@@ -70,30 +70,31 @@ negative, kept out.
 | Buenos Aires | AR | Subte A–E, H | A - the land-use survey joined to parcels at 99.8%, CC BY 2.5 AR read (2026-09-28, owner) |
 | Sydney (City of Sydney) | AU | Sydney Trains and Metro in the LGA | B - the City's FES establishment layer, found on a re-probe (2026-09-28, owner) |
 | Newcastle | UK | Tyne and Wear Metro, ~60 stations | B - food only on the FSA register (2026-09-28, owner) |
-| Bangkok | TH | MRT, BTS, ARL | D - the BMA's portal refuses this machine (2026-09-28, owner) |
-| Riyadh | SA | Riyadh Metro, 6 lines | D - the national open-data portal times out from here (2026-09-28, owner) |
+| Bangkok | TH | MRT, BTS, ARL | R - the BMA's portal refuses this machine (2026-09-28, owner) |
+| Riyadh | SA | Riyadh Metro, 6 lines | R - the national open-data portal times out from here (2026-09-28, owner) |
 | Glasgow | UK | Subway, 15 stations | B - food only on the FSA register (FHIS), 6,632 premises (2026-09-28, owner) |
-| Bengaluru | IN | Namma Metro | D - BBMP's hosts time out (2026-09-28, owner) |
-| Tashkent | UZ | Tashkent Metro (kn) | D - every host refuses this machine or needs a login (2026-09-28, owner) |
-| Hanoi, Ho Chi Minh City | VN | 2 lines / 1 line (kn) | D - timeouts and a CAPTCHA wall (2026-09-28, owner) |
-| Perth | AU | Transperth, ~80 stations | N - property land-use codes only, City of Perth (2026-09-28, owner) |
-| Ankara | TR | Ankaray, M1–M4 | N - Istanbul's shape: the districts publish no licence lists (2026-09-28, owner) |
+| Bengaluru | IN | Namma Metro | R - BBMP's hosts time out (2026-09-28, owner) |
+| Tashkent | UZ | Tashkent Metro (kn) | R - every host refuses this machine or needs a login (2026-09-28, owner) |
+| Hanoi | VN | 2 lines (kn) | R - the city's hosts time out (2026-09-28, owner) |
+| Ho Chi Minh City | VN | 1 line (kn) | D - a CAPTCHA wall on the open-data catalogue; the owner can pass it (2026-09-28, owner) |
+| Perth | AU | Transperth, ~80 stations | C - property land-use codes only, City of Perth (2026-09-28, owner) |
+| Ankara | TR | Ankaray, M1–M4 | C - Istanbul's shape: the districts publish no licence lists (2026-09-28, owner) |
 | Melbourne (City of Melbourne) | AU | City Loop, Metro Tunnel, CBD trams | B - CLUE covers the City of Melbourne only (2026-09-28, owner) |
 | Delhi | IN | Delhi Metro, ~290 stations (kn) | D - the current register behind a CAPTCHA; every Delhi-government host refuses this machine (screened 2026-09-28, owner) |
 | Berlin | DE | U-Bahn 9 lines, ~175 stations (kn); S-Bahn | B - IHK Berlin's per-premises register; hairdressers and laundries missing (from the discards 2026-09-28, owner) |
-| Istanbul | TR | M1A–M11, 177 stations; T1–T5 | N - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
-| Dubai | AE | Metro Red and Green, 64 stations; tram | D - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
+| Istanbul | TR | M1A–M11, 177 stations; T1–T5 | C - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
+| Dubai | AE | Metro Red and Green, 64 stations; tram | R - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
 | London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |
 | Stockholm | SE | T-bana, 92 stations | B - passed, food only |
-| Singapore | SG | MRT 21 relations | N - the food register is a 2016 snapshot |
+| Singapore | SG | MRT 21 relations | C - the food register is a 2016 snapshot |
 | Kaohsiung | TW | ~75 stations (kn) | D - geo-blocked to Taiwan |
 | Bucharest | RO | M1-M5, 64 stations | B - food only; the file downloads only in a browser |
 | Incheon | KR | 64 stations | B - placed 71.3% by the lift-building join and road interpolation |
-| Hyderabad | IN | 6 relations | D - geo-blocked, nothing read behind it |
+| Hyderabad | IN | 6 relations | R - geo-blocked, nothing read behind it |
 | Lisbon | PT | 10 subway relations | D - a free account on the national register |
-| Helsinki | FI | metro + trams | D - geo-blocked |
-| Yokohama | JP | 43 stations | N - no food list in any era |
-| Warsaw | PL | 2 lines (kn) | D - geo-blocked |
+| Helsinki | FI | metro + trams | R - geo-blocked |
+| Yokohama | JP | 43 stations | C - no food list in any era |
+| Warsaw | PL | 2 lines (kn) | R - geo-blocked |
 
 ## Never screened (0) - emptied 2026-09-28
 

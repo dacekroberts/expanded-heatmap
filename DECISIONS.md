@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**122 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**123 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
 - [Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)](#2026-09-28---kolkata-and-chennai-discarded-the-large-transit-gaps-never-screened-list-is-empty-owner)
 - [Glasgow to Band B, food only; Bengaluru to Band D (owner)](#2026-09-28---glasgow-to-band-b-food-only-bengaluru-to-band-d-owner)
 - [Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)](#2026-09-28---six-small-networks-screened-tashkent-hanoi-and-ho-chi-minh-city-to-band-d-baku-panama-city-and-caracas-discarded-owner)
@@ -158,6 +159,45 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)
+
+- **Split Band D by who can move it (owner's call).**
+  - **D keeps the six cities that something the owner can do from here
+    would unblock:** Kaohsiung (a request to the civil affairs bureau),
+    Lisbon (a free account), Tallinn (an order by email), Sendai (the
+    drafted permission request), Delhi (a CAPTCHA on MCD's register) and Ho
+    Chi Minh City (a CAPTCHA on the catalogue).
+  - **New Band R, "restricted", holds the twelve the project cannot move:**
+    ten geo-blocks (Warsaw, Hyderabad, Helsinki, Dubai, Bengaluru, Bangkok,
+    Riyadh, Tashkent, Hanoi, Gimhae) and two residency walls (Daejeon,
+    Gwangju). The project uses no VPN, proxy or account.
+  - **The CAPTCHA precedent is Bucharest's:** the owner passes it in their
+    own browser and fetches; the project never replays a session. The
+    owner's question was whether a CAPTCHA only needs a human, and it does,
+    subject to export volume (Delhi's register exports trade × zone × year)
+    and a licence read of whatever is fetched.
+- **Retooled Band N as C, "closer to a page" (owner's call).** The same seven
+  cities (Singapore, Yokohama, Palma, Baltimore, Istanbul, Perth, Ankara) sit
+  higher, because they are likelier to become buildable than a blocked city.
+  The letter C had closed earlier the same day.
+- **Section order is now A, B, C, D, R, T** (R after the others, ahead of T).
+  The master list reads A 1 · B 10 · C 7 · D 6 · R 12 · T 51 = 87
+  candidates.
+- **The check was changed to match.**
+  - `scripts/check_master_list_counts.py`: `LETTERS = "ABCDRT"`, and its
+    second hard-coded letter string now reads `LETTERS`.
+  - `scripts/check_master_list_counts_selftest.py`'s `drop_bands` now
+    renames every `## <marker> Band X` heading by regex instead of naming
+    each band, so a new band cannot leave one heading recognised and the
+    vacuous-pass case silently passing (that is what failed first).
+  - The new C heading first mentioned "Band N" in its parenthesis, and the
+    check's heading regex reads the last "Band X" on the line. The heading
+    was reworded.
+  - These are script changes going to master from staging, under the
+    owner's approval of the restructure. Files:
+    `docs/city_master_list.md`, `docs/global_transit_gap.md`,
+    `docs/handoff_staging_2026-09-28.md`, both scripts.
 
 ### 2026-09-28 - Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)
 
