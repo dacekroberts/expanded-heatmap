@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**175 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**176 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Incheon built on SEMAS's national storefront register (owner); the LOCALDATA API found closed by an identity check; cross-city category rules made a step every build passes through (owner)](#2026-09-29---incheon-built-on-semass-national-storefront-register-owner-the-localdata-api-found-closed-by-an-identity-check-cross-city-category-rules-made-a-step-every-build-passes-through-owner)
 - [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
 - [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
 - [The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)](#2026-09-29---the-tram-lists-data-re-checked-for-currency-santa-cruzla-laguna-discarded-kansas-city-kept-with-its-data-date-owner)
@@ -215,6 +216,80 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-29 - Incheon built on SEMAS's national storefront register (owner); the LOCALDATA API found closed by an identity check; cross-city category rules made a step every build passes through (owner)
+
+- **The national LOCALDATA API is closed to this project.** Gyeonggi's decided
+  source (the Ministry's local-licence data) is now only the data.go.kr Open API
+  15154916 and its siblings, which need a service key. data.go.kr membership is
+  for Korean nationals (내국인) or companies registered with the National Tax
+  Service, with 본인인증 at step 4 (sign-up page read 2026-09-29, nothing
+  entered). The file listing 15096283 is a 2021 link with no data.
+  `file.localdata.go.kr` refused on 2026-09-27. The owner asked for this to be
+  investigated before anything was pursued: the same wall as juso.go.kr's.
+- **SEMAS's 상가(상권)정보 chosen for Incheon and the Gyeonggi satellites
+  (owner).** The source is data.go.kr 15083033, a keyless ZIP (352,699,739
+  bytes, edition 2026-06-30), declared 이용허락범위 제한 없음. It was found by
+  a background probe of the three satellites' own files: Goyang publishes
+  almost nothing, Yongin no food files, and Seongnam has no coordinates. It
+  lists storefronts nationally with a WGS84 point on every row and SEMAS's own
+  categories. Incheon: 136,995 rows, food 40,973, retail 31,534, repair and
+  personal 17,154.
+  - **Rejected: the brief's route**, built through step 2 first. Incheon's
+    permit lists placed 33,092 of 45,363 storefront rows (73.4%) through KESA's
+    lift-building file (exact 20,152, interpolated 11,453, same main number
+    1,487). The salons-and-baths list (9,493) carries lot-number addresses only,
+    which no keyless file places, so Personal services would have been empty.
+  - The licence (`licence-read`, 2026-09-29) is permitted with conditions: a
+    credit, no distortion of the facts, and the categories stated as this
+    project's. SEMAS's website copyright policy ("consult before using material
+    without a KOGL mark") is read as covering its homepage (owner, Daegu's
+    reading). The 소상공인365 notices the listing cites are unread, IP-blocked
+    from here. The ZIP's own readme holds only Excel instructions.
+- **The SEMAS taxonomy (owner): keyed at 소분류**, where the catch-all share is
+  6.4% (13.1% at 중분류). All 247 categories are given a home
+  (`pipeline/taxonomies/korea_sbiz.py`), aligned with the NAICS cities.
+  - Food service: everything under 음식, less staff canteens (612 in Incheon),
+    hostess bars (1,010) and dance halls (53).
+  - Retail: everything under 소매, less household fuel dealers (110).
+  - Personal services: salons, laundries, baths, body-shaping and **massage**.
+  - Out: offices, education, health, estate agents, lodging, recreation,
+    repairs, funeral services, wedding halls and matchmaking.
+  - **Massage was first proposed out** as possibly adult. The owner kept it
+    **for continuity**: every other country counts commercial massage (NAICS
+    812199; D.C., Miami, Chicago, Calgary, Dublin, Milan, Buenos Aires,
+    Brazil), and R3 excludes only premises the register names as adult.
+- **`docs/category_rules.md` (owner): the cross-city category rules in one
+  place**, each with its precedent cities: funeral, R1-R5, massage, vets,
+  nonstore, repairs, lodging, recreation, pharmacies, health food and mobile
+  units. `premises-taxonomy`, `add-city` Step 1 and CLAUDE.md now send every
+  keep-or-drop call through it, and a departure is an owner call brought with
+  the precedent it breaks. A machine check is left as a separate task.
+- **Incheon built** on branch `incheon`, page 65, notice 66 on the branch
+  (renumber at merge).
+  - Step 1: 12 of 64 relations drawn, 79 stations inside Incheon and 151
+    outside. Gate 3 is exact on Incheon Line 1 (33), Line 2 (27), Line 7 (53)
+    and the Suin-Bundang Line (63). Line 1 is not gated whole: its southern
+    branches never touch the box.
+  - Step 2: 82,671 storefronts (39,298 / 31,424 / 11,949), 100% on the
+    register's point, 107 names withheld.
+  - Step 3: 56,426 in a ring (68.3%).
+  - Rail is Seoul's precedent as the brief recommended: AREX, the maglev and
+    the Wolmi Sea Train (placed by name) are not drawn.
+  - The macro label is measured at 54.4 px and sits left of the dot at dy -6,
+    between Seoul's and Daegu's labels (PROBLEMS 0, tight).
+- **Privacy: no personal information published.**
+  `check_personal_exposure.py incheon`: no owner column exists; 0 emails,
+  phones or c/o; 0 Korean personal names at a residential address shown. 2,081
+  bare-name shapes (3.7%) stand at commercial addresses, as on Seoul's and
+  Busan's maps.
+- Files: `pipeline/incheon/`, `pipeline/countries/korea_sbiz.py`,
+  `pipeline/countries/korea_sbiz_fetch.py`, `pipeline/taxonomies/korea_sbiz.py`,
+  `app/pages/65_Incheon_Heatmap.py`, `app/cities.py`, `app/components.py`,
+  `docs/category_rules.md`, `docs/data_sources.md`,
+  `docs/data_sources/south-korea.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/incheon.md`, the two skills, `CLAUDE.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
 ### 2026-09-29 - Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)
 
 - **Supersedes the same day's discard in "The tram list's data re-checked

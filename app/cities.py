@@ -1693,13 +1693,13 @@ CITIES = [
         "region": "East Asia",
         "country": "South Korea",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # LEFT of the dot, slightly raised, and SCORED: width 54.4 px measured in
+        # the deployed app's own frame (2026-09-29, four entries reproduced).
+        # TIGHT: above the dot it sits on Seoul's label, and level with the dot
+        # it grazes Daegu's (3.5 px); dy -5 to -6 clears both, and
+        # check_macro_labels.py passes every region at 375, 768 and 1200 with
+        # PROBLEMS 0. Any further city near Seoul re-scores this one first.
+        "label_offset": ("end", -9, -6),
     },
 ]
 
