@@ -338,5 +338,10 @@
   "in_ring": 13003,
   "all": 23481,
   "map_blob": "f03b1f6fca7ca4cee7c4c087a53879fca61dbe76"
+ },
+ "buffalo": {
+  "in_ring": 376,
+  "all": 1564,
+  "map_blob": "a700d026d601032cae7e7ae5bd74e24d1d86ab6a"
  }
 }
