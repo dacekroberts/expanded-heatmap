@@ -151,10 +151,12 @@ code for this city.
 >   3. ~~The OSM address hit rate~~ measured: **79.5%** (above). **Decided
 >      (owner, 2026-09-28): build, with the unplaced share disclosed.**
 >   4. ~~Canteens and pastry labs~~ **left out (owner, 2026-09-28).**
->   5. **Open**: names. Recommended: the company name without its legal-form
->      words ("SC Mega Image SRL" becomes "Mega Image"); the category only
->      for sole traders (ÎI, PFA, II, ÎF). The page's wording for the
->      unplaced share is drafted at the build.
+>   5. ~~Names~~ **decided (owner, 2026-09-28)**: the company name without
+>      its legal-form words ("SC Mega Image SRL" becomes "Mega Image"); the
+>      category only for sole traders (ÎI, PFA, II, ÎF).
+>   6. **Order (owner, 2026-09-28): build after Incheon**, whose page sets
+>      the wording for a disclosed placement gap. Bucharest's wording for its
+>      unplaced share is drafted at the build, from Incheon's.
 
 ---
 

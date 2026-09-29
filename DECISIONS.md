@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**152 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**153 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)](#2026-09-28---bucharests-names-the-company-name-without-its-legal-form-sole-traders-by-category-owner-bucharest-builds-after-incheon-owner)
 - [Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)](#2026-09-28---bucharest-to-be-built-with-its-unplaced-share-disclosed-canteens-and-pastry-labs-left-out-owner)
 - [Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM](#2026-09-28---bucharests-address-hit-rate-measured-795-of-20815-storefronts-placed-on-street-and-number-against-osm)
 - [Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication](#2026-09-28---bucharests-supermarket-file-and-eight-non-animal-origin-files-fetched-owner-about-23100-active-rows-before-de-duplication)
@@ -188,6 +189,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)
+
+- **Decided (owner), as recommended: Bucharest's pins show the company name
+  with its legal-form words removed** ("SC Mega Image SRL" becomes "Mega
+  Image", "Carrefour Romania SA" becomes "Carrefour Romania"). Sole
+  traders (ÎI, PFA, II, ÎF), whose registered name is the holder's own,
+  show the category only. `check_personal_exposure.py bucharest` looks for
+  those forms first. This settles the name question left open in the
+  entry below.
+- **Decided (owner): Bucharest builds after Incheon, unless there is good
+  reason otherwise.** Incheon (71.3% placed) is the precedent for a page
+  that discloses a placement gap. Building it first settles the wording
+  that Bucharest's page (79.5%) then reuses. No reason to reorder was
+  found.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
 
 ### 2026-09-28 - Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)
 
