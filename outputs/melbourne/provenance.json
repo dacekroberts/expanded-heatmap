@@ -1,0 +1,8 @@
+{
+  "fetched_utc": "2026-09-29T06:01:40+00:00",
+  "clue_dataset_url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/business-establishments-with-address-and-industry-classification",
+  "clue_year": "2024",
+  "clue_modified": "2021-11-02T00:00:00+00:00",
+  "clue_license": "CC BY",
+  "clue_license_url": "https://creativecommons.org/licenses/by/4.0/legalcode"
+}

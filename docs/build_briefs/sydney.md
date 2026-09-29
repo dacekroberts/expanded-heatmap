@@ -6,6 +6,26 @@ Sydney (owner). Brief written the same day, with the licence read.** Run
 `DECISIONS.md` 2026-09-28 "Moved Sydney into Band B, scoped to the City of
 Sydney", and "Melbourne and Sydney briefs written".
 
+> **Measured at the build, 2026-09-28 (build session, `worktree-sydney`)** -
+> these supersede the screen's figures below where they differ:
+> - **Five more classes sit in the storefront divisions** than the brief's
+>   prefixes reached: religious services (9540, 144), interest-group,
+>   professional and labour associations (955x, 249) - excluded as
+>   organisations, NAICS 813's precedent - and licensed members' clubs (4530,
+>   27, owner: out). The taxonomy lists every class; a new one stops step 2.
+> - **Owner's calls**: catering (4513) and funeral services (9520) out,
+>   the two n.e.c. catch-alls kept, light rail left out but disclosed, region
+>   "Oceania", the licence read's credit as notice 64.
+> - **7,328 storefronts** (Retail 3,091, Food service 3,234, Personal services
+>   1,003) after 27 points outside OSM's LGA polygon; 5,218 distinct points.
+>   **83.5% within a ring** (6,120).
+> - **Superseded the same day (owner, on Melbourne's evidence)**: 9539 other
+>   personal services n.e.c. excluded, so **7,074 storefronts** (Personal
+>   services 749), **83.4% within a ring**.
+> - **Stations**: OSM's stop names spell the platform three ways ("Central,
+>   Platform 16", "Campbelltown Platform 2", "Gadigal 1"); normalised, the
+>   route-membership stations inside the LGA are exactly the brief's 16.
+
 ⚠️ **All three buckets, one LGA, and no names.** The page covers the City of
 Sydney only (the CBD, Central, Redfern, Green Square, Kings Cross,
 Pyrmont), disclosed. Pins carry a business class, never a name: the survey

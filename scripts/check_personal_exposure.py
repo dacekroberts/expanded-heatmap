@@ -186,6 +186,16 @@ REGISTRIES = {
     # address column, so the unit check is skipped.
     "berlin": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Sydney: the City of Sydney's FES publishes no name or address column at
+    # all; `business_name` is the ANZSIC class label, so no pin can be a
+    # person's name - Berlin's structural answer.
+    "sydney": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
+    # Melbourne: CLUE's `trading_name` is the only name column and is shown
+    # as is (no owner fallback exists); its census covers non-residential
+    # floor space, and the business address is never written out.
+    "melbourne": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
     # London: the FSA's `BusinessName` is the only name the register publishes
     # - there is no separate owner column to fall back to - so the fallback
     # failure cannot occur; what CAN occur is a sole trader trading under their
@@ -195,6 +205,20 @@ REGISTRIES = {
     # address is carried to the map, so the unit check is skipped.
     "london": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Buenos Aires is Dublin's case: a land-use survey records USES, not
+    # businesses, and carries no name column of any kind. The pin reads as the
+    # street address (owner, 2026-09-28). The risk is a pin on a home, and the
+    # survey files homes with an economic activity under RESIDENCIAL, which
+    # step 2's TIPO1 filter excludes; 34 UNICOMERCIAL rows typed RESIDENCIAL
+    # are excluded by the taxonomy too.
+    "buenos_aires": dict(raw=None, trade=None, owner=None, name_is_address=True,
+                         processed="businesses_clean.csv",
+                         address=("business_name",)),
+    # Glasgow reads the same FSA file format through pipeline/fsa.py: no
+    # fallback name, and the flat rule (a storefront at a "Flat" address is
+    # never placed, 185 rows) is the structural guard this check cannot see.
+    "glasgow": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None),
     # Every other Brazilian city reads CNEFE through the same national reader,
     # so São Paulo's structural answer holds for each; measured per city.
     "belo_horizonte": dict(raw=None, trade=None, owner=None,
@@ -573,6 +597,11 @@ REGISTRIES = {
     "monterrey": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=None),
+    # Newcastle (Regional) reads the FSA's files through pipeline/fsa.py, as
+    # London does: no fallback name; the private-address guard and the flat and
+    # childminder rules are structural, and this check cannot see them.
+    "newcastle": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.

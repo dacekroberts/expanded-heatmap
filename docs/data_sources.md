@@ -99,7 +99,9 @@ together, so a row in either counts and a row in neither still fails.
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
-| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London |
+| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
+| Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
+| Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 
 ## Business registries
 
@@ -1892,6 +1894,149 @@ this to 59 if it lands first).
   style guide was not read (owner: skip); the notice displays inline and
   legibly on every page, as every credited source's does.
 - Wording approved by the owner 2026-09-28.
+
+**60. Gobierno de la Ciudad de Buenos Aires (Buenos Aires) — required, and
+DISPLAYED** (written into `render_site_notices()`; displayed once Buenos Aires
+lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28 for the survey and
+  Parcelas; the SBASE dataset page read 2026-09-28 declares the same
+  CC-BY-2.5-AR; the Buenos Aires rows in
+  [`data_sources/argentina.md`](data_sources/argentina.md)). **Creative Commons
+  Attribution 2.5 Argentina**: credit to the Gobierno de la Ciudad de Buenos
+  Aires / BA Data and each author unit (DG Antropología Urbana, Subsecretaría de
+  Planeamiento; Subsecretaría de Registro, Interpretación y Catastro;
+  Subterráneos de Buenos Aires, SBASE), each dataset's title and URI, the
+  licence URI, and a sentence on how the data was changed.
+- **Versions disagree** (the datasets say 2.5 AR, the survey's resources an
+  unversioned `cc-by`, Parcelas' resources 4.0): the one credit satisfies 2.5 AR
+  and 4.0 both, and the data is never described as "CC BY 4.0" alone.
+- **MUST NOT**: use a GCBA or BA Data logo; imply endorsement. If the city asks
+  for its credit to be removed, remove it (s.4(a)).
+- **MUST DO:** `check_personal_exposure.py buenos_aires`, run 2026-09-28: the
+  survey carries no name column; pins read as the street address (owner); the
+  verdict is in `DECISIONS.md`.
+- **Station names follow OpenStreetMap** (ODbL, notice 1), matched to SBASE's
+  points; the credit says so.
+- Wording approved by the owner 2026-09-28.
+
+**61. Food Standards Scotland (Glasgow) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Glasgow lands; 60 is Buenos Aires's, on
+its own branch - recheck both at merge).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Glasgow rows in
+  [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md)). Glasgow
+  City Council runs Scotland's **Food Hygiene Information Scheme** (FHIS), not
+  England's FHRS. The FSA's terms put the whole open-data file, FHIS records
+  included, under the **Open Government Licence**, and Food Standards Scotland
+  publishes the same council's data itself under "Open Government Licence
+  (v3)". The OGL statement with a link to the licence; the date the information
+  was updated (the file's extract date, 2026-09-14). No result ("Pass",
+  "Improvement Required"), logo or imagery is shown.
+- **Credit wording (owner, 2026-09-28)**: "Food Standards Scotland, Food Hygiene
+  Information Scheme data, via the Food Standards Agency" - FSS runs the scheme
+  and licenses its own copy, the FSA distributes the file this project reads.
+  **Never "FHRS"** for Scotland: it is a different scheme, and the FSA's terms
+  bar "the FHRS name" outside its imagery.
+- **Personal data (owner, 2026-09-28)**: FSS's FHIS privacy notice counts the
+  operator's name and address as personal information, and the OGL does not
+  license it. Glasgow City lists home bakers and cooks as cafés at their flat,
+  with a point, so two rules were added to London's (`pipeline/fsa.py`): a
+  storefront at a "Flat" address is never placed (185), nor one named as a
+  childminder (5). London's map applies the flat rule too
+  (the Food Standards Agency's notice 58, amended).
+- **MUST NOT**: imply official status or endorsement by FSS or the FSA (OGL);
+  use either body's logo; display a result.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py glasgow`, run 2026-09-28: no
+  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+- **Glasgow's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**58 (Food Standards Agency, London) amended the same day (owner, 2026-09-28)**: its "Modified by this project"
+adds "premises at a flat address left out" - London's map applies the flat rule
+(98 storefronts).
+
+**62. Food Standards Agency (Newcastle) — required, and DISPLAYED** (written
+into `render_site_notices()`; displayed once Newcastle lands; 60 is Buenos
+Aires's and 61 Glasgow's, each on its own branch - recheck at merge).
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58, the
+  `licence-read` of 2026-09-28): the five Tyne and Wear councils are on
+  England's FHRS, under the **Open Government Licence v3** with the FSA's
+  conditions. The OGL statement linked; each council's extract date
+  (2026-09-09 to 2026-09-16); no rating, logo or imagery. **Credit (owner,
+  2026-09-28)**: London's, "Food Standards Agency, UK food hygiene rating
+  data", as a notice of its own rather than by extending 58.
+- **Personal data**: the project's rule as for London, through
+  `pipeline/fsa.py`: home and mobile caterers out by type, a private address
+  never placed, a storefront at a "Flat" address (5) or named as a childminder
+  (0) never placed, the trade name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py newcastle`, run 2026-09-28: no
+  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+- **Newcastle's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**63. Ordnance Survey (Newcastle) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Newcastle lands).
+
+- **PERMITTED WITH CONDITIONS**, London's `licence-read` (notice 59): the same
+  Code-Point Open file and edition (2026-08), copied from London's cache, not
+  downloaded again. The three statements verbatim, the OGL link, no
+  endorsement, the product's registered name not used.
+- **Used for** 634 Newcastle food storefronts the FSA lists with a full
+  postcode and no point (9.5% of storefront rows); never a private address.
+  Units kept to the five districts' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/newcastle/` republishes the derived locations (README's credits).
+- Wording approved by the owner 2026-09-28.
+
+**64. City of Sydney (Sydney) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Sydney lands; 60 to 63 are Buenos
+Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Sydney rows in
+  [`data_sources/australia.md`](data_sources/australia.md)): the FES item's
+  `licenseInfo` links **CC BY 4.0**, credit "City of Sydney"; the data hub's
+  disclaimer says data products carry the licence named in their description.
+  Data.NSW's harvested copy says "License Not Specified", a harvester failure;
+  the publisher's item governs.
+- **MUST DISPLAY** (CC BY §3(a)(1)): the City of Sydney as creator and
+  copyright holder, the licence linked, the dataset linked, that the data was
+  modified, and the warranty disclaimer. No wording is prescribed; the
+  licence read's draft, approved by the owner 2026-09-28, with the survey year.
+- **MUST NOT**: imply endorsement or official status (§2(a)(6)); present the
+  data as accurate, current or complete on the City's authority.
+- **Noted, not a blocker (owner, 2026-09-28)**: the City's main website terms
+  (`cityofsydney.nsw.gov.au/terms-conditions`) bar republishing its content
+  without written authorisation; the read judged them written for that site's
+  pages and not incorporated by the data hub, where Creative Commons governs.
+- **MUST DO:** nothing to the publisher. `check_personal_exposure.py sydney`,
+  run 2026-09-28: the survey has no names, so no pin can show one; the verdict
+  is in `DECISIONS.md`.
+- **Sydney's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**65. City of Melbourne (Melbourne) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Melbourne lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Melbourne rows
+  in [`data_sources/australia.md`](data_sources/australia.md)): the portal's
+  "About our data" puts its open data under CC BY 4.0, and the dataset's
+  metadata declares `license: "CC BY"` with the 4.0 legal code. DataVic's
+  "other-open" is CKAN's generic bucket and carries the same CC BY text; the
+  council's portal governs. Nothing is incorporated by reference (the portal's
+  terms page is undefined; `melbourne.vic.gov.au/copyright` covers the website).
+- **MUST DISPLAY** (CC BY §3(a)): a credit, the licence linked, the dataset
+  linked, a note that the data was modified. No wording is prescribed; the
+  licence read's draft, approved by the owner 2026-09-28, with the census year.
+- **MUST NOT**: imply endorsement (§2(a)(6)); use DataVic's "© Copyright State
+  Government of Victoria" (DataVic's own material).
+- **MUST DO:** nothing to the publisher ("#melbdata" is an invitation).
+  Privacy is not licensed (§2(b)(1)): `check_personal_exposure.py melbourne`,
+  run 2026-09-28, finds only trading names and no fallback; the verdict is in
+  `DECISIONS.md`.
+- **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

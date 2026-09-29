@@ -2020,10 +2020,13 @@ event kitchens sit; mobile caterers (2,595); hospitals, childcare and care homes
 (972); manufacturers and packers (1,136); distributors and transporters (669);
 importers and exporters (278); farmers and growers (33).
 
-**Placed at their postcode's centre** - 2,349 food storefronts the register
+**Not placed: flats** - 99 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's centre** - 2,344 food storefronts the register
 gives no location but a full postcode (Ordnance Survey's postcode data).
 
-**Not placed** - 3,001 food storefronts (5.0%) with neither a location nor a
+**Not placed** - 3,000 food storefronts (5.0%) with neither a location nor a
 full postcode, most in outer boroughs (23% of Redbridge's, 18% of Havering's).
 A business run from a private address is published without a location or a
 full postcode and is never placed.
@@ -2045,6 +2048,194 @@ six London Overground lines are drawn, cut at Greater London's boundary.
   station records (North Ealing, South Harrow, Woolwich Arsenal, Hatch End,
   Watford High Street, Upper Holloway, Wood Street, St James Street).
 - Tramlink, National Rail services and river buses are not drawn.
+
+### Buenos Aires - the city's land-use survey, placed at parcel centres
+
+**Excluded by use** - car workshops, car washes and tyre repairers (3,951);
+estate agents, banks, lottery agencies, bill-payment and money-transfer offices
+and insurers (4,481); lawyers, printers, travel agents and copy shops (1,831);
+health and veterinary practices (1,690); gyms, event halls and cultural centres
+(1,353); other repair workshops (1,158); construction trades and workshops
+making goods (802); party offices, places of worship and associations (658);
+transport, courier and rental offices (609); schools and classes (403);
+wholesalers (216).
+
+**Left out because the survey cannot say** - 6,243 active shopfronts whose use
+the surveyors could not identify (7.2%; 32% in Villa Riachuelo), and 593 malls,
+arcades and markets, recorded as one row each with their shops not itemised.
+
+**Homes are never shown** - 1,756 homes with a business inside are filed by the
+survey as housing and excluded.
+
+**Placed at a block's centre** - 93 whose parcel is not in the parcel layer; 3
+not placed.
+
+**Shown, but not named** - the survey records no names; each dot shows the
+street address.
+
+**Stations.** The Subte's six lines are drawn; all 89 stations lie in the city.
+- Not drawn: the Premetro (18 stops in the south-west; it would add about 750
+  storefronts, 1.2%, in Villa Lugano, Villa Soldati and Villa Riachuelo), the
+  heritage tramway, and the commuter railways.
+
+### Glasgow - the food hygiene register, food only
+
+**Only food is on this map.** Glasgow City Council's entries in Scotland's Food
+Hygiene Information Scheme list the premises the council inspects for food
+hygiene; no open register of other shops or of personal services covers
+Glasgow, so clothes shops, hairdressers and the like are missing rather than
+excluded. Food shops (grocers, off-licences, bakers, butchers, newsagents
+selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - mobile caterers (425); other catering premises (348),
+where home caterers and event kitchens sit; hospitals, childcare and care homes
+(342); schools, colleges and universities (202); manufacturers and packers
+(139); hotels and guest houses (110); distributors and transporters (84);
+importers and exporters (23); farmers and growers (1).
+
+**Not placed: flats and childminders** - 185 food storefronts registered at a
+flat, mostly home bakers and cooks listed as cafés (the flat rule, owner
+2026-09-28), and 5 childminders listed as cafés, three under the childminder's
+own name (the childminder rule, the same day).
+
+**Not placed** - 55 food storefronts (1.2%) the register gives no location. 22
+have a full postcode; they are not placed at its centre, which would add about
+one storefront in two hundred at the cost of a second data source.
+
+**Shown under its trade name** - 2 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the city** - 5 whose location lies outside
+Glasgow City.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.7% of that type read as one by name.
+
+**Stations.** The Glasgow Subway's 15 stations, all inside Glasgow City.
+- Suburban and national rail (the Argyle and North Clyde lines and the rest) is
+  not drawn.
+
+### Newcastle (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the five Tyne and Wear councils inspect for food hygiene; no open
+register of other shops or of personal services covers Tyne and Wear, so
+clothes shops, hairdressers and the like are missing rather than excluded.
+Food shops (grocers, off-licences, bakers, butchers, newsagents selling food,
+supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (622), where home caterers and
+event kitchens sit; mobile caterers (548); hospitals, childcare and care homes
+(524); schools, colleges and universities (559); hotels and guest houses (75);
+manufacturers and packers (125); distributors and transporters (78);
+importers and exporters (8); farmers and growers (8).
+
+**Not placed: flats** - 5 food storefronts registered at a flat address, where
+home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's centre** - 634 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 489 food storefronts (7.3%) with neither a location nor a
+usable full postcode, most in North Tyneside (9.7%) and Sunderland (9.2%). A
+business run from a private address is published without a location or a full
+postcode and is never placed.
+
+**Shown under its trade name** - 7 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 2 whose register location lies
+far outside Tyne and Wear (one in London, one in Lancashire).
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.3% of that type read as one by name.
+
+**Stations.** All 60 Tyne and Wear Metro stations, on the Green and Yellow
+lines, the Sunderland branch included (owner, 2026-09-28): between Pelaw and
+Sunderland it runs on track shared with national rail.
+- Northern's national rail trains are not drawn.
+
+### Sydney - the City of Sydney's floor-space survey, all three buckets
+
+**One council, one survey year.** The City of Sydney's Floor Space and
+Employment Survey counts every business establishment in the council area
+every five years; the map shows the 2022 survey, the latest. The neighbouring
+councils publish no comparable survey and are not on the map.
+
+**No names.** The survey publishes an industry class and a point for each
+establishment and nothing else: a dot is titled by its ANZSIC class. Points are
+per building, so the shops of a shopping centre share one point (5,054 distinct
+points for the storefronts, the largest holding 140).
+
+**Excluded by class** (ANZSIC 2006, `pipeline/taxonomies/anzsic_fes.py`):
+- Not storefronts: parking (72), non-store retail (14) and commission-based
+  retail (1), as the NAICS cities exclude them.
+- Organisations, not services sold over a counter: religious services (144),
+  interest-group associations (137), business and professional associations
+  (89), labour associations (23).
+- The owner's calls (2026-09-28): licensed members' clubs (27, entered by
+  sign-in), brothels (27), catering firms (21, the work happens at the event),
+  funeral, crematorium and cemetery services (7).
+
+**Excluded, a catch-all** - other personal services n.e.c. (254): kept at
+first because the survey's rows have no names to sample, then excluded the same
+day (owner, 2026-09-28) when Melbourne's census, which names them, showed the
+class holds mostly consultancies in office suites.
+
+**Kept, and named as a catch-all** - other store-based retailing n.e.c. (311).
+Car and fuel retailers (64) are shops, as in the NAICS cities.
+
+**Left off because they are outside the city** - 27 survey points that fall
+just outside OpenStreetMap's outline of the council area.
+
+**Stations.** Sydney Trains' T1, T2, T3, T4, T8 and T9 and Sydney Metro's M1,
+cut at the council boundary: 16 stations inside it.
+- Left out: 157 stations beyond the boundary, listed in
+  `outputs/sydney/excluded_stations.csv`.
+- **Light rail (L1, L2, L3; 22 stops in the area) is not drawn** (owner,
+  2026-09-28); with it, about nine storefronts in ten would sit within a ring
+  (93.0%, the brief's measure), against 83.4% without it.
+- NSW TrainLink services and ferries are not drawn.
+
+### Melbourne - the City of Melbourne's land-use census, all three buckets
+
+**One council, one census year.** The City of Melbourne's Census of Land Use
+and Employment records every business establishment in the council area with
+its trading name; the map shows the 2024 census. The neighbouring councils
+publish no comparable census and are not on the map.
+
+**Points per property.** Every tenancy in a property shares its point, so a
+shopping centre or an arcade is one point (1,840 distinct points for the
+storefronts, the largest holding 219). Upper-floor and suite tenancies are
+kept (434, 8.8%): the census does not say which face the street.
+
+**Excluded by class** (ANZSIC 2006, the classes Sydney's decisions set,
+`pipeline/taxonomies/anzsic_fes.py`):
+- Other personal services n.e.c. (279; owner, 2026-09-28): 214 are upper-floor
+  suites, mostly migration and education consultancies, with a few tattoo
+  studios.
+- Not storefronts: parking (146), non-store retail (17) and commission-based
+  retail (1).
+- Organisations: interest-group associations (161), religious services (93),
+  business and professional associations (89), labour associations (33).
+- The owner's calls for Sydney, applied here: catering firms (39), licensed
+  members' clubs (15), brothels (9), funeral services (6).
+
+**Kept, and named as a catch-all** - other store-based retailing n.e.c. The
+census's finer classes (convenience stores; men's, women's and children's
+clothing and footwear) are Retail.
+
+**Stations.** Metro Trains' six line groups, cut at the council boundary: 17
+stations inside it.
+- Left out: 199 stations beyond the boundary, Richmond among them (its
+  platforms' centre lies just outside, on Punt Road), listed in
+  `outputs/melbourne/excluded_stations.csv`.
+- **Trams (22 routes, 155 stops in the area) are not drawn** (owner,
+  2026-09-28); with them, 99.1% of storefronts would sit within a ring (the
+  brief's measure), against 96.0% without them.
+- The event-day Flemington Racecourse line (with Showgrounds and Flemington
+  Racecourse stations), the City Circle special service and V/Line are not
+  drawn.
 
 ## Kept, and why
 

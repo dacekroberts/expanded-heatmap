@@ -40,8 +40,13 @@ names. The work is the taxonomy (385 subtypes) and the rail scope.**
   the module exists. Out of scope inside UNICOMERCIAL: car workshops (TALLER
   MECANICO, 2,993), estate agents (INMOBILIARIA, 1,894), banks, car
   dealers and similar.
-- **`TIPO2` strings carry accents in UTF-8** (CAFÉ, LIBRERÍA); read the CSV
-  as UTF-8 and never match on a console-mangled copy.
+- **`TIPO2` accented vowels are mojibake IN THE PUBLISHED FILE** (corrected
+  at the build, 2026-09-28): read as UTF-8, `CAFÉ` is `CAF├ë` (U+251C
+  U+00EB), `LIBRERÍA` is `LIBRER├ìA`; the publisher decoded UTF-8 as code
+  page 437 and saved the result. `Ñ` is intact. Repair with
+  `value.encode("cp437").decode("utf-8")` (`ba_usos_suelo.repair`) and key
+  on the repaired form. The same damage is in `TIPO1`/`BARRIO` values
+  (`GALER├ìA BARRIAL`, `USOS M├ÜLTIPLES`).
 - **MULTICOMERCIAL (615 rows) is one row per mall or arcade**: PASEO DE
   COMPRAS 361, GALERÍA BARRIAL 206, MERCADO 27, SHOPPING 21. The shops
   inside are not itemised. Leave them out, or show them as one pin each, and

@@ -42,16 +42,20 @@ dense-looking city may simply have more complete records.
   are used (eight food lists, MHLW's filings added for four of them, and the
   barber, beauty and laundry registers of four), so the other fifteen have no data
   at all.
-- **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, and the
-  nine Brazilian cities (IBGE's 2022 census walk).
+- **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, the
+  nine Brazilian cities (IBGE's 2022 census walk), Sydney (the City of
+  Sydney's 2022 floor-space survey, one council only) and Melbourne (the City
+  of Melbourne's 2024 land-use census, one council only).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
   Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
   and Taipei (the national business tax register, FIA).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
-- **A food hygiene register:** London (the Food Standards Agency's FHRS), every food
-  premises a borough inspects, and nothing else.
+- **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
+  Agency's FHRS), every food premises a borough or council inspects, and nothing
+  else; Glasgow the same on Scotland's scheme (Food Standards Scotland's FHIS),
+  every premises the council inspects.
 - **A chamber of commerce's membership:** Berlin (IHK Berlin's Gewerbedaten), each
   member's premises as a point. Membership, not licensing, decides who is in it:
   the crafts belong to a different chamber and are absent.
@@ -69,13 +73,14 @@ dense-looking city may simply have more complete records.
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London.
+- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional).
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
-  London (grocers, off-licences, bakers, butchers, newsagents with food and
-  supermarkets, named "Food shops" as in the Japanese cities).
+  London, Glasgow and Newcastle (Regional) (grocers, off-licences, bakers,
+  butchers, newsagents with food and supermarkets, named "Food shops" as in the
+  Japanese cities).
 - **Retail thin:** New York (food stores plus a regulated slice of trades). Toronto:
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
   fireworks), 328 pins inside the rings against 6,461 Food service. Seoul: Retail is
@@ -112,8 +117,11 @@ and districts no metro reaches.
   Hokuso, Tsukuba Express and Rinkai lines, cut at the line of the 23 wards); an
   owner call of 2026-09-24, recorded in the `japan-city`
   skill, not the line-by-line test below), Berlin (the S-Bahn's 16 lines, the
-  Ring among them, cut at the Land boundary) and London (the Elizabeth line and the
-  six London Overground lines, cut at Greater London).
+  Ring among them, cut at the Land boundary), London (the Elizabeth line and the
+  six London Overground lines, cut at Greater London), Sydney (Sydney Trains'
+  six lines through the City of Sydney, where they run as a metro) and
+  Melbourne (Metro Trains' six line groups through the City Loop and the Metro
+  Tunnel).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -214,7 +222,8 @@ name at their home.
 - **No names at all:** Dublin (address and recorded use), Rome (activity and address),
   Rotterdam, Riga (the kind of place, or the premises' registered name), Berlin (the
   chamber's own label for the kind of business; the register has neither names nor
-  street addresses).
+  street addresses), Sydney (the ANZSIC class; the survey publishes neither names
+  nor addresses).
 - **Mostly addresses:** Milan (a shop sign on about 1 pin in 7), Amsterdam's shop
   layer, the French cities where SIRENE has no sign or usual name (only about 40% of
   Paris rows and 43% of Marseille rows are named, per the Marseille brief).
@@ -426,6 +435,13 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Berlin | U-Bahn U1–U9 and the S-Bahn's 16 lines (the Ring S41/S42 among them) | Trams, regional trains, ferries; the U6's Tegel branch (closed for works until about August 2027) | VBB GTFS (gate 3 exact: U-Bahn 170 = 175 less 5 closed, S-Bahn 168) | Land of Berlin (lines cut at the Land boundary) | 41 / 0 (36 in Brandenburg, 5 closed for works) |
 | **United Kingdom** | | | | | |
 | London | Underground (11 lines), DLR, Elizabeth line and the six London Overground lines (19 lines, short names on the map, full names in the legend) | Tramlink, National Rail, river buses | OpenStreetMap route relations (TfL publishes no GTFS; its API's line strings are straight lines between stations); 8 stations OSM's relations omit added from its station nodes; gate 3 exact on 14 counts | Greater London (lines cut at the boundary) | 32 / 0 |
+| Glasgow | Glasgow Subway (one 15-station loop, its two tunnels drawn as one line) | Suburban and national rail (the Argyle and North Clyde lines and the rest) | OpenStreetMap route relations (SPT publishes no GTFS for the Subway); gate 3 exact on 15 | Glasgow City (the loop lies wholly inside) | 0 / 0 |
+| Newcastle (Regional) | Tyne and Wear Metro, Green and Yellow lines (the Sunderland branch included) | Northern's national rail trains | OpenStreetMap route relations; gate 3 exact on 60 | The five Tyne and Wear districts | 0 / 0 |
+| **Argentina** | | | | | |
+| Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
+| **Australia** | | | | | |
+| Sydney | Sydney Trains T1, T2, T3, T4, T8 and T9 and Sydney Metro M1 (7 lines, refs on the map, full names in the legend) | Light rail L1-L3 (22 stops in the LGA), NSW TrainLink, ferries | OpenStreetMap route relations (Transport for NSW's GTFS needs an API key); gate 3 exact on the 16 stations inside the LGA | The City of Sydney LGA (lines cut at the boundary) | 157 / 0 |
+| Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -506,7 +522,14 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Germany** | | | | | |
 | Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,154 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
 | **United Kingdom** | | | | | |
-| London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,399 / 29,255 / — | No Personal services; Retail = food shops only ("Food shops") |
+| London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,360 / 29,210 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Glasgow | Food hygiene register | Glasgow City Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 405 / 1,588 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
+| **Argentina** | | | | | |
+| Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,697 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
+| **Australia** | | | | | |
+| Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,768 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
+| Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -579,7 +602,14 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Germany** | | | |
 | Berlin | Register coordinates (60,313 of 60,314 inside the Land) | Crafts missing; web shops cannot be excluded; registered offices stack at arcade and business-centre addresses | Catering, intermediation, mobile food, household services; "other personal services" (96.99) and general non-food retail (IHK 47122) as catch-alls; employee band and business type read, never shown |
 | **United Kingdom** | | | |
-| London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,001 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address never placed; the name after "trading as" shown |
+| London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,000 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Glasgow | Register coordinates (99%); 55 not placed | Food only; about one storefront in a hundred unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a flat address or a childminder never placed; the name after "trading as" shown |
+| Newcastle (Regional) | Register coordinates (90%) and postcode centres (10%, OS postcode centroids for a full postcode with no register point); 489 not placed | Food only; about one storefront in fourteen unplaced, most in North Tyneside and Sunderland; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| **Argentina** | | | |
+| Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
+| **Australia** | | | |
+| Sydney | Census coordinates (per building; 5,054 distinct points for 7,074 storefronts) | The City of Sydney LGA only; a five-yearly survey (2022); no names | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
+| Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -664,6 +694,13 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Berlin | 2026-09-01, monthly (IHK's own commit date; fetched 2026-09-28) | B | 0.6 mi | Yes | 82% | Kind of business (the register has no names) |
 | **United Kingdom** | | | | | | |
 | London | Extracts of 2026-09-09 to 2026-09-16, per borough (fetched 2026-09-28) | B | 0.6 mi | Yes | 74% | Registered name; the trade name where registered "trading as" |
+| Glasgow | Extract of 2026-09-14 (fetched 2026-09-28) | B | 0.6 mi | Yes | 42% | Registered name; the trade name where registered "trading as" |
+| Newcastle (Regional) | Extracts of 2026-09-09 to 2026-09-16, per council (fetched 2026-09-28) | B | 0.6 mi | Yes | 54% | Registered name; the trade name where registered "trading as" |
+| **Argentina** | | | | | | |
+| Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
+| **Australia** | | | | | | |
+| Sydney | Survey of 2022 (layer last edited 2025-02-12; fetched 2026-09-28) | B | 0.6 mi | Yes | 83% | Kind of business (the survey has no names) |
+| Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

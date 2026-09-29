@@ -100,6 +100,8 @@ TAXONOMY_MODULES = {
     # because that value means five different things depending on its parent.
     "barcelona_activitat": "pipeline.taxonomies.barcelona_activitat",
     "dublin_uses": "pipeline.taxonomies.dublin_uses",
+    # Buenos Aires' land-use survey subtypes (TIPO2), enumerated in full.
+    "ba_usos_suelo": "pipeline.taxonomies.ba_usos_suelo",
     "milan_source": "pipeline.taxonomies.milan_source",
     # NAF rev. 2 - the FIRST taxonomy here that is NATIONAL rather than a
     # city's own. SIRENE is one register for the whole country, so five French
@@ -128,6 +130,7 @@ TAXONOMY_MODULES = {
     "taiwan_fia": "pipeline.taxonomies.taiwan_fia",
     "ihk_wz2025": "pipeline.taxonomies.ihk_wz2025",
     "fsa_businesstype": "pipeline.taxonomies.fsa_businesstype",
+    "anzsic_fes": "pipeline.taxonomies.anzsic_fes",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

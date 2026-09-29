@@ -1347,8 +1347,9 @@ _NOTICES = [
      "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
      "licensed under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
-     "this project: storefront types selected, premises without a location placed at their "
-     "postcode's centre, or left out where they have no full postcode, and trade "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's centre, or left out where they have no "
+     "full postcode, and trade "
      "names shown where a business is registered under another name. No hygiene rating is "
      "shown. The Food Standards Agency does not endorse this map.",
      False),
@@ -1365,6 +1366,85 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Buenos Aires (notice 60): BA Data's three datasets under CC BY 2.5 AR -
+    # author units, dataset titles and URIs, the licence URI, how the data was
+    # changed, no endorsement, no GCBA or BA Data logo. Written to satisfy 2.5 AR
+    # and 4.0 both (Parcelas' resources say 4.0). Approved by the owner 2026-09-28.
+    ("Gobierno de la Ciudad de Buenos Aires (Buenos Aires)",
+     "Buenos Aires' storefronts are from the [Relevamiento Usos del Suelo 2022-2024]"
+     "(https://data.buenosaires.gob.ar/dataset/relevamiento-usos-suelo) (Dirección General de "
+     "Antropología Urbana, Subsecretaría de Planeamiento), placed using "
+     "[Parcelas](https://data.buenosaires.gob.ar/dataset/parcelas) (Subsecretaría de Registro, "
+     "Interpretación y Catastro), and the Subte's stations and lines are from "
+     "[Subte: Estaciones](https://data.buenosaires.gob.ar/dataset/subte-estaciones) "
+     "(Subterráneos de Buenos Aires, SBASE), all published by the Gobierno de la Ciudad de "
+     "Buenos Aires on BA Data under the [Creative Commons Attribution 2.5 Argentina licence]"
+     "(http://creativecommons.org/licenses/by/2.5/ar/). Modified by this project: filtered to "
+     "storefronts, grouped into three categories, and placed at the centre of each parcel, or "
+     "of its block where the parcel is not listed; station names follow OpenStreetMap's "
+     "spelling. The Gobierno de la Ciudad de Buenos Aires does not endorse this map.",
+     False),
+    # Glasgow (notice 61): Scotland's FHIS data, run by Food Standards Scotland and
+    # published in the FSA's open-data files, under OGL v3 (FSS states v3 itself) - the
+    # OGL statement linked, the extract date, what was modified, no endorsement by either
+    # body. Never "FHRS": FHIS is a separate scheme. Wording approved by the owner 2026-09-28.
+    ("Food Standards Scotland (Glasgow)",
+     "Glasgow's food businesses are from Food Standards Scotland, Food Hygiene Information "
+     "Scheme data, via the Food Standards Agency, extracted on 2026-09-14. Contains public "
+     "sector information licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected; premises without a location, at a flat address "
+     "or registered as a childminder left out; trade names shown where a business is "
+     "registered under another name. No inspection result is shown. Neither Food Standards "
+     "Scotland nor the Food Standards Agency endorses this map.",
+     False),
+    # Newcastle (notice 62): the FSA's FHRS data for the five Tyne and Wear councils,
+    # London's credit and conditions (England, FHRS). Wording approved by the owner
+    # 2026-09-28.
+    ("Food Standards Agency (Newcastle)",
+     "Newcastle's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
+     "licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's centre, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Newcastle's postcode centroids (notice 63): London's Ordnance Survey notice, the
+    # same file and edition. Wording approved by the owner 2026-09-28.
+    ("Ordnance Survey (Newcastle)",
+     "Where the Food Standards Agency lists a Newcastle food business without a map point, it "
+     "is placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Sydney (notice 64): the City of Sydney's FES under CC BY 4.0 - creator and
+    # copyright holder, the licence and the dataset linked, modification noted, the
+    # warranty disclaimer, no endorsement (licence-read 2026-09-28; no wording is
+    # prescribed). Wording approved by the owner 2026-09-28.
+    ("City of Sydney (Sydney)",
+     "Business establishment locations: City of Sydney, Floor Space and Employment Survey 2022 "
+     "([FES Industry of occupation](https://www.arcgis.com/home/item.html?id="
+     "77ac8aa96bd34bacb881cfe8e5358ba0)), © City of Sydney, licensed under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project "
+     "(filtered and grouped by category); provided as is, without warranty. The City of Sydney "
+     "does not endorse this map.",
+     False),
+    # Melbourne (notice 65): the City of Melbourne's CLUE under CC BY 4.0 - the credit,
+    # the licence and the dataset linked, the modification noted, no endorsement
+    # (licence-read 2026-09-28; no wording is prescribed). Wording approved by the
+    # owner 2026-09-28.
+    ("City of Melbourne (Melbourne)",
+     "Business establishments: City of Melbourne, Census of Land Use and Employment (CLUE) 2024 "
+     "([dataset](https://data.melbourne.vic.gov.au/explore/dataset/"
+     "business-establishments-with-address-and-industry-classification/)), "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Filtered, categorised and "
+     "aggregated by this project. The City of Melbourne does not endorse this map.",
      False),
 ]
 

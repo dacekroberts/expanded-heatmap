@@ -1067,7 +1067,13 @@ CITIES = [
         # measured in the app's own document with eleven entries reproduced,
         # and check_macro_labels.py passes every region at 375, 768 and 1200
         # with PROBLEMS 0.
-        "label_offset": ('middle', 0, -22),
+        # Up and right since Buenos Aires joined the region (2026-09-28): the
+        # wider view put the above-dot pill under the zoom buttons at 375 px,
+        # and right or below met Recife. Scored PROBLEMS 0 at 375, 768, 1200.
+        # Left of its dot (deploy-verify, review time 2026-09-28): right of it,
+        # the South America view's right edge cut the name by 35% at 375 px once
+        # Buenos Aires widened the view. Left of it: PROBLEMS 0 and nothing clipped.
+        "label_offset": ("end", -12, -10),
     },
     {
         "name": "Porto Alegre (Regional)",
@@ -1090,7 +1096,10 @@ CITIES = [
         # with PROBLEMS 0.
         # 7.5 px (5%) clipped at the west edge at phone width -
         # reported, not failed, the class Guadalajara's 6% is in.
-        "label_offset": ('middle', 0, -22),
+        # Right of the dot since Buenos Aires joined the region (2026-09-28):
+        # above met Santos's pill and below met Buenos Aires's. Scored
+        # PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 12, 5),
     },
     {
         "name": "Recife (Regional)",
@@ -1338,7 +1347,7 @@ CITIES = [
         "page": "pages/47_Monterrey_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "DENUE May 2026, fetched 2026-09-27",
+        "data_age": "DENUE May 2026 edition, fetched 2026-09-27",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
@@ -1547,6 +1556,128 @@ CITIES = [
         # PROBLEMS 0 in every region at 375, 768 and 1200.
         "label_offset": ("end", -10, 5),
     },
+    {
+        "name": "Buenos Aires",
+        "lat": -34.6037,
+        "lon": -58.3816,
+        "page": "pages/58_Buenos_Aires_Heatmap.py",
+        # Owner-approved 2026-09-28: the "Why the maps differ" row.
+        "coverage": "full",
+        "placement": "Parcel centres (99.8%) and block centres (0.1%)",
+        "data_age": "Surveyed 2022–2024",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
+        "blurb": "Subte Líneas A–E and H",
+        "region": "South America",
+        "country": "Argentina",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 87.4 px in
+        # the deployed app's own frame (2026-09-28, seven entries reproduced),
+        # and with Fortaleza and Porto Alegre moved, every region passes at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Glasgow",
+        "lat": 55.8609,
+        "lon": -4.2514,
+        "page": "pages/59_Glasgow_Heatmap.py",
+        # Owner-approved 2026-09-28, London's values on Scotland's scheme.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (99%)",
+        "data_age": "Extract of 2026-09-14",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Glasgow Subway, one 15-station loop",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 56.8 px in
+        # the deployed app's own frame (2026-09-28, three entries reproduced),
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0. Nothing else is near it on the Europe view.
+        # Beside its dot, not above: see Newcastle (Regional)'s note.
+        # Right of its dot after all (deploy-verify, review time 2026-09-28): left
+        # of it, the Europe view's left edge cut the name to "sgow" at 375 px
+        # (41% clipped). Right of it: PROBLEMS 0 and nothing clipped.
+        "label_offset": ("start", 12, -4),
+    },
+    {
+        "name": "Newcastle (Regional)",
+        "lat": 54.9738,
+        "lon": -1.6131,
+        "page": "pages/60_Newcastle_Heatmap.py",
+        # Owner-approved 2026-09-28, London's values; rail_extra "—": the
+        # Metro is its own system, its Sunderland stretch on shared track
+        # disclosed on the page.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (90%) and postcode centres (10%)",
+        "data_age": "Extracts of 2026-09-09 to 2026-09-16",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Tyne and Wear Metro, Green and Yellow lines",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 143.1 px
+        # in the deployed app's own frame (2026-09-28, four entries
+        # reproduced), and check_macro_labels.py passes every region at 375,
+        # 768 and 1200 with PROBLEMS 0 - scored WITHOUT Glasgow, which is on
+        # its own branch; re-score when both have landed.
+        # Glasgow and Newcastle together (review time 2026-09-28, owner): each was
+        # scored without the other, and above-the-dot Newcastle covered Glasgow's
+        # marker at 1200 px. A search of 48 pairs passed only with Newcastle lifted
+        # 48 px and Glasgow's name beside its dot. The owner accepted the drift
+        # a 48 px lift costs when zoomed in; check_macro_labels.py PROBLEMS 0.
+        "label_offset": ("middle", 0, -48),
+    },
+    {
+        "name": "Sydney",
+        "lat": -33.8688,
+        "lon": 151.2093,
+        "page": "pages/61_Sydney_Heatmap.py",
+        # Owner-approved 2026-09-28.
+        "coverage": "full",
+        "placement": "Census coordinates (per building)",
+        "data_age": "Survey of 2022",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
+        "blurb": "Sydney Trains T1–T4, T8, T9 and Metro M1",
+        "region": "Oceania",
+        "country": "Australia",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 51.4 px in
+        # the deployed app's own frame (2026-09-28, three entries reproduced),
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0. Alone in Oceania until Melbourne arrives.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Melbourne",
+        "lat": -37.8136,
+        "lon": 144.9631,
+        "page": "pages/62_Melbourne_Heatmap.py",
+        # Owner-approved 2026-09-28.
+        "coverage": "full",
+        "placement": "Census coordinates (per property)",
+        "data_age": "Census of 2024",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
+        "blurb": "Metro Trains' six line groups",
+        "region": "Oceania",
+        "country": "Australia",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 72.4 px in
+        # the deployed app's own frame (2026-09-28, three entries reproduced),
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0, Sydney included.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -1691,6 +1822,12 @@ REGION_ORDER = [
     # Seoul is about 2,100 km and to Sapporo about 3,400, past the 3,300 at which
     # Canada was split, so re-score it when Japan lands rather than assume.
     "East Asia",
+    # OCEANIA (owner, 2026-09-28): Sydney first, Melbourne next, about 710 km
+    # apart - one readable view, far from every other region. Named for the
+    # continent rather than the country, as Europe is, so an Australian or New
+    # Zealand city joins it; Perth is about 3,300 km from Sydney, past the
+    # distance at which Canada was split, so re-score it if it ever arrives.
+    "Oceania",
 ]
 
 # A REGION'S ZOOM FITTED WITHOUT AN OUTLIER; its centre still takes every city.

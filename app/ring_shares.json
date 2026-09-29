@@ -280,8 +280,33 @@
   "map_blob": "bd6ff223b5043d031f18f002a0ed8b5a15afcbc4"
  },
  "london": {
-  "in_ring": 41654,
-  "all": 56589,
-  "map_blob": "a83e37422c2b8dffaa772fd8f96dc71912fd2ff4"
+  "in_ring": 41574,
+  "all": 56491,
+  "map_blob": "736f90c7d3f369d3f14c39c950956aaca7feb227"
+ },
+ "buenos_aires": {
+  "in_ring": 42270,
+  "all": 63596,
+  "map_blob": "7e97f5c337bd041ed4d2dc190aed51117feb9dd6"
+ },
+ "glasgow": {
+  "in_ring": 1993,
+  "all": 4708,
+  "map_blob": "acb53d8b4da4c07933dba237689fcbeccc152774"
+ },
+ "newcastle": {
+  "in_ring": 3358,
+  "all": 6171,
+  "map_blob": "818fa393ceab4a71d61515c3a1af00de676b9781"
+ },
+ "sydney": {
+  "in_ring": 5901,
+  "all": 7074,
+  "map_blob": "61c2c05006618a7257a1100d1b5c697f391d33be"
+ },
+ "melbourne": {
+  "in_ring": 4760,
+  "all": 4959,
+  "map_blob": "a2f4f0043cce42b33dfb7866fdf288b1d29d9490"
  }
 }

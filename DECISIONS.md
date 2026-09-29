@@ -20,27 +20,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**157 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**165 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)](#2026-09-28---incheons-licences-read-the-permit-lists-and-the-kesa-lift-building-file-both-permitted-with-conditions-the-website-copyright-terms-judged-not-to-reach-them-owner-personal-services-shown-from-2021-dated-owner)
 - [Gyeonggi satellites: Goyang, Seongnam and Yongin first, then Suwon and Bucheon (owner)](#2026-09-28---gyeonggi-satellites-goyang-seongnam-and-yongin-first-then-suwon-and-bucheon-owner)
 - [Bucharest builds before Incheon (owner), reversing the order recorded earlier today; Incheon and the Gyeonggi satellites to be briefed](#2026-09-28---bucharest-builds-before-incheon-owner-reversing-the-order-recorded-earlier-today-incheon-and-the-gyeonggi-satellites-to-be-briefed)
+- [Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)](#2026-09-28---second-review-time-batch-published-buenos-aires-glasgow-newcastle-sydney-melbourne-londons-flat-rule-monterreys-wording-owner-called-it)
 - [Stockholm is built on its register as frozen on 2025-10-21 (owner); the 1,391 untyped premises measured, a by-name recovery proposed](#2026-09-28---stockholm-is-built-on-its-register-as-frozen-on-2025-10-21-owner-the-1391-untyped-premises-measured-a-by-name-recovery-proposed)
+- [Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)](#2026-09-28---melbourne-built-on-the-city-of-melbournes-land-use-census-by-metro-trains-line-group-9539-excluded-in-melbourne-and-sydney-owner)
 - [Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)](#2026-09-28---bucharests-names-the-company-name-without-its-legal-form-sole-traders-by-category-owner-bucharest-builds-after-incheon-owner)
 - [Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)](#2026-09-28---bucharest-to-be-built-with-its-unplaced-share-disclosed-canteens-and-pastry-labs-left-out-owner)
 - [Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM](#2026-09-28---bucharests-address-hit-rate-measured-795-of-20815-storefronts-placed-on-street-and-number-against-osm)
 - [Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication](#2026-09-28---bucharests-supermarket-file-and-eight-non-animal-origin-files-fetched-owner-about-23100-active-rows-before-de-duplication)
+- [Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)](#2026-09-28---sydney-built-on-the-city-of-sydneys-floor-space-survey-light-rail-out-a-new-oceania-region-catering-funerals-and-clubs-out-owner)
+- [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
+- [Newcastle (Regional) built on the FSA register: the Sunderland branch kept, London's centroid tier, notices of its own (owner)](#2026-09-28---newcastle-regional-built-on-the-fsa-register-the-sunderland-branch-kept-londons-centroid-tier-notices-of-its-own-owner)
 - [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
+- [Glasgow built on Scotland's FHIS register, food only; the flat and childminder rules added for Glasgow and London (owner)](#2026-09-28---glasgow-built-on-scotlands-fhis-register-food-only-the-flat-and-childminder-rules-added-for-glasgow-and-london-owner)
 - [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
 - [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
+- [Buenos Aires built: the land-use survey at parcel centres, the Subte from SBASE's own layers (owner)](#2026-09-28---buenos-aires-built-the-land-use-survey-at-parcel-centres-the-subte-from-sbases-own-layers-owner)
 - [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
 - [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
 - [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
+- [Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)](#2026-09-28---buenos-aires-taxonomy-385-survey-subtypes-mapped-five-scope-calls-owner)
 - [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
 - [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
 - [London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too](#2026-09-28---londons-unplaced-storefronts-placed-at-postcode-centroids-owner-2349-more-notice-58-for-ordnance-survey-the-credit-in-the-repository-too)
@@ -258,6 +266,54 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   licence reads are running: Incheon's data.go.kr lists, the KESA
   lift-building file, and Gyeonggi's data portal. Per-city counts and
   stations will decide which satellites come first.
+### 2026-09-28 - Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)
+
+- **Merged into `worktree-cleanup` in land order:** Buenos Aires (77da039),
+  Glasgow (46163e3), Newcastle (4b45cda), Sydney (bdaa8b8), then Melbourne
+  (5a2e8d8, stacked on Sydney), plus master's latest.
+  - Each city's data-bound gate steps passed in its build session: zero
+    drift, the personal-exposure verdict in DECISIONS, and `brief_check`.
+  - Notices 60 to 65, pages 58 to 62.
+  - The master list re-applied each city's move to Built on master's bands:
+    62 built across 21 countries, 80 candidates, Band B 4.
+    `check_master_list_counts.py` agrees.
+  - The United Kingdom row of the data-sources index now names all three UK
+    cities.
+- **Changed with the batch:**
+  - London's flat rule (owner): 56,590 to 56,492 processed rows, 56,491
+    storefronts.
+  - Sydney's ANZSIC 9539 exclusion (owner): 7,328 to 7,074 storefronts.
+  - The new Oceania region.
+- **Merge fixes:**
+  - **Glasgow and Newcastle** were each scored without the other, and
+    Newcastle's label covered Glasgow's marker at 1200 px. The owner chose
+    Newcastle lifted 48 px, after a search of 48 offset pairs.
+    `deploy-verify` then found Glasgow's name, placed left of its dot, cut
+    to "sgow" at the Europe view's left edge at 375 px. It was moved right
+    of its dot: PROBLEMS 0, nothing clipped.
+  - **Fortaleza's label** (moved right by the Buenos Aires branch) was cut
+    35% at the South America view's right edge at 375 px. It was moved left
+    of its dot: PROBLEMS 0, nothing clipped.
+  - **Page 91's station table** widened the page to 518 px at 375. It was
+    moved to `components.scroll_table`. Measured afterwards: document 375
+    px, the table 440 px in a 343 px box, 62 rows.
+  - **A notice 58 citation** that a line break split was rewrapped, so
+    `check_provenance.py` can read it.
+- **London's shared processed data.** Cleanup first re-ran London's step 2
+  well before the push, which broke `check_macro_facts.py` in every other
+  session's hook (Staging caught it). Master's file was restored by running
+  master's own step 2 from a temporary detached checkout. The flat-rule
+  version was re-run only immediately before the push. The handoff now says
+  so.
+- **Gate:**
+  - `check_all.py` 24/24, `check_deploy_imports.py` clean, and
+    `check_macro_labels.py` PROBLEMS 0 across 11 regions × 3 widths.
+  - `deploy-verify` ran `scope: city-added` for the five cities, plus London,
+    Sydney's re-render, the labels, pages 91 and 92, and Monterrey. The only
+    changed outputs were those six cities'.
+  - Every item passed except the two label clips and page 91 (outside the
+    scope), all fixed above. The label fixes were re-scored by the check,
+    and page 91 was re-measured in the lean venv.
 
 ### 2026-09-28 - Stockholm is built on its register as frozen on 2025-10-21 (owner); the 1,391 untyped premises measured, a by-name recovery proposed
 
@@ -285,6 +341,78 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   (not food shops) and the rest. That gives about 5,996 placed
   storefronts.
 - Files: `docs/build_briefs/stockholm.md`.
+### 2026-09-28 - Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)
+
+- **ANZSIC 9539 "Other Personal Services n.e.c." excluded in both Australian
+  cities (owner), superseding the same day's keep in Sydney** (the entry
+  "Sydney built on the City of Sydney's floor-space survey"). Sydney's survey
+  has no names, so the class could not be sampled there; Melbourne's census
+  names it: 214 of its 279 rows are upper-floor suites, mostly migration and
+  education consultancies ("Suite 1008, Level 10, 365 Little Collins
+  Street"), with a few tattoo studios. Sydney re-rendered on this branch:
+  7,328 -> **7,074** storefronts, Personal services 1,003 -> 749, 83.5% ->
+  83.4% in the rings. Rejected: excluding it in Melbourne only (two maps
+  differing on one class), keeping it in both.
+- **Trains drawn by Metro Trains' line group (owner)**: inside the
+  municipality each group's lines share one track (the Burnley group's four to
+  Richmond), so 16 line labels would stack. Six groups, from the colours OSM's
+  relations carry (Burnley, Clifton Hill, Northern, Cross City, Frankston,
+  Metro Tunnel; Sandringham shares Cross City's colour, so the seven proposed
+  became six), each labelled on the map with its lines named in the legend.
+  Each of the 119 relations is assigned by the line name before the colon in
+  its `name`; one matching no group stops step 1. **Left out (owner)**: the
+  Flemington Racecourse line (event days only; its Showgrounds and Flemington
+  Racecourse stations with it) and the City Circle (OSM's own description:
+  "Not a usual service"). Rejected: 16 separate lines; the racecourse line in.
+- **Trams left out, and the page says what they would add (owner)**: 96.0%
+  of storefronts in a ring with trains, 99.1% with trams (the brief's
+  measure). Sydney's light-rail treatment.
+- **The credit is the licence read's draft (owner), notice 65**: "Business
+  establishments: City of Melbourne, Census of Land Use and Employment (CLUE)
+  2024", the dataset and CC BY 4.0 linked, "Filtered, categorised and
+  aggregated by this project", no endorsement.
+- **Richmond is out, on the boundary rule this build wrote**: a station is in
+  when the centre of its platforms (its stop nodes) is inside the LGA;
+  Richmond's is just outside on Punt Road, though OSM's station node is
+  inside. The brief measured the coverage difference at 0.0 points.
+- **Built** (`worktree-melbourne`, stacked on `worktree-sydney` for the shared
+  taxonomy, the Oceania region and `docs/data_sources/australia.md`; lands
+  after Sydney):
+  - Census: the 2024 export only (3,842,307 bytes, 19,672 rows, count
+    asserted; owner's OK, against the whole table's 413,550 rows and about 85
+    MB). `anzsic_fes` gains CLUE's six finer retail classes (4111 convenience
+    stores, 4254-4258 clothing and footwear by wearer), found by the step's
+    stop on an undecided class. **4,959 storefronts** (Retail 1,852, Food
+    service 2,646, Personal services 461), every one inside the LGA. 1,840
+    distinct points (the property's), the largest 219; 434 upper-floor or
+    suite tenancies kept and reported.
+  - Rail: six groups merged by London's branch rule and clipped to the LGA;
+    colours from `line_colour_search.py` (closest pair within 500 m 36.6).
+    **17 stations**, gate 3 exact against the brief's list less the racecourse
+    line's two and Richmond.
+  - Boundary: OSM relation 2404870, 37.7 km² in UTM 55S.
+  - **4,760 storefronts in the rings (96.0%).**
+  - Macro label 72.4 px (measured with Sydney's); PROBLEMS 0 in 11 regions,
+    Sydney and Melbourne together in Oceania.
+- **Exposure (`check_personal_exposure.py melbourne`)**: CLUE's trading name
+  is the only name, no fallback; 0 contact details. The heuristic's 27.7% is
+  trade names on a 50-name sample ("Grossi Florentino", "Mister Munro"); one
+  storefront sits at an "Apartment" address, under a trade name. The census
+  covers non-residential floor space.
+- **Verified**: `brief_check.py melbourne` 4/4; `drift_check.py melbourne` and
+  `sydney` zero drift against 226b783; `check_inconsistency_list.py`,
+  `check_macro_facts.py`, `check_scope_disclosure.py` and
+  `check_master_list_counts.py` OK; the map rendered at 1000x650 with six
+  labels, the legend and the OSM credit (the legend covers the east edge; it
+  has a Hide control). `app/macro_facts.json` keeps this branch's London count
+  (56,589): the shared `data/` folder now holds the flat-rule London that
+  lands with Glasgow.
+- Files: `pipeline/melbourne/`, `pipeline/taxonomies/anzsic_fes.py`,
+  `app/pages/62_Melbourne_Heatmap.py`, `app/pages/61_Sydney_Heatmap.py`,
+  `app/components.py` (notice 65), `app/cities.py`, `docs/data_sources.md`,
+  `docs/data_sources/australia.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`, both briefs,
+  `outputs/sydney/heatmap.html`.
 
 ### 2026-09-28 - Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)
 
@@ -366,6 +494,106 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   files, so step 2 de-duplicates on name and address.
 - Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
 
+### 2026-09-28 - Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)
+
+- **Light rail (L1, L2, L3) left out, and the page says what it would add
+  (owner).** The brief measured 83.2% of storefronts in a ring with trains
+  and Metro, 93.0% with light rail; Berlin's precedent left its trams out at
+  6.9 points. The page names the lines and the effect. Rejected: drawing L1-L3.
+- **A new front-page region, "Oceania" (owner)**, for Sydney and Melbourne
+  (about 710 km apart). Named for the continent, as Europe is. Rejected:
+  "Australia".
+- **Catering (ANZSIC 4513, 21) and funeral services (9520, 7) excluded
+  (owner)**; the two n.e.c. catch-alls kept (4279 other store-based retail,
+  311; 9539 other personal services, 254): with no names they cannot be
+  sampled, and they expose no one. The owner also asked Cleanup to audit
+  funeral services in every other city (Cleanup's audit: 34 cities exclude by
+  code or licence type, six get a disclosure, after the frozen branches land).
+- **Licensed members' clubs (4530, 27) excluded (owner)**: entered by sign-in,
+  not walk-in; outside the brief's 451-452 scope.
+- **Five classes the brief's prefixes did not reach sit in the storefront
+  divisions**, found because `anzsic_fes.py` stops step 2 on any undecided
+  class there. Religious services (9540, 144) and interest-group, professional
+  and labour associations (9551, 9552, 9559; 249) are excluded as
+  organisations, NAICS 813's precedent; clubs as above.
+- **The rest of the class list mirrors `naics.py`**: motor-vehicle and fuel
+  retail kept (NAICS 441 and 447), non-store and commission-based retail out
+  (454), parking out (81293), brothels out (the owner's earlier call).
+- **The credit is the licence read's draft (owner), notice 64**: "Business
+  establishment locations: City of Sydney, Floor Space and Employment Survey
+  2022 (FES Industry of occupation), © City of Sydney, licensed under CC BY
+  4.0", the dataset and licence linked, "Modified by this project (filtered and
+  grouped by category); provided as is, without warranty", no endorsement. The
+  City's website terms (republishing needs written authorisation) were judged
+  not to reach the data hub; noted, not a blocker.
+- **Built** (`worktree-sydney`, from origin/master 3f72ffe):
+  - Survey: 21,618 establishments of 2022 (count asserted, paged 2,000 at a
+    time, owner's OK); 7,355 storefronts by class -> 27 outside OSM's LGA
+    polygon -> **7,328** (Retail 3,091, Food service 3,234, Personal services
+    1,003). 5,218 distinct points; 61.8% alone, 12.4% in stacks of 10 or more,
+    the largest 140.
+  - Rail: 22 OSM relations for T1, T2, T3, T4, T8, T9 and M1, merged by
+    London's branch rule and clipped to the LGA. OSM spells the platform three
+    ways ("Central, Platform 16", "Campbelltown Platform 2", "Gadigal 1"); once
+    normalised, **the 16 stations inside the LGA are exactly the brief's
+    list** (OSM's station nodes, a second method). Gadigal and Town Hall, 160 m
+    apart, are two signed stations. Colours from `line_colour_search.py`:
+    closest pair within 500 m 19.2 (M1, T4).
+  - Boundary: OSM relation 1251066, 26.5 km² in UTM 56S.
+  - **6,120 storefronts in the rings (83.5%).**
+  - Macro label 51.4 px in the deployed app's frame (Prague, Tokyo, London
+    reproduced); PROBLEMS 0 in 11 regions.
+- **Exposure (`check_personal_exposure.py sydney`)**: the survey has no name
+  or address column; a pin shows one of 43 ANZSIC class labels. The heuristic's
+  14.0% is those labels ("Clothing Retailing"). No exposure, structurally.
+- **Verified**: `brief_check.py sydney` 5/5; `drift_check.py sydney` zero
+  drift against 37fa12b; `check_inconsistency_list.py`, `check_macro_facts.py`
+  (after a table B note that read "only" as a missing category was reworded),
+  `check_scope_disclosure.py` and `check_master_list_counts.py` OK; the map
+  rendered at 1000x650 with seven labels, the legend and the OSM credit.
+- Files: `pipeline/taxonomies/anzsic_fes.py`, `pipeline/sydney/`,
+  `app/pages/61_Sydney_Heatmap.py`, `app/components.py` (notice 64),
+  `app/cities.py` (Oceania), `docs/data_sources.md`,
+  `docs/data_sources/australia.md` (new), `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/sydney.md`.
+### 2026-09-28 - Funeral services come off every map (owner); audit and plan
+
+- **Owner's call, confirmed in the cleanup session** (first relayed from the
+  Sydney build): funeral homes, crematoria and cemeteries are not
+  storefronts, and no city's map shows them. Shops selling funeral goods
+  stay, because they are storefronts.
+- **Audit (read-only, every taxonomy module, 57 cities).**
+  - **34 map funeral businesses into a bucket by code or licence type,**
+    almost always Personal services:
+    - NAICS 8122: Los Angeles, San Diego, San Francisco, Montréal.
+    - SCIAN 8123: the three Mexican cities.
+    - NAF 96.03Z: the five French cities.
+    - Rev. 2.1's 96.30: Oslo, Copenhagen, Prague, Berlin.
+    - Madrid's pompas fúnebres; the three Taiwanese cities' 殯葬 types;
+      Brazil's "FUNERARIA" keyword (nine cities).
+    - Local licence types: Vancouver, Edmonton, Miami, Washington D.C.,
+      Dublin.
+  - **By accident, with no code to exclude:** Chicago, Calgary and Milan
+    (roughly 10 to 20 pins each, under general licences, found by name).
+  - **Not identifiable:** Amsterdam, Rotterdam and Riga (building-register
+    shop units).
+  - **Already excluded:** Hong Kong.
+  - **Not in the source:** 16 cities.
+  - Cemeteries were kept in some cities and excluded in others (Vancouver,
+    Miami, Dublin and Brazil already drop them).
+- **Decided (owner):**
+  - Exclude by code or licence type in the 34 cities.
+  - Chicago, Calgary and Milan get a DISCLOSURE, not a name filter.
+    Rejected: a new name-matching filter for a handful of pins.
+  - Amsterdam, Rotterdam and Riga get a disclosure, since the data cannot
+    separate them.
+  - Taiwan's funeral-goods retail stays.
+- **When:** cleanup runs it after Buenos Aires, Glasgow and Newcastle land.
+  It means re-running the 34 cities one at a time as announced heavy jobs,
+  then drift checks. The new `docs/excluded_categories.md` wording goes to
+  the owner first. A full `deploy-verify` runs at review time. PLAN has the
+  item.
 ### 2026-09-28 - Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations
 
 - **The owner fetched eight files** from the registered retail units of
@@ -397,6 +625,76 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rule applies: those units show a category only.
 - **Still undecided:** Bucharest's buildability, which rests on the OSM
   address hit rate over the active rows. The addresses are free text.
+
+### 2026-09-28 - Newcastle (Regional) built on the FSA register: the Sunderland branch kept, London's centroid tier, notices of its own (owner)
+
+- **Kept every Tyne and Wear Metro station, the Sunderland branch included
+  (owner).** Pelaw to Sunderland runs on Network Rail track shared with
+  Northern's trains, but the route runs as the Metro, with Metro stations and
+  frequencies. Measured before the call: the branch's 12 stations add 597
+  storefronts to the rings (44.7% -> 54.4%), and without them Sunderland, one
+  of the five districts with 1,390 storefronts, has none in a ring. The five
+  Metro-only stations beyond Sunderland add 155 of the 597. Rejected: dropping
+  the branch, and keeping only its Metro-only end (disconnected from the rest).
+  Northern's trains stay out.
+- **Placed storefronts without an FSA point at their postcode's centroid
+  (owner), London's tier.** 1,123 of the 6,662 storefront rows left after the flat rule
+  (16.9%) have no point; 634 are placed (Code-Point Open, the same file as
+  London's, copied from its cache, kept to the five districts' GSS codes) and
+  489 (7.3%) are not. The centroid-placed share in the rings (51.9%) is close
+  to the rest's (54.7%), so the tier does not tilt the headline figure.
+  **No outward-code-only rows** here: the brief's 4.4% did not recur in the
+  full files; the private addresses carry no postcode at all (426).
+- **Notices 62 (Food Standards Agency) and 63 (Ordnance Survey), per city
+  (owner)**, London's credit and statements, rather than extending 58 and 59:
+  the per-city pattern Glasgow's 61 follows, and no collision with Glasgow's
+  branch edit to 58.
+- **Page name "Newcastle (Regional)" (owner)**: Lille's precedent for a page
+  covering several authorities; the five districts include Sunderland, a city
+  in its own right.
+- **Built** (`worktree-newcastle`, from origin/master 7db6064, with
+  `pipeline/fsa.py` taken unchanged from `worktree-glasgow`, so either lands
+  cleanly first):
+  - Register: five files by code (410, 416, 417, 427, 429; 9,248,845 bytes,
+    owner's OK), 9,214 rows; 6,667 storefronts -> 5 at a flat address, 0
+    childminders, 489 unplaced, 2 FSA points far outside the area (one in
+    London, one in Lancashire) -> **6,171** (food service 4,141, food shops
+    2,030). 7 trading-as names. Canteens by name at least 1.3%, not separated.
+  - Rail: four OSM relations, one per line drawn (Green 40.9 km, Yellow 54.6
+    km with the coast loop once), #30A800 and #C08800 (Nexus's hues' nearest
+    feasible colours, 45.5 and 78.5 from every pin, 70.4 apart). **60
+    stations, gate 3 exact** against Nexus's 60; Green 31, Yellow 41; "St.
+    James" merged into St James.
+  - Boundary: the union of OSM relations 142282, 116279, 140462, 142245 and
+    140390, 551.2 km² in UTM 30N.
+  - **3,358 storefronts in the rings (54.4%).**
+  - Macro label: "Newcastle (Regional)" 143.1 px in the deployed app's frame
+    (Prague, Tokyo, London and Guadalajara (Regional) reproduced); PROBLEMS 0
+    without Glasgow, whose branch is separate - re-score after both land.
+  - The map fits every station, but the legend covers the Sunderland end at
+    1000x650; the legend has a Hide control, and the shared renderer was not
+    forked for it.
+- **Exposure (`check_personal_exposure.py newcastle`)**: no fallback name
+  exists; 0 emails or phone numbers. The heuristic's 22.8% of all placed
+  storefronts is trade names on a 40-name sample (Lucky's Diner, Woodmans
+  Arms); the 18 "person then bracket" names are all trade names with a place
+  or unit ("Costa Coffee (Green Mall)").
+- **Verified**: `brief_check.py newcastle` 4/4; `drift_check.py newcastle`
+  zero drift against cf45ef7; `check_inconsistency_list.py`,
+  `check_scope_disclosure.py`, `check_macro_facts.py` and
+  `check_master_list_counts.py` OK.
+- **A slip, repaired**: re-running London's step 2 on `worktree-glasgow`
+  rewrote `data/london/processed/businesses_clean.csv`, which every worktree
+  shares through the `data/` junction, and master's `check_macro_facts.py`
+  failed for every session (Staging caught it). Master's file was restored
+  from the copy saved before the run; Cleanup re-runs London's step 2 when
+  Glasgow lands.
+- Files: `pipeline/newcastle/`, `pipeline/fsa.py`,
+  `app/pages/60_Newcastle_Heatmap.py`, `app/components.py` (notices 62, 63),
+  `app/cities.py`, `docs/data_sources.md`,
+  `docs/data_sources/united-kingdom.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/newcastle.md`, README's credits.
 
 ### 2026-09-28 - Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn
 
@@ -450,6 +748,81 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - Files: `docs/build_briefs/stockholm.md` (6/6), `docs/build_briefs/bucharest.md`
   (2/2), and three rows of `docs/city_master_list.md`.
 
+### 2026-09-28 - Glasgow built on Scotland's FHIS register, food only; the flat and childminder rules added for Glasgow and London (owner)
+
+- **A storefront whose address line starts "Flat" is never placed, in Glasgow
+  and London alike (owner).** Glasgow City publishes home bakers and cooks as
+  Restaurant/Cafe/Canteen at their tenement flat WITH the FSA's point ("Flat
+  2/1", a few under a person's own name): 185 of 4,958 storefronts (130 upper
+  floor, 23 ground floor, 32 other). London's structural guard (a private
+  address gets no point and an outward postcode only) catches none of them,
+  and the same test found 99 in London's files, 98 of them on the live map.
+  Rejected: upper floors only (keeps 23 ground-floor flats, some of them
+  tenement shops but others home kitchens), and Glasgow only (leaves London's
+  98 standing). A few real ground-floor shops are lost; disclosed.
+- **A storefront named as a childminder is never placed (owner).** Five in
+  Glasgow, listed as cafés at a house, three under the childminder's own name
+  ("Andrea Stewart - Childminder"); none in London. Not a food storefront and
+  home-based by definition. No "home bakery" rule: in Scotland that names a
+  kind of shop (Newlands Home Bakery, Clarkston Road), and "Homemade By
+  Fiona" is a trade name, which the existing rule allows.
+- **Both rules live in a new shared module, `pipeline/fsa.py`** (the build
+  session's call, which the briefs left open): London's FSA reader, the
+  trading-as rule and the Code-Point loader, lifted out of London's step 2 so
+  that Newcastle, the third FSA city, passes through the rules. London's step
+  2 now uses it. Its CSV lost exactly the 98 placed flat rows (93 at the FSA
+  point, 5 at a postcode centroid), and every other row is byte-identical to
+  the old step 2's output: 56,590 -> 56,492 storefronts, 41,574 in the rings (73.6%).
+- **Glasgow's credit reads "Food Standards Scotland, Food Hygiene Information
+  Scheme data, via the Food Standards Agency" (owner), notice 61**, with the
+  OGL v3 statement linked and the extract date (2026-09-14). The `licence-read`
+  found the FSA's terms put the whole file, FHIS records included, under the
+  OGL, and that FSS publishes the same council's data itself under OGL v3. It
+  also found that London's credit ("UK food hygiene rating data") would
+  describe FHIS wrongly: FHIS gives Pass or Improvement Required, not a rating.
+  Rejected: FSS alone (the file is the FSA's), and extending notice 58. Notice
+  58 and London's page are amended for the flat rule (owner-approved wording).
+- **No postcode centroids for Glasgow (owner).** 55 of the storefronts left
+  after the two rules (1.2%) have no FSA point, 22 of them with a full postcode.
+  Centroids would place those 22 (about 0.4%) at the cost of Ordnance Survey's
+  notice on the page; left unplaced and disclosed.
+- **Built** (`worktree-glasgow`, from origin/master ff761b2):
+  - Register: authority 776's file (6,028,925 bytes, owner's OK), 6,632 rows,
+    all FHIS; 4,958 storefronts -> 185 flats, 5 childminders, 55 without a
+    point, 5 outside Glasgow City -> **4,708** (food service 3,438, food shops
+    1,270). 2 trading-as names. Canteens by name at least 1.7% of
+    Restaurant/Cafe/Canteen, not separated (London's precedent).
+  - Rail: the Subway's two OSM relations, drawn once from the Outer Circle
+    (11.2 km) in #F86000 (SPT's orange, the nearest feasible colour, 65.3 from
+    every pin). **15 stations, gate 3 exact.** The brief's "Govan missing" was
+    wrong: Govan is the loop's start and end, a `stop_entry_only` and a
+    `stop_exit_only` member, and a count of `stop` roles gives 14. No station
+    was added by hand. "St Georges Cross" shown as "St George's Cross".
+  - Boundary: OSM relation 1906767, 176.3 km² in UTM 30N.
+  - **1,993 storefronts in the rings (42.3%)**, stated on the page.
+  - Macro label: 56.8 px, measured in the deployed app's frame (Prague 47.3,
+    Tokyo 40.5, London 50.9 reproduced); `check_macro_labels.py` PROBLEMS 0 at
+    the starting offset, above the dot.
+- **Exposure (`check_personal_exposure.py glasgow`)**: no fallback name exists;
+  0 emails or phone numbers. The person-name heuristic's 26.0% of all placed
+  storefronts is trade names on a 50-name sample (Starbucks Coffee, Waxy
+  O'Connors). The 26 "person then bracket" names are contract caterers and
+  canteens ("Sodexo Ltd (Diageo Canteen)"), except one childminder, which the
+  childminder rule removes. The flat rule is the structural guard, and this
+  check cannot see it.
+- **Verified**: `brief_check.py glasgow` 4/4; `drift_check.py glasgow` and
+  `london`, zero drift against 57c9355; `check_provenance.py` names Glasgow
+  OK once committed; `check_scope_disclosure.py`,
+  `check_inconsistency_list.py` and `check_master_list_counts.py` OK; the map
+  rendered in a browser, one line labelled "Subway", the legend "Glasgow
+  Subway", the OSM credit visible. `line_colour_search.py` no longer crashes
+  on a one-line city.
+- Files: `pipeline/fsa.py`, `pipeline/glasgow/`, `pipeline/london/step2_clean_businesses.py`,
+  `app/pages/59_Glasgow_Heatmap.py`, `app/components.py` (notice 61, 58
+  amended), `app/pages/57_London_Heatmap.py`, `app/cities.py`,
+  `docs/data_sources.md`, `docs/data_sources/united-kingdom.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/glasgow.md`.
 ### 2026-09-28 - Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured
 
 - **Licence reads (`licence-read`, one per source), both PERMITTED WITH
@@ -530,6 +903,61 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - Files: `docs/build_briefs/newcastle.md` and `docs/build_briefs/glasgow.md`
   (4/4 each), and the two Band B rows in `docs/city_master_list.md`.
 
+### 2026-09-28 - Buenos Aires built: the land-use survey at parcel centres, the Subte from SBASE's own layers (owner)
+
+- **Built Buenos Aires, Argentina's first city: 63,596 storefronts at 89
+  Subte stations, 42,270 (66.5%) within a ring (Retail 30,586, Food service
+  6,987, Personal services 4,697).** Step 2 keeps the 87,028 active
+  single-use shopfronts of the Relevamiento Usos del Suelo 2022-2024
+  (417,764 rows), drops 23,429 by use (6,243 of them "SIN IDENTIFICAR") and
+  counts 593 active malls and arcades left out; homes with an economic
+  activity (1,756 active, a RESIDENCIAL subtype) never enter. Drift baseline
+  recorded (`outputs/buenos_aires/baseline.json`), zero drift on its commit.
+- **Placement is a join, not a geocoder: 63,503 (99.8%) at their parcel's
+  centroid on the survey's SMP key (spaces removed, upper-cased), 93 (0.1%) at
+  their block's mean parcel centroid, 3 unplaced.** 11,538 parcels hold more
+  than one storefront, so pins stack. 1,127 rows share a parcel, use, street
+  and number and were KEPT as separate shops: all 535 groups fall in one
+  survey year (none span two, so they are not re-surveys), their OBJECTIDs
+  are consecutive, and they cluster where one building holds several shops
+  (clothing on Florida, fabric in Once). De-duplicating would have removed
+  real shops on the busiest streets.
+- **The rail source moved from OSM to SBASE's own layers at the build (owner's
+  download OK).** The brief chose OSM because the city's GTFS lacks
+  `routes.txt`; BA Data's `subte-estaciones` dataset (Subterráneos de Buenos
+  Aires, CC BY 2.5 AR, modified 2026-09-01) carries 90 station points and 98
+  track segments, and `osm-rail` ranks agency GIS layers first. Every segment
+  lies within 30 m of OSM's route; Línea E's are drawn twice (21.5 km of
+  segments on an 11.9 km footprint) and are dissolved. Gate 3 is exact against
+  SBASE and against OSM's relations on all six lines (A 18, B 17, C 9, D 16,
+  E 18, H 12). Retiro (C, E) merges as one name; Pueyrredón (B, D), about a
+  kilometre apart, stays two stations with line letters.
+- **Station names follow OSM, matched to each SBASE point on its own line (90
+  of 90 within 150 m, median 24 m).** SBASE drops accents ("Peru",
+  "Constitucion"), title-cases articles ("Plaza De Miserere") and still reads
+  "Beata Mama Antula" after the 2024 canonisation; 19 of 90 differ. OSM is not
+  uniform on honorific suffixes either (it drops Congreso's, keeps Callao D's);
+  the credit says names follow OSM.
+- **The Premetro is not drawn (owner), on a measurement:** it would add 749
+  storefronts (1.2% of placed storefronts; +1.8% on the Subte's rings), almost
+  all in Villa Lugano, Villa Soldati and Villa Riachuelo, which the Subte does
+  not reach. Consistent with Berlin's trams; disclosed on the page and in
+  `docs/excluded_categories.md`.
+- **Pins read as the street address (owner).** The survey has no name column
+  of any kind; France, Czechia and Denmark use the address where a register
+  has no trade name. `check_personal_exposure.py buenos_aires`: no names exist,
+  0 contact details, the heuristics run over addresses (Dublin's case);
+  verdict: nothing personal published.
+- **Owner-approved 2026-09-28: the page text, credit notice 60 (Berlin 57,
+  London 58 and 59 on master), the excluded-categories section and the
+  summary-table fields** (full; parcel and block centres; surveyed 2022–2024;
+  street survey; all three). The credit satisfies CC BY 2.5 AR and 4.0 both
+  and names all three author units.
+- **Front-page labels: Buenos Aires measured at 87.4 px in the deployed app's
+  frame (seven entries reproduced); joining South America widened the view, so
+  Fortaleza moved up-right (its pill had gone under the zoom buttons at 375
+  px) and Porto Alegre right of its dot (it met Santos).** Scored PROBLEMS 0 in
+  every region at 375, 768 and 1200.
 ### 2026-09-28 - Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)
 
 - **Moved Lisbon to Band R, request only (owner's call), after the owner
@@ -688,6 +1116,39 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Next:** the owner reboots (the batch changes `app/cities.py`,
   `app/components.py` and `app/station_scope.py`), then the live site is
   checked, including one city nobody touched.
+### 2026-09-28 - Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)
+
+- **Mapped every `TIPO2` among Buenos Aires' 87,028 active UNICOMERCIAL
+  survey rows into the three buckets: Retail 46,479, Food service 10,127,
+  Personal services 6,993, excluded 23,429.** `pipeline/taxonomies/ba_usos_suelo.py`
+  enumerates all 385 values (none unmapped, none stale), following the two
+  survey precedents, `dublin_uses` and `barcelona_activitat`, and NAICS where
+  they agree: food shops are retail, repair and vehicle workshops (811) are
+  out, and Dublin's two departures (shoe repair and key cutting, garment
+  alterations) are personal services. The published CSV stores accented
+  vowels as cp437 mojibake (`CAFÉ` is `CAF├ë`), contrary to the brief, which
+  said UTF-8; the module repairs before lookup and keys on the repaired form,
+  and the brief was corrected.
+- **Owner's calls, each on a recommendation:** MULTICOMERCIAL (615 malls and
+  arcades whose shops are not itemised) left out and disclosed, since one pin
+  per mall would weigh a shopping centre like a kiosk; the 6,243 active "SIN
+  IDENTIFICAR" shopfronts dropped and disclosed, since drawing them needs a
+  fourth bucket and Dublin and Barcelona both drop their no-use rows;
+  VETERINARIA (ATENCION) (656) excluded as professional services (541940),
+  with Korea and Brazil against Barcelona; CONFITERIA (379) moved from Food
+  service to Retail, as neighbourhood confiterias are mostly pastry shops
+  beside the facturas and cake shops already in Retail.
+- **LOTERIA (1,106) excluded as gambling (NAICS 7132), following the regional
+  precedent (Brazil excludes lotericas).** The owner asked for the
+  discrepancy to be noted for a later uniformity pass: Berlin agrees (its WZ
+  mapping never reaches division 92), but **Dublin counts BETTING SHOP as
+  Retail**, the one taxonomy that buckets gambling. Added to `PLAN.md`.
+- **The Premetro is left out unless it covers new areas well (owner),
+  pending a measurement:** storefronts inside a Premetro stop's outer ring
+  (0.6 mi) and outside every Subte station's. OSM carries it as four
+  `route=tram` relations, ref P, colour #F38733, network "Subte de Buenos
+  Aires". The count needs the parcel join and waits for the machine's heavy
+  job to end. The Tramway Historico (heritage) is out regardless.
 ### 2026-09-28 - Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)
 
 - **Moved Kaohsiung, Tallinn and Sendai from D to R, and renamed R

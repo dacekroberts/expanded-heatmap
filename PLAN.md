@@ -100,6 +100,20 @@ Desktop is unaffected — the label is fully visible there.
   The macro map's marker and label colours now come from `pipeline/theme.py`;
   measure them against the dark page (`#0B1220`) numerically, not by eye.
 
+- [ ] **Funeral services off every map (owner, 2026-09-28; DECISIONS).**
+  Cleanup does it AFTER Buenos Aires, Glasgow and Newcastle land:
+  - Exclude by code or licence type in 34 cities: NAICS 8122, SCIAN 8123,
+    NAF 96.03Z, Rev. 2.1's 96.30 (Oslo, Copenhagen, Prague, Berlin), Madrid's
+    pompas fúnebres, Taiwan's 殯葬 service types (NOT the funeral-goods
+    retail), Brazil's FUNERARIA keyword, and the local types in Vancouver,
+    Edmonton, Miami, D.C. and Dublin. Cemeteries and crematoria go with them.
+  - Disclose, don't filter: Chicago, Calgary and Milan (by accident, under
+    general licences) and Amsterdam, Rotterdam and Riga (not identifiable).
+  - Re-run the affected cities one at a time as announced heavy jobs, then
+    drift checks, `check_ring_shares.py --write` and
+    `check_macro_facts.py --write`.
+  - The `docs/excluded_categories.md` wording goes to the owner first; a
+    full `deploy-verify` runs at review time.
 - [x] **Put the cross-city inconsistency list on the site** (owner, 2026-09-24).
   LIVE 2026-09-28 (checked on the live URL after the owner's reboot): page 92 "Why
   the maps differ", linked from every page's footer; the owner's shape and
@@ -393,6 +407,17 @@ evidence section.
     59); 3,001 (5.0%) stay unplaced; never a private-address record.
   - [ ] Refetch before the FSA extracts age: `fetch_sources.py --force`; if OSM
     starts carrying one of the eight added stations, step 1 stops and says so.
+- [x] **Buenos Aires built 2026-09-28** (`worktree-buenos-aires`, held for
+  review time): 63,596 storefronts, 89 stations, 6 lines; texts owner-approved
+  (DECISIONS).
+  - [ ] At review time: `publish-city` (page 58, `cities.py` with Fortaleza's
+    and Porto Alegre's labels moved, notice 60), deploy-verify `scope:
+    city-added`, reboot.
+  - [ ] `docs/map_inconsistencies.md`'s prose lists (street surveys, modes not
+    drawn, in-ring shares, pin labels) still to name Buenos Aires: cleanup's
+    `city-landed buenos_aires` sweep.
+  - [ ] SBASE's layers are dated 2026-09-01; refetch with `fetch_sources.py
+    --force` when BA Data updates them (step 1 re-checks the counts).
 - [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
   28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
   - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
@@ -630,6 +655,12 @@ every key, account and letter:
   "Pre-deploy gate").
 
 ## Data quality follow-ups
+
+- [ ] **Gambling is bucketed inconsistently across taxonomies** (owner,
+  2026-09-28, at Buenos Aires' LOTERIA call): Buenos Aires, Brazil and Berlin
+  exclude lottery and betting premises (NAICS 7132, WZ 92), but
+  `dublin_uses` counts BETTING SHOP as Retail. Decide one rule and sweep
+  every taxonomy for it, with a drift measurement per city changed.
 
 - [ ] Los Angeles: ~9% of registry rows have no NAICS code; consider whether
   the caveat needs to be visible on the city page.
