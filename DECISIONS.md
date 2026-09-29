@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**168 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**169 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)](#2026-09-29---staging-handed-off-for-the-tram-question-a-preliminary-yes-for-scoping-and-filtering-band-t-only-the-final-call-after-an-audit-owner)
 - [Gyeonggi is built from the Ministry's national local-licence files (owner)](#2026-09-29---gyeonggi-is-built-from-the-ministrys-national-local-licence-files-owner)
 - [Gyeonggi's portal licence read: the datasets are permissive, but the portal's terms bar commercial use and possibly processing without approval; the national source recommended instead](#2026-09-29---gyeonggis-portal-licence-read-the-datasets-are-permissive-but-the-portals-terms-bar-commercial-use-and-possibly-processing-without-approval-the-national-source-recommended-instead)
 
@@ -207,6 +208,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)
+
+- **The owner's framing of Band T's question: a preliminary yes to
+  trams-only maps, for scoping and filtering the 51-city list only.** The
+  list is audited thoroughly under that assumption: whether each city is
+  trams-only, whether its data still stands, and the design questions
+  (what rings mean at tram-stop spacing, labels for dense networks, the
+  macro map and summary table, build cost by country pipeline). **Then the
+  owner makes the final call on whether trams-only maps are allowed, and
+  implementation starts only after that.** Nothing is built or promoted to A
+  or B on the preliminary yes. This is a working assumption for the audit,
+  not the decision Band T waits on.
+- **A fresh staging session takes it** (owner), in its own environment:
+  `docs/handoff_staging_2026-09-29.md` replaces
+  `docs/handoff_staging_2026-09-28.md` (deleted; two handoffs' mentions
+  retargeted). This session's measuring scripts (Bucharest, Stockholm,
+  Gyeonggi, Australia, the UK probe) are kept in
+  `data/_staging_scratch_2026-09-29/`, and the Bucharest and Stockholm
+  briefs point there.
+- **State at handoff:** 62 built; A 0 · B 4 · C 8 · D 0 · R 17 · T 51 = 80
+  candidates; 91 discards. Band B is fully briefed and queued with the
+  Stockholm build session (Stockholm, Bucharest, Incheon, Gyeonggi).
 
 ### 2026-09-29 - Gyeonggi is built from the Ministry's national local-licence files (owner)
 
