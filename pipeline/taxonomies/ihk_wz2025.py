@@ -40,10 +40,14 @@ _DIVISION_BUCKETS = {
 }
 
 # What the bucket holds, where an IHK register cannot hold all of it. Legend
-# text only - classification never reads this.
+# text only - classification never reads this. KEPT SHORT ON PURPOSE: the
+# legend must fit the label solver's 274 px model (map_common.LEGEND_MODEL_W);
+# "(no hairdressers or laundries)" made Berlin's legend 379 px at the 1000 px
+# frame and put 6 line labels under it. The page and
+# docs/excluded_categories.md say what is missing.
 # DRAFT, awaiting the owner's approval of the wording (2026-09-28).
 _BUCKET_NOTES = {
-    "Personal services": "no hairdressers or laundries",
+    "Personal services": "partial",
 }
 
 # ---------------------------------------------------------------------------

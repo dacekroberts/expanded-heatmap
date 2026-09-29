@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver](#2026-09-28---berlins-map-rendered-shapes-chosen-by-rule-a-served-share-rule-for-diversions-colours-by-the-shared-search-a-legend-that-fits-the-solver)
 - [Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green](#2026-09-28---berlins-rail-scope-u-bahn-and-s-bahn-no-trams-the-u6s-tegel-branch-drawn-as-the-timetable-runs-owner-steps-1-and-2-green)
 - [Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)](#2026-09-28---berlins-calls-47122-excluded-personal-services-drawn-as-a-partial-bucket-trams-on-ring-numbers-both-downloads-approved-owner)
 - [Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner](#2026-09-28---berlins-brief-written-both-licences-read-the-register-is-nace-rev-21-personal-services-partial-four-calls-for-the-owner)
@@ -150,6 +151,40 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver
+
+- **Each line's GTFS shape is chosen by rule in step 1, not pinned by id**:
+  VBB's shape_ids are small integers reissued every release. The rule is a
+  greedy cover of the line's in-Land stations (a shape passes a station within
+  150 m), ties to the most-used shape; step 1 writes
+  `data/berlin/processed/lines.geojson` and step 3 reads it
+  (`load_geojson_line_shapes`, Tokyo's contract). 24 lines need one shape;
+  S85 needs two (its Pankow branch). The plain most-used shape was rejected
+  (S3's is 16 km of 45), and so was the longest (S41's has 8 trips; its ring
+  456).
+- **A station belongs to a line only where >= 10% of the line's trips call**
+  (`config.LINE_STOP_MIN_SHARE`): the feed window carries construction
+  diversions (S3/S5 via Grunewald, ring trains via Charlottenburg, S8 via
+  Gesundbrunnen). 47 station-line pairs fall under it and are printed; no
+  station is served only by them, and both gate-3 counts are unchanged (U-Bahn
+  170, S-Bahn 168).
+- **Line colours from `scripts/line_colour_search.py berlin`** with VBB's GTFS
+  `route_color` as the target hues: VBB colours by family (S2/S25/S26 one
+  green), which the project's CIE76 floors refuse. Closest pair within 500 m
+  18.0 (S46, S47), anywhere 10.3 (U1, S85), every line >= 45.0 from every pin.
+  The pins' blue, pink and green rule out VBB's blues and greens, so U3/S2
+  read olive and S3/U8 grey-blue (Osaka's and Tokyo's trade).
+- **The Personal services legend row is shortened to "(partial)"** (a DRAFT
+  for the owner): "(no hairdressers or laundries)" made the open legend 379
+  px wide against the label solver's 274 px model, and the first render put
+  6 labels under it at the 1000 px frame (U5, S3, S5, S7, S46, S47) - the
+  Tokyo failure, by legend width rather than line names. At 256 px: 0 label
+  problems at 1000, 343, 375 and 1280 px; zoom as expected (10.5 / 9.5); the
+  dark toggle works; the OSM credit is visible at 1280x800 and 375x900; no
+  console errors. `check_inline_arrays` and `check_map_markup` pass (56 maps).
+- **Rendered**: 49,426 of 60,313 storefronts inside a ring (82.0%), 275
+  stations, 25 lines, `outputs/berlin/heatmap.html` 7.2 MB.
 
 ### 2026-09-28 - Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green
 

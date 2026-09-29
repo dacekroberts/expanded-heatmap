@@ -20,6 +20,11 @@ HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
+# Each drawn line's chosen GTFS shape (step 1 writes it; step 3 and
+# scripts/line_colour_search.py read it).
+LINES_GEOJSON = DATA_PROCESSED / "lines.geojson"
+# A shape "passes" a station within this distance (platform centroid to track).
+SHAPE_STATION_M = 150
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 
 # Raw inputs, all keyless, downloaded by fetch_sources.py (never by a step).
@@ -103,6 +108,39 @@ LINE_NAMES = {
                       "S5", "S7", "S75", "S8", "S85", "S9", "S15")},
 }
 
+# Each line's OPERATOR hue: VBB's GTFS `route_color` (CC BY 4.0, read
+# 2026-09-28). VBB colours by FAMILY - S2/S25/S26, S7/S75, S8/S85, S46/S47
+# and S1/S15 share one colour each - which check_map_markup.py refuses on one
+# map (CIE76 10 anywhere, 18 within 500 m), so the drawn colour is the one
+# scripts/line_colour_search.py finds nearest each hue (LINE_COLOURS, below).
+# Order is priority: a line earlier in LINE_ORDER keeps nearer its own hue, so
+# the U-Bahn and each family's main line come first.
+LINES = {
+    "U1": {"hue": "#7DAD4C"}, "U2": {"hue": "#DA421E"}, "U3": {"hue": "#16683D"},
+    "U4": {"hue": "#F0D722"}, "U5": {"hue": "#7E5330"}, "U6": {"hue": "#8C6DAB"},
+    "U7": {"hue": "#009BD5"}, "U8": {"hue": "#224F86"}, "U9": {"hue": "#F3791D"},
+    "S1": {"hue": "#DA6BA2"}, "S2": {"hue": "#007734"}, "S3": {"hue": "#0066AD"},
+    "S41": {"hue": "#AD5937"}, "S42": {"hue": "#CB6418"}, "S5": {"hue": "#EB7405"},
+    "S7": {"hue": "#816DA6"}, "S8": {"hue": "#66AA22"}, "S9": {"hue": "#992746"},
+    "S46": {"hue": "#CD9C53"}, "S25": {"hue": "#007734"}, "S26": {"hue": "#007734"},
+    "S47": {"hue": "#CD9C53"}, "S75": {"hue": "#816DA6"}, "S85": {"hue": "#66AA22"},
+    "S15": {"hue": "#DA6BA2"},
+}
+LINE_ORDER = list(LINES)
+# `python scripts/line_colour_search.py berlin` (defaults: 500 m, CIE76 18),
+# run 2026-09-28 on step 1's lines.geojson: 3,817 feasible colours; closest
+# pair within 500 m 18.0 (S46, S47), anywhere 10.3 (U1, S85); every line
+# >= 45.0 from every pin; 25 distinct dark-mode labels. The pins' blue, pink
+# and green rule out VBB's own blues and greens, so U3/S2 read olive, S3 and
+# U8 grey-blue, S9 salmon - Osaka's and Tokyo's trade.
+LINE_COLOURS = {
+    "U1": "#608000", "U2": "#E04820", "U3": "#606848", "U4": "#A09800", "U5": "#885838",
+    "U6": "#B880A8", "U7": "#08A0C0", "U8": "#506878", "U9": "#E87010", "S1": "#C870C8",
+    "S2": "#586818", "S3": "#7098A8", "S41": "#B86038", "S42": "#B05000", "S5": "#D08000",
+    "S7": "#805878", "S8": "#60A000", "S9": "#C88070", "S46": "#B88840", "S25": "#909040",
+    "S26": "#20A800", "S47": "#806018", "S75": "#A088A0", "S85": "#809820", "S15": "#9840A0",
+}
+
 # GATE 3, network-wide (the operators publish no per-line figure used here).
 # The feed is compared with the published count LESS the stations closed for
 # works (CLOSED_FOR_WORKS), which step 1 subtracts by name.
@@ -122,6 +160,10 @@ STATION_SUFFIXES = (" (Berlin)", " Bhf")
 # the operators' own maps draw them).
 COLLAPSE_MAX_SPREAD_M = 450
 SPACING_MIN_M = 400.0
+# A station belongs to a line where at least this share of the line's trips
+# call (step 1 prints every pair under it): below it are the feed window's
+# construction diversions and occasional short workings.
+LINE_STOP_MIN_SHARE = 0.10
 
 # --- Business filtering ------------------------------------------------
 

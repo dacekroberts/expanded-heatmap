@@ -16,12 +16,14 @@ with Berlin's own:
   * **The scope is the Land**: the register is IHK Berlin's and stops at the
     border, so stations in Brandenburg are recorded as excluded, not drawn.
 """
+import json
 import sys
 import zipfile
 from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
+from shapely.geometry import LineString, MultiLineString, mapping
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
@@ -54,6 +56,59 @@ def line_key(name):
     return (name[0], int("".join(c for c in name[1:] if c.isdigit()) or 0), name)
 
 
+def write_lines(z, trips, line_of, inside):
+    """Each drawn line's shape, CHOSEN BY RULE rather than pinned by id: VBB's
+    shape_ids are small integers reissued with every release, so a pinned id
+    would silently draw some other shape after a refresh.
+
+    The rule, a greedy cover of the line's stations inside the Land (a shape
+    "passes" a station within config.SHAPE_STATION_M): take the shape that
+    passes the most of them, ties to the most-used; while any is uncovered,
+    add the shape passing the most of the rest, ties again to the most-used.
+    The plain most-used shape is often a short working (S3's is 16 km of its
+    45), and "the longest" picks one-trip depot variants (S41's longest has 8
+    trips; its ring has 456). A line needing a second shape prints the
+    stations that forced it.
+    """
+    need_ids = set(trips["shape_id"].dropna())
+    parts = []
+    for chunk in pd.read_csv(z.open("shapes.txt"), dtype={"shape_id": str}, chunksize=2_000_000):
+        parts.append(chunk[chunk["shape_id"].isin(need_ids)])
+    sh = pd.concat(parts).sort_values(["shape_id", "shape_pt_sequence"])
+    geoms = {sid: LineString(zip(d["shape_pt_lon"], d["shape_pt_lat"]))
+             for sid, d in sh.groupby("shape_id")}
+    shp = gpd.GeoSeries(geoms, crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED)
+    st_xy = inside.to_crs(config.CRS_PROJECTED)
+
+    feats = []
+    t = trips.assign(line=trips["route_id"].map(line_of))
+    print("\n  line shapes (greedy cover of each line's in-Land stations):")
+    for ln in sorted(config.LINE_NAMES, key=line_key):
+        counts = t.loc[t["line"] == ln, "shape_id"].value_counts()
+        pts = st_xy[st_xy["lines"].map(lambda v: ln in v.split("/"))]
+        passes = {sid: set(pts.index[pts.geometry.distance(shp[sid]) <= config.SHAPE_STATION_M])
+                  for sid in counts.index}
+        todo, picks = set(pts.index), []
+        while todo:
+            sid = max(counts.index, key=lambda s: (len(passes[s] & todo), counts[s]))
+            gain = passes[sid] & todo
+            if not gain:
+                sys.exit(f"{ln}: no shape passes {sorted(todo)}")
+            if picks:
+                print(f"      + shape {sid} for {', '.join(sorted(gain))}")
+            picks.append(sid)
+            todo -= gain
+        print(f"    {ln:<4} shape(s) {'+'.join(picks):>11}: {counts[picks[0]]:>4} of "
+              f"{counts.sum():>5} trips on the first, {len(pts)} stations passed")
+        feats.append({"type": "Feature",
+                      "properties": {"line": ln, "shape_ids": picks,
+                                     "trips": int(counts[picks[0]])},
+                      "geometry": mapping(MultiLineString([geoms[s] for s in picks]))})
+    config.LINES_GEOJSON.write_text(json.dumps({"type": "FeatureCollection", "features": feats}),
+                                    encoding="utf-8")
+    print(f"  {len(feats)} lines -> {config.LINES_GEOJSON.relative_to(config.ROOT)}")
+
+
 def main():
     need(config.GTFS_ZIP, "the GTFS feed")
     need(config.CITY_BOUNDARY_GEOJSON, "the Land boundary")
@@ -83,7 +138,7 @@ def main():
     line_of = dict(zip(drawn["route_id"], drawn["route_short_name"]))
     mode_of_line = dict(zip(drawn["route_short_name"], drawn["mode"]))
 
-    trips = pd.read_csv(z.open("trips.txt"), dtype=str, usecols=["route_id", "trip_id"])
+    trips = pd.read_csv(z.open("trips.txt"), dtype=str, usecols=["route_id", "trip_id", "shape_id"])
     trips = trips[trips["route_id"].isin(line_of)]
     head = pd.read_csv(z.open("stop_times.txt"), dtype=str, nrows=1)
     st_cols = ["trip_id", "stop_id"] + [c for c in ("pickup_type", "drop_off_type")
@@ -115,7 +170,23 @@ def main():
 
     link = st.merge(q.reset_index()[["stop_id", "station"]], on="stop_id").merge(trips, on="trip_id")
     link["line"] = link["route_id"].map(line_of)
-    lines_by = link.groupby("station")["line"].agg(
+    # A station belongs to a line only where a real share of the line's trips
+    # call: the feed window carries construction diversions (S3 and S5 via
+    # Grunewald, ring trains via Charlottenburg), which would otherwise list
+    # lines that do not normally serve a station and bend each line's shape.
+    line_trips = link.groupby("line")["trip_id"].nunique()
+    calls = link.groupby(["station", "line"])["trip_id"].nunique().reset_index(name="trips")
+    calls["share"] = calls["trips"] / calls["line"].map(line_trips)
+    minor = calls[calls["share"] < config.LINE_STOP_MIN_SHARE]
+    print(f"\n  {len(minor)} station-line pair(s) under {config.LINE_STOP_MIN_SHARE:.0%} of the "
+          f"line's trips (diversions and short workings), not counted as served:")
+    for r in minor.sort_values(["line", "station"], key=lambda s: s.map(str)).itertuples():
+        print(f"    {r.line:<4} {r.station:<30} {r.trips:>4} trips ({r.share:.1%})")
+    major = calls[calls["share"] >= config.LINE_STOP_MIN_SHARE]
+    only_minor = sorted(set(calls["station"]) - set(major["station"]))
+    if only_minor:
+        print(f"  served ONLY by such trips, so not stations of this map: {only_minor}")
+    lines_by = major.groupby("station")["line"].agg(
         lambda s: "/".join(sorted(set(s), key=line_key)))
 
     g = gpd.GeoDataFrame(q, geometry=gpd.points_from_xy(q["longitude"], q["latitude"]),
@@ -196,6 +267,8 @@ def main():
     out = pd.concat([out, shut[out.columns]], ignore_index=True).sort_values(["reason", "station"])
     out.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
     print(f"  {len(out)} excluded -> {config.EXCLUDED_STATIONS_CSV.relative_to(config.ROOT)}")
+
+    write_lines(z, trips, line_of, inside)
 
     keep = (inside.reset_index()[["station", "lines", "latitude", "longitude"]]
             .sort_values("station"))
