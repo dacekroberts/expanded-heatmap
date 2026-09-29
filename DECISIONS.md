@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**165 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)](#2026-09-28---stockholm-the-225-untyped-premises-recognised-by-name-go-on-the-map-flagged-owner-t-bana-only-owner-the-full-register-fetched-owner)
 - [Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)](#2026-09-28---incheons-licences-read-the-permit-lists-and-the-kesa-lift-building-file-both-permitted-with-conditions-the-website-copyright-terms-judged-not-to-reach-them-owner-personal-services-shown-from-2021-dated-owner)
 - [Gyeonggi satellites: Goyang, Seongnam and Yongin first, then Suwon and Bucheon (owner)](#2026-09-28---gyeonggi-satellites-goyang-seongnam-and-yongin-first-then-suwon-and-bucheon-owner)
 - [Bucharest builds before Incheon (owner), reversing the order recorded earlier today; Incheon and the Gyeonggi satellites to be briefed](#2026-09-28---bucharest-builds-before-incheon-owner-reversing-the-order-recorded-earlier-today-incheon-and-the-gyeonggi-satellites-to-be-briefed)
@@ -202,6 +203,27 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-28 - Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)
+
+- **The 225 untyped premises are added (owner).** These are the ones the name
+  rules call storefronts and that were last inspected in 2022-23. They are
+  flagged "classified from the name" on the map. This answers the proposal in
+  "Stockholm is built on its register as frozen on 2025-10-21". The other
+  1,166 untyped premises stay out and are disclosed: institutions, the
+  unidentifiable, pharmacies, and the 26 storefronts by name last inspected
+  before 2022. That gives about 5,996 placed storefronts. The rules are right
+  96.9% of the time on typed premises, so about 7 of the 225 may be wrong.
+  Rejected: leaving every untyped premises out (about 5,771, all typed by the
+  register).
+- **T-bana only (owner)**, the brief's recommendation: lines 10, 11, 13, 14,
+  17, 18 and 19. 88.7% of storefronts fall in a ring. Pendeltåg,
+  Roslagsbanan and Saltsjöbanan would give 92.3%. Trams are out, and so is
+  the unref'd Yellow line relation (21104772), which is not in service.
+  Rejected: adding pendeltåg and the local railways.
+- **Download approved (owner)**: all 289,742 inspection rows of
+  Livsmedelstillsyn layer 41, every field. Measured beforehand from a
+  2,000-row sample at 564 bytes a row: about 165 MB in 145 pages.
+- Files: `DECISIONS.md` (the build's own files follow on branch `stockholm`).
 ### 2026-09-28 - Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)
 
 - **Two `licence-read`s, both PERMITTED WITH CONDITIONS.**
