@@ -80,7 +80,7 @@ negative, kept out.
 | Perth | AU | Transperth, ~80 stations | C - property land-use codes only, City of Perth (2026-09-28, owner) |
 | Ankara | TR | Ankaray, M1–M4 | C - Istanbul's shape: the districts publish no licence lists (2026-09-28, owner) |
 | Melbourne (City of Melbourne) | AU | City Loop, Metro Tunnel, CBD trams | B - CLUE covers the City of Melbourne only (2026-09-28, owner) |
-| Delhi | IN | Delhi Metro, ~290 stations (kn) | D - the current register behind a CAPTCHA; every Delhi-government host refuses this machine (screened 2026-09-28, owner) |
+| Delhi | IN | Delhi Metro, ~290 stations (kn) | R - MCD's licences carry no street address and its CAPTCHA is restricted (owner, 2026-09-28) |
 | Berlin | DE | U-Bahn 9 lines, ~175 stations (kn); S-Bahn | B - IHK Berlin's per-premises register; hairdressers and laundries missing (from the discards 2026-09-28, owner) |
 | Istanbul | TR | M1A–M11, 177 stations; T1–T5 | C - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
 | Dubai | AE | Metro Red and Green, 64 stations; tram | R - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
