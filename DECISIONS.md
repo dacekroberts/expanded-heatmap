@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**203 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
+- [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
 - [Light-rail briefs: the last four calls answered, all five ready (owner)](#2026-09-29---light-rail-briefs-the-last-four-calls-answered-all-five-ready-owner)
 - [Light-rail briefs: the owner's calls, and two timetables read (staging)](#2026-09-29---light-rail-briefs-the-owners-calls-and-two-timetables-read-staging)
@@ -240,6 +242,69 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
+
+- **Rule 1 now reads "at least one full bucket at register quality", not
+  "food" (owner).** The food requirement had been inferred from the pages
+  built, all of which have food. The one case that proved it was Yokohama
+  itself, so the rule was circular.
+- **Yokohama moved from C to B**, the first page not built on food: 17,408
+  personal-services premises, current to 2026-04-01, CC BY. The page states
+  that no food register is published.
+  - Its 2026-09-24 "no page" argued that a map without ~29,000 restaurants
+    would read emptier than Tokyo's or Osaka's.
+  - Two later decisions answer that: the macro map's completeness colours
+    (2026-09-28) draw a one-bucket city apart, and today's relaxed rule 4
+    discloses a thin page rather than refusing it.
+  - **Its placement rate is still unmeasured.** The block-level join places
+    95%+ in the six built Japanese cities, and it joins the post-reset
+    measurements.
+- **The amendment moves no other city.** Singapore's current registers
+  (tobacco, pharmacies) are sector lists, not a full bucket. Istanbul's
+  pharmacies are frozen and often carry the pharmacist's own name. B 4 → 5,
+  C 10 → 9.
+
+### 2026-09-29 - The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)
+
+- **A written bar for reduced-bucket pages (owner)**, drawn from the pages
+  built on fewer than three buckets (Stockholm, Bucharest, London, Glasgow,
+  Newcastle, Hong Kong, Incheon) and the "no page" verdicts:
+  1. food at register quality (Yokohama, personal services only, failed);
+  2. current under the one-clock rule (Singapore's 2016 register failed);
+  3. a register of premises, not a curated guide, one sector or land use per
+     property;
+  4. **size and in-ring share are disclosed, never a gate**;
+  5. about 70% or more placed (Incheon's 71.3%);
+  6. rail that passes the light-rail test and is not a stub.
+
+  Rule 4 was drafted as a floor at Glasgow's size (4,708 storefronts, 1,993
+  in rings, the smallest reduced page built). **The owner relaxed it**,
+  pointing to Houston, which will map at about 7% in-ring. That 7% is a
+  share: about 2,500 of ~36,000 storefronts sit in the rings, more in
+  absolute terms than Glasgow's 1,993. Either way, a thin page is disclosed
+  rather than refused.
+- **Moved to Band B on the bar (owner)**:
+  - **Hiroshima**: 12,674 restaurants on two lists, 95–96% joined; the
+    Astram Line and JR.
+  - **Kitchener–Waterloo (Regional)**: food 2,008 and personal services
+    about 636. It is under the drafted floor, and passed.
+  - **Baltimore**: 1,327 restaurants on 27 stations. Its 2026-09-28 "no
+    page" rested on size, which the relaxed rule 4 no longer gates.
+
+  C 13 → 10, B 1 → 4.
+- **Palma reopened (owner)**, as Glasgow's twin: 4,375 food premises against
+  Glasgow's 4,708, on about 16 stations against 15. It was told "no page" on
+  2026-09-28, the day Glasgow was built. It stays in C until an address join
+  shows about 70% placed (13% carry coordinates).
+- **Pending light measurements, then a verdict on the bar**: Ottawa (its
+  food count was never recorded), Minneapolis (47,959 inspection rows to
+  de-duplicate to premises, and the stub test) and Pittsburgh (the count
+  inside the city, and the stub test).
+- **Staying in C**, each row saying what would change it: Singapore
+  (currency), Yokohama (no food), Istanbul and Ankara (not a premises
+  register), Perth (land use per property, about 6 stations) and Ho Chi Minh
+  City (seven months of certificates, no placement route).
 
 ### 2026-09-29 - Portland re-probed at the owner's request: still no classified register
 
