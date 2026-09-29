@@ -46,7 +46,8 @@ city's food control inspects: restaurants, cafés and bars, and food shops from
 kiosks to supermarkets. No open register of other shops or of personal
 services covers Stockholm, so **clothes shops, hairdressers and the like are
 not on this map**. Kitchens in preschools, schools, care homes and workplaces
-are left out by name, and so are pharmacies, wholesalers and food producers.
+are left out by name, and so are caterers, food trucks, pharmacies,
+wholesalers and food producers.
 A few office canteens registered under a company name remain.
 
 **The register stopped updating in October 2025.** Its latest inspection is
@@ -55,8 +56,8 @@ opened or closed after then is not reflected. Each premises is shown as it
 stood at its latest inspection. The register began recording a premises' type
 in 2024. Premises last inspected in 2022 or 2023 carry no type, and those
 whose name identifies a restaurant or a food shop are shown, their pins marked
-"classified from its name". About one storefront in twenty-five has no map
-position and is not shown.
+"classified from its name". About one storefront in sixty has no map position
+and is not shown.
 
 **About nine storefronts in ten sit within a station ring.**
 

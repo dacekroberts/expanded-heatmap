@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**191 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Stockholm's caterers, event firms and food trucks out by name (owner)](#2026-09-29---stockholms-caterers-event-firms-and-food-trucks-out-by-name-owner)
 - [Atlanta's discard ground changed from currency to terms (owner)](#2026-09-29---atlantas-discard-ground-changed-from-currency-to-terms-owner)
 - [Review batch live after the owner's reboot: exclusions batch and six cities, 68 built](#2026-09-29---review-batch-live-after-the-owners-reboot-exclusions-batch-and-six-cities-68-built)
 - [Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill](#2026-09-29---yes-to-trams-only-maps-owner-with-the-macro-map-re-planned-minor-cities-labelled-only-in-their-own-region-dots-coloured-by-network-type-completeness-by-fill)
@@ -229,6 +230,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Stockholm's caterers, event firms and food trucks out by name (owner)
+
+- **Food with no counter of its own left Stockholm's map by name (owner),
+  on rule R1 of `docs/category_rules.md`.** The register files catering and
+  mobile food under its restaurant type, so the build had kept them and said
+  so on the page. `sweden_livsmedel.py` now reads the name: a food truck,
+  mobile unit, prep kitchen ("preppkök", "bakomlokal") or food demonstrator
+  is out whatever else the name says. A caterer or event firm is out unless
+  its name also names a counter. That keeps 10 of them, among them Chez Kny
+  Bistro & Catering and Reimers Café & Catering, and drops Westers Catering
+  and Stockholm Event. 168 premises left: 44 placed pins (read one by one:
+  29 caterers, 15 mobile units or prep kitchens) and 124 with no position,
+  nearly all food trucks. Step 2: 5,471 -> 5,303 storefronts. 5,262 -> 5,218
+  placed (Food service 4,193 -> 4,150, Food shops 1,069 -> 1,068, 217 -> 215
+  from the name). Unplaced fell from 209 (3.8%) to 85 (1.6%), and the page
+  now says one in sixty, not one in twenty-five. The untyped recovery shown
+  is 220, down from 225. Step 3: 4,666 in a ring (89.4%). Rejected: keeping
+  every name with "catering", since 29 of the 39 were caterers with no
+  counter; and dropping every such name, since that would lose ten
+  restaurants and cafés. `check_personal_exposure.py stockholm` has the same
+  verdict: trade names only, on the register's own premises. The page, the
+  `cities.py` placement tier (96.2% -> 98.4%), `excluded_categories.md`,
+  `map_inconsistencies.md`, the Sweden sources row and the master list were
+  updated. `app/` changed, so this waits for review time and a reboot.
 
 ### 2026-09-29 - Atlanta's discard ground changed from currency to terms (owner)
 

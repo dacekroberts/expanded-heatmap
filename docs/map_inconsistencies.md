@@ -708,7 +708,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Romania** | | | |
 | Bucharest | Address join to OpenStreetMap's address points, in the premises' own sector (74.9%) | About one storefront in four unplaced, even across sectors; fishmongers in markets lowest | Cancelled registrations, mobile units, kiosk carts, vending machines, pastry labs, in-house buffets, catering; sole traders' and person-named companies' names withheld (category shown) |
 | **Sweden** | | | |
-| Stockholm | Register coordinates (96.2%); 209 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care) and pharmacies by name; wholesale, production and "Övrigt" by type |
+| Stockholm | Register coordinates (98.4%); 85 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care), caterers, event firms, food trucks and pharmacies by name; wholesale, production and "Övrigt" by type |
 | **Denmark** | | | |
 | Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
 | **Czechia** | | | |
