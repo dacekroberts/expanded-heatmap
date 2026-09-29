@@ -1721,6 +1721,29 @@ CITIES = [
         # then passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Incheon",
+        "lat": 37.4563,
+        "lon": 126.7052,
+        "page": "pages/65_Incheon_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Incheon Lines 1 and 2, Line 1, Line 7 and the Suin–Bundang Line",
+        "region": "East Asia",
+        "country": "South Korea",
+        "in_default_view": False,
+        # LEFT of the dot, slightly raised, and SCORED: width 54.4 px measured in
+        # the deployed app's own frame (2026-09-29, four entries reproduced).
+        # TIGHT: above the dot it sits on Seoul's label, and level with the dot
+        # it grazes Daegu's (3.5 px); dy -5 to -6 clears both, and
+        # check_macro_labels.py passes every region at 375, 768 and 1200 with
+        # PROBLEMS 0. Any further city near Seoul re-scores this one first.
+        "label_offset": ("end", -9, -6),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

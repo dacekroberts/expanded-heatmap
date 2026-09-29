@@ -318,5 +318,10 @@
   "in_ring": 11244,
   "all": 15593,
   "map_blob": "c46c9563f4b0cc1e044793696246c451073c0a96"
+ },
+ "incheon": {
+  "in_ring": 56426,
+  "all": 82671,
+  "map_blob": "abb50b6e4abb7ee5384d54df336b419175d0a7ec"
  }
 }

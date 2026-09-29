@@ -97,7 +97,7 @@ together, so a row in either counts and a row in neither still fails.
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
@@ -2085,6 +2085,26 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   the verdict is in `DECISIONS.md`.
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
+
+**68. Small Enterprise and Market Service (Incheon) — required, and DISPLAYED**
+(written into `render_site_notices()`; displayed once Incheon lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-29; the rows in
+  [`data_sources/south-korea.md`](data_sources/south-korea.md)): data.go.kr
+  15083033 declares 이용허락범위 제한 없음 in the page, Schema.org and DCAT, set
+  by SEMAS as provider, and SEMAS names data.go.kr as its release channel.
+  data.go.kr's FAQs 210 and 186: commercial use and processing allowed; the
+  factual content must not be falsified or distorted.
+- **Reasoned position (owner, 2026-09-29), Daegu's shape**: SEMAS's website
+  copyright policy asks for a consultation before using material without a
+  KOGL mark; read as covering the homepage's content, since the dataset carries
+  the publisher's own no-restriction label. Any objection is honoured. The
+  소상공인365 notices the listing cites are unread (IP-blocked from here).
+- **MUST DISPLAY**: a source credit, no wording prescribed; the categories and
+  counts stated as this project's (FAQ 186).
+- **MUST NOT**: present the counts as SEMAS's figures, or the data as accurate
+  or complete on SEMAS's behalf (its legal notice disclaims both).
+- **MUST DO**: nothing.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

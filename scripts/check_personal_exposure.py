@@ -76,6 +76,13 @@ REGISTRIES = {
     # SOLE_TRADER). No address reaches the map; placement is by OSM address.
     "bucharest": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Incheon: SEMAS's 상가(상권)정보 names STOREFRONTS (상호명, with the branch),
+    # with no owner, representative or phone column; the Korean pass (Seoul's rule,
+    # pipeline/korean_names.py) withholds a bare personal name at a residential
+    # address, read with the building name (pipeline/countries/korea_sbiz.py).
+    "incheon": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",), korean=True, withheld="Name withheld"),
     # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
     # trade name (`insegna`) and the rest carry the street address, because
     # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on
