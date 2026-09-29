@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**119 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**120 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)](#2026-09-28---londons-rail-underground-dlr-elizabeth-line-and-the-six-overground-lines-tramlink-left-out-owner)
 - [London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)](#2026-09-28---londons-licence-calls-the-existing-personal-information-rule-and-the-credit-food-standards-agency-uk-food-hygiene-rating-data-owner)
 - [London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)](#2026-09-28---london-started-on-its-own-branch-the-fsa-files-downloaded-placement-measured-ring-coverage-by-rail-tier-the-fsa-licence-read-owner-calls-pending)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
@@ -155,6 +156,19 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)
+
+- **Decided (owner), as recommended**: the Underground (11 lines), the DLR,
+  the Elizabeth line and all six Overground lines, cut at Greater London -
+  73.9% of placed storefronts in the 0.6 mi rings on the tier measurement.
+  The Elizabeth line and the Overground run like Berlin's S-Bahn inside London
+  (the suburban-rail test Berlin applied the same day); the DLR is an automated
+  light metro, counted like Montréal's REM. **Tramlink is left out**: +1.0
+  point for about 37 stops, Berlin's trams' trade (+6.9 points left out).
+  Rail is from OpenStreetMap (TfL publishes no GTFS); the Elizabeth line and
+  most of the Overground are tagged `network=National Rail`, so they are
+  selected by name.
 
 ### 2026-09-28 - London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)
 
