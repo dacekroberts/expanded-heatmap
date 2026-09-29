@@ -23,15 +23,11 @@ committed maps by scripts/check_ring_shares.py). Adding a city adds its row
 with no edit here; scripts/check_inconsistency_list.py fails a city without the
 three fields, and check_ring_shares.py one without a share.
 
-AN HTML TABLE IN A SCROLLING BOX, NOT st.dataframe AND NOT A MARKDOWN TABLE.
-st.dataframe rendered collapsed on page 91 (52 px wide, measured 2026-09-23 in
-the lean venv) and keeps its contents out of the page text. A markdown table
-of seven columns widens the whole page at 375 px, the defect Tokyo's ward table
-has (PLAN). Wrapped in an overflow box, the table scrolls sideways on its own
-and the page does not.
+AN HTML TABLE IN A SCROLLING BOX (components.scroll_table), NOT st.dataframe
+AND NOT A MARKDOWN TABLE: seven columns would widen the whole page at 375 px.
+The helper's docstring has the measurements.
 """
 
-import html
 import json
 import sys
 from pathlib import Path
@@ -46,6 +42,7 @@ from components import (  # noqa: E402
     OVERVIEW_PAGE,
     SITE_NAME,
     render_site_notices,
+    scroll_table,
     set_base_font,
 )
 from station_scope import slug  # noqa: E402
@@ -83,29 +80,6 @@ def summary_rows():
             "Data date": c.get("data_age", "—"),
         })
     return rows
-
-
-def table_html(rows):
-    cols = list(rows[0])
-    cell = "padding:0.3rem 0.6rem;border-bottom:1px solid rgba(128,128,128,0.3);"
-    head = "".join(
-        f'<th style="{cell}text-align:{"right" if c.startswith("Storefronts") else "left"};'
-        f'vertical-align:bottom">{html.escape(c)}</th>' for c in cols)
-    body = []
-    for r in rows:
-        tds = []
-        for c in cols:
-            v = r[c]
-            if c.startswith("Storefronts"):
-                tds.append(f'<td style="{cell}text-align:right">'
-                           f'{"—" if v is None else f"{v}%"}</td>')
-            else:
-                tds.append(f'<td style="{cell}">{html.escape(str(v))}</td>')
-        body.append("<tr>" + "".join(tds) + "</tr>")
-    return ('<div style="overflow-x:auto;max-width:100%">'
-            '<table style="border-collapse:collapse;min-width:760px;font-size:0.9rem">'
-            f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody>"
-            "</table></div>")
 
 
 rows = summary_rows()
@@ -215,7 +189,11 @@ Mexico.
 )
 
 st.subheader("Every city in one row")
-st.markdown(table_html(rows), unsafe_allow_html=True)
+cols = list(rows[0])
+scroll_table(cols,
+             [["—" if r[c] is None else f"{r[c]}%" if c == "Storefronts near a station"
+               else r[c] for c in cols] for r in rows],
+             right=("Storefronts near a station",), min_width=760)
 st.caption(
     "\"Trams\" includes light rail. \"Retail thin\" or \"Personal services thin\" "
     "means that layer holds only part of its trades, such as the ones the city "

@@ -20,6 +20,7 @@ from pipeline.tokyo.wards import WARDS  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
     render_site_notices,
+    scroll_table,
     set_base_font,
 )
 
@@ -64,12 +65,13 @@ shares = OUTPUTS / "official_shares.json"
 if shares.exists():
     by_code = {c: w for c, w in WARDS.items()}
     rows = sorted(json.loads(shares.read_text(encoding="utf-8")), key=lambda r: -r["share_pct"])
-    table = ["| Ward | Restaurant permits in the list | Official count | Share | The list |",
-             "|---|---:|---:|---:|---|"]
-    for r in rows:
-        w = by_code[r["code"]]
-        table.append(f"| {w['en']} | {r['rows']:,} | {r['official']:,} | {r['share_pct']:.1f}% | {w['share_note']} |")
-    st.markdown("\n".join(table))
+    # components.scroll_table, not a markdown table: at 375 px this table is
+    # 469 px wide and pushed the whole page sideways (deploy-verify 2026-09-28).
+    cols = ["Ward", "Restaurant permits in the list", "Official count", "Share", "The list"]
+    scroll_table(cols,
+                 [[by_code[r["code"]]["en"], f"{r['rows']:,}", f"{r['official']:,}",
+                   f"{r['share_pct']:.1f}%", by_code[r["code"]]["share_note"]] for r in rows],
+                 right=("Restaurant permits in the list", "Official count", "Share"))
     st.caption(f"Official count: {rows[0]['source']}.")
 
 st.markdown(

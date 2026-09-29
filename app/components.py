@@ -287,6 +287,40 @@ _MAP_ONLY_CSS = """
 """
 
 
+def scroll_table(columns, rows, right=(), min_width=None):
+    """Render a table that scrolls sideways inside its own box on a phone,
+    instead of widening the whole page.
+
+    A markdown table wider than the column pushes the page itself sideways at
+    375 px (Tokyo's ward table, 469 px in a 343 px column, deploy-verify
+    2026-09-28), and st.dataframe drew collapsed on page 91 in the lean venv
+    (2026-09-23). An HTML table in an overflow box does neither, and its text
+    stays in the page. `rows` are sequences of already-formatted strings;
+    `right` names the columns to right-align (figures); `min_width` (px)
+    keeps a wide table from squashing its columns before it scrolls. Colours
+    are left to the theme, with a grey rule that reads in both.
+    """
+    import html
+
+    cell = "padding:0.3rem 0.6rem;border-bottom:1px solid rgba(128,128,128,0.3);"
+
+    def align(col):
+        return "right" if col in right else "left"
+
+    head = "".join(f'<th style="{cell}text-align:{align(c)};vertical-align:bottom">'
+                   f"{html.escape(c)}</th>" for c in columns)
+    body = "".join(
+        "<tr>" + "".join(f'<td style="{cell}text-align:{align(c)}">{html.escape(str(v))}</td>'
+                         for c, v in zip(columns, r)) + "</tr>"
+        for r in rows)
+    st.markdown(
+        '<div style="overflow-x:auto;max-width:100%">'
+        f'<table style="border-collapse:collapse;font-size:0.9rem{f";min-width:{min_width}px" if min_width else ""}">'
+        f"<thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>",
+        unsafe_allow_html=True,
+    )
+
+
 def set_base_font():
     """Swaps Streamlit's default typeface for Space Grotesk on base page
     text only.
