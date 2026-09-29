@@ -230,8 +230,9 @@ CASES = [
     ("by country: a named city is not in the band its row lists",
      wrong_band, "its Bands column says"),
 
-    ("a city in two bands (a Band D row renamed to a Band T city)",
-     rename_into("D", "T"), None),
+    # Aimed at Band R since 2026-09-28, when D emptied (its rows moved to R and C).
+    ("a city in two bands (a Band R row renamed to a Band T city)",
+     rename_into("R", "T"), None),
 
     ("a built city still listed in a band (a Band T row renamed to a built city)",
      rename_into("T", None), None),

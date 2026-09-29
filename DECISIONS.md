@@ -20,11 +20,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**143 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**147 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Buenos Aires built: the land-use survey at parcel centres, the Subte from SBASE's own layers (owner)](#2026-09-28---buenos-aires-built-the-land-use-survey-at-parcel-centres-the-subte-from-sbases-own-layers-owner)
+- [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
+- [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
+- [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
+- [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
 - [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
 - [Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)](#2026-09-28---buenos-aires-taxonomy-385-survey-subtypes-mapped-five-scope-calls-owner)
 - [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
@@ -235,6 +239,114 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   Fortaleza moved up-right (its pill had gone under the zoom buttons at 375
   px) and Porto Alegre right of its dot (it met Santos).** Scored PROBLEMS 0 in
   every region at 375, 768 and 1200.
+### 2026-09-28 - Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)
+
+- **Moved Lisbon to Band R, request only (owner's call), after the owner
+  worked through DGAE's site.**
+  - **The data exists, publicly.** The Mapa do Comércio, Serviços e
+    Restauração shows each establishment without login. Its fields are
+    exploration type (Comércio / Serviços / Restauração, the project's
+    three buckets), CAE, full street address, coordinates and a
+    registration code. Lisbon-area clusters hold about 6,700–11,000 points
+    each.
+  - **Gaps the build would design around:** there is no status field, sole
+    traders appear under their own names, and market and mobile traders are
+    registered at their homes.
+  - **No individual account.** The export endpoint (`/estabelecimentos/exportar`)
+    answers 401 anonymously. Registration offers only Administração Pública
+    Central, Município and Estrutura Associativa, so the owner cannot hold
+    an account honestly. The terms are a visitor privacy policy (silent on
+    reuse), and `dados.gov.pt` carries only aggregates.
+  - **A request is drafted, not sent,** kept to revisit:
+    `docs/notifications/dgae-lisbon-porto-request.md`, in European
+    Portuguese with an English copy. It asks for a Lisboa and Porto export,
+    the reuse terms, and states that sole traders' names won't be published
+    and non-sedentary trade will be excluded. Gated-access item 28 is
+    updated. Porto moves on the same answer.
+- **Band D is empty**, after the owner's own checks of all three cities this
+  evening (Ho Chi Minh City to C, Delhi and Lisbon to R). The band stays for
+  the next city the owner can unblock alone. The counts self-test's "city in
+  two bands" case, which borrowed a Band D row, is re-aimed at Band R. Counts:
+  57 built; A 1 · B 8 · C 8 · D 0 · R 17 · T 51 = 85. Files:
+  `docs/city_master_list.md`, `docs/gated_access.md`,
+  `docs/notifications/dgae-lisbon-porto-request.md`,
+  `docs/handoff_staging_2026-09-28.md`,
+  `scripts/check_master_list_counts_selftest.py`.
+
+### 2026-09-28 - Review-time batch live after the owner's reboot, checked on the live URL
+
+- **Live checks, all passed.** Each page was loaded through the app's inner
+  document (`/~/+/<Page>`) with the viewport set before loading.
+  - **Page 92:** 57 rows. Berlin's reads Suburban rail / Chamber of commerce
+    register / Personal services thin / 82%; London's reads Food hygiene
+    register / Food premises only / 74%. The share range reads "about 12% to
+    100%".
+  - **Opening zoom** (the map-view check, recomputing the expected zoom from
+    the map's own inputs), at 1280 px: Berlin 10.5 against 10.5, London 10.25
+    against 10.25, and Rennes (untouched by the batch) 13.5 against 13.5. No
+    run needed a correction.
+  - **London's page** shows all three new notices (VBB, Food Standards
+    Agency, Ordnance Survey) and the footer link. Rennes shows the footer link
+    and no error.
+  - **Tokyo at 375 px:** the document is 375 px wide, and the ward table (410
+    px, 8 rows) scrolls inside a 343 px box. The page says "The Food shops
+    layer" and no longer "The Retail layer".
+- **Housekeeping:** PLAN's page 92, Berlin and London items are ticked. The
+  memory reminder to place the inconsistency list on the site was removed,
+  because it is on the site.
+### 2026-09-28 - Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)
+
+- **Moved Delhi to Band R (owner's call) after the owner checked MCD's
+  General Trade Licence search themselves.**
+  - **No street address.** The empty results table shows the columns before
+    any query: Licensee, Application Number, Licence No, Establishment/Unit,
+    Trade Description, Zone, Ward, Colony, Status, Submitted Date and Valid
+    Upto. Premises are located to colony at best, as in the 2021-22 list.
+  - **No bulk route.** There is no "All" trade type ("all kinds of consumer
+    goods" is one type among many), so a city-wide export means one search
+    per trade type per zone.
+  - **The CAPTCHA image does not load for the owner,** even though the page
+    does. The owner judged it a restricted feature, and by the owner's rule
+    restricted belongs in R, not D.
+  - **Licence:** MCD's site terms are a disclaimer only (accuracy, liability,
+    Indian jurisdiction), with no reuse clause. A GIGW "Copyright Policy"
+    page was not yet found.
+  - **One lead, unchecked:** the Health Trade Licence page's columns. The
+    screen reported an establishment address there, which would make food
+    placeable by a request to MCD.
+- Band D now holds Lisbon alone. Counts: 57 built; A 1 · B 8 · C 8 · D 1 ·
+  R 16 · T 51. Files: `docs/city_master_list.md`,
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)
+
+- **Moved Ho Chi Minh City to Band C, "closer to a page" (owner's call), on
+  the first Band D unlock done by the owner.** The owner passed the open-data
+  portal's CAPTCHA in their own browser (Bucharest's precedent) and read the
+  catalogue through CKAN's `package_list` and `package_show`: 112 datasets.
+  - **Only the Food Safety Department's certificate file is
+    premises-level.** The owner fetched it (`DU DIEU KIEN DAT 2026.xlsx`,
+    903,823 bytes, sha256 `1ef3a41d0d4287d25e87a3f9e214694f01354bb40a62713f4ebd55ee3fc5b9ce`,
+    in `data/ho-chi-minh-city/raw/`), and staging read its structure only.
+    It holds **7,413 establishments** whose latest certificate was issued
+    2026-01-05 to 2026-07-31: seven months of issuances, not the stock.
+    Street address and new ward are 100% filled; there are no coordinates
+    and no business type, only the supervising sector (Health 4,484,
+    Agriculture 1,040, Industry and Trade 903, legacy 980), so restaurants
+    and food factories are mixed. 34% are household businesses, usually
+    named for the owner. It covers the enlarged city (Bà Rịa–Vũng Tàu and
+    Bình Dương merged in 2025). The licence is not specified.
+  - **The rest fails.** The enterprise register is company-level (684.58 MB,
+    January 2022). The "markets, shopping centres, supermarkets and
+    convenience stores" dataset holds only a markets list (24 KB, 2024). No
+    household-business register exists on the portal, no district
+    publishes, and no open address layer was found.
+  - **What would reopen it:** the full certificate stock with a
+    business-type field, a household-business register, or an open address
+    layer. Counts: 57 built (Berlin and London have since landed);
+    A 1 · B 8 · C 8 · D 2 · R 15 · T 51. Files: `docs/city_master_list.md`,
+    `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+    `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)
 

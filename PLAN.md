@@ -100,8 +100,8 @@ Desktop is unaffected — the label is fully visible there.
   The macro map's marker and label colours now come from `pipeline/theme.py`;
   measure them against the dark page (`#0B1220`) numerically, not by eye.
 
-- [ ] **Put the cross-city inconsistency list on the site** (owner, 2026-09-24).
-  LANDED at review time 2026-09-28, waiting for the reboot and the live check: page 92 "Why
+- [x] **Put the cross-city inconsistency list on the site** (owner, 2026-09-24).
+  LIVE 2026-09-28 (checked on the live URL after the owner's reboot): page 92 "Why
   the maps differ", linked from every page's footer; the owner's shape and
   approved text are in DECISIONS (2026-09-28). `docs/map_inconsistencies.md`
   stays internal as its evidence and is still kept current as cities land. A
@@ -377,7 +377,7 @@ evidence section.
   Fukuoka, Kyoto, then Tokyo - all built.)
 - [x] **Berlin built 2026-09-28** (`worktree-berlin`, held for review time):
   60,313 storefronts, 275 stations, 25 lines; texts owner-approved (DECISIONS).
-  - [x] LANDED at review time 2026-09-28 by cleanup, with London, page 92 and the Tokyo table fix (DECISIONS); deploy-verify `city-added` plus extras passed; waiting for the owner's reboot and the live check.
+  - [x] LANDED at review time 2026-09-28 by cleanup, with London, page 92 and the Tokyo table fix (DECISIONS); deploy-verify `city-added` plus extras passed; LIVE after the owner's reboot, checked on the live URL 2026-09-28.
   - [ ] **When the U6 reopens to Alt-Tegel (about August 2027)**: step 1 stops
     on the refetch that serves it; take the five stations out of
     `config.CLOSED_FOR_WORKS` and re-run steps 1-3.
@@ -386,7 +386,7 @@ evidence section.
 - [x] **London built 2026-09-28** (`worktree-london`, held for review time;
   Berlin is on `worktree-berlin`): 54,241 food storefronts, 387 stations, 19
   lines; texts owner-approved (DECISIONS).
-  - [x] LANDED at review time 2026-09-28 by cleanup, with Berlin, page 92 and the Tokyo table fix (DECISIONS); deploy-verify `city-added` plus extras passed; waiting for the owner's reboot and the live check.
+  - [x] LANDED at review time 2026-09-28 by cleanup, with Berlin, page 92 and the Tokyo table fix (DECISIONS); deploy-verify `city-added` plus extras passed; LIVE after the owner's reboot, checked on the live URL 2026-09-28.
     London's notices are 58 (FSA) and 59 (Ordnance Survey); Berlin's VBB is 57.
   - [x] Placed 2026-09-28 (owner): 2,349 of the 5,350 storefronts the FSA
     gives no point sit at their postcode's centroid (OS Code-Point Open, notice
@@ -616,11 +616,12 @@ every key, account and letter:
 - [ ] **Philadelphia's permission request** (`docs/gated_access.md` item 12;
   DECISIONS, "Philadelphia: ask for permission, stay up on a reasoned position
   meanwhile"). The footer (`components._UNSETTLED_TERMS`) discloses it meanwhile.
-    - [ ] **Follow up on 2026-09-28** (one week), at the owner's request. The
+    - [x] **Followed up 2026-09-28** (one week), at the owner's request. The
       owner SENT the request on 2026-09-21 to `maps@phila.gov`, copying
       `LIGISTEAM@phila.gov` (text in
-      `docs/notifications/philadelphia-permission-request.md`). No
-      reply as of 2026-09-21. If still silent: wait, chase once, or ring the Open
+      `docs/notifications/philadelphia-permission-request.md`). **No reply as
+      of 2026-09-28** (the owner, checked that day).
+    - [ ] **Owner to choose the next step:** wait, chase once, or ring the Open
       Data Program. **Silence is not consent** - the interim position holds on
       the reasoned reading and the disclosure, not on the absence of an
       objection, and it does not strengthen with time. Sending it is the owner's to do. **Nothing in this project may
