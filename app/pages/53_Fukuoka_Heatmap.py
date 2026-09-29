@@ -46,7 +46,7 @@ since then are filed online through the Ministry of Health, Labour and Welfare's
 open data is the second list (downloaded 27 September 2026). A premises in both lists appears
 once. Barbers and beauty salons come from the city's registers as of 31 August 2026, laundries as
 of 31 March 2026. Japan has no general business licence, so shops other than food shops
-(clothing, electronics, pharmacies) do not appear. The Retail layer is food retail only, and it is
+(clothing, electronics, pharmacies) do not appear. The Food shops layer is food retail only, and it is
 partial: shops that only notify rather than hold a permit, such as supermarkets, convenience
 stores and greengrocers, appear only where they chose to publish in the ministry's list.
 Fukuoka's yatai, the street stalls that trade nightly at fixed spots, are included. Food trucks,

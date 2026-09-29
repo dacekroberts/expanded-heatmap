@@ -88,7 +88,7 @@ today.
 Barbers, beauty salons and laundries come from the registers of Minato, Taito, Meguro and Shibuya.
 Seven more wards publish such registers, but a ward without a food list stays hollow, because food
 is most of what a station counts. Japan has no general business licence, so shops other than food
-shops do not appear. The Retail layer is food retail only, by permit type: bakeries and
+shops do not appear. The Food shops layer is food retail only, by permit type: bakeries and
 confectioners, delis, butchers and fishmongers. Shops selling only packaged food have filed a
 notification rather than a permit since 2021, and appear only where a list includes
 notifications. Food trucks, stalls and temporary permits are left out.

@@ -42,7 +42,7 @@ sightseeing lines up the mountain. Line colours are this project's own, not the 
 Businesses come from Kobe City's list of food-business permits (all permits in force at the end of
 March 2026) and its registers of barbers, beauty salons and laundries. Japan has no general
 business licence, so shops other than food shops — clothing, electronics, pharmacies — do not
-appear: the Retail layer is food retail only (bakeries and confectioners, delis, butchers and
+appear: the Food shops layer is food retail only (bakeries and confectioners, delis, butchers and
 fishmongers). Food businesses that only notify the city rather than hold a permit, such as many
 convenience stores and greengrocers, are not in the list. The city notes that premises which have
 closed may still be listed, so a dot means a permit on file, not a business open today. Food trucks
