@@ -131,6 +131,7 @@ TAXONOMY_MODULES = {
     "ihk_wz2025": "pipeline.taxonomies.ihk_wz2025",
     "fsa_businesstype": "pipeline.taxonomies.fsa_businesstype",
     "anzsic_fes": "pipeline.taxonomies.anzsic_fes",
+    "romania_dsvsa": "pipeline.taxonomies.romania_dsvsa",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 
