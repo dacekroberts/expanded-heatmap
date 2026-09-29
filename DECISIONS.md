@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**189 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Atlanta's discard ground changed from currency to terms (owner)](#2026-09-29---atlantas-discard-ground-changed-from-currency-to-terms-owner)
+- [Review batch live after the owner's reboot: exclusions batch and six cities, 68 built](#2026-09-29---review-batch-live-after-the-owners-reboot-exclusions-batch-and-six-cities-68-built)
 - [Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill](#2026-09-29---yes-to-trams-only-maps-owner-with-the-macro-map-re-planned-minor-cities-labelled-only-in-their-own-region-dots-coloured-by-network-type-completeness-by-fill)
 - [Tram audit Phases 3-4: rings measured, no thinning and rings sized per city (owner), the decision memo published](#2026-09-29---tram-audit-phases-3-4-rings-measured-no-thinning-and-rings-sized-per-city-owner-the-decision-memo-published)
 - [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
@@ -243,6 +244,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   Whether to tell the City about the exposure was not answered and stays
   with the owner. `check_discard_evidence.py` passes (91 rows).
 
+### 2026-09-29 - Review batch live after the owner's reboot: exclusions batch and six cities, 68 built
+
+- **Pushed as 95e04c4** (`review-2026-09-29` -> master, pre-push hook 24/24)
+  after the full `deploy-verify` passed on c50615b; the 41 cities' re-run
+  processed files were swapped into the shared data first, and are master's
+  state from here on.
+- **Checked on the live URL after the owner's reboot** (the first reboot had
+  run before the push, so a second one was needed): the Overview shows 68
+  cities in 12 regions with Seoul Capital Area (5); Stockholm and Incheon
+  render their 650 px maps with their notices (Stockholms stad; the Small
+  Enterprise and Market Service) and the OSM credit; What Is Excluded loads
+  at its unchanged URL with the batch's wording (the five kinds, Chicago's
+  35, Brazil's 558, Los Angeles's 3,145, Stockholm's caterers); Boston, the
+  unchanged control, renders; no `stException` anywhere. The only console
+  errors are the deep-link `_stcore/health` and `host-config` 404s every page
+  logs, Boston's included.
 ### 2026-09-29 - Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill
 
 - **The owner's final call on the tram list: yes**, after the audit and its
