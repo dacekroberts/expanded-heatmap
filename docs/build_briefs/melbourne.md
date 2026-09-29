@@ -14,6 +14,24 @@ says so the way Tokyo's page names its wards.
 
 ---
 
+> **Measured at the build, 2026-09-28 (build session, `worktree-melbourne`,
+> stacked on Sydney's branch)** - these supersede the screen's figures below:
+> - **Downloaded** (owner's OK): the 2024 census only, 3,842,307 bytes,
+>   19,672 rows (the whole table is 413,550 rows, about 85 MB).
+> - **The taxonomy is Sydney's** (`anzsic_fes`), plus CLUE's six finer retail
+>   classes (4111 convenience stores, 4254-4258 clothing and footwear by
+>   wearer). **9539 excluded in both cities (owner)**: 214 of its 279 rows are
+>   upper-floor suites, mostly migration and education consultancies.
+> - **4,959 storefronts** (Retail 1,852, Food service 2,646, Personal services
+>   461), every one inside the LGA; 1,840 distinct points, the largest 219;
+>   434 upper-floor or suite tenancies kept. **96.0% within a ring.**
+> - **Rail by Metro Trains' line group (owner)**: six groups from 119 OSM
+>   relations; the event-day Flemington Racecourse line and the City Circle
+>   out. **17 stations**, the brief's list less the racecourse line's two and
+>   Richmond (its platforms' centre is just outside the LGA). Trams out (owner).
+> - **Exposure**: trading names only, no fallback; one storefront at an
+>   "Apartment" address, a trade name.
+
 ## The one-line summary
 
 **A council census with trading names, ANZSIC classes and coordinates under

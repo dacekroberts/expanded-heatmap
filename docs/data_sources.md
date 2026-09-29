@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London |
-| Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney |
+| Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 
 ## Business registries
 
@@ -1918,6 +1918,27 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   run 2026-09-28: the survey has no names, so no pin can show one; the verdict
   is in `DECISIONS.md`.
 - **Sydney's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**65. City of Melbourne (Melbourne) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Melbourne lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Melbourne rows
+  in [`data_sources/australia.md`](data_sources/australia.md)): the portal's
+  "About our data" puts its open data under CC BY 4.0, and the dataset's
+  metadata declares `license: "CC BY"` with the 4.0 legal code. DataVic's
+  "other-open" is CKAN's generic bucket and carries the same CC BY text; the
+  council's portal governs. Nothing is incorporated by reference (the portal's
+  terms page is undefined; `melbourne.vic.gov.au/copyright` covers the website).
+- **MUST DISPLAY** (CC BY §3(a)): a credit, the licence linked, the dataset
+  linked, a note that the data was modified. No wording is prescribed; the
+  licence read's draft, approved by the owner 2026-09-28, with the census year.
+- **MUST NOT**: imply endorsement (§2(a)(6)); use DataVic's "© Copyright State
+  Government of Victoria" (DataVic's own material).
+- **MUST DO:** nothing to the publisher ("#melbdata" is an invitation).
+  Privacy is not licensed (§2(b)(1)): `check_personal_exposure.py melbourne`,
+  run 2026-09-28, finds only trading names and no fallback; the verdict is in
+  `DECISIONS.md`.
+- **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

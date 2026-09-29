@@ -2055,7 +2055,7 @@ councils publish no comparable survey and are not on the map.
 
 **No names.** The survey publishes an industry class and a point for each
 establishment and nothing else: a dot is titled by its ANZSIC class. Points are
-per building, so the shops of a shopping centre share one point (5,218 distinct
+per building, so the shops of a shopping centre share one point (5,054 distinct
 points for the storefronts, the largest holding 140).
 
 **Excluded by class** (ANZSIC 2006, `pipeline/taxonomies/anzsic_fes.py`):
@@ -2068,10 +2068,13 @@ points for the storefronts, the largest holding 140).
   sign-in), brothels (27), catering firms (21, the work happens at the event),
   funeral, crematorium and cemetery services (7).
 
-**Kept, and named as catch-alls** - other store-based retailing n.e.c. (311)
-and other personal services n.e.c. (254): with no names they cannot be sampled,
-and with no names they expose no one. Car and fuel retailers (64) are shops, as
-in the NAICS cities.
+**Excluded, a catch-all** - other personal services n.e.c. (254): kept at
+first because the survey's rows have no names to sample, then excluded the same
+day (owner, 2026-09-28) when Melbourne's census, which names them, showed the
+class holds mostly consultancies in office suites.
+
+**Kept, and named as a catch-all** - other store-based retailing n.e.c. (311).
+Car and fuel retailers (64) are shops, as in the NAICS cities.
 
 **Left off because they are outside the city** - 27 survey points that fall
 just outside OpenStreetMap's outline of the council area.
@@ -2082,8 +2085,48 @@ cut at the council boundary: 16 stations inside it.
   `outputs/sydney/excluded_stations.csv`.
 - **Light rail (L1, L2, L3; 22 stops in the area) is not drawn** (owner,
   2026-09-28); with it, about nine storefronts in ten would sit within a ring
-  (93.0%, the brief's measure), against 83.5% without it.
+  (93.0%, the brief's measure), against 83.4% without it.
 - NSW TrainLink services and ferries are not drawn.
+
+### Melbourne - the City of Melbourne's land-use census, all three buckets
+
+**One council, one census year.** The City of Melbourne's Census of Land Use
+and Employment records every business establishment in the council area with
+its trading name; the map shows the 2024 census. The neighbouring councils
+publish no comparable census and are not on the map.
+
+**Points per property.** Every tenancy in a property shares its point, so a
+shopping centre or an arcade is one point (1,840 distinct points for the
+storefronts, the largest holding 219). Upper-floor and suite tenancies are
+kept (434, 8.8%): the census does not say which face the street.
+
+**Excluded by class** (ANZSIC 2006, the classes Sydney's decisions set,
+`pipeline/taxonomies/anzsic_fes.py`):
+- Other personal services n.e.c. (279; owner, 2026-09-28): 214 are upper-floor
+  suites, mostly migration and education consultancies, with a few tattoo
+  studios.
+- Not storefronts: parking (146), non-store retail (17) and commission-based
+  retail (1).
+- Organisations: interest-group associations (161), religious services (93),
+  business and professional associations (89), labour associations (33).
+- The owner's calls for Sydney, applied here: catering firms (39), licensed
+  members' clubs (15), brothels (9), funeral services (6).
+
+**Kept, and named as a catch-all** - other store-based retailing n.e.c. The
+census's finer classes (convenience stores; men's, women's and children's
+clothing and footwear) are Retail.
+
+**Stations.** Metro Trains' six line groups, cut at the council boundary: 17
+stations inside it.
+- Left out: 199 stations beyond the boundary, Richmond among them (its
+  platforms' centre lies just outside, on Punt Road), listed in
+  `outputs/melbourne/excluded_stations.csv`.
+- **Trams (22 routes, 155 stops in the area) are not drawn** (owner,
+  2026-09-28); with them, 99.1% of storefronts would sit within a ring (the
+  brief's measure), against 96.0% without them.
+- The event-day Flemington Racecourse line (with Showgrounds and Flemington
+  Racecourse stations), the City Circle special service and V/Line are not
+  drawn.
 
 ## Kept, and why
 

@@ -1378,6 +1378,17 @@ _NOTICES = [
      "(filtered and grouped by category); provided as is, without warranty. The City of Sydney "
      "does not endorse this map.",
      False),
+    # Melbourne (notice 65): the City of Melbourne's CLUE under CC BY 4.0 - the credit,
+    # the licence and the dataset linked, the modification noted, no endorsement
+    # (licence-read 2026-09-28; no wording is prescribed). Wording approved by the
+    # owner 2026-09-28.
+    ("City of Melbourne (Melbourne)",
+     "Business establishments: City of Melbourne, Census of Land Use and Employment (CLUE) 2024 "
+     "([dataset](https://data.melbourne.vic.gov.au/explore/dataset/"
+     "business-establishments-with-address-and-industry-classification/)), "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Filtered, categorised and "
+     "aggregated by this project. The City of Melbourne does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

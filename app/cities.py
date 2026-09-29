@@ -1569,6 +1569,28 @@ CITIES = [
         # with PROBLEMS 0. Alone in Oceania until Melbourne arrives.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Melbourne",
+        "lat": -37.8136,
+        "lon": 144.9631,
+        "page": "pages/62_Melbourne_Heatmap.py",
+        # Owner-approved 2026-09-28.
+        "coverage": "full",
+        "placement": "Census coordinates (per property)",
+        "data_age": "Census of 2024",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
+        "blurb": "Metro Trains' six line groups",
+        "region": "Oceania",
+        "country": "Australia",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 72.4 px in
+        # the deployed app's own frame (2026-09-28, three entries reproduced),
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0, Sydney included.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

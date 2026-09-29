@@ -191,6 +191,11 @@ REGISTRIES = {
     # person's name - Berlin's structural answer.
     "sydney": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Melbourne: CLUE's `trading_name` is the only name column and is shown
+    # as is (no owner fallback exists); its census covers non-residential
+    # floor space, and the business address is never written out.
+    "melbourne": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
     # London: the FSA's `BusinessName` is the only name the register publishes
     # - there is no separate owner column to fall back to - so the fallback
     # failure cannot occur; what CAN occur is a sole trader trading under their

@@ -285,8 +285,13 @@
   "map_blob": "a83e37422c2b8dffaa772fd8f96dc71912fd2ff4"
  },
  "sydney": {
-  "in_ring": 6120,
-  "all": 7328,
+  "in_ring": 5901,
+  "all": 7074,
+  "map_blob": "7d63549323fb46e3d6c98c2f408acc7b8085c074"
+ },
+ "melbourne": {
+  "in_ring": 4760,
+  "all": 4959,
   "map_blob": null
  }
 }
