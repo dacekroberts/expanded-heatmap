@@ -64,9 +64,9 @@ SBASE_STATIONS_URL = f"{_SBASE}/estaciones_de_subte.geojson"
 SBASE_LINES_URL = f"{_SBASE}/red_subte.geojson"
 SBASE_STATIONS_GEOJSON = DATA_RAW / "estaciones_de_subte.geojson"
 SBASE_LINES_GEOJSON = DATA_RAW / "red_subte.geojson"
-# Recorded after the first download; None until then.
-SBASE_STATIONS_SHA256 = None
-SBASE_LINES_SHA256 = None
+# As downloaded 2026-09-28 (both last modified 2026-09-01).
+SBASE_STATIONS_SHA256 = "e392abf0d923e5ea7cebc1c463f9b7471f062ad22527fb628fe0f480d2f32cc3"
+SBASE_LINES_SHA256 = "aef377072b153f7e1093c146b1fa70cf07ae66866f1589bee2180d3041b407ad"
 
 OSM_STATIONS_JSON = DATA_RAW / "osm_stations.json"
 OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"

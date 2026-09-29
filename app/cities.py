@@ -1067,7 +1067,10 @@ CITIES = [
         # measured in the app's own document with eleven entries reproduced,
         # and check_macro_labels.py passes every region at 375, 768 and 1200
         # with PROBLEMS 0.
-        "label_offset": ('middle', 0, -22),
+        # Up and right since Buenos Aires joined the region (2026-09-28): the
+        # wider view put the above-dot pill under the zoom buttons at 375 px,
+        # and right or below met Recife. Scored PROBLEMS 0 at 375, 768, 1200.
+        "label_offset": ("start", 12, -10),
     },
     {
         "name": "Porto Alegre (Regional)",
@@ -1090,7 +1093,10 @@ CITIES = [
         # with PROBLEMS 0.
         # 7.5 px (5%) clipped at the west edge at phone width -
         # reported, not failed, the class Guadalajara's 6% is in.
-        "label_offset": ('middle', 0, -22),
+        # Right of the dot since Buenos Aires joined the region (2026-09-28):
+        # above met Santos's pill and below met Buenos Aires's. Scored
+        # PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 12, 5),
     },
     {
         "name": "Recife (Regional)",
@@ -1552,16 +1558,21 @@ CITIES = [
         "lat": -34.6037,
         "lon": -58.3816,
         "page": "pages/58_Buenos_Aires_Heatmap.py",
-        "blurb": "Subte (TODO: list the lines)",
+        # Owner-approved 2026-09-28: the "Why the maps differ" row.
+        "coverage": "full",
+        "placement": "Parcel centres (99.8%) and block centres (0.1%)",
+        "data_age": "Surveyed 2022–2024",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
+        "blurb": "Subte Líneas A–E and H",
         "region": "South America",
         "country": "Argentina",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, and SCORED: the label width was measured at 87.4 px in
+        # the deployed app's own frame (2026-09-28, seven entries reproduced),
+        # and with Fortaleza and Porto Alegre moved, every region passes at
+        # 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
 ]

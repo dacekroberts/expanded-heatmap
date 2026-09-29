@@ -170,7 +170,7 @@ _PERSONAL = {
 # Enumerated so an unmapped value means "the survey changed", never "someone
 # forgot one".
 _NOT_STOREFRONT = {
-    # Unidentified: the owner's call at the build (drop and disclose, or draw)
+    # Unidentified shopfronts: dropped and disclosed (owner, 2026-09-28)
     "SIN IDENTIFICAR",
     # Homes filed under UNICOMERCIAL; never pin a home
     "RESIDENCIAL",

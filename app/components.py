@@ -1366,6 +1366,24 @@ _NOTICES = [
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
      False),
+    # Buenos Aires (notice 60): BA Data's three datasets under CC BY 2.5 AR -
+    # author units, dataset titles and URIs, the licence URI, how the data was
+    # changed, no endorsement, no GCBA or BA Data logo. Written to satisfy 2.5 AR
+    # and 4.0 both (Parcelas' resources say 4.0). Approved by the owner 2026-09-28.
+    ("Gobierno de la Ciudad de Buenos Aires (Buenos Aires)",
+     "Buenos Aires' storefronts are from the [Relevamiento Usos del Suelo 2022-2024]"
+     "(https://data.buenosaires.gob.ar/dataset/relevamiento-usos-suelo) (Dirección General de "
+     "Antropología Urbana, Subsecretaría de Planeamiento), placed using "
+     "[Parcelas](https://data.buenosaires.gob.ar/dataset/parcelas) (Subsecretaría de Registro, "
+     "Interpretación y Catastro), and the Subte's stations and lines are from "
+     "[Subte: Estaciones](https://data.buenosaires.gob.ar/dataset/subte-estaciones) "
+     "(Subterráneos de Buenos Aires, SBASE), all published by the Gobierno de la Ciudad de "
+     "Buenos Aires on BA Data under the [Creative Commons Attribution 2.5 Argentina licence]"
+     "(http://creativecommons.org/licenses/by/2.5/ar/). Modified by this project: filtered to "
+     "storefronts, grouped into three categories, and placed at the centre of each parcel, or "
+     "of its block where the parcel is not listed; station names follow OpenStreetMap's "
+     "spelling. The Gobierno de la Ciudad de Buenos Aires does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

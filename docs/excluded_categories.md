@@ -2046,6 +2046,35 @@ six London Overground lines are drawn, cut at Greater London's boundary.
   Watford High Street, Upper Holloway, Wood Street, St James Street).
 - Tramlink, National Rail services and river buses are not drawn.
 
+### Buenos Aires - the city's land-use survey, placed at parcel centres
+
+**Excluded by use** - car workshops, car washes and tyre repairers (3,951);
+estate agents, banks, lottery agencies, bill-payment and money-transfer offices
+and insurers (4,481); lawyers, printers, travel agents and copy shops (1,831);
+health and veterinary practices (1,690); gyms, event halls and cultural centres
+(1,353); other repair workshops (1,158); construction trades and workshops
+making goods (802); party offices, places of worship and associations (658);
+transport, courier and rental offices (609); schools and classes (403);
+wholesalers (216).
+
+**Left out because the survey cannot say** - 6,243 active shopfronts whose use
+the surveyors could not identify (7.2%; 32% in Villa Riachuelo), and 593 malls,
+arcades and markets, recorded as one row each with their shops not itemised.
+
+**Homes are never shown** - 1,756 homes with a business inside are filed by the
+survey as housing and excluded.
+
+**Placed at a block's centre** - 93 whose parcel is not in the parcel layer; 3
+not placed.
+
+**Shown, but not named** - the survey records no names; each dot shows the
+street address.
+
+**Stations.** The Subte's six lines are drawn; all 89 stations lie in the city.
+- Not drawn: the Premetro (18 stops in the south-west; it would add about 750
+  storefronts, 1.2%, in Villa Lugano, Villa Soldati and Villa Riachuelo), the
+  heritage tramway, and the commuter railways.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

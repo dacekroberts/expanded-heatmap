@@ -393,6 +393,17 @@ evidence section.
     59); 3,001 (5.0%) stay unplaced; never a private-address record.
   - [ ] Refetch before the FSA extracts age: `fetch_sources.py --force`; if OSM
     starts carrying one of the eight added stations, step 1 stops and says so.
+- [x] **Buenos Aires built 2026-09-28** (`worktree-buenos-aires`, held for
+  review time): 63,596 storefronts, 89 stations, 6 lines; texts owner-approved
+  (DECISIONS).
+  - [ ] At review time: `publish-city` (page 58, `cities.py` with Fortaleza's
+    and Porto Alegre's labels moved, notice 60), deploy-verify `scope:
+    city-added`, reboot.
+  - [ ] `docs/map_inconsistencies.md`'s prose lists (street surveys, modes not
+    drawn, in-ring shares, pin labels) still to name Buenos Aires: cleanup's
+    `city-landed buenos_aires` sweep.
+  - [ ] SBASE's layers are dated 2026-09-01; refetch with `fetch_sources.py
+    --force` when BA Data updates them (step 1 re-checks the counts).
 - [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
   28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
   - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
