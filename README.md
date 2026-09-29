@@ -38,6 +38,7 @@ Mapped so far:
 - **Argentina:** Buenos Aires
 - **Australia:** Sydney, Melbourne
 - **Sweden:** Stockholm
+- **Romania:** Bucharest
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.

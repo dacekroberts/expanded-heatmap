@@ -1461,6 +1461,21 @@ _NOTICES = [
      "Tunnelbana stations. This is not the official register, and it is not produced or "
      "endorsed by Stockholms stad.",
      False),
+    # Bucharest (notice 67): DSVSA București's registers. Licence SILENT (no terms page; the ANSVSA
+    # footer's "all rights reserved" covers the website), so the notice credits the
+    # publisher and states the changes without claiming a licence. Wording approved
+    # by the owner 2026-09-29.
+    ("DSVSA București (Bucharest)",
+     "Food premises for Bucharest are from the registers of the Sanitary-Veterinary and "
+     "Food Safety Directorate of Bucharest (DSVSA București, "
+     "[bucuresti.dsvsa.ro](https://bucuresti.dsvsa.ro/)), which it publishes with no stated "
+     "licence. Changes: cancelled registrations are left out; the units are filtered to "
+     "restaurants, cafés, bars and food shops, merged where one premises holds several "
+     "registrations, grouped into two categories, placed by matching their addresses to "
+     "OpenStreetMap's address points, and mapped by distance to metro stations. Company "
+     "names are shown without their legal form, and sole traders by category only. This is "
+     "not the official register, and it is not produced or endorsed by DSVSA or ANSVSA.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

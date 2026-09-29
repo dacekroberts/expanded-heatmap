@@ -313,5 +313,10 @@
   "in_ring": 4702,
   "all": 5262,
   "map_blob": "8704c2c4b9a79dd961cf1e54b3b2333eaf0b27fa"
+ },
+ "bucharest": {
+  "in_ring": 11244,
+  "all": 15593,
+  "map_blob": "c46c9563f4b0cc1e044793696246c451073c0a96"
  }
 }

@@ -1699,6 +1699,26 @@ CITIES = [
         # to it, the zoom dropped and put four label pairs on top of each
         # other. check_macro_labels.py then passes every region at 375, 768
         # and 1200 with PROBLEMS 0.
+    },
+    {
+        "name": "Bucharest",
+        "lat": 44.4268,
+        "lon": 26.1025,
+        "page": "pages/64_Bucharest_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined by address (74.9%)",
+        "data_age": "Registers of 2026-08-25",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Metrorex M1–M5",
+        "region": "Europe",
+        "country": "Romania",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 69.8 px measured in the deployed
+        # app's own frame (2026-09-29, four entries reproduced). Europe's zoom
+        # leaves Bucharest out (REGION_ZOOM_WITHOUT); check_macro_labels.py
+        # then passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
 ]
@@ -1866,7 +1886,11 @@ REGION_ORDER = [
 # zoom dropped and Marseille, Rennes, Copenhagen and Amsterdam collided with
 # neighbours at every width. Without it Europe's zoom and centre are exactly
 # what they were (Riga already sets the centre's eastern edge).
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm")}
+# Bucharest (2026-09-29) joins it on the same measurement: fitted to it, the
+# zoom dropped and a dozen label pairs collided at every width. Its centre
+# still counts, so Europe's frame sits about a degree further east; on a phone
+# Dublin's label clips 11 px and Bucharest's 25 px, PROBLEMS 0.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest")}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.

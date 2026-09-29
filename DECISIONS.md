@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**181 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**182 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
@@ -31,6 +31,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)](#2026-09-29---exclusions-batch-re-run-41-cities-re-rendered-brazils-funilaria-misspelling-fixed-chicagos-funeral-disclosure-rewritten-owner)
 - [Information pages renumbered 90-92 -> 200-202 (owner)](#2026-09-29---information-pages-renumbered-90-92---200-202-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
+- [Bucharest built: DSVSA's food registers placed by an address join in each premises' own sector (74.9%); person-named companies by category (owner); privacy clean](#2026-09-29---bucharest-built-dsvsas-food-registers-placed-by-an-address-join-in-each-premises-own-sector-749-person-named-companies-by-category-owner-privacy-clean)
 - [Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session](#2026-09-29---exclusions-batch-the-owners-eight-follow-ups-wording-approved-handed-to-a-fresh-session)
 - [Stockholm built on its frozen food inspection register: institutional kitchens out by name (owner), three lines with Swedish labels (owner); privacy clean](#2026-09-29---stockholm-built-on-its-frozen-food-inspection-register-institutional-kitchens-out-by-name-owner-three-lines-with-swedish-labels-owner-privacy-clean)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
@@ -545,6 +546,68 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   section was brought current as well (Tallinn is in R; Rijswijk and Delft
   left C for T on 2026-09-27). Measuring scripts and caches in
   `data/_staging_scratch_2026-09-29/band_t_audit/`.
+### 2026-09-29 - Bucharest built: DSVSA's food registers placed by an address join in each premises' own sector (74.9%); person-named companies by category (owner); privacy clean
+
+- **Built on branch `bucharest`, page 64, notice 66 on the branch (67 once
+  Stockholm's 66 lands; renumber at merge, owner).** Step 1: 12 OSM relations
+  -> 64 stations (Metrorex's 64), all inside the municipality. Step 2: 17
+  owner-fetched files -> 23,113 active rows -> 23,014 after mobile units (75)
+  and non-storefront categories (27) -> 20,821 premises -> 15,593 placed
+  (7,857 Food shops, 7,736 Food service). Step 3: 11,244 in a ring (72.1%).
+- **The address join keeps the sector and the street type, and refuses a
+  number found in two places.** Staging's key, reproduced, put 1,730 of its
+  15,448 first-pass matches (11.2%) on a street and number whose OSM points
+  lie more than 300 m apart. Two causes: the street type was dropped (Aleea
+  and Șoseaua Pantelimon merged), and Bucharest repeats street names across
+  sectors. The build matches in the register's own Sector (the six OSM sector
+  polygons, with a 100 m edge for boundary streets), keeps a written type, and
+  places a premises only where its points form one site. "One site" means
+  linked in 150 m hops and no wider than 600 m: a plain 150 m spread test left
+  3,177 rows ambiguous, and 1,701 of the 2,655 read were one continuous site,
+  such as Casa Presei or Bucur Obor. Result: 74.9% placed, 73-76% in every
+  sector. The **control** reproduces: with those tests off the join reads
+  81.7% against Staging's 79.5%. The **second method** agrees: 29 of 29
+  house-level Nominatim answers lie within 100 m of the placed point (median
+  15 m); the other 10 answers were road midpoints. Rejected: Staging's
+  sector-free key (about 5 points higher, but it places the wrong-sector and
+  two-place rows at an arbitrary point).
+- **Companies named only as a person are shown by category (owner).** Six
+  company names, once the legal form is stripped, are only a Romanian given
+  name, a surname and initials ("Caranica Mihai SRL", "Stuparu Cristina"). "La
+  Mircea Măcelaru", a shop's name, stays. Rejected: showing them as
+  registered.
+- **The sole-trader rule reads every form of the name.** The first run caught
+  only a trailing form. 308 sole traders are now shown by category: the form
+  before the name ("PFA Ionescu Octavian"), after a hyphen ("-I.I"), behind a
+  legal form ("Volosnicu Mihaela PFA SRL", "SC II ..."), and "PF".
+- **The owner's canteen and catering exclusions reach rows filed elsewhere**:
+  13 "bufet de incintă" (in-house buffets) and 1 catering-only unit in file 19,
+  plus 3 labs, 8 kiosk carts and 2 vending machines. **Ice-cream makers (N24)
+  are Food service** (gelaterias), the brief having left the bucket open.
+- **Rail**: the branch rule dropped M5's Valea Ialomiței branch (the terminus
+  519 m from any drawn track). The buffer was narrowed to 100 m, and a new
+  step-1 gate holds every station within 100 m of its own line (furthest 23 m).
+  The numbered interchange pairs (Basarab 1/2 and five more) stay two stations
+  each, as Metrorex counts them.
+- **Europe's macro zoom leaves Bucharest out, as it does Riga**: fitted to it,
+  the zoom dropped and a dozen label pairs collided. Its centre still counts,
+  so Europe's frame sits about a degree further east, and on a phone Dublin's
+  label clips 11 px. `check_macro_labels.py` PROBLEMS 0; label width 69.8 px,
+  measured in the deployed frame with four controls reproduced.
+- **Privacy: no personal information published.** `check_personal_exposure.py
+  bucharest`: no fallback column; 0 emails, phones or c/o. The heuristic's 38%
+  "person-like" is Romanian two-word company names; the measured person-name
+  test finds 0 on the pins after the rules above. No address reaches the map.
+- **Gates**: `brief_check.py bucharest` 1/2 - the metro check passes; the
+  Internet Archive check answered HTTP 429 (rate limit), twice, a limit rather
+  than a finding. `check_provenance.py` names Bucharest OK; the scope,
+  inconsistency, master-list and macro-label checks pass.
+- Files: `pipeline/bucharest/`, `pipeline/taxonomies/romania_dsvsa.py`,
+  `app/pages/64_Bucharest_Heatmap.py`, `app/cities.py`, `app/components.py`,
+  `docs/data_sources/romania.md`, `docs/data_sources.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/bucharest.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
 ### 2026-09-29 - Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session
 
 - **Follow-ups on the measured counts (owner):**

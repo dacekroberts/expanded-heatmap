@@ -69,6 +69,13 @@ REGISTRIES = {
     # and the address is not carried to the map, so the unit check is skipped.
     "stockholm": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Bucharest: DSVSA's registers name the registered UNIT, most often the
+    # operating company. The owner's rule (2026-09-28): the company name
+    # without its legal form, and the CATEGORY ONLY for a sole trader (II,
+    # PFA, IF, before or after the name, and behind a legal form - step 2's
+    # SOLE_TRADER). No address reaches the map; placement is by OSM address.
+    "bucharest": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
     # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
     # trade name (`insegna`) and the rest carry the street address, because
     # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on
