@@ -77,8 +77,17 @@ if __name__ == "__main__":
     for d in (config.DATA_RAW, config.FSA_RAW_DIR, config.OUTPUTS):
         d.mkdir(parents=True, exist_ok=True)
 
-    auths = authorities()
-    config.FSA_AUTHORITIES_JSON.write_text(json.dumps(auths, indent=1), encoding="utf-8")
+    # The authority list is cached with the files: the FSA's API returned HTTP
+    # 500 on 2026-09-28 an hour after serving it, and a cached run must not
+    # depend on an API it does not need.
+    cached = sorted(config.FSA_RAW_DIR.glob("*.xml"))
+    if (config.FSA_AUTHORITIES_JSON.exists() and len(cached) == config.FSA_AUTHORITY_COUNT
+            and not args.force):
+        auths = json.loads(config.FSA_AUTHORITIES_JSON.read_text(encoding="utf-8"))
+        print(f"  authority list cached ({len(auths)})")
+    else:
+        auths = authorities()
+        config.FSA_AUTHORITIES_JSON.write_text(json.dumps(auths, indent=1), encoding="utf-8")
     total = 0
     for a in auths:
         dest = config.FSA_RAW_DIR / f"{a['LocalAuthorityIdCode']}.xml"
@@ -97,6 +106,15 @@ if __name__ == "__main__":
     print(f"  {len(auths)} authority files, {total:,} bytes in {config.FSA_RAW_DIR.relative_to(config.ROOT)}")
 
     fetch_boundary(args.force)
+
+    from pipeline import osm
+    els, host = osm.fetch(config.OSM_ROUTES_QUERY, config.OSM_ROUTES_JSON, force=args.force)
+    rels = [e for e in els if e.get("type") == "relation"]
+    print(f"  {'osm_rail_routes':28} {len(rels)} route relations (via {host})")
+    els, host = osm.fetch(config.OSM_STOPS_QUERY, config.OSM_STOPS_JSON, force=args.force)
+    print(f"  {'osm_rail_stops':28} {len(els)} stop nodes (via {host})")
+    els, host = osm.fetch(config.OSM_ADDITIONS_QUERY, config.OSM_ADDITIONS_JSON, force=args.force)
+    print(f"  {'osm_station_additions':28} {len(els)} station nodes (via {host})")
 
     prov = {"fetched_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "fsa_authorities_url": config.FSA_AUTHORITIES_URL,
