@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**188 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**189 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Atlanta's discard ground changed from currency to terms (owner)](#2026-09-29---atlantas-discard-ground-changed-from-currency-to-terms-owner)
 - [Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill](#2026-09-29---yes-to-trams-only-maps-owner-with-the-macro-map-re-planned-minor-cities-labelled-only-in-their-own-region-dots-coloured-by-network-type-completeness-by-fill)
 - [Tram audit Phases 3-4: rings measured, no thinning and rings sized per city (owner), the decision memo published](#2026-09-29---tram-audit-phases-3-4-rings-measured-no-thinning-and-rings-sized-per-city-owner-the-decision-memo-published)
 - [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
@@ -227,6 +228,20 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Atlanta's discard ground changed from currency to terms (owner)
+
+- **Atlanta stays discarded, now on terms (owner),** as recommended in
+  "Atlanta's 2024 licence layer is not a publication to build on". Its row
+  in `docs/city_master_list.md` is now kind `terms`: the current layer
+  (`BusinessLicenses_2024_Revenue`, 2024-08-15) passes the currency rule and
+  holds all three buckets, but declares no licence, is not in the city's
+  open-data hub, and carries per-business reported revenue that O.C.G.A.
+  § 48-13-15 makes confidential. The 2026-09-28 currency ground rested on
+  the 2019–22 layer alone. Reopens on a licensed City extract (the Atlanta
+  Regional Commission's portal is unread) or on request, the last resort.
+  Whether to tell the City about the exposure was not answered and stays
+  with the owner. `check_discard_evidence.py` passes (91 rows).
 
 ### 2026-09-29 - Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill
 
