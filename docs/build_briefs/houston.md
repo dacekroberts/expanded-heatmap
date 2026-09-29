@@ -173,9 +173,11 @@ and it is Buffalo's question in another form.
 
 ## Build-time calls
 
-1. 🟠 **Owner: build at ~7% in-ring (recommended), or reconsider.**
-2. 🟠 **Owner: rail from OSM (recommended) or METRO's feed under its data
-   agreement; and the line-label wording.**
+1. ✅ **Build as scoped at ~7% in-ring, with the share stated on the page
+   (owner, 2026-09-29).**
+2. ✅ **Rail from OSM (owner, 2026-09-29)**: METRO's feed and its Data Use
+   Agreement stay out of the build. ✅ **Line labels "Red Line", "Green Line",
+   "Purple Line" (owner, 2026-09-29).**
 3. `IS` rows at a `Residential` point: drop (recommended) or keep with the
    name suppressed.
 4. The address file: the City's bulk export (recommended; public domain) or

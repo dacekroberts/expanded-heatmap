@@ -20,11 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**202 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Bergen built on Oslo's modules, the first light-rail city from the tram list; the five light-rail cities handed to this session (owner)](#2026-09-29---bergen-built-on-oslos-modules-the-first-light-rail-city-from-the-tram-list-the-five-light-rail-cities-handed-to-this-session-owner)
+- [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
+- [Light-rail briefs: the last four calls answered, all five ready (owner)](#2026-09-29---light-rail-briefs-the-last-four-calls-answered-all-five-ready-owner)
+- [Light-rail briefs: the owner's calls, and two timetables read (staging)](#2026-09-29---light-rail-briefs-the-owners-calls-and-two-timetables-read-staging)
 - [Light-rail build briefs: Buffalo, Houston and Sacramento (staging)](#2026-09-29---light-rail-build-briefs-buffalo-houston-and-sacramento-staging)
 - [Light-rail build briefs: Bergen and Aarhus (staging)](#2026-09-29---light-rail-build-briefs-bergen-and-aarhus-staging)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
@@ -307,6 +310,80 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
   `docs/build_briefs/bergen.md`, `scripts/check_macro_labels.py`,
   `scripts/check_personal_exposure.py`.
+### 2026-09-29 - Portland re-probed at the owner's request: still no classified register
+
+- **Portland stays in the discards; the re-probe found one partial source and
+  no personal services.** It ran the `reprobe-city` skill's steps:
+  - data.oregon.gov enumerated in full (537 datasets). The one premises-shaped
+    source is OLCC's liquor licences (`srxe-qkm2`, daily): ~2,140 current
+    alcohol-serving venues and 666 off-premises shops in Portland. Venues
+    without alcohol and most retail are absent.
+  - No salon or barber facility file on the state portal, Multnomah County's
+    ArcGIS content or Metro's.
+  - The City's own open-data services (portlandmaps.com/od, 12 services)
+    hold a Buildings layer whose use class is per building (874 Commercial
+    Retail, 239 Commercial Restaurant among 249,102). That is a second shape,
+    but not premises.
+  - Oregon's Active Businesses (`tckn-sxa6`) still has no classification.
+
+  An OLCC-only page would show the drinking city, not its storefronts. The
+  rejected alternative was a Band C row on that basis. Recorded on the
+  discard row, with its evidence.
+
+### 2026-09-29 - Light-rail briefs: the last four calls answered, all five ready (owner)
+
+- **Aarhus is scoped to the 20 new-tramway stations (owner, confirmed)**, the
+  answer the light-rail test gives on Midttrafik's timetables, with halved
+  rings (499 m median).
+- **Houston is built as scoped, at about 7% of storefronts in the rings, and
+  the page states the share (owner, on the recommendation).** Reconsidering
+  its place in Band A was the rejected alternative: the project scopes by
+  municipality, and a stated low share is honest where a narrowed scope
+  would not be. Its lines are labelled "Red Line", "Green Line" and "Purple
+  Line" (owner), the lowest-risk wording METRO's licence read named, on
+  OSM's rail.
+- **Sacramento's "Request permission to use" is read as Esri's label for an
+  empty licence field, not a term (owner)**, since the City's Open Data Terms
+  grant use and promise to mark any rights claimed on the dataset page.
+- **All five light-rail cities are ready to build.** The one build-time
+  check left is whether SacRT's Green Line still runs.
+
+### 2026-09-29 - Light-rail briefs: the owner's calls, and two timetables read (staging)
+
+- **Rejseplanen's feed is not used; Aarhus's frequency now rests on
+  Midttrafik's own timetables, and the owner's test gives 20 stations.** The
+  owner's call: if Rejseplanen's Labs guidelines do not permit the use, drop
+  the item or find another source. The guidelines describe access as by
+  request with the guidelines accepted, and this project made no request.
+  Another source was found: Midttrafik's published PDFs, the L2 normal plan
+  from 9 October 2026 and the L1 year plan from 25 September 2026. The new
+  city tramway runs every 7–8 minutes. On Odderbanen, Odder trains run every
+  30 minutes, and the extra trips starting at Mårslet run through without
+  stopping at Mølleparken, Kongsvang and the stops between, so the
+  intermediate stops see a train every 30 minutes through the morning, and
+  Malling all day. L1 runs every 30 minutes. Both converted railways fail
+  the 15-minute gate, so the scope is the 20 new-tramway stations with halved
+  rings (499 m median). This applies the owner's rule to a measurement, and
+  it is marked for the owner's confirmation. The audit's cached copy of
+  Rejseplanen's feed was deleted from the staging scratchpad.
+  `docs/build_briefs/aarhus.md`.
+- **Buffalo's and Houston's rail are drawn from OSM (owner).** Neither NFTA's
+  trademark clause nor METRO's Data Use Agreement reaches the maps. Houston's
+  line-label wording and its ~7% in-ring flag remain open.
+- **Sacramento's uncapped indemnity is accepted (owner)**, as Hong Kong's
+  was, with the fact stated that the brief's measurement had already pulled
+  the Active rows. Recorded beside Hong Kong's in `docs/data_sources.md`.
+  **Its addresses go through the US Census Bureau geocoder (owner)**, not the
+  City's All Addresses layer, which no terms cover. The Hub's "Request
+  permission to use" label is still unanswered, and the lean is Esri
+  boilerplate.
+- **SacRT's timetable was read in the browser**: the schedule pages are now
+  text tables. Blue runs every 15 minutes 05:03–17:48 and Gold 4 an hour at
+  Sacramento Valley Station, both every 30 minutes in the evening, so the
+  15-minute question does not arise. The GTFS host (`apps.sacrt.com`) still
+  serves an expired certificate and was not fetched. **SacRT lists only Blue
+  and Gold**; OSM still maps a Green Line, which the build must confirm or
+  drop.
 
 ### 2026-09-29 - Light-rail build briefs: Buffalo, Houston and Sacramento (staging)
 

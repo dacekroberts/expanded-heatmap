@@ -303,6 +303,18 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
 
 ## Next review time
 
+**When (owner, 2026-09-29):** after the last light-rail builds are on their
+branches: Bergen, then Houston, Sacramento, Buffalo and Aarhus. That review is
+a deliberate stopping point for builds; the owner's remaining edits before the
+tram cities are mostly prose. If the light-rail builds slip past 2026-10-01,
+run the review with what is ready. Every queued branch stays off master, is
+pushed to its own origin branch as a backup, and sends the cleanup session a
+READY notice (commit, counts it assumes, exposure verdict). The shared counts
+(Built, Band A, notices, page numbers) are reconciled once, in the review
+merge. Suggested order: stockholm-catering, category-continuity, suwon,
+bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
+`full`, one push, one reboot.
+
 - **`stockholm-catering`** (origin, one commit on master; owner-approved):
   the name filter now also drops caterers and mobile units, 5,262 -> 5,218
   placed (85 unplaced). The committed map, macro_facts and ring_shares already
@@ -321,7 +333,22 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   and "Tommys Farstaplan, Food truck" as `pending(...)`. **Whichever of the two
   branches lands second, turn those two into `loc(...)` in the
   sweden_livsmedel column in that merge**, or the check reports them stale
-  and the pre-push hook fails.
+  and the pre-push hook fails. **Correction (category session, 2026-09-29):
+  the edit is `pending(` -> `fixed(`, not `loc(`** (same arguments), on the
+  Westers Catering and Tommys Farstaplan rows (~1549, ~1557); delete the
+  `("sweden_livsmedel", "mobile_unit")` entry from QUEUED_ELSEWHERE (~1572) and
+  reword its no_counter_food entry to the torghandel stall, a name rule now
+  that stockholm-catering has landed. The torghandel stall row stays
+  `pending`. Then `python scripts/check_category_continuity.py` and its
+  `--selftest`: 2 queued plus Boston's pending row, OK.
+- **category-continuity's new processed files** (40 cities, 8 identical to
+  master) are in `data/_review_category-continuity_2026-09-29/new_processed/`,
+  with master's copies in `master_processed/` beside them (585 MB, local
+  only). Swap them in for `check_macro_facts.py --write`, swap master's back,
+  and swap in again at the push. Branch at 41b44cf; exposure verdicts clean
+  for all 32 moved cities (DECISIONS "Category fix batch re-run"). Its
+  per-city `docs/excluded_categories.md` wording still needs the owner's
+  approval.
 - The Stockholm worktree was removed 2026-09-29 (owner); `stockholm-catering`
   is kept, locally and on origin.
 - **`suwon`** (page 69; 33,433 storefronts, 14 stations) and **`bucheon`**

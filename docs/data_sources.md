@@ -414,6 +414,22 @@ accept Lyon's — Lyon carries two further gates (an account this project does
 not create, and a trademark clause that collides with an invariant), so it
 stays deferred on those grounds regardless.
 
+#### Sacramento's indemnity — ACCEPTED 2026-09-29 (candidate city)
+
+The City of Sacramento's **Open Data Terms of Use** (the same text as its Open
+Data Policy, pp. 13–18; read 2026-09-29 by the licence-read agent) govern the
+Business Operation Tax layer. They carry the same shape again: the user "will
+indemnify, defend at his/her sole cost and expense, and hold harmless the
+City … even if the claim may be groundless, false or fraudulent". There is no
+cap, and it is **accepted "by machine-consuming, or downloading and using the
+Data"**. The staging brief's measurement had already pulled the layer's
+24,040 Active rows (never the owner, phone or mailing columns) before the
+terms were read. **The owner accepted the indemnity on 2026-09-29 with that
+fact stated.** As with Hong Kong, the acceptance covers this one source; it
+is not a notice or a build step. The Hub's "Request permission to use" label
+on the same dataset is a separate question, still open
+(`docs/build_briefs/sacramento.md`).
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the
