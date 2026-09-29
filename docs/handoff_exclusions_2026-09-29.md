@@ -261,5 +261,5 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   premises fell 1,535 -> 1,488.
 - **Review time** (owner: once the two Korean cities are in): full
   `deploy-verify`, then the landing steps above. Stockholm first, then
-  Bucharest with its three merge fixes (NOTICE 67, REGION_ZOOM_WITHOUT with
+  Bucharest with its three merge fixes (its notice renumbered after Stockholm's, REGION_ZOOM_WITHOUT with
   all three cities, master-list counts), as the Stockholm session sent them.
