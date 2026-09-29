@@ -293,6 +293,11 @@ correct, not a check to relax.
   mark the rest TODO - then, **before building the city**, do the full
   `SELECT DISTINCT <field>` pull and fill the mapping in properly, with a
   hand-sample of any catch-all categories.
+- **Either way, every keep-or-drop call follows the other cities**:
+  `docs/category_rules.md` holds the owner's cross-city rules (funeral, canteens,
+  the personal-services catch-all, adult venues, massage, petrol stations,
+  gambling, vets...) with their precedents. Recommend the precedent; bring a
+  departure to the owner with the precedent it breaks.
 
 ## Step 2 - Scaffold
 

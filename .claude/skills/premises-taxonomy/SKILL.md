@@ -19,6 +19,15 @@ time.** It is not "what do the values mean". It is:
 
 Everything else in this file follows from asking that first.
 
+**And every keep-or-drop call follows the other cities.** Before recommending
+that any category be kept or left out, look it up in
+`docs/category_rules.md` (the owner's cross-city rules, with precedents) and,
+if it has no row, grep `pipeline/taxonomies/` for the trade in the languages
+already built. Recommend the precedent; a departure is an owner call brought
+with the precedent it breaks and the count. Korea's first SEMAS mapping
+proposed dropping massage on a hunch, which would have made Korea the only
+country without it (2026-09-29).
+
 ---
 
 ## Step 1 — Find out how many levels there are, before reading any values

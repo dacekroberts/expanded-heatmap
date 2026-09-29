@@ -1446,6 +1446,21 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Filtered, categorised and "
      "aggregated by this project. The City of Melbourne does not endorse this map.",
      False),
+    # SEMAS's 상가(상권)정보 (notice 66 on this branch; renumber at merge after Stockholm's
+    # and Bucharest's): data.go.kr 15083033, 이용허락범위 제한 없음. licence-read
+    # 2026-09-29: PERMITTED WITH CONDITIONS - a source credit, no distortion of the
+    # facts (so the categories are stated as this project's), SEMAS's website copyright
+    # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
+    # under the owner's pre-approval of this build's prose. Covers every Korean city on
+    # the register (Incheon; the Gyeonggi satellites add their names).
+    ("Small Enterprise and Market Service (Incheon)",
+     "Storefronts for Incheon are from the Small Enterprise and Market Service's "
+     "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "
+     "[data.go.kr](https://www.data.go.kr/data/15083033/fileData.do)), "
+     "이용허락범위 제한 없음. Changes: filtered to shops, food and drink and personal services, "
+     "grouped into three categories, and mapped by distance to stations; the categories and "
+     "counts are this project's, not SEMAS's. Not produced or endorsed by SEMAS.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

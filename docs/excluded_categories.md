@@ -2237,6 +2237,39 @@ stations inside it.
   Racecourse stations), the City Circle special service and V/Line are not
   drawn.
 
+### Incheon - SEMAS's national storefront register, all three buckets
+
+**One national register, every storefront with a point.** The Small Enterprise
+and Market Service's 상가(상권)정보 (edition 2026-06-30) lists trading
+storefronts across Korea with SEMAS's own three-level classification; the map
+keys on its finest level (소분류), each of the 247 categories given a home
+(`pipeline/taxonomies/korea_sbiz.py`, the owner's calls 2026-09-29, aligned with
+`docs/category_rules.md`).
+
+**Out by category** (Incheon's 136,995 rows):
+- Not storefronts in this project's sense, whole groups: professional and
+  technical offices (12,244), education (9,681), estate agents (5,569), lodging
+  (3,423), health care (3,702), facility services and rentals (5,719),
+  recreation (6,996: gyms, karaoke rooms, PC rooms, lottery sellers), repairs
+  (vehicle, appliance, clothing), funeral services, wedding halls and
+  matchmaking (5,205 in all within 수리·개인).
+- Named: hostess bars (일반 유흥 주점, 1,010) and dance halls (53), staff
+  canteens (612), household fuel dealers (110).
+
+**Kept, and named here because other registers differ**: massage (commercial,
+as in every other country), petrol and LPG stations, pharmacies, pubs.
+
+**Names withheld** - 107 storefronts whose registered name is a bare personal
+name at an address that reads residential (Seoul's rule).
+
+**Placement** - every storefront sits at the register's own point.
+
+**Stations.** Incheon Lines 1 and 2, Line 1, Line 7 and the Suin-Bundang Line:
+79 stations inside Incheon.
+- Left out: 151 stations of those lines in Seoul and Gyeonggi, listed in
+  `outputs/incheon/excluded_stations.csv`; the lines are drawn to their ends.
+- AREX, the suspended airport maglev and the Wolmi Sea Train are not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

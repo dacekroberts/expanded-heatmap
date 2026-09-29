@@ -127,6 +127,9 @@ TAXONOMY_MODULES = {
     "hong_kong_fehd": "pipeline.taxonomies.hong_kong_fehd",
     "riga_source": "pipeline.taxonomies.riga_source",
     "korea_localdata": "pipeline.taxonomies.korea_localdata",
+    # SEMAS's national storefront register (상가(상권)정보), keyed on its 소분류:
+    # Incheon and the Gyeonggi satellites, where LOCALDATA's key is out of reach.
+    "korea_sbiz": "pipeline.taxonomies.korea_sbiz",
     "taiwan_fia": "pipeline.taxonomies.taiwan_fia",
     "ihk_wz2025": "pipeline.taxonomies.ihk_wz2025",
     "fsa_businesstype": "pipeline.taxonomies.fsa_businesstype",
