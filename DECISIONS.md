@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**205 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**206 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
@@ -263,6 +264,25 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rejected: the rule as given is either, and the page is where a reader of
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
+
+### 2026-09-29 - Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)
+
+- **Minneapolis and Pittsburgh move to B (owner)**, each on a city-only
+  scope with its worst line's 42% accepted (Minneapolis's Green, Pittsburgh's
+  Silver). Both keep 19–20 stations inside the city, a normal-sized map
+  against Buffalo's 14 and Glasgow's 15. The rejected alternative was holding
+  them to Toulouse's T1 (52%), the lowest worst line built city-only. That
+  would have been a new floor the precedent never set as a rule.
+- **St. Paul was re-checked first, at the owner's question**, for a
+  Minneapolis–St. Paul scope that would restore the Green line.
+  - Its Socrata portals are gone (404 on three domains).
+  - The city's one licence layer is 306 liquor licences.
+  - No statewide or Ramsey County food list turned up.
+
+  The discard stands, with the re-check on its row. More would take a
+  request to the city's inspections department (outreach, the last resort).
+- **Band C now holds 5**: Singapore, Istanbul, Ankara, Perth and Ho Chi Minh
+  City, each with its "what would change it". B 7 → 9.
 
 ### 2026-09-29 - The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected
 
