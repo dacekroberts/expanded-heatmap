@@ -81,15 +81,18 @@ type, completeness by fill; PLAN, under the completeness tiers).
    DECISIONS "Tram audit Phases 3-4"). Owner calls made: no thinning, ring
    size reduced per city as needed.
 
-**Still open with the owner** (the yes itself is decided):
-- **The ring rule**: French tram cities on France's 0.3 mi rings; others at
-  0.6, down to 0.3 where 0.6 passes about 95%.
+**Decided since**: ring size by the existing spacing rule (outer 0.3 mi where
+the median station gap is about 550 m or less; `docs/ring_rules.md`);
+Atlanta's discard ground is terms; the published-city date check ran
+(DECISIONS "Published cities' data dates checked"; fixes in PLAN).
+
+**Still open with the owner**:
 - **Build order**: France, Czechia, Odense and Latvia, the US three and
-  Florence; T2 after its gap verdicts.
-- **Atlanta**: its discard ground from currency to terms (recommended), and
-  whether to tell the City its 2024 layer exposes reported revenue
-  (DECISIONS "Atlanta's 2024 licence layer").
-- **A date check on the published cities** (offered; Milan and Dublin first).
+  Florence; T2 after its gap verdicts (recommended, not answered).
+- **Atlanta**: whether to tell the City its 2024 layer exposes reported
+  revenue.
+- **Dublin** (vacant premises on the valuation list) and the three
+  undatable sources (NYS food stores, Milan, Surrey): how each page states it.
 
 **Stale in the handoff above, corrected**: the tram rescopes are NOT the only
 precedents for drawing trams (Riga, Amsterdam, Rotterdam, Oslo, Dublin's Luas).

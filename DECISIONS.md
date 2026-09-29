@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows](#2026-09-29---published-cities-data-dates-checked-san-francisco-maps-closed-locations-dublin-keeps-vacant-premises-three-sources-cannot-be-dated-from-their-rows)
+- [Tram cities use the existing spacing rule for ring size (owner); the 95% coverage rule withdrawn](#2026-09-29---tram-cities-use-the-existing-spacing-rule-for-ring-size-owner-the-95-coverage-rule-withdrawn)
 - [Atlanta's discard ground changed from currency to terms (owner)](#2026-09-29---atlantas-discard-ground-changed-from-currency-to-terms-owner)
 - [Review batch live after the owner's reboot: exclusions batch and six cities, 68 built](#2026-09-29---review-batch-live-after-the-owners-reboot-exclusions-batch-and-six-cities-68-built)
 - [Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill](#2026-09-29---yes-to-trams-only-maps-owner-with-the-macro-map-re-planned-minor-cities-labelled-only-in-their-own-region-dots-coloured-by-network-type-completeness-by-fill)
@@ -229,6 +231,67 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows
+
+- **The date check on the 17 published cities that recorded no source date
+  (owner: "run a full check")**, read-only, one agent for the nine US cities
+  and one for Canada and Europe. Each source was read for (1) how closed
+  businesses leave and whether the pipeline applies it, and (2) the newest
+  date in its rows. Scratch in the session scratchpad (`datecheck_us/`,
+  `datecheck_eu/`).
+- **Current on both parts (13 cities)**: San Diego (rows to 2026-09-17),
+  Los Angeles (refreshed 2026-09-15; its start dates run forward, so the
+  date is approximate), Chicago (2026-09-18), New York's DOHMH, DCWP and
+  salons, Miami (2026 tax receipts to 2026-09-21), Boston, Washington D.C.,
+  Vancouver, Calgary, Edmonton, Toronto (rows to 2026-09-19, though its
+  resource stamp reads 2022-12-01), Madrid (census load of 2026-09-21), Oslo
+  (register of 2026-09-22).
+- **San Francisco fails part 1 in the pipeline, not the source.** Step 2
+  (`pipeline/san_francisco/step2_clean_businesses.py`, line 108) drops only
+  `administratively_closed`; **4,677 of the 16,495 mapped rows (28%) carry a
+  `location_end_date`**, closed between 1968 and 2026. The source can drop
+  them; the fix is a filter and a re-render, a correction to a published map.
+- **Dublin fails part 1 as a list of open businesses.** Tailte Éireann's
+  valuation list keeps vacant commercial premises rateable, listed under
+  their last use ("SHOP"); only about 117 rows say VACANT and step 2 drops
+  those. The list itself is revised to 2026-09-15. An owner call: disclose
+  ("includes vacant units") or look for another source.
+- **Three sources cannot be dated from their rows.** New York's NYS Retail
+  Food Stores (`9a8c-vfzj`) has no date column and was last refreshed
+  2025-09-30; Milan's six Comune lists carry no date column, only the
+  publisher's `temporal_coverage` of 2025-06-30 (re-published 2026-08-31);
+  Surrey's annual table has none either. Within five years on the
+  publisher's word; part 2 of the rule cannot be read.
+- **Philadelphia's feed looks frozen at 2026-08-17**: issues ran about 1,900
+  a week to the week of 2026-08-10, then 275, then none, and inactivations
+  stop the same day. Recorded, to re-read in two weeks before calling it.
+- **Smaller leaks**: status-only filters let active-but-expired licences
+  through (Philadelphia 6,406 table-wide, DCWP 65, San Diego 76, D.C. 4,
+  Calgary 105); several columns hold future dates (Los Angeles, Miami,
+  Chicago, Philadelphia), so any "rows to" date needs a cap at the fetch
+  date; several built raws download no date column, so the date has to be
+  recorded at fetch time. Miami's `YEAR`=2026 may roll over in October.
+- Pipeline fixes are build-session work at review time (PLAN). The pages'
+  `data_age` wording waits for them.
+
+### 2026-09-29 - Tram cities use the existing spacing rule for ring size (owner); the 95% coverage rule withdrawn
+
+- **Ring size on the tram list follows the rule the built cities already
+  use (owner): halve the rings (outer 0.3 mi) where the median station gap
+  is about 550 m or less.** It replaces the memo's proposal (French tram
+  cities on 0.3 mi, others on 0.6 unless 0.6 put more than about 95% of
+  storefronts in-ring), which was new and matched nothing published: five
+  cities sit over 95% on the standard rings (Barcelona 99.9%, Osaka 98.2,
+  Tokyo 97.6, Melbourne 96.0, Amsterdam 95.5) and Paris is 98.1% on the
+  small ones. Seven built cities are on 0.3 mi, all on spacing: Paris (399 m),
+  Marseille (341), New York (~0.3 mi), Oslo (465), Rennes (541), Toulouse
+  (525), Lille (501). On the tram list nearly every city falls under 550 m
+  (Brno 337, Florence 322, Odense 440, Daugavpils and Liepāja 281–309, Tucson
+  266, New Orleans 161); Kansas City (~560) is measured at its build. No
+  published city changes. The table of every built city is
+  `docs/ring_rules.md`, generated by `scripts/ring_rules_table.py` (owner:
+  "save these tables").
 
 ### 2026-09-29 - Atlanta's discard ground changed from currency to terms (owner)
 

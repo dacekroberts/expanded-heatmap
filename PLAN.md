@@ -77,6 +77,19 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Two-key legend; re-run `validate_palette.js`; re-measure the east-coast
     cluster if the dot grows a pixel. Review time, `map-chrome`
     deploy-verify, reboot. (DECISIONS "Yes to trams-only maps".)
+  - [ ] **Published-city date fixes (the 2026-09-29 date check; DECISIONS
+    "Published cities' data dates checked")**: (a) **San Francisco**: drop
+    rows with a `location_end_date` in step 2 (4,677 of 16,495 mapped rows
+    are closed locations), re-render, drift-check; (b) **Dublin**: owner call,
+    disclose that the valuation list includes vacant units, or another
+    source; (c) NYS Retail Food Stores (no date column, refreshed
+    2025-09-30), Milan (publisher's date 2025-06-30 only) and Surrey: owner
+    call on how the page states an undatable source; (d) Philadelphia: re-read
+    around 2026-10-13, frozen since 2026-08-17?; (e) apply expiry dates where
+    a status filter alone leaks expired licences (Philadelphia, DCWP, San
+    Diego, D.C., Calgary); (f) record each source's newest row date at fetch
+    time, capped at the fetch date, and write it into `data_age`. Pipeline
+    work for the build sessions; review time.
   - [ ] **Groundwork before the tram batch (staging's list, 2026-09-29; ~68 →
     ~110 cities)**, in the recommended order: (1) a France batch kit - a
     `france-tram-city` skill and a script writing the 21 configs from the
