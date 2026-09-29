@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**141 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**142 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
 - [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
 - [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
@@ -177,6 +178,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Review-time batch live after the owner's reboot, checked on the live URL
+
+- **Live checks, all passed.** Each page was loaded through the app's inner
+  document (`/~/+/<Page>`) with the viewport set before loading.
+  - **Page 92:** 57 rows. Berlin's reads Suburban rail / Chamber of commerce
+    register / Personal services thin / 82%; London's reads Food hygiene
+    register / Food premises only / 74%. The share range reads "about 12% to
+    100%".
+  - **Opening zoom** (the map-view check, recomputing the expected zoom from
+    the map's own inputs), at 1280 px: Berlin 10.5 against 10.5, London 10.25
+    against 10.25, and Rennes (untouched by the batch) 13.5 against 13.5. No
+    run needed a correction.
+  - **London's page** shows all three new notices (VBB, Food Standards
+    Agency, Ordnance Survey) and the footer link. Rennes shows the footer link
+    and no error.
+  - **Tokyo at 375 px:** the document is 375 px wide, and the ward table (410
+    px, 8 rows) scrolls inside a 343 px box. The page says "The Food shops
+    layer" and no longer "The Retail layer".
+- **Housekeeping:** PLAN's page 92, Berlin and London items are ticked. The
+  memory reminder to place the inconsistency list on the site was removed,
+  because it is on the site.
 
 ### 2026-09-28 - Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)
 
