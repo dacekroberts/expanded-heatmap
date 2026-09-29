@@ -346,9 +346,15 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   with master's copies in `master_processed/` beside them (585 MB, local
   only). Swap them in for `check_macro_facts.py --write`, swap master's back,
   and swap in again at the push. Branch at 41b44cf; exposure verdicts clean
-  for all 32 moved cities (DECISIONS "Category fix batch re-run"). Its
-  per-city `docs/excluded_categories.md` wording still needs the owner's
-  approval.
+  for all 32 moved cities (DECISIONS "Category fix batch re-run"). Final at
+  fdaa57a on origin/category-continuity, with its per-city
+  `docs/excluded_categories.md` wording owner-approved.
+- **Refresh the Brazilian "Excluded by what the enumerator wrote" counts** in
+  `docs/excluded_categories.md` from the step-2 logs, AFTER category-continuity
+  merges (its re-run moved all nine Brazilian cities). They were already
+  stale: São Paulo's vehicle-and-repair reads 40,992 against 41,122 in the
+  log, likely the FUNELARIA tie rule moving body shops into repair. Owner
+  approval for the new figures only if the wording changes.
 - The Stockholm worktree was removed 2026-09-29 (owner); `stockholm-catering`
   is kept, locally and on origin.
 - **`suwon`** (page 69; 33,433 storefronts, 14 stations) and **`bucheon`**
