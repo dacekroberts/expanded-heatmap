@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**144 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**145 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
 - [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
@@ -180,6 +181,44 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Funeral services come off every map (owner); audit and plan
+
+- **Owner's call, confirmed in the cleanup session** (first relayed from the
+  Sydney build): funeral homes, crematoria and cemeteries are not
+  storefronts, and no city's map shows them. Shops selling funeral goods
+  stay, because they are storefronts.
+- **Audit (read-only, every taxonomy module, 57 cities).**
+  - **34 map funeral businesses into a bucket by code or licence type,**
+    almost always Personal services:
+    - NAICS 8122: Los Angeles, San Diego, San Francisco, Montréal.
+    - SCIAN 8123: the three Mexican cities.
+    - NAF 96.03Z: the five French cities.
+    - Rev. 2.1's 96.30: Oslo, Copenhagen, Prague, Berlin.
+    - Madrid's pompas fúnebres; the three Taiwanese cities' 殯葬 types;
+      Brazil's "FUNERARIA" keyword (nine cities).
+    - Local licence types: Vancouver, Edmonton, Miami, Washington D.C.,
+      Dublin.
+  - **By accident, with no code to exclude:** Chicago, Calgary and Milan
+    (roughly 10 to 20 pins each, under general licences, found by name).
+  - **Not identifiable:** Amsterdam, Rotterdam and Riga (building-register
+    shop units).
+  - **Already excluded:** Hong Kong.
+  - **Not in the source:** 16 cities.
+  - Cemeteries were kept in some cities and excluded in others (Vancouver,
+    Miami, Dublin and Brazil already drop them).
+- **Decided (owner):**
+  - Exclude by code or licence type in the 34 cities.
+  - Chicago, Calgary and Milan get a DISCLOSURE, not a name filter.
+    Rejected: a new name-matching filter for a handful of pins.
+  - Amsterdam, Rotterdam and Riga get a disclosure, since the data cannot
+    separate them.
+  - Taiwan's funeral-goods retail stays.
+- **When:** cleanup runs it after Buenos Aires, Glasgow and Newcastle land.
+  It means re-running the 34 cities one at a time as announced heavy jobs,
+  then drift checks. The new `docs/excluded_categories.md` wording goes to
+  the owner first. A full `deploy-verify` runs at review time. PLAN has the
+  item.
 
 ### 2026-09-28 - Review-time batch live after the owner's reboot, checked on the live URL
 
