@@ -19,10 +19,15 @@ negative, kept out.
 "(kn)" marks a network size from general knowledge, not from the record; a
 "subway 35" in the record counts route relations in a feed, not stations.
 
-## Discarded (25) - `docs/city_master_list.md`, DISCARDED
+## Discarded (33) - `docs/city_master_list.md`, DISCARDED
 
 | City | Country | Network | Why not covered (the record's words, short) |
 |---|---|---|---|
+| Doha | QA | Doha Metro, 3 lines (kn) | The commerce register is counts only (screened 2026-09-28, owner) |
+| Kolkata, Chennai | IN | ~40-80 each (kn) | Per-licence lookups only, no published list (screened 2026-09-28, owner) |
+| Baku, Panama City, Caracas | AZ, PA, VE | ~14-30 stations (kn) | No premises list on any reachable host (screened 2026-09-28, owner) |
+| Algiers | DZ | 1 metro line + trams (kn) | No premises list at any level (screened 2026-09-28, owner); its "no urban rail" misfiling corrected |
+| Mumbai | IN | Metro 1, 2A, 7, 3; Monorail (kn) | No storefront list on the city's or state's reachable hosts (screened 2026-09-28, owner) |
 | Munich, Frankfurt, Cologne | DE | 96 / 86 / ~230 stops (kn) | No premises register on a full enumeration of each catalogue, geoportal and chamber (screened 2026-09-28, owner) |
 | Manila | PH | LRT-1, LRT-2, MRT-3 | No business list at any level (re-screened 2026-09-28, owner); the old commuter-rail reason is obsolete |
 | Kuala Lumpur | MY | 14 relations | "No register at any level, on three methods" |
@@ -47,27 +52,38 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (11) - "Countries ruled out" and the shortlist
+## Country ruled out (21) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
+| Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each (kn) | **Ruled out 2026-09-28 (owner), high legal barriers**: anti-bot (Shanghai), real-name accounts (Beijing, Shenzhen), terms forbidding redistribution (Shenzhen), no open coordinates, regulated map publishing. Hangzhou's food-licence list is a narrow opening, blocked by a real-name filing duty and placement |
 | Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
-| Newcastle, Glasgow | UK | 60 / 15 stations (kn) | Recorded as "NNDR carries no category"; **wrong** (London's re-screen, 2026-09-28): the VOA list has a description and is ruled out by its terms. The FSA food register is untested for either city |
-| Melbourne, Sydney, Perth | AU | ~220 / 170+ / 80 stations (kn) | Licensing not municipal, **ASSERTED** |
+| Tehran, Minsk | IR, BY | ~150 / ~37 stations (kn) | Left out like Russia, for wartime concerns (owner, 2026-09-28); not screened |
 | Brussels | BE | 69 stations (kn) | Bulk access paid |
 | Kyiv | UA | 52 stations (kn) | Excluded for now: active war |
 | Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
-| Algiers | DZ | 1 metro line + trams (kn) | Filed under "no urban rail at all" - **wrong**; it has a metro |
 
-## In a band, not built (15)
+## In a band, not built (28)
 
 | City | Country | Network | Band and blocker |
 |---|---|---|---|
-| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn); S-Bahn | B - IHK Berlin's per-premises register, shops and food; personal services missing (from the discards 2026-09-28, owner) |
+| Buenos Aires | AR | Subte A–E, H | A - the land-use survey joined to parcels at 99.8%, CC BY 2.5 AR read (2026-09-28, owner) |
+| Sydney (City of Sydney) | AU | Sydney Trains and Metro in the LGA | B - the City's FES establishment layer, found on a re-probe (2026-09-28, owner) |
+| Newcastle | UK | Tyne and Wear Metro, ~60 stations | B - food only on the FSA register (2026-09-28, owner) |
+| Bangkok | TH | MRT, BTS, ARL | D - the BMA's portal refuses this machine (2026-09-28, owner) |
+| Riyadh | SA | Riyadh Metro, 6 lines | D - the national open-data portal times out from here (2026-09-28, owner) |
+| Glasgow | UK | Subway, 15 stations | B - food only on the FSA register (FHIS), 6,632 premises (2026-09-28, owner) |
+| Bengaluru | IN | Namma Metro | D - BBMP's hosts time out (2026-09-28, owner) |
+| Tashkent | UZ | Tashkent Metro (kn) | D - every host refuses this machine or needs a login (2026-09-28, owner) |
+| Hanoi, Ho Chi Minh City | VN | 2 lines / 1 line (kn) | D - timeouts and a CAPTCHA wall (2026-09-28, owner) |
+| Perth | AU | Transperth, ~80 stations | N - property land-use codes only, City of Perth (2026-09-28, owner) |
+| Ankara | TR | Ankaray, M1–M4 | N - Istanbul's shape: the districts publish no licence lists (2026-09-28, owner) |
+| Melbourne (City of Melbourne) | AU | City Loop, Metro Tunnel, CBD trams | B - CLUE covers the City of Melbourne only (2026-09-28, owner) |
+| Delhi | IN | Delhi Metro, ~290 stations (kn) | D - the current register behind a CAPTCHA; every Delhi-government host refuses this machine (screened 2026-09-28, owner) |
+| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn); S-Bahn | B - IHK Berlin's per-premises register; hairdressers and laundries missing (from the discards 2026-09-28, owner) |
 | Istanbul | TR | M1A–M11, 177 stations; T1–T5 | N - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
 | Dubai | AE | Metro Red and Green, 64 stations; tram | D - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
 | London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |
-| Tokyo (8 wards) | JP | 330 stations | A - the Tokyo build session; only Shibuya's list is complete, Chiyoda's ledger requested |
 | Stockholm | SE | T-bana, 92 stations | B - passed, food only |
 | Singapore | SG | MRT 21 relations | N - the food register is a 2016 snapshot |
 | Kaohsiung | TW | ~75 stations (kn) | D - geo-blocked to Taiwan |
@@ -79,18 +95,10 @@ negative, kept out.
 | Yokohama | JP | 43 stations | N - no food list in any era |
 | Warsaw | PL | 2 lines (kn) | D - geo-blocked |
 
-## Never screened (32)
+## Never screened (0) - emptied 2026-09-28
 
 | Cities | Country | Network (kn) | Why not covered |
 |---|---|---|---|
-| Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each | China is in no file: it was absent from the feed catalogue the 87-country screen started from |
-| Delhi, Mumbai, Bengaluru, Kolkata, Chennai | IN | Delhi ~290; others ~40-80 | Only India's national catalogue was read (counts, not premises); the city hosts were never asked |
-| Tehran | IR | ~150 stations | No record |
-| Bangkok | TH | 4 subway + 5 light-rail relations | The national portal answered 403 on every strategy (2026-09-21); never given a city row |
-| Buenos Aires | AR | Subte, 6 lines | Its feed has no `routes.txt`; business data never probed |
-| Riyadh, Doha | SA, QA | 85 / 37 stations | No record |
-| Ankara, Caracas, Tashkent, Minsk, Baku | various | ~27-57 stations | No record |
-| Panama City, Hanoi, Ho Chi Minh City | PA, VN | ~14-30 stations | No record (small networks) |
 
 ## The weakest or oldest reasons among the biggest networks
 
@@ -104,7 +112,11 @@ Recommended first for re-screening (the staging handoff's priority 1):
    opticians only.
 4. ~~**Berlin**, **Munich, Frankfurt, Cologne**~~ - **done 2026-09-28**
    (owner): the three discarded; Berlin to Band B on its chamber's register.
-5. **Delhi and Mumbai** - only the national catalogue was read.
-6. **China's fourteen** - never looked at; the largest untouched block, with
-   access and licensing likely hard.
-7. **Algiers** - misfiled as having no urban rail.
+5. ~~**Delhi and Mumbai**~~ - **done 2026-09-28** (owner): Delhi to Band D
+   (a CAPTCHA and geo-blocks), Mumbai discarded. Tokyo was built the same day
+   and left the band table.
+6. ~~**China's fourteen**~~ - **done 2026-09-28**: ruled out as a country
+   (owner), Hangzhou's opening noted.
+7. ~~**Algiers**~~ - **done 2026-09-28**: misfiling corrected, then
+   discarded (owner). **Buenos Aires** probed the same day (never-screened
+   list): see DECISIONS.

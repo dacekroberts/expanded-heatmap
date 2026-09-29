@@ -1965,6 +1965,46 @@ ward line.
   are not drawn on their own.
 - The Shinkansen does not count.
 
+### London - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises boroughs inspect for food hygiene; no open register of other shops or
+of personal services covers London, so clothes shops, hairdressers and the like
+are missing rather than excluded. Food shops (grocers, off-licences, bakers,
+butchers, newsagents selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (8,053), where home caterers and
+event kitchens sit; mobile caterers (2,595); hospitals, childcare and care homes
+(4,682); schools, colleges and universities (3,501); hotels and guest houses
+(972); manufacturers and packers (1,136); distributors and transporters (669);
+importers and exporters (278); farmers and growers (33).
+
+**Placed at their postcode's centre** - 2,349 food storefronts the register
+gives no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 3,001 food storefronts (5.0%) with neither a location nor a
+full postcode, most in outer boroughs (23% of Redbridge's, 18% of Havering's).
+A business run from a private address is published without a location or a
+full postcode and is never placed.
+
+**Shown under its trade name** - 188 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the city** - 19 whose location lies outside
+Greater London, and 1 whose registered name holds contact details.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 2.5% of that type read as one by name.
+
+**Stations.** The Underground's eleven lines, the DLR, the Elizabeth line and the
+six London Overground lines are drawn, cut at Greater London's boundary.
+- Left out: 32 stations beyond it, on the Metropolitan and Central lines, the
+  Elizabeth line and the Overground.
+- Eight stations missing from OpenStreetMap's route data are added from its
+  station records (North Ealing, South Harrow, Woolwich Arsenal, Hatch End,
+  Watford High Street, Upper Holloway, Wood Street, St James Street).
+- Tramlink, National Rail services and river buses are not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

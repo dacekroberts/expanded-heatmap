@@ -1326,6 +1326,34 @@ _NOTICES = [
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
      False),
+    # London (notice 57; Berlin's branch also uses 57 - renumber whichever lands
+    # second): the FSA's FHRS data under OGL v3 - the OGL statement linked, the
+    # data date, what was modified, no endorsement. The credit avoids "the FHRS
+    # name" (the FSA's imagery terms). Wording approved by the owner 2026-09-28.
+    ("Food Standards Agency (London)",
+     "London's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
+     "licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises without a location placed at their "
+     "postcode's centre, or left out where they have no full postcode, and trade "
+     "names shown where a business is registered under another name. No hygiene rating is "
+     "shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # London's postcode centroids (notice 58): Ordnance Survey's OGL v3 data -
+    # the three statements verbatim from the licence file OS ships with it
+    # (Doc/licence.txt, which OS's own terms name as the authority), the
+    # licence link, no endorsement. The product's registered name is not used
+    # (trademarks are outside the OGL). Wording approved by the owner 2026-09-28.
+    ("Ordnance Survey (London)",
+     "Where the Food Standards Agency lists a London food business without a map point, it is "
+     "placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

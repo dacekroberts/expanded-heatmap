@@ -177,6 +177,15 @@ REGISTRIES = {
     # is skipped.
     "sao_paulo": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # London: the FSA's `BusinessName` is the only name the register publishes
+    # - there is no separate owner column to fall back to - so the fallback
+    # failure cannot occur; what CAN occur is a sole trader trading under their
+    # own name, which the heuristics below measure. Home caterers and mobile
+    # caterers are out of scope by type, and a private-address record (no FSA
+    # point, outward postcode only) is never placed (owner, 2026-09-28). No
+    # address is carried to the map, so the unit check is skipped.
+    "london": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
     # Every other Brazilian city reads CNEFE through the same national reader,
     # so São Paulo's structural answer holds for each; measured per city.
     "belo_horizonte": dict(raw=None, trade=None, owner=None,

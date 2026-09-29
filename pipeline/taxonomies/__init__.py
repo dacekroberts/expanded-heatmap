@@ -126,6 +126,7 @@ TAXONOMY_MODULES = {
     "riga_source": "pipeline.taxonomies.riga_source",
     "korea_localdata": "pipeline.taxonomies.korea_localdata",
     "taiwan_fia": "pipeline.taxonomies.taiwan_fia",
+    "fsa_businesstype": "pipeline.taxonomies.fsa_businesstype",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

@@ -50,6 +50,8 @@ dense-looking city may simply have more complete records.
   and Taipei (the national business tax register, FIA).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
+- **A food hygiene register:** London (the Food Standards Agency's FHRS), every food
+  premises a borough inspects, and nothing else.
 - **Property or building registers:** Dublin (rateable valuation list); Amsterdam
   and Rotterdam for shops (BAG shop-use units).
 - **Permit lists:** Amsterdam's food layer (hospitality permits); Rotterdam's food
@@ -64,11 +66,13 @@ dense-looking city may simply have more complete records.
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston.
+- **No Personal services at all:** Philadelphia, Boston, London.
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
-  big-box stores that sell packaged food), Boston (grocers, package stores, cannabis).
+  big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
+  London (grocers, off-licences, bakers, butchers, newsagents with food and
+  supermarkets, named "Food shops" as in the Japanese cities).
 - **Retail thin:** New York (food stores plus a regulated slice of trades). Toronto:
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
   fireworks), 328 pins inside the rings against 6,461 Food service. Seoul: Retail is
@@ -99,7 +103,8 @@ and districts no metro reaches.
   Kyoto, and Tokyo (JR East's nine services, seven private railways, and the
   Hokuso, Tsukuba Express and Rinkai lines, cut at the line of the 23 wards); an
   owner call of 2026-09-24, recorded in the `japan-city`
-  skill, not the line-by-line test below).
+  skill, not the line-by-line test below), and London (the Elizabeth line and the
+  six London Overground lines, cut at Greater London).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -129,7 +134,8 @@ run on top of a metro network.
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Copenhagen (the Letbane has no stop in
-  scope).
+  scope), London (Tramlink: about one more point of storefronts in the rings;
+  owner, 2026-09-28).
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
   mover), Daegu's Line 3 monorail, Busan's Line 4 (a rubber-tyred light metro, which
@@ -230,7 +236,8 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   `_FOOD_AS_OF`).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
   Amsterdam, Rome, the Brazilian cities, Rotterdam, Hong Kong, Riga, Seoul, Daegu,
-  Busan, Taichung, Taoyuan, Taipei, the six Japanese cities.
+  Busan, Taichung, Taoyuan, Taipei, the six Japanese cities, London (each borough's extract date, 2026-09-09
+  to 2026-09-16).
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -256,7 +263,9 @@ really shopfronts. Several pages say which way their map leans.
   in five withheld its address and is unplaced); Tokyo (fifteen of the 23 wards have
   no data, and the eight lists run from 9% to 101% of each ward's official
   restaurant count, each ward's share on the page; notifying food shops absent
-  except where a list includes notifications).
+  except where a list includes notifications); London (about one food storefront in
+  twenty has no location and no full postcode and is not placed, a quarter in
+  Redbridge and a fifth in Havering).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
@@ -390,6 +399,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Fukuoka | Fukuoka City Subway (Kūkō, Hakozaki, Nanakuma), JR Kagoshima Main / Chikuhi / Fukuhoku Yutaka / Kashii, Nishitetsu Tenjin Ōmuta / Kaizuka (9 lines) | The Shinkansen; the JR Hakata-Minami line (only Hakata inside the city) | MLIT N02 railway data, collapsed on its station-group code; English names from OSM, 20 rewritten in one style (gate 3 exact on the three subway lines) | City (JR and Nishitetsu cut at the city line) | 22 / 0 |
 | Kyoto | Kyoto Municipal Subway (Karasuma, Tōzai), JR Kyoto / Biwako / Sagano / Nara / Kosei, Keihan Main / Ōtō / Uji / Keishin, Hankyu Kyoto / Arashiyama, Kintetsu Kyoto, Randen Arashiyama Main / Kitano, Eiden Eizan Main / Kurama (18 lines) | The Shinkansen; the Sagano scenic line and the Eizan and Kurama funiculars (sightseeing) | MLIT N02 railway data, collapsed on its station-group code, 東海道線 split at Kyoto; English names from OSM, 41 rewritten in one style (gate 3 exact on five lines) | City (JR and the private lines cut at the city line) | 25 / 0 |
 | Tokyo | JR East (Yamanote, Keihin-Tohoku, Chuo Rapid, Chuo-Sobu, Yokosuka / Sobu Rapid, Keiyo, Joban, Saikyo, Utsunomiya / Takasaki), Tokyo Metro (Ginza, Marunouchi, Hibiya, Tozai, Chiyoda, Yurakucho, Hanzomon, Namboku, Fukutoshin), Toei (Asakusa, Mita, Shinjuku, Oedo, Sakura Tram, Nippori-Toneri Liner), Tokyu (7), Keio (2), Odakyu, Seibu (4), Tobu (4), Keisei (3), Keikyu (2), Hokuso, Tsukuba Express, Rinkai, Yurikamome, Tokyo Monorail (52 lines, labelled on the map by line code) | The Shinkansen; the Narita Sky Access and the Saitama Railway (one station each in the wards, served by other lines); the Tokaido and Shonan-Shinjuku lines not drawn on their own | MLIT N02 railway data, collapsed on its station-group code; JR East drawn as nine services over its legal lines; English names from OSM in the operators' signage style (gate 3 exact on fifteen lines) | The 23 wards (lines cut at the ward line); 293 stations in the 15 wards without data drawn hollow | 55 / 0 |
+| **United Kingdom** | | | | | |
+| London | Underground (11 lines), DLR, Elizabeth line and the six London Overground lines (19 lines, short names on the map, full names in the legend) | Tramlink, National Rail, river buses | OpenStreetMap route relations (TfL publishes no GTFS; its API's line strings are straight lines between stations); 8 stations OSM's relations omit added from its station nodes; gate 3 exact on 14 counts | Greater London (lines cut at the boundary) | 32 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -467,6 +478,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Fukuoka | Permit register | City food-permit list (pre-2021-06 permits) + MHLW's online filings + barber, beauty and laundry registers | Permit type (業種 / 営業の種類), read with the form of business (業態) | 5,185 / 14,867 / 4,670 | Retail is food only (no general licence in Japan) and partial: notification-only food shops appear only where they published in MHLW's opt-in list; about one restaurant in five withheld its address (disclosed) |
 | Kyoto | Permit register, REBUILT | The 2021 food list + every monthly list since, in term on 2026-07-31; barber, beauty and laundry lists + their months | Permit type (業種) | 3,736 / 19,318 / 4,926 | An upper bound: closures are not published; Retail is food only, and packaged-only sale (a notification since 2021) absent |
 | Tokyo | Permit lists, per ward (8 of 23) | Eight wards' own food lists + MHLW's filings for four; the barber, beauty and laundry registers of four | Permit type (業種) | 11,954 / 41,972 / 8,557 | Business data for 8 of 23 wards only (15 hollow); the lists run 9% to 101% of the official count; Retail = food only |
+| **United Kingdom** | | | | | |
+| London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,399 / 29,255 / — | No Personal services; Retail = food shops only ("Food shops") |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -536,6 +549,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Fukuoka | Address join to MLIT's address blocks, MHLW's own point where the block join misses (98.1% block, 1.8% MHLW's point, 0.1% town-chōme centre; 88 unplaced) | 11,768 MHLW filings published without an address (4,203 restaurants) unplaced; closed premises may remain listed in the city's list | Food trucks, stalls and on-train sales; school, hospital and staff kitchens; hotel restaurants; manufacturing except 菓子 / そうざい; vending; yatai (屋台) counted; a trade name that is the operator's own name shown by permit type, per premises (city lists only: MHLW's rows cannot be tested) |
 | Kyoto | Address join to MLIT's address blocks (93.2% block, 5.5% town centre; 435 unplaced), the street-corner prefix read past | Twin-named towns left unplaced; closures invisible (an upper bound, disclosed) | Food trucks and permits under a year; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type, per premises |
 | Tokyo | Address join to MLIT's address blocks (99.7% block, 158 at the town centre, 35 at MHLW's own point; 33 unplaced) | Fifteen wards without data (hollow stations); partial lists, each ward's share on the page; MHLW's filings by consent (8,973 without an address) | Food trucks, stalls and temporary permits; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type, where a list names its operators |
+| **United Kingdom** | | | |
+| London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,001 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address never placed; the name after "trading as" shown |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -616,6 +631,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Fukuoka | City food list and barber / beauty registers as of 2026-08-31, laundry 2026-03-31; MHLW's filings downloaded 2026-09-27 (fetched 2026-09-24 to 09-27) | B (in the prose) | 0.6 mi | Yes | 82% | Trade name in Japanese, or the permit type (5) |
 | Kyoto | Food permits rebuilt as of 2026-07-31, registers 2026-03-31 plus new premises to 2026-07 (fetched 2026-09-24) | B (in the prose) | 0.6 mi | Yes | 86% | Trade name in Japanese, or the permit type (8) |
 | Tokyo | Ward lists dated 2022-11-30 to 2026-09-02, registers undated or 2026-03-31 (fetched 2026-09-24) | B (in the prose) | 0.6 mi | Yes | 98% | Trade name in Japanese, or the permit type (2) |
+| **United Kingdom** | | | | | | |
+| London | Extracts of 2026-09-09 to 2026-09-16, per borough (fetched 2026-09-28) | B | 0.6 mi | Yes | 74% | Registered name; the trade name where registered "trading as" |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

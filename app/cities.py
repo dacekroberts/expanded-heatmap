@@ -793,7 +793,15 @@ CITIES = [
         # 1200. Scored alternatives: due west met Rennes (59.7 x 2.6 px),
         # below covered Paris's marker; up-and-west scores PROBLEMS 0 across
         # 7 regions x 3 widths.
-        "label_offset": ("end", -10, -14),
+        #
+        # TURNED DOWN AND EAST 2026-09-28, when London arrived north-west of
+        # it: the up-and-west pill covered London's marker at every width
+        # whatever London's own label did. Scored as a pair with London's 12
+        # candidates (scratch score_pair.py): lower-right here with London's
+        # label left of its dot is the only pair at PROBLEMS 0 in every region
+        # at 375, 768 and 1200; due east covered Prague's marker, below met
+        # Rennes and covered Paris.
+        "label_offset": ("start", 12, 18),
     },
     {
         "name": "Rennes",
@@ -1488,6 +1496,31 @@ CITIES = [
         # and this sits nearer its dot. check_macro_labels.py: clear at 375,
         # 768 and 1200.
         "label_offset": ("start", 12, -14),
+    },
+    {
+        "name": "London",
+        "lat": 51.5074,
+        "lon": -0.1278,
+        "page": "pages/57_London_Heatmap.py",
+        # Owner-approved 2026-09-28. rail_extra, record_kind and categories are
+        # the "Why the maps differ" page's fields (worktree-cleanup, landing at
+        # review time); "Food hygiene register" is a new allowed value there.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (91%) and postcode centres (4%)",
+        "data_age": "Extracts of 2026-09-09 to 2026-09-16",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Underground, DLR, Elizabeth line and 6 Overground lines",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Left of the dot, and SCORED: the label width was measured at 50.9 px
+        # in the app's own document (2026-09-28, five entries reproduced).
+        # Above met Amsterdam and Rotterdam; below and right met Rennes or
+        # Lille. With Lille's label turned down and east, left of the dot is
+        # PROBLEMS 0 in every region at 375, 768 and 1200.
+        "label_offset": ("end", -10, 5),
     },
 ]
 

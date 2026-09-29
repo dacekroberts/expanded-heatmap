@@ -33,6 +33,7 @@ Mapped so far:
 - **South Korea:** Seoul, Daegu, Busan
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo
+- **United Kingdom:** London
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.
@@ -130,6 +131,14 @@ So the MIT grant covers this project's own work only. Every source, its
 endpoint, its retrieval date and its terms are in `docs/data_sources.md`, and
 what was filtered out of each city is in `docs/excluded_categories.md`. Take
 the code freely; for the data, go to the source.
+
+**Credits carried by the committed data** (where a source asks for its credit
+wherever derived data is republished, and `outputs/` republishes it):
+`outputs/london/` places some food premises at their postcode's centre from
+Ordnance Survey's postcode data, under the Open Government Licence v3.0 -
+Contains Ordnance Survey data © Crown copyright and database right 2026.
+Contains Royal Mail data © Royal Mail copyright and database right 2026.
+Contains National Statistics data © Crown copyright and database right 2026.
 
 **Removal requests are honoured, not argued** — from a data publisher, a
 business owner, or anyone raising a privacy concern about a specific listing.
