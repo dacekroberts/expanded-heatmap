@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**121 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**122 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London](#2026-09-28---londons-page-notice-57-macro-entry-and-disclosures-written-owner-approved-lilles-macro-label-turned-for-london)
 - [London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule](#2026-09-28---londons-rail-built-from-osm-gate-3-exact-its-map-rendered-and-checked-the-tfl-licence-read-abandoned-as-unnecessary-a-trading-as-display-rule)
 - [London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)](#2026-09-28---londons-rail-underground-dlr-elizabeth-line-and-the-six-overground-lines-tramlink-left-out-owner)
 - [London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)](#2026-09-28---londons-licence-calls-the-existing-personal-information-rule-and-the-credit-food-standards-agency-uk-food-hygiene-rating-data-owner)
@@ -157,6 +158,37 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London
+
+- **Approved by the owner and written**: the page text
+  (`app/pages/57_London_Heatmap.py`, a snapshot caption from
+  `outputs/london/provenance.json` - the 33 boroughs' own extract dates,
+  2026-09-09 to 2026-09-16, now recorded by `fetch_sources.py`); **notice 57**
+  (the FSA: "Food Standards Agency, UK food hygiene rating data", the OGL v3
+  statement linked, the extract dates, what was modified, no rating, no
+  endorsement) in `app/components.py` and `docs/data_sources.md` - Berlin's
+  branch also uses 57, so whichever lands second renumbers (PLAN); the
+  `app/cities.py` entry (coverage narrowed, placement "Register coordinates
+  (91%)", data age "Extracts of 2026-09-09 to 2026-09-16", blurb "Underground,
+  DLR, Elizabeth line and 6 Overground lines", rail_extra "Suburban rail",
+  record_kind "Food hygiene register" - a new value, sent to Cleanup -
+  categories "Food licences only"); London's section in
+  `docs/excluded_categories.md`; its rows in tables A-D and themes 1-4, 9 and
+  10 of `docs/map_inconsistencies.md` (in-ring pins: food shops 11,984, food
+  service 28,010); `docs/data_sources/united-kingdom.md` and its index row;
+  the master list (built 56, Band B 6, candidates 75 on this branch), README,
+  project context and PLAN.
+- **London's macro label sits left of its dot, and Lille's is turned down and
+  east** (`("end", -10, 5)` and `("start", 12, 18)`): London measured 50.9 px in
+  the app's document (five entries reproduced). Above, London met Amsterdam and
+  Rotterdam; and in all eight London placements Lille's up-and-west pill
+  covered London's marker. Scored as a pair (12 combinations), this is the only
+  one at PROBLEMS 0 in every region at 375, 768 and 1200. Berlin's label, on its
+  own branch, was scored against Lille's old placement: re-score after both land
+  (PLAN).
+- One quick render of the London page in the lean app: the approved text, the
+  caption with both dates, notice 57 displayed.
 
 ### 2026-09-28 - London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule
 

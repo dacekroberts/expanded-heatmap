@@ -1,5 +1,10 @@
 """London step 1: the Underground, DLR, Elizabeth line and Overground inside
-Greater London - line geometry from OpenStreetMap, stations TODO.
+Greater London - line geometry and stations from OpenStreetMap's route
+relations (TfL publishes no GTFS, and its API draws straight lines).
+
+STATIONS. Route-relation stop members, names normalised and collapsed, split
+where a name's stops are far apart, eight stations OSM's relations omit added
+from their station nodes; gate 3 against the published per-line counts.
 
     python pipeline/london/step1_stations.py
 

@@ -116,9 +116,23 @@ if __name__ == "__main__":
     els, host = osm.fetch(config.OSM_ADDITIONS_QUERY, config.OSM_ADDITIONS_JSON, force=args.force)
     print(f"  {'osm_station_additions':28} {len(els)} station nodes (via {host})")
 
+    # Each file's own <ExtractDate> - the date the page states (the FSA's
+    # condition: show when the information was updated). They differ by
+    # borough (2026-09-09 to 2026-09-16 at the first fetch).
+    extracts = {}
+    for a in auths:
+        f = config.FSA_RAW_DIR / f"{a['LocalAuthorityIdCode']}.xml"
+        with open(f, encoding="utf-8") as fh:
+            head = fh.read(400)
+        i = head.find("<ExtractDate>")
+        extracts[a["Name"]] = head[i + 13:i + 23] if i >= 0 else ""
+    dates = sorted(d for d in extracts.values() if d)
     prov = {"fetched_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "fsa_authorities_url": config.FSA_AUTHORITIES_URL,
-            "fsa_published": {a["Name"]: a["LastPublishedDate"][:10] for a in auths}}
+            "fsa_published": {a["Name"]: a["LastPublishedDate"][:10] for a in auths},
+            "fsa_extract_dates": extracts,
+            "fsa_extract_range": [dates[0], dates[-1]] if dates else []}
+    print(f"  FSA extract dates {dates[0]} to {dates[-1]}")
     config.PROVENANCE_JSON.write_text(json.dumps(prov, ensure_ascii=False, indent=2),
                                       encoding="utf-8")
     print(f"provenance -> {config.PROVENANCE_JSON.relative_to(config.ROOT)}")

@@ -33,6 +33,7 @@ Mapped so far:
 - **South Korea:** Seoul, Daegu, Busan
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo
+- **United Kingdom:** London
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.

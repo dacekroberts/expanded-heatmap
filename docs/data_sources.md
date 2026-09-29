@@ -98,6 +98,7 @@ together, so a row in either counts and a row in neither still fails.
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
+| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London |
 
 ## Business registries
 
@@ -1815,6 +1816,34 @@ into `render_site_notices()`, its businesses part BUILT from
   own name in the raw lists, 2 pins showing their permit type. The lists
   without an individual-operator column cannot be tested (owner accepted
   2026-09-28, disclosed on the page). The verdict is in `DECISIONS.md`.
+
+**57. Food Standards Agency (London) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once London lands). ⚠️ Berlin's branch also
+numbers its VBB notice 57: whichever lands second renumbers to 58.
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the London rows in
+  [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md)). The FSA's
+  terms put its FHRS data under the **Open Government Licence v3**: the OGL
+  statement ("Contains public sector information licensed under the Open
+  Government Licence v3.0.") with a link to the licence; the date the
+  information was updated (each borough's extract date, 2026-09-09 to
+  2026-09-16 at the first fetch, on the page and in the notice). No rating,
+  score, FSA imagery or logo is shown, so the imagery conditions do not reach
+  the map. **Credit wording (owner, 2026-09-28)**: "Food Standards Agency, UK
+  food hygiene rating data" - "the FHRS name" may not be used outside its
+  imagery without permission.
+- **Personal data (owner, 2026-09-28)**: the FSA's privacy notice treats a
+  business's name and address as personal data and the OGL does not license
+  it; the project's existing rule applies - home and mobile caterers are out by
+  type, a private-address record (no point, outward postcode only) is never
+  placed, a trading-as name shows the name on the shop.
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py london`, run 2026-09-28: no fallback
+  name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+- **London's rail is OpenStreetMap data** (ODbL, notice 1): the basemap credit
+  covers its stations and track too.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

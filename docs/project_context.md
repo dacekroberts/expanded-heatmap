@@ -936,6 +936,18 @@ Cities built and running end to end (pipeline, map, app page):
   use over MLIT's legal lines, and the map labels its lines by the operators'
   line codes, the full names in the legend (owner).
 
+- **London** - the Underground, DLR, Elizabeth line and the six London
+  Overground lines, cut at Greater London (Tramlink left out, owner); the United
+  Kingdom's first city. **Food only**: the Food Standards Agency's hygiene
+  register, every premises a borough inspects, placed at the FSA's own point or
+  not at all - a private address has none, which keeps home caterers off the
+  map, and food retail is labelled "Food shops" as in Japan. **Rail is
+  OpenStreetMap's**: TfL publishes no GTFS and its API draws straight lines
+  between stations. Each line keeps one direction per branch, eight stations
+  missing from OSM's route data are added from its station records (retired
+  automatically once OSM carries them), and the Elizabeth line and most of the
+  Overground are selected by name because OSM tags them `network=National Rail`.
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises

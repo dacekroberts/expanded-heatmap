@@ -378,6 +378,23 @@ evidence section.
   the Hong Kong / Riga `thin()` port - is OFF the queue; its items stay below,
   measured and unqueued, until the owner puts any back. (Before: Sapporo,
   Fukuoka, Kyoto, then Tokyo - all built.)
+- [x] **London built 2026-09-28** (`worktree-london`, held for review time;
+  Berlin is on `worktree-berlin`): 54,241 food storefronts, 387 stations, 19
+  lines; texts owner-approved (DECISIONS).
+  - [ ] At review time, landing BOTH branches: **notice 57 is taken on each**
+    (Berlin's VBB, London's FSA) - renumber whichever lands second to 58, in
+    `docs/data_sources.md` and `app/components.py`'s comments, and re-run
+    `check_provenance.py`. **Re-score the macro labels after both land**
+    (`check_macro_labels.py`): London's branch turned Lille's label down and
+    east, and Berlin's label was scored against Lille's old one. Cleanup's "Why
+    the maps differ" batch must carry "Food hygiene register" and "Personal
+    services thin" in its allowed values; `check_ring_shares.py --write` after
+    the merge. Then `publish-city`, deploy-verify `scope: city-added`, reboot.
+  - [ ] Open, owner's call when it comes: placing the 5,350 storefronts (9.0%)
+    the FSA gives no point, by postcode centroid (a separate source and licence
+    read) - never a private-address record.
+  - [ ] Refetch before the FSA extracts age: `fetch_sources.py --force`; if OSM
+    starts carrying one of the eight added stations, step 1 stops and says so.
 - [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
   28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
   - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's

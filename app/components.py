@@ -1291,6 +1291,19 @@ _NOTICES = [
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
      False),
+    # London (notice 57; Berlin's branch also uses 57 - renumber whichever lands
+    # second): the FSA's FHRS data under OGL v3 - the OGL statement linked, the
+    # data date, what was modified, no endorsement. The credit avoids "the FHRS
+    # name" (the FSA's imagery terms). Wording approved by the owner 2026-09-28.
+    ("Food Standards Agency (London)",
+     "London's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
+     "licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises without a location left out, and trade "
+     "names shown where a business is registered under another name. No hygiene rating is "
+     "shown. The Food Standards Agency does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
