@@ -275,6 +275,24 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   200-202; until the app reboots, the cached `components.py` still links to
   `pages/90_...`, which no longer exists, so every info-page link would break
   on the live site. If the owner cannot reboot, hold the push.
+- **Later the same day:** Incheon and the Gyeonggi satellites (Goyang,
+  Seongnam, Yongin) merged too (SEMAS notice 68, the Seoul Capital Area
+  region, 68 built / B 1 / 77 candidates); `app/macro_facts.json` written with
+  the new processed files swapped in and master's restored; PLAN ticked; the
+  full `deploy-verify` PASSED on c50615b (68 maps at five sizes, the app, the
+  renumbered info pages, notices; three pre-existing label overlaps in
+  Madrid, Oslo and Osaka, none from this batch). `check_macro_facts.py` fails
+  on this branch until the swap is redone - expected.
+- **The push, when the owner can reboot:**
+  1. `python <scratchpad>/swap_processed.py in` (it refuses unless the shared
+     data is still master's).
+  2. `git fetch`, merge origin/master into `review-2026-09-29` if behind
+     (`merge_append_only.py DECISIONS.md` for a conflict there).
+  3. `check_all.py` (the pre-push hook runs it, `check_macro_facts.py`
+     included) and `check_deploy_imports.py`.
+  4. `git push origin review-2026-09-29:master`, gated on 0 behind.
+  5. The owner reboots; check the live site, including an unchanged city.
+  The shared data stays swapped in after the push: it is then master's.
 - **For the owner, not decided:** Stockholm's caterers and mobile units could
   be excluded by name, as its institutional kitchens are; today's rule keeps
   them because the register's type cannot split them.
