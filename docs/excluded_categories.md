@@ -2237,6 +2237,49 @@ stations inside it.
   Racecourse stations), the City Circle special service and V/Line are not
   drawn.
 
+### Stockholm - the food inspection register, food only, frozen in October 2025
+
+**Only food is on this map.** Stockholms stad's food inspection register lists
+the premises its food control inspects; Sweden has no general business licence
+and the city publishes no other commercial register, so clothes shops,
+hairdressers and the like are missing rather than excluded. Food shops (from
+kiosks to supermarkets) are a category of their own.
+
+**Frozen.** The register holds inspections to 2025-10-21 and has not been
+updated since. Each premises (8,146) is shown as it stood at its latest
+inspection.
+
+**Excluded by type** - 779 premises with no restaurant or retail type:
+wholesale (300), the catch-all "Övrigt" (185, by name head offices, delivery
+firms and distributors), food production (105), transport and storage (71),
+water works (4), and 114 carrying two or more of these.
+
+**Excluded by name** (owner, 2026-09-29) - 718 restaurant-typed premises that
+are institutional kitchens: preschools (386), schools and gymnasia (206), care
+homes, home care and day centres (78), staff canteens (11) and others such as
+churches, prisons and associations (37). 12 retail-typed pharmacies.
+
+**Not measured: office canteens.** About 20 staff restaurants registered under a
+company name ("KPMG AB") remain; company names are too mixed to filter.
+
+**Untyped premises** - the register began recording types in 2024, so 1,391
+premises last inspected earlier carry none. **225 are shown** (owner,
+2026-09-28): those whose name identifies a restaurant or food shop and that were
+inspected in 2022 or 2023, marked "classified from its name". Left out: 26 such
+names inspected before 2022 (likely closed), about 120 pharmacies, about 550
+institutions by name, and about 470 whose name says nothing.
+
+**Not placed** - 209 storefronts (3.8%) the register gives no position.
+
+**Stations.** The Tunnelbana's three lines (seven routes), cut at the kommun
+boundary: 82 stations inside it.
+- Left out: 18 stations in Solna, Sundbyberg, Danderyd, Huddinge and Botkyrka,
+  listed with their kommun in `outputs/stockholm/excluded_stations.csv`.
+- Pendeltåg, Roslagsbanan, Saltsjöbanan and the trams are not drawn (owner,
+  2026-09-28); with pendeltåg and the local railways, the brief measured 92.3%
+  of storefronts in a ring against 88.7% without.
+- The Yellow line (Gul linje), under construction, is not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

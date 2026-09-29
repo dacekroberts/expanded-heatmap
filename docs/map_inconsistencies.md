@@ -55,7 +55,9 @@ dense-looking city may simply have more complete records.
 - **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
   Agency's FHRS), every food premises a borough or council inspects, and nothing
   else; Glasgow the same on Scotland's scheme (Food Standards Scotland's FHIS),
-  every premises the council inspects.
+  every premises the council inspects. Stockholm's is the city's own food
+  inspection register (Livsmedelstillsyn), one row per inspection reduced to one
+  per premises, and frozen since October 2025.
 - **A chamber of commerce's membership:** Berlin (IHK Berlin's Gewerbedaten), each
   member's premises as a point. Membership, not licensing, decides who is in it:
   the crafts belong to a different chamber and are absent.
@@ -73,14 +75,14 @@ dense-looking city may simply have more complete records.
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional).
+- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Stockholm.
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
   London, Glasgow and Newcastle (Regional) (grocers, off-licences, bakers,
   butchers, newsagents with food and supermarkets, named "Food shops" as in the
-  Japanese cities).
+  Japanese cities); Stockholm the same, kiosks to supermarkets.
 - **Retail thin:** New York (food stores plus a regulated slice of trades). Toronto:
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
   fireworks), 328 pins inside the rings against 6,461 Food service. Seoul: Retail is
@@ -256,12 +258,13 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   rebuilt to 2026-07-31), Tokyo (each ward's list has its own date: Chuo's and
   Koto's hold only permits from June 2021 to late 2022, Shinjuku's is a 1 January
   2023 snapshot, the other five run to 2026; `pipeline/tokyo/config.py`
-  `_FOOD_AS_OF`).
+  `_FOOD_AS_OF`), Stockholm (the register froze at its 2025-10-21 inspections;
+  premises last inspected in 2022-23 are shown as they stood then).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
   Amsterdam, Rome, the Brazilian cities, Rotterdam, Hong Kong, Riga, Seoul, Daegu,
   Busan, Taichung, Taoyuan, Taipei, the six Japanese cities, Berlin (the register's monthly
   date, 2026-09-01), London (each borough's extract date, 2026-09-09
-  to 2026-09-16).
+  to 2026-09-16), Stockholm (the register's last edit, 2025-10-22).
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -395,6 +398,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | Métro a, b | — | STAR GTFS | Commune | 4 / 0 |
 | **Norway** | | | | | |
 | Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
+| **Sweden** | | | | | |
+| Stockholm | Tunnelbana: Gröna, Röda and Blå linjen (routes T10–T19), one label per line | Pendeltåg, Roslagsbanan, Saltsjöbanan, trams; the unopened Yellow line | OpenStreetMap route relations (SL's GTFS needs a key); gate 3 exact on 100 | Kommune | 18 / 0 |
 | **Denmark** | | | | | |
 | Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
 | **Czechia** | | | | | |
@@ -483,6 +488,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | same | same | same | 1,105 / 906 / 354 | — |
 | **Norway** | | | | | |
 | Oslo | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 4,197 / 2,082 / 1,828 | — |
+| **Sweden** | | | | | |
+| Stockholm | Food hygiene register | Stockholms stad's food inspection register (Livsmedelstillsyn), one record per premises | Its own activity types (VerksamhetsTyp), plus a name test | 943 / 3,759 / — | No Personal services; Retail = food shops only ("Food shops"); frozen since 2025-10-21 |
 | **Denmark** | | | | | |
 | Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,760 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
@@ -571,6 +578,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | same (99.97%) | Masking 17.5% | Same codes |
 | **Norway** | | | |
 | Oslo | Address join to Matrikkelen (96.8%) | Web shops cannot be excluded | 8 no-premises codes, 96.990, bankrupt parents; sole-trader names withheld |
+| **Sweden** | | | |
+| Stockholm | Register coordinates (96.2%); 209 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care) and pharmacies by name; wholesale, production and "Övrigt" by type |
 | **Denmark** | | | |
 | Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
 | **Czechia** | | | |
@@ -654,6 +663,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Rennes | same (2026-09-23) | T | 0.3 mi | Yes | 68% | same (about two in five show an address, per the page) |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
+| **Sweden** | | | | | | |
+| Stockholm | Inspections to 2025-10-21, layer edited 2025-10-22 (fetched 2026-09-29) | B | 0.6 mi | Yes | 89% | Premises name |
 | **Denmark** | | | | | | |
 | Copenhagen | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 94% | Name; address for personal owners |
 | **Czechia** | | | | | | |
