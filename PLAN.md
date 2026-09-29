@@ -77,6 +77,18 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Two-key legend; re-run `validate_palette.js`; re-measure the east-coast
     cluster if the dot grows a pixel. Review time, `map-chrome`
     deploy-verify, reboot. (DECISIONS "Yes to trams-only maps".)
+  - [ ] **Groundwork before the tram batch (staging's list, 2026-09-29; ~68 →
+    ~110 cities)**, in the recommended order: (1) a France batch kit - a
+    `france-tram-city` skill and a script writing the 21 configs from the
+    screen's station files and fetching all 21 feeds at once (Czechia's six
+    likewise, smaller); (2) the licence reads up front (Bordeaux LO 1.0, the
+    four ODbL feeds, Plzeň and Olomouc GTFS, Tucson, RideKC, Florence), each
+    notice in `docs/data_sources.md` before a page exists; (3) page text by
+    template, one French paragraph approved once; (4) the macro-map items
+    below before France lands; (5) re-measure Streamlit Community Cloud at
+    ~110 (memory, clone time, the Overview list; `docs/scaling_thresholds.md`
+    was written at 9 cities); (6) scoped `city-added` deploy-verifies per
+    landing group. Ring sizes: `docs/ring_rules.md` (generated).
   - [ ] **Macro-map label tiers (owner 2026-09-29)**: minor cities get no
     name pill outside their own region, only the hover tooltip; anchors keep
     theirs. Europe and East Asia become composites of their sub-regions.
