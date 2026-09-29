@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**133 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**138 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -37,9 +37,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)](#2026-09-28---londons-licence-calls-the-existing-personal-information-rule-and-the-credit-food-standards-agency-uk-food-hygiene-rating-data-owner)
 - [London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)](#2026-09-28---london-started-on-its-own-branch-the-fsa-files-downloaded-placement-measured-ring-coverage-by-rail-tier-the-fsa-licence-read-owner-calls-pending)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
+- [Berlin's page, notice 57, macro entry and disclosures written (owner-approved); the exposure verdict; a "closed for works" station category](#2026-09-28---berlins-page-notice-57-macro-entry-and-disclosures-written-owner-approved-the-exposure-verdict-a-closed-for-works-station-category)
+- [Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver](#2026-09-28---berlins-map-rendered-shapes-chosen-by-rule-a-served-share-rule-for-diversions-colours-by-the-shared-search-a-legend-that-fits-the-solver)
+- [Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green](#2026-09-28---berlins-rail-scope-u-bahn-and-s-bahn-no-trams-the-u6s-tegel-branch-drawn-as-the-timetable-runs-owner-steps-1-and-2-green)
+- [Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)](#2026-09-28---berlins-calls-47122-excluded-personal-services-drawn-as-a-partial-bucket-trams-on-ring-numbers-both-downloads-approved-owner)
 - [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
 - [Cleanup follow-ups: two wordings approved, the japan worktree retired, the Japan list proved](#2026-09-28---cleanup-follow-ups-two-wordings-approved-the-japan-worktree-retired-the-japan-list-proved)
 - ["Chamber of commerce register" added to the summary table's record kinds (owner)](#2026-09-28---chamber-of-commerce-register-added-to-the-summary-tables-record-kinds-owner)
+- [Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner](#2026-09-28---berlins-brief-written-both-licences-read-the-register-is-nace-rev-21-personal-services-partial-four-calls-for-the-owner)
 - ["Why the maps differ" built (page 92), waiting for review time](#2026-09-28---why-the-maps-differ-built-page-92-waiting-for-review-time)
 - [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
 - [China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)](#2026-09-28---china-ruled-out-as-a-country-after-a-feasibility-gate-hangzhous-opening-noted-legal-barriers-high-owner)
@@ -555,6 +560,141 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   now say page reads only. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+### 2026-09-28 - Berlin's page, notice 57, macro entry and disclosures written (owner-approved); the exposure verdict; a "closed for works" station category
+
+- **Approved by the owner and written**: the page text
+  (`app/pages/56_Berlin_Heatmap.py`, with a snapshot caption read from
+  `outputs/berlin/provenance.json` - the register's own date, IHK's last
+  commit of the file, 2026-09-01, and VBB's calendar window 2026-09-24 to
+  2026-12-12 - and the courtesy credit "Business data: IHK Berlin (CC0)");
+  the legend row "Personal services (partial) - WZ 96"; **notice 57** (VBB, CC
+  BY 4.0: credit, licence link, what was modified, the disclaimer, no
+  endorsement) in `app/components.py` and `docs/data_sources.md`; the
+  `app/cities.py` entry (coverage narrowed, placement "Register coordinates",
+  data age "As of 2026-09-01", blurb "U-Bahn U1–U9 and 16 S-Bahn lines",
+  rail_extra "Suburban rail", record_kind "Chamber of commerce register",
+  categories "Personal services thin" - the last a new value, sent to Cleanup
+  for `check_inconsistency_list.py`'s allowed list); Berlin's section in
+  `docs/excluded_categories.md`; its rows in tables A-D and themes 1-4 and 8-11
+  of `docs/map_inconsistencies.md`; `docs/data_sources/germany.md` and its
+  index row.
+- **Table B's note reads "No hairdressers or laundries: crafts are not IHK
+  members"**, which `check_macro_facts.py` reads as structural: a gap by the
+  register's construction, not a thin layer, so "narrowed" (owner) holds under
+  the rule rather than by loosening it. Macro label width measured at 38.8 px
+  in the app's document (Prague, Tokyo, Marseille, Oslo and Copenhagen
+  reproduced); `check_macro_labels.py` PROBLEMS 0 with the default placement.
+- **Exposure verdict (`check_personal_exposure.py berlin`)**: 49,426 pins, 208
+  distinct titles, every one an IHK branch label; 0 person-like names, 0
+  contact details. The 199 "surname-first" hits are labels with commas ("Day
+  Spas, Saunas, Dampfbäder"). No name column exists to fall back to, and the
+  employee band, age and business type never reach `outputs/`. **Publishable.**
+- **`app/station_scope.py` learns "closed for works"** as its own category, and
+  page 91 shows a "Closed for works" column when any city has one: Berlin's five
+  U6 stations were counted as "Other", which `check_scope_disclosure.py`
+  refuses. `counts_for()` returns a fourth count, last, so the first three keep
+  their positions; page 91's sentence gains ", and N closed for works".
+
+### 2026-09-28 - Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver
+
+- **Each line's GTFS shape is chosen by rule in step 1, not pinned by id**:
+  VBB's shape_ids are small integers reissued every release. The rule is a
+  greedy cover of the line's in-Land stations (a shape passes a station within
+  150 m), ties to the most-used shape; step 1 writes
+  `data/berlin/processed/lines.geojson` and step 3 reads it
+  (`load_geojson_line_shapes`, Tokyo's contract). 24 lines need one shape;
+  S85 needs two (its Pankow branch). The plain most-used shape was rejected
+  (S3's is 16 km of 45), and so was the longest (S41's has 8 trips; its ring
+  456).
+- **A station belongs to a line only where >= 10% of the line's trips call**
+  (`config.LINE_STOP_MIN_SHARE`): the feed window carries construction
+  diversions (S3/S5 via Grunewald, ring trains via Charlottenburg, S8 via
+  Gesundbrunnen). 47 station-line pairs fall under it and are printed; no
+  station is served only by them, and both gate-3 counts are unchanged (U-Bahn
+  170, S-Bahn 168).
+- **Line colours from `scripts/line_colour_search.py berlin`** with VBB's GTFS
+  `route_color` as the target hues: VBB colours by family (S2/S25/S26 one
+  green), which the project's CIE76 floors refuse. Closest pair within 500 m
+  18.0 (S46, S47), anywhere 10.3 (U1, S85), every line >= 45.0 from every pin.
+  The pins' blue, pink and green rule out VBB's blues and greens, so U3/S2
+  read olive and S3/U8 grey-blue (Osaka's and Tokyo's trade).
+- **The Personal services legend row is shortened to "(partial)"** (a DRAFT
+  for the owner): "(no hairdressers or laundries)" made the open legend 379
+  px wide against the label solver's 274 px model, and the first render put
+  6 labels under it at the 1000 px frame (U5, S3, S5, S7, S46, S47) - the
+  Tokyo failure, by legend width rather than line names. At 256 px: 0 label
+  problems at 1000, 343, 375 and 1280 px; zoom as expected (10.5 / 9.5); the
+  dark toggle works; the OSM credit is visible at 1280x800 and 375x900; no
+  console errors. `check_inline_arrays` and `check_map_markup` pass (56 maps).
+- **Rendered**: 49,426 of 60,313 storefronts inside a ring (82.0%), 275
+  stations, 25 lines, `outputs/berlin/heatmap.html` 7.2 MB.
+
+### 2026-09-28 - Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green
+
+- **Trams are left out (owner)**, on the ring numbers from the cached register
+  and VBB's GTFS (966 m rings, trams unthinned, so an upper bound): U-Bahn only
+  170 stations, 22.1% of the Land, 65.0% of storefronts; **U + S 275 stations,
+  42.1%, 82.0%** (retail 79.4%, food 87.9%, personal 82.0%); U + S + trams 793
+  stations, 54.2%, 88.9%. Precedent is a full metro beside trams (Paris,
+  Barcelona, Milan, Toronto), not trams as the core network (Amsterdam,
+  Rotterdam, Oslo, Riga). The scope disclosure names the trams.
+- **The U6's Tegel branch is drawn as the timetable runs (owner)**: gate 3
+  found 170 U-Bahn stations in the feed against BVG's 175, and the five
+  missing are Scharnweberstr., Otisstraße, Holzhauser Str., Borsigwerke and
+  Alt-Tegel - closed for works since November 2022, replacement buses until
+  about August 2027 (BVG, "U6-Nord Streckensanierung"). The alternative, the
+  permanent network from OSM, was rejected: it would draw a service that does
+  not run. `config.CLOSED_FOR_WORKS` lists them; step 1 records them as
+  excluded and **stops if the feed serves any again**, so the reopening is a
+  re-run rather than a silent change.
+- **Step 1 (`pipeline/berlin/step1_stations.py`)**: VBB's GTFS (calendar
+  2026-09-24 to 2026-12-12, no `feed_info.txt`); lines matched on route type,
+  agency and short name, never `route_id` (the S-Bahn's 16 lines carry 45
+  route_ids, and each line's replacement buses share its short name under type
+  700). 746 platforms -> 311 stations (median 780 m); gate 3 U-Bahn 170 = 175 -
+  5 closed, S-Bahn 168 = 168 (BVG "BVG in Zahlen" 31.12.2024; S-Bahn Berlin "at
+  a glance"). **275 inside the Land**, 36 in Brandenburg and 5 closed ->
+  `outputs/berlin/excluded_stations.csv`; in-Land median spacing 702 m. Two
+  pairs under 200 m are differently named interchanges (Rathaus Spandau U7 /
+  Spandau S, 159 m; Charlottenburg S / Wilmersdorfer Str. U7, 216 m), kept
+  apart as the operators name them.
+- **Step 2 (`pipeline/berlin/step2_clean_businesses.py`)**: the CSV has
+  368,841 rows (the WFS 367,575 the same day; the CSV is the newer monthly
+  cut), no duplicate ids, `city` "Berlin" on every row. 82,718 storefront rows
+  after the WZ filter (structural exclusions 479, 5612, 562, 564, 964, 9691) ->
+  drop `nace_id` 969* 10,210 and `ihk_branch_id` 47122 12,194 (EXACT match: a
+  prefix match also caught department stores, `471221`, which stay) -> 60,314
+  -> 1 outside the Land polygon -> **60,313 storefronts: retail 38,844, food
+  17,618, personal services 3,851**. Measured, never written out: 57.9% report
+  0 employees (food 45.3%, retail 61.6%, personal services 77.7%).
+- **The taxonomy is `ihk_wz2025`**, named for the source kind rather than the
+  country: WZ 2025 is national, but the missing crafts are a property of any
+  IHK register, and the legend has to say so. Its Personal services legend
+  text is a DRAFT for the owner. A pin's title is IHK's branch label (São
+  Paulo's precedent for a register with no names).
+
+### 2026-09-28 - Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)
+
+- **Decided (owner), all as the brief recommended**:
+  - **IHK's `47122` is Berlin's retail catch-all verdict and is excluded**
+    (12,141 rows, 24% of retail), departing from the Rev. 2.1 precedent of
+    keeping 47.12 (Oslo, Copenhagen, Prague, France) on Berlin's own numbers:
+    91% zero-employee, and a 30 m OSM-shop match (63%) at office level
+    (62-77%) rather than the rest of retail's (81%). `47121` and its siblings
+    stay.
+  - **Personal services is drawn as a partial bucket**, its legend and
+    disclosure saying hairdressers and laundries are not in it (they are
+    Handwerkskammer members). This supersedes the Band B row's "personal
+    services missing" (2026-09-28, "Berlin from the discards to Band B").
+  - **Trams are decided on the ring-coverage numbers**, measured once the
+    register is cached.
+  - **Both downloads approved**: IHK's CSV (126,348,283 bytes, GitHub LFS)
+    and VBB's GTFS (78,379,003 bytes, `www.vbb.de/gtfs`).
+  - **Berlin's `record_kind` is "Chamber of commerce register"**, a new
+    value (Cleanup added it to `check_inconsistency_list.py` on
+    `worktree-cleanup`, `62e6288`).
+- `9699` is excluded class-wide, as in Oslo and Copenhagen (the brief's
+  proposal; prostitution and escort go with it).
 
 ### 2026-09-28 - Algiers: the "no urban rail" misfiling corrected, then discarded (owner)
 
@@ -616,6 +756,53 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   Berlin's map on the public "Why the maps differ" table. No city uses the
   value yet.
 
+### 2026-09-28 - Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner
+
+- **Wrote `docs/build_briefs/berlin.md`; `brief_check.py berlin` holds 11/11
+  live.** Germany's `add-country` profile is a section of the brief, not a
+  `germany_step0_endpoints.md`: Berlin is the country's only viable city
+  (Munich, Frankfurt, Cologne and Hamburg discarded 2026-09-24 and 2026-09-28),
+  so a country file would serve no second city. Every number came from WFS
+  `RESULTTYPE=hits` counts, spread samples and Overpass reads; nothing large was
+  downloaded. Controls: a nonsense code returns 0, an unknown field errors, each
+  code level's children sum to their parent.
+- **Found `nace_id` to be NACE Rev. 2.1 / WZ 2025 classes at 4 digits, not WZ
+  2008 subclasses**: `5610` has 0 rows and `5611` (56.11 Restaurants, a Rev. 2.1
+  class) 14,962. The finer code is IHK's own `ihk_branch_id` (5-6 digits). So
+  Oslo's, Copenhagen's and Prague's Rev. 2.1 consequences hold: car retail sits
+  in 47, and online shops cannot be excluded by code (no branch label names mail
+  order or online retail). The taxonomy becomes a national
+  `germany_wz2025.py` shaped on `czech_nace2025.py`. Staging corrected its
+  master-list row the same day on this finding.
+- **Found personal services partial, not missing**: beauty 9622 1,792 and
+  spa/sauna/massage 9623 1,595 are IHK members and match OSM shops closely;
+  only hairdressers 9621 (180) and laundries 9610 (215) are missing
+  (Handwerkskammer members). The catch-all 9699 (10,170) is mostly
+  non-premises (trade-fair hosts 1,275, hospitality services 1,630, residual
+  4,419) and holds prostitution 16 and escort 148; excluding it as a class
+  follows Oslo and Copenhagen.
+- **Measured the retail catch-all `47122` (12,141, 24% of retail)**: 91%
+  zero-employee against 57-69% for the rest of retail, evenly spread over the
+  12 Bezirke, and within 30 m of an OSM shop 63% of the time in four station
+  boxes, against 81% for the rest of retail and 62-77% for office controls
+  (divisions 62, 68, 70, 73). Precedent keeps the Rev. 2.1 retail catch-all; the
+  brief recommends excluding it in Berlin on these numbers, as the owner's call.
+- **Licence reads (`licence-read`, one source each)**: IHK's Gewerbedaten is
+  PERMITTED with nothing to display or do (CSV and CKAN CC0 1.0, WFS
+  dl-de/zero-2.0; CC0 releases no trademark, so no IHK logo). VBB's GTFS is
+  PERMITTED WITH CONDITIONS under CC BY 4.0, per VBB's own dataset page (CKAN's
+  `cc-by` is unversioned): the credit "VBB Verkehrsverbund
+  Berlin-Brandenburg GmbH", the licence and source linked, a statement that the
+  data was modified, a reference to VBB's disclaimer, and no implied
+  endorsement. VBB's Linienfarben CSV is under the same grant. Neither source
+  has a `data_sources` row yet; those come with the build.
+- **Rail read from OSM**: U1-U9, the S-Bahn's 16 lines and BVG's 22 tram lines,
+  all with refs. The S-Bahn is drawn on Copenhagen's and Dublin's
+  spacing-and-frequency precedent, cut at the Land border (the register stops
+  there). Trams wait on a ring-coverage measurement.
+- **Open for the owner (brief, "Calls for the owner")**: `47122`; a partial
+  Personal services bucket; trams; and the two downloads (the register CSV,
+  126,348,283 bytes, and VBB's GTFS, 78,379,003 bytes).
 ### 2026-09-28 - "Why the maps differ" built (page 92), waiting for review time
 
 - **Built on `worktree-cleanup` with the owner's approved text** (the eleven

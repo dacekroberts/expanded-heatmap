@@ -108,41 +108,47 @@ def station_table():
     outside = sum(r["counts"][0] for r in rows if r["counts"])
     thinned = sum(r["counts"][1] for r in rows if r["counts"])
     other = sum(r["counts"][2] for r in rows if r["counts"])
+    closed = sum(r["counts"][3] for r in rows if r["counts"])
 
     # A MARKDOWN TABLE, NOT st.dataframe. The grid widget renders collapsed
     # here - 52 px wide with no canvas at all, measured 2026-09-23 in the lean
     # venv - and even working it would be the only interactive element on a
     # page that is otherwise a document: no sorting worth doing on 22 rows, and
     # its contents would not appear in the page text.
-    header = ["City", "Network mapped", "Outside the city", "Stops thinned"]
+    # Each optional column is picked by its index in counts_for()'s tuple, so
+    # "Closed for works" can appear without "Other" (Berlin, 2026-09-28).
+    columns = [("Outside the city", 0), ("Stops thinned", 1)]
     if other:
-        header.append("Other")
+        columns.append(("Other", 2))
+    if closed:
+        columns.append(("Closed for works", 3))
+    header = ["City", "Network mapped"] + [c for c, _ in columns]
     lines = ["| " + " | ".join(header) + " |",
              "|" + "|".join("---" if i < 2 else "--:"
                             for i, _ in enumerate(header)) + "|"]
     for row in rows:
         cells = [row["name"], row["network"]]
         if row["counts"] is None:
-            cells += ["—"] * (len(header) - 2)
+            cells += ["—"] * len(columns)
         else:
-            cells += [f"{n:,}" for n in row["counts"][:len(header) - 2]]
+            cells += [f"{row['counts'][i]:,}" for _, i in columns]
         lines.append("| " + " | ".join(cells) + " |")
-    return "\n".join(lines), outside, thinned, other
+    return "\n".join(lines), outside, thinned, other, closed
 
 
 if DOC.exists():
-    table, outside, thinned, other = station_table()
+    table, outside, thinned, other, closed = station_table()
     text = DOC.read_text(encoding="utf-8")
     head, marker, tail = text.partition(BUSINESS_HEADING)
     st.markdown(head)
 
     st.markdown(
         f"""
-**{outside + thinned + other:,} stations are left out across these maps** -
+**{outside + thinned + other + closed:,} stations are left out across these maps** -
 {outside:,} for standing outside the city whose register the map is built from,
-and {thinned:,} thinned out of street-running stretches where the stops are
-closer together than the rings. Every one of them is named in its city's
-`excluded_stations.csv`.
+{thinned:,} thinned out of street-running stretches where the stops are
+closer together than the rings, and {closed:,} closed for works. Every one of
+them is named in its city's `excluded_stations.csv`.
 """
     )
     st.markdown(table)

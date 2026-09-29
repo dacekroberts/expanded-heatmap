@@ -173,6 +173,11 @@ TEXT_WIDTH = {
     # Tokyo measured 2026-09-28 the same way, with Kobe 34.2, Osaka 40.6 and
     # Kyoto 40.2 reproduced exactly in the same run.
     "Tokyo": 40.5,
+    # Berlin measured 2026-09-28 in the local lean app's own document with
+    # Space Grotesk loaded (document.fonts.check true); five entries reproduced
+    # exactly in the same run - Prague 47.3, Tokyo 40.5, Marseille 60.3, Oslo
+    # 29.0, Copenhagen 85.5.
+    "Berlin": 38.8,
     # London measured 2026-09-28 in the local lean app's own document with
     # Space Grotesk loaded (document.fonts.check true); five entries reproduced
     # exactly in the same run - Prague 47.3, Tokyo 40.5, Marseille 60.3, Oslo

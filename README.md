@@ -33,6 +33,7 @@ Mapped so far:
 - **South Korea:** Seoul, Daegu, Busan
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo
+- **Germany:** Berlin
 - **United Kingdom:** London
 <!-- CITIES:END -->
 

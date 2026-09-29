@@ -1326,8 +1326,20 @@ _NOTICES = [
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
      False),
-    # London (notice 57; Berlin's branch also uses 57 - renumber whichever lands
-    # second): the FSA's FHRS data under OGL v3 - the OGL statement linked, the
+    # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
+    # the requested credit, the licence link, what was modified, the
+    # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
+    # notice (its courtesy credit is on the Berlin page). Wording approved by
+    # the owner 2026-09-28.
+    ("VBB Verkehrsverbund Berlin-Brandenburg (Berlin)",
+     "Station locations and line geometry for Berlin are from VBB Verkehrsverbund "
+     "Berlin-Brandenburg GmbH's timetable data (GTFS), used under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
+     "U-Bahn and S-Bahn stations were selected and those outside the Land of Berlin removed, "
+     "one timetable shape was chosen per line, and the lines are drawn in this project's "
+     "colours. VBB provides the data without warranty and does not endorse this map.",
+     False),
+    # London (notice 58): the FSA's FHRS data under OGL v3 - the OGL statement linked, the
     # data date, what was modified, no endorsement. The credit avoids "the FHRS
     # name" (the FSA's imagery terms). Wording approved by the owner 2026-09-28.
     ("Food Standards Agency (London)",
@@ -1340,7 +1352,7 @@ _NOTICES = [
      "names shown where a business is registered under another name. No hygiene rating is "
      "shown. The Food Standards Agency does not endorse this map.",
      False),
-    # London's postcode centroids (notice 58): Ordnance Survey's OGL v3 data -
+    # London's postcode centroids (notice 59): Ordnance Survey's OGL v3 data -
     # the three statements verbatim from the licence file OS ships with it
     # (Doc/licence.txt, which OS's own terms name as the authority), the
     # licence link, no endorsement. The product's registered name is not used

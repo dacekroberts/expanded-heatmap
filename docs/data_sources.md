@@ -98,6 +98,7 @@ together, so a row in either counts and a row in neither still fails.
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
+| Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London |
 
 ## Business registries
@@ -1817,9 +1818,33 @@ into `render_site_notices()`, its businesses part BUILT from
   without an individual-operator column cannot be tested (owner accepted
   2026-09-28, disclosed on the page). The verdict is in `DECISIONS.md`.
 
-**57. Food Standards Agency (London) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once London lands). ⚠️ Berlin's branch also
-numbers its VBB notice 57: whichever lands second renumbers to 58.
+**57. VBB Verkehrsverbund Berlin-Brandenburg (Berlin) — required, and DISPLAYED**
+(written into `render_site_notices()`; displayed once Berlin lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Berlin rows in
+  [`data_sources/germany.md`](data_sources/germany.md)). VBB's GTFS is CC BY
+  4.0 per VBB's own dataset page (`unternehmen.vbb.de/digitale-services/
+  datensaetze/`; Berlin's CKAN says an unversioned `cc-by`). The credit VBB
+  requests is "VBB Verkehrsverbund Berlin-Brandenburg GmbH" (CKAN's
+  `attribution_text`); CC BY 4.0 adds the licence link, a statement of
+  modification and a reference to the disclaimer VBB supplies ("kann Fehler
+  enthalten und/oder unvollständig sein").
+- **MUST NOT**: imply the map is official VBB information or endorsed by VBB
+  (§2(a)(6)); use VBB's, BVG's or S-Bahn Berlin's logos or line signets
+  (trademarks, not licensed). VBB's website terms (private use only) govern its
+  web pages, not the datasets, and nothing from those pages is reproduced.
+- **IHK Berlin's register needs no notice**: CC0 1.0 on the CSV channel used
+  (dl-de/zero-2.0 on the WFS), neither with any condition. The page carries a
+  courtesy credit, "Business data: IHK Berlin (CC0)" (owner, 2026-09-28), and
+  no IHK logo (CC0 §4(a) releases no trademark).
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py berlin`, run 2026-09-28: the
+  register has no name column of any kind, so 0 pins can show a person's name;
+  every pin's title is one of 208 IHK branch labels. The verdict is in
+  `DECISIONS.md`.
+
+**58. Food Standards Agency (London) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once London lands).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the London rows in
   [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md)). The FSA's
@@ -1845,7 +1870,7 @@ numbers its VBB notice 57: whichever lands second renumbers to 58.
 - **London's rail is OpenStreetMap data** (ODbL, notice 1): the basemap credit
   covers its stations and track too.
 
-**58. Ordnance Survey (London) — required, and DISPLAYED** (written into
+**59. Ordnance Survey (London) — required, and DISPLAYED** (written into
 `render_site_notices()`; displayed once London lands; Berlin's branch shifts
 this to 59 if it lands first).
 

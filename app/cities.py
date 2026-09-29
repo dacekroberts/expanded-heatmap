@@ -1498,6 +1498,31 @@ CITIES = [
         "label_offset": ("start", 12, -14),
     },
     {
+        "name": "Berlin",
+        "lat": 52.52,
+        "lon": 13.405,
+        "page": "pages/56_Berlin_Heatmap.py",
+        # Owner-approved 2026-09-28. rail_extra, record_kind and categories are
+        # the "Why the maps differ" page's fields (worktree-cleanup, landing at
+        # review time); "Chamber of commerce register" and "Personal services
+        # thin" are new allowed values there.
+        "coverage": "narrowed",
+        "placement": "Register coordinates",
+        "data_age": "As of 2026-09-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Chamber of commerce register",
+        "categories": "Personal services thin",
+        "blurb": "U-Bahn U1–U9 and 16 S-Bahn lines",
+        "region": "Europe",
+        "country": "Germany",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured at 38.8 px in the app's own document (2026-09-28, five
+        # entries reproduced), and check_macro_labels.py passes every region
+        # at 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
         "name": "London",
         "lat": 51.5074,
         "lon": -0.1278,

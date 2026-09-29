@@ -177,6 +177,15 @@ REGISTRIES = {
     # is skipped.
     "sao_paulo": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Berlin: IHK Berlin's Gewerbedaten carries NO name and NO street column of
+    # any kind (fetch_sources.py refuses a header with one), so a pin's title
+    # is IHK's own branch label ("Nagelstudio", "Kiosk") and the fallback
+    # failure cannot occur. The residual risk is a point at a sole trader's
+    # home: step 2 reads the employee band, business age and business type to
+    # measure and never writes them out (config.MEASURE_ONLY_COLUMNS). No
+    # address column, so the unit check is skipped.
+    "berlin": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
     # London: the FSA's `BusinessName` is the only name the register publishes
     # - there is no separate owner column to fall back to - so the fallback
     # failure cannot occur; what CAN occur is a sole trader trading under their

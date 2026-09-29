@@ -273,5 +273,15 @@
   "in_ring": 62483,
   "all": 63989,
   "map_blob": "764eff60a943a6a1922ec39215f6c93b7b4b3d7c"
+ },
+ "berlin": {
+  "in_ring": 49426,
+  "all": 60313,
+  "map_blob": "bd6ff223b5043d031f18f002a0ed8b5a15afcbc4"
+ },
+ "london": {
+  "in_ring": 41654,
+  "all": 56589,
+  "map_blob": "a83e37422c2b8dffaa772fd8f96dc71912fd2ff4"
  }
 }
