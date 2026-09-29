@@ -20,6 +20,18 @@ tenth Brazilian city makes "All nine" fail rather than silently including it.
 It checks presence, not content: whether a row is TRUE is the builder's job and
 the reason each table cites its sources. A row for a name not in cities.py is
 also reported (a renamed or removed city).
+
+THE PUBLISHED SUMMARY (owner, 2026-09-28). Tables A-D stay internal; the site's
+"Why the maps differ" page (app/pages/92_Why_the_Maps_Differ.py) shows one row
+per city built from three fields of its app/cities.py entry. So every city must
+also carry `rail_extra`, `record_kind` and `categories`, each one of the values
+in FIELDS below - the page's whole vocabulary, so a new kind of record is a
+deliberate addition here, not a spelling that slips onto the site. They are
+read from the city's rows in tables A (drawn) and B (source kind, pins).
+`categories` must also agree with the macro map's `coverage` tier
+(check_macro_facts.py decides that one from table B): "All three" is a "full"
+city, and a missing, merged or food-only layer is a "narrowed" one. "Retail
+thin" can be either, as New York (full) and Toronto (narrowed) are.
 """
 import argparse
 import re
@@ -37,6 +49,46 @@ TABLES = ("A", "B", "C", "D")
 NUMBER_WORDS = {w: i for i, w in enumerate(
     "zero one two three four five six seven eight nine ten eleven twelve thirteen "
     "fourteen fifteen sixteen seventeen eighteen nineteen twenty".split())}
+
+FIELDS = {
+    "rail_extra": {"Trams", "Suburban rail", "Both", "—"},
+    "record_kind": {"Licence register", "Permit registers", "Street survey or census",
+                    "National register", "Tax register", "Property register",
+                    "Food licences", "Property register and permits",
+                    "Property register and licences",
+                    # Berlin: IHK Berlin's Gewerbedaten, the chamber's membership
+                    # list as premises points (owner, 2026-09-28).
+                    "Chamber of commerce register",
+                    # London: the FSA's food hygiene rating (inspection) register
+                    # (owner, 2026-09-28).
+                    "Food hygiene register"},
+    # "Food premises only" was "Food licences only" until London, whose register
+    # is inspections, not licences; renamed for Hong Kong too (owner, 2026-09-28).
+    # "Personal services thin": Berlin, whose chamber register has no crafts
+    # (owner, 2026-09-28).
+    "categories": {"All three", "Two", "Merged", "Retail thin",
+                   "Personal services thin", "Food premises only"},
+}
+# The coverage tier each `categories` value needs; absent means either.
+TIER_OF = {"All three": "full", "Two": "narrowed", "Merged": "narrowed",
+           "Food premises only": "narrowed", "Personal services thin": "narrowed"}
+
+
+def field_problems(cities):
+    problems = []
+    for c in cities:
+        for field, allowed in FIELDS.items():
+            value = c.get(field)
+            if value is None:
+                problems.append(f"{c['name']}: no {field!r} in app/cities.py")
+            elif value not in allowed:
+                problems.append(f"{c['name']}: {field} {value!r} is not one of "
+                                f"{sorted(allowed)}")
+        tier = TIER_OF.get(c.get("categories"))
+        if tier and c.get("coverage") != tier:
+            problems.append(f"{c['name']}: categories {c['categories']!r} needs coverage "
+                            f"{tier!r}, not {c.get('coverage')!r}")
+    return problems
 
 
 def first_cell(line):
@@ -108,15 +160,18 @@ def main():
     for tab in TABLES:
         if tab not in seen_tables:
             problems.append(f"table {tab}: section '### {tab}.' not found")
+    problems += field_problems(CITIES)
     if problems:
         print(f"PROBLEMS {len(problems)}")
         for p in problems:
             print("  " + p)
         print("\nAdd the city's rows to docs/map_inconsistencies.md - one per table, "
-              "under its country - with the facts from its page, config and outputs.")
+              "under its country - with the facts from its page, config and outputs, "
+              "and its rail_extra, record_kind and categories to app/cities.py.")
         return 1
     print(f"OK - all {len(names)} cities have a row in each of tables "
-          f"{', '.join(TABLES)} of docs/map_inconsistencies.md")
+          f"{', '.join(TABLES)} of docs/map_inconsistencies.md, and the "
+          f"summary fields in app/cities.py")
     return 0
 
 

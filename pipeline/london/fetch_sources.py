@@ -1,0 +1,150 @@
+"""Download London's raw inputs into data/london/raw/ (gitignored).
+
+DELIBERATELY NOT NAMED step*.py - `drift_check.py` globs step*.py, and a
+download in a step would make every drift check a question about the current
+upstream rather than the committed code.
+
+    python pipeline/london/fetch_sources.py [--force]
+
+The FSA's register: its authority list is read first and filtered to the
+London region, then one bulk XML per authority. Each file must parse as XML
+and carry its own authority's code, because a wrong URL can answer 200 with
+an HTML page.
+"""
+import argparse
+import json
+import sys
+import urllib.request
+import xml.etree.ElementTree as ET
+from datetime import datetime, timezone
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from pipeline.london import config
+
+HEADERS = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
+
+
+def get(url, extra=None, timeout=600):
+    req = urllib.request.Request(url, headers={**HEADERS, **(extra or {})})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read()
+
+
+def authorities():
+    data = json.loads(get(config.FSA_AUTHORITIES_URL, config.FSA_API_HEADERS))
+    rows = [a for a in data["authorities"] if a.get("RegionName") == config.FSA_REGION]
+    if len(rows) != config.FSA_AUTHORITY_COUNT:
+        sys.exit(f"  the FSA lists {len(rows)} authorities in {config.FSA_REGION!r}, "
+                 f"not {config.FSA_AUTHORITY_COUNT} - a scope change, read it first")
+    keep = ("LocalAuthorityIdCode", "Name", "FileName", "LastPublishedDate",
+            "EstablishmentCount")
+    return [{k: a.get(k) for k in keep} for a in rows]
+
+
+def fetch_boundary(force):
+    """Greater London (OSM relation 175342), polygonised from its outer ways -
+    Prague's method - and gated on its area, so a partial answer cannot pass."""
+    from shapely.geometry import LineString, MultiLineString, mapping
+    from shapely.ops import linemerge, polygonize, unary_union
+    import geopandas as gpd
+    from pipeline import osm
+
+    if config.CITY_BOUNDARY_GEOJSON.exists() and not force:
+        print(f"  {'city_boundary':28} cached")
+        return
+    els, host = osm.fetch(f"[out:json][timeout:180];rel({config.BOUNDARY_OSM_RELATION});out geom;",
+                          config.BOUNDARY_OSM_CACHE, force=force)
+    lines = [LineString([(p["lon"], p["lat"]) for p in m["geometry"]])
+             for e in els for m in e.get("members", [])
+             if m.get("type") == "way" and m.get("role") == "outer"]
+    poly = unary_union(list(polygonize(linemerge(MultiLineString(lines)))))
+    km2 = gpd.GeoSeries([poly], crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED).area.iloc[0] / 1e6
+    lo, hi = config.BOUNDARY_AREA_KM2
+    if not lo <= km2 <= hi:
+        sys.exit(f"  Greater London polygon is {km2:.1f} km2, outside {lo}-{hi}: a partial answer?")
+    config.CITY_BOUNDARY_GEOJSON.write_text(json.dumps(
+        {"type": "Feature", "geometry": mapping(poly),
+         "properties": {"osm_relation": config.BOUNDARY_OSM_RELATION}}), encoding="utf-8")
+    print(f"  {'city_boundary':28} {km2:.1f} km2 (via {host})")
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--force", action="store_true")
+    args = ap.parse_args()
+    for d in (config.DATA_RAW, config.FSA_RAW_DIR, config.OUTPUTS):
+        d.mkdir(parents=True, exist_ok=True)
+
+    # The authority list is cached with the files: the FSA's API returned HTTP
+    # 500 on 2026-09-28 an hour after serving it, and a cached run must not
+    # depend on an API it does not need.
+    cached = sorted(config.FSA_RAW_DIR.glob("*.xml"))
+    if (config.FSA_AUTHORITIES_JSON.exists() and len(cached) == config.FSA_AUTHORITY_COUNT
+            and not args.force):
+        auths = json.loads(config.FSA_AUTHORITIES_JSON.read_text(encoding="utf-8"))
+        print(f"  authority list cached ({len(auths)})")
+    else:
+        auths = authorities()
+        config.FSA_AUTHORITIES_JSON.write_text(json.dumps(auths, indent=1), encoding="utf-8")
+    total = 0
+    for a in auths:
+        dest = config.FSA_RAW_DIR / f"{a['LocalAuthorityIdCode']}.xml"
+        if dest.exists() and not args.force:
+            total += dest.stat().st_size
+            continue
+        body = get(a["FileName"])
+        root = ET.fromstring(body)
+        codes = {e.text for e in root.iter("LocalAuthorityCode")}
+        if codes and codes != {str(a["LocalAuthorityIdCode"])}:
+            sys.exit(f"  {a['Name']}: file carries authority code(s) {codes}, "
+                     f"expected {a['LocalAuthorityIdCode']}")
+        dest.write_bytes(body)
+        total += len(body)
+        print(f"  {a['Name']:<28} {len(body):>11,} bytes  published {a['LastPublishedDate'][:10]}")
+    print(f"  {len(auths)} authority files, {total:,} bytes in {config.FSA_RAW_DIR.relative_to(config.ROOT)}")
+
+    fetch_boundary(args.force)
+
+    meta = json.loads(get(config.CODEPOINT_META_URL))
+    if config.CODEPOINT_ZIP.exists() and not args.force:
+        print(f"  {'codepo_gb.zip':28} cached ({config.CODEPOINT_ZIP.stat().st_size:,} bytes)")
+    else:
+        body = get(config.CODEPOINT_URL)
+        if not body[:4].startswith(b"PK\x03\x04"):
+            sys.exit("  Code-Point Open: not a zip - not the file asked for")
+        config.CODEPOINT_ZIP.write_bytes(body)
+        print(f"  {'codepo_gb.zip':28} {len(body):,} bytes, edition {meta.get('version')}")
+    codepoint_edition = meta.get("version")
+
+    from pipeline import osm
+    els, host = osm.fetch(config.OSM_ROUTES_QUERY, config.OSM_ROUTES_JSON, force=args.force)
+    rels = [e for e in els if e.get("type") == "relation"]
+    print(f"  {'osm_rail_routes':28} {len(rels)} route relations (via {host})")
+    els, host = osm.fetch(config.OSM_STOPS_QUERY, config.OSM_STOPS_JSON, force=args.force)
+    print(f"  {'osm_rail_stops':28} {len(els)} stop nodes (via {host})")
+    els, host = osm.fetch(config.OSM_ADDITIONS_QUERY, config.OSM_ADDITIONS_JSON, force=args.force)
+    print(f"  {'osm_station_additions':28} {len(els)} station nodes (via {host})")
+
+    # Each file's own <ExtractDate> - the date the page states (the FSA's
+    # condition: show when the information was updated). They differ by
+    # borough (2026-09-09 to 2026-09-16 at the first fetch).
+    extracts = {}
+    for a in auths:
+        f = config.FSA_RAW_DIR / f"{a['LocalAuthorityIdCode']}.xml"
+        with open(f, encoding="utf-8") as fh:
+            head = fh.read(400)
+        i = head.find("<ExtractDate>")
+        extracts[a["Name"]] = head[i + 13:i + 23] if i >= 0 else ""
+    dates = sorted(d for d in extracts.values() if d)
+    prov = {"fetched_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "fsa_authorities_url": config.FSA_AUTHORITIES_URL,
+            "fsa_published": {a["Name"]: a["LastPublishedDate"][:10] for a in auths},
+            "fsa_extract_dates": extracts,
+            "fsa_extract_range": [dates[0], dates[-1]] if dates else [],
+            "codepoint_url": config.CODEPOINT_URL, "codepoint_edition": codepoint_edition}
+    print(f"  FSA extract dates {dates[0]} to {dates[-1]}")
+    config.PROVENANCE_JSON.write_text(json.dumps(prov, ensure_ascii=False, indent=2),
+                                      encoding="utf-8")
+    print(f"provenance -> {config.PROVENANCE_JSON.relative_to(config.ROOT)}")

@@ -51,8 +51,13 @@ A city just reached master. Bring the cross-city documents up to date with it.
    DECISIONS entry, page and `outputs/`. Then read the themes above the tables
    and update any whose city lists the new city changes (trams drawn or not,
    whole-city layer, in-ring share bands, rings). Do not renumber themes.
+   Then compare the city's `rail_extra`, `record_kind` and `categories` in
+   `app/cities.py` with the rows you wrote. They feed the public "Why the
+   maps differ" table. Report any disagreement as a draft; `app/` is not yours
+   to edit.
 3. Run and report the last line of each:
    `python scripts/check_inconsistency_list.py`,
+   `python scripts/check_ring_shares.py`,
    `python scripts/check_render_current.py`,
    `python scripts/check_city_registry.py`,
    `python scripts/check_inline_arrays.py`,

@@ -40,9 +40,21 @@ then follow the pointers. **Delete a section when its item is done.**
   Yokohama, Palma, Baltimore) · T contingent on trams, **opening with its EDGE
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
-- **`docs/global_transit_gap.md`**: every large-network city not built (27
-  discarded, 26 ruled out by country, 15 in a band, 14 never screened;
-  Delhi to D, Mumbai and Algiers discarded 2026-09-28; Tokyo built;
+- **Bands restructured 2026-09-28 (owner, late)**: A · B · **C** (closer to a page;
+  the old N) · **D** (blocked, but the owner can act alone: a CAPTCHA, a free
+  account) · **R** (restricted or request only: a geo-block, an identity we
+  cannot hold, or a permission/order/reply; future request-only cities go here) · T. Section order A, B, C, D, R, T. As of this line: 55 built;
+  A 1 · B 10 · C 8 · D 1 · R 16 · T 51 = 87 candidates; 91 discards. The
+  counts check knows R (`LETTERS = "ABCDRT"`).
+- **`docs/global_transit_gap.md`**: every large-network city not built (33
+  discarded, 21 ruled out by country, 28 in a band, 0 never screened;
+  Kolkata and Chennai discarded 2026-09-28: the never-screened list is empty;
+  Glasgow to B and Bengaluru to D 2026-09-28;
+  Tashkent, Hanoi and HCMC to D, Baku, Panama City and Caracas discarded 2026-09-28;
+  Perth and Ankara to N 2026-09-28;
+  Sydney and Newcastle to B, Bangkok and Riyadh to D, Doha discarded 2026-09-28;
+  Delhi to D, Mumbai and Algiers discarded, Buenos Aires to A, Melbourne to B
+  2026-09-28; Tokyo built;
   re-screened 2026-09-28: London to B, Dubai to D, Manila discarded,
   Istanbul to N, Munich, Frankfurt and Cologne discarded, Berlin to B) with
   the record's reason and a recommended re-screen order.
@@ -62,9 +74,8 @@ then follow the pointers. **Delete a section when its item is done.**
    at a time, light methods only. The owner asked for the list 2026-09-28 and
    is likely to steer here before the small tram and one-bucket builds.
    Propose each screen and its cost before running it. Recommended order:
-   - **The never-screened rest** of `docs/global_transit_gap.md`: Buenos Aires
-     (probed 2026-09-28, banding pending), then Bangkok, Riyadh and Doha,
-     Ankara, the Indian three (Bengaluru, Kolkata, Chennai; expect Delhi's
+   - **Glasgow** (FSA count running 2026-09-28), then **the never-screened rest**
+     of `docs/global_transit_gap.md`: the Indian three (Bengaluru, Kolkata, Chennai; expect Delhi's
      geo-blocks), then the small networks. Tehran and Minsk are left out
      (owner).
    Record per country in `global_country_shortlist.md`, the result in the

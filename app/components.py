@@ -287,6 +287,40 @@ _MAP_ONLY_CSS = """
 """
 
 
+def scroll_table(columns, rows, right=(), min_width=None):
+    """Render a table that scrolls sideways inside its own box on a phone,
+    instead of widening the whole page.
+
+    A markdown table wider than the column pushes the page itself sideways at
+    375 px (Tokyo's ward table, 469 px in a 343 px column, deploy-verify
+    2026-09-28), and st.dataframe drew collapsed on page 91 in the lean venv
+    (2026-09-23). An HTML table in an overflow box does neither, and its text
+    stays in the page. `rows` are sequences of already-formatted strings;
+    `right` names the columns to right-align (figures); `min_width` (px)
+    keeps a wide table from squashing its columns before it scrolls. Colours
+    are left to the theme, with a grey rule that reads in both.
+    """
+    import html
+
+    cell = "padding:0.3rem 0.6rem;border-bottom:1px solid rgba(128,128,128,0.3);"
+
+    def align(col):
+        return "right" if col in right else "left"
+
+    head = "".join(f'<th style="{cell}text-align:{align(c)};vertical-align:bottom">'
+                   f"{html.escape(c)}</th>" for c in columns)
+    body = "".join(
+        "<tr>" + "".join(f'<td style="{cell}text-align:{align(c)}">{html.escape(str(v))}</td>'
+                         for c, v in zip(columns, r)) + "</tr>"
+        for r in rows)
+    st.markdown(
+        '<div style="overflow-x:auto;max-width:100%">'
+        f'<table style="border-collapse:collapse;font-size:0.9rem{f";min-width:{min_width}px" if min_width else ""}">'
+        f"<thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>",
+        unsafe_allow_html=True,
+    )
+
+
 def set_base_font():
     """Swaps Streamlit's default typeface for Space Grotesk on base page
     text only.
@@ -355,6 +389,7 @@ SITE_NAME = "Storefronts Near Transit"
 # keeps them last in the sidebar, which is where they belong.
 ABOUT_DATA_PAGE = "pages/90_About_the_Data.py"
 EXCLUSIONS_PAGE = "pages/91_What_Is_Excluded.py"
+DIFFERENCES_PAGE = "pages/92_Why_the_Maps_Differ.py"
 
 # Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
 # and the sources are recorded in docs/data_sources.md, "Notices this project
@@ -1291,6 +1326,46 @@ _NOTICES = [
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
      False),
+    # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
+    # the requested credit, the licence link, what was modified, the
+    # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
+    # notice (its courtesy credit is on the Berlin page). Wording approved by
+    # the owner 2026-09-28.
+    ("VBB Verkehrsverbund Berlin-Brandenburg (Berlin)",
+     "Station locations and line geometry for Berlin are from VBB Verkehrsverbund "
+     "Berlin-Brandenburg GmbH's timetable data (GTFS), used under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
+     "U-Bahn and S-Bahn stations were selected and those outside the Land of Berlin removed, "
+     "one timetable shape was chosen per line, and the lines are drawn in this project's "
+     "colours. VBB provides the data without warranty and does not endorse this map.",
+     False),
+    # London (notice 58): the FSA's FHRS data under OGL v3 - the OGL statement linked, the
+    # data date, what was modified, no endorsement. The credit avoids "the FHRS
+    # name" (the FSA's imagery terms). Wording approved by the owner 2026-09-28.
+    ("Food Standards Agency (London)",
+     "London's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
+     "licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises without a location placed at their "
+     "postcode's centre, or left out where they have no full postcode, and trade "
+     "names shown where a business is registered under another name. No hygiene rating is "
+     "shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # London's postcode centroids (notice 59): Ordnance Survey's OGL v3 data -
+    # the three statements verbatim from the licence file OS ships with it
+    # (Doc/licence.txt, which OS's own terms name as the authority), the
+    # licence link, no endorsement. The product's registered name is not used
+    # (trademarks are outside the OGL). Wording approved by the owner 2026-09-28.
+    ("Ordnance Survey (London)",
+     "Where the Food Standards Agency lists a London food business without a map point, it is "
+     "placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
@@ -1352,7 +1427,7 @@ _AS_RECORDED = (
 
 
 def render_site_notices(show_links: bool = True):
-    """The site-level footer: the two data documents, then every notice that
+    """The site-level footer: the three reference pages, then every notice that
     publishing these maps requires.
 
     Called from EVERY page. See _NOTICES above for why a single city page
@@ -1364,6 +1439,7 @@ def render_site_notices(show_links: bool = True):
                           vertical_alignment="center"):
             st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
             st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
+            st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
     st.caption(_AS_RECORDED)
     st.caption(_NON_AFFILIATION)
 

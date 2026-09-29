@@ -67,10 +67,13 @@ def bump(pattern, expect):
 
 
 def drop_bands(text):
-    """Every band heading renamed: an unrecognised file must not pass."""
-    out = text.replace("## 🟢 Band A", "## 🟢 Group A").replace("## 🟣 Band C", "## 🟣 Group C")
-    out = out.replace("## 🔵 Band B", "## 🔵 Group B").replace("## ⚪ Band N", "## ⚪ Group N")
-    out = out.replace("## 🟤 Band T", "## 🟤 Group T").replace("## 🔴 Band D", "## 🔴 Group D")
+    """Every band heading renamed: an unrecognised file must not pass.
+
+    Matches any '## <marker> Band X' heading rather than naming the bands, so a
+    new band (R, 2026-09-28) cannot leave one heading recognised and the case
+    silently not-vacuous.
+    """
+    out = re.sub(r"^(## \S+ )Band ([A-Z])\b", r"\1Group \2", text, flags=re.M)
     return out if out != text else None
 
 
