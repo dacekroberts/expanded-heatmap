@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**143 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**144 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
+- [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
 - [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
 - [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
 - [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
@@ -201,6 +202,30 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Housekeeping:** PLAN's page 92, Berlin and London items are ticked. The
   memory reminder to place the inconsistency list on the site was removed,
   because it is on the site.
+### 2026-09-28 - Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)
+
+- **Moved Delhi to Band R (owner's call) after the owner checked MCD's
+  General Trade Licence search themselves.**
+  - **No street address.** The empty results table shows the columns before
+    any query: Licensee, Application Number, Licence No, Establishment/Unit,
+    Trade Description, Zone, Ward, Colony, Status, Submitted Date and Valid
+    Upto. Premises are located to colony at best, as in the 2021-22 list.
+  - **No bulk route.** There is no "All" trade type ("all kinds of consumer
+    goods" is one type among many), so a city-wide export means one search
+    per trade type per zone.
+  - **The CAPTCHA image does not load for the owner,** even though the page
+    does. The owner judged it a restricted feature, and by the owner's rule
+    restricted belongs in R, not D.
+  - **Licence:** MCD's site terms are a disclaimer only (accuracy, liability,
+    Indian jurisdiction), with no reuse clause. A GIGW "Copyright Policy"
+    page was not yet found.
+  - **One lead, unchecked:** the Health Trade Licence page's columns. The
+    screen reported an establishment address there, which would make food
+    placeable by a request to MCD.
+- Band D now holds Lisbon alone. Counts: 57 built; A 1 · B 8 · C 8 · D 1 ·
+  R 16 · T 51. Files: `docs/city_master_list.md`,
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)
 
 - **Moved Ho Chi Minh City to Band C, "closer to a page" (owner's call), on
