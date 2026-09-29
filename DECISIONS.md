@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**118 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Sydney found on a re-probe and Newcastle, both to Band B; Bangkok and Riyadh to Band D; Doha discarded (owner)](#2026-09-28---sydney-found-on-a-re-probe-and-newcastle-both-to-band-b-bangkok-and-riyadh-to-band-d-doha-discarded-owner)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
 - [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
 - [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
@@ -153,6 +154,44 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Sydney found on a re-probe and Newcastle, both to Band B; Bangkok and Riyadh to Band D; Doha discarded (owner)
+
+- **Moved Sydney into Band B, scoped to the City of Sydney (owner's call),
+  after a re-probe the owner asked for overturned the first pass.** The first
+  pass keyword-searched the City's hub, found the FES block totals, and
+  recommended Band N. The owner doubted that Melbourne could publish a census
+  while Sydney published nothing. The re-probe enumerated all 166 hub items
+  and 609 organisation items, and found the **FES Industry of occupation**
+  layer, filed under a title no keyword search reaches. It holds one point
+  per business establishment: 21,618 in 2022 (equal to the FES2022 block
+  "Businesses" total), plus 2007, 2012 and 2017, with ANZSIC 2006 class and
+  MGA56 points, under CC BY 4.0. By bucket: retail 3,110, food 3,304,
+  personal services 980. It is weaker than Melbourne's CLUE: no trading
+  names, points per building, and a survey every five years. **Class 9534
+  (brothel keeping, 27 in 2022) is excluded, and the exclusion noted (owner);
+  `docs/excluded_categories.md` records it at the build.** Lesson: a
+  first-pass negative on a portal that was keyword-searched is an ASSERTED
+  negative, even inside a screen that enumerated other portals.
+- **Moved Newcastle into Band B, food only (owner's call)**, on London's
+  method: 9,211 FSA premises across the five Tyne and Wear Metro authorities
+  (Newcastle upon Tyne 2,713, Sunderland 2,324, Gateshead 1,647, North
+  Tyneside 1,488, South Tyneside 1,039). The per-type split is unmeasured,
+  because the API returned 500s on the per-type endpoint.
+- **Moved Bangkok and Riyadh into Band D, in Warsaw's weaker form (owner's
+  calls).** Bangkok: the BMA's CKAN resets TCP on HTTP and HTTPS; its GIS,
+  web portal, `data.go.th`, DBD and the Thai FDA refuse too. The reachable
+  VAT-registrant file has no activity code or coordinates, and TAT's list is
+  a curated tourism selection. Riyadh: the national open-data portal and the
+  municipality's geoportal time out at TCP connect; the reachable RCRC layer
+  is 2,658 retail points, partly copied from Google Maps.
+- **Discarded Doha (owner's call).** `www.data.gov.qa` was enumerated in full
+  (1,889 datasets). MOCI's commercial certificates are counts by municipality
+  and activity (121,409 active in Doha); the only placeable layer is GIS
+  Qatar's landmark gazetteer (about 800 relevant points nationwide, no
+  licence). Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)
 
