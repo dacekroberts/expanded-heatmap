@@ -222,7 +222,7 @@ def by_country_bump(col, expect):
 CASES = [
     # Re-aimed from Band C to Band B 2026-09-28, when C closed (owner).
     ("a band heading's count drifted (Band B, +1)",
-     bump(r"^## 🔵 Band B —[^\n]*?\((\d+) cities", "Band B holds"), None),
+     bump(r"^## 🔵 Band B —[^\n]*?\((\d+) cit", "Band B holds"), None),   # "1 city" or "N cities"
 
     ("the summary box's band count drifted (B, +1)",
      bump(r"· B (\d+) ·", "summary says B {new}"), None),
