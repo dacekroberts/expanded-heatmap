@@ -19,11 +19,12 @@ negative, kept out.
 "(kn)" marks a network size from general knowledge, not from the record; a
 "subway 35" in the record counts route relations in a feed, not stations.
 
-## Discarded (31) - `docs/city_master_list.md`, DISCARDED
+## Discarded (33) - `docs/city_master_list.md`, DISCARDED
 
 | City | Country | Network | Why not covered (the record's words, short) |
 |---|---|---|---|
 | Doha | QA | Doha Metro, 3 lines (kn) | The commerce register is counts only (screened 2026-09-28, owner) |
+| Kolkata, Chennai | IN | ~40-80 each (kn) | Per-licence lookups only, no published list (screened 2026-09-28, owner) |
 | Baku, Panama City, Caracas | AZ, PA, VE | ~14-30 stations (kn) | No premises list on any reachable host (screened 2026-09-28, owner) |
 | Algiers | DZ | 1 metro line + trams (kn) | No premises list at any level (screened 2026-09-28, owner); its "no urban rail" misfiling corrected |
 | Mumbai | IN | Metro 1, 2A, 7, 3; Monorail (kn) | No storefront list on the city's or state's reachable hosts (screened 2026-09-28, owner) |
@@ -94,11 +95,10 @@ negative, kept out.
 | Yokohama | JP | 43 stations | N - no food list in any era |
 | Warsaw | PL | 2 lines (kn) | D - geo-blocked |
 
-## Never screened (2)
+## Never screened (0) - emptied 2026-09-28
 
 | Cities | Country | Network (kn) | Why not covered |
 |---|---|---|---|
-| Kolkata, Chennai | IN | ~40-80 each | Only India's national catalogue was read (counts, not premises); the city hosts were never asked. Delhi and Mumbai were asked 2026-09-28 (D, discarded) |
 
 ## The weakest or oldest reasons among the biggest networks
 

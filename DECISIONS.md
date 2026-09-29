@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**127 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**128 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too](#2026-09-28---londons-unplaced-storefronts-placed-at-postcode-centroids-owner-2349-more-notice-58-for-ordnance-survey-the-credit-in-the-repository-too)
+- [Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)](#2026-09-28---kolkata-and-chennai-discarded-the-large-transit-gaps-never-screened-list-is-empty-owner)
 - [London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London](#2026-09-28---londons-page-notice-57-macro-entry-and-disclosures-written-owner-approved-lilles-macro-label-turned-for-london)
 - [Glasgow to Band B, food only; Bengaluru to Band D (owner)](#2026-09-28---glasgow-to-band-b-food-only-bengaluru-to-band-d-owner)
 - [London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule](#2026-09-28---londons-rail-built-from-osm-gate-3-exact-its-map-rendered-and-checked-the-tfl-licence-read-abandoned-as-unnecessary-a-trading-as-display-rule)
@@ -195,6 +196,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **London's categories value is "Food premises only"** (owner, confirming
   Cleanup's relayed rename: the FSA records inspections, not licences).
 
+### 2026-09-28 - Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)
+
+- **Discarded Kolkata and Chennai (owner's calls): each corporation publishes
+  licence procedures and a per-licence lookup, never a list.**
+  - **Kolkata:** `www.kmcgov.in` has Certificate of Enlistment procedures,
+    forms and a "View CE Information" lookup keyed on a certificate number
+    (not queried). Its KMC 2.0 RTI portal (`kmc.wb.gov.in`) timed out.
+  - **Chennai:** `chennaicorporation.gov.in/gcc/`'s Trade Licence page links
+    a status lookup (on `erp.chennaicorporation.gov.in`, which timed out), a
+    login-only application and a fee PDF. Its RTI and Public Information
+    pages carry no register.
+  - Same basis as Mumbai's discard.
+- **Every city in `docs/global_transit_gap.md` has now been screened or
+  ruled out.** Today's re-screen, from London to here, moved:
+  - A +1 (Buenos Aires), while Tokyo left A by being built.
+  - B 4 → 10 (London, Berlin, Melbourne, Sydney, Newcastle, Glasgow).
+  - D 10 → 18 (Dubai, Delhi, Bangkok, Riyadh, Tashkent, Hanoi, Ho Chi Minh
+    City, Bengaluru).
+  - N 4 → 7 (Istanbul, Perth, Ankara).
+  - Discards 80 → 91: +12 (Manila, Munich, Frankfurt, Cologne, Mumbai,
+    Algiers, Doha, Baku, Panama City, Caracas, Kolkata, Chennai) and −1
+    (Berlin, out to B).
+  - China, Iran and Belarus were ruled out. The master list stands at 55 built, 87 candidates and 91
+  discards. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 ### 2026-09-28 - London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London
 
 - **Approved by the owner and written**: the page text
