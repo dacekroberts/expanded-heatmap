@@ -20,11 +20,16 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**145 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**150 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
+- [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
+- [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
+- [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
+- [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
+- [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
 - [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
@@ -219,6 +224,203 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   then drift checks. The new `docs/excluded_categories.md` wording goes to
   the owner first. A full `deploy-verify` runs at review time. PLAN has the
   item.
+### 2026-09-28 - Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations
+
+- **The owner fetched eight files** from the registered retail units of
+  animal origin, in their own browser past the site's challenge. That is
+  Bucharest's memo condition, and no session was replayed. The files total
+  9,319,353 bytes, all dated 25.08.2026, and are in `data/bucharest/raw/`
+  (hashes in `docs/build_briefs/bucharest.md`).
+  - **Chosen as storefronts:** 01 pork butcher, 02 butcher, 11 fishmonger,
+    16 honey shop, 19 public food service, 20 pizzeria, 23 confectioner and
+    pastry shop, 25 food shop.
+  - **Still to come:** 26 hyper- and supermarkets; the site timed out on
+    the owner's retry.
+  - **Left out:** canteens (21) and pastry labs (22) are recommended out,
+    for the owner to confirm. Catering, local producers, internet-only
+    sales, mobile stalls, vending machines, warehouses, fairs, farms and
+    processing are left out as non-storefronts.
+  - The files had been saved to the main checkout's root, and were moved
+    into `data/bucharest/raw/`. `check_stray_downloads.py` is clean.
+- **Found that each file lists cancelled registrations below an "ANULATE"
+  row.** They are printed red on yellow and carry the cancelling decision;
+  the sheet is named "Active și desființate". There is no status column.
+  - **Active: 19,017 of 26,763 rows**, with 7,746 cancelled.
+  - The screen's 31,299 had counted both.
+  - Food service (19) has 9,915 active; food shops (25) have 7,540.
+  - Step 2 must cut at the ANULATE row, and parse by section, since one
+    row in file 19 has only two filled cells.
+- **Names are legal entities, and sole traders appear under their own
+  names** ("ÎNTREPRINDERE INDIVIDUALĂ", PFA, II). The personal-information
+  rule applies: those units show a category only.
+- **Still undecided:** Bucharest's buildability, which rests on the OSM
+  address hit rate over the active rows. The addresses are free text.
+
+### 2026-09-28 - Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn
+
+- **Stockholm, re-measured on the live layer (`Livsmedelstillsyn/41`).**
+  - **The dedupe key is `ObjektId`**, with 8,146 distinct values, exactly
+    the premises count. 5,188 premises change name, address, type or
+    position across inspections, so each one's latest record is used.
+  - **The register stopped updating.** Its 289,742 inspection rows run
+    2018-01-02 to 2025-10-21, and the layer was last edited 2025-10-22. The
+    brief had said "daily". Every storefront-typed premises was last
+    inspected in 2024 or 2025.
+  - **`VerksamhetsTyp` types each premises**, which the screen had not
+    seen: restaurant, catering and bar 4,946; retail 996; retail mixed with
+    another type 25; wholesale, transport and production 603; other 185;
+    untyped 1,391 (17.1%). That gives 5,771 placed storefronts.
+  - **Ring coverage:** the T-bana reaches 88.7% of them, and 92.3% with
+    pendeltåg and the local railways.
+  - **The unref'd subway relation** is "Gul linje till Älvsjö", the
+    unopened Yellow line.
+  - **The derived UTM zone is 34N (EPSG:32634)**, since Stockholm lies east
+    of 18° E.
+  - **Recommended:** T-bana only, and the untyped premises left out and
+    disclosed.
+  - **Owner calls at the build:** those two, and building on a register
+    frozen for 11 months.
+- **Bucharest: the brief's "schema not read" was stale.**
+  - The 2026-09-20 screen had read the columns in the browser: the unit's
+    name, the address, the sector, the category and the registration number,
+    across 34 per-category XLSX files. The brief of 2026-09-23 said
+    otherwise.
+  - OSM now carries 12 subway relations, M1-M5, every one referenced and
+    coloured, so `Extensie M4` is gone.
+  - Both DSVSA hosts still answer 503 with the browser challenge.
+  - **Next:** the owner fetches the files in their own browser, and then
+    the address hit rate against OSM is measured.
+  - An Overpass check was added to the brief. The 2026-09-23 objection
+    (intermittent 504s) is answered by `osm_route_refs` confirming any
+    mismatch on a second mirror.
+- **Withdrawn: "OSM's Glasgow Subway relations omit Govan"** (the entry
+  "Newcastle and Glasgow briefs written", above). The Glasgow build found
+  Govan as the loop's `stop_entry_only` and `stop_exit_only` member.
+  - The probe's query was at fault. It recursed the second and third roles
+    from the stop nodes rather than from the relations, so only `stop` roles
+    were counted.
+  - Both relations carry all 15 stations.
+  - The Glasgow brief's correction is in the build's own "Measured at the
+    build" box.
+  - Newcastle's 60 Metro stations came from the same query. The count
+    matches Nexus's own figure, and the loop's terminals are among the
+    names, but the build should recount it.
+- Files: `docs/build_briefs/stockholm.md` (6/6), `docs/build_briefs/bucharest.md`
+  (2/2), and three rows of `docs/city_master_list.md`.
+
+### 2026-09-28 - Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured
+
+- **Licence reads (`licence-read`, one per source), both PERMITTED WITH
+  CONDITIONS, CC BY 4.0, with nothing to do beyond display.**
+  - **Melbourne's CLUE:** the council portal declares CC BY 4.0.
+    DataVic's "other-open" turned out to be CKAN's generic bucket, and the
+    same record carries CC BY 4.0 in its custom licence fields. The portal's
+    terms page is empty ("have not been defined yet"), so nothing is
+    incorporated by reference.
+  - **Sydney's FES layer:** the ArcGIS item's `licenseInfo` links CC BY 4.0
+    with the credit "City of Sydney". Data.NSW's harvested copy says
+    "License Not Specified", which is a harvester failure.
+  - **Flagged, not a blocker:** the City of Sydney website's terms bar
+    republishing "content or data" without written authorisation. The read
+    judged they do not reach the data hub, since they are written for that
+    website and nothing on the hub incorporates them.
+  - **Credit wording** is prescribed by neither council. The reads' drafts
+    are in the briefs, for the owner.
+- **Rail, from OSM stations inside each LGA.**
+  - **Melbourne:** 20 train stations, including the Metro Tunnel's five;
+    the screen had said 12-15.
+  - **Sydney:** 16 Sydney Trains and Metro stations.
+- **Ring coverage** (0.6 mi, storefront-class points, projected):
+  - **Melbourne:** 96.5% of 5,456 by train, 99.1% with trams.
+  - **Sydney:** 83.2% of 7,497 by train and Metro, 93.0% with light rail.
+  - **Recommended, as owner calls at the build:** trains only for both,
+    Berlin's precedent for trams. In Sydney the light rail adds 9.8 points,
+    so the call there is closer.
+- **Points are per building in both.**
+  - **Melbourne:** 5,456 storefronts on 1,919 points (largest stack 221).
+  - **Sydney:** 21,618 establishments on 12,334 coordinates (largest 163).
+  - Ring counts are unaffected; how the map shows the stacks is the build's
+    call.
+- **Sydney's storefront count is not yet settled.** The prefix filter
+  (ANZSIC 39-43, 451-452, 951-953) gives 7,497, against the screen's split
+  of 7,394. Motor vehicle retail, fuel, funerals and parking are the
+  candidate difference, for the taxonomy to decide.
+- **A new region value ("Oceania")** is needed for the first Australian page.
+  That is the owner's call.
+- Files: `docs/build_briefs/melbourne.md` (4/4) and
+  `docs/build_briefs/sydney.md` (5/5; its OSM check failed once on an
+  Overpass answer and passed on the rerun), and the two Band B rows in
+  `docs/city_master_list.md`.
+
+### 2026-09-28 - Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build
+
+- **Measured the per-type split the screens could not get** (the FSA API
+  answered this time; each authority's 14 types sum to its total).
+  - **Tyne and Wear, 5 authorities:** 6,673 food storefronts of 9,211
+    premises (food service 4,236, food shops 2,437). A page-1 sample of 2,290
+    storefront rows found 85.0% with the FSA's point, 10.3% with a full
+    postcode only and 4.4% with an outward code only (private addresses,
+    never placed). London had 91.0% with a point at its build. Newcastle upon
+    Tyne is lowest, at 77.8%.
+  - **Glasgow City:** 4,958 of 6,632 (food service 3,655, food shops 1,303),
+    99.0% with a point (495 of 500).
+  - Bulk files, by HEAD request: Tyne and Wear's five XMLs total 9,248,845
+    bytes; Glasgow's is 6,028,925. Neither is downloaded; each needs the
+    owner's OK.
+- **Rail, from OSM.**
+  - **Tyne and Wear Metro:** four `light_rail` relations, refs Green and
+    Yellow, 60 stations. The stop names give 61, one a duplicate spelling of
+    St James.
+  - **Glasgow Subway:** two `subway` relations (the Inner and Outer Circle),
+    ref "Subway". Their stop members name **14 of 15 stations; Govan is
+    missing**, so it is to be added from its station node, London's
+    precedent.
+- **Left for the builds, as recommendations:**
+  - Newcastle: keep the Sunderland branch. Its page name, "Newcastle" or
+    "Newcastle (Regional)", is the owner's call.
+  - Newcastle: select authorities by code, not region. The five sit in the
+    FSA's wider North East region.
+  - Glasgow: the `licence-read` must add Food Standards Scotland's FHIS
+    pages and settle the credit wording. The FHRS terms name the OGL and
+    mention Scotland, but not FHIS.
+  - Both: lifting London's FSA code into a shared module is the build
+    session's call.
+- Files: `docs/build_briefs/newcastle.md` and `docs/build_briefs/glasgow.md`
+  (4/4 each), and the two Band B rows in `docs/city_master_list.md`.
+
+### 2026-09-28 - Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)
+
+- **Moved Lisbon to Band R, request only (owner's call), after the owner
+  worked through DGAE's site.**
+  - **The data exists, publicly.** The Mapa do Comércio, Serviços e
+    Restauração shows each establishment without login. Its fields are
+    exploration type (Comércio / Serviços / Restauração, the project's
+    three buckets), CAE, full street address, coordinates and a
+    registration code. Lisbon-area clusters hold about 6,700–11,000 points
+    each.
+  - **Gaps the build would design around:** there is no status field, sole
+    traders appear under their own names, and market and mobile traders are
+    registered at their homes.
+  - **No individual account.** The export endpoint (`/estabelecimentos/exportar`)
+    answers 401 anonymously. Registration offers only Administração Pública
+    Central, Município and Estrutura Associativa, so the owner cannot hold
+    an account honestly. The terms are a visitor privacy policy (silent on
+    reuse), and `dados.gov.pt` carries only aggregates.
+  - **A request is drafted, not sent,** kept to revisit:
+    `docs/notifications/dgae-lisbon-porto-request.md`, in European
+    Portuguese with an English copy. It asks for a Lisboa and Porto export,
+    the reuse terms, and states that sole traders' names won't be published
+    and non-sedentary trade will be excluded. Gated-access item 28 is
+    updated. Porto moves on the same answer.
+- **Band D is empty**, after the owner's own checks of all three cities this
+  evening (Ho Chi Minh City to C, Delhi and Lisbon to R). The band stays for
+  the next city the owner can unblock alone. The counts self-test's "city in
+  two bands" case, which borrowed a Band D row, is re-aimed at Band R. Counts:
+  57 built; A 1 · B 8 · C 8 · D 0 · R 17 · T 51 = 85. Files:
+  `docs/city_master_list.md`, `docs/gated_access.md`,
+  `docs/notifications/dgae-lisbon-porto-request.md`,
+  `docs/handoff_staging_2026-09-28.md`,
+  `scripts/check_master_list_counts_selftest.py`.
 
 ### 2026-09-28 - Review-time batch live after the owner's reboot, checked on the live URL
 

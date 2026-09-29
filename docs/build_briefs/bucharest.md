@@ -4,6 +4,92 @@
 2026-09-23.** Run `python scripts/brief_check.py bucharest` before writing any
 code for this city.
 
+> **Re-checked 2026-09-28 (staging), before the build.** These supersede the
+> text below where they differ.
+> - **Band B since 2026-09-27** (owner, the Band C memo), on the memo's two
+>   conditions:
+>   - **the owner fetches the files in their own browser**, the precedent
+>     since followed for Ho Chi Minh City;
+>   - **the licence stays SILENT, and the page discloses it.**
+> - **The columns are known.** The screen of 2026-09-20 read them in the
+>   browser (`docs/decisions/2026-09-20.md`, "Unitati de vanzare cu amanuntul
+>   INREGISTRATE"):
+>   - The fields are `Nr. crt.`, `Denumirea unitatii` (the unit's name,
+>     trade names in the example), `Adresa`, `Sector`, `Categorie unitate`
+>     and the registration number with its date.
+>   - Example row: "Boutique Du Pain Bucharest, Academiei 28-30,S1, sector 1,
+>     Restaurant, 6645/20.03.2023".
+>   - There are **34 XLSX files, one per category**. 14 of them hold the
+>     31,299 rows, and the file name is the taxonomy.
+>   - The list of units of non-animal origin and 20 of the categories are
+>     uncounted, so 31,299 is a floor.
+>
+>   So "the schema has not been read" and the one-file "56,009 bytes" below
+>   are out of date. The 56,009 bytes are one of the 34 files.
+> - **Rail: OSM now has 12 subway relations, M1-M5, every one with a ref and
+>   a colour.** `Extensie M4` no longer appears (bbox query), so that trap is
+>   gone. Colours: M1 `#FFFF00`, M2 `#003399`, M3 `#BC1725`, M4 `#347c11`,
+>   M5 `#FF8040`.
+> - **Both DSVSA hosts still answer 503 with the browser challenge.**
+> - **The owner's browser fetch, 2026-09-28**: eight of the nine chosen
+>   files (26 Hipermarket-supermarket still to come), 9,319,353 bytes, all
+>   dated 25.08.2026, now in `data/bucharest/raw/` (sha256 prefixes:
+>   01 `3b13434e4e3cd85a`, 02 `3d11a184654b049d`, 11 `419db7efb97c6c94`,
+>   16 `7398d34557714273`, 19 `5c1fa63f00961899`, 20 `3a7655688cca630c`,
+>   23 `7549ab134b5a5194`, 25 `639cbb07dc5f2899`).
+>   - **Left out, as non-storefronts**: canteens (21), pastry labs (22),
+>     catering (31), local producers (34), internet sales, mobile stalls,
+>     vending machines, warehouses, fairs, and the farm and processing
+>     categories. Canteens and pastry labs are marked for the owner's
+>     confirmation.
+>   - **Not yet opened**: the list of units of non-animal origin
+>     (*Produse de origine non-animală*).
+> - 🚨 **About a quarter of the rows are cancelled registrations.** The sheet
+>   is "Active și desființate" (active and closed). Below a row reading
+>   **ANULATE** ("cancelled") in each file, the rows are cancelled, printed
+>   red on yellow, and carry the cancelling decision ("Decizia …"). There
+>   is no status column: **the section is the status.**
+>
+>   | File | Active | Cancelled |
+>   |---|---|---|
+>   | 01 Carmangerie (pork butcher) | 116 | 145 |
+>   | 02 Măcelărie (butcher) | 260 | 568 |
+>   | 11 Pescărie (fishmonger) | 103 | 173 |
+>   | 16 Honey shop | 5 | 3 |
+>   | 19 Alimentație publică (restaurants, cafés, bars) | 9,915 | 3,363 |
+>   | 20 Pizzerie | 544 | 260 |
+>   | 23 Cofetărie-patiserie | 534 | 295 |
+>   | 25 Magazin alimentar (food shop) | 7,540 | 2,939 |
+>   | **Total** | **19,017** | **7,746** |
+>
+>   So the screen's 31,299 counted cancelled units as well. **Step 2 must cut
+>   each file at its ANULATE row.** One row in file 19 (Nr. 379) has only two
+>   filled cells, so parse by section, not by the shape of a row.
+> - **Columns**: `Nr. crt.`, `Denumirea unității`, `Adresa`, `Sector`,
+>   `Categorie unitate`, the registration number and date, and sometimes a
+>   seventh cell ("Preschimbat <date>", renewed; or the cancelling decision).
+>   - **The header sits on row 16 or 17**, below the authority's letterhead.
+>   - **`Categorie unitate` is free text** with case and spelling variants
+>     ("Fast food", "fast-food", "Fast-Food"). Some carry "(Unitate vânzare
+>     prin internet)", meaning the unit also sells online. It is still a
+>     registered premises.
+>   - File 19's categories (Fast food, Bistro, Snack bar, Bar, Restaurant, …)
+>     give a finer food-service split than any other one-bucket city.
+> - **Names are legal entities**, not always the name on the sign ("Metro
+>   Cash & Carry SRL", "Carrefour Romania SA"). **Sole traders appear under
+>   their own names** ("… ÎNTREPRINDERE INDIVIDUALĂ", and PFA / II forms).
+>   The project's rule applies: show the category, never a person's name.
+>   `check_personal_exposure.py` should look for those suffixes first.
+> - **What the build still needs, in order:**
+>   1. ~~The owner's browser fetch~~ done for eight files. Still to come:
+>      26 Hipermarket-supermarket, and a look at the non-animal-origin list.
+>   2. ~~Five rows of each, read for the names~~ done: legal entities, with
+>      sole traders under their own names (above).
+>   3. **The OSM address hit rate** on the ~19,000 active rows, the one
+>      number that decides whether Bucharest is buildable. Addresses are
+>      free text ("Calea Mosilor 294,", "Str. Pieței nr. 67, sp. S67, sect.
+>      1"), so normalisation comes first (`address-join`).
+
 ---
 
 ## The one-line summary
@@ -222,6 +308,15 @@ is a fair summary of what makes it hard.
     "kind": "http_ok",
     "url": "https://archive.org/wayback/available?url=data.gov.ro%2Fapi%2F3%2Faction%2Fpackage_list",
     "min_bytes": 50
+  },
+  {
+    "id": "bucharest-osm-metro-refs",
+    "claim": "OSM carries Bucharest's metro as M1-M5, every relation referenced (added 2026-09-28: osm_route_refs now confirms a mismatch on a second mirror, which answers the 2026-09-23 objection to Overpass checks; Extensie M4 no longer appears)",
+    "kind": "osm_route_refs",
+    "bbox": [44.33, 25.95, 44.55, 26.25],
+    "routes": ["subway"],
+    "expect_refs": {"subway": 5},
+    "require_refs": {"subway": ["M1", "M2", "M3", "M4", "M5"]}
   }
 ]
 ```
