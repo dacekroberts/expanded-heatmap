@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**121 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -28,7 +28,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver](#2026-09-28---berlins-map-rendered-shapes-chosen-by-rule-a-served-share-rule-for-diversions-colours-by-the-shared-search-a-legend-that-fits-the-solver)
 - [Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green](#2026-09-28---berlins-rail-scope-u-bahn-and-s-bahn-no-trams-the-u6s-tegel-branch-drawn-as-the-timetable-runs-owner-steps-1-and-2-green)
 - [Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)](#2026-09-28---berlins-calls-47122-excluded-personal-services-drawn-as-a-partial-bucket-trams-on-ring-numbers-both-downloads-approved-owner)
+- [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
 - [Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner](#2026-09-28---berlins-brief-written-both-licences-read-the-register-is-nace-rev-21-personal-services-partial-four-calls-for-the-owner)
+- [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
+- [China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)](#2026-09-28---china-ruled-out-as-a-country-after-a-feasibility-gate-hangzhous-opening-noted-legal-barriers-high-owner)
+- [Berlin's personal-services gap corrected: only hairdressers and laundries are missing](#2026-09-28---berlins-personal-services-gap-corrected-only-hairdressers-and-laundries-are-missing)
+- [Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)](#2026-09-28---delhi-and-mumbai-re-screened-on-their-city-hosts-delhi-to-band-d-mumbai-discarded-owner)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)](#2026-09-28---tokyo-landed-on-master-the-build-queue-wiped-for-two-new-frontrunners-berlin-then-london-owner)
@@ -289,6 +294,24 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - `9699` is excluded class-wide, as in Oslo and Copenhagen (the brief's
   proposal; prostitution and escort go with it).
 
+### 2026-09-28 - Algiers: the "no urban rail" misfiling corrected, then discarded (owner)
+
+- **Corrected Algeria's filing: Algiers has a metro and a tramway.** The
+  87-country screen put Algeria under "no urban rail at all" from a
+  single-feed catalogue that did not carry either; the shortlist now says so
+  beside the old list.
+- **Discarded Algiers on its business side (owner's call).** CNRC's Sidjilcom
+  is a paid per-trader lookup (5,000-20,000 DZA a semester), with no bulk or
+  open offer. ONS's register of natural-person businesses (as of 2023-12-31)
+  is published as counts by wilaya × NAA section only. The wilaya's
+  downloads are weapons forms, and the Algiers Direction du Commerce's pages
+  return a database error. The only name-and-address lists are the Ministry
+  of Commerce's holiday duty rosters, which carry traders' personal names,
+  no coordinates and no licence. `data.gov.dz` does not exist (DNS). Files:
+  `docs/city_master_list.md` (DISCARDED), `docs/global_country_shortlist.md`
+  (the no-rail list and Tier 4), `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner
 
 - **Wrote `docs/build_briefs/berlin.md`; `brief_check.py berlin` holds 11/11
@@ -336,6 +359,104 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Open for the owner (brief, "Calls for the owner")**: `47122`; a partial
   Personal services bucket; trams; and the two downloads (the register CSV,
   126,348,283 bytes, and VBB's GTFS, 78,379,003 bytes).
+### 2026-09-28 - Tehran and Minsk left out like Russia, for wartime concerns (owner)
+
+- **Left Iran and Belarus out of the screen, as Russia and Ukraine are
+  (owner's call), so Tehran (~150 stations) and Minsk (~37) are not
+  screened.** Both sat in `docs/global_transit_gap.md`'s "never screened"
+  group with "no record". The exclusion is about the countries' situation,
+  not their data, and is recorded as such beside Russia and Ukraine. Files:
+  `docs/city_master_list.md` (the access-not-data note),
+  `docs/global_country_shortlist.md` (Tier 4), `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)
+
+- **Ruled out mainland China as a country (owner's call), on a feasibility
+  gate rather than fourteen city screens, with Hangzhou's narrow opening
+  recorded.** China was in no file; the owner asked whether it was open
+  enough to screen at all before spending on a bulk screen, and to read the
+  licences first. Four platforms were tried.
+  - **Shanghai** answers HTTPS 412 behind a JS anti-bot challenge, and a
+    real browser gets a blank page.
+  - **Beijing**'s file links redirect to the city's unified identity login.
+    Its terms are permissive (可自由利用、自由传播与分享) with a 备案 duty.
+  - **Shenzhen** needs real-name verification to download, and its terms
+    forbid passing on any data (用户不得有偿或无偿转让…任何数据资源; no
+    mirrors, 包括全部或局部), despite 2,228,174 food-licence rows marked
+    无条件开放.
+  - **Hangzhou** is the near-opening. Dataset 12747 (杭州食品经营许可证,
+    54,100 rows, premises addresses, no coordinates) is behind a
+    click-through agreement with no login, and its terms allow free copying,
+    publishing and dissemination with a credit and the download date. But
+    they also oblige a 备案 filing that needs a 浙里办 real-name account,
+    which this project does not create.
+  - **Placement fails everywhere.** There is no open address-point file,
+    Amap and Baidu return GCJ-02 / BD-09 and their terms forbid this use,
+    and Tianditu needs a key.
+  - **Map publishing is regulated** (审图号 review and GCJ-02 for maps
+    published in China; ASSERTED), which the owner weighed as a high legal
+    barrier for any Chinese city.
+- **A per-city screen, or Hangzhou in Band D, was rejected.** Hangzhou's
+  blockers are a real-name filing duty and missing coordinates, neither of
+  which an ask could clear. The agent ran over its step budget (about 100
+  steps against about 30), mostly on the licence reading done first. Files:
+  `docs/city_master_list.md` (Countries ruled out),
+  `docs/global_country_shortlist.md` (Tier 4, China),
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - Berlin's personal-services gap corrected: only hairdressers and laundries are missing
+
+- **Corrected the Berlin probe's personal-services finding: the register
+  carries beauty and spa premises, and only hairdressers and laundries are
+  missing.** This supersedes the personal-services lines of today's entries
+  "German screen from the large-transit gap..." and "Berlin from the discards
+  to Band B...". The probe keyed personal services on NACE Rev. 2 codes
+  (9601, 9602, 9604) and found 5, 3, 1 and 0 in the four station boxes. The
+  Berlin build session measured live that IHK's `nace_id` is NACE Rev. 2.1 /
+  WZ 2025. In that edition 5610 and 9602 do not exist, restaurants are 5611,
+  hair 9621, beauty 9622, spa/sauna 9623 and laundry 9610. City-wide, beauty
+  has 1,792 and spa/sauna 1,595, beside a 9699 catch-all of 10,170; hair
+  (180) and laundry (215) are the crafts-chamber gap. The food and retail
+  ratios stand, since 561x and 47xx were keyed correctly. "Restaurants are
+  5611, a WZ subclass" was also wrong: 5611 is a 2.1 class, and IHK's own
+  `ihk_branch_id` (5–6 digits) is the finer code. Band B is unchanged; the
+  row now reads "without hairdressers and laundries" instead of "personal
+  services missing". Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`.
+
+### 2026-09-28 - Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)
+
+- **Moved Delhi to Band D (owner's call): the current register sits behind a
+  CAPTCHA and the state hosts refuse this machine.** India's record rested on
+  the national catalogue alone (288,011 titles, counts only), so the city
+  hosts were asked this time. MCD's current trade and health licence register
+  (`gtlLicenseDetail` / `htlLicenseDetail`: trade × 12 zones × year, with an
+  Excel export) needs an image CAPTCHA, as does FSSAI FoSCoS; neither was
+  attempted. What is open is stale or partial. MCD's 2021-22 general trade
+  licence list (366 KB, ~4,100 rows) covers the former South DMC only and
+  places rows to colony, not street. NDMC's current health licences (453 in
+  2025) carry unit addresses but cover central New Delhi only, with no trade
+  type. Every Delhi-government host timed out on HTTP and HTTPS
+  (delhi.gov.in and its labour, food-safety, DES and health subdomains on one
+  IP; `gsdl.org.in`; `edistrict`), and no address or coordinate layer was
+  reachable. A discard was rejected because the current register exists and
+  only its access control stops it, as with Daejeon's CAPTCHA wall.
+  Placement stays unresolved beside it.
+- **Discarded Mumbai (owner's call): no storefront list on any reachable
+  host.** MCGM's portal has application forms only, and its RTI disclosures
+  say nothing on licences. Its ArcGIS Online org (437 public items) holds one
+  licence layer: 7,361 Section 394 trade licences, mostly hazardous goods and
+  manufacturing, with no licence text and personal names on 3,536 rows. FDA
+  Maharashtra publishes counts only (187,030 licences), and the state DES
+  describes a business register with no public list. The state's Shops &
+  Establishments system and MCGM's GIS servers timed out from here. Band D
+  was rejected because those are application and planning systems, not a
+  register. MCGM's ArcGIS Online also publicly serves a supplier layer with a
+  tax-ID field and a hawker layer with phone numbers; neither was used or
+  recorded. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md` (India),
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list
 
