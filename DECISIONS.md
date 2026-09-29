@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**151 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**152 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)](#2026-09-28---bucharest-to-be-built-with-its-unplaced-share-disclosed-canteens-and-pastry-labs-left-out-owner)
 - [Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM](#2026-09-28---bucharests-address-hit-rate-measured-795-of-20815-storefronts-placed-on-street-and-number-against-osm)
 - [Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication](#2026-09-28---bucharests-supermarket-file-and-eight-non-animal-origin-files-fetched-owner-about-23100-active-rows-before-de-duplication)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
@@ -187,6 +188,21 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)
+
+- **Decided (owner), as recommended: Bucharest is built with its unplaced
+  storefronts disclosed on the page**, Incheon's precedent. The measured
+  baseline is 79.5% of 20,815 placed on street and house number. Rows that
+  match no unique street and number are not placed along a street.
+- **Decided (owner), as recommended: canteens (file 21) and pastry labs
+  (file 22) are left out**, as institutional kitchens and production, as
+  London's canteens were. They are not among the files fetched.
+- **Open: how names are shown.** Recommended: the company name without
+  its legal-form words ("SC Mega Image SRL" becomes "Mega Image"), and the
+  category only for sole traders (ÎI, PFA, II, ÎF). This was put to the
+  owner after the two calls above and awaits a yes.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
 
 ### 2026-09-28 - Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM
 

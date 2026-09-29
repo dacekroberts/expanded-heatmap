@@ -148,11 +148,13 @@ code for this city.
 >      26 Hipermarket-supermarket, and a look at the non-animal-origin list.
 >   2. ~~Five rows of each, read for the names~~ done: legal entities, with
 >      sole traders under their own names (above).
->   3. ~~The OSM address hit rate~~ measured: **79.5%** (above). **The owner
->      decides whether that is enough to build, with the gap disclosed.**
->   4. Owner calls for the build: canteens and pastry labs out (recommended);
->      the page's wording for the ~20% unplaced; whether to show legal-entity
->      names or the category only.
+>   3. ~~The OSM address hit rate~~ measured: **79.5%** (above). **Decided
+>      (owner, 2026-09-28): build, with the unplaced share disclosed.**
+>   4. ~~Canteens and pastry labs~~ **left out (owner, 2026-09-28).**
+>   5. **Open**: names. Recommended: the company name without its legal-form
+>      words ("SC Mega Image SRL" becomes "Mega Image"); the category only
+>      for sole traders (ÎI, PFA, II, ÎF). The page's wording for the
+>      unplaced share is drafted at the build.
 
 ---
 
