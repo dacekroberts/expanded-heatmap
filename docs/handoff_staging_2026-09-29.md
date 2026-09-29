@@ -64,13 +64,23 @@ and every owner call are in DECISIONS. **The groundwork now lives in
   `docs/review_time.md`, the approved French page-text template, the France
   label measurement.
 
-**NEXT for a fresh staging session: build briefs for Band A's five light-rail
-cities** (none exists yet), **Bergen first** (no open calls; Oslo's modules),
-then Aarhus, Buffalo, Houston, Sacramento. Each brief: the rail (the
-light-rail test's measurements in `docs/tram_city_list.md`), the business
-leg and its build-time calls from `docs/city_master_list.md` Band A, the
-ring size by the spacing rule (`docs/ring_rules.md`), and a checks block for
-`scripts/brief_check.py`. Sacramento needs its timetable read first.
+**DONE 2026-09-29: build briefs for Band A's five light-rail cities**
+(`docs/build_briefs/{bergen,aarhus,buffalo,houston,sacramento}.md`, every
+checks block passing; DECISIONS "Light-rail build briefs"). **Bergen is
+ready to build with no owner call.** The others' owner calls:
+- **Aarhus**: 20, 32 or 39 stations (the Odder section's per-stop frequency
+  decides 32). **The tram audit read Aarhus's frequency from Rejseplanen's
+  GTFS, which Copenhagen declined to download**: the owner's word on using it
+  for measurement only, or a read of Midttrafik's planner.
+- **Buffalo**: rail from OSM (recommended) or NFTA's feed under its
+  trademark clause.
+- **Houston**: build at ~7% in-ring (recommended, stated on the page) or
+  reconsider; rail from OSM (METRO's agreement is heavy) and the label
+  wording.
+- **Sacramento**: the Open Data Terms' uncapped indemnity (accepted by use;
+  the brief's measurement already pulled the rows), "Request permission to
+  use", the address source (Census geocoder recommended), and frequency as a
+  disclosure rather than a gate.
 
 **Still open with the owner** (none blocks the France kit):
 - **Build order** beyond France: Czechia, Odense and Latvia, the US three
