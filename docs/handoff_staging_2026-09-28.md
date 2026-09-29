@@ -41,10 +41,10 @@ then follow the pointers. **Delete a section when its item is done.**
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
 - **Bands restructured 2026-09-28 (owner, late)**: A · B · **C** (closer to a page;
-  the old N) · **D** (blocked, but the owner can act: CAPTCHA, account, request,
-  order) · **R** (restricted: needs someone in the country, or an identity we
-  cannot hold) · T. Section order A, B, C, D, R, T. As of this line: 55 built;
-  A 1 · B 10 · C 7 · D 6 · R 12 · T 51 = 87 candidates; 91 discards. The
+  the old N) · **D** (blocked, but the owner can act alone: a CAPTCHA, a free
+  account) · **R** (restricted or request only: a geo-block, an identity we
+  cannot hold, or a permission/order/reply; future request-only cities go here) · T. Section order A, B, C, D, R, T. As of this line: 55 built;
+  A 1 · B 10 · C 7 · D 3 · R 15 · T 51 = 87 candidates; 91 discards. The
   counts check knows R (`LETTERS = "ABCDRT"`).
 - **`docs/global_transit_gap.md`**: every large-network city not built (33
   discarded, 21 ruled out by country, 28 in a band, 0 never screened;

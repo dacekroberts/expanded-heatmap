@@ -87,7 +87,7 @@ negative, kept out.
 | London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |
 | Stockholm | SE | T-bana, 92 stations | B - passed, food only |
 | Singapore | SG | MRT 21 relations | C - the food register is a 2016 snapshot |
-| Kaohsiung | TW | ~75 stations (kn) | D - geo-blocked to Taiwan |
+| Kaohsiung | TW | ~75 stations (kn) | R - geo-blocked to Taiwan |
 | Bucharest | RO | M1-M5, 64 stations | B - food only; the file downloads only in a browser |
 | Incheon | KR | 64 stations | B - placed 71.3% by the lift-building join and road interpolation |
 | Hyderabad | IN | 6 relations | R - geo-blocked, nothing read behind it |
