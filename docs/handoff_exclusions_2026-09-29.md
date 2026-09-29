@@ -324,3 +324,17 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   and the pre-push hook fails.
 - The Stockholm worktree was removed 2026-09-29 (owner); `stockholm-catering`
   is kept, locally and on origin.
+- **`suwon`** (page 69; 33,433 storefronts, 14 stations) and **`bucheon`**
+  (page 70; 22,512, 14 stations, Seohae drawn per the owner), both on origin,
+  each cut from master and counting 69 built. **The second to land
+  reconciles:** master list Built 70, South Korea 9, Seoul Capital Area (7);
+  the Small Enterprise and Market Service's notice 68 names both cities; both
+  cities' rows follow Yongin's in `docs/data_sources/south-korea.md`,
+  `docs/map_inconsistencies.md` and `docs/excluded_categories.md`; `app/cities.py`,
+  `macro_facts.json`, `ring_shares.json`, README, `check_macro_labels.py`
+  TEXT_WIDTH and `check_personal_exposure.py` REGISTRIES take both. `bucheon`
+  also moves Incheon's macro label below its dot. Re-run
+  `check_macro_labels.py` with both merged.
+- **The category-fix batch** (`category-continuity`, 17 taxonomies and their
+  re-renders, owner-approved) bases its Stockholm fix on `stockholm-catering`:
+  land it after, or in one merge.
