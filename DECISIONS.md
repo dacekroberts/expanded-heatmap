@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**142 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**143 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
+- [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
 - [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
 - [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
 - [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
@@ -200,6 +201,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Housekeeping:** PLAN's page 92, Berlin and London items are ticked. The
   memory reminder to place the inconsistency list on the site was removed,
   because it is on the site.
+### 2026-09-28 - Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)
+
+- **Moved Ho Chi Minh City to Band C, "closer to a page" (owner's call), on
+  the first Band D unlock done by the owner.** The owner passed the open-data
+  portal's CAPTCHA in their own browser (Bucharest's precedent) and read the
+  catalogue through CKAN's `package_list` and `package_show`: 112 datasets.
+  - **Only the Food Safety Department's certificate file is
+    premises-level.** The owner fetched it (`DU DIEU KIEN DAT 2026.xlsx`,
+    903,823 bytes, sha256 `1ef3a41d0d4287d25e87a3f9e214694f01354bb40a62713f4ebd55ee3fc5b9ce`,
+    in `data/ho-chi-minh-city/raw/`), and staging read its structure only.
+    It holds **7,413 establishments** whose latest certificate was issued
+    2026-01-05 to 2026-07-31: seven months of issuances, not the stock.
+    Street address and new ward are 100% filled; there are no coordinates
+    and no business type, only the supervising sector (Health 4,484,
+    Agriculture 1,040, Industry and Trade 903, legacy 980), so restaurants
+    and food factories are mixed. 34% are household businesses, usually
+    named for the owner. It covers the enlarged city (Bà Rịa–Vũng Tàu and
+    Bình Dương merged in 2025). The licence is not specified.
+  - **The rest fails.** The enterprise register is company-level (684.58 MB,
+    January 2022). The "markets, shopping centres, supermarkets and
+    convenience stores" dataset holds only a markets list (24 KB, 2024). No
+    household-business register exists on the portal, no district
+    publishes, and no open address layer was found.
+  - **What would reopen it:** the full certificate stock with a
+    business-type field, a household-business register, or an open address
+    layer. Counts: 57 built (Berlin and London have since landed);
+    A 1 · B 8 · C 8 · D 2 · R 15 · T 51. Files: `docs/city_master_list.md`,
+    `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+    `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)
 
