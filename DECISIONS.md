@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Bucheon built on SEMAS's register, the Seohae Line drawn (owner); Samsan Gymnasium kept at the Incheon border (owner); Incheon's macro label moved below its dot](#2026-09-29---bucheon-built-on-semass-register-the-seohae-line-drawn-owner-samsan-gymnasium-kept-at-the-incheon-border-owner-incheons-macro-label-moved-below-its-dot)
+- [Light-rail build briefs: Buffalo, Houston and Sacramento (staging)](#2026-09-29---light-rail-build-briefs-buffalo-houston-and-sacramento-staging)
 - [Light-rail build briefs: Bergen and Aarhus (staging)](#2026-09-29---light-rail-build-briefs-bergen-and-aarhus-staging)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
 - [French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record](#2026-09-29---french-tram-feeds-read-four-permitted-with-conditions-angers-bars-naming-its-network-without-consent-the-national-portals-odbl-conditions-found-correcting-toulouses-and-rennes-record)
@@ -295,6 +296,61 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
   `docs/build_briefs/gyeonggi.md`, `scripts/check_macro_labels.py`,
   `scripts/check_personal_exposure.py`.
+### 2026-09-29 - Light-rail build briefs: Buffalo, Houston and Sacramento (staging)
+
+- **Buffalo's "Active" means nothing: 42.8% of bucket rows are past their
+  expiry date, so the brief applies Chicago's expiry-at-fetch rule.** All
+  12,131 rows of the city's `qcyy-feh8` say `Active`; 1,171 of the 2,737 in
+  bucket codes expired before 2026-09-29, the oldest in 2013. After expiry,
+  one row per point, the NYS food and salon files scoped by point-in-boundary
+  (421 of 596 postal-Buffalo food stores inside), and chair renters out:
+  retail ~909, food ~462, personal ~298 inside the city, before cross-source
+  dedupe. The screen's ~900 / ~1,500 / 374 is superseded. 22.4% sit within
+  0.6 mi of the 14 stations. The city file's `businessname` is the trade name
+  and `dbaname` usually the legal entity, the reverse of their names.
+  **NFTA's GTFS licence was read**: permitted with conditions, nothing to
+  display, and a trademark clause ("NFTA trademarks … may not be used in
+  association with the Data") that names no marks. That is Angers's shape,
+  milder. **OSM rail is recommended**, since it keeps the agreement off the
+  map. `docs/build_briefs/buffalo.md`, 8 of 8 checks.
+- **Houston: a sample places 81% and the address file is public domain, but
+  only ~7% of storefronts would sit in the rings.** The Comptroller's
+  `jrea-zgmq` has 79,097 inside-limits Houston outlets. NAICS 2017 keeps the
+  store / non-store split, so 6,491 non-store retailers (454) leave by code,
+  and 414 parking lots (812930) with them: retail ~21,870, food 11,867,
+  personal ~2,575. The City's Site Addresses (1,550,454 points) were read as
+  public domain ("COHGIS data is in the public domain and may be copied
+  without permission"). 243 of 300 sampled outlets matched exactly after unit
+  stripping. The misses are letter suffixes and highway names. On those 243
+  points, 7.0% lie within 0.6 mi of METRORail's 40 stations (80 platforms,
+  direction-suffixed names and three downtown couplets). Taoyuan's 11.7% is
+  the lowest built; the brief recommends building as scoped and stating the
+  share, and flags it. **METRO's Data Use Agreement was read** and is the
+  heaviest yet: a verbatim credit, a modification notice, a trademark legend
+  (only "METRO" is licensed), an uncapped indemnity and a 24-hour compliance
+  duty. OSM rail is recommended. `docs/build_briefs/houston.md`, 5 of 5.
+- **Sacramento's data works and its terms need three owner calls.** Of the
+  24,040 Active rows, 2,768 (11.5%) are past their expiry date (Chicago's
+  rule again), and 5,724 withhold the address as "ON FILE". Those are
+  unmappable, and mostly home businesses. In the city, unexpired: retail
+  ~1,670, food ~1,130, personal ~730, with online sellers, food vendors,
+  independent stylists and massage technicians left out. A fresh OSM read
+  puts **39 stations inside** (the screen's 41 predates the boundary test).
+  93% of a 200-row sample joins to the City's All Addresses layer, and ~38%
+  lie within 0.6 mi. **The licence read (the City's Open Data Terms of Use)
+  found an uncapped indemnity accepted "by machine-consuming, or downloading
+  and using the Data"** (Hong Kong's shape, accepted there source by source).
+  It also found a Hub label, "Request permission to use", which may or may
+  not be a term, and that All Addresses is not on the portal, so no terms
+  cover it (the Census geocoder is recommended instead). **This brief's
+  measurement pulled the 24,040 Active rows** (no owner, phone or mailing
+  columns) **before the terms were read**, which may already count as
+  acceptance. It is recorded so the owner decides with that in view. The
+  handoff's "read the timetable first" becomes a disclosure. The light-rail
+  test gates frequency only on converted railway, and SacRT's track was built
+  as light rail, the Gold Line's Folsom extension on a former freight
+  right-of-way. That reading is flagged for the owner.
+  `docs/build_briefs/sacramento.md`, 5 of 5 on the first run.
 
 ### 2026-09-29 - Light-rail build briefs: Bergen and Aarhus (staging)
 
