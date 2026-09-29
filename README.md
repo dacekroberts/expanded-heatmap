@@ -35,6 +35,7 @@ Mapped so far:
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo
 - **Germany:** Berlin
 - **United Kingdom:** London
+- **Argentina:** Buenos Aires
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.

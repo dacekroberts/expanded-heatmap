@@ -100,6 +100,7 @@ together, so a row in either counts and a row in neither still fails.
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London |
+| Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 
 ## Business registries
 
@@ -1891,6 +1892,31 @@ this to 59 if it lands first).
   `data_sources/united-kingdom.md` state the three lines. OS's 48 MB third-party
   style guide was not read (owner: skip); the notice displays inline and
   legibly on every page, as every credited source's does.
+- Wording approved by the owner 2026-09-28.
+
+**60. Gobierno de la Ciudad de Buenos Aires (Buenos Aires) — required, and
+DISPLAYED** (written into `render_site_notices()`; displayed once Buenos Aires
+lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28 for the survey and
+  Parcelas; the SBASE dataset page read 2026-09-28 declares the same
+  CC-BY-2.5-AR; the Buenos Aires rows in
+  [`data_sources/argentina.md`](data_sources/argentina.md)). **Creative Commons
+  Attribution 2.5 Argentina**: credit to the Gobierno de la Ciudad de Buenos
+  Aires / BA Data and each author unit (DG Antropología Urbana, Subsecretaría de
+  Planeamiento; Subsecretaría de Registro, Interpretación y Catastro;
+  Subterráneos de Buenos Aires, SBASE), each dataset's title and URI, the
+  licence URI, and a sentence on how the data was changed.
+- **Versions disagree** (the datasets say 2.5 AR, the survey's resources an
+  unversioned `cc-by`, Parcelas' resources 4.0): the one credit satisfies 2.5 AR
+  and 4.0 both, and the data is never described as "CC BY 4.0" alone.
+- **MUST NOT**: use a GCBA or BA Data logo; imply endorsement. If the city asks
+  for its credit to be removed, remove it (s.4(a)).
+- **MUST DO:** `check_personal_exposure.py buenos_aires`, run 2026-09-28: the
+  survey carries no name column; pins read as the street address (owner); the
+  verdict is in `DECISIONS.md`.
+- **Station names follow OpenStreetMap** (ODbL, notice 1), matched to SBASE's
+  points; the credit says so.
 - Wording approved by the owner 2026-09-28.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro

@@ -426,6 +426,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Berlin | U-Bahn U1–U9 and the S-Bahn's 16 lines (the Ring S41/S42 among them) | Trams, regional trains, ferries; the U6's Tegel branch (closed for works until about August 2027) | VBB GTFS (gate 3 exact: U-Bahn 170 = 175 less 5 closed, S-Bahn 168) | Land of Berlin (lines cut at the Land boundary) | 41 / 0 (36 in Brandenburg, 5 closed for works) |
 | **United Kingdom** | | | | | |
 | London | Underground (11 lines), DLR, Elizabeth line and the six London Overground lines (19 lines, short names on the map, full names in the legend) | Tramlink, National Rail, river buses | OpenStreetMap route relations (TfL publishes no GTFS; its API's line strings are straight lines between stations); 8 stations OSM's relations omit added from its station nodes; gate 3 exact on 14 counts | Greater London (lines cut at the boundary) | 32 / 0 |
+| **Argentina** | | | | | |
+| Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -507,6 +509,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,154 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
 | **United Kingdom** | | | | | |
 | London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,399 / 29,255 / — | No Personal services; Retail = food shops only ("Food shops") |
+| **Argentina** | | | | | |
+| Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,697 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -580,6 +584,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Berlin | Register coordinates (60,313 of 60,314 inside the Land) | Crafts missing; web shops cannot be excluded; registered offices stack at arcade and business-centre addresses | Catering, intermediation, mobile food, household services; "other personal services" (96.99) and general non-food retail (IHK 47122) as catch-alls; employee band and business type read, never shown |
 | **United Kingdom** | | | |
 | London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,001 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address never placed; the name after "trading as" shown |
+| **Argentina** | | | |
+| Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -664,6 +670,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Berlin | 2026-09-01, monthly (IHK's own commit date; fetched 2026-09-28) | B | 0.6 mi | Yes | 82% | Kind of business (the register has no names) |
 | **United Kingdom** | | | | | | |
 | London | Extracts of 2026-09-09 to 2026-09-16, per borough (fetched 2026-09-28) | B | 0.6 mi | Yes | 74% | Registered name; the trade name where registered "trading as" |
+| **Argentina** | | | | | | |
+| Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**150 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**152 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -29,11 +29,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
 - [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
 - [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
+- [Buenos Aires built: the land-use survey at parcel centres, the Subte from SBASE's own layers (owner)](#2026-09-28---buenos-aires-built-the-land-use-survey-at-parcel-centres-the-subte-from-sbases-own-layers-owner)
 - [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
 - [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
 - [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
+- [Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)](#2026-09-28---buenos-aires-taxonomy-385-survey-subtypes-mapped-five-scope-calls-owner)
 - [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
 - [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
 - [London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too](#2026-09-28---londons-unplaced-storefronts-placed-at-postcode-centroids-owner-2349-more-notice-58-for-ordnance-survey-the-credit-in-the-repository-too)
@@ -388,6 +390,61 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - Files: `docs/build_briefs/newcastle.md` and `docs/build_briefs/glasgow.md`
   (4/4 each), and the two Band B rows in `docs/city_master_list.md`.
 
+### 2026-09-28 - Buenos Aires built: the land-use survey at parcel centres, the Subte from SBASE's own layers (owner)
+
+- **Built Buenos Aires, Argentina's first city: 63,596 storefronts at 89
+  Subte stations, 42,270 (66.5%) within a ring (Retail 30,586, Food service
+  6,987, Personal services 4,697).** Step 2 keeps the 87,028 active
+  single-use shopfronts of the Relevamiento Usos del Suelo 2022-2024
+  (417,764 rows), drops 23,429 by use (6,243 of them "SIN IDENTIFICAR") and
+  counts 593 active malls and arcades left out; homes with an economic
+  activity (1,756 active, a RESIDENCIAL subtype) never enter. Drift baseline
+  recorded (`outputs/buenos_aires/baseline.json`), zero drift on its commit.
+- **Placement is a join, not a geocoder: 63,503 (99.8%) at their parcel's
+  centroid on the survey's SMP key (spaces removed, upper-cased), 93 (0.1%) at
+  their block's mean parcel centroid, 3 unplaced.** 11,538 parcels hold more
+  than one storefront, so pins stack. 1,127 rows share a parcel, use, street
+  and number and were KEPT as separate shops: all 535 groups fall in one
+  survey year (none span two, so they are not re-surveys), their OBJECTIDs
+  are consecutive, and they cluster where one building holds several shops
+  (clothing on Florida, fabric in Once). De-duplicating would have removed
+  real shops on the busiest streets.
+- **The rail source moved from OSM to SBASE's own layers at the build (owner's
+  download OK).** The brief chose OSM because the city's GTFS lacks
+  `routes.txt`; BA Data's `subte-estaciones` dataset (Subterráneos de Buenos
+  Aires, CC BY 2.5 AR, modified 2026-09-01) carries 90 station points and 98
+  track segments, and `osm-rail` ranks agency GIS layers first. Every segment
+  lies within 30 m of OSM's route; Línea E's are drawn twice (21.5 km of
+  segments on an 11.9 km footprint) and are dissolved. Gate 3 is exact against
+  SBASE and against OSM's relations on all six lines (A 18, B 17, C 9, D 16,
+  E 18, H 12). Retiro (C, E) merges as one name; Pueyrredón (B, D), about a
+  kilometre apart, stays two stations with line letters.
+- **Station names follow OSM, matched to each SBASE point on its own line (90
+  of 90 within 150 m, median 24 m).** SBASE drops accents ("Peru",
+  "Constitucion"), title-cases articles ("Plaza De Miserere") and still reads
+  "Beata Mama Antula" after the 2024 canonisation; 19 of 90 differ. OSM is not
+  uniform on honorific suffixes either (it drops Congreso's, keeps Callao D's);
+  the credit says names follow OSM.
+- **The Premetro is not drawn (owner), on a measurement:** it would add 749
+  storefronts (1.2% of placed storefronts; +1.8% on the Subte's rings), almost
+  all in Villa Lugano, Villa Soldati and Villa Riachuelo, which the Subte does
+  not reach. Consistent with Berlin's trams; disclosed on the page and in
+  `docs/excluded_categories.md`.
+- **Pins read as the street address (owner).** The survey has no name column
+  of any kind; France, Czechia and Denmark use the address where a register
+  has no trade name. `check_personal_exposure.py buenos_aires`: no names exist,
+  0 contact details, the heuristics run over addresses (Dublin's case);
+  verdict: nothing personal published.
+- **Owner-approved 2026-09-28: the page text, credit notice 60 (Berlin 57,
+  London 58 and 59 on master), the excluded-categories section and the
+  summary-table fields** (full; parcel and block centres; surveyed 2022–2024;
+  street survey; all three). The credit satisfies CC BY 2.5 AR and 4.0 both
+  and names all three author units.
+- **Front-page labels: Buenos Aires measured at 87.4 px in the deployed app's
+  frame (seven entries reproduced); joining South America widened the view, so
+  Fortaleza moved up-right (its pill had gone under the zoom buttons at 375
+  px) and Porto Alegre right of its dot (it met Santos).** Scored PROBLEMS 0 in
+  every region at 375, 768 and 1200.
 ### 2026-09-28 - Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)
 
 - **Moved Lisbon to Band R, request only (owner's call), after the owner
@@ -546,6 +603,39 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Next:** the owner reboots (the batch changes `app/cities.py`,
   `app/components.py` and `app/station_scope.py`), then the live site is
   checked, including one city nobody touched.
+### 2026-09-28 - Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)
+
+- **Mapped every `TIPO2` among Buenos Aires' 87,028 active UNICOMERCIAL
+  survey rows into the three buckets: Retail 46,479, Food service 10,127,
+  Personal services 6,993, excluded 23,429.** `pipeline/taxonomies/ba_usos_suelo.py`
+  enumerates all 385 values (none unmapped, none stale), following the two
+  survey precedents, `dublin_uses` and `barcelona_activitat`, and NAICS where
+  they agree: food shops are retail, repair and vehicle workshops (811) are
+  out, and Dublin's two departures (shoe repair and key cutting, garment
+  alterations) are personal services. The published CSV stores accented
+  vowels as cp437 mojibake (`CAFÉ` is `CAF├ë`), contrary to the brief, which
+  said UTF-8; the module repairs before lookup and keys on the repaired form,
+  and the brief was corrected.
+- **Owner's calls, each on a recommendation:** MULTICOMERCIAL (615 malls and
+  arcades whose shops are not itemised) left out and disclosed, since one pin
+  per mall would weigh a shopping centre like a kiosk; the 6,243 active "SIN
+  IDENTIFICAR" shopfronts dropped and disclosed, since drawing them needs a
+  fourth bucket and Dublin and Barcelona both drop their no-use rows;
+  VETERINARIA (ATENCION) (656) excluded as professional services (541940),
+  with Korea and Brazil against Barcelona; CONFITERIA (379) moved from Food
+  service to Retail, as neighbourhood confiterias are mostly pastry shops
+  beside the facturas and cake shops already in Retail.
+- **LOTERIA (1,106) excluded as gambling (NAICS 7132), following the regional
+  precedent (Brazil excludes lotericas).** The owner asked for the
+  discrepancy to be noted for a later uniformity pass: Berlin agrees (its WZ
+  mapping never reaches division 92), but **Dublin counts BETTING SHOP as
+  Retail**, the one taxonomy that buckets gambling. Added to `PLAN.md`.
+- **The Premetro is left out unless it covers new areas well (owner),
+  pending a measurement:** storefronts inside a Premetro stop's outer ring
+  (0.6 mi) and outside every Subte station's. OSM carries it as four
+  `route=tram` relations, ref P, colour #F38733, network "Subte de Buenos
+  Aires". The count needs the parcel join and waits for the machine's heavy
+  job to end. The Tramway Historico (heritage) is out regardless.
 ### 2026-09-28 - Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)
 
 - **Moved Kaohsiung, Tallinn and Sendai from D to R, and renamed R

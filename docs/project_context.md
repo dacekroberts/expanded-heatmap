@@ -959,6 +959,17 @@ Cities built and running end to end (pipeline, map, app page):
   missing from OSM's route data are added from its station records (retired
   automatically once OSM carries them), and the Elizabeth line and most of the
   Overground are selected by name because OSM tags them `network=National Rail`.
+- **Buenos Aires** - the Subte's six lines (A-E and H) inside the Ciudad
+  Autónoma; Argentina's first city. The businesses are **a street survey**, the
+  city's Relevamiento Usos del Suelo 2022-2024: uses, not businesses, so no
+  names (a pin reads as its street address), and no coordinates, so each is
+  placed by a JOIN to the city's Parcelas on the survey's parcel key, at the
+  parcel's centroid (block centroid where the parcel is missing). The survey's
+  accented values are cp437 mojibake, repaired in the taxonomy
+  (`ba_usos_suelo`, all 385 subtypes enumerated). Malls and arcades (shops not
+  itemised) and unidentified shopfronts are left out and disclosed. **Rail is
+  SBASE's own station and track layers**, OSM the cross-check and the source
+  of station names; the Premetro is left out (owner).
 
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food

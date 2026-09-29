@@ -183,6 +183,11 @@ TEXT_WIDTH = {
     # exactly in the same run - Prague 47.3, Tokyo 40.5, Marseille 60.3, Oslo
     # 29.0, Copenhagen 85.5.
     "London": 50.9,
+    # Buenos Aires measured 2026-09-28 in the deployed app's own frame (/~/+/)
+    # with Space Grotesk loaded (document.fonts.check true); seven entries
+    # reproduced exactly in the same run - Prague 47.3, Tokyo 40.5, Marseille
+    # 60.3, Oslo 29.0, Copenhagen 85.5, Berlin 38.8, London 50.9.
+    "Buenos Aires": 87.4,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
