@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**202 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**203 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
 - [Light-rail briefs: the last four calls answered, all five ready (owner)](#2026-09-29---light-rail-briefs-the-last-four-calls-answered-all-five-ready-owner)
@@ -241,6 +242,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
+
+- **Rule 1 now reads "at least one full bucket at register quality", not
+  "food" (owner).** The food requirement had been inferred from the pages
+  built, all of which have food. The one case that proved it was Yokohama
+  itself, so the rule was circular.
+- **Yokohama moved from C to B**, the first page not built on food: 17,408
+  personal-services premises, current to 2026-04-01, CC BY. The page states
+  that no food register is published.
+  - Its 2026-09-24 "no page" argued that a map without ~29,000 restaurants
+    would read emptier than Tokyo's or Osaka's.
+  - Two later decisions answer that: the macro map's completeness colours
+    (2026-09-28) draw a one-bucket city apart, and today's relaxed rule 4
+    discloses a thin page rather than refusing it.
+  - **Its placement rate is still unmeasured.** The block-level join places
+    95%+ in the six built Japanese cities, and it joins the post-reset
+    measurements.
+- **The amendment moves no other city.** Singapore's current registers
+  (tobacco, pharmacies) are sector lists, not a full bucket. Istanbul's
+  pharmacies are frozen and often carry the pharmacist's own name. B 4 → 5,
+  C 10 → 9.
 
 ### 2026-09-29 - The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)
 
