@@ -1547,6 +1547,28 @@ CITIES = [
         # PROBLEMS 0 in every region at 375, 768 and 1200.
         "label_offset": ("end", -10, 5),
     },
+    {
+        "name": "Sydney",
+        "lat": -33.8688,
+        "lon": 151.2093,
+        "page": "pages/61_Sydney_Heatmap.py",
+        # Owner-approved 2026-09-28.
+        "coverage": "full",
+        "placement": "Census coordinates (per building)",
+        "data_age": "Survey of 2022",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
+        "blurb": "Sydney Trains T1–T4, T8, T9 and Metro M1",
+        "region": "Oceania",
+        "country": "Australia",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 51.4 px in
+        # the deployed app's own frame (2026-09-28, three entries reproduced),
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0. Alone in Oceania until Melbourne arrives.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -1691,6 +1713,12 @@ REGION_ORDER = [
     # Seoul is about 2,100 km and to Sapporo about 3,400, past the 3,300 at which
     # Canada was split, so re-score it when Japan lands rather than assume.
     "East Asia",
+    # OCEANIA (owner, 2026-09-28): Sydney first, Melbourne next, about 710 km
+    # apart - one readable view, far from every other region. Named for the
+    # continent rather than the country, as Europe is, so an Australian or New
+    # Zealand city joins it; Perth is about 3,300 km from Sydney, past the
+    # distance at which Canada was split, so re-score it if it ever arrives.
+    "Oceania",
 ]
 
 # A REGION'S ZOOM FITTED WITHOUT AN OUTLIER; its centre still takes every city.
