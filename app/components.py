@@ -355,6 +355,7 @@ SITE_NAME = "Storefronts Near Transit"
 # keeps them last in the sidebar, which is where they belong.
 ABOUT_DATA_PAGE = "pages/90_About_the_Data.py"
 EXCLUSIONS_PAGE = "pages/91_What_Is_Excluded.py"
+DIFFERENCES_PAGE = "pages/92_Why_the_Maps_Differ.py"
 
 # Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
 # and the sources are recorded in docs/data_sources.md, "Notices this project
@@ -1352,7 +1353,7 @@ _AS_RECORDED = (
 
 
 def render_site_notices(show_links: bool = True):
-    """The site-level footer: the two data documents, then every notice that
+    """The site-level footer: the three reference pages, then every notice that
     publishing these maps requires.
 
     Called from EVERY page. See _NOTICES above for why a single city page
@@ -1364,6 +1365,7 @@ def render_site_notices(show_links: bool = True):
                           vertical_alignment="center"):
             st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
             st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
+            st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
     st.caption(_AS_RECORDED)
     st.caption(_NON_AFFILIATION)
 

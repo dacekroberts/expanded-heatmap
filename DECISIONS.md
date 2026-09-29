@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- ["Why the maps differ" built (page 92), waiting for review time](#2026-09-28---why-the-maps-differ-built-page-92-waiting-for-review-time)
 - ["Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting](#2026-09-28---why-the-maps-differ-page-shape-decided-owner-the-inconsistency-list-re-checked-before-drafting)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
@@ -148,6 +149,44 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - "Why the maps differ" built (page 92), waiting for review time
+
+- **Built on `worktree-cleanup` with the owner's approved text** (the eleven
+  themes as drafted in chat, with theme 7 opened "How much of a city's
+  storefronts lie near a station", owner's edit). New:
+  `app/pages/92_Why_the_Maps_Differ.py`; `app/ring_shares.json` and
+  `scripts/check_ring_shares.py` (in `check_all.py`); three fields per city in
+  `app/cities.py` (`rail_extra`, `record_kind`, `categories`), with the
+  vocabulary and a `coverage` agreement rule in `check_inconsistency_list.py`.
+  The footer link is in `render_site_notices()`, with top links on pages 90
+  and 91. Page 91's "Commuter rail is excluded everywhere" now reads "left out
+  except where, inside the city, it runs like a metro (*Why the maps differ*
+  says where)", the companion fix approved with the page.
+- **The ring share is counted from the maps, not recorded.** It is the
+  in-ring heat layer's points over the whole-city layer's, found by layer
+  name, as table D counts it. The committed maps are about 212 MB, so
+  `--write` (22 s) stores each map's git blob id. The check compares ids from
+  `git ls-files -s` (0.3 s) and re-reads only a changed map. A re-render that
+  moves no point passes; one that moves a count fails and names `--write`.
+  Controls: a changed id with the same points passed (1 re-read); an
+  off-by-one count failed naming Rennes 2,365 against 2,366; a missing city
+  failed naming Oslo. The 55 shares run 12% (Taoyuan) to 100% (Barcelona,
+  35,936 of 35,958), matching table D.
+- **The table is an HTML table in a scrolling box, not `st.dataframe`**,
+  which drew collapsed on page 91 in the lean venv (2026-09-23), and not a
+  markdown table, which widens the page at 375 px as Tokyo's ward table
+  does. Measured in the lean venv at 375 px: the document is 375 px wide, and
+  the box is 343 px showing a 760 px table. All 55 rows are there.
+- **The field values were read from tables A and B.** "Trams" includes light
+  rail. Montréal's REM, the Busan-Gimhae LRT and Seoul's light metros count
+  as metro, not trams; Taipei's Danhai and Ankeng LRT count as trams. The
+  Japanese cities are "Retail thin" (their layer is labelled "Food shops").
+  The tier rule found no disagreement with `coverage`: "Retail thin" is full
+  in New York and narrowed in Toronto, Korea and Japan, so it may be either.
+- **Checks:** `check_all.py` 24 of 24, `check_deploy_imports.py` clean. One
+  local render in the lean venv, footer link present on the front page. No
+  `deploy-verify`: that runs at review time with the batch.
 
 ### 2026-09-28 - "Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting
 

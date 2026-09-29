@@ -1,0 +1,277 @@
+{
+ "san_diego": {
+  "in_ring": 2577,
+  "all": 10955,
+  "map_blob": "d799e9422bf29b81375253af19e56bca610549a7"
+ },
+ "san_francisco": {
+  "in_ring": 12792,
+  "all": 17837,
+  "map_blob": "a93fae21a69a4befbac99ccb2876a30511194136"
+ },
+ "los_angeles": {
+  "in_ring": 14019,
+  "all": 58173,
+  "map_blob": "d31ce14aad3f73dfc0df1af672edc20bffd61102"
+ },
+ "chicago": {
+  "in_ring": 11796,
+  "all": 20686,
+  "map_blob": "d0646bc3b7c2ef90e000ebedb710754c60194837"
+ },
+ "new_york": {
+  "in_ring": 44360,
+  "all": 62441,
+  "map_blob": "0c5725c01c9966f140f78822917deaa008330884"
+ },
+ "philadelphia": {
+  "in_ring": 4954,
+  "all": 8504,
+  "map_blob": "25e93106c3d81737406b7d7b1ee5098f58fad309"
+ },
+ "miami": {
+  "in_ring": 3775,
+  "all": 29878,
+  "map_blob": "fc3fff3df6aa8174b17a6f3bc5b978c36e993faf"
+ },
+ "boston": {
+  "in_ring": 2410,
+  "all": 3164,
+  "map_blob": "bacd2ebe35ee7cdd999fe42c4b371fc743c7a07b"
+ },
+ "washington_dc": {
+  "in_ring": 3860,
+  "all": 5230,
+  "map_blob": "a656bdc04e150c058a1bccca9ce07f432a100d3a"
+ },
+ "vancouver": {
+  "in_ring": 4668,
+  "all": 11724,
+  "map_blob": "29db47a9f947f567ccbbda59f393a772a3a15677"
+ },
+ "montreal": {
+  "in_ring": 10421,
+  "all": 17231,
+  "map_blob": "ea4d8d0fe0f53d746faca685c6309988bc6d8e56"
+ },
+ "calgary": {
+  "in_ring": 6171,
+  "all": 15099,
+  "map_blob": "4fa8e6673139c4a149285aec6843a80ee3af1ab2"
+ },
+ "edmonton": {
+  "in_ring": 2380,
+  "all": 10721,
+  "map_blob": "f4434fd83e268d63de5dfc78bc26dfb334ea4a86"
+ },
+ "toronto": {
+  "in_ring": 8739,
+  "all": 18186,
+  "map_blob": "1f30b584e12e342361c5a880a6e8b86a30e58ada"
+ },
+ "mexico_city": {
+  "in_ring": 133362,
+  "all": 283345,
+  "map_blob": "1d70d75905a09e8b6edeaf5985668e60d1f73dbd"
+ },
+ "guadalajara": {
+  "in_ring": 36925,
+  "all": 117454,
+  "map_blob": "b5831dd6a82a4c1bb2c4d942f625915fc027b359"
+ },
+ "madrid": {
+  "in_ring": 50497,
+  "all": 53355,
+  "map_blob": "f09bc1ec61752435cdecd4eadb3f06d4ec5b916f"
+ },
+ "barcelona": {
+  "in_ring": 35936,
+  "all": 35958,
+  "map_blob": "1eefde4f52fad8feca2f095cef9d72aec18180af"
+ },
+ "dublin": {
+  "in_ring": 7595,
+  "all": 13123,
+  "map_blob": "6aac1c4a31614d8d5eb2283e68f51f2c11a26fc7"
+ },
+ "milan": {
+  "in_ring": 41510,
+  "all": 47540,
+  "map_blob": "89a5753fe5379a2deb11f99b0339fb8b16049ba3"
+ },
+ "paris": {
+  "in_ring": 85501,
+  "all": 87164,
+  "map_blob": "761df065e035f543b9a6af7bad9d67d30258eb35"
+ },
+ "marseille": {
+  "in_ring": 10013,
+  "all": 18177,
+  "map_blob": "b8af76744e435ac865d05529839ec938debd91fe"
+ },
+ "toulouse": {
+  "in_ring": 5553,
+  "all": 8635,
+  "map_blob": "b7636c6b7ff0898173649c1739bfb4f025125a8c"
+ },
+ "lille": {
+  "in_ring": 7205,
+  "all": 11833,
+  "map_blob": "2f2f3d295f44573cad7084cd5fe1e8e610536fa2"
+ },
+ "rennes": {
+  "in_ring": 2365,
+  "all": 3479,
+  "map_blob": "5577018f268fd86aaf7bc12ca14c9f5ededf18c0"
+ },
+ "oslo": {
+  "in_ring": 8107,
+  "all": 10718,
+  "map_blob": "42ca8733da2bbf0760368f263f011dfa65d4ba86"
+ },
+ "copenhagen": {
+  "in_ring": 14154,
+  "all": 14978,
+  "map_blob": "cfef7cdff77fce24e45c20cf1de50b6ed65ae993"
+ },
+ "prague": {
+  "in_ring": 17648,
+  "all": 25275,
+  "map_blob": "77f082cc01ebd8d9bd143a3dc12aaf8b6727be63"
+ },
+ "amsterdam": {
+  "in_ring": 12648,
+  "all": 13238,
+  "map_blob": "f1b22e00e3979c0ccc0337f9b6b96539ce794b8d"
+ },
+ "rome": {
+  "in_ring": 60739,
+  "all": 98897,
+  "map_blob": "f5569553c1349d635c15a064c64a0276c2e55002"
+ },
+ "sao_paulo": {
+  "in_ring": 49591,
+  "all": 219578,
+  "map_blob": "c116124e23058cca6939569ca332a1d94f2ae77f"
+ },
+ "rio_de_janeiro": {
+  "in_ring": 30269,
+  "all": 106652,
+  "map_blob": "e6895fd7f201c82ba9ef2f75ec23c764238dc826"
+ },
+ "belo_horizonte": {
+  "in_ring": 8428,
+  "all": 45582,
+  "map_blob": "c6e7c702c2ab3422c09c629b7196f9e42c148b01"
+ },
+ "brasilia": {
+  "in_ring": 5066,
+  "all": 36687,
+  "map_blob": "8c36a75da81a855497850f8320db34d3044c4185"
+ },
+ "salvador": {
+  "in_ring": 10068,
+  "all": 53045,
+  "map_blob": "8f22a5884d914c172cb6d4c8a70f7dab7d4690c1"
+ },
+ "fortaleza": {
+  "in_ring": 8543,
+  "all": 62969,
+  "map_blob": "b16a90f424eddb8c054d8f50c5c807f38abf7082"
+ },
+ "porto_alegre": {
+  "in_ring": 7420,
+  "all": 36480,
+  "map_blob": "801cf72cc1ce2d57d25fa6e75f08f63762d95aca"
+ },
+ "recife": {
+  "in_ring": 10388,
+  "all": 44382,
+  "map_blob": "11c40802444aa2e254791e5e90633dd528bdde97"
+ },
+ "santos": {
+  "in_ring": 5387,
+  "all": 11813,
+  "map_blob": "1423898a46a95bd1117f3ef195c60c3dea45956b"
+ },
+ "rotterdam": {
+  "in_ring": 6982,
+  "all": 7520,
+  "map_blob": "6d736e2a1244be182200ce740887644ba5794515"
+ },
+ "hong_kong": {
+  "in_ring": 19275,
+  "all": 21135,
+  "map_blob": "5642fdcc6a6bcf32553b3ef15a422b2c3617f369"
+ },
+ "riga": {
+  "in_ring": 5241,
+  "all": 6730,
+  "map_blob": "7aaa2d3d29761d77c46e01c95295dd0b6a415c2d"
+ },
+ "seoul": {
+  "in_ring": 224381,
+  "all": 239410,
+  "map_blob": "12367a0fc85e524d3dc41b449885d9201258b42c"
+ },
+ "taichung": {
+  "in_ring": 12588,
+  "all": 66115,
+  "map_blob": "dfbf9cc8304e71b2e8770ff2c694238cc1e3105f"
+ },
+ "taoyuan": {
+  "in_ring": 5226,
+  "all": 45014,
+  "map_blob": "0f0cef4ebe35a3c3a3acc311cb758c814d4d9b78"
+ },
+ "taipei": {
+  "in_ring": 103587,
+  "all": 133335,
+  "map_blob": "b8656488adbbdf98650eb23a2c0312e11cbd5272"
+ },
+ "daegu": {
+  "in_ring": 47724,
+  "all": 67212,
+  "map_blob": "3b730e903ac3f3a89c51f473ff9395e1b544f829"
+ },
+ "busan": {
+  "in_ring": 66348,
+  "all": 89798,
+  "map_blob": "010be88823ddb938c0b2d517ec43237c213fa2e8"
+ },
+ "monterrey": {
+  "in_ring": 14788,
+  "all": 58564,
+  "map_blob": "28e04af0296605358afb6bc0b97774c9a536c23f"
+ },
+ "kobe": {
+  "in_ring": 23785,
+  "all": 27251,
+  "map_blob": "053e00d8e76506abb88cb85101782d362efe3c9b"
+ },
+ "osaka": {
+  "in_ring": 71672,
+  "all": 72999,
+  "map_blob": "86bf1bac975f33923a79e248fdf669a4d36dc358"
+ },
+ "sapporo": {
+  "in_ring": 23001,
+  "all": 28674,
+  "map_blob": "f261bcceffe6a72bdc604860fd42025ee2ea3f46"
+ },
+ "fukuoka": {
+  "in_ring": 24722,
+  "all": 30062,
+  "map_blob": "6986d0ae974fbcf4d9777f101e90be6f48c4a76b"
+ },
+ "kyoto": {
+  "in_ring": 27980,
+  "all": 32355,
+  "map_blob": "fce8bd02fec9f49f19f21ee19719723a5f26b488"
+ },
+ "tokyo": {
+  "in_ring": 62483,
+  "all": 63989,
+  "map_blob": "764eff60a943a6a1922ec39215f6c93b7b4b3d7c"
+ }
+}

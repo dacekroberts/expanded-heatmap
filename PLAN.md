@@ -100,17 +100,14 @@ Desktop is unaffected — the label is fully visible there.
   The macro map's marker and label colours now come from `pipeline/theme.py`;
   measure them against the dark page (`#0B1220`) numerically, not by eye.
 
-- [ ] **⏸ AFTER THE LAST VIABLE BUILD: put the cross-city inconsistency list
-  on the site** (owner, 2026-09-24).
-  - **The list**: `docs/map_inconsistencies.md` (draft, kept current by
-    Cleanup) is one place that answers "why does this map differ from that
-    one": what each map draws and what is missing, city by city. Readers should
-    not have to read each city's prose to learn it.
-  - **Placement is deliberately undecided.** The owner wants reminding only
-    once every valid build is done: presentation cleanup (mostly prose and UI)
-    comes after all the content is on the maps.
-  - **Until then**: keep the draft current as cities land, and don't raise
-    placement early.
+- [ ] **Put the cross-city inconsistency list on the site** (owner, 2026-09-24).
+  BUILT 2026-09-28 on `worktree-cleanup`, WAITING FOR REVIEW TIME: page 92 "Why
+  the maps differ", linked from every page's footer; the owner's shape and
+  approved text are in DECISIONS (2026-09-28). `docs/map_inconsistencies.md`
+  stays internal as its evidence and is still kept current as cities land. A
+  new city now also needs `rail_extra`, `record_kind` and `categories` in
+  `app/cities.py` and a `check_ring_shares.py --write` (both checks are in the
+  hook). Tick this once it is live.
 
 - [ ] **🇲🇽 MONTERREY (REGIONAL) - BUILT 2026-09-27 on branch `worktree-monterrey`, HELD for a
   batch publish with a few smaller cities (owner): 58,565 storefronts, 38 stations, Metrorrey

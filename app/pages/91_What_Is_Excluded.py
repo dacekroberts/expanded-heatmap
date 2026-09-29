@@ -40,6 +40,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from cities import CITIES  # noqa: E402
 from components import (  # noqa: E402
     ABOUT_DATA_PAGE,
+    DIFFERENCES_PAGE,
     OVERVIEW_PAGE,
     SITE_NAME,
     render_site_notices,
@@ -65,6 +66,7 @@ set_base_font()
 with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
     st.page_link(OVERVIEW_PAGE, label="← Global View")
     st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
+    st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
 
 st.title("What is counted, and what is not")
 
@@ -75,7 +77,8 @@ few hundred metres of a rapid-transit station - and they answer it by leaving
 two different things out.
 
 **Which stations.** Each map covers one rapid-transit network, the one named
-in that city's page title. Commuter rail is excluded everywhere, stations in
+in that city's page title. Commuter rail is left out except where, inside the
+city, it runs like a metro (*Why the maps differ* says where), stations in
 neighbouring municipalities are dropped because no register covers them, and
 where a light-rail line stops every other block its surface stops are thinned
 so the rings stay readable.
