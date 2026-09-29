@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**146 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**147 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
 - [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
 - [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
@@ -182,6 +183,50 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured
+
+- **Licence reads (`licence-read`, one per source), both PERMITTED WITH
+  CONDITIONS, CC BY 4.0, with nothing to do beyond display.**
+  - **Melbourne's CLUE:** the council portal declares CC BY 4.0.
+    DataVic's "other-open" turned out to be CKAN's generic bucket, and the
+    same record carries CC BY 4.0 in its custom licence fields. The portal's
+    terms page is empty ("have not been defined yet"), so nothing is
+    incorporated by reference.
+  - **Sydney's FES layer:** the ArcGIS item's `licenseInfo` links CC BY 4.0
+    with the credit "City of Sydney". Data.NSW's harvested copy says
+    "License Not Specified", which is a harvester failure.
+  - **Flagged, not a blocker:** the City of Sydney website's terms bar
+    republishing "content or data" without written authorisation. The read
+    judged they do not reach the data hub, since they are written for that
+    website and nothing on the hub incorporates them.
+  - **Credit wording** is prescribed by neither council. The reads' drafts
+    are in the briefs, for the owner.
+- **Rail, from OSM stations inside each LGA.**
+  - **Melbourne:** 20 train stations, including the Metro Tunnel's five;
+    the screen had said 12-15.
+  - **Sydney:** 16 Sydney Trains and Metro stations.
+- **Ring coverage** (0.6 mi, storefront-class points, projected):
+  - **Melbourne:** 96.5% of 5,456 by train, 99.1% with trams.
+  - **Sydney:** 83.2% of 7,497 by train and Metro, 93.0% with light rail.
+  - **Recommended, as owner calls at the build:** trains only for both,
+    Berlin's precedent for trams. In Sydney the light rail adds 9.8 points,
+    so the call there is closer.
+- **Points are per building in both.**
+  - **Melbourne:** 5,456 storefronts on 1,919 points (largest stack 221).
+  - **Sydney:** 21,618 establishments on 12,334 coordinates (largest 163).
+  - Ring counts are unaffected; how the map shows the stacks is the build's
+    call.
+- **Sydney's storefront count is not yet settled.** The prefix filter
+  (ANZSIC 39-43, 451-452, 951-953) gives 7,497, against the screen's split
+  of 7,394. Motor vehicle retail, fuel, funerals and parking are the
+  candidate difference, for the taxonomy to decide.
+- **A new region value ("Oceania")** is needed for the first Australian page.
+  That is the owner's call.
+- Files: `docs/build_briefs/melbourne.md` (4/4) and
+  `docs/build_briefs/sydney.md` (5/5; its OSM check failed once on an
+  Overpass answer and passed on the rerun), and the two Band B rows in
+  `docs/city_master_list.md`.
 
 ### 2026-09-28 - Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build
 
