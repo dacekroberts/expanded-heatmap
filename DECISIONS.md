@@ -20,12 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**205 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**207 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
+- [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
@@ -290,6 +292,64 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rejected: the rule as given is either, and the page is where a reader of
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
+
+### 2026-09-29 - Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)
+
+- **Minneapolis and Pittsburgh move to B (owner)**, each on a city-only
+  scope with its worst line's 42% accepted (Minneapolis's Green, Pittsburgh's
+  Silver). Both keep 19–20 stations inside the city, a normal-sized map
+  against Buffalo's 14 and Glasgow's 15. The rejected alternative was holding
+  them to Toulouse's T1 (52%), the lowest worst line built city-only. That
+  would have been a new floor the precedent never set as a rule.
+- **St. Paul was re-checked first, at the owner's question**, for a
+  Minneapolis–St. Paul scope that would restore the Green line.
+  - Its Socrata portals are gone (404 on three domains).
+  - The city's one licence layer is 306 liquor licences.
+  - No statewide or Ramsey County food list turned up.
+
+  The discard stands, with the re-check on its row. More would take a
+  request to the city's inspections department (outreach, the last resort).
+- **Band C now holds 5**: Singapore, Istanbul, Ankara, Perth and Ho Chi Minh
+  City, each with its "what would change it". B 7 → 9.
+
+### 2026-09-29 - The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected
+
+- **Ottawa passes the reduced-bucket bar and moves to B.** Its public-health
+  inspection feed (Yelp's LIVES format, feed date 2026-09-29) lists 12,961
+  businesses, 5,747 of them inspected since 2024-09-29. About 7.2% of those
+  are institutional kitchens by name, which leaves ~5,300 food premises,
+  99.8% with coordinates. The feed has no type field, so food shops sit
+  inside the food bucket; that is disclosed, as for Kitchener–Waterloo. Its
+  licence is read at build.
+- **Palma passes and moves to B.** 4,372 are active; 13.3% carry
+  coordinates. The rest were joined to Catastro's INSPIRE addresses for the
+  municipality (55,609 points). Street and number matched 61.0% of a
+  300-row sample after one normalisation pass, read from the misses:
+  Catastro's type codes (`CL`, `CM`…) and Catalan particles. That places
+  66.2% overall, and **73.4% with Incheon's nearest same-side number**. 12.7%
+  of rows have no number (`S/N`). Catastro's certificate chain needed the OS
+  trust store (the `address-join` skill's step 3); verification stayed on.
+- **Minneapolis and Pittsburgh pass on data, and each has a rail question
+  for the owner.**
+  - Minneapolis: 2,916 facilities (restaurants 1,544; grocery 448 and meat
+    markets 90 as retail), all with coordinates.
+  - Pittsburgh: 3,217 active facilities in the city's wards (restaurants
+    1,633; convenience and packaged-food shops 453), 98% placed, plus 3,855
+    under an undocumented status 7.
+  - The stub test, from OSM route relations against each city's boundary:
+    - Minneapolis: 19 stations inside; Blue keeps 60%, Green 42% (its other
+      half in St. Paul).
+    - Pittsburgh: 20 stations inside; Blue 54%, Red 48%, Silver 42%.
+  - Neither is a stub by station count (Buffalo has 14 and Glasgow 15), but
+    both worst lines sit below Toulouse's T1 (52%), the lowest built on a
+    city-only scope. **Left in C until the owner calls the rail.**
+  - Minneapolis's "38 stations" recorded earlier was a bounding-box count.
+- **Yokohama's count corrected: 7,896 premises, not 17,408.** The current
+  register (2026-04-01, all 18 wards) holds beauty 5,091, barbers 1,512 and
+  cleaning 1,293. The earlier figure's source could not be traced. It places
+  97.8–98.7% at block level on the shared `japan_register` join, and about
+  100% with town-chōme. It stays in B.
+- B 5 → 7, C 9 → 7.
 
 ### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
 
