@@ -4,6 +4,35 @@
 2026-09-23.** Run `python scripts/brief_check.py bucharest` before writing any
 code for this city.
 
+> **Measured at the build, 2026-09-29 (build session, branch `bucharest`)** -
+> these supersede the figures below:
+> - **The registers**: 17 files, 23,113 active rows (10,316 cancelled below the
+>   ANULATE rows never read); file 19's second sheet is hidden and empty (step
+>   2 checks every file's other sheets). Out: 75 mobile units, and by category
+>   8 kiosk carts, 2 vending machines, 3 labs, 13 in-house buffets ("bufet de
+>   incintă") and 1 catering-only unit. 23,014 rows merge to **20,821
+>   premises** (Staging: 20,815).
+> - **Names (owner)**: the company name without its legal form; the category
+>   for 308 sole traders (the form before or after the name, after a hyphen, or
+>   behind a legal form: "Volosnicu Mihaela PFA SRL") and for 6 companies
+>   named only as a person (owner, 2026-09-29).
+> - 🚨 **Staging's key put 11.2% of its matches on an address with points more
+>   than 300 m apart**: it dropped the street type (Aleea / Șoseaua
+>   Pantelimon) and ignored the sector. The build keeps the type, matches in
+>   the register's own sector (the six OSM sector polygons, 100 m edge), and
+>   accepts only points forming ONE site (150 m hops, 600 m wide): **15,593
+>   placed, 74.9%**, 73-76% in every sector (exact 13,101, whole number 592,
+>   tolerant 1,906; unplaced: no street 1,855, street without the number
+>   1,726, two places 1,288, no number 365). **Control**: with those tests off
+>   the join reads 81.7% (Staging 79.5%). **Second method**: 29 of 29
+>   house-level Nominatim answers within 100 m, median 15 m.
+> - **Rail**: 12 OSM relations, M1-M5, **64 stations against 64**; the branch
+>   rule dropped M5's Valea Ialomiței branch (519 m from any track) until the
+>   buffer was narrowed, and a new gate holds every station within 100 m of its
+>   line (furthest 23 m). **72.1% of placed storefronts in a ring.**
+> - The archive.org brief-check answered HTTP 429 (rate limit) twice at the
+>   build; the metro check passed.
+
 > **Re-checked 2026-09-28 (staging), before the build.** These supersede the
 > text below where they differ.
 > - **Band B since 2026-09-27** (owner, the Band C memo), on the memo's two

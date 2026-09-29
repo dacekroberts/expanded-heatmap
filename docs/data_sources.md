@@ -89,6 +89,7 @@ together, so a row in either counts and a row in neither still fails.
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo |
+| Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam |
@@ -2037,6 +2038,30 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   run 2026-09-28, finds only trading names and no fallback; the verdict is in
   `DECISIONS.md`.
 - **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**66. DSVSA București (Bucharest) — displayed by choice, not required**
+(written into `render_site_notices()`; displayed once Bucharest lands).
+*Numbered 66 on branch `bucharest`; it becomes 67 when Stockholm's notice 66
+lands first - renumber at merge (owner, 2026-09-29).*
+
+- **SILENT, with the pages named** (read in the browser 2026-09-23; the
+  Bucharest rows in [`data_sources/romania.md`](data_sources/romania.md)):
+  `bucuresti.dsvsa.ro` has no terms-of-use page, only cookie and privacy
+  pages; the privacy policy says nothing of reuse; DSVSA's data is not on
+  `data.gov.ro`. The ANSVSA footer "Toate drepturile rezervate" is a website
+  footer, which governs site content, not the data (the New York situation).
+- **MUST DISPLAY**: nothing is prescribed. The notice credits the publisher,
+  says no licence is stated, names the changes (including the name rule and
+  the address placement) and disclaims endorsement. Wording approved by the
+  owner 2026-09-29.
+- **MUST NOT**: present the map as the official register, or imply DSVSA or
+  ANSVSA produced or endorses it.
+- **MUST DO**: nothing to the publisher. The files are fetched by the owner in
+  their own browser (the Band C memo's condition); a clearance cookie is never
+  replayed. Privacy: `check_personal_exposure.py bucharest`, run 2026-09-29;
+  the verdict is in `DECISIONS.md`.
+- **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
+  data** (ODbL, notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

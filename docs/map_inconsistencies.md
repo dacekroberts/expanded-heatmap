@@ -56,7 +56,8 @@ dense-looking city may simply have more complete records.
 - **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
   Agency's FHRS), every food premises a borough or council inspects, and nothing
   else; Glasgow the same on Scotland's scheme (Food Standards Scotland's FHIS),
-  every premises the council inspects.
+  every premises the council inspects. Bucharest's is the sanitary-veterinary
+  directorate's register of food units (DSVSA București), active registrations only.
 - **A chamber of commerce's membership:** Berlin (IHK Berlin's Gewerbedaten), each
   member's premises as a point. Membership, not licensing, decides who is in it:
   the crafts belong to a different chamber and are absent.
@@ -76,14 +77,14 @@ dense-looking city may simply have more complete records.
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional).
+- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Bucharest.
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
   London, Glasgow and Newcastle (Regional) (grocers, off-licences, bakers,
   butchers, newsagents with food and supermarkets, named "Food shops" as in the
-  Japanese cities).
+  Japanese cities); Bucharest the same, butchers and bakeries to supermarkets.
 - **Retail thin:** New York (food stores plus a regulated slice of trades). Toronto:
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
   fireworks), 328 pins inside the rings against 6,461 Food service. Seoul: Retail is
@@ -278,8 +279,8 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   date, 2026-09-01), London (each borough's extract date, 2026-09-09
   to 2026-09-16), Glasgow (the council's extract date, 2026-09-14), Newcastle
   (Regional) (each council's, 2026-09-09 to 2026-09-16), Buenos Aires (the
-  survey years, in the prose), Sydney (the survey year) and Melbourne (the
-  census year).
+  survey years, in the prose), Sydney (the survey year), Melbourne (the
+  census year) and Bucharest (the registers' date, 2026-08-25).
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -422,6 +423,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | Métro a, b | — | STAR GTFS | Commune | 4 / 0 |
 | **Norway** | | | | | |
 | Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
+| **Romania** | | | | | |
+| Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
 | **Denmark** | | | | | |
 | Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
 | **Czechia** | | | | | |
@@ -510,6 +513,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | same | same | same | 1,105 / 906 / 354 | — |
 | **Norway** | | | | | |
 | Oslo | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 4,197 / 2,082 / 1,828 | — |
+| **Romania** | | | | | |
+| Bucharest | Food hygiene register | DSVSA București's registers of food units (17 category files, active rows only) | The file (the unit category), with the category text for exceptions | 5,250 / 5,994 / — | No Personal services; Retail = food shops only ("Food shops"); a quarter of premises unplaced |
 | **Denmark** | | | | | |
 | Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,760 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
@@ -598,6 +603,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | same (99.97%) | Masking 17.5% | Same codes |
 | **Norway** | | | |
 | Oslo | Address join to Matrikkelen (96.8%) | Web shops cannot be excluded | 8 no-premises codes, 96.990, bankrupt parents; sole-trader names withheld |
+| **Romania** | | | |
+| Bucharest | Address join to OpenStreetMap's address points, in the premises' own sector (74.9%) | About one storefront in four unplaced, even across sectors; fishmongers in markets lowest | Cancelled registrations, mobile units, kiosk carts, vending machines, pastry labs, in-house buffets, catering; sole traders' and person-named companies' names withheld (category shown) |
 | **Denmark** | | | |
 | Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
 | **Czechia** | | | |
@@ -681,6 +688,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Rennes | same (2026-09-23) | T | 0.3 mi | Yes | 68% | same (about two in five show an address, per the page) |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
+| **Romania** | | | | | | |
+| Bucharest | Registers of 2026-08-25 (fetched by the owner 2026-09-28) | B | 0.6 mi | Yes | 72% | Company name without its legal form; category for sole traders and person-named companies |
 | **Denmark** | | | | | | |
 | Copenhagen | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 94% | Name; address for personal owners |
 | **Czechia** | | | | | | |

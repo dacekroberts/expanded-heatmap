@@ -2237,6 +2237,47 @@ stations inside it.
   Racecourse stations), the City Circle special service and V/Line are not
   drawn.
 
+### Bucharest - the sanitary-veterinary registers, food only, placed by address
+
+**Only food is on this map.** DSVSA București registers the units that
+handle food; Romania publishes no open register of other shops or of personal
+services, so clothes shops, hairdressers and the like are missing rather than
+excluded. Food shops (butchers, fishmongers, bakeries, confectioners, food
+shops, supermarkets) are a category of their own.
+
+**Cancelled registrations** - 10,316 rows below the files' ANULATE rows are
+never read; 23,113 active rows are.
+
+**Never fetched, by the owner's call (2026-09-28)** - canteens (file 21),
+pastry labs (22), catering (31), local producers, internet-only sales, mobile
+stalls, vending machines, warehouses, fairs, and the farm and processing
+categories.
+
+**Excluded within the files used** - 75 mobile units (Sector "U.M.", a food
+truck with a number plate for an address); and by category, the owner's
+exclusions applied to rows filed elsewhere: 13 in-house buffets ("bufet de
+incintă", a canteen), 1 catering-only unit, 3 pastry labs, 8 kiosk carts and 2
+vending machines.
+
+**Merged** - one premises registered in several files (a supermarket's
+butcher, fishmonger and food counter) is shown once: 23,014 rows are 20,821
+premises.
+
+**Names withheld** - a sole trader (II, PFA, IF, PF: 308) and a company named
+only as a person (6) are shown by category, never by name (the owner's rules,
+2026-09-28 and 2026-09-29). Other companies show their name without the legal
+form.
+
+**Not placed** - 5,228 premises (25.1%): the register gives an address but no
+position, and each is placed by matching its street and number to
+OpenStreetMap's address points in its own sector. Left off rather than guessed:
+the street not found (1,855), the street without that number (1,726), the
+number in two or more places (1,288), no number given (365). Even across the
+sectors (73-76% placed); lowest for fishmongers (50%), many inside markets.
+
+**Stations.** Metrorex M1-M5, 64 stations, every one inside the municipality.
+- Suburban trains and trams are not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

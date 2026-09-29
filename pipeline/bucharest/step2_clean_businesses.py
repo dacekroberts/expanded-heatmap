@@ -99,7 +99,7 @@ def read_registers():
 # person's name OR before it, after a space or a hyphen. Tested AFTER the
 # legal form is stripped: "Volosnicu Mihaela PFA SRL" and "SC II CAGELEA
 # ..." hide the form behind one (2026-09-29).
-_FORM = r"(i\.?\s?i\.?|p\.?\s?f\.?\s?a\.?|i\.?\s?f\.?)"
+_FORM = r"(i\.?\s?i\.?|p\.?\s?f\.?\s?a\.?|i\.?\s?f\.?|p\.?\s?f\.?)"   # PF: persoana fizica
 SOLE_TRADER = re.compile(
     rf"(^|[\s-]){_FORM}\s*$|^{_FORM}(\s|(?<=\.)(?=\w))|"
     r"\b(intreprindere individuala|intreprindere familiala|persoana fizica autorizata)\b")
@@ -118,12 +118,41 @@ def strip_legal_form(name):
     return shown
 
 
+# A company registered under its owner's own name ("Caranica Mihai SRL") is
+# shown by category too (owner, 2026-09-29): its name, stripped of the legal
+# form, is only a Romanian given name, a surname and initials.
+GIVEN_NAMES = set("""ion ioan maria elena gheorghe vasile andrei mihai alexandru ana ioana florin marian
+nicolae cristian daniel adrian dumitru constantin mariana gabriela george mircea stefan radu bogdan cosmin
+catalin ciprian claudiu costel dan dorin dragos emil eugen florian gabriel iulian ionut laurentiu liviu
+lucian marius octavian ovidiu paul petru razvan robert sorin teodor tudor valentin victor viorel virgil
+alina andreea anca angela camelia carmen cristina daniela diana doina elisabeta emilia florentina georgeta
+iuliana laura liliana lucia luminita magdalena maricica mihaela monica nicoleta oana otilia paula raluca
+ramona roxana silvia simona sorina stela tatiana valentina veronica violeta viorica aurel aurelia cornel
+cornelia marin marinela lenuta costica nelu gigel fanel petrica ilie grigore traian toma sandu""".split())
+SURNAME_ENDING = re.compile(r"(escu|eanu|anu|oiu|aru|ache|ica|oaie|ciu)$")
+
+
+def is_person_name(shown):
+    words = re.findall(r"[a-z]+", fold(shown))
+    if not 2 <= len(words) <= 5:
+        return False
+    given = [w for w in words if w in GIVEN_NAMES]
+    surname = [w for w in words if w not in GIVEN_NAMES and SURNAME_ENDING.search(w)]
+    # "La Mircea Macelaru" ("at Mircea the butcher") is a shop's name: a
+    # preposition is not an initial.
+    initials = [w for w in words if len(w) <= 2 and w not in GIVEN_NAMES and w not in ("la", "de", "si", "cu")]
+    return bool(given) and bool(surname) and len(given) + len(surname) + len(initials) == len(words)
+
+
 def display_name(name, category):
     """The owner's rule: the company name without its legal form; the
-    category alone for a sole trader. Case is left as registered."""
+    category alone for a sole trader, or for a company named only as a
+    person. Case is left as registered."""
     shown = strip_legal_form(name)
     if SOLE_TRADER.search(fold(name)) or SOLE_TRADER.search(fold(shown)):
         return None, "sole trader"
+    if is_person_name(shown):
+        return None, "person-named company"
     return (shown or None), "company"
 
 
@@ -351,10 +380,12 @@ def main():
     shown = merged.apply(lambda r: display_name(r["name"], r["Categorie"]), axis=1)
     merged["business_name"] = [s[0] if s[0] else None for s in shown]
     merged["name_kind"] = [s[1] for s in shown]
-    sole = merged["name_kind"] == "sole trader"
     merged.loc[merged["business_name"].isna(), "business_name"] = \
         merged.loc[merged["business_name"].isna(), "Categorie"].str.split(" · ").str[0]
-    print(f"  sole traders shown by category only: {int(sole.sum()):,}")
+    kinds = merged["name_kind"].value_counts()
+    print(f"  shown by category only: sole traders {kinds.get('sole trader', 0):,}, "
+          f"companies named as a person {kinds.get('person-named company', 0):,} "
+          f"({'; '.join(merged.loc[merged['name_kind'] == 'person-named company', 'name'].head(12))})")
 
     merged = filter_to_storefront(merged, config.TAXONOMY_SYSTEM)
     print(f"  {len(merged):,} storefront premises after filter_to_storefront()")
