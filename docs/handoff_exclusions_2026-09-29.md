@@ -296,3 +296,23 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
 - **For the owner, not decided:** Stockholm's caterers and mobile units could
   be excluded by name, as its institutional kitchens are; today's rule keeps
   them because the register's type cannot split them.
+- **LANDED 2026-09-29** as 95e04c4 and live after the owner's reboot
+  (DECISIONS "Review batch live after the owner's reboot"). The four city
+  branches were deleted locally and on origin (owner, confirmed in the
+  cleanup chat).
+
+## Next review time
+
+- **`stockholm-catering`** (origin, one commit on master; owner-approved):
+  the name filter now also drops caterers and mobile units, 5,262 -> 5,218
+  placed (85 unplaced). The committed map, macro_facts and ring_shares already
+  carry 5,218, but the shared `data/stockholm/processed/` holds master's
+  5,262. **Right after merging it, run
+  `python pipeline/stockholm/step2_clean_businesses.py`**, or
+  `check_macro_facts.py` (and so the pre-push hook) disagrees. It touches
+  `app/cities.py` and the Stockholm page: reboot after the push. It edits
+  `docs/excluded_categories.md` too; confirm the 2026-09-29 "Kept because the
+  register cannot split it" Stockholm disclosure no longer claims the
+  caterers are on the map.
+- **Do not remove `.claude/worktrees/stockholm`** until the owner closes that
+  session; then `check_worktree_data.py` first.
