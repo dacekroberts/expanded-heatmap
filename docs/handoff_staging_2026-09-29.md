@@ -64,6 +64,14 @@ and every owner call are in DECISIONS. **The groundwork now lives in
   `docs/review_time.md`, the approved French page-text template, the France
   label measurement.
 
+**NEXT for a fresh staging session: build briefs for Band A's five light-rail
+cities** (none exists yet), **Bergen first** (no open calls; Oslo's modules),
+then Aarhus, Buffalo, Houston, Sacramento. Each brief: the rail (the
+light-rail test's measurements in `docs/tram_city_list.md`), the business
+leg and its build-time calls from `docs/city_master_list.md` Band A, the
+ring size by the spacing rule (`docs/ring_rules.md`), and a checks block for
+`scripts/brief_check.py`. Sacramento needs its timetable read first.
+
 **Still open with the owner** (none blocks the France kit):
 - **Build order** beyond France: Czechia, Odense and Latvia, the US three
   and Florence (recommended, not answered).
