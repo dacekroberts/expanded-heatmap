@@ -1423,6 +1423,18 @@ _NOTICES = [
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
      False),
+    # Sydney (notice 64): the City of Sydney's FES under CC BY 4.0 - creator and
+    # copyright holder, the licence and the dataset linked, modification noted, the
+    # warranty disclaimer, no endorsement (licence-read 2026-09-28; no wording is
+    # prescribed). Wording approved by the owner 2026-09-28.
+    ("City of Sydney (Sydney)",
+     "Business establishment locations: City of Sydney, Floor Space and Employment Survey 2022 "
+     "([FES Industry of occupation](https://www.arcgis.com/home/item.html?id="
+     "77ac8aa96bd34bacb881cfe8e5358ba0)), © City of Sydney, licensed under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project "
+     "(filtered and grouped by category); provided as is, without warranty. The City of Sydney "
+     "does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

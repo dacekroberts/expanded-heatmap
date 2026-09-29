@@ -101,6 +101,7 @@ together, so a row in either counts and a row in neither still fails.
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
+| Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney |
 
 ## Business registries
 
@@ -1990,6 +1991,31 @@ Aires's and 61 Glasgow's, each on its own branch - recheck at merge).
 - **The repository carries the credit too**, as for London: committed
   `outputs/newcastle/` republishes the derived locations (README's credits).
 - Wording approved by the owner 2026-09-28.
+
+**64. City of Sydney (Sydney) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Sydney lands; 60 to 63 are Buenos
+Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Sydney rows in
+  [`data_sources/australia.md`](data_sources/australia.md)): the FES item's
+  `licenseInfo` links **CC BY 4.0**, credit "City of Sydney"; the data hub's
+  disclaimer says data products carry the licence named in their description.
+  Data.NSW's harvested copy says "License Not Specified", a harvester failure;
+  the publisher's item governs.
+- **MUST DISPLAY** (CC BY §3(a)(1)): the City of Sydney as creator and
+  copyright holder, the licence linked, the dataset linked, that the data was
+  modified, and the warranty disclaimer. No wording is prescribed; the
+  licence read's draft, approved by the owner 2026-09-28, with the survey year.
+- **MUST NOT**: imply endorsement or official status (§2(a)(6)); present the
+  data as accurate, current or complete on the City's authority.
+- **Noted, not a blocker (owner, 2026-09-28)**: the City's main website terms
+  (`cityofsydney.nsw.gov.au/terms-conditions`) bar republishing its content
+  without written authorisation; the read judged them written for that site's
+  pages and not incorporated by the data hub, where Creative Commons governs.
+- **MUST DO:** nothing to the publisher. `check_personal_exposure.py sydney`,
+  run 2026-09-28: the survey has no names, so no pin can show one; the verdict
+  is in `DECISIONS.md`.
+- **Sydney's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

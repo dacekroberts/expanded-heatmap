@@ -186,6 +186,11 @@ REGISTRIES = {
     # address column, so the unit check is skipped.
     "berlin": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Sydney: the City of Sydney's FES publishes no name or address column at
+    # all; `business_name` is the ANZSIC class label, so no pin can be a
+    # person's name - Berlin's structural answer.
+    "sydney": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
     # London: the FSA's `BusinessName` is the only name the register publishes
     # - there is no separate owner column to fall back to - so the fallback
     # failure cannot occur; what CAN occur is a sole trader trading under their

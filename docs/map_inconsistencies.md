@@ -42,8 +42,9 @@ dense-looking city may simply have more complete records.
   are used (eight food lists, MHLW's filings added for four of them, and the
   barber, beauty and laundry registers of four), so the other fifteen have no data
   at all.
-- **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, and the
-  nine Brazilian cities (IBGE's 2022 census walk).
+- **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, the
+  nine Brazilian cities (IBGE's 2022 census walk), and Sydney (the City of
+  Sydney's 2022 floor-space survey, one council only).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
   Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
@@ -115,8 +116,9 @@ and districts no metro reaches.
   Hokuso, Tsukuba Express and Rinkai lines, cut at the line of the 23 wards); an
   owner call of 2026-09-24, recorded in the `japan-city`
   skill, not the line-by-line test below), Berlin (the S-Bahn's 16 lines, the
-  Ring among them, cut at the Land boundary) and London (the Elizabeth line and the
-  six London Overground lines, cut at Greater London).
+  Ring among them, cut at the Land boundary), London (the Elizabeth line and the
+  six London Overground lines, cut at Greater London) and Sydney (Sydney Trains'
+  six lines through the City of Sydney, where they run as a metro).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -217,7 +219,8 @@ name at their home.
 - **No names at all:** Dublin (address and recorded use), Rome (activity and address),
   Rotterdam, Riga (the kind of place, or the premises' registered name), Berlin (the
   chamber's own label for the kind of business; the register has neither names nor
-  street addresses).
+  street addresses), Sydney (the ANZSIC class; the survey publishes neither names
+  nor addresses).
 - **Mostly addresses:** Milan (a shop sign on about 1 pin in 7), Amsterdam's shop
   layer, the French cities where SIRENE has no sign or usual name (only about 40% of
   Paris rows and 43% of Marseille rows are named, per the Marseille brief).
@@ -433,6 +436,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Newcastle (Regional) | Tyne and Wear Metro, Green and Yellow lines (the Sunderland branch included) | Northern's national rail trains | OpenStreetMap route relations; gate 3 exact on 60 | The five Tyne and Wear districts | 0 / 0 |
 | **Argentina** | | | | | |
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
+| **Australia** | | | | | |
+| Sydney | Sydney Trains T1, T2, T3, T4, T8 and T9 and Sydney Metro M1 (7 lines, refs on the map, full names in the legend) | Light rail L1-L3 (22 stops in the LGA), NSW TrainLink, ferries | OpenStreetMap route relations (Transport for NSW's GTFS needs an API key); gate 3 exact on the 16 stations inside the LGA | The City of Sydney LGA (lines cut at the boundary) | 157 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -518,6 +523,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,697 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
+| **Australia** | | | | | |
+| Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,768 / 861 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals and brothels excluded by class |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -595,6 +602,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Newcastle (Regional) | Register coordinates (90%) and postcode centres (10%, OS postcode centroids for a full postcode with no register point); 489 not placed | Food only; about one storefront in fourteen unplaced, most in North Tyneside and Sunderland; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
+| **Australia** | | | |
+| Sydney | Census coordinates (per building; 5,218 distinct points for 7,328 storefronts) | The City of Sydney LGA only; a five-yearly survey (2022); no names | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals and brothels by class; two n.e.c. catch-alls kept |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -683,6 +692,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Newcastle (Regional) | Extracts of 2026-09-09 to 2026-09-16, per council (fetched 2026-09-28) | B | 0.6 mi | Yes | 54% | Registered name; the trade name where registered "trading as" |
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
+| **Australia** | | | | | | |
+| Sydney | Survey of 2022 (layer last edited 2025-02-12; fetched 2026-09-28) | B | 0.6 mi | Yes | 84% | Kind of business (the survey has no names) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

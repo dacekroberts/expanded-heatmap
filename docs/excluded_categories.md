@@ -2155,6 +2155,45 @@ lines, the Sunderland branch included (owner, 2026-09-28): between Pelaw and
 Sunderland it runs on track shared with national rail.
 - Northern's national rail trains are not drawn.
 
+### Sydney - the City of Sydney's floor-space survey, all three buckets
+
+**One council, one survey year.** The City of Sydney's Floor Space and
+Employment Survey counts every business establishment in the council area
+every five years; the map shows the 2022 survey, the latest. The neighbouring
+councils publish no comparable survey and are not on the map.
+
+**No names.** The survey publishes an industry class and a point for each
+establishment and nothing else: a dot is titled by its ANZSIC class. Points are
+per building, so the shops of a shopping centre share one point (5,218 distinct
+points for the storefronts, the largest holding 140).
+
+**Excluded by class** (ANZSIC 2006, `pipeline/taxonomies/anzsic_fes.py`):
+- Not storefronts: parking (72), non-store retail (14) and commission-based
+  retail (1), as the NAICS cities exclude them.
+- Organisations, not services sold over a counter: religious services (144),
+  interest-group associations (137), business and professional associations
+  (89), labour associations (23).
+- The owner's calls (2026-09-28): licensed members' clubs (27, entered by
+  sign-in), brothels (27), catering firms (21, the work happens at the event),
+  funeral, crematorium and cemetery services (7).
+
+**Kept, and named as catch-alls** - other store-based retailing n.e.c. (311)
+and other personal services n.e.c. (254): with no names they cannot be sampled,
+and with no names they expose no one. Car and fuel retailers (64) are shops, as
+in the NAICS cities.
+
+**Left off because they are outside the city** - 27 survey points that fall
+just outside OpenStreetMap's outline of the council area.
+
+**Stations.** Sydney Trains' T1, T2, T3, T4, T8 and T9 and Sydney Metro's M1,
+cut at the council boundary: 16 stations inside it.
+- Left out: 157 stations beyond the boundary, listed in
+  `outputs/sydney/excluded_stations.csv`.
+- **Light rail (L1, L2, L3; 22 stops in the area) is not drawn** (owner,
+  2026-09-28); with it, about nine storefronts in ten would sit within a ring
+  (93.0%, the brief's measure), against 83.5% without it.
+- NSW TrainLink services and ferries are not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

@@ -130,6 +130,7 @@ TAXONOMY_MODULES = {
     "taiwan_fia": "pipeline.taxonomies.taiwan_fia",
     "ihk_wz2025": "pipeline.taxonomies.ihk_wz2025",
     "fsa_businesstype": "pipeline.taxonomies.fsa_businesstype",
+    "anzsic_fes": "pipeline.taxonomies.anzsic_fes",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

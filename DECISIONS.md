@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**155 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)](#2026-09-28---sydney-built-on-the-city-of-sydneys-floor-space-survey-light-rail-out-a-new-oceania-region-catering-funerals-and-clubs-out-owner)
 - [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
 - [Newcastle (Regional) built on the FSA register: the Sunderland branch kept, London's centroid tier, notices of its own (owner)](#2026-09-28---newcastle-regional-built-on-the-fsa-register-the-sunderland-branch-kept-londons-centroid-tier-notices-of-its-own-owner)
@@ -191,6 +192,69 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-28 - Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)
+
+- **Light rail (L1, L2, L3) left out, and the page says what it would add
+  (owner).** The brief measured 83.2% of storefronts in a ring with trains
+  and Metro, 93.0% with light rail; Berlin's precedent left its trams out at
+  6.9 points. The page names the lines and the effect. Rejected: drawing L1-L3.
+- **A new front-page region, "Oceania" (owner)**, for Sydney and Melbourne
+  (about 710 km apart). Named for the continent, as Europe is. Rejected:
+  "Australia".
+- **Catering (ANZSIC 4513, 21) and funeral services (9520, 7) excluded
+  (owner)**; the two n.e.c. catch-alls kept (4279 other store-based retail,
+  311; 9539 other personal services, 254): with no names they cannot be
+  sampled, and they expose no one. The owner also asked Cleanup to audit
+  funeral services in every other city (Cleanup's audit: 34 cities exclude by
+  code or licence type, six get a disclosure, after the frozen branches land).
+- **Licensed members' clubs (4530, 27) excluded (owner)**: entered by sign-in,
+  not walk-in; outside the brief's 451-452 scope.
+- **Five classes the brief's prefixes did not reach sit in the storefront
+  divisions**, found because `anzsic_fes.py` stops step 2 on any undecided
+  class there. Religious services (9540, 144) and interest-group, professional
+  and labour associations (9551, 9552, 9559; 249) are excluded as
+  organisations, NAICS 813's precedent; clubs as above.
+- **The rest of the class list mirrors `naics.py`**: motor-vehicle and fuel
+  retail kept (NAICS 441 and 447), non-store and commission-based retail out
+  (454), parking out (81293), brothels out (the owner's earlier call).
+- **The credit is the licence read's draft (owner), notice 64**: "Business
+  establishment locations: City of Sydney, Floor Space and Employment Survey
+  2022 (FES Industry of occupation), © City of Sydney, licensed under CC BY
+  4.0", the dataset and licence linked, "Modified by this project (filtered and
+  grouped by category); provided as is, without warranty", no endorsement. The
+  City's website terms (republishing needs written authorisation) were judged
+  not to reach the data hub; noted, not a blocker.
+- **Built** (`worktree-sydney`, from origin/master 3f72ffe):
+  - Survey: 21,618 establishments of 2022 (count asserted, paged 2,000 at a
+    time, owner's OK); 7,355 storefronts by class -> 27 outside OSM's LGA
+    polygon -> **7,328** (Retail 3,091, Food service 3,234, Personal services
+    1,003). 5,218 distinct points; 61.8% alone, 12.4% in stacks of 10 or more,
+    the largest 140.
+  - Rail: 22 OSM relations for T1, T2, T3, T4, T8, T9 and M1, merged by
+    London's branch rule and clipped to the LGA. OSM spells the platform three
+    ways ("Central, Platform 16", "Campbelltown Platform 2", "Gadigal 1"); once
+    normalised, **the 16 stations inside the LGA are exactly the brief's
+    list** (OSM's station nodes, a second method). Gadigal and Town Hall, 160 m
+    apart, are two signed stations. Colours from `line_colour_search.py`:
+    closest pair within 500 m 19.2 (M1, T4).
+  - Boundary: OSM relation 1251066, 26.5 km² in UTM 56S.
+  - **6,120 storefronts in the rings (83.5%).**
+  - Macro label 51.4 px in the deployed app's frame (Prague, Tokyo, London
+    reproduced); PROBLEMS 0 in 11 regions.
+- **Exposure (`check_personal_exposure.py sydney`)**: the survey has no name
+  or address column; a pin shows one of 43 ANZSIC class labels. The heuristic's
+  14.0% is those labels ("Clothing Retailing"). No exposure, structurally.
+- **Verified**: `brief_check.py sydney` 5/5; `drift_check.py sydney` zero
+  drift against 37fa12b; `check_inconsistency_list.py`, `check_macro_facts.py`
+  (after a table B note that read "only" as a missing category was reworded),
+  `check_scope_disclosure.py` and `check_master_list_counts.py` OK; the map
+  rendered at 1000x650 with seven labels, the legend and the OSM credit.
+- Files: `pipeline/taxonomies/anzsic_fes.py`, `pipeline/sydney/`,
+  `app/pages/61_Sydney_Heatmap.py`, `app/components.py` (notice 64),
+  `app/cities.py` (Oceania), `docs/data_sources.md`,
+  `docs/data_sources/australia.md` (new), `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/sydney.md`.
 ### 2026-09-28 - Funeral services come off every map (owner); audit and plan
 
 - **Owner's call, confirmed in the cleanup session** (first relayed from the
