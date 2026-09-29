@@ -1547,6 +1547,28 @@ CITIES = [
         # PROBLEMS 0 in every region at 375, 768 and 1200.
         "label_offset": ("end", -10, 5),
     },
+    {
+        "name": "Glasgow",
+        "lat": 55.8609,
+        "lon": -4.2514,
+        "page": "pages/59_Glasgow_Heatmap.py",
+        # Owner-approved 2026-09-28, London's values on Scotland's scheme.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (99%)",
+        "data_age": "Extract of 2026-09-14",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Glasgow Subway, one 15-station loop",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 56.8 px in
+        # the deployed app's own frame (2026-09-28, three entries reproduced),
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0. Nothing else is near it on the Europe view.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

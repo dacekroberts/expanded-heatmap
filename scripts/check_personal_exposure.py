@@ -195,6 +195,11 @@ REGISTRIES = {
     # address is carried to the map, so the unit check is skipped.
     "london": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Glasgow reads the same FSA file format through pipeline/fsa.py: no
+    # fallback name, and the flat rule (a storefront at a "Flat" address is
+    # never placed, 185 rows) is the structural guard this check cannot see.
+    "glasgow": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None),
     # Every other Brazilian city reads CNEFE through the same national reader,
     # so São Paulo's structural answer holds for each; measured per city.
     "belo_horizonte": dict(raw=None, trade=None, owner=None,

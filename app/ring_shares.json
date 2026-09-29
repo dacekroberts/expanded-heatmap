@@ -280,8 +280,13 @@
   "map_blob": "bd6ff223b5043d031f18f002a0ed8b5a15afcbc4"
  },
  "london": {
-  "in_ring": 41654,
-  "all": 56589,
+  "in_ring": 41574,
+  "all": 56491,
   "map_blob": "a83e37422c2b8dffaa772fd8f96dc71912fd2ff4"
+ },
+ "glasgow": {
+  "in_ring": 1993,
+  "all": 4708,
+  "map_blob": null
  }
 }

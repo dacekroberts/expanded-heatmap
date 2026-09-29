@@ -5,6 +5,24 @@ food only (owner, B over N). Brief written the same day.** Run
 `python scripts/brief_check.py glasgow` before writing any code. The trail:
 `DECISIONS.md` 2026-09-28 "Glasgow to Band B, food only".
 
+> **Measured at the build, 2026-09-28 (build session, `worktree-glasgow`)** -
+> these supersede the screen's figures below where they differ:
+> - **Govan is not missing.** Each Subway relation carries all 15 stations:
+>   the loop starts and ends at Govan, a `stop_entry_only` and a
+>   `stop_exit_only` member, which a count of `stop` roles alone misses. No
+>   station is added by hand.
+> - **Home businesses at flats**: 185 of 4,958 storefronts have an address line
+>   starting "Flat", mostly home bakers and cooks listed as
+>   Restaurant/Cafe/Canteen WITH the FSA's point, a few under a person's own
+>   name; 5 more are childminders listed as cafés. Never placed (owner; the
+>   flat rule reaches London too, `pipeline/fsa.py`).
+> - **Coordinates**: 55 of the rest (1.2%) have no point; no centroid tier
+>   (owner). 4,708 storefronts placed; **42.3% within a ring**.
+> - **Licence** (`licence-read`): OGL v3 by the FSA's terms, and FSS states v3
+>   for its own copy of the same data; credit "Food Standards Scotland, Food
+>   Hygiene Information Scheme data, via the Food Standards Agency" (owner),
+>   notice 61.
+
 ⚠️ **One-bucket city: food, with food retail, on London's method.** Read
 `docs/build_briefs/london.md` (its "Measured at the build" box) and London's
 DECISIONS entries of 2026-09-28 first: the taxonomy, the personal-information

@@ -34,7 +34,7 @@ Mapped so far:
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo
 - **Germany:** Berlin
-- **United Kingdom:** London
+- **United Kingdom:** London, Glasgow
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.
