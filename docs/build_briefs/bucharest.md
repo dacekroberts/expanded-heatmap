@@ -80,6 +80,33 @@ code for this city.
 >   their own names** ("… ÎNTREPRINDERE INDIVIDUALĂ", and PFA / II forms).
 >   The project's rule applies: show the category, never a person's name.
 >   `check_personal_exposure.py` should look for those suffixes first.
+> - **The ninth animal-origin file** (26 Hipermarket-supermarket, 85,020 B,
+>   sha256 `4bc41e29f86b8d67`): **499 active**, 201 cancelled. The
+>   animal-origin set is therefore **19,516 active** before de-duplication.
+>   One store can sit in several files (a hypermarket's butcher, fishmonger
+>   and food counter), so **step 2 de-duplicates on name + address.**
+> - **The non-animal-origin list** (45 files, mostly factories; the owner
+>   fetched eight 2026-09-28 into `data/bucharest/raw/non-animal/`, same
+>   layout, same ANULATE sections):
+>
+>   | File | Active | Cancelled | What the rows are | Call |
+>   |---|---|---|---|---|
+>   | 36 Baruri | **778** | 81 | Bar 557, Cafenea (café) 197, Ceainărie (tea house) 17 | ✅ food service |
+>   | 33 Comerț cu amănuntul, supermarkets only | **1,083** | 149 | "Comerț cu amănuntul" (retail), a mixed bag: grocers, and shops selling some packaged food | ✅ food shops, with a sole-trader check (PFA names appear) |
+>   | 42 Frozen and chilled non-animal food | **934** | 183 | Lidl and the like: bake-off counters in shops | ✅ food shops; most will be duplicates |
+>   | 03 Bread and pastry making | **496** | 1,040 | Covrigării (pretzel shops), bakeries, pastry shops | ✅ food shops |
+>   | 01 Bread making | **164** | 236 | In-store bakeries (Carrefour, Selgros) and market bakeries | ✅ food shops; many duplicates |
+>   | 02 Pastry making | **76** | 650 | Pastry and doughnut shops | ✅ food shops |
+>   | 24 Ice-cream making | **66** | 30 | Gelaterias, plus 3 kiosks and 2 vending machines | ✅ the 61 shops; kiosks and machines out |
+>   | 34 Supermarket-hypermarket | 0 | 0 | Header only | - |
+>
+>   Sha256 prefixes: 01 `cc9c3ed541159ab9`, 02 `081dc27f739f0142`,
+>   03 `5d25e9357ab110de`, 24 `206cfc828d10efc5`, 33 `30867121c2100d5c`,
+>   34 `b1628ffd3c5870e0`, 36 `eab91027f4b99e2c`, 42 `da5c7e2a03d0cf9d`.
+>   Together: **about 3,590 more active rows**, so **about 23,100 before
+>   de-duplication.** "Sector" reads **U.M.** (unitate mobilă) on mobile
+>   units, such as a wine truck with a number plate for an address. They are
+>   out, as non-storefronts.
 > - **What the build still needs, in order:**
 >   1. ~~The owner's browser fetch~~ done for eight files. Still to come:
 >      26 Hipermarket-supermarket, and a look at the non-animal-origin list.

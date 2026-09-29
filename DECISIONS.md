@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**149 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**150 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication](#2026-09-28---bucharests-supermarket-file-and-eight-non-animal-origin-files-fetched-owner-about-23100-active-rows-before-de-duplication)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
 - [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
 - [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
@@ -185,6 +186,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication
+
+- **The owner fetched the ninth animal-origin file** (26
+  Hipermarket-supermarket): 499 active and 201 cancelled. It had been saved
+  to the checkout root and was moved into `data/bucharest/raw/`.
+- **The owner fetched eight of the 45 non-animal-origin files**, as
+  recommended: 01, 02, 03, 24, 33, 34, 36 and 42. The other 37 are
+  factories, bottlers, warehouses, wholesale, markets and empty templates.
+  The eight are in `data/bucharest/raw/non-animal/`. Their active rows:
+  - bars and cafés 778
+  - supermarket retail 1,083
+  - frozen and chilled food sellers 934, mostly bake-off counters
+  - bakeries, pretzel and pastry shops 496, 164 and 76
+  - ice-cream makers 66, of which 5 are kiosks and machines, left out
+  - file 34, header only
+- **Read, and classified as storefronts (recommended).** The "making" files
+  turned out to be shops: pretzel shops, in-store bakeries and gelaterias,
+  not factories. Mobile units (Sector "U.M.") are left out.
+- **About 23,100 active rows** before de-duplication (19,516 of animal
+  origin, about 3,590 of non-animal). Large stores appear in several
+  files, so step 2 de-duplicates on name and address.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
 
 ### 2026-09-28 - Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations
 
