@@ -1344,7 +1344,8 @@ IDFM's Art. 5.8 already imposes at item 24, so nothing new is owed as an act.
 ⚠️ **OPEN — the station CSV under §4.4.** Whether the derived station table and
 `outputs/toulouse/excluded_stations.csv` are themselves a Derivative Database
 that must carry the notice is unresolved, and unlike Paris there is **no
-publisher gloss** to lean on. **Cheap discharge: put the ODbL notice on the
+publisher gloss** to lean on. ⚠️ **Corrected 2026-09-29: there is one** - the National Access Point's
+Conditions Particulières apply to every ODbL dataset it lists (`docs/licenses/odbl-toulouse-rennes.md`). **Cheap discharge: put the ODbL notice on the
 station CSV** rather than try to win the argument.
 
 **26. STAR (Rennes) — required, and DISPLAYED.**

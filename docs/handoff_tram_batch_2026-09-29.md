@@ -47,15 +47,21 @@ The 21 French T1 cities, on one register already cached nationally
 - Feeds are rolling (earliest end Avignon 2026-10-18): fetch at build, never
   cache a feed across weeks.
 
-## 2. Licence reads - STAGING, in progress 2026-09-29
+## 2. Licence reads - the five French ones DONE 2026-09-29
 
-The five French feeds whose licence differs from LO 2.0 were sent to the
-`licence-read` agent the same day: Bordeaux (LO 1.0), Montpellier,
-Grenoble, Angers, Le Havre (ODbL). Their verdicts are in DECISIONS once
-back. Still to read, nearer their builds: Plzeň's and Olomouc's GTFS,
-Tucson's BUSLIC terms, RideKC's GTFS, Florence's four layers, VZD's address
-file (Daugavpils, Liepāja). Each notice goes in `docs/data_sources/` before
-its page exists.
+DECISIONS "French tram feeds read" has each verdict. In short: **Bordeaux**
+(LO 1.0) credit Bordeaux Métropole and the feed's own date; **Montpellier,
+Grenoble, Le Havre** (ODbL) the §4.3 notice naming the producer;
+**Montpellier and Le Havre have no `shapes.txt`** (geometry from another
+source, which needs its own read) and **Le Havre has no colours** (choose
+them; never from transports-lia.fr). **Angers bars "Irigo" and its other
+marks without consent: an owner call before its build.** **Every French ODbL
+feed carries the national portal's Conditions Particulières**: keep station
+tables as pure extracts (nothing renamed or merged) unless the owner creates
+a data.gouv.fr account to re-share. Still to read, nearer their builds:
+Plzeň's and Olomouc's GTFS, Tucson's BUSLIC terms, RideKC's GTFS, Florence's
+four layers, VZD's address file, and the geometry source for Montpellier and
+Le Havre. Each notice goes in `docs/data_sources/` before its page exists.
 
 ## 3. Page text by template - APPROVED by the owner 2026-09-29
 
