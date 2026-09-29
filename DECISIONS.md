@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
 - [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
 - [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
 - [China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)](#2026-09-28---china-ruled-out-as-a-country-after-a-feasibility-gate-hangzhous-opening-noted-legal-barriers-high-owner)
@@ -152,6 +153,59 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)
+
+- **Moved Buenos Aires into Band A (owner's call): a land-use survey joined to
+  parcels, with the licence read.** It was never screened (the record said
+  only that its feed lacks `routes.txt`). BA Data (454 datasets enumerated)
+  publishes the **Relevamiento Usos del Suelo 2022-2024**: 417,764 rows, one
+  per observed use at a parcel, with no business names. The owner approved
+  its download (39.5 MB, sha256 `5743336654ff…`) and pre-approved the parcel
+  file (329 MB, sha256 `f3debefdac…`), both in `data/buenos-aires/raw/`.
+  Measured:
+  - 87,028 active storefront (UNICOMERCIAL) rows. The catch-all "SIN
+    IDENTIFICAR" is 23.0% of all storefront rows but **7.2% of active ones**,
+    because 18,240 of the 19,323 inactive rows are unidentified vacant
+    shopfronts. Downtown it runs 9.9% in Monserrat, 6.9% in San Nicolás and
+    2.9% in Recoleta.
+  - 3.5× OSM's shop and food count inside CABA (18,285 + 6,493).
+  - **99.8% of active rows join a parcel exactly** on the normalised SMP, and
+    100% at block level.
+  - Subte A–E and H are all coloured in OSM.
+  - `licence-read`: CC BY 2.5 AR, worldwide and perpetual, with commercial
+    use allowed and nothing owed up front. The page owes a credit with
+    titles, URIs, the licence URI and a statement of how the data was
+    changed; no GCBA logos. The resource labels (unversioned `cc-by`, and
+    CC BY 4.0 on Parcelas) disagree with the dataset's 2.5 AR, so the credit
+    is written to satisfy both.
+  - Band B was rejected: all three buckets are present across the whole
+    city.
+- **Moved Melbourne into Band B, scoped to the City of Melbourne (owner's
+  call); Australia leaves "Countries ruled out".** "Licensing is not
+  municipal" was ASSERTED and wrong: councils register food premises, but
+  none publishes the register. The City of Melbourne's CLUE census
+  (`data.melbourne.vic.gov.au`, 238 datasets enumerated) has 19,672
+  establishments in 2024, with trading name, ANZSIC4 and lat/lon under CC BY
+  4.0: retail 1,870, food 2,685, personal services 901. It covers the
+  municipality only (about 12–15 of ~220 train stations, plus the CBD trams),
+  which the page discloses. A `licence-read` is pending, since DataVic labels
+  it "other-open".
+- **Did not band Sydney: queued for a re-probe with the next batch (owner).**
+  The first pass found the City of Sydney hub (166 items) with block totals
+  only, and Data.NSW (17,165 packages) with the NSW liquor-licence premises
+  list, frozen at June 2024. Band N was the recommendation. The owner judged
+  it hard to believe that Melbourne has this depth and Sydney does not, and
+  asked for a second look instead.
+- **Deleted every file the screens' agents had saved** at the owner's
+  request: PDFs from the Delhi, Algiers, China, Dubai and Buenos Aires agents;
+  two councils' business-rates CSVs, a fire-safety XLSX and a sample from the
+  London agent (one CSV carried a personal email address); and a PDF that
+  WebFetch auto-saved. My agent instructions had allowed reading a small
+  PDF's first page, which saved files without the owner's download OK; they
+  now say page reads only. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Algiers: the "no urban rail" misfiling corrected, then discarded (owner)
 
