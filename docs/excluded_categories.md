@@ -2448,6 +2448,11 @@ churches, prisons and associations (37). 12 retail-typed pharmacies.
 **Not measured: office canteens.** About 20 staff restaurants registered under a
 company name ("KPMG AB") remain; company names are too mixed to filter.
 
+**Kept because the register cannot split it:** its restaurant type is also its
+type for catering and mobile food ("Restaurang-, catering- och
+barverksamhet"), so about 39 premises named as caterers and about 15 named as
+food trucks or mobile units are on the map as food service.
+
 **Untyped premises** - the register began recording types in 2024, so 1,391
 premises last inspected earlier carry none. **225 are shown** (owner,
 2026-09-28): those whose name identifies a restaurant or food shop and that were
