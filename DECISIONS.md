@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**120 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**121 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule](#2026-09-28---londons-rail-built-from-osm-gate-3-exact-its-map-rendered-and-checked-the-tfl-licence-read-abandoned-as-unnecessary-a-trading-as-display-rule)
 - [London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)](#2026-09-28---londons-rail-underground-dlr-elizabeth-line-and-the-six-overground-lines-tramlink-left-out-owner)
 - [London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)](#2026-09-28---londons-licence-calls-the-existing-personal-information-rule-and-the-credit-food-standards-agency-uk-food-hygiene-rating-data-owner)
 - [London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)](#2026-09-28---london-started-on-its-own-branch-the-fsa-files-downloaded-placement-measured-ring-coverage-by-rail-tier-the-fsa-licence-read-owner-calls-pending)
@@ -156,6 +157,50 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule
+
+- **Stations and track from OpenStreetMap, not TfL.** TfL publishes no GTFS;
+  its Unified API lists the 19 lines' stops but its "lineStrings" are
+  station-to-station straight lines (Victoria: 16 points for 16 stations), so
+  track had to be OSM's regardless. The `licence-read` of TfL's terms stalled
+  41 minutes on tfl.gov.uk's Cloudflare challenge and was stopped; with OSM
+  supplying stations too, nothing of TfL's is stored or published, and its API
+  served only a scratch cross-check of the Overground's stop lists.
+- **Step 1 (`pipeline/london/step1_stations.py`)**: 171 relations (one stray
+  Windrush relation from Battersea Park skipped by name - TfL's Windrush list
+  has no such stop). Lines: per line, the longest relation, then only
+  relations adding >= 1 km of track > 300 m from what is chosen, and only
+  their NEW part (merging everything had doubled Central to 127 km; lengths now
+  match the networks - Victoria 22.1, DLR 40.1, Elizabeth 89.5 km inside
+  Greater London). Stations: route-relation stop members, names normalised
+  (platform suffixes; aliases London Paddington / Euston / Liverpool Street,
+  Custom House for Excel, Cutty Sark for Maritime Greenwich), split where a
+  name's stops are > 400 m apart (Bethnal Green's two). **Eight stations OSM's
+  relations omit are added from their station nodes** (North Ealing, South
+  Harrow; Woolwich Arsenal; Hatch End, Watford High Street, Upper Holloway,
+  Wood Street, St James Street), and step 1 stops once OSM carries any.
+  **Gate 3 exact on 14 counts** against English Wikipedia (secondary):
+  Underground per line (Circle 35, the table's 36 counting Paddington twice),
+  DLR 45, Elizabeth 41; the Overground 112 against TfL's own stop lists (the
+  article's 113 is one more than TfL's). **387 stations inside Greater
+  London**, 32 outside -> `outputs/london/excluded_stations.csv`; median
+  spacing 737 m.
+- **Colours** from `scripts/line_colour_search.py london` with TfL's colours
+  (OSM `colour`) as hues: closest pair within 500 m 18.3, anywhere 10.5. The
+  Piccadilly reads mauve (the Retail pins own its blue) and the Northern grey.
+  Labels are short names, the legend full names (`legend_names`, capped at 274
+  px).
+- **Rendered**: 39,994 of 54,240 storefronts in the rings (73.7%), 387
+  stations, 19 lines. Browser: 0 label problems at 1000, 343, 375 and 1280 px;
+  zoom as expected; dark toggle; OSM credit visible at 1280x800 and 375x900;
+  no console errors. `check_inline_arrays`, `check_map_markup` pass.
+- **Exposure (`check_personal_exposure.py london`)**: no fallback name exists;
+  0 emails or phone numbers. The person-name heuristic's 24.4% is almost all
+  two-word trade names on a 40-name sample (Caffe Nero, Royal Tandoori, Boots
+  UK). The structural guard is the FSA's: a private address gets no point and
+  is never placed. **A trading-as rule** (the existing rule, owner): 186 names
+  of the form "X T/A Y" or "Person trading as Y" show Y, the name on the shop.
 
 ### 2026-09-28 - London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)
 

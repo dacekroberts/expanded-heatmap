@@ -30,6 +30,9 @@ from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # no
 
 TAX = load_taxonomy_module(config.TAXONOMY_SYSTEM)
 READ = ("FHRSID", "BusinessName", "BusinessType", "PostCode", "LocalAuthorityName")
+# "T/A", "t/a", "Also T/A", "(Trading as ...)", "trading as" - a whole word, so
+# "Ta Va" (a restaurant) is untouched.
+TRADING_AS = r"(?i)\s*\(?\b(?:also\s+)?(?:t/a|trading\s+as)\b\s*"
 
 
 def load():
@@ -83,6 +86,16 @@ def main():
     inside = pts.within(gl)
     print(f"  {int((~inside).sum()):,} outside Greater London, dropped")
     df = df[inside]
+
+    # The name on the shop: "Skinner Stores T/A Londis" and "Lydia Oduro
+    # Enterprise Trading as LO" show what follows the trading-as marker - the
+    # trade name, which is also what keeps a sole trader's own name off the map
+    # where they registered both (the owner's rule, 2026-09-28).
+    tas = df["BusinessName"].str.split(TRADING_AS, n=1, regex=True)
+    has = tas.str.len() == 2
+    shown = tas.str[-1].str.strip().str.strip("()").str.strip()
+    df = df.assign(BusinessName=df["BusinessName"].where(~has | (shown == ""), shown))
+    print(f"  {int(has.sum()):,} names carry a trading-as marker; the trade name after it is shown")
 
     out = df.rename(columns={"FHRSID": "fhrsid", "BusinessName": "business_name",
                              "LocalAuthorityName": "authority"})[

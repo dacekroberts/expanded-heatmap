@@ -74,6 +74,49 @@ STATION_NAME_ALIASES = {
     "Cutty Sark for Maritime Greenwich": "Cutty Sark",
 }
 
+# On-map label (the name riders use) and legend name (the full public name).
+# 19 full names would not fit the label solver - Tokyo's lesson - so the map
+# says "Bakerloo" and the legend "Bakerloo line" (render_heatmap's
+# legend_names, which also caps the legend at the solver's 274 px).
+LEGEND_NAMES = {
+    **{k: f"{k} line" for k in ("Bakerloo", "Central", "Circle", "District",
+                                "Hammersmith & City", "Jubilee", "Metropolitan", "Northern",
+                                "Piccadilly", "Victoria", "Waterloo & City", "Elizabeth")},
+    "DLR": "DLR (Docklands Light Railway)",
+    **{k: f"{k} line (London Overground)" for k in ("Liberty", "Lioness", "Mildmay",
+                                                    "Suffragette", "Weaver", "Windrush")},
+}
+# Each line's OPERATOR hue - TfL's colours as OSM's route relations carry them
+# (read 2026-09-28). The drawn colour is scripts/line_colour_search.py's
+# nearest feasible one (LINE_COLOURS below): the pins' blue, pink and green and
+# the dark page rule some of TfL's out (the Northern's black, for one).
+LINES = {
+    "Bakerloo": {"hue": "#AE6017"}, "Central": {"hue": "#E42313"}, "Circle": {"hue": "#FFD329"},
+    "District": {"hue": "#00A166"}, "Hammersmith & City": {"hue": "#F4A9BE"},
+    "Jubilee": {"hue": "#949699"}, "Metropolitan": {"hue": "#91005A"},
+    "Northern": {"hue": "#000000"}, "Piccadilly": {"hue": "#094FA3"},
+    "Victoria": {"hue": "#0A9CDA"}, "Waterloo & City": {"hue": "#93CEBA"},
+    "DLR": {"hue": "#00AFAD"}, "Elizabeth": {"hue": "#9364CC"},
+    "Liberty": {"hue": "#61686B"}, "Lioness": {"hue": "#FFA600"}, "Mildmay": {"hue": "#006FE6"},
+    "Suffragette": {"hue": "#18A95D"}, "Weaver": {"hue": "#9B0058"}, "Windrush": {"hue": "#DC241F"},
+}
+LINE_ORDER = list(LINES)
+LINE_NAMES = {k: k for k in LINES}
+# `python scripts/line_colour_search.py london` (500 m, CIE76 18), run
+# 2026-09-28 on step 1's lines.geojson: closest pair within 500 m 18.3
+# (Northern, Waterloo & City), anywhere 10.5 (Jubilee, Liberty); every line
+# >= 45.0 from every pin; 19 distinct dark-mode labels. The Retail pins' blue
+# takes the Piccadilly's, which reads mauve here; the Northern's black is grey
+# so it shows on the dark page.
+LINE_COLOURS = {
+    "Bakerloo": "#B06018", "Central": "#E02010", "Circle": "#B09000", "District": "#586818",
+    "Hammersmith & City": "#B88090", "Jubilee": "#909090", "Metropolitan": "#9840A0",
+    "Northern": "#686060", "Piccadilly": "#805878", "Victoria": "#08A0C0",
+    "Waterloo & City": "#487070", "DLR": "#5098A8", "Elizabeth": "#C068E0",
+    "Liberty": "#707878", "Lioness": "#D08000", "Mildmay": "#0050F0",
+    "Suffragette": "#30A800", "Weaver": "#E858D0", "Windrush": "#F86040",
+}
+
 # GATE 3 - the whole network (not cut at Greater London), against English
 # Wikipedia, read 2026-09-28 (a SECONDARY source, Prague's precedent; tfl.gov.uk
 # serves a Cloudflare challenge to automated reads): the London Underground
@@ -163,12 +206,9 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 
 # --- Station scope ----------------------------------------------------------
 
-# TODO: which lines count and why (one agency's rail system per city; note what
-# is left out), the feed's own route_ids, and the real public line names.
-# Check the rail system's shape before assuming "keep every station" (see the
-# add-city skill, Step 4).
-ROUTE_IDS = []
-LINE_NAMES = {}  # route_id -> real public name, e.g. {"801": "A Line"}
+# Which lines count and why: see "Rail" above (owner, 2026-09-28) and
+# LINE_OSM_REFS / LINE_NAMES. Every station of the 19 lines is kept - the
+# spacing gate's median is 737 m, no surface stretch needs thinning.
 
 # --- Business filtering ------------------------------------------------
 
