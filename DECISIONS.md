@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**173 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**175 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)](#2026-09-29---exclusions-batch-re-run-41-cities-re-rendered-brazils-funilaria-misspelling-fixed-chicagos-funeral-disclosure-rewritten-owner)
+- [Information pages renumbered 90-92 -> 200-202 (owner)](#2026-09-29---information-pages-renumbered-90-92---200-202-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
 - [Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session](#2026-09-29---exclusions-batch-the-owners-eight-follow-ups-wording-approved-handed-to-a-fresh-session)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
@@ -212,6 +214,108 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)
+
+- **All 41 cities re-rendered, one at a time, with master's shared processed
+  data backed up and restored around each** (heavy-job notices to the
+  Stockholm and staging sessions per batch). Step 2 onward only; step 1 is
+  untouched by a taxonomy. Storefronts before -> after (pins in a ring):
+  - US and Canada: Los Angeles 58,173 -> 57,527 (13,900); San Diego 10,955
+    -> 9,124 (2,228); San Francisco 17,837 -> 16,495 (11,788); Montréal
+    17,231 -> 17,162 (10,386); Vancouver 11,724 -> 11,525 (4,618); Edmonton
+    10,721 -> 10,702 (2,374); Calgary 15,099 -> 15,072 (6,156); Toronto
+    18,186 -> 18,218 (8,752; the nightclubs added 32 geocoded pins); Miami
+    29,878 -> 29,549 (3,733); Washington D.C. 5,230 -> 5,203 (3,847);
+    Chicago 20,686 -> 20,553 (11,721); Philadelphia 8,504 -> 8,301 (4,851).
+  - Mexico: Mexico City 283,345 -> 279,804 (131,458); Guadalajara 117,454
+    -> 116,657 (36,662); Monterrey 58,564 -> 58,049 (14,564).
+  - Europe: Paris 87,164 -> 86,903 (85,247); Marseille 18,177 -> 18,029
+    (9,947); Toulouse 8,635 -> 8,596 (5,533); Lille 11,833 -> 11,739
+    (7,165); Rennes 3,479 -> 3,448 (2,354); Oslo 10,718 -> 10,678 (8,080);
+    Copenhagen 14,978 -> 14,922 (14,102); Prague 25,275 -> 25,206 (17,613);
+    Berlin 60,313 -> 60,269 (49,393); Madrid 53,355 -> 52,102 (49,400);
+    Dublin 13,123 -> 12,904 (7,460).
+  - Asia: Taichung 66,115 -> 63,692 (12,185); Taipei 133,335 -> 128,878
+    (100,239); Taoyuan 45,014 -> 43,592 (5,089); Tokyo 63,989 -> 61,377
+    (59,889); Fukuoka 30,062 -> 29,921 (24,619).
+  - South America: Buenos Aires 63,596 -> 63,443 (42,185); São Paulo
+    219,578 -> 219,421 (49,555); Rio 106,652 -> 106,576 (30,233); Belo
+    Horizonte 45,582 -> 45,533 (8,393); Brasília 36,687 -> 36,633 (5,063);
+    Salvador 53,045 -> 52,938 (10,056); Fortaleza 62,969 -> 62,882 (8,514);
+    Porto Alegre 36,480 -> 36,391 (7,400); Recife 44,382 -> 44,302
+    (10,358); Santos 11,813 -> 11,809 (5,385).
+  - Every total is within 0.2% of the handoff's read-only measurement except
+    São Paulo (below). Madrid (+67), Taipei (-71) and Taichung (-39) moved
+    most; the handoff's rule is to use the re-run count.
+- **Kobe, Osaka, Sapporo and Kyoto: zero drift** on single-city drift
+  checks, so the changed Japanese module removes nothing there, as measured.
+- **Baselines rewritten from the re-run's own step logs**, which the
+  handoff did not cover: the steps print `##BASELINE` figures but only
+  `drift_check --update-baseline` writes `outputs/<city>/baseline.json`, and
+  a 41-city drift check was the heavy job the handoff split up. Step 2
+  onward figures were taken from the logs and step 1's carried over (24
+  cities have baselines; 17 have none). Verified by a drift check of
+  Edmonton against the new commit: zero drift, baseline unchanged.
+- **Brazil: "FUNELARIA" is a body shop, not a funeral home.** São Paulo lost
+  157 storefronts, not the measured 25. The edit-distance pass corrects a
+  token to the first vocabulary word within reach in sort order, and
+  FUNELARIA, FUNIRARIA and FUNINARIA - São Paulo's spellings of
+  *funilaria* - are as close to FUNERARIA, which sorts first, as to
+  FUNILARIA: 132 of São Paulo's 178 funeral-labelled rows. A first fix (a
+  spelling-table entry) was withdrawn when real funeral homes turned out to
+  depend on the same pass (FUNEARIA CRUZ DOURADO, FUNENARIA ROXO, FENERARIA
+  SANTA IZABEL). `fuzzy_fix` now takes FUNILARIA whenever a token is at
+  least as close to it, with import-time asserts both ways
+  (`pipeline/taxonomies/brazil_cnefe.py`). Both labels are excluded, so it
+  moves a reason, not a pin: all nine maps re-rendered identical after
+  Folium-id normalisation. Re-labelled from the raw descriptions, the 703
+  pins the batch took off the nine maps are **558 funeral** (São Paulo 25,
+  Rio 75, Belo Horizonte 48, Brasília 53, Salvador 106, Fortaleza 86, Porto
+  Alegre 85, Recife 79, Santos 1) and **145 body shops**, which the
+  misspelling had kept on the maps as personal services until now - a
+  correction, since auto repair is excluded. Owner approved the fix. The
+  one known cost: Salvador's FUNIRARIA J SODRE, probably a funeral home,
+  is now labelled auto repair; it is excluded either way.
+- **Wording counts re-measured** against before/after processed files by an
+  agent: every figure in the approved per-city text matches except three,
+  settled by the owner:
+  - Los Angeles's kept `722300` is **3,145 pins**, not 3,013 (that was the
+    count before geocoding and the residence filter).
+  - Chicago's catch-all removed **133** sites, not 134; 17 of them name
+    another activity too, all of them activities that were never counted
+    (fitness, yoga, tax preparation, event planning).
+  - **Chicago's funeral disclosure rewritten (owner):** the "about 63"
+    funeral-word pins were 64 before the batch; 35 of them were funeral
+    homes filed under the "Miscellaneous Personal Services" catch-all and
+    left with it, and the 29 that remain sell funeral items. The approved
+    "they stay because nothing separates them" was no longer true.
+  - Brazil's trailer or food-truck descriptions: about 320, not 325.
+- **Personal exposure re-run for all 41 (`check_personal_exposure.py`):
+  every city consistent with its prior verdict, none worse.** Los Angeles
+  331 of 13,900 pins (2.38%, down from 844, 5.81%, on 2026-09-21), but that
+  entry's apartment-population item was never closed and still is not.
+  Vancouver 312 of 4,618 (6.76%, from 314 of 4,668): the share rose 0.03
+  points only because the total fell; the 2026-09-21 verdict accepted that
+  level on the parcel-zoning join, which this re-run did not redo. Mexico
+  City, Guadalajara and Monterrey stay at the accepted 31-35% heuristic
+  level; the nine Brazilian cities stay inside the accepted 8.8-19.5%.
+- **Checks:** `check_ring_shares.py --write` (62 cities), `check_macro_labels.py`
+  PROBLEMS 0, `check_all.py` 24/24. `app/macro_facts.json` waits for landing,
+  as the handoff says: `check_macro_facts.py --write` drops every city whose
+  shared data is stale.
+
+### 2026-09-29 - Information pages renumbered 90-92 -> 200-202 (owner)
+
+- **About the Data, What Is Excluded and Why the Maps Differ are now pages
+  200, 201 and 202.** With 64 cities built after Stockholm and Bucharest and
+  about 120 more on the candidate and tram lists, 90 would have been reached;
+  150 was the alternative, and 200 leaves room for every listed city. The
+  URLs do not change, since Streamlit drops the number from the path.
+  `scripts/scaffold_city.py`'s `next_page_number()` now refuses a city
+  number that reaches the first info page (tested both ways); before, the
+  collision would have been silent, as it nearly was at 10 in 2026-09-21
+  (`docs/scaling_thresholds.md`).
 
 ### 2026-09-29 - Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)
 
