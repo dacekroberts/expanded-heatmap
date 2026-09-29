@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**202 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
 - [Light-rail briefs: the last four calls answered, all five ready (owner)](#2026-09-29---light-rail-briefs-the-last-four-calls-answered-all-five-ready-owner)
 - [Light-rail briefs: the owner's calls, and two timetables read (staging)](#2026-09-29---light-rail-briefs-the-owners-calls-and-two-timetables-read-staging)
@@ -240,6 +241,47 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)
+
+- **A written bar for reduced-bucket pages (owner)**, drawn from the pages
+  built on fewer than three buckets (Stockholm, Bucharest, London, Glasgow,
+  Newcastle, Hong Kong, Incheon) and the "no page" verdicts:
+  1. food at register quality (Yokohama, personal services only, failed);
+  2. current under the one-clock rule (Singapore's 2016 register failed);
+  3. a register of premises, not a curated guide, one sector or land use per
+     property;
+  4. **size and in-ring share are disclosed, never a gate**;
+  5. about 70% or more placed (Incheon's 71.3%);
+  6. rail that passes the light-rail test and is not a stub.
+
+  Rule 4 was drafted as a floor at Glasgow's size (4,708 storefronts, 1,993
+  in rings, the smallest reduced page built). **The owner relaxed it**,
+  pointing to Houston, which will map at about 7% in-ring. That 7% is a
+  share: about 2,500 of ~36,000 storefronts sit in the rings, more in
+  absolute terms than Glasgow's 1,993. Either way, a thin page is disclosed
+  rather than refused.
+- **Moved to Band B on the bar (owner)**:
+  - **Hiroshima**: 12,674 restaurants on two lists, 95–96% joined; the
+    Astram Line and JR.
+  - **Kitchener–Waterloo (Regional)**: food 2,008 and personal services
+    about 636. It is under the drafted floor, and passed.
+  - **Baltimore**: 1,327 restaurants on 27 stations. Its 2026-09-28 "no
+    page" rested on size, which the relaxed rule 4 no longer gates.
+
+  C 13 → 10, B 1 → 4.
+- **Palma reopened (owner)**, as Glasgow's twin: 4,375 food premises against
+  Glasgow's 4,708, on about 16 stations against 15. It was told "no page" on
+  2026-09-28, the day Glasgow was built. It stays in C until an address join
+  shows about 70% placed (13% carry coordinates).
+- **Pending light measurements, then a verdict on the bar**: Ottawa (its
+  food count was never recorded), Minneapolis (47,959 inspection rows to
+  de-duplicate to premises, and the stub test) and Pittsburgh (the count
+  inside the city, and the stub test).
+- **Staying in C**, each row saying what would change it: Singapore
+  (currency), Yokohama (no food), Istanbul and Ankara (not a premises
+  register), Perth (land use per property, about 6 stations) and Ho Chi Minh
+  City (seven months of certificates, no placement route).
 
 ### 2026-09-29 - Portland re-probed at the owner's request: still no classified register
 
