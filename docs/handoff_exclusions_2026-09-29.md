@@ -234,3 +234,32 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   reboots. Check the live site, including one city that did not change.
 - Stockholm (branch `stockholm`, frozen at `9d58123`) may be landing in the
   same batch: see `docs/handoff_2026-09-28.md`.
+
+## State after the run (2026-09-29, second cleanup session)
+
+- **Done and committed on `worktree-cleanup`, not pushed:** all 41 maps,
+  baselines, `app/ring_shares.json`, the Brazil funilaria fix, the approved
+  wording (with the owner's re-run substitutions: Los Angeles 3,145; Chicago
+  133 and a rewritten funeral disclosure; Brazil 558 and about 320),
+  `docs/map_inconsistencies.md`, the info pages renumbered to 200-202, and
+  DECISIONS. `check_all.py` 24/24. Counts and verdicts are in DECISIONS
+  2026-09-29 "Exclusions batch re-run".
+- **The new processed files are in that session's scratchpad**,
+  `new_processed/<slug>/` (41 cities; the Brazilian ones are the final
+  re-run), under
+  `C:/Users/dacek/AppData/Local/Temp/claude/C--Users-dacek-Documents-Portfolio-expanded-heatmap--claude-worktrees-cleanup/b47d2f67-189e-4346-a6f0-718eed9272c2/scratchpad/`.
+  Master's copies are beside them in `master_processed/` (Brazil:
+  `master_processed_run2/`). If that folder is gone, the landing re-runs
+  step 2 onward for the 41 cities instead; the committed maps say what the
+  result must be.
+- **Waiting for the owner:** the "Why the maps differ" page
+  (`app/pages/202_Why_the_Maps_Differ.py`) still says "Street stalls are
+  left out in Mexico." A replacement is drafted in chat.
+- **Not traced, internal only:** a few in-ring Retail counts rose (Chicago
+  +15, Madrid +8, D.C. +2, Miami +1), consistent with multi-use premises
+  re-bucketing when one of their uses is excluded; Madrid's multi-bucket
+  premises fell 1,535 -> 1,488.
+- **Review time** (owner: once the two Korean cities are in): full
+  `deploy-verify`, then the landing steps above. Stockholm first, then
+  Bucharest with its three merge fixes (NOTICE 67, REGION_ZOOM_WITHOUT with
+  all three cities, master-list counts), as the Stockholm session sent them.
