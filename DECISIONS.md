@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**144 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**145 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
 - [Ho Chi Minh City from D to C, after the owner passed its CAPTCHA (owner)](#2026-09-28---ho-chi-minh-city-from-d-to-c-after-the-owner-passed-its-captcha-owner)
@@ -180,6 +181,40 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)
+
+- **Moved Lisbon to Band R, request only (owner's call), after the owner
+  worked through DGAE's site.**
+  - **The data exists, publicly.** The Mapa do Comércio, Serviços e
+    Restauração shows each establishment without login. Its fields are
+    exploration type (Comércio / Serviços / Restauração, the project's
+    three buckets), CAE, full street address, coordinates and a
+    registration code. Lisbon-area clusters hold about 6,700–11,000 points
+    each.
+  - **Gaps the build would design around:** there is no status field, sole
+    traders appear under their own names, and market and mobile traders are
+    registered at their homes.
+  - **No individual account.** The export endpoint (`/estabelecimentos/exportar`)
+    answers 401 anonymously. Registration offers only Administração Pública
+    Central, Município and Estrutura Associativa, so the owner cannot hold
+    an account honestly. The terms are a visitor privacy policy (silent on
+    reuse), and `dados.gov.pt` carries only aggregates.
+  - **A request is drafted, not sent,** kept to revisit:
+    `docs/notifications/dgae-lisbon-porto-request.md`, in European
+    Portuguese with an English copy. It asks for a Lisboa and Porto export,
+    the reuse terms, and states that sole traders' names won't be published
+    and non-sedentary trade will be excluded. Gated-access item 28 is
+    updated. Porto moves on the same answer.
+- **Band D is empty**, after the owner's own checks of all three cities this
+  evening (Ho Chi Minh City to C, Delhi and Lisbon to R). The band stays for
+  the next city the owner can unblock alone. The counts self-test's "city in
+  two bands" case, which borrowed a Band D row, is re-aimed at Band R. Counts:
+  57 built; A 1 · B 8 · C 8 · D 0 · R 17 · T 51 = 85. Files:
+  `docs/city_master_list.md`, `docs/gated_access.md`,
+  `docs/notifications/dgae-lisbon-porto-request.md`,
+  `docs/handoff_staging_2026-09-28.md`,
+  `scripts/check_master_list_counts_selftest.py`.
 
 ### 2026-09-28 - Review-time batch live after the owner's reboot, checked on the live URL
 

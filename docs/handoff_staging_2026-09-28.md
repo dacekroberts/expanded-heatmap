@@ -44,7 +44,7 @@ then follow the pointers. **Delete a section when its item is done.**
   the old N) · **D** (blocked, but the owner can act alone: a CAPTCHA, a free
   account) · **R** (restricted or request only: a geo-block, an identity we
   cannot hold, or a permission/order/reply; future request-only cities go here) · T. Section order A, B, C, D, R, T. As of this line: 55 built;
-  A 1 · B 10 · C 8 · D 1 · R 16 · T 51 = 87 candidates; 91 discards. The
+  A 1 · B 10 · C 8 · D 0 · R 17 · T 51 = 87 candidates; 91 discards. The
   counts check knows R (`LETTERS = "ABCDRT"`).
 - **`docs/global_transit_gap.md`**: every large-network city not built (33
   discarded, 21 ruled out by country, 28 in a band, 0 never screened;
