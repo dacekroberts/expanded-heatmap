@@ -91,7 +91,9 @@ is most of what a station counts. Japan has no general business licence, so shop
 shops do not appear. The Food shops layer is food retail only, by permit type: bakeries and
 confectioners, delis, butchers and fishmongers. Shops selling only packaged food have filed a
 notification rather than a permit since 2021, and appear only where a list includes
-notifications. Food trucks, stalls and temporary permits are left out.
+notifications. Food trucks, stalls, temporary permits and caterers are left out, and so are the
+bar permit types that take in cabarets and hostess-staffed snack bars; Meguro's bars, listed
+without that detail, are kept.
 
 The lists give an address but no location. Each address is matched to MLIT's address reference
 data, which places 99.7% at their street block; where only the town can be found, the dot sits at

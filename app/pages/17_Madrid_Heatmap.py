@@ -66,7 +66,8 @@ register. They are listed in `outputs/madrid/excluded_stations.csv`.
 **What is counted, and what is not.** Retail, food service and personal
 services, as the register's own activity classification defines them. Hotels
 and tourist flats are excluded - they are accommodation rather than food
-service. So are wholesale, vehicle repair, and premises with no shopfront such
+service. So are wholesale, vehicle repair, canteens in schools, care homes and
+offices, event caterers, funeral parlours, and premises with no shopfront such
 as online and vending sales.
 
 Concentric ring boundaries and the three business categories (Retail, Food
