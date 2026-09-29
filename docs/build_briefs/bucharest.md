@@ -140,8 +140,8 @@ code for this city.
 >     can raise it with more normalisation (the `address-join` skill's
 >     patterns, an `i` stem, initials). **Street-level placement for the
 >     street-only rows is not proposed**: a boulevard is kilometres long.
->   - **The measurement scripts** are session scratch
->     (`buc_match.py`, `buc_match2.py`). The build writes its own join in
+>   - **The measurement scripts** are kept (gitignored) in
+>     `data/_staging_scratch_2026-09-29/` (`buc_match.py`, `buc_match2.py`, `buc_blocks.py`, `buc_na.py`). The build writes its own join in
 >     step 2, and this table is its baseline.
 > - **What the build still needs, in order:**
 >   1. ~~The owner's browser fetch~~ done for eight files. Still to come:

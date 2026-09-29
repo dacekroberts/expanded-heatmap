@@ -4,7 +4,7 @@
 earlier ones: the Japan build session's Tokyo plan, the build role from
 "Staging and build handoff", and Tokyo sources research's closing note. The
 first and third files are deleted. The staging role keeps its own handoff
-(`docs/handoff_staging_2026-09-28.md`). Read this once and follow the
+(`docs/handoff_staging_2026-09-29.md`). Read this once and follow the
 pointers. **When a section is done, delete it rather than adding an
 addendum.**
 

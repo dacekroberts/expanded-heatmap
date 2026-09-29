@@ -20,15 +20,19 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**171 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Stockholm built on its frozen food inspection register: institutional kitchens out by name (owner), three lines with Swedish labels (owner); privacy clean](#2026-09-29---stockholm-built-on-its-frozen-food-inspection-register-institutional-kitchens-out-by-name-owner-three-lines-with-swedish-labels-owner-privacy-clean)
+- [Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)](#2026-09-29---staging-handed-off-for-the-tram-question-a-preliminary-yes-for-scoping-and-filtering-band-t-only-the-final-call-after-an-audit-owner)
+- [Gyeonggi is built from the Ministry's national local-licence files (owner)](#2026-09-29---gyeonggi-is-built-from-the-ministrys-national-local-licence-files-owner)
+- [Gyeonggi's portal licence read: the datasets are permissive, but the portal's terms bar commercial use and possibly processing without approval; the national source recommended instead](#2026-09-29---gyeonggis-portal-licence-read-the-datasets-are-permissive-but-the-portals-terms-bar-commercial-use-and-possibly-processing-without-approval-the-national-source-recommended-instead)
 
 **2026-09-28**
 
 - [Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)](#2026-09-28---stockholm-the-225-untyped-premises-recognised-by-name-go-on-the-map-flagged-owner-t-bana-only-owner-the-full-register-fetched-owner)
+- [Second batch live after the owner's reboot, checked on the live URL](#2026-09-28---second-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)](#2026-09-28---incheons-licences-read-the-permit-lists-and-the-kesa-lift-building-file-both-permitted-with-conditions-the-website-copyright-terms-judged-not-to-reach-them-owner-personal-services-shown-from-2021-dated-owner)
 - [Gyeonggi satellites: Goyang, Seongnam and Yongin first, then Suwon and Bucheon (owner)](#2026-09-28---gyeonggi-satellites-goyang-seongnam-and-yongin-first-then-suwon-and-bucheon-owner)
 - [Bucharest builds before Incheon (owner), reversing the order recorded earlier today; Incheon and the Gyeonggi satellites to be briefed](#2026-09-28---bucharest-builds-before-incheon-owner-reversing-the-order-recorded-earlier-today-incheon-and-the-gyeonggi-satellites-to-be-briefed)
@@ -299,6 +303,84 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   Livsmedelstillsyn layer 41, every field. Measured beforehand from a
   2,000-row sample at 564 bytes a row: about 165 MB in 145 pages.
 - Files: `DECISIONS.md` (the build's own files follow on branch `stockholm`).
+### 2026-09-29 - Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)
+
+- **The owner's framing of Band T's question: a preliminary yes to
+  trams-only maps, for scoping and filtering the 51-city list only.** The
+  list is audited thoroughly under that assumption: whether each city is
+  trams-only, whether its data still stands, and the design questions
+  (what rings mean at tram-stop spacing, labels for dense networks, the
+  macro map and summary table, build cost by country pipeline). **Then the
+  owner makes the final call on whether trams-only maps are allowed, and
+  implementation starts only after that.** Nothing is built or promoted to A
+  or B on the preliminary yes. This is a working assumption for the audit,
+  not the decision Band T waits on.
+- **A fresh staging session takes it** (owner), in its own environment:
+  `docs/handoff_staging_2026-09-29.md` replaces
+  `docs/handoff_staging_2026-09-28.md` (deleted; two handoffs' mentions
+  retargeted). This session's measuring scripts (Bucharest, Stockholm,
+  Gyeonggi, Australia, the UK probe) are kept in
+  `data/_staging_scratch_2026-09-29/`, and the Bucharest and Stockholm
+  briefs point there.
+- **State at handoff:** 62 built; A 0 · B 4 · C 8 · D 0 · R 17 · T 51 = 80
+  candidates; 91 discards. Band B is fully briefed and queued with the
+  Stockholm build session (Stockholm, Bucharest, Incheon, Gyeonggi).
+
+### 2026-09-29 - Gyeonggi is built from the Ministry's national local-licence files (owner)
+
+- **Decided (owner), as recommended: the Gyeonggi satellites' business data
+  comes from the Ministry of the Interior's national local-licence files**,
+  the source Busan's build uses. They declare "이용허락범위 제한 없음", so
+  the 경기데이터드림 portal's ambiguous terms (entry below) do not apply.
+  - The portal files already in `data/gyeonggi/raw/` stay as a scratch
+    cross-check, and nothing from them is published.
+  - The national files need the owner's download OK at the build.
+  - Whether they carry the café file's name, location and status (and the
+    takeaway file's status) is checked before the page's gap is written.
+    The per-city counts in the brief came from the portal files and are
+    re-measured on the national ones.
+- Files: `docs/build_briefs/gyeonggi.md`.
+
+### 2026-09-29 - Gyeonggi's portal licence read: the datasets are permissive, but the portal's terms bar commercial use and possibly processing without approval; the national source recommended instead
+
+- **`licence-read` of 경기데이터드림 (data.gg.go.kr): AMBIGUOUS.** Every
+  declaration is permissive:
+  - the portal's 14 dataset pages: "commercial use and modification
+    allowed";
+  - data.go.kr's 17 Gyeonggi listings and the Ministry's national
+    listings: "제한 없음";
+  - the provincial ordinance 제4조③, which bars restricting even
+    commercial use.
+
+  But the portal's 이용약관 제12조⑥ and 제14조②9 bar commercial use
+  ("processing and selling" given as examples) and profit-making without
+  Gyeonggi's approval. Read one way, a non-commercial map is outside the
+  bar; read the other, processing alone needs approval. The terms'
+  effective date is a blank placeholder.
+- **Recommended, not decided: build from the Ministry's national
+  local-licence files, as Busan does.** Most portal files name the
+  Ministry as provider, and the national files declare "제한 없음", so the
+  portal's terms never apply. They may also close the café and takeaway
+  gaps: the read found the portal's café metadata listing an address and
+  lat/lon. That is to be checked before the page's gap is written. The
+  alternative is to accept the permissive reading of the portal's terms.
+- **Never published:** phone numbers, deposit and rent, and the
+  rights-holder and livestock identifiers. No owner-name column was found.
+- Files: `docs/build_briefs/gyeonggi.md`.
+### 2026-09-28 - Second batch live after the owner's reboot, checked on the live URL
+
+- **Page 92:** 62 rows; Melbourne's in-ring share reads 96% and Sydney's
+  83%; the range reads "about 12% to 100%".
+- **Opening zoom** (the map-view check recomputing the expected zoom, 1280
+  px, 0 corrections): Buenos Aires 12.75, Glasgow 14, Newcastle 11.5, Sydney
+  13.25, Melbourne 13.5, London 10.25, and Chicago (untouched) 10.75, each
+  matching its expected zoom.
+- **Content:** the footer shows the new notices (the City of Melbourne, the
+  City of Sydney, Buenos Aires's city government, Food Standards Scotland),
+  and London's page carries the flat-address sentence.
+- **Page 91 at 375 px:** the document is 375 px wide, and 62 rows scroll in
+  a 343 px box.
+
 ### 2026-09-28 - Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)
 
 - **Two `licence-read`s, both PERMITTED WITH CONDITIONS.**

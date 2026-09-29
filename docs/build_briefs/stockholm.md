@@ -61,7 +61,7 @@
 >   - **Proposed (awaiting the owner):** add the 225 of those 251 last
 >     inspected in 2022-23, flagged as classified from the name, which gives
 >     about 5,996 storefronts.
->   - The measurement script is `sthlm_untyped.py` (session scratch). The
+>   - The measurement script is `sthlm_untyped.py`, kept (gitignored) in `data/_staging_scratch_2026-09-29/`. The
 >     build writes the rules into its taxonomy, with the same validation as
 >     a check.
 > - **`VerksamhetsTyp` types each premises** (the screen said nothing of it):
