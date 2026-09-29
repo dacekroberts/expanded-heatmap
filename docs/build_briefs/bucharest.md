@@ -107,15 +107,52 @@ code for this city.
 >   de-duplication.** "Sector" reads **U.M.** (unitate mobilă) on mobile
 >   units, such as a wine truck with a number plate for an address. They are
 >   out, as non-storefronts.
+> - 🎯 **THE HIT RATE, measured 2026-09-28: about 80% placed on street and
+>   house number.** The inputs:
+>   - OSM: **145,892 address objects** inside relation 377733, pulled as a
+>     CSV (owner-approved, 9,523,237 B, sha256 `49f1b99f5242b28d…`,
+>     `data/bucharest/raw/osm_addresses_2026-09-28.csv`, via
+>     overpass.kumi.systems). That gives 4,443 street keys and 132,287
+>     street+number pairs.
+>   - DSVSA: 23,032 active rows (mobile units, kiosks and vending machines
+>     out), which merge on name and parsed address to **20,815
+>     storefronts**.
+>
+>   | Pass | Placed | Share |
+>   |---|---|---|
+>   | 1: normalised street + number (types, diacritics, "nr." stripped) | 15,448 | 74.2% |
+>   | 2: a tolerant key (words over 2 letters, ranks dropped, genitive stemmed); **a unique OSM street only** | +1,103 → **16,551** | **79.5%** |
+>
+>   - **Left unplaced: 4,264.** 1,051 are **ambiguous** (two or more OSM
+>     streets fit) and are not guessed. The others either match a street
+>     whose house number OSM lacks, or match no street. The split was not
+>     measured.
+>     - Long boulevards lead the missing numbers: Iuliu Maniu,
+>       Alexandriei, Floreasca, Oltenitei.
+>     - The no-match rows are market addresses such as Câmpul Moșilor, and
+>       abbreviations still unresolved ("Dorobanți" against "Dorobanților",
+>       "I.C. Brătianu").
+>   - **By sector:** 1 76% · 2 83% · 3 79% · 4 78% · 5 75% · 6 86%.
+>   - **By file:** 76-88%, except fishmongers at 57% (many sit inside
+>     markets).
+>   - **Where that leaves Bucharest:** below Prague's 99.8%, Oslo's 97.8% and
+>     London's 94.9%, above Incheon's 71.3% (Band B, gap disclosed). A build
+>     can raise it with more normalisation (the `address-join` skill's
+>     patterns, an `i` stem, initials). **Street-level placement for the
+>     street-only rows is not proposed**: a boulevard is kilometres long.
+>   - **The measurement scripts** are session scratch
+>     (`buc_match.py`, `buc_match2.py`). The build writes its own join in
+>     step 2, and this table is its baseline.
 > - **What the build still needs, in order:**
 >   1. ~~The owner's browser fetch~~ done for eight files. Still to come:
 >      26 Hipermarket-supermarket, and a look at the non-animal-origin list.
 >   2. ~~Five rows of each, read for the names~~ done: legal entities, with
 >      sole traders under their own names (above).
->   3. **The OSM address hit rate** on the ~19,000 active rows, the one
->      number that decides whether Bucharest is buildable. Addresses are
->      free text ("Calea Mosilor 294,", "Str. Pieței nr. 67, sp. S67, sect.
->      1"), so normalisation comes first (`address-join`).
+>   3. ~~The OSM address hit rate~~ measured: **79.5%** (above). **The owner
+>      decides whether that is enough to build, with the gap disclosed.**
+>   4. Owner calls for the build: canteens and pastry labs out (recommended);
+>      the page's wording for the ~20% unplaced; whether to show legal-entity
+>      names or the category only.
 
 ---
 

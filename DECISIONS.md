@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**150 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**151 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM](#2026-09-28---bucharests-address-hit-rate-measured-795-of-20815-storefronts-placed-on-street-and-number-against-osm)
 - [Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication](#2026-09-28---bucharests-supermarket-file-and-eight-non-animal-origin-files-fetched-owner-about-23100-active-rows-before-de-duplication)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
 - [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
@@ -186,6 +187,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM
+
+- **Downloaded (owner's OK)** 145,892 OSM address objects inside relation
+  377733, as a CSV (9,523,237 bytes, sha256 `49f1b99f5242b28d…`,
+  `data/bucharest/raw/osm_addresses_2026-09-28.csv`). The first Overpass
+  mirror failed and overpass.kumi.systems answered. The job was announced
+  to the live sessions as a heavy job, and Cleanup held London's step 2
+  for it.
+- **Matched DSVSA's active rows** after leaving out mobile units, kiosks and
+  vending machines: 23,032 rows, merging on name and parsed address to
+  20,815 storefronts.
+  - **First pass** (normalised street and number): **74.2%** placed.
+  - **Second pass** (a tolerant street key, accepted only where exactly one
+    OSM street fits): **79.5%, 16,551 placed.**
+  - **Left unplaced: 4,264.** 1,051 are ambiguous and are not guessed. The
+    rest either sit on a street whose house number OSM lacks (mostly long
+    boulevards) or match no street; the split was not measured.
+  - **By sector:** 75-86%. **By file:** 76-88%, except fishmongers at 57%.
+- **Recommended but not decided:** Bucharest is buildable with the gap
+  disclosed. Its 79.5% sits above Incheon's 71.3% (Band B, disclosed) and
+  below the European builds (London 94.9%, Oslo 97.8%). Placing a
+  street-only row somewhere along its street is **not** proposed, since a
+  boulevard is kilometres long. More normalisation belongs to the build.
+  Whether to build, and the wording of the gap, are the owner's calls.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
 
 ### 2026-09-28 - Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication
 
