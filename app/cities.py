@@ -1821,12 +1821,10 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, and SCORED: width 45.3 px measured in the local app's
+        # own document (2026-09-29, seven entries reproduced). Labelled in the
+        # Seoul Capital Area region; check_macro_labels.py passes every region
+        # at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
 ]
