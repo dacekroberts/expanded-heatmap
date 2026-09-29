@@ -362,17 +362,25 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   TEXT_WIDTH and `check_personal_exposure.py` REGISTRIES take both. `bucheon`
   also moves Incheon's macro label below its dot. Re-run
   `check_macro_labels.py` with both merged.
-- **`bergen`** (origin, READY 2026-09-29; page 71; 3,597 storefronts, 33
+- **`bergen`** (origin at bf1f5b4, READY final 2026-09-29; page 71; 3,597 storefronts, 33
   stations, 58.5% in a ring; exposure clean): cut from master, so it counts
   Built 69, Band A 4, Europe (23), Norway 2, Candidates 76. With suwon and
   bucheon merged, Built becomes 71 before the light-rail four (reconcile each
-  count once, after all city branches are in). Widens notices 27, 28 and 29
-  to "(Oslo, Bergen)"; the OSM rail-geometry notice names Bybanen line 1's
+  count once, after all city branches are in). Widens notices 27
+  (Brønnøysundregistrene), 28 (Kartverket) and 29 (Entur, adding Skyss) to
+  "(Oslo, Bergen)"; the OSM rail-geometry notice names Bybanen line 1's
   colour (owner-approved text). Macro label 48.3 px, above the dot. For the
   held macro-map work: Bergen takes the light-rail colour (rail_extra
   "Trams", as Calgary). Aarhus onward is built in a fresh session from
   `docs/handoff_light_rail_2026-09-29.md` (Aarhus, Buffalo, Sacramento,
-  Houston; pages 72-75; each READY to the cleanup session).
+  Houston; pages 72-75; each READY to the cleanup session). suwon, bucheon
+  and bergen append after the same anchors: expect conflicts in
+  `app/cities.py`, `check_macro_labels.py` TEXT_WIDTH (Suwon 45.3, Bucheon
+  60.1, Bergen 48.3), `check_personal_exposure.py` REGISTRIES, macro_facts,
+  ring_shares (re-run `--write`), README, DECISIONS, the master list,
+  map_inconsistencies tables A-D and excluded_categories (Bergen before
+  Oslo). The build session stays open until the batch is live: send it
+  questions during the merge and a notice when live.
 - **The category-fix batch** (`category-continuity`, 17 taxonomies and their
   re-renders, owner-approved) bases its Stockholm fix on `stockholm-catering`:
   land it after, or in one merge.
