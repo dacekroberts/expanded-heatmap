@@ -314,5 +314,13 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   `docs/excluded_categories.md` too; confirm the 2026-09-29 "Kept because the
   register cannot split it" Stockholm disclosure no longer claims the
   caterers are on the map.
-- **Do not remove `.claude/worktrees/stockholm`** until the owner closes that
-  session; then `check_worktree_data.py` first.
+- **`category-continuity`** (local branch in worktree
+  `quizzical-lamarr-4c765b`, 60d23ff, waiting for the owner) adds
+  `check_category_continuity.py` to `check_all.py`. Its table in
+  `scripts/category_continuity_table.py` lists Stockholm's "Westers Catering"
+  and "Tommys Farstaplan, Food truck" as `pending(...)`. **Whichever of the two
+  branches lands second, turn those two into `loc(...)` in the
+  sweden_livsmedel column in that merge**, or the check reports them stale
+  and the pre-push hook fails.
+- The Stockholm worktree was removed 2026-09-29 (owner); `stockholm-catering`
+  is kept, locally and on origin.
