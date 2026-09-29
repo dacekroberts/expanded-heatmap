@@ -18,6 +18,11 @@ https://claude.ai/artifact/UQ7Lsdu23HPfuZ1JFxoaxo, and PLAN's macro-map items.
 - **Macro map**: minor cities get no pill outside their own region; dots are
   coloured by network type (Dublin tram), completeness by fill (solid, ring,
   half-filled).
+- **Station tables are pure extracts for every French ODbL feed** (owner):
+  the feed's own `parent_station` and coordinates; without one, the first
+  platform's coordinates, never a mean; names unchanged. No data.gouv.fr
+  account. **Angers is held** (owner) until the other 20 are built: the
+  France batch is 20 cities.
 - **The currency rule**: the source must drop closed businesses and its
   newest row date must be under five years; the date goes on the page.
 

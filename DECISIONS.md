@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
 - [French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record](#2026-09-29---french-tram-feeds-read-four-permitted-with-conditions-angers-bars-naming-its-network-without-consent-the-national-portals-odbl-conditions-found-correcting-toulouses-and-rennes-record)
 - [The French tram-city page text approved as a template (owner)](#2026-09-29---the-french-tram-city-page-text-approved-as-a-template-owner)
 - [The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended](#2026-09-29---the-tram-batchs-groundwork-started-owner-all-six-items-a-france-macro-view-measured-and-a-northsouth-split-recommended)
@@ -234,6 +235,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Angers held; French ODbL station tables stay pure extracts (owner)
+
+- **Angers is held (owner)** until the other 20 French tram cities are
+  built, rather than seeking the Métropole's consent (a reCAPTCHA form, and
+  outreach is the last resort) or labelling its lines without the brand (an
+  arguable reading of « toute autre marque »). It stays in T1 with the hold
+  on its row; the France batch is 20 cities.
+- **The pure-extract rule for every French ODbL feed (owner).** A station
+  table is the feed's own stops, filtered, never renamed, re-geocoded or
+  given new coordinates, so it adds nothing and the national portal's
+  Conditions Particulières ask for no re-share; no data.gouv.fr account is
+  created. In practice: a station is the feed's own `parent_station` with its
+  own coordinates; where a feed sets none, the first platform's coordinates
+  stand, **never a mean of several** (a mean is a new coordinate, which the
+  portal files under « ajout de coordonnées »). Names are the feed's. Line
+  geometry from another source (Montpellier, Le Havre) is a separate
+  database with its own read and is not written into the station table.
+- **Toulouse's and Rennes' step 1 fall back to exactly that mean** where a
+  feed sets no `parent_station` (`pipeline/toulouse/step1_stations.py`
+  lines 118–135, `pipeline/rennes/step1_stations.py` 117–134). Whether the
+  fallback fired for either is not recorded; PLAN carries the check, and a
+  fix is build-session work at review time.
 
 ### 2026-09-29 - French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record
 

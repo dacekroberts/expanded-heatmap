@@ -90,6 +90,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Diego, D.C., Calgary); (f) record each source's newest row date at fetch
     time, capped at the fetch date, and write it into `data_age`. Pipeline
     work for the build sessions; review time.
+  - [ ] **Toulouse and Rennes: did step 1's name-level fallback fire?** The pure-extract
+    rule for French ODbL feeds (owner 2026-09-29) forbids a station point made as the
+    MEAN of same-named platforms (`step1_stations.py`, the "collapsing N name(s)"
+    branch), which the national portal files under « ajout de coordonnées ». Re-run step 1
+    read-only (or read its drift log) for the print; if it fired, take the first
+    platform's coordinates instead, drift-check, review time.
   - [ ] **Groundwork before the tram batch (staging's list, 2026-09-29; ~68 →
     ~110 cities)**, in the recommended order: (1) a France batch kit - a
     `france-tram-city` skill and a script writing the 21 configs from the
