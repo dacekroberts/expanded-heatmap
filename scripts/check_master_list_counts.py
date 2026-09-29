@@ -57,6 +57,17 @@ The Built table is counted by names in each row (` · `-separated); its
 per-country figures are checked against `app/cities.py` separately, by
 `scripts/check_provenance.py` check E. The discard rows' evidence is checked by
 `scripts/check_discard_evidence.py`; this script only counts them.
+
+THE TRAM LIST (owner, 2026-09-29). Band T's cities moved to their own file,
+`docs/tram_city_list.md`, sorted into tiers (`## ... T1 ... (N cities)`), so
+the tram cities can be worked through apart from the rest. When the master
+list's Band T section names that file, Band T's members are read from the
+tram list's tier sections instead - the master list's own Band T section must
+then hold no city rows - and every count the tram list states (its title, each
+tier heading, its tier table, its country sub-groups) is checked the same way.
+Band T still counts toward the candidate total, and a city still sits in ONE
+place across both files. The tram list is looked for beside the file checked,
+so `--file` controls can carry their own copy.
 """
 import argparse
 import re
@@ -66,6 +77,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LIST = ROOT / "docs" / "city_master_list.md"
+TRAM_NAME = "tram_city_list.md"      # Band T's own file, beside the master list
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -75,6 +87,7 @@ FLAG_RE = re.compile(FLAG)
 BOLD = re.compile(r"\*\*(.+?)\*\*")
 SEP = re.compile(r"^\|[\s:|-]+\|\s*$")
 BAND_HEAD = re.compile(r"^## .*\bBand ([A-Z])\b")
+TIER_HEAD = re.compile(r"^## .*?\b(T\d)\b")
 # Every band letter a candidate can sit in. B reopened (passed: narrower
 # pages) and N created (no page for now) by the owner 2026-09-28, when C
 # closed; later the same day N was retooled as C (closer to a page) and D
@@ -192,11 +205,67 @@ def built_table(lines, start, end):
 
 # --- the check --------------------------------------------------------------
 
-def check(text):
-    """Return (report, problems). `report` is {list name: {key: name}}."""
+def tram_list(text):
+    """Band T's members from the tram list, and every count it states.
+
+    Returns ({key: (name, line_index, False)}, problems, {tier: count})."""
+    lines = text.splitlines()
+    problems, found, tiers = [], {}, {}
+    for t, s, e in sections(lines):
+        m = TIER_HEAD.match(t)
+        if not m:
+            continue
+        tier = m.group(1)
+        mem = members(lines, s, e)
+        tiers[tier] = len(mem)
+        h = re.search(r"\((\d+)\s+cit", t)
+        if not h:
+            problems.append(f"tram list: {tier}'s heading states no '(N cities)': {t!r}")
+        elif int(h.group(1)) != len(mem):
+            problems.append(f"tram list: heading '{t}' says {h.group(1)}, but {tier} holds "
+                            f"{len(mem)}: {_names({k: v[0] for k, v in mem.items()})}")
+        problems += [f"tram list: {p}" for p in subgroups(lines, s, e, tier)]
+        for k, (name, i, _) in mem.items():
+            if k in found:
+                problems.append(f"tram list: {name} is in {found[k][3]} AND {tier} - one tier "
+                                f"per city")
+            else:
+                found[k] = (name, i, False, tier)
+    if not tiers:
+        problems.append("tram list: no '## ... T1 ... (N cities)' tier sections - the file "
+                        "changed shape; update this check rather than let it pass vacuously")
+    total = len(found)
+    title = next((l for l in lines if l.startswith("# ")), "")
+    m = re.search(r"—\s*(\d+)\s+cities", title)
+    if not m:
+        problems.append(f"tram list: the title states no '— N cities': {title!r}")
+    elif int(m.group(1)) != total:
+        problems.append(f"tram list: title '{title}' but the tiers hold {total}")
+    for head, rows in tables(lines, 0, len(lines)):
+        if not head or head[0].lower() != "tier":
+            continue
+        for i, row in rows:
+            n = re.search(r"(\d+)", row[-1])
+            if not n:
+                continue
+            tm = re.search(r"\*\*(T\d)\*\*", row[0])
+            if tm and int(n.group(1)) != tiers.get(tm.group(1), 0):
+                problems.append(f"tram list line {i + 1}: tier table says {tm.group(1)} "
+                                f"{n.group(1)}, the tier holds {tiers.get(tm.group(1), 0)}")
+            elif not tm and "total" in row[0].lower() and int(n.group(1)) != total:
+                problems.append(f"tram list line {i + 1}: tier table says total "
+                                f"{n.group(1)}, the tiers hold {total}")
+    return {k: v[:3] for k, v in found.items()}, problems, tiers
+
+
+def check(text, tram_text=None):
+    """Return (report, problems). `report` is {list name: {key: name}}.
+
+    `tram_text` is docs/tram_city_list.md, read when Band T points to it."""
     lines = text.splitlines()
     problems = []
     secs = sections(lines)
+    tiers = {}
 
     def find(pred):
         return [(t, s, e) for t, s, e in secs if pred(t)]
@@ -235,6 +304,19 @@ def check(text):
     if not bands:
         problems.append("no '## ... Band X' sections found - the file changed shape; "
                         "update this check rather than let it pass vacuously")
+    if "T" in bands and TRAM_NAME in "\n".join(lines[bands["T"][1]:bands["T"][2]]):
+        t, s, e, mem = bands["T"]
+        if mem:
+            problems.append(f"Band T's cities live on the tram list, but the master list's "
+                            f"Band T section still holds {_names({k: v[0] for k, v in mem.items()})}"
+                            f" - a move half made")
+        if tram_text is None:
+            problems.append(f"Band T points to {TRAM_NAME}, which was not found beside the "
+                            f"master list")
+        else:
+            mem, tram_problems, tiers = tram_list(tram_text)
+            problems += tram_problems
+            bands["T"] = (t, s, e, mem)
     ready, built_in_a = {}, {}
     for letter, (t, s, e, mem) in bands.items():
         for k, (name, i, marked) in mem.items():
@@ -320,6 +402,7 @@ def check(text):
 
     report = dict(lists)
     report["Band A (built rows kept)"] = built_in_a
+    report["_tiers"] = tiers
     return report, problems
 
 
@@ -531,7 +614,10 @@ def main():
     ap.add_argument("--file", type=Path, default=LIST)
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args()
-    report, problems = check(args.file.read_text(encoding="utf-8"))
+    tram = args.file.parent / TRAM_NAME
+    report, problems = check(args.file.read_text(encoding="utf-8"),
+                             tram.read_text(encoding="utf-8") if tram.exists() else None)
+    tiers = report.pop("_tiers", {})
 
     if args.verbose:
         for label, names in report.items():
@@ -545,10 +631,12 @@ def main():
               "decided. A city in two lists is a move half made.")
         return 1
     bands = {k: len(v) for k, v in report.items() if k.startswith("Band ") and "built" not in k}
+    on_tram_list = (" (tram list: " + ", ".join(f"{k} {v}" for k, v in sorted(tiers.items()))
+                    + ")") if tiers else ""
     print(f"OK - {len(report.get('Built', {}))} built, "
           + ", ".join(f"{k} {v}" for k, v in sorted(bands.items()))
-          + f", {len(report.get('the discards', {}))} discarded; every stated count agrees "
-          "and no city is in two lists")
+          + f"{on_tram_list}, {len(report.get('the discards', {}))} discarded; every stated "
+          "count agrees and no city is in two lists")
     return 0
 
 

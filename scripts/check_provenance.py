@@ -581,7 +581,7 @@ def check_cited_outputs():
 # files of docs/data_sources/, added by glob in check_tables().
 TABLE_DOCS = ("docs/data_sources.md", "docs/excluded_categories.md",
               "docs/city_master_list.md", "docs/city_master_list_evidence.md",
-              "docs/session_roles.md")
+              "docs/tram_city_list.md", "docs/session_roles.md")
 
 
 def check_tables():
