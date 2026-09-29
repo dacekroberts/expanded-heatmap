@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**204 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**205 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
@@ -243,6 +244,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Stations closed for works: drawn as the timetable runs, in every city (owner)
+
+- **Stations closed for works are drawn as the timetable runs, in every city
+  (owner, on the recommendation), and Prague's Flora is converted to match.**
+  Two built cities had disagreed on the same situation: Prague drew Flora,
+  closed for reconstruction since 1 February 2026 and due back around
+  December (owner, 2026-09-24), while Berlin left the U6's five Tegel-branch
+  stations off, closed since November 2022 and due back around August 2027
+  (owner, 2026-09-28). The only difference was how long each closure was
+  expected to last, and no threshold had been set. The new case forced the
+  question: SacRT's Green Line, suspended since 2025-06-16, due back "by
+  mid-October", for which the owner chose Berlin's treatment the same day
+  (Township 9, its one Green-only station, listed as closed for works).
+  The timetable rule was chosen because the feed decides it; a rule keyed
+  on the reopening date needs a threshold that operators' own dates slip
+  past, and drawing a closed station rings businesses around a stop no
+  train serves. Rejected: Prague's rule everywhere (it would put Berlin's
+  five stations back and reverse the Sacramento call), and grandfathering
+  Flora until it reopens (consistent for no extra render, since the category
+  batch already re-renders Prague at the next review, and Flora returns
+  under either rule when the feed serves it). Written as a Station scope
+  section in `docs/category_rules.md`. Prague's conversion lands in the
+  review merge: step 1 lists Flora in `excluded_stations.csv` as closed for
+  works (its stop-when-served guard stays); the Prague page, the ROPID
+  notice ("Flora is added while closed" removed from its changes) and the
+  What Is Excluded line change as drafted in the cleanup chat and approved.
 
 ### 2026-09-29 - Thinned lines must be named where a reader can find them (owner)
 

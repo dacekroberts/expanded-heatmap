@@ -421,6 +421,25 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   Rail...". **Trap:** when sweeping label offsets, run
   `python -B scripts/check_macro_labels.py`, because a same-length rewrite of
   `app/cities.py` within a second reuses the stale .pyc.
+- **Prague's Flora comes off the map** (owner, 2026-09-29: the timetable
+  rule, `docs/category_rules.md` "Station scope"). Do it AFTER merging
+  category-continuity, which re-renders Prague, and re-run Prague's steps 1-3
+  once. `pipeline/prague/step1_stations.py`: stop adding Flora; write it to
+  `excluded_stations.csv` with a reason containing "closed for works" and
+  "reopening around December 2026 (DPP)"; keep the guard that stops the build
+  once the feed serves it. Tidy `config.py`'s FLORA comment and
+  `app/station_scope.py`'s docstring ("Prague's Flora, also closed, is
+  DRAWN"). PLAN's Flora item becomes "add it back". Approved wording:
+  - `app/pages/28_Prague_Heatmap.py`: "**Flora station on line A is closed
+    for reconstruction** until about December 2026, so it is not drawn while
+    closed, as the timetable runs; it returns when it reopens."
+  - `app/components.py`, the ROPID notice: remove "Flora is added while
+    closed, " from its list of changes.
+  - `docs/excluded_categories.md`: "Flora, closed for reconstruction, is
+    drawn." becomes "Flora, closed for reconstruction, is not drawn while
+    closed."
+  Then `check_personal_exposure.py prague` is not needed (step 2 unchanged
+  unless it reads stations), but drift, macro_facts and ring_shares are.
 - **Copenhagen, the store-number rule:** matching pins keep their place and
   show the street address in place of the name (`name_is_address`); no pin
   is removed. Expect 33 changes, all discount supermarkets, the storefront
