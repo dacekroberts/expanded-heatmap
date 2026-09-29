@@ -398,6 +398,11 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   step 2 and step 3**, then `check_personal_exposure.py copenhagen`
   (DECISIONS verdict), `drift_check --update-baseline`, macro_facts and
   ring_shares.
+- **`aarhus` adds a fifth station-scope class, "infrequent"** (owner-approved):
+  `app/station_scope.py`'s `counts_for` returns a 5-tuple,
+  `app/pages/201_What_Is_Excluded.py` gains a "Too infrequent" column, and
+  the "Three things remove a station" list in `docs/excluded_categories.md`
+  changes. Watch those three files for conflicts with the other branches.
 - **The category-fix batch** (`category-continuity`, 17 taxonomies and their
   re-renders, owner-approved) bases its Stockholm fix on `stockholm-catering`:
   land it after, or in one merge.
