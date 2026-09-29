@@ -34,11 +34,13 @@ item is done.**
 
 - **`docs/city_master_list.md`**: read the counts off it, and run
   `python scripts/check_master_list_counts.py` after any row change. At
-  handoff: **62 built; A 0 · B 4 · C 8 · D 0 · R 17 · T 51 = 80
-  candidates; 91 discards.** The band scheme and the chat format are in the
-  owner's memory (`feedback_master_list_format.md`): A, B, C (closer to a
-  page), D (blocked, but the owner can act alone), R (restricted or request
-  only; every future request-only city goes here), T.
+  2026-09-29 (after the Band T audit's first half): **62 built; A 5 · B 4 ·
+  C 13 · D 0 · R 17 · T 41 = 80 candidates; 91 discards** (Phase 2 of the tram audit). The band scheme
+  and the chat format are in the owner's memory
+  (`feedback_master_list_format.md`): A, B, C (closer to a page), D (blocked,
+  but the owner can act alone), R (restricted or request only; every future
+  request-only city goes here), T. **Band T lives in its own file,
+  `docs/tram_city_list.md`** (T1 34, T2 7), and the count checker reads both.
 - **Band B is fully briefed and queued** with the Stockholm build session:
   **Stockholm → Bucharest → Incheon → Gyeonggi** (owner, 2026-09-28; "Bucharest
   before Incheon" supersedes an earlier entry). Each brief carries its owner
@@ -47,55 +49,50 @@ item is done.**
   re-screen, the band restructure, and the Band B briefs' measurements and
   owner calls.
 
-## Priority 1 - the tram question (Band T, 51 cities)
+## Priority 1 - the tram question: Phases 3-4 on the tram list (41 cities)
 
 **The owner's framing (2026-09-29): a preliminary yes, for scoping and
-filtering the 51-city list only.** Audit the list thoroughly under that
-assumption; then the owner makes the final call on whether trams-only maps
-are allowed, and only then does implementation begin. **Nothing is built,
-and no city is promoted to A or B, on the preliminary yes.**
+filtering the list only.** The owner makes the final call on trams-only maps
+after the audit; nothing on the tram list is built before it.
 
-**What exists:**
-- **The Band T section** of the master list: an **EDGE** sub-group (11:
-  light rail built partly to metro standard; the owner grouped them to go
-  first), five moved from Band C with a bucket gap as well, then the
-  countries (France 19, Czechia 6, Denmark and Latvia 3, US 6, Italy and
-  Spain 2). Each row carries its evidence and its build-time calls.
-- **Briefs for 3 of 51**: Göteborg, Zurich, Hiroshima (2026-09-2x, stale in
-  places).
-- **The tram rescopes of built cities** (2026-09-27): `docs/tram_rescope_specs.md`
-  and `docs/tram_rescope_estimate.md`, and the DECISIONS entries "Tram rescope
-  1-5 of 5". Rome's tram 8 was thinned to 7 of its 16 stops, San Francisco's
-  F line thinned, and two stacked stops merged. **These are the project's
-  only precedents for drawing trams.**
-- **Built cities that left trams out, and why**: Berlin (+6.9 points left
-  out), London (Tramlink, +1.0), Melbourne and Sydney
-  (`docs/build_briefs/melbourne.md`, `sydney.md`, ring coverage with and
-  without). Stockholm (T-bana only, recommended).
+**Done 2026-09-29 (commit 350ce29; DECISIONS "Band T audited")**:
+- **Phase 1, "is it really trams-only?"**: a three-part light-rail test
+  (track, frequency, spacing, against San Diego, Calgary and Edmonton) moved
+  ten out: Buffalo, Houston, Sacramento, Aarhus and Bergen to A; Ottawa,
+  Minneapolis, Kitchener–Waterloo, Pittsburgh and Hiroshima to C. Commuter
+  rail checked in Zurich, Den Haag, Utrecht, Brno, Ostrava and Göteborg:
+  nothing changes a tier. The test, its measurements and every city's stop
+  spacing are in `docs/tram_city_list.md`.
+- **Band T moved to `docs/tram_city_list.md`** in tiers T1 (35, ready if
+  trams are approved) and T2 (6, trams plus a bucket gap), with a revisit note
+  for six discards. The checker reads both files.
+- Scripts and caches: `data/_staging_scratch_2026-09-29/band_t_audit/`
+  (`train_probe.py`, `lines_bbox.py`, `track_share.py`, `gtfs_freq.py`,
+  `zurich_sbahn2.py`, `spacing_bandt.py`, the Overpass caches).
 
-**What the audit has to answer, per city and for the group** (a suggested
-order; the owner steers):
-1. **Is it really trams-only?** Re-check the rail (no metro, no S-Bahn-class
-   service the city's own maps treat as rapid transit). EDGE cities first.
-2. **Does its data still stand?** Row counts, licence and currency, re-run
-   through each row's evidence (`check_stale_claims.py` helps). Band T's
-   rows date from 2026-09-2x screens.
-3. **The design questions the preliminary yes raises, which the owner decides
-   before implementation:**
-   - **Ring meaning:** with stops every 300-500 m, 0.6 mi rings merge into
-     one blob that covers the city. Is ring coverage still meaningful, and
-     does a trams-only page need another radius or stop thinning (Rome's
-     precedent)?
-   - **Labels and legends for dense networks** (Bordeaux-class: 135 stops,
-     six lines): the invariant "every drawn line gets a permanent label and
-     a legend entry" at that density.
-   - **Where a trams-only city sits on the macro map**, and in the summary
-     table ("Network type").
-   - **Build cost across 51**, grouped by country pipeline (France's 19 share
-     SIRENE and the built French chain, Czechia's 6 share ROS/RÚIAN).
-4. **The output:** an audited, filtered list (keep, drop, or park with a
-   reason) and a short memo of the design questions with recommendations.
-   The memo gets published so the owner can decide from it.
+**Next, in order** (the owner said "next step sounds good when appropriate"):
+1. **Phase 2 - DONE 2026-09-29** (DECISIONS "The tram list's data re-checked
+   for currency"; the tram list's "Data currency" section): 39 of 41 stood;
+   Santa Cruz–La Laguna's stale directory dropped and the city moved to T2 as
+   food only; Kansas City kept in T1 with its data date on the page (both
+   owner). The currency rule is in the master list's "Five rules". About 2% of a 5-hour window.
+2. **Phase 3 - the design memo, measured on precedents that already exist**:
+   - **Rings**: Riga is live trams-only with a 0.5-mile spacing filter (15
+     stops out, 108 kept, in-ring share 77.9%); Amsterdam 95.5%, Rotterdam
+     92.8%, Oslo 75.6% already draw trams. Question for the owner: does every
+     tram city get Riga's filter, and what in-ring share would T1's biggest
+     (Brno, Bordeaux, Montpellier) land at? `app/ring_shares.json` has the
+     built figures.
+   - **Labels**: Amsterdam draws 16 tram lines plus 5 metro, each labelled
+     with a legend entry; T1's densest are Brno (11 lines, 146 stops) and
+     Zurich (18 refs).
+   - **Macro map and "Network type"**: read how Riga is labelled now.
+   - **Build cost by pipeline**.
+3. **Phase 4 - the memo, published** as an artifact so the owner can decide;
+   draft its prose in chat first.
+
+**Stale in the handoff above, corrected**: the tram rescopes are NOT the only
+precedents for drawing trams (Riga, Amsterdam, Rotterdam, Oslo, Dublin's Luas).
 
 ## Priority 2 - carried over (still open from 2026-09-28)
 
@@ -104,8 +101,10 @@ order; the owner steers):
     (owner-approved).
   - St. Louis's Commercial Occupancy Permits API.
   - A quiet-hour Overpass re-run, ONE query at a time: stub tests for
-    Pittsburgh, St. Louis and Minneapolis; rail and density for Buffalo and
-    Houston.
+    Pittsburgh, St. Louis and Minneapolis; OSM density for Buffalo and
+    Houston (their rail was measured 2026-09-29: 14 and 42 stops). Overpass's
+    boundary lookups by name returned empty for Buffalo that day; a bbox of
+    route relations (`lines_bbox.py`) worked.
   - Richmond's licence read, and New Westminster's address join.
   - Rio's Gramacho-Saracuruna shuttle rail test.
   - Long Beach's licence read.
