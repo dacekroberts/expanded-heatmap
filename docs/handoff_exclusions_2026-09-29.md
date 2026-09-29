@@ -353,7 +353,9 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   `docs/excluded_categories.md` from the step-2 logs, AFTER category-continuity
   merges (its re-run moved all nine Brazilian cities). They were already
   stale: São Paulo's vehicle-and-repair reads 40,992 against 41,122 in the
-  log, likely the FUNELARIA tie rule moving body shops into repair. Owner
+  log, likely the FUNELARIA tie rule moving body shops into repair. Read the
+  figures from `data/_review_category-continuity_2026-09-29/logs/<city>.log`
+  (the branch's full drift runs; São Paulo's table near lines 84-105). Owner
   approval for the new figures only if the wording changes.
 - The Stockholm worktree was removed 2026-09-29 (owner); `stockholm-catering`
   is kept, locally and on origin.
