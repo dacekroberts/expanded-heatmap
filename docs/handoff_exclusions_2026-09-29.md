@@ -262,7 +262,7 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
 - **The landing branch is `review-2026-09-29`** (local, in the cleanup
   worktree; owner pre-approved every change at review time). It is
   `worktree-cleanup` + origin/master + `stockholm` + `bucharest`, with
-  Bucharest's three merge fixes done (notice 67, `REGION_ZOOM_WITHOUT` with
+  Bucharest's three merge fixes done (DSVSA București's notice renumbered 67, `REGION_ZOOM_WITHOUT` with
   Riga, Stockholm and Bucharest, master-list counts 64 built / B 2 / 78
   candidates / 23 countries), ring shares for 64 cities, and a Stockholm
   disclosure (its restaurant type also holds about 39 caterers and 15 mobile
