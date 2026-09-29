@@ -184,7 +184,11 @@ BUCKETS = {
     "Personal Service": PERSONAL,                              # 1,649  57% spa/nail/hair - the core of NAICS 8121
     "Health Enhancement Centre (Accredited)": PERSONAL,        #   560  call 4; 26% is NAICS 621 and disclosed
     "Animal Breeding and Boarding Facility": PERSONAL,         #    77  call 3; NAICS 81291 pet care
-    "Funeral, Cremation, and Cemetery Service": PERSONAL,      #    24  NAICS 8122; a funeral home is a storefront
+
+    # --- NAICS 8122 death care: funeral services off every map (owner,
+    # 2026-09-28) - funeral homes, crematoria and cemeteries are not
+    # storefronts, as naics.py's 8122 carve-out --------------------------
+    "Funeral, Cremation, and Cemetery Service": None,          #    24
 
     # --- People and renters, not premises ---------------------------------
     "Health Enhancement Centre (Accredited / Independent)": None,  # 115  call 4
@@ -242,7 +246,13 @@ BUCKETS = {
     "Bingo / Casino": None,                                    #    11  NAICS 7132
     "Event Production": None,                                  #     3
     "Carnival / Amusement Park": None,                         #     2
-    "After Hours Dance Club": None,                            #     1  an entertainment venue; holds no alcohol category
+
+    # --- A nightclub is food service (NAICS 7224) everywhere else in this
+    # project - Dublin, Miami, every NAICS city - so it is here too (owner,
+    # 2026-09-29, nightclubs aligned). Excluded until then as an
+    # entertainment venue holding no alcohol category. Erotic venues stay
+    # excluded (call 6).
+    "After Hours Dance Club": FOOD,                            #     1
 }
 
 

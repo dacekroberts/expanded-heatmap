@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**171 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**172 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session](#2026-09-29---exclusions-batch-the-owners-eight-follow-ups-wording-approved-handed-to-a-fresh-session)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
 - [Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)](#2026-09-29---staging-handed-off-for-the-tram-question-a-preliminary-yes-for-scoping-and-filtering-band-t-only-the-final-call-after-an-audit-owner)
 - [Gyeonggi is built from the Ministry's national local-licence files (owner)](#2026-09-29---gyeonggi-is-built-from-the-ministrys-national-local-licence-files-owner)
@@ -210,6 +211,42 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session
+
+- **Follow-ups on the measured counts (owner):**
+  - (1) France's car dealers REVERSED: 95% of Paris's 45.11Z rows record no
+    employees and 27% carry a premises name, so they are mostly one-person
+    traders probably registered at home. That is a personal-information risk
+    as well as a scope one. France stays the disclosed exception.
+  - (2) Montréal's caterers exempt: the street survey records traiteur
+    shops, as in France. Implemented as a thin `naics_montreal` taxonomy,
+    because a config list would be undone when `map_common` re-classifies at
+    render.
+  - (3) San Diego also loses its group-level 8129, its cottage-food home
+    kitchens (72234) and its ecoATM kiosks (81295 and 812959). 81291 and
+    81292 stay by assert.
+  - (4) Dublin's kiosks kept (newsstand-like); markets and betting shops
+    out.
+  - (5) Barcelona's vets left in and disclosed: one value mixed with pet
+    shops.
+  - (6) Taiwan's marriage introduction (969023) out; drinking places and
+    show restaurants kept.
+  - (7) San Francisco's contractor code accepted whole and disclosed.
+  - (8) Disclosed only: Los Angeles's 722300, Brazil's trucks and kiosks,
+    Meguro's 飲食バー, and the food-register cities' canteens.
+- **Wording approved (owner):** a new cross-city paragraph for
+  `excluded_categories.md`, per-city additions for 41 cities, and six
+  city-page sentences. They are recorded verbatim in
+  `docs/handoff_exclusions_2026-09-29.md`.
+- **Handed to a fresh cleanup session** (owner), with the weekly limit past
+  64%. The taxonomy code (27 files) is committed on `worktree-cleanup` and
+  deliberately NOT pushed: code without re-rendered maps would be drift on
+  master. The re-run of 41 cities follows the handoff, which backs up and
+  restores master's shared processed data around each city.
+- **This worktree's `data/` is now a junction to the shared folder.** The old
+  real folder is kept as `data.stale-2026-09-29/`, excluded from git. It
+  holds seven older station and line files, and nothing else unique.
 
 ### 2026-09-29 - Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch
 

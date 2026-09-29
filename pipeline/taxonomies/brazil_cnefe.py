@@ -100,6 +100,14 @@ RULES = [
     ("events venue", None, rx("SALAO DE FESTA", "SALAO DE EVENTO",
                               "CASA DE FESTA", "CASA DE EVENTO", "ESPACO DE FESTA",
                               "ESPACO DE EVENTO", "BUFFET", "EVENTOS")),
+    # Funeral services off every map (owner, 2026-09-28): funeral homes,
+    # wakes, crematoria and cemeteries are not storefronts. FUNERARIA was a
+    # Personal services word until then; CEMITERIO stays in "not premises"
+    # too, where it only catches a description that STARTS with it. The head
+    # noun still wins, so ARTIGOS FUNERARIOS (a shop selling funeral goods)
+    # stays Retail.
+    ("funeral services", None, rx("FUNERARI", "FUNERAL", "VELORIO",
+                                  "CREMATORIO", "CREMACAO", "CEMITERIO")),
     ("parking / storage", None, rx("GARAGE", "ESTACIONAMENTO", "GALPAO",
                                    "DEPOSITO(?! DE BEBIDA)", "ALMOXARIFADO",
                                    "ARMAZENAGEM", "GUARDA MOVEIS")),
@@ -181,7 +189,7 @@ RULES = [
         "COIFFEUR", "ESMALTERIA", "NAIL", "MANICURE",
         "PEDICURE", "ESTETICA", "DEPILACAO", "UNHA", "SOBRANCELHA", "BELEZA",
         "LAVANDERIA", "TINTURARIA", "TATUAGEM", "TATTOO", "PIERCING",
-        "BANHO E TOSA", "PET SPA", "FUNERARIA", "MASSAGEM", r"SPA\b",
+        "BANHO E TOSA", "PET SPA", "MASSAGEM", r"SPA\b",
         "MAQUIAGEM", "CILIOS", "BRONZEAMENTO")),
     ("retail", "Retail", rx(
         "LOJA .", "LOJAS", "LOJINHA", "VENDINHA", "TENDINHA", "MERCADO",
@@ -331,7 +339,10 @@ for _d, _want in [("BAR DO CLUBE", "food service"),
                   ("DEPOSITO", "parking / storage"), ("PADARIA", "retail"),
                   ("GARAGEM DO MERCADO", "parking / storage"),
                   ("LOJA", "catch-all"), ("CASA DO NORTE", "retail"),
-                  ("CASA DE CARNES", "retail"), ("CASA", "not premises")]:
+                  ("CASA DE CARNES", "retail"), ("CASA", "not premises"),
+                  ("FUNERARIA", "funeral services"),
+                  ("VELORIO MUNICIPAL", "funeral services"),
+                  ("ARTIGOS FUNERARIOS", "retail")]:
     assert classify_text(_d)[0] == _want, (_d, classify_text(_d), _want)
 
 

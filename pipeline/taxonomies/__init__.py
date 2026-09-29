@@ -64,6 +64,9 @@ CATEGORY_BUCKETS = [
 #       (Amsterdam: "Shops and services"). Defaults to the bucket name.
 TAXONOMY_MODULES = {
     "naics": "pipeline.taxonomies.naics",
+    # Montréal: naics.py plus one exemption - its street survey's caterers
+    # (722320) are traiteur shops and stay (owner, 2026-09-29).
+    "naics_montreal": "pipeline.taxonomies.naics_montreal",
     "chicago_license": "pipeline.taxonomies.chicago_license",
     "phl_licensetype": "pipeline.taxonomies.phl_licensetype",
     # New York dispatches over four registries rather than reading one

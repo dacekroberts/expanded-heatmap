@@ -24,6 +24,7 @@ from pipeline.san_diego.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
     BUSINESSES_PREFILTER_CSV,
     CITY_KEEP,
+    NAICS_EXCLUDE_CODES,
     PARCEL_RESIDENTIAL_CODES,
     PARCELS_CENTROIDS_CSV,
     SAN_DIEGO_BBOX,
@@ -65,6 +66,13 @@ def main():
     before = len(df)
     df = filter_to_storefront(df, TAXONOMY_SYSTEM)
     print(f"Storefront filter ({TAXONOMY_SYSTEM}): {before:,} -> {len(df):,} rows")
+
+    # --- Excluded codes (per-city verdict; see config.py) --------------------
+    # EXACT match: "8129" must not take 81291 pet care or 81292 photofinishing.
+    before = len(df)
+    df = df[~df[value_column].astype(str).str.strip().isin(NAICS_EXCLUDE_CODES)]
+    print(f"Excluded codes {sorted(NAICS_EXCLUDE_CODES)} (owner, 2026-09-29): "
+          f"{before:,} -> {len(df):,} rows")
 
     # --- Drop rows without usable coordinates -------------------------------
     before = len(df)

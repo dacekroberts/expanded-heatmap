@@ -105,6 +105,10 @@ NOT_PREMISES = {
 
     # Personal services performed in the client's household.
     "96.910",   # Personlig tjenesteyting i husholdninger
+
+    # Funeral services off every map (owner, 2026-09-28): undertakers,
+    # crematoria and cemeteries are not storefronts.
+    "96.300",   # Begravelsesbyråvirksomhet og lignende tjenester
 }
 
 _DIVISION_BUCKETS = {

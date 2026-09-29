@@ -75,9 +75,33 @@ SCIAN_GROUPS = [
 #           the twin of NAICS 81293. 2,230 units in CDMX. A parking trip is
 #           planned rather than incidental foot traffic from a station, so it
 #           sits outside this project's question.
+#   8123    Servicios funerarios y administracion de cementerios - 812310
+#           funeral services, 812321/812322 private and public cemeteries.
+#           Funeral services off every map (owner, 2026-09-28): not
+#           storefronts. NOT naics.py's 8122: SCIAN numbers death care 8123
+#           and laundries 8122 (812210 Lavanderias y tintorerias), the reverse
+#           of NAICS, so copying the NAICS prefix would drop every laundry.
+#   7223    Servicios de preparacion de alimentos por encargo - 722310
+#           comedor para empresas e instituciones, 722320 alimentos para
+#           ocasiones especiales, 722330 alimentos en unidades moviles. Food
+#           with no counter of its own (owner, 2026-09-29): an institutional
+#           canteen, an event caterer and a food truck. Unlike Los Angeles'
+#           NAICS 722300, DENUE never files a row at the undifferentiated
+#           7223 level - all three six-digit codes are named - so the whole
+#           industry group goes. Checked against SCIAN's own labels, not
+#           copied from naics.py: the numbers happen to agree here.
+#   812990  Otros servicios personales - the "other personal services"
+#           catch-all, excluded everywhere (owner, 2026-09-29). SCIAN has no
+#           code of its own for tattooing, so any tattoo studio DENUE files
+#           here goes with it.
+#   812130  Sanitarios publicos y bolerias - public toilets and shoe-shine
+#           stands (owner, 2026-09-29): neither is a walk-in shop. Its
+#           sibling 812120 Banos publicos (bathhouses) stays.
 #
 # A prefix here always wins over SCIAN_GROUPS.
-SCIAN_EXCLUDE_PREFIXES = ("469", "812410")
+SCIAN_EXCLUDE_PREFIXES = ("469", "812410", "8123",
+                          "7223",               # (owner, 2026-09-29) R1
+                          "812990", "812130")   # (owner, 2026-09-29) R2
 
 # What DENUE calls the activity, in Spanish, as INEGI wrote it. The tooltip
 # shows the register's own words rather than a translation - add-country's
@@ -136,6 +160,17 @@ assert scian_group("812110") == "Personal services", "salon must be Personal ser
 # The carve-outs, each of which would otherwise be swept in by a group prefix.
 assert scian_group("469110") is None, "nonstore retail must be excluded"
 assert scian_group("812410") is None, "parking must be excluded"
+assert scian_group("812310") is None, "funeral services must be excluded"
+assert scian_group("812322") is None, "cemeteries must be excluded"
+assert scian_group("812210") == "Personal services", "laundries (SCIAN 8122) must stay"
+# (owner, 2026-09-29): the no-counter food codes, the catch-all, and toilets /
+# shoe-shine go; their near neighbours stay.
+for _c in ("722310", "722320", "722330", "812990", "812130"):
+    assert scian_group(_c) is None, f"{_c} must be excluded (owner, 2026-09-29)"
+assert scian_group("722511") == "Food service", "restaurants (7225) must stay"
+assert scian_group("722412") == "Food service", "bars (7224) must stay"
+assert scian_group("812120") == "Personal services", "banos publicos must stay"
+assert scian_group("812910") == "Personal services", "photo developing must stay"
 assert scian_group("721111") is None, "hotels must NOT be Food service"
 assert scian_group("811111") is None, "auto repair must NOT be Personal services"
 assert scian_group("813210") is None, "religious associations must NOT be a bucket"

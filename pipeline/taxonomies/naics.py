@@ -48,11 +48,42 @@ NAICS_GROUPS = [
 #          foot traffic from a station, so it sits outside this project's
 #          question. (Excluded on the same reasoning in a sibling project.)
 #          Low privacy signal (~4% residential) - this one is about scope.
+#   8122   Death care services - 812210 funeral homes and funeral services,
+#          812220 cemeteries and crematories. Funeral services off every map
+#          (owner, 2026-09-28): not storefronts. Shops selling funeral goods
+#          are retail (45) and stay.
+#   72231  Food service contractors  \  Food with no counter of its own
+#   72232  Caterers                   > (owner, 2026-09-29): an institutional
+#   72233  Mobile food services      /  or contract canteen, an event caterer
+#          and a food truck serve no walk-in public at a premises of their
+#          own. Five-digit prefixes, so San Diego's variable-length codes
+#          (72231, 72232, 72233) are caught with the six-digit ones. The
+#          undifferentiated 7223 / 72230 / 722300 ("special food services",
+#          3,392 rows in Los Angeles) is NOT excluded: it mixes all three
+#          with real counters, and the code alone cannot tell them apart.
+#          ONE PER-CITY EXEMPTION: Montréal keeps 722320 (owner,
+#          2026-09-29) - its street survey's caterers are traiteur shops, as
+#          France's 56.21Z. See naics_montreal.py; every other NAICS city
+#          excludes caterers.
+#   81299  All other personal services - the "other personal services"
+#          catch-all (owner, 2026-09-29), excluded for every city. It was a
+#          per-city verdict before (Los Angeles and San Francisco excluded
+#          812990 in their own configs; San Diego's 81299 and Montreal's
+#          812990 were still mapped). The four-digit 8129 is NOT this code:
+#          it is the whole industry group (pet care, photofinishing too).
+#   812193 San Diego's own "MASSAGE PARLORS" - adult and hostess venues off
+#          every map (owner, 2026-09-29). Not a national NAICS code (NAICS
+#          has 812191 and 812199 only); San Diego's registry extends 81219
+#          locally, and keeps 812198 MASSAGE THERAPY and 812194 MASSAGE
+#          TECHNICIAN as their own codes, which stay.
 #
 # A prefix here always wins over NAICS_GROUPS, so "454" beats "45" and "81293"
 # beats "812". Anything added here changes every NAICS city's counts: re-run the
 # pipelines, the drift check and scripts/check_personal_exposure.py.
-NAICS_EXCLUDE_PREFIXES = ("454", "81293")
+NAICS_EXCLUDE_PREFIXES = ("454", "81293", "8122",
+                          "72231", "72232", "72233",   # (owner, 2026-09-29) R1
+                          "81299",                     # (owner, 2026-09-29) R2
+                          "812193")                    # (owner, 2026-09-29) R3
 
 # Individual 6-digit NAICS codes worth hand-sampling per city before trusting
 # the prefix filter alone. Each is a national NAICS catch-all (it sweeps a
@@ -67,6 +98,9 @@ NAICS_EXCLUDE_PREFIXES = ("454", "81293")
 #     888 mapped pins in Los Angeles, 637 in San Francisco, 104 in San Diego.
 #     This was a scope call, not a privacy one (~4% residential).
 #   812990  All Other Personal Services
+#     RESOLVED 2026-09-29: excluded for every city, via the 81299 prefix in
+#     NAICS_EXCLUDE_PREFIXES above (owner, "other personal services"
+#     catch-all). The per-city history below is kept as the reasoning trail.
 #     A prior single-city hand-sample (Seattle, 40 rows) found ~90%
 #     non-storefront (home-based sole proprietors, professional offices,
 #     services that travel to the customer) and excluded it. Re-sample per
@@ -145,3 +179,18 @@ def classify(row: dict):
     if not code:
         return None
     return naics_group(code)
+
+
+# The 2026-09-29 carve-outs (owner), each checked against its near misses: a
+# prefix one digit short would take a real counter or a kept code with it.
+for _c, _want in [("722310", None), ("72231", None), ("722320", None), ("72232", None),
+                  ("722330", None), ("72233", None),
+                  ("722300", "Food service"), ("7223", "Food service"),
+                  ("72230", "Food service"), ("72234", "Food service"),
+                  ("722511", "Food service"), ("722410", "Food service"),
+                  ("812990", None), ("81299", None), ("812999", None),
+                  ("8129", "Personal services"), ("812910", "Personal services"),
+                  ("812193", None), ("812198", "Personal services"),
+                  ("812194", "Personal services"), ("812199", "Personal services"),
+                  ("812196", "Personal services")]:
+    assert naics_group(_c) == _want, (_c, naics_group(_c), _want)

@@ -39,8 +39,33 @@ REGISTER_ZIP = SHARED_RAW / "BGMOPEN1.zip"
 
 # ISIC-aligned divisions, read from the register's own code names. 487 is
 # online shopping - non-store retail, excluded as NAICS 454 is everywhere.
+# 9630 is 殯葬 - 963011 墓地, 963012 殯儀館, 963013 火化場, 963014 骨灰存放,
+# 963015 殯葬禮儀服務, 963099 其他殯葬及寵物生命紀念: funeral services off every
+# map (owner, 2026-09-28), not storefronts. 485212 宗教、喪葬用品零售 (shops
+# selling funeral goods) is retail and stays.
+#
+# Food with no counter of its own (owner, 2026-09-29):
+#   562     外燴及團膳承包 - 562011 外燴（辦桌）承包 banquet catering, 562012
+#           團膳承包 contract meals, 562013 學校營養午餐供應 school lunches,
+#           562099 其他. A kitchen that cooks for an event or an institution.
+#   486     零售攤販 - every retail STALL (486111 食品, 486212 服裝, 486999
+#           未分類其他...). The register's own word, 攤販, is the stall.
+#   561200  餐食攤販 - food stalls; 563200 調理飲料攤販 - drink stalls. The
+#           six-digit codes, because their siblings (561111 早餐店, 561113
+#           麵店、小吃店, 563115 手搖飲店...) are shops with a counter.
+#   472929  餐盒零售 (boxed-meal shops) is a shop and stays.
+# The "other personal services" catch-all (owner, 2026-09-29):
+#   969099  未分類其他個人服務 - the catch-all itself.
+#   969019  算命卜卦、占星、堪輿 - fortune-telling, astrology, geomancy.
+#   969023  婚姻介紹服務 - marriage introduction (Madrid's "agencias de
+#           contactos" in the same catch-all).
+#   969017  紋身、紋眉服務 (tattoo) has its own code and stays; so do 563114
+#   飲酒店 (drinking places) and 561116 有娛樂節目餐廳 (restaurants with shows),
+#   whose names claim no hostess service (owner, 2026-09-29).
 BUCKET = {"47": "Retail", "48": "Retail", "56": "Food service", "96": "Personal services"}
-EXCLUDE_PREFIXES = ("487",)
+EXCLUDE_PREFIXES = ("487", "9630",
+                    "562", "486", "561200", "563200",   # (owner, 2026-09-29) R1
+                    "969099", "969019", "969023")       # (owner, 2026-09-29) R2
 
 # The name rule's business markers: a sole proprietor's registered name is
 # shown only when it carries one (brief taipei.md, owner 2026-09-23).
@@ -144,6 +169,21 @@ def bucket_of(code):
     if code.startswith(EXCLUDE_PREFIXES):
         return None
     return BUCKET.get(code[:2])
+
+
+# The carve-outs above, each against a near miss that must stay (owner,
+# 2026-09-28 and 2026-09-29).
+for _c, _want in [("562011", None), ("562012", None), ("562013", None), ("562099", None),
+                  ("486111", None), ("486212", None), ("486999", None),
+                  ("561200", None), ("563200", None), ("969099", None), ("969019", None),
+                  ("969023", None), ("969022", "Personal services"), ("561116", "Food service"),
+                  ("963015", None), ("487111", None),
+                  ("561113", "Food service"), ("561115", "Food service"),
+                  ("563115", "Food service"), ("563114", "Food service"),
+                  ("472929", "Retail"), ("485212", "Retail"), ("485299", "Retail"),
+                  ("969017", "Personal services"), ("969015", "Personal services"),
+                  ("969021", "Personal services"), ("962111", "Personal services")]:
+    assert bucket_of(_c) == _want, (_c, bucket_of(_c), _want)
 
 
 def is_trade_name(name, org_type):

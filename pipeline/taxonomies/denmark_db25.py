@@ -98,6 +98,10 @@ NOT_PREMISES_CLASSES = {
 
     # Personal services performed in the client's home.
     "9691",     # Levering af personlige serviceydelser i hjemmet
+
+    # Funeral services off every map (owner, 2026-09-28): undertakers,
+    # crematoria and cemeteries are not storefronts.
+    "9630",     # Drift af bedemandsforretninger og begravelsesvæsen (963000)
 }
 
 # ONE DANISH ADDITION, at the 6-digit level because DB25 splits the class

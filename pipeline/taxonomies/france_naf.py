@@ -141,6 +141,11 @@ NOT_PREMISES = {
     # split "de gros" / "de détail" by INSEE itself, so the publisher's own
     # hierarchy makes this call, not a reading of the French.
     "96.01A": "blanchisserie de gros - industrial, not a shopfront",
+
+    # Funeral services off every map (owner, 2026-09-28): pompes funèbres,
+    # crematoria and cemetery management are not storefronts. Shops selling
+    # funeral goods sit in division 47 and stay.
+    "96.03Z": "services funéraires - funeral services off every map (owner, 2026-09-28)",
 }
 
 
@@ -228,6 +233,15 @@ _DIVISION_BUCKETS = {
     "56": "Food service",
     "96": "Personal services",
 }
+
+# DIVISION 45 (vehicle trade) STAYS OUT, so no French city maps a car dealer -
+# the disclosed exception to every other city here, where dealers are Retail
+# (NAICS 441, SCIAN 4681, NACE rev. 2.1 47.81-47.83). Decided (owner,
+# 2026-09-29) after measuring the four selling sous-classes (45.11Z, 45.19Z,
+# 45.32Z, 45.40Z; 9,548 pins across the five cities): in Paris 95% of 45.11Z
+# rows carry no employee band against 79% for division 47, and only 27% carry
+# a premises name - mostly one-person traders, probably registered at home,
+# so mapping them is a personal-information risk rather than a gain.
 
 
 def normalise_code(value):

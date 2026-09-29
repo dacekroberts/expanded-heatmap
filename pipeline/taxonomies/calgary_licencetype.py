@@ -99,8 +99,7 @@ BUCKETS = {
     "SECONDHAND DEALER": RETAIL,                        #   349
     "FUEL SALES/STORAGE": RETAIL,                       #   300  NAICS 457
     "CANNABIS STORE": RETAIL,                           #   187
-    "MARKET": RETAIL,                                   #    54
-    "PAWNBROKER": RETAIL,                               #     7  regulated slice
+    "PAWNBROKER": RETAIL,                              #     7  regulated slice
     "PAWNBROKER (GRANDFATHERED)": RETAIL,               #     7
     "RETAIL DEALER - FIREARMS/AMMUNITION": RETAIL,      #     7
 
@@ -200,6 +199,9 @@ BUCKETS = {
     "CLEANING SERVICE (RESIDENTIAL ONLY) (DIRECT SALES)": None,  # 2
     "CLEANING SERVICE (RESIDENTIAL ONLY) (PRESSURE WASHING)": None,  # 1
     "FOOD SERVICE - NO PREMISES (NON-RES)": None,       #     1
+    # Street and market stalls (owner, 2026-09-29): a market is a place
+    # stalls stand, not a shop of its own. Was Retail until then.
+    "MARKET": None,                                     #    54
 
     # --- Professional, financial, security, organisations -----------------
     "CHARITABLE ORGANIZATION": None,                    #   370  NAICS 813

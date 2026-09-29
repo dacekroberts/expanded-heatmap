@@ -48,6 +48,8 @@ FIVE JUDGMENT CALLS, RECORDED RATHER THAN BURIED
    the largest single row-count sacrificed to consistency here, and the
    category is also genuinely mixed - Vancouver licenses food carts and
    merchandise vendors under one label with no subtype to split them.
+   Extended 2026-09-29 (owner, food with no counter of its own): both
+   registries' `Caterer`, Surrey's `Concession Stand` and `Flea Market`.
 
 2. **Surrey's two Inter-Municipal Business Licences are the city's catch-all
    and are excluded** - 1,473 of its 13,066 Commercial/Industrial rows
@@ -66,10 +68,11 @@ FIVE JUDGMENT CALLS, RECORDED RATHER THAN BURIED
    `Health Care Professionals and Services` (None) and `Health Enhancement
    Services` (Personal services).
 
-4. **A funeral parlour is a storefront; a cemetery is not.** Both are NAICS
-   812, so the anchor alone would keep both. Surrey's `Funeral Parlour` (4) is
-   a walk-in commercial premises and counts; `Cemetery` (2) is land, and is
-   excluded as a departure from the prefix on storefront grounds.
+4. **Neither a funeral parlour nor a cemetery is a storefront.** Both are
+   NAICS 812 (8122), so the anchor alone would keep both. `Cemetery` (2) is
+   land, and was excluded from the start. Surrey's `Funeral Parlour` (4) was
+   first counted as a walk-in premises; funeral services off every map
+   (owner, 2026-09-28) took it out too, as naics.py now carves out 8122.
 
 5. **Vancouver's `businesssubtype` was TESTED as a disambiguator and
    REJECTED.** It looked like Chicago's `business_activity`. It is empty on
@@ -127,7 +130,6 @@ VANCOUVER_BUCKETS = {
     "Restaurant": FOOD,                               # 1,663
     "Limited Service Food Establishment": FOOD,       # 1,297
     "Liquor Establishment": FOOD,                     #   190  drinking places
-    "Caterer": FOOD,                                  #   154
 
     # Personal services (NAICS 812)
     "Beauty Services": PERSONAL,                      # 1,396
@@ -212,6 +214,9 @@ VANCOUVER_BUCKETS = {
 
     # Mobile trade - see judgment call 1.
     "Street Vendor": None,                            #   116
+    # Food with no counter of its own (owner, 2026-09-29): an event caterer
+    # cooks for the event (NAICS 722320). Food service until then.
+    "Caterer": None,                                  #   154
 
     # Organisations (NAICS 813, not 812).
     "Association or Society": None,                   #   589
@@ -266,18 +271,15 @@ SURREY_BUCKETS = {
     "Second Hand Dealer": RETAIL,                     #  13  NAICS 4533
     "Lumber Yard/Building Material Yard": RETAIL,     #   5  NAICS 4441
     "Pawn Broker": RETAIL,                            #   4  regulated retail slice
-    "Flea Market": RETAIL,                            #   1
-    "Adult Entertainment Store": RETAIL,              #   1
+    "Adult Entertainment Store": RETAIL,              #   1  a sex shop - retail, kept (owner, 2026-09-29)
     "Pepper Spray Vendor": RETAIL,                    #   1
 
     # Food service (NAICS 722)
     "Restaurant - No Alcohol": FOOD,                  # 838
     "Food Primary-Class B Dining Lounge": FOOD,       # 149
     "Food Primary-Class B Dining Room": FOOD,         # 116
-    "Caterer": FOOD,                                  #  62
     "Liquor Primary - Class A Pub": FOOD,             #  18
     "Liquor Primary-Class D Neighbourhood Pub": FOOD,  # 16
-    "Concession Stand": FOOD,                         #   6
     "Liquor Primary-Class E Stadium": FOOD,           #   3
     "Liquor Primary-Class F Marine Pub": FOOD,        #   1
 
@@ -292,7 +294,6 @@ SURREY_BUCKETS = {
     "Tanning Salon": PERSONAL,                        #  10
     "Commercial Kennel": PERSONAL,                    #   7
     "Animal Sitting": PERSONAL,                       #   5
-    "Funeral Parlour": PERSONAL,                      #   4  a storefront - call 4
     "Reflexology": PERSONAL,                          #   4
     "Acupressure": PERSONAL,                          #   3
     "Shiatsu Massage": PERSONAL,                      #   2
@@ -479,6 +480,7 @@ SURREY_BUCKETS = {
     "Social Club": None,                              #   3
     "Public Utility Company": None,                   #   3
     "Cemetery": None,                                 #   2  not a storefront - call 4
+    "Funeral Parlour": None,                          #   4  funeral services off every map (owner, 2026-09-28) - call 4
     "Fitness Personal Trainer": None,                 #  18  travels to the client
     "Recycling Depot": None,                          #  27
     "U-Brew Premise": None,                           #   2
@@ -489,6 +491,12 @@ SURREY_BUCKETS = {
     "Portable Food Vendor": None,                     #   9
     "Post Box Rental Agency": None,                   #   6
     "Catering/Coffee Truck": None,                    #   3
+    # Food with no counter of its own, street and market stalls (owner,
+    # 2026-09-29): an event caterer (NAICS 722320), a concession stand and a
+    # flea market's stalls. Food service / Retail until then.
+    "Caterer": None,                                  #  62
+    "Concession Stand": None,                         #   6
+    "Flea Market": None,                              #   1
     "Auction/Auctioneer": None,                       #   1
     "Mail Drop Service": None,                        #   1
     "Pedlar": None,

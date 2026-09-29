@@ -69,6 +69,9 @@ NOT_PREMISES_PREFIXES = {
     "964": "Vermittlungstätigkeiten für persönliche Dienstleistungen",
     # 96.91, personal services in the customer's household.
     "9691": "Persönliche Dienstleistungen in Haushalten",
+    # 96.3 is entirely 96.30, funeral and related activities. Funeral services
+    # off every map (owner, 2026-09-28): not storefronts.
+    "963": "Bestattungswesen",
 }
 
 # Codes whose own label is residual wording ("sonstige", "a. n. g."), at the
