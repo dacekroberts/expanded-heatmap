@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Bucheon built on SEMAS's register, the Seohae Line drawn (owner); Samsan Gymnasium kept at the Incheon border (owner); Incheon's macro label moved below its dot](#2026-09-29---bucheon-built-on-semass-register-the-seohae-line-drawn-owner-samsan-gymnasium-kept-at-the-incheon-border-owner-incheons-macro-label-moved-below-its-dot)
 - [Light-rail build briefs: Bergen and Aarhus (staging)](#2026-09-29---light-rail-build-briefs-bergen-and-aarhus-staging)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
 - [French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record](#2026-09-29---french-tram-feeds-read-four-permitted-with-conditions-angers-bars-naming-its-network-without-consent-the-national-portals-odbl-conditions-found-correcting-toulouses-and-rennes-record)
@@ -236,6 +237,64 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Bucheon built on SEMAS's register, the Seohae Line drawn (owner); Samsan Gymnasium kept at the Incheon border (owner); Incheon's macro label moved below its dot
+
+- **Built on branch `bucheon`, from origin/master**, page 70, on the Goyang,
+  Seongnam and Yongin pattern. Suwon is on its own branch (`suwon`, page 69),
+  so each branch counts 69 built; the second to land reconciles to 70.
+  SEMAS's 상가(상권)정보, edition 2026-06-30, 경기도's member cut by 시군구명
+  부천시 (원미, 소사 and 오정구, restored in 2024; the prefix catches all
+  three).
+
+  | City | SEMAS rows | Storefronts (F / R / P) | Withheld | Stations | In a ring |
+  |---|---|---|---|---|---|
+  | Bucheon | 37,720 | 22,512 (10,119 / 8,755 / 3,638) | 28 | 14 | 80.4% |
+
+  Every figure matches the handoff's measurement from the cache. The high
+  in-ring share is a compact city (54 km²) with three lines across it.
+- **Rail**: Line 1, Line 7 and the Seohae Line.
+  - **The Seohae Line is drawn (owner, as recommended)**: in Bucheon it runs
+    on its own track through its own stations. Goyang left it out because
+    there it shares the Gyeongui-Jungang track.
+  - 14 stations: Line 1 5, Line 7 7, Seohae 4, with Sosa and Bucheon Stadium
+    on two lines each. No undrawn line has a station in Bucheon. Lines 2, 5
+    and 9, Incheon Lines 1 and 2, the Gimpo Goldline and GTX-A cross the box
+    and are named as not drawn.
+  - Gate 3 is exact on Line 7 (53). Line 1 is left out of the whole-line gate,
+    as in Incheon, and so is the Seohae Line (no infobox count read).
+  - Seohae's colour is OSM's tag, #5EAC41, as the other satellites' Korail
+    colours are. Three colours sit below the preferred 45 CIE76 and are
+    recorded: Line 1 26.2 (Retail), Seohae 29.9 and Line 7 40.6 (Personal
+    services).
+  - Boundary: relation 2409162, 54 km² (the city publishes 53.4).
+- **Samsan Gymnasium kept (owner, as recommended).** Its station lies about
+  50 m inside OSM's Bucheon boundary, but its operator is Incheon Transit
+  Corporation, and it is probably administratively in Incheon's Bupyeong-gu.
+  Incheon's build left it out on the same boundary. Dropping it here would
+  put it on neither map, so it stays on Bucheon's, counted once.
+- **Incheon's macro label moved below its dot.** Above it, Incheon's label
+  covered Bucheon's marker at 375, 768 and 1200 px (PROBLEMS 3). Below its
+  dot, to its left and to its right all scored PROBLEMS 0. Below was taken:
+  it keeps the centred style of every other label in the region, and moving
+  the label is the documented fix. Bucheon's label width is 60.1 px, measured
+  in the same run as Suwon's (seven entries reproduced).
+- **The English-name override hook** from Suwon's step 1 is carried in
+  Bucheon's step 1 too, with no entry: every Bucheon name is OSM's own.
+- **Privacy: no personal information published.**
+  `check_personal_exposure.py bucheon`: no owner column, 0 contact details, 0
+  Korean personal names at a residential address shown (21 withheld pins in
+  the rings, 28 citywide). Bare-name shapes stand at commercial addresses
+  (3.6%).
+- **Notice 68 widened** to name Bucheon (Suwon's branch names Suwon; the
+  second to land lists both).
+- Files: `pipeline/bucheon/`, `app/pages/70_Bucheon_Heatmap.py`,
+  `app/cities.py`, `app/components.py`, `app/macro_facts.json`,
+  `app/ring_shares.json`, `README.md`, `docs/data_sources.md`,
+  `docs/data_sources/south-korea.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/gyeonggi.md`, `scripts/check_macro_labels.py`,
+  `scripts/check_personal_exposure.py`.
 
 ### 2026-09-29 - Light-rail build briefs: Bergen and Aarhus (staging)
 

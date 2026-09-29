@@ -24,7 +24,9 @@ satellites: PASS, to B; "which satellites is the brief's question").
 >   Suin-Bundang, Shinbundang), 55.4%.
 > - Takeaway and barbers, the brief's open calls, do not arise: SEMAS files
 >   takeaway food under 음식 and barbers under 이용·미용, with the rest.
-> - Suwon and Bucheon remain next (owner's order).
+> - Bucheon **22,512** storefronts, 14 stations (Line 1, Line 7 and the
+>   Seohae Line, drawn here on its own track, owner), 80.4% in a ring (build
+>   session, branch `bucheon`, 2026-09-29). Suwon on its own branch.
 
 ⚠️ **Korean cities: read `cjk-text`, and Seoul's, Daegu's and Busan's briefs
 first.** The satellites sit around Seoul (built) and share its lines, so

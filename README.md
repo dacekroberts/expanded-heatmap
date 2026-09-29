@@ -30,7 +30,7 @@ Mapped so far:
 - **Brazil:** São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional)
 - **Hong Kong:** Hong Kong
 - **Latvia:** Riga
-- **South Korea:** Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin
+- **South Korea:** Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Bucheon
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo
 - **Germany:** Berlin

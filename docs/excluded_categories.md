@@ -2570,6 +2570,25 @@ ends; stations outside in each city's `excluded_stations.csv`):
 - Yongin: the EverLine, the Suin-Bundang and Shinbundang Lines, 24 stations.
   GTX-A (its Guseong stop) is not drawn.
 
+### Bucheon - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+section above).
+
+**Out by name**: hostess bars 443, dance halls 11, staff canteens 67,
+household fuel dealers 19; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 28 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Bucheon's boundary (the lines drawn to their ends;
+stations outside in `outputs/bucheon/excluded_stations.csv`): Line 1, Line 7
+and the Seohae Line, 14 stations. The Seohae Line is drawn here (owner): in
+Bucheon it has its own track and stations, unlike Goyang. No undrawn line has
+a station in Bucheon.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

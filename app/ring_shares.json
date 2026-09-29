@@ -338,5 +338,10 @@
   "in_ring": 13003,
   "all": 23481,
   "map_blob": "f03b1f6fca7ca4cee7c4c087a53879fca61dbe76"
+ },
+ "bucheon": {
+  "in_ring": 18093,
+  "all": 22512,
+  "map_blob": null
  }
 }

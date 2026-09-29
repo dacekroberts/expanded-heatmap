@@ -1482,8 +1482,8 @@ _NOTICES = [
     # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
     # under the owner's pre-approval of this build's prose. Covers every Korean city on
     # the register (Incheon; the Gyeonggi satellites add their names).
-    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin)",
-     "Storefronts for Incheon, Goyang, Seongnam and Yongin are from the Small Enterprise and "
+    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Bucheon)",
+     "Storefronts for Incheon, Goyang, Seongnam, Yongin and Bucheon are from the Small Enterprise and "
      "Market Service's "
      "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "
      "[data.go.kr](https://www.data.go.kr/data/15083033/fileData.do)), "
