@@ -1334,7 +1334,7 @@ CITIES = [
         # the "Why the maps differ" page's fields (worktree-cleanup, landing at
         # review time); "Food hygiene register" is a new allowed value there.
         "coverage": "narrowed",
-        "placement": "Register coordinates (91%)",
+        "placement": "Register coordinates (91%) and postcode centres (4%)",
         "data_age": "Extracts of 2026-09-09 to 2026-09-16",
         "rail_extra": "Suburban rail",
         "record_kind": "Food hygiene register",

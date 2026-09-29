@@ -390,9 +390,9 @@ evidence section.
     the maps differ" batch must carry "Food hygiene register" and "Personal
     services thin" in its allowed values; `check_ring_shares.py --write` after
     the merge. Then `publish-city`, deploy-verify `scope: city-added`, reboot.
-  - [ ] Open, owner's call when it comes: placing the 5,350 storefronts (9.0%)
-    the FSA gives no point, by postcode centroid (a separate source and licence
-    read) - never a private-address record.
+  - [x] Placed 2026-09-28 (owner): 2,349 of the 5,350 storefronts the FSA
+    gives no point sit at their postcode's centroid (OS Code-Point Open, notice
+    58); 3,001 (5.0%) stay unplaced; never a private-address record.
   - [ ] Refetch before the FSA extracts age: `fetch_sources.py --force`; if OSM
     starts carrying one of the eight added stations, step 1 stops and says so.
 - [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):

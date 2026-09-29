@@ -132,6 +132,14 @@ endpoint, its retrieval date and its terms are in `docs/data_sources.md`, and
 what was filtered out of each city is in `docs/excluded_categories.md`. Take
 the code freely; for the data, go to the source.
 
+**Credits carried by the committed data** (where a source asks for its credit
+wherever derived data is republished, and `outputs/` republishes it):
+`outputs/london/` places some food premises at their postcode's centre from
+Ordnance Survey's postcode data, under the Open Government Licence v3.0 -
+Contains Ordnance Survey data © Crown copyright and database right 2026.
+Contains Royal Mail data © Royal Mail copyright and database right 2026.
+Contains National Statistics data © Crown copyright and database right 2026.
+
 **Removal requests are honoured, not argued** — from a data publisher, a
 business owner, or anyone raising a privacy concern about a specific listing.
 No reason is required and no case will be argued first. The full commitment is

@@ -49,8 +49,11 @@ on this map**. Caterers working from home, mobile traders, and kitchens in
 schools, hospitals and workplaces are left out.
 
 **Read the density as a register, not a street survey.** A premises stays
-listed until the borough removes it. About one food storefront in eleven has no
-location in the register, mostly in outer boroughs, and is not shown. Names are
+listed until the borough removes it. Most premises sit at the register's own
+map point. Where it gives none, a business with a full postcode is placed at
+the centre of its postcode, usually within a few dozen metres of its door.
+About one food storefront in twenty has neither and is not shown, mostly in
+outer boroughs. A business run from a private address is never placed. Names are
 shown as registered; where a business is registered "trading as" another name,
 the name on the shop is shown.
 

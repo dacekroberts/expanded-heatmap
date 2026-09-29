@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**126 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**127 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too](#2026-09-28---londons-unplaced-storefronts-placed-at-postcode-centroids-owner-2349-more-notice-58-for-ordnance-survey-the-credit-in-the-repository-too)
 - [London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London](#2026-09-28---londons-page-notice-57-macro-entry-and-disclosures-written-owner-approved-lilles-macro-label-turned-for-london)
 - [Glasgow to Band B, food only; Bengaluru to Band D (owner)](#2026-09-28---glasgow-to-band-b-food-only-bengaluru-to-band-d-owner)
 - [London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule](#2026-09-28---londons-rail-built-from-osm-gate-3-exact-its-map-rendered-and-checked-the-tfl-licence-read-abandoned-as-unnecessary-a-trading-as-display-rule)
@@ -162,6 +163,37 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too
+
+- **Decided (owner)**: a storefront the FSA gives a FULL postcode and no point
+  is placed at that postcode unit's centroid, from Ordnance Survey's Code-Point
+  Open (14,461,176 bytes, edition 2026-08, download approved). Of the 5,350
+  without a point: **2,349 placed**; 220 full postcodes absent from the edition,
+  11 outward codes only and 2,770 with no usable postcode stay unplaced (3,001,
+  5.0%). An outward code or none is how the FSA publishes a private address, so
+  **no private address is placed** (the owner's rule). Only units in a London
+  borough (district E09) are used. Placed overall: 91.0% at the FSA's point +
+  3.9% at a centroid = 94.9%.
+- **Control (address-join)**: for 53,855 storefronts with both an FSA point and
+  a full postcode, the centroid lies a median 11 m from the FSA point, 83.6%
+  within 50 m, 94.6% within 100 m (p95 104 m) - fine against a 966 m ring.
+  Step 2 writes each row's tier (`placement`: fsa_point / postcode_centroid).
+- **Licence (`licence-read`)**: OGL v3, PERMITTED WITH CONDITIONS; the three
+  statements from the licence file OS ships (which its terms name as the
+  authority), all mandatory for Code-Point Open and for derived data. **Notice
+  58** (owner-approved) carries them with the OGL link and no endorsement,
+  without the product's registered name. **The repository carries them too**
+  (owner): README's credits and `data_sources/united-kingdom.md`, since
+  committed `outputs/london/` republishes the derived locations. OS's 48 MB
+  third-party style guide was not read (owner: skip).
+- **Wording (owner-approved)**: the page's placement sentences; notice 57's
+  "placed at their postcode's centre, or left out where they have no full
+  postcode"; the macro placement phrase "Register coordinates (91%) and postcode
+  centres (4%)". Tables B-D, theme 10 and the exclusions follow: in-ring pins
+  food shops 12,399, food service 29,255 (41,654, 73.6%); 56,590 storefronts.
+- **London's categories value is "Food premises only"** (owner, confirming
+  Cleanup's relayed rename: the FSA records inspections, not licences).
 
 ### 2026-09-28 - London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London
 

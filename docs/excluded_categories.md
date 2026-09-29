@@ -1979,12 +1979,15 @@ event kitchens sit; mobile caterers (2,595); hospitals, childcare and care homes
 (972); manufacturers and packers (1,136); distributors and transporters (669);
 importers and exporters (278); farmers and growers (33).
 
-**Not placed** - 5,350 food storefronts (9.0%) the register gives no location,
-most in outer boroughs (a quarter of Richmond's, Merton's and Redbridge's). A
-business run from a private address is published without a location and is
-never placed.
+**Placed at their postcode's centre** - 2,349 food storefronts the register
+gives no location but a full postcode (Ordnance Survey's postcode data).
 
-**Shown under its trade name** - 186 businesses registered "trading as" another
+**Not placed** - 3,001 food storefronts (5.0%) with neither a location nor a
+full postcode, most in outer boroughs (23% of Redbridge's, 18% of Havering's).
+A business run from a private address is published without a location or a
+full postcode and is never placed.
+
+**Shown under its trade name** - 188 businesses registered "trading as" another
 name show the name on the shop.
 
 **Left off because they are outside the city** - 19 whose location lies outside

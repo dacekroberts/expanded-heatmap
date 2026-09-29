@@ -939,9 +939,9 @@ Cities built and running end to end (pipeline, map, app page):
 - **London** - the Underground, DLR, Elizabeth line and the six London
   Overground lines, cut at Greater London (Tramlink left out, owner); the United
   Kingdom's first city. **Food only**: the Food Standards Agency's hygiene
-  register, every premises a borough inspects, placed at the FSA's own point or
-  not at all - a private address has none, which keeps home caterers off the
-  map, and food retail is labelled "Food shops" as in Japan. **Rail is
+  register, every premises a borough inspects, placed at the FSA's own point or,
+  failing that, at its full postcode's centre (Ordnance Survey's postcode data) -
+  a private address has neither, which keeps home caterers off the map, and food retail is labelled "Food shops" as in Japan. **Rail is
   OpenStreetMap's**: TfL publishes no GTFS and its API draws straight lines
   between stations. Each line keeps one direction per branch, eight stations
   missing from OSM's route data are added from its station records (retired

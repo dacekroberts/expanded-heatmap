@@ -254,8 +254,8 @@ really shopfronts. Several pages say which way their map leans.
   no data, and the eight lists run from 9% to 101% of each ward's official
   restaurant count, each ward's share on the page; notifying food shops absent
   except where a list includes notifications); London (about one food storefront in
-  eleven has no location and is not placed, a quarter in Richmond, Merton and
-  Redbridge).
+  twenty has no location and no full postcode and is not placed, a quarter in
+  Redbridge and a fifth in Havering).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
@@ -469,7 +469,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Kyoto | Permit register, REBUILT | The 2021 food list + every monthly list since, in term on 2026-07-31; barber, beauty and laundry lists + their months | Permit type (業種) | 3,736 / 19,318 / 4,926 | An upper bound: closures are not published; Retail is food only, and packaged-only sale (a notification since 2021) absent |
 | Tokyo | Permit lists, per ward (8 of 23) | Eight wards' own food lists + MHLW's filings for four; the barber, beauty and laundry registers of four | Permit type (業種) | 11,954 / 41,972 / 8,557 | Business data for 8 of 23 wards only (15 hollow); the lists run 9% to 101% of the official count; Retail = food only |
 | **United Kingdom** | | | | | |
-| London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 11,984 / 28,010 / — | No Personal services; Retail = food shops only ("Food shops") |
+| London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,399 / 29,255 / — | No Personal services; Retail = food shops only ("Food shops") |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -540,7 +540,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Kyoto | Address join to MLIT's address blocks (93.2% block, 5.5% town centre; 435 unplaced), the street-corner prefix read past | Twin-named towns left unplaced; closures invisible (an upper bound, disclosed) | Food trucks and permits under a year; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type, per premises |
 | Tokyo | Address join to MLIT's address blocks (99.7% block, 158 at the town centre, 35 at MHLW's own point; 33 unplaced) | Fifteen wards without data (hollow stations); partial lists, each ward's share on the page; MHLW's filings by consent (8,973 without an address) | Food trucks, stalls and temporary permits; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type, where a list names its operators |
 | **United Kingdom** | | | |
-| London | Register coordinates (91%; 5,350 storefronts without one not placed) | Food only; about one storefront in eleven unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address never placed; the name after "trading as" shown |
+| London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,001 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address never placed; the name after "trading as" shown |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 

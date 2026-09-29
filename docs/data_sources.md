@@ -1845,6 +1845,29 @@ numbers its VBB notice 57: whichever lands second renumbers to 58.
 - **London's rail is OpenStreetMap data** (ODbL, notice 1): the basemap credit
   covers its stations and track too.
 
+**58. Ordnance Survey (London) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once London lands; Berlin's branch shifts
+this to 59 if it lands first).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28): OS Code-Point Open
+  under the **Open Government Licence v3**; the licence file shipped in the zip
+  (`Doc/licence.txt`) redirects to OGL v3 and carries the statements OS's terms
+  name as required: "Contains Ordnance Survey data © Crown copyright and
+  database right 2026." "Contains Royal Mail data © Royal Mail copyright and
+  database right 2026." "Contains National Statistics data © Crown copyright
+  and database right 2026." OS says derived data (a premises placed at a
+  postcode centroid) is credited. OGL link; no endorsement.
+- **Used for** 2,349 London food storefronts the FSA lists with a full postcode
+  and no point (3.9% of storefront rows); never a private address.
+- **MUST NOT**: imply OS endorsement; use the OS logo; use "Code-Point" (a
+  registered OS mark - trademarks are outside the OGL) in the credit.
+- **The repository carries the credit too** (owner, 2026-09-28): committed
+  `outputs/london/` republishes the derived locations, so README's credits and
+  `data_sources/united-kingdom.md` state the three lines. OS's 48 MB third-party
+  style guide was not read (owner: skip); the notice displays inline and
+  legibly on every page, as every credited source's does.
+- Wording approved by the owner 2026-09-28.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).
