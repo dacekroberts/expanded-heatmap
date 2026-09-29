@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
 - [China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)](#2026-09-28---china-ruled-out-as-a-country-after-a-feasibility-gate-hangzhous-opening-noted-legal-barriers-high-owner)
 - [Berlin's personal-services gap corrected: only hairdressers and laundries are missing](#2026-09-28---berlins-personal-services-gap-corrected-only-hairdressers-and-laundries-are-missing)
 - [Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)](#2026-09-28---delhi-and-mumbai-re-screened-on-their-city-hosts-delhi-to-band-d-mumbai-discarded-owner)
@@ -150,6 +151,17 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tehran and Minsk left out like Russia, for wartime concerns (owner)
+
+- **Left Iran and Belarus out of the screen, as Russia and Ukraine are
+  (owner's call), so Tehran (~150 stations) and Minsk (~37) are not
+  screened.** Both sat in `docs/global_transit_gap.md`'s "never screened"
+  group with "no record". The exclusion is about the countries' situation,
+  not their data, and is recorded as such beside Russia and Ukraine. Files:
+  `docs/city_master_list.md` (the access-not-data note),
+  `docs/global_country_shortlist.md` (Tier 4), `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)
 

@@ -48,12 +48,13 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (25) - "Countries ruled out" and the shortlist
+## Country ruled out (27) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
 | Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each (kn) | **Ruled out 2026-09-28 (owner), high legal barriers**: anti-bot (Shanghai), real-name accounts (Beijing, Shenzhen), terms forbidding redistribution (Shenzhen), no open coordinates, regulated map publishing. Hangzhou's food-licence list is a narrow opening, blocked by a real-name filing duty and placement |
 | Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
+| Tehran, Minsk | IR, BY | ~150 / ~37 stations (kn) | Left out like Russia, for wartime concerns (owner, 2026-09-28); not screened |
 | Newcastle, Glasgow | UK | 60 / 15 stations (kn) | Recorded as "NNDR carries no category"; **wrong** (London's re-screen, 2026-09-28): the VOA list has a description and is ruled out by its terms. The FSA food register is untested for either city |
 | Melbourne, Sydney, Perth | AU | ~220 / 170+ / 80 stations (kn) | Licensing not municipal, **ASSERTED** |
 | Brussels | BE | 69 stations (kn) | Bulk access paid |
@@ -81,16 +82,15 @@ negative, kept out.
 | Yokohama | JP | 43 stations | N - no food list in any era |
 | Warsaw | PL | 2 lines (kn) | D - geo-blocked |
 
-## Never screened (16)
+## Never screened (14)
 
 | Cities | Country | Network (kn) | Why not covered |
 |---|---|---|---|
 | Bengaluru, Kolkata, Chennai | IN | ~40-80 each | Only India's national catalogue was read (counts, not premises); the city hosts were never asked. Delhi and Mumbai were asked 2026-09-28 (D, discarded) |
-| Tehran | IR | ~150 stations | No record |
 | Bangkok | TH | 4 subway + 5 light-rail relations | The national portal answered 403 on every strategy (2026-09-21); never given a city row |
 | Buenos Aires | AR | Subte, 6 lines | Its feed has no `routes.txt`; business data never probed |
 | Riyadh, Doha | SA, QA | 85 / 37 stations | No record |
-| Ankara, Caracas, Tashkent, Minsk, Baku | various | ~27-57 stations | No record |
+| Ankara, Caracas, Tashkent, Baku | various | ~27-57 stations | No record |
 | Panama City, Hanoi, Ho Chi Minh City | PA, VN | ~14-30 stations | No record (small networks) |
 
 ## The weakest or oldest reasons among the biggest networks

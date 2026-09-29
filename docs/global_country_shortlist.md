@@ -2097,6 +2097,7 @@ before the next country is profiled.
 | **Belgium** | Establishment units exist; **bulk access requires application and payment** | MEASURED |
 | **Australia, New Zealand** | Auckland is commuter-only. **Melbourne's PTV feed is a nested zip** the screen cannot read, so its rail is *unverified rather than absent*. Business licensing is not municipal — **ASSERTED** | MIXED |
 | **Russia, Ukraine** | Access and conflict, not data | — |
+| **Iran, Belarus** | **Left out like Russia, for wartime concerns (owner, 2026-09-28)**: Tehran (~150 stations) and Minsk (~37 stations) are not screened. Not a data finding | — |
 
 ### Japan's rail data is solved, and not by GTFS
 

@@ -1129,7 +1129,8 @@ being replaced by a BRT), and the earlier one (Winnipeg, Hamilton and Québec Ci
 (re-checked 2026-09-27: both lines still under construction, Québec's to open
 in 2033), Halifax,
 Mississauga, ~30 single-feed countries) and access-not-data
-(Russia, Ukraine).
+(Russia, Ukraine; Iran and Belarus left out the same way 2026-09-28, owner,
+for wartime concerns).
 
 **Not reached (wave 2, 2026-09-28; owner's call: no row).** Each city's own
 host refused or never answered, so a discard row would rest on no city-host
