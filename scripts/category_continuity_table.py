@@ -205,6 +205,7 @@ RULES = {
 R1 = "Funeral exclusions coded; fringe-category audit"       # the R1-R5 entry
 FOLLOWUPS = "Exclusions batch: the owner's eight follow-ups"
 CONFIRMED = "Category check: three older calls confirmed"   # Berlin tattoo, FSA pharmacies, Melbourne opticians
+RULED = "Category check: the owner's calls on the pending departures"
 
 COLUMNS = {}
 
@@ -352,11 +353,10 @@ COLUMNS["chicago_license"] = {
     "repair": [
         loc({"license_description": LBL, "business_activity": "Repair of Electronics"},
             "an unmatched repair activity"),
-        exception({"license_description": LBL, "business_activity": "Clothing Alterations"},
-                  "clothing alterations", "Personal services",
-                  "Chicago catch-all license types classified by activity",
-                  "approved before the build (2026-09-19) as a personal service; the repairs rule "
-                  "(NAICS 811, alterations included) was written down later")],
+        pending({"license_description": LBL, "business_activity": "Clothing Alterations"},
+                "clothing alterations", "Personal services", "2026-09-29",
+                "approved as a personal service before the build (2026-09-19); the repairs rule "
+                "(NAICS 811, alterations included) came later, and the owner chose to align")],
     "lodging": [loc("Hotel", "hotel")],
     "recreation": [loc({"license_description": LBL, "business_activity": "Gym / Fitness Classes"},
                        "gyms and fitness classes")],
@@ -378,11 +378,11 @@ COLUMNS["phl_licensetype"] = {
     "massage_regulated": absent("no personal-services source"),
     "car_dealer": absent("no car-dealer type: 'Vendor - Motor Vehicle Sales' is food trucks",
                          ignore=("VENDOR - MOTOR VEHICLE SALES",)),
-    "petrol_station": [pending("MOTOR VEHICLE REPAIR / FUEL DISPENSING", "repair and fuel merged",
-                               None, "2026-09-29",
-                               "one type merges auto repair (NAICS 811, out) with fuel dispensing "
-                               "(NAICS 457, kept), sampled mostly as repair shops, and goes whole. "
-                               "Edmonton's merged type has a DECISIONS call; this one has none.")],
+    "petrol_station": [exception("MOTOR VEHICLE REPAIR / FUEL DISPENSING", "repair and fuel merged",
+                                 None, RULED,
+                                 "one type merges auto repair (NAICS 811, out) with fuel dispensing "
+                                 "(NAICS 457, kept), sampled mostly as repair shops, and goes whole, "
+                                 "as Edmonton's merged type does")],
     "vehicle_repair": [loc("AUTO WRECKING / WASTE HANDLING", "auto wrecking"),
                        loc("TOW TRUCK", "tow truck")],
     "gambling": [loc("ANNUAL SMALL GAMES OF CHANCE", "small games of chance"), loc("BINGO", "bingo")],
@@ -724,9 +724,8 @@ COLUMNS["dublin_uses"] = {
     "car_dealer": [loc(_dub("-, MOTOR SHOWROOM"), "motor showroom")],
     "petrol_station": [loc(_dub("-, SERVICE STATION"), "service station"),
                        loc(_dub("-, MOTOR FUEL SALES"), "motor fuel sales"),
-                       pending(_dub("-, SERVICE STATION (NO SHOP)"), "forecourt with no shop", None,
-                               "2026-09-29", "filed under repair and industry with no comment; the "
-                               "rule keeps petrol stations")],
+                       exception(_dub("-, SERVICE STATION (NO SHOP)"), "forecourt with no shop", None,
+                                 RULED, "a forecourt with no shop has nothing to walk into")],
     "vehicle_repair": [loc(_dub("-, GARAGE"), "garage"), loc(_dub("-, MOTOR WASH"), "car wash")],
     "gambling": [loc(_dub("-, BETTING SHOP"), "betting shop"), loc(_dub("SHOP, BETTING SHOP"), "betting shop"),
                  loc(_dub("SHOP, CASINO"), "casino"), loc(_dub("-, BINGO HALL"), "bingo hall")],
@@ -736,12 +735,14 @@ COLUMNS["dublin_uses"] = {
     "nonstore": absent("a valuation register lists rated premises only"),
     "parking": [loc(_dub("CAR PARK", "MISCELLANEOUS"), "car park")],
     "repair": [loc(_dub("-, REPAIRS"), "repairs"),
-               exception(_dub("-, SHOE REPAIR / KEY CUT"), "shoe repair and key cutting",
-                         "Personal services", "Buenos Aires taxonomy: 385 survey subtypes",
-                         "one of 'Dublin's two departures' (shoe repair and key cutting, garment "
-                         "alterations) that Buenos Aires followed; dublin_uses.py gives the reason"),
-               exception(_dub("-, ALTERATIONS"), "alterations", "Personal services",
-                         "Buenos Aires taxonomy: 385 survey subtypes", "as shoe repair")],
+               pending(_dub("-, SHOE REPAIR / KEY CUT"), "shoe repair and key cutting",
+                       "Personal services", "2026-09-29",
+                       "'Dublin's two departures' (shoe repair and key cutting, garment alterations), "
+                       "which Buenos Aires followed; the owner chose to align with the repairs rule"),
+               pending(_dub("-, ALTERATIONS"), "alterations", "Personal services", "2026-09-29",
+                       "as shoe repair"),
+               pending(_dub("-, TAILORING"), "tailoring", "Personal services", "2026-09-29",
+                       "as shoe repair")],
     "lodging": [loc(_dub("HOTEL", "HOSPITALITY"), "hotel"), loc(_dub("-, GUESTHOUSE"), "guesthouse")],
     "recreation": [loc(_dub("-, GYMNASIUM / FITNESS CENTRE"), "gym"), loc(_dub("-, CINEMA"), "cinema"),
                    pending(_dub("GYMNASIUM / FITNESS CENTRE, SHOP"), "gym beside a generic shop use",
@@ -791,10 +792,11 @@ COLUMNS["ba_usos_suelo"] = {
                 outside(BA_STEP2, BA_FILTER, "commercial garages (GARAGE COMERCIAL) dropped before classify()")],
     "repair": [loc("REPARACION CELULARES", "phone repair"),
                loc("REPARACION DE ELECTRODOMESTICOS", "appliance repair"),
-               exception("COMPOSTURA DE CALZADO", "shoe repair", "Personal services",
-                         "Buenos Aires taxonomy: 385 survey subtypes", "Dublin's two departures, followed"),
-               exception("ARREGLO DE ROPA", "clothing alterations", "Personal services",
-                         "Buenos Aires taxonomy: 385 survey subtypes", "Dublin's two departures, followed")],
+               pending("COMPOSTURA DE CALZADO", "shoe repair", "Personal services", "2026-09-29",
+                       "Dublin's two departures, followed; the owner chose to align with the repairs rule"),
+               pending("ARREGLO DE ROPA", "clothing alterations", "Personal services", "2026-09-29",
+                       "as shoe repair"),
+               pending("SASTRERIA", "tailor", "Personal services", "2026-09-29", "as shoe repair")],
     "lodging": [outside(BA_STEP2, BA_FILTER, "hotels (EQUIPAMIENTO) dropped before classify()")],
     "recreation": [loc("GIMNASIO", "gym"), loc("SALON DE BAILE", "dance hall")],
     "pharmacy": [loc("FARMACIA Y PERFUMERIA", "pharmacy")],
@@ -912,10 +914,9 @@ COLUMNS["japan_eigyo"] = {
 COLUMNS["korea_localdata"] = {
     "funeral": absent("none of the loaded permit files is funeral"),
     "no_counter_food": [loc({"oa": "OA-16094", "subtype": "출장조리"}, "catering"),
-                        pending({"oa": "OA-16096", "subtype": "시장"}, "traditional market (대규모점포)",
-                                "Retail", "2026-09-29",
-                                "a registered market building is kept as Retail with no stated reason; "
-                                "Dublin, Calgary, Miami and Philadelphia take markets out")],
+                        exception({"oa": "OA-16096", "subtype": "시장"}, "traditional market (대규모점포)",
+                                  "Retail", RULED,
+                                  "a registered market building holds fixed shops, not stalls")],
     "personal_catchall": absent("the files are named permit types, with no catch-all"),
     "adult_hostess": [loc({"oa": "OA-16090", "subtype": "룸살롱"}, "room salon (유흥주점)"),
                       loc({"oa": "OA-16090", "subtype": "카바레"}, "cabaret (유흥주점)")],
@@ -1418,9 +1419,12 @@ COLUMNS["riga_source"] = {
                    "name rule and is dropped unmatched") for rid in (
         "funeral", "personal_catchall", "adult_hostess", "massage_regulated", "vet", "nonstore", "parking",
         "lodging", "recreation")},
-    "no_counter_food": [pending(None, "markets and stands kept as shops ('tirgus', 'stends')", "Retail",
-                                "2026-09-29", "the shop name rule keeps market pavilions and stands; "
-                                "Dublin, Calgary and Miami take markets out", path=RIGA_CFG, token="tirgus")],
+    "no_counter_food": [exception(None, "market pavilions kept as shops ('tirgus', 'paviljon')", "Retail",
+                                  RULED, "a market pavilion is a building of fixed shops, not stalls",
+                                  path=RIGA_CFG, token="tirgus"),
+                        pending(None, "stands kept as shops ('stends', '^lete')", "Retail", "2026-09-29",
+                                "a stand is a stall; the rule takes street and market stalls out",
+                                path=RIGA_CFG, token="stends")],
     "sex_shop": [outside(RIGA_CFG, "veikal", "sex shops kept as shops by name")],
     "massage_commercial": [outside(RIGA_CFG, "masāž", "massage kept as a personal service by name")],
     "car_dealer": [outside(RIGA_CFG, "autosalon", "car showrooms kept as shops by name")],
@@ -1553,6 +1557,28 @@ COLUMNS["sweden_livsmedel"] = {
     "mobile_unit": [pending(_se(REST, "Tommys Farstaplan, Food truck"), "food truck typed as a restaurant",
                             "Food service", "2026-09-29", CATERING_BRANCH)],
 }
+
+
+# ---------------------------------------------------------------------------
+# PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
+# is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
+# except the cells below, which still wait on the owner. A queued row turns stale
+# (and fails) when its fix lands: make it a loc() in the same change.
+# ---------------------------------------------------------------------------
+AWAITING_OWNER = {
+    ("boston_licensecat", "nightclub"): "measure first: how many bars and clubs hold no ISD food permit",
+}
+QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
+QUEUED_ELSEWHERE = {
+    ("sweden_livsmedel", "no_counter_food"): "the caterer row is fixed on branch stockholm-catering",
+    ("sweden_livsmedel", "mobile_unit"): "fixed on branch stockholm-catering",
+}
+for _system, _col in COLUMNS.items():
+    for _rid, _cell in _col.items():
+        for _e in (_cell if isinstance(_cell, list) else [_cell]):
+            if _e.kind == "pending":
+                _e.queued = (None if (_system, _rid) in AWAITING_OWNER
+                             else QUEUED_ELSEWHERE.get((_system, _rid), QUEUED))
 
 
 # ---------------------------------------------------------------------------

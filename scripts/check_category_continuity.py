@@ -139,6 +139,12 @@ def module_path(root, dotted):
     return root / Path(*dotted.split(".")).with_suffix(".py")
 
 
+def pending_tag(entry):
+    """PENDING OWNER until the owner rules; QUEUED FIX once a fix is approved."""
+    queued = getattr(entry, "queued", None)
+    return f"QUEUED FIX [{queued}] " if queued else "PENDING OWNER "
+
+
 def keyword_hits(rule, vocab, ignore=()):
     if not rule.keywords:
         return []
@@ -266,9 +272,9 @@ def run_check(table, registry, load, doc_text, headings, root):
                                         "resolved? make it a loc() or outside()")
                         marks.add("!")
                     elif entry.kind == "pending":
-                        pendings.append(f"{system}: rule {rid}, {entry.label} ({entry.path}): "
-                                        f"{show(entry.result)}, the rule says {show(r.verdict)} "
-                                        f"(since {entry.since}). {entry.note}")
+                        pendings.append(f"{pending_tag(entry)}{system}: rule {rid}, {entry.label} "
+                                        f"({entry.path}): {show(entry.result)}, the rule says "
+                                        f"{show(r.verdict)} (since {entry.since}). {entry.note}")
                         marks.add("p")
                     else:
                         marks.add("x")
@@ -297,8 +303,8 @@ def run_check(table, registry, load, doc_text, headings, root):
                                         f"gives {show(got)}")
                         marks.add("!")
                     elif entry.kind == "pending":
-                        pendings.append(f"{where}: gives {show(got)}, the rule says "
-                                        f"{show(r.verdict)} (since {entry.since}). {entry.note}")
+                        pendings.append(f"{pending_tag(entry)}{where}: gives {show(got)}, the rule "
+                                        f"says {show(r.verdict)} (since {entry.since}). {entry.note}")
                         marks.add("p")
                     else:
                         marks.add("x")
@@ -354,17 +360,20 @@ def main():
     for p in problems:
         print("FAIL", p)
     for p in pendings:
-        print("PENDING OWNER", p)
+        print(p)
+    queued = sum(p.startswith("QUEUED FIX") for p in pendings)
     marks = list(grid.values())
     print(f"\n{len(table.RULES)} rules x {len(registry)} taxonomies: "
           f"{sum(m in '=!' for m in marks)} located, {marks.count('-')} absent, "
           f"{marks.count('o')} decided outside classify(), {marks.count('x')} declared exceptions, "
-          f"{len(pendings)} pending departure rows.")
+          f"{len(pendings)} pending departure rows ({queued} with an approved fix queued, "
+          f"{len(pendings) - queued} awaiting the owner).")
     if problems or (args.strict and pendings):
         print(f"{len(problems)} problem(s). A departure is the OWNER's call: bring it with the "
               f"precedent it breaks ({RULES_DOC}); never edit a taxonomy to pass this check.")
         return 1
-    tail = f"; {len(pendings)} pending departure rows await the owner" if pendings else ""
+    tail = (f"; {len(pendings) - queued} pending row(s) await the owner, {queued} approved fix(es) "
+            "are queued" if pendings else "")
     print(f"OK - every taxonomy reaches the cross-city verdicts or declares why not{tail}.")
     return 0
 

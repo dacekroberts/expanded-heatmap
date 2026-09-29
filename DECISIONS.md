@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Category check: the owner's calls on the pending departures](#2026-09-29---category-check-the-owners-calls-on-the-pending-departures)
 - [Category check: three older calls confirmed (owner)](#2026-09-29---category-check-three-older-calls-confirmed-owner)
 - [The cross-city category rules made a check; 45 departures found and left for the owner; two claims in category_rules.md out of date](#2026-09-29---the-cross-city-category-rules-made-a-check-45-departures-found-and-left-for-the-owner-two-claims-in-category_rulesmd-out-of-date)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
@@ -237,6 +238,63 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Category check: the owner's calls on the pending departures
+
+- **The owner accepted every recommendation on the check's pending list**:
+  "align" for repairs and "fix all" for the probable bugs. The fixes are
+  taxonomy and config changes that need about 45 cities re-rendered.
+  - They are queued as one batch in `docs/handoff_category_fixes_2026-09-29.md`
+    for a fresh session, rather than run here. Weekly usage stood at 81% with
+    five days to the reset.
+  - Shared taxonomy code is not this session's to edit (`docs/session_roles.md`).
+- **Fixes approved** (each is a `QUEUED FIX` row in the check until it lands):
+  - *Nonstore out*: NAICS 2022's 445132 and 457210; heating-fuel and
+    bottled-gas dealers in France (47.78B), Berlin (477893) and Taiwan (482912,
+    482911).
+  - *Pawnbrokers in*: Mexico (522452), Berlin (64922), Taiwan (649611), D.C.
+  - *Nightclubs in*: Madrid (233), Taiwan (932918, 932917), Brazil (BOATE).
+  - *Petrol stations in*: Buenos Aires (266, dropped with their survey type)
+    and Riga (by name).
+  - *Repairs out, aligned to the rule*: shoe repair, key cutting, tailoring
+    and alterations in Chicago, Dublin, Buenos Aires and Barcelona (649), and
+    Riga's workshops. This supersedes the calls that counted them as personal
+    services: Chicago's (docs/decisions/2026-09-13.md, "Chicago catch-all
+    license types classified by activity") and the Dublin precedent that
+    Buenos Aires followed (DECISIONS 2026-09-28, "Buenos Aires taxonomy: 385
+    survey subtypes mapped"). Miami's dry-cleaning-and-alterations type
+    stays whole, since it cannot be split.
+  - *Canteens, stalls and mobile food out*: Brazil (CANTINA ESCOLAR,
+    RESTAURANTE INDUSTRIAL), Madrid's situados (about 163) and mobile food
+    (21), Japan's 露店 form (about 34), Bucharest's trailers (7), Riga's stands
+    and Stockholm's market-square stall.
+  - *Bugs*:
+    - Prague's catch-all matched by prefix (21 rows).
+    - Brazil's ESTUDIO DE TATUAGEM kept like STUDIO, and LOJA VIRTUAL out.
+    - Taiwan's shoe-shine (969014) out.
+    - Dublin's generic SHOP stops rescuing recreation (5 pins), and internet
+      cafés (27) out.
+- **Declared exceptions (owner)**, now in the check's table:
+  - Philadelphia's `MOTOR VEHICLE REPAIR / FUEL DISPENSING` goes whole, as
+    Edmonton's merged type does.
+  - Dublin's `SERVICE STATION (NO SHOP)` stays out: nothing to walk into.
+  - Market buildings of fixed shops stay: Seoul's 시장 and Riga's market
+    pavilions.
+  - Pawnbrokers under a mixed credit code (NAICS 522298/522299, NACE 64.92)
+    are recorded as absent, because none can be kept without every other
+    lender.
+- **`docs/category_rules.md` brought up to date** with these calls, plus the
+  two corrections the owner approved:
+  - France is the disclosed car-dealer exception, not "aligned".
+  - Barcelona's vets are kept and disclosed, not "aligned".
+- **Still with the owner**: Boston's General On Premise licences, to be
+  measured first, and Buenos Aires' `CERRAJERIA` (locksmiths), found while
+  writing the handoff.
+- The check now prints `QUEUED FIX` rows (approved, waiting on the batch)
+  separately from `PENDING OWNER` rows. Files:
+  `scripts/check_category_continuity.py`,
+  `scripts/category_continuity_table.py`, `docs/category_rules.md`,
+  `docs/handoff_category_fixes_2026-09-29.md`.
 
 ### 2026-09-29 - Category check: three older calls confirmed (owner)
 

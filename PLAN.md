@@ -161,6 +161,16 @@ Desktop is unaffected — the label is fully visible there.
     `check_macro_facts.py --write`.
   - The `docs/excluded_categories.md` wording goes to the owner first; a
     full `deploy-verify` runs at review time.
+- [ ] **The category fix batch (owner-approved 2026-09-29).**
+  `scripts/check_category_continuity.py` found 45 departures from
+  `docs/category_rules.md`, and the owner approved fixing all of them. The
+  work list is `docs/handoff_category_fixes_2026-09-29.md`: 17 taxonomies or
+  configs and about 45 cities to re-render, run as the exclusions batch was.
+  - Start it in a fresh session. The owner picks the time; weekly usage was
+    81% on 2026-09-29.
+  - Land `stockholm-catering` first.
+  - Still with the owner: Boston's General On Premise licences (measure
+    first) and Buenos Aires' `CERRAJERIA`.
 - [ ] **Next cross-city discrepancy audits (owner, 2026-09-29), AFTER the
   exclusions batch lands.** Each is read-only and runs one at a time; each ends in rules
   for the owner to decide, as the fringe-category audit did.
