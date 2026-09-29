@@ -207,6 +207,7 @@ SLUG_OVERRIDES = {
     "Guadalajara (Regional)": "guadalajara",
     "Miami (Regional)": "miami",
     "Lille (Regional)": "lille",
+    "Newcastle (Regional)": "newcastle",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",

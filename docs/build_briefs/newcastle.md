@@ -20,8 +20,9 @@ United Kingdom row in `docs/global_country_shortlist.md` Tier 4.
 >   the rings, 44.7% -> **54.4%**; without it Sunderland's 1,390 have none.
 > - **Rail**: 60 stations, gate 3 exact; Green 31, Yellow 41. One relation per
 >   line draws the whole line (the coast loop once).
-> - **Page name "Newcastle (Regional)"** (owner); notices 62 (FSA) and 63
->   (Ordnance Survey), per city rather than extending London's (owner).
+> - **Page name "Newcastle (Regional)"** (owner). Two notices per city rather
+>   than extending London's (owner): the Food Standards Agency's is notice 62;
+>   Ordnance Survey's is notice 63.
 
 ⚠️ **One-bucket city: food, with food retail, on London's method.** Read
 `docs/build_briefs/london.md` (its "Measured at the build" box) and London's
