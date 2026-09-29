@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**200 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
 - [Light-rail briefs: the last four calls answered, all five ready (owner)](#2026-09-29---light-rail-briefs-the-last-four-calls-answered-all-five-ready-owner)
 - [Light-rail briefs: the owner's calls, and two timetables read (staging)](#2026-09-29---light-rail-briefs-the-owners-calls-and-two-timetables-read-staging)
 - [Light-rail build briefs: Buffalo, Houston and Sacramento (staging)](#2026-09-29---light-rail-build-briefs-buffalo-houston-and-sacramento-staging)
@@ -239,6 +240,26 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Portland re-probed at the owner's request: still no classified register
+
+- **Portland stays in the discards; the re-probe found one partial source and
+  no personal services.** It ran the `reprobe-city` skill's steps:
+  - data.oregon.gov enumerated in full (537 datasets). The one premises-shaped
+    source is OLCC's liquor licences (`srxe-qkm2`, daily): ~2,140 current
+    alcohol-serving venues and 666 off-premises shops in Portland. Venues
+    without alcohol and most retail are absent.
+  - No salon or barber facility file on the state portal, Multnomah County's
+    ArcGIS content or Metro's.
+  - The City's own open-data services (portlandmaps.com/od, 12 services)
+    hold a Buildings layer whose use class is per building (874 Commercial
+    Retail, 239 Commercial Restaurant among 249,102). That is a second shape,
+    but not premises.
+  - Oregon's Active Businesses (`tckn-sxa6`) still has no classification.
+
+  An OLCC-only page would show the drinking city, not its storefronts. The
+  rejected alternative was a Band C row on that basis. Recorded on the
+  discard row, with its evidence.
 
 ### 2026-09-29 - Light-rail briefs: the last four calls answered, all five ready (owner)
 
