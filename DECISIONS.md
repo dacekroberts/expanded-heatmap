@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**162 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**163 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Second batch live after the owner's reboot, checked on the live URL](#2026-09-28---second-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)](#2026-09-28---second-review-time-batch-published-buenos-aires-glasgow-newcastle-sydney-melbourne-londons-flat-rule-monterreys-wording-owner-called-it)
 - [Stockholm is built on its register as frozen on 2025-10-21 (owner); the 1,391 untyped premises measured, a by-name recovery proposed](#2026-09-28---stockholm-is-built-on-its-register-as-frozen-on-2025-10-21-owner-the-1391-untyped-premises-measured-a-by-name-recovery-proposed)
 - [Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)](#2026-09-28---melbourne-built-on-the-city-of-melbournes-land-use-census-by-metro-trains-line-group-9539-excluded-in-melbourne-and-sydney-owner)
@@ -198,6 +199,20 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Second batch live after the owner's reboot, checked on the live URL
+
+- **Page 92:** 62 rows; Melbourne's in-ring share reads 96% and Sydney's
+  83%; the range reads "about 12% to 100%".
+- **Opening zoom** (the map-view check recomputing the expected zoom, 1280
+  px, 0 corrections): Buenos Aires 12.75, Glasgow 14, Newcastle 11.5, Sydney
+  13.25, Melbourne 13.5, London 10.25, and Chicago (untouched) 10.75, each
+  matching its expected zoom.
+- **Content:** the footer shows the new notices (the City of Melbourne, the
+  City of Sydney, Buenos Aires's city government, Food Standards Scotland),
+  and London's page carries the flat-address sentence.
+- **Page 91 at 375 px:** the document is 375 px wide, and 62 rows scroll in
+  a 343 px box.
 
 ### 2026-09-28 - Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)
 
