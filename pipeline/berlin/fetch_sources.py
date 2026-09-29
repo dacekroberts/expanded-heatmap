@@ -16,6 +16,8 @@ the wrong thing and HTTP 200:
   * the boundary by its geometry type and feature count.
 """
 import argparse
+import csv
+import io
 import json
 import sys
 import urllib.request
@@ -120,6 +122,22 @@ if __name__ == "__main__":
             sys.exit("  gtfs.zip: wrong magic bytes - not a zip")
         tmp.replace(config.GTFS_ZIP)
     prov["feed_info"] = feed_info(config.GTFS_ZIP)
+    # VBB ships no feed_info.txt, so the page's timetable window is calendar.txt's.
+    with zipfile.ZipFile(config.GTFS_ZIP) as z:
+        text = z.read("calendar.txt").decode("utf-8-sig")
+    cal = list(csv.DictReader(io.StringIO(text)))
+    prov["gtfs_calendar"] = {"start": min(c["start_date"] for c in cal),
+                             "end": max(c["end_date"] for c in cal)}
+    print(f"  calendar.txt window: {prov['gtfs_calendar']}")
+
+    # The register's own date: IHK commits the file monthly ("Dataset
+    # aktualisiert"); the latest commit touching it is the snapshot date the
+    # page shows. The CSV itself carries no date.
+    req = urllib.request.Request(config.REGISTER_COMMITS_URL, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=60) as r:
+        commits = json.loads(r.read())
+    prov["register_date"] = commits[0]["commit"]["committer"]["date"][:10]
+    print(f"  register date (IHK's last commit of the file): {prov['register_date']}")
 
     if config.CITY_BOUNDARY_GEOJSON.exists() and not args.force:
         print(f"  {'city_boundary':26s} cached")

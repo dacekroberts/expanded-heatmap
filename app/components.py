@@ -1291,6 +1291,19 @@ _NOTICES = [
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
      False),
+    # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
+    # the requested credit, the licence link, what was modified, the
+    # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
+    # notice (its courtesy credit is on the Berlin page). Wording approved by
+    # the owner 2026-09-28.
+    ("VBB Verkehrsverbund Berlin-Brandenburg (Berlin)",
+     "Station locations and line geometry for Berlin are from VBB Verkehrsverbund "
+     "Berlin-Brandenburg GmbH's timetable data (GTFS), used under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
+     "U-Bahn and S-Bahn stations were selected and those outside the Land of Berlin removed, "
+     "one timetable shape was chosen per line, and the lines are drawn in this project's "
+     "colours. VBB provides the data without warranty and does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

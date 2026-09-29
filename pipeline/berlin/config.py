@@ -37,6 +37,9 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # ever appears (the download boundary is the privacy control).
 BUSINESSES_URL = ("https://media.githubusercontent.com/media/IHKBerlin/"
                   "IHKBerlin_Gewerbedaten/master/data/IHKBerlin_Gewerbedaten.csv")
+# The CSV's commit history on GitHub, for the register's own date.
+REGISTER_COMMITS_URL = ("https://api.github.com/repos/IHKBerlin/IHKBerlin_Gewerbedaten/"
+                        "commits?path=data/IHKBerlin_Gewerbedaten.csv&per_page=1")
 # VBB's GTFS (Berlin-Brandenburg), CC BY 4.0 per VBB's own dataset page:
 # credit "VBB Verkehrsverbund Berlin-Brandenburg GmbH", say it was modified.
 GTFS_URL = "https://www.vbb.de/gtfs"
@@ -47,7 +50,9 @@ BOUNDARY_URL = ("https://gdi.berlin.de/services/wfs/alkis_land?SERVICE=WFS"
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
 BUSINESSES_RAW_CSV = DATA_RAW / "IHKBerlin_Gewerbedaten.csv"
 CITY_BOUNDARY_GEOJSON = DATA_RAW / "city_boundary.geojson"
-PROVENANCE_JSON = DATA_RAW / "provenance.json"
+# Read by the app page for its snapshot caption, so it lives in outputs/ (the
+# deployed app has no data/).
+PROVENANCE_JSON = OUTPUTS / "provenance.json"
 # Register columns that match fetch_sources.py's name-like fragments but are
 # known to be harmless (an area's name, say). Empty: none do, as of 2026-09-28.
 REGISTER_ALLOWED_NAMEISH = ()

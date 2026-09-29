@@ -177,6 +177,15 @@ REGISTRIES = {
     # is skipped.
     "sao_paulo": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Berlin: IHK Berlin's Gewerbedaten carries NO name and NO street column of
+    # any kind (fetch_sources.py refuses a header with one), so a pin's title
+    # is IHK's own branch label ("Nagelstudio", "Kiosk") and the fallback
+    # failure cannot occur. The residual risk is a point at a sole trader's
+    # home: step 2 reads the employee band, business age and business type to
+    # measure and never writes them out (config.MEASURE_ONLY_COLUMNS). No
+    # address column, so the unit check is skipped.
+    "berlin": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
     # Every other Brazilian city reads CNEFE through the same national reader,
     # so São Paulo's structural answer holds for each; measured per city.
     "belo_horizonte": dict(raw=None, trade=None, owner=None,

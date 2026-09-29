@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Berlin's page, notice 57, macro entry and disclosures written (owner-approved); the exposure verdict; a "closed for works" station category](#2026-09-28---berlins-page-notice-57-macro-entry-and-disclosures-written-owner-approved-the-exposure-verdict-a-closed-for-works-station-category)
 - [Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver](#2026-09-28---berlins-map-rendered-shapes-chosen-by-rule-a-served-share-rule-for-diversions-colours-by-the-shared-search-a-legend-that-fits-the-solver)
 - [Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green](#2026-09-28---berlins-rail-scope-u-bahn-and-s-bahn-no-trams-the-u6s-tegel-branch-drawn-as-the-timetable-runs-owner-steps-1-and-2-green)
 - [Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)](#2026-09-28---berlins-calls-47122-excluded-personal-services-drawn-as-a-partial-bucket-trams-on-ring-numbers-both-downloads-approved-owner)
@@ -151,6 +152,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Berlin's page, notice 57, macro entry and disclosures written (owner-approved); the exposure verdict; a "closed for works" station category
+
+- **Approved by the owner and written**: the page text
+  (`app/pages/56_Berlin_Heatmap.py`, with a snapshot caption read from
+  `outputs/berlin/provenance.json` - the register's own date, IHK's last
+  commit of the file, 2026-09-01, and VBB's calendar window 2026-09-24 to
+  2026-12-12 - and the courtesy credit "Business data: IHK Berlin (CC0)");
+  the legend row "Personal services (partial) - WZ 96"; **notice 57** (VBB, CC
+  BY 4.0: credit, licence link, what was modified, the disclaimer, no
+  endorsement) in `app/components.py` and `docs/data_sources.md`; the
+  `app/cities.py` entry (coverage narrowed, placement "Register coordinates",
+  data age "As of 2026-09-01", blurb "U-Bahn U1–U9 and 16 S-Bahn lines",
+  rail_extra "Suburban rail", record_kind "Chamber of commerce register",
+  categories "Personal services thin" - the last a new value, sent to Cleanup
+  for `check_inconsistency_list.py`'s allowed list); Berlin's section in
+  `docs/excluded_categories.md`; its rows in tables A-D and themes 1-4 and 8-11
+  of `docs/map_inconsistencies.md`; `docs/data_sources/germany.md` and its
+  index row.
+- **Table B's note reads "No hairdressers or laundries: crafts are not IHK
+  members"**, which `check_macro_facts.py` reads as structural: a gap by the
+  register's construction, not a thin layer, so "narrowed" (owner) holds under
+  the rule rather than by loosening it. Macro label width measured at 38.8 px
+  in the app's document (Prague, Tokyo, Marseille, Oslo and Copenhagen
+  reproduced); `check_macro_labels.py` PROBLEMS 0 with the default placement.
+- **Exposure verdict (`check_personal_exposure.py berlin`)**: 49,426 pins, 208
+  distinct titles, every one an IHK branch label; 0 person-like names, 0
+  contact details. The 199 "surname-first" hits are labels with commas ("Day
+  Spas, Saunas, Dampfbäder"). No name column exists to fall back to, and the
+  employee band, age and business type never reach `outputs/`. **Publishable.**
+- **`app/station_scope.py` learns "closed for works"** as its own category, and
+  page 91 shows a "Closed for works" column when any city has one: Berlin's five
+  U6 stations were counted as "Other", which `check_scope_disclosure.py`
+  refuses. `counts_for()` returns a fourth count, last, so the first three keep
+  their positions; page 91's sentence gains ", and N closed for works".
 
 ### 2026-09-28 - Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver
 

@@ -1965,6 +1965,47 @@ ward line.
   are not drawn on their own.
 - The Shinkansen does not count.
 
+### Berlin - the chamber of commerce's members, with no names and no crafts
+
+**Excluded by the classification itself** - catering and contract catering
+(3,155), retail intermediation (331), personal services performed in the
+customer's household (19), intermediation for personal services (25), mobile
+food stalls (23) and food-service intermediation (1): 3,554 rows, read against
+the register's own WZ 2025 labels.
+
+**Excluded as catch-alls** - "other personal services" (10,210), which holds
+trade-fair hosts, hospitality services, clearance firms, escort and
+prostitution among much else, as in Oslo and Copenhagen; and general non-food
+retail (12,194), the broad registration a trader takes to sell anything,
+anywhere, which is mostly online and market trading. **Not a catch-all:**
+department stores sit under the same heading in the register and are kept.
+
+**Missing rather than excluded** - craft businesses belong to the Handwerks-
+kammer, not the chamber of commerce, so hairdressers, laundries and dry
+cleaners are almost entirely absent and bakers and butchers are thin.
+Personal services on this map is beauty and nail salons, spas, saunas and
+massage. Liberal professions are not members either.
+
+**What cannot be excluded: web shops.** As in Oslo, Copenhagen and Prague, the
+classification files an online seller under the goods it sells.
+
+**Shown, but not named** - the register publishes no names at all; every dot
+shows its kind of business. It also publishes no street address, so none is
+shown.
+
+**Left off because it is outside the city** - 1 business whose point lies
+outside the Land of Berlin.
+
+**Stations.** The U-Bahn and all sixteen S-Bahn lines are drawn, cut at the
+Land's boundary.
+- Left out: 36 S-Bahn stations in Brandenburg, where the register does not
+  reach.
+- Not drawn: the U6's five stations from Scharnweberstraße to Alt-Tegel,
+  closed for rebuilding since November 2022 (replacement buses until about
+  August 2027); the map follows the timetable.
+- Trams, which run as an overlay on the U- and S-Bahn, regional trains and
+  ferries are not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
