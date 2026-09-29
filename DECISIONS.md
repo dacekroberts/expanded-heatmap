@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**207 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**208 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Band C closed: its last five to the discards (owner)](#2026-09-29---band-c-closed-its-last-five-to-the-discards-owner)
 - [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
@@ -292,6 +293,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rejected: the rule as given is either, and the page is where a reader of
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
+
+### 2026-09-29 - Band C closed: its last five to the discards (owner)
+
+- **Singapore, Istanbul, Ankara, Perth and Ho Chi Minh City moved from C to
+  the discards, closing Band C (owner, on the recommendation).** After the
+  Band C audit passed eight cities to B, the band's condition ("the
+  likeliest to become buildable") described none of the five left. The list's
+  own rule is that a band whose condition stops being true closes, which is
+  why it was not re-captioned. That rule was applied the same way on
+  2026-09-28.
+- Each discard row carries its evidence and its reopen condition:
+  - **Singapore**, kind `measured`: NEA's food register ends 2016-09-06;
+    reopens when NEA refreshes it.
+  - **Istanbul** and **Ankara**, `absence`: storefronts are licensed by the
+    districts; reopens if a central district publishes its işyeri list.
+  - **Perth**, `absence`: land use per property on about 6 stations;
+    reopens with a per-establishment census like Sydney's or Melbourne's.
+  - **Ho Chi Minh City**, `absence`: seven months of certificates and no
+    placement route. The certificate file the owner fetched past the CAPTCHA
+    stays on the row with its sha256.
+- Candidates 77 → 72, discards 91 → 96, C 5 → 0; the letter C is free.
+  `check_discard_evidence.py` passes all 96 rows.
+- `check_master_list_counts_selftest.py`: its three cases aimed at Band C rows
+  were re-aimed at Band B, which cannot empty while reduced-bucket pages
+  exist. 24 of 24.
 
 ### 2026-09-29 - Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)
 
