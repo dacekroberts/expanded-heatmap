@@ -1446,6 +1446,21 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Filtered, categorised and "
      "aggregated by this project. The City of Melbourne does not endorse this map.",
      False),
+    # Stockholm (notice 66): Stockholms stad's Livsmedelstillsyn register. Its licence
+    # is SILENT (no licence on the item; the publisher's own Hub feed says public, with
+    # CC0 on 8 of 109 datasets but not this one), so the notice credits the publisher
+    # and states the changes without claiming a licence. Wording approved by the
+    # owner 2026-09-29.
+    ("Stockholms stad (Stockholm)",
+     "Food premises for Stockholm are from the City of Stockholm's food inspection "
+     "register (Livsmedelstillsyn, Stockholms stad, miljöförvaltningen, "
+     "[open-data-sthlm-miljo.hub.arcgis.com](https://open-data-sthlm-miljo.hub.arcgis.com/)), "
+     "which the city publishes as public open data with no stated licence. Changes: the "
+     "inspections are reduced to one record per premises, filtered to restaurants, cafés, "
+     "bars and food shops, grouped into two categories, and mapped by distance to "
+     "Tunnelbana stations. This is not the official register, and it is not produced or "
+     "endorsed by Stockholms stad.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

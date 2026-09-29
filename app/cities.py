@@ -1678,6 +1678,29 @@ CITIES = [
         # with PROBLEMS 0, Sydney included.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Stockholm",
+        "lat": 59.3293,
+        "lon": 18.0686,
+        "page": "pages/63_Stockholm_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (96.2%)",
+        "data_age": "Register frozen at 2025-10-21",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "The Tunnelbana's three lines",
+        "region": "Europe",
+        "country": "Sweden",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 72.1 px measured in the deployed
+        # app's own frame (2026-09-29, four entries reproduced). Europe's zoom
+        # leaves Stockholm out, as it does Riga (REGION_ZOOM_WITHOUT): fitted
+        # to it, the zoom dropped and put four label pairs on top of each
+        # other. check_macro_labels.py then passes every region at 375, 768
+        # and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -1839,7 +1862,11 @@ REGION_ORDER = [
 # and centre on the midpoint of all 16 - central Europe. On tablet and desktop
 # every city shows; on a phone Dublin and Riga sit a pan away, and the list
 # beneath the map always has them. check_macro_labels.py reads this too.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga",)}
+# Stockholm (2026-09-29) joins it on the same measurement: fitted to it, the
+# zoom dropped and Marseille, Rennes, Copenhagen and Amsterdam collided with
+# neighbours at every width. Without it Europe's zoom and centre are exactly
+# what they were (Riga already sets the centre's eastern edge).
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm")}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.

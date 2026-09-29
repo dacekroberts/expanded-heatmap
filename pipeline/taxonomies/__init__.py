@@ -134,6 +134,7 @@ TAXONOMY_MODULES = {
     "ihk_wz2025": "pipeline.taxonomies.ihk_wz2025",
     "fsa_businesstype": "pipeline.taxonomies.fsa_businesstype",
     "anzsic_fes": "pipeline.taxonomies.anzsic_fes",
+    "sweden_livsmedel": "pipeline.taxonomies.sweden_livsmedel",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

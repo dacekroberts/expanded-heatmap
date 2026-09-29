@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**179 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**181 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
@@ -32,6 +32,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Information pages renumbered 90-92 -> 200-202 (owner)](#2026-09-29---information-pages-renumbered-90-92---200-202-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
 - [Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session](#2026-09-29---exclusions-batch-the-owners-eight-follow-ups-wording-approved-handed-to-a-fresh-session)
+- [Stockholm built on its frozen food inspection register: institutional kitchens out by name (owner), three lines with Swedish labels (owner); privacy clean](#2026-09-29---stockholm-built-on-its-frozen-food-inspection-register-institutional-kitchens-out-by-name-owner-three-lines-with-swedish-labels-owner-privacy-clean)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
 - [Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)](#2026-09-29---staging-handed-off-for-the-tram-question-a-preliminary-yes-for-scoping-and-filtering-band-t-only-the-final-call-after-an-audit-owner)
 - [Gyeonggi is built from the Ministry's national local-licence files (owner)](#2026-09-29---gyeonggi-is-built-from-the-ministrys-national-local-licence-files-owner)
@@ -40,6 +41,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-09-28**
 
+- [Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)](#2026-09-28---stockholm-the-225-untyped-premises-recognised-by-name-go-on-the-map-flagged-owner-t-bana-only-owner-the-full-register-fetched-owner)
 - [Second batch live after the owner's reboot, checked on the live URL](#2026-09-28---second-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)](#2026-09-28---incheons-licences-read-the-permit-lists-and-the-kesa-lift-building-file-both-permitted-with-conditions-the-website-copyright-terms-judged-not-to-reach-them-owner-personal-services-shown-from-2021-dated-owner)
 - [Gyeonggi satellites: Goyang, Seongnam and Yongin first, then Suwon and Bucheon (owner)](#2026-09-28---gyeonggi-satellites-goyang-seongnam-and-yongin-first-then-suwon-and-bucheon-owner)
@@ -579,6 +581,98 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   real folder is kept as `data.stale-2026-09-29/`, excluded from git. It
   holds seven older station and line files, and nothing else unique.
 
+### 2026-09-29 - Stockholm built on its frozen food inspection register: institutional kitchens out by name (owner), three lines with Swedish labels (owner); privacy clean
+
+- **Built on branch `stockholm`, page 63, notice 66.** Step 1: 14 OSM subway
+  relations (the Yellow line's skipped) -> 100 stations -> 82 inside
+  Stockholms kommun, 18 outside with their kommun named. Step 2: 289,742
+  inspection rows -> 8,146 premises (latest record per `ObjektId`) -> 5,976
+  storefront-typed, 730 of them out by name, plus 225 untyped by name ->
+  5,471 storefronts -> 5,262 placed (4,193 Food service, 1,069 Food shops, 217
+  classified from the name). Step 3: 4,702 in a ring (89.4%).
+- **Institutional kitchens left out by name (owner).** The register files every
+  kitchen under the restaurant type. 718 of 4,967 restaurant-typed premises are
+  named as preschools (386), schools and gymnasia (206), care homes, home care
+  and day centres (78), staff canteens (11) or churches, prisons and
+  associations (37). Rejected: keeping them, London's canteen precedent, where
+  canteens were about 2.5% of the type rather than about 14%. The test applies
+  to the restaurant type only: a shop inside an institution ("Tekniska
+  högskolans Tobak") stays. About 20 office canteens under company names
+  ("KPMG AB") remain; "AB" names are too mixed to filter (Bapsang, The Good
+  Gringo), and the page says so.
+- **Staging's name rule corrected on measured grounds.** Its 686 matches on
+  typed storefronts were read. Five words were substrings of real names ("lss"
+  in Olsson and Karlsson, "sfi" in Kungsfisk, "lager" in Lagerbaren, "kontor" in
+  Restaurang Kontoret, "kyrka" in Slaktkyrkan) and are now bounded. Six words
+  from the placed pins were added (hemtjänst, dagverksamhet, daglig
+  verksamhet, äldreomsorg, montessori, föräldrakoop). Re-validated on typed
+  premises: 96.5% right when it says storefront (Staging's 96.9% was before
+  the fix). The untyped recovery is still 225.
+- **Pharmacies and "Övrigt" out (owner).** 12 retail-typed pharmacies are
+  excluded, matching the owner's rule for untyped ones. The 185 premises typed
+  only "Övrigt" are head offices, delivery firms and distributors by name
+  (Foodora huvudkontor, Bacardi AB).
+- **The Tunnelbana is drawn as SL's three lines (owner)**: Gröna, Röda and Blå
+  linjen, labelled in Swedish, with the routes in the legend. This is
+  Melbourne's grouping and Oslo's local names. Rejected: English names; seven
+  routes drawn separately, since the three green routes share one track and
+  one colour. Colours from `line_colour_search.py`: the Blue line reads violet
+  (#8018F8) beside the Food shops pins, London's Piccadilly precedent.
+- **OSM's relations were incomplete in two ways.** The first stops fetch came
+  from a mirror (overpass.kumi.systems) older than the relations, and eleven
+  stations' stop nodes were missing. Step 1 now stops on any missing member.
+  Tekniska högskolan is a platform member only, so named platform members
+  count. Hallonbergen (route 11, Sundbyberg) is in no relation and is added
+  from its station node. Gate 3 is exact against English Wikipedia's table of
+  lines: 100 stations; routes 10, 11, 13, 14 and 19 at 14, 12, 25, 19 and 35.
+  Routes 17 and 18 are out of the per-route gate, because OSM runs them on to
+  Hässelby strand.
+- **Europe's macro zoom leaves Stockholm out, as it does Riga.** At 18.07° E,
+  fitting to Stockholm lowered the zoom, and four label pairs collided at every
+  width (Marseille and Milan, Rennes and London, Copenhagen and Newcastle,
+  Amsterdam and Rotterdam). With it in `REGION_ZOOM_WITHOUT`, Europe's view is
+  exactly as before, and `check_macro_labels.py` reports PROBLEMS 0. Label width
+  72.1 px, measured in the deployed frame with four controls reproduced.
+- **Privacy: no personal information published.** `check_personal_exposure.py
+  stockholm`: no fallback name column exists; 0 emails, 0 phone numbers. The 3
+  c/o hits are venues ("A8 c/o K-märkt"), and the 6 comma names are a chain and
+  its street ("Subway, Fleminggatan"). The heuristic's 1,120 person-like names
+  were sampled (90): every one a trade name, since Swedish two-word names read
+  as persons ("Coop Konsum", "Birger Jarl"). No placed storefront's address
+  carries a flat, floor or c/o marker, and the address is not shown.
+- **Gates**: `brief_check.py stockholm` 6/6; `drift_check.py stockholm` zero
+  drift; `check_provenance.py` names Stockholm OK;
+  `check_scope_disclosure.py`, `check_inconsistency_list.py`,
+  `check_master_list_counts.py` and `check_macro_labels.py` pass. The notice is
+  the owner's approved wording: it credits the publisher and states that no
+  licence is given (SILENT).
+- Files: `pipeline/stockholm/`, `pipeline/taxonomies/sweden_livsmedel.py`,
+  `app/pages/63_Stockholm_Heatmap.py`, `app/cities.py`, `app/components.py`,
+  `docs/data_sources/sweden.md`, `docs/data_sources.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/stockholm.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+### 2026-09-28 - Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)
+
+- **The 225 untyped premises are added (owner).** These are the ones the name
+  rules call storefronts and that were last inspected in 2022-23. They are
+  flagged "classified from the name" on the map. This answers the proposal in
+  "Stockholm is built on its register as frozen on 2025-10-21". The other
+  1,166 untyped premises stay out and are disclosed: institutions, the
+  unidentifiable, pharmacies, and the 26 storefronts by name last inspected
+  before 2022. That gives about 5,996 placed storefronts. The rules are right
+  96.9% of the time on typed premises, so about 7 of the 225 may be wrong.
+  Rejected: leaving every untyped premises out (about 5,771, all typed by the
+  register).
+- **T-bana only (owner)**, the brief's recommendation: lines 10, 11, 13, 14,
+  17, 18 and 19. 88.7% of storefronts fall in a ring. Pendeltåg,
+  Roslagsbanan and Saltsjöbanan would give 92.3%. Trams are out, and so is
+  the unref'd Yellow line relation (21104772), which is not in service.
+  Rejected: adding pendeltåg and the local railways.
+- **Download approved (owner)**: all 289,742 inspection rows of
+  Livsmedelstillsyn layer 41, every field. Measured beforehand from a
+  2,000-row sample at 564 bytes a row: about 165 MB in 145 pages.
+- Files: `DECISIONS.md` (the build's own files follow on branch `stockholm`).
 ### 2026-09-29 - Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch
 
 - **Funeral services (owner, 2026-09-28): coded, not yet rendered.**

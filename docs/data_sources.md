@@ -89,6 +89,7 @@ together, so a row in either counts and a row in neither still fails.
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo |
+| Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam |
@@ -2037,6 +2038,30 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   run 2026-09-28, finds only trading names and no fallback; the verdict is in
   `DECISIONS.md`.
 - **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**66. Stockholms stad (Stockholm) — displayed by choice, not required**
+(written into `render_site_notices()`; displayed once Stockholm lands).
+
+- **SILENT, with the pages named** (resolved 2026-09-22; the Stockholm rows in
+  [`data_sources/sweden.md`](data_sources/sweden.md)): the ArcGIS item's
+  `licenseInfo` is empty and it serves without credentials; `dataportal.se`
+  says "Begränsad" but is a harvester; the publisher's own Hub DCAT feed says
+  `accessLevel: public` on all 109 datasets and carries CC0 on 8 of them, not
+  this one. A contradiction between a catalogue and its publisher is decided
+  for the publisher (`read-licence` step 5).
+- **MUST DISPLAY**: nothing is prescribed. The notice credits the publisher,
+  says no licence is stated, names the changes and disclaims endorsement,
+  without claiming a licence the city did not grant (Amsterdam's SILENT
+  register was displayed as CC BY by the owner's choice; this one is not).
+  Wording approved by the owner 2026-09-29.
+- **MUST NOT**: present the map as the official register, or imply Stockholms
+  stad produced or endorses it.
+- **MUST DO**: nothing. `brief_check.py stockholm` re-reads the Hub feed; if it
+  changes, the verdict is re-argued. Privacy: `check_personal_exposure.py
+  stockholm`, run 2026-09-29, finds only premises names and no fallback; the
+  verdict is in `DECISIONS.md`.
+- **Stockholm's rail, boundary and naming layer are OpenStreetMap data** (ODbL,
+  notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

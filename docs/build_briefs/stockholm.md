@@ -3,6 +3,37 @@
 **Screening closed 2026-09-22; rail counted 2026-09-23.** Run
 `python scripts/brief_check.py stockholm` before writing any code.
 
+> **Measured at the build, 2026-09-29 (build session, branch `stockholm`)** -
+> these supersede the figures below:
+> - **Downloaded** (owner's OK): all 289,742 inspection rows, every field,
+>   75.5 MB as CSV (145 pages of 2,000); the count and the field list are
+>   gated. Still frozen: no row after 2025-10-21.
+> - **Types**: 21 distinct `VerksamhetsTyp` values; only restaurant and retail
+>   are storefronts. `Övrigt` (185 premises) read by name - head offices,
+>   delivery firms, distributors - and excluded (owner).
+> - **The name test the brief asked for**: 718 of 4,967 restaurant-typed
+>   premises are institutional kitchens (preschools 386, schools 206, care 78,
+>   staff canteens 11, others 37) and are left out (owner); 12 retail-typed
+>   pharmacies too. Staging's rule had five substring errors ("lss" in Olsson,
+>   "sfi" in Kungsfisk, "lager", "kontor", "kyrka" in Slaktkyrkan), bounded at
+>   the build; six words added (hemtjänst, dagverksamhet, daglig verksamhet,
+>   äldreomsorg, montessori, föräldrakoop). Re-validated: **96.5%** right when
+>   it says storefront; the untyped recovery is still **225** (owner: added,
+>   flagged).
+> - **5,262 placed storefronts** (Food service 4,193, Food shops 1,069; 217
+>   from the name); 209 (3.8%) without a position. The served point equals the
+>   SWEREF 99 18 00 position to 0.0 m. **89.4% within a ring** (the brief said
+>   88.7% before the name test).
+> - **Rail**: OSM's relations lack stations in two ways. A mirror older than
+>   the relations dropped eleven stop nodes (step 1 now gates every member),
+>   and Tekniska högskolan is a platform member only, while Hallonbergen is in
+>   no relation (added from its station node). **Gate 3 exact**: 100 stations,
+>   and routes 10: 14, 11: 12, 13: 25, 14: 19, 19: 35. 82 inside the kommun,
+>   18 outside, each with its kommun. Drawn as SL's three lines, Swedish
+>   labels, routes in the legend (owner).
+> - **The kommun is 215.8 km²** in UTM 34N. No placed storefront's address
+>   carries a flat, floor or c/o marker.
+
 > **Re-measured 2026-09-28 (staging), before the build.** These supersede the
 > figures below where they differ.
 > - **Band B since 2026-09-27**: the one-bucket question below is answered.

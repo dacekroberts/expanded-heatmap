@@ -62,6 +62,13 @@ REGISTRIES = {
     "dublin": dict(raw=None, trade=None, owner=None, name_is_address=True,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
+    # Stockholm: the food inspection register names PREMISES
+    # (`AnlaggningsNamn`), with no owner or registrant column to fall back to;
+    # the inspection text is never read. None of the placed storefronts'
+    # addresses carries a flat, floor or c/o marker (0 of 5,315, 2026-09-29),
+    # and the address is not carried to the map, so the unit check is skipped.
+    "stockholm": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
     # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
     # trade name (`insegna`) and the rest carry the street address, because
     # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on
