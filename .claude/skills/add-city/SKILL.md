@@ -614,6 +614,29 @@ right.
   never omit it) (the name must
   match the entry) instead of a bare back-link. If a page file is ever
   renamed, update its `page` path in `cities.py`.
+- **Give the entry its three summary fields** (owner, 2026-09-28): the city's
+  row in the table on the "Why the maps differ" page
+  (`app/pages/92_Why_the_Maps_Differ.py`) is built from them.
+  - `rail_extra`: what the map draws beyond the metro. `"Trams"` (light rail
+    counts; a light metro such as Montréal's REM does not), `"Suburban rail"`,
+    `"Both"` or `"—"`.
+  - `record_kind`: what the businesses come from, e.g. `"Licence register"`,
+    `"Permit registers"`, `"National register"`, `"Tax register"`.
+  - `categories`: `"All three"`, `"Two"`, `"Merged"`, `"Retail thin"`,
+    `"Personal services thin"` or `"Food premises only"`. It must agree with
+    `coverage`: "All three" is a `full` city; a missing, merged, food-only or
+    thin Personal services layer is `narrowed`. "Retail thin" may be either.
+
+  The allowed values are `FIELDS` in `scripts/check_inconsistency_list.py`,
+  which refuses a missing field or a value not on the list. A genuinely new
+  kind (a new record type) is added there on purpose, never misspelled into
+  place. Read the values off the city's rows in tables A and B of
+  `docs/map_inconsistencies.md` (Step 9), so the two agree.
+- **After the map is rendered and committed, run
+  `python scripts/check_ring_shares.py --write`** and commit
+  `app/ring_shares.json`. It counts the city's in-ring share from its map for
+  the same table and the page's share range. The check (in the pre-push hook)
+  refuses a city with no share, or a re-render that moved the counts.
 - **Grep the city page for hardcoded prose** - words like "six lines",
   station counts, "half mile" are literal text, not computed values, and go
   stale when the pipeline changes. Prefer wording that doesn't restate
@@ -642,7 +665,9 @@ clicking each marker opens its page, each switcher works, each map renders).
   ring size or a regional scope. The owner wants this list current as cities
   land, so that "why is this map different?" has one answer when it goes on
   the site. `python scripts/check_inconsistency_list.py` fails until every
-  table has the row.
+  table has the row and the city's `app/cities.py` entry has its three
+  summary fields (Step 8). Check that the fields agree with the rows you just
+  wrote.
 - **Run `python scripts/check_provenance.py` and make it name your city OK.**
   This replaces confirming the rows by eye, because confirming by eye is what
   failed: the sentence below has been in this skill since the start, was

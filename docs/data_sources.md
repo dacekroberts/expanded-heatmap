@@ -98,6 +98,8 @@ together, so a row in either counts and a row in neither still fails.
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
+| Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
+| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London |
 
 ## Business registries
 
@@ -1815,6 +1817,81 @@ into `render_site_notices()`, its businesses part BUILT from
   own name in the raw lists, 2 pins showing their permit type. The lists
   without an individual-operator column cannot be tested (owner accepted
   2026-09-28, disclosed on the page). The verdict is in `DECISIONS.md`.
+
+**57. VBB Verkehrsverbund Berlin-Brandenburg (Berlin) — required, and DISPLAYED**
+(written into `render_site_notices()`; displayed once Berlin lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Berlin rows in
+  [`data_sources/germany.md`](data_sources/germany.md)). VBB's GTFS is CC BY
+  4.0 per VBB's own dataset page (`unternehmen.vbb.de/digitale-services/
+  datensaetze/`; Berlin's CKAN says an unversioned `cc-by`). The credit VBB
+  requests is "VBB Verkehrsverbund Berlin-Brandenburg GmbH" (CKAN's
+  `attribution_text`); CC BY 4.0 adds the licence link, a statement of
+  modification and a reference to the disclaimer VBB supplies ("kann Fehler
+  enthalten und/oder unvollständig sein").
+- **MUST NOT**: imply the map is official VBB information or endorsed by VBB
+  (§2(a)(6)); use VBB's, BVG's or S-Bahn Berlin's logos or line signets
+  (trademarks, not licensed). VBB's website terms (private use only) govern its
+  web pages, not the datasets, and nothing from those pages is reproduced.
+- **IHK Berlin's register needs no notice**: CC0 1.0 on the CSV channel used
+  (dl-de/zero-2.0 on the WFS), neither with any condition. The page carries a
+  courtesy credit, "Business data: IHK Berlin (CC0)" (owner, 2026-09-28), and
+  no IHK logo (CC0 §4(a) releases no trademark).
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py berlin`, run 2026-09-28: the
+  register has no name column of any kind, so 0 pins can show a person's name;
+  every pin's title is one of 208 IHK branch labels. The verdict is in
+  `DECISIONS.md`.
+
+**58. Food Standards Agency (London) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once London lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the London rows in
+  [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md)). The FSA's
+  terms put its FHRS data under the **Open Government Licence v3**: the OGL
+  statement ("Contains public sector information licensed under the Open
+  Government Licence v3.0.") with a link to the licence; the date the
+  information was updated (each borough's extract date, 2026-09-09 to
+  2026-09-16 at the first fetch, on the page and in the notice). No rating,
+  score, FSA imagery or logo is shown, so the imagery conditions do not reach
+  the map. **Credit wording (owner, 2026-09-28)**: "Food Standards Agency, UK
+  food hygiene rating data" - "the FHRS name" may not be used outside its
+  imagery without permission.
+- **Personal data (owner, 2026-09-28)**: the FSA's privacy notice treats a
+  business's name and address as personal data and the OGL does not license
+  it; the project's existing rule applies - home and mobile caterers are out by
+  type, a private-address record (no point, outward postcode only) is never
+  placed, a trading-as name shows the name on the shop.
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py london`, run 2026-09-28: no fallback
+  name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+- **London's rail is OpenStreetMap data** (ODbL, notice 1): the basemap credit
+  covers its stations and track too.
+
+**59. Ordnance Survey (London) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once London lands; Berlin's branch shifts
+this to 59 if it lands first).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28): OS Code-Point Open
+  under the **Open Government Licence v3**; the licence file shipped in the zip
+  (`Doc/licence.txt`) redirects to OGL v3 and carries the statements OS's terms
+  name as required: "Contains Ordnance Survey data © Crown copyright and
+  database right 2026." "Contains Royal Mail data © Royal Mail copyright and
+  database right 2026." "Contains National Statistics data © Crown copyright
+  and database right 2026." OS says derived data (a premises placed at a
+  postcode centroid) is credited. OGL link; no endorsement.
+- **Used for** 2,349 London food storefronts the FSA lists with a full postcode
+  and no point (3.9% of storefront rows); never a private address.
+- **MUST NOT**: imply OS endorsement; use the OS logo; use "Code-Point" (a
+  registered OS mark - trademarks are outside the OGL) in the credit.
+- **The repository carries the credit too** (owner, 2026-09-28): committed
+  `outputs/london/` republishes the derived locations, so README's credits and
+  `data_sources/united-kingdom.md` state the three lines. OS's 48 MB third-party
+  style guide was not read (owner: skip); the notice displays inline and
+  legibly on every page, as every credited source's does.
+- Wording approved by the owner 2026-09-28.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

@@ -936,6 +936,30 @@ Cities built and running end to end (pipeline, map, app page):
   use over MLIT's legal lines, and the map labels its lines by the operators'
   line codes, the full names in the legend (owner).
 
+- **Berlin** - the U-Bahn and the S-Bahn's sixteen lines, cut at the Land
+  boundary; Germany's first and only city (no other chamber or city publishes
+  premises). The register is **a chamber of commerce's membership**, IHK
+  Berlin's, as points with WZ 2025 (NACE Rev. 2.1) classes: no names and no
+  street addresses at all, so a dot shows its kind of business, and the crafts
+  (hairdressers, laundries) belong to a different chamber, so Personal services
+  is partial and says so in its legend. The taxonomy is named for the source
+  kind (`ihk_wz2025`). General non-food retail is excluded as Berlin's
+  catch-all, unlike the other NACE Rev. 2.1 cities (owner). Rail is VBB's GTFS,
+  each line's shape chosen by rule because VBB reissues shape ids; trams are
+  left out (owner); the U6's Tegel branch, closed for works, is drawn as the
+  timetable runs, and step 1 stops when the feed serves it again.
+- **London** - the Underground, DLR, Elizabeth line and the six London
+  Overground lines, cut at Greater London (Tramlink left out, owner); the United
+  Kingdom's first city. **Food only**: the Food Standards Agency's hygiene
+  register, every premises a borough inspects, placed at the FSA's own point or,
+  failing that, at its full postcode's centre (Ordnance Survey's postcode data) -
+  a private address has neither, which keeps home caterers off the map, and food retail is labelled "Food shops" as in Japan. **Rail is
+  OpenStreetMap's**: TfL publishes no GTFS and its API draws straight lines
+  between stations. Each line keeps one direction per branch, eight stations
+  missing from OSM's route data are added from its station records (retired
+  automatically once OSM carries them), and the Elizabeth line and most of the
+  Overground are selected by name because OSM tags them `network=National Rail`.
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises

@@ -1,0 +1,36 @@
+{
+  "fetched_utc": "2026-09-29T00:43:05+00:00",
+  "businesses_url": "https://media.githubusercontent.com/media/IHKBerlin/IHKBerlin_Gewerbedaten/master/data/IHKBerlin_Gewerbedaten.csv",
+  "gtfs_url": "https://www.vbb.de/gtfs",
+  "boundary_url": "https://gdi.berlin.de/services/wfs/alkis_land?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=alkis_land:landesgrenze&OUTPUTFORMAT=application/json&SRSNAME=EPSG:4326",
+  "register_columns": [
+    "opendata_id",
+    "city",
+    "postcode",
+    "latitude",
+    "longitude",
+    "ihk_branch_id",
+    "nace_id",
+    "branch_top_level_id",
+    "employees_range",
+    "ihk_branch_desc",
+    "nace_desc",
+    "branch_top_level_desc",
+    "business_age",
+    "business_type",
+    "Bezirk",
+    "planungsraum_id",
+    "Planungsraum",
+    "Bezirksregion",
+    "Prognoseraum",
+    "Ortsteil"
+  ],
+  "feed_info": {
+    "missing_feed_info": true
+  },
+  "gtfs_calendar": {
+    "start": "20260924",
+    "end": "20261212"
+  },
+  "register_date": "2026-09-01"
+}

@@ -30,6 +30,7 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from components import (  # noqa: E402
+    DIFFERENCES_PAGE,
     EXCLUSIONS_PAGE,
     OVERVIEW_PAGE,
     SITE_NAME,
@@ -66,6 +67,7 @@ set_base_font()
 with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
     st.page_link(OVERVIEW_PAGE, label="← Global View")
     st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
+    st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
 
 st.title("Where this data comes from")
 

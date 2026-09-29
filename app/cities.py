@@ -74,6 +74,13 @@ phone-width clipping above as the known exception (the canvas height is always
 variable). Re-check all three widths after changing any of them, or after
 adding a city whose name is long.
 
+`rail_extra`, `record_kind` and `categories` are the city's row in the summary
+table on the "Why the maps differ" page (pages/92_Why_the_Maps_Differ.py): what
+is drawn beyond the metro, what kind of record the businesses come from, and
+whether all three categories are there. Each must be one of the values
+scripts/check_inconsistency_list.py lists, and is read from the city's rows in
+tables A and B of docs/map_inconsistencies.md.
+
 `MAP_ONLY_NAV` (below) switches the app between two ways of moving around: True
 (the current pilot) hides the sidebar page list and the city switcher on every
 city page, so the map is the only navigation (a city's page opens from its
@@ -95,6 +102,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates (98.4%)",
         "data_age": "Fetched 2026-09-18 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "Tax register",
+        "categories": "All three",
         "blurb": "MTS Trolley (Blue, Orange, Green, Copper, Silver lines)",
         # East of its dot: it sits south-east of Los Angeles, so the two
         # names split left/below rather than colliding.
@@ -110,6 +120,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-19 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "Muni Metro (J Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street) and the F Market & Wharves",
         "label_offset": ("middle", 0, -22),
     },
@@ -123,6 +136,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates; corrupt ones geocoded (98.7%)",
         "data_age": "Fetched 2026-09-19 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "Tax register",
+        "categories": "All three",
         "blurb": "Metro Rail (A, B, C, D, E, K Lines)",
         # BELOW its dot, not west of it. Westward, "Los Angeles" ran off the
         # left edge at phone width - the "flush at 375 px" problem - and
@@ -144,6 +160,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Active licences, fetched 2026-09-20",
+        "rail_extra": "—",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "CTA 'L' (Red, Blue, Brown, Green, Orange, Pink, Purple Lines)",
         # SOUTH of its dot, moved 2026-09-21 for the same pre-emptive reason
         # as Vancouver's. Above its dot this label occupied x 439-510,
@@ -172,6 +191,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates, some geocoded (1.4% lost)",
         "data_age": "Fetched 2026-09-21 (no source date)",
+        "rail_extra": "—",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Subway trunk lines (8 Av, 6 Av, 7 Av, Lexington Av, Broadway, "
                  "Nassau St, Flushing, Crosstown, 14 St-Canarsie) and the Staten "
                  "Island Railway",
@@ -203,6 +225,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register coordinates",
         "data_age": "Active licences, fetched 2026-09-21",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "Two",
         "blurb": "SEPTA Metro — the Market–Frankford and Broad Street Lines, "
                  "plus the subway-surface and Girard Avenue trolleys",
         # East of its dot, third from the top of the eastern column.
@@ -222,6 +247,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Tax year 2026, fetched 2026-09-21",
+        "rail_extra": "—",
+        "record_kind": "Tax register",
+        "categories": "All three",
         "blurb": "Metrorail and Metromover (42 stations across six municipalities)",
         # Below its dot: the widest name here (133 px) and the southernmost
         # city, so the empty canvas beneath it is the only place it fits
@@ -238,6 +266,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        "categories": "Two",
         "blurb": "MBTA rapid transit (Red, Orange, Blue, Green Lines and the Mattapan Trolley)",
         # East of its dot, top of the eastern column - the northernmost of
         # the four, so it takes the largest upward offset.
@@ -253,6 +284,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates, some geocoded (85.8%)",
         "data_age": "Active licences, fetched 2026-09-21",
+        "rail_extra": "—",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "WMATA Metrorail (Red, Blue, Green, Yellow, Orange, Silver "
                  "Lines; the 40 stations inside the District)",
         # East of its dot, bottom of the eastern column - the southernmost
@@ -273,6 +307,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Current-year licences, fetched 2026-09-21",
+        "rail_extra": "—",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "SkyTrain (24 stations across Vancouver and Surrey)",
         # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
         # flag exists. See IN_DEFAULT_VIEW below.
@@ -309,6 +346,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Survey coordinates (100%)",
         "data_age": "2025 survey",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "STM Métro (4 lines) and the REM, 78 stations on the island",
         # OUTSIDE THE DEFAULT VIEW, for the same reason as Vancouver: it keeps
         # fit_view's zoom pinned at 1.4525 so no existing label moves. Its dot
@@ -346,6 +386,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "CTrain (Red and Blue Lines, 45 stations)",
         # Outside the default view, as every non-US city is - it keeps
         # fit_view's zoom pinned at 1.4525 so no existing label moves.
@@ -369,6 +412,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "ETS LRT (Capital, Metro and Valley Lines)",
         # OUTSIDE THE DEFAULT VIEW, like the other three Canadian cities. See
         # IN_DEFAULT_VIEW below.
@@ -391,6 +437,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined by address (93.8%)",
         "data_age": "Current licences, fetched 2026-09-21",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "Retail thin",
         "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT)",
         # OUTSIDE THE DEFAULT VIEW, like the other Canadian cities. Toronto is
         # the closest of the four to the framed region - its longitude sits
@@ -415,7 +464,10 @@ CITIES = [
         "page": "pages/15_Mexico_City_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates (100%)",
-        "data_age": "Fetched 2026-09-22 (no source date)",
+        "data_age": "DENUE May 2026 edition, fetched 2026-09-22",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero",
         "region": "Mexico",
         "country": "Mexico",
@@ -461,7 +513,10 @@ CITIES = [
         "page": "pages/16_Guadalajara_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "Fetched 2026-09-22 (no source date)",
+        "data_age": "DENUE May 2026 edition, fetched 2026-09-22",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Tren Ligero (Líneas 1–4, across four municipios)",
         "region": "Mexico",
         "country": "Mexico",
@@ -508,6 +563,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates (9.2% without, left out)",
         "data_age": "Refreshed daily; fetched 2026-09-22",
+        "rail_extra": "Trams",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal) and Metro "
                  "Ligero line 1, 200 stations inside the city",
         "region": "Europe",
@@ -535,6 +593,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Survey coordinates",
         "data_age": "2022 survey",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metro de Barcelona (L1–L12 across TMB and FGC, plus the "
                  "Montjuïc and Vallvidrera funiculars, 112 stations inside "
                  "the city)",
@@ -564,6 +625,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-22 (no source date)",
+        "rail_extra": "Both",
+        "record_kind": "Property register",
+        "categories": "All three",
         "blurb": "Luas Red and Green Lines, and the DART",
         "region": "Europe",
         "country": "Ireland",
@@ -584,6 +648,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-22 (no source date)",
+        "rail_extra": "—",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
         "region": "Europe",
         "country": "Italy",
@@ -604,6 +671,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined to INSEE's geolocation (99.96%)",
         "data_age": "SIRENE monthly; fetched 2026-09-22",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis) and trams T3a and T3b",
         "region": "Europe",
         "country": "France",
@@ -627,6 +697,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined to INSEE's geolocation (99.94%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "RTM Métro 1–2 and Tramway 1–3",
         "region": "Europe",
         "country": "France",
@@ -664,6 +737,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined to INSEE's geolocation (99.93%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Tisséo Métro A–B, Tramway T1 and the Téléo cable car",
         "region": "Europe",
         "country": "France",
@@ -696,6 +772,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined to INSEE's geolocation (99.98%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "ilévia Métro 1–2 and Tram R–T, across eleven communes",
         "region": "Europe",
         "country": "France",
@@ -714,7 +793,15 @@ CITIES = [
         # 1200. Scored alternatives: due west met Rennes (59.7 x 2.6 px),
         # below covered Paris's marker; up-and-west scores PROBLEMS 0 across
         # 7 regions x 3 widths.
-        "label_offset": ("end", -10, -14),
+        #
+        # TURNED DOWN AND EAST 2026-09-28, when London arrived north-west of
+        # it: the up-and-west pill covered London's marker at every width
+        # whatever London's own label did. Scored as a pair with London's 12
+        # candidates (scratch score_pair.py): lower-right here with London's
+        # label left of its dot is the only pair at PROBLEMS 0 in every region
+        # at 375, 768 and 1200; due east covered Prague's marker, below met
+        # Rennes and covered Paris.
+        "label_offset": ("start", 12, 18),
     },
     {
         "name": "Rennes",
@@ -724,6 +811,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined to INSEE's geolocation (99.97%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "STAR Métro a and b",
         "region": "Europe",
         "country": "France",
@@ -745,6 +835,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined by address (96.8%)",
         "data_age": "Fetched 2026-09-24 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Ruter T-bane 1–5 and Trikk 12, 13, 15, 17, 18, 19",
         "region": "Europe",
         "country": "Norway",
@@ -769,6 +862,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined by address (98.3%)",
         "data_age": "Weekly extract; fetched 2026-09-24",
+        "rail_extra": "Suburban rail",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Metro M1–M4 and S-tog A, B, Bx, C, E, F, H",
         "region": "Europe",
         "country": "Denmark",
@@ -788,6 +884,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined by address (99.99%)",
         "data_age": "As of 2026-08-31",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Metro A, B and C",
         "region": "Europe",
         "country": "Czechia",
@@ -806,6 +905,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register coordinates",
         "data_age": "Live register; fetched 2026-09-24",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and permits",
+        "categories": "Merged",
         "blurb": "Metro 50–54 and 16 tram lines",
         "region": "Europe",
         "country": "Netherlands",
@@ -825,6 +927,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined by address (95.7%)",
         "data_age": "July 2025",
+        "rail_extra": "Both",
+        "record_kind": "Licence register",
+        "categories": "All three",
         "blurb": "Metro A, B, B1, C, Roma–Viterbo and Tram 8",
         "region": "Europe",
         "country": "Italy",
@@ -844,6 +949,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metrô Linhas 1–5 and 15, CPTM Linha 9",
         "region": "South America",
         "country": "Brazil",
@@ -864,6 +972,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "Both",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "MetrôRio 1, 2 and 4, VLT Carioca, SuperVia Deodoro and Saracuruna",
         "region": "South America",
         "country": "Brazil",
@@ -882,6 +993,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metrô BH Linhas 1 and 2",
         "region": "South America",
         "country": "Brazil",
@@ -900,6 +1014,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metrô-DF Linha Verde and Linha Laranja",
         "region": "South America",
         "country": "Brazil",
@@ -918,6 +1035,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metrô Linhas 1 and 2",
         "region": "South America",
         "country": "Brazil",
@@ -936,6 +1056,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metrofor Linha Sul",
         "region": "South America",
         "country": "Brazil",
@@ -954,6 +1077,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Trensurb Linha 1",
         "region": "South America",
         "country": "Brazil",
@@ -974,6 +1100,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "—",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "Metrô do Recife Linhas Centro and Sul",
         "region": "South America",
         "country": "Brazil",
@@ -992,6 +1121,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Census coordinates",
         "data_age": "2022 census",
+        "rail_extra": "Trams",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
         "blurb": "VLT Linhas 1 and 2",
         "region": "South America",
         "country": "Brazil",
@@ -1011,6 +1143,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register coordinates",
         "data_age": "Permits to 2026-09-24 (5-year window)",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and permits",
+        "categories": "Merged",
         "blurb": "RET metro A–E and 9 tram lines",
         "region": "Europe",
         "country": "Netherlands",
@@ -1032,6 +1167,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register coordinates",
         "data_age": "Registers of 2026-09-25",
+        "rail_extra": "Trams",
+        "record_kind": "Food licences",
+        "categories": "Food premises only",
         "blurb": "MTR's eight urban lines and the Light Rail",
         "region": "East Asia",
         # Grouping only - the switcher and the Overview list order by it and
@@ -1051,6 +1189,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined by address (96.8%)",
         "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and licences",
+        "categories": "Merged",
         "blurb": "Rīgas satiksme's seven tram lines",
         "region": "Europe",
         "country": "Latvia",
@@ -1067,6 +1208,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register building points (98%)",
         "data_age": "Updated to 2026-09-24",
+        "rail_extra": "—",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Lines 1–9 and six more subway lines",
         "region": "East Asia",
         "country": "South Korea",
@@ -1084,6 +1228,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined by door plate (92.2%)",
         "data_age": "Register of 2026-09-25",
+        "rail_extra": "—",
+        "record_kind": "Tax register",
+        "categories": "All three",
         "blurb": "Taichung Metro's Green Line",
         "region": "East Asia",
         "country": "Taiwan",
@@ -1102,6 +1249,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined by door plate (93.6%)",
         "data_age": "Register of 2026-09-25",
+        "rail_extra": "—",
+        "record_kind": "Tax register",
+        "categories": "All three",
         "blurb": "The Taoyuan Airport MRT",
         "region": "East Asia",
         "country": "Taiwan",
@@ -1121,6 +1271,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Joined by door plate (91.8-95.0%)",
         "data_age": "Register of 2026-09-25",
+        "rail_extra": "Trams",
+        "record_kind": "Tax register",
+        "categories": "All three",
         "blurb": "Taipei and New Taipei's metro and light rail",
         "region": "East Asia",
         "country": "Taiwan",
@@ -1138,6 +1291,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register building points (99%)",
         "data_age": "Rows end 2025-08-31",
+        "rail_extra": "—",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Daegu Metro Lines 1–3",
         "region": "East Asia",
         "country": "South Korea",
@@ -1154,6 +1310,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Register building points (99%)",
         "data_age": "Frozen at 2026-04-15",
+        "rail_extra": "—",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Busan Metro Lines 1–4 and the Busan–Gimhae LRT",
         "region": "East Asia",
         "country": "South Korea",
@@ -1180,6 +1339,9 @@ CITIES = [
         "coverage": "full",
         "placement": "Register coordinates",
         "data_age": "DENUE May 2026, fetched 2026-09-27",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
         "blurb": "Metrorrey (Líneas 1–3, across four municipios)",
         "region": "Mexico",
         "country": "Mexico",
@@ -1201,6 +1363,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined to address blocks (97.3%)",
         "data_age": "Permits in force 2026-03-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Kobe's subway, the Port and Rokkō Liners, and JR and private railways",
         "region": "East Asia",
         "country": "Japan",
@@ -1218,6 +1383,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined to address blocks (99.1%)",
         "data_age": "Permits as of 2026-06-30",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Osaka Metro and the New Tram, JR, and the private railways and Hankai tram",
         "region": "East Asia",
         "country": "Japan",
@@ -1242,6 +1410,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined to address blocks (86.0%)",
         "data_age": "Permits as of 2026-03-31",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Sapporo Municipal Subway, the streetcar, and JR Hokkaido's lines",
         "region": "East Asia",
         "country": "Japan",
@@ -1261,6 +1432,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined to address blocks (98.1%); ministry coordinates where missed",
         "data_age": "Permits as of 2026-08-31; ministry filings fetched 2026-09-27",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Fukuoka City Subway, and JR Kyushu's and Nishitetsu's lines",
         "region": "East Asia",
         "country": "Japan",
@@ -1282,6 +1456,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined to address blocks (93.2%)",
         "data_age": "Rebuilt from permits to 2026-07-31 (an upper bound)",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "Kyoto City Subway, JR West, Keihan, Hankyu, Kintetsu, the Randen and Eiden",
         "region": "East Asia",
         "country": "Japan",
@@ -1304,6 +1481,9 @@ CITIES = [
         "coverage": "narrowed",
         "placement": "Joined to address blocks (99.7%)",
         "data_age": "Ward lists dated 2022-11-30 to 2026-09-02",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
         "blurb": "JR East, Tokyo Metro, Toei, Tokyu, Keio, Odakyu, Seibu, Tobu, Keisei, Keikyu and five more; "
                  "business data for 8 of the 23 wards",
         "region": "East Asia",
@@ -1316,6 +1496,56 @@ CITIES = [
         # and this sits nearer its dot. check_macro_labels.py: clear at 375,
         # 768 and 1200.
         "label_offset": ("start", 12, -14),
+    },
+    {
+        "name": "Berlin",
+        "lat": 52.52,
+        "lon": 13.405,
+        "page": "pages/56_Berlin_Heatmap.py",
+        # Owner-approved 2026-09-28. rail_extra, record_kind and categories are
+        # the "Why the maps differ" page's fields (worktree-cleanup, landing at
+        # review time); "Chamber of commerce register" and "Personal services
+        # thin" are new allowed values there.
+        "coverage": "narrowed",
+        "placement": "Register coordinates",
+        "data_age": "As of 2026-09-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Chamber of commerce register",
+        "categories": "Personal services thin",
+        "blurb": "U-Bahn U1–U9 and 16 S-Bahn lines",
+        "region": "Europe",
+        "country": "Germany",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured at 38.8 px in the app's own document (2026-09-28, five
+        # entries reproduced), and check_macro_labels.py passes every region
+        # at 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "London",
+        "lat": 51.5074,
+        "lon": -0.1278,
+        "page": "pages/57_London_Heatmap.py",
+        # Owner-approved 2026-09-28. rail_extra, record_kind and categories are
+        # the "Why the maps differ" page's fields (worktree-cleanup, landing at
+        # review time); "Food hygiene register" is a new allowed value there.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (91%) and postcode centres (4%)",
+        "data_age": "Extracts of 2026-09-09 to 2026-09-16",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Underground, DLR, Elizabeth line and 6 Overground lines",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Left of the dot, and SCORED: the label width was measured at 50.9 px
+        # in the app's own document (2026-09-28, five entries reproduced).
+        # Above met Amsterdam and Rotterdam; below and right met Rennes or
+        # Lille. With Lille's label turned down and east, left of the dot is
+        # PROBLEMS 0 in every region at 375, 768 and 1200.
+        "label_offset": ("end", -10, 5),
     },
     {
         "name": "Buenos Aires",

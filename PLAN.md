@@ -25,7 +25,7 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   `gtfs-openov-nl.zip`) and `data/rome/raw/rome_static_gtfs.zip` (46.8 MB,
   downloaded, then not used) may be deleted from the main checkout.
 
-- [ ] **Tokyo's page scrolls sideways on a phone** (deploy-verify at review
+- [x] **Tokyo's page scrolls sideways on a phone** FIXED at review time 2026-09-28 (a table that scrolls inside itself, `components.scroll_table`; deploy-verify: 375 and 343 px pass). (deploy-verify at review
   time, 2026-09-28): at 375 px its ward-share table is 469 px wide in a 343 px
   column, so the "The list" column is off screen until the reader scrolls. A
   layout fix for the next `app/` batch (a table that scrolls inside itself, or
@@ -38,8 +38,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   pass) until the owner decides.
 
 - [ ] ⏸ **Per-city restriction disclosures, on every city's page (owner,
-  2026-09-28). WAITS until every Japanese city is built** (Fukuoka, Kyoto,
-  Tokyo); the prose edits come then, drafted in chat for the owner. **Before
+  2026-09-28). UNBLOCKED 2026-09-28: every Japanese city is built** (Tokyo
+  landed); the prose edits are drafted in chat for the owner. **Before
   any drafting, the owner looks over the live pages and gives general advice
   first (owner 2026-09-28): ask for it, then wait.** Four
   facts per city, which the macro map's tooltip may also carry:
@@ -100,17 +100,14 @@ Desktop is unaffected — the label is fully visible there.
   The macro map's marker and label colours now come from `pipeline/theme.py`;
   measure them against the dark page (`#0B1220`) numerically, not by eye.
 
-- [ ] **⏸ AFTER THE LAST VIABLE BUILD: put the cross-city inconsistency list
-  on the site** (owner, 2026-09-24).
-  - **The list**: `docs/map_inconsistencies.md` (draft, kept current by
-    Cleanup) is one place that answers "why does this map differ from that
-    one": what each map draws and what is missing, city by city. Readers should
-    not have to read each city's prose to learn it.
-  - **Placement is deliberately undecided.** The owner wants reminding only
-    once every valid build is done: presentation cleanup (mostly prose and UI)
-    comes after all the content is on the maps.
-  - **Until then**: keep the draft current as cities land, and don't raise
-    placement early.
+- [ ] **Put the cross-city inconsistency list on the site** (owner, 2026-09-24).
+  LANDED at review time 2026-09-28, waiting for the reboot and the live check: page 92 "Why
+  the maps differ", linked from every page's footer; the owner's shape and
+  approved text are in DECISIONS (2026-09-28). `docs/map_inconsistencies.md`
+  stays internal as its evidence and is still kept current as cities land. A
+  new city now also needs `rail_extra`, `record_kind` and `categories` in
+  `app/cities.py` and a `check_ring_shares.py --write` (both checks are in the
+  hook). Tick this once it is live.
 
 - [ ] **🇲🇽 MONTERREY (REGIONAL) - BUILT 2026-09-27 on branch `worktree-monterrey`, HELD for a
   batch publish with a few smaller cities (owner): 58,565 storefronts, 38 stations, Metrorrey
@@ -378,6 +375,24 @@ evidence section.
   the Hong Kong / Riga `thin()` port - is OFF the queue; its items stay below,
   measured and unqueued, until the owner puts any back. (Before: Sapporo,
   Fukuoka, Kyoto, then Tokyo - all built.)
+- [x] **Berlin built 2026-09-28** (`worktree-berlin`, held for review time):
+  60,313 storefronts, 275 stations, 25 lines; texts owner-approved (DECISIONS).
+  - [x] LANDED at review time 2026-09-28 by cleanup, with London, page 92 and the Tokyo table fix (DECISIONS); deploy-verify `city-added` plus extras passed; waiting for the owner's reboot and the live check.
+  - [ ] **When the U6 reopens to Alt-Tegel (about August 2027)**: step 1 stops
+    on the refetch that serves it; take the five stations out of
+    `config.CLOSED_FOR_WORKS` and re-run steps 1-3.
+  - [ ] Monthly: IHK updates the register on the 1st; VBB's calendar ends
+    2026-12-12, so refetch before then.
+- [x] **London built 2026-09-28** (`worktree-london`, held for review time;
+  Berlin is on `worktree-berlin`): 54,241 food storefronts, 387 stations, 19
+  lines; texts owner-approved (DECISIONS).
+  - [x] LANDED at review time 2026-09-28 by cleanup, with Berlin, page 92 and the Tokyo table fix (DECISIONS); deploy-verify `city-added` plus extras passed; waiting for the owner's reboot and the live check.
+    London's notices are 58 (FSA) and 59 (Ordnance Survey); Berlin's VBB is 57.
+  - [x] Placed 2026-09-28 (owner): 2,349 of the 5,350 storefronts the FSA
+    gives no point sit at their postcode's centroid (OS Code-Point Open, notice
+    59); 3,001 (5.0%) stay unplaced; never a private-address record.
+  - [ ] Refetch before the FSA extracts age: `fetch_sources.py --force`; if OSM
+    starts carrying one of the eight added stations, step 1 stops and says so.
 - [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
   28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
   - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
@@ -440,7 +455,8 @@ brief names.
   densest, and it benefits most from a Japan skill written off the first four.
   Kyoto sits after Fukuoka, before Tokyo (owner, 2026-09-24): Japan's first
   rebuilt register benefits from the join being settled on four cities first.
-- [ ] **Tokyo — the missing wards as a planned project, before its build.**
+- [ ] **Tokyo — the missing wards as a planned project.** Tokyo was built
+  2026-09-28 with 8 of the 23 wards; this item now adds wards to a live map.
   Chiyoda alone lifts urban station coverage from 45% to 56%; Chiyoda,
   Toshima and Bunkyō reach 67%; all 23 wards reach 98% (`tokyo.md`).
   Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
@@ -628,6 +644,11 @@ every key, account and letter:
   whether to include them.
 - [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
   the caveat needs to be visible on the city page.
+- These three are the only maps whose lean the city page does not state
+  (`docs/map_inconsistencies.md` theme 10). The "Why the maps differ" page
+  (page 92) hedges around them: "Where it is known, each city's page says
+  which way its map leans." Once all three pages carry their caveat, that
+  sentence can drop its hedge (published wording: owner's call).
 
 ## Later / maybe
 

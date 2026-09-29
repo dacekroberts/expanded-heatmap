@@ -47,7 +47,7 @@ own, not the operators'; with this many lines, a few labels stand a little off t
 Businesses come from Osaka City's list of food-business permits (as of 30 June 2026) and its
 registers of barbers, beauty salons and laundries (as of 31 March 2026). Japan has no general
 business licence, so shops other than food shops — clothing, electronics, pharmacies — do not
-appear: the Retail layer is food retail only (bakeries and confectioners, delis, butchers and
+appear: the Food shops layer is food retail only (bakeries and confectioners, delis, butchers and
 fishmongers). Food businesses that only notify the city rather than hold a permit, such as many
 convenience stores and greengrocers, are not in the list, nor are linen-supply laundries, which
 serve hotels and hospitals rather than the public. The list may include premises that have closed,

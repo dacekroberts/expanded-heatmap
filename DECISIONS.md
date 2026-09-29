@@ -20,20 +20,39 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**123 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**142 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
 - [Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)](#2026-09-28---buenos-aires-taxonomy-385-survey-subtypes-mapped-five-scope-calls-owner)
+- [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
+- [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
+- [London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too](#2026-09-28---londons-unplaced-storefronts-placed-at-postcode-centroids-owner-2349-more-notice-58-for-ordnance-survey-the-credit-in-the-repository-too)
+- [Summary-table values for Berlin and London; "Food licences only" renamed "Food premises only" (owner)](#2026-09-28---summary-table-values-for-berlin-and-london-food-licences-only-renamed-food-premises-only-owner)
 - [Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)](#2026-09-28---kolkata-and-chennai-discarded-the-large-transit-gaps-never-screened-list-is-empty-owner)
+- [London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London](#2026-09-28---londons-page-notice-57-macro-entry-and-disclosures-written-owner-approved-lilles-macro-label-turned-for-london)
 - [Glasgow to Band B, food only; Bengaluru to Band D (owner)](#2026-09-28---glasgow-to-band-b-food-only-bengaluru-to-band-d-owner)
+- [London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule](#2026-09-28---londons-rail-built-from-osm-gate-3-exact-its-map-rendered-and-checked-the-tfl-licence-read-abandoned-as-unnecessary-a-trading-as-display-rule)
 - [Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)](#2026-09-28---six-small-networks-screened-tashkent-hanoi-and-ho-chi-minh-city-to-band-d-baku-panama-city-and-caracas-discarded-owner)
 - [Perth and Ankara to Band N (owner)](#2026-09-28---perth-and-ankara-to-band-n-owner)
 - [Sydney found on a re-probe and Newcastle, both to Band B; Bangkok and Riyadh to Band D; Doha discarded (owner)](#2026-09-28---sydney-found-on-a-re-probe-and-newcastle-both-to-band-b-bangkok-and-riyadh-to-band-d-doha-discarded-owner)
+- [London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)](#2026-09-28---londons-rail-underground-dlr-elizabeth-line-and-the-six-overground-lines-tramlink-left-out-owner)
+- [London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)](#2026-09-28---londons-licence-calls-the-existing-personal-information-rule-and-the-credit-food-standards-agency-uk-food-hygiene-rating-data-owner)
+- [London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)](#2026-09-28---london-started-on-its-own-branch-the-fsa-files-downloaded-placement-measured-ring-coverage-by-rail-tier-the-fsa-licence-read-owner-calls-pending)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
+- [Berlin's page, notice 57, macro entry and disclosures written (owner-approved); the exposure verdict; a "closed for works" station category](#2026-09-28---berlins-page-notice-57-macro-entry-and-disclosures-written-owner-approved-the-exposure-verdict-a-closed-for-works-station-category)
+- [Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver](#2026-09-28---berlins-map-rendered-shapes-chosen-by-rule-a-served-share-rule-for-diversions-colours-by-the-shared-search-a-legend-that-fits-the-solver)
+- [Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green](#2026-09-28---berlins-rail-scope-u-bahn-and-s-bahn-no-trams-the-u6s-tegel-branch-drawn-as-the-timetable-runs-owner-steps-1-and-2-green)
+- [Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)](#2026-09-28---berlins-calls-47122-excluded-personal-services-drawn-as-a-partial-bucket-trams-on-ring-numbers-both-downloads-approved-owner)
 - [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
+- [Cleanup follow-ups: two wordings approved, the japan worktree retired, the Japan list proved](#2026-09-28---cleanup-follow-ups-two-wordings-approved-the-japan-worktree-retired-the-japan-list-proved)
+- ["Chamber of commerce register" added to the summary table's record kinds (owner)](#2026-09-28---chamber-of-commerce-register-added-to-the-summary-tables-record-kinds-owner)
+- [Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner](#2026-09-28---berlins-brief-written-both-licences-read-the-register-is-nace-rev-21-personal-services-partial-four-calls-for-the-owner)
+- ["Why the maps differ" built (page 92), waiting for review time](#2026-09-28---why-the-maps-differ-built-page-92-waiting-for-review-time)
 - [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
 - [China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)](#2026-09-28---china-ruled-out-as-a-country-after-a-feasibility-gate-hangzhous-opening-noted-legal-barriers-high-owner)
+- ["Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting](#2026-09-28---why-the-maps-differ-page-shape-decided-owner-the-inconsistency-list-re-checked-before-drafting)
 - [Berlin's personal-services gap corrected: only hairdressers and laundries are missing](#2026-09-28---berlins-personal-services-gap-corrected-only-hairdressers-and-laundries-are-missing)
 - [Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)](#2026-09-28---delhi-and-mumbai-re-screened-on-their-city-hosts-delhi-to-band-d-mumbai-discarded-owner)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
@@ -160,6 +179,55 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-28 - Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)
+
+- **Merged into `worktree-cleanup` as real merges**: `worktree-london`
+  (e084a5e, which carried master b3a9bc4), then `worktree-berlin` (bb9876d),
+  then master's band restructure (611a8f5). The build session froze both
+  branches first. It confirmed in its own session, where the data is, that
+  each city's data-bound gate steps had passed: drift check zero, the
+  personal-exposure verdict in DECISIONS, and `brief_check` 11/11 for Berlin
+  and 4/4 for London.
+- **Conflicts:**
+  - 13 files in the Berlin merge, every one both cities adding at the same
+    point. Both were kept, Berlin first (built first; Germany precedes the
+    United Kingdom in country order). Berlin's "London next" item in
+    `PLAN.md` was dropped as obsolete.
+  - `docs/city_master_list.md` took master's restructured bands (A 1 · B 10
+    · C 7 · D 6 · R 12 · T 51, 55 built). London's and Berlin's moves to
+    Built were then re-applied on top: 57 built across 19 countries, 85
+    candidates, B 8. `check_master_list_counts.py` agrees.
+  - `DECISIONS.md` was resolved with `merge_append_only.py` each time.
+- **Notices:** both branches had numbered their first notice 57. Berlin's VBB
+  keeps 57, and London's are renumbered 58 (Food Standards Agency) and 59
+  (Ordnance Survey), in `docs/data_sources.md`, `docs/data_sources/united-kingdom.md`
+  and `app/components.py`'s comments. `check_provenance.py` passes.
+- **Also in the batch:**
+  - Tokyo's ward table now scrolls inside its own box
+    (`components.scroll_table`, which page 92's table now also uses).
+  - The six Japanese pages say "the Food shops layer", as their legends do
+    (owner-approved wording).
+  - `app/ring_shares.json` was regenerated for 57 cities; Berlin is 82% and
+    London 74%.
+- **Gate:**
+  - `check_all.py` 24/24 on the merged commit, `check_deploy_imports.py`
+    clean, and `check_macro_labels.py` PROBLEMS 0 across 10 regions × 3
+    widths.
+  - `deploy-verify` ran `scope: city-added` for Berlin and London, not
+    `full`. The only changed outputs were `berlin/` and `london/`, so every
+    other map was byte-identical to maps already passed. The added extras:
+    page 92 at 375 px and desktop (57 rows, no page-level sideways scroll,
+    dark mode), page 91's "Closed for works" table, the footer link on
+    Overview, Chicago and Madrid, page 90's links, Tokyo at 375 and 343 px,
+    and the DENUE tooltips.
+  - All passed at 482ede1. The Japanese wording commit came after; it swaps
+    two words on six pages, and the files compile.
+- **Noticed, not changed:** Monterrey's tooltip reads "DENUE May 2026,
+  fetched 2026-09-27", without "edition", unlike Mexico City and Guadalajara.
+  This is published wording and is left for the owner.
+- **Next:** the owner reboots (the batch changes `app/cities.py`,
+  `app/components.py` and `app/station_scope.py`), then the live site is
+  checked, including one city nobody touched.
 ### 2026-09-28 - Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)
 
 - **Mapped every `TIPO2` among Buenos Aires' 87,028 active UNICOMERCIAL
@@ -193,6 +261,112 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `route=tram` relations, ref P, colour #F38733, network "Subte de Buenos
   Aires". The count needs the parcel join and waits for the machine's heavy
   job to end. The Tramway Historico (heritage) is out regardless.
+### 2026-09-28 - Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)
+
+- **Moved Kaohsiung, Tallinn and Sendai from D to R, and renamed R
+  "restricted or request only" (owner's call).** Each waits on an
+  institution's reply: Kaohsiung on a request to the city's civil affairs
+  bureau for its door-plate file, Tallinn on an emailed order for the
+  building register (its food file is also geo-blocked), and Sendai on the
+  city's permission. The owner's reasoning: waiting on a bureaucratic
+  response takes the push past the block out of the owner's hands, as a
+  geo-block does. **Standing rule: every future request-only city goes to
+  R, not D.**
+- **Band D is now only what the owner can clear alone:** Lisbon (a free
+  account), Delhi (a CAPTCHA on MCD's register), and Ho Chi Minh City (a
+  CAPTCHA on the catalogue). Counts: A 1 · B 10 · C 7 · D 3 · R 15 · T 51 =
+  87. Files: `docs/city_master_list.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)
+
+- **Split Band D by who can move it (owner's call).**
+  - **D keeps the six cities that something the owner can do from here
+    would unblock:** Kaohsiung (a request to the civil affairs bureau),
+    Lisbon (a free account), Tallinn (an order by email), Sendai (the
+    drafted permission request), Delhi (a CAPTCHA on MCD's register) and Ho
+    Chi Minh City (a CAPTCHA on the catalogue).
+  - **New Band R, "restricted", holds the twelve the project cannot move:**
+    ten geo-blocks (Warsaw, Hyderabad, Helsinki, Dubai, Bengaluru, Bangkok,
+    Riyadh, Tashkent, Hanoi, Gimhae) and two residency walls (Daejeon,
+    Gwangju). The project uses no VPN, proxy or account.
+  - **The CAPTCHA precedent is Bucharest's:** the owner passes it in their
+    own browser and fetches; the project never replays a session. The
+    owner's question was whether a CAPTCHA only needs a human, and it does,
+    subject to export volume (Delhi's register exports trade × zone × year)
+    and a licence read of whatever is fetched.
+- **Retooled Band N as C, "closer to a page" (owner's call).** The same seven
+  cities (Singapore, Yokohama, Palma, Baltimore, Istanbul, Perth, Ankara) sit
+  higher, because they are likelier to become buildable than a blocked city.
+  The letter C had closed earlier the same day.
+- **Section order is now A, B, C, D, R, T** (R after the others, ahead of T).
+  The master list reads A 1 · B 10 · C 7 · D 6 · R 12 · T 51 = 87
+  candidates.
+- **The check was changed to match.**
+  - `scripts/check_master_list_counts.py`: `LETTERS = "ABCDRT"`, and its
+    second hard-coded letter string now reads `LETTERS`.
+  - `scripts/check_master_list_counts_selftest.py`'s `drop_bands` now
+    renames every `## <marker> Band X` heading by regex instead of naming
+    each band, so a new band cannot leave one heading recognised and the
+    vacuous-pass case silently passing (that is what failed first).
+  - The new C heading first mentioned "Band N" in its parenthesis, and the
+    check's heading regex reads the last "Band X" on the line. The heading
+    was reworded.
+  - These are script changes going to master from staging, under the
+    owner's approval of the restructure. Files:
+    `docs/city_master_list.md`, `docs/global_transit_gap.md`,
+    `docs/handoff_staging_2026-09-28.md`, both scripts.
+### 2026-09-28 - London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too
+
+- **Decided (owner)**: a storefront the FSA gives a FULL postcode and no point
+  is placed at that postcode unit's centroid, from Ordnance Survey's Code-Point
+  Open (14,461,176 bytes, edition 2026-08, download approved). Of the 5,350
+  without a point: **2,349 placed**; 220 full postcodes absent from the edition,
+  11 outward codes only and 2,770 with no usable postcode stay unplaced (3,001,
+  5.0%). An outward code or none is how the FSA publishes a private address, so
+  **no private address is placed** (the owner's rule). Only units in a London
+  borough (district E09) are used. Placed overall: 91.0% at the FSA's point +
+  3.9% at a centroid = 94.9%.
+- **Control (address-join)**: for 53,855 storefronts with both an FSA point and
+  a full postcode, the centroid lies a median 11 m from the FSA point, 83.6%
+  within 50 m, 94.6% within 100 m (p95 104 m) - fine against a 966 m ring.
+  Step 2 writes each row's tier (`placement`: fsa_point / postcode_centroid).
+- **Licence (`licence-read`)**: OGL v3, PERMITTED WITH CONDITIONS; the three
+  statements from the licence file OS ships (which its terms name as the
+  authority), all mandatory for Code-Point Open and for derived data. **Notice
+  58** (owner-approved) carries them with the OGL link and no endorsement,
+  without the product's registered name. **The repository carries them too**
+  (owner): README's credits and `data_sources/united-kingdom.md`, since
+  committed `outputs/london/` republishes the derived locations. OS's 48 MB
+  third-party style guide was not read (owner: skip).
+- **Wording (owner-approved)**: the page's placement sentences; notice 57's
+  "placed at their postcode's centre, or left out where they have no full
+  postcode"; the macro placement phrase "Register coordinates (91%) and postcode
+  centres (4%)". Tables B-D, theme 10 and the exclusions follow: in-ring pins
+  food shops 12,399, food service 29,255 (41,654, 73.6%); 56,590 storefronts.
+- **London's categories value is "Food premises only"** (owner, confirming
+  Cleanup's relayed rename: the FSA records inspections, not licences).
+
+### 2026-09-28 - Summary-table values for Berlin and London; "Food licences only" renamed "Food premises only" (owner)
+
+- **Three changes to the allowed values in `scripts/check_inconsistency_list.py`,
+  on the owner's yes in this session.** The build session had relayed the
+  first two as owner-approved there; they were confirmed here before
+  anything was added, because a peer's report is not the owner's approval.
+  - **`"Personal services thin"`** (categories, needs `narrowed`), for Berlin.
+    IHK Berlin's register draws all three categories, but it has no crafts,
+    so hairdressers and laundries are missing. The note under page 92's
+    table now reads: "'Retail thin' or 'Personal services thin' means that
+    layer holds only part of its trades, such as the ones the city licenses"
+    (owner-approved wording).
+  - **`"Food hygiene register"`** (record kind), for London: the FSA's food
+    hygiene rating register, which records inspections, not licences.
+  - **`"Food licences only"` renamed `"Food premises only"`**, in the check,
+    in Hong Kong's `app/cities.py` entry and in the `add-city` skill. London's
+    register is not a licence list, so the old label would have misdescribed
+    it. Rejected: keeping the old label and accepting the loose fit for London.
+- Berlin's and London's branches must use `"Personal services thin"` and
+  `"Food premises only"`. The build session was told. Both land at review time.
 
 ### 2026-09-28 - Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)
 
@@ -220,6 +394,36 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   discards. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+### 2026-09-28 - London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London
+
+- **Approved by the owner and written**: the page text
+  (`app/pages/57_London_Heatmap.py`, a snapshot caption from
+  `outputs/london/provenance.json` - the 33 boroughs' own extract dates,
+  2026-09-09 to 2026-09-16, now recorded by `fetch_sources.py`); **notice 57**
+  (the FSA: "Food Standards Agency, UK food hygiene rating data", the OGL v3
+  statement linked, the extract dates, what was modified, no rating, no
+  endorsement) in `app/components.py` and `docs/data_sources.md` - Berlin's
+  branch also uses 57, so whichever lands second renumbers (PLAN); the
+  `app/cities.py` entry (coverage narrowed, placement "Register coordinates
+  (91%)", data age "Extracts of 2026-09-09 to 2026-09-16", blurb "Underground,
+  DLR, Elizabeth line and 6 Overground lines", rail_extra "Suburban rail",
+  record_kind "Food hygiene register" - a new value, sent to Cleanup -
+  categories "Food licences only"); London's section in
+  `docs/excluded_categories.md`; its rows in tables A-D and themes 1-4, 9 and
+  10 of `docs/map_inconsistencies.md` (in-ring pins: food shops 11,984, food
+  service 28,010); `docs/data_sources/united-kingdom.md` and its index row;
+  the master list (built 56, Band B 6, candidates 75 on this branch), README,
+  project context and PLAN.
+- **London's macro label sits left of its dot, and Lille's is turned down and
+  east** (`("end", -10, 5)` and `("start", 12, 18)`): London measured 50.9 px in
+  the app's document (five entries reproduced). Above, London met Amsterdam and
+  Rotterdam; and in all eight London placements Lille's up-and-west pill
+  covered London's marker. Scored as a pair (12 combinations), this is the only
+  one at PROBLEMS 0 in every region at 375, 768 and 1200. Berlin's label, on its
+  own branch, was scored against Lille's old placement: re-score after both land
+  (PLAN).
+- One quick render of the London page in the lean app: the approved text, the
+  caption with both dates, notice 57 displayed.
 
 ### 2026-09-28 - Glasgow to Band B, food only; Bengaluru to Band D (owner)
 
@@ -237,6 +441,50 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   screen of those two. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - London's rail built from OSM (gate 3 exact), its map rendered and checked; the TfL licence read abandoned as unnecessary; a trading-as display rule
+
+- **Stations and track from OpenStreetMap, not TfL.** TfL publishes no GTFS;
+  its Unified API lists the 19 lines' stops but its "lineStrings" are
+  station-to-station straight lines (Victoria: 16 points for 16 stations), so
+  track had to be OSM's regardless. The `licence-read` of TfL's terms stalled
+  41 minutes on tfl.gov.uk's Cloudflare challenge and was stopped; with OSM
+  supplying stations too, nothing of TfL's is stored or published, and its API
+  served only a scratch cross-check of the Overground's stop lists.
+- **Step 1 (`pipeline/london/step1_stations.py`)**: 171 relations (one stray
+  Windrush relation from Battersea Park skipped by name - TfL's Windrush list
+  has no such stop). Lines: per line, the longest relation, then only
+  relations adding >= 1 km of track > 300 m from what is chosen, and only
+  their NEW part (merging everything had doubled Central to 127 km; lengths now
+  match the networks - Victoria 22.1, DLR 40.1, Elizabeth 89.5 km inside
+  Greater London). Stations: route-relation stop members, names normalised
+  (platform suffixes; aliases London Paddington / Euston / Liverpool Street,
+  Custom House for Excel, Cutty Sark for Maritime Greenwich), split where a
+  name's stops are > 400 m apart (Bethnal Green's two). **Eight stations OSM's
+  relations omit are added from their station nodes** (North Ealing, South
+  Harrow; Woolwich Arsenal; Hatch End, Watford High Street, Upper Holloway,
+  Wood Street, St James Street), and step 1 stops once OSM carries any.
+  **Gate 3 exact on 14 counts** against English Wikipedia (secondary):
+  Underground per line (Circle 35, the table's 36 counting Paddington twice),
+  DLR 45, Elizabeth 41; the Overground 112 against TfL's own stop lists (the
+  article's 113 is one more than TfL's). **387 stations inside Greater
+  London**, 32 outside -> `outputs/london/excluded_stations.csv`; median
+  spacing 737 m.
+- **Colours** from `scripts/line_colour_search.py london` with TfL's colours
+  (OSM `colour`) as hues: closest pair within 500 m 18.3, anywhere 10.5. The
+  Piccadilly reads mauve (the Retail pins own its blue) and the Northern grey.
+  Labels are short names, the legend full names (`legend_names`, capped at 274
+  px).
+- **Rendered**: 39,994 of 54,240 storefronts in the rings (73.7%), 387
+  stations, 19 lines. Browser: 0 label problems at 1000, 343, 375 and 1280 px;
+  zoom as expected; dark toggle; OSM credit visible at 1280x800 and 375x900;
+  no console errors. `check_inline_arrays`, `check_map_markup` pass.
+- **Exposure (`check_personal_exposure.py london`)**: no fallback name exists;
+  0 emails or phone numbers. The person-name heuristic's 24.4% is almost all
+  two-word trade names on a 40-name sample (Caffe Nero, Royal Tandoori, Boots
+  UK). The structural guard is the FSA's: a private address gets no point and
+  is never placed. **A trading-as rule** (the existing rule, owner): 186 names
+  of the form "X T/A Y" or "Person trading as Y" show Y, the name on the shop.
 
 ### 2026-09-28 - Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)
 
@@ -334,6 +582,72 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   licence). Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+### 2026-09-28 - London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)
+
+- **Decided (owner), as recommended**: the Underground (11 lines), the DLR,
+  the Elizabeth line and all six Overground lines, cut at Greater London -
+  73.9% of placed storefronts in the 0.6 mi rings on the tier measurement.
+  The Elizabeth line and the Overground run like Berlin's S-Bahn inside London
+  (the suburban-rail test Berlin applied the same day); the DLR is an automated
+  light metro, counted like Montréal's REM. **Tramlink is left out**: +1.0
+  point for about 37 stops, Berlin's trams' trade (+6.9 points left out).
+  Rail is from OpenStreetMap (TfL publishes no GTFS); the Elizabeth line and
+  most of the Overground are tagged `network=National Rail`, so they are
+  selected by name.
+
+### 2026-09-28 - London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)
+
+- **The project's existing rule applies to the FSA register (owner)**: a trade
+  name is shown, never a person's own name at what looks like their home.
+  Concretely: "Other catering premises" and "Mobile caterer", where home
+  caterers sit, stay out of scope (`pipeline/taxonomies/fsa_businesstype.py`);
+  a private-address record, which the FSA publishes with no point and only an
+  outward postcode, is never placed; `check_personal_exposure.py london` runs
+  on what remains. This answers the licence read's point that the FSA treats a
+  name and address as personal data and the OGL does not license it.
+- **The credit reads "Food Standards Agency, UK food hygiene rating data"
+  (owner)**, the FSA's own dataset title on data.gov.uk, with the OGL v3
+  statement linked and the data date: the FSA's terms bar "the FHRS name"
+  outside its rating imagery without permission.
+- **The taxonomy `fsa_businesstype` maps all 14 types** (five storefronts, nine
+  excluded, a new type fails in step 2). Food retail's legend reads "Food
+  shops", the Japanese cities' precedent for a food-only retail layer.
+- The rail tier (the recommendation: Underground, DLR, Elizabeth line and the
+  Overground, without Tramlink - 73.9% of storefronts in the rings) is not yet
+  decided.
+
+### 2026-09-28 - London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)
+
+- **London is built on `worktree-london`, cut from origin/master `e3a48bc`
+  (owner)**, so Berlin's branch stays untouched for its review time. London's
+  page is numbered 57, since Berlin holds 56 on its own branch.
+- **Downloaded (owner's OK)**: the FSA's 33 London authority XMLs, 80,367,855
+  bytes, published 2026-09-17, read from the FSA's own authority list
+  (`pipeline/london/fetch_sources.py`; each file must parse and carry its own
+  authority code). 81,529 rows.
+- **Placement is a smaller question than screened**: the brief's ~20% without
+  coordinates is across every type; the five storefront types (Restaurant/
+  Cafe/Canteen, Takeaway, Pub/bar, Retailers - other, supermarkets) are
+  59,610 rows and **91.0% carry the FSA's own point**. 2,764 have neither
+  point nor postcode. Placed share by borough runs from 74% (Richmond) to 98%
+  (Brent). The FSA point is not a postcode centroid (14.0% of 6,523 postcodes
+  with 3+ storefronts put them on one point). Owner: placement is decided when
+  it comes up.
+- **Ring coverage by rail tier** (OSM route relations' stop nodes inside
+  Greater London, relation 175342, 1,595.5 km²; 0.6 mi): Underground 57.8%, +
+  DLR 59.9%, + Elizabeth line 64.6%, + Overground 73.9%, + Tramlink 74.9%.
+  OSM tags the Elizabeth line and most of the Overground `network=National
+  Rail`, which is why the screen's network filter found 2 of 6 Overground
+  lines; they are selected by name.
+- **The FSA licence read (`licence-read`)**: OGL v3, **PERMITTED WITH
+  CONDITIONS** - "Contains public sector information licensed under the Open
+  Government Licence v3.0." linked, the data date shown, no endorsement, no FSA
+  logo or imagery. Two points for the owner: the FSA's privacy notice treats a
+  business's name and address as personal data and the OGL does not license
+  personal data (sole traders, home caterers); and "the FHRS name" may not be
+  used outside its imagery without permission, so the credit should read "Food
+  Standards Agency, UK food hygiene rating data". Private-address records
+  carry only an outward postcode.
 
 ### 2026-09-28 - Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)
 
@@ -387,6 +701,141 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   now say page reads only. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+### 2026-09-28 - Berlin's page, notice 57, macro entry and disclosures written (owner-approved); the exposure verdict; a "closed for works" station category
+
+- **Approved by the owner and written**: the page text
+  (`app/pages/56_Berlin_Heatmap.py`, with a snapshot caption read from
+  `outputs/berlin/provenance.json` - the register's own date, IHK's last
+  commit of the file, 2026-09-01, and VBB's calendar window 2026-09-24 to
+  2026-12-12 - and the courtesy credit "Business data: IHK Berlin (CC0)");
+  the legend row "Personal services (partial) - WZ 96"; **notice 57** (VBB, CC
+  BY 4.0: credit, licence link, what was modified, the disclaimer, no
+  endorsement) in `app/components.py` and `docs/data_sources.md`; the
+  `app/cities.py` entry (coverage narrowed, placement "Register coordinates",
+  data age "As of 2026-09-01", blurb "U-Bahn U1–U9 and 16 S-Bahn lines",
+  rail_extra "Suburban rail", record_kind "Chamber of commerce register",
+  categories "Personal services thin" - the last a new value, sent to Cleanup
+  for `check_inconsistency_list.py`'s allowed list); Berlin's section in
+  `docs/excluded_categories.md`; its rows in tables A-D and themes 1-4 and 8-11
+  of `docs/map_inconsistencies.md`; `docs/data_sources/germany.md` and its
+  index row.
+- **Table B's note reads "No hairdressers or laundries: crafts are not IHK
+  members"**, which `check_macro_facts.py` reads as structural: a gap by the
+  register's construction, not a thin layer, so "narrowed" (owner) holds under
+  the rule rather than by loosening it. Macro label width measured at 38.8 px
+  in the app's document (Prague, Tokyo, Marseille, Oslo and Copenhagen
+  reproduced); `check_macro_labels.py` PROBLEMS 0 with the default placement.
+- **Exposure verdict (`check_personal_exposure.py berlin`)**: 49,426 pins, 208
+  distinct titles, every one an IHK branch label; 0 person-like names, 0
+  contact details. The 199 "surname-first" hits are labels with commas ("Day
+  Spas, Saunas, Dampfbäder"). No name column exists to fall back to, and the
+  employee band, age and business type never reach `outputs/`. **Publishable.**
+- **`app/station_scope.py` learns "closed for works"** as its own category, and
+  page 91 shows a "Closed for works" column when any city has one: Berlin's five
+  U6 stations were counted as "Other", which `check_scope_disclosure.py`
+  refuses. `counts_for()` returns a fourth count, last, so the first three keep
+  their positions; page 91's sentence gains ", and N closed for works".
+
+### 2026-09-28 - Berlin's map rendered: shapes chosen by rule, a served-share rule for diversions, colours by the shared search, a legend that fits the solver
+
+- **Each line's GTFS shape is chosen by rule in step 1, not pinned by id**:
+  VBB's shape_ids are small integers reissued every release. The rule is a
+  greedy cover of the line's in-Land stations (a shape passes a station within
+  150 m), ties to the most-used shape; step 1 writes
+  `data/berlin/processed/lines.geojson` and step 3 reads it
+  (`load_geojson_line_shapes`, Tokyo's contract). 24 lines need one shape;
+  S85 needs two (its Pankow branch). The plain most-used shape was rejected
+  (S3's is 16 km of 45), and so was the longest (S41's has 8 trips; its ring
+  456).
+- **A station belongs to a line only where >= 10% of the line's trips call**
+  (`config.LINE_STOP_MIN_SHARE`): the feed window carries construction
+  diversions (S3/S5 via Grunewald, ring trains via Charlottenburg, S8 via
+  Gesundbrunnen). 47 station-line pairs fall under it and are printed; no
+  station is served only by them, and both gate-3 counts are unchanged (U-Bahn
+  170, S-Bahn 168).
+- **Line colours from `scripts/line_colour_search.py berlin`** with VBB's GTFS
+  `route_color` as the target hues: VBB colours by family (S2/S25/S26 one
+  green), which the project's CIE76 floors refuse. Closest pair within 500 m
+  18.0 (S46, S47), anywhere 10.3 (U1, S85), every line >= 45.0 from every pin.
+  The pins' blue, pink and green rule out VBB's blues and greens, so U3/S2
+  read olive and S3/U8 grey-blue (Osaka's and Tokyo's trade).
+- **The Personal services legend row is shortened to "(partial)"** (a DRAFT
+  for the owner): "(no hairdressers or laundries)" made the open legend 379
+  px wide against the label solver's 274 px model, and the first render put
+  6 labels under it at the 1000 px frame (U5, S3, S5, S7, S46, S47) - the
+  Tokyo failure, by legend width rather than line names. At 256 px: 0 label
+  problems at 1000, 343, 375 and 1280 px; zoom as expected (10.5 / 9.5); the
+  dark toggle works; the OSM credit is visible at 1280x800 and 375x900; no
+  console errors. `check_inline_arrays` and `check_map_markup` pass (56 maps).
+- **Rendered**: 49,426 of 60,313 storefronts inside a ring (82.0%), 275
+  stations, 25 lines, `outputs/berlin/heatmap.html` 7.2 MB.
+
+### 2026-09-28 - Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green
+
+- **Trams are left out (owner)**, on the ring numbers from the cached register
+  and VBB's GTFS (966 m rings, trams unthinned, so an upper bound): U-Bahn only
+  170 stations, 22.1% of the Land, 65.0% of storefronts; **U + S 275 stations,
+  42.1%, 82.0%** (retail 79.4%, food 87.9%, personal 82.0%); U + S + trams 793
+  stations, 54.2%, 88.9%. Precedent is a full metro beside trams (Paris,
+  Barcelona, Milan, Toronto), not trams as the core network (Amsterdam,
+  Rotterdam, Oslo, Riga). The scope disclosure names the trams.
+- **The U6's Tegel branch is drawn as the timetable runs (owner)**: gate 3
+  found 170 U-Bahn stations in the feed against BVG's 175, and the five
+  missing are Scharnweberstr., Otisstraße, Holzhauser Str., Borsigwerke and
+  Alt-Tegel - closed for works since November 2022, replacement buses until
+  about August 2027 (BVG, "U6-Nord Streckensanierung"). The alternative, the
+  permanent network from OSM, was rejected: it would draw a service that does
+  not run. `config.CLOSED_FOR_WORKS` lists them; step 1 records them as
+  excluded and **stops if the feed serves any again**, so the reopening is a
+  re-run rather than a silent change.
+- **Step 1 (`pipeline/berlin/step1_stations.py`)**: VBB's GTFS (calendar
+  2026-09-24 to 2026-12-12, no `feed_info.txt`); lines matched on route type,
+  agency and short name, never `route_id` (the S-Bahn's 16 lines carry 45
+  route_ids, and each line's replacement buses share its short name under type
+  700). 746 platforms -> 311 stations (median 780 m); gate 3 U-Bahn 170 = 175 -
+  5 closed, S-Bahn 168 = 168 (BVG "BVG in Zahlen" 31.12.2024; S-Bahn Berlin "at
+  a glance"). **275 inside the Land**, 36 in Brandenburg and 5 closed ->
+  `outputs/berlin/excluded_stations.csv`; in-Land median spacing 702 m. Two
+  pairs under 200 m are differently named interchanges (Rathaus Spandau U7 /
+  Spandau S, 159 m; Charlottenburg S / Wilmersdorfer Str. U7, 216 m), kept
+  apart as the operators name them.
+- **Step 2 (`pipeline/berlin/step2_clean_businesses.py`)**: the CSV has
+  368,841 rows (the WFS 367,575 the same day; the CSV is the newer monthly
+  cut), no duplicate ids, `city` "Berlin" on every row. 82,718 storefront rows
+  after the WZ filter (structural exclusions 479, 5612, 562, 564, 964, 9691) ->
+  drop `nace_id` 969* 10,210 and `ihk_branch_id` 47122 12,194 (EXACT match: a
+  prefix match also caught department stores, `471221`, which stay) -> 60,314
+  -> 1 outside the Land polygon -> **60,313 storefronts: retail 38,844, food
+  17,618, personal services 3,851**. Measured, never written out: 57.9% report
+  0 employees (food 45.3%, retail 61.6%, personal services 77.7%).
+- **The taxonomy is `ihk_wz2025`**, named for the source kind rather than the
+  country: WZ 2025 is national, but the missing crafts are a property of any
+  IHK register, and the legend has to say so. Its Personal services legend
+  text is a DRAFT for the owner. A pin's title is IHK's branch label (São
+  Paulo's precedent for a register with no names).
+
+### 2026-09-28 - Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)
+
+- **Decided (owner), all as the brief recommended**:
+  - **IHK's `47122` is Berlin's retail catch-all verdict and is excluded**
+    (12,141 rows, 24% of retail), departing from the Rev. 2.1 precedent of
+    keeping 47.12 (Oslo, Copenhagen, Prague, France) on Berlin's own numbers:
+    91% zero-employee, and a 30 m OSM-shop match (63%) at office level
+    (62-77%) rather than the rest of retail's (81%). `47121` and its siblings
+    stay.
+  - **Personal services is drawn as a partial bucket**, its legend and
+    disclosure saying hairdressers and laundries are not in it (they are
+    Handwerkskammer members). This supersedes the Band B row's "personal
+    services missing" (2026-09-28, "Berlin from the discards to Band B").
+  - **Trams are decided on the ring-coverage numbers**, measured once the
+    register is cached.
+  - **Both downloads approved**: IHK's CSV (126,348,283 bytes, GitHub LFS)
+    and VBB's GTFS (78,379,003 bytes, `www.vbb.de/gtfs`).
+  - **Berlin's `record_kind` is "Chamber of commerce register"**, a new
+    value (Cleanup added it to `check_inconsistency_list.py` on
+    `worktree-cleanup`, `62e6288`).
+- `9699` is excluded class-wide, as in Oslo and Copenhagen (the brief's
+  proposal; prostitution and escort go with it).
 
 ### 2026-09-28 - Algiers: the "no urban rail" misfiling corrected, then discarded (owner)
 
@@ -405,6 +854,133 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `docs/city_master_list.md` (DISCARDED), `docs/global_country_shortlist.md`
   (the no-rail list and Tier 4), `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - Cleanup follow-ups: two wordings approved, the japan worktree retired, the Japan list proved
+
+- **Two wordings approved by the owner.** The note under page 92's city table
+  stands as built. Mexico City's and Guadalajara's `data_age` in
+  `app/cities.py` now read "DENUE May 2026 edition, fetched 2026-09-22", not
+  "Fetched 2026-09-22 (no source date)". The edition is DENUE 05_2026
+  (`docs/data_sources/mexico.md`, the Monterrey row). `check_macro_facts.py`
+  passes, and the phrase's figures appear in table D. Lands at review time
+  with page 92.
+- **`docs/japan_city_list.md` proved.** `scripts/japan_ward_table.py --write`
+  reproduced the committed file exactly, so the hand-edited Tokyo row matches
+  the script. It ran against the shared `data/` in the main checkout, with the
+  eight Japanese folders (`japan`, `mhlw` and the six cities) junctioned into
+  this worktree's own real `data/` for the run (53 s) and unlinked
+  afterwards, and was announced to Berlin build and Staging as a heavy job.
+  This worktree's `data/` is a real folder without them.
+- **The `japan` worktree retired, with the owner's word** (its sessions were
+  closed; none was listed). `worktree-japan` was fully on master
+  (`af68a82`, 0 commits ahead). Its `data/` and `.venv-lean` junctions were
+  unlinked non-recursively, `check_worktree_data.py` found nothing to lose,
+  and it was removed with `git worktree remove` and `git branch -d`. The
+  shared `data/` was checked intact afterwards. Its GitHub branch stays until
+  the owner deletes it.
+- **`PLAN.md` corrected:** the per-city restriction disclosures item is
+  unblocked (every Japanese city is built; the owner's general advice still
+  comes first), and the Tokyo missing-wards item no longer says "before its
+  build". San Francisco's, Los Angeles's and San Diego's undisclosed leans
+  were already open items. They are now tied to page 92's "Where it is
+  known" hedge, which can drop once those pages carry their caveats.
+
+### 2026-09-28 - "Chamber of commerce register" added to the summary table's record kinds (owner)
+
+- **Added `"Chamber of commerce register"` to `record_kind`'s allowed values**
+  in `scripts/check_inconsistency_list.py`, for Berlin, on the owner's
+  approval of the wording. The Berlin build session reported that IHK
+  Berlin's Gewerbedaten is the chamber of commerce's membership list,
+  published as premises points. It is not a licence, permit, national, tax
+  or property register, so none of the existing values fit. Rejected: forcing
+  it into "National register" or "Licence register", which would misdescribe
+  Berlin's map on the public "Why the maps differ" table. No city uses the
+  value yet.
+
+### 2026-09-28 - Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner
+
+- **Wrote `docs/build_briefs/berlin.md`; `brief_check.py berlin` holds 11/11
+  live.** Germany's `add-country` profile is a section of the brief, not a
+  `germany_step0_endpoints.md`: Berlin is the country's only viable city
+  (Munich, Frankfurt, Cologne and Hamburg discarded 2026-09-24 and 2026-09-28),
+  so a country file would serve no second city. Every number came from WFS
+  `RESULTTYPE=hits` counts, spread samples and Overpass reads; nothing large was
+  downloaded. Controls: a nonsense code returns 0, an unknown field errors, each
+  code level's children sum to their parent.
+- **Found `nace_id` to be NACE Rev. 2.1 / WZ 2025 classes at 4 digits, not WZ
+  2008 subclasses**: `5610` has 0 rows and `5611` (56.11 Restaurants, a Rev. 2.1
+  class) 14,962. The finer code is IHK's own `ihk_branch_id` (5-6 digits). So
+  Oslo's, Copenhagen's and Prague's Rev. 2.1 consequences hold: car retail sits
+  in 47, and online shops cannot be excluded by code (no branch label names mail
+  order or online retail). The taxonomy becomes a national
+  `germany_wz2025.py` shaped on `czech_nace2025.py`. Staging corrected its
+  master-list row the same day on this finding.
+- **Found personal services partial, not missing**: beauty 9622 1,792 and
+  spa/sauna/massage 9623 1,595 are IHK members and match OSM shops closely;
+  only hairdressers 9621 (180) and laundries 9610 (215) are missing
+  (Handwerkskammer members). The catch-all 9699 (10,170) is mostly
+  non-premises (trade-fair hosts 1,275, hospitality services 1,630, residual
+  4,419) and holds prostitution 16 and escort 148; excluding it as a class
+  follows Oslo and Copenhagen.
+- **Measured the retail catch-all `47122` (12,141, 24% of retail)**: 91%
+  zero-employee against 57-69% for the rest of retail, evenly spread over the
+  12 Bezirke, and within 30 m of an OSM shop 63% of the time in four station
+  boxes, against 81% for the rest of retail and 62-77% for office controls
+  (divisions 62, 68, 70, 73). Precedent keeps the Rev. 2.1 retail catch-all; the
+  brief recommends excluding it in Berlin on these numbers, as the owner's call.
+- **Licence reads (`licence-read`, one source each)**: IHK's Gewerbedaten is
+  PERMITTED with nothing to display or do (CSV and CKAN CC0 1.0, WFS
+  dl-de/zero-2.0; CC0 releases no trademark, so no IHK logo). VBB's GTFS is
+  PERMITTED WITH CONDITIONS under CC BY 4.0, per VBB's own dataset page (CKAN's
+  `cc-by` is unversioned): the credit "VBB Verkehrsverbund
+  Berlin-Brandenburg GmbH", the licence and source linked, a statement that the
+  data was modified, a reference to VBB's disclaimer, and no implied
+  endorsement. VBB's Linienfarben CSV is under the same grant. Neither source
+  has a `data_sources` row yet; those come with the build.
+- **Rail read from OSM**: U1-U9, the S-Bahn's 16 lines and BVG's 22 tram lines,
+  all with refs. The S-Bahn is drawn on Copenhagen's and Dublin's
+  spacing-and-frequency precedent, cut at the Land border (the register stops
+  there). Trams wait on a ring-coverage measurement.
+- **Open for the owner (brief, "Calls for the owner")**: `47122`; a partial
+  Personal services bucket; trams; and the two downloads (the register CSV,
+  126,348,283 bytes, and VBB's GTFS, 78,379,003 bytes).
+### 2026-09-28 - "Why the maps differ" built (page 92), waiting for review time
+
+- **Built on `worktree-cleanup` with the owner's approved text** (the eleven
+  themes as drafted in chat, with theme 7 opened "How much of a city's
+  storefronts lie near a station", owner's edit). New:
+  `app/pages/92_Why_the_Maps_Differ.py`; `app/ring_shares.json` and
+  `scripts/check_ring_shares.py` (in `check_all.py`); three fields per city in
+  `app/cities.py` (`rail_extra`, `record_kind`, `categories`), with the
+  vocabulary and a `coverage` agreement rule in `check_inconsistency_list.py`.
+  The footer link is in `render_site_notices()`, with top links on pages 90
+  and 91. Page 91's "Commuter rail is excluded everywhere" now reads "left out
+  except where, inside the city, it runs like a metro (*Why the maps differ*
+  says where)", the companion fix approved with the page.
+- **The ring share is counted from the maps, not recorded.** It is the
+  in-ring heat layer's points over the whole-city layer's, found by layer
+  name, as table D counts it. The committed maps are about 212 MB, so
+  `--write` (22 s) stores each map's git blob id. The check compares ids from
+  `git ls-files -s` (0.3 s) and re-reads only a changed map. A re-render that
+  moves no point passes; one that moves a count fails and names `--write`.
+  Controls: a changed id with the same points passed (1 re-read); an
+  off-by-one count failed naming Rennes 2,365 against 2,366; a missing city
+  failed naming Oslo. The 55 shares run 12% (Taoyuan) to 100% (Barcelona,
+  35,936 of 35,958), matching table D.
+- **The table is an HTML table in a scrolling box, not `st.dataframe`**,
+  which drew collapsed on page 91 in the lean venv (2026-09-23), and not a
+  markdown table, which widens the page at 375 px as Tokyo's ward table
+  does. Measured in the lean venv at 375 px: the document is 375 px wide, and
+  the box is 343 px showing a 760 px table. All 55 rows are there.
+- **The field values were read from tables A and B.** "Trams" includes light
+  rail. Montréal's REM, the Busan-Gimhae LRT and Seoul's light metros count
+  as metro, not trams; Taipei's Danhai and Ankeng LRT count as trams. The
+  Japanese cities are "Retail thin" (their layer is labelled "Food shops").
+  The tier rule found no disagreement with `coverage`: "Retail thin" is full
+  in New York and narrowed in Toronto, Korea and Japan, so it may be either.
+- **Checks:** `check_all.py` 24 of 24, `check_deploy_imports.py` clean. One
+  local render in the lean venv, footer link present on the front page. No
+  `deploy-verify`: that runs at review time with the batch.
 
 ### 2026-09-28 - Tehran and Minsk left out like Russia, for wartime concerns (owner)
 
@@ -452,6 +1028,48 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `docs/global_country_shortlist.md` (Tier 4, China),
   `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
+### 2026-09-28 - "Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting
+
+- **The page's shape, owner's yes to all three recommendations.** Placement:
+  its own page beside "About the Data" and "What Is Excluded", linked from
+  `render_site_notices()` in `app/components.py`, which every page already
+  calls; rejected a front-page section (pushes the map down, and a reader
+  arriving on a city page never sees it) and merging into "What Is
+  Excluded" (already long, and most differences are not exclusions).
+  Text: eleven themes (theme 12 is resolved), each a heading and two to four
+  sentences with one to three named examples and no count that grows with
+  the city list. Tables: A-D stay internal as the evidence; the page carries
+  one generated per-city summary table built from `app/cities.py` and the
+  committed outputs, shown with `st.dataframe` so it does not scroll the page
+  sideways at 375 px, and `check_inconsistency_list.py` extended so a city
+  that lands without the new fields fails the hook. Rejected publishing A-D
+  cleaned up: 220 rows of method notes that go stale by hand, as the re-check
+  below shows they already had. All of it is `app/` and lands at review time;
+  the eleven themes are drafted in chat first.
+- **Why names, not lists:** five of the six stale spots the re-check found
+  were hand-written city lists that missed a later city, the sixth a count
+  ("nineteen" pages without a date, now twenty after Monterrey).
+- **Re-checked against the repository (an agent parsed all 55 committed
+  maps):** in-ring shares, ring sizes and out/thinned station counts 55 of 55
+  match; table B's in-ring pins match except Edmonton, 1,034 / 922 / 416 in
+  the file against 1,039 / 924 / 417 in the map's layer menu (the
+  2026-09-25 `AS_OF_DATE` rebuild, c958057, missed by the sweeps since).
+- **Corrected in `docs/map_inconsistencies.md`:** Edmonton's counts; Taipei
+  added to theme 5's "(Regional)" list (ten maps now, not nine); Riga and the
+  three Taiwanese cities added to theme 1; Korea's "Name withheld", Taiwan's
+  line of business and Hong Kong's "No shop sign" added to theme 8; six
+  cities added to theme 9's "date shown" list; Montréal dropped from theme
+  1's "not comparable" pages (its page makes the point without the words);
+  open question 18's branch note (the Toronto EC change is on master) and
+  question 20's count and DENUE edition; the stale `map_common.py` line
+  reference replaced by `add_pin_layer()`. Four UNKNOWN cells filled:
+  Barcelona 0 zero-coordinate rows of 58,908 (`baseline.json`), Mexico City
+  and Guadalajara DENUE 05_2026 (`docs/data_sources/mexico.md`), and the
+  Toulouse, Lille and Rennes address shares from their own pages.
+- **Queued for review time:** `app/cities.py` `data_age` still says "no
+  source date" for Mexico City and Guadalajara; "What Is Excluded" says
+  "Commuter rail is excluded everywhere" (`app/pages/91_What_Is_Excluded.py`
+  L78), which eleven maps contradict.
 ### 2026-09-28 - Berlin's personal-services gap corrected: only hairdressers and laundries are missing
 
 - **Corrected the Berlin probe's personal-services finding: the register

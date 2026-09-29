@@ -47,7 +47,7 @@ before its permit ran out is still counted. The map shows an upper bound, and a 
 permit on file, not a business open today. Barbers, beauty salons and laundries come from the
 city's complete lists as of 31 March 2026 and the new premises listed each month since. Japan has
 no general business licence, so shops other than food shops (clothing, electronics, pharmacies)
-do not appear. The Retail layer is food retail only, by permit type: bakeries and confectioners,
+do not appear. The Food shops layer is food retail only, by permit type: bakeries and confectioners,
 delis, butchers and fishmongers. Shops selling only packaged food have filed a notification rather
 than a permit since 2021 and are not in the lists. Food trucks and permits for less than a year
 are left out.

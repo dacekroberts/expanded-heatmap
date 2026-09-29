@@ -6,6 +6,34 @@ any code. The trail: `DECISIONS.md` 2026-09-28 "London re-screened from the
 large-transit gap", and the United Kingdom row in
 `docs/global_country_shortlist.md` Tier 4.
 
+> **Measured at the build, 2026-09-28 (build session, `worktree-london`)** -
+> these supersede the screen's figures below where they differ:
+> - **Downloaded** (owner's OK): the 33 London authority XMLs, 80,367,855
+>   bytes, published 2026-09-17; 81,529 rows.
+> - **The ~20% without coordinates is mostly out of scope**: the five
+>   storefront types hold 59,610 rows, **91.0% with the FSA's own point**;
+>   Other catering (35.6%) and Mobile caterer (33.4%) carry most of the gap.
+>   2,764 storefront rows have neither point nor postcode. By borough, 74%
+>   (Richmond) to 98% (Brent) placed.
+> - **The FSA point is not a postcode centroid**: of 6,523 postcodes with 3+
+>   storefronts, 14.0% put them all on one point.
+> - **Canteens**: 693 of 27,262 Restaurant/Cafe/Canteen names (2.5%) read as
+>   institutional or contract catering - a lower bound.
+> - **Rail, OSM**: the Elizabeth line (24 relations) and all six Overground
+>   lines exist with colours; most are tagged `network=National Rail`, so
+>   select them by name, never by network (Dublin's DART lesson).
+> - **Ring coverage by tier** (0.6 mi, Greater London, OSM relation 175342,
+>   1,595.5 km²; 54,241 placed storefronts): Underground 57.8% · + DLR 59.9% ·
+>   + Elizabeth line 64.6% · + Overground 73.9% · + Tramlink 74.9%.
+> - **Licence** (`licence-read`): OGL v3, PERMITTED WITH CONDITIONS - the OGL
+>   statement linked, the data date, no endorsement, no FSA logo or imagery.
+>   Two owner calls: the FSA's privacy notice calls a business's name and
+>   address personal data and the OGL excludes personal data (sole traders,
+>   home caterers); and "the FHRS name" may not be used outside its imagery,
+>   so credit "Food Standards Agency, UK food hygiene rating data". Private-
+>   address records carry only an outward postcode: a centroid would place a
+>   person's trading name at a district centre.
+
 ⚠️ **One-bucket city: food, with food retail.** Stockholm and Bucharest are
 the precedent pages. The page must say plainly that shops and personal
 services are missing, and why (the rating list's terms, below).

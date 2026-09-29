@@ -52,6 +52,7 @@ CHECKS = [
     ["scripts/check_overpass_hosts.py"],
     ["scripts/check_provenance.py"],
     ["scripts/check_render_current.py"],
+    ["scripts/check_ring_shares.py"],
     ["scripts/check_scope_disclosure.py"],
     ["scripts/check_scope_disclosure_selftest.py"],
     ["scripts/check_stray_bullets.py"],

@@ -20,6 +20,7 @@ from pipeline.tokyo.wards import WARDS  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
     render_site_notices,
+    scroll_table,
     set_base_font,
 )
 
@@ -64,12 +65,13 @@ shares = OUTPUTS / "official_shares.json"
 if shares.exists():
     by_code = {c: w for c, w in WARDS.items()}
     rows = sorted(json.loads(shares.read_text(encoding="utf-8")), key=lambda r: -r["share_pct"])
-    table = ["| Ward | Restaurant permits in the list | Official count | Share | The list |",
-             "|---|---:|---:|---:|---|"]
-    for r in rows:
-        w = by_code[r["code"]]
-        table.append(f"| {w['en']} | {r['rows']:,} | {r['official']:,} | {r['share_pct']:.1f}% | {w['share_note']} |")
-    st.markdown("\n".join(table))
+    # components.scroll_table, not a markdown table: at 375 px this table is
+    # 469 px wide and pushed the whole page sideways (deploy-verify 2026-09-28).
+    cols = ["Ward", "Restaurant permits in the list", "Official count", "Share", "The list"]
+    scroll_table(cols,
+                 [[by_code[r["code"]]["en"], f"{r['rows']:,}", f"{r['official']:,}",
+                   f"{r['share_pct']:.1f}%", by_code[r["code"]]["share_note"]] for r in rows],
+                 right=("Restaurant permits in the list", "Official count", "Share"))
     st.caption(f"Official count: {rows[0]['source']}.")
 
 st.markdown(
@@ -86,7 +88,7 @@ today.
 Barbers, beauty salons and laundries come from the registers of Minato, Taito, Meguro and Shibuya.
 Seven more wards publish such registers, but a ward without a food list stays hollow, because food
 is most of what a station counts. Japan has no general business licence, so shops other than food
-shops do not appear. The Retail layer is food retail only, by permit type: bakeries and
+shops do not appear. The Food shops layer is food retail only, by permit type: bakeries and
 confectioners, delis, butchers and fishmongers. Shops selling only packaged food have filed a
 notification rather than a permit since 2021, and appear only where a list includes
 notifications. Food trucks, stalls and temporary permits are left out.
