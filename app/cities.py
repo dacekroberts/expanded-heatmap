@@ -1699,6 +1699,7 @@ CITIES = [
         # to it, the zoom dropped and put four label pairs on top of each
         # other. check_macro_labels.py then passes every region at 375, 768
         # and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
     },
     {
         "name": "Bucharest",
