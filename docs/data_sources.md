@@ -1916,7 +1916,8 @@ its own branch - recheck both at merge).
   license it. Glasgow City lists home bakers and cooks as cafés at their flat,
   with a point, so two rules were added to London's (`pipeline/fsa.py`): a
   storefront at a "Flat" address is never placed (185), nor one named as a
-  childminder (5). London's map applies the flat rule too (notice 58 amended).
+  childminder (5). London's map applies the flat rule too (the Food Standards
+  Agency's notice 58, amended).
 - **MUST NOT**: imply official status or endorsement by FSS or the FSA (OGL);
   use either body's logo; display a result.
 - Wording approved by the owner 2026-09-28.
@@ -1924,7 +1925,7 @@ its own branch - recheck both at merge).
   fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.
 - **Glasgow's rail is OpenStreetMap data** (ODbL, notice 1).
 
-**58 amended the same day (owner, 2026-09-28)**: its "Modified by this project"
+**58 (Food Standards Agency, London) amended the same day (owner, 2026-09-28)**: its "Modified by this project"
 adds "premises at a flat address left out" - London's map applies the flat rule
 (98 storefronts).
 
