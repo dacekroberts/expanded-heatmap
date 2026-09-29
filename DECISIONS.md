@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**118 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**119 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Perth and Ankara to Band N (owner)](#2026-09-28---perth-and-ankara-to-band-n-owner)
 - [Sydney found on a re-probe and Newcastle, both to Band B; Bangkok and Riyadh to Band D; Doha discarded (owner)](#2026-09-28---sydney-found-on-a-re-probe-and-newcastle-both-to-band-b-bangkok-and-riyadh-to-band-d-doha-discarded-owner)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
 - [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
@@ -154,6 +155,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Perth and Ankara to Band N (owner)
+
+- **Moved Perth into Band N (owner's call).** After Melbourne's and Sydney's
+  council censuses, the City of Perth's ArcGIS org was enumerated in full
+  (370 items) and its hub (67). The only usable layer is **Property
+  Boundaries**: 23,994 property polygons with a land-use code (174 values),
+  under CC BY 4.0, found only by enumerating the org. It holds property codes
+  rather than businesses (a shopping centre counts once, no names), with
+  about 465 retail, 354 food and 17 personal-services properties, and covers
+  the City of Perth only (about 6 of ~85 stations). data.wa.gov.au (2,914
+  packages) has no food or liquor register. WA's Land Use and Employment
+  Survey is published per LGA; liquor licences are a search form. What would
+  change it: a per-establishment census like Sydney's.
+- **Moved Ankara into Band N, Istanbul's shape (owner's call).** ABB's
+  Şeffaf Ankara catalogue (7,147 datasets, mostly wholesale-market prices)
+  holds no licence list. Its POI layer has a curated restaurant guide (1,013)
+  and butchers (225), but no retail or salon category, and its licence is
+  unread. Çankaya, Keçiören, Altındağ and Yenimahalle, which license
+  storefronts, publish no lists. A WebFetch auto-save of ABB's licence PDF
+  was deleted under the owner's standing OK. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Sydney found on a re-probe and Newcastle, both to Band B; Bangkok and Riyadh to Band D; Doha discarded (owner)
 

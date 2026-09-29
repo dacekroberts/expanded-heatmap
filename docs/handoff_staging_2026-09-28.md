@@ -41,7 +41,8 @@ then follow the pointers. **Delete a section when its item is done.**
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
 - **`docs/global_transit_gap.md`**: every large-network city not built (28
-  discarded, 23 ruled out by country, 21 in a band, 10 never screened;
+  discarded, 22 ruled out by country, 23 in a band, 9 never screened;
+  Perth and Ankara to N 2026-09-28;
   Sydney and Newcastle to B, Bangkok and Riyadh to D, Doha discarded 2026-09-28;
   Delhi to D, Mumbai and Algiers discarded, Buenos Aires to A, Melbourne to B
   2026-09-28; Tokyo built;
@@ -64,8 +65,8 @@ then follow the pointers. **Delete a section when its item is done.**
    at a time, light methods only. The owner asked for the list 2026-09-28 and
    is likely to steer here before the small tram and one-bucket builds.
    Propose each screen and its cost before running it. Recommended order:
-   - **The never-screened rest** of `docs/global_transit_gap.md`: Ankara,
-     the Indian three (Bengaluru, Kolkata, Chennai; expect Delhi's
+   - **Glasgow** (FSA count running 2026-09-28), then **the never-screened rest**
+     of `docs/global_transit_gap.md`: the Indian three (Bengaluru, Kolkata, Chennai; expect Delhi's
      geo-blocks), then the small networks. Tehran and Minsk are left out
      (owner).
    Record per country in `global_country_shortlist.md`, the result in the
