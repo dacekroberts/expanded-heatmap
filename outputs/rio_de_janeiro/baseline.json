@@ -1,13 +1,13 @@
 {
   "cnefe_rows": 3276028,
   "establishment_rows": 264714,
-  "mapped_rows": 106751,
-  "rescued_version_2": 1477,
-  "shares_dwelling": 58636,
+  "mapped_rows": 106898,
+  "rescued_version_2": 1476,
+  "shares_dwelling": 58710,
   "stations_collapsed": 98,
   "stations_excluded": 3,
   "stations_in_scope": 95,
   "stop_points": 161,
-  "storefronts": 106576,
-  "unclassified_placed": 51475
+  "storefronts": 106723,
+  "unclassified_placed": 51459
 }
