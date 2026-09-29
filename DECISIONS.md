@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**168 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
 - [City-landed sweep: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; two worktrees retired](#2026-09-29---city-landed-sweep-buenos-aires-glasgow-newcastle-sydney-melbourne-two-worktrees-retired)
 
 **2026-09-28**
@@ -206,6 +207,78 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch
+
+- **Funeral services (owner, 2026-09-28): coded, not yet rendered.**
+  - Scope: 16 files, 35 cities. Uncommitted in `worktree-cleanup` until the
+    re-render, so that code and outputs land together.
+  - Codes excluded:
+    - NAICS 8122 (Los Angeles, San Diego, San Francisco, Montréal).
+    - SCIAN **8123** (Mexico). SCIAN's 8122 is laundries, the reverse of
+      NAICS; an import-time assert keeps laundries.
+    - NAF 96.03Z (the five French cities).
+    - Rev. 2.1's 96.30 (Oslo, Copenhagen, Prague, Berlin).
+    - Madrid's pompas fúnebres.
+    - Taiwan's 9630 (funeral-goods retail 485212 stays).
+    - Brazil's funeral keywords ("ARTIGOS FUNERARIOS" stays Retail).
+    - The local types in Vancouver, Edmonton, Miami, Washington D.C., Dublin
+      and Buenos Aires.
+  - Effect: about 4,180 pins come off, almost all from Personal services.
+    The largest cuts are Taipei 634, Mexico City 629 and Taichung 443.
+  - **Buenos Aires included**, built after the audit (owner: excluding it is
+    the consistent choice).
+  - **Edge cases accepted (owner):**
+    - Brazil loses funeral-plan offices, pet crematoria and six Recife
+      funeral-home-and-florist premises.
+    - Dublin's six "shop, funeral home" premises stay Retail through their
+      shop use.
+    - Edmonton's four licences combining funeral with food stay Food
+      service.
+  - **Disclosure only:**
+    - Chicago: about 63 name matches, 26 of them funeral-goods retail.
+    - Calgary: 12.
+    - Milan: about 29.
+    - Amsterdam, Rotterdam and Riga: none identifiable.
+- **Fringe-category audit (read-only, 53 cities measured).** Categories
+  mapped in many cities that are arguably not walk-in storefronts, and
+  categories one city excluded while another kept them. The owner's rules:
+  - **R1 Food with no counter of its own: EXCLUDE** wherever a code names
+    it: institutional and contract canteens (e.g. Madrid's 1,157), mobile
+    food, street and market stalls, and event caterers. Kept: France's
+    traiteurs (56.21Z), which France recorded as usually a shop.
+  - **R2 The "other personal services" catch-all: EXCLUDE** everywhere still
+    mapped: San Diego, Montréal, Mexico, Madrid and Taiwan, about 3,700
+    rows; ten or more cities had already dropped it after sampling. Also
+    Mexico's 812130, public toilets and shoe-shine stands (1,945 rows, never
+    decided). Tattoo stays where it has its own code.
+  - **R3 Adult and hostess venues: EXCLUDE** wherever the register names
+    them: Tokyo's cabarets and snack bars (2,536), and San Diego's "massage
+    parlors" (144). **Korean karaoke bars KEPT** (owner), and sex shops kept
+    as retail.
+  - **R4 Car dealers and petrol stations: KEPT** (about 40 cities).
+    **France aligned (owner):** NAF 45.11Z, 45.19Z, 45.32Z and 45.40Z are
+    added to Retail. France's exclusion was an artefact, not a decision:
+    `france_naf.py` read only divisions 47, 56 and 96. Vehicle repair and
+    wholesale stay out.
+  - **R5 Gambling: EXCLUDE** everywhere mapped (Dublin's 176 betting shops
+    are the main case). **Pawnbrokers KEPT**, with New York and Chicago
+    staying as disclosed exceptions. **Nightclubs KEPT, and Toronto aligned
+    (owner):** its ENTERTAINMENT ESTABLISHMENT/NIGHTCLUB (170) and
+    Edmonton's after-hours dance clubs go back IN as Food service. They had
+    been dropped only because the licence name leads with "entertainment",
+    not on sensitivity; adult clubs stay excluded.
+  - **Barcelona's vets: EXCLUDE** (395 rows mixed with pet services), in
+    line with six cities.
+- **Rejected:** a name filter for cities with no code (Chicago, Calgary,
+  Milan), and excluding car dealers everywhere. Dealers are near-universal
+  practice, and dropping them would be the largest change on the list.
+- **One batch.** The funeral change and these rules land together: one
+  round of step 2 and 3 re-runs, a city at a time as announced heavy jobs.
+  Master's shared processed data is saved and restored around each city, so
+  no other session's `check_macro_facts.py` breaks. The combined
+  `excluded_categories.md` wording goes to the owner first, and a full
+  `deploy-verify` runs at review time.
 
 ### 2026-09-29 - City-landed sweep: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; two worktrees retired
 
