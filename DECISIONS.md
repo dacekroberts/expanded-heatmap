@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**182 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**183 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
 - [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
 - [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
 - [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
@@ -221,6 +222,34 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)
+
+- **`review-2026-09-29` holds the whole batch, unpushed** (owner pre-approved
+  every change at review time, 2026-09-29): `worktree-cleanup`, origin/master,
+  `stockholm`, then `bucharest`. Conflicts were resolved block by block by
+  script, never by taking one side of a file: the two cities' entries,
+  notices, taxonomies, exposure rules, label widths, data-source rows and
+  inconsistency rows kept side by side; the master list re-counted to 64
+  built, Band B 2, 78 candidates, 23 countries (Europe 22); Bucharest's notice
+  renumbered to 67; `REGION_ZOOM_WITHOUT` Europe = Riga, Stockholm and
+  Bucharest; ring shares re-written for 64 cities. `check_macro_labels.py`
+  PROBLEMS 0 with both cities together (each branch had passed alone),
+  `check_master_list_counts.py`, `check_city_registry.py` and `check_all.py`
+  24/24.
+- **Stockholm disclosed, not changed:** its register's restaurant type
+  ("Restaurang-, catering- och barverksamhet") also holds catering and mobile
+  food, so about 39 premises named as caterers and 15 as food trucks or mobile
+  units are on the map. Under the cross-city rule, a kind a register files
+  under an ordinary label stays and is disclosed; excluding them by name, as
+  Stockholm's institutional kitchens are, is left to the owner.
+  `sweden_livsmedel.py`'s docstring says its name rule removes catering; the
+  pattern has no catering word. Bucharest already excludes canteens,
+  catering-only units and vending (`romania_dsvsa.py`).
+- **The push waits until a reboot can follow it.** The info pages moved to
+  200-202 in this batch, and a deployed app that is not rebooted keeps its
+  imported `components.py`, whose page constants would then name files that
+  no longer exist.
 
 ### 2026-09-29 - The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found
 

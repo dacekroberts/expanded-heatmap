@@ -259,7 +259,22 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   +15, Madrid +8, D.C. +2, Miami +1), consistent with multi-use premises
   re-bucketing when one of their uses is excluded; Madrid's multi-bucket
   premises fell 1,535 -> 1,488.
-- **Review time** (owner: once the two Korean cities are in): full
-  `deploy-verify`, then the landing steps above. Stockholm first, then
-  Bucharest with its three merge fixes (its notice renumbered after Stockholm's, REGION_ZOOM_WITHOUT with
-  all three cities, master-list counts), as the Stockholm session sent them.
+- **The landing branch is `review-2026-09-29`** (local, in the cleanup
+  worktree; owner pre-approved every change at review time). It is
+  `worktree-cleanup` + origin/master + `stockholm` + `bucharest`, with
+  Bucharest's three merge fixes done (notice 67, `REGION_ZOOM_WITHOUT` with
+  Riga, Stockholm and Bucharest, master-list counts 64 built / B 2 / 78
+  candidates / 23 countries), ring shares for 64 cities, and a Stockholm
+  disclosure (its restaurant type also holds about 39 caterers and 15 mobile
+  units). `check_macro_labels.py` PROBLEMS 0, `check_all.py` 24/24.
+- **Review time** (owner: once the two Korean cities are in): merge them and
+  origin/master into `review-2026-09-29`, then the full `deploy-verify`, the
+  processed-data swap, `check_macro_facts.py --write`, tick PLAN's
+  exclusions item, fetch, merge, push.
+- **Push only when a reboot can follow.** The info pages moved from 90-92 to
+  200-202; until the app reboots, the cached `components.py` still links to
+  `pages/90_...`, which no longer exists, so every info-page link would break
+  on the live site. If the owner cannot reboot, hold the push.
+- **For the owner, not decided:** Stockholm's caterers and mobile units could
+  be excluded by name, as its institutional kitchens are; today's rule keeps
+  them because the register's type cannot split them.
