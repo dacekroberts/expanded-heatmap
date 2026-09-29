@@ -57,11 +57,42 @@ Tucson's BUSLIC terms, RideKC's GTFS, Florence's four layers, VZD's address
 file (Daugavpils, Liepāja). Each notice goes in `docs/data_sources/` before
 its page exists.
 
-## 3. Page text by template - STAGING drafts, the owner approves once
+## 3. Page text by template - APPROVED by the owner 2026-09-29
 
-A French tram-city paragraph set was drafted in chat 2026-09-29 for the
-owner's approval (see that session's last messages). Once approved, it lives
-in the skill; per-city facts fill it.
+The French tram-city page text, approved word for word ("approved"). It goes
+into the `france-tram-city` skill; braces are per-city facts, filled at each
+build from that city's own measurements. The controls paragraph and the
+heat-layer caveat stay exactly as on Rennes's page
+(`app/pages/25_Rennes_Heatmap.py`), and so does the transit caption, with the
+operator's credit and any notice its licence read requires.
+
+> {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
+> and in the legend, from the operator's own published timetable feed. {City}
+> has no metro: its trams are its rapid transit, as Riga's are, so every tram
+> stop gets rings.
+>
+> The map covers the **{commune of City / N communes of the Métropole}**.
+> {Where a line runs past it: which stops are left out and why, as Rennes's
+> page does.}
+>
+> Businesses come from **SIRENE**, France's national register of
+> établissements, joined to INSEE's geolocation file, the same sources as
+> Paris, Marseille, Toulouse, Lille and Rennes. {Share} of active
+> establishments here are marked non-diffusible by INSEE, which withholds
+> their name, address and coordinates together, so they never reach this map.
+> Where SIRENE records no shop sign or trading name, the dot shows the address
+> instead.
+>
+> **Read the density as a register, not a street survey.** {Same paragraph as
+> Rennes, with this city's ratio to OpenStreetMap's restaurants.}
+>
+> **Tram stops sit closer together than metro stations**, a median of
+> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
+> 0.3 mi), as on the other French maps. **About {share} of storefronts sit
+> within a ring.**
+
+A city whose median stop gap is over about 550 m keeps the standard rings and
+drops the last paragraph's first sentence (none in France is expected to).
 
 ## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time)
 

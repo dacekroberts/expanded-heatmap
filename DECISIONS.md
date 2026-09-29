@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The French tram-city page text approved as a template (owner)](#2026-09-29---the-french-tram-city-page-text-approved-as-a-template-owner)
 - [The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended](#2026-09-29---the-tram-batchs-groundwork-started-owner-all-six-items-a-france-macro-view-measured-and-a-northsouth-split-recommended)
 - [Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows](#2026-09-29---published-cities-data-dates-checked-san-francisco-maps-closed-locations-dublin-keeps-vacant-premises-three-sources-cannot-be-dated-from-their-rows)
 - [Tram cities use the existing spacing rule for ring size (owner); the 95% coverage rule withdrawn](#2026-09-29---tram-cities-use-the-existing-spacing-rule-for-ring-size-owner-the-95-coverage-rule-withdrawn)
@@ -232,6 +233,19 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - The French tram-city page text approved as a template (owner)
+
+- **One set of paragraphs for all 21 French tram pages, approved once
+  (owner: "approved")**, so the batch's page text needs no per-city prose
+  sitting. Built from Rennes's page: the drawn lines and why trams get rings
+  (Riga's precedent), the scope and any stops left out, SIRENE and INSEE's
+  non-diffusible share, "read the density as a register", and the half-size
+  rings with the city's median stop gap and in-ring share. Per-city facts
+  fill the braces from each city's own measurements; the controls paragraph,
+  heat caveat and transit caption stay as Rennes has them. The text is in
+  `docs/handoff_tram_batch_2026-09-29.md` section 3 until the
+  `france-tram-city` skill carries it.
 
 ### 2026-09-29 - The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended
 
