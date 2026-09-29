@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**203 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**204 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
@@ -242,6 +243,25 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Thinned lines must be named where a reader can find them (owner)
+
+- **Every city that thins stops by spacing must name the thinned lines on its
+  own page or in the spacing-filter paragraph of
+  `docs/excluded_categories.md` (owner), and `check_scope_disclosure.py`
+  now decides it as property F.** The What Is Excluded page's station table
+  gives each city a "Stops thinned" count but not which lines, so a count
+  with no sentence behind it would tell a reader nothing. Measured the same
+  day through `app/station_scope.py`: eight cities thin by spacing (San
+  Francisco 85, Philadelphia 161, Boston 25, Amsterdam 59, Rome 9, Rotterdam
+  23, Hong Kong 17, Riga 15; listed in `docs/sub_transit_line_filters.md`).
+  All eight pages already say so, in "thinned" or in "one stop per half mile
+  is drawn". Riga alone is missing from the paragraph, which the check prints
+  as a NOTE rather than a failure, since the owner's rule is either place;
+  its addition is approved for review time. Requiring both places was
+  rejected: the rule as given is either, and the page is where a reader of
+  that one city looks. The self-test gains a case that strips both places
+  from Riga (10 of 10), and its fixture now copies `app/pages/`.
 
 ### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
 

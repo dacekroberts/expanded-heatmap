@@ -32,6 +32,7 @@ TWO TRAPS THIS FILE IS BUILT AROUND, both met for real on 2026-09-23:
 """
 
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -53,6 +54,10 @@ def build_tree(dest):
     (dest / "app").mkdir()
     for src in sorted((ROOT / "app").glob("*.py")):
         shutil.copy2(src, dest / "app" / src.name)
+    # The city pages too: property F reads them for the thinning sentence.
+    (dest / "app" / "pages").mkdir()
+    for src in sorted((ROOT / "app" / "pages").glob("*.py")):
+        shutil.copy2(src, dest / "app" / "pages" / src.name)
 
     (dest / "docs").mkdir()
     shutil.copy2(ROOT / DOC, dest / DOC)
@@ -141,6 +146,28 @@ def stale_known_gap(city):
     return apply
 
 
+def thinning_undisclosed(city, page):
+    """A thinned city whose page stops saying so, and which the document's
+    spacing paragraph does not name either, must fail (property F). Both are
+    stripped, so the case keeps working once the city joins that paragraph."""
+    def apply(root):
+        path = root / "app" / "pages" / page
+        text = path.read_text(encoding="utf-8")
+        stripped = re.sub(r"thinn|one (?:stop|station) per half[- ]mile",
+                          "some stops", text, flags=re.IGNORECASE)
+        if stripped == text:
+            return False
+        path.write_text(stripped, encoding="utf-8")
+        doc = root / DOC
+        head, marker, tail = doc.read_text(encoding="utf-8").partition(
+            "**Its stops are too close together")
+        para, sep, rest = tail.partition("\n\n")
+        doc.write_text(head + marker + para.replace(city, "a city") + sep + rest,
+                       encoding="utf-8")
+        return True
+    return apply
+
+
 def no_cities_at_all(root):
     """An empty city list must not pass vacuously.
 
@@ -187,6 +214,10 @@ CASES = [
     ("a documented city left stale in KNOWN_GAPS",
      stale_known_gap("Milan"),
      "Remove it from KNOWN_GAPS"),
+
+    ("a thinned city whose lines are named neither on its page nor in the list",
+     thinning_undisclosed("Riga", "42_Riga_Heatmap.py"),
+     "says which lines"),
 
     ("no cities at all - the vacuous pass",
      no_cities_at_all,
