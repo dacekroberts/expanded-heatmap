@@ -100,7 +100,7 @@ Desktop is unaffected — the label is fully visible there.
   The macro map's marker and label colours now come from `pipeline/theme.py`;
   measure them against the dark page (`#0B1220`) numerically, not by eye.
 
-- [ ] **One exclusions batch: funeral services off every map (owner, 2026-09-28) PLUS the fringe-category rules (owner, 2026-09-29: R1 no-counter food, R2 the other-personal-services catch-all and Mexico 812130, R3 adult/hostess venues (karaoke kept), R5 gambling, Barcelona vets; France's car dealers and the Toronto/Edmonton nightclubs brought in). DECISIONS 2026-09-29.** Funeral code is done (uncommitted); the fringe rules are being coded.
+- [x] **Landed with the 2026-09-29 review batch (41 cities re-rendered; DECISIONS 2026-09-29 "Exclusions batch re-run").** **One exclusions batch: funeral services off every map (owner, 2026-09-28) PLUS the fringe-category rules (owner, 2026-09-29: R1 no-counter food, R2 the other-personal-services catch-all and Mexico 812130, R3 adult/hostess venues (karaoke kept), R5 gambling, Barcelona vets; France's car dealers and the Toronto/Edmonton nightclubs brought in). DECISIONS 2026-09-29.** Funeral code is done (uncommitted); the fringe rules are being coded.
   Cleanup does it AFTER Buenos Aires, Glasgow and Newcastle land:
   - Exclude by code or licence type in 34 cities: NAICS 8122, SCIAN 8123,
     NAF 96.03Z, Rev. 2.1's 96.30 (Oslo, Copenhagen, Prague, Berlin), Madrid's
