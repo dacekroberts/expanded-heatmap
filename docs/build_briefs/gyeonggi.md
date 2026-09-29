@@ -6,6 +6,26 @@ gap disclosed. Brief written 2026-09-28.** Run
 `DECISIONS.md` 2026-09-28 "Band C's last five get verdicts" (Gyeonggi
 satellites: PASS, to B; "which satellites is the brief's question").
 
+> **Measured at the build, 2026-09-29 (build session, branch `gyeonggi`,
+> stacked on `incheon`)** - these supersede the business leg and the page
+> shape below:
+> - 🚨 **The national LOCALDATA source is closed**: its data.go.kr API needs a
+>   key, and data.go.kr accounts need a Korean identity check (본인인증). A probe
+>   of each city's own files found them unusable: Goyang publishes only a
+>   meat-retail list, Yongin no food or retail register, and Seongnam files
+>   without coordinates. **Built on SEMAS's 상가(상권)정보 (owner)**, Incheon's
+>   source and module, every storefront on its own point.
+> - **One page per city (owner)**, and a new **Seoul Capital Area** macro-map
+>   region (owner): Seoul, Incheon and the three, whose labels cannot share
+>   East Asia's zoom.
+> - Goyang **27,808** storefronts, 20 stations (Line 3, Gyeongui-Jungang),
+>   66.6% in a ring; Seongnam **25,529**, 18 stations (Line 8, Suin-Bundang,
+>   Shinbundang, Gyeonggang), 76.1%; Yongin **23,481**, 24 stations (EverLine,
+>   Suin-Bundang, Shinbundang), 55.4%.
+> - Takeaway and barbers, the brief's open calls, do not arise: SEMAS files
+>   takeaway food under 음식 and barbers under 이용·미용, with the rest.
+> - Suwon and Bucheon remain next (owner's order).
+
 ⚠️ **Korean cities: read `cjk-text`, and Seoul's, Daegu's and Busan's briefs
 first.** The satellites sit around Seoul (built) and share its lines, so
 Seoul's rail precedent applies (below).

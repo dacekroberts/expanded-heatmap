@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**185 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**186 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
+- [Goyang, Seongnam and Yongin built on SEMAS's register, one page each (owner); a Seoul Capital Area macro-map region (owner)](#2026-09-29---goyang-seongnam-and-yongin-built-on-semass-register-one-page-each-owner-a-seoul-capital-area-macro-map-region-owner)
 - [Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner](#2026-09-29---atlantas-2024-licence-layer-is-not-a-publication-to-build-on-it-carries-per-business-revenue-likely-confidential-under-georgia-law-and-no-licence-atlanta-stays-discarded-pending-the-owner)
 - [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
 - [Incheon built on SEMAS's national storefront register (owner); the LOCALDATA API found closed by an identity check; cross-city category rules made a step every build passes through (owner)](#2026-09-29---incheon-built-on-semass-national-storefront-register-owner-the-localdata-api-found-closed-by-an-identity-check-cross-city-category-rules-made-a-step-every-build-passes-through-owner)
@@ -252,6 +253,68 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   200-202 in this batch, and a deployed app that is not rebooted keeps its
   imported `components.py`, whose page constants would then name files that
   no longer exist.
+### 2026-09-29 - Goyang, Seongnam and Yongin built on SEMAS's register, one page each (owner); a Seoul Capital Area macro-map region (owner)
+
+- **Built on branch `gyeonggi`, stacked on `incheon`** (they read its SEMAS
+  module), pages 66-68. SEMAS's 상가(상권)정보 is Incheon's source (the
+  previous entry), 경기도's member cut by 시군구명:
+
+  | City | SEMAS rows | Storefronts (F / R / P) | Withheld | Stations | In a ring |
+  |---|---|---|---|---|---|
+  | Goyang | 50,587 | 27,808 (12,413 / 11,327 / 4,068) | 9 | 20 | 66.6% |
+  | Seongnam | 46,326 | 25,529 (11,770 / 9,951 / 3,808) | 30 | 18 | 76.1% |
+  | Yongin | 46,309 | 23,481 (10,999 / 9,353 / 3,129) | 16 | 24 | 55.4% |
+
+- **The brief's sources were closed or empty.** The Ministry's LOCALDATA data
+  (the owner's choice of 2026-09-29) is reachable only through a keyed API
+  that needs a Korean identity check. A background probe of each city's own
+  keyless data.go.kr files found Goyang with only a meat-retail list, Yongin
+  with no food or retail register, and Seongnam with files but no coordinates.
+  The province's linked listings all point to 경기데이터드림, whose terms are
+  ambiguous.
+- **One page per city (owner)**, the brief's recommendation. The owner asked
+  whether the satellites belonged in a Seoul regional build. The answer was not
+  now: Seoul's page is built on licence registers with thin retail, and a
+  regional map mixing them would show a false jump at the city line. A
+  SEMAS-based "Seoul (Regional)" is a possible later project.
+- **A Seoul Capital Area macro-map region (owner).** Seoul, Incheon, Goyang,
+  Seongnam and Yongin moved out of East Asia into their own region. At East
+  Asia's zoom the five sit 20-30 px apart and every pair of labels overlapped;
+  a composite region would still label them all at that zoom. Each city keeps
+  its own page. East Asia keeps Daegu, Busan, Japan, Taiwan and Hong Kong.
+  `check_macro_labels.py`: PROBLEMS 0 across 12 regions, all labels above
+  their dots. Label widths were measured in the deployed frame: Goyang 52.1,
+  Seongnam 71.4, Yongin 45.9. `check_master_list_counts.py` now counts
+  distinct countries, so South Korea spanning two region rows is one country.
+- **Rail, on Seoul's precedent for a satellite**: every metropolitan subway,
+  Korail metro or light-rail line with stations in the city is drawn, and
+  GTX-A is not.
+  - Goyang: Line 3 and the Gyeongui-Jungang Line. The Seohae Line is not
+    drawn: it runs on the Gyeongui-Jungang track through the same stations
+    in Goyang.
+  - Seongnam: Line 8, the Suin-Bundang, Shinbundang and Gyeonggang Lines.
+  - Yongin: the EverLine, the Suin-Bundang and Shinbundang Lines.
+  - Gate 3 is exact on six whole lines. Not gated whole: the
+    Gyeongui-Jungang Line (OSM 55 against 57), Line 8 (OSM's 24 is the real
+    line; the infobox reads 25) and the Gyeonggang Line (18 against the 11 of
+    its metropolitan section).
+  - Four colours sit below the preferred 45 and are recorded: Line 8,
+    Shinbundang and Gyeongui-Jungang are Seoul's own drawn colours, and the
+    Gyeonggang and EverLine colours are the operators'.
+- **Privacy: no personal information published.**
+  `check_personal_exposure.py` on all three: no owner column, and 0 contact
+  details. 0 Korean personal names at a residential address are shown (3, 23
+  and 12 pins withheld). Bare-name shapes stand at commercial addresses (3.0 to
+  3.7%), as in Incheon.
+- **Notice 66 widened** to "Small Enterprise and Market Service (Incheon,
+  Goyang, Seongnam, Yongin)".
+- Files: `pipeline/goyang/`, `pipeline/seongnam/`, `pipeline/yongin/`,
+  `app/pages/66-68_*`, `app/cities.py`, `app/components.py`,
+  `docs/data_sources.md`, `docs/data_sources/south-korea.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/gyeonggi.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`,
+  `scripts/check_master_list_counts.py`.
 ### 2026-09-29 - Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner
 
 - **The licence read (`licence-read` agent) found no grant and a likely

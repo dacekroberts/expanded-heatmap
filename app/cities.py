@@ -1221,7 +1221,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Lines 1–9 and six more subway lines",
-        "region": "East Asia",
+        "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
         # Above the dot, the default: Seoul and Hong Kong are far apart in
@@ -1733,16 +1733,77 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Incheon Lines 1 and 2, Line 1, Line 7 and the Suin–Bundang Line",
-        "region": "East Asia",
+        "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # LEFT of the dot, slightly raised, and SCORED: width 54.4 px measured in
-        # the deployed app's own frame (2026-09-29, four entries reproduced).
-        # TIGHT: above the dot it sits on Seoul's label, and level with the dot
-        # it grazes Daegu's (3.5 px); dy -5 to -6 clears both, and
-        # check_macro_labels.py passes every region at 375, 768 and 1200 with
-        # PROBLEMS 0. Any further city near Seoul re-scores this one first.
-        "label_offset": ("end", -9, -6),
+        # Above the dot, and SCORED: width 54.4 px measured in the deployed
+        # app's own frame (2026-09-29, four entries reproduced). Labelled in the
+        # Seoul Capital Area region only; check_macro_labels.py passes every
+        # region at 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Goyang",
+        "lat": 37.6584,
+        "lon": 126.832,
+        "page": "pages/66_Goyang_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 3 and the Gyeongui–Jungang Line",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 52.1 px measured in the deployed app's
+        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
+        # Capital Area region; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Seongnam",
+        "lat": 37.42,
+        "lon": 127.1265,
+        "page": "pages/67_Seongnam_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 8, the Suin–Bundang, Shinbundang and Gyeonggang Lines",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 71.4 px measured in the deployed app's
+        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
+        # Capital Area region; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yongin",
+        "lat": 37.2411,
+        "lon": 127.1776,
+        "page": "pages/68_Yongin_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "The EverLine, the Suin–Bundang and Shinbundang Lines",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 45.9 px measured in the deployed app's
+        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
+        # Capital Area region; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
     },
 ]
 
@@ -1888,6 +1949,12 @@ REGION_ORDER = [
     # Seoul is about 2,100 km and to Sapporo about 3,400, past the 3,300 at which
     # Canada was split, so re-score it when Japan lands rather than assume.
     "East Asia",
+    # SEOUL CAPITAL AREA (owner, 2026-09-29): Seoul, Incheon and the Gyeonggi
+    # satellites (Goyang, Seongnam, Yongin), five cities within about 40 km,
+    # moved out of East Asia. At East Asia's zoom they sit 20-30 px apart and
+    # every pair of labels overlapped (check_macro_labels.py); a composite
+    # would still label them all at that zoom. Each city keeps its own page.
+    "Seoul Capital Area",
     # OCEANIA (owner, 2026-09-28): Sydney first, Melbourne next, about 710 km
     # apart - one readable view, far from every other region. Named for the
     # continent rather than the country, as Europe is, so an Australian or New

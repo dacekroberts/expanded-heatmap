@@ -323,5 +323,20 @@
   "in_ring": 56426,
   "all": 82671,
   "map_blob": "abb50b6e4abb7ee5384d54df336b419175d0a7ec"
+ },
+ "goyang": {
+  "in_ring": 18519,
+  "all": 27808,
+  "map_blob": "d375c2c50e3255c29d65b4f4d44016e092fa8bcd"
+ },
+ "seongnam": {
+  "in_ring": 19418,
+  "all": 25529,
+  "map_blob": "b3a21bed7481c8db83deb393eb92f30badfc5bad"
+ },
+ "yongin": {
+  "in_ring": 13003,
+  "all": 23481,
+  "map_blob": "f03b1f6fca7ca4cee7c4c087a53879fca61dbe76"
  }
 }
