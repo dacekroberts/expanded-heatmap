@@ -253,19 +253,25 @@ def run_check(table, registry, load, doc_text, headings, root):
                     else:
                         marks.add("o")
                     continue
-                if entry.kind == "pending" and entry.row is None:
+                if entry.kind in ("pending", "exception") and entry.row is None:
                     # A departure made before classify(): pinned by its token.
                     path = root / entry.path
-                    if not path.exists() or entry.token not in path.read_text(encoding="utf-8"):
-                        problems.append(f"D {system}: rule {rid}, {entry.label}: the pending "
-                                        f"departure's token {entry.token!r} has gone from "
-                                        f"{entry.path} - resolved? make it a loc() or outside()")
+                    if entry.kind == "exception" and not any(entry.decision in h for h in headings):
+                        problems.append(f"D {system}: rule {rid}, {entry.label}: the exception cites "
+                                        f"DECISIONS \"{entry.decision}\", which is no heading there")
                         marks.add("!")
-                    else:
+                    if not path.exists() or entry.token not in path.read_text(encoding="utf-8"):
+                        problems.append(f"D {system}: rule {rid}, {entry.label}: the {entry.kind}'s "
+                                        f"token {entry.token!r} has gone from {entry.path} - "
+                                        "resolved? make it a loc() or outside()")
+                        marks.add("!")
+                    elif entry.kind == "pending":
                         pendings.append(f"{system}: rule {rid}, {entry.label} ({entry.path}): "
                                         f"{show(entry.result)}, the rule says {show(r.verdict)} "
                                         f"(since {entry.since}). {entry.note}")
                         marks.add("p")
+                    else:
+                        marks.add("x")
                     continue
                 key = row_keys.get(system, mod.VALUE_COLUMN)
                 row = entry.row if isinstance(entry.row, dict) else {key: entry.row}

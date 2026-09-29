@@ -10,11 +10,13 @@ HOW TO ANSWER A RULE FOR A TAXONOMY (one of these per cell):
                              the dict classify() receives, or a bare string for
                              {VALUE_COLUMN: string}. Each must give the rule's
                              verdict.
-  exception(row, label, result, decision, why)
+  exception(row, label, result, decision, why[, path, token])
                              a disclosed departure the OWNER decided. `decision`
                              is a substring of a DECISIONS heading; the check
                              fails if it is not one, and fails if the row ever
-                             comes back into line (a stale exception).
+                             comes back into line (a stale exception). With
+                             row=None it is made before classify(), pinned by
+                             `token` in `path`, as pending() below.
   pending(row, label, result, since, note[, path, token])
                              a departure this table FOUND and the owner has not
                              ruled on. Passes, but is printed on every run: a
@@ -73,8 +75,10 @@ def loc(row, label):
     return _Entry("loc", row=row, label=label)
 
 
-def exception(row, label, result, decision, why):
-    return _Entry("exception", row=row, label=label, result=result, decision=decision, why=why)
+def exception(row, label, result, decision, why, path=None, token=None):
+    """row=None: an owner-decided departure made before classify(), pinned by `token` in `path`."""
+    return _Entry("exception", row=row, label=label, result=result, decision=decision, why=why,
+                  path=path, token=token)
 
 
 def pending(row, label, result, since, note, path=None, token=None):
@@ -200,6 +204,7 @@ RULES = {
 # ---------------------------------------------------------------------------
 R1 = "Funeral exclusions coded; fringe-category audit"       # the R1-R5 entry
 FOLLOWUPS = "Exclusions batch: the owner's eight follow-ups"
+CONFIRMED = "Category check: three older calls confirmed"   # Berlin tattoo, FSA pharmacies, Melbourne opticians
 
 COLUMNS = {}
 
@@ -1165,11 +1170,10 @@ COLUMNS["ihk_wz2025"] = {
                 loc(_ihk("9630", "96302"), "Friedhöfe und Krematorien")],
     "no_counter_food": [loc(_ihk("5621", "56210"), "Event-Caterer"), loc(_ihk("5622", "562202"), "Kantinen")],
     "personal_catchall": [outside(BERLIN_CFG, BERLIN_969, "9699 and bare 969 dropped by prefix in step 2")],
-    "tattoo": [pending(None, "Tätowier- und Piercingstudios (96991, 1,262)", None, "2026-09-29",
-                       "tattoo has its own IHK branch code but goes with the 969 prefix: the owner's "
-                       "2026-09-28 call (DECISIONS \"Berlin's calls\"), made the day before R2 said "
-                       "tattoo stays where it has its own code. Confirm it stands.",
-                       path=BERLIN_CFG, token=BERLIN_969)],
+    "tattoo": [exception(None, "Tätowier- und Piercingstudios (96991, 1,262)", None, CONFIRMED,
+                         "tattoo has its own IHK branch code but goes with the 969 prefix: the "
+                         "owner's 2026-09-28 call, confirmed after R2 (2026-09-29)",
+                         path=BERLIN_CFG, token=BERLIN_969)],
     "adult_hostess": [outside(BERLIN_CFG, BERLIN_969,
                               "prostitution (96992) and escort services (969992) go with the 969 prefix")],
     "sex_shop": [loc(_ihk("4712", "471212"), "Einzelhandel mit Erotikartikeln")],
@@ -1358,9 +1362,9 @@ COLUMNS["anzsic_fes"] = {
     "lodging": [loc("4400", "accommodation")],
     "recreation": [loc("9111", "gyms"), loc("5513", "cinemas"), loc("9139", "karaoke rooms")],
     "pharmacy": [loc("4271", "pharmaceutical and toiletry retailing")],
-    "optician": [pending("8532", "optometry and optical dispensing (Specsavers; 33 in Melbourne)", None,
-                         "2026-09-29", "ANZSIC files optical shops with optometry in health (division 85), "
-                         "which is not a storefront division; the rule keeps opticians as Retail")],
+    "optician": [exception("8532", "optometry and optical dispensing (Specsavers; 33 in Melbourne)", None,
+                           CONFIRMED, "ANZSIC files optical shops with optometry in health "
+                           "(division 85), not a storefront division; left out (owner)")],
     "health_food": [loc("4129", "other specialised food retailing")],
     "mobile_unit": absent("no mobile class: vending is in 4310, out"),
 }
@@ -1382,10 +1386,10 @@ COLUMNS["fsa_businesstype"] = {
     "nonstore": [loc("Distributors/Transporters", "distributors")],
     "lodging": [loc("Hotel/bed & breakfast/guest house", "hotels")],
     "pharmacy_food_register": [
-        pending("Retailers - other", "other retailers (about 489 pharmacy names in London)",
-                "Retail", "2026-09-29",
-                "the rule says a food-only register's pharmacies are out, as Stockholm's are "
-                "by name; the FSA cities keep them under 'Retailers - other'")],
+        exception("Retailers - other", "other retailers (about 489 pharmacy names in London)",
+                  "Retail", CONFIRMED,
+                  "the FSA cities keep their pharmacies under 'Retailers - other', unlike "
+                  "Stockholm's name filter (owner)")],
     "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register"),
     "health_food": [loc("Retailers - other", "other retailers (health-food chains)")],
     "mobile_unit": [loc("Mobile caterer", "mobile caterer")],

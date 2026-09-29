@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Category check: three older calls confirmed (owner)](#2026-09-29---category-check-three-older-calls-confirmed-owner)
 - [The cross-city category rules made a check; 45 departures found and left for the owner; two claims in category_rules.md out of date](#2026-09-29---the-cross-city-category-rules-made-a-check-45-departures-found-and-left-for-the-owner-two-claims-in-category_rulesmd-out-of-date)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
 - [French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record](#2026-09-29---french-tram-feeds-read-four-permitted-with-conditions-angers-bars-naming-its-network-without-consent-the-national-portals-odbl-conditions-found-correcting-toulouses-and-rennes-record)
@@ -236,6 +237,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Category check: three older calls confirmed (owner)
+
+- **Three departures the category check listed as pending are confirmed and
+  now stand as declared exceptions (owner).** Each remains a departure from
+  `docs/category_rules.md` and is disclosed in the check's table
+  (`scripts/category_continuity_table.py`):
+  - Berlin's tattoo and piercing studios (IHK branch 96991, 1,262) stay off
+    the map with the 969 catch-all prefix. That was the owner's 2026-09-28
+    call ("Berlin's calls"), made the day before R2 said tattoo stays where it
+    has its own code.
+  - The FSA cities (London, Glasgow, Newcastle) keep their pharmacies under
+    "Retailers - other", about 489 pharmacy names in London alone. The rules
+    table says a food-only register's pharmacies are out, which Stockholm
+    applies by name.
+  - Melbourne's opticians (ANZSIC 8532, Optometry and Optical Dispensing, 33)
+    stay out. ANZSIC files optical shops with optometry in health, which is
+    not a storefront division; the rules table keeps opticians as Retail.
+- The check now reports 42 pending rows, down from 45, and 21 exceptions.
+  `exception()` now also takes an owner-decided departure made before
+  `classify()`, pinned by a token in a file, as `pending()` already did;
+  Berlin's needs it. `check_category_continuity.py` and its table are the
+  files touched.
 
 ### 2026-09-29 - The cross-city category rules made a check; 45 departures found and left for the owner; two claims in category_rules.md out of date
 
