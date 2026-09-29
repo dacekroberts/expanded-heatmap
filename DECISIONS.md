@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**147 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**148 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
 - [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
 - [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
 - [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
@@ -183,6 +184,58 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn
+
+- **Stockholm, re-measured on the live layer (`Livsmedelstillsyn/41`).**
+  - **The dedupe key is `ObjektId`**, with 8,146 distinct values, exactly
+    the premises count. 5,188 premises change name, address, type or
+    position across inspections, so each one's latest record is used.
+  - **The register stopped updating.** Its 289,742 inspection rows run
+    2018-01-02 to 2025-10-21, and the layer was last edited 2025-10-22. The
+    brief had said "daily". Every storefront-typed premises was last
+    inspected in 2024 or 2025.
+  - **`VerksamhetsTyp` types each premises**, which the screen had not
+    seen: restaurant, catering and bar 4,946; retail 996; retail mixed with
+    another type 25; wholesale, transport and production 603; other 185;
+    untyped 1,391 (17.1%). That gives 5,771 placed storefronts.
+  - **Ring coverage:** the T-bana reaches 88.7% of them, and 92.3% with
+    pendeltåg and the local railways.
+  - **The unref'd subway relation** is "Gul linje till Älvsjö", the
+    unopened Yellow line.
+  - **The derived UTM zone is 34N (EPSG:32634)**, since Stockholm lies east
+    of 18° E.
+  - **Recommended:** T-bana only, and the untyped premises left out and
+    disclosed.
+  - **Owner calls at the build:** those two, and building on a register
+    frozen for 11 months.
+- **Bucharest: the brief's "schema not read" was stale.**
+  - The 2026-09-20 screen had read the columns in the browser: the unit's
+    name, the address, the sector, the category and the registration number,
+    across 34 per-category XLSX files. The brief of 2026-09-23 said
+    otherwise.
+  - OSM now carries 12 subway relations, M1-M5, every one referenced and
+    coloured, so `Extensie M4` is gone.
+  - Both DSVSA hosts still answer 503 with the browser challenge.
+  - **Next:** the owner fetches the files in their own browser, and then
+    the address hit rate against OSM is measured.
+  - An Overpass check was added to the brief. The 2026-09-23 objection
+    (intermittent 504s) is answered by `osm_route_refs` confirming any
+    mismatch on a second mirror.
+- **Withdrawn: "OSM's Glasgow Subway relations omit Govan"** (the entry
+  "Newcastle and Glasgow briefs written", above). The Glasgow build found
+  Govan as the loop's `stop_entry_only` and `stop_exit_only` member.
+  - The probe's query was at fault. It recursed the second and third roles
+    from the stop nodes rather than from the relations, so only `stop` roles
+    were counted.
+  - Both relations carry all 15 stations.
+  - The Glasgow brief's correction is in the build's own "Measured at the
+    build" box.
+  - Newcastle's 60 Metro stations came from the same query. The count
+    matches Nexus's own figure, and the loop's terminals are among the
+    names, but the build should recount it.
+- Files: `docs/build_briefs/stockholm.md` (6/6), `docs/build_briefs/bucharest.md`
+  (2/2), and three rows of `docs/city_master_list.md`.
 
 ### 2026-09-28 - Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured
 

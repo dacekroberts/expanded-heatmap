@@ -4,6 +4,41 @@
 2026-09-23.** Run `python scripts/brief_check.py bucharest` before writing any
 code for this city.
 
+> **Re-checked 2026-09-28 (staging), before the build.** These supersede the
+> text below where they differ.
+> - **Band B since 2026-09-27** (owner, the Band C memo), on the memo's two
+>   conditions:
+>   - **the owner fetches the files in their own browser**, the precedent
+>     since followed for Ho Chi Minh City;
+>   - **the licence stays SILENT, and the page discloses it.**
+> - **The columns are known.** The screen of 2026-09-20 read them in the
+>   browser (`docs/decisions/2026-09-20.md`, "Unitati de vanzare cu amanuntul
+>   INREGISTRATE"):
+>   - The fields are `Nr. crt.`, `Denumirea unitatii` (the unit's name,
+>     trade names in the example), `Adresa`, `Sector`, `Categorie unitate`
+>     and the registration number with its date.
+>   - Example row: "Boutique Du Pain Bucharest, Academiei 28-30,S1, sector 1,
+>     Restaurant, 6645/20.03.2023".
+>   - There are **34 XLSX files, one per category**. 14 of them hold the
+>     31,299 rows, and the file name is the taxonomy.
+>   - The list of units of non-animal origin and 20 of the categories are
+>     uncounted, so 31,299 is a floor.
+>
+>   So "the schema has not been read" and the one-file "56,009 bytes" below
+>   are out of date. The 56,009 bytes are one of the 34 files.
+> - **Rail: OSM now has 12 subway relations, M1-M5, every one with a ref and
+>   a colour.** `Extensie M4` no longer appears (bbox query), so that trap is
+>   gone. Colours: M1 `#FFFF00`, M2 `#003399`, M3 `#BC1725`, M4 `#347c11`,
+>   M5 `#FF8040`.
+> - **Both DSVSA hosts still answer 503 with the browser challenge.**
+> - **What the build still needs, in order:**
+>   1. The owner's browser fetch of every file on that page into
+>      `data/bucharest/raw/`, including the uncounted ones.
+>   2. Five rows of each, read for the names: trade names or holders' names
+>      (the personal-information rule).
+>   3. **The OSM address hit rate**, the one number that decides whether
+>      Bucharest is buildable.
+
 ---
 
 ## The one-line summary
@@ -222,6 +257,15 @@ is a fair summary of what makes it hard.
     "kind": "http_ok",
     "url": "https://archive.org/wayback/available?url=data.gov.ro%2Fapi%2F3%2Faction%2Fpackage_list",
     "min_bytes": 50
+  },
+  {
+    "id": "bucharest-osm-metro-refs",
+    "claim": "OSM carries Bucharest's metro as M1-M5, every relation referenced (added 2026-09-28: osm_route_refs now confirms a mismatch on a second mirror, which answers the 2026-09-23 objection to Overpass checks; Extensie M4 no longer appears)",
+    "kind": "osm_route_refs",
+    "bbox": [44.33, 25.95, 44.55, 26.25],
+    "routes": ["subway"],
+    "expect_refs": {"subway": 5},
+    "require_refs": {"subway": ["M1", "M2", "M3", "M4", "M5"]}
   }
 ]
 ```

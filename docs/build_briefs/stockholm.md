@@ -3,6 +3,52 @@
 **Screening closed 2026-09-22; rail counted 2026-09-23.** Run
 `python scripts/brief_check.py stockholm` before writing any code.
 
+> **Re-measured 2026-09-28 (staging), before the build.** These supersede the
+> figures below where they differ.
+> - **Band B since 2026-09-27**: the one-bucket question below is answered.
+>   Stockholm passed the Band C memo as a food page (owner). Zurich and
+>   Göteborg went to Band T, trams only.
+> - **The dedupe key is `ObjektId`**: 8,146 distinct values, exactly the
+>   premises count. 5,188 premises change name, address, type or position
+>   across their inspections, so take each one's **latest** record (by
+>   `TillsynsDatum`).
+> - 🚨 **Not daily any more.** Inspections run 2018-01-02 to **2025-10-21**,
+>   and the layer was last edited 2025-10-22 (the Hub feed's `modified` says
+>   the same). There are no rows since. Every storefront-typed premises was
+>   last inspected in 2024 or 2025, so the snapshot is recent but frozen.
+>   The page states the data date. **Building on a register frozen for 11
+>   months is an owner call.** Singapore's 2016 snapshot sits in C.
+> - **`VerksamhetsTyp` types each premises** (the screen said nothing of it):
+>   | Type | Premises |
+>   |---|---|
+>   | Restaurang-, catering- och barverksamhet | **4,946** |
+>   | Detaljhandel | **996** |
+>   | Retail with another type | 25 |
+>   | Wholesale, transport, production, water works and their mixes | 603 |
+>   | Övrigt | 185 |
+>   | None | **1,391 (17.1%)** |
+>
+>   The storefronts are the first two types, including premises that carry
+>   them together with another: **5,771 placed**. Catering and institutional
+>   kitchens sit inside the restaurant type, so a name test is needed
+>   (Göteborg's register was 26.5% non-storefront). **The 1,391 untyped
+>   premises are an owner call**: leave them out and disclose it
+>   (recommended), or classify them by name.
+> - **Placement**: 236 premises (2.9%) have no position. Positions are
+>   SWEREF 99 18 00 (EPSG:3011) as well as the point geometry.
+> - **The unref'd subway relation** is "Gul linje till Älvsjö" (21104772,
+>   `#f5c700`), the Yellow line, which is not in service (general knowledge;
+>   check its tags). Leave it out. The T-bana has **7 refs** (10, 11, 13,
+>   14, 17, 18, 19), with colours tagged as words (blue, red, green).
+> - **Ring coverage** (0.6 mi, the 5,771 placed storefront premises, UTM
+>   34N): T-bana **88.7%**; adding pendeltåg and the local railways
+>   (Roslagsbanan, Saltsjöbanan) gives 92.3%. **The recommendation is T-bana
+>   only**, Berlin's and London's trade (+3.6 points left out), with trams
+>   out.
+> - **CRS**: the UTM zone derived from Stockholm's longitude (18.07° E) is
+>   **34N (EPSG:32634)**, not 33. SWEREF 99 TM (EPSG:3006) is the national
+>   alternative.
+
 ⚠️ **One-bucket city.** It shares a single owner decision with **Zurich** and
 **Göteborg** — *does a food-density page belong in a project whose other
 cities carry three buckets?* **Answer it once and three cities move.**
@@ -136,6 +182,36 @@ wrong, confidently-zero rail network.**
     "kind": "http_ok",
     "url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A60%5D%3Brel(398021)%3Bout%20ids%3B",
     "min_bytes": 100
+  },
+  {
+    "id": "stockholm-livsmedelstillsyn-layer",
+    "claim": "The register is ArcGIS layer Livsmedelstillsyn/41: points, keyed per premises by ObjektId, typed by VerksamhetsTyp, one row per inspection",
+    "kind": "arcgis_layer",
+    "url": "https://services-eu1.arcgis.com/81H0sgjoIWj6WxIM/arcgis/rest/services/Livsmedelstillsyn/FeatureServer/41",
+    "expect_geometry": "esriGeometryPoint",
+    "present": ["ObjektId", "AnlaggningsNamn", "Adress", "VerksamhetsTyp", "TillsynsDatum"]
+  },
+  {
+    "id": "stockholm-register-frozen-since-2025-10",
+    "claim": "TRIPWIRE: the layer has held 289,742 inspection rows, the last dated 2025-10-21, since 2025-10-22. If this FAILS, the register has resumed updating: re-measure the premises count and the data date",
+    "kind": "http_contains",
+    "url": "https://services-eu1.arcgis.com/81H0sgjoIWj6WxIM/arcgis/rest/services/Livsmedelstillsyn/FeatureServer/41/query?where=1%3D1&returnCountOnly=true&f=json",
+    "present": ["\"count\":289742"]
+  },
+  {
+    "id": "stockholm-osm-tbana-refs",
+    "claim": "OSM carries the T-bana's seven refs in Stockholm's bbox",
+    "kind": "osm_route_refs",
+    "bbox": [59.22, 17.75, 59.45, 18.20],
+    "routes": ["subway"],
+    "require_refs": {"subway": ["10", "11", "13", "14", "17", "18", "19"]}
+  },
+  {
+    "id": "stockholm-projected-crs",
+    "claim": "Stockholm's derived UTM zone is 34N (EPSG:32634) - it lies just east of 18 E - not 33N",
+    "kind": "utm_zone_from_longitude",
+    "lon": 18.0686,
+    "expect": "EPSG:32634"
   }
 ]
 ```
