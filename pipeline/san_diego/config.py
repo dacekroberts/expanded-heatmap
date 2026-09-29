@@ -95,6 +95,30 @@ TAXONOMY_SYSTEM = "naics"
 # taxonomy's VALUE_COLUMN, then filters via pipeline.taxonomies.
 RAW_CLASSIFICATION_COLUMN = "naics_code"
 
+# NAICS codes excluded for THIS city only, EXACT match (owner, 2026-09-29) -
+# Los Angeles' and San Francisco's NAICS_EXCLUDE_CODES idiom, applied as its
+# own printed filter in step 2. San Diego's registry files codes at variable
+# length, and these three are its own:
+#   8129    "OTHER PERSONAL SERVICES" at the bare industry-group level (569
+#           pins). A sample reads calibration labs, marine services, waste
+#           collection, remodelling, photographers: the catch-all under
+#           another number. EXACT, because the prefix would take 81291 pet
+#           care and 81292 photofinishing, which stay.
+#   72234   "COTTAGE FOOD OPERATOR" (192): California's licence for a home
+#           kitchen (bakers, sweets) - food with no counter of its own.
+#   81295 / 812959  "KIOSK/ATM BUSINESSES" / "OTHER KIOSK RELATED BUSINESS"
+#           (23 + 3): ecoATM phone-recycling machines and two carrier kiosks
+#           - a machine, not a storefront. ecoATM files under both codes.
+NAICS_EXCLUDE_CODES = {"8129", "72234", "81295", "812959"}
+
+# The near misses: exact matching must leave 81291 pet care and 81292
+# photofinishing classified and on the map.
+from pipeline.taxonomies.naics import naics_group as _ng  # noqa: E402
+assert _ng("81291") == "Personal services" and "81291" not in NAICS_EXCLUDE_CODES
+assert _ng("81292") == "Personal services" and "81292" not in NAICS_EXCLUDE_CODES
+assert all(_ng(_c) is not None for _c in NAICS_EXCLUDE_CODES), \
+    "a per-city exclusion must name a code the taxonomy would otherwise map"
+
 # Sanity bounds for the business dataset's own lat/lng. San Diego's data
 # ships pre-geocoded (see step2), so this is a data-quality check on the
 # supplied coordinates, not a post-geocode validation.

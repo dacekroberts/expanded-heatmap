@@ -45,7 +45,8 @@ cafés, takeaways, pubs and bars, and food shops from corner shops to
 supermarkets. No open register of other shops or of personal services covers
 Glasgow, so **clothes shops, hairdressers and the like are not on this map**.
 Caterers working from home, mobile traders, and kitchens in schools, hospitals
-and workplaces are left out.
+and care homes are left out; a workplace canteen registered as a restaurant or
+café cannot be told apart and may appear.
 
 **Read the density as a register, not a street survey.** A premises stays
 listed until the council removes it. Every business shown sits at the

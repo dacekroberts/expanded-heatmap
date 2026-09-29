@@ -387,9 +387,9 @@ SITE_NAME = "Storefronts Near Transit"
 # take 1..n. At nine cities the next city would be page 10 - which these two
 # already occupied. Moving them to the 90s leaves 10-89 free for cities and
 # keeps them last in the sidebar, which is where they belong.
-ABOUT_DATA_PAGE = "pages/90_About_the_Data.py"
-EXCLUSIONS_PAGE = "pages/91_What_Is_Excluded.py"
-DIFFERENCES_PAGE = "pages/92_Why_the_Maps_Differ.py"
+ABOUT_DATA_PAGE = "pages/200_About_the_Data.py"
+EXCLUSIONS_PAGE = "pages/201_What_Is_Excluded.py"
+DIFFERENCES_PAGE = "pages/202_Why_the_Maps_Differ.py"
 
 # Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
 # and the sources are recorded in docs/data_sources.md, "Notices this project
@@ -1445,6 +1445,51 @@ _NOTICES = [
      "business-establishments-with-address-and-industry-classification/)), "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Filtered, categorised and "
      "aggregated by this project. The City of Melbourne does not endorse this map.",
+     False),
+    # Stockholm (notice 66): Stockholms stad's Livsmedelstillsyn register. Its licence
+    # is SILENT (no licence on the item; the publisher's own Hub feed says public, with
+    # CC0 on 8 of 109 datasets but not this one), so the notice credits the publisher
+    # and states the changes without claiming a licence. Wording approved by the
+    # owner 2026-09-29.
+    ("Stockholms stad (Stockholm)",
+     "Food premises for Stockholm are from the City of Stockholm's food inspection "
+     "register (Livsmedelstillsyn, Stockholms stad, miljöförvaltningen, "
+     "[open-data-sthlm-miljo.hub.arcgis.com](https://open-data-sthlm-miljo.hub.arcgis.com/)), "
+     "which the city publishes as public open data with no stated licence. Changes: the "
+     "inspections are reduced to one record per premises, filtered to restaurants, cafés, "
+     "bars and food shops, grouped into two categories, and mapped by distance to "
+     "Tunnelbana stations. This is not the official register, and it is not produced or "
+     "endorsed by Stockholms stad.",
+     False),
+    # Bucharest (notice 67): DSVSA București's registers. Licence SILENT (no terms page; the ANSVSA
+    # footer's "all rights reserved" covers the website), so the notice credits the
+    # publisher and states the changes without claiming a licence. Wording approved
+    # by the owner 2026-09-29.
+    ("DSVSA București (Bucharest)",
+     "Food premises for Bucharest are from the registers of the Sanitary-Veterinary and "
+     "Food Safety Directorate of Bucharest (DSVSA București, "
+     "[bucuresti.dsvsa.ro](https://bucuresti.dsvsa.ro/)), which it publishes with no stated "
+     "licence. Changes: cancelled registrations are left out; the units are filtered to "
+     "restaurants, cafés, bars and food shops, merged where one premises holds several "
+     "registrations, grouped into two categories, placed by matching their addresses to "
+     "OpenStreetMap's address points, and mapped by distance to metro stations. Company "
+     "names are shown without their legal form, and sole traders by category only. This is "
+     "not the official register, and it is not produced or endorsed by DSVSA or ANSVSA.",
+     False),
+    # SEMAS's 상가(상권)정보 (notice 68): data.go.kr 15083033, 이용허락범위 제한 없음. licence-read
+    # 2026-09-29: PERMITTED WITH CONDITIONS - a source credit, no distortion of the
+    # facts (so the categories are stated as this project's), SEMAS's website copyright
+    # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
+    # under the owner's pre-approval of this build's prose. Covers every Korean city on
+    # the register (Incheon; the Gyeonggi satellites add their names).
+    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin)",
+     "Storefronts for Incheon, Goyang, Seongnam and Yongin are from the Small Enterprise and "
+     "Market Service's "
+     "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "
+     "[data.go.kr](https://www.data.go.kr/data/15083033/fileData.do)), "
+     "이용허락범위 제한 없음. Changes: filtered to shops, food and drink and personal services, "
+     "grouped into three categories, and mapped by distance to stations; the categories and "
+     "counts are this project's, not SEMAS's. Not produced or endorsed by SEMAS.",
      False),
 ]
 

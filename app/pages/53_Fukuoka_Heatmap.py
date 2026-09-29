@@ -50,7 +50,8 @@ of 31 March 2026. Japan has no general business licence, so shops other than foo
 partial: shops that only notify rather than hold a permit, such as supermarkets, convenience
 stores and greengrocers, appear only where they chose to publish in the ministry's list.
 Fukuoka's yatai, the street stalls that trade nightly at fixed spots, are included. Food trucks,
-festival stalls, school and hospital kitchens and staff canteens are not. The lists may include
+festival stalls, caterers, school and hospital kitchens, staff canteens and snack bars are not. The
+lists may include
 premises that have closed, so a dot means a permit on file, not a business open today.
 
 About one restaurant in five in Fukuoka chose not to publish its address in the national filing

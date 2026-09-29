@@ -41,7 +41,8 @@ Maokong Gondola are not drawn.
 
 Businesses come from Taiwan's **national business tax register** (Fiscal Information Agency),
 which lists every trading location — a company's branches as their own rows — with an address and
-an industry code. Shops, food service and personal services are read from the code; online sellers
+an industry code. Shops, food service and personal services are read from the code; online sellers,
+street and market stalls, caterers, funeral services and the "other personal services" catch-all
 are left out. A company head office registered on an upper floor or in a numbered room is usually
 an office rather than a shop, so those rows are left out, except in buildings that hold many
 storefronts, such as markets and malls. Brands trading inside a department store are generally

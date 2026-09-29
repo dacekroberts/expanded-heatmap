@@ -100,6 +100,14 @@ RULES = [
     ("events venue", None, rx("SALAO DE FESTA", "SALAO DE EVENTO",
                               "CASA DE FESTA", "CASA DE EVENTO", "ESPACO DE FESTA",
                               "ESPACO DE EVENTO", "BUFFET", "EVENTOS")),
+    # Funeral services off every map (owner, 2026-09-28): funeral homes,
+    # wakes, crematoria and cemeteries are not storefronts. FUNERARIA was a
+    # Personal services word until then; CEMITERIO stays in "not premises"
+    # too, where it only catches a description that STARTS with it. The head
+    # noun still wins, so ARTIGOS FUNERARIOS (a shop selling funeral goods)
+    # stays Retail.
+    ("funeral services", None, rx("FUNERARI", "FUNERAL", "VELORIO",
+                                  "CREMATORIO", "CREMACAO", "CEMITERIO")),
     ("parking / storage", None, rx("GARAGE", "ESTACIONAMENTO", "GALPAO",
                                    "DEPOSITO(?! DE BEBIDA)", "ALMOXARIFADO",
                                    "ARMAZENAGEM", "GUARDA MOVEIS")),
@@ -181,7 +189,7 @@ RULES = [
         "COIFFEUR", "ESMALTERIA", "NAIL", "MANICURE",
         "PEDICURE", "ESTETICA", "DEPILACAO", "UNHA", "SOBRANCELHA", "BELEZA",
         "LAVANDERIA", "TINTURARIA", "TATUAGEM", "TATTOO", "PIERCING",
-        "BANHO E TOSA", "PET SPA", "FUNERARIA", "MASSAGEM", r"SPA\b",
+        "BANHO E TOSA", "PET SPA", "MASSAGEM", r"SPA\b",
         "MAQUIAGEM", "CILIOS", "BRONZEAMENTO")),
     ("retail", "Retail", rx(
         "LOJA .", "LOJAS", "LOJINHA", "VENDINHA", "TENDINHA", "MERCADO",
@@ -287,8 +295,19 @@ def fuzzy_fix(desc_norm):
             continue
         if tok not in _FIX_CACHE:
             k = 2 if len(tok) >= 9 else 1
-            _FIX_CACHE[tok] = next((w for w in _BY_FIRST.get(tok[0], ())
-                                    if _within(tok, w, k)), tok)
+            fix = next((w for w in _BY_FIRST.get(tok[0], ())
+                        if _within(tok, w, k)), tok)
+            # A body shop, not a funeral home, when the token is at least as
+            # close to FUNILARIA (2026-09-29). Sort order puts FUNERARIA
+            # first, and FUNELARIA, FUNIRARIA and FUNINARIA - Sao Paulo's
+            # spellings of funilaria - took 132 of its 178 "funeral" rows.
+            # Body shops outnumber funeral homes about 700 to 1; both labels
+            # are excluded, so this moves a reason, never a pin.
+            if fix == "FUNERARIA":
+                d = next(d for d in range(k + 1) if _within(tok, fix, d))
+                if _within(tok, "FUNILARIA", d):
+                    fix = "FUNILARIA"
+            _FIX_CACHE[tok] = fix
         out.append(_FIX_CACHE[tok])
     return " ".join(out)
 
@@ -331,8 +350,20 @@ for _d, _want in [("BAR DO CLUBE", "food service"),
                   ("DEPOSITO", "parking / storage"), ("PADARIA", "retail"),
                   ("GARAGEM DO MERCADO", "parking / storage"),
                   ("LOJA", "catch-all"), ("CASA DO NORTE", "retail"),
-                  ("CASA DE CARNES", "retail"), ("CASA", "not premises")]:
+                  ("CASA DE CARNES", "retail"), ("CASA", "not premises"),
+                  ("FUNERARIA", "funeral services"),
+                  ("VELORIO MUNICIPAL", "funeral services"),
+                  ("ARTIGOS FUNERARIOS", "retail")]:
     assert classify_text(_d)[0] == _want, (_d, classify_text(_d), _want)
+# The FUNILARIA/FUNERARIA tie in fuzzy_fix, both ways (measured 2026-09-29).
+for _d, _want in [("FUNELARIA E PINTURA", "auto / repair"),
+                  ("FUNULARIA E REPARACAO DE VEICULOS", "auto / repair"),
+                  ("FUNIRARIA E PINTURA", "auto / repair"),
+                  ("FUNINARIA", "auto / repair"),
+                  ("FUNEARIA CRUZ DOURADO", "funeral services"),
+                  ("FUNENARIA ROXO", "funeral services"),
+                  ("FENERARIA SANTA IZABEL", "funeral services")]:
+    assert classify_text(fuzzy_fix(norm(_d)))[0] == _want, (_d, classify_text(fuzzy_fix(norm(_d))), _want)
 
 
 # --- version 2: words that only RESCUE a row nothing above matched ----------

@@ -155,15 +155,11 @@ _PERSONAL = {
     "ARREGLO DE ROPA",                              #   214  alterations
     "DEPILACION",                                   #   157
     "TATUAJES",                                     #   111
-    "SEPELIOS",                                     #    78  death care, 8122
     "SASTRERIA",                                    #    35
     "SOLARIUM",                                     #    34
-    "VELATORIO",                                    #    33
-    "FUNERARIA",                                    #    32
     "MASAJES",                                      #    29
     "PELUQUERIA MASCOTAS",                          #    27  pet grooming, 812910
     "INSTITUTO DE BELLEZA",                         #    25
-    "TAROT", "ASTROLOGIA",                          #    10  812990
 }
 
 # --- Not a storefront in this project's sense -------------------------------
@@ -174,6 +170,15 @@ _NOT_STOREFRONT = {
     "SIN IDENTIFICAR",
     # Homes filed under UNICOMERCIAL; never pin a home
     "RESIDENCIAL",
+    # Death care (NAICS 8122): funeral services off every map (owner,
+    # 2026-09-28) - funeral homes and wake parlours are not storefronts.
+    "SEPELIOS",                                     #    78
+    "VELATORIO",                                    #    33
+    "FUNERARIA",                                    #    32
+    # NAICS 812990, the "other personal services" catch-all: fortune-telling
+    # and astrology off every map (owner, 2026-09-29). Personal services
+    # until then.
+    "TAROT", "ASTROLOGIA",                          #    10
     # Vehicle repair and services (811)
     "TALLER MECANICO DE AUTOMOTORES", "CHAPA Y PINTURA AUTOMOTORES",
     "LAVADERO DE AUTOS", "GOMERIA", "LUBRICENTRO",

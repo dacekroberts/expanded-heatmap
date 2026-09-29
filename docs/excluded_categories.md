@@ -133,6 +133,20 @@ which is the honest limit of a map built from one city's own data.
 
 ## Which businesses are counted
 
+**Five kinds of business are left off every map, wherever a register names
+them.** Funeral homes, crematoria and cemeteries, which are not places a
+passer-by walks into. Food with no counter of its own: canteens inside schools,
+offices, hospitals and care homes, event caterers, food trucks, and street and
+market stalls. The "other personal services" catch-all that registers keep for
+whatever fits nowhere else, which mostly holds people working from home or at
+the customer's door, fortune-tellers and dating agencies among them. Adult and
+hostess venues, left off for the sake of the people who work there; sex shops
+are shops and stay. And gambling: betting shops, casinos, arcades and lottery
+agencies. Where a register files one of these under the same label as ordinary
+businesses, it cannot be separated and stays on the map; each city's section
+says where. Newsstands and kiosks, pawnbrokers, karaoke bars and nightclubs are
+kept, and car dealers count as shops everywhere except France.
+
 The rest of this page is the other half — what is excluded from the business
 side, city by city, and what is missing from it rather than excluded.
 
@@ -166,6 +180,8 @@ city's own data.
 
 ### Los Angeles — All other personal services (NAICS 812990)
 
+Since 2026-09-29 this catch-all is left out in every city.
+
 A national catch-all code. An earlier sample of this code found roughly 90% of
 it was not storefront at all: people working from home, professional offices,
 and services that travel to the customer. Los Angeles's own data matched that
@@ -176,6 +192,23 @@ It was a large exclusion: 31% of the city's otherwise-qualifying businesses.
 Los Angeles is unusual in that 68% of its registry rows carry no trade name, so
 those rows displayed the registrant's own name.
 
+Also left out: funeral services (93) and food with no counter of its own —
+mobile food (348), caterers (147) and food-service contractors (60). **Kept
+because it cannot be split:** `722300` "special food services" (3,145 pins),
+which this registry uses for caterers, concession stands and food trucks alike,
+but also for taquerias and cafés; all of it counts as food service.
+
+### San Diego - its own codes for massage parlours, cottage kitchens and kiosks
+
+San Diego's registry extends NAICS with codes of its own, and four are left
+out: `812193` massage parlours (144; massage therapy, `812198`, stays), `72234`
+cottage-food operators (192, a licensed home kitchen), `81295`/`812959` kiosk
+businesses (26, ecoATM phone-recycling machines), and `8129` "other personal
+services" filed at group level (569; calibration labs, waste haulers,
+remodellers). With the `81299` catch-all (585), caterers, mobile food and food
+contractors (296) and funeral services (19), 1,831 pins leave the map. Pet care
+and photofinishing stay.
+
 ### San Francisco — Solo massage establishments (NAICS 812990)
 
 The same code number, but San Francisco's licence data labels it "solo massage
@@ -184,6 +217,13 @@ establishment" rather than the generic name, so it is a different decision. Of
 address with a residential indicator — the highest share of any category in the
 city. A sole practitioner working from home is a sensitive thing to place on a
 public map, and the category is a small part of the total, so it is excluded.
+
+Also left out: funeral services (21); food with no counter of its own
+(1,300) — food-service contractors (537), caterers (417) and mobile food (325);
+and the remaining catch-all rows filed as `81299` (21). The contractor code
+goes whole, although the city's own licences show it also holds 139 stadium
+and convention-centre concession stands, 21 bars on San Francisco Bay ferries
+and a few restaurants.
 
 ### New York — licences held by a person, and non-storefront trades
 
@@ -231,6 +271,15 @@ amusements, child care, and licences that merely attach to a business already
 counted (an outdoor-patio or late-hour permit, for instance). A business holding
 several licences is counted once.
 
+Licences whose only listed activity is "Miscellaneous Personal Services", the
+city's catch-all, are left out (133); a licence that also names a specific
+service is counted by that service.
+
+Chicago has no funeral licence type. Most funeral homes were licensed under the
+"Miscellaneous Personal Services" catch-all and leave the map with it (35). The
+29 pins that still carry funeral words sell funeral items, and stay as
+funeral-goods shops do everywhere.
+
 ### Philadelphia — landlord registrations, and non-storefront permits
 
 Philadelphia licenses activities rather than businesses, so its exclusions are
@@ -255,9 +304,10 @@ Sales`, which licenses vending *from* a vehicle and whose holders are food
 trucks); vehicle repair, towing, wrecking and parking; permits that attach to a
 building rather than a business (dumpsters, hazardous materials, high-rise, hot
 work); food manufacturing and wholesale; child care; assembly venues; games of
-chance; and handbill distribution. A business holding several licences is
-counted once, so a restaurant with pavement seating appears as a restaurant
-rather than twice.
+chance; handbill distribution; and event caterers (`Food Caterer`, 193) and
+curb markets (10). Newsstands are kept, as small walk-in shops. A business
+holding several licences is counted once, so a restaurant with pavement seating
+appears as a restaurant rather than twice.
 
 ### Miami — offices, wholesale, and one very large service catch-all
 
@@ -300,7 +350,8 @@ Mobile and itinerant trade is out as everywhere else — `LUNCH WAGON / TRUCK`,
 `ICE CREAM VENDOR`, `PEDDLER`, carnivals, and the machine licences (`A T M /
 POINT OF SALE`, `VENDING MACHINE`). Fitness centres, cinemas and other
 recreation venues (NAICS 713/711) are out because no bucket covers them in any
-city here.
+city here. `CATERING BUSINESS` (276) and `FUNERAL HOME` (62) are out too.
+`NIGHT CLUB` and `DANCING OR ENTERTAINMENT` are kept as food service.
 
 One category is kept on a cross-project consistency argument rather than a
 local one, and is flagged so the choice is visible: **`AUTO / TRUCK / VAN
@@ -401,6 +452,7 @@ tracked bucket — the same reason Miami's `SERVICE BUSINESS` went);
 Exempt 440, Cooperative Association 176); **wholesale** (NAICS 42); and
 **individual rather than premises licences** (Motor Vehicle Salesperson 263,
 Auctioneer 15, Tour Guide 3 — a licence attached to a person, not a shopfront).
+`Funeral Establishment` (29) is excluded, as funeral services are everywhere.
 
 **One category is kept despite being ambiguous, and it is a large one.**
 `Delicatessen` (1,065) is D.C.'s prepared-food catch-all, issued to sandwich
@@ -443,7 +495,9 @@ excluded, on the same reasoning as the project-wide NAICS 454 exclusion above:
 NAICS itself calls these "nonstore". Street Vendor is the largest single
 row-count given up to that consistency, and the category is genuinely mixed -
 Vancouver licenses food carts and merchandise vendors under one label with no
-subtype to separate them.
+subtype to separate them. Both registers' `Caterer` (148 and 49), Surrey's
+`Concession Stand` (5) and `Flea Market` (1) are out too. Surrey's one
+`Adult Entertainment Store` is a sex shop and stays.
 
 **Surrey's catch-all is a regional permission, not a premises.**
 `Inter-Municipal Business License Metro` (758) and `Inter-Municipal Business
@@ -497,10 +551,9 @@ other way:
   same line itself**, between `Health Care Professionals and Services` and
   `Health Enhancement Services` (111, kept), which is why the rule is the
   registries' rather than this project's invention.
-- **A funeral parlour counts; a cemetery does not.** Both are NAICS 812, so the
-  prefix alone would keep both. Surrey's `Funeral Parlour` (4) is a walk-in
-  commercial premises; `Cemetery` (2) is land. A deliberate departure from the
-  prefix, on storefront grounds.
+- **Neither a funeral parlour nor a cemetery counts.** Surrey's
+  `Funeral Parlour` (4) and `Cemetery` (2) are left out: funeral services are
+  off every map.
 - **Licence applications are not businesses.** Vancouver's
   `Liquor License Application` (50), `Temp Liquor Licence Amendment` (30) and
   `Cannabis Licence Application` (1) are administrative rows, not premises.
@@ -535,6 +588,11 @@ municipalities, two of which are not in the survey at all. The Métro does not
 reach them, so almost none of this is drawn; read the island's edges as thinner
 in the data, not necessarily on the ground.
 
+**Caterers are kept here (107), unlike in every other NAICS city.** The survey
+records premises a surveyor walked past, and they are traiteur shops with a
+counter, as in France. Left out, as everywhere: funeral services (39) and the
+"other personal services" catch-all (30).
+
 ### Calgary - endorsements, nonstore trade, and two categories left off on sensitivity
 
 **Calgary's register does most of this page's work itself**, which makes its
@@ -562,7 +620,8 @@ DEALER - NO PREMISES` (42), `FOOD SERVICE - NO PREMISES` (27), `FULL SERVICE
 FOOD VEHICLE` (50), `PERSONAL SERVICE (MOBILE)`, `MASSAGE CENTRE (HOME BASED)`
 and the `(DIRECT SALES)` cleaning variants. **`RETAIL DEALER - PREMISES (MAIL
 ORDER)` (59) is excluded despite saying PREMISES** - the suffix nearest the
-actual trade wins, and mail order is nonstore.
+actual trade wins, and mail order is nonstore. `MARKET` (27) is out: a market
+is where stalls stand, not a shop.
 
 **Repair is excluded and personal care is not**, the same NAICS 811-against-812
 line Vancouver and Surrey draw: `MOTOR VEHICLE REPAIR AND SERVICE` (1,400
@@ -600,6 +659,9 @@ It is constant, not merely unreliable, so unlike Surrey (`Home Occupation`,
 14,015 rows) and Edmonton (`licencetype`, 14,114) the City asserts nothing
 about home occupation, and no inference is attempted - Vancouver's parcel
 substitute, built for the same silence in its own register, removed nothing.
+
+About 12 pins with funeral words in their names sit under the general retail
+licence and stay.
 
 ### Edmonton - a register that sorts itself, and one merged category counted anyway
 
@@ -732,8 +794,10 @@ recreation (450, NAICS 713940 as Vancouver's `Fitness Centre` and Calgary's
 and motels (98, NAICS 721 not 722), independent laboratories (69), scrap metal
 dealers (52), auctions (14, NAICS 425 agents and brokers - the sample is
 livestock and salvage), bingo and casinos (11, NAICS 7132), cannabis processing
-(6) and cultivation (3), event production (3), carnivals (2) and one
-after-hours dance club that holds no alcohol category.
+(6) and cultivation (3), event production (3) and carnivals (2).
+`After Hours Dance Club` (1) counts as food service, as a nightclub does
+everywhere here; that premises was already a pin through its retail licence.
+`Funeral, Cremation, and Cemetery Service` (19 pins) is out.
 
 ### Toronto - endorsements, person-held licences, and a register that is mostly history
 
@@ -813,14 +877,15 @@ to None rather than deleted, so it is one line to reverse.
 
 **Also excluded, without controversy:** entertainment and recreation
 (`ENTERTAINMENT PLACE OF ASSEMBLY` 445, `AMUSEMENT ESTABLISHMENT` 437,
-`BILLIARD HALL` 177, `ENTERTAINMENT ESTABLISHMENT/NIGHTCLUB` 170 - merged and
-leading with entertainment, so the same treatment as Edmonton's after-hours
-dance club - `THEATRE` 73, `BOWLING HOUSE` 38, `CARNIVAL` 16, `CIRCUS` 5,
-`SWIMMING POOL` 3), `PAYDAY LOAN` (187, NAICS 522291), `SECOND HAND SALVAGE
+`BILLIARD HALL` 177, `THEATRE` 73, `BOWLING HOUSE` 38, `CARNIVAL` 16, `CIRCUS`
+5, `SWIMMING POOL` 3), `PAYDAY LOAN` (187, NAICS 522291), `SECOND HAND SALVAGE
 YARD` (68, a yard rather than a shop), `AUCTIONEER` (251) and `COLLECTOR OF
 SECOND HAND GOODS` (66) as people rather than premises, `SHORT TERM RENTAL
 COMPANY` (5, NAICS 721), and `** Class record not on file. (138)` (4), which is
 the register's own placeholder.
+
+**Nightclubs count as food service** — 36 active premises, about 32 new pins
+once geocoded — as in every other city. Adult entertainment clubs stay out.
 
 ### Mexico City - street stalls, a nonstore twin, and a heuristic that does not speak Spanish
 
@@ -841,6 +906,10 @@ the same reasoning regardless of size.
 
 **SCIAN 812410 — parking — is excluded**, the twin of NAICS 81293. 2,230 units.
 A parking trip is planned rather than incidental foot traffic from a station.
+
+Also excluded: public toilets and shoe-shine stands (`812130`, 1,646), the
+"other personal services" catch-all (`812990`, 977), funeral services (629),
+event caterers (146), institutional canteens (82) and food trucks (61).
 
 **Not excluded but absent by construction: 811 repair and 813 associations.**
 Personal services is anchored on **812**, not the whole of 81, so auto repair
@@ -869,6 +938,10 @@ SCIAN **469** nonstore retail, and SCIAN **812410** parking. Food service is
 anchored on **722** and personal services on **812**, so 721 accommodation, 811
 repair and 813 associations never enter. See the Mexico City section above for
 the measurements behind each.
+
+Also excluded: public toilets and shoe-shine stands (`812130`, 227), the
+"other personal services" catch-all (`812990`, 238), funeral services (207),
+event caterers (77), institutional canteens (34) and food trucks (14).
 
 **Tonalá is excluded, and it is the only whole municipio this project has left
 out of a region it could have included.** DENUE holds **19,897** economic units
@@ -903,6 +976,10 @@ enter. Repair is the largest of those here - 9,593 fixed premises at the
 2026-09-27 screen, in an industrial city - and is most of why storefronts are a
 smaller share of fixed premises than in the other two Mexican cities.
 
+Also excluded: public toilets and shoe-shine stands (`812130`, 72), the
+"other personal services" catch-all (`812990`, 125), funeral services (156),
+event caterers (78), institutional canteens (51) and food trucks (33).
+
 **No whole municipio is left out.** Monterrey, San Nicolás de los Garza,
 Guadalupe and General Escobedo are exactly the municipios a station's 0.6-mile
 ring reaches; no other municipio in Nuevo León has a Metrorrey station. They are
@@ -934,8 +1011,11 @@ renderer's contact-detail scrub - a shop sign styled as an e-mail address.
 **Hotels and tourist flats are excluded** - accommodation rather than food
 service, the same carve-out Barcelona needs and for the same reason. So are
 wholesale, vehicle repair, and premises with no shopfront at all, such as
-online and vending sales. The three categories are the register's own activity
-classification, not NAICS.
+online and vending sales. So are canteens in schools, care homes, social
+centres, offices, sports grounds and hospitals (1,157), banquet halls and event
+caterers (90), the register's "other personal services (astrology, contact
+agencies)" catch-all (43) and funeral parlours (30). The three categories are
+the register's own activity classification, not NAICS.
 
 **About one storefront premises in eleven cannot be placed on the map.** The
 register gives every premises a coordinate, and **9.2%** of those in these
@@ -968,6 +1048,10 @@ number's clothes.
 counted.** The census flags them and this map deliberately ignores the flag: a
 mall beside a station is commercial density a rider can reach.
 
+**Kept, although part of it is clinics:** `Veterinaris / Mascotes` (395) puts
+vets under one value with pet shops and groomers; about 160 read as veterinary
+clinics by name, and the census cannot separate them.
+
 ### Dublin - a register of premises rather than of businesses
 
 **Nothing here is excluded on the basis of what a business is called, because
@@ -981,6 +1065,10 @@ does not arise.
 what it is counted as** - a shop with offices above it is a shop, a salon
 behind a shopfront is a salon. A premises whose recorded uses are none of
 retail, food service or personal service is not on the map.
+
+**Betting shops are left out (175)**, with a casino and an amusement centre that
+had reached the map through a "shop" use beside them. So are markets (4) and
+funeral homes (38). Kiosks stay: a kiosk is a small walk-in shop.
 
 ### Milan - six registers kept apart, and a category the register cannot mark
 
@@ -999,6 +1087,9 @@ identify themselves are filtered out, but the register does not mark them
 reliably, so some remain. This is an exclusion that is incompletely applied
 rather than a category left in on purpose, and it is the one limit on this
 city's map worth knowing before reading its food-service colours.
+
+Milan's registers carry no funeral code; about 29 funeral services reach the
+non-food shop layer through the shop register, and they stay.
 
 ### Paris - four trades with no premises, and two catch-alls the publisher's own hierarchy settled
 
@@ -1029,6 +1120,15 @@ magasin** - INSEE stating the premises exists - so they stay. This is
 Barcelona's finding in French: the publisher's hierarchy settling a call that a
 reading of the language would have got wrong.
 
+**Funeral services (`96.03Z`) are excluded** — 261 here.
+
+**Car dealers are not on the French maps, unlike every other city here.**
+SIRENE files vehicle sales in their own division, not with retail. Four selling
+codes would add about 9,500 pins across the five cities (5,384 in Paris), but
+95% record no employees and about a quarter carry a premises name: mostly
+one-person traders, probably registered at home. Left off on that ground
+(owner, 2026-09-29).
+
 **What is left is still more than a street survey would find, and that is
 disclosed rather than filtered.** Against OpenStreetMap's mapped shops in the
 same commune the map carries roughly **1.8 times** as many points after these
@@ -1041,10 +1141,10 @@ numbers agreed would be fitting to a number rather than measuring one.
 
 **Everything excluded in Paris is excluded here, from the same national
 register and for the same reasons** - the four no-premises trades, the wholesale
-laundry, and the same two catch-alls `96.09Z` and `56.29B`. The catch-all
-verdict was re-measured rather than inherited: the two cities' compositions
-differ, which is why the shares were counted for Marseille instead of Paris's
-being assumed.
+laundry, funeral services, and the same two catch-alls `96.09Z` and `56.29B`.
+The catch-all verdict was re-measured rather than inherited: the two cities'
+compositions differ, which is why the shares were counted for Marseille instead
+of Paris's being assumed.
 
 **The gap against OpenStreetMap is wider here - about 2.6 times as many points -
 and most of that is not the register.** OpenStreetMap covers Marseille far
@@ -1063,11 +1163,11 @@ revisiting, not as an automatic application of a rule.
 
 **Everything excluded in Paris is excluded here, from the same national
 register and for the same reasons** - the four no-premises trades, the
-wholesale laundry, and the same two catch-alls `96.09Z` and `56.29B`. The
-verdict was measured a third time rather than inherited, and this is the city
-that shows why that is not ceremony: `96.09Z` is **13.9%** of Toulouse's bucket
-rows against roughly 9.7% in both Paris and Marseille. The national argument
-transfers; the shares plainly do not.
+wholesale laundry, funeral services, and the same two catch-alls `96.09Z` and
+`56.29B`. The verdict was measured a third time rather than inherited, and this
+is the city that shows why that is not ceremony: `96.09Z` is **13.9%** of
+Toulouse's bucket rows against roughly 9.7% in both Paris and Marseille. The
+national argument transfers; the shares plainly do not.
 
 **A fifth of this city's active establishments are withheld by INSEE, not by
 this project.** `statutDiffusion` masks the name, the address **and** the
@@ -1100,9 +1200,9 @@ out not to exist, is recorded in `DECISIONS.md`.
 ### Lille (Regional) - the same register, eleven communes, and no station lost to a boundary
 
 **Everything excluded in Paris is excluded here, for the same reasons** - the
-four no-premises trades, the wholesale laundry, and the two catch-alls
-`96.09Z` and `56.29B`. They were measured again rather than inherited:
-`96.09Z` is 11.2% here, between Marseille and Toulouse.
+four no-premises trades, the wholesale laundry, funeral services, and the two
+catch-alls `96.09Z` and `56.29B`. They were measured again rather than
+inherited: `96.09Z` is 11.2% here, between Marseille and Toulouse.
 
 **No station is excluded for its location, because the boundary is drawn
 around the stations.** This map covers the eleven communes the network serves,
@@ -1121,9 +1221,9 @@ railway.
 ### Rennes - the same register, and one line that leaves the commune at both ends
 
 **Everything excluded in Paris is excluded here, for the same reasons** - the
-four no-premises trades, the wholesale laundry, and the two catch-alls `96.09Z`
-and `56.29B`. They were measured again rather than inherited: `96.09Z` is 14.0%
-here, level with Toulouse, and its rows show the same sign of sole traders
+four no-premises trades, the wholesale laundry, funeral services, and the two
+catch-alls `96.09Z` and `56.29B`. They were measured again rather than
+inherited: `96.09Z` is 14.0% here, level with Toulouse, and its rows show the same sign of sole traders
 registered at home - rows with no employee band are 28.8% catch-all, against
 9.8% for rows that record one.
 
@@ -1153,6 +1253,8 @@ is usually a shop, while Norway's label says the work happens at the event.
 services not elsewhere classified*: 811 rows, of which 5% record any employee
 and 87% belong to a sole trader, the strongest home-based signature measured in
 any city here. The five retail catch-alls are kept.
+
+Funeral services are excluded too, as everywhere: 40 premises.
 
 **Excluded because the business is ending** - 260 premises whose parent
 company is bankrupt or being wound up.
@@ -1194,6 +1296,8 @@ seventy tattoo studios and a few dog groomers, which are lost with it, and the
 map's page says so. The six retail catch-alls and "other eating places" are
 kept.
 
+Funeral services are excluded too, as everywhere: 56 premises.
+
 **Left off because they could not be placed** - 256 premises (under 2%) that
 carry no address in Denmark's official address register, more of them
 personally owned than the storefronts as a whole.
@@ -1223,15 +1327,15 @@ municipality.
 **Excluded by the classification itself, anywhere in Czechia** - personal
 services performed in the customer's home (439), catering and contract catering
 (101), and retail intermediation (10): 550 rows, read against the Czech
-Statistical Office's own CZ-NACE 2025 labels.
+Statistical Office's own CZ-NACE 2025 labels. So are funeral services (66).
 
 **Excluded because it is probably a home** - 1,500 establishments of people
 trading in their own name at their own registered address, which for a Czech
 sole trader is usually where they live.
 
-**No catch-all is excluded.** The "other personal services" category that other
-cities leave out holds three rows here; the 2025 classification already sorts
-that work into specific classes. Day spas, saunas and massage salons are a
+**The "other personal services" catch-all is excluded, as in every city — three
+rows here**; the 2025 classification already sorts that work into specific
+classes. Day spas, saunas and massage salons are a
 specific class and are kept.
 
 **Missing rather than excluded** - about 57,000 Prague establishments belong to
@@ -1276,6 +1380,9 @@ and 22 permits whose address could not be placed.
 
 **What cannot be excluded: empty shops.** About one shop unit in twenty stood
 empty at the start of 2026, and no open source says which.
+
+The building register records only a shop unit, so a funeral home there cannot
+be identified or removed.
 
 **Shown, but not named** - every shop unit shows its address.
 
@@ -1327,6 +1434,9 @@ parking and storage (44,793), vehicle and repair workshops (40,992), industry an
 places of worship (9,154), events venues (2,306), accommodation (1,766) and other
 non-premises (2,495); and 5,940 rows with no usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded** (558 across the nine
+cities).
+
 **Missing rather than excluded** - 108,311 establishments whose description no rule can
 read, mostly bare brand or trade names: about a third of those that might be
 storefronts, commoner near stations and in commercial districts. By hand-read samples,
@@ -1334,6 +1444,12 @@ roughly one storefront in ten to one in seven within the station rings is missin
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls. About 320 descriptions across the nine cities mention a trailer or food truck,
+and about 1,400 start with quiosque, barraca or banca, but a beach kiosk is a fixed
+premises and a trailer may stand in one spot for years. They count as whatever the rest
+of the description names.
 
 **Shown, but not named** - at an address that is also a home (37% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1350,11 +1466,16 @@ buses and bus corridors.
 **Excluded by what the enumerator wrote** - vacant premises (22,954), parking and storage (18,528), vehicle and repair workshops (15,286), offices and professional premises (14,669), industry and trades (9,827), public, civic and education premises (8,131), places of worship (6,692), events venues (2,526), accommodation (1,930) and other non-premises (1,657); and 4,155 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 51,532 establishments whose description no rule can
 read, mostly bare brand or trade names: about a third of those that might be storefronts, a little more near the stations - about 35 in a hundred.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (55% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1372,11 +1493,16 @@ railway; and the Complexo do Alemão cable car, closed since 2016.
 **Excluded by what the enumerator wrote** - vacant premises (12,939), vehicle and repair workshops (8,628), offices and professional premises (8,370), parking and storage (7,514), industry and trades (6,007), public, civic and education premises (3,767), places of worship (1,917), events venues (580), accommodation (246) and other non-premises (557); and 1,203 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 27,675 establishments whose description no rule can
 read, mostly bare brand or trade names: about four in ten of those that might be storefronts, slightly more near the stations.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (36% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1391,11 +1517,16 @@ only since it opened on 3 July 2026; Linha 1's two stations in Contagem are left
 **Excluded by what the enumerator wrote** - vacant premises (6,925), vehicle and repair workshops (6,893), offices and professional premises (6,621), industry and trades (5,322), parking and storage (5,025), public, civic and education premises (3,347), places of worship (1,821), events venues (503), accommodation (269) and other non-premises (392); and 989 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 26,057 establishments whose description no rule can
 read, mostly bare brand or trade names: about four in ten of those that might be storefronts.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (69% of dots), the dot
 shows its category, never the enumerator's description. Brasília's addresses name a block rather than a door, so
@@ -1411,11 +1542,16 @@ Federal District. Not drawn: 104 Sul and Onoyama, still being built.
 **Excluded by what the enumerator wrote** - parking and storage (12,006), vehicle and repair workshops (7,241), vacant premises (5,999), industry and trades (4,290), offices and professional premises (4,207), public, civic and education premises (3,458), places of worship (2,570), events venues (468), accommodation (339) and other non-premises (282); and 2,631 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 25,502 establishments whose description no rule can
 read, mostly bare brand or trade names: about a third of those that might be storefronts.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (56% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1430,11 +1566,16 @@ Aeroporto, in Lauro de Freitas, is left out.
 **Excluded by what the enumerator wrote** - vacant premises (12,203), vehicle and repair workshops (11,021), parking and storage (10,972), industry and trades (8,994), offices and professional premises (7,306), public, civic and education premises (4,179), places of worship (2,247), events venues (607), accommodation (470) and other non-premises (482); and 2,143 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 42,506 establishments whose description no rule can
 read, mostly bare brand or trade names: about four in ten of those that might be storefronts, slightly more near the stations.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (54% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1451,11 +1592,16 @@ with no station of its own.
 **Excluded by what the enumerator wrote** - vacant premises (10,630), offices and professional premises (9,113), parking and storage (7,789), vehicle and repair workshops (7,170), industry and trades (5,530), public, civic and education premises (3,933), places of worship (1,609), events venues (584), accommodation (286) and other non-premises (376); and 1,026 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 31,465 establishments whose description no rule can
 read, mostly bare brand or trade names: almost half of those that might be storefronts, and about half near the stations, so the station areas are the most under-drawn part of this map.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (42% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1470,11 +1616,16 @@ municípios it runs through. Not drawn: the airport people mover.
 **Excluded by what the enumerator wrote** - parking and storage (9,188), vehicle and repair workshops (7,452), vacant premises (7,387), offices and professional premises (5,653), industry and trades (4,992), public, civic and education premises (3,418), places of worship (1,677), events venues (416), accommodation (301) and other non-premises (550); and 2,568 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 33,903 establishments whose description no rule can
 read, mostly bare brand or trade names: about four in ten of those that might be storefronts.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (44% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1491,11 +1642,16 @@ with no station of its own.
 **Excluded by what the enumerator wrote** - vacant premises (2,521), offices and professional premises (2,328), parking and storage (2,240), vehicle and repair workshops (1,910), industry and trades (1,260), public, civic and education premises (1,190), places of worship (565), events venues (200), accommodation (99) and other non-premises (173); and 343 rows with no
 usable description.
 
+**Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
+
 **Missing rather than excluded** - 7,127 establishments whose description no rule can
 read, mostly bare brand or trade names: almost four in ten of those that might be storefronts, slightly more near the stops.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
 during its fieldwork.
+
+**Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
+stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (35% of dots), the dot
 shows its category, never the enumerator's description.
@@ -1523,7 +1679,8 @@ permits older than five years and coffeeshop permits older than one.
 
 **What cannot be excluded: closed premises and empty shops.** A premises that closed stays until
 its permit would have run out (about one in seven, measured on Amsterdam); about 7% of shop units
-were registered vacant on 1 January 2025 (CBS).
+were registered vacant on 1 January 2025 (CBS). The building register records only a shop unit,
+so a funeral home there cannot be identified or removed.
 
 **Not named** - no dot carries a business name; shop units show their address.
 
@@ -1575,7 +1732,8 @@ two venues apart is never read.
 
 **Left out of the cadastre** - trade premises named as fuel stations, wholesale or storage, food
 service (the excise register is the food layer), gambling, offices, dwellings and ancillary rooms;
-412 shops in buildings the city lists as degrading.
+412 shops in buildings the city lists as degrading. The building register records only a shop
+unit, so a funeral home there cannot be identified or removed.
 
 **Not placed** - 48 food premises whose address matched no address point; 34 shops whose building
 had no footprint.
@@ -1682,9 +1840,15 @@ Ilgwang, have no ring.
 
 ### Taichung - Taiwan's national tax register, joined to the city's door plates
 
-**Left out** - online shopping (industry code 487); every industry outside retail, food service
-and personal services; 1,521 company head-office rows on an upper floor or in a numbered room,
-which read as offices (owner's rule; buildings with 20 or more storefront rows exempt).
+**Left out** - online shopping (industry code 487); funeral services (443); street and market
+stalls (1,101) and caterers, banquet cooks and school-lunch contractors (266); the "other
+personal services" catch-all, fortune-telling and marriage introduction (574); every industry
+outside retail, food service and personal services; 1,521 company head-office rows on an upper
+floor or in a numbered room, which read as offices (owner's rule; buildings with 20 or more
+storefront rows exempt).
+
+Drinking places and restaurants with shows are kept: their register names claim no hostess
+service.
 
 **Not placed** - 5,599 rows whose address matched no door plate: market and roadside stalls,
 intersections, and rural addresses.
@@ -1701,8 +1865,13 @@ drawn: Taiwan Railway and high-speed rail.
 
 ### Taoyuan - the same register and rules as Taichung, on the Airport MRT
 
-**Left out** - online shopping; industries outside the three buckets; 1,177 office-like company
-head-office rows (owner's rule).
+**Left out** - online shopping; funeral services (288); street and market stalls (553) and
+caterers, banquet cooks and school-lunch contractors (182); the "other personal services"
+catch-all, fortune-telling and marriage introduction (388); industries outside the three
+buckets; 1,177 office-like company head-office rows (owner's rule).
+
+Drinking places and restaurants with shows are kept: their register names claim no hostess
+service.
 
 **Not placed** - 3,097 rows whose address matched no door plate (rural addresses, stalls,
 intersections).
@@ -1716,8 +1885,14 @@ centre, so most storefronts lie outside the rings.
 
 ### Taipei (Regional) - Taipei and New Taipei, the same register and rules
 
-**Left out** - online shopping; industries outside the three buckets; 10,138 office-like
-company head-office rows (6,232 in Taipei, 3,906 in New Taipei; owner's rule).
+**Left out** - online shopping; funeral services (634); street and market stalls (2,669) and
+caterers, banquet cooks and school-lunch contractors (272); the "other personal services"
+catch-all, fortune-telling and marriage introduction (811); industries outside the three
+buckets; 10,138 office-like company head-office rows (6,232 in Taipei, 3,906 in New Taipei;
+owner's rule).
+
+Drinking places and restaurants with shows are kept: their register names claim no hostess
+service.
 
 **Not placed** - 9,364 rows whose address matched no door plate: about 3,600 stalls in
 Taipei's traditional markets and under viaducts (owner: left off rather than stacked on their
@@ -1854,6 +2029,8 @@ line.
 - 58 restaurants inside hotels and inns.
 - 62 mail-order and online sellers.
 - 10 karaoke boxes.
+- 103 snack bars (スナック).
+- 39 caterers (仕出し).
 - 111 filings MHLW marks as closed (廃業).
 
 **Counted** - Fukuoka's 81 yatai (屋台, filed as ろ店), which trade nightly at
@@ -1937,8 +2114,14 @@ line.
   temporary and mobile permits, 276 premises inside hotels and inns, 133
   entertainment venues, 71 mail-order businesses, 2 linen suppliers and 2
   salons inside welfare facilities.
+- 2,536 bars and snack bars filed under the permit sub-types バー・キャバレー
+  (bars and cabarets, one sub-type) and スナック (hostess-staffed snack bars)
+- 83 caterers (仕出し)
 - 22,368 closed premises, which Shibuya's list and the national filings keep,
   marked.
+
+**Kept, though possibly the same sub-type:** Meguro abbreviates its bar permits
+as 飲食バー (102), without the cabaret or snack detail.
 
 **Counted** - each ward's list as the ward publishes it; the page gives each
 one's share of the official count (9% to 101%). 114 of the 4,385 bakery,
@@ -1979,6 +2162,8 @@ prostitution among much else, as in Oslo and Copenhagen; and general non-food
 retail (12,194), the broad registration a trader takes to sell anything,
 anywhere, which is mostly online and market trading. **Not a catch-all:**
 department stores sit under the same heading in the register and are kept.
+
+Funeral services are excluded too, as everywhere: 44 premises.
 
 **Missing rather than excluded** - craft businesses belong to the Handwerks-
 kammer, not the chamber of commerce, so hairdressers, laundries and dry
@@ -2058,7 +2243,8 @@ health and veterinary practices (1,690); gyms, event halls and cultural centres
 (1,353); other repair workshops (1,158); construction trades and workshops
 making goods (802); party offices, places of worship and associations (658);
 transport, courier and rental offices (609); schools and classes (403);
-wholesalers (216).
+wholesalers (216); funeral homes and wake parlours (143); fortune-tellers and
+astrologers (10).
 
 **Left out because the survey cannot say** - 6,243 active shopfronts whose use
 the surveyors could not identify (7.2%; 32% in Villa Riachuelo), and 593 malls,
@@ -2237,6 +2423,153 @@ stations inside it.
   Racecourse stations), the City Circle special service and V/Line are not
   drawn.
 
+### Stockholm - the food inspection register, food only, frozen in October 2025
+
+**Only food is on this map.** Stockholms stad's food inspection register lists
+the premises its food control inspects; Sweden has no general business licence
+and the city publishes no other commercial register, so clothes shops,
+hairdressers and the like are missing rather than excluded. Food shops (from
+kiosks to supermarkets) are a category of their own.
+
+**Frozen.** The register holds inspections to 2025-10-21 and has not been
+updated since. Each premises (8,146) is shown as it stood at its latest
+inspection.
+
+**Excluded by type** - 779 premises with no restaurant or retail type:
+wholesale (300), the catch-all "Övrigt" (185, by name head offices, delivery
+firms and distributors), food production (105), transport and storage (71),
+water works (4), and 114 carrying two or more of these.
+
+**Excluded by name** (owner, 2026-09-29) - 718 restaurant-typed premises that
+are institutional kitchens: preschools (386), schools and gymnasia (206), care
+homes, home care and day centres (78), staff canteens (11) and others such as
+churches, prisons and associations (37). 12 retail-typed pharmacies.
+
+**Not measured: office canteens.** About 20 staff restaurants registered under a
+company name ("KPMG AB") remain; company names are too mixed to filter.
+
+**Kept because the register cannot split it:** its restaurant type is also its
+type for catering and mobile food ("Restaurang-, catering- och
+barverksamhet"), so about 39 premises named as caterers and about 15 named as
+food trucks or mobile units are on the map as food service.
+
+**Untyped premises** - the register began recording types in 2024, so 1,391
+premises last inspected earlier carry none. **225 are shown** (owner,
+2026-09-28): those whose name identifies a restaurant or food shop and that were
+inspected in 2022 or 2023, marked "classified from its name". Left out: 26 such
+names inspected before 2022 (likely closed), about 120 pharmacies, about 550
+institutions by name, and about 470 whose name says nothing.
+
+**Not placed** - 209 storefronts (3.8%) the register gives no position.
+
+**Stations.** The Tunnelbana's three lines (seven routes), cut at the kommun
+boundary: 82 stations inside it.
+- Left out: 18 stations in Solna, Sundbyberg, Danderyd, Huddinge and Botkyrka,
+  listed with their kommun in `outputs/stockholm/excluded_stations.csv`.
+- Pendeltåg, Roslagsbanan, Saltsjöbanan and the trams are not drawn (owner,
+  2026-09-28); with pendeltåg and the local railways, the brief measured 92.3%
+  of storefronts in a ring against 88.7% without.
+- The Yellow line (Gul linje), under construction, is not drawn.
+
+### Bucharest - the sanitary-veterinary registers, food only, placed by address
+
+**Only food is on this map.** DSVSA București registers the units that
+handle food; Romania publishes no open register of other shops or of personal
+services, so clothes shops, hairdressers and the like are missing rather than
+excluded. Food shops (butchers, fishmongers, bakeries, confectioners, food
+shops, supermarkets) are a category of their own.
+
+**Cancelled registrations** - 10,316 rows below the files' ANULATE rows are
+never read; 23,113 active rows are.
+
+**Never fetched, by the owner's call (2026-09-28)** - canteens (file 21),
+pastry labs (22), catering (31), local producers, internet-only sales, mobile
+stalls, vending machines, warehouses, fairs, and the farm and processing
+categories.
+
+**Excluded within the files used** - 75 mobile units (Sector "U.M.", a food
+truck with a number plate for an address); and by category, the owner's
+exclusions applied to rows filed elsewhere: 13 in-house buffets ("bufet de
+incintă", a canteen), 1 catering-only unit, 3 pastry labs, 8 kiosk carts and 2
+vending machines.
+
+**Merged** - one premises registered in several files (a supermarket's
+butcher, fishmonger and food counter) is shown once: 23,014 rows are 20,821
+premises.
+
+**Names withheld** - a sole trader (II, PFA, IF, PF: 308) and a company named
+only as a person (6) are shown by category, never by name (the owner's rules,
+2026-09-28 and 2026-09-29). Other companies show their name without the legal
+form.
+
+**Not placed** - 5,228 premises (25.1%): the register gives an address but no
+position, and each is placed by matching its street and number to
+OpenStreetMap's address points in its own sector. Left off rather than guessed:
+the street not found (1,855), the street without that number (1,726), the
+number in two or more places (1,288), no number given (365). Even across the
+sectors (73-76% placed); lowest for fishmongers (50%), many inside markets.
+
+**Stations.** Metrorex M1-M5, 64 stations, every one inside the municipality.
+- Suburban trains and trams are not drawn.
+
+### Incheon - SEMAS's national storefront register, all three buckets
+
+**One national register, every storefront with a point.** The Small Enterprise
+and Market Service's 상가(상권)정보 (edition 2026-06-30) lists trading
+storefronts across Korea with SEMAS's own three-level classification; the map
+keys on its finest level (소분류), each of the 247 categories given a home
+(`pipeline/taxonomies/korea_sbiz.py`, the owner's calls 2026-09-29, aligned with
+`docs/category_rules.md`).
+
+**Out by category** (Incheon's 136,995 rows):
+- Not storefronts in this project's sense, whole groups: professional and
+  technical offices (12,244), education (9,681), estate agents (5,569), lodging
+  (3,423), health care (3,702), facility services and rentals (5,719),
+  recreation (6,996: gyms, karaoke rooms, PC rooms, lottery sellers), repairs
+  (vehicle, appliance, clothing), funeral services, wedding halls and
+  matchmaking (5,205 in all within 수리·개인).
+- Named: hostess bars (일반 유흥 주점, 1,010) and dance halls (53), staff
+  canteens (612), household fuel dealers (110).
+
+**Kept, and named here because other registers differ**: massage (commercial,
+as in every other country), petrol and LPG stations, pharmacies, pubs.
+
+**Names withheld** - 107 storefronts whose registered name is a bare personal
+name at an address that reads residential (Seoul's rule).
+
+**Placement** - every storefront sits at the register's own point.
+
+**Stations.** Incheon Lines 1 and 2, Line 1, Line 7 and the Suin-Bundang Line:
+79 stations inside Incheon.
+- Left out: 151 stations of those lines in Seoul and Gyeonggi, listed in
+  `outputs/incheon/excluded_stations.csv`; the lines are drawn to their ends.
+- AREX, the suspended airport maglev and the Wolmi Sea Train are not drawn.
+
+### Goyang, Seongnam and Yongin - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules** (the section above): SEMAS's 상가(상권)정보,
+edition 2026-06-30, every storefront on its own point, classified by
+`pipeline/taxonomies/korea_sbiz.py` and aligned with `docs/category_rules.md`.
+
+**Out by name**, per city (Goyang / Seongnam / Yongin): hostess bars (110 /
+273 / 188), dance halls (8 / 21 / 4), staff canteens (48 / 138 / 161),
+household fuel dealers (24 / 16 / 65); and, as in Incheon, offices,
+education, health, estate agents, lodging, recreation, repairs, funeral
+services, wedding halls and matchmaking.
+
+**Names withheld** - 9 / 30 / 16 storefronts whose registered name is a bare
+personal name at an address that reads residential.
+
+**Stations**, each city cut at its own boundary (the lines drawn to their
+ends; stations outside in each city's `excluded_stations.csv`):
+- Goyang: Line 3 and the Gyeongui-Jungang Line, 20 stations. The Seohae Line
+  (on the Gyeongui-Jungang track through the same stations) and GTX-A (its
+  Kintex stop) are not drawn.
+- Seongnam: Line 8, the Suin-Bundang, Shinbundang and Gyeonggang Lines, 18
+  stations. GTX-A is not drawn.
+- Yongin: the EverLine, the Suin-Bundang and Shinbundang Lines, 24 stations.
+  GTX-A (its Guseong stop) is not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
@@ -2246,9 +2579,10 @@ stations inside it.
   shop is called after them is a genuine storefront, and the name is a trade
   name they chose to register publicly. Roughly a fifth of mapped names read
   like personal names for exactly this reason, and that is not a problem to fix.
-- **San Diego's personal services.** San Diego shows no comparable exposure: its
-  registry always carries a trade name, so no registrant name was ever
-  substituted. Its residual is small and it was left in.
+- **San Diego's personal services, apart from its catch-alls.** Its registry
+  always carries a trade name, so no registrant name was ever substituted. The
+  two catch-all codes were left in on that ground until 2026-09-29, when the
+  catch-all left every map.
 
 ## What is missing rather than excluded
 

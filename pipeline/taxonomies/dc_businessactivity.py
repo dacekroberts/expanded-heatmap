@@ -93,7 +93,6 @@ PERSONAL_SERVICES = {
     "Barber Shop",                   # 89
     "Beauty Shop (Esthetics)",       # 39
     "Massage Establishment",         # 31 - NAICS 812199
-    "Funeral Establishment",         # 29 - NAICS 812210
     "Dry Cleaner",                   # 21 - NAICS 812320
     "Power Laundry",                 # 10 - NAICS 812320/812331
     "Beauty Shop (Braiding)",        # 9
@@ -223,6 +222,10 @@ EXCLUDED = {
     "Tour Guide": "individual licence, NAICS 5615 (3)",
     "Employment Counseling": "NAICS 5613 (2)",
     "Special Event": "one-off event permit (1)",
+
+    # Death care - NAICS 8122, carved out of 812 as naics.py does.
+    "Funeral Establishment": "funeral services off every map (owner, "
+                             "2026-09-28), NAICS 812210 (29)",
 }
 
 _BUCKETS = {}

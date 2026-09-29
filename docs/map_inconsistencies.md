@@ -47,7 +47,8 @@ dense-looking city may simply have more complete records.
   2022–2024 land-use survey, every ground floor on every block), Sydney (the City of
   Sydney's 2022 floor-space survey, one council only) and Melbourne (the City
   of Melbourne's 2024 land-use census, one council only).
-- **National statistical or establishment registers:** Mexico City, Guadalajara and
+- **National statistical or establishment registers:** Incheon, Goyang, Seongnam
+  and Yongin (SEMAS's national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
   Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
   and Taipei (the national business tax register, FIA).
@@ -56,7 +57,10 @@ dense-looking city may simply have more complete records.
 - **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
   Agency's FHRS), every food premises a borough or council inspects, and nothing
   else; Glasgow the same on Scotland's scheme (Food Standards Scotland's FHIS),
-  every premises the council inspects.
+  every premises the council inspects. Stockholm's is the city's own food
+  inspection register (Livsmedelstillsyn), one row per inspection reduced to one
+  per premises, and frozen since October 2025. Bucharest's is the sanitary-veterinary
+  directorate's register of food units (DSVSA București), active registrations only.
 - **A chamber of commerce's membership:** Berlin (IHK Berlin's Gewerbedaten), each
   member's premises as a point. Membership, not licensing, decides who is in it:
   the crafts belong to a different chamber and are absent.
@@ -76,32 +80,37 @@ dense-looking city may simply have more complete records.
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional).
+- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Stockholm, Bucharest.
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
   London, Glasgow and Newcastle (Regional) (grocers, off-licences, bakers,
   butchers, newsagents with food and supermarkets, named "Food shops" as in the
-  Japanese cities).
+  Japanese cities); Stockholm the same, kiosks to supermarkets;
+  Bucharest the same, butchers and bakeries to supermarkets.
 - **Retail thin:** New York (food stores plus a regulated slice of trades). Toronto:
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
-  fireworks), 328 pins inside the rings against 6,461 Food service. Seoul: Retail is
+  fireworks), 328 pins inside the rings against 6,474 Food service (nightclubs
+  count as Food service since 2026-09-29). Seoul: Retail is
   only the licensed trades (bakeries, butchers, food shops, tobacco, marts, health food),
   47,933 pins inside the rings against 139,802 Food service. Daegu and Busan: the same
   licensed trades (11,031 and 14,330 Retail pins against 27,271 and 39,487 Food service).
   Kobe: Retail is food retail only (bakeries and confectioners, delis, butchers,
   fishmongers), because Japan licenses no other shop - 2,619 pins inside the rings
   against 16,980 Food service; food businesses that only notify the city are absent too.
-  Osaka, Sapporo, Kyoto and Tokyo the same: 6,418, 2,111, 3,736 and 11,954 Retail
-  pins inside the rings against 50,109, 16,222, 19,318 and 41,972 Food service.
-  Fukuoka: 5,185 against 14,867, with the food shops that only notify present where
-  they published in MHLW's opt-in list. On all six Japanese maps the layer is named
+  Osaka, Sapporo, Kyoto and Tokyo the same: 6,418, 2,111, 3,736 and 11,952 Retail
+  pins inside the rings against 50,109, 16,222, 19,318 and 39,380 Food service
+  (Tokyo's Food service without its caterers and the bar and snack-bar permit
+  types, 2026-09-29).
+  Fukuoka: 5,185 against 14,764 (without its caterers and snack bars), with the
+  food shops that only notify present where they published in MHLW's opt-in list. On all six Japanese maps the layer is named
   "Food shops", not "Retail".
 - **Personal services thin:** Berlin. Hairdressers and laundries are crafts,
   members of the Handwerkskammer rather than the chamber of commerce whose register
   the map uses, so the layer is beauty and nail salons, spas, saunas and massage
-  (3,154 pins inside the rings against 30,800 Retail and 15,472 Food service). The
+  (3,121 pins inside the rings against 30,800 Retail and 15,472 Food service;
+  funeral services left it on 2026-09-29). The
   legend says "(partial)".
 - **Retail and Personal services merged into "Shops and services":** Amsterdam,
   Rotterdam, Riga. The building register records a unit's intended use, not its trade.
@@ -271,7 +280,9 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   Koto's hold only permits from June 2021 to late 2022, Shinjuku's is a 1 January
   2023 snapshot, the other five run to 2026; `pipeline/tokyo/config.py`
   `_FOOD_AS_OF`), Buenos Aires (each block surveyed once, 2022 to 2024), Sydney
-  (the 2022 survey, taken every five years), Melbourne (the 2024 census).
+  (the 2022 survey, taken every five years), Melbourne (the 2024 census),
+  Stockholm (the register froze at its 2025-10-21 inspections; premises
+  last inspected in 2022-23 are shown as they stood then).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
   Amsterdam, Rome, the Brazilian cities, Rotterdam, Hong Kong, Riga, Seoul, Daegu,
   Busan, Taichung, Taoyuan, Taipei, the six Japanese cities, Berlin (the register's monthly
@@ -279,7 +290,8 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   to 2026-09-16), Glasgow (the council's extract date, 2026-09-14), Newcastle
   (Regional) (each council's, 2026-09-09 to 2026-09-16), Buenos Aires (the
   survey years, in the prose), Sydney (the survey year) and Melbourne (the
-  census year).
+  census year), Stockholm (the register's last edit, 2025-10-22) and
+  Bucharest (the registers' date, 2026-08-25).
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -338,22 +350,96 @@ really shopfronts. Several pages say which way their map leans.
 **Reader sentence:** The three categories are meant to mean the same thing
 everywhere, but a few businesses land differently depending on how a country
 classifies or licenses them.
-- **Car dealers:** counted as Retail in the NAICS cities, Mexico, Madrid, Oslo,
-  Copenhagen, Berlin, Miami, Buenos Aires, Sydney and Melbourne (ANZSIC 39, with
-  fuel retail; the Sydney page says so). Not counted in France: NAF puts them in division 45, and
-  `france_naf.py` keys on 47, 56 and 96 only.
+- **RESOLVED 2026-09-29 by one rule (owner):** five kinds of business are left off
+  every map wherever a register names them - funeral services (funeral homes,
+  crematoria, cemeteries); food with no counter of its own (institutional canteens,
+  event caterers, food trucks, street and market stalls); the "other personal
+  services" catch-all; adult and hostess venues (sex shops are shops and stay); and
+  gambling (betting shops, casinos, arcades, lottery agencies). Newsstands and
+  kiosks, pawnbrokers, karaoke bars and nightclubs are kept everywhere. The 41 maps
+  affected were re-rendered the same day. What still differs
+  is where a register files one of these under the same label as ordinary
+  businesses; those cases are below, and each is disclosed in its EC city section.
+- **Car dealers:** counted as Retail everywhere a register names them: the NAICS
+  cities and Montréal, Chicago, Miami, Washington D.C., Vancouver/Surrey, Calgary,
+  Edmonton, Mexico City, Guadalajara, Monterrey, Madrid, Barcelona, Dublin, Oslo,
+  Copenhagen, Prague and Berlin (NACE Rev. 2.1 moved car retail into 47.81-47.83),
+  Buenos Aires, the nine Brazilian cities, Taichung, Taoyuan, Taipei, Sydney and
+  Melbourne (ANZSIC 39, with fuel retail; the Sydney page says so). **France is the
+  one exception** (owner, 2026-09-29): SIRENE files vehicle sales in their own
+  division (NAF 45), and its four selling codes would add about 9,500 pins across
+  the five cities (5,384 in Paris), but about 95% record no employees and about a
+  quarter carry a premises name - mostly one-person traders, probably registered
+  at home. `france_naf.py` keys on 47, 56 and 96 only and gives that reason; the
+  Paris page's approved sentence saying so lands with the batch. Toronto, Philadelphia, Boston, Hong Kong and the Korean,
+  Japanese and UK maps license or inspect no car dealer, so none appears.
+- **Funeral services:** off every map where a code or licence type names them
+  (Brazil by keyword: 558 pins removed across the nine cities). They remain where
+  the register cannot separate them: **Chicago** has no funeral licence type; most
+  funeral homes were under the "Miscellaneous Personal Services" catch-all and
+  left with it (35), and the 29 funeral-word pins that remain sell funeral items.
+  **Calgary:** about 12 funeral-word pins under the general retail licence stay.
+  **Milan:** no funeral code; about 29 funeral services reach the non-food shop
+  layer through the shop register and stay. **Amsterdam, Rotterdam, Riga:** the
+  building register records only a shop unit, so a funeral home cannot be
+  identified.
+- **Food with no counter of its own:** canteens, event caterers, food trucks and
+  stalls are excluded wherever coded. Remaining differences: **Montréal keeps its
+  caterers** (107), because the survey records walk-in traiteur shops, as France
+  keeps its traiteurs (56.21Z; only 56.29 contract and institutional catering
+  leaves). **Los Angeles** keeps `722300` "special food services" (3,145 pins),
+  which the registry uses for caterers, concession stands and food trucks alike
+  but also for taquerias and cafés. **San Francisco** drops its food-service
+  contractor code whole, although it also holds stadium and convention-centre
+  concession stands, Bay ferry bars and a few restaurants. **Brazil:** food
+  trucks, trailers, kiosks and stalls cannot be told from fixed premises in the
+  census's descriptions and count as whatever the rest of the description names.
+  **London, Glasgow, Newcastle (Regional):** a workplace canteen registered as a
+  restaurant or café cannot be told apart; not measured.
+- **Street and market stalls:** excluded in Mexico City, Guadalajara and Monterrey;
+  by code in France (47.8x) and Taiwan (street and market stalls, e.g. 2,669 in
+  Taipei); food trucks and stalls (permits valid city-wide) in the six Japanese
+  cities, but Fukuoka's yatai (屋台, fixed street stalls on long-term permits) are
+  counted as Food service (owner); markets in Philadelphia (curb markets), Calgary,
+  Dublin and Surrey (flea market). Not separable in Brazil (above).
+- **The "other personal services" catch-all:** excluded in every city since
+  2026-09-29. Until then San Diego (`81299` and its group-level `8129`), San
+  Francisco's residual `81299` rows, Chicago's "Miscellaneous Personal Services",
+  Prague (three rows) and the Taiwanese cities kept it. It takes fortune-tellers
+  and dating or marriage agencies with it (Madrid, Buenos Aires, Taiwan).
+  Copenhagen's tattoo studios leave with it (table B).
 - **Massage:** a Personal service in Calgary and Edmonton, where Alberta does not
   regulate it, and in Toronto's non-registered "holistic centres"; excluded as health
-  care in Vancouver/Surrey, where British Columbia regulates it.
-- **Adult premises:** body-rub and similar premises are excluded on sensitivity in
-  Calgary, Edmonton, Toronto and Vancouver; in Berlin, escort and prostitution leave
-  with the "other personal services" catch-all, while non-medical massage (a class of
-  its own) is kept. Brothels (ANZSIC 9534) are excluded by class in Sydney and
-  Melbourne (owner, 2026-09-28), and both pages say so. UNKNOWN for other cities.
-- **Street stalls:** excluded in Mexico City, Guadalajara and Monterrey; market-stall trading is
-  excluded by code in France; food trucks and stalls (permits valid city-wide) are
-  excluded in the six Japanese cities, but Fukuoka's yatai (屋台, fixed street
-  stalls on long-term permits) are counted as Food service (owner).
+  care in Vancouver/Surrey, where British Columbia regulates it. San Diego's own
+  massage-parlour code (`812193`) is excluded; massage therapy (`812198`) stays.
+- **Adult and hostess venues:** excluded wherever a register names them (owner,
+  2026-09-29). Body-rub and similar premises in Calgary, Edmonton, Toronto (adult
+  entertainment clubs too) and Vancouver; escort and prostitution with Berlin's
+  catch-all, while non-medical massage (a class of its own) is kept; brothels
+  (ANZSIC 9534) by class in Sydney and Melbourne; hostess bars in Seoul, Daegu and
+  Busan; Tokyo's bar-and-cabaret and snack-bar permit sub-types (バー・キャバレー,
+  スナック; 2,536) and Fukuoka's snack bars (103). Sex shops stay (Surrey's one
+  `Adult Entertainment Store`). **Kept, though possibly the same thing:** Meguro
+  lists its bar permits as 飲食バー (102), without the cabaret or snack detail; the
+  Taiwanese drinking places and restaurants with shows, whose register names claim
+  no hostess service. No code separates such venues in the NAICS, SCIAN, NAF, NACE
+  or CNEFE cities; whether those maps hold any is UNKNOWN (open question 15).
+- **Gambling:** excluded wherever a register files it among storefront uses:
+  Dublin's betting shops (175, with a casino and an amusement centre that had
+  reached the map through a "shop" use beside them), Rome's arcades and gaming
+  machines, Rotterdam's gaming permits, Calgary's arcades, Edmonton's and
+  Vancouver's bingo halls and casinos, Buenos Aires's and Brazil's lottery
+  agencies. In the NAICS, SCIAN, NAF and NACE cities gambling sits outside the
+  retail, food and personal-service codes and was never mapped.
+- **Nightclubs, karaoke, pawnbrokers, newsstands and kiosks:** kept everywhere.
+  Toronto's nightclubs (36 active premises, about 32 new pins), Edmonton's
+  after-hours dance club and Miami's `NIGHT CLUB` and `DANCING OR ENTERTAINMENT`
+  count as Food service; Philadelphia's newsstands and Dublin's kiosks as Retail.
+  San Diego's "kiosk businesses" (`81295`/`812959`, ecoATM phone-recycling
+  machines) are machines, not kiosks, and are excluded.
+- **Vets:** excluded as health care where coded (the Korean cities, Buenos Aires);
+  Barcelona's `Veterinaris / Mascotes` (395) puts vets under one value with pet
+  shops and groomers, about 160 read as clinics by name, and all are kept.
 - **Web shops:** excluded by code in France, and by class in Sydney and Melbourne
   (ANZSIC 4310, non-store retailing); cannot be excluded in Oslo, Copenhagen,
   Prague or Berlin (Berlin leaves out general non-food retail, the broad registration
@@ -365,7 +451,9 @@ classifies or licenses them.
   CZ-NACE cities ("Retail — NAICS Code: 44/45", "Retail - NAF 47"); plain names
   in the cities with a local taxonomy, and in Sydney and Melbourne although
   ANZSIC is a national classification.
-- **Reason:** national classifications and provincial or state regulation.
+- **Reason:** national classifications and provincial or state regulation, and,
+  since the common rule, registers that file an excluded kind under the same
+  label as ordinary businesses.
 
 ### 12. RESOLVED 2026-09-27 - every map now has a whole-city heat layer
 Kept as a numbered heading so references to theme 12 still resolve. Mexico City
@@ -422,6 +510,10 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | Métro a, b | — | STAR GTFS | Commune | 4 / 0 |
 | **Norway** | | | | | |
 | Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
+| **Romania** | | | | | |
+| Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
+| **Sweden** | | | | | |
+| Stockholm | Tunnelbana: Gröna, Röda and Blå linjen (routes T10–T19), one label per line | Pendeltåg, Roslagsbanan, Saltsjöbanan, trams; the unopened Yellow line | OpenStreetMap route relations (SL's GTFS needs a key); gate 3 exact on 100 | Kommune | 18 / 0 |
 | **Denmark** | | | | | |
 | Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
 | **Czechia** | | | | | |
@@ -447,6 +539,10 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Seoul | Seoul Metropolitan Subway: Lines 1–9, Shinbundang, Ui LRT, Sillim + 3 Korail lines | AREX, GTX-A, Seohae Line, Gimpo Goldline | OpenStreetMap (no gate 3) | City | 223 / 0 |
 | Daegu | Daegu Metro Lines 1–3 (Line 3 a monorail) | 대경선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia; operator unreachable) | City | 5 / 0 |
 | Busan | Busan Metro Lines 1–4 (Line 4 a rubber-tyred light metro) and the Busan–Gimhae LRT | 동해선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia) | City | 17 / 0 |
+| Incheon | Incheon Lines 1 and 2, Line 1, Line 7, Suin–Bundang Line | AREX, the airport maglev, the Wolmi Sea Train | OpenStreetMap (gate 3 against English Wikipedia; Line 1 not gated) | City | 151 / 0 |
+| Goyang | Line 3, Gyeongui–Jungang Line | Seohae Line (same track), GTX-A | OpenStreetMap (gate 3 on Line 3) | City | 76 / 0 |
+| Seongnam | Line 8, Suin–Bundang, Shinbundang, Gyeonggang Lines | GTX-A | OpenStreetMap (gate 3 on two lines) | City | 91 / 0 |
+| Yongin | EverLine, Suin–Bundang, Shinbundang Lines | GTX-A | OpenStreetMap (gate 3 on all three) | City | 67 / 0 |
 | **Taiwan** | | | | | |
 | Taichung | Taichung Metro Green Line | Taiwan Railway, high-speed rail | Operator's station table + OpenStreetMap route (gate 3 exact) | City | 0 / 0 |
 | Taoyuan | Taoyuan Airport MRT (line A) | Taiwan Railway, high-speed rail | National station layer + OSM route (gate 3 exact, one dated addition) | City | 7 / 0 |
@@ -472,61 +568,68 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 
 ### B. Business data (dimensions 4–6)
 
+The in-ring pin counts were re-read from each committed map's layer menu on
+2026-09-29, after the exclusions batch re-rendered 41 maps.
+
 | City | Source kind | Source | Classification | In-ring pins R / F / P | Missing or thin |
 |---|---|---|---|---|---|
 | **United States** | | | | | |
-| San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 655 / 843 | Undercount: neighbourhoods registered under own name (PLAN) |
-| San Francisco | Licence register | Registered Business Locations | NAICS | 5,065 / 5,568 / 2,159 | Floor: about 37% of rows have NAICS (DEC) |
-| Los Angeles | Tax register | Listing of Active Businesses | NAICS | 8,069 / 3,922 / 2,028 | Floor: about 9% of rows lack NAICS (DEC) |
-| Chicago | Licence register | Business Licenses | Own licence types | 5,461 / 4,196 / 2,139 | — |
+| San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 551 / 598 | Undercount: neighbourhoods registered under own name (PLAN) |
+| San Francisco | Licence register | Registered Business Locations | NAICS | 5,065 / 4,591 / 2,132 | Floor: about 37% of rows have NAICS (DEC) |
+| Los Angeles | Tax register | Listing of Active Businesses | NAICS | 8,069 / 3,817 / 2,014 | Floor: about 9% of rows lack NAICS (DEC) |
+| Chicago | Licence register | Business Licenses | Own licence types | 5,476 / 4,196 / 2,049 | — |
 | New York | 4 activity registers | DOHMH, NYS food stores, NYS salons, DCWP | Per-source dispatch | 14,822 / 22,060 / 7,478 | Retail thin |
-| Philadelphia | Licence register (activities) | L&I Business Licenses | Own licence types | 780 / 4,174 / — | No Personal services; Retail = food retail |
-| Miami (Regional) | Tax register | Local Business Tax (county) | Own CATGRYNAME (NAICS column empty) | 1,960 / 1,254 / 561 | Repair and service premises under-counted |
+| Philadelphia | Licence register (activities) | L&I Business Licenses | Own licence types | 770 / 4,081 / — | No Personal services; Retail = food retail |
+| Miami (Regional) | Tax register | Local Business Tax (county) | Own CATGRYNAME (NAICS column empty) | 1,961 / 1,215 / 557 | Repair and service premises under-counted |
 | Boston | 3 activity registers | Food inspections, Licensing Board, cannabis | Per-source dispatch | 530 / 1,880 / — | No Personal services; Retail = food, package, cannabis |
-| Washington D.C. | Licence register | Basic Business License | Own BUSINESSACTIVITY | 897 / 2,603 / 360 | "Delicatessen" (1,065) ambiguous, counted as Food |
+| Washington D.C. | Licence register | Basic Business License | Own BUSINESSACTIVITY | 899 / 2,603 / 345 | "Delicatessen" (1,065) ambiguous, counted as Food |
 | **Canada** | | | | | |
-| Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,867 / 954 | — |
-| Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,499 | Edge municipalities thinner in the survey |
-| Calgary | Licence register | Business Licences | Own licencetypes | 1,977 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
-| Edmonton | Licence register | Business Licences | Own licence categories | 1,039 / 924 / 417 | Personal services overstated (clinics) |
-| Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,461 / 1,950 | Retail = regulated slice only |
+| Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
+| Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
+| Calgary | Licence register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
+| Edmonton | Licence register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
+| Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,474 / 1,950 | Retail = regulated slice only |
 | **Mexico** | | | | | |
-| Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,938 / 13,782 | Street stalls excluded |
-| Guadalajara (Regional) | National statistical register | INEGI DENUE | SCIAN | 26,341 / 6,723 / 3,861 | Street stalls excluded |
-| Monterrey (Regional) | National statistical register | INEGI DENUE | SCIAN | 10,164 / 3,108 / 1,516 | Street stalls excluded |
+| Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,798 / 12,018 | Street stalls excluded |
+| Guadalajara (Regional) | National statistical register | INEGI DENUE | SCIAN | 26,341 / 6,698 / 3,623 | Street stalls excluded |
+| Monterrey (Regional) | National statistical register | INEGI DENUE | SCIAN | 10,164 / 3,057 / 1,343 | Street stalls excluded |
 | **Spain** | | | | | |
-| Madrid | Premises census | Censo de locales | Own epígrafe | 26,189 / 16,238 / 8,070 | — |
+| Madrid | Premises census | Censo de locales | Own epígrafe | 26,197 / 15,171 / 8,032 | — |
 | Barcelona | Street survey (2022) | Cens de locals en planta baixa | Own 4-level scheme (finest level) | 20,287 / 9,976 / 5,673 | 458 mixed retail/wholesale rows dropped |
 | **Ireland** | | | | | |
-| Dublin | Property register | Rateable valuation list | Register's own "Uses" | 5,338 / 1,703 / 554 | — |
+| Dublin | Property register | Rateable valuation list | Register's own "Uses" | 5,225 / 1,703 / 532 | — |
 | **Italy** | | | | | |
 | Milan | 6 licence registers | Comune di Milano premises registers | Register = category | 24,793 / 11,738 / 4,979 | Canteens and clubs partly left in Food |
 | Rome | Authorisation register | SUAP | Own authorisation types | 38,121 / 14,534 / 8,084 | Workshops with no trade missing |
 | **France** | | | | | |
-| Paris | National establishment register | SIRENE + INSEE geolocation | NAF rév. 2 (sous-classe) | 40,771 / 32,871 / 11,859 | — |
-| Marseille | same | same | same | 4,558 / 3,852 / 1,603 | — |
-| Toulouse | same | same | same | 2,438 / 2,162 / 953 | — |
-| Lille (Regional) | same | same | same | 3,166 / 2,942 / 1,097 | — |
-| Rennes | same | same | same | 1,105 / 906 / 354 | — |
+| Paris | National establishment register | SIRENE + INSEE geolocation | NAF rév. 2 (sous-classe) | 40,771 / 32,871 / 11,605 | — |
+| Marseille | same | same | same | 4,558 / 3,852 / 1,537 | — |
+| Toulouse | same | same | same | 2,438 / 2,162 / 933 | — |
+| Lille (Regional) | same | same | same | 3,166 / 2,942 / 1,057 | — |
+| Rennes | same | same | same | 1,105 / 906 / 343 | — |
 | **Norway** | | | | | |
-| Oslo | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 4,197 / 2,082 / 1,828 | — |
+| Oslo | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 4,197 / 2,082 / 1,801 | — |
+| **Sweden** | | | | | |
+| Stockholm | Food hygiene register | Stockholms stad's food inspection register (Livsmedelstillsyn), one record per premises | Its own activity types (VerksamhetsTyp), plus a name test | 943 / 3,759 / — | No Personal services; Retail = food shops only ("Food shops"); frozen since 2025-10-21 |
+| **Romania** | | | | | |
+| Bucharest | Food hygiene register | DSVSA București's registers of food units (17 category files, active rows only) | The file (the unit category), with the category text for exceptions | 5,250 / 5,994 / — | No Personal services; Retail = food shops only ("Food shops"); a quarter of premises unplaced |
 | **Denmark** | | | | | |
-| Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,760 | Tattoo studios lost with the catch-all |
+| Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,708 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
-| Prague | National registers (location + activity) | ROS02 + RES | CZ-NACE 2025 (owner's activity) | 6,027 / 5,464 / 6,157 | About 57,000 establishments of other-activity owners missing |
+| Prague | National registers (location + activity) | ROS02 + RES | CZ-NACE 2025 (owner's activity) | 6,027 / 5,464 / 6,122 | About 57,000 establishments of other-activity owners missing |
 | **Netherlands** | | | | | |
 | Amsterdam | Permit list + building register | Horeca permits; BAG shop units | Per-source (2 buckets) | Shops & services 9,215 / Food 3,433 | Retail and Personal merged |
 | Rotterdam | Gazette notices + building register | Permit notices; BAG shop units | Per-source (2 buckets) | Shops & services 5,211 / Food 1,771 | Retail and Personal merged |
 | **Brazil** (all nine) | Census of addresses (2022) | IBGE CNEFE | Free-text keyword rules | see below | A third to a half of plausible storefronts unreadable |
-| São Paulo | | | | 25,969 / 15,331 / 8,291 | about 1/3 unreadable |
-| Rio de Janeiro | | | | 15,085 / 10,364 / 4,820 | about 1/3 |
-| Belo Horizonte | | | | 4,634 / 2,355 / 1,439 | about 4 in 10 |
-| Brasília | | | | 2,808 / 1,246 / 1,012 | about 4 in 10 |
-| Salvador | | | | 5,131 / 3,312 / 1,625 | about 1/3 |
-| Fortaleza (Regional) | | | | 5,255 / 1,964 / 1,324 | about 4 in 10 |
-| Porto Alegre (Regional) | | | | 4,660 / 1,516 / 1,244 | almost half; about half near stations |
-| Recife (Regional) | | | | 6,547 / 2,058 / 1,783 | about 4 in 10 |
-| Santos (Regional) | | | | 3,113 / 1,482 / 792 | almost 4 in 10 |
+| São Paulo | | | | 25,968 / 15,331 / 8,256 | about 1/3 unreadable |
+| Rio de Janeiro | | | | 15,085 / 10,364 / 4,784 | about 1/3 |
+| Belo Horizonte | | | | 4,634 / 2,355 / 1,404 | about 4 in 10 |
+| Brasília | | | | 2,808 / 1,246 / 1,009 | about 4 in 10 |
+| Salvador | | | | 5,131 / 3,312 / 1,613 | about 1/3 |
+| Fortaleza (Regional) | | | | 5,255 / 1,964 / 1,295 | about 4 in 10 |
+| Porto Alegre (Regional) | | | | 4,660 / 1,516 / 1,224 | almost half; about half near stations |
+| Recife (Regional) | | | | 6,547 / 2,058 / 1,753 | about 4 in 10 |
+| Santos (Regional) | | | | 3,113 / 1,482 / 790 | almost 4 in 10 |
 | **Hong Kong** | | | | | |
 | Hong Kong | Licence registers (food premises) | FEHD licence registers | Local (licence type) | Food service 15,833 / Food shops 3,408 / Bathhouses 34 | No general retail or personal services: FEHD does not license them |
 | **Latvia** | | | | | |
@@ -535,25 +638,29 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Seoul | Permit registers (17 types) | Seoul's LOCALDATA permit registers | Local (permit type) | 47,933 / 139,802 / 36,646 | Retail only the licensed trades; no general retail |
 | Daegu | Permit registers (14 types) | Daegu's republication of the national LOCALDATA registers (D-데이터허브) | Local (permit type) | 11,031 / 27,271 / 9,422 | Retail only the licensed trades; no general retail |
 | Busan | Permit registers (14 types) | Busan's LOCALDATA API (the national permit registers) | Local (permit type) | 14,330 / 39,487 / 12,531 | Retail only the licensed trades; no general retail |
+| Incheon | National register | SEMAS's 상가(상권)정보 (the national storefront register) | SEMAS's own (소분류) | 21,719 / 25,983 / 8,724 | — |
+| Goyang | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 7,358 / 8,243 / 2,918 | — |
+| Seongnam | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 7,487 / 8,982 / 2,949 | — |
+| Yongin | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 4,991 / 6,052 / 1,960 | — |
 | **Taiwan** | | | | | |
-| Taichung | National tax register | FIA business tax register | Industry code division | 6,307 / 4,145 / 2,136 | One line in a large city: 19% of storefronts in a ring |
-| Taoyuan | National tax register | FIA business tax register | Industry code division | 2,465 / 1,854 / 907 | The airport line misses the city's largest centre: 12% in a ring |
-| Taipei (Regional) | National tax register | FIA business tax register | Industry code division | 55,274 / 35,125 / 13,188 | Market stalls unplaced (about 3,600) |
+| Taichung | National tax register | FIA business tax register | Industry code division | 6,283 / 3,970 / 1,932 | One line in a large city: 19% of storefronts in a ring |
+| Taoyuan | National tax register | FIA business tax register | Industry code division | 2,455 / 1,813 / 821 | The airport line misses the city's largest centre: 12% in a ring |
+| Taipei (Regional) | National tax register | FIA business tax register | Industry code division | 54,595 / 33,575 / 12,069 | Market stalls unplaced (about 3,600) |
 | **Japan** | | | | | |
 | Kobe | Permit register | City food-permit list + barber, beauty and laundry registers | Permit type (営業の種類) | 2,619 / 16,980 / 4,186 | Retail is food only (no general licence in Japan); notification-only food businesses (届出) absent |
 | Osaka | Permit register | City food-permit list + barber, beauty and laundry registers | Permit type (業種分類) | 6,418 / 50,109 / 15,145 | Retail is food only (no general licence in Japan); notification-only food businesses (届出) absent; the list holds about 70% of the restaurant permits Osaka reports nationally (disclosed, owner-approved wording) |
 | Sapporo | Permit register | City food-permit list + barber, beauty, laundry and coin-laundry registers | Permit type (業種名) | 2,111 / 16,222 / 4,668 | Retail is food only (no general licence in Japan); notification-only food businesses (届出) absent; coin laundries counted as Personal services (owner) |
-| Fukuoka | Permit register | City food-permit list (pre-2021-06 permits) + MHLW's online filings + barber, beauty and laundry registers | Permit type (業種 / 営業の種類), read with the form of business (業態) | 5,185 / 14,867 / 4,670 | Retail is food only (no general licence in Japan) and partial: notification-only food shops appear only where they published in MHLW's opt-in list; about one restaurant in five withheld its address (disclosed) |
+| Fukuoka | Permit register | City food-permit list (pre-2021-06 permits) + MHLW's online filings + barber, beauty and laundry registers | Permit type (業種 / 営業の種類), read with the form of business (業態) | 5,185 / 14,764 / 4,670 | Retail is food only (no general licence in Japan) and partial: notification-only food shops appear only where they published in MHLW's opt-in list; about one restaurant in five withheld its address (disclosed) |
 | Kyoto | Permit register, REBUILT | The 2021 food list + every monthly list since, in term on 2026-07-31; barber, beauty and laundry lists + their months | Permit type (業種) | 3,736 / 19,318 / 4,926 | An upper bound: closures are not published; Retail is food only, and packaged-only sale (a notification since 2021) absent |
-| Tokyo | Permit lists, per ward (8 of 23) | Eight wards' own food lists + MHLW's filings for four; the barber, beauty and laundry registers of four | Permit type (業種) | 11,954 / 41,972 / 8,557 | Business data for 8 of 23 wards only (15 hollow); the lists run 9% to 101% of the official count; Retail = food only |
+| Tokyo | Permit lists, per ward (8 of 23) | Eight wards' own food lists + MHLW's filings for four; the barber, beauty and laundry registers of four | Permit type (業種) | 11,952 / 39,380 / 8,557 | Business data for 8 of 23 wards only (15 hollow); the lists run 9% to 101% of the official count; Retail = food only |
 | **Germany** | | | | | |
-| Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,154 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
+| Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,121 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
 | **United Kingdom** | | | | | |
 | London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,360 / 29,214 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Glasgow | Food hygiene register | Glasgow City Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 405 / 1,588 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
-| Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,697 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
+| Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,612 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 | **Australia** | | | | | |
 | Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,769 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
@@ -598,6 +705,10 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | same (99.97%) | Masking 17.5% | Same codes |
 | **Norway** | | | |
 | Oslo | Address join to Matrikkelen (96.8%) | Web shops cannot be excluded | 8 no-premises codes, 96.990, bankrupt parents; sole-trader names withheld |
+| **Romania** | | | |
+| Bucharest | Address join to OpenStreetMap's address points, in the premises' own sector (74.9%) | About one storefront in four unplaced, even across sectors; fishmongers in markets lowest | Cancelled registrations, mobile units, kiosk carts, vending machines, pastry labs, in-house buffets, catering; sole traders' and person-named companies' names withheld (category shown) |
+| **Sweden** | | | |
+| Stockholm | Register coordinates (96.2%); 209 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care) and pharmacies by name; wholesale, production and "Övrigt" by type |
 | **Denmark** | | | |
 | Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
 | **Czechia** | | | |
@@ -615,6 +726,10 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Seoul | Source building points, gaps filled from other permits at the same building (98% placed; 4,875 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 138 personal names withheld; phone never read |
 | Daegu | Source building points, gaps filled from other permits at the same building (99% placed; 612 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 113 personal names withheld; phone never read; health-food addresses masked by the publisher |
 | Busan | Source building points, gaps filled from other permits at the same building (99% placed; 810 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 114 personal names withheld; phone never read; health-food addresses masked by the publisher |
+| Incheon | Register coordinates (100%) | None: the register holds every storefront with a point | Offices, education, health, estate agents, lodging, recreation, repairs, funeral, wedding halls, hostess bars, staff canteens, fuel dealers; 107 personal names withheld |
+| Goyang | Register coordinates (100%) | None | Incheon's; 9 personal names withheld |
+| Seongnam | Register coordinates (100%) | None | Incheon's; 30 personal names withheld |
+| Yongin | Register coordinates (100%) | None | Incheon's; 16 personal names withheld |
 | **Taiwan** | | | |
 | Taichung | Address join to the city's door plates (92.2%; 5,599 unplaced) | Stalls unplaced; a department store is one point | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
 | Taoyuan | Address join to the city's door plates (93.6%; 3,097 unplaced) | Stalls and rural addresses unplaced | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
@@ -681,6 +796,10 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Rennes | same (2026-09-23) | T | 0.3 mi | Yes | 68% | same (about two in five show an address, per the page) |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
+| **Romania** | | | | | | |
+| Bucharest | Registers of 2026-08-25 (fetched by the owner 2026-09-28) | B | 0.6 mi | Yes | 72% | Company name without its legal form; category for sole traders and person-named companies |
+| **Sweden** | | | | | | |
+| Stockholm | Inspections to 2025-10-21, layer edited 2025-10-22 (fetched 2026-09-29) | B | 0.6 mi | Yes | 89% | Premises name |
 | **Denmark** | | | | | | |
 | Copenhagen | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 94% | Name; address for personal owners |
 | **Czechia** | | | | | | |
@@ -706,6 +825,10 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes (restored 2026-09-27; dropped 2026-09-25 for phones) | 94% | Trade name in Korean (138 show "Name withheld") |
 | Daegu | Edition 2026-08, but its rows end 2025-08-31 (fetched 2026-09-27) | Yes (snapshot caption, the rows' own date) | 0.6 mi | Yes | 71% | Trade name in Korean (113 show "Name withheld") |
 | Busan | Frozen 2026-04-15, the rows agree (fetched 2026-09-27) | Yes (snapshot caption) | 0.6 mi | Yes | 74% | Trade name in Korean (114 show "Name withheld") |
+| Incheon | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 68% | Trade name in Korean, with the branch (107 show "Name withheld") |
+| Goyang | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 67% | Trade name in Korean, with the branch |
+| Seongnam | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 76% | Trade name in Korean, with the branch |
+| Yongin | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 55% | Trade name in Korean, with the branch |
 | **Taiwan** | | | | | | |
 | Taichung | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 19% | Trade name in Chinese, or the line of business (11,907) |
 | Taoyuan | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 12% | Trade name in Chinese, or the line of business (7,230) |
@@ -825,10 +948,15 @@ wording lands at review time.
     counting car dealers because "every other city in this project already counts a
     car dealer as retail". `france_naf.py` maps division 47 only, so the five French
     cities do not (NAF puts car sales in 45). Either the justification or the French
-    mapping needs a note.
+    mapping needs a note. *(2026-09-29: settled by the owner - France is the one
+    disclosed exception, with its reason in `france_naf.py` and EC's Paris
+    section (theme 11). The Madrid and Norway comments' "every other city" still
+    reads as if France were not one.)*
 15. **Adult-premises exclusions** are recorded for Calgary, Edmonton, Toronto and
     Vancouver. No file says whether the NAICS, SIRENE, NACE or CNEFE cities contain
-    or exclude comparable premises.
+    or exclude comparable premises. *(2026-09-29: adult and hostess venues are now
+    left off wherever a register names them (theme 11); the question stands for
+    the classification cities, where no code names them.)*
 16. **INSEE masking shares are uneven on the pages.** Toulouse, Lille and Rennes state
     theirs; the Paris and Marseille pages do not. Marseille's only figure (12.2%) comes
     from a partial sample in `docs/build_briefs/marseille.md`.
@@ -906,9 +1034,16 @@ wording lands at review time.
   Rome, Prague, Miami, Mexico, Copenhagen, Milan and Edmonton; EC line 1543
   (Vancouver); DEC around line 19480 (SF) and around 19229 (LA); `PLAN.md` around
   lines 1675–1682.
-- **Theme 11 (category edges):** `pipeline/taxonomies/france_naf.py:223–273`;
-  `madrid_epigrafe.py:58–65`; `norway_sn2025.py:15–18`; EC Vancouver, Calgary,
-  Edmonton and Toronto sections; legend rows in each `heatmap.html`.
+- **Theme 11 (category edges):** `pipeline/taxonomies/france_naf.py:223–273`
+  (the car-dealer reason at 237–244); `madrid_epigrafe.py:58–65`;
+  `norway_sn2025.py:15–18`; the dealer entries in `dc_businessactivity.py`,
+  `vancouver.py`, `calgary_licencetype.py`, `edmonton_licencecategory.py`,
+  `dublin_uses.py`, `barcelona_activitat.py`, `ba_usos_suelo.py`,
+  `brazil_cnefe.py`, `czech_nace2025.py`, `anzsic_fes.py` and
+  `pipeline/countries/taiwan.py` (division 48 is Retail apart from 486 and 487,
+  so 484 car retail - 全新汽車零售 in Taichung's data - is kept); the
+  approved wording and counts in `docs/handoff_exclusions_2026-09-29.md`; EC city
+  sections; legend rows in each `heatmap.html`.
 - **Theme 12 (whole-city layer, resolved):** no city passes `all_city_heat=False`
   since 2026-09-27; DECISIONS of that date.
 - **Location rates:** DS Business registries rows (Toronto, Paris to Rennes, Oslo,

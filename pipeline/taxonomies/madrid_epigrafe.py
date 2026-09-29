@@ -78,6 +78,27 @@ EPIGRAFE_EXCLUDE = {
     "COMERCIO AL POR MENOR POR CORRESPONDENCIA, INTERNET, A DOMICILIO",  # 218
     "COMERCIO AL POR MENOR CON MAQUINAS EXPENDEDORAS",                   # 39
     "COMERCIO AL POR MENOR EN PUESTOS DE VENTA Y EN MERCADILLOS",        # 2
+    # Carved out of Personal services, not Retail (NACE 96.03, NAICS 8122):
+    # funeral services off every map (owner, 2026-09-28) - tanatorios and
+    # funeral parlours are not storefronts.
+    "POMPAS FUNEBRES Y ACTIVIDADES RELACIONADAS",                        # 30
+    # Carved out of Food service: food with no counter of its own (owner,
+    # 2026-09-29) - canteens inside schools, care homes, social centres,
+    # hospitals, offices and sports facilities (NACE 56.29, NAICS 722310),
+    # and event catering and banquet halls (NACE 56.21, NAICS 722320). None
+    # serves a walk-in public. Written as the register spells them, accent
+    # included on PREPARACIÓN; _norm() upper-cases but keeps accents.
+    "SERVICIOS DE COMEDOR EN CENTROS EDUCATIVOS Y CENTROS DE CUIDADO INFANTIL",  # 763
+    "SERVICIOS DE COMEDOR EN CENTROS PARA MAYORES",                      # 196
+    "SERVICIOS DE COMEDOR EN CENTROS DE ACTIVIDADES DE SERVICIOS SOCIALES",  # 79
+    "OTROS SERVICIOS DE COMIDAS EN INSTALACIONES DEPORTIVAS, OFICINAS, EMPRESAS O SIMILARES",  # 115
+    "SERVICIOS DE PREPARACIÓN DE COMIDAS EN HOSPITALES",                 # 4
+    "SALONES DE BANQUETES Y PROVISION COMIDAS PARA EVENTOS",             # 90
+    # Carved out of Personal services: the "other personal services"
+    # catch-all (owner, 2026-09-29), NACE 96.09 - astrology, contact
+    # agencies and whatever else has no epigrafe of its own. The register's
+    # own "OTRAS" (sic). Tattoo and piercing have their own epigrafe and stay.
+    "OTRAS SERVICIOS PERSONALES (ASTROLOGIA, AGENCIAS DE CONTACTOS) N.C.O.P.",  # 43
 }
 
 FIELD_LABEL = "Actividad (epígrafe)"
@@ -156,6 +177,24 @@ assert classify({"desc_division": _VEH,
 # The nonstore carve-out survives even though its division is in a bucket.
 assert classify({"desc_division": "COMERCIO AL POR MENOR",
                  "desc_epigrafe": "COMERCIO AL POR MENOR POR CORRESPONDENCIA, INTERNET, A DOMICILIO"}) is None
+# So does the funeral carve-out (owner, 2026-09-28).
+assert classify({"desc_division": "OTROS SERVICIOS PERSONALES",
+                 "desc_epigrafe": "POMPAS FUNEBRES Y ACTIVIDADES RELACIONADAS"}) is None
+# And the 2026-09-29 carve-outs (owner), next to the neighbours that stay: a
+# cafeteria and a fast-food counter are food service, a tattoo studio is a
+# personal service.
+_FOOD = "SERVICIOS DE COMIDAS Y BEBIDAS"
+_PERS = "OTROS SERVICIOS PERSONALES"
+for _div, _epi, _want in [
+        (_FOOD, "SERVICIOS DE COMEDOR EN CENTROS EDUCATIVOS Y CENTROS DE CUIDADO INFANTIL", None),
+        (_FOOD, "Servicios de preparación de comidas en hospitales", None),
+        (_FOOD, "SALONES DE BANQUETES Y PROVISION COMIDAS PARA EVENTOS", None),
+        (_FOOD, "CAFETERIA", "Food service"),
+        (_FOOD, "AUTOSERVICIO DE RESTAURACION", "Food service"),
+        (_FOOD, "RESTAURANTES DE COMIDA RAPIDA", "Food service"),
+        (_PERS, "OTRAS SERVICIOS PERSONALES (ASTROLOGIA, AGENCIAS DE CONTACTOS) N.C.O.P.", None),
+        (_PERS, "CENTROS DE TATUAJE Y/O ANILLADO", "Personal services")]:
+    assert classify({"desc_division": _div, "desc_epigrafe": _epi}) == _want, (_epi, _want)
 
 # An unmapped division is excluded rather than defaulting into a bucket.
 assert classify({"desc_division": "ACTIVIDADES INMOBILIARIAS"}) is None

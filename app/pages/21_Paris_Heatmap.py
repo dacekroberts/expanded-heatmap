@@ -62,9 +62,11 @@ real, and neither can be separated out, so the count is left as the register
 gives it rather than trimmed until the two agree.
 
 Categories that describe no shopfront are excluded: distance selling and
-vending, market-stall trading, contract catering for institutions, and the two
-"other services" catch-alls that carry no premises in their own official
-definition. `docs/excluded_categories.md` lists them.
+vending, market-stall trading, contract catering for institutions, funeral
+services, and the two "other services" catch-alls that carry no premises in
+their own official definition. Car dealers are not counted here, unlike on
+other cities' maps: most are one-person traders registered at home.
+`docs/excluded_categories.md` lists them.
 
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top

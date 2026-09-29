@@ -89,13 +89,15 @@ together, so a row in either counts and a row in neither still fails.
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo |
+| Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
+| Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
@@ -2037,6 +2039,72 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   run 2026-09-28, finds only trading names and no fallback; the verdict is in
   `DECISIONS.md`.
 - **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**66. Stockholms stad (Stockholm) — displayed by choice, not required**
+(written into `render_site_notices()`; displayed once Stockholm lands).
+
+- **SILENT, with the pages named** (resolved 2026-09-22; the Stockholm rows in
+  [`data_sources/sweden.md`](data_sources/sweden.md)): the ArcGIS item's
+  `licenseInfo` is empty and it serves without credentials; `dataportal.se`
+  says "Begränsad" but is a harvester; the publisher's own Hub DCAT feed says
+  `accessLevel: public` on all 109 datasets and carries CC0 on 8 of them, not
+  this one. A contradiction between a catalogue and its publisher is decided
+  for the publisher (`read-licence` step 5).
+- **MUST DISPLAY**: nothing is prescribed. The notice credits the publisher,
+  says no licence is stated, names the changes and disclaims endorsement,
+  without claiming a licence the city did not grant (Amsterdam's SILENT
+  register was displayed as CC BY by the owner's choice; this one is not).
+  Wording approved by the owner 2026-09-29.
+- **MUST NOT**: present the map as the official register, or imply Stockholms
+  stad produced or endorses it.
+- **MUST DO**: nothing. `brief_check.py stockholm` re-reads the Hub feed; if it
+  changes, the verdict is re-argued. Privacy: `check_personal_exposure.py
+  stockholm`, run 2026-09-29, finds only premises names and no fallback; the
+  verdict is in `DECISIONS.md`.
+- **Stockholm's rail, boundary and naming layer are OpenStreetMap data** (ODbL,
+  notice 1).
+
+**67. DSVSA București (Bucharest) — displayed by choice, not required**
+(written into `render_site_notices()`; displayed once Bucharest lands).
+
+- **SILENT, with the pages named** (read in the browser 2026-09-23; the
+  Bucharest rows in [`data_sources/romania.md`](data_sources/romania.md)):
+  `bucuresti.dsvsa.ro` has no terms-of-use page, only cookie and privacy
+  pages; the privacy policy says nothing of reuse; DSVSA's data is not on
+  `data.gov.ro`. The ANSVSA footer "Toate drepturile rezervate" is a website
+  footer, which governs site content, not the data (the New York situation).
+- **MUST DISPLAY**: nothing is prescribed. The notice credits the publisher,
+  says no licence is stated, names the changes (including the name rule and
+  the address placement) and disclaims endorsement. Wording approved by the
+  owner 2026-09-29.
+- **MUST NOT**: present the map as the official register, or imply DSVSA or
+  ANSVSA produced or endorses it.
+- **MUST DO**: nothing to the publisher. The files are fetched by the owner in
+  their own browser (the Band C memo's condition); a clearance cookie is never
+  replayed. Privacy: `check_personal_exposure.py bucharest`, run 2026-09-29;
+  the verdict is in `DECISIONS.md`.
+- **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
+  data** (ODbL, notice 1).
+
+**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin) — required, and DISPLAYED**
+(written into `render_site_notices()`; displayed once Incheon lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-29; the rows in
+  [`data_sources/south-korea.md`](data_sources/south-korea.md)): data.go.kr
+  15083033 declares 이용허락범위 제한 없음 in the page, Schema.org and DCAT, set
+  by SEMAS as provider, and SEMAS names data.go.kr as its release channel.
+  data.go.kr's FAQs 210 and 186: commercial use and processing allowed; the
+  factual content must not be falsified or distorted.
+- **Reasoned position (owner, 2026-09-29), Daegu's shape**: SEMAS's website
+  copyright policy asks for a consultation before using material without a
+  KOGL mark; read as covering the homepage's content, since the dataset carries
+  the publisher's own no-restriction label. Any objection is honoured. The
+  소상공인365 notices the listing cites are unread (IP-blocked from here).
+- **MUST DISPLAY**: a source credit, no wording prescribed; the categories and
+  counts stated as this project's (FAQ 186).
+- **MUST NOT**: present the counts as SEMAS's figures, or the data as accurate
+  or complete on SEMAS's behalf (its legal notice disclaims both).
+- **MUST DO**: nothing.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

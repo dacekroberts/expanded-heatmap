@@ -12,6 +12,29 @@ that Incheon then reuses.
 ⚠️ **Korean city: read `cjk-text`, and Seoul's, Daegu's and Busan's briefs
 first** (`pipeline/korean_names.py`, the rail precedent below).
 
+> **Measured at the build, 2026-09-29 (build session, branch `incheon`)** -
+> these supersede the business leg below:
+> - 🚨 **Built on SEMAS's 상가(상권)정보 instead (owner, 2026-09-29).** The
+>   brief's route was built through step 2 first: 48,736 active permit rows,
+>   **33,092 placed (73.4%)** through KESA (exact 20,152, interpolated 11,453,
+>   same main number 1,487). But the salons-and-baths list (15061611, 9,493)
+>   carries **lot-number addresses only** - KESA and OSM are road-name only,
+>   and juso.go.kr needs a Korean identity check - so Personal services could
+>   not be placed at all. The national LOCALDATA API needs a data.go.kr key,
+>   and **data.go.kr accounts are for Korean nationals or Korean-registered
+>   companies, with 본인인증** (sign-up page read 2026-09-29).
+> - **SEMAS** (data.go.kr 15083033, keyless ZIP, 352.7 MB, edition
+>   2026-06-30): Incheon's 136,995 rows -> **82,671 storefronts** (Food
+>   service 39,298, Retail 31,424, Personal services 11,949), **100% on the
+>   register's own point**, already on the 2026-07-01 districts (서해구, 검단구,
+>   제물포구, 영종구). 107 names withheld. Licence: permitted with conditions,
+>   SEMAS's website copyright policy read as the homepage's (owner).
+> - **Rail**, as recommended: 79 stations inside Incheon, 151 outside; gate 3
+>   exact on Incheon Line 1 (33), Line 2 (27), Line 7 (53) and the
+>   Suin-Bundang Line (63); Line 1 not gated whole (its southern branches never
+>   touch the box). The Wolmi Sea Train is placed by name as not drawn.
+> - **68.3% of storefronts within a ring.**
+
 ---
 
 ## The one-line summary

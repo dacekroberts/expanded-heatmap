@@ -4,7 +4,7 @@ it maps - read from the committed maps, never hand-kept (owner, 2026-09-28).
     python scripts/check_ring_shares.py            # check (the pre-push hook)
     python scripts/check_ring_shares.py --write    # regenerate app/ring_shares.json
 
-WHY. The "Why the maps differ" page (app/pages/92_Why_the_Maps_Differ.py) shows
+WHY. The "Why the maps differ" page (app/pages/202_Why_the_Maps_Differ.py) shows
 each city's share in its summary table and quotes the site-wide range in its
 prose. Both are open-ended - the next city can move the range - so they come
 from a generated file, the way app/macro_facts.json carries the macro map's

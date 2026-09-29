@@ -72,7 +72,6 @@ CATEGORY_BUCKETS_BY_NAME = {
     # ---- Food service (NAICS 722) --------------------------------------
     "EATING ESTABLISHMENT": "Food service",            # 7,876 / 1,907
     "DANCING OR ENTERTAINMENT": "Food service",        #   293 /   128  bars
-    "CATERING BUSINESS": "Food service",               #   282 /    70
     "NIGHT CLUB": "Food service",                      #    14 /     1
 
     # ---- Retail (NAICS 44/45) ------------------------------------------
@@ -89,7 +88,6 @@ CATEGORY_BUCKETS_BY_NAME = {
     "MASSAGE ESTABLISHMENT": "Personal services",           #   305 /  59
     "TATTOO STUDIO": "Personal services",                   #   235 /  56
     "ELECTROLYSIS SERVICE": "Personal services",            #    80 /  14
-    "FUNERAL HOME": "Personal services",                    #    62 /  13
 
     # ---- Catch-alls: checked, excluded, reasons in the docstring --------
     "SERVICE BUSINESS": None,                          # 28,010 / 4,900
@@ -206,6 +204,9 @@ CATEGORY_BUCKETS_BY_NAME = {
     # Excluded on the same rule as every other city: permanent fixed
     # premises only. A machine or a truck has no storefront to be near.
     "LUNCH WAGON / TRUCK": None,                       #   213 /    71
+    # Food with no counter of its own (owner, 2026-09-29): an event caterer
+    # cooks for the event (NAICS 722320). Food service until then.
+    "CATERING BUSINESS": None,                         #   282 /    70
     "ICE CREAM VENDOR": None,
     "PEDDLER": None,
     "TRAVELING JUNK DEALER": None,
@@ -250,6 +251,9 @@ CATEGORY_BUCKETS_BY_NAME = {
     "MEMBERSHIP ORGANIZATION": None,
     "PASSENGER TRANSPORTATION SERV": None,
     "CEMETERY / CREMATORIES, ETC.": None,
+    # Funeral services off every map (owner, 2026-09-28): a funeral home is
+    # not a storefront, as naics.py's 8122 carve-out. 62 / 13.
+    "FUNERAL HOME": None,
     "OCCASIONAL SALES - EXEMPT": None,
 }
 

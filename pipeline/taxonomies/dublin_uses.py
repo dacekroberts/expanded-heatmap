@@ -41,7 +41,7 @@ NULL_SEGMENT = "-"
 # or bakery sells goods; a cafe sells a sitting. The line is consumption on the
 # premises, which is also where NAICS draws it.
 _RETAIL = {
-    "CLOTHES SHOP", "SHOP (OFFICES)", "KIOSK", "PHARMACY", "BETTING SHOP",
+    "CLOTHES SHOP", "SHOP (OFFICES)", "KIOSK", "PHARMACY",
     "CONVENIENCE STORE [<200 SQ. M.]", "NEWSAGENT", "OFF-LICENCE", "JEWELLERS",
     "BUTCHER", "BUTCHERS / FISH MONGERS", "DEPARTMENT STORE", "SHOE SHOP",
     "ETHNIC FOOD SHOP", "FURNISHINGS", "CHARITY SHOP", "FLORIST", "BOOKSHOP",
@@ -57,7 +57,7 @@ _RETAIL = {
     "LIGHTING / LAMP", "FIREPLACES", "PEN SHOP", "ELECTRICAL / ELECTRONIC",
     "MOTOR ACCESSORIES", "SUPERMARKET", "SUPERMARKET 1 [200-500 SQ. M.]",
     "SUPERMARKET 2 [500-2500 SQ. M.]", "SUPERMARKET 3 [> 2500 SQ. M.]",
-    "RETAIL WAREHOUSE", "MARKET", "NURSERY (MOTHERCARE)",
+    "RETAIL WAREHOUSE", "NURSERY (MOTHERCARE)",
     "NURSERY  (MOTHERCARE)",   # the register carries both spacings
     # NAICS 441 motor vehicle dealers and 457 fuel stations both sit inside
     # retail trade, so these follow rather than being carved out by taste.
@@ -79,7 +79,8 @@ _FOOD = {
 #
 # 812 is services performed on a person or their personal effects: 8121
 # personal care, 8122 death care, 8123 laundry, 8129 other (incl. pet care and
-# photofinishing).
+# photofinishing). 8122 is carved out, as naics.py does: funeral services off
+# every map (owner, 2026-09-28).
 #
 # TWO DELIBERATE DEPARTURES, both toward the everyday meaning of a high street:
 #   - SHOE REPAIR / KEY CUT, ALTERATIONS and TAILORING are NAICS 811 (repair),
@@ -89,7 +90,7 @@ _FOOD = {
 #   - KENNELS is 812910 pet care and included; PET SHOP is 453910 and retail.
 _PERSONAL = {
     "HAIRDRESSING SALON", "BARBER", "BEAUTY SALON / MASSAGE", "TATTOO PARLOUR",
-    "DRY CLEANERS / LAUNDERETTE", "LAUNDRY", "FUNERAL HOME",
+    "DRY CLEANERS / LAUNDERETTE", "LAUNDRY",
     "PHOTO PROCESSING SHOP", "SHOE REPAIR / KEY CUT", "ALTERATIONS",
     "TAILORING", "KENNELS",
 }
@@ -102,6 +103,26 @@ _PERSONAL = {
 # one field that separates them reliably, so it is used here and only here.
 _GENERIC = {"SHOP", "STORE"}
 _RETAIL_CATEGORIES = {"RETAIL (SHOPS)", "RETAIL (WAREHOUSE)"}
+
+# --- Uses that OVERRIDE the generic SHOP / STORE ----------------------------
+#
+# Retail until 2026-09-29, when two owner rules took them off every map:
+#   - Gambling (owner, 2026-09-29): BETTING SHOP (176 rows), and CASINO,
+#     AMUSEMENT CENTRE and BINGO HALL, which were already excluded on their
+#     own but still reached the map as Retail through a "SHOP" segment beside
+#     them ("SHOP, CASINO", "AMUSEMENT CENTRE, SHOP").
+#   - Street and market stalls (owner, 2026-09-29): MARKET.
+# KIOSK stays Retail (owner, 2026-09-29): a kiosk is a small walk-in shop, as
+# a newsstand is.
+# The generic segment is the unit's TYPE, not its trade, so "SHOP, BETTING
+# SHOP" is a betting shop and must not come back as Retail through "SHOP".
+# A second SPECIFIC use still classifies ("AMUSEMENT CENTRE, ELECTRICAL /
+# ELECTRONIC" is an electronics shop) - the module's own rule that the
+# specific activity wins.
+_OVERRIDES_GENERIC = {
+    "BETTING SHOP", "CASINO", "AMUSEMENT CENTRE", "BINGO HALL",   # (owner, 2026-09-29) R5
+    "MARKET",                                                    # (owner, 2026-09-29) R1
+}
 
 # --- Explicitly not storefront ---------------------------------------------
 #
@@ -122,6 +143,13 @@ _NOT_STOREFRONT = {
     "ADVERTISING STATION", "NO USE SELECTED", "NO USE SELETCED", "OTHER",
     "MISCELLANEOUS", "VACANT", "DEMOLISHED / INCAPABLE OF USE", "DOMESTIC",
     "HOUSE", "RIGHT OF TRADING", "ATM", "POST BOX", "MAST", "MAST/ANTENNA",
+    # 8122 death care: funeral services off every map (owner, 2026-09-28).
+    # CEMETERY OR CREMATORIUM is further down, with the leisure uses.
+    "FUNERAL HOME",
+    # Gambling, and markets (owner, 2026-09-29): see _OVERRIDES_GENERIC
+    # above. CASINO, AMUSEMENT CENTRE and BINGO HALL are listed with the
+    # leisure uses further down.
+    "BETTING SHOP", "MARKET",
     # Accommodation is not one of this project's buckets. The
     # premises-taxonomy skill flags it specifically because it hides inside
     # food service in three other countries; here it is its own vocabulary.
@@ -236,7 +264,12 @@ _PRIORITY = ("Food service", "Personal services", "Retail")
 def classify(row):
     """A register row -> a bucket name, or None if it is not a storefront."""
     category = row.get("Category")
-    found = {bucket_for_segment(s, category) for s in _segments(row.get(VALUE_COLUMN))}
+    segments = _segments(row.get(VALUE_COLUMN))
+    if any(s in _OVERRIDES_GENERIC for s in segments):
+        # (owner, 2026-09-29) the generic unit type does not rescue a betting
+        # shop, a casino or a market stall.
+        segments = [s for s in segments if s not in _GENERIC]
+    found = {bucket_for_segment(s, category) for s in segments}
     found.discard(None)
     for bucket in _PRIORITY:
         if bucket in found:
@@ -246,3 +279,18 @@ def classify(row):
 
 def legend_label(bucket):
     return bucket
+
+
+_SHOPS = "RETAIL (SHOPS)"
+for _uses, _want in [("-, BETTING SHOP", None), ("SHOP, BETTING SHOP", None),
+                     ("SHOP, CASINO", None), ("AMUSEMENT CENTRE, SHOP", None),
+                     ("MARKET", None), ("SHOP, MARKET", None),
+                     ("-, KIOSK", "Retail"), ("SHOP, KIOSK", "Retail"),
+                     ("AMUSEMENT CENTRE, ELECTRICAL / ELECTRONIC", "Retail"),
+                     ("PHOTO PROCESSING SHOP, KIOSK", "Personal services"),
+                     ("-, NEWSAGENT", "Retail"), ("SHOP, -", "Retail"),
+                     ("-, ADULT SHOP", "Retail"),
+                     ("NIGHT CLUB / DISCOTHEQUE", "Food service")]:
+    assert classify({VALUE_COLUMN: _uses, "Category": _SHOPS}) == _want, (_uses, _want)
+for _s in _OVERRIDES_GENERIC:
+    assert is_known(_s) and bucket_for_segment(_s, _SHOPS) is None, _s

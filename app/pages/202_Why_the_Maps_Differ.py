@@ -1,7 +1,7 @@
 """Why the maps differ - the reader's version of docs/map_inconsistencies.md.
 
-The third information page, beside 90_About_the_Data.py (where the data comes
-from) and 91_What_Is_Excluded.py (what is left out). This one answers the
+The third information page, beside 200_About_the_Data.py (where the data comes
+from) and 201_What_Is_Excluded.py (what is left out). This one answers the
 question a reader asks when comparing two cities: why does this map look
 different from that one? The owner's shape (DECISIONS, 2026-09-28): its own
 page, linked from every page's footer; eleven short themes written for a
@@ -183,8 +183,10 @@ its map leans.
 meant to mean the same thing everywhere, but national classifications and
 local rules move some businesses at the edges. Car dealers count as Retail in
 most cities but not in France. Massage is a Personal service in Alberta but is
-left out as health care in British Columbia. Street stalls are left out in
-Mexico.
+left out as health care in British Columbia. Funeral homes, caterers, food
+trucks and market stalls, gambling, and the "other personal services"
+catch-all are left out wherever a register names them; where one files them
+under an ordinary label, they stay on the map.
 """
 )
 

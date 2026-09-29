@@ -301,6 +301,11 @@ correct, not a check to relax.
   mark the rest TODO - then, **before building the city**, do the full
   `SELECT DISTINCT <field>` pull and fill the mapping in properly, with a
   hand-sample of any catch-all categories.
+- **Either way, every keep-or-drop call follows the other cities**:
+  `docs/category_rules.md` holds the owner's cross-city rules (funeral, canteens,
+  the personal-services catch-all, adult venues, massage, petrol stations,
+  gambling, vets...) with their precedents. Recommend the precedent; bring a
+  departure to the owner with the precedent it breaks.
 
 ## Step 2 - Scaffold
 
@@ -624,7 +629,7 @@ right.
   renamed, update its `page` path in `cities.py`.
 - **Give the entry its three summary fields** (owner, 2026-09-28): the city's
   row in the table on the "Why the maps differ" page
-  (`app/pages/92_Why_the_Maps_Differ.py`) is built from them.
+  (`app/pages/202_Why_the_Maps_Differ.py`) is built from them.
   - `rail_extra`: what the map draws beyond the metro. `"Trams"` (light rail
     counts; a light metro such as Montréal's REM does not), `"Suburban rail"`,
     `"Both"` or `"—"`.

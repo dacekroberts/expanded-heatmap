@@ -431,7 +431,7 @@ def check_d():
 # --- E. Universal claims on the published surface ---------------------------
 
 # Only what a READER sees: page prose, and the two documents the app renders
-# (91_What_Is_Excluded.py and 90_About_the_Data.py). A universal in a research
+# (201_What_Is_Excluded.py and 200_About_the_Data.py). A universal in a research
 # brief is shorthand between sessions; on a page it is a claim to the public.
 PUBLISHED_PAGES = ("app/Overview.py", "app/pages/*.py")
 # data_sources/*.md: the per-country files split out of data_sources.md on

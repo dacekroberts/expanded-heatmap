@@ -62,6 +62,34 @@ REGISTRIES = {
     "dublin": dict(raw=None, trade=None, owner=None, name_is_address=True,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
+    # Stockholm: the food inspection register names PREMISES
+    # (`AnlaggningsNamn`), with no owner or registrant column to fall back to;
+    # the inspection text is never read. None of the placed storefronts'
+    # addresses carries a flat, floor or c/o marker (0 of 5,315, 2026-09-29),
+    # and the address is not carried to the map, so the unit check is skipped.
+    "stockholm": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
+    # Bucharest: DSVSA's registers name the registered UNIT, most often the
+    # operating company. The owner's rule (2026-09-28): the company name
+    # without its legal form, and the CATEGORY ONLY for a sole trader (II,
+    # PFA, IF, before or after the name, and behind a legal form - step 2's
+    # SOLE_TRADER). No address reaches the map; placement is by OSM address.
+    "bucharest": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
+    # Incheon: SEMAS's 상가(상권)정보 names STOREFRONTS (상호명, with the branch),
+    # with no owner, representative or phone column; the Korean pass (Seoul's rule,
+    # pipeline/korean_names.py) withholds a bare personal name at a residential
+    # address, read with the building name (pipeline/countries/korea_sbiz.py).
+    "incheon": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",), korean=True, withheld="Name withheld"),
+    # The Gyeonggi satellites: the same register, module and pass as Incheon.
+    "goyang": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                   address=("address",), korean=True, withheld="Name withheld"),
+    "seongnam": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                     address=("address",), korean=True, withheld="Name withheld"),
+    "yongin": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                   address=("address",), korean=True, withheld="Name withheld"),
     # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
     # trade name (`insegna`) and the rest carry the street address, because
     # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on

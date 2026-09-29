@@ -20,17 +20,25 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**178 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**187 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Tram audit Phases 3-4: rings measured, no thinning and rings sized per city (owner), the decision memo published](#2026-09-29---tram-audit-phases-3-4-rings-measured-no-thinning-and-rings-sized-per-city-owner-the-decision-memo-published)
+- [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
+- [Goyang, Seongnam and Yongin built on SEMAS's register, one page each (owner); a Seoul Capital Area macro-map region (owner)](#2026-09-29---goyang-seongnam-and-yongin-built-on-semass-register-one-page-each-owner-a-seoul-capital-area-macro-map-region-owner)
 - [Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner](#2026-09-29---atlantas-2024-licence-layer-is-not-a-publication-to-build-on-it-carries-per-business-revenue-likely-confidential-under-georgia-law-and-no-licence-atlanta-stays-discarded-pending-the-owner)
 - [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
+- [Incheon built on SEMAS's national storefront register (owner); the LOCALDATA API found closed by an identity check; cross-city category rules made a step every build passes through (owner)](#2026-09-29---incheon-built-on-semass-national-storefront-register-owner-the-localdata-api-found-closed-by-an-identity-check-cross-city-category-rules-made-a-step-every-build-passes-through-owner)
 - [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
 - [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
 - [The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)](#2026-09-29---the-tram-lists-data-re-checked-for-currency-santa-cruzla-laguna-discarded-kansas-city-kept-with-its-data-date-owner)
+- [Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)](#2026-09-29---exclusions-batch-re-run-41-cities-re-rendered-brazils-funilaria-misspelling-fixed-chicagos-funeral-disclosure-rewritten-owner)
+- [Information pages renumbered 90-92 -> 200-202 (owner)](#2026-09-29---information-pages-renumbered-90-92---200-202-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
+- [Bucharest built: DSVSA's food registers placed by an address join in each premises' own sector (74.9%); person-named companies by category (owner); privacy clean](#2026-09-29---bucharest-built-dsvsas-food-registers-placed-by-an-address-join-in-each-premises-own-sector-749-person-named-companies-by-category-owner-privacy-clean)
+- [Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session](#2026-09-29---exclusions-batch-the-owners-eight-follow-ups-wording-approved-handed-to-a-fresh-session)
+- [Stockholm built on its frozen food inspection register: institutional kitchens out by name (owner), three lines with Swedish labels (owner); privacy clean](#2026-09-29---stockholm-built-on-its-frozen-food-inspection-register-institutional-kitchens-out-by-name-owner-three-lines-with-swedish-labels-owner-privacy-clean)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
 - [Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)](#2026-09-29---staging-handed-off-for-the-tram-question-a-preliminary-yes-for-scoping-and-filtering-band-t-only-the-final-call-after-an-audit-owner)
 - [Gyeonggi is built from the Ministry's national local-licence files (owner)](#2026-09-29---gyeonggi-is-built-from-the-ministrys-national-local-licence-files-owner)
@@ -39,6 +47,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-09-28**
 
+- [Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)](#2026-09-28---stockholm-the-225-untyped-premises-recognised-by-name-go-on-the-map-flagged-owner-t-bana-only-owner-the-full-register-fetched-owner)
 - [Second batch live after the owner's reboot, checked on the live URL](#2026-09-28---second-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)](#2026-09-28---incheons-licences-read-the-permit-lists-and-the-kesa-lift-building-file-both-permitted-with-conditions-the-website-copyright-terms-judged-not-to-reach-them-owner-personal-services-shown-from-2021-dated-owner)
 - [Gyeonggi satellites: Goyang, Seongnam and Yongin first, then Suwon and Bucheon (owner)](#2026-09-28---gyeonggi-satellites-goyang-seongnam-and-yongin-first-then-suwon-and-bucheon-owner)
@@ -253,6 +262,95 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   said to continue through the phases unattended, so it was published
   without a read-back, and nothing was pushed to master.
 
+### 2026-09-29 - Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)
+
+- **`review-2026-09-29` holds the whole batch, unpushed** (owner pre-approved
+  every change at review time, 2026-09-29): `worktree-cleanup`, origin/master,
+  `stockholm`, then `bucharest`. Conflicts were resolved block by block by
+  script, never by taking one side of a file: the two cities' entries,
+  notices, taxonomies, exposure rules, label widths, data-source rows and
+  inconsistency rows kept side by side; the master list re-counted to 64
+  built, Band B 2, 78 candidates, 23 countries (Europe 22); Bucharest's notice
+  renumbered to 67; `REGION_ZOOM_WITHOUT` Europe = Riga, Stockholm and
+  Bucharest; ring shares re-written for 64 cities. `check_macro_labels.py`
+  PROBLEMS 0 with both cities together (each branch had passed alone),
+  `check_master_list_counts.py`, `check_city_registry.py` and `check_all.py`
+  24/24.
+- **Stockholm disclosed, not changed:** its register's restaurant type
+  ("Restaurang-, catering- och barverksamhet") also holds catering and mobile
+  food, so about 39 premises named as caterers and 15 as food trucks or mobile
+  units are on the map. Under the cross-city rule, a kind a register files
+  under an ordinary label stays and is disclosed; excluding them by name, as
+  Stockholm's institutional kitchens are, is left to the owner.
+  `sweden_livsmedel.py`'s docstring says its name rule removes catering; the
+  pattern has no catering word. Bucharest already excludes canteens,
+  catering-only units and vending (`romania_dsvsa.py`).
+- **The push waits until a reboot can follow it.** The info pages moved to
+  200-202 in this batch, and a deployed app that is not rebooted keeps its
+  imported `components.py`, whose page constants would then name files that
+  no longer exist.
+### 2026-09-29 - Goyang, Seongnam and Yongin built on SEMAS's register, one page each (owner); a Seoul Capital Area macro-map region (owner)
+
+- **Built on branch `gyeonggi`, stacked on `incheon`** (they read its SEMAS
+  module), pages 66-68. SEMAS's 상가(상권)정보 is Incheon's source (the
+  previous entry), 경기도's member cut by 시군구명:
+
+  | City | SEMAS rows | Storefronts (F / R / P) | Withheld | Stations | In a ring |
+  |---|---|---|---|---|---|
+  | Goyang | 50,587 | 27,808 (12,413 / 11,327 / 4,068) | 9 | 20 | 66.6% |
+  | Seongnam | 46,326 | 25,529 (11,770 / 9,951 / 3,808) | 30 | 18 | 76.1% |
+  | Yongin | 46,309 | 23,481 (10,999 / 9,353 / 3,129) | 16 | 24 | 55.4% |
+
+- **The brief's sources were closed or empty.** The Ministry's LOCALDATA data
+  (the owner's choice of 2026-09-29) is reachable only through a keyed API
+  that needs a Korean identity check. A background probe of each city's own
+  keyless data.go.kr files found Goyang with only a meat-retail list, Yongin
+  with no food or retail register, and Seongnam with files but no coordinates.
+  The province's linked listings all point to 경기데이터드림, whose terms are
+  ambiguous.
+- **One page per city (owner)**, the brief's recommendation. The owner asked
+  whether the satellites belonged in a Seoul regional build. The answer was not
+  now: Seoul's page is built on licence registers with thin retail, and a
+  regional map mixing them would show a false jump at the city line. A
+  SEMAS-based "Seoul (Regional)" is a possible later project.
+- **A Seoul Capital Area macro-map region (owner).** Seoul, Incheon, Goyang,
+  Seongnam and Yongin moved out of East Asia into their own region. At East
+  Asia's zoom the five sit 20-30 px apart and every pair of labels overlapped;
+  a composite region would still label them all at that zoom. Each city keeps
+  its own page. East Asia keeps Daegu, Busan, Japan, Taiwan and Hong Kong.
+  `check_macro_labels.py`: PROBLEMS 0 across 12 regions, all labels above
+  their dots. Label widths were measured in the deployed frame: Goyang 52.1,
+  Seongnam 71.4, Yongin 45.9. `check_master_list_counts.py` now counts
+  distinct countries, so South Korea spanning two region rows is one country.
+- **Rail, on Seoul's precedent for a satellite**: every metropolitan subway,
+  Korail metro or light-rail line with stations in the city is drawn, and
+  GTX-A is not.
+  - Goyang: Line 3 and the Gyeongui-Jungang Line. The Seohae Line is not
+    drawn: it runs on the Gyeongui-Jungang track through the same stations
+    in Goyang.
+  - Seongnam: Line 8, the Suin-Bundang, Shinbundang and Gyeonggang Lines.
+  - Yongin: the EverLine, the Suin-Bundang and Shinbundang Lines.
+  - Gate 3 is exact on six whole lines. Not gated whole: the
+    Gyeongui-Jungang Line (OSM 55 against 57), Line 8 (OSM's 24 is the real
+    line; the infobox reads 25) and the Gyeonggang Line (18 against the 11 of
+    its metropolitan section).
+  - Four colours sit below the preferred 45 and are recorded: Line 8,
+    Shinbundang and Gyeongui-Jungang are Seoul's own drawn colours, and the
+    Gyeonggang and EverLine colours are the operators'.
+- **Privacy: no personal information published.**
+  `check_personal_exposure.py` on all three: no owner column, and 0 contact
+  details. 0 Korean personal names at a residential address are shown (3, 23
+  and 12 pins withheld). Bare-name shapes stand at commercial addresses (3.0 to
+  3.7%), as in Incheon.
+- **Notice 66 widened** to "Small Enterprise and Market Service (Incheon,
+  Goyang, Seongnam, Yongin)".
+- Files: `pipeline/goyang/`, `pipeline/seongnam/`, `pipeline/yongin/`,
+  `app/pages/66-68_*`, `app/cities.py`, `app/components.py`,
+  `docs/data_sources.md`, `docs/data_sources/south-korea.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/gyeonggi.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`,
+  `scripts/check_master_list_counts.py`.
 ### 2026-09-29 - Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner
 
 - **The licence read (`licence-read` agent) found no grant and a likely
@@ -324,6 +422,80 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `data/_staging_scratch_2026-09-29/band_t_audit/atl_find.py`,
   `atl_2024.py`, `atl_stations.py`.
 
+### 2026-09-29 - Incheon built on SEMAS's national storefront register (owner); the LOCALDATA API found closed by an identity check; cross-city category rules made a step every build passes through (owner)
+
+- **The national LOCALDATA API is closed to this project.** Gyeonggi's decided
+  source (the Ministry's local-licence data) is now only the data.go.kr Open API
+  15154916 and its siblings, which need a service key. data.go.kr membership is
+  for Korean nationals (내국인) or companies registered with the National Tax
+  Service, with 본인인증 at step 4 (sign-up page read 2026-09-29, nothing
+  entered). The file listing 15096283 is a 2021 link with no data.
+  `file.localdata.go.kr` refused on 2026-09-27. The owner asked for this to be
+  investigated before anything was pursued: the same wall as juso.go.kr's.
+- **SEMAS's 상가(상권)정보 chosen for Incheon and the Gyeonggi satellites
+  (owner).** The source is data.go.kr 15083033, a keyless ZIP (352,699,739
+  bytes, edition 2026-06-30), declared 이용허락범위 제한 없음. It was found by
+  a background probe of the three satellites' own files: Goyang publishes
+  almost nothing, Yongin no food files, and Seongnam has no coordinates. It
+  lists storefronts nationally with a WGS84 point on every row and SEMAS's own
+  categories. Incheon: 136,995 rows, food 40,973, retail 31,534, repair and
+  personal 17,154.
+  - **Rejected: the brief's route**, built through step 2 first. Incheon's
+    permit lists placed 33,092 of 45,363 storefront rows (73.4%) through KESA's
+    lift-building file (exact 20,152, interpolated 11,453, same main number
+    1,487). The salons-and-baths list (9,493) carries lot-number addresses only,
+    which no keyless file places, so Personal services would have been empty.
+  - The licence (`licence-read`, 2026-09-29) is permitted with conditions: a
+    credit, no distortion of the facts, and the categories stated as this
+    project's. SEMAS's website copyright policy ("consult before using material
+    without a KOGL mark") is read as covering its homepage (owner, Daegu's
+    reading). The 소상공인365 notices the listing cites are unread, IP-blocked
+    from here. The ZIP's own readme holds only Excel instructions.
+- **The SEMAS taxonomy (owner): keyed at 소분류**, where the catch-all share is
+  6.4% (13.1% at 중분류). All 247 categories are given a home
+  (`pipeline/taxonomies/korea_sbiz.py`), aligned with the NAICS cities.
+  - Food service: everything under 음식, less staff canteens (612 in Incheon),
+    hostess bars (1,010) and dance halls (53).
+  - Retail: everything under 소매, less household fuel dealers (110).
+  - Personal services: salons, laundries, baths, body-shaping and **massage**.
+  - Out: offices, education, health, estate agents, lodging, recreation,
+    repairs, funeral services, wedding halls and matchmaking.
+  - **Massage was first proposed out** as possibly adult. The owner kept it
+    **for continuity**: every other country counts commercial massage (NAICS
+    812199; D.C., Miami, Chicago, Calgary, Dublin, Milan, Buenos Aires,
+    Brazil), and R3 excludes only premises the register names as adult.
+- **`docs/category_rules.md` (owner): the cross-city category rules in one
+  place**, each with its precedent cities: funeral, R1-R5, massage, vets,
+  nonstore, repairs, lodging, recreation, pharmacies, health food and mobile
+  units. `premises-taxonomy`, `add-city` Step 1 and CLAUDE.md now send every
+  keep-or-drop call through it, and a departure is an owner call brought with
+  the precedent it breaks. A machine check is left as a separate task.
+- **Incheon built** on branch `incheon`, page 65, notice 66 on the branch
+  (renumber at merge).
+  - Step 1: 12 of 64 relations drawn, 79 stations inside Incheon and 151
+    outside. Gate 3 is exact on Incheon Line 1 (33), Line 2 (27), Line 7 (53)
+    and the Suin-Bundang Line (63). Line 1 is not gated whole: its southern
+    branches never touch the box.
+  - Step 2: 82,671 storefronts (39,298 / 31,424 / 11,949), 100% on the
+    register's point, 107 names withheld.
+  - Step 3: 56,426 in a ring (68.3%).
+  - Rail is Seoul's precedent as the brief recommended: AREX, the maglev and
+    the Wolmi Sea Train (placed by name) are not drawn.
+  - The macro label is measured at 54.4 px and sits left of the dot at dy -6,
+    between Seoul's and Daegu's labels (PROBLEMS 0, tight).
+- **Privacy: no personal information published.**
+  `check_personal_exposure.py incheon`: no owner column exists; 0 emails,
+  phones or c/o; 0 Korean personal names at a residential address shown. 2,081
+  bare-name shapes (3.7%) stand at commercial addresses, as on Seoul's and
+  Busan's maps.
+- Files: `pipeline/incheon/`, `pipeline/countries/korea_sbiz.py`,
+  `pipeline/countries/korea_sbiz_fetch.py`, `pipeline/taxonomies/korea_sbiz.py`,
+  `app/pages/65_Incheon_Heatmap.py`, `app/cities.py`, `app/components.py`,
+  `docs/category_rules.md`, `docs/data_sources.md`,
+  `docs/data_sources/south-korea.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/incheon.md`, the two skills, `CLAUDE.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
 ### 2026-09-29 - Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)
 
 - **Supersedes the same day's discard in "The tram list's data re-checked
@@ -424,6 +596,107 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   still unread (none deciding keep or drop); `docs/city_master_list.md` the
   discard row and the Spain row. `check_master_list_counts.py` and
   `check_discard_evidence.py` pass.
+### 2026-09-29 - Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)
+
+- **All 41 cities re-rendered, one at a time, with master's shared processed
+  data backed up and restored around each** (heavy-job notices to the
+  Stockholm and staging sessions per batch). Step 2 onward only; step 1 is
+  untouched by a taxonomy. Storefronts before -> after (pins in a ring):
+  - US and Canada: Los Angeles 58,173 -> 57,527 (13,900); San Diego 10,955
+    -> 9,124 (2,228); San Francisco 17,837 -> 16,495 (11,788); Montréal
+    17,231 -> 17,162 (10,386); Vancouver 11,724 -> 11,525 (4,618); Edmonton
+    10,721 -> 10,702 (2,374); Calgary 15,099 -> 15,072 (6,156); Toronto
+    18,186 -> 18,218 (8,752; the nightclubs added 32 geocoded pins); Miami
+    29,878 -> 29,549 (3,733); Washington D.C. 5,230 -> 5,203 (3,847);
+    Chicago 20,686 -> 20,553 (11,721); Philadelphia 8,504 -> 8,301 (4,851).
+  - Mexico: Mexico City 283,345 -> 279,804 (131,458); Guadalajara 117,454
+    -> 116,657 (36,662); Monterrey 58,564 -> 58,049 (14,564).
+  - Europe: Paris 87,164 -> 86,903 (85,247); Marseille 18,177 -> 18,029
+    (9,947); Toulouse 8,635 -> 8,596 (5,533); Lille 11,833 -> 11,739
+    (7,165); Rennes 3,479 -> 3,448 (2,354); Oslo 10,718 -> 10,678 (8,080);
+    Copenhagen 14,978 -> 14,922 (14,102); Prague 25,275 -> 25,206 (17,613);
+    Berlin 60,313 -> 60,269 (49,393); Madrid 53,355 -> 52,102 (49,400);
+    Dublin 13,123 -> 12,904 (7,460).
+  - Asia: Taichung 66,115 -> 63,692 (12,185); Taipei 133,335 -> 128,878
+    (100,239); Taoyuan 45,014 -> 43,592 (5,089); Tokyo 63,989 -> 61,377
+    (59,889); Fukuoka 30,062 -> 29,921 (24,619).
+  - South America: Buenos Aires 63,596 -> 63,443 (42,185); São Paulo
+    219,578 -> 219,421 (49,555); Rio 106,652 -> 106,576 (30,233); Belo
+    Horizonte 45,582 -> 45,533 (8,393); Brasília 36,687 -> 36,633 (5,063);
+    Salvador 53,045 -> 52,938 (10,056); Fortaleza 62,969 -> 62,882 (8,514);
+    Porto Alegre 36,480 -> 36,391 (7,400); Recife 44,382 -> 44,302
+    (10,358); Santos 11,813 -> 11,809 (5,385).
+  - Every total is within 0.2% of the handoff's read-only measurement except
+    São Paulo (below). Madrid (+67), Taipei (-71) and Taichung (-39) moved
+    most; the handoff's rule is to use the re-run count.
+- **Kobe, Osaka, Sapporo and Kyoto: zero drift** on single-city drift
+  checks, so the changed Japanese module removes nothing there, as measured.
+- **Baselines rewritten from the re-run's own step logs**, which the
+  handoff did not cover: the steps print `##BASELINE` figures but only
+  `drift_check --update-baseline` writes `outputs/<city>/baseline.json`, and
+  a 41-city drift check was the heavy job the handoff split up. Step 2
+  onward figures were taken from the logs and step 1's carried over (24
+  cities have baselines; 17 have none). Verified by a drift check of
+  Edmonton against the new commit: zero drift, baseline unchanged.
+- **Brazil: "FUNELARIA" is a body shop, not a funeral home.** São Paulo lost
+  157 storefronts, not the measured 25. The edit-distance pass corrects a
+  token to the first vocabulary word within reach in sort order, and
+  FUNELARIA, FUNIRARIA and FUNINARIA - São Paulo's spellings of
+  *funilaria* - are as close to FUNERARIA, which sorts first, as to
+  FUNILARIA: 132 of São Paulo's 178 funeral-labelled rows. A first fix (a
+  spelling-table entry) was withdrawn when real funeral homes turned out to
+  depend on the same pass (FUNEARIA CRUZ DOURADO, FUNENARIA ROXO, FENERARIA
+  SANTA IZABEL). `fuzzy_fix` now takes FUNILARIA whenever a token is at
+  least as close to it, with import-time asserts both ways
+  (`pipeline/taxonomies/brazil_cnefe.py`). Both labels are excluded, so it
+  moves a reason, not a pin: all nine maps re-rendered identical after
+  Folium-id normalisation. Re-labelled from the raw descriptions, the 703
+  pins the batch took off the nine maps are **558 funeral** (São Paulo 25,
+  Rio 75, Belo Horizonte 48, Brasília 53, Salvador 106, Fortaleza 86, Porto
+  Alegre 85, Recife 79, Santos 1) and **145 body shops**, which the
+  misspelling had kept on the maps as personal services until now - a
+  correction, since auto repair is excluded. Owner approved the fix. The
+  one known cost: Salvador's FUNIRARIA J SODRE, probably a funeral home,
+  is now labelled auto repair; it is excluded either way.
+- **Wording counts re-measured** against before/after processed files by an
+  agent: every figure in the approved per-city text matches except three,
+  settled by the owner:
+  - Los Angeles's kept `722300` is **3,145 pins**, not 3,013 (that was the
+    count before geocoding and the residence filter).
+  - Chicago's catch-all removed **133** sites, not 134; 17 of them name
+    another activity too, all of them activities that were never counted
+    (fitness, yoga, tax preparation, event planning).
+  - **Chicago's funeral disclosure rewritten (owner):** the "about 63"
+    funeral-word pins were 64 before the batch; 35 of them were funeral
+    homes filed under the "Miscellaneous Personal Services" catch-all and
+    left with it, and the 29 that remain sell funeral items. The approved
+    "they stay because nothing separates them" was no longer true.
+  - Brazil's trailer or food-truck descriptions: about 320, not 325.
+- **Personal exposure re-run for all 41 (`check_personal_exposure.py`):
+  every city consistent with its prior verdict, none worse.** Los Angeles
+  331 of 13,900 pins (2.38%, down from 844, 5.81%, on 2026-09-21), but that
+  entry's apartment-population item was never closed and still is not.
+  Vancouver 312 of 4,618 (6.76%, from 314 of 4,668): the share rose 0.03
+  points only because the total fell; the 2026-09-21 verdict accepted that
+  level on the parcel-zoning join, which this re-run did not redo. Mexico
+  City, Guadalajara and Monterrey stay at the accepted 31-35% heuristic
+  level; the nine Brazilian cities stay inside the accepted 8.8-19.5%.
+- **Checks:** `check_ring_shares.py --write` (62 cities), `check_macro_labels.py`
+  PROBLEMS 0, `check_all.py` 24/24. `app/macro_facts.json` waits for landing,
+  as the handoff says: `check_macro_facts.py --write` drops every city whose
+  shared data is stale.
+
+### 2026-09-29 - Information pages renumbered 90-92 -> 200-202 (owner)
+
+- **About the Data, What Is Excluded and Why the Maps Differ are now pages
+  200, 201 and 202.** With 64 cities built after Stockholm and Bucharest and
+  about 120 more on the candidate and tram lists, 90 would have been reached;
+  150 was the alternative, and 200 leaves room for every listed city. The
+  URLs do not change, since Streamlit drops the number from the path.
+  `scripts/scaffold_city.py`'s `next_page_number()` now refuses a city
+  number that reaches the first info page (tested both ways); before, the
+  collision would have been silent, as it nearly was at 10 in 2026-09-21
+  (`docs/scaling_thresholds.md`).
 
 ### 2026-09-29 - Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)
 
@@ -511,7 +784,196 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   section was brought current as well (Tallinn is in R; Rijswijk and Delft
   left C for T on 2026-09-27). Measuring scripts and caches in
   `data/_staging_scratch_2026-09-29/band_t_audit/`.
+### 2026-09-29 - Bucharest built: DSVSA's food registers placed by an address join in each premises' own sector (74.9%); person-named companies by category (owner); privacy clean
 
+- **Built on branch `bucharest`, page 64, notice 66 on the branch (67 once
+  Stockholm's 66 lands; renumber at merge, owner).** Step 1: 12 OSM relations
+  -> 64 stations (Metrorex's 64), all inside the municipality. Step 2: 17
+  owner-fetched files -> 23,113 active rows -> 23,014 after mobile units (75)
+  and non-storefront categories (27) -> 20,821 premises -> 15,593 placed
+  (7,857 Food shops, 7,736 Food service). Step 3: 11,244 in a ring (72.1%).
+- **The address join keeps the sector and the street type, and refuses a
+  number found in two places.** Staging's key, reproduced, put 1,730 of its
+  15,448 first-pass matches (11.2%) on a street and number whose OSM points
+  lie more than 300 m apart. Two causes: the street type was dropped (Aleea
+  and Șoseaua Pantelimon merged), and Bucharest repeats street names across
+  sectors. The build matches in the register's own Sector (the six OSM sector
+  polygons, with a 100 m edge for boundary streets), keeps a written type, and
+  places a premises only where its points form one site. "One site" means
+  linked in 150 m hops and no wider than 600 m: a plain 150 m spread test left
+  3,177 rows ambiguous, and 1,701 of the 2,655 read were one continuous site,
+  such as Casa Presei or Bucur Obor. Result: 74.9% placed, 73-76% in every
+  sector. The **control** reproduces: with those tests off the join reads
+  81.7% against Staging's 79.5%. The **second method** agrees: 29 of 29
+  house-level Nominatim answers lie within 100 m of the placed point (median
+  15 m); the other 10 answers were road midpoints. Rejected: Staging's
+  sector-free key (about 5 points higher, but it places the wrong-sector and
+  two-place rows at an arbitrary point).
+- **Companies named only as a person are shown by category (owner).** Six
+  company names, once the legal form is stripped, are only a Romanian given
+  name, a surname and initials ("Caranica Mihai SRL", "Stuparu Cristina"). "La
+  Mircea Măcelaru", a shop's name, stays. Rejected: showing them as
+  registered.
+- **The sole-trader rule reads every form of the name.** The first run caught
+  only a trailing form. 308 sole traders are now shown by category: the form
+  before the name ("PFA Ionescu Octavian"), after a hyphen ("-I.I"), behind a
+  legal form ("Volosnicu Mihaela PFA SRL", "SC II ..."), and "PF".
+- **The owner's canteen and catering exclusions reach rows filed elsewhere**:
+  13 "bufet de incintă" (in-house buffets) and 1 catering-only unit in file 19,
+  plus 3 labs, 8 kiosk carts and 2 vending machines. **Ice-cream makers (N24)
+  are Food service** (gelaterias), the brief having left the bucket open.
+- **Rail**: the branch rule dropped M5's Valea Ialomiței branch (the terminus
+  519 m from any drawn track). The buffer was narrowed to 100 m, and a new
+  step-1 gate holds every station within 100 m of its own line (furthest 23 m).
+  The numbered interchange pairs (Basarab 1/2 and five more) stay two stations
+  each, as Metrorex counts them.
+- **Europe's macro zoom leaves Bucharest out, as it does Riga**: fitted to it,
+  the zoom dropped and a dozen label pairs collided. Its centre still counts,
+  so Europe's frame sits about a degree further east, and on a phone Dublin's
+  label clips 11 px. `check_macro_labels.py` PROBLEMS 0; label width 69.8 px,
+  measured in the deployed frame with four controls reproduced.
+- **Privacy: no personal information published.** `check_personal_exposure.py
+  bucharest`: no fallback column; 0 emails, phones or c/o. The heuristic's 38%
+  "person-like" is Romanian two-word company names; the measured person-name
+  test finds 0 on the pins after the rules above. No address reaches the map.
+- **Gates**: `brief_check.py bucharest` 1/2 - the metro check passes; the
+  Internet Archive check answered HTTP 429 (rate limit), twice, a limit rather
+  than a finding. `check_provenance.py` names Bucharest OK; the scope,
+  inconsistency, master-list and macro-label checks pass.
+- Files: `pipeline/bucharest/`, `pipeline/taxonomies/romania_dsvsa.py`,
+  `app/pages/64_Bucharest_Heatmap.py`, `app/cities.py`, `app/components.py`,
+  `docs/data_sources/romania.md`, `docs/data_sources.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/bucharest.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+### 2026-09-29 - Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session
+
+- **Follow-ups on the measured counts (owner):**
+  - (1) France's car dealers REVERSED: 95% of Paris's 45.11Z rows record no
+    employees and 27% carry a premises name, so they are mostly one-person
+    traders probably registered at home. That is a personal-information risk
+    as well as a scope one. France stays the disclosed exception.
+  - (2) Montréal's caterers exempt: the street survey records traiteur
+    shops, as in France. Implemented as a thin `naics_montreal` taxonomy,
+    because a config list would be undone when `map_common` re-classifies at
+    render.
+  - (3) San Diego also loses its group-level 8129, its cottage-food home
+    kitchens (72234) and its ecoATM kiosks (81295 and 812959). 81291 and
+    81292 stay by assert.
+  - (4) Dublin's kiosks kept (newsstand-like); markets and betting shops
+    out.
+  - (5) Barcelona's vets left in and disclosed: one value mixed with pet
+    shops.
+  - (6) Taiwan's marriage introduction (969023) out; drinking places and
+    show restaurants kept.
+  - (7) San Francisco's contractor code accepted whole and disclosed.
+  - (8) Disclosed only: Los Angeles's 722300, Brazil's trucks and kiosks,
+    Meguro's 飲食バー, and the food-register cities' canteens.
+- **Wording approved (owner):** a new cross-city paragraph for
+  `excluded_categories.md`, per-city additions for 41 cities, and six
+  city-page sentences. They are recorded verbatim in
+  `docs/handoff_exclusions_2026-09-29.md`.
+- **Handed to a fresh cleanup session** (owner), with the weekly limit past
+  64%. The taxonomy code (27 files) is committed on `worktree-cleanup` and
+  deliberately NOT pushed: code without re-rendered maps would be drift on
+  master. The re-run of 41 cities follows the handoff, which backs up and
+  restores master's shared processed data around each city.
+- **This worktree's `data/` is now a junction to the shared folder.** The old
+  real folder is kept as `data.stale-2026-09-29/`, excluded from git. It
+  holds seven older station and line files, and nothing else unique.
+
+### 2026-09-29 - Stockholm built on its frozen food inspection register: institutional kitchens out by name (owner), three lines with Swedish labels (owner); privacy clean
+
+- **Built on branch `stockholm`, page 63, notice 66.** Step 1: 14 OSM subway
+  relations (the Yellow line's skipped) -> 100 stations -> 82 inside
+  Stockholms kommun, 18 outside with their kommun named. Step 2: 289,742
+  inspection rows -> 8,146 premises (latest record per `ObjektId`) -> 5,976
+  storefront-typed, 730 of them out by name, plus 225 untyped by name ->
+  5,471 storefronts -> 5,262 placed (4,193 Food service, 1,069 Food shops, 217
+  classified from the name). Step 3: 4,702 in a ring (89.4%).
+- **Institutional kitchens left out by name (owner).** The register files every
+  kitchen under the restaurant type. 718 of 4,967 restaurant-typed premises are
+  named as preschools (386), schools and gymnasia (206), care homes, home care
+  and day centres (78), staff canteens (11) or churches, prisons and
+  associations (37). Rejected: keeping them, London's canteen precedent, where
+  canteens were about 2.5% of the type rather than about 14%. The test applies
+  to the restaurant type only: a shop inside an institution ("Tekniska
+  högskolans Tobak") stays. About 20 office canteens under company names
+  ("KPMG AB") remain; "AB" names are too mixed to filter (Bapsang, The Good
+  Gringo), and the page says so.
+- **Staging's name rule corrected on measured grounds.** Its 686 matches on
+  typed storefronts were read. Five words were substrings of real names ("lss"
+  in Olsson and Karlsson, "sfi" in Kungsfisk, "lager" in Lagerbaren, "kontor" in
+  Restaurang Kontoret, "kyrka" in Slaktkyrkan) and are now bounded. Six words
+  from the placed pins were added (hemtjänst, dagverksamhet, daglig
+  verksamhet, äldreomsorg, montessori, föräldrakoop). Re-validated on typed
+  premises: 96.5% right when it says storefront (Staging's 96.9% was before
+  the fix). The untyped recovery is still 225.
+- **Pharmacies and "Övrigt" out (owner).** 12 retail-typed pharmacies are
+  excluded, matching the owner's rule for untyped ones. The 185 premises typed
+  only "Övrigt" are head offices, delivery firms and distributors by name
+  (Foodora huvudkontor, Bacardi AB).
+- **The Tunnelbana is drawn as SL's three lines (owner)**: Gröna, Röda and Blå
+  linjen, labelled in Swedish, with the routes in the legend. This is
+  Melbourne's grouping and Oslo's local names. Rejected: English names; seven
+  routes drawn separately, since the three green routes share one track and
+  one colour. Colours from `line_colour_search.py`: the Blue line reads violet
+  (#8018F8) beside the Food shops pins, London's Piccadilly precedent.
+- **OSM's relations were incomplete in two ways.** The first stops fetch came
+  from a mirror (overpass.kumi.systems) older than the relations, and eleven
+  stations' stop nodes were missing. Step 1 now stops on any missing member.
+  Tekniska högskolan is a platform member only, so named platform members
+  count. Hallonbergen (route 11, Sundbyberg) is in no relation and is added
+  from its station node. Gate 3 is exact against English Wikipedia's table of
+  lines: 100 stations; routes 10, 11, 13, 14 and 19 at 14, 12, 25, 19 and 35.
+  Routes 17 and 18 are out of the per-route gate, because OSM runs them on to
+  Hässelby strand.
+- **Europe's macro zoom leaves Stockholm out, as it does Riga.** At 18.07° E,
+  fitting to Stockholm lowered the zoom, and four label pairs collided at every
+  width (Marseille and Milan, Rennes and London, Copenhagen and Newcastle,
+  Amsterdam and Rotterdam). With it in `REGION_ZOOM_WITHOUT`, Europe's view is
+  exactly as before, and `check_macro_labels.py` reports PROBLEMS 0. Label width
+  72.1 px, measured in the deployed frame with four controls reproduced.
+- **Privacy: no personal information published.** `check_personal_exposure.py
+  stockholm`: no fallback name column exists; 0 emails, 0 phone numbers. The 3
+  c/o hits are venues ("A8 c/o K-märkt"), and the 6 comma names are a chain and
+  its street ("Subway, Fleminggatan"). The heuristic's 1,120 person-like names
+  were sampled (90): every one a trade name, since Swedish two-word names read
+  as persons ("Coop Konsum", "Birger Jarl"). No placed storefront's address
+  carries a flat, floor or c/o marker, and the address is not shown.
+- **Gates**: `brief_check.py stockholm` 6/6; `drift_check.py stockholm` zero
+  drift; `check_provenance.py` names Stockholm OK;
+  `check_scope_disclosure.py`, `check_inconsistency_list.py`,
+  `check_master_list_counts.py` and `check_macro_labels.py` pass. The notice is
+  the owner's approved wording: it credits the publisher and states that no
+  licence is given (SILENT).
+- Files: `pipeline/stockholm/`, `pipeline/taxonomies/sweden_livsmedel.py`,
+  `app/pages/63_Stockholm_Heatmap.py`, `app/cities.py`, `app/components.py`,
+  `docs/data_sources/sweden.md`, `docs/data_sources.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/stockholm.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+### 2026-09-28 - Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)
+
+- **The 225 untyped premises are added (owner).** These are the ones the name
+  rules call storefronts and that were last inspected in 2022-23. They are
+  flagged "classified from the name" on the map. This answers the proposal in
+  "Stockholm is built on its register as frozen on 2025-10-21". The other
+  1,166 untyped premises stay out and are disclosed: institutions, the
+  unidentifiable, pharmacies, and the 26 storefronts by name last inspected
+  before 2022. That gives about 5,996 placed storefronts. The rules are right
+  96.9% of the time on typed premises, so about 7 of the 225 may be wrong.
+  Rejected: leaving every untyped premises out (about 5,771, all typed by the
+  register).
+- **T-bana only (owner)**, the brief's recommendation: lines 10, 11, 13, 14,
+  17, 18 and 19. 88.7% of storefronts fall in a ring. Pendeltåg,
+  Roslagsbanan and Saltsjöbanan would give 92.3%. Trams are out, and so is
+  the unref'd Yellow line relation (21104772), which is not in service.
+  Rejected: adding pendeltåg and the local railways.
+- **Download approved (owner)**: all 289,742 inspection rows of
+  Livsmedelstillsyn layer 41, every field. Measured beforehand from a
+  2,000-row sample at 564 bytes a row: about 165 MB in 145 pages.
+- Files: `DECISIONS.md` (the build's own files follow on branch `stockholm`).
 ### 2026-09-29 - Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch
 
 - **Funeral services (owner, 2026-09-28): coded, not yet rendered.**

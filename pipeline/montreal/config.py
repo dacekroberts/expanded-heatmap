@@ -240,7 +240,10 @@ IN_CITY_STATIONS_EXPECTED = 78
 SOURCE_ENCODING = "utf-8"
 SOURCE_DELIMITER = ","
 
-TAXONOMY_SYSTEM = "naics"
+# naics.py with one exemption (owner, 2026-09-29): caterers (722320), which
+# naics.py excludes for every other city, stay here - a street survey's
+# traiteur shops, as France's 56.21Z. See pipeline/taxonomies/naics_montreal.py.
+TAXONOMY_SYSTEM = "naics_montreal"
 # The survey's own column name; step 2 renames it to the taxonomy's
 # VALUE_COLUMN ("naics").
 RAW_CLASSIFICATION_COLUMN = "SCIAN"

@@ -69,6 +69,14 @@ free for cities and keeps them last in the sidebar where they belong.
 `app/components.py`'s `ABOUT_DATA_PAGE` and `EXCLUSIONS_PAGE` constants were
 updated with it.
 
+**Renumbered again 2026-09-29 (owner): the info pages are now 200, 201 and
+202** (the third, Why the Maps Differ, had been added at 92). With 64
+cities built and about 120 more on the candidate and tram lists, 89 slots
+would not last. 150 was the alternative; 200 leaves room for every listed
+city. The URLs do not change, since Streamlit drops the number from the
+path. `next_page_number()` now refuses a city number that reaches the first
+info page, so the collision above cannot recur silently.
+
 The lesson worth keeping: **"verified not a problem" was true of the question
 asked and hid a real defect one layer down.** The sort was fine; the slot was
 not.

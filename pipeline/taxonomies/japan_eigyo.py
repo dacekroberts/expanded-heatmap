@@ -37,6 +37,11 @@ VALUE_COLUMN = "permit_type"
 EXTRA_COLUMNS = ("source", "form")
 PERSONAL_SOURCES = {"barber", "beauty", "laundry", "coinlaundry"}
 
+# Two patterns shared by RULES (the type) and FORM_RULES (the 業態), both
+# (owner, 2026-09-29) - see their entries in RULES.
+_HOSTESS = r"キャバレー|キャバクラ|スナック(?!菓子)"
+_CATERING = r"仕出"
+
 # (rule name, bucket or None, pattern) - searched in the NORMALISED value.
 RULES = [
     # --- not a premises, or not a storefront: above everything they overlap
@@ -46,6 +51,15 @@ RULES = [
     ("mail order", None, r"通信販売|訪問販売|通信訪問"),
     ("inside accommodation", None, r"旅館|ホテル"),
     ("entertainment venue", None, r"カラオケ|麻雀|遊技場|ネットカフェ|漫画喫茶"),
+    # Adult and hostess venues off every map (owner, 2026-09-29): Tokyo's
+    # permit sub-type バー・キャバレー (bars filed with cabarets, one sub-type)
+    # and the snack bar, a hostess-staffed bar. Plain バー stays: it names
+    # no hostess. Not スナック菓子 (snack foods, a confectioner's product).
+    ("hostess venue: cabaret / snack bar", None, _HOSTESS),
+    # Food with no counter of its own (owner, 2026-09-29): 仕出し is catering
+    # delivered to homes, offices and events (Tokyo's 飲食店営業（仕出し）,
+    # Meguro's 飲食仕出, Fukuoka's 業態 仕出し).
+    ("event catering (仕出し)", None, _CATERING),
     # --- Retail, food only (the owner's two manufacturing types come first,
     #     because they would otherwise fall to the manufacturing exclusion)
     ("konbini holding a restaurant permit", "Retail", r"コンビニ"),
@@ -60,7 +74,7 @@ RULES = [
     ("bento shop", "Retail", r"^弁当販売"),
     ("other food and drink sales", "Retail", r"その他の食料・飲料販売|^他食販(店舗|包装)"),
     # --- Food service
-    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶|仕出)"),
+    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶)"),
     ("café", "Food service", r"喫茶店営業|^喫茶店舗"),
 ]
 _COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in RULES]
@@ -88,6 +102,10 @@ FORM_RULES = [
                                      r"栄養管理室|病院|保育園|幼稚園|小学校"),
     ("inside accommodation", None, r"旅館|ホテル"),
     ("entertainment venue", None, r"カラオケ|麻雀|遊技場|ネットカフェ|漫画喫茶"),
+    # (owner, 2026-09-29) the same two rules as RULES, in the filer's words:
+    # Tokyo's バー・キャバレー / 一般・スナック, Fukuoka's スナック、バー.
+    ("hostess venue: cabaret / snack bar", None, _HOSTESS),
+    ("event catering (仕出し)", None, _CATERING),
     ("vending machine", None, r"自動販売機|自販機|置き菓子"),
     ("mail order", None, r"通信販売|訪問販売|ネット販売|インターネット販売|ネットショップ|オンラインショップ"),
     # Kobe's konbini rule, as a form: a konbini or supermarket holding a
@@ -183,4 +201,14 @@ for _v, _f, _want in (("① 飲食店営業", "自動車200L", None), ("① 飲�
                       ("① 飲食店営業", "居酒屋", "Food service"), ("① 飲食店営業", float("nan"), "Food service"),
                       ("⑪ 百貨店、総合スーパー", "ドラッグストア", "Retail"), ("食肉処理業", "スーパー", None),
                       ("⑤ コップ式自動販売機（自動洗浄・屋内設置）", "カフェ", None)):
+    assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))
+# (owner, 2026-09-29) hostess venues and 仕出し catering go, by type or by 業態;
+# a plain bar, a wine bar and a snack-food confectioner stay.
+for _v, _f, _want in (("飲食店営業（バー・キャバレー）", "", None), ("飲食店営業（一般・スナック）", "", None),
+                      ("飲食店営業", "バー・キャバレー", None), ("飲食店営業", "一般・スナック", None),
+                      ("① 飲食店営業", "スナック、バー", None), ("飲食店営業（仕出し）", "", None),
+                      ("飲食仕出", "", None), ("飲食店営業", "仕出し・定期", None),
+                      ("飲食店営業", "バー", "Food service"), ("① 飲食店営業", "ワインバー", "Food service"),
+                      ("飲食バー", "", "Food service"), ("飲食店営業", "一般・食堂", "Food service"),
+                      ("菓子製造業", "スナック菓子", "Retail"), ("菓子製造業（スナック菓子）", "", "Retail")):
     assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))

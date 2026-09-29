@@ -6,11 +6,11 @@ Adding a city means adding its entry here (plus its page under app/pages/).
 st.page_link and st.switch_page expect.
 
 PAGE NUMBERING: cities are numbered 1..N in the order they were IMPLEMENTED,
-and the two information pages sit at 90 and 91 so they never compete for a
-city's slot and always sort last in the sidebar. Vancouver is 10 as the tenth
-city; **11 is the next free city slot**, which
-`scripts/scaffold_city.py`'s `next_page_number()` already returns on its own
-because it globs `*_Heatmap.py` and so does not see 90 or 91. Nothing needs
+and the three information pages sit at 200, 201 and 202 (90-92 until
+2026-09-29) so they never compete for a city's slot and always sort last in
+the sidebar. The next free city slot is one past the highest `*_Heatmap.py`,
+which `scripts/scaffold_city.py`'s `next_page_number()` returns on its own
+(it refuses a number that reaches the info pages). Nothing needs
 reserving by hand - just do not renumber a city page without updating its
 `page` value here, since these two are the only link between them. `lat`/`lon` place the
 city's marker on the macro map; they only need to be a sensible centre of its
@@ -75,7 +75,7 @@ variable). Re-check all three widths after changing any of them, or after
 adding a city whose name is long.
 
 `rail_extra`, `record_kind` and `categories` are the city's row in the summary
-table on the "Why the maps differ" page (pages/92_Why_the_Maps_Differ.py): what
+table on the "Why the maps differ" page (pages/202_Why_the_Maps_Differ.py): what
 is drawn beyond the metro, what kind of record the businesses come from, and
 whether all three categories are there. Each must be one of the values
 scripts/check_inconsistency_list.py lists, and is read from the city's rows in
@@ -1221,7 +1221,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Lines 1–9 and six more subway lines",
-        "region": "East Asia",
+        "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
         # Above the dot, the default: Seoul and Hong Kong are far apart in
@@ -1678,6 +1678,134 @@ CITIES = [
         # with PROBLEMS 0, Sydney included.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Stockholm",
+        "lat": 59.3293,
+        "lon": 18.0686,
+        "page": "pages/63_Stockholm_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (96.2%)",
+        "data_age": "Register frozen at 2025-10-21",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "The Tunnelbana's three lines",
+        "region": "Europe",
+        "country": "Sweden",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 72.1 px measured in the deployed
+        # app's own frame (2026-09-29, four entries reproduced). Europe's zoom
+        # leaves Stockholm out, as it does Riga (REGION_ZOOM_WITHOUT): fitted
+        # to it, the zoom dropped and put four label pairs on top of each
+        # other. check_macro_labels.py then passes every region at 375, 768
+        # and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Bucharest",
+        "lat": 44.4268,
+        "lon": 26.1025,
+        "page": "pages/64_Bucharest_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined by address (74.9%)",
+        "data_age": "Registers of 2026-08-25",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Metrorex M1–M5",
+        "region": "Europe",
+        "country": "Romania",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 69.8 px measured in the deployed
+        # app's own frame (2026-09-29, four entries reproduced). Europe's zoom
+        # leaves Bucharest out (REGION_ZOOM_WITHOUT); check_macro_labels.py
+        # then passes every region at 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Incheon",
+        "lat": 37.4563,
+        "lon": 126.7052,
+        "page": "pages/65_Incheon_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Incheon Lines 1 and 2, Line 1, Line 7 and the Suin–Bundang Line",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 54.4 px measured in the deployed
+        # app's own frame (2026-09-29, four entries reproduced). Labelled in the
+        # Seoul Capital Area region only; check_macro_labels.py passes every
+        # region at 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Goyang",
+        "lat": 37.6584,
+        "lon": 126.832,
+        "page": "pages/66_Goyang_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 3 and the Gyeongui–Jungang Line",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 52.1 px measured in the deployed app's
+        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
+        # Capital Area region; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Seongnam",
+        "lat": 37.42,
+        "lon": 127.1265,
+        "page": "pages/67_Seongnam_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 8, the Suin–Bundang, Shinbundang and Gyeonggang Lines",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 71.4 px measured in the deployed app's
+        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
+        # Capital Area region; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yongin",
+        "lat": 37.2411,
+        "lon": 127.1776,
+        "page": "pages/68_Yongin_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "The EverLine, the Suin–Bundang and Shinbundang Lines",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 45.9 px measured in the deployed app's
+        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
+        # Capital Area region; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -1822,6 +1950,12 @@ REGION_ORDER = [
     # Seoul is about 2,100 km and to Sapporo about 3,400, past the 3,300 at which
     # Canada was split, so re-score it when Japan lands rather than assume.
     "East Asia",
+    # SEOUL CAPITAL AREA (owner, 2026-09-29): Seoul, Incheon and the Gyeonggi
+    # satellites (Goyang, Seongnam, Yongin), five cities within about 40 km,
+    # moved out of East Asia. At East Asia's zoom they sit 20-30 px apart and
+    # every pair of labels overlapped (check_macro_labels.py); a composite
+    # would still label them all at that zoom. Each city keeps its own page.
+    "Seoul Capital Area",
     # OCEANIA (owner, 2026-09-28): Sydney first, Melbourne next, about 710 km
     # apart - one readable view, far from every other region. Named for the
     # continent rather than the country, as Europe is, so an Australian or New
@@ -1839,7 +1973,15 @@ REGION_ORDER = [
 # and centre on the midpoint of all 16 - central Europe. On tablet and desktop
 # every city shows; on a phone Dublin and Riga sit a pan away, and the list
 # beneath the map always has them. check_macro_labels.py reads this too.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga",)}
+# Stockholm (2026-09-29) joins it on the same measurement: fitted to it, the
+# zoom dropped and Marseille, Rennes, Copenhagen and Amsterdam collided with
+# neighbours at every width. Without it Europe's zoom and centre are exactly
+# what they were (Riga already sets the centre's eastern edge).
+# Bucharest (2026-09-29) joins it on the same measurement: fitted to it, the
+# zoom dropped and a dozen label pairs collided at every width. Its centre
+# still counts, so Europe's frame sits about a degree further east; on a phone
+# Dublin's label clips 11 px and Bucharest's 25 px, PROBLEMS 0.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest")}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.

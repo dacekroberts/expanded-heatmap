@@ -1,10 +1,10 @@
 {
-  "bucket_food_service": 12639,
-  "bucket_personal_services": 8079,
+  "bucket_food_service": 12477,
+  "bucket_personal_services": 7726,
   "bucket_retail": 37869,
-  "businesses_clean_rows": 58565,
+  "businesses_clean_rows": 58050,
   "denue_rows": 211349,
   "fijo_rows": 114007,
   "in_scope_rows": 117276,
-  "storefront_rows": 58587
+  "storefront_rows": 58072
 }

@@ -22,7 +22,7 @@ the reason each table cites its sources. A row for a name not in cities.py is
 also reported (a renamed or removed city).
 
 THE PUBLISHED SUMMARY (owner, 2026-09-28). Tables A-D stay internal; the site's
-"Why the maps differ" page (app/pages/92_Why_the_Maps_Differ.py) shows one row
+"Why the maps differ" page (app/pages/202_Why_the_Maps_Differ.py) shows one row
 per city built from three fields of its app/cities.py entry. So every city must
 also carry `rail_extra`, `record_kind` and `categories`, each one of the values
 in FIELDS below - the page's whole vocabulary, so a new kind of record is a

@@ -56,6 +56,9 @@ NOT_PREMISES_PREFIXES = {
     "964": "Zprostředkování v oblasti osobních služeb",
     # 96.91, personal services in the customer's household.
     "9691": "Poskytování osobních služeb v domácnostech",
+    # 96.3 is entirely 96.30, funeral and related activities. Funeral services
+    # off every map (owner, 2026-09-28): not storefronts.
+    "963": "Pohřební a související činnosti",
 }
 
 # Codes whose own label is residual wording ("ostatní", "j. n." - jinde

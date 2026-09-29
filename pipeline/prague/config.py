@@ -145,7 +145,11 @@ CITY_KEEP = "PRAHA"   # kept for the scaffold's templates; OBEC filters
 # not residual wording, and mostly massage salons with a street door - kept.
 # The retail catch-alls (47120, 47270, 47690, 47780, 47799) are kept, as in
 # Oslo, Copenhagen and France: shops by product.
-CATCH_ALL_EXCLUDE = ()
+#
+# SUPERSEDED 2026-09-29 for 96990: the "other personal services" catch-all is
+# excluded in every city (owner, 2026-09-29), however few rows it holds here.
+# 96230 stays - a specific class, as above.
+CATCH_ALL_EXCLUDE = ("96990",)   # (owner, 2026-09-29) R2
 
 # Sanity bounds: the placed storefronts' measured extent (49.9488-50.1716 N,
 # 14.2657-14.6867 E, 2026-09-24) plus ~0.02 deg. The join to RUIAN does the

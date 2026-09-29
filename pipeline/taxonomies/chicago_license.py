@@ -57,7 +57,11 @@ PERSONAL_SERVICE_ACTIVITIES = (
     "HAIR SERVICES", "HAIR, NAIL", "NAIL SERVICES", "SKINCARE SERVICES",
     "SKIN CARE", "WAXING", "MASSAGE", "TATTOO", "LAUNDROMAT",
     "DRY CLEANING - DROP OFF", "CLOTHING ALTERATIONS",
-    "MISCELLANEOUS PERSONAL SERVICES",
+    # "MISCELLANEOUS PERSONAL SERVICES" was here until 2026-09-29: it is
+    # Chicago's "other personal services" catch-all, excluded everywhere
+    # (owner, 2026-09-29). Removed rather than vetoed, so a licence that ALSO
+    # names a specific activity ("... | Skincare Services") still classifies
+    # by that activity, as a catch-all license type does here.
 )
 RETAIL_ACTIVITIES = (
     "RETAIL SALE",                      # "Retail Sales of ...", "Retail Sale of ..."
@@ -132,3 +136,13 @@ def classify(row: dict):
             return "Personal services"
         return "Retail" if _has(parts, RETAIL_ACTIVITIES) else None
     return None
+
+
+# (owner, 2026-09-29) the personal-services catch-all decides nothing on its
+# own; beside a specific activity, the specific one decides.
+_LBL = "Limited Business License"
+for _act, _want in [("Miscellaneous Personal Services", None),
+                    ("Miscellaneous Personal Services | Skincare Services", "Personal services"),
+                    ("Miscellaneous Personal Services | Retail Sales of General Merchandise", "Retail"),
+                    ("Hair Services", "Personal services")]:
+    assert classify({"license_description": _LBL, "business_activity": _act}) == _want, (_act, _want)

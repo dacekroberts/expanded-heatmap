@@ -288,7 +288,10 @@ def check(text, tram_text=None):
         if stated is not None and stated != len(names):
             problems.append(f"line {i + 1}: Built row '{country} ({stated})' lists "
                             f"{len(names)} cities: {' · '.join(names)}")
-    countries = sum(len(f) if f else 1 for *_, f in rows)
+    # Distinct flags across the rows, plus one per flagless row: a country can
+    # span two region rows (South Korea in East Asia and the Seoul Capital Area,
+    # 2026-09-29) and is still one country.
+    countries = len({fl for *_, f in rows if f for fl in f}) + sum(1 for *_, f in rows if not f)
     m = re.match(r"^## Built\s*—\s*(\d+)", title)
     if not m:
         problems.append(f"the Built heading states no count: {title!r}")

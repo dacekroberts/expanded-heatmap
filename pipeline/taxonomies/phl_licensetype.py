@@ -53,7 +53,7 @@ LICENSETYPE_TO_BUCKET = {
     # --- Food service -----------------------------------------------------
     "FOOD PREPARING AND SERVING": "Food service",              # 4,277
     "FOOD PREPARING AND SERVING (30+ SEATS)": "Food service",  # 2,656
-    "FOOD CATERER": "Food service",                            # 229
+    # FOOD CATERER (229) left Food service on 2026-09-29 - see below.
     # Adjunct: held BY a restaurant that already holds a primary food licence
     # at the same address, so step 2's one-row-per-site collapse ranks these
     # last (LICENSE_PRIORITY in config.py) and they add a pin only where no
@@ -69,7 +69,7 @@ LICENSETYPE_TO_BUCKET = {
     # bodegas, mini-markets, beer distributors and live-poultry shops.
     "FOOD ESTABLISHMENT, RETAIL PERMANENT LOCATION": "Retail",      # 1,052
     "FOOD ESTABLISHMENT, RETAIL PERM LOCATION (LARGE)": "Retail",   # 385
-    "CURB MARKET": "Retail",                                        # 31
+    # A newsstand is a small walk-in shop and stays (owner, 2026-09-29).
     "VENDOR - NEWSSTAND": "Retail",                                 # 75
     "TIRE DEALER": "Retail",                                        # 83
     "PRECIOUS METAL DEALER": "Retail",                              # 78
@@ -105,6 +105,11 @@ LICENSETYPE_TO_BUCKET = {
     "VENDOR - PUSHCART": None,                          # 7
     "VENDOR - ON FOOT": None,                           # 7
     "HONOR BOX": None,                                  # 19 (vending machines, NAICS 454210)
+    # Food with no counter of its own (owner, 2026-09-29): an event caterer
+    # (NAICS 722320) cooks for the event, and a curb market is a street
+    # market's stalls. Food service and Retail respectively until then.
+    "FOOD CATERER": None,                               # 229
+    "CURB MARKET": None,                                # 31
 
     # Vehicle repair and trade. NAICS 811, which no city here maps. The
     # sampled holders are auto body and repair shops ("KONNY'S AUTO BODY",

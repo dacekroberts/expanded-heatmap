@@ -105,6 +105,12 @@ BUCKETS = {
     # --- Food service (NAICS 722) -----------------------------------------
     "EATING OR DRINKING ESTABLISHMENT": FOOD,            # 36,615
     "TAKE-OUT OR RETAIL FOOD ESTABLISHMENT": FOOD,       # 26,286
+    # A nightclub sells drink on the premises (NAICS 7224), as it does in
+    # Dublin, Miami and every NAICS city. Excluded until 2026-09-29 as NAICS
+    # 71 entertainment, because the merged label leads with it; aligned with
+    # the rest of the project then (owner, 2026-09-29, nightclubs). Adult
+    # clubs stay excluded (call 4).
+    "ENTERTAINMENT ESTABLISHMENT/NIGHTCLUB": FOOD,       #    170
 
     # --- Personal services (NAICS 812, less 81293 parking) ----------------
     "PERSONAL SERVICES SETTINGS": PERSONAL,              # 11,105  salons, barbers, nail, tattoo
@@ -208,7 +214,6 @@ BUCKETS = {
     "ENTERTAINMENT PLACE OF ASSEMBLY": None,             #    445
     "AMUSEMENT ESTABLISHMENT": None,                     #    437
     "BILLIARD HALL": None,                               #    177
-    "ENTERTAINMENT ESTABLISHMENT/NIGHTCLUB": None,       #    170  merged; leads with entertainment
     "THEATRE": None,                                     #     73
     "BOWLING HOUSE": None,                               #     38
     "CARNIVAL": None,                                    #     16

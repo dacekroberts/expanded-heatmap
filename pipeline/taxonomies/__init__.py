@@ -64,6 +64,9 @@ CATEGORY_BUCKETS = [
 #       (Amsterdam: "Shops and services"). Defaults to the bucket name.
 TAXONOMY_MODULES = {
     "naics": "pipeline.taxonomies.naics",
+    # Montréal: naics.py plus one exemption - its street survey's caterers
+    # (722320) are traiteur shops and stay (owner, 2026-09-29).
+    "naics_montreal": "pipeline.taxonomies.naics_montreal",
     "chicago_license": "pipeline.taxonomies.chicago_license",
     "phl_licensetype": "pipeline.taxonomies.phl_licensetype",
     # New York dispatches over four registries rather than reading one
@@ -127,10 +130,15 @@ TAXONOMY_MODULES = {
     "hong_kong_fehd": "pipeline.taxonomies.hong_kong_fehd",
     "riga_source": "pipeline.taxonomies.riga_source",
     "korea_localdata": "pipeline.taxonomies.korea_localdata",
+    # SEMAS's national storefront register (상가(상권)정보), keyed on its 소분류:
+    # Incheon and the Gyeonggi satellites, where LOCALDATA's key is out of reach.
+    "korea_sbiz": "pipeline.taxonomies.korea_sbiz",
     "taiwan_fia": "pipeline.taxonomies.taiwan_fia",
     "ihk_wz2025": "pipeline.taxonomies.ihk_wz2025",
     "fsa_businesstype": "pipeline.taxonomies.fsa_businesstype",
     "anzsic_fes": "pipeline.taxonomies.anzsic_fes",
+    "romania_dsvsa": "pipeline.taxonomies.romania_dsvsa",
+    "sweden_livsmedel": "pipeline.taxonomies.sweden_livsmedel",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 
