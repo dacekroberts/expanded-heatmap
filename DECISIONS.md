@@ -20,11 +20,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**156 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**160 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)](#2026-09-28---melbourne-built-on-the-city-of-melbournes-land-use-census-by-metro-trains-line-group-9539-excluded-in-melbourne-and-sydney-owner)
+- [Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)](#2026-09-28---bucharests-names-the-company-name-without-its-legal-form-sole-traders-by-category-owner-bucharest-builds-after-incheon-owner)
+- [Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)](#2026-09-28---bucharest-to-be-built-with-its-unplaced-share-disclosed-canteens-and-pastry-labs-left-out-owner)
+- [Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM](#2026-09-28---bucharests-address-hit-rate-measured-795-of-20815-storefronts-placed-on-street-and-number-against-osm)
+- [Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication](#2026-09-28---bucharests-supermarket-file-and-eight-non-animal-origin-files-fetched-owner-about-23100-active-rows-before-de-duplication)
 - [Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)](#2026-09-28---sydney-built-on-the-city-of-sydneys-floor-space-survey-light-rail-out-a-new-oceania-region-catering-funerals-and-clubs-out-owner)
 - [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
@@ -265,6 +269,86 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `docs/data_sources/australia.md`, `docs/excluded_categories.md`,
   `docs/map_inconsistencies.md`, `docs/city_master_list.md`, both briefs,
   `outputs/sydney/heatmap.html`.
+
+### 2026-09-28 - Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)
+
+- **Decided (owner), as recommended: Bucharest's pins show the company name
+  with its legal-form words removed** ("SC Mega Image SRL" becomes "Mega
+  Image", "Carrefour Romania SA" becomes "Carrefour Romania"). Sole
+  traders (ÎI, PFA, II, ÎF), whose registered name is the holder's own,
+  show the category only. `check_personal_exposure.py bucharest` looks for
+  those forms first. This settles the name question left open in the
+  entry below.
+- **Decided (owner): Bucharest builds after Incheon, unless there is good
+  reason otherwise.** Incheon (71.3% placed) is the precedent for a page
+  that discloses a placement gap. Building it first settles the wording
+  that Bucharest's page (79.5%) then reuses. No reason to reorder was
+  found.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
+
+### 2026-09-28 - Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)
+
+- **Decided (owner), as recommended: Bucharest is built with its unplaced
+  storefronts disclosed on the page**, Incheon's precedent. The measured
+  baseline is 79.5% of 20,815 placed on street and house number. Rows that
+  match no unique street and number are not placed along a street.
+- **Decided (owner), as recommended: canteens (file 21) and pastry labs
+  (file 22) are left out**, as institutional kitchens and production, as
+  London's canteens were. They are not among the files fetched.
+- **Open: how names are shown.** Recommended: the company name without
+  its legal-form words ("SC Mega Image SRL" becomes "Mega Image"), and the
+  category only for sole traders (ÎI, PFA, II, ÎF). This was put to the
+  owner after the two calls above and awaits a yes.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
+
+### 2026-09-28 - Bucharest's address hit rate measured: 79.5% of 20,815 storefronts placed on street and number against OSM
+
+- **Downloaded (owner's OK)** 145,892 OSM address objects inside relation
+  377733, as a CSV (9,523,237 bytes, sha256 `49f1b99f5242b28d…`,
+  `data/bucharest/raw/osm_addresses_2026-09-28.csv`). The first Overpass
+  mirror failed and overpass.kumi.systems answered. The job was announced
+  to the live sessions as a heavy job, and Cleanup held London's step 2
+  for it.
+- **Matched DSVSA's active rows** after leaving out mobile units, kiosks and
+  vending machines: 23,032 rows, merging on name and parsed address to
+  20,815 storefronts.
+  - **First pass** (normalised street and number): **74.2%** placed.
+  - **Second pass** (a tolerant street key, accepted only where exactly one
+    OSM street fits): **79.5%, 16,551 placed.**
+  - **Left unplaced: 4,264.** 1,051 are ambiguous and are not guessed. The
+    rest either sit on a street whose house number OSM lacks (mostly long
+    boulevards) or match no street; the split was not measured.
+  - **By sector:** 75-86%. **By file:** 76-88%, except fishmongers at 57%.
+- **Recommended but not decided:** Bucharest is buildable with the gap
+  disclosed. Its 79.5% sits above Incheon's 71.3% (Band B, disclosed) and
+  below the European builds (London 94.9%, Oslo 97.8%). Placing a
+  street-only row somewhere along its street is **not** proposed, since a
+  boulevard is kilometres long. More normalisation belongs to the build.
+  Whether to build, and the wording of the gap, are the owner's calls.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
+
+### 2026-09-28 - Bucharest's supermarket file and eight non-animal-origin files fetched (owner): about 23,100 active rows before de-duplication
+
+- **The owner fetched the ninth animal-origin file** (26
+  Hipermarket-supermarket): 499 active and 201 cancelled. It had been saved
+  to the checkout root and was moved into `data/bucharest/raw/`.
+- **The owner fetched eight of the 45 non-animal-origin files**, as
+  recommended: 01, 02, 03, 24, 33, 34, 36 and 42. The other 37 are
+  factories, bottlers, warehouses, wholesale, markets and empty templates.
+  The eight are in `data/bucharest/raw/non-animal/`. Their active rows:
+  - bars and cafés 778
+  - supermarket retail 1,083
+  - frozen and chilled food sellers 934, mostly bake-off counters
+  - bakeries, pretzel and pastry shops 496, 164 and 76
+  - ice-cream makers 66, of which 5 are kiosks and machines, left out
+  - file 34, header only
+- **Read, and classified as storefronts (recommended).** The "making" files
+  turned out to be shops: pretzel shops, in-store bakeries and gelaterias,
+  not factories. Mobile units (Sector "U.M.") are left out.
+- **About 23,100 active rows** before de-duplication (19,516 of animal
+  origin, about 3,590 of non-animal). Large stores appear in several
+  files, so step 2 de-duplicates on name and address.
+- Files: `docs/build_briefs/bucharest.md`, `docs/city_master_list.md`.
 
 ### 2026-09-28 - Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)
 

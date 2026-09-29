@@ -80,15 +80,83 @@ code for this city.
 >   their own names** ("… ÎNTREPRINDERE INDIVIDUALĂ", and PFA / II forms).
 >   The project's rule applies: show the category, never a person's name.
 >   `check_personal_exposure.py` should look for those suffixes first.
+> - **The ninth animal-origin file** (26 Hipermarket-supermarket, 85,020 B,
+>   sha256 `4bc41e29f86b8d67`): **499 active**, 201 cancelled. The
+>   animal-origin set is therefore **19,516 active** before de-duplication.
+>   One store can sit in several files (a hypermarket's butcher, fishmonger
+>   and food counter), so **step 2 de-duplicates on name + address.**
+> - **The non-animal-origin list** (45 files, mostly factories; the owner
+>   fetched eight 2026-09-28 into `data/bucharest/raw/non-animal/`, same
+>   layout, same ANULATE sections):
+>
+>   | File | Active | Cancelled | What the rows are | Call |
+>   |---|---|---|---|---|
+>   | 36 Baruri | **778** | 81 | Bar 557, Cafenea (café) 197, Ceainărie (tea house) 17 | ✅ food service |
+>   | 33 Comerț cu amănuntul, supermarkets only | **1,083** | 149 | "Comerț cu amănuntul" (retail), a mixed bag: grocers, and shops selling some packaged food | ✅ food shops, with a sole-trader check (PFA names appear) |
+>   | 42 Frozen and chilled non-animal food | **934** | 183 | Lidl and the like: bake-off counters in shops | ✅ food shops; most will be duplicates |
+>   | 03 Bread and pastry making | **496** | 1,040 | Covrigării (pretzel shops), bakeries, pastry shops | ✅ food shops |
+>   | 01 Bread making | **164** | 236 | In-store bakeries (Carrefour, Selgros) and market bakeries | ✅ food shops; many duplicates |
+>   | 02 Pastry making | **76** | 650 | Pastry and doughnut shops | ✅ food shops |
+>   | 24 Ice-cream making | **66** | 30 | Gelaterias, plus 3 kiosks and 2 vending machines | ✅ the 61 shops; kiosks and machines out |
+>   | 34 Supermarket-hypermarket | 0 | 0 | Header only | - |
+>
+>   Sha256 prefixes: 01 `cc9c3ed541159ab9`, 02 `081dc27f739f0142`,
+>   03 `5d25e9357ab110de`, 24 `206cfc828d10efc5`, 33 `30867121c2100d5c`,
+>   34 `b1628ffd3c5870e0`, 36 `eab91027f4b99e2c`, 42 `da5c7e2a03d0cf9d`.
+>   Together: **about 3,590 more active rows**, so **about 23,100 before
+>   de-duplication.** "Sector" reads **U.M.** (unitate mobilă) on mobile
+>   units, such as a wine truck with a number plate for an address. They are
+>   out, as non-storefronts.
+> - 🎯 **THE HIT RATE, measured 2026-09-28: about 80% placed on street and
+>   house number.** The inputs:
+>   - OSM: **145,892 address objects** inside relation 377733, pulled as a
+>     CSV (owner-approved, 9,523,237 B, sha256 `49f1b99f5242b28d…`,
+>     `data/bucharest/raw/osm_addresses_2026-09-28.csv`, via
+>     overpass.kumi.systems). That gives 4,443 street keys and 132,287
+>     street+number pairs.
+>   - DSVSA: 23,032 active rows (mobile units, kiosks and vending machines
+>     out), which merge on name and parsed address to **20,815
+>     storefronts**.
+>
+>   | Pass | Placed | Share |
+>   |---|---|---|
+>   | 1: normalised street + number (types, diacritics, "nr." stripped) | 15,448 | 74.2% |
+>   | 2: a tolerant key (words over 2 letters, ranks dropped, genitive stemmed); **a unique OSM street only** | +1,103 → **16,551** | **79.5%** |
+>
+>   - **Left unplaced: 4,264.** 1,051 are **ambiguous** (two or more OSM
+>     streets fit) and are not guessed. The others either match a street
+>     whose house number OSM lacks, or match no street. The split was not
+>     measured.
+>     - Long boulevards lead the missing numbers: Iuliu Maniu,
+>       Alexandriei, Floreasca, Oltenitei.
+>     - The no-match rows are market addresses such as Câmpul Moșilor, and
+>       abbreviations still unresolved ("Dorobanți" against "Dorobanților",
+>       "I.C. Brătianu").
+>   - **By sector:** 1 76% · 2 83% · 3 79% · 4 78% · 5 75% · 6 86%.
+>   - **By file:** 76-88%, except fishmongers at 57% (many sit inside
+>     markets).
+>   - **Where that leaves Bucharest:** below Prague's 99.8%, Oslo's 97.8% and
+>     London's 94.9%, above Incheon's 71.3% (Band B, gap disclosed). A build
+>     can raise it with more normalisation (the `address-join` skill's
+>     patterns, an `i` stem, initials). **Street-level placement for the
+>     street-only rows is not proposed**: a boulevard is kilometres long.
+>   - **The measurement scripts** are session scratch
+>     (`buc_match.py`, `buc_match2.py`). The build writes its own join in
+>     step 2, and this table is its baseline.
 > - **What the build still needs, in order:**
 >   1. ~~The owner's browser fetch~~ done for eight files. Still to come:
 >      26 Hipermarket-supermarket, and a look at the non-animal-origin list.
 >   2. ~~Five rows of each, read for the names~~ done: legal entities, with
 >      sole traders under their own names (above).
->   3. **The OSM address hit rate** on the ~19,000 active rows, the one
->      number that decides whether Bucharest is buildable. Addresses are
->      free text ("Calea Mosilor 294,", "Str. Pieței nr. 67, sp. S67, sect.
->      1"), so normalisation comes first (`address-join`).
+>   3. ~~The OSM address hit rate~~ measured: **79.5%** (above). **Decided
+>      (owner, 2026-09-28): build, with the unplaced share disclosed.**
+>   4. ~~Canteens and pastry labs~~ **left out (owner, 2026-09-28).**
+>   5. ~~Names~~ **decided (owner, 2026-09-28)**: the company name without
+>      its legal-form words ("SC Mega Image SRL" becomes "Mega Image"); the
+>      category only for sole traders (ÎI, PFA, II, ÎF).
+>   6. **Order (owner, 2026-09-28): build after Incheon**, whose page sets
+>      the wording for a disclosed placement gap. Bucharest's wording for its
+>      unplaced share is drafted at the build, from Incheon's.
 
 ---
 
