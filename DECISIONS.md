@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Suwon built on SEMAS's register, the fourth Gyeonggi satellite; downloads for Suwon and Bucheon approved, and Bucheon's Seohae Line to be drawn (owner)](#2026-09-29---suwon-built-on-semass-register-the-fourth-gyeonggi-satellite-downloads-for-suwon-and-bucheon-approved-and-bucheons-seohae-line-to-be-drawn-owner)
+- [Light-rail build briefs: Bergen and Aarhus (staging)](#2026-09-29---light-rail-build-briefs-bergen-and-aarhus-staging)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
 - [French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record](#2026-09-29---french-tram-feeds-read-four-permitted-with-conditions-angers-bars-naming-its-network-without-consent-the-national-portals-odbl-conditions-found-correcting-toulouses-and-rennes-record)
 - [The French tram-city page text approved as a template (owner)](#2026-09-29---the-french-tram-city-page-text-approved-as-a-template-owner)
@@ -288,6 +289,49 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
   `docs/city_master_list.md`, `docs/build_briefs/gyeonggi.md`,
   `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+### 2026-09-29 - Light-rail build briefs: Bergen and Aarhus (staging)
+
+- **Bergen's brief: Oslo's modules on kommune 4601, with three Oslo settings
+  that must not be copied.** Bybanen is `route_type 901` in Skyss's feed,
+  where Oslo reads `401, 902`; the tram audit's first frequency run on this
+  feed returned no routes for exactly that reason. Bergen lies in UTM 31N
+  (EPSG:25831), Oslo in 32N. Its 624 m median station gap takes the standard
+  rings, where Oslo's 465 m took the halved ones. Measured on the cached feed:
+  68 platforms, 34 parent stop places, 33 by name (Bergen busstasjon is two
+  stop places 70 m apart), all inside the kommune; 58.6% of the screen's 3,615
+  placed storefronts lie within 0.6 mi. Three build-time calls, none needing
+  the owner before starting: build on the national register cached
+  2026-09-23, which Oslo shares (recommended), or refresh it and re-run Oslo's
+  drift check; Line 2's colour (both lines are `#BF4525` in OSM, and the feed
+  has none); and Byparken / Kaigaten, 73 m apart, kept as two stations (the
+  lean, on Oslo's Stortinget / Stortorvet precedent). 9 of 9 brief checks
+  hold. `docs/build_briefs/bergen.md`.
+- **Aarhus's scope call has three options, not two.** OSM's six Letbane
+  relations put 39 stations inside the kommune (41 names; two are spelling
+  variants of one stop). They are 20 on the new city tramway, 12 on
+  Odderbanen (L2, converted railway) and 7 on Grenaabanen (L1 only, every
+  30 min, which fails the light-rail test's frequency gate on converted
+  railway). The master row offered 20 or 39. **32 passes if L2's 15 minutes
+  reach the Odder stops, which was not read per stop.** The call also decides
+  the rings: 20 stations sit at a 499 m median (halved rings), 32 at 634 m
+  and 39 at 669 m (standard). Within 0.6 mi: 49.1% at 32, 55.4% at 39. The
+  20 give 25.4% within 0.3 mi. The lean is 32 if the Odder read passes, else
+  20. Also recorded: placement joins OSM's `osak:identifier` to the DAR
+  **Husnummer** id (97.0%, 5,125 of 5,283). Joining the adgangspunkt id
+  instead places 80.1%, a plausible-looking wrong answer. The Aarhus row in
+  `docs/city_master_list.md` now names the three options.
+  `docs/build_briefs/aarhus.md`; 2 of 2 brief checks hold.
+- **Flagged for the owner: the tram audit read Aarhus's frequency from
+  Rejseplanen's GTFS, which Copenhagen's build declined to download.** The
+  Copenhagen call (2026-09-24) left the file undownloaded because Rejseplanen's
+  Labs guidelines ask that the data not be changed and describe access as by
+  request with those guidelines accepted. On 2026-09-29 the audit's frequency
+  script fetched it anyway (54,971,494 bytes, to the staging session's
+  scratchpad) and read L1 and L2 from it. Nothing drawn or published comes
+  from it. The brief rules it out for the build unless the owner decides
+  otherwise. The Odder read needs either the owner's OK to use the feed for
+  timetable measurement only, or Midttrafik's journey planner, since its
+  Letbane pages give no frequency in text and link no timetable PDF.
 
 ### 2026-09-29 - Angers held; French ODbL station tables stay pure extracts (owner)
 

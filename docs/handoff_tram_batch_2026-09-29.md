@@ -105,7 +105,11 @@ operator's credit and any notice its licence read requires.
 A city whose median stop gap is over about 550 m keeps the standard rings and
 drops the last paragraph's first sentence (none in France is expected to).
 
-## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time)
+## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time) - HELD
+
+**HELD (owner, 2026-09-29) until the France kit has made real progress.**
+The cleanup session is to claim this role (sections 4 and 5) and was told to
+wait; the owner or staging says when to start.
 
 PLAN, under "Macro-map completeness tiers", holds both items. **Measured
 2026-09-29 for the France view** (scratch
