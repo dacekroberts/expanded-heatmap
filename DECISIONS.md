@@ -20,11 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**163 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Second batch live after the owner's reboot, checked on the live URL](#2026-09-28---second-batch-live-after-the-owners-reboot-checked-on-the-live-url)
+- [Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)](#2026-09-28---incheons-licences-read-the-permit-lists-and-the-kesa-lift-building-file-both-permitted-with-conditions-the-website-copyright-terms-judged-not-to-reach-them-owner-personal-services-shown-from-2021-dated-owner)
+- [Gyeonggi satellites: Goyang, Seongnam and Yongin first, then Suwon and Bucheon (owner)](#2026-09-28---gyeonggi-satellites-goyang-seongnam-and-yongin-first-then-suwon-and-bucheon-owner)
+- [Bucharest builds before Incheon (owner), reversing the order recorded earlier today; Incheon and the Gyeonggi satellites to be briefed](#2026-09-28---bucharest-builds-before-incheon-owner-reversing-the-order-recorded-earlier-today-incheon-and-the-gyeonggi-satellites-to-be-briefed)
 - [Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)](#2026-09-28---second-review-time-batch-published-buenos-aires-glasgow-newcastle-sydney-melbourne-londons-flat-rule-monterreys-wording-owner-called-it)
 - [Stockholm is built on its register as frozen on 2025-10-21 (owner); the 1,391 untyped premises measured, a by-name recovery proposed](#2026-09-28---stockholm-is-built-on-its-register-as-frozen-on-2025-10-21-owner-the-1391-untyped-premises-measured-a-by-name-recovery-proposed)
 - [Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)](#2026-09-28---melbourne-built-on-the-city-of-melbournes-land-use-census-by-metro-trains-line-group-9539-excluded-in-melbourne-and-sydney-owner)
@@ -214,6 +217,70 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Page 91 at 375 px:** the document is 375 px wide, and 62 rows scroll in
   a 343 px box.
 
+### 2026-09-28 - Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)
+
+- **Two `licence-read`s, both PERMITTED WITH CONDITIONS.**
+  - **Incheon's five permit lists on data.go.kr** (15048906, 15048905,
+    15061611, 15120709, 15045294) declare "이용허락범위 제한 없음" on the
+    page and in DCAT, with no KOGL type. Incheon's data portal says that
+    means free use, and the Public Data Act 제3조④ bars restricting reuse.
+    - **Conditions:** credit the City, including "인천데이터포털
+      공공데이터"; do not imply acting for the City; publish no personal
+      information.
+    - 15120709's page says owner names are not disclosed, yet the file
+      carries `업자명`. It is dropped on read.
+  - **KESA's lift-building file** (15156424) declares the same.
+    - **Conditions:** good faith, and no distortion. Pins placed by the
+      join are the project's derivation, not KESA's record, and `건물명` is
+      never published.
+    - The file is a one-off snapshot from 2025-12-12.
+  - Nothing is owed to either publisher.
+- **Decided (owner), as recommended: the City of Incheon's website terms
+  and KESA's website copyright policy do not reach the data.go.kr files.**
+  Both ask for consultation before reusing material without a KOGL mark,
+  but both are written for their websites. The dataset pages declare
+  제한 없음 and never link to them, which is a stronger position than
+  Daegu's. The removal rule applies if either body objects.
+- **Decided (owner), as recommended: Incheon's personal services are shown
+  from 15061611, a one-off list dated 2021-11-08, with the date on the
+  page.** Marking the bucket thin was the rejected alternative; the list
+  has 9,493 premises. The large-stores list (2022-08-06) is dated the same
+  way.
+- Files: `docs/build_briefs/incheon.md`.
+
+### 2026-09-28 - Gyeonggi satellites: Goyang, Seongnam and Yongin first, then Suwon and Bucheon (owner)
+
+- **Decided (owner), as recommended.** The order rests on two measures from
+  the local province files and OSM:
+  - **active storefronts** with a status and an address, which leaves out
+    cafés, takeaway food and barbers, all of which lack a status: Goyang
+    34,211, Suwon 30,399, Seongnam 27,528, Yongin 26,738, Bucheon 21,424;
+  - **OSM station nodes** per 시군: Yongin 24, Goyang 22, Uijeongbu 20,
+    Seongnam 18, Suwon 14, Bucheon 13.
+
+  Goyang, Seongnam and Yongin are in the top four on both measures.
+  Suwon's station count needs a recount that includes stations mapped as
+  areas.
+- **Still open, for the owner at the build:**
+  - the page shape (a page per city is recommended);
+  - whether takeaway food and barbers, which have no status column, are
+    left out or partly included by permit date;
+  - the portal's licence read, which is running.
+- Files: `docs/build_briefs/gyeonggi.md`.
+
+### 2026-09-28 - Bucharest builds before Incheon (owner), reversing the order recorded earlier today; Incheon and the Gyeonggi satellites to be briefed
+
+- **Decided (owner): Bucharest is built before Incheon.** This supersedes
+  "Bucharest builds after Incheon, unless there is good reason otherwise"
+  in the entry "Bucharest's names…" below, which was recorded from the
+  owner's earlier message ("except for bucharest after incheon"). The owner
+  has since stated the order directly. As a consequence, Bucharest's page
+  drafts its own wording for its unplaced share (79.5% placed), and
+  Incheon's (71.3%) can reuse it.
+- **Briefs started for Incheon and the Gyeonggi satellites (owner).** Three
+  licence reads are running: Incheon's data.go.kr lists, the KESA
+  lift-building file, and Gyeonggi's data portal. Per-city counts and
+  stations will decide which satellites come first.
 ### 2026-09-28 - Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)
 
 - **Merged into `worktree-cleanup` in land order:** Buenos Aires (77da039),
