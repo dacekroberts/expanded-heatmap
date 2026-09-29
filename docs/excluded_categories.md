@@ -2046,6 +2046,46 @@ six London Overground lines are drawn, cut at Greater London's boundary.
   Watford High Street, Upper Holloway, Wood Street, St James Street).
 - Tramlink, National Rail services and river buses are not drawn.
 
+### Newcastle (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the five Tyne and Wear councils inspect for food hygiene; no open
+register of other shops or of personal services covers Tyne and Wear, so
+clothes shops, hairdressers and the like are missing rather than excluded.
+Food shops (grocers, off-licences, bakers, butchers, newsagents selling food,
+supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (622), where home caterers and
+event kitchens sit; mobile caterers (548); hospitals, childcare and care homes
+(524); schools, colleges and universities (559); hotels and guest houses (75);
+manufacturers and packers (125); distributors and transporters (78);
+importers and exporters (8); farmers and growers (8).
+
+**Not placed: flats** - 5 food storefronts registered at a flat address, where
+home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's centre** - 634 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 489 food storefronts (7.3%) with neither a location nor a
+usable full postcode, most in North Tyneside (9.7%) and Sunderland (9.2%). A
+business run from a private address is published without a location or a full
+postcode and is never placed.
+
+**Shown under its trade name** - 7 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 2 whose register location lies
+far outside Tyne and Wear (one in London, one in Lancashire).
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.3% of that type read as one by name.
+
+**Stations.** All 60 Tyne and Wear Metro stations, on the Green and Yellow
+lines, the Sunderland branch included (owner, 2026-09-28): between Pelaw and
+Sunderland it runs on track shared with national rail.
+- Northern's national rail trains are not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

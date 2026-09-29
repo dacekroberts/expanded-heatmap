@@ -1,0 +1,23 @@
+{
+  "fetched_utc": "2026-09-29T05:14:15+00:00",
+  "fsa_file_url": "https://ratings.food.gov.uk/OpenDataFiles/FHRS{code}en-GB.xml",
+  "fsa_authorities": {
+    "410": "Gateshead",
+    "416": "Newcastle upon Tyne",
+    "417": "North Tyneside",
+    "427": "South Tyneside",
+    "429": "Sunderland"
+  },
+  "fsa_extract_dates": {
+    "Gateshead": "2026-09-16",
+    "Newcastle upon Tyne": "2026-09-16",
+    "North Tyneside": "2026-09-16",
+    "South Tyneside": "2026-09-16",
+    "Sunderland": "2026-09-09"
+  },
+  "fsa_extract_range": [
+    "2026-09-09",
+    "2026-09-16"
+  ],
+  "codepoint_edition": "2026-08"
+}

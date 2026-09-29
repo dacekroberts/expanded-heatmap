@@ -50,8 +50,8 @@ dense-looking city may simply have more complete records.
   and Taipei (the national business tax register, FIA).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
-- **A food hygiene register:** London (the Food Standards Agency's FHRS), every food
-  premises a borough inspects, and nothing else.
+- **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
+  Agency's FHRS), every food premises a borough or council inspects, and nothing else.
 - **A chamber of commerce's membership:** Berlin (IHK Berlin's Gewerbedaten), each
   member's premises as a point. Membership, not licensing, decides who is in it:
   the crafts belong to a different chamber and are absent.
@@ -69,13 +69,14 @@ dense-looking city may simply have more complete records.
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London.
+- **No Personal services at all:** Philadelphia, Boston, London, Newcastle (Regional).
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
-  London (grocers, off-licences, bakers, butchers, newsagents with food and
-  supermarkets, named "Food shops" as in the Japanese cities).
+  London and Newcastle (Regional) (grocers, off-licences, bakers, butchers,
+  newsagents with food and supermarkets, named "Food shops" as in the Japanese
+  cities).
 - **Retail thin:** New York (food stores plus a regulated slice of trades). Toronto:
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
   fireworks), 328 pins inside the rings against 6,461 Food service. Seoul: Retail is
@@ -426,6 +427,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Berlin | U-Bahn U1–U9 and the S-Bahn's 16 lines (the Ring S41/S42 among them) | Trams, regional trains, ferries; the U6's Tegel branch (closed for works until about August 2027) | VBB GTFS (gate 3 exact: U-Bahn 170 = 175 less 5 closed, S-Bahn 168) | Land of Berlin (lines cut at the Land boundary) | 41 / 0 (36 in Brandenburg, 5 closed for works) |
 | **United Kingdom** | | | | | |
 | London | Underground (11 lines), DLR, Elizabeth line and the six London Overground lines (19 lines, short names on the map, full names in the legend) | Tramlink, National Rail, river buses | OpenStreetMap route relations (TfL publishes no GTFS; its API's line strings are straight lines between stations); 8 stations OSM's relations omit added from its station nodes; gate 3 exact on 14 counts | Greater London (lines cut at the boundary) | 32 / 0 |
+| Newcastle (Regional) | Tyne and Wear Metro, Green and Yellow lines (the Sunderland branch included) | Northern's national rail trains | OpenStreetMap route relations; gate 3 exact on 60 | The five Tyne and Wear districts | 0 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -507,6 +509,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,154 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
 | **United Kingdom** | | | | | |
 | London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,399 / 29,255 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -580,6 +583,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Berlin | Register coordinates (60,313 of 60,314 inside the Land) | Crafts missing; web shops cannot be excluded; registered offices stack at arcade and business-centre addresses | Catering, intermediation, mobile food, household services; "other personal services" (96.99) and general non-food retail (IHK 47122) as catch-alls; employee band and business type read, never shown |
 | **United Kingdom** | | | |
 | London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,001 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address never placed; the name after "trading as" shown |
+| Newcastle (Regional) | Register coordinates (90%) and postcode centres (10%, OS postcode centroids for a full postcode with no register point); 489 not placed | Food only; about one storefront in fourteen unplaced, most in North Tyneside and Sunderland; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -664,6 +668,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Berlin | 2026-09-01, monthly (IHK's own commit date; fetched 2026-09-28) | B | 0.6 mi | Yes | 82% | Kind of business (the register has no names) |
 | **United Kingdom** | | | | | | |
 | London | Extracts of 2026-09-09 to 2026-09-16, per borough (fetched 2026-09-28) | B | 0.6 mi | Yes | 74% | Registered name; the trade name where registered "trading as" |
+| Newcastle (Regional) | Extracts of 2026-09-09 to 2026-09-16, per council (fetched 2026-09-28) | B | 0.6 mi | Yes | 54% | Registered name; the trade name where registered "trading as" |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

@@ -6,6 +6,23 @@ food only (owner). Brief written the same day.** Run
 `DECISIONS.md` 2026-09-28 "Moved Newcastle into Band B, food only", and the
 United Kingdom row in `docs/global_country_shortlist.md` Tier 4.
 
+> **Measured at the build, 2026-09-28 (build session, `worktree-newcastle`)** -
+> these supersede the screen's figures below where they differ:
+> - **Downloaded** (owner's OK): the five XMLs, 9,248,845 bytes; 9,214 rows,
+>   6,667 storefronts.
+> - **Placement from the full files**: 83.1% of storefront rows carry the
+>   FSA's point; 634 more (9.5%) placed at their postcode's centroid (owner);
+>   489 (7.3%) unplaced. **No outward-code-only rows**: the private addresses
+>   here carry no postcode at all (426 with none). 5 at a flat address and 2
+>   FSA points far outside the area (London, Lancashire) dropped. **6,171
+>   storefronts.**
+> - **Sunderland branch kept (owner)**: its 12 stations add 597 storefronts to
+>   the rings, 44.7% -> **54.4%**; without it Sunderland's 1,390 have none.
+> - **Rail**: 60 stations, gate 3 exact; Green 31, Yellow 41. One relation per
+>   line draws the whole line (the coast loop once).
+> - **Page name "Newcastle (Regional)"** (owner); notices 62 (FSA) and 63
+>   (Ordnance Survey), per city rather than extending London's (owner).
+
 ⚠️ **One-bucket city: food, with food retail, on London's method.** Read
 `docs/build_briefs/london.md` (its "Measured at the build" box) and London's
 DECISIONS entries of 2026-09-28 first: the taxonomy, the licence, the

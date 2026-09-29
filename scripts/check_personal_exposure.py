@@ -573,6 +573,11 @@ REGISTRIES = {
     "monterrey": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=None),
+    # Newcastle (Regional) reads the FSA's files through pipeline/fsa.py, as
+    # London does: no fallback name; the private-address guard and the flat and
+    # childminder rules are structural, and this check cannot see them.
+    "newcastle": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.

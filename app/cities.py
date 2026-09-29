@@ -1547,6 +1547,31 @@ CITIES = [
         # PROBLEMS 0 in every region at 375, 768 and 1200.
         "label_offset": ("end", -10, 5),
     },
+    {
+        "name": "Newcastle (Regional)",
+        "lat": 54.9738,
+        "lon": -1.6131,
+        "page": "pages/60_Newcastle_Heatmap.py",
+        # Owner-approved 2026-09-28, London's values; rail_extra "—": the
+        # Metro is its own system, its Sunderland stretch on shared track
+        # disclosed on the page.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (90%) and postcode centres (10%)",
+        "data_age": "Extracts of 2026-09-09 to 2026-09-16",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Tyne and Wear Metro, Green and Yellow lines",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Above the dot, and SCORED: the label width was measured at 143.1 px
+        # in the deployed app's own frame (2026-09-28, four entries
+        # reproduced), and check_macro_labels.py passes every region at 375,
+        # 768 and 1200 with PROBLEMS 0 - scored WITHOUT Glasgow, which is on
+        # its own branch; re-score when both have landed.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
