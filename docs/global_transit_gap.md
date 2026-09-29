@@ -51,19 +51,18 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (22) - "Countries ruled out" and the shortlist
+## Country ruled out (21) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
 | Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each (kn) | **Ruled out 2026-09-28 (owner), high legal barriers**: anti-bot (Shanghai), real-name accounts (Beijing, Shenzhen), terms forbidding redistribution (Shenzhen), no open coordinates, regulated map publishing. Hangzhou's food-licence list is a narrow opening, blocked by a real-name filing duty and placement |
 | Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
 | Tehran, Minsk | IR, BY | ~150 / ~37 stations (kn) | Left out like Russia, for wartime concerns (owner, 2026-09-28); not screened |
-| Glasgow | UK | 15 stations (kn) | Recorded as "NNDR carries no category"; **wrong** (London's re-screen, 2026-09-28): the VOA list has a description and is ruled out by its terms. The FSA food register is untested for either city |
 | Brussels | BE | 69 stations (kn) | Bulk access paid |
 | Kyiv | UA | 52 stations (kn) | Excluded for now: active war |
 | Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
 
-## In a band, not built (26)
+## In a band, not built (28)
 
 | City | Country | Network | Band and blocker |
 |---|---|---|---|
@@ -72,6 +71,8 @@ negative, kept out.
 | Newcastle | UK | Tyne and Wear Metro, ~60 stations | B - food only on the FSA register (2026-09-28, owner) |
 | Bangkok | TH | MRT, BTS, ARL | D - the BMA's portal refuses this machine (2026-09-28, owner) |
 | Riyadh | SA | Riyadh Metro, 6 lines | D - the national open-data portal times out from here (2026-09-28, owner) |
+| Glasgow | UK | Subway, 15 stations | B - food only on the FSA register (FHIS), 6,632 premises (2026-09-28, owner) |
+| Bengaluru | IN | Namma Metro | D - BBMP's hosts time out (2026-09-28, owner) |
 | Tashkent | UZ | Tashkent Metro (kn) | D - every host refuses this machine or needs a login (2026-09-28, owner) |
 | Hanoi, Ho Chi Minh City | VN | 2 lines / 1 line (kn) | D - timeouts and a CAPTCHA wall (2026-09-28, owner) |
 | Perth | AU | Transperth, ~80 stations | N - property land-use codes only, City of Perth (2026-09-28, owner) |
@@ -93,11 +94,11 @@ negative, kept out.
 | Yokohama | JP | 43 stations | N - no food list in any era |
 | Warsaw | PL | 2 lines (kn) | D - geo-blocked |
 
-## Never screened (3)
+## Never screened (2)
 
 | Cities | Country | Network (kn) | Why not covered |
 |---|---|---|---|
-| Bengaluru, Kolkata, Chennai | IN | ~40-80 each | Only India's national catalogue was read (counts, not premises); the city hosts were never asked. Delhi and Mumbai were asked 2026-09-28 (D, discarded) |
+| Kolkata, Chennai | IN | ~40-80 each | Only India's national catalogue was read (counts, not premises); the city hosts were never asked. Delhi and Mumbai were asked 2026-09-28 (D, discarded) |
 
 ## The weakest or oldest reasons among the biggest networks
 

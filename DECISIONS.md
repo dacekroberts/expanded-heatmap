@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**120 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**121 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Glasgow to Band B, food only; Bengaluru to Band D (owner)](#2026-09-28---glasgow-to-band-b-food-only-bengaluru-to-band-d-owner)
 - [Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)](#2026-09-28---six-small-networks-screened-tashkent-hanoi-and-ho-chi-minh-city-to-band-d-baku-panama-city-and-caracas-discarded-owner)
 - [Perth and Ankara to Band N (owner)](#2026-09-28---perth-and-ankara-to-band-n-owner)
 - [Sydney found on a re-probe and Newcastle, both to Band B; Bangkok and Riyadh to Band D; Doha discarded (owner)](#2026-09-28---sydney-found-on-a-re-probe-and-newcastle-both-to-band-b-bangkok-and-riyadh-to-band-d-doha-discarded-owner)
@@ -156,6 +157,23 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Glasgow to Band B, food only; Bengaluru to Band D (owner)
+
+- **Moved Glasgow into Band B, food only (owner's call; B over N).** Glasgow
+  City has 6,632 premises on the FSA register under Scotland's FHIS scheme,
+  republished 2026-09-15. The per-type split is unmeasured, because the API's
+  per-type endpoint timed out all evening. The Subway is a 15-station loop,
+  the smallest network in the gap; Band N was offered as the alternative.
+  The build takes the per-type count from the bulk file, and the
+  `licence-read` covers Food Standards Scotland's FHIS terms.
+- **Moved Bengaluru into Band D, Hyderabad's shape (owner's call).**
+  `bbmp.gov.in` and `site.bbmp.gov.in` time out at 21 s, and
+  `opendata.bbmp.gov.in` fails at once. The same check found Kolkata's and
+  Chennai's corporation sites answering, so the owner asked for a short
+  screen of those two. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)
 
