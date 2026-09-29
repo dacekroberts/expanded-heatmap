@@ -1399,6 +1399,30 @@ _NOTICES = [
      "registered under another name. No inspection result is shown. Neither Food Standards "
      "Scotland nor the Food Standards Agency endorses this map.",
      False),
+    # Newcastle (notice 62): the FSA's FHRS data for the five Tyne and Wear councils,
+    # London's credit and conditions (England, FHRS). Wording approved by the owner
+    # 2026-09-28.
+    ("Food Standards Agency (Newcastle)",
+     "Newcastle's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
+     "licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's centre, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Newcastle's postcode centroids (notice 63): London's Ordnance Survey notice, the
+    # same file and edition. Wording approved by the owner 2026-09-28.
+    ("Ordnance Survey (Newcastle)",
+     "Where the Food Standards Agency lists a Newcastle food business without a map point, it "
+     "is placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

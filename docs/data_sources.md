@@ -99,7 +99,7 @@ together, so a row in either counts and a row in neither still fails.
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
-| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London |
+| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 
 ## Business registries
@@ -1954,6 +1954,42 @@ its own branch - recheck both at merge).
 **58 (Food Standards Agency, London) amended the same day (owner, 2026-09-28)**: its "Modified by this project"
 adds "premises at a flat address left out" - London's map applies the flat rule
 (98 storefronts).
+
+**62. Food Standards Agency (Newcastle) — required, and DISPLAYED** (written
+into `render_site_notices()`; displayed once Newcastle lands; 60 is Buenos
+Aires's and 61 Glasgow's, each on its own branch - recheck at merge).
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58, the
+  `licence-read` of 2026-09-28): the five Tyne and Wear councils are on
+  England's FHRS, under the **Open Government Licence v3** with the FSA's
+  conditions. The OGL statement linked; each council's extract date
+  (2026-09-09 to 2026-09-16); no rating, logo or imagery. **Credit (owner,
+  2026-09-28)**: London's, "Food Standards Agency, UK food hygiene rating
+  data", as a notice of its own rather than by extending 58.
+- **Personal data**: the project's rule as for London, through
+  `pipeline/fsa.py`: home and mobile caterers out by type, a private address
+  never placed, a storefront at a "Flat" address (5) or named as a childminder
+  (0) never placed, the trade name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py newcastle`, run 2026-09-28: no
+  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+- **Newcastle's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**63. Ordnance Survey (Newcastle) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Newcastle lands).
+
+- **PERMITTED WITH CONDITIONS**, London's `licence-read` (notice 59): the same
+  Code-Point Open file and edition (2026-08), copied from London's cache, not
+  downloaded again. The three statements verbatim, the OGL link, no
+  endorsement, the product's registered name not used.
+- **Used for** 634 Newcastle food storefronts the FSA lists with a full
+  postcode and no point (9.5% of storefront rows); never a private address.
+  Units kept to the five districts' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/newcastle/` republishes the derived locations (README's credits).
+- Wording approved by the owner 2026-09-28.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

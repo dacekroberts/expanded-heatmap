@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**153 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
+- [Newcastle (Regional) built on the FSA register: the Sunderland branch kept, London's centroid tier, notices of its own (owner)](#2026-09-28---newcastle-regional-built-on-the-fsa-register-the-sunderland-branch-kept-londons-centroid-tier-notices-of-its-own-owner)
 - [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
 - [Glasgow built on Scotland's FHIS register, food only; the flat and childminder rules added for Glasgow and London (owner)](#2026-09-28---glasgow-built-on-scotlands-fhis-register-food-only-the-flat-and-childminder-rules-added-for-glasgow-and-london-owner)
 - [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
@@ -258,6 +259,76 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rule applies: those units show a category only.
 - **Still undecided:** Bucharest's buildability, which rests on the OSM
   address hit rate over the active rows. The addresses are free text.
+
+### 2026-09-28 - Newcastle (Regional) built on the FSA register: the Sunderland branch kept, London's centroid tier, notices of its own (owner)
+
+- **Kept every Tyne and Wear Metro station, the Sunderland branch included
+  (owner).** Pelaw to Sunderland runs on Network Rail track shared with
+  Northern's trains, but the route runs as the Metro, with Metro stations and
+  frequencies. Measured before the call: the branch's 12 stations add 597
+  storefronts to the rings (44.7% -> 54.4%), and without them Sunderland, one
+  of the five districts with 1,390 storefronts, has none in a ring. The five
+  Metro-only stations beyond Sunderland add 155 of the 597. Rejected: dropping
+  the branch, and keeping only its Metro-only end (disconnected from the rest).
+  Northern's trains stay out.
+- **Placed storefronts without an FSA point at their postcode's centroid
+  (owner), London's tier.** 1,123 of the 6,662 storefront rows left after the flat rule
+  (16.9%) have no point; 634 are placed (Code-Point Open, the same file as
+  London's, copied from its cache, kept to the five districts' GSS codes) and
+  489 (7.3%) are not. The centroid-placed share in the rings (51.9%) is close
+  to the rest's (54.7%), so the tier does not tilt the headline figure.
+  **No outward-code-only rows** here: the brief's 4.4% did not recur in the
+  full files; the private addresses carry no postcode at all (426).
+- **Notices 62 (Food Standards Agency) and 63 (Ordnance Survey), per city
+  (owner)**, London's credit and statements, rather than extending 58 and 59:
+  the per-city pattern Glasgow's 61 follows, and no collision with Glasgow's
+  branch edit to 58.
+- **Page name "Newcastle (Regional)" (owner)**: Lille's precedent for a page
+  covering several authorities; the five districts include Sunderland, a city
+  in its own right.
+- **Built** (`worktree-newcastle`, from origin/master 7db6064, with
+  `pipeline/fsa.py` taken unchanged from `worktree-glasgow`, so either lands
+  cleanly first):
+  - Register: five files by code (410, 416, 417, 427, 429; 9,248,845 bytes,
+    owner's OK), 9,214 rows; 6,667 storefronts -> 5 at a flat address, 0
+    childminders, 489 unplaced, 2 FSA points far outside the area (one in
+    London, one in Lancashire) -> **6,171** (food service 4,141, food shops
+    2,030). 7 trading-as names. Canteens by name at least 1.3%, not separated.
+  - Rail: four OSM relations, one per line drawn (Green 40.9 km, Yellow 54.6
+    km with the coast loop once), #30A800 and #C08800 (Nexus's hues' nearest
+    feasible colours, 45.5 and 78.5 from every pin, 70.4 apart). **60
+    stations, gate 3 exact** against Nexus's 60; Green 31, Yellow 41; "St.
+    James" merged into St James.
+  - Boundary: the union of OSM relations 142282, 116279, 140462, 142245 and
+    140390, 551.2 km² in UTM 30N.
+  - **3,358 storefronts in the rings (54.4%).**
+  - Macro label: "Newcastle (Regional)" 143.1 px in the deployed app's frame
+    (Prague, Tokyo, London and Guadalajara (Regional) reproduced); PROBLEMS 0
+    without Glasgow, whose branch is separate - re-score after both land.
+  - The map fits every station, but the legend covers the Sunderland end at
+    1000x650; the legend has a Hide control, and the shared renderer was not
+    forked for it.
+- **Exposure (`check_personal_exposure.py newcastle`)**: no fallback name
+  exists; 0 emails or phone numbers. The heuristic's 22.8% of all placed
+  storefronts is trade names on a 40-name sample (Lucky's Diner, Woodmans
+  Arms); the 18 "person then bracket" names are all trade names with a place
+  or unit ("Costa Coffee (Green Mall)").
+- **Verified**: `brief_check.py newcastle` 4/4; `drift_check.py newcastle`
+  zero drift against cf45ef7; `check_inconsistency_list.py`,
+  `check_scope_disclosure.py`, `check_macro_facts.py` and
+  `check_master_list_counts.py` OK.
+- **A slip, repaired**: re-running London's step 2 on `worktree-glasgow`
+  rewrote `data/london/processed/businesses_clean.csv`, which every worktree
+  shares through the `data/` junction, and master's `check_macro_facts.py`
+  failed for every session (Staging caught it). Master's file was restored
+  from the copy saved before the run; Cleanup re-runs London's step 2 when
+  Glasgow lands.
+- Files: `pipeline/newcastle/`, `pipeline/fsa.py`,
+  `app/pages/60_Newcastle_Heatmap.py`, `app/components.py` (notices 62, 63),
+  `app/cities.py`, `docs/data_sources.md`,
+  `docs/data_sources/united-kingdom.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/newcastle.md`, README's credits.
 
 ### 2026-09-28 - Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn
 
