@@ -295,8 +295,19 @@ def fuzzy_fix(desc_norm):
             continue
         if tok not in _FIX_CACHE:
             k = 2 if len(tok) >= 9 else 1
-            _FIX_CACHE[tok] = next((w for w in _BY_FIRST.get(tok[0], ())
-                                    if _within(tok, w, k)), tok)
+            fix = next((w for w in _BY_FIRST.get(tok[0], ())
+                        if _within(tok, w, k)), tok)
+            # A body shop, not a funeral home, when the token is at least as
+            # close to FUNILARIA (2026-09-29). Sort order puts FUNERARIA
+            # first, and FUNELARIA, FUNIRARIA and FUNINARIA - Sao Paulo's
+            # spellings of funilaria - took 132 of its 178 "funeral" rows.
+            # Body shops outnumber funeral homes about 700 to 1; both labels
+            # are excluded, so this moves a reason, never a pin.
+            if fix == "FUNERARIA":
+                d = next(d for d in range(k + 1) if _within(tok, fix, d))
+                if _within(tok, "FUNILARIA", d):
+                    fix = "FUNILARIA"
+            _FIX_CACHE[tok] = fix
         out.append(_FIX_CACHE[tok])
     return " ".join(out)
 
@@ -344,6 +355,15 @@ for _d, _want in [("BAR DO CLUBE", "food service"),
                   ("VELORIO MUNICIPAL", "funeral services"),
                   ("ARTIGOS FUNERARIOS", "retail")]:
     assert classify_text(_d)[0] == _want, (_d, classify_text(_d), _want)
+# The FUNILARIA/FUNERARIA tie in fuzzy_fix, both ways (measured 2026-09-29).
+for _d, _want in [("FUNELARIA E PINTURA", "auto / repair"),
+                  ("FUNULARIA E REPARACAO DE VEICULOS", "auto / repair"),
+                  ("FUNIRARIA E PINTURA", "auto / repair"),
+                  ("FUNINARIA", "auto / repair"),
+                  ("FUNEARIA CRUZ DOURADO", "funeral services"),
+                  ("FUNENARIA ROXO", "funeral services"),
+                  ("FENERARIA SANTA IZABEL", "funeral services")]:
+    assert classify_text(fuzzy_fix(norm(_d)))[0] == _want, (_d, classify_text(fuzzy_fix(norm(_d))), _want)
 
 
 # --- version 2: words that only RESCUE a row nothing above matched ----------
