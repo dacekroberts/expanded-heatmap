@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**174 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**175 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
 - [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
 - [The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)](#2026-09-29---the-tram-lists-data-re-checked-for-currency-santa-cruzla-laguna-discarded-kansas-city-kept-with-its-data-date-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
@@ -213,6 +214,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)
+
+- **Supersedes the same day's discard in "The tram list's data re-checked
+  for currency" (owner).** The discard was right about the Cabildo's
+  retail and services directory (no update since 2023-11-13, median row
+  2016-11), and wrong to set aside the Cabildo's hostelería register as
+  "food only, addresses only": food only is Zurich's and Göteborg's shape,
+  and both sit in T2. Measured the same day on the cached file: **3,658
+  restaurants** in the two municipalities (Santa Cruz 1,993, La Laguna
+  1,665), updated 2026-08-31, trade names on every row, 90.3% of addresses
+  with a house number (5.3% "S/N"), a postcode on all. It passes the
+  currency rule as a register. The directory is dropped, not used as a
+  partial layer.
+- **The gap noted in T2**: food only, and no coordinates, so placement is an
+  address join still to measure (Zaragoza was discarded at 36% with a house
+  number; this reads 90.3%). The register's licence is not read. The tram
+  passed Phase 1 unchanged.
+- **Counts: T 40 → 41 (T1 34, T2 7); candidates 79 → 80; discards 92 → 91.**
+  The discard row and its note are removed from `docs/city_master_list.md`;
+  the tram list's revisit row becomes a T2 row. `check_master_list_counts.py`
+  and `check_discard_evidence.py` pass.
 
 ### 2026-09-29 - A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)
 

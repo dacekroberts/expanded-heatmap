@@ -1,4 +1,4 @@
-# 🟤 Tram city list — 40 cities (split from the master list 2026-09-29)
+# 🟤 Tram city list — 41 cities (split from the master list 2026-09-29)
 
 **Band T of [`docs/city_master_list.md`](city_master_list.md), in a file of its
 own** (owner, 2026-09-29), so the tram cities can be sorted and worked through
@@ -22,8 +22,8 @@ Oslo and Dublin (Luas) also draw trams.
 | Tier | What these cities ARE | Cities |
 |---|---|---|
 | 🟤 **T1** | **Ready if trams-only maps are approved.** All three buckets, access open, rail measured; grouped by country pipeline, which is how the build cost falls | **34** |
-| 🟤 **T2** | **Trams plus a bucket gap.** Two yeses needed: trams-only maps, and a verdict on the gap (the owner's Band B / C call) | **6** |
-| **Total** | | **40** |
+| 🟤 **T2** | **Trams plus a bucket gap.** Two yeses needed: trams-only maps, and a verdict on the gap (the owner's Band B / C call) | **7** |
+| **Total** | | **41** |
 
 **EDGE** (light rail partly built to metro standard, the owner's tag
 2026-09-27) is now a flag on a row, not a group: the rest of the EDGE group
@@ -73,7 +73,7 @@ operator's GTFS for frequency, worst daytime hour at the median stop):
 | Aarhus | 3% | 97% / 0% | L2 15 min; **L1 30 min on converted railway** | 666 m | light rail on its new tramway → A |
 | Bergen | **40%** | 58% / 3% | 7–8 min | 622 m | light rail → A |
 | Pittsburgh | 30% | 70% / 0% | Red 20 min; Blue, Silver part-day | 437 m (suburban street stops in the box) | light rail (the Buffalo rule) → C |
-| Santa Cruz–La Laguna | 4% | 0% / **96.5%** | L1 5–6 min, L2 10–12 (Metrotenerife) | 510–549 m | tram; **then discarded on data currency** (below) |
+| Santa Cruz–La Laguna | 4% | 0% / **96.5%** | L1 5–6 min, L2 10–12 (Metrotenerife) | 510–549 m | tram; **in T2 on its data** (below) |
 
 **Hiroshima left as well, on a different ground**: MLIT's N02 × N03 puts the
 Astram Line (22 stations, an automated guideway like Kobe's drawn Port Liner)
@@ -114,7 +114,7 @@ feed's end date, and the declared licence. **39 of 41 stood.**
 | `Gastwirtschaftsbetriebe` | Zurich | 2026-09-28 | current |
 | `Livsmedelsverksamheter` | Göteborg | 2026-09-28 | current |
 | **`kkhs-93m4`** | **Kansas City** | **Frozen 2026-01-15**: 13,058 of 15,895 rows are licences valid for 2025, 1,978 for 2024, **859 for 2026**; the parent `pnm4-68wg` has the same split, and the catalogue holds nothing newer (food permits stop in 2017). The previous update was 2023-12, so a yearly snapshot | **stays in T1, the data date on the page** (owner; Stockholm's precedent) |
-| **The Cabildo's four layers** | **Santa Cruz–La Laguna** | **Newest update 2023-11-13, none since 2024**; most rows last touched 2015–2018. The catalogue was re-stamped 2026-05-31 with no row changed | **discarded** (owner; Dallas's precedent), on the revisit list below |
+| **The Cabildo's four layers** | **Santa Cruz–La Laguna** | **Newest update 2023-11-13, none since 2024**; most rows last touched 2015–2018. The catalogue was re-stamped 2026-05-31 with no row changed | **The directory fails (Dallas's precedent) and is dropped; the city moves to T2 as food only** on the Cabildo's current hostelería register (owner, the same day) |
 
 **Licences still unread, none deciding keep or drop** (for the build briefs):
 Bordeaux's Licence Ouverte 1.0; the ODbL feeds of Montpellier, Grenoble,
@@ -196,7 +196,7 @@ Prague. `czechia_register.ruian()`'s coordinate control is per city now.
 
 **🇮🇹 Italy (1)** — joined 2026-09-28 from wave 2's second group (owner's
 call), with coordinates on every row. Santa Cruz–La Laguna, which joined
-with it, was discarded on currency on 2026-09-29.
+with it, moved to T2 on 2026-09-29 (its data, not its tram).
 
 | City | Network | Business | Build-time calls |
 |---|---|---|---|
@@ -204,16 +204,20 @@ with it, was discarded on currency on 2026-09-29.
 
 ---
 
-## 🟤 T2 — trams plus a bucket gap (6 cities)
+## 🟤 T2 — trams plus a bucket gap (7 cities)
 
 Each needs two yeses: trams-only maps, and a verdict on its gap. Zurich,
 Göteborg, Utrecht and Den Haag moved in from Band C on 2026-09-27 (owner's
-call), Rijswijk and Delft after them as Den Haag add-ons.
+call), Rijswijk and Delft after them as Den Haag add-ons. **Santa Cruz–La
+Laguna came from T1 on 2026-09-29** (owner): its only three-bucket source
+failed the currency rule, and its current food register makes it Zurich's
+shape.
 
 | City | Network | What is there | The gap, measured |
 |---|---|---|---|
 | **Zurich** 🇨🇭 | 18 tram refs, all coloured, plus the Forchbahn (S18); no metro. **The S-Bahn fails the rail test on coverage (2026-09-29)**: 23 stations in the city, 707 m apart, 6–28 trains an hour each way on the trunk (each line alone every 20–30 min), but 21 of 23 stand within 800 m of a tram stop and the other two (Affoltern, Leimbach) run every 20–30 min, Seoul's AREX case. Trams only; the S-Bahn is named on the page as excluded | `Gastwirtschaftsbetriebe`, 3,488 food premises, CC0 | **Food only**: no second register in 1,128 catalogue names; STATENT is aggregate |
 | **Göteborg** 🇸🇪 | **Measured 2026-09-27 (OSM)**: 13 tram lines (1–13, Göteborgs Spårvägar), **127 distinct stops inside Göteborgs Stad**; lines 4 and 12 run on into Mölndal. Each line has its own OSM colour except 11 ("black"); the heritage Lisebergslinjen is out. No metro; 4 train stations in the city (1.3–1.8 km apart), not a network | `Livsmedelsverksamheter`, 5,063 active food businesses, CC0, daily | **Food only**: `handel`, `butik`, `företag` and `frisör` all return 0 on a filtering search |
+| **Santa Cruz–La Laguna (Regional)** 🇪🇸 | Metrotenerife L1 and L2, a tram (96.5% mapped as tram; 510–549 m). Either municipality alone is a stub (Santa Cruz keeps L1 11/21, L2 1/6; La Laguna L1 10/21, L2 5/6); together 21/21 and 6/6. L1 every 5–6 min, L2 10–12 | The Cabildo's hostelería register (`datos.tenerife.es`, updated 2026-08-31): **3,658 restaurants** (Santa Cruz 1,993, La Laguna 1,665), with trade names and capacity; licence not read | **Food only**, Zurich's shape: the Cabildo's retail and services layers are a directory with no update since 2023-11-13 (median row 2016-11) and are not used. **No coordinates**: 90.3% of addresses carry a house number (5.3% "S/N") and all a postcode, so placement is an address join, still to measure (Zaragoza was discarded at 36%) |
 | **Den Haag** 🇳🇱 (EDGE) | 14 HTM lines plus RandstadRail E: 172 stop places; worst line tram 1, 20 of 37 (a regional scope makes every line 94–100% whole). RET metro E keeps 4 of 23 stops in the city | BAG shop units 6,560 (1.75× OSM) | **No current food source**: the city's register froze at the end of 2020, and its Gemeenteblad carries 321 applications and no decisions |
 | **Utrecht** 🇳🇱 (EDGE) | Trams 20–22: 16 stops (line 21 keeps 57%); 32 with Nieuwegein and IJsselstein | BAG shop units 3,461 (1.73×) | **Food partial**: rebuilt from Gemeenteblad notices, 822 premises (0.78× OSM), no expiry rule. **What would move it**: the owner accepting a disclosed partial food layer. `open.utrecht.nl` answered 403 and was left alone, so "no register" there is unmeasured |
 | **Rijswijk** 🇳🇱 | Trams-only, 17 stop places | BAG shop units | No food source. **A Den Haag add-on** (owner 2026-09-27): a candidate for a Den Haag (Regional) scope, not a page of its own |
@@ -289,7 +293,6 @@ that a yes to trams-only maps sends someone to look (owner, 2026-09-29).
 | **Cincinnati** 🇺🇸 | Connector streetcar, every 20–25 min | Food only | Fails frequency; one bucket |
 | **Detroit** 🇺🇸 | QLine streetcar every 15 min, **plus the People Mover** (an automated elevated loop, 13 stations, never counted; Kobe's Port Liner is the same kind of line, and it is drawn) | Food only (4,830 restaurants) | Thin, one bucket; with the People Mover it is a real downtown network |
 | **Milwaukee** 🇺🇸 | The Hop, 13 stops | 1,702 restaurants, 1,072 food dealers (grocers: retail under New York's rule?) | Thin, one or two buckets |
-| **Santa Cruz–La Laguna (Regional)** 🇪🇸 | Metrotenerife L1 and L2, a tram (96.5% mapped as tram); either municipality alone is a stub, together 21/21 and 6/6; L1 every 5–6 min | The Cabildo's four layers, 3,786 / 2,528 / 494, coordinates on every row | **Currency** (2026-09-29): no row updated since 2023-11-13. Reopens only if the Cabildo republishes; its hostelería register is current but food only, addresses only |
 
 Bologna (the Linea Rossa, spring 2027) and Brampton (the Hurontario LRT,
 early 2028) wait on rail that has not opened, with revisit dates in their own
