@@ -159,6 +159,12 @@ fuel dealers. **NAICS itself calls these "nonstore"** — there is no shopfront 
 walk into. They had been included only because the filter matched the broad
 `45` retail prefix, which pulls in the whole family.
 
+NAICS 2022 moved two of these trades out of 454: vending-machine operators to
+`445132` and fuel dealers to `457210`. Both stay excluded under their new codes
+(San Francisco 39, Los Angeles 36). Heating-oil and bottled-gas dealers are
+excluded the same way where the register is not NAICS: France's `47.78B`,
+Berlin's `477893`, and Taiwan's bottled-gas and kerosene retail.
+
 Removed: 10.1% of Los Angeles's mapped businesses, 9.0% of San Diego's, 1.7% of
 San Francisco's. `454390` "Other direct selling establishments" was also the
 single largest group of mapped names that looked like an individual's at a
@@ -267,7 +273,7 @@ Chicago classifies by licence type rather than NAICS, so its exclusions are
 named differently but follow the same rule. Left out: home-based businesses
 (the city marks these explicitly), peddlers and mobile vendors, temporary and
 pop-up trading, shared kitchens, wholesale, parking operators, vehicle repair,
-amusements, child care, and licences that merely attach to a business already
+clothing alterations (61; repair is excluded in every city), amusements, child care, and licences that merely attach to a business already
 counted (an outdoor-patio or late-hour permit, for instance). A business holding
 several licences is counted once.
 
@@ -453,6 +459,7 @@ Exempt 440, Cooperative Association 176); **wholesale** (NAICS 42); and
 **individual rather than premises licences** (Motor Vehicle Salesperson 263,
 Auctioneer 15, Tour Guide 3 — a licence attached to a person, not a shopfront).
 `Funeral Establishment` (29) is excluded, as funeral services are everywhere.
+Pawnbrokers count as retail (4).
 
 **One category is kept despite being ambiguous, and it is a large one.**
 `Delicatessen` (1,065) is D.C.'s prepared-food catch-all, issued to sandwich
@@ -911,6 +918,10 @@ Also excluded: public toilets and shoe-shine stands (`812130`, 1,646), the
 "other personal services" catch-all (`812990`, 977), funeral services (629),
 event caterers (146), institutional canteens (82) and food trucks (61).
 
+**Pawnshops count as retail.** SCIAN files casas de empeño (`522452`) under
+financial services, but a pawnshop is a shop people walk into to buy and sell
+goods. It counts wherever a register can separate it: 381 here.
+
 **Not excluded but absent by construction: 811 repair and 813 associations.**
 Personal services is anchored on **812**, not the whole of 81, so auto repair
 (27,216 units in Jalisco, the largest block inside 81) and civic, religious and
@@ -942,6 +953,7 @@ the measurements behind each.
 Also excluded: public toilets and shoe-shine stands (`812130`, 227), the
 "other personal services" catch-all (`812990`, 238), funeral services (207),
 event caterers (77), institutional canteens (34) and food trucks (14).
+Pawnshops (`522452`) count as retail, as in Mexico City: 288.
 
 **Tonalá is excluded, and it is the only whole municipio this project has left
 out of a region it could have included.** DENUE holds **19,897** economic units
@@ -979,6 +991,7 @@ smaller share of fixed premises than in the other two Mexican cities.
 Also excluded: public toilets and shoe-shine stands (`812130`, 72), the
 "other personal services" catch-all (`812990`, 125), funeral services (156),
 event caterers (78), institutional canteens (51) and food trucks (33).
+Pawnshops (`522452`) count as retail, as in Mexico City: 280.
 
 **No whole municipio is left out.** Monterrey, San Nicolás de los Garza,
 Guadalupe and General Escobedo are exactly the municipios a station's 0.6-mile
@@ -1017,6 +1030,10 @@ caterers (90), the register's "other personal services (astrology, contact
 agencies)" catch-all (43) and funeral parlours (30). The three categories are
 the register's own activity classification, not NAICS.
 
+Market and street stalls (`SITUADOS`, 63) and mobile food are excluded: a
+pitch, not a shopfront. **Discotheques and dance halls count as food service
+(197)**, as a nightclub does everywhere here.
+
 **About one storefront premises in eleven cannot be placed on the map.** The
 register gives every premises a coordinate, and **9.2%** of those in these
 three categories carry a literal zero instead of a location. They are left out
@@ -1035,7 +1052,8 @@ can be taken out rather than silently counted as businesses.
 **Hotels, hostals and pensions are excluded**, although the census files them
 in the same group as restaurants and bars: **720 accommodation rows** sit
 inside a group whose own name says so, in Catalan. Offices, health, education,
-finance, repair, storage and construction are excluded too.
+finance, repair (clothing alterations, `Arranjaments`, 649, among it), storage
+and construction are excluded too.
 
 **458 rows are dropped rather than assigned to Retail.** They sit in a sector
 that explicitly mixes retail with wholesale, and the census's finer levels say
@@ -1069,6 +1087,11 @@ retail, food service or personal service is not on the map.
 **Betting shops are left out (175)**, with a casino and an amusement centre that
 had reached the map through a "shop" use beside them. So are markets (4) and
 funeral homes (38). Kiosks stay: a kiosk is a small walk-in shop.
+
+Internet cafés (27) and repair uses (shoe repair and key cutting, tailoring and
+alterations: 28) are left out too, as repair is in every city. A gym, snooker
+hall or other recreation use no longer reaches the map through a "shop" use
+beside it (5).
 
 ### Milan - six registers kept apart, and a category the register cannot mark
 
@@ -1109,6 +1132,10 @@ makes the registered address the trader's own. Contract catering (`56.29A`) is
 a canteen inside someone else's institution. Wholesale laundry (`96.01A`) is
 industrial - and its retail twin `96.01B` is **kept**, because INSEE itself
 splits the pair *de gros* / *de détail*.
+
+Retail of heating fuel and bottled gas (`47.78B`) is excluded for the same
+reason as distance selling: the fuel is delivered, not sold over a counter.
+That's 19 in Paris and 16 across the other four cities.
 
 **Two of the five catch-alls are dropped and three are kept, decided by the
 class label rather than by the word "autres".** `96.09Z` (9,349 rows) sits
@@ -1333,8 +1360,8 @@ Statistical Office's own CZ-NACE 2025 labels. So are funeral services (66).
 trading in their own name at their own registered address, which for a Czech
 sole trader is usually where they live.
 
-**The "other personal services" catch-all is excluded, as in every city — three
-rows here**; the 2025 classification already sorts that work into specific
+**The "other personal services" catch-all is excluded, as in every city — 24
+rows here, 21 of them filed under the bare group code `969`**; the 2025 classification already sorts that work into specific
 classes. Day spas, saunas and massage salons are a
 specific class and are kept.
 
@@ -1436,6 +1463,10 @@ non-premises (2,495); and 5,940 rows with no usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded** (558 across the nine
 cities).
+
+**Nightclubs (`boate`, 201 across the nine cities) count as food service**, and tattoo and
+beauty studios as personal services (about 350 shown, more under a hidden name). School
+canteens, refectories and industrial kitchens (32) and online-only shops (29) are excluded.
 
 **Missing rather than excluded** - 108,311 establishments whose description no rule can
 read, mostly bare brand or trade names: about a third of those that might be
@@ -1730,9 +1761,10 @@ shops, fuel stations, warehouses, offices and kiosks (the cadastre is the shop l
 One premises per address and kind: a venue holds several licences, and the holder that would tell
 two venues apart is never read.
 
-**Left out of the cadastre** - trade premises named as fuel stations, wholesale or storage, food
+**Left out of the cadastre** - trade premises named as wholesale or storage, food
 service (the excise register is the food layer), gambling, offices, dwellings and ancillary rooms;
-412 shops in buildings the city lists as degrading. The building register records only a shop
+399 shops in buildings the city lists as degrading. **Fuel stations count as shops (88)**, as
+everywhere; repair workshops and market stands are left out (93). The building register records only a shop
 unit, so a funeral home there cannot be identified or removed.
 
 **Not placed** - 48 food premises whose address matched no address point; 34 shops whose building
@@ -1842,10 +1874,14 @@ Ilgwang, have no ring.
 
 **Left out** - online shopping (industry code 487); funeral services (443); street and market
 stalls (1,101) and caterers, banquet cooks and school-lunch contractors (266); the "other
-personal services" catch-all, fortune-telling and marriage introduction (574); every industry
+personal services" catch-all, fortune-telling and marriage introduction (574); bottled-gas and
+kerosene retail (178) and shoe-shining (4); every industry
 outside retail, food service and personal services; 1,521 company head-office rows on an upper
 floor or in a numbered room, which read as offices (owner's rule; buildings with 20 or more
 storefront rows exempt).
+
+Pawnshops (262) are kept as retail, and nightclubs and dance halls without hostess service (8)
+as food service.
 
 Drinking places and restaurants with shows are kept: their register names claim no hostess
 service.
@@ -1867,8 +1903,12 @@ drawn: Taiwan Railway and high-speed rail.
 
 **Left out** - online shopping; funeral services (288); street and market stalls (553) and
 caterers, banquet cooks and school-lunch contractors (182); the "other personal services"
-catch-all, fortune-telling and marriage introduction (388); industries outside the three
-buckets; 1,177 office-like company head-office rows (owner's rule).
+catch-all, fortune-telling and marriage introduction (388); bottled-gas and kerosene retail
+(204) and shoe-shining (1); industries outside the three buckets; 1,177 office-like company
+head-office rows (owner's rule).
+
+Pawnshops (134) are kept as retail, and nightclubs and dance halls without hostess service (10)
+as food service.
 
 Drinking places and restaurants with shows are kept: their register names claim no hostess
 service.
@@ -1887,9 +1927,12 @@ centre, so most storefronts lie outside the rings.
 
 **Left out** - online shopping; funeral services (634); street and market stalls (2,669) and
 caterers, banquet cooks and school-lunch contractors (272); the "other personal services"
-catch-all, fortune-telling and marriage introduction (811); industries outside the three
-buckets; 10,138 office-like company head-office rows (6,232 in Taipei, 3,906 in New Taipei;
-owner's rule).
+catch-all, fortune-telling and marriage introduction (811); bottled-gas and kerosene retail
+(298) and shoe-shining (9); industries outside the three buckets; 10,138 office-like company
+head-office rows (6,232 in Taipei, 3,906 in New Taipei; owner's rule).
+
+Pawnshops (523) are kept as retail, and nightclubs and dance halls without hostess service (8)
+as food service.
 
 Drinking places and restaurants with shows are kept: their register names claim no hostess
 service.
@@ -2165,6 +2208,9 @@ department stores sit under the same heading in the register and are kept.
 
 Funeral services are excluded too, as everywhere: 44 premises.
 
+Heating-oil and bottled-gas dealers (`477893`, 36) are excluded as nonstore,
+and pawnbrokers (`64922`, 35) count as retail.
+
 **Missing rather than excluded** - craft businesses belong to the Handwerks-
 kammer, not the chamber of commerce, so hairdressers, laundries and dry
 cleaners are almost entirely absent and bakers and butchers are thin.
@@ -2240,11 +2286,15 @@ six London Overground lines are drawn, cut at Greater London's boundary.
 estate agents, banks, lottery agencies, bill-payment and money-transfer offices
 and insurers (4,481); lawyers, printers, travel agents and copy shops (1,831);
 health and veterinary practices (1,690); gyms, event halls and cultural centres
-(1,353); other repair workshops (1,158); construction trades and workshops
+(1,353); other repair workshops (1,158), and locksmiths, shoe repairers,
+clothes alterations and tailors (944); construction trades and workshops
 making goods (802); party offices, places of worship and associations (658);
 transport, courier and rental offices (609); schools and classes (403);
 wholesalers (216); funeral homes and wake parlours (143); fortune-tellers and
 astrologers (10).
+
+**Petrol stations count as retail (266).** The survey files them under a type
+of their own, which is now read.
 
 **Left out because the survey cannot say** - 6,243 active shopfronts whose use
 the surveyors could not identify (7.2%; 32% in Villa Riachuelo), and 593 malls,
@@ -2488,7 +2538,8 @@ stalls, vending machines, warehouses, fairs, and the farm and processing
 categories.
 
 **Excluded within the files used** - 75 mobile units (Sector "U.M.", a food
-truck with a number plate for an address); and by category, the owner's
+truck with a number plate for an address), and 4 more filed as a trailer or
+mobile fast food; and by category, the owner's
 exclusions applied to rows filed elsewhere: 13 in-house buffets ("bufet de
 incintă", a canteen), 1 catering-only unit, 3 pastry labs, 8 kiosk carts and 2
 vending machines.

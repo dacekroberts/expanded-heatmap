@@ -168,9 +168,10 @@ Desktop is unaffected — the label is fully visible there.
   configs and about 45 cities to re-render, run as the exclusions batch was.
   - Coded and re-run on branch `category-continuity` (2026-09-29): 32 maps
     moved, the privacy check is clean, and `check_all` passes (DECISIONS,
-    "Category fix batch re-run"). Left: the owner approves the per-city
-    wording in `docs/excluded_categories.md`; `app/macro_facts.json` is
-    written with the saved processed files at review time; then landing.
+    "Category fix batch re-run"). The per-city wording in
+    `docs/excluded_categories.md` is written (owner-approved). Left for review
+    time: `app/macro_facts.json`, written from the processed files saved in
+    `data/_review_category-continuity_2026-09-29/`, then landing.
   - Stockholm's torghandel stall waits for `stockholm-catering` to land.
   - Still with the owner: Boston's General On Premise licences (measure
     first).
