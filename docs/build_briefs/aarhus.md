@@ -27,7 +27,7 @@ licence is read. The rail is OSM's, as Copenhagen's is.
 
 ---
 
-## 🟠 THE SCOPE CALL — 20, 32 or 39 stations
+## 🟠 THE SCOPE — 20 stations by the owner's test (to confirm)
 
 Measured 2026-09-29 from OSM's six Letbane route relations (7463675,
 8603279, 9907095, 9907096, 14973317, 14973318) against Aarhus Kommune's OSM
@@ -44,48 +44,48 @@ The 39 are three pieces of track:
 | **Grenaabanen**, Østbanetorvet – Risskov – Skødstrup – Løgten | **7** | L1 only | converted railway |
 
 **The light-rail test makes frequency a gate on converted railway** (15 min
-or better by day; owner, 2026-09-29). The audit's read: **L1 every 30 min**
-(Grenaabanen fails), **L2 every 15 min at its median stop** (the city
-tramway passes). **The Odder section was not read per stop.** L2 through-runs
-it, so it passes if L2's 15 minutes reach Malling, and fails if alternate
-trips turn back short. **That read decides the middle option**, which the
-master row did not list (it named only 20 or 39).
+or better by day, at the median stop's worst daytime hour; owner,
+2026-09-29). **Read 2026-09-29 from Midttrafik's own timetables**, the
+operator's published PDFs, weekdays:
+- **L2**: `l2_k26_20261009-20270403_normal-ua.pdf`, the normal plan valid
+  from 9 October 2026;
+- **L1**: `l1_k26_20260925-20270320_helaar-ua.pdf`, the year plan valid from
+  25 September 2026;
+
+both linked from `midttrafik.dk/rejsemuligheder/?search=L2` and `?search=L1`.
+
+| Piece | What the timetable shows | Test |
+|---|---|---|
+| New city tramway | Aarhus H northbound every **7–8 min** (6.01, 6.08, 6.16, 6.23…) | **passes** |
+| Odderbanen | Odder trains every **30 min** (x.04, x.34). The extra trips that start at Mårslet (`S7.07`, `S7.37`) **run through without stopping** (`|`) at Mølleparken, Nørrevænget, Kongsvang and the stops between, so those stops get **2 an hour through the morning**; Malling gets 2 an hour all day | **fails** at the section's median stop |
+| Grenaabanen (L1) | every **30 min** (Aarhus H x.18, x.48); peak extras run only to Skødstrup and skip Løgten | **fails** |
+
+**By the owner's test, the scope is the 20 stations on the new tramway**,
+with the halved rings its 499 m median gap takes. That is the lean the
+master row carried before this read. **Owner to confirm** (a
+measurement applying the owner's rule, not a new rule).
 
 | Scope | Median gap | Rings (spacing rule) | Within the outer ring |
 |---|---|---|---|
-| **20**, new tramway | **499 m** | **halved: 0.05 / 0.1 / 0.2 / 0.3 mi** | 25.4% at 0.3 mi |
-| **32**, tramway + Odderbanen | 634 m | standard 0.1 / 0.2 / 0.3 / 0.6 mi | **49.1%** (2,516) |
-| **39**, all | 669 m | standard | **55.4%** (2,837) |
+| **20**, new tramway (the test's answer) | **499 m** | **halved: 0.05 / 0.1 / 0.2 / 0.3 mi** | **25.4%** at 0.3 mi |
+| 32, tramway + Odderbanen | 634 m | standard 0.1 / 0.2 / 0.3 / 0.6 mi | 49.1% (2,516) |
+| 39, all | 669 m | standard | 55.4% (2,837) |
 
 *(Shares over the screen's 5,125 placed points; UTM 32N; the 20-station
 scope also shown at 0.6 mi for comparison: 40.4%.)*
 
-**Lean: 32 if the Odder read passes, else 20.** The test is the owner's, and
-it drops Grenaabanen's 7 on L1's 30 minutes whichever way Odder falls. 39
-would draw a 30-minute converted railway, which is the thing the test was
-written to exclude. **This is the owner's call at build**; bring the Odder
-read with it.
+### Where the frequency comes from — Midttrafik, not Rejseplanen
 
-### ⚠️ Where the frequency comes from — a flag for the owner
-
-**The tram audit's frequency figures (2026-09-29) were read from Rejseplanen's
-national GTFS** (`https://www.rejseplanen.info/labs/GTFS.zip`, 54,971,494
-bytes, cached in that session's scratchpad). **Copenhagen's build declined to
-download that file** (owner, 2026-09-24): Rejseplanen's Labs guidelines ask
-that the data not be changed from the original, and describe access as by
-request with the guidelines accepted. Neither point was resolved. The audit
-used it for a measurement only, and nothing drawn or published comes from
-it. **The build must not use it** unless the owner resolves those two
-points. The Odder read therefore needs either:
-- **the owner's OK to use Rejseplanen's feed for timetable measurement only**
-  (nothing from it is redistributed, which is the ground the guidelines
-  protect); or
-- **a read of Midttrafik's own timetable.** Midttrafik's Letbane pages
-  (`midttrafik.dk/rejsemuligheder/letbanen/koereplaner-l1-og-l2/`) show no
-  frequency in text and link no timetable PDF (2026-09-29); the timetables sit
-  behind the journey planner.
-
-Danish Wikipedia's table of *planned* service is not a current source.
+The tram audit's first figures (2026-09-29) were read from Rejseplanen's
+national GTFS (`rejseplanen.info/labs/GTFS.zip`), which **Copenhagen's build
+declined to download** (owner, 2026-09-24). Rejseplanen's Labs guidelines ask
+that the data not be changed and describe access as by request with the
+guidelines accepted, and this project never made that request. **The owner's
+call (2026-09-29): if the guidelines do not permit our use, drop the item or
+find another source.** Another source was found: the frequency above rests
+on **Midttrafik's own published timetables** and nothing else. The audit's
+cached copy of Rejseplanen's feed was deleted from the staging scratchpad.
+**The build never fetches Rejseplanen.**
 
 ---
 
@@ -181,10 +181,10 @@ the rail.
 
 ## Build-time calls
 
-1. **Scope: 20, 32 or 39 stations.** This is the owner's call, and it
-   decides the ring size. It needs the Odder read first (above), which in
-   turn needs **the owner's word on Rejseplanen's feed** or a read of
-   Midttrafik's planner.
+1. **Scope: 20 stations**, the answer the owner's test gives on Midttrafik's
+   own timetables (above), with the halved rings. **Owner to confirm.**
+   Record the timetable read on the page as the reason the converted
+   railways are not drawn.
 2. **Line colours** through `linecolour.py` (both lines are `#30556E` in OSM).
 3. **The two spelling aliases**: explicit, never a rule.
 
@@ -193,7 +193,9 @@ light-rail network colour, as Bergen does; Copenhagen is metro.
 
 ## Still unknown — the honest list
 
-- **L2's frequency at each Odder-section stop** (call 1).
+- ~~L2's frequency at each Odder-section stop~~ ✅ read 2026-09-29 from
+  Midttrafik's normal plan: every 30 min at the intermediate stops through
+  the morning, Malling all day.
 - Whether OSM's relations match Midttrafik's current service pattern (the
   L2 short branch to Lisbjergskolen appears in OSM as its own relation pair).
 

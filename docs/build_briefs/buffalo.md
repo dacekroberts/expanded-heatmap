@@ -186,8 +186,9 @@ the page says so.
 
 ## Build-time calls
 
-0. 🟠 **The owner's, before step 1: rail from OSM (recommended) or from
-   NFTA's feed** under the permissive reading of its trademark clause (above).
+0. ✅ **Rail from OSM (owner, 2026-09-29).** NFTA's feed is not fetched by
+   the build. The page's 20-minute disclosure cites NFTA's published
+   schedule.
 1. **Expiry at the fetch date** (Chicago's rule, recommended), or a grace
    window (a departure; the owner's call).
 2. **The dedupe key** across the three sources.

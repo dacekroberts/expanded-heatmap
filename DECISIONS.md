@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Light-rail briefs: the owner's calls, and two timetables read (staging)](#2026-09-29---light-rail-briefs-the-owners-calls-and-two-timetables-read-staging)
 - [Light-rail build briefs: Buffalo, Houston and Sacramento (staging)](#2026-09-29---light-rail-build-briefs-buffalo-houston-and-sacramento-staging)
 - [Light-rail build briefs: Bergen and Aarhus (staging)](#2026-09-29---light-rail-build-briefs-bergen-and-aarhus-staging)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
@@ -237,6 +238,43 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Light-rail briefs: the owner's calls, and two timetables read (staging)
+
+- **Rejseplanen's feed is not used; Aarhus's frequency now rests on
+  Midttrafik's own timetables, and the owner's test gives 20 stations.** The
+  owner's call: if Rejseplanen's Labs guidelines do not permit the use, drop
+  the item or find another source. The guidelines describe access as by
+  request with the guidelines accepted, and this project made no request.
+  Another source was found: Midttrafik's published PDFs, the L2 normal plan
+  from 9 October 2026 and the L1 year plan from 25 September 2026. The new
+  city tramway runs every 7–8 minutes. On Odderbanen, Odder trains run every
+  30 minutes, and the extra trips starting at Mårslet run through without
+  stopping at Mølleparken, Kongsvang and the stops between, so the
+  intermediate stops see a train every 30 minutes through the morning, and
+  Malling all day. L1 runs every 30 minutes. Both converted railways fail
+  the 15-minute gate, so the scope is the 20 new-tramway stations with halved
+  rings (499 m median). This applies the owner's rule to a measurement, and
+  it is marked for the owner's confirmation. The audit's cached copy of
+  Rejseplanen's feed was deleted from the staging scratchpad.
+  `docs/build_briefs/aarhus.md`.
+- **Buffalo's and Houston's rail are drawn from OSM (owner).** Neither NFTA's
+  trademark clause nor METRO's Data Use Agreement reaches the maps. Houston's
+  line-label wording and its ~7% in-ring flag remain open.
+- **Sacramento's uncapped indemnity is accepted (owner)**, as Hong Kong's
+  was, with the fact stated that the brief's measurement had already pulled
+  the Active rows. Recorded beside Hong Kong's in `docs/data_sources.md`.
+  **Its addresses go through the US Census Bureau geocoder (owner)**, not the
+  City's All Addresses layer, which no terms cover. The Hub's "Request
+  permission to use" label is still unanswered, and the lean is Esri
+  boilerplate.
+- **SacRT's timetable was read in the browser**: the schedule pages are now
+  text tables. Blue runs every 15 minutes 05:03–17:48 and Gold 4 an hour at
+  Sacramento Valley Station, both every 30 minutes in the evening, so the
+  15-minute question does not arise. The GTFS host (`apps.sacrt.com`) still
+  serves an expired certificate and was not fetched. **SacRT lists only Blue
+  and Gold**; OSM still maps a Green Line, which the build must confirm or
+  drop.
 
 ### 2026-09-29 - Light-rail build briefs: Buffalo, Houston and Sacramento (staging)
 
