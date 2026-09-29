@@ -2570,6 +2570,24 @@ ends; stations outside in each city's `excluded_stations.csv`):
 - Yongin: the EverLine, the Suin-Bundang and Shinbundang Lines, 24 stations.
   GTX-A (its Guseong stop) is not drawn.
 
+### Suwon - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+section above).
+
+**Out by name**: hostess bars 270, dance halls 38, staff canteens 109,
+household fuel dealers 33; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 37 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Suwon's boundary (the lines drawn to their ends;
+stations outside in `outputs/suwon/excluded_stations.csv`): Line 1, the
+Suin-Bundang and Shinbundang Lines, 14 stations. No undrawn line has a
+station in Suwon.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
