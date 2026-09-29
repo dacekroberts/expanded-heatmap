@@ -35,6 +35,15 @@ FSA_REGION = "London"
 FSA_AUTHORITY_COUNT = 33   # the 32 boroughs and the City of London
 FSA_RAW_DIR = DATA_RAW / "fsa"
 FSA_AUTHORITIES_JSON = DATA_RAW / "fsa_authorities.json"
+# Postcode centroids (owner, 2026-09-28): OS Code-Point Open places a food
+# storefront the FSA gives a FULL postcode and no point. Never a private
+# address - the FSA publishes those with no postcode or an outward code only.
+CODEPOINT_META_URL = "https://api.os.uk/downloads/v1/products/CodePointOpen"
+CODEPOINT_URL = ("https://api.os.uk/downloads/v1/products/CodePointOpen/downloads"
+                 "?area=GB&format=CSV&redirect")
+CODEPOINT_ZIP = DATA_RAW / "codepo_gb.zip"
+CODEPOINT_CRS = "EPSG:27700"   # British National Grid eastings / northings
+
 # Rail (owner, 2026-09-28): the Underground, the DLR, the Elizabeth line and
 # the six Overground lines; Tramlink left out. TfL publishes no GTFS. Track
 # geometry is OpenStreetMap's route relations, ONE bounded query for all 19

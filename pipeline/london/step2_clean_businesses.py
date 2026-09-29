@@ -33,6 +33,29 @@ READ = ("FHRSID", "BusinessName", "BusinessType", "PostCode", "LocalAuthorityNam
 # "T/A", "t/a", "Also T/A", "(Trading as ...)", "trading as" - a whole word, so
 # "Ta Va" (a restaurant) is untouched.
 TRADING_AS = r"(?i)\s*\(?\b(?:also\s+)?(?:t/a|trading\s+as)\b\s*"
+FULL_POSTCODE = r"^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$"
+OUTWARD_POSTCODE = r"^[A-Z]{1,2}\d[A-Z\d]?$"
+
+
+def codepoint():
+    """Greater London's postcode centroids from OS Code-Point Open, WGS84,
+    indexed by postcode without spaces. Only units whose district is a London
+    borough (E09) - the same 33 authorities as the FSA's region."""
+    import io
+    import zipfile
+    from pyproj import Transformer
+    if not config.CODEPOINT_ZIP.exists():
+        sys.exit(f"missing {config.CODEPOINT_ZIP.name}: run python pipeline/london/fetch_sources.py")
+    cols = ["pc", "pq", "e", "n", "cy", "rh", "lh", "cc", "dc", "wc"]
+    z = zipfile.ZipFile(config.CODEPOINT_ZIP)
+    parts = [pd.read_csv(io.BytesIO(z.read(n)), header=None, names=cols, dtype=str)
+             for n in z.namelist() if n.startswith("Data/CSV/") and n.endswith(".csv")]
+    cp = pd.concat(parts)
+    cp = cp[cp["dc"].fillna("").str.startswith("E09")]
+    t = Transformer.from_crs(config.CODEPOINT_CRS, config.CRS_GEOGRAPHIC, always_xy=True)
+    lon, lat = t.transform(cp["e"].astype(float).to_numpy(), cp["n"].astype(float).to_numpy())
+    cp = cp.assign(latitude=lat, longitude=lon, key=cp["pc"].str.replace(r"\s+", "", regex=True))
+    return cp.drop_duplicates("key").set_index("key")
 
 
 def load():
@@ -66,10 +89,28 @@ def main():
 
     lat = pd.to_numeric(df["latitude"], errors="coerce")
     lon = pd.to_numeric(df["longitude"], errors="coerce")
-    df = df.assign(latitude=lat, longitude=lon)
-    unplaced = df["latitude"].isna() | df["longitude"].isna()
-    print(f"\n  {int(unplaced.sum()):,} without the FSA's own point, NOT placed "
-          f"({unplaced.mean():.1%}); by authority, the most:")
+    df = df.assign(latitude=lat, longitude=lon, placement="fsa_point")
+    no_point = df["latitude"].isna() | df["longitude"].isna()
+    print(f"\n  {int(no_point.sum()):,} without the FSA's own point ({no_point.mean():.1%})")
+
+    # Tier 2: the postcode unit's centroid (OS Code-Point Open), for a FULL
+    # postcode only. A private address has no postcode or an outward code
+    # ("E1") and is never placed (owner, 2026-09-28).
+    pc = df["PostCode"].str.upper().str.strip()
+    full = pc.str.match(FULL_POSTCODE)
+    cp = codepoint()
+    key = pc.str.replace(r"\s+", "", regex=True)
+    joinable = no_point & full & key.isin(cp.index)
+    ll = cp.loc[key[joinable], ["latitude", "longitude"]].to_numpy()
+    df.loc[joinable, ["latitude", "longitude"]] = ll
+    df.loc[joinable, "placement"] = "postcode_centroid"
+    outward = no_point & pc.str.match(OUTWARD_POSTCODE)
+    print(f"    placed at their postcode's centroid: {int(joinable.sum()):,}")
+    print(f"    full postcode not in Code-Point (left unplaced): {int((no_point & full & ~joinable).sum()):,}")
+    print(f"    outward code only - a private address, never placed: {int(outward.sum()):,}")
+    print(f"    no usable postcode (left unplaced): {int((no_point & ~full & ~outward).sum()):,}")
+    unplaced = no_point & ~joinable
+    print(f"  {int(unplaced.sum()):,} NOT placed ({unplaced.mean():.1%}); by authority, the most:")
     by = df.assign(u=unplaced).groupby("LocalAuthorityName")["u"].agg(["sum", "mean"])
     for name, r in by.sort_values("mean", ascending=False).head(6).iterrows():
         print(f"    {name:<26} {int(r['sum']):>5,} ({r['mean']:.1%})")
@@ -99,7 +140,7 @@ def main():
 
     out = df.rename(columns={"FHRSID": "fhrsid", "BusinessName": "business_name",
                              "LocalAuthorityName": "authority"})[
-        ["fhrsid", "business_name", "latitude", "longitude", TAX.VALUE_COLUMN, "authority"]]
+        ["fhrsid", "business_name", "latitude", "longitude", TAX.VALUE_COLUMN, "authority", "placement"]]
     out.to_csv(config.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")
     bucket = out[TAX.VALUE_COLUMN].map(lambda v: TAX.classify({TAX.VALUE_COLUMN: v}))
     print(f"\n  {len(out):,} storefronts -> {config.BUSINESSES_CLEAN_CSV.relative_to(config.ROOT)}")

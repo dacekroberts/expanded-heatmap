@@ -107,6 +107,17 @@ if __name__ == "__main__":
 
     fetch_boundary(args.force)
 
+    meta = json.loads(get(config.CODEPOINT_META_URL))
+    if config.CODEPOINT_ZIP.exists() and not args.force:
+        print(f"  {'codepo_gb.zip':28} cached ({config.CODEPOINT_ZIP.stat().st_size:,} bytes)")
+    else:
+        body = get(config.CODEPOINT_URL)
+        if not body[:4].startswith(b"PK\x03\x04"):
+            sys.exit("  Code-Point Open: not a zip - not the file asked for")
+        config.CODEPOINT_ZIP.write_bytes(body)
+        print(f"  {'codepo_gb.zip':28} {len(body):,} bytes, edition {meta.get('version')}")
+    codepoint_edition = meta.get("version")
+
     from pipeline import osm
     els, host = osm.fetch(config.OSM_ROUTES_QUERY, config.OSM_ROUTES_JSON, force=args.force)
     rels = [e for e in els if e.get("type") == "relation"]
@@ -131,7 +142,8 @@ if __name__ == "__main__":
             "fsa_authorities_url": config.FSA_AUTHORITIES_URL,
             "fsa_published": {a["Name"]: a["LastPublishedDate"][:10] for a in auths},
             "fsa_extract_dates": extracts,
-            "fsa_extract_range": [dates[0], dates[-1]] if dates else []}
+            "fsa_extract_range": [dates[0], dates[-1]] if dates else [],
+            "codepoint_url": config.CODEPOINT_URL, "codepoint_edition": codepoint_edition}
     print(f"  FSA extract dates {dates[0]} to {dates[-1]}")
     config.PROVENANCE_JSON.write_text(json.dumps(prov, ensure_ascii=False, indent=2),
                                       encoding="utf-8")

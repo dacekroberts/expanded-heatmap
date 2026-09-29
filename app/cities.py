@@ -1338,7 +1338,7 @@ CITIES = [
         "data_age": "Extracts of 2026-09-09 to 2026-09-16",
         "rail_extra": "Suburban rail",
         "record_kind": "Food hygiene register",
-        "categories": "Food licences only",
+        "categories": "Food premises only",
         "blurb": "Underground, DLR, Elizabeth line and 6 Overground lines",
         "region": "Europe",
         "country": "United Kingdom",

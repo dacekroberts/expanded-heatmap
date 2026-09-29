@@ -1,5 +1,5 @@
 {
-  "fetched_utc": "2026-09-29T02:25:10+00:00",
+  "fetched_utc": "2026-09-29T02:47:14+00:00",
   "fsa_authorities_url": "https://api.ratings.food.gov.uk/Authorities",
   "fsa_published": {
     "Barking and Dagenham": "2026-09-17",
@@ -74,5 +74,7 @@
   "fsa_extract_range": [
     "2026-09-09",
     "2026-09-16"
-  ]
+  ],
+  "codepoint_url": "https://api.os.uk/downloads/v1/products/CodePointOpen/downloads?area=GB&format=CSV&redirect",
+  "codepoint_edition": "2026-08"
 }
