@@ -43,7 +43,8 @@ dense-looking city may simply have more complete records.
   barber, beauty and laundry registers of four), so the other fifteen have no data
   at all.
 - **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, the
-  nine Brazilian cities (IBGE's 2022 census walk), Sydney (the City of
+  nine Brazilian cities (IBGE's 2022 census walk), Buenos Aires (the city's
+  2022–2024 land-use survey, every ground floor on every block), Sydney (the City of
   Sydney's 2022 floor-space survey, one council only) and Melbourne (the City
   of Melbourne's 2024 land-use census, one council only).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
@@ -68,7 +69,9 @@ dense-looking city may simply have more complete records.
 - **Reason:** each country and city publishes what it publishes. The pages for
   Mexico City, Guadalajara, Monterrey, Madrid and Barcelona already say their density
   is "not comparable" with licence-register cities; Montréal's makes the point without
-  those words (checked 2026-09-28).
+  those words (checked 2026-09-28). Buenos Aires's page says to read its
+  density "as a survey, not a register"; London's, Glasgow's and Newcastle
+  (Regional)'s "as a register, not a street survey" (checked 2026-09-29).
 
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
@@ -127,7 +130,10 @@ and districts no metro reaches.
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
   Transilien, the TER around Marseille, CPTM Linhas 7, 8 and 10–13, SuperVia's other
   three lines, Fortaleza's and Recife's diesel lines, Korail's Daegyeong Line (Daegu)
-  and Donghae Line (Busan).
+  and Donghae Line (Busan), National Rail in London, Glasgow's suburban lines
+  (the Argyle and North Clyde lines and the rest), Northern's trains in Tyne and
+  Wear, Buenos Aires's commuter railways, NSW TrainLink (Sydney), and V/Line and
+  the event-day Flemington Racecourse line (Melbourne).
 - **Not mentioned either way:** Montréal (exo), Mexico City (Tren Suburbano).
   Montréal's REM is drawn from 2026-09-27 (the tram rescope).
 - **Reason:** a spacing, frequency and coverage test, applied line by line (EC
@@ -155,7 +161,12 @@ run on top of a metro network.
   518 stops for about 7 more points of storefronts in the rings; owner,
   2026-09-28),
   London (Tramlink: about one more point of storefronts in the rings;
-  owner, 2026-09-28).
+  owner, 2026-09-28), Buenos Aires (the Premetro, a surface light-rail line from
+  Línea E's southern end, and the heritage tramway), Sydney (light rail L1–L3,
+  22 stops in the council area: about ten more points, 83.2% to 93.0% on the
+  brief's measure; owner, 2026-09-28), Melbourne (22 tram routes, 155 stops in
+  the council area: about three more points, 96.0% to 99.1%; owner,
+  2026-09-28). The Sydney and Melbourne pages state the effect.
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
   mover), Daegu's Line 3 monorail, Busan's Line 4 (a rubber-tyred light metro, which
@@ -174,7 +185,8 @@ are drawn on the line but get no ring. Some cover several municipalities because
 register covers them all, or because the rail network only makes sense that way.
 - **Labelled "(Regional)":** Miami (Miami-Dade County), Vancouver (with Surrey),
   Guadalajara (4 municipios), Monterrey (4 municipios), Lille (11 communes), Fortaleza (4), Porto Alegre (6),
-  Recife (4), Santos (with São Vicente), Taipei (with New Taipei).
+  Recife (4), Santos (with São Vicente), Taipei (with New Taipei), Newcastle
+  (Regional) (the five Tyne and Wear districts).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -186,7 +198,8 @@ register covers them all, or because the rail network only makes sense that way.
   data).
 - **Regional maps that count a municipality with no station:** Fortaleza (Caucaia),
   Recife (Cabo de Santo Agostinho). Guadalajara leaves out Tonalá for having none.
-- **Lose the most stations to the boundary:** Seoul (223), Paris (76), Osaka (76),
+- **Lose the most stations to the boundary:** Seoul (223), Melbourne (199),
+  Sydney (157; both keep to one council's area), Paris (76), Osaka (76),
   Copenhagen (59), Washington
   D.C. (58), Tokyo (55), Los Angeles (54), Rotterdam (52), Barcelona (50), Madrid (49), Boston (43).
 - **Reason:** a register covers one jurisdiction, so rings outside it would read as
@@ -208,7 +221,7 @@ other cities.
 others most of the city is beyond walking distance of the network. That depends on
 how far the network reaches, not on the data.
 - **90% or more inside the rings:** Barcelona 100%, Paris 98%, Osaka 98%, Tokyo 98%
-  (of the eight wards with data), Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
+  (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
 - **Under 25%:** Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte
   18%, Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
   Recife 23%, Los Angeles 24%, San Diego 24%.
@@ -223,7 +236,8 @@ name at their home.
   Rotterdam, Riga (the kind of place, or the premises' registered name), Berlin (the
   chamber's own label for the kind of business; the register has neither names nor
   street addresses), Sydney (the ANZSIC class; the survey publishes neither names
-  nor addresses).
+  nor addresses), Buenos Aires (street address and the surveyed use; the survey
+  records uses, not who runs them).
 - **Mostly addresses:** Milan (a shop sign on about 1 pin in 7), Amsterdam's shop
   layer, the French cities where SIRENE has no sign or usual name (only about 40% of
   Paris rows and 43% of Marseille rows are named, per the Marseille brief).
@@ -256,12 +270,16 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   rebuilt to 2026-07-31), Tokyo (each ward's list has its own date: Chuo's and
   Koto's hold only permits from June 2021 to late 2022, Shinjuku's is a 1 January
   2023 snapshot, the other five run to 2026; `pipeline/tokyo/config.py`
-  `_FOOD_AS_OF`).
+  `_FOOD_AS_OF`), Buenos Aires (each block surveyed once, 2022 to 2024), Sydney
+  (the 2022 survey, taken every five years), Melbourne (the 2024 census).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
   Amsterdam, Rome, the Brazilian cities, Rotterdam, Hong Kong, Riga, Seoul, Daegu,
   Busan, Taichung, Taoyuan, Taipei, the six Japanese cities, Berlin (the register's monthly
   date, 2026-09-01), London (each borough's extract date, 2026-09-09
-  to 2026-09-16).
+  to 2026-09-16), Glasgow (the council's extract date, 2026-09-14), Newcastle
+  (Regional) (each council's, 2026-09-09 to 2026-09-16), Buenos Aires (the
+  survey years, in the prose), Sydney (the survey year) and Melbourne (the
+  census year).
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -291,7 +309,11 @@ really shopfronts. Several pages say which way their map leans.
   laundries, many bakers and butchers - are not chamber-of-commerce members);
   London (about one food storefront in
   twenty has no location and no full postcode and is not placed, a quarter in
-  Redbridge and a fifth in Havering).
+  Redbridge and a fifth in Havering); Glasgow (about one food storefront in a
+  hundred has no map point and is not placed); Newcastle (Regional) (about one
+  in fourteen unplaced, most in North Tyneside and Sunderland); Buenos Aires
+  (shopfronts whose use the surveyors could not identify, 7.2% and 32% in Villa
+  Riachuelo, are dropped, and shops inside malls and arcades are not itemised).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
@@ -304,7 +326,8 @@ really shopfronts. Several pages say which way their map leans.
   mark closures, and those are left out); Berlin (closures and moves reach the
   register late; registered premises may have no shopfront, including web shops and
   business centres; about 1.2 to 1.5 times OpenStreetMap's restaurants, cafés and
-  bars at four station areas).
+  bars at four station areas); London, Glasgow and Newcastle (Regional) (a
+  premises stays listed until the council removes it, as each page says).
 - **Undisclosed on the city page:** San Francisco (only about 37% of rows carry a
   NAICS code) and Los Angeles (about 9% carry none), so both are floors. San Diego
   undercounts neighbourhoods registered under their own name. All three are open
@@ -316,7 +339,8 @@ really shopfronts. Several pages say which way their map leans.
 everywhere, but a few businesses land differently depending on how a country
 classifies or licenses them.
 - **Car dealers:** counted as Retail in the NAICS cities, Mexico, Madrid, Oslo,
-  Copenhagen, Berlin and Miami. Not counted in France: NAF puts them in division 45, and
+  Copenhagen, Berlin, Miami, Buenos Aires, Sydney and Melbourne (ANZSIC 39, with
+  fuel retail; the Sydney page says so). Not counted in France: NAF puts them in division 45, and
   `france_naf.py` keys on 47, 56 and 96 only.
 - **Massage:** a Personal service in Calgary and Edmonton, where Alberta does not
   regulate it, and in Toronto's non-registered "holistic centres"; excluded as health
@@ -324,12 +348,14 @@ classifies or licenses them.
 - **Adult premises:** body-rub and similar premises are excluded on sensitivity in
   Calgary, Edmonton, Toronto and Vancouver; in Berlin, escort and prostitution leave
   with the "other personal services" catch-all, while non-medical massage (a class of
-  its own) is kept. UNKNOWN for other cities.
+  its own) is kept. Brothels (ANZSIC 9534) are excluded by class in Sydney and
+  Melbourne (owner, 2026-09-28), and both pages say so. UNKNOWN for other cities.
 - **Street stalls:** excluded in Mexico City, Guadalajara and Monterrey; market-stall trading is
   excluded by code in France; food trucks and stalls (permits valid city-wide) are
   excluded in the six Japanese cities, but Fukuoka's yatai (屋台, fixed street
   stalls on long-term permits) are counted as Food service (owner).
-- **Web shops:** excluded by code in France; cannot be excluded in Oslo, Copenhagen,
+- **Web shops:** excluded by code in France, and by class in Sydney and Melbourne
+  (ANZSIC 4310, non-store retailing); cannot be excluded in Oslo, Copenhagen,
   Prague or Berlin (Berlin leaves out general non-food retail, the broad registration
   most online and market traders take).
 - **One premises with several licences:** counted once almost everywhere; counted
@@ -337,7 +363,8 @@ classifies or licenses them.
   as Food.
 - **Legend labels:** show code prefixes in the NAICS, SCIAN, NAF, SN2025, DB25 and
   CZ-NACE cities ("Retail — NAICS Code: 44/45", "Retail - NAF 47"); plain names
-  in the cities with a local taxonomy.
+  in the cities with a local taxonomy, and in Sydney and Melbourne although
+  ANZSIC is a national classification.
 - **Reason:** national classifications and provincial or state regulation.
 
 ### 12. RESOLVED 2026-09-27 - every map now has a whole-city heat layer
@@ -522,13 +549,13 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Germany** | | | | | |
 | Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,154 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
 | **United Kingdom** | | | | | |
-| London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,360 / 29,210 / — | No Personal services; Retail = food shops only ("Food shops") |
+| London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,360 / 29,214 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Glasgow | Food hygiene register | Glasgow City Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 405 / 1,588 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,697 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 | **Australia** | | | | | |
-| Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,768 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
+| Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,769 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)

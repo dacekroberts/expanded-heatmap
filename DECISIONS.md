@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-29**
+
+- [City-landed sweep: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; two worktrees retired](#2026-09-29---city-landed-sweep-buenos-aires-glasgow-newcastle-sydney-melbourne-two-worktrees-retired)
 
 **2026-09-28**
 
@@ -202,6 +206,38 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - City-landed sweep: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; two worktrees retired
+
+- **The inconsistency list is current for the five cities.** Their rows in
+  tables A-D, added by the build sessions, were checked against the maps,
+  the ring shares, `excluded_stations.csv`, the pages and DECISIONS. Two
+  table B counts were one off and corrected to the maps' layer menus:
+  London's Food service 29,210 to 29,214 (after the flat rule), and Sydney's
+  2,768 to 2,769 (after 9539).
+- **Themes updated, none renumbered:**
+  - 1: Buenos Aires added to street surveys.
+  - 3: the suburban lines each new city leaves out, by name.
+  - 4: trams not drawn in Buenos Aires, Sydney and Melbourne, with each
+    in-ring share if drawn.
+  - 5: Newcastle (Regional) added; Melbourne 199 and Sydney 157 stations
+    lost at the boundary.
+  - 7: Melbourne 96% added to the 90%-and-over band.
+  - 8: Buenos Aires added to "no names".
+  - 9: the dates for all five.
+  - 10: the undercounts and overcounts the new pages state.
+  - 11: car dealers, brothels, web shops and legend styles in Buenos Aires,
+    Sydney and Melbourne.
+- **Checks:** the inconsistency list, ring shares, render currency, city
+  registry, inline arrays and scope checks all pass for 62 cities. No "only
+  city" claim was made false.
+- **Retired, on the owner's word:** the `berlin` worktree (last on
+  `worktree-buenos-aires`) and the `glasgow` worktree (last on
+  `worktree-melbourne`). In each, `data/` and `.venv-lean` were junctions,
+  unlinked non-recursively; `check_worktree_data.py` found nothing to lose,
+  and the shared `data/` was checked intact. The five merged branches
+  (buenos-aires, glasgow, newcastle, sydney, melbourne) were deleted
+  locally. `origin/worktree-buenos-aires` is left for the owner.
 
 ### 2026-09-28 - Second batch live after the owner's reboot, checked on the live URL
 
