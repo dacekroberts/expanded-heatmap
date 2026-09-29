@@ -76,7 +76,7 @@ negative, kept out.
 | Bengaluru | IN | Namma Metro | R - BBMP's hosts time out (2026-09-28, owner) |
 | Tashkent | UZ | Tashkent Metro (kn) | R - every host refuses this machine or needs a login (2026-09-28, owner) |
 | Hanoi | VN | 2 lines (kn) | R - the city's hosts time out (2026-09-28, owner) |
-| Ho Chi Minh City | VN | 1 line (kn) | D - a CAPTCHA wall on the open-data catalogue; the owner can pass it (2026-09-28, owner) |
+| Ho Chi Minh City | VN | 1 line (kn) | C - behind the CAPTCHA (passed by the owner): 7 months of food certificates, no business type, no placement (2026-09-28, owner) |
 | Perth | AU | Transperth, ~80 stations | C - property land-use codes only, City of Perth (2026-09-28, owner) |
 | Ankara | TR | Ankaray, M1–M4 | C - Istanbul's shape: the districts publish no licence lists (2026-09-28, owner) |
 | Melbourne (City of Melbourne) | AU | City Loop, Metro Tunnel, CBD trams | B - CLUE covers the City of Melbourne only (2026-09-28, owner) |
