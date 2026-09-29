@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**200 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Category fix batch re-run: 32 cities moved, 8 did not; no new personal exposure](#2026-09-29---category-fix-batch-re-run-32-cities-moved-8-did-not-no-new-personal-exposure)
 - [Category check: the owner's calls on the pending departures](#2026-09-29---category-check-the-owners-calls-on-the-pending-departures)
 - [Category check: three older calls confirmed (owner)](#2026-09-29---category-check-three-older-calls-confirmed-owner)
 - [The cross-city category rules made a check; 45 departures found and left for the owner; two claims in category_rules.md out of date](#2026-09-29---the-cross-city-category-rules-made-a-check-45-departures-found-and-left-for-the-owner-two-claims-in-category_rulesmd-out-of-date)
@@ -239,6 +240,67 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Category fix batch re-run: 32 cities moved, 8 did not; no new personal exposure
+
+- **The owner's approved category fixes (commit 12501db) were re-run across 40
+  cities; 32 maps moved and were committed (244133d, 45f449d).** Each city ran
+  as a heavy job, with master's `data/<city>/processed` saved and restored
+  around it and the baseline written by `drift_check.py --update-baseline`.
+  Los Angeles and Washington D.C. ran their steps with the network allowed
+  first, because their geocode-cache keys changed with the batch. Zero drift:
+  San Diego, Montréal, and the six Japanese cities, where the 露店 form matched
+  no mapped row (the work list's "about 34" was never confirmed against a
+  mapped row). Storefront rows before -> after, counted with
+  pandas (a line count had given Los Angeles -108, because of embedded
+  newlines):
+  - *Pawnbrokers in*: Mexico City 279,804 -> 280,185 (+381 casas de empeño),
+    Guadalajara +288, Monterrey +280, D.C. +4; Berlin +35 (64922), inside a
+    net -1; Taiwan's 典當服務 +523 Taipei, +262 Taichung, +134 Taoyuan.
+  - *Nonstore out* (NAICS 2022, heating fuel and bottled gas): San Francisco
+    -39 (445132 -24, 457210 -15), Los Angeles 60,556 -> 60,520 (445132 -36),
+    Paris -19, Marseille -3, Toulouse -4, Lille -6, Rennes -3, Berlin -36;
+    Taiwan's 桶裝瓦斯零售 and 煤油零售 -298 Taipei, -178 Taichung, -204
+    Taoyuan. Taoyuan is the one Taiwanese city that fell overall
+    (43,592 -> 43,532).
+  - *Repairs out*: Barcelona 35,958 -> 35,309 (`Arranjaments` -649); Buenos
+    Aires `CERRAJERIA` -469, `COMPOSTURA DE CALZADO` -226, `ARREGLO DE ROPA`
+    -214, `SASTRERIA` -35; Chicago -61; Dublin -28 (with its internet cafés,
+    -27, and five recreation pins, 12,904 -> 12,844 in all); Riga -93 across
+    workshops and stands.
+  - *Petrol stations in*: Buenos Aires +266 (63,443 -> 62,765 net), Riga +88
+    (6,730 -> 6,725 net).
+  - *Nightclubs in*: Madrid +197 (`DISCOTECAS Y SALAS DE BAILE`), Taiwan +26,
+    Brazil +201 `BOATE`.
+  - *Stalls, canteens and mobile food out*: Madrid's situados -63; Bucharest's
+    trailers -4 (of the work list's 7); Brazil's
+    canteens and refectories -32 and online shops -29.
+  - *Bugs*: Prague -21 (the bare `969` catch-all); Taiwan's shoe-shine -14;
+    Brazil's ESTUDIO DE TATUAGEM +180 shown, with more hidden.
+- **Brazil's ESTUDIO fix also kept `ESTUDIO DE BELEZA` (+169 shown, more
+  hidden),** alongside the approved tattoo studios. A beauty studio is hair and
+  beauty, which every city counts as a personal service, so this follows the
+  precedent rather than departing from it. The old rule dropped these as
+  offices. With the 356 rows whose description step 2 hides as a probable
+  personal name, the nine Brazilian cities gained 832 storefronts together
+  (São Paulo +246, Rio +147, Fortaleza +154).
+- **`check_personal_exposure.py` was run before and after on all 32 moved
+  cities: nothing new is exposed.** Everywhere, the displayed names carry no
+  email, no phone number, and no new person-like name at a residential unit.
+  The person-like heuristic rose where pins were added:
+  - Mexico City +39 on 209 new pins, below its 32% base rate.
+  - Madrid +42 on 137. These are shop-sign names from the register, none at a
+    residential unit.
+  - São Paulo +6.
+  It fell where repairs left: Barcelona 9,979 -> 9,753. D.C. added one
+  fallback-only pin under an entity name, not a sole proprietor.
+- **`app/ring_shares.json` was regenerated (`check_ring_shares.py --write`),
+  and `check_all.py` passes 26 of 26.** `app/macro_facts.json` is still
+  written only at landing, with the new processed data swapped in.
+  `check_category_continuity.py` now shows only the three queued Stockholm
+  rows and Boston's General On Premise row. Still to do: the per-city wording
+  in `docs/excluded_categories.md`, drafted for the owner, and landing at
+  review time.
 
 ### 2026-09-29 - Category check: the owner's calls on the pending departures
 

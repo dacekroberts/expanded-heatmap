@@ -166,11 +166,14 @@ Desktop is unaffected — the label is fully visible there.
   `docs/category_rules.md`, and the owner approved fixing all of them. The
   work list is `docs/handoff_category_fixes_2026-09-29.md`: 17 taxonomies or
   configs and about 45 cities to re-render, run as the exclusions batch was.
-  - Start it in a fresh session. The owner picks the time; weekly usage was
-    81% on 2026-09-29.
-  - Land `stockholm-catering` first.
+  - Coded and re-run on branch `category-continuity` (2026-09-29): 32 maps
+    moved, the privacy check is clean, and `check_all` passes (DECISIONS,
+    "Category fix batch re-run"). Left: the owner approves the per-city
+    wording in `docs/excluded_categories.md`; `app/macro_facts.json` is
+    written with the saved processed files at review time; then landing.
+  - Stockholm's torghandel stall waits for `stockholm-catering` to land.
   - Still with the owner: Boston's General On Premise licences (measure
-    first) and Buenos Aires' `CERRAJERIA`.
+    first).
 - [ ] **Next cross-city discrepancy audits (owner, 2026-09-29), AFTER the
   exclusions batch lands.** Each is read-only and runs one at a time; each ends in rules
   for the owner to decide, as the fringe-category audit did.
