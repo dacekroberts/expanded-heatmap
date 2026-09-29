@@ -333,7 +333,22 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   and "Tommys Farstaplan, Food truck" as `pending(...)`. **Whichever of the two
   branches lands second, turn those two into `loc(...)` in the
   sweden_livsmedel column in that merge**, or the check reports them stale
-  and the pre-push hook fails.
+  and the pre-push hook fails. **Correction (category session, 2026-09-29):
+  the edit is `pending(` -> `fixed(`, not `loc(`** (same arguments), on the
+  Westers Catering and Tommys Farstaplan rows (~1549, ~1557); delete the
+  `("sweden_livsmedel", "mobile_unit")` entry from QUEUED_ELSEWHERE (~1572) and
+  reword its no_counter_food entry to the torghandel stall, a name rule now
+  that stockholm-catering has landed. The torghandel stall row stays
+  `pending`. Then `python scripts/check_category_continuity.py` and its
+  `--selftest`: 2 queued plus Boston's pending row, OK.
+- **category-continuity's new processed files** (40 cities, 8 identical to
+  master) are in `data/_review_category-continuity_2026-09-29/new_processed/`,
+  with master's copies in `master_processed/` beside them (585 MB, local
+  only). Swap them in for `check_macro_facts.py --write`, swap master's back,
+  and swap in again at the push. Branch at 41b44cf; exposure verdicts clean
+  for all 32 moved cities (DECISIONS "Category fix batch re-run"). Its
+  per-city `docs/excluded_categories.md` wording still needs the owner's
+  approval.
 - The Stockholm worktree was removed 2026-09-29 (owner); `stockholm-catering`
   is kept, locally and on origin.
 - **`suwon`** (page 69; 33,433 storefronts, 14 stations) and **`bucheon`**
