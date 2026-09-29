@@ -338,5 +338,10 @@
   "in_ring": 13003,
   "all": 23481,
   "map_blob": "f03b1f6fca7ca4cee7c4c087a53879fca61dbe76"
+ },
+ "aarhus": {
+  "in_ring": 1300,
+  "all": 5102,
+  "map_blob": "d31d67780ddd1ba2f2db7e50d98ff958f3c74b4a"
  }
 }
