@@ -15,15 +15,15 @@ open questions:
 - the register's terms carry an **uncapped indemnity accepted by use** (Hong
   Kong's shape, which the owner accepts source by source);
 - the address layer that joins so well is **not covered by any terms at all**;
-- **SacRT's timetable is still unread**. Under the light-rail test that is
-  a disclosure, not a gate.
+- ~~SacRT's timetable is unread~~ **read 2026-09-29** on SacRT's schedule
+  pages: Blue and Gold every 15 minutes by day.
 
 | | |
 |---|---|
 | Rail | SacRT light rail, Blue / Gold / Green: **39 stations inside the city** (Blue 26, Gold 18, Green 9; OSM), 765 m median gap |
 | Register | the City's **Business Operation Tax Information** (ArcGIS item `f4ee567a…`): 63,904 rows, **no geometry** |
 | Storefronts (Active, unexpired, `Location_City = SACRAMENTO`) | retail **~1,670** · food **~1,130** · personal services **~730** |
-| Coordinates | an address join: **93.0%** of a 200-row sample against the City's All Addresses layer (but see the licence) |
+| Coordinates | **the US Census Bureau batch geocoder** (owner, 2026-09-29); the City's All Addresses layer (93.0% of a sample, but covered by no terms) is not used |
 | In the 0.6 mi ring | **~38.2%** (186 placed sample rows; 12.4% at 0.3 mi) |
 | Rings | **standard 0.1 / 0.2 / 0.3 / 0.6 mi** (765 m) |
 | Projected CRS | **EPSG:32610** (UTM 10N, 121.49° W) |
@@ -52,16 +52,25 @@ open questions:
   build. An alias merges only what was looked at (Oslo's rule). Houston's
   Capitol / Rusk couplets were one station each; here the names differ
   more, so look before merging.
-- **Frequency, the handoff's "read the timetable first"**: under the owner's
-  light-rail test, frequency **gates only converted railway**, and SacRT's
-  track was built as light rail (1987 onward; the Gold Line's Folsom
-  extension runs on a former freight right-of-way, **built new as light-rail
-  track**, not an operating railway converted in service like Aarhus's
-  Odderbanen). **So the timetable is a page disclosure, not a gate.** That
-  reading is a judgment and is flagged for the owner. The read itself:
-  **from the owner's browser** (SacRT's schedule pages are images; the
-  Priority 2 lane of reads from the owner's browser), or the feed once its
-  certificate is renewed.
+- **Frequency: READ 2026-09-29 on SacRT's own schedule pages**
+  (`sacrt.com/routes-schedules/#533` and `#507`, now served as text tables;
+  the GTFS on `apps.sacrt.com` still serves an expired certificate and was
+  not fetched). Weekdays:
+  - **Blue** (Watt/I-80 → CRC): every **15 min** from 05:03 to 17:48, then
+    every 30 min to 22:48.
+  - **Gold**: **4 an hour** at Sacramento Valley Station, the in-city end
+    (every 15 min, 05:44 to 18:59), and 3 an hour from Historic Folsom;
+    every 30 min in the evening.
+
+  **Both clear 15 minutes by day**, so the question of whether frequency
+  gates this track does not arise. The page states the 30-minute evenings.
+- ⚠️ **The Green Line**: SacRT's schedule pages list **only Blue and Gold**.
+  The Gold Line's stop list now ends at 8th & K, 8th & H and Sacramento
+  Valley Station, and no schedule serves `7th & Richards / Township 9`.
+  OSM's two Green relations (2379220, 2379221) may be **stale**. **At build,
+  confirm on SacRT's site whether the Green Line runs.** If it does not,
+  drop its relations and any station only it served, and re-count (39 inside
+  includes Green's 9).
 
 ---
 
@@ -109,7 +118,8 @@ number + street name. Of the matches: Business 120, Resident 26, both 20,
 unknown 20. So `MAILTYPE` is a usable home signal, like Houston's `addrtype`
 but better filled.
 
-**⚠️ But no terms cover it.** It is a public ArcGIS item **not shared to the
+**⚠️ But no terms cover it, so it is NOT used: the owner chose the Census
+geocoder, 2026-09-29.** It is a public ArcGIS item **not shared to the
 City's Open Data portal** (`groupIds: []`), and every licence field is empty.
 The portal's Terms define Data as what is "made available for download
 through" data.cityofsacramento.org. **Alternatives, in order:**
@@ -135,7 +145,8 @@ attribution clause and nothing to display.
   or downloading and using the Data"**, and **this brief's measurement pulled
   the 24,040 Active rows** (without the owner, phone or mailing columns) on
   2026-09-29. That may already count. It is recorded here and in `DECISIONS.md`
-  so the owner decides with that fact in view.
+  so the owner decides with that fact in view. **ACCEPTED by the owner,
+  2026-09-29**, with that fact stated.
 - 🟠 **The Hub page shows "No License Provided / Request permission to use"**,
   Esri's label for an empty licence field. The Terms incorporate anything
   "stated … on the page from which the Data is accessed". Read permissively,
@@ -150,21 +161,28 @@ attribution clause and nothing to display.
 
 ## Build-time calls
 
-1. 🟠 **Owner: the indemnity** (accept, as for Hong Kong, or not build).
-2. 🟠 **Owner: "Request permission to use"**, as boilerplate or as a term.
-3. 🟠 **Owner: the address source**: Census geocoder (recommended), the
-   county's points, or the uncovered City layer.
-4. **Owner: frequency as a disclosure, not a gate** (the Gold Line's right of
-   way), and the timetable read from the owner's browser.
-5. The couplet aliases; pet supplies versus grooming; `MAILTYPE = Resident`
-   rows (drop, as recommended for Houston's `IS` at a residential point).
+1. ✅ **The indemnity: ACCEPTED (owner, 2026-09-29)**, as Hong Kong's was.
+   Recorded in `docs/data_sources.md` beside Hong Kong's.
+2. ✅ **"Request permission to use" is Esri's label for an empty licence
+   field, not a term (owner, 2026-09-29)**: the City's own Terms grant use.
+3. ✅ **Address source: the US Census Bureau batch geocoder (owner,
+   2026-09-29)**, `pipeline/census_geocoder.py`. The City's All Addresses
+   layer is not used. Measure the match rate at build and apply the bounds
+   check. The Census answer carries no home signal, so `MAILTYPE` is lost;
+   the `ON FILE` rows and the excluded individual categories remain the home
+   screen.
+4. ✅ **Frequency: read 2026-09-29 on SacRT's schedule pages** (below).
+   Blue and Gold both run every 15 minutes by day, so the gate question is
+   moot.
+5. The couplet aliases; pet supplies versus grooming; **the Green Line**
+   (below).
 
 **Flag for the cleanup role (held macro-map work)**: Sacramento takes the
 light-rail network colour.
 
 ## Still unknown
 
-- SacRT's current frequency.
+- Whether the Green Line still runs (build-time check, above).
 - The Census geocoder's match rate on this register.
 
 ```brief-checks

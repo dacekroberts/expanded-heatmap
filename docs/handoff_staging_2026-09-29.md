@@ -67,20 +67,17 @@ and every owner call are in DECISIONS. **The groundwork now lives in
 **DONE 2026-09-29: build briefs for Band A's five light-rail cities**
 (`docs/build_briefs/{bergen,aarhus,buffalo,houston,sacramento}.md`, every
 checks block passing; DECISIONS "Light-rail build briefs"). **Bergen is
-ready to build with no owner call.** The others' owner calls:
-- **Aarhus**: 20, 32 or 39 stations (the Odder section's per-stop frequency
-  decides 32). **The tram audit read Aarhus's frequency from Rejseplanen's
-  GTFS, which Copenhagen declined to download**: the owner's word on using it
-  for measurement only, or a read of Midttrafik's planner.
-- **Buffalo**: rail from OSM (recommended) or NFTA's feed under its
-  trademark clause.
-- **Houston**: build at ~7% in-ring (recommended, stated on the page) or
-  reconsider; rail from OSM (METRO's agreement is heavy) and the label
-  wording.
-- **Sacramento**: the Open Data Terms' uncapped indemnity (accepted by use;
-  the brief's measurement already pulled the rows), "Request permission to
-  use", the address source (Census geocoder recommended), and frequency as a
-  disclosure rather than a gate.
+ready to build with no owner call.** The owner's answers (2026-09-29)
+settled most of the rest (DECISIONS "Light-rail briefs: the owner's calls"):
+Rejseplanen not used (Aarhus's frequency read from Midttrafik's own
+timetables); rail from OSM for Buffalo and Houston; Sacramento's indemnity
+accepted and its addresses through the Census geocoder; SacRT's timetable
+read in the browser. **Then all four remaining calls were answered
+(owner, 2026-09-29)**: Aarhus's 20-station scope confirmed; Houston built as
+scoped at ~7% in-ring with the share stated, lines labelled Red / Green /
+Purple Line; Sacramento's "Request permission to use" read as Esri
+boilerplate. **All five cities are ready to build**; the one build-time
+check left is whether SacRT's Green Line still runs.
 
 **Still open with the owner** (none blocks the France kit):
 - **Build order** beyond France: Czechia, Odense and Latvia, the US three
