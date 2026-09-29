@@ -1,7 +1,9 @@
 # Philadelphia: permission request — SENT 2026-09-21
 
 **Status: drafted and SENT 2026-09-21** by the owner, to `maps@phila.gov`
-copying `LIGISTEAM@phila.gov`. No reply yet.
+copying `LIGISTEAM@phila.gov`. **No reply as of the one-week follow-up on
+2026-09-28** (the owner, checked that day). The next step - wait, chase once,
+or phone - is the owner's call.
 
 **Follow-up due 2026-09-28** — one week, at the owner's request. If there is
 no reply by then, the options are to wait longer, to chase once, or to escalate

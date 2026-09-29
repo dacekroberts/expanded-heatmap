@@ -589,11 +589,12 @@ every key, account and letter:
 - [ ] **Philadelphia's permission request** (`docs/gated_access.md` item 12;
   DECISIONS, "Philadelphia: ask for permission, stay up on a reasoned position
   meanwhile"). The footer (`components._UNSETTLED_TERMS`) discloses it meanwhile.
-    - [ ] **Follow up on 2026-09-28** (one week), at the owner's request. The
+    - [x] **Followed up 2026-09-28** (one week), at the owner's request. The
       owner SENT the request on 2026-09-21 to `maps@phila.gov`, copying
       `LIGISTEAM@phila.gov` (text in
-      `docs/notifications/philadelphia-permission-request.md`). No
-      reply as of 2026-09-21. If still silent: wait, chase once, or ring the Open
+      `docs/notifications/philadelphia-permission-request.md`). **No reply as
+      of 2026-09-28** (the owner, checked that day).
+    - [ ] **Owner to choose the next step:** wait, chase once, or ring the Open
       Data Program. **Silence is not consent** - the interim position holds on
       the reasoned reading and the disclosure, not on the absence of an
       objection, and it does not strengthen with time. Sending it is the owner's to do. **Nothing in this project may
