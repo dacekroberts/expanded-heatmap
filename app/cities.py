@@ -1806,6 +1806,27 @@ CITIES = [
         # 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Suwon",
+        "lat": 37.2636,
+        "lon": 127.0286,
+        "page": "pages/69_Suwon_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 1, the Suin–Bundang and Shinbundang Lines",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 45.3 px measured in the local app's
+        # own document (2026-09-29, seven entries reproduced). Labelled in the
+        # Seoul Capital Area region; check_macro_labels.py passes every region
+        # at 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

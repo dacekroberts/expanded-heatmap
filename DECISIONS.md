@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**215 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**216 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
@@ -39,6 +39,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Light-rail briefs: the owner's calls, and two timetables read (staging)](#2026-09-29---light-rail-briefs-the-owners-calls-and-two-timetables-read-staging)
 - [Light-rail build briefs: Buffalo, Houston and Sacramento (staging)](#2026-09-29---light-rail-build-briefs-buffalo-houston-and-sacramento-staging)
 - [Category check: the owner's calls on the pending departures](#2026-09-29---category-check-the-owners-calls-on-the-pending-departures)
+- [Suwon built on SEMAS's register, the fourth Gyeonggi satellite; downloads for Suwon and Bucheon approved, and Bucheon's Seohae Line to be drawn (owner)](#2026-09-29---suwon-built-on-semass-register-the-fourth-gyeonggi-satellite-downloads-for-suwon-and-bucheon-approved-and-bucheons-seohae-line-to-be-drawn-owner)
 - [Category check: three older calls confirmed (owner)](#2026-09-29---category-check-three-older-calls-confirmed-owner)
 - [The cross-city category rules made a check; 45 departures found and left for the owner; two claims in category_rules.md out of date](#2026-09-29---the-cross-city-category-rules-made-a-check-45-departures-found-and-left-for-the-owner-two-claims-in-category_rulesmd-out-of-date)
 - [Light-rail build briefs: Bergen and Aarhus (staging)](#2026-09-29---light-rail-build-briefs-bergen-and-aarhus-staging)
@@ -762,6 +763,57 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `scripts/category_continuity_table.py`, `docs/category_rules.md`,
   `docs/handoff_category_fixes_2026-09-29.md`.
 
+### 2026-09-29 - Suwon built on SEMAS's register, the fourth Gyeonggi satellite; downloads for Suwon and Bucheon approved, and Bucheon's Seohae Line to be drawn (owner)
+
+- **Built on branch `suwon`, from origin/master**, page 69, on the Goyang,
+  Seongnam and Yongin pattern (the entry below): SEMAS's 상가(상권)정보,
+  edition 2026-06-30, 경기도's member cut by 시군구명 수원시 (영통, 팔달, 권선
+  and 장안구).
+
+  | City | SEMAS rows | Storefronts (F / R / P) | Withheld | Stations | In a ring |
+  |---|---|---|---|---|---|
+  | Suwon | 57,488 | 33,433 (16,022 / 12,214 / 5,197) | 37 | 14 | 47.6% |
+
+  Every figure matches the handoff's measurement from the cache.
+- **Owner's calls, asked once for both cities**: the OSM downloads for Suwon
+  and Bucheon (rail, station names, boundary, and a name lookup for each
+  boundary relation) were approved. **Bucheon's Seohae Line is to be drawn**,
+  as recommended: in Bucheon it runs on its own track through its own
+  stations (Sosa and north), so the satellite rule applies. Goyang left it
+  out only because there it shares the Gyeongui-Jungang track and stations.
+- **Rail**: Line 1, the Suin-Bundang and Shinbundang Lines, on Seoul's
+  precedent for a satellite.
+  - 14 stations: Line 1 4, Suin-Bundang 9, Shinbundang 2, with Suwon station
+    on two lines. The brief's "14 OSM nodes, a floor" was the whole count.
+  - No undrawn line has a station in Suwon. Line 4 and GTX-A cross the box
+    and are named as not drawn.
+  - Gate 3 is exact on the Suin-Bundang (63) and Shinbundang (16) Lines.
+    Line 1 is left out of the whole-line gate, as in Incheon.
+  - Line 1 (26.2 against Retail) and Shinbundang (23.9 against Food service)
+    sit below the preferred 45 CIE76. Both are Seoul's own drawn colours and
+    are recorded.
+  - Boundary: relation 2409182, 121 km² (the city publishes 121.1).
+- **One English name overridden.** OSM's name:en for 매탄권선 reads
+  "MaetanGwonseon"; the map shows "Maetan-Gwonseon", the signed form, on
+  Fukuoka's `OSM_NAME_EN_OVERRIDES` precedent. Step 1 refuses an override
+  that names no station in the city. "Sungkyunkwan Univ." stays as OSM has
+  it, as Busan's "Pusan Nat'l Univ." did.
+- **Privacy: no personal information published.**
+  `check_personal_exposure.py suwon`: no owner column, 0 contact details, 0
+  Korean personal names at a residential address shown (14 withheld pins in
+  the rings, 37 citywide). Bare-name shapes stand at commercial addresses
+  (3.3%), as in the other satellites.
+- **Macro map**: region Seoul Capital Area. Label width 45.3 px, measured in
+  the local app's own document with Space Grotesk loaded (Prague, Tokyo,
+  London, Glasgow, Incheon, Goyang and Yongin reproduced exactly).
+  `check_macro_labels.py`: PROBLEMS 0.
+- **Notice 68 widened** to name Suwon.
+- Files: `pipeline/suwon/`, `app/pages/69_Suwon_Heatmap.py`, `app/cities.py`,
+  `app/components.py`, `app/macro_facts.json`, `app/ring_shares.json`,
+  `README.md`, `docs/data_sources.md`, `docs/data_sources/south-korea.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/gyeonggi.md`,
+  `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
 ### 2026-09-29 - Category check: three older calls confirmed (owner)
 
 - **Three departures the category check listed as pending are confirmed and
