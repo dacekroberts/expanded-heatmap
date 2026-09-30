@@ -39,7 +39,7 @@ Astuce's "Métro" is a light rail with a central tunnel, one line with two branc
 | Resource | `https://transport.data.gouv.fr/resources/81942/download` (48,130,399 bytes on 2026-09-30) |
 | Licence | **Licence Ouverte 2.0** (`lov2`, declared on the NAP) |
 | Validity | `feed_info.txt` present but undated |
-| `shapes.txt` | yes |
+| `shapes.txt` | present, but the tram shapes are `AUTO_` stop-to-stop lines (2026-09-30): **geometry from OpenStreetMap** |
 | Stations | 31 network-wide under the pure-extract rule; `parent_station` on 0 of 61 platforms |
 | Route types | 0: 5, 1: 1, 2: 26, 3: 521, 4: 37, 7: 1 |
 
@@ -70,7 +70,7 @@ The chain is the five built cities' (`france_register.py`), which reproduced Ren
 ## Notices
 
 - **Transit**: Licence Ouverte 2.0: credit the producer and the data's date in the transit caption, Marseille's and Toulouse's pattern (`Transit data © <producer>, via <portal>` plus the feed window or snapshot date from `provenance.json`). No `_NOTICES` entry is needed. The LO 2.0 feeds were not read one by one; the batch relies on the licence's own text (`docs/licenses/france-licence-ouverte-2.0.md`).
-- **The aggregate's producer is the Région Normandie** (the NAP dataset's owner); the credit names it and the agency's network.
+- **The aggregate's Concédant is Syndicat mixte Atoumod** (the licence read 2026-09-30; not the Région, not Cityway): the credit names it, the agency's network and the resource's `last_modified` date captured at fetch (data.gouv resource `3873ccc7-44d9-40f3-a133-920944af0c29`), since `feed_info.txt` carries none. Line geometry from OpenStreetMap adds the OpenStreetMap notice.
 - **Business**: `Source : Insee` verbatim with the SIRENE edition's date, as every French page.
 - **Basemap**: © OpenStreetMap contributors, and the OpenStreetMap notice if OSM supplies any geometry.
 
@@ -91,7 +91,8 @@ The owner approved the French tram-city text word for word on 2026-09-29 (the `f
 
 ## Build-time calls, with the recommended answer
 
-- **The feed is the Normandie regional aggregate**, filtered to agency `ATOUMOD001:Network:001:LOC` (Astuce): Astuce's own resource redirects to `api.mrn.cityway.fr`, which refused connections at the screen and again on 2026-09-30. Try it first at build; the aggregate is the fallback, and its licence (LO 2.0, the Région) is what the credit then names.
+- **The feed is the Normandie regional aggregate**, filtered to agency `ATOUMOD001:Network:001:LOC` (Astuce): Astuce's own resource redirects to `api.mrn.cityway.fr`, which refused connections at the screen and again on 2026-09-30. Try it first at build; the aggregate is the fallback, under LO 2.0, and the credit then names its Concédant, Syndicat mixte Atoumod (SIREN 200052488; the licence read 2026-09-30), not the Région and not Cityway, the exporter.
+- **Line geometry from OpenStreetMap** (`osm-rail`): the aggregate's shapes for the métro are `TCAR:AUTO_*`, whose points are exactly each trip's stops (20 of 20 on the most-used shape, 2026-09-30) - straight lines between stops, not track. Stations still come from the aggregate.
 - **No `parent_station` in the aggregate**: first platform per unchanged name.
 
 ---
