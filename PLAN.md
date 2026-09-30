@@ -99,8 +99,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - [ ] **Groundwork before the tram batch (staging's list, 2026-09-29; ~68 →
     ~110 cities)**, in the recommended order: (1) a France batch kit - a
     `france-tram-city` skill and a script writing the 21 configs from the
-    screen's station files and fetching all 21 feeds at once (Czechia's six
-    likewise, smaller); (2) the licence reads up front (Bordeaux LO 1.0, the
+    screen's station files (Czechia's six likewise, smaller) - **France DONE
+    2026-09-30**: the skill, `scripts/scaffold_france_batch.py` and 20 briefs
+    (Angers held); feeds are fetched at build, never cached; builds wait for
+    the owner's go and the calls in each brief; (2) the licence reads up front (Bordeaux LO 1.0, the
     four ODbL feeds, Plzeň and Olomouc GTFS, Tucson, RideKC, Florence), each
     notice in `docs/data_sources.md` before a page exists; (3) page text by
     template, one French paragraph approved once; (4) the macro-map items

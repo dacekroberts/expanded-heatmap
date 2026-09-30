@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
+- [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
@@ -271,6 +273,83 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-30 - The France batch's eight calls approved as recommended; builds go ahead (owner)
+
+- **Owner: "approved, all eight as recommended"**, the list the kit put
+  after "The France batch kit". **The scope rule** stands: under half of the
+  worst line's stations in the commune goes regional. So Nantes is regional,
+  with Bordeaux, Grenoble, Rouen and Valenciennes. **Rouen's `mode` is
+  `light_rail`**, and its page's second sentence reads "Rouen's métro is a
+  light rail running mostly on the street, so every stop gets rings". **On a
+  Licence Ouverte feed only, a same-name pair** (case and accents ignored)
+  within 150 m keeps its first row, never a mean or a rename; ODbL feeds stay
+  pure extracts (Bordeaux's five pairs, Caen's one). **Brest's cable car is
+  drawn** on Toulouse's Téléo precedent: 41 stations, 39 in the commune, the
+  page saying "two tram lines and the cable car". **Nice's route B is
+  drawn.** **Le Havre's geometry comes from the Normandie aggregate** after a
+  `licence-read`, sent the same day, with OpenStreetMap as the fallback.
+  **Valenciennes is built last.** **Builds go ahead in landing groups**
+  (`docs/review_time.md`).
+- **The builds run in the France kit's worktree on a build branch**, never
+  pushed to master, since landing `app/` is deploying. Docs, skills and
+  scripts still go to master on their own commits. The skill, the scaffold
+  script and the 20 briefs now carry the approvals.
+
+### 2026-09-30 - The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held
+
+- **The kit is written; nothing was built.** Handoff section 1
+  (`docs/handoff_tram_batch_2026-09-29.md`): `.claude/skills/france-tram-city/SKILL.md`,
+  `scripts/scaffold_france_batch.py` (tested with `--dry-run` and
+  `--preview-dir` only; a real run refuses without `--go`), and
+  `docs/build_briefs/<slug>.md` for the 20 cities (Angers held). Every brief
+  passes `brief_check.py`: 146 of 146 claims. No city was scaffolded, no
+  pipeline step run, nothing written to `app/`.
+- **Every feed was read live on 2026-09-30**, and the read found what the
+  screen had not recorded. **Strasbourg's feed has no `shapes.txt`** (with
+  Montpellier and Le Havre, three of 20 need geometry from elsewhere; OSM
+  through `osm-rail` is recommended). **Brest's feed carries a cable car**
+  (route C, `route_type 6`) and **two fictitious stops**, `FIC_LIB1/2`, track
+  switches marked boardable on 40 of 1,038 stop_times; they are excluded as
+  Edmonton's garages were. **Nice has a sixth tram route, B** (Aéroport T2 -
+  CADAM, 6 stops). **Dijon's two lines share one colour.** **The Normandie
+  aggregate carries LiA's lines with shapes** under LO 2.0, a candidate
+  geometry for Le Havre that needs its own licence read first, because it
+  republishes LiA's ODbL data. Astuce's own host refused connections again,
+  so Rouen stays on the aggregate.
+- **Station tables re-measured under the owner's pure-extract rule** (the
+  parent's own row, else the first platform in `stops.txt` order per
+  unchanged name, never a mean), written to the screen folder as
+  `stations_pure_2026-09-30/`, which the scaffold reads before the screen's
+  own `stations/`. The screen's collapse differed: Montpellier line 3 29
+  stations, not 36; Bordeaux 140, not 135; Brest 39, not 41. The kit
+  applies the rule to every French feed, not only the ODbL ones, pending
+  the owner's call on Licence Ouverte same-name pairs (Bordeaux's five,
+  Caen's one), rather than a looser rule for 16 feeds and a strict one for
+  three.
+- **Scope rule proposed, not decided**: under half of the worst line's
+  stations in the commune goes regional, half or more stays commune-only.
+  It fits Toulouse (52%, commune) and Lille (Métro 2 43%, regional). It
+  makes Bordeaux, Grenoble, Rouen, Valenciennes and **Nantes (48.5%)**
+  regional; Nantes is the one it decides, and the brief puts both sides.
+  **Rouen's `mode` proposed `light_rail`**: its feed types it metro, and the
+  page template's "has no metro" sentence needs one owner-approved change
+  for a line called "Métro". Every other city is `tram`, and all 20 are
+  `coverage` `full`.
+- **The scaffold writes configs and a thin step 2, not step 1 or the
+  fetch.** Twenty copies of Rennes's 240-line step 1 is what
+  `france_register.py` exists to prevent, and Rennes's step 1 averages a
+  name group, which the pure-extract rule forbids. The skill has the first
+  batch build write a shared `pipeline/countries/france_tram.py`. Brief
+  files use the pipeline slug (`le_havre.md`, not `le-havre.md`), so
+  `brief_check.py le_havre --vs-config` reaches `pipeline.le_havre.config`.
+  Each brief's licence check carries the proposed scope, mode and coverage
+  as `vs_config` fields.
+- **`brief_check.py`: a cached GTFS zip older than 7 days is refetched, and
+  `stop_times.txt` is read in chunks filtered by trip.** The first enforces
+  the owner's rolling-feed rule: a brief checked at build weeks from now must
+  read that day's feed, not this session's cache. The second keeps Nantes's
+  579 MB `stop_times.txt` from being read whole. Edmonton's brief re-ran
+  9 of 9 after the change.
 ### 2026-09-30 - The six Czech tram cities briefed; three licence calls (owner)
 
 - **Briefed Brno, Ostrava, Plzeň, Olomouc, Liberec (Regional) and Most +
