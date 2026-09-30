@@ -415,6 +415,13 @@ REGISTRIES = {
     # ever downloaded but the organisation type (fetch_sources names its
     # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its
     # address, so the names left are companies' - which this run measures.
+    # Minneapolis: the City's food inspections. One name column (BusinessName)
+    # is downloaded; InspectorComments, FoodCodeText and APN never are
+    # (config.FOOD_FIELDS; step 2 asserts the columns). No owner column, so no
+    # fallback; a sole trader's LLC can carry their own name - measured here.
+    "minneapolis": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv",
+                        address=("address",)),
     "houston": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),

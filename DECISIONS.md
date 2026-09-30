@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**225 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**226 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-30**
+
+- [Minneapolis built on the City's food inspections, with a name test inside its types](#2026-09-30---minneapolis-built-on-the-citys-food-inspections-with-a-name-test-inside-its-types)
 
 **2026-09-29**
 
@@ -264,6 +268,86 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Minneapolis built on the City's food inspections, with a name test inside its types
+
+**Built** on branch `minneapolis`, page 77, region United States East (Chicago's;
+the brief's "North America" is no region), out of the default frame for
+Buffalo's reason. Band B's second of eight, under the owner's pre-approval of
+downloads and write-ups (2026-09-29). 1,793 storefronts (food service 1,401,
+food shops 392), 641 in the rings (35.7%), 15 stations.
+
+**Rail.** OSM, Metro Transit's GTFS licence unread (the owner's Buffalo and
+Houston choice). Gate 3 exact on 19 and 23, from Wikipedia: Metro Transit's
+line pages state no count (Ottawa's position). **15 stations in the city, not
+the brief's 16 or its stub test's 19**: Target Field's two platforms and "US
+Bank Stadium" / "U.S. Bank Stadium" fold (the latter by alias). The 22 outside
+are in `excluded_stations.csv` with their TIGER county subdivision (St. Paul 14,
+Bloomington 4, Fort Snelling Unorganized Territory 4). The box's `tram`
+relation is the Minnesota Streetcar Museum's Como-Harriet heritage ride, not
+the airport's people mover the brief named: not drawn. **Green keeps OSM's
+#008144**, ΔE 18.6 against the Personal services pin colour, a bucket this
+page never draws (96.9 and 112.1 against the two it does); clearing 46 would
+need a near-black green 28 ΔE from the agency's. Stockholm's food-only page
+kept its official green the same way.
+
+**The register decides first.** RESTAURANT is food service; GROCERY, MEAT
+MARKET, MARKET and LIQOFFSALE (one off-sale liquor store, NAICS 445320) are
+food shops, New York's precedent. Out by type: institutions, board and
+lodging, caterers (R1, where the brief had kept them as food), food trucks,
+carts, limited mobile units, a market vendor and vendors, food shelves,
+wholesale, and **3 with no category** (two of them restaurants by name: left
+out, not guessed).
+
+**Then a name test inside the kept types** (161), because the register files
+a contract caterer's workplace café or a hospital cafeteria as a RESTAURANT
+and a vending route or a workplace micro-market as a GROCERY. Stockholm's
+precedent for canteens by name in a typed register, and each rule a row of
+`docs/category_rules.md`: institutional kitchens 57 (R1), hotels 43
+(lodging), venues and clubs 33 (recreation; the private clubs as Ottawa's
+call), vending 21 (nonstore), pharmacies 5 (a food register's pharmacies are
+out; Ottawa's one layer is its own owner exception, not this page's), and 2
+the register's own name calls a cabaret (R3). THE NICOLLET DINER AND ROXY'S
+CABARET, a diner, stays; so does a caterer whose name also names a
+restaurant, café or bakery. A university name is campus dining on a
+RESTAURANT and a bookstore on a GROCERY, which stays.
+
+**One shop, one pin (measured, Retail only).** 74 grocers hold a GROCERY and
+a MEAT MARKET licence for one counter under one name and street address; the
+second is folded and listed. Restaurants are not folded: two licences under
+one name and street address are an operator's separate bars in a building,
+told apart by unit. A supermarket's deli, licensed as a RESTAURANT, keeps its
+own pin (Ottawa's keep-each-id precedent).
+
+**Not placed: 42** with no point in any inspection row (two Cub Foods, two
+Lunds & Byerlys stores among them); not geocoded, because an address join
+comes first and was not worth its cost at 2%. A facility's point is its
+latest row that has one.
+
+**Licence.** CC0 1.0 on the dataset itself (licence-read agent, 2026-09-30):
+PERMITTED, nothing to display or do; the rail-geometry notice now names
+Minneapolis's lines.
+
+**Personal information** (`check_personal_exposure.py minneapolis`): no
+owner column is downloaded, and InspectorComments, FoodCodeText and APN are
+never requested. 0 of 641 pins have a person-like name at a residential
+unit; the heuristic's 87 distinct flagged names were read and every one is a
+trade name (DOKKEN SUPERETTE, CHATTERBOX PUB, LEEANN CHIN), the upper-case
+two-word shape Ottawa found. Displayed as the register gives it, up to a
+first line break (two names carry a clerk's memo on a second line). The
+excluded-premises file names only the kept types' left-outs: BOARD AND
+LODGING's names include people's own at homes, and it is counted, never
+listed.
+
+**Macro label.** Width 81.6 measured in a browser (Prague 47.3, Tokyo 40.5,
+Houston 56.9, Toronto 52.4 reproduced). No placement of Minneapolis's alone
+cleared Toronto's pill in Global; **Toronto's label raised 5 px** (end 0 -16
+to -21) with Minneapolis's below-left (end -16 36): PROBLEMS 0 at 375, 768
+and 1200 px, and the same with Ottawa's branch applied, so the two merge
+clean.
+
+**For the batch review:** Toronto's label moved 5 px; the name test's 161
+and the 74 folds are this build's measurement, not an owner's call.
 
 ### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
 

@@ -330,6 +330,50 @@ shop — about 5,000 of the latter statewide. They are not a separate storefront
 and counting them would both double-count the shop and put an individual on the
 map. Only the business licences are used.
 
+### Minneapolis - the food inspection register, food only, with a name test
+
+**Only food is on this map.** The City of Minneapolis's food inspection data
+lists the facilities it licenses and inspects for food; no open register of
+other shops or of personal services covers the city, so clothes shops,
+hairdressers and the like are missing rather than excluded. Food shops
+(grocers, convenience stores, butchers, one liquor store) are the retail
+layer. Each facility (2,916) is shown as it stood at its latest inspection;
+55 not inspected in the two years before the fetch (2026-09-30) are left out.
+
+**Excluded by type** - 791 facilities the register files as something other
+than a restaurant or a shop: institutions (445: schools, childcare, care
+homes), food trucks (133), board and lodging (92), food shelves (41),
+caterers (35, R1), limited mobile units (33), food carts (4), wholesale (2),
+vendors and a market vendor (3), and 3 with no category at all (a park board
+and two restaurants by name, left out rather than guessed).
+
+**Excluded by name** - 161 facilities inside the kept types that are not
+storefronts (`pipeline/taxonomies/minneapolis_inspection.py`; each is listed
+in `outputs/minneapolis/excluded_premises.csv`): institutional kitchens (57:
+contract caterers' workplace cafés - Sodexo, Aramark, Compass and Eurest -
+hospital, school, church and campus dining, event caterers with no counter,
+shared commissary kitchens), hotels (43), recreation venues and clubs (33:
+theatre, cinema, arena and bowling concessions, event centres, museums, the
+private city and country clubs), vending routes (21), pharmacies (5, a food
+register's) and two venues the register names as cabarets (R3). A caterer
+whose name also names a restaurant, café or bakery stays; so does the
+Nicollet Diner, whose name includes Roxy's Cabaret.
+
+**Folded** - 74 second licences of one shop: a grocer licensed as both a
+GROCERY and a MEAT MARKET at one address is shown once. Two restaurant
+licences under one name and street address are kept apart (an operator's
+separate bars in one building), and so is a supermarket's deli, licensed as a
+restaurant.
+
+**Not placed** - 42 facilities with no point in any inspection row, among
+them two Cub Foods and two Lunds & Byerlys stores; they are not geocoded.
+
+**Stations** - rings are drawn around the 15 stations inside the city. The
+Green Line's 14 stations in St. Paul and the Blue Line's 4 in Bloomington and
+4 in Fort Snelling Unorganized Territory (the airport among them) are left
+out, because the register stops at the city line; all are listed in
+`outputs/minneapolis/excluded_stations.csv`.
+
 ### Buffalo — three registers, expired licences, and salon names
 
 **Missing, not excluded: general retail.** Buffalo licenses no clothing shop,

@@ -455,7 +455,11 @@ CITIES = [
         # (measured from rendered pixels) and covered Montréal's marker; both
         # went unnoticed because nothing checked either. ("end", 0, -16) clears
         # Boston, clears Montréal's dot, and keeps Toronto's own dot visible.
-        "label_offset": ("end", 0, -16),
+        # RAISED 5 px (2026-09-30, from -16) for Minneapolis: at -16 Toronto's
+        # pill covered Minneapolis's marker in Global at every width, and no
+        # placement of Minneapolis's alone cleared it. The joint sweep's PROBLEMS
+        # 0 at 375, 768 and 1200 px, with and without Ottawa's branch applied.
+        "label_offset": ("end", 0, -21),
     },
     {
         "name": "Mexico City",
@@ -1972,6 +1976,32 @@ CITIES = [
         # Monterrey's marker; check_macro_labels.py (python -B) passes start
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
+    },
+    {
+        "name": "Minneapolis",
+        "lat": 44.9778,
+        "lon": -93.265,
+        "page": "pages/77_Minneapolis_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (97.8%)",
+        "data_age": "Inspected within two years of 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Two",
+        "blurb": "METRO Blue and Green Lines (light rail)",
+        "region": "United States East",
+        "country": "United States",
+        # NOT IN THE DEFAULT FRAME, Buffalo's reason: at 44.98 N Minneapolis is
+        # north of every framed US city, and joining IN_DEFAULT_VIEW would re-fit
+        # the pinned 1.4525 zoom. Still labelled in Global, United States and
+        # United States East.
+        "in_default_view": False,
+        # BELOW-LEFT, with Toronto's raised 5 px to make room: every placement
+        # of Minneapolis's alone left Toronto's pill over its marker in Global,
+        # and above-right runs into Calgary's, Buffalo's or Montréal's. The
+        # joint sweep's PROBLEMS 0 at 375, 768 and 1200 px, with and without
+        # Ottawa's branch; width 81.6 measured in a browser.
+        "label_offset": ("end", -16, 36),
     },
 ]
 
