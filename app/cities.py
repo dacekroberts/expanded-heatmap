@@ -2059,7 +2059,7 @@ CITIES = [
         "placement": "Register coordinates (100%)",
         "data_age": "Inspected within two years of 2026-07-03",
         "rail_extra": "Suburban rail",
-        "record_kind": "Food hygiene register",
+        "record_kind": "Health inspection register",
         "categories": "Two",
         "blurb": "ION light rail (route 301)",
         "region": "Canada East",

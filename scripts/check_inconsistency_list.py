@@ -63,7 +63,10 @@ FIELDS = {
                     "Chamber of commerce register",
                     # London: the FSA's food hygiene rating (inspection) register
                     # (owner, 2026-09-28).
-                    "Food hygiene register"},
+                    "Food hygiene register",
+                    # Kitchener–Waterloo: the Region's public-health inspections
+                    # cover food and personal services (owner, 2026-09-30).
+                    "Health inspection register"},
     # "Food premises only" was "Food licences only" until London, whose register
     # is inspections, not licences; renamed for Hong Kong too (owner, 2026-09-28).
     # "Personal services thin": Berlin, whose chamber register has no crafts

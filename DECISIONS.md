@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**238 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)](#2026-09-30---a-new-record-kind-health-inspection-register-for-kitchenerwaterloo-owner)
 - [Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail](#2026-09-30---tram-kit-four-more-briefs-checked-new-orleans-recommended-unthinned-every-brief-so-far-takes-osm-rail)
 - [Kitchener–Waterloo built on the Region's two inspection registers, typed from their bulk tables; the tables' licence read as the portal's (owner)](#2026-09-30---kitchenerwaterloo-built-on-the-regions-two-inspection-registers-typed-from-their-bulk-tables-the-tables-licence-read-as-the-portals-owner)
 - [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
@@ -279,6 +280,16 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)
+
+The owner added a `record_kind` value, relayed by the cleanup session: **"Health
+inspection register"**, for a public-health inspection register that covers food
+premises AND personal-service settings. Kitchener–Waterloo's build entry had used
+"Food hygiene register" as the nearest existing value and said so; its register (the
+Region of Waterloo Public Health's food and personal-services inspections) now takes
+the new value. `scripts/check_inconsistency_list.py` lists it in `FIELDS`; table B's
+row already said "Food hygiene register" and now says the new value, so the two agree.
 
 ### 2026-09-30 - Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail
 

@@ -600,7 +600,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
 | Calgary | Licence register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
 | Edmonton | Licence register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
-| Kitchener–Waterloo (Regional) | Food hygiene register | Region of Waterloo Public Health's food and personal-services inspection layers, typed from its bulk tables | Its own inspection types (SUBCATEGORY), plus a name test | 143 / 545 / 177 | Retail = food shops only ("Food shops"); no general-retail register |
+| Kitchener–Waterloo (Regional) | Health inspection register | Region of Waterloo Public Health's food and personal-services inspection layers, typed from its bulk tables | Its own inspection types (SUBCATEGORY), plus a name test | 143 / 545 / 177 | Retail = food shops only ("Food shops"); no general-retail register |
 | Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,474 / 1,950 | Retail = regulated slice only |
 | **Mexico** | | | | | |
 | Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,798 / 12,018 | Street stalls excluded |
