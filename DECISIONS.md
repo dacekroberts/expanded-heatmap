@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Continuity: Sacramento's two precedents confirmed; the four waiting cells counted (owner)](#2026-09-30---continuity-sacramentos-two-precedents-confirmed-the-four-waiting-cells-counted-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 
@@ -269,6 +270,55 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Continuity: Sacramento's two precedents confirmed; the four waiting cells counted (owner)
+
+- **Confirmed (owner):**
+  - **Sacramento's OPTOMETRISTS stay out** as eye doctors' offices (NAICS
+    621320, health care, as in the NAICS cities).
+  - **Its MASSAGE - TECHNICIAN licences stay out, as a privacy exclusion.**
+    California's certificate is not a health licence, so the
+    regulated-massage precedent (Vancouver's and Toronto's RMTs) does not
+    carry over. But each licence names a person, not a premises.
+  - Both cells in `scripts/category_continuity_table.py` now say so.
+- **The four `AWAITING_OWNER` cells were counted (owner: "count first")**,
+  read-only, against each city's kept rows (`processed/businesses_clean.csv`).
+  Buffalo's and Boston's committed raw files hold none of these record types:
+  Buffalo filters at download to `CITY_LICENCE_CODES`, and Boston keeps only
+  Retail and Druggist board rows. So two public API reads went to the
+  session scratchpad only, not to `data/`.
+  - **Buffalo "Cert. Operation Fuel Device" (1,182) is not a pump register.**
+    Every row is code COO, and the holders are apartments, churches, colleges
+    and factories, which reads as fuel-burning equipment (boilers). That is
+    inferred from the holders; the City Code was not read. Only 19
+    certificates at 16 sites carry a fuel or auto name. The only real petrol
+    retailers are three 7-Elevens, all already mapped through the State
+    food-store licence. Two sites are unclear (Delta Sonic Car Wash;
+    "Filling Station", 719 Seneca), both more than 2 km from a station.
+  - **Buffalo Dance Hall (24 licences, 21 sites; 8 licences at 7 sites
+    current on 2026-09-29).** Three current sites are already mapped. The four
+    current sites with no kept row are community or banquet halls (a Polish
+    cadets' hall, an Orthodox church, a banquet centre, a civic centre), all
+    1.6-6.1 km from a station. Five lapsed licences are club-like and in
+    ring, among them Metropolitan Entertainment Complex and The Black
+    Butterfly, both lapsed 2026-08-01, possibly awaiting renewal.
+  - **Sacramento ENTERTAINMENT: 41 current (44 across all dates).** About 2
+    are likely clubs with a public floor, Channel 24 and La Kalle; that is
+    identified from general knowledge, not a source. 3 are adult venues,
+    which belong to rule R3, not nightclubs: Club Fantasy, KC at the same
+    address, and an adult bookstore. The rest:
+    - 12 DJs, bands and event services;
+    - 7 media or studios;
+    - 8 other venues or recreation;
+    - 2 associations;
+    - 3 unclear;
+    - 4 licences in a person's own name.
+  - **Boston "GOP All Alc." (17 active licensees).** 10 are already mapped
+    through an ISD food permit at the same address, or by name for one. The 7
+    unmapped are 1 bar (The Spud Bar, East Boston), 1 event venue, 2
+    theatres, a college, an aquarium concession and an island education
+    centre. Other GOP-family licences add one more unmapped bar or lounge,
+    Black Market Social.
 
 ### 2026-09-30 - Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)
 

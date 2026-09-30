@@ -771,7 +771,11 @@ COLUMNS["sacramento"] = {
     "adult_hostess": [loc("ADULT ENTERTAINMENT", "adult entertainment")],
     "sex_shop": absent("no type of its own; under RETAIL SALES - GENERAL"),
     "massage_commercial": [loc("MASSAGE - ESTABLISHMENT", "massage establishment")],
-    "massage_regulated": [loc("MASSAGE - TECHNICIAN", "certified massage technician, a person")],
+    # Confirmed by the owner (2026-09-30) as a PRIVACY exclusion, not as
+    # regulated massage: California's certificate is not a health licence, but
+    # each one names a person rather than a premises.
+    "massage_regulated": [loc("MASSAGE - TECHNICIAN", "certified massage technician: a licence "
+                                                      "naming a person, out for privacy (owner)")],
     "car_dealer": [loc("AUTOMOBILE DEALERS - NEW / USED", "car dealers"),
                    loc("AUTOMOBILE DEALERS - USED", "used car dealers")],
     "petrol_station": [loc("SERVICE STATIONS", "service stations")],
@@ -795,7 +799,7 @@ COLUMNS["sacramento"] = {
     "pharmacy": [loc("DRUGS STORES & PHARMACIES", "pharmacies")],
     "optician": absent("no optician type: OPTOMETRISTS are eye doctors' offices (NAICS 621320, "
                        "health care, out as in the NAICS cities); optical shops file under "
-                       "RETAIL SALES - GENERAL"),
+                       "RETAIL SALES - GENERAL; confirmed by the owner 2026-09-30"),
     "mobile_unit": [loc("MOBILE VENDOR - FOOD", "food truck"),
                     loc("MOBILE VENDOR - ICE CREAM", "ice-cream vendor"),
                     loc("SIDEWALK VENDOR - MERCHANDISE", "street merchandise stall")],
