@@ -373,5 +373,10 @@
   "in_ring": 2224,
   "all": 29912,
   "map_blob": "4e6a1858e44f8ebecb6578e3afc121f6ea97736e"
+ },
+ "minneapolis": {
+  "in_ring": 641,
+  "all": 1793,
+  "map_blob": "0ff9f8fdb91b1bb51f1b28700e27b9749f20037f"
  }
 }
