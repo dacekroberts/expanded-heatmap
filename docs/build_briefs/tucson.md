@@ -8,6 +8,22 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **City of Tucson** | See the rail section |
+| **Lines drawn** | Sun Link (OSM) | |
+| **Rings** | halved: median gap 265 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Credit** | "Business licence data: City of Tucson." (owner, permissive reading) | |
+| **Call (approved): Colour** | chosen at build | |
+
+---
+
 ## The one-line summary
 
 **Sun Link, one streetcar line of 21 stops, and the city's NAICS business-licence layer, read as permitted (owner, 2026-09-30).**
@@ -20,7 +36,7 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
 | Projected CRS | **EPSG:32612** (UTM 12N, 110.97° W) |
 | Register | BUSLIC, `gis.tucsonaz.gov/arcgis/rest/services/PublicMaps/OpenData_EconomicDevelopment/MapServer/3`, 93,483 rows, 34,764 active, points, NAICS |
 
-**Region: `"North America"`.** **Macro legend (proposed)**: `mode` tram, `coverage` full.
+**Region: `"United States West"`.** **Macro legend (proposed)**: `mode` tram, `coverage` full.
 
 ---
 
@@ -107,7 +123,17 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
     "claim": "The derived UTM zone is EPSG:32612",
     "kind": "utm_zone_from_longitude",
     "lon": -110.97,
-    "expect": "EPSG:32612"
+    "expect": "EPSG:32612",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "city",
+    "crs": "EPSG:32612",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```

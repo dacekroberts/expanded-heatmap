@@ -17,9 +17,11 @@ and its notices. The register and taxonomy are shared code already.
 Ostrava, Plzeň, Olomouc, Liberec (with Jablonec nad Nisou) and Most (with
 Litvínov). Prague is built and draws its metro only.
 
-**Builds are HELD** (owner, 2026-09-30) until the owner's go on the open calls
-(DECISIONS "The Czech batch kit"). When the go comes, build on a branch, never
-on master: `app/` lands at review time only.
+**Every call is approved as recommended, the page text and notices word for
+word** (owner, 2026-09-30: DECISIONS "The Czech batch's calls and prose
+approved as recommended"). **Builds wait for the owner's explicit go**, which
+approving the calls did not give. When it comes, build on a branch, never on
+master: `app/` lands at review time only.
 
 ## Order of work for one city
 
@@ -87,6 +89,19 @@ sheets below.
 - **Buses, trolleybuses and trains are never drawn.** Brno's S-trains fail the
   spacing rule (11 stations at a 1,974 m median gap; the tram audit,
   2026-09-29).
+- **Approved with the kit (owner, 2026-09-30, "all recommended approaches to
+  the calls", "and prose")**:
+  - the five OSM cities' colours are the project's own, from
+    `scripts/line_colour_search.py` with target hues spaced evenly;
+  - **Ostrava's line 5 is left out** (3 of 10 stops in the city);
+  - **Liberec is "Liberec (Regional)", with Jablonec nad Nisou**;
+  - **Most is built, last, as "Most (Regional)"**, covering Litvínov;
+  - **Brno's H4 and P1 are left out**;
+  - `mode` `tram` and `coverage` `full` for all six;
+  - OSM stops collapse by Aarhus's rule (section 3), Brno's stations are
+    the feed's parents;
+  - the build order Brno, Plzeň, Olomouc, Ostrava, Liberec, Most;
+  - the page text (section 7) and the notices (section 6), word for word.
 
 ## 1. The register chain - `czechia_register.py`, with its traps
 
@@ -178,7 +193,7 @@ reproduce the committed output exactly. That is a heavy job; announce it.
 - **Route types**: 299 bus, 28 rail, 14 trolleybus (800), 13 tram (0), 1
   ferry. Select `route_type 0` AND `route_short_name` in the 11 regular lines
   (1-10, 12). H4 (heritage) and P1 (the Arena Brno event shuttle, sharing line
-  1's colour) run no weekday trips; they are out if the owner approves.
+  1's colour) run no weekday trips; both are out (owner, 2026-09-30).
 - **Stations are the feed's own `parent_station` rows, Prague's shape.** All
   329 platforms the 11 lines serve have a parent (2026-09-30): 149 parents, no
   two sharing a name. Take the parent's id, name and coordinates; no name
@@ -268,7 +283,7 @@ and anchors labels only.
 
 - **One obec**: Brno, Ostrava, Plzeň, Olomouc. Brno's line 2 keeps 36 of 38
   stop names (its Modřice branch leaves the city); every other line in the
-  four stays whole, apart from Ostrava's line 5 (the owner's call, below).
+  four stays whole, apart from Ostrava's line 5 (left out, owner, 2026-09-30).
   Step 1 asserts `EXPECTED_INSIDE_PER_LINE`; a change is a decision re-taken.
 - **Two obce, "(Regional)"** in the display name, as Lille's: Liberec with
   Jablonec nad Nisou (line 11 is 14 + 7), and Most with Litvínov. **Most alone
@@ -305,28 +320,96 @@ database. Wording is the owner's; draft any new one in chat first.
 | **RES** (ČSÚ), CC BY 4.0 with ČSÚ's data conditions | all six | The existing "Czech Statistical Office (Prague)" notice. Its text names no city, so **add each city to the title**, as Norway's "(Oslo, Bergen)" and Denmark's "(Copenhagen, Aarhus)" do. It discharges ČSÚ's two duties: link the conditions, and mark the data as derived, not official statistics |
 | **RÚIAN** (ČÚZK), CC BY 4.0, "ČÚZK, <year>" prescribed | all six | The existing "ČÚZK (Prague)" notice, the title extended the same way. The year is the file's |
 | **ROS02** (DIA) | all six | Declared open data, no personal data, no database right: **nothing to display** (read 2026-09-24). Name it in the page text |
-| **KORDIS JMK's GTFS**, CC BY 4.0 (read 2026-09-30) | Brno | **A new notice**: credit KORDIS JMK, a.s. and DPMB (the feed's `agency.txt` reads "IDS JMK (Data from: KORDIS JMK, DPMB)", which CC BY §3(a)(1)(A) says to retain); name data.brno.cz (Statutární město Brno) as the distributor; CC BY 4.0 linked; a link to the feed; the changes (filtered to the 11 regular tram lines, stations reduced to one point each, rings computed). No endorsement, no IDS JMK, KORDIS or DPMB logos. ROPID's notice is the model |
+| **KORDIS JMK's GTFS**, CC BY 4.0 (read 2026-09-30) | Brno | **A new notice**: credit KORDIS JMK, a.s. and DPMB (the feed's `agency.txt` reads "IDS JMK (Data from: KORDIS JMK, DPMB)", which CC BY §3(a)(1)(A) says to retain); name data.brno.cz (Statutární město Brno) as the distributor; CC BY 4.0 linked; a link to the feed; the changes. No endorsement, no IDS JMK, KORDIS or DPMB logos. **The wording, approved (owner, 2026-09-30)**, is below the table |
 | **PMDP's GTFS**, if used as Plzeň's gate 3 | Plzeň | Credit it anyway, on the stricter CC BY reading: "Plzeňské městské dopravní podniky, a.s. (PMDP), GTFS published by the Statutory City of Plzeň at opendata.plzen.eu, CC BY 4.0, modified by this project". Never the city's arms or PMDP's logo |
 | **OpenStreetMap**, ODbL 1.0 | all six | © OpenStreetMap contributors on the render, and **a clause in the "OpenStreetMap (rail geometry)" notice** for each city: its tram lines (and, except Brno, their stops) and the obec boundaries used to select them |
+
+**Brno's notice, approved word for word (owner, 2026-09-30)**, titled
+"KORDIS JMK (Brno)":
+
+> Tram stops for Brno come from the IDS JMK timetable data (GTFS) published by
+> KORDIS JMK, a.s., with data from KORDIS JMK and DPMB, and distributed by the
+> Statutory City of Brno at data.brno.cz, under
+> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+> ([feed](https://kordis-jmk.cz/gtfs/gtfs.zip)). Changes: the 11 regular tram
+> lines are selected, each stop is reduced to one point, and distance rings are
+> computed around it. Not produced or endorsed by KORDIS JMK, DPMB or the City
+> of Brno.
+
+**The existing notices (approved the same day)**: the ČSÚ and ČÚZK titles add
+each Czech city as it lands ("Czech Statistical Office (Prague, Brno)", and so
+on), their text unchanged; each city adds its clause to "OpenStreetMap (rail
+geometry)".
 
 Also, for each city: a row per new source in `docs/data_sources/czechia.md`
 (the feed or the OSM tram relations, the RÚIAN file, the boundary) **before the
 page exists**; the excluded categories in `docs/excluded_categories.md`; and
 `check_scope_disclosure.py` passing.
 
-## 7. Page text - PENDING the owner's approval
+## 7. Page text - approved by the owner, word for word (2026-09-30)
 
-The template was drafted in chat for the owner on 2026-09-30 (the France kit's
-practice). **Nothing here is approved yet.** When the owner approves it, write
-it here word for word, with the approval date, and treat any departure as an
-owner call, never an edit. Until then, no Czech page text is written.
+Braces are per-city facts, filled from this city's own step 1, step 2 and
+rendered map, never from a brief. Brackets choose a variant. **Departures are
+owner calls, never edits.**
 
-What is already fixed: the title is "{City}: commercial density around tram
-stops" (Riga's); the controls paragraph and the heat-layer caveat stay exactly
-as on Prague's page (`app/pages/28_Prague_Heatmap.py`); the snapshot caption
-reads the ROS02 snapshot and the tram data's date from `provenance.json`; and
-every figure comes from this city's own step 1, step 2 and rendered map, never
-from a brief.
+**Title**: "{City}: commercial density around tram stops" (Riga's).
+
+> {N} tram lines are drawn, **{operator}'s trams {lines}**, each labelled on
+> the map and in the legend. *[Brno:]* The stops come from the IDS JMK
+> timetable data published by KORDIS JMK, and the lines are shown in the
+> operator's colours; their routes are drawn from OpenStreetMap, because the
+> timetable data carries none. *[The other five:]* The lines and stops are
+> drawn from OpenStreetMap, and the colours are this project's, because none
+> are published for reuse. {City} has no metro: its trams are its rapid
+> transit, as Riga's are, so every tram stop gets rings. Buses, trolleybuses
+> and trains are not drawn{Brno: ", nor the heritage tram H4 or the event
+> shuttle P1"}.
+>
+> The map covers the **{city of X / cities of Liberec and Jablonec nad Nisou,
+> which tram line 11 joins / towns of Most and Litvínov, which the trams
+> join}**. {Brno: "Line 2's last two stops, in Modřice beyond the city
+> boundary, are left out." / Ostrava: "Line 5, the suburban line to Budišovice,
+> is not drawn: only 3 of its 10 stops are in the city."}
+>
+> Businesses come from the Czech **register of active business establishments**
+> (ROS02), which records each place where a business operates at that place's
+> own address, placed using the national address register (RÚIAN), the same
+> sources as Prague's map. What each establishment does comes from the Czech
+> Statistical Office's business register (RES). RES records one main activity
+> per business, so every establishment inherits its owner's, and a chain's
+> office or warehouse counts as the chain's trade. **Where a business belongs to
+> a person trading in their own name, or to a partnership, the map shows its
+> address instead of its name.** Where such an establishment is at the owner's
+> own registered address, which is usually their home, it is left off the map
+> altogether.
+>
+> **Read the density as a register, not a street survey.** Some establishments
+> are newly registered and may not have opened yet. Czechia's classification
+> files a web shop under the goods it sells, so some dots are businesses with
+> no shop a passer-by could walk into. Against OpenStreetMap's mapped
+> restaurants, cafés and takeaways in the city, the register carries about
+> **{ratio} times** as many. {Where the ratio is over 2 (Ostrava, Liberec and
+> Most at the screen): "OpenStreetMap maps fewer restaurants here than in
+> Prague, so the ratio says as much about OpenStreetMap's gaps as about the
+> register."} Businesses whose main activity is something else, such as a
+> brewery's pub or a wholesaler's shop, are not shown, because no open source
+> records what each establishment itself does.
+>
+> **Tram stops sit closer together than metro stations**, a median of
+> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
+> 0.3 mi). **About {share} of storefronts sit within a ring.**
+
+Then the controls paragraph and the heat-layer caveat, exactly as on Prague's
+page (`app/pages/28_Prague_Heatmap.py`).
+
+**Caption** (from `provenance.json`): "Snapshot: establishments as of **{DATPLAT}**
+(ROS02); tram timetable data valid **{start}** to **{end}** (KORDIS JMK)" for
+Brno; for the OSM cities, the second half reads "tram lines and stops from
+OpenStreetMap, fetched **{date}**".
+
+A city whose build-day median stop gap is over about 550 m (only Most is
+close) keeps the standard rings and drops the last paragraph's first
+sentence.
 
 ## 8. The config template
 
@@ -412,7 +495,8 @@ passes (line-colour contrast); `python pipeline/drift_check.py <slug>`; `grep
 ## The six, one sheet each
 
 Figures are the briefs' and the 2026-09-30 reads. Storefronts are the screen's
-(2026-09-27), and step 2 replaces them. Calls marked **owner** await the go.
+(2026-09-27), and step 2 replaces them. Every call was **approved as
+recommended** (owner, 2026-09-30).
 
 ### Brno
 
@@ -426,7 +510,7 @@ Figures are the briefs' and the 2026-09-30 reads. Storefronts are the screen's
 | Colours | The feed's: 1 D40000, 2 4AB95D, 3 009E9E, 4 EE7E1E, 5 F31D7F, 6 0777C1, 7 939DAC, 8 E1CB31, 9 8C4A9A, 10 A05A2C, 12 00CCFF |
 | Spacing | 329 m: halved rings |
 | Storefronts | 7,229 (retail 2,520, food 2,126, personal 2,583); restaurants 1.61× OSM |
-| Calls | **owner**: H4 and P1 out |
+| Calls | **approved**: H4 and P1 out; built first |
 | Notices | ČSÚ, ČÚZK, a new KORDIS notice, OSM (lines) |
 
 ### Ostrava
@@ -437,10 +521,10 @@ Figures are the briefs' and the 2026-09-30 reads. Storefronts are the screen's
 | Control | `("3182860", 49.84130, 18.28927, "Magistrát města Ostravy, 30. dubna 635/35")` |
 | CRS | **EPSG:32634 (UTM 34N)** |
 | Trams | OSM, operator "Dopravní podnik Ostrava": 1-4, 6-8, 10-12, 14, 15, 17, 18; 96 stop names inside |
-| Not drawn | 9 and 19 (no stop members); relation 19177807 (an unref'd line 11 variant); **owner**: line 5 |
+| Not drawn | 9 and 19 (no stop members); relation 19177807 (an unref'd line 11 variant); line 5 (approved) |
 | Spacing | 424 m: halved rings |
 | Storefronts | 3,971; restaurants 2.23× OSM (OSM thin) |
-| Calls | **owner**: line 5 out (3 of 10 stops inside, 30%; costs Poruba,koupaliště and Krásné Pole); the palette |
+| Calls | **approved**: line 5 out (3 of 10 stops inside, 30%; costs Poruba,koupaliště and Krásné Pole); the project's palette; fourth in order |
 | Traps | 34N; 33 relations and 18 refs on 2026-09-30 (the brief says 34); line 7 has a 2-stop relation (17625150) beside its full one |
 
 ### Plzeň
@@ -455,7 +539,7 @@ Figures are the briefs' and the 2026-09-30 reads. Storefronts are the screen's
 | Gate 3 | PMDP's GTFS (permitted), credited if used |
 | Spacing | 294 m: halved rings |
 | Storefronts | 3,513; restaurants 1.99× OSM |
-| Calls | **owner**: the palette |
+| Calls | **approved**: the project's palette; second in order |
 
 ### Olomouc
 
@@ -467,7 +551,7 @@ Figures are the briefs' and the 2026-09-30 reads. Storefronts are the screen's
 | Trams | OSM, operator "Dopravní podnik města Olomouce": 1-7, 14 relations; 36 stop names, all inside |
 | Spacing | 318 m: halved rings |
 | Storefronts | 2,246; restaurants 1.80× OSM |
-| Calls | **owner**: the palette. DPMO's feed is not used at all, not even for gate 3 |
+| Calls | **approved**: the project's palette; third in order. DPMO's feed is not used at all, not even for gate 3 |
 
 ### Liberec (Regional)
 
@@ -479,7 +563,7 @@ Figures are the briefs' and the 2026-09-30 reads. Storefronts are the screen's
 | Trams | OSM, operator "Dopravní podnik měst Liberce a Jablonce nad Nisou": 2, 3, 5, 11; 39 stop names in scope, every line whole (line 11: 14 + 7) |
 | Spacing | 378 m: halved rings |
 | Storefronts | 2,498 (Jablonec 618); restaurants 2.45× OSM |
-| Calls | **owner**: with Jablonec (recommended) or Liberec alone (line 11 keeps 14 of 21, 67%); the palette |
+| Calls | **approved**: with Jablonec, as "Liberec (Regional)" (Liberec alone would keep line 11 at 14 of 21, 67%); the project's palette; fifth in order |
 | Traps | the two-obec change (section 2); DPMLJ's own GTFS reset the connection at the screen |
 
 ### Most (Regional)
@@ -492,5 +576,5 @@ Figures are the briefs' and the 2026-09-30 reads. Storefronts are the screen's
 | Trams | OSM, operator "Dopravní podnik měst Mostu a Litvínova": 1-4, 8 relations; 27 stop names in scope, every line whole |
 | Spacing | 514 m: halved rings, 36 m under the line |
 | Storefronts | 1,030 (Litvínov 241); restaurants 3.71× OSM (OSM thin) |
-| Calls | **owner**: build it at all, and last (the smallest Czech page); the display name; the palette |
+| Calls | **approved**: built, last (the smallest Czech page), as "Most (Regional)" covering Litvínov; the project's palette |
 | Traps | the joint scope is required; the two-obec change |

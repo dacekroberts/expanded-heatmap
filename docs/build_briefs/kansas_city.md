@@ -1,10 +1,26 @@
 # Kansas City — build brief
 
 **Screened 2026-09-27 (moved from the discards, owner: "Kansas City trams okay"); this brief 2026-09-30, on live OpenStreetMap.** Run
-`python scripts/brief_check.py kansas-city` before writing code. T1 on the tram
+`python scripts/brief_check.py kansas_city` before writing code. T1 on the tram
 list: trams-only maps approved by the owner on 2026-09-29. **Rings are sized by
 the owner's spacing rule and no stop is thinned** (the tram batch's binding
 decisions, `docs/handoff_tram_batch_2026-09-29.md`).
+
+---
+
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Kansas City, Missouri** | See the rail section |
+| **Lines drawn** | KC Streetcar (OSM ref 601); RideKC's feed not used (owner) | |
+| **Rings** | halved: median gap 413 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Colour** | chosen at build; no RideKC or KC Streetcar logo | |
+| **Call (approved): Data date** | stated on the page (register frozen 2026-01-15, owner) | |
 
 ---
 
@@ -20,7 +36,7 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
 | Projected CRS | **EPSG:32615** (UTM 15N, 94.6° W) |
 | Register | "KCMO Business License Holders", Socrata `kkhs-93m4`, **Public Domain**, 15,895 rows, geocoded |
 
-**Region: `"North America"`.** **Macro legend (proposed)**: `mode` tram, `coverage` full.
+**Region: `"United States East"`** (Houston, at 95.4° W, is East). **Macro legend (proposed)**: `mode` tram, `coverage` full.
 
 ---
 
@@ -109,7 +125,17 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
     "claim": "The derived UTM zone is EPSG:32615",
     "kind": "utm_zone_from_longitude",
     "lon": -94.58,
-    "expect": "EPSG:32615"
+    "expect": "EPSG:32615",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "city",
+    "crs": "EPSG:32615",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```

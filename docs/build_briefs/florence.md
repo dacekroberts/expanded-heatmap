@@ -8,6 +8,22 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Comune di Firenze** | See the rail section |
+| **Lines drawn** | T1 Leonardo and T2 Vespucci (OSM colours) | |
+| **Rings** | halved: median gap 322 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): 639 exempt food rows** | **In**, Milan's precedent (fuori piano included, non-public premises filtered by name, the gap disclosed) | |
+| **Call (approved): T3** | not drawn until it opens | |
+
+---
+
 ## The one-line summary
 
 **Tramvia T1 and T2 inside the comune, and the Comune's four CC BY 4.0 activity layers with a point on every row but no names.**
@@ -73,7 +89,7 @@ GeoJSON on `datigis.comune.fi.it/json/`: `commercio_sede_fissa_od.json`
 
 ## Build-time calls
 
-1. **The 639 exempt food rows**: in or out (Milan's precedent).
+1. **The 639 exempt food rows**: **in** (recommended), Milan's precedent (the owner included Milan's *fuori piano* register on 2026-09-22 and filtered the nameable non-public premises); say on the page that some non-public premises remain.
 2. **T3**: check at the build whether it has opened.
 
 ```brief-checks
@@ -119,7 +135,17 @@ GeoJSON on `datigis.comune.fi.it/json/`: `commercio_sede_fissa_od.json`
     "claim": "The derived UTM zone is EPSG:32632",
     "kind": "utm_zone_from_longitude",
     "lon": 11.25,
-    "expect": "EPSG:32632"
+    "expect": "EPSG:32632",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "comune",
+    "crs": "EPSG:32632",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```

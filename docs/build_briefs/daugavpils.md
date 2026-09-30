@@ -8,6 +8,22 @@ first trams-only city): read `pipeline/riga/config.py` and Riga's page first.
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`narrowed`** | Riga's two layers, merged (Riga is `narrowed`) |
+| **Scope** | **Daugavpils (ATVK 0002000)** | See the rail section |
+| **Lines drawn** | Route 1 only (see the call); routes 2–5 on the owner's word | |
+| **Rings** | halved: median gap 298 m over all 38 stops (recompute for the lines drawn) | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Routes drawn** | **Route 1 only** (every 10–15 min by day). Routes 3 and 5 (one loop, each direction every 20–30 min), 2 (gaps of an hour or more) and 4 (hourly) fail the kit's 20-minute rule (Buffalo's flat 20 is the slowest drawn); stops served only by them go to `excluded_stations.csv` as infrequent | |
+| **Call (approved): Colours** | chosen at build | |
+
+---
+
 ## The one-line summary
 
 **Riga's two layers with ATVK 0002000, placed on VZD's address file, and five tram routes from OSM.** Latvia's second city; Daugavpils Satiksme runs its trams, and there is no other urban rail.
@@ -23,7 +39,7 @@ first trams-only city): read `pipeline/riga/config.py` and Riga's page first.
 | In a ring | Riga 77.9% | **81.5%** within 483 m (the screen) |
 
 **Region: `"Europe"`.** **Macro legend (proposed)**: `mode` tram, `coverage`
-as Riga's (the same two layers, and the same thin food layer).
+`narrowed`, as Riga (the same two layers, merged; the same thin food layer).
 
 ---
 
@@ -56,8 +72,8 @@ to sell alcohol, as on Riga's page; say so there as Riga's page does.
 ## Rail — trams from OpenStreetMap
 
 - **OSM** (`osm-rail`): route=tram relations for refs 1, 2, 3 and 4 (and a line 3 loop, Cietoksnis – Stropu ezers – Ķīmija – Cietoksnis), operator Daugavpils Satiksme. **Every stop is inside the city**: 38 stop names on the routes, and all but one (Stropu ciemats, on the routes but not tagged as a stop) are tagged tram stops.
-- **The screen said routes 1–5**; OSM carries 1–4 on 2026-09-30. Read the operator's current route list at build (not the GTFS).
-- **Frequency** is disclosed, not gated: route 1 about every 10 minutes, the others about hourly (the screen). Say so on the page.
+- **Routes 1–5, of which 3 and 5 are one loop run in opposite directions** (Cietoksnis – Stropu ezers – Ķīmija): OSM tags both as ref 3.
+- **Frequency, measured 2026-09-30** (the operator's timetable as published in its GTFS, read for the headway only, Wednesday 2026-10-07, 07–19h, worst hour one way at each route's busiest stop): **route 1 4–6 trams an hour**; **routes 3 and 5 2–3 each**; **route 2 0–3** (hours with none); **route 4 1**. An hourly street tram has no precedent; the tram kit recommends drawing a route only at every 20 minutes or better by day (Buffalo's flat 20 is the slowest drawn), so **route 1 only**, approved: the kit's call 6 draws routes 2–4 only at 20 minutes or better, and the timetable shows none do, so **route 1 only**.
 - **No `colour`** on any relation: choose a palette (Le Havre's precedent).
 
 ---
@@ -149,7 +165,17 @@ to sell alcohol, as on Riga's page; say so there as Riga's page does.
     "claim": "Daugavpils (26.5 E) is in UTM 35N (EPSG:32635), as Riga",
     "kind": "utm_zone_from_longitude",
     "lon": 26.53,
-    "expect": "EPSG:32635"
+    "expect": "EPSG:32635",
+    "mode": "tram",
+    "coverage": "narrowed",
+    "scope": "city",
+    "crs": "EPSG:32635",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```

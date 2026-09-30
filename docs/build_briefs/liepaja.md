@@ -8,6 +8,22 @@ first trams-only city): read `pipeline/riga/config.py` and Riga's page first.
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`narrowed`** | Riga's two layers, merged (Riga is `narrowed`) |
+| **Scope** | **Liepāja (ATVK 0005000)** | See the rail section |
+| **Lines drawn** | Tram 1 (OSM), about every 7 min | |
+| **Rings** | halved: median gap 329 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Brīvības iela and Klaipēdas iela** | **Add by name**: tagged stops, missing from OSM's routes | |
+| **Call (approved): Colour** | chosen at build | |
+
+---
+
 ## The one-line summary
 
 **Riga's two layers with ATVK 0005000, and one tram line whose OSM route relations miss both ends' newest stops.**
@@ -23,7 +39,7 @@ first trams-only city): read `pipeline/riga/config.py` and Riga's page first.
 | In a ring | **69.7%** within 483 m (the screen) |
 
 **Region: `"Europe"`.** **Macro legend (proposed)**: `mode` tram, `coverage`
-as Riga's (the same two layers, and the same thin food layer).
+`narrowed`, as Riga (the same two layers, merged; the same thin food layer).
 
 ---
 
@@ -147,7 +163,17 @@ to sell alcohol, as on Riga's page; say so there as Riga's page does.
     "claim": "Liepāja (21.0 E) is in UTM 34N (EPSG:32634), not Riga's 35N",
     "kind": "utm_zone_from_longitude",
     "lon": 21.01,
-    "expect": "EPSG:32634"
+    "expect": "EPSG:32634",
+    "mode": "tram",
+    "coverage": "narrowed",
+    "scope": "city",
+    "crs": "EPSG:32634",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```

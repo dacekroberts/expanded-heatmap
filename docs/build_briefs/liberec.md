@@ -10,6 +10,22 @@ built on Prague's modules.
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; DECISIONS "The Czech batch's calls and prose approved as recommended")**: every call below as recommended, and the prose. **Build order: Brno, Plzeň, Olomouc, Ostrava, Liberec, Most.** Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Liberec (Regional): Liberec + Jablonec nad Nisou** | See the rail section |
+| **Lines drawn** | Trams 2, 3, 5 and 11 (OSM) | |
+| **Rings** | halved: median gap 378 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Scope** | **Regional, with Jablonec**: every line whole, +618 storefronts; Liberec alone passes at 67% | |
+| **Call (approved): Colours** | the project's palette, `line_colour_search.py`, evenly spaced hues | |
+
+---
+
 ## The one-line summary
 
 **Prague's modules over two obce, Liberec and Jablonec nad Nisou, joined by the interurban tram line 11.** Liberec alone passes too; the scope is the owner's call.
@@ -47,7 +63,7 @@ refresh them from a city branch.
   RUIAN_CRS_CONTROL = ("23653124", 50.77000, 15.05845, "Liberec Town Hall, nám. Dr. E. Beneše 1/1")
   ```
 
-  Liberec's transforms within 0.0004° of OSM's square. ⚠️ **Jablonec's is still to measure** (Overpass timed out on 2026-09-30): pick its town hall at the build. Files `20260831_OB_563889_ADR.csv.zip` (`data/liberec/raw/`) and `…563510…` (to fetch).
+  Liberec's transforms within 0.0004° of OSM's square. **Jablonec's, measured 2026-09-30** (its town hall, against OSM's square): `("12188018", 50.72452, 15.17128, "Jablonec Town Hall, Mírové náměstí 3100/19")`, within 0.0005° of the square's OSM points. Files `20260831_OB_563889_ADR.csv.zip` (`data/liberec/raw/`) and `20260831_OB_563510_ADR.csv.zip` (fetched to scratch 2026-09-30; the build fetches its own).
 - ⚠️ **`czechia_register` reads ONE obec.** A two-obec scope means calling it per obec and concatenating: Monterrey's and Kitchener–Waterloo's regional precedent, in shared code, not a fork.
 
 **The natural-person rule is Prague's**: an establishment at its owner's own
@@ -79,8 +95,8 @@ forms (`NAME_SUPPRESSED_FORMS`).
 ## Build-time calls
 
 1. **The scope: recommend Liberec (Regional) with Jablonec.** Every line whole, 618 more storefronts, one more line end ringed. Liberec alone passes (67%) if the owner prefers one obec.
-2. **Jablonec's RÚIAN control** at the build.
-3. **The palette** (below).
+2. **Jablonec's RÚIAN control**: measured (above).
+3. **The palette** (approved, owner 2026-09-30): choose at the build with `scripts/line_colour_search.py` (3:1 contrast on both map pages, CIE76 45 or more from every pin), aiming at evenly spaced hues, since no operator hue is licensed.
 
 ```brief-checks
 [
@@ -129,7 +145,22 @@ forms (`NAME_SUPPRESSED_FORMS`).
     "claim": "The derived UTM zone is 33N (EPSG:32633)",
     "kind": "utm_zone_from_longitude",
     "lon": 15.06,
-    "expect": "EPSG:32633"
+    "expect": "EPSG:32633",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "regional",
+    "crs": "EPSG:32633",
+    "obec_codes": [
+      "563889",
+      "563510"
+    ],
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED",
+      "obec_codes": "OBEC_CODES"
+    }
   }
 ]
 ```
