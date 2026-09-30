@@ -135,15 +135,36 @@ def scope_paragraph(cfg, name, m):
     k = len(m["excluded"])
     places = "; ".join(f"{joined(sorted(v))} in {p}" for p, v in by_place.items())
     run = "runs" if len(lines) == 1 else "run"
+    one = k == 1
     return (f"{text} **{names} {run} past it**, so {NUMBERS.get(k, str(k)).lower()} "
-            f"stop{'s' if k != 1 else ''} beyond the boundary {'are' if k != 1 else 'is'} "
+            f"stop{'s' if not one else ''} beyond the boundary {'are' if not one else 'is'} "
             f"left out: {places}. The line{'s are' if len(lines) != 1 else ' is'} still "
-            f"drawn to {'their' if len(lines) != 1 else 'its'} ends, but those stops get no "
-            f"ring and their businesses are not counted; they are listed in "
-            f"`outputs/{slug}/excluded_stations.csv`. Their communes' businesses are in the "
-            f"same national register this map reads, so leaving them out is a choice rather "
-            f"than a limit of the data: the map keeps to the commune, as the other French "
-            f"maps do.")
+            f"drawn to {'their' if len(lines) != 1 else 'its'} ends, but "
+            + ("that stop gets no ring and its businesses are not counted; it is listed in "
+               if one else
+               "those stops get no ring and their businesses are not counted; they are "
+               "listed in ")
+            + f"`outputs/{slug}/excluded_stations.csv`. "
+            + ("Its commune's" if one else "Their communes'")
+            + " businesses are in the same national register this map reads, so leaving "
+            + ("it" if one else "them")
+            + " out is a choice rather than a limit of the data: the map keeps to the "
+              "commune, as the other French maps do.")
+
+
+def source_clause(cfg, n):
+    """The template says the lines come "from the operator's own published
+    timetable feed". Where the track is OpenStreetMap's (no usable shapes in the
+    feed: Montpellier, Strasbourg, Le Havre, Caen, Rouen) that would be untrue,
+    so those pages say which part comes from where - a departure from the
+    approved wording, flagged for the owner at review time."""
+    feed = ("the Normandie region's published timetable feed"
+            if getattr(cfg, "GTFS_AGENCY_ID", None) else
+            "the operator's own published timetable feed")
+    if cfg.LINE_GEOMETRY != "osm":
+        return f"from {feed}"
+    its = "its" if n == 1 else "their"
+    return f"{its} stops from {feed} and {its} track from OpenStreetMap"
 
 
 def first_paragraph(cfg, name, operator):
@@ -151,19 +172,19 @@ def first_paragraph(cfg, name, operator):
     names = [cfg.LINE_NAMES[k] for k in cfg.LINE_KEYS]
     if slug == "rouen":   # approved departure, owner 2026-09-30
         return (f"One {operator} line is drawn, **{names[0]}**, labelled on the map and in "
-                f"the legend, from the operator's own published timetable feed. Rouen's métro "
+                f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}. Rouen's métro "
                 f"is a light rail running mostly on the street, so every stop gets rings.")
     if slug == "brest":   # approved departure, owner 2026-09-30
         trams = [cfg.LINE_NAMES[k] for k in cfg.LINE_KEYS if k != "C"]
         return (f"Two {operator} tram lines and the cable car are drawn, "
                 f"**{joined(trams + [cfg.LINE_NAMES['C']])}**, each labelled on the map and in "
-                f"the legend, from the operator's own published timetable feed. {name} has no "
+                f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}. {name} has no "
                 f"metro: its trams are its rapid transit, as Riga's are, so every tram stop "
                 f"gets rings.")
     n = len(names)
     return (f"{NUMBERS[n]} {operator} tram line{'s are' if n != 1 else ' is'} drawn, "
             f"**{joined(names)}**, {'each ' if n != 1 else ''}labelled on the map and in the "
-            f"legend, from the operator's own published timetable feed. {name} has no metro: "
+            f"legend, {source_clause(cfg, len(cfg.LINE_KEYS))}. {name} has no metro: "
             f"its trams are its rapid transit, as Riga's are, so every tram stop gets rings.")
 
 
@@ -298,7 +319,11 @@ def main():
         m = measure(cfg)
         text = prose(cfg, name, spec["operator"], m)
         owner = PRODUCER.get(slug) or legal_owner(cfg)
-        if not owner:
+        if slug == "bordeaux":
+            # LO 1.0 read (2026-09-29): Bordeaux Métropole is the producer
+            # credited; not TBM, Keolis or the exporter Mecatran.
+            credit = "Bordeaux Métropole"
+        elif not owner:
             credit = spec["operator"]
         elif "(" in owner:
             credit = f"{owner}, {spec['operator']}"
