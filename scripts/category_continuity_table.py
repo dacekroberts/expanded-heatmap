@@ -706,6 +706,101 @@ COLUMNS["boston_licensecat"] = {
     "mobile_unit": [loc({"source": "isd_food", "business_category": "MFW"}, "mobile food walk-on")],
 }
 
+
+def _buf(descript, source="city"):
+    return {"source": source, "business_category": descript}
+
+
+# Buffalo: the City's 46 licence codes (read from the portal 2026-09-29) and
+# two State registers, NYS retail food stores (every row Retail) and NYS salon
+# business licences (every row Personal services).
+COLUMNS["buffalo"] = {
+    "funeral": absent("no funeral type among the City's 46 licence codes; the State registers are "
+                      "food stores and salons"),
+    "no_counter_food": [loc(_buf("Caterer"), "caterer"), loc(_buf("Flea Market"), "flea market")],
+    "personal_catchall": absent("no personal-services catch-all: the City's codes are regulated "
+                                "activities, and the State's salon register is one trade"),
+    "adult_hostess": [loc(_buf("Go-Go Dancers"), "go-go dancers")],
+    "sex_shop": absent("no type of its own"),
+    "massage_commercial": absent("no massage type: New York licenses massage at state level, in no "
+                                 "register used here"),
+    "massage_regulated": absent("no massage type in these registers"),
+    "car_dealer": [loc(_buf("Used Car Dealer"), "used car dealer")],
+    "petrol_station": [
+        loc(_buf("GAS & GO EXPRESS", "nys_store"),
+            "a station with a shop holds a State food-store licence (44 such names, Joe's Kwik Marts)"),
+        pending(_buf("Cert. Operation Fuel Device"), "certificate of operation for a fuel device (1,182)",
+                None, "2026-09-29",
+                "the City's only record of every pump is a device certificate, left out as not a "
+                "premises (like elevators); a station without a food-store licence is off the map. "
+                "Not measured")],
+    "vehicle_repair": absent("no repair or car-wash code; Tire Handler is a scrap-tire permit"),
+    "gambling": absent("no betting, lottery, bingo or casino code; Coin-controlled Amusements are "
+                       "arcade machines (recreation)"),
+    "pawnbroker": [loc(_buf("Pawnbroker"), "pawnbroker")],
+    "nightclub": [
+        loc(_buf("Restaurant / Dance"), "restaurant licensed for dancing"),
+        pending(_buf("Dance Hall"), "dance hall (24)", None, "2026-09-29",
+                "left out as an adjunct licence; a club holding no Restaurant licence would be off "
+                "the map. Not measured")],
+    "vet": absent("no veterinary code"),
+    "nonstore": [loc(_buf("Vending Machine"), "vending machine")],
+    "parking": [loc(_buf("Parking Lot"), "parking lot"),
+                loc(_buf("Parking Garage Structure"), "parking garage")],
+    "repair": absent("no repair code"),
+    "lodging": [loc(_buf("Lodging House"), "lodging house"),
+                loc(_buf("Short Term Rental Dwelling"), "short-term rental")],
+    "recreation": [loc(_buf("Amusement Shows"), "amusement shows"), loc(_buf("Arcade"), "arcade"),
+                   loc(_buf("Bowling Alley"), "bowling"), loc(_buf("Billiard Parlor"), "billiards"),
+                   loc(_buf("Skating Rink"), "skating rink")],
+    "pharmacy": [loc(_buf("CVS PHARMACY", "nys_store"),
+                     "drugstore chains holding a State food-store licence (CVS, Rite Aid: 17)")],
+    "optician": absent("no optician type"),
+    "mobile_unit": [loc(_buf("Stationary Peddler"), "peddler at a fixed spot")],
+}
+
+# Sacramento: the City's Business_Description, 148 values (read 2026-09-29).
+COLUMNS["sacramento"] = {
+    "funeral": [loc("FUNERAL HOME & CREMATORY", "funeral home"),
+                loc("PET CREMATION SERVICES", "pet cremation")],
+    "no_counter_food": [loc("CATERING", "caterer"), loc("COTTAGE FOOD OPERATION", "home kitchen"),
+                        loc("SIDEWALK VENDOR - FOOD", "street food stall")],
+    "personal_catchall": [loc("SERVICE - GENERAL", "the general service catch-all"),
+                          loc("OTHER", "the whole-register catch-all")],
+    "tattoo": [loc("TATTOO PARLOR/ARTIST", "tattoo parlour")],
+    "adult_hostess": [loc("ADULT ENTERTAINMENT", "adult entertainment")],
+    "sex_shop": absent("no type of its own; under RETAIL SALES - GENERAL"),
+    "massage_commercial": [loc("MASSAGE - ESTABLISHMENT", "massage establishment")],
+    "massage_regulated": [loc("MASSAGE - TECHNICIAN", "certified massage technician, a person")],
+    "car_dealer": [loc("AUTOMOBILE DEALERS - NEW / USED", "car dealers"),
+                   loc("AUTOMOBILE DEALERS - USED", "used car dealers")],
+    "petrol_station": [loc("SERVICE STATIONS", "service stations")],
+    "vehicle_repair": [loc("AUTOMOTIVE - REPAIR", "auto repair"),
+                       loc("AUTOMOTIVE - WRECKING", "auto wrecking")],
+    "gambling": [loc("CARDROOMS", "card rooms"), loc("AMUSEMENT - BINGO", "bingo")],
+    "pawnbroker": [loc("PAWNBROKERS", "pawnbroker")],
+    "nightclub": [
+        loc("BARS - TAVERNS", "bars and taverns, where a club with a bar licence files"),
+        pending("ENTERTAINMENT", "entertainment (44 in the city)", None, "2026-09-29",
+                "left out as recreation and events; a hand read of the names is mostly DJs, bands "
+                "and media, but a few may be clubs (LA KALLE, CLUB FANTASY)")],
+    "vet": [loc("VETERINARIANS", "veterinarians")],
+    "nonstore": [loc("RETAIL SALES - ONLINE", "online retail"), loc("VENDING MACHINES", "vending")],
+    "parking": [loc("PARKING LOTS/SERVICES", "parking")],
+    "repair": [loc("SERVICE - REPAIRS", "repairs"), loc("ELECTRONICS & REPAIRS", "electronics repair"),
+               loc("CLOTHING ALTERATIONS, &TAILORS SHOPS", "alterations")],
+    "lodging": [loc("HOTELS & MOTELS", "hotels"), loc("SHORT-TERM RENTAL", "short-term rental")],
+    "recreation": [loc("FITNESS/PERSONAL TRAINER", "fitness"), loc("THEATRES", "theatres"),
+                   loc("AMUSEMENT - ARCADES", "arcades"), loc("AMUSEMENT - OTHER", "amusements")],
+    "pharmacy": [loc("DRUGS STORES & PHARMACIES", "pharmacies")],
+    "optician": absent("no optician type: OPTOMETRISTS are eye doctors' offices (NAICS 621320, "
+                       "health care, out as in the NAICS cities); optical shops file under "
+                       "RETAIL SALES - GENERAL"),
+    "mobile_unit": [loc("MOBILE VENDOR - FOOD", "food truck"),
+                    loc("MOBILE VENDOR - ICE CREAM", "ice-cream vendor"),
+                    loc("SIDEWALK VENDOR - MERCHANDISE", "street merchandise stall")],
+}
+
 SHOP = "RETAIL (SHOPS)"
 
 
@@ -1567,6 +1662,11 @@ COLUMNS["sweden_livsmedel"] = {
 # ---------------------------------------------------------------------------
 AWAITING_OWNER = {
     ("boston_licensecat", "nightclub"): "measure first: how many bars and clubs hold no ISD food permit",
+    # Found when these columns were added (2026-09-29, after the owner's list was ruled on).
+    ("buffalo", "petrol_station"): "measure first: how many fuel-device sites hold no State "
+                                   "food-store licence",
+    ("buffalo", "nightclub"): "measure first: how many Dance Hall licensees hold no Restaurant licence",
+    ("sacramento", "nightclub"): "read the 44 ENTERTAINMENT names for clubs with a public floor",
 }
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
