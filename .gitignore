@@ -24,6 +24,9 @@ data/*/processed/
 # of licence pages and API captures). Found untracked, and not ignored, in four
 # checkouts on 2026-09-27, one `git add -A` away from being committed.
 data/_*/
+# The heavy-job gate's shared ledger, lock and measured-peak history
+# (scripts/heavy_job.py): machine state, never committed.
+data/_heavy_jobs*
 
 # outputs/<city>/ IS committed - the deployed app only ever reads from
 # there, per the pipeline/app split.

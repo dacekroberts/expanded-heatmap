@@ -7,6 +7,21 @@ owner on 2026-09-29.
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; DECISIONS "The Czech batch's calls and prose approved as recommended")**: every call below as recommended, and the prose. **Build order: Brno, Plzeň, Olomouc, Ostrava, Liberec, Most.** Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Obec Brno** | See the rail section |
+| **Lines drawn** | Trams 1–10 and 12 (11 lines), KORDIS's feed; OSM geometry | |
+| **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi: median gap 329 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): H4 and P1** | **Out**: heritage and event services, no weekday trips | |
+
+---
+
 ## The one-line summary
 
 **Prague's modules with a new obec code, one coordinate control to declare,
@@ -104,10 +119,7 @@ at build, never across weeks.**
 - **Frequency** is disclosed, not gated, on street track. At each line's
   busiest stop on Wednesday 2026-10-07, 07–19h, the worst hour is **6 trips
   one way** on every regular line except line 10 (3 an hour).
-- **Stations are stop names:** 147 inside the city, at a 329 m median
-  nearest-neighbour gap. Collapse platforms by name. Check the few names
-  that recur across the city (the cjk-text rule does not apply; Czech
-  diacritics are kept as published).
+- **Stations are the feed's `parent_station` rows, Prague's shape** (the Czech kit, 2026-09-30): all 329 platforms of the 11 regular lines carry a parent. That gives **149 parents network-wide, no two sharing a name, and 147 inside the city**; the two outside are Modřice, Tyršova and Modřice, smyčka on line 2's branch. The tram list's 146 was the screen's count. The median gap is 329 m. Czech diacritics are kept as published.
 
 ---
 
@@ -175,7 +187,9 @@ at build, never across weeks.**
     "claim": "The feed carries 13 tram routes (route_type 0): the 11 regular lines, H4 and P1 (2026-09-30)",
     "kind": "gtfs_route_type_counts",
     "url": "https://kordis-jmk.cz/gtfs/gtfs.zip",
-    "expect": {"0": 13}
+    "expect": {
+      "0": 13
+    }
   },
   {
     "id": "brno-gtfs-current",
@@ -189,21 +203,40 @@ at build, never across weeks.**
     "claim": "data.brno.cz lists the feed as CC-BY-4.0 (item 379d2e9a7907460c8ca7fda1f3e84328)",
     "kind": "http_contains",
     "url": "https://data.brno.cz/api/search/v1/collections/all/items/379d2e9a7907460c8ca7fda1f3e84328",
-    "present": ["CC-BY-4.0", "kordis-jmk.cz/gtfs/gtfs.zip"]
+    "present": [
+      "CC-BY-4.0",
+      "kordis-jmk.cz/gtfs/gtfs.zip"
+    ]
   },
   {
     "id": "brno-ruian-atom",
     "claim": "ČÚZK's ATOM service resolves obec 582786's RÚIAN address file",
     "kind": "http_contains",
     "url": "https://atom.cuzk.gov.cz/get.ashx?theme=RUIAN-CSV-ADR-OB&spatial_dataset_identifier_code=CZ-00025712-CUZK_RUIAN-CSV-ADR-OB_582786",
-    "present": ["582786"]
+    "present": [
+      "582786"
+    ]
   },
   {
     "id": "brno-projected-crs",
     "claim": "Brno's derived UTM zone is 33N (EPSG:32633)",
     "kind": "utm_zone_from_longitude",
     "lon": 16.608,
-    "expect": "EPSG:32633"
+    "expect": "EPSG:32633",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "obec",
+    "crs": "EPSG:32633",
+    "obec_codes": [
+      "582786"
+    ],
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED",
+      "obec_codes": "OBEC_CODES"
+    }
   }
 ]
 ```

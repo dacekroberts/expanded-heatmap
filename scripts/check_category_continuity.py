@@ -101,9 +101,13 @@ def parse_doc_rules(text):
 
 
 def decision_headings(root):
-    """Every DECISIONS heading, current and archived (for exceptions)."""
+    """Every DECISIONS heading, current and archived (for exceptions), and every
+    heading still in a session's drafts file (docs/decisions_drafts/, owner
+    2026-09-30): build sessions write there, cleanup folds them in, and an
+    exception cites its draft until the fold."""
     heads = []
-    for p in [root / "DECISIONS.md", *sorted((root / "docs" / "decisions").glob("*.md"))]:
+    for p in [root / "DECISIONS.md", *sorted((root / "docs" / "decisions").glob("*.md")),
+              *sorted((root / "docs" / "decisions_drafts").glob("*.md"))]:
         if p.exists():
             heads += [l[4:].strip() for l in p.read_text(encoding="utf-8").splitlines()
                       if l.startswith("### ")]

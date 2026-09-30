@@ -214,6 +214,8 @@ results in the sweep.
 
 ### ▲ 🇺🇸 Dallas — from the discards on the Comptroller's permit file (2026-09-30, owner's call)
 
+**Queued for the Band B build session, last in its queue (owner, 2026-09-30).** Brief: `docs/build_briefs/dallas.md`, 4/4.
+
 Discarded on 2026-09-21 because the city's certificates of occupancy stopped
 in 2022. **The Texas Comptroller's Active Sales Tax Permit Holders file
 (`jrea-zgmq`, public domain), Houston's register, replaces them.** The owner
@@ -221,7 +223,7 @@ approved the re-screen (2026-09-28) and the move (2026-09-30).
 
 | City | Network | Business | Build-time calls |
 |---|---|---|---|
-| **Dallas** 🇺🇸 | DART light rail, Red, Blue, Green and Orange: **44 stations inside the city** (OSM relation 6571629, 1,018 km²), 1,397 m median gap, so standard rings. Worst line Orange, 17 of 30 inside (57%, over Toulouse's 52%). Purpose-built track, so frequency is disclosed, not gated. The Silver Line and the TRE are commuter rail, not drawn | `jrea-zgmq`, 44,760 outlets flagged DALLAS inside city limits, permits to 2026-09-26: **19,557 storefronts** once non-store retail (454, 4,350) and parking (812930, 256) leave: retail about 11,900, food 6,310, personal about 1,360. **Placed 90.0%** on a 300-row sample against the City's AddressPoints (395,893 main addresses, `services2.arcgis.com/rwnOSbfKSwyTBcwN`): exact 88.3%, same-side number 1.7%. **24.4% within 0.6 mi** of a station (a 400-row sample) | Houston's module and rules: never `taxpayer_name`, `taxpayer_address` or `taxpayer_number`; suppress `outlet_name` for sole owners; strip suites (38.6% carry one). ⚠️ **The AddressPoints layer's licence is unread**: its item carries an accuracy disclaimer only (Texas Gov. Code § 2051.102), so a `licence-read` first. The Dallas Streetcar and the M-Line trolley: an owner call at the build |
+| **Dallas** 🇺🇸 | DART light rail, Red, Blue, Green and Orange: **44 stations inside the city** (OSM relation 6571629, 1,018 km²), 1,397 m median gap, so standard rings. Worst line Orange, 17 of 30 inside (57%, over Toulouse's 52%). Purpose-built track, so frequency is disclosed, not gated. The Silver Line and the TRE are commuter rail, not drawn | `jrea-zgmq`, 44,760 outlets flagged DALLAS inside city limits, permits to 2026-09-26: **19,557 storefronts** once non-store retail (454, 4,350) and parking (812930, 256) leave: retail about 11,900, food 6,310, personal about 1,360. **Placed 90.0%** on a 300-row sample against the City's AddressPoints (395,893 main addresses, `services2.arcgis.com/rwnOSbfKSwyTBcwN`): exact 88.3%, same-side number 1.7%. **24.4% within 0.6 mi** of a station (a 400-row sample) | Houston's module and rules: never `taxpayer_name`, `taxpayer_address` or `taxpayer_number`; suppress `outlet_name` for sole owners; strip suites (38.6% carry one). **The AddressPoints layer, read 2026-09-30: SILENT on reuse, with an open-ended indemnity accepted by use; the owner accepted it (2026-09-30)** (`docs/data_sources.md`, "Dallas's indemnity"). Never call the pin locations surveyed or exact. The Dallas Streetcar and the M-Line trolley: an owner call at the build |
 
 ### ▲ Five light-rail cities from Band T — 2026-09-29 (owner's call)
 

@@ -10,6 +10,23 @@ built on Prague's modules.
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; DECISIONS "The Czech batch's calls and prose approved as recommended")**: every call below as recommended, and the prose. **Build order: Brno, Plzeň, Olomouc, Ostrava, Liberec, Most.** Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Obec Ostrava** | See the rail section |
+| **Lines drawn** | Trams 1–4, 6–8, 10–12, 14, 15, 17 and 18 (OSM) | |
+| **Rings** | halved: median gap 424 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Line 5** | **Out**: a suburban stub, 3 of 10 stops inside (30%); costs two stops | |
+| **Call (approved): Lines 9 and 19** | **Not drawn**: relations with no stop members | |
+| **Call (approved): Colours** | the project's palette, `line_colour_search.py`, evenly spaced hues | |
+
+---
+
 ## The one-line summary
 
 **Prague's modules with obec 554821, trams from OSM, and one line to leave out.** Ostrava has no metro. Its tram network is one of the country's largest, and the business leg is the national chain.
@@ -56,7 +73,7 @@ forms (`NAME_SUPPRESSED_FORMS`).
 
 ## Rail — trams from OpenStreetMap
 
-- **No GTFS used.** The screen found no reachable feed, so the lines come from OSM (`osm-rail`): 34 route=tram relations in the box (overpass-api.de, 2026-09-30), every one tagged `operator` Dopravní podnik Ostrava.
+- **No GTFS used.** The screen found no reachable feed, so the lines come from OSM (`osm-rail`): 33–34 route=tram relations in the box (34 on 2026-09-30 here, 33 with 18 refs on the kit's check the same day) (overpass-api.de, 2026-09-30), every one tagged `operator` Dopravní podnik Ostrava.
 - **Every regular line keeps all its stops inside the city**, 15 to 28 stop names each.
 - ⚠️ **Line 5 is the suburban line to Budišovice**: 3 of its 10 stops inside (30%), below every stub precedent (Toulouse 52%; Minneapolis and Pittsburgh 42%, owner). One of the three, Poruba,Vřesinská, is on other lines. The other two are Poruba,koupaliště and Krásné Pole.
 - **Lines 9 and 19** have relations but no stop members in OSM (special or peak services). Place them as not drawn, or read their stops at the build; step 1 refuses an unplaced relation.
@@ -81,7 +98,7 @@ forms (`NAME_SUPPRESSED_FORMS`).
 
 1. **Line 5: recommend leaving it out**, as a suburban stub at 30% inside. That loses two stops (Poruba,koupaliště, Krásné Pole); the alternative is to draw it to its end and ring its three stops.
 2. **Lines 9 and 19**: out, unless their stops are read.
-3. **The palette** (below).
+3. **The palette** (approved, owner 2026-09-30): choose at the build with `scripts/line_colour_search.py` (3:1 contrast on both map pages, CIE76 45 or more from every pin), aiming at evenly spaced hues, since no operator hue is licensed.
 4. **The UTM zone is 34N**, set per city and never copied.
 
 ```brief-checks
@@ -133,7 +150,21 @@ forms (`NAME_SUPPRESSED_FORMS`).
     "claim": "The derived UTM zone is 34N (EPSG:32634)",
     "kind": "utm_zone_from_longitude",
     "lon": 18.29,
-    "expect": "EPSG:32634"
+    "expect": "EPSG:32634",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "obec",
+    "crs": "EPSG:32634",
+    "obec_codes": [
+      "554821"
+    ],
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED",
+      "obec_codes": "OBEC_CODES"
+    }
   }
 ]
 ```

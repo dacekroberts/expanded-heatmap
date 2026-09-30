@@ -444,6 +444,25 @@ one source.** On the same day the owner extended Barcelona's reading of the
 took the permissive reading of Catastro's INSPIRE terms for the address join
 (`docs/build_briefs/palma.md`).
 
+#### Dallas's indemnity — ACCEPTED 2026-09-30 (candidate city)
+
+The City of Dallas's **Standard GIS Data Disclaimer of Liability** (2015-12-04; the
+linked PDF is dead, and the current copy is ArcGIS item `115c0fe8ed4b4a12a669f5e48dc56d52`)
+governs the City's **Address Points** layer (item `0a5c879d970f4b32b744476e29e0e54b`),
+which the Dallas build uses only to place the Comptroller's permit addresses. It was
+read on 2026-09-30 by the licence-read agent.
+- **The shape:** the same again. The user agrees to "indemnify, defend, and hold
+  harmless The City of Dallas" for any liability arising from errors in the data
+  or from its use.
+- **How it binds:** it is accepted by using the data. There is no cap.
+- **Reuse:** nothing grants it and nothing forbids it. The layer is not on
+  dallasopendata.com.
+- **The owner accepted it on 2026-09-30, for this one source**, after the
+  alternative (placing through the Census geocoder) was offered unmeasured. As
+  with Hong Kong, it is not a notice or a build step.
+- **Prose rule:** never call Dallas's pin locations surveyed or exact.
+- **Optional credit:** "City of Dallas Development Services GIS".
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the
