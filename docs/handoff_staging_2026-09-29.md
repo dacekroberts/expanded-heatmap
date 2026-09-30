@@ -46,18 +46,15 @@ item is done.**
   clock), the yes to trams-only maps, the macro-map plan, the French feed
   licence reads, Atlanta, the published-city date check.
 
-## NEXT - the order set by the owner (2026-09-30); NOT started, wait for the go
+## NEXT - the order set by the owner (2026-09-30); GO given the same day
 
 Every banded city is briefed (Band B's last, the Gyeonggi satellites
 Namyangju, Ansan, Uijeongbu and Anyang, on 2026-09-29). The owner set this
 order, and said not to start yet:
-1. **T2 gap verdicts**: Zurich, Göteborg, Santa Cruz–La Laguna, Den Haag,
-   Utrecht, Rijswijk, Delft.
-   - Read each against Band B's reduced-bucket bar (the six rules in
-     `docs/city_master_list.md`), with the currency check first.
-   - Bring pass/fail recommendations to the owner.
-   - Rijswijk and Delft are expected to fold into a Den Haag (Regional)
-     scope.
+1. ~~**T2 gap verdicts**~~ **DONE 2026-09-30** (owner accepted all; DECISIONS
+   "T2 closed"): Zurich, Göteborg and Den Haag to T1, Utrecht to R, Santa
+   Cruz–La Laguna, Rijswijk and Delft to the discards. **Still open**: the
+   licence read of Den Haag's horeca permit layer (it declares none).
 2. **Priority 2's wave-2 follow-ups** (below):
    - Dallas, Fort Worth and Austin on the Comptroller's `jrea-zgmq`;
    - St. Louis's permits API;
