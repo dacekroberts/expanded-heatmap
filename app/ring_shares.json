@@ -338,5 +338,10 @@
   "in_ring": 13003,
   "all": 23481,
   "map_blob": "f03b1f6fca7ca4cee7c4c087a53879fca61dbe76"
+ },
+ "sacramento": {
+  "in_ring": 1378,
+  "all": 3335,
+  "map_blob": "8e5723b8c56ec138a1be9c600de1b0f4299c1f79"
  }
 }
