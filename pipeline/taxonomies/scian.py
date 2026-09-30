@@ -128,10 +128,20 @@ def legend_label(bucket: str) -> str:
     return bucket
 
 
+# Exact codes carried INTO a bucket from outside the group prefixes.
+#   522452  Casas de empeño - pawnshops, which DENUE files in credit (5224)
+#           under a code of their own. Pawnbrokers are kept as Retail in every
+#           city (R5; owner, 2026-09-29, DECISIONS "Category check: the owner's
+#           calls"); 381 in Mexico City's file. Its credit neighbours stay out.
+SCIAN_INCLUDE_CODES = {"522452": "Retail"}
+
+
 def scian_group(code: str):
     """A SCIAN code -> its bucket name, or None if it is not a tracked
     storefront category."""
     code = str(code)
+    if code in SCIAN_INCLUDE_CODES:
+        return SCIAN_INCLUDE_CODES[code]
     if code.startswith(SCIAN_EXCLUDE_PREFIXES):
         return None
     for name, prefixes in SCIAN_GROUPS:

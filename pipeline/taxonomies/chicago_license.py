@@ -56,7 +56,10 @@ ANIMAL_CARE = "ANIMAL CARE LICENSE"
 PERSONAL_SERVICE_ACTIVITIES = (
     "HAIR SERVICES", "HAIR, NAIL", "NAIL SERVICES", "SKINCARE SERVICES",
     "SKIN CARE", "WAXING", "MASSAGE", "TATTOO", "LAUNDROMAT",
-    "DRY CLEANING - DROP OFF", "CLOTHING ALTERATIONS",
+    "DRY CLEANING - DROP OFF",
+    # "CLOTHING ALTERATIONS" was here until 2026-09-29: alterations are repair
+    # (NAICS 811490), out in every city (owner, 2026-09-29, DECISIONS
+    # "Category check: the owner's calls"), superseding the 2026-09-19 call.
     # "MISCELLANEOUS PERSONAL SERVICES" was here until 2026-09-29: it is
     # Chicago's "other personal services" catch-all, excluded everywhere
     # (owner, 2026-09-29). Removed rather than vetoed, so a licence that ALSO

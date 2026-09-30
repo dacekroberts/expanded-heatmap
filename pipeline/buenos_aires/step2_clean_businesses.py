@@ -111,8 +111,14 @@ def main():
     print(f"active MULTICOMERCIAL (left out, disclosed) {multi:>8,}")
     emit("multicomercial_active", multi)
 
-    df = df[active & df[TAX.TYPE_COLUMN].eq(TAX.TYPE_VALUE)].copy()
-    print(f"active single-use shopfronts               {len(df):>9,}")
+    # Petrol stations are their own survey type with no TIPO2; admit them and
+    # name their use, so the taxonomy classifies them (owner, 2026-09-29).
+    stations = active & df[TAX.TYPE_COLUMN].eq(TAX.STATION_TYPE_VALUE)
+    df.loc[stations, RAW_CLASSIFICATION_COLUMN] = TAX.STATION_TYPE_VALUE
+    print(f"active service stations (kept as Retail)   {int(stations.sum()):>9,}")
+    emit("service_stations_active", int(stations.sum()))
+    df = df[active & df[TAX.TYPE_COLUMN].isin(TAX.STOREFRONT_TYPE_VALUES)].copy()
+    print(f"active single-use shopfronts and stations  {len(df):>9,}")
     emit("unicomercial_active", len(df))
     unidentified = int(df[RAW_CLASSIFICATION_COLUMN].eq("SIN IDENTIFICAR").sum())
     print(f"  of which SIN IDENTIFICAR (dropped, disclosed) {unidentified:>5,}")

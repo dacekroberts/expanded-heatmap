@@ -161,6 +161,20 @@ Desktop is unaffected — the label is fully visible there.
     `check_macro_facts.py --write`.
   - The `docs/excluded_categories.md` wording goes to the owner first; a
     full `deploy-verify` runs at review time.
+- [ ] **The category fix batch (owner-approved 2026-09-29).**
+  `scripts/check_category_continuity.py` found 45 departures from
+  `docs/category_rules.md`, and the owner approved fixing all of them. The
+  work list is `docs/handoff_category_fixes_2026-09-29.md`: 17 taxonomies or
+  configs and about 45 cities to re-render, run as the exclusions batch was.
+  - Coded and re-run on branch `category-continuity` (2026-09-29): 32 maps
+    moved, the privacy check is clean, and `check_all` passes (DECISIONS,
+    "Category fix batch re-run"). The per-city wording in
+    `docs/excluded_categories.md` is written (owner-approved). Left for review
+    time: `app/macro_facts.json`, written from the processed files saved in
+    `data/_review_category-continuity_2026-09-29/`, then landing.
+  - Stockholm's torghandel stall waits for `stockholm-catering` to land.
+  - Still with the owner: Boston's General On Premise licences (measure
+    first).
 - [ ] **Next cross-city discrepancy audits (owner, 2026-09-29), AFTER the
   exclusions batch lands.** Each is read-only and runs one at a time; each ends in rules
   for the owner to decide, as the fringe-category audit did.

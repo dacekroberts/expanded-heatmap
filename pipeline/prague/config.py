@@ -149,7 +149,11 @@ CITY_KEEP = "PRAHA"   # kept for the scaffold's templates; OBEC filters
 # SUPERSEDED 2026-09-29 for 96990: the "other personal services" catch-all is
 # excluded in every city (owner, 2026-09-29), however few rows it holds here.
 # 96230 stays - a specific class, as above.
-CATCH_ALL_EXCLUDE = ("96990",)   # (owner, 2026-09-29) R2
+# "969" too (owner, 2026-09-29, DECISIONS "Category check: the owner's calls"):
+# the register is ragged, and 21 rows filed at the bare group reached the map
+# while the match is exact. Exact rather than a prefix, so no other 969x class
+# can go with it.
+CATCH_ALL_EXCLUDE = ("96990", "969")   # (owner, 2026-09-29) R2
 
 # Sanity bounds: the placed storefronts' measured extent (49.9488-50.1716 N,
 # 14.2657-14.6867 E, 2026-09-24) plus ~0.02 deg. The join to RUIAN does the

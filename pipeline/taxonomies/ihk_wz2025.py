@@ -31,7 +31,7 @@ exclusion is the SHORTEST prefix that means only the excluded activity.
 
 FIELD_LABEL = "WZ 2025"
 VALUE_COLUMN = "nace_desc"
-EXTRA_COLUMNS = ("nace_id",)
+EXTRA_COLUMNS = ("nace_id", "ihk_branch_id")   # the branch only for INCLUDE_BRANCHES
 
 _DIVISION_BUCKETS = {
     "47": "Retail",
@@ -101,8 +101,18 @@ def excluded(code):
     return next((p for p in NOT_PREMISES_PREFIXES if code.startswith(p)), None)
 
 
+# IHK branches carried INTO a bucket from a class that is not one (the class
+# alone cannot say it). 64922 Leihhäuser - pawnshops, filed in 6492 other
+# credit granting; kept as Retail in every city (R5; owner, 2026-09-29,
+# DECISIONS "Category check: the owner's calls"). 35 in Berlin.
+INCLUDE_BRANCHES = {"64922": "Retail"}
+
+
 def classify(row):
     """Bucket for a row, or None if it is not tracked storefront commerce."""
+    branch = str(row.get("ihk_branch_id") or "").strip()
+    if branch in INCLUDE_BRANCHES:
+        return INCLUDE_BRANCHES[branch]
     code = normalise_code(row.get("nace_id"))
     if len(code) < 2 or excluded(code):
         return None

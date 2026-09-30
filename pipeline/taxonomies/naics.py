@@ -76,6 +76,13 @@ NAICS_GROUPS = [
 #          has 812191 and 812199 only); San Diego's registry extends 81219
 #          locally, and keeps 812198 MASSAGE THERAPY and 812194 MASSAGE
 #          TECHNICIAN as their own codes, which stay.
+#   445132 Vending machine operators \  NAICS 2022 moved 454's vending and
+#   457210 Fuel dealers               / fuel-dealer codes INTO the retail
+#          prefixes, so the "454" carve-out missed them (Los Angeles and San
+#          Francisco's registries use both editions). Nonstore, out (owner,
+#          2026-09-29, DECISIONS "Category check: the owner's calls"). Their
+#          neighbours 445131 convenience retailers and 457110/457120 gasoline
+#          stations stay.
 #
 # A prefix here always wins over NAICS_GROUPS, so "454" beats "45" and "81293"
 # beats "812". Anything added here changes every NAICS city's counts: re-run the
@@ -83,7 +90,8 @@ NAICS_GROUPS = [
 NAICS_EXCLUDE_PREFIXES = ("454", "81293", "8122",
                           "72231", "72232", "72233",   # (owner, 2026-09-29) R1
                           "81299",                     # (owner, 2026-09-29) R2
-                          "812193")                    # (owner, 2026-09-29) R3
+                          "812193",                    # (owner, 2026-09-29) R3
+                          "445132", "457210")          # (owner, 2026-09-29) NAICS 2022 nonstore
 
 # Individual 6-digit NAICS codes worth hand-sampling per city before trusting
 # the prefix filter alone. Each is a national NAICS catch-all (it sweeps a
@@ -192,5 +200,7 @@ for _c, _want in [("722310", None), ("72231", None), ("722320", None), ("72232",
                   ("8129", "Personal services"), ("812910", "Personal services"),
                   ("812193", None), ("812198", "Personal services"),
                   ("812194", "Personal services"), ("812199", "Personal services"),
-                  ("812196", "Personal services")]:
+                  ("812196", "Personal services"),
+                  ("445132", None), ("445131", "Retail"), ("457210", None),
+                  ("457110", "Retail"), ("457120", "Retail")]:
     assert naics_group(_c) == _want, (_c, naics_group(_c), _want)

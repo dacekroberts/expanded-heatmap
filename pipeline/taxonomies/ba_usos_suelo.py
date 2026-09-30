@@ -28,6 +28,13 @@ VALUE_COLUMN = "TIPO2"
 
 TYPE_COLUMN = "TIPO1"
 TYPE_VALUE = "UNICOMERCIAL"
+# Petrol stations are a survey type of their own, with no TIPO2 (266 active).
+# Step 2 admits them beside UNICOMERCIAL and gives them this TIPO2, which is
+# Retail: petrol stations are kept in every city (R4; owner, 2026-09-29,
+# DECISIONS "Category check: the owner's calls"). Until then the UNICOMERCIAL
+# filter dropped every one of them.
+STATION_TYPE_VALUE = "ESTACION DE SERVICIO"
+STOREFRONT_TYPE_VALUES = (TYPE_VALUE, STATION_TYPE_VALUE)
 ACTIVE_COLUMN = "ESTADO"
 ACTIVE_VALUE = "ACTIVO"
 
@@ -138,24 +145,23 @@ _RETAIL = {
     "CONCESIONARIA AUTOMOTORES", "REPUESTOS AUTOMOTOR", "ACCESORIOS AUTOMOTOR",
     "MOTOS, REPUESTOS Y ACCESORIOS", "BATERIAS AUTOMOTORES", "NEUMATICOS",
     "AUTORADIOS",
+    "ESTACION DE SERVICIO",     # 266 - the TIPO1 step 2 labels as its use (see STATION_TYPE_VALUE)
 }
 
-# --- Personal services: NAICS 812, plus Dublin's two departures -------------
-# (shoe repair, key cutting and garment alterations are 811 but read as
-# personal services on a high street; Dublin includes them, so this does)
+# --- Personal services: NAICS 812 -------------------------------------------
+# Shoe repair, key cutting, tailoring and garment alterations were counted here
+# until 2026-09-29, following Dublin's departure. They are NAICS 811 repair,
+# out in every city (owner, 2026-09-29, DECISIONS "Category check: the owner's
+# calls"), and are now listed with the repair trades below.
 _PERSONAL = {
     "PELUQUERIA",                                   # 2,645
     "LAVADERO DE ROPA",                             #   934  laundry
     "CENTRO DE ESTETICA CORPORAL",                  #   670
     "BARBERIA",                                     #   661
-    "CERRAJERIA",                                   #   469  key cutting
     "MANICURIA Y PEDICURIA",                        #   359
     "TINTORERIA",                                   #   244  dry cleaner
-    "COMPOSTURA DE CALZADO",                        #   226  shoe repair
-    "ARREGLO DE ROPA",                              #   214  alterations
     "DEPILACION",                                   #   157
     "TATUAJES",                                     #   111
-    "SASTRERIA",                                    #    35
     "SOLARIUM",                                     #    34
     "MASAJES",                                      #    29
     "PELUQUERIA MASCOTAS",                          #    27  pet grooming, 812910
@@ -187,7 +193,9 @@ _NOT_STOREFRONT = {
     "ALARMAS AUTOMOTORES", "TAPICERIA PARA AUTOS", "INYECCION ELECTRONICA AUTOMOTOR",
     "COLOCACION CRISTALES AUTOMOTORES", "CAÑOS DE ESCAPE", "EQUIPOS GNC",
     "POLARIZADO DE VIDRIOS", "RELOJES PARA TAXI", "DEPOSITO AUTOMOTORES",
-    # Other repair (811)
+    # Other repair (811). The first four were personal services until
+    # 2026-09-29 (owner: repairs out in every city).
+    "CERRAJERIA", "COMPOSTURA DE CALZADO", "ARREGLO DE ROPA", "SASTRERIA",
     "REPARACION DE ELECTRODOMESTICOS", "REPARACION DE ART. ELECTRONICOS",
     "REPARACION CELULARES", "REPARACION PC", "REPARACION AIRE ACONDICIONADO",
     "REPARACION DE AUDIO Y VIDEO", "REPARACION DE HELADERAS",

@@ -99,6 +99,21 @@ EPIGRAFE_EXCLUDE = {
     # agencies and whatever else has no epigrafe of its own. The register's
     # own "OTRAS" (sic). Tattoo and piercing have their own epigrafe and stay.
     "OTRAS SERVICIOS PERSONALES (ASTROLOGIA, AGENCIAS DE CONTACTOS) N.C.O.P.",  # 43
+    # Mobile food (owner, 2026-09-29, DECISIONS "Category check: the owner's
+    # calls"): a vehicle or a vendor on foot has no counter of its own.
+    "ESTABLECIMIENTO DE RESTAURACION MOVIL",                             # 18
+    "VENDEDOR AMBULANTE DE ALIMENTOS PREPARADOS PARA SU CONSUMO INMEDIATO",  # 3
+}
+# Street pitches: every "SITUADOS: ..." epígrafe is a licensed pitch on the
+# public way (about 163 rows), a stall rather than a shop (owner, 2026-09-29).
+EPIGRAFE_EXCLUDE_PREFIXES = ("SITUADOS",)
+
+# --- carved INTO Food service from a division that is not a bucket ----------
+# Nightclubs are kept as Food service in every city (R5; owner, 2026-09-29,
+# DECISIONS "Category check: the owner's calls"); Madrid files them under
+# recreation. Its "SALAS DE FIESTA" (party halls) stay out.
+EPIGRAFE_INTO_FOOD = {
+    "DISCOTECAS Y SALAS DE BAILE",                                       # 233
 }
 
 FIELD_LABEL = "Actividad (epígrafe)"
@@ -132,10 +147,12 @@ def _norm(value) -> str:
 def classify(row: dict):
     """Taxonomy-module interface (see pipeline/taxonomies/__init__.py)."""
     epigrafe = _norm(row.get(VALUE_COLUMN))
-    if epigrafe in EPIGRAFE_EXCLUDE:
+    if epigrafe in EPIGRAFE_EXCLUDE or epigrafe.startswith(EPIGRAFE_EXCLUDE_PREFIXES):
         return None
     if epigrafe in EPIGRAFE_INTO_RETAIL:
         return "Retail"
+    if epigrafe in EPIGRAFE_INTO_FOOD:
+        return "Food service"
 
     division = _norm(row.get("desc_division"))
     for prefix, bucket in DIVISION_TO_BUCKET.items():

@@ -205,8 +205,13 @@ RAW_CLASSIFICATION_COLUMN = "nace_desc"
 # MATCHING DIFFERS BY COLUMN: a WZ code is a PREFIX (the taxonomy's ragged-
 # depth rule), an IHK branch code is EXACT - IHK nests its own children under
 # a branch, and `471221` (department stores) sits under `47122`.
+#   ihk_branch_id 477893 "Einzelhandel mit Brennstoffen": heating-fuel dealers
+#                        (36), nonstore everywhere (owner, 2026-09-29,
+#                        DECISIONS "Category check: the owner's calls"). Not
+#                        a catch-all, but the only exact-branch filter step 2
+#                        has; the rest of 4778 stays.
 CATCH_ALL_EXCLUDE = {
-    "ihk_branch_id": ("47122",),   # exact
+    "ihk_branch_id": ("47122", "477893"),   # exact
     "nace_id": ("969",),           # prefix
 }
 

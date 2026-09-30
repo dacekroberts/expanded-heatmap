@@ -81,6 +81,9 @@ RETAIL = {
     "Marine Food Product (Retail)",  # 5   - fishmongers; retail food
     "Fireworks Sales (Retail)",      # 2
     "Secondhand Dealer (Class B)",   # 1
+    "Pawnbroker",                    # 4   - kept, as in every city (R5; owner,
+                                     #       2026-09-29, "Category check: the
+                                     #       owner's calls"); was excluded as lending
 }
 
 # --- Personal services ---------------------------------------------------
@@ -217,7 +220,6 @@ EXCLUDED = {
     "Auctioneer": "individual licence, no premises (15)",
     "Auction Sales": "auction house, not walk-in retail (6)",
     "Security Agency": "NAICS 5616 (5)",
-    "Pawnbroker": "NAICS 522299 - lending, as in the NAICS cities (4)",
     "Detective Agency": "NAICS 5616 (3)",
     "Tour Guide": "individual licence, NAICS 5615 (3)",
     "Employment Counseling": "NAICS 5613 (2)",

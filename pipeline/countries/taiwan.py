@@ -62,10 +62,23 @@ REGISTER_ZIP = SHARED_RAW / "BGMOPEN1.zip"
 #   969017  紋身、紋眉服務 (tattoo) has its own code and stays; so do 563114
 #   飲酒店 (drinking places) and 561116 有娛樂節目餐廳 (restaurants with shows),
 #   whose names claim no hostess service (owner, 2026-09-29).
+# The category check's fixes (owner, 2026-09-29, DECISIONS "Category check:
+# the owner's calls"):
+#   969014  擦皮鞋 shoe-shine - the R2 catch-all row names shoe-shine stands.
+#   482911  煤油零售 kerosene, 482912 桶裝瓦斯零售 bottled gas - fuel dealers,
+#           nonstore as in Korea and Brazil. 482111-482113 (petrol, diesel,
+#           LPG stations) stay.
+#   649611  典當服務 pawnbrokers - Retail, as in every city (R5); division 64
+#           is otherwise not a bucket.
+#   932918  夜店 nightclubs and 932917 無侍者陪伴之舞場 dance halls without
+#           hostesses - Food service (R5); division 93 is otherwise out, and
+#           the hostess codes (93231x) stay out under R3.
 BUCKET = {"47": "Retail", "48": "Retail", "56": "Food service", "96": "Personal services"}
+INCLUDE_CODES = {"649611": "Retail", "932918": "Food service", "932917": "Food service"}
 EXCLUDE_PREFIXES = ("487", "9630",
                     "562", "486", "561200", "563200",   # (owner, 2026-09-29) R1
-                    "969099", "969019", "969023")       # (owner, 2026-09-29) R2
+                    "969099", "969019", "969023",       # (owner, 2026-09-29) R2
+                    "969014", "482911", "482912")       # (owner, 2026-09-29) the category check
 
 # The name rule's business markers: a sole proprietor's registered name is
 # shown only when it carries one (brief taipei.md, owner 2026-09-23).
@@ -166,6 +179,8 @@ def register_date(zip_path=REGISTER_ZIP):
 
 def bucket_of(code):
     code = (code or "").strip()
+    if code in INCLUDE_CODES:
+        return INCLUDE_CODES[code]
     if code.startswith(EXCLUDE_PREFIXES):
         return None
     return BUCKET.get(code[:2])
@@ -182,7 +197,12 @@ for _c, _want in [("562011", None), ("562012", None), ("562013", None), ("562099
                   ("563115", "Food service"), ("563114", "Food service"),
                   ("472929", "Retail"), ("485212", "Retail"), ("485299", "Retail"),
                   ("969017", "Personal services"), ("969015", "Personal services"),
-                  ("969021", "Personal services"), ("962111", "Personal services")]:
+                  ("969021", "Personal services"), ("962111", "Personal services"),
+                  ("969014", None), ("482911", None), ("482912", None),
+                  ("482111", "Retail"), ("482113", "Retail"),
+                  ("649611", "Retail"), ("649699", None),
+                  ("932918", "Food service"), ("932917", "Food service"),
+                  ("932311", None), ("932316", None), ("932211", None)]:
     assert bucket_of(_c) == _want, (_c, bucket_of(_c), _want)
 
 

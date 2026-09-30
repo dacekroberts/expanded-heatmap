@@ -149,11 +149,12 @@ _RETAIL = {
 
 # --- Personal services -----------------------------------------------------
 #
-# 5,673 rows. NAICS 812's shape: hair, beauty, laundry, garment repair, pets.
+# NAICS 812's shape: hair, beauty, laundry, pets. ARRANJAMENTS (garment repair,
+# 649) was here until 2026-09-29: repair is NAICS 811, out in every city
+# (owner, DECISIONS "Category check: the owner's calls"); see _NOT_STOREFRONT.
 _PERSONAL = {
     "PERRUQUERIES",                                      # 2,616
     "CENTRES D'ESTÈTICA",                                # 1,597
-    "ARRANJAMENTS",                                      #   649  garment repair
     "TINTORERIES",                                       #   416  dry cleaners
     "VETERINARIS / MASCOTES",                            #   395  NAICS 812910
 }
@@ -167,6 +168,9 @@ _PERSONAL = {
 _NOT_STOREFRONT = {
     # The accommodation trap. Hotels, hostals, pensions and fondes.
     "SERVEIS D'ALLOTJAMENT",                             #   720
+    # Garment repair and alterations: NAICS 811, repairs out everywhere
+    # (owner, 2026-09-29).
+    "ARRANJAMENTS",                                      #   649
     # Offices and back-of-house, not shops
     "SERVEIS A LES EMPRESES I OFICINES",                 # 3,214
     "ACTIVITATS EMMAGATZEMATGE",                         # 1,688

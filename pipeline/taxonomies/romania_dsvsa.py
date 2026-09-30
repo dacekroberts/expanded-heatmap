@@ -43,7 +43,12 @@ KNOWN_FILES = FOOD_SERVICE_FILES | SHOP_FILES | {"N34"}   # N34 is empty
 # Also the owner's canteen and catering exclusions (files 21 and 31) applied
 # to rows filed in file 19: "bufet (de) incinta", an in-house buffet (13), and
 # a category that is catering alone (2; "restaurant/catering" stays).
-NOT_STOREFRONT_CATEGORY = re.compile(r"toneta|automat|laborator|\blab\b|bufet (de )?incinta|^catering$")
+# "rulota" (a trailer) and "unitate mobila" (a mobile unit) joined on
+# 2026-09-29: seven fast-food rows in numbered sectors whose category says
+# mobile, which step 2's sector and address tests miss (owner, DECISIONS
+# "Category check: the owner's calls").
+NOT_STOREFRONT_CATEGORY = re.compile(r"toneta|automat|laborator|\blab\b|bufet (de )?incinta|^catering$|"
+                                     r"rulota|unitate mobil")
 
 
 def fold(s):
