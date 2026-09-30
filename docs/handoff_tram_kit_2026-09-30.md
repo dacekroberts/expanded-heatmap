@@ -2,10 +2,48 @@
 
 For a FRESH session in `.claude/worktrees/tram-kit` (branch
 `worktree-tram-kit`): the France kit session's role, for the T1 tram cities
-that are neither French nor Czech. **HOLD ON BUILDS** (owner, 2026-09-30):
-no scaffolding, no pipeline step, nothing in `app/`. Write the kit, bring the
-owner's calls with recommendations, say when it is done, and wait for the go.
+that are neither French nor Czech. **The kit is DONE, and BUILDS ARE GO**
+(owner, 2026-09-30: "give my permission to activate all builds").
 **Delete a section when its item is done.**
+
+## Builds - GO (owner, 2026-09-30)
+
+- **Branch `tram-build`**, cut from `worktree-tram-kit` in this worktree. It
+  is never pushed to master: `app/` lands at review time, in groups. Docs,
+  skills and scripts may still go to master from `worktree-tram-kit`.
+- **Read `.claude/skills/tram-city/SKILL.md` first.** All 28 calls are
+  decided in it.
+- **Order:**
+  1. **Odense first**: it writes `pipeline/osm_tram.py` (the contract is in
+     the skill, section 4), with Aarhus's `stations.csv` as the control.
+     Then tell the Czech kit and the France build session the signature,
+     the return shape and the branch. France wants the lines-only mode for
+     Montpellier, Strasbourg, Le Havre, Caen and Rouen: `route` in (tram,
+     light_rail), with an optional `network` filter.
+  2. Liepāja, then Daugavpils: lift Riga's step 2 into
+     `pipeline/countries/latvia_register.py`, with Riga's drift check as the
+     control.
+  3. Kansas City, Tucson, New Orleans.
+  4. Florence, Göteborg, Den Haag.
+  5. Zurich last, since it needs `add-country` for Switzerland first.
+- **The tram kit goes before the Czech builds** (owner): osm_tram.py first,
+  and a tram-kit heavy job goes first in the queue.
+- **The owner's six rules of 2026-09-30** (relayed to every session; cleanup
+  is writing them into CLAUDE.md and `docs/session_roles.md`):
+  - **Heavy jobs**: at most two at once. Start one only if available memory
+    (psutil) is at least its peak plus 2 GB, until cleanup's
+    `scripts/heavy_job.py` gate lands. At 15:45 only 2.3 GB of 15.9 was
+    available: eight Claude sessions took 6.3 GB, and an orphaned staging
+    grep held 4.7 GB (PID 17392, left for the owner).
+  - **DECISIONS drafts**: entries go in `docs/decisions_drafts/tram-kit.md`,
+    never `DECISIONS.md`. Cleanup folds them in when the owner hands them
+    off.
+  - **Overpass**: one query in flight per session, and a wait of at least
+    60 s after a 504 or 429.
+  - **Downloads**: the sources the briefs name are pre-permitted.
+  - **Prose**: page text from the approved template needs no read-back. A
+    departure is flagged in the drafts file and at review time.
+  - **Plan**: the owner is no longer on Pro.
 
 ## The ten cities (`docs/tram_city_list.md`, T1)
 
