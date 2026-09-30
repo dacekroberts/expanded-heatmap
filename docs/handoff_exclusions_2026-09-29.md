@@ -421,6 +421,18 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   Rail...". **Trap:** when sweeping label offsets, run
   `python -B scripts/check_macro_labels.py`, because a same-length rewrite of
   `app/cities.py` within a second reuses the stale .pyc.
+- **`sacramento`** (origin at cdbcc19, READY 2026-09-29; page 74; 3,335
+  storefronts, 37 stations, 41.3% in a ring; TEXT_WIDTH 81.3, label
+  ("middle", 0, -40); in_default_view True; rail_extra "Trams"; thins
+  nothing). Merged with master after Band C closed, so it counts Candidates
+  70. Township 9 is listed as closed for works (the Green Line, expected
+  mid-October 2026), with a PLAN item from 2026-10-15 to add it back. Dos
+  Rios is placed from Wikidata Q107175168 (CC0), and step 1 stops once OSM
+  carries it. 525 person-like names show the business description; 4
+  apartment-unit businesses are left off. Adds `pipeline/taxonomies/sacramento.py`
+  and REGISTRIES "sacramento"; its OpenStreetMap rail-geometry clause goes
+  after Copenhagen's, the fourth branch to insert there. No new numbered
+  notice. DECISIONS "Sacramento built: Blue and Gold...".
 - **Prague's Flora comes off the map** (owner, 2026-09-29: the timetable
   rule, `docs/category_rules.md` "Station scope"). Do it AFTER merging
   category-continuity, which re-renders Prague, and re-run Prague's steps 1-3
