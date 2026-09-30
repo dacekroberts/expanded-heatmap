@@ -44,11 +44,10 @@ them here. When the skill or a build needs a brief changed, finished or
 re-checked, ask staging for it (`ListAgents`, then `SendMessage` to the
 staging session), and pull its commits from `origin/master`. Reading them and
 running `python scripts/brief_check.py brno ostrava plzen olomouc liberec
-most` is fine. **Asked of staging on 2026-09-30, and open until its commits
-land**: the dangling palette reference in five briefs; Brno's stations as the
-feed's parents, and its count; the `vs_config` mappings; Jablonec's and
-Litvínov's RÚIAN controls; Ostrava's relation recount. It was also told the
-approved calls, so the briefs can carry them.
+most` is fine. **Everything the kit asked of staging on 2026-09-30 is done**
+(on master the same day): the palette pointer, Brno's stations as the feed's
+parents, the `vs_config` mappings, Jablonec's and Litvínov's RÚIAN controls,
+Ostrava's recount, and the approved calls, in all six briefs.
 
 ## Standing rules (same as the France kit)
 
