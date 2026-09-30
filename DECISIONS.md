@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**231 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
 - [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
@@ -272,6 +273,70 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held
+
+- **The kit is written; nothing was built.** This covers handoff sections 1 and 2
+  (`docs/handoff_czech_batch_2026-09-30.md`), and the skill is
+  `.claude/skills/czech-tram-city/SKILL.md`. No city was scaffolded, no
+  pipeline step was run and nothing was written to `app/`. `brief_check.py`
+  on the six briefs: 23 of 23 claims hold (Plzeň's OSM claim on a second
+  run, after both Overpass mirrors timed out on the first).
+- **No batch scaffold script, on the measurement.** Of the 39 constants in
+  Prague's `config.py`:
+  - about 21 would be identical in all six Czech tram configs (the paths,
+    the halved rings, the taxonomy, the catch-all rule, `mode` and
+    `coverage`);
+  - about 8 differ per city and are already in the briefs (the slug, the
+    obec codes, the RÚIAN controls, the CRS, the scope, the lines, the query
+    box), which is about 48 typed values in all;
+  - about 10 exist only on build day (relation ids, colours, per-line
+    counts, gate 3, the boundary area, the storefront box).
+  France's script paid because it computed station counts, medians and
+  scope from twenty screen tables. Here those figures are in the briefs, and
+  step 1 re-measures them. `scaffold_city.py` already writes the rest and
+  derives Ostrava's 34N from the longitude. So the skill carries a config
+  template and a sheet per city instead, and `brief_check.py --vs-config`
+  diffs the typed values against the brief. Staging was asked to add the
+  mappings (`OBEC_CODES`, `CRS_PROJECTED`, `SCOPE`, `MAP_MODE`,
+  `MAP_COVERAGE`).
+- **One country-neutral `pipeline/osm_tram.py`, agreed with the tram kit
+  session.** Five Czech cities and several of the tram kit's ten take their
+  trams from OSM, so one module serves both kits rather than one copy each.
+  - **Who writes it:** whichever OSM tram build goes first, from Aarhus's
+    `stop_rows()`. The control is Aarhus's inputs reproducing its
+    `stations.csv`, and the app/chrome role is told first.
+  - **The contract in both skills:** every relation is kept or placed in
+    `NOT_DRAWN` by id. A line's stops are the union of its relations. Stop
+    members may be tagged `stop_position` or `tram_stop`, and `STATION_ADD`
+    takes a node id. Stops collapse by name at the mean within 200 m. Scope
+    can be a union of polygons, the operator filter is optional, and a
+    lines-only mode serves Brno.
+  - **Rejected:** France's never-a-mean rule for OSM stations. It came from
+    the French portal's Conditions Particulières on ODbL feeds, which do not
+    reach OSM or Czechia.
+- **Brno's stations are the feed's own `parent_station` rows**, not a name
+  collapse. In the live KORDIS feed, all 329 platforms the 11 regular lines
+  serve have a parent: 149 stations, no two sharing a name. That is Prague's
+  shape. Staging was asked to change the brief's "collapse platforms by
+  name". **All 11 feed colours pass `check_line_colours` as published.** Line
+  6's `0777C1` is closest to the pins, at 13.2 from Retail, and is recorded
+  rather than moved. OSM's Brno relations carry all 11 refs and the same
+  colours, so the geometry matches the feed by ref.
+- **The two-obec change to `czechia_register.py` is specified, not made.**
+  Liberec (Regional) and Most (Regional) need `OBEC_CODES` and a RÚIAN
+  control per file. The change is made at the first Czech build, with
+  Prague's step 2 and `drift_check.py prague` as the control. It is shared
+  code and a heavy job, so it is build work, held with the builds.
+- **Found in the briefs and sent to staging** (the briefs are staging's):
+  - five briefs point to a palette section "below" that does not exist;
+  - Brno's station count is 147 in the brief, 146 in
+    `docs/tram_city_list.md`, and 149 parents network-wide;
+  - Ostrava had 33 relations on the day, where the brief says 34;
+  - Jablonec's and Litvínov's RÚIAN controls are still unmeasured.
+- **The page-text template was drafted in chat for the owner**, as France's
+  was. The skill's section 7 is marked pending, and no Czech page text is
+  written until it is approved.
 
 ### 2026-09-30 - The France batch's eight calls approved as recommended; builds go ahead (owner)
 
