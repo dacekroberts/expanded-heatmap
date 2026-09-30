@@ -373,5 +373,10 @@
   "in_ring": 2224,
   "all": 29912,
   "map_blob": "4e6a1858e44f8ebecb6578e3afc121f6ea97736e"
+ },
+ "pittsburgh": {
+  "in_ring": 316,
+  "all": 1730,
+  "map_blob": "8265e488eecf34498528a27688028154c19f8e2a"
  }
 }
