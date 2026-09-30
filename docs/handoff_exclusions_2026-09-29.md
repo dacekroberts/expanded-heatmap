@@ -407,6 +407,39 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   `app/components.py` NOTICES near Bergen's OpenStreetMap rail-geometry edit.
   Its full list of shared files is in its READY message; it matches the other
   city branches' list, plus `docs/project_context.md` and the Danish modules.
+- **`buffalo`** (origin at 3c2d4bf, READY 2026-09-29; page 73; 1,564
+  storefronts, 14 stations, 24.1% in a ring; TEXT_WIDTH 48.8, label ("end",
+  -11, -46); rail_extra "Trams"; thins nothing). **Kept OUT of
+  IN_DEFAULT_VIEW:** at 42.89 N it would re-fit the pinned 1.4525 zoom; its
+  dot sits about 2 px from Toronto's. Adds `pipeline/taxonomies/buffalo.py`
+  (registered in `__init__.py`) and REGISTRIES "buffalo". Its OpenStreetMap
+  rail-geometry notice clause goes after Copenhagen's, where aarhus and
+  bergen also insert. No new numbered notice. Owner calls: a State salon
+  named like a person shows its licence type (42 of 267); 3 salons at an
+  "Apt" unit are left off (Buffalo only, New York unchanged); the boundary
+  is Census TIGERweb place 3611000. DECISIONS "Buffalo built: NFTA Metro
+  Rail...". **Trap:** when sweeping label offsets, run
+  `python -B scripts/check_macro_labels.py`, because a same-length rewrite of
+  `app/cities.py` within a second reuses the stale .pyc.
+- **Prague's Flora comes off the map** (owner, 2026-09-29: the timetable
+  rule, `docs/category_rules.md` "Station scope"). Do it AFTER merging
+  category-continuity, which re-renders Prague, and re-run Prague's steps 1-3
+  once. `pipeline/prague/step1_stations.py`: stop adding Flora; write it to
+  `excluded_stations.csv` with a reason containing "closed for works" and
+  "reopening around December 2026 (DPP)"; keep the guard that stops the build
+  once the feed serves it. Tidy `config.py`'s FLORA comment and
+  `app/station_scope.py`'s docstring ("Prague's Flora, also closed, is
+  DRAWN"). PLAN's Flora item becomes "add it back". Approved wording:
+  - `app/pages/28_Prague_Heatmap.py`: "**Flora station on line A is closed
+    for reconstruction** until about December 2026, so it is not drawn while
+    closed, as the timetable runs; it returns when it reopens."
+  - `app/components.py`, the ROPID notice: remove "Flora is added while
+    closed, " from its list of changes.
+  - `docs/excluded_categories.md`: "Flora, closed for reconstruction, is
+    drawn." becomes "Flora, closed for reconstruction, is not drawn while
+    closed."
+  Then `check_personal_exposure.py prague` is not needed (step 2 unchanged
+  unless it reads stations), but drift, macro_facts and ring_shares are.
 - **Copenhagen, the store-number rule:** matching pins keep their place and
   show the street address in place of the name (`name_is_address`); no pin
   is removed. Expect 33 changes, all discount supermarkets, the storefront

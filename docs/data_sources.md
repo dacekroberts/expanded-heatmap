@@ -431,6 +431,19 @@ on the same dataset was settled the same day: Esri's label for an
 empty licence field, not a term, since the City's Terms grant use (owner, 2026-09-29;
 `docs/build_briefs/sacramento.md`). Built on 2026-09-29.
 
+#### Palma's indemnity — ACCEPTED 2026-09-29 (candidate city)
+
+GOIB's *Política i termes d'ús*, which govern the Consell de Mallorca's
+restaurant register on the Balearic open-data catalogue (read 2026-09-29 by
+the licence-read agent), carry the same shape again. The reuser "accepta
+indemnitzar, així com eximir al Govern de les Illes Balears … de qualsevol
+responsabilitat … pel mer ús, reproducció, modificació o distribució de la
+informació", with no cap. **The owner accepted it on 2026-09-29, for this
+one source.** On the same day the owner extended Barcelona's reading of the
+"no alteration" condition (Ley 37/2007 art. 8 wording) to this source, and
+took the permissive reading of Catastro's INSPIRE terms for the address join
+(`docs/build_briefs/palma.md`).
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the

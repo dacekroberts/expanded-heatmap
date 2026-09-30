@@ -48,3 +48,14 @@ DECISIONS entry that a build session does not read before recommending.
 | Pharmacies, opticians | **Kept**, Retail (NAICS 44-45) where the register covers general retail. A food-only register's pharmacies are out (not food shops) | the NAICS cities; Stockholm (food-only) | naics.py; DECISIONS 2026-09-29 Stockholm |
 | Health-food sellers | **In-store only**; e-commerce, door-to-door and multilevel sellers out, and never at an apartment unit | Seoul, Daegu, Busan, Incheon | korea_localdata.py |
 | Mobile units, kiosk carts, vending machines | **Out** | Bucharest, Seoul (food trucks), Glasgow (mobile caterers) | romania_dsvsa.py, korea_localdata.py |
+
+## Station scope
+
+The same idea for stations: one answer in every city for the same situation.
+Keeping or dropping a station for a reason below follows the rule; a
+departure is an owner call, brought with the precedent it breaks.
+
+| Situation | Rule | Precedent | Source |
+|---|---|---|---|
+| A station or branch closed for works | **Drawn as the timetable runs** (owner, 2026-09-29): a station the current feed does not serve is not drawn and not ringed; track that trains still run through is drawn. It is listed in `excluded_stations.csv` with a "closed for works" reason and the operator's reopening date, so What Is Excluded counts it; the city page names it and says when it is due back; step 1 stops the build once the feed serves it again; and PLAN.md carries a dated item to add it back. A rule keyed on how soon it reopens was rejected: operators' dates slip, and the feed can be read | Berlin's U6 Tegel branch (5 stations, 2026-09-28); Sacramento's Township 9 (2026-09-29); Prague's Flora, drawn while closed until this rule and converted in the next review merge | DECISIONS 2026-09-29 "Stations closed for works" |
+| Surface stops closer together than the rings | **Thinned** to about one per half mile along the line; underground stations, termini and interchanges kept; the thinned lines named on the city page or in What Is Excluded | eight cities | `docs/sub_transit_line_filters.md` |
