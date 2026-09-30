@@ -84,7 +84,7 @@ def main():
                          for v, n in zip(p["types"], p["business_name"])], index=p.index)
     named_out = typed_store & by_rule.isna()
     print(f"    typed storefronts {int(typed_store.sum()):,}; excluded by name (an institutional "
-          f"kitchen, or a pharmacy): {int(named_out.sum()):,}")
+          f"kitchen, a caterer or mobile unit, or a pharmacy): {int(named_out.sum()):,}")
     p = filter_to_storefront(p, config.TAXONOMY_SYSTEM)
     print(f"  {len(p):,} storefront premises after filter_to_storefront()")
 

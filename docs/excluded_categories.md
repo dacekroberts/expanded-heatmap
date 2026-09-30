@@ -2445,22 +2445,25 @@ are institutional kitchens: preschools (386), schools and gymnasia (206), care
 homes, home care and day centres (78), staff canteens (11) and others such as
 churches, prisons and associations (37). 12 retail-typed pharmacies.
 
+**Excluded by name: food with no counter** (owner, 2026-09-29) - the
+register's restaurant type is also its type for catering and mobile food
+("Restaurang-, catering- och barverksamhet"), so these are read from the
+name: 168 premises named as food trucks or mobile units, caterers, event
+firms, food demonstrators or prep kitchens. 124 of them had no position,
+most of them food trucks. A caterer whose name also names a restaurant,
+café, bistro or bakery ("Chez Kny Bistro & Catering") stays.
+
 **Not measured: office canteens.** About 20 staff restaurants registered under a
 company name ("KPMG AB") remain; company names are too mixed to filter.
 
-**Kept because the register cannot split it:** its restaurant type is also its
-type for catering and mobile food ("Restaurang-, catering- och
-barverksamhet"), so about 39 premises named as caterers and about 15 named as
-food trucks or mobile units are on the map as food service.
-
 **Untyped premises** - the register began recording types in 2024, so 1,391
-premises last inspected earlier carry none. **225 are shown** (owner,
-2026-09-28): those whose name identifies a restaurant or food shop and that were
+premises last inspected earlier carry none. **220 are shown** (owner,
+2026-09-28; 225 before the caterers and mobile units above left): those whose name identifies a restaurant or food shop and that were
 inspected in 2022 or 2023, marked "classified from its name". Left out: 26 such
 names inspected before 2022 (likely closed), about 120 pharmacies, about 550
 institutions by name, and about 470 whose name says nothing.
 
-**Not placed** - 209 storefronts (3.8%) the register gives no position.
+**Not placed** - 85 storefronts (1.6%) the register gives no position.
 
 **Stations.** The Tunnelbana's three lines (seven routes), cut at the kommun
 boundary: 82 stations inside it.

@@ -20,17 +20,17 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**210 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**211 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
-- [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
-- [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Baltimore to the discards on currency; Palma's three licence calls (owner)](#2026-09-29---baltimore-to-the-discards-on-currency-palmas-three-licence-calls-owner)
 - [Build briefs for six Band B cities; Baltimore's register found stale (staging)](#2026-09-29---build-briefs-for-six-band-b-cities-baltimores-register-found-stale-staging)
 - [Band C closed: its last five to the discards (owner)](#2026-09-29---band-c-closed-its-last-five-to-the-discards-owner)
+- [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
+- [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
@@ -44,6 +44,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended](#2026-09-29---the-tram-batchs-groundwork-started-owner-all-six-items-a-france-macro-view-measured-and-a-northsouth-split-recommended)
 - [Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows](#2026-09-29---published-cities-data-dates-checked-san-francisco-maps-closed-locations-dublin-keeps-vacant-premises-three-sources-cannot-be-dated-from-their-rows)
 - [Tram cities use the existing spacing rule for ring size (owner); the 95% coverage rule withdrawn](#2026-09-29---tram-cities-use-the-existing-spacing-rule-for-ring-size-owner-the-95-coverage-rule-withdrawn)
+- [Stockholm's caterers, event firms and food trucks out by name (owner)](#2026-09-29---stockholms-caterers-event-firms-and-food-trucks-out-by-name-owner)
 - [Atlanta's discard ground changed from currency to terms (owner)](#2026-09-29---atlantas-discard-ground-changed-from-currency-to-terms-owner)
 - [Review batch live after the owner's reboot: exclusions batch and six cities, 68 built](#2026-09-29---review-batch-live-after-the-owners-reboot-exclusions-batch-and-six-cities-68-built)
 - [Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill](#2026-09-29---yes-to-trams-only-maps-owner-with-the-macro-map-re-planned-minor-cities-labelled-only-in-their-own-region-dots-coloured-by-network-type-completeness-by-fill)
@@ -250,52 +251,6 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
-### 2026-09-29 - Stations closed for works: drawn as the timetable runs, in every city (owner)
-
-- **Stations closed for works are drawn as the timetable runs, in every city
-  (owner, on the recommendation), and Prague's Flora is converted to match.**
-  Two built cities had disagreed on the same situation: Prague drew Flora,
-  closed for reconstruction since 1 February 2026 and due back around
-  December (owner, 2026-09-24), while Berlin left the U6's five Tegel-branch
-  stations off, closed since November 2022 and due back around August 2027
-  (owner, 2026-09-28). The only difference was how long each closure was
-  expected to last, and no threshold had been set. The new case forced the
-  question: SacRT's Green Line, suspended since 2025-06-16, due back "by
-  mid-October", for which the owner chose Berlin's treatment the same day
-  (Township 9, its one Green-only station, listed as closed for works).
-  The timetable rule was chosen because the feed decides it; a rule keyed
-  on the reopening date needs a threshold that operators' own dates slip
-  past, and drawing a closed station rings businesses around a stop no
-  train serves. Rejected: Prague's rule everywhere (it would put Berlin's
-  five stations back and reverse the Sacramento call), and grandfathering
-  Flora until it reopens (consistent for no extra render, since the category
-  batch already re-renders Prague at the next review, and Flora returns
-  under either rule when the feed serves it). Written as a Station scope
-  section in `docs/category_rules.md`. Prague's conversion lands in the
-  review merge: step 1 lists Flora in `excluded_stations.csv` as closed for
-  works (its stop-when-served guard stays); the Prague page, the ROPID
-  notice ("Flora is added while closed" removed from its changes) and the
-  What Is Excluded line change as drafted in the cleanup chat and approved.
-
-### 2026-09-29 - Thinned lines must be named where a reader can find them (owner)
-
-- **Every city that thins stops by spacing must name the thinned lines on its
-  own page or in the spacing-filter paragraph of
-  `docs/excluded_categories.md` (owner), and `check_scope_disclosure.py`
-  now decides it as property F.** The What Is Excluded page's station table
-  gives each city a "Stops thinned" count but not which lines, so a count
-  with no sentence behind it would tell a reader nothing. Measured the same
-  day through `app/station_scope.py`: eight cities thin by spacing (San
-  Francisco 85, Philadelphia 161, Boston 25, Amsterdam 59, Rome 9, Rotterdam
-  23, Hong Kong 17, Riga 15; listed in `docs/sub_transit_line_filters.md`).
-  All eight pages already say so, in "thinned" or in "one stop per half mile
-  is drawn". Riga alone is missing from the paragraph, which the check prints
-  as a NOTE rather than a failure, since the owner's rule is either place;
-  its addition is approved for review time. Requiring both places was
-  rejected: the rule as given is either, and the page is where a reader of
-  that one city looks. The self-test gains a case that strips both places
-  from Riga (10 of 10), and its fixture now copies `app/pages/`.
-
 ### 2026-09-29 - Baltimore to the discards on currency; Palma's three licence calls (owner)
 
 - **Baltimore moved from B to the discards on currency (owner: "dubious").**
@@ -387,6 +342,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   were re-aimed at Band B, which cannot empty while reduced-bucket pages
   exist. 24 of 24.
 
+### 2026-09-29 - Stations closed for works: drawn as the timetable runs, in every city (owner)
+
+- **Stations closed for works are drawn as the timetable runs, in every city
+  (owner, on the recommendation), and Prague's Flora is converted to match.**
+  Two built cities had disagreed on the same situation: Prague drew Flora,
+  closed for reconstruction since 1 February 2026 and due back around
+  December (owner, 2026-09-24), while Berlin left the U6's five Tegel-branch
+  stations off, closed since November 2022 and due back around August 2027
+  (owner, 2026-09-28). The only difference was how long each closure was
+  expected to last, and no threshold had been set. The new case forced the
+  question: SacRT's Green Line, suspended since 2025-06-16, due back "by
+  mid-October", for which the owner chose Berlin's treatment the same day
+  (Township 9, its one Green-only station, listed as closed for works).
+  The timetable rule was chosen because the feed decides it; a rule keyed
+  on the reopening date needs a threshold that operators' own dates slip
+  past, and drawing a closed station rings businesses around a stop no
+  train serves. Rejected: Prague's rule everywhere (it would put Berlin's
+  five stations back and reverse the Sacramento call), and grandfathering
+  Flora until it reopens (consistent for no extra render, since the category
+  batch already re-renders Prague at the next review, and Flora returns
+  under either rule when the feed serves it). Written as a Station scope
+  section in `docs/category_rules.md`. Prague's conversion lands in the
+  review merge: step 1 lists Flora in `excluded_stations.csv` as closed for
+  works (its stop-when-served guard stays); the Prague page, the ROPID
+  notice ("Flora is added while closed" removed from its changes) and the
+  What Is Excluded line change as drafted in the cleanup chat and approved.
+
 ### 2026-09-29 - Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)
 
 - **Minneapolis and Pittsburgh move to B (owner)**, each on a city-only
@@ -444,6 +426,25 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   97.8–98.7% at block level on the shared `japan_register` join, and about
   100% with town-chōme. It stays in B.
 - B 5 → 7, C 9 → 7.
+
+### 2026-09-29 - Thinned lines must be named where a reader can find them (owner)
+
+- **Every city that thins stops by spacing must name the thinned lines on its
+  own page or in the spacing-filter paragraph of
+  `docs/excluded_categories.md` (owner), and `check_scope_disclosure.py`
+  now decides it as property F.** The What Is Excluded page's station table
+  gives each city a "Stops thinned" count but not which lines, so a count
+  with no sentence behind it would tell a reader nothing. Measured the same
+  day through `app/station_scope.py`: eight cities thin by spacing (San
+  Francisco 85, Philadelphia 161, Boston 25, Amsterdam 59, Rome 9, Rotterdam
+  23, Hong Kong 17, Riga 15; listed in `docs/sub_transit_line_filters.md`).
+  All eight pages already say so, in "thinned" or in "one stop per half mile
+  is drawn". Riga alone is missing from the paragraph, which the check prints
+  as a NOTE rather than a failure, since the owner's rule is either place;
+  its addition is approved for review time. Requiring both places was
+  rejected: the rule as given is either, and the page is where a reader of
+  that one city looks. The self-test gains a case that strips both places
+  from Riga (10 of 10), and its fixture now copies `app/pages/`.
 
 ### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
 
@@ -859,6 +860,30 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   published city changes. The table of every built city is
   `docs/ring_rules.md`, generated by `scripts/ring_rules_table.py` (owner:
   "save these tables").
+### 2026-09-29 - Stockholm's caterers, event firms and food trucks out by name (owner)
+
+- **Food with no counter of its own left Stockholm's map by name (owner),
+  on rule R1 of `docs/category_rules.md`.** The register files catering and
+  mobile food under its restaurant type, so the build had kept them and said
+  so on the page. `sweden_livsmedel.py` now reads the name: a food truck,
+  mobile unit, prep kitchen ("preppkök", "bakomlokal") or food demonstrator
+  is out whatever else the name says. A caterer or event firm is out unless
+  its name also names a counter. That keeps 10 of them, among them Chez Kny
+  Bistro & Catering and Reimers Café & Catering, and drops Westers Catering
+  and Stockholm Event. 168 premises left: 44 placed pins (read one by one:
+  29 caterers, 15 mobile units or prep kitchens) and 124 with no position,
+  nearly all food trucks. Step 2: 5,471 -> 5,303 storefronts. 5,262 -> 5,218
+  placed (Food service 4,193 -> 4,150, Food shops 1,069 -> 1,068, 217 -> 215
+  from the name). Unplaced fell from 209 (3.8%) to 85 (1.6%), and the page
+  now says one in sixty, not one in twenty-five. The untyped recovery shown
+  is 220, down from 225. Step 3: 4,666 in a ring (89.4%). Rejected: keeping
+  every name with "catering", since 29 of the 39 were caterers with no
+  counter; and dropping every such name, since that would lose ten
+  restaurants and cafés. `check_personal_exposure.py stockholm` has the same
+  verdict: trade names only, on the register's own premises. The page, the
+  `cities.py` placement tier (96.2% -> 98.4%), `excluded_categories.md`,
+  `map_inconsistencies.md`, the Sweden sources row and the master list were
+  updated. `app/` changed, so this waits for review time and a reboot.
 
 ### 2026-09-29 - Atlanta's discard ground changed from currency to terms (owner)
 

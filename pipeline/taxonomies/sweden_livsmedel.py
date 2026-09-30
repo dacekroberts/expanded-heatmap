@@ -96,13 +96,30 @@ NOT_STOREFRONT_NAME = re.compile(
     # day centres and elderly care, Montessori and parent-cooperative
     # preschools.
     r"hemtjänst|dagverksamhet|daglig verksamhet|äldreomsorg|montessori|föräldrakoop")
+# Food with no counter of its own is out (docs/category_rules.md, R1; owner
+# 2026-09-29), read from the 5,262 placed pins' names. A mobile unit or a back
+# kitchen is out whatever else its name says (Tommys Farstaplan, Food truck;
+# Mackverket's "bakomlokal"). A caterer or an event firm is out UNLESS its name
+# also names a counter (Chez Kny Bistro & Catering, Reimers Café & Catering
+# stay; Westers Catering, Stockholm Event go).
+NO_COUNTER_NAME = re.compile(
+    r"food ?trucks?|matvagn|korvvagn|vagn\b|\bmobil\b|preppkök|\bprepp\b|bakomlokal|"
+    r"matdemonstrat")
+CATERER_NAME = re.compile(r"catering|\bevent\b")
+
+
+def no_counter(n):
+    """True for a lower-cased name that says the premises has no counter."""
+    if NO_COUNTER_NAME.search(n):
+        return True
+    return bool(CATERER_NAME.search(n)) and not FOOD_NAME.search(CATERER_NAME.sub(" ", n))
 
 
 def name_bucket(name):
     """The bucket a premises' NAME says, or None: 'not a storefront' wins,
     then food service, then food shops; a pharmacy is never a food shop."""
     n = (name or "").lower()
-    if NOT_STOREFRONT_NAME.search(n) or PHARMACY_NAME.search(n):
+    if NOT_STOREFRONT_NAME.search(n) or PHARMACY_NAME.search(n) or no_counter(n):
         return None
     if FOOD_NAME.search(n):
         return "Food service"
@@ -125,6 +142,8 @@ def classify(row):
     if not buckets:
         return None
     n = name.lower()
+    if no_counter(n):
+        return None
     # Food service wins over a shop for a premises that is both (a café-bakery).
     if "Food service" in buckets:
         # The restaurant type holds every institutional kitchen: preschools,
@@ -137,3 +156,7 @@ def classify(row):
 
 
 assert not set(TYPE_TO_BUCKET) & EXCLUDED_TYPES
+# The counter test must not eat a restaurant that also caters, nor keep a
+# caterer whose only food word is "catering".
+assert not no_counter("chez kny bistro & catering") and no_counter("westers catering")
+assert no_counter("tommys farstaplan, food truck") and not no_counter("vagnhallen deli")

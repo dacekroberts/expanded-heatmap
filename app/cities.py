@@ -1684,7 +1684,7 @@ CITIES = [
         "lon": 18.0686,
         "page": "pages/63_Stockholm_Heatmap.py",
         "coverage": "narrowed",
-        "placement": "Register coordinates (96.2%)",
+        "placement": "Register coordinates (98.4%)",
         "data_age": "Register frozen at 2025-10-21",
         "rail_extra": "—",
         "record_kind": "Food hygiene register",
