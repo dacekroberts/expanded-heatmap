@@ -47,11 +47,35 @@ def nace_labels():
     return labels
 
 
+def obce(cfg):
+    """[(obec, RUIAN zip, control)], one per RUIAN address file the city reads.
+
+    A city that spans two obce (Liberec with Jablonec, Most with Litvinov)
+    declares `OBEC_CODES`, `RUIAN_ZIPS` and `RUIAN_CRS_CONTROLS`, each keyed by
+    obec, and every file runs its OWN control. Prague's single-obec config
+    (`OBEC`, `RUIAN_ZIP`, `RUIAN_CRS_CONTROL`) takes the same path as one entry.
+    """
+    codes = getattr(cfg, "OBEC_CODES", None)
+    if codes is None:
+        return [(cfg.OBEC, cfg.RUIAN_ZIP, getattr(cfg, "RUIAN_CRS_CONTROL", None))]
+    controls = getattr(cfg, "RUIAN_CRS_CONTROLS", {})
+    return [(o, cfg.RUIAN_ZIPS[o], controls.get(o)) for o in codes]
+
+
 def ruian(cfg):
-    """The obec's addresses: code -> WGS84 point and a street-address label."""
+    """Every obec's addresses: code -> WGS84 point, a street-address label and
+    the obec it lies in. Address codes are national, so the files concatenate."""
+    parts = [_ruian_file(cfg, obec, path, control) for obec, path, control in obce(cfg)]
+    a = pd.concat(parts)
+    if a.index.duplicated().any():
+        sys.exit(f"RUIAN address codes repeat across obce {[o for o, _, _ in obce(cfg)]}")
+    return a
+
+
+def _ruian_file(cfg, obec, path, control):
     from pyproj import Transformer
 
-    z = zipfile.ZipFile(_need(cfg.RUIAN_ZIP, cfg))
+    z = zipfile.ZipFile(_need(path, cfg))
     member = next(n for n in z.namelist() if n.lower().endswith(".csv"))
     a = pd.read_csv(io.BytesIO(z.read(member)), sep=CZ.RUIAN_SEP, dtype=str,
                     encoding=CZ.RUIAN_ENCODING)
@@ -64,10 +88,9 @@ def ruian(cfg):
     # and fail the bounding box instead, misreported as a bad coordinate.
     a["latitude"] = pd.Series(lat, index=a.index).where(pd.Series(lat).abs().lt(90).values)
     a["longitude"] = pd.Series(lon, index=a.index).where(pd.Series(lon).abs().lt(180).values)
-    control = getattr(cfg, "RUIAN_CRS_CONTROL", None)
     if control is None:
-        sys.exit(f"pipeline/{cfg.SLUG}/config.py has no RUIAN_CRS_CONTROL. Declare one "
-                 f"known address in obec {cfg.OBEC} as (RUIAN code, lat, lon, label), "
+        sys.exit(f"pipeline/{cfg.SLUG}/config.py has no RUIAN coordinate control for obec "
+                 f"{obec}. Declare one known address in it as (RUIAN code, lat, lon, label), "
                  f"measured from a source other than this file - Prague's is the castle.")
     code, want_lat, want_lon, label = control
     got = a.loc[a[CZ.RUIAN_CODE] == code, ["latitude", "longitude"]]
@@ -79,9 +102,10 @@ def ruian(cfg):
     num = a[CZ.RUIAN_HOUSE].fillna("")
     orient = (a[CZ.RUIAN_ORIENT].fillna("") + a[CZ.RUIAN_ORIENT_LETTER].fillna("")).str.strip()
     a["address"] = (street + " " + num + ("/" + orient).where(orient != "", "")).str.strip()
-    print(f"RUIAN addresses in obec {cfg.OBEC}: {len(a):,}; coordinates on "
+    a["obec"] = obec
+    print(f"RUIAN addresses in obec {obec}: {len(a):,}; coordinates on "
           f"{a['latitude'].notna().mean():.2%}; CRS control ({label}) passed")
-    return a.set_index(CZ.RUIAN_CODE)[["latitude", "longitude", "address"]]
+    return a.set_index(CZ.RUIAN_CODE)[["latitude", "longitude", "address", "obec"]]
 
 
 def _strip_form(name):
@@ -105,11 +129,22 @@ def build_storefronts(cfg, bbox):
     # month must give this month's answer.
     ros = ros[ros["DATUKON"].isna() | (ros["DATUKON"] > snapshot)]
     print(f"  {len(ros):,} distinct establishments active on {snapshot}")
+    codes = [o for o, _, _ in obce(cfg)]
     ros = ros[ros["PKODADM"].isin(adr.index)]
-    print(f"  {len(ros):,} with an address in obec {cfg.OBEC}")
+    print(f"  {len(ros):,} with an address in obec {' + '.join(codes)}")
     emit("establishments_in_obec", len(ros))
 
-    res = pd.read_csv(_need(CZ.RES_CSV, cfg), dtype=str, usecols=list(CZ.RES_COLUMNS))
+    # RES IN CHUNKS, keeping only this city's owners: the whole 543 MB file
+    # read at once is the step's memory peak, and a city needs a few thousand
+    # of its ~3 million subjects. Filtering before the dedupe keeps each ICO's
+    # FIRST row in file order, exactly as the whole-file dedupe did (Prague's
+    # output reproduced byte for byte, 2026-09-30).
+    wanted = set(ros["ICO"].dropna())
+    res = pd.concat(
+        [ch[ch["ICO"].isin(wanted)]
+         for ch in pd.read_csv(_need(CZ.RES_CSV, cfg), dtype=str,
+                               usecols=list(CZ.RES_COLUMNS), chunksize=500_000)],
+        ignore_index=True)
     res = res.drop_duplicates("ICO")
     df = ros.merge(res, on="ICO", how="left")
     print(f"  owner found in RES for {df['FORMA'].notna().mean():.2%}")
@@ -179,10 +214,18 @@ def build_storefronts(cfg, bbox):
           f"({(~df['name_is_address']).mean():.1%}); the address on the rest")
     emit("storefronts_placed", len(df))
     emit("name_shown", int((~df["name_is_address"]).sum()))
+    # A regional city states each obec's share on its page, so it gets the
+    # per-obec count and an `obec` column. A one-obec city's output is
+    # unchanged (Prague's control).
+    multi = len(codes) > 1
+    if multi:
+        for obec, n in df["obec"].value_counts().reindex(codes, fill_value=0).items():
+            print(f"  placed in obec {obec}: {n:,}")
+            emit(f"storefronts_placed_{obec}", int(n))
 
     out = df.rename(columns={"ICP": "icp"})[
         ["icp", "business_name", "name_is_address", "latitude", "longitude",
-         cfg.RAW_CLASSIFICATION_COLUMN, "nace2025_code"]]
+         cfg.RAW_CLASSIFICATION_COLUMN, "nace2025_code"] + (["obec"] if multi else [])]
     if out["icp"].duplicated().any():
         sys.exit("an establishment appears twice after the join")
     return out
