@@ -1266,6 +1266,19 @@ same national register, so this is a scoping choice rather than a data limit.
 project** - 17.5% here - with the name, the address and the coordinates removed
 together, so those rows cannot reach the map.
 
+### Bergen - Oslo's register and rules
+
+**Oslo's rules, unchanged** (the section below): the register's premises,
+the no-premises codes, parents bankrupt or being wound up, and a sole
+trader's premises shown by its address. **`96.990` excluded on Bergen's own
+numbers**: 284 rows (7.1%), 83% with a sole-trader parent and 8% with
+employees. The five retail catch-alls are kept. Structurally excluded in
+Bergen: 354 rows (canteens and catering 241, retail agents 73, funeral
+services 18, mobile food 14, personal-service agents 5, household services
+3). Parents bankrupt or being wound up: 76. Web shops cannot be excluded, as
+in Oslo. **Stations**: both Bybanen lines, all 33 stations inside the
+kommune; ferries are not drawn.
+
 ### Oslo - premises rather than companies, and a sole trader's name kept off the map
 
 **Excluded by the classification itself, anywhere in Norway** - eight SN2025

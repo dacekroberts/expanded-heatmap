@@ -226,6 +226,10 @@ TEXT_WIDTH = {
     # canvas measureText after document.fonts.load, Space Grotesk loaded;
     # Prague, Tokyo, London, Glasgow, Incheon, Goyang and Yongin reproduced.
     "Bucheon": 60.1,
+    # Bergen: measured 2026-09-29 in the local app's own document (lean venv),
+    # canvas measureText after document.fonts.load, Space Grotesk loaded;
+    # Prague, Tokyo, London, Glasgow and Oslo reproduced.
+    "Bergen": 48.3,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

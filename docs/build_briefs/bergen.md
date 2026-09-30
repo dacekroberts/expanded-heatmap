@@ -4,6 +4,14 @@
 light-rail test; this brief).** Run `python scripts/brief_check.py bergen`
 before writing code.
 
+> **Measured at the build, 2026-09-29 (branch `bergen`)**: brief check 9/9.
+> **3,597 storefronts** (Retail 2,195, Food 658, Personal 744), 33 stations,
+> 58.5% in a ring. The screen's 3,615 is 18 lower because the shared filter
+> now also excludes catering. The three calls: the cached register (no
+> refresh), Line 2 `#9c27b0` (worst pin 55.2), Byparken / Kaigaten kept as
+> two. Gate 3 is not run: Wikipedia's 35 stops network-wide does not
+> reconcile with the feed's 34 stop places.
+
 ---
 
 ## The one-line summary

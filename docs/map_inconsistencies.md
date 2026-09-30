@@ -49,7 +49,7 @@ dense-looking city may simply have more complete records.
   of Melbourne's 2024 land-use census, one council only).
 - **National statistical or establishment registers:** Incheon, Goyang, Seongnam,
   Yongin, Suwon and Bucheon (SEMAS's national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
-  Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
+  Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo and Bergen (Enhetsregisteret sub-units),
   Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
   and Taipei (the national business tax register, FIA).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
@@ -250,7 +250,7 @@ name at their home.
 - **Mostly addresses:** Milan (a shop sign on about 1 pin in 7), Amsterdam's shop
   layer, the French cities where SIRENE has no sign or usual name (only about 40% of
   Paris rows and 43% of Marseille rows are named, per the Marseille brief).
-- **Address in place of a sole trader's name:** Oslo, Copenhagen, Prague.
+- **Address in place of a sole trader's name:** Oslo, Bergen, Copenhagen, Prague.
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
 - **Type in place of a personal name:** Vancouver/Surrey (88 pins). Kobe (10 pins: a
@@ -510,6 +510,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rennes | Métro a, b | — | STAR GTFS | Commune | 4 / 0 |
 | **Norway** | | | | | |
 | Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
+| Bergen | Bybanen 1 and 2 (light rail) | Ferries | Skyss via Entur GTFS | Kommune | 0 / 0 |
 | **Romania** | | | | | |
 | Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
 | **Sweden** | | | | | |
@@ -611,6 +612,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Rennes | same | same | same | 1,105 / 906 / 343 | — |
 | **Norway** | | | | | |
 | Oslo | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 4,197 / 2,082 / 1,801 | — |
+| Bergen | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 1,204 / 484 / 418 | — |
 | **Sweden** | | | | | |
 | Stockholm | Food hygiene register | Stockholms stad's food inspection register (Livsmedelstillsyn), one record per premises | Its own activity types (VerksamhetsTyp), plus a name test | 943 / 3,759 / — | No Personal services; Retail = food shops only ("Food shops"); frozen since 2025-10-21 |
 | **Romania** | | | | | |
@@ -709,6 +711,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Rennes | same (99.97%) | Masking 17.5% | Same codes |
 | **Norway** | | | |
 | Oslo | Address join to Matrikkelen (96.8%) | Web shops cannot be excluded | 8 no-premises codes, 96.990, bankrupt parents; sole-trader names withheld |
+| Bergen | Address join to Matrikkelen (96.2%) | Web shops cannot be excluded | Oslo's; 96.990 on Bergen's own numbers; sole-trader names withheld |
 | **Romania** | | | |
 | Bucharest | Address join to OpenStreetMap's address points, in the premises' own sector (74.9%) | About one storefront in four unplaced, even across sectors; fishmongers in markets lowest | Cancelled registrations, mobile units, kiosk carts, vending machines, pastry labs, in-house buffets, catering; sole traders' and person-named companies' names withheld (category shown) |
 | **Sweden** | | | |
@@ -802,6 +805,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Rennes | same (2026-09-23) | T | 0.3 mi | Yes | 68% | same (about two in five show an address, per the page) |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
+| Bergen | Register downloaded 2026-09-23; transit 2026-09-27 | B | 0.6 mi | Yes | 59% | Name; address for sole traders |
 | **Romania** | | | | | | |
 | Bucharest | Registers of 2026-08-25 (fetched by the owner 2026-09-28) | B | 0.6 mi | Yes | 72% | Company name without its legal form; category for sole traders and person-named companies |
 | **Sweden** | | | | | | |

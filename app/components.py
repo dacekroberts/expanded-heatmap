@@ -707,7 +707,8 @@ _NOTICES = [
      "the boundaries of its four municipios) and Barcelona (Metro de "
      "Barcelona, including its FGC lines and both funiculars), and the route "
      "geometry of Lille's two métro lines, the per-line colours of "
-     "Oslo's T-bane and tram lines, and Copenhagen's Metro and S-tog lines "
+     "Oslo's T-bane and tram lines, the colour of Bergen's Bybanen line 1, "
+     "and Copenhagen's Metro and S-tog lines "
      "and stations and the municipal boundaries used to select them, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
@@ -880,11 +881,11 @@ _NOTICES = [
     # 2026-09-24) - so this is section 5's own default sentence, VERBATIM,
     # with the licence linked. Section 5 also requires changes to be
     # indicated clearly, which the second sentence does.
-    ("Brønnøysundregistrene (Oslo)",
+    ("Brønnøysundregistrene (Oslo, Bergen)",
      "Contains data under the Norwegian licence for Open Government data "
      "(NLOD) distributed by Brønnøysundregistrene "
-     "([NLOD 2.0](https://data.norge.no/nlod/en/2.0)). Oslo's business "
-     "premises are selected, classified and placed by this project, and a "
+     "([NLOD 2.0](https://data.norge.no/nlod/en/2.0)). Oslo's and Bergen's "
+     "business premises are selected, classified and placed by this project, and a "
      "sole trader's premises is shown by its address rather than its name; "
      "the categories and densities are this project's own work.",
      True),
@@ -895,9 +896,10 @@ _NOTICES = [
     # 3(a) adds the licence link and a statement of modification. The
     # boundaries' municipality names come from SSR, whose rule asks for
     # "SSR ©Kartverket" - cheap, so included rather than argued.
-    ("Kartverket (Oslo)",
-     "© [Kartverket](https://www.kartverket.no). Oslo's address register "
-     "(Matrikkelen – Adresse) and the municipal boundaries of Oslo and Bærum "
+    ("Kartverket (Oslo, Bergen)",
+     "© [Kartverket](https://www.kartverket.no). Oslo's and Bergen's address "
+     "registers (Matrikkelen – Adresse) and the municipal boundaries of Oslo, "
+     "Bærum and Bergen "
      "(Administrative enheter kommuner), under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); municipality "
      "names from SSR ©Kartverket. This project joins the addresses to the "
@@ -911,13 +913,14 @@ _NOTICES = [
     # treated as owed) - Entur's own unaltered file,
     # app/assets/entur/Enturlogo_Blue_RGB.svg. NLOD section 6 bars using the
     # licensor's or other contributors' names to endorse, which reaches Ruter.
-    ("Entur (Oslo)",
+    ("Entur (Oslo, Bergen)",
      "Data made available by Entur, under the Norwegian licence for Open "
      "Government data ([NLOD 2.0](https://data.norge.no/nlod/en/2.0)); source: "
-     "Ruter's timetable data via [Entur](https://developer.entur.org). The "
-     "T-bane and tram lines and stations are selected, limited to Oslo kommune "
-     "and redrawn by this project, and the line colours are not from this "
-     "data. Not produced or endorsed by Entur, Ruter or Sporveien.",
+     "Ruter's and Skyss's timetable data via [Entur](https://developer.entur.org). "
+     "The T-bane, tram and Bybanen lines and stations are selected, limited to "
+     "Oslo and Bergen kommunes and redrawn by this project, and the line colours "
+     "are not from this data. Not produced or endorsed by Entur, Ruter, "
+     "Sporveien or Skyss.",
      True),
     # CVR - Copenhagen's business register, via Datafordeler. CC BY 4.0:
     # "Du skal kreditere Det Centrale Virksomhedsregister (CVR) på et

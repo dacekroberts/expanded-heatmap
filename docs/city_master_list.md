@@ -210,7 +210,7 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (5 ready + 42 ✅ BUILT)
+## 🟢 Band A — ready to build (4 ready + 43 ✅ BUILT)
 
 ### ▲ Five light-rail cities from Band T — 2026-09-29 (owner's call)
 
@@ -227,7 +227,6 @@ Street trams stay on the tram list.
 | **Houston** 🇺🇸 | METRORail Red, Green and Purple: **42 stations** (651 m), 94% mapped light rail, street-running along Main Street; Red every 6 min, Green and Purple every 12 by day (METRO's GTFS, 2026-09-29) | **The Texas Comptroller's "Active Sales Tax Permit Holders"** (`jrea-zgmq`, public domain, updated 2026-09-26): 79,097 outlets flagged inside city limits, `outlet_naics_code`: **~21,870 / 11,867 / ~2,575** (brief, 2026-09-29: 6,491 non-store retailers and 414 parking lots dropped by code) | **Addresses only: an address join** to the City's Site Addresses (public domain; **81% of a 300-row sample** at the first pass); 9,314 sole owners (`IS`) in the buckets, name suppressed; **~7% of storefronts within 0.6 mi** on the sample (Taoyuan's 11.7% is the lowest built): **build as scoped, share stated (owner)**; **rail from OSM (owner, 2026-09-29)**, keeping METRO's data agreement off the map; labels "Red / Green / Purple Line" (owner). See `docs/build_briefs/houston.md` |
 | **Sacramento** 🇺🇸 | SacRT light rail: **41 stations inside** (Blue 30 → 28, Gold 30 → 18, Green 9 → 9; OSM), 763 m, 94% mapped light rail. **Frequency unread**: the feed host's certificate has expired and the schedule pages are images (2026-09-29) | Business Operation Tax (the city's item `f4ee567a…`, 13,385 active in the city, 148 local descriptions): **~1,670 / ~1,130 / ~730** (brief, 2026-09-29: Active and unexpired in the city; online sellers, food vendors, independent stylists and massage technicians out) | **39 stations inside** on a fresh OSM read (Gold loses 12 to Rancho Cordova and Folsom); **timetable read 2026-09-29: Blue and Gold every 15 min by day**, and SacRT lists no Green Line (confirm at build); **addresses through the Census geocoder (owner)**; **the Open Data Terms' uncapped indemnity ACCEPTED (owner, 2026-09-29)**; the "Request permission to use" label read as Esri boilerplate (owner); ~38% within 0.6 mi. See `docs/build_briefs/sacramento.md` |
 | **Aarhus** 🇩🇰 | Letbane L1 and L2, **39 stations in the kommune** (666 m); L2 every 15 min, **L1 every 30 min on converted single-track regional railway** (Rejseplanen's GTFS, 2026-09-29) | CVR production units: 3,122 / 1,220 / 941 = **5,283**; OSM's DAR address points place 97.0% (the owner's call 2026-09-27) | **20 stations by the owner's test** (brief, 2026-09-29, on Midttrafik's own timetables): the new tramway every 7–8 min; Odderbanen's intermediate stops and Grenaabanen every 30 min, both failing the converted-railway gate; halved rings (499 m); **confirmed by the owner**; Rejseplanen not used; one OSM colour for both lines; ~44% personally owned (Copenhagen 39%). See `docs/build_briefs/aarhus.md` |
-| **Bergen** 🇳🇴 | Bybanen lines 1 and 2, **34 stations, all inside the kommune** (622 m); **40% in tunnel or on bridges**, street-running in the centre; every 7–8 min by day, 10 in the evening (Skyss's GTFS via Entur, NLOD, read for Oslo) | Oslo's modules unchanged: 2,195 / 658 / 762 = **3,615** placed; join **96.2%** | **None** — the cheapest non-French build |
 
 ▲ **🇦🇷 Buenos Aires joined 2026-09-28** from the large-transit gap's
 never-screened list (owner's call). Network class: **METRO**. Argentina's
@@ -344,6 +343,7 @@ and whether it held.
 
 | # | City | Business leg | What remains |
 |---|---|---|---|
+| ✅ | ~~**Bergen**~~ 🇳🇴 | Oslo's modules unchanged: the national sub-unit register (shared 2026-09-23 cache), the parent join and sole-trader rule, `96.990` dropped on Bergen's numbers, Kartverket's address join (**96.2%**) | **BUILT 2026-09-29** — `pages/71_Bergen_Heatmap.py`, region *Europe*, **3,597 storefronts, 33 stations** (Bybanen 1 and 2, light rail). Screening said "none" and that held: 3,615 became 3,597 because the shared filter now also excludes catering, and 34 stop places are 33 stations by name |
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
 | ✅ | ~~**Monterrey (Regional)**~~ 🇲🇽 | DENUE (the same national edition), SCIAN = NAICS, INEGI licence cleared; four municipios keyed on INEGI's municipio code | **BUILT 2026-09-27** — `pages/47_Monterrey_Heatmap.py`, region *Mexico*, **58,565 storefronts, 38 stations**. Screening said the build would need only its rail leg and scope, and that held |
 | ✅ | ~~**Madrid**~~ 🇪🇸 | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **BUILT 2026-09-22** — `pages/17_Madrid_Heatmap.py`, region *Spain*. Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Screening said the rail leg was the open question and CRTM answered it |
@@ -1151,7 +1151,7 @@ the evidence file.
 | 🇫🇷 France | **5** | **21** | T | Every one trams-only; waits on the trams decision, on the tram list (T1). Lyon discarded |
 | 🇨🇿 Czechia | **1** | **6** — Brno, Ostrava, Plzeň, Olomouc, Liberec, Most + Litvínov | T | Band T's decision; `czechia_register.ruian()`'s coordinate control is per city now |
 | 🇩🇰 Denmark | **1** | **2** — Aarhus, Odense | A · T | **Aarhus to A 2026-09-29** (light rail, owner); Odense's tram on the tram list. Placement through OSM's DAR address points |
-| 🇳🇴 Norway | **1** | **1** — Bergen | A | **To A 2026-09-29** (light rail, owner); Oslo's modules unchanged, no other calls |
+| 🇳🇴 Norway | **2** | — | — | **Bergen built 2026-09-29** on Oslo's modules (to A the same day, light rail, owner) |
 | 🇱🇻 Latvia | **1** | **2** — Daugavpils, Liepāja | T | Band T's decision; VZD's address file needs its licence row |
 | 🇳🇱 Netherlands | **2** | **4** — Den Haag, Utrecht, Rijswijk, Delft | T | Band T's decision; Rijswijk and Delft as Den Haag add-ons. No current food register in any of the four (Utrecht's is partial) |
 | 🇭🇰 Hong Kong | **1** | — | — | Built; the East Asia region |

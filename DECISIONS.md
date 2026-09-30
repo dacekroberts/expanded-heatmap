@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**217 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**218 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
@@ -33,6 +33,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
+- [Bergen built on Oslo's modules, the first light-rail city from the tram list; the five light-rail cities handed to this session (owner)](#2026-09-29---bergen-built-on-oslos-modules-the-first-light-rail-city-from-the-tram-list-the-five-light-rail-cities-handed-to-this-session-owner)
 - [Category fix batch re-run: 32 cities moved, 8 did not; no new personal exposure](#2026-09-29---category-fix-batch-re-run-32-cities-moved-8-did-not-no-new-personal-exposure)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
 - [Light-rail briefs: the last four calls answered, all five ready (owner)](#2026-09-29---light-rail-briefs-the-last-four-calls-answered-all-five-ready-owner)
@@ -515,6 +516,74 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   register), Perth (land use per property, about 6 stations) and Ho Chi Minh
   City (seven months of certificates, no placement route).
 
+### 2026-09-29 - Bergen built on Oslo's modules, the first light-rail city from the tram list; the five light-rail cities handed to this session (owner)
+
+- **The handover (owner, relayed by the Staging session).** This session
+  takes Band A's five light-rail cities, one branch each, in the order
+  Bergen, Aarhus, Buffalo, Sacramento, Houston. Suwon and Bucheon were
+  already parked green. The owner confirmed Bergen in this session (with its
+  downloads) and a written handoff to a fresh session for the rest. The
+  review is deferred until all five are built (owner, relayed by the cleanup
+  session): each branch is pushed as a backup, and page numbers and shared
+  counts are reconciled once, in the review merge.
+- **Built on branch `bergen`, from origin/master**, page 71. Brief check 9/9.
+  Oslo's step 2 (`norway_register.py`) on kommune 4601, from the SHARED
+  2026-09-23 register cache, not refreshed, so Oslo's inputs are untouched
+  (the brief's recommended call 1):
+
+  | Stage | Rows |
+  |---|---|
+  | Storefront rows after `filter_to_storefront()` | 4,100 (354 structurally excluded) |
+  | After parents bankrupt or being wound up | 4,025 (28.5% sole traders) |
+  | After `96.990` (284 rows: 83% ENK, 8% with employees) | 3,741 |
+  | **Placed** by Kartverket's address file | **3,597 (96.2%)**: Retail 2,195, Food 658, Personal 744 |
+  | In a ring (0.6 mi) | 2,106 (58.5%): 1,204 / 484 / 418 |
+
+  The screen's 3,615 is 18 higher because the shared filter now also
+  excludes catering (56.210, 56.220).
+- **The three settings not copied from Oslo**, each set and checked: route
+  type 901 (the feed has exactly two 901 routes), EPSG:25831 (UTM 31N) and
+  the standard rings (624 m median gap, over the ~550 m line).
+- **Stations: 33**, 28 on line 1 and 10 on line 2 with 5 shared, all inside
+  the kommune (570 km²), so `excluded_stations.csv` is empty and step 1 exits
+  if one ever falls outside. **Byparken / Kaigaten (73 m) kept as two**, the
+  brief's lean: the two lines' distinct termini.
+- **Gate 3 not run.** English and Norwegian Wikipedia give 35 stops for the
+  network and no split by line, against the feed's 34 stop places and 33
+  names. A number that does not reconcile is not a gate, and none was
+  invented (Goyang's precedent).
+- **Line 2's colour, `#9c27b0`**: neither the feed (no `route_color`) nor OSM
+  (both lines `#BF4525`) tells the lines apart. Line 1 keeps OSM's colour
+  (40.8 against Food service, below the preferred 45, recorded). Line 2's
+  purple scored worst pin 55.2 (Retail), 93.6 from line 1 and 98 from the
+  heat ramp. Oslo's teal `#00a3a8` would have sat at 34.0 and was not taken.
+- **Privacy: no personal information published.**
+  `check_personal_exposure.py bergen`: 0 contact details, 0 person-like
+  names at a residential unit. The heuristic's 17.3% person-like names match
+  Oslo's 17.3% exactly, and a sample of 25 two-word names were all trade
+  names. Every sole trader's premises shows its address (907 pins).
+- **The page's dates** are each cached file's own (provenance `files_utc`):
+  transit 2026-09-27, register downloaded 2026-09-23. Oslo's page shows the
+  provenance run's date, which would have read as today here.
+- **Page text and notices approved (owner)**: Oslo's text with Bergen's
+  network; notices 27 (Brønnøysundregistrene), 28 (Kartverket) and 29
+  (Entur, with Skyss) widened to Bergen, and the OpenStreetMap rail-geometry
+  notice names line 1's colour.
+- **Macro map**: region Europe, label width 48.3 px measured in the local
+  app's own document (five entries reproduced, Oslo's included). Bergen is
+  now the frame's northernmost city, the position where Oslo's label once
+  hid under the "Light mode" button. At 375 px Bergen sits far enough west
+  that its label clears the button (seen in the browser).
+  `check_macro_labels.py`: PROBLEMS 0.
+- **For the cleanup role's held macro-map work**: Bergen takes the
+  light-rail network colour (`rail_extra` "Trams", as Calgary).
+- Files: `pipeline/bergen/`, `app/pages/71_Bergen_Heatmap.py`,
+  `app/cities.py`, `app/components.py`, `app/macro_facts.json`,
+  `app/ring_shares.json`, `README.md`, `docs/data_sources.md`,
+  `docs/data_sources/norway.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
+  `docs/build_briefs/bergen.md`, `scripts/check_macro_labels.py`,
+  `scripts/check_personal_exposure.py`.
 ### 2026-09-29 - Category fix batch re-run: 32 cities moved, 8 did not; no new personal exposure
 
 - **The owner's approved category fixes (commit 12501db) were re-run across 40
