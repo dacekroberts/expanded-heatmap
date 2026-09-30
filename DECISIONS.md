@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**224 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**225 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)](#2026-09-29---anyang-briefed-on-its-ring-share-the-satellites-in-the-seoul-capital-area-view-only-owner)
 - [The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)](#2026-09-29---the-next-gyeonggi-satellites-briefed-namyangju-ansan-uijeongbu-owners-scope)
 - [Second batch review: nine branches merged, 75 cities; builds pause](#2026-09-29---second-batch-review-nine-branches-merged-75-cities-builds-pause)
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
@@ -263,6 +264,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
+
+- **Briefed Anyang with the three satellites (owner, 2026-09-29), past the
+  agreed station test.** Its recount held at 7 stations, not above, but
+  64.2% of its 15,177 storefronts are in a ring on 59 km². That is above
+  Suwon's 47.6% and Yongin's 55.4%, and the seven-station bar had stood in
+  for exactly that coverage.
+  - **Lines:** Line 1 (Gwanak, Seoksu, Anyang, Myeonghak) and Line 4
+    (Indeogwon, Pyeongchon, Beomgye). The Sillim Line is in the query box
+    but has no station in Anyang, so it is not drawn.
+  - **Brief-check:** an `osm_route_refs` check added for Anyang's box.
+  - **Supersedes** Anyang's "left out" in the entry "The next Gyeonggi
+    satellites briefed" above.
+- **The four new satellites join the Seoul Capital Area macro-map region
+  and are not shown in the global view (owner, 2026-09-29), as the five
+  built ones are.**
+  - **Config:** `"region": "Seoul Capital Area"` and
+    `"in_default_view": False`.
+  - **Labels:** placed by `check_macro_labels.py`.
+  - **Zoom:** re-check the region's zoom when they land, since they widen
+    its extent.
+  - **The brief's old line** `"region": "East Asia"` is struck through.
+  - **Files:** `docs/build_briefs/gyeonggi.md` and
+    `docs/city_master_list.md`.
 
 ### 2026-09-29 - The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)
 

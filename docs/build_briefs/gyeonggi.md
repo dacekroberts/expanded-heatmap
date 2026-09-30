@@ -31,8 +31,9 @@ satellites: PASS, to B; "which satellites is the brief's question").
 >   Seohae Line, drawn here on its own track, owner), 80.4% in a ring (build
 >   session, branch `bucheon`, 2026-09-29).
 > - **The next satellites, briefed 2026-09-29 (owner's scope)**: Namyangju,
->   Ansan and Uijeongbu; Hwaseong, Anyang, Gimpo and the smaller 시군 left
->   out with the reason. See "The next satellites" below.
+>   Ansan and Uijeongbu, then Anyang on its ring share (owner); Hwaseong,
+>   Gimpo and the smaller 시군 left out with the reason. All four go in the
+>   Seoul Capital Area view only (owner). See "The next satellites" below.
 
 ⚠️ **Korean cities: read `cjk-text`, and Seoul's, Daegu's and Busan's briefs
 first.** The satellites sit around Seoul (built) and share its lines, so
@@ -145,6 +146,8 @@ network.
 **Scope (owner, 2026-09-29):** brief Namyangju, Ansan and Uijeongbu;
 recount Hwaseong and Anyang and brief them only if the recount lifts them
 above seven stations; leave Gimpo and the smaller 시군 out, with the reason.
+Anyang, which held at seven, was then briefed on its ring share (owner,
+2026-09-29).
 
 Measured the built five's way:
 - **Stations** from route-relation membership (`osm-rail`), on Seoul's
@@ -163,7 +166,7 @@ Scratch data is in `data/_staging_scratch_2026-09-29/briefs/gyeonggi/`.
 | **안산 Ansan** | 2409159 | 486 km² | **13** | Line 4 8, Suin–Bundang 7, Seohae 5 | 1,417 m → standard | **19,711** (9,263 / 7,494 / 2,954) | **64.3%** | **Brief** |
 | **의정부 Uijeongbu** | 2409183 | 82 km² | **20** | U Line 15, Line 1 5, Line 7 1 | 622 m → standard | **13,103** (5,875 / 5,090 / 2,138) | **85.3%** | **Brief** |
 | 화성 Hwaseong | 2409173 | 1,073 km² | 3 | Line 1 1, Suin–Bundang 2 | 2,532 m | 25,272 | 5.2% | Out |
-| 안양 Anyang | 2409161 | 59 km² | 7 | Line 1 4, Line 4 3 | 1,487 m → standard | 15,177 | 64.2% | Out on the agreed test; ⚠️ owner call below |
+| **안양 Anyang** | 2409161 | 59 km² | **7** | Line 1 4, Line 4 3 | 1,487 m → standard | **15,177** (7,010 / 5,853 / 2,314) | **64.2%** | **Brief** (owner, 2026-09-29, on its ring share) |
 
 - A station on two lines counts on each line in the lines column.
 - **The areas recount changed nothing in the four cities with metro
@@ -228,6 +231,24 @@ Scratch data is in `data/_staging_scratch_2026-09-29/briefs/gyeonggi/`.
   rings. 85.3% in a ring, the highest of any satellite.
 - **SEMAS:** prefix `의정부시`.
 
+### Anyang (안양시) — briefed on its ring share (owner, 2026-09-29)
+
+- **It fails the agreed station test, which it was briefed past.** The
+  recount holds at 7, not above it, but 64.2% of its storefronts are in a
+  ring on 59 km². That is above Suwon's 47.6% and Yongin's 55.4%. The owner
+  briefed it on that measure.
+- **Two lines, no shared station:**
+  - Line 1, 4 stations: Gwanak, Seoksu, Anyang and Myeonghak;
+  - Line 4, 3: Indeogwon, Pyeongchon and Beomgye.
+- **Colours:** Seoul's, `#004A85` and `#009BCE`.
+- **Gate 3:** Line 1 is left out of the whole-line gate, as in Incheon and
+  Bucheon.
+- **The Sillim Line's relations come into the query box** (ref `Silim`), but
+  it has no station in Anyang, so it goes in `NOT_DRAWN`.
+- **English names:** every station object inside the city has a `name:en`.
+- **Rings:** a 1,487 m median gap, so standard rings.
+- **SEMAS:** prefix `안양시` (만안구, 동안구).
+
 ### Left out, with the reason
 
 - **Hwaseong:**
@@ -237,20 +258,24 @@ Scratch data is in `data/_staging_scratch_2026-09-29/briefs/gyeonggi/`.
     Korail `station=train` nodes on no metro route relation. By name they
     are the Seohae Line's southern intercity section.
   - The recount lowers it from 7 to 3, so it is out.
-- **Anyang:**
-  - the recount holds at 7 (Line 1 4, Line 4 3), so it is out on the agreed
-    test.
-  - ⚠️ **But 64.2% of its 15,177 storefronts are in a ring**, on 59 km².
-    That is above Suwon's 47.6% and Yongin's 55.4%, and level with Ansan's.
-    The seven-station bar stood in for coverage, and the measured ring share
-    says it covers well.
-  - **Owner call:** brief it with the three, or leave it out.
 - **Gimpo:** the Goldline only, screened as an edge network (2026-09-28).
   Not re-measured.
 - **The smaller 시군** (Hanam, Gwangmyeong, Guri, Gwacheon, Uiwang…): under
   8,000 storefronts and five stations each (2026-09-28).
 
-Once the three are built and Anyang is decided, the Band B row closes.
+### Region: the Seoul Capital Area view only (owner, 2026-09-29)
+
+All four join the **Seoul Capital Area** macro-map region, and none shows in
+the global view, as with the five built satellites.
+- **In `app/cities.py`:** `"region": "Seoul Capital Area"` and
+  `"in_default_view": False`, as Goyang's and Bucheon's entries have.
+- **Labels:** four more labels in the region. Run `check_macro_labels.py`
+  at 375, 768 and 1200, and set each `label_offset` from its result, as the
+  built five were.
+- **Zoom:** Uijeongbu, Namyangju, Ansan and Anyang widen the region's
+  extent, so re-check the region's zoom when they land.
+
+Once the four are built, the Band B row closes.
 
 ---
 
@@ -322,7 +347,9 @@ the city boundary.
 
 - **Scope:** each chosen 시 by its OSM boundary (admin_level 6 in KR-41).
 - **CRS:** UTM 52N (EPSG:32652).
-- **Region:** `"region": "East Asia"`.
+- **Region:** ~~`"region": "East Asia"`~~ **`"Seoul Capital Area"`, with
+  `"in_default_view": False`** (owner, 2026-09-29), for every satellite. See
+  "Region: the Seoul Capital Area view only" above.
 
 ## Still unknown
 
@@ -369,6 +396,14 @@ the city boundary.
     "bbox": [37.25, 126.75, 37.38, 126.94],
     "routes": ["subway", "train"],
     "require_refs": {"subway": ["4"], "train": ["수인·분당", "서해"]}
+  },
+  {
+    "id": "gyeonggi-next-anyang-lines",
+    "claim": "Anyang's query box (the city plus about 2 km, as step 1's) carries Lines 1 and 4 by ref, and the Sillim Line (ref Silim), which is not drawn (2026-09-29)",
+    "kind": "osm_route_refs",
+    "bbox": [37.34, 126.85, 37.47, 127.00],
+    "routes": ["light_rail", "subway"],
+    "require_refs": {"light_rail": ["Silim"], "subway": ["1", "4"]}
   },
   {
     "id": "gyeonggi-projected-crs",
