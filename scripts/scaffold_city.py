@@ -478,6 +478,9 @@ def add_city_entry(root, args, page_rel, dry_run):
         # REQUIRED since 2026-09-24, for the same reason as region: cities.py
         # raises at import without it. The city switcher groups by country.
         f'        "country": "{args.country}",\n'
+        # REQUIRED since 2026-09-30: the macro dot's colour. No default - a
+        # usually-right "metro" would hide the light-rail city that forgot it.
+        f'        "mode": "{args.mode}",\n'
         # BOTH KEYS BELOW ARE WRITTEN BECAUSE THEIR ABSENCE IS NOT NEUTRAL.
         # Barcelona shipped without either on 2026-09-22 and both surfaced in
         # check_deploy_imports, the second one disguised:
@@ -563,6 +566,11 @@ def main():
                          "\"Canada\", \"Mexico\". REQUIRED: app/cities.py raises at import "
                          "on an untagged city. A region NEW to the project also needs "
                          "--new-region; without it this script refuses.")
+    ap.add_argument("--mode", required=True, choices=("metro", "light_rail", "tram"),
+                    help="the HIGHEST-ORDER rail mode the city's map will draw (metro > "
+                         "light rail > tram); it colours the macro dot. REQUIRED: "
+                         "cities.py raises at import without it. The owner approves it "
+                         "with the build.")
     ap.add_argument("--country", required=True,
                     help="the city's country, spelled as the other cities in app/cities.py "
                          "spell it (\"Brazil\", \"Netherlands\"). REQUIRED: the city "

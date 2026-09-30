@@ -30,8 +30,10 @@ deliberate addition here, not a spelling that slips onto the site. They are
 read from the city's rows in tables A (drawn) and B (source kind, pins).
 `categories` must also agree with the macro map's `coverage` tier
 (check_macro_facts.py decides that one from table B): "All three" is a "full"
-city, and a missing, merged or food-only layer is a "narrowed" one. "Retail
-thin" can be either, as New York (full) and Toronto (narrowed) are.
+city, a missing, merged or thin layer a "narrowed" one, and food alone a
+"one_bucket" one (owner, 2026-09-30: food shops are food-like and not a
+second category; "Retail thin" is always narrowed, New York and Buffalo
+included).
 """
 import argparse
 import re
@@ -69,9 +71,10 @@ FIELDS = {
     "categories": {"All three", "Two", "Merged", "Retail thin",
                    "Personal services thin", "Food premises only"},
 }
-# The coverage tier each `categories` value needs; absent means either.
+# The coverage tier each `categories` value needs (owner, 2026-09-30).
 TIER_OF = {"All three": "full", "Two": "narrowed", "Merged": "narrowed",
-           "Food premises only": "narrowed", "Personal services thin": "narrowed"}
+           "Retail thin": "narrowed", "Personal services thin": "narrowed",
+           "Food premises only": "one_bucket"}
 
 
 def field_problems(cities):

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**234 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -33,6 +33,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
+- [Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)](#2026-09-30---macro-legend-approved-hong-kong-and-philadelphia-one-category-builds-told-owner)
+- [Macro dots by network and fill; food shops are food; thin layers are narrowed (owner)](#2026-09-30---macro-dots-by-network-and-fill-food-shops-are-food-thin-layers-are-narrowed-owner)
 
 **2026-09-29**
 
@@ -713,6 +715,91 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
     repository's LF) and `docs/city_master_list.md` (counts, Utrecht's R
     row, three discard rows, the country table). `check_master_list_counts`
     and `check_discard_evidence` pass.
+### 2026-09-30 - Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)
+
+- **Approved (owner):** every city's `mode` as proposed (including Monterrey
+  and Newcastle as metro, Guadalajara as light rail and Melbourne as metro),
+  the legend and tooltip wording, and Houston's `categories` "Personal
+  services thin".
+- **Hong Kong is one category, not "Two" (owner): its 34 bathhouses are not
+  enough to make a second category.** This supersedes the proposal in the
+  entry below. `categories` is back to "Food premises only" and `coverage`
+  is `one_bucket`. `check_macro_facts.py` names it in `ONE_BUCKET_BY_OWNER`,
+  with the owner's reason: a token layer is a per-city call, never a
+  threshold.
+- **Philadelphia is one category (owner):** its Retail is food retail, so
+  under the food-shops rule it is food alone. `categories` "Two" -> "Food
+  premises only", `coverage` `one_bucket`. Boston stays "Two" and narrowed:
+  its Retail includes package stores and cannabis. Tiers on master: full 50,
+  narrowed 18, one_bucket 7.
+- **New builds are told (owner):** the `add-city` skill now states both keys
+  (colour = `mode`, fill = `coverage`), the food-shops rule and the
+  categories-to-tier map; `scaffold-city` requires `--mode`; `publish-city`'s
+  live check looks at the new dot. The country skills defer to `add-city`.
+
+### 2026-09-30 - Macro dots by network and fill; food shops are food; thin layers are narrowed (owner)
+
+- **Built the revised macro legend on `macro-legend` (owner, 2026-09-30,
+  lifting the hold on this item).** Colour is now the highest-order mode a
+  city's map draws (a new `mode` field in `app/cities.py`: metro, light_rail
+  or tram). Fill is completeness, and it decays linearly: solid = full, the
+  bottom half = narrowed, a hollow ring with a pale centre = one category. The
+  owner reversed the 2026-09-29 plan, which gave narrowed the hollow ring: a
+  hollow dot reads as the least of the three. The bottom half is used, not a
+  side, because a level reads as "partly full" and a pie as shares.
+  - The colours reuse the validated completeness set: teal #0D9488 metro,
+    purple #9333EA light rail, orange #C2410C tram. `validate_palette.js`
+    re-run on all four basemap surfaces: normal-vision floor 27.1, worst
+    colour-blind pair 13.7 deutan / 17.0 tritan. They fall below 3:1 only
+    over water, as before.
+  - The dots are an IconLayer over one SVG sprite of 9 cells. The
+    ScatterplotLayer stays on top, invisible (alpha 1), for picking and the
+    amber hover.
+  - The legend has two keys: Rail network (solid dots in the mode colours)
+    and Business data (the three fills in grey).
+  - Dots grew from 10 to 12 px, so a ring is visible and tappable, and
+    `check_macro_labels.py`'s MARKER_R went from 5 to 6. At the new size
+    Osaka's, Taipei's and London's side labels grazed their own dots; each
+    moved 2 px outward (dx 10 -> 12). PROBLEMS 0; grazing notes went from 36
+    to 54.
+  - `iconAtlas` needed `pdk.types.String`: a bare `data:` URI is parsed as an
+    expression ("Unexpected ':'").
+  - The half fill paints a pale top half only; painting a pale disc under a
+    coloured half left a hairline round the lower arc.
+- **Modes: 62 metro, 11 light rail, 2 tram on master.** Light rail: Aarhus,
+  Bergen, Buffalo, Calgary, Edmonton, Guadalajara, Houston, Sacramento, San
+  Diego, San Francisco and Santos. Tram: Dublin and Riga. Ottawa and
+  Minneapolis are light rail on their branches. Borderline calls, from an
+  audit of each step 1 and its config:
+  - Monterrey and Newcastle are metro (grade-separated, drawn as the city's
+    rapid transit).
+  - Guadalajara is light rail (officially Tren Ligero).
+  - Melbourne is metro (suburban heavy rail only).
+
+  The per-city modes go to the owner before landing. `cities.py` raises at
+  import on a missing mode, and `scaffold_city.py` now requires `--mode`,
+  with no default.
+- **Food shops are food (owner): a food-only register is one category.**
+  London, Glasgow, Newcastle, Stockholm and Bucharest moved from narrowed to
+  `one_bucket`. Each has "Retail = food shops only" and no Personal services
+  in table B. `check_macro_facts.py` now accepts one_bucket for a dash in
+  Personal plus a "Retail = food shops only / food retail" note.
+  `check_inconsistency_list.py` maps "Food premises only" to one_bucket.
+  Ottawa and Minneapolis are one category too; their branches were asked to
+  set it.
+- **A thin layer is narrowed (owner), superseding the 2026-09-28 call that
+  New York stays full.** New York and Buffalo ("Retail thin") and Houston
+  (table B: "Personal services thin") moved from full to narrowed. Houston's
+  `categories` changed from "All three" to "Personal services thin", to match
+  its record and Berlin. `STRUCTURAL` in `check_macro_facts.py` now includes
+  "thin"; a floor (San Francisco, Brazil) stays full.
+- **Hong Kong: narrowed, `categories` "Two" (proposed, for the owner at
+  review).** Its register adds 34 bathhouses in Personal services, so it is
+  food plus personal, not food alone. Tiers now: full 50, narrowed 20,
+  one_bucket 5 on master. **Flagged, not changed:** Philadelphia
+  ("Two": food plus "Retail = food retail") would be one category under the
+  food-shops rule. The owner named it narrowed, so it stays narrowed pending
+  their word.
 
 ### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
 

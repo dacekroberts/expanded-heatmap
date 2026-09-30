@@ -668,8 +668,29 @@ right.
     `"Permit registers"`, `"National register"`, `"Tax register"`.
   - `categories`: `"All three"`, `"Two"`, `"Merged"`, `"Retail thin"`,
     `"Personal services thin"` or `"Food premises only"`. It must agree with
-    `coverage`: "All three" is a `full` city; a missing, merged, food-only or
-    thin Personal services layer is `narrowed`. "Retail thin" may be either.
+    `coverage` (owner, 2026-09-30): "All three" is `full`; "Two", "Merged"
+    and either "thin" value are `narrowed`; "Food premises only" is
+    `one_bucket`. **Food shops are food**, not a second category: a register of
+    restaurants plus food shops is one category, even though table B counts
+    the shops under Retail.
+- **The macro-map dot has TWO KEYS, and the entry sets both** (owner,
+  2026-09-30; the legend under the Overview map shows them):
+  - **Colour = `mode`**: the HIGHEST-ORDER rail mode the city's map draws,
+    `"metro"` > `"light_rail"` > `"tram"`. Trams drawn beside a metro leave
+    it `"metro"`; a light-rail-only system (Houston, Calgary) is
+    `"light_rail"`; street trams only (Dublin, Riga) is `"tram"`. It is
+    distinct from `rail_extra`, which lists what is drawn BESIDE the metro.
+    `scaffold_city.py --mode` writes it; `cities.py` raises at import without
+    it. Decide it from what step 1 keeps (GTFS `route_type`, OSM `route=`),
+    not the system's marketing name, and put it to the owner with the build.
+  - **Fill = `coverage`**: `"full"` (solid), `"narrowed"` (bottom half) or
+    `"one_bucket"` (hollow ring). `check_macro_facts.py` holds it to the
+    city's table B row, and `check_inconsistency_list.py` to `categories`.
+    A token third layer (Hong Kong's 34 bathhouses) does not lift a city out
+    of one category, but that is the owner's call per city, recorded in
+    `ONE_BUCKET_BY_OWNER` in `check_macro_facts.py`, never a threshold.
+  - The dots are 12 px (`DOT_PX` in `app/Overview.py`, `MARKER_R` in
+    `check_macro_labels.py`), so score the new label with that size.
 
   The allowed values are `FIELDS` in `scripts/check_inconsistency_list.py`,
   which refuses a missing field or a value not on the list. A genuinely new
