@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**242 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
 - [A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)](#2026-09-30---a-new-record-kind-health-inspection-register-for-kitchenerwaterloo-owner)
+- [Dallas's address-layer indemnity accepted (owner)](#2026-09-30---dallass-address-layer-indemnity-accepted-owner)
 - [Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity](#2026-09-30---zurich-göteborg-and-den-haag-briefed-for-the-tram-kit-dallass-address-layer-carries-an-open-ended-indemnity)
 - [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
 - [The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)](#2026-09-30---the-tram-kits-24-calls-and-its-page-text-template-approved-as-recommended-builds-still-held-owner)
@@ -285,6 +286,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+<<<<<<< HEAD
 ### 2026-09-30 - A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)
 
 The owner added a `record_kind` value, relayed by the cleanup session: **"Health
@@ -294,6 +296,23 @@ premises AND personal-service settings. Kitchener–Waterloo's build entry had u
 Region of Waterloo Public Health's food and personal-services inspections) now takes
 the new value. `scripts/check_inconsistency_list.py` lists it in `FIELDS`; table B's
 row already said "Food hygiene register" and now says the new value, so the two agree.
+=======
+### 2026-09-30 - Dallas's address-layer indemnity accepted (owner)
+
+- **The owner accepted the open-ended indemnity in the City of Dallas's GIS
+  data disclaimer (2026-09-30: "Accept")**, for the Address Points layer the
+  Dallas build places permits on (90.0% on a sample).
+  - **The rejected alternative:** placing through the Census geocoder
+    (Sacramento's route), which was offered with its placement rate
+    unmeasured.
+  - **Precedent:** the fourth such acceptance, after Hong Kong, Sacramento and
+    Palma.
+  - **The build:** Dallas's one pre-build item is cleared. It is the only
+    Band A city, and it waits for the owner's go on builds.
+- **Files:** `docs/data_sources.md` (a new "Dallas's indemnity" subsection)
+  and `docs/city_master_list.md` (Dallas's row).
+
+>>>>>>> origin/master
 ### 2026-09-30 - Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity
 
 - **The last three T1 briefs, with the owner's pre-approved calls confirmed
