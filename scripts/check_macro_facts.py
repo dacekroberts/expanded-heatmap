@@ -19,10 +19,14 @@ Three things are decided here:
      of docs/map_inconsistencies.md. "narrowed" needs a structural gap there:
      a bucket missing (a dash), merged or relabelled (the pins cell is not
      three plain figures), or a "Missing or thin" note saying "No ...",
-     "... only", "merged" or "Retail =". "full" needs three plain figures and
-     no such note. "one_bucket" needs a single figure. A floor or a thin
-     layer (San Francisco's NAICS floor, Brazil's unreadable rows, New York's
-     thin retail) is NOT structural: those cities stay full, and their
+     "... only", "merged" or "Retail =", or a layer called "thin" (owner,
+     2026-09-30: New York's and Buffalo's thin retail made them narrowed,
+     superseding 2026-09-28). "full" needs three plain figures and no such
+     note. "one_bucket" needs a single figure, OR food alone: no Personal
+     services (a dash) and a note saying the Retail figure is food shops or
+     food retail (owner, 2026-09-30: food shops are food-like and are not a
+     second category). A floor (San Francisco's NAICS floor, Brazil's
+     unreadable rows) is NOT structural: those cities stay full, and their
      caveats belong on their pages (PLAN).
   3. THE PHRASES (`placement`, `data_age`): every date, year and percentage in
      them must appear in the city's row of table C (placement) or D (data age),
@@ -45,7 +49,16 @@ from station_scope import slug  # noqa: E402
 FACTS_JSON = ROOT / "app" / "macro_facts.json"
 INCONSISTENCIES = ROOT / "docs" / "map_inconsistencies.md"
 TIERS = ("full", "narrowed", "one_bucket")
-STRUCTURAL = re.compile(r"\bNo [A-Za-z]|\bonly\b|merged|Retail =")
+STRUCTURAL = re.compile(r"\bNo [A-Za-z]|\bonly\b|merged|Retail =|\bthin\b")
+# The note that makes a Retail figure food: "Retail = food shops only", "Retail = food retail".
+FOOD_RETAIL = re.compile(r"Retail = food (?:shops only|retail)\b")
+DASH = ("—", "-", "–")
+# One-category cities whose table B row carries a token third figure, each
+# named with the owner's call - never a threshold, which would decide the next
+# city unseen.
+ONE_BUCKET_BY_OWNER = {
+    "Hong Kong": "owner, 2026-09-30: 34 bathhouses are not enough to make a second category",
+}
 FIGURE = r"\d[\d,]*"
 
 
@@ -159,8 +172,11 @@ def main():
             if cov == "narrowed" and not structural:
                 problems.append(f"{name}: coverage 'narrowed', but table B shows three plain "
                                 f"buckets and no structural note ({note!r})")
-            if cov == "one_bucket" and not (len(parts) == 1 or sum(bool(re.search(FIGURE, p)) for p in parts) == 1):
-                problems.append(f"{name}: coverage 'one_bucket', but table B shows {pins!r}")
+            single = len(parts) == 1 or sum(bool(re.search(FIGURE, p)) for p in parts) == 1
+            food_alone = (len(parts) == 3 and parts[2] in DASH and bool(FOOD_RETAIL.search(note)))
+            if cov == "one_bucket" and not (single or food_alone or name in ONE_BUCKET_BY_OWNER):
+                problems.append(f"{name}: coverage 'one_bucket', but table B shows {pins!r} "
+                                f"(note {note!r})")
         elif cov in TIERS:
             problems.append(f"{name}: no row in table B of {INCONSISTENCIES.name}")
         check_phrases(problems, name, "placement", c.get("placement", ""), row_for(tc, name, c.get("country")))
