@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**226 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)](#2026-09-30---macro-legend-approved-hong-kong-and-philadelphia-one-category-builds-told-owner)
 - [Macro dots by network and fill; food shops are food; thin layers are narrowed (owner)](#2026-09-30---macro-dots-by-network-and-fill-food-shops-are-food-thin-layers-are-narrowed-owner)
 
 **2026-09-29**
@@ -268,6 +269,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)
+
+- **Approved (owner):** every city's `mode` as proposed (including Monterrey
+  and Newcastle as metro, Guadalajara as light rail and Melbourne as metro),
+  the legend and tooltip wording, and Houston's `categories` "Personal
+  services thin".
+- **Hong Kong is one category, not "Two" (owner): its 34 bathhouses are not
+  enough to make a second category.** This supersedes the proposal in the
+  entry below. `categories` is back to "Food premises only" and `coverage`
+  is `one_bucket`. `check_macro_facts.py` names it in `ONE_BUCKET_BY_OWNER`,
+  with the owner's reason: a token layer is a per-city call, never a
+  threshold.
+- **Philadelphia is one category (owner):** its Retail is food retail, so
+  under the food-shops rule it is food alone. `categories` "Two" -> "Food
+  premises only", `coverage` `one_bucket`. Boston stays "Two" and narrowed:
+  its Retail includes package stores and cannabis. Tiers on master: full 50,
+  narrowed 18, one_bucket 7.
+- **New builds are told (owner):** the `add-city` skill now states both keys
+  (colour = `mode`, fill = `coverage`), the food-shops rule and the
+  categories-to-tier map; `scaffold-city` requires `--mode`; `publish-city`'s
+  live check looks at the new dot. The country skills defer to `add-city`.
 
 ### 2026-09-30 - Macro dots by network and fill; food shops are food; thin layers are narrowed (owner)
 

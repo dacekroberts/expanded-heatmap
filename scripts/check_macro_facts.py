@@ -53,6 +53,12 @@ STRUCTURAL = re.compile(r"\bNo [A-Za-z]|\bonly\b|merged|Retail =|\bthin\b")
 # The note that makes a Retail figure food: "Retail = food shops only", "Retail = food retail".
 FOOD_RETAIL = re.compile(r"Retail = food (?:shops only|retail)\b")
 DASH = ("—", "-", "–")
+# One-category cities whose table B row carries a token third figure, each
+# named with the owner's call - never a threshold, which would decide the next
+# city unseen.
+ONE_BUCKET_BY_OWNER = {
+    "Hong Kong": "owner, 2026-09-30: 34 bathhouses are not enough to make a second category",
+}
 FIGURE = r"\d[\d,]*"
 
 
@@ -168,7 +174,7 @@ def main():
                                 f"buckets and no structural note ({note!r})")
             single = len(parts) == 1 or sum(bool(re.search(FIGURE, p)) for p in parts) == 1
             food_alone = (len(parts) == 3 and parts[2] in DASH and bool(FOOD_RETAIL.search(note)))
-            if cov == "one_bucket" and not (single or food_alone):
+            if cov == "one_bucket" and not (single or food_alone or name in ONE_BUCKET_BY_OWNER):
                 problems.append(f"{name}: coverage 'one_bucket', but table B shows {pins!r} "
                                 f"(note {note!r})")
         elif cov in TIERS:
