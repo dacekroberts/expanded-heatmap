@@ -34,7 +34,7 @@ st.markdown(
     """
 Three Soléa tram lines are drawn, **Tram 1, Tram 2 and Tram 3**, each labelled on the map and in the legend, from the operator's own published timetable feed. Mulhouse has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
 
-The map covers the **commune of Mulhouse**. **Tram 3 runs past it**, so one stop beyond the boundary is left out: Lutterbach Gare in Lutterbach. The line is still drawn to its ends, but those stops get no ring and their businesses are not counted; they are listed in `outputs/mulhouse/excluded_stations.csv`. Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
+The map covers the **commune of Mulhouse**. **Tram 3 runs past it**, so one stop beyond the boundary is left out: Lutterbach Gare in Lutterbach. The line is still drawn to its ends, but that stop gets no ring and its businesses are not counted; it is listed in `outputs/mulhouse/excluded_stations.csv`. Its commune's businesses are in the same national register this map reads, so leaving it out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
 
 Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as Paris, Marseille, Toulouse, Lille and Rennes. About 13% of active establishments here are marked non-diffusible by INSEE, which withholds their name, address and coordinates together, so they never reach this map. Where SIRENE records no shop sign or trading name, the dot shows the address instead.
 

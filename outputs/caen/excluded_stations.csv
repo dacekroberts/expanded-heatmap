@@ -1,0 +1,10 @@
+stop_id,station,lines,reason,latitude,longitude
+FR:14271:ZE:cp01:ATOUMOD029,College Hawking,T3,"in Fleury-sur-Orne (14271), outside commune 14118",49.157829,-0.360862
+FR:14271:ZE:zac01:ATOUMOD029,Hauts de l'Orne,T3,"in Fleury-sur-Orne (14271), outside commune 14118",49.152935,-0.361205
+FR:14327:ZE:ci01:ATOUMOD029,CITIS,T2,"in Hérouville-Saint-Clair (14327), outside commune 14118",49.21138,-0.356601
+FR:14327:ZE:cim01:ATOUMOD029,Café des Images,T1,"in Hérouville-Saint-Clair (14327), outside commune 14118",49.202534,-0.332551
+FR:14327:ZE:che01:ATOUMOD029,Château d'Eau,T1,"in Hérouville-Saint-Clair (14327), outside commune 14118",49.202789,-0.34032
+FR:14327:ZE:ac01:ATOUMOD029,Place de l'Europe,T1,"in Hérouville-Saint-Clair (14327), outside commune 14118",49.202637,-0.336463
+FR:14327:ZE:sc01:ATOUMOD029,Saint-Clair,T1,"in Hérouville-Saint-Clair (14327), outside commune 14118",49.20364,-0.329385
+FR:14341:ZE:jv01:ATOUMOD029,Jean Vilar,T1,"in Ifs (14341), outside commune 14118",49.150078,-0.351002
+FR:14341:ZE:mo01:ATOUMOD029,Modigliani,T1,"in Ifs (14341), outside commune 14118",49.154381,-0.34627

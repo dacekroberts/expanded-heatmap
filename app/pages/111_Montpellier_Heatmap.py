@@ -2,16 +2,21 @@
 
 Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
 Overview.py's docstring for why this is the decided pattern
-for every city's detail page. Scaffolded by scripts/scaffold_city.py.
+for every city's detail page. Scaffolded by scripts/scaffold_city.py; the prose
+written by scripts/france_page.py from the French tram-city template the owner
+approved word for word (2026-09-29; france-tram-city skill, section 6), every
+brace filled from this city's own build. Re-run that script after a rebuild
+rather than editing the figures by hand.
 """
 
+import json
 import sys
 from pathlib import Path
 
 import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.montpellier.config import HEATMAP_HTML  # noqa: E402
+from pipeline.montpellier.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
     render_site_notices,
@@ -23,17 +28,19 @@ set_base_font()
 
 render_city_nav("Montpellier")
 
-st.title("Montpellier: commercial density around TaM station areas")
+st.title("Montpellier: commercial density around tram stops")
 
-# TODO: replace every TODO line below with prose true for this city: the lines
-# (by name), which stations are included and what is left out and where the
-# list is, the data source and any known limitation. Avoid restating counts.
 st.markdown(
     """
-TODO: describe the lines drawn (each is labeled directly on the map and in the
-legend), the stations included and excluded (the excluded ones are listed in
-`outputs/montpellier/excluded_stations.csv`), and the data source and its
-limitations.
+Five TaM tram lines are drawn, **Tram 1, Tram 2, Tram 3, Tram 4 and Tram 5**, each labelled on the map and in the legend, their stops from the operator's own published timetable feed and their track from OpenStreetMap. Montpellier has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
+
+The map covers the **commune of Montpellier**. **Tram 2, Tram 3 and Tram 5 run past it**, so 24 stops beyond the boundary are left out: Aube Rouge, Centurions, Charles de Gaulle, Clairval, Georges Pompidou, La Galine, Notre-Dame de Sablassou and Via Domitia in Castelnau-le-Lez; Clapiers in Clapiers; Jacou in Jacou; Juvignac in Juvignac; Boirargues, Cougourlude, Lattes Centre and Soriech in Lattes; Montferrier-sur-Lez in Montferrier-sur-Lez; EcoPôle, Parc Expo, Pérols Centre and Pérols Étang de l'Or in Pérols; La Condamine, Saint-Jean de Védas Centre, Saint-Jean le Sec and Victoire 2 in Saint-Jean-de-Védas. The lines are still drawn to their ends, but those stops get no ring and their businesses are not counted; they are listed in `outputs/montpellier/excluded_stations.csv`. Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
+
+Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as Paris, Marseille, Toulouse, Lille and Rennes. About 19% of active establishments here are marked non-diffusible by INSEE, which withholds their name, address and coordinates together, so they never reach this map. Where SIRENE records no shop sign or trading name, the dot shows the address instead.
+
+**Read the density as a register, not a street survey.** SIRENE records where a business is *registered*, and some registered establishments have no customer-facing shopfront; nothing in the data says which. Against OpenStreetMap's mapped restaurants in the commune of Montpellier, where the two schemes mean nearly the same thing, this map carries about **2.1 times** as many points.
+
+**Tram stops sit closer together than metro stations**, a median of 420 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps. **About 87% of storefronts sit within a ring.**
 
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
@@ -46,6 +53,35 @@ statistical density estimate, so read the colour as "roughly where things
 cluster."
 """
 )
+
+# The snapshot, read from outputs/montpellier/provenance.json rather than
+# hardcoded so it cannot go stale on the next fetch. ODbL: the §4.3 notice naming this database is in components._NOTICES; this caption credits the producer and the date.
+# SIRENE's line carries INSEE's prescribed « Source : Insee ».
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _taken = (_prov.get("fetched_utc") or "")[:10]
+        _fi = _prov.get("feed_info") or {}
+        _nap = _prov.get("nap") or {}
+
+        def _iso(d):
+            d = str(d or "")
+            return f"{d[:4]}-{d[4:6]}-{d[6:8]}" if len(d) == 8 and d.isdigit() else d
+
+        _start = _iso(_fi.get("feed_start_date") or _nap.get("start_date"))
+        _end = _iso(_fi.get("feed_end_date") or _nap.get("end_date"))
+        if _taken:
+            _line = "Transit data © Montpellier Méditerranée Métropole (TaM), via transport.data.gouv.fr"
+            if _start and _end:
+                _line += f", from the feed published for **{_start}** to **{_end}**"
+            st.caption(_line + f"; snapshot taken **{_taken}**.")
+            _edition = (_prov.get("sirene_etab_title") or "").split(" - ")[-1].split(" (")[0]
+            st.caption("Business data: Source : Insee, SIRENE"
+                       + (f" ({_edition} edition)" if _edition else "")
+                       + " and its geolocation file.")
+    except (ValueError, OSError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its

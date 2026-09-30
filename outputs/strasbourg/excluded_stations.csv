@@ -1,0 +1,30 @@
+stop_id,station,lines,reason,latitude,longitude
+BOROM_01,Bois Romain,F,"in Eckbolsheim (67118), outside commune 67482",48.58713637,7.681919101
+ECKEL_01,Eckelse,F,"in Eckbolsheim (67118), outside commune 67482",48.58500709,7.686583127
+PAACE_01,Parc d'activités d'Eckbolsheim Zénith,F,"in Eckbolsheim (67118), outside commune 67482",48.5888765,7.677962095
+POTER_01,Poteries,D/F,"in Eckbolsheim (67118), outside commune 67482",48.58230087,7.692462888
+WOHER_01,Wolfisheim Henri Rendu,F,"in Eckbolsheim (67118), outside commune 67482",48.59133652,7.672866984
+GEGAU_01,Général de Gaulle,B,"in Hœnheim (67204), outside commune 67482",48.6216289053,7.7638010186
+HOGAR_05,Hoenheim Gare,B,"in Hœnheim (67204), outside commune 67482",48.6280977541,7.7586243923
+LERIE_01,Le Ried,B,"in Hœnheim (67204), outside commune 67482",48.6214719951,7.7675578792
+BAGGE_03,Baggersee,A/E,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5448638373,7.7377496847
+CAILL_03,Campus d'Illkirch,A/E,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5292993959,7.7327266976
+COLON_03,Colonne,A/E,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5380069983,7.7335093054
+COILL_01,Cours de l'Illiade,A,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5277925592,7.7103622688
+ILGRA_01,Graffenstaden,A,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5248450274,7.7080735936
+ILLIX_04,Illkirch Lixenbuhl,A,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5297647342,7.7248172834
+LECLE_01,Leclerc,A/E,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5342782135,7.7343959338
+PAMAL_01,Parc Malraux,A,"in Illkirch-Graffenstaden (67218), outside commune 67482",48.5269665007,7.7203461401
+KEHOC_01,Hochschule / Läger,D,"in Kehl, Germany, outside commune 67482",48.57527579,7.815822746
+KEBAH_03,Kehl Bahnhof,D,"in Kehl, Germany, outside commune 67482",48.576008867,7.807742469
+KERAT_01,Kehl Rathaus,D,"in Kehl, Germany, outside commune 67482",48.5722608437,7.8138750046
+ALOUT_01,Lingolsheim Alouettes,B,"in Lingolsheim (67267), outside commune 67482",48.5511932819,7.692940057
+LITIE_01,Lingolsheim Tiergaertel,B,"in Lingolsheim (67267), outside commune 67482",48.5537703385,7.6894163522
+BORIE_01,Bohrie,B,"in Ostwald (67365), outside commune 67482",48.5499224652,7.7029905667
+OSHVI_01,Ostwald Hôtel de Ville,B,"in Ostwald (67365), outside commune 67482",48.5509338278,7.7103004879
+WIHRE_01,Wihrel,B,"in Ostwald (67365), outside commune 67482",48.5549084541,7.7128485217
+FUGLA_01,Futura Glacière,B,"in Schiltigheim (67447), outside commune 67482",48.6051485634,7.759488807
+LEMAR_03,Le Marais,B,"in Schiltigheim (67447), outside commune 67482",48.6099232579,7.7657309458
+LYMAB_01,Lycée Marc Bloch,B,"in Schiltigheim (67447), outside commune 67482",48.6166095889,7.7679947153
+POPHA_03,Pont Phario,B,"in Schiltigheim (67447), outside commune 67482",48.612982625,7.7671478773
+RIAAR_03,Rives de l'Aar,B,"in Schiltigheim (67447), outside commune 67482",48.600909946,7.7546171867
