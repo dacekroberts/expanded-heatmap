@@ -140,7 +140,9 @@ so the join does not selectively drop home businesses.
 
 ⚠️ **The register files are NATIONAL and SHARED with Oslo**:
 `data/norway/raw/underenheter.csv.gz` and `enheter.csv.gz`, cached
-**2026-09-23**. Refreshing them changes Oslo's inputs, and Oslo's next drift
+**2026-09-23** (Pacific time; 01:30 UTC on 2026-09-24, which is 2026-09-24
+in Norway and is the date the page states - dates follow the city's own time
+zone, DECISIONS 2026-09-29). Refreshing them changes Oslo's inputs, and Oslo's next drift
 check reports drift that is not Oslo's. **Build-time call: build on the
 cached 2026-09-23 edition** (six days old; the currency rule's clock is five
 years) and record the date on the page, **or** refresh deliberately and re-run

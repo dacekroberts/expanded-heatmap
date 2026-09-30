@@ -1857,7 +1857,7 @@ CITIES = [
         "page": "pages/71_Bergen_Heatmap.py",
         "coverage": "full",
         "placement": "Joined by address (96.2%)",
-        "data_age": "Register 2026-09-23; transit fetched 2026-09-27 (no source date)",
+        "data_age": "Register 2026-09-24; transit fetched 2026-09-27 (no source date)",
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
