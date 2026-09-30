@@ -9,6 +9,23 @@ placement through OSM's DAR address points, the same Letbane shape. Read
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; the 24 calls in `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: every call below as recommended, and the page-text template. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Odense Kommune (461)** | See the rail section |
+| **Lines drawn** | Odense Letbane, one line (OSM ref L) | |
+| **Rings** | halved: median gap 441 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): SDU Syd/Hospital Nord** | **Add by name**: open since 2023-08-25, missing from OSM's routes | |
+| **Call (approved): Hospital Syd** | **Out** until it opens in 2027 | |
+| **Call (approved): Colour** | chosen at build | |
+
+---
+
 ## The one-line summary
 
 **Aarhus's modules with kommune 461 and one Letbane line, plus a station OSM's
@@ -92,17 +109,40 @@ The screen (`data/_staging_scratch_2026-09-27/second_cities/denmark/biz.py`,
     "id": "odense-letbane-osm",
     "claim": "OSM carries Odense Letbane as two route=tram relations with ref L (operator Keolis), 24 stop names on the routes (2026-09-30)",
     "kind": "osm_route_refs",
-    "bbox": [55.33, 10.28, 55.46, 10.47],
-    "routes": ["tram"],
-    "expect_relations": {"tram": 2},
-    "require_refs": {"tram": ["L"]}
+    "bbox": [
+      55.33,
+      10.28,
+      55.46,
+      10.47
+    ],
+    "routes": [
+      "tram"
+    ],
+    "expect_relations": {
+      "tram": 2
+    },
+    "require_refs": {
+      "tram": [
+        "L"
+      ]
+    }
   },
   {
     "id": "odense-is-utm-32",
     "claim": "Odense (10.39 E) is in UTM zone 32, as Aarhus: EPSG:25832 for DAR, WGS84 twin 32632",
     "kind": "utm_zone_from_longitude",
     "lon": 10.39,
-    "expect": "EPSG:32632"
+    "expect": "EPSG:32632",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "kommune",
+    "crs": "EPSG:25832",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```

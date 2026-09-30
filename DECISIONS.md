@@ -20,11 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**240 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
 - [Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)](#2026-09-30---palma-built-on-m1-alone-its-register-placed-by-a-catastro-join-m1s-timetable-disclosed-not-disqualifying-owner)
+- [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
+- [The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)](#2026-09-30---the-tram-kits-24-calls-and-its-page-text-template-approved-as-recommended-builds-still-held-owner)
+- [The Czech batch's calls and prose approved as recommended (owner)](#2026-09-30---the-czech-batchs-calls-and-prose-approved-as-recommended-owner)
 - [Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail](#2026-09-30---tram-kit-four-more-briefs-checked-new-orleans-recommended-unthinned-every-brief-so-far-takes-osm-rail)
 - [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
 - [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
@@ -346,6 +349,103 @@ the join and the access date. The dataset URI is on `intranet.caib.es`
 Kitchener–Waterloo's 69 on their branches: whichever lands second renumbers.
 `record_kind` "Licence register" (the register is the Consell's registration of
 establishments), `rail_extra` "Suburban rail" (SFM's trains).
+### 2026-09-30 - The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in
+
+- **All 13 briefs now open with a "For the owner, with the build" table**
+  (Brest's shape), giving `mode`, a literal `coverage`, scope, lines, rings
+  and each call.
+  - **`vs_config` fields** (mode, coverage, scope, crs, and obec codes for
+    the Czech six) sit on each brief's CRS check, so `brief_check.py
+    --vs-config` holds a build to them.
+  - **The approvals are written in:** the Czech batch's calls (owner, bd9a083)
+    and the tram kit's 24 (owner, cdee504).
+  - **Checks:** every brief passes, re-run where Overpass timed out.
+- **Measured for the kits (2026-09-30):**
+  - **Daugavpils's headways** (worst daytime hour one way, the operator's
+    timetable read for headway only): route 1 4–6 an hour; routes 3 and 5,
+    one loop, 2–3 each; route 2 0–3; route 4 1. Under the approved 20-minute
+    floor, **route 1 only** is drawn.
+  - **Brno's stations** are the feed's 149 parent stations, 147 inside the
+    city. The tram list's 146 was the screen's.
+  - **The Jablonec and Litvínov RÚIAN controls:** 12188018 and 5150507,
+    against OSM.
+  - **New Orleans:** 38.1% of licences within 0.3 mi with every stop kept,
+    37.2% thinned at 400 m, so no thinning (approved).
+  - **Zurich** (live OSM, for the tram list): 182 stops at a 283 m median
+    gap. Glattalbahn 12 (11%), Limmattalbahn 20 (15%) and the Forchbahn S18
+    (20%) are stubs, while 10 keeps 72%. Refs 50 and 51 are wholly inside.
+- **Corrections:**
+  - **Regions:** the US three take "United States East" (Kansas City, New
+    Orleans) and "United States West" (Tucson), not "North America".
+  - **File names:** `kansas_city.md` and `new_orleans.md` renamed to match
+    their pipeline slugs.
+  - **Coverage:** Latvia and Den Haag are `narrowed`, Rotterdam's and Riga's
+    merged shape.
+  - **Palette:** the dangling "(below)" references now point to
+    `line_colour_search.py`.
+  - **Name:** "Most (Regional)" (owner).
+
+### 2026-09-30 - The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)
+
+- **Owner: "Agree with recommended options for all"**, covering the 24 calls
+  in `docs/handoff_tram_kit_2026-09-30.md`, the trams-only page-text
+  template among them.
+  - **The template** is now section 6 of the `tram-city` skill. It is
+    France's structure with the rail from OpenStreetMap. It adds a
+    one-bucket or narrowed paragraph, a currency paragraph (Kansas City's
+    data date, Göteborg's undated rows) and New Orleans's
+    ring-band sentence.
+  - **A route is drawn only if it runs at least every 20 minutes by day**
+    (Buffalo, the slowest drawn). A stop served only by slower routes is
+    listed as infrequent. This decides Daugavpils's hourly routes once
+    their headways are read.
+  - **No city on the tram list is thinned**: New Orleans keeps all 110
+    stops, against the handoff's named exception.
+  - **Coverage**: Daugavpils, Liepāja and Den Haag are `narrowed`
+    ("Merged"), overriding the tram list's `full` for Den Haag. Odense is
+    `mode` `tram`.
+  - **The per-city data calls**: Kansas City keeps 2025-26 licences, drops
+    fee codes with the count shown, and withholds personal `dba_name`s.
+    Tucson withholds `ACC_NAME` for personal ownership types. New Orleans
+    drops event vendors and home offices. Florence keeps its exempt food
+    rows on Milan's *fuori piano* precedent, and is commune-only.
+  - **The line calls**: Zurich's Forchbahn and Den Haag's RandstadRail E
+    are left out. The Glattalbahn and Göteborg's Mölndal lines take the
+    stub test. Göteborg's blank-`typ` rows are classified by name or
+    dropped. Den Haag's pending permits are out.
+- **Calls 18-24 (Zurich, Göteborg, Den Haag) were approved before their
+  briefs landed**, so a brief whose measurement changes the facts behind
+  one sends that call back to the owner.
+- **Builds stay held**: the approval covers the calls, not the go. The kit
+  is complete apart from checking those three briefs when staging lands
+  them.
+### 2026-09-30 - The Czech batch's calls and prose approved as recommended (owner)
+
+- **Owner: "I approve all recommended approaches to the calls", then "and
+  prose"**, for the nine calls the Czech kit put after "The Czech batch kit".
+  - **Colours:** the five OSM cities (Ostrava, Plzeň, Olomouc, Liberec and
+    Most) use the project's own palette, from `scripts/line_colour_search.py`
+    with evenly spaced target hues. Brno keeps its feed colours.
+  - **Ostrava's line 5 is left out.** 3 of its 10 stops are in the city, and
+    leaving it out costs Poruba,koupaliště and Krásné Pole.
+  - **Liberec is "Liberec (Regional)", with Jablonec nad Nisou.**
+  - **Most is built last, as "Most (Regional)"**, covering Litvínov. The
+    brief's "Most and Litvínov (Regional)" was the rejected name; the page
+    names Litvínov in its scope sentence.
+  - **Brno's H4 and P1 are left out.**
+  - **`mode` `tram` and `coverage` `full`** for all six.
+  - **OSM stops collapse by name** at the mean within 200 m (Aarhus's rule);
+    Brno's stations are the feed's parents.
+  - **The build order** is Brno, Plzeň, Olomouc, Ostrava, Liberec, Most.
+- **The prose is approved word for word.** It covers the page-text template
+  and the new "KORDIS JMK (Brno)" notice. It also extends the ČSÚ and ČÚZK
+  notice titles to each Czech city as it lands, with their text unchanged.
+  `.claude/skills/czech-tram-city/SKILL.md` sections 6 and 7 carry it, and
+  any departure is an owner call.
+- **Not taken as the go on builds.** The approval covers the calls and the
+  prose; the handoff asks for an explicit go before any Czech city is
+  scaffolded, so builds still wait for it. When it comes, they run on a build
+  branch, and `app/` lands at review time.
 
 ### 2026-09-30 - Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail
 

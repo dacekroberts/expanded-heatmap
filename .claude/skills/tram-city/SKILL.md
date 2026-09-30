@@ -1,6 +1,6 @@
 ---
 name: tram-city
-description: Build a trams-only city outside France and Czechia - the ten T1 cities in seven countries (Odense, Daugavpils, Liepāja, Kansas City, New Orleans, Tucson, Florence, Zurich, Göteborg, Den Haag) - with what every trams-only map shares - the owner's trams-only calls, rings by the spacing rule, no stop thinning (New Orleans's the one open call), the light-rail test, the shared OSM tram step 1, rolling feeds, OSM rail, the currency rule, one-bucket and narrowed pages, the macro map's mode and coverage keys, and the page-text shape - plus a sheet per city pointing at its country's built template. Read with the city's brief, add-city, osm-rail and publish-city, which it does not replace.
+description: Build a trams-only city outside France and Czechia - the ten T1 cities in seven countries (Odense, Daugavpils, Liepāja, Kansas City, New Orleans, Tucson, Florence, Zurich, Göteborg, Den Haag) - with what every trams-only map shares - the owner's trams-only calls, rings by the spacing rule, no stop thinning anywhere (New Orleans included), the light-rail test, the shared OSM tram step 1, rolling feeds, OSM rail, the currency rule, one-bucket and narrowed pages, the macro map's mode and coverage keys, and the page text the owner approved - plus a sheet per city pointing at its country's built template. Read with the city's brief, add-city, osm-rail and publish-city, which it does not replace.
 ---
 
 # Building a trams-only city (the ten non-French, non-Czech T1 cities)
@@ -16,8 +16,8 @@ brief names as its template. `japan-city`, `taiwan-city` and `brazil-city` stay
 the model for a country skill. Write one only if a country here gets a third
 city.
 
-**Builds are HELD** (owner, 2026-09-30) until the owner gives the go after
-the kit and the briefs' calls. Build on a branch, never on master: `app/` lands
+**Builds are HELD** (owner, 2026-09-30) until the owner gives the go. The
+kit's 24 calls were approved on 2026-09-30, but that is not the go. Build on a branch, never on master: `app/` lands
 at review time only (`docs/review_time.md`).
 
 ## Order of work for one city
@@ -46,10 +46,8 @@ at review time only (`docs/review_time.md`).
   precedent), and every tram stop gets rings.
 - **No stop thinning on the tram list** (DECISIONS "Tram audit Phases 3-4",
   owner). Riga's 0.5 mi filter does not carry over, even to the two Latvian
-  cities built on Riga's modules. **New Orleans (164 m) is the one open
-  question** (section 2): the kit's handoff named it an exception, and its
-  brief keeps every stop. The kit recommends no thinning, and it is an owner
-  call.
+  cities built on Riga's modules. **New Orleans keeps every stop too**
+  (owner, 2026-09-30, call 13), so no city on this list is thinned.
 - **Rings follow the spacing rule** (DECISIONS "Tram cities use the existing
   spacing rule", owner, 2026-09-29), section 3.
 - **The light-rail test** (`docs/tram_city_list.md`, owner, 2026-09-29) decides
@@ -71,6 +69,50 @@ at review time only (`docs/review_time.md`).
   complete.
 - **A GTFS feed that declares no licence is not used**: take OSM (Olomouc,
   owner, 2026-09-30). Daugavpils and Liepāja follow it.
+- **RideKC's GTFS is not used** (owner, 2026-09-30): Kansas City's rail is
+  OSM.
+- **The kit's 24 calls, approved as recommended** (owner, 2026-09-30: "Agree
+  with recommended options for all"; the numbers are the handoff's):
+  1. the page-text template (section 6);
+  2. a route is drawn only if it runs at least every 20 minutes by day, and
+     a stop served only by slower routes is listed as infrequent (section 1);
+  3. the project's own colours where the source has none (Odense, Daugavpils,
+     Liepāja, Kansas City, Tucson);
+  4. Odense's SDU Syd/Hospital Nord added by node, and Hospital Syd out until
+     it opens;
+  5. Odense's `mode` is `tram`;
+  6. Daugavpils's routes under the call 2 floor;
+  7. Daugavpils and Liepāja are `narrowed`, "Merged";
+  8. notice 42 extended to name VZD's address register, in VZD's wording
+     with the year;
+  9. Liepāja's Brīvības iela and Klaipēdas iela added by node;
+  10. Kansas City keeps licences valid for 2025 and 2026 only;
+  11. Kansas City's `dba_name` withheld where it reads as a person (Houston's
+      rule);
+  12. Kansas City's fee-code types dropped, with the count on the page;
+  13. New Orleans keeps all 110 stops;
+  14. New Orleans drops "Special Events-Other (Vendor)" and "Home
+      Based-Office Use Only";
+  15. Tucson's `ACC_NAME` withheld for Sole Proprietorship, Individual and
+      Married;
+  16. Florence keeps its 639 exempt food rows, filtering what the type code
+      names as non-public, on Milan's *fuori piano* precedent;
+  17. Florence is commune-only, with T1's 4 Scandicci stops listed as
+      outside;
+  18. Zurich's Forchbahn is left out and named on the page;
+  19. Zurich's Glattalbahn lines each take the stub test, and a stub is
+      dropped;
+  20. Göteborg's blank-`typ` rows are classified by name where the name
+      shows a counter, and the rest dropped;
+  21. Göteborg's lines 4 and 12 are drawn to their ends, with the Mölndal
+      stops listed as outside, unless the stub test fails;
+  22. Den Haag's RandstadRail E is left out as a stub;
+  23. Den Haag is `narrowed`, "Merged";
+  24. Den Haag's 158 pending horeca permits are left out.
+
+  **Calls 18-24 were approved before their briefs landed.** If a brief's
+  measurement changes the facts behind one (a Glattalbahn line that is not
+  a stub, a Mölndal line that is), the call goes back to the owner.
 
 ## 1. Is it a tram, and what is its `mode`?
 
@@ -90,22 +132,22 @@ what step 1 keeps (GTFS `route_type`, OSM `route=`), never from a marketing
 name. France's feeds showed that mode flags lie (Reims's tram is typed metro).
 Here that means:
 
-| City | Proposed `mode` | The question |
+| City | `mode` | Why |
 |---|---|---|
-| Den Haag (EDGE) | `light_rail` if RandstadRail 3 and 4 are drawn as light rail; `metro` only if line E is drawn | **Line E keeps 4 of its 23 stops in the city.** That is a stub (Ostrava's line 5, Madrid's ML2 and ML3), so leaving it out is recommended |
-| Zurich | `tram` | **The Forchbahn (S18) is OSM `route=light_rail`.** Inside the Stadt it runs on tram 11's track and stops. Drawing it would make the dot light-rail purple for no new rings, so leaving it out is recommended, named with the S-Bahn |
-| Odense | `tram` | Aarhus, its template, is `light_rail` (its new tramway passed the test). Odense's Letbane is OSM `route=tram` and street-running, and it stayed on the list |
+| Den Haag (EDGE) | `light_rail` if OSM tags RandstadRail 3 and 4 as light rail, else `tram` | **Line E is left out as a stub** (owner, call 22): 4 of its 23 stops are in the city, as Ostrava's line 5 and Madrid's ML2 and ML3 were. So `metro` is never drawn |
+| Zurich | `tram` | **The Forchbahn (S18, OSM `route=light_rail`) is left out** (owner, call 18) and named on the page with the S-Bahn. Inside the Stadt it runs on tram 11's track and stops, so drawing it would add no rings |
+| Odense | `tram` (owner, call 5) | Aarhus, its template, is `light_rail` (its new tramway passed the test). Odense's Letbane is OSM `route=tram` and street-running, and it stayed on the list |
 | the other seven | `tram` | none |
 
-**A frequency floor for a route, not a system (Daugavpils).** Street trams
+**A frequency floor for a route, not a system** (owner, call 2). Street trams
 have no frequency gate, but no built city draws a route that runs **hourly**,
-and Daugavpils's routes 2-4 did at the screen. The kit recommends drawing a
-route only if it runs at least **every 20 minutes by day** (Buffalo, the
-slowest drawn). A stop served only by slower routes goes to
-`excluded_stations.csv` as **infrequent**, Aarhus's class
-(`app/station_scope.py`). This is an owner call (the call list).
+and Daugavpils's routes 2-4 did at the screen. **A route is drawn only if it
+runs at least every 20 minutes by day** (Buffalo, the slowest drawn). Read
+it from the operator's own timetable. A stop served only by slower routes
+goes to `excluded_stations.csv` as **infrequent**, Aarhus's class
+(`app/station_scope.py`), and the page says so.
 
-## 2. Stations - every stop, one exception
+## 2. Stations - every stop
 
 - **Every stop in scope gets a ring.** Collapse platforms to stations and
   thin nothing. `pipeline/stations.py`'s gates still run: spacing, per-line
@@ -130,24 +172,26 @@ slowest drawn). A stop served only by slower routes goes to
     list.
   - **A stop that is not yet open stays out** and becomes a watch item
     (Odense's Hospital Syd, 2027).
-- **New Orleans: keep every stop (recommended; an owner call).** Its
+- **New Orleans keeps every stop** (owner, 2026-09-30, call 13). Its
   streetcar stops stand a block or two apart (164 m median), so the rings
-  merge into a band along each line. The kit's handoff named it the one
+  merge into a band along each line. The kit's handoff had named it the one
   exception for the street-stop filter, but the filter's own shape test
   (`docs/sub_transit_line_filters.md`, "When this applies") fails. That
-  filter exists for a central corridor with sparse stations plus dense
-  surface branches (Muni Metro, Boston's Green Line). **New Orleans is
-  uniformly dense, with no corridor**, the case the doc says not to thin.
-  Thinning there would also put a business one block from a stop outside
-  the rings. The band is then a true reading of distance from the line, and
-  the page says so. If the owner chooses the filter instead, it is
-  `pipeline/stations.py` `thin()`, never a new copy, with terminals and
-  interchanges kept and every cut stop in `excluded_stations.csv` with
-  "spacing" in its reason. No other city on this list is a candidate.
+  filter is for a central corridor with sparse stations plus dense surface
+  branches (Muni Metro, Boston's Green Line). **New Orleans is uniformly
+  dense, with no corridor**, the case the doc says not to thin. Thinning
+  would also leave a business a block from a stop outside the rings. The
+  band is a true reading of distance from the line, and the page says so
+  (section 6).
 - **A line mostly outside the scope is a stub question**, as for the Czech
-  and French cities: Göteborg's 4 and 12 (Mölndal), Den Haag's E, Zurich's
-  Glattalbahn, and Florence's T1 (4 of 26 stops in Scandicci). Keep the line
-  and list the stops outside, or drop a stub. The brief recommends which.
+  and French cities. Decided (owner, 2026-09-30):
+  - Florence's T1 is drawn to its end, with its 4 Scandicci stops listed as
+    outside (call 17);
+  - Den Haag's E is left out as a stub (call 22);
+  - Zurich's Glattalbahn lines take the stub test one by one, and a stub is
+    dropped (call 19);
+  - Göteborg's 4 and 12 are drawn to their ends, with the Mölndal stops
+    listed as outside, unless the stub test fails (call 21).
   Where the business source covers the city only (Zurich, Göteborg, Den
   Haag's horeca layer, Florence), **the scope cannot go regional**, so
   France's scope rule does not apply.
@@ -259,37 +303,66 @@ city, and that is the owner's call per city (`ONE_BUCKET_BY_OWNER`).
 | Florence | All three | `full` | The Comune's four layers |
 | Zurich | Two | `narrowed` | Food plus partial retail (alcohol-licensed shops, kiosks, petrol stations); no personal services. Boston's precedent: retail that is not only food shops makes two |
 | Göteborg | Food premises only | `one_bucket` | Food service plus food shops, which count as food |
-| Den Haag | Merged | `narrowed` | **Rotterdam's shape** (BAG winkelfunctie plus the horeca layer), which is `narrowed`, "Merged". The tram list's "full" does not fit that precedent; staging was asked to confirm (2026-09-30) |
+| Den Haag | Merged | `narrowed` | **Rotterdam's shape** (BAG winkelfunctie plus the horeca layer), which is `narrowed`, "Merged". Approved `narrowed` over the tram list's "full" (owner, call 23) |
 
 **A narrowed or one-bucket page says what is missing in its own paragraph**
 (section 6), and `check_scope_disclosure.py` holds it to
 `docs/excluded_categories.md`. The layer control names only the categories
 the map has (Riga's "Shops and services, and Food service").
 
-## 6. Page text
+## 6. Page text - approved by the owner, word for word (2026-09-30)
 
-**The trams-only template was drafted in chat on 2026-09-30 for the owner's
-approval and is not approved yet.** Until it is, bring each page's text to
-the owner as a proposal, built from these parts in this order, which are the
-built pages' own (Rennes, Aarhus, Riga):
+Braces are per-city facts, filled from this city's own measurements (step 1,
+step 2 and the rendered map), never from the brief's screen figures. A
+paragraph in braces appears only where it applies. The controls paragraph and
+the heat-layer caveat stay exactly as on the built pages (Aarhus's and Riga's),
+with the category names this map has. The transit caption comes from
+`provenance.json`, with the operator's credit and any notice its licence
+requires.
 
-1. The lines drawn and their source; "has no metro: its trams are its rapid
-   transit, as Riga's are, so every tram stop gets rings"; any slow timetable
-   disclosed; the rail left out (buses, suburban rail, Zurich's S-Bahn and
-   Forchbahn).
-2. The scope and any stops left out, named with where they lie.
-3. The business source, in the template city's wording.
-4. **Narrowed or one-bucket only**: what the map has and what it lacks.
-5. **Currency only** (Kansas City, Göteborg): the data date, or that the rows
-   carry none.
-6. "Read the density as a register, not a street survey", with the source's
-   own caveat.
-7. Rings: the half-size sentence with the median gap, and the in-ring share.
-8. The controls paragraph and the heat-layer caveat, **exactly as on the
-   built pages**, with the category names this map has.
+> {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
+> and in the legend, redrawn from {OpenStreetMap's route geometry}{, in
+> colours this project chose, since the source records none}. {City} has no
+> metro: its trams are its rapid transit, as Riga's are, so every tram stop
+> gets rings. {Trams run about every {n} minutes by day{; less often in the
+> evenings}.} {Buses{ and suburban trains} are not drawn{: why}.}
+>
+> The map covers the **{city unit}**. {Where a line runs past it: "{Line}
+> runs on into {place}, so its {k} stops there are left out. The line is
+> still drawn to its end, but those stops get no ring and their businesses
+> are not counted. They are listed in `outputs/{slug}/excluded_stations.csv`."}
+>
+> {The business source, in the template city's wording: which register, how
+> the dots are placed, and whether a dot shows a name, a type or an address.}
+>
+> {Narrowed or one-bucket only: "**This map has {one category / two
+> categories}, not three.** {What the source holds, and what is missing.}"}
+>
+> {Kansas City: "**The licence data dates from 15 January 2026**, and holds
+> licences valid for 2025 and 2026. Businesses that opened or closed since
+> then are not shown." Göteborg: "**The register carries no dates.** It lists
+> the food businesses active on the day it was fetched ({date}), and says
+> nothing about when each opened."}
+>
+> **Read the density as a register, not a street survey.** {The source's own
+> caveat, and this city's ratio to OpenStreetMap.}
+>
+> **Tram stops sit closer together than metro stations**, a median of
+> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
+> 0.3 mi). **About {share} of storefronts sit within a ring.** {New Orleans:
+> "Streetcar stops here stand a block or two apart, so the rings join into a
+> band along each line. Read them as distance from the line."}
+>
+> {The controls paragraph and heat-layer caveat, word for word as on the
+> built pages, with this map's category names.}
 
-The transit caption comes from `provenance.json` with the operator's credit
-and any notice its licence requires.
+A city whose median stop gap is over about 550 m keeps the standard rings
+and drops the last paragraph's first sentence. Where the rail comes from a
+feed rather than OpenStreetMap, the first sentence names the feed ("from
+{operator}'s own published timetable feed"), as France's template does.
+
+**Departures are owner calls, never edits.** Anything that does not fit the
+template goes to the owner as a proposed sentence.
 
 ## 7. The macro map and the app entry
 
@@ -336,9 +409,9 @@ calls.
 | **Daugavpils** | **Riga** (`pipeline/riga/`, `taxonomies/riga_source.py`) | VID excise (food, placed on VZD's `aw_eka.csv`) + VZD cadastre use class 1230 (shops and services), ATVK 0002000 | OSM, refs 1-4 (the screen said 1-5: check the operator's list) | 32635 | `aw_eka.csv`'s `KOORD_X` is the northing (EPSG:3059); use `DD_N`/`DD_E`; `STATUSS` = EKS; the VZD credit (notice 42 extended); hourly routes (section 1) |
 | **Liepāja** | **Riga** | as Daugavpils, ATVK 0005000 | OSM, ref 1; + Brīvības iela and Klaipēdas iela by node | **32634** | as Daugavpils |
 | **Kansas City** | **Houston** (a US register, the sole-owner name rule); `naics.py` through a NAICS 2022 **title** map | Socrata `kkhs-93m4`, Public Domain, **frozen 2026-01-15**; `valid_license_for` 2025 and 2026 only; fee-code types ("Misc Rate 129") dropped and counted | **OSM** (RideKC's GTFS barred, owner), ref 601, 19 stops, all inside; 413 m | 32615 | The data date on the page; `dba_name` withheld where it is a person; no logos; frequency as a fact, not a cited schedule |
-| **New Orleans** | Philadelphia (a US text taxonomy, `premises-taxonomy`) | Socrata `iqay-p646`, CC0, daily; drop "Special Events-Other (Vendor)" and "Home Based-Office Use Only"; `ownername` never shown | **OSM**, streetcars 12, 47, 48 and 2, 110 stops, all inside; 164 m | 32615 | Thinning (section 2, an owner call); 46 and 49 have no stops (`NOT_DRAWN` unless they run); CSS-keyword colours |
+| **New Orleans** | Philadelphia (a US text taxonomy, `premises-taxonomy`) | Socrata `iqay-p646`, CC0, daily; drop "Special Events-Other (Vendor)" and "Home Based-Office Use Only"; `ownername` never shown | **OSM**, streetcars 12, 47, 48 and 2, 110 stops, all inside; 164 m | 32615 | Every stop kept (owner, call 13); 46 and 49 have no stops (`NOT_DRAWN` unless they run); CSS-keyword colours |
 | **Tucson** | **Houston** (the sole-owner name rule); `naics.py` unchanged | BUSLIC **layer 3** (never layer 1), active (strip `LIC_STATUS`) and `HOME_OCCUPATION` = F; licence SILENT, permissive reading (owner, 2026-09-30) | **OSM**, Sun Link, 21 stops, all inside; 265 m | 32612 | Notice "Business licence data: City of Tucson"; never call the pins complete; `ACC_NAME` withheld for Sole Proprietorship, Individual and Married; 10 min weekdays 07-18, 20 otherwise, disclosed |
-| **Florence** | **Milan** and **Rome** (the Comune's layers; Milan's *fuori piano*) | Four Comune GeoJSON layers (`datigis.comune.fi.it/json/`), EPSG:3003, no names or addresses (the dots show the type); licence read: CC BY 4.0, credit the Comune di Firenze and state the changes | **OSM**, T1 and T2 in OSM colours, 39 stops in the comune (T1 20 of 24); 322 m | 32632 | 639 exempt food rows (an owner call); Scandicci's 4 stops outside; 3,424 rows share a point; T3 under construction (`NOT_DRAWN`); no giglio or logo |
+| **Florence** | **Milan** and **Rome** (the Comune's layers; Milan's *fuori piano*) | Four Comune GeoJSON layers (`datigis.comune.fi.it/json/`), EPSG:3003, no names or addresses (the dots show the type); licence read: CC BY 4.0, credit the Comune di Firenze and state the changes | **OSM**, T1 and T2 in OSM colours, 39 stops in the comune (T1 20 of 24); 322 m | 32632 | 639 exempt food rows kept, non-public ones filtered (owner, call 16); Scandicci's 4 stops outside; 3,424 rows share a point; T3 under construction (`NOT_DRAWN`); no giglio or logo |
 | **Zurich** | **Stockholm** (one register, city only), Seoul/Gyeonggi (partial retail) | `Gastwirtschaftsbetriebe` via the **WFS** (the CKAN downloads are an Angular shell), layer `gastwirtschaftsbetriebe`, CC0; `betriebsstatus` = `Offen` | OSM (18 tram refs, all coloured) or the national feed, the brief's call | **2056** | **`add-country` first**; the S-Bahn named as excluded (fails on coverage); the Forchbahn (section 1); the Glattalbahn stub test |
 | **Göteborg** | **Stockholm** (`taxonomies/sweden_livsmedel.py`) | `Livsmedelsverksamheter`, CC0, daily: **take the CSV** (`utf-8-sig`, `;`), never the rowstore JSON (drops 279 rows, swaps x and y) | OSM (13 lines, 127 stops) or Västtrafik, the brief's call | **UTM 32N** (11.97° E; not Stockholm's 34N) | Undated rows (the page says so); 274 blank `typ` to classify or drop; lines 4 and 12 into Mölndal; heritage line out; line 11 "black" |
 | **Den Haag** | **Rotterdam** (BAG, `taxonomies/rotterdam_source.py`); Amsterdam for the horeca precedent | BAG winkelfunctie units + the city's `Horeca_nieuw` layer (2,543 granted or notified) | HTM's lines, GTFS as Rotterdam's or OSM | UTM 31N, as Rotterdam | **Never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM`**; the trade name is `OMSCHRIJVI`, double-encoded UTF-8 to repair; line E's stub; `mode`; tram 1 at 54% in the city |

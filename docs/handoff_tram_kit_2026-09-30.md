@@ -15,8 +15,8 @@ owner's calls with recommendations, say when it is done, and wait for the go.
 | Daugavpils | Latvia | Riga (two layers, VZD) | `daugavpils.md`, 2026-09-30: 4/4 |
 | Liepāja | Latvia | Riga | `liepaja.md`, 2026-09-30: 4/4 (on a re-run) |
 | Kansas City | United States | many (NAICS) | `kansas-city.md`, 2026-09-30: 3/3 |
-| New Orleans | United States | many | `new-orleans.md`, 2026-09-30 |
-| Tucson | United States | many | `tucson.md`, 2026-09-30 |
+| New Orleans | United States | many | `new-orleans.md`, 2026-09-30: 2/2 |
+| Tucson | United States | many | `tucson.md`, 2026-09-30: 3/3 |
 | Florence | Italy | Milan, Rome | `florence.md`, 2026-09-30: 4/4 |
 | Zurich | **Switzerland: new country** (`add-country` first) | nothing | `zurich.md`, from 2026-09-23, before T1 (staging refreshes it) |
 | Göteborg | Sweden | Stockholm | `goteborg.md`, before T1 (staging refreshes it) |
@@ -44,7 +44,7 @@ when the kit needs a brief changed or finished, ask staging
    `origin/macro-legend` (or on master once it lands), and
    `docs/category_rules.md` for any category kept or dropped.
 
-## 1. A `tram-city` skill - WRITTEN 2026-09-30 (`.claude/skills/tram-city/`); its page-text template waits on the owner
+## 1. A `tram-city` skill - DONE 2026-09-30 (`.claude/skills/tram-city/`), with the page-text template the owner approved
 
 France and Czechia each get a country skill. These ten are one or two per
 country, so write one cross-country skill instead. The per-country detail
@@ -75,9 +75,11 @@ Decided on the measurement: seven template configs for ten cities, so about
 build instead (`pipeline/osm_tram.py` with the Czech kit, and Latvia's step 2).
 DECISIONS "The tram kit".
 
-## The owner's calls, collected (2026-09-30; grows as briefs land)
+## The owner's calls - ALL 24 APPROVED AS RECOMMENDED (owner, 2026-09-30)
 
-**One sitting, each with a recommendation.** "Brief" marks a call its brief
+**Owner, 2026-09-30: "Agree with recommended options for all."** The skill's standing calls carry them. **Calls 18-24 were approved before their briefs landed**: if a brief's measurement changes the facts behind one, it goes back to the owner. Builds are still held until the owner's go.
+
+**As collected, each with the recommendation approved.** "Brief" marks a call its brief
 states; "list" marks one taken from `docs/tram_city_list.md` or the kit's
 reading, still waiting on its brief (staging's). Calls already decided (the
 data date for Kansas City, Göteborg's undated rows, Zurich's partial retail,
