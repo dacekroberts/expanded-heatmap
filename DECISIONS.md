@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**229 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Madrid, Oslo and Fukuoka line labels cleared; the legend model is wrong (owner)](#2026-09-30---madrid-oslo-and-fukuoka-line-labels-cleared-the-legend-model-is-wrong-owner)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
@@ -270,6 +271,40 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Madrid, Oslo and Fukuoka line labels cleared; the legend model is wrong (owner)
+
+- **Three line labels fixed by forcing which end of the line carries them
+  (`LINE_LABEL_ENDS`), step 3 re-rendered for those cities only (owner's go,
+  2026-09-30).**
+  - **Oslo, T-bane 2 -> "start".** At the solver's own 1000 x 650 it ran
+    57 x 9 px under the open legend. The 2026-09-29 review had logged this
+    as a 1024 x 768 issue.
+  - **Fukuoka, Kūkō Line -> "end".** It sat 4 x 21 px under the legend; this
+    was new, found by the audit below. "start" left it there.
+  - **Madrid, Ramal Ópera–Príncipe Pío -> "end".** At 343 px its label
+    touched Línea 5's. All four single-end variants were rendered and checked:
+    Ramal "end" and Línea 5 "start" are clean at 1000, 375 and 343; the other
+    two reproduce the overlap. The Ramal, two stations long, moves least.
+  - **Checks.** `scripts/check_map_labels.js`, run against each map in a
+    frame of the width under test, is clean for all three at 1000, 375 and
+    343, and for Oslo also at 854 with the legend open. Positive control:
+    master's Oslo map fails it at 1000 ("under legend: T-bane 2").
+  - **Drift.** `drift_check.py oslo fukuoka` and `madrid` report only
+    `heatmap.html` changed. Fukuoka's 31 and Madrid's 19 baseline figures are
+    unchanged; Oslo emits none. `check_all` 26/26; `check_inline_arrays`
+    reports 0 over the cap.
+- **Found: the solver's legend model is wrong in both directions.** It
+  models the open legend as `178 + 19 x lines`. Measured with the legend
+  open in a 1000 x 650 frame across all 75 cities, the real legend differs
+  by -32 to +114 px: 33 cities are taller than modelled (Melbourne +114,
+  Sydney +42, Kyoto and Paris +34), and 29 are shorter. At 1000 x 650 that put
+  three labels under the legend: Oslo's, Fukuoka's and Osaka's "JR
+  Gakkentoshi Line" (13 x 21 px). Osaka is left to the session that holds it.
+  No two labels overlapped in any city. A shared fix (legend height = max of
+  the model and a content-based estimate, so only a label actually under the
+  legend can move) needs a full drift check and waits for review time. It is
+  in PLAN, not built.
 
 ### 2026-09-30 - The six Czech tram cities briefed; three licence calls (owner)
 

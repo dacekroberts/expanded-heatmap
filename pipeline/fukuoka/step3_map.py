@@ -26,7 +26,12 @@ from pipeline.fukuoka import config  # noqa: E402
 SYSTEM_NAME = "Fukuoka rail"
 # Per-line label end override ("start" / "end"); automatic unless a rendered
 # map shows a label landing badly.
-LINE_LABEL_ENDS = {}
+#
+# THE KŪKŌ LINE IS FORCED TO ITS "end" (2026-09-30): at 1000 x 650 its label sat
+# 4 x 21 px under the open legend, which the solver models 10 px shorter than
+# Fukuoka's real one. "start" left it there; "end" is clean in
+# check_map_labels.js at 1000, 375 and 343.
+LINE_LABEL_ENDS = {"K": "end"}
 
 LINE_SPECS = {
     key: (key, spec["colour"], spec["name"], LINE_LABEL_ENDS.get(key))

@@ -55,7 +55,12 @@ from pipeline.oslo.config import (  # noqa: E402
 # x 11 at 343, where Trikk 15 also touched). "start" moved nothing: that end of
 # 18's shape is also Rikshospitalet. With "end", check_map_labels' label tests
 # are clean at 375, 343, 854 and 1280.
-LINE_LABEL_ENDS = {"RUT:Line:18": "end"}
+# T-BANE 2 IS FORCED TO ITS "start" (2026-09-30): at the solver's own 1000 x
+# 650 its label ran 57 x 9 px under the open legend, because the solver models
+# the legend as 178 + 19 px per line (387 px here) and Oslo's is 403. With
+# "start", check_map_labels.js is clean at 1000, 854 (legend open), 375 and
+# 343; master's map fails it at 1000 ("under legend: T-bane 2").
+LINE_LABEL_ENDS = {"RUT:Line:18": "end", "RUT:Line:2": "start"}
 
 
 def shape_ids_for_routes(zf):

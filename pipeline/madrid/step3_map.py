@@ -61,7 +61,15 @@ LINE_SHAPES = {key: (key, LINE_COLOURS[key]) for key in LINE_NAMES}
 # line** - a closed loop whose two "ends" are the same point, so there is no
 # other end to send it to. The fix belongs in map_common, which now lets a
 # label stand further off its own line when every nearer position is taken.
-LINE_LABEL_ENDS = {}
+#
+# THE RAMAL IS FORCED TO ITS "end" (2026-09-30), for a phone, not for the
+# 1000 px layout: at 343 px (the app's map frame on a 375 phone) its label
+# touched Línea 5's ("overlap: Línea 5 / Ramal" in check_map_labels.js). All
+# four single-end variants were rendered and checked at 1000, 375 and 343:
+# Ramal "end" and Línea 5 "start" are clean at all three; the other two
+# reproduce the overlap. The Ramal is two stations long, so its label moves
+# least.
+LINE_LABEL_ENDS = {"R": "end"}
 
 LINE_SPECS = {
     key: (source_key, colour, LINE_NAMES[key], LINE_LABEL_ENDS.get(key))

@@ -59,6 +59,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Angeles** (9-37% of rows without an industry code, a floor on every
     bucket); **Taichung** and **Taoyuan** (only 12-19% of storefronts in a
     ring: one line through a large city). Each stays Full on the macro map.
+  - [ ] **City-map legend model (found 2026-09-30, not built).** The label
+    solver models the open legend as `178 + 19 x lines`; the rendered legend
+    is -32 to +114 px off that across 75 cities, which put Oslo's, Fukuoka's
+    and Osaka's labels under it at 1000 x 650. Oslo and Fukuoka are fixed per
+    city; Osaka's "JR Gakkentoshi Line" (13 x 21 px) is not. The shared fix:
+    the obstacle becomes max(model, a content-based estimate) - never smaller
+    - so only a label truly under the legend can move. It needs a full drift
+    check (heavy) and review time.
   - [ ] **Macro-map completeness tiers: APPROVED (owner 2026-09-28)**, not
     tied to the wait above. Dots coloured **Full #0D9488** (the current teal)
     · **Narrowed #9333EA** · **One bucket #C2410C**, one set for both themes
