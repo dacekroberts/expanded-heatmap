@@ -1,0 +1,21 @@
+{
+  "written_utc": "2026-09-30T04:51:55+00:00",
+  "osm_host": "overpass.kumi.systems",
+  "osm_bbox": [
+    45.2,
+    -76.0,
+    45.55,
+    -75.4
+  ],
+  "as_of_date": "2026-09-29",
+  "feed_info": "\"20260929\",\"1.0\",\"Ottawa\",\"http://www.ottawa.ca\",\"\"",
+  "files_utc": {
+    "yelp_ottawa_healthscores_FoodSafety.zip": "2026-09-30T03:19:02+00:00",
+    "wards_2022_2026.geojson": "2026-09-30T04:51:08+00:00",
+    "osm_rail.json": "2026-09-30T04:51:55+00:00"
+  },
+  "sources": {
+    "feed": "https://opendata.ottawa.ca/inspections/yelp_ottawa_healthscores_FoodSafety.zip",
+    "wards": "https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/Wards_2022_2026/FeatureServer/0/query"
+  }
+}

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**224 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**225 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Ottawa built on Ottawa Public Health's inspection feed: food only, 4,896 premises, 25 stations](#2026-09-29---ottawa-built-on-ottawa-public-healths-inspection-feed-food-only-4896-premises-25-stations)
 - [Band B's last eight: the owner's four calls before the builds](#2026-09-29---band-bs-last-eight-the-owners-four-calls-before-the-builds)
 - [Second batch review: nine branches merged, 75 cities; builds pause](#2026-09-29---second-batch-review-nine-branches-merged-75-cities-builds-pause)
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
@@ -263,6 +264,67 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Ottawa built on Ottawa Public Health's inspection feed: food only, 4,896 premises, 25 stations
+
+- **Canada's sixth city, a food-only page (owner's reduced-bucket bar),
+  branch `ottawa`, page 76, region Canada East.** OC Transpo's O-Train Lines
+  1, 2 and 4 from OpenStreetMap. Business leg: Ottawa Public Health's
+  food-safety inspection feed, a Yelp LIVES zip (feed_date 20260929), cached
+  first because its item says it "will be retired in Q1 2026".
+- **The feed host challenges a client with no user agent.** curl's default
+  agent got Imperva's "Pardon Our Interruption" page (HTTP 200, 6 KB of
+  HTML); the project's identifying agent was served the zip. Nothing was
+  worked around, and `fetch_sources.py` refuses an answer that is not a zip.
+- **Rail: 25 stations, gate 3 exact.** Line 1 13, Line 2 11, Line 4 3;
+  Bayview and South Keys each collapse to one station across two lines; the
+  direction-suffixed platform names fold by rule (43 stop positions, widest
+  name 15 m). Median gap 891 m, so standard rings. Gate 3's source is
+  Wikipedia's line infoboxes (revisions of 2026-09-19): octranspo.com
+  answers a scripted client 403, and that refusal is respected. Every
+  station is inside the City; `excluded_stations.csv` is empty.
+- **Boundary: the City's 2022-2026 wards, dissolved** (Vancouver's
+  precedent), under the same Open Government Licence – City of Ottawa as the
+  feed: 24 wards, 2,892.4 km2 against ~2,790 km2 of land, gated.
+- **Line colours measured**: OC Transpo's red and green sat 44.1 from Food
+  service's magenta and 34.2 from Personal services' green, so each moved the
+  least distance that clears 45 (Line 1 `#D41F11`, Line 2 `#739C0D`); Line 4's
+  gold `#F2A900` is kept.
+- **Currency: inspected within two years of the feed date**, the only clock
+  the feed has (no status, no closing date): 5,747 of 12,961 premises.
+- **Left out by name (owner, 2026-09-29, both recommendations taken)**,
+  829 premises, each listed with its rule in
+  `outputs/ottawa/excluded_premises.csv`: 597 institutional kitchens
+  (including contract caterers' outlets and event caterers with no shop,
+  R1), 83 clubs and recreation venues, 110 mobile and event vendors, and 39
+  hotels, B&Bs and funeral homes. The brief's single-word list caught SCHOOL
+  HOUSE PIZZA, MARRIOTT RESIDENCE INN and UNIVERSITY TAVERN, so the rules are
+  phrases (`pipeline/taxonomies/ottawa_inspection.py`). A second read (a
+  given-name probe and word counts) found breakfast programmes, care homes
+  and child services the first list missed; they were added. 14 premises
+  have no point and 8 a point outside the City.
+- **Food shops and pharmacies stay in the one layer (owner)**, labelled
+  "Restaurants and food shops", the FSA cities' precedent for an inspection
+  register's pharmacies. The continuity table records the forecourt-shop,
+  pharmacy and health-food rows as exceptions under this entry: kept, in
+  Food service rather than Retail, because no field separates them.
+- **Privacy verdict: publish.** `check_personal_exposure.py ottawa`: 0
+  e-mails, 0 phone numbers, 0 c/o markers, 0 person-like names at a
+  residential unit; 3 "name (qualifier)" pins, all qualifiers such as
+  "(retail stand)". The shared `looks_personal` shape test flags 27% of pins,
+  and a read of 120 found trade names throughout (TIM HORTONS, FIVE GUYS, NO
+  FRILLS), so it is not applied as a suppression rule here (Sacramento
+  applies it); a given-name probe of all 4,896 names found businesses and
+  institutions only. `phone_number` is never read.
+- **Macro label: Montréal's moved too.** Ottawa's label width is 47.5,
+  measured in a browser with Prague 47.3 and Tokyo 40.5 reproduced. A sweep
+  of about 900 offsets for Ottawa alone left one Global-frame collision at
+  every placement (Toronto's, Boston's or Montréal's pill). A joint sweep
+  found Ottawa `("start", 10, -25)` with Montréal raised 10 px (`-34` ->
+  `-44`): `check_macro_labels.py` PROBLEMS 0 in 12 regions at 375, 768 and
+  1200 px. That is a visible change to a deployed city's label, so it goes to
+  review time with the rest.
+- **Result: 4,896 food premises, 1,586 in a ring (32.4%).**
 
 ### 2026-09-29 - Band B's last eight: the owner's four calls before the builds
 

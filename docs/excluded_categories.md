@@ -2654,6 +2654,46 @@ boundary: 82 stations inside it.
   of storefronts in a ring against 88.7% without.
 - The Yellow line (Gul linje), under construction, is not drawn.
 
+### Ottawa - the public health inspection data, food only, restaurants and food shops together
+
+**Only food is on this map.** Ottawa Public Health's food-safety inspection
+data lists every premises the health unit inspects; the City publishes no
+register of other shops or of personal services, so clothes shops,
+hairdressers and the like are missing rather than excluded. **The data has no
+type field**, so restaurants, cafés, bars and take-outs share one layer with
+food shops - grocers, convenience stores, bakeries, butchers and pharmacies
+that sell food (owner, 2026-09-29) - labelled "Restaurants and food shops".
+
+**Current by inspection.** The data records no closings. A premises is shown
+when it was inspected in the two years before the data's date (2026-09-29):
+5,747 of 12,961 premises. The rest were last inspected earlier, most of them
+presumably closed.
+
+**Excluded by name** (owner, 2026-09-29), 829 premises, each listed with its
+rule in `outputs/ottawa/excluded_premises.csv`:
+- 597 institutional kitchens: schools and écoles, daycares and garderies,
+  hospital patient kitchens and cafeterias, retirement and long-term-care
+  homes, churches and parishes, community centres, workplace cafeterias and
+  contract caterers' outlets (Aramark, Sodexo, Compass), shelters, missions,
+  food banks and camps, and event caterers with no shop of their own. A shop
+  that also caters ("… takeout and catering") stays.
+- 83 clubs and recreation venues: golf, country, curling, tennis and yacht
+  clubs, Legion halls, arenas and their canteens, gyms.
+- 110 mobile and special-event vendors (most have no position).
+- 39 hotels' breakfast rooms and banquet kitchens, bed and breakfasts and
+  funeral homes. A hotel's own named bar or restaurant stays.
+
+A name rule is imperfect: a few such kitchens may remain under a name that
+says nothing.
+
+**Not placed** - 14 premises with no position (the data withholds the address
+of shelters and similar as "RESTRICTED"), and 8 whose position lies outside
+the City.
+
+**Stations.** OC Transpo's O-Train Lines 1, 2 and 4, all 25 stations, every
+one inside the City: `outputs/ottawa/excluded_stations.csv` is written empty.
+Buses, including the Transitway, are not drawn.
+
 ### Bucharest - the sanitary-veterinary registers, food only, placed by address
 
 **Only food is on this map.** DSVSA București registers the units that
