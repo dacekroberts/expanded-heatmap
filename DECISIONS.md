@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**223 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**224 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)](#2026-09-29---the-next-gyeonggi-satellites-briefed-namyangju-ansan-uijeongbu-owners-scope)
 - [Second batch review: nine branches merged, 75 cities; builds pause](#2026-09-29---second-batch-review-nine-branches-merged-75-cities-builds-pause)
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
@@ -262,6 +263,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)
+
+- **Briefed Namyangju, Ansan and Uijeongbu as additions to
+  `docs/build_briefs/gyeonggi.md`; left out Hwaseong, Anyang, Gimpo and the
+  smaller 시군 with the reason (owner's scope, 2026-09-29).** The scope:
+  brief the three; recount Hwaseong and Anyang, and brief them only if the
+  recount lifted them above seven stations; leave out Gimpo (Goldline only,
+  an edge network) and the cities below the floor.
+  - **Method:** measured the built five's way. Stations came from
+    route-relation membership, with GTX-A never drawn. Areas were recounted
+    against every `railway=station` object inside each OSM boundary.
+    Storefronts came from SEMAS (edition 2026-06-30), with the ring share at
+    0.6 mi.
+  - **Namyangju:** 17 stations on Gyeongchun, Gyeongui–Jungang, Line 4 and
+    Line 8. 18,344 storefronts, 54.9% in a ring; a 2,294 m median gap, so
+    standard rings.
+  - **Ansan:** 13 stations on Line 4, Suin–Bundang and Seohae. 19,711
+    storefronts, 64.3% in a ring. The Seohae Line is drawn on Bucheon's
+    precedent: it has its own track through four stations and shares only
+    Choji.
+  - **Uijeongbu:** 20 stations on the U Line, Line 1 and Line 7. 13,103
+    storefronts, 85.3% in a ring. The median gap is 622 m, so standard
+    rings. OSM carries two depot-shuttle U Line relations with no ref, to be
+    placed by name as not drawn.
+  - **The recount:** it changed nothing where there is metro. Every station
+    is an OSM node.
+  - **Hwaseong** fell from 7 to 3 drawn stations: Dongtan is GTX-A only, and
+    three Korail nodes are on no metro relation. 5.2% in a ring, so out.
+  - **Anyang** held at 7, so it is out on the agreed test. Its 64.2% ring
+    share on 59 km² is above Suwon's and Yongin's, so it is recorded in the
+    brief as an owner call.
+  - **Brief-checks:** two `osm_route_refs` checks added for the new lines;
+    5/5 hold. The portal and province-wide Overpass checks failed once on an
+    SSL EOF and a 504, then passed on re-run.
 
 ### 2026-09-29 - Second batch review: nine branches merged, 75 cities; builds pause
 

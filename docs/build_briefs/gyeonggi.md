@@ -30,6 +30,9 @@ satellites: PASS, to B; "which satellites is the brief's question").
 > - Bucheon **22,512** storefronts, 14 stations (Line 1, Line 7 and the
 >   Seohae Line, drawn here on its own track, owner), 80.4% in a ring (build
 >   session, branch `bucheon`, 2026-09-29).
+> - **The next satellites, briefed 2026-09-29 (owner's scope)**: Namyangju,
+>   Ansan and Uijeongbu; Hwaseong, Anyang, Gimpo and the smaller 시군 left
+>   out with the reason. See "The next satellites" below.
 
 ⚠️ **Korean cities: read `cjk-text`, and Seoul's, Daegu's and Busan's briefs
 first.** The satellites sit around Seoul (built) and share its lines, so
@@ -137,6 +140,120 @@ network.
 
 ---
 
+## The next satellites — measured 2026-09-29 (staging session)
+
+**Scope (owner, 2026-09-29):** brief Namyangju, Ansan and Uijeongbu;
+recount Hwaseong and Anyang and brief them only if the recount lifts them
+above seven stations; leave Gimpo and the smaller 시군 out, with the reason.
+
+Measured the built five's way:
+- **Stations** from route-relation membership (`osm-rail`), on Seoul's
+  precedent (GTX-A never drawn).
+- **The areas recount:** every `railway=station` node, way and relation
+  inside each OSM boundary, set against the stations route membership found.
+- **Storefronts** from SEMAS (edition 2026-06-30), through
+  `korea_sbiz.storefronts`.
+- **The ring share** at each city's outer ring, to the nearest drawn station.
+
+Scratch data is in `data/_staging_scratch_2026-09-29/briefs/gyeonggi/`.
+
+| City | OSM boundary | Area | Stations | Lines drawn (stations in the city) | Median gap → rings | SEMAS storefronts (food / retail / personal) | In ring | Verdict |
+|---|---|---|---|---|---|---|---|---|
+| **남양주 Namyangju** | 2409175 | 457 km² | **17** | Gyeongchun 7, Gyeongui–Jungang 6, Line 4 3, Line 8 2 | 2,294 m → standard | **18,344** (8,069 / 7,699 / 2,576) | **54.9%** | **Brief** |
+| **안산 Ansan** | 2409159 | 486 km² | **13** | Line 4 8, Suin–Bundang 7, Seohae 5 | 1,417 m → standard | **19,711** (9,263 / 7,494 / 2,954) | **64.3%** | **Brief** |
+| **의정부 Uijeongbu** | 2409183 | 82 km² | **20** | U Line 15, Line 1 5, Line 7 1 | 622 m → standard | **13,103** (5,875 / 5,090 / 2,138) | **85.3%** | **Brief** |
+| 화성 Hwaseong | 2409173 | 1,073 km² | 3 | Line 1 1, Suin–Bundang 2 | 2,532 m | 25,272 | 5.2% | Out |
+| 안양 Anyang | 2409161 | 59 km² | 7 | Line 1 4, Line 4 3 | 1,487 m → standard | 15,177 | 64.2% | Out on the agreed test; ⚠️ owner call below |
+
+- A station on two lines counts on each line in the lines column.
+- **The areas recount changed nothing in the four cities with metro
+  stations.** Every station object inside Namyangju, Ansan, Uijeongbu and
+  Anyang is on a queried route relation, and every station in these cities
+  is an OSM node.
+- Ansan's 13 by route membership stand against 12 station-object names, and
+  the 2026-09-28 floor of 12.
+- Names withheld by Seoul's personal-name rule are few: 37, 17, 11, 19 and
+  28 in the table's order.
+
+### Namyangju (남양주시)
+
+- **Four lines:**
+  - Gyeongchun, 7 stations;
+  - Gyeongui–Jungang, 6;
+  - Line 4's Jinjeop extension, 3: Byeollae Byeolgaram, Onam and Jinjeop;
+  - Line 8's Byeollae extension, 2: Dasan and Byeollae. Byeollae is shared
+    with the Gyeongchun Line.
+- Seoul draws Gyeongui–Jungang, Line 4 and Line 8. Gyeongchun is a Korail
+  metro line in Seoul's precedent.
+- **Colours:** Seoul's drawn ones, with Line 8 as Seongnam draws it
+  (`#92144E`). Gyeongchun's is OSM's `#007A62`.
+- **A sprawling city:** 457 km² and a 2,294 m median gap, so standard rings
+  and 54.9% in a ring, level with Yongin's 55.4%.
+- **English names:** 11 stop nodes have no `name:en`, but every station
+  object inside the city has one, and step 1 takes the station object's name
+  first.
+- **SEMAS:** 시군구명 prefix `남양주시` (no 구).
+
+### Ansan (안산시)
+
+- **Three lines:**
+  - Line 4, 8 stations;
+  - Suin–Bundang, 7;
+  - Seohae, 5: Wonsi, Siu, Seonbu, Dalmi and Choji.
+- Line 4 and Suin–Bundang share six stations: Gojan, Singil Oncheon, Ansan,
+  Jungang, Choji and Handae-ap.
+- **The Seohae Line is drawn, on Bucheon's precedent** (the owner's call
+  there, 2026-09-29).
+  It runs on its own track through Wonsi, Siu, Seonbu and Dalmi, and meets
+  the other lines only at Choji. That is Bucheon's shape, not Goyang's.
+- **Area:** 486 km² takes in Daebudo and the sea around it, which is why the
+  median gap is wide. 64.3% of storefronts are in a ring.
+- **SEMAS:** prefix `안산시` (상록구, 단원구).
+
+### Uijeongbu (의정부시)
+
+- **Three lines:**
+  - the U Line (Uijeongbu LRT, OSM `#F0831E`), 15 stations;
+  - Line 1, 5, with Hoeryong shared with the U Line;
+  - Line 7, 1: Jangam.
+- Line 7's single station is drawn by the satellites' rule (every line with
+  a station in the city, to its ends).
+- ⚠️ **OSM carries the U Line as three relations.**
+  - The main one has ref `U`.
+  - The two depot-shuttle relations, `의정부경전철: 발곡 → 차량기지임시승강장`
+    and `의정부경전철: 차량기지임시승강장 → 탑석`, have no ref.
+  - Place the two in `NOT_DRAWN_BY_NAME`: step 1 never matches a drawn line
+    on text, and the relation with the ref already carries the whole line.
+- **Rings:** a 622 m median gap, just above the 550 m threshold, so standard
+  rings. 85.3% in a ring, the highest of any satellite.
+- **SEMAS:** prefix `의정부시`.
+
+### Left out, with the reason
+
+- **Hwaseong:**
+  - three drawn stations in 1,073 km², and 5.2% of storefronts in a ring;
+  - Dongtan, its centre, is served by GTX-A only, which is not drawn;
+  - the other three station objects inside it (서화성, 향남, 화성시청) are
+    Korail `station=train` nodes on no metro route relation. By name they
+    are the Seohae Line's southern intercity section.
+  - The recount lowers it from 7 to 3, so it is out.
+- **Anyang:**
+  - the recount holds at 7 (Line 1 4, Line 4 3), so it is out on the agreed
+    test.
+  - ⚠️ **But 64.2% of its 15,177 storefronts are in a ring**, on 59 km².
+    That is above Suwon's 47.6% and Yongin's 55.4%, and level with Ansan's.
+    The seven-station bar stood in for coverage, and the measured ring share
+    says it covers well.
+  - **Owner call:** brief it with the three, or leave it out.
+- **Gimpo:** the Goldline only, screened as an edge network (2026-09-28).
+  Not re-measured.
+- **The smaller 시군** (Hanam, Gwangmyeong, Guri, Gwacheon, Uiwang…): under
+  8,000 storefronts and five stations each (2026-09-28).
+
+Once the three are built and Anyang is decided, the Band B row closes.
+
+---
+
 ## Licence — read 2026-09-29 (`licence-read`): AMBIGUOUS on the portal; clean on the national source
 
 **The datasets are permissive everywhere they are declared:**
@@ -236,6 +353,22 @@ the city boundary.
     "bbox": [37.10, 126.60, 37.80, 127.30],
     "routes": ["light_rail"],
     "require_refs": {"light_rail": ["김포 골드라인"]}
+  },
+  {
+    "id": "gyeonggi-next-north-lines",
+    "claim": "Namyangju's and Uijeongbu's drawn lines are in OSM by ref: the U Line (with its two no-ref depot-shuttle relations), Lines 1, 4, 7 and 8, the Gyeongchun and Gyeongui-Jungang Lines (2026-09-29)",
+    "kind": "osm_route_refs",
+    "bbox": [37.51, 127.00, 37.78, 127.38],
+    "routes": ["light_rail", "subway", "train"],
+    "require_refs": {"light_rail": ["U", "<no ref>"], "subway": ["1", "4", "7", "8"], "train": ["경춘", "경의·중앙"]}
+  },
+  {
+    "id": "gyeonggi-next-ansan-lines",
+    "claim": "Ansan's drawn lines are in OSM by ref: Line 4, the Suin-Bundang and Seohae Lines (2026-09-29)",
+    "kind": "osm_route_refs",
+    "bbox": [37.25, 126.75, 37.38, 126.94],
+    "routes": ["subway", "train"],
+    "require_refs": {"subway": ["4"], "train": ["수인·분당", "서해"]}
   },
   {
     "id": "gyeonggi-projected-crs",
