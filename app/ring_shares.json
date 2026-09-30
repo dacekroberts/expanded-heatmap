@@ -428,5 +428,50 @@
   "in_ring": 8086,
   "all": 10063,
   "map_blob": "10501c61bfddb446c7080a3549299daea4df70f4"
+ },
+ "montpellier": {
+  "in_ring": 5443,
+  "all": 6276,
+  "map_blob": "21ef6e0fb7bdd74a52e188f6d20d8ac8ee881adb"
+ },
+ "strasbourg": {
+  "in_ring": 4779,
+  "all": 5614,
+  "map_blob": "5bd4901fa3012afd52a05347b1bd24347d27bb56"
+ },
+ "le_havre": {
+  "in_ring": 1461,
+  "all": 2433,
+  "map_blob": "6ab6631622c93283fc28cf53dc3b7747cd4c06d6"
+ },
+ "caen": {
+  "in_ring": 1567,
+  "all": 2214,
+  "map_blob": "4c984acc90328dbfb49de6d03378ea3eef6d90df"
+ },
+ "rouen": {
+  "in_ring": 2584,
+  "all": 4167,
+  "map_blob": "23bdbe7fdf543f0ff8715f14075ad0677f54edfd"
+ },
+ "bordeaux": {
+  "in_ring": 8381,
+  "all": 12807,
+  "map_blob": "566893a341055dc588b5862fa1b6161a6a09d224"
+ },
+ "nantes": {
+  "in_ring": 4146,
+  "all": 6570,
+  "map_blob": "89fc4e397719d58417689c85bc169213e6d29cc1"
+ },
+ "grenoble": {
+  "in_ring": 4534,
+  "all": 5781,
+  "map_blob": "d1a89b88c724eb274da8a05a6e67db7a78c4c21c"
+ },
+ "valenciennes": {
+  "in_ring": 1609,
+  "all": 2330,
+  "map_blob": "61adcdef97da57ec0266adec71ba9b3931e87f5c"
  }
 }
