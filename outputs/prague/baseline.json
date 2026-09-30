@@ -4,8 +4,8 @@
   "name_shown": 12932,
   "platforms": 122,
   "stations": 58,
-  "stations_excluded": 0,
-  "stations_in_scope": 58,
+  "stations_excluded": 1,
+  "stations_in_scope": 57,
   "storefront_rows": 26711,
   "storefronts_placed": 25185
 }
