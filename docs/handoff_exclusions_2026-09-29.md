@@ -301,7 +301,34 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   branches were deleted locally and on origin (owner, confirmed in the
   cleanup chat).
 
-## Next review time
+## Second review: LIVE 2026-09-29 (master 0441fd3, owner rebooted)
+
+Every item queued below landed in one batch (DECISIONS "Second batch review"),
+and deploy-verify `full` passed. The live site was checked after the reboot:
+Houston, What Is Excluded (both new columns, Riga, Copenhagen's 33, 394 thinned)
+and Prague (Flora). Builds pause here (owner). Left open:
+- **Owner calls:** the three continuity departures, all `pending` in
+  AWAITING_OWNER: Buffalo's fuel-device certificates (1,182), Buffalo's Dance
+  Hall licences (24) and Sacramento's ENTERTAINMENT (44). Also two precedent
+  cells to confirm: Sacramento's optometrists and its massage technicians.
+- **Aarhus's baseline:** `drift_check.py aarhus --update-baseline` (about a
+  5 GB read, a heavy job) at the next slot. It was skipped by the owner.
+- **Map labels, not blocking:** Madrid at 343 px (Línea 5 and the Ópera–Príncipe
+  Pío branch touch), Oslo at 1024x768 ("T-bane 2" under the legend's corner) and
+  Osaka on phones (a separate session holds it).
+- **Houston's caption** shows the fetch's UTC date (2026-09-30), where provenance
+  says 2026-09-29: an `app/` change, for the next review.
+- **Branches merged and deletable** with the owner's word: stockholm-catering,
+  category-continuity, suwon, bucheon, bergen, aarhus, buffalo, sacramento,
+  houston, continuity-buffalo-sacramento, review-batch-2, plus
+  worktree-cleanup and review-2026-09-29 from the first review. Also
+  `data/_review_category-continuity_2026-09-29/` (585 MB, local only), which is
+  now spent.
+- **Shared processed data** now matches master for every city: the category
+  batch's files were swapped in, and Stockholm, Prague and Copenhagen were
+  re-run on the merged code.
+
+## Queue for the second review (all landed; kept for the record)
 
 **When (owner, 2026-09-29):** after the last light-rail builds are on their
 branches: Bergen, then Houston, Sacramento, Buffalo and Aarhus. That review is
