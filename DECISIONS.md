@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**240 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**241 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Palma's macro mode "metro" approved (owner)](#2026-09-30---palmas-macro-mode-metro-approved-owner)
 - [Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)](#2026-09-30---palma-built-on-m1-alone-its-register-placed-by-a-catastro-join-m1s-timetable-disclosed-not-disqualifying-owner)
 - [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
 - [The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)](#2026-09-30---the-tram-kits-24-calls-and-its-page-text-template-approved-as-recommended-builds-still-held-owner)
@@ -282,6 +283,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Palma's macro mode "metro" approved (owner)
+
+The owner approved Palma's `mode` "metro" (relayed by the cleanup session), on
+Newcastle's precedent: a system its operator calls a metro, mapped `light_rail` in
+OSM, keyed metro on the macro legend. This closes the flag in the build entry above
+("flagged for the owner's approval with the build"); nothing changes in the build.
 
 ### 2026-09-30 - Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)
 
