@@ -433,6 +433,16 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   and REGISTRIES "sacramento"; its OpenStreetMap rail-geometry clause goes
   after Copenhagen's, the fourth branch to insert there. No new numbered
   notice. DECISIONS "Sacramento built: Blue and Gold...".
+- **`houston`** (origin at 9a83bef, READY 2026-09-29; page 75; 29,912
+  storefronts, 40 stations, 7.4% in a ring, the lowest, stated on the page
+  (owner); label ("start", 11, 0), TEXT_WIDTH 56.9; rail_extra "Trams").
+  METRORail from OSM; scoped by the TIGER place polygon; a person's permit
+  shows its address, and one at a City-typed Residential point is left off
+  (334, owner). Its OpenStreetMap rail notice line goes before Rome's.
+  `docs/map_inconsistencies.md` list 7's heading changes to "about one in
+  thirteen". Master-list counts compound across the four light-rail
+  branches: take master's side and re-apply each branch's move. **All
+  queued builds are in; builds pause after this review.**
 - **Prague's Flora comes off the map** (owner, 2026-09-29: the timetable
   rule, `docs/category_rules.md` "Station scope"). Do it AFTER merging
   category-continuity, which re-renders Prague, and re-run Prague's steps 1-3
