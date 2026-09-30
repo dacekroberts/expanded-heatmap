@@ -61,7 +61,9 @@ Cached at `data/palma/raw/`: 10,607 rows island-wide, **4,375 with
 | Catastro INSPIRE Addresses | **READ 2026-09-29: PERMITTED WITH CONDITIONS.** The current metadata (IDEE `ES_SDGC_AD`, 2025-01-28; the EU high-value-dataset record, 2026-05-21) declares **CC BY 4.0 DG Catastro**. The ATOM feed's rights ask that the Dirección General del Catastro (Ministerio de Hacienda) be named "as author and owner of the information". **Display**: that credit, "CC BY 4.0" with the link, a statement that the data were joined and modified, and the access date. **Must not** present the map as Catastro information or imply endorsement |
 | OSM | ODbL, notice 1 |
 
-### 🟠 The two owner calls the register's terms raise
+### ✅ The three licence calls — ANSWERED 2026-09-29 (owner)
+
+**A: Barcelona's reading extended** (the no-alteration clause bars misrepresentation, not analysis; the page identifies the transformation). **B: the indemnity accepted**, for this source, as Hong Kong's and Sacramento's were. **C: the permissive reading of Catastro's terms** (CC BY 4.0, the current declaration; a joined business map is transformed and the address layer is never published). The questions as put:
 
 - **A. "Que el contingut de la informació no sigui alterat"** (Ley 37/2007
   art. 8 wording). **Barcelona's precedent** (owner, 2026-09-22) reads it as

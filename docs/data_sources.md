@@ -430,6 +430,19 @@ is not a notice or a build step. The Hub's "Request permission to use" label
 on the same dataset is a separate question, still open
 (`docs/build_briefs/sacramento.md`).
 
+#### Palma's indemnity — ACCEPTED 2026-09-29 (candidate city)
+
+GOIB's *Política i termes d'ús*, which govern the Consell de Mallorca's
+restaurant register on the Balearic open-data catalogue (read 2026-09-29 by
+the licence-read agent), carry the same shape again. The reuser "accepta
+indemnitzar, així com eximir al Govern de les Illes Balears … de qualsevol
+responsabilitat … pel mer ús, reproducció, modificació o distribució de la
+informació", with no cap. **The owner accepted it on 2026-09-29, for this
+one source.** On the same day the owner extended Barcelona's reading of the
+"no alteration" condition (Ley 37/2007 art. 8 wording) to this source, and
+took the permissive reading of Catastro's INSPIRE terms for the address join
+(`docs/build_briefs/palma.md`).
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the

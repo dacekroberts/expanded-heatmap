@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**209 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**210 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Baltimore to the discards on currency; Palma's three licence calls (owner)](#2026-09-29---baltimore-to-the-discards-on-currency-palmas-three-licence-calls-owner)
 - [Build briefs for six Band B cities; Baltimore's register found stale (staging)](#2026-09-29---build-briefs-for-six-band-b-cities-baltimores-register-found-stale-staging)
 - [Band C closed: its last five to the discards (owner)](#2026-09-29---band-c-closed-its-last-five-to-the-discards-owner)
 - [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
@@ -294,6 +295,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rejected: the rule as given is either, and the page is where a reader of
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
+
+### 2026-09-29 - Baltimore to the discards on currency; Palma's three licence calls (owner)
+
+- **Baltimore moved from B to the discards on currency (owner: "dubious").**
+  Every row of its Restaurants layer carries `EDIT_DATE` 2008-06-22. The
+  publisher's own note says it "has not been updated since 2022". It has no
+  field that could drop a closed restaurant. The rejected alternative was
+  keeping it on the publisher's 2022 note with the date disclosed. The
+  one-clock rule reads age from the rows, and the rows say 2008. The
+  discard row carries the evidence, the permitted licence and its reopen
+  condition.
+  - **Lesson**: the Band C audit passed it on 2026-09-29 without reading the
+    rows' dates, which were read only when the brief was drafted. **The
+    currency check belongs before a band move**, not at the brief.
+  - B 9 → 8, candidates 72 → 71, discards 96 → 97.
+- **Palma: all three licence calls answered (owner).**
+  - **A**: Barcelona's 2026-09-22 reading of the "no alteration" condition
+    (it bars misrepresentation, not analysis) extends to GOIB's terms.
+  - **B**: GOIB's uncapped indemnity is accepted, for this source, as Hong
+    Kong's, the CSDI's and Sacramento's were. Recorded in
+    `docs/data_sources.md`.
+  - **C**: Catastro's terms take the permissive reading. CC BY 4.0 is the
+    current, dated declaration; a business map built by a join is
+    transformed; the address layer is never published.
+
+  Palma's brief has no open call.
 
 ### 2026-09-29 - Build briefs for six Band B cities; Baltimore's register found stale (staging)
 
