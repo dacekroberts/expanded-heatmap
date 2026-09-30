@@ -317,7 +317,11 @@ and Prague (Flora). Builds pause here (owner). Left open:
   Pío branch touch), Oslo at 1024x768 ("T-bane 2" under the legend's corner) and
   Osaka on phones (a separate session holds it).
 - **Houston's caption** shows the fetch's UTC date (2026-09-30), where provenance
-  says 2026-09-29: an `app/` change, for the next review.
+  says 2026-09-29: an `app/` change, for the next review. **Fixed on
+  `origin/houston-caption` at 17416fc** (the page reads provenance's
+  as_of_date, falling back to the file's UTC date); queued for the next review.
+  Buffalo and Sacramento use the same UTC pattern but show the right date,
+  since both were fetched before midnight UTC.
 - **Branches merged and deletable** with the owner's word: stockholm-catering,
   category-continuity, suwon, bucheon, bergen, aarhus, buffalo, sacramento,
   houston, continuity-buffalo-sacramento, review-batch-2, plus
