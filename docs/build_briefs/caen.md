@@ -37,7 +37,7 @@ Twisto's three tram lines, 29 of 38 stops in the commune, from the Normandie agg
 | Resource | `https://transport.data.gouv.fr/resources/81942/download` (48,130,399 bytes on 2026-09-30) |
 | Licence | **Licence Ouverte 2.0** (`lov2`, declared on the NAP) |
 | Validity | `feed_info.txt` present but undated |
-| `shapes.txt` | yes |
+| `shapes.txt` | present, but the tram shapes are `AUTO_` stop-to-stop lines (2026-09-30): **geometry from OpenStreetMap** |
 | Stations | 38 network-wide under the pure-extract rule; `parent_station` on 0 of 76 platforms |
 | Route types | 0: 5, 1: 1, 2: 26, 3: 521, 4: 37, 7: 1 |
 
@@ -73,7 +73,7 @@ The chain is the five built cities' (`france_register.py`), which reproduced Ren
 ## Notices
 
 - **Transit**: Licence Ouverte 2.0: credit the producer and the data's date in the transit caption, Marseille's and Toulouse's pattern (`Transit data © <producer>, via <portal>` plus the feed window or snapshot date from `provenance.json`). No `_NOTICES` entry is needed. The LO 2.0 feeds were not read one by one; the batch relies on the licence's own text (`docs/licenses/france-licence-ouverte-2.0.md`).
-- **The aggregate's producer is the Région Normandie** (the NAP dataset's owner); the credit names it and the agency's network.
+- **The aggregate's Concédant is Syndicat mixte Atoumod** (the licence read 2026-09-30; not the Région, not Cityway): the credit names it, the agency's network and the resource's `last_modified` date captured at fetch (data.gouv resource `3873ccc7-44d9-40f3-a133-920944af0c29`), since `feed_info.txt` carries none. Line geometry from OpenStreetMap adds the OpenStreetMap notice.
 - **Business**: `Source : Insee` verbatim with the SIRENE edition's date, as every French page.
 - **Basemap**: © OpenStreetMap contributors, and the OpenStreetMap notice if OSM supplies any geometry.
 
@@ -95,6 +95,8 @@ The owner approved the French tram-city text word for word on 2026-09-29 (the `f
 ## Build-time calls, with the recommended answer
 
 - **Filter the aggregate to agency `ATOUMOD029:Network:029:LOC`** (Twisto). The aggregate also carries Rouen's métro, LiA's trams and a funicular, and TER.
+- **Line geometry from OpenStreetMap** (`osm-rail`): the aggregate's shapes for T1-T3 are `TWISTO:AUTO_*`, whose points are exactly each trip's stops (25 of 25 on T1's most-used shape, 2026-09-30) - straight lines, not track. Stations still come from the aggregate.
+- **Credit Syndicat mixte Atoumod**, the aggregate's Concédant (the licence read 2026-09-30), with the resource's `last_modified` date.
 
 ---
 

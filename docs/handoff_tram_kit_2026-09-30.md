@@ -9,7 +9,7 @@ owner's calls with recommendations, say when it is done, and wait for the go.
 
 ## The ten cities (`docs/tram_city_list.md`, T1)
 
-| City | Country | Built there already | Brief today |
+| City | Country | Built there already | Brief (staging's) |
 |---|---|---|---|
 | Odense | Denmark | Copenhagen, Aarhus (CVR, DAR) | none |
 | Daugavpils | Latvia | Riga (two layers, VZD) | none |
@@ -18,15 +18,15 @@ owner's calls with recommendations, say when it is done, and wait for the go.
 | New Orleans | United States | many | none |
 | Tucson | United States | many | none |
 | Florence | Italy | Milan, Rome | none |
-| Zurich | **Switzerland: new country** (`add-country` first) | nothing | `zurich.md`, from 2026-09-23, before T1: refresh it |
-| Göteborg | Sweden | Stockholm | `goteborg.md`, before T1: refresh it |
+| Zurich | **Switzerland: new country** (`add-country` first) | nothing | `zurich.md`, from 2026-09-23, before T1 (staging refreshes it) |
+| Göteborg | Sweden | Stockholm | `goteborg.md`, before T1 (staging refreshes it) |
 | Den Haag | Netherlands | Amsterdam, Rotterdam (BAG) | none |
 
-**Briefs were staging's item 3** (`docs/handoff_staging_2026-09-29.md`, "Briefs
-for the 13 non-French T1 cities"). Staging is doing the six Czech ones. The
-France kit session told staging on 2026-09-30 that these ten move here. Before
-writing a brief, confirm with staging (`ListAgents`, then `SendMessage`) that
-it has not started that city.
+**The briefs are STAGING's** (owner, 2026-09-30: staging is writing them,
+as it is the Czech six). Do not write or edit them here. Read them as they
+land on `origin/master`, run `python scripts/brief_check.py <slug>`, and
+when the kit needs a brief changed or finished, ask staging
+(`ListAgents`, then `SendMessage`).
 
 ## Read first
 
@@ -74,31 +74,33 @@ Ten cities in seven countries have little shared config. `scaffold_city.py`
 per city is probably enough. Decide on the measurement and record it in
 DECISIONS.
 
-## 3. Ten briefs, each with a passing `brief-checks` block
+## 3. The briefs - staging's; this session's part
 
-Each brief states the proposed `mode` and `coverage` (the two-key legend) and
-lists the owner's calls with a recommendation. Licence reads still open, one
-`licence-read` call per source, nearer each brief:
-- **Kansas City**: RideKC's GTFS terms ("free for anyone to use", unread);
-  data frozen 2026-01-15 (the page gives the date, owner); `dba_name` is
-  often a person.
-- **New Orleans**: `iqay-p646` is CC0; RTA's GTFS unread; `ownername` goes
-  through `check_personal_exposure.py`.
-- **Tucson**: BUSLIC's "as is" terms; about 6,250 licences are individuals'.
-- **Florence**: the Comune's four layers (full read); GEST's GTFS in the
-  Regione Toscana feed.
-- **Daugavpils and Liepāja**: VZD's address file `aw_eka.csv` (CC BY 4.0, a
-  new `docs/data_sources.md` row); rail from OSM.
-- **Odense**: the Letbane from OSM or the operator; placement through DAR
-  (98.4%, the owner's call 2026-09-27).
-- **Zurich**: `add-country` for Switzerland (licence culture, CRS LV95
-  `EPSG:2056`, the register); partial retail from alcohol-licensed shops
-  (owner).
-- **Göteborg**: take the CSV, never the rowstore JSON; the rows carry no
-  date (owner).
-- **Den Haag**: the horeca layer's reading on Amsterdam's precedent (owner,
-  2026-09-30); never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM`; RandstadRail
-  E and the `mode` question.
+Staging writes the ten briefs. This session:
+- reads each brief as it lands and checks it against the skill;
+- makes sure it states the proposed `mode` and `coverage` and the owner's
+  calls with a recommendation, and asks staging for anything missing;
+- collects the calls across the ten, so the owner can approve them in
+  one sitting, as France's eight were approved.
+
+What the briefs still have to settle, from `docs/tram_city_list.md`
+(staging's to do, listed here so the skill covers them):
+- **Kansas City**: RideKC's GTFS terms (unread); data frozen 2026-01-15,
+  so the page gives the date (owner); `dba_name` is often a person.
+- **New Orleans**: RTA's GTFS (unread); `ownername` goes through
+  `check_personal_exposure.py`; the street-stop filter.
+- **Tucson**: BUSLIC's "as is" terms; about 6,250 licences are
+  individuals'.
+- **Florence**: the Comune's four layers (a full read); GEST's GTFS.
+- **Daugavpils and Liepāja**: VZD's `aw_eka.csv` (a new source row); rail
+  from OSM.
+- **Odense**: placement through DAR (owner, 2026-09-27).
+- **Zurich**: `add-country` for Switzerland (LV95 `EPSG:2056`), and
+  partial retail from alcohol-licensed shops (owner).
+- **Göteborg**: the CSV, never the rowstore JSON; undated rows (owner).
+- **Den Haag**: Amsterdam's precedent for the horeca layer (owner); never
+  fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM`; RandstadRail E and the
+  `mode`.
 
 ## Standing rules (as the France kit)
 

@@ -80,7 +80,8 @@ Build on a branch, never on master: `app/` lands at review time only.
   - the Licence Ouverte same-name rule (section 2);
   - Brest's cable car and Nice's route B are drawn;
   - Le Havre's geometry comes from the Normandie aggregate after a licence
-    read, with OpenStreetMap as the fallback;
+    read, with OpenStreetMap as the fallback. The read found the aggregate's
+    shapes stop-to-stop, so it is OpenStreetMap;
   - Valenciennes is built last;
   - builds proceed in landing groups.
 
@@ -183,12 +184,22 @@ it empty. Orléans fills it on 9 of 103 platforms.
    four same-name parent pairs, and Caen's Presqu'île / Presqu'Ile at 12 m.
    **On an ODbL feed, never.**
 
-**Geometry**: `shapes.txt`, each line's most-used shape. **Three feeds have
-none: Montpellier, Strasbourg and Le Havre.** Use OpenStreetMap's route
-relations through `osm-rail`, already covered by the OpenStreetMap notice;
-any other layer needs a `licence-read` first. For Le Havre, the Normandie
-aggregate carries LiA's lines with shapes under LO 2.0, but it republishes
-LiA's ODbL data, so read it before relying on it.
+**Geometry**: `shapes.txt`, each line's most-used shape, **after checking
+that it is track**. Compare its point count with the trip's stop count: when
+the shape's points are exactly the stops, it is straight lines between stops.
+
+- **Three feeds have no shapes: Montpellier, Strasbourg and Le Havre.**
+- **The Normandie aggregate's tram shapes are all stop-to-stop**
+  (`TCAR:AUTO_*`, `TWISTO:AUTO_*` and `LIA:AUTO_*`; measured on
+  2026-09-30's copy, 20 of 20 points at stops on Rouen's métro and 25 of
+  25 on Caen's T1). So **Caen, Rouen and Le Havre also take their geometry
+  from OpenStreetMap**. The aggregate still supplies Caen's and Rouen's
+  stations. Le Havre uses nothing from it: its LiA stops equal LiA's own
+  ODbL feed to 5 decimals, and that makes the ambiguity over LiA's licence
+  inside the aggregate (LO 2.0 declared, ODbL at source) moot.
+
+Use OpenStreetMap's route relations through `osm-rail`, already covered by
+the OpenStreetMap notice. Any other layer needs a `licence-read` first.
 
 **Colours**: the feed's `route_color`. **Dijon's two lines share one colour**
 (AB0672), which `pipeline/linecolour.py` refuses; Lille's precedent darkens
@@ -254,7 +265,7 @@ measured over 510 m).
 
 | Licence | Cities | What the page must carry |
 |---|---|---|
-| **Licence Ouverte 2.0** (`lov2`) | 16 of 20, Caen and Rouen through the Normandie aggregate | The producer and the data's date in the transit caption (Marseille's and Toulouse's pattern). No `_NOTICES` entry. For the aggregate, credit the Région Normandie and the agency's network |
+| **Licence Ouverte 2.0** (`lov2`) | 16 of 20, Caen and Rouen through the Normandie aggregate | The producer and the data's date in the transit caption (Marseille's and Toulouse's pattern). No `_NOTICES` entry. For the aggregate, credit its Concédant, **Syndicat mixte Atoumod** (not the Région, not the exporter Cityway: the licence read 2026-09-30), the agency's network, and the resource's `last_modified` date captured at fetch; `feed_info.txt` has no date |
 | **Licence Ouverte 1.0** (`fr-lo`) | Bordeaux | Credit **Bordeaux Métropole** (not TBM, Keolis or the exporter Mecatran) and the feed's own date, captured at fetch; nothing implying endorsement; nothing from infotbm.com (read 2026-09-29) |
 | **ODbL 1.0** (`odc-odbl`) under the NAP's Conditions Particulières | Montpellier (TaM, Montpellier Méditerranée Métropole), Grenoble (SMMAG, "M"), Le Havre (Le Havre Seine Métropole) | A §4.3 notice in `app/components.py` `_NOTICES`, one per database, on Tisséo's and STAR's model ("Contains information from <database>, which is made available here under the Open Database License (ODbL). …"). Neither existing notice discharges a new one. Station tables are pure extracts. No TaM logo (read 2026-09-29) |
 
@@ -353,14 +364,14 @@ Scope, mode and every call were approved as the briefs recommended them
 | Bordeaux (Regional) | TBM A-F | 140 | regional, 14 communes | tram | LO 1.0; LO same-name pairs keep the first row |
 | Nantes (Regional) | Naolib 1-3 | 84 | **regional, 6: the closest call** | tram | 579 MB stop_times |
 | Grenoble (Regional) | M réso A-E | 81 | regional, 12 | tram | ODbL (SMMAG); undated feed_info |
-| Rouen (Regional) | Astuce Métro | 31 | regional, 5 | **light_rail** | Normandie aggregate; its own page sentence |
+| Rouen (Regional) | Astuce Métro | 31 | regional, 5 | **light_rail** | Normandie aggregate, OSM geometry; its own page sentence |
 | Saint-Étienne | STAS T1-T3 | 40 (35) | commune | tram | no parent_station |
 | Dijon | Divia T1-T2 | 34 (28) | commune | tram | one colour for both lines |
 | Tours | Fil Bleu A | 29 (22) | commune | tram | `feed_infos.txt` (sic) |
-| Le Havre | LiA A-B | 23 (22) | commune | tram | ODbL; no shapes (the aggregate's, after a read), own colours |
+| Le Havre | LiA A-B | 23 (22) | commune | tram | ODbL; OSM geometry (the aggregate's are stop-to-stop); own colours |
 | Mulhouse | Soléa 1-3 | 29 (28) | commune | tram | tram-train `TT` dropped |
 | Reims | Tram (2 branches) | 24 (21) | commune | tram | typed `route_type 1` |
-| Caen | Twisto T1-T3 | 38 (29) | commune | tram | Normandie aggregate; Presqu'île pair keeps the first row |
+| Caen | Twisto T1-T3 | 38 (29) | commune | tram | Normandie aggregate, OSM geometry; Presqu'île pair keeps the first row |
 | Brest | Bibus A-B, Téléphérique | 41 (39) | commune | tram | cable car drawn; `FIC_` switch stops |
 | Besançon | Ginko T1-T2 | 31 (29) | commune | tram | none |
 | Orléans | TAO A-B | 51 (32) | commune | tram | partial parent_station |

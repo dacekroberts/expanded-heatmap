@@ -25,7 +25,7 @@ Two LiA tram lines through the Jenner tunnel, 22 of 23 stops in the commune; an 
 
 ### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
-- **Line geometry source**: LiA's feed has none. Found 2026-09-30: **the Normandie aggregate** (LO 2.0, the Région) carries LiA's lines A and B **with shapes** (`ATOUMOD003:Line:A:LOC`, `:B:LOC`). Recommended: a `licence-read` of the aggregate before use, because it republishes LiA's ODbL data under LO 2.0, and a notice must not rest on a relicensing the Région may not have been free to make. OpenStreetMap (already covered) is the fallback.
+- **Line geometry source**: approved (owner, 2026-09-30) as the Normandie aggregate after a licence read, OpenStreetMap the fallback. **The read settled it for OpenStreetMap**: the aggregate's LiA shapes are `LIA:AUTO_*`, whose points are exactly each trip's stops (9 of 9, today's copy) - straight lines, not track - and its LiA stops match LiA's own ODbL feed to 5 decimals, so it adds nothing. Nothing from the aggregate is used for Le Havre, which also leaves its licence ambiguity for LiA's data (LO 2.0 declared, ODbL at source) moot. Geometry from OpenStreetMap through `osm-rail`.
 
 ---
 
