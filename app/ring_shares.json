@@ -373,5 +373,10 @@
   "in_ring": 2224,
   "all": 29912,
   "map_blob": "4e6a1858e44f8ebecb6578e3afc121f6ea97736e"
+ },
+ "kitchener_waterloo": {
+  "in_ring": 865,
+  "all": 2086,
+  "map_blob": "4c1a749cd56ed4043a99c8d7e259cc1221a8d0ac"
  }
 }

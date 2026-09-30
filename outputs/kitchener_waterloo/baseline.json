@@ -1,0 +1,23 @@
+{
+  "in_city": 2952,
+  "kept_without_type": 61,
+  "kind_food_shop": 388,
+  "kind_personal_services": 555,
+  "kind_restaurant_or_bar": 1143,
+  "name_as_type": 18,
+  "not_inspected_recently": 134,
+  "reason_hotel_back_of_house": 3,
+  "reason_institutional__mobile_or_processing_category": 297,
+  "reason_institutional_kitchen_or_service": 73,
+  "reason_kept": 2086,
+  "reason_market_stall": 46,
+  "reason_mobile_or_at_home_unit": 4,
+  "reason_not_inspected_since_2024_07_03": 134,
+  "reason_pharmacy": 23,
+  "reason_recreation_venue_or_club": 62,
+  "reason_storage": 1,
+  "reason_type_not_a_storefront": 223,
+  "stations_in_scope": 19,
+  "stop_positions": 31,
+  "storefronts": 2086
+}
