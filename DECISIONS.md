@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**239 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**240 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Tram kit complete: all ten briefs checked; four last points for the owner; builds held](#2026-09-30---tram-kit-complete-all-ten-briefs-checked-four-last-points-for-the-owner-builds-held)
 - [Dallas's address-layer indemnity accepted (owner)](#2026-09-30---dallass-address-layer-indemnity-accepted-owner)
 - [Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity](#2026-09-30---zurich-göteborg-and-den-haag-briefed-for-the-tram-kit-dallass-address-layer-carries-an-open-ended-indemnity)
 - [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
@@ -282,6 +283,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-30 - Tram kit complete: all ten briefs checked; four last points for the owner; builds held
+
+- **Zurich 4/4, Göteborg 4/4, Den Haag 3/3** (`brief_check.py`). Zurich's
+  first run failed its OSM claim while two Overpass hosts were returning
+  504s, and passed on a re-run. All ten briefs now carry an owner table,
+  the approved calls and `vs_config` fields. Kansas City's and New Orleans's
+  briefs were renamed to their pipeline slugs. **Every one of the ten takes
+  halved rings** (median gaps 164-441 m) and OSM rail.
+- **The briefs confirmed the facts behind calls 18-24**, measured on live
+  OSM: the Forchbahn (20% inside) and Glattalbahn 12 (11%) are stubs, and
+  Glattalbahn 10 (72%) is drawn; Göteborg's 4 (75%) and 12 (72%) pass;
+  RandstadRail E (17%) is a stub. Den Haag's `mode` became `tram` under
+  call 22's rule, since every drawn line is OSM `route=tram`.
+- **Four points went to the owner** (handoff section 3, calls 25-28):
+  - Zurich's tram 20 (Limmattalbahn, 15% inside), which staging put out on
+    the stub rule;
+  - Den Haag's tram 1 at 51%, drawn on the 42% precedent;
+  - a currency sentence for Den Haag's horeca layer, last edited
+    2025-05-23;
+  - Daugavpils under the 20-minute floor.
+- **Daugavpils measured by the kit** (one Overpass query, 2026-09-30):
+  route 1 serves 19 of the 38 stop names. The other 19, on routes 2-4 and
+  the Stropu loop, are served only by routes that fail the floor, so the
+  approved rule halves the city's stops. It was brought to the owner as a
+  consequence, with building as approved recommended, rather than reopened
+  unasked.
 ### 2026-09-30 - Dallas's address-layer indemnity accepted (owner)
 
 - **The owner accepted the open-ended indemnity in the City of Dallas's GIS
