@@ -1546,7 +1546,7 @@ COLUMNS["sweden_livsmedel"] = {
     "no_counter_food": [
         loc(_se(REST, "Axfood personalmatsal"), "staff canteen, by name"),
         loc(_se(REST, "Engelbrektsskolan"), "school kitchen, by name"),
-        pending(_se(REST, "Westers Catering"), "caterer typed as a restaurant", "Food service", "2026-09-29",
+        fixed(_se(REST, "Westers Catering"), "caterer typed as a restaurant", "Food service", "2026-09-29",
                 CATERING_BRANCH),
         pending(_se("Detaljhandel", "Likajs Frukt & Grönt, torghandel"), "market-square stall", "Retail",
                 "2026-09-29", "a torghandel stall stays Retail; the rule takes street and market stalls out")],
@@ -1554,8 +1554,8 @@ COLUMNS["sweden_livsmedel"] = {
     "petrol_station": [loc(_se("Detaljhandel", "Circle K Roslagstull"), "forecourt shop")],
     "pharmacy_food_register": [loc(_se("Detaljhandel", "Kronans Apotek Järva"), "pharmacy, by name")],
     "health_food": [loc(_se("Detaljhandel", "Hälsokosten Vällingby"), "health-food shop")],
-    "mobile_unit": [pending(_se(REST, "Tommys Farstaplan, Food truck"), "food truck typed as a restaurant",
-                            "Food service", "2026-09-29", CATERING_BRANCH)],
+    "mobile_unit": [fixed(_se(REST, "Tommys Farstaplan, Food truck"), "food truck typed as a restaurant",
+                          "Food service", "2026-09-29", CATERING_BRANCH)],
 }
 
 
@@ -1570,9 +1570,8 @@ AWAITING_OWNER = {
 }
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
-    ("sweden_livsmedel", "no_counter_food"): "caterer: fixed on branch stockholm-catering; the "
-                                             "torghandel stall: a name rule after that branch lands",
-    ("sweden_livsmedel", "mobile_unit"): "fixed on branch stockholm-catering",
+    ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "
+                                             "stockholm-catering has landed",
 }
 for _system, _col in COLUMNS.items():
     for _rid, _cell in _col.items():
