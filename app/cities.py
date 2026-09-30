@@ -1806,6 +1806,30 @@ CITIES = [
         # 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Sacramento",
+        "lat": 38.5816,
+        "lon": -121.4944,
+        "page": "pages/74_Sacramento_Heatmap.py",
+        "coverage": "full",
+        "placement": "Geocoded by address (98.0%)",
+        "data_age": "Licences unexpired on 2026-09-29; fetched 2026-09-29",
+        "rail_extra": "Trams",
+        "record_kind": "Tax register",
+        "categories": "All three",
+        "blurb": "SacRT light rail: the Blue and Gold Lines",
+        "region": "United States West",
+        "country": "United States",
+        "in_default_view": True,
+        # HIGH ABOVE THE DOT, and SCORED: width 81.3 px measured 2026-09-29 in
+        # the local app's own document (the Suwon/Bucheon/Bergen session). At
+        # this zoom Sacramento is a few px from San Francisco, whose label sits
+        # at -22, so the names stack. check_macro_labels.py (python -B) passes
+        # dy -37 to about -42 above the dot; higher, Calgary's and Vancouver's
+        # labels; level to the right passes only at exactly dy 0. -40, PROBLEMS
+        # 0 at 375, 768 and 1200.
+        "label_offset": ("middle", 0, -40),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

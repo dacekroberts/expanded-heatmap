@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**205 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**206 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Sacramento built: Blue and Gold, a geocoded tax register, names shown by type](#2026-09-29---sacramento-built-blue-and-gold-a-geocoded-tax-register-names-shown-by-type)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
@@ -244,6 +245,98 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Sacramento built: Blue and Gold, a geocoded tax register, names shown by type
+
+- **Sacramento built, 3,335 storefronts around 37 stations, branch
+  `sacramento` (page 74, held for the batch review).** Rail from
+  OpenStreetMap: SacRT's GTFS host serves an expired certificate, and SSL is
+  never bypassed. Blue and Gold are kept; the Green Line relations are read
+  but not drawn. 99 stop positions become 51 stations after three couplet
+  merges. **Gate 3 exact** against SacRT's own timetables (Blue 28, Gold 27),
+  counted per direction before the merge. 37 stations are inside the City
+  (OSM relation 6232940, 256.7 km²), 796 m median, standard rings. 14 are
+  outside (8 in unincorporated Sacramento County, 3 in Rancho Cordova, 3 in
+  Folsom), and Township 9 is closed for works. The lines are drawn from
+  track ways only, through step 1's GeoJSON.
+- **Businesses**: the City's Business Operation Tax table (no geometry).
+  - 24,040 Active rows fetched by an explicit column list. The owner, phone
+    and `Mail_*` columns are never requested, and both fetch and step 2
+    assert it.
+  - 21,272 are unexpired on 2026-09-29; 2,768 had expired.
+  - `Location_City` SACRAMENTO 11,927; 4,935 are "ON FILE" (address
+    withheld).
+  - 3,557 have storefront descriptions (`pipeline/taxonomies/sacramento.py`,
+    hand-mapped on `docs/category_rules.md`). 4 at an apartment unit are
+    dropped, and one premises per name + address leaves 3,534.
+  - **The US Census batch geocoder** (owner) matched 3,465 (98.0%; 3,298
+    Exact); 5 fell outside the city's box.
+  - **Point-in-boundary on the City's polygon dropped 125 more**, because
+    `Location_City` is the postal city and a "Sacramento" address also
+    covers unincorporated county (Los Angeles' lesson).
+  - That leaves 3,335: Retail 1,594, Food 1,033, Personal 708. In rings
+    1,378 (41.3%): 625 / 510 / 243.
+- **Category calls on precedent, not asked**:
+  - Catering (51) is out on R1, where the brief counted it as food.
+  - Clothing alterations (11) and dressmaking are out as repairs (NAICS 811),
+    where the brief had alterations as personal services.
+  - Service stations (27) are in under R4 and pawnbrokers under R5.
+  - Cannabis dispensaries are in, as Boston's cannabis retail.
+  - Office and medical supplies are out: a hand sample found IBM, Xerox and
+    McKesson.
+  - Pet care is in Personal services (NAICS 812910; the sample was groomers,
+    daycares and shops). "Food - Other" is kept after a hand sample.
+  - The catch-alls Service - General (656) and Other (345) are out.
+- **A name that reads as a person's shows the business description (owner,
+  on the recommendation)**. The register records no legal form, and a sole
+  proprietor often registers under their own name ("SHEILA ABRAHAM",
+  "XINLI WANG"). The shared test (`pipeline.residence.looks_personal`)
+  flagged 525. In an 80-name sample about 1 in 5 was really a person; the
+  rest were trade names ("TACO BELL") that show their description too, the
+  cost of having no better signal. The replacement runs after the dedup.
+  "C/O <person>" is cut from names (2 rows), and "PERSON (TRADE)" shows the
+  trade half, Philadelphia's rule (2).
+  - Rejected: keeping the names, which leaves ~95 people named, and showing
+    the address, Oslo's form.
+  - Only "APT" counts as a home unit here: "UNIT" and "SPC" are strip-mall
+    and mall spaces (Arden Fair's "SPC 1334").
+- **Privacy verdict: publishable.** `check_personal_exposure.py sacramento`
+  finds 0 contact details and 0 person-like names at a residential unit.
+  The two remaining heuristic hits are the substituted description "Tobacco
+  Products".
+- **The Green Line is drawn as the service runs (owner): not drawn, with
+  7th & Richards/Township 9 closed for works.** SacRT suspended it on
+  2025-06-16 for the Railyards works. It has been in testing since
+  2026-09-14, "not available for passenger boarding", and is expected back
+  "by mid-October" (sacrt.com/greenline). Berlin's U6 rule, which the owner
+  made cross-city the same day (`docs/category_rules.md`, "Station scope").
+  OSM cannot signal a reopening, so the guard is a dated PLAN item.
+- **OSM lags SacRT on two Blue stations, and each workaround retires
+  itself.**
+  - Morrison Creek's two stop nodes carry no name; OSM's station node
+    4420963540 beside them is "Morrison Creek". They are named from
+    `config.UNNAMED_STOP_NAMES`, and step 1 stops once OSM names them.
+  - **Dos Rios** opened 2026-09-28 and is on SacRT's Blue timetable, but OSM
+    has no object for it. It is placed at Wikidata Q107175168's coordinate
+    (CC0; owner: "Wikidata for now, replace with OSM when we can"), 18 m from
+    the drawn Blue Line. Step 1 stops once OSM's Blue relations carry it.
+  - Rejected: leaving it out, and SacRT's stations shapefile, whose licence
+    carries NFTA's trademark clause.
+- **Three downtown couplets are one station each (owner, on the
+  recommendation)**, Houston's precedent: 7th & Capitol / 8th & Capitol
+  (128 m), 7th & I / 8th & H County Center (141 m), and St. Rose of Lima
+  Park / 8th & K (124 m). Each merged name carries both stops. 8th & O,
+  234 m from 8th & Capitol, stays separate. SacRT names every stop
+  separately.
+- **Sacramento's macro label sits high above its dot, `("middle", 0,
+  -40)`**, stacked over San Francisco's (-22). `check_macro_labels.py`
+  (`python -B`) passes dy -37 to about -42. Level to the right passes only
+  at exactly 0. Width 81.3 px.
+- **Line colours** are OSM's: Blue `#002666` is 36.6 from Retail (below the
+  preferred 45, recorded); Gold `#ffba00` is 91.5.
+- **Text approved by the owner 2026-09-29**: the page, Sacramento added to
+  the OpenStreetMap rail-geometry notice, and the Sacramento section of
+  `docs/excluded_categories.md`.
 
 ### 2026-09-29 - Thinned lines must be named where a reader can find them (owner)
 

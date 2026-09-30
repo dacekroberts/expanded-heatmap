@@ -180,6 +180,24 @@ attribution clause and nothing to display.
 **Flag for the cleanup role (held macro-map work)**: Sacramento takes the
 light-rail network colour.
 
+## ✅ Built 2026-09-29 — what the build settled
+
+- **The Green Line is suspended** (since 2025-06-16; reopening expected
+  mid-October 2026, sacrt.com/greenline): not drawn, Township 9 closed for
+  works (owner; the cross-city rule is now in docs/category_rules.md).
+- **OSM lags SacRT on Blue**: Morrison Creek's stop nodes are unnamed, and Dos
+  Rios (opened 2026-09-28) is unmapped, placed from Wikidata (owner). Gate 3
+  is exact against SacRT's own timetables: Blue 28, Gold 27.
+- **The couplets merge** (owner): Capitol, County Center, K Street. 8th & O
+  stays separate.
+- **Location_City is postal**: 125 geocoded "Sacramento" addresses lie
+  outside the City and are dropped by the polygon.
+- **Names**: 525 that read as a person's show the description (owner); 4 at an
+  apartment are left off. Caterers and clothing alterations are out, on
+  docs/category_rules.md (R1; repairs).
+- The Census geocoder matched 98.0%. 3,335 storefronts are placed; 1,378
+  (41.3%) are in the rings.
+
 ## Still unknown
 
 - Whether the Green Line still runs (build-time check, above).
