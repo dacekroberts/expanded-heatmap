@@ -286,7 +286,6 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
-<<<<<<< HEAD
 ### 2026-09-30 - A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)
 
 The owner added a `record_kind` value, relayed by the cleanup session: **"Health
@@ -296,7 +295,7 @@ premises AND personal-service settings. Kitchener–Waterloo's build entry had u
 Region of Waterloo Public Health's food and personal-services inspections) now takes
 the new value. `scripts/check_inconsistency_list.py` lists it in `FIELDS`; table B's
 row already said "Food hygiene register" and now says the new value, so the two agree.
-=======
+
 ### 2026-09-30 - Dallas's address-layer indemnity accepted (owner)
 
 - **The owner accepted the open-ended indemnity in the City of Dallas's GIS
@@ -312,7 +311,6 @@ row already said "Food hygiene register" and now says the new value, so the two 
 - **Files:** `docs/data_sources.md` (a new "Dallas's indemnity" subsection)
   and `docs/city_master_list.md` (Dallas's row).
 
->>>>>>> origin/master
 ### 2026-09-30 - Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity
 
 - **The last three T1 briefs, with the owner's pre-approved calls confirmed
