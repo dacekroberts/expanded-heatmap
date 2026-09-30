@@ -1,0 +1,46 @@
+{
+  "written_utc": "2026-09-30T01:20:27+00:00",
+  "as_of_date": "2026-09-29",
+  "register": {
+    "url": "https://data.texas.gov/resource/jrea-zgmq.json",
+    "where": "upper(outlet_city)='HOUSTON' AND outlet_inside_outside_city_limits_indicator='Y'",
+    "fields": [
+      ":id",
+      "outlet_number",
+      "outlet_name",
+      "outlet_address",
+      "outlet_city",
+      "outlet_state",
+      "outlet_zip_code",
+      "outlet_county_code",
+      "outlet_naics_code",
+      "outlet_inside_outside_city_limits_indicator",
+      "outlet_permit_issue_date",
+      "outlet_first_sales_date",
+      "taxpayer_organization_type"
+    ]
+  },
+  "site_addresses": "https://mycity.houstontx.gov/mycitydocs/download/Export_SiteAddresses.zip",
+  "boundary": {
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
+    "query": {
+      "where": "GEOID='4835000'",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "f": "geojson"
+    }
+  },
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    29.6,
+    -95.5,
+    29.9,
+    -95.25
+  ],
+  "files_utc": {
+    "sales_tax_permits_houston.csv": "2026-09-30T01:15:37+00:00",
+    "Export_SiteAddresses.zip": "2026-09-30T01:15:53+00:00",
+    "city_boundary_tiger.geojson": "2026-09-30T01:20:27+00:00",
+    "osm_rail.json": "2026-09-30T01:15:55+00:00"
+  }
+}

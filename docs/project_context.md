@@ -258,6 +258,16 @@ Cities built and running end to end (pipeline, map, app page):
   rather than merely counted, which is why a Census TIGERweb layer is
   downloaded alongside the District's own boundary.
 
+- **Houston** - METRORail's Red, Green and Purple light-rail lines, all 40
+  stations inside the City; held for the batch review. The Texas
+  Comptroller's sales-tax permits have no geometry, so storefronts are placed
+  by an address join to the City's Site Addresses and the Census geocoder,
+  and scoped by TIGER's place polygon (OSM's lacks annexed land). The permit
+  records the owner's legal form, so a person's permit shows its address
+  rather than its name, and one at a City-typed Residential point is left off
+  (owner). The lowest in-ring share on the map, stated on the page (owner).
+  Rail from OSM: METRO's data agreement is kept out of the build.
+
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first
   built from two municipalities' own registries.** Distinctive in five ways.

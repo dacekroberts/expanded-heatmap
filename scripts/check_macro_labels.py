@@ -218,6 +218,10 @@ TEXT_WIDTH = {
     # Goyang, Seongnam, Yongin: measured in the same run as Incheon (2026-09-29,
     # the deployed app's own frame; Prague, Tokyo, London and Glasgow reproduced).
     "Goyang": 52.1, "Seongnam": 71.4, "Yongin": 45.9,
+    # Houston: measured 2026-09-29 in the local app's own document (lean venv),
+    # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load,
+    # in the Suwon/Bucheon/Bergen session's run that measured Sacramento.
+    "Houston": 56.9,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

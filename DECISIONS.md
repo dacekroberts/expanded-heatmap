@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**210 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**211 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Houston built: METRORail from OSM, a joined sales-tax register, a person's permit shown by address](#2026-09-29---houston-built-metrorail-from-osm-a-joined-sales-tax-register-a-persons-permit-shown-by-address)
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Baltimore to the discards on currency; Palma's three licence calls (owner)](#2026-09-29---baltimore-to-the-discards-on-currency-palmas-three-licence-calls-owner)
@@ -249,6 +250,95 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Houston built: METRORail from OSM, a joined sales-tax register, a person's permit shown by address
+
+- **Houston built, 29,912 storefronts around 40 stations, branch `houston`
+  (page 75, held for the batch review).** Rail from OpenStreetMap (owner):
+  METRO's Data Use Agreement never binds the map. The six relations are
+  whitelisted on network `Metro`, and 80 stop positions become 40 stations.
+  **Gate 3 exact**: Red 25, Green 9, Purple 10. The whole city is in scope,
+  so none is excluded; the median gap is 659 m, with standard rings.
+  - **The brief's "Purple 13" was a counting slip**, corrected in the brief.
+    25 + 9 + 13, less the four stations Green and Purple share, is 43, not
+    the brief's own total of 40. Wikipedia's Purple Line list and OSM's two
+    Purple relations both give 10.
+  - OSM carries Theater District and Convention District under one name
+    each, so only Central Station's Capitol / Rusk pair merges, by alias.
+    Burnett's name differs by direction, and METRO's current name is kept.
+  - Main Street Square's two stop positions are 267 m apart, over step 1's
+    250 m merge gate. They are the staggered downtown platforms on
+    consecutive blocks of Main Street, so the station is allowed by name
+    (`STAGGERED_PLATFORMS_M`) and the gate stays tight for every other
+    station.
+  - Central Station Main (Red) is 148 m from Central Station Capitol / Rusk
+    (Green and Purple). They are two METRO stations, both in its 40, so both
+    are kept.
+- **The city boundary is TIGER's, not OSM's, on a measurement.** OSM's
+  relation 2688911 assembles cleanly (1,644.7 km² outer, less 26 enclaves
+  such as Bellaire) to 1,589.5 km². TIGER's place polygon (GEOID 4835000) is
+  1,741.5 km², and 156 km² of it is missing from OSM in annexed pieces on the
+  west and north edges; the largest is 23.5 km² near 29.79 N, 95.75 W. OSM
+  holds 4 km² that TIGER lacks. The legal boundary the City reports to the
+  Census wins, which is Buffalo's layer. All 40 stations are inside it; the
+  boundary decides which placed storefronts count.
+- **Businesses**: the Texas Comptroller's Active Sales Tax Permit Holders
+  (`jrea-zgmq`).
+  - 79,097 Houston outlets flagged inside city limits, fetched by an
+    explicit `$select`. **`taxpayer_number` is never read, beside the
+    taxpayer's name and address**: for an individual, a Texas taxpayer
+    number is built from their Social Security number. The brief had not
+    flagged it. The row key is Socrata's `:id`.
+  - 33,613 in the buckets (the shared NAICS module; 6,491 non-store sellers,
+    2,376 caterers, mobile food and contractors, and 414 parking lots out by
+    code). Then 226 not trading by the fetch date, 968 at an apartment or
+    trailer (Sacramento's APT call, plus `residence.py`'s TRLR), 21 with no
+    house number and 373 name + address duplicates leave 32,025.
+  - **Placed by an address join to the City's Site Addresses** (bulk file
+    geodatabase, 1,547,147 points): 80.3% on the street as filed within its
+    ZIP (the brief's sample said 81%), 262 more on a canonical form, and 893
+    on a street address unique across the region's ZIPs. **The Census
+    geocoder** matched 3,979 of the remaining 5,148. 96.3% placed in all.
+  - Point-in-boundary on TIGER's polygon dropped 608, because the permits'
+    city is a postal one.
+- **A person's permit shows its address (the brief's call, Copenhagen's and
+  Oslo's rule).** The Comptroller records the legal form, so no guess at the
+  name is needed. Personal forms from its record layout: IS (sole owner), S,
+  PI (individuals' general partnership), P, PZ and ES (estate). General
+  partnerships are in on Denmark's precedent (owner, 2026-09-24); PB, a
+  partnership of businesses, is not. 5,730 mapped storefronts show their
+  address.
+- **A person's permit at a Residential point is left off (owner, 2026-09-29,
+  the brief's recommendation): 334.** The City's `addrtype` types the point,
+  and "Residential" counts only when every typed point at that street
+  address says so. 1,017 companies at such a point stay: their names are
+  companies'.
+- **Company names are shown, including the few that are a person's.** Of
+  24,182 company rows, 2,996 names pass `looks_personal`. An 80-name sample
+  was trade names ("TACO BELL", "SHIPLEY DO-NUTS", "SEWELL CADILLAC"), with a
+  few LLCs named for a designer ("LINDSEY MEHNE"). That is a registered name
+  a company chose, San Diego's precedent. Showing the kind of business for
+  them all (Sacramento's rule) was rejected: that rule stood in for a legal
+  form Sacramento's register lacks, and here it would unname about 2,900
+  trade names to reach a handful.
+- **Privacy verdict: publishable.** `check_personal_exposure.py houston`
+  finds 0 contact details on 2,224 in-ring pins. It flags 251 person-like
+  names (the company trade names above) and 7 at a "UNIT", which are mall and
+  strip-centre spaces. Read across the whole city: 48 person-like company
+  names at a UNIT or SPC address, every one a shop (airport and mall units,
+  strip-centre suites).
+- **Line colours through `linecolour.py`, never METRO's.** A pure red sits
+  33-37 ΔE from Food service's magenta and a mid green 25-39 from Personal
+  services', so the lines are brick red `#bf360c` (46.5), olive green
+  `#5d6d0e` (46.5) and purple `#7b1fa2` (50.6), each over the 45 preference.
+- **2,224 of 29,912 in the rings: 7.4%**, the lowest on the map (Taoyuan
+  11.7%), stated on the page (owner). Retail 1,077, Food 1,052, Personal 94:
+  a sales-tax permit is held by sellers of taxable goods and services, so
+  Personal services are thin. A thin layer, not a structural gap, so
+  coverage stays "full" (`check_macro_facts.py`'s rule).
+- **Region "United States East"**, by the owner's 2026-09-22 split (West is
+  California). The macro label sits level to the right of the dot, width
+  56.9 px; it passes at dy -8 to +6.
 
 ### 2026-09-29 - Stations closed for works: drawn as the timetable runs, in every city (owner)
 
