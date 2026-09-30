@@ -1,4 +1,4 @@
-# Most and Litvínov (Regional) — build brief
+# Most (Regional) — build brief
 
 **Step 0 measured 2026-09-27 (the Czech second-city screen) and 2026-09-30
 (this brief, on live OpenStreetMap).** Run `python scripts/brief_check.py most`
@@ -7,6 +7,22 @@ on 2026-09-29. Read `docs/build_briefs/brno.md` first: the Czech tram pattern,
 built on Prague's modules.
 
 
+
+---
+
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; DECISIONS "The Czech batch's calls and prose approved as recommended")**: every call below as recommended, and the prose. **Build order: Brno, Plzeň, Olomouc, Ostrava, Liberec, Most.** Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Most (Regional)**: Most + Litvínov; the page names Litvínov in its scope sentence | See the rail section |
+| **Lines drawn** | Trams 1–4 (OSM) | |
+| **Rings** | halved: median gap 514 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Build it** | **Last of the six**: 1,030 storefronts, 27 stops, the smallest Czech page | |
+| **Call (approved): Colours** | the project's palette, `line_colour_search.py`, evenly spaced hues | |
 
 ---
 
@@ -46,7 +62,7 @@ refresh them from a city branch.
   RUIAN_CRS_CONTROL = ("25298429", 50.50284, 13.64078, "Most Town Hall (Magistrát), Radniční 1/2")
   ```
 
-  RÚIAN transforms it to 50.50287, 13.64052. ⚠️ **Litvínov's control is still to measure** at the build.
+  RÚIAN transforms it to 50.50287, 13.64052. **Litvínov's, measured 2026-09-30** (OSM's town-hall node): `("5150507", 50.59881, 13.61171, "Litvínov Town Hall, náměstí Míru 11")`; RÚIAN transforms it to 50.59884, 13.61173.
 - ⚠️ **Two obce**: as Liberec (Regional), call `czechia_register` per obec.
 
 **The natural-person rule is Prague's**: an establishment at its owner's own
@@ -78,8 +94,8 @@ forms (`NAME_SUPPRESSED_FORMS`).
 ## Build-time calls
 
 1. **Build it at all?** It is T1 and passes, but it is **the smallest Czech page** (1,030 storefronts, 27 stops), and the screen marked it low value. Recommend building it last of the six, or asking the owner then.
-2. **Litvínov's RÚIAN control** at the build.
-3. **The palette** (below).
+2. **Litvínov's RÚIAN control**: measured (above).
+3. **The palette** (approved, owner 2026-09-30): choose at the build with `scripts/line_colour_search.py` (3:1 contrast on both map pages, CIE76 45 or more from every pin), aiming at evenly spaced hues, since no operator hue is licensed.
 
 ```brief-checks
 [
@@ -128,7 +144,22 @@ forms (`NAME_SUPPRESSED_FORMS`).
     "claim": "The derived UTM zone is 33N (EPSG:32633)",
     "kind": "utm_zone_from_longitude",
     "lon": 13.64,
-    "expect": "EPSG:32633"
+    "expect": "EPSG:32633",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "regional",
+    "crs": "EPSG:32633",
+    "obec_codes": [
+      "567027",
+      "567256"
+    ],
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED",
+      "obec_codes": "OBEC_CODES"
+    }
   }
 ]
 ```

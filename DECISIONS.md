@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**231 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**232 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
 - [The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod](#2026-09-30---the-normandie-aggregate-read-its-tram-shapes-are-stop-to-stop-so-caen-rouen-and-le-havre-draw-from-openstreetmap-its-concédant-is-atoumod)
 - [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
@@ -273,6 +274,42 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in
+
+- **All 13 briefs now open with a "For the owner, with the build" table**
+  (Brest's shape), giving `mode`, a literal `coverage`, scope, lines, rings
+  and each call.
+  - **`vs_config` fields** (mode, coverage, scope, crs, and obec codes for
+    the Czech six) sit on each brief's CRS check, so `brief_check.py
+    --vs-config` holds a build to them.
+  - **The approvals are written in:** the Czech batch's calls (owner, bd9a083)
+    and the tram kit's 24 (owner, cdee504).
+  - **Checks:** every brief passes, re-run where Overpass timed out.
+- **Measured for the kits (2026-09-30):**
+  - **Daugavpils's headways** (worst daytime hour one way, the operator's
+    timetable read for headway only): route 1 4–6 an hour; routes 3 and 5,
+    one loop, 2–3 each; route 2 0–3; route 4 1. Under the approved 20-minute
+    floor, **route 1 only** is drawn.
+  - **Brno's stations** are the feed's 149 parent stations, 147 inside the
+    city. The tram list's 146 was the screen's.
+  - **The Jablonec and Litvínov RÚIAN controls:** 12188018 and 5150507,
+    against OSM.
+  - **New Orleans:** 38.1% of licences within 0.3 mi with every stop kept,
+    37.2% thinned at 400 m, so no thinning (approved).
+  - **Zurich** (live OSM, for the tram list): 182 stops at a 283 m median
+    gap. Glattalbahn 12 (11%), Limmattalbahn 20 (15%) and the Forchbahn S18
+    (20%) are stubs, while 10 keeps 72%. Refs 50 and 51 are wholly inside.
+- **Corrections:**
+  - **Regions:** the US three take "United States East" (Kansas City, New
+    Orleans) and "United States West" (Tucson), not "North America".
+  - **File names:** `kansas_city.md` and `new_orleans.md` renamed to match
+    their pipeline slugs.
+  - **Coverage:** Latvia and Den Haag are `narrowed`, Rotterdam's and Riga's
+    merged shape.
+  - **Palette:** the dangling "(below)" references now point to
+    `line_colour_search.py`.
+  - **Name:** "Most (Regional)" (owner).
 
 ### 2026-09-30 - The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod
 
