@@ -1,6 +1,6 @@
 ---
 name: tram-city
-description: Build a trams-only city outside France and Czechia - the ten T1 cities in seven countries (Odense, Daugavpils, Liepāja, Kansas City, New Orleans, Tucson, Florence, Zurich, Göteborg, Den Haag) - with what every trams-only map shares - the owner's trams-only calls, rings by the spacing rule, no thinning but New Orleans's street-stop filter, the light-rail test, rolling feeds, OSM rail, the currency rule, one-bucket and narrowed pages, the macro map's mode and coverage keys, and the page-text shape - plus a sheet per city pointing at its country's built template. Read with the city's brief, add-city, osm-rail and publish-city, which it does not replace.
+description: Build a trams-only city outside France and Czechia - the ten T1 cities in seven countries (Odense, Daugavpils, Liepāja, Kansas City, New Orleans, Tucson, Florence, Zurich, Göteborg, Den Haag) - with what every trams-only map shares - the owner's trams-only calls, rings by the spacing rule, no stop thinning (New Orleans's the one open call), the light-rail test, the shared OSM tram step 1, rolling feeds, OSM rail, the currency rule, one-bucket and narrowed pages, the macro map's mode and coverage keys, and the page-text shape - plus a sheet per city pointing at its country's built template. Read with the city's brief, add-city, osm-rail and publish-city, which it does not replace.
 ---
 
 # Building a trams-only city (the ten non-French, non-Czech T1 cities)
@@ -46,9 +46,9 @@ at review time only (`docs/review_time.md`).
   precedent), and every tram stop gets rings.
 - **No stop thinning on the tram list** (DECISIONS "Tram audit Phases 3-4",
   owner). Riga's 0.5 mi filter does not carry over, even to the two Latvian
-  cities built on Riga's modules. **The single named exception is the
-  street-stop filter where stops stand one or two blocks apart**: New
-  Orleans at a 161 m median gap (section 2). Its spacing is still an owner
+  cities built on Riga's modules. **New Orleans (164 m) is the one open
+  question** (section 2): the kit's handoff named it an exception, and its
+  brief keeps every stop. The kit recommends no thinning, and it is an owner
   call.
 - **Rings follow the spacing rule** (DECISIONS "Tram cities use the existing
   spacing rule", owner, 2026-09-29), section 3.
@@ -130,15 +130,20 @@ slowest drawn). A stop served only by slower routes goes to
     list.
   - **A stop that is not yet open stays out** and becomes a watch item
     (Odense's Hospital Syd, 2027).
-- **The street-stop filter is New Orleans's only.** Stops one or two blocks
-  apart (161 m median) put every ring on top of the next.
-  `docs/sub_transit_line_filters.md` applies through `pipeline/stations.py`
-  `thin()`, never a new copy. Keep terminals and interchanges (filters 2 and
-  4). Measure the thinning along each line's stop sequence, and write every
-  cut stop to `excluded_stations.csv` with "spacing" in its reason. **The
-  spacing is the owner's call**: the brief measures the in-ring share with
-  every stop kept and at the proposed spacing (400 m suggested). No other
-  city on this list is thinned.
+- **New Orleans: keep every stop (recommended; an owner call).** Its
+  streetcar stops stand a block or two apart (164 m median), so the rings
+  merge into a band along each line. The kit's handoff named it the one
+  exception for the street-stop filter, but the filter's own shape test
+  (`docs/sub_transit_line_filters.md`, "When this applies") fails. That
+  filter exists for a central corridor with sparse stations plus dense
+  surface branches (Muni Metro, Boston's Green Line). **New Orleans is
+  uniformly dense, with no corridor**, the case the doc says not to thin.
+  Thinning there would also put a business one block from a stop outside
+  the rings. The band is then a true reading of distance from the line, and
+  the page says so. If the owner chooses the filter instead, it is
+  `pipeline/stations.py` `thin()`, never a new copy, with terminals and
+  interchanges kept and every cut stop in `excluded_stations.csv` with
+  "spacing" in its reason. No other city on this list is a candidate.
 - **A line mostly outside the scope is a stub question**, as for the Czech
   and French cities: Göteborg's 4 and 12 (Mölndal), Den Haag's E, Zurich's
   Glattalbahn, and Florence's T1 (4 of 26 stops in Scandicci). Keep the line
@@ -150,19 +155,18 @@ slowest drawn). A stop served only by slower routes goes to
 ## 3. Rings - the spacing rule
 
 Measure the **median nearest-neighbour gap among the stations in scope**,
-after collapse, with every stop kept (or after New Orleans's filter, if the
-owner approves it).
+after collapse, with every stop kept.
 - **About 550 m or less**: `RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]`,
   `RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]`
   (Aarhus's config). The config comment records the figure.
 - **Over about 550 m**: the standard `[0.0, 0.1, 0.2, 0.3, 0.6]`. Drop the
-  page's half-size sentence. **Kansas City** (about 560 m at the screen) is the
-  only borderline city: measure at build on its step 1 stations and apply the
-  rule as written. A figure between 540 and 570 m goes to the owner with both
-  in-ring shares.
-- Screen gaps (the tram list): Odense 440 m, Daugavpils 281-298, Liepāja
-  309-329, Florence 322, Tucson 266, New Orleans 161; Zurich, Göteborg and
-  Den Haag at build.
+  page's half-size sentence. A build figure between 540 and 570 m goes to the
+  owner with both in-ring shares. Kansas City read about 560 m as a mean at the
+  screen, but **413 m as a median over OSM's 19 stops in its brief**, so it
+  takes halved rings.
+- The briefs' gaps (2026-09-30): Odense 441 m, Daugavpils 298, Liepāja 329,
+  Kansas City 413, Florence 322, Tucson 265, New Orleans 164. Zurich, Göteborg
+  and Den Haag at build. **Every city measured so far takes halved rings.**
 - **Riga is on the standard rings with thinning.** Its Latvian followers are
   NOT: no thinning and halved rings, as above.
 - **Distance in a metre CRS, never EPSG:4326**, and the CRS is per city:
@@ -181,28 +185,35 @@ owner approves it).
   `feed_info.txt` window (or the publisher's metadata) in
   `outputs/<slug>/provenance.json`, which the page's caption reads. A step
   never fetches (`check_no_fetch_in_steps.py`).
-- **Read the licence before the feed is used**, with one `licence-read` per
-  source (`read-licence`). Still unread on 2026-09-30: RideKC's GTFS
-  (declared "free for anyone to use"), RTA's GTFS, GEST's in the Regione
-  Toscana feed (declared CC BY 4.0), and whichever feed Zurich, Göteborg or
-  Den Haag use.
-- **OSM through `osm-rail`** where a feed is unlicensed, unreachable or barred:
-  Odense (Rejseplanen barred), Daugavpils and Liepāja (the city GTFS declares
-  no licence). Zurich and Göteborg were measured on OSM at the screen, and
-  their briefs decide the source. OSM is already covered by the site's
-  OpenStreetMap notice. Say on the page that the lines and stops come from
-  OpenStreetMap.
-- **Colours**: the feed's `route_color`, else OSM's `colour` (a CSS keyword
-  is resolved through the named-colour table: Göteborg's line 11 is "black").
-  Else the project's own palette, as Le Havre and Riga have: Odense, the two
-  Latvian cities, probably Kansas City. Run `pipeline/linecolour.py`'s checks
-  and `check_map_markup.py`. Two lines with one colour are refused (Dijon).
+- **Read the licence before a feed is used**, with one `licence-read` per
+  source (`read-licence`). RTA's and GEST's GTFS are unread, and neither
+  brief uses them. **RideKC's GTFS is barred (owner, 2026-09-30)**: ridekc.org's
+  site terms restrict schedules and require written consent, Philadelphia's
+  shape. So Kansas City's frequency is stated as a fact, without citing the
+  schedule, and the KC Streetcar and RideKC logos are never used.
+- **OSM through `osm-rail` is the rail source for every brief so far.** It
+  is used where a feed is unlicensed, barred, or simply not needed for
+  geometry: Odense (Rejseplanen barred), Daugavpils and Liepāja (no declared
+  licence), Kansas City (barred), New Orleans, Tucson and Florence. Zurich,
+  Göteborg and Den Haag were measured on OSM at their screens. OSM is covered
+  by the site's OpenStreetMap notice. Say on the page that the lines and
+  stops come from OpenStreetMap.
+- **Relations with no stop members are placed in `NOT_DRAWN` with a reason**,
+  never dropped silently: New Orleans's 46 and 49 (read whether they run),
+  and Florence's T3.2.1, T3.2.2, T2.2 and T4 (under construction; re-check
+  when T3 opens, due end of 2026).
+- **Colours**: the feed's `route_color`, else OSM's `colour`. A CSS keyword is
+  resolved through the named-colour table: New Orleans's `green`, `red` and
+  `blue`, Göteborg's line 11 "black". Otherwise use the project's own
+  palette, as Le Havre and Riga have: Odense, Daugavpils, Liepāja, Kansas
+  City and Tucson. Run `pipeline/linecolour.py`'s checks and
+  `check_map_markup.py`. Two lines with one colour are refused (Dijon).
 - **Every drawn line gets a permanent on-map label (its real public name) and
   a legend entry.**
 - **Shared code where it pays: `pipeline/osm_tram.py`, one module for both
-  kits** (agreed with the Czech kit, 2026-09-30). Three to five of these ten
-  take OSM rail (Odense, Daugavpils, Liepāja, perhaps Zurich and Göteborg),
-  and five of the six Czech cities do. **Use it. If it does not exist yet,
+  kits** (agreed with the Czech kit, 2026-09-30). Seven of these ten briefs
+  take OSM rail, the other three were measured on it, and five of the six
+  Czech cities do too. **Use it. If it does not exist yet,
   the first OSM tram build writes it**, from Aarhus's `stop_rows()`
   generalised:
   - relations kept on `ref` and `route`, and on `operator` only where the
@@ -299,7 +310,9 @@ and any notice its licence requires.
 
 `python scripts/check_personal_exposure.py <slug>` (verdict in `DECISIONS.md`;
 **the suspects are Kansas City's `dba_name`, New Orleans's `ownername`,
-Tucson's individuals' licences and Den Haag's `AANVRAGER`**);
+Tucson's `ACC_NAME` on personal ownership types, Florence's beauty and
+laundry points (no names, but sole traders' premises) and Den Haag's
+`AANVRAGER`**);
 `check_provenance.py` names the city OK; `check_scope_disclosure.py` passes;
 a `docs/data_sources.md` row for every new source, the join and address layers
 included (VZD's `aw_eka.csv`); `drift_check.py <slug>`; no `TODO` left in
@@ -322,10 +335,10 @@ calls.
 | **Odense** | **Aarhus** (`pipeline/aarhus/`, `countries/denmark*.py`, `taxonomies/denmark_db25.py`) | CVR, kommune 461; placed on OSM's DAR points (98.4%); personally owned rows show the address, as Aarhus | OSM, 2 `route=tram` relations, ref L; + SDU Syd/Hospital Nord by node | 25832 | No colour in OSM; Hospital Syd opens 2027; build on the shared CVR cache, never refresh it from a branch |
 | **Daugavpils** | **Riga** (`pipeline/riga/`, `taxonomies/riga_source.py`) | VID excise (food, placed on VZD's `aw_eka.csv`) + VZD cadastre use class 1230 (shops and services), ATVK 0002000 | OSM, refs 1-4 (the screen said 1-5: check the operator's list) | 32635 | `aw_eka.csv`'s `KOORD_X` is the northing (EPSG:3059); use `DD_N`/`DD_E`; `STATUSS` = EKS; the VZD credit (notice 42 extended); hourly routes (section 1) |
 | **Liepāja** | **Riga** | as Daugavpils, ATVK 0005000 | OSM, ref 1; + Brīvības iela and Klaipēdas iela by node | **32634** | as Daugavpils |
-| **Kansas City** | a US register city (`naics.py` does not fit; `premises-taxonomy` on `business_type`) | Socrata `kkhs-93m4`, PUBLIC_DOMAIN, **frozen 2026-01-15** (2025's licences) | RideKC GTFS route 601, `route_type` 0 (licence unread); OSM as the cross-check | UTM 15N | The data date on the page; `dba_name` is often a person; `business_type` mixes fee codes with activities; rings borderline (~560 m) |
-| **New Orleans** | Philadelphia and San Francisco for the filter | Socrata `iqay-p646`, CC0, a text taxonomy (no codes); drop "Special Events-Other (Vendor)" and "Home Based-Office Use Only" | RTA GTFS, streetcars 12, 47, 48, 2 (licence unread) | UTM 15N | The street-stop filter (owner's spacing); `ownername` through the exposure check |
-| **Tucson** | a NAICS city (`naics.py` unchanged) | BUSLIC on `gis.tucsonaz.gov`, active and not home-based | Sun Link GTFS | UTM 12N | "As is" terms (a read); ~6,250 individuals' licences; 10 min weekdays, 20 evenings and weekends, disclosed |
-| **Florence** | **Milan** and **Rome** (the Comune's layers; Milan's *fuori piano*) | Four Comune layers on dati.toscana.it, CC BY 4.0 declared, coordinates on 100%, no names | GEST in the Regione Toscana GTFS (CC BY 4.0 declared) | UTM 32N | 639 exempt food rows (an owner call); Scandicci's 4 stops; 3,424 rows share a point; a full licence read; T3 due end 2026 |
+| **Kansas City** | **Houston** (a US register, the sole-owner name rule); `naics.py` through a NAICS 2022 **title** map | Socrata `kkhs-93m4`, Public Domain, **frozen 2026-01-15**; `valid_license_for` 2025 and 2026 only; fee-code types ("Misc Rate 129") dropped and counted | **OSM** (RideKC's GTFS barred, owner), ref 601, 19 stops, all inside; 413 m | 32615 | The data date on the page; `dba_name` withheld where it is a person; no logos; frequency as a fact, not a cited schedule |
+| **New Orleans** | Philadelphia (a US text taxonomy, `premises-taxonomy`) | Socrata `iqay-p646`, CC0, daily; drop "Special Events-Other (Vendor)" and "Home Based-Office Use Only"; `ownername` never shown | **OSM**, streetcars 12, 47, 48 and 2, 110 stops, all inside; 164 m | 32615 | Thinning (section 2, an owner call); 46 and 49 have no stops (`NOT_DRAWN` unless they run); CSS-keyword colours |
+| **Tucson** | **Houston** (the sole-owner name rule); `naics.py` unchanged | BUSLIC **layer 3** (never layer 1), active (strip `LIC_STATUS`) and `HOME_OCCUPATION` = F; licence SILENT, permissive reading (owner, 2026-09-30) | **OSM**, Sun Link, 21 stops, all inside; 265 m | 32612 | Notice "Business licence data: City of Tucson"; never call the pins complete; `ACC_NAME` withheld for Sole Proprietorship, Individual and Married; 10 min weekdays 07-18, 20 otherwise, disclosed |
+| **Florence** | **Milan** and **Rome** (the Comune's layers; Milan's *fuori piano*) | Four Comune GeoJSON layers (`datigis.comune.fi.it/json/`), EPSG:3003, no names or addresses (the dots show the type); licence read: CC BY 4.0, credit the Comune di Firenze and state the changes | **OSM**, T1 and T2 in OSM colours, 39 stops in the comune (T1 20 of 24); 322 m | 32632 | 639 exempt food rows (an owner call); Scandicci's 4 stops outside; 3,424 rows share a point; T3 under construction (`NOT_DRAWN`); no giglio or logo |
 | **Zurich** | **Stockholm** (one register, city only), Seoul/Gyeonggi (partial retail) | `Gastwirtschaftsbetriebe` via the **WFS** (the CKAN downloads are an Angular shell), layer `gastwirtschaftsbetriebe`, CC0; `betriebsstatus` = `Offen` | OSM (18 tram refs, all coloured) or the national feed, the brief's call | **2056** | **`add-country` first**; the S-Bahn named as excluded (fails on coverage); the Forchbahn (section 1); the Glattalbahn stub test |
 | **Göteborg** | **Stockholm** (`taxonomies/sweden_livsmedel.py`) | `Livsmedelsverksamheter`, CC0, daily: **take the CSV** (`utf-8-sig`, `;`), never the rowstore JSON (drops 279 rows, swaps x and y) | OSM (13 lines, 127 stops) or Västtrafik, the brief's call | **UTM 32N** (11.97° E; not Stockholm's 34N) | Undated rows (the page says so); 274 blank `typ` to classify or drop; lines 4 and 12 into Mölndal; heritage line out; line 11 "black" |
 | **Den Haag** | **Rotterdam** (BAG, `taxonomies/rotterdam_source.py`); Amsterdam for the horeca precedent | BAG winkelfunctie units + the city's `Horeca_nieuw` layer (2,543 granted or notified) | HTM's lines, GTFS as Rotterdam's or OSM | UTM 31N, as Rotterdam | **Never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM`**; the trade name is `OMSCHRIJVI`, double-encoded UTF-8 to repair; line E's stub; `mode`; tram 1 at 54% in the city |

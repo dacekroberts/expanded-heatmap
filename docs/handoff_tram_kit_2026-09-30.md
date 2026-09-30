@@ -14,10 +14,10 @@ owner's calls with recommendations, say when it is done, and wait for the go.
 | Odense | Denmark | Copenhagen, Aarhus (CVR, DAR) | `odense.md`, 2026-09-30: checks 2/2 |
 | Daugavpils | Latvia | Riga (two layers, VZD) | `daugavpils.md`, 2026-09-30: 4/4 |
 | Liepāja | Latvia | Riga | `liepaja.md`, 2026-09-30: 4/4 (on a re-run) |
-| Kansas City | United States | many (NAICS) | none |
-| New Orleans | United States | many | none |
-| Tucson | United States | many | none |
-| Florence | Italy | Milan, Rome | none |
+| Kansas City | United States | many (NAICS) | `kansas-city.md`, 2026-09-30: 3/3 |
+| New Orleans | United States | many | `new-orleans.md`, 2026-09-30 |
+| Tucson | United States | many | `tucson.md`, 2026-09-30 |
+| Florence | Italy | Milan, Rome | `florence.md`, 2026-09-30: 4/4 |
 | Zurich | **Switzerland: new country** (`add-country` first) | nothing | `zurich.md`, from 2026-09-23, before T1 (staging refreshes it) |
 | Göteborg | Sweden | Stockholm | `goteborg.md`, before T1 (staging refreshes it) |
 | Den Haag | Netherlands | Amsterdam, Rotterdam (BAG) | none |
@@ -102,14 +102,14 @@ re-asked.
 | Daugavpils, Liepāja | 7 | `coverage` | `narrowed`, "Merged", as Riga (the briefs say "as Riga's") | kit |
 | Daugavpils, Liepāja | 8 | The credit for VZD's address file (CC BY 4.0, a join layer) | Extend notice 42 to name the address register, with VZD's own wording and the year | brief |
 | Liepāja | 9 | Brīvības iela (the named terminus) and Klaipēdas iela, on no route relation | Add both by node | brief |
-| Kansas City | 10 | Rings at a ~560 m median gap | Apply the spacing rule to the build's own figure; if it falls between 540 and 570 m, bring both in-ring shares | list |
-| Kansas City | 11 | `dba_name` is often a person ("HARRIS GREGORY J") | Show the address where the name reads as a person, Aarhus's rule for sole traders; the exposure check decides the pattern | list |
-| Kansas City | 12 | `business_type` fee codes ("Flat Rate 16", "Misc Rate 129") | Keep only rows whose type names an activity; report the fee-code share and read a sample before dropping | list |
-| New Orleans | 13 | **The street-stop filter's spacing** (161 m median; the owner's no-thinning rule has this one exception) | `thin()` at about 400 m, keeping terminals and interchanges, **if** staging's measurement shows the rings merge with every stop kept | list; measurement asked |
-| New Orleans | 14 | "Special Events-Other (Vendor)" (1,258) and "Home Based-Office Use Only" (357) | Drop both: no counter of their own (`docs/category_rules.md` R1) | list |
-| Tucson | 15 | About 6,250 active licences are individuals' | The exposure check first. Show the address, not the name, where the holder is a person, as call 11 | list |
-| Florence | 16 | 639 exempt food rows (464 "non soggetta", 175 art. 53) | Keep them and filter what the type code names as non-public, on Milan's *fuori piano* precedent (owner, 2026-09-22), with the remainder disclosed | list |
-| Florence | 17 | T1's 4 stops in Scandicci | Commune-only (T1 keeps 22 of 26): draw the line to its end and list the 4 as outside | list |
+| Kansas City | 10 | Keep `valid_license_for` 2025 and 2026 only (1,978 licences for 2024 out) | Yes: the licences current at the freeze; the page gives the date | brief |
+| Kansas City | 11 | `dba_name` is often a person ("HARRIS GREGORY J") | Withhold it where it reads as a person, Houston's sole-owner rule; the exposure check decides the pattern | brief |
+| Kansas City | 12 | `business_type` fee codes ("Misc Rate 129" 328, "Flat Rate 42" 91) | Drop them and state the count on the page; the titles map to NAICS 2022 codes for `naics.py` | brief |
+| New Orleans | 13 | **Thinning.** The handoff named New Orleans the exception to no-thinning; its brief keeps all 110 stops (164 m) | **Keep every stop.** The street-stop filter's own shape test fails: it is for a central corridor plus dense branches, and New Orleans is uniformly dense. Thinning would leave businesses a block from a stop outside the rings. The rings form a band along each line, and the page says why | brief vs handoff |
+| New Orleans | 14 | "Special Events-Other (Vendor)" (1,258) and "Home Based-Office Use Only" (357) | Drop both: no counter of their own (`docs/category_rules.md` R1) | brief |
+| Tucson | 15 | `ACC_NAME` for personal ownership types (Sole Proprietorship 4,395, Individual 1,857, Married 131 active) | Withhold the name for those types, Houston's rule; the dot shows the business type and address | brief |
+| Florence | 16 | 639 exempt food rows (464 "non soggetta", 175 art. 53); food is 2,385 (1.14x OSM) without them | Keep them and filter what the type code names as non-public, on Milan's *fuori piano* precedent (owner, 2026-09-22). The page says some non-public premises remain | brief |
+| Florence | 17 | T1's 4 stops in Scandicci | Commune-only: T1 keeps 20 of 24 (83%). Draw the line to its end and list the 4 as outside; the Comune's layers are city-only anyway | brief |
 | Zurich | 18 | The Forchbahn (S18, OSM `light_rail`), on tram 11's track and stops inside the Stadt | Leave it out and name it with the S-Bahn, keeping `mode` `tram` | kit; asked of staging |
 | Zurich | 19 | The Glattalbahn lines, largely outside the Stadt | The stub test per line; the food register is city-only, so a stub is dropped, not scoped regionally | kit; asked of staging |
 | Göteborg | 20 | 274 rows with a blank `typ` | Classify by name where it names a counter (Stockholm's name rules), and drop the rest | list |
