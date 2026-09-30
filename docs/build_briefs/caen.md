@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py caen` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only caen --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
@@ -21,9 +21,9 @@ Twisto's three tram lines, 29 of 38 stops in the commune, from the Normandie agg
 | **Scope** | **Commune of Caen** | The worst line, T1, keeps 19 of 25 stations (76%) in the commune: half or more stays commune-only (Toulouse 52%, Rennes 73%) |
 | **Lines drawn** | Tram T1, Tram T2 and Tram T3 | 3 lines from Twisto's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 311 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | Same place, spelt twice |
+| **Owner call** | **approved** | Same place, spelt twice |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
 - **Same place, spelt twice** (a Licence Ouverte feed): Presqu'île and Presqu'Ile, 12 m apart on T2. The same call as Bordeaux's: recommended, keep the first row of a same-name pair (case and accents ignored) within 150 m on LO feeds.
 

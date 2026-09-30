@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**229 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
@@ -271,6 +272,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The France batch's eight calls approved as recommended; builds go ahead (owner)
+
+- **Owner: "approved, all eight as recommended"**, the list the kit put
+  after "The France batch kit". **The scope rule** stands: under half of the
+  worst line's stations in the commune goes regional. So Nantes is regional,
+  with Bordeaux, Grenoble, Rouen and Valenciennes. **Rouen's `mode` is
+  `light_rail`**, and its page's second sentence reads "Rouen's métro is a
+  light rail running mostly on the street, so every stop gets rings". **On a
+  Licence Ouverte feed only, a same-name pair** (case and accents ignored)
+  within 150 m keeps its first row, never a mean or a rename; ODbL feeds stay
+  pure extracts (Bordeaux's five pairs, Caen's one). **Brest's cable car is
+  drawn** on Toulouse's Téléo precedent: 41 stations, 39 in the commune, the
+  page saying "two tram lines and the cable car". **Nice's route B is
+  drawn.** **Le Havre's geometry comes from the Normandie aggregate** after a
+  `licence-read`, sent the same day, with OpenStreetMap as the fallback.
+  **Valenciennes is built last.** **Builds go ahead in landing groups**
+  (`docs/review_time.md`).
+- **The builds run in the France kit's worktree on a build branch**, never
+  pushed to master, since landing `app/` is deploying. Docs, skills and
+  scripts still go to master on their own commits. The skill, the scaffold
+  script and the 20 briefs now carry the approvals.
 
 ### 2026-09-30 - The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held
 

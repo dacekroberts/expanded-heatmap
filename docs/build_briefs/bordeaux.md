@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py bordeaux` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only bordeaux --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
@@ -21,9 +21,9 @@ The biggest tram network in the batch and the clearest regional case: line A kee
 | **Scope** | **Regional**, 14 communes | The worst line, A, keeps 17 of 47 stations (36%) in the commune. Under half goes regional (Lille); half or more stays commune-only (Toulouse 52%, Rennes 73%) |
 | **Lines drawn** | Tram A, Tram B, Tram C, Tram D, Tram E and Tram F | 6 lines from TBM's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 425 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | Same place, same name, twice |
+| **Owner call** | **approved** | Same place, same name, twice |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
 - **Same place, same name, twice** (a Licence Ouverte feed, so the ODbL pure-extract rule does not bind it): PESSAC CENTRE and Pessac Centre 3 m apart, Les Aubiers 10 m, Porte de Bourgogne 11 m, Hôtel de Ville 73 m and Stade Chaban Delmas 104 m. Recommended for every **LO** feed: keep the first row of a same-name pair (case and accents ignored) within 150 m, no mean coordinate and no rename; on ODbL feeds, never. The alternative is the pure extract everywhere, which draws five doubled stations here.
 

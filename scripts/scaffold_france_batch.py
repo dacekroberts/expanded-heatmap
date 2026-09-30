@@ -32,8 +32,9 @@ DOES NOT WRITE step1_stations.py or fetch_sources.py. Twenty copies of Rennes's
 shared tram module); this script prints the reminder per city.
 
 WHAT EVERY VALUE IS. Measured values come from the inputs above and say so in
-the generated comment. Proposals awaiting the owner (scope, `mode`, `coverage`,
-a line to add or drop) are written as proposals. Values only the build-day
+the generated comment. The owner's calls (scope, `mode`, `coverage`, a line
+added or dropped) were approved as the briefs recommended them on 2026-09-30,
+and the comments say so. Values only the build-day
 feed can supply (route_ids, colours, gate 3's independent count) are TODOs:
 feeds are rolling, so they are read at build and never copied from a cache.
 """
@@ -68,7 +69,7 @@ HELD = {
 # One row per city. `lines` are the feed's route_short_name values KEPT; `drop`
 # names what the feed carries on rails and the map leaves out, with the reason;
 # `names` are the proposed public names (verified at build). `scope`, `mode`
-# and `coverage` are PROPOSALS for the owner, made in each city's brief.
+# and `coverage` are as each brief recommended, APPROVED by the owner 2026-09-30.
 # `route_types` is what the feed types those lines as - Reims and Rouen type
 # theirs 1 - which is why the mode is decided per city, never from the flag.
 BATCH = {
@@ -79,7 +80,7 @@ BATCH = {
     "nice": dict(name="Nice", operator="Lignes d'Azur", route_types=("0",),
                  lines=["L1", "L2", "L3", "B"], scope="commune",
                  names={"L1": "Tram 1", "L2": "Tram 2", "L3": "Tram 3",
-                        "B": "TODO: route B's public name (Aéroport Terminal 2 - CADAM, 6 stops; an owner call to draw it)"},
+                        "B": "TODO: route B's public name (Aéroport Terminal 2 - CADAM, 6 stops; drawn, owner 2026-09-30)"},
                  feed_notes="feed_info.txt self-attests"),
     "strasbourg": dict(name="Strasbourg", operator="CTS", route_types=("0",),
                        lines=list("ABCDEF"), scope="commune",
@@ -130,11 +131,10 @@ BATCH = {
                  names={k: f"Tram {k}" for k in ("T1", "T2", "T3")},
                  feed="normandie", agency_id="ATOUMOD029:Network:029:LOC",
                  feed_notes="no feed of its own: the Normandie aggregate, agency Twisto"),
-    "brest": dict(name="Brest", operator="Bibus", route_types=("0",),
-                  lines=["A", "B"], scope="commune",
-                  names={"A": "Tram A", "B": "Tram B"},
-                  pending={"C": "the cable car (route_type 6, Jean Moulin - Ateliers): an owner call - Toulouse's Téléo precedent draws route_type 6"},
-                  feed_notes="feed_info.txt self-attests; ends 2026-12-20"),
+    "brest": dict(name="Brest", operator="Bibus", route_types=("0", "6"),
+                  lines=["A", "B", "C"], scope="commune",
+                  names={"A": "Tram A", "B": "Tram B", "C": "Téléphérique"},
+                  feed_notes="feed_info.txt self-attests; ends 2026-12-20. The cable car C (route_type 6) is DRAWN (owner, 2026-09-30, Toulouse's Téléo precedent). The FIC_LIB1/2 stops are track switches, not stations"),
     "besancon": dict(name="Besançon", operator="Ginko", route_types=("0",),
                      lines=["T1", "T2"], scope="commune",
                      names={k: f"Tram {k}" for k in ("T1", "T2")},
@@ -350,7 +350,7 @@ RING_LABELS = @@RING_LABELS@@
 
 # --- Station scope ----------------------------------------------------------
 
-# PROPOSED to the owner with the build (docs/build_briefs/@@SLUG@@.md):
+# APPROVED by the owner 2026-09-30, as docs/build_briefs/@@SLUG@@.md recommended:
 @@SCOPE_WHY@@
 #   mode     @@MODE@@ (the macro map's dot colour: what step 1 keeps, never the
 #            feed's route_type flag)
@@ -369,10 +369,12 @@ LINE_KEYS = @@LINE_KEYS@@
 # (Le Havre, Valenciennes) - they collapse onto the key.
 ROUTE_IDS = []
 @@DROP@@
-# Station rule (owner, 2026-09-29, every French ODbL feed; the kit applies it
-# to every French feed): the feed's own parent_station row, else the FIRST
-# platform in stops.txt order per unchanged stop_name. Never a mean, never a
-# rename. Measured @@SDATE@@: @@N_STATIONS@@ stations network-wide.
+# Station rule (owner, 2026-09-29 and 09-30): the feed's own parent_station
+# row, else the FIRST platform in stops.txt order per unchanged stop_name.
+# Never a mean, never a rename. On a Licence Ouverte feed ONLY, a same-name
+# pair (case and accents ignored) within 150 m keeps its first row; on an ODbL
+# feed, never. Fictitious FIC_ stops are not stations.
+# Measured @@SDATE@@: @@N_STATIONS@@ stations network-wide.
 @@SCOPE_ASSERT@@
 # GATE 3: an independent per-line count, from outside the feed.
 # TODO: the operator's own stop list or OpenStreetMap's route relations.

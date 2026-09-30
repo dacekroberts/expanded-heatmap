@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py rouen` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only rouen --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
@@ -21,10 +21,10 @@ Astuce's "Métro" is a light rail with a central tunnel, one line with two branc
 | **Scope** | **Regional**, 5 communes | The worst line, Métro, keeps 10 of 31 stations (32%) in the commune. Under half goes regional (Lille); half or more stays commune-only (Toulouse 52%, Rennes 73%) |
 | **Lines drawn** | Métro | 1 line from Astuce's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 382 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | Mode |
-| **Owner call** | see below | Page wording |
+| **Owner call** | **approved** | Mode |
+| **Owner call** | **approved** | Page wording |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
 - **Mode**: recommended **`light_rail`**, not `tram` and not `metro`. The feed types it `route_type 1`, but the rule is what step 1 keeps, not the flag: street-running light rail with a central tunnel, Calgary's and Houston's class.
 - **Page wording**: the approved template says "{City} has no metro: its trams are its rapid transit", and the line's public name is "Métro". Recommended: "Rouen's métro is a light rail running mostly on the street, so every stop gets rings", one sentence changed for this city only. Otherwise the template stands.

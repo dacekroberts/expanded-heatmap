@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py valenciennes` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only valenciennes --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
@@ -21,9 +21,9 @@ Two Transvilles tram lines across two EPCIs; 12 of 48 stops are in the commune, 
 | **Scope** | **Regional**, 13 communes | The worst line, T2, keeps 9 of 37 stations (24%) in the commune. Under half goes regional (Lille); half or more stays commune-only (Toulouse 52%, Rennes 73%) |
 | **Lines drawn** | Tram T1 and Tram T2 | 2 lines from Transvilles's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 510 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | Build it at all? |
+| **Owner call** | **approved** | Build it at all? |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
 - **Build it at all?** The tram list marks it low interest (1,027 storefronts near stations in the commune, 1,984 regionally). Recommended: build it last, regional, with the rest of the batch, since the kit makes it cheap.
 

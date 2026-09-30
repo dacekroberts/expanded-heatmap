@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py grenoble` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only grenoble --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 

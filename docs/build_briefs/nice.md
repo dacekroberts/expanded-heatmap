@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py nice` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only nice --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
@@ -19,11 +19,11 @@ Every Lignes d'Azur tram stop is inside the commune, so scope costs nothing; the
 | **`mode`** (macro dot colour) | **`tram`** | Street trams only, no metro (Dublin's and Riga's class) |
 | **`coverage`** (macro dot fill) | **`full`** | SIRENE carries all three buckets: 4,230 retail, 3,544 food, 2,372 personal in the commune (screen) |
 | **Scope** | **Commune of Nice** | The worst line, L1, keeps 22 of 22 stations (100%) in the commune: half or more stays commune-only (Toulouse 52%, Rennes 73%) |
-| **Lines drawn** | Tram 1, Tram 2, Tram 3 and TODO: route B's public name (Aéroport Terminal 2 - CADAM, 6 stops; an owner call to draw it) | 4 lines from Lignes d'Azur's feed; public names verified at build |
+| **Lines drawn** | Tram 1, Tram 2, Tram 3 and TODO: route B's public name (Aéroport Terminal 2 - CADAM, 6 stops; drawn, owner 2026-09-30) | 4 lines from Lignes d'Azur's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 415 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | Route B |
+| **Owner call** | **approved** | Route B |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
 - **Route B** (`Aéroport Terminal 2 - CADAM / Centre Administratif`, 6 stops, all in Nice, coloured FFDD00): the feed types it tram and it runs on tram track. Recommended: **draw it** under its public name, verified at build. It adds one line to the page's count.
 
@@ -81,7 +81,7 @@ The chain is the five built cities' (`france_register.py`), which reproduced Ren
 
 The owner approved the French tram-city text word for word on 2026-09-29 (the `france-tram-city` skill carries it). This city's braces, as measured so far:
 
-- **{N} {operator} tram lines … {lines}**: 4 Lignes d'Azur lines, **Tram 1, Tram 2, Tram 3 and TODO: route B's public name (Aéroport Terminal 2 - CADAM, 6 stops; an owner call to draw it)**.
+- **{N} {operator} tram lines … {lines}**: 4 Lignes d'Azur lines, **Tram 1, Tram 2, Tram 3 and TODO: route B's public name (Aéroport Terminal 2 - CADAM, 6 stops; drawn, owner 2026-09-30)**.
 - **Scope**: the **commune of Nice**; no stop is left out.
 - **{Share} non-diffusible**: ~12% at the screen; step 2's figure goes on the page.
 - **Ratio to OpenStreetMap's restaurants**: ~2.3× at the screen; the build's figure goes on the page.
