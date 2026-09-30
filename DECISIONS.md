@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 
@@ -269,6 +270,49 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The six Czech tram cities briefed; three licence calls (owner)
+
+- **Briefed Brno, Ostrava, Plzeň, Olomouc, Liberec (Regional) and Most +
+  Litvínov** (`docs/build_briefs/`, each brief-check passing: 6/6, 3/3, 3/3,
+  3/3, 4/4 and 4/4). All six are on Prague's national chain, placed 100%
+  through RÚIAN, with ROS02 dated 2026-08-31.
+  - **Rings:** every city takes halved rings under the owner's spacing
+    rule. The median gaps run 294–514 m.
+  - **RÚIAN controls:** each config's coordinate check was measured
+    against OSM or the building's own coordinates. Brno used the New Town
+    Hall, Ostrava the Magistrát at 30. dubna 35, Plzeň náměstí Republiky
+    1, Olomouc Horní náměstí 583, Liberec its town hall and Most Radniční
+    1/2. Jablonec's and Litvínov's are left to the build, after Overpass
+    timeouts.
+  - **Ostrava** is in **UTM 34N**, not 33N: 18.29° E.
+- **Brno's tram feed: KORDIS's own CC BY 4.0 grant, and the file is
+  fetched from `kordis-jmk.cz` (owner).**
+  - **The rejected reading:** data.brno.cz's retired 2021 licence page,
+    which adds a keep-the-licence clause and a resale ban.
+  - **Line geometry** comes from OSM, since the feed has no `shapes.txt`.
+  - **Line colours** come from the feed's `route_color`.
+  - **H4 and P1** (heritage and event services, no weekday trips) are
+    recommended out.
+- **Olomouc's trams come from OSM (owner).** DPMO's feed declares nothing.
+  Permission would rest on a reading of zákon 106/1999 §4b, and the feed's
+  colours are all white.
+- **Plzeň's PMDP feed was read: PERMITTED.** It contradicts itself (CC BY
+  in the description, no-rights terms on the distribution), and both
+  permit use. It has no colours and no shapes, so OSM draws the lines and
+  the feed is at most a stop-name cross-check.
+- **Long Beach's breach-only indemnity was accepted (owner)**, as
+  Hong Kong's, Sacramento's and Palma's were. The licence is an express
+  grant in the MapsLB Terms of Use.
+- **Open calls left in the briefs:**
+  - **Line colours:** OSM tags none in the five OSM cities, so a chosen
+    palette is needed (Le Havre's precedent).
+  - **Ostrava's line 5:** a suburban line with 3 of 10 stops in the city;
+    leaving it out is recommended, which costs two stops.
+  - **Liberec's scope:** with Jablonec is recommended; Liberec alone
+    passes at 67%.
+  - **Most + Litvínov:** 1,030 storefronts; building it last is
+    recommended.
 
 ### 2026-09-30 - Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)
 

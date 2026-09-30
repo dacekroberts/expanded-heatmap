@@ -164,7 +164,9 @@ the mode is decided per city. TER is excluded in every built French city.
 | Valenciennes | T1, T2 | 12 / 48 (T2: 24%) | 514 / 412 / 192 (2.02×) | 1,027; 1,984 over 13 communes in 2 EPCIs | **Regional scope**; low interest |
 
 **🇨🇿 Czechia (6)** — ROS02 establishments, RES activity and the RÚIAN join, as
-Prague. `czechia_register.ruian()`'s coordinate control is per city now.
+Prague. **Briefed 2026-09-30**: `docs/build_briefs/` brno, ostrava, plzen, olomouc,
+liberec (Liberec (Regional), with Jablonec recommended) and most (with Litvínov);
+trams from OSM everywhere but Brno, whose stops come from KORDIS's CC BY feed. `czechia_register.ruian()`'s coordinate control is per city now.
 
 | City | Rail (stations in the town) | Spacing | R / F / P; restaurants × OSM | Build-time calls |
 |---|---|---|---|---|

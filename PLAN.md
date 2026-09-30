@@ -337,7 +337,12 @@ Desktop is unaffected — the label is fully visible there.
         shuttle fails beyond Gramacho**: SuperVia's own notices (the 12-minute
         peak runs Central–Gramacho only; one notice gave Gramacho–Saracuruna
         a 50-minute average). The three stations the add-on needs, up to
-        Gramacho, pass. (6) Long Beach: licence read running.
+        Gramacho, pass. (6) **Long Beach: PERMITTED WITH CONDITIONS**. Its
+        "Business Licenses Public View" (20,264 active, in-city, not home-based)
+        carries an express grant in the MapsLB Terms of Use. **The breach-only
+        indemnity was accepted by the owner (2026-09-30)**. Never imply
+        endorsement. Withhold `FULLNAME` where there is no `DBANAME` (12,854),
+        and drop the Pacific placeholder points.
       - **Reads from the owner's own browser**: Burnaby (Vancouver's
         rescope), Tempe, **Arlington** (its "Active Business Licenses" for a
         D.C. add-on: 11 of D.C.'s 32 excluded Virginia stations), Zaragoza,
