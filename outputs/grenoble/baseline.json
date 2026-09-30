@@ -1,0 +1,16 @@
+{
+  "food": 2256,
+  "masked": 15359,
+  "named": 3214,
+  "personal": 1001,
+  "platforms": 168,
+  "retail": 2524,
+  "stations_in_scope": 81,
+  "stations_line_A": 31,
+  "stations_line_B": 22,
+  "stations_line_C": 22,
+  "stations_line_D": 22,
+  "stations_line_E": 31,
+  "stations_network": 81,
+  "storefronts": 5781
+}

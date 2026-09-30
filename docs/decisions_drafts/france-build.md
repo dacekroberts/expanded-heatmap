@@ -5,6 +5,49 @@ Entries for `DECISIONS.md`, newest first, each exactly as it should land
 in when handed off). Anything that must cite a DECISIONS verdict cites this
 file until then.
 
+### 2026-09-30 - France landing group 2 built: Montpellier, Strasbourg, Le Havre, Caen, Rouen, Bordeaux, Nantes, Grenoble, Valenciennes
+
+- **All twenty French cities are now built through step 3**: group 1 on
+  `france-build`, group 2 on `france-build-2`. Group 2's storefronts:
+  Montpellier 6,276, Strasbourg 5,614, Le Havre 2,433, Caen 2,214, Rouen
+  (Regional) 4,168, Bordeaux (Regional) 12,807, Nantes (Regional) 6,570,
+  Grenoble (Regional) 5,781, Valenciennes (Regional) 2,330. Within a ring:
+  87%, 85%, 60%, 71%, 62%, 65%, 63%, 78%, 69%.
+- **Masked at source**: 15.8% to 19.1%. **`96.09Z`**: 9.2% to 15.6%.
+  **Nantes's 15.6% is just above the five cities' 14.0% top**. It is near
+  enough that the precedent stands (both catch-alls excluded); a share far
+  outside would have gone to the owner.
+- **The personal-exposure check passes** for all nine: 0 contact details,
+  and 0 person-like names at a residential unit.
+- **The Licence Ouverte same-name rule acted where the kit said it would.**
+  Bordeaux's five pairs and Caen's Presqu'île pair each keep their first row,
+  so Bordeaux's lines count one or two fewer than the kit's table and Caen's
+  T2 17, not 18. The configs record why.
+- **OpenStreetMap geometry for five cities, and a template departure for
+  the owner.** Montpellier, Strasbourg, Le Havre, Caen and Rouen draw their
+  track from OSM. The approved sentence "from the operator's own published
+  timetable feed" would be untrue on those pages, so they read "their stops
+  from the operator's own published timetable feed and their track from
+  OpenStreetMap". Caen and Rouen say "the Normandie region's published
+  timetable feed", since their stops come from the aggregate. **A proposed
+  sentence for the owner at review time.** The rest of the template is
+  unchanged. Montpellier's OSM line 4 is the loop's 4A relation.
+- **Gate 3 again reads low on branched lines** (the single-relation count):
+  - Rouen's métro, 20 against 31: two branches, Georges Braque and
+    Technopôle;
+  - Montpellier's line 3, 26 against 29: Lattes and Pérols;
+  - Bordeaux's A, B and E;
+  - Nantes's 2, 25 against 34;
+  - Grenoble's C, D and E: OSM's relations are incomplete, E reading 17
+    against 31;
+  - Strasbourg's A, C and E, and Valenciennes's T2, by one or two.
+  Recorded as OSM has them.
+- **Notices 69-71** (TaM, M réso, LiA) are numbered in
+  `docs/data_sources.md`. **Renumber at landing**: `check_provenance.py`
+  wants the list contiguous from master's last number, and the Band B
+  branches also carry a 69. The Band B session and cleanup agree to
+  renumber in landing order.
+
 ### 2026-09-30 - France's pages take 100-119; three ODbL notices; group 2 on a stacked branch
 
 - **The twenty French pages are numbered 100-119** (Le Mans 100 to
