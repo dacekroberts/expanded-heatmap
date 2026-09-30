@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**222 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**223 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Second batch review: nine branches merged, 75 cities; builds pause](#2026-09-29---second-batch-review-nine-branches-merged-75-cities-builds-pause)
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Houston built: METRORail from OSM, a joined sales-tax register, a person's permit shown by address](#2026-09-29---houston-built-metrorail-from-osm-a-joined-sales-tax-register-a-persons-permit-shown-by-address)
@@ -261,6 +262,38 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Second batch review: nine branches merged, 75 cities; builds pause
+
+- **Nine branches merged on `review-batch-2` for one review (owner-called,
+  run in steps with a stop at 98% of the weekly limit):** stockholm-catering,
+  category-continuity, suwon, bucheon, bergen, aarhus, buffalo, sacramento
+  and houston. 68 -> 75 built, 23 countries; candidates 71 -> 66, Band A
+  empty (the five light-rail cities built). Shared lists were reconciled
+  once, after all seven city branches were in, rather than per branch:
+  the master list, `app/cities.py` (each city's entry taken whole from its
+  branch), the SEMAS notice (six Korean cities), the OpenStreetMap
+  rail-geometry notice (four new clauses), TEXT_WIDTH, REGISTRIES and the
+  document lists. Two DECISIONS entries that both sides carried were
+  duplicated by the merges and removed (identical bodies).
+- **Follow-on work done in the merge:** Stockholm's step 2 re-run (5,218,
+  as its branch recorded); the continuity table's two Stockholm rows made
+  `fixed(` now that stockholm-catering has landed; Prague re-rendered with
+  Flora listed as closed for works (57 drawn, 1 excluded; its business
+  figures unchanged); Copenhagen re-rendered under the store-number rule
+  (exactly 33 franchisee names now show their address, name_shown 9,130 ->
+  9,097, storefronts unchanged); Riga added to the spacing-filter sentence;
+  the nine Brazilian enumerator-exclusion counts refreshed from the category
+  batch's step-2 logs (São Paulo's vehicle and repair 40,992 -> 41,122).
+- **Copenhagen's privacy verdict stands: publish.** `check_personal_exposure
+  copenhagen` after the rule: 0 e-mails, 0 phone numbers, 0 c/o markers;
+  1,993 person-like names by the heuristic (2,004 at the 2026-09-20
+  verdict); 4 at a residential unit (0.03%, the same 4, and the same
+  measurement gap).
+- **Aarhus's stored baseline is deferred (owner):** its second full read of
+  the national CVR files was skipped to save usage, since the build had
+  already run the chain and its drift check was zero; `drift_check.py
+  aarhus --update-baseline` records it at the next heavy slot.
 
 ### 2026-09-29 - Stations closed for works: drawn as the timetable runs, in every city (owner)
 
