@@ -22,7 +22,7 @@ cities carry three buckets?* **Answer it once and three cities move.**
 | **Rings** | halved: **182 stop names, median gap 283 m** | The owner's spacing rule |
 | **Call (approved): the Forchbahn S18** | **Out**, named on the page with the S-Bahn | 4 of its 20 stops inside (20%) |
 | **Call (approved): Glattalbahn stubs** | **12 out** (2 of 18 inside, 11%); **10 in** (21 of 29, 72%) | The stub test, measured |
-| **Measured, same rule: tram 20** (Limmattalbahn) | **Out** (4 of 26 inside, 15%) | Not in the kit's list; the stub rule decides it the same way |
+| **Call (approved, call 25): tram 20** (Limmattalbahn) | **Out** as a stub (4 of 26 inside, 15%) | The owner, 2026-09-30 |
 | **Refs 50 and 51** | Draw only if they are daytime services (confirm at build) | OSM: Auzelg – Frankental (31 of 33 inside), Seebach – Altstetten Nord (27 of 27) |
 
 **Measured 2026-09-30** (live OSM, relations by ref, stop members inside the Stadt): trams 2 (83%), 4 (94%) and 10 (72%) pass; 3, 5–9,

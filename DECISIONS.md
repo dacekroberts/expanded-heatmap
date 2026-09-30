@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**244 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)](#2026-09-30---new-working-rules-a-memory-gate-for-two-heavy-jobs-decisions-drafts-overpass-pacing-pre-permitted-downloads-and-prose-owner)
 - [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
 - [Tram kit complete: all ten briefs checked; four last points for the owner; builds held](#2026-09-30---tram-kit-complete-all-ten-briefs-checked-four-last-points-for-the-owner-builds-held)
 - [Dallas's address-layer indemnity accepted (owner)](#2026-09-30---dallass-address-layer-indemnity-accepted-owner)
@@ -285,6 +286,52 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)
+
+- **The owner activated all builds and set working rules, relayed by the
+  tram kit and confirmed in the cleanup session (2026-09-30).** They are
+  written into `CLAUDE.md`, `docs/session_roles.md`, the `decisions-entry`
+  skill and `docs/rule_history.md`.
+- **Heavy jobs: at most two, each admitted by `scripts/heavy_job.py` against
+  measured available memory.**
+  - The relayed reading, two jobs whose peaks sum to 12 GB, was dropped: at
+    the time psutil showed 2.3 GB available of 15.9 GB. The apps held about
+    8 GB, and an orphaned `grep` (PID 17392, parent session gone) held
+    4.7 GB. It had ended by the next reading, 6.2 GB available.
+  - The gate is a wrapper (`run ... -- <command>`). It admits a job if fewer
+    than two are running and available memory, less what running jobs have
+    yet to claim, covers the peak plus 2 GB. It removes the entry at exit and
+    records the measured peak.
+  - The ledger is `data/_heavy_jobs.json`, shared through the `data/`
+    junction and gitignored (`data/_heavy_jobs*`). Dead pids drop on read,
+    and writes take an O_EXCL lock.
+  - A selftest (9 cases, touching nothing) runs in `check_all.py`. A smoke
+    run was admitted and measured 0.31 GB.
+  - A gate was chosen over a memory monitor: a monitor polls all day and
+    reacts after the damage.
+  - Measured peaks so far: France's SIRENE step 2 0.37 GB, the Czech
+    register control 0.37 GB.
+- **DECISIONS drafts:** build and docs sessions write
+  `docs/decisions_drafts/<session>.md`, and cleanup folds them in when the
+  owner hands them off.
+  - `check_category_continuity.py` now accepts a heading from a drafts file,
+    so an exception can cite its draft before the fold.
+  - `check_provenance.py` skips a drafts file's `item N` citations, as it
+    does DECISIONS', since several branches can claim the same notice number
+    until landing.
+- **Overpass:** one query in flight per session, one per city, and at least
+  60 s after a 504 or 429.
+- **Downloads and prose:**
+  - Sources named in a build's brief and skill may be fetched without asking,
+    with licence rows and notices as usual. A source not in the brief goes
+    to the owner first.
+  - Page text from an approved template needs no read-back in chat. A
+    sentence the template does not cover is flagged in the session's drafts
+    file and at review time.
+- **Not written as standing rules:** the tram kit's priority over the Czech
+  builds, and the owner's change of plan (no 5-hour throttle). Both are
+  session coordination, not project rules.
 
 ### 2026-09-30 - Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)
 

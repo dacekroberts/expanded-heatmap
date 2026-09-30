@@ -17,9 +17,9 @@ first trams-only city): read `pipeline/riga/config.py` and Riga's page first.
 | **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
 | **`coverage`** (macro dot fill) | **`narrowed`** | Riga's two layers, merged (Riga is `narrowed`) |
 | **Scope** | **Daugavpils (ATVK 0002000)** | See the rail section |
-| **Lines drawn** | Route 1 only (see the call); routes 2–5 on the owner's word | |
-| **Rings** | halved: median gap 298 m over all 38 stops (recompute for the lines drawn) | The owner's spacing rule (`docs/ring_rules.md`) |
-| **Call (approved): Routes drawn** | **Route 1 only** (every 10–15 min by day). Routes 3 and 5 (one loop, each direction every 20–30 min), 2 (gaps of an hour or more) and 4 (hourly) fail the kit's 20-minute rule (Buffalo's flat 20 is the slowest drawn); stops served only by them go to `excluded_stations.csv` as infrequent | |
+| **Lines drawn** | **All five routes, 1–5** (38 stops), each route's wait stated on the page | The owner, 2026-09-30 (call 28) |
+| **Rings** | halved: median gap 298 m over all 38 stops | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (owner, overruling call 28): Routes drawn** | **All routes 1–5.** The page states the waits: route 1 every 10–15 min, the Stropu loop (3 and 5) every 20–30, routes 2 and 4 about hourly. The owner: "like with buffalo 50% of network shouldn't fall if the norm is longer waits"; the 20-minute floor now drops only an outlier route on a network that otherwise meets it | |
 | **Call (approved): Colours** | chosen at build | |
 
 ---
@@ -73,7 +73,7 @@ to sell alcohol, as on Riga's page; say so there as Riga's page does.
 
 - **OSM** (`osm-rail`): route=tram relations for refs 1, 2, 3 and 4 (and a line 3 loop, Cietoksnis – Stropu ezers – Ķīmija – Cietoksnis), operator Daugavpils Satiksme. **Every stop is inside the city**: 38 stop names on the routes, and all but one (Stropu ciemats, on the routes but not tagged as a stop) are tagged tram stops.
 - **Routes 1–5, of which 3 and 5 are one loop run in opposite directions** (Cietoksnis – Stropu ezers – Ķīmija): OSM tags both as ref 3.
-- **Frequency, measured 2026-09-30** (the operator's timetable as published in its GTFS, read for the headway only, Wednesday 2026-10-07, 07–19h, worst hour one way at each route's busiest stop): **route 1 4–6 trams an hour**; **routes 3 and 5 2–3 each**; **route 2 0–3** (hours with none); **route 4 1**. An hourly street tram has no precedent; the tram kit recommends drawing a route only at every 20 minutes or better by day (Buffalo's flat 20 is the slowest drawn), so **route 1 only**, approved: the kit's call 6 draws routes 2–4 only at 20 minutes or better, and the timetable shows none do, so **route 1 only**.
+- **Frequency, measured 2026-09-30** (the operator's timetable as published in its GTFS, read for the headway only, Wednesday 2026-10-07, 07–19h, worst hour one way at each route's busiest stop): **route 1 4–6 trams an hour**; **routes 3 and 5 2–3 each**; **route 2 0–3** (hours with none); **route 4 1**. The tram kit recommended drawing route 1 only (call 28); **the owner overruled it on 2026-09-30: all five routes are drawn**, with each route's wait stated on the page (route 1 every 10–15 min, the Stropu loop 20–30, routes 2 and 4 about hourly), since half a network should not fall where longer waits are the norm (Buffalo's precedent).
 - **No `colour`** on any relation: choose a palette (Le Havre's precedent).
 
 ---
