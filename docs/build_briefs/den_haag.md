@@ -19,7 +19,8 @@ OpenStreetMap.** Run `python scripts/brief_check.py den_haag` before writing cod
 | **Rings** | halved: **161 stop names, median gap 335 m** | The owner's spacing rule |
 | **Call (approved): RandstadRail E** | **Out**, as a stub: 4 of 23 stops inside (17%) | RET's metro line; its Den Haag stops are served by trams 3 and 4 |
 | **Call (approved): the 158 pending permits** | **Out** | In behandeling 125, Ingekomen 31, Advies aangevraagd 2: not granted |
-| **Tram 1** | **Drawn**: 19 of 37 inside (51%) | Under Toulouse's 52%, over the 42% the owner accepted for Minneapolis and Pittsburgh; noted for the owner |
+| **Call (approved, call 26): tram 1** | **Drawn**: 19 of 37 inside (51%) | The owner, 2026-09-30 (over the 42% accepted for Minneapolis and Pittsburgh) |
+| **Call (approved, call 27): the data date** | The page carries: "The permit data runs to 2025. The city last edited its permit layer on 23 May 2025, so premises that opened or closed since then may be missing or still shown." | The owner, 2026-09-30 |
 
 ---
 
@@ -60,7 +61,7 @@ OpenStreetMap.** Run `python scripts/brief_check.py den_haag` before writing cod
 
 ## Build-time calls
 
-1. **Tram 1 at 51%**: drawn (recommended; the 42% precedent).
+1. **Tram 1 at 51%**: drawn (approved, call 26).
 2. **Colours for 10 and 34**, and one of 1/19 moved.
 
 ```brief-checks
