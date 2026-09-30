@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**231 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**232 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
 - [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
+- [The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod](#2026-09-30---the-normandie-aggregate-read-its-tram-shapes-are-stop-to-stop-so-caen-rouen-and-le-havre-draw-from-openstreetmap-its-concédant-is-atoumod)
 - [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
@@ -337,6 +338,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **The trams-only page-text template is drafted in chat for the owner, not
   written to the skill**, which lists its parts until the owner approves
   it.
+### 2026-09-30 - The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod
+
+- **The approved `licence-read` of "Agrégat des réseaux urbains et
+  interurbains de Normandie"** (NAP 5ced52ed8b4c4177b679d377) found a data
+  fact first. **Every tram shape in it is an `AUTO_` shape whose points are
+  exactly the trip's stops**: straight lines between stops, not track. The
+  agent found it on the 2026-09-27 copy, and it was confirmed on 2026-09-30's
+  copy: Rouen's métro 20 of 20, Le Havre's A and B 9 of 9, Caen's T1 25 of 25,
+  T2 17 of 17 and T3 15 of 15. Its buses carry real `CALC_` shapes.
+- **So Le Havre takes its geometry from OpenStreetMap**, the fallback the
+  owner approved, and uses nothing from the aggregate. Its LiA stops equal
+  LiA's own ODbL feed to 5 decimals, so it adds nothing. That makes the one
+  ambiguity the read found moot: whether LiA's part of an aggregate declared
+  LO 2.0 stays ODbL (Atoumod's legal notice says partners keep their data).
+  **Caen and Rouen also draw their lines from OpenStreetMap**, a builder's
+  call on the same grounds as Montpellier and Strasbourg, whose feeds have no
+  shapes. Their stations still come from the aggregate.
+- **The Concédant is Syndicat mixte Atoumod** (SIREN 200052488; Le Havre
+  Seine Métropole, Caen la Mer, Métropole Rouen Normandie and the Région are
+  among its members). It is not the Région Normandie, as the kit's briefs had
+  said, and not Cityway, the exporter named in `feed_info.txt`. Caen and
+  Rouen: **PERMITTED WITH CONDITIONS** under LO 2.0. The credit names
+  Atoumod and the date of last update, taken from the data.gouv resource's
+  `last_modified` at fetch (`feed_info.txt` has none). No logos; own colours.
+  The briefs, the skill and the scaffold's notes are corrected.
 
 ### 2026-09-30 - The France batch's eight calls approved as recommended; builds go ahead (owner)
 
