@@ -18,9 +18,9 @@ owner's calls with recommendations, say when it is done, and wait for the go.
 | New Orleans | United States | many | `new-orleans.md`, 2026-09-30: 2/2 |
 | Tucson | United States | many | `tucson.md`, 2026-09-30: 3/3 |
 | Florence | Italy | Milan, Rome | `florence.md`, 2026-09-30: 4/4 |
-| Zurich | **Switzerland: new country** (`add-country` first) | nothing | `zurich.md`, from 2026-09-23, before T1 (staging refreshes it) |
-| Göteborg | Sweden | Stockholm | `goteborg.md`, before T1 (staging refreshes it) |
-| Den Haag | Netherlands | Amsterdam, Rotterdam (BAG) | none |
+| Zurich | **Switzerland: new country** (`add-country` first) | nothing | `zurich.md`, refreshed 2026-09-30: 4/4 |
+| Göteborg | Sweden | Stockholm | `goteborg.md`, refreshed 2026-09-30: 4/4 |
+| Den Haag | Netherlands | Amsterdam, Rotterdam (BAG) | `den_haag.md`, 2026-09-30: 3/3 |
 
 **The briefs are STAGING's** (owner, 2026-09-30: staging is writing them,
 as it is the Czech six). Do not write or edit them here. Read them as they
@@ -120,33 +120,23 @@ re-asked.
 | Den Haag | 23 | `coverage` | `narrowed`, "Merged", on Rotterdam's shape, not the tram list's `full` | kit; asked of staging |
 | Den Haag | 24 | 158 pending horeca permits | Out: only granted or notified premises are drawn | list |
 
-## 3. The briefs - staging's; this session's part
+## 3. The briefs - DONE 2026-09-30: all ten landed and checked
 
-Staging writes the ten briefs. This session:
-- reads each brief as it lands and checks it against the skill;
-- makes sure it states the proposed `mode` and `coverage` and the owner's
-  calls with a recommendation, and asks staging for anything missing;
-- collects the calls across the ten, so the owner can approve them in
-  one sitting, as France's eight were approved.
+Every brief passes `brief_check.py` (Zurich and Liepāja on a re-run, after
+Overpass mirrors disagreed), carries an owner table, the approvals and
+`vs_config` fields. **Four points the last briefs raised, for the owner:**
 
-What the briefs still have to settle, from `docs/tram_city_list.md`
-(staging's to do, listed here so the skill covers them):
-- **Kansas City**: RideKC's GTFS terms (unread); data frozen 2026-01-15,
-  so the page gives the date (owner); `dba_name` is often a person.
-- **New Orleans**: RTA's GTFS (unread); `ownername` goes through
-  `check_personal_exposure.py`; the street-stop filter.
-- **Tucson**: BUSLIC's "as is" terms; about 6,250 licences are
-  individuals'.
-- **Florence**: the Comune's four layers (a full read); GEST's GTFS.
-- **Daugavpils and Liepāja**: VZD's `aw_eka.csv` (a new source row); rail
-  from OSM.
-- **Odense**: placement through DAR (owner, 2026-09-27).
-- **Zurich**: `add-country` for Switzerland (LV95 `EPSG:2056`), and
-  partial retail from alcohol-licensed shops (owner).
-- **Göteborg**: the CSV, never the rowstore JSON; undated rows (owner).
-- **Den Haag**: Amsterdam's precedent for the horeca layer (owner); never
-  fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM`; RandstadRail E and the
-  `mode`.
+| # | City | Point | Recommendation |
+|---|---|---|---|
+| 25 | Zurich | Tram 20 (Limmattalbahn) keeps 4 of 26 stops in the city (15%), not in the kit's list | Out as a stub, the rule of call 19 |
+| 26 | Den Haag | Tram 1 keeps 19 of 37 stops in the city (51%), under Toulouse's 52% | Drawn to its end with the stops outside listed: over the 42% accepted for Minneapolis's Green and Pittsburgh's Silver, and the horeca layer is city-only |
+| 27 | Den Haag | The horeca layer was last edited 2025-05-23; the template's currency paragraph named only Kansas City and Göteborg | Add: "**The permit data runs to 2025.** The city last edited its permit layer on 23 May 2025, so premises that opened or closed since then may be missing or still shown." |
+| 28 | Daugavpils | Call 2's floor leaves route 1 only: 19 of 38 stop names (OSM, 2026-09-30); the Stropu loop (3 and 5, 20-30 minutes each way) and routes 2 and 4 fail | Build as approved, with the 19 other stops listed as infrequent and the page naming the routes left out |
+
+Settled inside approved rules, no call: Den Haag's `mode` is `tram` (every
+drawn line is OSM `route=tram` once E is out); Zurich's 50 and 51 are drawn
+only if they meet the 20-minute floor; colours that clash or fail contrast
+(Den Haag's 1 and 19, Göteborg's white line 1) follow Lille's darkening.
 
 ## Standing rules (as the France kit)
 
