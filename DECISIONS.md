@@ -336,6 +336,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   a sales-tax permit is held by sellers of taxable goods and services, so
   Personal services are thin. A thin layer, not a structural gap, so
   coverage stays "full" (`check_macro_facts.py`'s rule).
+- **The Comptroller's licence, read (the `licence-read` agent): permitted,
+  nothing to display or do.** The dataset's "Public Domain" label is the
+  Comptroller's own grant, in its Privacy and Security Policy: public domain
+  "as permitted by law", except pictures, official symbols and marks. The
+  pointer was followed through Tax Code ch. 151 (§151.027(a) makes permit
+  information public) and Gov't Code chs. 552 and 2054; none restricts reuse,
+  and no Texas statute limits this list's use for solicitation. The map uses
+  no seal or mark.
 - **Region "United States East"**, by the owner's 2026-09-22 split (West is
   California). The macro label sits level to the right of the dot, width
   56.9 px; it passes at dy -8 to +6.
