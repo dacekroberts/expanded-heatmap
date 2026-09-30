@@ -4,6 +4,78 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - The six Czech business legs built; Brno's stations from the feed, with request stops kept and depot runs dropped
+
+- **All six business legs ran on the shared chain, each RÚIAN control
+  passing, and 100% of storefronts were placed.** Brno has 7,200. Plzeň
+  has 3,508, Olomouc 2,235 and Ostrava 3,960. Liberec (Regional) has
+  2,488, of which Liberec 1,873 and Jablonec 615. Most (Regional) has
+  1,025, of which Most 787 and Litvínov 238. Each is slightly under the
+  screen's 2026-09-27 figure (Brno 7,229, Liberec 2,498, Most 1,030).
+  - **Why lower:** the screen ran before the owner's 2026-09-29 catch-all
+    call (96990 and the bare 969), and the taxonomy now structurally
+    excludes 963 (funeral services).
+  - **Which to publish:** the pages use step 2's figures, never the
+    screen's.
+  - **The two-obec path's first real use** is Liberec and Most: every file
+    ran its own control, and each obec's count was printed.
+- **Two shared modules for the Czech tram cities, beside Prague's own
+  files, which stay as they are:**
+  - **`pipeline/countries/czechia_fetch.py`** is imported only by the
+    `fetch_sources.py` scripts. It checks the shared national files and
+    never fetches them. It always fetches the rolling sources: KORDIS's
+    feed, each obec's RÚIAN file named through ATOM, and the two OSM
+    queries. OSM goes one query at a time, with a 60-second wait before its
+    one retry (the owner's staggering rule). Both mirrors 504'd once on
+    Brno's boundary, and the retry answered.
+  - **`pipeline/countries/czechia_boundary.py`** turns each obec's OSM
+    relation into a polygon, checks that its `ref` ends in the RÚIAN obec
+    code, and gates the union on the Czech Statistical Office's area. Brno
+    measured 230.1 km².
+  - `check_no_fetch_in_steps.py` passes.
+- **Request stops are stops: 25 of Brno's 149 stations were being dropped
+  as "non-revenue".** KORDIS codes every request stop (*na znamení*)
+  `pickup_type`/`drop_off_type` 3, "coordinate with the driver", which GTFS
+  counts as boardable. `pipeline/stations.py`'s `boardable_stop_ids` accepted
+  only 0. Among the stops lost were Stránská skála and Líšeňská.
+  - **The fix:** a `boardable` parameter, which Brno passes as
+    `("0", "2", "3")`. The default is unchanged, so no built city's output
+    moves unannounced.
+  - **Rejected:** changing the default. It is the correct reading of the
+    GTFS spec, but it could move other cities' station tables, and the
+    module is the app/chrome role's.
+  - **Handed to cleanup:** checking whether any built city's feed carries
+    2 or 3.
+- **A line serves a Brno station when it calls there on at least 10% of its
+  trips in one direction.** The feed runs about 2.5 months of timetable, and
+  the union of every trip gave line 4 54 stations where its route has 24.
+  - **The rule:** Riga's `PATTERN_MIN_SHARE` (10%), taken per station
+    rather than per exact stopping pattern. Line 10 splits its Líšeň branch
+    over patterns that are each under 10%; the branch holds 8% of the line's
+    trips, and other lines serve it.
+  - **The effect:** 148 stations, of which only the Vozovna Medlánky depot
+    is dropped, since no line calls there on more than 2 to 5% of its trips.
+    146 are inside the city at a 336 m median gap, so the rings stay halved.
+    Line 2's two Modřice stops are excluded.
+  - **Gate 3 against OSM's route relations** agrees on 9 of 11 lines. Line
+    1 has 47 stations in the feed against OSM's 36, and line 10 has 38
+    against 27. OSM carries only their main routes, while the feed runs
+    line 1 via Tábor and line 10 to Technologický park and Bystrc on 12 to
+    21% of their trips, every sampled weekday from 2026-10-01 to 12-02.
+    This is recorded rather than "fixed": the feed is the operator's.
+  - **Station-spacing floor:** 200 m, Riga's and Aarhus's, instead of the
+    shared 400 m metro default. It still refuses Brno's uncollapsed
+    platforms (42 m median).
+- **The six Czech pages are numbered 150-155**, in build order, so they do
+  not collide at landing with France's 76-95 or the other build branches.
+  The other build sessions were told. `scaffold_city.py` numbers from the
+  highest page in its own tree, so each page was scaffolded and then its
+  `app/cities.py` path pointed at the block.
+- **Not yet done:** the rail steps for the five OSM cities wait for
+  `pipeline/osm_tram.py` on the tram build branch (the owner's priority
+  rule). Brno's station step was built now because it depends only on
+  KORDIS's feed. Brno's step 3 draws OSM geometry by ref and is next.
+
 ### 2026-09-30 - czechia_register reads several obce and RES in chunks; Prague reproduced byte for byte at a 0.37 GB peak
 
 - **The Czech builds have the owner's go, confirmed in this session**

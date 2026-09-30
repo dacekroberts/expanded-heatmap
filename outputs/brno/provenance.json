@@ -1,0 +1,76 @@
+{
+  "ros02": {
+    "file": "ros02_data.csv",
+    "url": "",
+    "bytes": 58507315,
+    "sha256": "a17749249c8cbb4bfe1569f38635e29e56cd7b6f18806f3d5298f2fe4340d810",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:34:15+00:00"
+  },
+  "res": {
+    "file": "res_data.csv",
+    "url": "",
+    "bytes": 543309993,
+    "sha256": "c6b6031d0598ce95117de7980c5f52d1d8675b49f92ddbb72f80e201d5dc4fdc",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:34:16+00:00"
+  },
+  "nace_level1": {
+    "file": "cz_nace_2025_level1.csv",
+    "url": "",
+    "bytes": 3489,
+    "sha256": "04af65726c38444d4f8d0cbb1999fbafb94c4c9fd1dbbedae628be977ae5f79c",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:34:16+00:00"
+  },
+  "nace_level2": {
+    "file": "cz_nace_2025_level2.csv",
+    "url": "",
+    "bytes": 14016,
+    "sha256": "3b301176e60bc18d912086afb2f24136450773150441de18d13b5543b6b05edc",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:34:16+00:00"
+  },
+  "nace_level3": {
+    "file": "cz_nace_2025_level3.csv",
+    "url": "",
+    "bytes": 47490,
+    "sha256": "7e47f8d581c0c3bbc18d71ca0a1e52c2418ea16a4f03f3b215e15eaee08a3d4d",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:34:16+00:00"
+  },
+  "nace_level4": {
+    "file": "cz_nace_2025_level4.csv",
+    "url": "",
+    "bytes": 103402,
+    "sha256": "37526e7a5ca1d4b468cef11c30e1644c30eaa4193b553fe1c33b5df4d60ecb48",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:34:16+00:00"
+  },
+  "nace_level5": {
+    "file": "cz_nace_2025_level5.csv",
+    "url": "",
+    "bytes": 115587,
+    "sha256": "df261a1fbfeef605c8eba6ac7c8fb3b6252c15adc1e87f3431db7e661f5f0fb5",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:34:16+00:00"
+  },
+  "ros02_snapshot": "2026-08-31",
+  "ruian": {
+    "582786": {
+      "file": "ruian_adr_582786.csv.zip",
+      "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_582786_ADR.csv.zip",
+      "bytes": 1395689,
+      "sha256": "40b9878f2e3b51026e513453e71b615c638cf3aa975e3732648773414bdf21e6",
+      "retrieved": "2026-09-30T23:34:22+00:00",
+      "edition": "20260831_OB_582786_ADR.csv.zip"
+    }
+  },
+  "gtfs": {
+    "file": "gtfs.zip",
+    "url": "https://kordis-jmk.cz/gtfs/gtfs.zip",
+    "bytes": 9273130,
+    "sha256": "3de4b85fc2bdd769eca139d7a235190609a0b2b740f7ba75489e8b1500a05b87",
+    "retrieved": "2026-09-30T23:34:24+00:00"
+  },
+  "gtfs_calendar": {
+    "calendar_start": "20260925",
+    "calendar_end": "20261213"
+  },
+  "osm_boundary_host": "overpass-api.de",
+  "osm_tram_host": "overpass-api.de",
+  "osm_fetched": "2026-09-30T23:37:39+00:00"
+}
