@@ -1950,6 +1950,29 @@ CITIES = [
         # 0 at 375, 768 and 1200.
         "label_offset": ("middle", 0, -40),
     },
+    {
+        "name": "Houston",
+        "lat": 29.7604,
+        "lon": -95.3698,
+        "page": "pages/75_Houston_Heatmap.py",
+        "coverage": "full",
+        "placement": "Joined by address (83.9%) and geocoded (12.4%)",
+        "data_age": "Active permits; fetched 2026-09-29",
+        "rail_extra": "Trams",
+        "record_kind": "Tax register",
+        "categories": "All three",
+        "blurb": "METRORail: the Red, Green and Purple Lines",
+        # EAST, on the owner's split of 2026-09-22: West is California, East is
+        # Chicago and everything else in the country.
+        "region": "United States East",
+        "country": "United States",
+        "in_default_view": True,
+        # LEVEL, RIGHT OF THE DOT, and SCORED: width 56.9 px (TEXT_WIDTH).
+        # Above the dot it meets San Diego's and Chicago's labels, below it
+        # Monterrey's marker; check_macro_labels.py (python -B) passes start
+        # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 11, 0),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

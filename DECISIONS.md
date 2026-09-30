@@ -20,19 +20,20 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**221 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**222 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
+- [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Houston built: METRORail from OSM, a joined sales-tax register, a person's permit shown by address](#2026-09-29---houston-built-metrorail-from-osm-a-joined-sales-tax-register-a-persons-permit-shown-by-address)
 - [Sacramento built: Blue and Gold, a geocoded tax register, names shown by type](#2026-09-29---sacramento-built-blue-and-gold-a-geocoded-tax-register-names-shown-by-type)
 - [Baltimore to the discards on currency; Palma's three licence calls (owner)](#2026-09-29---baltimore-to-the-discards-on-currency-palmas-three-licence-calls-owner)
 - [Build briefs for six Band B cities; Baltimore's register found stale (staging)](#2026-09-29---build-briefs-for-six-band-b-cities-baltimores-register-found-stale-staging)
 - [Band C closed: its last five to the discards (owner)](#2026-09-29---band-c-closed-its-last-five-to-the-discards-owner)
-- [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
 - [Buffalo built: NFTA Metro Rail, three registers, a Census boundary](#2026-09-29---buffalo-built-nfta-metro-rail-three-registers-a-census-boundary)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
-- [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
 - [Aarhus built: the city tramway, Copenhagen's register, OSM's address points](#2026-09-29---aarhus-built-the-city-tramway-copenhagens-register-osms-address-points)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
@@ -261,6 +262,148 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-29 - Stations closed for works: drawn as the timetable runs, in every city (owner)
+
+- **Stations closed for works are drawn as the timetable runs, in every city
+  (owner, on the recommendation), and Prague's Flora is converted to match.**
+  Two built cities had disagreed on the same situation: Prague drew Flora,
+  closed for reconstruction since 1 February 2026 and due back around
+  December (owner, 2026-09-24), while Berlin left the U6's five Tegel-branch
+  stations off, closed since November 2022 and due back around August 2027
+  (owner, 2026-09-28). The only difference was how long each closure was
+  expected to last, and no threshold had been set. The new case forced the
+  question: SacRT's Green Line, suspended since 2025-06-16, due back "by
+  mid-October", for which the owner chose Berlin's treatment the same day
+  (Township 9, its one Green-only station, listed as closed for works).
+  The timetable rule was chosen because the feed decides it; a rule keyed
+  on the reopening date needs a threshold that operators' own dates slip
+  past, and drawing a closed station rings businesses around a stop no
+  train serves. Rejected: Prague's rule everywhere (it would put Berlin's
+  five stations back and reverse the Sacramento call), and grandfathering
+  Flora until it reopens (consistent for no extra render, since the category
+  batch already re-renders Prague at the next review, and Flora returns
+  under either rule when the feed serves it). Written as a Station scope
+  section in `docs/category_rules.md`. Prague's conversion lands in the
+  review merge: step 1 lists Flora in `excluded_stations.csv` as closed for
+  works (its stop-when-served guard stays); the Prague page, the ROPID
+  notice ("Flora is added while closed" removed from its changes) and the
+  What Is Excluded line change as drafted in the cleanup chat and approved.
+
+### 2026-09-29 - Thinned lines must be named where a reader can find them (owner)
+
+- **Every city that thins stops by spacing must name the thinned lines on its
+  own page or in the spacing-filter paragraph of
+  `docs/excluded_categories.md` (owner), and `check_scope_disclosure.py`
+  now decides it as property F.** The What Is Excluded page's station table
+  gives each city a "Stops thinned" count but not which lines, so a count
+  with no sentence behind it would tell a reader nothing. Measured the same
+  day through `app/station_scope.py`: eight cities thin by spacing (San
+  Francisco 85, Philadelphia 161, Boston 25, Amsterdam 59, Rome 9, Rotterdam
+  23, Hong Kong 17, Riga 15; listed in `docs/sub_transit_line_filters.md`).
+  All eight pages already say so, in "thinned" or in "one stop per half mile
+  is drawn". Riga alone is missing from the paragraph, which the check prints
+  as a NOTE rather than a failure, since the owner's rule is either place;
+  its addition is approved for review time. Requiring both places was
+  rejected: the rule as given is either, and the page is where a reader of
+  that one city looks. The self-test gains a case that strips both places
+  from Riga (10 of 10), and its fixture now copies `app/pages/`.
+### 2026-09-29 - Houston built: METRORail from OSM, a joined sales-tax register, a person's permit shown by address
+
+- **Houston built, 29,912 storefronts around 40 stations, branch `houston`
+  (page 75, held for the batch review).** Rail from OpenStreetMap (owner):
+  METRO's Data Use Agreement never binds the map. The six relations are
+  whitelisted on network `Metro`, and 80 stop positions become 40 stations.
+  **Gate 3 exact**: Red 25, Green 9, Purple 10. The whole city is in scope,
+  so none is excluded; the median gap is 659 m, with standard rings.
+  - **The brief's "Purple 13" was a counting slip**, corrected in the brief.
+    25 + 9 + 13, less the four stations Green and Purple share, is 43, not
+    the brief's own total of 40. Wikipedia's Purple Line list and OSM's two
+    Purple relations both give 10.
+  - OSM carries Theater District and Convention District under one name
+    each, so only Central Station's Capitol / Rusk pair merges, by alias.
+    Burnett's name differs by direction, and METRO's current name is kept.
+  - Main Street Square's two stop positions are 267 m apart, over step 1's
+    250 m merge gate. They are the staggered downtown platforms on
+    consecutive blocks of Main Street, so the station is allowed by name
+    (`STAGGERED_PLATFORMS_M`) and the gate stays tight for every other
+    station.
+  - Central Station Main (Red) is 148 m from Central Station Capitol / Rusk
+    (Green and Purple). They are two METRO stations, both in its 40, so both
+    are kept.
+- **The city boundary is TIGER's, not OSM's, on a measurement.** OSM's
+  relation 2688911 assembles cleanly (1,644.7 km² outer, less 26 enclaves
+  such as Bellaire) to 1,589.5 km². TIGER's place polygon (GEOID 4835000) is
+  1,741.5 km², and 156 km² of it is missing from OSM in annexed pieces on the
+  west and north edges; the largest is 23.5 km² near 29.79 N, 95.75 W. OSM
+  holds 4 km² that TIGER lacks. The legal boundary the City reports to the
+  Census wins, which is Buffalo's layer. All 40 stations are inside it; the
+  boundary decides which placed storefronts count.
+- **Businesses**: the Texas Comptroller's Active Sales Tax Permit Holders
+  (`jrea-zgmq`).
+  - 79,097 Houston outlets flagged inside city limits, fetched by an
+    explicit `$select`. **`taxpayer_number` is never read, beside the
+    taxpayer's name and address**: for an individual, a Texas taxpayer
+    number is built from their Social Security number. The brief had not
+    flagged it. The row key is Socrata's `:id`.
+  - 33,613 in the buckets (the shared NAICS module; 6,491 non-store sellers,
+    2,376 caterers, mobile food and contractors, and 414 parking lots out by
+    code). Then 226 not trading by the fetch date, 968 at an apartment or
+    trailer (Sacramento's APT call, plus `residence.py`'s TRLR), 21 with no
+    house number and 373 name + address duplicates leave 32,025.
+  - **Placed by an address join to the City's Site Addresses** (bulk file
+    geodatabase, 1,547,147 points): 80.3% on the street as filed within its
+    ZIP (the brief's sample said 81%), 262 more on a canonical form, and 893
+    on a street address unique across the region's ZIPs. **The Census
+    geocoder** matched 3,979 of the remaining 5,148. 96.3% placed in all.
+  - Point-in-boundary on TIGER's polygon dropped 608, because the permits'
+    city is a postal one.
+- **A person's permit shows its address (the brief's call, Copenhagen's and
+  Oslo's rule).** The Comptroller records the legal form, so no guess at the
+  name is needed. Personal forms from its record layout: IS (sole owner), S,
+  PI (individuals' general partnership), P, PZ and ES (estate). General
+  partnerships are in on Denmark's precedent (owner, 2026-09-24); PB, a
+  partnership of businesses, is not. 5,730 mapped storefronts show their
+  address.
+- **A person's permit at a Residential point is left off (owner, 2026-09-29,
+  the brief's recommendation): 334.** The City's `addrtype` types the point,
+  and "Residential" counts only when every typed point at that street
+  address says so. 1,017 companies at such a point stay: their names are
+  companies'.
+- **Company names are shown, including the few that are a person's.** Of
+  24,182 company rows, 2,996 names pass `looks_personal`. An 80-name sample
+  was trade names ("TACO BELL", "SHIPLEY DO-NUTS", "SEWELL CADILLAC"), with a
+  few LLCs named for a designer ("LINDSEY MEHNE"). That is a registered name
+  a company chose, San Diego's precedent. Showing the kind of business for
+  them all (Sacramento's rule) was rejected: that rule stood in for a legal
+  form Sacramento's register lacks, and here it would unname about 2,900
+  trade names to reach a handful.
+- **Privacy verdict: publishable.** `check_personal_exposure.py houston`
+  finds 0 contact details on 2,224 in-ring pins. It flags 251 person-like
+  names (the company trade names above) and 7 at a "UNIT", which are mall and
+  strip-centre spaces. Read across the whole city: 48 person-like company
+  names at a UNIT or SPC address, every one a shop (airport and mall units,
+  strip-centre suites).
+- **Line colours through `linecolour.py`, never METRO's.** A pure red sits
+  33-37 ΔE from Food service's magenta and a mid green 25-39 from Personal
+  services', so the lines are brick red `#bf360c` (46.5), olive green
+  `#5d6d0e` (46.5) and purple `#7b1fa2` (50.6), each over the 45 preference.
+- **2,224 of 29,912 in the rings: 7.4%**, the lowest on the map (Taoyuan
+  11.7%), stated on the page (owner). Retail 1,077, Food 1,052, Personal 94:
+  a sales-tax permit is held by sellers of taxable goods and services, so
+  Personal services are thin. A thin layer, not a structural gap, so
+  coverage stays "full" (`check_macro_facts.py`'s rule).
+- **The Comptroller's licence, read (the `licence-read` agent): permitted,
+  nothing to display or do.** The dataset's "Public Domain" label is the
+  Comptroller's own grant, in its Privacy and Security Policy: public domain
+  "as permitted by law", except pictures, official symbols and marks. The
+  pointer was followed through Tax Code ch. 151 (§151.027(a) makes permit
+  information public) and Gov't Code chs. 552 and 2054; none restricts reuse,
+  and no Texas statute limits this list's use for solicitation. The map uses
+  no seal or mark.
+- **Region "United States East"**, by the owner's 2026-09-22 split (West is
+  California). The macro label sits level to the right of the dot, width
+  56.9 px; it passes at dy -8 to +6.
+
 ### 2026-09-29 - Sacramento built: Blue and Gold, a geocoded tax register, names shown by type
 
 - **Sacramento built, 3,335 storefronts around 37 stations, branch
@@ -443,33 +586,6 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   were re-aimed at Band B, which cannot empty while reduced-bucket pages
   exist. 24 of 24.
 
-### 2026-09-29 - Stations closed for works: drawn as the timetable runs, in every city (owner)
-
-- **Stations closed for works are drawn as the timetable runs, in every city
-  (owner, on the recommendation), and Prague's Flora is converted to match.**
-  Two built cities had disagreed on the same situation: Prague drew Flora,
-  closed for reconstruction since 1 February 2026 and due back around
-  December (owner, 2026-09-24), while Berlin left the U6's five Tegel-branch
-  stations off, closed since November 2022 and due back around August 2027
-  (owner, 2026-09-28). The only difference was how long each closure was
-  expected to last, and no threshold had been set. The new case forced the
-  question: SacRT's Green Line, suspended since 2025-06-16, due back "by
-  mid-October", for which the owner chose Berlin's treatment the same day
-  (Township 9, its one Green-only station, listed as closed for works).
-  The timetable rule was chosen because the feed decides it; a rule keyed
-  on the reopening date needs a threshold that operators' own dates slip
-  past, and drawing a closed station rings businesses around a stop no
-  train serves. Rejected: Prague's rule everywhere (it would put Berlin's
-  five stations back and reverse the Sacramento call), and grandfathering
-  Flora until it reopens (consistent for no extra render, since the category
-  batch already re-renders Prague at the next review, and Flora returns
-  under either rule when the feed serves it). Written as a Station scope
-  section in `docs/category_rules.md`. Prague's conversion lands in the
-  review merge: step 1 lists Flora in `excluded_stations.csv` as closed for
-  works (its stop-when-served guard stays); the Prague page, the ROPID
-  notice ("Flora is added while closed" removed from its changes) and the
-  What Is Excluded line change as drafted in the cleanup chat and approved.
-
 ### 2026-09-29 - Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)
 
 - **Minneapolis and Pittsburgh move to B (owner)**, each on a city-only
@@ -615,26 +731,6 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   97.8–98.7% at block level on the shared `japan_register` join, and about
   100% with town-chōme. It stays in B.
 - B 5 → 7, C 9 → 7.
-### 2026-09-29 - Thinned lines must be named where a reader can find them (owner)
-
-- **Every city that thins stops by spacing must name the thinned lines on its
-  own page or in the spacing-filter paragraph of
-  `docs/excluded_categories.md` (owner), and `check_scope_disclosure.py`
-  now decides it as property F.** The What Is Excluded page's station table
-  gives each city a "Stops thinned" count but not which lines, so a count
-  with no sentence behind it would tell a reader nothing. Measured the same
-  day through `app/station_scope.py`: eight cities thin by spacing (San
-  Francisco 85, Philadelphia 161, Boston 25, Amsterdam 59, Rome 9, Rotterdam
-  23, Hong Kong 17, Riga 15; listed in `docs/sub_transit_line_filters.md`).
-  All eight pages already say so, in "thinned" or in "one stop per half mile
-  is drawn". Riga alone is missing from the paragraph, which the check prints
-  as a NOTE rather than a failure, since the owner's rule is either place;
-  its addition is approved for review time. Requiring both places was
-  rejected: the rule as given is either, and the page is where a reader of
-  that one city looks. The self-test gains a case that strips both places
-  from Riga (10 of 10), and its fixture now copies `app/pages/`.
-
-
 ### 2026-09-29 - Aarhus built: the city tramway, Copenhagen's register, OSM's address points
 
 - **Aarhus built on Copenhagen's modules, 5,102 storefronts around 20 stations,

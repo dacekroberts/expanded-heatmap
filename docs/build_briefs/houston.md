@@ -136,7 +136,10 @@ Three `route_type 0` routes: 700 **METRORAIL RED LINE** `EF0000`, 800
 
 80 platforms → **44 names** after stripping the direction and "Stn" →
 **40 stations** with the couplets and Eado aliased. Per line: Red 25, Green 9,
-Purple 13. **All 40 are inside the city.** Median gap 657 m (the test's OSM
+Purple 13. **All 40 are inside the city.** *(⚠️ Corrected at build, 2026-09-29:
+Purple has **10** stations - Wikipedia's Purple Line list and OSM's two
+Purple relations agree - and 25 + 9 + 13 less the four stations Green and
+Purple share is 43, not 40. The total of 40 holds.)* Median gap 657 m (the test's OSM
 read: 42 stops, 651 m). The couplet aliases are explicit, never a rule
 (Oslo's).
 
@@ -185,6 +188,34 @@ and it is Buffalo's question in another form.
 
 **Flag for the cleanup role (held macro-map work)**: Houston takes the
 light-rail network colour.
+
+## Built 2026-09-29 - what the build measured
+
+- **Rail**: OSM's six relations whitelisted on network `Metro`, 80 stop
+  positions -> 40 stations; gate 3 exact (Red 25, Green 9, Purple 10). OSM
+  already carries Theater District and Convention District as one name each;
+  only Central Station splits (Capitol / Rusk, merged by alias), and Burnett's
+  name differs by direction. Main Street Square's two stop positions are
+  267 m apart on consecutive blocks (staggered platforms), allowed by name.
+  Median gap 659 m.
+- **Boundary**: TIGER's place polygon, not OSM's relation 2688911, which
+  lacks 156 km2 of the city in annexed pieces (1,589.5 against 1,741.5 km2).
+- **Register**: 79,097 -> 33,613 in the buckets -> 32,025 premises (226 not
+  trading yet, 968 at an apartment or trailer, 21 with no house number, 373
+  duplicates). ⚠️ **`taxpayer_number` is never read either**: for an
+  individual, a Texas taxpayer number is built from their Social Security
+  number. Personal forms from the Comptroller's record layout: IS, S, PI, P,
+  PZ, ES (general partnerships on Denmark's precedent).
+- **Join**: 80.3% on the street as filed (the sample's 81% held), 262 more on
+  a canonical form, 893 on a street address unique across ZIPs; the Census
+  geocoder matched 3,979 of the remaining 5,148. 96.3% placed; 608 outside the
+  city.
+- **Build-time call 3 answered (owner, 2026-09-29): drop.** 334 personally
+  owned storefronts at a Residential point are left off; 1,017 companies at
+  one stay. **Call 4**: the City's bulk export (Last-Modified 2025-11-12).
+- **29,912 storefronts, 2,224 in the rings: 7.4%**, inside the sample's ±3.
+- Line colours through `linecolour.py`: brick red, olive green, purple, each
+  over the 45 preference.
 
 ## Still unknown
 

@@ -411,6 +411,13 @@ REGISTRIES = {
     "sacramento": dict(raw=None, trade=None, owner=None,
                        processed="businesses_geocoded.csv",
                        address=("street", "unit")),
+    # Houston: the Texas Comptroller's sales-tax permits. No taxpayer column is
+    # ever downloaded but the organisation type (fetch_sources names its
+    # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its
+    # address, so the names left are companies' - which this run measures.
+    "houston": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_geocoded.csv",
+                    address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

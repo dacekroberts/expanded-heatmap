@@ -241,6 +241,32 @@ Sacramento County, 3 in Rancho Cordova, 3 in Folsom), and 7th &
 Richards/Township 9 is closed for works while the Green Line is suspended. All
 are listed in `outputs/sacramento/excluded_stations.csv`.
 
+### Houston — non-store sellers by code, homes, and a person's permit shown by address
+
+**Left out of the Comptroller's permits**, counted on its 79,097 Houston
+outlets flagged inside city limits, by NAICS code (the shared carve-outs,
+`pipeline/taxonomies/naics.py`):
+- non-store retailers (454): 6,491, of them online shops 4,704, direct
+  sellers 1,396 and vending-machine operators 362;
+- food service contractors (507), caterers (357) and mobile food (1,512);
+- parking (414), funeral services (51) and "all other personal services" (282).
+
+**Also left out**: 226 outlets whose first sales date is after the fetch date
+(not trading yet); 968 at an apartment or trailer address, as homes; 21 with
+no house number (a mall or building name alone); and 334 held by a person at
+an address point the City types Residential, as homes (owner, 2026-09-29).
+
+**Not placed**: 1,169 addresses neither the City's address file nor the Census
+geocoder could match (3.7%), and 608 placed points with a Houston postal
+address that lie outside the city limits.
+
+**Shown, but not named**: 5,730 storefronts held by a person (a sole owner, a
+partnership of individuals or an estate) show their street address instead of
+a name.
+
+**Stations**: all 40 METRORail stations are inside the city, counting
+Central Station's Capitol / Rusk pair as one. None is left out.
+
 ### San Diego - its own codes for massage parlours, cottage kitchens and kiosks
 
 San Diego's registry extends NAICS with codes of its own, and four are left

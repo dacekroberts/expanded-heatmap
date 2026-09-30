@@ -715,6 +715,7 @@ _NOTICES = [
      "Buffalo's NFTA Metro Rail line and its stations, "
      "Sacramento's SacRT Blue and Gold Lines and their stations, and the "
      "municipal boundaries used to select them, "
+     "Houston's METRORail Red, Green and Purple Lines and their stations, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
