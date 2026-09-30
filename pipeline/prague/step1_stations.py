@@ -9,9 +9,12 @@ WHAT MAKES THIS CITY'S STEP 1 DIFFERENT:
   * **Stations come from the feed's own `parent_station`**, so no name
     collapse is needed: every metro platform (`U...Z101P`) belongs to a parent
     (`U...S1`) with its own name and position.
-  * **Flora is added although no trip serves it** - line A's station, closed
-    for reconstruction since 1 February 2026 - located from stops.txt, owner's
-    call. The build STOPS the day the feed serves Flora again, so the override
+  * **Flora is counted but not drawn** - line A's station, closed for
+    reconstruction since 1 February 2026. It is located from stops.txt so the
+    per-line gates still match the operator's network, then listed in
+    excluded_stations.csv as closed for works (owner, 2026-09-29: stations
+    closed for works are drawn as the timetable runs, docs/category_rules.md).
+    The build STOPS the day the feed serves Flora again, so the override
     cannot outlive the closure.
   * **OSM's route relations are the cross-check** (osm-rail's order: agency
     GTFS first), and they omit Flora too.
@@ -99,8 +102,8 @@ def main():
     if stops.loc[config.FLORA_PARENT, "stop_name"] != config.FLORA_NAME:
         sys.exit(f"{config.FLORA_PARENT} is not {config.FLORA_NAME} in stops.txt")
     lines.loc[config.FLORA_PARENT] = config.FLORA_LINE
-    print(f"  {config.FLORA_NAME} added from stops.txt ({config.FLORA_PARENT}): closed for "
-          f"reconstruction, no trip serves it - owner's call, disclosed on the page")
+    print(f"  {config.FLORA_NAME} added from stops.txt ({config.FLORA_PARENT}) for the gates: "
+          f"closed for reconstruction, no trip serves it; listed as closed for works")
 
     platforms = stops.loc[stops.index.isin(set(link["stop_id"])) |
                           (stops["parent_station"] == config.FLORA_PARENT)
@@ -145,15 +148,29 @@ def main():
                  f"  measured: {inside_per_line}\n"
                  f"  config  : {config.EXPECTED_INSIDE_PER_LINE}")
 
+    # FLORA LEAVES THE DRAWN SET HERE, after the gates, which count the
+    # operator's network: closed for works, drawn as the timetable runs.
+    closed = inside[inside.index == config.FLORA_PARENT].copy()
+    inside = inside[inside.index != config.FLORA_PARENT].copy()
+    if len(closed) != 1:
+        sys.exit(f"expected {config.FLORA_NAME} inside the obec once, found {len(closed)}")
+
     nn = inside.to_crs(config.CRS_PROJECTED).geometry
     d = pd.Series([nn.drop(i).distance(p).min() for i, p in nn.items()])
     print(f"\n  in-scope spacing (nearest neighbour, m): min {d.min():,.0f}  "
           f"median {d.median():,.0f}  mean {d.mean():,.0f}  max {d.max():,.0f}")
 
-    out = pd.DataFrame({"station": outside["stop_name"], "lines": outside["lines"],
-                        "reason": f"outside obec {config.OBEC} (Praha)",
-                        "latitude": outside["latitude"], "longitude": outside["longitude"]},
-                       columns=["station", "lines", "reason", "latitude", "longitude"])
+    cols = ["station", "lines", "reason", "latitude", "longitude"]
+    out = pd.concat([
+        pd.DataFrame({"station": outside["stop_name"], "lines": outside["lines"],
+                      "reason": f"outside obec {config.OBEC} (Praha)",
+                      "latitude": outside["latitude"], "longitude": outside["longitude"]},
+                     columns=cols),
+        pd.DataFrame({"station": closed["stop_name"], "lines": closed["lines"],
+                      "reason": config.FLORA_REASON,
+                      "latitude": closed["latitude"], "longitude": closed["longitude"]},
+                     columns=cols),
+    ], ignore_index=True)
     out.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
     keep = (inside.rename_axis("stop_id").reset_index()
             .rename(columns={"stop_name": "station"})

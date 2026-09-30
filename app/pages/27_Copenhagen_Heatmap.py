@@ -54,7 +54,8 @@ company's. Each is placed using Denmark's official address register, Danmarks
 Adresseregister. **Where a business is owned personally (a sole proprietorship, a
 partnership or any business whose registered name marks it as one person's), the
 map shows its address instead of its name**, because such businesses are usually
-registered under the owners' own names.
+registered under the owners' own names. So does a supermarket registered under
+its franchisee's own name.
 
 **Read the density as a register, not a street survey.** Some premises are newly
 registered and may not have opened yet. Denmark's classification files a web shop

@@ -121,8 +121,8 @@ repository, and every one of them is counted in the table on this page.
   one every half mile measured along the line's own route, while every
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
-  trolleys, the Boston Green Line's surface branches, the trams of Amsterdam and
-  Rotterdam, Rome's tram 8, and Hong Kong's Light Rail. The reasoning is in
+  trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
+  Rotterdam and Riga, Rome's tram 8, and Hong Kong's Light Rail. The reasoning is in
   `docs/sub_transit_line_filters.md`.
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
   it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
@@ -1463,8 +1463,10 @@ so an online-only seller carries the code of the goods it sells.
 **Shown, but not named: personally owned businesses.** Every premises of a sole
 proprietorship, a small personally owned business or a partnership shows its
 address instead of its name, as does any name carrying Denmark's sole-trader
-marker "v/" ("by"). They remain on the map; only the name is withheld. Addresses
-recorded "care of" another person are never read.
+marker "v/" ("by"). So does a supermarket registered under its franchisee's own
+name and a store number (33 premises, owner 2026-09-29). They remain on the map;
+only the name is withheld. Addresses recorded "care of" another person are never
+read.
 
 **Two municipalities, one map.** The map covers Copenhagen and Frederiksberg,
 which Copenhagen entirely surrounds. Businesses in the surrounding
@@ -1510,7 +1512,7 @@ carries no coordinates.
 
 **All 58 metro stations are inside the city.** Trams, which run as a dense
 overlay on the metro, the Petřín funicular, ferries and suburban trains are not
-drawn. Flora, closed for reconstruction, is drawn.
+drawn. Flora, closed for reconstruction, is not drawn while closed.
 
 ### Amsterdam - two registers, and a shop unit that is also a home kept off the map
 

@@ -991,7 +991,7 @@ _NOTICES = [
      "by ROPID ([pid.cz/o-systemu/opendata](https://pid.cz/o-systemu/opendata/)), "
      "under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the "
      "three metro lines are selected and redrawn, stations are reduced to one point "
-     "each, Flora is added while closed, and line A's colour is lightened. Not "
+     "each, and line A's colour is lightened. Not "
      "produced or endorsed by ROPID or DPP.",
      False),
     # Gemeente Amsterdam - hospitality permits. The register's own licence is

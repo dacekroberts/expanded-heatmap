@@ -117,7 +117,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     and 1200 px. Same review-time route.
 
 - [ ] ⏰ **Prague: Flora reopens around December 2026**: when PID's feed serves
-  it again, step 1 STOPS the build on purpose - remove the override then.
+  it again, step 1 STOPS the build on purpose - remove the override then, and
+  Flora is drawn again from the trips (it is listed as closed for works until
+  then, owner 2026-09-29).
 
 - [ ] Optional label follow-ups (DECISIONS, "Phone-width label placer verified
   and pushed"): a few re-placed labels sit ~54 px from their tip (Amsterdam's

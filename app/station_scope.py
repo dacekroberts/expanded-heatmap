@@ -53,7 +53,8 @@ def classify(reason, city):
 
     `closed` is a station the timetable does not serve because it is closed
     for works (Berlin's U6 Tegel branch, 2026-09-28, owner: drawn as the
-    timetable runs). Prague's Flora, also closed, is DRAWN, so it is in no file.
+    timetable runs), Sacramento's Township 9 and Prague's Flora, all under the
+    one rule of 2026-09-29 (docs/category_rules.md, "Station scope").
     """
     text = (reason or "").lower()
     if "spacing" in text:

@@ -33,8 +33,8 @@ Three lines are drawn — **Metro A, B and C** — each labelled on the map and 
 the legend, redrawn from the Prague Integrated Transport system's (PID) own route
 geometry in the operator's colours. Line A is shown a shade lighter so it stays
 distinct from the green of the personal-services dots. **Flora station on line A
-is closed for reconstruction** until about December 2026; it is drawn, since the
-closure is temporary. Trams, the Petřín funicular, ferries and suburban trains
+is closed for reconstruction** until about December 2026, so it is not drawn
+while closed, as the timetable runs; it returns when it reopens. Trams, the Petřín funicular, ferries and suburban trains
 are not drawn.
 
 The map covers the **City of Prague**, and every metro station lies inside it,
