@@ -19,7 +19,7 @@ Mapped so far:
 - **United States:** San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston
 - **Canada:** Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto
 - **Mexico:** Mexico City, Guadalajara (Regional), Monterrey (Regional)
-- **Spain:** Madrid, Barcelona
+- **Spain:** Madrid, Barcelona, Palma
 - **Ireland:** Dublin
 - **Italy:** Milan, Rome
 - **France:** Paris, Marseille, Toulouse, Lille (Regional), Rennes

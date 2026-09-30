@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)](#2026-09-30---palma-built-on-m1-alone-its-register-placed-by-a-catastro-join-m1s-timetable-disclosed-not-disqualifying-owner)
 - [Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail](#2026-09-30---tram-kit-four-more-briefs-checked-new-orleans-recommended-unthinned-every-brief-so-far-takes-osm-rail)
 - [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
 - [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
@@ -278,6 +279,73 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)
+
+**Built** on branch `palma` (from `origin/master`, `origin/macro-legend` merged first),
+page 80, region Europe, not in the default frame. Band B, food only (Glasgow's twin),
+under the owner's pre-approval of downloads and page prose (2026-09-30). **3,432
+storefronts**, 1,187 within the 0.6 mi rings (34.6%), 10 stations. `coverage`
+one_bucket, `categories` "Food premises only", `mode` metro (Newcastle's precedent:
+named a metro, mapped `light_rail` in OSM; flagged for the owner's approval with the
+build).
+
+**M1 alone (owner, 2026-09-30).** TIB, the Consorci de Transports de Mallorca's
+timetable site (rendered by script, read in a browser), lists one metro line, M1
+Palma - UIB - ParcBit, stops 301-310; the Marratxí corridor the brief counted as M2
+is SFM's trains T1-T3, suburban rail, not drawn. OSM still carries M2's two
+relations; they are named in `NOT_DRAWN`. That leaves 10 stations, not the ~16 the
+owner passed Palma on; asked, the owner chose to build on them (recommended).
+
+**The timetable is disclosed, not disqualifying.** M1 runs every 20 minutes in term
+time, 30-40 in the holidays, Saturdays until 15:00, no Sunday service (Wikipedia,
+citing TIB). I first put this to the owner as failing the 15-minute rule; the owner
+corrected it: the three-part light-rail test (2026-09-29) makes frequency a gate on
+converted railway only, and on purpose-built track a slower timetable is disclosed
+(Buffalo's 20 minutes). M1 is purpose-built, so it is drawn and the page states the
+timetable. **Lesson**: the frequency row in `docs/category_rules.md`'s station scope
+names light-rail *stretches* on converted railway (Aarhus); read the test's own
+wording before citing it against a whole system.
+
+**The address join** (the `address-join` skill; new shared code,
+`pipeline/countries/spain_catastro.py`): Catastro's INSPIRE Addresses for Palma,
+55,609 points. Street + number, then the nearest listed number on the same side
+within 6 (Incheon's precedent); a name + number naming two places more than 60 m
+apart that type and postcode cannot separate is left unplaced. The normalisation
+was found by reading misses: the Catalan geminate L written `L.L`; titles Catastro
+files after a comma ("JOSEP DARDER,METGE", and the register the same way); names
+cut at 24 characters; Castilian and Catalan forms of one given name (MIGUEL /
+MIQUEL, BARTOLOME / BARTOMEU); a title or second surname the register adds; and
+one alias, Passeig Marítim as Avinguda Gabriel Roca (its official name). No fuzzy
+matching. **Tiers**: register coordinates 13.2%, exact 59.3%, nearest 7.1%,
+unplaced 20.4% (677 street not found, 126 no number, 55 number not listed, 22
+ambiguous). **Control**: the 512 rows with both a register coordinate and a joined
+point sit a median 1.1 m apart, 92.2% within 100 m. The GML declares the INSPIRE
+3.0 URNs; Catastro's certificate chain needs the OS trust store.
+
+**Types and names.** Every kept `Grup` is food service; nightclubs, party and dance
+halls kept (R5); catering (9) out (R1). By name (Ottawa's and Pittsburgh's rules):
+35 sports, golf and nautical clubs (their restaurants included, Ottawa's yacht
+clubs), a sports centre, a pool bar, cinemas, bingo halls and casinos (a members'
+club as often as a gaming hall; R5 either way); 8 parish, school and clinic bars and
+a community centre's canteen (R1); 4 bare hotel names; 4 adult venues where the name
+says so (R3). Bakery-cafés the register types as bars stay. Over-reach read and
+fixed at the build: a bar and a restaurant named after cinemas, and "Hostal de's
+Pla" (in Catalan an inn-restaurant).
+
+**Names.** `Explotador/s` is never read. `check_personal_exposure.py palma`: 0
+person-like names at a residential unit of 1,187 in-ring pins; the heuristic's hits
+(a sample of 80 read) are trade names throughout (CAN BRUNO, DON TONI, JUAN CATY).
+Verdict: publishable.
+
+**Licences**: the owner's three calls of 2026-09-29 (A, B, C) stand; notice 69
+displays GOIB's required credit, author, title, licence link, dataset URI, last
+update and modification statement, and Catastro as author and owner with CC BY 4.0,
+the join and the access date. The dataset URI is on `intranet.caib.es`
+(`catalegdades.caib.cat` answers 404). **Notice 69 clashes** with Ottawa's and
+Kitchener–Waterloo's 69 on their branches: whichever lands second renumbers.
+`record_kind` "Licence register" (the register is the Consell's registration of
+establishments), `rail_extra` "Suburban rail" (SFM's trains).
 
 ### 2026-09-30 - Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail
 

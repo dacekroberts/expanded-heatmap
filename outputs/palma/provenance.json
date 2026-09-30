@@ -1,0 +1,26 @@
+{
+  "written_utc": "2026-09-30T22:12:38+00:00",
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    39.54,
+    2.58,
+    39.7,
+    2.8
+  ],
+  "as_of_date": "2026-09-07",
+  "catastro_date": "2026-08-21",
+  "files_utc": {
+    "empreses_restauracio_mallorca.csv": "2026-09-28T06:06:46+00:00",
+    "A.ES.SDGC.AD.07040.zip": "2026-09-30T21:39:53+00:00",
+    "city_boundary.geojson": "2026-09-30T21:49:57+00:00",
+    "osm_rail.json": "2026-09-30T21:50:20+00:00",
+    "osm_municipalities.json": "2026-09-30T21:50:43+00:00"
+  },
+  "sources": {
+    "register": "https://intranet.caib.es/opendatacataleg/files/dataset/empreses_restauracio_mallorca/empreses_restauracio_mallorca.csv",
+    "register_dataset": "https://intranet.caib.es/opendatacataleg/dataset/empreses-restauracio-entreteniment-mallorca",
+    "catastro": "https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/07/07040-PALMA/A.ES.SDGC.AD.07040.zip",
+    "catastro_atom": "https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/07/ES.SDGC.AD.atom_07.xml",
+    "boundary_osm_relation": 341321
+  }
+}

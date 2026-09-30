@@ -1630,6 +1630,28 @@ def _se(typ, name, name_classified=None):
     return row
 
 
+PAL_VENUE = "Recreation venue, club or gaming"
+COLUMNS["palma_restauracio"] = {
+    **{rid: absent("a restaurant and entertainment register: food premises only") for rid in (
+        "funeral", "personal_catchall", "sex_shop", "massage_commercial", "massage_regulated",
+        "car_dealer", "petrol_station", "vehicle_repair", "pawnbroker", "vet", "parking",
+        "repair", "optician", "health_food", "nonstore", "mobile_unit")},
+    "no_counter_food": [
+        loc("Catering (no counter)", "the register's Catering type (R1), by type"),
+        loc("Institutional canteen", "parish and school bars, clinics' cafeterias, a community "
+                                     "centre's canteen, by name")],
+    "adult_hostess": [loc("Adult venue", "a whiskeria or a table dance, by name")],
+    "gambling": [loc(PAL_VENUE, "bingo halls and casinos, by name")],
+    "nightclub": [loc("Bar, café or restaurant", "Discoteca, Sala de festes and Sala de ball, "
+                                                 "by type")],
+    "lodging": [loc("Hotel", "a bare hotel name, by name")],
+    "recreation": [loc(PAL_VENUE, "sports, tennis, padel, riding, golf and nautical clubs, "
+                                  "sports centres, pool bars and cinemas, by name")],
+    "pharmacy": absent("a restaurant and entertainment register: no pharmacies"),
+    "pharmacy_food_register": absent("a restaurant and entertainment register: no pharmacies"),
+}
+
+
 COLUMNS["sweden_livsmedel"] = {
     **{rid: absent("a food-control register: food premises only") for rid in (
         "funeral", "personal_catchall", "adult_hostess", "sex_shop", "massage_commercial", "massage_regulated",

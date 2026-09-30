@@ -2048,6 +2048,30 @@ CITIES = [
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
     },
+    {
+        "name": "Palma",
+        "lat": 39.5696,
+        "lon": 2.6502,
+        "page": "pages/80_Palma_Heatmap.py",
+        # One category (owner, 2026-09-29: food only, Glasgow's twin).
+        "coverage": "one_bucket",
+        "placement": "Register coordinates (13.2%) and joined by address (66.4%)",
+        "data_age": "Register of 2026-09-07",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Licence register",
+        "categories": "Food premises only",
+        "blurb": "Metro de Palma: M1",
+        "region": "Europe",
+        "country": "Spain",
+        "mode": "metro",
+        "in_default_view": False,
+        # East of the dot, in the open sea: the default above collided with
+        # Barcelona's marker and pill in the Europe frame. PROBLEMS 0 at 375,
+        # 768 and 1200 px on this branch and with Ottawa, Minneapolis,
+        # Pittsburgh and Kitchener–Waterloo combined; width 40.1 measured in a
+        # browser.
+        "label_offset": ("start", 11, 0),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

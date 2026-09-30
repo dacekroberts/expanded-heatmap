@@ -501,6 +501,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Spain** | | | | | |
 | Madrid | Metro L1–L12 + Ramal + Metro Ligero ML1 | Cercanías; Metro Ligero ML2, ML3 (stubs), ML4 (Parla) | CRTM ArcGIS layers | Municipio | 49 / 0 |
 | Barcelona | Metro L1–L12 (TMB+FGC) + 2 funiculars | Trams | OpenStreetMap | Municipi | 50 / 0 |
+| Palma | Metro de Palma M1 (10 stations) | SFM's trains T1–T3 (suburban rail); M2, no longer a metro service | OpenStreetMap route relations; gate 3 exact against TIB's stop list | Municipality (OSM) | 0 / 0 |
 | **Ireland** | | | | | |
 | Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS | 4 local authorities | 2 / 0 |
 | **Italy** | | | | | |
@@ -607,6 +608,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Spain** | | | | | |
 | Madrid | Premises census | Censo de locales | Own epígrafe | 26,197 / 15,171 / 8,032 | — |
 | Barcelona | Street survey (2022) | Cens de locals en planta baixa | Own 4-level scheme (finest level) | 20,287 / 9,976 / 5,673 | 458 mixed retail/wholesale rows dropped |
+| Palma | Licence register | The Consell de Mallorca's register of restaurant and entertainment establishments (GOIB catalogue) | Its own types (Grup), plus a name test | — / 1,187 / — | No Retail; No Personal services |
 | **Ireland** | | | | | |
 | Dublin | Property register | Rateable valuation list | Register's own "Uses" | 5,225 / 1,703 / 532 | — |
 | **Italy** | | | | | |
@@ -710,6 +712,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Spain** | | | |
 | Madrid | Source coordinates; 9.2% zero, dropped | 1 premises in 11 cannot be placed | Accommodation, wholesale, repair, no-shopfront |
 | Barcelona | Source coordinates; no zero-coordinate rows (`baseline.json`: 0 of 58,908) | Survey is 2022 | Vacant units (1 in 9), hotels, 458 mixed rows |
+| Palma | Register coordinates (13.2%) and joined by address to Catastro's points (66.4%); 20.4% unplaced | Food only; a premises with no street number, or on a street the two sources spell differently, is unplaced | Caterers by type; sports, golf and nautical clubs, cinemas, bingo halls, casinos, parish, school and clinic bars, bare hotel names and adult venues by name |
 | **Ireland** | | | |
 | Dublin | Source coordinates (ITM) | Large areas with no rail | No names published at all |
 | **Italy** | | | |
@@ -808,6 +811,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Spain** | | | | | | |
 | Madrid | Portal refreshed daily (2026-09-22) | — | 0.6 mi | Yes | 95% | Trade name |
 | Barcelona | 2022 survey (2026-09-22) | B (prose) | 0.6 mi | Yes | 100% | Unit name |
+| Palma | Register of 2026-09-07 (fetched 2026-09-28) | B | 0.6 mi | Yes | 35% | Trade name |
 | **Ireland** | | | | | | |
 | Dublin | UNKNOWN (2026-09-22) | — | 0.6 mi | Yes | 58% | Address + use |
 | **Italy** | | | | | | |
