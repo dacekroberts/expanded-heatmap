@@ -326,6 +326,18 @@ Desktop is unaffected — the label is fully visible there.
         terms reserve the right to restrict access) for "Los Angeles
         (Regional)": 8 A Line stations, active licences ~1,590 / 1,464 /
         920, a `FULLNAME` column (privacy).
+      - **Run 2026-09-30 (staging; DECISIONS "Wave-2 follow-ups")**: (1)
+        **Dallas to Band A** (owner); Fort Worth and Austin stay out on rail.
+        (2) **St. Louis to the discards**: a stream of occupancy permits,
+        no closures. (3) Moot: Minneapolis and Pittsburgh were measured and
+        passed on 2026-09-29, Buffalo and Houston are built, and St. Louis
+        is discarded. (4) **New Westminster joins at 99.8%**; **Richmond's
+        directory is NOT PERMITTED as it stands** (site-wide "research and
+        private use only"; written permission, an owner call). (5) **The
+        shuttle fails beyond Gramacho**: SuperVia's own notices (the 12-minute
+        peak runs Central–Gramacho only; one notice gave Gramacho–Saracuruna
+        a 50-minute average). The three stations the add-on needs, up to
+        Gramacho, pass. (6) Long Beach: licence read running.
       - **Reads from the owner's own browser**: Burnaby (Vancouver's
         rescope), Tempe, **Arlington** (its "Active Business Licenses" for a
         D.C. add-on: 11 of D.C.'s 32 excluded Virginia stations), Zaragoza,
@@ -335,7 +347,10 @@ Desktop is unaffected — the label is fully visible there.
       - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded
         stations (Duque de Caxias, Corte Oito, Gramacho); CNEFE 18,698
         storefronts. **First a rail test for the Gramacho–Saracuruna shuttle**,
-        which the scope would bring in.
+        which the scope would bring in. **Run 2026-09-30**: up to Gramacho
+        passes; Campos Elíseos, Jardim Primavera and Saracuruna, beyond it,
+        fail (search-level: SuperVia's notices; no timetable feed found), so
+        the line is drawn to its end and only those three are left unringed.
       - **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
         Eldorado; CNEFE 13,011. Belo Horizonte becomes "(Regional)".
       - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
@@ -348,6 +363,14 @@ Desktop is unaffected — the label is fully visible there.
       left**: Burnaby's `gis.burnaby.ca` refuses scripted requests (17,286
       licences per the portal: an owner's browser fetch, as Bucharest);
       Richmond's business directory declares no licence (a `licence-read`).
+      **2026-09-30**: New Westminster measured, 907 resident licences in the
+      buckets (retail 379, food 303, personal 225; approved 2025–2026),
+      **99.8% joined** to the City's Address Points (42,690). **Richmond:
+      NOT PERMITTED as it stands**. It has no open-data licence; the site's
+      copyright notice allows "research purposes and private use only",
+      written permission required (buslic@richmond.ca), so it stays out
+      unless the owner asks. Its directory: 11,517 current licences, 4,012
+      in the buckets, addresses only.
     - **Watch items from group 1**, each a dated re-check: Salvador's VLT
       (trial running since 2026-06-29; draw it on Salvador's map once in
       revenue service); Teresina (all-day 15-minute service); the Hazel

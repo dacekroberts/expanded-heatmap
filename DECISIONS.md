@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**226 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 
 **2026-09-29**
@@ -268,6 +269,79 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)
+
+- **Dallas moved from the discards to Band A (owner: "yes agree on den haag
+  and dallas").** Its 2026-09-21 discard rested on the city's certificates
+  of occupancy stopping in 2022.
+  - **The register:** the Comptroller's `jrea-zgmq` (public domain,
+    Houston's register) holds 44,760 outlets flagged DALLAS inside city
+    limits, with permits to 2026-09-26. That is 19,557 storefronts once
+    non-store retail (4,350) and parking (256) leave.
+  - **Placement:** a 300-row sample joined to the City's AddressPoints
+    (395,893 main addresses) places 90.0% (exact 88.3%).
+  - **Rail:** DART light rail has 44 stations inside the city, at a
+    1,397 m median gap. The worst line, Orange, keeps 57% of its stations.
+  - **In-ring share:** 24.4% within 0.6 mi (a 400-row sample).
+  - **Before a build:** the AddressPoints licence (an accuracy disclaimer
+    only) needs a read.
+- **Fort Worth and Austin stay discarded, now on rail.**
+  - **Fort Worth:** 22,352 outlets in the file, but TEXRail and the TRE
+    are commuter lines.
+  - **Austin:** the register the 2026-09-18 row found missing is there
+    (37,228 outlets). Its Red Line, measured from Capital Metro's GTFS
+    (`r4v4-vz24`), runs 1–2 trains an hour each way at the median stop.
+    That fails the 15-minute gate for converted railway, so the row's
+    kind changed from absence to rail.
+- **St. Louis was discarded as a stream, not a register**, Norfolk's
+  precedent.
+  - **The permits:** its occupancy permits run from 1991 to date (10,635
+    applications 2021–2026) but record a business arriving, never
+    leaving.
+  - **The API:** the Commercial Occupancy API is a live queue of 60
+    pending applications.
+  - Counts: A 0 → 1, candidates 63 → 64, discards 100
+    (Dallas out, St. Louis in).
+- **Den Haag's horeca permit layer proceeds on Amsterdam's precedent (the
+  owner's call on an AMBIGUOUS licence read).**
+  - **Why ambiguous:** nothing grants or bars reuse. Under Databankenwet
+    art. 8(2) a public body's database is unprotected unless the right
+    is expressly reserved. Against that: denhaag.nl's site terms name
+    database rights, the layer is not on the open-data portal, and the
+    portal's horeca placeholder is "in onderzoek".
+  - **The rejected alternative:** asking datashop@denhaag.nl, since
+    outreach is the last resort.
+  - **Conditions:**
+    - credit "Gemeente Den Haag";
+    - never call the layer current or complete;
+    - never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM`, which the
+      city's own map hides.
+- **Richmond (BC) is NOT PERMITTED as it stands** (licence read).
+  - **The terms:** there is no open-data licence. The site-wide
+    copyright notice limits material to "research purposes and private
+    use only", with written permission required, closer to Philadelphia
+    than to a silent source.
+  - **The data:** the directory holds 11,517 current licences, 4,012 in
+    the buckets, addresses only.
+  - **Next step:** it stays out of Vancouver's rescope unless the owner
+    asks the City.
+- **New Westminster joins at 99.8%.** 907 resident licences in the
+  buckets (approved 2025–2026) match the City's Address Points (42,690).
+- **Rio's Gramacho–Saracuruna section fails the frequency gate.** Rio's
+  three add-on stations (Duque de Caxias, Corte Oito and Gramacho) pass.
+  - **The evidence** is search-level: SuperVia's notices. The 12-minute
+    peak runs Central–Gramacho only; one notice gave Gramacho–Saracuruna
+    a 50-minute average; the Moovit timetable shows short turns at
+    Gramacho.
+  - **The consequence:** beyond Gramacho, Campos Elíseos, Jardim
+    Primavera and Saracuruna are left unringed.
+- **Macro legend:** the three new T1 rows carry the proposed `mode` and
+  `coverage` (the cleanup session's two-key legend). Göteborg is
+  `one_bucket`, since food shops count as food.
+- **Still running:** Long Beach's licence read.
+- **Files:** `docs/city_master_list.md`, `docs/tram_city_list.md`,
+  `PLAN.md`.
 
 ### 2026-09-30 - T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)
 
