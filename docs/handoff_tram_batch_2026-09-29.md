@@ -26,31 +26,11 @@ https://claude.ai/artifact/UQ7Lsdu23HPfuZ1JFxoaxo, and PLAN's macro-map items.
 - **The currency rule**: the source must drop closed businesses and its
   newest row date must be under five years; the date goes on the page.
 
-## 1. The France batch kit - a STAGING session (skills, scripts, briefs)
+## 1. The France batch kit - DONE 2026-09-30
 
-The 21 French T1 cities, on one register already cached nationally
-(`data/france/raw/`, the September 2026 SIRENE edition).
-
-- **A `france-tram-city` skill**, written from the five built French cities
-  (Paris, Marseille, Toulouse, Lille, Rennes) per the per-country-skill rule:
-  the SIRENE chain (active is the letter `A`; `codeCommuneEtablissement`
-  codes differ from boundary codes; the per-row `epsg` column; `qualite_xy`
-  33 is commune-centroid grade), the tram leg from the city's own feed
-  (mode flags are unreliable: Reims types its tram as metro; Le Havre's
-  funicular and Mulhouse's tram-train are dropped), the scope call (commune
-  or regional; Bordeaux, Grenoble, Rouen and Valenciennes lean regional),
-  0.3 mi rings, and the notices.
-- **A batch scaffold script** (`scripts/`, dry-run first) that writes the 21
-  configs from the screen's inputs:
-  `data/_staging_scratch_2026-09-27/second_cities/france/` holds
-  `stations/<slug>.csv` (every tram stop with its commune), `gtfs_urls.py`
-  (each feed's resource and declared licence), `cities.py` (commune codes),
-  `screen_results.csv` and `sirene_candidates.parquet`. Running the
-  scaffolds is build work; writing the script is staging's.
-- **21 build briefs** in `docs/build_briefs/<slug>.md`, each with a checks
-  block for `scripts/brief_check.py`.
-- Feeds are rolling (earliest end Avignon 2026-10-18): fetch at build, never
-  cache a feed across weeks.
+The `france-tram-city` skill, `scripts/scaffold_france_batch.py` and 20
+briefs (Angers held); DECISIONS "The France batch kit". Builds wait for the
+owner's go and the calls in each brief.
 
 ## 2. Licence reads - the five French ones DONE 2026-09-29
 
@@ -68,42 +48,9 @@ Plzeň's and Olomouc's GTFS, Tucson's BUSLIC terms, RideKC's GTFS, Florence's
 four layers, VZD's address file, and the geometry source for Montpellier and
 Le Havre. Each notice goes in `docs/data_sources/` before its page exists.
 
-## 3. Page text by template - APPROVED by the owner 2026-09-29
+## 3. Page text by template - APPROVED 2026-09-29, now in the skill
 
-The French tram-city page text, approved word for word ("approved"). It goes
-into the `france-tram-city` skill; braces are per-city facts, filled at each
-build from that city's own measurements. The controls paragraph and the
-heat-layer caveat stay exactly as on Rennes's page
-(`app/pages/25_Rennes_Heatmap.py`), and so does the transit caption, with the
-operator's credit and any notice its licence read requires.
-
-> {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
-> and in the legend, from the operator's own published timetable feed. {City}
-> has no metro: its trams are its rapid transit, as Riga's are, so every tram
-> stop gets rings.
->
-> The map covers the **{commune of City / N communes of the Métropole}**.
-> {Where a line runs past it: which stops are left out and why, as Rennes's
-> page does.}
->
-> Businesses come from **SIRENE**, France's national register of
-> établissements, joined to INSEE's geolocation file, the same sources as
-> Paris, Marseille, Toulouse, Lille and Rennes. {Share} of active
-> establishments here are marked non-diffusible by INSEE, which withholds
-> their name, address and coordinates together, so they never reach this map.
-> Where SIRENE records no shop sign or trading name, the dot shows the address
-> instead.
->
-> **Read the density as a register, not a street survey.** {Same paragraph as
-> Rennes, with this city's ratio to OpenStreetMap's restaurants.}
->
-> **Tram stops sit closer together than metro stations**, a median of
-> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
-> 0.3 mi), as on the other French maps. **About {share} of storefronts sit
-> within a ring.**
-
-A city whose median stop gap is over about 550 m keeps the standard rings and
-drops the last paragraph's first sentence (none in France is expected to).
+Word for word in `.claude/skills/france-tram-city/SKILL.md`, section 6.
 
 ## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time) - HELD
 
