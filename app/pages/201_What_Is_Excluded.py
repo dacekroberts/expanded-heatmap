@@ -110,6 +110,7 @@ def station_table():
     thinned = sum(r["counts"][1] for r in rows if r["counts"])
     other = sum(r["counts"][2] for r in rows if r["counts"])
     closed = sum(r["counts"][3] for r in rows if r["counts"])
+    infrequent = sum(r["counts"][4] for r in rows if r["counts"])
 
     # components.scroll_table since 2026-09-28: as a markdown table it widened
     # this page to 518 px at 375 (deploy-verify, review time). And NOT
@@ -125,6 +126,8 @@ def station_table():
         columns.append(("Other", 2))
     if closed:
         columns.append(("Closed for works", 3))
+    if infrequent:
+        columns.append(("Too infrequent", 4))
     header = ["City", "Network mapped"] + [c for c, _ in columns]
     body = []
     for row in rows:
@@ -134,21 +137,22 @@ def station_table():
         else:
             cells += [f"{row['counts'][i]:,}" for _, i in columns]
         body.append(cells)
-    return header, body, outside, thinned, other, closed
+    return header, body, outside, thinned, other, closed, infrequent
 
 
 if DOC.exists():
-    header, body, outside, thinned, other, closed = station_table()
+    header, body, outside, thinned, other, closed, infrequent = station_table()
     text = DOC.read_text(encoding="utf-8")
     head, marker, tail = text.partition(BUSINESS_HEADING)
     st.markdown(head)
 
     st.markdown(
         f"""
-**{outside + thinned + other + closed:,} stations are left out across these maps** -
+**{outside + thinned + other + closed + infrequent:,} stations are left out across these maps** -
 {outside:,} for standing outside the city whose register the map is built from,
 {thinned:,} thinned out of street-running stretches where the stops are
-closer together than the rings, and {closed:,} closed for works. Every one of
+closer together than the rings, {infrequent:,} on light-rail stretches that run
+less often than every 15 minutes, and {closed:,} closed for works. Every one of
 them is named in its city's `excluded_stations.csv`.
 """
     )

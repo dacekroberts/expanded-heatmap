@@ -1,0 +1,31 @@
+station,lines,reason,latitude,longitude
+Hjortshøj,L1,"Grenaabanen, converted railway: every 30 min by day (Midttrafik's L1 timetable, read 2026-09-29), under the 15-minute light-rail test",56.24490015,10.269282950000001
+Løgten,L1,"Grenaabanen, converted railway: every 30 min by day (Midttrafik's L1 timetable, read 2026-09-29), under the 15-minute light-rail test",56.27596885,10.31756745
+Risskov Strandpark,L1,"Grenaabanen, converted railway: every 30 min by day (Midttrafik's L1 timetable, read 2026-09-29), under the 15-minute light-rail test",56.1843648,10.237088
+Skødstrup,L1,"Grenaabanen, converted railway: every 30 min by day (Midttrafik's L1 timetable, read 2026-09-29), under the 15-minute light-rail test",56.2618422,10.3032037
+Torsøvej,L1,"Grenaabanen, converted railway: every 30 min by day (Midttrafik's L1 timetable, read 2026-09-29), under the 15-minute light-rail test",56.205480449999996,10.22848915
+Vestre Strandalle,L1,"Grenaabanen, converted railway: every 30 min by day (Midttrafik's L1 timetable, read 2026-09-29), under the 15-minute light-rail test",56.194977699999995,10.2368262
+Østbanetorvet,L1,"Grenaabanen, converted railway: every 30 min by day (Midttrafik's L1 timetable, read 2026-09-29), under the 15-minute light-rail test",56.16289810000001,10.2163979
+Beder,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.0569105,10.1981318
+Gunnar Clausens Vej,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.1114956,10.125815450000001
+Kongsvang,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.1353766,10.1741845
+Malling,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.037667549999995,10.1912476
+Mårslet,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.06877555,10.1642908
+Mølleparken,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.072535,10.15447
+Nørrevænget,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.0921794,10.1512014
+Rosenhøj,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.1170109,10.1471798
+Tranbjerg,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.096576999999996,10.1358246
+Viby J,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.121904,10.1598843
+Vilhelmsborg,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.06403855,10.1789691
+Øllegårdsvej,L2,"Odderbanen, converted railway: every 30 min by day at the section's stops (Midttrafik's L2 timetable, read 2026-09-29), under the 15-minute light-rail test",56.11460565,10.1338255
+Grenaa,L1,"in Norddjurs Kommune (707), outside Aarhus Kommune",56.41273905,10.880454199999999
+Hessel,L1,"in Norddjurs Kommune (707), outside Aarhus Kommune",56.3900118,10.8720644
+Trustrup,L1,"in Norddjurs Kommune (707), outside Aarhus Kommune",56.3506934,10.7716096
+Assedrup,L2,"in Odder Kommune (727), outside Aarhus Kommune",56.00400035,10.18259625
+Odder,L2,"in Odder Kommune (727), outside Aarhus Kommune",55.97183325,10.15050615
+Rude Havvej,L2,"in Odder Kommune (727), outside Aarhus Kommune",55.98346705,10.15417415
+Hornslet,L1,"in Syddjurs Kommune (706), outside Aarhus Kommune",56.32054035,10.31363765
+Kolind,L1,"in Syddjurs Kommune (706), outside Aarhus Kommune",56.3629163,10.5875326
+Mørke,L1,"in Syddjurs Kommune (706), outside Aarhus Kommune",56.3393531,10.3759933
+Ryomgård,L1,"in Syddjurs Kommune (706), outside Aarhus Kommune",56.3800312,10.50055585
+Thorsager,L1,"in Syddjurs Kommune (706), outside Aarhus Kommune",56.3560845,10.4479118

@@ -91,7 +91,7 @@ together, so a row in either counts and a row in neither still fails.
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm |
-| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen |
+| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga |
@@ -1453,7 +1453,7 @@ Sporveien's names to endorse anything (NLOD §6), or present the data
 misleadingly. **MUST DO: nothing** - no key for the static file, and Entur asks
 for no more than one download a day.
 
-**30. Det Centrale Virksomhedsregister (Copenhagen) — required, and DISPLAYED.**
+**30. Det Centrale Virksomhedsregister (Copenhagen, Aarhus) — required, and DISPLAYED.** Aarhus (2026-09-29) reads the same cached generation 505, so Det Centrale Virksomhedsregister's credit is widened to name it, owner-approved.
 
 **CC BY 4.0**, from CVR's own terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/det-centrale-virksomhedsregister-cvr/`,
@@ -1466,7 +1466,7 @@ DO: nothing** - no notification, no registration of the reuse. The account is
 the owner's and closes after Copenhagen publishes (`docs/gated_access.md` item
 3); closing is licence-safe, since the grant attaches to the data.
 
-**31. Klimadatastyrelsen (Copenhagen) — required, and DISPLAYED.**
+**31. Klimadatastyrelsen (Copenhagen, Aarhus) — required, and DISPLAYED.** Aarhus (2026-09-29) reads DAR's Adresse and Husnummer (generation 761) and takes each point from OpenStreetMap's copy, so Klimadatastyrelsen's notice now names OpenStreetMap's points for Aarhus, owner-approved.
 
 **CC BY 4.0**, from DAR's terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/danmarks-adresseregister-dar/`,

@@ -24,7 +24,7 @@ Mapped so far:
 - **Italy:** Milan, Rome
 - **France:** Paris, Marseille, Toulouse, Lille (Regional), Rennes
 - **Norway:** Oslo, Bergen
-- **Denmark:** Copenhagen
+- **Denmark:** Copenhagen, Aarhus
 - **Czechia:** Prague
 - **Netherlands:** Amsterdam, Rotterdam
 - **Brazil:** São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional)

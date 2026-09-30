@@ -1873,6 +1873,29 @@ CITIES = [
         # browser, 2026-09-29). check_macro_labels.py: PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Aarhus",
+        "lat": 56.1567,
+        "lon": 10.2108,
+        "page": "pages/72_Aarhus_Heatmap.py",
+        "coverage": "full",
+        "placement": "Joined by address (97.1%)",
+        "data_age": "Weekly extract; fetched 2026-09-24",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Letbane L2 on the city tramway (light rail)",
+        "region": "Europe",
+        "country": "Denmark",
+        "in_default_view": False,
+        # LEFT of the dot and a little below, and SCORED: width 46.9 px
+        # measured in the local app's own document (2026-09-29, Prague, Tokyo,
+        # London, Glasgow and Oslo reproduced). Above the dot, the default, it
+        # overlapped Copenhagen's label (53.4 x 9.7 px) at every width; below,
+        # Berlin's. check_macro_labels.py passes dy 6 to 16 here, and 10 is the
+        # middle of that range: PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("end", -11, 10),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

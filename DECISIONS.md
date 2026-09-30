@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**218 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**219 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
@@ -31,6 +31,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Aarhus built: the city tramway, Copenhagen's register, OSM's address points](#2026-09-29---aarhus-built-the-city-tramway-copenhagens-register-osms-address-points)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Bergen built on Oslo's modules, the first light-rail city from the tram list; the five light-rail cities handed to this session (owner)](#2026-09-29---bergen-built-on-oslos-modules-the-first-light-rail-city-from-the-tram-list-the-five-light-rail-cities-handed-to-this-session-owner)
@@ -453,6 +454,86 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
 
+### 2026-09-29 - Aarhus built: the city tramway, Copenhagen's register, OSM's address points
+
+- **Aarhus built on Copenhagen's modules, 5,102 storefronts around 20 stations,
+  branch `aarhus` (page 72, held for the batch review).** Rail and boundary from
+  OpenStreetMap (Overpass, 2026-09-29): six Letbane relations kept on ref +
+  route + operator (Keolis); 89 stop positions -> 50 names after the two
+  explicit aliases (`G. Clausens Vej`, `Lisbjerg - Terp`) -> 39 in Aarhus
+  Kommune -> **20 on the city tramway** (the owner's scope), 12 on Odderbanen
+  and 7 on Grenaabanen excluded under the 15-minute test, 11 in Odder,
+  Syddjurs and Norddjurs. In-scope median gap 506 m (the brief's 499 m), so
+  the halved rings 0.05/0.1/0.2/0.3 mi. Step 1 exits unless the three named
+  sections partition the kommune's stations. Gate 3 not run: no operator
+  count exists for the section. Businesses: CVR generation 505 and DAR
+  generation 761, the shared national caches, read and not refreshed. 60,113
+  production units located in kommune 751 -> 5,884 in DB25 divisions
+  47/56/96 -> 465 structurally excluded -> 5,419 -> `969900` dropped (165,
+  3.0%, personally owned 78% against 45%) -> 5,254 -> **5,102 placed
+  (97.1%)**. The screen had 5,283 and 5,125 on the same generation. Trade
+  name shown on 2,828 (55.4%). In-ring 1,300 (25.5%): Retail 636, Food 450,
+  Personal 214. Files: `pipeline/aarhus/`, `app/pages/72_Aarhus_Heatmap.py`,
+  `app/cities.py`.
+- **Aarhus places each premises on OpenStreetMap's copy of the DAR point,
+  joined on the Husnummer's own id, as a second placement path in the shared
+  Danish step 2.** `denmark.PLACEMENT_OSM_OSAK` beside `PLACEMENT_DAR`,
+  chosen by a city's `config.PLACEMENT` (absent means DAR, so Copenhagen's
+  path is unchanged). The join is Adresse -> `husnummer` id -> the OSM point
+  whose `osak:identifier` equals it: 3,849 of 3,865 Husnummer found, against
+  3,099 on the `adgangspunkt` id, which the step prints as the key not used.
+  Datafordeler's `Adressepunkt_0751` was the rejected alternative: it needs
+  the owner's key (owner, 2026-09-27: "OSM unless we need the data
+  account"). The address points (113,964, 8.0 MB as Overpass CSV) have their
+  own support-source row in `docs/data_sources/denmark.md`.
+- **L2 is drawn cut to the city tramway, and L1 is not drawn.** OSM's L2
+  relations run on to Odder over Odderbanen, which is out of scope, so step 1
+  cuts the trunk at Aarhus H (14.2 of 40.8 km kept) and keeps only the
+  Lisbjergskolen branch beyond Lisbjerg Bygade (0.6 km). It writes that as
+  GeoJSON for `load_geojson_line_shapes`, Madrid's path, rather than
+  extending `load_osm_line_shapes`, which draws a relation whole. It
+  excludes each relation's ~27 `platform` ways, which would otherwise
+  linemerge into stray rings. Two checks guard the cut: every in-scope
+  station within 60 m of the line, every converted-railway station more than
+  150 m from it. L1's only in-scope track is shared with L2, so drawing it
+  would add a label and a legend entry for no new track. Its four in-scope
+  stations carry "L1/L2" in stations.csv. Colour `#30556E`, OSM's: 42.7
+  against Retail, below the preferred 45, recorded.
+- **A Danish store registered as a franchisee's own name and a store number
+  shows its address, in both Danish cities (owner, on the recommendation).**
+  29 Aarhus premises, and 33 live on Copenhagen's page, are discount
+  supermarkets named "Jacob Albertsen, 870 Sabro": a person, a three-digit
+  store number, a place, under a company parent, so the legal-form guard
+  never fired. `denmark.STORE_NUMBER_NAME` (`^[^\d,]+,\s*\d{3}\s+\D`) matched
+  exactly those rows in both cities, and "VIN OG TOBAK, 1001 NAT" and
+  "365discount Åbyhøj, Silkeborgvej 340" keep their names. Rejected: keeping
+  the names as Copenhagen published them (shops, not homes), and an
+  Aarhus-only rule. Copenhagen's re-render is queued with the cleanup session
+  for the review merge; this branch does not re-run another city's step.
+- **Aarhus privacy verdict: publishable.** `check_personal_exposure.py
+  aarhus`: 1,300 pins; 0 contact details; 0 person-like names at a
+  residential unit. The heuristic's 208 person-like names were read in full:
+  trade names of company-form businesses (brands, cafés, AXEL KAUFMANN, a
+  fashion house). The one surname-first hit, "SØREN BRUUN, ÅRHUS", is a
+  company-form restaurant's registered name, which Copenhagen's rule keeps.
+- **Stops cut by the frequency test are a fifth category on the public
+  exclusions page (owner, the wording approved).** `app/station_scope.py`
+  classifies a reason naming the 15-minute test as `infrequent`, and
+  `counts_for` returns it fifth, so the earlier positions hold. Page 201 adds
+  a "Too infrequent" column, shown only when non-zero, and a clause in its
+  total. `docs/excluded_categories.md` now says "Three things remove a
+  station", with the new bullet. Folding the 19 into "Other" was what
+  `check_scope_disclosure.py` refused.
+- **Aarhus's macro label sits left of its dot and a little below:
+  `("end", -11, 10)`.** Above the dot, the default, it overlapped
+  Copenhagen's label (53.4 x 9.7 px) at every width; left and higher still
+  overlapped; below, Berlin's. `check_macro_labels.py` passes dy 6 to 16, and
+  10 is the middle: PROBLEMS 0 at 375, 768 and 1200. Width 46.9 px, measured
+  2026-09-29 by the Suwon/Bucheon/Bergen session.
+- **Text approved by the owner 2026-09-29**: the page, the CVR and
+  Klimadatastyrelsen notices widened to "(Copenhagen, Aarhus)", Aarhus added
+  to the OpenStreetMap rail-geometry notice (with its address points), and
+  the Aarhus section of `docs/excluded_categories.md`.
 ### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
 
 - **Rule 1 now reads "at least one full bucket at register quality", not
