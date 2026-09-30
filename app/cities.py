@@ -1973,6 +1973,34 @@ CITIES = [
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
     },
+    {
+        "name": "Odense",
+        "lat": 55.3959,
+        "lon": 10.3883,
+        "page": "pages/130_Odense_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Joined by address (98.4%)",
+        "data_age": "Weekly extract; fetched 2026-09-24",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Odense Letbane, one tram line",
+        "region": "Europe",
+        "country": "Denmark",
+        "in_default_view": False,
+        # RIGHT of the dot and a little below, and SCORED: width 50.6 px
+        # measured in a browser with Space Grotesk loaded (2026-09-30; seven
+        # built cities' widths reproduced). Above the dot it covered Aarhus's
+        # marker and overlapped Copenhagen's label; below, Amsterdam's and
+        # Berlin's; left, Aarhus's or Amsterdam's. check_macro_labels.py passes
+        # dy 5 to 8 on this side (4 covers Copenhagen's marker, 9 touches
+        # Berlin's label), and 6 sits inside that: PROBLEMS 0 at 375, 768 and
+        # 1200.
+        "label_offset": ("start", 11, 6),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

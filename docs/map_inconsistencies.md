@@ -522,6 +522,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Denmark** | | | | | |
 | Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
 | Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
+| Odense | Odense Letbane, one tram line | Buses and regional trains | OpenStreetMap | Kommune | 0 / 0 |
 | **Czechia** | | | | | |
 | Prague | Metro A, B, C | Trams, funicular, ferries, suburban | PID GTFS | City | 0 / 0 |
 | **Netherlands** | | | | | |
@@ -628,6 +629,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Denmark** | | | | | |
 | Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,708 | Tattoo studios lost with the catch-all |
 | Aarhus | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 636 / 450 / 214 | Tattoo studios lost with the catch-all |
+| Odense | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 603 / 343 / 208 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
 | Prague | National registers (location + activity) | ROS02 + RES | CZ-NACE 2025 (owner's activity) | 6,027 / 5,464 / 6,122 | About 57,000 establishments of other-activity owners missing |
 | **Netherlands** | | | | | |
@@ -731,6 +733,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Denmark** | | | |
 | Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
 | Aarhus | Address join to DAR, points from OpenStreetMap's copy (97.1%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
+| Odense | Address join to DAR, points from OpenStreetMap's copy (98.4%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
 | **Czechia** | | | |
 | Prague | Address join to RÚIAN (99.99%) | Owner's activity only; web shops | Home-address sole traders (1,500) dropped; names withheld |
 | **Netherlands** | | | |
@@ -829,6 +832,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Denmark** | | | | | | |
 | Copenhagen | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 94% | Name; address for personal owners |
 | Aarhus | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 25% | Name; address for personal owners and franchisees |
+| Odense | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 41% | Name; address for personal owners and franchisees |
 | **Czechia** | | | | | | |
 | Prague | 2026-08-31 (ROS02) | B | 0.6 mi | Yes | 70% | Name; address for persons/partnerships |
 | **Netherlands** | | | | | | |

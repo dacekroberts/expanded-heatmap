@@ -1434,6 +1434,27 @@ the municipality (Odder 3, Syddjurs 5, Norddjurs 3). All are listed in
 `outputs/aarhus/excluded_stations.csv`. Regional and InterCity trains are not
 drawn.
 
+### Odense - Copenhagen's register and rules, and every tram stop
+
+**Copenhagen's rules, unchanged** (the section below): production units at their
+own location address, the eight structural kinds of work plus industrial
+laundries (221 rows here: contract catering and canteens 96, event catering 61,
+retail agents 28, mobile food stalls 16, funeral services 11, home services 5,
+industrial laundries 2, personal-service agents 2), and a personally owned
+business shown by its address. **`969900` excluded on Odense's own numbers**:
+108 rows (3.6%), 84% personally owned against 46% overall; tattoo studios are
+lost with it, as in Copenhagen and Aarhus. **A supermarket registered under its
+franchisee's own name and a store number** shows its address too: 17 premises.
+**Left off because they could not be placed**: 45 premises (1.6%), 41 with no
+address id and 4 whose address has no point in OpenStreetMap.
+
+**Stations**: all 25 Odense Letbane stops in service, Tarup Center to Hjallese
+Station, every one inside the municipality, so none is excluded. SDU
+Syd/Hospital Nord, open since August 2023, is added by hand because
+OpenStreetMap's route relations leave it out. Hospital Syd opens with the new
+university hospital in 2027 and gets no ring until then. Buses and regional
+trains are not drawn.
+
 ### Copenhagen - production units, two municipalities, and a personal owner's name kept off the map
 
 **Excluded by the classification itself, anywhere in Denmark** - the same eight
