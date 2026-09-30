@@ -2156,6 +2156,28 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   or complete on SEMAS's behalf (its legal notice disclaims both).
 - **MUST DO**: nothing.
 
+**69. Yokohama City and MLIT (Yokohama) — required, and DISPLAYED** (written
+into `render_site_notices()` 2026-09-30, after Tokyo's; displayed once Yokohama
+lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-30; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's barber, beauty
+  and laundry registers are **CC BY 4.0**, declared on the dataset page
+  (`https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/seikatsu/kaiteki/kankyodata.html`)
+  and through the city's open-data terms. MLIT's 位置参照情報 and N02 are **PDL
+  1.0**, each with its own credit line, as in Kobe's (50). N03 (CC BY 4.0) is
+  credited although it only picks stations and is **never drawn** (the Survey
+  Act).
+- **MUST DISPLAY**: the city's own form for a modified work -
+  `この地図は、以下の著作物を改変して利用しています。環境衛生関係施設一覧（理容所・美容所・クリーニング所施設一覧、令和８年４月１日現在）、神奈川県横浜市、クリエイティブ・コモンズ・ライセンス 表示4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）`
+  - with an English gloss saying what was modified, and the dataset page linked.
+- **MUST NOT**: present the map as the city's work; imply its endorsement; say
+  the pins are businesses open now (the registers record no closures).
+- **MUST DO:** `check_personal_exposure.py yokohama` with its Japan pass (the
+  operator's own name is never shown as a trade name), run 2026-09-30; the
+  verdict is in `docs/decisions_drafts/band-b.md` until it is folded into
+  `DECISIONS.md`. Contact for removals: ir-seikatsueisei@city.yokohama.lg.jp.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

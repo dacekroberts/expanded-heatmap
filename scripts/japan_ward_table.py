@@ -64,9 +64,9 @@ STATUS = {
     "sendai": ("Sendai", "🔴 D", "Needs the city's permission; letter drafted, not sent"),
 }
 GAP = [  # no food list on disk: status only (key, name, wards, personal services, band, status)
-    ("yokohama", "Yokohama", 18, "complete (2026-04-01)", "🟣 C",
-     "Personal services only, no page for now (owner, 2026-09-24). No food list in any era; "
-     "MHLW's opt-in slice is 2,912 restaurants"),
+    ("yokohama", "Yokohama", 18, "7,896 rows, complete (2026-04-01)", "✅ built",
+     "Built 2026-09-30, Japan's seventh: personal services only (owner, 2026-09-29), 98.0% placed at "
+     "block. No food list in any era; MHLW's opt-in slice is 2,912 restaurants"),
     ("nagoya", "Nagoya", 16, "beauty list only", "✗ discarded",
      "Discarded 2026-09-24 (owner): no standing list ever, and the monthly files omit renewals, "
      "so no rebuild can work"),

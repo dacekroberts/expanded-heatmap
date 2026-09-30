@@ -2321,6 +2321,35 @@ ward line.
   are not drawn on their own.
 - The Shinkansen does not count.
 
+### Yokohama - the city's barber, beauty and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the city publishes no list of them, so
+  this map shows personal services only (owner, 2026-09-29).
+- The city's other registers (bathhouses, inns, entertainment venues, pools,
+  building sanitation): not personal-services storefronts.
+- The monthly lists of new premises since 1 April 2026 (about 170): closures
+  are not published beside them, so the register stays one snapshot.
+- 24 premises with no fixed place: 3 salons in vehicles, and 21 laundries
+  registered to work anywhere in the city (20 of them pick-up services with no
+  shop).
+
+**Counted** - every barber, beauty salon and laundry on the registers of 1 April
+2026, laundry counters that take in and return washing included. No closures
+are recorded, so some may have closed since.
+
+**One pin per premises** - 25 repeat registrations are shown once.
+
+**Not placed** - 4 rows. Another 156 sit at their town's centre.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 41 stations beyond it: 25 in Kawasaki, 6 in Tokyo (Machida), 4 in
+  Yamato, and 2 each in Yokosuka, Fujisawa and Zushi.
+- The Shinkansen does not count.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

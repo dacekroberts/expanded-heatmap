@@ -411,6 +411,13 @@ REGISTRIES = {
     "sacramento": dict(raw=None, trade=None, owner=None,
                        processed="businesses_geocoded.csv",
                        address=("street", "unit")),
+    # Yokohama: the city's barber, beauty and laundry registers (personal
+    # services only). 申請者氏名 is read only by the name rule, in memory
+    # (japan_register.name_is_operator); the Japan pass tests what reached the
+    # map (2026-09-30).
+    "yokohama": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv",
+                     address=("address",), japan=True),
     # Houston: the Texas Comptroller's sales-tax permits. No taxpayer column is
     # ever downloaded but the organisation type (fetch_sources names its
     # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its

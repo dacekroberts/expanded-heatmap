@@ -2048,6 +2048,29 @@ CITIES = [
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
     },
+    {
+        "name": "Yokohama",
+        "lat": 35.444,
+        "lon": 139.638,
+        "page": "pages/81_Yokohama_Heatmap.py",
+        "coverage": "one_bucket",
+        "mode": "metro",
+        "placement": "Joined to address blocks (98.0%)",
+        "data_age": "Registers as of 2026-04-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Yokohama's subway, the Minatomirai and Seaside lines, and JR and private railways",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # RIGHT OF THE DOT AND ABOVE TOKYO'S PILL: Yokohama's dot sits 2 px from
+        # Tokyo's in East Asia, whose pill is right of both, with Kobe's and Kyoto's
+        # above-left and Osaka's below. check_macro_labels.py (python -B) passes start
+        # 12 at dy -34 to -56 (-64 covers Sapporo's marker), PROBLEMS 0 at 375, 768
+        # and 1200 on the combined tree (width 68.8 px, measured 2026-09-30).
+        "label_offset": ("start", 12, -42),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
