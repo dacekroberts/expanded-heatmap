@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**231 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
 - [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
@@ -272,6 +273,70 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held
+
+- **Wrote `.claude/skills/tram-city/SKILL.md` for the ten T1 cities that
+  are neither French nor Czech** (`docs/handoff_tram_kit_2026-09-30.md`).
+  They span seven countries, one to three per country, so it is one
+  cross-country skill rather than a country skill. It carries what they
+  share: the owner's trams-only calls, rings by the spacing rule, no
+  thinning except New Orleans's street-stop filter, the light-rail test and
+  `mode`, rolling feeds, OSM rail, the currency rule, `coverage`, and the
+  page-text parts. A sheet per city names its built template (Aarhus, Riga,
+  Milan and Rome, Stockholm, Rotterdam, a US register city). Nothing was
+  scaffolded or built, and nothing touched `app/`.
+- **No batch scaffold, on the measurement.** The ten copy seven different
+  template configs (153 to 304 lines each), and Zurich has none (a new
+  country). The largest group sharing one business config is Latvia's two;
+  the US three have three different registers. Beyond `scaffold_city.py`,
+  which already writes the config, step 3, the page and the `cities.py`
+  entry with `--mode`, a batch script could write only the halved ring
+  edges and labels (2 lines in about 9 cities) and two CRS overrides
+  (Odense `EPSG:25832`, Zurich `EPSG:2056`). That is about 20 lines of hand
+  edits, against France's 675-line script for 20 cities on one config
+  shape. So each city runs `scaffold_city.py` and copies its template.
+- **The code that does repeat goes into shared modules at the first build
+  instead.** The OSM tram step 1 is needed by three to five of these ten
+  (Odense, Daugavpils, Liepāja, perhaps Zurich and Göteborg) and by five of
+  the six Czech cities. **Agreed with the Czech kit: one
+  `pipeline/osm_tram.py`**, written by whichever OSM tram build goes first.
+  It is Aarhus's `stop_rows()` generalised:
+  - `STATION_ADD` by node (Odense's SDU Syd/Hospital Nord, Liepāja's
+    Brīvības iela and Klaipēdas iela);
+  - `tram_stop` or `stop_position` members accepted;
+  - an optional operator filter;
+  - every matching relation kept or listed in `NOT_DRAWN`;
+  - several relations per ref;
+  - a union of scope polygons;
+  - a lines-only mode.
+
+  Its control is Aarhus's inputs reproducing Aarhus's `stations.csv`.
+  Latvia's step 2 is lifted from Riga's into
+  `pipeline/countries/latvia_register.py` at the first Latvian build, with
+  Riga's drift check as the control. Both modules are shared paths, so the
+  app/chrome role is told first. Rejected: a batch script (above), and
+  copying Aarhus's 293-line step 1 per city, the shape
+  `france_register.py` exists to prevent.
+- **OSM stations collapse at the name mean, Aarhus's rule.** France's
+  never-a-mean rule came from the French portal's ODbL conditions for the
+  feeds, so it applies here only to an ODbL GTFS feed.
+- **Brief checks, 2026-09-30:** Odense 2/2, Daugavpils 4/4, Liepāja 4/4.
+  Liepāja's first run was 3/4, with Overpass mirrors disagreeing on the
+  relation count (1 against 2): a host problem, which passed on re-run.
+- **Staging asked for** a Brest-style "For the owner, with the build"
+  table in every brief, and literal `coverage` values: the Latvian briefs
+  say "as Riga's", and Riga is `narrowed`, "Merged". Also asked for:
+  - Den Haag's `coverage`: the tram list proposes `full`, but Rotterdam,
+    its shape, is `narrowed`, "Merged";
+  - Daugavpils's per-route headways (the screen had routes 2-4 hourly);
+  - Zurich's Forchbahn, its Glattalbahn stub test and refs 50 and 51;
+  - New Orleans's in-ring share with and without the street-stop filter;
+  - Kansas City's median gap and colour;
+  - `vs_config` fields on the GTFS briefs.
+- **The trams-only page-text template is drafted in chat for the owner, not
+  written to the skill**, which lists its parts until the owner approves
+  it.
 
 ### 2026-09-30 - The France batch's eight calls approved as recommended; builds go ahead (owner)
 
