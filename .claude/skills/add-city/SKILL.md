@@ -304,8 +304,14 @@ correct, not a check to relax.
 - **Either way, every keep-or-drop call follows the other cities**:
   `docs/category_rules.md` holds the owner's cross-city rules (funeral, canteens,
   the personal-services catch-all, adult venues, massage, petrol stations,
-  gambling, vets...) with their precedents. Recommend the precedent; bring a
-  departure to the owner with the precedent it breaks.
+  gambling, vets...) with their precedents, and a "Station scope" section for
+  stations (closed for works, too rarely served, thinned; see Step 4).
+  Recommend the precedent; bring a departure to the owner with the precedent it
+  breaks. `scripts/check_category_continuity.py` needs a column for every new
+  taxonomy in `scripts/category_continuity_table.py` (every rule answered with
+  `loc`, `absent`, `outside` or `exception`); a new taxonomy without one fails
+  `check_all`. A departure goes in as `pending(...)`, with the cell listed in
+  AWAITING_OWNER, never as a decided row.
 
 ## Step 2 - Scaffold
 
@@ -469,6 +475,31 @@ Document every cut station (name, line, reason, nearest kept station) to
 filter deserve the same record, with the city each lies in (Los Angeles: 54
 of 110 stations, across 23 other places) - use a multi-city boundary layer
 so the city can be named.
+
+**Three station rules hold in every city** (owner, 2026-09-29;
+`docs/category_rules.md`, "Station scope"). Recommend the precedent, and bring a
+departure to the owner with the precedent it breaks. The `reason` wording is load-bearing:
+`app/station_scope.py` sorts each `excluded_stations.csv` row into the What Is
+Excluded table by the words in it, and a row it cannot read is counted as "Other"
+and fails `check_scope_disclosure.py`.
+- **Closed for works: drawn as the timetable runs.** A station or branch the
+  current feed does not serve because it is closed is not drawn or ringed; track
+  that trains still run through is drawn. List it with a reason containing
+  `closed for works` and the operator's reopening date. Name it on the page with
+  when it is due back, make step 1 stop the build once the feed serves it again,
+  and add a dated PLAN item to put it back. If the operator's count includes it,
+  count it for gate 3 first, then move it out, as Prague does with Flora. Precedents:
+  Berlin's U6 Tegel branch, Sacramento's Township 9, Prague's Flora. A rule keyed
+  on how soon a station reopens was rejected, because operators' dates slip.
+- **Too rarely served: the 15-minute test.** Light rail is drawn only where it
+  runs at least every 15 minutes by day. A stop on a slower stretch is listed
+  with a reason containing `15-minute` (Aarhus's two converted railway lines).
+- **Thinned by spacing: name the lines.** A city whose file thins stops (reason
+  containing `spacing`) must say which lines, either on its own page ("thinned", or
+  "one stop per half mile is drawn") or in the spacing-filter paragraph of
+  `docs/excluded_categories.md`. Do both: the page is where that city's reader
+  looks, and the paragraph lists every city. `check_scope_disclosure.py` property F
+  fails a city with neither; it prints a NOTE for one on its page only.
 
 **Measure inter-station distances against the 0.6 mi outer ring.** Where
 several stations sit closer than that (downtown clusters), their rings

@@ -28,6 +28,15 @@ with the precedent it breaks and the count. Korea's first SEMAS mapping
 proposed dropping massage on a hunch, which would have made Korea the only
 country without it (2026-09-29).
 
+**A new taxonomy module needs its column in the continuity table in the same
+change.** Registering it in `pipeline/taxonomies/__init__.py` without a column in
+`scripts/category_continuity_table.py` fails `check_category_continuity.py`, and
+so `check_all` and the pre-push hook. The column answers every rule with a real
+row from the register: `loc`, `absent`, `outside` or `exception`. A departure
+goes in as `pending(...)` and its cell into AWAITING_OWNER; without that entry
+the table reads it as a fix the owner approved. Buffalo and Sacramento arrived at
+review without columns (2026-09-29).
+
 ---
 
 ## Step 1 — Find out how many levels there are, before reading any values
