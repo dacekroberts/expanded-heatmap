@@ -81,7 +81,8 @@ at review time only (`docs/review_time.md`).
   4. Odense's SDU Syd/Hospital Nord added by node, and Hospital Syd out until
      it opens;
   5. Odense's `mode` is `tram`;
-  6. Daugavpils's routes under the call 2 floor;
+  6. Daugavpils's routes under the call 2 floor (**superseded by call 28**:
+     every route is drawn);
   7. Daugavpils and Liepāja are `narrowed`, "Merged";
   8. notice 42 extended to name VZD's address register, in VZD's wording
      with the year;
@@ -113,6 +114,16 @@ at review time only (`docs/review_time.md`).
   **Calls 18-24 were approved before their briefs landed.** If a brief's
   measurement changes the facts behind one (a Glattalbahn line that is not
   a stub, a Mölndal line that is), the call goes back to the owner.
+- **The four calls from the last briefs** (owner, 2026-09-30):
+  25. Zurich's tram 20 (Limmattalbahn, 4 of 26 stops inside) is left out as
+      a stub;
+  26. Den Haag's tram 1 (19 of 37 inside, 51%) is drawn to its end, with the
+      stops outside listed;
+  27. Den Haag's page carries the permit layer's date (section 6);
+  28. **Daugavpils draws its whole network, routes 1-5, and the page states
+      the waits.** In the owner's words: "like with buffalo 50% of network
+      shouldn't fall if the norm is longer waits." Call 2's floor would have
+      kept only route 1, 19 of the 38 stops.
 
 ## 1. Is it a tram, and what is its `mode`?
 
@@ -139,13 +150,21 @@ Here that means:
 | Odense | `tram` (owner, call 5) | Aarhus, its template, is `light_rail` (its new tramway passed the test). Odense's Letbane is OSM `route=tram` and street-running, and it stayed on the list |
 | the other seven | `tram` | none |
 
-**A frequency floor for a route, not a system** (owner, call 2). Street trams
-have no frequency gate, but no built city draws a route that runs **hourly**,
-and Daugavpils's routes 2-4 did at the screen. **A route is drawn only if it
-runs at least every 20 minutes by day** (Buffalo, the slowest drawn). Read
-it from the operator's own timetable. A stop served only by slower routes
-goes to `excluded_stations.csv` as **infrequent**, Aarhus's class
-(`app/station_scope.py`), and the page says so.
+**Frequency: disclose the network's norm, drop only an outlier** (owner,
+calls 2 and 28). Street trams have no frequency gate. Read each route's
+daytime headway from the operator's own timetable.
+- **Where longer waits are the network's norm, every route is drawn and the
+  page states the waits** (call 28, Buffalo's precedent). Daugavpils is the
+  case: route 1 every 10-15 minutes, the Stropu loop (3 and 5) every 20-30
+  minutes each way, routes 2 and 4 about hourly. All five are drawn, because
+  dropping the slower routes would take half the network (19 of 38 stops).
+- **Call 2's 20-minute floor (Buffalo, the slowest drawn) is for an outlier
+  route**: a slow route on a network that otherwise meets it, such as
+  Zurich's 50 and 51 if they turn out not to run by day. Its stops, if no
+  other route serves them, go to `excluded_stations.csv` as **infrequent**,
+  Aarhus's class (`app/station_scope.py`), and the page says so.
+- **The line between the two is the owner's.** When a slow route is more
+  than an outlier, bring the share of stops it alone serves.
 
 ## 2. Stations - every stop
 
@@ -211,7 +230,7 @@ after collapse, with every stop kept.
 - The briefs' gaps (2026-09-30): Odense 441 m, Daugavpils 298, Liepāja 329,
   Kansas City 413, Florence 322, Tucson 265, New Orleans 164, Zurich 283,
   Göteborg 378, Den Haag 335. **All ten take halved rings**; recompute on the
-  stations actually drawn (Daugavpils draws route 1 only).
+  stations actually drawn.
 - **Riga is on the standard rings with thinning.** Its Latvian followers are
   NOT: no thinning and halved rings, as above.
 - **Distance in a metre CRS, never EPSG:4326**, and the CRS is per city:
@@ -343,7 +362,10 @@ requires.
 > licences valid for 2025 and 2026. Businesses that opened or closed since
 > then are not shown." Göteborg: "**The register carries no dates.** It lists
 > the food businesses active on the day it was fetched ({date}), and says
-> nothing about when each opened."}
+> nothing about when each opened." Den Haag (owner, call 27): "**The permit
+> data runs to 2025.** The city last edited its permit layer on 23 May 2025,
+> so premises that opened or closed since then may be missing or still
+> shown."}
 >
 > **Read the density as a register, not a street survey.** {The source's own
 > caveat, and this city's ratio to OpenStreetMap.}
@@ -407,7 +429,7 @@ calls.
 | City | Template (built) | Business leg | Rail source | CRS | Traps |
 |---|---|---|---|---|---|
 | **Odense** | **Aarhus** (`pipeline/aarhus/`, `countries/denmark*.py`, `taxonomies/denmark_db25.py`) | CVR, kommune 461; placed on OSM's DAR points (98.4%); personally owned rows show the address, as Aarhus | OSM, 2 `route=tram` relations, ref L; + SDU Syd/Hospital Nord by node | 25832 | No colour in OSM; Hospital Syd opens 2027; build on the shared CVR cache, never refresh it from a branch |
-| **Daugavpils** | **Riga** (`pipeline/riga/`, `taxonomies/riga_source.py`) | VID excise (food, placed on VZD's `aw_eka.csv`) + VZD cadastre use class 1230 (shops and services), ATVK 0002000 | OSM, **route 1 only** under the 20-minute floor (routes 2-5 fail, measured by staging 2026-09-30): 19 of the 38 stop names; the other 19 are listed as infrequent | 32635 | `aw_eka.csv`'s `KOORD_X` is the northing (EPSG:3059); use `DD_N`/`DD_E`; `STATUSS` = EKS; the VZD credit (notice 42 extended); hourly routes (section 1) |
+| **Daugavpils** | **Riga** (`pipeline/riga/`, `taxonomies/riga_source.py`) | VID excise (food, placed on VZD's `aw_eka.csv`) + VZD cadastre use class 1230 (shops and services), ATVK 0002000 | OSM, **routes 1-5, all drawn** (owner, call 28): 38 stop names; the page states the waits (route 1 every 10-15 min, the Stropu loop 20-30, routes 2 and 4 about hourly) | 32635 | `aw_eka.csv`'s `KOORD_X` is the northing (EPSG:3059); use `DD_N`/`DD_E`; `STATUSS` = EKS; the VZD credit (notice 42 extended); hourly routes (section 1) |
 | **Liepāja** | **Riga** | as Daugavpils, ATVK 0005000 | OSM, ref 1; + Brīvības iela and Klaipēdas iela by node | **32634** | as Daugavpils |
 | **Kansas City** | **Houston** (a US register, the sole-owner name rule); `naics.py` through a NAICS 2022 **title** map | Socrata `kkhs-93m4`, Public Domain, **frozen 2026-01-15**; `valid_license_for` 2025 and 2026 only; fee-code types ("Misc Rate 129") dropped and counted | **OSM** (RideKC's GTFS barred, owner), ref 601, 19 stops, all inside; 413 m | 32615 | The data date on the page; `dba_name` withheld where it is a person; no logos; frequency as a fact, not a cited schedule |
 | **New Orleans** | Philadelphia (a US text taxonomy, `premises-taxonomy`) | Socrata `iqay-p646`, CC0, daily; drop "Special Events-Other (Vendor)" and "Home Based-Office Use Only"; `ownername` never shown | **OSM**, streetcars 12, 47, 48 and 2, 110 stops, all inside; 164 m | 32615 | Every stop kept (owner, call 13); 46 and 49 have no stops (`NOT_DRAWN` unless they run); CSS-keyword colours |

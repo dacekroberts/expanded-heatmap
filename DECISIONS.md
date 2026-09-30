@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**240 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**241 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
 - [Tram kit complete: all ten briefs checked; four last points for the owner; builds held](#2026-09-30---tram-kit-complete-all-ten-briefs-checked-four-last-points-for-the-owner-builds-held)
 - [Dallas's address-layer indemnity accepted (owner)](#2026-09-30---dallass-address-layer-indemnity-accepted-owner)
 - [Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity](#2026-09-30---zurich-göteborg-and-den-haag-briefed-for-the-tram-kit-dallass-address-layer-carries-an-open-ended-indemnity)
@@ -282,6 +283,38 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)
+
+- **Call 28 overruled (owner): "like with buffalo 50% of network shouldn't
+  fall if the norm is longer waits."**
+  - **What changes:** Daugavpils draws routes 1-5 (38 stop names), and the
+    page states each route's wait: route 1 every 10-15 minutes, the Stropu
+    loop 20-30 each way, routes 2 and 4 about hourly. The kit's
+    recommendation was route 1 only, 19 of 38 stops, under call 2's
+    20-minute floor.
+  - **Call 2 narrowed:** the floor now drops only an outlier route, one
+    slow route on a network that otherwise meets it (Zurich's 50 and 51 if
+    they do not run by day). It never drops a network whose norm is longer
+    waits. That is Buffalo's precedent, where the slower timetable is
+    disclosed, not disqualifying. Where the line between the two falls is
+    the owner's, brought with the share of stops the slow route alone
+    serves.
+  - **Supersedes** call 6 in "The tram kit's 24 calls and its page-text
+    template approved".
+- **Calls 25-27 approved as recommended (owner):**
+  - Zurich's tram 20 (Limmattalbahn, 4 of 26 stops inside) is out as a
+    stub;
+  - Den Haag's tram 1 (51%) is drawn to its end with the stops outside
+    listed;
+  - Den Haag's page says "**The permit data runs to 2025.** The city last
+    edited its permit layer on 23 May 2025, so premises that opened or
+    closed since then may be missing or still shown", added to the
+    template's currency paragraph.
+- **Owner's idea, sent to the cleanup session:** a per-city interval value
+  passed to the city page, so waits are shown as structured data rather
+  than written into each page's prose. It is not decided here and would be
+  an `app/` change for review time.
 
 ### 2026-09-30 - Tram kit complete: all ten briefs checked; four last points for the owner; builds held
 

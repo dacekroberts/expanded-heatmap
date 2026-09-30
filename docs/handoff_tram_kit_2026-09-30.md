@@ -124,14 +124,15 @@ re-asked.
 
 Every brief passes `brief_check.py` (Zurich and Liepāja on a re-run, after
 Overpass mirrors disagreed), carries an owner table, the approvals and
-`vs_config` fields. **Four points the last briefs raised, for the owner:**
+`vs_config` fields. **Four points the last briefs raised, decided by the owner
+(2026-09-30): 25-27 as recommended; 28 overruled, so Daugavpils draws every route.**
 
 | # | City | Point | Recommendation |
 |---|---|---|---|
 | 25 | Zurich | Tram 20 (Limmattalbahn) keeps 4 of 26 stops in the city (15%), not in the kit's list | Out as a stub, the rule of call 19 |
 | 26 | Den Haag | Tram 1 keeps 19 of 37 stops in the city (51%), under Toulouse's 52% | Drawn to its end with the stops outside listed: over the 42% accepted for Minneapolis's Green and Pittsburgh's Silver, and the horeca layer is city-only |
 | 27 | Den Haag | The horeca layer was last edited 2025-05-23; the template's currency paragraph named only Kansas City and Göteborg | Add: "**The permit data runs to 2025.** The city last edited its permit layer on 23 May 2025, so premises that opened or closed since then may be missing or still shown." |
-| 28 | Daugavpils | Call 2's floor leaves route 1 only: 19 of 38 stop names (OSM, 2026-09-30); the Stropu loop (3 and 5, 20-30 minutes each way) and routes 2 and 4 fail | Build as approved, with the 19 other stops listed as infrequent and the page naming the routes left out |
+| 28 | Daugavpils | Call 2's floor leaves route 1 only: 19 of 38 stop names (OSM, 2026-09-30); the Stropu loop (3 and 5, 20-30 minutes each way) and routes 2 and 4 fail | **Overruled (owner): all five routes drawn, the waits stated on the page.** "Like with buffalo 50% of network shouldn't fall if the norm is longer waits." Call 2's floor now drops only an outlier route |
 
 Settled inside approved rules, no call: Den Haag's `mode` is `tram` (every
 drawn line is OSM `route=tram` once E is out); Zurich's 50 and 51 are drawn
