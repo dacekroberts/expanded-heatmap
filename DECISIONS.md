@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail](#2026-09-30---tram-kit-four-more-briefs-checked-new-orleans-recommended-unthinned-every-brief-so-far-takes-osm-rail)
 - [Kitchener–Waterloo built on the Region's two inspection registers, typed from their bulk tables; the tables' licence read as the portal's (owner)](#2026-09-30---kitchenerwaterloo-built-on-the-regions-two-inspection-registers-typed-from-their-bulk-tables-the-tables-licence-read-as-the-portals-owner)
 - [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
 - [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
@@ -278,6 +279,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail
+
+- **Florence 4/4, Kansas City 3/3, New Orleans and Tucson** (see the handoff)
+  were checked against the `tram-city` skill. **All seven landed briefs take
+  their rail from OpenStreetMap**: Kansas City because RideKC's GTFS is barred
+  (owner, 2026-09-30, site terms restricting schedules), the rest because the
+  feed declares no licence or is not needed for geometry. That settles the
+  shared `pipeline/osm_tram.py` beyond doubt. The skill's "three to five"
+  is now seven of ten, and it adds a contract point: relations with no stop
+  members go into `NOT_DRAWN`, as New Orleans's 46 and 49 and Florence's T3
+  and T4 relations need.
+- **New Orleans: no thinning recommended, against the handoff's named
+  exception.** Its brief keeps all 110 stops (164 m median). The handoff
+  had named it the one case for the street-stop filter. But that filter's
+  own shape test (`docs/sub_transit_line_filters.md`, "When this
+  applies") is a central corridor with sparse stations plus dense surface
+  branches, and New Orleans is uniformly dense with no corridor. Thinning
+  there would also put businesses a block from a stop outside the rings.
+  Put to the owner as call 13; the alternative is `thin()` at about 400 m.
+- **Kansas City's median gap is 413 m** over OSM's 19 stops (the brief), not
+  the screen's ~560 m mean, so every city measured so far takes halved rings.
+- **Staging told:** the three US briefs give the region "North America",
+  which `app/cities.py` does not have ("United States East" for Kansas City
+  and New Orleans, "United States West" for Tucson); and the hyphenated
+  brief names do not match the pipeline slugs `--vs-config` imports.
 
 ### 2026-09-30 - Kitchener–Waterloo built on the Region's two inspection registers, typed from their bulk tables; the tables' licence read as the portal's (owner)
 
