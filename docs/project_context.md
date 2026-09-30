@@ -267,6 +267,14 @@ Cities built and running end to end (pipeline, map, app page):
   shows its licence type (owner). Rail from OpenStreetMap, because NFTA's
   feed licence bars its marks "in association with the Data"; the boundary
   is the Census place polygon, because the City's layer is Erie County's work.
+- **Sacramento** - SacRT's Blue and Gold light-rail lines, stations inside
+  the City; held for the batch review. The City's business-tax register has
+  no geometry, so storefronts are placed by the Census geocoder and scoped by
+  the City's polygon, because the register's city is a postal one. A name
+  that reads as a person's shows the business description, because the
+  register records no legal form (owner). The Green Line is suspended and
+  drawn as the service runs; OSM lags SacRT on two Blue stations, one
+  unnamed and one (Dos Rios) placed from Wikidata until OSM maps it.
 
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first

@@ -404,6 +404,13 @@ REGISTRIES = {
     "buffalo": dict(raw="nys_retail_food_stores.csv", trade="dba_name",
                     owner="entity_name", processed="businesses_clean.csv",
                     address=("address", "unit")),
+    # Sacramento: the City's Business Operation Tax register. The owner's name,
+    # phone and mailing columns are never downloaded (fetch_sources names its
+    # columns; step 2 asserts), so no fallback exists; Business_Name is shown,
+    # and a sole proprietor's can be their own - which this run measures.
+    "sacramento": dict(raw=None, trade=None, owner=None,
+                       processed="businesses_geocoded.csv",
+                       address=("street", "unit")),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

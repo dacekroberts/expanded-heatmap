@@ -209,6 +209,38 @@ because it cannot be split:** `722300` "special food services" (3,145 pins),
 which this registry uses for caterers, concession stands and food trucks alike,
 but also for taquerias and cafés; all of it counts as food service.
 
+### Sacramento — expired licences, withheld addresses, and names that read as a person's
+
+**Left out of the City's register**, counted on its in-city rows:
+- licences past their expiry date: 2,768 of the 24,040 marked Active;
+- 4,935 unexpired licences whose address the City withholds ("ON FILE"),
+  mostly home businesses, which cannot be placed;
+- the catch-alls *Service – General* (656) and *Other* (345);
+- online sellers (89) and vending machines (10);
+- caterers (51), mobile and sidewalk vendors (52) and cottage-food home
+  kitchens (8);
+- independent stylists (200) and massage technicians (71), individuals rather
+  than premises;
+- repairs and alterations (45), and office and medical suppliers, mostly
+  business-to-business (17);
+- adult venues (40), entertainment (55), card rooms (2), parking (59), funeral
+  services (7) and a seasonal lot (1).
+
+**Not placed**: 74 addresses the Census geocoder could not match inside the
+city's box (2%), and 125 matched points with a Sacramento postal address that
+lie outside the city limits. 4 businesses at an apartment address are left off
+as homes.
+
+**Shown, but not named**: 525 businesses whose registered name reads as a
+person's show their business description instead. About one in five is a
+person's own name; the rest are trade names the test cannot tell apart.
+
+**Stations**: the Blue and Gold Lines' 37 stations inside the city, counting
+each downtown couplet as one. 14 are outside it (8 in unincorporated
+Sacramento County, 3 in Rancho Cordova, 3 in Folsom), and 7th &
+Richards/Township 9 is closed for works while the Green Line is suspended. All
+are listed in `outputs/sacramento/excluded_stations.csv`.
+
 ### San Diego - its own codes for massage parlours, cottage kitchens and kiosks
 
 San Diego's registry extends NAICS with codes of its own, and four are left

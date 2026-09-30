@@ -29,7 +29,7 @@ applied for permission to trade. Others come from street surveys, which record w
 was actually in each shopfront, or from national registers or property records. A
 dense-looking city may simply have more complete records.
 - **Municipal licence or tax registers:** San Diego, San Francisco, Los Angeles,
-  Chicago, Philadelphia, Miami, Washington D.C., Vancouver/Surrey, Calgary, Edmonton,
+  Chicago, Philadelphia, Miami, Washington D.C., Sacramento, Vancouver/Surrey, Calgary, Edmonton,
   Toronto, Milan (six premises registers), Rome (SUAP authorisations).
 - **Assembled from several activity-specific registers:** New York (4), Boston (3), Buffalo (3),
   and the Korean permit registers: Seoul (17 types), Daegu (14), Busan (14). The
@@ -253,7 +253,7 @@ name at their home.
 - **Address in place of a sole trader's name:** Oslo, Bergen, Copenhagen, Aarhus (and a franchisee's own name with a store number, Denmark's two cities), Prague.
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
-- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Buffalo (42 salons licensed under a person's own name show the licence type). Kobe (10 pins: a
+- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Buffalo (42 salons licensed under a person's own name show the licence type). Sacramento (525 businesses whose name reads as a person's show their description). Kobe (10 pins: a
   trade name that is the operator's own name shows its permit type). Osaka (9 pins,
   the same rule, applied to every permit at the premises), Sapporo (7), Kyoto (8),
   Fukuoka (5, on the city's lists only: MHLW publishes no operator column to test),
@@ -485,6 +485,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Boston | Red, Orange, Blue + Green, Mattapan | Commuter Rail, ferries | MBTA GTFS | City | 43 / 25 |
 | Washington D.C. | Metrorail, 6 lines | DC Streetcar no longer operating (ended 2026-03-31); MARC/VRE are separate systems | WMATA GTFS (API key) | District | 58 / 0 |
 | Buffalo | NFTA Metro Rail (light rail, one line) | NFTA's GTFS not used (OSM) | OpenStreetMap route relations; gate 3 exact on 14 | City | 0 / 0 |
+| Sacramento | SacRT light rail, Blue and Gold | Green Line (suspended; its one station closed for works) | OpenStreetMap route relations (+ Wikidata for Dos Rios); gate 3 exact on SacRT's timetables | City | 15 / 0 |
 | **Canada** | | | | | |
 | Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS | Vancouver + Surrey | 30 / 0 |
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
@@ -589,6 +590,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Boston | 3 activity registers | Food inspections, Licensing Board, cannabis | Per-source dispatch | 530 / 1,880 / — | No Personal services; Retail = food, package, cannabis |
 | Washington D.C. | Licence register | Basic Business License | Own BUSINESSACTIVITY | 899 / 2,603 / 345 | "Delicatessen" (1,065) ambiguous, counted as Food |
 | Buffalo | 3 activity registers | City Business Licenses, NYS food stores, NYS salons | Per-source dispatch | 113 / 188 / 75 | Retail thin |
+| Sacramento | Tax register | Business Operation Tax Information | Own Business_Description | 625 / 510 / 243 | — |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
@@ -690,6 +692,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Boston | Source coordinates (state plane) | Residence check reads zero by construction | Dormitories, lodging, Common Victualler (counted via food data) |
 | Washington D.C. | Register X/Y + Census geocoder (387 of 451, 85.8%; 64 lost) | Delicatessen ambiguity | Residential rentals (61%), General Business, school cafeterias, caterers |
 | Buffalo | Register coordinates (14 rows without a point lost) | Retail thin; possible double counts | Expired licences, caterers, sidewalk cafés, chair renters, salons at an apartment; person-named salons shown by type |
+| Sacramento | Census geocoder (98.0% of addresses matched; 125 outside the city by postal address) | "ON FILE" addresses withheld and unplaceable | Expired licences, two catch-alls, online, mobile and cottage food, individual stylists and massage technicians, repairs, apartments; person-like names shown by type |
 | **Canada** | | | |
 | Vancouver (Regional) | Source coordinates | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
@@ -786,6 +789,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Boston | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 76% | Name |
 | Washington D.C. | Active licences (2026-09-21) | — | 0.6 mi | Yes | 74% | Name |
 | Buffalo | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 24% | Trade name; licence type for person-named salons |
+| Sacramento | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 41% | Name; description for names that read as a person's |
 | **Canada** | | | | | | |
 | Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |

@@ -1,0 +1,41 @@
+{
+  "written_utc": "2026-09-29T22:03:18+00:00",
+  "as_of_date": "2026-09-29",
+  "register": {
+    "url": "https://services5.arcgis.com/54falWtcpty3V47Z/arcgis/rest/services/account_data_with_header_NEW/FeatureServer/0/query",
+    "where": "Current_License_Status = 'Active'",
+    "fields": [
+      "OBJECTID",
+      "Account_Number",
+      "Business_Name",
+      "Business_Description",
+      "Business_Start_Date",
+      "Business_Close_Date",
+      "Current_Expire_Date",
+      "Current_License_Status",
+      "Location_Street_Number",
+      "Location_Direction",
+      "Location_Street_Name",
+      "Location_Street_Type",
+      "Location_Unit",
+      "Location_City",
+      "Location_State",
+      "Location_Zip_code"
+    ]
+  },
+  "osm_hosts": [
+    "overpass-api.de",
+    "overpass-api.de"
+  ],
+  "osm_bbox": [
+    38.45,
+    -121.58,
+    38.72,
+    -121.1
+  ],
+  "files_utc": {
+    "business_operation_tax_active.csv": "2026-09-29T21:54:53+00:00",
+    "osm_rail.json": "2026-09-29T21:55:05+00:00",
+    "osm_boundaries.json": "2026-09-29T21:55:08+00:00"
+  }
+}

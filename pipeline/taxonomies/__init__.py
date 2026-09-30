@@ -140,6 +140,7 @@ TAXONOMY_MODULES = {
     "romania_dsvsa": "pipeline.taxonomies.romania_dsvsa",
     "sweden_livsmedel": "pipeline.taxonomies.sweden_livsmedel",
     "buffalo": "pipeline.taxonomies.buffalo",
+    "sacramento": "pipeline.taxonomies.sacramento",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

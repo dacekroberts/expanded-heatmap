@@ -733,6 +733,24 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
+- [ ] **Sacramento's Green Line: add it back when SacRT reopens it (due by
+  mid-October 2026; check from 2026-10-15).** Suspended since 2025-06-16 for
+  the Railyards works; not drawn, and 7th & Richards/Township 9 is in
+  `outputs/sacramento/excluded_stations.csv` as closed for works
+  (docs/category_rules.md, "Station scope"). When SacRT's schedule pages list
+  the Green Line again, do four things:
+  - move "Green" from `config.NOT_DRAWN_REFS` to `LINE_REFS` and clear
+    `CLOSED_FOR_WORKS`;
+  - add the new 7th & Railyards station, if OSM carries it;
+  - read the Green Line's frequency from SacRT's timetable against the
+    15-minute test;
+  - re-run the city and update the page's Green Line sentence.
+
+  OSM cannot signal the reopening, so this date is the guard. **Also retire,
+  when OSM catches up**: `config.ADDED_STATIONS` (Dos Rios, placed from
+  Wikidata) and `UNNAMED_STOP_NAMES` (Morrison Creek). Step 1 stops on its
+  own once OSM carries either.
+
 - [ ] **Gambling is bucketed inconsistently across taxonomies** (owner,
   2026-09-28, at Buenos Aires' LOTERIA call): Buenos Aires, Brazil and Berlin
   exclude lottery and betting premises (NAICS 7132, WZ 92), but
