@@ -11,9 +11,9 @@ owner's calls with recommendations, say when it is done, and wait for the go.
 
 | City | Country | Built there already | Brief (staging's) |
 |---|---|---|---|
-| Odense | Denmark | Copenhagen, Aarhus (CVR, DAR) | none |
-| Daugavpils | Latvia | Riga (two layers, VZD) | none |
-| Liepāja | Latvia | Riga | none |
+| Odense | Denmark | Copenhagen, Aarhus (CVR, DAR) | `odense.md`, 2026-09-30: checks 2/2 |
+| Daugavpils | Latvia | Riga (two layers, VZD) | `daugavpils.md`, 2026-09-30: 4/4 |
+| Liepāja | Latvia | Riga | `liepaja.md`, 2026-09-30: 4/4 (on a re-run) |
 | Kansas City | United States | many (NAICS) | none |
 | New Orleans | United States | many | none |
 | Tucson | United States | many | none |
@@ -44,7 +44,7 @@ when the kit needs a brief changed or finished, ask staging
    `origin/macro-legend` (or on master once it lands), and
    `docs/category_rules.md` for any category kept or dropped.
 
-## 1. A `tram-city` skill - what every trams-only city shares
+## 1. A `tram-city` skill - WRITTEN 2026-09-30 (`.claude/skills/tram-city/`); its page-text template waits on the owner
 
 France and Czechia each get a country skill. These ten are one or two per
 country, so write one cross-country skill instead. The per-country detail
@@ -68,11 +68,55 @@ What it should carry:
   as France's was (`france-tram-city` section 6 is the model; the controls
   paragraph and heat caveat stay as on the built pages).
 
-## 2. A scaffold script - only if it pays
+## 2. A scaffold script - DONE 2026-09-30: none
 
-Ten cities in seven countries have little shared config. `scaffold_city.py`
-per city is probably enough. Decide on the measurement and record it in
-DECISIONS.
+Decided on the measurement: seven template configs for ten cities, so about
+20 lines of hand edits beyond `scaffold_city.py`. Shared modules at the first
+build instead (`pipeline/osm_tram.py` with the Czech kit, and Latvia's step 2).
+DECISIONS "The tram kit".
+
+## The owner's calls, collected (2026-09-30; grows as briefs land)
+
+**One sitting, each with a recommendation.** "Brief" marks a call its brief
+states; "list" marks one taken from `docs/tram_city_list.md` or the kit's
+reading, still waiting on its brief (staging's). Calls already decided (the
+data date for Kansas City, Göteborg's undated rows, Zurich's partial retail,
+Den Haag's horeca layer, Odense's placement) are in the skill and are not
+re-asked.
+
+**Across the ten**
+
+| # | Call | Recommendation |
+|---|---|---|
+| 1 | The trams-only page-text template (drafted in chat, 2026-09-30) | Approve as drafted |
+| 2 | **A frequency floor per route.** Street trams have no gate, but no built city draws an hourly route | Draw a route only if it runs at least every 20 minutes by day (Buffalo, the slowest drawn). A stop served only by slower routes gets no ring and is listed as infrequent (Aarhus's class) |
+| 3 | Line colours where the source has none (Odense, Daugavpils, Liepāja, perhaps Kansas City) | This project's own palette, as for Riga and Le Havre, checked with `check_map_markup.py`; the page says the colours are this project's |
+
+**Per city**
+
+| City | # | Call | Recommendation | From |
+|---|---|---|---|---|
+| Odense | 4 | SDU Syd/Hospital Nord, in service since 2023-08-25 but on no OSM route relation | Add it by its node; leave Hospital Syd (opens 2027) out as a watch item | brief |
+| Odense | 5 | `mode` | `tram`, not Aarhus's `light_rail`: the Letbane is street-running, OSM `route=tram`, and it stayed on the tram list | brief |
+| Daugavpils | 6 | Routes 2-4 run about hourly (the screen) | Call 2's floor: draw route 1; draw 2-4 only if the operator's timetable shows 20 minutes or better | kit; headways asked of staging |
+| Daugavpils, Liepāja | 7 | `coverage` | `narrowed`, "Merged", as Riga (the briefs say "as Riga's") | kit |
+| Daugavpils, Liepāja | 8 | The credit for VZD's address file (CC BY 4.0, a join layer) | Extend notice 42 to name the address register, with VZD's own wording and the year | brief |
+| Liepāja | 9 | Brīvības iela (the named terminus) and Klaipēdas iela, on no route relation | Add both by node | brief |
+| Kansas City | 10 | Rings at a ~560 m median gap | Apply the spacing rule to the build's own figure; if it falls between 540 and 570 m, bring both in-ring shares | list |
+| Kansas City | 11 | `dba_name` is often a person ("HARRIS GREGORY J") | Show the address where the name reads as a person, Aarhus's rule for sole traders; the exposure check decides the pattern | list |
+| Kansas City | 12 | `business_type` fee codes ("Flat Rate 16", "Misc Rate 129") | Keep only rows whose type names an activity; report the fee-code share and read a sample before dropping | list |
+| New Orleans | 13 | **The street-stop filter's spacing** (161 m median; the owner's no-thinning rule has this one exception) | `thin()` at about 400 m, keeping terminals and interchanges, **if** staging's measurement shows the rings merge with every stop kept | list; measurement asked |
+| New Orleans | 14 | "Special Events-Other (Vendor)" (1,258) and "Home Based-Office Use Only" (357) | Drop both: no counter of their own (`docs/category_rules.md` R1) | list |
+| Tucson | 15 | About 6,250 active licences are individuals' | The exposure check first. Show the address, not the name, where the holder is a person, as call 11 | list |
+| Florence | 16 | 639 exempt food rows (464 "non soggetta", 175 art. 53) | Keep them and filter what the type code names as non-public, on Milan's *fuori piano* precedent (owner, 2026-09-22), with the remainder disclosed | list |
+| Florence | 17 | T1's 4 stops in Scandicci | Commune-only (T1 keeps 22 of 26): draw the line to its end and list the 4 as outside | list |
+| Zurich | 18 | The Forchbahn (S18, OSM `light_rail`), on tram 11's track and stops inside the Stadt | Leave it out and name it with the S-Bahn, keeping `mode` `tram` | kit; asked of staging |
+| Zurich | 19 | The Glattalbahn lines, largely outside the Stadt | The stub test per line; the food register is city-only, so a stub is dropped, not scoped regionally | kit; asked of staging |
+| Göteborg | 20 | 274 rows with a blank `typ` | Classify by name where it names a counter (Stockholm's name rules), and drop the rest | list |
+| Göteborg | 21 | Lines 4 and 12 run into Mölndal | Keep both lines drawn to their ends, with the Mölndal stops listed as outside, unless the stub test fails | list |
+| Den Haag | 22 | RandstadRail E: 4 of its 23 stops in the city | Leave it out as a stub (Ostrava's line 5), so `mode` is `light_rail` or `tram` from what OSM tags lines 3 and 4 | list |
+| Den Haag | 23 | `coverage` | `narrowed`, "Merged", on Rotterdam's shape, not the tram list's `full` | kit; asked of staging |
+| Den Haag | 24 | 158 pending horeca permits | Out: only granted or notified premises are drawn | list |
 
 ## 3. The briefs - staging's; this session's part
 
