@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**241 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**242 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
 - [Palma's macro mode "metro" approved (owner)](#2026-09-30---palmas-macro-mode-metro-approved-owner)
+- [Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity](#2026-09-30---zurich-göteborg-and-den-haag-briefed-for-the-tram-kit-dallass-address-layer-carries-an-open-ended-indemnity)
 - [Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)](#2026-09-30---palma-built-on-m1-alone-its-register-placed-by-a-catastro-join-m1s-timetable-disclosed-not-disqualifying-owner)
 - [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
 - [The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)](#2026-09-30---the-tram-kits-24-calls-and-its-page-text-template-approved-as-recommended-builds-still-held-owner)
@@ -290,6 +291,35 @@ The owner approved Palma's `mode` "metro" (relayed by the cleanup session), on
 Newcastle's precedent: a system its operator calls a metro, mapped `light_rail` in
 OSM, keyed metro on the macro legend. This closes the flag in the build entry above
 ("flagged for the owner's approval with the build"); nothing changes in the build.
+
+### 2026-09-30 - Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity
+
+- **The last three T1 briefs, with the owner's pre-approved calls confirmed
+  by measurement (live OSM, 2026-09-30).**
+  - **Zurich:** 182 stops at 283 m. The Forchbahn S18 (20% inside) and
+    Glattalbahn 12 (11%) are out as stubs, as approved. Glattalbahn 10
+    passes at 72%. **Limmattalbahn 20 (15%) is out on the same rule**,
+    which was not in the kit's list. Refs 50 and 51 are drawn only if they
+    run by day. `coverage` is narrowed.
+  - **Göteborg:** 127 stops at 378 m. Lines 4 and 12 keep 75% and 72%,
+    so both are drawn to their ends, as approved. A first name pass
+    recovers about 74 of the 274 untyped rows. `coverage` is one_bucket.
+  - **Den Haag** (new `den_haag.md`): 161 stops at 335 m, on 14 tram
+    lines. RandstadRail E is out as a stub (17%), as approved, which makes
+    `mode` tram rather than light_rail. Tram 1 keeps 51%, under
+    Toulouse's 52% and over the owner's 42%. `coverage` is narrowed, and
+    the 158 pending permits are out.
+- **Dallas's AddressPoints, licence read: SILENT on reuse, with an
+  open-ended indemnity.**
+  - **The terms:** the City's GIS disclaimer (2015-12-04, now ArcGIS item
+    `115c0fe8…`; the PDF link is dead) treats any use as acceptance. It
+    requires users to "indemnify, defend, and hold harmless The City of
+    Dallas" for any use of the data.
+  - **Not on the portal:** the layer is not on dallasopendata.com.
+  - **Status:** an owner call, which blocks the Band A build until it is
+    answered.
+- **Files:** `docs/build_briefs/zurich.md`, `goteborg.md`, `den_haag.md`
+  and `docs/tram_city_list.md`.
 
 ### 2026-09-30 - Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)
 

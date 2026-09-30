@@ -9,6 +9,32 @@ cities carry three buckets?* **Answer it once and three cities move.**
 
 ---
 
+## For the owner, with the build (refreshed 2026-09-30; supersedes the sections below where they differ)
+
+**Approved before this brief (owner, 2026-09-30; `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: the calls below as recommended, and the page-text template. The measurements here confirm the facts behind each call; where one differs, it says so. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** | **`tram`** | Street trams; the Forchbahn (`light_rail`) is left out, which keeps the dot tram |
+| **`coverage`** | **`narrowed`** ("Two") | Food 2,325 plus a partial retail layer, 1,028 shops licensed to sell alcohol (owner, 2026-09-30); no personal services |
+| **Scope** | **Stadt Zürich** (OSM 1682248) | The food register is city-only, so the scope cannot go regional |
+| **Lines drawn** | Trams 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 17 (and 50, 51 if they run by day) | Stub test below |
+| **Rings** | halved: **182 stop names, median gap 283 m** | The owner's spacing rule |
+| **Call (approved): the Forchbahn S18** | **Out**, named on the page with the S-Bahn | 4 of its 20 stops inside (20%) |
+| **Call (approved): Glattalbahn stubs** | **12 out** (2 of 18 inside, 11%); **10 in** (21 of 29, 72%) | The stub test, measured |
+| **Measured, same rule: tram 20** (Limmattalbahn) | **Out** (4 of 26 inside, 15%) | Not in the kit's list; the stub rule decides it the same way |
+| **Refs 50 and 51** | Draw only if they are daytime services (confirm at build) | OSM: Auzelg – Frankental (31 of 33 inside), Seebach – Altstetten Nord (27 of 27) |
+
+**Measured 2026-09-30** (live OSM, relations by ref, stop members inside the Stadt): trams 2 (83%), 4 (94%) and 10 (72%) pass; 3, 5–9,
+11, 13–15 and 17 are whole. Colours: 18 refs, all coloured in OSM (the 2026-09-23 count).
+
+**The register, re-read 2026-09-30:** `Gastwirtschaftsbetriebe` 3,487 rows, every one `betriebsstatus` Offen and `jahr` 2026, LV95
+points on all. Food 2,325 (Gastwirtschaft 2,099, Nebenwirtschaft 192, Kleinwirtschaft 30, Take Away 3, Aussenliegende
+Saisonwirtschaft 1). Partial retail 1,028 (Kleinverkaufsstelle 954, Kiosk 53, Tankstelle 21). Out: canteens, dance halls,
+cabarets, event rooms and the like.
+
+---
+
 ## The one-line summary
 
 **The cleanest licence and the smallest register — and its trams are its
@@ -137,14 +163,67 @@ rule for all European cities.
     "claim": "The WFS is the route that works. Its capabilities advertise the lower-case layer gastwirtschaftsbetriebe, resultType=hits and GeoJSON output - all verified 2026-09-23 at 3,488 features. The CKAN-advertised CSV/GeoJSON/SHP download URLs are an Angular SPA returning text/html, so a fetch script taking the CKAN resource URL gets a web page",
     "kind": "http_contains",
     "url": "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Gastwirtschaftsbetriebe?SERVICE=WFS&REQUEST=GetCapabilities&VERSION=1.1.0",
-    "present": ["gastwirtschaftsbetriebe"]
+    "present": [
+      "gastwirtschaftsbetriebe"
+    ]
   },
   {
     "id": "zurich-licence-is-cc-zero",
     "claim": "Gastwirtschaftsbetriebe declares Creative Commons CCZero on the city's own CKAN. The strongest licence position of the three one-bucket cities - Goteborg is also CC0 and Stockholm is SILENT",
     "kind": "http_contains",
     "url": "https://data.stadt-zuerich.ch/api/3/action/package_show?id=geo_gastwirtschaftsbetriebe",
-    "present": ["cc-zero"]
+    "present": [
+      "cc-zero"
+    ]
+  },
+  {
+    "id": "zurich-osm-tram-refs",
+    "claim": "OSM carries Zurich's drawn trams by ref (2026-09-30)",
+    "kind": "osm_route_refs",
+    "bbox": [
+      47.32,
+      8.44,
+      47.44,
+      8.63
+    ],
+    "routes": [
+      "tram"
+    ],
+    "require_refs": {
+      "tram": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "13",
+        "14",
+        "15",
+        "17"
+      ]
+    }
+  },
+  {
+    "id": "zurich-projected-crs",
+    "claim": "The derived UTM zone is EPSG:32632",
+    "kind": "utm_zone_from_longitude",
+    "lon": 8.54,
+    "expect": "EPSG:32632",
+    "mode": "tram",
+    "coverage": "narrowed",
+    "scope": "city",
+    "crs": "EPSG:32632",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```
