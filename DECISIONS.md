@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**225 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**226 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-30**
+
+- [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 
 **2026-09-29**
 
@@ -264,6 +268,72 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)
+
+- **The tram list's bucket-gap tier (T2) closed on the owner's calls
+  ("accept all").** Each of its seven cities was read against Band B's
+  reduced-bucket bar (2026-09-29), currency first. T 41 → 37 (T1 34 → 37,
+  T2 7 → 0), R 17 → 18, candidates 66 → 63, discards 97 → 100.
+  - **Zurich → T1.** `Gastwirtschaftsbetriebe` (WFS, CC0) holds 3,487
+    rows, every one `Offen` and stamped `jahr` 2026, all with LV95
+    points: food 2,325.
+    - **The owner said yes to a partial retail layer:** 1,028 shops
+      licensed to sell alcohol (Kleinverkaufsstelle 954, kiosks 53, petrol
+      stations 21), on the tobacco-retail precedent of Seoul and
+      Gyeonggi, the gap disclosed.
+  - **Göteborg → T1.** `Livsmedelsverksamheter` (CC0, daily, "all
+    active"): 5,066 rows with lat/lon on all. Food service 2,167, and
+    food shops 906 as retail (New York's precedent).
+    - **The rows carry no date, and the owner said the page states it**,
+      as for New York State's food stores, Milan and Surrey.
+    - The count moved 5,063 → 5,066 in a week, which is the evidence
+      the list is maintained.
+  - **Den Haag → T1, on a register the 2026-09-27 screen missed.**
+    - **The source:** the city's horeca permit layer (`Horeca_nieuw`
+      layer 2 on ArcGIS Online, displayed by the denhaag.nl permit map
+      modified 2026-07-02). 2,701 permits with a point on every one:
+      2,543 granted or notified, 158 pending, about 2,352 food premises
+      after exclusions.
+    - **Currency:** rows run to 2025, and the layer was last edited
+      2025-05-23.
+    - **With the BAG's 6,560 shop units, this is Rotterdam's shape.**
+      It supersedes T2's "no current food source: the city's register
+      froze at the end of 2020".
+    - **Still open:** the layer declares no licence, and a licence read
+      is running. The applicant field is never shown (34% are one-person
+      firms).
+  - **Utrecht → Band R.** `open.utrecht.nl` and `data.utrecht.nl` answer
+    nginx 403 to scripts and to a real browser; `utrecht.dataplatform.nl`
+    times out. ArcGIS Online holds no Utrecht horeca layer.
+    - **The reachable food layer fails:** it is rebuilt from Gemeenteblad
+      notices (822, 0.78× OSM) and cannot drop a closed business, since
+      Utrecht's permits do not expire.
+    - **R was preferred to a discard**, since a read from an allowed
+      network could find a register like Den Haag's.
+  - **Santa Cruz–La Laguna → discards, on placement.**
+    - **The join:** the Cabildo's hostelería register (3,658
+      restaurants, addresses only, CC BY declared, monthly) to Catastro's
+      INSPIRE addresses for 38900 and 38023 (73,841 points, EPSG:32628).
+      Exact 1,756 plus nearest same-side number 356 gives **57.7%**.
+    - **The ceiling:** 20.6% of rows carry no house number, so 79% at
+      most.
+    - **The addresses are not revised:** unmatched streets include names
+      the city has since changed (General Franco).
+  - **Rijswijk and Delft → discards (absence).** Neither publishes a food
+    source: Delft's ArcGIS org (455 items) has terrace maps only, and
+    Rijswijk has no open-data page.
+    - **The province's facility layers were checked and rejected:** they
+      are OpenStreetMap re-processed, not a register.
+    - **The BAG alone fails rule 3.** It is a use class per unit, which
+      passed as Rotterdam's second layer but not as a page's only layer.
+    - **The regional Den Haag scope they were kept for is no longer
+      needed.**
+  - **Files:** `docs/tram_city_list.md` (T2 closed with a verdict table,
+    three T1 rows, the old tier kept as history, CRLF normalised to the
+    repository's LF) and `docs/city_master_list.md` (counts, Utrecht's R
+    row, three discard rows, the country table). `check_master_list_counts`
+    and `check_discard_evidence` pass.
 
 ### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
 
