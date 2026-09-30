@@ -1390,6 +1390,15 @@ cannot reach the map.
 | Brest | 12.0% | 18.2% | 1 in Gouesnou; 1 in Guipavas |
 | Saint-Étienne | 8.6% | 16.8% | 5 in Saint-Priest-en-Jarez |
 | Nice | 12.4% | 15.9% | none |
+| Montpellier | 13.0% | 18.7% | 8 in Castelnau-le-Lez; 1 in Clapiers; 1 in Jacou; 1 in Juvignac; 4 in Lattes; 1 in Montferrier-sur-Lez; 4 in Pérols; 4 in Saint-Jean-de-Védas |
+| Strasbourg | 10.3% | 15.9% | 5 in Eckbolsheim; 3 in Hœnheim; 8 in Illkirch-Graffenstaden; 3 in Kehl, Germany; 2 in Lingolsheim; 3 in Ostwald; 5 in Schiltigheim |
+| Le Havre | 10.7% | 15.8% | 1 in Octeville-sur-Mer |
+| Caen | 11.2% | 17.5% | 2 in Fleury-sur-Orne; 5 in Hérouville-Saint-Clair; 2 in Ifs |
+| Rouen (Regional) | 9.5% | 17.3% | none (regional scope) |
+| Bordeaux (Regional) | 13.7% | 17.5% | none (regional scope) |
+| Nantes (Regional) | 15.6% | 19.1% | none (regional scope) |
+| Grenoble (Regional) | 11.4% | 18.4% | none (regional scope) |
+| Valenciennes (Regional) | 9.2% | 16.0% | none (regional scope) |
 
 ### Bergen - Oslo's register and rules
 

@@ -2137,6 +2137,54 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   or complete on SEMAS's behalf (its legal notice disclaims both).
 - **MUST DO**: nothing.
 
+**69. TaM (Montpellier) — required, and DISPLAYED.**
+
+**ODbL 1.0**, declared `odc-odbl` on France's National Access Point for "Réseau
+urbain TaM" (Montpellier Méditerranée Métropole), under the NAP's Conditions
+Particulières (DECISIONS "French tram feeds read", 2026-09-29).
+
+**MUST DISPLAY**, verbatim - ODbL §4.3's own template with the database named:
+
+> Contains information from Réseau urbain TAM, which is made available here
+> under the Open Database License (ODbL).
+
+(as written in `render_site_notices()`, "Réseau urbain TaM"). It names only the
+stations: the feed has no `shapes.txt`, so the line geometry is OpenStreetMap's,
+under notice 1. **MUST DO**: keep the station table a pure extract (the owner's
+rule, 2026-09-29); §4.6 is met by the linked public repository. **MUST NOT**:
+use the TaM logo.
+
+**70. M réso (Grenoble) — required, and DISPLAYED.**
+
+**ODbL 1.0**, declared `odc-odbl` on the NAP for "Réseau urbain TAG", published
+by the SMMAG ("M", the Syndicat Mixte des Mobilités de l'Aire Grenobloise), under
+the NAP's Conditions Particulières; the SMMAG adopted the same narrowing on its
+own licence page (read from its Wayback copy of 2025-03-15, as its live copy is
+empty). **MUST DISPLAY**, verbatim - §4.3 with the database named:
+
+> Contains information from Réseau urbain TAG, which is made available here
+> under the Open Database License (ODbL).
+
+It names the stations and the line geometry, both redrawn from the feed. **MUST
+DO**: the station table stays a pure extract; §4.6 by the repository.
+
+**71. LiA (Le Havre) — required, and DISPLAYED.**
+
+**ODbL 1.0**, declared `odc-odbl` on the NAP for "Réseau urbain LiA" (Le Havre
+Seine Métropole), under the NAP's Conditions Particulières. **MUST DISPLAY**,
+verbatim - §4.3 with the database named:
+
+> Contains information from Réseau urbain LiA, which is made available here
+> under the Open Database License (ODbL).
+
+It names only the stations. The feed has no shapes and no colours: the line
+geometry is OpenStreetMap's (notice 1), and the colours are the project's own,
+since LiA's website terms claim its colour scheme (licence read 2026-09-29). The
+Normandie aggregate's LiA shapes, stop-to-stop lines, are not used, so the
+aggregate's licence question for LiA's data does not arise (DECISIONS drafts,
+`docs/decisions_drafts/france-build.md`). **MUST DO**: a pure-extract station
+table; §4.6 by the repository.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

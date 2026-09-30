@@ -68,7 +68,9 @@ def rows(slug):
     if cfg.LINE_GEOMETRY == "osm":
         geo.append(f"| {name} | OpenStreetMap route relations for {spec['operator']}'s lines "
                    f"(the feed has no usable shapes) | Overpass, one query per city, "
-                   f"cached at `data/{slug}/raw/osm_routes.json`: `{cfg.OSM_ROUTES_QUERY}` | "
+                   f"cached at `data/{slug}/raw/osm_routes.json`: route relations of `route` tram or "
+                   f"light_rail in the bbox ({re.search(r'\(([\d.,-]+)\);out', cfg.OSM_ROUTES_QUERY).group(1)}), "
+                   f"`out geom` (the exact query is in the config and `provenance.json`) | "
                    f"{date} | refs {cfg.OSM_REFS}. ODbL 1.0, covered by the OpenStreetMap "
                    f"notice |")
     bnd = [f"| {name} | **`geo.api.gouv.fr` commune contour**, code INSEE "

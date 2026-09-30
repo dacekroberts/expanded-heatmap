@@ -523,6 +523,15 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Brest | Tram A, Tram B, Téléphérique | — | Bibus GTFS | Commune | 2 / 0 |
 | Saint-Étienne | Tram T1, Tram T2, Tram T3 | — | STAS GTFS | Commune | 5 / 0 |
 | Nice | Tram 1, Tram 2, Tram 3, Tram B | — | Lignes d'Azur GTFS | Commune | 0 / 0 |
+| Montpellier | Tram 1, Tram 2, Tram 3, Tram 4, Tram 5 | — | TaM GTFS (geometry OSM) | Commune | 24 / 0 |
+| Strasbourg | Tram A, Tram B, Tram C, Tram D, Tram E, Tram F | — | CTS GTFS (geometry OSM) | Commune | 29 / 0 |
+| Le Havre | Tram A, Tram B | — | LiA GTFS (geometry OSM) | Commune | 1 / 0 |
+| Caen | Tram T1, Tram T2, Tram T3 | — | Twisto GTFS (geometry OSM) | Commune | 9 / 0 |
+| Rouen (Regional) | Métro | — | Astuce GTFS (geometry OSM) | 5 communes served | 0 / 0 |
+| Bordeaux (Regional) | Tram A, Tram B, Tram C, Tram D, Tram E, Tram F | — | TBM GTFS | 14 communes served | 0 / 0 |
+| Nantes (Regional) | Tram 1, Tram 2, Tram 3 | — | Naolib GTFS | 6 communes served | 0 / 0 |
+| Grenoble (Regional) | Tram A, Tram B, Tram C, Tram D, Tram E | — | M réso GTFS | 12 communes served | 0 / 0 |
+| Valenciennes (Regional) | Tram T1, Tram T2 | — | Transvilles GTFS | 13 communes served | 0 / 0 |
 | **Norway** | | | | | |
 | Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
 | Bergen | Bybanen 1 and 2 (light rail) | Ferries | Skyss via Entur GTFS | Kommune | 0 / 0 |
@@ -640,6 +649,15 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Brest | same | same | same | 774 / 499 / 244 | — |
 | Saint-Étienne | same | same | same | 1,020 / 914 / 342 | — |
 | Nice | same | same | same | 3,397 / 2,980 / 1,709 | — |
+| Montpellier | same | same | same | 2,209 / 2,234 / 1,000 | — |
+| Strasbourg | same | same | same | 2,076 / 1,900 / 803 | — |
+| Le Havre | same | same | same | 680 / 502 / 279 | — |
+| Caen | same | same | same | 733 / 610 / 224 | — |
+| Rouen (Regional) | same | same | same | 1,256 / 867 / 461 | — |
+| Bordeaux (Regional) | same | same | same | 3,626 / 3,308 / 1,447 | — |
+| Nantes (Regional) | same | same | same | 1,916 / 1,576 / 654 | — |
+| Grenoble (Regional) | same | same | same | 1,913 / 1,868 / 753 | — |
+| Valenciennes (Regional) | same | same | same | 790 / 549 / 270 | — |
 | **Norway** | | | | | |
 | Oslo | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 4,197 / 2,082 / 1,801 | — |
 | Bergen | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 1,204 / 484 / 418 | — |
@@ -754,6 +772,15 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Brest | same (100.00%) | Masking 18.2%; 2 stops out | Same codes |
 | Saint-Étienne | same (100.00%) | Masking 16.8%; 5 stops out | Same codes |
 | Nice | same (99.96%) | Masking 15.9% | Same codes |
+| Montpellier | same (99.97%) | Masking 18.7%; 24 stops out | Same codes |
+| Strasbourg | same (99.93%) | Masking 15.9%; 29 stops out | Same codes |
+| Le Havre | same (99.84%) | Masking 15.8%; 1 stops out | Same codes |
+| Caen | same (100.00%) | Masking 17.5%; 9 stops out | Same codes |
+| Rouen (Regional) | same (99.95%) | Masking 17.3% | Same codes |
+| Bordeaux (Regional) | same (99.95%) | Masking 17.5% | Same codes |
+| Nantes (Regional) | same (99.98%) | Masking 19.1% | Same codes |
+| Grenoble (Regional) | same (99.93%) | Masking 18.4% | Same codes |
+| Valenciennes (Regional) | same (99.96%) | Masking 16.0% | Same codes |
 | **Norway** | | | |
 | Oslo | Address join to Matrikkelen (96.8%) | Web shops cannot be excluded | 8 no-premises codes, 96.990, bankrupt parents; sole-trader names withheld |
 | Bergen | Address join to Matrikkelen (96.2%) | Web shops cannot be excluded | Oslo's; 96.990 on Bergen's own numbers; sole-trader names withheld |
@@ -863,6 +890,15 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Brest | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 77% | Sign/usual name (about 59%), else address |
 | Saint-Étienne | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 76% | Sign/usual name (about 54%), else address |
 | Nice | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 80% | Sign/usual name (about 49%), else address |
+| Montpellier | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 87% | Sign/usual name (about 49%), else address |
+| Strasbourg | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 85% | Sign/usual name (about 53%), else address |
+| Le Havre | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 60% | Sign/usual name (about 56%), else address |
+| Caen | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 71% | Sign/usual name (about 60%), else address |
+| Rouen (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 62% | Sign/usual name (about 54%), else address |
+| Bordeaux (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 65% | Sign/usual name (about 51%), else address |
+| Nantes (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 63% | Sign/usual name (about 57%), else address |
+| Grenoble (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 78% | Sign/usual name (about 56%), else address |
+| Valenciennes (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 69% | Sign/usual name (about 51%), else address |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
 | Bergen | Register downloaded 2026-09-23; transit 2026-09-27 | B | 0.6 mi | Yes | 59% | Name; address for sole traders |
