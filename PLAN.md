@@ -77,6 +77,24 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Two-key legend; re-run `validate_palette.js`; re-measure the east-coast
     cluster if the dot grows a pixel. Review time, `map-chrome`
     deploy-verify, reboot. (DECISIONS "Yes to trams-only maps".)
+  - [ ] **FILL ORDER REVISED, and BUILDING (owner 2026-09-30; branch
+    `macro-legend`).** Fill decays linearly with completeness: **solid =
+    full, BOTTOM half filled (a level, not a pie) = narrowed, hollow ring
+    with a pale centre = one category**. The ring and the half carry the mode
+    colour; the pale centre and empty half take the pill surface colour, so
+    colour always means mode and fill always means completeness. Drawn as
+    SVG icons (3 modes x 3 fills), so the iPhone check runs on it. Two-key
+    legend: mode colours as solid dots, fills in a neutral grey (Full,
+    Narrowed, One category). **Ottawa is one category** (owner): the hollow
+    ring ships with it. Per-city modes go to the owner before landing.
+  - [ ] **Buffalo's macro label: HELD (owner 2026-09-30).** In United States
+    East its pill reads as Toronto's. Branch `buffalo-label` (Buffalo south,
+    Chicago west) passes on master but collides with Minneapolis; the only
+    clean three-way layout puts Chicago's label nearer D.C.'s dot in Global.
+    Kept OUT of the next review. Revisit once `macro-legend` (12 px dots),
+    Ottawa and Minneapolis are live and the east-coast cluster has been
+    looked at rendered; per-region label offsets (scoped 2026-09-29, about
+    40 lines) are the likely fix.
   - [ ] **Published-city date fixes (the 2026-09-29 date check; DECISIONS
     "Published cities' data dates checked")**: (a) **San Francisco**: drop
     rows with a `location_end_date` in step 2 (4,677 of 16,495 mapped rows

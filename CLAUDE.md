@@ -211,7 +211,7 @@ python scripts/decisions_index.py [--check]
 python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
 python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # archived entries count as present
-python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country>   # add --dry-run first
+python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country> --mode <metro|light_rail|tram>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
 
