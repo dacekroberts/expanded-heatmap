@@ -158,10 +158,10 @@ obec, whose expected position comes from **a source other than this file**
 within 0.001° on both axes. Prague's is the castle. It was a module constant
 until 2026-09-27, which would have stopped every other Czech town.
 
-Five are measured (the sheets). **Jablonec's (563510) and Litvínov's (567256)
-are not** (Overpass timed out on 2026-09-30); staging has been asked, and
-otherwise the build measures them. Pick the town hall, take OSM's node for it
-through a bbox-bounded query, and find its RÚIAN code in the obec file.
+All eight obce files have one, measured by staging on 2026-09-30 (the sheets),
+Jablonec's (563510) and Litvínov's (567256) included. For a new obec: pick the
+town hall, take OSM's node for it through a bbox-bounded query, and find its
+RÚIAN code in the obec file.
 
 ### Two obce: the one change to shared code
 
@@ -465,8 +465,9 @@ MAP_COVERAGE = "full"
 ```
 
 `brief_check.py <slug> --vs-config` diffs `OBEC_CODES`, `CRS_PROJECTED`,
-`SCOPE`, `MAP_MODE` and `MAP_COVERAGE` against the brief once staging has added
-the mappings (asked 2026-09-30).
+`SCOPE`, `MAP_MODE` and `MAP_COVERAGE` against the brief: each brief's CRS
+check carries the mappings (staging, 2026-09-30). `SCOPE` is `"obec"` or
+`"regional"`, and `OBEC_CODES` is a list of strings, as the briefs have them.
 
 ## 9. The macro map and the app entry
 
@@ -505,7 +506,7 @@ recommended** (owner, 2026-09-30).
 | Obec | 582786; OSM relation 438171 (`ref` CZ0642582786) |
 | Control | `("19095597", 49.1936, 16.6069, "Brno New Town Hall")`, Dominikánské náměstí 196/1 |
 | CRS | EPSG:32633 |
-| Trams | KORDIS feed, lines 1-10 and 12, `route_type 0`; 149 parents network-wide, 147 stop names inside (brief); line 2 keeps 36 of 38 |
+| Trams | KORDIS feed, lines 1-10 and 12, `route_type 0`; 149 parent stations network-wide, 147 inside the city (the tram list's 146 was the screen's count); line 2 keeps 36 of 38 |
 | Geometry | OSM, operator "Dopravní podnik města Brna", 26 relations, all 11 refs |
 | Colours | The feed's: 1 D40000, 2 4AB95D, 3 009E9E, 4 EE7E1E, 5 F31D7F, 6 0777C1, 7 939DAC, 8 E1CB31, 9 8C4A9A, 10 A05A2C, 12 00CCFF |
 | Spacing | 329 m: halved rings |
@@ -525,7 +526,7 @@ recommended** (owner, 2026-09-30).
 | Spacing | 424 m: halved rings |
 | Storefronts | 3,971; restaurants 2.23× OSM (OSM thin) |
 | Calls | **approved**: line 5 out (3 of 10 stops inside, 30%; costs Poruba,koupaliště and Krásné Pole); the project's palette; fourth in order |
-| Traps | 34N; 33 relations and 18 refs on 2026-09-30 (the brief says 34); line 7 has a 2-stop relation (17625150) beside its full one |
+| Traps | 34N; 33 or 34 relations and 18 refs on 2026-09-30 (OSM moved between reads, so step 1 counts, not the brief); line 7 has a 2-stop relation (17625150) beside its full one |
 
 ### Plzeň
 
@@ -558,7 +559,7 @@ recommended** (owner, 2026-09-30).
 | | |
 |---|---|
 | Obce | 563889 Liberec (OSM 439073, `ref` CZ0513563889) + 563510 Jablonec nad Nisou (OSM 438931, `ref` CZ0512563510) |
-| Controls | Liberec `("23653124", 50.77000, 15.05845, "Liberec Town Hall, nám. Dr. E. Beneše 1/1")`; **Jablonec to measure** |
+| Controls | Liberec `("23653124", 50.77000, 15.05845, "Liberec Town Hall, nám. Dr. E. Beneše 1/1")`; Jablonec `("12188018", 50.72452, 15.17128, "Jablonec Town Hall, Mírové náměstí 3100/19")` |
 | CRS | EPSG:32633 |
 | Trams | OSM, operator "Dopravní podnik měst Liberce a Jablonce nad Nisou": 2, 3, 5, 11; 39 stop names in scope, every line whole (line 11: 14 + 7) |
 | Spacing | 378 m: halved rings |
@@ -571,7 +572,7 @@ recommended** (owner, 2026-09-30).
 | | |
 |---|---|
 | Obce | 567027 Most (OSM 436570, `ref` CZ0425567027) + 567256 Litvínov (OSM 436574, `ref` CZ0425567256) |
-| Controls | Most `("25298429", 50.50284, 13.64078, "Most Town Hall (Magistrát), Radniční 1/2")`; **Litvínov to measure** |
+| Controls | Most `("25298429", 50.50284, 13.64078, "Most Town Hall (Magistrát), Radniční 1/2")`; Litvínov `("5150507", 50.59881, 13.61171, "Litvínov Town Hall, náměstí Míru 11")` |
 | CRS | EPSG:32633 |
 | Trams | OSM, operator "Dopravní podnik měst Mostu a Litvínova": 1-4, 8 relations; 27 stop names in scope, every line whole |
 | Spacing | 514 m: halved rings, 36 m under the line |
