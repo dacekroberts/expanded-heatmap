@@ -1585,11 +1585,11 @@ minutes; the Roma–Viterbo railway beyond Montebello; and suburban trains.
 
 ### São Paulo - a census of establishments, read from free text
 
-**Excluded by what the enumerator wrote** - offices and professional premises (52,407),
-parking and storage (44,793), vehicle and repair workshops (40,992), industry and trades
-(33,360), vacant premises (32,653), public, civic and education premises (16,201),
-places of worship (9,154), events venues (2,306), accommodation (1,766) and other
-non-premises (2,495); and 5,940 rows with no usable description.
+**Excluded by what the enumerator wrote** - offices and professional premises (52,385),
+parking and storage (44,792), vehicle and repair workshops (41,122), industry and trades
+(33,291), vacant premises (32,653), public, civic and education premises (15,905),
+places of worship (9,152), events venues (2,306), accommodation (1,766) and other
+non-premises (2,493); and 5,940 rows with no usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded** (558 across the nine
 cities).
@@ -1624,7 +1624,7 @@ buses and bus corridors.
 
 ### Rio de Janeiro - the same census, and rail from two sources
 
-**Excluded by what the enumerator wrote** - vacant premises (22,954), parking and storage (18,528), vehicle and repair workshops (15,286), offices and professional premises (14,669), industry and trades (9,827), public, civic and education premises (8,131), places of worship (6,692), events venues (2,526), accommodation (1,930) and other non-premises (1,657); and 4,155 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (22,954), parking and storage (18,528), vehicle and repair workshops (15,287), offices and professional premises (14,664), industry and trades (9,798), public, civic and education premises (7,970), places of worship (6,690), events venues (2,526), accommodation (1,929) and other non-premises (1,657); and 4,155 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
@@ -1651,7 +1651,7 @@ railway; and the Complexo do Alemão cable car, closed since 2016.
 
 ### Belo Horizonte - the same census, and a line opened in July 2026
 
-**Excluded by what the enumerator wrote** - vacant premises (12,939), vehicle and repair workshops (8,628), offices and professional premises (8,370), parking and storage (7,514), industry and trades (6,007), public, civic and education premises (3,767), places of worship (1,917), events venues (580), accommodation (246) and other non-premises (557); and 1,203 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (12,939), vehicle and repair workshops (8,629), offices and professional premises (8,369), parking and storage (7,514), industry and trades (6,001), public, civic and education premises (3,698), places of worship (1,915), events venues (580), accommodation (246) and other non-premises (557); and 1,203 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
@@ -1675,7 +1675,7 @@ only since it opened on 3 July 2026; Linha 1's two stations in Contagem are left
 
 ### Brasília - the same census, where an address names a block
 
-**Excluded by what the enumerator wrote** - vacant premises (6,925), vehicle and repair workshops (6,893), offices and professional premises (6,621), industry and trades (5,322), parking and storage (5,025), public, civic and education premises (3,347), places of worship (1,821), events venues (503), accommodation (269) and other non-premises (392); and 989 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (6,925), vehicle and repair workshops (6,894), offices and professional premises (6,620), industry and trades (5,317), parking and storage (5,025), public, civic and education premises (3,276), places of worship (1,818), events venues (503), accommodation (269) and other non-premises (392); and 989 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
@@ -1700,7 +1700,7 @@ Federal District. Not drawn: 104 Sul and Onoyama, still being built.
 
 ### Salvador - the same census, and one station over the boundary
 
-**Excluded by what the enumerator wrote** - parking and storage (12,006), vehicle and repair workshops (7,241), vacant premises (5,999), industry and trades (4,290), offices and professional premises (4,207), public, civic and education premises (3,458), places of worship (2,570), events venues (468), accommodation (339) and other non-premises (282); and 2,631 rows with no
+**Excluded by what the enumerator wrote** - parking and storage (12,006), vehicle and repair workshops (7,242), vacant premises (5,999), industry and trades (4,276), offices and professional premises (4,207), public, civic and education premises (3,407), places of worship (2,570), events venues (468), accommodation (339) and other non-premises (282); and 2,631 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
@@ -1724,7 +1724,7 @@ Aeroporto, in Lauro de Freitas, is left out.
 
 ### Fortaleza (Regional) - the same census, and a município with no station
 
-**Excluded by what the enumerator wrote** - vacant premises (12,203), vehicle and repair workshops (11,021), parking and storage (10,972), industry and trades (8,994), offices and professional premises (7,306), public, civic and education premises (4,179), places of worship (2,247), events venues (607), accommodation (470) and other non-premises (482); and 2,143 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (12,203), vehicle and repair workshops (11,022), parking and storage (10,972), industry and trades (8,986), offices and professional premises (7,304), public, civic and education premises (4,015), places of worship (2,245), events venues (607), accommodation (470) and other non-premises (482); and 2,143 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
@@ -1750,7 +1750,7 @@ with no station of its own.
 
 ### Porto Alegre (Regional) - the same census, six municípios along one line
 
-**Excluded by what the enumerator wrote** - vacant premises (10,630), offices and professional premises (9,113), parking and storage (7,789), vehicle and repair workshops (7,170), industry and trades (5,530), public, civic and education premises (3,933), places of worship (1,609), events venues (584), accommodation (286) and other non-premises (376); and 1,026 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (10,630), offices and professional premises (9,107), parking and storage (7,788), vehicle and repair workshops (7,174), industry and trades (5,524), public, civic and education premises (3,863), places of worship (1,609), events venues (584), accommodation (286) and other non-premises (376); and 1,026 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
@@ -1774,7 +1774,7 @@ municípios it runs through. Not drawn: the airport people mover.
 
 ### Recife (Regional) - the same census, and a município with no station
 
-**Excluded by what the enumerator wrote** - parking and storage (9,188), vehicle and repair workshops (7,452), vacant premises (7,387), offices and professional premises (5,653), industry and trades (4,992), public, civic and education premises (3,418), places of worship (1,677), events venues (416), accommodation (301) and other non-premises (550); and 2,568 rows with no
+**Excluded by what the enumerator wrote** - parking and storage (9,188), vehicle and repair workshops (7,453), vacant premises (7,387), offices and professional premises (5,652), industry and trades (4,981), public, civic and education premises (3,383), places of worship (1,676), events venues (416), accommodation (301) and other non-premises (550); and 2,568 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
@@ -1800,7 +1800,7 @@ with no station of its own.
 
 ### Santos (Regional) - the same census, two cities joined by a VLT
 
-**Excluded by what the enumerator wrote** - vacant premises (2,521), offices and professional premises (2,328), parking and storage (2,240), vehicle and repair workshops (1,910), industry and trades (1,260), public, civic and education premises (1,190), places of worship (565), events venues (200), accommodation (99) and other non-premises (173); and 343 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (2,521), offices and professional premises (2,328), parking and storage (2,240), vehicle and repair workshops (1,913), industry and trades (1,254), public, civic and education premises (1,176), places of worship (565), events venues (200), accommodation (99) and other non-premises (173); and 343 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
