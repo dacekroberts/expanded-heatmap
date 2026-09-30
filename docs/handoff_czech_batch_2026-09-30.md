@@ -17,7 +17,7 @@ below to the owner, and wait for the go before building.**
    (`docs/build_briefs/brest.md`). DECISIONS "The France batch kit" and "The
    France batch's eight calls approved" record how it was done and what the
    owner approved. Copy the method, not the French facts.
-3. **The six Czech briefs**, written by staging on 2026-09-30, each passing
+3. **The six Czech briefs** (staging's; see section 3), first written on 2026-09-30, each passing
    `brief_check.py`: `docs/build_briefs/brno.md`, `ostrava.md`, `plzen.md`,
    `olomouc.md`, `liberec.md` and `most.md`. DECISIONS "The six Czech tram
    cities briefed" has their calls.
@@ -56,11 +56,16 @@ on the measurement (how much per-city config is the same), and say which in
 DECISIONS. If a script is written: `--dry-run` first, and a real run behind
 `--go`.
 
-## 3. The briefs - refresh, then bring the calls to the owner
+## 3. The briefs - STAGING's, not this session's
 
-The briefs exist; re-run `python scripts/brief_check.py brno ostrava plzen
-olomouc liberec most`. **The open calls, from the briefs (recommendations
-theirs):**
+**The staging session owns the Czech briefs and is still working on them**
+(owner, 2026-09-30). Do not edit them here. When the skill or a build needs a
+brief changed, finished or re-checked, ask staging for it (`ListAgents`, then
+`SendMessage` to the staging session), and pull its commits from
+`origin/master`. Reading them and running `python scripts/brief_check.py
+brno ostrava plzen olomouc liberec most` is fine. **The open calls, as the
+briefs stood on 2026-09-30 (recommendations theirs; staging or the owner may
+have settled some since):**
 - **Line colours** for the five OSM cities: OSM tags none, so a chosen
   palette (Le Havre's and Riga's precedent).
 - **Ostrava's line 5**: 3 of its 10 stops in the city. Recommended left out,
