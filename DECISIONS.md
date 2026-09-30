@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**234 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**235 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)](#2026-09-30---the-tram-kits-24-calls-and-its-page-text-template-approved-as-recommended-builds-still-held-owner)
 - [Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail](#2026-09-30---tram-kit-four-more-briefs-checked-new-orleans-recommended-unthinned-every-brief-so-far-takes-osm-rail)
 - [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
 - [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
@@ -276,6 +277,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)
+
+- **Owner: "Agree with recommended options for all"**, covering the 24 calls
+  in `docs/handoff_tram_kit_2026-09-30.md`, the trams-only page-text
+  template among them.
+  - **The template** is now section 6 of the `tram-city` skill. It is
+    France's structure with the rail from OpenStreetMap. It adds a
+    one-bucket or narrowed paragraph, a currency paragraph (Kansas City's
+    data date, Göteborg's undated rows) and New Orleans's
+    ring-band sentence.
+  - **A route is drawn only if it runs at least every 20 minutes by day**
+    (Buffalo, the slowest drawn). A stop served only by slower routes is
+    listed as infrequent. This decides Daugavpils's hourly routes once
+    their headways are read.
+  - **No city on the tram list is thinned**: New Orleans keeps all 110
+    stops, against the handoff's named exception.
+  - **Coverage**: Daugavpils, Liepāja and Den Haag are `narrowed`
+    ("Merged"), overriding the tram list's `full` for Den Haag. Odense is
+    `mode` `tram`.
+  - **The per-city data calls**: Kansas City keeps 2025-26 licences, drops
+    fee codes with the count shown, and withholds personal `dba_name`s.
+    Tucson withholds `ACC_NAME` for personal ownership types. New Orleans
+    drops event vendors and home offices. Florence keeps its exempt food
+    rows on Milan's *fuori piano* precedent, and is commune-only.
+  - **The line calls**: Zurich's Forchbahn and Den Haag's RandstadRail E
+    are left out. The Glattalbahn and Göteborg's Mölndal lines take the
+    stub test. Göteborg's blank-`typ` rows are classified by name or
+    dropped. Den Haag's pending permits are out.
+- **Calls 18-24 (Zurich, Göteborg, Den Haag) were approved before their
+  briefs landed**, so a brief whose measurement changes the facts behind
+  one sends that call back to the owner.
+- **Builds stay held**: the approval covers the calls, not the go. The kit
+  is complete apart from checking those three briefs when staging lands
+  them.
 
 ### 2026-09-30 - Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail
 
