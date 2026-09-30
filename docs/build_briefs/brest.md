@@ -2,13 +2,13 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py brest` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only brest --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
 ## The one-line summary
 
-Two Bibus tram lines, 37 of 39 stations in the commune, plus a cable car, and two stops in the feed that are track switches.
+Two Bibus tram lines and the Téléphérique cable car, 39 of 41 stations in the commune; two stops in the feed are track switches.
 
 ---
 
@@ -19,13 +19,13 @@ Two Bibus tram lines, 37 of 39 stations in the commune, plus a cable car, and tw
 | **`mode`** (macro dot colour) | **`tram`** | Street trams only, no metro (Dublin's and Riga's class) |
 | **`coverage`** (macro dot fill) | **`full`** | SIRENE carries all three buckets: 952 retail, 679 food, 360 personal in the commune (screen) |
 | **Scope** | **Commune of Brest** | The worst line, A, keeps 28 of 30 stations (93%) in the commune: half or more stays commune-only (Toulouse 52%, Rennes 73%) |
-| **Lines drawn** | Tram A and Tram B | 2 lines from Bibus's feed; public names verified at build |
+| **Lines drawn** | Tram A, Tram B and Téléphérique | 3 lines from Bibus's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 425 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | The cable car |
+| **Owner call** | **approved** | The cable car |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
-- **The cable car** (route C, `route_type 6`, Jean Moulin - Ateliers across the Penfeld): Toulouse's Téléo is the precedent, drawn by the owner's call 2026-09-23. Recommended: **draw it**, and the page says "two tram lines and the cable car", one clause added to the template.
+- **The cable car** (route C, `route_type 6`, Jean Moulin - Ateliers across the Penfeld): Toulouse's Téléo is the precedent, drawn by the owner's call 2026-09-23. **Approved: draw it** (owner, 2026-09-30), and the page says "two tram lines and the cable car", one clause added to the template.
 
 ---
 
@@ -38,18 +38,18 @@ Two Bibus tram lines, 37 of 39 stations in the commune, plus a cable car, and tw
 | Licence | **Licence Ouverte 2.0** (`lov2`, declared on the NAP) |
 | Validity | `feed_info.txt` self-attests: RD Brest, 2026-09-28 to **2026-12-20** |
 | `shapes.txt` | yes |
-| Stations | 39 network-wide under the pure-extract rule (the 2 fictitious `FIC_` track-switch stops excluded); `parent_station` on 0 of 74 platforms |
+| Stations | 41 network-wide under the pure-extract rule (the 2 fictitious `FIC_` track-switch stops excluded); `parent_station` on 0 of 76 platforms |
 | Route types | 0: 2, 3: 66, 6: 1 |
 
 | Line | route_id(s) today | Colour | Stations | In the commune |
 |---|---|---|---|---|
 | Tram A (`A`) | `A` | DE007E | 30 | 28 (93%) |
 | Tram B (`B`) | `B` | 004F9E | 11 | 11 (100%) |
-| C? | | | | **pending**: the cable car (route_type 6, Jean Moulin - Ateliers): an owner call - Toulouse's Téléo precedent draws route_type 6 |
+| Téléphérique (`C`) | `C` | EA6758 | 2 | 2 (100%) |
 
 **Left out by the commune boundary**: Gouesnou: Porte de Gouesnou; Guipavas: Porte de Guipavas.
 
-**Station pairs under 150 m** (read by name, each one): Liberté / Liberté Quartz 49 m.
+**Station pairs under 150 m** (read by name, each one): Liberté Quartz / Liberté 49 m; Jean Moulin / Château 100 m.
 
 - `feed_info.txt` self-attests (RD Brest, 2026-09-28 to 2026-12-20).
 - Liberté and Liberté Quartz, 49 m apart, are two stops.
@@ -82,7 +82,7 @@ The chain is the five built cities' (`france_register.py`), which reproduced Ren
 
 The owner approved the French tram-city text word for word on 2026-09-29 (the `france-tram-city` skill carries it). This city's braces, as measured so far:
 
-- **{N} {operator} tram lines … {lines}**: 2 Bibus lines, **Tram A and Tram B**.
+- **{N} {operator} tram lines … {lines}**: 3 Bibus lines, **Tram A, Tram B and Téléphérique**.
 - **Scope**: the **commune of Brest**; 2 stops left out, named above.
 - **{Share} non-diffusible**: ~11% at the screen; step 2's figure goes on the page.
 - **Ratio to OpenStreetMap's restaurants**: ~1.6× at the screen; the build's figure goes on the page.
@@ -159,16 +159,17 @@ The owner approved the French tram-city text word for word on 2026-09-29 (the `f
   },
   {
     "id": "brest-stations",
-    "claim": "brief_check's own count for the kept route_ids today (2 routes; 76 platforms; parent_station populated: False; 41 stations). The pure-extract table in the brief can differ where parents are partial or share names; Brest's 41 includes the two FIC_ track-switch stops",
+    "claim": "brief_check's own count for the kept route_ids today (3 routes; 78 platforms; parent_station populated: False; 43 stations). The pure-extract table in the brief can differ where parents are partial or share names; Brest's 43 includes the two FIC_ track-switch stops",
     "kind": "gtfs_stations",
     "url": "https://www.data.gouv.fr/api/1/datasets/r/583d1419-058b-481b-b378-449cab744c82",
     "route_ids": [
       "A",
-      "B"
+      "B",
+      "C"
     ],
     "crs": "EPSG:2154",
     "station_spacing_median_m_min": 250,
-    "expect_stations": 41,
+    "expect_stations": 43,
     "expect_parent_station_populated": false
   },
   {

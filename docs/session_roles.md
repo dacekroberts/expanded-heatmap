@@ -90,7 +90,9 @@ step instead of an implicit race.
 |---|---|---|
 | Staging / research | `.claude/worktrees/staging` | `worktree-staging` |
 | Cleanup / audit | `.claude/worktrees/cleanup` | `worktree-cleanup` |
-| France kit (a staging-type role, 2026-09-29: the tram batch's skill, scaffold script and briefs) | `.claude/worktrees/france-kit` | `worktree-france-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
+| France kit, then the France builds (2026-09-29 kit; builds approved 2026-09-30) | `.claude/worktrees/france-kit` | `worktree-france-kit` for docs, skills and scripts; `france-build` for the builds, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
+| Czech kit (2026-09-30: `docs/handoff_czech_batch_2026-09-30.md`) | `.claude/worktrees/czech-kit` | `worktree-czech-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
+| Tram kit, the ten other T1 cities (2026-09-30: `docs/handoff_tram_kit_2026-09-30.md`; holding before builds) | `.claude/worktrees/tram-kit` | `worktree-tram-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build` - the name every build since Dublin has actually used, rather than the `worktree-<role>` form above. Delete the branch when the worktree goes: merged build branches have tended to outlive their worktrees |
 
 **The cleanup role is moving to its row.** Until 2026-09-23 it ran in

@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py le_havre` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only le_havre --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
@@ -21,11 +21,11 @@ Two LiA tram lines through the Jenner tunnel, 22 of 23 stops in the commune; an 
 | **Scope** | **Commune of Le Havre** | The worst line, A, keeps 14 of 15 stations (93%) in the commune: half or more stays commune-only (Toulouse 52%, Rennes 73%) |
 | **Lines drawn** | Tram A and Tram B | 2 lines from LiA's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 434 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | Line geometry source |
+| **Owner call** | **approved** | Line geometry source |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
-- **Line geometry source**: LiA's feed has none. Found 2026-09-30: **the Normandie aggregate** (LO 2.0, the Région) carries LiA's lines A and B **with shapes** (`ATOUMOD003:Line:A:LOC`, `:B:LOC`). Recommended: a `licence-read` of the aggregate before use, because it republishes LiA's ODbL data under LO 2.0, and a notice must not rest on a relicensing the Région may not have been free to make. OpenStreetMap (already covered) is the fallback.
+- **Line geometry source**: approved (owner, 2026-09-30) as the Normandie aggregate after a licence read, OpenStreetMap the fallback. **The read settled it for OpenStreetMap**: the aggregate's LiA shapes are `LIA:AUTO_*`, whose points are exactly each trip's stops (9 of 9, today's copy) - straight lines, not track - and its LiA stops match LiA's own ODbL feed to 5 decimals, so it adds nothing. Nothing from the aggregate is used for Le Havre, which also leaves its licence ambiguity for LiA's data (LO 2.0 declared, ODbL at source) moot. Geometry from OpenStreetMap through `osm-rail`.
 
 ---
 

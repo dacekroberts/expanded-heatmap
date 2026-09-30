@@ -20,11 +20,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**232 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
 - [Kitchener–Waterloo built on the Region's two inspection registers, typed from their bulk tables; the tables' licence read as the portal's (owner)](#2026-09-30---kitchenerwaterloo-built-on-the-regions-two-inspection-registers-typed-from-their-bulk-tables-the-tables-licence-read-as-the-portals-owner)
+- [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
+- [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
+- [The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod](#2026-09-30---the-normandie-aggregate-read-its-tram-shapes-are-stop-to-stop-so-caen-rouen-and-le-havre-draw-from-openstreetmap-its-concédant-is-atoumod)
+- [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
@@ -362,6 +366,179 @@ drawn. Boundary: the Region's Cities and Towns layer (138.4 and 65.2 km2), not O
 nearest value; the register also holds personal services). The notice is numbered 69,
 as Ottawa's is on its branch: whichever lands second renumbers. `check_provenance.py`
 gains the city's slug override; `check_personal_exposure.py` its registry entry.
+### 2026-09-30 - The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held
+
+- **The kit is written; nothing was built.** This covers handoff sections 1 and 2
+  (`docs/handoff_czech_batch_2026-09-30.md`), and the skill is
+  `.claude/skills/czech-tram-city/SKILL.md`. No city was scaffolded, no
+  pipeline step was run and nothing was written to `app/`. `brief_check.py`
+  on the six briefs: 23 of 23 claims hold (Plzeň's OSM claim on a second
+  run, after both Overpass mirrors timed out on the first).
+- **No batch scaffold script, on the measurement.** Of the 39 constants in
+  Prague's `config.py`:
+  - about 21 would be identical in all six Czech tram configs (the paths,
+    the halved rings, the taxonomy, the catch-all rule, `mode` and
+    `coverage`);
+  - about 8 differ per city and are already in the briefs (the slug, the
+    obec codes, the RÚIAN controls, the CRS, the scope, the lines, the query
+    box), which is about 48 typed values in all;
+  - about 10 exist only on build day (relation ids, colours, per-line
+    counts, gate 3, the boundary area, the storefront box).
+  France's script paid because it computed station counts, medians and
+  scope from twenty screen tables. Here those figures are in the briefs, and
+  step 1 re-measures them. `scaffold_city.py` already writes the rest and
+  derives Ostrava's 34N from the longitude. So the skill carries a config
+  template and a sheet per city instead, and `brief_check.py --vs-config`
+  diffs the typed values against the brief. Staging was asked to add the
+  mappings (`OBEC_CODES`, `CRS_PROJECTED`, `SCOPE`, `MAP_MODE`,
+  `MAP_COVERAGE`).
+- **One country-neutral `pipeline/osm_tram.py`, agreed with the tram kit
+  session.** Five Czech cities and several of the tram kit's ten take their
+  trams from OSM, so one module serves both kits rather than one copy each.
+  - **Who writes it:** whichever OSM tram build goes first, from Aarhus's
+    `stop_rows()`. The control is Aarhus's inputs reproducing its
+    `stations.csv`, and the app/chrome role is told first.
+  - **The contract in both skills:** every relation is kept or placed in
+    `NOT_DRAWN` by id. A line's stops are the union of its relations. Stop
+    members may be tagged `stop_position` or `tram_stop`, and `STATION_ADD`
+    takes a node id. Stops collapse by name at the mean within 200 m. Scope
+    can be a union of polygons, the operator filter is optional, and a
+    lines-only mode serves Brno.
+  - **Rejected:** France's never-a-mean rule for OSM stations. It came from
+    the French portal's Conditions Particulières on ODbL feeds, which do not
+    reach OSM or Czechia.
+- **Brno's stations are the feed's own `parent_station` rows**, not a name
+  collapse. In the live KORDIS feed, all 329 platforms the 11 regular lines
+  serve have a parent: 149 stations, no two sharing a name. That is Prague's
+  shape. Staging was asked to change the brief's "collapse platforms by
+  name". **All 11 feed colours pass `check_line_colours` as published.** Line
+  6's `0777C1` is closest to the pins, at 13.2 from Retail, and is recorded
+  rather than moved. OSM's Brno relations carry all 11 refs and the same
+  colours, so the geometry matches the feed by ref.
+- **The two-obec change to `czechia_register.py` is specified, not made.**
+  Liberec (Regional) and Most (Regional) need `OBEC_CODES` and a RÚIAN
+  control per file. The change is made at the first Czech build, with
+  Prague's step 2 and `drift_check.py prague` as the control. It is shared
+  code and a heavy job, so it is build work, held with the builds.
+- **Found in the briefs and sent to staging** (the briefs are staging's):
+  - five briefs point to a palette section "below" that does not exist;
+  - Brno's station count is 147 in the brief, 146 in
+    `docs/tram_city_list.md`, and 149 parents network-wide;
+  - Ostrava had 33 relations on the day, where the brief says 34;
+  - Jablonec's and Litvínov's RÚIAN controls are still unmeasured.
+- **The page-text template was drafted in chat for the owner**, as France's
+  was. The skill's section 7 is marked pending, and no Czech page text is
+  written until it is approved.
+### 2026-09-30 - The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held
+
+- **Wrote `.claude/skills/tram-city/SKILL.md` for the ten T1 cities that
+  are neither French nor Czech** (`docs/handoff_tram_kit_2026-09-30.md`).
+  They span seven countries, one to three per country, so it is one
+  cross-country skill rather than a country skill. It carries what they
+  share: the owner's trams-only calls, rings by the spacing rule, no
+  thinning except New Orleans's street-stop filter, the light-rail test and
+  `mode`, rolling feeds, OSM rail, the currency rule, `coverage`, and the
+  page-text parts. A sheet per city names its built template (Aarhus, Riga,
+  Milan and Rome, Stockholm, Rotterdam, a US register city). Nothing was
+  scaffolded or built, and nothing touched `app/`.
+- **No batch scaffold, on the measurement.** The ten copy seven different
+  template configs (153 to 304 lines each), and Zurich has none (a new
+  country). The largest group sharing one business config is Latvia's two;
+  the US three have three different registers. Beyond `scaffold_city.py`,
+  which already writes the config, step 3, the page and the `cities.py`
+  entry with `--mode`, a batch script could write only the halved ring
+  edges and labels (2 lines in about 9 cities) and two CRS overrides
+  (Odense `EPSG:25832`, Zurich `EPSG:2056`). That is about 20 lines of hand
+  edits, against France's 675-line script for 20 cities on one config
+  shape. So each city runs `scaffold_city.py` and copies its template.
+- **The code that does repeat goes into shared modules at the first build
+  instead.** The OSM tram step 1 is needed by three to five of these ten
+  (Odense, Daugavpils, Liepāja, perhaps Zurich and Göteborg) and by five of
+  the six Czech cities. **Agreed with the Czech kit: one
+  `pipeline/osm_tram.py`**, written by whichever OSM tram build goes first.
+  It is Aarhus's `stop_rows()` generalised:
+  - `STATION_ADD` by node (Odense's SDU Syd/Hospital Nord, Liepāja's
+    Brīvības iela and Klaipēdas iela);
+  - `tram_stop` or `stop_position` members accepted;
+  - an optional operator filter;
+  - every matching relation kept or listed in `NOT_DRAWN`;
+  - several relations per ref;
+  - a union of scope polygons;
+  - a lines-only mode.
+
+  Its control is Aarhus's inputs reproducing Aarhus's `stations.csv`.
+  Latvia's step 2 is lifted from Riga's into
+  `pipeline/countries/latvia_register.py` at the first Latvian build, with
+  Riga's drift check as the control. Both modules are shared paths, so the
+  app/chrome role is told first. Rejected: a batch script (above), and
+  copying Aarhus's 293-line step 1 per city, the shape
+  `france_register.py` exists to prevent.
+- **OSM stations collapse at the name mean, Aarhus's rule.** France's
+  never-a-mean rule came from the French portal's ODbL conditions for the
+  feeds, so it applies here only to an ODbL GTFS feed.
+- **Brief checks, 2026-09-30:** Odense 2/2, Daugavpils 4/4, Liepāja 4/4.
+  Liepāja's first run was 3/4, with Overpass mirrors disagreeing on the
+  relation count (1 against 2): a host problem, which passed on re-run.
+- **Staging asked for** a Brest-style "For the owner, with the build"
+  table in every brief, and literal `coverage` values: the Latvian briefs
+  say "as Riga's", and Riga is `narrowed`, "Merged". Also asked for:
+  - Den Haag's `coverage`: the tram list proposes `full`, but Rotterdam,
+    its shape, is `narrowed`, "Merged";
+  - Daugavpils's per-route headways (the screen had routes 2-4 hourly);
+  - Zurich's Forchbahn, its Glattalbahn stub test and refs 50 and 51;
+  - New Orleans's in-ring share with and without the street-stop filter;
+  - Kansas City's median gap and colour;
+  - `vs_config` fields on the GTFS briefs.
+- **The trams-only page-text template is drafted in chat for the owner, not
+  written to the skill**, which lists its parts until the owner approves
+  it.
+### 2026-09-30 - The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod
+
+- **The approved `licence-read` of "Agrégat des réseaux urbains et
+  interurbains de Normandie"** (NAP 5ced52ed8b4c4177b679d377) found a data
+  fact first. **Every tram shape in it is an `AUTO_` shape whose points are
+  exactly the trip's stops**: straight lines between stops, not track. The
+  agent found it on the 2026-09-27 copy, and it was confirmed on 2026-09-30's
+  copy: Rouen's métro 20 of 20, Le Havre's A and B 9 of 9, Caen's T1 25 of 25,
+  T2 17 of 17 and T3 15 of 15. Its buses carry real `CALC_` shapes.
+- **So Le Havre takes its geometry from OpenStreetMap**, the fallback the
+  owner approved, and uses nothing from the aggregate. Its LiA stops equal
+  LiA's own ODbL feed to 5 decimals, so it adds nothing. That makes the one
+  ambiguity the read found moot: whether LiA's part of an aggregate declared
+  LO 2.0 stays ODbL (Atoumod's legal notice says partners keep their data).
+  **Caen and Rouen also draw their lines from OpenStreetMap**, a builder's
+  call on the same grounds as Montpellier and Strasbourg, whose feeds have no
+  shapes. Their stations still come from the aggregate.
+- **The Concédant is Syndicat mixte Atoumod** (SIREN 200052488; Le Havre
+  Seine Métropole, Caen la Mer, Métropole Rouen Normandie and the Région are
+  among its members). It is not the Région Normandie, as the kit's briefs had
+  said, and not Cityway, the exporter named in `feed_info.txt`. Caen and
+  Rouen: **PERMITTED WITH CONDITIONS** under LO 2.0. The credit names
+  Atoumod and the date of last update, taken from the data.gouv resource's
+  `last_modified` at fetch (`feed_info.txt` has none). No logos; own colours.
+  The briefs, the skill and the scaffold's notes are corrected.
+
+### 2026-09-30 - The France batch's eight calls approved as recommended; builds go ahead (owner)
+
+- **Owner: "approved, all eight as recommended"**, the list the kit put
+  after "The France batch kit". **The scope rule** stands: under half of the
+  worst line's stations in the commune goes regional. So Nantes is regional,
+  with Bordeaux, Grenoble, Rouen and Valenciennes. **Rouen's `mode` is
+  `light_rail`**, and its page's second sentence reads "Rouen's métro is a
+  light rail running mostly on the street, so every stop gets rings". **On a
+  Licence Ouverte feed only, a same-name pair** (case and accents ignored)
+  within 150 m keeps its first row, never a mean or a rename; ODbL feeds stay
+  pure extracts (Bordeaux's five pairs, Caen's one). **Brest's cable car is
+  drawn** on Toulouse's Téléo precedent: 41 stations, 39 in the commune, the
+  page saying "two tram lines and the cable car". **Nice's route B is
+  drawn.** **Le Havre's geometry comes from the Normandie aggregate** after a
+  `licence-read`, sent the same day, with OpenStreetMap as the fallback.
+  **Valenciennes is built last.** **Builds go ahead in landing groups**
+  (`docs/review_time.md`).
+- **The builds run in the France kit's worktree on a build branch**, never
+  pushed to master, since landing `app/` is deploying. Docs, skills and
+  scripts still go to master on their own commits. The skill, the scaffold
+  script and the 20 briefs now carry the approvals.
 
 ### 2026-09-30 - The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held
 

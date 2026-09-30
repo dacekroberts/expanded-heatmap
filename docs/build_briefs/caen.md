@@ -2,7 +2,7 @@
 
 **Step 0 measured 2026-09-30** by the France kit session: the rail leg from the feed as fetched that day, the business leg from the 2026-09-27 screen (`data/_staging_scratch_2026-09-27/second_cities/france/`). **Run `python scripts/brief_check.py caen` before writing any code**, and build with the `france-tram-city` skill; `python scripts/scaffold_france_batch.py --only caen --dry-run` shows the config it writes.
 
-**Builds are HELD** (owner, 2026-09-29): this brief is ready for the owner's go, not a go.
+**Builds APPROVED** (owner, 2026-09-30), in landing groups per `docs/review_time.md`; every call below was approved as this brief recommended it.
 
 ---
 
@@ -21,9 +21,9 @@ Twisto's three tram lines, 29 of 38 stops in the commune, from the Normandie agg
 | **Scope** | **Commune of Caen** | The worst line, T1, keeps 19 of 25 stations (76%) in the commune: half or more stays commune-only (Toulouse 52%, Rennes 73%) |
 | **Lines drawn** | Tram T1, Tram T2 and Tram T3 | 3 lines from Twisto's feed; public names verified at build |
 | **Rings** | 0.05 / 0.1 / 0.2 / 0.3 mi | Median gap between in-scope stations 311 m, under ~550 m (`docs/ring_rules.md`) |
-| **Owner call** | see below | Same place, spelt twice |
+| **Owner call** | **approved** | Same place, spelt twice |
 
-### Owner calls
+### Owner calls - APPROVED as recommended (owner, 2026-09-30)
 
 - **Same place, spelt twice** (a Licence Ouverte feed): Presqu'île and Presqu'Ile, 12 m apart on T2. The same call as Bordeaux's: recommended, keep the first row of a same-name pair (case and accents ignored) within 150 m on LO feeds.
 
@@ -37,7 +37,7 @@ Twisto's three tram lines, 29 of 38 stops in the commune, from the Normandie agg
 | Resource | `https://transport.data.gouv.fr/resources/81942/download` (48,130,399 bytes on 2026-09-30) |
 | Licence | **Licence Ouverte 2.0** (`lov2`, declared on the NAP) |
 | Validity | `feed_info.txt` present but undated |
-| `shapes.txt` | yes |
+| `shapes.txt` | present, but the tram shapes are `AUTO_` stop-to-stop lines (2026-09-30): **geometry from OpenStreetMap** |
 | Stations | 38 network-wide under the pure-extract rule; `parent_station` on 0 of 76 platforms |
 | Route types | 0: 5, 1: 1, 2: 26, 3: 521, 4: 37, 7: 1 |
 
@@ -73,7 +73,7 @@ The chain is the five built cities' (`france_register.py`), which reproduced Ren
 ## Notices
 
 - **Transit**: Licence Ouverte 2.0: credit the producer and the data's date in the transit caption, Marseille's and Toulouse's pattern (`Transit data © <producer>, via <portal>` plus the feed window or snapshot date from `provenance.json`). No `_NOTICES` entry is needed. The LO 2.0 feeds were not read one by one; the batch relies on the licence's own text (`docs/licenses/france-licence-ouverte-2.0.md`).
-- **The aggregate's producer is the Région Normandie** (the NAP dataset's owner); the credit names it and the agency's network.
+- **The aggregate's Concédant is Syndicat mixte Atoumod** (the licence read 2026-09-30; not the Région, not Cityway): the credit names it, the agency's network and the resource's `last_modified` date captured at fetch (data.gouv resource `3873ccc7-44d9-40f3-a133-920944af0c29`), since `feed_info.txt` carries none. Line geometry from OpenStreetMap adds the OpenStreetMap notice.
 - **Business**: `Source : Insee` verbatim with the SIRENE edition's date, as every French page.
 - **Basemap**: © OpenStreetMap contributors, and the OpenStreetMap notice if OSM supplies any geometry.
 
@@ -95,6 +95,8 @@ The owner approved the French tram-city text word for word on 2026-09-29 (the `f
 ## Build-time calls, with the recommended answer
 
 - **Filter the aggregate to agency `ATOUMOD029:Network:029:LOC`** (Twisto). The aggregate also carries Rouen's métro, LiA's trams and a funicular, and TER.
+- **Line geometry from OpenStreetMap** (`osm-rail`): the aggregate's shapes for T1-T3 are `TWISTO:AUTO_*`, whose points are exactly each trip's stops (25 of 25 on T1's most-used shape, 2026-09-30) - straight lines, not track. Stations still come from the aggregate.
+- **Credit Syndicat mixte Atoumod**, the aggregate's Concédant (the licence read 2026-09-30), with the resource's `last_modified` date.
 
 ---
 
