@@ -16,7 +16,7 @@ files).
 ```bash
 python scripts/scaffold_city.py --slug dallas --name Dallas --system-name DART \
     --taxonomy naics --lat 32.7767 --lon -96.7970 \
-    --region "United States East" --country "United States"
+    --region "United States East" --country "United States" --mode light_rail
 ```
 
 - `--slug` lower snake_case; `--name` the display name (also the switcher name);
@@ -25,6 +25,10 @@ python scripts/scaffold_city.py --slug dallas --name Dallas --system-name DART \
   `--country` groups it in the city switcher, spelled as `app/cities.py`
   already spells that country. Both are required: `cities.py` raises at import
   without them.
+- `--mode` (`metro`, `light_rail` or `tram`): the HIGHEST-ORDER mode the
+  city's map will draw. It colours the macro dot; trams drawn beside a metro
+  leave it `metro`. Required, with no default, and the owner approves it with
+  the build (owner, 2026-09-30).
 - `--lat/--lon` the macro-map marker; the projected CRS (UTM zone) is derived
   from the longitude and its derivation written into the config.
 - `--map-step 4` if you will insert a geocoding step (Los Angeles); default 3.
