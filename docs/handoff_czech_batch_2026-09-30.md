@@ -28,33 +28,11 @@ below to the owner, and wait for the go before building.**
    (ROS02 establishments, RES activity, the RÚIAN address join).
 5. `docs/tram_city_list.md`, the Czech T1 rows, and `docs/ring_rules.md`.
 
-## 1. A `czech-tram-city` skill (the per-country-skill rule)
+## Done (2026-09-30)
 
-Written from Prague's build and the six briefs, on the France skill's plan:
-- the ROS02 + RES + RÚIAN chain and its traps (active judged against the
-  file's own `DATPLAT`, dedupe on `ICP`, the 6.6% with no `PKODADM`, never
-  RŽP via ARES);
-- `czechia_register.ruian()`'s per-city coordinate control;
-- the tram leg: Brno from KORDIS's own CC BY 4.0 feed at `kordis-jmk.cz`
-  (geometry from OSM, since the feed has no shapes), and the other five from
-  OSM through `osm-rail`. Plzeň's PMDP feed is at most a stop-name
-  cross-check;
-- the scope call (Liberec with Jablonec; Most + Litvínov jointly, because
-  Most alone fails the stub test);
-- the halved rings (median gaps 294-514 m);
-- UTM per city (Ostrava is 34N, not 33N);
-- the notices;
-- a page-text template, drafted in chat for the owner's approval, as
-  France's was;
-- a sheet per city.
-
-## 2. A batch scaffold - only if it pays
-
-France's twenty justified `scripts/scaffold_france_batch.py`. For six cities,
-five of them on OSM rail, `scaffold_city.py` six times may be enough. Decide
-on the measurement (how much per-city config is the same), and say which in
-DECISIONS. If a script is written: `--dry-run` first, and a real run behind
-`--go`.
+Sections 1 and 2 are done. The skill is `.claude/skills/czech-tram-city/SKILL.md`,
+and there is no batch scaffold, decided on the measurement (DECISIONS "The
+Czech batch kit"). The page-text template waits for the owner's approval.
 
 ## 3. The briefs - STAGING's, not this session's
 
