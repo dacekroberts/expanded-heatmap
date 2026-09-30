@@ -338,5 +338,10 @@
   "in_ring": 13003,
   "all": 23481,
   "map_blob": "f03b1f6fca7ca4cee7c4c087a53879fca61dbe76"
+ },
+ "houston": {
+  "in_ring": 2224,
+  "all": 29912,
+  "map_blob": "4e6a1858e44f8ebecb6578e3afc121f6ea97736e"
  }
 }
