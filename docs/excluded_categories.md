@@ -330,6 +330,47 @@ shop — about 5,000 of the latter statewide. They are not a separate storefront
 and counting them would both double-count the shop and put an individual on the
 map. Only the business licences are used.
 
+### Pittsburgh - the County's food facilities, food only, with a name test
+
+**Only food is on this map.** Allegheny County Health Department's list of
+food facilities covers every place it licenses to serve or sell food; no open
+register of other shops or of personal services covers the city, so clothes
+shops, hairdressers and the like are missing rather than excluded, except
+general retailers that also sell packaged food (dollar and discount stores,
+kept as food-selling shops). The list is dated 2025-08-27. Of 11,144
+facilities in Pittsburgh's wards, 3,204 are active (status 1 with no closing
+date); status 7, out of business, holds most of the rest.
+
+**Excluded by type** - 1,056 active facilities the list files as something
+other than a restaurant or a food-selling shop: institutional kitchens (326:
+childcare, adult day, university, hospital, religious and community
+kitchens, food banks), mobile vendors (184), school kitchens (117),
+processors and warehouses (103), boarding, personal-care and nursing homes
+(97), commissaries (79), caterers (60, R1), social clubs (45, members' bars),
+banquet halls (25), temporary events (19) and a pool snack bar.
+
+**Excluded by name** - 393 facilities inside the kept types that are not
+storefronts (`pipeline/taxonomies/pittsburgh_inspection.py`; each is listed
+in `outputs/pittsburgh/excluded_premises.csv`): 254 stands and outlets of
+venues (Acrisure Stadium, PNC Park, PPG Paints Arena, Highmark Stadium, the
+Petersen Events Center, the convention centre, Stage AE, Rivers Casino, the
+zoo, aviary, museums and science centre, theatres, cinemas, bowling, golf and
+fitness, the private city clubs), 96 institutional outlets (Market C
+workplace micro-markets, contract caterers, hospital and campus outlets,
+church cafés, employee cafeterias, commissaries, caterers with no counter),
+25 pharmacies (a food register's), 14 hotel back-of-house licences (a
+hotel's own named bar or restaurant stays), 2 delivery-only stores and 2
+venues the name calls a cabaret or a gentlemen's club (R3).
+
+**Not placed** - 22 with no point in the list and 3 whose point falls outside
+the city's polygon.
+
+**Stations** - rings are drawn around the 20 stations inside the city. The
+31 stations of the South Hills branches beyond the city line (Bethel Park 17,
+Castle Shannon 7, Dormont 3, Mount Lebanon 3, South Park 1) are left out,
+because the list is used here within the city only; all are listed in
+`outputs/pittsburgh/excluded_stations.csv`.
+
 ### Buffalo — three registers, expired licences, and salon names
 
 **Missing, not excluded: general retail.** Buffalo licenses no clothing shop,

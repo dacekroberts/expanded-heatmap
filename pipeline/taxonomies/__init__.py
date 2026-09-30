@@ -141,6 +141,7 @@ TAXONOMY_MODULES = {
     "sweden_livsmedel": "pipeline.taxonomies.sweden_livsmedel",
     "buffalo": "pipeline.taxonomies.buffalo",
     "sacramento": "pipeline.taxonomies.sacramento",
+    "pittsburgh_inspection": "pipeline.taxonomies.pittsburgh_inspection",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

@@ -1,0 +1,23 @@
+{
+  "written_utc": "2026-09-30T19:59:02+00:00",
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    40.28,
+    -80.15,
+    40.5,
+    -79.9
+  ],
+  "as_of_date": "2026-09-30",
+  "register_date": "2025-08-27",
+  "files_utc": {
+    "geocoded_food_facilities.csv": "2026-09-30T19:55:38+00:00",
+    "city_boundary_tiger.geojson": "2026-09-30T19:55:35+00:00",
+    "county_subdivisions_tiger.geojson": "2026-09-30T19:55:37+00:00",
+    "osm_rail.json": "2026-09-30T19:59:02+00:00"
+  },
+  "sources": {
+    "food_facilities": {
+      "endpoint": "https://data.wprdc.org/datastore/dump/112a3821-334d-4f3f-ab40-4de1220b1a0a"
+    }
+  }
+}

@@ -179,7 +179,9 @@ CITIES = [
         # A pill 21 px tall at dy +16 starts 5.5 px below the dot's centre,
         # which clears the 4 px marker and its 1 px ring - so it reads as
         # below the dot rather than on it.
-        "label_offset": ("middle", 0, 16),
+        # LOWERED 3 px (2026-09-30, from 16) for Pittsburgh: at 16 its pill covered
+        # Pittsburgh's marker in Global and United States.
+        "label_offset": ("middle", 0, 19),
     },
     {
         "name": "New York",
@@ -291,7 +293,8 @@ CITIES = [
                  "Lines; the 40 stations inside the District)",
         # East of its dot, bottom of the eastern column - the southernmost
         # of the four, and the widest name, so it clips first on a phone.
-        "label_offset": ("start", 14, 24),
+        # MOVED 5 px RIGHT (2026-09-30, from 14) to open the gap Pittsburgh's label sits in.
+        "label_offset": ("start", 19, 24),
     },
     {
         # "(Regional)" for Miami's reason: this map spans Vancouver AND
@@ -1972,6 +1975,31 @@ CITIES = [
         # Monterrey's marker; check_macro_labels.py (python -B) passes start
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
+    },
+    {
+        "name": "Pittsburgh",
+        "lat": 40.4406,
+        "lon": -79.9959,
+        "page": "pages/78_Pittsburgh_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (98.7%)",
+        "data_age": "Active on the County's list of 2025-08-27; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Two",
+        "blurb": "The T: PRT Red, Blue and Silver Lines (light rail)",
+        "region": "United States East",
+        "country": "United States",
+        # IN THE DEFAULT FRAME: at 40.44 N, 80.00 W Pittsburgh is inside the
+        # box the framed US cities already span (south of Boston, west of New
+        # York), so it joins without re-fitting the pinned zoom.
+        "in_default_view": True,
+        # BELOW, a little left: the one gap in the landing view's eastern cluster, between
+        # San Diego's pill and Washington D.C.'s, with D.C.'s moved 5 px right and Chicago's
+        # 3 px down to open it. Solved against the combined tree (master + the ottawa and
+        # minneapolis branches + this one): PROBLEMS 0 at 375, 768 and 1200 px; width 70.7
+        # measured in a browser.
+        "label_offset": ("middle", -15, 32),
     },
 ]
 

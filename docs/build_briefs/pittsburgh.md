@@ -6,6 +6,23 @@ page (owner, 2026-09-29): food plus convenience and packaged-food retail,
 **no personal services**. Run `python scripts/brief_check.py pittsburgh`
 before writing code.
 
+> **Measured at the build (2026-09-30), where it corrects the text below.**
+> **Status 7 is out of business**: the resource's own description ("1
+> indicates that the facility is active and 7 indicates that the facility is
+> out of business"); active stays status 1 with no closing date (3,204 in the
+> wards). **Supermarkets and bakeries (111, 112, 117, 118) are kept** as food
+> shops, missing from the list below. A name test inside the kept categories
+> leaves out 393 (254 stadium, arena, casino and attraction stands; 96
+> workplace, hospital and campus outlets; 25 pharmacies; 14 hotel
+> back-of-house; 2 dark stores; 2 adult venues): **1,730 storefronts** (food
+> 1,335, food-selling shops 395), 18% within the 0.3 mi rings. Rail: 20
+> stations in the city, gate 3 exact on 31 / 24 / 31 (Wikipedia), 452 m
+> median. Blue's colour moved to #59bcde (OSM's #77b6e4 is ΔE 37.8 from the
+> Retail pins). Region `"United States East"`. **Licence**: CC0, nothing to
+> display; WPRDC's Data Use Agreement adds an uncapped indemnity (**accepted by
+> the owner 2026-09-30**) and a duty to notify WPRDC of any Non-Public
+> Information found.
+
 | | |
 |---|---|
 | Rail | PRT's **Blue, Red and Silver** light rail (the T), with the downtown subway: **20 stations inside the city** (OSM) |

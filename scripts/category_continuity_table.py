@@ -1654,6 +1654,38 @@ COLUMNS["sweden_livsmedel"] = {
 }
 
 
+PGH_VENUE, PGH_OTHER = "Recreation venue, casino or club", "OTHER CATEGORY"
+COLUMNS["pittsburgh_inspection"] = {
+    **{rid: absent("a food-facility register: food premises only") for rid in (
+        "funeral", "personal_catchall", "sex_shop", "massage_commercial", "massage_regulated",
+        "car_dealer", "vehicle_repair", "pawnbroker", "vet", "parking", "repair", "optician")},
+    "no_counter_food": [
+        loc(PGH_OTHER, "caterers and transient caterers (100, 101), institutional kitchens (4xx), "
+                       "school kitchens (6xx), commissaries (120, 121), by type"),
+        loc("Institutional kitchen", "workplace micro-markets (Market C), contract caterers, hospital "
+                                     "and campus outlets, employee cafeterias, by name")],
+    "adult_hostess": [loc("Adult venue", "a '... Cabaret' that is not a theatre, a gentlemen's club, "
+                                         "by name")],
+    "gambling": [loc(PGH_VENUE, "Rivers Casino's outlets, by name")],
+    "petrol_station": [loc("FOOD SHOP", "forecourt shops (Sunoco, GetGo) licensed as convenience stores")],
+    "nightclub": [loc("RESTAURANT", "bars and clubs licensed as restaurants with liquor")],
+    "nonstore": [loc("Nonstore or vending", "delivery-only stores (goPuff, DashMart) and vending, by name")],
+    "lodging": [loc("Hotel back of house", "hotels' main and banquet kitchens, employee cafes, club "
+                                           "lounges, by name"),
+                loc(PGH_OTHER, "rooming and boarding houses with guest food service (3xx), by type")],
+    "recreation": [loc(PGH_VENUE, "stadium, arena, events-centre, zoo, museum, theatre, cinema, "
+                                  "bowling and golf outlets, by name"),
+                   loc(PGH_OTHER, "social clubs (250) and pool snack bars (708), by type")],
+    "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register, "
+                       "which is where the module's pharmacy strings are located",
+                       ignore=("Pharmacy", "PHARMAC", "PHAMAC", r"^RITE AID\b", r"^CVS\b",
+                               r"^WALGREENS\b")),
+    "pharmacy_food_register": [loc("Pharmacy", "pharmacies licensed as packaged-food shops, by name")],
+    "health_food": [loc("FOOD SHOP", "health-food shops licensed as packaged food (GNC)")],
+    "mobile_unit": [loc(PGH_OTHER, "mobile tiers I and II (119, 123), by type")],
+}
+
+
 # ---------------------------------------------------------------------------
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
