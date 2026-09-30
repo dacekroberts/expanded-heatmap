@@ -258,6 +258,16 @@ Cities built and running end to end (pipeline, map, app page):
   rather than merely counted, which is why a Census TIGERweb layer is
   downloaded alongside the District's own boundary.
 
+- **Buffalo** - NFTA Metro Rail, one light-rail line, every station inside
+  the city; held for the batch review. New York's multi-source shape at one
+  city's scale: the City's licences (counted only while unexpired, since the
+  file marks every licence Active), the State's food-store and salon
+  registers scoped by point-in-boundary, and grocers both list merged on
+  house number and street. A State salon licensed under a person's own name
+  shows its licence type (owner). Rail from OpenStreetMap, because NFTA's
+  feed licence bars its marks "in association with the Data"; the boundary
+  is the Census place polygon, because the City's layer is Erie County's work.
+
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first
   built from two municipalities' own registries.** Distinctive in five ways.

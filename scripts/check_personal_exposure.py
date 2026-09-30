@@ -398,6 +398,12 @@ REGISTRIES = {
     "new_york": dict(raw=None, trade=None, owner=None,
                      processed="businesses_geocoded.csv",
                      address=("address", "unit")),
+    # Buffalo, New York's three-registry shape. The one name fallback is the
+    # NYS food store's entity_name where dba_name is blank, measured here. The
+    # City's file has no person column; the salon registrant is never loaded.
+    "buffalo": dict(raw="nys_retail_food_stores.csv", trade="dba_name",
+                    owner="entity_name", processed="businesses_clean.csv",
+                    address=("address", "unit")),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

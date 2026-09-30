@@ -712,6 +712,7 @@ _NOTICES = [
      "and stations and the municipal boundaries used to select them, "
      "Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
      "select them and the address points used to place its businesses, "
+     "Buffalo's NFTA Metro Rail line and its stations, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "

@@ -1896,6 +1896,36 @@ CITIES = [
         # middle of that range: PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("end", -11, 10),
     },
+    {
+        "name": "Buffalo",
+        "lat": 42.8864,
+        "lon": -78.8784,
+        "page": "pages/73_Buffalo_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "Licences unexpired on 2026-09-29; fetched 2026-09-29",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "NFTA Metro Rail (light rail)",
+        "region": "United States East",
+        "country": "United States",
+        # NOT IN THE DEFAULT FRAME although a US city: at 42.89 N Buffalo is
+        # north of every built US city, and joining IN_DEFAULT_VIEW would re-fit
+        # the pinned 1.4525 zoom every label offset here was measured at (the
+        # Vancouver lesson, below). It is still labelled in Global, United
+        # States and United States East.
+        "in_default_view": False,
+        # ABOVE-LEFT AND HIGH, and SCORED: width 48.8 px measured 2026-09-29 in
+        # the local app's own document (the Suwon/Bucheon/Bergen session). At
+        # this zoom Buffalo's dot is ~2 px from Toronto's, so the two names
+        # stack: nearer the dot it overlaps Toronto's label in Global, higher
+        # still Edmonton's. check_macro_labels.py passes dy -40 to -50 (read
+        # with `python -B`: a same-length rewrite of this file inside one
+        # second reuses the stale .pyc); -46 is the middle. PROBLEMS 0 at 375,
+        # 768 and 1200.
+        "label_offset": ("end", -11, -46),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
