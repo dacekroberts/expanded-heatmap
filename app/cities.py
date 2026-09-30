@@ -1737,11 +1737,13 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 54.4 px measured in the deployed
-        # app's own frame (2026-09-29, four entries reproduced). Labelled in the
-        # Seoul Capital Area region only; check_macro_labels.py passes every
-        # region at 375, 768 and 1200 with PROBLEMS 0.
-        "label_offset": ("middle", 0, -22),
+        # BELOW the dot since Bucheon joined (2026-09-29): above, its pill
+        # covered Bucheon's marker at all three widths. Width 54.4 px measured
+        # in the deployed app's own frame (2026-09-29, four entries
+        # reproduced). Labelled in the Seoul Capital Area region only;
+        # check_macro_labels.py passes every region at 375, 768 and 1200 with
+        # PROBLEMS 0.
+        "label_offset": ("middle", 0, 22),
     },
     {
         "name": "Goyang",
@@ -1822,6 +1824,27 @@ CITIES = [
         "country": "South Korea",
         "in_default_view": False,
         # Above the dot, and SCORED: width 45.3 px measured in the local app's
+        # own document (2026-09-29, seven entries reproduced). Labelled in the
+        # Seoul Capital Area region; check_macro_labels.py passes every region
+        # at 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Bucheon",
+        "lat": 37.5035,
+        "lon": 126.766,
+        "page": "pages/70_Bucheon_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 1, Line 7 and the Seohae Line",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 60.1 px measured in the local app's
         # own document (2026-09-29, seven entries reproduced). Labelled in the
         # Seoul Capital Area region; check_macro_labels.py passes every region
         # at 375, 768 and 1200 with PROBLEMS 0.

@@ -27,7 +27,9 @@ satellites: PASS, to B; "which satellites is the brief's question").
 > - Suwon **33,433** storefronts, 14 stations (Line 1, Suin-Bundang,
 >   Shinbundang; the brief's 14 nodes were the whole count), 47.6% in a ring
 >   (build session, branch `suwon`, 2026-09-29).
-> - Bucheon remains next (owner's order).
+> - Bucheon **22,512** storefronts, 14 stations (Line 1, Line 7 and the
+>   Seohae Line, drawn here on its own track, owner), 80.4% in a ring (build
+>   session, branch `bucheon`, 2026-09-29).
 
 ⚠️ **Korean cities: read `cjk-text`, and Seoul's, Daegu's and Busan's briefs
 first.** The satellites sit around Seoul (built) and share its lines, so

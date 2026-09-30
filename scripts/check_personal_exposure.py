@@ -92,6 +92,8 @@ REGISTRIES = {
                    address=("address",), korean=True, withheld="Name withheld"),
     "suwon": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                   address=("address",), korean=True, withheld="Name withheld"),
+    "bucheon": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                    address=("address",), korean=True, withheld="Name withheld"),
     # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
     # trade name (`insegna`) and the rest carry the street address, because
     # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on

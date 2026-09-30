@@ -97,7 +97,7 @@ together, so a row in either counts and a row in neither still fails.
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
@@ -2116,7 +2116,7 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
 
-**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon) — required, and DISPLAYED**
+**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed once Incheon lands).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-29; the rows in
