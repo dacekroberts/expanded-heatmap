@@ -214,6 +214,8 @@ results in the sweep.
 
 ### ▲ 🇺🇸 Dallas — from the discards on the Comptroller's permit file (2026-09-30, owner's call)
 
+**Queued for the Band B build session, last in its queue (owner, 2026-09-30).** Brief: `docs/build_briefs/dallas.md`, 4/4.
+
 Discarded on 2026-09-21 because the city's certificates of occupancy stopped
 in 2022. **The Texas Comptroller's Active Sales Tax Permit Holders file
 (`jrea-zgmq`, public domain), Houston's register, replaces them.** The owner
