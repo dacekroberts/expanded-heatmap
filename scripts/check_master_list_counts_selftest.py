@@ -267,12 +267,13 @@ CASES = [
 
     # Aimed at Band R since 2026-09-28, when D emptied (its rows moved to R and C).
     # Re-aimed from Band T to Band C 2026-09-29, when Band T's rows moved to the
-    # tram list and the master list's Band T section stopped holding any.
-    ("a city in two bands (a Band R row renamed to a Band C city)",
-     rename_into("R", "C"), None),
+    # tram list and the master list's Band T section stopped holding any; and
+    # from Band C to Band B the same day, when Band C closed (owner).
+    ("a city in two bands (a Band R row renamed to a Band B city)",
+     rename_into("R", "B"), None),
 
-    ("a built city still listed in a band (a Band C row renamed to a built city)",
-     rename_into("C", None), None),
+    ("a built city still listed in a band (a Band B row renamed to a built city)",
+     rename_into("B", None), None),
 
     ("no band recognised at all - the vacuous pass",
      drop_bands, "no '## ... Band X' sections"),
@@ -289,8 +290,8 @@ CASES = [
     ("tram list: the tier table's count drifted (T2, +1)",
      bump(r"^\| 🟤 \*\*T2\*\* \|.*\| \*\*(\d+)\*\*", "tier table says T2 {new}"), None, "tram"),
 
-    ("tram list: a city in two lists across the files (a tram row renamed to a Band C city)",
-     tram_into("C"), None, "tram"),
+    ("tram list: a city in two lists across the files (a tram row renamed to a Band B city)",
+     tram_into("B"), None, "tram"),
 
     ("tram list: a city row left behind in the master list's Band T section",
      row_left_in_band_t, "a move half made", "main"),

@@ -20,12 +20,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**207 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**210 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Baltimore to the discards on currency; Palma's three licence calls (owner)](#2026-09-29---baltimore-to-the-discards-on-currency-palmas-three-licence-calls-owner)
+- [Build briefs for six Band B cities; Baltimore's register found stale (staging)](#2026-09-29---build-briefs-for-six-band-b-cities-baltimores-register-found-stale-staging)
+- [Band C closed: its last five to the discards (owner)](#2026-09-29---band-c-closed-its-last-five-to-the-discards-owner)
 - [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
@@ -292,6 +295,97 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rejected: the rule as given is either, and the page is where a reader of
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
+
+### 2026-09-29 - Baltimore to the discards on currency; Palma's three licence calls (owner)
+
+- **Baltimore moved from B to the discards on currency (owner: "dubious").**
+  Every row of its Restaurants layer carries `EDIT_DATE` 2008-06-22. The
+  publisher's own note says it "has not been updated since 2022". It has no
+  field that could drop a closed restaurant. The rejected alternative was
+  keeping it on the publisher's 2022 note with the date disclosed. The
+  one-clock rule reads age from the rows, and the rows say 2008. The
+  discard row carries the evidence, the permitted licence and its reopen
+  condition.
+  - **Lesson**: the Band C audit passed it on 2026-09-29 without reading the
+    rows' dates, which were read only when the brief was drafted. **The
+    currency check belongs before a band move**, not at the brief.
+  - B 9 → 8, candidates 72 → 71, discards 96 → 97.
+- **Palma: all three licence calls answered (owner).**
+  - **A**: Barcelona's 2026-09-22 reading of the "no alteration" condition
+    (it bars misrepresentation, not analysis) extends to GOIB's terms.
+  - **B**: GOIB's uncapped indemnity is accepted, for this source, as Hong
+    Kong's, the CSDI's and Sacramento's were. Recorded in
+    `docs/data_sources.md`.
+  - **C**: Catastro's terms take the permissive reading. CC BY 4.0 is the
+    current, dated declaration; a business map built by a join is
+    transformed; the address layer is never published.
+
+  Palma's brief has no open call.
+
+### 2026-09-29 - Build briefs for six Band B cities; Baltimore's register found stale (staging)
+
+- **Briefs written in the owner's order**: Minneapolis, Pittsburgh (US),
+  Ottawa, Kitchener–Waterloo (Canada), Palma, Yokohama. Every checks block
+  passes; Overpass and WPRDC timeouts pass on re-run.
+  - **Minneapolis**: 16 light-rail stations inside (the stub test's 19
+    counted the airport people mover), 618 m, standard rings; 2,104 premises
+    (inspected within two years), 37.1% within 0.6 mi.
+  - **Pittsburgh**: 20 stations at a **445 m median gap, so halved rings**
+    by the spacing rule. 2,086 active premises; 26.8% within the 0.3 mi
+    outer ring. Status 7 (3,855 rows, undocumented) is to read in WPRDC's
+    dictionary before the build.
+  - **Ottawa**: 25 stations (the raw OSM names give 38 at a 12 m gap, as
+    platforms differ by direction); ~5,300 food premises, 30.8% within
+    0.6 mi. The feed is licensed under the **Open Government Licence – City
+    of Ottawa v2.0** (read), with a prescribed credit. The item says it
+    "will be retired in Q1 2026" yet is still updated daily, so it should be
+    cached early.
+  - **Kitchener–Waterloo**: the Region's two inspection layers found
+    (MapServer 17 and 18: 3,750 food and 998 personal region-wide); ION 19
+    stops, 613 m.
+  - **Palma**: the full join places **74.0%** (581 own coordinates plus
+    2,655 via Catastro). About 16 stations inside, 583 m; 37.3% within
+    0.6 mi. **Three owner calls from the licence reads**:
+    - GOIB's "no alteration" clause (Barcelona's reading);
+    - an uncapped indemnity (Hong Kong's shape);
+    - Catastro's older 2016 licence PDF against its current CC BY 4.0.
+  - **Yokohama**: 138 stations inside across seven operators, 836 m; 7,896
+    premises, 82.1% within 0.6 mi.
+- **Baltimore's brief was not written: its register fails the one-clock
+  rule on inspection.** Every one of the Restaurants layer's 1,327 rows
+  carries `EDIT_DATE` 2008-06-22. The item was republished 2025-12-04, and
+  its description says it "has not been updated since 2022". Read from the
+  rows, the list is 18 years old; read from the publisher's note, 4 years,
+  with no way to drop a closed restaurant. The licence read found it
+  permitted (the City Code's open-data ordinance, § 9-8(b)). **The currency
+  verdict is the owner's**: back to the discards on currency (Singapore's
+  ground), or keep it on the publisher's 2022 note with the date disclosed.
+  The Band C audit passed it without having read the rows' dates.
+
+### 2026-09-29 - Band C closed: its last five to the discards (owner)
+
+- **Singapore, Istanbul, Ankara, Perth and Ho Chi Minh City moved from C to
+  the discards, closing Band C (owner, on the recommendation).** After the
+  Band C audit passed eight cities to B, the band's condition ("the
+  likeliest to become buildable") described none of the five left. The list's
+  own rule is that a band whose condition stops being true closes, which is
+  why it was not re-captioned. That rule was applied the same way on
+  2026-09-28.
+- Each discard row carries its evidence and its reopen condition:
+  - **Singapore**, kind `measured`: NEA's food register ends 2016-09-06;
+    reopens when NEA refreshes it.
+  - **Istanbul** and **Ankara**, `absence`: storefronts are licensed by the
+    districts; reopens if a central district publishes its işyeri list.
+  - **Perth**, `absence`: land use per property on about 6 stations;
+    reopens with a per-establishment census like Sydney's or Melbourne's.
+  - **Ho Chi Minh City**, `absence`: seven months of certificates and no
+    placement route. The certificate file the owner fetched past the CAPTCHA
+    stays on the row with its sha256.
+- Candidates 77 → 72, discards 91 → 96, C 5 → 0; the letter C is free.
+  `check_discard_evidence.py` passes all 96 rows.
+- `check_master_list_counts_selftest.py`: its three cases aimed at Band C rows
+  were re-aimed at Band B, which cannot empty while reduced-bucket pages
+  exist. 24 of 24.
 
 ### 2026-09-29 - Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)
 
