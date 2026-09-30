@@ -881,6 +881,35 @@ _NOTICES = [
      "and are not produced or endorsed by STAR, Keolis Rennes or Rennes "
      "Métropole.",
      True),
+    # THE FRANCE TRAM BATCH'S THREE ODbL FEEDS (licence reads 2026-09-29): each
+    # its own §4.3 notice naming its own database, as Tisséo's and STAR's are,
+    # under the NAP's Conditions Particulières - the station tables are pure
+    # extracts. Montpellier's and Le Havre's LINE GEOMETRY is OpenStreetMap's
+    # (neither feed publishes shapes), which the OpenStreetMap notice covers, so
+    # those two name only the stations; Grenoble's geometry is its feed's own.
+    # No TaM logo, and LiA's colours are the project's own.
+    ("TaM (Montpellier)",
+     "Contains information from Réseau urbain TaM, which is made available here "
+     "under the Open Database License (ODbL). Tram station locations for "
+     "Montpellier are drawn from that feed; the stations kept, the rings, the "
+     "categories and the densities are this project's own work and are not "
+     "produced or endorsed by TaM or Montpellier Méditerranée Métropole.",
+     True),
+    ("M réso (Grenoble)",
+     "Contains information from Réseau urbain TAG, which is made available here "
+     "under the Open Database License (ODbL). Tram station locations and line "
+     "geometry for Grenoble are redrawn from that feed; the stations kept, the "
+     "rings, the categories and the densities are this project's own work and "
+     "are not produced or endorsed by the SMMAG (M) or Grenoble-Alpes "
+     "Métropole.",
+     True),
+    ("LiA (Le Havre)",
+     "Contains information from Réseau urbain LiA, which is made available here "
+     "under the Open Database License (ODbL). Tram station locations for Le "
+     "Havre are drawn from that feed; the stations kept, the rings, the "
+     "categories, the line colours and the densities are this project's own "
+     "work and are not produced or endorsed by LiA or Le Havre Seine Métropole.",
+     True),
     # BRØNNØYSUNDREGISTRENE - Oslo's business register. NLOD 2.0: section 5
     # says to attribute "as specified by the licensor", and Brønnøysund's API
     # documentation specifies nothing beyond "License: NLOD" (read

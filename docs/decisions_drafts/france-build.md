@@ -5,6 +5,31 @@ Entries for `DECISIONS.md`, newest first, each exactly as it should land
 in when handed off). Anything that must cite a DECISIONS verdict cites this
 file until then.
 
+### 2026-09-30 - France's pages take 100-119; three ODbL notices; group 2 on a stacked branch
+
+- **The twenty French pages are numbered 100-119** (Le Mans 100 to
+  Valenciennes 119), not 76-95. The Band B builds hold 76-86 (Ottawa to
+  Dallas, six already pushed) and the Czech builds took 150-155, so a reserved
+  block avoids interleaving at landing. Agreed with the Band B session. Only
+  file names and `app/cities.py`'s `page` fields moved; each page's slug and
+  `outputs/` directory are unchanged.
+- **Landing group 1 lives on `france-build`** (the eleven cities, 24 of 26
+  checks passing). **Group 2 is on `france-build-2`**, stacked on it:
+  Montpellier, Strasbourg, Le Havre, Caen, Rouen, Bordeaux, Nantes,
+  Grenoble, and Valenciennes last. Group 2's scaffolds first sat on
+  `france-build` and were moved off it, so group 1 can land without nine
+  half-built cities.
+- **Three §4.3 notices added to `app/components.py` `_NOTICES`**, one per
+  ODbL feed, on Tisséo's and STAR's model: TaM (Montpellier), Réseau
+  urbain TAG (Grenoble, naming the SMMAG) and LiA (Le Havre). Montpellier's
+  and Le Havre's name only the stations, since their line geometry is
+  OpenStreetMap's.
+- **Bordeaux's transit caption credits Bordeaux Métropole alone** (the
+  LO 1.0 read). Caen's and Rouen's credit Syndicat mixte Atoumod.
+- **Le Havre's colours are the project's own**: A `#EF6C00` and B
+  `#6D4C41`, which clear the preferred 45 against every pin (67.0 and 53.8)
+  and sit 71.1 from each other. Neither is LiA's scheme.
+
 ### 2026-09-30 - Ten more French tram cities built through step 3: Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice
 
 - **The first landing group's pipelines**: all eleven commune-scope cities

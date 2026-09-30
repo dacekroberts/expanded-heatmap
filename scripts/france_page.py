@@ -298,7 +298,11 @@ def main():
         m = measure(cfg)
         text = prose(cfg, name, spec["operator"], m)
         owner = PRODUCER.get(slug) or legal_owner(cfg)
-        if not owner:
+        if slug == "bordeaux":
+            # LO 1.0 read (2026-09-29): Bordeaux Métropole is the producer
+            # credited; not TBM, Keolis or the exporter Mecatran.
+            credit = "Bordeaux Métropole"
+        elif not owner:
             credit = spec["operator"]
         elif "(" in owner:
             credit = f"{owner}, {spec['operator']}"
