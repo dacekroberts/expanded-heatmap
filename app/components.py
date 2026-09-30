@@ -644,6 +644,31 @@ _NOTICES = [
      "measured by distance from transit stations. The City of Edmonton does "
      "not endorse this project or its use of the data.",
      False),
+    # Kitchener–Waterloo: Region of Waterloo Public Health's food and personal
+    # services inspection layers and bulk tables, and the Region's Cities and
+    # Towns layer, under the Region of Waterloo Open Data Licence (read
+    # 2026-09-30; the bulk tables' item pages name no licence, and the owner
+    # read the portal's "By downloading the data on the portal, you are
+    # agreeing to the Open Data License" as covering them, 2026-09-30). Credit
+    # is OPTIONAL under the licence, but it prescribes the sentence to use if
+    # one is given; it is reproduced VERBATIM. The licence bars suggesting
+    # official status or endorsement and misrepresenting the data or its
+    # source; the layers' descriptions add that no endorsement of any premises
+    # is implied. Written under the owner's pre-approval of this build's prose
+    # (2026-09-30).
+    ("Region of Waterloo (Kitchener–Waterloo)",
+     "Contains information provided by the Regional Municipality of Waterloo under licence "
+     "([Region of Waterloo Open Data Licence](https://www.regionofwaterloo.ca/"
+     "government-and-council/transparency-and-accountability/open-data/)). Food premises "
+     "and personal services for Kitchener–Waterloo are from Region of Waterloo Public "
+     "Health's inspection data, and the boundaries of Kitchener and Waterloo from the "
+     "Region's Cities and Towns layer. Changes: the premises are limited to the two cities "
+     "and to those inspected in the last two years; institutional kitchens, caterers, "
+     "market stalls, clubs and venues, pharmacies and mobile units are left out by type or "
+     "by name; and the rest are mapped by distance to ION stops. Inspection results are not "
+     "shown, and a pin is not a rating or an endorsement of the premises. This is not an "
+     "official Region of Waterloo product, and it is not endorsed by the Region.",
+     False),
     # Mexico City, added 2026-09-22. TWO OBLIGATIONS IN ONE NOTICE, and the
     # second is the one a source credit does not discharge.
     #
@@ -712,6 +737,7 @@ _NOTICES = [
      "and stations and the municipal boundaries used to select them, "
      "Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
      "select them and the address points used to place its businesses, "
+     "Kitchener–Waterloo's ION line and its stops, "
      "Buffalo's NFTA Metro Rail line and its stations, "
      "Sacramento's SacRT Blue and Gold Lines and their stations, and the "
      "municipal boundaries used to select them, "

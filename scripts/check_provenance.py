@@ -223,6 +223,8 @@ SLUG_OVERRIDES = {
     "Taipei (Regional)": "taipei",
     # Mexico: four municipios as one regional page (2026-09-27).
     "Monterrey (Regional)": "monterrey",
+    # Canada: Kitchener and Waterloo as one regional page (2026-09-30).
+    "Kitchener–Waterloo (Regional)": "kitchener_waterloo",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are

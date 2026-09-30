@@ -2048,6 +2048,32 @@ CITIES = [
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
     },
+    {
+        "name": "Kitchener–Waterloo (Regional)",
+        "lat": 43.4643,
+        "lon": -80.5204,
+        "page": "pages/79_Kitchener_Waterloo_Heatmap.py",
+        # Two categories (owner, 2026-09-30): food shops count as food, so
+        # food and personal services, with no general retail, are narrowed.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Inspected within two years of 2026-07-03",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Food hygiene register",
+        "categories": "Two",
+        "blurb": "ION light rail (route 301)",
+        "region": "Canada East",
+        "country": "Canada",
+        "mode": "light_rail",
+        "in_default_view": False,
+        # Above the eastern cluster, over Montréal's and Edmonton's pills:
+        # every closer placement of a 207 px label collided with Toronto's,
+        # Buffalo's, Montréal's or Edmonton's pill in the Global frame.
+        # PROBLEMS 0 at 375, 768 and 1200 px on this branch and with Ottawa,
+        # Minneapolis and Pittsburgh combined; width 207.2 measured in a
+        # browser.
+        "label_offset": ("middle", 0, -84),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

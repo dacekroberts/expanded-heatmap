@@ -411,6 +411,14 @@ REGISTRIES = {
     "sacramento": dict(raw=None, trade=None, owner=None,
                        processed="businesses_geocoded.csv",
                        address=("street", "unit")),
+    # Kitchener–Waterloo: Region of Waterloo Public Health's inspection layers.
+    # No operator column exists and SiteTelephone is never fetched; a
+    # personal-services name that reads as a person's shows its type (step 2),
+    # so what is left is measured here - personal services first, where
+    # home-based studios are.
+    "kitchener_waterloo": dict(raw=None, trade=None, owner=None,
+                               processed="businesses_clean.csv",
+                               address=("address",)),
     # Houston: the Texas Comptroller's sales-tax permits. No taxpayer column is
     # ever downloaded but the organisation type (fetch_sources names its
     # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its

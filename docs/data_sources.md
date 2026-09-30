@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.
 | Country | File | Cities |
 |---|---|---|
 | United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston |
-| Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto |
+| Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
@@ -2136,6 +2136,40 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
 - **MUST NOT**: present the counts as SEMAS's figures, or the data as accurate
   or complete on SEMAS's behalf (its legal notice disclaims both).
 - **MUST DO**: nothing.
+
+**69. Region of Waterloo (Kitchener–Waterloo) — displayed by choice, not required**
+(written into `render_site_notices()`; displayed once Kitchener–Waterloo lands).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-30; the
+  Kitchener–Waterloo rows in [`data_sources/canada.md`](data_sources/canada.md)):
+  the food and personal-services inspection layers (items
+  `61a7a8d8775e4da381d9718658c0d842`, `d96eeb0cd02e4b45ba52bc1a918c6218`) and the
+  Cities and Towns layer (`369f39237bf844e3abcf39d71947ee49`) name the **Region of
+  Waterloo Open Data Licence** in their `licenseInfo` (heading "v.2.0"; its body
+  says "version 1.0"; undated; OGL-UK via British Columbia's). The cited URL,
+  `https://www.regionofwaterloo.ca/en/regional-government/open-data.aspx#Open-Data-Licence`,
+  now answers 404; the licence is at `https://www.regionofwaterloo.ca/government-and-council/transparency-and-accountability/open-data/`, and a Wayback copy of the old URL
+  (2026-04-14) diffs identical.
+- **The bulk tables (`Inspections.zip`, `Inspections_PS.zip`; items
+  `b79414c31d93490c811c5a9979634fec`, `beb380d01149451dad08a04ebf19fdc3`) name no
+  licence**: `licenseInfo` null, and the Hub shows Esri's "No License Provided /
+  Request permission to use". **Owner's reading, 2026-09-30:** the Region's own
+  open-data page says "By downloading the data on the portal, you are agreeing to
+  the Open Data License below", which covers every portal download, so the
+  tables are used under the same licence. Any objection from the Region is
+  honoured.
+- **MUST DISPLAY**: nothing. Credit is optional, but the licence prescribes the
+  sentence if one is given, and it is displayed verbatim: "Contains information
+  provided by the Regional Municipality of Waterloo under licence".
+- **MUST NOT**: suggest official status or endorsement, or misrepresent the data
+  or its source. The layers' descriptions add that the results are what an
+  inspector observed on the day and that no endorsement of any premises is
+  implied, so the page shows no results and says a pin is not a rating.
+  Personal information is outside the grant (MFIPPA):
+  `check_personal_exposure.py kitchener_waterloo`, run 2026-09-30, finds 0
+  person-like names at a residential unit; the verdict is in `DECISIONS.md`.
+- **MUST DO**: nothing.
+- **Kitchener–Waterloo's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

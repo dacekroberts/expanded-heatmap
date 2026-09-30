@@ -1,0 +1,29 @@
+{
+  "written_utc": "2026-09-30T21:04:38+00:00",
+  "osm_host": "overpass.kumi.systems",
+  "osm_bbox": [
+    43.38,
+    -80.6,
+    43.52,
+    -80.4
+  ],
+  "as_of_date": "2026-07-03",
+  "zip_member_date": "2026-07-03",
+  "files_utc": {
+    "food_facilities.geojson": "2026-09-30T21:01:29+00:00",
+    "personal_facilities.geojson": "2026-09-30T21:01:30+00:00",
+    "Inspections.zip": "2026-09-30T21:01:38+00:00",
+    "Inspections_PS.zip": "2026-09-30T21:01:39+00:00",
+    "cities_and_towns.geojson": "2026-09-30T21:01:40+00:00",
+    "ion_stops.json": "2026-09-30T21:01:40+00:00",
+    "osm_rail.json": "2026-09-30T21:04:38+00:00"
+  },
+  "sources": {
+    "food_layer": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/17",
+    "personal_layer": "https://utility.arcgis.com/usrsvcs/servers/d96eeb0cd02e4b45ba52bc1a918c6218/rest/services/OpenData/OpenData/MapServer/18",
+    "food_zip": "https://webapps.regionofwaterloo.ca/open-data-downloads/SSIS/Hedgehog/Inspections.zip",
+    "personal_zip": "https://webapps.regionofwaterloo.ca/open-data-downloads/SSIS/Hedgehog/Inspections_PS.zip",
+    "cities": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/15",
+    "ion_stops": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/5"
+  }
+}

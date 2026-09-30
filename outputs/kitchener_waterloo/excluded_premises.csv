@@ -1,0 +1,867 @@
+source_key,business_name,premises_type,address,reason
+2DACBAB0-8AAB-4C0B-A498-B9734BD54046,Park Inn,Food Take Out,50 Young St,Hotel back of house
+12384C84-1383-4973-8B16-45913A229C0C,WALPER HOTEL,Restaurant,1 KING ST W,Hotel back of house
+726E49E5-CCE8-49C1-8AE3-617E628E337E,WATERLOO SUITES HOTEL,Restaurant,547 King St N,Hotel back of house
+324F941E-AC35-4476-ACA9-7EC49B1764B9,AGECARE WEST WILLIAMS LONG TERM CARE HOME - HAIR SALON,Hair Salon,200 David Bergey Dr,Institutional kitchen or service
+8DE7FDD0-DDA4-4FD5-ABF8-1310F66D47FE,CONESTOGA COLLEGE - BLOOM RESTAURANT,Restaurant,108 UNIVERSITY Ave E,Institutional kitchen or service
+AD5DF2B9-34AC-449E-8984-1CAD8BD3D442,Conestoga Student Services Incorporated(Pita Pit),Restaurant,299 Doon Valley DR,Institutional kitchen or service
+664F49FE-C29A-4913-8F7F-A48286B6F475,DOWNTOWN COMMUNITY CENTRE-MAIN KITCHEN,Restaurant,35 WEBER ST W,Institutional kitchen or service
+C19E26B4-8373-4FC2-A84F-F148A59E5650,FRESHII QUICK SERVICE - WRHN AT MIDTOWN (FORMERLY GRAND RIVER HOSPITAL),Food Take Out,835 King St W,Institutional kitchen or service
+044648C2-4030-4A30-886E-F94AF9920958,GINA'S SCHOOL OF AESTHETICS & ELECTROLYSIS,Ear / Body Piercing,385 WEBER ST N,Institutional kitchen or service
+29C5E285-1A05-4A33-B8DB-20F2ACEC2DF2,Kids Cafe - Creekside Church ,Snack Bar / Refreshment Stand,660 Conservation Dr,Institutional kitchen or service
+4621CC75-8E22-4B6C-B76C-AC853252416D,Kitchener Church of the Lord Jesus Christ Apostolic - Food Bank,,420 Bridgeport Rd E,Institutional kitchen or service
+B49269D5-BA6C-4F7D-893C-32F65DE40F96,La Lola Catering,Restaurant,26 Benton St,Institutional kitchen or service
+CA83BFE2-1BB1-4CD1-A4F9-A643F2696B16,MO'CHA BUBBLE TEA - WATERLOO REGION HEALTH NETWORK (WRHN) - CHICOPEE,Food Take Out,3570 KING ST E,Institutional kitchen or service
+CCBEA3BD-42C7-40A7-AE9E-17497CFC2E39,NUTRITION FOR LEARNING - SUDDABY PUBLIC SCHOOL,Food Take Out,171 FREDERICK ST,Institutional kitchen or service
+45FEF0F5-F160-4EDC-8D3C-B1F01E05CED8,Orange Blossom Catering,,976 Copper Leaf Crescent,Institutional kitchen or service
+76606A32-DBE0-41D2-95DA-7254331C7BB5,PARK HAIR STYLING - THE VILLAGE OF WINSTON PARK RETIREMENT HOME,Aesthetics,695 Block Line Rd,Institutional kitchen or service
+44A8CD86-88D0-4143-A4E4-1F108D509D3E,ROCKWAY COMMUNITY CENTRE CAFE,Food Take Out,1405 KING ST E,Institutional kitchen or service
+C6D04A6A-5820-4FFD-B6CD-781C6BD2CA37,"RUBY, THE - THE VILLAGE AT UNIVERSITY GATES RH",Restaurant,250 LAURELWOOD DR,Institutional kitchen or service
+ED2CEBDC-09CB-4E8F-ACAD-21F4E0F8C58C,ST. JEROME'S UNIVERSITY - THE FUNCKEN CAFE,Restaurant,290 WESTMOUNT RD N,Institutional kitchen or service
+2D6B226A-1E62-47EA-AF1E-37D253755B52,STANLEY PARK COMMUNITY CENTRE MARKET,Produce Vendor,505 Franklin St. N,Institutional kitchen or service
+230DB884-CBBD-43DD-9E05-964402516A0E,SUBWAY - WRHN @ Queen’s Blvd,Food Take Out,911 Queens Blvd,Institutional kitchen or service
+5897AB28-5CCB-4D7C-8AAE-94B04F4FF867,SUBWAY - WRHN AT MIDTOWN (FORMERLY GRAND RIVER HOSPITAL),Food Take Out,835 KING ST W,Institutional kitchen or service
+02C0E234-41CF-4B71-959E-A4260705EE09,TASTE OF MEDITERRANEAN - WRHN AT MIDTOWN (FORMERLY GRAND RIVER HOSPITAL),Food Take Out,835 King St W,Institutional kitchen or service
+3CC97EAE-F0DB-4FC0-8167-1424AA1A0AFF,TIM HORTONS - WATERLOO REGION HEALTH NETWORK (WRHN) - CHICOPEE,Food Take Out,3570 KING ST E,Institutional kitchen or service
+B035763F-138A-444E-9064-D3CF8C778B4A,TIM HORTONS - WRHN @ Queen’s Blvd,Food Take Out,911 QUEENS BLVD,Institutional kitchen or service
+DD716B8A-CF4B-443F-BBAF-66A8035D80B7,TIM HORTONS - WRHN AT MIDTOWN (FORMERLY GRAND RIVER HOSPITAL),Food Take Out,835 KING ST W,Institutional kitchen or service
+236248E9-BA1C-4FB2-B2DA-5F7559DD5060,UW - BROWSERS (LIB),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+0AF0B842-45C0-4AFA-B280-68E676897DE4,UW - BRUBAKERS (SLC),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+CD729E0B-4CF7-4639-95CE-8DA60A0A897F,UW - CEIT CAFE (EIT),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+DC9639F4-28EE-4CCB-AE3A-7612671A76F0,UW - CHASKA (SLC),Food Take Out,200 University Ave W,Institutional kitchen or service
+BF30186C-1C3E-4300-AB2D-A74FCB783682,UW - CHATIME (DC),Food Take Out,200 University Avenue West,Institutional kitchen or service
+3E38066E-75FD-429C-BFEF-B42607FE5E7A,UW - ENGINEERING SOCIETY COFFEE & DONUT SHOP (CPH),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+4BCB4DC8-41CE-49E4-9020-D5267F0AA6C6,UW - ENGINEERING SOCIETY COFFEE & DONUT SHOP (E7/PEARL SULLIVAN),Food store convenience / Variety,200 UNIVERSITY Ave W,Institutional kitchen or service
+0A95280C-8DF1-4788-B480-AC2C16676F2B,UW - ESS COFFEE SHOP (EV1),Food Take Out,200 UNIVERSITY Ave W,Institutional kitchen or service
+40C56DD5-5461-42B1-9B8B-05F8B3EB69BC,UW - EV3RGREEN CAFE (EV3),Food Take Out,200 University Ave,Institutional kitchen or service
+E1E78EFB-7C4F-44C8-BC02-9AF1972DE09C,UW - FEDERATION HALL,Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+B45D2B45-29EF-4BF7-BEA6-7688312C7647,UW - FLOCK STOP (SLC),Food store convenience / Variety,200 UNIVERSITY Ave W,Institutional kitchen or service
+F814149D-C1BD-45E4-82DB-0E5DB79D04C7,UW - GRAD HOUSE (GRAD STUDENTS),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+6A01CC49-2B4C-4817-8728-27C296D4D2B1,UW - JUGO JUICE (PAC),Food Take Out,200 University Ave W,Institutional kitchen or service
+1CFBC39D-5214-45C4-AB80-7F694892DC7C,UW - LIQUID ASSETS CAFE (HH),Food Take Out,200 University Ave W,Institutional kitchen or service
+B946023C-5F72-4B73-95A1-0FB07BF3D8A5,UW - MATH SOCIETY COFFEE & DONUT SHOP - (MC),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+79BC5705-75E3-4E56-BCC0-EA9F9C967010,UW - ML's DINER (ML),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+73548900-245C-41AE-B236-37FCA0C36E10,UW - ROLLTATION (HLTH),Food Take Out,200 UNIVERSITY Ave W,Institutional kitchen or service
+1B4E765B-1BA0-47C9-B660-93EAF554F028,UW - SCIENCE SOCIETY COFFEE and DONUT SHOP (BI),Food store convenience / Variety,200 UNIVERSITY Ave W,Institutional kitchen or service
+6A01125A-F9F5-4FB9-8691-BBD13E576AC4,UW - SOUTH SIDE MARKETPLACE (SCH),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+4B58CFD4-908E-462C-89C6-E9697990B927,UW - STARBUCKS COFFEE (HLTH),Food Take Out,200 UNIVERSITY Ave W,Institutional kitchen or service
+31B1DEEA-8D95-4D0B-ABE8-D2B8CB209308,UW - STARBUCKS COFFEE (STC),Food Take Out,200 UNIVERSITY Ave W,Institutional kitchen or service
+804886CF-D158-4BAF-B832-16EA2A09A87F,UW - SUBWAY (SLC),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+06EF4A67-B5C8-4889-98B3-2745246163E8,UW - THE BOMBER (SLC),Restaurant,200 University Ave W,Institutional kitchen or service
+C757FD07-E89C-4891-9A0B-D5144E2FE184,UW - TIM HORTONS (DC) ,Food Take Out,200 University Avenue West,Institutional kitchen or service
+38C97651-7064-43F1-B008-C2DE969AF50B,UW - TIM HORTONS (East Campus 5),Restaurant,305 PHILLIP ST,Institutional kitchen or service
+1BC69A06-95B6-49CD-AD10-E71127347287,UW - TIM HORTONS (ML),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+B7679ECD-5EEC-43B9-95E8-B2F41F5364D9,UW - TIM HORTONS (SCH),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+251EF404-0B50-4F72-AFCF-95E204ADF7CC,UW - TIM HORTONS (SLC),Restaurant,200 UNIVERSITY Ave W,Institutional kitchen or service
+FD97A497-D399-4214-A654-E3773B36345F,UW - WARRIORS FUEL (CIF),,220 Columbia St W,Institutional kitchen or service
+0E050B73-22E1-43DB-95D6-71F5E6EB74D4,WLU - Ah-So Korea (TERRACE),Food Take Out,75 University Ave W,Institutional kitchen or service
+30532B04-6489-43E7-BEDA-FFCD10AD6386,WLU - Ah-So Sushi (TERRACE),Food Take Out,75 University Ave. W,Institutional kitchen or service
+74E1EE04-CD6B-4878-AD9E-D590EB115B7C,WLU - Byte75 Coffee and Social (LH),Restaurant,64 University Ave W,Institutional kitchen or service
+FF2814FA-ADFA-46BC-9DA1-FE3537142742,WLU - CAFE 1911 (Terrace),Food Take Out,75 University Ave W,Institutional kitchen or service
+D329C8E9-5C93-47A3-88D4-CE6FE06E9AA5,WLU - Frank's Coffee Haus (Peters Building),Food Take Out,75 University Ave W,Institutional kitchen or service
+33C0D0CD-E7CF-46D5-A75F-0EEB153DB601,WLU - Fresh Food Co. (Dining Hall),Restaurant,75 UNIVERSITY Ave W,Institutional kitchen or service
+0C9C6F24-B7EC-40FC-BDAB-CA876A7F3B05,WLU - GRAB N GO PREP KITCHEN (Terrace) ,Food Take Out,75 University Ave W,Institutional kitchen or service
+63229621-338A-4676-BD92-D3C220E1CA46,WLU - HARVEY'S (TERRACE),Restaurant,75 UNIVERSITY Ave W,Institutional kitchen or service
+D8443CEB-28AE-40E1-9A35-9F1A55AE1B2F,WLU - INS Market  (F.N. Campus Centre),Food store convenience / Variety,75 University Ave W,Institutional kitchen or service
+1840B0FF-1A57-4B7E-A860-ADC8AFFFD6BE,"WLU - Mini Market, The (King Street Residence)",Food store convenience / Variety,200 King St. N,Institutional kitchen or service
+3CF241A5-3A31-40BF-98B3-2BD71FE663F0,WLU - PIZZA PIZZA/Chicken Chicken (TERRACE),Restaurant,75 UNIVERSITY Ave W,Institutional kitchen or service
+B81F856C-CEBC-42F4-A3CC-8A0D3A71419D,WLU - Palgong Tea (Library),Food Take Out,75 University Ave. W,Institutional kitchen or service
+AB666736-65FC-4D8F-82A8-AFE9DE475F87,WLU - Starbucks Coffee (FN Campus Centre),Food Take Out,75 UNIVERSITY Ave W,Institutional kitchen or service
+8D4CFC18-A39A-4ABA-B87F-61FFD6EE9452,WLU - Subway (Bricker Academic),Restaurant,75 UNIVERSITY Ave W,Institutional kitchen or service
+DE63D296-75DB-4029-97DD-AA852A8B0A53,WLU - TIM HORTONS (SCIENCE BUILDING),Restaurant,75 UNIVERSITY Ave W,Institutional kitchen or service
+7F50F728-642E-4262-AB45-45B52557B0D6,"WLU - TURRET,THE (F.N. Campus Centre)",Cocktail Bar/ Nightclub,75 UNIVERSITY Ave W,Institutional kitchen or service
+7148E5AA-C101-49C0-AE8B-D496FDF9A166,WLU - Union Market (Terrace),Restaurant,75 UNIVERSITY Ave W,Institutional kitchen or service
+152F7974-1421-4D67-8C48-45A0AA26AD6A,WLU - Veritas Café @ the AC (Athletic Complex),Snack Bar / Refreshment Stand,75 University Ave W,Institutional kitchen or service
+9BEC38D9-E799-4A05-9039-519FB779C24E,WLU - WILF'S (F.N. Campus Centre),Restaurant,75 UNIVERSITY Ave W,Institutional kitchen or service
+9BA2E9A6-54EF-426A-BEF9-F47DA2D59A3A,WLU - Zoca Mexican Fresh Flavours (TERRACE),Food Take Out,75 University Ave. W,Institutional kitchen or service
+A7748E56-1AE2-43C5-8F0A-2E36C8B6334E,WLU-Athletic Complex Concession Stand (Athletic Complex),Snack Bar / Refreshment Stand,75 University Ave W,Institutional kitchen or service
+017F0A64-5033-4F7B-BD4D-7C56242D61AD,AGECARE WEST WILLIAMS LONG TERM CARE RESIDENCE ,Long Term Care,200 DAVID BERGEY DR,"Institutional, mobile or processing category"
+92B984B6-8CD6-4E83-9DC4-1D7A5020F40C,ALL FIRED UP- PITSTOP GRILL,Mobile Preparation Premises,99 Regin St S,"Institutional, mobile or processing category"
+2579145B-9531-4578-83BE-5063D86AFDF1,AMICA CLAIR HILLS RETIREMENT RESIDENCES,Retirement Home,530 COLUMBIA ST W,"Institutional, mobile or processing category"
+D9AA44CA-4C46-4643-B19D-D448A02F91E1,ANNA'S BBQ CART,Street Food Vendor/Hot Dog Cart,166 Park St,"Institutional, mobile or processing category"
+4018945C-D89A-433B-8CF7-55D78FC90334,ANSELMA HOUSE,Group / Lodging Home (>9),700 HERITAGE DR,"Institutional, mobile or processing category"
+E9BCF4F0-E2C6-4729-A6C4-C00D642BB7E6,ARK RESIDENTIAL CARE FACILITY,Group / Lodging Home (>9),125 WATER ST N,"Institutional, mobile or processing category"
+17406486-3E9C-458E-A4E5-E7FE63BA6119,ASPIRA DOON VILLAGE RETIREMENT LIVING,Retirement Home,868 DOON VILLAGE RD,"Institutional, mobile or processing category"
+DE0644C5-A12E-4AD5-BD63-F1D60D843FDA,ASPIRA HYGATE WATERLOO RETIREMENT LIVING,Retirement Home,215 Lexington Rd,"Institutional, mobile or processing category"
+17F082D5-D66B-42F7-90B9-BDADDEE27C4B,Abraham Erb PS-WRDSB-ED/YD,Before and After School Program,710 LAURELWOOD DR,"Institutional, mobile or processing category"
+119EF81F-02AE-48E7-A61D-3AB82EB118B8,Alpine PS-WRDSB-ED/YD,Before and After School Program,75 Lucerne Dr,"Institutional, mobile or processing category"
+C7293140-452C-4A48-A63B-10D3DD6BDDF5,Angelic Treasure Christian Daycare -Food,,301 Westmount Rd West,"Institutional, mobile or processing category"
+F42CA97F-A34B-407B-8614-C1FCFF2A78D3,Angus Valley Montessori,Child Care Onsite Prep./Recreational Camp/Co-op,873  Fairway Road N,"Institutional, mobile or processing category"
+19DC6E43-EFA5-4A85-A27C-5D6F17B56D4D,BAD ATTITUDE TREATS,Food Plant / Production - Other,305 Northfield Dr E,"Institutional, mobile or processing category"
+9F53586F-0B6A-4D1B-AEE0-E8928B138205,BEECHWOOD MANOR,Retirement Home,305 ERB ST W,"Institutional, mobile or processing category"
+2454082C-4559-46A6-9D5A-56AF8C4DFBD8,BIG JERK TRAILER 1,Catering Vehicle,70 Dumart Pl,"Institutional, mobile or processing category"
+F4B1839F-BFA2-4BF5-BFE4-5F0D537965F6,BRASON ACADEMY MONTESSORI SCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,275 Erb St E,"Institutional, mobile or processing category"
+5EDF8833-AD26-4C95-9A7E-72B4FDBB5EEA,BREAD HEADS FOOD TRUCK,Mobile Preparation Premises,360 Queen St S,"Institutional, mobile or processing category"
+68CC6277-A373-43B7-A793-650ECA05DD1A,BRIARFIELD GARDENS RETIREMENT RESIDENCE,Retirement Home,1250 WEBER ST E,"Institutional, mobile or processing category"
+DB330153-3F9F-4642-9D4B-772A83597064,BUTTERFLY LEARNING CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,30 BATHURST DR,"Institutional, mobile or processing category"
+D103F589-821E-4AE7-98CE-A74F1ECB07EB,Batter Plus,Food Plant / Production - Other,401 Weber St N,"Institutional, mobile or processing category"
+5F444958-97AD-4619-84A5-E4C14C5B6BDF,Berlin 95 Food Truck,Mobile Preparation Premises,380 Lake Louise Blvd,"Institutional, mobile or processing category"
+F2BC4790-6F05-45E8-B00A-1755343E4673,Bridgeport PS-WRDSB-ED/YD,Before and After School Program,59 Bridge St W,"Institutional, mobile or processing category"
+57057757-7862-47EE-AB23-D02FEB2575AF,Brigadoon PS  - YMCA Three Rivers - ED/YD,Before and After School Program,415 Caryndale Dr,"Institutional, mobile or processing category"
+37A3D129-3030-484C-99F3-1B905395104E,Brightpath,Child Care Onsite Prep./Recreational Camp/Co-op,1151 VICTORIA ST N,"Institutional, mobile or processing category"
+AA29F49A-1C6E-46A3-8EFC-477076933F81,CENTRE EDUCATIF VILLAGE D'ELISABETH,Child Care Onsite Prep./Recreational Camp/Co-op,280 GLENRIDGE DR,"Institutional, mobile or processing category"
+E92BC34B-A804-4341-BD4E-3F60D456DF4F,CHAI PLEASE INC.,Mobile Preparation Premises,82 Margaret Ave,"Institutional, mobile or processing category"
+700AA903-2DD1-4653-A74C-C95CD74BDF82,CHARTWELL BANKSIDE RETIREMENT RESIDENCE,Retirement Home,71 BANKSIDE DR,"Institutional, mobile or processing category"
+321692A8-B121-4360-AB32-1720A504D25A,CHARTWELL TERRACE ON THE SQUARE RETIREMENT HOME,Retirement Home,100 CAROLINE ST S,"Institutional, mobile or processing category"
+9BA4ACE3-77C3-40B7-9D0B-13663736CFDB,CHARTWELL WESTHILL RETIREMENT COMMUNITY,Retirement Home,25 WESTHILL DR,"Institutional, mobile or processing category"
+DE6C9854-5709-4DF0-AACC-4C9E2ACDF36F,CHARTWELL WESTMOUNT RETIREMENT RESIDENCE,Retirement Home,190 David Bergey Dr,"Institutional, mobile or processing category"
+01B603FB-6051-4E23-8A76-688667680833,CHILD CARE PLUS,Child Care Onsite Prep./Recreational Camp/Co-op,14 JANSEN Ave,"Institutional, mobile or processing category"
+1B4439C5-DBFB-40F7-B1F0-768F97E64A7E,COLUMBIA FOREST LONG TERM CARE CENTRE,Long Term Care,650 MOUNTAIN MAPLE AVE,"Institutional, mobile or processing category"
+2F99F0ED-5E5D-498C-A259-EE5A189D481F,CONESTOGA COLLEGE CHILD MINDING WATERLOO,Child Care Onsite Prep./Recreational Camp/Co-op,108 University Ave E,"Institutional, mobile or processing category"
+7F509ED7-3F3F-4EAD-A6DA-AD42F7E06929,CONESTOGA COLLEGE DAY CARE - DOON,Child Care Onsite Prep./Recreational Camp/Co-op,299 DOON VALLEY DR,"Institutional, mobile or processing category"
+D06D6747-30C5-4EE6-AF4C-C8D7ACCC313A,CONESTOGA LODGE,Retirement Home,55 HUGO CRES,"Institutional, mobile or processing category"
+3F68B01E-B696-46E0-ABBD-3961F87951B0,CREATIVE BEGINNINGS EARLY LEARNING AND CARE - UNIVERSITY ,Child Care Onsite Prep./Recreational Camp/Co-op,2415 University Ave E,"Institutional, mobile or processing category"
+7D375604-4D38-433F-B9B8-D2EC6A6040A2,Cafe du Monde Creperie,Mobile Preparation Premises,933 Dunblane CRT,"Institutional, mobile or processing category"
+B8A9D47F-67DF-412D-8C3B-773E02BFA308,Camino Wellbeing + Mental Health,Group / Lodging Home (>9),231 HERBERT ST,"Institutional, mobile or processing category"
+06D8ECEB-8949-4A24-B9BD-C14CED96ED4A,Cedarbrae PS-WRDSB-ED/YD,Before and After School Program,230 Cedarbrae Ave,"Institutional, mobile or processing category"
+3EFA4329-1DF3-4F7D-A93B-67DC5A627ECB,Chicopee Hills PS-WRDSB-ED/YD,Before and After School Program,300 Chicopee Hills Drive,"Institutional, mobile or processing category"
+345CF986-0D84-4A58-B98B-6FB5185ACB56,Coastline Coffee Cart,Mobile Preparation Premises,300 Regina St N,"Institutional, mobile or processing category"
+55BC3A93-752C-4907-B5AB-CE2E99F753F8,Cobble Creek Residence Inc.,Retirement Home,210 Woolwich St,"Institutional, mobile or processing category"
+7B59A6D5-8227-4E14-86A2-1CAE191F28E2,Cocktail Carriage Roaming Bar,Catering Vehicle,32 Mowat Blvd,"Institutional, mobile or processing category"
+BDE06E97-8ADE-4464-804A-381F37DAFF9B,Country Hills PS-WRDSB-ED/YD,Before and After School Program,195 Country Hill Drive,"Institutional, mobile or processing category"
+8A5FE66B-8D81-42B7-9F6A-1AC4D9531167,Crestview PS-WRDSB-ED/YD,Before and After School Program,153 MONTCALM DR,"Institutional, mobile or processing category"
+B4216FBA-A216-4045-9ED2-067DCB84DD90,DARING RESIDENTIAL HOMES,Group / Lodging Home (>9),226 QUEEN ST S,"Institutional, mobile or processing category"
+21CB0E85-038A-4759-BC35-54EC14FA4543,DAS FRITTER HAUS/BARON HAUS,Mobile Preparation Premises,44 Woolwich St,"Institutional, mobile or processing category"
+56426DC5-32A9-48DE-B8BC-CCA3AA2F2278,DIA'S DELI,Food Plant/Production - Meat,154 Victoria St S,"Institutional, mobile or processing category"
+6749192C-557C-4B2D-B8DF-BC51E31CA4C6,DOC MACCHEESEY,Mobile Preparation Premises,31 Kingsbury Drive,"Institutional, mobile or processing category"
+2E4D9684-C487-4F93-8AD5-1C5364A8FDAD,DRIFTWOOD PARK CHILD CARE CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,50 PARKLAND CRES,"Institutional, mobile or processing category"
+3244D49E-E285-4E1D-A9E1-FDB048FF2700,DRINK BOX - THUNDERSTORM PRODUCTIONS,Street Food Vendor/Hot Dog Cart,290 Marsland Drive,"Institutional, mobile or processing category"
+015413CE-0D17-42B6-9C9B-2DE6327CFD0C,Doodle Bugz Early Learning,Child Care Catered,200 David Bergey Dr,"Institutional, mobile or processing category"
+780A3956-ABD4-4732-9837-B1D13EA12BCA,Dosa On Wheels,Mobile Preparation Premises,143 Westwood Drive,"Institutional, mobile or processing category"
+0888CFFB-D9DA-4F25-B309-46367DF8524E,Driftwood Park PS - Conestoga College Child Care - ED/YD,Before and After School Program,50 Parkland Cr,"Institutional, mobile or processing category"
+59438FD6-3663-4C1A-992A-E5613002B772,EARLY YEARS EDUCATION SYSTEM,Child Care Onsite Prep./Recreational Camp/Co-op,1284 Ottawa Street South,"Institutional, mobile or processing category"
+600E98CC-888A-4F9D-9CB3-3210403AC18A,EL MILAGRO FOOD TRAILER AND CATERING,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+1DB4F1A6-B8E7-4F4E-B5EB-7044A6026951,ELITE DAYCARE - KITCHEN,Child Care Onsite Prep./Recreational Camp/Co-op,1557 Highland Rd W,"Institutional, mobile or processing category"
+2702A207-252F-469D-A31C-A4A2AA101EB6,EMMANUEL AT BRIGHTON DAY CARE,Child Care Onsite Prep./Recreational Camp/Co-op,65 NOECKER ST,"Institutional, mobile or processing category"
+78B6229F-A8A6-43A9-BA14-8FF4AB10BDBC,ENGLISH AT FIRST,Child Care Onsite Prep./Recreational Camp/Co-op,16 WILLIAM ST W,"Institutional, mobile or processing category"
+8CF556E2-7D8D-4558-84F5-6FD336BF4DFE,ESL ST. LOUIS LINC DAY CARE,Child Care Onsite Prep./Recreational Camp/Co-op,80 YOUNG ST,"Institutional, mobile or processing category"
+0299B4B3-C469-4024-8212-54CACB5B3515,Elizabeth Ziegler PS-WRDSB-ED/YD,Before and After School Program,90 Moore Ave S,"Institutional, mobile or processing category"
+DC6B4A38-D192-403A-82A2-67D2C3F3898E,Empire PS-WRDSB-ED/YD,Before and After School Program,83 Empire St,"Institutional, mobile or processing category"
+28674BB4-223C-4037-8409-4D838C10C65B,FERGUS PLACE,Retirement Home,164 Fergus Ave,"Institutional, mobile or processing category"
+E544D586-7307-4D2B-9AF0-73EF1523EB20,FILTER'D,Mobile Preparation Premises,150 Victoria St N,"Institutional, mobile or processing category"
+B2AB3E8C-367E-445E-8079-03E45EC6A89A,FOOD2GO INC.,Mobile Preparation Premises,405 KING ST N,"Institutional, mobile or processing category"
+3339EDAD-D5F0-47C6-98C4-EC56D978CAF8,FOREST HEIGHTS LONG TERM CARE CENTRE,Long Term Care,60 WESTHEIGHTS DR,"Institutional, mobile or processing category"
+45E0E39A-0A87-4D95-A165-1B6076777819,FRANK'S FOOD SERVICE,Catering Vehicle,509 Wilson Ave,"Institutional, mobile or processing category"
+8AB353CA-7192-4499-8AE9-C22D620D994A,Forest Hill PS-WRDSB-ED/YD,Before and After School Program,255 Westmount Rd E,"Institutional, mobile or processing category"
+F2878B5B-A456-435C-9B3B-80685B43DF02,Four All Ice Cream - Tricycle ,Street Food Vendor/Hot Dog Cart,141 Whitney Pl,"Institutional, mobile or processing category"
+A5D68F5B-C136-4AF6-8A4D-C7228DFD0A1E,Franklin PS-WRDSB-ED/YD,Before and After School Program,371 Franklin St N,"Institutional, mobile or processing category"
+21534156-5D3C-44E6-800C-CDBC30275AF1,Glazed Nuts Inc.- Food Trailer,Mobile Preparation Premises,9 Strange St,"Institutional, mobile or processing category"
+7C554209-D167-46A2-8A4C-DC369E51748A,Glencairn PS-WRDSB-ED/YD,Before and After School Program,664 ERINBROOK DR,"Institutional, mobile or processing category"
+C2CCC33B-E2B0-4068-90EE-51502145C70C,Groh PS - YMCA Three Rivers - ED/YD,Before and After School Program,225 Thomas Slee Dr,"Institutional, mobile or processing category"
+8E72ED71-C37E-4882-9FC7-C7F9608F809C,Grow Together Child Care Centre,Child Care Catered,543 Beechwood Dr,"Institutional, mobile or processing category"
+F1D30347-D27A-4A29-B142-5E8CFD94A138,HEAVENLY DREAMS ICE CREAM INC Plate #AD 15010,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+F59A8EBA-DBA8-47C4-AC26-CBB1AA75D733,HEAVENLY DREAMS ICE CREAM INC Plate #AP 54786,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+5A7C4388-1AB8-41F3-A081-7D764829FFEE,HEAVENLY DREAMS ICE CREAM INC Plate #AT 43335,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+A3D1E41A-FC96-4DF1-ABFB-EABF45B2F7F4,HEAVENLY DREAMS ICE CREAM INC Plate #BD 24957,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+D0EF2A88-0A6C-4954-B6B8-02B0A220BE01,HEAVENLY DREAMS ICE CREAM INC Plate #CB 10001,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+A3F4B151-2EAE-4C9A-8AEF-C151CA9D385C,HEAVENLY DREAMS ICE CREAM INC Plate #CF90351,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+C4925A0B-0F6D-43CF-8DD7-D896065810C0,HIGHLAND PLACE,Retirement Home,20 Fieldgate St,"Institutional, mobile or processing category"
+059DB038-BD7D-4D86-AFD6-F5BC7F951D58,HIGHVIEW RESIDENCES KITCHENER (Blair House with Edwards and Treffrey Cottages) - RETIREMENT HOME,Retirement Home,20 Reichert Dr,"Institutional, mobile or processing category"
+189C00BB-7D51-4482-B1C6-C72CC0B61206,HIGHVIEW RESIDENCES KITCHENER (Cedar Creek House with Cooper and Bowlby Cottages),Retirement Home,20 Reichert Dr,"Institutional, mobile or processing category"
+A1ED6322-1B10-4C0A-9356-A4C95BA12722,HISSING GOOSE COFFEE ROASTERS,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+E4EE1F3D-0DAE-4214-8675-744F7520B13F,HOMETOWN STREET EATS,,99 Regina St S,"Institutional, mobile or processing category"
+933260EC-DD14-4DA2-9B26-1D2C8695F7B9,HOSPICE OF WATERLOO REGION,Group / Lodging Home (>9),100 SOLSTICE WAY,"Institutional, mobile or processing category"
+FE39F1F7-38E8-4C23-9F58-8064F2D6B92A,HOUSE OF FRIENDSHIP - HART TRANSITIONAL HOUSING,Group / Lodging Home (>9),47 Madison Ave S,"Institutional, mobile or processing category"
+FCBB7404-4667-404C-99F6-B2D44F14FF8D,HOUSE OF FRIENDSHIP - SHELTERCARE,Group / Lodging Home (>9),190 Weber St N,"Institutional, mobile or processing category"
+874CD319-5E01-4A12-9831-078AA8B1286A,HOUSE OF FRIENDSHIP ADDICTION SERVICES FOR WOMEN,Group / Lodging Home (>9),71 ANN ST,"Institutional, mobile or processing category"
+834A82FC-E4C6-4E17-86B3-9F644264867C,Hillside PS-WRDSB-ED/YD,Before and After School Program,11 Chopin Dr,"Institutional, mobile or processing category"
+F148D6C7-078B-4E0A-8CCC-46D50D6DD61B,Homemade Goodness,Cannery,74 Bleams Rd,"Institutional, mobile or processing category"
+86544356-381D-4060-B06F-180BF04478E1,Howard Robertson PS-WRDSB-ED/YD,Before and After School Program,130 Morgan Ave,"Institutional, mobile or processing category"
+863FECAA-1D1B-4DD0-ABD2-FF02D8E6A718,ICE CREAM 4U,Mobile Preparation Premises,99 Regina St. S,"Institutional, mobile or processing category"
+D699C99E-1B0D-4386-A111-F4BFF8BD75DF,INNISFREE HOUSE,Group / Lodging Home (>9),2375 Homer Watson Blvd,"Institutional, mobile or processing category"
+AEAB2FDC-ECF3-4AEE-80E6-6BF83226F1DA,ISH & CHIPS,Mobile Preparation Premises,414 Manchester Rd,"Institutional, mobile or processing category"
+2B22A43D-3AFA-4EB5-BF4E-D7E0952152BF,ISLAND SON CANADA,Food Plant / Production - Other,195 Yellow Birch Drive,"Institutional, mobile or processing category"
+7C82B3C6-A9FD-433B-A97A-1A28790B8378,JANET METCALFE CHILD CARE CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,335 Seabrook Dr,"Institutional, mobile or processing category"
+C76960F6-3D4D-4A49-8E0C-E17EC98FFE7D,JF Carmichael PS-Conestoga College CC-YD,Before and After School Program,80 Patricia Ave,"Institutional, mobile or processing category"
+19F52A8B-0F26-40F0-9528-5DCD22AEFEDC,JF Carmichael PS-WRDSB-ED,Before and After School Program,80 Patricia Ave,"Institutional, mobile or processing category"
+C393C0BE-BD8E-49DB-BD7A-E10157101FD5,JOEY DOGGS INC,Street Food Vendor/Hot Dog Cart,1458 Weber St E,"Institutional, mobile or processing category"
+57EABE5D-2FB5-4006-A3DA-B73F2054623D,JOEY DOGGS ON THE GO,Street Food Vendor/Hot Dog Cart,1458 WEBER ST E,"Institutional, mobile or processing category"
+06D292CC-AFC7-4E62-A791-A2985E71A73A,JOHN DARLING PS-WRDSB-ED,Before and After School Program,200 Rolling Meadows Dr.,"Institutional, mobile or processing category"
+AF10F14D-0600-40DF-8D2D-DF885D5839CD,JOHN SWEENEY C.E.S. - RISING OAKS EARLY LEARNING,Child Care Onsite Prep./Recreational Camp/Co-op,185 ACTIVA Ave,"Institutional, mobile or processing category"
+0A644248-4BC2-4F9D-9B0C-46E58B45A939,JW Gerth PS - YMCA Three Rivers - ED/YD,Before and After School Program,171 Apple Ridge Dr,"Institutional, mobile or processing category"
+15BBADFF-9BD6-4421-A8B6-F5CCB102EE48,Janet Metcalfe PS-WRDSB-ED/YD,Before and After School Program,335 Seabrook Dr,"Institutional, mobile or processing category"
+48BE837D-728A-4F56-8EA8-652254A360FA,Jean Steckle PS-YWCA Childcare,Child Care Onsite Prep./Recreational Camp/Co-op,130 Woodbine Ave,"Institutional, mobile or processing category"
+F5BBE554-6C2B-4398-80CE-4A899361BB22,K-W MONTESSORI SCHOOL-BRIDGEPORT,Child Care Catered,527 BRIDGEPORT RD E,"Institutional, mobile or processing category"
+27BE755D-2036-4AC9-85E0-9AD1DBBEAD2E,KIDS AND COMPANY CHILDCARE,Child Care Catered,340 HAGEY BLVD,"Institutional, mobile or processing category"
+8B5FB16C-2D5A-4C5F-930F-8C1BF9B5E551,KING EDWARD PS-WRDSB-ED,Before and After School Program,709 KING ST W,"Institutional, mobile or processing category"
+FFF9FBEC-134F-4C2F-8252-4A35AFD781C4,KONO PIZZA,Mobile Preparation Premises,91 BLACK WALNUT DR,"Institutional, mobile or processing category"
+3C1EEB46-01E6-48AC-93BB-F5EB49C7B31B,Keatsway PS-WRDSB-ED/YD,Before and After School Program,323 KEATS WAY,"Institutional, mobile or processing category"
+D5D10FFA-E5E8-4EC4-A8F7-F5F2ACFF8C82,Kinderwood Academy,Child Care Onsite Prep./Recreational Camp/Co-op,139 Washburn Dr,"Institutional, mobile or processing category"
+F306481B-2205-42C0-8C98-20C989DC0C6B,L'HARMONIE-BEFORE AND AFTERSCHOOL PROGRAM,Before and After School Program,158 Bridgeport Rd E,"Institutional, mobile or processing category"
+69EA8796-C800-47AA-872C-952EBA3BA432,LA GARDERIE DES LUTINS DE KITCHENER,Child Care Onsite Prep./Recreational Camp/Co-op,345 THE COUNTRY WAY,"Institutional, mobile or processing category"
+8F412E83-9FF2-4133-95D5-4D48640CA60C,LACKNER WOODS CHILD CARE,Child Care Onsite Prep./Recreational Camp/Co-op,151 ZELLER DR,"Institutional, mobile or processing category"
+B35A48BF-205A-4921-B18F-FAE3CA336AB3,LAKESHORE CO-OP NURSERY SCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,315 NORTHLAKE DR,"Institutional, mobile or processing category"
+958747B8-DFA1-444B-BBFF-91B933C3183E,LANARK HEIGHTS LONG TERM CARE,Long Term Care,46 LANARK CRES,"Institutional, mobile or processing category"
+049F6CC0-5783-4ED5-936D-9FF6C869E58F,LANARK VILLAGE RETIREMENT RESIDENCE,Retirement Home,44 LANARK CRES,"Institutional, mobile or processing category"
+C327C2A1-762F-4463-9BA6-465E9177466B,LES COCCINELLES,Child Care Catered,158 Bridgeport Rd E,"Institutional, mobile or processing category"
+84FAD0DC-713F-4269-B3C2-ECE8459EEED2,LES HALAT HOT DOG CART,Street Food Vendor/Hot Dog Cart,666 Victoria St N,"Institutional, mobile or processing category"
+43C5F51D-F39D-478F-B556-357448A21F2E,LES HALAT HOT DOG CART #4,Street Food Vendor/Hot Dog Cart,160 Frobisher Dr,"Institutional, mobile or processing category"
+644D585E-A833-40AC-B531-57AC89D8FA57,LINCOLN HEIGHTS PS-WRDSB-ED/YD,Before and After School Program,270 Quickfall Dr,"Institutional, mobile or processing category"
+9197392B-9993-4A5C-8D16-A099C1178415,LITTLE CHAMPS ACADEMY OF LEARNING,Child Care Onsite Prep./Recreational Camp/Co-op,24 WESTMOUNT RD W,"Institutional, mobile or processing category"
+A921917C-31C2-4D3E-AA55-CB0715A63AD6,LOLA LIZA FOODS,Mobile Preparation Premises,150 Victoria St.N,"Institutional, mobile or processing category"
+661C2E55-3DF2-443D-AFB6-AEF75F3C7741,LOS ROLLING TACOS - FOOD TRUCK,Mobile Preparation Premises,160 COLUMBIA ST W,"Institutional, mobile or processing category"
+F355E20A-1F08-4616-83E8-AB5129B742BC,LOS ROLLING TACOS - TRAILER,Catering Vehicle,160 COLUMBIA ST W,"Institutional, mobile or processing category"
+79388FF6-2AB6-46FE-A806-FC018D4C3AA1,LUTHER VILLAGE ON THE PARK - SUNSHINE CENTRE,Retirement Home,141 FATHER DAVID BAUER DR,"Institutional, mobile or processing category"
+0ECDE9EF-A8D3-4648-A90E-4C1E4ECF2D66,Lackner Woods PS-WRDSB-ED/YD,Before and After School Program,151 Zeller Dr,"Institutional, mobile or processing category"
+E49A6C90-D5E2-495A-A1D3-B13DA9ED317E,"Lancaster Smokehouse Food Truck, The",Mobile Preparation Premises,574 Lancaster St W,"Institutional, mobile or processing category"
+CFBD1D87-EC25-48A4-8E74-187BE07F4D4E,Laurelwood PS-WRDSB-ED/YD,Before and After School Program,460 Brentcliffe Dr,"Institutional, mobile or processing category"
+AEAEBDA1-9950-477E-876A-25BAFD82596F,Lester B. Pearson PS-WRDSB-ED/YD,Before and After School Program,520 Chesapeake Dr,"Institutional, mobile or processing category"
+8F35272F-4BAC-477C-8282-88A8D8D8E758,Lexington PS-WRDSB-ED/YD,Before and After School Program,431 Forestlawn Rd,"Institutional, mobile or processing category"
+B8DEB785-D71F-4A6A-A735-6CA61D65A572,Little Oaks Child Care & Montessori,Child Care Onsite Prep./Recreational Camp/Co-op,68 Alexandra Ave,"Institutional, mobile or processing category"
+C1F665DB-F960-47C0-AB00-FCE26EDAE537,MAC MGS PRESCHOOL AND CHILDCARE CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,160 COURTLAND Ave,"Institutional, mobile or processing category"
+B7F94218-9C75-4AC6-BB24-AE805E593F82,MAD OVER SPICES FOOD TRUCK,Mobile Preparation Premises,94 Bridgeport Rd E,"Institutional, mobile or processing category"
+8498E226-06C8-4D3B-A391-7EACF9556F37,MANITOU TAKEOUT,Mobile Preparation Premises,808 COURTLAND Ave E,"Institutional, mobile or processing category"
+A1F2696F-87AD-4EF5-9D90-55E707A1F86E,MANULIFE FOOD TRAILER,Mobile Preparation Premises,500 King St N,"Institutional, mobile or processing category"
+C31A3881-1805-43FC-B363-A408C873EA0A,MARILLAC PLACE,Group / Lodging Home (>9),109 YOUNG ST,"Institutional, mobile or processing category"
+C4D58F24-88E3-4315-A839-B481F40E9F4D,MEADOWLANE PS-WRDSB-ED/YD,Before and After School Program,236 Forestwood Dr,"Institutional, mobile or processing category"
+419FBCDC-CD12-4614-A8CB-94D8A5CAF75A,MJ'S FOOD SERVICE,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+927DBBDE-AC59-4175-9077-59750F71224A,MOPPET PARENT PARTICIPATING PRESCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,171 FREDERICK ST,"Institutional, mobile or processing category"
+1E6B55CD-58A4-4810-9BBF-FE7CA3344C99,MORNING DEW COFFEE - TRAILER,Catering Vehicle,186 CORRIE CRES,"Institutional, mobile or processing category"
+293B4FBE-1563-48AC-AFE9-9ACEC2463DC0,MURRAYS MILLWOOD MANOR,Group / Lodging Home (>9),409 MILL ST,"Institutional, mobile or processing category"
+CAD85D81-6A78-4579-82E6-475E775E00EA,Mackenzie King PS-WRDSB-ED/YD,Before and After School Program,51 Natchez Rd,"Institutional, mobile or processing category"
+F75403ED-E3EC-4318-AC48-634D501E8EFA,Marquez Churros Trailer License Plate W6431B,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+1BF7C1B0-A60A-4991-87B0-C858B6DF82D5,Marvelous Minds Community,Child Care Onsite Prep./Recreational Camp/Co-op,167 Thaler Ave,"Institutional, mobile or processing category"
+9C65D2EB-3FC2-44A8-AC8C-26D908035912,Mary Johnston PS-WRDSB-ED/YD,Before and After School Program,475 BRYNHURST BLVD,"Institutional, mobile or processing category"
+F5DC16C6-A408-4E80-B8E8-4DC1747197BD,Mega Cone 1 Licence Plate # AD 48901,Mobile Preparation Premises,189 Mountain Laurel Crescent,"Institutional, mobile or processing category"
+CCA441FF-C7FD-4537-816A-EADE67F2B6F2,Mega Cone 2- Licence Plate # AC 70658,Mobile Preparation Premises,189 Mountain Laurel Crescent,"Institutional, mobile or processing category"
+8D18F870-04ED-4378-B934-73B09988D078,Mega Cone 3 Licence plate # BD 87222,Street Food Vendor/Hot Dog Cart,189 Mountain Laurel Crescent,"Institutional, mobile or processing category"
+4F7F2729-4803-4512-A821-AA6B0F547372,Millen Woods Child Care Centre,Child Care Onsite Prep./Recreational Camp/Co-op,640 New Hampshire St,"Institutional, mobile or processing category"
+3927F7DD-1268-4EA8-BD46-F26451461405,Millen Woods PS-WRDSB-ED/YD,Before and After School Program,640 New Hampshire St,"Institutional, mobile or processing category"
+0393802B-850E-4E75-919E-707C13D90353,Millen Woods PS-WRDSB-ED/YD,Before and After School Program,640 New Hampshire St,"Institutional, mobile or processing category"
+FFEFD6A3-5C12-4C38-A1A8-A465B4066769,N.A. MacEachern PS-WRDSB-ED/YD,Before and After School Program,580 Rolling Hills Dr.,"Institutional, mobile or processing category"
+918BD7C7-56F9-4A09-BCA3-4EA970BEFF4B,NFL-SHEPPARD SCHOOL,Nourishment Program,278 WEBER ST E,"Institutional, mobile or processing category"
+B67A89F2-C778-4D39-BED3-7BEF70E70985,NOBLE RESIDENTIAL HOME,Group / Lodging Home (>9),251 QUEEN ST S,"Institutional, mobile or processing category"
+B3AC0160-00CA-4C43-86B6-E3214CAE1F4A,NUTRITION FOR LEARNING -  BLESSED SACRAMENT,Nourishment Program,367 THE COUNTRY WAY,"Institutional, mobile or processing category"
+AD3183F2-C6C3-43C7-9728-B531DA213B75,NUTRITION FOR LEARNING - BLUEVALE COLLEGIATE,Nourishment Program,80 Bluevale St N,"Institutional, mobile or processing category"
+793B9794-D1E5-4CA1-8BF2-0CD356469F1A,NUTRITION FOR LEARNING - CEDARBRAE PUBLIC SCHOOL,Nourishment Program,230 CEDARBRAE Ave,"Institutional, mobile or processing category"
+1024D62D-0C00-4EC2-B820-6FA20A5002F2,NUTRITION FOR LEARNING - CRESTVIEW P.S.,Nourishment Program,153 MONTCALM DR,"Institutional, mobile or processing category"
+E913847B-B8F0-4E76-8E20-4A0E6E77E235,NUTRITION FOR LEARNING - FOREST HEIGHTS COLLEGIATE,Nourishment Program,255 Fischer-Hallman Rd,"Institutional, mobile or processing category"
+84E03392-86F5-4DC4-9655-C9AC215E219B,NUTRITION FOR LEARNING - HILLSIDE PS,Nourishment Program,11 Chopin Dr,"Institutional, mobile or processing category"
+364E2BEA-2DCE-48E4-8014-C3F1F4006523,NUTRITION FOR LEARNING - J.F CARMICHAEL PUBLIC SCHOOL,Before and After School Program,80 Patricia Ave,"Institutional, mobile or processing category"
+2CFEC588-BEE5-499F-A942-8B9DE22F982C,NUTRITION FOR LEARNING - KING EDWARD SCHOOL,Nourishment Program,709 KING ST W,"Institutional, mobile or processing category"
+7C007ABE-C095-417E-8944-6EE1D40EAEEE,NUTRITION FOR LEARNING - Laurel Heights Secondary School,Nourishment Program,650 Laurelwood Dr.,"Institutional, mobile or processing category"
+3F225F3B-0D33-410D-B45B-F0440905D693,NUTRITION FOR LEARNING - MARGARET AVE. PUBLIC SCHOOL,Nourishment Program,325 LOUISA ST,"Institutional, mobile or processing category"
+24D48313-1A3E-4D72-BDE8-7780ABAC5672,NUTRITION FOR LEARNING - MONSIGNOR HALLER,Nourishment Program,118 SHEA CRES,"Institutional, mobile or processing category"
+C0C81878-FA49-4F7F-8497-C8DCF0344637,NUTRITION FOR LEARNING - QUEEN ELIZABETH SCHOOL,Nourishment Program,191 HOFFMAN ST,"Institutional, mobile or processing category"
+0A960374-A3CB-4582-A5AA-BB5528B254AE,NUTRITION FOR LEARNING - ST. ANNE'S SCHOOL,Nourishment Program,250 EAST Ave,"Institutional, mobile or processing category"
+2E25248D-4CE7-40A9-BAAF-33D90D9FC091,NUTRITION FOR LEARNING - ST. BERNADETTE,Nourishment Program,245 LORNE Ave,"Institutional, mobile or processing category"
+9447964C-E30D-48C4-B093-A666BB55CB27,NUTRITION FOR LEARNING - ST. JOHN'S CATHOLIC SCHOOL,Nourishment Program,99 STRANGE ST,"Institutional, mobile or processing category"
+D6E1AB58-28B8-418E-8348-94B712C84169,NUTRITION FOR LEARNING - WINSTON CHURCHILL PUBLIC SCHOOL,Nourishment Program,100 MILFORD Ave,"Institutional, mobile or processing category"
+65E992AA-EC6C-4CCB-8DA4-ACFC2E2C3FFE,NUTRITION FOR LEARNING- Eastwood Collegiate Institute,Nourishment Program,760 Weber St E,"Institutional, mobile or processing category"
+B9C367FF-EFED-4E92-8FD3-32CE133DC3ED,Northlake Woods PS-WRDSB-ED/YD,Before and After School Program,500 Northlake Dr,"Institutional, mobile or processing category"
+77973052-A715-4FDF-A4D6-0EDC96502678,Nutrition For Learning - Elizabeth Ziegler PS,Nourishment Program,90 Moore Ave S,"Institutional, mobile or processing category"
+CCC92550-9D41-469C-80CE-2A01D3523F3E,Nutrition For Learning - Empire PS,Nourishment Program,83 Empire St,"Institutional, mobile or processing category"
+286C9506-7EB1-48FC-AB8A-884E3070CEFD,Nutrition For Learning - Holy Rosary,Nourishment Program,485 THORNDALE DR,"Institutional, mobile or processing category"
+5995AB9D-6125-4D02-B88A-F4A65EE01660,Nutrition For Learning - Westvale PS,Nourishment Program,265 Westvale Dr,"Institutional, mobile or processing category"
+78E6E9E1-3FA3-4932-9ECE-22AC8F319076,Nutrition for Learning - Our Lady of Lourdes,Nourishment Program,55 Roslin Ave S,"Institutional, mobile or processing category"
+A603BDAC-079B-41A5-A2E9-4875AC546EF1,Nutrition for Learning - WESTMOUNT PS,Nourishment Program,329 GLASGOW ST,"Institutional, mobile or processing category"
+A3E29606-66BD-4934-B36E-A7513E05E560,Nutrition for Learning- Queensmount,Nourishment Program,21 Westmount RD W,"Institutional, mobile or processing category"
+EB060D1D-02C0-435A-81D1-56AF631B3CD4,OAK CREEK PS - RISING OAKS EARLY LEARNING,Child Care Onsite Prep./Recreational Camp/Co-op,80 Tartan Avenue,"Institutional, mobile or processing category"
+3D05B3CA-480D-44C5-B1EF-3EF98CD62DD6,OLDE TYME KETTLE KITCHEN - PRODUCTION,,130 Frobisher Dr,"Institutional, mobile or processing category"
+AC04B1A7-2158-41F3-BA2F-906C1666AEBB,OPEN SESAME PRESCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,29 WESTMOUNT RD S,"Institutional, mobile or processing category"
+898FE00E-4C62-4D8B-BB00-23D142975057,PARKWOOD MENNONITE HOME LONG TERM CARE,Long Term Care,726 NEW HAMPSHIRE ST,"Institutional, mobile or processing category"
+90BF0308-4AB3-49FC-9689-35DA3431A93A,PEOPLECARE A.R. GOUDIE KITCHENER,Long Term Care,369 FREDERICK ST,"Institutional, mobile or processing category"
+6C30EC9E-A5F8-4ACD-89A6-0BC1F8D8BC91,PHILLY & WINGS FOOD TRUCK,Mobile Preparation Premises,656 Erb St W,"Institutional, mobile or processing category"
+6A2E5100-8C48-4BFD-883D-59E31C22701E,PIONEER YOUTH SERVICES - ALBERT,Group / Lodging Home (>9),79 Albert St,"Institutional, mobile or processing category"
+C953495A-B444-46E2-BC8B-88FE28921D9E,PLUTO DAY CARE - KING,Child Care Onsite Prep./Recreational Camp/Co-op,435 King St N,"Institutional, mobile or processing category"
+D756564C-B228-42E7-9CEC-82D3B6BB23BE,PLUTO DAY CARE-ACTIVA,Child Care Onsite Prep./Recreational Camp/Co-op,192 ACTIVA Ave,"Institutional, mobile or processing category"
+F61F3ABE-5514-4574-AB10-4B25767EC6D2,PLUTO DAYCARE - WEBER,Child Care Onsite Prep./Recreational Camp/Co-op,1418 Weber St E,"Institutional, mobile or processing category"
+F9BDF59C-D0AF-4DBB-A79B-CB902CA5A0D8,POP ART POPS,Street Food Vendor/Hot Dog Cart,40 Shirley Ave,"Institutional, mobile or processing category"
+EB950BC8-1C11-433B-83A4-8B3A41C9955D,PRUETER PS-WRDSB-ED/YD,Before and After School Program,40 Prueter Ave,"Institutional, mobile or processing category"
+D2D79E36-5396-4D2E-BABD-457D2FDBF02B,Parkwood Mennonite Retirement Residence,Retirement Home,720 New Hampshire St,"Institutional, mobile or processing category"
+A6ECACEE-3159-4620-96C8-43BACB7E80C3,Pioneer Park PS-Conestoga College CC-YD,Before and After School Program,55 Upper Canada Dr,"Institutional, mobile or processing category"
+8AAF8904-48E0-4FBF-BAE8-90665CD4510D,Pioneer Park PS-WRDSB-ED,Before and After School Program,55 Upper Canada Dr,"Institutional, mobile or processing category"
+7C19DAF2-5216-4E46-8CE1-9F23F39222E9,Pioneer Park Public School -Nutrition for Learning/Before and After Program,Nourishment Program,55 Upper Canada Dr,"Institutional, mobile or processing category"
+ADF89D08-1023-479C-82A8-A848E9A84435,Poole's Cheese,Food Plant / Production - Dairy,96 Rush Meadow St,"Institutional, mobile or processing category"
+E4F40C7F-047A-457F-9CD1-ACD43CE26750,Prohibition Poutine,Mobile Preparation Premises,56 King St N,"Institutional, mobile or processing category"
+A02245C8-3F81-4AAC-AD79-B17B14DF8974,Queen Elizabeth PS-WRDSB-ED/YD,Before and After School Program,191 Hoffman St,"Institutional, mobile or processing category"
+905D70DB-1F17-480B-A76C-7CE087C0F92B,RISING OAKS EARLY LEARNING - SAINT JOHN PAUL II,Child Care Onsite Prep./Recreational Camp/Co-op,75 PEBBLE CREEK DR,"Institutional, mobile or processing category"
+8F3E44FF-0A04-4195-9BBA-633982F13DC3,RISING OAKS EARLY LEARNING - ST PATRICK,Child Care Onsite Prep./Recreational Camp/Co-op,1201 River Road E,"Institutional, mobile or processing category"
+F9D944B7-870F-4C60-B3F3-5299D6458797,RISING OAKS EARLY LEARNING - ST. NICHOLAS,Child Care Onsite Prep./Recreational Camp/Co-op,525 LAURELWOOD DR,"Institutional, mobile or processing category"
+860A8807-ED0C-4058-82C6-C397879C8E14,RISING OAKS EARLY LEARNING ONTARIO-ST. LUKE'S,Child Care Onsite Prep./Recreational Camp/Co-op,550 CHESAPEAKE DR,"Institutional, mobile or processing category"
+688C97E0-2F5D-4B76-A2B6-67F111C62755,RISINGOAKS EARLY LEARNING-LINCOLN ,Child Care Onsite Prep./Recreational Camp/Co-op,145 LINCOLN RD,"Institutional, mobile or processing category"
+692F548F-BEE1-4146-82DD-BFCFFB6E2956,RISINGOAKS EARLY LEARNING-ST. MATTHEW,Child Care Onsite Prep./Recreational Camp/Co-op,405 PASTERN TRAIL,"Institutional, mobile or processing category"
+49D38B77-EA36-46BD-8CC2-AA1E07546CE2,Ray Woodey’s Craft Chippery,Food Plant / Production - Other,262 McBrine Drive,"Institutional, mobile or processing category"
+AD33CE36-3086-4748-96A3-286959ABD97D,Rockway PS-WRDSB-ED/YD,Before and After School Program,70 Vanier Dr,"Institutional, mobile or processing category"
+3B21BF40-A7E7-4AAA-AF1F-0E4A9E50DF8C,S.W.A.T.,Mobile Preparation Premises,898 Atlantic Blvd,"Institutional, mobile or processing category"
+B3B67B63-EA8D-4626-AB86-84D1D3C9F73A,SALVATION ARMY FOOD TRUCK,Mobile Preparation Premises,75 TILLSLEY DR,"Institutional, mobile or processing category"
+78EB83F7-F8EA-413A-B7CC-F2D4A09356F2,SALVATION ARMY- NEW DIRECTIONS,Group / Lodging Home (>9),657 KING ST E,"Institutional, mobile or processing category"
+4524375C-6F53-45D3-883E-7D2354A992D1,SARDAR JI - FOOD TRUCK ,Mobile Preparation Premises,1458 Weber St E,"Institutional, mobile or processing category"
+7306D9BB-FD0E-441B-91D5-275C4B92F378,SCHMUCK'N GOURMET,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+0B3930A7-545D-4630-9D1C-ED2DEED352F9,SHAKE AND BAKE,Mobile Preparation Premises,236 Shady Glen Dr,"Institutional, mobile or processing category"
+F67E81A4-62B3-40A9-AB59-124E467A4A48,SIGGI'S FOOD TRUCK AND CATERING,Mobile Preparation Premises,120 Bridgeport Rd E,"Institutional, mobile or processing category"
+2590A8C6-1732-4135-AC3C-4A4867F99356,SIP AND DIP,Mobile Preparation Premises,454 Midwood Cr Waterloo,"Institutional, mobile or processing category"
+0A1EA523-073D-42E1-B7E9-FED6E4AAB2DD,SPOTS FOR TOTS,Child Care Onsite Prep./Recreational Camp/Co-op,80 YOUNG ST,"Institutional, mobile or processing category"
+6D1091A7-7D34-438B-B6F0-F2B93DC72CE0,ST. JOHN'S CHRISTIAN NURSERY SCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,22 WILLOW ST,"Institutional, mobile or processing category"
+34D6512A-5D80-4CA5-AF09-14A0DCE1A3C1,ST. LOUIS - ST. FRANCIS LINC PRESCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,154 GATEWOOD RD,"Institutional, mobile or processing category"
+87AAB33F-4617-42B6-8C37-62DCCAD37A41,ST. PATRICK CS - RISING OAKS - ED,Before and After School Program,1201 RIVER RD E,"Institutional, mobile or processing category"
+34F2D31C-F6EE-42EC-A43B-458D45DB0E39,STARLING COMMUNITY SERVICES,Group / Lodging Home (>9),285 BENJAMIN RD,"Institutional, mobile or processing category"
+189A3D29-21AB-4041-B00A-356298683C56,STARLING COMMUNITY SERVICES SAFE HAVEN KITCHEN,Group / Lodging Home (>9),41 WEBER ST W,"Institutional, mobile or processing category"
+5B8CE39D-1D30-473F-8A9F-ACA690F4E98E,STREET DOGS,Street Food Vendor/Hot Dog Cart,41 SHOEMAKER ST,"Institutional, mobile or processing category"
+0CA69E99-DF9B-4DD1-A91C-87D9C5148BE5,SUNBEAM LODGE,Group / Lodging Home (>9),389 PINNACLE DR,"Institutional, mobile or processing category"
+94F2F6EA-18C6-4CB5-A514-6A6AB2DEE42B,SUNNY DAY CARE,Child Care Onsite Prep./Recreational Camp/Co-op,2209 KINGSWAY DR,"Institutional, mobile or processing category"
+BD3209F6-4CEE-4286-A3E4-BFC570DE9B3A,SUNNYSIDE HOME,Long Term Care,247 FRANKLIN ST N,"Institutional, mobile or processing category"
+CDAFB950-4CBA-4820-8DCC-53F4DC7540D7,SUNSHINE MONTESSORI SCHOOL DAY CARE,Child Care Catered,10 BONIFACE Ave,"Institutional, mobile or processing category"
+BE775A7F-60E0-42EF-8F22-FB119ECA3830,Sandhills PS-Conestoga College CC-YD,Before and After School Program,1250 VICTORIA ST S,"Institutional, mobile or processing category"
+A79A8DD8-25EF-4588-9E9F-4A043F898E09,Sandhills PS-WRDSB-ED,Before and After School Program,1250 VICTORIA ST S,"Institutional, mobile or processing category"
+CDBFC5EA-C306-4CAA-8AC6-DB943091C47F,Sandowne PS-WRDSB-ED/YD,Before and After School Program,265 Sandowne Dr,"Institutional, mobile or processing category"
+67F7C593-A1DB-4F24-80D9-BFBD3D11283E,Scoops In Motion,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+F965E358-7666-4075-B2A5-C15D77527684,Scrumptious Spud/Berlin 95 Catering Trailer ,Mobile Preparation Premises,380 Lake Louise Blvd,"Institutional, mobile or processing category"
+6771EDA6-6794-49ED-A542-84B439B2DCAD,Sheppard PS-WRDSB-ED/YD,Before and After School Program,278 WEBER ST E,"Institutional, mobile or processing category"
+3AD6380A-D384-41BE-9DC7-EE3F05DB4AA2,Smithson PS-WRDSB-ED/YD,Before and After School Program,150 Belleview Ave,"Institutional, mobile or processing category"
+F9C65947-A3AF-4C01-966D-E5930CCA90F2,Southridge PS-WRDSB-ED,Before and After School Program,1425 Queen's Blvd,"Institutional, mobile or processing category"
+706E0B49-8FB1-44DF-93F3-1995FA718F9E,St. Josephine Bakhita-YMCA of Three Rivers,Child Care Onsite Prep./Recreational Camp/Co-op,25 Beckview Drive,"Institutional, mobile or processing category"
+9986EDD8-629D-4405-8586-B99F9B61E4EA,St. Nicholas-Rising Oaks-ED,Before and After School Program,525 Laurelwood Dr,"Institutional, mobile or processing category"
+727DCC80-9CB8-4B13-A71D-34541B98F658,St. Timothy - Nutrition for Learning,Nourishment Program,15 BECHTEL DR,"Institutional, mobile or processing category"
+531CECEE-2EB3-453A-B468-15598DC1F1F1,Suddaby PS-WRDSB-ED/YD,Before and After School Program,171 Frederick St,"Institutional, mobile or processing category"
+BB394629-4709-4A80-99A3-85F47C0CB781,THE CRUMBY COOKIE DOUGH TRAILER,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+FE6FF3EC-7BFC-4B44-AD4B-CBB19F23C5B6,THE GRAND MEHFIL MOBILE FOOD TRUCK,Mobile Preparation Premises,1400  WEBER ST E,"Institutional, mobile or processing category"
+15A0C91E-E5F1-44EF-9E3F-319E7BA488CB,THE VILLAGE OF WINSTON PARK (LONG TERM CARE AND RETIREMENT HOME),Long Term Care,695 Block Line Rd,"Institutional, mobile or processing category"
+DB135BDA-EE1D-4047-92F9-51DC139EC6CC,TRINITY VILLAGE CARE CENTRE,Long Term Care,2727 KINGSWAY DR,"Institutional, mobile or processing category"
+F35BE8CD-98EC-4ED1-9FFE-1E1858D8DEFF,Teas By Kara,Food Plant / Production - Other,35 Weber St W,"Institutional, mobile or processing category"
+3379CBDF-2B66-4017-8EEE-D25D83FFDDFD,The Sweet Spot Creamery & Cafe,,108 Birch Ave,"Institutional, mobile or processing category"
+9B8EC86A-9E32-4832-861A-45651AC5B57D,Tiny Hoppers,Child Care Onsite Prep./Recreational Camp/Co-op,4341 King St,"Institutional, mobile or processing category"
+4DA3F79A-1D15-4EB0-A56E-06938A1DBD2F,Tiny Hoppers - Williamsburg,Child Care Onsite Prep./Recreational Camp/Co-op,1188 Fischer-Hallman road,"Institutional, mobile or processing category"
+DC4894F8-DDD1-468A-96E9-DC9C508FD90C,Trillium Bilingual Montessori School,Child Care Onsite Prep./Recreational Camp/Co-op,4195 King St E,"Institutional, mobile or processing category"
+E623BD17-C251-47D8-950D-F79A6F238F48,Trillium PS-WRDSB-ED/YD,Before and After School Program,79 Laurentian Dr,"Institutional, mobile or processing category"
+AFFE2E20-7112-4F7A-B711-696CDE4CF7C0,UNDERHILL RESIDENCE-Kitchen,Group / Lodging Home (>9),127 ERB ST W,"Institutional, mobile or processing category"
+D41F0901-B5AE-4DC2-9F2D-51A32CD19824,UW - BRIGHT STARTS CO-OPERATIVE EARLY LEARNING CENTRE INC.,Child Care Onsite Prep./Recreational Camp/Co-op,200 COLUMBIA ST W,"Institutional, mobile or processing category"
+F6DE1A2D-0F8E-4622-8F40-0E85664E81C7,UW - EARLY CHILDHOOD EDUCATIONAL CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,200 UNIVERSITY Ave W,"Institutional, mobile or processing category"
+36A85A4C-CDEA-4F8E-8277-DA7D6B7D7E52,Universe in the Pocket Montessori School,Child Care Onsite Prep./Recreational Camp/Co-op,121 Westmount Rd E,"Institutional, mobile or processing category"
+FEBC2DBF-CECF-48AE-9EAF-65886DDCA6EA,VICTORIA LEARNING CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,592 VICTORIA ST S,"Institutional, mobile or processing category"
+5724048B-14C2-4190-8E56-B9004BA6AF43,VICTORIA PLACE RETIREMENT RESIDENCE,Retirement Home,290 Queen St S,"Institutional, mobile or processing category"
+D6C903A0-3B67-460F-A03D-6E91EA05B2C6,"VILLAGE AT UNIVERSITY GATES LTCH, THE",Long Term Care,250 LAURELWOOD DR,"Institutional, mobile or processing category"
+B94C5AF5-557D-49C9-913A-9272C830F441,"VILLAGE AT UNIVERSITY GATES RH, THE",Retirement Home,250 LAURELWOOD DR,"Institutional, mobile or processing category"
+5ECAFAE2-E173-4B33-B928-FD956D72DEDD,VILLAGE CATERER MOBILE TRUCK,Mobile Preparation Premises,45 Otonabee Dr,"Institutional, mobile or processing category"
+2D1A04F1-EBCD-4018-98BB-7196A23485A4,Victoria Park Hot Dog Cart,Street Food Vendor/Hot Dog Cart,57 Jubilee Drive,"Institutional, mobile or processing category"
+926F0891-6049-4B51-A519-FF1D43675664,Vista Hills-WRDSB-ED/YD,Before and After School Program,314 Sweet Gale St,"Institutional, mobile or processing category"
+9AA991D0-6522-4A41-9093-46F468D1C1FC,WATERLOO CO-OP PRESCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,22 BRIDGEPORT RD W,"Institutional, mobile or processing category"
+063AA598-92A5-4CA6-AB9E-112F3B3F52E6,WATERLOO INFANT TODDLER DAY CARE,Child Care Onsite Prep./Recreational Camp/Co-op,368 ERB ST W,"Institutional, mobile or processing category"
+5965E801-E78F-4AF7-9FE4-76EB1E44139D,WATERLOO INFANT TODDLER DAY CARE - KW Bilingual Site,Child Care Onsite Prep./Recreational Camp/Co-op,600 Erb St W,"Institutional, mobile or processing category"
+D67FD62B-EAF4-41D8-87D9-0FEED63D7B6B,WATERLOO INFANT TODDLER DAY CARE BUILDING 2,Child Care Catered,372 Erb St W,"Institutional, mobile or processing category"
+F3ED70CC-12C4-4A11-8275-BB06100885C8,WATERLOO INFANT TODDLER DAYCARE AT ST. JOHN'S - SUMMER CAMP,Child Care Catered,22 WILLOW STREET,"Institutional, mobile or processing category"
+EA33BC5B-8E5F-4BB7-8BF1-391B9EB6C135,WATERLOO MONTESSORI ACADEMY,Child Care Catered,200 King Street South,"Institutional, mobile or processing category"
+3F4DFCE8-B759-4BB0-9735-1994297ABBCB,WATERLOO REGION HEALTH NETWORK (WRHN) - CHICOPEE,Hospital,3570 KING ST E,"Institutional, mobile or processing category"
+6C4A73F0-5013-4F19-9698-EB313552FC1E,WATERLOO REGION HEALTH NETWORK - WITHDRAWAL MANAGEMENT CENTRE,Group / Lodging Home (>9),52 GLASGOW ST,"Institutional, mobile or processing category"
+955DF6D1-ADCF-43B6-8413-276157021B9E,WEST CORNERS COFFEE COMPANY ,,99 Regina St S,"Institutional, mobile or processing category"
+2B6CC5F9-1D98-41A6-AA25-7EEBF8BEC7C8,WESTVALE CHILD CARE CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,265 WESTVALE DR,"Institutional, mobile or processing category"
+F29BB9E2-1640-4D1A-B28D-F2EC89695A36,"WILD BOAR, THE",Mobile Preparation Premises,645B SILVERBIRCH RD,"Institutional, mobile or processing category"
+97CA0502-36DC-4DEC-AC16-D93BA1437C05,WRHN AT MIDTOWN (FORMERLY GRAND RIVER HOSPITAL) - HOSPITAL,Hospital,835 KING ST W,"Institutional, mobile or processing category"
+73DC88A4-EC05-4140-A3AB-C8DD414D7FE8,WT Townshend PS - YMCA - ED/YD,Before and After School Program,245 Activa Ave,"Institutional, mobile or processing category"
+67B56E4C-2B65-45A7-B5C0-D2F603F10C35,WT Townshend PS-YMCA Child Care,Child Care Catered,245 Activa Ave,"Institutional, mobile or processing category"
+A470EAE1-D830-4831-9CF1-BF3A7195DB53,WU GONG SPRING WRAPS,Mobile Preparation Premises,689 Highpoint Ave,"Institutional, mobile or processing category"
+F7B45E86-4D47-4771-A1DF-9BC8E66E747C,Waterloo Regional Health Network (WRHN) @ Queen’s Blvd,Hospital,911 QUEENS BLVD,"Institutional, mobile or processing category"
+39E9BEE6-3253-45AB-B9F9-50FE3FBC2F0E,Westmount PS-WRDSB-ED/YD,Before and After School Program,329 Glasgow St,"Institutional, mobile or processing category"
+7BDDA9E9-4436-4629-9733-5C6A7E4DDA2B,Westvale PS-WRDSB-ED/YD,Before and After School Program,265 Westvale Dr,"Institutional, mobile or processing category"
+79376F2A-8C03-4418-9293-145F06F011C6,White Lotus,Mobile Preparation Premises,99 Regina St S,"Institutional, mobile or processing category"
+191FE6B0-EF00-4482-98E4-2646B39006E4,Williamsburg PS - YMCA - ED/YD,Before and After School Program,760 Commonwealth Cres,"Institutional, mobile or processing category"
+4DFF46E1-FC0D-4AC4-8824-08791F7FFDF9,Williamsburg PS-YMCA Childcare,Child Care Onsite Prep./Recreational Camp/Co-op,760 COMMONWEALTH CRES,"Institutional, mobile or processing category"
+FCB215FB-A08E-4247-A83F-FFBBA8F586A1,Wilson Avenue PS-WRDSB-ED/YD,Before and After School Program,221 Wilson Ave,"Institutional, mobile or processing category"
+A6FEFC48-8C81-466F-A005-D9B7E43202CF,Wing Monster,Mobile Preparation Premises,145 Dearborn Pl,"Institutional, mobile or processing category"
+0F5E091D-BB0D-435B-AB54-E7F95A32107C,Winston Churchill PS-WRDSB-ED/YD,Before and After School Program,100 Milford Ave,"Institutional, mobile or processing category"
+96350659-CB8B-4DDE-8832-1D4EBDAC1B34,YMCA BRIGADOON CHILD CARE,Child Care Onsite Prep./Recreational Camp/Co-op,415 CARYNDALE DR,"Institutional, mobile or processing category"
+A4BEBD65-6918-4BDA-8909-D6693729E632,YMCA CHILD CARE - J.W. GERTH,Child Care Onsite Prep./Recreational Camp/Co-op,171 APPLE RIDGE DR,"Institutional, mobile or processing category"
+883144D7-998A-4289-AA60-80D789DC9469,YMCA CHILD CARE -GROH PUBLIC SCHOOL,Child Care Onsite Prep./Recreational Camp/Co-op,225 THOMAS SLEE DR,"Institutional, mobile or processing category"
+7FB684CB-19F3-47FC-AF07-B8AF7A5F9A8A,YMCA EDNA STAEBLER - ED,Before and After School Program,450 BERNAY DR,"Institutional, mobile or processing category"
+9A2C00BA-E6CD-470E-A210-9A53C0265068,YMCA EDNA STAEBLER CHILD CARE CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,450 BERNAY DR,"Institutional, mobile or processing category"
+FA9DF48C-EC1C-4496-AFAD-1E7FA12E0D85,YMCA HEAD TO TOE CHILD CARE,Child Care Onsite Prep./Recreational Camp/Co-op,455 UNIVERSITY Ave W,"Institutional, mobile or processing category"
+5B82CF2D-95DD-4C71-A355-3E8ADB44E02E,YMCA LITTLE PAUSE CHILD CARE,Child Care Onsite Prep./Recreational Camp/Co-op,560 PIONEER DR,"Institutional, mobile or processing category"
+E1E8C40D-5602-4A9D-8449-A1473B50C5C2,YMCA of Three Rivers Just For Kids Child Care - KITCHEN,Child Care Onsite Prep./Recreational Camp/Co-op,485 THORNDALE DR,"Institutional, mobile or processing category"
+D1703384-34D1-4B0A-9070-D601FDC112F7,YW WILLOW RIVER CHILD CARE,Child Care Onsite Prep./Recreational Camp/Co-op,670 THOMAS SLEE DR,"Institutional, mobile or processing category"
+BBA827FA-F8E6-4CAE-89FB-0E7C55A742C4,YW WILLOW RIVER PS-WRDSB-ED/YD,Before and After School Program,670 THOMAS SLEE DR,"Institutional, mobile or processing category"
+900671A7-B738-4AC4-AABF-5FBDB8E5D4D9,YWCA BRIDGEPORT CHILD CARE,Child Care Onsite Prep./Recreational Camp/Co-op,8 BRIDGE ST E,"Institutional, mobile or processing category"
+F28E491A-DFDF-41AD-8886-690E309A0E26,YWCA CITY KIDS DAY CARE,Child Care Onsite Prep./Recreational Camp/Co-op,111 DUKE ST W,"Institutional, mobile or processing category"
+466765B4-72DF-4B10-BCDD-E1583C43C255,YWCA ST. PAUL CHILDCARE CENTRE,Child Care Onsite Prep./Recreational Camp/Co-op,45 Birchcliff Ave,"Institutional, mobile or processing category"
+BCEB3C90-15FB-48AB-8C59-761FBD0DD17C,NKFM - A Taste of Seoul,Food Take Out,300 King St E,Market stall
+92E7DEDB-B774-4C29-A442-C3302D40436C,NKFM - AL MADINA EGYPTIAN CUISINE,Food Take Out,300 KING ST E,Market stall
+2A2E2341-F843-4834-B46B-C187780CC05B,NKFM - AP BAKERY,Bakery,300 KING ST E,Market stall
+20CB32FE-D938-4E6D-90B8-0C729DD0A34B,NKFM - BAST CHEESE CO.,Food Take Out,300 KING ST E,Market stall
+F5CBBCE4-7C53-45FD-8739-C56911E8C3E0,NKFM - BOLERO JUICES AND PIZZA (LOWER LEVEL),Food Take Out,300 KING ST E,Market stall
+280C1300-344F-429C-BD68-E73876C771B7,NKFM - Bubinsky's (Lower Level Vendor),Food Take Out,300 King St E,Market stall
+7798758A-4A95-43AF-A337-FBFE8049737A,NKFM - CASABLANCA POPCORN CO. (Lower Level Vendor),Food Take Out,300 King St E,Market stall
+0C2F50CE-2251-434E-8005-E150C03BD2D0,NKFM - CAUDLE`S CATCH SEAFOOD LTD,Butcher Shop,300 KING ST E,Market stall
+7CE5D8D4-AB6F-497B-BA9B-7D3EBCDE91BC,NKFM - CRESSMAN MEATS LTD.,Butcher Shop,300 KING ST E,Market stall
+6D67B2FA-75E9-48AA-8EA5-F899320EE02A,NKFM - Chocosol ,Food store convenience / Variety,300 King St E,Market stall
+164925D6-1A15-47AA-AC3E-AB9736E2AB09,NKFM - Coals and Cocoa Confections (lower level vendor),Food Take Out,300 King St E,Market stall
+8A384F2E-E764-4D53-BDE4-FAF640BA566A,NKFM - DOUG'S HONEY,Food Take Out,300 KING ST E,Market stall
+066591FD-5E20-417D-BEBD-80BBB27EFF3A,NKFM - EURO FOOD,Food Take Out,300 KING ST E,Market stall
+FD4C8807-4D26-4001-A549-FC4889477640,NKFM - FORE QUARTER BUTCHER SHOP,Butcher Shop,300 King St E,Market stall
+5EE50985-51FB-46E5-AE7F-B9DD2F5F667C,NKFM - FUTURE BAKERY,Bakery,300 KING ST E,Market stall
+9C36C35A-351F-4391-AA70-80C72BD9CB2D,NKFM - Front Road Cellar (Lower Level Vendor),Food Take Out,300 King St E,Market stall
+31192F22-5446-4CAA-852E-788C57A49334,NKFM - GMACH PRODUCE,Food Take Out,300 KING ST E,Market stall
+9E37BD54-D6C5-41E7-B77E-11844551F7EC,NKFM - Gigi Deli (LOWER LEVEL VENDOR),Food Take Out,300 King St E,Market stall
+04D97CE0-1FB9-4148-93D2-A26A206C203D,NKFM - Grand River Confections (Lower Level Vendor),Food Take Out,300 King St E,Market stall
+BF641C38-DD14-4AFB-9101-67CB84D76B9B,NKFM - HERITAGE GRAINS ONTARIO (Lower Level Vendor),Food Take Out,300 King St E,Market stall
+D7CE40E5-1BF6-4BF9-A5EC-E9B936D40F3F,NKFM - KARLIK PASTRY,Bakery,300 KING ST E,Market stall
+72AD5D40-1811-472D-A258-750E5BE10DC2,NKFM - KIPFERS HERITAGE FARMS,Food Take Out,300 King St E,Market stall
+8B310CFF-20CD-4F03-B1A5-10DA5C1A975C,NKFM - KUEPFER'S HONEY,Food Take Out,300 KING ST E,Market stall
+818C26BE-F0F2-4159-B68D-7D66F2DC0C32,NKFM - KW Empanadas,Food Take Out,300 King St E,Market stall
+E6A96CD9-6320-47A6-8C10-B0DC03F6E479,NKFM - MANGO AND ROLLZ,Food Take Out,300 King St E,Market stall
+8B65A70B-6391-4E65-914E-D05B5F275CC4,NKFM - MARTINS MAPLE SYRUP,Food Take Out,300 KING St E,Market stall
+93F0AEFC-EBA5-4351-BF81-DF7DE728EF93,NKFM - MEATARIAN INC,Food Take Out,300 KING ST E,Market stall
+C98BA98E-44E8-41E3-8BF7-F726645F031E,NKFM - OK EGG FARM,Food Take Out,300 KING ST E,Market stall
+38F74997-E5B7-49B0-88C6-4C830DDD5035,NKFM - OLA BRAZIL,Food Take Out,300 King St E,Market stall
+7D75EBE1-6989-4261-8C63-09A8D77FD659,NKFM - ORGANIC CHEF FOODS,Food store convenience / Variety,300 KING ST E,Market stall
+E1872962-CC61-4380-83ED-3CC3C4E7319B,NKFM - Piquancy (lower level vendor),Food Take Out,300 King St E,Market stall
+A18D899B-F00D-4E0D-B951-AFA4340C6C00,NKFM - SERRINIA CAFE (LOWER LEVEL),Food Take Out,300 KING ST E,Market stall
+4BDBC2EF-D877-4A34-84EC-5AF85918FDE9,NKFM - SHE'S GONE NUTS,Food store convenience / Variety,300 KING ST E,Market stall
+F676C957-E36D-4ADE-98F6-84518A67FE39,NKFM - SPROLL'S FINE GERMAN BAKERY,Bakery,300 KING ST E,Market stall
+7938B5EB-239B-4A15-A324-1B3C2925ECAD,NKFM - SWEET AND SAVORY PIE COMPANY,Food Take Out,300 King St E,Market stall
+4CF86BCA-F593-4F6B-88B3-4FAAEEA8EFA1,NKFM - Sweet Girl Bakes (Lower Level Vendor),Food Take Out,300 King St E,Market stall
+92DA6E7D-C580-46CD-BC9E-6FCBD4F5F5F5,NKFM - TASTEA,Food Take Out,300 King St E,Market stall
+4F7CB5A7-C768-4050-8E29-954330CCF7BF,NKFM - TASTY DELI STORE (Lower Level),Food Take Out,300 King St E,Market stall
+3800CB5A-9AF0-4C4C-A741-3134393AC722,NKFM - TURKISH CUISINE (LOWER LEVEL),Bakery,300 King St E,Market stall
+70BE68D8-C00B-48B2-BCC7-58A3752FE913,NKFM - UMMI'S,Food Take Out,300 King St E,Market stall
+0527AB2D-AAE0-49ED-8DBD-84139708D2A4,NKFM - UNIQPOL CHICKEN PRODUCTS,Butcher Shop,300 KING ST E,Market stall
+A7B309EB-3234-4DF2-9718-30E8DEF26E05,NKFM-FEKETE'S PRODUCE,Produce Vendor,300 KING ST E,Market stall
+0CFD1C6E-97E5-4A93-94E7-84AAAB4AB898,NKFM-G & G FAMILY PRODUCE,Produce Vendor,300 KING ST E,Market stall
+04D10D99-ED27-4D01-B0DB-6444CAC5EBFE,NKFM-KENDY'S PRODUCE,Produce Vendor,300 KING ST E,Market stall
+C9525016-C349-4D2E-8CD4-E2C438D032DC,NKFM-Shroom's,Produce Vendor,300 King St E,Market stall
+6B02E4BB-BFDA-4C48-8E05-93C61900C8AF,NKFM-THE UNFACTORY FARM,Produce Vendor,300 KING ST E,Market stall
+D7B3719B-CA9B-4A60-B9C3-1D8C80B57BD7,ANGIE'S AT-HOME EAR PIERCING - MOBILE,Ear / Body Piercing,99 REGINA ST S,Mobile or at-home unit
+4B566F58-EA8A-4749-8813-D7A0C6320551,INK DEN - MOBILE,,238 KING ST N,Mobile or at-home unit
+A978EFBF-E939-4D27-A768-F7CCA57D7651,JADE'S BEAUTY & BARBER - MOBILE,Hair Salon,232 LOUISA ST,Mobile or at-home unit
+DB08247B-E991-4289-8925-A52397272DE1,"Urban Treats  - ice cream bike (previously a ""Dickie Dee"" ice cream bike)",Ice Cream / Yogurt Vendor,358 Woodbine Ave,Mobile or at-home unit
+40307BF8-51E4-4EB7-A14B-24BFF4B47D74,7 STAR CONVENIENCE,Food store convenience / Variety,156 ERB ST W,Not inspected since 2024-07-03
+2F6890E4-ED5A-4958-86C2-DB95ACFF7CF1,ACCENT VYBE HAIR STUDIO,Hair Salon,300 VICTORIA ST N,Not inspected since 2024-07-03
+64E3EC05-45E2-476E-87CF-40E4E3F19BE4,ACE CUT HAIR STUDIO,Hair Salon,62 BALSAM ST,Not inspected since 2024-07-03
+9DC7E2DE-47BC-446B-AFA6-81A2FA9070A6,AFROULA'S HAIR STYLING BOUTIQUE,Waxing,200 LORRAINE AVE,Not inspected since 2024-07-03
+141706AF-F68B-4EE5-B78A-F85557FC7B27,ALL THINGS TEA,Food store convenience / Variety,681 BELMONT Ave W,Not inspected since 2024-07-03
+CE3673E8-5BCC-404B-9BE6-4FA5BCD78AC9,ANITA'S SKIN CARE SPA,Aesthetics,430 The Boardwalk,Not inspected since 2024-07-03
+61B4F5FD-A884-497F-A9B7-C3769B8E9A6D,ARTLINE SALON,Hair Salon,12 ROCK AVE,Not inspected since 2024-07-03
+A979FFA4-5EAA-412E-BBAA-23FF6C6D4B1A,AURA NAIL SALON - INSIDE THE MAGIC BEAUTY ROOM,Aesthetics,151 VICTORIA ST N,Not inspected since 2024-07-03
+2FFFA34F-A6B1-4E26-8C01-FA3ACEA7EB99,BARRANCA BOUTIQUE SALON,Hair Salon,1 KING ST N,Not inspected since 2024-07-03
+8C0D1CD9-92C7-427A-AA63-43EA37A0F9EE,BEAUTY HUB,Hair Salon,110 Weber St N,Not inspected since 2024-07-03
+F59B8C4F-124C-444B-861C-5BD2F6172C13,BELMONT ENERGY STATION,Food store convenience / Variety,200 Glasgow st,Not inspected since 2024-07-03
+DD800B2C-45EB-4D66-93E6-8470D7DEE86D,BOTANICAL BEAUTS HAIR STUDIO,Hair Salon,194 KING St. S,Not inspected since 2024-07-03
+509DDF15-A877-4395-AE99-00C8691A2DC1,BOWLDUP SLIDERS SHACK,Food Take Out,228 Albert St,Not inspected since 2024-07-03
+C688488B-221A-4618-881F-E198D3836FA9,Big Ben's Baguettes,Food Take Out,401 Weber St N,Not inspected since 2024-07-03
+98E99D5A-E5D6-40CF-898F-7BF4C8630FC2,CALIFORNIA CONTOURS,Aesthetics,535 PARK ST,Not inspected since 2024-07-03
+9A57CC52-3CE9-475E-B7BB-E93DAA47F205,CALYPSO SPA ,Massage,2480 Homer Watson Blvd,Not inspected since 2024-07-03
+15137ACD-F97C-4B3E-A24B-54BA74E793CD,CHAR'S HAIR DESIGN,Hair Salon,247 Murdock Ave,Not inspected since 2024-07-03
+17702371-ECEB-49D3-AF58-887ED565772D,CHILLI N CHOPSTICKS,Restaurant,183 King St E,Not inspected since 2024-07-03
+B0C7FECE-750F-4345-BF99-785504361F21,"CLUB AT NORTHFIELD, THE ",Restaurant,155 Northfield Dr W,Not inspected since 2024-07-03
+2E50DF9A-4D3E-4A61-962A-4229200EA966,CLUB ELEMENTS,Cocktail Bar/ Nightclub,90 KING ST W,Not inspected since 2024-07-03
+4900800E-D5E9-4A62-8562-09C9E8EDAB09,CONTROL HAIR INC,Hair Salon,55 Erb St W,Not inspected since 2024-07-03
+C647416D-E47C-44F3-A208-FE2FCCFB18CE,COZZY CUPS CAFE,Food Take Out,333 Carwood Ave,Not inspected since 2024-07-03
+3B385869-7958-41AE-9F4C-094D20C0AF63,CROW SHIELD LODGE - SNACK PROGRAM,Food store convenience / Variety,101 David St,Not inspected since 2024-07-03
+355C5CC5-675B-4EFC-85B3-B2E8FB2F090E,Cathy Humphrey,Hair Salon,1077 Weber St E,Not inspected since 2024-07-03
+B3F099A2-8969-47D1-B3AF-DDF5082634B8,D.M.C'S JAMAICAN PATTIES,Food Take Out,415 Veronica Drive,Not inspected since 2024-07-03
+7B318595-E18C-4EFA-A662-763837F5F213,DALLAS,Cocktail Bar/ Nightclub,312 KING ST W,Not inspected since 2024-07-03
+AD795A62-C422-4CF2-B7CB-D4F90BA8157B,DASH OF DELICIOUS,Bakery,241 Dartmoor Cres,Not inspected since 2024-07-03
+0B997274-7389-4F1D-A42C-C7C5055FED6D,DERMAENVY SKIN CARE ,Aesthetics,99 Northfield Dr E,Not inspected since 2024-07-03
+386A6D2E-C15A-4188-AC62-27995F86995D,DOLCE BELLA BEAUTY BOUTIQUE ,Hair Salon,53 Glen Lake Crescent,Not inspected since 2024-07-03
+7C9F5BF4-33BA-4EF4-9742-1A9C9594B3CA,EAST AFRICAN STYLE ,Barber Shop,265 King St E,Not inspected since 2024-07-03
+BAF55260-5B54-4324-96F5-186853F22248,EDJE THE SALON,Hair Salon,285 Weber ST N,Not inspected since 2024-07-03
+9DE62524-2FC6-4AFA-89B8-B0B42EB3C8AD,EL ANTOJO BAKERY & CAFE,Bakery,825 Weber St E,Not inspected since 2024-07-03
+5A53E93D-7518-473C-99C1-F25DC720B720,ESCAPE SALON,Hair Salon,866 Frederick St,Not inspected since 2024-07-03
+1F9822C2-A9F0-424D-8341-74F7CB373A72,EXCELL SALON,Aesthetics,296 Highland Rd E,Not inspected since 2024-07-03
+03C00142-C648-4C1A-BBB5-67B8D503BD92,FASHION SALON,Hair Salon,308 Lester St,Not inspected since 2024-07-03
+70D06F2B-0675-4AAF-A504-F82E9B817EB4,"FAWN COLLECTIVE, THE",Hair Salon,18 Fisher-Hallman Rd N,Not inspected since 2024-07-03
+45FCA0F3-A0F2-4AA2-823E-0DDBC5DB945A,FIYORATE,Hair Salon,12 WATER ST N,Not inspected since 2024-07-03
+1840C281-15C2-4124-BC7E-8968C9D0CE8C,FRESHCO,Supermarket,2400 HOMER WATSON BLVD,Not inspected since 2024-07-03
+70C427BB-56AF-4739-8FD3-74376F70A4B2,GOLDEN CASH & CARRY,Food store convenience / Variety,1400 WEBER ST E,Not inspected since 2024-07-03
+3F33B73C-AB15-47F4-8217-84C6BEDE064C,GOLDEN HOUR SALON,Hair Salon,60 MOORE AVE S,Not inspected since 2024-07-03
+5204476D-0B43-47F6-BD44-4D3DB133CB45,Golden Lotus Head Spa,Hair Salon,15 Eby St S,Not inspected since 2024-07-03
+172505C7-E526-40FD-A5B2-C3783B65E15F,H.M.S Import & Export,Food Take Out,312 Lawrence Ave,Not inspected since 2024-07-03
+44D670A3-05F9-443B-984D-40FBC35C2262,HABESH-AFRO HAIR STYLE ,Hair Salon,333 King St E,Not inspected since 2024-07-03
+25339702-BD2D-47C5-9547-595A3296A326,HADI BARBER SHOP,Barber Shop,1167 KING ST E,Not inspected since 2024-07-03
+BD83C34B-F8E7-467E-A422-A98C487B7A39,HAIR CLIPPERS,Barber Shop,8 Bloomingdale Rd,Not inspected since 2024-07-03
+4E74B93D-72F6-4289-A228-7B81020B3AD2,HAIR LOOKS,Hair Salon,215 LOUISA ST,Not inspected since 2024-07-03
+641AE6CC-A68D-4662-8B67-9FCC27B6A618,HOAN'S HAIR STUDIO,Hair Salon,168 OTTAWA ST N,Not inspected since 2024-07-03
+32480362-FDFE-42CF-B41D-C97CD96A2B70,HOMEIRA BEAUTY SALON,Aesthetics,3 IVY LANE CRT,Not inspected since 2024-07-03
+E5EB3B4D-5512-4BE7-9A82-208A51A2C586,HOT HEADS,Aesthetics,64 FRANCIS ST N,Not inspected since 2024-07-03
+614D5ACB-7E2E-4B7D-8B31-78FF7DE4A1D1,HOUSE OF ELEGANCE - WATERLOO HEIGHTS RETIREMENT APARTMENTS,Hair Salon,170 ERB ST W,Not inspected since 2024-07-03
+F2673F47-C98C-459C-8A3B-F9D98FECACA9,HURON NAIL SALON & SPA,Aesthetics,1606 Battler Rd,Not inspected since 2024-07-03
+FE76148E-270A-4F74-AA45-FAB2244C28D5,Hair by Amber,Hair Salon,100 Water St N,Not inspected since 2024-07-03
+B117761D-7C2F-4F14-82BC-CCC917747C47,Ignis Tattoo Studio,Tattooing / Micropigmentation,625 King St E,Not inspected since 2024-07-03
+1355A21F-F353-4485-B024-0AC18AB78640,India Food & Grocery - Canadian Convenience ,Food store convenience / Variety,62 Balsam St,Not inspected since 2024-07-03
+3924EC1F-B602-40FD-80B6-EF5379A99DDD,J.P.'S HAIRSTYLING - DOON VILLAGE RETIREMENT RESIDENCE,Hair Salon,868 Doon Village Rd,Not inspected since 2024-07-03
+B112D03C-A076-473B-BD54-8187EB0FD8EA,JOLANTA'S EUROPEAN SPA ,Aesthetics,125 PARK,Not inspected since 2024-07-03
+06FCFB01-A310-4F98-93EA-42F2AF0FCD9A,KING AND JACKSON CONVENIENCE,Food store convenience / Variety,6 Jackson Ave,Not inspected since 2024-07-03
+BB4857F3-F688-47F6-B111-8422284AE374,KYM'S HAIR DESIGN,Hair Salon,174 CEDAR CREST ST,Not inspected since 2024-07-03
+955E22E6-596A-4909-B1E2-A2A29741DCED,LITTLE SHORT STOP,Food store convenience / Variety,3014 KING ST E,Not inspected since 2024-07-03
+E23A3EB4-8E1F-4E06-85B5-3A2AE79D9D66,LOCK BOX STUDIO,Barber Shop,19 Scott St,Not inspected since 2024-07-03
+19D73BF0-AABA-4FB2-B533-646BDDB68F61,LUCJA'S SALON AND SPA,Aesthetics,34 Benesfort Dr,Not inspected since 2024-07-03
+3E4594CF-2678-4EF7-A872-6C9DB344593A,LUMINOUS SPA AND SALON,Aesthetics,520 UNIVERSITY AVE W,Not inspected since 2024-07-03
+95B6C38D-E20D-4356-BB40-AA89E4B1E4BA,LUXEAPPEAL SALON,Hair Salon,151 Charles St W,Not inspected since 2024-07-03
+4106C93B-BBCE-44E0-88B1-544BCE39C73A,Lancaster Hair Design,Hair Salon,8 Bloomingdale Rd,Not inspected since 2024-07-03
+1CB7E6AF-F295-445A-9479-801AA1C4CDB9,M.A.C Cosmetics,Aesthetics,2960 Kingsway Dr,Not inspected since 2024-07-03
+C75BD332-82E6-44F7-8856-8BF679D5C326,"MAGIC BEAUTY ROOM, THE / ELITE LASER LOUNGE",Aesthetics,151 Victoria St N,Not inspected since 2024-07-03
+0E10512B-019F-4BD8-BD8B-0CC4CA189866,MAHLER'S HAIRSTYLISTS,Hair Salon,183 LOUISA ST,Not inspected since 2024-07-03
+76F0955D-FE0F-486C-8FEF-68251127DB13,MAY'S BEAUTY SALON,Hair Salon,478 TREMBLING ASPEN AVE,Not inspected since 2024-07-03
+E28811B7-F60A-434C-98CB-362774560EAF,MIGA JAPANESE & KOREAN RESTAURANT,Restaurant,354 King St N,Not inspected since 2024-07-03
+179DDF04-1E61-4ABE-9279-AC46E8C1C456,MOMONA BAR AND RESTAURANT,Restaurant,30  ONTARIO ST S,Not inspected since 2024-07-03
+C9F48D68-95B5-4732-8540-BD3A6996F316,Meat Nation,Butcher Shop,124 Seabrook Dr,Not inspected since 2024-07-03
+9451B87A-A50F-43A6-B6E1-69C7A6177C69,NAI BEAUTI,Aesthetics,280 GINSENG ST,Not inspected since 2024-07-03
+D6DC9DDC-88AE-4EF6-8C8F-D24E9B47F985,NANDANI BEAUTY SALON,Waxing,500 GLEN FORREST BLVD,Not inspected since 2024-07-03
+6CC1EF09-638A-4559-B68C-C835711B8A01,NATALIA LAPTEVA SALON,Hair Salon,709 PARIS BLVD,Not inspected since 2024-07-03
+6AC20A5D-C716-4FA8-8411-74FC1FDE96DD,NATURAL SOLUTIONS SALON & SPA,Aesthetics,2960 KINGSWAY DR,Not inspected since 2024-07-03
+9FA0C650-BC87-4D99-AA0F-03A1D5045F11,NEWVUE SALON AND STUDIO,Hair Salon,42 Banffshire St,Not inspected since 2024-07-03
+408060BB-1BE1-48AD-A523-B7BD1FA4FBD1,NEXT CUT BARBERSHOP,Barber Shop,275 LARCH ST,Not inspected since 2024-07-03
+F93FA4D8-AF3F-47CD-85E8-539DDF46B945,NICE HAIR CUT BARBERSHOP,Barber Shop,308 Lester St,Not inspected since 2024-07-03
+B28AA612-155D-4A34-A1D8-A8442D446FD4,NKFM - Blade and Board (Upper Level Vendor),Butcher Shop,300 King St E,Not inspected since 2024-07-03
+A4FE7323-3394-4429-A377-B185A0272C78,NORA MARKET,Food store convenience / Variety,907 Frederick St,Not inspected since 2024-07-03
+FE0EF98D-2FDE-4126-8448-45B67C35AC97,OLA BRAZIL,Food Take Out,1405 KING ST E,Not inspected since 2024-07-03
+DB2D2FDE-EE0A-4F9D-8D9F-B0B6B7214E5C,OPAL & MAY HAIR CO.,Hair Salon,283 LANCASTER ST W,Not inspected since 2024-07-03
+1EF5DF46-655B-4781-96B8-8F943F9AA4E7,ORO SALON,Hair Salon,99 NORTHFIELD DR E,Not inspected since 2024-07-03
+0B66B832-7271-4B3A-AAF9-47F9EBAA7AD8,PALMAS BAR & LOUNGE,Cocktail Bar/ Nightclub,612 King St E,Not inspected since 2024-07-03
+7BD65BD6-88B3-4AC1-AD59-6A7008A70B78,PAULINE'S HAIR STUDIO,Hair Salon,645 Cardiff St,Not inspected since 2024-07-03
+1CEB18DE-58B1-46D1-B15E-453D11781CE8,PROPER BARBER SHOP (Frederick Mall Barber Shop),Barber Shop,385 FREDERICK ST,Not inspected since 2024-07-03
+9A072473-DBAC-4F4F-8390-34F25E61291C,PROPOL EURO FOOD,Food Take Out,1244  Victoria Street N,Not inspected since 2024-07-03
+79DE860A-CA89-43A5-A452-AA8675680F44,Players Bar & Billiards,Cocktail Bar/ Nightclub,8 Water St N,Not inspected since 2024-07-03
+9CFF6E94-F056-4297-9A1A-69E1312AE8E4,"QUEENS MALL, THE",Food store convenience / Variety,91 Queen St S,Not inspected since 2024-07-03
+1BBD1841-91E4-4CDC-8498-96DF42A8F5AE,QUICK TRIP VARIETY STORE,Food store convenience / Variety,347 ERB ST W,Not inspected since 2024-07-03
+C04CB556-F29B-4E6C-B053-729BA7E081A4,RAZOR KING BARBERSHOP,Barber Shop,260 Lester St,Not inspected since 2024-07-03
+7DFAC645-92A1-4F62-9F39-08F62147BE13,RAZOR KING BARBERSHOP & SALON,Barber Shop,450 COLUMBIA ST W,Not inspected since 2024-07-03
+4EB48E95-A235-4B54-A229-29C6CEB7B37F,SALON NINETY5,Hair Salon,95 King St S,Not inspected since 2024-07-03
+D4E5E521-D036-4BEB-A46F-0FA81159EE72,SALON SENSATIONS AESTHETICS,Aesthetics,170 BRIDGEPORT RD E,Not inspected since 2024-07-03
+F247B0CF-8736-4620-81F7-0057E4DF5555,SERENITY SKIN CARE STUDIO ,Aesthetics,15 WESTMOUNT RD S,Not inspected since 2024-07-03
+AF80A451-335D-46AA-8A55-A2B5B0879E5E,SHARPER IMAGES,Barber Shop,91 QUEEN ST S,Not inspected since 2024-07-03
+38E3BD1D-641F-471F-94EB-6ED9A9198CAA,SHEAR HEAVEN,Hair Salon,551 ROCK POINT CRES,Not inspected since 2024-07-03
+56724C13-6164-4210-9E1D-E664A87BF15B,SIGNATURE HAIR DESIGN,Hair Salon,176 ALLEN ST E,Not inspected since 2024-07-03
+61B80903-08EC-45BF-90CE-9847341BA141,SKIN 101,Aesthetics,280 LESTER ST,Not inspected since 2024-07-03
+34046218-74D6-4D8E-8198-0DE1E134414A,SPORT CLIPS,Hair Salon,655 Parkside Dr,Not inspected since 2024-07-03
+AE6A2DA0-F0C0-4F0E-BB89-24CBEA0B5AD0,STARBUCKS COFFEE #4733,Food Take Out,95 KING ST S,Not inspected since 2024-07-03
+FBAE6955-8B8D-4053-BE6F-38CDD53A4304,STUDIO SO LARA WATERLOO,Hair Salon,584 Weber St N,Not inspected since 2024-07-03
+7EC5FB75-DC06-4A99-854A-7BB2C6167298,SUPER DAVE'S BARBER SHOP,Barber Shop,20 Spring St E,Not inspected since 2024-07-03
+CB8A2BD6-8E5A-4B12-9FC4-E49808091946,Smoke Variety ,Food store convenience / Variety,2934 KING ST E,Not inspected since 2024-07-03
+3E19B1AD-04EB-47DA-9294-31830B2A51CF,Sugar Cane Squeezery ,Snack Bar / Refreshment Stand,"14 Lanark Crescent, Kitchener",Not inspected since 2024-07-03
+4B3A7680-96F4-4E18-A220-F9AA59F96793,Sugar Run,Restaurant,33 Queen St S,Not inspected since 2024-07-03
+E3D6A2EC-7DA2-4C1A-B80E-FD24E9DB0A78,TANNER ELISABETH HAIR ,Hair Salon,40 John St E,Not inspected since 2024-07-03
+C2798E0D-FB2F-487A-A30E-88470B597DAD,THE ATTIC MOVEMENT CO.,Food Take Out,48 Ontario St N,Not inspected since 2024-07-03
+6AEFCB55-5590-4359-B1E1-43942D762F01,THE BIRYANI BARREL,Restaurant,1472 KING ST E,Not inspected since 2024-07-03
+514AE90D-78E4-46BC-946A-E80AA98C958D,THE EMPORIUM - DANA HOSPITALITY,Restaurant,99 Regina St S,Not inspected since 2024-07-03
+48384F41-88B6-42AD-B749-099E97ADD443,THE SONNECK HOUSE,Aesthetics,108 QUEEN ST N,Not inspected since 2024-07-03
+E7E45C3D-9D20-4629-9F18-72D1D18DDBEE,THE WELL,Cocktail Bar/ Nightclub,221 Weber St N,Not inspected since 2024-07-03
+F96D2709-DF78-4C0C-9782-46934FE9DAF2,TMCake & Pastries,Bakery,51 Paulander Drive,Not inspected since 2024-07-03
+261CE30D-D142-45C2-9372-E6C2D056D92A,TOTAL SKIN & BODY CLINIC,Aesthetics,385 FREDERICK ST,Not inspected since 2024-07-03
+3965CF64-5559-44F0-99D3-B30FE845DD26,TRI CITY STYLES,Barber Shop,108 King St N,Not inspected since 2024-07-03
+8543D80A-85D7-457E-ACB8-C73A3ACDB248,"TRUTH BEAUTY COMPANY, THE",Facials,46  King St N,Not inspected since 2024-07-03
+DBAD3A88-BEA7-4EAA-9C1D-B99BE9AAF023,Tandoori Zaika,Restaurant,158 University Ave W,Not inspected since 2024-07-03
+7BCECCEF-72A4-4350-9342-1C75E912CFD5,The Jump Off - Barber Shop,Barber Shop,10 King St E,Not inspected since 2024-07-03
+61D5F85F-FFB9-40CF-8E01-26C36C643214,Tza Greek,Restaurant,263 Northfield Dr E,Not inspected since 2024-07-03
+24D8C57B-98EA-4027-884D-6D36F914A232,UGLY TOAD COOKIE CO,Bakery,46 King St N,Not inspected since 2024-07-03
+BA376F03-ADD7-42CD-8C91-5CD097126C89,URBAN NAIL STUDIO & SPA,Aesthetics,239 Weber St N,Not inspected since 2024-07-03
+620BA3DE-0A9E-4177-809F-B0B2D5E46309,VERY NICE HAIR COMPANY,Hair Salon,22 KING ST S,Not inspected since 2024-07-03
+09B317AB-A868-44FC-99C4-E2D38FAFA5AC,VICTORIA HAIR,Hair Salon,28 Bloomingdale Rd N,Not inspected since 2024-07-03
+6711BCAA-C74F-41BC-8A79-FECB885A5544,VOILA ,Aesthetics,4336 King St E,Not inspected since 2024-07-03
+58A79542-E749-4EAB-BED8-C8274170EBA4,VOLUM STUDIO,Aesthetics,550 King St N,Not inspected since 2024-07-03
+A0325307-9066-4368-9F91-4B1FD012702F,ValueRite African Stores  ,Supermarket,468 Doon South Drive,Not inspected since 2024-07-03
+9F7C0F15-A6A7-405E-80E2-B573E37B1232,"WALPER BARBERS, THE",Barber Shop,119 Joseph St,Not inspected since 2024-07-03
+5D092D2E-CCA4-43AE-A140-55B4CE8F2083,WATERLOO MEDICAL COSMETICS,Aesthetics,4 King St S,Not inspected since 2024-07-03
+30500676-C163-4CC3-963C-A486BE83CA91,"WATERS SPA, THE",Aesthetics,75 KING ST S,Not inspected since 2024-07-03
+46E3C935-D8F2-45C2-B2D4-AB9A94DEF1C3,WILSON PARK CONCESSION STAND,Food Take Out,75 Wilson Ave,Not inspected since 2024-07-03
+1801B613-E659-4C78-901F-D059FC634CB2,"Worm Burner Pro Shop, The",Restaurant,41 Ira Needles Blvd,Not inspected since 2024-07-03
+83E3E1BC-155F-4119-83D1-CA5331D37D70,YAN HEALTH SPA/MASSAGE & BEAUTY CARE,Massage,301 King St. E,Not inspected since 2024-07-03
+F1298B4A-C2C6-4F75-8E56-54E764DBBB8F,YES MARKET,Food store convenience / Variety,651 Belmont Ave W,Not inspected since 2024-07-03
+FEBBA1E3-08CF-47BE-901A-94F2CAD5DCA1,Zara Lounge & Bar ,Cocktail Bar/ Nightclub,14 Charles Street W,Not inspected since 2024-07-03
+32B7BD9E-EAC6-4B61-A132-9FB2DEB09FD8,REXALL Drugstore,Food store convenience / Variety,324 HIGHLAND RD W,Pharmacy
+7EC66D76-96A3-470E-9AE7-5AC588C4458C,REXALL PHARMA PLUS,Food store convenience / Variety,537 FREDERICK ST,Pharmacy
+F0942479-687C-4E5B-A5D5-225F99187C91,REXALL PHARMA PLUS,Food store convenience / Variety,696 Belmont Ave W,Pharmacy
+C99E1E39-2B65-41D9-8868-59EE9443E47B,REXALL PHARMA PLUS,Food store convenience / Variety,1405 OTTAWA ST N,Pharmacy
+3F04C9EF-E894-45A9-ACE3-87BC15898291,REXALL Pharma Plus Drugmarts Ltd,Food store convenience / Variety,851 Fischer Hallman Rd,Pharmacy
+8A883DF6-5407-42E6-B6FF-7CF3EFC2E5A4,Rexall / Pharma Plus,Food store convenience / Variety,425 University Ave E,Pharmacy
+81DB2452-0D3D-4300-85DE-5F5B09999D8C,Rexall Pharma Plus,Food store convenience / Variety,585 Weber St N,Pharmacy
+5FE9694A-AC3A-4695-A260-EC12D8005397,SHOPPERS DRUG MART,Food store convenience / Variety,190 NORTHFIELD DR,Pharmacy
+A513FC63-A35A-46B5-AB19-C7786CAB7849,SHOPPERS DRUG MART,Food store convenience / Variety,1221 WEBER ST E,Pharmacy
+5C975A6A-20A2-4AF7-89AC-A622B5957ED3,SHOPPERS DRUG MART,Food store convenience / Variety,1005 Ottawa St N,Pharmacy
+683ACD0F-458C-413B-8DF6-FAEEC6F5FD43,SHOPPERS DRUG MART,Supermarket,563 HIGHLAND RD W,Pharmacy
+95320945-7ADC-4BC3-8624-1B189D544EE5,SHOPPERS DRUG MART,Food store convenience / Variety,235 Ira Needles Blvd,Pharmacy
+BA7BFD08-B1B0-49AD-8426-2298F775B9EE,SHOPPERS DRUG MART,Food store convenience / Variety,75 KING ST S,Pharmacy
+8E5CA74A-A139-45B9-8C27-36F321519E83,SHOPPERS DRUG MART,Food store convenience / Variety,250 KING ST W,Pharmacy
+47ECC5CB-3133-4538-995A-695E56261BA4,SHOPPERS DRUG MART,Food store convenience / Variety,658 Erb St W,Pharmacy
+4EEB8686-9C65-4DCD-90CE-51143CF4F438,SHOPPERS DRUG MART,Food store convenience / Variety,50 WEBER ST N,Pharmacy
+F869E266-7562-468A-AD76-E9E5AB58481F,SHOPPERS DRUG MART,Food store convenience / Variety,600 LAURELWOOD DR,Pharmacy
+1C9835E0-5AA3-4848-9372-52EC6B81E2C0,SHOPPERS DRUG MART,Food store convenience / Variety,550 King St. N.,Pharmacy
+A77F701A-221F-4F50-B80F-A30C16F78991,SHOPPERS DRUG MART,Food store convenience / Variety,310 FAIRWAY RD S,Pharmacy
+0BFFD9AC-4E50-42C4-ACA0-7451BE3D8DD5,SHOPPERS DRUG MART # 729,Food store convenience / Variety,700 Strasburg Rd,Pharmacy
+A0CB3A1F-5B19-47C9-A2DB-DF40349B0126,SHOPPERS DRUG MART 992,Food store convenience / Variety,1400 Ottawa St S,Pharmacy
+D4C8CDB8-BAF0-4035-AC54-B26DB2773FBA,Shoppers Drug Mart,Food store convenience / Variety,1950 Fischer-Hallman Rd,Pharmacy
+5926B86C-3D64-4291-AF0F-E5AEBECB952C,Shoppers Drug Mart,Food store convenience / Variety,123 Pioneer DR,Pharmacy
+AB9EDDDD-5CE5-44ED-AECF-69DE716442BA,ALBERT MCCORMICK ARENA,Restaurant,500 PARKSIDE DR,Recreation venue or club
+F6431503-F8D7-4680-AE00-4B4E7146604D,ARENA CONCESSIONS- WATERLOO RECREATION COMPLEX,Food Take Out,100 FATHER DAVID BAUER DR,Recreation venue or club
+6F843932-CDBF-42BE-8E51-A522143C7767,Apollo Cinema,Snack Bar / Refreshment Stand,141 ONTARIO St N,Recreation venue or club
+9C7DE895-EDFE-4BD5-8522-15DBA3469B5A,BAD AXE THROWING,Snack Bar / Refreshment Stand,321 WEBER STREET NORTH,Recreation venue or club
+03876DFC-F9DE-451E-B4E3-9EE584768722,BINGEMAN PARK-FUNWORX,Restaurant,425 BINGEMANS CENTRE DR,Recreation venue or club
+87DD0F2B-BF74-4CEC-9F30-9DBDC01BF004,BINGEMAN PARK-TIDAL TREATS,Ice Cream / Yogurt Vendor,425 BINGEMANS CENTRE DR,Recreation venue or club
+85573B70-BB83-4574-8AF7-1136DC9E1555,CENTRE IN THE SQUARE - LOWER LEVEL VIP MEMBERS LOUNGE,Cocktail Bar/ Nightclub,101 QUEEN ST N,Recreation venue or club
+C9AD7919-A537-4F78-9CC8-3ACABA082040,CHICOPEE SKI CLUB,Restaurant,396 MORRISON RD,Recreation venue or club
+3BF74F40-023A-4EFE-83D9-1C8C4BDA1F6F,CONCORDIA CLUB,Restaurant,429 OTTAWA ST S,Recreation venue or club
+EEF64FD8-2666-43B5-AE23-A3293EEA3634,CONRAD CENTRE FOR THE PERFORMING ARTS,Cocktail Bar/ Nightclub,36 KING ST W,Recreation venue or club
+39169CF6-9369-4007-B722-09548E4AD8D6,Cineplex Cinemas Kitchener & VIP,Restaurant,225 Fairway Rd S,Recreation venue or club
+3BB7AE00-479B-459F-A877-C8CBC53D4758,DEER RIDGE GOLF CLUB KITCHEN AND HALFWAY HOUSE,Restaurant,200 DEER RIDGE DR,Recreation venue or club
+76AC221C-4C83-468D-A243-3CEA4C47ACE7,DOON VALLEY GOLF COURSE & HALFWAY HOUSE,Restaurant,500 DOON VALLEY DR,Recreation venue or club
+60221C75-57F5-4D38-9ABD-C498723654A9,ESCAPOLOGY WATERLOO,Snack Bar / Refreshment Stand,341 Marsland Dr,Recreation venue or club
+7FAAA907-C587-4BFA-BE8D-C261119AF88C,FREDERICK LANES,,385 Frederick St,Recreation venue or club
+CAFCD413-2344-426E-8A9D-A651E69D24D2,FUNVILLA,Snack Bar / Refreshment Stand,335 Gage Ave,Recreation venue or club
+B09A9BD6-C832-40D8-89AB-E53BFC0A2C8C,GALAXY CINEMAS - General Concession & Outtakes Backstage Bistro,Restaurant,550 KING ST N,Recreation venue or club
+808902B6-0940-491A-B4B3-E052C7B8018D,GOLFPLAY,Restaurant,80 Lodge St,Recreation venue or club
+A194222E-01F1-4D12-BD78-51A5CA2F5106,GOLFPLAY INC. IRONWOOD BISTRO,Restaurant,4500 KING ST E,Recreation venue or club
+30E1689C-1EBB-4F52-B073-3D22BCC9E5EF,GRANITE CLUB,Cocktail Bar/ Nightclub,99 SEAGRAM DR,Recreation venue or club
+8A36D0E2-0957-424B-80F0-AD9BC124B1A0,GREY SILO - HALFWAY HOUSE,Snack Bar / Refreshment Stand,2001 UNIVERSITY Ave E,Recreation venue or club
+DEDEC855-7FF6-45B4-B1B1-93E36E203FB6,GREY SILO CLUB HOUSE,Restaurant,2001 UNIVERSITY Ave,Recreation venue or club
+CDC7DA74-BBFA-4115-89DD-ADAF32CA2785,HERITAGE LAWN BOWLING CLUB,Food Take Out,600 Heritage Drive,Recreation venue or club
+61C45D0D-F23B-41E7-958C-6F4863102575,ITALIAN CORTINA CLUB,Snack Bar / Refreshment Stand,22 KEVCO PL,Recreation venue or club
+CDB1EC3B-E408-44BA-9908-CADCED775174,KITCHENER MEMORIAL AUDITORIUM - CARVERY UPPER 3RD FLOOR,Food Take Out,400 EAST Ave,Recreation venue or club
+B112E0FF-F906-4E93-A63B-59724FD2E3F2,KITCHENER MEMORIAL AUDITORIUM - CHEF'S TABLE & BAR ,Food Take Out,400 East Ave,Recreation venue or club
+5C93A2F9-A9D6-4104-B074-F80C46BFA8D0,KITCHENER MEMORIAL AUDITORIUM - EAST CONCESSION,Food Take Out,400 EAST Ave,Recreation venue or club
+1D8C0208-5688-4E9E-985D-DFD3AA3791EF,KITCHENER MEMORIAL AUDITORIUM - LEGENDS,Food Take Out,400 East Ave,Recreation venue or club
+8EC1996A-2C6C-4434-9F44-E4D88960910B,KITCHENER MEMORIAL AUDITORIUM - POPCORN STAND EAST,Snack Bar / Refreshment Stand,400 EAST Ave,Recreation venue or club
+3F96945F-3AE8-4018-87FA-CA0DCB2C55AD,KITCHENER MEMORIAL AUDITORIUM - POPCORN STAND UPPER 3RD FLOOR,Snack Bar / Refreshment Stand,400 EAST Ave,Recreation venue or club
+18D04A17-194C-4967-82C1-86BA441C8255,KITCHENER MEMORIAL AUDITORIUM - POPCORN STAND WEST,Snack Bar / Refreshment Stand,400 EAST Ave,Recreation venue or club
+EA9CC316-DE20-4704-A853-FB0533B6990D,KITCHENER MEMORIAL AUDITORIUM - ROASTERS,Food Take Out,400 EAST Ave,Recreation venue or club
+A6820785-7643-459E-A9CF-8D18FD242CEE,KITCHENER MEMORIAL AUDITORIUM - THE AUD RESTAURANT,Restaurant,400 EAST Ave,Recreation venue or club
+76CD31F7-C518-4A38-BAE3-6AC4CF328FA2,KITCHENER MEMORIAL AUDITORIUM - UPPER CONCESSION 3RD FLOOR,Food Take Out,400 EAST Ave,Recreation venue or club
+8E0A6F6C-B9AE-4A34-8C70-EEAA57DE268B,KITCHENER MEMORIAL AUDITORIUM - WEST CONCESSION,Snack Bar / Refreshment Stand,400 EAST Ave,Recreation venue or club
+447A0D16-A276-460C-8B63-D3CEFE70570B,Kitchener Waterloo Racquet Club,Restaurant,138 Duke St E,Recreation venue or club
+4A064322-BBF9-48C2-B387-A998EA2B941A,LANDMARK CINEMAS WATERLOO,Restaurant,415 The Boardwalk,Recreation venue or club
+211FD758-4052-405D-8EE5-A08A0658FA9B,MINI-PLAYTOWN INC.,Snack Bar / Refreshment Stand,543 Mill,Recreation venue or club
+AD183EDE-0A7F-487B-84A8-95AB2431D633,Main Concession - WATERLOO RECREATION COMPLEX,Food Take Out,101 FATHER DAVID BAUER DR,Recreation venue or club
+EA643EE7-E8E0-406D-96E4-6B8119FB1CCA,Midtown Yoga KW,Snack Bar / Refreshment Stand,663 Belmont Ave. W,Recreation venue or club
+6FA9149E-5614-4581-BE0E-FA91EA613B8B,Movati Athletic-Juice Bar,Snack Bar / Refreshment Stand,405 The Boardwalk,Recreation venue or club
+726A82F6-53FE-4E8B-9968-CC53DA3A4E59,PETER HALLMAN BALLYARD,Snack Bar / Refreshment Stand,220 HAYWARD Ave,Recreation venue or club
+15AC7B22-F7AB-4FFA-9736-79F0E539BA06,PIONEER SPORTSMEN CLUB,Cocktail Bar/ Nightclub,211 PIONEER TOWER RD,Recreation venue or club
+C99D7A62-BE3A-4FCF-8226-E0036325947C,PLAYERS INDOOR GOLF & SPORTS BAR,Restaurant,1373 Victoria St N,Recreation venue or club
+8314D297-1CFC-44DB-90C3-2D5DFA5B7EAA,Princess Cinema,Snack Bar / Refreshment Stand,6 Princess St W,Recreation venue or club
+A28DE484-F8EF-400C-A0CD-E671FC590D98,Princess Twin Cinema,Food Take Out,46 KING ST N,Recreation venue or club
+34A994AA-BD3B-450A-9C64-CEBE6C88C4E2,"REGISTRY THEATRE, THE",Snack Bar / Refreshment Stand,122 Frederick St,Recreation venue or club
+B134F084-2C54-4B8C-AC76-B1FB68E49C4D,RETRO ROLLERS,Snack Bar / Refreshment Stand,563 Highland Rd W,Recreation venue or club
+E4BD2251-646F-4268-934E-A14F1F87FE91,RIVER EDGE GOLF CLUB,Restaurant,245 EDGEHILL DR,Recreation venue or club
+9C0E9F84-990C-4AFA-8A0B-56AFE667C9B2,ROCKWAY GOLF CLUB,Restaurant,625 ROCKWAY DR,Recreation venue or club
+F7535A9E-E075-487B-9B86-438BF55A1236,ROCKWAY GOLF CLUB HALFWAY HOUSE,Food Take Out,625 ROCKWAY DR,Recreation venue or club
+131DEDCE-2CC8-4B9B-AF43-0DE074C373F8,ROCKWAY GOLF CLUB SHACK,Snack Bar / Refreshment Stand,625 ROCKWAY DR,Recreation venue or club
+5E3D892D-9ADB-41D2-B149-63D45E092DE8,SKY ZONE TRAMPOLINE PARK,Snack Bar / Refreshment Stand,150 GATEWAY PARK DR,Recreation venue or club
+AD9B8906-5CB7-42B3-AB43-833BBB9B6AE5,SPORTSWORLD Crossing TWIN PADS Arena,Food Take Out,35 SPORTSWORLD Crossing Rd,Recreation venue or club
+AA142F0D-5878-4EC9-B485-870B5ACF9CBE,Sugar & Ice - NEXTGEN VR,Snack Bar / Refreshment Stand,4341 KING ST E,Recreation venue or club
+6A6DD0C2-4D63-4D58-A032-AB695DCE23EE,THEMUSEUM -Voodoo Lounge ,Cocktail Bar/ Nightclub,10 King St W,Recreation venue or club
+35B65E58-B1EB-4059-9E71-6BEDD9318530,TRAPPED KW,Snack Bar / Refreshment Stand,100 Lodge,Recreation venue or club
+3D955769-D7D5-44F6-BD25-3C4DDC7C9368,WATERLOO TENNIS CLUB,Restaurant,50 Central St,Recreation venue or club
+A657ADCB-0152-4781-9185-7AECCD6CA554,WESTMOUNT GOLF & COUNTRY CLUB,Restaurant,50 INVERNESS DR,Recreation venue or club
+A8E22457-B23C-4721-8D08-9F9977346870,WESTMOUNT GOLF - HALFWAY HOUSE,,50 INVERNESS DR,Recreation venue or club
+BCF9DC05-C716-479A-AAA1-6B479A0F7BC9,WESTMOUNT GOLF - OASIS,,50 INVERNESS DR,Recreation venue or club
+EA972759-4323-400E-B688-355008CE07F8,Waterloo Gaming Lounge ,Snack Bar / Refreshment Stand,1 King St N,Recreation venue or club
+6D2BFFFD-3480-49DA-999D-1D22B3BAA23A,BZEE B CONFECTIONS - STORAGE,,216 Fifth Ave,Storage
+1F0A4E25-4406-4181-93A2-D962BCBBC855,519 COMMUNITY COLLECTIVE,Food Bank,100 Hoffman St,Type not a storefront
+F202AC38-3BC0-440D-B135-C95216044910,519 COMMUNITY COLLECTIVE NOURISH FRIDGE,Food Bank,150 Roger St,Type not a storefront
+C9C88D52-AB98-4672-9828-1B33AFA6F281,84 Frederick Street Transitional Housing Program,Community Kitchen,84 Frederick St,Type not a storefront
+363A4AD8-2089-4B25-87B1-852992894ADA,A1 Cash and Carry,Food Warehouse / Depot,135 Gateway Park Dr.,Type not a storefront
+D5E67EC5-B47B-428A-8C73-CCE7ED63089F,ALPINE CLUB,Banquet Hall,464 MAPLE Ave,Type not a storefront
+AA9E5CC5-F9C6-45C9-8766-37D5964E1CE2,ASIAN FOOD LAND-WHOLE MILK VENDING INC.,Food Vending Facility,4500 KING ST E,Type not a storefront
+561A2EC4-2277-42D0-B6E8-4F0F048682E3,AZIMUTH CAFE FOR COMPASS AT GOOGLE,Workplace Cafeteria,20 Breithaupt St,Type not a storefront
+8F13C5C0-4414-4006-8DB3-5AF8067DA469,African Pot,Caterer / Commissary,401 Weber St N,Type not a storefront
+CACF5DB1-5F0A-4094-A9B9-757230D42F9B,BASE CHURCH,School Cafeteria,100 FERGUS Ave,Type not a storefront
+F1473007-DF43-40B4-8085-768A3D4D8176,BELLA VISTA CATERING AND EVENTS,Caterer / Commissary,262 MILL ST,Type not a storefront
+DD4F26A1-C313-4018-AFDB-A1497EAE6EE5,BETHANY EVANGELICAL CHURCH,Community Kitchen,160 LANCASTER ST E,Type not a storefront
+74768B71-33AE-474D-B960-EBF6B4CCA5D0,BETHEL EVANGELICAL LUTHERAN CHURCH,Church Kitchen Facility,47 SHELDON AVE N,Type not a storefront
+766AA527-526D-4F4C-9E6C-54BB59C8C2AB,BIG JERK,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+001C0A63-D8D8-4360-91F8-CFF9AA13EDFD,BINGEMAN PARK-EMBASSY ROOM,Serving Kitchen,425 BINGEMAN CENTRE DR,Type not a storefront
+F0F950AE-1EE8-478C-9538-C42DBB2ED29E,BINGEMAN PARK-MARSHALL HALL/BALLROOM KITCHEN,Serving Kitchen,425 BINGEMAN CENTRE DR,Type not a storefront
+1E09B292-EBD8-487B-91AC-F8B548D78249,BLACK HOLE BISTRO - PERIMETER INSTITUTE,Workplace Cafeteria,31 CAROLINE ST N,Type not a storefront
+9145B1A5-8D62-488E-8809-53C5EAFF85B8,BLACKMARKET HUMMUS ( Marlen Fahel),Serving Kitchen,173 Roger St,Type not a storefront
+F9265A54-2466-4363-8253-B2549C99F989,BLOWING SMOKE HOT SAUCE INC,Caterer / Commissary,1405 King St E,Type not a storefront
+D4FF8AF3-0D41-4F36-9B5E-48E599884E30,BLUEVALE COLLEGIATE,School Cafeteria,80 BLUEVALE ST N,Type not a storefront
+AE49BBCF-616E-4CAE-8C4C-418F134DA710,BOUTIQUE CATERING,Caterer / Commissary,145 Dearborn Pl,Type not a storefront
+B9A72F76-DFDB-4B60-BD9C-E78F79739B40,BRAHMARISHI MISSION OF CANADA - SHRI RAM DHAM HINDU TEMPLE,Church Kitchen Facility,525 Bridge St East,Type not a storefront
+749A0A58-DE92-40B8-9D56-787A4DC56B25,BRIDGEPORT COMMUNITY CENTRE,Community Kitchen,20 TYSON DR,Type not a storefront
+E40050A1-2D94-4ACA-88AF-B5CA5303F822,BRITTLES'N MORE,Food Warehouse / Depot,180 Frobisher Drive,Type not a storefront
+E5A9441A-1B9F-469D-B181-8AE0B3D35F88,Bailey's Local Foods,Food Warehouse / Depot,16 William St W,Type not a storefront
+7A96347A-280D-42D6-847C-C86052B39B1B,Bakes & Grazing,Caterer / Commissary,9 Dreger Ave,Type not a storefront
+EB27FB03-773A-4B1A-9A06-7675442E8DD3,Black Fire Kitchen,Caterer / Commissary,401 Weber St N,Type not a storefront
+EEC9EB87-619C-4CBD-8E89-7FAE49BA195C,Bubinsky's ,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+BF9D6FE2-B658-4CF4-BAC2-42802FE5D39C,CAFE O - OPEN TEXT ARAMARK CAFE,Workplace Cafeteria,275 FRANK TOMPA DR,Type not a storefront
+5BC79DBA-6391-41EC-ACE8-D69CED085359,CAMINO FOOD HAMPER PROGRAM,Food Bank,45 Amos Ave,Type not a storefront
+9BD28411-02F4-4C5D-9E4C-21680C23CC53,CAUDLE'S CATCH,Food Warehouse / Depot,60 OTONABEE DR,Type not a storefront
+727D3FE1-4F53-43C6-96BF-F5574A446157,CEDARS WORSHIP & COMMUNITY CENTRE,Banquet Hall,543 BEECHWOOD DR,Type not a storefront
+90AE43B2-BF4C-45FA-B200-B055DB726F4F,CENTRE IN THE SQUARE - LOWER LEVEL PREFORMERS CAFETERIA,Workplace Cafeteria,101 QUEEN ST N,Type not a storefront
+7D1D81BA-8702-483E-BFD4-090C336464B6,CENTRE IN THE SQUARE - MAIN FLOOR LOUNGES,Community Kitchen,101 QUEEN ST N,Type not a storefront
+F764C3B3-1CE3-47D0-854D-39BA064B2ECB,CENTREVILLE CHICOPEE COMMUNITY CENTRE,Community Kitchen,141 MORGAN Ave,Type not a storefront
+86B11B44-F726-49DE-AF60-EB1AAB450CBA,CHANDLER MOWAT COMMUNITY CENTRE,Community Kitchen,222 Chandler Dr,Type not a storefront
+8B763F9C-D620-463C-9862-CDA83B66CE1A,CHRIST EVANGELICAL LUTHERAN CHURCH,Church Kitchen Facility,445 Anndale Rd,Type not a storefront
+AAE639CA-2EAC-4855-B446-DC14F6D0191F,CHRISTIE DIGITAL SYSTEMS - DANA FOOD SERVICES,Workplace Cafeteria,809 WELLINGTON ST N,Type not a storefront
+CBB714D5-7989-4422-BC46-075BC3458BBA,COLUMBUS CONFERENCE CENTRE,Banquet Hall,145 DEARBORN PL,Type not a storefront
+6413F70F-494F-420C-8FC5-E2749ADD57A1,COMMUNITY HALL-ST MATTHEWS LUTHERAN CHURCH,Church Kitchen Facility,54 BENTON ST,Type not a storefront
+B9D3F199-E5C0-49C7-8960-15003905B8ED,CONRAD GREBEL COLLEGE,School Cafeteria,140 WESTMOUNT RD N,Type not a storefront
+34865A3A-4698-44B3-8884-2785201081F5,COOKS ON CALL,Caterer / Commissary,18 EBY ST S,Type not a storefront
+59A74AC5-041A-4A60-8774-C4566DBCECD7,COUNTRY HILLS COMMUNITY CENTRE,Community Kitchen,100 RITTENHOUSE RD,Type not a storefront
+BF590EE2-9B06-46FF-AD02-95A6B41579C4,"Casablanca Popcorn Co.,",Caterer / Commissary,44 Frankfurt Street,Type not a storefront
+F15CB589-E901-4997-9BC3-ABF4764CDD76,Conestoga Catering,Banquet Hall,110 MANITOU DR,Type not a storefront
+2DACFE48-A1B3-4C30-88BA-4801C535E4E2,Creekside Church Kitchen,Church Kitchen Facility,660 Conservation Dr,Type not a storefront
+46203D1E-28D1-499C-996F-A7BC4CE39D45,DANA SHORTT GOURMET INC,Caterer / Commissary,55 ERB ST E,Type not a storefront
+6363B14C-5A96-46DA-A7C3-A552999CDC5E,DAVENPORT CATERING,Caterer / Commissary,100 FROBISHER DR,Type not a storefront
+CFC34722-E70B-445C-8377-1FE052A046B2,DIAL A DINNER,Caterer / Commissary,130 COLUMBIA ST W,Type not a storefront
+73A4B996-CD55-4126-99C4-830BEC205D02,DOON PIONEER PARK COMMUNITY CENTRE,Banquet Hall,150 PIONEER DR,Type not a storefront
+4943C01A-626C-4D44-B63D-B325E32BCB7B,DOON PRESBYTERIAN CHURCH,Community Kitchen,35 ROOS ST,Type not a storefront
+1753AE81-02DF-47A3-B721-9C8AA95FA425,DOREL'S FOOD LTD.,Food Warehouse / Depot,101 WHITNEY PL,Type not a storefront
+92C2756B-D6BA-4FF1-9EAF-8951A53875BB,DOWNTOWN COMMUNITY CENTRE - NEIGHBOURHOOD KITCHEN,Community Kitchen,35 Weber St W,Type not a storefront
+12B352C8-0B05-4534-ADD1-230174A6DBD8,Delta Hotel Servery,Serving Kitchen,110 Erb St W,Type not a storefront
+3B7565BC-599F-493A-9E5C-C1E45D5D6780,Doon Heritage Village - Staff House,Community Kitchen,10 Huron Rd,Type not a storefront
+B2FB01E5-CED8-4B30-B20D-81407CFDE267,Dream By Day Shop,Food Vending Facility,20 Queen St S,Type not a storefront
+E9791FFC-4E3B-43EB-B71C-28E36F05B038,EAGLE EATS,School Cafeteria,1500 Block Line Rd,Type not a storefront
+0FC74C41-CE4A-4C8A-B941-0A03CB3E9276,EBY VILLAGE,Community Kitchen,50 EBY ST S,Type not a storefront
+9E2976A5-3745-434A-9F73-736244596219,EDIBLE ARRANGEMENTS,Caterer / Commissary,583 KING ST N,Type not a storefront
+642E6498-5A50-44A3-AD81-542D7E802321,EMERGENCY FOOD HAMPER PROGRAM,Food Bank,807 GUELPH ST,Type not a storefront
+6F736135-5968-46ED-9262-4A091CCF6DEC,EMERGENCY SHELTER - SHIP - UNIVERSITY AVE,Serving Kitchen,139 UNIVERSITY AVE W,Type not a storefront
+58A31CEA-5FE1-4DF5-9D8C-AC7DCB8A2AA1,EMMANUEL UNITED CHURCH/BRIDGEPORT CAFE,Church Kitchen Facility,22 BRIDGEPORT RD W,Type not a storefront
+9E6FEECB-5736-4804-8971-43A681DA1D3D,"EMPORIUM, THE - DEXTERRA SIGNATURE DINING",Workplace Cafeteria,150 Frederick St,Type not a storefront
+D7F3433D-E70E-4F32-AE4B-D3375343F999,EQ EATS,Workplace Cafeteria,1 WESTMOUNT RD N,Type not a storefront
+9E38CC13-24F4-45F5-B72E-B1E0A8BD66CD,EUREST SERVICES (SUNLIFE),Workplace Cafeteria,227 KING ST S,Type not a storefront
+EFCC130B-A498-43B8-A681-4D7F2E41E316,Ebytown Food Co-Op,Food Bank,79 Joseph St,Type not a storefront
+18F6A03E-77C5-4CD9-AA11-8279560E9230,Erb& Good Funeral Home,Serving Kitchen,171 KING ST S,Type not a storefront
+9E5D0519-3F69-43DD-A239-694EFBF59569,FILIPINO WOMEN'S KITCHEN,Caterer / Commissary,222 Chandler Ave,Type not a storefront
+B281CABE-9AF6-457D-9718-374E5957B2F8,FINEST SAUSAGE & MEAT LTD.,Food Warehouse / Depot,268 TRILLIUM DR,Type not a storefront
+64B0C9C2-AAF2-42B3-9B77-0C5C864D9D63,FIRST BAPTIST CHURCH,Church Kitchen Facility,306 ERB St W,Type not a storefront
+46610F1F-306D-40EB-9E08-398E173C2881,FIRST UNITED CHURCH,Community Kitchen,16 WILLIAM ST W,Type not a storefront
+5C16B091-5DC3-4058-B6AB-6F2FDCF83493,"FOOD BANK OF WATERLOO REGION, THE",Food Bank,50 ALPINE CRT KITCHENER,Type not a storefront
+9BEBD7C7-25FE-4FE1-A714-DC652EDCAECE,FOOD4KIDS,Food Bank,330 Trillium Dr,Type not a storefront
+15A47BBA-A65E-4681-9FF3-C62D94917C07,FOREST HEIGHTS COMMUNITY CENTRE,Community Kitchen,1700 QUEEN'S BLVD,Type not a storefront
+F0FB8F4E-E767-425A-A5E7-A41CD9F003D2,FOREST HILL UNITED CHURCH,Church Kitchen Facility,121 Westmount Rd,Type not a storefront
+0A6DED98-19C0-4238-812A-35059FE678B5,Faiczak Food & Fitness,Caterer / Commissary,105 Lexington Rd,Type not a storefront
+8F2C90BC-A10C-4D40-8143-FD14399A549B,Food Literacy Programming - Kitchener Public Library Food Cart,Community Kitchen,85 Queen Street North,Type not a storefront
+51F9F9FE-FE6C-4EDB-AA3D-BA1B6459CC65,Freedom in Christ Church,Community Kitchen,1643 Bleams Road,Type not a storefront
+AB7F6BF0-D28C-42C0-84FE-29D384A0FB0B,GAYUMA,Caterer / Commissary,401 Weber St N,Type not a storefront
+9DEDED6E-7BB9-45D5-9F3C-DA45242E1E6B,GINGER GOAT HOT SAUCE,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+1E141CE5-2C3D-4B6A-A250-8756B6F62ED5,GOLF WITHOUT LIMITS,Serving Kitchen,283 NORTHFIELD DR E,Type not a storefront
+62FBEB92-776C-4A23-841A-9D8DEB1B1DFF,GOOGLE (BYTE),Workplace Cafeteria,51 Breithaupt St,Type not a storefront
+858C510E-EEE0-4F59-9257-8CA863AAA70E,GOOGLE (TRUE NORTH),Workplace Cafeteria,51 Breithaupt St,Type not a storefront
+F4EF4F88-5ECD-4C8E-9450-DEE15E93531D,GOOGLE SERVING KITCHEN,Serving Kitchen,173 Roger Street,Type not a storefront
+28414F64-3E2C-4C7C-85DC-F7D998A0BA99,GRAND RIVER C.I. TEACHING KITCHEN,Community Kitchen,175 INDIAN RD,Type not a storefront
+73CFC358-2B85-4DFF-BDEC-AFBE648C5105,GRANDVIEW BAPTIST CHURCH,Church Kitchen Facility,250 Old Chicopee Rd,Type not a storefront
+786A5850-C771-480F-A629-EF9F6FE785A6,GRAZEFUL CREATIONS,Caterer / Commissary,388 Ottawa St S,Type not a storefront
+00402FB7-0FED-412F-A109-02915DFAB745,GREEN GABLES,Serving Kitchen,189 QUEEN ST N,Type not a storefront
+C5FD1BEA-AC4F-4C64-88F2-546AE27A8F6E,Glencairn Mennonite Brethren Church,Food Bank,725 Erinbrook Dr.,Type not a storefront
+FE2A8E02-D305-4BD5-A746-19D83CFE7F68,Gold Roast Coffee Service Ltd.,Food Warehouse / Depot,550 Parkside Dr,Type not a storefront
+47D87CB8-31D9-40B3-8596-30BA16A026C4,Grand River Recreation Complex,Banquet Hall,600 Heritage Dr,Type not a storefront
+C01044C0-7E58-463D-B7FF-E66C51810C28,HIGHLAND BAPTIST CHURCH,Church Kitchen Facility,135 HIGHLAND RD W,Type not a storefront
+F343747C-4A9A-4DD6-8EA3-1E15B6C1F457,HOLIDAY INN EXPRESS & SUITES,Serving Kitchen,4355 KING ST. E,Type not a storefront
+DEDBDE4A-FBD0-4278-99D7-0CDBDD8D2A51,HOLY TRINITY SERBIAN HALL,Banquet Hall,700 FISCHER-HALLMAN RD,Type not a storefront
+B6EFB1D8-7C7F-4062-9BF0-3D5BEC1B83C2,HOUSE OF FRIENDSHIP - WATERLOO CHRISTIAN REFORMED CHURCH,Serving Kitchen,209 Bearinger Rd,Type not a storefront
+AB118468-D2CB-4939-BC58-2CD40A141CF7,HURON HEIGHTS SECONDARY SCHOOL,School Cafeteria,1825 STRASBURG RD,Type not a storefront
+9F5F05CF-2ED2-45A7-84EB-2DA59B85832B,Hacienda Sereda,Banquet Hall,1254 Union,Type not a storefront
+FBF460C2-D0B8-449D-ADC0-B10E82A4524C,House of Friendship,Food Warehouse / Depot,72 WILSON AVE,Type not a storefront
+77693217-9D97-417A-ACE5-D5DD1FC22865,IMMANUEL PENTECOSTAL CHURCH,Community Kitchen,100 Hoffman St,Type not a storefront
+DF764113-87FE-46EF-AD98-D69AD3D8CCE9,INDULGE KITCHEN,Caterer / Commissary,1595 Victoria St N,Type not a storefront
+98E69472-E5BE-4959-8EF3-08BB17E2BCD8,Islamic Center of Waterloo Food bank,Food Bank,510 Erbsville Rd,Type not a storefront
+10D7F9F8-1AD9-430F-8041-A6A74923F3CB,JACQUELINE'S CATERING,Caterer / Commissary,500 GLEN FORREST BLVD,Type not a storefront
+BDCF7A9A-9E67-42D3-A19F-9F18591FB474,JAMANICA PATTIES AND TINGS,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+893A3FE0-45BE-4231-9E99-0F8072AD2F02,Jean Steckle PS-YWCA-ED/YD,Serving Kitchen,130 Woodbine Ave,Type not a storefront
+A22F4175-78FF-4B98-AF06-1969048E11CD,KINGSDALE COMMUNITY CENTRE,Community Kitchen,72 WILSON AVE,Type not a storefront
+2832131C-356C-450C-BD2D-D97DF737305E,KITCHEN BRIDE CATERING AND EVENTS MANAGEMENT,Caterer / Commissary,222 Chandler Dr,Type not a storefront
+FF4C519E-9BA1-4A3E-AF50-3AA3FCBFD22D,KITCHENER MEMORIAL AUDITORIUM - KIWANIS KITCHEN,Community Kitchen,400 EAST Ave,Type not a storefront
+C1E0DFE3-483E-48D0-86DE-4CAC43171835,KITCHENER PORTUGUESE CLUB,Banquet Hall,1548 FISCHER-HALLMAN RD,Type not a storefront
+4188E025-23FB-4E50-B250-C30E35F8CD85,KITCHENER- WATERLOO COLLEGIATE INSTITUTE HOSPITALITY KITCHEN,School Cafeteria,787 KING ST W,Type not a storefront
+302C8B58-D9E0-49D7-ACDE-E121E21AB499,KOREAN EATS,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+5A60D163-E557-41CA-988C-B9408675A091,KPL Southwest Community Library,Community Kitchen,"100 Rosenberg Wy, Kitchener",Type not a storefront
+232D3ED8-2BE9-4B96-AC7A-CB42CA1BAE94,KW Empanadas Inc - Preparation facility,Caterer / Commissary,195 King St St E,Type not a storefront
+E1AC602C-005C-4137-916D-5872C87F4AC7,KW NAVAL ASSOCIATION,Banquet Hall,315 WEBER ST N,Type not a storefront
+6ABCF9EC-33EC-4997-B16A-9D618063E21D,Knox Presbyterian Church,Church Kitchen Facility,50 Erb St W,Type not a storefront
+7A4461AE-2B83-4C2F-B7DC-4E27E3DA2967,"LORD OF THE TACOS, THE",Caterer / Commissary,20 Hurst Ave,Type not a storefront
+1E5F1A6D-B87B-4936-B545-B21FF5EDB922,LUNCH LADY ,Caterer / Commissary,6 HOFFMAN ST,Type not a storefront
+126A3305-190C-4D61-B0E8-889AB4E101EA,Lakelands Diet Delivery,Caterer / Commissary,401 Weber ST N,Type not a storefront
+27DD1742-F05B-40C1-ACDD-ED5EC4671004,Lynn Macaulay Legacy Project,Church Kitchen Facility,248 Highland Rd E,Type not a storefront
+6D9E7BDC-AF64-4F2E-9102-B1E1532ABDF5,MAHA'S KITCHEN,Caterer / Commissary,100 Park St,Type not a storefront
+05904678-6D63-4FAF-8B32-BBC125A57F49,MANULIFE FINANCIAL,Workplace Cafeteria,500 KING ST N,Type not a storefront
+E850844C-0E05-456D-ADD6-5B40E629C625,MARGARET AFRICAN & CARIBBEAN FOODS - CHANDLER MOWAT COMMUNITY CENTRE RENTAL KITCHEN,Transient / Low Use,222 Chandler Dr,Type not a storefront
+A8DE85E5-01B7-4FA7-8C61-21BE713706B6,MAURITA'S KITCHEN,Caterer / Commissary,66 QUEEN ST SOUTH,Type not a storefront
+A5146F4B-E5FE-47BB-87BF-B8F669BD4AE3,MEAL IN A JAR,Caterer / Commissary,96 Rankin St,Type not a storefront
+6D1E28B8-5A34-4C33-A710-541C2D4E400C,MERMAID CHEF,Transient / Low Use,20 Hurst Ave,Type not a storefront
+0338981E-02E4-47CF-BC5F-19074DE0BEAF,MILL COURTLAND COMMUNITY CENTER,Community Kitchen,216 MILL ST,Type not a storefront
+4E293A0B-1949-4F42-9956-5C1C5C8EDC3B,MIMIZ CATERING,Caterer / Commissary,1405 King St E,Type not a storefront
+1CAAABA9-F45F-4383-BA91-5A2062FD279F,MOUNT ZION LUTHERAN CHURCH (Kitchen),Church Kitchen Facility,29 Westmount Rd S,Type not a storefront
+B5CE8BA2-15BE-4E12-BD5F-2A070748D13B,MOZY'S PREP KITCHEN AND COLD STORAGE,Food Warehouse / Depot,100 FROBISHER DR,Type not a storefront
+4CE86652-5ECB-401F-8BE8-2CA53FCB1D66,NKFM - THE MARKET PLACE,Caterer / Commissary,300 King St East,Type not a storefront
+C689579F-8B3C-4166-A2B6-F1043CD4EB9B,NUTRITION FOR LEARNING - HURON HEIGHTS SECONDARY SCHOOL,School Cafeteria,1825 STRASBURG RD,Type not a storefront
+52FD599E-3BA1-44B3-B027-25EEA0DF4C6D,NUTRITION FOR LEARNING - ROCKWAY PUBLIC SCHOOL,School Cafeteria,70 VANIER DR,Type not a storefront
+B12F8040-BDF5-496F-9042-828B2005DC61,NUTRITION FOR LEARNING - ST. ALOYSIUS,School Cafeteria,504 CONNAUGHT ST,Type not a storefront
+AC73D3E7-2A0F-4A0F-88DB-F70DE30FC22F,NUTRITION FOR LEARNING- WILSON PUBLIC SCHOOL,Church Kitchen Facility,237 WILSON Ave,Type not a storefront
+FA598969-E87C-48B8-A886-28E35D81D839,Naija Chops,Community Kitchen,222 Chandler Dr,Type not a storefront
+4C86DECB-40B6-4AFF-91B3-4F51387B42FF,Noi Kitchen,Caterer / Commissary,401  Weber St W,Type not a storefront
+8C7AC08C-D7C3-446C-BCA1-C5E0F951E5E1,Nourish & Flourish Inc,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+0F8BBD7E-CE7E-4F0F-97F5-557AC678B5DA,ONE ROOF YOUTH SERVICES,Community Kitchen,35 Sheldon Ave N,Type not a storefront
+E606A125-F267-4C0A-A339-B45694A1C70B,OUT OF THE COLD - ST. LOUIS ROMAN CATHOLIC CHURCH,Community Kitchen,53 ALLEN ST E,Type not a storefront
+E419DD68-B0F4-4C84-8AF4-1DAB5E497972,Our Lady of Lourdes Parish,Church Kitchen Facility,173 Lourdes St,Type not a storefront
+4C132D05-B482-40F4-BEFD-A611900FD3CA,PARENTS FOR COMMUNITY LIVING TEACHING KITCHEN,Community Kitchen,544 BRIDGEPORT RD E,Type not a storefront
+5FF1C5E9-4C3E-4E1F-937D-86895C9B8A92,PARKMINSTER UNITED CHURCH,Church Kitchen Facility,275 Erb St E,Type not a storefront
+D0292822-F069-4F8E-AF99-FDA6769D225C,PAULANDER COMMUNITY CENTER,Food Bank,60 Paulander Drive,Type not a storefront
+271A8690-63BB-4E37-B483-9ACE8278B2AA,PIE O'CLOCK,Community Kitchen,20 Hurst Ave,Type not a storefront
+910C2958-1DC3-4ABE-AAC1-0DCE14F722D3,QUALITY INN KITCHENER - BREAKFAST BUFFET,Serving Kitchen,2899 King Street East,Type not a storefront
+F88AA130-5C2F-4FA4-ADEA-0C1D43773150,RAY OF HOPE - MARKETPLACE FOOD BANK,Food Bank,659 King St E,Type not a storefront
+C17E08C1-B11B-4763-A467-747AF3C3484A,RELISH COOKING STUDIO,Serving Kitchen,70 Victoria St N,Type not a storefront
+75D2D4D3-AFE6-4916-8EE5-9C9E554D2E1B,RENISON COLLEGE,School Cafeteria,240 WESTMOUNT RD N,Type not a storefront
+63E84282-2687-4421-82DB-CFB5FC45E70E,RESURRECTION COLLEGE,School Cafeteria,265 WESTMOUNT RD N,Type not a storefront
+2C809ACC-0147-44A5-B0B7-002C6CBC55BE,RIM PARK - BANQUET HALL,Banquet Hall,2001 UNIVERSITY Ave E,Type not a storefront
+379283D8-9E45-4AFC-A02E-72B6380A4978,ROCKWAY COMMUNITY CENTRE - MAIN KITCHEN,Community Kitchen,1405 KING ST E,Type not a storefront
+39816A21-ED26-4190-A57D-0E1C7E9D79CC,ROCKWAY MENNONITE COLLEGIATE,School Cafeteria,110 DOON RD,Type not a storefront
+79099284-3EEE-424B-9A09-8B08567594B0,ROYAL CANADIAN LEGION,Banquet Hall,524 BELMONT Ave W,Type not a storefront
+8E563C3D-06BB-400F-A393-867081746454,ROYAL CANADIAN LEGION BRANCH #530,Banquet Hall,316 Marsland Dr,Type not a storefront
+4B4BFE0A-0FBC-4F05-BB08-44164B8017D5,"ROYAL CANADIAN LEGION, BRANCH 412 POLISH LEGION",Banquet Hall,601 WELLINGTON ST N,Type not a storefront
+DECF99D1-FD66-4C45-BE90-2312A13308BF,Ray of Hope Community Centre,Serving Kitchen,659 King St E,Type not a storefront
+817C65E1-9194-4E53-888B-269F31AD8E77,S&P Catering,Caterer / Commissary,620 Davenport Rd,Type not a storefront
+6720AA1B-263B-4EB0-B633-F8D4852622B1,SALVATION ARMY CHURCH AND FOOD BANK,Community Kitchen,75 TILLSLEY DR,Type not a storefront
+65DBAB17-92A8-4210-ABA5-F6362ED2C0B3,SAPLING KITCHEN,Caterer / Commissary,50 Ottawa St S,Type not a storefront
+BD0F04FC-555C-4BD9-911C-B6D4DEE708BD,SERVICES AND HOUSING IN THE PROVINCE (SHIP) EMERGENCY SHELTER KITCHEN,Community Kitchen,104 Stirling Ave S,Type not a storefront
+A061BA7F-3347-477B-BD59-0F51D22C97F1,SHORT FINGER BREWING CO. LTD.,Food Warehouse / Depot,20 Hurst Ave,Type not a storefront
+527C46B7-9C33-46D4-9ABB-DD19B0EBD233,SOUL FOOD,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+562B09F0-AE9E-425B-8374-0E7B4E82BD02,ST STEPHEN'S LUTHERAN CHURCH,Community Kitchen,248 HIGHLAND RD E,Type not a storefront
+BAA12F8C-5B26-494C-BB24-48E2DF8C7713,ST. ANDREW'S PRESBYTERIAN CHURCH,Church Kitchen Facility,54 QUEEN ST N,Type not a storefront
+C856EC3F-1BBE-4274-A6E3-B09FB3DBE929,ST. DAVID CSS - CAFETERIA,School Cafeteria,4 HIGH ST,Type not a storefront
+857573B1-D4A4-40A4-AC3B-D026C04760BC,ST. DAVID CSS - TEACHING KITCHEN,School Cafeteria,4 HIGH ST,Type not a storefront
+1A7D12B2-B911-43FC-A9A1-EBA7CFF72A17,ST. GEORGE BANQUET HALL,Banquet Hall,665 KING ST N,Type not a storefront
+1A95A2A6-6B07-4100-9437-46D2BE7A4540,ST. JEROME'S UNIVERSITY,School Cafeteria,290 WESTMOUNT RD N,Type not a storefront
+D9C5F0ED-5599-47BA-8DCE-11C08F98952F,ST. JEROME'S UNIVERSITY - THE BUTTERY,Community Kitchen,290 Westmount Rd N,Type not a storefront
+5C69C00E-C4A6-4E90-ADFD-9710A728429C,ST. JOHN'S KITCHEN,Community Kitchen,97 VICTORIA ST N,Type not a storefront
+AAFCC61B-CA7E-40E6-86FA-0A21FB0E4C27,ST. MARK'S - INDWELL COMMUNITY HOUSING,Serving Kitchen,825 King street west,Type not a storefront
+86E19587-C71D-41C7-89CA-7A0C8D9A15D8,ST. MARY'S HOSPITALITY,School Cafeteria,1500 Block Line Rd,Type not a storefront
+1AFFBC04-BF44-44CF-B597-B917132E6B7B,ST. MATTHEW'S LUTHERAN CHURCH - FELLOWSHIP HALL,Serving Kitchen,54 BENTON ST,Type not a storefront
+C0A53854-F63C-4ACF-991C-CA7D8ABB1751,ST. MICHAEL CHURCH,Church Kitchen Facility,80 University Avenue West,Type not a storefront
+1F8151FC-17E9-4145-AB01-E56574520281,ST. PAUL'S LUTHERAN CHURCH,Community Kitchen,137 QUEEN ST S,Type not a storefront
+6AD140AE-AB33-4045-B55D-8522A4613975,ST. PAUL'S UNITED COLLEGE - WATSON'S EATERY,School Cafeteria,190 WESTMOUNT RD N,Type not a storefront
+8D7CBC30-935B-4A56-AFB6-4E8A8F3168C1,STANLEY PARK COMMUNITY CENTRE,Community Kitchen,505 FRANKLIN ST N,Type not a storefront
+1BD5C65F-9433-4AD1-9DF2-9D9C81BC6334,SUMBEE PASTRIES - CHANDLER MOWAT COMMUNITY CENTRE,Caterer / Commissary,222 Chandler Dr,Type not a storefront
+8941F67A-4731-4152-BC08-448D7A40870E,SUMBEEPASTRIES - STORAGE,Food Warehouse / Depot,74 Fallowfield Drive,Type not a storefront
+B121D18E-FAAC-4D0E-BCDE-863484CD3B21,SUNRISE CATERING,Workplace Cafeteria,125 Northfield Dr W,Type not a storefront
+E9D08690-5B37-45AA-9F0F-926DFABA5E27,SWEETCAKESNSLICES,Caterer / Commissary,222 Chandler Dr,Type not a storefront
+12DC17A1-C8BF-426D-A78E-145BC1B305A4,St. John the Baptist Romanian Orthodox Church - Culture Club,Banquet Hall,2150 Bleams Rd,Type not a storefront
+79E3DF8B-C4F5-421A-9EDA-469A45171CD7,Stanley Park Community Church ,Church Kitchen Facility,9 Dreger Ave,Type not a storefront
+16FFB463-AC30-4A92-8EA2-0EA25A6B3FC3,Steckle Heritage Farm,Serving Kitchen,811 Bleams Rd,Type not a storefront
+F5797C6E-C7CF-470F-863B-4B26FE486A8A,Stirling Avenue Mennonite Church / The Raw Carrot,Church Kitchen Facility,57 Stirling Ave N,Type not a storefront
+08AA3682-2975-4005-AD04-7B31A02F95D5,TAVOLA DI TERRA,Caterer / Commissary,100 Fergus Ave,Type not a storefront
+A46F3FFB-D80F-4754-9DD8-13874D8478B1,THE CHURCH OF ST. JOHN EVANGELIST - COMMUNITY KITCHEN CO-OPERATIVE KITCHENER,Community Kitchen,23 Water St N,Type not a storefront
+D349D7E3-53AD-4D53-86E3-F4F4381A670A,"THE CHURCH OF ST. JOHN EVANGELIST - Co - op program, A Better Tent City",Church Kitchen Facility,23 WATER ST N,Type not a storefront
+329FF3EF-07A9-46EE-8FA3-55FC120124F4,THE DOUGH JOE BAKERY,Caterer / Commissary,20 Hurst Ave,Type not a storefront
+ABA2F048-DD5F-4CB1-A43D-EDC68A2EB812,THUNDERSTORM PRODUCTIONS INC.,Food Warehouse / Depot,283 Northfield Dr E,Type not a storefront
+4030E450-1AD5-4454-8253-45E625D3671F,TRAVERSE INDEPENDENCE - OPPORTUNITY CENTRE,Serving Kitchen,450 Westheights Dr,Type not a storefront
+8A5DCA5C-963D-421D-8C4A-363989276E43,TREATS BY JIL ,Caterer / Commissary,1405 King St E,Type not a storefront
+725DF214-5C2C-40FD-B9DD-F4A3B42F6AC2,TRI CITY MULTICULTURAL FOODS ,Caterer / Commissary,533 WEBER ST E,Type not a storefront
+2630AF3E-78D7-4698-8433-8637C441F99C,Teaching Kitchen - Laurel Heights Secondary School,School Cafeteria,650 Laurelwood Dr,Type not a storefront
+BD4FB554-F67C-41D9-A14A-E388DF61C5D6,The Traveling Chef (Seven Shores Cafe),Caterer / Commissary,10 Regina St N,Type not a storefront
+E880BC97-2D46-4931-8DCC-E2DFD145B4B4,The Village Parenting Centre,Community Kitchen,40 Francis St S,Type not a storefront
+F4DF536D-277F-4714-9F4C-C038BBC0E8D4,Three Cubs Treats,Caterer / Commissary,900 Marl Meadow,Type not a storefront
+B8114563-DFD3-4383-8932-AF80D3427D01,Trillium Lutheran Church-Community Ministry Program,Church Kitchen Facility,22 Willow St,Type not a storefront
+1FD1C9AF-E72B-4279-A2FE-861F95C9FD38,Trinity Church Kitchen,Church Kitchen Facility,330 Conservation Dr.,Type not a storefront
+ACC5F994-4D99-4120-9F5E-668CA152DD6F,UW - DC BYTES (DC) ,School Cafeteria,200 University Avenue West,Type not a storefront
+29626549-CC16-45EB-9FBD-A1E68EA73251,UW - FRESH EXPRESS (CMH),Caterer / Commissary,200 UNIVERSITY Ave W,Type not a storefront
+90DDBC88-747F-49EF-B19F-364B52B75897,UW - REVelation (RON EYDT VILLAGE),School Cafeteria,200 UNIVERSITY Ave W,Type not a storefront
+8655042D-5690-465E-BC9D-89A761829A2E,UW - THE MARKET AT UWP (CMH),School Cafeteria,165 University Ave W,Type not a storefront
+1F1665DB-FEC7-4BF7-B8DE-26C0BF279DDD,UW - TOBY JENKINS TEACHING KITCHEN (TJB),Community Kitchen,340 HAGEY BLVD,Type not a storefront
+C3F8D46B-D872-455E-8A07-A8985891DF73,UW - VILLAGE I (MUDIE'S),School Cafeteria,200 UNIVERSITY Ave W,Type not a storefront
+3DA4E7F1-ADF5-4F7C-B658-CEADE65BD28F,UW - WUSA FOOD SUPPORT SERVICE (SLC),Food Bank,200 UNIVERSITY Ave W,Type not a storefront
+4EC1C987-AEF6-4457-AF72-82E8D62561E5,UW - WUSA PREP KITCHEN (SLC),Caterer / Commissary,200 UNIVERSITY Ave W,Type not a storefront
+C1A15540-74C1-4445-98E8-362CAAFABA47,V.C. FOODS,Caterer / Commissary,6 Hoffman St,Type not a storefront
+0EC3AE39-CD12-4A75-B751-C20C05F61D67,VICTORIA HILLS COMMUNITY,Community Kitchen,10 CHOPIN DR,Type not a storefront
+A731C188-A2A9-4D44-A3C6-A43B93B9A506,VICTORIA PARK PAVILION,Banquet Hall,80 SCHNEIDER Ave,Type not a storefront
+31E1275B-7CC0-4838-BBDF-6318158393A8,VILLAGE CATERER,Caterer / Commissary,45 OTONABEE DR,Type not a storefront
+93E90BF3-F1FA-4056-8405-DC84ED900571,WATERLOO MENNONITE BRETHREN CHURCH,Church Kitchen Facility,245 LEXINGTON RD,Type not a storefront
+D2B3D2E0-446B-47D1-82F0-C8AB514A7E7A,WATERLOO PARK HOSPITALITY AREA,Banquet Hall,90 Westmount RD N,Type not a storefront
+B06BC0A4-B25E-4028-BE5F-591B24317C94,WATERLOO PENTECOSTAL ASSEMBLY,Community Kitchen,395 KING ST N,Type not a storefront
+7AB5F14A-B9F7-4691-81FE-92940B66BBD9,WATERLOO REGION COURTHOUSE,Workplace Cafeteria,85 FREDERICK ST,Type not a storefront
+522ED064-830E-4E44-85C3-A852692FA07D,WESTHEIGHTS COMMUNITY CHURCH,Church Kitchen Facility,82 Westheights Dr,Type not a storefront
+4242F099-4144-4781-BC68-A607329EEBE1,WING 404 R.C.A.F.A. ROTARY ADULT CENTRE,Community Kitchen,510 DUTTON DR,Type not a storefront
+EB1DD7CB-6259-422E-8C36-CCAF35820D44,WINNIE'S GLUTEN-FREE KITCHEN,Caterer / Commissary,70 Dumart Place,Type not a storefront
+8B262E30-45E0-49CD-B8E3-FA5F437F8C04,Waterloo Church of Christ,Church Kitchen Facility,470 Glenelm Crescent,Type not a storefront
+3C9E2C29-7856-4ADC-8369-9F850C61726E,Waterloo Region Museum,Workplace Cafeteria,10 HURON RD,Type not a storefront
+122F4994-4D8B-49B2-9F26-825BDE9FAD2D,Waterloo Wayside Food Bag Program ,Food Bank,22 Bridgeport Rd W,Type not a storefront
+01412313-F8B7-4ECB-AB25-B95157897A9C,Wicked Smart Hot Sauce,Food Warehouse / Depot,375 New Dundee Rd,Type not a storefront
+AFF7FE63-C4C7-4D1F-A177-13D23BAC02F3,Williamsburg Community Centre,Community Kitchen,200 Rosenburg Way,Type not a storefront
+3C93A8E3-2BDF-44C7-9810-EDCF173661F8,Wooden Boat Company,Food Warehouse / Depot,20 Hurst Ave,Type not a storefront
+53D6ACFD-65E4-4AD9-A37B-57AF2288D28E,YW SUPPORTIVE HOUSING - BLOCK LINE ROAD,Serving Kitchen,1470 Block Line Rd,Type not a storefront
