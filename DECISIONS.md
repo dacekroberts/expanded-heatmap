@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**223 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**224 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Band B's last eight: the owner's four calls before the builds](#2026-09-29---band-bs-last-eight-the-owners-four-calls-before-the-builds)
 - [Second batch review: nine branches merged, 75 cities; builds pause](#2026-09-29---second-batch-review-nine-branches-merged-75-cities-builds-pause)
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
@@ -262,6 +263,30 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Band B's last eight: the owner's four calls before the builds
+
+- **Gyeonggi: Namyangju, Ansan and Uijeongbu, each on its own page, as
+  recommended; the row closes after them (owner).** The three are the
+  remaining satellites with 12 or more stations (17, 12 and 20 OSM station
+  nodes, a floor). **The rest stay possible, not discarded**: Hwaseong
+  (19,499 storefronts, 7 stations), Anyang (14,815, 7) and Gimpo (11,453, 9,
+  its Goldline screened EDGE), noted here at the owner's request as possible
+  further pages.
+- **Hiroshima: build on the permissive reading of the city list's licence
+  (owner).** That reading is the city's dataset-level PDL 1.0 on DataEye,
+  plus the page calling the list open data. The full-list file has no
+  DataEye entry of its own and sits on a page that declares no licence. The
+  city was not asked (outreach is the last resort).
+- **Hiroshima: Hiroden's streetcars are drawn if they are substantial or
+  integral to the network (owner),** under the tram approval of 2026-09-29.
+  The build measures that from N02 and the operator's own figures and
+  records the result.
+- **Downloads and page write-ups are pre-approved for all eight (owner),**
+  as they were for Houston.
+- **Usage:** the weekly limit stood at 93% when the builds began. The
+  owner's 98% stop from the second review's entry applies, and they work in
+  steps.
 
 ### 2026-09-29 - Second batch review: nine branches merged, 75 cities; builds pause
 
