@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**229 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The three continuity disclosures written; Pittsburgh's mode; six merged branches deleted (owner)](#2026-09-30---the-three-continuity-disclosures-written-pittsburghs-mode-six-merged-branches-deleted-owner)
 - [Four continuity departures kept out and disclosed (owner)](#2026-09-30---four-continuity-departures-kept-out-and-disclosed-owner)
 - [Continuity: Sacramento's two precedents confirmed; the four waiting cells counted (owner)](#2026-09-30---continuity-sacramentos-two-precedents-confirmed-the-four-waiting-cells-counted-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
@@ -271,6 +272,24 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The three continuity disclosures written; Pittsburgh's mode; six merged branches deleted (owner)
+
+- **The owner approved the drafted disclosures, and they are in
+  `docs/excluded_categories.md`.**
+  - Buffalo: a petrol station with a shop is mapped through its State
+    licence, and dance-hall licences are left out.
+  - Sacramento: one or two nightclubs hold only an entertainment licence.
+    They are unnamed, because the identification came from general
+    knowledge.
+  - Boston: the 17 General On Premise licences.
+  - City pages get no line (owner): site-wide prose edits come later.
+- **Pittsburgh's `mode` is light rail (owner, 2026-09-30).** Its branch was
+  asked to carry it, and to move to one category under the food-shops rule.
+- **Deleted on GitHub (owner):** aarhus, buffalo, sacramento, houston,
+  continuity-buffalo-sacramento and handoff-band-b. Each was confirmed an
+  ancestor of origin/master immediately before. Their local copies were
+  deleted with the lightrail worktree.
 
 ### 2026-09-30 - Four continuity departures kept out and disclosed (owner)
 
