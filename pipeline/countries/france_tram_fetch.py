@@ -145,8 +145,13 @@ def fetch_osm(cfg, force):
     print(f"  {'osm_routes':20s} {len(rels)} relation(s), refs {refs} ({host})")
     want = set(cfg.OSM_REFS.values())
     if not want <= set(refs):
-        sys.exit(f"  OSM lacks the ref(s) {sorted(want - set(refs))} - check the "
-                 f"query's network tag against the relations")
+        msg = (f"OSM lacks the ref(s) {sorted(want - set(refs))} - check the "
+               f"relations' tags (Reims's carry no ref at all)")
+        if cfg.LINE_GEOMETRY == "osm":
+            sys.exit("  " + msg)
+        # Geometry is the feed's: OSM is only gate 3's cross-check here, so a
+        # missing ref costs gate 3 for that line, not the build.
+        print(f"  ⚠ {msg}; gate 3 needs another source for those lines")
     return host, len(rels)
 
 

@@ -2,13 +2,11 @@
 
 Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
 Overview.py's docstring for why this is the decided pattern
-for every city's detail page. Scaffolded by scripts/scaffold_city.py.
-
-THE PROSE IS THE FRENCH TRAM-CITY TEMPLATE, approved by the owner word for
-word on 2026-09-29 (`.claude/skills/france-tram-city/SKILL.md`, section 6),
-with this city's braces filled from its own build: step 1's spacing, step 2's
-non-diffusible share and food count, the rendered map's in-ring share. The
-controls paragraph and the heat caveat are Rennes's, unchanged.
+for every city's detail page. Scaffolded by scripts/scaffold_city.py; the prose
+written by scripts/france_page.py from the French tram-city template the owner
+approved word for word (2026-09-29; france-tram-city skill, section 6), every
+brace filled from this city's own build. Re-run that script after a rebuild
+rather than editing the figures by hand.
 """
 
 import json
@@ -25,7 +23,7 @@ from components import (  # noqa: E402
     set_base_font,
 )
 
-st.set_page_config(page_title="Le Mans Heatmap", page_icon="\U0001f5fa️", layout="wide")
+st.set_page_config(page_title="Le Mans Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
 
 render_city_nav("Le Mans")
@@ -34,31 +32,15 @@ st.title("Le Mans: commercial density around tram stops")
 
 st.markdown(
     """
-Two SETRAM tram lines are drawn, **Tram T1 and Tram T2**, each labelled on the
-map and in the legend, from the operator's own published timetable feed. Le
-Mans has no metro: its trams are its rapid transit, as Riga's are, so every
-tram stop gets rings.
+Two SETRAM tram lines are drawn, **Tram T1 and Tram T2**, each labelled on the map and in the legend, from the operator's own published timetable feed. Le Mans has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
 
 The map covers the **commune of Le Mans**.
 
-Businesses come from **SIRENE**, France's national register of
-établissements, joined to INSEE's geolocation file, the same sources as
-Paris, Marseille, Toulouse, Lille and Rennes. About one in six active
-establishments here are marked non-diffusible by INSEE, which withholds
-their name, address and coordinates together, so they never reach this map.
-Where SIRENE records no shop sign or trading name, the dot shows the address
-instead.
+Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as Paris, Marseille, Toulouse, Lille and Rennes. About 16% of active establishments here are marked non-diffusible by INSEE, which withholds their name, address and coordinates together, so they never reach this map. Where SIRENE records no shop sign or trading name, the dot shows the address instead.
 
-**Read the density as a register, not a street survey.** SIRENE records where
-a business is *registered*, and some registered establishments have no
-customer-facing shopfront; nothing in the data says which. Against
-OpenStreetMap's mapped restaurants in the same commune, where the two schemes
-mean nearly the same thing, this map carries about **1.8 times** as many
-points.
+**Read the density as a register, not a street survey.** SIRENE records where a business is *registered*, and some registered establishments have no customer-facing shopfront; nothing in the data says which. Against OpenStreetMap's mapped restaurants in the commune of Le Mans, where the two schemes mean nearly the same thing, this map carries about **1.8 times** as many points.
 
-**Tram stops sit closer together than metro stations**, a median of 437 m
-here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on
-the other French maps. **About 73% of storefronts sit within a ring.**
+**Tram stops sit closer together than metro stations**, a median of 440 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps. **About 73% of storefronts sit within a ring.**
 
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
@@ -72,11 +54,9 @@ cluster."
 """
 )
 
-# The snapshot, read from outputs/le_mans/provenance.json rather than hardcoded
-# so it cannot go stale on the next fetch. Licence Ouverte 2.0 asks for the
-# producer (Le Mans Métropole, the dataset's legal owner; SETRAM runs the
-# network) and the date of the data; the feed self-attests, so the window is
-# the operator's own. SIRENE's line carries INSEE's prescribed « Source : Insee ».
+# The snapshot, read from outputs/le_mans/provenance.json rather than
+# hardcoded so it cannot go stale on the next fetch. Licence Ouverte 2.0 asks for the producer and the date of the data.
+# SIRENE's line carries INSEE's prescribed « Source : Insee ».
 if PROVENANCE_JSON.exists():
     try:
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
@@ -91,7 +71,7 @@ if PROVENANCE_JSON.exists():
         _start = _iso(_fi.get("feed_start_date") or _nap.get("start_date"))
         _end = _iso(_fi.get("feed_end_date") or _nap.get("end_date"))
         if _taken:
-            _line = "Transit data © Le Mans Métropole (SETRAM), via transport.data.gouv.fr"
+            _line = "Transit data © CU Le Mans Métropole (SETRAM), via transport.data.gouv.fr"
             if _start and _end:
                 _line += f", from the feed published for **{_start}** to **{_end}**"
             st.caption(_line + f"; snapshot taken **{_taken}**.")

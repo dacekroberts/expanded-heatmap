@@ -33,6 +33,7 @@ from shapely.geometry import shape
 from shapely.ops import unary_union
 
 from pipeline import stations as station_gates
+from pipeline.baseline import emit
 
 # The collapsed-station floor for trams. The shared gate's default (400 m) is
 # a METRO floor; every city in the batch measured a 311-510 m median, and
@@ -67,12 +68,18 @@ def _routes(cfg, z):
     if agency:
         rail = rail[rail["agency_id"] == agency]
     excluded = getattr(cfg, "EXCLUDED_RAIL_ROUTES", {})
-    kept = rail[rail["route_short_name"].isin(cfg.LINE_KEYS)]
-    stray = sorted(set(rail["route_short_name"]) - set(cfg.LINE_KEYS) - set(excluded))
+    # A feed route that riders know as SEVERAL lines (Reims: one route "TRAM",
+    # two public lines T1 and T2 since 2025-11-24) is named in ROUTE_BRANCHES
+    # and split per trip in _trip_lines(); its branch keys are in LINE_KEYS.
+    branches = getattr(cfg, "ROUTE_BRANCHES", {})
+    branch_keys = {k for b in branches.values() for k in b}
+    wanted = {k for k in cfg.LINE_KEYS if k not in branch_keys} | set(branches)
+    kept = rail[rail["route_short_name"].isin(wanted)]
+    stray = sorted(set(rail["route_short_name"]) - wanted - set(excluded))
     if stray:
         sys.exit(f"the feed carries rail route(s) {stray} that are neither kept nor "
                  f"excluded in config - a line added is a scope decision")
-    missing = sorted(set(cfg.LINE_KEYS) - set(kept["route_short_name"]))
+    missing = sorted(wanted - set(kept["route_short_name"]))
     if missing:
         sys.exit(f"line(s) {missing} are not in the feed - a line withdrawn is a "
                  f"scope decision")
@@ -100,6 +107,58 @@ def _served_stop_times(z, trips):
     return pd.concat(parts, ignore_index=True)
 
 
+def _trip_lines(cfg, trips, st, stops, key_of):
+    """(trip_id, line) for every kept trip. A plain route's trips take its key.
+    A route in ROUTE_BRANCHES is split by the terminus each trip serves, matched
+    on the stop name (accents and case ignored): a trip serving one branch's
+    terminus is that line; a trip serving neither is a trunk working and
+    belongs to every branch (its stops are shared); a trip serving two is an
+    error, since then the split is not by terminus."""
+    branches = getattr(cfg, "ROUTE_BRANCHES", {})
+    out = []
+    plain = trips[~trips["route_id"].map(key_of).isin(branches)]
+    out.append(pd.DataFrame({"trip_id": plain["trip_id"],
+                             "line": plain["route_id"].map(key_of)}))
+    if branches:
+        names = stops.set_index("stop_id")["stop_name"].map(_norm)
+        served = st.assign(_n=st["stop_id"].map(names)).groupby("trip_id")["_n"].agg(set)
+        for route_short, legs in branches.items():
+            mine = trips[trips["route_id"].map(key_of) == route_short]
+            want = {k: _norm(v) for k, v in legs.items()}
+            first, rest = {}, []
+            for tid in mine["trip_id"]:
+                hits = [k for k, term in want.items()
+                        if any(term in n for n in served.get(tid, ()))]
+                if len(hits) > 1:
+                    sys.exit(f"trip {tid} serves the termini of {hits}: ROUTE_BRANCHES "
+                             f"cannot split {route_short} by terminus")
+                if hits:
+                    first[tid] = hits[0]
+                else:
+                    rest.append(tid)
+            # A short working serves neither terminus: it belongs to the branch
+            # whose OWN stops it serves (Reims's trips ending at Léon Blum are
+            # T2's), and only a trip on shared stops alone counts for both.
+            stops_of = {k: set().union(*(served[t] for t, b in first.items() if b == k))
+                        for k in legs}
+            own = {k: s - set().union(*(v for j, v in stops_of.items() if j != k))
+                   for k, s in stops_of.items()}
+            both = 0
+            for tid in rest:
+                hits = [k for k in legs if served.get(tid, set()) & own[k]]
+                if len(hits) == 1:
+                    first[tid] = hits[0]
+                else:
+                    both += 1
+                    for k in legs:
+                        out.append(pd.DataFrame({"trip_id": [tid], "line": [k]}))
+            out.append(pd.DataFrame({"trip_id": list(first), "line": list(first.values())}))
+            counts = pd.Series(list(first.values())).value_counts().to_dict()
+            print(f"  {route_short} split by branch: {counts}, {both} trip(s) on shared "
+                  f"stops only, counted for every branch")
+    return pd.concat(out, ignore_index=True)
+
+
 def pure_extract(cfg, z, key_of):
     """The owner's station rule. Returns (platforms, stations, non_revenue,
     dropped_pairs)."""
@@ -111,11 +170,11 @@ def pure_extract(cfg, z, key_of):
     keep_ids = (board if board is not None else served)
     keep_ids = {s for s in keep_ids if not str(s).startswith("FIC_")}
     non_revenue = sorted(served - keep_ids)
-    st = st[st["stop_id"].isin(keep_ids)].merge(trips, on="trip_id")
-    st["line"] = st["route_id"].map(key_of)
+    stops = _read(z, "stops.txt")
+    st = st[st["stop_id"].isin(keep_ids)]
+    st = st.merge(_trip_lines(cfg, trips, st, stops, key_of), on="trip_id")
     lines_of_stop = st.groupby("stop_id")["line"].agg(lambda s: set(s)).to_dict()
 
-    stops = _read(z, "stops.txt")
     stops["_order"] = np.arange(len(stops))
     by_id = stops.set_index("stop_id")
     plat = stops[stops["stop_id"].isin(keep_ids)].copy()
@@ -175,8 +234,11 @@ def osm_stop_counts(cfg):
         if e.get("type") != "relation":
             continue
         ref = (e.get("tags") or {}).get("ref")
-        n = sum(1 for m in e.get("members", ())
-                if m.get("type") == "node" and str(m.get("role", "")).startswith("stop"))
+        # DISTINCT positions: a relation may list one stop node twice (Tours's
+        # tram A does), and "stop_entry_only" / "stop_exit_only" at the termini
+        # are stops too, so the role test takes every "stop*" role.
+        n = len({(m.get("lat"), m.get("lon"), m.get("ref")) for m in e.get("members", ())
+                 if m.get("type") == "node" and str(m.get("role", "")).startswith("stop")})
         if ref and n > best.get(ref, 0):
             best[ref] = n
     return best
@@ -301,6 +363,11 @@ def build_stations(cfg, name):
            .sort_values("station"))
     out.to_csv(cfg.STATIONS_CSV, index=False, encoding="utf-8")
     print(f"  {len(out)} stations -> {cfg.STATIONS_CSV.relative_to(cfg.ROOT)}")
+    emit("platforms", len(plat))
+    emit("stations_network", len(st))
+    emit("stations_in_scope", len(out))
+    for k in cfg.LINE_KEYS:
+        emit(f"stations_line_{k}", per_line[k])
 
 
 # --- step 3 ---------------------------------------------------------------
@@ -314,8 +381,12 @@ def _gtfs_line_shapes(cfg):
         key_of = dict(zip(routes["route_id"], routes["route_short_name"]))
         trips = _read(zf, "trips.txt", usecols=["route_id", "trip_id", "shape_id"])
         trips = trips[trips["route_id"].isin(cfg.ROUTE_IDS)].dropna(subset=["shape_id"])
-        trips["key"] = trips["route_id"].map(key_of)
         st = _served_stop_times(zf, trips)
+        stops = _read(zf, "stops.txt")
+    # Split by branch where ROUTE_BRANCHES says so; a trunk trip counts for
+    # every branch, and its shape stays a candidate for each.
+    trips = trips.merge(_trip_lines(cfg, trips, st, stops, key_of)
+                        .rename(columns={"line": "key"}), on="trip_id")
     link = st.merge(trips[["trip_id", "key", "shape_id"]], on="trip_id")
     shape_stops = link.groupby(["key", "shape_id"])["stop_id"].agg(set).to_dict()
     shape_trips = trips.groupby(["key", "shape_id"])["trip_id"].count().to_dict()

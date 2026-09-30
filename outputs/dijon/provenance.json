@@ -1,0 +1,22 @@
+{
+  "fetched_utc": "2026-09-30T23:01:30+00:00",
+  "gtfs_url": "https://www.data.gouv.fr/api/1/datasets/r/e0dbd217-15cd-4e28-9459-211a27511a34",
+  "gtfs_licence": "lov2",
+  "boundary_url": "https://geo.api.gouv.fr/communes/21231?geometry=contour&format=geojson",
+  "feed_info": null,
+  "nap": {
+    "dataset": "Réseau urbain DiviaMobilités",
+    "dataset_updated": "2026-09-30T03:27:44.363282Z",
+    "resource_updated": "2026-09-29T11:38:16.800000Z",
+    "start_date": "2026-01-01",
+    "end_date": "2026-12-31",
+    "licence": "lov2"
+  },
+  "osm_query": "[out:json][timeout:120];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](47.27,4.94,47.4,5.12);out geom;",
+  "osm_host": "overpass-api.de",
+  "osm_relations": 4,
+  "sirene_etab_title": "Sirene : Fichier StockEtablissement - 01 septembre 2026 (format parquet)",
+  "sirene_etab_last_modified": "2026-09-01T09:08:32.653000+00:00",
+  "sirene_geoloc_title": "Sirene : Fichier géolocalisation établissements - septembre 2026 (format parquet)",
+  "sirene_geoloc_last_modified": "2026-09-21T07:01:06.423000+00:00"
+}

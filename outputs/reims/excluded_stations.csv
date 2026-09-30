@@ -1,0 +1,4 @@
+stop_id,station,lines,reason,latitude,longitude
+151784,Gare de Champagne-Ardenne TGV,T2,"in Bezannes (51058), outside commune 51454",49.2150309,3.9949648
+103060,POLYCLINIQUE,T2,"in Bezannes (51058), outside commune 51454",49.2176827,4.0004713
+103228,NEUFCHATEL,T1/T2,"in Bétheny (51055), outside commune 51454",49.2850065,4.0278349
