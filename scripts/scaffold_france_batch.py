@@ -26,10 +26,10 @@ WRITES, per city (real run):
   then runs scaffold_city.py for __init__.py, step3_map.py, the app page and
   the cities.py entry; its generic config.py is skipped because ours exists.
 
-DOES NOT WRITE step1_stations.py or fetch_sources.py. Twenty copies of Rennes's
-240-line step 1 is the shape `france_register.py` exists to prevent. The
-`france-tram-city` skill says what the first batch build writes instead (a
-shared tram module); this script prints the reminder per city.
+AND the thin fetch_sources.py, step1_stations.py and step3_map.py over the
+shared tram module (`pipeline/countries/france_tram.py` for the steps,
+`france_tram_fetch.py` for downloads): twenty copies of Rennes's 240-line step 1
+is the shape `france_register.py` exists to prevent.
 
 WHAT EVERY VALUE IS. Measured values come from the inputs above and say so in
 the generated comment. The owner's calls (scope, `mode`, `coverage`, a line
@@ -154,6 +154,32 @@ BATCH = {
                          lines=["T1", "T2"], scope="regional",
                          names={k: f"Tram {k}" for k in ("T1", "T2")},
                          feed_notes="two or three route_ids per line with differing route_color; the network spans two EPCIs"),
+}
+# Each feed's NAP dataset id (read 2026-09-30): the provenance step reads the
+# resource's `updated` date and window from it when the zip carries no dated
+# feed_info.txt, and refuses a changed licence.
+NAP_IDS = {
+    "montpellier": "662ba9a3f7d9ff84a3060d0a", "nice": "685181f3733800e180c475fa",
+    "strasbourg": "5ae1715488ee384c8ba0342b", "bordeaux": "67f5bad303325228295b7dff",
+    "nantes": "685d9000ec5a7481ab634360", "grenoble": "5af03701b595081c1880a8a4",
+    "rouen": "5ced52ed8b4c4177b679d377", "caen": "5ced52ed8b4c4177b679d377",
+    "saint_etienne": "5c34c93f8b4c4104b817fb3a", "dijon": "5d31d8b69ce2e703da90b699",
+    "tours": "638157af7f6b7cd00e2908e1", "le_havre": "617c12b7f9aaa6853cf6d303",
+    "mulhouse": "63c02bbf4059d43863de0c81", "reims": "63b4c3d200fbf8e5ed9dde9a",
+    "brest": "55ffbe0888ee387348ccb97d", "besancon": "5b5b090988ee385b10198107",
+    "orleans": "61fb1b864ba517c310952886", "le_mans": "5acb75f0c751df341652c886",
+    "avignon": "5ae2e01d88ee381811e691b5", "valenciennes": "63eb6d550f2b31a8efe618fe",
+}
+# Line geometry from OpenStreetMap where the feed has no usable shapes: no
+# shapes.txt (Montpellier, Strasbourg, Le Havre), or the Normandie
+# aggregate's stop-to-stop AUTO_ shapes (Caen, Rouen). Everywhere else, the
+# feed's own shapes.txt.
+OSM_GEOMETRY = {"montpellier", "strasbourg", "le_havre", "caen", "rouen"}
+# Stations outside every French commune file, named by hand (Kehl, Germany).
+EXCLUDED_STATION_PLACES = {
+    "strasbourg": {"Hochschule / Läger": "Kehl, Germany",
+                   "Kehl Bahnhof": "Kehl, Germany",
+                   "Kehl Rathaus": "Kehl, Germany"},
 }
 MODE_DEFAULT = "tram"
 COVERAGE_DEFAULT = "full"   # SIRENE carries all three buckets in every French city
@@ -322,6 +348,8 @@ GTFS_LICENCE = "@@LICENCE@@"
 # TODO: re-read at build - does the build-day zip carry feed_info.txt with a
 # feed_end_date? True means the page can quote the operator's own window.
 GTFS_SELF_ATTESTS = None
+# The NAP dataset: fetch_sources.py reads the resource's date and window from it.
+GTFS_NAP_ID = "@@NAP_ID@@"
 
 BOUNDARY_COMMUNE_CODE = "@@CORE@@"
 # ⚠ `geometry=contour`, NOT `fields=contour` (a 120-byte POINT, no error).
@@ -388,6 +416,12 @@ LINE_NAMES = @@LINE_NAMES@@  # TODO verify
 # one and it is unambiguous; pipeline/linecolour.py decides a clash.
 LINE_COLOURS = {}
 
+# The map's layer and title prefix for the lines.
+MAP_SYSTEM_NAME = "@@SYSTEM_NAME@@"
+# Where the line GEOMETRY comes from: "gtfs" (the feed's shapes.txt) or "osm".
+# Stations come from the feed either way.
+LINE_GEOMETRY = "@@GEOMETRY@@"
+@@OSM_BLOCK@@@@PLACES_BLOCK@@
 # --- Business filtering ------------------------------------------------
 
 # EXACT INSEE codes, from the station table's own commune placement.
@@ -459,6 +493,91 @@ def comment(text, first="# ", rest="# "):
 def pyrepr(obj):
     """A literal that reads as the repo's own configs do (double quotes)."""
     return json.dumps(obj, ensure_ascii=False)
+
+
+def osm_block(slug, spec, m):
+    b = m["bbox"]
+    use = ("the LINE GEOMETRY and gate 3's count" if slug in OSM_GEOMETRY
+           else "gate 3's independent per-line count (geometry is the feed's)")
+    return (
+        f"# OpenStreetMap route relations, for {use}: ONE query per city, cached by\n"
+        "# fetch_sources.py (the owner's Overpass rule). TODO: check the relations'\n"
+        "# `network` tag and refs at build and narrow the query to the operator's.\n"
+        'OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"\n'
+        "OSM_ROUTES_QUERY = (\n"
+        '    "[out:json][timeout:120];"\n'
+        '    \'relation["type"="route"]["route"~"^(tram|light_rail)$"]\'\n'
+        f'    "({b['lat_min']},{b['lon_min']},{b['lat_max']},{b['lon_max']});"\n'
+        '    "out geom;")\n'
+        "# line key -> the relations' `ref` tag. TODO verify against the fetched file.\n"
+        f"OSM_REFS = {pyrepr({k: k for k in spec['lines']})}\n")
+
+
+FETCH = '''"""Download @@NAME@@'s raw inputs: the rolling feed (always fresh), the
+commune and EPCI contours, OpenStreetMap geometry where the config asks for it,
+and the national SIRENE parquets (shared).
+
+    python pipeline/@@SLUG@@/fetch_sources.py [--skip-parquet] [--force]
+
+Thin over `pipeline/countries/france_tram_fetch.py`. Deliberately not named
+step*.py, so drift_check.py never runs it.
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from pipeline.countries.france_tram_fetch import fetch_all
+from pipeline.@@SLUG@@ import config
+
+if __name__ == "__main__":
+    fetch_all(config)
+'''
+
+STEP1 = '''"""@@NAME@@ step 1: the stations in scope, under the owner's pure-extract rule.
+
+    python pipeline/@@SLUG@@/step1_stations.py
+
+Thin over `pipeline/countries/france_tram.py`; reads the cache only.
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from pipeline.countries.france_tram import build_stations
+from pipeline.@@SLUG@@ import config
+
+if __name__ == "__main__":
+    build_stations(config, "@@NAME@@")
+'''
+
+STEP3 = '''"""@@NAME@@ step 3: render the heatmap to outputs/@@SLUG@@/heatmap.html.
+
+    python pipeline/@@SLUG@@/step3_map.py
+
+Thin over `pipeline/countries/france_tram.py`, which calls
+`pipeline/map_common.py`'s render_heatmap(); nothing here forks it.
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from pipeline.countries.france_tram import render
+from pipeline.@@SLUG@@ import config
+
+if __name__ == "__main__":
+    render(config, "@@DISPLAY@@")
+'''
+
+
+def wrappers(slug, spec):
+    name = re.sub(r" \(Regional\)$", "", spec["name"])
+    vals = {"NAME": name, "SLUG": slug, "DISPLAY": spec["name"]}
+    return {"fetch_sources.py": fill(FETCH, vals),
+            "step1_stations.py": fill(STEP1, vals),
+            "step3_map.py": fill(STEP3, vals)}
 
 
 def render(slug, spec, m, feeds, sdir):
@@ -552,6 +671,12 @@ def render(slug, spec, m, feeds, sdir):
         "LINE_NAMES": pyrepr(spec["names"]),
         "PREFIXES": pyrepr(list(prefixes)).replace("[", "(").replace("]", ",)" if len(prefixes) == 1 else ")"),
         "BBOX_WHAT": bbox_what, "BBOX_NAME": f"{slug.upper()}_BBOX", "BBOX": pyrepr(m["bbox"]),
+        "NAP_ID": NAP_IDS[slug],
+        "SYSTEM_NAME": "Métro" if slug == "rouen" else ("Tram and Téléphérique" if slug == "brest" else "Tram"),
+        "GEOMETRY": "osm" if slug in OSM_GEOMETRY else "gtfs",
+        "OSM_BLOCK": osm_block(slug, spec, m),
+        "PLACES_BLOCK": (f"EXCLUDED_STATION_PLACES = {pyrepr(EXCLUDED_STATION_PLACES[slug])}\n"
+                         if slug in EXCLUDED_STATION_PLACES else ""),
     }
     config_text = fill(CONFIG, values)
     step2_text = fill(STEP2, {"NAME": re.sub(r" \(Regional\)$", "", spec["name"]),
@@ -645,15 +770,19 @@ def main():
             write(out / "config.py", config_text, False, True, f"{out / 'config.py'}")
             write(out / "step2_clean_businesses.py", step2_text, False, True,
                   f"{out / 'step2_clean_businesses.py'}")
+            for fname, text in wrappers(slug, spec).items():
+                write(out / fname, text, False, True, f"{out / fname}")
             continue
         write(root / "pipeline" / slug / "config.py", config_text, args.dry_run, args.force,
               f"pipeline/{slug}/config.py (French tram config)")
         write(root / "pipeline" / slug / "step2_clean_businesses.py", step2_text, args.dry_run,
               args.force, f"pipeline/{slug}/step2_clean_businesses.py")
+        # BEFORE scaffold_city.py, so it finds our step3_map.py and skips its
+        # generic one, as it does config.py.
+        for fname, text in wrappers(slug, spec).items():
+            write(root / "pipeline" / slug / fname, text, args.dry_run, args.force,
+                  f"pipeline/{slug}/{fname} (thin, over france_tram)")
         run_scaffold(root, slug, spec, m, args.dry_run, args.force)
-        if not (root / "pipeline" / "countries" / "france_tram.py").exists():
-            print("    not written: step1_stations.py, fetch_sources.py - the first batch build "
-                  "writes the shared tram module (france-tram-city skill, 'Step 1')")
         print()
     if not args.preview_dir and not scaffold_supports_mode(root):
         print("⚠ scaffold_city.py has no --mode yet (it arrives with the macro-legend branch):\n"
