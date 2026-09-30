@@ -665,6 +665,20 @@ REGISTRIES = {
                       processed="businesses_clean.csv", address=None),
 }
 
+# The France tram batch (2026-09-30): twenty cities on the same shared French
+# step 2 as Paris to Rennes (pipeline/countries/france_register.py), so the same
+# structural guarantee - no registrant-name column is ever loaded, and a row
+# without a shop sign or usual name shows its address. One entry each, so the
+# check still names every city it has measured.
+REGISTRIES.update({
+    slug: dict(raw=None, trade=None, owner=None,
+               processed="businesses_clean.csv", address=("business_name",))
+    for slug in ("montpellier", "nice", "strasbourg", "bordeaux", "nantes",
+                 "grenoble", "rouen", "saint_etienne", "dijon", "tours",
+                 "le_havre", "mulhouse", "reims", "caen", "brest", "besancon",
+                 "orleans", "le_mans", "avignon", "valenciennes")
+})
+
 # Unit designators that suggest a residence, as opposed to a commercial suite.
 # Splitting these is why Los Angeles' jewellery district stopped reading as 42%
 # "residential" (DECISIONS.md, 2026-09-21): STE in the Diamond District is an

@@ -181,6 +181,15 @@ EXCLUDED_STATION_PLACES = {
                    "Kehl Bahnhof": "Kehl, Germany",
                    "Kehl Rathaus": "Kehl, Germany"},
 }
+# Legacy INSEE codes inside each scope: communes associées or déléguées whose
+# chef-lieu is a commune in scope, which SIRENE may still carry (Lille's Lomme
+# 59355 and Hellemmes 59298). Measured 2026-09-30 from geo.api.gouv.fr's
+# communes_associees_deleguees, with Lille as the control (it returned exactly
+# those two). Every other batch scope has none.
+LEGACY_CODES = {
+    "le_havre": {"76539": "Rouelles"},
+    "saint_etienne": {"42190": "Rochetaillée"},
+}
 MODE_DEFAULT = "tram"
 COVERAGE_DEFAULT = "full"   # SIRENE carries all three buckets in every French city
 
@@ -285,7 +294,7 @@ per-city folder architecture (see docs/project_context.md, "Architecture").
 Scaffolded by scripts/scaffold_france_batch.py (the France tram batch) from the
 2026-09-27 screen's inputs and the station table in `@@SDIR@@`.
 Read `.claude/skills/france-tram-city/SKILL.md` and
-`docs/build_briefs/@@SLUG@@.md` before filling anything. Every TODO is a value
+`docs/build_briefs/@@SLUG@@.md` before filling anything. Every to-do marker is a value
 only the build-day feed or the owner can supply; none may ship.
 """
 
@@ -425,8 +434,7 @@ LINE_GEOMETRY = "@@GEOMETRY@@"
 # --- Business filtering ------------------------------------------------
 
 # EXACT INSEE codes, from the station table's own commune placement.
-# TODO: count each code in SIRENE at step 2 and look for legacy codes inside
-# these contours (Lille's Lomme and Hellemmes: MEL's labels and INSEE's differ).
+@@LEGACY_NOTE@@
 COMMUNE_PREFIXES = @@PREFIXES@@
 
 CITY_KEEP = "@@NAME_UPPER@@"   # scaffold field; COMMUNE_PREFIXES is the filter
@@ -623,7 +631,7 @@ def render(slug, spec, m, feeds, sdir):
                         f"EXPECTED_SERVED_COMMUNES = {pyrepr(served)}\n"
                         f"# Per line, network-wide (the regional scope keeps every station):\n"
                         f"EXPECTED_STATIONS_PER_LINE = {pyrepr({k: v['total'] for k, v in m['per_line'].items()})}\n")
-        prefixes = tuple(codes)
+        prefixes = tuple(codes) + tuple(LEGACY_CODES.get(slug, {}))
         bbox_what = "served communes'"
     else:
         scope_why = (f"the worst line, {w_line}, keeps {w['inside']} of {w['total']} "
@@ -638,7 +646,7 @@ def render(slug, spec, m, feeds, sdir):
         if m["outside_epci"]:
             scope_assert += ("# ⚠ Outside every EPCI contour, so no commune file names them: "
                              f"{', '.join(m['outside_epci'])}.\n")
-        prefixes = (m["core"],)
+        prefixes = (m["core"],) + tuple(LEGACY_CODES.get(slug, {}))
         bbox_what = "commune's"
     drop = ""
     if spec.get("drop") or spec.get("pending"):
@@ -672,6 +680,11 @@ def render(slug, spec, m, feeds, sdir):
         "PREFIXES": pyrepr(list(prefixes)).replace("[", "(").replace("]", ",)" if len(prefixes) == 1 else ")"),
         "BBOX_WHAT": bbox_what, "BBOX_NAME": f"{slug.upper()}_BBOX", "BBOX": pyrepr(m["bbox"]),
         "NAP_ID": NAP_IDS[slug],
+        "LEGACY_NOTE": comment(
+            "Legacy codes checked 2026-09-30 against geo.api.gouv.fr's communes "
+            "associées and déléguées (Lille's 59298 and 59355 the control): "
+            + (", ".join(f"{c} {n}" for c, n in LEGACY_CODES[slug].items())
+               + " included." if slug in LEGACY_CODES else "none in this scope.")),
         "SYSTEM_NAME": "Métro" if slug == "rouen" else ("Tram and Téléphérique" if slug == "brest" else "Tram"),
         "GEOMETRY": "osm" if slug in OSM_GEOMETRY else "gtfs",
         "OSM_BLOCK": osm_block(slug, spec, m),

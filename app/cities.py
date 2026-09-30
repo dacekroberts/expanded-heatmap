@@ -1973,6 +1973,29 @@ CITIES = [
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
     },
+    {
+        "name": "Le Mans",
+        "lat": 47.982,
+        "lon": 0.2012,
+        "page": "pages/76_Le_Mans_Heatmap.py",
+        "coverage": "full",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "SETRAM trams T1 and T2",
+        "region": "Europe",
+        "country": "France",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
