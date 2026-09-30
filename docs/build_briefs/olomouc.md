@@ -10,6 +10,21 @@ built on Prague's modules.
 
 ---
 
+## For the owner, with the build
+
+**Approved (owner, 2026-09-30; DECISIONS "The Czech batch's calls and prose approved as recommended")**: every call below as recommended, and the prose. **Build order: Brno, Plzeň, Olomouc, Ostrava, Liberec, Most.** Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** (macro dot colour) | **`tram`** | Street trams, no metro |
+| **`coverage`** (macro dot fill) | **`full`** | All three buckets |
+| **Scope** | **Obec Olomouc** | See the rail section |
+| **Lines drawn** | Trams 1–7 (OSM, owner 2026-09-30) | |
+| **Rings** | halved: median gap 318 m | The owner's spacing rule (`docs/ring_rules.md`) |
+| **Call (approved): Colours** | the project's palette, `line_colour_search.py`, evenly spaced hues | |
+
+---
+
 ## The one-line summary
 
 **Prague's modules with obec 500496, seven tram lines wholly inside the city, drawn from OSM (owner, 2026-09-30).**
@@ -76,7 +91,7 @@ forms (`NAME_SUPPRESSED_FORMS`).
 
 ## Build-time calls
 
-1. **The palette** (below).
+1. **The palette** (approved, owner 2026-09-30): choose at the build with `scripts/line_colour_search.py` (3:1 contrast on both map pages, CIE76 45 or more from every pin), aiming at evenly spaced hues, since no operator hue is licensed.
 
 ```brief-checks
 [
@@ -119,7 +134,21 @@ forms (`NAME_SUPPRESSED_FORMS`).
     "claim": "The derived UTM zone is 33N (EPSG:32633)",
     "kind": "utm_zone_from_longitude",
     "lon": 17.25,
-    "expect": "EPSG:32633"
+    "expect": "EPSG:32633",
+    "mode": "tram",
+    "coverage": "full",
+    "scope": "obec",
+    "crs": "EPSG:32633",
+    "obec_codes": [
+      "500496"
+    ],
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED",
+      "obec_codes": "OBEC_CODES"
+    }
   }
 ]
 ```

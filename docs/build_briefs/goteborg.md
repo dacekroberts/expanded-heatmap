@@ -9,6 +9,28 @@ It shares a single owner decision with **Zurich** and **Stockholm**.
 
 ---
 
+## For the owner, with the build (refreshed 2026-09-30; supersedes the sections below where they differ)
+
+**Approved before this brief (owner, 2026-09-30; `docs/handoff_tram_kit_2026-09-30.md`, cdee504)**: the calls below as recommended, and the page-text template. The measurements here confirm the facts behind each call; where one differs, it says so. Builds wait for the owner's explicit go.
+
+| | Proposed | Why |
+|---|---|---|
+| **`mode`** | **`tram`** | Göteborgs Spårvägar, street trams; no metro |
+| **`coverage`** | **`one_bucket`** | Food service plus food shops, and food shops count as food under the two-key legend |
+| **Scope** | **Göteborgs Stad** (OSM 935611) | The register is the city's |
+| **Lines drawn** | Trams 1–13 in their OSM colours; **4 and 12 drawn to their ends, with the Mölndal stops listed as outside** | Stub test below; the heritage Lisebergslinjen is out |
+| **Rings** | halved: **127 stop names, median gap 378 m** | The owner's spacing rule |
+| **Call (approved): lines 4 and 12** | **Drawn**: 4 keeps 15 of 20 (75%), 12 keeps 13 of 18 (72%) | Both pass the stub test; the five Mölndal stops (Krokslätts Fabriker, Krokslätts torg, Lackarebäck, Mölndals Innerstad, Mölndals sjukhus) are outside |
+| **Call (approved): blank `typ`** | **Classify by name where the name shows a counter; drop the rest** | A first pass on 274 rows: about 52 food, 22 food shops; about 24 institutional, out; about 176 unclear, dropped (the build refines, e.g. 7-Eleven, 24SJU as shops) |
+| **Call (approved): undated rows** | The page says the rows carry no date | New York State's food stores, Milan, Surrey |
+
+**Measured 2026-09-30** (live OSM): lines 1, 2, 3, 5, 6, 7, 8, 9, 10, 11 and 13 wholly inside; line 1's OSM colour is `#FFFFFF`
+(white), so check its contrast on both map pages and keep it if it passes; lines 4, 5, 6, 7, 8, 10 and 11 carry two OSM colour
+values, so take the hex one. **The register, re-read 2026-09-30:** 5,066 rows (5,063 on 2026-09-23): food service 2,167, food shops
+906 (retail on the page, New York's precedent), institutions, wholesale and transport 1,719 out, 274 blank `typ` (the call above).
+
+---
+
 ## The one-line summary
 
 **No geocoding leg, CC0, the cleanest taxonomy in the project — and a second
@@ -167,7 +189,57 @@ failed its own control.
     "claim": "The licence is CC0 and it is on the DISTRIBUTION node, not the dataset. Foodbusinesses (store/6/resource/35) carries fourteen properties and no license, rights or accessRights of any kind - a reader checking the dataset node would record Goteborg as SILENT and be wrong in the permissive direction",
     "kind": "http_contains",
     "url": "https://catalog.goteborg.se/store/6/metadata/57479",
-    "present": ["publicdomain/zero"]
+    "present": [
+      "publicdomain/zero"
+    ]
+  },
+  {
+    "id": "goteborg-osm-tram-refs",
+    "claim": "OSM carries Göteborg's trams 1–13 by ref (2026-09-30)",
+    "kind": "osm_route_refs",
+    "bbox": [
+      57.6,
+      11.85,
+      57.82,
+      12.12
+    ],
+    "routes": [
+      "tram"
+    ],
+    "require_refs": {
+      "tram": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ]
+    }
+  },
+  {
+    "id": "goteborg-projected-crs",
+    "claim": "The derived UTM zone is EPSG:32632",
+    "kind": "utm_zone_from_longitude",
+    "lon": 11.97,
+    "expect": "EPSG:32632",
+    "mode": "tram",
+    "coverage": "one_bucket",
+    "scope": "city",
+    "crs": "EPSG:32632",
+    "vs_config": {
+      "mode": "MAP_MODE",
+      "coverage": "MAP_COVERAGE",
+      "scope": "SCOPE",
+      "crs": "CRS_PROJECTED"
+    }
   }
 ]
 ```
