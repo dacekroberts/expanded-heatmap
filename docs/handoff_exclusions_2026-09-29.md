@@ -322,8 +322,21 @@ and Prague (Flora). Builds pause here (owner). Left open:
   as_of_date, falling back to the file's UTC date); queued for the next review.
   Buffalo and Sacramento use the same UTC pattern but show the right date,
   since both were fetched before midnight UTC.
+- **Before the next review, reconcile Bergen's register date (owner):** the
+  live caption reads "business register downloaded 2026-09-24", which is the UTC
+  date of the file's mtime (2026-09-24T01:30:45Z, provenance `files_utc`).
+  Bergen's brief, its DECISIONS entry ("Bergen built on Oslo's modules...")
+  and Oslo's records say 2026-09-23, the local date of the same download. Both
+  are true. Either add a DECISIONS note and align
+  `docs/data_sources/norway.md` and the brief to UTC, or change the caption to
+  the local date (an `app/` change, for the next review). Houston's caption
+  fix (houston-caption) read the provenance date instead: take the same
+  approach here if the caption changes.
+- **Live check of Suwon, Bucheon and Bergen passed** (their build session, at
+  1280 and 375 px). Branches suwon, bucheon and bergen are deleted locally
+  and on origin (owner's OK, verified merged first).
 - **Branches merged and deletable** with the owner's word: stockholm-catering,
-  category-continuity, suwon, bucheon, bergen, aarhus, buffalo, sacramento,
+  category-continuity, aarhus, buffalo, sacramento,
   houston, continuity-buffalo-sacramento, review-batch-2, plus
   worktree-cleanup and review-2026-09-29 from the first review. Also
   `data/_review_category-continuity_2026-09-29/` (585 MB, local only), which is
