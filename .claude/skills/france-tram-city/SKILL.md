@@ -32,13 +32,22 @@ Build on a branch, never on master: `app/` lands at review time only.
    owner approves with the build: `mode`, `coverage`, scope, lines and any
    owner call. Bring the calls to the owner before writing code.
 3. `python scripts/scaffold_france_batch.py --only <slug> --dry-run`, then
-   `--go` once the owner has said go. This writes the French `config.py`, a
-   thin step 2, and (through `scaffold_city.py`) `__init__.py`,
-   `step3_map.py`, the app page and the `app/cities.py` entry.
-4. Fill every `TODO` from the **build-day** feed (route_ids, colours,
-   `GTFS_SELF_ATTESTS`, gate 3), then write step 1 and `fetch_sources.py`
-   (below). Run the steps, render, and run the checks under "Before
-   publishing".
+   `--go`. This writes the French `config.py`, three-line `fetch_sources.py`,
+   step 1, step 2 and step 3 over the shared module, and (through
+   `scaffold_city.py`) `__init__.py`, the app page and the `app/cities.py`
+   entry.
+4. `python pipeline/<slug>/fetch_sources.py` (always a fresh feed; one
+   Overpass query), then `python scripts/france_fill_build_day.py <slug>
+   --write`. That fills `GTFS_SELF_ATTESTS`, the route_ids, the colours and
+   gate 3 from the fresh feed and OpenStreetMap, and prints every value. Read
+   what it wrote, settle the public names, and clear every remaining to-do.
+5. Steps 1, 2 and 3. A French step 2 peaks at about 0.4 GB (measured): light
+   work, no notice needed. Then `python scripts/france_page.py <slug>
+   --write` writes the page from the approved template, with every brace from
+   the build. `python scripts/france_source_rows.py <slug> --write` adds the
+   source rows, and `python scripts/france_excluded_section.py` rewrites the
+   batch's section of `docs/excluded_categories.md`. Then the checks under
+   "Before publishing".
 
 ## What already exists - reuse it, do not rewrite it
 
@@ -208,16 +217,32 @@ scheme; Riga's precedent), even though the aggregate carries some.
 Valenciennes's route_ids per line differ in colour: take the most-used
 route_id's.
 
-**Write the shared module once.** Rennes's step 1 is 240 lines, and twenty
-copies is the shape `france_register.py` exists to prevent. The first batch
-build writes `pipeline/countries/france_tram.py` (step 1 and the fetch)
-from Rennes's step 1 and Lille's served-commune code, generalised to:
-`LINE_KEYS` with several route_ids per key, `GTFS_AGENCY_ID`, the
-pure-extract rule above, `EXPECTED_INSIDE_PER_LINE` (commune) or
-`EXPECTED_SERVED_COMMUNES` (regional), excluded stations named with the
-commune each lies in, and gate 3. The next nineteen are wrappers; extend
-`scaffold_france_batch.py` to write them once the module exists (it already
-checks for the file).
+**The shared module (written with Le Mans, 2026-09-30).**
+`pipeline/countries/france_tram.py` holds steps 1 and 3, and
+`france_tram_fetch.py` the downloads; no step imports the network code. It
+covers:
+- `LINE_KEYS` with several route_ids per key, and `GTFS_AGENCY_ID`;
+- the pure-extract rule above;
+- `EXPECTED_INSIDE_PER_LINE` (commune) or `EXPECTED_SERVED_COMMUNES`
+  (regional), with excluded stations named by commune;
+- `EXCLUDED_STATION_PLACES` for a stop outside France;
+- gate 3 from OpenStreetMap;
+- either geometry source;
+- baseline emits.
+
+**`ROUTE_BRANCHES`** is for a feed route that riders know as several lines.
+Reims's one route `TRAM` is two public lines, T1 and T2, since 2025-11-24. The
+module splits the trips by the terminus each serves (the platform's name). A
+short working goes by its branch's own stops, and a trip on shared stops only
+counts for both.
+
+**Gate 3 from OpenStreetMap** counts the distinct stop positions in each
+ref's most complete relation. It is exact for most cities. It reads low where
+a line branches, because each relation covers one branch (Brest's A), and
+where OSM's positions sit far from the feed's (Saint-Étienne, Nice). Record
+it as OSM has it, and trace any mismatch by name
+(`docs/decisions_drafts/france-build.md`). Never count a union of relations:
+it over-counted exactly where the single-relation count was right.
 
 ## 3. The scope call - commune or regional
 
@@ -370,7 +395,7 @@ Scope, mode and every call were approved as the briefs recommended them
 | Tours | Fil Bleu A | 29 (22) | commune | tram | `feed_infos.txt` (sic) |
 | Le Havre | LiA A-B | 23 (22) | commune | tram | ODbL; OSM geometry (the aggregate's are stop-to-stop); own colours |
 | Mulhouse | Soléa 1-3 | 29 (28) | commune | tram | tram-train `TT` dropped |
-| Reims | Tram (2 branches) | 24 (21) | commune | tram | typed `route_type 1` |
+| Reims | Tram T1 and T2 (one feed route, split) | 24 (21) | commune | tram | typed `route_type 1`; two public lines since 2025-11-24 |
 | Caen | Twisto T1-T3 | 38 (29) | commune | tram | Normandie aggregate, OSM geometry; Presqu'île pair keeps the first row |
 | Brest | Bibus A-B, Téléphérique | 41 (39) | commune | tram | cable car drawn; `FIC_` switch stops |
 | Besançon | Ginko T1-T2 | 31 (29) | commune | tram | none |

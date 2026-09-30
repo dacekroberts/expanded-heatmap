@@ -223,6 +223,18 @@ SLUG_OVERRIDES = {
     "Taipei (Regional)": "taipei",
     # Mexico: four municipios as one regional page (2026-09-27).
     "Monterrey (Regional)": "monterrey",
+    # The France tram batch (2026-09-30): accents dropped, and the regional
+    # pages' suffix, as for Lille.
+    "Besançon": "besancon",
+    "Orléans": "orleans",
+    "Saint-Étienne": "saint_etienne",
+    "Le Mans": "le_mans",
+    "Le Havre": "le_havre",
+    "Rouen (Regional)": "rouen",
+    "Bordeaux (Regional)": "bordeaux",
+    "Nantes (Regional)": "nantes",
+    "Grenoble (Regional)": "grenoble",
+    "Valenciennes (Regional)": "valenciennes",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are
