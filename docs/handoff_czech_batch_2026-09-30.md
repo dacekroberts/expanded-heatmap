@@ -28,53 +28,27 @@ below to the owner, and wait for the go before building.**
    (ROS02 establishments, RES activity, the RÚIAN address join).
 5. `docs/tram_city_list.md`, the Czech T1 rows, and `docs/ring_rules.md`.
 
-## 1. A `czech-tram-city` skill (the per-country-skill rule)
+## Done (2026-09-30)
 
-Written from Prague's build and the six briefs, on the France skill's plan:
-- the ROS02 + RES + RÚIAN chain and its traps (active judged against the
-  file's own `DATPLAT`, dedupe on `ICP`, the 6.6% with no `PKODADM`, never
-  RŽP via ARES);
-- `czechia_register.ruian()`'s per-city coordinate control;
-- the tram leg: Brno from KORDIS's own CC BY 4.0 feed at `kordis-jmk.cz`
-  (geometry from OSM, since the feed has no shapes), and the other five from
-  OSM through `osm-rail`. Plzeň's PMDP feed is at most a stop-name
-  cross-check;
-- the scope call (Liberec with Jablonec; Most + Litvínov jointly, because
-  Most alone fails the stub test);
-- the halved rings (median gaps 294-514 m);
-- UTM per city (Ostrava is 34N, not 33N);
-- the notices;
-- a page-text template, drafted in chat for the owner's approval, as
-  France's was;
-- a sheet per city.
-
-## 2. A batch scaffold - only if it pays
-
-France's twenty justified `scripts/scaffold_france_batch.py`. For six cities,
-five of them on OSM rail, `scaffold_city.py` six times may be enough. Decide
-on the measurement (how much per-city config is the same), and say which in
-DECISIONS. If a script is written: `--dry-run` first, and a real run behind
-`--go`.
+Sections 1 and 2 are done. The skill is `.claude/skills/czech-tram-city/SKILL.md`,
+and there is no batch scaffold, decided on the measurement (DECISIONS "The
+Czech batch kit"). **Every open call, the page text and the notices were
+approved as recommended** (owner, 2026-09-30: DECISIONS "The Czech batch's
+calls and prose approved as recommended"), and the skill carries them. What
+is left is the owner's go on builds, which that approval did not give.
 
 ## 3. The briefs - STAGING's, not this session's
 
-**The staging session owns the Czech briefs and is still working on them**
-(owner, 2026-09-30). Do not edit them here. When the skill or a build needs a
-brief changed, finished or re-checked, ask staging for it (`ListAgents`, then
-`SendMessage` to the staging session), and pull its commits from
-`origin/master`. Reading them and running `python scripts/brief_check.py
-brno ostrava plzen olomouc liberec most` is fine. **The open calls, as the
-briefs stood on 2026-09-30 (recommendations theirs; staging or the owner may
-have settled some since):**
-- **Line colours** for the five OSM cities: OSM tags none, so a chosen
-  palette (Le Havre's and Riga's precedent).
-- **Ostrava's line 5**: 3 of its 10 stops in the city. Recommended left out,
-  which costs two stops.
-- **Liberec's scope**: with Jablonec recommended; Liberec alone passes at
-  67%.
-- **Brno's H4 and P1** (heritage and event services, no weekday trips):
-  recommended out.
-- `mode` tram and `coverage` full for each, as the briefs propose.
+**The staging session owns the Czech briefs** (owner, 2026-09-30). Do not edit
+them here. When the skill or a build needs a brief changed, finished or
+re-checked, ask staging for it (`ListAgents`, then `SendMessage` to the
+staging session), and pull its commits from `origin/master`. Reading them and
+running `python scripts/brief_check.py brno ostrava plzen olomouc liberec
+most` is fine. **Asked of staging on 2026-09-30, and open until its commits
+land**: the dangling palette reference in five briefs; Brno's stations as the
+feed's parents, and its count; the `vs_config` mappings; Jablonec's and
+Litvínov's RÚIAN controls; Ostrava's relation recount. It was also told the
+approved calls, so the briefs can carry them.
 
 ## Standing rules (same as the France kit)
 
