@@ -132,12 +132,12 @@
  "copenhagen": {
   "in_ring": 14102,
   "all": 14922,
-  "map_blob": "813331fa66f887e849a09a81895b0a326407227f"
+  "map_blob": "1fab3ce3cbb0c432b8b60537349c49c74f75eeed"
  },
  "prague": {
-  "in_ring": 17601,
+  "in_ring": 17528,
   "all": 25185,
-  "map_blob": "b6a0c2b61019ec54d54c495d67a6471ed9575008"
+  "map_blob": "8afd8d1ee90ffc8ce1e2e407cb4195eccd58789d"
  },
  "amsterdam": {
   "in_ring": 12648,
@@ -312,7 +312,7 @@
  "stockholm": {
   "in_ring": 4666,
   "all": 5218,
-  "map_blob": "8704c2c4b9a79dd961cf1e54b3b2333eaf0b27fa"
+  "map_blob": "97b08cc8245b60ed0c5a4bc5daad6b7b08b23741"
  },
  "bucharest": {
   "in_ring": 11242,
@@ -343,5 +343,35 @@
   "in_ring": 15928,
   "all": 33433,
   "map_blob": "2e8b0895063b7101bb4d50329ad3e0458ae184f8"
+ },
+ "bucheon": {
+  "in_ring": 18093,
+  "all": 22512,
+  "map_blob": "319e0d2e18e8dd04e6250b74413dfbae88cb7951"
+ },
+ "bergen": {
+  "in_ring": 2106,
+  "all": 3597,
+  "map_blob": "ab01aaa4e836d8e90a148621cd11dfcff4daf0ef"
+ },
+ "aarhus": {
+  "in_ring": 1300,
+  "all": 5102,
+  "map_blob": "d31d67780ddd1ba2f2db7e50d98ff958f3c74b4a"
+ },
+ "buffalo": {
+  "in_ring": 376,
+  "all": 1564,
+  "map_blob": "a700d026d601032cae7e7ae5bd74e24d1d86ab6a"
+ },
+ "sacramento": {
+  "in_ring": 1378,
+  "all": 3335,
+  "map_blob": "8e5723b8c56ec138a1be9c600de1b0f4299c1f79"
+ },
+ "houston": {
+  "in_ring": 2224,
+  "all": 29912,
+  "map_blob": "4e6a1858e44f8ebecb6578e3afc121f6ea97736e"
  }
 }
