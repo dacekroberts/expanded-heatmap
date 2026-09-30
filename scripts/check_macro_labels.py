@@ -263,7 +263,7 @@ TEXT_WIDTH = {
 
 PILL_PAD_X = 5            # background_padding=[5, 2]
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
-MARKER_R = 5.0            # get_radius=4 plus the 1 px ring
+MARKER_R = 6.0            # Overview.DOT_PX / 2: 12 px icons since 2026-09-30 (was 4 + 1 px ring)
 DEFAULT_OFFSET = ("middle", 0, -22)
 CANVAS = {375: 343, 768: 726, 1200: 1030}   # viewport -> deck canvas width
 CANVAS_H = 460

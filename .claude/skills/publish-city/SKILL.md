@@ -119,7 +119,9 @@ action. Say so plainly and do not report the city as live until they confirm.
 Not locally. The working tree cannot show you a cached module, a CDN, or a
 process that never restarted.
 
-- The region switcher and macro map still land where they should.
+- The region switcher and macro map still land where they should, and the
+  new city's dot shows the colour of its `mode` and the fill of its
+  `coverage` that the owner approved (the two-key legend, 2026-09-30).
 - The new city's page renders its map, its labels and its licence notices.
 - **One city you did not touch.** This is the highest-value minute in the whole
   process: on 2026-09-22 the new city rendered wrong at a narrow viewport and so

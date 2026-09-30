@@ -46,6 +46,29 @@ item is done.**
   clock), the yes to trams-only maps, the macro-map plan, the French feed
   licence reads, Atlanta, the published-city date check.
 
+## NEXT - the order set by the owner (2026-09-30); NOT started, wait for the go
+
+Every banded city is briefed (Band B's last, the Gyeonggi satellites
+Namyangju, Ansan, Uijeongbu and Anyang, on 2026-09-29). The owner set this
+order, and said not to start yet:
+1. **T2 gap verdicts**: Zurich, Göteborg, Santa Cruz–La Laguna, Den Haag,
+   Utrecht, Rijswijk, Delft.
+   - Read each against Band B's reduced-bucket bar (the six rules in
+     `docs/city_master_list.md`), with the currency check first.
+   - Bring pass/fail recommendations to the owner.
+   - Rijswijk and Delft are expected to fold into a Den Haag (Regional)
+     scope.
+2. **Priority 2's wave-2 follow-ups** (below):
+   - Dallas, Fort Worth and Austin on the Comptroller's `jrea-zgmq`;
+   - St. Louis's permits API;
+   - the Long Beach and Richmond licence reads;
+   - New Westminster's join;
+   - Rio's shuttle.
+3. **Briefs for the 13 non-French T1 cities**, in the handoff's recommended
+   order: Czechia (Brno first), Odense and Latvia, the US three, Florence.
+   - Each brief does its own pending licence reads.
+   - The 21 French ones are the France kit's.
+
 ## Priority 1 - the tram question: DONE; the batch's groundwork is handed on
 
 **Yes to trams-only maps (owner, 2026-09-29).** The audit (Phases 1-4), the
