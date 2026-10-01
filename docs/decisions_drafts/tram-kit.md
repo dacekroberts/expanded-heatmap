@@ -100,9 +100,24 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
     review.**
   - At 375 px in United States East, Kansas City's pill runs 17.3 px (19%)
     off the left edge. It is reported as clipped, not a problem.
-- **Licence read.** `kkhs-93m4` declares Public Domain. A `licence-read` was
-  started at build; its verdict goes into the licence table when it
-  returns.
+- **Licence read (2026-09-30): PERMITTED WITH CONDITIONS, and one OWNER
+  DECISION. Kansas City does not land until it is made.**
+  - **The grant.** KCMO Code § 2-2134(a) requires portal datasets to be public
+    domain with "no restrictions or requirements placed on use".
+    `kkhs-93m4` and its parent `pnm4-68wg` declare Public Domain, and that is
+    the City's choice, not a portal default.
+  - **The disclaimer.** The portal's undated Data Terms of Use prescribe a
+    disclaimer for any derivative application. It is Chicago's wording on
+    the same portal template, so it is displayed site-wide as **notice 69**,
+    verbatim, including the dead host `www.data.kcmo.gov`.
+  - **The indemnity.** The same terms claim an open-ended indemnity from
+    "any user of the data". RideKC's GTFS was barred partly over one.
+    - **Recommended: read the ordinance as controlling and land.** The
+      dataset is declared public domain, a City ordinance backs it, and
+      the terms page is undated, with no acceptance step.
+    - **Or:** ask data@kcmo.org, or drop the city.
+  - **Notice numbering.** France also numbered notices 69-71 on its branch,
+    so renumber at landing.
 
 ### 2026-09-30 - Daugavpils built on tram-build: all five routes, 37 stations
 

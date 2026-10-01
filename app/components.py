@@ -1522,6 +1522,20 @@ _NOTICES = [
      "grouped into three categories, and mapped by distance to stations; the categories and "
      "counts are this project's, not SEMAS's. Not produced or endorsed by SEMAS.",
      False),
+    # Kansas City (notice 69): the Data Terms of Use of Open Data KC
+    # (data.kcmo.org/terms) prescribe this paragraph "at the site where the
+    # software application ... can be accessed" - Chicago's wording on the same
+    # portal template, so displayed site-wide as Chicago's is. Word for word,
+    # the City's dead host www.data.kcmo.gov included (licence-read 2026-09-30).
+    ("City of Kansas City, Missouri (Kansas City)",
+     "This site provides applications using data that has been modified for "
+     "use from its original source, www.data.kcmo.gov, the official open data "
+     "website of the City of Kansas City. The City of Kansas City makes no "
+     "claims as to the content, accuracy, timeliness, or completeness of any "
+     "of the data provided at this site. The data provided at this site is "
+     "subject to change at any time. It is understood that the data provided "
+     "at this site is being used at one’s own risk.",
+     True),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

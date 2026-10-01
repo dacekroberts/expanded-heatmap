@@ -2156,6 +2156,37 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   or complete on SEMAS's behalf (its legal notice disclaims both).
 - **MUST DO**: nothing.
 
+**69. City of Kansas City, Missouri (Kansas City) — required, and DISPLAYED**
+(written into `render_site_notices()`; tram kit, 2026-09-30; displayed once Kansas
+City lands. **France also numbered notices 69-71 on its branch: renumber at
+landing.**)
+
+- **PERMITTED WITH CONDITIONS, and one owner decision** (`licence-read`
+  2026-09-30; the rows in [`data_sources/united-states.md`](data_sources/united-states.md)).
+  KCMO Code § 2-2134(a) (Ord. 150865, 2015) requires every portal dataset to be
+  "explicitly placed into the public domain, thereby ensuring that there are no
+  restrictions or requirements placed on use", and `kkhs-93m4` and its parent
+  `pnm4-68wg` both declare Public Domain - the City's choice, not a portal
+  default (142 of the portal's 202 datasets carry no licence).
+- **MUST DISPLAY**: the portal's Data Terms of Use (`data.kcmo.org/terms`,
+  undated) prescribe the paragraph above "at the site where the software
+  application ... can be accessed" - Chicago's wording on the same portal
+  template, so site-wide as Chicago's. Reproduced word for word, including
+  `www.data.kcmo.gov`, a host that does not resolve (the portal is
+  data.kcmo.org). Displayed whichever document controls: it costs nothing.
+- **OWNER DECISION - the indemnity.** The same terms say any user "shall
+  indemnify and hold harmless the City from any claim ... that arises directly
+  or indirectly ... from that user's use of this data". Read as binding, the
+  project takes on an open-ended indemnity (RideKC's GTFS was barred partly over
+  one); read as overridden by the ordinance's "no restrictions or
+  requirements", it binds nothing. The licence-read did not resolve it in the
+  project's favour. **Kansas City does not land until the owner decides.**
+- **MUST NOT**: use City marks (the terms reserve them); present the data as
+  the City's current or accurate record (the disclaimer above says otherwise,
+  and the register is frozen at 2026-01-15).
+- **MUST DO**: check for Finance-department data terms before a republish
+  (the terms incorporate them; none found).
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).
