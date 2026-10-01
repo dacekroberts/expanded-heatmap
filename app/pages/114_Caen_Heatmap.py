@@ -84,7 +84,7 @@ if PROVENANCE_JSON.exists():
 # (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). Outside the
 # provenance block so a missing or malformed provenance file cannot drop it;
 # only the edition comes from that file. Check M of
-# scripts/check_provenance.py notes a page that nests it again.
+# scripts/check_provenance.py refuses a page that nests it again.
 st.caption("Business data: Source : Insee, SIRENE"
            + (f" ({_edition} edition)" if _edition else "")
            + " and its geolocation file.")
