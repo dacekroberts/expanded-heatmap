@@ -188,11 +188,12 @@ select its columns before printing anything.
 ## What landing has to resolve
 
 - **Notice numbers**: Ottawa, Kitchener–Waterloo, Palma, Yokohama and
-  Hiroshima each carry notice 69 on their own branch (the check requires the
-  list contiguous from master), so they renumber in landing order.
+  Hiroshima each add one required notice numbered next after master's last
+  (the check requires the list contiguous from master), so they renumber in
+  landing order.
 - **Ordinals and counts**: two branches say "Japan's seventh", four "South
   Korea's tenth"; the master-list counts are branch-relative.
-- **Notice 68's heading** gains a satellite on each of four branches.
+- **The SEMAS notice's heading** gains a satellite on each of four branches.
 - **The Gyeonggi satellites row** closes when the last of the four lands.
 - **For review time**: Dallas's two page sentences beyond Houston's template,
   San Diego's moved label, and the Dallas home rule that cannot run.
