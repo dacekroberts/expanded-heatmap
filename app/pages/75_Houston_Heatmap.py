@@ -79,10 +79,15 @@ cluster."
 
 # The fetch date, read from outputs/houston/provenance.json so it cannot go
 # stale: permits count if the outlet had begun trading by it (config.AS_OF_DATE).
+# as_of_date, not the file's UTC timestamp: the fetch ran on the evening of
+# 2026-09-29 in Houston, after midnight UTC, and the timestamp read 2026-09-30
+# while step 2 applied 2026-09-29 (deploy-verify, 2026-09-29).
 if PROVENANCE_JSON.exists():
     try:
-        _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
-        _taken = (_files.get("sales_tax_permits_houston.csv") or "")[:10]
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _files = _prov.get("files_utc") or {}
+        _taken = (_prov.get("as_of_date")
+                  or (_files.get("sales_tax_permits_houston.csv") or "")[:10])
         if _taken:
             st.caption(f"Sales tax permits fetched **{_taken}**.")
     except (ValueError, OSError, AttributeError):
