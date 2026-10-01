@@ -1044,6 +1044,183 @@ WHEEL_ZOOM_SCRIPT = """
 })();
 </script>
 """
+# PICK ONE LINE OUT (owner, 2026-09-30, from the live site on an iPhone).
+# Where lines share track, the one drawn last covers the rest completely:
+# Daugavpils' line 2 was never visible under the purple, Saint-Etienne's trams
+# hid one another, Reims' T1 sat under T2. Tapping a line's LEGEND row, or the
+# line itself, draws that whole line on top and thicker and fades the others;
+# tapping it again, empty map, or another line restores or switches. A mouse
+# hovering a line or a row previews the same. A line hidden end to end can
+# only be reached through the legend, which is why every row is a button.
+#
+# Nothing is redrawn. Each line's polylines carry `hm-line hm-line-<n>` and
+# its label and legend row `data-line="<n>"` (render_heatmap, n = the line's
+# order), and a state is two CSS classes on the paths plus a reorder of the
+# line paths INSIDE their own run of the SVG - so a picked line goes above the
+# other lines but stays under the business dots, which are added after it.
+# CSS stroke-width overrides the attribute, so the dark theme's
+# `path[stroke-width="4"]` rule still matches a thickened line.
+#
+# A tap on the map is matched to a line by distance, not by what was hit: a
+# 4 px line is too thin to tap, and the hidden line is never what was hit.
+# Leaflet's own clipped, projected `_parts` are measured, as its
+# _containsPoint does. A tap on a business dot, station or ring is left alone.
+# The legend's open/collapsed state is never touched.
+LINE_HIGHLIGHT_SCRIPT = """
+<style>
+.map-legend .hm-line-row { cursor: pointer; border-radius: 3px; }
+.map-legend .hm-line-row:focus-visible { outline: none;
+    background: rgba(127,127,127,0.16); box-shadow: 0 0 0 3px rgba(127,127,127,0.16); }
+@media (hover: hover) {
+    .map-legend .hm-line-row:hover { background: rgba(127,127,127,0.16);
+        box-shadow: 0 0 0 3px rgba(127,127,127,0.16); } }
+.map-legend .hm-line-row.hm-on { background: rgba(127,127,127,0.28);
+    box-shadow: 0 0 0 3px rgba(127,127,127,0.28); }
+.map-legend .hm-line-row.hm-on > span { transform: scaleY(2); }
+.map-legend.hm-picking .hm-line-row:not(.hm-on) { opacity: 0.6; }
+.leaflet-overlay-pane path.hm-line.hm-dim { stroke-opacity: 0.25; }
+.leaflet-overlay-pane path.hm-line.hm-hot { stroke-width: 7px; stroke-opacity: 1; }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.eachLayer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var lines = {};
+        function line(k) { return lines[k] || (lines[k] = {polys: [], label: null}); }
+        m.eachLayer(function (layer) {
+            var c = layer.options && layer.options.className;
+            var hit = typeof c === "string" && /\\bhm-line-(\\d+)\\b/.exec(c);
+            if (hit && layer._path) {
+                line(hit[1]).polys.push(layer);
+                layer._path._hmLine = true;
+            } else if (layer._icon) {
+                var d = layer._icon.querySelector(".hm-line-label[data-line]");
+                if (d) line(d.getAttribute("data-line")).label = layer;
+            }
+        });
+        var keys = Object.keys(lines).filter(function (k) {
+            return lines[k].polys.length;
+        }).sort(function (a, b) { return a - b; });
+        if (!keys.length) return;
+        var legend = document.querySelector("details.map-legend");
+        var rows = legend ? legend.querySelectorAll(".hm-line-row[data-line]") : [];
+        var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+        var HOVER = mq("(hover: hover) and (pointer: fine)");
+        var TOL = mq("(pointer: coarse)") ? 16 : 7;
+        var sel = null, hov = null, shown = null, outTimer = null;
+
+        // The picked line's paths go last within the run of line paths, so
+        // above every other line and still under anything drawn after them.
+        function restack(top) {
+            var paths = [];
+            keys.forEach(function (k) {
+                if (k !== top) lines[k].polys.forEach(function (p) { paths.push(p._path); });
+            });
+            if (top !== null) lines[top].polys.forEach(function (p) { paths.push(p._path); });
+            var g = paths[0].parentNode;
+            if (!g) return;
+            var last = g.lastChild;
+            while (last && !last._hmLine) last = last.previousSibling;
+            var ref = last ? last.nextSibling : null;
+            paths.forEach(function (p) { if (p.parentNode === g) g.insertBefore(p, ref); });
+        }
+
+        function show() {
+            var want = hov !== null ? hov : sel;
+            if (want === shown) return;
+            shown = want;
+            keys.forEach(function (k) {
+                var on = k === want, rec = lines[k];
+                rec.polys.forEach(function (p) {
+                    p._path.classList.toggle("hm-hot", on);
+                    p._path.classList.toggle("hm-dim", want !== null && !on);
+                });
+                if (rec.label) rec.label.setZIndexOffset(on ? 1500 : 1000);
+            });
+            for (var i = 0; i < rows.length; i++) {
+                var on = rows[i].getAttribute("data-line") === want;
+                rows[i].classList.toggle("hm-on", on);
+                rows[i].setAttribute("aria-pressed", on ? "true" : "false");
+            }
+            if (legend) legend.classList.toggle("hm-picking", want !== null);
+            restack(want);
+        }
+        function pick(k) { sel = sel === k ? null : k; show(); }
+        // A short delay before a hover ends, so moving from one line onto the
+        // line beside it, or a path being restacked under the pointer, does
+        // not flash the whole map back to normal in between.
+        function hover(k) {
+            clearTimeout(outTimer);
+            if (k !== null) { hov = k; show(); return; }
+            outTimer = setTimeout(function () { hov = null; show(); }, 80);
+        }
+
+        function distance(rec, p) {
+            var d = Infinity;
+            rec.polys.forEach(function (layer) {
+                (layer._parts || []).forEach(function (part) {
+                    for (var i = 1; i < part.length; i++) {
+                        d = Math.min(d, L.LineUtil.pointToSegmentDistance(p, part[i - 1], part[i]));
+                    }
+                });
+            });
+            return d;
+        }
+
+        m.on("click", function (e) {
+            var t = e.originalEvent && e.originalEvent.target;
+            if (t && t.classList && t.classList.contains("leaflet-interactive") && !t._hmLine) return;
+            var found = [];
+            keys.forEach(function (k, i) {
+                var d = distance(lines[k], e.layerPoint);
+                if (d <= TOL) found.push({k: k, d: d, z: k === shown ? keys.length : i});
+            });
+            if (!found.length) { sel = null; show(); return; }
+            var near = Math.min.apply(null, found.map(function (f) { return f.d; }));
+            var best = null;
+            found.forEach(function (f) {
+                if (f.d <= near + 1 && (!best || f.z > best.z)) best = f;
+            });
+            pick(best.k);
+        });
+
+        for (var i = 0; i < rows.length; i++) {
+            (function (row) {
+                var k = row.getAttribute("data-line");
+                if (!lines[k]) return;
+                row.addEventListener("click", function () { pick(k); });
+                row.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(k); }
+                });
+                if (HOVER) {
+                    row.addEventListener("mouseenter", function () { hover(k); });
+                    row.addEventListener("mouseleave", function () { hover(null); });
+                }
+            })(rows[i]);
+        }
+        if (HOVER) {
+            keys.forEach(function (k) {
+                lines[k].polys.forEach(function (layer) {
+                    layer.on("mouseover", function () { hover(k); });
+                    layer.on("mouseout", function () { hover(null); });
+                });
+            });
+        }
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && sel !== null) { sel = null; show(); }
+        });
+    }
+    start();
+})();
+</script>
+"""
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -1053,9 +1230,12 @@ LEGEND_ROW = """
 """
 # A short colored line swatch, not a dot - distinguishes transit lines from
 # business categories at a glance, so a reader isn't relying on the on-map
-# line labels alone (automatic placement can land imperfectly).
+# line labels alone (automatic placement can land imperfectly). Each row is
+# also the button that picks its line out (LINE_HIGHLIGHT_SCRIPT); `line` is
+# the line's order, the same n as its polylines' hm-line-<n> class.
 LEGEND_LINE_ROW = """
-  <div style="display:flex; align-items:center; margin:3px 0;">
+  <div class="hm-line-row" data-line="{line}" role="button" tabindex="0" aria-pressed="false"
+    style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:16px; height:3px;
       background:{color}; margin-right:7px;
       border-radius:2px;"></span>{label}
@@ -1389,7 +1569,7 @@ def _clearance(tip):
 LIGHT_LABEL_HALO = "#ffffff"
 
 
-def add_line_label(feature_group, tip, label, color, dark=None):
+def add_line_label(feature_group, tip, label, color, dark=None, line=None):
     """A permanent, always-visible line-name label at the tail end of the line
     - NOT a hover tooltip. Use the line's real public-facing name.
 
@@ -1397,8 +1577,12 @@ def add_line_label(feature_group, tip, label, color, dark=None):
     element - extra pixels of clearance - from _label_candidates: the label is
     centred just beyond the tip along the line's own direction, offset in
     pixels by the label's own size so it clears the line whatever the angle,
-    and it stays put relative to the tip at every zoom."""
+    and it stays put relative to the tip at every zoom.
+
+    `line`: the line's order in render_heatmap, written as data-line so
+    LINE_HIGHLIGHT_SCRIPT can lift this label with its line."""
     lat, lon, ux, uy = tip[:4]
+    data_line = "" if line is None else f' data-line="{int(line)}"'
     dx, dy, _hw, _hh = _label_offset(label, ux, uy, _clearance(tip))
     # Both themes read at 4.5:1: the light theme's colour and halo (a yellow
     # keeps its colour on a dark halo rather than turning olive), and the dark
@@ -1416,7 +1600,7 @@ def add_line_label(feature_group, tip, label, color, dark=None):
             icon_size=(0, 0),
             icon_anchor=(0, 0),
             html=f"""
-            <div class="hm-line-label" style="
+            <div class="hm-line-label"{data_line} style="
                 position: absolute; left: 0; top: 0;
                 transform: translate(-50%, -50%) translate({dx:.1f}px, {dy:.1f}px);
                 font-size: 14px; font-weight: bold; color: {light}; --dm-label: {dark};
@@ -1933,9 +2117,9 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     """
     names = legend_names or {}
     line_rows = "".join(
-        LEGEND_LINE_ROW.format(color=color, label=html.escape(
+        LEGEND_LINE_ROW.format(line=n, color=color, label=html.escape(
             f"{label} {names[key]}" if key in names else label))
-        for key, (_coords, color, label, _end) in lines.items()
+        for n, (key, (_coords, color, label, _end)) in enumerate(lines.items())
     )
     if no_data_stations:
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
@@ -2218,13 +2402,16 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # different lines never share one - see linecolour.dark_label_colours.
     dark_labels = dark_label_colours({k: v[1] for k, v in lines.items()},
                                      dark_halo=DARK["page"], city=city_name)
-    for key, (segments, color, label, _end) in lines.items():
+    # `n` ties a line's polylines, label and legend row together for
+    # LINE_HIGHLIGHT_SCRIPT; build_legend numbers its rows in this same order.
+    for n, (key, (segments, color, label, _end)) in enumerate(lines.items()):
         rail_layer = folium.FeatureGroup(name=f"{system_name}: {names.get(key, label)}", show=True, control=False)
         # One polyline per alignment; a branching trunk keeps one label and one
         # legend entry (see load_line_shapes).
         for segment in segments:
-            folium.PolyLine(segment, color=color, weight=4, opacity=0.85).add_to(rail_layer)
-        add_line_label(rail_layer, tips[key], label, color, dark=dark_labels[key])
+            folium.PolyLine(segment, color=color, weight=4, opacity=0.85,
+                            class_name=f"hm-line hm-line-{n}").add_to(rail_layer)
+        add_line_label(rail_layer, tips[key], label, color, dark=dark_labels[key], line=n)
         rail_layer.add_to(m)
 
     # Category grouping via the city's own taxonomy, never a hardcoded one.
@@ -2306,6 +2493,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See WHEEL_ZOOM_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         WHEEL_ZOOM_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # A line's legend row, or the line itself, picks it out above the others.
+    # See LINE_HIGHLIGHT_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        LINE_HIGHLIGHT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
 
     # A declared language: its font order on --hm-font, which every shared
     # block reads through theme.FONT_VAR, so the shared blocks stay identical.
