@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -51,7 +52,7 @@ st.markdown(
   L'Hospitalet, Cornellà, Sant Boi, El Prat, Badalona and Santa Coloma - several of them only
   metres past the boundary.
 - The lines are drawn in full, but mapping those stations would need each municipality's own
-  premises data. They are listed on the What is counted page.
+  premises data. They are listed below.
 
 **The businesses**
 
@@ -87,6 +88,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Barcelona")
 render_country_links('Barcelona')
 
 # The notices that publishing requires, on EVERY page rather than one -

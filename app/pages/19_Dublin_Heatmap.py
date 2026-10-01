@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -51,7 +52,7 @@ st.markdown(
   Laoghaire-Rathdown - rather than the city alone, because the Luas and the DART run through all
   four.
 - Two DART stations, Bray Daly and Greystones, lie in County Wicklow outside all four authorities -
-  they and the reason are listed on the What is counted page.
+  they and the reason are listed below.
 
 **The businesses**
 
@@ -76,6 +77,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Dublin")
 render_country_links('Dublin')
 
 # The notices that publishing requires, on EVERY page rather than one -

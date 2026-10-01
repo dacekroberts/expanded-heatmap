@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -73,8 +74,7 @@ st.markdown(
   north-east to Grenaa, and those are not drawn. Midttrafik's own timetables show trains there
   every 30 minutes by day, against every 7 to 8 minutes on the city tramway, and this site draws
   light rail only where it runs at least every 15 minutes.
-- Their 19 stops inside the municipality and the 11 beyond it are listed on the What is counted
-  page.
+- Their 19 stops inside the municipality and the 11 beyond it are listed below.
 - **The station rings are smaller here.** The tramway's stops sit about 500 m apart, so the rings
   run to 0.3 mi instead of the 0.6 mi most cities here use.
 - The map covers the **municipality of Aarhus**.
@@ -105,6 +105,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Aarhus")
 render_country_links('Aarhus')
 
 # The notices that publishing requires, on EVERY page rather than one -

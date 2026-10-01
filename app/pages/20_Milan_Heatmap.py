@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -53,7 +54,7 @@ st.markdown(
   sit a block or two apart, which needs different treatment from a metro, and the agency publishes
   no colour for any of them.
 - Twenty-one metro stations lie outside the comune - the ends of M1 at Rho and Sesto, M2 at
-  Gessate and Cologno, M4 at Linate - and are listed on the What is counted page.
+  Gessate and Cologno, M4 at Linate - and are listed below.
 
 **The businesses**
 
@@ -78,6 +79,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Milan")
 render_country_links('Milan')
 
 # The notices that publishing requires, on EVERY page rather than one -

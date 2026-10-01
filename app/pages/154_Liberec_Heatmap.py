@@ -19,6 +19,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -97,13 +98,14 @@ st.markdown(
   registered and may not have opened yet.
 - Czechia's classification files a web shop under the goods it sells, so some dots are businesses
   with no shop a passer-by could walk into.
-- Against OpenStreetMap's mapped restaurants, cafés and takeaways in the city, the register carries
+- Against OpenStreetMap's mapped restaurants, cafés and takeaways in the two towns, the register carries
   about **2.5 times** as many. OpenStreetMap maps fewer restaurants here than in Prague, so the
   ratio says as much about OpenStreetMap's gaps as about the register.
 """
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Liberec (Regional)")
 render_country_links('Liberec (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -

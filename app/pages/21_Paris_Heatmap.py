@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -85,7 +86,7 @@ st.markdown(
 - Île-de-France Mobilités gives T3a and T3b the same colours as Lignes 5 and 12, so this map draws
   them in lighter shades of its own. Those two colours are this project's, not RATP's.
 - The map covers the **commune of Paris**. Métro stations outside it are not drawn, and every one
-  is listed on the What is counted page.
+  is listed below.
 - RER and Transilien are absent by a rule this project applies everywhere: they are commuter rail.
 - The other trams are absent: T2 and T9 each have only a few stops inside the commune, and the
   rest never enter it.
@@ -114,6 +115,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Paris")
 render_country_links('Paris')
 
 # The notices that publishing requires, on EVERY page rather than one -

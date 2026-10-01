@@ -21,6 +21,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -83,7 +84,7 @@ st.markdown(
 - Besançon has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 360 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Besançon**. **Tram T1 runs past it**, so two stops beyond the boundary are left out: Chalezeule - Chalezeule and Chalezeule - Marnières in Chalezeule.
-- The line is still drawn to its ends, but those stops get no ring and their businesses are not counted; they are listed on the What is counted page.
+- The line is still drawn to its ends, but those stops get no ring and their businesses are not counted; they are listed below.
 - Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
 
 **The businesses**
@@ -101,6 +102,7 @@ st.markdown(
 )
 
 render_map_help("three business categories (Retail, Food service and Personal services)")
+render_excluded_stations("Besançon")
 render_country_links("Besançon")
 
 # The notices that publishing requires, on EVERY page rather than one -

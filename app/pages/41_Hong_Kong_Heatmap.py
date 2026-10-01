@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -105,6 +106,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Food service, Food shops and Bathhouses)')
+render_excluded_stations("Hong Kong")
 render_country_links('Hong Kong')
 
 # The notices that publishing requires, on EVERY page rather than one -

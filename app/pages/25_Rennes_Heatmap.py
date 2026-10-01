@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -88,7 +89,7 @@ st.markdown(
   Cesson - Viasilva in Cesson-Sévigné, and La Courrouze and Saint-Jacques - Gaîté in
   Saint-Jacques-de-la-Lande.
 - The line is still drawn to its ends, but those four stations get no ring and their businesses
-  are not counted. They are listed on the What is counted page.
+  are not counted. They are listed below.
 - Their communes' businesses are in the same national register this map reads, so leaving them
   out is a choice rather than a limit of the data: the map keeps to the commune so that Rennes can
   be read alongside Paris, Marseille and Toulouse on the same terms.
@@ -116,6 +117,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Rennes")
 render_country_links('Rennes')
 
 # The notices that publishing requires, on EVERY page rather than one -

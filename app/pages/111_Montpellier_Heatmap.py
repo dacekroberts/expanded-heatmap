@@ -21,6 +21,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -83,7 +84,7 @@ st.markdown(
 - Montpellier has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 420 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Montpellier**. **Tram 2, Tram 3 and Tram 5 run past it**, so 24 stops beyond the boundary are left out: Aube Rouge, Centurions, Charles de Gaulle, Clairval, Georges Pompidou, La Galine, Notre-Dame de Sablassou and Via Domitia in Castelnau-le-Lez; Clapiers in Clapiers; Jacou in Jacou; Juvignac in Juvignac; Boirargues, Cougourlude, Lattes Centre and Soriech in Lattes; Montferrier-sur-Lez in Montferrier-sur-Lez; EcoPôle, Parc Expo, Pérols Centre and Pérols Étang de l'Or in Pérols; La Condamine, Saint-Jean de Védas Centre, Saint-Jean le Sec and Victoire 2 in Saint-Jean-de-Védas.
-- The lines are still drawn to their ends, but those stops get no ring and their businesses are not counted; they are listed on the What is counted page.
+- The lines are still drawn to their ends, but those stops get no ring and their businesses are not counted; they are listed below.
 - Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
 
 **The businesses**
@@ -101,6 +102,7 @@ st.markdown(
 )
 
 render_map_help("three business categories (Retail, Food service and Personal services)")
+render_excluded_stations("Montpellier")
 render_country_links("Montpellier")
 
 # The notices that publishing requires, on EVERY page rather than one -

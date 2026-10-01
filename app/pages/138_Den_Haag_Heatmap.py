@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -84,7 +85,7 @@ st.markdown(
   Leidschendam-Voorburg, Pijnacker-Nootdorp, Westland, Zoetermeer and Lansingerland, so their 64
   stops there are left out.
 - The lines are still drawn to their ends, but those stops get no ring and their businesses are
-  not counted. They are listed on the What is counted page.
+  not counted. They are listed below.
 
 **The businesses**
 
@@ -115,6 +116,7 @@ st.markdown(
 )
 
 render_map_help('two business categories (Shops and services, and Food service)')
+render_excluded_stations("Den Haag")
 render_country_links('Den Haag')
 
 # The notices that publishing requires, on EVERY page rather than one -

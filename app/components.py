@@ -1978,6 +1978,48 @@ def render_map_help(layers="business categories"):
     )
 
 
+def render_excluded_stations(name):
+    """The stations the city's map leaves out, collapsed under its bullets:
+    the rows of outputs/<slug>/excluded_stations.csv, which a page's bullets
+    point to as "listed below" (owner, 2026-10-01; What Is Excluded shows only
+    a count per city). Nothing renders for a city with no file or an empty one.
+
+    The files do not share a schema (app/station_scope.py). "Why" is the
+    file's `reason` as written; a file without one records the place instead
+    (located_in, state, commune or municipality), and a file with neither
+    holds only stations outside the city's boundary (Madrid, and the
+    distance_outside_m files), which station_scope counts the same way."""
+    import csv
+    from station_scope import slug
+
+    path = (Path(__file__).parent.parent / "outputs" / slug(city_entry(name)["page"])
+            / "excluded_stations.csv")
+    if not path.exists():
+        return
+    with open(path, encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        columns = reader.fieldnames or []
+        rows = list(reader)
+    if not rows:
+        return
+    lines_col = next((c for c in ("lines", "line") if c in columns), None)
+    place_col = next((c for c in ("located_in", "state", "commune", "municipality")
+                      if c in columns), None)
+
+    def why(row):
+        if (row.get("reason") or "").strip():
+            return row["reason"].strip()
+        if place_col and (row.get(place_col) or "").strip():
+            return f"in {row[place_col].strip()}"
+        return "outside the city"
+
+    header = ["Station"] + (["Lines"] if lines_col else []) + ["Why"]
+    body = [[row.get("station", "")] + ([row.get(lines_col, "")] if lines_col else [])
+            + [why(row)] for row in rows]
+    with st.expander(f"Stations left out ({len(rows):,})"):
+        scroll_table(header, body, min_width=480)
+
+
 def render_country_links(name):
     """Links to the two reference pages, opened on the city's country. The
     deep-link contract with those pages: ?country=<the city's country value

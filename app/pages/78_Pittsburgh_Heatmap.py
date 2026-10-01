@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -62,8 +63,7 @@ st.markdown(
   and Silver Lines for part of the day only.
 - Rings are drawn only around the stations inside the City of Pittsburgh, because the business data
   used here stops at the city line; the stations in Dormont, Mount Lebanon, Castle Shannon, Bethel
-  Park and South Park are left out, and each is listed with its municipality on the What is counted
-  page.
+  Park and South Park are left out, and each is listed with its municipality below.
 - Stations here are close together, so the rings are half the usual size, reaching 0.3 miles.
 - Buses and the inclines are not drawn.
 
@@ -85,6 +85,7 @@ st.markdown(
 )
 
 render_map_help('business layers')
+render_excluded_stations("Pittsburgh")
 render_country_links('Pittsburgh')
 
 # The notices that publishing requires, on EVERY page rather than one -

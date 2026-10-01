@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -49,7 +50,7 @@ st.markdown(
   labeled directly on the map and in the legend.
 - Every underground subway station is shown. The street-running stretches of each line are thinned
   to roughly one station per half mile (plus each line's terminals and any transfer points) so the
-  rings stay readable; the excluded stations are listed on the What is counted page.
+  rings stay readable; the excluded stations are listed below.
 - **BART and Caltrain are not on this map.** Both are regional rail crossing county lines, and
   commuter rail is left out here as on most maps on this site.
 - Where BART and Muni Metro share a station, the station is here as the Muni one it also is:
@@ -68,6 +69,7 @@ st.markdown(
 )
 
 render_map_help('NAICS-geocoded storefronts')
+render_excluded_stations("San Francisco")
 render_country_links('San Francisco')
 
 # The notices that publishing requires, on EVERY page rather than one -

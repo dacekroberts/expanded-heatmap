@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -71,7 +72,7 @@ st.markdown(
 - The map covers the **Comune di Firenze**. T1 runs on into Scandicci, so its 4 stops there are
   left out.
 - The line is still drawn to its end, but those stops get no ring and their businesses are not
-  counted. They are listed on the What is counted page.
+  counted. They are listed below.
 
 **The businesses**
 
@@ -93,6 +94,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Florence")
 render_country_links('Florence')
 
 # The notices that publishing requires, on EVERY page rather than one -

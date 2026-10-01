@@ -18,6 +18,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -84,7 +85,7 @@ st.markdown(
 - Ferries are not drawn.
 - The map covers the **municipality of Oslo**. The T-bane's western branches run on into Bærum,
   so twelve of their stations, out to Kolsås and Østerås, are drawn on the line but get no ring,
-  and their businesses are not counted. They are listed on the What is counted page.
+  and their businesses are not counted. They are listed below.
 - Bærum's businesses are in the same national register this map reads, so leaving them out is a
   choice rather than a limit of the data.
 
@@ -114,6 +115,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Oslo")
 render_country_links('Oslo')
 
 # The notices that publishing requires, on EVERY page rather than one -

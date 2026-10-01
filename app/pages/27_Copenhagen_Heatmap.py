@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -71,7 +72,7 @@ st.markdown(
   so leaving it out would leave a hole in the middle of the map.
 - The S-tog lines run far beyond both, out to Køge, Hillerød and Frederikssund. Their stations out
   there are drawn on the line but get no ring, and their businesses are not counted; the same goes
-  for the Metro's two airport stations in Tårnby. They are listed on the What is counted page.
+  for the Metro's two airport stations in Tårnby. They are listed below.
 
 **The businesses**
 
@@ -100,6 +101,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Copenhagen")
 render_country_links('Copenhagen')
 
 # The notices that publishing requires, on EVERY page rather than one -

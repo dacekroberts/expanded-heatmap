@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -90,7 +91,7 @@ st.markdown(
 - The map covers the **Stadt Zürich**, the city itself. Trams 2, 4, 10 and 50 run on into
   Schlieren, Zollikon, Opfikon, Kloten and Rümlang, so their 15 stops there are left out.
 - The lines are still drawn to their ends, but those stops get no ring and their businesses are
-  not counted. They are listed on the What is counted page.
+  not counted. They are listed below.
 
 **The businesses**
 
@@ -118,6 +119,7 @@ st.markdown(
 )
 
 render_map_help('two business categories (Licensed shops and Food service)')
+render_excluded_stations("Zurich")
 render_country_links('Zurich')
 
 # The notices that publishing requires, on EVERY page rather than one -

@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -46,7 +47,7 @@ st.markdown(
   labeled directly on the map and in the legend, in Metro's own line colors.
 - Only stations inside the City of Los Angeles are shown. The lines also serve Long Beach, Pasadena,
   Santa Monica and many other cities, whose businesses come from separate city registries.
-- The stations left out are listed on the What is counted page.
+- The stations left out are listed below.
 
 **The businesses**
 
@@ -58,6 +59,7 @@ st.markdown(
 )
 
 render_map_help('NAICS-coded storefronts')
+render_excluded_stations("Los Angeles")
 render_country_links('Los Angeles')
 
 # The notices that publishing requires, on EVERY page rather than one -

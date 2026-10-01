@@ -26,6 +26,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -72,7 +73,7 @@ st.markdown(
   store licences, salons and barbers from the State's appearance-enhancement licences, and a narrow
   slice of regulated retail from the city's own Consumer and Worker Protection licences.
 - That has a consequence worth stating plainly: **the Retail category here covers less of the trade
-  than it does in the other cities on this site.** A clothing shop or a bookshop needs no licence
+  than it does in most cities on this site.** A clothing shop or a bookshop needs no licence
   from any of these four registries, so it is simply absent, while restaurants appear because the
   city inspects them.
 - Read the balance between categories as a fact about New York's licensing, not about its high
@@ -83,6 +84,7 @@ st.markdown(
 )
 
 render_map_help()
+render_excluded_stations("New York")
 render_country_links('New York')
 
 # The notices that publishing requires, on EVERY page rather than one -

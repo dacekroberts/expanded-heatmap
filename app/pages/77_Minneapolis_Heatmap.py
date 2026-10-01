@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -61,7 +62,7 @@ st.markdown(
 - Rings are drawn only around the stations inside the City of Minneapolis, because the business
   data stops at the city line.
 - The Green Line's stations in St. Paul and the Blue Line's at Fort Snelling, the airport and
-  Bloomington are left out, and each is listed with its municipality on the What is counted page.
+  Bloomington are left out, and each is listed with its municipality below.
 - Buses and the Northstar commuter line are not drawn.
 
 **The businesses**
@@ -83,6 +84,7 @@ st.markdown(
 )
 
 render_map_help('business layers')
+render_excluded_stations("Minneapolis")
 render_country_links('Minneapolis')
 
 # The notices that publishing requires, on EVERY page rather than one -

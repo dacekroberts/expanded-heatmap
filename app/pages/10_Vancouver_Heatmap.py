@@ -20,6 +20,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -51,8 +52,7 @@ st.markdown(
   no rider recognises.
 - Of 54 stations, 20 are in Vancouver and 4 in Surrey. The other 30 are in Burnaby,
   Richmond, New Westminster, Coquitlam and Port Moody, whose own business registers would
-  each have to be sourced and verified separately; every station left out is listed on the
-  What is counted page.
+  each have to be sourced and verified separately; every station left out is listed below.
 - **Three lines are drawn** from TransLink's own route geometry, each labelled directly on
   the map and in the legend: the Expo Line, the Millennium Line and the Canada Line, in
   TransLink's own colours.
@@ -83,6 +83,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Vancouver (Regional)")
 render_country_links('Vancouver (Regional)')
 
 render_site_notices()

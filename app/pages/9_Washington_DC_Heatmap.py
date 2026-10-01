@@ -25,6 +25,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -83,7 +84,7 @@ st.markdown(
 - **Six lines are drawn**, each labelled directly on the map and in the legend: the Red, Blue,
   Green, Yellow, Orange and Silver Lines, in the colours WMATA's own schedule data gives them.
 - **This is the District, not the Metrorail network.** 58 of Metrorail's 98 stations lie outside
-  it (32 in Virginia, 26 in Maryland), each listed with its state on the What is counted page.
+  it (32 in Virginia, 26 in Maryland), each listed with its state below.
 - A station in Arlington or Silver Spring would need Virginia's or Maryland's own business data,
   sourced separately.
 - All six lines keep a substantial presence inside the District, so none drops out of the map, and
@@ -95,6 +96,7 @@ Rail alignment data from WMATA's Metrorail GTFS feed.
 )
 
 render_map_help('business categories')
+render_excluded_stations("Washington D.C.")
 render_country_links('Washington D.C.')
 
 # The notices that publishing requires, on EVERY page rather than one -

@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -79,8 +80,7 @@ st.markdown(
 - The map covers the **commune of Marseille**, and unlike most cities here that costs it nothing:
   every station on all five lines falls inside the boundary.
 - What the boundary does exclude is a *sixth* rail line in the same feed — the tram at Aubagne, a
-  separate town with its own network — and those seven stations are listed on the What is counted
-  page.
+  separate town with its own network — and those seven stations are listed below.
 - Two other modes are absent by rules this project applies everywhere: the TER regional services
   are commuter rail, and ferries are not rail, though Marseille's harbour shuttles are closer to
   urban transit than that rule usually implies.
@@ -113,6 +113,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Marseille")
 render_country_links('Marseille')
 
 # The notices that publishing requires, on EVERY page rather than one -

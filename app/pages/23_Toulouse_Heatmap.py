@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -85,7 +86,7 @@ st.markdown(
 - The map covers the **commune of Toulouse**, and here that costs something real. Métro A loses
   one station and Métro B one; **Tramway T1 loses twelve of its twenty-five** — the whole branch
   out through Blagnac and Beauzelle, the Airbus works and the exhibition centre with it. All
-  fourteen are listed on the What is counted page.
+  fourteen are listed below.
 - Blagnac's businesses are in the same national register this map reads, so leaving them out is a
   choice rather than a limit of the data: the map keeps to the commune so that Toulouse can be
   read alongside Paris and Marseille on the same terms.
@@ -108,15 +109,15 @@ st.markdown(
   *registered*, and some registered establishments have no customer-facing shopfront — nothing in
   the data says which.
 - Against OpenStreetMap's mapped restaurants in the same commune, where the two schemes mean
-  nearly the same thing, this map carries about **1.3 times** as many points. That is the closest
-  of the three French cities: Paris runs 1.8× and Marseille 1.7×, and part of the difference here
-  is simply the masking above.
+  nearly the same thing, this map carries about **1.3 times** as many points, closer than Paris's
+  1.8× or Marseille's 1.7×; part of the difference here is simply the masking above.
 - **About two storefronts in three sit within a station ring.** The category toggles show every
   storefront; the rings show the share the four lines actually reach.
 """
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Toulouse")
 render_country_links('Toulouse')
 
 # The notices that publishing requires, on EVERY page rather than one -

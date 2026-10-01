@@ -18,6 +18,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -91,8 +92,7 @@ st.markdown(
   in fourteen and is not drawn.
 - Tram 8's stops are only a few hundred metres apart, closer than the rings are built for, so one
   stop about every half mile along the line is kept, plus both ends. San Francisco's, Amsterdam's
-  and Rotterdam's tram lines are thinned the same way. The stops left out are listed on the What
-  is counted page.
+  and Rotterdam's tram lines are thinned the same way. The stops left out are listed below.
 - The map covers the **comune di Roma**, Ostia included. Metro C's last stop, Monte Compatri –
   Pantano, is in a neighbouring comune and is not counted; the line is drawn to it.
 
@@ -122,6 +122,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Rome")
 render_country_links('Rome')
 
 # The notices that publishing requires, on EVERY page rather than one -

@@ -19,6 +19,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -50,6 +51,7 @@ st.markdown(
 )
 
 render_map_help('NAICS-geocoded storefronts')
+render_excluded_stations("San Diego")
 render_country_links('San Diego')
 
 # The notices that publishing requires, on EVERY page rather than one -

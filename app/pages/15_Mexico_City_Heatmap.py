@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -52,8 +53,7 @@ st.markdown(
   legend.
 - Only stations inside Ciudad de México are mapped. Líneas A and B run north and east into
   the State of Mexico, and those stations are left out because this map has no business data
-  for them — their rings would sit over blank ground. They are listed on the What is counted
-  page.
+  for them — their rings would sit over blank ground. They are listed below.
 - **The line geometry here comes from OpenStreetMap, not from the operator.** Every public
   host for the Mexico City government, for STC Metro and for the STE is unreachable from
   where this was built, and the Metro's transit feed is refused at its download location.
@@ -77,6 +77,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Mexico City")
 render_country_links('Mexico City')
 
 # The notices that publishing requires, on EVERY page rather than one -

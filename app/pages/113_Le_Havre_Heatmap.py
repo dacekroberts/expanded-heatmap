@@ -21,6 +21,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -83,7 +84,7 @@ st.markdown(
 - Le Havre has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 430 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Le Havre**. **Tram A runs past it**, so one stop beyond the boundary is left out: Grand Hameau in Octeville-sur-Mer.
-- The line is still drawn to its ends, but that stop gets no ring and its businesses are not counted; it is listed on the What is counted page.
+- The line is still drawn to its ends, but that stop gets no ring and its businesses are not counted; it is listed below.
 - Its commune's businesses are in the same national register this map reads, so leaving it out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
 
 **The businesses**
@@ -101,6 +102,7 @@ st.markdown(
 )
 
 render_map_help("three business categories (Retail, Food service and Personal services)")
+render_excluded_stations("Le Havre")
 render_country_links("Le Havre")
 
 # The notices that publishing requires, on EVERY page rather than one -

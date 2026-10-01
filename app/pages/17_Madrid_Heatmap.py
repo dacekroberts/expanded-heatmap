@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -51,7 +52,7 @@ st.markdown(
 - **Stations outside the city are not mapped.** Forty-nine of the 249 stations on the lines drawn
   here lie in Alcorcón, Getafe, Arganda del Rey and fifteen other municipalities.
 - Lines 10 and 12 run well past the city and are drawn in full, but mapping their stations would
-  need each municipality's own business register. They are listed on the What is counted page.
+  need each municipality's own business register. They are listed below.
 
 **The businesses**
 
@@ -75,6 +76,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Madrid")
 render_country_links('Madrid')
 
 # The notices that publishing requires, on EVERY page rather than one -

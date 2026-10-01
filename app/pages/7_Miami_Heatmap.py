@@ -21,6 +21,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -51,9 +52,8 @@ st.markdown(
   Miami: its stations reach Hialeah, Medley, Coral Gables, South Miami and unincorporated
   Miami-Dade.
 - Miami-Dade County licenses business tax receipts for all 34 of its municipalities in a single
-  file, so covering the whole line cost nothing extra. Six municipalities hold stations, every
-  station is on the map, and `outputs/miami/station_municipalities.csv` records which station is
-  where.
+  file, so covering the whole line cost nothing extra. Six municipalities hold stations, and every
+  station is on the map.
 - **Three lines are drawn**, each labelled directly on the map and in the legend: Metrorail, and the
   Metromover's Inner and Omni/Brickell loops.
 - Metrorail appears once even though Miami-Dade Transit signs it as two lines, Green and Orange:
@@ -90,6 +90,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Miami (Regional)")
 render_country_links('Miami (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -

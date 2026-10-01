@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -53,8 +54,7 @@ st.markdown(
 - **Three of this system's apparent stations are not stations.** Every train stops at two
   garage access points and a tail track, and at none of the three can a passenger get on or
   off. In the schedule data they are indistinguishable from real stations, and counting them
-  is why this project's own earlier reading of Edmonton came out too low per station. They
-  are listed in `outputs/edmonton/non_revenue_stops.csv`.
+  is why this project's own earlier reading of Edmonton came out too low per station.
 - Every remaining station is inside the city, so nothing was dropped for lying in another
   municipality.
 
@@ -88,6 +88,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Edmonton")
 render_country_links('Edmonton')
 
 # The notices that publishing requires, on EVERY page rather than one -

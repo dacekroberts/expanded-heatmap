@@ -21,6 +21,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -78,7 +79,7 @@ st.markdown(
   Blue and Green Lines and the Mattapan Trolley.
 - Regional Rail is a separate system and is not included, as commuter rail is left out on most
   maps here.
-- **Two different kinds of station are missing, and both are listed on the What is counted page
+- **Two different kinds of station are missing, and both are listed below
   with the reason for each.** 43 stations were dropped for being in another municipality (the
   network is regional, reaching Newton, Brookline, Cambridge, Somerville, Milton, Quincy, Medford,
   Revere, Malden and Braintree), and 25 Green Line surface stops were thinned out.
@@ -92,6 +93,7 @@ Rail alignment data provided by MassDOT/MBTA.
 )
 
 render_map_help('business categories')
+render_excluded_stations("Boston")
 render_country_links('Boston')
 
 # The notices that publishing requires, on EVERY page rather than one -

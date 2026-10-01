@@ -22,6 +22,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -90,8 +91,7 @@ st.markdown(
   Lille, out to Villeneuve-d'Ascq, Roubaix and Tourcoing, and a map of the commune alone would keep
   fewer than half of Métro 2's stations and only three of the tram's thirty-six.
 - So it takes in every commune with a station: Lille, Roubaix, Tourcoing, Villeneuve-d'Ascq,
-  Marcq-en-Barœul, Wasquehal, Croix, Mons-en-Barœul, La Madeleine, Mouvaux and Lambersart. Each is
-  listed with its stations in `outputs/lille/served_communes.csv`.
+  Marcq-en-Barœul, Wasquehal, Croix, Mons-en-Barœul, La Madeleine, Mouvaux and Lambersart.
 
 **The businesses**
 
@@ -116,6 +116,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Lille (Regional)")
 render_country_links('Lille (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -

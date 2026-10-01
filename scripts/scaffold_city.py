@@ -228,6 +228,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_data_age,
     render_map_help,
     render_site_notices,
@@ -262,7 +263,7 @@ st.markdown(
 
 - TODO: the lines drawn, by name (each is labeled on the map and in the legend).
 - TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed on the What is counted page.
+- TODO: the area covered; stations left out are listed below.
 
 **The businesses**
 
@@ -271,6 +272,7 @@ st.markdown(
 )
 
 render_map_help("three business categories (Retail, Food service and Personal services)")
+render_excluded_stations("@@NAME@@")
 render_country_links("@@NAME@@")
 
 # The notices that publishing requires, on EVERY page rather than one -

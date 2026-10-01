@@ -24,6 +24,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -68,7 +69,7 @@ st.markdown(
   they are thinned to roughly one stop per half-mile measured along the track, keeping each branch's
   terminals, the Center City tunnel stations all five share, and every point where a trolley meets
   a subway line.
-- Every stop cut this way is listed on the What is counted page, along with the six stations that
+- Every stop cut this way is listed below, along with the six stations that
   lie outside the city in Upper Darby, Yeadon and Darby.
 - Two SEPTA Metro lines are absent because they never enter Philadelphia: the Norristown High Speed
   Line and the Media–Sharon Hill trolleys both begin at 69th Street in Upper Darby.
@@ -95,6 +96,7 @@ st.markdown(
 )
 
 render_map_help('both business categories')
+render_excluded_stations("Philadelphia")
 render_country_links('Philadelphia')
 
 # The notices that publishing requires, on EVERY page rather than one -

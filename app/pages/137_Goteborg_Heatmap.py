@@ -18,6 +18,7 @@ from components import (  # noqa: E402
     render_city_nav,
     render_city_title,
     render_country_links,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -82,7 +83,7 @@ st.markdown(
 - The map covers **Göteborgs Stad**, the City of Gothenburg. Trams 4 and 12 run on into Mölndal,
   so their 5 stops there are left out.
 - The lines are still drawn to their ends, but those stops get no ring and their businesses are
-  not counted. They are listed on the What is counted page.
+  not counted. They are listed below.
 
 **The businesses**
 
@@ -91,7 +92,7 @@ st.markdown(
 - Each dot is placed at the point the register records for it and shows the premises' name and
   its type. Where a premises is registered under a person's name alone, its dot shows the street
   address instead.
-- **This map has one category, not three.** The register lists every premises the city's food
+- **This map shows food only, not three categories.** The register lists every premises the city's food
   control has registered: restaurants, cafés and bars, and food shops from kiosks to
   supermarkets, shown as Food service and Food shops.
 - It holds food premises only, so **clothes shops, hairdressers and the like are not on this
@@ -112,6 +113,7 @@ st.markdown(
 )
 
 render_map_help('business categories (Food service and Food shops)')
+render_excluded_stations("Göteborg")
 render_country_links('Göteborg')
 
 # The notices that publishing requires, on EVERY page rather than one -

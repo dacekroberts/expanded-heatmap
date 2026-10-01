@@ -17,6 +17,7 @@ from components import (  # noqa: E402
     render_city_title,
     render_country_links,
     render_data_age,
+    render_excluded_stations,
     render_map_help,
     render_site_notices,
     set_base_font,
@@ -51,7 +52,7 @@ st.markdown(
   adding them would quadruple the station count and change what this map is about.
 - **Two stations are missing on purpose.** Line 1 continues past the city limit into York
   Region, so Highway 407 and Vaughan Metropolitan Centre sit outside Toronto and outside this
-  map; they are listed on the What is counted page. Everything else the TTC signs as a
+  map; they are listed below. Everything else the TTC signs as a
   rapid-transit station is here.
 
 **The businesses**
@@ -84,6 +85,7 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Toronto")
 render_country_links('Toronto')
 
 # The notices that publishing requires, on EVERY page rather than one -
