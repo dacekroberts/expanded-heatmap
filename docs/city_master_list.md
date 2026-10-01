@@ -9,6 +9,10 @@ what is stopping each one.** It is rewritten as things change, like
 behind it. That file is the trail; this file is the answer. When they disagree,
 the trail wins and this file is stale.
 
+**How the list reached its state** — the band scheme, the methods, the filters
+and the reversals, dated — is in
+[`docs/city_master_list_history.md`](city_master_list_history.md) (2026-10-01).
+
 **Drift-corrected 2026-09-23**, after Marseille was built: counts, the band
 table, Marseille's row, Hong Kong's geocode rate, Göteborg's row count, Cairo
 (moved out of the discards onto the open screening gap, by this file's own

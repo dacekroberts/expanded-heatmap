@@ -28,7 +28,8 @@ are stated here.
 2. this file
 3. [`PLAN.md`](../PLAN.md) - what's open and what's next
 4. [`DECISIONS.md`](../DECISIONS.md) - the reasoning trail and per-run baselines
-5. [`city_master_list.md`](city_master_list.md) - which cities are viable and why
+5. [`city_master_list.md`](city_master_list.md) - which cities are viable and why;
+   [`city_master_list_history.md`](city_master_list_history.md) is how it got there
 6. [`sub_transit_line_filters.md`](sub_transit_line_filters.md) - the station-thinning pattern
 7. `.claude/skills/add-city/` - the process for adding a city
 
