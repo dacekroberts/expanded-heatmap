@@ -32,6 +32,24 @@ N02_URL = "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip"
 N02_ZIP = SHARED_RAW / "N02-24_GML.zip"
 N02_STATIONS = "UTF-8/N02-24_Station.geojson"
 N02_SECTIONS = "UTF-8/N02-24_RailroadSection.geojson"
+# N02 EDITIONS, per city (Hiroshima, 2026-09-30): a city reads the edition its
+# CITIES entry names ("n02"), N02-24 by default, so a newer edition moves no
+# built city until its own drift check is run on it. N02-24 (MLIT metadata
+# 2025-03-26) predates Hiroden's 駅前大橋線 (opened 2025-08-03): it still draws
+# the abandoned 的場町-猿猴橋町-広島駅 track and the closed 猿猴橋町 stop. N02-25
+# (published 2026-04-07, metadata 2026-03-06) has the new layout (no 猿猴橋町;
+# 皆実線's new 松川町). Same columns and CRS; the zip nests its members one
+# folder deeper. edition -> (URL, local zip, stations member, sections member)
+N02_EDITIONS = {
+    "24": (N02_URL, N02_ZIP, N02_STATIONS, N02_SECTIONS),
+    "25": ("https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip", SHARED_RAW / "N02-25_GML.zip",
+           "N02-25_GML/UTF-8/N02-25_Station.geojson", "N02-25_GML/UTF-8/N02-25_RailroadSection.geojson"),
+}
+
+
+def n02(slug=None):
+    """The N02 edition a city reads: (URL, zip, stations member, sections member)."""
+    return N02_EDITIONS[CITIES.get(slug, {}).get("n02", "24")]
 # N02_001 railway class · N02_002 operator type (1 = Shinkansen, 2 = JR
 # conventional, 3 = public, 4 = private, 5 = third sector) · N02_003 line name
 # · N02_004 operator · N02_005 station name. Station geometry is a LineString
@@ -80,6 +98,9 @@ CITIES = {
     # Band B 2026-09-29 (owner): personal services only, the 18 wards
     "yokohama": {"name": "横浜市", "pref": "14", "epsg": 32654,
                  "wards": [f"141{n:02d}" for n in range(1, 19)]},
+    # Band B 2026-09-29 (owner): food only, the 8 wards
+    "hiroshima": {"name": "広島市", "pref": "34", "epsg": 32653, "n02": "25",
+                  "wards": [f"341{n:02d}" for n in range(1, 9)]},
 }
 
 
@@ -134,12 +155,14 @@ def city_boundary(slug, wards=None):
     return wards.to_crs(4326).union_all()
 
 
-def stations(include_shinkansen=False):
+def stations(include_shinkansen=False, slug=None):
     """Every N02 station as a point (the platform's centroid), EPSG:4326, with
     the line and operator. The Shinkansen is dropped unless asked for. The
     centroid is taken in a projected CRS, never in degrees (the project's
-    invariant). Web Mercator is enough for a platform-length line."""
-    st = _read_geojson(N02_ZIP, N02_STATIONS)
+    invariant). Web Mercator is enough for a platform-length line. `slug`
+    picks the city's N02 edition (n02)."""
+    _, zp, member, _ = n02(slug)
+    st = _read_geojson(zp, member)
     if not include_shinkansen:
         st = st[st["N02_002"] != SHINKANSEN]
     st = st.to_crs(3857)
@@ -154,7 +177,7 @@ def stub_test(slug, wards=None):
     Returns a DataFrame; judging which lines are urban is left to the reader.
     `wards` measures an alternative scope (Tokyo's, with and without Chiyoda)."""
     city = city_boundary(slug, wards)
-    st = stations()
+    st = stations(slug=slug)
     st["inside"] = st.geometry.within(city)
     g = st.groupby(["N02_004", "N02_003", "N02_001", "N02_002"])
     out = g["inside"].agg(total="size", inside="sum").reset_index()

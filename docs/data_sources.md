@@ -2298,6 +2298,29 @@ lands).
   verdict is in `docs/decisions_drafts/band-b.md` until it is folded into
   `DECISIONS.md`. Contact for removals: ir-seikatsueisei@city.yokohama.lg.jp.
 
+**76. Hiroshima City, MHLW and MLIT (Hiroshima) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-09-30, after Tokyo's; displayed once
+Hiroshima lands).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-09-24; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's full list is
+  **PDL 1.0** through the city's open-data list (DataEye dataset 5672), and the
+  website terms give way to it; the owner accepted that reading for the
+  full-list file on 2026-09-24. MHLW's open data is **PDL 1.0**, as in
+  Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**,
+  as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never
+  drawn** (the Survey Act).
+- **MUST DISPLAY**: DataEye's pattern,
+  `出典：「食品営業許可一覧」（広島広域都市圏・広島県オープンデータポータルサイト）（https://hiroshima-opendata.dataeye.jp/datasets/5672）を加工して作成`,
+  and who did the processing (PDL 1.0); MHLW's source and processed-by credit,
+  linking its top page only; MLIT's credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate.
+- **MUST DO:** `check_personal_exposure.py hiroshima` with its Japan pass (the
+  operator's own name is never shown as a trade name), run 2026-09-30; the
+  verdict is in `docs/decisions_drafts/hiroshima.md` until it is folded into
+  `DECISIONS.md`.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

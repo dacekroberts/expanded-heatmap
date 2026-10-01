@@ -2654,6 +2654,29 @@ CITIES = [
         # and 1200 on the combined tree (width 68.8 px, measured 2026-09-30).
         "label_offset": ("start", 12, -42),
     },
+    {
+        "name": "Hiroshima",
+        "lat": 34.3963,
+        "lon": 132.4596,
+        "page": "pages/82_Hiroshima_Heatmap.py",
+        "coverage": "one_bucket",
+        "mode": "metro",
+        "placement": "Joined to address blocks (96.4%); ministry coordinates where missed",
+        "data_age": "Permits as of 2026-03-31; ministry filings fetched 2026-09-30",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Astram Line, JR, and Hiroden's streetcars",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # BELOW THE DOT, UNDER FUKUOKA'S PILL: Kobe's and Kyoto's pills sit above
+        # Hiroshima's dot in East Asia, Osaka's to its right, Daegu's and Busan's to its
+        # left. check_macro_labels.py (python -B) passes middle 0 at dy 48 to 62 (46
+        # meets Fukuoka's pill, 68 Taipei's), PROBLEMS 0 at 375, 768 and 1200 on the
+        # combined tree with Yokohama (width 66.3 px, measured 2026-09-30).
+        "label_offset": ("middle", 0, 54),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

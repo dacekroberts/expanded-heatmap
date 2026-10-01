@@ -1,0 +1,60 @@
+{
+  "city_food": {
+    "as_of": "2026-03-31",
+    "bytes": 13880348,
+    "dataset_page": "https://www.city.hiroshima.lg.jp/business/shokuhin-eisei/1051268/1051957.html",
+    "file": "5080331-2.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:50:42+00:00",
+    "rows": 9247,
+    "sha256": "2db4cd5f46af901bbe9d76792e30065f00e978f89bd81f724efa404a13db9963",
+    "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/014/315/5080331-2.xlsx"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 4094641,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "34100_food_business_all.csv",
+    "how": "downloaded",
+    "retrieved": "2026-09-30T23:42:56+00:00",
+    "rows": 12007,
+    "sha256": "581cee6914ff6285cdb5f37ecaf5f47a5ab3c162435f3a4d274f52ef5129425c",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=34100_food_business_all.csv"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 7088421,
+    "file": "data/japan/raw/N03-20250101_34_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-29T07:40:04+00:00",
+    "sha256": "3ca6dd943fc06c150938d6b750c885d44feac787c0d18bb650046c3f222256da",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_34_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 55042,
+    "elements": 86,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-09-30T23:49:55Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.25,132.16,34.63,132.7);way[\"railway\"=\"station\"](34.25,132.16,34.63,132.7););out tags center;",
+    "retrieved": "2026-09-30T23:51:10+00:00",
+    "sha256": "74cb9bd519ed29f2b31da058ca435fe7a7d04ec5e3313b3a2ce7457bc177d927"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 92781,
+    "elements": 162,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-09-30T23:52:01Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](34.25,132.16,34.63,132.7);out body;",
+    "retrieved": "2026-09-30T23:52:57+00:00",
+    "sha256": "8fc4078ad0d39996b47653bcb7acae95c64ea200e7ddff7a5be83c5a47ad2457"
+  }
+}

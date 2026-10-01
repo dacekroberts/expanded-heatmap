@@ -171,7 +171,8 @@ def fetch_isj(config, force):
 
 def fetch_mlit(config, force):
     pref = japan.CITIES[config.SLUG]["pref"]
-    for key, url, dest in (("n02", japan.N02_URL, japan.N02_ZIP),
+    n02_url, n02_zip, _, _ = japan.n02(config.SLUG)
+    for key, url, dest in (("n02", n02_url, n02_zip),
                            ("n03", japan.N03_URL_TEMPLATE.format(pref=pref),
                             japan.SHARED_RAW / japan.N03_ZIP_TEMPLATE.format(pref=pref))):
         how = get(url, dest, force)

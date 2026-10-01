@@ -78,7 +78,7 @@ Shinkansen.
 **Hiroshima City (8 wards).** Hiroden's Miyajima line and JR run on to
 Hatsukaichi and Kaita. Check at build.
 
-## Licences — MHLW READ 2026-09-24; the city's pending
+## Licences — both read 2026-09-24; the city's accepted by the owner the same day
 
 - **MHLW open data — PERMITTED WITH CONDITIONS** (PDL 1.0), exactly as in
   `fukuoka.md`: a processed-by credit naming the processor, no
@@ -94,7 +94,7 @@ Hatsukaichi and Kaita. Check at build.
   - **The site default GIVES WAY, unlike Sendai's**: the website terms reserve
     reuse (「…無断で使用・複製・転載・販売・改変・印刷配布することはできません」)
     but add 「…利用規約等、特別な規定がある場合は、この取り扱いに優先する」.
-  - ⚠️ **OPEN (owner)**: DataEye's only per-file entry (resource 25502)
+  - ✅ **ACCEPTED by the owner, 2026-09-24** (`docs/decisions/2026-09-20.md`, the Japan re-banding entry; this line said OPEN until the build, 2026-09-30): DataEye's only per-file entry (resource 25502)
     names the MONTHLY series and says the full list is viewable elsewhere. The
     市内全て file has no entry of its own, and it sits on the city's page,
     which declares no licence. The permitting reading is the city's
@@ -133,10 +133,10 @@ and the address, never any operator column. MHLW's file carries 法人名,
 
 ## Still unknown
 
-- ⚠️ **Whether the city's dataset-level PDL 1.0 covers the full-list file**: the owner's call, or one question to the city (both licences are read: PERMITTED WITH CONDITIONS).
-- ⚠️ **Band**: food service plus partial food retail, with no personal services. Band C's shape: the owner's call.
+- ✅ **Whether the city's dataset-level PDL 1.0 covers the full-list file**: accepted by the owner, 2026-09-24.
+- ✅ **Band**: passed to Band B on the reduced-bucket bar (owner, 2026-09-29); built 2026-09-30, food only, Hiroden drawn.
 - ⚠️ The ~14% with no published address; whether trams count. (✅ decided 2026-09-24 (owner): see the block at the top: city line only; Shinkansen out.)
-- ⚠️ The Economic Census food control.
+- ✅ The Economic Census food control: 1.80 pins per establishment, every ward 1.56-1.92 (the build, 2026-09-30).
 
 ```brief-checks
 [

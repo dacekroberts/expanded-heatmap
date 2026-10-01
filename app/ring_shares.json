@@ -503,5 +503,10 @@
   "in_ring": 6540,
   "all": 7843,
   "map_blob": "691a9d989c532d9fb4171368872bd6a27bf47272"
+ },
+ "hiroshima": {
+  "in_ring": 9134,
+  "all": 13567,
+  "map_blob": "9afd04db39efe8628f229aab0aedf3014a4f27bf"
  }
 }

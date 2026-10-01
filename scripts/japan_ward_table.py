@@ -58,9 +58,10 @@ STATUS = {
     "kyoto": ("Kyoto", "✅ built", "Built 2026-09-28, Japan's fifth. Rebuilt register: an upper bound"),
     "tokyo": ("Tokyo (8 wards)", "✅ built", "Built 2026-09-28, Japan's sixth and last. 8 food wards on; the 15 without "
                                         "a usable food list drawn as hollow stations (owner)"),
-    "hiroshima": ("Hiroshima", "🟣 C", "Food only: no personal-services list is published. Also: the network "
-                                     "is streetcars plus the elevated Astram Line, a trams-only edge case (Band T's "
-                                     "question), noted under the first-blocker rule"),
+    "hiroshima": ("Hiroshima", "✅ built", "Built 2026-09-30, Japan's seventh: food only (no personal-services list "
+                                         "is published; owner, 2026-09-29), with Hiroden's streetcars drawn and "
+                                         "MHLW's addressed filings; about one restaurant in seven withholds its "
+                                         "address"),
     "sendai": ("Sendai", "🔴 D", "Needs the city's permission; letter drafted, not sent"),
 }
 GAP = [  # no food list on disk: status only (key, name, wards, personal services, band, status)
