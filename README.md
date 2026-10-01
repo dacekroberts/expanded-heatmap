@@ -19,7 +19,7 @@ Mapped so far:
 - **United States:** San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh
 - **Canada:** Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional)
 - **Mexico:** Mexico City, Guadalajara (Regional), Monterrey (Regional)
-- **Spain:** Madrid, Barcelona
+- **Spain:** Madrid, Barcelona, Palma
 - **Ireland:** Dublin
 - **Italy:** Milan, Rome
 - **France:** Paris, Marseille, Toulouse, Lille (Regional), Rennes, Le Mans, Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice, Montpellier, Strasbourg, Le Havre, Caen, Rouen (Regional), Bordeaux (Regional), Nantes (Regional), Grenoble (Regional), Valenciennes (Regional)

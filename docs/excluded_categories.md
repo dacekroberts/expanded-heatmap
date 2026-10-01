@@ -2636,6 +2636,50 @@ street address.
   storefronts, 1.2%, in Villa Lugano, Villa Soldati and Villa Riachuelo), the
   heritage tramway, and the commuter railways.
 
+### Palma - the island's restaurant register, food only, placed by address
+
+**Only food is on this map.** The Consell de Mallorca registers every
+restaurant and entertainment establishment on the island - bars, cafés,
+restaurants, music bars and nightclubs - and publishes the register on the
+Govern de les Illes Balears's catalogue. No open register of other shops or
+of personal services covers Palma, so clothes shops, hairdressers and the like
+are missing rather than excluded. Nightclubs, party halls and dance halls are
+kept, as food service (R5). A premises is shown when the register lists it as
+active in Palma (4,372 of 4,375; 3 are temporarily closed).
+
+**Excluded by type and by name**, each listed with its rule in
+`outputs/palma/excluded_premises.csv`:
+- 9 caterers, the register's own "Catering" type (R1: no counter of their own).
+- 35 recreation venues, clubs and gaming: sports, tennis, padel, riding, golf
+  and nautical clubs (their restaurants included), a sports centre and a pool
+  bar, cinemas, bingo halls, and "casinos" (in Spain a members' club as often
+  as a gaming hall).
+- 8 institutional canteens: parish and school bars, clinics' cafeterias, a
+  community centre's canteen.
+- 4 bare hotel names (a hotel's own named café or restaurant stays).
+- 4 adult venues, where the name says so ("whiskería", table dance; R3).
+
+A name rule is imperfect: a few such premises may remain under a name that
+says nothing.
+
+**Not placed - 880 premises, about one in five.** The register gives
+coordinates for 13%; the rest are joined street and number to the Dirección
+General del Catastro's address points (59% of kept premises), or placed at the
+nearest listed number on the same side within six (7%). Left off the map: 677
+on a street Catastro spells differently or does not list (the airport, the
+seafront promenades, shopping centres, kilometre points on the main roads),
+126 with no street number ("S/N"), 55 whose number Catastro does not list, and
+22 whose street name and number name two places Catastro cannot tell apart.
+The join was checked against the register's own coordinates: a median 1.1 m
+apart, 92% within 100 m.
+
+**Stations.** Metro de Palma M1, all 10 stations, every one inside the
+municipality: `outputs/palma/excluded_stations.csv` is written empty. M2, which
+OpenStreetMap still carries, is no longer a metro service (the operator's
+timetable site lists M1 only); SFM's trains T1-T3 are suburban rail and not
+drawn, nor are buses. M1 runs about every 20 minutes in term time and every 30
+to 40 in the holidays, with no Sunday service.
+
 ### Glasgow - the food hygiene register, food only
 
 **Only food is on this map.** Glasgow City Council's entries in Scotland's Food

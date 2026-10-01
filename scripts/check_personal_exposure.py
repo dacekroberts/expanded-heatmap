@@ -419,6 +419,13 @@ REGISTRIES = {
     "kitchener_waterloo": dict(raw=None, trade=None, owner=None,
                                processed="businesses_clean.csv",
                                address=("address",)),
+    # Palma: the Consell de Mallorca's restaurant register. `Explotador/s`
+    # (the operator, sometimes a person with a tax id) is never read - step 2
+    # names its columns and asserts it - so only trade names are displayed,
+    # which this run measures.
+    "palma": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("address",)),
     # Houston: the Texas Comptroller's sales-tax permits. No taxpayer column is
     # ever downloaded but the organisation type (fetch_sources names its
     # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its

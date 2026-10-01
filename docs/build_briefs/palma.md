@@ -5,6 +5,27 @@ this brief).** Band B (owner, 2026-09-29): **food only**, reopened as
 Glasgow's twin. Run `python scripts/brief_check.py palma` before writing
 code.
 
+> **Measured at the build (2026-09-30), where it corrects the text below.**
+> **M2 is no longer a metro service**: TIB (the Consorci de Transports de
+> Mallorca) lists one metro line, M1; the Marratxí corridor is SFM's trains
+> T1–T3 (suburban rail, not drawn). OSM still carries M2's two relations
+> (named in `NOT_DRAWN`). So the page draws **M1 alone, 10 stations**, all in
+> Palma, 648 m median, gate 3 exact against TIB's stop list (owner,
+> 2026-09-30: build on the 10). M1 runs every 20 min in term time, 30–40 in
+> the holidays, no Sunday service: **disclosed, not disqualifying** (purpose-
+> built track; the light-rail test's Buffalo call). The address join
+> (`pipeline/countries/spain_catastro.py`) places **79.6%** of 4,312 kept
+> premises: the register's own coordinates 13.2%, Catastro exact 59.3%,
+> nearest number 7.1%; its control (512 rows with both) lands a median 1.1 m
+> apart, 92.2% within 100 m. The normalisation found by reading misses:
+> Catalan `l·l` written `L.L`, titles filed after a comma ("JOSEP
+> DARDER,METGE"), names cut at 24 characters, Castilian and Catalan forms of
+> one given name, a register title or second surname Catastro omits, and
+> Passeig Marítim as Avinguda Gabriel Roca. Catering (9) out by type; 51 by
+> name (clubs, cinemas, bingo, parish and clinic bars, bare hotel names,
+> adult venues). **3,432 storefronts**, 34.6% within the rings. The
+> dataset URI is on `intranet.caib.es`, not `catalegdades.caib.cat` (404).
+
 | | |
 |---|---|
 | Rail | Metro de Palma **M1** (Plaça d'Espanya ↔ ParcBit, `#f1b03e`) and **M2** (Plaça d'Espanya ↔ Marratxí, `#e93324`), operator SFM: 18 stations in OSM, about 16 inside the municipality (M2's outer stops are in Marratxí). OSM tags both `light_rail` |

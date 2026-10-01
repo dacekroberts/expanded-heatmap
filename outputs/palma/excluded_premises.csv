@@ -1,0 +1,944 @@
+source_key,business_name,establishment_type,address,reason
+B/3175,CLUB MUSEO WISKERIA,Bar,"GABRIEL ROCA, S/N. PALMA, Mallorca",Adult venue
+B/2200,LA WHISKERIA,Bar,"F.GARCIA LORCA, CANTONADA  PLAÇA FRANCESC ROSSELLÓ,4, 7. 07014 PALMA, Mallorca",Adult venue
+B/5464,RIKI´S TABLE DANCE,Bar,"GOMILA,EDIFICI GOMILA, S/N. 07014 PALMA, Mallorca",Adult venue
+CC/61,TABLE DANCE,Cafè concert,"Carrer LLAUT, 30. 07600 Arenal (L´)",Adult venue
+CT/10,CAN VALLORI,Catering,"Carrer SANT ESPERIT, 18. 07002 PALMA, Mallorca",Catering (no counter)
+CT/2,"HOM CASES DE SON MORRO, CAFÈ, RESTAURANT, BOTIGA",Catering,"Carrer PROJECTE HOME, 6, 07007 PALMA (Mallorca), Illes Balears",Catering (no counter)
+CT/11,LA CULINAREA,Catering,"Carrer GENERAL RIERA, 83. 07010 PALMA, Mallorca",Catering (no counter)
+CT/17,L´ARANCINA MALLORCA,Catering,"Carrer  JOAN MIRO, 275 local 6-9. 07015 PALMA, Mallorca",Catering (no counter)
+CT/8,MARTINEZ & MENOR,Catering,"Carrer LLAUT, 22 pis BXS. 07610 Arenal (L´)",Catering (no counter)
+CT/13,QUE BO,Catering,"Gran Via ASIMA, 34. 07009 Polígon Industrial De Son Castelló",Catering (no counter)
+CT/16,RAUSCHENBERGER CATERING,Catering,"Camí VELL DE LLUCMAJOR, 112. 07007 -",Catering (no counter)
+CT/6,TENTACIONES,Catering,"Carrer JUAN GRIS, 5. 07011 PALMA, Mallorca",Catering (no counter)
+CT/18,Vicky Pulgarín Catering SLU,Catering,"Carrer CALA BLANCA, 9. 07009 PALMA, Mallorca",Catering (no counter)
+BC/1258,HOTEL BASILICA,Bar-cafeteria,"CAN TRONCOSO, 3. -, -",Hotel
+BCp/79,HOTEL HOSTAL CUBA,Bar-copes,"Carrer SANT MAGÍ, 1. 07013 PALMA, Mallorca",Hotel
+C/4128,HOTEL PALACIO AVENIDA,Cafeteria,"ALEXANDRE ROSSELLÓ, CANTONADA MARQUÈS DE FUENSANTA, 42. 07002 PALMA, Mallorca",Hotel
+BC/1391,JOE´S GOMILA BOUTIQUE HOTEL,Bar-cafeteria,"Carrer GERMANS SCHEMBRI (Palma), 2. 07014 PALMA, Mallorca",Hotel
+BC/433,BAR DE L´ESCOLA,Bar-cafeteria,"CALA FIGUERA, 10. 07009 PALMA, Mallorca",Institutional canteen
+BC/1322,BAR PARROQUIAL,Bar-cafeteria,"Carrer BALTASAR VALENTÍ, 32 pis BJS. 07008 PALMA, Mallorca",Institutional canteen
+BC/856,BAR PARROQUIAL,Bar-cafeteria,"Carrer FRANCESC MARTI I MORA, 40. 07011 PALMA, Mallorca",Institutional canteen
+C/3814,CAFETERIA CLINICA PLANAS,Cafeteria,"DELS REIS, S/N. 07010 PALMA, Mallorca",Institutional canteen
+C/4474,CANTINA CENTRE SOCIAL FLASSADERS,Cafeteria,"FERRERIA, 10. 07002 PALMA, Mallorca",Institutional canteen
+R/400,CLINICA ROTGER,Restaurant,"SANTIAGO ROSSINYOL (ABANS VIA ROMA), 9. 07012 PALMA, Mallorca",Institutional canteen
+C/3529,PARROQUIA SAN. FCO. DE PAULA,Cafeteria,"GENERAL RIERA, 75. 07010 PALMA, Mallorca",Institutional canteen
+C/3742,POLICLINICA MIRAMAR,Cafeteria,"DE LA VILETA, 30. 07011 PALMA, Mallorca",Institutional canteen
+B/3208,ARIES,Bar,"BRIGADIER JOAQUIN RUIZ DE PORRAS, 3. 07015 PALMA, Mallorca",Not active (Baixa temporal)
+B/4151,CITY BURGER,Bar,"JUAN DE SARIDAKIS,7, S/N. PALMA, Mallorca",Not active (Baixa temporal)
+B/4453,NICO´S,Bar,"VENERABLE FRAY LLINAS, 3 lletra A. 07006 PALMA, Mallorca",Not active (Baixa temporal)
+B/3484,ABRAXAS,Bar,"MARITIM, 42. 07014 PALMA, Mallorca",Not placed: ambiguous street
+B/8098,AGUA Y AIRE CAFETERIA GERMANS ESCALAS,Bar,"MARE DE DEU DE MONTSERRAT, 69. 07008 PALMA, Mallorca",Not placed: ambiguous street
+C/4084,BAR CAFETERIA ZAFIRO,Cafeteria,"ANTONI RIBAS, 29 planta BXS. 07006 PALMA, Mallorca",Not placed: ambiguous street
+B/7235,CAFE BAR DUNDRET,Bar,"MAJOR, 9-A, CANT. PLAZA CAPELLERS, 2-B, S/N. 07001 PALMA, Mallorca",Not placed: ambiguous street
+R/6803,CAN CERA GASTRO BAR,Restaurant,"SANT FRANCESC, 8. 07001 PALMA, Mallorca",Not placed: ambiguous street
+R/7535,CANTINA - GRIL,Restaurant,"Avinguda GABRIEL ROCA, 44 local 35-36. 07015 PALMA, Mallorca",Not placed: ambiguous street
+C/3972,DUET CAFE,Cafeteria,"CUBA,7,CANT.C/QUITO, S/N. 07006 PALMA, Mallorca",Not placed: ambiguous street
+R/3929,EL PATO,Restaurant,"SON VIDA (URB.SON VIDA), 1. 07013 PALMA, Mallorca",Not placed: ambiguous street
+R/3646,KENTUCKY FRIED CHICKEN,Restaurant,"ESPANYA, 13. 07002 PALMA, Mallorca",Not placed: ambiguous street
+B/8187,LA BOLSA DEL MARITIMO,Bar,"ENGINYER GABRIEL ROCA, 33. 07014 PALMA, Mallorca",Not placed: ambiguous street
+B/2401,LA ENCINA,Bar,"PERE RIPOLL I PALOU (RAFAL VELL), 37. 07008 PALMA, Mallorca",Not placed: ambiguous street
+B/8223,LAOS MARITIM,Bar,"Avinguda GABRIEL ROCA, 44 local 10,11,12 I 13. 07015 PALMA, Mallorca",Not placed: ambiguous street
+B/3893,MARGARITA,Bar,"Carrer CAN VALERO, 6. PALMA, Mallorca",Not placed: ambiguous street
+R/3067,MERCAT 1930 PALMA GASTRONOMIC MARKET,Restaurant,"Avinguda GABRIEL ROCA, 33. 07014 PALMA, Mallorca",Not placed: ambiguous street
+R/2564,MERCAT DE´S TENIS,Restaurant,"JUAN CRESPI, 13. 07014 PALMA, Mallorca",Not placed: ambiguous street
+C/2017,MOVIDA 500,Cafeteria,"MARITIM, 33. 07014 PALMA, Mallorca",Not placed: ambiguous street
+R/6155,NA BRASA,Restaurant,"Carrer JOAN MARAGALL, 50 planta BXS local 4,5,6. 07006 PALMA, Mallorca",Not placed: ambiguous street
+B/2807,SANTA EULALIA,Bar,"SANTA EULALIA, 7. 07001 PALMA, Mallorca",Not placed: ambiguous street
+B/5998,SOCIAL CLUB,Bar,"MARITIM, 33. 07014 PALMA, Mallorca",Not placed: ambiguous street
+B/5292,TABERNA DEL PUERTO,Bar,"MARITIM, 44. PALMA, Mallorca",Not placed: ambiguous street
+B/8502,TEMPLO PALMA,Bar,"ENGINYER GABRIEL ROCA, 44 pis BXS local 17-18. -, -",Not placed: ambiguous street
+C/991,TER,Cafeteria,"MARITIM, 44. 07014 PALMA, Mallorca",Not placed: ambiguous street
+B/6484,ABACANTO,Bar,"SON NICOLAU, S/N. 07009 Indioteria (La)",Not placed: no number
+B/5337,ACRON,Bar,"JOAN MIRO S/N, S/N. PALMA, Mallorca",Not placed: no number
+B/3442,ADN,Bar,"MARITIM, S/N-H. PALAS ATE,, S/N. PALMA, Mallorca",Not placed: no number
+B/6655,ALAMBIQUE,Bar,"GOMILA, S/N. 07014 PALMA, Mallorca",Not placed: no number
+B/3005,ALASKA,Bar,"ROSSELLO,S/N, S/N. PALMA, Mallorca",Not placed: no number
+B/2331,ALFAMBRA,Bar,"ILLES PITIUSES, S/N. Coll De´N Rabassa (El)",Not placed: no number
+C/4577,AMERICAN EUROPEAN,Cafeteria,"DE LA MUNTANYA(TAHOE TENNIS CLUB), S/N. 07199 PALMA, Mallorca",Not placed: no number
+B/7815,ANTIC CAFE CAN SIMONET,Bar,"VALLDEMOSSA, S/N-PARQUE CAN SIMONET, S/N. PALMA, Mallorca",Not placed: no number
+R/5535,ARS,Restaurant,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+C/3550,BABOR,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+C/4227,BAIXADOR DE SON REUS,Cafeteria,"DE SON REUS (BAIXADOR DEL TREN), S/N. Son Sardina",Not placed: no number
+B/7515,BALNEARIO 11,Bar,"NEOPATRIA, S/N. 07600 PALMA, Mallorca",Not placed: no number
+B/7518,BALNEARIO 14,Bar,"BARTOLOME RIUTORT, S/N. 07600 PALMA, Mallorca",Not placed: no number
+B/7513,BALNEARIO 9,Bar,"VILLAGARCIA DE AROSA, S/N. 07600 PALMA, Mallorca",Not placed: no number
+B/8638,BAR D´ES MERCA,Bar,"CARDENAL ROSSELL (MERCAPALMA PABELLON 3), S/N. 07007 Coll De´N Rabassa (El)",Not placed: no number
+BC/9,BAR LAURA,Bar-cafeteria,"GREMI DE SELLETERS I BASTERS, S/N. 07009 PALMA, Mallorca",Not placed: no number
+C/3937,BARRIKA,Cafeteria,"Carrer LEOCADIA TOGORES (CENTRE OCIMAX), S/N local B2B. 07010 PALMA, Mallorca",Not placed: no number
+C/2868,BARTINI,Cafeteria,"DALT MURADA, S/N - SES VOLTES, S/N. 07001 PALMA, Mallorca",Not placed: no number
+B/3386,BAVARIA,Bar,"JOAN MIRO, S/N, S/N. 07014 PALMA, Mallorca",Not placed: no number
+C/3926,BEER GARDEN,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+C/3925,BEER GARDEN-PLANTA 4ª,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/152,BRIAN´S PLACE,Bar,"JOAN MIRO, S/N, S/N. PALMA, Mallorca",Not placed: no number
+C/3733,BURGER KING,Cafeteria,"AEROPORT SON SANT JOAN, MODUL A, LOCAL 8, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/6846,BURGER KING QUIOSCO FAN MALLORCA,Restaurant,"Carrer CARDENAL ROSSELL (CC. FAN) (L1-L7), S/N local 83. 07007 Coll De´N Rabassa (El)",Not placed: no number
+C/3554,CAFE CAFE,Cafeteria,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/4656,CAFE ES PES DE SA PALLA,Restaurant,"DES PES DE SA PALLA, S/N. 07002 PALMA, Mallorca",Not placed: no number
+B/1484,CAFE MILANO,Bar,"OLIVAR, S/N. 07002 PALMA, Mallorca",Not placed: no number
+B/8035,CAFE STEFKA,Bar,"Carrer MARBELLA ( CENTRE COMERCIAL LA RIBERA), S/N local 8. 07610 PALMA, Mallorca",Not placed: no number
+B/7381,CAFE TALAT,Bar,"ANTONIO MAURA, S/N. 07012 PALMA, Mallorca",Not placed: no number
+B/8029,CAFE TERRASSA ES PARC,Bar,"MIMOSA (PARC SON GIBERT), S/N. 07008 PALMA, Mallorca",Not placed: no number
+C/4619,CAFETERIA HOTEL ACAPULCO,Cafeteria,"EL ARENAL, S/N. HOTEL ACAPULCO PLAYA, S/N. 07610 PALMA, Mallorca",Not placed: no number
+C/3853,CAFETERIA MARINA PORT,Cafeteria,"ENGINYER GABRIEL ROCA, S/N. 07014 PALMA, Mallorca",Not placed: no number
+B/8052,CAFÉ CAFÉ PLANTA 4ª PLANTA,Bar,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/4116,CAJA DE AHORROS DE BALEARES,Restaurant,"CONCEPCIO, S/N. 07012 PALMA, Mallorca",Not placed: no number
+R/2549,CALVO,Restaurant,"Plaça MAJOR, S/N local 28. 07002 PALMA, Mallorca",Not placed: no number
+R/4721,CAN BIZEN´S BAR RESTAURANTE,Restaurant,"Carrer LLUIS ALEMANY PUJOL (CANT.GERMANS GARCIA PEÑARANDA), S/N. 07010 PALMA, Mallorca",Not placed: no number
+B/2349,CAN REMOLI,Bar,"SALARD S/N, S/N. 07008 PALMA, Mallorca",Not placed: no number
+B/7823,"CENTROS CIALS.CARREFOUR,S.A",Bar,"CARDENAL ROSSELL, S/N, S/N. 07007 Coll De´N Rabassa (El)",Not placed: no number
+C/3551,CERVECERIA 1516- T.A.,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/8054,CERVECERIA FACTURACION,Bar,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/8500,CHUPITO,Bar,"CARDENAL ROSSELL (MERCAPALMA - PABELLON II), S/N. 07007 Coll De´N Rabassa (El)",Not placed: no number
+BC/936,DARUMA-CORNER 37,Bar-cafeteria,"Plaça OLIVAR (MERCAT OLIVAR), S/N. 07002 PALMA, Mallorca",Not placed: no number
+R/242,DE VERGARA,Restaurant,"POBLE ESPANYOL, S/N. 07014 PALMA, Mallorca",Not placed: no number
+B/543,DOLI,Bar,"SANT VICENÇ DE PAÜL, S/N. 07010 PALMA, Mallorca",Not placed: no number
+R/5685,EL PEÑON,Restaurant,"Carrer ILLA DE SAMOS, S/N. 07007 PALMA, Mallorca",Not placed: no number
+R/2765,EL PORTICO,Restaurant,"Passeig MARITIM, S/N local 19-44. 07015 PALMA, Mallorca",Not placed: no number
+B/7186,ES CARRERO,Bar,"ESPARTERES S/N, S/N. 07012 PALMA, Mallorca",Not placed: no number
+B/4484,ESPAÑOL,Bar,"PORTA DE SANTA CATALINA, S/N. 07012 PALMA, Mallorca",Not placed: no number
+B/7806,FAST BAR,Bar,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7804,FAST BAR AMARILLO,Bar,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7805,FAST BAR AZUL,Bar,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7801,FAST BAR VERDE,Bar,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/2601,FLINTSTONE,Bar,"VEINAL GENOVA, S/N. Gènova",Not placed: no number
+B/4609,FONOLL,Bar,"Carrer CA´N FONOLL, S/N. 07007 Ciutat Jardí",Not placed: no number
+C/1585,GABI´S BAR,Cafeteria,"GOMILA, S/N. 07014 PALMA, Mallorca",Not placed: no number
+B/2358,GARRE,Bar,"ANDREA DORIA S/N, S/N. 07014 PALMA, Mallorca",Not placed: no number
+C/3197,GRAND SIENA,Cafeteria,"INGENIERO ROCA,S/N, S/N. PALMA, Mallorca",Not placed: no number
+C/3923,HENRY J. BEANS,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7002,I LOVE RIO,Bar,"MARITIM, S/N. PALMA, Mallorca",Not placed: no number
+C/3924,ILLY CAFE,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/4184,INTERNACIONAL,Restaurant,"Carrer NANSES, S/N. 07610 Can Pastilla",Not placed: no number
+R/175,ISKA,Restaurant,"ANTONI MAURA, S/N. 07012 PALMA, Mallorca",Not placed: no number
+C/2112,JARDINES EL PARQUE,Cafeteria,"Carrer MANUEL AZAÑA (PARC KREKOVIC), S/N. 07006 PALMA, Mallorca",Not placed: no number
+C/3437,JOSE´S,Cafeteria,"Carrer BARTOLOME SUREDA I MISEROL, S/N local 4. 07013 PALMA, Mallorca",Not placed: no number
+B/3457,JOY PALACE,Bar,"MISSIÓ DE SANT GABRIEL, S/N, S/N. 07600 PALMA, Mallorca",Not placed: no number
+B/6562,KIOSCO ALASKA,Bar,"DEL MERCAT, S/N. 07001 PALMA, Mallorca",Not placed: no number
+C/785,LA CASUCA,Cafeteria,"MARQUES DE LA SENIA, S/N. 07014 PALMA, Mallorca",Not placed: no number
+C/3547,LA CERVECERIA,Cafeteria,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/889,LA MONCLOA,Bar,"GOMILA, S/N. 07014 PALMA, Mallorca",Not placed: no number
+C/3555,LA PLAZA,Cafeteria,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7799,LAURENTIS,Bar,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7087,LOS ANGELES,Bar,"MISSIO DE SANT GABRIEL, S/N. 07600 PALMA, Mallorca",Not placed: no number
+R/4363,MANGIAFUOCO,Restaurant,"VAPOR, S/N. 07013 PALMA, Mallorca",Not placed: no number
+C/1298,MARITIMO,Cafeteria,"MARITIM S/N, S/N. 07015 PALMA, Mallorca",Not placed: no number
+BC/631,MAS Q MENOS,Bar-cafeteria,"Avinguda CARDENAL ROSSELL, S/N local 84. 07007 Coll De´N Rabassa (El)",Not placed: no number
+B/4084,MASSANET,Bar,"Carrer MANUEL AZAÑA S/N, S/N. 07006 PALMA, Mallorca",Not placed: no number
+C/3759,MCDONALD´S,Cafeteria,"LEOCADIA DE TOGORES, S/N (ZONA OCIMAX) CA´S CAPISCOL, S/N. 07010 PALMA, Mallorca",Not placed: no number
+C/4065,MCDONALD´S DE SON RAPINYA,Cafeteria,"Camí DE SON RAPINYA, S/N. 07013 PALMA, Mallorca",Not placed: no number
+C/3548,MEDAS BEER,Cafeteria,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7800,MEDAS READY TO EAT,Bar,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+C/1870,MEJILLONERA,Cafeteria,"NANSES, S/N. 07610 Can Pastilla",Not placed: no number
+R/1808,MESON CASTILLA,Restaurant,"GERMA BIANOR 1, S/N. 07600 Platja De Palma",Not placed: no number
+R/1766,MESON JAGUAR,Restaurant,"GAVINA S/N, S/N. 07015 PALMA, Mallorca",Not placed: no number
+R/4982,MESTRAL,Restaurant,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/1025,MONCADAS,Restaurant,"CONCHA ESPINA S/N, S/N. 07011 Vileta (La) - Son Rapinya",Not placed: no number
+R/2606,MONTEGO BAY,Restaurant,"MIGUEL ROSSELLO ALEMANY 2, S/N. PALMA, Mallorca",Not placed: no number
+C/1013,MORALVA,Cafeteria,"BARTOMEU QUETGLAS S/N, S/N. 07015 Cala Major",Not placed: no number
+B/7803,NESCAFE CORNER,Bar,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/928,NIBBAS,Bar,"GOMILA, S/N. 07014 PALMA, Mallorca",Not placed: no number
+C/3581,OASIS,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+C/939,OSIRIS,Cafeteria,"FRANCESC MARTI I MORA, S/N. 07011 PALMA, Mallorca",Not placed: no number
+R/2906,PARC DE LA MAR,Restaurant,"PARC DE LA MAR, S/N. PALMA, Mallorca",Not placed: no number
+R/4489,PAYESA,Restaurant,"SANTA PAGESA, S/N. 07003 PALMA, Mallorca",Not placed: no number
+C/4582,PELICANO BEACH,Cafeteria,"Carrer GUILLERMO DIAZ PLAJA, S/N. 07015 Cala Major",Not placed: no number
+B/7802,PLANTACIONES,Bar,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+C/3549,PONENT,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+B/7934,PUNT DE JOC OCIMAX,Bar,"LEOCADIA TOGORES , S/N, S/N. 07010 PALMA, Mallorca",Not placed: no number
+B/8011,PUNT DE JOC SON RAPINYA,Bar,"SON RAPINYA, S/N - CENTRE CIAL LOS ALEMDROS S/N. 07013 Vileta (La) - Son Rapinya",Not placed: no number
+R/4039,RANCHO BONANZA,Restaurant,"Carrer DEL VIOLER,S/N, S/N. 07610 Can Pastilla",Not placed: no number
+C/3927,READY TO EAT T.A.,Cafeteria,"AEROPORT DE SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/6981,RESTAURANT PESQUERO,Restaurant,"MOLL DE LA LLOTJA, S/N. -, -",Not placed: no number
+R/5564,RESTAURANTE SON HUGO,Restaurant,"CONCORDIA, S/N. 07004 PALMA, Mallorca",Not placed: no number
+B/87,RINCON DE LEON,Bar,"SON GOTLEU, S/N. 07008 PALMA, Mallorca",Not placed: no number
+R/6044,RODEO GRILL,Restaurant,"Plaça COMTAT DE ROSSELLO, S/N. 07002 PALMA, Mallorca",Not placed: no number
+C/3553,SA CALA,Cafeteria,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/2986,SA PAYESITA,Restaurant,"NANSES S/N, S/N. 07610 Can Pastilla",Not placed: no number
+R/349,SA TALAYA,Restaurant,"Passeig MARITIM, S/N. PALMA, Mallorca",Not placed: no number
+B/7975,SALON ORENES RAFAL,Bar,"Camí SON GIBERT,S/N CANTONADA CAMI SALARD, S/N. 07008 PALMA, Mallorca",Not placed: no number
+B/8103,SALON RECREATIVOS SA INDIOTERIA,Bar,"EDUARDO URGORRI, S/N, LOCALS 65-66-99-100, S/N. 07009 PALMA, Mallorca",Not placed: no number
+C/4308,SEGAFREDO BIT BURGER,Cafeteria,"AEROPORT DE SON SANT JOAN-TERMINAL D, S/N. 07611 PALMA, Mallorca",Not placed: no number
+BC/645,SES TERRASSES,Bar-cafeteria,"CARAVEL.LA S/N, S/N. 07610 PALMA, Mallorca",Not placed: no number
+R/1001,SON CASTELLO,Restaurant,"GREMI  DE BOTERS, S/N. 07009 Polígon Industrial De Son Castelló",Not placed: no number
+C/780,SON FORTEZA,Cafeteria,"PINTOR ROMERO DE TORRES, S/N. PALMA, Mallorca",Not placed: no number
+R/4983,SON SANT JOAN,Restaurant,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+R/392,SON SUNYER,Restaurant,"DE LA MUNTANYA, S/N. 07608 Pil·Larí (El)",Not placed: no number
+B/7504,S´ESTAY,Bar,"Passeig MARITIM, S/N local 2. PALMA, Mallorca",Not placed: no number
+R/6809,TACO BELL CENTRE COMERCIAL FAN MALLORCA SHOPPING,Restaurant,"Avinguda CARDENAL ROSSELL (CENTRE COMERCIAL FAN MALLORCA SHOPPING), S/N local 79-80. 07007 Coll De´N Rabassa (El)",Not placed: no number
+R/3093,THE GUINNESS HOUSE,Restaurant,"PARC DE LA MAR, S/N. PALMA, Mallorca",Not placed: no number
+R/4981,TRAMUNTANA,Restaurant,"AEROPORT SON SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: no number
+C/1711,TREN DE SOLLER,Cafeteria,"ESPANYA, S/N. 07002 PALMA, Mallorca",Not placed: no number
+R/4238,TRES PALAS,Restaurant,"CA NA GABRIELA S/N, S/N. 07600 PALMA, Mallorca",Not placed: no number
+R/4501,ULZAMA,Restaurant,"RUBEN DARIO, S/N. 07012 PALMA, Mallorca",Not placed: no number
+B/5690,VERONICA,Bar,"AMILCAR, S/N, S/N. 07600 PALMA, Mallorca",Not placed: no number
+B/1414,VILLA INGA,Bar,"SON TOELLS, S/N. 07015 Sant Agustí",Not placed: no number
+R/6274,VIP ARENA,Restaurant,"DE L´URUGUAI, S/N. 07010 PALMA, Mallorca",Not placed: no number
+BC/392,WURSTKONING,Bar-cafeteria,"ARENAL, S/N. 07610 PALMA, Mallorca",Not placed: no number
+B/4135,ALCOYANO,Bar,"JACINT VERDAGUER, 1. 07600 PALMA, Mallorca",Not placed: number not in Catastro
+B/43,ANDALUZ,Bar,"SANTIAGO ALVAREZ AVELLAN, 33. 07009 PALMA, Mallorca",Not placed: number not in Catastro
+R/6924,ARALLO,Restaurant,"Carrer MOLL VELL, 6. 07012 PALMA, Mallorca",Not placed: number not in Catastro
+B/7725,BAR CAN SANSO,Bar,"EDUARDO URGORRI, 57. 07009 PALMA, Mallorca",Not placed: number not in Catastro
+B/1908,BELMONTE,Bar,"FONOLL, 45. Coll De´N Rabassa (El)",Not placed: number not in Catastro
+B/2935,BILLARES METROPOLE,Bar,"SANT MIQUEL, 139. 07002 PALMA, Mallorca",Not placed: number not in Catastro
+BC/163,BURGER KING,Bar-cafeteria,"Carrer SON MALFERIT F (NO), 24 26. 07007 PALMA, Mallorca",Not placed: number not in Catastro
+C/4468,CAFE DES PAGESOS,Cafeteria,"CARDENAL ROSSELL, 182. 07007 Coll De´N Rabassa (El)",Not placed: number not in Catastro
+C/4595,CAFETERIA BIERGARDEN PETER,Cafeteria,"GAVINA, 5. 07015 Cala Major",Not placed: number not in Catastro
+BC/324,CAFETERIA NYAM-NYAM,Bar-cafeteria,"Carrer GREMI TRAGINERS D´OLI, 4. 07009 Polígon Industrial De Son Castelló",Not placed: number not in Catastro
+B/2489,CAN ALEGRIA,Bar,"SON FANGOS,301, S/N. PALMA, Mallorca",Not placed: number not in Catastro
+B/222,CAN CANTO,Bar,"REINA VIOLANT, 55. 07005 PALMA, Mallorca",Not placed: number not in Catastro
+B/311,CAN ROS,Bar,"CERDANA, 47. 07009 Indioteria (La)",Not placed: number not in Catastro
+B/2995,CASA BLANCA,Bar,"MANACOR, 815. 07199 PALMA, Mallorca",Not placed: number not in Catastro
+C/2737,CAÑADUL,Cafeteria,"LLUIS ALEMANY PUJOL, 7. 07010 PALMA, Mallorca",Not placed: number not in Catastro
+R/7057,DINS SANTI TAURA,Restaurant,"Plaça de Llorenç Villalonga, 4. 07001 PALMA, Mallorca",Not placed: number not in Catastro
+C/2200,DUCS,Cafeteria,"VIA ROMA, 22. 07012 PALMA, Mallorca",Not placed: number not in Catastro
+B/2766,EL JABALI,Bar,"BLANQUERNA,174,176, S/N. 07010 PALMA, Mallorca",Not placed: number not in Catastro
+B/1113,ES RAFAL,Bar,"PARE MARIA PAYERAS, 33. 07008 PALMA, Mallorca",Not placed: number not in Catastro
+B/2269,FREDDIES,Bar,"JOAN MIRO, 552. 07015 PALMA, Mallorca",Not placed: number not in Catastro
+B/5414,FRENTE ATLETICO,Bar,"Carrer CAP SALINES, 23. 07011 Son Roca - Son Ximelis",Not placed: number not in Catastro
+C/506,HAWAII,Cafeteria,"MARITIM, 166. 07015 PALMA, Mallorca",Not placed: number not in Catastro
+B/712,HELIOS,Bar,"MARITIM, 222. PALMA, Mallorca",Not placed: number not in Catastro
+BC/1524,INDIA HOUSE,Bar-cafeteria,"Carretera ARENAL, 3. 07610 Arenal (L´)",Not placed: number not in Catastro
+R/686,JUAN CRESPI,Restaurant,"JOAN CRESPI, 97. 07014 PALMA, Mallorca",Not placed: number not in Catastro
+B/8009,LA BODEGUILLA,Bar,"GREMI DE PORGADORS, 88. 07009 PALMA, Mallorca",Not placed: number not in Catastro
+B/2994,LA GADITANA,Bar,"MONT LUERI, 111. 07011 PALMA, Mallorca",Not placed: number not in Catastro
+BC/241,LA TASKITA,Bar-cafeteria,"BERGA, 29 planta BXS. 07600 Aranjassa (L´)",Not placed: number not in Catastro
+B/4975,LA TIERRA,Bar,"NIGUL, 4. 07014 PALMA, Mallorca",Not placed: number not in Catastro
+C/229,LOS OLIVOS,Cafeteria,"AIGUAMARINA, 28. 07600 PALMA, Mallorca",Not placed: number not in Catastro
+B/803,MAFALDA,Bar,"MONSENYOR PALMER, 20. 07014 PALMA, Mallorca",Not placed: number not in Catastro
+B/2683,MASPALOMAS,Bar,"JOAN MIRO, 599. 07015 PALMA, Mallorca",Not placed: number not in Catastro
+B/862,MI CASA,Bar,"SOLER, 96. 07013 PALMA, Mallorca",Not placed: number not in Catastro
+B/3954,NAYS,Bar,"MONSENYOR PALMER, 23 planta BXS. 07014 PALMA, Mallorca",Not placed: number not in Catastro
+B/7139,NOVEDADES,Bar,"EDUARDO URGORRI, 71. 07009 PALMA, Mallorca",Not placed: number not in Catastro
+B/1957,OLE,Bar,"JOAN MIRO, 179. 07015 PALMA, Mallorca",Not placed: number not in Catastro
+B/3644,ORLY,Bar,"BRIGADIER JOAQUIN RUIZ DE PORRAS, 16. 07015 PALMA, Mallorca",Not placed: number not in Catastro
+B/2416,PALOMARES,Bar,"SON CLADERA, 25. PALMA, Mallorca",Not placed: number not in Catastro
+B/1903,PILOTO,Bar,"EUSEBI ESTADA, 267. PALMA, Mallorca",Not placed: number not in Catastro
+R/3123,PIRINEU,Restaurant,"CAMINO REAL,24, S/N. PALMA, Mallorca",Not placed: number not in Catastro
+B/8430,PUNT DE JOC POLIGONO,Bar,"Carrer GREMI FERRERS, 1. 07009 Polígon Industrial De Son Castelló",Not placed: number not in Catastro
+R/6112,RESTAURANTE BAMBU,Restaurant,"PORTO PI, 32 planta BXS. 07012 PALMA, Mallorca",Not placed: number not in Catastro
+B/3033,SA FORMATGERIA,Bar,"MARQUES DE LA SENIA, 61. 07014 PALMA, Mallorca",Not placed: number not in Catastro
+R/5636,SA PERGOLA,Restaurant,"ANTONIA MARTÍNEZ FIOL (URB. SON PARERA) ESTABLIMENTS, 1. 07010 PALMA, Mallorca",Not placed: number not in Catastro
+B/7616,SANTOSHA,Bar,"METGE MATAS, 2. 07012 PALMA, Mallorca",Not placed: number not in Catastro
+R/4815,S´ATURADETA,Restaurant,"GREMI DE FERRERS, 3 local 58",Not placed: number not in Catastro
+R/4819,S´OLIVERA,Restaurant,"GRACIA, 67. 07002 PALMA, Mallorca",Not placed: number not in Catastro
+BCp/82,TEMATIK,Bar-copes,"Carrer Camí dels Reis , 221. 07011 PALMA, Mallorca",Not placed: number not in Catastro
+BC/368,TIPIC SOLLER,Bar-cafeteria,"EUSEBI ESTADA, 1. 07004 PALMA, Mallorca",Not placed: number not in Catastro
+B/3172,TOTEM,Bar,"JOAN MIRO, 189. 07015 PALMA, Mallorca",Not placed: number not in Catastro
+B/2909,TRIANA,Bar,"HEREDERO, 48. 07014 PALMA, Mallorca",Not placed: number not in Catastro
+B/1379,TU CASA,Bar,"BANC DE S´OLI, 30. 07002 PALMA, Mallorca",Not placed: number not in Catastro
+R/7470,URBÀ,Restaurant,"Plaça  DE LLORENÇ VILLALONGA, 4 pis 4. 07001 PALMA, Mallorca",Not placed: number not in Catastro
+BC/1392,VINILE.IT,Bar-cafeteria,"Carrer CAMI DELS REIS, 221 pis bxs local 1. 07011 PALMA, Mallorca",Not placed: number not in Catastro
+B/4022,YANGO,Bar,"JOAQUIM BOTIA, 4. 07012 PALMA, Mallorca",Not placed: number not in Catastro
+C/3781,31 DE DICIEMBRE,Cafeteria,"Carrer 31 DE DICIEMBRE, 17. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+C/4334,39 MÉS 1,Cafeteria,"Carrer EMPERADRIU EUGENIA, BLOQUE 1, S/N local 41. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/7554,7 DE JULIO,Bar,"GILABERT DE CENTELLAS -BJOS, S/N. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/5327,9 ASIMA,Restaurant,"Avinguda GRAN VIA ASIMA, 9. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+R/5429,A DINS PALMA,Restaurant,"Carrer PARELLADES   -CANT.PERE DEZCALLAR I NET, 12 local 14. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+B/3035,ACUARIO,Bar,"SANT IGNACI, 69. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/8462,ADOSVELAS,Bar,"Avinguda ENGINYER GABRIEL ROCA, EDIF TORRE MAR,, 44 local 9. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+C/3464,ALADIN,Cafeteria,"SES PARCELES, 2. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+R/4799,ALADIN,Restaurant,"OLMS, 4. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+B/2921,ALAMEDA,Bar,"TRASIMENO, 64. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/7325,ALAREIRA,Bar,"C´AN PASTILLA, 63 lletra A. 07610 Can Pastilla",Not placed: street not in Catastro
+B/4220,ALASKA,Bar,"JAUME BAUÇA, 7 lletra A. PALMA, Mallorca",Not placed: street not in Catastro
+B/3310,ALMONTE,Bar,"BISBE SASTRE CANTONADA CRONISTA ALEMAN, S/N. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+R/3641,AMADOR,Restaurant,"Carrer MISION DE SANTA BARBARA, 3 pis BXS. 07610 Arenal (L´)",Not placed: street not in Catastro
+R/6835,AMAYÓ,Restaurant,"Carrer JULIAN ALVAREZ, 3 pis PB porta IZ. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/1136,AMOK,Restaurant,"Carretera PALMA-S´ARANJASSA KM 10.800, PREDI SON SUNYER, S/N. 07199 Aranjassa (L´)",Not placed: street not in Catastro
+SF/30,AMOK,Sala de festes,"Carretera PALMA-ARANJASSA, S/N. 07199 Aranjassa (L´)",Not placed: street not in Catastro
+R/6623,ANIMA BEACH,Restaurant,"AUTOVIA DE LEVANTE (PUNTA DEL GAS), S/N. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+R/5735,ANSSIA,Restaurant,"Passeig PORTIXOL, S/N. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/5305,ANTILLON,Bar,"ISIDOR ANTILLON, 65. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/4079,APARSUIT,Bar,"FEDERIC GARCIA LORCA, 51. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/2342,APERITIVOS,Bar,"HUERTOS,1, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/7314,AROMA INDIA,Restaurant,"Avinguda Joan Maragal, 38 local 8. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+R/3522,ARROCERIA CA´N PEDRO,Restaurant,"ATENES, 3. 07610 Sometimes",Not placed: street not in Catastro
+R/6507,ARXI,Restaurant,"PUNTA CALA ESTANCIA,LOC.14,15,16 I 17, S/N. 07610 Can Pastilla",Not placed: street not in Catastro
+R/3510,ASADOR ARGENTINO LAS LEÑAS,Restaurant,"JOSEP DARDER METGE, 21. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/3941,ATLETICO SON GOTLEU,Bar,"PICO DE LA VELETA, 4. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/6100,AVAM,Bar,"RENATO, 4. PALMA, Mallorca",Not placed: street not in Catastro
+B/7771,AVANTI HELADOS ITALIANOS,Bar,"CENTRO COMERCIAL PORTO PI LOC:2414, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/5220,BACCUS,Bar,"LUIS FABREGAS,2, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/2150,BACOLI TRATTORIA,Restaurant,"Carrer JOSEP DARDER METGE, 35 pis BXS. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+R/6148,BADAL CORNER,Restaurant,"Carrer VELAZQUEZ ESQ. PLAZA COMPTAT DEL ROSSELLO, 7. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+C/1386,BALLERMAN 33,Cafeteria,"MISIO SANT  DIEGO, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+C/2733,BALLERMAN PACO Y JUAN,Cafeteria,"TROVADORS,S/N-EL ARENAL, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/81,BALLY JAY,Bar,"MEDITERRANI, 5. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/2509,BALMES,Bar,"BALMES, 59. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/7505,BALNEARIO 1,Bar,"GRAN VIA CAN PASTILLA, 4. 07600 Can Pastilla",Not placed: street not in Catastro
+B/7516,BALNEARIO 12,Bar,"ARENAL-APTOS.SOMETIMES, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/7517,BALNEARIO 13,Bar,"ARENAL-FRENTE C/GARZA, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/7519,BALNEARIO 15,Bar,"BARTOMEU RIUTORT CANTONADA CARRER BERGANTIN, S/N. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+B/7512,BALNEARIO 8,Bar,"MAR EGEO, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+C/3322,BAMBOLEO 2,Cafeteria,"PADRE BARTOLOME SALVA, 5. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/5348,BAR 1º PISO,Bar,"GOMILA, EDIFICI GOMILA CENTER, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+BC/928,BAR ALCE,Bar-cafeteria,"Carrer parcelas, 14. 07610  PALMA, Mallorca",Not placed: street not in Catastro
+BC/74,BAR AUTENTIC,Bar-cafeteria,"Carrer SANT VICENÇ FERRER, CANT.C/ARAGO, 132. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+BC/573,BAR CAFETERIA 18,Bar-cafeteria,"Camí DE SON GOTLEU (ESQ. JOSEP GARCIA, 2), 81. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/7798,BAR CAFETERIA CA´N BONET,Bar,"Carrer JOSEP DARDER, 3. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+C/4464,BAR CAFETERÍA LIN,Cafeteria,"Carrer JOSEP DARDER METGE, 11. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+C/2439,BAR CAFETERÍA LOS AMIGOS,Cafeteria,"Carrer JOSEP DARDER METGE, 11. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/7477,BAR CAPRI,Bar,"Carrer JOSEP DARDER METGE, 7. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/8490,BAR CASA FERNANDO,Bar,"GREMI CIRURGIANS I BARBERS, 50 planta BXS. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+C/4167,BAR CA´N LLUIS,Cafeteria,"Carrer BENET PONS I FABREGAS, 43 local B. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+B/7071,BAR CA´S NENE,Bar,"NAVEGACION, PTO. 21. MERCAT SANTA CATALINA, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/6866,BAR CERVECERIA EL GRANAINO,Restaurant,"Carrer MARGARITA MONLAU, 40. 07198 Son Ferriol",Not placed: street not in Catastro
+C/3255,BAR CINE CLUB CARLOS,Cafeteria,"Carrer TARENT, 2 local 6. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/3426,BAR DE LA MARINA,Bar,"MUELLE PELAIRES, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+C/4578,BAR DE LA MARINA,Cafeteria,"MOLL DE PELAIRES, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/8552,BAR EL RINCON DE ZAFRINA,Bar,"Carrer BENET PONS I FABREGAS, 3 pis BXS porta ES. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+B/654,BAR GASOLINERA,Bar,"Carrer ARAGON CANTONADA JACINTO BENAVENTE, S/N. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/7969,BAR GASOLINERA SON RAPINYA,Bar,"DELS REIS CANTONADA CAMI DE SON RAPINYA, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/3699,BAR GRANADA,Bar,"CENTRO CCIAL LOS ALMENDROS, S/N local 30. 07013 Vileta (La) - Son Rapinya",Not placed: street not in Catastro
+BC/1239,BAR JB,Bar-cafeteria,"Carrer ISIDORO ANILLON, 69 pis BJOS. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+BC/254,BAR KARAOKE ANDURIÑA,Bar-cafeteria,"Carrer GRAN VIA, 5 local 59. 07610 Can Pastilla",Not placed: street not in Catastro
+B/1034,BAR LALA,Bar,"PERE OLIVER DOMENGE, CANT.SARGENT MORAGUES VIDAL, 18 pis BXS",Not placed: street not in Catastro
+C/2067,BAR LAS TORRES,Cafeteria,"LAS TORRES,APARTAMENT, 3. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1206,BAR LOS AGUIRRES,Bar-cafeteria,"Carrer OLMOS, 24. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+B/1324,BAR LUNA MALLORCA,Bar,"Carrer COLLIURE, 41. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/7979,BAR MALAMBO,Bar,"Carrer CAN VALERO, BAIXOS, 11. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/6504,BAR MALLORCA,Bar,"TORRE DEN BIBILONI, 21. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/3875,BAR MOMENTS,Bar,"Carrer GAVIOTA,6 CANTONADA JOAN MIRO,275, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/959,BAR NORVI,Bar,"Carrer GUILLEM GALMES (CANTO C/ JOAN MUNAR, 19), 21 local D. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+BC/622,BAR NOU,Bar-cafeteria,"Carrer SANTIAGO ALVAREZ ABELLAN, 5 local 23. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+B/6258,BAR OASIS,Bar,"JOSEP Mª LLOMPART,8, CANT. PEDRO RIPOLL PALOU, 52, S/N. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1275,BAR PONS,Bar-cafeteria,"Plaça MONTERO, 9. 07199 Sant Jordi",Not placed: street not in Catastro
+R/4093,BAR RESTAURANTE TORRES,Restaurant,"CIRI 12, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/7829,BAR RUN RUN,Bar,"Carrer GOLF D´ ALICANT,URBANITZACIO SON PARERA, 3 local 10. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+B/3664,BAR SA CURVA HIPODROMO SON PARDO,Bar,"Carretera SOLLER, KM. 3,5 - HIPODROM SON PARDO, S/N. 07120 PALMA, Mallorca",Not placed: street not in Catastro
+BC/558,BAR VEN,Bar-cafeteria,"BINIALI ESQ. PASSATGE SENCELLES, 3 planta BXS. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/8036,BAR VERACRUZ,Bar,"PADRE BARTOLOME POU, 10. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+B/5236,BARRANCO,Bar,"FERIAS Y MERCADOS, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/5702,BASIC,Restaurant,"Carrer PERE D´ALCANTARA PENYA, BAJOS DCHA., 18 local BJS. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+C/1582,BASMATI,Cafeteria,"STA. CATALINA DE SIENA   -C. CIAL. LOS GERANIOS 2. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+BC/760,BEAUDEVIN,Bar-cafeteria,"AEROPUERTO DE PALMA DE MALLORCA - TERMINAL C - PORTA 52, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+R/6850,BEERCODE,Restaurant,"AEROPORT PALMA DE MALLORCA. TERMINAL C - PORTA 52, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+B/95,BELLVER,Bar,"SERIÑA,2, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/2042,BERPA,Bar,"339 - URBANIZACION SON DAMETO, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/4177,BIERGARTEN,Bar,"MIGUEL PELLISA CANTONADA LLAUT, 12. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+R/6187,BISTRO BASKO,Restaurant,"POIMA, NAVE 2, 23. 07011 Polígon Industrial De Can Valero",Not placed: street not in Catastro
+C/4336,BLACK&BLUE COFFEE,Cafeteria,"Carrer CALA MONDRAGO, 10. 07009 Son Cladera",Not placed: street not in Catastro
+B/118,BLUE BEAT,Bar,"GOMILA,EDIFICI GOMILA, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/5964,BLUES VILLE,Bar,"MORO,5, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/6990,BO,Restaurant,"Carrer Isla de Malta, 14. 07007 Ciutat Jardí",Not placed: street not in Catastro
+B/1787,BODEGA LA RAMBLA,Bar,"LA RAMBLA, 15. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+R/6830,BOMBON BOSS,Restaurant,"Carrer PORTA DE JESUS (ACCESO C/ OLMOS, 52), 2 pis BJS. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+R/672,BON APETITO HANS EN GRIETJE MALLORCA,Restaurant,"TRASIMENO, 24. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/135,BON SOL,Bar,"ARENAL,KM.11´9, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/1101,BOSQUE,Cafeteria,"Carrer BOSC,ED.KUALITY, S/N local 3. PALMA, Mallorca",Not placed: street not in Catastro
+C/439,BOSTON,Cafeteria,"BATLE FONS, S/N. 07015 Cala Major",Not placed: street not in Catastro
+R/6656,BOTAVARA,Restaurant,"BOLONYA, PL.TARENT, 2. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+BC/569,BOTONS,Bar-cafeteria,"RAIMUNDO CLAR, 15 planta BXS porta 3. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/8406,BOUTIQUE DE GELATO,Bar,"ARQUITECTE GASPAR BENNASAR,11, EUSEBI ESTADA,64, S/N. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/4895,BREOGAN,Restaurant,"Carrer MARIANO CANALS, 5 pis BJS. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+BC/635,BRICK BAR,Bar-cafeteria,"FORN DEN VILA, 3. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+R/5295,BUEN DIA,Restaurant,"GREMIO DE FUSTERS, 12. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+R/2116,BUFETTE HIPODROMO SON PARDO,Restaurant,"Carretera SOLLER, KM.3´5 - HIPODROM SON PARDO, S/N. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/7129,BULEVAR MEDITERRANEO,Bar,"MEDITERRANI, 5. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/6198,BULLDOG,Restaurant,"Camí DE GENOVA A SAN AGUSTIN, 51 pis BXS porta B. 07015 Sant Agustí",Not placed: street not in Catastro
+R/6067,BUNKER´S,Restaurant,"SOLER,CANT.PURSIANA, 34. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+C/3713,BURC,Cafeteria,"Carretera ARENAL- BAIXOS 1-3, 29 pis BXS. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+BC/162,BURGER KING,Bar-cafeteria,"Plaça ESPAÑA, 2. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/1940,BURGER KING,Restaurant,"MARITIMO S/N, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/6694,BURGER KING,Restaurant,"CIRERER (CANTO C/ARAGO, 206), 1 local B. -, -",Not placed: street not in Catastro
+R/5874,BURGER KING OCIMAX,Restaurant,"Carretera VALLDEMOSSA, POLIGON IND. CAS CAPISCOL II, C. CCIAL OCIMAX, S/N. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/7241,BURGUER JOHN´S,Bar,"TOMAS RU.LLAN, 25. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/6287,BY CDM RESTAURANTE,Restaurant,"GABRIEL ROCA, LOC. 1-2-3-4-5-6-7-8-9, 54. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+BC/346,CA NA CATI,Bar-cafeteria,"Carrer JOSEP DARDER METGE, 5 local 3. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/8369,CA NA CHINCHILLA,Bar,"RAMBLES DELS DUCS DE PALMA, 7. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+R/3011,CA NA CRISTINA,Restaurant,"JOAN MIRO, LOCALS 25 I 26, 275. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/8093,CA NA FANI,Bar,"GENERAL RIERA, CANTONADA REVEREND ANTONI TAULER, S/N. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+C/4526,CA NA MERCE,Cafeteria,"ESPARTERO, CANT. PLAZA PUENTE, 2, 25. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/6160,CA NA YOLI,Restaurant,"Carrer HORT DE TORTELLA, 34 pis BX. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/5104,CA S´ARROSSER,Bar,"MONTAÑA,377, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/4436,CACHITO,Bar,"ED.PUNTA CALA ESTANCIA,LOC.16, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/2832,CAFE BAR LA PISTA,Bar,"Carrer JACINT GUERRERO, 10. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+C/3552,CAFE CAFE FACTURACION,Cafeteria,"AEROPORT SONT SANT JOAN, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+B/4487,CAFE CAMPS REDO,Bar,"GENERAL RIERA, CANTONADA CAP BLANES, 76. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/1703,CAFE CA´N MARTI,Bar,"CA´N SALAS, 7. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+BC/61,CAFE CUATRE,Bar-cafeteria,"PUERTA SAN ANTONIO, 12. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/7988,CAFE DE CALA GAMBA,Bar,"JOSEP MARQUES I TAULET, 10 planta 1. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+CC/51,CAFE EL GARITO DE CA´N BARBARA,Cafè concert,"Zona DÀRSENA DE CAN BARBARA, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+BC/483,CAFE LOS LAGOS,Bar-cafeteria,"Carrer LLAC LUGAN, 12 local B. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+C/3,CAFE SA PLAÇA,Cafeteria,"Carrer ARADO, 24 lletra B. Sant Jordi",Not placed: street not in Catastro
+B/7583,CAFE VERDE,Bar,"MERCED, 1 planta BXS. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+C/1263,CAFETERIA ALASKA,Cafeteria,"SON RIGO   -EDIFICI NADAL, 19. 07610 Arenal (L´)",Not placed: street not in Catastro
+C/872,CAFETERIA ALUM,Cafeteria,"Carrer RAFALETES, 1 local 1. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1136,CAFETERIA ANSELM TURMEDA,Bar-cafeteria,"Carretera VALLDEMOSSA, Km. 7,5 (CAMINAL EIVISSA, S/N), -. 07122 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1134,CAFETERIA CAMPUSESPORT,Bar-cafeteria,"Carretera VALLDEMOSSA KM. 7,5 (CAMINAL FORMENTERA, S/N), -. 07122 PALMA, Mallorca",Not placed: street not in Catastro
+C/4004,CAFETERIA CAN POLLETS,Cafeteria,"EDUARDO UGORRI-CENTRO COMERCIAL 82-83, S/N. 07009 Indioteria (La)",Not placed: street not in Catastro
+C/3287,CAFETERIA CASANOVA,Cafeteria,"CALA ESTANCIA, LOC. 11-12-13, S/N. 07610 Can Pastilla",Not placed: street not in Catastro
+BC/596,CAFETERIA CASTILLO DE SAN CARLOS,Bar-cafeteria,"DIQUE DEL OESTE, CASTILLO DE SAN CARLOS, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+BC/124,CAFETERIA DUO,Bar-cafeteria,"Carrer EMILI DARDER BATLE, 17 lletra B. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+C/4538,CAFETERIA EROSKI,Cafeteria,"Carretera PALMA-MANACOR, KM. 2,9 (NAVE EROSKI), S/N local 1. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+C/707,CAFETERIA GISELA,Cafeteria,"Carretera ARENAL -EDIFICI PARIS, 48 local 19-20. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+C/1428,CAFETERIA GRAN JOY,Cafeteria,"MISION SAN GABRIEL, 8 I 9. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1135,CAFETERIA GUILLEM CIFRE DE COLONYA,Bar-cafeteria,"Carretera VALLDEMOSSA KM. 7,5 (CAMINAL EIVISSA, S/N), -. 07122 PALMA, Mallorca",Not placed: street not in Catastro
+BC/805,CAFETERIA HAMBURGUESERIA P&P,Bar-cafeteria,"Avinguda TOMAS DE VILLANOVA I CORTES, 20 pis BXS. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1155,CAFETERIA JOVELLANOS,Bar-cafeteria,"Carretera VALLDEMOSSA Km. 5,7, S/N. 07122 PALMA, Mallorca",Not placed: street not in Catastro
+BC/187,CAFETERIA PIZZERIA ARMONIA,Bar-cafeteria,"Carrer OLMOS, 13 pis BXS. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1247,CAFETERIA RAMON LLULL,Bar-cafeteria,"Carretera VALLDEMOSSA KM 5.7, S/N. 07122 PALMA, Mallorca",Not placed: street not in Catastro
+C/3407,CAFETERIA SAXOFON,Cafeteria,"Carrer GABRIEL CORTES,CANTONADA C/CAMBRILS, 10. 07009 Indioteria (La)",Not placed: street not in Catastro
+R/6286,CAFETERIA THE GUINNESS HOUSE,Restaurant,"Avinguda MUELLE VIEJO, EDIFICIO ESPIGON, S/N. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+C/4488,CAFETERIA TONY´S,Cafeteria,"Carrer JORDI ANDREU, 16 local 3. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+C/3947,CAFETERIA TUCAN,Cafeteria,"Carrer EMILIO SERRANO, CANT. C/ TOMAS LUIS DE LA VICTORIA, S/N. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+C/4076,CAFETERIA UNIVERSO,Cafeteria,"VENTAYOL, 3, CANTONADA ARAGON 83, 3 planta BXS. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+C/4568,CAFETERIA VILY,Cafeteria,"Plaça TARENT, 1 pis BXS. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/3089,CAFETERIA VIRGEN DE MONSERRAT,Bar,"Carrer VERGE DE MONTSERRAT, 21. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+C/3585,CAFETERIA ZONA URGENCIAS SON LLATZER,Cafeteria,"Carretera MANACOR  KM.4 (SON LLATZER), KM 4. 07198 Son Ferriol",Not placed: street not in Catastro
+BC/1139,CAFETERÍA EDIFICI MATEU ORFILA,Bar-cafeteria,"Carretera VALLDEMOSSA, Km. 7,5 (C/. ILLA D´EN COLOM), S/N. 07122 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1140,CAFETERÍA EDIFICI SON LLEDÓ,Bar-cafeteria,"Carretera VALLDEMOSSA Km. 7,5 (C/. FORMENTERA), S/N. 07122 PALMA, Mallorca",Not placed: street not in Catastro
+B/3080,CAMPOS,Bar,"Carretera ARENAL-GALERIES CUPIDO, 15 local 4. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+R/1104,CAN ALOY,Restaurant,"SINI DEN GIL, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/207,CAN BERNAT,Bar,"COLON,10.SON COTONER, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/8460,CAN BIEL FELIP,Bar,"MIGUEL DE CAMPLLONCH, 45 planta BXS. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+R/5365,CAN COLAU,Restaurant,"Carrer MONTAÑA, 374 local A-B. 07600 Pil·Larí (El)",Not placed: street not in Catastro
+B/2678,CAN DALMAU,Bar,"GENERAL RUEDA, 407. PALMA, Mallorca",Not placed: street not in Catastro
+B/4653,CAN DAMIA,Bar,"NEVIA,22, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/5989,CAN DENIX,Restaurant,"Camí DEL PALMER, S/N. 07600 Arenal (L´)",Not placed: street not in Catastro
+BC/628,CAN JAUME ARTESANS,Bar-cafeteria,"MERCAT DE L´OLIVAR, LLOC 51-52, S/N. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/7053,CAN JOAN,Bar,"SUREDA, (CANTONADA REGAL, 9), 23. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+B/1950,CAN MIQUEL DES LICEU,Bar,"HUERTO DE TORRELLA, 24. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/1630,CAN PAU,Bar,"ESPORLAS-ESTABLIMENS, 63. PALMA, Mallorca",Not placed: street not in Catastro
+C/3778,CAN PETIT BISTRO,Cafeteria,"Camí DE CAN MANUEL  - PARC BIT, S/N. 07120 Son Espanyol",Not placed: street not in Catastro
+C/4586,CAN PONCIO,Cafeteria,"Carrer MARBELLA-C.COMERCIAL LA RIBERA, S/N local 3. 07610 Arenal (L´)",Not placed: street not in Catastro
+R/2709,CAN TONI,Restaurant,"VALLDEMOSA, 59. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+R/3410,CAN TORRAT,Restaurant,"LAS MARAVILLAS, S/N. 07610 Arenal (L´)",Not placed: street not in Catastro
+R/4997,CANTINA CALA GAMBA,Restaurant,"JOSE MARQUES Y TAULET, 10 planta BXS. 07600 Cala Gamba",Not placed: street not in Catastro
+B/7779,CANTINA PARC DE CABRERA,Bar,"PORT DE CABRERA, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/4051,CAPPUCCINO BORNE,Cafeteria,"JOAN CARLES I, 9. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+R/3925,CAPRI BAR & RESTAURANTE,Restaurant,"Carrer MARBELLA,CANT.AV.SON RIGO, S/N. 07610 Arenal (L´)",Not placed: street not in Catastro
+R/3308,CARMONA,Restaurant,"DELFI, 11. 07610 Can Pastilla",Not placed: street not in Catastro
+B/7131,CARNIVAL BAR,Bar,"Plaça MEDITERRANI, 5. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+C/342,CARRION,Cafeteria,"ARENAL,KM.11, S/N. 07610 Can Pastilla",Not placed: street not in Catastro
+C/3211,CAS ALOI´S,Cafeteria,"Carrer BALMES CANTONADA AMB NUNO SANÇ, 19. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/1912,CAS FERRER,Bar,"SON FONO, 13 planta BXS. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+B/4851,CAS PINCHO,Bar,"421, S/N. Son Serra Perera",Not placed: street not in Catastro
+R/266,CASA EDUARDO,Restaurant,"INDUSTRIA PESQUERA, 4. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+R/1944,CASA JACINTO,Restaurant,"BARRANCO, 20, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/5447,CASA JACINTO,Restaurant,"DEL TRANVIA, 37. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+R/3263,CASA LEONE,Restaurant,"MAR MENOR, CANT. C/LLAUD, 5. 07610 Can Pastilla",Not placed: street not in Catastro
+B/392,CASA LUIS,Bar,"OBLATAS,4.LA VILETA, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/3239,CASA MANOLO,Restaurant,"SON FERRIOL 44, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/5128,CASA TOLO,Bar,"CAP SALINAS CANTONADA CAP FORMENTOR, S/N. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/7642,CATAMARAN FASCINATION BAR,Bar,"PUERTO, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/7641,CATAMARAN INSPIRATION BAR,Bar,"PUERTO, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/7811,CA´N BIEL,Bar,"Carrer MUSICO JOSE Mª USANDIZAGA, 4 pis BXS. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+C/3457,CA´N BLANC,Cafeteria,"Avinguda GABRIEL ROCA, DÀRSENA DE SANT MAGÍ, 3. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/6917,CA´N DALMAU,Bar,"NOU CAMI ROIG, 23. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+B/3098,CA´N DIVI,Bar,"MERCAT DE L´OLIVAR, LLOC 21, S/N. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+R/2987,CA´N GAFET,Restaurant,"MANACOR, KM 12, S/N. 07199 PALMA, Mallorca",Not placed: street not in Catastro
+R/2126,CA´N GOMILA,Restaurant,"JOAN MIRO, GOMILA CENTRE LOCAL II, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/4015,CA´N GOST,Restaurant,"Carrer BLANQUERNA, -. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+B/7062,CA´N GUILLEM,Bar,"MARINA,32, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/237,CA´N MATIAS I MIQUEL,Restaurant,"MANACOR, KM 4. -, -",Not placed: street not in Catastro
+R/1082,CA´N MIANES,Restaurant,"MONTAÑA 6, ES PITLARI, SAN FCO, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/863,CA´N MONA,Bar,"Carrer BARRERA- SON ESPANYOLET, 25. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/5032,CA´N PEDRO,Restaurant,"ADRIA FERRA, 28 planta BXS. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/6118,CA´N PEDRO DE MARIA,Restaurant,"Carrer GRAN VIA ASIMA, 15 local ESQUER. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+R/517,CA´N QUIRANTE,Restaurant,"OBISPO PLANAS S/N, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/7498,CA´N SERGI,Bar,"Carrer BINIALI, BLOC C, 5 local 2. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+R/3934,CA´N TANOS,Restaurant,"CºVECINAL SON RAPINYA,37, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/4736,CA´N VERDERA NOU,Restaurant,"MAR NEGRE, 6. 07610 Les Meravelles",Not placed: street not in Catastro
+R/4738,CEL BLAU,Restaurant,"LLAÜD 40, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+R/564,CELLER RANCHO PICADERO,Restaurant,"FLAMENCO,1, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+C/3587,CENTRO DE OCIO FAMILIAR PAMADI,Cafeteria,"Avinguda GABRIEL ROCA, BLOC UE TERRASSES PORTO PI, 54. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/8053,CERVECERIA 1516 T.C.,Bar,"AEROPORT DE PALMA, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+R/4378,CERVECERIA LAMBIC,Restaurant,"GABRIEL ROCA-PORTO PI, 54. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/426,CERVECERIA MUNICH,Bar,"192 S/N, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/428,CERVECERIA SES ROQUES,Bar,"PERE MOLINA, 30. PALMA, Mallorca",Not placed: street not in Catastro
+C/4207,CERVEZAS DE MALLORCA,Cafeteria,"Carrer CARDENAL ROSSELL, CENTRE COMERCIAL CARREFOUR, S/N local 25. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+B/430,CESTOS,Bar,"CESTOS,12, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/2823,CHACAL,Bar,"PARC (CANTO C/ BARTOLOME ROSSELLO PORCEL, 5), 12. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/2887,CHALET SIENA,Restaurant,"MISION SAN DIEGO, 1, S/N. 07600 Platja De Palma",Not placed: street not in Catastro
+R/4135,CHARMEN,Restaurant,"Carrer BERENGUER DE SANT JOAN, 1. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+R/6732,CHE ARGENTINO / AMERICAN LOFT,Restaurant,"Avinguda CARDENAL ROSELL (C. COMERCIAL FAN MALLORCA) S/N LOCAL 1-9A I 1-10A, S/N. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+R/6505,CHILISS Nº3,Restaurant,"Carrer MUELLE,EDIFICI MOLL VELL, 6 local 6 I 7. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+B/4629,CHIRINGUITO,Bar,"SON AMETLER 29,BAJOS, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/1087,CHIRINGUITO BARLOVENTO,Bar,"TRONERAS S/N, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+BC/945,CHIRINGUITO CALA MAJOR,Bar-cafeteria,"PLAYA CALA MAJOR, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+BC/184,CHIS CAKES & MORE,Bar-cafeteria,"Passatge JOAN XXIII-GALERIAS LOS GERANIOS, 2 pis BXS. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/1426,CHUCCA,Bar,"Carrer SANT RAMON NONAT- COMPLEXE RIU CENTER, 8 pis BXS local A6. 07610 Platja De Palma",Not placed: street not in Catastro
+C/2534,CIUDAD JARDIN Nº1,Cafeteria,"CIUTAT JARDI S/N, S/N. 07007 Ciutat Jardí",Not placed: street not in Catastro
+C/2550,CIUDAD JARDIN Nº2,Cafeteria,"CIUTAT JARDI S/N, S/N. 07007 Ciutat Jardí",Not placed: street not in Catastro
+B/3918,CLUB LA RUEDA,Bar,"VELL DE  SINEU,KM.5, S/N. 07198 Hostalot (L´)",Not placed: street not in Catastro
+B/481,CLUB SALSA PICANTE,Bar,"MEDITERRANI, 8. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+C/3868,COCKPIT CAFES,Cafeteria,"Carrer GOLFO DE CADIZ, 4 local 2. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/5921,COCO´S,Restaurant,"PADRE BARTOLOME SALVA, ESQ C/ CANYES Y AGUSTIN CATANY, S/N. 07600 Arenal (L´)",Not placed: street not in Catastro
+BC/770,COFFE LIVE FOREVER TM RESTOBAR,Bar-cafeteria,"CAPELLERA, 2 lletra D planta BXS. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/487,COLISEO BALEAR,Bar,"PLAZA DE TOROS, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/3933,COLL,Bar,"CORDELERIA,11, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/944,CONTROL,Restaurant,"Carretera MANACOR KM 10, S/N. 07199 PALMA, Mallorca",Not placed: street not in Catastro
+BC/38,COQUETIER,Bar-cafeteria,"Carrer MONSEÑOR PALMER, 5 local 6. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/5565,CORB MARÍ,Restaurant,"MUELLE SAN PEDRO (REAL CLUB NAUTICO PALMA, PANTALAN N-01, 1. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+B/3727,CORINTO,Bar,"BOSC, SEMISOTANO, 8. PALMA, Mallorca",Not placed: street not in Catastro
+R/4794,COSA NOSTRA,Restaurant,"MEDITERRANI, 5 planta BXS. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1706,CREMOLA GELATO ITALIANO,Bar-cafeteria,"Carrer VELAQUEZ , 4. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+C/3341,CROISSANTERIA PORTO PI,Cafeteria,"CENTRE COMERCIAL PORTO PI, S/N local 1603. PALMA, Mallorca",Not placed: street not in Catastro
+B/6058,DA CAPO,Bar,"PASEO MARTIMO,20, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/5056,DEGUSTACION CAFES PALMA,Bar,"GRAN VIA ASIMA ILLETA XII, 4. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+B/4465,DEL CARMEN,Bar,"CARMEN 25, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+BC/555,DEL REVES,Bar-cafeteria,"ALFONS EL MAGNANIM (CANTO C/JOAQUIN TOGORES, 6), 29 planta BXS. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/7045,DELICIAS DE SON GARRIT,Bar,"VELL DE SON RAPINYA, 33 lletra B. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/564,DES COLL,Bar,"Carrer CARDENAL ROSELL, 27. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+B/3343,DE´S PEIX,Bar,"MERCADO OLIVAR, LLOC, 97 lletra A. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/7051,DIQUE DEL OESTE,Bar,"DIC DE L´OEST, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/8142,DISCOTECA CLUB DE MAR,Bar,"GABRIEL ROCA-MUELLE PELAIRES, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+R/6847,DOCK39,Restaurant,"CARDENAL ROSSELL (C.C.COMERCIAL FAN MALLORCA SHOPPING) LO-20A Y LO-20-B, 168. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+BC/190,DOLLAR CAFÉ,Bar-cafeteria,"Carrer DE LA CAMOMIL.LA, 6 local 4. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+R/185,DON CARACOL,Restaurant,"Avinguda COMTE DE SALLENT, BAIXOS ESQUERRA, 6 pis BX. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+R/5034,DON CARACOL,Restaurant,"CRISTINA VALLS-CANT. C/ ILLA CORFU, 1. -, -",Not placed: street not in Catastro
+R/583,DON CARACOL,Restaurant,"PALMA-LLUCMAJOR,KM.14, S/N. 07199 Aranjassa (L´)",Not placed: street not in Catastro
+B/5992,DOS S.S,Bar,"LLADONER 44, S/N. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+C/520,DUGA,Cafeteria,"SANT RAMON NONATO, 27. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+BC/135,DULCE PARK,Bar-cafeteria,"ARQUITECTE GASPAR BENNASSAR, 59 lletra B. -, -",Not placed: street not in Catastro
+BC/359,DUNAS TAPAS,Bar-cafeteria,"TRASIMENO, 12. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/7047,D´ES MERCAT,Bar,"MERCAT SANTA CATALINA - PTO 45, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1587,ECLIPSE,Bar-cafeteria,"Carrer GUILLEM CIREROL (CANT. C/. CANNES, 25), 5 pis BXS. 07600 Platja De Palma",Not placed: street not in Catastro
+BC/1681,EHIB,Bar-cafeteria,"Carretera Valldemossa, km 7´5. 07122 Sense Definir",Not placed: street not in Catastro
+R/5052,EL BECERRO DE LA CUARTERA,Restaurant,"CUARTERA, 3. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/7455,EL CAFE,Bar,"Lloc CENTRO CIAL.PORTO PI,LOC.2301-02, -. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/4107,EL CAMPERO,Bar,"PUIG DE MONTESION, 2. Hostalot (L´)",Not placed: street not in Catastro
+R/2269,EL CARRASCAL,Restaurant,"FEMENIAS, 17. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/7215,EL CHULENGO,Restaurant,"Carrer PASCUAL RIBOT, 2 porta C local 6. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/1825,EL CISNE,Bar,"BERENGUER DE SAN JOAN, 1. PALMA, Mallorca",Not placed: street not in Catastro
+R/2560,EL COCOLOCO,Restaurant,"GERMANS SCHEMBRY, 3 lletra A. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/8024,EL DIAMANTE EN BRUTO,Bar,"Carrer BISBE CABANELLAS, 29 pis BXS. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/1665,EL MESIAS,Restaurant,"JUNIPERO SERRA, 8. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/5351,EL MOLINERO ITALIAN RESTAURANT,Restaurant,"Carrer INDUSTRIA, MOLINO 2, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/2910,EL MURCIANO,Bar,"ESTRELLA, 10. PALMA, Mallorca",Not placed: street not in Catastro
+B/4562,EL NIDO DE PEPE,Bar,"Carrer RAFALETES - PORTO PI, 1 local 2. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+R/4984,EL PURO BEACH,Restaurant,"Carrer PAGELL - CALA ESTANCIA, 1. 07610 Can Pastilla",Not placed: street not in Catastro
+R/5271,EL RINCON,Restaurant,"SANTIAGO ROSSINYOL, 12. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+B/8467,EL RINCON DE COTLLIURE,Bar,"Carrer ALBACETE, CANTONADA COLLIURE 11, 24. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+C/3860,EL RINCON DE HELLIN,Cafeteria,"ARAGO,  CANTONADA PERE RIPOLL I PALOU, 186. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+R/4496,EL SECO,Restaurant,"HERRERIA, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/898,ELITE´S CLUB PARRILLA,Restaurant,"PALMA-LLUCMAJOR, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+BC/787,ENTRE PINSAS,Bar-cafeteria,"Plaça RAIMUNDO CLAR, 15 pis BXS porta 3. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+C/3849,ES CAFETO DE LA RAMBLA,Cafeteria,"DE LA RAMBLA DELS DUCS DE PALMA, 8 planta BX. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+C/4355,ES CANTONET,Cafeteria,"Carrer EMPERATRIZ EUGENIA (CENTRE CULTURAL S´ESCORXADOR), S/N local 38. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/4341,ES CRENERS,Bar,"CTRA PALMA-ARTA,KM.47´9, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/5030,ES DESPATX,Restaurant,"GREMI FERRERS,CANTONADA GREMI TINTORERS,NAU 9, 58. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+B/4869,ES DRAC,Bar,"Carrer BAUÇA, 3. 07199 Sant Jordi",Not placed: street not in Catastro
+B/3446,ES FOGUERO,Bar,"PALMA-SANTANYI, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/3690,ESCORPIO,Bar,"LEONARDO ZAFORTEZ, 1. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/5478,ESPAÑA,Restaurant,"CAN ESCURSACH, 12. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+B/7797,ESTACION DE AUTOBUSES,Bar,"EUSEBI ESTADA, CANT.GABRIEL MAURA, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/3489,ESTACION MARITIMA Nº2,Cafeteria,"MUELLE DE PERAIRES(ESTACION MARITIMA 2), S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/7397,ESTACION MARITIMA Nº3,Bar,"MOLL PELAIRES,S/N, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/4450,ESTACION MARITIMA Nº4,Bar,"MUELLE PELAIRES, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/6754,ETHNIC,Bar,"MEDITERRANI, 10. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/5329,EURO,Restaurant,"REINA ESCLARAMUNDA, 8. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+B/5329,FACTORY,Bar,"MEDITERRANI, 10. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+C/4407,FARGGY,Cafeteria,"AEROPORT DE SONT SANT JOAN, LOCAL E04P20L01, OF.642, 6ª PLANTA, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+C/914,FLINSTONE,Cafeteria,"VECINAL GENOVA, 121. PALMA, Mallorca",Not placed: street not in Catastro
+C/3861,FOOD GALLERY,Cafeteria,"AEROPORT DE PALMA, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+B/8056,FORN DE CAMPOS,Bar,"HEURA  (CANT.CIRERER ,21)  - ES RAFAL 14. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/8234,FORN DE CAMPOS,Bar,"16 DE JULO, 31. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+C/4360,FORN DE CAMPOS,Cafeteria,"16 DE JULIOL, 31. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+C/4361,FORN DE CAMPOS,Cafeteria,"GRAN VIA ASIMA, 4. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+C/4465,FORN DE CAMPOS,Cafeteria,"Carrer CIRUJANS I BARBERS, 46 local 1. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+B/3346,FORN MEDITERRANEO II,Bar,"FEMENIAS, 30 planta BXS. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+BC/618,FORN SANTO CRISTO,Bar-cafeteria,"CARDENAL ROSEL (CENTRE COMERCIAL FAN), S/N. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+R/6266,FOSTER´S HOLLYWOOD,Restaurant,"GABRIEL ROCA-C.C. PORTO PI, 54. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+R/6709,FOSTER´S HOLLYWOOD,Restaurant,"Avinguda CARDENAL ROSSELL - CENTRO COMERCIAL FAN MALLORCA, S/N local 81-82. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+C/3831,FREDS BISTRO,Cafeteria,"Carrer TOKIO, 6 local 4. 07600 Arenal (L´)",Not placed: street not in Catastro
+BC/367,FRIMA,Bar-cafeteria,"Avinguda 16 DE JULIOL, 42. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+R/6015,FUJIYAMA,Restaurant,"CARDENAL ROSELL, 1 planta 2. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+B/3824,GABI´S,Bar,"GOMILA,EDIFICI SINGULAR 1 PLANTA, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/8624,GALPEIX,Bar,"OLIVAR (MERCADO)-PUESTO 33 B,C I 38 A, B, C, S/N. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+C/3724,GASTRO BAR ANGELICA PASTRANA,Cafeteria,"Camí SON RAPINYA, ANGULAR LAGO SANABRIA, 48 pis BXS porta D. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/8072,GELATERIA LALI CALATAYUD,Bar,"ARCHIDUQUE LUIS SALVADOR, 69. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/7209,GIBSON,Bar,"MERCADO, 18. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+B/4571,GIGI´S PICCOLO RISTORANTE,Bar,"Carrer CAÇADOR, 3 pis BXS. PALMA, Mallorca",Not placed: street not in Catastro
+B/7726,GLOBO ROJO,Bar,"BENET PONS I FABREGAS, 35. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/5368,GOIKO,Restaurant,"Avinguda JOAN MIRO-TERRAZAS DE C.CIAL PORTO PI, - local 3502. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+C/3191,GOLAFRE CAFE,Cafeteria,"Avinguda GASPAR BENNAZAR, ARQUITECTE, 71. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/5366,GOLDEN,Bar,"Carrer 297, S/N local 27. PALMA, Mallorca",Not placed: street not in Catastro
+C/1179,GOMILA,Cafeteria,"BELLVER CANTONADA SALUT, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/2252,GRAN PARADA,Restaurant,"VECINAL SON RAPINYA, 62. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+R/6109,GRAN RESTAURANTE WOK,Restaurant,"GRAN VIA ASIMA, 5. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+R/2967,GRAN VIA BALEAR,Restaurant,"GRAN VIA ASIMA, 4. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+BC/164,GREEN GO,Bar-cafeteria,"Avinguda ARGENTINA, ESQUINA DAMAS CALVET 2, 30. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+C/3888,GRILLMEISTER,Cafeteria,"Carretera ARENAL -EDIF. SOMETIMES PARK, S/N local 8. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+B/8481,GROC,Bar,"Carrer COSTA RICA, 23 pis BXS local PALMA . 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/5950,GUILLEN´S,Bar,"MARITIM,EDIF.MIRAMAR, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/1726,GUSTUS,Restaurant,"Carrer FRANCESC SUAU, CANTONADA PINTOR BUADES, 14 lletra B. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/8683,H.H.L.DES ARTISTES,Bar,"MERCAT SANTA CATALINA-PUESTO 33-36, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/7974,HAAGEN DAZS,Bar,"CENTRE COMERCIAL CAS CAPISCOL, S/N local C10. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/7214,HADDOCK,Bar,"LONJA DE MAR,4, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/3327,HAMBURGUESERIA CHAPLIN,Cafeteria,"Carrer JOSEP DARDER METGE, 5 lletra A. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+C/2376,HAMBURGUESERIA MAFOS,Cafeteria,"PLATON 16,SON FERRIOL, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/8421,HAVANA,Bar,"Carretera ARENAL, EDIFICIO BALBOA, 4 planta BXS local 1. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/4206,HEL4DERIA LUIGI,Bar,"06021984LAS,7-BJS, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/7266,HELADERIA PALMA CIUTAT,Bar,"JOAN CARLES I, 6. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+C/2314,HOLIDAY,Cafeteria,"CARABELLA -ESQ.PALAGRES, S/N",Not placed: street not in Catastro
+R/4778,HORTRA,Restaurant,"VIAL SANT JOSEP, 80. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+R/380,HOSTAL DE´S PLA,Restaurant,"MANACOR, KM 12,500, S/N",Not placed: street not in Catastro
+C/4424,HOTBAO,Cafeteria,"Plaça MAYOR, 3 local 5. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+R/6104,IKEA,Restaurant,"FONDO, S/N. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+C/4527,IL CAPRICCIO,Cafeteria,"Carrer COSTA I LLOBERA, 24. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/6003,IL FORNO,Restaurant,"INFANT FERRA, 4. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+R/4344,IL GAMBERETTO DI PALMA,Restaurant,"GRAN VIA CA´N PASTILLA, S/N. 07610 Can Pastilla",Not placed: street not in Catastro
+R/6167,IL TANO,Restaurant,"Carrer JOAN MARAGALL-PASSEIG PORTIXOL,5, 38 local 9. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+R/6214,INDIAN RESTAURANT,Restaurant,"Avinguda JOAN MARCH ORDINAS, 4. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/5987,INDICO,Restaurant,"CENTRO COMERCIAL PORT PI, LOC.1313-14, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/2702,INSULAR,Bar,"MAJOR - CENTRE COMERCIAL, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/7035,IRENE,Bar,"PARE IGNACI FIOL, 4. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/8690,J Y C,Bar,"DE BAIX RIERA, CANT MESTRE PEROSI, 35. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/6216,JACI,Bar,"BENET PONS I FABREGAS, 23 lletra C. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/970,JOY PALACE,Restaurant,"Carretera ARENAL,KM.11, S/N. 07600 Platja De Palma",Not placed: street not in Catastro
+B/2868,JUAN FRAU,Bar,"NAVEGACIO-MERCAT SANTA CATALINA, S/N",Not placed: street not in Catastro
+B/4833,JUEGOS RECRE.LAS COLUMNAS,Bar,"FRANCESC BARCEÑLO I COMBIS, 6. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/5643,JULIOS,Bar,"LAUD,33, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1696,JUZZYPOPP SL,Bar-cafeteria,"Plaça Olivar (Mercat de l´Olivar), - local 71. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+BC/53,K-AVA,Bar-cafeteria,"GAVIOTA, 2. 07015 Cala Major",Not placed: street not in Catastro
+B/2120,KANSAS,Bar,"MIRO, 5. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/1183,KAPADOKYA,Restaurant,"GASPAR BENNASAR ARQUITECTE, 37. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/4691,KFC,Restaurant,"Avinguda JOAN MIRO-C.C.PORTO PI, 155 local 4102. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/4114,KIOSCO,Bar,"EMBARCADERO PUNTA DES GAS, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/8435,KIT&KAT,Bar,"Carrer ALFREDO BONET, 7 pis BXS. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+C/919,KURSAAL,Cafeteria,"PUENTE, 3. PALMA, Mallorca",Not placed: street not in Catastro
+B/5013,LA BARRA,Bar,"Plaça FRANCESC ROSSELLO PINTOR-ED.S´AIGO DOLSA, 3. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+BC/197,LA BARRA DE BENDITA,Bar-cafeteria,"Plaça NAVEGACIO S/N-MERCADO SANTA CATALINA-LLOCS 1,2,3 I 4, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+C/4037,LA BODEGA,Cafeteria,"PUEBLO ESPAÑOL, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/5897,LA BODEGUITA DE PORTO PI,Restaurant,"Avinguda GABRIEL ROCA, C.C.PORTO PI, 54 local 3504. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/8565,LA BOUTIQUE DEL GELATO,Bar,"LEOCADIA DE TOGORES-BISBE PERE PUIGDORFILA (C.OCIMAX), S/N. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/2849,LA CANTINA,Bar,"MUELLE VIEJO,ESPIGON INTERIOR, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/213,LA CANTINA,Restaurant,"MUELLE SAN PEDRO(PANTANALES REAL CLUB NAUTICO PALMA), S/N. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+B/447,LA CHIQUITINA,Bar,"JOAN BURGUES ZAFORTESA, 58. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1670,LA COCINA DE ANITA,Bar-cafeteria,"Avinguda ARQUITECTE GASPAR BENNASAR, 26 pis BXS. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/8181,LA COMELONA,Bar,"Carrer JOSEP DARDER METGE, 9 local 1. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/3706,LA DOBLE J,Bar,"MERCAT PERE GARAU, S/N. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1402,LA ESPERANZA,Bar-cafeteria,"Carrer IBIZA, 3 local 3. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/2756,LA ESPIGA VERDE,Bar,"URBANITZACIO RAFAL NOU, EDIFICI D, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/2558,LA FACTORIA,Restaurant,"TOKIO, 8. 07600 Arenal (L´)",Not placed: street not in Catastro
+R/6869,LA GRANDE ARMONIA,Restaurant,"Carrer OLMOS, 27 pis BJ. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+C/3846,LA JUVENTUD,Cafeteria,"MONTISSION, 2 planta BXS. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+R/5301,LA LIBERA,Restaurant,"SANTIAGO ROSSINYOL, 15. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+CC/71,LA LLORONA DEL PASEO,Cafè concert,"Avinguda ENGINYER GABRIEL ROCA, EDIF TORRE MAR, 44 local 3, 4. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/5057,LA LONJA,Bar,"MARINA, 2. PALMA, Mallorca",Not placed: street not in Catastro
+B/8126,LA MADELEINE DE PROUST,Bar,"ANIBAL, 17 planta BX. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/5723,LA MADONNA,Restaurant,"STA. CATALINA LABOURE, CANTONADA C/ SAN VICENTE PAUL, S/N. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/3124,LA MADREÑA,Bar,"MAJOR, POBLE ESPANYOL, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/2794,LA MEZQUITA,Bar,"SECAL DE LA REAL, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/3993,LA MEZQUITA,Bar,"CALA FALCO, 4. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+BC/310,LA NAVE DEL PADBOL,Bar-cafeteria,"Carrer GREMI SUCRERS I CANDELERS, 20 local C. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+B/8410,LA NUEVA TENTACION,Bar,"Carrer FRANCESC PI I MARAGALL, 23. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/6597,LA PERLA,Restaurant,"ANIBAL, 6 planta BXS porta A. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/2167,LA PLAZA,Bar,"FELIX RODRIGUEZ DE LA FUENTE, 14. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+R/3885,LA PRIMAVERA,Restaurant,"Plaça MARE DE DEU DE LA SALUD, S/N. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+R/5260,LA RAMBLA,Restaurant,"Carrer CARDENAL ROSSELL, EDIFICI BRITANIA, 28 local 1-2. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+C/3866,LA RESISTENCIA,Cafeteria,"Carrer ANTONIO LLITERAS, 6. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/5913,LA RIGOLETTA,Restaurant,"PORTIXOL, 7 planta BXS. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/3477,LA ROTONDA,Bar,"MARITIM S/N-H. FENIX, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/2222,LA TERRAZA,Cafeteria,"LAUD/TROVADOR  S/N, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+C/3449,LAS DELICIAS,Cafeteria,"Carrer JOSEP DE DIEGO,EDIFICI ORSON WELLES, 7 local 4. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+C/3887,LAS LOMAS,Cafeteria,"Carrer TROBADORS (CANTONADA C/ DUNA, 7), 14. 07600 Arenal (L´)",Not placed: street not in Catastro
+C/2853,LATINO,Cafeteria,"Carrer SAN RAMON NONATO, 5 local 4. 07600 Platja De Palma",Not placed: street not in Catastro
+B/3745,LAZY´S Q,Bar,"MARITIM,EDIF.NEPTU, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/4141,LG CAFE,Cafeteria,"Carrer SON ESPANYOLET, CANTONADA MURLA, 2 local A. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/6273,LIEVITO,Restaurant,"Carrer OCELLS, CANTONADA Carrer TROBADA, 13. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+C/4561,LO QUE QUIERAS CON KEBAB,Cafeteria,"Carrer BISBE PUIGDORFILA, 6 local 2. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+C/309,LONDON,Cafeteria,"TRASIMENO, 27. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/6615,LORIEN,Bar,"CAPUCHINAS, 5. PALMA, Mallorca",Not placed: street not in Catastro
+BC/759,LOS ALPES,Bar-cafeteria,"ARXIDUC LLUIS SALVADOR CANT. C/ MUSIC JOSEP BALAGUER, 33, 87 planta BXS porta IZ. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/4933,LOS COMINOS,Bar,"MAR JONICO, 7. 07600 Arenal (L´)",Not placed: street not in Catastro
+B/965,LOS OLIVOS,Bar,"MINGUELLA, 5. Ciutat Jardí",Not placed: street not in Catastro
+R/5879,LOS PINCHOS MORUNOS,Restaurant,"Avinguda GABRIEL ROCA, CENTRO PORTO PI, 54 local 3503. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/5440,LOS PINOS,Bar,"VERGE MIRACULOSA, 3 lletra A. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+R/2801,LOS ROBLES,Restaurant,"BENET PONS, 37. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/5527,LOUNGE CLUB DE MAR,Restaurant,"MOLL PELAIRES, S/N - CLUB DE MAR, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/5148,LUIS,Bar,"RAFAL NOU,BLOQUE D,4, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/2856,L´ENTORN,Bar,"FRANCESC DE BORJA MOLL, 1. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+C/4597,L´ITALIANO,Cafeteria,"JUAN GRIS, CANTONADA FRANCESC MARTI I MORA, 8. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/4947,MAGIC,Bar,"Carrer CARTAGO ABANS AVDA. NACIONAL (SOTERRANI), 21. 07600 Platja De Palma",Not placed: street not in Catastro
+B/3709,MALA UVA,Bar,"Avinguda JOAN MIRO,  SOTERRANI 4º, 113. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+BC/821,MALLORCAFE,Bar-cafeteria,"Camí DEL REI, 122. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+R/7491,MALVASIA,Restaurant,"Carretera Valldemossa, km 7´5. 07122 Sense Definir",Not placed: street not in Catastro
+B/3486,MANHATAN,Bar,"MEDATERRANI, 10. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/6978,MANTO NEGRO,Restaurant,"Carrer UNION,ESQ.STA.CATALINA THOMAS, 10. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+B/3592,MAR CHICA,Bar,"TORRE DE PERAIRES, 1. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+R/6624,MAR DE NUDOS,Restaurant,"Carrer DEL MOLL (EDIFICIO MOLL VELL), 6 local 1. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+B/8160,MARCELO,Bar,"CALES DE MALLORCA, 4. 07009 Son Cladera",Not placed: street not in Catastro
+R/6403,MARCELO´S,Restaurant,"Carrer GRAN VIA DE CAN PASTILLA, LOCALS 29,31,33, 5. 07610 Can Pastilla",Not placed: street not in Catastro
+C/733,MARENA 41,Cafeteria,"Carrer NACIONAL CANTONADA  ALMILCAR,1, S/N. 07600 Platja De Palma",Not placed: street not in Catastro
+R/5699,MARES RESTAURANTE BOUTIQUE,Restaurant,"Carrer PUEBLO ESPAÑOL, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+C/148,MARFA,Cafeteria,"173 S/N, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/6321,MARISQUERIA LA DUQUESA,Bar,"DUQUESA DE LA VICTORIA 25, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/7694,MARQUES,Bar,"C´AN MARTI FELIU, 3. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/833,MATEU,Bar,"JOSEP DE LA UNTANYA, 39. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+C/3088,MCDONALD´S,Cafeteria,"CENTRE COMERCIAL PORTO PI, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/3279,MCDONALD´S,Cafeteria,"CENTRE COMERCIAL PORTO PI, S/N local 1409. PALMA, Mallorca",Not placed: street not in Catastro
+C/4492,MCDONALD´S,Cafeteria,"AEROPUERTO DE PALMA MODULO C PISO MAS 2, S/N local 4. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+B/8078,MDQ,Bar,"CARLOS I, 8. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+C/3532,MEGA PARK,Cafeteria,"Carrer LLAUT, CANT. MISION SAN GABRIEL, S/N. 07600 Platja De Palma",Not placed: street not in Catastro
+R/4726,MEGA SPORT CENTRE,Restaurant,"SON VALENTI, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/2388,MELASSA CAFE,Restaurant,"Carrer FRANCISC SUAU, 14. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+C/3379,MELS,Cafeteria,"PUNTA ESTANCIA, 7. 07610 Can Pastilla",Not placed: street not in Catastro
+C/967,MENFIS,Cafeteria,"TORCUAT LUCA DE TENA, 73. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/4820,MENORCA,Bar,"PARQUE CUARENTENA, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/846,MERCADO KIOSCO,Bar,"MERCAT SANTA CATALINA, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/6230,MERCAFE,Bar,"MERCAT PERE GARAU, PTO.63-64, S/N. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/2947,MERCAT DE LLEVANT,Restaurant,"MERCAT MUNICIPAL DE LEVANTE, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/4200,MESON DEL PUERTO,Bar,"MARITIM,ED.TORREMAR, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/1868,MESON DON JUAN,Restaurant,"LEPANTO 7 Y 8, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/855,MESON LA PALOMA,Bar,"JERONO ROSSELLO, 13. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/6944,MESÓN PA AMB OLI,Bar,"MARGARIDA MONLAU, 34 planta BXS. 07198 PALMA, Mallorca",Not placed: street not in Catastro
+B/4882,MEZQUIDA,Bar,"Avinguda 16 DE JULIOL, 46. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+R/1632,MICHELLE CIBER CAFE,Restaurant,"Carrer MARBELLA /CRTA ARENAL, 9, LOCAL 8 (TE DUES ENTRADES), 22 local 2C. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+C/2356,MIGUEL,Cafeteria,"TRASIMENO,69, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/6817,MILLAN,Bar,"BAJO ORDINAS,27BJ., S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/5300,MIRAMAR,Restaurant,"Carretera VALLDEMOSSA, KM 7,5, S/N. 07120 PALMA, Mallorca",Not placed: street not in Catastro
+R/1024,MIRCHI,Restaurant,"FEMENIAS 2, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/2365,MITJA PESSETA,Bar,"ANTONI ROSELLO NADAL, 66. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+BC/137,MOCARO,Bar-cafeteria,"Carrer PONT I VIC, CANTONADA PURESA, 8. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+R/5390,MOLI DE CAN TEM,Restaurant,"ENE 7, URB. BELLAVISTA, S/N. 07608 Cadenes (Les)",Not placed: street not in Catastro
+B/3490,MOLI DE´S COMPTE,Bar,"MOLI DES COMPTE, 90. PALMA, Mallorca",Not placed: street not in Catastro
+R/4542,MOLLET,Restaurant,"CONTRAMUELLE MOLLET, 2. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+BC/339,MON DE SUSHI,Bar-cafeteria,"NAVEGACIÓ (MERCAT DE SANTA CATALINA),PUESTO 36-37, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/2853,MONKEY PIZZA,Restaurant,"NUESTRA SEÑORA DE LOURDES, 4. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/4452,MORDISCOS,Bar,"GOMILA,EDIFICI GOMILA CENTER, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/5602,MOSSET,Restaurant,"COSTA I LLOBERA, 20. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/4712,MUSIK LADEN,Bar,"MISION DE SAN DIEGO, 3. 07600 Arenal (L´)",Not placed: street not in Catastro
+C/3943,MY SUSHI,Cafeteria,"JOSEP DARDER METGE, 14 planta BXS. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/7198,NANA´S,Bar,"REMOLARES,5, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/8636,NATOO,Bar,"AEROPORT DE PALMA DE MALLORCA-TERMINAL C, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+R/6446,NATUR ZEN,Restaurant,"Carrer LA VILETA-EDIFICIO SON MOIX CENTRE, 39 planta 1º local 10. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+C/4313,NATURAL BREAK,Cafeteria,"AEROPORT DE PLAMA DE MALLORCA - SORTIDA 4TA PLANTA, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+B/934,NO NAME,Bar,"Plaça GOMILA, EDIFICI GOMILA, S/N local A B C. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/4564,NOS VEREMOS,Bar,"GUILLEM COSTA, 3. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/5453,NOU,Bar,"ARAGON, 378 lletra C. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+R/5706,NOU SE,Restaurant,"ALEXANDRE DE LA BORDE, 30, NAU 5, POLIG. CAN VALERO, 30. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/5974,NURIA,Bar,"ALBACETE I ALFONS EL SAVI, S/N. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/7586,OBELISCO,Bar,"DE LAS MARAVILLAS ESQUINA C/ CANYES, S/N. 07610 Les Meravelles",Not placed: street not in Catastro
+R/2684,OLA DEL MAR,Restaurant,"VICARIO JOAQUIM FUSTER, 1. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+R/1140,OLAS,Restaurant,"GERMANS SCHMBRI, 10. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+C/2099,OSCAR,Cafeteria,Carretera ARENAL  -EDIF. PIL·LARI PLAYA S/N local 37. 07610 Arenal (L´),Not placed: street not in Catastro
+B/8655,OSMA,Bar,"Carrer PURSIANA (CANTO C/ POU, 26), 18. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/6335,PACHARAN,Restaurant,"Avinguda ARQUITECTE GASPAR BENNASAR, 29 pis BXS. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+C/8,PAM-PAM,Cafeteria,"MEDITERRANI 2,4, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/8313,PANADERIA TANGO BAR,Bar,"FRAY LLUIS VALLESPIR, 73. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/7729,PANORAMA BALEAR,Bar,"GREMI SILLERS - ALBADERS, S/N. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+R/560,PANTAGRUEL,Restaurant,"VEC.GENOVA-SAN AGUSTIN, S/N",Not placed: street not in Catastro
+B/5318,PARQUE,Bar,"ZONA VERDE SON XIMELIS, S/N. Son Roca - Son Ximelis",Not placed: street not in Catastro
+B/5794,PARQUE INFANTIL SON COTONER,Bar,"CRONISTA JOAN MUNTANER I BUJOSA S/N, S/N. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+C/3884,PARQUE SA RIERA,Cafeteria,"Camí JESUS S/N, PARC DE SA RIERA, S/N local 1. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+R/5714,PATA NEGRA CIUDAD JARDIN,Restaurant,"CARDENALL ROSSELL, CANT. XESC FORTEZA, 9, 20. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+R/215,PEQUEÑO DELFIN,Restaurant,"MARITIM, EDIFICI MAR, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/1004,PEQUEÑO MUNDO,Restaurant,"Carrer CARDENAL ROSELL, S/N. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+C/682,PEQUEÑO SOL,Cafeteria,"CORONEL MARQUES, 28. 07007 Ciutat Jardí",Not placed: street not in Catastro
+B/3053,PETIT,Bar,"MERCAT DE L´OLIVAR, LLOC (ABANS 86 B), 129. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/4291,PEÑARBAS,Bar,"REGALO, 82. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+BC/198,PIANO 89,Bar-cafeteria,"Carrer GUAL, CANT. VIA ARGENTINA, 1. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/7746,PICCOLO,Bar,"SANT JOAN, CANTÓ AMB C/ ORELL, 3. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1431,PIT STOP,Bar-cafeteria,"Carrer ISAAC NEWTON, S/N local 10-11. 07121 PALMA, Mallorca",Not placed: street not in Catastro
+R/3331,PIZZA HUT,Restaurant,"GOMILA, EDIFICI CENTRO, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/4441,PIZZA HUT,Restaurant,"Carrer JOSEP DARDER METGE, 30. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1628,PIZZA KEBABB SULTAN,Bar-cafeteria,"Carrer MÉDICO JOSE DARDER, 7 local 4. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/5570,PIZZEA,Restaurant,"Polígon CA´S CAPISCOL II (CENTRE D´OCI OCIMAX) local B6. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+R/5656,PIZZERIA & HAMBURGUESERIA SPORT CAFE,Restaurant,"Carrer CANONGE JOSEP  TARONGI (COLINDANT AMB VICENTE TOFIÑO, 25, BXS), 8. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+R/4068,PIZZERIA ANGELA,Restaurant,"MARQUES DE FUENSANTA, 8 lletra B. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/2541,PIZZERIA PLAZA,Restaurant,"LLAUD, CANT. C/RAMON NONATO, S/N. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+R/1697,PLAYA CALA NOVA,Restaurant,"CALA NOVA, S/N. 07015 Cala Nova",Not placed: street not in Catastro
+R/2875,PORTIXOLET,Restaurant,"BARCELO I MIR, 19 planta 1. 07006 El Molinar",Not placed: street not in Catastro
+C/3241,PORTO PI,Cafeteria,"GABRIEL ROCA,CENTRE COMERCIAL  PORTO PI, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+BC/160,POTPOURRI,Bar-cafeteria,"EMILI DARDER, 14. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/3766,PRISMAS,Bar,"GAVIOTA CANTONADA JOAN MIRO, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/5279,PUB CACAO,Bar,"Carrer CARTAGO - CANTONADA C/ FITA, S/N. 07600 Platja De Palma",Not placed: street not in Catastro
+B/5387,PUB EL MOMENTO,Bar,"BARTOMEU ROSELLO-PORCEL, 16. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/3904,PUB QUEEN,Restaurant,"SANT RAMON NEONAT, 7 planta BJ. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+R/2931,PUERTO BAHIA,Restaurant,"PUNTA ESTANCIA,LOC.1,2,3,4,5,6, S/N. 07610 Can Pastilla",Not placed: street not in Catastro
+BC/543,PUNT DE JOC MARTI COSTA,Bar-cafeteria,"MARTI COSTA, 2. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/7483,PUNT DE JOC MEDICO J.DARDER,Bar,"JOSEP DARDER METGE, 22. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+R/921,PUNTA DE SON GUAL,Restaurant,"MANACOR KM 11, S/N",Not placed: street not in Catastro
+R/6244,QUE BO,Restaurant,"Carrer GRAN VIA ASIMA, 34. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+R/3932,QUEMADO,Restaurant,"Avinguda ARQUITECTE GASPAR  BENNASSAR, 57 pis BXS. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+BC/800,QUIOBIT,Bar-cafeteria,"Carrer ISAAC NEWTON (PARC BIT - EDIFICI NAORTE BLOC A), - local 1. 07120 PALMA, Mallorca",Not placed: street not in Catastro
+R/1456,RAFA´S,Restaurant,"GARZA, 4. 07610 Can Pastilla",Not placed: street not in Catastro
+B/5926,RANCHO COLORADO,Bar,"Camí PALMER, S/N. 07608 Les Meravelles",Not placed: street not in Catastro
+R/7132,RANXO SAZON,Restaurant,Polígon 15 Parcel·la 100. 07120 Son Espanyol,Not placed: street not in Catastro
+B/3979,RARA AVIS,Bar,"BELLVER,  C.GOMILA CENTRO, 3 local N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/8553,RAT PACK BAR,Bar,"GRAN VIA CA´N PASTILLA, 17-19. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+R/1704,RAXA,Restaurant,"GARZA, 14. 07610 Can Pastilla",Not placed: street not in Catastro
+R/5601,REI JAUME,Restaurant,"SON PARERA, 3. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+B/6686,REPRISS,Bar,"GRAN VIA ASIMA, 38. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+B/2545,REQUENA,Bar,"VENCEJO, 17. Vileta (La) - Son Rapinya",Not placed: street not in Catastro
+R/5051,RESTAURANT BON PROFIT,Restaurant,"ALFONS EL MAGNANIM, CANTONADA BARTOMEU LLULL,, 51 lletra A. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/6384,RESTAURANT HOM,Restaurant,"Carrer GRAN VIA ASIMA, 28 pis BXS. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+R/6135,RESTAURANTE AZAFRAN,Restaurant,"Polígon 2, GREMI DE CORREDORS. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+R/3022,RESTAURANTE BAHIA MEDITERRANEO,Restaurant,"MARITIM-PLAÇA MEDITERRANI 2, 33 planta 5. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/6697,RESTAURANTE CAFEINA,Restaurant,"Carrer GREMI DE PASSAMANERS-POLIGON SON ROSSINYOL, 30 local 12. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+R/5720,RESTAURANTE CHINO EL JARDIN,Restaurant,"PASCUAL RIBOT, 29 planta BXS",Not placed: street not in Catastro
+R/2855,RESTAURANTE HOYO 10,Restaurant,"BARCELO I MIR, 11. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+R/5433,RESTAURANTE KANSO,Restaurant,"Carrer FRANCESC DE BORJA MOLL, 24 local A. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+R/2552,RESTAURANTE MAR,Restaurant,"ARENAL - C/MARBELLA 22(EDIFICIO PIL·LARI), 9. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+R/200,RESTAURANTE MERCAT DE L´OLIVAR,Restaurant,"MERCADO OLIVAR, S/N. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+R/1778,RESTAURANTE MIRANDA,Restaurant,"Camí MONUMENT DE NA BURGUESA, S/N. 07015 Gènova",Not placed: street not in Catastro
+R/4678,RESTAURANTE MY THAI,Restaurant,"MARBELLA-CANT.COSTA BRAVA, 65. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+R/5713,RESTAURANTE NUEVA CHINA,Restaurant,"SANT JOAN DE LA CREU  60, CANTONADA DEL CID, S/N planta BXS. 07198 Son Ferriol",Not placed: street not in Catastro
+R/5482,RESTAURANTE RAFA,Restaurant,"GRAN VIA ASIMA, 26, CANT.GREMI BOTERS, 23, S/N. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+R/4358,RESTAURANTE UBLO,Restaurant,"PROGRESO, 23. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/5809,RESTAURANTE VIP ASIMA,Restaurant,"GREMI FUSTERS, CANT. GRAN VIA ASIMA, 33 local 4. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+C/3347,RESTO BAR VOLVER,Cafeteria,"Carrer GREMI SILLERS, 46. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+C/4449,RINCON CANARIO,Cafeteria,"Carrer GRAN VIA, 5 local 3. 07610 Can Pastilla",Not placed: street not in Catastro
+R/3049,RINCON DE CANDIDO,Restaurant,"CAMINO VECINAL DE SON RAPINYA, LOCALES 9, 10 I 11, 37 planta BJS local 9 -11. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/5472,RINCÓN LATINO ´´EL HUEQUITO´´,Restaurant,"Carrer VIAL SANT JOSEP, 78. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+B/4958,RIU PALACE,Bar,"LLAUD,S/N, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/7031,RIU PALACE,Bar,"LLAUD,S/N, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+C/3900,ROCIERO,Cafeteria,"Carrer PLATANERS, 3 local 3. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+BC/373,ROSARIGASINOS,Bar-cafeteria,"Carrer BALMES, 19 local 4. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+B/867,RUZABIA,Bar,"MERCAT PERE GARAU, LLOC, 1. 07007 PALMA, Mallorca",Not placed: street not in Catastro
+B/7428,SA BARANA,Bar,"Avinguda GABRIEL ROCA, C.CIAL.PORTO PI, 54 local 1312. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/1979,SA BODEGUETA,Bar,"SANT CRISTO, 2. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+C/576,SA GAVINA,Cafeteria,"Passatge JOAN XXIII- EDIFICI EUROPA, S/N. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+R/4858,SA PLAÇA,Restaurant,"Plaça JOSEP GUASP, CANT. TURÓ, 11. 07199 Aranjassa (L´)",Not placed: street not in Catastro
+R/3760,SA POSADA DE BELLVER,Restaurant,"BELLVER, CANTONADA SALUT 36, 7. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/6885,SA RUTINA,Bar,"Carrer EMILI DARDER BATLE, 26. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+C/3799,SA TASA,Cafeteria,"ARQUITECTE GASPAR BENNASAR, 60 escala BXS. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/2494,SA TROBADA,Restaurant,"POLVORIN 39, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/8695,SABORES DE SANDRA - VEGAN DELICIOUS FOOD,Bar,"EMILIO DARDER BATLE, 43 lletra A pis BJS",Not placed: street not in Catastro
+B/5060,SAINT TROPEZ,Bar,"MARQUES DE LA CENIA, 37. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+SF/26,SALA 1 ES GREMI,Sala de festes,"Carrer PORGADORS, 16. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+CC/77,SALA 2 CAFE CLUB ES GREMI,Cafè concert,"Carrer C/ PORGADORS, 16. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+D/30,SALA 3 ES GREMI,Discoteca,"Carrer  PORGADORS, 16. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+B/7773,SALA DE JOC MACAO,Bar,"Carrer JOSEP DARDER METGE, 4. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/7831,SALA DE JOCS LES COLUMNES,Bar,"GARCIA ORELL,5, S/N. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+B/774,SALON DE JOC KYOTO,Bar,"JOAN ALCOVER, CANTONADA PEREZ GALDOS, 52. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/7937,SALON ORENES MOLINAR,Bar,"Carrer CIUDAT DE LA PLATA, 2. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/8046,SALON RECREATIVO SON VALENTI,Bar,"4 (MANZANA E, PARCELA 37) POLIGONO SON VALENTI, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+R/7541,SALTAO DE MAR,Restaurant,"Carrer PELAIRES, s/n local 34. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/7976,SALÓN DE JUEGOS MAGIC GAMES,Bar,"Carrer MARQUES DE LA CENIA, 5. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/693,SAMANTHA´S,Restaurant,"MEDITERRANI, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/8686,SAMBA KEBAB,Bar,"ARQUITECTE GASPAR BENNASAR, 1 planta BXS. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/1075,SAN ANTONIO DE LA PLAYA,Restaurant,"VELL DE CAN PASTILLA, Nº 82 CANTONADA ANTONI LLABRES I MOREY, S/N. 07610 Can Pastilla",Not placed: street not in Catastro
+BC/481,SANTA GLORIA,Bar-cafeteria,"ARQUITECTE GASPAR BENNASAR, CANT.EUSEBIO ESTADA, 15",Not placed: street not in Catastro
+R/3050,SANTA MARIA,Restaurant,"CAMI DELS REIS S/N,LOCAL 3, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/6332,SANTAL CAFE,Restaurant,"Carrer INDUSTRIA,MOLI 4, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/4525,SAPPORET,Bar,"Carrer FRANCESC DE  BORJA MOLL, 6 pis BXS. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+C/488,SARA´S,Cafeteria,"MEDITERRANI, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/4617,SE RUEDA,Bar,"CAN ESTADES, 2. 07015 Cala Major",Not placed: street not in Catastro
+R/6243,SEA MILLE,Restaurant,"Passeig PORTIXOL (2N MOLI DE SES TRONERES), SN. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/1230,SERI,Bar,"ZONA SERVEI DEL PORT, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+BC/19,SES COVES DE CAN MOREY,Bar-cafeteria,"DEL PALMER, S/N. 07600 Pil·Larí (El)",Not placed: street not in Catastro
+R/4371,SHABBY´S CAFE,Restaurant,"Carrer ARQUITECTE BENNASSAR, 15 local 1. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+B/7778,SHOW ARENA,Bar,"LLAUT, CANTONADA MISION SAN GABRIEL, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+B/2397,SIGLO XX,Bar,"ALDEA DE CARIÑO 8, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/5674,SIMANCAS,Restaurant,"Carrer REINA SANCHA DE NAPOLES, 22 pis BX. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+R/1217,SINGAPORE GARDEN,Restaurant,"MEDITERRANI, 2. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/7508,SIROCCO,Restaurant,"Carrer COSTA BRAVA, 3. 07610 Platja De Palma",Not placed: street not in Catastro
+B/2419,SITJAR,Bar,"ANDREU TORENS, 29. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/1683,SITO,Bar,"Plaça SON FORTEZA, 4. PALMA, Mallorca",Not placed: street not in Catastro
+B/2508,SOLER,Bar,"SON  ADOLSA, Nº 16 - ES VIVER, S/N. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+B/4098,SOLERA-JAEN,Bar,"PARTICULAR DE BUGER, 3, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/3772,SOMBRA,Bar,"PIEDAD,12-A, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/6378,SOMETIMES,Restaurant,"SON RIGO, C/SAMIL, S/N. 07610 Sometimes",Not placed: street not in Catastro
+R/274,SON FLO,Restaurant,"LEGIONARIO SAN ALEXIO, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/3535,SON GUAL,Bar,"CTRA. PUIGPUNYENT KM.7, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/241,SON GUAL,Restaurant,"CTRA.PALMA-PUIGPUNYENT, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/5041,SON LLATZER,Restaurant,"Carretera MANACOR KM.4 (SON LLATZER), S/N. 07198 Son Ferriol",Not placed: street not in Catastro
+R/6537,SON MIR,Restaurant,"VELL DE SINEU KM 7,250, S/N. 07198 PALMA, Mallorca",Not placed: street not in Catastro
+B/2953,SON QUINT,Bar,"CENTRO COMERCIAL LOS ALMENDROS, 18 local 18. 07013 Vileta (La) - Son Rapinya",Not placed: street not in Catastro
+R/5545,SPACE,Restaurant,"GRAN VIA CAN PASTILLA, 13. 07610 Can Pastilla",Not placed: street not in Catastro
+R/4837,ST. AMBROS,Restaurant,"Plaça DEN COLL, 4. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+BC/747,STARBUCKS COFFEE,Bar-cafeteria,"Carrer CARDENAL ROSSELL, PLANTA BAJA, LOCAL 35-36 (CC FAN MALLORCA), S/N. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+BC/97,SUNSHINE,Bar-cafeteria,"Carrer PARCEL·LES 8, 8. 07610 Platja De Palma",Not placed: street not in Catastro
+R/6658,SUSHI YOKO,Restaurant,"COSTA I LLOBERA, 20 planta BXS porta DT. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/5915,S´ALBORADA TAPES,Restaurant,"MARQUES DE FUENSANTA, 57. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/5553,S´ALFABAGUERA,Restaurant,"Plaça PARE ANTONI RAMON PASCUAL, 9. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+C/2209,S´ESCALA,Cafeteria,"Carrer ASEGRA MZNA.6,12, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/4313,S´ESCOLLERA,Restaurant,"GABRIEL ROCA.PORTO PI CENTRE, 54. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+R/4337,S´HOSTALOT,Restaurant,"Camí VELL DE  SINEU,KM.5, S/N. 07198 Hostalot (L´)",Not placed: street not in Catastro
+BC/1535,S´OFICINA,Bar-cafeteria,"GUADIANA SN, POL SON FUSTER ILLETA A, SN. 07009 Polígon De Son Fuster",Not placed: street not in Catastro
+R/7459,T ELICIOUS PALMA,Restaurant,"Carretera VIEJA DE SINEU, KM 10. 07198 PALMA, Mallorca",Not placed: street not in Catastro
+R/4835,TABANA,Restaurant,"Avinguda SON RIGO, CANTONADA MAR TIRRENA, 4. 07600 Platja De Palma",Not placed: street not in Catastro
+C/3263,TABERNA LEONESA,Cafeteria,BARTOMEU RIUTORT-CAMI DE CAN PASTILLA 3. 07610 Can Pastilla,Not placed: street not in Catastro
+B/4333,TABLADO FLAMENCO,Bar,"FEDERIC  GARCIA LORCA, 19. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+R/2907,TAKE SUSHI CLUB,Restaurant,"Plaça FRANCESC ROSSELLO PINTOR, 3. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+C/330,TANDOOR,Cafeteria,"Carrer LAUD S/N, S/N. 07600 Platja De Palma",Not placed: street not in Catastro
+R/6852,TANGO PARRILLA & VINOS,Restaurant,"Carrer GREMI DE CIRURGIANS I BARBERS, 10, S/N. 07009 PALMA, Mallorca",Not placed: street not in Catastro
+C/771,TAPAS Y MAS,Cafeteria,"Carretera ARENAL - CANTONADA  PERLA, 58 local 2-3. 07600 Platja De Palma",Not placed: street not in Catastro
+B/6601,TAPERY,Bar,"TRASIMENO,59, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/727,TARONJA NEGRE MAR,Restaurant,"MUELLE DE PELAIRES, S/N. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/1295,TAUJA,Bar,"LES RAMBLES, 17. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+R/5543,TAXI DRIVER,Restaurant,"AEROPORT DE PALMA DE MALLORCA, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+C/3862,TELE PIZZA,Cafeteria,"AEROPORT DE PALMA, S/N. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+R/5818,TELEPIZZA,Restaurant,"INDUSTRIA, MOLINO 1, 9. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+R/5830,TELEPIZZA,Restaurant,"JOAN ALCOVER, CANTÓ JERONI POU, 33. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/4202,TENIS,Bar,"BATOMEU ROSSELLO-PORCEL, 14. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/3103,TEODORO,Bar,"MERCADO DEL OLIVAR LLOC, 139-140. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+B/6186,THAIS,Bar,"SOLDAT MOLL CORRO, 1. 07198 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1680,THE BARN,Bar-cafeteria,"Rambla LA RAMBLA, 15. 07003 PALMA, Mallorca",Not placed: street not in Catastro
+BC/320,THE GLOOBO,Bar-cafeteria,"VIDRIERA, 6 planta BXS porta B. 07001 PALMA, Mallorca",Not placed: street not in Catastro
+R/7244,THE POPPA CLUB,Restaurant,"EXPLANADA SUD,EXTREM NORD, MOLL DE PALMA, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/2861,THE SUN,Cafeteria,"MISIO DE SANTA BARBARA, 3. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+C/1907,THE TAVERN,Cafeteria,"PUNTA ESTANCIA, 8. 07610 Can Pastilla",Not placed: street not in Catastro
+R/1720,TIROLIA,Restaurant,"REBERT GRAVES, 15. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+B/4968,TITOS,Bar,"TERRAL ESQ.SALUD,LOC.6, S/N. 07600 PALMA, Mallorca",Not placed: street not in Catastro
+R/4651,TOKACHI JAPANESE CUISINE,Restaurant,"Carrer MARTIN BORNEO,CANTONADA VICENÇ  JUAN I ROSSELLO, 16. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/5410,TONYS,Bar,"GASPAR BENNASAR ARQUITECTE, 37. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/2279,TORRE ASIMA,Restaurant,"Avinguda GRAN VIA ASIMA, 2. 07009 Polígon Industrial De Son Castelló",Not placed: street not in Catastro
+C/4387,TOUCHE,Cafeteria,"Carrer PALANGRES, CANT. BELLAMAR, 2. 07610 Can Pastilla",Not placed: street not in Catastro
+R/2530,TRATTORIA-PIZZERIA ROBERTO´S,Restaurant,"GIMILA, EDIFICI GOMILA, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/4404,TREBOL,Bar,"COMPLEJO CIAL PARIS,LOC.61-3, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/5369,TREBOL,Bar,"297,28, 28. PALMA, Mallorca",Not placed: street not in Catastro
+B/4979,TU TORTILLERIA,Bar,"Plaça GOMILA -EDIFICI  GOMILA CENTER, S/N local G. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+B/3781,TU Y YO,Bar,"ALMENDRO,9, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/5296,TUTUTANGOO,Bar,"GABRIEL ROCA -EDIFICI. TUENT, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+C/3751,TWIST,Cafeteria,"Carrer COSTA I LLOBERA, 15 pis BXS porta F. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+C/2223,T´ESTIM,Cafeteria,"PAPA JOAN XXIII, S/N. 07002 PALMA, Mallorca",Not placed: street not in Catastro
+R/6748,UDON,Restaurant,"Avinguda CARDENAL ROSSELL-CENTRE COMERCIAL FAN MALLORCA SHOPPING, S/N local 77. 07007 Coll De´N Rabassa (El)",Not placed: street not in Catastro
+BC/1251,UN POC DE TOT,Bar-cafeteria,"Avinguda MEXICO, 8. 07006 PALMA, Mallorca",Not placed: street not in Catastro
+B/6760,UNICA,Bar,"EJERCITO ESPAÑOL,1, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+R/6430,UNOCTAVO,Restaurant,"COSTA I LLORBERA, 14 planta BXS. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/4525,UTOPIA,Restaurant,"ILLE DE XIPRE, 35 lletra B. 07007 Ciutat Jardí",Not placed: street not in Catastro
+B/7827,VAGON TATTOO,Bar,"EMILI DARDER BATLE, 56 planta BXS porta DT. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/7766,VELVET BAR,Bar,"Plaça DRASSANES, 13. 07012 PALMA, Mallorca",Not placed: street not in Catastro
+B/1546,VERMU,Bar,"CONDE DE BARCELONA,13, CANT.MURILLO, 42, S/N. 07013 PALMA, Mallorca",Not placed: street not in Catastro
+B/5127,VETERANOS,Bar,"FELIPE II, 9. 07010 PALMA, Mallorca",Not placed: street not in Catastro
+C/164,VICENTE,Cafeteria,"RAFALETES, 2. 07015 PALMA, Mallorca",Not placed: street not in Catastro
+C/679,VIKINGO,Cafeteria,"CAMINO VECINAL GENOVA S/N, S/N. PALMA, Mallorca",Not placed: street not in Catastro
+B/2789,WAIKIKI,Bar,"MEDITERRANI, S/N. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+C/4425,WARSTEINER,Cafeteria,"AEROPORT DE PALMA, TERMINAL C, OF 642, S/N planta 6. 07611 PALMA, Mallorca",Not placed: street not in Catastro
+BC/849,WE HOSTEL PALMA,Bar-cafeteria,"Carrer GERMANS SCHEMBRI, CANT. NIGUL, 1-3. 07014 PALMA, Mallorca",Not placed: street not in Catastro
+BC/529,XKENO? CAFE,Bar-cafeteria,"Carrer ISAAC NEWTON, PARC BIT, S/N. 07011 PALMA, Mallorca",Not placed: street not in Catastro
+B/4757,YEGEN,Bar,"JOSEP DARDER METGE, 38. 07008 PALMA, Mallorca",Not placed: street not in Catastro
+C/4537,ZAITUNA BAR,Cafeteria,"Carrer JORDI ANDREU ALCOVER (CANTONADA JACINT VERDAGUER, 39A), 16 local 1. 07004 PALMA, Mallorca",Not placed: street not in Catastro
+R/4428,ZAO DIAN JIAN,Restaurant,"Carrer TORCUAT LUCA DE TENA, 35. 07005 PALMA, Mallorca",Not placed: street not in Catastro
+R/6034,ZEE RESTAURANT,Restaurant,"CONGRIO, 26. 07610 PALMA, Mallorca",Not placed: street not in Catastro
+BC/1403,ADN GOLF,Bar-cafeteria,"Camí DELS REIS, 221 pis BAIXOS. 07009 PALMA, Mallorca","Recreation venue, club or gaming"
+BC/1052,BAR TERRAZA PISCINA,Bar-cafeteria,"Passeig Ingeniero Gabriel Roca, 29. 07014 PALMA, Mallorca","Recreation venue, club or gaming"
+B/7687,BINGO CASA MENORCA,Bar,"DAMETO,6, S/N. 07013 PALMA, Mallorca","Recreation venue, club or gaming"
+C/3337,BINGO ES FORTI,Cafeteria,"Carrer RAMÓN PICO I CAMPAMAR, 1. 07011 PALMA, Mallorca","Recreation venue, club or gaming"
+C/3333,BINGO ROSALES,Cafeteria,"MANACOR, 99. 07007 PALMA, Mallorca","Recreation venue, club or gaming"
+C/3338,BINGO TEATRO BALEAR,Cafeteria,"COMTAT DEL ROSSELLO, 4. 07002 PALMA, Mallorca","Recreation venue, club or gaming"
+C/3400,BINGO VERSALLES,Cafeteria,"FRANCESC BARCELO I COMBIS, 5. 07006 PALMA, Mallorca","Recreation venue, club or gaming"
+BC/764,CAFETERIA CLUB PADEL U36,Bar-cafeteria,"ANDALUCIA S/N, CANTONADA CASTILLA LA MANCHA, S/N. 07013 PALMA, Mallorca","Recreation venue, club or gaming"
+C/3771,CAFETERIA POLIESPORTIU SANT JORDI,Cafeteria,"CAN COTA, S/N. 07199 Sant Jordi","Recreation venue, club or gaming"
+B/400,CASINO,Bar,"CABRERA,41, S/N. PALMA, Mallorca","Recreation venue, club or gaming"
+B/6700,CASINO,Bar,"Plaça MÍNIMS, 2 lletra A. 07007 PALMA, Mallorca","Recreation venue, club or gaming"
+B/7793,CASINO ARAGON,Bar,"ARAGO, 235. 07008 PALMA, Mallorca","Recreation venue, club or gaming"
+B/7638,CASINO SINDICATO,Bar,"SINDICAT, 56. 07002 PALMA, Mallorca","Recreation venue, club or gaming"
+B/7573,CINE RIVOLI,Bar,"ANTONI MARQUES, 25. 07003 PALMA, Mallorca","Recreation venue, club or gaming"
+C/4451,CLUB DE BALL ESPORTIU BAT CLUB,Cafeteria,"GREMI SELLETERS I BASTERS, 23. 07009 Polígon Industrial De Son Castelló","Recreation venue, club or gaming"
+C/2765,CLUB DE TENIS Y PADEL PLAYA DE PALMA,Cafeteria,"MAR JONICA, 8. 07610 PALMA, Mallorca","Recreation venue, club or gaming"
+B/4741,CLUB DEPORTIVO RELOJERIA CALVO,Bar,"DE LA FE (CANTONADA FORNARIS, 19), 16. 07007 PALMA, Mallorca","Recreation venue, club or gaming"
+C/4287,CLUB ESCUELA EQUITACION SON GUAL,Cafeteria,"ESTABLIMENTS A PUIGPUNYENT, KM.2, S/N. 07010 PALMA, Mallorca","Recreation venue, club or gaming"
+R/1851,CLUB MTMO SAN ANT.DE LA PLAYA,Restaurant,"NANSES S/N, S/N. 07610 Can Pastilla","Recreation venue, club or gaming"
+R/1430,CLUB NAUTICO CALA GAMBA,Restaurant,"CALA GAMBA S/N, S/N. 07007 Cala Gamba","Recreation venue, club or gaming"
+R/4343,CLUB NAUTICO SAN ANTONIO DE LA PLAYA,Restaurant,"VIRGILI, 27. 07610 Can Pastilla","Recreation venue, club or gaming"
+B/3006,EL BINGO,Bar,"FONERS, 27. 07006 PALMA, Mallorca","Recreation venue, club or gaming"
+R/6140,GOLF SON MUNTANER,Restaurant,"D.S. SON MUNTANER, CAMI DE SON RAPINYA, S/N. 07013 PALMA, Mallorca","Recreation venue, club or gaming"
+R/5280,LOCAL SOCIAL CLUB NAUTIC CALA GAMBA,Restaurant,"CALA GAMBA, S/N. 07007 Cala Gamba","Recreation venue, club or gaming"
+C/2569,METROPOLITAN MULTICINES,Cafeteria,"GABRIEL LLABRES, 20. 07007 PALMA, Mallorca","Recreation venue, club or gaming"
+R/593,MINI GOLF,Restaurant,"GOLF, S/N. 07015 Cala Major","Recreation venue, club or gaming"
+B/7814,MULTICINES OCIMAX,Bar,"LEOCADIA TOGORES, PARC.A, S/N. 07004 PALMA, Mallorca","Recreation venue, club or gaming"
+B/7578,MULTICINES PORTO PI,Bar,"GABRIEL ROCA, 54. 07015 PALMA, Mallorca","Recreation venue, club or gaming"
+B/8310,NAUTIC,Bar,"Carrer VIRGILI, 24. 07610 PALMA, Mallorca","Recreation venue, club or gaming"
+BC/1160,PALMA SPORT & TENNIS CLUB,Bar-cafeteria,"Carrer JOAN MARÍA THOMAS, 4. 07014 PALMA, Mallorca","Recreation venue, club or gaming"
+BC/1169,PINS PADEL,Bar-cafeteria,"Carrer LLUÍS FERBAL, 7. 07014 PALMA, Mallorca","Recreation venue, club or gaming"
+R/4204,RESTAURANTE CLUB MARITIMO EL MOLINAR DE LEVANTE,Restaurant,"VICARI JOAQUIM FUSTER, 2. 07006 El Molinar","Recreation venue, club or gaming"
+R/6394,RESTAURANTE CLUB NAUTICO PORTIXOL,Restaurant,"BARTOMEU BARCELO I MIR, 2. 07006 PALMA, Mallorca","Recreation venue, club or gaming"
+R/1654,RESTAURANTE EL NAUTICO DEL R.C.N.P.,Restaurant,"MUELLE DE SAN PEDRO, 1. 07012 PALMA, Mallorca","Recreation venue, club or gaming"
+R/6713,RESTAURANTE GOLF SON VIDA,Restaurant,"SOLLERIC, 1. 07013 Son Vida","Recreation venue, club or gaming"

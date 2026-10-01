@@ -84,7 +84,7 @@ together, so a row in either counts and a row in neither still fails.
 | United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
-| Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona |
+| Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
@@ -2255,6 +2255,26 @@ table; §4.6 by the repository.
   person-like names at a residential unit; the verdict is in `DECISIONS.md`.
 - **MUST DO**: nothing.
 - **Kitchener–Waterloo's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**74. Govern de les Illes Balears and Dirección General del Catastro (Palma) — required, and DISPLAYED**
+(written into `render_site_notices()`; displayed once Palma lands).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-09-29, the owner's three calls; the
+  Palma rows in [`data_sources/spain.md`](data_sources/spain.md)): the
+  Consell de Mallorca's register on the GOIB catalogue (`cc-by`; GOIB's terms,
+  CC BY 3.0 ES) and Catastro's INSPIRE Addresses for Palma (CC BY 4.0 DG
+  Catastro).
+- **MUST DISPLAY**: "Font de les dades: Govern de les Illes Balears", the
+  author, the title, the licence link, the dataset URI, the register's last
+  update (2026-09-07) and that the data were modified; Catastro named as
+  author and owner, CC BY 4.0 linked, the join stated, the access date.
+- **MUST NOT**: imply that GOIB, the Consell or Catastro endorses the map, or
+  present it as Catastro information. `check_personal_exposure.py palma`, run
+  2026-09-30: trade names only (`Explotador/s` never read); the verdict is in
+  `DECISIONS.md`.
+- **MUST DO**: nothing required; GOIB "urges" projects to tell it (not done:
+  a courtesy, like Barcelona's, recorded).
+- **Palma's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

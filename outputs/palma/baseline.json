@@ -1,0 +1,19 @@
+{
+  "control_rows": 512,
+  "control_within_100m_pct": "92.2",
+  "kind_adult_venue": 4,
+  "kind_bar__caf\u00e9_or_restaurant": 4312,
+  "kind_catering__no_counter_": 9,
+  "kind_hotel": 4,
+  "kind_institutional_canteen": 8,
+  "kind_recreation_venue__club_or_gaming": 35,
+  "outside_city": 0,
+  "placed_catastro_exact": 2559,
+  "placed_catastro_nearest": 305,
+  "placed_register": 568,
+  "placed_unplaced": 880,
+  "stations_in_scope": 10,
+  "stations_outside": 0,
+  "stop_positions": 19,
+  "storefronts": 3432
+}

@@ -145,6 +145,7 @@ TAXONOMY_MODULES = {
     "minneapolis_inspection": "pipeline.taxonomies.minneapolis_inspection",
     "pittsburgh_inspection": "pipeline.taxonomies.pittsburgh_inspection",
     "kitchener_waterloo_inspection": "pipeline.taxonomies.kitchener_waterloo_inspection",
+    "palma_restauracio": "pipeline.taxonomies.palma_restauracio",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

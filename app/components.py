@@ -746,6 +746,8 @@ _NOTICES = [
      "Minneapolis's METRO Blue and Green Lines and their stations, "
      "Pittsburgh's PRT Red, Blue and Silver Lines and their stations, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
+     "Palma's Metro M1 and its stations, and the municipal boundaries used to "
+     "select them, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
@@ -790,6 +792,31 @@ _NOTICES = [
      "delivered: on 22 September 2026 the portal's own contact form stalled, "
      "and the enquiry channel the terms themselves name did not respond. It "
      "will be sent when that service is reachable again.",
+     False),
+    # Palma: the Consell de Mallorca's restaurant register, on the GOIB
+    # catalogue (dataset licence "cc-by"; GOIB's terms link CC BY 3.0 ES), and
+    # Catastro's INSPIRE addresses (CC BY 4.0 DG Catastro), both read
+    # 2026-09-29 with the owner's three calls (DECISIONS). GOIB's terms require
+    # the source credit, the author, the title, the licence link, the dataset
+    # URI, the date of last update and a statement that the data were modified,
+    # and bar implying endorsement; Catastro's ask that the Dirección General
+    # del Catastro be named as author and owner, the licence, a statement of
+    # the join and the access date. Written under the owner's pre-approval of
+    # this build's prose (2026-09-30).
+    ("Govern de les Illes Balears and Dirección General del Catastro (Palma)",
+     "Font de les dades: Govern de les Illes Balears. Bars, cafés and restaurants for Palma "
+     "are from the Registre d'Establiments de Restauració i Entreteniment de Mallorca "
+     "(author: Consell de Mallorca, Direcció Insular de Transició i Ordenació Turística), "
+     "[dataset](https://intranet.caib.es/opendatacataleg/dataset/"
+     "empreses-restauracio-entreteniment-mallorca), last updated 2026-09-07, used under "
+     "[CC BY 3.0 ES](https://creativecommons.org/licenses/by/3.0/es/). Premises without "
+     "coordinates are placed at the address points of the Dirección General del Catastro "
+     "(Ministerio de Hacienda), author and owner of that information, INSPIRE Addresses for "
+     "Palma, accessed 2026-09-30, used under [CC BY 4.0](https://creativecommons.org/"
+     "licenses/by/4.0/). Both have been modified by this project: the register is limited "
+     "to active premises in Palma, caterers, clubs, venues and hotels are left out, "
+     "addresses are joined to Catastro's points, and the rest are mapped by distance to "
+     "Metro stations. Neither the Govern, the Consell nor Catastro endorses this map.",
      False),
     # TAILTE EIREANN - Dublin. CC BY 4.0, confirmed from data.gov.ie's
     # package_show. NO wording is prescribed, so the string is this project's
