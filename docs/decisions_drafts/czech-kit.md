@@ -4,6 +4,68 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Brno rendered and checked: 146 stations, 11 lines, 82.4% of storefronts in a ring; privacy verdict publish
+
+- **Brno's map is rendered on `czech-build`.**
+  - **What it shows:** 146 stations and 11 lines drawn from OSM by `ref` in
+    the feed's colours, with 7,200 storefronts. 5,932 of them (82.4%) sit
+    inside the 0.05 / 0.1 / 0.2 / 0.3 mi rings; the brief's OSM stand-in
+    read about 83%.
+  - **Checks:** `check_map_markup.py` and `check_inline_arrays.py` pass on
+    all 76 maps. `check_map_view.js` passes at 1280 px (zoom 12 against 12)
+    and at 375 px (11.25 against 11.25), with no corrections. The OSM
+    credit is clear and the legend clamp in force at 1000x650 and
+    1280x900.
+  - **How it was served:** the preview read the launch folder's own
+    `.claude/launch.json`, so a temporary `czech-static-tmp` entry was
+    written there. The main checkout's file was not touched; a hook refused
+    the edit.
+- **Privacy verdict for Brno, from `check_personal_exposure.py brno`:
+  publish.** The figures: 0 e-mails, 0 phone numbers, 0 c/o markers, and 1
+  person-like name at a residential unit (0.02%). The heuristic flags 602
+  names (10.1%), and every one is a company's registered name, because
+  natural persons and partnerships show their address. That is Prague's
+  verdict (1,991 flagged, 1 at a residential unit) on the same structural
+  guarantee. The six cities were added to the check's table in Prague's
+  shape, and the other five get their verdicts once their maps exist.
+- **The restaurant control, measured for all six as Prague's was.**
+  CZ-NACE 2025 5611 storefronts against OSM's restaurant, fast_food, cafe,
+  food_court and ice_cream features, node and way, inside each city's own
+  polygon (2026-09-30):
+
+  | City | Register | OSM | Ratio |
+  |---|---|---|---|
+  | Brno | 2,110 | 1,315 | 1.60 |
+  | Plzeň | 852 | 429 | 1.99 |
+  | Olomouc | 616 | 342 | 1.80 |
+  | Ostrava | 1,092 | 482 | 2.27 |
+  | Liberec (Regional) | 587 | 237 | 2.48 |
+  | Most (Regional) | 267 | 80 | 3.34 |
+
+  Ostrava, Liberec and Most are over 2, so their pages carry the approved
+  sentence on OpenStreetMap's gaps.
+- **Brno's page is written from the approved template**, with no departure
+  from it. Brno's own notice is number 72 (France holds 69-71 on
+  `france-build-2`). The ČSÚ and ČÚZK notice titles now list the six Czech
+  cities, and items 32 and 33 in `data_sources.md` match. The "OpenStreetMap
+  (rail geometry)" notice names the Czech tram lines.
+- **Rows written:** `docs/data_sources/czechia.md` has rows for all six
+  (registries, transit, OSM geometry, boundaries), and
+  `docs/excluded_categories.md` has a section per city.
+  `check_provenance.py` names all six OK. `check_scope_disclosure.py` passes
+  for 81 cities. `check_provenance.py` gained the Czech display-name
+  overrides (Plzeň, Liberec (Regional), Most (Regional)).
+- **For the lander, at landing:**
+  - Notices 69-71 must land before or with 72, or the contiguity check
+    fails.
+  - The ČSÚ/ČÚZK titles and the OSM notice name all six cities, so a
+    partial landing trims them to the cities that land.
+  - `macro_facts.json` (`check_macro_facts.py --write`), the
+    `map_inconsistencies.md` rows (cleanup's city-landed sweep), the
+    master-list counts and each city's measured macro-label width are all
+    landing-time work.
+  - The `mode` key waits for the macro-legend branch.
+
 ### 2026-09-30 - The six Czech business legs built; Brno's stations from the feed, with request stops kept and depot runs dropped
 
 - **All six business legs ran on the shared chain, each RÚIAN control

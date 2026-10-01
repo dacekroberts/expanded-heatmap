@@ -1499,7 +1499,7 @@ because Datafordeler's general terms ask for "the responsible register". The
 prescribed a dated credit sentence and is SUPERSEDED for data fetched after 16
 May 2024 - not to be followed. **MUST DO: nothing.**
 
-**32. Czech Statistical Office (Prague) — required, and DISPLAYED.**
+**32. Czech Statistical Office (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most) — required, and DISPLAYED.**
 
 **CC BY 4.0**, from ČSÚ's own conditions page
 (`csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu`,
@@ -1513,7 +1513,7 @@ official statistics, which its second sentence does. **MUST NOT SAY**: that the
 map is official Czech statistics. Wording approved by the owner 2026-09-24.
 **MUST DO: nothing.**
 
-**33. ČÚZK (Prague) — required, and DISPLAYED.**
+**33. ČÚZK (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most) — required, and DISPLAYED.**
 
 **CC BY 4.0**, from ČÚZK's spatial-data conditions
 (`www.cuzk.gov.cz/Predpisy/Podminky-poskytovani-prostor-dat-a-sitovych-sluzeb/Podminky-poskytovani-prostorovych-dat-CUZK.aspx`,
@@ -2155,6 +2155,28 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
 - **MUST NOT**: present the counts as SEMAS's figures, or the data as accurate
   or complete on SEMAS's behalf (its legal notice disclaims both).
 - **MUST DO**: nothing.
+
+**72. KORDIS JMK (Brno) — required, and DISPLAYED** (written into
+`render_site_notices()` on `czech-build`; displayed once Brno lands. 69-71 are
+France's, on `france-build-2`).
+
+- **PERMITTED WITH CONDITIONS, CC BY 4.0** (read 2026-09-30, the rows in
+  [`data_sources/czechia.md`](data_sources/czechia.md)): KORDIS's own "Otevřená
+  data (GTFS)" block on `idsjmk.cz/a/kontakty.html` grants CC BY 4.0, and
+  data.brno.cz lists the byte-identical file as CC-BY-4.0. idsjmk.cz's BY-NC-SA
+  footer covers only its web pages. The file is fetched from `kordis-jmk.cz`
+  (owner, 2026-09-30), under KORDIS's own grant.
+- **MUST DISPLAY**: KORDIS JMK, a.s. and DPMB, as the feed's `agency.txt`
+  credits them ("IDS JMK (Data from: KORDIS JMK, DPMB)", which CC BY
+  §3(a)(1)(A) says to retain); data.brno.cz (the Statutory City of Brno) as the
+  distributor; CC BY 4.0, linked; a link to the feed; the changes. The wording
+  was approved by the owner on 2026-09-30, word for word.
+- **MUST NOT**: imply endorsement, or use the IDS JMK, KORDIS or DPMB logos.
+- **MUST DO**: nothing.
+
+**32 and 33 widened in the same change.** The ČSÚ and ČÚZK notices' text names
+no city, so their titles list each Czech city as it lands (owner, 2026-09-30),
+as Norway's and Denmark's do. Their text is unchanged.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

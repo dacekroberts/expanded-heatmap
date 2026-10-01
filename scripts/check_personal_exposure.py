@@ -196,6 +196,12 @@ REGISTRIES = {
     "prague": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
+    # The six Czech tram cities (2026-09-30): Prague's shared step 2
+    # (czechia_register.py), so Prague's structural guarantee, unchanged.
+    **{slug: dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("business_name",))
+       for slug in ("brno", "plzen", "olomouc", "ostrava", "liberec", "most")},
     # Copenhagen, the first Danish city: Oslo's structural guarantee, from
     # CVR. The parent company's legal form is joined for every premises, and
     # a personally owned one (Enkeltmandsvirksomhed, PMV) - or any name with

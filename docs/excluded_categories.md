@@ -1514,6 +1514,99 @@ carries no coordinates.
 overlay on the metro, the Petřín funicular, ferries and suburban trains are not
 drawn. Flora, closed for reconstruction, is not drawn while closed.
 
+### Brno - Prague's register, and trams as the rapid transit
+
+The register is Prague's (ROS02 establishments, RES activity, the RÚIAN address
+join), so the rules are Prague's: an establishment carries its owner's single
+main activity, and a natural person's or partnership's pin shows its address.
+
+**Excluded by the classification itself, anywhere in Czechia** - personal
+services performed in the customer's home (262), funeral services (23),
+catering and contract catering (22), retail intermediation (4) and mobile food
+service (1): 312 rows.
+
+**Excluded because it is probably a home** - 591 establishments of people
+trading in their own name at their own registered address.
+
+**The "other personal services" catch-all is excluded, as in every city** - 6
+rows. Day spas, saunas and massage salons are a specific class and are kept.
+
+**Missing rather than excluded** - about 18,800 Brno establishments belong to
+businesses whose main activity is something other than retail, food or personal
+services, and are not shown.
+
+**What cannot be excluded: web shops**, which the classification files under the
+goods they sell.
+
+**The rail scope.** The 11 regular tram lines (1-10 and 12) are drawn; the
+heritage tram H4 and the event shuttle P1, which run no weekday trips, are not.
+Line 2's two stops in Modřice, beyond the city boundary, are left out, and so is
+the Vozovna Medlánky depot stop, which no line serves on a tenth of its trips.
+Buses, trolleybuses, the S-trains and the ferry are not drawn.
+
+### Plzeň - Prague's register, three tram lines
+
+The register and its rules are Prague's. **Excluded by the classification** -
+personal services in the customer's home (125), catering (9) and funeral
+services (5): 139 rows. **Excluded because it is probably a home** - 299
+establishments of people trading in their own name at their own registered
+address. **The "other personal services" catch-all** is excluded (no rows here).
+**Missing rather than excluded** - about 7,200 establishments whose owner's main
+activity is something else. **Web shops cannot be excluded.** **The rail
+scope**: trams 1, 2 and 4, every stop inside the city; PMDP's relief and depot
+runs (1X, 4X) are not drawn, nor buses or trolleybuses.
+
+### Olomouc - Prague's register, seven tram lines
+
+The register and its rules are Prague's. **Excluded by the classification** -
+personal services in the customer's home (44), funeral services (9) and catering
+(3): 56 rows. **Excluded because it is probably a home** - 223 establishments of
+people trading in their own name at their own registered address. **The "other
+personal services" catch-all** is excluded (2 rows). **Missing rather than
+excluded** - about 4,800 establishments whose owner's main activity is something
+else. **Web shops cannot be excluded.** **The rail scope**: trams 1-7, every stop
+inside the city; buses are not drawn.
+
+### Ostrava - Prague's register, trams without the suburban line
+
+The register and its rules are Prague's. **Excluded by the classification** -
+personal services in the customer's home (100), funeral services (11), catering
+(10) and retail intermediation (1): 122 rows. **Excluded because it is probably a
+home** - 207 establishments of people trading in their own name at their own
+registered address. **The "other personal services" catch-all** is excluded (no
+rows here). **Missing rather than excluded** - about 9,000 establishments whose
+owner's main activity is something else. **Web shops cannot be excluded.** **The
+rail scope**: every tram line but line 5, the suburban line to Budišovice, which
+has only 3 of its 10 stops in the city (owner, 2026-09-30); leaving it out costs
+Poruba,koupaliště and Krásné Pole. Lines 9 and 19, which OSM carries without
+stops, are not drawn, nor buses or trolleybuses.
+
+### Liberec (Regional) - two towns, one tram network
+
+The register and its rules are Prague's, read for **two obce, Liberec and
+Jablonec nad Nisou**, which tram line 11 joins; businesses in the surrounding
+municipalities are not counted. **Excluded by the classification** - personal
+services in the customer's home (74), catering (14) and funeral services (9): 97
+rows. **Excluded because it is probably a home** - 283 establishments of people
+trading in their own name at their own registered address. **The "other personal
+services" catch-all** is excluded (1 row). **Missing rather than excluded** -
+about 6,200 establishments whose owner's main activity is something else. **Web
+shops cannot be excluded.** **The rail scope**: trams 2, 3, 5 and 11, every stop
+inside the two towns; buses are not drawn.
+
+### Most (Regional) - two towns, one tram network
+
+The register and its rules are Prague's, read for **two obce, Most and Litvínov**,
+which the trams join; Most alone would cut three of its four lines short.
+**Excluded by the classification** - personal services in the customer's home
+(18), funeral services (5) and catering (1): 24 rows. **Excluded because it is
+probably a home** - 104 establishments of people trading in their own name at
+their own registered address. **The "other personal services" catch-all** is
+excluded (no rows here). **Missing rather than excluded** - about 2,000
+establishments whose owner's main activity is something else. **Web shops cannot
+be excluded.** **The rail scope**: trams 1-4, every stop inside the two towns;
+buses are not drawn.
+
 ### Amsterdam - two registers, and a shop unit that is also a home kept off the map
 
 **Two layers, two categories.** Food service is the city's register of

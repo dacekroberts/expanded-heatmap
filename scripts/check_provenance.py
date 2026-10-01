@@ -223,6 +223,11 @@ SLUG_OVERRIDES = {
     "Taipei (Regional)": "taipei",
     # Mexico: four municipios as one regional page (2026-09-27).
     "Monterrey (Regional)": "monterrey",
+    # Czechia: accents dropped from the package name; two obce each as one
+    # regional page (2026-09-30).
+    "Plzeň": "plzen",
+    "Liberec (Regional)": "liberec",
+    "Most (Regional)": "most",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are
