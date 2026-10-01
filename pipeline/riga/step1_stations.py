@@ -178,8 +178,13 @@ def main():
                 .rename(columns={"stop_name": "station"}))
     lines_of = {n: [s for s in config.LINE_ORDER if n in line_names[s]] for n in stations.station}
     stations["lines"] = [" ".join(lines_of[n]) for n in stations.station]
+    # Gate 3 runs here, BEFORE thinning: the operator lists every stop, and the
+    # thinning below is the owner's call, disclosed in excluded_stations.csv.
     station_gates.verify_stations(city="Riga", platforms=plat, stations=stations,
-                                  crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M)
+                                  crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M,
+                                  expected_per_line=config.OPERATOR_STATION_COUNTS,
+                                  actual_per_line={s: sum(s in ls for ls in lines_of.values())
+                                                   for s in config.LINE_ORDER})
     emit("platforms", len(plat))
     emit("station_names", len(stations))
 
@@ -212,6 +217,9 @@ def main():
     cuts = [c for c in cuts if c["station"] not in kept]
     print(f"\n  thinning (terminals and {len(interchange)} interchanges kept, the rest one per "
           f"{config.THIN_SPACING_MILES} mi): {len(stations)} -> {len(kept)} stations")
+    print("  per route, before -> after thinning: " + ", ".join(
+        f"{s} {sum(s in ls for ls in lines_of.values())}->"
+        f"{sum(s in ls for n, ls in lines_of.items() if n in kept)}" for s in config.LINE_ORDER))
     emit("stations_kept", len(kept))
 
     excluded, seen = [], set()

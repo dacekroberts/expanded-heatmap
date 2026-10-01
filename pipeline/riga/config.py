@@ -91,6 +91,41 @@ COLLAPSE_MAX_SPREAD_M = 300.0
 ALIAS_MAX_M = 60.0
 SPACING_MIN_M = 200.0
 THIN_SPACING_MILES = 0.5
+
+# Gate 3: each route's stops as Rīgas satiksme's timetable lists them, against
+# the build's stations per route BEFORE thinning (step 1 compares there; the
+# thinning to one stop per THIN_SPACING_MILES is the owner's call and the only
+# reason the drawn set is smaller - after it, 1 draws 32, 8 36, 10 15, 11 19,
+# and 5, 7 and 14 all theirs). Distinct stops over both directions of the main
+# terminal-to-terminal variants, reconciled where the difference is known:
+OPERATOR_STATION_COUNTS = {
+    # 37 stops each way; 39 names, because two stops carry a different name in
+    # each direction (K.Barona iela / Brīvības iela, Jūrmalas gatve / Kurzemes
+    # prospekts), which step 1 merges by its measured rule (ALIAS_MAX_M).
+    "1": 37,
+    "5": 34,       # 34 each way, the same 34
+    "7": 23,       # 23 each way; 24 names, Autoosta / Centrāltirgus one stop
+    # 37 each way on Mīlgrāvis - Tapešu iela, plus Stacijas laukums: the
+    # terminus of route 8's Stacijas laukums - Tapešu iela short working, which
+    # the timetable lists as a variant of route 8 and which runs at least
+    # PATTERN_MIN_SHARE of a direction's trips, so step 1 keeps it.
+    "8": 38,
+    # 18 one way, 16 the other, 20 names; Jelgavas iela and Jelgavas iela/Bērnu
+    # slimnīca are one stop named per direction (merged in step 1).
+    "10": 19,
+    "11": 23,      # 22 one way, 23 the other
+    "14": 33,      # 33 each way; 34 names, Autoosta / Centrāltirgus one stop
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Rīgas satiksme's tram timetable as 1188.lv (Tet's directory) republishes it, "
+    "one page per route variant: www.1188.lv/satiksme/pilsetas/riga/ routes 2313 "
+    "(1), 116 (5), 118 (7), 3602 (8), 120 (10), 121 (11), 3603 (14), read "
+    "2026-10-01 - SECONDARY. The operator's own timetable host, "
+    "saraksti.rigassatiksme.lv, did not answer (2026-10-01), and its only "
+    "per-route publication outside the feed is a route-scheme PDF with no stop "
+    "list to read (rigassatiksme.lv/files/06_1_tramvaju_marsruts_shema.pdf). "
+    "Latvian Wikipedia's per-route articles agree on 1, 7, 11 and 14 but are "
+    "stale on 5 (35, pre-renaming names) and were not used.")
 # The union of Riga's 58 neighbourhoods: measured 304.0 km2 (= OSM 13048688).
 CITY_AREA_KM2 = (300.0, 308.0)
 LINE_SHAPES_JSON = DATA_PROCESSED / "line_shapes.json"

@@ -38,7 +38,10 @@ from pipeline.san_diego.config import (  # noqa: E402
     GTFS_NAME_ALIASES,
     CITY_BOUNDARY_NAME,
     CRS_GEOGRAPHIC,
+    OPERATOR_STATION_COUNTS,
+    OPERATOR_COUNTS_SOURCE,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 
 def load_gtfs_table(zip_path, filename):
@@ -94,6 +97,20 @@ def main():
           f"(all cities, before platform collapse):")
     print(sorted(trolley_stops["stop_name"].unique()))
     print()
+
+    # Gate 3: whole lines, before the city-limits cut below; an interchange
+    # counts once on each line it serves. Prints only, as verify_stations does.
+    print("Gate 3 (MTS Trolley):")
+    per_line = (
+        trolley_trips[["trip_id", "route_id"]]
+        .merge(trolley_routes[["route_id", "route_short_name"]], on="route_id")
+        .merge(stop_times[["trip_id", "stop_id"]], on="trip_id")
+        .drop_duplicates(["route_short_name", "stop_id"])
+        .merge(trolley_stops[["stop_id", "stop_name"]], on="stop_id")
+    )
+    actual = per_line.groupby("route_short_name")["stop_name"].nunique().to_dict()
+    check_operator_counts(OPERATOR_STATION_COUNTS, actual)
+    print(f"    gate 3 source: {OPERATOR_COUNTS_SOURCE}\n")
 
     # Platforms sharing a name collapse to one row per station by
     # averaging.

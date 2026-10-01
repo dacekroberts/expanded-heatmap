@@ -239,6 +239,34 @@ STATION_NAME_ALIASES = {
     "BISCAYNE BD@E FLAGLER ST": "Bayfront Park",
 }
 
+# --- Gate 3: the operator's own per-line station counts ----------------------
+# Keyed as step 1 keys its lines: the public names in LINE_NAMES. An
+# interchange counts once on each line it serves (the seven downtown Metromover
+# stations both drawn routes call at count on both). Nothing is cut by
+# municipality here, so there is no before/after-scope distinction.
+OPERATOR_STATION_COUNTS = {
+    # Green and Orange Lines together: one route_id in MDT's feed, one drawn
+    # line here. Palmetto - Dadeland South plus MIA.
+    "Metrorail": 23,
+    # The stations table marks 8 Inner Loop stations: Government Center,
+    # Wilkie D. Ferguson Jr., College North, College/Bayside, First Street,
+    # Bayfront Park, Knight Center, Miami Avenue.
+    "Metromover Inner Loop": 8,
+    # Omni Loop and Brickell Loop together (one route_id in the feed): the 7
+    # downtown stations they share with the Inner Loop, Third Street, 6 Omni
+    # and 6 Brickell stations. Park West is the table's older name for Miami
+    # Worldcenter. 8 + 20 - 7 shared = MDT's 21.
+    "Metromover Omni/Brickell Loops": 20,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Metrorail 23: en.wikipedia.org/wiki/Metrorail_(Miami-Dade_County), read "
+    "2026-10-01 - secondary (miamidade.gov's station list renders only in a "
+    "browser). Metromover: 21 stations in total from Miami-Dade County's own "
+    "Metromover page, miamidade.gov/global/transportation/metromover.page - "
+    "primary; the per-loop split from en.wikipedia.org/wiki/Metromover's "
+    "stations table - secondary. All read 2026-10-01."
+)
+
 # --- Business filtering ------------------------------------------------
 
 # No CITY_KEEP: this map is regional. Every municipality in the county file is

@@ -101,6 +101,21 @@ STATION_ADD = {}
 EXPECTED_IN_COMUNE = 39
 EXPECTED_OUTSIDE = 4
 
+# Gate 3: GEST's own stop counts per line, the whole line before the comune
+# split (T1's four Scandicci stops included). Step 1 stops on a mismatch.
+#   T1 Villa Costanza - Careggi: 26 stops.
+#   T2 Peretola Aeroporto - San Marco Università: 20 stops. GEST's diagram also
+#      shows Unità, greyed out: the Comune closed it to regular service on
+#      2 January 2025, first and last runs only. It is not drawn, so it is not
+#      counted (secondary sources that say 21 include it).
+OPERATOR_STATION_COUNTS = {"T1": 26, "T2": 20}
+OPERATOR_COUNTS_SOURCE = (
+    "GEST's stop diagram 'Sinottico fermate' on its Linee page, "
+    "https://www.gestramvia.it/linee/ (image wp-content/uploads/2025/01/"
+    "Sinottico-fermate-1.png), read 2026-10-01; Unità's closure from the Comune di "
+    "Firenze, 'Linea 2 della tramvia, tratto Fortezza-San Marco' (16 Jan 2025). "
+    "Cross-checked against it.wikipedia 'Rete tranviaria di Firenze' (secondary).")
+
 SPACING_MIN_M = 100.0
 
 DRAWN_LINES = ("T1", "T2")

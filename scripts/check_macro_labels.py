@@ -412,6 +412,27 @@ TOUCH = 1.0
 ACCEPTED_OVERLAPS = {}
 ACCEPTED_TOL = 0.5
 
+# DOTS ON TOP OF DOTS (review lessons, 2026-09-30): two markers whose centres
+# sit within one marker radius in a member's OWN region - the closest view the
+# macro map gives it - so neither can be told apart or clicked anywhere. Global
+# and the composites are not judged: a continental view stacks neighbours by
+# design, and the reader drills down. These seven were measured on 2026-10-01
+# and wait for the site-wide prose and UI pass (PLAN, calls A3, A6, A7, B6:
+# draw the older city on top, or give the pair a closer regional view); a NEW
+# pair, or one of these drawn closer, fails.
+# (city, city) sorted -> the centre distance in px when listed (zoom is fixed
+# per region, so it is the same at every width).
+KNOWN_STACKED = {
+    ("Taipei (Regional)", "Taoyuan"): 1.8,
+    ("Kobe", "Osaka"): 2.3,
+    ("Tokyo", "Yokohama"): 2.3,
+    ("Den Haag", "Rotterdam"): 3.0,
+    ("Kyoto", "Osaka"): 3.5,
+    ("Santos (Regional)", "São Paulo"): 4.6,
+    ("Kobe", "Kyoto"): 5.1,
+}
+STACKED_TOL = 0.2
+
 # THE MAP'S OWN CONTROLS, which sit above the label canvas and hide whatever is
 # under them. Not modelled until 2026-09-23, so the check scored PROBLEMS 0
 # while Oslo's pill - the Europe frame's northernmost city, label above its dot
@@ -600,6 +621,7 @@ def main():
     # Francisco and Sacramento off United States West. Reported, not failed,
     # like clipping: the pinned France zooms accept it by the owner's call.
     offframe = []
+    stacked = []
     problems.extend(caption_arithmetic())
     for region in REGIONS:
         clat, clon, zoom = region_view(region)
@@ -686,6 +708,26 @@ def main():
                             f"{region['name']:<20} {vw:>4}px  "
                             f"{city['name']}'s marker is under the {what}")
 
+            # Dots on top of dots, judged in a member's own region only.
+            onc = [(c, x, y) for c, x, y, on in markers if on]
+            for i, (a, ax, ay) in enumerate(onc):
+                for b, bx, by in onc[i + 1:]:
+                    if region["name"] not in (a.get("region"), b.get("region")):
+                        continue
+                    d = ((ax - bx) ** 2 + (ay - by) ** 2) ** 0.5
+                    if d >= MARKER_R:
+                        continue
+                    key = tuple(sorted((a["name"], b["name"])))
+                    was = KNOWN_STACKED.get(key)
+                    line = (f"{region['name']:<20} {vw:>4}px  {key[0]} x {key[1]} "
+                            f"dots {d:.1f} px apart")
+                    if was is not None and d >= was - STACKED_TOL:
+                        stacked.append(line + " (known; the UI pass)")
+                    else:
+                        problems.append(line + (f" - CLOSER than the known {was}"
+                                                if was is not None else
+                                                " - one dot on top of the other"))
+
             for i, (a, _, _, ab, _) in enumerate(placed):
                 for b, _, _, bb, _ in placed[i + 1:]:
                     ox, oy = overlap(ab, bb)
@@ -718,6 +760,15 @@ def main():
         for line in near:
             print(f"  {line}")
         print()
+
+    if stacked and args.verbose:
+        print(f"Known dots on top of dots ({len(stacked)}) - see KNOWN_STACKED:")
+        for line in stacked:
+            print(f"  {line}")
+        print()
+    elif stacked:
+        print(f"{len({l.split('px  ')[1].split(' dots')[0] for l in stacked})} known pair(s) "
+              f"of dots on top of each other (KNOWN_STACKED); --verbose to list.\n")
 
     if offframe and args.verbose:
         print(f"Members whose dot is off the canvas ({len(offframe)}) - reported, not failed:")

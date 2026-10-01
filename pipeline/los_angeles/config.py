@@ -107,6 +107,27 @@ GTFS_NAME_ALIASES = {
     "Willowbrook - Rosa Parks Station - Metro C-Line": "Willowbrook - Rosa Parks Station",
 }
 
+# --- Gate 3: the operator's own per-line station counts ----------------------
+# Whole lines, BEFORE the City of LA cut (the A Line's Long Beach and Pomona
+# ends, the E Line's Santa Monica end and so on count here). An interchange
+# counts once on each line it serves. Keyed as step 1 keys its lines: the
+# public names in LA_METRO_LINE_NAMES.
+OPERATOR_STATION_COUNTS = {
+    "A Line": 48,   # Long Beach - Pomona North (Foothill 2B's four included)
+    "B Line": 14,
+    "C Line": 12,   # Norwalk - LAX/Metro Transit Center
+    "D Line": 11,   # Union Station - Wilshire/La Cienega
+    "E Line": 29,
+    "K Line": 13,   # Expo/Crenshaw - Redondo Beach
+}
+OPERATOR_COUNTS_SOURCE = (
+    "en.wikipedia.org/wiki/Los_Angeles_Metro_Rail, table of lines (A 48, B 14, "
+    "C 12, D 11, E 29, K 13), read 2026-10-01 - secondary. The C Line's 12 "
+    "also read from LA Metro's own C Line timetable, effective 2026-06-07 "
+    "(cdn.beta.metro.net/.../803_TT_6-7-26-1.pdf, linked from "
+    "metro.net/riding/guide/system-maps/), read 2026-10-01 - primary."
+)
+
 # Boundary layer: LA County's incorporated cities, one record per city; the
 # City of LA is the record whose CITY_COMM_NAME is "LOS ANGELES".
 CITY_BOUNDARY_FIELD = "CITY_COMM_NAME"

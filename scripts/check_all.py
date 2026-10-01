@@ -38,6 +38,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 CHECKS = [
+    ["scripts/check_barred_marks.py"],
+    ["scripts/check_barred_marks.py", "--selftest"],
     ["scripts/check_category_continuity.py"],
     ["scripts/check_category_continuity.py", "--selftest"],
     ["scripts/check_city_registry.py"],
@@ -54,6 +56,7 @@ CHECKS = [
     ["scripts/check_no_fetch_in_steps.py"],
     ["scripts/check_no_fetch_in_steps_selftest.py"],
     ["scripts/check_overpass_hosts.py"],
+    ["scripts/check_privacy_verdicts.py"],
     ["scripts/check_provenance.py"],
     ["scripts/check_render_current.py"],
     ["scripts/check_ring_shares.py"],

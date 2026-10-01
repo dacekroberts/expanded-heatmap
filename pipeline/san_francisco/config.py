@@ -107,6 +107,43 @@ MUNI_METRO_LINE_NAMES = {
     "F": "F Market & Wharves",
 }
 
+# --- Gate 3: the operator's own per-line stop counts -------------------------
+# Whole lines, BEFORE the surface-stop thinning: the stops on the one
+# representative trip (LINE_SHAPES in step 1) each line is read from, so ONE
+# direction. Wikipedia's per-line stop tables list stop PAIRS, marking stops one
+# direction alone serves; those are the known reasons below. An interchange
+# counts once on each line it serves. Every stop is in the county, so there is
+# no before/after-scope distinction. Keyed as step 1 keys its lines: route_id.
+# Each article's infobox count disagrees with its own table on four lines (K
+# 24, L 27, M 29, N 37: they count closed stops or each direction's stop); the
+# tables are what is compared.
+OPERATOR_STATION_COUNTS = {
+    # 25 table rows, less Church & 30th St (inbound only) and Church & Duboce
+    # (on other J trips in both directions, not on the representative trip;
+    # ~250 m from Church station, so the thinning would drop it anyway).
+    "J": 23,
+    "K": 20,   # 20 rows (Ocean & Fairfield/Victoria and Dorado/Jules are pairs)
+    # 25 rows, less Taraval & 17th Ave, served by the other direction only.
+    # The table's SF Zoo is the feed's 47th Ave & Cutler Ave on this trip.
+    "L": 24,
+    # 26 rows, less San Jose & Mt Vernon, removed by SFMTA from 2024-09-28
+    # (sfmta.com project update "Stop Removal at San Jose Ave & Mt. Vernon Ave").
+    "M": 25,
+    "N": 32,   # 32 rows (from 4th & King)
+    "T": 22,   # infobox 22, Chinatown - Sunnydale
+    # 32 rows, less Beach & Mason and Beach & Stockton, served by the other
+    # direction only.
+    "F": 30,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "en.wikipedia.org, each line's stop table (J Church read from the "
+    "wikitext row by row, with its inbound/outbound marks; K Ingleside, L "
+    "Taraval, M Ocean View, N Judah, F Market & Wharves) and T Third Street's "
+    "infobox, read 2026-10-01 - secondary. SFMTA's own route pages list stops "
+    "from the same GTFS this build reads (circular), so the M's removed stop "
+    "is from sfmta.com's own notice - primary."
+)
+
 # Raw GTFS stop names that are the SAME physical station but were named
 # inconsistently by different lines' own trips (not a direction-suffix
 # pattern step1_stations.py's regex can catch generally - these needed a

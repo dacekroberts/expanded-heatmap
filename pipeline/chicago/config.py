@@ -90,6 +90,26 @@ CTA_LINE_NAMES = {
     "Brn": "Brown Line",
 }
 
+# Gate 3: CTA's own station list on each line's page, keyed as
+# CTA_RAIL_ROUTE_IDS and counted over every station the line's trips serve,
+# before the city-limits cut. The five lines round the Loop each list
+# State/Lake, which CTA marks "closed for reconstruction into 2029" and the
+# feed no longer serves, so each figure is CTA's less State/Lake. Purple counts
+# its Loop and North Side express stops, as CTA's page lists them.
+OPERATOR_STATION_COUNTS = {
+    "Red": 33,
+    "P": 25,     # 26 less State/Lake (closed)
+    "Blue": 33,
+    "Pink": 21,  # 22 less State/Lake (closed)
+    "G": 30,     # 31 less State/Lake (closed)
+    "Org": 15,   # 16 less State/Lake (closed)
+    "Brn": 26,   # 27 less State/Lake (closed)
+}
+OPERATOR_COUNTS_SOURCE = ("CTA line pages' station lists, "
+                          "https://www.transitchicago.com/<line>line/ for red, "
+                          "purple, blue, pink, green, orange and brown (read "
+                          "2026-10-01)")
+
 # --- Business filtering ------------------------------------------------
 
 # The dataset's `city` field, exact match. Checked 2026-09-20: 49,066 of the

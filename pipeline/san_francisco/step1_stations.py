@@ -58,7 +58,10 @@ from pipeline.san_francisco.config import (  # noqa: E402
     SUBWAY_STATION_KEYWORDS,
     STATION_SPACING_MILES,
     STATION_NAME_ALIASES,
+    OPERATOR_STATION_COUNTS,
+    OPERATOR_COUNTS_SOURCE,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 # Representative trip's shape_id per line (its single most-used trip
 # shape - see pipeline/san_diego/step1_stations.py's sibling reasoning
@@ -214,6 +217,13 @@ def main():
         line: ordered_stop_sequence(line, trips, stop_times, stops)
         for line in MUNI_METRO_ROUTE_IDS
     }
+
+    # Gate 3: each line's stops before the thinning below (one direction - see
+    # config.OPERATOR_STATION_COUNTS). Prints only, as verify_stations does.
+    print("Gate 3 (Muni Metro and the F):")
+    actual = {line: seq["canonical"].nunique() for line, seq in line_sequences.items()}
+    check_operator_counts(OPERATOR_STATION_COUNTS, actual)
+    print(f"    gate 3 source: {OPERATOR_COUNTS_SOURCE}\n")
 
     # Which canonical stop names are shared by 2+ lines - the real
     # interchange points filter 4 force-includes. Subway stations are

@@ -66,6 +66,7 @@ from pipeline.edmonton.config import (  # noqa: E402
     LINE_NAMES,
     NON_REVENUE_STOPS_CSV,
     NON_REVENUE_STOPS_EXPECTED,
+    OPERATOR_STATION_COUNTS,
     PARENT_STATIONS_EXPECTED,
     PLATFORM_SPACING_MEDIAN_M_MAX,
     PLATFORMS_EXPECTED,
@@ -75,6 +76,7 @@ from pipeline.edmonton.config import (  # noqa: E402
     STATION_SPACING_MEDIAN_M_MIN,
     STATIONS_CSV,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 
 def load(zip_path, filename, **kw):
@@ -236,6 +238,13 @@ def main():
         print(f"  {name:<14}{n:>4}")
     shared = int(stations["lines"].fillna("").str.contains(",").sum())
     print(f"  served by more than one: {shared}")
+
+    # --- gate 3: ETS's own per-line stop lists ------------------------------
+    print("\nGate 3:")
+    check_operator_counts(OPERATOR_STATION_COUNTS, {
+        rid: int(stations["lines"].fillna("").str.contains(name,
+                                                            regex=False).sum())
+        for rid, name in LINE_NAMES.items()})
 
     # --- the boundary: a CHECK, since nothing should be outside -------------
     b = gpd.read_file(CITY_BOUNDARY_GEOJSON)

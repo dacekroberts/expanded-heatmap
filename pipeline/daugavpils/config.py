@@ -120,6 +120,32 @@ ACCEPT_MEMBERS = {10293447147: "Stropu ciemats"}
 # member named "Lokomotīvju demo" (sic).
 STATION_NAME_ALIASES = {"Lokomotīvju demo": "Lokomotīvju depo"}
 
+# Gate 3 (tram-city skill, section 2): the operator's own stops per route, read
+# for the count only, distinct stops over both directions of each regular
+# pattern. Ref 3 is routes 3 and 5, one loop run each way: 29 stops each, the
+# same 29. The operator names two stops differently from OSM - "Latvijas
+# maiznieks" (OSM's Maizes kombināts, the terminus) and "Kultūras pils" (OSM's
+# Kultūras un sporta pils) - which changes no count.
+OPERATOR_STATION_COUNTS = {
+    "1": 19,
+    # MISMATCH, unexplained: build 16. The operator stops at Užvaldes iela
+    # (stop ids T47261/T47262, 55.8889 N 26.5340 E, between A. Pumpura iela and
+    # Lokomotīvju depo, on routes 2 and 4 both ways); no element of that name
+    # is in the cached OSM (data/daugavpils/raw/osm_rail.json), so the build
+    # has no station there. Not fixed here: a fix is a station change.
+    "2": 17,
+    "3": 29,
+    # MISMATCH, unexplained: build 16. Užvaldes iela, as route 2.
+    "4": 17,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Daugavpils satiksme SIA's published tram timetable "
+    "(satiksme.daugavpils.lv/transports/tramvaju-saraksts), as the GTFS it publishes "
+    "lists it (feed_publisher 'Daugavpilssatiksme SIA', feed_version 01.09.2026, "
+    "valid 2026-04-30 to 2027-04-30; the cached data/daugavpils/raw/GTFS.zip, which "
+    "the build does not use): route 1 19 stops each way; route 2 17; route 4 17; "
+    "routes 3 and 5 29 each, one set. Read 2026-10-01; primary.")
+
 SPACING_MIN_M = 200.0
 
 DRAWN_LINES = ("1", "2", "3", "4")

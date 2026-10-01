@@ -67,6 +67,34 @@ GTFS_NAME_ALIASES = {
     "12th & Imperial Station (Bayside)": "12th & Imperial Station",
 }
 
+# --- Gate 3: the operator's own per-line station counts ----------------------
+# Whole lines, BEFORE the city-limits cut (Santee, El Cajon, La Mesa, Lemon
+# Grove, National City and Chula Vista stations count here). An interchange
+# counts once on each line it serves. Keyed as step 1 keys its lines: the
+# feed's route_short_name (TROLLEY_ROUTE_SHORT_NAMES).
+OPERATOR_STATION_COUNTS = {
+    # UTC - San Ysidro is 32. This feed also has 2 of its 1,898 Blue trips
+    # (12th & Imperial-bound, one each on two weekday service_ids) running via
+    # the Bayside - Seaport Village, Convention Center, Gaslamp Quarter - so
+    # the feed's Blue Line calls at 35. All three are Green Line stations,
+    # drawn anyway; no station changes. 32 + 3 = 35.
+    "Blue": 35,
+    "Orange": 19,
+    # 12th & Imperial - El Cajon. Wikipedia's network table still says 27,
+    # from before 2024-09-29, when the Green Line was cut back to El Cajon and
+    # the Copper Line took over Arnele Avenue, Gillespie Field and Santee; the
+    # Green Line article's own infobox and station table say 24.
+    "Green": 24,
+    "Copper": 4,
+    "Silver": 9,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "en.wikipedia.org/wiki/San_Diego_Trolley, table of lines (Blue 32, Orange "
+    "19, Copper 4, Silver 9), and en.wikipedia.org/wiki/Green_Line_(San_Diego_"
+    "Trolley), infobox and station table (24), read 2026-10-01 - secondary. "
+    "MTS's own line pages (sdmts.com) give termini, not station lists."
+)
+
 # City boundary name to filter Municipal_Boundaries.geojson (SANDAG
 # regional layer, covers all San Diego County municipalities) down to.
 CITY_BOUNDARY_NAME = "SAN DIEGO"

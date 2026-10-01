@@ -182,6 +182,31 @@ ROUTES = {
     "BRAY-HOWTH-I": ("DART", "#F57C00"),
 }
 
+# Gate 3: the operators' own per-line stop counts, keyed as ROUTES. Whole
+# lines, BEFORE the four-authority cut (DART's Greystones, in Wicklow, counts
+# here). An interchange counts once on each line it serves (Connolly is on the
+# Red Line's list and on DART's).
+OPERATOR_STATION_COUNTS = {
+    # "The line has 35 operating stops with 2 future stops which may be
+    # brought into use when there is development in those areas" - the two
+    # future stops are not built or served, so 35.
+    "10000 GREEN g a": 35,
+    "10000 RED g a": 32,        # "The line has 32 stops."
+    # Iarnrod Eireann's two DART routes: Malahide - Greystones, 29 stations,
+    # and Howth - Greystones, which adds Howth, Sutton and Bayside before
+    # joining at Howth Junction. 29 + 3 = 32, Woodbrook (opened 2025) included.
+    "BRAY-HOWTH-I": 32,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Luas: Transport Infrastructure Ireland, 'Luas Red and Green Lines' "
+    "(tii.ie/en/public-transport/luas/red-and-green-lines/), the stated stop "
+    "count of each line. DART: Iarnrod Eireann, 'Accessible details for "
+    "Dublin City and Commuter Zone Train and Tram Map' (irishrail.ie/en-ie/"
+    "travel-information/station-and-route-maps/accessible-details-dublin-"
+    "area), the DART station list of each route. Both read 2026-10-01; "
+    "primary (TII owns the Luas network; Iarnrod Eireann runs DART)."
+)
+
 # COMMUTER AND INTERCITY ARE EXCLUDED, and the agency feed separates them more
 # cleanly than OSM did: they are other route_ids under the same route_type 2,
 # with no tag to misread. Commuter rail is out in every built city and eight

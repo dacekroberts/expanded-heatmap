@@ -277,13 +277,13 @@ OSM is a volunteer map, and the brief's station count is usually OSM's own.
   what was looked for, where, and the date. The draft entry repeats it, and
   the drafts file and review time list it as a gap. A silent skip is the
   failure this section exists to stop.
-- **Back-fill owed (2026-09-30):** Liepāja, Daugavpils, Kansas City, Tucson,
-  New Orleans, Florence, Den Haag, Göteborg and Zurich were built without
-  gate 3. The owner landed them without it: like 16 earlier cities, they
-  are back-filled after review, for the next deploy (`PLAN.md`, "Gate 3
-  back-fill, 25 cities"). **A new tram build runs gate 3 before it is
-  committed.** A mismatch found by the back-fill is a station fix with a
-  drift check, not a page edit.
+- **Back-filled 2026-10-01** in the nine built without it, with 16 earlier
+  cities (DECISIONS, "Gate 3 back-filled in 25 cities"). It found real gaps
+  in New Orleans, Daugavpils and Den Haag, each OSM missing a stop the
+  operator serves: those step 1s print the mismatch with the exit commented
+  out until the owner's station fix (`PLAN.md`, "Gate 3's station calls").
+  **A new tram build runs gate 3 before it is committed.** A mismatch is a
+  station fix with a drift check, not a page edit.
 
 ## 3. Rings - the spacing rule
 
@@ -438,7 +438,9 @@ requires.
 > shown."}
 >
 > **Read the density as a register, not a street survey.** {The source's own
-> caveat, and this city's ratio to OpenStreetMap.}
+> caveat.} No ratio to OpenStreetMap: that comparison is the French pages',
+> where SIRENE counts registered establishments; no tram-kit page carries one
+> (owner, call C2, 2026-10-01).
 >
 > **Tram stops sit closer together than metro stations**, a median of
 > {spacing} m here, so the rings are drawn at half the usual size (0.05 to

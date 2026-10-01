@@ -49,11 +49,13 @@ from pipeline.madrid.config import (  # noqa: E402
     LINE_OF_CODE,
     LINE_SHAPES_GEOJSON,
     MADRID_MUNICIPIO_CODE,
+    OPERATOR_STATION_COUNTS,
     RING_EDGES_METERS,
     STATIONS_CSV,
     STATIONS_RAW_JSON,
     TRAMOS_RAW_JSON,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 # Spanish words that stay lower case inside a name. `.title()` is wrong here -
 # it produces "Plaza De Castilla" and "Puerta Del Sur", which no sign in Madrid
@@ -194,6 +196,10 @@ def main():
     for code, n in sorted(left.items()):
         print(f"  left out: {n:>2} record(s) of {LIGERO_LEFT_OUT[code]}")
     emit("ligero_ml1_records", len(ml))
+    # Gate 3 maps each tramo's CODIGOESTACION to a station name per service:
+    # the Metro and Metro Ligero layers number their stations independently.
+    name_of_code = {"metro": dict(zip(st["codigo"], st["name"])),
+                    "ligero": dict(zip(ml["codigo"], ml["name"]))}
     st = pd.concat([st, ml], ignore_index=True)
 
     # THE UNNAMED RECORDS, handled explicitly rather than dropped by a filter
@@ -273,6 +279,7 @@ def main():
     tramos = fetch_layer(CRTM_TRAMOS_LAYER, TRAMOS_RAW_JSON)
     segs = {}
     codes = set()
+    line_stations, unnamed_on_line = {}, {}
     for f in tramos["features"]:
         a, g = f["attributes"], f.get("geometry") or {}
         code = (a.get("NUMEROLINEAUSUARIO") or "").strip().upper()
@@ -281,6 +288,11 @@ def main():
         if line is None:
             raise SystemExit(f"unmapped line code {code!r} - add it to "
                              "config.LINE_OF_CODE rather than letting it vanish")
+        name = name_of_code["metro"].get(a.get("CODIGOESTACION"))
+        if name:
+            line_stations.setdefault(line, set()).add(name)
+        else:
+            unnamed_on_line.setdefault(line, set()).add(a.get("CODIGOESTACION"))
         for path in g.get("paths", []):
             if len(path) >= 2:
                 segs.setdefault(line, []).append(LineString(path))
@@ -300,6 +312,12 @@ def main():
             if code not in LIGERO_LEFT_OUT:
                 raise SystemExit(f"Metro Ligero tramo code {code!r} unrecorded")
             continue
+        name = name_of_code["ligero"].get(a.get("CODIGOESTACION"))
+        if name:
+            line_stations.setdefault(LIGERO_DRAWN[code], set()).add(name)
+        else:
+            unnamed_on_line.setdefault(LIGERO_DRAWN[code], set()).add(
+                a.get("CODIGOESTACION"))
         for path in g.get("paths", []):
             if len(path) >= 2:
                 segs.setdefault(LIGERO_DRAWN[code], []).append(LineString(path))
@@ -317,6 +335,17 @@ def main():
     print(f"  wrote {LINE_SHAPES_GEOJSON.name}")
     for _, r in lines.iterrows():
         print(f"    {r['name']:28} {r['segments']:>3} tramos")
+
+    # --- gate 3: whole lines, before the municipal cut, against CRTM -------
+    # A line's stations are the named stations its tramos stop at - each line
+    # at its own platform, which is how CRTM's line lists count the Plaza de
+    # España - Noviciado and Embajadores - Acacias complexes.
+    print("\nGate 3 - whole lines (before the término municipal cut):")
+    for line, cods in sorted(unnamed_on_line.items()):
+        print(f"  NOTE: {LINE_NAMES[line]} tramos stop at station code(s) "
+              f"{sorted(cods)} with no named station record - not counted")
+    check_operator_counts(OPERATOR_STATION_COUNTS,
+                          {k: len(v) for k, v in line_stations.items()})
 
     # --- station spacing against the outer ring ---------------------------
     #

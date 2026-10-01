@@ -44,6 +44,8 @@ from pipeline.miami.config import (  # noqa: E402
     EXCLUDED_STATIONS_CSV,
     GTFS_ZIP,
     LINE_NAMES,
+    OPERATOR_COUNTS_SOURCE,
+    OPERATOR_STATION_COUNTS,
     RING_EDGES_METERS,
     ROUTE_IDS,
     STATION_NAME_ALIASES,
@@ -51,6 +53,7 @@ from pipeline.miami.config import (  # noqa: E402
     STATIONS_CSV,
     STATION_MUNICIPALITIES_CSV,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 _SUFFIX = re.compile(STATION_SUFFIX_PATTERN)
 
@@ -115,6 +118,14 @@ def main():
 
     print(f"{len(sub)} platform-level stop_ids -> "
           f"{sub['station'].nunique()} stations after collapsing by name")
+
+    # Gate 3: stations per drawn line; an interchange counts once on each
+    # line it serves. Prints only, as verify_stations does.
+    print("\nGate 3 (Metrorail and Metromover):")
+    actual = (st.assign(line=st["route_id"].map(lambda r: LINE_NAMES[r][0]))
+              .groupby("line")["station"].nunique().to_dict())
+    check_operator_counts(OPERATOR_STATION_COUNTS, actual)
+    print(f"    gate 3 source: {OPERATOR_COUNTS_SOURCE}\n")
 
     stations = (
         sub.groupby("station", as_index=False)

@@ -46,6 +46,9 @@ from pipeline.philadelphia.config import (  # noqa: E402
     GTFS_URL,
     GTFS_ZIP,
     LINE_NAMES,
+    OPERATOR_COUNTS_GAP,
+    OPERATOR_COUNTS_SOURCE,
+    OPERATOR_STATION_COUNTS,
     ROUTE_GROUPS,
     STATION_NAME_ALIASES,
     STATION_SPACING_MILES,
@@ -54,6 +57,7 @@ from pipeline.philadelphia.config import (  # noqa: E402
     SUBWAY_STATION_NAMES,
     THINNED_GROUPS,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 SUFFIX_RE = re.compile(STATION_SUFFIX_PATTERN)
 
@@ -232,6 +236,20 @@ def main():
         for route_id in route_ids:
             sequences[(group, route_id)] = ordered_stop_sequence(
                 route_id, trips, stop_times, stops)
+
+    # Gate 3: per line group, before the thinning and the city-limits cut
+    # below; an interchange counts once on each line it serves. Prints only,
+    # as verify_stations does. config.OPERATOR_STATION_COUNTS says why the T
+    # is checked on its tunnel alone and what the G's figure reconciles.
+    names_by_group = {}
+    for (group, _), seq in sequences.items():
+        names_by_group.setdefault(group, set()).update(seq["canonical"])
+    actual = {group: len(names) for group, names in names_by_group.items()}
+    actual["T (Center City tunnel)"] = len(names_by_group["T"] & SUBWAY_STATION_NAMES)
+    print("Gate 3 (SEPTA Metro):")
+    check_operator_counts(OPERATOR_STATION_COUNTS, actual)
+    print(f"    gate 3 source: {OPERATOR_COUNTS_SOURCE}")
+    print(f"    gate 3 gap: {OPERATOR_COUNTS_GAP}\n")
 
     # Real transfer points: a canonical station served by 2+ LINE GROUPS.
     #

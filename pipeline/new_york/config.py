@@ -225,6 +225,52 @@ LINE_LABEL_ENDS = {}
 #               feed is literally an "N.." shape)
 DRAW_EXCLUDE_ROUTES = frozenset({"6X", "7X", "FX", "Z", "W"})
 
+# Gate 3, keyed by TRUNK (LINE_NAMES), as step 1 draws and labels its lines.
+# The MTA publishes no count per trunk, so each figure is counted from the
+# MTA's own station register: every station whose `daytime_routes` names any
+# of the trunk's services (route bullets: A/C/E for 8av; "S" for all three
+# shuttles; "SIR"). 496 stations, the same 496 parent stations the feed has.
+#
+# The build counts every station any trip of the trunk serves, nights and
+# odd-hour patterns included, and the register lists DAYTIME routes only.
+# Where they differ, each extra station was identified by stop id and its
+# serving trips' times read from the feed (2026-10-01); the figure here is the
+# register's plus those stations:
+#   8av  80 + 14: E trips to Jamaica-179 St (F01-F04: 179 St, 169 St, Parsons
+#        Blvd, Sutphin Blvd) and the late-night E local on Queens Blvd (G09-G20:
+#        67 Av, 63 Dr, Woodhaven, Grand Av, Elmhurst Av, 65 St, Northern Blvd,
+#        46 St, Steinway St, 36 St), daytime R/M stations.
+#   6av  119 + 4: the late-night D local on 4 Av, Brooklyn (R32-R35: Union St,
+#        4 Av-9 St, Prospect Av, 25 St; trips 21:00-07:00).
+#   lex  91 + 12: the late-night and early 4 to New Lots Av and two weekday
+#        early-morning 5 trips (236-238, 248-257: Bergen St to New Lots Av),
+#        daytime 2/3 stations.
+#   bway 85 + 3: one weekday R and two weekday W trips over the West End line
+#        (B12 9 Av, B16 62 St, B21 Bay Pkwy), daytime D stations.
+#   shuttles 11 + 4: the summer-weekend Rockaway Park Shuttle extension to
+#        Rockaway Blvd (A61, H01-H03: Rockaway Blvd, Aqueduct Racetrack,
+#        Aqueduct-N Conduit Av, Howard Beach-JFK), service ids
+#        Saturday/Sunday-H-20260526-20260907 - ended 2026-09-07, still in the
+#        cached feed.
+# The other six trunks match the register exactly.
+OPERATOR_STATION_COUNTS = {
+    "8av": 94,        # register 80 + 14 (above)
+    "6av": 123,       # register 119 + 4
+    "7av": 93,
+    "lex": 103,       # register 91 + 12
+    "bway": 88,       # register 85 + 3
+    "nassau": 30,
+    "flushing": 22,
+    "crosstown": 21,
+    "canarsie": 24,
+    "shuttles": 15,   # register 11 + 4
+    "sir": 21,
+}
+OPERATOR_COUNTS_SOURCE = ("MTA, 'MTA Subway Stations' register (data.ny.gov "
+                          "dataset 39hk-dx4f), stations per trunk by "
+                          "daytime_routes, https://data.ny.gov/resource/"
+                          "39hk-dx4f.json (read 2026-10-01)")
+
 # --- Business filtering ------------------------------------------------
 
 # The DOHMH file is an inspection history, not a list of open restaurants: an

@@ -40,7 +40,10 @@ from pipeline.los_angeles.config import (  # noqa: E402
     CITY_BOUNDARY_FIELD,
     CITY_BOUNDARY_NAME,
     CRS_GEOGRAPHIC,
+    OPERATOR_STATION_COUNTS,
+    OPERATOR_COUNTS_SOURCE,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 
 def load_gtfs_table(zip_path, filename, **kwargs):
@@ -95,6 +98,13 @@ def main():
     )
     print(f"\n{len(stations)} distinct Metro Rail stations across all cities "
           f"(after collapsing {len(GTFS_NAME_ALIASES)} per-line complex names).")
+
+    # Gate 3: whole lines, before the city-boundary cut below; an interchange
+    # counts once on each line it serves. Prints only, as verify_stations does.
+    print("\nGate 3 (LA Metro Rail):")
+    actual = served.groupby("line")["station"].nunique().to_dict()
+    check_operator_counts(OPERATOR_STATION_COUNTS, actual)
+    print(f"    gate 3 source: {OPERATOR_COUNTS_SOURCE}")
 
     # --- Spatial filter to the City of Los Angeles -------------------------
     cities = gpd.read_file(CITIES_BOUNDARY_GEOJSON)

@@ -41,7 +41,10 @@ from pipeline.chicago.config import (  # noqa: E402
     CTA_LINE_NAMES,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
+    OPERATOR_COUNTS_SOURCE,
+    OPERATOR_STATION_COUNTS,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 
 def load_gtfs_table(zip_path, filename, **kwargs):
@@ -92,6 +95,12 @@ def main():
         "lines": lines_by_parent.values,
     })
     print(f"\n{len(stations)} distinct CTA 'L' stations (parent stations) across all cities.")
+
+    # Gate 3: each whole line as CTA lists it, before the city-limits cut.
+    per_line = served.dropna(subset=["parent_station"]).groupby("route_id")["parent_station"].nunique()
+    print(f"\nGate 3 ({OPERATOR_COUNTS_SOURCE}):")
+    check_operator_counts(OPERATOR_STATION_COUNTS,
+                          {r: int(n) for r, n in per_line.items()})
 
     # --- Spatial filter to the City of Chicago -------------------------------
     boundary = gpd.read_file(CITY_BOUNDARY_GEOJSON)

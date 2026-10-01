@@ -207,6 +207,55 @@ LINE_SHAPES = {
 # grade-separated with 681-711 m median spacing and are kept whole.
 THINNED_GROUPS = frozenset({"T", "G"})
 
+# --- Gate 3: the operator's own per-line station counts ----------------------
+# Whole lines, BEFORE the city-limits cut (the L's Millbourne and 69th St count
+# here) and BEFORE the T and G thinning: step 1's per-group union of the stops
+# on each route's representative trip, which is one direction. An interchange
+# counts once on each line it serves. Keyed as step 1 keys its line groups.
+OPERATOR_STATION_COUNTS = {
+    # 28 stations, less 11th St, closed by SEPTA from 2026-09-05 to 2027-08-30
+    # for its accessibility rebuild (L trains run through). Not in this feed.
+    "L": 27,
+    # 22 on the B1 Fern Rock - NRG, plus the B3 Ridge Spur's own Chinatown and
+    # 8th-Market (its Fairmount and Girard are the B1's; Spring Garden on the
+    # spur has been closed since 1989).
+    "B": 24,
+    # The T's Center City tunnel only - the part of the line that is never
+    # thinned: 8 underground stations plus the 36th St and 40th St portals is
+    # 10; less the 36th St portal, a T1-only surface stop that is not in
+    # SUBWAY_STATION_NAMES and is thinned with the T1's street stops. Counted
+    # as the T stops that are in SUBWAY_STATION_NAMES. The branches: see
+    # OPERATOR_COUNTS_GAP.
+    "T (Center City tunnel)": 9,
+    # 64 stop rows, less the 5 served eastbound only (62nd-Girard, 61st-Girard,
+    # Lancaster-Girard, Poplar-26th, Stillman-Poplar), since step 1 reads one
+    # direction: 59.
+    # MISMATCH: build 57. The two missing are Richmond-Frankford and
+    # Frankford-Delaware, the G's short branch to the Frankford-Delaware loop
+    # (125 of the feed's 840 G1 trips). Step 1 reads the G1's most-used shape,
+    # which runs to Richmond-Westmoreland, so that branch's terminal is never
+    # read - and filter 2 would have kept it. Not fixed here: a station change
+    # needs the owner, a drift check and a redeploy.
+    "G": 59,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Secondary, all en.wikipedia.org, read 2026-10-01: L (SEPTA Metro) infobox "
+    "'28 (1 temporarily closed)', with SEPTA's 11th St closure dates as "
+    "reported by Northeast Times, 2026-08-07; Broad Street Line infobox 24; "
+    "T (SEPTA Metro) infobox '8 underground stations 2 surface level "
+    "stations'; G (SEPTA Metro) infobox '64 stops' and its stops table, read "
+    "row by row (EB/WB marks). SEPTA's own route pages render their stop lists "
+    "only in a browser."
+)
+OPERATOR_COUNTS_GAP = (
+    "The T's five street-running branches (T1-T5): no per-branch stop count "
+    "is published that is independent of SEPTA's GTFS, which this build reads. "
+    "Looked for on 2026-10-01 in en.wikipedia.org/wiki/T_(SEPTA_Metro) (route "
+    "table gives lengths, not stops) and SEPTA's route pages (stop lists drawn "
+    "from the same feed, browser-only). The tunnel the branches share is "
+    "checked above."
+)
+
 # Target spacing for the thinning filter, measured along each line's real
 # stop-to-stop path (see docs/sub_transit_line_filters.md). San Francisco's
 # value, which suits the same shape of problem: 190 in-city T stops and 71 G

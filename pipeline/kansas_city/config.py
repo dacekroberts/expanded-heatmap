@@ -108,6 +108,16 @@ NOT_DRAWN = {}
 STATION_ADD = {}
 EXPECTED_STATIONS = 19
 
+# GATE 3: the operator's own stop count, independent of OSM. The KC Streetcar
+# Authority's route map names 19 stops, River Market's Riverfront to UMKC -
+# the same 19 names the build draws. Read for the count only; RideKC's GTFS
+# and schedules are barred (owner) and were not used.
+OPERATOR_STATION_COUNTS = {"601": 19}
+OPERATOR_COUNTS_SOURCE = (
+    "KC Streetcar Authority, 'Expanded KC Streetcar Route Map as of May 18, 2026' "
+    "(pylon map 2978_KCSA_PylonMap_RUN-2026_Delaware, linked from "
+    "https://kcstreetcar.org/route/), 19 stops; primary; read 2026-10-01")
+
 SPACING_MIN_M = 150.0
 
 DRAWN_LINES = ("601",)

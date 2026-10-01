@@ -73,6 +73,9 @@ GTFS_LICENCE = "odc-odbl"
 # Read at build: the zip's feed_info.txt carries a feed_end_date, so the
 # page quotes the operator's own window.
 GTFS_SELF_ATTESTS = True
+# The network brand, barred on every surface the app renders without the
+# Métropole's consent (owner, 2026-09-30): scripts/check_barred_marks.py.
+BARRED_MARKS = ("Irigo",)
 # The NAP dataset: fetch_sources.py reads the resource's date and window from it.
 GTFS_NAP_ID = "6178cee254e3b3f0744a1318"
 

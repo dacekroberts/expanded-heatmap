@@ -149,6 +149,24 @@ LINE_NAMES = {
     "13686": "Canada Line",
 }
 
+# Gate 3: TransLink's own per-line station lists. Whole lines, BEFORE the
+# Vancouver-or-Surrey cut (the 30 Burnaby, Richmond, New Westminster, Coquitlam
+# and Port Moody stations count here). An interchange counts once on each line
+# it serves: Waterfront (Expo, Canada), Commercial-Broadway, Production
+# Way-University and Lougheed Town Centre (Expo, Millennium).
+OPERATOR_STATION_COUNTS = {
+    "30053": 24,   # Expo: both branches, Waterfront - King George and
+                   # Waterfront - Production Way-University
+    "30052": 17,   # Millennium: VCC-Clark - Lafarge Lake-Douglas
+    "13686": 17,   # Canada: Waterfront - YVR-Airport / Richmond-Brighouse,
+                   # Capstan included
+}
+OPERATOR_COUNTS_SOURCE = (
+    "TransLink, 'SkyTrain' schedules and maps page "
+    "(translink.ca/schedules-and-maps/skytrain), the station list under each "
+    "line. Read 2026-10-01; primary."
+)
+
 # Official TransLink colours, taken from the feed's own `route_color` rather
 # than from a style guide, so they are the agency's current values.
 #

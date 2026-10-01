@@ -20,10 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**321 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**324 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)](#2026-10-01---the-mega-reviews-c2-deferrals-done-swedish-layer-menus-say-food-shops-24sju-and-vending-by-name-no-osm-ratio-outside-france-owner)
+- [Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls](#2026-10-01---gate-3-back-filled-in-25-cities-ten-match-eight-reconcile-seven-need-the-owners-station-calls)
+- [Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner](#2026-10-01---privacy-verdicts-registered-for-all-124-cities-san-diego-and-chicago-publish-san-francisco-and-los-angeles-held-for-the-owner)
 - [The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current](#2026-10-01---the-japan-list-regenerated-taitō-and-meguro-re-measured-hiroshima-japans-eighth-the-japan-city-skill-current)
 - [The decisions drafts folded in: 48 entries from 17 drafts files, the files removed](#2026-10-01---the-decisions-drafts-folded-in-48-entries-from-17-drafts-files-the-files-removed)
 - [The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)](#2026-10-01---the-master-lists-history-written-docscity_master_list_historymd-published-as-an-artifact-owner)
@@ -366,6 +369,120 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)
+
+- **The owner: "we can do the data follow-ups other than zurich rebuild"**,
+  which includes call C2 (deferred 2026-09-30, each with a Stockholm drift
+  check).
+- **`sweden_livsmedel.layer_label = legend_label`**: both Swedish maps' layer
+  menus said "Businesses: Retail", against a legend that says "Food shops".
+  Stockholm's drift check: 5,218 storefronts unchanged; with Folium's ids
+  normalised, the map differs on that one line ("Retail (942)" becomes "Food
+  shops (942)").
+- **"24sju" a food shop by name**: a convenience-store chain Göteborg
+  registers with a blank type (2 of its 6 rows; the 4 typed ones were kept).
+  Göteborg 2,987 -> 2,989 storefronts (name-classified 90 -> 92), the baseline
+  recorded; Stockholm has none.
+- **Vending machines out by name in the module** ("vending", "smartvend",
+  "varuautomat"), moved from Göteborg's step 2, which still drops and counts
+  them first; no kept row in either city matched. The continuity table now
+  locates `nonstore` for this taxonomy instead of declaring it absent.
+- **The ratio to OpenStreetMap is dropped from the tram-city template**, not
+  filled: none of the ten non-French tram pages carries it (Aarhus, Odense's
+  model, never did), it is the French pages' comparison for SIRENE's
+  registered establishments, and filling it would spend an Overpass query per
+  city. No page changed.
+- `app/ring_shares.json` (Göteborg 2,256 of 2,989; every map's blob id
+  refreshed, all stale since the 124-map re-render) and `app/macro_facts.json`
+  (Göteborg's count) rewritten; 33 of 33 checks pass.
+
+### 2026-10-01 - Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls
+
+- **Done for the next deploy, as the owner set on 2026-09-30.** Six agents,
+  four or five cities each, under one brief: the operator's per-line counts,
+  independent of OSM and of the city's own feed, counted over whole lines
+  before any scope split; config carries `OPERATOR_STATION_COUNTS` and
+  `OPERATOR_COUNTS_SOURCE` (page, publisher, date read), with any reason
+  written beside its figure; step 1 compares. The early US nine, Montréal,
+  Edmonton, Vancouver and Madrid predate `verify_stations`, so
+  `pipeline/stations.py` gained `check_operator_counts()`, the gate on its
+  own (verify_stations now calls it). Every step 1 exited 0 and no committed
+  output changed. No Overpass query, no fetch.
+- **Match (10)**: Boston, Los Angeles, Miami, Montréal, Vancouver, Dublin,
+  Madrid, Kansas City (the KC Streetcar Authority's own map; RideKC not
+  used), Liepāja, Florence (Unità out of regular service since 2025-01-02).
+- **Reconciled (8), the reason in config beside each figure**: Chicago
+  (State/Lake closed into 2029, on five lines); New York (per trunk against
+  the MTA's station register's daytime routes; 37 stations served by night,
+  weekend or summer trips, each named); Washington (Blue's weekend diversion
+  to Huntington); San Diego (two Blue trips via the Bayside); San Francisco
+  (stops served in one direction; San Jose & Mt Vernon removed 2024-09-28);
+  Tucson (23 markers, two of them one stop counted per direction); Edmonton
+  (the Metro Line drawn to Century Park, where weekend trips run: ETS
+  publishes 10, the build 14 - the first real gate 3 here; the 33 -> 30 of
+  2026-09-22 was the boardability filter); Riga (every route matches before
+  the owner's thinning; secondary source, 1188.lv, as Rīgas satiksme's host
+  refused).
+- **Mismatch, cause found, left for the owner (PLAN, "Gate 3's station
+  calls")**: New Orleans (12: 62/63; 47: 23/25; 48: 20/25 - lower Canal to the
+  Ferry Terminal undrawn, 47 routed up Loyola by OSM); Philadelphia (G: 57/59,
+  the Frankford-Delaware branch); Daugavpils (routes 2 and 4: 16/17,
+  Užvaldes iela not in OSM - which makes the brief's original 38 right);
+  Seoul (Gyeongui-Jungang 54/58, four stations beyond Munsan and Yongmun,
+  all outside Seoul); Den Haag (11: 17/18, Groot Hertoginnelaan); Göteborg
+  (2, 4, 6, 8, 13 each one short: Korsvägen and Drottningtorget missing from
+  those lines' OSM relations - both stops are drawn through other lines, so
+  only their line lists are wrong); Zurich (10: 29/28, Bahnhof Oerlikon from
+  OSM's short-run relations). The tram cities' step-1 exit on a mismatch is
+  live in Kansas City, Tucson, Liepāja and Florence, and commented out with
+  a note in the other five until each fix.
+- **Gap (1)**: Philadelphia's T branches - no per-branch count independent of
+  SEPTA's feed; `OPERATOR_COUNTS_GAP` says so. Philadelphia's L, B and tunnel
+  match (L at 27: 11th St closed to 2027-08-30, not drawn and not disclosed -
+  in PLAN beside the station calls).
+- **Secondary sources, named as such in config**: English Wikipedia for Los
+  Angeles, Miami's split, Philadelphia, San Diego, San Francisco and most of
+  Seoul; Korean Wikipedia for four Seoul lines; CRTM's line pages for Madrid
+  (Metro de Madrid's own pages blocked every request).
+
+### 2026-10-01 - Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner
+
+- **A registry and a check** (review lesson 1, 2026-09-30: lane 4 found ten
+  French cities with no verdict ever written): `docs/privacy_verdicts.md`
+  holds one row per built city - verdict, date, and the heading of the entry
+  that records it - and `scripts/check_privacy_verdicts.py` (in `check_all`)
+  fails when a built city has no row, a verdict is not `publish`,
+  `publish-structural` or `pending`, or the cited entry is missing or never
+  names the city. `pending` is reported, not failed.
+- **120 verdicts found by reading** every city's entries (an agent, checked by
+  script: each heading resolves to one entry, each quoted sentence is in it):
+  publish 111, publish-structural 9 (Dublin, Rome, Berlin, Sydney, Liepāja,
+  Rotterdam, Riga, Buenos Aires, Florence: no person-name field on any pin).
+  Where a city was re-checked, the latest verdict is cited. Nineteen records
+  state the check's numbers without a verdict word (New York, Boston, the
+  first French five, the UK four, Taiwan's three among them); they are
+  `publish`, as published on those numbers.
+- **Four never had one: San Diego, San Francisco, Chicago and Los Angeles**,
+  the first cities built (2026-09-21): their entries hold measurements and the
+  home-business filters, not a verdict. `check_personal_exposure.py` run
+  2026-10-01:
+  - San Diego: 1 person-like name at a residential unit of 2,228 pins
+    (0.04%); no registrant-name fallback; **publish**.
+  - Chicago: 24 of 11,685 (0.21%); 3 pins can only be the legal-name
+    fallback; **publish**, at New York's 0.19% and Dallas's 0.10%.
+  - San Francisco: 61 of 11,762 (0.52%); 6 pins can only be the
+    ownership-name fallback. **Pending.**
+  - Los Angeles: **331 of 13,892 (2.38%)**, and 5,779 pins (41.6%) can only be
+    the registrant-name fallback, since 68% of raw rows have no trade name.
+    **Pending.**
+  - Both are the "apartment population" left open on 2026-09-21 (844 and 194
+    pins then): a person-like name at an APT/UNIT address in a multi-family
+    building, which the single-family parcel filters cannot reach. It was
+    never closed. Recommended to the owner: Kansas City's rule - a pin whose
+    name reads as a person's own at a residential unit shows its street
+    address instead of the name - a step 2 change, a drift check and a
+    redeploy for each city.
 
 ### 2026-10-01 - The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current
 

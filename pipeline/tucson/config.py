@@ -94,6 +94,24 @@ NOT_DRAWN = {}
 STATION_ADD = {}
 EXPECTED_STATIONS = 21
 
+# GATE 3: the operator's own stop count, independent of OSM. Sun Tran's Sun
+# Link page says "The 3.9 mile route has 23 stops", and its route map numbers
+# 23: 1-3, 4E/4W, 5E-8E and 5W-8W (the downtown couplet), 9-18. Twenty-three
+# less two stops counted per direction (the tram-city skill's known reason):
+#   - 4E/4W "Granada/Cushing St." - one legend entry on the operator's own map;
+#     OSM's two stop positions share the name and lie 41 m apart;
+#   - 5E "Broadway/Granada" and 5W "Congress/Granada" - OSM names both
+#     "Congress Street & Granada Avenue", 34 m apart where the couplet splits.
+# The other 19 match the build by name and place (2026-10-01). The 6E-8E and
+# 6W-8W pairs are drawn apart because they stand on two streets, Broadway and
+# Congress, 70-95 m apart, under two names.
+OPERATOR_STATION_COUNTS = {"Sun Link": 21}   # 23 less the two direction pairs at Granada
+OPERATOR_COUNTS_SOURCE = (
+    "Sun Tran, 'Sun Link Streetcar' page (https://www.sunlinkstreetcar.com/"
+    "routes-services/sunlink/: '23 stops') and its route map "
+    "(https://www.suntran.com/wp-content/uploads/2022/10/Sun-Link-Template-map-2022.jpg); "
+    "primary; read 2026-10-01")
+
 SPACING_MIN_M = 100.0
 
 DRAWN_LINES = ("Sun Link",)

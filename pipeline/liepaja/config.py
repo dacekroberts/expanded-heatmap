@@ -125,6 +125,20 @@ STATION_ADD = {
     11676327137: ("1", "Rožu laukums"),
 }
 
+# Gate 3 (tram-city skill, section 2): the operator's own stop count, read for
+# the count only. Route T (the line OSM calls ref 1) runs 18 stops each way,
+# Brīvības iela - Mirdzas Ķempes iela, the same 18 names the build draws -
+# including the three added by node above. A mismatch stops step 1.
+OPERATOR_STATION_COUNTS = {"1": 18}
+OPERATOR_COUNTS_SOURCE = (
+    "Liepājas sabiedriskais transports (the municipal transport authority, "
+    "liepajastransports.lv), its published tram timetable: route T, 18 stops each "
+    "way on the regular pattern, as the GTFS it publishes for marsruti.lv/liepaja "
+    "lists them (agency 'Liepājas sabiedriskais transports'; the cached "
+    "data/liepaja/raw/gtfs.zip, which the build does not use), read 2026-10-01. "
+    "Corroborated by Latvian Wikipedia, '1. tramvaju maršruts (Liepāja)': 36 "
+    "stops, 18 each way (secondary).")
+
 SPACING_MIN_M = 200.0
 
 DRAWN_LINES = ("1",)

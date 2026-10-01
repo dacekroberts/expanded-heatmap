@@ -46,6 +46,8 @@ from pipeline.boston.config import (  # noqa: E402
     GTFS_ZIP,
     LINE_NAMES,
     LINE_SHAPES,
+    OPERATOR_COUNTS_SOURCE,
+    OPERATOR_STATION_COUNTS,
     ROUTE_GROUPS,
     STATION_NAME_ALIASES,
     STATION_SPACING_MILES,
@@ -55,6 +57,7 @@ from pipeline.boston.config import (  # noqa: E402
     THINNED_GROUPS,
     TOWN_BOUNDARIES_GEOJSON,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 _SUFFIX = re.compile(STATION_SUFFIX_PATTERN)
 NEAR_DUPLICATE_M = 150.0
@@ -251,6 +254,16 @@ def main():
     interchange = {n for n, gs in name_to_groups.items() if len(gs) >= 2}
     print(f"{len(interchange)} interchange station(s) served by 2+ line "
           f"groups:\n  {', '.join(sorted(interchange))}\n")
+
+    # Gate 3: the whole line as the MBTA lists it, so before the Green Line
+    # thinning and before the City of Boston cut (config.py).
+    per_group = {}
+    for (group, _shape_id), seq in sequences.items():
+        per_group.setdefault(group, set()).update(seq["canonical"])
+    print(f"Gate 3 ({OPERATOR_COUNTS_SOURCE}):")
+    check_operator_counts(OPERATOR_STATION_COUNTS,
+                          {g: len(names) for g, names in per_group.items()})
+    print()
 
     kept_frames, excluded_frames = [], []
     for (group, shape_id), seq in sequences.items():
