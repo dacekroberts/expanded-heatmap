@@ -94,6 +94,18 @@ METRO_NETWORK = "수도권 전철"
 RAIL_OSM_JSON = DATA_RAW / "osm_rail_routes.json"
 STATION_OSM_JSON = DATA_RAW / "osm_station_names.json"   # English names only
 BOUNDARY_OSM_JSON = DATA_RAW / "osm_boundary.json"
+# A drawn line's relations the box query above does not return, fetched BY ID
+# into their own file (with their stop nodes and those stations' station
+# objects), so the main rail file stays as cached. Gyeongui-Jungang: OSM has
+# the services past Munsan and Yongmun as relations of their own, ref
+# 경의·중앙 and network 수도권 전철 like the rest, which the 2026-09-24 box query
+# missed - Munsan - Imjingang (10922025/10922027, through Uncheon), the
+# Imjingang - Dorasan shuttle (13487300/13487302) and Jipyeong - Munsan
+# (12623856/12623857). Found 2026-10-01 for gate 3 (Korean Wikipedia's 58).
+EXTRA_RELATIONS = {
+    "GJ": (10922025, 10922027, 13487300, 13487302, 12623856, 12623857),
+}
+EXTRA_OSM_JSON = DATA_RAW / "osm_extra_relations.json"
 # Seoul's own relation (서울특별시, admin_level 4), resolved by name on
 # 2026-09-24 and checked by the brief; its area is gated below.
 BOUNDARY_RELATION = 2297418
@@ -167,12 +179,12 @@ OPERATOR_STATION_COUNTS = {
     # Byeollae - Moran with Namwirye, the build's 24 name for name.
     "L8": 24,
     "L9": 38, "SBD": 16, "UI": 13, "SL": 11,
-    # MISMATCH, unexplained: build 54. Korean Wikipedia (수도권 전철 경의·중앙선)
-    # says 58: the build's 54 plus Uncheon, Imjingang and Dorasan (Paju, past
-    # Munsan; opened 2020-2022) and Jipyeong (Yangpyeong, past Yongmun, 2017).
-    # OSM's 경의·중앙 relations end at Munsan and Yongmun. All four lie outside
-    # Seoul, so no ringed station is affected; the line's drawn ends and
-    # excluded_stations.csv are. Not fixed here: a station change.
+    # Korean Wikipedia (수도권 전철 경의·중앙선) lists 58. Until 2026-10-01 the
+    # build had 54: the box query's relations end at Munsan and Yongmun, and
+    # OSM carries Uncheon, Imjingang and Dorasan (Paju, past Munsan) and
+    # Jipyeong (Yangpyeong, past Yongmun) on relations of their own, now read
+    # by id (EXTRA_RELATIONS). All four lie outside Seoul: the line's drawn
+    # ends and excluded_stations.csv change, no ringed station does.
     "GJ": 58,
     "SB": 63,
     # The metro service Cheongnyangni/Kwangwoon University - Chuncheon: Korean

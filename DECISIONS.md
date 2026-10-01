@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**324 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**325 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner)](#2026-10-01---gate-3s-station-calls-made-and-kansas-citys-rule-applied-in-san-francisco-and-los-angeles-owner)
 - [The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)](#2026-10-01---the-mega-reviews-c2-deferrals-done-swedish-layer-menus-say-food-shops-24sju-and-vending-by-name-no-osm-ratio-outside-france-owner)
 - [Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls](#2026-10-01---gate-3-back-filled-in-25-cities-ten-match-eight-reconcile-seven-need-the-owners-station-calls)
 - [Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner](#2026-10-01---privacy-verdicts-registered-for-all-124-cities-san-diego-and-chicago-publish-san-francisco-and-los-angeles-held-for-the-owner)
@@ -369,6 +370,73 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner)
+
+- **The owner: "Kansas city rule"**, **"Implement the station fixes"** and,
+  for the confirmations, **"Let's address all of these"**. Five agents, one
+  brief, each city drift-checked with only the intended change moving.
+- **Gate 3 now matches the operator on every gated line in all 25 cities**,
+  and the tram cities' step 1 stops on a mismatch again (New Orleans,
+  Daugavpils, Den Haag, Göteborg, Zurich).
+  - **New Orleans** (106 -> 110 stations; storefronts 4,689 unchanged, in
+    ring 2,131 -> 2,140): lines 47 and 48 run down Canal to the river - Canal
+    at North Peters, Canal at Chartres, the Canal Street Ferry Terminal (OSM's
+    nodes, named "Harrah's Casino" there: shown under RTA's name), with 47's
+    Cemeteries terminus; 47 no longer drawn up Loyola (46 still is); Canal at
+    Basin removed, as no RTA line stops there; Bourbon/Carondelet joins line
+    12's Canal at Carondelet as one interchange; South Carrollton at Sycamore
+    added on line 12 at the vertex of OSM's own track nearest RTA's pin (OSM
+    maps no stop there; step 1 stops if OSM later does). The page's personal
+    services sentence refilled from the new counts.
+  - **Philadelphia**: the G's Frankford-Delaware branch read from its own
+    shape and drawn (G 57 -> 59); the loop is a station, while
+    Richmond-Frankford, 0.07 mi from it, is thinned by the city's 0.5 mi
+    trolley spacing rule like any other G stop, and listed. **11th St on the
+    L is closed for works** to 2027-08-30 (SEPTA's release of 2026-08-06),
+    listed in `excluded_stations.csv` at OSM's node with Sacramento's
+    precedent, and the page says so ("Every open SEPTA Metro station ...";
+    "**11th St on the Market-Frankford Line is not drawn**: SEPTA closed it
+    on 5 September 2026 ... It is closed for works until then, and L trains
+    run through it without stopping."). PLAN carries the reopening.
+  - **Daugavpils** (37 -> 38 stations, as the brief first said): Užvaldes iela
+    on routes 2 and 4, at OSM's level-crossing vertex where the street meets
+    the track (Sycamore's precedent: OSM has no stop there, and the
+    operator's GTFS, which has no licence row, is not used); page median 291
+    -> 287 m.
+  - **Den Haag** (166 -> 167): tram 11's Groot Hertoginnelaan from OSM stop
+    positions on no relation; the two stops of that name, about 480 m apart,
+    are labelled "(line 11)" and "(line 17)"; page median 322 -> 326 m.
+  - **Seoul**: the Gyeongui-Jungang line to Uncheon, Imjingang, Dorasan and
+    Jipyeong (all outside Seoul), from six OSM relations the box query missed,
+    read by id from their own cache so the rest is not re-fetched; stations
+    outside the city 223 -> 227, no in-city figure moved.
+  - **Göteborg** and **Zurich**, labels only: city hooks put lines 4, 6, 8, 13
+    on Korsvägen and 2 on Drottningtorget (`LINE_ADD`), and take tram 10 off
+    Bahnhof Oerlikon (`LINE_NOT_AT`); no map change.
+  - **Edmonton**: the Metro Line drawn as ETS publishes it, NAIT/Blatchford
+    Market to Health Sciences/Jubilee (weekday shape 27-North), not to Century
+    Park where only weekend trips run; its four southern stations stay as
+    Capital Line stations. Page sentence (new): "The Metro Line shares the
+    Capital Line's track from downtown to Health Sciences/Jubilee, where
+    Edmonton Transit Service's published line ends; its weekend trips on to
+    Century Park are not drawn."
+  - **Tucson** stays at 21: OSM's track geometry puts 4E/4W and 5E/5W 34-41 m
+    apart on the two Granada tracks, one stop each, while 6-8 E/W are a street
+    apart; the evidence is in config.
+- **Kansas City's rule in San Francisco and Los Angeles**: a pin whose shown
+  name reads as a person's (the exposure check's own test) at a dwelling-unit
+  address shows the street address instead, without the unit number (Riga's
+  precedent). San Francisco 80 rows, Los Angeles 1,030 (applied in step 3,
+  after the home filter that reads the name); storefronts unchanged. The
+  exposure check's person-like name at a residential unit: 61 -> 0 and 331 ->
+  0, so both verdicts are now `publish`. Pages (Göteborg's sentence with the
+  dwelling-unit condition): "Where a business is registered under a person's
+  name alone at an apartment or other dwelling unit, its dot shows the street
+  address instead." **Left for the owner**: Los Angeles rows with no trade
+  name show the registrant's name - 4,788 read as a person, about 911 pins;
+  Kansas City's full rule (Houston's sole-owner rule) would show the address
+  for them (PLAN).
 
 ### 2026-10-01 - The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)
 

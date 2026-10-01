@@ -59,7 +59,7 @@ record whether a premises is in use, and no vacancy figure is published for
 Daugavpils, so read the shops layer as an upper bound. About 4% of licensed food
 premises cannot be placed by their address.
 
-**Tram stops sit closer together than metro stations**, a median of 291 m
+**Tram stops sit closer together than metro stations**, a median of 287 m
 here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
 four storefronts in five sit within a ring.**
 

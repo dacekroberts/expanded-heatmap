@@ -105,6 +105,24 @@ EXPECTED_STATIONS = 21
 # The other 19 match the build by name and place (2026-10-01). The 6E-8E and
 # 6W-8W pairs are drawn apart because they stand on two streets, Broadway and
 # Congress, 70-95 m apart, under two names.
+#
+# 5E/5W and 4E/4W RE-TESTED ON GEOMETRY (2026-10-01), because the operator
+# names 5E and 5W after two streets, as it does 6-8: they are one stop each.
+#   - OSM's track (ways 188426734 eastbound, 245869213 westbound) comes north
+#     up Granada on two parallel tracks and turns east; at Granada the
+#     eastbound (Broadway) track runs 13 m south of the westbound (Congress)
+#     one, the two streets meeting there, and they part only towards Church
+#     (72 m apart at 6E/6W). 5E is node 2986100986 on the eastbound track,
+#     5W node 2986100987 on the westbound, 34 m apart (platform ways 915513296
+#     and 915513295, side by side), and the only stop nodes on either track
+#     between 4 and 6 - there is no separate Broadway stop to add.
+#   - The operator's map draws 5E and 5W as two circles touching at one spot,
+#     as it does 4E and 4W, where it draws 6E/6W, 7E/7W and 8E/8W a street
+#     apart.
+#   - 4E/4W are nodes 8501663123 and 2986100983 on the two Granada tracks
+#     just north of Cushing, 41 m apart, one legend entry.
+# So 21 stands: a direction pair 34-41 m apart is one stop, the 70-95 m pairs
+# on two streets are two.
 OPERATOR_STATION_COUNTS = {"Sun Link": 21}   # 23 less the two direction pairs at Granada
 OPERATOR_COUNTS_SOURCE = (
     "Sun Tran, 'Sun Link Streetcar' page (https://www.sunlinkstreetcar.com/"

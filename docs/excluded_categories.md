@@ -2292,7 +2292,7 @@ Register; every shop was placed at its building.
 
 **Not named** - as in Riga. No licence holder is ever read.
 
-**Stations.** Every stop of trams 1 to 5, 37 in all, each inside the city: all five routes are
+**Stations.** Every stop of trams 1 to 5, 38 in all, each inside the city: all five routes are
 drawn though routes 2 and 4 run about hourly (owner, 2026-09-30), and the page states each
 route's wait. Not drawn: buses and suburban trains.
 
@@ -2368,7 +2368,9 @@ their street address - 783 with no business name and 25 whose name is only a per
 (`config.PERSON_NAMED`, read by eye).
 
 **Stations.** Every stop of the five lines RTA runs (owner, 2026-09-30, re-taken at build):
-106 stations, all inside the city, none thinned (owner, call 13). OSM's two ref-2 relations,
+110 stations, all inside the city, none thinned (owner, call 13), matching RTA's own stop list
+for each line (2026-10-01): 47 and 48 run down Canal Street to the ferry terminal, and 47 does
+not run Loyola Avenue, which 46 does. OSM's two ref-2 relations,
 the Riverfront's old routing via Canal Street, are not drawn: RTA runs the Riverfront as 49,
 French Market to Julia Street, since Summer 2025. Not drawn: buses and ferries.
 
@@ -2479,7 +2481,7 @@ premises), food and personal services by name.
 address that reads as a home. The telephone column is never read.
 
 **Stations.** Lines 1–9, the Shinbundang Line, the Ui LRT, the Sillim Line and three Korail
-lines are drawn, with stations inside Seoul only: 223 stations of those lines outside the city
+lines are drawn, with stations inside Seoul only: 227 stations of those lines outside the city
 are left out. Not drawn: AREX, GTX-A, the Seohae Line, the Gimpo Goldline and intercity trains;
 every station they serve in Seoul is also on a drawn line.
 

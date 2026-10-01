@@ -5,6 +5,7 @@ Darby Transit Center,,39.919085,-75.262376,outside Philadelphia city limits,,
 Main St & 3rd St,,39.916892,-75.251534,outside Philadelphia city limits,,
 Millbourne,,39.96432,-75.252243,outside Philadelphia city limits,,
 Yeadon,,39.924525,-75.252542,outside Philadelphia city limits,,
+Frankford Av & Richmond St,G1,39.966008,-75.134338,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Frankford Av & Delaware Av Loop,0.074
 Girard Av & 11th St,G1,39.970845,-75.154021,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 7th St,0.319
 Girard Av & 12th St,G1,39.971045,-75.155603,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 7th St,0.404
 Girard Av & 16th St,G1,39.971908,-75.162605,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Broad-Girard,0.179
@@ -47,6 +48,7 @@ Richmond St & Cumberland St,G1,39.974331,-75.118038,"spacing filter (street-runn
 Richmond St & Girard Av,G1,39.973068,-75.119591,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Huntingdon St,0.279
 Richmond St & Lehigh Av,G1,39.976907,-75.113101,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Ann St,0.372
 Richmond St & Somerset St,G1,39.978159,-75.110697,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Ann St,0.218
+11th St,L1,39.9517977,-75.1583456,"Market-Frankford Line, closed for works (accessibility rebuild) from 5 September 2026, reopening 30 August 2027 (SEPTA)",,
 36th St & Market St,T1,39.956281,-75.194218,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 38th St,0.367
 36th St Portal,T1,39.955335,-75.194162,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 38th St,0.432
 63rd St & Jefferson St,T1,39.97835,-75.246184,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",63rd-Malvern,0.429

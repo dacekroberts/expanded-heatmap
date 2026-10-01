@@ -21,8 +21,8 @@ a verdict word; they are `publish`, as published on those numbers.
 | City | Verdict | Date | DECISIONS entry | Evidence |
 |---|---|---|---|---|
 | San Diego | publish | 2026-10-01 | Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner | 1 person-like name at a residential unit of 2,228 pins (0.04%) |
-| San Francisco | pending | 2026-10-01 | Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner | 61 person-like names at a residential unit of 11,762 pins (0.52%); the apartment population, open since 2026-09-21 |
-| Los Angeles | pending | 2026-10-01 | Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner | 331 person-like names at a residential unit of 13,892 pins (2.38%); the apartment population, open since 2026-09-21 |
+| San Francisco | publish | 2026-10-01 | Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner) | Kansas City's rule (a person-like name at a dwelling unit shows the street address): 0 of 11,762 pins left, was 61 |
+| Los Angeles | publish | 2026-10-01 | Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner) | Kansas City's rule (a person-like name at a dwelling unit shows the street address): 0 of 13,892 pins left, was 331; registrant names with no trade name pending (PLAN) |
 | Chicago | publish | 2026-10-01 | Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner | 24 person-like names at a residential unit of 11,685 pins (0.21%) |
 | New York | publish | 2026-09-21 | New York added: the first city assembled from four registries | Exposure check: the cleanest large city so far, and the first where the measurement is real. (implicit: the check's result is recorded with no verdict word) |
 | Philadelphia | publish | 2026-09-21 | Philadelphia built: two buckets, one registry, two station rules | Privacy verdict: publish. |

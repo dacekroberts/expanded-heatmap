@@ -50,6 +50,27 @@ def load_osm():
     nodes = {e["id"]: e for e in els if e["type"] == "node"}
     if not rels:
         sys.exit("the rail file holds no relations - an empty result is not an empty city")
+    # The drawn lines' relations the box query misses, fetched by id (config).
+    extra = json.loads(need(config.EXTRA_OSM_JSON, "OSM extra relations").read_text(
+        encoding="utf-8"))["elements"]
+    have = {r["id"] for r in rels}
+    by_id = {e["id"]: e for e in extra if e["type"] == "relation"}
+    for k, ids in config.EXTRA_RELATIONS.items():
+        for i in ids:
+            r = by_id.get(i)
+            if r is None:
+                sys.exit(f"extra relation {i} ({k}) is not in {config.EXTRA_OSM_JSON.name} - "
+                         f"re-run fetch_sources.py osm-extra")
+            if r["tags"].get("ref") != config.LINES[k][0]:
+                sys.exit(f"extra relation {i} carries ref {r['tags'].get('ref')!r}, not "
+                         f"{config.LINES[k][0]!r} ({k}) - re-read it before drawing it")
+            if i not in have:
+                r["_extra"] = True
+                rels.append(r)
+                print(f"  extra relation {i}: {r['tags'].get('name')}")
+    for e in extra:
+        if e["type"] == "node" and "lat" in e:
+            nodes.setdefault(e["id"], e)
     return rels, nodes
 
 
@@ -99,7 +120,10 @@ def ways_of(rel):
 
 def line_geometry(rels, nodes):
     """The longest relation, plus only the ways other relations add away from it."""
-    rels = sorted(rels, key=lambda r: sum(len(g) for _, g in ways_of(r)), reverse=True)
+    # An extra relation (config.EXTRA_RELATIONS) comes after the line's own, so
+    # it only ever adds the track past their ends.
+    rels = sorted(rels, key=lambda r: (not r.get("_extra"), sum(len(g) for _, g in ways_of(r))),
+                  reverse=True)
     chosen, seen, covered = [], set(), set()
     drawn_m = None
     added_branch = 0
@@ -202,8 +226,13 @@ def main():
     # --- stations -------------------------------------------------------------
     plat = []
     for k in config.LINES:
+        main_keys = {s[0] for r in groups[k] if not r.get("_extra") for s in stop_seq(r, nodes)}
         for r in groups[k]:
             for key, en, la, lo in stop_seq(r, nodes):
+                # An extra relation adds only the stations the line's own
+                # relations lack; it never moves one they already place.
+                if r.get("_extra") and key in main_keys:
+                    continue
                 plat.append({"key": key, "en": en, "latitude": la, "longitude": lo, "line": k})
     platforms = pd.DataFrame(plat).drop_duplicates()
     src = pd.Series(NAME_SOURCE).value_counts(dropna=False)
@@ -226,8 +255,19 @@ def main():
     # The English name: the station object's (railway=station, same Korean name,
     # nearest within the collapse distance), else the stop nodes' own.
     objs = []
-    for e in json.loads(need(config.STATION_OSM_JSON, "OSM station names").read_text(
-            encoding="utf-8"))["elements"]:
+    station_objs = json.loads(need(config.STATION_OSM_JSON, "OSM station names").read_text(
+        encoding="utf-8"))["elements"]
+    # The extra relations' station objects (their stations lie past the box),
+    # for the stations ONLY those relations reach: a station the main file's
+    # stop nodes already name keeps the name it had.
+    main_keys = {korean_key(e.get("tags", {}).get("name:ko") or e.get("tags", {}).get("name"))
+                 for e in json.loads(config.RAIL_OSM_JSON.read_text(encoding="utf-8"))["elements"]
+                 if e["type"] == "node"}
+    station_objs += [e for e in json.loads(config.EXTRA_OSM_JSON.read_text(encoding="utf-8"))[
+        "elements"] if e["type"] != "relation" and e.get("tags", {}).get("railway") == "station"
+        and ("lat" in e or "center" in e)
+        and korean_key(e["tags"].get("name:ko") or e["tags"].get("name")) not in main_keys]
+    for e in station_objs:
         t = e.get("tags", {})
         la, lo = (e["lat"], e["lon"]) if e["type"] == "node" else (e["center"]["lat"], e["center"]["lon"])
         en = next((t[g].strip() for g in config.ENGLISH_NAME_TAGS if t.get(g)), "")

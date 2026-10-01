@@ -207,7 +207,7 @@ register covers them all, or because the rail network only makes sense that way.
   data).
 - **Regional maps that count a municipality with no station:** Fortaleza (Caucaia),
   Recife (Cabo de Santo Agostinho). Guadalajara leaves out Tonalá for having none.
-- **Lose the most stations to the boundary:** Seoul (223), Melbourne (199),
+- **Lose the most stations to the boundary:** Seoul (227), Melbourne (199),
   Sydney (157; both keep to one council's area), Paris (76), Osaka (76),
   Copenhagen (59), Washington
   D.C. (58), Tokyo (55), Los Angeles (54), Rotterdam (52), Barcelona (50), Madrid (49), Boston (43).
@@ -499,29 +499,29 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | City | Drawn | Notably not drawn | Rail source | Station scope | Out / thinned |
 |---|---|---|---|---|---|
 | **United States** | | | | | |
-| San Diego | Trolley (light rail), 5 lines | Coaster, Sprinter | MTS GTFS | City | 16 / 0 |
-| San Francisco | Muni Metro J K L M N T + F Market & Wharves | BART, Caltrain, cable cars | SFMTA GTFS (mirror) | City and County | 0 / 85 |
-| Los Angeles | Metro Rail A B C D E K (heavy + light) | Metrolink | LA Metro rail GTFS | City | 54 / 0 |
-| Chicago | 'L', 7 lines | Metra; Yellow Line | CTA GTFS | City | 18 / 0 |
-| New York | Subway (11 trunk groups) + Staten Island Rwy | LIRR | MTA GTFS | Five boroughs | 0 / 0 |
-| Philadelphia | MFL, BSL + subway-surface and Girard trolleys | Regional Rail; NHSL, Media–Sharon Hill (outside city) | SEPTA GTFS | City | 6 / 161 |
-| Miami (Regional) | Metrorail + 2 Metromover loops | Tri-Rail; MIA people mover | Miami-Dade Transit GTFS | County (6 municipalities have stations) | 0 / 0 |
-| Boston | Red, Orange, Blue + Green, Mattapan | Commuter Rail, ferries | MBTA GTFS | City | 43 / 25 |
-| Washington D.C. | Metrorail, 6 lines | DC Streetcar no longer operating (ended 2026-03-31); MARC/VRE are separate systems | WMATA GTFS (API key) | District | 58 / 0 |
+| San Diego | Trolley (light rail), 5 lines | Coaster, Sprinter | MTS GTFS; gate 3 exact | City | 16 / 0 |
+| San Francisco | Muni Metro J K L M N T + F Market & Wharves | BART, Caltrain, cable cars | SFMTA GTFS (mirror); gate 3 exact | City and County | 0 / 85 |
+| Los Angeles | Metro Rail A B C D E K (heavy + light) | Metrolink | LA Metro rail GTFS; gate 3 exact | City | 54 / 0 |
+| Chicago | 'L', 7 lines | Metra; Yellow Line | CTA GTFS; gate 3 exact, less State/Lake (closed) | City | 18 / 0 |
+| New York | Subway (11 trunk groups) + Staten Island Rwy | LIRR | MTA GTFS; gate 3 against the MTA's station register | Five boroughs | 0 / 0 |
+| Philadelphia | MFL, BSL + subway-surface and Girard trolleys | Regional Rail; NHSL, Media–Sharon Hill (outside city) | SEPTA GTFS; gate 3 exact on the L, B, G and the tunnel; T branches not gated | City | 7 / 162 |
+| Miami (Regional) | Metrorail + 2 Metromover loops | Tri-Rail; MIA people mover | Miami-Dade Transit GTFS; gate 3 exact | County (6 municipalities have stations) | 0 / 0 |
+| Boston | Red, Orange, Blue + Green, Mattapan | Commuter Rail, ferries | MBTA GTFS; gate 3 exact (MBTA) | City | 43 / 25 |
+| Washington D.C. | Metrorail, 6 lines | DC Streetcar no longer operating (ended 2026-03-31); MARC/VRE are separate systems | WMATA GTFS (API key); gate 3 exact | District | 58 / 0 |
 | Buffalo | NFTA Metro Rail (light rail, one line) | NFTA's GTFS not used (OSM) | OpenStreetMap route relations; gate 3 exact on 14 | City | 0 / 0 |
 | Sacramento | SacRT light rail, Blue and Gold | Green Line (suspended; its one station closed for works) | OpenStreetMap route relations (+ Wikidata for Dos Rios); gate 3 exact on SacRT's timetables | City | 15 / 0 |
 | Houston | METRORail light rail, Red, Green and Purple | — | OpenStreetMap route relations (METRO's data agreement kept out); gate 3 exact | City (TIGER) | 0 / 0 |
 | Minneapolis | METRO Blue and Green light rail | Northstar commuter rail; the Como-Harriet heritage streetcar (a museum ride) | OpenStreetMap route relations (Metro Transit's GTFS licence unread); gate 3 exact on 19 and 23 | City (TIGER) | 22 / 0 |
 | Pittsburgh | PRT light rail (the T), Red, Blue and Silver, with the downtown subway | Buses, the inclines | OpenStreetMap route relations (PRT's GTFS licence unread); gate 3 exact on 31, 24 and 31 | City (TIGER); halved rings | 31 / 0 |
 | Dallas | DART Light Rail, Red, Blue, Green and Orange | Dallas Streetcar, M-Line trolley (owner); Silver Line and TRE (commuter rail) | OpenStreetMap route relations (Houston's route); gate 3 exact | City (TIGER) | 20 / 0 |
-| Kansas City | KC Streetcar, one line | Buses | OpenStreetMap route relations (RideKC's GTFS barred, owner) | City (TIGER) | 0 / 0 |
-| Tucson | Sun Link streetcar, one line | Buses | OpenStreetMap route relations | City (TIGER) | 0 / 0 |
-| New Orleans | RTA streetcars 12, 46, 47, 48, 49 | Buses, ferries; OSM's stale ref 2 | OpenStreetMap route relations; 46 and 49 stops by node | City (TIGER; Orleans Parish) | 0 / 0 |
+| Kansas City | KC Streetcar, one line | Buses | OpenStreetMap route relations (RideKC's GTFS barred, owner); gate 3 exact | City (TIGER) | 0 / 0 |
+| Tucson | Sun Link streetcar, one line | Buses | OpenStreetMap route relations; gate 3 exact | City (TIGER) | 0 / 0 |
+| New Orleans | RTA streetcars 12, 46, 47, 48, 49 | Buses, ferries; OSM's stale ref 2 | OpenStreetMap route relations; 46 and 49 stops by node; gate 3 exact (RTA) | City (TIGER; Orleans Parish) | 0 / 0 |
 | **Canada** | | | | | |
-| Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS | Vancouver + Surrey | 30 / 0 |
-| Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
+| Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS; gate 3 exact | Vancouver + Surrey | 30 / 0 |
+| Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS; gate 3 exact | Agglomeration (island) | 11 / 0 |
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
-| Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS | City | 0 / 0 |
+| Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS; gate 3 exact | City | 0 / 0 |
 | Kitchener–Waterloo (Regional) | ION light rail (GRT route 301) | GO Transit's Kitchener line (suburban rail); ION's bus to Cambridge | OpenStreetMap route relations (the light-rail builds' source); gate 3 exact against the Region's ION Stops layer | Two cities (the Region's Kitchener and Waterloo polygons) | 0 / 0 |
 | Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
 | Ottawa | O-Train Lines 1, 2 and 4 (light rail) | Buses, the Transitway | OpenStreetMap route relations (OC Transpo's GTFS licence unread); gate 3 exact against Wikipedia | City (its own wards) | 0 / 0 |
@@ -530,15 +530,15 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Guadalajara (Regional) | Tren Ligero L1–L4 | — | OpenStreetMap (only GTFS expired 2023, lacks L4) | 4 municipios; Tonalá out | no CSV (all in scope) / 0 |
 | Monterrey (Regional) | Metrorrey L1–L3 | Líneas 4 and 6 (monorail, under construction) | OpenStreetMap (no agency data published); L3 in the operator's red | 4 municipios, by INEGI code | no CSV (all in scope) / 0 |
 | **Spain** | | | | | |
-| Madrid | Metro L1–L12 + Ramal + Metro Ligero ML1 | Cercanías; Metro Ligero ML2, ML3 (stubs), ML4 (Parla) | CRTM ArcGIS layers | Municipio | 49 / 0 |
+| Madrid | Metro L1–L12 + Ramal + Metro Ligero ML1 | Cercanías; Metro Ligero ML2, ML3 (stubs), ML4 (Parla) | CRTM ArcGIS layers; gate 3 exact (CRTM's line pages) | Municipio | 49 / 0 |
 | Barcelona | Metro L1–L12 (TMB+FGC) + 2 funiculars | Trams | OpenStreetMap | Municipi | 50 / 0 |
 | Palma | Metro de Palma M1 (10 stations) | SFM's trains T1–T3 (suburban rail); M2, no longer a metro service | OpenStreetMap route relations; gate 3 exact against TIB's stop list | Municipality (OSM) | 0 / 0 |
 | **Ireland** | | | | | |
-| Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS | 4 local authorities | 2 / 0 |
+| Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS; gate 3 exact | 4 local authorities | 2 / 0 |
 | **Italy** | | | | | |
 | Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
 | Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 3, 5, 14, 19 bus-replaced); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
-| Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap | Comune | 4 / 0 |
+| Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap; gate 3 exact | Comune | 4 / 0 |
 | **France** | | | | | |
 | Paris | Métro, 16 lines + Trams T3a, T3b | RER, Transilien, other trams (T2 and T9 stubs) | IDFM GTFS | Commune | 76 / 0 |
 | Marseille | Métro 1–2 + Tramway 1–3 | TER; ferries; Aubagne tram | Métropole AMP GTFS (RTM) | Commune | 7 (Aubagne tram) / 0 |
@@ -573,7 +573,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
 | **Sweden** | | | | | |
 | Stockholm | Tunnelbana: Gröna, Röda and Blå linjen (routes T10–T19), one label per line | Pendeltåg, Roslagsbanan, Saltsjöbanan, trams; the unopened Yellow line | OpenStreetMap route relations (SL's GTFS needs a key); gate 3 exact on 100 | Kommune | 18 / 0 |
-| Göteborg | Göteborgs Spårvägar trams 1–13 | Buses, ferries, commuter trains; Lisebergslinjen (heritage) | OpenStreetMap route relations | Kommun | 5 / 0 |
+| Göteborg | Göteborgs Spårvägar trams 1–13 | Buses, ferries, commuter trains; Lisebergslinjen (heritage) | OpenStreetMap route relations; gate 3 exact (Västtrafik) | Kommun | 5 / 0 |
 | **Denmark** | | | | | |
 | Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
 | Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
@@ -589,7 +589,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Netherlands** | | | | | |
 | Amsterdam | Metro 50–54 + 16 trams | Tram 3, museum tram, ferries, NS | OVapi national GTFS (GVB) | Gemeente (with Weesp) | 22 / 59 |
 | Rotterdam | RET metro A–E + 9 trams | Trams 12, 14, 18; ferries; NS | OVapi national GTFS (RET) | Gemeente | 52 / 23 |
-| Den Haag | HTM trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17, 19 and RandstadRail 3, 4, 34 (14 lines) | RandstadRail E (RET metro, a stub: 4 of 23 stops inside), the 9S short working, buses, NS | OpenStreetMap route relations | Gemeente | 64 / 0 |
+| Den Haag | HTM trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17, 19 and RandstadRail 3, 4, 34 (14 lines) | RandstadRail E (RET metro, a stub: 4 of 23 stops inside), the 9S short working, buses, NS | OpenStreetMap route relations; gate 3 exact (HTM) | Gemeente | 64 / 0 |
 | **Brazil** | | | | | |
 | São Paulo | Metrô L1–5, L15 (monorail) + CPTM L9 | CPTM 7, 8, 10–13; L6, L17 (building) | OpenStreetMap (GeoSampa for status) | Município | 2 / 0 |
 | Rio de Janeiro | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | Município | 3 / 0 |
@@ -603,11 +603,11 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Hong Kong** | | | | | |
 | Hong Kong | MTR, 8 lines + Light Rail | Airport Express, Disneyland Resort Line, high-speed rail, Peak Tram, Hong Kong Tramways | OpenStreetMap (station counts checked against MTR's own lists) | Territory | 0 / 17 (Racecourse left out: race days only) |
 | **Latvia** | | | | | |
-| Riga | Rīgas satiksme trams, 7 routes | Buses, trolleybuses, Vivi suburban rail | Rīgas satiksme GTFS | City (58 neighbourhoods) | 0 / 15 |
-| Liepāja | Tram 1, the one line | Buses and suburban trains | OpenStreetMap | City | 0 / 0 |
-| Daugavpils | Trams 1-5 (3 and 5 one loop) | Buses and suburban trains | OpenStreetMap | City | 0 / 0 |
+| Riga | Rīgas satiksme trams, 7 routes | Buses, trolleybuses, Vivi suburban rail | Rīgas satiksme GTFS; gate 3 exact before thinning | City (58 neighbourhoods) | 0 / 15 |
+| Liepāja | Tram 1, the one line | Buses and suburban trains | OpenStreetMap; gate 3 exact | City | 0 / 0 |
+| Daugavpils | Trams 1-5 (3 and 5 one loop) | Buses and suburban trains | OpenStreetMap; gate 3 exact | City | 0 / 0 |
 | **South Korea** | | | | | |
-| Seoul | Seoul Metropolitan Subway: Lines 1–9, Shinbundang, Ui LRT, Sillim + 3 Korail lines | AREX, GTX-A, Seohae Line, Gimpo Goldline | OpenStreetMap (no gate 3) | City | 223 / 0 |
+| Seoul | Seoul Metropolitan Subway: Lines 1–9, Shinbundang, Ui LRT, Sillim + 3 Korail lines | AREX, GTX-A, Seohae Line, Gimpo Goldline | OpenStreetMap (gate 3 exact on all 15 lines) | City | 227 / 0 |
 | Daegu | Daegu Metro Lines 1–3 (Line 3 a monorail) | 대경선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia; operator unreachable) | City | 5 / 0 |
 | Busan | Busan Metro Lines 1–4 (Line 4 a rubber-tyred light metro) and the Busan–Gimhae LRT | 동해선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia) | City | 17 / 0 |
 | Incheon | Incheon Lines 1 and 2, Line 1, Line 7, Suin–Bundang Line | AREX, the airport maglev, the Wolmi Sea Train | OpenStreetMap (gate 3 against English Wikipedia; Line 1 not gated) | City | 151 / 0 |
@@ -645,7 +645,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Sydney | Sydney Trains T1, T2, T3, T4, T8 and T9 and Sydney Metro M1 (7 lines, refs on the map, full names in the legend) | Light rail L1-L3 (22 stops in the LGA), NSW TrainLink, ferries | OpenStreetMap route relations (Transport for NSW's GTFS needs an API key); gate 3 exact on the 16 stations inside the LGA | The City of Sydney LGA (lines cut at the boundary) | 157 / 0 |
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
 | **Switzerland** | | | | | |
-| Zurich | VBZ trams 2–11, 13–15, 17 and the 2026 construction lines 50 and 51 | S-Bahn; Forchbahn S18; trams 12 (Glattalbahn) and 20 (Limmattalbahn), stubs | OpenStreetMap route relations | City (Stadt Zürich) | 15 / 0 |
+| Zurich | VBZ trams 2–11, 13–15, 17 and the 2026 construction lines 50 and 51 | S-Bahn; Forchbahn S18; trams 12 (Glattalbahn) and 20 (Limmattalbahn), stubs | OpenStreetMap route relations; gate 3 exact (ZVV) | City (Stadt Zürich) | 15 / 0 |
 
 ### B. Business data (dimensions 4–6)
 

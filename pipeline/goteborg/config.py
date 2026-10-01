@@ -115,6 +115,19 @@ NOT_DRAWN = {
 }
 STATION_ADD = {}
 NAME_ALIASES = {}
+# {stop name: (line, ...)}: a line Västtrafik's timetable serves at a stop
+# OSM's relations for that line leave out, where the stop is already drawn from
+# other lines' relations (one Västtrafik stop code across the lines). Step 1
+# adds the line to the stop's existing stop positions - no position is added, so
+# the station does not move - and stops if the name is gone, or if the line's
+# own relations now carry it (OSM filled the gap: remove the entry). Fixed
+# 2026-10-01 (owner, "implement the station fixes"):
+#   Korsvägen (003980): lines 4 (platforms A2/A3), 6 and 8 (B1/B2), 13 (B2)
+#   Drottningtorget (002135): line 2 (A3/A6)
+LINE_ADD = {
+    "Korsvägen": ("4", "6", "8", "13"),
+    "Drottningtorget": ("2",),
+}
 SPACING_MIN_M = 60.0
 # Owner call 21's stub test: a line drawn to its end must keep at least half
 # its stops inside the city.
@@ -124,26 +137,23 @@ STUB_LINES = ("4", "12")
 # Gate 3: Västtrafik's own stops per line, from each line's timetable PDF
 # (page 1's stop columns, both directions), the whole line before the kommun
 # split (4's and 12's Mölndal stops included). A tram step 1 stops on a
-# mismatch, but FIVE LINES DISAGREE and the cause is in OSM, so the stop is
-# commented out in step 1 until the cleanup session takes it to the owner:
-# OSM's relations leave out a stop the line's timetable serves. The station is
-# drawn and ringed in each case (it is on other lines' relations, and
-# Västtrafik gives it one stop code across the lines); what is missing is the
-# line on its label.
+# mismatch. Five lines' OSM relations leave out a stop the line's timetable
+# serves (2, 4, 6, 8, 13); LINE_ADD above puts each line back on that stop's
+# label, so the build matches (2026-10-01).
 OPERATOR_STATION_COUNTS = {
     "1": 28,
-    "2": 28,   # MISMATCH (cause found, not fixed): build 27. Drottningtorget (stop 002135, platforms A3/A6) is in line 2's timetable, not on OSM's line-2 relations
+    "2": 28,   # with Drottningtorget (002135) by LINE_ADD; OSM's relations alone give 27
     "3": 29,
-    "4": 21,   # MISMATCH (cause found, not fixed): build 20. Korsvägen (003980, A2/A3) is in line 4's timetable, not on OSM's line-4 relations
+    "4": 21,   # with Korsvägen (003980) by LINE_ADD; OSM alone 20
     "5": 33,
-    "6": 46,   # MISMATCH (cause found, not fixed): build 45. Korsvägen (003980, B1/B2) missing from OSM's line-6 relations
+    "6": 46,   # with Korsvägen by LINE_ADD; OSM alone 45
     "7": 35,
-    "8": 25,   # MISMATCH (cause found, not fixed): build 24. Korsvägen (003980, B1/B2) missing from OSM's line-8 relations
+    "8": 25,   # with Korsvägen by LINE_ADD; OSM alone 24
     "9": 21,
     "10": 13,
     "11": 35,
     "12": 18,
-    "13": 21,  # MISMATCH (cause found, not fixed): build 20. Korsvägen (003980, B2) missing from OSM's line-13 relation
+    "13": 21,  # with Korsvägen by LINE_ADD; OSM alone 20
 }
 OPERATOR_COUNTS_SOURCE = (
     "Västtrafik's line timetables 'Tidtabell linje 1' to '13', valid 2026-08-17 to "

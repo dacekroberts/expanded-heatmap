@@ -196,12 +196,57 @@ LINE_NAMES = {
 #      the express over B1's own tracks, so it adds no geometry.
 #   T  one shape per branch: T1 63rd-Malvern, T2 61st-Baltimore, T3 Yeadon,
 #      T4 Darby, T5 80th-Eastwick - all sharing the Center City tunnel.
+#   G  319735 is the G1 Richmond-Westmoreland - 63rd-Girard; 319733 is its
+#      short branch from the Frankford-Delaware loop, the same direction, which
+#      joins Girard Av at Frankford Av (see BRANCH_SHAPES).
 LINE_SHAPES = {
     "L": "319893",
     "B": ("319850", "319877"),
     "T": ("319740", "319746", "319768", "319779", "319804"),
-    "G": "319735",
+    "G": ("319735", "319733"),
 }
+
+# A route's branch that its most-used shape does not run, read by step 1 as a
+# second shape in the SAME direction as that most-used shape. Only the stops
+# the main shape lacks are taken from it, plus the junction they leave from,
+# so the shared trunk is thinned once, not twice.
+#   G1  319733: Frankford-Delaware loop - Girard Av, westbound, 125 of the
+#       feed's 840 G1 trips (2026-10-01). Its own stops are Frankford Av &
+#       Delaware Av Loop and Frankford Av & Richmond St (Frankford-Delaware and
+#       Richmond-Frankford in SEPTA's and Wikipedia's stop lists); it joins the
+#       main line at Girard Av & Frankford Av.
+BRANCH_SHAPES = {
+    "G1": ("319733",),
+}
+
+# --- Stations closed for works (docs/category_rules.md, "Station scope") ----
+# Drawn as the timetable runs (owner, 2026-09-29; Berlin's U6, Sacramento's
+# Township 9): a station the feed does not serve is not drawn and gets no ring;
+# step 1 lists it in excluded_stations.csv as closed for works with its
+# reopening date, and STOPS once the feed serves it again.
+#
+# 11th St (L): SEPTA closed it on 5 September 2026 for its accessibility
+# rebuild (two elevators, ADA compliance) and expects it back on 30 August
+# 2027; L trains run through without stopping. SEPTA, "SEPTA to Break Ground
+# on Accessibility Project at 11th Street Station", 2026-08-06 (septa.org/news/
+# 11th-st-station-accessibility-project/): "closed to the public from September
+# 5, 2026 through August 30, 2027". The feed of 2026-09-21 has no stop for it.
+# Its position is OpenStreetMap's station node (ODbL, already credited on the
+# map), since the feed no longer carries one.
+CLOSED_FOR_WORKS = {
+    "11th St": {
+        "line": "L1",
+        "reason": ("Market-Frankford Line, closed for works (accessibility "
+                   "rebuild) from 5 September 2026, reopening 30 August 2027 "
+                   "(SEPTA)"),
+        "latitude": 39.9517977,
+        "longitude": -75.1583456,
+        "position_source": ("OpenStreetMap node 5372090220 (railway=station, "
+                            "'11th Street', SEPTA), read 2026-10-01"),
+    },
+}
+# A feed L stop this close to a closed station means SEPTA serves it again.
+CLOSED_REOPEN_METRES = 100.0
 
 # Only the trolley groups are street-running and need thinning; L and B are
 # grade-separated with 681-711 m median spacing and are kept whole.
@@ -214,7 +259,8 @@ THINNED_GROUPS = frozenset({"T", "G"})
 # counts once on each line it serves. Keyed as step 1 keys its line groups.
 OPERATOR_STATION_COUNTS = {
     # 28 stations, less 11th St, closed by SEPTA from 2026-09-05 to 2027-08-30
-    # for its accessibility rebuild (L trains run through). Not in this feed.
+    # for its accessibility rebuild (L trains run through). Not in this feed;
+    # recorded as closed for works (CLOSED_FOR_WORKS).
     "L": 27,
     # 22 on the B1 Fern Rock - NRG, plus the B3 Ridge Spur's own Chinatown and
     # 8th-Market (its Fairmount and Girard are the B1's; Spring Garden on the
@@ -229,19 +275,15 @@ OPERATOR_STATION_COUNTS = {
     "T (Center City tunnel)": 9,
     # 64 stop rows, less the 5 served eastbound only (62nd-Girard, 61st-Girard,
     # Lancaster-Girard, Poplar-26th, Stillman-Poplar), since step 1 reads one
-    # direction: 59.
-    # MISMATCH: build 57. The two missing are Richmond-Frankford and
-    # Frankford-Delaware, the G's short branch to the Frankford-Delaware loop
-    # (125 of the feed's 840 G1 trips). Step 1 reads the G1's most-used shape,
-    # which runs to Richmond-Westmoreland, so that branch's terminal is never
-    # read - and filter 2 would have kept it. Not fixed here: a station change
-    # needs the owner, a drift check and a redeploy.
+    # direction: 59. That includes Richmond-Frankford and Frankford-Delaware,
+    # the short branch to the Frankford-Delaware loop, which step 1 reads from
+    # BRANCH_SHAPES (matched 2026-10-01; it read 57 before the branch was added).
     "G": 59,
 }
 OPERATOR_COUNTS_SOURCE = (
     "Secondary, all en.wikipedia.org, read 2026-10-01: L (SEPTA Metro) infobox "
-    "'28 (1 temporarily closed)', with SEPTA's 11th St closure dates as "
-    "reported by Northeast Times, 2026-08-07; Broad Street Line infobox 24; "
+    "'28 (1 temporarily closed)', with SEPTA's own 11th St closure dates "
+    "(septa.org news, 2026-08-06); Broad Street Line infobox 24; "
     "T (SEPTA Metro) infobox '8 underground stations 2 surface level "
     "stations'; G (SEPTA Metro) infobox '64 stops' and its stops table, read "
     "row by row (EB/WB marks). SEPTA's own route pages render their stop lists "
@@ -298,9 +340,15 @@ STATION_SUFFIX_PATTERN = r"\s+-\s+[A-Z0-9][A-Z0-9 &]*$"
 # it interchanges with - 6.7 m and 18.4 m apart respectively, far too close to
 # be two stations - under names that share no suffix pattern to detect. The
 # rapid-transit name wins because that is what riders call the place.
+#
+# The third is the G's own junction with its Frankford-Delaware branch: the
+# branch's westbound stop "Frankford Av & Girard Av" (stop 481) is 13 m from
+# the main line's "Girard Av & Frankford Av" (stop 20991) - one stop, counted
+# once in the operator's stop list, at the corner both directions share.
 STATION_NAME_ALIASES = {
     "Girard Av & Front St": "Front-Girard",
     "Girard Av & Broad St": "Broad-Girard",
+    "Frankford Av & Girard Av": "Girard Av & Frankford Av",
 }
 
 # --- Business filtering ------------------------------------------------

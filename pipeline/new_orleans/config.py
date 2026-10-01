@@ -106,10 +106,22 @@ NOT_DRAWN = {
 # tram_stop, assigned to its line by distance to that line's track (0-10 m;
 # 2026-09-30). John Churchill Chase Street (260 m off 49's new track) is not
 # served. 46's Loyola Avenue stops (Tulane, Poydras Street, Julia Street) are
-# 47's too - OSM's 47 runs Loyola to the terminal - so they keep their names and
-# merge with 47's. The riverfront's own Poydras Street and Julia Street, 600 m
-# away, take "Riverfront at" names (osm_tram's shown name), or the name collapse
-# would join them to Loyola's.
+# also stop members of OSM's 47, which runs Loyola to the terminal; RTA's 47
+# does not (below), so those three nodes are moved to 46 (`STOP_LINE_FIXES`)
+# and merge with 46's by name. The riverfront's own Poydras Street and Julia
+# Street, 600 m away, take "Riverfront at" names (osm_tram's shown name), or the
+# name collapse would join them to Loyola's.
+#
+# 47 AND 48 RUN DOWN CANAL TO THE FERRY TERMINAL (RTA's stop lists, read
+# 2026-10-01; gate 3 below). OSM's 47/48 relations carry the lower-Canal track
+# but stop at Canal at Basin / LaSalle, so the five lower-Canal stops RTA lists
+# are added here from OSM's own tram_stop nodes there (the old ref-2 relations'
+# stops), each direction's node, merged by the aliases below: Canal at N./S.
+# Rampart (46's too, as RTA lists it), Bourbon/Carondelet (12's terminus
+# corner, so it joins 12's Canal at Carondelet), Chartres/Camp, N./S. Peters,
+# and the Ferry Terminal - OSM's "Harrah's Casino" nodes, 5 m from RTA's Canal
+# St. Ferry Terminal pin, shown under RTA's name. 47's Cemeteries Transit
+# Terminal is OSM's "Cemeteries" node, on 47's relation with no stop role.
 STATION_ADD = {
     # 46 Loyola/Rampart
     4597187933: ("46", "Union Passenger Terminal"),
@@ -117,7 +129,8 @@ STATION_ADD = {
     2535854754: ("46", "Tulane"),
     2535854769: ("46", "Poydras Street"),
     2535854705: ("46", "Julia Street"),
-    4597117789: ("46", "Canal at South Rampart"),
+    4597117789: (("46", "47", "48"), "Canal at South Rampart"),
+    4597116962: (("46", "47", "48"), "Canal at North Rampart"),
     4597187943: ("46", "North Rampart at Conti"),
     8436279603: ("46", "North Rampart at Conti"),
     4597187934: ("46", "North Rampart at Saint Ann"),
@@ -130,6 +143,17 @@ STATION_ADD = {
     8436283443: ("46", "Saint Claude at Pauger"),
     4597187944: ("46", "Saint Claude at Elysian Fields"),
     8436283454: ("46", "Saint Claude at Elysian Fields"),
+    # 47 and 48, lower Canal Street (RTA, 2026-10-01)
+    4756571941: (("47", "48"), "Canal at Bourbon"),
+    4756570229: (("47", "48"), "Canal at Carondelet"),
+    4597117795: (("47", "48"), "Canal at Chartres"),
+    4597116969: (("47", "48"), "Canal at Camp"),
+    4597117791: (("47", "48"), "Canal at North Peters"),
+    4597116961: (("47", "48"), "Canal at South Peters"),
+    4597116957: (("47", "48"), "Harrah's Casino", "Canal Street Ferry Terminal"),
+    3340628159: (("47", "48"), "Harrah's Casino", "Canal Street Ferry Terminal"),
+    # 47, the Cemeteries Transit Terminal
+    11079132954: ("47", "Cemeteries"),
     # 49 Riverfront
     4821756939: ("49", "French Market"),
     8436263958: ("49", "French Market"),
@@ -149,36 +173,56 @@ STATION_ADD = {
     3340628100: ("49", "Julia Street", "Riverfront at Julia"),
 }
 # ONE STOP, TWO NAMES: on Canal Street and St. Charles Avenue each direction's
-# stop is named for the cross street on its own side, 6-26 m apart (2026-09-30)
-# - Houston's couplet, merged by explicit alias (Oslo's rule), never a rule.
+# stop is named for the cross street on its own side, 6-59 m apart (2026-09-30;
+# lower Canal 2026-10-01, the pairs RTA's own lists merge) - Houston's couplet,
+# merged by explicit alias (Oslo's rule), never a rule. Canal at Basin / Elk
+# Place (6 m) is no longer aliased: no line RTA runs stops there (below).
 NAME_ALIASES = {
-    "Canal at Elk Place": "Canal at Basin",                    # 6 m
     "Canal at Marais": "Canal at LaSalle",                      # 19 m
     "Saint Charles at Melpomene": "Saint Charles at Martin Luther King Jr.",   # 24 m
     "Canal at South Claiborne": "Canal at North Claiborne",     # 26 m
+    "Canal at North Rampart": "Canal at South Rampart",         # 59 m
+    "Canal at Bourbon": "Canal at Carondelet",                  # 38 m
+    "Canal at Camp": "Canal at Chartres",                       # 15 m
+    "Canal at South Peters": "Canal at North Peters",           # 16 m
 }
-EXPECTED_STATIONS = 106
+# STOP MEMBERS OF A KEPT RELATION THAT RTA'S LINE DOES NOT SERVE (2026-10-01),
+# {(line, node): (line it moves to, or None to drop; OSM name; reason)}. Step 1
+# stops if an entry no longer matches a stop row, so a stale one cannot linger.
+STOP_LINE_FIXES = {
+    ("47", 4597187938): ("46", "Tulane", "OSM's 47 runs Loyola Avenue; RTA's 47 runs "
+                         "Canal to the ferry. The node is 46 eastbound's stop"),
+    ("47", 4597187937): ("46", "Poydras Street", "as Tulane"),
+    ("47", 8436296827): ("46", "Julia Street", "as Tulane"),
+    ("47", 4597116975): (None, "Canal at Basin", "no line RTA runs lists a stop at "
+                         "Basin / Elk Place; 46, 47 and 48 stop at Rampart, 100 m on"),
+    ("47", 4597116978): (None, "Canal at Elk Place", "as Canal at Basin"),
+}
+# A STOP OSM DOES NOT MAP: RTA's S. Carrollton Ave at Sycamore St (stops 307 and
+# 205, one a direction, read 2026-10-01). OSM has no stop node there, under any
+# name, so each direction's stop sits at the vertex of OSM's own 12 track way
+# nearest RTA's pin (10-13 m from it): {name: (line, ((way, lat, lon), ...),
+# source)}. Step 1 checks each vertex is still on that way and that OSM has not
+# since mapped a stop within 60 m (then it is a STATION_ADD, and this goes).
+TRACK_STOPS = {
+    "South Carrollton at Sycamore": ("12", ((72902269, 29.9543416, -90.1221121),
+                                            (24016723, 29.9543667, -90.1221438)),
+                                     "RTA stops 307/205; OSM track vertices"),
+}
+EXPECTED_STATIONS = 110
 
 # GATE 3: the operator's own stops, independent of OSM. RTA's website stop
 # list per line and direction (the endpoint its Rider Tools schedule page
 # reads, norta.com/RTAStops?routeID=<line>&directionID=<0|1>), the two
 # directions merged where stops lie within 60 m (the smallest radius at which
 # 46 and 49 each come to one stop a location). 47 and 48 list 25 a direction
-# exactly. Read 2026-10-01. THREE LINES DISAGREE, AND THE BUILD IS THE ONE
-# SHORT - a station fix for the owner, not reconciled here:
+# exactly. Read 2026-10-01. All five match since the station fix of 2026-10-01
+# (owner): 12 was 62 (Sycamore, `TRACK_STOPS`), 47 was 23 (drawn up Loyola, not
+# down Canal to the ferry) and 48 was 20 (ended at LaSalle).
 OPERATOR_STATION_COUNTS = {
-    # MISMATCH, unexplained: build 62. RTA lists S. Carrollton Ave at Sycamore
-    # St (stop 307, both directions); OSM carries no Sycamore stop at all.
     "12": 63,
     "46": 11,
-    # MISMATCH, unexplained: build 23. RTA runs 47 down Canal to the Canal St.
-    # Ferry Terminal (Canal at N. Rampart, Bourbon/Carondelet, Chartres/Camp,
-    # N./S. Peters, Ferry Terminal) and lists the Cemeteries Transit Terminal;
-    # the build follows OSM's 47 up Loyola (Canal at Basin, Tulane, Poydras
-    # Street, Julia Street), which RTA's 47 does not serve.
     "47": 25,
-    # MISMATCH, unexplained: build 20. The same lower-Canal stops, Canal at
-    # N. Rampart to the Ferry Terminal (5): the build's 48 ends at LaSalle.
     "48": 25,
     "49": 8,
 }
@@ -191,6 +235,23 @@ OPERATOR_COUNTS_SOURCE = (
 SPACING_MIN_M = 40.0
 
 DRAWN_LINES = ("12", "46", "47", "48", "49")
+# WAYS OF A KEPT RELATION NOT DRAWN FOR ITS LINE: both of OSM's 47 relations
+# carry Loyola Avenue (the track UPT - Canal and its stop platforms), which
+# RTA's 47 does not run (2026-10-01); 46 draws Loyola. Without them 47 draws
+# Canal Street whole, ferry to cemeteries, on OSM's own track. Step 3 stops if
+# an id is no longer in a relation of that line.
+LINE_WAYS_NOT_DRAWN = {
+    "47": {
+        543357043: "Loyola Avenue track, UPT - Canal",
+        782345334: "UPT platform",
+        908572914: "Julia Street platform (Loyola)",
+        908572913: "Julia Street platform (Loyola)",
+        908572912: "Poydras Street platform (Loyola)",
+        908572911: "Poydras Street platform (Loyola)",
+        908572910: "Tulane platform (Loyola)",
+        908572909: "Tulane platform (Loyola)",
+    },
+}
 # RTA's names (its Fall '25 schedule list): "12 - St. Charles", "46 -
 # Loyola/Rampart", "47"/"48" the Canal lines by their ends, "49 - Riverfront".
 LINE_NAMES = {"12": "St. Charles", "46": "Loyola/Rampart", "47": "Canal–Cemeteries",

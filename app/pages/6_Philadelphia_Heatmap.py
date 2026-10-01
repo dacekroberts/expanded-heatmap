@@ -32,14 +32,20 @@ render_city_nav("Philadelphia")
 
 st.title("Philadelphia: commercial density around SEPTA Metro station areas")
 
+# The 11th St sentence follows the closed-for-works rule
+# (docs/category_rules.md, "Station scope"), in the wording of Sacramento's
+# page: name the closure and when it is due back.
 st.markdown(
     """
-Every SEPTA Metro station inside Philadelphia is mapped, across four lines: the
+Every open SEPTA Metro station inside Philadelphia is mapped, across four lines: the
 **Market–Frankford Line** and **Broad Street Line** (with its Ridge Spur),
 which run grade-separated, and the **Subway–Surface Trolleys** and **Girard
 Avenue Trolley**, which run in the street. Each is labelled directly on the map
 and in the legend, and the trolleys' five branches are drawn wherever they
-diverge.
+diverge. **11th St on the Market–Frankford Line is not drawn**: SEPTA closed it
+on 5 September 2026 to rebuild it with elevators and expects it back on 30
+August 2027. It is closed for works until then, and L trains run through it
+without stopping.
 
 **The two kinds of line are treated differently, because they are different
 kinds of line.** Market–Frankford and Broad Street stations sit a median 700 m

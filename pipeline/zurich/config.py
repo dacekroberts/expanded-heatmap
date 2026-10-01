@@ -96,10 +96,14 @@ MEDIAN_GAP_BOUNDS_M = (240.0, 330.0)
 #
 # Step 1 judges every `route=tram` and `route=light_rail` relation in the box:
 # kept on its ref, or named in NOT_DRAWN with a reason (osm_tram's contract).
-# Each kept line's stops are the union of its relations, so the short and
-# variant runs (tram 9's weekday-peak run on to Triemli, tram 8's Sunday run
-# to the Zoo, tram 10's Oerlikon short runs) add no stop of their own: every
-# stop on them is also on a line's everyday run (measured 2026-09-30).
+# Each kept line's stops are the union of its relations. The short and variant
+# runs of trams 9 (the weekday-peak run on to Triemli) and 8 (the Sunday run to
+# the Zoo) add no stop of their own: every stop on them is also on the line's
+# everyday run (measured 2026-09-30). TRAM 10'S OERLIKON SHORT RUNS DO ADD ONE:
+# their relations (10412927, 10412930: Bahnhofstrasse/HB <-> Bahnhof Oerlikon)
+# end at Bahnhof Oerlikon, a stop the everyday runs (53006, 2799184) do not
+# call at and ZVV's line 10 does not list (2026-10-01). LINE_NOT_AT below
+# takes 10 off that station; it stays drawn and ringed for tram 50.
 #
 # TRAMS 50 AND 51 ARE THE 2026 TIMETABLE'S CONSTRUCTION LINES (VBZ: 14 Dec 2025
 # to 12 Dec 2026, while the Bahnhofquai/HB stop is rebuilt). 50 replaces the
@@ -135,6 +139,14 @@ NOT_DRAWN = {
 }
 STATION_ADD = {}
 NAME_ALIASES = {}
+# {stop name: (line, ...)}: a line OSM puts at a stop the operator's own
+# timetable does not list there. Step 1 drops those (line, stop) rows before
+# the collapse, and stops if the name is gone, if the line no longer lists it
+# (a stale entry), or if a stop position would be lost with them (the station
+# would move). Bahnhof Oerlikon: only tram 10's short runs reach it; its stop
+# positions are tram 50's (node 4881603356 is on both), so the point stays put
+# (owner, "implement the station fixes", 2026-10-01).
+LINE_NOT_AT = {"Bahnhof Oerlikon": ("10",)}
 # The build of 2026-09-30: 195 stop names, 180 in the Stadt, 15 outside (tram 2's
 # six in Schlieren; tram 10's in Opfikon, Kloten and Rümlang; tram 50's two in
 # Opfikon; tram 4's Rehalp in Zollikon).
@@ -147,16 +159,11 @@ EXPECTED_OUTSIDE = 15
 # 10's Opfikon, Kloten and Rümlang stops included). 50 AND 51 ARE COUNTED FOR
 # THE CURRENT TIMETABLE PERIOD ONLY (14 Dec 2025 to 12 Dec 2026), as are the
 # shortened 4, 11, 13 and 14 they stand in for: re-read every figure when the
-# Bahnhofquai reopens. A tram step 1 stops on a mismatch, but tram 10
-# disagrees, so that stop is commented out in step 1 until the cleanup session
-# takes it to the owner.
+# Bahnhofquai reopens. A tram step 1 stops on a mismatch.
 OPERATOR_STATION_COUNTS = {
     "2": 30, "3": 21, "4": 16, "5": 12, "6": 11, "7": 31, "8": 27, "9": 34,
-    # MISMATCH (cause found, not fixed): build 29. The build's extra stop is
-    # Bahnhof Oerlikon, which only OSM's tram-10 short-run relations (10412927,
-    # 10412930: Bahnhofstrasse/HB <-> Bahnhof Oerlikon) carry; ZVV's line 10
-    # does not list it. The station stays drawn either way (tram 50 serves it);
-    # what changes is 10 on its label.
+    # 28 once LINE_NOT_AT takes 10 off Bahnhof Oerlikon (OSM's short runs
+    # gave the build 29; fixed 2026-10-01).
     "10": 28,
     "11": 14, "13": 13, "14": 12, "15": 13, "17": 21,
     "50": 33,   # temporary construction line, current timetable period only

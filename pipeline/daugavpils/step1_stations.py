@@ -6,7 +6,9 @@ Reads the cache only; `fetch_sources.py` downloads.
 
 On the shared `pipeline/osm_tram.py`: stations are the stop members of the
 nine kept relations (refs 1-4; ref 3 is routes 3 and 5), with one untagged
-member accepted by node (config.ACCEPT_MEMBERS) and one misspelling aliased.
+member accepted by node (config.ACCEPT_MEMBERS) and one misspelling aliased,
+plus Užvaldes iela, which OSM does not map, at a vertex of OSM's own track
+(config.TRACK_STOPS).
 Every route lies inside the city, so step 3 draws each ref's relation whole.
 All five routes are drawn (owner, 2026-09-30, overruling call 28); no stop is
 thinned (call 13).
@@ -54,6 +56,50 @@ def city_polygon():
     return poly
 
 
+def track_stops(els, q):
+    """Rows for the stops OSM does not map (config.TRACK_STOPS), each at a
+    vertex of OSM's own track way, one point for every listed line (New
+    Orleans's precedent). Exits if the vertex left its way, if the way left a
+    listed line's relations, if a line already has a stop of that name, or if
+    OSM has since mapped a stop within 60 m (then STATION_ADD it)."""
+    stops = [e for e in els if e["type"] == "node"
+             and (osm_tram._is_stop(e.get("tags", {}))
+                  or e.get("tags", {}).get("public_transport") == "platform")]
+    near = gpd.GeoSeries(gpd.points_from_xy([n["lon"] for n in stops],
+                                            [n["lat"] for n in stops]),
+                         crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED)
+    rows = []
+    for name, (lines, verts, _src) in config.TRACK_STOPS.items():
+        for line in lines:
+            if (q.loc[q["line"] == line, "stop_name"] == name).any():
+                sys.exit(f"TRACK_STOPS {name!r}: {line} now has a stop of that name - "
+                         f"remove the entry")
+        for wid, lat, lon in verts:
+            for line in lines:
+                geoms = [m.get("geometry") or [] for r in els if r["type"] == "relation"
+                         and r.get("tags", {}).get("route") == config.ROUTE
+                         and r.get("tags", {}).get("ref") == line
+                         for m in r["members"] if m["type"] == "way" and m["ref"] == wid]
+                if not geoms:
+                    sys.exit(f"TRACK_STOPS {name!r}: way {wid} is no longer on a route-{line} "
+                             f"relation - re-read OSM")
+                if not any(p["lat"] == lat and p["lon"] == lon for g in geoms for p in g):
+                    sys.exit(f"TRACK_STOPS {name!r}: ({lat}, {lon}) is no longer a vertex "
+                             f"of way {wid} - re-read OSM")
+            pt = gpd.GeoSeries(gpd.points_from_xy([lon], [lat]), crs=config.CRS_GEOGRAPHIC
+                               ).to_crs(config.CRS_PROJECTED).iloc[0]
+            close = [stops[i]["tags"].get("name") for i, d in enumerate(near.distance(pt))
+                     if d < 60]
+            if close:
+                sys.exit(f"TRACK_STOPS {name!r}: OSM now maps stop(s) {close} within "
+                         f"60 m - add it by STATION_ADD and remove this entry")
+            rows += [{"line": line, "node": -wid, "stop_name": name, "latitude": lat,
+                      "longitude": lon, "source": "track"} for line in lines]
+            print(f"    ADD  {name!r} on {'/'.join(lines)} at way {wid}'s vertex "
+                  f"({lat}, {lon})")
+    return pd.concat([q, pd.DataFrame(rows)], ignore_index=True)
+
+
 def main():
     config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
@@ -65,6 +111,7 @@ def main():
                            station_add=config.STATION_ADD,
                            name_aliases=config.STATION_NAME_ALIASES,
                            accept_members=config.ACCEPT_MEMBERS)
+    q = track_stops(els, q)
     platforms, st = osm_tram.collapse(q, refs=config.LINE_REFS,
                                       crs_projected=config.CRS_PROJECTED)
     print()
@@ -76,18 +123,11 @@ def main():
         expected_per_line=config.OPERATOR_STATION_COUNTS,
         actual_per_line={ref: int(st["lines"].str.split("/").apply(
             lambda ls: ref in ls).sum()) for ref in config.LINE_REFS})
-    # A tram step 1 stops on a mismatch (tram-city skill). COMMENTED OUT for
-    # now: routes 2 and 4 disagree with the operator by one stop each
-    # (Užvaldes iela, missing from OSM; config.py), unexplained, and the fix is
-    # a station change for the owner. Restore the exit when it is decided.
-    # if res["per_line_mismatches"]:
-    #     sys.exit("gate 3: the build disagrees with the operator - "
-    #              + "; ".join(f"route {ln}: build {b}, operator {o}"
-    #                          for ln, (b, o) in res["per_line_mismatches"].items()))
+    # A tram step 1 stops on a mismatch (tram-city skill).
     if res["per_line_mismatches"]:
-        print("    gate 3 MISMATCH (exit suspended, see above): "
-              + "; ".join(f"route {ln}: build {b}, operator {o}"
-                          for ln, (b, o) in res["per_line_mismatches"].items()))
+        sys.exit("gate 3: the build disagrees with the operator - "
+                 + "; ".join(f"route {ln}: build {b}, operator {o}"
+                             for ln, (b, o) in res["per_line_mismatches"].items()))
 
     places = gpd.GeoDataFrame([{"ref": config.ATVK, "name": config.CITY_NAME_LV,
                                 "geometry": poly}], crs=config.CRS_GEOGRAPHIC)

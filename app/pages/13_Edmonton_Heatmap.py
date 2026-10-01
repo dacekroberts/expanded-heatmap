@@ -51,8 +51,9 @@ the Capital Line, the Metro Line and the Valley Line. The colours are this
 site's rather than the agency's. ETS signs Capital blue and Valley green, and
 both sit too close to the Retail and Personal services pin colours to stay
 readable on top of them, so each line keeps its hue and is darkened until it
-separates. The Metro Line shares the Capital Line's track through the
-south-west, where the two run together.
+separates. The Metro Line shares the Capital Line's track from downtown to
+Health Sciences/Jubilee, where Edmonton Transit Service's published line
+ends; its weekend trips on to Century Park are not drawn.
 
 **Retail is the largest category here**, which is the reverse of Calgary's
 balance and is again a fact about licensing rather than about streets.

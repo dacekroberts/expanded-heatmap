@@ -87,10 +87,11 @@ RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
 RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 MEDIAN_GAP_BOUNDS_M = (240.0, 360.0)
-# 37, not the brief's 38: the brief counted "Lokomotīvju demo", one
-# direction's misspelling of Lokomotīvju depo, as a stop of its own (aliased
-# below; read 2026-09-30).
-EXPECTED_STATIONS = 37
+# 38. The brief's 38 counted "Lokomotīvju demo", one direction's misspelling of
+# Lokomotīvju depo, as a stop of its own (aliased below; read 2026-09-30), which
+# left 37; Užvaldes iela, a stop OSM does not map, is placed on OSM's track
+# (TRACK_STOPS below, 2026-10-01), which makes 38.
+EXPECTED_STATIONS = 38
 
 # --- Station scope: EVERY STOP OF ROUTES 1-5 -----------------------------------
 # Nine route=tram relations, refs 1-4, all kept (read 2026-09-30):
@@ -119,6 +120,26 @@ ACCEPT_MEMBERS = {10293447147: "Stropu ciemats"}
 # One stop spelled two ways: route 2 and route 4 each have one direction's
 # member named "Lokomotīvju demo" (sic).
 STATION_NAME_ALIASES = {"Lokomotīvju demo": "Lokomotīvju depo"}
+# A STOP OSM DOES NOT MAP: Užvaldes iela, which Daugavpils satiksme SIA's
+# published tram timetable lists on routes 2 and 4, both directions, between
+# A. Pumpura iela and Lokomotīvju depo (the name and the line membership are
+# the operator's published facts). OSM has no stop or platform there under any
+# name (live probe 2026-10-01). The position is OSM's own: the vertex of the
+# single-track way 38785621 (on all four route-2 and route-4 relations) that is
+# node 1307786297, the railway=tram_level_crossing where OSM's Užvaldes iela
+# (ways 107423184, 1014388819) crosses the track - one point for both
+# directions, on the drawn track. New Orleans's South Carrollton at Sycamore
+# precedent (2026-10-01). The operator's GTFS (data/daugavpils/raw/GTFS.zip)
+# declares no licence and has no licence row, so it is NOT used for anything
+# here - not the position, not the name. {name: (lines, ((way, lat, lon), ...),
+# source)}. Step 1 stops if the vertex leaves that way or the way leaves a
+# listed line's relations, or if OSM maps a stop within 60 m (then it becomes a
+# STATION_ADD and this entry goes).
+TRACK_STOPS = {
+    "Užvaldes iela": (("2", "4"), ((38785621, 55.8890735, 26.5339858),),
+                      "operator's published timetable (name, routes 2 and 4); "
+                      "OSM track vertex, node 1307786297 (position)"),
+}
 
 # Gate 3 (tram-city skill, section 2): the operator's own stops per route, read
 # for the count only, distinct stops over both directions of each regular
@@ -128,15 +149,16 @@ STATION_NAME_ALIASES = {"Lokomotīvju demo": "Lokomotīvju depo"}
 # Kultūras un sporta pils) - which changes no count.
 OPERATOR_STATION_COUNTS = {
     "1": 19,
-    # MISMATCH, unexplained: build 16. The operator stops at Užvaldes iela
-    # (stop ids T47261/T47262, 55.8889 N 26.5340 E, between A. Pumpura iela and
-    # Lokomotīvju depo, on routes 2 and 4 both ways); no element of that name
-    # is in the cached OSM (data/daugavpils/raw/osm_rail.json), so the build
-    # has no station there. Not fixed here: a fix is a station change.
+    # 17 with Užvaldes iela (TRACK_STOPS); OSM's relations alone give 16.
+    # Re-probed live 2026-10-01 (Overpass, every public_transport, railway and
+    # highway=bus_stop node within 250 m, and anything named like "vald" within
+    # 400 m; the kumi mirror, data to 2026-07-24, as overpass-api.de 504'd): OSM
+    # has NO stop or platform there - only node 1307786297, the
+    # railway=tram_level_crossing where Užvaldes iela crosses the track, which
+    # TRACK_STOPS uses as the position.
     "2": 17,
     "3": 29,
-    # MISMATCH, unexplained: build 16. Užvaldes iela, as route 2.
-    "4": 17,
+    "4": 17,   # as route 2: 17 with Užvaldes iela, 16 from OSM's relations alone
 }
 OPERATOR_COUNTS_SOURCE = (
     "Daugavpils satiksme SIA's published tram timetable "

@@ -19,6 +19,11 @@ different rules rather than one:
   trolley stops would swamp 47 real stations and every ring would overlap its
   neighbours, making "distance from a station" meaningless.
 
+The G1's short branch to the Frankford-Delaware loop is not on its most-used
+shape, so it is read from config.BRANCH_SHAPES (its own stops only), and
+stations closed for works (config.CLOSED_FOR_WORKS: the L's 11th St) are
+written to the excluded list rather than drawn.
+
 Routes M1 (Norristown High Speed Line) and D1/D2 (routes 101/102) are in the
 feed but have zero stops inside Philadelphia - both begin at 69th Street in
 Upper Darby - so they are not in config.ROUTE_GROUPS at all. Regional Rail is
@@ -39,7 +44,10 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.philadelphia.config import (  # noqa: E402
+    BRANCH_SHAPES,
     CITY_BOUNDARY_GEOJSON,
+    CLOSED_FOR_WORKS,
+    CLOSED_REOPEN_METRES,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
     EXCLUDED_STATIONS_CSV,
@@ -87,16 +95,22 @@ def load_gtfs_table(zip_path, filename, usecols=None):
             return pd.read_csv(f, dtype=str, usecols=usecols)
 
 
-def ordered_stop_sequence(route_id, trips, stop_times, stops):
+def ordered_stop_sequence(route_id, trips, stop_times, stops, shape_id=None):
     """One route's real, in-order stop sequence, taken from its single
     most-used trip shape (the mode over trips per shape_id - one direction is
-    enough to get the line's real path; see san_diego/step1_stations.py)."""
+    enough to get the line's real path; see san_diego/step1_stations.py), or
+    from `shape_id` when one is named (a branch, config.BRANCH_SHAPES)."""
     route_trips = trips[trips["route_id"] == route_id]
     if route_trips.empty:
         raise SystemExit(f"Route {route_id!r} has no trips in {GTFS_ZIP.name}. "
                          "SEPTA may have renumbered its routes; check "
                          "config.ROUTE_GROUPS against routes.txt.")
-    shape_id = Counter(route_trips["shape_id"].dropna()).most_common(1)[0][0]
+    if shape_id is None:
+        shape_id = Counter(route_trips["shape_id"].dropna()).most_common(1)[0][0]
+    elif shape_id not in set(route_trips["shape_id"]):
+        raise SystemExit(f"Branch shape {shape_id!r} is not a {route_id} shape in "
+                         f"{GTFS_ZIP.name}. Re-derive config.BRANCH_SHAPES (and "
+                         "LINE_SHAPES) from trips.txt for the re-downloaded feed.")
     trip_id = route_trips[route_trips["shape_id"] == shape_id].iloc[0]["trip_id"]
 
     seq = stop_times[stop_times["trip_id"] == trip_id].copy()
@@ -111,11 +125,40 @@ def ordered_stop_sequence(route_id, trips, stop_times, stops):
     return seq[["canonical", "latitude", "longitude"]].reset_index(drop=True)
 
 
-def select_line_stations(route_id, ordered, interchange_names):
+def branch_stop_sequence(route_id, shape_id, main_seq, trips, stop_times, stops):
+    """A branch's own stops, terminal first, ending at the junction where it
+    joins the route's main sequence - so the trunk the two share is read (and
+    thinned) once, from the main sequence, not twice."""
+    seq = ordered_stop_sequence(route_id, trips, stop_times, stops, shape_id)
+    on_main = seq["canonical"].isin(set(main_seq["canonical"])).tolist()
+    own = [i for i, m in enumerate(on_main) if not m]
+    if not own:
+        raise SystemExit(f"Branch shape {shape_id} of {route_id} has no stop the "
+                         "main shape lacks - the branch is gone or the main shape "
+                         "changed; re-derive config.BRANCH_SHAPES.")
+    contiguous = own == list(range(own[0], own[-1] + 1))
+    at_an_end = own[0] == 0 or own[-1] == len(seq) - 1
+    if not (contiguous and at_an_end) or len(own) == len(seq):
+        raise SystemExit(f"Branch shape {shape_id} of {route_id}: its own stops "
+                         f"are not one run at one end ({own}); this step only "
+                         "reads a branch that leaves the trunk once.")
+    if own[0] == 0:
+        part = seq.iloc[: own[-1] + 2]          # own stops, then the junction
+    else:
+        part = seq.iloc[own[0] - 1:].iloc[::-1]  # reversed: terminal first
+    return part.reset_index(drop=True)
+
+
+def select_line_stations(route_id, ordered, interchange_names,
+                         junction_last=False):
     """The four filters, applied to one street-running route's ordered stops.
 
     Returns (kept, excluded); excluded carries enough to document every cut
     stop - which route, why, and what it was nearest to instead.
+
+    `junction_last`: `ordered` is a branch (branch_stop_sequence) whose last
+    stop is the junction on the main sequence. Only its first stop is a
+    terminal, and the junction is left to the main sequence's own filters.
     """
     n = len(ordered)
     kept_mask = [False] * n
@@ -127,9 +170,10 @@ def select_line_stations(route_id, ordered, interchange_names):
         if ordered.iloc[i]["canonical"] in SUBWAY_STATION_NAMES:
             kept_mask[i] = True
 
-    # Filter 2: this route's own two terminals.
+    # Filter 2: this route's own two terminals (a branch's one).
     kept_mask[0] = True
-    kept_mask[n - 1] = True
+    if not junction_last:
+        kept_mask[n - 1] = True
 
     # Filter 3: ~1 per STATION_SPACING_MILES along the route's real
     # stop-to-stop path, counted fresh from whichever stop was most recently
@@ -166,7 +210,7 @@ def select_line_stations(route_id, ordered, interchange_names):
 
     excluded_rows = []
     for i in range(n):
-        if kept_mask[i]:
+        if kept_mask[i] or (junction_last and i == n - 1):
             continue
         name = ordered.iloc[i]["canonical"]
         excluded_rows.append({
@@ -184,6 +228,34 @@ def select_line_stations(route_id, ordered, interchange_names):
     if not excluded.empty:
         excluded = excluded.drop_duplicates(subset=["station", "line"])
     return kept, excluded
+
+
+def closed_for_works_rows(sequences):
+    """config.CLOSED_FOR_WORKS as excluded_stations.csv rows - and a stop if
+    the feed serves any of them again (by name, or by a stop of its line
+    within CLOSED_REOPEN_METRES), so the reopening is a re-run, not a
+    surprise (Berlin's and Sacramento's guard)."""
+    rows = []
+    for name, entry in CLOSED_FOR_WORKS.items():
+        group = next(g for g, rs in ROUTE_GROUPS.items() if entry["line"] in rs)
+        seq = sequences[(group, entry["line"])]
+        lat, lon = entry["latitude"], entry["longitude"]
+        near = [s for s, la, lo in zip(seq["canonical"], seq["latitude"],
+                                       seq["longitude"])
+                if s == name or haversine_miles(lat, lon, la, lo) * 1609.344
+                < CLOSED_REOPEN_METRES]
+        if near:
+            sys.exit(f"{name!r} is closed for works in config.CLOSED_FOR_WORKS, but "
+                     f"the feed's {entry['line']} now stops at {near} - it has "
+                     "reopened: drop it from CLOSED_FOR_WORKS, re-run, and update "
+                     "the city page.")
+        rows.append({"station": name, "line": entry["line"], "latitude": lat,
+                     "longitude": lon, "reason": entry["reason"],
+                     "nearest_kept_station": "",
+                     "miles_since_nearest_kept": float("nan")})
+        print(f"Closed for works, not drawn: {name} ({entry['line']}) - "
+              f"position from {entry['position_source']}")
+    return pd.DataFrame(rows)
 
 
 def report_near_duplicates(stations):
@@ -237,12 +309,20 @@ def main():
             sequences[(group, route_id)] = ordered_stop_sequence(
                 route_id, trips, stop_times, stops)
 
+    # A branch the most-used shape does not run (the G's Frankford-Delaware
+    # loop): its own stops, terminal first, ending at the junction.
+    branches = {}
+    for (group, route_id), seq in sequences.items():
+        for shape_id in BRANCH_SHAPES.get(route_id, ()):
+            branches[(group, route_id, shape_id)] = branch_stop_sequence(
+                route_id, shape_id, seq, trips, stop_times, stops)
+
     # Gate 3: per line group, before the thinning and the city-limits cut
     # below; an interchange counts once on each line it serves. Prints only,
     # as verify_stations does. config.OPERATOR_STATION_COUNTS says why the T
     # is checked on its tunnel alone and what the G's figure reconciles.
     names_by_group = {}
-    for (group, _), seq in sequences.items():
+    for (group, *_), seq in list(sequences.items()) + list(branches.items()):
         names_by_group.setdefault(group, set()).update(seq["canonical"])
     actual = {group: len(names) for group, names in names_by_group.items()}
     actual["T (Center City tunnel)"] = len(names_by_group["T"] & SUBWAY_STATION_NAMES)
@@ -261,7 +341,7 @@ def main():
     # defeated the thinning. Two branches of one trunk are not an interchange;
     # the tunnel stations they share are kept by filter 1 regardless.
     name_to_groups = {}
-    for (group, _), seq in sequences.items():
+    for (group, *_), seq in list(sequences.items()) + list(branches.items()):
         for name in seq["canonical"].unique():
             name_to_groups.setdefault(name, set()).add(group)
     interchange_names = {n for n, gs in name_to_groups.items() if len(gs) >= 2}
@@ -284,6 +364,18 @@ def main():
             print(f"{group}/{route_id} ({name}): kept all {len(selected)} "
                   f"stations - grade-separated, not thinned")
         kept_frames.append(selected)
+    for (group, route_id, shape_id), seq in branches.items():
+        if group not in THINNED_GROUPS:
+            sys.exit(f"{route_id} branch {shape_id}: branches are only read on "
+                     "the thinned groups; a grade-separated branch needs its own "
+                     "handling here.")
+        selected, excluded = select_line_stations(route_id, seq, interchange_names,
+                                                  junction_last=True)
+        excluded_frames.append(excluded)
+        kept_frames.append(selected)
+        print(f"{group}/{route_id} branch {shape_id} ({seq['canonical'].iloc[0]} - "
+              f"{seq['canonical'].iloc[-1]}): kept {len(selected)} of its "
+              f"{len(seq) - 1} own stops")
 
     all_selected = pd.concat(kept_frames, ignore_index=True)
     stations = (
@@ -327,8 +419,15 @@ def main():
     )[["station", "line", "latitude", "longitude", "reason",
        "nearest_kept_station", "miles_since_nearest_kept"]]
 
+    # Stations closed for works (docs/category_rules.md, "Station scope"): not
+    # in the feed, so not drawn and not ringed, but listed as closed for works
+    # with the operator's reopening date. closed_for_works_rows() has already
+    # stopped the build if the feed serves one again.
+    closed_rows = closed_for_works_rows(sequences)
+
     excluded_frames = [f for f in excluded_frames if not f.empty]
-    excluded = pd.concat(excluded_frames + [out_city_rows], ignore_index=True)
+    excluded = pd.concat(excluded_frames + [out_city_rows, closed_rows],
+                         ignore_index=True)
     # A stop thinned on one branch but kept on another is not excluded at all.
     excluded = excluded[~excluded["station"].isin(set(in_city["station"]))]
     excluded = excluded.drop_duplicates(subset=["station", "line"]).sort_values(

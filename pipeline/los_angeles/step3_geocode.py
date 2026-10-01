@@ -15,6 +15,7 @@ be told apart.
 Run:  python pipeline/los_angeles/step3_geocode.py
 """
 
+import re
 import sys
 from pathlib import Path
 
@@ -35,11 +36,28 @@ from pipeline.los_angeles.config import (  # noqa: E402
     LOS_ANGELES_BBOX,
     PARCEL_RESIDENCE_CSV,
 )
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.residence import (  # noqa: E402
     flag_home_based,
     has_residential_unit,
+    looks_personal,
     report,
 )
+
+# Everything from a dwelling-unit designator on (residence.RESIDENTIAL_UNIT's
+# words): "1522 GORDON STREET APT #1117" -> "1522 GORDON STREET".
+UNIT_TAIL = re.compile(
+    r"[\s,]*\b(?:APT|APARTMENT|UNIT|PH|BSMT|REAR|LOWR|SPC|SPACE|TRLR)\b.*$",
+    re.IGNORECASE)
+
+
+def street_only(address):
+    """The street address without its unit, for a pin that shows it in place
+    of a person's name. Exits rather than show an address with no number."""
+    s = re.sub(r"\s+", " ", UNIT_TAIL.sub("", str(address or ""))).strip()
+    if not re.search(r"\d", s):
+        sys.exit(f"no street number left in {address!r} after removing the unit")
+    return s
 
 
 def main():
@@ -176,10 +194,42 @@ def main():
               f"pipeline/los_angeles/fetch_parcel_residence.py, then re-run "
               f"this step.")
 
+    # --- A person's name at a flat shows the street address -----------------
+    # Kansas City's rule (owner, 2026-10-01): a pin whose displayed name reads
+    # as a person's own AND whose address carries a dwelling-unit designator
+    # keeps its place on the map but shows its street address - without the
+    # unit, which would mark the dot as a home - in place of the name. The
+    # test is scripts/check_personal_exposure.py's own (residence.py's
+    # looks_personal, matched on the upper-cased name as the check matches
+    # it, and the same unit regex), so that check's residential-unit line
+    # reads 0 after this.
+    #
+    # HERE, NOT IN STEP 2: the home filter above tests the displayed name, so
+    # replacing it any earlier would let those homes back onto the map; and
+    # fetch_parcel_residence.py reads the person-like rows of the prefilter
+    # file written above. After both, no storefront count moves.
+    names = out["business_name"].fillna("").astype(str).str.strip()
+    personal = set(names[names.map(looks_personal)].str.upper())
+    out["name_is_address"] = (names.str.upper().isin(personal)
+                              & out["street_address"].map(has_residential_unit))
+    flagged = out["name_is_address"]
+    out.loc[flagged, "business_name"] = out.loc[flagged, "street_address"].map(street_only)
+    print(f"\nPerson-like name at a dwelling unit: {int(out['name_is_address'].sum()):,} "
+          f"show the street address (pins kept)")
+    # Kansas City's second limb - a name that can only be the registrant's
+    # (dba_name blank, so step 2 shows business_name, the registrant) - is NOT
+    # applied: measured only, for the owner's decision.
+    fb = (out["dba_name"].fillna("").str.strip() == "") & ~out["name_is_address"]
+    print(f"  not applied - registrant name shown because dba_name is blank: "
+          f"{int(fb.sum()):,} rows, {int((fb & names.map(looks_personal)).sum()):,} "
+          f"of them person-like")
+
     BUSINESSES_GEOCODED_CSV.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(BUSINESSES_GEOCODED_CSV, index=False)
     print(f"\nWrote {len(out):,} rows to {BUSINESSES_GEOCODED_CSV} "
           f"({(out['geocode_source'] == 'census').sum():,} from the Census geocoder)")
+    emit("storefronts", len(out))
+    emit("name_as_address", int(out["name_is_address"].sum()))
 
 
 if __name__ == "__main__":

@@ -31,10 +31,10 @@
   "premises_food": 148256,
   "premises_personal": 39491,
   "premises_retail": 51663,
-  "stations_all": 531,
+  "stations_all": 535,
   "stations_kept": 308,
   "stations_off_map": 0,
-  "stations_outside": 223,
-  "stop_nodes": 1353,
+  "stations_outside": 227,
+  "stop_nodes": 1357,
   "storefronts": 239410
 }

@@ -9,6 +9,8 @@ kept tram relations, collapsed by name. Trams 2 and 10 run on past the Stadt
 (Schlieren; Opfikon and Kloten): their stops there are drawn with the line but
 not ringed, and are listed with the Gemeinde each lies in. Trams 12 and 20 and
 the Forchbahn are judged and left out (config.NOT_DRAWN). No stop is thinned.
+Tram 10 is taken off Bahnhof Oerlikon, which only its OSM short runs reach
+(config.LINE_NOT_AT).
 """
 import sys
 from pathlib import Path
@@ -24,6 +26,29 @@ from pipeline.zurich import config  # noqa: E402
 from pipeline.zurich.gemeinden import FETCH, gemeinde_polygons  # noqa: E402
 
 
+def drop_lines_not_at(q):
+    """Drop the (line, stop) rows config.LINE_NOT_AT names, with its staleness
+    checks: the line must still list the stop, the stop must keep another
+    line, and no stop position may go with the dropped rows."""
+    for name, lines in config.LINE_NOT_AT.items():
+        hit = (q["stop_name"] == name) & q["line"].isin(lines)
+        listed = set(q.loc[hit, "line"])
+        if listed != set(lines):
+            sys.exit(f"LINE_NOT_AT {name!r}: OSM no longer puts line(s) "
+                     f"{sorted(set(lines) - listed)} there - remove the entry")
+        rest = q[(q["stop_name"] == name) & ~hit]
+        if rest.empty:
+            sys.exit(f"LINE_NOT_AT {name!r}: no other line serves it - a station "
+                     f"removal, not a line correction")
+        lost = set(q.loc[hit, "node"]) - set(rest["node"])
+        if lost:
+            sys.exit(f"LINE_NOT_AT {name!r}: stop position(s) {sorted(lost)} are only "
+                     f"on the dropped line(s) - the station would move; re-read OSM")
+        q = q[~hit]
+        print(f"    line(s) {'/'.join(lines)} taken off {name!r} (config.LINE_NOT_AT)")
+    return q.reset_index(drop=True)
+
+
 def main():
     config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
@@ -33,6 +58,7 @@ def main():
     q = osm_tram.stop_rows(els, routes=config.ROUTES, refs=config.LINE_REFS,
                            operator=config.OPERATOR, not_drawn=config.NOT_DRAWN,
                            station_add=config.STATION_ADD, name_aliases=config.NAME_ALIASES)
+    q = drop_lines_not_at(q)
     platforms, st = osm_tram.collapse(q, refs=config.LINE_REFS,
                                       crs_projected=config.CRS_PROJECTED,
                                       max_spread_m=config.MAX_SPREAD_M)
@@ -43,14 +69,10 @@ def main():
         expected_per_line=config.OPERATOR_STATION_COUNTS,
         actual_per_line={ref: int(st["lines"].str.split("/").apply(
             lambda ls: ref in ls).sum()) for ref in config.LINE_REFS})
-    # Gate 3 stops a tram step 1 (the tram-city skill). COMMENTED OUT, 2026-10-01:
-    # tram 10 carries Bahnhof Oerlikon from OSM's short-run relations, which
-    # ZVV's line 10 does not list (config); a fix is a line change the owner
-    # calls. Restore the exit when the fix lands.
+    # Gate 3 stops a tram step 1 (the tram-city skill).
     if res["per_line_mismatches"]:
-        print("  gate 3 MISMATCH, not stopping (see config): " + "; ".join(
+        sys.exit("gate 3: the build disagrees with ZVV's own stop counts - " + "; ".join(
             f"{ref}: build {b}, ZVV {o}" for ref, (b, o) in res["per_line_mismatches"].items()))
-        # sys.exit("gate 3: the build disagrees with ZVV's own stop counts - " + ...)
 
     inside, outside = osm_tram.split_by_places(st, gem, keep={config.BFS_ZURICH})
     print(f"\n  {len(st)} tram stops -> {len(inside)} in the Stadt Zürich, "

@@ -3,7 +3,7 @@
   "bag_deduplicated": 561,
   "bag_units_in_use": 6560,
   "bag_units_kept": 4632,
-  "median_gap_m": 324,
+  "median_gap_m": 326,
   "names_person_shaped": 643,
   "names_withheld": 5,
   "outside_gemeente": 0,
@@ -15,10 +15,10 @@
   "permits_retyped": 39,
   "permits_same_address": 42,
   "permits_type_out": 331,
-  "shared_name_stops": 12,
-  "stations_collapsed": 230,
+  "shared_name_stops": 14,
+  "stations_collapsed": 231,
   "stations_excluded": 64,
-  "stations_in_scope": 166,
-  "stop_positions": 489,
+  "stations_in_scope": 167,
+  "stop_positions": 491,
   "storefronts": 6213
 }

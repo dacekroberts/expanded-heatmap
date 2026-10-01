@@ -822,13 +822,14 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
-- [ ] **San Francisco and Los Angeles: the apartment population (owner call,
-  2026-10-01).** Their privacy verdicts are `pending` in
-  `docs/privacy_verdicts.md`: a person-like name at a residential unit on 61
-  (0.52%) and 331 (2.38%) pins, the multi-family population left open on
-  2026-09-21. Recommended: Kansas City's rule (the street address shown
-  instead of a name that reads as a person's own at a residential unit), with
-  a drift check and a redeploy for each; then set both rows to `publish`.
+- [ ] **Los Angeles: a registrant's own name where no trade name was given
+  (owner call, 2026-10-01).** Kansas City's rule now shows the street address
+  for a person-like name at a dwelling unit in San Francisco and Los Angeles
+  (0 left by the exposure check). Not applied: Los Angeles rows whose trade
+  name is blank show the registrant's name - 23,941 rows, 4,788 reading as a
+  person (about 911 pins). Kansas City's own rule (Houston's sole-owner rule)
+  would show the address for those; its person test misfires on Los Angeles'
+  names, so it would need the exposure check's test.
 
 - [ ] ⏰ **Zurich: rebuild after 2026-12-12** (owner, 2026-09-30, call C1): VBZ's
   temporary construction trams 50 and 51 are drawn until then; when they stop,
@@ -856,33 +857,11 @@ every key, account and letter:
   NS at Den Haag, Göteborg's and Odense's regional trains are missing), the
   ring sizes at :118 and :135, and Florence's not-drawn list (T2.2). Rewrite
   them by category rather than as claims about every city.
-- [ ] **Gate 3's station calls (owner; back-fill done 2026-10-01, DECISIONS
-  "Gate 3 back-filled in 25 cities").** Each is a station fix with a drift
-  check and a redeploy; re-enable the city's step-1 exit with it where it is
-  commented out:
-  - **New Orleans**: lines 47 and 48 stop short of lower Canal - Canal at N.
-    Rampart, Bourbon/Carondelet, Chartres/Camp, N./S. Peters and the Canal St.
-    Ferry Terminal are on RTA's lists and not drawn - and OSM routes 47 up
-    Loyola, which RTA's 47 does not serve; line 12 lacks S. Carrollton at
-    Sycamore.
-  - **Philadelphia**: the G's Frankford-Delaware branch (Richmond-Frankford,
-    Frankford-Delaware) - step 1 reads only the most-used shape. Also: L's
-    11th St, closed for works to 2027-08-30, is not drawn and not disclosed
-    (Sacramento's closed-station precedent).
-  - **Daugavpils**: Užvaldes iela, on routes 2 and 4 in the operator's
-    timetable, is not in OSM.
-  - **Den Haag**: tram 11's Groot Hertoginnelaan (OSM has the stop positions on
-    no relation).
-  - **Seoul**: the Gyeongui-Jungang line ends at Munsan and Yongmun in OSM;
-    Uncheon, Imjingang, Dorasan and Jipyeong are beyond (all outside Seoul: the
-    line's drawn extent and excluded_stations.csv only).
-  - **Labels only, no station moves**: Göteborg's Korsvägen (lines 4, 6, 8, 13)
-    and Drottningtorget (line 2) lack those lines in OSM's relations; Zurich's
-    Bahnhof Oerlikon carries tram 10 from OSM's short-run relations, which
-    ZVV's 10 does not list.
-  - **Extents to confirm**: Edmonton's Metro Line is drawn to Century Park,
-    where only weekend trips run (ETS publishes NAIT to Health Sciences);
-    Tucson's 5E/5W read as one stop counted per direction.
+- [ ] ⏰ **Philadelphia: 11th St back on 2027-08-30** (SEPTA's release of
+  2026-08-06). Closed for works since 2026-09-05 and listed in
+  `excluded_stations.csv` (`config.CLOSED_FOR_WORKS`; step 1 stops if the feed
+  serves it again). When SEPTA reopens it: clear the entry, re-run the city,
+  and drop the page's 11th St sentence.
 
 - [ ] **Sacramento's Green Line: add it back when SacRT reopens it (due by
   mid-October 2026; check from 2026-10-15).** Suspended since 2025-06-16 for

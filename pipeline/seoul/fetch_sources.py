@@ -1,7 +1,7 @@
 """Download everything Seoul's pipeline reads. NOT a step: drift_check.py
 never runs this file, and every step exits naming it when its cache is missing.
 
-    python pipeline/seoul/fetch_sources.py [registers|osm|all] [--copy-from <dir>] [--resume]
+    python pipeline/seoul/fetch_sources.py [registers|osm|osm-extra|all] [--copy-from <dir>] [--resume]
 
   * seventeen citywide permit registers from data.seoul.go.kr (cp949 CSV);
   * OpenStreetMap: the rail route relations around Seoul, and Seoul's boundary.
@@ -140,6 +140,19 @@ def fetch_osm():
     bnd_q = (f'[out:json][timeout:240];'
              f'relation({config.BOUNDARY_RELATION})["name"="{config.BOUNDARY_NAME}"];out geom;')
     overpass(bnd_q, config.BOUNDARY_OSM_JSON, "osm_boundary")
+    fetch_osm_extra()
+
+
+def fetch_osm_extra():
+    """The drawn lines' relations the box query does not return (config.
+    EXTRA_RELATIONS: the Gyeongui-Jungang Line past Munsan and Yongmun), by id,
+    with their geometry, stop nodes and those stations' station objects."""
+    ids = ",".join(str(i) for ids in config.EXTRA_RELATIONS.values() for i in ids)
+    q = (f'[out:json][timeout:240];relation(id:{ids})->.r;.r out geom;'
+         f'node(r.r)->.n;.n out body;'
+         f'(node(around.n:300)["railway"="station"];'
+         f'way(around.n:300)["railway"="station"];);out tags center;')
+    overpass(q, config.EXTRA_OSM_JSON, "osm_extra_relations")
 
 
 def overpass(query, dest, key):
@@ -187,3 +200,5 @@ if __name__ == "__main__":
         fetch_registers(copy_from, resume)
     if what in ("osm", "all"):
         fetch_osm()
+    if what == "osm-extra":     # only the extra relations, leaving the rest cached
+        fetch_osm_extra()

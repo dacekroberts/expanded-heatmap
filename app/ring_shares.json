@@ -312,7 +312,7 @@
  "stockholm": {
   "in_ring": 4666,
   "all": 5218,
-  "map_blob": "8e249f1dc0bb9261835c7ed999c02e9ef6a40ea4"
+  "map_blob": "a3304191e76db45b5059a1108c8be98406f6b38d"
  },
  "bucharest": {
   "in_ring": 11242,
@@ -400,7 +400,7 @@
   "map_blob": "f4a14bfa6837a931a9a0e321bdf6083e520ecbaa"
  },
  "new_orleans": {
-  "in_ring": 2131,
+  "in_ring": 2140,
   "all": 4689,
   "map_blob": "a3fcac2e92c63386eeb929b49e0aef2f18cbdab8"
  },
@@ -412,7 +412,7 @@
  "goteborg": {
   "in_ring": 2256,
   "all": 2989,
-  "map_blob": "f617cf8826f24c1c6d46f1bd0517b3d2a6e59458"
+  "map_blob": "bb40707a874043de19860e129a2aa76a7f02969f"
  },
  "den_haag": {
   "in_ring": 5781,

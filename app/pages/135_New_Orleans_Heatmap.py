@@ -51,8 +51,8 @@ funeral services and the catch-all "other personal services". **The map shows
 the business name the licence gives, never the owner's**; where a licence gives
 no business name, or the name is only a person's, it shows the street address.
 
-Personal services are thin on this map: 218 of the pins near stations are
-salons, barbers and the like, against 935 shops and 978 food businesses, and the
+Personal services are thin on this map: 219 of the pins near stations are
+salons, barbers and the like, against 941 shops and 980 food businesses, and the
 City's catch-all "Personal Services, Other" (249 licences) is left out because
 it does not say what a business does.
 

@@ -79,7 +79,7 @@ map. About one Den Haag shop unit in twenty-five was registered as vacant at
 the start of 2025, by the national statistics office's count, and no open
 source says which.
 
-**Tram stops sit closer together than metro stations**, a median of 322 m
+**Tram stops sit closer together than metro stations**, a median of 326 m
 here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
 nine storefronts in ten sit within a ring.**
 

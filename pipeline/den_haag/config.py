@@ -130,7 +130,17 @@ NOT_DRAWN = {
     19439817: "9S Scheveningen Noord - Hollands Spoor: a short working of tram 9 (as above)",
     3009652: "RET's Rotterdam tram 8: another city's network, inside the fetch box only",
 }
-STATION_ADD = {}
+# Tram 11's Groot Hertoginnelaan (HTM stop NL:S:32001109, between Laan van
+# Meerdervoort and Houtrust, both directions in HTM's timetable): OSM has its two
+# stop positions (tagged stop_position + tram_stop, source=HTM) on no route
+# relation, so they are added for line 11 by node (fixed 2026-10-01, owner:
+# "implement the station fixes"). It is NOT tram 17's Groot Hertoginnelaan
+# (NL:S:32001114, about 480 m away at the nearest pair): SPLIT_LINK_M keeps the
+# two apart and labels them "(line 11)" and "(line 17)".
+STATION_ADD = {
+    3788117787: ("11", "Groot Hertoginnelaan"),
+    3788124865: ("11", "Groot Hertoginnelaan"),
+}
 # ONE INTERCHANGE, TWO NAMES: RandstadRail 3, 4 and 34 call it "Leidschenveen" and
 # tram 19 "Leidschenveen Centrum", 10 m apart (2026-09-30) - merged by explicit
 # alias, as Houston's couplet and New Orleans's Canal Street pairs were (Oslo's
@@ -142,7 +152,8 @@ NAME_ALIASES = {"Leidschenveen Centrum": "Leidschenveen"}
 # 2026-09-30): Oosteinde (16 in Wateringen, 19 in Voorburg, 8.8 km apart),
 # Beresteinlaan (4 / 9 and 10, 1.0 km), Fahrenheitstraat (2 / 3, 12 and 34,
 # 905 m), Weimarstraat (11 / 12, 568 m), Loosduinseweg (11 / 12, 520 m) and
-# Duinstraat (1 and 10 / 11, 351 m). Name collapse alone would average each
+# Duinstraat (1 and 10 / 11, 351 m); a seventh since 2026-10-01, Groot
+# Hertoginnelaan (11, added by node / 17, about 480 m). Name collapse alone would average each
 # pair into one point between them. So step 1 first groups a name's stop
 # positions by distance (single linkage at SPLIT_LINK_M) and, where a name falls
 # into several groups, labels each with the lines that serve it
@@ -160,19 +171,14 @@ SPACING_MIN_M = 100.0
 # Gate 3: HTM's own stops per line - the distinct stops its timetable's
 # journeys call at on Thursday 2026-10-01, from the endpoint htm.nl's line
 # pages read - the whole line, before the gemeente split. A tram step 1 stops
-# on a mismatch, but tram 11 disagrees, so that stop is commented out in step 1
-# until the cleanup session takes it to the owner. Two stops carry other names
+# on a mismatch. Two stops carry other names
 # in HTM's timetable and count the same: Delft's "Noordeinde" on 1 and 19 is
 # OSM's "Nieuwe Plantage", and tram 12's terminus "Markenseplein" is OSM's
 # "Zuiderstrand", each at the same place in the sequence.
 OPERATOR_STATION_COUNTS = {
     "1": 37, "2": 29, "3": 40, "4": 33, "6": 27, "9": 27, "10": 33,
-    # MISMATCH (cause found, not fixed): build 17. HTM's tram 11 calls at Groot
-    # Hertoginnelaan (stop NL:S:32001109) between Laan van Meerdervoort and
-    # Houtrust, both directions. OSM has its stop positions (nodes 3788117787,
-    # 3788124865) on no relation, so the build neither draws nor rings it. It is
-    # NOT tram 17's Groot Hertoginnelaan (NL:S:32001114, about 500 m away): a
-    # third shared name for SPLIT_LINK_M once the stop is added.
+    # 18 with Groot Hertoginnelaan added by node (STATION_ADD; OSM's line-11
+    # relations gave the build 17; fixed 2026-10-01).
     "11": 18,
     "12": 19, "15": 18, "16": 23, "17": 33, "19": 18, "34": 31,
 }

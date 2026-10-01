@@ -170,18 +170,39 @@ LINE_COLOURS = {
 # problem Miami's branching Metrorail had. Its southern half shares track with
 # the Capital Line, which is drawn too; overlapping trunks are normal (Calgary's
 # 7 Avenue mall is the same) and the labels sit at each line's own tail.
+#
+# SUPERSEDED - the owner's call (2026-10-01): follow ETS's PUBLISHED line.
+# ETS publishes the Metro Line as NAIT/Blatchford Market - Health Sciences/
+# Jubilee, 10 stations (edmonton.ca/ets/lrt-station-locations); only weekend
+# trips (the Saturday and Sunday `022R-38-North`/`39-South`/`40-South`, 308 of
+# 1,920 in feed 20260911-20261128) run on to Century Park. So the Metro Line
+# is drawn NAIT - Health Sciences, from `022R-27-North` (621 weekday trips,
+# 224 points, 53.5180 to 53.5673): the published extent, and the north-bound
+# shape, which reaches the NAIT platforms (53.5669) where the mode
+# (`022R-82-South`, 714 trips) stops 55 m short of them at 53.5664. Both run
+# into the Health Sciences tail track (53.5180), 250 m past the station, under
+# the Capital Line. McKernan/Belgravia, South Campus, Southgate and Century
+# Park stay on the map as Capital Line stations (LINES_LISTED_FROM_DRAWN_SHAPE).
 LINE_SHAPES = {
     "021R": "021R-68-North",   # Capital,  980 trips, 314 pts, full extent
-    "022R": "022R-38-North",   # Metro,    156 trips, 358 pts - EXTENT, not mode
+    "022R": "022R-27-North",   # Metro,    621 trips, 224 pts - ETS's published
+                               # extent, NAIT - Health Sciences (owner, 2026-10-01)
     "023R": "023R-43-South",   # Valley, 1,340 trips, 308 pts, full extent
 }
+# Lines whose station list is the stops of their DRAWN shape's trips, not of
+# every trip on the route (the owner's call above): a station a line's
+# weekend trips alone reach is not listed on it. Step 1 prints what this
+# removes and stops if a removed station would be left on no line.
+LINES_LISTED_FROM_DRAWN_SHAPE = ("022R",)
 
 # Which end of each line carries its label; None = automatic (the end farthest
 # from the other lines). EMPTY, and that was checked rather than assumed.
 #
 # The Metro Line's automatic label lands at its NAIT end, in the busiest part
 # of the map, so the alternative was rendered and measured in the browser
-# instead of judged by eye. Total label-on-cluster overlap, at 1000x660:
+# instead of judged by eye (2026-09-21, when the line was drawn to Century
+# Park; since 2026-10-01 its other end is Health Sciences, on the Capital
+# Line's track). Total label-on-cluster overlap, at 1000x660:
 #     automatic (NAIT, north)        ~905 px2, worst single 23x17
 #     forced "start" (Century Park)  2,536 px2, worst single 34x21 - it lands
 #                                    on the Century Park cluster stack
@@ -228,15 +249,14 @@ IN_CITY_STATIONS_EXPECTED = 30
 OPERATOR_STATION_COUNTS = {
     "021R": 15,   # Capital: Clareview - Century Park
     # Metro: ETS lists 10, "from NAIT / Blatchford Market in the north to
-    # Health Sciences / Jubilee in the south". The build counts 14 because
-    # ETS's own feed (20260911-20261128) runs 308 of its 1,920 Metro trips,
-    # all on Saturday and Sunday service_ids, on past Health Sciences to
-    # Century Park, so McKernan/Belgravia, South Campus/Fort Edmonton Park,
-    # Southgate and Century Park are Metro stops too - and step 3 draws the
-    # Metro Line to Century Park on purpose (LINE_SHAPES, "EXTENT, not
-    # mode"). All four are Capital Line stations, so the station set is the
-    # same either way. 10 + 4 = 14.
-    "022R": 14,
+    # Health Sciences / Jubilee in the south". Until 2026-10-01 the build
+    # counted 14: ETS's own feed (20260911-20261128) runs 308 of its 1,920
+    # Metro trips, all on Saturday and Sunday service_ids, on to Century
+    # Park. The owner's call (2026-10-01) follows ETS's published line, so
+    # the four stations past Health Sciences are listed and drawn as Capital
+    # Line stations only (LINE_SHAPES, LINES_LISTED_FROM_DRAWN_SHAPE). The
+    # station set is unchanged.
+    "022R": 10,
     "023R": 12,   # Valley Line Southeast: 102 Street - Mill Woods (11 stops
                   # and the elevated Davies station)
 }

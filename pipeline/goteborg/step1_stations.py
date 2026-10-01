@@ -10,6 +10,8 @@ Mölndal: their stops there are drawn with the line but not ringed, and are
 listed with the kommun each lies in (owner, call 21) - provided each line keeps
 at least half its stops in the city (the stub test, re-run here). No stop is
 thinned. Each line's drawn colour is checked against the colours OSM records.
+Lines Västtrafik's timetable serves at a stop their OSM relations leave out
+are added to that stop's label (config.LINE_ADD).
 """
 import sys
 from pathlib import Path
@@ -36,6 +38,29 @@ def check_colours(els):
                      f"- re-read OSM's colours")
 
 
+def add_lines(q):
+    """Put config.LINE_ADD's lines on stops already drawn from other lines.
+
+    One row per (line, existing stop position), so the collapse lists the line
+    and the station keeps its position. Stops if the name is not on any kept
+    relation, or if the line's own relations now carry it (a stale entry)."""
+    for name, lines in config.LINE_ADD.items():
+        at = q[q["stop_name"] == name].drop_duplicates("node")
+        if at.empty:
+            sys.exit(f"LINE_ADD {name!r}: no kept relation has a stop of that name - re-read OSM")
+        for ref in lines:
+            if ref not in config.LINE_REFS:
+                sys.exit(f"LINE_ADD {name!r}: {ref!r} is not a kept line")
+            if ((q["line"] == ref) & (q["stop_name"] == name)).any():
+                sys.exit(f"LINE_ADD {name!r}: line {ref}'s own relations now carry it - "
+                         f"OSM filled the gap; remove the entry")
+        q = pd.concat([q] + [at.assign(line=ref, source="line_add") for ref in lines],
+                      ignore_index=True)
+        print(f"    line(s) {'/'.join(lines)} added to {name!r} at its "
+              f"{len(at)} stop position(s) (config.LINE_ADD)")
+    return q
+
+
 def main():
     config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
@@ -46,6 +71,7 @@ def main():
     q = osm_tram.stop_rows(els, routes=(config.ROUTE,), refs=config.LINE_REFS,
                            operator=config.OPERATOR, not_drawn=config.NOT_DRAWN,
                            station_add=config.STATION_ADD, name_aliases=config.NAME_ALIASES)
+    q = add_lines(q)
     platforms, st = osm_tram.collapse(q, refs=config.LINE_REFS,
                                       crs_projected=config.CRS_PROJECTED)
     print()
@@ -55,15 +81,11 @@ def main():
         expected_per_line=config.OPERATOR_STATION_COUNTS,
         actual_per_line={ref: int(st["lines"].str.split("/").apply(
             lambda ls: ref in ls).sum()) for ref in config.LINE_REFS})
-    # Gate 3 stops a tram step 1 (the tram-city skill). COMMENTED OUT, 2026-10-01:
-    # lines 2, 4, 6, 8 and 13 each lack one stop OSM's relations leave out
-    # (config.OPERATOR_STATION_COUNTS); a fix is a line change the owner calls.
-    # Restore the exit when the fix lands.
+    # Gate 3 stops a tram step 1 (the tram-city skill).
     if res["per_line_mismatches"]:
-        print("  gate 3 MISMATCH, not stopping (see config): " + "; ".join(
+        sys.exit("gate 3: the build disagrees with Västtrafik's own stop counts - " + "; ".join(
             f"{ref}: build {b}, Västtrafik {o}"
             for ref, (b, o) in res["per_line_mismatches"].items()))
-        # sys.exit("gate 3: the build disagrees with Västtrafik's own stop counts - " + ...)
 
     inside, outside = osm_tram.split_by_places(st, kom, keep={config.GOTEBORG_SCB})
     print(f"\n  {len(st)} tram stops -> {len(inside)} in Göteborgs Stad, "

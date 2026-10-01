@@ -23,9 +23,11 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.residence import (  # noqa: E402
     flag_home_based,
     has_residential_unit,
+    looks_personal,
     report,
 )
 from pipeline.san_francisco.config import (  # noqa: E402
@@ -48,6 +50,20 @@ POINT_PATTERN = re.compile(r"POINT \(([-\d.]+) ([-\d.]+)\)")
 # the_geom arrives as a string in the roll's CSV export; pull the pair out
 # rather than depending on which of WKT or GeoJSON Socrata emits.
 COORD_PATTERN = re.compile(r"(-?\d+\.\d+)[ ,]+(-?\d+\.\d+)")
+# Everything from a dwelling-unit designator on (residence.RESIDENTIAL_UNIT's
+# words): "909 Geary St Apt 321" -> "909 Geary St".
+UNIT_TAIL = re.compile(
+    r"[\s,]*\b(?:APT|APARTMENT|UNIT|PH|BSMT|REAR|LOWR|SPC|SPACE|TRLR)\b.*$",
+    re.IGNORECASE)
+
+
+def street_only(address):
+    """The street address without its unit, for a pin that shows it in place
+    of a person's name. Exits rather than show an address with no number."""
+    s = re.sub(r"\s+", " ", UNIT_TAIL.sub("", str(address or ""))).strip()
+    if not re.search(r"\d", s):
+        sys.exit(f"no street number left in {address!r} after removing the unit")
+    return s
 
 
 def parcel_points():
@@ -151,6 +167,7 @@ def main():
     if blank_name.any():
         print(f"Filling {blank_name.sum()} blank dba_name(s) from ownership_name")
         df.loc[blank_name, "business_name"] = df.loc[blank_name, "ownership_name"]
+    df["_owner_fallback"] = blank_name
 
     # --- Home-based businesses, against the Assessor's own classification ----
     # A scope filter first: a caterer or hairdresser working from the house
@@ -224,12 +241,44 @@ def main():
               f"home-business filter did NOT run. Run "
               f"pipeline/san_francisco/fetch_sources.py")
 
+    # --- A person's name at a flat shows the street address -----------------
+    # Kansas City's rule (owner, 2026-10-01): a pin whose displayed name reads
+    # as a person's own AND whose address carries a dwelling-unit designator
+    # keeps its place on the map but shows its street address - without the
+    # unit, which would mark the dot as a home - in place of the name. The
+    # test is scripts/check_personal_exposure.py's own (residence.py's
+    # looks_personal, matched on the upper-cased name as the check matches
+    # it, and the same unit regex), so that check's residential-unit line
+    # reads 0 after this. Rule 2 above already took the pins of this shape on
+    # a residential building; these are the rest (a unit designator on a
+    # building the roll does not call residential, or no parcel match).
+    # Applied after the home filter, which tests the name, so no storefront
+    # count moves.
+    names = df["business_name"].fillna("").astype(str).str.strip()
+    personal = set(names[names.map(looks_personal)].str.upper())
+    df["name_is_address"] = (names.str.upper().isin(personal)
+                             & df["full_business_address"].map(has_residential_unit))
+    flagged = df["name_is_address"]
+    df.loc[flagged, "business_name"] = df.loc[flagged, "full_business_address"].map(street_only)
+    print(f"Person-like name at a dwelling unit: {int(df['name_is_address'].sum()):,} "
+          f"show the street address (pins kept)")
+    # Kansas City's second limb - a name that can only be the registrant's
+    # (dba_name blank, ownership_name shown) - is NOT applied: measured only,
+    # for the owner's decision.
+    fb = df["_owner_fallback"] & ~df["name_is_address"]
+    print(f"  not applied - ownership_name shown because dba_name is blank: "
+          f"{int(fb.sum()):,} rows, {int((fb & names.map(looks_personal)).sum()):,} "
+          f"of them person-like")
+    df = df.drop(columns="_owner_fallback")
+
     df = df.reset_index(drop=True)
     df["record_id"] = df.index.astype(str)
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(BUSINESSES_CLEAN_CSV, index=False)
     print(f"\nWrote {len(df):,} rows to {BUSINESSES_CLEAN_CSV}")
+    emit("storefronts", len(df))
+    emit("name_as_address", int(df["name_is_address"].sum()))
 
 
 if __name__ == "__main__":

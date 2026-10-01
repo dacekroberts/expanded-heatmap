@@ -51,6 +51,8 @@ Concentric ring boundaries and NAICS-geocoded storefronts are toggleable
 via the layer control in the top left. When enabled, business density
 will display as numbered circles summing areas when zoomed out. Zooming
 in will show individual dots; hover over those to see further details.
+Where a business is registered under a person's name alone at an apartment
+or other dwelling unit, its dot shows the street address instead.
 
 Top right: a **Cities** menu and a **Global View** button for moving
 between maps, and a light/dark switch. The map opens in whichever mode

@@ -64,6 +64,8 @@ from pipeline.edmonton.config import (  # noqa: E402
     GTFS_ZIP,
     IN_CITY_STATIONS_EXPECTED,
     LINE_NAMES,
+    LINE_SHAPES,
+    LINES_LISTED_FROM_DRAWN_SHAPE,
     NON_REVENUE_STOPS_CSV,
     NON_REVENUE_STOPS_EXPECTED,
     OPERATOR_STATION_COUNTS,
@@ -227,6 +229,25 @@ def main():
     stop_to_parent = dict(zip(rs["stop_id"], rs["parent_station"]))
     sl = served.assign(parent=served["stop_id"].map(stop_to_parent),
                        line=served["trip_id"].map(trip_to_route).map(LINE_NAMES))
+    # A line listed from its DRAWN shape (the owner's call, 2026-10-01: the
+    # Metro Line is ETS's published NAIT - Health Sciences, not the weekend
+    # trips' Century Park extent): only that shape's trips put a station on it.
+    trip_to_shape = dict(zip(keep_trips["trip_id"], keep_trips["shape_id"]))
+    for rid in LINES_LISTED_FROM_DRAWN_SHAPE:
+        on_route = sl["trip_id"].map(trip_to_route) == rid
+        off_shape = sl["trip_id"].map(trip_to_shape) != LINE_SHAPES[rid]
+        before = set(sl.loc[on_route, "parent"].dropna())
+        after = set(sl.loc[on_route & ~off_shape, "parent"].dropna())
+        sl = sl[~(on_route & off_shape)]
+        dropped = before - after
+        names = dict(zip(stations["parent_station"], stations["station"]))
+        print(f"\n{LINE_NAMES[rid]} listed from its drawn shape {LINE_SHAPES[rid]}: "
+              f"{len(after)} stations; not listed on it (other trips only): "
+              + (", ".join(sorted(names.get(p, p) for p in dropped)) or "none"))
+        orphans = dropped - set(sl["parent"].dropna())
+        if orphans:
+            sys.exit(f"  {sorted(names.get(p, p) for p in orphans)} would be left "
+                     f"on no line - the drawn shape no longer covers them.")
     stations["lines"] = stations["parent_station"].map(
         sl.dropna(subset=["parent"]).groupby("parent")["line"].apply(
             lambda s: ", ".join(sorted(set(s.dropna())))))
