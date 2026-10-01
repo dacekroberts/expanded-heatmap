@@ -1,0 +1,56 @@
+{
+  "written_utc": "2026-10-01T00:59:42+00:00",
+  "as_of_date": "2026-09-30",
+  "register": {
+    "url": "https://data.texas.gov/resource/jrea-zgmq.json",
+    "where": "upper(outlet_city)='DALLAS' AND outlet_inside_outside_city_limits_indicator='Y'",
+    "fields": [
+      ":id",
+      "outlet_number",
+      "outlet_name",
+      "outlet_address",
+      "outlet_city",
+      "outlet_state",
+      "outlet_zip_code",
+      "outlet_county_code",
+      "outlet_naics_code",
+      "outlet_inside_outside_city_limits_indicator",
+      "outlet_permit_issue_date",
+      "outlet_first_sales_date",
+      "taxpayer_organization_type"
+    ]
+  },
+  "address_points": {
+    "url": "https://services2.arcgis.com/rwnOSbfKSwyTBcwN/arcgis/rest/services/AddressPoints/FeatureServer/0/query",
+    "fields": [
+      "OBJECTID",
+      "HOUSENUMBER",
+      "HOUSESUFFIX",
+      "FULLSTREETNAME",
+      "ZIPCODE",
+      "ADDRESSTYPE"
+    ]
+  },
+  "boundary": {
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
+    "query": {
+      "where": "GEOID='4819000'",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "f": "geojson"
+    }
+  },
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    32.62,
+    -96.98,
+    33.02,
+    -96.55
+  ],
+  "files_utc": {
+    "sales_tax_permits_dallas.csv": "2026-10-01T00:57:52+00:00",
+    "address_points.csv": "2026-10-01T00:59:16+00:00",
+    "city_boundary_tiger.geojson": "2026-10-01T00:59:17+00:00",
+    "osm_rail.json": "2026-10-01T00:59:42+00:00"
+  }
+}

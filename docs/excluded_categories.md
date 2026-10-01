@@ -267,6 +267,36 @@ a name.
 **Stations**: all 40 METRORail stations are inside the city, counting
 Central Station's Capitol / Rusk pair as one. None is left out.
 
+### Dallas — Houston's register and rules: non-store sellers by code, homes, and a person's permit shown by address
+
+**Left out of the Comptroller's permits**, counted on its 44,760 Dallas
+outlets flagged inside city limits, by NAICS code (the shared carve-outs,
+`pipeline/taxonomies/naics.py`):
+- non-store retailers (454): 4,350, of them online shops 3,123, direct
+  sellers 958 and vending-machine operators 255;
+- food service contractors (233), caterers (321) and mobile food (487);
+- parking (256), funeral services (23) and "all other personal services" (218).
+
+**Also left out**: 97 outlets whose first sales date is after the fetch date
+(not trading yet); 771 at an apartment or trailer address, as homes; and 21
+with no house number (a mall or building name alone). Houston's further rule,
+a person's permit at an address point the City types Residential, cannot run
+here: the City's Address Points carry type codes their publisher does not
+document, so none is read as Residential.
+
+**Not placed**: 394 addresses neither the City's Address Points nor the Census
+geocoder could match (2.3%), and 770 placed points with a Dallas postal
+address that lie outside the city limits.
+
+**Shown, but not named**: 3,252 storefronts held by a person (a sole owner or
+a partnership of individuals) show their street address instead of a name.
+
+**Stations**: 44 DART stations inside the city; 20 beyond its limits (in
+Plano, Richardson, Garland, Rowlett, Carrollton, Farmers Branch and Irving, and
+at DFW Airport) are left out, the lines drawn to their ends. The Dallas
+Streetcar and the M-Line trolley are not drawn (owner, 2026-09-30); the Silver
+Line and the TRE are commuter rail.
+
 ### San Diego - its own codes for massage parlours, cottage kitchens and kiosks
 
 San Diego's registry extends NAICS with codes of its own, and four are left
