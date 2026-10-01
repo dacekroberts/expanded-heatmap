@@ -108,7 +108,8 @@ def fetch_address_points():
             dest.write_bytes(r.content)   # as served: no CRLF translation
             print(f"  address points: {rows:,} rows via {name}")
             return name
-        time.sleep(30 * (attempt + 1))
+        # At least the owner's 60 s after a 504 or 429 (CLAUDE.md, 2026-09-30).
+        time.sleep(osm.OVERLOAD_WAIT_S * (attempt + 1))
     sys.exit("  every Overpass mirror failed for the address points: "
              + "; ".join(problems))
 

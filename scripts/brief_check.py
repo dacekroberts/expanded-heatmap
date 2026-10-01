@@ -52,6 +52,7 @@ import json
 import math
 import re
 import sys
+import time
 import zipfile
 from pathlib import Path
 
@@ -705,6 +706,29 @@ OVERPASS_HOSTS = (
     "https://overpass.kumi.systems/api/interpreter",
 )
 
+# The owner's rule (CLAUDE.md, 2026-09-30): after a 504 or 429, wait at least
+# 60 s before asking that host again, never in a tight loop. This script asks
+# a mirror more than once - the second-mirror confirmation in
+# `osm_route_refs`, and every OSM claim after the first - so it remembers when
+# each host last refused. Same rule as pipeline/osm.py, copied for the reason
+# `_overpass` gives.
+OVERLOAD_WAIT_S = 60
+_OVERLOADED_AT = {}
+
+
+class MirrorsOverloaded(RuntimeError):
+    """Every mirror refused with a 504, a 429 or a timeout. A fact about
+    Overpass at this moment, never about the brief - the runner reports it as
+    RETRY, not FAIL."""
+
+
+def _is_overload(exc):
+    response = getattr(exc, "response", None)
+    if response is not None and response.status_code in (429, 504):
+        return True
+    return (isinstance(exc, (requests.Timeout, TimeoutError))
+            or "timed out" in str(exc).lower())
+
 
 def _overpass_once(host, query, timeout):
     """One mirror. Returns elements, or raises with why this host is no good.
@@ -759,17 +783,30 @@ def _overpass(query, timeout=180, _skip=()):
     clean clone without importing the pipeline package.
     """
     problems = []
+    overloaded = 0
     for host in OVERPASS_HOSTS:
         name = host.split("/")[2]
         if name in _skip:
             continue
+        at = _OVERLOADED_AT.get(name)
+        wait = 0 if at is None else OVERLOAD_WAIT_S - (time.monotonic() - at)
+        if wait > 0:
+            print(f"        ({name} refused under {OVERLOAD_WAIT_S}s ago - "
+                  f"waiting {wait:.0f}s)", flush=True)
+            time.sleep(wait)
         try:
             return _overpass_once(host, query, timeout), name
         except Exception as exc:
             hint = ""
-            if "504" in str(exc) or "timed out" in str(exc).lower():
+            if _is_overload(exc):
+                overloaded += 1
+                _OVERLOADED_AT[name] = time.monotonic()
                 hint = "  <- may be cost rather than outage: try nodes-only, drop `out center`"
             problems.append(f"{name}: {type(exc).__name__} {exc}{hint}")
+    tried = [h for h in OVERPASS_HOSTS if h.split("/")[2] not in _skip]
+    if tried and overloaded == len(tried):
+        raise MirrorsOverloaded("every Overpass mirror refused (504/429/timeout) - "
+                                + "; ".join(problems))
     raise RuntimeError("every Overpass mirror failed - " + "; ".join(problems))
 
 
@@ -838,6 +875,11 @@ def osm_route_refs(spec, ctx):
     # confirm against a DIFFERENT mirror before failing the brief.
     try:
         second, other = _overpass(query, _skip=(host,))
+    except MirrorsOverloaded as exc:
+        # Unconfirmed because the other mirror was overloaded: a RETRY, not
+        # a brief to correct.
+        raise MirrorsOverloaded(detail + " - MISMATCH: " + "; ".join(bad)
+                                + f" [UNCONFIRMED: {exc}]") from exc
     except Exception as exc:
         return False, (detail + " - MISMATCH: " + "; ".join(bad)
                        + f" [UNCONFIRMED: no second mirror to check against - {exc}]")
@@ -1019,7 +1061,7 @@ def main():
             sys.exit(f"no brief for {args.city}. Have: "
                      f"{', '.join(b.stem for b in sorted(BRIEFS.glob('*.md')))}")
 
-    total = failed = 0
+    total = failed = retry = 0
     unchecked = []
     for path in briefs:
         specs, built = load(path)
@@ -1055,6 +1097,10 @@ def main():
                 continue
             try:
                 ok, detail = fn(spec, {"force": args.force})
+            except MirrorsOverloaded as exc:
+                retry += 1
+                print(f"  RETRY {claim}\n        {exc}")
+                continue
             except Exception as exc:
                 ok, detail = False, f"{type(exc).__name__}: {exc}"
             if not ok:
@@ -1069,12 +1115,17 @@ def main():
 
     if args.list:
         return
-    print(f"\nRESULT: {total - failed}/{total} claim(s) hold"
-          + (f", {failed} FAILED" if failed else ""))
+    print(f"\nRESULT: {total - failed - retry}/{total} claim(s) hold"
+          + (f", {failed} FAILED" if failed else "")
+          + (f", {retry} not checked (Overpass overloaded)" if retry else ""))
     if failed:
         print("A failing claim is a brief to correct, not a check to relax - the "
               "brief is the cache and the source is the truth.")
-    sys.exit(1 if failed else 0)
+    if retry:
+        print(f"A RETRY is not a failed claim: every Overpass mirror refused with "
+              f"a 504/429/timeout. Re-run in a few minutes, at least "
+              f"{OVERLOAD_WAIT_S}s apart.")
+    sys.exit(1 if failed or retry else 0)
 
 
 if __name__ == "__main__":

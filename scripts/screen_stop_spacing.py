@@ -100,12 +100,14 @@ def ask(query):
                 with urllib.request.urlopen(req, timeout=240) as r:
                     return r.status, r.read()
             except urllib.error.HTTPError as e:
+                # The owner's rule (CLAUDE.md, 2026-09-30): at least 60 s
+                # after a 504 or 429 before asking again.
                 if e.code in (429, 504):
-                    time.sleep(20)
+                    time.sleep(60)
                     continue
                 return e.code, e.read()[:200]
-            except Exception:
-                time.sleep(8)
+            except Exception as e:
+                time.sleep(60 if "timed out" in str(e).lower() else 8)
     return None, b"all mirrors failed"
 
 
