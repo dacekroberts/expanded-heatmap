@@ -412,16 +412,16 @@
  "goteborg": {
   "in_ring": 2255,
   "all": 2987,
-  "map_blob": null
+  "map_blob": "eb31e77c8d248dc33890f3326b682c350837a014"
  },
  "den_haag": {
   "in_ring": 5781,
   "all": 6213,
-  "map_blob": null
+  "map_blob": "20aeaa0cde3c6b9b2a71f2f75cfad54424de15f8"
  },
  "zurich": {
   "in_ring": 3099,
   "all": 3363,
-  "map_blob": null
+  "map_blob": "5bed72f479121497dfc7dce78a87576c75aa6056"
  }
 }
