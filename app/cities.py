@@ -2192,6 +2192,57 @@ CITIES = [
         # 375, 768 and 1200.
         "label_offset": ("start", 11, -3),
     },
+    {
+        "name": "Göteborg",
+        "lat": 57.7089,
+        "lon": 11.9746,
+        "page": "pages/137_Goteborg_Heatmap.py",
+        "blurb": "Göteborgs Spårvägar (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Sweden",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Den Haag",
+        "lat": 52.0705,
+        "lon": 4.3007,
+        "page": "pages/138_Den_Haag_Heatmap.py",
+        "blurb": "HTM (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Netherlands",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Zurich",
+        "lat": 47.3769,
+        "lon": 8.5417,
+        "page": "pages/139_Zurich_Heatmap.py",
+        "blurb": "VBZ (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Switzerland",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

@@ -255,6 +255,11 @@ TEXT_WIDTH = {
     # Florence: measured 2026-09-30 in a fresh tab, the same way (Houston 56.9,
     # Odense 50.6, Kansas City 79.3 and Daugavpils 73.7 reproduced).
     "Florence": 58.1,
+    # Göteborg, Den Haag and Zurich: measured in the same tab as Florence, the
+    # same way (2026-09-30, tram kit).
+    "Göteborg": 63.6,
+    "Den Haag": 63.8,
+    "Zurich": 42.6,
     # Buffalo: measured 2026-09-29 in the local app's own document (lean venv),
     # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load;
     # Prague 47.3, Tokyo 40.5, London 50.9, Glasgow 56.8 and Oslo 29.0
