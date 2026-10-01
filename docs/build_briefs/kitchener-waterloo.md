@@ -5,6 +5,33 @@ and 2026-09-29 (the Band C audit; this brief).** Band B, a reduced-bucket
 page (owner, 2026-09-29): **food and personal services, no retail**. Run
 `python scripts/brief_check.py kitchener-waterloo` before writing code.
 
+> **Measured at the build (2026-09-30), where it corrects the text below.**
+> **Three buckets on the map, two categories on the legend** (owner,
+> 2026-09-30): the bulk zips' `SUBCATEGORY` splits "Food, General" into food
+> service and food shops, drawn as their own layer; food shops count as food,
+> so the macro dot is narrowed ("Two"). The layers are joined to the zips on
+> the facility id (3,650 of 3,750 food, 963 of 998 personal); the layers are
+> newer, so 61 kept premises have no type yet and stay in their layer's
+> default bucket (owner). Currency: inspected within two years of the zips'
+> date, 2026-07-03 (134 left out). By type: institutional, mobile and
+> processing categories, caterers, community and church kitchens, cafeterias,
+> banquet halls, warehouses, vending; by name: campus and hospital outlets,
+> venue stands and clubs, cinemas, hotels, 23 pharmacies, mobile units and the
+> Kitchener Market's Saturday stalls (its labelled upper-level counters stay).
+> **2,086 storefronts** (food service 1,143, food shops 388, personal services
+> 555), 41.5% within the rings; 18 personal-services names that read as a
+> person's show their type. Rail: 19 stops (Waterloo 8, Kitchener 11), gate 3
+> exact against the Region's own ION Stops layer, 565 m median (the downtown
+> direction splits count as stops, as the Region counts them). ION's OSM
+> colour #244895 moved to #12164b (ΔE 20.9 from the Retail pins). Boundary:
+> the Region's Cities and Towns layer, not OSM. **Licence**: credit is
+> optional (the wording below is what the licence prescribes if one is
+> given, and it is displayed); **the bulk zips name no licence** on their item
+> pages, and the owner read the portal's "By downloading the data on the
+> portal, you are agreeing to the Open Data License" as covering them
+> (2026-09-30). The zip host fails Python's TLS (curl works); the CSVs are
+> cp1252.
+
 | | |
 |---|---|
 | Scope | **Kitchener and Waterloo together** (Regional): either city alone is a stub (Kitchener 11 ION stops, Waterloo 8) |
@@ -50,7 +77,7 @@ matches the other light-rail builds.
 | Source | Status |
 |---|---|
 | Region of Waterloo inspection layers and GTFS | **Region of Waterloo Open Data Licence v2.0** (declared). Required wording: *"Contains information provided by the Regional Municipality of Waterloo under licence."* Read in full at build |
-| OSM | ODbL, notice 1 |
+| OSM | ODbL, notice 1 (OpenStreetMap) |
 
 ```brief-checks
 [

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**254 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**256 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -30,12 +30,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)](#2026-09-30---new-working-rules-a-memory-gate-for-two-heavy-jobs-decisions-drafts-overpass-pacing-pre-permitted-downloads-and-prose-owner)
 - [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
 - [Tram kit complete: all ten briefs checked; four last points for the owner; builds held](#2026-09-30---tram-kit-complete-all-ten-briefs-checked-four-last-points-for-the-owner-builds-held)
+- [A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)](#2026-09-30---a-new-record-kind-health-inspection-register-for-kitchenerwaterloo-owner)
 - [Dallas's address-layer indemnity accepted (owner)](#2026-09-30---dallass-address-layer-indemnity-accepted-owner)
 - [Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity](#2026-09-30---zurich-göteborg-and-den-haag-briefed-for-the-tram-kit-dallass-address-layer-carries-an-open-ended-indemnity)
 - [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
 - [The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)](#2026-09-30---the-tram-kits-24-calls-and-its-page-text-template-approved-as-recommended-builds-still-held-owner)
 - [The Czech batch's calls and prose approved as recommended (owner)](#2026-09-30---the-czech-batchs-calls-and-prose-approved-as-recommended-owner)
 - [Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail](#2026-09-30---tram-kit-four-more-briefs-checked-new-orleans-recommended-unthinned-every-brief-so-far-takes-osm-rail)
+- [Kitchener–Waterloo built on the Region's two inspection registers, typed from their bulk tables; the tables' licence read as the portal's (owner)](#2026-09-30---kitchenerwaterloo-built-on-the-regions-two-inspection-registers-typed-from-their-bulk-tables-the-tables-licence-read-as-the-portals-owner)
 - [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
 - [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
 - [The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod](#2026-09-30---the-normandie-aggregate-read-its-tram-shapes-are-stop-to-stop-so-caen-rouen-and-le-havre-draw-from-openstreetmap-its-concédant-is-atoumod)
@@ -489,6 +491,16 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   consequence, with building as approved recommended, rather than reopened
   unasked.
 
+### 2026-09-30 - A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)
+
+The owner added a `record_kind` value, relayed by the cleanup session: **"Health
+inspection register"**, for a public-health inspection register that covers food
+premises AND personal-service settings. Kitchener–Waterloo's build entry had used
+"Food hygiene register" as the nearest existing value and said so; its register (the
+Region of Waterloo Public Health's food and personal-services inspections) now takes
+the new value. `scripts/check_inconsistency_list.py` lists it in `FIELDS`; table B's
+row already said "Food hygiene register" and now says the new value, so the two agree.
+
 ### 2026-09-30 - Dallas's address-layer indemnity accepted (owner)
 
 - **The owner accepted the open-ended indemnity in the City of Dallas's GIS
@@ -657,6 +669,94 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   which `app/cities.py` does not have ("United States East" for Kansas City
   and New Orleans, "United States West" for Tucson); and the hyphenated
   brief names do not match the pipeline slugs `--vs-config` imports.
+
+### 2026-09-30 - Kitchener–Waterloo built on the Region's two inspection registers, typed from their bulk tables; the tables' licence read as the portal's (owner)
+
+**Built** on branch `kitchener-waterloo` (from `origin/master`, `origin/macro-legend`
+merged first), page 79, region Canada East, not in the default frame. Band B, under
+the owner's pre-approval of downloads and page prose (2026-09-30). **2,086
+storefronts** (food service 1,143, food shops 388, personal services 555), 865 within
+the 0.6 mi rings (41.5%), 19 stops. Kitchener and Waterloo are one page (Regional);
+Cambridge and the townships are out.
+
+**Two categories, narrowed** (the owner's two-key rule of 2026-09-30): the owner's
+call the same day was to use the bulk tables' `SUBCATEGORY`, so food shops
+(supermarkets, convenience stores, bakeries, butchers, fish and produce sellers) are
+their own map layer, "Food shops"; on the macro legend food shops are food, so
+`categories` is "Two" (food and personal services) and `coverage` narrowed. Table B's
+note says "Retail = food shops only". `mode` light_rail.
+
+**The bulk tables' licence (owner, 2026-09-30).** The licence-read agent found the
+layers (17, 18, 15) under the Region of Waterloo Open Data Licence, credit optional
+with a prescribed sentence, and the two zips' item pages naming no licence ("No
+License Provided / Request permission to use", Esri's text for an empty field). Asked,
+the owner chose to read the Region's own "By downloading the data on the portal, you
+are agreeing to the Open Data License below" as covering them (recommended). The
+credit is displayed anyway (notice 69); any objection from the Region is honoured.
+The licence's cited URL now 404s; the licence moved (recorded). The agent's browser
+visits saved two copies of the zips into the main checkout's root; they were
+byte-identical to the cache and were moved to the scratchpad.
+
+**The join.** The live layers (points, 3,750 food and 998 personal premises) join the
+tables on the facility id: 3,650 and 963. The layers are newer than the tables
+(2026-07-03): 100 food premises in the layer are not in the table and 79 in the table
+are no longer in the layer, so the unjoined are openings since. **The 61 kept-kind
+premises with no type stay** in their layer's default bucket (47 restaurants and bars,
+14 personal services), the owner's call, disclosed. **Currency is Ottawa's rule**:
+the registers have no status, so a table premises counts when inspected within two
+years of the tables' date, which is exactly the two years the tables hold; 134 were
+not (48 food, 86 personal services), listed in `excluded_premises.csv`.
+
+**By type** (the register's own): "Food, General" only; its caterers and
+commissaries (R1), community, church and serving kitchens, school and workplace
+cafeterias, food banks, banquet halls (Pittsburgh's call, R2's wedding halls),
+warehouses, vending and transient kitchens are out (223), and the Institutional,
+Mobile Vendor and Processing Plant categories whole (297). Bakeries and produce
+sellers are food shops (Pittsburgh's supermarkets and bakeries). All nine
+personal-services types are kept, commercial massage included; medi-spas stay, as
+the Region inspects them as personal services.
+
+**By name, inside the kept types** (Pittsburgh's and Ottawa's rules): 73 campus
+(UW, WLU, Conestoga, St. Jerome's) and hospital (WRHN) outlets, church and
+community-centre cafes, school programmes, care-home salons, a school of aesthetics
+and caterers with no counter; 62 venue stands and clubs (the Aud, arenas, golf, ski,
+racquet, curling and lawn-bowling clubs, lanes, cinemas, theatres, the museum, play
+venues, gyms, Bingeman Park, members' clubs, the Legion); 23 pharmacies typed as
+convenience stores; 4 mobile or at-home units; 3 hotel back-of-house or bare hotel
+names (a hotel's named bar stays); 1 storage room. **The Kitchener Market** (300 King
+St E, 56 premises): R1 keeps a market building's fixed shops and drops its stalls, so
+the 10 whose names say "UPPER LEVEL" (the weekday food hall) stay and the 46 others
+(the Saturday farmers' market) are out. "The Club at Northfield" was not matched: what
+it is was a guess.
+
+**Names.** The shared personal-name test (`residence.looks_personal`) flags 386 kept
+food names, and they read as trade names throughout (TIM HORTONS, DAIRY QUEEN), so
+**food names are shown as registered** (Ottawa's finding). On **personal services**,
+where home-based studios are, a name that reads as a person's shows its type
+(Vancouver's and Sacramento's rule), with a local beauty-trade guard (GREAT CLIPS,
+RAMI BARBERSHOP are not people) and one three-word name read at the build (config's
+`PERSON_NAMES`; a three-word test flagged 26 trade names for it): 18 names.
+**`check_personal_exposure.py kitchener_waterloo`: 0 person-like names at a
+residential unit** of 865 in-ring pins; the 182 heuristic hits were read and are
+trade names, first-name possessives ("LINDA'S AESTHETICS") included. `SiteTelephone`
+is never fetched. Verdict: publishable.
+
+**Rail.** OSM (the light-rail builds' source), GRT route 301, relations 6885375 and
+11494375, whitelisted on operator and ref. 19 stops, **gate 3 exact against the
+Region's own ION Stops layer** (stage 1, constructed), rather than Wikipedia. Through
+both downtowns the two directions run on parallel streets, and OSM and the Region
+both count each side as a stop, so 19 (four within 275 m of another; checked, not
+one station under two names); median 565 m, standard rings. The line is one
+direction's track plus the other's ways that leave it by more than 30 m (the
+splits), so double track is not drawn twice; every stop within 8 m of it. **OSM's
+colour #244895 moves to #12164b**: 20.9 ΔE from the Retail pins; the least move
+(25.2) clearing 46. `rail_extra` "Suburban rail": GO Transit's Kitchener line is not
+drawn. Boundary: the Region's Cities and Towns layer (138.4 and 65.2 km2), not OSM.
+
+**Shared files, and a conflict to expect.** `record_kind` "Food hygiene register" (the
+nearest value; the register also holds personal services). The notice is numbered 69,
+as Ottawa's is on its branch: whichever lands second renumbers. `check_provenance.py`
+gains the city's slug override; `check_personal_exposure.py` its registry entry.
 
 ### 2026-09-30 - The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held
 

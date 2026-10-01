@@ -981,6 +981,69 @@ livestock and salvage), bingo and casinos (11, NAICS 7132), cannabis processing
 everywhere here; that premises was already a pin through its retail licence.
 `Funeral, Cremation, and Cemetery Service` (19 pins) is out.
 
+### Kitchener–Waterloo - two inspection registers, typed from their bulk tables, food shops as their own layer
+
+**Food and personal services only.** Region of Waterloo Public Health inspects
+food premises and personal-services studios, and publishes both registers; the
+Region publishes no register of other shops, so clothes shops, hardware stores
+and the like are missing rather than excluded. The live layers give each
+premises and its point; the Region's bulk tables give its type
+(`SUBCATEGORY`), which splits food into restaurants and bars and **food shops**
+(supermarkets, convenience stores, bakeries, butchers, fish and produce
+sellers), drawn as their own layer (owner, 2026-09-30). On the macro map food
+shops count as food, so the city has two categories. Kitchener and Waterloo
+are one map (the Region's own polygons for the two cities); Cambridge and the
+townships are left out.
+
+**Current by inspection.** The registers record no closings. A premises is
+shown when Public Health inspected it in the two years before the tables'
+date (2026-07-03): 134 kept-type premises were not (48 food, 86 personal
+services). **61 premises are newer than the tables** and have no type yet;
+they stay on the map as restaurants and bars (47) or personal services (14),
+by the owner's call (2026-09-30).
+
+**Excluded by category and type** (the register's own), each listed with its
+rule in `outputs/kitchener_waterloo/excluded_premises.csv`:
+- 297 in the Institutional, Mobile Vendor and Processing Plant categories:
+  childcare, before- and after-school programmes, nourishment programmes,
+  retirement, group and long-term-care homes, hospitals, mobile preparation
+  premises, street carts and catering vehicles, food plants.
+- 223 of "Food, General"'s types that are not storefronts: caterers and
+  commissaries (51, R1), community kitchens (41), church kitchens (26), school
+  cafeterias (22), serving kitchens (20), banquet halls (18), food warehouses
+  (14), workplace cafeterias (14), food banks (13), vending (2) and
+  transient or low-use kitchens (2).
+
+**Excluded by name**, inside the kept types (the same file):
+- 73 institutional outlets: University of Waterloo, Wilfrid Laurier, Conestoga
+  College and St. Jerome's outlets (chains included), hospital outlets (WRHN),
+  school nutrition programmes, church and community-centre cafés, food banks,
+  salons inside care homes, a school of aesthetics, and caterers with no
+  counter.
+- 62 recreation venues and clubs: the Kitchener Memorial Auditorium's stands,
+  arenas and recreation complexes, golf, ski, racquet, tennis, curling and
+  lawn-bowling clubs, bowling lanes, cinemas, theatres, the museum, escape
+  rooms, trampoline and play venues, gyms and yoga, the ballyard, Bingeman
+  Park, and members' and ethnic clubs.
+- 46 of the Kitchener Market's Saturday farmers'-market stalls (R1); its
+  upper-level food hall's counters, named as such, stay.
+- 23 pharmacies (Shoppers Drug Mart, Rexall), which the register files as
+  convenience stores.
+- 4 mobile and at-home units, 3 hotels' breakfast rooms or bare hotel names (a
+  hotel's own named bar or restaurant stays), and 1 storage room.
+
+A name rule is imperfect: a few such outlets may remain under a name that
+says nothing.
+
+**Names.** A personal-services studio registered under what reads as a
+person's own name shows its type instead (18). Food names are shown as
+registered.
+
+**Stations.** ION, Grand River Transit route 301, all 19 stops, every one
+inside the two cities: `outputs/kitchener_waterloo/excluded_stations.csv` is
+written empty. GO Transit's Kitchener line (suburban rail) and ION's bus
+extension to Cambridge are not drawn.
+
 ### Toronto - endorsements, person-held licences, and a register that is mostly history
 
 **Toronto's exclusions are unusually large in share and unusually dull in

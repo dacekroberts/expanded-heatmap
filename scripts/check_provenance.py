@@ -237,6 +237,8 @@ SLUG_OVERRIDES = {
     "Nantes (Regional)": "nantes",
     "Grenoble (Regional)": "grenoble",
     "Valenciennes (Regional)": "valenciennes",
+    # Canada: Kitchener and Waterloo as one regional page (2026-09-30).
+    "Kitchener–Waterloo (Regional)": "kitchener_waterloo",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are

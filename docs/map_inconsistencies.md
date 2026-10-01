@@ -518,6 +518,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
 | Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS | City | 0 / 0 |
+| Kitchener–Waterloo (Regional) | ION light rail (GRT route 301) | GO Transit's Kitchener line (suburban rail); ION's bus to Cambridge | OpenStreetMap route relations (the light-rail builds' source); gate 3 exact against the Region's ION Stops layer | Two cities (the Region's Kitchener and Waterloo polygons) | 0 / 0 |
 | Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
 | Ottawa | O-Train Lines 1, 2 and 4 (light rail) | Buses, the Transitway | OpenStreetMap route relations (OC Transpo's GTFS licence unread); gate 3 exact against Wikipedia | City (its own wards) | 0 / 0 |
 | **Mexico** | | | | | |
@@ -647,6 +648,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
 | Calgary | Licence register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
 | Edmonton | Licence register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
+| Kitchener–Waterloo (Regional) | Health inspection register | Region of Waterloo Public Health's food and personal-services inspection layers, typed from its bulk tables | Its own inspection types (SUBCATEGORY), plus a name test | 143 / 545 / 177 | Retail = food shops only ("Food shops"); no general-retail register |
 | Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,474 / 1,950 | Retail = regulated slice only |
 | Ottawa | Food hygiene register | Ottawa Public Health's food-safety inspection data (LIVES), one record per premises | None: a premises kind from the name | — / 1,586 / — | No Personal services; no Retail layer: food shops sit inside the one layer, labelled "Restaurants and food shops" |
 | **Mexico** | | | | | |
@@ -773,6 +775,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
 | Calgary | Source point | No home-business flag | Endorsements; body rub / escort (sensitivity) |
 | Edmonton | Source coordinates | Personal services overstated | Non-commercial licence types (43%); adult services (sensitivity) |
+| Kitchener–Waterloo (Regional) | Register coordinates (100% of kept premises) | Food and personal services only, no general-retail register; current by inspection within two years; 61 premises newer than the typed tables kept by default | Institutional kitchens, caterers, banquet halls and warehouses by type; campus and hospital outlets, venue stands, clubs, cinemas, hotels, pharmacies, mobile units and the Kitchener Market's Saturday stalls by name; a studio under a person's name shows its type |
 | Toronto | Address join to One Address Repository (93.8%) | Retail absent; plazas under-counted | Cancelled licences; endorsements; person-held; adult premises (sensitivity) |
 | Ottawa | Feed coordinates (99.6% of kept premises); 14 not placed, 8 outside the City | Food only; no type field, so restaurants and food shops are one layer; current by inspection within two years | Institutional kitchens, event caterers, clubs and arenas, mobile vendors, hotels and funeral homes by name |
 | **Mexico** | | | |
@@ -894,6 +897,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |
 | Calgary | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 41% | Trade name |
 | Edmonton | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 22% | Business name |
+| Kitchener–Waterloo (Regional) | Inspected since 2024-07-03 (typed tables 2026-07-03; layers fetched 2026-09-30) | B | 0.6 mi | Yes | 41% | Premises name; type for a person's name (personal services) |
 | Toronto | Current licences (2026-09-21) | — | 0.6 mi | Yes | 48% | Operating name |
 | Ottawa | Inspected since 2024-09-29 (feed 2026-09-29) | B | 0.6 mi | Yes | 32% | Premises name |
 | **Mexico** | | | | | | |

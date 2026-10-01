@@ -263,6 +263,10 @@ TEXT_WIDTH = {
     # Grotesk" after document.fonts.load (Google Fonts, as the app loads it);
     # Prague 47.3, Tokyo 40.5, Houston 56.9 and Toronto 52.4 reproduced.
     "Pittsburgh": 70.7,
+    # Kitchener–Waterloo (Regional): measured 2026-09-30 in a browser with Space
+    # Grotesk 600 14px loaded, Prague 47.3, Tokyo 40.5, Houston 56.9 and Toronto
+    # 52.4 reproduced.
+    "Kitchener–Waterloo (Regional)": 207.2,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

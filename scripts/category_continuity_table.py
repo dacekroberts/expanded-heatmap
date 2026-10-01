@@ -1630,6 +1630,47 @@ def _se(typ, name, name_classified=None):
     return row
 
 
+KW_TYPE, KW_CAT = "Type not a storefront", "Institutional, mobile or processing category"
+COLUMNS["kitchener_waterloo_inspection"] = {
+    **{rid: absent("food and personal-services inspection registers: no such type, and none "
+                   "found by name at the build") for rid in (
+        "funeral", "personal_catchall", "adult_hostess", "sex_shop", "massage_regulated",
+        "car_dealer", "vehicle_repair", "gambling", "pawnbroker", "vet", "parking", "repair",
+        "optician")},
+    "no_counter_food": [
+        loc(KW_TYPE, "caterers and commissaries, community, church and serving kitchens, school "
+                     "and workplace cafeterias, food banks, banquet halls, by type"),
+        loc(KW_CAT, "the Institutional category (childcare, schools' programmes, care homes, "
+                    "hospitals), by type"),
+        loc("Institutional kitchen or service", "campus and hospital outlets, church and "
+                                                "community-centre cafes, caterers with no counter, "
+                                                "by name"),
+        loc("Market stall", "the Kitchener Market's Saturday stalls, by name")],
+    "tattoo": [loc("Personal services", "Tattooing / Micropigmentation, its own type")],
+    "massage_commercial": [loc("Personal services", "Massage, its own type")],
+    "petrol_station": [loc("Food shop", "forecourt shops typed as convenience stores "
+                                        "(AM 2 PM Express Market / Petro Canada)")],
+    "nightclub": [loc("Restaurant or bar", "Cocktail Bar/ Nightclub, its own type")],
+    "nonstore": [loc(KW_TYPE, "Food Vending Facility, by type")],
+    "lodging": [loc("Hotel back of house", "hotels' breakfast rooms and serveries and bare hotel "
+                                           "names, by name"),
+                loc(KW_CAT, "group and lodging homes (Institutional category), by type")],
+    "recreation": [loc("Recreation venue or club", "the Aud's stands, arenas, golf and other "
+                                                   "clubs, lanes, cinemas, theatres, play venues, "
+                                                   "gyms, by name")],
+    "pharmacy": absent("a food and personal-services register: its pharmacies fall under "
+                       "pharmacy_food_register, which is where the module's pharmacy strings are "
+                       "located", ignore=("Pharmacy", "PHARMAC", "PHARMACY")),
+    "pharmacy_food_register": [loc("Pharmacy", "Shoppers Drug Mart and Rexall, typed as "
+                                               "convenience stores, by name")],
+    "health_food": [loc("Food shop", "health-food shops typed as supermarkets or convenience "
+                                     "stores (Goodness Me!)")],
+    "mobile_unit": [loc("Mobile or at-home unit", "mobile and at-home units, by name"),
+                    loc(KW_CAT, "the Mobile Vendor category (preparation premises, carts, "
+                                "catering vehicles), by type")],
+}
+
+
 COLUMNS["sweden_livsmedel"] = {
     **{rid: absent("a food-control register: food premises only") for rid in (
         "funeral", "personal_catchall", "adult_hostess", "sex_shop", "massage_commercial", "massage_regulated",
