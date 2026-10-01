@@ -831,6 +831,13 @@ every key, account and letter:
   the Korean nightclub difference disclosed on What Is Excluded (the SEMAS
   satellites leave out dance halls, Seoul keeps nightclubs), with the two
   "as in every other city" sentences corrected.
+- [ ] **What Is Excluded's opening generalisations (review lane 4, 2026-09-30;
+  for the prose and UI pass)**: each bets on the next city and the tram kit
+  outgrew them - light rail drawn only at 15-minute headways (Daugavpils's
+  routes run hourly and are drawn), the commuter-rail list (Zurich's S-Bahn,
+  NS at Den Haag, Göteborg's and Odense's regional trains are missing), the
+  ring sizes at :118 and :135, and Florence's not-drawn list (T2.2). Rewrite
+  them by category rather than as claims about every city.
 - [ ] **Gate 3 back-fill, 25 cities: after the 2026-09-30 review, for the
   next deploy (owner, 2026-09-30).** The owner chose not to hold the tram kit
   for it: other cities went live without the check. A code survey of step 1
