@@ -255,7 +255,7 @@ ref's most complete relation. It is exact for most cities. It reads low where
 a line branches, because each relation covers one branch (Brest's A), and
 where OSM's positions sit far from the feed's (Saint-Étienne, Nice). Record
 it as OSM has it, and trace any mismatch by name
-(`docs/decisions_drafts/france-build.md`). Never count a union of relations:
+(the France build entries in `DECISIONS.md`). Never count a union of relations:
 it over-counted exactly where the single-relation count was right.
 
 ## 3. The scope call - commune or regional

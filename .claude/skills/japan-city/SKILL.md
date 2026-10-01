@@ -349,7 +349,7 @@ reproduced the brief's eight shares exactly. Wards without data get hollow
 
 **The owner's Japanese list is complete**: all six on the owner's order
 (Osaka → Kobe → Sapporo → Fukuoka → Kyoto → Tokyo) are built and published
-(2026-09-28), and none is left in Band A. The other Japanese cities
-wait in their bands (`docs/japan_city_list.md`): Hiroshima food only and on
-streetcars (T), Yokohama personal services only (N), Sendai the city's
-permission (D). A Tokyo ward whose list turns up is the `tokyo-ward` skill.
+(2026-09-28), and none is left in Band A. Two more were built from Band B
+on 2026-09-30: Yokohama (personal services only) and Hiroshima (food only,
+Hiroden's streetcars drawn). Sendai waits on the city's permission (D); the
+rest are in `docs/japan_city_list.md`. A Tokyo ward whose list turns up is the `tokyo-ward` skill.

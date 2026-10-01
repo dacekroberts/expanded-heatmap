@@ -20,10 +20,63 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**271 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**321 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-01**
+
+- [The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current](#2026-10-01---the-japan-list-regenerated-taitō-and-meguro-re-measured-hiroshima-japans-eighth-the-japan-city-skill-current)
+- [The decisions drafts folded in: 48 entries from 17 drafts files, the files removed](#2026-10-01---the-decisions-drafts-folded-in-48-entries-from-17-drafts-files-the-files-removed)
+- [The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)](#2026-10-01---the-master-lists-history-written-docscity_master_list_historymd-published-as-an-artifact-owner)
 
 **2026-09-30**
 
+- [A line's legend row, or the line itself, picks it out above the others](#2026-09-30---a-lines-legend-row-or-the-line-itself-picks-it-out-above-the-others)
+- [Most and Liberec briefs: as-built stop counts added beside the screen's](#2026-09-30---most-and-liberec-briefs-as-built-stop-counts-added-beside-the-screens)
+- [drift_check --render-only: the map step alone, zero drift on master's 124 cities](#2026-09-30---drift_check---render-only-the-map-step-alone-zero-drift-on-masters-124-cities)
+- [Gate 3 made required in tram-city; the back-fill of 25 cities deferred to after review (owner)](#2026-09-30---gate-3-made-required-in-tram-city-the-back-fill-of-25-cities-deferred-to-after-review-owner)
+- [Zurich built on tram-build: VBZ's trams, and the city's food and alcohol licences](#2026-09-30---zurich-built-on-tram-build-vbzs-trams-and-the-citys-food-and-alcohol-licences)
+- [Göteborg built on tram-build: trams 1-13, and the city's food register by its own types](#2026-09-30---göteborg-built-on-tram-build-trams-1-13-and-the-citys-food-register-by-its-own-types)
+- [Den Haag built on tram-build: HTM's 14 tram lines, the city's permit layer and the BAG](#2026-09-30---den-haag-built-on-tram-build-htms-14-tram-lines-the-citys-permit-layer-and-the-bag)
+- [Florence built on tram-build: T1 and T2, and the Comune's four layers](#2026-09-30---florence-built-on-tram-build-t1-and-t2-and-the-comunes-four-layers)
+- [New Orleans built on tram-build: the five lines RTA runs, and a new taxonomy](#2026-09-30---new-orleans-built-on-tram-build-the-five-lines-rta-runs-and-a-new-taxonomy)
+- [Tucson built on tram-build: Sun Link and the City's BUSLIC layer](#2026-09-30---tucson-built-on-tram-build-sun-link-and-the-citys-buslic-layer)
+- [Kansas City built on tram-build: the KC Streetcar and KCMO's frozen licence register](#2026-09-30---kansas-city-built-on-tram-build-the-kc-streetcar-and-kcmos-frozen-licence-register)
+- [Daugavpils built on tram-build: all five routes, 37 stations](#2026-09-30---daugavpils-built-on-tram-build-all-five-routes-37-stations)
+- [Liepāja built on tram-build; Riga's step 2 lifted into latvia_register.py](#2026-09-30---liepāja-built-on-tram-build-rigas-step-2-lifted-into-latvia_registerpy)
+- [Odense built on tram-build; osm_tram.py written, its Aarhus control passing](#2026-09-30---odense-built-on-tram-build-osm_trampy-written-its-aarhus-control-passing)
+- [All builds activated, with six working rules for concurrent sessions (owner)](#2026-09-30---all-builds-activated-with-six-working-rules-for-concurrent-sessions-owner)
+- [Gate 3 from IDOS: Olomouc, Liberec and Most exact; Ostrava partial; the regular network through works (owner)](#2026-09-30---gate-3-from-idos-olomouc-liberec-and-most-exact-ostrava-partial-the-regular-network-through-works-owner)
+- [Pre-review checks: briefs match configs, app imports clean, pages render, label widths measured; gate 3 needs PDFs; Ostrava runs a diversion timetable (owner calls open)](#2026-09-30---pre-review-checks-briefs-match-configs-app-imports-clean-pages-render-label-widths-measured-gate-3-needs-pdfs-ostrava-runs-a-diversion-timetable-owner-calls-open)
+- [Ostrava's in-city line 5 stops disclosed in prose, not listed, following Kyoto and Madrid (owner); the boardable default flipped on master (owner)](#2026-09-30---ostravas-in-city-line-5-stops-disclosed-in-prose-not-listed-following-kyoto-and-madrid-owner-the-boardable-default-flipped-on-master-owner)
+- [Master's new rules merged into czech-build; Ostrava's two in-city line 5 stops need a station-scope category (owner call open)](#2026-09-30---masters-new-rules-merged-into-czech-build-ostravas-two-in-city-line-5-stops-need-a-station-scope-category-owner-call-open)
+- [Plzeň built: 53 stations; the "two missing stops" were a one-day diversion (supersedes the entry below on Plzeň's gate 3)](#2026-09-30---plzeň-built-53-stations-the-two-missing-stops-were-a-one-day-diversion-supersedes-the-entry-below-on-plzeňs-gate-3)
+- [Olomouc, Ostrava, Liberec (Regional) and Most (Regional) built on osm_tram.py; Plzeň's gate 3 finds two stops OSM's relations lack](#2026-09-30---olomouc-ostrava-liberec-regional-and-most-regional-built-on-osm_trampy-plzeňs-gate-3-finds-two-stops-osms-relations-lack)
+- [Brno rendered and checked: 146 stations, 11 lines, 82.4% of storefronts in a ring; privacy verdict publish](#2026-09-30---brno-rendered-and-checked-146-stations-11-lines-824-of-storefronts-in-a-ring-privacy-verdict-publish)
+- [The six Czech business legs built; Brno's stations from the feed, with request stops kept and depot runs dropped](#2026-09-30---the-six-czech-business-legs-built-brnos-stations-from-the-feed-with-request-stops-kept-and-depot-runs-dropped)
+- [czechia_register reads several obce and RES in chunks; Prague reproduced byte for byte at a 0.37 GB peak](#2026-09-30---czechia_register-reads-several-obce-and-res-in-chunks-prague-reproduced-byte-for-byte-at-a-037-gb-peak)
+- [Angers built mark-free on `france-build-3`: 36 stops, 2,530 storefronts, page 120, notice 77](#2026-09-30---angers-built-mark-free-on-france-build-3-36-stops-2530-storefronts-page-120-notice-77)
+- [The twenty French batch cities retagged to France North and South, with the legend's two fields](#2026-09-30---the-twenty-french-batch-cities-retagged-to-france-north-and-south-with-the-legends-two-fields)
+- [The France macro view: North and South at zoom 5.0, released to cleanup (owner)](#2026-09-30---the-france-macro-view-north-and-south-at-zoom-50-released-to-cleanup-owner)
+- [France landing group 2 built: Montpellier, Strasbourg, Le Havre, Caen, Rouen, Bordeaux, Nantes, Grenoble, Valenciennes](#2026-09-30---france-landing-group-2-built-montpellier-strasbourg-le-havre-caen-rouen-bordeaux-nantes-grenoble-valenciennes)
+- [France's pages take 100-119; three ODbL notices; group 2 on a stacked branch](#2026-09-30---frances-pages-take-100-119-three-odbl-notices-group-2-on-a-stacked-branch)
+- [Ten more French tram cities built through step 3: Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice](#2026-09-30---ten-more-french-tram-cities-built-through-step-3-besançon-avignon-tours-dijon-reims-orléans-mulhouse-brest-saint-étienne-nice)
+- [Le Mans built on the shared French tram module: 35 stops, 1,991 storefronts; a French step 2 peaks at 0.37 GB](#2026-09-30---le-mans-built-on-the-shared-french-tram-module-35-stops-1991-storefronts-a-french-step-2-peaks-at-037-gb)
+- [Hiroshima's macro mode "metro" approved (owner)](#2026-09-30---hiroshimas-macro-mode-metro-approved-owner)
+- [Shared Japanese code: a per-city N02 edition, and a per-city station-gate floor](#2026-09-30---shared-japanese-code-a-per-city-n02-edition-and-a-per-city-station-gate-floor)
+- [Hiroshima built: food only, two lists, Hiroden drawn](#2026-09-30---hiroshima-built-food-only-two-lists-hiroden-drawn)
+- [A new category value, "Personal services only", for Yokohama (owner)](#2026-09-30---a-new-category-value-personal-services-only-for-yokohama-owner)
+- [Yokohama built: personal services only, on the shared Japanese steps](#2026-09-30---yokohama-built-personal-services-only-on-the-shared-japanese-steps)
+- [Anyang built: the last Gyeonggi satellite, on its ring share](#2026-09-30---anyang-built-the-last-gyeonggi-satellite-on-its-ring-share)
+- [Overpass callers wait 60 s after a 504, 429 or timeout](#2026-09-30---overpass-callers-wait-60-s-after-a-504-429-or-timeout)
+- [Check M refuses a prescribed credit shown only inside a conditional block (owner)](#2026-09-30---check-m-refuses-a-prescribed-credit-shown-only-inside-a-conditional-block-owner)
+- [« Source : Insee » on Paris, Marseille, Toulouse, Lille and Rennes; check M refuses a French page without it](#2026-09-30---source-insee-on-paris-marseille-toulouse-lille-and-rennes-check-m-refuses-a-french-page-without-it)
+- [Conflict markers fail the pre-push hook; merge_append_only stops loudly on a failed write](#2026-09-30---conflict-markers-fail-the-pre-push-hook-merge_append_only-stops-loudly-on-a-failed-write)
+- [Dallas: the Streetcar and the M-Line out, and coverage narrowed as Houston (owner)](#2026-09-30---dallas-the-streetcar-and-the-m-line-out-and-coverage-narrowed-as-houston-owner)
+- [Dallas built on Houston's register and rules, placed by the City's Address Points](#2026-09-30---dallas-built-on-houstons-register-and-rules-placed-by-the-citys-address-points)
+- [The France page template shows « Source : Insee » unconditionally (owner)](#2026-09-30---the-france-page-template-shows-source-insee-unconditionally-owner)
+- [Uijeongbu built: a Gyeonggi satellite on SEMAS's register, the U Line drawn](#2026-09-30---uijeongbu-built-a-gyeonggi-satellite-on-semass-register-the-u-line-drawn)
+- [Ansan built: a Gyeonggi satellite on SEMAS's register, the Seohae Line drawn](#2026-09-30---ansan-built-a-gyeonggi-satellite-on-semass-register-the-seohae-line-drawn)
+- [Namyangju built: the sixth Gyeonggi satellite, on SEMAS's register](#2026-09-30---namyangju-built-the-sixth-gyeonggi-satellite-on-semass-register)
 - [Buffalo's label south of its dot in United States East, by a per-region offset; map-refresh assembled (owner)](#2026-09-30---buffalos-label-south-of-its-dot-in-united-states-east-by-a-per-region-offset-map-refresh-assembled-owner)
 - [Seoul labelled in East Asia and the landing view; the Seoul Capital Area's satellites minor (owner)](#2026-09-30---seoul-labelled-in-east-asia-and-the-landing-view-the-seoul-capital-areas-satellites-minor-owner)
 - [Personal exposure: PASS for Zurich, Göteborg and Den Haag; lane 4's last findings fixed](#2026-09-30---personal-exposure-pass-for-zurich-göteborg-and-den-haag-lane-4s-last-findings-fixed)
@@ -313,6 +366,2611 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current
+
+- **`docs/japan_city_list.md` regenerated** (`japan_ward_table.py --write`,
+  0.69 GB through the gate). Tokyo's Taitō food count moves 5,779 to 4,830
+  and Meguro's 2,022 to 1,999 (Tokyo's total 43,638 to 42,666), the drift
+  Yokohama's build reported to cleanup. It is not new drift: the list was
+  last generated on 2026-09-24, before the Tokyo build of 2026-09-28 settled
+  how each ward's list is read; the ward files on disk are unchanged since
+  2026-09-27, and Tokyo's map is untouched. Hiroshima's ward table gains its
+  stations column (its N03 file is cached now).
+- **Hiroshima is Japan's eighth city, not its seventh**: Yokohama landed first
+  (page 81, 16:32) and Hiroshima second (page 82, 17:06); both STATUS lines
+  had said seventh.
+- **The japan-city skill** still had Hiroshima and Yokohama waiting in their
+  bands; it now says both were built from Band B on 2026-09-30.
+
+### 2026-10-01 - The decisions drafts folded in: 48 entries from 17 drafts files, the files removed
+
+- **Folded verbatim** under the owner's rule of 2026-09-30: build and docs
+  sessions wrote their entries to `docs/decisions_drafts/<session>.md`, and
+  cleanup folds every drafts file in one pass. The 17 files, newest
+  last commit first: `line-highlight.md`, `staging.md`, `drift-render-only.md`, `tram-kit.md`, `czech-kit.md`, `france-build.md`, `hiroshima.md`, `yokohama.md`, `anyang.md`, `overpass-backoff.md`, `france-insee-attribution.md`, `check-conflict-markers.md`, `dallas.md`, `france-insee-template.md`, `uijeongbu.md`, `ansan.md`, `namyangju.md`.
+- **Order:** newest first by date; within a date, by each file's last commit
+  (newest first), and each file's entries in its own order, which was newest
+  first. The drafts carried no times, so entries from different files are not
+  interleaved with each other or with the entries already here.
+- No heading was already in `DECISIONS.md` or the archive. The files are
+  removed; the pointers to them in live docs now point here.
+
+### 2026-10-01 - The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)
+
+- **The owner's ask, from the 2026-09-30 handoff**: a detailed history of
+  how the list reached its state. The outline was drafted in chat on
+  2026-09-30. The owner deferred the file until after review time, then
+  said to start.
+- **Placement, the owner's call, as recommended**: the file sits beside the
+  list and its evidence file, with pointers from the list's head and from
+  `docs/project_context.md`. It is also a private artifact.
+- **It describes the list after the review landed**: 124 built, 18
+  candidates (all Band R), 100 discards. Every count is dated.
+- **Two dates settled from git**:
+  - The discard audit's commits are 22:39 and 22:56 on 2026-09-23 local
+    (UTC−7). The log dates it 09-24, and both are right.
+  - Berlin went back to the discards between the reband of 2026-09-21
+    21:33 and the list's first version (2026-09-22 00:46), on one keyword
+    search.
+- **Zaragoza's 36% is the share of addresses with a house number**, not a
+  placement rate. The history states it that way.
+- **Two stale figures were found and are not corrected there; they go to
+  Cleanup**:
+  - the master list's Yokohama row (17,408 against the 7,896 measured);
+  - `add-country`'s station-density table (Canada's pre-correction
+    figures).
+
+### 2026-09-30 - A line's legend row, or the line itself, picks it out above the others
+
+**The problem** (owner, 2026-09-30, from the live site on an iPhone): where
+lines share track, the one drawn last hides the others completely - Daugavpils'
+line 2 under the purple, Göteborg's 4/9 and 6/7/11, Reims' T1 under T2, Brest's
+téléphérique, every Saint-Étienne tram, Nice's T2, Strasbourg's A, Liberec's 5,
+Most's 1. **The owner chose** a highlight, with striping shared track left for
+later where this is not enough.
+
+**Built** once, in `pipeline/map_common.py`: a new shared block,
+`LINE_HIGHLIGHT_SCRIPT` (one `<style>` and one `<script>`), plus three markers
+the renderer now writes - each line's polylines carry the class
+`hm-line hm-line-<n>`, its label and its legend row `data-line="<n>"`, where
+`n` is the line's order in `render_heatmap()`. Tapping a legend row, or the map
+within reach of a line, draws that whole line on top at 7 px and full opacity
+and fades every other line to a quarter; tapping it again, empty map, or
+Escape restores, and another line switches. A mouse hovering a line or a row
+previews the same, and a click still toggles. City `step3_map.py` files are
+untouched. Rendered for Reims, Göteborg, Saint-Étienne, Most and Madrid only;
+the other 119 maps wait for the full re-render, and `check_render_current.py`
+names each of them for `LINE_HIGHLIGHT_SCRIPT` alone until then.
+
+Judgment calls inside the owner's design, each proposed for review time:
+
+- **The picked line goes above the other lines, not above everything.** Its
+  paths move to the end of the run of line paths in the SVG, so business dots
+  (drawn after the lines) still sit on top of it and stations stay where they
+  were. Heat layer, dots, stations, rings and the attribution are untouched.
+- **Nothing is redrawn.** A state is two CSS classes on the paths plus that
+  reorder. CSS `stroke-width` overrides the SVG attribute, so the dark theme's
+  `path[stroke-width="4"]` brightening still applies to a thickened line
+  (measured: `brightness(1.55) saturate(0.9)` on the picked Madrid line).
+- **A map tap is matched by distance, not by what the finger hit**: within
+  16 px on a coarse pointer, 7 px on a mouse, measured against Leaflet's own
+  clipped `_parts` as its `_containsPoint` does. A 4 px line is too thin to
+  tap, and a hidden line is never what was hit. Where two lines are equally
+  near (shared track), the one currently on top wins, so a second tap on a
+  picked line restores rather than switching to the line under it - which is
+  why a fully hidden line is reached through the legend. A tap on a business
+  dot, station or ring is left alone.
+- **Hover only where a fine pointer can hover** (`(hover: hover) and
+  (pointer: fine)`), with an 80 ms grace before a hover ends so moving between
+  touching lines does not flash the map back to normal.
+- **Labels stay as they are**; the picked line's label is lifted above the
+  others (z-index 1500 against 1000). Other labels are not faded.
+- **The legend's layout does not change.** The picked row gets a tint and a
+  doubled swatch (`transform`), the other line rows drop to 0.6 opacity, and no
+  text goes bold - a bolder row can widen the legend, which `_layout_labels`
+  models at a fixed width. Rows are `role="button"` with `aria-pressed` and
+  answer Enter and Space. The legend's open or collapsed state is never
+  touched.
+
+**Verified** in the browser pane at 1280, 375 and 343 px, light and dark, on
+all five maps: every legend row highlights its whole line on top (its paths
+last in the line run, only its paths thick, every other line faded) and a
+second tap restores the original order; real taps restored on empty map and
+picked Göteborg's Tram 8 from 9 px off its line; desktop hover on Madrid's
+Línea 10 in dark mode. `check_map_labels.js` and `check_map_attribution.js`
+PROBLEMS 0 on every map at every width; `check_map_markup.py` PROBLEMS 0;
+`check_inline_arrays.py` 0 over the cap; `check_all.py` 28 of 29, the one
+failure being `check_render_current.py` on the 119 maps not re-rendered, each
+for `LINE_HIGHLIGHT_SCRIPT is MISSING` and nothing else.
+
+### 2026-09-30 - Most and Liberec briefs: as-built stop counts added beside the screen's
+
+- **The Czech kit reported both briefs' prose behind the build** (czech-build,
+  6366a912). `brief_check --vs-config` still passes for both; no check
+  changed.
+- **Most: 28 stops and 1,025 storefronts as built, against the screen's 27
+  and 1,030.** Litvínov, Vrchlického was added on lines 1, 3 and 4. It is
+  closed for works, but the map shows the regular network (owner).
+- **Liberec: 40 stations as built, against the screen's 39.** Šaldovo
+  náměstí is on lines 2 and 3.
+- **The screen's figures stay, with the as-built ones beside them.** A brief
+  records what Step 0 measured.
+- **`docs/tram_city_list.md` still says Most 27 and Liberec 39.** It was not
+  edited here: Cleanup's review rehearsal rewrites that table, and the
+  correction goes to Cleanup to fold in.
+
+### 2026-09-30 - drift_check --render-only: the map step alone, zero drift on master's 124 cities
+
+**Built** `pipeline/drift_check.py --render-only` for changes that touch only
+map rendering (a line-highlight change to `map_common.py` is next, and all 124
+maps must re-render after it). It runs one step per city and diffs `outputs/`
+exactly as the full check does. The full sweep stays the default and the
+pre-deploy gate.
+
+- **"The map step" is the file named `step*_map.py`, not "step 3".** Measured
+  over the tree: 117 cities have step3_map.py, seven have step4_map.py after a
+  step3_geocode.py (Los Angeles, New York, Sacramento, Toronto, Washington
+  D.C.) or step3_place.py (Dallas, Houston). All seven of those step 3s write
+  `data/<city>/processed/businesses_geocoded.csv`, a map input, and nothing in
+  `outputs/`, so leaving them out loses no output. Geocoding is not rendering,
+  and running it would put a network-capable step in a render check. A city
+  with no map step or two is refused.
+- **Refused, not passed: a city whose `data/<city>/processed/` is missing or
+  empty.** It counts as a failure and names the full check to run instead.
+  The map step's own "Missing ... Run the earlier steps first" still catches
+  a single missing file.
+- **What it assumes is printed per city**: how many processed files there are
+  and when the newest was written, since `data/` is shared by every worktree
+  and holds whatever the last steps 1-2 run on any branch left there.
+- **Baseline counts are not checked** in render-only (no map step emits any;
+  grepped), and `--update-baseline` with `--render-only` is refused, since the
+  counts come from steps the mode does not run.
+- **The offline guard still applies**: the map step runs with
+  `HEATMAP_NO_NETWORK=1`, as every step under the full check does.
+- **Selftest** `scripts/drift_check_selftest.py`, in `check_all.py`: fake
+  cities in a temp tree prove the step choice (step4_map.py alone where a
+  geocode or place step precedes it), each refusal, that the map step runs
+  offline and alone, that the full path still runs every step in order; the
+  live tree is the positive control (every city has exactly one map step).
+- **Run on master (8fb44e7c) through `heavy_job.py`, `--jobs 2`: zero drift**
+  on all 124 cities. Wall time 231 s; per city 1.7 s to 24.7 s (Paris; Seoul
+  16.5 s). Measured peak 1.79 GB for the whole run, declared 4.5 GB on a
+  Seoul-alone measurement of 1.93 GB (14.6 s). The 124 rewritten maps were
+  restored with `git checkout -- outputs/`.
+- **Not done: more than two cities at once.** `MAX_JOBS` stays 2; whether
+  render-only may run more is an owner call, raised in the agent's report.
+
+### 2026-09-30 - Gate 3 made required in tram-city; the back-fill of 25 cities deferred to after review (owner)
+
+- **Gate 3 made required in `tram-city`, not optional** (the owner asked,
+  after the tram kit retrospective found it ran in 1 of 10 builds).
+  - The operator's per-line counts go in config before step 1 is written.
+  - A tram step 1 stops on an unexplained mismatch.
+  - The source must be independent of OSM, so neither OSM nor a brief count
+    taken from it; Kansas City's check was circular for this reason.
+  - Where nothing usable is published, the gap is recorded in config, as
+    Mexico City and Barcelona record theirs.
+  - `pipeline/stations.py` was left printing rather than raising, because
+    other cities call it.
+- **A code survey of step 1 across all 85 cities found 25 with no gate 3**:
+  - 41 pass operator counts to `verify_stations`;
+  - about 16 run an equivalent of their own;
+  - 2 record it as unavailable;
+  - 25 show no trace. These are the early US nine, which predate
+    `stations.py`; Montréal, Edmonton and Vancouver; Dublin, Madrid, Riga
+    and Seoul; and this batch's nine (every tram city but Odense).
+  - The survey reads code only, so a city checked by hand at build would not
+    show.
+- **The owner's decision: the tram kit lands without the back-fill.** All 25
+  cities become one post-review item for the next deploy (`PLAN.md`, "Gate 3
+  back-fill, 25 cities"). The reason: other cities went live without the
+  check, so the batch is not held for it.
+  - Rejected: back-filling this batch's nine before landing, about 45 to 90
+    minutes. A mismatch would have meant station fixes and drift checks
+    during the review.
+  - New tram builds run gate 3 before commit.
+
+### 2026-09-30 - Zurich built on tram-build: VBZ's trams, and the city's food and alcohol licences
+
+- **Zurich, the project's first Swiss city, built on Stockholm's template** (one city
+  register, the city only), Seoul's and Gyeonggi's precedent for partial retail, and the
+  shared `osm_tram.py`. 180 stations, 3,363 storefronts (2,335 Food service, 1,028
+  Licensed shops), 3,099 of them (92.1%) in a ring; the page says "about nine storefronts
+  in ten".
+- **`add-country` for Switzerland, kept to what one build established**:
+  `docs/data_sources/switzerland.md`. Commerce is licensed and published municipally and
+  by trade; the Stadt's CKAN geodata downloads are an Angular page, so the WFS is the
+  route; CC0; LV95 (EPSG:2056) is the national grid and the register's own. No other Swiss
+  city was probed.
+- **The register: `Gastwirtschaftsbetriebe`, 3,487 rows through the WFS, every one
+  `Offen` and `jahr` 2026** (the publisher: only open premises are published), last
+  updated 2026-09-28. Every row has an LV95 point; the WFS's WGS84 point agrees to
+  0.07 m at most, and step 2 gates it. All 3,363 storefronts lie in the Stadt. The second
+  CKAN hit (`sid_wipo_...od1111`) is the same register's year-end counts, not a source.
+- **The taxonomy: `pipeline/taxonomies/zurich_gastwirtschaft.py`**, keyed on
+  `betriebsart`, 14 values each with a home (the publisher documents 11), an unknown one
+  raising; a continuity column (handed over).
+  - Food service: Gastwirtschaft, Nebenwirtschaft, Kleinwirtschaft, Take Away, the one
+    seasonal outdoor restaurant, and **Dancing / Disco (10) - FLAGGED: the brief's screen
+    had dance halls out (food 2,325); the standing rule keeps nightclubs not named as
+    adult (category_rules R5), so the build follows the rule (2,335).** Owner to confirm.
+  - Licensed shops (the Retail bucket, partial): Kleinverkaufsstelle 954, Kiosk 53,
+    Tankstelle 21 (owner, 2026-09-30).
+  - Out: Ausgabestelle 56 (the city files caterers, kiosks with seating and food trucks
+    there; R1), Kantine / Mensa 31 (R1), Patentbefreit 25 (a catch-all, read by name),
+    Cabaret / Nachtclub 6 (R3), Veranstaltungsraum 6.
+  - **Non-storefront share: 3.6% out by type, plus about 79 institutional kitchens
+    licensed as ordinary restaurants (3.4% of food; care homes, staff restaurants,
+    hospitals, clubhouses, by a name pattern with a few false hits such as "Noerd
+    Kantine").** Göteborg's equivalent was 26.5%. Not filtered: Stockholm's name rule was
+    the owner's call on 13% of its register; here the page says they remain. **FLAGGED for
+    the owner.** A few Kleinverkaufsstelle licences are offices and online sellers; the
+    page says so.
+- **Names.** The dot shows `betriebsname` and the licence type in English with the
+  register's word ("Shop licensed to sell alcohol (Kleinverkaufsstelle)"). 12 trade names
+  read by eye as a person's own show the address (`config.PERSON_NAMED`, Kansas City's and
+  New Orleans's rule); kiosk signs with a surname stay. Privacy verdict: publishable
+  (the read in place of `check_personal_exposure.py`, which needs the registry entry).
+- **The trams.** 36 `route=tram` relations kept (refs 2-11, 13-15, 17, 50, 51), eight
+  judged out in `NOT_DRAWN`: tram 12 (1 of 18 stops in the Stadt; the brief's screen said
+  2; still a stub, call 19), tram 20 (4 of 26, call 25; Bahnhof Altstetten and Seidelhof
+  are on no drawn line and get no ring) and the Forchbahn S18 (call 18; its four city
+  stops are all tram stops).
+  - **Trams 50 and 51 drawn - FLAGGED.** They are VBZ's construction lines for the 2026
+    timetable (14 Dec 2025 - 12 Dec 2026, Bahnhofquai/HB rebuilt): they replace the
+    northern halves of 4, 11, 13 and 14 and are the only trams at their outer stops (31
+    and 27 stops in the city). Call 2's floor: Transit's published VBZ timetable shows
+    trips every 15 minutes (a secondary source; VBZ's own pages read did not state a
+    headway). Dropping them would leave Seebach, Auzelg, Frankental and Altstetten Nord
+    unringed. **The map is a 2026 map: when the Bahnhofquai reopens, 4, 11, 13 and 14
+    change back and Zurich must be rebuilt** (a PLAN item for December 2026; step 1 stops
+    once OSM drops refs 50 and 51).
+  - 417 stop positions -> 195 stations; Waffenplatzstrasse's two directions sit 233 m
+    apart under one stop code (uic_ref 8591415), so the collapse limit is 240 m for this
+    city. 180 in the Stadt, 15 outside (trams 2, 4, 10, 50: Schlieren, Zollikon, Opfikon,
+    Kloten, Rümlang), drawn and listed. The variant runs (9's peak run to Triemli, 8's
+    Sunday run to the Zoo) add no stop of their own.
+  - **Median gap 282 m** (brief 283), halved rings, gated at 240-330 m.
+  - **Colours - FLAGGED, outside OSM's.** VBZ gives 2/15, 3/11 and 4/9 one colour each
+    and 7/50/51 black; two lines with one colour are refused, so the lower number keeps
+    VBZ's and the other moves (Den Haag's "one moves"): 15 `#F07A86`, 11 `#005A25`, 9
+    `#8A4FA8`, 50 `#4D4D4D`, 51 `#858585`. Tram 10's `#CE1F75` was Delta-E 11.9 from the
+    Food service pins and is darkened to `#8E1450` (20.2; Seoul's line 8). Tram 7's
+    `#000000` raises in `linecolour.dark_label` (a colour darker than the dark halo is
+    moved darker), so it is drawn `#262626` (London drew the Northern's black as a grey).
+    Step 3 asserts OSM still records VBZ's colours.
+- **CRS: EPSG:2056 (LV95)**, overriding the scaffold's UTM 32N (the tram-city skill).
+  At integration, 2056 was added to `check_provenance.py`'s NATIONAL_GRIDS (5.9-10.5 E)
+  and the brief's `zurich-projected-crs` check now carries `crs` EPSG:2056 (its derived
+  UTM zone claim is unchanged and still true).
+- **Page.** The template, filled from the build. **Sentences outside the template,
+  FLAGGED**: the colour clause; "Trams 50 and 51 run only while the Bahnhofquai stop is
+  rebuilt ..."; the not-drawn sentence (buses, the S-Bahn, the Forchbahn and why; trams 12
+  and 20 and the two unringed stops); the person-name clause; the "Read the density"
+  caveats (institutional kitchens, offices and online sellers, shared addresses). No
+  frequency sentence: no operator timetable was read for one.
+- **Licence read: PERMITTED (CC0)**; no notice required; the caption credits "Stadt
+  Zürich" as the city recommends. The OSM rail notice gains a Zurich clause.
+- **Rejected:** keeping the brief's food count by leaving clubs out (breaks R5); a
+  name filter on institutional kitchens without the owner (Stockholm's was an owner
+  call); leaving 50 and 51 out (would unring the city's north and west ends for the
+  whole of 2026); drawing duplicate colours (refused at render).
+
+### 2026-09-30 - Göteborg built on tram-build: trams 1-13, and the city's food register by its own types
+
+- **Göteborg built on Stockholm's template and `osm_tram.py`.** 127 stations,
+  2,987 storefronts (2,110 Food service, 877 Food shops), and 2,255 of them
+  (75.5%) in a ring. The page says "about three storefronts in four".
+  `coverage` is `narrowed` on tram-build, as Stockholm's is here; the
+  owner's `one_bucket` for "Food premises only" (2026-09-30) is on
+  origin/macro-legend, whose checks it needs, and Göteborg moves with
+  Stockholm when that branch lands (the coordinator, at integration: the
+  agent wrote `one_bucket`, which both of this branch's checks refuse).
+- **The bucket question raised in the brief needed no new call.** The brief's
+  refreshed table and the tram-city skill settle it: food shops count as food.
+  The register holds food premises only.
+- **The trams.** 26 relations, two per line except 13. Lisebergslinjen
+  (444922, heritage) is not drawn.
+  - **305 stop positions collapse to 132 stations**; 127 are in Göteborgs Stad
+    (OSM 935611, 1,030.4 km² with the sea).
+  - **4 and 12 drawn to their ends** (owner, call 21). The stub test passes: 4
+    keeps 15 of 20 (75%), 12 keeps 13 of 18 (72%). Their 5 Mölndal stops are
+    listed, not ringed. Step 1 re-runs the test each build.
+  - **Median gap 390 m** (brief 378), so the rings are halved, gated at
+    320-430 m.
+  - **Colours: OSM's.** Where a line's two relations differ (5, 6, 7, 8, 10),
+    the drawn relation's colour is taken. Where it is a CSS word (4 "green", 11
+    "black"), the other's hex.
+  - **Line 4 lightened** to `#00BB70`. OSM's `#00A261` was 8.8 from the
+    Personal services pins; +0.05 lightness gives 13.3 (Prague's precedent for
+    the same green). Rejected: darkening, for Lille's dark-basemap reason.
+  - **Line 1 is OSM's white.** Its label passes on a dark halo (18.7:1), so it
+    is kept.
+  - Labels "Tram 1" to "Tram 13", Riga's form (Västtrafik's own is "Spårvagn
+    1").
+- **The register: Livsmedelsverksamheter's CSV** (CC0 on the distribution
+  node), 5,066 rows, no dates.
+  - **`sweden_livsmedel.py` is unchanged.** Göteborg's `typ` is its own local
+    vocabulary (47 values), not Stockholm's national groups. So step 2 maps the
+    10 storefront types to the module's two groups and excludes the other 37
+    with a reason (1,819 rows). A new type stops the step. The pin shows the
+    national group.
+  - **Out, by type, with some public premises among them**:
+    - "RESTAURANG - mottagning" (13): 11 are staff restaurants;
+    - FRUKOSTSERVERING (26): hotel breakfast rooms;
+    - FARTYG (20): ships, 3 cafés among them;
+    - KAFFEROSTERI (8): production;
+    - APOTEK (61): `category_rules.md`.
+  - **Bakeries and ice-cream makers with a shop are Food shops**;
+    ice-cream kiosks are Food service.
+  - **Blank `typ` (274)**: classified by the module's name rules (owner, call
+    20). 92 kept, 182 dropped. "24SJU" (2) is dropped because the module does
+    not know it. A Göteborg-only rule would not survive step 3, which
+    re-classifies from the name.
+  - **The module's name test drops 47 typed premises.** Among them are public
+    cafés at two hospitals, a children's hospital, Trädgårdsföreningen and a
+    gym. That is Stockholm's rule, and changing it moves Stockholm.
+  - **Vending machines out by name (2)**: category rule.
+- **The fallback point: 29 storefronts (1.0%) not placed.** The distribution's
+  description says premises with no correct address, or mobile, are placed at
+  the Environment Administration's address point.
+  - 135 register rows sit within 16.5 m of the AMBULERANDE rows' median, then
+    none within 42 m.
+  - Florida Pizzeria's own address is Väderlekstorget 6.
+  - New Orleans's 0,0 precedent. Rejected: keeping them, which would pile 29
+    restaurants and shops on one Majorna street corner.
+- **Privacy verdict: publishable.** The register names premises. 13 of the 738
+  person-shaped names read as a person's own and show their street address
+  (Kansas City's rule). No placed storefront is at an apartment.
+- **No notice for the register** (CC0). The OSM rail notice names Göteborg's
+  lines and the kommun boundaries.
+- **Page: the tram-city template with Stockholm's business wording.** No
+  frequency sentence (no timetable read). PROPOSALS outside the template,
+  flagged for review time:
+  - "in OpenStreetMap's own colours, line 4's made a little lighter so it
+    stands apart from the dots";
+  - "Buses, ferries and commuter trains are not drawn, and neither is
+    Lisebergslinjen, the heritage tram line.";
+  - the Mölndal sentence in the plural ("Trams 4 and 12 run on into Mölndal,
+    so their 5 stops ... The lines are still drawn to their ends");
+  - the business-source paragraph, including "Where a premises is registered
+    under a person's name alone, its dot shows the street address instead" and
+    "Premises the register has no correct address for are placed at the
+    Administration's own address, so they are not shown: about one storefront
+    in a hundred";
+  - the one-bucket paragraph's list of what is left out, and "It holds food
+    premises only". Stockholm's "No open register of other shops ... covers"
+    was not reused: no second-source probe has been run for Göteborg
+    (reprobe-city);
+  - the register caveat: "A food registration is not always a food business:
+    gyms, cinemas, bingo halls and general stores that sell some food are
+    registered as cafés or food shops and are counted, and a few staff
+    restaurants registered under a company name remain";
+  - the title "Göteborg: food businesses around tram stops" (Stockholm's
+    form).
+- **Pending for review time**:
+  - `coverage`: flip Göteborg to `one_bucket` with Stockholm when
+    macro-legend lands;
+  - `sweden_livsmedel.layer_label` would make both Swedish layer menus say
+    "Food shops", and `24sju`/vending words in its name rules; each moves
+    Stockholm, so drift-check Stockholm if applied.
+- **Macro labels, settled with Zurich's and Den Haag's** (the coordinator):
+  a grid search over the six crowded Europe labels, PROBLEMS 0 at 375, 768
+  and 1200. Göteborg stays above its dot (the scaffold's value); Oslo moves
+  left of its dot (below it met Göteborg's, and no Göteborg offset cleared
+  both Oslo and Copenhagen); Prague moves left and up (`("end", -11, -8)`;
+  above, it met Den Haag's); Milan and Zurich go right of their dots
+  (Milan's pill covered Zurich's marker); Den Haag keeps `("start", 11, 0)`.
+  The checker models the theme button that once hid Oslo's label.
+
+### 2026-09-30 - Den Haag built on tram-build: HTM's 14 tram lines, the city's permit layer and the BAG
+
+- **Den Haag built on Rotterdam's template and `osm_tram.py`, with Amsterdam's
+  precedent for the city's own permit layer.** 166 stations, 6,213 storefronts
+  (Shops and services 4,071, Food service 2,142), and 5,781 (93%) in a ring.
+  The page says "about nine storefronts in ten".
+- **The trams.** Trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17 and 19 and
+  RandstadRail 3, 4 and 34, two OSM relations each, operator HTM, every one
+  `route=tram`, so `mode` is `tram`. RandstadRail E (OSM `route=subway`) is out
+  as a stub (owner, call 22).
+  - **489 stop positions collapse to 231 stations**; 167 are in the Gemeente
+    Den Haag (OSM 192736, 98.1 km²). 64 on ten lines are outside and listed,
+    not ringed (owner, call 26, for tram 1: 20 of its 37 inside here, 54%,
+    against the brief's 19 of 37).
+  - **Six stop names belong to two stops each** (Oosteinde 8.8 km apart,
+    Beresteinlaan 1.0 km, Fahrenheitstraat 905 m, Weimarstraat 568 m,
+    Loosduinseweg 520 m, Duinstraat 351 m). Name collapse would have averaged
+    each pair into one point between them. Step 1 groups a name's positions at
+    300 m single linkage and labels a split name by its lines
+    ("Weimarstraat (line 11)"). No name's groups fall between 230 and 350 m.
+    Rejected: renaming by street or place, which would be this project's
+    words, not HTM's.
+  - **The collapse's spread gate is 250 m, not the shared 200 m**, for two
+    stops whose platforms stand apart after the split: Station Hollands Spoor
+    (A/B and C/D, 206 m) and Mozartlaan (228 m, staggered).
+  - **Median gap 324 m** (brief 335; 322 before the merge below), so the
+    rings are halved, gated at 280-400 m.
+  - **Leidschenveen (RandstadRail 3, 4, 34) and Leidschenveen Centrum (19),
+    10 m apart, merged by explicit alias** at integration (the coordinator,
+    2026-09-30): one interchange, one ring set - Houston's couplet and New
+    Orleans's Canal Street pairs, Oslo's rule. The agent had left them apart
+    as an owner question; the precedent settles it. 166 stations in the
+    gemeente.
+  - **Not drawn:** 9S (two relations, a short working of 9) and RET's
+    Rotterdam tram 8 (in the fetch box only), both in `NOT_DRAWN`.
+  - **Colours.** OSM's own, with three changes, each by the smallest HSL step
+    that clears 13 from every other line (Rotterdam's rule): 19 darkened to
+    `#9f0e11` (it shared `#c01115` with 1); 16 lightened to `#fb8540` (it was
+    Delta-E 2.9 from 4's `#fc751c`, a pair the brief did not list); 10 amber
+    `#fbc02d` and 34 brown `#5d4037` from the palette (no OSM colour). Tram
+    15's `#e63a6b` is 11.9 from Food service's pins, recorded, not changed.
+    Label contrast passes.
+- **The taxonomy: `pipeline/taxonomies/den_haag_source.py`**, Rotterdam's
+  two-source shape with Amsterdam's permit mapping, keyed on the repaired
+  `TYPEBEDRIJ` (73 values, each with a home; an unknown one raises), with a new continuity column.
+  `rotterdam_source` could not be used: it classifies gazette notice kinds.
+  - **In:** restaurants, cafés, lunchrooms, takeaways, snack bars, beach
+    pavilions (70 on the map), coffeeshops (32, Amsterdam's and Rotterdam's call),
+    nightclubs, sports bars, bakeries' cafés, and six `attractiecentrum`
+    permits that are each a restaurant by their own description.
+  - **Out (331):** canteens and club houses, community and youth centres,
+    theatre and cinema foyers, event sites, party centres, hall hire, cooking
+    studios, members' clubs, hotels and their restaurants (Florence's rule),
+    the department store (Amsterdam's `Warenhuis`), caterers, sex businesses,
+    gaming, recreation, and blank types (26 blank and 1 "niet van
+    toepassing", as the brief).
+  - **39 food-typed permits re-typed by their own description**: care-home
+    and school canteens 9, club canteens, sports halls and a stadium 9,
+    museum and theatre cafés 4, hotel and hostel bars and restaurants 15, an
+    "erotic entertainment" disco 1, an association's meeting room 1.
+- **The permit layer.** 158 pending applications out (owner, call 24).
+  - **Fetched by named field**; `AANVRAGER`, `KVKNUMMER` and `RECHTSVORM` are
+    never requested, and the fetch stops if one arrives.
+  - **Double-encoded UTF-8 repaired** in 1,145 fields (`cafÃ©` -> `café`);
+    the step stops if any description is still garbled.
+  - **28 permits whose own description records the business gone are left
+    out** ("opgeheven", "uit KvK", "ingetrokken", "vervallen", "historisch",
+    "vertrokken" ...). Kept: a closure order that ran out in 2024, and an
+    operator trading under a notification after giving up the permit. The
+    brief had read the layer as dropping closures by removal; it mostly does.
+  - **42 older permits at an address with a newer one are counted once**,
+    the newest kept.
+  - **The trade name** is the description with the city's bracketed staff
+    notes, "MELDING" and the leading lower-case type words removed. 39 that
+    are only a type word show the type.
+- **The BAG.** 6,560 shop-class units in use (PDOK, Rotterdam's query, 4.9 MB,
+  no heavy job needed). **1,928 also registered as a dwelling are left off**
+  (Amsterdam's owner call), 29% of Den Haag's units against Rotterdam's 26 and
+  Amsterdam's 757. 561 at a kept permit's address are de-duplicated by address
+  (Amsterdam's rule; Rotterdam's notices had no address and used 3 m).
+- **Privacy verdict: publishable.** 643 shown names match residence.py's
+  shape test; read by eye, five are only a person's name and show the type
+  (`PERSON_NAMED`). The descriptions' staff notes, which name people, are
+  stripped. No applicant column is downloaded.
+- **Vacancy: CBS, Landelijke Monitor Leegstand 2025, table 1**: 180 of 4,480
+  shop units in scope (4%), 1 January 2025; "about one in twenty-five".
+- **Page sentences outside the template, flagged:** the colour sentence
+  (10 and 34 coloured by this project, 1/19 and 4/16 a shade apart);
+  "Den Haag has no metro of its own" (the template's "has no metro", adapted
+  for RandstadRail E); RandstadRail E's sentence; the business paragraph
+  (Amsterdam's wording, adapted); the vacancy and permit-scope caveats. No
+  frequency sentence: no timetable was read.
+- **Notice 83 "Gemeente Den Haag"**: proposed text, for review time. Notice 40
+  (CBS) now names Den Haag too. The OSM rail notice names Den Haag's lines and
+  the gemeente boundaries.
+
+### 2026-09-30 - Florence built on tram-build: T1 and T2, and the Comune's four layers
+
+- **Florence built on Milan's and Rome's template and `osm_tram.py`.** It
+  has 39 stations, 12,052 storefronts (exactly the brief's screen: 7,355
+  retail, 3,024 food, 1,673 personal), and 4,435 of them (36.8%) in a ring.
+  The page says "about three storefronts in eight".
+- **The trams.** T1 Leonardo and T2 Vespucci, two relations each, operator
+  Autolinee Toscane, in OSM's own colours.
+  - **79 stop positions collapse to 43 stations.** 39 are in the Comune di
+    Firenze (OSM relation 42602, ISTAT 048017).
+  - **T1's four Scandicci stops** (Villa Costanza, De André, Resistenza, Aldo
+    Moro) are drawn with the line and listed, not ringed (owner, call 17).
+    Step 1 gates 39 inside and 4 outside.
+  - **Median gap 323 m**, so the rings are halved, gated at 270-380 m.
+  - **Not drawn: eight relations with track and no stops**, all under
+    construction: T3.2.1, T3.2.2 (no ref), T4 and T2.2. The Comune says
+    T3.2.1 Libertà - Bagno a Ripoli opens about January 2027; re-check then.
+    T2's San Marco extension opened on 2026-01-25 and is already on OSM's
+    T2.
+  - **Colours.** T1 `#254395` scores 22.5 against Retail's pin and T2
+    `#5d3988` 33.7. Both are recorded, not changed, because they are the
+    source's. Label contrast passes.
+- **The taxonomy: `pipeline/taxonomies/florence_attivita.py`**, keyed on
+  layer + `tipologiaattivita`, 36 pairs each with a home, with a new
+  continuity column.
+  - **In:** the exempt food service (owner, call 16; Milan's precedent).
+    That is 464 "non soggetta a requisiti comunali" and 175 art. 53; the
+    type does not say which are not open to the public, so the page says
+    some remain.
+  - **Bakers are Retail**, Milan's call: NACE 10.71 sits in the pubblici
+    esercizi layer here but sells bread.
+  - **Tattoo, piercing and permanent make-up are Personal services.**
+  - **Out**, as the screen dropped them:
+    - clubs (186);
+    - internal shops (128);
+    - nonstore sellers (123);
+    - farmers (49);
+    - wholesale (2);
+    - catering and home restaurants (31);
+    - temporary service (6);
+    - sports-ground bars (33);
+    - hotel restaurants (12);
+    - rows with no type in the shop and food layers (19).
+
+    A row with no type in the beauty and laundry layers takes its layer's
+    bucket.
+  - **Kept, flagged:** "CENTRO COMMERCIALE" (7) as Retail. A shopping centre
+    row may overlap the shops licensed inside it.
+- **No name, no address on any layer.** A dot shows its type in English
+  ("Shop", "Restaurant or bar", "Hairdresser").
+  - 3,423 rows share a point with another; they are drawn as they are (the
+    brief).
+  - **Privacy verdict: publishable.** 4,435 pins and 16 distinct labels;
+    nothing here can be a person.
+- **Notice 82, "Comune di Firenze"**: CC BY 4.0, linked, crediting the
+  Direzione Attività Economiche e Turismo and stating the changes. Milan's
+  notice is the model, and the text is the project's own. The OSM rail
+  notice names Florence's lines and the comune boundaries.
+- **Macro label: Florence is 58.1 px** (Houston, Odense, Kansas City and
+  Daugavpils reproduced first, after the tab had drifted to another site and
+  read Houston 50.6). It sits right of the dot at ("start", 11, -3).
+  - **Rome's label moved from above its dot to the right, at ("start", 11,
+    2).** Above, it covered Florence's marker in Europe at all three widths.
+    The in-process grid passes Rome at -6 to +10 and Florence at -12 to +6.
+  - **A front-page change for deploy-verify.**
+- **Page: no frequency sentence**, flagged. GEST's timetable was not read.
+
+### 2026-09-30 - New Orleans built on tram-build: the five lines RTA runs, and a new taxonomy
+
+- **New Orleans built on `osm_tram.py` and a new text taxonomy.** It has 106
+  stations, 4,689 storefronts, and 2,131 of them (45%) in a ring. The page
+  says "about nine storefronts in twenty". The brief screened 38.1% over
+  its 110 stops.
+- **The brief's lines were out of date; the owner re-took the call at build
+  ("draw what runs", 2026-09-30).**
+  - The brief drew 12, 47, 48 and OSM's "2", with 46 and 49 out "unless in
+    service".
+  - RTA's service-changes page (Fall '26 schedules, effective 2026-09-20)
+    says 46 Rampart/UPT "will officially reopen for service" (Summer '25).
+    It also says 49 Riverfront "will now run along the river from the
+    French Market to Julia Street" and "will no longer service Canal
+    Street, Loyola Avenue, or Union Passenger Terminal".
+  - **Drawn: 12, 46, 47, 48, 49.** OSM's two ref-2 relations are the old
+    Riverfront routing via Canal Street, and are `NOT_DRAWN`, superseded.
+  - **Rejected:** the Riverfront alone, without 46, which drops a line that
+    runs; and the brief as written, which draws a routing RTA no longer
+    runs.
+- **46's and 49's stops come from OSM's own tram-stop nodes.** 46's are
+  relation members with no role, and 49's stand beside its track. 32 nodes
+  were assigned to their line by distance to its track (0-10 m) and added
+  by node. John Churchill Chase Street, 260 m off 49's new track, is not
+  served.
+- **Stop names.**
+  - **46 shares three Loyola Avenue stations with 47**: OSM's 47 runs
+    Loyola to the terminal, so Tulane, Poydras Street and Julia Street merge
+    as 46/47.
+  - **The riverfront's own Poydras Street and Julia Street**, 600 m away,
+    are renamed "Riverfront at Poydras" and "Riverfront at Julia".
+  - **Four one-stop-two-names pairs are merged by explicit alias**, 6-26 m
+    apart, each direction named for its own side's cross street: Canal at
+    Basin / Elk Place, Canal at LaSalle / Marais, St. Charles at MLK /
+    Melpomene, Canal at North / South Claiborne. That is Houston's couplet
+    rule.
+  - The result is 192 stop positions, 110 names and 106 stations.
+- **`osm_tram.py`, two backward-compatible changes.** The Czech kit takes
+  the same file. The Aarhus control passes, and drift checks for the five
+  earlier tram cities are below.
+  - **`station_add` takes an optional third element, the shown name**, for
+    one node. A name alias renames every node of a spelling, so it could
+    not separate the two Poydras stops.
+  - **The gap check is per line.** An add is stale when its own line already
+    has the stop. A stop of that name on another line is a shared station.
+    Before, any route stop of the name refused the add.
+- **Rings: median gap 186 m** (the brief read 164 m over its 110), so the
+  rings are halved, step 1 gates the median at 120-220 m, and no stop is
+  thinned (call 13). The page carries the template's band sentence.
+- **Colours: OSM's own**, with the CSS keywords resolved by their CSS
+  definitions:
+  - 12 `green` #008000 scores 37.2;
+  - 47 `red` #FF0000 scores 62.3;
+  - 48 #90EE90 scores 30.5;
+  - 49 #5C2E86 scores 37.8;
+  - 46 has no colour in OSM and takes the project's #b8860b, 74.8.
+
+  Three are under the preferred 45. They are recorded, not changed, because
+  they are the source's colours. `check_map_markup` passes, and every label
+  reads at 4.5:1.
+- **The taxonomy: `pipeline/taxonomies/nola_businesstype.py`**, a new
+  continuity column, and a brief check.
+  - **Method.** `businesstype` is one level with 486 values: NAICS-era
+    titles with no codes, often inverted and misspelt, plus a dozen of the
+    City's own permit types. 187 match a NAICS 2017 or 2022 title exactly,
+    and 341 do once the inversion and the typos are undone. 17 storefront
+    and edge types were coded by hand. Each value maps to the NAICS code its
+    title names, so `naics.py` decides the bucket and every shared carve-out
+    holds.
+  - **The trap:** "Personal Services, Other" (249) title-matches the
+    4-digit group 8129, which keeps rows. It is the 812990 catch-all (R2),
+    coded so and asserted at import.
+  - **Catch-all share, declared in the brief:** 676 of 16,521 (4.1%).
+  - **Out, not NAICS:**
+    - the brief's two types;
+    - festival and Carnival vendors;
+    - **flea-market stalls (344)**, on category_rules R1: a market's stalls
+      and stands are out;
+    - street artists (281), video poker (261) and short-term rentals.
+  - **Kept:** pawnshops (7) stay Retail by R5, though NAICS files them as
+    lenders.
+  - Buckets: Food 1,808, Retail 2,452, Personal 710 licences.
+- **The register, step by step** (`iqay-p646`, CC0, daily). `ownername` and
+  `businessphone` are never downloaded, and the step asserts it.
+  - 4,970 licences are storefront types.
+  - **219 sit at the register's 0,0**, ungeocoded, and are counted as
+    unplaced; the page says "about one in twenty-three". One more point lies
+    outside the parish.
+  - 4,750 collapse to 4,689 premises.
+  - Two care-of or attention tails are cut from names: "HANGER PROST & ORTH
+    C/O GREG MYERS" put a person's name on a pin.
+  - **808 show the address**: 783 with no business name, and 25 whose name
+    is only a person's (`config.PERSON_NAMED`). All 697 person-shaped
+    names were read by eye, and ambiguous ones are listed. Brands and bars
+    are kept ("KATE SPADE", "ERIN ROSE").
+- **Privacy verdict: publishable.** 2,131 pins:
+  - 0 contact details after the tail cut;
+  - 0 surname-first names;
+  - 2 person-like names at a unit, both restaurants (Johnny Sanchez, Willa
+    Jean) in commercial units;
+  - one bracketed name, "OTHER PLACE (THE)", a bar.
+- **Page: no frequency sentence**, flagged. The brief's "about every 10
+  minutes" was search-level, and RTA's schedules were not read for it.
+- **Macro label: New Orleans is 82.8 px, right of the dot at ("start", 11,
+  4).** **Houston's label rose from level to dy -22.** Level, it covered New
+  Orleans's marker at the Global zoom; lower, it covers Miami's; left, it
+  meets Los Angeles's and Tucson's.
+  - The search was an in-process grid over Houston × New Orleans, about 160
+    sets. Houston passes start 11 at dy -30 to -18, and New Orleans 0 to +8.
+  - **A front-page change for deploy-verify at review.**
+
+### 2026-09-30 - Tucson built on tram-build: Sun Link and the City's BUSLIC layer
+
+- **Tucson built on Houston's rules and `osm_tram.py`.** It has 21
+  stations, 5,243 storefronts, and 340 of them (6.5%) in a ring. The page
+  says "about one storefront in fifteen".
+- **Sun Link.** OSM relations 3920972 and 12426661, ref "Sun Link". Their 23
+  stop positions collapse to the brief's 21 stations; downtown runs on
+  one-way couplets, so each direction's stops keep their own names. All are
+  inside the City as TIGER draws it (place 0477000, 629.4 km²).
+  - **Median gap 265 m**, exactly the brief's, so the rings are halved, and
+    step 1 gates the median at 200-340 m. No gate 3.
+  - **Colour `#e65100`, deep orange, 59.7 against Food service.** Teal
+    `#00838f` was tried first and scored 42.3 against Personal services.
+  - The page states the frequency: 10 minutes on weekdays 07-18, and 20
+    otherwise.
+- **Scope: TIGER, not the brief's OSM relation 253824.** This is Houston's
+  layer, and it costs no Overpass query while both mirrors were 504ing.
+  Every stop is inside either way.
+- **BUSLIC (layer 3), step by step.**
+  - The server filter is `LIC_STATUS = 'Active' AND HOME_OCCUPATION = 'F'`,
+    asserted again in step 2. That is 24,191 licences; the 10,573 active
+    home occupations are never downloaded.
+  - **7,120 storefront licences** by NAICS: Retail 4,049, Food 1,779,
+    Personal 1,292. The brief screened 4,056, 2,011 and 1,245.
+    - 539 (7.6%) have no point. The page says "about one licence in
+      thirteen".
+    - 23 lie outside the city.
+    - 19 have APT in the `APT` field and are left off as homes. The field is
+      otherwise shop suites ("STE 101"), so only APT, APARTMENT and TRLR
+      count.
+  - **6,539 licences collapse to 5,243 premises.** A business holds a
+    business licence, a tobacco licence and a liquor licence at one
+    address, so rows collapse on name and address.
+- **Names (call 15).** The address is shown for 748 premises:
+  - **692 with a personal OWN_TYPE**: Sole Proprietorship 525, Individual
+    151, Married 16;
+  - **45 whose account name is only a person's**, Kansas City's rule. All
+    642 distinct shown names that `residence.looks_personal` reads as a
+    person's were read by eye. The 45 are listed in `config.PERSON_NAMED`,
+    and step 2 stops if one disappears. The rest are shop names ("RATHER
+    KEEN", "BLIND PIG") or brands ("SONNY ANGEL").
+  - **11 with no account name.**
+
+  2,040 storefronts have no OWN_TYPE at all. Their account names are trade
+  names apart from those in the list.
+- **Privacy verdict: publishable.** 340 pins:
+  - 0 contact details;
+  - 0 surname-first names;
+  - 0 person-like names at a residential unit;
+  - 69 person-like by the heuristic, all shop names from the list read by
+    eye (22% of them at an STE suite).
+- **Licence: SILENT, read as permitted by the owner.** Notice 81, "Business
+  licence data: City of Tucson.", is the owner's wording. The page quotes the
+  layer's own words: the list "should not be considered a complete listing".
+  The OSM rail notice now names Kansas City's and Tucson's streetcars. It had
+  missed Kansas City's in the first commit.
+- **Macro label: Tucson is 48.6 px, right of the dot at ("start", 11, -5).**
+  - **San Diego's label moved from east of its dot to west, over the
+    Pacific, at ("end", -11, -2).** East of its dot it covered Tucson's
+    marker at the Global and United States zooms. The scan: San Diego
+    passes dy -5 to +1, and Tucson -7 to -2.
+  - **Tucson is left out of United States West's zoom fit**
+    (`REGION_ZOOM_WITHOUT`), as Riga is out of Europe's. Fitted to Tucson,
+    the zoom dropped and San Francisco's pill covered Sacramento's marker.
+    - **Rejected: moving San Francisco's and Los Angeles's labels west too.**
+      It also scores PROBLEMS 0, but San Francisco's pill then clips 26-37%
+      off the left edge at 375 px.
+    - Left out of the fit, California keeps its zoom, and the centre moves
+      about 3° east.
+  - **Two front-page changes for deploy-verify at review:** San Diego's
+    label, and United States West's centre.
+- **Notice numbering.** Notices 80 (Kansas City) and 81 (Tucson); first
+  numbered 69 and 70, which clashed with France's 69-71, and renumbered at
+  landing.
+
+### 2026-09-30 - Kansas City built on tram-build: the KC Streetcar and KCMO's frozen licence register
+
+- **Kansas City built on Houston's rules and `osm_tram.py`.** It has 19
+  stations, 3,561 storefronts, and 451 of them (12.7%) in a ring. The page
+  says "about one storefront in eight".
+- **The streetcar.** OSM relations 7825409 and 7825410, ref 601, operator
+  "Kansas City Streetcar Authority". Their 35 stop positions collapse to the
+  brief's 19 stations, all inside the City as TIGER draws it (place 2938000,
+  824.8 km²). RideKC's GTFS was not fetched (owner).
+  - **Median gap 384 m, not the brief's 413 m**, so the rings are halved, and
+    step 1 gates the median at 350-480 m.
+  - No gate 3: RideKC's count is barred, and the brief's 19 is OSM's own
+    count, which step 1 checks.
+  - Colour `#b8860b`, Odense's, scoring 74.8 against the nearest pin. OSM
+    records none, and no logo is used.
+  - The frequency, "about every 10 minutes by day, seven days a week", is
+    stated as a fact, as the brief says.
+- **Found: the brief misread the register's name columns.** `dba_name` is
+  filled on all 15,895 rows and holds the LICENCE HOLDER: "HARRIS GREGORY J"
+  for a person, "MANREET INC" for a company. `business_name`, filled on
+  5,835 rows, is the trade name ("7 ELEVEN STORE NO 18711C" over MANREET INC).
+  - **Decided: call 11 (Houston's sole-owner rule) is read on the holder.**
+    Where the holder reads as a person (surname first, letters only, no
+    organisation word; it is meant to over-fire), the pin shows the address
+    and no name at all, not even the trade name. That is Houston's rule,
+    which withholds a person's trade name too. This covers 684 storefronts.
+  - **Otherwise the pin shows the trade name, else the holder company.**
+    That is 1,385 trade names and 1,466 holder companies. Showing the trade
+    name departs from the brief's "show `dba_name`", which assumed
+    `dba_name` was the trade name. **Flagged for the owner.**
+  - **A company named only as a person shows the address too.** This
+    follows Bucharest's precedent ("Caranica Mihai SRL") and Denmark's. All
+    587 shown names that `residence.looks_personal` reads as a person's
+    were read by eye: 271 trade names and 316 holder companies with the
+    legal form stripped. 26 are people ("ALYSSA BULLIS LLC", "NEVA J
+    WILLIAMS"), listed in `config.PERSON_NAMED`. The rest are shop names
+    ("CROWS COFFEE") or chains named for a founder ("KENDRA SCOTT",
+    "JOHNNY WAS"), and are kept as brands. Step 2 stops if a listed name
+    disappears. The register is frozen, so the list is measured rather
+    than guessed.
+- **Privacy verdict: publishable.** 451 pins:
+  - 0 contact details;
+  - 0 surname-first names;
+  - 0 at a residential unit, because the register's addresses carry no unit
+    at all, so Houston's apartment test cannot fire;
+  - 39 person-like names by the heuristic, all shop names (Akoya Omakase,
+    Midtown Tavern, Hotel Indigo);
+  - 163 holder-company fallbacks, read by eye in the ring: 169 names, all
+    companies once the 26 above were withheld.
+- **The register, step by step.** Of the 15,895 rows:
+  - 13,917 are licences valid for 2025 or 2026 (owner, call 10). The 1,978
+    valid for 2024 had lapsed by the freeze.
+  - **1,095 carry only a fee code** ("Misc Rate 129", "Flat Rate 42A"). They
+    were dropped, and the page states the count (call 12). The brief's
+    1,200 counted all years. No restaurant hides under a fee code: one
+    fee-code name of 1,095 reads as food.
+  - **615 NAICS 2022 titles map to codes through the Census title file**
+    (a new support source with a row; federal, public domain), compared on
+    letters and digits. One truncated title, "Freight Transportation
+    Arrangemen", maps by unique prefix. Every title maps.
+  - 3,612 are in the buckets; 11 points lie outside the city; 40 are
+    duplicates by name and address. That leaves 3,561.
+  - **NAICS 2022 has no "nonstore" code (454)**, so online sellers are NOT
+    left out by code here. The page says a web shop is filed under its
+    goods, Odense's caveat, rather than Houston's "online sellers are left
+    out". Vending machines (23) and fuel dealers (1) are left out.
+- **Found: Food service is thin.** 175 premises in the whole city, 52 in a
+  ring; only 26 full-service restaurants citywide. The licence register
+  holds few restaurants and bars.
+  - **Kept `coverage` "full"**, on Houston's precedent: its personal
+    services were 94 of 2,223 in-ring pins and it stayed "All three". KC's
+    food is 52 of 451.
+  - The page says "It holds few restaurants and bars, about 175 across the
+    whole city". **That sentence is outside the template: flagged.**
+  - **The owner's call, if it is wanted:** `narrowed` with "Food thin"
+    instead, or a city food-permit source (none is in the brief).
+- **Page sentences outside the template, flagged:**
+  - the register caveat, "a licence is issued to a business at an address
+    ...";
+  - the web-shop sentence;
+  - the thin-food sentence;
+  - "and so it does where a company trades under a person's own name".
+- **Macro label: Kansas City is 79.3 px, measured with Houston, Odense,
+  Daugavpils and Riga reproduced. It sits left of the dot at ("end", -11,
+  8).**
+  - **Chicago's label moved from below its dot to the left, ("end", -11,
+    -2).** Below its dot it covered Kansas City's marker at the Global and
+    United States zooms, at all three widths, and no offset of Kansas
+    City's own label can fix that. The scan:
+    - Chicago passes dy -8 to +5;
+    - Kansas City passes dy +2 to +13;
+    - PROBLEMS 0.
+  - **A front-page change to a published city, for deploy-verify at
+    review.**
+  - At 375 px in United States East, Kansas City's pill runs 17.3 px (19%)
+    off the left edge. It is reported as clipped, not a problem.
+- **Licence read (2026-09-30): PERMITTED WITH CONDITIONS; the one owner
+  decision it raised is made (below), and Kansas City is cleared to land.**
+  - **The grant.** KCMO Code § 2-2134(a) requires portal datasets to be public
+    domain with "no restrictions or requirements placed on use".
+    `kkhs-93m4` and its parent `pnm4-68wg` declare Public Domain, and that is
+    the City's choice, not a portal default.
+  - **The disclaimer.** The portal's undated Data Terms of Use prescribe a
+    disclaimer for any derivative application. It is Chicago's wording on
+    the same portal template, so it is displayed site-wide as **notice 80**,
+    verbatim, including the dead host `www.data.kcmo.gov`.
+  - **The indemnity.** The same terms claim an open-ended indemnity from
+    "any user of the data". RideKC's GTFS was barred partly over one.
+    - **Decided by the owner (2026-09-30): the ordinance controls; land
+      Kansas City.** The dataset is declared public domain, KCMO Code
+      § 2-2134(a) backs it, and the terms page is undated, with no
+      acceptance step, so the indemnity is read as binding nothing.
+    - **Rejected:** asking data@kcmo.org first, and dropping the city.
+  - **Notice numbering.** France also numbered notices 69-71 on its branch,
+    so the kit's four notices were renumbered 80-83 at landing, in landing
+    order.
+
+### 2026-09-30 - Daugavpils built on tram-build: all five routes, 37 stations
+
+- **Daugavpils built on Riga's layers through `latvia_register.py`.** It
+  has 37 stations, 819 storefronts, and 80.1% of them in a ring (the
+  screen: 81.5%).
+- **All nine OSM relations, refs 1-4, were kept: all five routes are drawn**
+  (the owner's overrule of call 28). Ref 3 carries three relations:
+  - route 3, Cietoksnis-Stropu ezers, one relation each way;
+  - the loop the operator's own linked page calls route 5. OSM tags it 3.
+
+  Their stops are unioned. Route 3 adds Balvu iela and Stropu ciemats.
+  Route 3's track lies almost wholly on the loop's (0.07-0.09 km off it), so
+  the loop is drawn once, labelled "Trams 3 and 5". The page states each
+  route's wait, from the brief: 1 every 10-15 min, 3 and 5 every 20-30, 2
+  and 4 about hourly.
+- **37 stations, not the brief's 38.** The brief counted "Lokomotīvju demo",
+  one direction's misspelling of Lokomotīvju depo on routes 2 and 4, as a
+  stop of its own. It is aliased.
+- **Stropu ciemats is a stop member of both route-3 relations**, but it is
+  tagged only highway=bus_stop and public_transport=platform. It was
+  accepted by node through osm_tram's new `accept_members`.
+- **There is no operator whitelist.** The relations spell the operator
+  "Daugavpils Satiksme AS" and, on route 2, "SIA". Every tram relation in
+  the box is one of the nine.
+- **Median gap 291 m: the rings are halved.** No gate 3: no operator count
+  was read.
+- **Businesses.** Food: 98 premises, 94 placed (95.9%) on VZD's address
+  register (15,221 existing addresses in the city). Shops and services: 725
+  of 956 premise groups, all placed. The screen's 722 predates the
+  2026-09-29 rule changes. Step 2's measured peak was 0.30 GB.
+- **Colours.** Riga's orange, brown and gold for 1, 2 and 4. Deep purple
+  `#4a148c` for 3 and 5: Riga's cyan scored 40.9 against Personal services,
+  and the purple scores 47.1 against the nearest pin and 78+ against the
+  other lines.
+- **Privacy verdict: publishable.** 656 pins, 0 person-like names, 0
+  contact details; no holder column is ever read.
+- **Daugavpils was also left out of Europe's zoom fit.** At 26.5° E it is
+  the easternmost European city, 0.4° east of Bucharest, so it moves
+  Europe's centre that far east. That is a front-page change that
+  deploy-verify should look at in the review batch. Its label is 73.7 px,
+  right of the dot (dy -12 to 12 pass): PROBLEMS 0.
+- **Notice 42 now reads "VZD (Riga, Liepāja, Daugavpils)"**, and the OSM
+  notice names Daugavpils's trams. Both are for the owner's approval at
+  review time.
+- **`osm_tram.py` gained two backward-compatible options** (commit 97ba25a).
+  The Czech kit takes the same file.
+  - `station_add` accepts a tuple of refs. This was the Czech kit's
+    request, for Plzeň's Jízdecká and U Synagogy, which lines 1, 2 and 4
+    all serve.
+  - `accept_members` accepts a named stop member that has no stop tag.
+
+  The Aarhus control passes, and Odense's and Liepāja's figures are
+  unchanged.
+
+### 2026-09-30 - Liepāja built on tram-build; Riga's step 2 lifted into latvia_register.py
+
+- **Riga's step 2 was lifted into `pipeline/countries/latvia_register.py`,
+  and Riga's output did not move.** Riga's step 2 is now a thin call into
+  the module.
+  - **The control** is `scripts/latvia_register_control.py`. It rebuilds
+    Riga's frame through the module and compares it with Riga's
+    `businesses_clean.csv`. All 6,725 rows are identical, and all 11 step 2
+    figures match `outputs/riga/baseline.json`.
+  - **Rejected: running `drift_check.py riga` as the control**, which the
+    skill had named. It would re-run Riga's steps from a branch into the
+    shared `data/` junction, and the in-memory control answers the same
+    question without writing.
+  - **The classification stays in `pipeline/riga/config.py`**, and later
+    Latvian configs import it from there. `category_continuity_table.py`
+    reads those rules by their text in Riga's config, so moving them would
+    break that check. One set of rules for the country, decided once.
+  - **Measured peak: 0.34 GB.**
+- **Liepāja built: 18 stations, 702 storefronts, 69.7% in a ring** (the
+  screen's figure).
+  - **Stations: the 15 stop names on OSM's two ref-1 relations, plus three
+    added by node.** All three lie on the relations' own track:
+    - Brīvības iela, the terminus, is a platform member whose stop
+      position carries no name;
+    - Klaipēdas iela, between Tukuma iela and Ventas iela, has a stop
+      position each way but is on neither relation;
+    - Rožu laukums, between Pētertirgus and Koncertzāle, is a platform
+      member each way with no stop position.
+  - **The approved call named only Brīvības iela and Klaipēdas iela**, but
+    the brief's own count of 18 needs Rožu laukums too. So it was read as
+    the brief's prose missing one stop, not as a new call.
+  - **`osm_tram`'s `station_add` now accepts a named platform node**, for
+    an add only, and refuses an add whose name is already a route stop. The
+    Aarhus control still passes, and Odense still has zero drift.
+  - **Spacing and frequency.** The median gap is 313 m (the brief: 329 over
+    15). No gate 3: no operator count was read. The approved call's "about
+    every 7 minutes" is stated on the page.
+  - **Food** comes from the excise register (Riga's national cache), placed
+    on VZD's address register `aw_eka.csv` (fetched 2026-09-30, 7,839
+    existing addresses in Liepāja): 131 premises, 123 placed (93.9%: 110
+    exact, 13 with the unit dropped). This matches the screen.
+  - **Shops and services** come from the premise groups in ATVK 0005000:
+    771 premise groups, 579 kept, all placed. The screen counted 583 before
+    the 2026-09-29 name-rule changes (fuel stations kept, repair and stands
+    dropped).
+  - **Step 2's measured peak was 0.30 GB.**
+- **Liepāja privacy verdict: publishable.** 489 pins, 0 contact details and
+  0 person-like names. No holder column is ever read: food shows the kind
+  and street address, shops show the cadastre's own word.
+- **Notice 42 widened to "VZD (Riga, Liepāja)", FOR THE OWNER'S APPROVAL AT
+  REVIEW TIME.** It names Liepāja's cadastral map and VZD's State Address
+  Register, with the elements the brief requires:
+  - VZD's own source wording and the year, "Izmantoti Valsts adrešu
+    reģistra informācijas sistēmas dati, 2026. gads";
+  - VZD named, and CC BY 4.0 linked;
+  - the changes described: addresses matched and points used to place each
+    premises, and the file not shown;
+  - "VZD has not approved these changes or this map."
+
+  The OpenStreetMap rail-geometry notice now names Liepāja's tram, its
+  stops and the city boundary.
+- **Liepāja is left out of Europe's zoom fit (`REGION_ZOOM_WITHOUT`), as
+  Riga, Stockholm and Bucharest are.** Fitted to it, the zoom dropped and 57
+  label problems appeared at every width, whatever Liepāja's own offset. It
+  lies inside the frame Riga and Bucharest already set, so the centre does
+  not move. Its label is 48.2 px, measured, placed below the dot (dy 14-34
+  pass): PROBLEMS 0.
+- **The template's "{this city's ratio to OpenStreetMap}" is left unfilled
+  for Odense and Liepāja.** Neither template city's page has one: Aarhus's
+  CVR wording and Riga's two-layer wording are what section 6 says to
+  reuse. Measuring one is an Overpass count of shops and food per city, with
+  its own caveats about OSM's tagging. **For the owner: fill it per city, or
+  drop it from the template?**
+
+### 2026-09-30 - Odense built on tram-build; osm_tram.py written, its Aarhus control passing
+
+- **`pipeline/osm_tram.py` written to the tram-city skill's section 4
+  contract (commit 17f906c on `tram-build`), and its control passes:
+  `scripts/osm_tram_control.py` reproduces Aarhus's `stations.csv` exactly**
+  on Aarhus's cache: 20 stations, the same names, lines and kommune, and
+  coordinates within 1e-9 degrees. It is Aarhus's `stop_rows()` generalised:
+  - `select_relations` keeps relations on ref + route (+ operator), and exits
+    on any relation that is neither kept nor in `not_drawn`, on a stale
+    `not_drawn` id, and on a ref with no kept relation. It is also the
+    lines-only mode.
+  - `stop_rows` takes stop members tagged `stop_position` or `tram_stop`,
+    unions a ref's relations, takes `station_add` by node with its expected
+    name, and applies aliases whose two spellings must both be present.
+  - `collapse` is Aarhus's name collapse at 200 m.
+  - `split_by_places` scopes over a union of polygons.
+
+  Aarhus's own step 1 was not rewired: its output is the independent answer
+  the control compares against. The signature, return shape and branch went
+  to the Czech kit (which was waiting on them) and to the France build
+  session. Staging, the app/chrome owner while no third window runs, was told
+  before the file was written.
+- **Odense built: 25 stations, 2,834 storefronts placed (98.4%).**
+  - **Rail.** OSM's two `route=tram` relations (ref L, operator Keolis)
+    carry 24 stop names on 48 stop positions. SDU Syd/Hospital Nord was added
+    by its two direction nodes (7942163365, 7942163366), as the approved
+    call. Gate 3 ran against the operator's figure: 25 against 25, the
+    operator's 26 stops less Hospital Syd. Every station is in Odense Kommune
+    (304.7 km² as OSM draws it). The line is drawn whole with
+    `load_osm_line_shapes`.
+  - **Spacing.** The median gap measured 430 m, not the brief's 441, and
+    holds the halved rings; step 1 stops outside 380-500 m.
+  - **Stray node.** Idrætsparken's node 9034508024 is also on no relation.
+    It is a second stop position 10 m from Idrætsparken's member node, not a
+    station, so it was left alone.
+  - **Businesses.** CVR generation 505 through Aarhus's chain: 3,208 rows in
+    divisions 47/56/96 and 221 structurally excluded, leaving 2,987. `969900`
+    was dropped (108 rows, 3.6%, 84% personally owned against 46%), leaving
+    2,879, of which 2,834 were placed. The screen of 2026-09-27 counted 210
+    structural exclusions and 2,998 storefronts. The build's filter is the
+    shared one, so the build's figure stands.
+  - **Rings.** 1,154 storefronts sit within a ring (40.7%), in-ring
+    R/F/P 603/343/208.
+- **Hospital Syd is a watch item, not a row in `excluded_stations.csv`.**
+  The approved call was "out until it opens in 2027". Listing it failed
+  `check_scope_disclosure.py`: What Is Excluded has no category for a stop
+  not yet in service, and adding one is an `app/station_scope.py` change and
+  an owner call. A stop that is not yet in service is not part of the
+  network, so no category is needed. Step 1's `check_not_yet_open` stops the
+  build when OSM puts Hospital Syd on a route or drops its tag. The page does
+  not mention it. **For PLAN.md: add Hospital Syd when the new OUH opens
+  (due 2027).** Rejected: a new "not yet open" category, which is new public
+  wording for one stop.
+- **The frequency sentence is left out of Odense's page.** It is optional in
+  the template (braces). Odense Letbane's own køreplan page, valid from
+  10 August 2026, states Saturday (7.5 min), Sunday (10 min) and Friday
+  evening (10 min), but no weekday figure. The brief's 7.5 minutes came from
+  the screen, so it is not stated. Rejseplanen is never read. The owner's
+  per-city interval value (sent to cleanup) can carry it later.
+- **Line colour `#b8860b` (dark goldenrod)**, this project's own, since OSM
+  records none. CIE76 74.8 from the nearest pin (Personal services);
+  `check_map_markup.py` PROBLEMS 0. Aarhus's `#30556E` was tried first and
+  scored 42.7 against Retail, under the preferred 45.
+- **Macro label.** The width measured 50.6 px in a browser tab with Google
+  Fonts' Space Grotesk. Seven built cities' widths reproduced exactly:
+  Aarhus 46.9, Prague 47.3, Oslo 29.0, Riga 29.5, Bergen 48.3, Boston 48.4
+  and Chicago 55.0. The offset is `("start", 11, 6)`: only dy 5-8 on the
+  right passes. Above the dot, the label covered Aarhus's marker and
+  overlapped Copenhagen's label; below, it overlapped Amsterdam's and
+  Berlin's. `check_macro_labels.py` PROBLEMS 0.
+- **Odense privacy verdict: publishable**, on Aarhus's precedent.
+  `check_personal_exposure.py odense` found 1,154 pins, 0 contact details
+  and 0 person-like names at a residential unit. The heuristic's 170
+  distinct person-like names were read in full: brands and chains (Arnold
+  Busck, Harald Nyborg, Magasin, ZARA) and company-form shops, cafés and
+  salons trading under a founder's name (HENRIK GUNDTOFT, Ingvard
+  Christensen, Nadja Holst). Personally owned forms are already shown by
+  address. The one bracketed hit, "GreenMind Odense (Kongensgade)", is a
+  chain branch.
+- **Three displayed notices widened to name Odense, FOR THE OWNER'S APPROVAL
+  AT REVIEW TIME** (Aarhus's were owner-approved on 2026-09-29):
+  - CVR, notice 30: "(Copenhagen, Aarhus, Odense)", "Copenhagen's, Aarhus's
+    and Odense's business premises";
+  - Klimadatastyrelsen, notice 31: "in Aarhus and Odense the points are
+    OpenStreetMap's copies of them";
+  - OpenStreetMap (rail geometry): "Odense's Letbane line and its stops, the
+    municipal boundary used to select them and the address points used to
+    place its businesses".
+
+  They sit on `tram-build` and ship only when `app/` lands.
+- **Step 2 is not a heavy job: measured peak 0.70 GB.**
+  - The gate (`scripts/heavy_job.py`) refused it first at the 5.5 GB
+    declared from Aarhus's brief: 6.9 GB available, against 5.5 + 2. That
+    "about 5 GB" was the size of the files read, not memory.
+  - It was re-run under `HEATMAP_MEMCAP_TEST_GB=4.5`, a hard cap that can
+    only lower the per-process limit. The declared 4.5 GB peak was then true
+    by construction, and was admitted.
+  - A Danish step 2 can be declared at 1 GB from now on.
+- **Page numbers by block**, agreed between sessions so the landings don't
+  collide:
+  - Band B: 76-86;
+  - France: 100-119;
+  - tram kit: 130-139 (Odense 130);
+  - Czech: 150-155.
+- **Left for the landing, not done on the branch**:
+  - README's city list (`readme_cities.py`);
+  - the master list's built counts;
+  - `map_inconsistencies.md`'s prose counts (section 6, "half the size in
+    seven cities").
+
+  Each is a shared count that every concurrent build would change on its
+  own branch, so each is set once, at landing.
+
+### 2026-09-30 - All builds activated, with six working rules for concurrent sessions (owner)
+
+- **The owner gave the go for every build session**: Band B, the France
+  builds, the Czech builds and the tram kit. The go was relayed by the tram
+  kit to each live session. The Czech kit asked the owner to confirm it in
+  its own session, which is the right behaviour for a relayed permission.
+- **The six rules, in the owner's words where given:**
+  1. **Heavy jobs**: "If two heavy jobs go under the memory thresholds we
+     established, run those concurrently." The relay first set the budget at
+     12 GB summed over two jobs (the 12 GB with-children cap). A measurement
+     minutes later disproved it: only 2.3 GB of 15.9 was available, with
+     eight Claude sessions taking 6.3 GB, Opera 1.8, and an orphaned
+     staging grep 4.7 (PID 17392, started 13:54, a
+     `.{0,30000}` pattern over a licence page, its parent gone). The tram
+     kit was not permitted to stop another session's process, so that was
+     left for the owner. **Corrected rule**: at most two heavy jobs, each
+     started only when available memory is at least its peak plus 2 GB; an
+     unknown peak counts as 8 GB.
+  2. **Priority**: the tram kit goes before the Czech builds. So the tram
+     kit writes `pipeline/osm_tram.py` first, starting with Odense.
+  3. **DECISIONS.md drafts per session**: "keep drafts for decisions.md for
+     each build session and pass off all at once for cleanup to implement".
+     Each session writes `docs/decisions_drafts/<session>.md`, and cleanup
+     folds them all in at once. That ends the append-only merge conflicts,
+     four of which fell on this session's pushes on 2026-09-30 alone.
+  4. **Overpass**: "stagger osm requests": one query in flight per session,
+     and at least 60 s after a 504 or 429. Both mirrors were 504ing under
+     several sessions' load that day.
+  5. **Plan**: the owner is no longer on Pro.
+  6. **Downloads and prose are pre-permitted**: the sources a brief names,
+     and page text written from an approved template. A departure from a
+     template is flagged, and does not stop the build.
+- **Memory monitoring: a start gate, not a monitor.** The owner asked
+  cleanup to "monitor all sessions for memory. Or whatever reactive protocol
+  is efficient and safe". The tram kit recommended a gate,
+  `scripts/heavy_job.py`, with a ledger in the shared `data/` junction that
+  admits a job only if it fits in available memory, drops dead pids, and
+  lists any process over 1.5 GB. Polling spends tokens all day and still
+  reacts after the damage; a gate costs one call per heavy job. It was handed
+  to the multi-city cleanup session to build. A second session named
+  "Cleanup Session" belongs to another project (link-station-commercial),
+  received the broadcast by mistake, and declined it.
+- **Rejected**: a fixed summed budget (disproved by measurement above), and
+  a polling monitor session.
+
+### 2026-09-30 - Gate 3 from IDOS: Olomouc, Liberec and Most exact; Ostrava partial; the regular network through works (owner)
+
+- **Gate 3 was read from IDOS's per-stop timetables, not the operators' PDFs,
+  so nothing was downloaded.** `idos.cz/<city>/zjr` lists every stop of a line
+  in both directions for a chosen date, as HTML; dpmost.cz links it as its
+  own HTML timetables. Each line was read in both directions on a regular
+  weekday, and a stop counts when either direction calls (request stops
+  included). It is a count read, nothing from it is published, and it has no
+  licence row. **Flagged for review time:** IDOS is a source the briefs did
+  not name, used only as a check. Supersedes the plan in the entry below to
+  ask for PDF downloads.
+- **Olomouc: all seven lines exact** (Mon 2026-03-16; 2026-10-01 identical):
+  11 / 14 / 16 / 20 / 10 / 14 / 14 stops. Fibichova is on line 4 toward
+  Pavlovičky only, so it counts. No change.
+  `OPERATOR_STATION_COUNTS` recorded.
+- **Liberec: three gaps found and filled; 39 stations became 40.**
+  - **Line 11's OSM relations pass Fügnerova and Sídliště Nové Vratislavice
+    without listing them**, while line 5 lists both. IDOS has line 11 calling
+    at both on every trip, in regular service and today. `osm_tram`'s
+    `station_add` refuses a name already on a route, so
+    `czechia_osm_tram.add_line_stops` reads a new `LINE_STOP_ADD`. It adds a
+    stop position to a named line, and stops the build when:
+    - the node is renamed or untagged;
+    - the line now lists the stop;
+    - the node lies more than 25 m from that line's own track.
+    All four nodes lie 0 m from it.
+  - **Šaldovo náměstí** on lines 2 and 3 is added by `STATION_ADD` from its
+    two OSM platform nodes.
+  - **Result:** gate 3 is exact at 17 / 21 / 13 / 23 (Mon 2026-06-15), 34
+    stations in Liberec and 6 in Jablonec. In-ring storefronts went from
+    1,396 to 1,405 of 2,488.
+- **Most: Litvínov, Vrchlického added on lines 1, 3 and 4; 27 stations
+  became 28.**
+  - The cache had no node of that name. Most's OSM was re-fetched, and the
+    fetch's every-tram-stop clause now brought both stop positions, which no
+    relation lists.
+  - Gate 3 is exact at 25 / 11 / 19 / 22 (Mon 2026-02-16).
+  - The re-fetch also took fresh RUIAN files, the same 2026-08-31 edition;
+    storefronts are unchanged at 1,025.
+- **Owner's call: the regular network, through temporary works.**
+  - **Most:** since 2026-03-01, with no end date published, buses replace
+    trams between Litvínov, Citadela and Záluží, and Vrchlického is closed.
+  - **Liberec:** from 2026-06-20 to at least 2026-12-12, lines 2 and 3 end at
+    Fügnerova, and Šaldovo náměstí is closed.
+  - **Ostrava:** a diversion runs from 2026-09-17 to about 2026-12-12; line 6
+    is not running, and lines 13 and 19 run instead.
+  - All three keep their track, and OSM maps it.
+  - **Rejected:** mapping today's service. It would mean redrawing all three
+    in December, and OSM cannot draw Ostrava's 13. Holding Ostrava only
+    delays it, and Most has no end date to wait for.
+  - Prague's Flora is the precedent: a station closed for reconstruction is
+    still drawn.
+- **Ostrava: gate 3 is partial, by the owner's call to re-check after the
+  diversion.** IDOS accepts only dates from 2026-09-21 to 2026-11-30, all
+  inside the diversion.
+  - **Exact:** lines 3, 4, 11, 15, 17 and 18, which the diversion leaves
+    whole.
+  - **Open until about 2026-12-13:**
+    - 1, 2 and 10: Don Bosco, which IDOS has on no line during the works,
+      though OSM tags it as a DPO stop about 400 m from Dolní Vítkovice
+      Hlubina;
+    - 7: IDOS's 7 calls at Svinov,mosty, and OSM's skips it, though our 11
+      and 17 have it;
+    - 6, 8, 12 and 14: cut or rerouted by the works.
+  - No change; 92 stations.
+- **Proposed page text, for review time** (outside the approved template, so
+  not written to the pages):
+  - **Most:** "Since March 2026 buses have replaced trams between Litvínov,
+    Citadela and Záluží during works, and Litvínov, Vrchlického is closed;
+    the map shows the regular network."
+  - **Liberec:** "From June to at least December 2026 lines 2 and 3 end at
+    Fügnerova during works, and Šaldovo náměstí is closed; the map shows the
+    regular network."
+  - **Ostrava:** "From 17 September to about 12 December 2026 DPO runs a
+    diversion timetable: line 6 does not run, and lines 13 and 19 do. The
+    map shows the regular network."
+- **check_provenance's not-forked check** was failing on the five OSM cities'
+  step 3 files (Plzeň's since its build). It is a text match for
+  `render_heatmap`, and those files call it through `czechia_osm_tram.step3`.
+  Their docstrings now name it.
+- **Results:**
+  - Baselines rewritten for Liberec and Most (intended); Olomouc and Ostrava
+    zero drift.
+  - `check_scope_disclosure` OK for 81 cities, and the Aarhus control for
+    `osm_tram` passes.
+  - `app/ring_shares.json` regenerated.
+  - Files: `pipeline/countries/czechia_osm_tram.py`,
+    `pipeline/{liberec,most,olomouc,ostrava}/config.py`, the five step 3
+    files, `docs/data_sources/czechia.md`, and the Liberec and Most pages'
+    figures.
+
+### 2026-09-30 - Pre-review checks: briefs match configs, app imports clean, pages render, label widths measured; gate 3 needs PDFs; Ostrava runs a diversion timetable (owner calls open)
+
+- **Briefs against configs:** `brief_check.py --vs-config` passes for all six
+  briefs, 30 fields (mode, coverage, scope, CRS, obec codes).
+  `check_deploy_imports.py --ref czech-build`: a clean clone imports under
+  the lean venv.
+- **Pages render in the app** (lean venv, one local render; Brno, Ostrava,
+  Liberec). Each page has its title, and its snapshot caption reads its
+  provenance: ROS02 2026-08-31, KORDIS valid 2026-09-25 to 2026-12-13, OSM
+  fetched 2026-09-30. Each carries its notices, its map frame is 650 px, and
+  none shows an error.
+- **Macro-label widths measured** in the app's own document, with eight
+  table entries reproduced exactly: Brno 31.9, Plzeň 36.0, Olomouc 59.1,
+  Ostrava 51.6, Liberec (Regional) 122.9 and Most (Regional) 107.5, in
+  `scripts/check_macro_labels.py`.
+  - **The labels clash in the Europe view**, seven Czech cities round
+    Prague.
+  - **The owner's label-tier decision** (DECISIONS 2026-09-29) gives the
+    Czech tram cities no pill in the parent views and a sub-region of their
+    own.
+  - **Not built yet.** France got a North/South region split instead
+    (`macro-france`, unmerged, the cleanup session's).
+  - **So the Czech offsets wait for that decision**, and nothing was tuned.
+- **Gate 3 from the operators' own stop lists** (owner-approved, counting
+  only) is not finished. Every operator publishes its per-line stop lists
+  only as PDFs, and downloads need the owner's OK, file by file. The agents'
+  findings are in the session scratchpad, `gate3_*.txt`.
+  - **Olomouc:** the seven DPMO stop-timetable PDFs, `jr-tra-1` to
+    `jr-tra-7`, 410-600 kB each, on dpmo.cz, valid from 14 Dec 2025 and from
+    1 Sep 2026. The HTML route titles agree with our table. One thing to
+    check: our line 4 includes Fibichova, while its title ends at
+    Pavlovičky.
+  - **Liberec:** dpmlj.cz refuses this machine (an IP block, it appears).
+    IDOL's line 11 PDF (`iidol.cz/data/catalog/29/2055/83586.pdf`, valid 1
+    Dec 2025 to 12 Dec 2026) covers line 11 only; lines 2, 3 and 5 are not
+    on IDOL. Two things to check: line 11's route description passes
+    Fügnerova, which our table gives lines 2/3/5 only, and IDOL lists a
+    line 4 (Horní Hanychov to Jablonec) with no timetable.
+  - **Ostrava:** DPO's 15 PDFs (`dpo.cz/jr/2026-09-17/0NN_2026-09-17.pdf`),
+    or KODIS's regular-timetable PDFs for lines 1, 2, 4, 8, 10, 12, 14 and
+    18 only.
+  - **Most:** the agent was still running when this entry was written.
+- **Ostrava runs a DIVERSION timetable from 2026-09-17**, which KODIS's file
+  names run to 2026-12-12. DPO's network diagram is labelled as the
+  diversion state. **Line 6 is not running**, yet our map draws it on 21
+  stations. **Lines 13 (Zábřeh - Hranečník) and 19 (Dubina - Martinov) run
+  in its place.** OSM has no line 13 relation, and its line 19 has no stops.
+  OSM shows the regular network. The owner's standing rule draws works "as
+  the timetable runs" (Prague's Flora, Berlin's U6), so this is an owner
+  call, not yet put.
+- **Housekeeping:** a temporary `czech-app-tmp` entry is in the launch
+  folder's `.claude/launch.json`
+  (`.claude/worktrees/beautiful-gould-c4eede/.claude/launch.json`), which
+  this session created. Remove it once no more app renders are needed; the
+  main checkout's file is untouched.
+
+### 2026-09-30 - Ostrava's in-city line 5 stops disclosed in prose, not listed, following Kyoto and Madrid (owner); the boardable default flipped on master (owner)
+
+- **Owner: "B, follow the precedent."** This supersedes the recommendation
+  in the entry below. A new station-scope category, "left out with a stub
+  line", would have served two stops in 81 cities, and the precedent runs
+  the other way: Kyoto's Sagano Scenic Railway and Madrid's Metro Ligero ML2
+  and ML3 were left out as stubs, and their stops were never listed in an
+  excluded-stations file, only disclosed in prose.
+  - **What changed:** `czechia_osm_tram._not_drawn_stops` now lists a
+    not-drawn line's stops only when they lie beyond the map's obce, as
+    outside. Ostrava's file has gone from 9 rows to 7.
+  - **Disclosed in prose:** Poruba,koupaliště and Krásné Pole, in Ostrava's
+    section of `docs/excluded_categories.md`. The page says line 5 is not
+    drawn, with 3 of its 10 stops in the city.
+  - **No app change.** `check_scope_disclosure.py` passes for all 81 cities.
+    Ostrava's baseline is rewritten (`stations_excluded` 9 to 7, intended).
+- **The boardable default was flipped by the cleanup session** (owner,
+  2026-09-30, approved in both sessions): `boardable_stop_ids` defaults to
+  ("0", "2", "3") on master since `d928f50`, with cleanup's proof that no
+  built map moved (theme 13 of `docs/map_inconsistencies.md`).
+  - **On `czech-build`:** master was merged and `pipeline/stations.py`
+    resolved to master's version, byte-identical.
+  - **Brno:** its explicit argument now restates the default and stays, to
+    say why Brno depends on it. Brno re-ran with zero drift.
+
+### 2026-09-30 - Master's new rules merged into czech-build; Ostrava's two in-city line 5 stops need a station-scope category (owner call open)
+
+- **`origin/master` merged into `czech-build`.** It brought the heavy-job gate
+  (`scripts/heavy_job.py`), the drafts rule and a stricter
+  `check_scope_disclosure.py`, which now refuses an excluded station whose
+  reason `app/station_scope.py` reads as "Other".
+- **Ostrava's nine line 5 rows were split by place.** The seven beyond the
+  city now say "outside obec 554821 (Ostrava), on a line not drawn: …", and
+  station_scope counts them as outside. The two inside the city,
+  Poruba,koupaliště and Krásné Pole, still carry line 5's reason, because no
+  existing category is true of them. **The check fails for those two on
+  `czech-build`.**
+- **An owner call, recommended: a new category, "left out with a stub
+  line".** It would mean teaching `app/station_scope.py` the category, adding
+  a column to the excluded-stations page (`201_What_Is_Excluded.py`) and a
+  sentence there, and describing the category in
+  `docs/excluded_categories.md`. The other shapes are worse:
+  - calling them "outside" is false;
+  - dropping them from the CSV loses the station table's record of them
+    (the page text and the exclusions doc name them either way).
+  The category is shared app code and new page text, so it goes to the
+  owner, not this session.
+- **Regenerated on the branch:** `app/ring_shares.json` (the six Czech
+  cities added, no other row moved) and README's city list.
+- **Left for the lander, all landing-time work:**
+  - `check_macro_facts.py --write`, which reads every city's shared processed
+    files;
+  - the `map_inconsistencies.md` rows (cleanup's city-landed sweep);
+  - the measured macro-label widths (a real browser in the app);
+  - notice numbering, where 69-71 are France's and must land with 78 and 79;
+  - the master-list counts.
+
+### 2026-09-30 - Plzeň built: 53 stations; the "two missing stops" were a one-day diversion (supersedes the entry below on Plzeň's gate 3)
+
+- **Plzeň's two "missing" stops were not stops.** The entry below reported
+  that gate 3 against PMDP's feed found Jízdecká and U Synagogy missing
+  from OSM's relations, to be added. That was a counting error. Both are
+  served only by service 44, which has no weekday flags and runs on
+  2026-10-10 alone (`calendar_dates`): a one-day diversion. No trip calls at
+  both U Synagogy and Sady Pětatřicátníků, 58 m apart; a trip uses one or
+  the other. The 10% trip share had been counted over the whole six-month
+  feed, with no weighting for the days a trip runs.
+- **Gate 3 by service day.** These are the stop names each line serves on
+  Wednesday 2026-10-07, at the 10% rule.
+  - Line 2 has 23, and OSM 23.
+  - Line 1 has 20, OSM 19; the extra is the Vozovna Slovany depot stop.
+  - Line 4 has 29, OSM 19. Every extra is a station already in the set,
+    reached by a depot-bound variant over line 1's track, except the depot.
+  - **So the station SET matches PMDP's but for the depot**, which is left
+    out as Brno's Vozovna Medlánky is. The same pattern held on 2026-10-14
+    and 11-11.
+  - The counts sit in the config with that reason; gate 3 prints the two
+    per-line mismatches, as Prague's did.
+- **Not added:** the `STATION_ADD` entries were removed before any map was
+  rendered with them. The tram kit's tuple-of-refs extension (97ba25a, taken
+  whole onto `czech-build`) stays, harmless and useful. The shared tram query
+  (`czechia_fetch.osm_trams`) now also fetches every tagged tram stop in the
+  box, which a future add needs; steps read relation members only, so no
+  station moves.
+- **Built:** 53 stations, all inside, at a 306 m median gap. 2,508 of 3,508
+  storefronts (71%) sit in a ring, and the restaurant ratio is 2.0 (1.99, so
+  no OpenStreetMap-gaps sentence).
+  - **Checks:** `check_map_view.js` at 1280 and 375 px, and the attribution
+    check at 1000x650 and 1280x900, all pass with no corrections.
+  - **Privacy verdict:** publish. No contact details, no person-like name at
+    a residential unit, and 6.2% heuristic flags, all company names.
+- **PMDP is credited as notice 79**, on the stricter CC BY reading, since its
+  counts were used.
+  - **The credit** is the brief's (owner-approved).
+  - **The framing around it is this session's and is flagged for review:**
+    "Plzeň's tram stops are checked against …: only its stop counts per line
+    are used, and nothing from it is drawn. Not produced or endorsed by PMDP
+    or the City of Plzeň."
+- **The lesson is in the skill**: count a feed by service day, never over the
+  whole file.
+
+### 2026-09-30 - Olomouc, Ostrava, Liberec (Regional) and Most (Regional) built on osm_tram.py; Plzeň's gate 3 finds two stops OSM's relations lack
+
+- **The four built on the tram kit's `pipeline/osm_tram.py`**, taken
+  unchanged from `tram-build` so both branches carry one file; its Aarhus
+  control passes on `czech-build`. A shared Czech wrapper,
+  `pipeline/countries/czechia_osm_tram.py`, runs step 1 and step 3, and each
+  city's step files are a few lines. Step 1 writes the kept relations'
+  geometry (each ref's relation with the most track, platform outlines left
+  out, Aarhus's rule) to `lines.geojson`. Step 3 draws that file, and
+  `line_colour_search.py` reads it, so what is drawn is exactly what was
+  kept.
+
+  | City | Stations | Lines | Median gap | In a ring |
+  |---|---|---|---|---|
+  | Olomouc | 36 | 7 | 316 m | 1,742 / 2,235 (78%) |
+  | Ostrava | 92 | 14 | 431 m | 2,941 / 3,960 (74%) |
+  | Liberec (Regional) | 39 (Liberec 33, Jablonec 6) | 4 | 355 m | 1,396 / 2,488 (56%) |
+  | Most (Regional) | 27 (Most 15, Litvínov 12) | 4 | 522 m | 664 / 1,025 (65%) |
+
+  Every median is under 550 m, so all keep the halved rings. Most's is 28 m
+  under the line.
+- **Ostrava's three judgments:**
+  - **NOT_DRAWN.** It names line 5's two relations (owner), lines 9 and 19
+    (no stop members) and an unref'd line 11 depot variant. Line 5's stops
+    are listed in `excluded_stations.csv` with the reason (9 rows).
+  - **A 330 m collapse instead of 200.** Two names are interchanges whose
+    stops sit on different arms of a junction: Sport Aréna at 321 m (lines
+    2/7 on one arm, 11/12 on the other) and Mariánské náměstí at 223 m.
+    That is within Riga's 300 m and Osaka's 400 m; the next widest name is
+    173 m.
+  - **Two stand pairs folded by name alias.** The station gate's close-pair
+    note found them: Hranečník (St. 1) into (St. 5), 120 m apart, and Nová
+    Huť hlavní brána 1 into 2, 61 m apart. One station under two names
+    would have taken two sets of rings. Each folds into the spelling more
+    lines carry, because `osm_tram` never invents a bare name.
+  - **Result:** 94 stations became 92, and the closest pair is now 168 m.
+- **The palettes are the project's own** (owner), from
+  `line_colour_search.py` with target hues spaced evenly round the wheel in
+  line order, HSL (h, 70%, 45%). Every line is 3:1 on both map pages and 45
+  or more from every pin. The closest pairs: Olomouc 19.4; Ostrava 18.3
+  within 500 m and 15.8 anywhere (lines 10 and 11, never near each other);
+  Liberec and Most 88.3; Plzeň 124.7. `check_map_markup.py` passes on all 80
+  maps.
+- **Checks on the four maps:** `check_map_view.js` passes at 1280 and 375
+  px, with no corrections, and the attribution check passes at 1000x650 and
+  1280x900. **Privacy verdicts, from `check_personal_exposure.py`: publish,
+  for all four.** No contact details, and no person-like name at a
+  residential unit. The heuristic flags 7.7 to 9.4%, all of them company
+  names, as in Prague and Brno.
+- **Pages written from the approved template**, with no departure from it.
+  Ostrava, Liberec and Most carry the OpenStreetMap-gaps sentence (ratios
+  2.3, 2.5 and 3.3). "{City} has no metro" names the core town on the two
+  regional pages ("Liberec", "Most").
+- **Gate 3 runs only in Plzeň, and there it found a gap.** PMDP's feed (the
+  approved cross-check) serves Jízdecká and U Synagogy on lines 1, 2 and 4.
+  OSM tags both as tram stops (nodes 10314072849 and 10315344302) but puts
+  them on no route relation. The feed also runs line 4 via Hlavní pošta and
+  Náměstí Republiky, while OSM does not; the abbreviation "Nám. Generála
+  Píky" is a spelling difference only.
+  - **What OSM gives:** 53 stations from the route relations, the brief's
+    figure exactly, and a set the feed shows to be two short.
+  - **The fix:** `osm_tram`'s `STATION_ADD`. It takes one line per node, so
+    a backward-compatible change (a tuple of refs) was put to the tram kit,
+    who own the module. Plzeň's page waits for it.
+  - **Two untagged directions:** two line 4 relations carry no operator tag
+    in OSM, and are named in `NOT_DRAWN`; their reverse directions are kept.
+    No stop is lost, and the excluded list is empty.
+- **Gate 3 is not run for Olomouc, Ostrava, Liberec or Most**, and is
+  recorded as an open gap in each config. Olomouc's DPMO feed is excluded by
+  the owner's call. Ostrava's and Liberec's feeds were unreachable at the
+  screen, and Most has none. Plzeň shows what OSM's relations can miss.
+  Reading each operator's published stop lists would close the gap; that
+  belongs at review time.
+
+### 2026-09-30 - Brno rendered and checked: 146 stations, 11 lines, 82.4% of storefronts in a ring; privacy verdict publish
+
+- **Brno's map is rendered on `czech-build`.**
+  - **What it shows:** 146 stations and 11 lines drawn from OSM by `ref` in
+    the feed's colours, with 7,200 storefronts. 5,932 of them (82.4%) sit
+    inside the 0.05 / 0.1 / 0.2 / 0.3 mi rings; the brief's OSM stand-in
+    read about 83%.
+  - **Checks:** `check_map_markup.py` and `check_inline_arrays.py` pass on
+    all 76 maps. `check_map_view.js` passes at 1280 px (zoom 12 against 12)
+    and at 375 px (11.25 against 11.25), with no corrections. The OSM
+    credit is clear and the legend clamp in force at 1000x650 and
+    1280x900.
+  - **How it was served:** the preview read the launch folder's own
+    `.claude/launch.json`, so a temporary `czech-static-tmp` entry was
+    written there. The main checkout's file was not touched; a hook refused
+    the edit.
+- **Privacy verdict for Brno, from `check_personal_exposure.py brno`:
+  publish.** The figures: 0 e-mails, 0 phone numbers, 0 c/o markers, and 1
+  person-like name at a residential unit (0.02%). The heuristic flags 602
+  names (10.1%), and every one is a company's registered name, because
+  natural persons and partnerships show their address. That is Prague's
+  verdict (1,991 flagged, 1 at a residential unit) on the same structural
+  guarantee. The six cities were added to the check's table in Prague's
+  shape, and the other five get their verdicts once their maps exist.
+- **The restaurant control, measured for all six as Prague's was.**
+  CZ-NACE 2025 5611 storefronts against OSM's restaurant, fast_food, cafe,
+  food_court and ice_cream features, node and way, inside each city's own
+  polygon (2026-09-30):
+
+  | City | Register | OSM | Ratio |
+  |---|---|---|---|
+  | Brno | 2,110 | 1,315 | 1.60 |
+  | Plzeň | 852 | 429 | 1.99 |
+  | Olomouc | 616 | 342 | 1.80 |
+  | Ostrava | 1,092 | 482 | 2.27 |
+  | Liberec (Regional) | 587 | 237 | 2.48 |
+  | Most (Regional) | 267 | 80 | 3.34 |
+
+  Ostrava, Liberec and Most are over 2, so their pages carry the approved
+  sentence on OpenStreetMap's gaps.
+- **Brno's page is written from the approved template**, with no departure
+  from it. Brno's own notice is number 78 (France holds 69-71 on
+  `france-build-2`). The ČSÚ and ČÚZK notice titles now list the six Czech
+  cities, and items 32 and 33 in `data_sources.md` match. The "OpenStreetMap
+  (rail geometry)" notice names the Czech tram lines.
+- **Rows written:** `docs/data_sources/czechia.md` has rows for all six
+  (registries, transit, OSM geometry, boundaries), and
+  `docs/excluded_categories.md` has a section per city.
+  `check_provenance.py` names all six OK. `check_scope_disclosure.py` passes
+  for 81 cities. `check_provenance.py` gained the Czech display-name
+  overrides (Plzeň, Liberec (Regional), Most (Regional)).
+- **For the lander, at landing:**
+  - Notices 69-71 must land before or with 78, or the contiguity check
+    fails.
+  - The ČSÚ/ČÚZK titles and the OSM notice name all six cities, so a
+    partial landing trims them to the cities that land.
+  - `macro_facts.json` (`check_macro_facts.py --write`), the
+    `map_inconsistencies.md` rows (cleanup's city-landed sweep), the
+    master-list counts and each city's measured macro-label width are all
+    landing-time work.
+  - The `mode` key waits for the macro-legend branch.
+
+### 2026-09-30 - The six Czech business legs built; Brno's stations from the feed, with request stops kept and depot runs dropped
+
+- **All six business legs ran on the shared chain, each RÚIAN control
+  passing, and 100% of storefronts were placed.** Brno has 7,200. Plzeň
+  has 3,508, Olomouc 2,235 and Ostrava 3,960. Liberec (Regional) has
+  2,488, of which Liberec 1,873 and Jablonec 615. Most (Regional) has
+  1,025, of which Most 787 and Litvínov 238. Each is slightly under the
+  screen's 2026-09-27 figure (Brno 7,229, Liberec 2,498, Most 1,030).
+  - **Why lower:** the screen ran before the owner's 2026-09-29 catch-all
+    call (96990 and the bare 969), and the taxonomy now structurally
+    excludes 963 (funeral services).
+  - **Which to publish:** the pages use step 2's figures, never the
+    screen's.
+  - **The two-obec path's first real use** is Liberec and Most: every file
+    ran its own control, and each obec's count was printed.
+- **Two shared modules for the Czech tram cities, beside Prague's own
+  files, which stay as they are:**
+  - **`pipeline/countries/czechia_fetch.py`** is imported only by the
+    `fetch_sources.py` scripts. It checks the shared national files and
+    never fetches them. It always fetches the rolling sources: KORDIS's
+    feed, each obec's RÚIAN file named through ATOM, and the two OSM
+    queries. OSM goes one query at a time, with a 60-second wait before its
+    one retry (the owner's staggering rule). Both mirrors 504'd once on
+    Brno's boundary, and the retry answered.
+  - **`pipeline/countries/czechia_boundary.py`** turns each obec's OSM
+    relation into a polygon, checks that its `ref` ends in the RÚIAN obec
+    code, and gates the union on the Czech Statistical Office's area. Brno
+    measured 230.1 km².
+  - `check_no_fetch_in_steps.py` passes.
+- **Request stops are stops: 25 of Brno's 149 stations were being dropped
+  as "non-revenue".** KORDIS codes every request stop (*na znamení*)
+  `pickup_type`/`drop_off_type` 3, "coordinate with the driver", which GTFS
+  counts as boardable. `pipeline/stations.py`'s `boardable_stop_ids` accepted
+  only 0. Among the stops lost were Stránská skála and Líšeňská.
+  - **The fix:** a `boardable` parameter, which Brno passes as
+    `("0", "2", "3")`. The default is unchanged, so no built city's output
+    moves unannounced.
+  - **Rejected:** changing the default. It is the correct reading of the
+    GTFS spec, but it could move other cities' station tables, and the
+    module is the app/chrome role's.
+  - **Handed to cleanup:** checking whether any built city's feed carries
+    2 or 3.
+- **A line serves a Brno station when it calls there on at least 10% of its
+  trips in one direction.** The feed runs about 2.5 months of timetable, and
+  the union of every trip gave line 4 54 stations where its route has 24.
+  - **The rule:** Riga's `PATTERN_MIN_SHARE` (10%), taken per station
+    rather than per exact stopping pattern. Line 10 splits its Líšeň branch
+    over patterns that are each under 10%; the branch holds 8% of the line's
+    trips, and other lines serve it.
+  - **The effect:** 148 stations, of which only the Vozovna Medlánky depot
+    is dropped, since no line calls there on more than 2 to 5% of its trips.
+    146 are inside the city at a 336 m median gap, so the rings stay halved.
+    Line 2's two Modřice stops are excluded.
+  - **Gate 3 against OSM's route relations** agrees on 9 of 11 lines. Line
+    1 has 47 stations in the feed against OSM's 36, and line 10 has 38
+    against 27. OSM carries only their main routes, while the feed runs
+    line 1 via Tábor and line 10 to Technologický park and Bystrc on 12 to
+    21% of their trips, every sampled weekday from 2026-10-01 to 12-02.
+    This is recorded rather than "fixed": the feed is the operator's.
+  - **Station-spacing floor:** 200 m, Riga's and Aarhus's, instead of the
+    shared 400 m metro default. It still refuses Brno's uncollapsed
+    platforms (42 m median).
+- **The six Czech pages are numbered 150-155**, in build order, so they do
+  not collide at landing with France's 76-95 or the other build branches.
+  The other build sessions were told. `scaffold_city.py` numbers from the
+  highest page in its own tree, so each page was scaffolded and then its
+  `app/cities.py` path pointed at the block.
+- **Not yet done:** the rail steps for the five OSM cities wait for
+  `pipeline/osm_tram.py` on the tram build branch (the owner's priority
+  rule). Brno's station step was built now because it depends only on
+  KORDIS's feed. Brno's step 3 draws OSM geometry by ref and is next.
+
+### 2026-09-30 - czechia_register reads several obce and RES in chunks; Prague reproduced byte for byte at a 0.37 GB peak
+
+- **The Czech builds have the owner's go, confirmed in this session**
+  ("Go ahead", 2026-09-30). The tram kit relayed it with six working rules,
+  and this session asked the owner to confirm before scaffolding anything.
+  The builds follow the rules: business legs first, and the Czech rail steps
+  once `pipeline/osm_tram.py` is on the tram build branch. Every entry goes
+  here, not in `DECISIONS.md`.
+- **`pipeline/countries/czechia_register.py` now reads one RÚIAN file per
+  obec.** A city that spans two obce (Liberec with Jablonec, Most with
+  Litvínov) declares `OBEC_CODES`, `RUIAN_ZIPS` and `RUIAN_CRS_CONTROLS`,
+  each keyed by obec. Every file runs its own coordinate control, and the
+  files concatenate, with an exit if an address code repeats. Such a city's
+  output gains an `obec` column and a per-obec count for its page. Prague's
+  one-obec config (`OBEC`, `RUIAN_ZIP`, `RUIAN_CRS_CONTROL`) takes the same
+  path as a single entry, so its output is unchanged. **Rejected:** a
+  regional step 2 per city that calls the module twice and concatenates.
+  That would put the obec loop in two city folders instead of one shared
+  place.
+- **RES is read in 500,000-row chunks, keeping only the owners the city's
+  establishments point to**, rather than the whole 543 MB file at once.
+  Filtering before the dedupe keeps each ICO's first row in file order, as
+  the whole-file dedupe did.
+- **The control: Prague, run from the build branch into the scratchpad.**
+  The shared `data/prague/processed/` was not touched (the shared-junction
+  rule). The output's SHA-256 matched the saved baseline (`9153d4d0…`), and
+  all five baseline counts matched `outputs/prague/baseline.json`:
+  84,192 in obec, 27,327 bucket rows, 26,711 storefront rows, 25,185 placed
+  and 12,932 named. **Measured peak 0.37 GB RSS in 17 s**, so a Czech step 2
+  is not a heavy job under the owner's 2 GB margin rule. The Czech step 2s
+  run one at a time, each announced as a 0.5 GB job. `drift_check.py prague`
+  was not run, because it would rewrite the shared processed files from a
+  branch; the byte-identical step 2 output is the same test for this change,
+  and the lander re-runs it at merge.
+
+### 2026-09-30 - Angers built mark-free on `france-build-3`: 36 stops, 2,530 storefronts, page 120, notice 77
+
+- **Owner: "build angers mark-free as recommended."** Angers had been held
+  since 2026-09-29. The Métropole's terms (DECISIONS "French tram feeds
+  read") bar the network's brand "and any other mark" from anything built
+  from the data without prior agreement. Three options were put to the
+  owner:
+  - seek consent first, through a reCAPTCHA form the owner would send
+    (rejected: open-ended, and outreach is the last resort);
+  - hold Angers indefinitely (rejected);
+  - build mark-free (recommended and approved).
+- **What mark-free means here, all of it checked.**
+  - The page, the macro label, the `app/cities.py` entry, the transit
+    caption and the §4.3 notice name **Angers Loire Métropole**, never the
+    brand.
+  - The lines are **Tram A, Tram B and Tram C**. OpenStreetMap's relations
+    read "Tram <brand> A", and the brand is dropped.
+  - The feed's `feed_publisher_name` and `agency_name` (both the brand) are
+    never shown.
+  - Notice 77 names the database by its producer and its NAP id, because the
+    dataset's title and its NAP page slug both carry the brand. ODbL §4.3
+    asks only for a notice reasonably calculated to make a reader aware of
+    the source.
+  - A case-insensitive grep of `app/` and `outputs/angers/` finds the brand
+    only in `provenance.json`, the fetch record (the NAP title and the
+    feed's publisher field). The page reads only dates from that file.
+    Repository docs (this file, the brief, `docs/data_sources/france.md`)
+    cite the dataset by its real title as records.
+  - **The owner may want those scrubbed too.** That is flagged for review
+    time, not done.
+- **If the Métropole objects, the removal rule applies**: take Angers down
+  first, then record who asked.
+- **Brief** `docs/build_briefs/angers.md`, from the kit's generator: 7/7
+  checks hold on the build-day feed.
+  - The feed is ODbL, with `feed_info.txt` valid 2026-09-29 to 2026-12-28
+    and `shapes.txt` that is real track (100 to 425 points a shape against 9
+    to 25 stops).
+  - It has no `parent_station` column, so the stations are the first
+    platform per unchanged name: 85 platforms make 42 stations.
+  - No station pair is under 150 m, no names repeat, and 49007 has no legacy
+    INSEE codes.
+- **Scope: the commune of Angers**, by the approved rule. The worst line, A,
+  keeps 19 of 25 stops (76%). Six Avrillé stops on A are left out: Acacias,
+  Avrillé-Ardenne, Bascule, Bois du Roy, Plateau Mayenne and St-Gilles.
+  - Gate 3 from OpenStreetMap is exact: A 25, B 18, C 19.
+  - The median gap in scope is 390 m, so the rings are half-size.
+- **Step 2: 2,530 storefronts**: 1,183 retail, 876 food and 471 personal.
+  - 96.09Z ran at 12.5%, inside the 9.6-14.0% precedent, so both catch-alls
+    are excluded.
+  - 19.3% is masked at source, against 13.5% at the screen. The page
+    carries step 2's figure.
+  - 99.96% of rows joined to the geolocation file.
+- **The map: 1,907 of 2,530 storefronts within a ring (75%).** The colours
+  are the feed's `route_color` (data, not a mark). Tram B's 17.9 CIE76
+  against Retail is below the preferred 45 and recorded, like the other
+  cities' low pairs.
+- **Personal exposure: PASS.** No contact details. 0 of 1,907 pins carry a
+  person-like name at a residential unit. Step 2 never loads a legal-name
+  column, and 20.0% of pins look like names on the heuristic, which matches
+  the other French cities.
+- **The macro label** is in France North, measured at 47.2 px. The width was
+  measured in a browser with the Google Fonts faces loaded, and Paris,
+  Marseille, Lille (Regional), Le Havre and Saint-Étienne reproduced
+  exactly.
+  - The offset is ("middle", 0, -18). The default overlapped Rennes's
+    eastward label by 3.4 px, and below the dot it hits Nantes's.
+  - `check_macro_labels.py` scores PROBLEMS 0 on 96 cities.
+- **Landing**: page 120 and notice 77, both renumbered in landing order.
+  The branch is `france-build-3`, stacked on `france-build-2`, so Angers can
+  land with group 2 or after it.
+
+### 2026-09-30 - The twenty French batch cities retagged to France North and South, with the legend's two fields
+
+- **Merged `origin/macro-france` (9b9ed0e, which carries macro-legend and
+  master) into `france-build` and `france-build-2`**, and set each of the
+  twenty entries to the cleanup session's measurement: the region (France
+  North at latitude 46.5 and up, 14 cities; France South, 6), its
+  `label_offset`, and its label width in `check_macro_labels.py`'s
+  `TEXT_WIDTH` (measured in the app's own document with the font loaded;
+  Paris, Marseille and Lille reproduced exactly). `france-build` carries
+  group 1's eleven, and `france-build-2` adds group 2's nine.
+- **Le Havre is the one hand-set label**, ("middle", 20, 20), below and right
+  of its dot. At the default it sat on "Rouen (Regional)". At 1200 px it is
+  within 4 px of reading as Rouen's, as are Nantes/Tours and
+  Marseille/Avignon. Cleanup noted this for the owner; it is not a
+  failure.
+- **The legend's two fields.** `coverage` is `full` for all twenty
+  (SIRENE carries all three buckets, "All three" in every entry). `mode` is
+  `tram` for nineteen and `light_rail` for Rouen (Regional), as Rouen's brief
+  proposed and the owner approved with the eight calls. Brest's cable car
+  does not change its mode: the dot shows the highest-order mode the map
+  draws, which is tram.
+- **`check_macro_labels.py`: PROBLEMS 0**, 14 regions at 375, 768 and
+  1200 px, on 86 cities (`france-build`) and 95 (`france-build-2`). This
+  matches cleanup's combined-tree score. `check_all` leaves one failure on
+  each branch: the master list's Built and France counts, which move at
+  landing.
+
+### 2026-09-30 - The France macro view: North and South at zoom 5.0, released to cleanup (owner)
+
+- **Owner: "go with north/south, release it to cleanup."** France becomes two
+  macro-map regions, France North (latitude 46.5 and up, 17 cities) and France
+  South (8), each with a `REGIONS` zoom override of 5.0. It was put after the
+  owner asked whether zooming in on one France region could fit every label.
+- **Measured on the 25 cities France will show** (the five built French
+  cities and the twenty batch cities, Angers held), with the real label text
+  (" (Regional)" on five). Staging's placer and projection were used, with
+  widths estimated at 7 px a character where none is measured.
+  - **One region fails at every zoom.** At 4.5, 3 labels cannot be placed
+    and 4 cities fall off a 375 px canvas. At 5.0, Marseille, Lille and
+    Valenciennes fall off even at 1200 px. France is taller than the 650 px
+    canvas allows.
+  - **The split works at 5.0.** North: nothing off-canvas at 768 or
+    1200 px, and Le Havre's label needs a hand-set offset (it is crowded by
+    "Rouen (Regional)"). South: every label places.
+- **Released to the cleanup session** (handoff section 4, held until then)
+  for the `REGIONS` and `REGION_ORDER` entries, the five built cities'
+  region tags, and the twenty labels' widths and offsets. France retags the
+  twenty batch entries on its own branches once the region names exist.
+
+### 2026-09-30 - France landing group 2 built: Montpellier, Strasbourg, Le Havre, Caen, Rouen, Bordeaux, Nantes, Grenoble, Valenciennes
+
+- **All twenty French cities are now built through step 3**: group 1 on
+  `france-build`, group 2 on `france-build-2`. Group 2's storefronts:
+  Montpellier 6,276, Strasbourg 5,614, Le Havre 2,433, Caen 2,214, Rouen
+  (Regional) 4,168, Bordeaux (Regional) 12,807, Nantes (Regional) 6,570,
+  Grenoble (Regional) 5,781, Valenciennes (Regional) 2,330. Within a ring:
+  87%, 85%, 60%, 71%, 62%, 65%, 63%, 78%, 69%.
+- **Masked at source**: 15.8% to 19.1%. **`96.09Z`**: 9.2% to 15.6%.
+  **Nantes's 15.6% is just above the five cities' 14.0% top**. It is near
+  enough that the precedent stands (both catch-alls excluded); a share far
+  outside would have gone to the owner.
+- **The personal-exposure check passes** for all nine: 0 contact details,
+  and 0 person-like names at a residential unit.
+- **The Licence Ouverte same-name rule acted where the kit said it would.**
+  Bordeaux's five pairs and Caen's Presqu'île pair each keep their first row,
+  so Bordeaux's lines count one or two fewer than the kit's table and Caen's
+  T2 17, not 18. The configs record why.
+- **OpenStreetMap geometry for five cities, and a template departure for
+  the owner.** Montpellier, Strasbourg, Le Havre, Caen and Rouen draw their
+  track from OSM. The approved sentence "from the operator's own published
+  timetable feed" would be untrue on those pages, so they read "their stops
+  from the operator's own published timetable feed and their track from
+  OpenStreetMap". Caen and Rouen say "the Normandie region's published
+  timetable feed", since their stops come from the aggregate. **A proposed
+  sentence for the owner at review time.** The rest of the template is
+  unchanged. Montpellier's OSM line 4 is the loop's 4A relation.
+- **Gate 3 again reads low on branched lines** (the single-relation count):
+  - Rouen's métro, 20 against 31: two branches, Georges Braque and
+    Technopôle;
+  - Montpellier's line 3, 26 against 29: Lattes and Pérols;
+  - Bordeaux's A, B and E;
+  - Nantes's 2, 25 against 34;
+  - Grenoble's C, D and E: OSM's relations are incomplete, E reading 17
+    against 31;
+  - Strasbourg's A, C and E, and Valenciennes's T2, by one or two.
+  Recorded as OSM has them.
+- **Notices 69-71** (TaM, M réso, LiA) are numbered in
+  `docs/data_sources.md`. **Renumber at landing**: `check_provenance.py`
+  wants the list contiguous from master's last number, and the Band B
+  branches also carry a 69. The Band B session and cleanup agree to
+  renumber in landing order.
+
+### 2026-09-30 - France's pages take 100-119; three ODbL notices; group 2 on a stacked branch
+
+- **The twenty French pages are numbered 100-119** (Le Mans 100 to
+  Valenciennes 119), not 76-95. The Band B builds hold 76-86 (Ottawa to
+  Dallas, six already pushed) and the Czech builds took 150-155, so a reserved
+  block avoids interleaving at landing. Agreed with the Band B session. Only
+  file names and `app/cities.py`'s `page` fields moved; each page's slug and
+  `outputs/` directory are unchanged.
+- **Landing group 1 lives on `france-build`** (the eleven cities, 24 of 26
+  checks passing). **Group 2 is on `france-build-2`**, stacked on it:
+  Montpellier, Strasbourg, Le Havre, Caen, Rouen, Bordeaux, Nantes,
+  Grenoble, and Valenciennes last. Group 2's scaffolds first sat on
+  `france-build` and were moved off it, so group 1 can land without nine
+  half-built cities.
+- **Three §4.3 notices added to `app/components.py` `_NOTICES`**, one per
+  ODbL feed, on Tisséo's and STAR's model: TaM (Montpellier), Réseau
+  urbain TAG (Grenoble, naming the SMMAG) and LiA (Le Havre). Montpellier's
+  and Le Havre's name only the stations, since their line geometry is
+  OpenStreetMap's.
+- **Bordeaux's transit caption credits Bordeaux Métropole alone** (the
+  LO 1.0 read). Caen's and Rouen's credit Syndicat mixte Atoumod.
+- **Le Havre's colours are the project's own**: A `#EF6C00` and B
+  `#6D4C41`, which clear the preferred 45 against every pin (67.0 and 53.8)
+  and sit 71.1 from each other. Neither is LiA's scheme.
+
+### 2026-09-30 - Ten more French tram cities built through step 3: Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice
+
+- **The first landing group's pipelines**: all eleven commune-scope cities
+  whose feeds carry real shapes, with Le Mans. Each ran the shared module:
+  fetch (feed always fresh; one Overpass query per city, one in flight, a 60 s
+  pause before any retry), step 1, step 2 and step 3. Storefronts:
+  Besançon 2,042, Avignon 2,416, Tours 2,652, Dijon 2,668, Reims 2,662,
+  Orléans 1,852, Mulhouse 2,155, Brest 1,980, Saint-Étienne 2,998, Nice
+  10,063.
+- **Masked at source and catch-alls** were in range everywhere, so the
+  precedent's two exclusions stand. Masked: Besançon 15.9%, Avignon 14.5%,
+  Tours 19.0%, Dijon 18.7%, Orléans 19.8%, Mulhouse 12.7%, Brest 18.2%,
+  Saint-Étienne 16.8%, Nice 15.9%, Reims 17.7%. 96.09Z ran 8.6% to 13.4%
+  (Saint-Étienne 8.6% and Mulhouse 8.9% just under the five cities' 9.6%
+  low), and 56.29B 0.6% to 2.5%.
+- **Within-ring shares**: Le Mans 73%, Besançon 64%, Avignon 26% (one line,
+  ten stops), Tours 66%, Dijon 67%, Reims 55%, Orléans 85%, Mulhouse 79%,
+  Brest 77%, Saint-Étienne 76%.
+- **Reims draws TWO lines, T1 and T2, not the brief's one.** Since
+  2025-11-24 Grand Reims Mobilités runs T1 (Neufchâtel - Hôpital Debré, 21
+  stops) and T2 (to Gare Champagne TGV, 22), the former A and B
+  (fr.wikipedia; OpenStreetMap's relations agree). The feed still carries
+  one route, "TRAM". The invariant that every drawn line carries its real
+  public name decides it, so this is a correction of the brief's facts, not
+  a new call. `ROUTE_BRANCHES` in the shared module splits the route's
+  trips:
+  - by the terminus each trip serves;
+  - short workings go by the branch's own stops (the 12 trips ending at
+    Léon Blum are T2's);
+  - a trip on shared stops only counts for both lines.
+  The split gives exactly 21 and 22, and gate 3 matches the published
+  counts. T1 keeps the feed's red; T2 takes OpenStreetMap's #00AEF0, since
+  the feed cannot tell the lines apart. **For the owner at review time**,
+  since the brief said one line.
+- **Nice's route B is Line B**: CADAM - Airport Terminal 2, opened
+  2025-01-06 on L2's former branch (Lignes d'Azur; fr.wikipedia). It is
+  drawn as "Tram B", as approved.
+- **Colours below the hard floor, darkened on Lille's rule** (the
+  operator's hue kept, darkened 16% of HSL lightness):
+  - Tours: `#BD074E` was ΔE 5.5 from the Food service pins, so it becomes
+    `#6E042E` (29.5);
+  - Dijon: Divia gives T1 and T2 one colour, `#AB0672`. T1 keeps it and T2
+    becomes `#5C033D` (30.6 from T1).
+- **Gate 3 against OpenStreetMap is exact** for Le Mans, Besançon, Avignon,
+  Dijon, Orléans, Mulhouse, Brest B, Tours and Reims (both by hand). Tours
+  read 31 until the count took distinct positions: its relation lists one
+  stop twice and adds entry- and exit-only roles. **Where it disagrees, the
+  difference is OpenStreetMap's shape, traced by name:**
+  - **Brest A**, 25 against 30: each relation covers one of A's two
+    northern branches, and some A trips reach Gares.
+  - **Saint-Étienne**, 25, 11 and 27 against 27, 12 and 29: around the
+    Peuple and Bourse stops, OSM's stop positions sit 114-152 m from the
+    feed's.
+  - **Nice L1 and L3**, 20 and 23 against 22 and 24: OSM positions are
+    111-566 m off the feed's named stops.
+  A union-of-relations count was tried and rejected: it over-counted
+  exactly where the single-relation count was right (Le Mans, Tours,
+  Orléans).
+- **Brest**: the cable car is drawn (owner). Its gate 3 is its two stations,
+  since OSM tags it an aerialway, not a tram route. The two `FIC_` switch
+  stops are excluded, as the brief said.
+- **Legacy INSEE codes, all 20 scopes**, from geo.api.gouv.fr's communes
+  associées and déléguées, with Lille's 59298 and 59355 as the control: only
+  Le Havre (76539 Rouelles) and Saint-Étienne (42190 Rochetaillée) have one,
+  and the scaffold adds them to `COMMUNE_PREFIXES`.
+- **Kit additions, all on this branch:**
+  - `scripts/france_fill_build_day.py` fills the self-attest flag,
+    route_ids and colours from the fresh feed, and gate 3 from OSM. It
+    reproduced Le Mans's hand-filled values as its control.
+  - `scripts/france_page.py` writes each page from the approved template,
+    with braces from the build's own measurements.
+  - The step 2 wrapper writes `outputs/<slug>/sirene_facts.json`, the
+    funnel counts the page quotes (`france_register.LAST_RUN`, read-only;
+    nothing changes for Paris to Rennes).
+  - The shared steps emit baseline figures.
+
+### 2026-09-30 - Le Mans built on the shared French tram module: 35 stops, 1,991 storefronts; a French step 2 peaks at 0.37 GB
+
+- **The first of the France batch, and the shared module's control.**
+  `pipeline/countries/france_tram.py` (steps 1 and 3) and
+  `france_tram_fetch.py` (downloads) now carry the owner's station rule, the
+  commune and regional scopes, gate 3 from OpenStreetMap, and both geometry
+  sources. A city's fetch, step 1 and step 3 are three-line wrappers, which
+  `scripts/scaffold_france_batch.py --go` writes. Le Mans took SETRAM's
+  `gtfs_setram_lmm_auto` resource. It self-attests: Mecatran, 2026-09-25 to
+  2026-11-11, fetched 2026-09-30.
+- **Rail:** route_ids `T1` and `T2`, colours `#E4151E` and `#0D65AE` (the
+  feed's own). 70 platforms become 35 stations (every platform has a parent);
+  all 35 are inside commune 72181, T1 24 and T2 18. **Gate 3 is exact**
+  against OpenStreetMap's route relations (24 and 18). Median gap 437 m (min
+  238), so the half-size rings. Geometry is the feed's `shapes.txt`, two
+  shapes per line.
+- **Business:** SIRENE, September 2026 edition. The funnel: 85,363 rows
+  under 72181, 29,395 active, 24,765 diffusible (**15.8% masked**), 3,624 in
+  divisions 47, 56 and 96, 1,283 structurally excluded, 2,341 storefronts,
+  and 1,992 after the precedent's catch-alls. **96.09Z at 13.0%** is inside
+  the five cities' 9.6-14.0% range, and 56.29B is at 1.9%. Coordinates joined
+  for 100.00%, one centroid-grade row dropped: **1,991 storefronts** (900
+  retail, 632 food, 459 personal). Premises name on 59.7%. Food is 1.79
+  times the screen's OpenStreetMap count. 1,462 (73%) sit within a ring.
+  Legacy codes: none under 72181 (geo.api.gouv.fr's communes associées and
+  déléguées, with Lille's 59298 and 59355 as the control).
+- **`check_personal_exposure.py le_mans`: PASS on the structural guarantee.**
+  No registrant-name column is loaded. 0 contact details; 0 of 1,462 pins
+  are a person-like name at a residential unit. The heuristic flags 18.5% as
+  person-like, against Rennes's 17.9% on the same code. The twenty batch
+  cities are registered in the script in one entry.
+- **A French SIRENE step 2 is not a heavy job**: a measured peak of
+  **0.37 GB** (psutil, the process and its children), because it streams
+  row groups of at most 7 MB uncompressed for the columns it reads. It was
+  announced to every live session with the measured figure.
+- **The page** is the approved template with Le Mans's braces. No line leaves
+  the commune, so the template's bracketed "where a line runs past it"
+  sentence is left out as the template intends. The density paragraph ends
+  at this city's ratio; Rennes's comparison with its siblings was Rennes's
+  own fact. The page also adds a business caption carrying INSEE's
+  prescribed « Source : Insee » with the SIRENE edition. None of the five
+  built French pages carries that string; a separate task was raised for
+  them, since it is an `app/` change to published pages.
+- **Still to do before Le Mans lands** (at review time, with its landing
+  group):
+  - `map_inconsistencies.md` rows and `macro_facts.json`;
+  - its macro label width, measured in a browser, in one pass for the group;
+  - `ring_shares.json` and the README list;
+  - its `excluded_categories.md` section;
+  - its `docs/data_sources/france.md` rows (feed, contour, OSM);
+  - the cities.py `mode` once macro-legend lands.
+
+### 2026-09-30 - Hiroshima's macro mode "metro" approved (owner)
+
+The build set `mode` "metro" on precedent - JR West's suburban heavy rail
+(Melbourne's "suburban heavy rail only") and the grade-separated Astram Line
+(Monterrey's and Newcastle's) - and flagged it for the owner's review with the
+other per-city modes (the build entry below). **Approved by the owner,
+2026-09-30** (relayed by the cleanup session). Nothing changes in the build.
+
+### 2026-09-30 - Shared Japanese code: a per-city N02 edition, and a per-city station-gate floor
+
+Two backward-compatible changes for Hiroshima; the six built Japanese cities
+read exactly what they read before (their configs set neither).
+
+- **N02 editions** (`pipeline/countries/japan.py`, `N02_EDITIONS` and `n02()`;
+  `japan.stations(slug=)`, `japan_step1`, `japan_fetch`). MLIT published N02-25
+  on 2026-04-07 (metadata 2026-03-06). N02-24 (metadata 2025-03-26) predates
+  Hiroden's 駅前大橋線 (2025-08-03): it still draws the abandoned
+  的場町-猿猴橋町-広島駅 track and the closed 猿猴橋町 stop, where N02-25 has the
+  new layout (猿猴橋町 gone, 皆実線's new 松川町; OpenStreetMap agrees, no
+  猿猴橋町 tram stop). Same columns and CRS; the zip nests one folder deeper.
+  A city names its edition in `japan.CITIES` (`"n02": "25"`); the default
+  stays N02-24, so moving any built city to N02-25 is that city's own change,
+  decided by its drift check. **Recommendation for the cleanup session:**
+  every Japanese city could move to N02-25; none was moved here.
+- **Gate 1's floor** (`japan_step1.run`): `config.SPACING_MIN_M` where a city
+  sets it, else the shared 400 m. Hiroshima's in-city stations are mostly
+  Hiroden's tram stops, a median 357 m apart after the group-code collapse
+  (platforms 324 m), so the 400 m "still platforms" gate refused a correct
+  set. Hiroshima takes 200 m, the value Paris, Marseille, Amsterdam and Riga
+  take, not a new number.
+
+### 2026-09-30 - Hiroshima built: food only, two lists, Hiroden drawn
+
+**Built** on branch `hiroshima` (from `origin/master`, `origin/macro-legend`
+merged first), page 82, region East Asia, not in the default frame. Band B
+(owner, 2026-09-29): food only, since the city publishes only new barber and
+salon openings, as PDFs. Downloads and page prose under the owner's
+pre-approval (2026-09-30). **13,567 storefronts** (food service 10,028, food
+shops 3,539), 9,134 within the halved rings (67.3%), **124 stations on 12
+lines**. `coverage` one_bucket, `categories` "Food premises only" (food shops
+are food, owner 2026-09-30), `rail_extra` "Both", `record_kind` "Permit
+registers".
+
+**Mode "metro"** (for the owner's review with the other per-city modes): no
+subway, but JR West's suburban heavy rail is metro by Melbourne's precedent
+("suburban heavy rail only"), and the Astram Line is grade-separated
+(Monterrey's and Newcastle's).
+
+**Business leg, Fukuoka's shape.** The city's 【窓口申請】食品営業許可施設一覧
+（市内全て）, the annual full list as of the end of March 2026 (9,247 rows, 個人
+4,393 and 法人 4,854; every 許可満了日 2026-03-31 or later, so a snapshot of permits
+in force), plus MHLW's open data for Hiroshima City (12,007 rows, downloaded
+2026-09-30; 67 closed). `SUPERSEDES`: 146 city rows for a premises in MHLW's;
+`OWN_POINT_FALLBACK`: 242 MHLW rows at MHLW's own point; `ADDRESS_BY_CONSENT`:
+4,584 MHLW rows with no published address, **1,779 of 12,682 restaurant permits
+(14.0%, "one restaurant in seven" on the page)**. The page's monthly new-permit
+files are not added: the full list is the snapshot. **One city-local rule**
+(`config.source_rows`): the workbook marks a street stall in 許可条件
+(露店による営業 / 露店の営業に限る, 130 rows) and a vehicle in 自動車登録番号 (180 rows,
+none marked in its type); both are carried into 業態, where japan_eigyo's form
+rules already take them out. The permit classes (一類の営業行為に限る...) match no
+form rule. 1,278 菓子 / そうざい rows, 66 (5.2%) factory-like, kept (owner
+2026-09-24).
+
+**Placement.** The shared MLIT join: 96.4% block, 0.9% town-chōme, 1.7% MHLW's
+point, 150 unplaced (rural outer-ward addresses, the Shareo underground mall).
+MHLW's coordinates against the block point: median 34 m, 96.5% within 250 m
+(the brief: 35 m, 96.3%). **Census control** (`scripts/japan_census_control.py
+hiroshima`, through `heavy_job.py`, measured peak 0.11 GB): 1.80 food-service
+pins per 2021 飲食店 establishment, every ward 1.56-1.92 - even, so no ward's
+pins land in another's, and just under Fukuoka's 2.01, the other two-list city,
+as the withheld MHLW addresses predict.
+
+**Rail.** MLIT N02 in its 2025 edition (entry above), cut at the city line. 12
+lines: the Astram Line (N02 classes 16 and 24, one pair); JR West's Sanyo (12 of
+131), Kabe (14 of 14), Geibi (14 of 44) and Kure (1 of 28: 矢野, a one-station
+stub kept as cut, Kobe's JR Takarazuka precedent); Hiroden's seven legal lines,
+drawn (owner 2026-09-29), the Miyajima Line cut at Hatsukaichi (12 of 22). Gate
+3 exact: Astram 22, Kabe 14. 13 stations beyond the line excluded. Close pairs
+read and kept apart, as MLIT keeps them: JR 広島 and Hiroden's 広島駅 90 m, 五日市
+and 広電五日市 40 m, 横川 and 横川駅 102 m, 西広島 and 広電西広島 150 m (different
+operators' stations). **Rings halved** on the spacing rule (357 m median);
+gate 1's floor 200 m (entry above).
+
+**Station names**, signage style (Tokyo's and Yokohama's, owner 2026-09-28):
+13 cited overrides - 11 macrons dropped (Hondōri, Ōmachi, Kōiki-kōen-mae...),
+and two of Hiroden's stops OSM had translated or run together
+(修大協創中高前 "Hiroshima Shudo University Hiroshima Kyoso Junior and High School"
+to "Shudai-kyoso-chuko-mae"; 広大附属学校前 to "Hirodai-fuzoku-gakko-mae") - and
+11 spelling aliases (OSM's figures before 丁目, dropped brackets, and 祗 for 祇 in
+祗園新橋北, Kyoto's pair). **Line colours** from `scripts/line_colour_search.py
+hiroshima`: all 12 clear 45 from the pins; closest pair within 500 m 19.4.
+
+**Personal exposure: PASS.** `check_personal_exposure.py hiroshima` (Japan
+pass): the operator's own name shown as a trade name on 0 of 13,567 rows; 3 raw
+rows matched the rule and the one that reached the map shows its permit type;
+person-like name at a residential unit 0 of 9,134 pins. 申請者名 (個人) and
+代表者名 (法人) are read only by the rule, in memory; MHLW's rows name no
+individual operator, so the rule cannot run there (Fukuoka's case, disclosed on
+the page). **One slip, recorded**: a schema probe at this build printed the
+first five rows of each sheet whole to the build session's own console,
+operator names and one applicant address among them. Nothing was written to a
+file or committed; later probes printed column names and counts only.
+
+**Licence.** The brief's one open point (whether the city's dataset-level PDL
+1.0 covers the full-list file) was decided by the owner on 2026-09-24
+(`docs/decisions/2026-09-20.md`, the Japan re-banding entry); the row in
+`docs/data_sources/japan.md` now says so. Notice 76: DataEye's prescribed 出典
+pattern, MHLW's as in Fukuoka's, MLIT's as in Kobe's. **Macro label**: width
+66.3 px (measured 2026-09-30, controls reproduced), ("middle", 0, 54) below the
+dot and under Fukuoka's pill, clear from dy 48 to 62; PROBLEMS 0 on the
+combined tree with Yokohama's branch.
+
+**Left for others.** `docs/japan_city_list.md`: only Hiroshima's row was taken
+from the regenerated file (Tokyo's rows drift, unrelated; reported with
+Yokohama's READY); its station column counts N02-24's names (123), the map
+N02-25's (124).
+
+### 2026-09-30 - A new category value, "Personal services only", for Yokohama (owner)
+
+The site's "Why the maps differ" page reads each city's `categories` from
+`app/cities.py`, from a closed vocabulary in `scripts/check_inconsistency_list.py`.
+None of its values described Yokohama, whose page shows barbers, beauty salons and
+laundries and no food: the nearest, "Food premises only", is the food-only case.
+Asked, the owner chose **"Personal services only"** (recommended over a generic
+"One category"), tiered `one_bucket` like "Food premises only". Added to `FIELDS`
+and `TIER_OF` with a dated comment. `check_macro_facts.py` needed no change: table
+B's pins cell `— / — / 6,540` is a single figure, which it already reads as one
+bucket.
+
+### 2026-09-30 - Yokohama built: personal services only, on the shared Japanese steps
+
+**Built** on branch `yokohama` (from `origin/master`, `origin/macro-legend` merged
+first), page 81, region East Asia, not in the default frame. Band B (owner,
+2026-09-29): the first page not built on food, under the amended rule 1, and the
+page says the city publishes no food list. Downloads and page prose under the
+owner's pre-approval (2026-09-30). **7,843 storefronts**, 6,540 within the 0.6 mi
+rings (83.4%), **140 stations on 20 lines**. `coverage` one_bucket, `categories`
+"Personal services only" (entry above), `mode` metro, `record_kind` "Permit
+registers", `rail_extra` "Suburban rail".
+
+**Business leg.** The city's 環境衛生関係施設一覧 as of 2026-04-01: barbers 1,512,
+beauty 5,091, laundries 1,293 (7,896 rows; the brief's figure, not the 17,408 of
+2026-09, reproduced). The three zips are byte-identical to the city's copies of
+2026-09-30. Each holds 18 ward CSVs (UTF-16 LE, TAB-separated); the shared
+`japan_register.city_rows` reads only zipped `.xlsx`, so `config.source_rows` reads
+the members city-locally (Kyoto's hook) and `fetch_sources.py` overrides only the
+shared fetch's city part. **No shared join code changed**, so the Minato control
+was not re-run. One city-local rule: the kind of premises is in 詳細業種, while
+業種 repeats the register's name, so 詳細業種 is the type the taxonomy reads - that
+is what catches 美容所(移動) (3 salons in vehicles) and 無店舗取次店 (20 pick-up
+services with no shop). 24 rows have no fixed place (those, and 市内一円 laundries);
+25 repeat registrations are shown once.
+
+**One clock (the snapshot case).** The registers record no closures. The page
+also publishes each month's new premises since (新規, 2026-04 to 2026-09: about
+170 barbers, salons and laundries, 2% of the register) but no closures, so they are
+not added: the register stays one snapshot, dated 2026-04-01, and the page says a
+dot may have closed since. `bill` and the other five zips are not personal-services
+storefronts.
+
+**Placement.** The shared MLIT join: 7,712 at the block (98.0%), 156 at the
+town-chōme centre, 4 unplaced (a building name holding 丁目, 六ッ川, 子安通り).
+
+**Rail.** MLIT N02 on Japan's standing rule, cut at the city line. 20 lines: the
+Blue Line (N02's 1号線 + 3号線) and Green Line; JR East's 東海道線 drawn as four
+services, each a `route` (Tokyo's precedent) - the Keihin-Tohoku Line (with 根岸線
+as the Negishi Line), the Tokaido, the Yokosuka (over the Hinkaku track via 新川崎)
+and the Sotetsu-JR Link Line (羽沢横浜国大 to 武蔵小杉 on the freight track, checked:
+17.6 km, 42 m from 鶴見, never near 横浜) - plus the Yokohama, Nambu and Tsurumi
+lines; Keikyu Main and Zushi; Tokyu Toyoko, Den-en-toshi, Kodomonokuni and
+Shin-yokohama; Minatomirai; Sotetsu Main, Izumino and Shin-yokohama; the Kanazawa
+Seaside Line (N02 class 24, drawn as Kobe's Port Liner). The JR Nambu Line keeps
+one station inside (矢向, 1 of 30), kept as cut on Kobe's JR Takarazuka Line
+precedent. **140 stations** (the brief said 138): 大船's JR platform lies inside the
+city line (Sakae ward), and a station counts when any platform is inside (Osaka's
+太子橋今市, owner 2026-09-27). Gate 3 exact on seven lines (Blue 31, Green 10,
+Seaside 14, Minatomirai 6, Kodomonokuni 3, Tokyu and Sotetsu Shin-yokohama 3 each).
+Close pairs read and kept: Tsunashima / Shin-Tsunashima 145 m, the JR and Keikyu
+Higashi-Kanagawa 164 m, the JR and Keikyu Shinkoyasu 171 m (separate stations). 41
+stations beyond the line are excluded. Median gap 857 m: standard rings.
+
+**Station names** follow the operators' signs, Tokyo's style (owner 2026-09-28):
+one override, 大船 "Ōfuna" to "Ofuna" (the city's only macron), and one alias, N02's
+鶴ヶ峰 for OSM's 鶴ケ峰. **Line colours** from `scripts/line_colour_search.py
+yokohama`: all 20 clear 45 from the pins; closest pair within 500 m 18.0 (Blue /
+Keihin-Tohoku), anywhere 12.4 (Kodomonokuni / Seaside Line, 17 km apart).
+
+**Personal exposure: PASS.** `check_personal_exposure.py yokohama` (Japan pass):
+the operator's own name shown as a trade name on 0 of 7,843 rows; person-like
+name at a residential unit 0 of 6,540 pins. The name rule compared every row
+(申請者氏名 filled on all 7,896, read in memory only): none is exactly the
+operator's name; 4 trade names contain the operator's full name plus a business
+word, which the owner's rule shows. 申請者役職 and 施設電話番号 are never read.
+
+**Licence.** CC BY 4.0 (read 2026-09-30 by the `licence-read` agent): the city's
+prescribed credit for a modified work, with an English gloss, in notice 75.
+MLIT's credits as in Kobe's. **Macro label**: width 68.8 px (measured 2026-09-30,
+controls reproduced); the dot sits 2 px from Tokyo's, so the pill goes right of it
+and above Tokyo's, ("start", 12, -42), clear from dy -34 to -56; PROBLEMS 0 on the
+combined tree.
+
+**Left for others.** Regenerating `docs/japan_city_list.md` also moved Tokyo's
+Taitō (5,779 to 4,830) and Meguro (2,022 to 1,999) food counts, drift unrelated
+to Yokohama; only Yokohama's row was taken, and the drift is reported to the
+cleanup session. The same table still shows Hiroshima in Band C; Hiroshima's
+build updates it.
+
+### 2026-09-30 - Anyang built: the last Gyeonggi satellite, on its ring share
+
+**Built** on branch `anyang` (from `origin/master`, `origin/macro-legend`
+merged first), page 87, region Seoul Capital Area, not in the default frame,
+from Bucheon's files and Namyangju's config. Assigned to the Band B session
+after Dallas (owner, 2026-09-30, relayed by the cleanup session), on the
+Gyeonggi brief: briefed on its ring share although it holds at 7 stations,
+below the satellites' station test (owner, 2026-09-29). Downloads and page
+prose under the owner's pre-approval; the page is Bucheon's approved text with
+Anyang's lines. **15,177 storefronts** (food service 7,010, retail 5,853,
+personal services 2,314), exactly the brief's; 9,747 within the rings (64.2%,
+the brief's). **7 stations** on two lines (Line 1 4: Seoksu, Gwanak, Anyang,
+Myeonghak; Line 4 3: Indeogwon, Pyeongchon, Beomgye; none shared), a 1,488 m
+median gap, standard rings. `coverage` full, `categories` "All three", `mode`
+metro, as the built satellites.
+
+- **Colours**: Seoul's, #004A85 and #009BCE (the brief).
+- **Gate 3**: neither line takes the whole-line gate - Line 1 as in Incheon and
+  Bucheon (the brief), Line 4 because the relations reaching the box carry 48
+  of its 51 stations, without the Jinjeop extension (Namyangju's finding). In
+  its place each line's in-city stations were read against its line table
+  (English Wikipedia, 2026-09-30); both agree with step 1.
+- **The Sillim Line**: the brief's check found its relations reaching the box
+  (ref `Silim`, to be named not drawn); this fetch's answer (rail from the kumi
+  mirror) did not carry it, so there was nothing to place. It has no station in
+  Anyang either way.
+- **Personal exposure: PASS.** `check_personal_exposure.py anyang` (the Korean
+  pass): a Korean personal name at a residential address still shown on 0 of
+  15,177 rows; 28 withheld by step 2.
+- **Licence**: notice 68 (SEMAS) gains Anyang in its heading and text.
+- **Macro label**: width 51.6 px (measured 2026-09-30, Prague, Tokyo, Houston,
+  Toronto and Dallas reproduced). Anyang leaves the region's frame unchanged,
+  but at Namyangju's wider zoom (8.10, its branch) the default pill meets
+  Seongnam's by 5 px, so it sits at ("middle", -14, -22), clear from dx -8 to
+  -24; PROBLEMS 0 alone and on the combined tree with every Band B branch.
+- **Master list**: Anyang adds to Built. The owner's note that the Gyeonggi
+  satellites row "then closes" holds once all four satellite branches land:
+  on this branch Namyangju, Ansan and Uijeongbu are not yet built, so the row
+  stays a Band B candidate here; **the last of the four to land closes it**
+  (Band B 8 to 7).
+
+### 2026-09-30 - Overpass callers wait 60 s after a 504, 429 or timeout
+
+- **`pipeline/osm.py`'s `fetch()` backed off 5 s after its first failed
+  round, against the owner's rule of 60 s after a 504 or 429.** The tram-kit
+  session saw it on Tucson's `fetch_sources.py` the same day: both mirrors
+  504 or timed out, "backing off 5s", then a retry. Decided: a round whose
+  failures include a 504, a 429 or a timeout (an HTTP timeout, or a remark
+  saying the query timed out) now waits `OVERLOAD_WAIT_S` = 60 s, escalating
+  60, 120, ... per round. When the `deadline` cannot fit that wait plus a
+  10 s request, `fetch()` gives up and says so; it does not retry early.
+  Rounds whose failures are an empty 200, a remark or all-zero counts are not
+  load, so they keep the old 5 s, 20 s backoff. Timeouts count as load
+  because a read timeout came alongside the 504s each time both mirrors
+  were struggling (Lille 2026-09-23, Tucson 2026-09-30). Rejected: a flat
+  `max(60, 5 * n**2)`, which does not climb above 60 until the fourth round.
+- **`fetch()` also remembers which host refused, for the rest of the
+  process.** A later `fetch()` that reaches that host within the minute
+  waits out the remainder. If the deadline is too short for the wait, it
+  skips that host for the next one. Without this, a fetch script making
+  several queries would send the second query to a host that 504'd seconds
+  earlier on the first, whenever the other mirror had answered the first.
+  Host order is unchanged. Rejected: putting a refusing host last, which
+  would change which mirror answers. The mirrors disagree, so that changes
+  what gets cached.
+- **The same rule now applies to the three other places that retry Overpass
+  themselves.** `scripts/brief_check.py`'s second-mirror confirmation in
+  `osm_route_refs` could re-ask a host that 504'd moments earlier. It now
+  keeps the same per-host minute. `scripts/screen_stop_spacing.py` retried
+  the same mirror after 20 s on a 504 or 429 and after 8 s on any exception.
+  It now waits 60 s after a 504, a 429 or a timeout. The address loop in
+  `pipeline/aarhus/fetch_sources.py` slept 30 s and 60 s between rounds.
+  It now sleeps 60 s and 120 s, the shape Odense's copy on `tram-build`
+  already had. These callers were left alone because each tries every host
+  once and never retries one: the Hong Kong, Seoul, Taichung, Taipei,
+  Taoyuan, Mexico City and Bucharest fetch scripts. Every other Overpass
+  caller goes through `osm.fetch()`.
+- **`brief_check.py` reports a claim it could not check because Overpass was
+  overloaded as RETRY, not FAIL** (the staging session asked for this when
+  told of the change). Before this, every mirror 504ing printed FAIL under
+  "a brief to correct", although it says nothing about the brief. Now, when
+  every mirror refused with a 504, a 429 or a timeout, the check raises
+  `MirrorsOverloaded`. That includes an unconfirmed mismatch whose second
+  mirror refused. The runner counts these separately and prints "re-run, at
+  least 60 s apart". The exit code is still non-zero, so nothing can read
+  a RETRY as a pass. Any other failure is still a FAIL.
+- **Verified offline.** Seven cases ran against a fake clock and fake mirrors:
+  a 504 plus a timeout waits 60 s and then answers; 429s and 504s escalate
+  60 then 120; empty 200s still wait 5 s; a 60 s deadline gives up after
+  two requests and no sleep; no deadline still waits 60; a second fetch
+  waits out the refusing host's minute; a 30 s deadline skips that host for
+  kumi. Three brief_check cases: all mirrors 504 gives RETRY, a 400 is still
+  a FAIL, and the confirmation waits 60 s. `check_overpass_hosts.py
+  --selftest` passed and `check_all.py` passed 29 of 29. No drift run: no
+  step imports `osm.py` (`check_no_fetch_in_steps.py` enforces that), and
+  no step or output changed.
+
+### 2026-09-30 - Check M refuses a prescribed credit shown only inside a conditional block (owner)
+
+- **Check M now fails a page that shows a prescribed credit only inside an
+  if/try/with/loop block, where it used to print a note.** Owner's call, after
+  the France template moved « Source : Insee » out of the provenance block
+  (`france-insee-template`, taken onto `france-build` at `c35f596` and
+  `france-build-2` at `f8999e6`). With no French page nesting the credit any
+  more, the note could catch only a regression, and a regression drops a
+  licence obligation whenever a provenance file is missing. Tested: Le Mans as
+  it stood before the move (`5d97a9e`) fails, Le Mans after it passes, and
+  all twenty generated pages on `france-build-2` pass. On this branch
+  `check_provenance.py` reports "All recorded". This supersedes the
+  owner-call bullet in the entry below.
+
+### 2026-09-30 - « Source : Insee » on Paris, Marseille, Toulouse, Lille and Rennes; check M refuses a French page without it
+
+- **The five built French pages now display INSEE's prescribed credit.**
+  `docs/licenses/france-licence-ouverte-2.0.md`, MUST DISPLAY 1: INSEE permits
+  reuse « sous réserve de mentionner la source sous la forme « Source : Insee » »,
+  the only prescribed string among the French sources, covering SIRENE and the
+  geolocation file. All five pages named SIRENE and INSEE in prose and none
+  carried the string; neither did `app/components.py`'s `_NOTICES`. Each page
+  (`app/pages/21_Paris_Heatmap.py` to `25_Rennes_Heatmap.py`) gains, under its
+  transit caption, the France batch's line: "Business data: Source : Insee,
+  SIRENE (01 septembre 2026 edition) and its geolocation file." The edition
+  is written the way the batch template renders it
+  (`scripts/france_page.py` on `france-build`), so all French pages read
+  alike.
+- **The edition comes from the record of the shared cache, and is hardcoded in
+  the page.** `outputs/<city>/provenance.json` does not record it for any of
+  the five. `data/paris/raw/provenance.json`, written by the run that
+  downloaded `data/france/raw/` on 2026-09-23 (file times match to the
+  minute), records "Sirene : Fichier StockEtablissement - 01 septembre 2026"
+  and "Fichier géolocalisation établissements - septembre 2026". All five
+  configs import that national cache. The claim holds even for Paris, whose
+  `data_age` says "fetched 2026-09-22": the stock resource is dated 09-01 and
+  the geoloc 09-21, so any fetch from 09-21 to 09-30 got the same pair.
+  Rejected: adding `sirene_etab_title` to the five outputs provenance files by
+  hand. `fetch_sources.py` rewrites that file from scratch and records the
+  SIRENE keys only when it downloads the parquet, which is why they are
+  missing now, so the next run with a cached parquet would drop them again.
+  Also rejected: a fetch-date wording, because the title names the edition
+  directly. **Cost: the page line has to change with the next SIRENE
+  refetch.** Each page's comment says so.
+- **The line sits outside the provenance block, unlike the batch template.**
+  Le Mans's template nests the INSEE caption inside
+  `if PROVENANCE_JSON.exists(): try: ... if _taken:`, so a missing or
+  malformed provenance file drops a licence obligation along with the transit
+  snapshot. On the five built pages it is unconditional.
+- **Check M added to `scripts/check_provenance.py`: a credit a licence
+  prescribes word for word must be on every page of that country.**
+  `PRESCRIBED_CREDITS` maps France to "Source : Insee" and its evidence. The
+  check parses each page and accepts only a string literal passed to an `st.*`
+  call, so a comment quoting the string (each of the five pages now has one)
+  does not count. It accepts a no-break space before the colon. It fails when
+  no city has the country, so it cannot pass by checking nothing. It already
+  runs from `check_all.py` and at publish-city step 4, so it needed no new
+  registration. Tested against the old pages (all five refused, by name) and
+  synthetic pages (comment-only refused, no-break space accepted, Le Mans
+  passes with a note). Rejected: a standalone French-only script, because the
+  table is where the next prescribed string goes, whatever the country.
+- **Owner call open, recommended: move the INSEE line out of the provenance
+  block in the batch template** (`scripts/france_page.py`, and the generated
+  pages 100-110 on `france-build`). Check M passes those pages but prints a
+  note for each, "shows 'Source : Insee' only inside a conditional block". It
+  is a note and not a failure so the batch is not held up by this branch. Once
+  the template moves the line out, the note can become a failure.
+- **Verified at 7bbab98.** `check_provenance.py` reported "All recorded",
+  with check M OK for the five. `check_deploy_imports.py --ref 7bbab98` (run
+  from the main checkout, because this worktree has no `.venv-lean`) reported
+  PROBLEMS 0. A `deploy-verify` run (scope `map-chrome`) passed all five
+  pages:
+  - The caption reads verbatim, once, between the transit caption and the
+    map. On Lille it follows the MEL/Ilévia provenance caption, because Lille
+    has no "Transit data ©" line.
+  - No exceptions; the maps render; the notices block is present.
+  - `check_map_attribution.js` found the credit uncovered on Paris and
+    Rennes at 1000x650, 1024x768 and 375x812.
+  - Madrid, the control, was unchanged.
+
+  **No reboot is needed for this change alone**: page files only, and no
+  module Overview.py imports. At review time the reboot question is still
+  computed from the whole push's `app/` diff.
+
+### 2026-09-30 - Conflict markers fail the pre-push hook; merge_append_only stops loudly on a failed write
+
+- **What happened.** On kitchener-waterloo, `merge_append_only.py
+  DECISIONS.md` hit a Windows file lock (OSError, Errno 22) and the merge was
+  committed with `<<<<<<< HEAD`, `=======` and `>>>>>>> origin/master` still
+  in DECISIONS.md. `check_all.py` passed it 26 of 26: nothing read for
+  markers, and `decisions_index.py --check` compares headings, which a
+  conflict leaves intact. Removed in 3d93d29.
+- **`scripts/check_conflict_markers.py`, in the hook.** It reads every
+  tracked file outside data/ (binary skipped by a NUL sniff), working tree
+  as check_all does, and fails naming file and line on a line starting
+  `<<<<<<< ` or `>>>>>>> `, and on a bare `=======` or diff3 `||||||| `
+  between them. A bare `=======` outside a conflict is a Markdown heading
+  underline and passes. About 3 s on 1,210 files, most of it the rendered
+  maps under outputs/. On `3d93d29^`'s DECISIONS.md it names lines 289, 299
+  and 315, the three markers that were committed.
+- **Its selftest** (`check_conflict_markers_selftest.py`, also in the hook):
+  nine shapes with known answers, including half a conflict, CRLF, diff3, an
+  indented or mid-line marker and eight brackets; a conflict spliced into the
+  live DECISIONS.md; and the real tree as the positive control.
+- **`merge_append_only.py` now writes through `write_or_die()`**: write, read
+  back, retry once after 2 s, then exit non-zero with a message that says the
+  file still holds markers or is half written, not to `git add` it, and to
+  restore it with `git checkout --merge -- <path>`. A lock held by an editor
+  or a sync client is often gone a moment later; the hook is the backstop
+  when it is not.
+
+### 2026-09-30 - Dallas: the Streetcar and the M-Line out, and coverage narrowed as Houston (owner)
+
+Three calls at the build, each recommended:
+- **The Dallas Streetcar and the M-Line trolley are not drawn** (owner): DART's
+  four light-rail lines only, Houston's shape. Both are named in
+  `config.NOT_DRAWN` so step 1 still stops on any relation it cannot place.
+- **`mode` light_rail** (owner, as the brief proposed): DART has no metro.
+- **`coverage` narrowed, `categories` "Personal services thin"** (owner). The
+  brief proposed "full"; I first passed that on without weighing Houston,
+  which uses the same register and is narrowed because Texas taxes few
+  personal services, then corrected the question. Dallas's in-ring pins bear
+  it out: 2,501 retail, 1,492 food service, 204 personal services. The brief is
+  corrected to the calls.
+
+### 2026-09-30 - Dallas built on Houston's register and rules, placed by the City's Address Points
+
+**Built** on branch `dallas` (from `origin/master`, `origin/macro-legend` merged
+first), page 86, region United States East, in the landing view (as Houston and
+Sacramento). From Band A (owner, 2026-09-30), the last city in the Band B
+session's queue. Downloads and page prose under the owner's pre-approval
+(2026-09-30). **15,885 storefronts placed inside the city** (of 17,049
+premises), 4,197 within the rings (26.4%; the brief's 400-row sample read
+24.4%), **44 stations** on four lines.
+
+- **Register**: the Comptroller's `jrea-zgmq`, 44,760 outlets flagged DALLAS
+  inside city limits, Houston's explicit column list - `taxpayer_name`,
+  `taxpayer_address` and `taxpayer_number` never requested, asserted twice.
+  Houston's step 2 unchanged: 18,275 storefront NAICS; 97 not trading yet, 771
+  at an apartment or trailer (homes), 21 with no house number; 17,049
+  premises; 3,408 personally owned (IS 3,238, PI 170) show their address, never
+  a name. Houston's measured reading that UNIT and SPC are commercial spaces
+  held on Dallas's rows (NorthPark Center, DFW's concessions).
+- **Placement** (`step3_place.py`, Houston's passes on Dallas's layer): the
+  City's Address Points, 395,893 points pulled in pages of 2,000 (never per
+  address): exact 14,363, canonical 158, unique street under any ZIP 560, and
+  the brief's fourth tier, the nearest listed number on the same side within
+  10, 225; the Census geocoder took 1,349 of the 1,743 left. **89.8% joined,
+  7.9% geocoded, 2.3% unplaced**; 770 placed points with a Dallas postal address
+  lie outside TIGER's city polygon and are dropped (no address-point placement
+  among them). The indemnity was accepted by the owner (2026-09-30); the page
+  calls the placement approximate, not surveyed.
+- **Not run: Houston's "a person's permit at a Residential point is a home"**.
+  The Address Points carry an `ADDRESSTYPE` code (T 250,622, B 61,683, A 47,722,
+  P 23,855, and ten rarer) that neither the layer nor its ArcGIS item
+  documents, so no code is read as Residential. Personally owned outlets still
+  show an address rather than a name, and apartments and trailers are still
+  left off. **For review time**: the codes' meaning (the City's GIS office) would
+  let the rule run.
+- **Personal exposure: PASS at Houston's level.** `check_personal_exposure.py
+  dallas`: a person-like name at a residential unit on 4 of 4,197 pins (0.10%;
+  Houston 0.31%), each a company outlet in a mall or airport space; no taxpayer
+  column exists to fall back to.
+- **Boundary**: TIGER's place polygon, GEOID 4819000, 993.8 km² (Houston's
+  rule), not OSM's relation.
+- **Rail**: OSM, 27 DART light-rail relations (network `DART`); 128 stop
+  positions -> 64 stations, 44 inside the city, 20 beyond it excluded (Plano,
+  Richardson, Garland, Rowlett, Carrollton, Farmers Branch, Irving, DFW
+  Airport); median gap 1,388 m, standard rings. **Gate 3 exact** against
+  English Wikipedia's line infoboxes (Red 26, Blue 23, Green 24, Orange 31) less
+  two stations read at build: Convention Center, in OSM's Red and Blue
+  relations with role `inactive` and closed while the convention centre is
+  rebuilt, and Hidden Ridge, the Irving infill station OSM does not yet carry
+  (outside the city: no ring lost).
+- **Line colours**: the project's own. Red and Green are Houston's; Blue and
+  Orange the smallest HLS move from DART's hues clearing CIE76 46 from the pins
+  and 30 from the other lines, 3:1 on both pages: DART's blue sat 15.5 from
+  Retail's pin, so #264ded (46.4); orange #d97c0e.
+- **Page**: Houston's approved text with Dallas's facts, plus two sentences
+  beyond the template, **flagged for review time**: the timetable (every 20
+  minutes at peak, 20 to 30 at other times; Wikipedia's DART article, read
+  2026-09-30), which the brief says to disclose, and that Texas taxes only some
+  services, so salons and barbers mostly do not appear (the coverage call).
+- **Macro label**: width 40.1 px (measured 2026-09-30, five controls
+  reproduced). In the landing view Dallas's dot fell inside San Diego's pill,
+  so **San Diego's label moved west of its dot**, ("start", 16, 0) to ("end",
+  -16, -2), and Dallas sits left of its own dot, ("end", -10, -3), in a narrow
+  clear window (dy -6 to 0); PROBLEMS 0 on the combined tree with every Band B
+  branch.
+- **Master list**: Dallas leaves Band A, which is now empty of candidates.
+
+### 2026-09-30 - The France page template shows « Source : Insee » unconditionally (owner)
+
+- **The INSEE caption moved out of the provenance block in
+  `scripts/france_page.py` and in the twenty pages it generated (100-119),
+  on the owner's call.** The template nested it inside
+  `if PROVENANCE_JSON.exists(): try: ... if _taken:`, so a missing or
+  malformed provenance file, or one without `fetched_utc`, dropped INSEE's
+  prescribed credit along with the transit snapshot
+  (`docs/licenses/france-licence-ouverte-2.0.md`, MUST DISPLAY 1). Only the
+  edition depends on that file. `_edition` now starts empty and is read
+  right after the file loads. The caption runs after the block, so without
+  provenance it reads "Business data: Source : Insee, SIRENE and its
+  geolocation file." The visible text with provenance is unchanged.
+  Rejected: a second, stripped-down caption in the `except` branch, which
+  would still miss the no-file and no-`fetched_utc` cases.
+- **The pages were patched with the same exact-match edit, not regenerated.**
+  `france_page.py --write` rebuilds the prose from each city's build data,
+  so a regeneration could move other sentences. The edit matched exactly
+  once in the template and in every page. Afterwards each page's block reads
+  line for line as the template's, apart from the city's transit credit.
+- **Verified.** The template and all twenty pages compile. Check M (from
+  `france-insee-attribution`) prints no nesting note for pages 100-119.
+  Le Mans run headless under the lean venv (streamlit AppTest, page links
+  stubbed) showed the caption with provenance ("(01 septembre 2026
+  edition)") and without it (edition omitted). `deploy-verify` is left to
+  the landing group's `city-added` run at review time.
+- **Check M's note can now become a failure**, since no French page nests
+  the credit any more. That is a change to `france-insee-attribution`,
+  queued for the owner.
+
+### 2026-09-30 - Uijeongbu built: a Gyeonggi satellite on SEMAS's register, the U Line drawn
+
+**Built** on branch `uijeongbu` (from `origin/master`, `origin/macro-legend`
+merged first), page 85, region Seoul Capital Area, not in the default frame,
+from Bucheon's files and Namyangju's config. Downloads and page prose under the
+owner's pre-approval (2026-09-30); the page is Bucheon's approved text with
+Uijeongbu's lines. **13,103 storefronts** (food service 5,875, retail 5,090,
+personal services 2,138), exactly the brief's; 11,178 within the rings
+(85.3%, the brief's, the highest of any satellite). **20 stations** on three
+lines (U Line 15, Line 1 5, Line 7 1: Jangam; Hoeryong shared by Line 1 and the
+U Line), a 615 m median gap: standard rings, outside the spacing rule's
+540-570 m band that would go to the owner (the brief read 622 m). `coverage`
+full, `categories` "All three", `mode` metro, as the built satellites.
+
+- **The U Line** (Uijeongbu LRT) in OSM's colour (#F0831E); Line 1 and Line 7 in
+  the colours Bucheon draws. Line 7's one station is drawn by the satellites'
+  rule.
+- **Its two depot-shuttle relations** (no ref) are placed by name in
+  `NOT_DRAWN_BY_NAME` (Incheon's pattern, as the brief said): the ref-U
+  relation carries the whole line, and a drawn line is never matched on text.
+- **Not drawn**: Line 4 and GTX-A, which reach the query box with no station in
+  Uijeongbu.
+- **Gate 3** exact on the U Line (15) and Line 7 (53); Line 1 left out of the
+  whole-line gate, as in Incheon and Suwon.
+- **Close pair read and kept**: the U Line's 경전철의정부 ("LRT Uijeongbu") and
+  Korail's 의정부, 257 m apart, are separate stations.
+- **Personal exposure: PASS.** `check_personal_exposure.py uijeongbu` (the
+  Korean pass): a Korean personal name at a residential address still shown on
+  0 of 13,103 rows; 11 withheld by step 2.
+- **Licence**: notice 68 (SEMAS) gains Uijeongbu in its heading and text.
+- **Macro label**: width 68.6 px (measured 2026-09-30, controls reproduced).
+  Uijeongbu moves the Seoul Capital Area frame's centre north (37.450 to
+  37.490 N; zoom unchanged, measured in memory); the default ("middle", 0, -22)
+  scores clear, alone and on the combined tree with Namyangju's and Ansan's
+  branches.
+- **Master list**: the Gyeonggi satellites row stays a Band B candidate (Anyang,
+  briefed on its ring share, is not built here); Uijeongbu adds to Built only.
+  Namyangju, Ansan and Uijeongbu each call their city South Korea's tenth on
+  their own branch: renumber in landing order.
+
+### 2026-09-30 - Ansan built: a Gyeonggi satellite on SEMAS's register, the Seohae Line drawn
+
+**Built** on branch `ansan` (from `origin/master`, `origin/macro-legend`
+merged first), page 84, region Seoul Capital Area, not in the default frame,
+from Bucheon's files and Namyangju's config. Downloads and page prose under the
+owner's pre-approval (2026-09-30); the page is Bucheon's approved text with
+Ansan's lines, and one sentence on Daebudo. **19,711 storefronts** (food
+service 9,263, retail 7,494, personal services 2,954), exactly the brief's;
+12,575 within the rings (63.8%; the brief measured 64.3% to the nearest drawn
+station on its own station set). **13 stations** on three lines (Line 4 8,
+Suin-Bundang 7, Seohae 5; six shared by Line 4 and Suin-Bundang, Choji by all
+three), a 1,417 m median gap, standard rings. `coverage` full, `categories`
+"All three", `mode` metro, as the built satellites.
+
+- **The Seohae Line is drawn** on Bucheon's precedent (owner, 2026-09-29): in
+  Ansan it runs on its own track through Wonsi, Siu, Seonbu and Dalmi, meeting
+  the other lines only at Choji. Bucheon's colour (OSM's tag, #5EAC41).
+- **Not drawn**: Line 1, Incheon Line 1 and GTX-A, which reach the query box
+  with no station in Ansan.
+- **Gate 3** exact on the Suin-Bundang Line (63, as Seongnam, Suwon and Yongin
+  read it). Line 4 is left out (only its service relations reach the box), and
+  the Seohae Line is not gated whole, as in Bucheon.
+- **English names**: one override on Suwon's precedent, "Singiloncheon" to
+  "Singil Oncheon". 한대앞 keeps OSM's "Hanyang University at Ansan", and the
+  page names it so.
+- **Personal exposure: PASS.** `check_personal_exposure.py ansan` (the Korean
+  pass): a Korean personal name at a residential address still shown on 0 of
+  19,711 rows; 17 withheld by step 2.
+- **Licence**: notice 68 (SEMAS) gains Ansan in its heading and text.
+- **Macro label**: width 41.5 px (measured 2026-09-30, controls reproduced).
+  Ansan lies inside the Seoul Capital Area frame (the zoom does not move); the
+  default ("middle", 0, -22) scores clear, alone and on the combined tree with
+  Namyangju's branch.
+- **Master list**: the Gyeonggi satellites row stays a Band B candidate; Ansan
+  adds to Built only. Both this branch and `namyangju` call their city South
+  Korea's tenth: whichever lands second is the eleventh.
+
+### 2026-09-30 - Namyangju built: the sixth Gyeonggi satellite, on SEMAS's register
+
+**Built** on branch `namyangju` (from `origin/master`, `origin/macro-legend`
+merged first), page 83, region Seoul Capital Area, not in the default frame,
+from Bucheon's files (the satellites' module: SEMAS through `korea_sbiz`, OSM
+rail on Busan's step 1). Downloads and page prose under the owner's
+pre-approval (2026-09-30); the page is Bucheon's approved text with
+Namyangju's lines and one sentence on its spread. **18,344 storefronts**
+(food service 8,069, retail 7,699, personal services 2,576), exactly the
+brief's; 10,067 within the rings (54.9%, the brief's); **17 stations** on four
+lines (Gyeongchun 7, Gyeongui-Jungang 6, Line 4 3, Line 8 2; Byeollae on Line 8
+and Gyeongchun), a 2,294 m median gap, standard rings. `coverage` full,
+`categories` "All three", `mode` metro, as the five built satellites.
+
+- **Colours**: Seoul's for Line 4, Gyeongui-Jungang and Gyeongchun; Line 8 as
+  Seoul and Seongnam draw it (#92144E).
+- **Not drawn**: GTX-A and Seoul's Lines 2, 5, 6 and 9, which reach the query
+  box with no station in Namyangju.
+- **Gate 3**: no line takes the whole-line gate, each for a reason an earlier
+  city recorded - Line 4's relations in the box carry 29 of its 51 stations
+  (Line 1's case in Incheon and Suwon); Line 8 24 against 25 (Seongnam's);
+  Gyeongui-Jungang 55 against 57 (Goyang's); Gyeongchun's relations carry 25
+  with the Cheongnyangni and Kwangwoon University branches, its infobox 20 and
+  its table 21 (read 2026-09-30). In its place, each line's in-city stations
+  were read against its line table (English Wikipedia, 2026-09-30) and all four
+  agree with step 1 (7, 6, 3, 2).
+- **English names**: two overrides on Suwon's precedent, "Byeollaebyeolgaram"
+  to "Byeollae Byeolgaram" and "PyeongnaeHopyeong" to "Pyeongnae-Hopyeong".
+- **OSM**: the rail answer came from a mirror whose OSM base was 2026-07-28;
+  nothing on Namyangju's four lines changed since (the brief's counts of
+  2026-09-29 reproduce).
+- **Personal exposure: PASS.** `check_personal_exposure.py namyangju` (the
+  Korean pass): a Korean personal name at a residential address still shown on
+  0 of 18,344 rows; 37 withheld by step 2 (30 of them inside the rings).
+- **Licence**: notice 68 (SEMAS) gains Namyangju in its heading and text.
+- **Macro label**: width 75.8 px (measured 2026-09-30, controls reproduced).
+  Namyangju widens the Seoul Capital Area frame (zoom 8.21 to 8.10, measured in
+  memory with and without it); the default ("middle", 0, -22) scores clear, and
+  every other label there still does: PROBLEMS 0 on the combined tree.
+- **Master list**: the Gyeonggi satellites row stays a Band B candidate until
+  Ansan and Uijeongbu (and Anyang, briefed) are built; Namyangju adds to Built
+  only.
+- **For the cleanup session**: `brief_check.py gyeonggi` FAILS one claim, on
+  Anyang's query box (Lines 1 and 4 and the Sillim Line by ref), a city this
+  session is not building; the brief needs correcting there.
 
 ### 2026-09-30 - Buffalo's label south of its dot in United States East, by a per-region offset; map-refresh assembled (owner)
 

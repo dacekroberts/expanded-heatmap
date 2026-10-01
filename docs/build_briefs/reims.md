@@ -14,7 +14,7 @@
 > splits its trips by terminus (`ROUTE_BRANCHES` in the config), and draws and
 > labels T1 and T2. Gate 3 is exact against the published 21 and 22. The
 > "one line in the legend" below is superseded. Build log:
-> `docs/decisions_drafts/france-build.md`.
+> the France build entries in `DECISIONS.md` (folded 2026-10-01).
 
 ## The one-line summary
 
