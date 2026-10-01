@@ -4,6 +4,106 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Kansas City built on tram-build: the KC Streetcar and KCMO's frozen licence register
+
+- **Kansas City built on Houston's rules and `osm_tram.py`.** It has 19
+  stations, 3,561 storefronts, and 451 of them (12.7%) in a ring. The page
+  says "about one storefront in eight".
+- **The streetcar.** OSM relations 7825409 and 7825410, ref 601, operator
+  "Kansas City Streetcar Authority". Their 35 stop positions collapse to the
+  brief's 19 stations, all inside the City as TIGER draws it (place 2938000,
+  824.8 km²). RideKC's GTFS was not fetched (owner).
+  - **Median gap 384 m, not the brief's 413 m**, so the rings are halved, and
+    step 1 gates the median at 350-480 m.
+  - No gate 3: RideKC's count is barred, and the brief's 19 is OSM's own
+    count, which step 1 checks.
+  - Colour `#b8860b`, Odense's, scoring 74.8 against the nearest pin. OSM
+    records none, and no logo is used.
+  - The frequency, "about every 10 minutes by day, seven days a week", is
+    stated as a fact, as the brief says.
+- **Found: the brief misread the register's name columns.** `dba_name` is
+  filled on all 15,895 rows and holds the LICENCE HOLDER: "HARRIS GREGORY J"
+  for a person, "MANREET INC" for a company. `business_name`, filled on
+  5,835 rows, is the trade name ("7 ELEVEN STORE NO 18711C" over MANREET INC).
+  - **Decided: call 11 (Houston's sole-owner rule) is read on the holder.**
+    Where the holder reads as a person (surname first, letters only, no
+    organisation word; it is meant to over-fire), the pin shows the address
+    and no name at all, not even the trade name. That is Houston's rule,
+    which withholds a person's trade name too. This covers 684 storefronts.
+  - **Otherwise the pin shows the trade name, else the holder company.**
+    That is 1,385 trade names and 1,466 holder companies. Showing the trade
+    name departs from the brief's "show `dba_name`", which assumed
+    `dba_name` was the trade name. **Flagged for the owner.**
+  - **A company named only as a person shows the address too.** This
+    follows Bucharest's precedent ("Caranica Mihai SRL") and Denmark's. All
+    587 shown names that `residence.looks_personal` reads as a person's
+    were read by eye: 271 trade names and 316 holder companies with the
+    legal form stripped. 26 are people ("ALYSSA BULLIS LLC", "NEVA J
+    WILLIAMS"), listed in `config.PERSON_NAMED`. The rest are shop names
+    ("CROWS COFFEE") or chains named for a founder ("KENDRA SCOTT",
+    "JOHNNY WAS"), and are kept as brands. Step 2 stops if a listed name
+    disappears. The register is frozen, so the list is measured rather
+    than guessed.
+- **Privacy verdict: publishable.** 451 pins:
+  - 0 contact details;
+  - 0 surname-first names;
+  - 0 at a residential unit, because the register's addresses carry no unit
+    at all, so Houston's apartment test cannot fire;
+  - 39 person-like names by the heuristic, all shop names (Akoya Omakase,
+    Midtown Tavern, Hotel Indigo);
+  - 163 holder-company fallbacks, read by eye in the ring: 169 names, all
+    companies once the 26 above were withheld.
+- **The register, step by step.** Of the 15,895 rows:
+  - 13,917 are licences valid for 2025 or 2026 (owner, call 10). The 1,978
+    valid for 2024 had lapsed by the freeze.
+  - **1,095 carry only a fee code** ("Misc Rate 129", "Flat Rate 42A"). They
+    were dropped, and the page states the count (call 12). The brief's
+    1,200 counted all years. No restaurant hides under a fee code: one
+    fee-code name of 1,095 reads as food.
+  - **615 NAICS 2022 titles map to codes through the Census title file**
+    (a new support source with a row; federal, public domain), compared on
+    letters and digits. One truncated title, "Freight Transportation
+    Arrangemen", maps by unique prefix. Every title maps.
+  - 3,612 are in the buckets; 11 points lie outside the city; 40 are
+    duplicates by name and address. That leaves 3,561.
+  - **NAICS 2022 has no "nonstore" code (454)**, so online sellers are NOT
+    left out by code here. The page says a web shop is filed under its
+    goods, Odense's caveat, rather than Houston's "online sellers are left
+    out". Vending machines (23) and fuel dealers (1) are left out.
+- **Found: Food service is thin.** 175 premises in the whole city, 52 in a
+  ring; only 26 full-service restaurants citywide. The licence register
+  holds few restaurants and bars.
+  - **Kept `coverage` "full"**, on Houston's precedent: its personal
+    services were 94 of 2,223 in-ring pins and it stayed "All three". KC's
+    food is 52 of 451.
+  - The page says "It holds few restaurants and bars, about 175 across the
+    whole city". **That sentence is outside the template: flagged.**
+  - **The owner's call, if it is wanted:** `narrowed` with "Food thin"
+    instead, or a city food-permit source (none is in the brief).
+- **Page sentences outside the template, flagged:**
+  - the register caveat, "a licence is issued to a business at an address
+    ...";
+  - the web-shop sentence;
+  - the thin-food sentence;
+  - "and so it does where a company trades under a person's own name".
+- **Macro label: Kansas City is 79.3 px, measured with Houston, Odense,
+  Daugavpils and Riga reproduced. It sits left of the dot at ("end", -11,
+  8).**
+  - **Chicago's label moved from below its dot to the left, ("end", -11,
+    -2).** Below its dot it covered Kansas City's marker at the Global and
+    United States zooms, at all three widths, and no offset of Kansas
+    City's own label can fix that. The scan:
+    - Chicago passes dy -8 to +5;
+    - Kansas City passes dy +2 to +13;
+    - PROBLEMS 0.
+  - **A front-page change to a published city, for deploy-verify at
+    review.**
+  - At 375 px in United States East, Kansas City's pill runs 17.3 px (19%)
+    off the left edge. It is reported as clipped, not a problem.
+- **Licence read.** `kkhs-93m4` declares Public Domain. A `licence-read` was
+  started at build; its verdict goes into the licence table when it
+  returns.
+
 ### 2026-09-30 - Daugavpils built on tram-build: all five routes, 37 stations
 
 - **Daugavpils built on Riga's layers through `latvia_register.py`.** It
