@@ -235,6 +235,28 @@ OFF_ISLAND_FARE_ZONE_SUFFIX = " -Zone B"
 # 64 Métro + 16 REM - 2 interchanges that collapse (2026-09-27; 64 before).
 IN_CITY_STATIONS_EXPECTED = 78
 
+# --- Gate 3: the operators' own per-line station counts ----------------------
+# Whole lines, BEFORE the island cut (the Orange Line's three Laval stations,
+# the Yellow Line's Longueuil terminus and the REM's off-island ends count
+# here). An interchange counts once on each line it serves. Keyed as step 1
+# keys its lines: STM route_id, and REM_LINE_KEY for the REM's one drawn line.
+OPERATOR_STATION_COUNTS = {
+    "1": 27,      # Angrignon - Honoré-Beaugrand
+    "2": 31,      # Côte-Vertu - Montmorency (3 of them zone B, in Laval)
+    "4": 3,       # Berri-UQAM, Jean-Drapeau, Longueuil-Université-de-Sherbrooke
+    "5": 12,      # Snowdon - Saint-Michel
+    "REM": 23,    # the 23 marked "In use"; rem.info lists 26, of which
+                  # Marie-Curie and YUL-Aéroport-Montréal-Trudeau are "In
+                  # construction" and Griffintown - Bernard-Landry "Projected"
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Métro: STM's own line pages, the station list on each of "
+    "stm.info/en/info/networks/metro/ligne-1---verte, ligne-2---orange, "
+    "ligne-4---jaune and ligne-5---bleue (Société de transport de Montréal). "
+    "REM: rem.info/en/travelling/stations, the station list with each "
+    "station's status (REM / CDPQ Infra). Both read 2026-10-01; primary."
+)
+
 # --- Business filtering ------------------------------------------------
 
 SOURCE_ENCODING = "utf-8"

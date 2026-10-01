@@ -121,6 +121,38 @@ SPACING_MIN_M = 60.0
 STUB_MIN_SHARE = 0.5
 STUB_LINES = ("4", "12")
 
+# Gate 3: Västtrafik's own stops per line, from each line's timetable PDF
+# (page 1's stop columns, both directions), the whole line before the kommun
+# split (4's and 12's Mölndal stops included). A tram step 1 stops on a
+# mismatch, but FIVE LINES DISAGREE and the cause is in OSM, so the stop is
+# commented out in step 1 until the cleanup session takes it to the owner:
+# OSM's relations leave out a stop the line's timetable serves. The station is
+# drawn and ringed in each case (it is on other lines' relations, and
+# Västtrafik gives it one stop code across the lines); what is missing is the
+# line on its label.
+OPERATOR_STATION_COUNTS = {
+    "1": 28,
+    "2": 28,   # MISMATCH (cause found, not fixed): build 27. Drottningtorget (stop 002135, platforms A3/A6) is in line 2's timetable, not on OSM's line-2 relations
+    "3": 29,
+    "4": 21,   # MISMATCH (cause found, not fixed): build 20. Korsvägen (003980, A2/A3) is in line 4's timetable, not on OSM's line-4 relations
+    "5": 33,
+    "6": 46,   # MISMATCH (cause found, not fixed): build 45. Korsvägen (003980, B1/B2) missing from OSM's line-6 relations
+    "7": 35,
+    "8": 25,   # MISMATCH (cause found, not fixed): build 24. Korsvägen (003980, B1/B2) missing from OSM's line-8 relations
+    "9": 21,
+    "10": 13,
+    "11": 35,
+    "12": 18,
+    "13": 21,  # MISMATCH (cause found, not fixed): build 20. Korsvägen (003980, B2) missing from OSM's line-13 relation
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Västtrafik's line timetables 'Tidtabell linje 1' to '13', valid 2026-08-17 to "
+    "2026-12-12, the PDF linked from each line's page "
+    "https://www.vasttrafik.se/reseplanering/tidtabeller/linje/90110145<NNN>00000/ "
+    "(page 1's stop columns, both directions), read 2026-10-01. The line page's own "
+    "stop list names more stops than the PDF (line 7: six more), so the "
+    "timetable PDF is the figure used.")
+
 DRAWN_LINES = LINE_REFS
 # The lines' public names: Västtrafik's "Spårvagn 1" ... "Spårvagn 13",
 # labelled in English as Riga's and Daugavpils's are ("Tram 1").
@@ -231,7 +263,8 @@ TYP_EXCLUDED = {
 # Vending machines are out wherever the register files them (docs/
 # category_rules.md, "Mobile units, kiosk carts, vending machines"): 24Seven
 # Vending (a KIOSK) and SmartVend 24/7 (blank, a shop by its "24/7"). The
-# module's name rules have no vending word, so step 2 drops them here.
+# module's name rules have carried the same words since 2026-10-01 (call C2);
+# step 2 still drops them here first, so its log counts them.
 VENDING_NAME = r"(?i)vending|smartvend"
 
 # A PREMISES NAMED ONLY AS A PERSON shows its address (Kansas City's and New

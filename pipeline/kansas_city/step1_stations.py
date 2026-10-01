@@ -50,11 +50,18 @@ def main():
     platforms, st = osm_tram.collapse(q, refs=config.LINE_REFS,
                                       crs_projected=config.CRS_PROJECTED)
     print()
-    # Gate 3 not run: no operator count was read for the line (RideKC's feed is
-    # barred, and the brief's 19 is OSM's own count, checked below).
-    station_gates.verify_stations(
+    # Gate 3 against the KC Streetcar Authority's own map (config), counted
+    # before the city split; a tram step 1 stops on a mismatch (tram-city skill).
+    res = station_gates.verify_stations(
         city="Kansas City", platforms=platforms, stations=st,
-        crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M)
+        crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M,
+        expected_per_line=config.OPERATOR_STATION_COUNTS,
+        actual_per_line={ref: int(st["lines"].str.split("/").apply(
+            lambda ls: ref in ls).sum()) for ref in config.LINE_REFS})
+    if res["per_line_mismatches"]:
+        sys.exit("gate 3: the build disagrees with the operator's own count - "
+                 + "; ".join(f"{line}: build {b}, operator {o}"
+                             for line, (b, o) in res["per_line_mismatches"].items()))
 
     places = gpd.GeoDataFrame([{"ref": config.CITY_GEOID, "name": "Kansas City",
                                 "geometry": poly}], crs=config.CRS_GEOGRAPHIC)

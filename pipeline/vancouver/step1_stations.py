@@ -62,6 +62,7 @@ from pipeline.vancouver.config import (  # noqa: E402
     LINE_NAMES,
     MUNICIPALITIES_GEOJSON,
     MUNICIPALITIES_NAME_FIELD,
+    OPERATOR_STATION_COUNTS,
     RING_EDGES_METERS,
     ROUTE_IDS,
     STATION_MUNICIPALITIES_CSV,
@@ -73,6 +74,7 @@ from pipeline.vancouver.config import (  # noqa: E402
     SURREY_BOUNDARY_NAME_KEEP,
     THINNED_GROUPS,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 SUFFIX = re.compile(STATION_SUFFIX_PATTERN, re.I)
 
@@ -258,6 +260,12 @@ def main():
         n = int(kept["lines"].fillna("").str.contains(name, regex=False).sum())
         total = int(gdf["lines"].fillna("").str.contains(name, regex=False).sum())
         print(f"  {name:<16}{n:>4} of {total:>3}")
+
+    # --- gate 3: whole lines, before the scope cut, against TransLink -------
+    print("\nGate 3 - whole lines (before the Vancouver-or-Surrey cut):")
+    check_operator_counts(OPERATOR_STATION_COUNTS, {
+        rid: int(gdf["lines"].fillna("").str.contains(name, regex=False).sum())
+        for rid, name in LINE_NAMES.items()})
 
     # --- station spacing, measured against the outer ring -------------------
     outer = RING_EDGES_METERS[-1]

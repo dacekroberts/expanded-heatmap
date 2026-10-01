@@ -141,6 +141,33 @@ NAME_ALIASES = {}
 EXPECTED_IN_CITY = 180
 EXPECTED_OUTSIDE = 15
 
+# Gate 3: the stops of each line in ZVV's Linienfahrplan (the Zürcher
+# Verkehrsverbund's official line timetable for VBZ's trams, both directions,
+# by stop number), the whole line before the Stadt split (2's Schlieren and
+# 10's Opfikon, Kloten and Rümlang stops included). 50 AND 51 ARE COUNTED FOR
+# THE CURRENT TIMETABLE PERIOD ONLY (14 Dec 2025 to 12 Dec 2026), as are the
+# shortened 4, 11, 13 and 14 they stand in for: re-read every figure when the
+# Bahnhofquai reopens. A tram step 1 stops on a mismatch, but tram 10
+# disagrees, so that stop is commented out in step 1 until the cleanup session
+# takes it to the owner.
+OPERATOR_STATION_COUNTS = {
+    "2": 30, "3": 21, "4": 16, "5": 12, "6": 11, "7": 31, "8": 27, "9": 34,
+    # MISMATCH (cause found, not fixed): build 29. The build's extra stop is
+    # Bahnhof Oerlikon, which only OSM's tram-10 short-run relations (10412927,
+    # 10412930: Bahnhofstrasse/HB <-> Bahnhof Oerlikon) carry; ZVV's line 10
+    # does not list it. The station stays drawn either way (tram 50 serves it);
+    # what changes is 10 on its label.
+    "10": 28,
+    "11": 14, "13": 13, "14": 12, "15": 13, "17": 21,
+    "50": 33,   # temporary construction line, current timetable period only
+    "51": 27,   # temporary construction line, current timetable period only
+}
+OPERATOR_COUNTS_SOURCE = (
+    "ZVV, 'Haltestellen- und Linienfahrpläne', Jahresfahrplan 2026 (valid "
+    "2025-12-14 to 2026-12-12): https://online.fahrplaninfo.zvv.ch/frame_linie3.php"
+    "?lang=de&sel_linie=|010<nn>|<n>&sel_gk=<per line>, read 2026-10-01. ZVV is the "
+    "public transport authority that publishes VBZ's timetable.")
+
 SPACING_MIN_M = 80.0
 # One name, one stop: osm_tram's 200 m collapse limit, widened for ONE stop.
 # Waffenplatzstrasse (trams 5 and 13) has its two directions' stop positions

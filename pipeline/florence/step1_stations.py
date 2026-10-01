@@ -35,9 +35,16 @@ def main():
     platforms, st = osm_tram.collapse(q, refs=config.LINE_REFS,
                                       crs_projected=config.CRS_PROJECTED)
     print()
-    station_gates.verify_stations(
+    res = station_gates.verify_stations(
         city="Florence", platforms=platforms, stations=st,
-        crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M)
+        crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M,
+        expected_per_line=config.OPERATOR_STATION_COUNTS,
+        actual_per_line={ref: int(st["lines"].str.split("/").apply(
+            lambda ls: ref in ls).sum()) for ref in config.LINE_REFS})
+    # Gate 3 stops a tram step 1 (the tram-city skill).
+    if res["per_line_mismatches"]:
+        sys.exit("gate 3: the build disagrees with GEST's own stop counts - " + "; ".join(
+            f"{ref}: build {b}, GEST {o}" for ref, (b, o) in res["per_line_mismatches"].items()))
 
     inside, outside = osm_tram.split_by_places(st, com, keep={config.ISTAT_FIRENZE})
     print(f"\n  {len(st)} tram stops -> {len(inside)} in the Comune di Firenze, "

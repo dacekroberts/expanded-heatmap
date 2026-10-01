@@ -49,8 +49,11 @@ from pipeline.new_york.config import (  # noqa: E402
     ROUTE_TO_TRUNK,
     RING_EDGES_MILES,
     METERS_PER_MILE,
+    OPERATOR_COUNTS_SOURCE,
+    OPERATOR_STATION_COUNTS,
     STATIONS_CSV,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 
 def load_gtfs_table(zip_path, filename, **kwargs):
@@ -122,6 +125,13 @@ def main():
         "lines": lines_by_parent.values,
     })
     print(f"\n{len(stations)} distinct MTA rail stations (parent stations) in the feed.")
+
+    # Gate 3, per trunk, before the city cut (config.OPERATOR_STATION_COUNTS
+    # says how the MTA register's daytime routes were reconciled).
+    per_trunk = served.dropna(subset=["parent_station"]).groupby("trunk")["parent_station"].nunique()
+    print(f"\nGate 3 ({OPERATOR_COUNTS_SOURCE}):")
+    check_operator_counts(OPERATOR_STATION_COUNTS,
+                          {t: int(n) for t, n in per_trunk.items()})
 
     # --- Spatial filter to New York City ------------------------------------
     # The subway is wholly within the city, so this is expected to exclude

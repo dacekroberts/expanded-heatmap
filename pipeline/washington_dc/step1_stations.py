@@ -48,6 +48,8 @@ from pipeline.washington_dc.config import (  # noqa: E402
     EXCLUDED_STATIONS_CSV,
     GTFS_ZIP,
     LINE_NAMES,
+    OPERATOR_COUNTS_SOURCE,
+    OPERATOR_STATION_COUNTS,
     RING_EDGES_METERS,
     ROUTE_GROUPS,
     STATES_GEOJSON,
@@ -57,6 +59,7 @@ from pipeline.washington_dc.config import (  # noqa: E402
     STATION_SUFFIX_PATTERN,
     THINNED_GROUPS,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 ROUTE_TO_GROUP = {r: g for g, routes in ROUTE_GROUPS.items() for r in routes}
 
@@ -140,6 +143,12 @@ def main():
     groups_by_parent = st.groupby("parent")["group"].apply(
         lambda s: ", ".join(sorted({LINE_NAMES[g][0] for g in s})))
     stations["lines"] = stations["stop_id"].map(groups_by_parent)
+
+    # Gate 3: each whole line as WMATA lists it, before the District cut.
+    per_group = st.groupby("group")["parent"].nunique()
+    print(f"\nGate 3 ({OPERATOR_COUNTS_SOURCE}):")
+    check_operator_counts(OPERATOR_STATION_COUNTS,
+                          {g: int(n) for g, n in per_group.items()})
 
     # --- inside the District? ----------------------------------------------
     dc = gpd.read_file(CITY_BOUNDARY_GEOJSON)

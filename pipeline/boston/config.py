@@ -233,6 +233,21 @@ STATION_SUFFIX_PATTERN = r"\s*-\s*(Inbound|Outbound)\s*$"
 
 STATION_NAME_ALIASES = {}
 
+# Gate 3: the MBTA's own per-line station lists, keyed as ROUTE_GROUPS. Counted
+# over each group's drawn shapes BEFORE the Green Line thinning and before the
+# City of Boston cut (step 1 compares the full sequences), because the operator
+# lists the whole line and the thinning is this map's own rule, not a missing
+# station. Green is the MBTA's 70 distinct names across B, C, D, E and the
+# Green Line Extension; its B and C branches each have a "Saint Paul Street"
+# stop, listed once by name on the MBTA page and collapsed once by name here.
+# Brandon Hall (C) was listed but marked closed to 2026-10-04 for accessibility
+# work; it is a stop on the line, so it counts.
+OPERATOR_STATION_COUNTS = {"Red": 22, "Orange": 20, "Blue": 12, "Green": 70,
+                           "Mattapan": 8}
+OPERATOR_COUNTS_SOURCE = ("MBTA, 'Subway' stations page, the station list per "
+                          "line, https://www.mbta.com/stops/subway (read "
+                          "2026-10-01)")
+
 # --- Business filtering ------------------------------------------------
 
 TAXONOMY_SYSTEM = "boston_licensecat"

@@ -159,6 +159,35 @@ NAME_ALIASES = {
 }
 EXPECTED_STATIONS = 106
 
+# GATE 3: the operator's own stops, independent of OSM. RTA's website stop
+# list per line and direction (the endpoint its Rider Tools schedule page
+# reads, norta.com/RTAStops?routeID=<line>&directionID=<0|1>), the two
+# directions merged where stops lie within 60 m (the smallest radius at which
+# 46 and 49 each come to one stop a location). 47 and 48 list 25 a direction
+# exactly. Read 2026-10-01. THREE LINES DISAGREE, AND THE BUILD IS THE ONE
+# SHORT - a station fix for the owner, not reconciled here:
+OPERATOR_STATION_COUNTS = {
+    # MISMATCH, unexplained: build 62. RTA lists S. Carrollton Ave at Sycamore
+    # St (stop 307, both directions); OSM carries no Sycamore stop at all.
+    "12": 63,
+    "46": 11,
+    # MISMATCH, unexplained: build 23. RTA runs 47 down Canal to the Canal St.
+    # Ferry Terminal (Canal at N. Rampart, Bourbon/Carondelet, Chartres/Camp,
+    # N./S. Peters, Ferry Terminal) and lists the Cemeteries Transit Terminal;
+    # the build follows OSM's 47 up Loyola (Canal at Basin, Tulane, Poydras
+    # Street, Julia Street), which RTA's 47 does not serve.
+    "47": 25,
+    # MISMATCH, unexplained: build 20. The same lower-Canal stops, Canal at
+    # N. Rampart to the Ferry Terminal (5): the build's 48 ends at LaSalle.
+    "48": 25,
+    "49": 8,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "New Orleans RTA, website stop lists per line and direction "
+    "(https://www.norta.com/RTAStops?routeID=12|46|47|48|49&directionID=0|1, "
+    "behind https://www.norta.com/rider-tools?tab=schedules), directions merged "
+    "within 60 m; primary; read 2026-10-01")
+
 SPACING_MIN_M = 40.0
 
 DRAWN_LINES = ("12", "46", "47", "48", "49")

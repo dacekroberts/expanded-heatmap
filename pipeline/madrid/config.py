@@ -160,6 +160,43 @@ LINE_NAMES = {
     "ML1": "Metro Ligero ML1",
 }
 
+# Gate 3: the per-line station lists CRTM publishes, keyed as LINE_NAMES - every
+# drawn line, the 13 Metro lines and ML1. Whole lines, BEFORE the término
+# municipal cut (Line 12, MetroSur, lies wholly outside Madrid and counts
+# here). An interchange counts once on each line it serves. The build side is
+# each line's stations as its CRTM tramos reach them (step 1).
+#
+# The Plaza de España - Noviciado and Embajadores - Acacias pairs are each ONE
+# station record whose LINEAS lists every line of the complex; counted that way
+# Line 2 would read 21, Line 3 21, Line 5 33 and Line 10 32. They are counted
+# by the tramos instead, which stop each line at its own platform, as CRTM's
+# line lists do.
+OPERATOR_STATION_COUNTS = {
+    "1": 33,     # Pinar de Chamartín - Valdecarros
+    "2": 20,     # Las Rosas - Cuatro Caminos
+    "3": 19,     # El Casar - Moncloa
+    "4": 23,     # Argüelles - Pinar de Chamartín
+    "5": 32,     # Alameda de Osuna - Casa de Campo
+    "6": 28,     # the circular
+    "7": 31,     # Hospital del Henares - Pitis
+    "8": 8,      # Nuevos Ministerios - Aeropuerto T4
+    "9": 29,     # Paco de Lucía - Arganda del Rey
+    "10": 31,    # Hospital Infanta Sofía - Puerta del Sur
+    "11": 7,     # Plaza Elíptica - La Fortuna
+    "12": 28,    # MetroSur, the circular - all outside Madrid
+    "R": 2,      # Ópera - Príncipe Pío
+    "ML1": 9,    # Pinar de Chamartín - Las Tablas
+}
+OPERATOR_COUNTS_SOURCE = (
+    "Consorcio Regional de Transportes de Madrid (CRTM), the station list on "
+    "each line's page: crtm.es/4__1___ ... 4__12___ and 4__R___ for Metro, "
+    "crtm.es/10__51___ for Metro Ligero ML1. Read 2026-10-01. CRTM is the "
+    "region's transport authority and publishes the CRTM layers the build "
+    "reads, so this is the authority's own published list rather than the "
+    "operator's: Metro de Madrid's line pages (metromadrid.es/es/linea/...) "
+    "returned a security-block page to every request on 2026-10-01."
+)
+
 # Metro de Madrid's official livery, used so the map's line colours come from
 # the operator rather than being invented.
 #

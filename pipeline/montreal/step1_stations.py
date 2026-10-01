@@ -65,8 +65,10 @@ from pipeline.montreal.config import (  # noqa: E402
     LINE_NAMES,
     INTERCHANGE_MAX_SPREAD_M,
     OFF_ISLAND_FARE_ZONE_SUFFIX,
+    OPERATOR_STATION_COUNTS,
     REM_GTFS_ZIP,
     REM_ISLAND_ZONE,
+    REM_LINE_KEY,
     REM_LINE_NAME,
     REM_ROUTE_IDS,
     REM_STATION_NAME_STRIP_PREFIX,
@@ -76,6 +78,7 @@ from pipeline.montreal.config import (  # noqa: E402
     STATIONS_CSV,
     THINNED_GROUPS,
 )
+from pipeline.stations import check_operator_counts  # noqa: E402
 
 
 def load(zip_path, filename, **kw):
@@ -294,6 +297,14 @@ def main():
         n = int(kept["lines"].fillna("").str.contains(name, regex=False).sum())
         total = int(gdf["lines"].fillna("").str.contains(name, regex=False).sum())
         print(f"  {name:<18}{n:>4} of {total:>3}")
+
+    # --- gate 3: whole lines, before the island cut, against the operators ---
+    print("\nGate 3 - whole lines (before the island cut):")
+    line_names = {**LINE_NAMES, REM_LINE_KEY: REM_LINE_NAME}
+    actual_per_line = {
+        key: int(gdf["lines"].fillna("").str.contains(name, regex=False).sum())
+        for key, name in line_names.items()}
+    check_operator_counts(OPERATOR_STATION_COUNTS, actual_per_line)
 
     # --- spacing, measured against the outer ring ---------------------------
     outer = RING_EDGES_METERS[-1]

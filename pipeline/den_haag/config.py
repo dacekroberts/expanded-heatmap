@@ -157,6 +157,30 @@ COLLAPSE_MAX_SPREAD_M = 250.0
 
 SPACING_MIN_M = 100.0
 
+# Gate 3: HTM's own stops per line - the distinct stops its timetable's
+# journeys call at on Thursday 2026-10-01, from the endpoint htm.nl's line
+# pages read - the whole line, before the gemeente split. A tram step 1 stops
+# on a mismatch, but tram 11 disagrees, so that stop is commented out in step 1
+# until the cleanup session takes it to the owner. Two stops carry other names
+# in HTM's timetable and count the same: Delft's "Noordeinde" on 1 and 19 is
+# OSM's "Nieuwe Plantage", and tram 12's terminus "Markenseplein" is OSM's
+# "Zuiderstrand", each at the same place in the sequence.
+OPERATOR_STATION_COUNTS = {
+    "1": 37, "2": 29, "3": 40, "4": 33, "6": 27, "9": 27, "10": 33,
+    # MISMATCH (cause found, not fixed): build 17. HTM's tram 11 calls at Groot
+    # Hertoginnelaan (stop NL:S:32001109) between Laan van Meerdervoort and
+    # Houtrust, both directions. OSM has its stop positions (nodes 3788117787,
+    # 3788124865) on no relation, so the build neither draws nor rings it. It is
+    # NOT tram 17's Groot Hertoginnelaan (NL:S:32001114, about 500 m away): a
+    # third shared name for SPLIT_LINK_M once the stop is added.
+    "11": 18,
+    "12": 19, "15": 18, "16": 23, "17": 33, "19": 18, "34": 31,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "HTM's timetable for 2026-10-01, https://www.htm.nl/v1/Netex/GetDepartureTimes"
+    "?lineNumber=<n>&date=2026-10-01 (the data behind htm.nl/dienstregeling/tram-<n>/), "
+    "distinct stops over every journey, read 2026-10-01.")
+
 DRAWN_LINES = LINE_REFS
 # The public names: OSM's `wikipedia` tags name 3, 4 and 34 "RandstadRail 3/4/34"
 # (`brand` RandstadRail) and the others "Tramlijn n".

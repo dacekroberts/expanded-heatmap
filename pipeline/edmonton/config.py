@@ -219,6 +219,34 @@ STATION_SPACING_MEDIAN_M_MIN = 400.0    # collapsed stations must not
 NON_REVENUE_STOPS_EXPECTED = 3
 IN_CITY_STATIONS_EXPECTED = 30
 
+# --- Gate 3: ETS's own per-line stop lists ------------------------------------
+# NOT the 33 -> 30 correction above, which came from the feed's boardability
+# flags; this is the check from outside the data. An interchange counts once on
+# each line it serves (Churchill's Capital/Metro station and the Valley Line's
+# street-level Churchill stop are two places, one on each list). All three
+# lines are wholly inside Edmonton, so there is no scope split to count before.
+OPERATOR_STATION_COUNTS = {
+    "021R": 15,   # Capital: Clareview - Century Park
+    # Metro: ETS lists 10, "from NAIT / Blatchford Market in the north to
+    # Health Sciences / Jubilee in the south". The build counts 14 because
+    # ETS's own feed (20260911-20261128) runs 308 of its 1,920 Metro trips,
+    # all on Saturday and Sunday service_ids, on past Health Sciences to
+    # Century Park, so McKernan/Belgravia, South Campus/Fort Edmonton Park,
+    # Southgate and Century Park are Metro stops too - and step 3 draws the
+    # Metro Line to Century Park on purpose (LINE_SHAPES, "EXTENT, not
+    # mode"). All four are Capital Line stations, so the station set is the
+    # same either way. 10 + 4 = 14.
+    "022R": 14,
+    "023R": 12,   # Valley Line Southeast: 102 Street - Mill Woods (11 stops
+                  # and the elevated Davies station)
+}
+OPERATOR_COUNTS_SOURCE = (
+    "City of Edmonton / Edmonton Transit Service, 'LRT Stops and Stations' "
+    "(edmonton.ca/ets/lrt-station-locations): its per-line stop selector "
+    "(Capital 15, Metro 10, Valley 12) and per-line 'Travels from ... to ...' "
+    "termini. Read 2026-10-01; primary."
+)
+
 # --- Business filtering ------------------------------------------------
 
 # `licencetype` is Edmonton's own premises-or-person marker, and it is why this

@@ -64,11 +64,18 @@ def main():
     platforms, st = osm_tram.collapse(q, refs=config.LINE_REFS,
                                       crs_projected=config.CRS_PROJECTED)
     print()
-    # Gate 3 not run: no operator count was read for the line (the brief's 18
-    # is the screen's own OSM count, not the operator's).
-    station_gates.verify_stations(
+    # Gate 3: the operator's own stop count (config.OPERATOR_STATION_COUNTS),
+    # per line over every collapsed station; a tram step 1 stops on a mismatch.
+    res = station_gates.verify_stations(
         city="Liepāja", platforms=platforms, stations=st,
-        crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M)
+        crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M,
+        expected_per_line=config.OPERATOR_STATION_COUNTS,
+        actual_per_line={ref: int(st["lines"].str.split("/").apply(
+            lambda ls: ref in ls).sum()) for ref in config.LINE_REFS})
+    if res["per_line_mismatches"]:
+        sys.exit("gate 3: the build disagrees with the operator - "
+                 + "; ".join(f"line {ln}: build {b}, operator {o}"
+                             for ln, (b, o) in res["per_line_mismatches"].items()))
 
     places = gpd.GeoDataFrame([{"ref": config.ATVK, "name": config.CITY_NAME_LV,
                                 "geometry": poly}], crs=config.CRS_GEOGRAPHIC)

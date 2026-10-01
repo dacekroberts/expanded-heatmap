@@ -281,9 +281,13 @@ def main():
                     kept.station.iloc[i], kept.station.iloc[j])
                    for i in range(len(xy)) for j in range(i + 1, len(xy)))[:4]
     print("  closest pairs: " + "; ".join(f"{a} / {b} {d:.0f} m" for d, a, b in pairs))
+    # Gate 3 counts each WHOLE line (st, before the Seoul split): the sources
+    # list every station, inside Seoul or not.
     station_gates.verify_stations(
         city="Seoul", platforms=platforms[platforms.key.isin(set(kept.key))],
-        stations=kept, crs_projected=config.CRS_PROJECTED)
+        stations=kept, crs_projected=config.CRS_PROJECTED,
+        expected_per_line=config.OPERATOR_STATION_COUNTS,
+        actual_per_line={k: int(sum(k in ls for ls in st.lines)) for k in config.LINES})
     emit("stop_nodes", len(platforms))
     emit("stations_all", len(st))
     emit("stations_kept", len(kept))

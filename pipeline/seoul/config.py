@@ -153,6 +153,41 @@ LINES = {
 # every relation still carries it).
 OSM_COLOUR = {"L8": "#D11D70"}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "train"}
+# Gate 3: each drawn line's WHOLE station count, past Seoul's boundary, against
+# step 1's stations per line before the Seoul split. Every figure was also
+# matched station by station, by Korean name, to the source's own table.
+OPERATOR_STATION_COUNTS = {
+    "L1": 102, "L2": 51, "L3": 44, "L4": 51,
+    # English Wikipedia's infobox says 57; its own station table, and Korean
+    # Wikipedia's (수도권 전철 5호선), list 56 - the build's 56, name for name.
+    "L5": 56,
+    "L6": 39, "L7": 53,
+    # English Wikipedia's infobox says 25 and its table predates the Byeollae
+    # extension (2024-08-10); Korean Wikipedia's (수도권 전철 8호선) lists 24,
+    # Byeollae - Moran with Namwirye, the build's 24 name for name.
+    "L8": 24,
+    "L9": 38, "SBD": 16, "UI": 13, "SL": 11,
+    # MISMATCH, unexplained: build 54. Korean Wikipedia (수도권 전철 경의·중앙선)
+    # says 58: the build's 54 plus Uncheon, Imjingang and Dorasan (Paju, past
+    # Munsan; opened 2020-2022) and Jipyeong (Yangpyeong, past Yongmun, 2017).
+    # OSM's 경의·중앙 relations end at Munsan and Yongmun. All four lie outside
+    # Seoul, so no ringed station is affected; the line's drawn ends and
+    # excluded_stations.csv are. Not fixed here: a station change.
+    "GJ": 58,
+    "SB": 63,
+    # The metro service Cheongnyangni/Kwangwoon University - Chuncheon: Korean
+    # Wikipedia (수도권 전철 경춘선) lists 25, the build's 25. English
+    # Wikipedia's 20 is the railway line, not the service.
+    "GC": 25,
+}
+OPERATOR_COUNTS_SOURCE = (
+    "SECONDARY, read 2026-10-01: English Wikipedia's line articles (infobox "
+    "'stations', each checked against the article's own station table by Korean "
+    "name) for lines 1-4, 6, 7, 9, Shinbundang, Ui LRT, Sillim and Suin-Bundang; "
+    "Korean Wikipedia's line articles for 5, 8, Gyeongui-Jungang and Gyeongchun, "
+    "where English Wikipedia's figure disagreed with its own table or was stale. "
+    "Seoul's lines are split between several operators (Seoul Metro and Korail "
+    "among them, often on one line); no operator page was read.")
 NOT_DRAWN = {
     "공항철도": "AREX", "GTX-A": "GTX-A", "서해": "Seohae Line",
     "김포 골드라인": "Gimpo Goldline", "경강": "Gyeonggang Line",

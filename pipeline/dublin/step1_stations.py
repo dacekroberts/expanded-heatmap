@@ -155,13 +155,21 @@ def osm_cross_check(stations):
 def main():
     gtfs = load_gtfs()
     region = dissolved_boundary()
-    _per_route, stop_routes = stops_per_route(gtfs)
+    per_route, stop_routes = stops_per_route(gtfs)
     platforms, stations = collapse(gtfs, stop_routes)
+
+    # Gate 3's build side: stations per route, collapsed by name exactly as
+    # collapse() does, over the whole line before the four-authority cut.
+    name_of = {s["stop_id"]: s["stop_name"] for s in gtfs["stops.txt"]}
+    actual_per_line = {route: len({name_of[i] for i in per_route[route]})
+                       for route in config.ROUTES}
 
     # The shared gates. The spacing one RAISES if the collapse left platforms
     # behind, which is what Toronto and Calgary both shipped once.
     verify_stations(city="Dublin", platforms=platforms, stations=stations,
-                    crs_projected=config.CRS_PROJECTED)
+                    crs_projected=config.CRS_PROJECTED,
+                    expected_per_line=config.OPERATOR_STATION_COUNTS,
+                    actual_per_line=actual_per_line)
     osm_cross_check(stations)
 
     gdf = gpd.GeoDataFrame(

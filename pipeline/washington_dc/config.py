@@ -284,6 +284,26 @@ SUBWAY_STATION_NAMES = frozenset()
 STATION_SUFFIX_PATTERN = None
 STATION_NAME_ALIASES = {}
 
+# Gate 3: WMATA's own station list on each line's page, keyed as ROUTE_GROUPS
+# and counted over every station the line's trips serve, before the District
+# cut. Silver's 39 is both its branches since the June 2025 split (Ashburn to
+# Downtown Largo and to New Carrollton), as WMATA's page lists them.
+OPERATOR_STATION_COUNTS = {
+    "Red": 27,
+    # WMATA lists 28 (Franconia-Springfield to Downtown Largo). The cached feed
+    # (2026-09-15 to 09-25) also runs Blue trains to Huntington, through
+    # Eisenhower Av, on the weekend service ids 23_R and 27_R (Sat 19/26 and
+    # Sun 20/27 September): weekend planned work. 28 + those 2 = 30.
+    "Blue": 30,
+    "Green": 21,
+    "Yellow": 22,
+    "Orange": 26,
+    "Silver": 39,
+}
+OPERATOR_COUNTS_SOURCE = ("WMATA 'Rail Line Stations' pages, "
+                          "https://www.wmata.com/ridertools/line/<colour> for "
+                          "all six lines (read 2026-10-01)")
+
 # --- Business filtering ------------------------------------------------
 
 TAXONOMY_SYSTEM = "dc_businessactivity"

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**322 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**323 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls](#2026-10-01---gate-3-back-filled-in-25-cities-ten-match-eight-reconcile-seven-need-the-owners-station-calls)
 - [Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner](#2026-10-01---privacy-verdicts-registered-for-all-124-cities-san-diego-and-chicago-publish-san-francisco-and-los-angeles-held-for-the-owner)
 - [The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current](#2026-10-01---the-japan-list-regenerated-taitō-and-meguro-re-measured-hiroshima-japans-eighth-the-japan-city-skill-current)
 - [The decisions drafts folded in: 48 entries from 17 drafts files, the files removed](#2026-10-01---the-decisions-drafts-folded-in-48-entries-from-17-drafts-files-the-files-removed)
@@ -367,6 +368,55 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls
+
+- **Done for the next deploy, as the owner set on 2026-09-30.** Six agents,
+  four or five cities each, under one brief: the operator's per-line counts,
+  independent of OSM and of the city's own feed, counted over whole lines
+  before any scope split; config carries `OPERATOR_STATION_COUNTS` and
+  `OPERATOR_COUNTS_SOURCE` (page, publisher, date read), with any reason
+  written beside its figure; step 1 compares. The early US nine, Montréal,
+  Edmonton, Vancouver and Madrid predate `verify_stations`, so
+  `pipeline/stations.py` gained `check_operator_counts()`, the gate on its
+  own (verify_stations now calls it). Every step 1 exited 0 and no committed
+  output changed. No Overpass query, no fetch.
+- **Match (10)**: Boston, Los Angeles, Miami, Montréal, Vancouver, Dublin,
+  Madrid, Kansas City (the KC Streetcar Authority's own map; RideKC not
+  used), Liepāja, Florence (Unità out of regular service since 2025-01-02).
+- **Reconciled (8), the reason in config beside each figure**: Chicago
+  (State/Lake closed into 2029, on five lines); New York (per trunk against
+  the MTA's station register's daytime routes; 37 stations served by night,
+  weekend or summer trips, each named); Washington (Blue's weekend diversion
+  to Huntington); San Diego (two Blue trips via the Bayside); San Francisco
+  (stops served in one direction; San Jose & Mt Vernon removed 2024-09-28);
+  Tucson (23 markers, two of them one stop counted per direction); Edmonton
+  (the Metro Line drawn to Century Park, where weekend trips run: ETS
+  publishes 10, the build 14 - the first real gate 3 here; the 33 -> 30 of
+  2026-09-22 was the boardability filter); Riga (every route matches before
+  the owner's thinning; secondary source, 1188.lv, as Rīgas satiksme's host
+  refused).
+- **Mismatch, cause found, left for the owner (PLAN, "Gate 3's station
+  calls")**: New Orleans (12: 62/63; 47: 23/25; 48: 20/25 - lower Canal to the
+  Ferry Terminal undrawn, 47 routed up Loyola by OSM); Philadelphia (G: 57/59,
+  the Frankford-Delaware branch); Daugavpils (routes 2 and 4: 16/17,
+  Užvaldes iela not in OSM - which makes the brief's original 38 right);
+  Seoul (Gyeongui-Jungang 54/58, four stations beyond Munsan and Yongmun,
+  all outside Seoul); Den Haag (11: 17/18, Groot Hertoginnelaan); Göteborg
+  (2, 4, 6, 8, 13 each one short: Korsvägen and Drottningtorget missing from
+  those lines' OSM relations - both stops are drawn through other lines, so
+  only their line lists are wrong); Zurich (10: 29/28, Bahnhof Oerlikon from
+  OSM's short-run relations). The tram cities' step-1 exit on a mismatch is
+  live in Kansas City, Tucson, Liepāja and Florence, and commented out with
+  a note in the other five until each fix.
+- **Gap (1)**: Philadelphia's T branches - no per-branch count independent of
+  SEPTA's feed; `OPERATOR_COUNTS_GAP` says so. Philadelphia's L, B and tunnel
+  match (L at 27: 11th St closed to 2027-08-30, not drawn and not disclosed -
+  in PLAN beside the station calls).
+- **Secondary sources, named as such in config**: English Wikipedia for Los
+  Angeles, Miami's split, Philadelphia, San Diego, San Francisco and most of
+  Seoul; Korean Wikipedia for four Seoul lines; CRTM's line pages for Madrid
+  (Metro de Madrid's own pages blocked every request).
 
 ### 2026-10-01 - Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner
 
