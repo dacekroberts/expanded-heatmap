@@ -4,6 +4,80 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Liepāja built on tram-build; Riga's step 2 lifted into latvia_register.py
+
+- **Riga's step 2 was lifted into `pipeline/countries/latvia_register.py`,
+  and Riga's output did not move.** Riga's step 2 is now a thin call into
+  the module.
+  - **The control** is `scripts/latvia_register_control.py`. It rebuilds
+    Riga's frame through the module and compares it with Riga's
+    `businesses_clean.csv`. All 6,725 rows are identical, and all 11 step 2
+    figures match `outputs/riga/baseline.json`.
+  - **Rejected: running `drift_check.py riga` as the control**, which the
+    skill had named. It would re-run Riga's steps from a branch into the
+    shared `data/` junction, and the in-memory control answers the same
+    question without writing.
+  - **The classification stays in `pipeline/riga/config.py`**, and later
+    Latvian configs import it from there. `category_continuity_table.py`
+    reads those rules by their text in Riga's config, so moving them would
+    break that check. One set of rules for the country, decided once.
+  - **Measured peak: 0.34 GB.**
+- **Liepāja built: 18 stations, 702 storefronts, 69.7% in a ring** (the
+  screen's figure).
+  - **Stations: the 15 stop names on OSM's two ref-1 relations, plus three
+    added by node.** All three lie on the relations' own track:
+    - Brīvības iela, the terminus, is a platform member whose stop
+      position carries no name;
+    - Klaipēdas iela, between Tukuma iela and Ventas iela, has a stop
+      position each way but is on neither relation;
+    - Rožu laukums, between Pētertirgus and Koncertzāle, is a platform
+      member each way with no stop position.
+  - **The approved call named only Brīvības iela and Klaipēdas iela**, but
+    the brief's own count of 18 needs Rožu laukums too. So it was read as
+    the brief's prose missing one stop, not as a new call.
+  - **`osm_tram`'s `station_add` now accepts a named platform node**, for
+    an add only, and refuses an add whose name is already a route stop. The
+    Aarhus control still passes, and Odense still has zero drift.
+  - **Spacing and frequency.** The median gap is 313 m (the brief: 329 over
+    15). No gate 3: no operator count was read. The approved call's "about
+    every 7 minutes" is stated on the page.
+  - **Food** comes from the excise register (Riga's national cache), placed
+    on VZD's address register `aw_eka.csv` (fetched 2026-09-30, 7,839
+    existing addresses in Liepāja): 131 premises, 123 placed (93.9%: 110
+    exact, 13 with the unit dropped). This matches the screen.
+  - **Shops and services** come from the premise groups in ATVK 0005000:
+    771 premise groups, 579 kept, all placed. The screen counted 583 before
+    the 2026-09-29 name-rule changes (fuel stations kept, repair and stands
+    dropped).
+  - **Step 2's measured peak was 0.30 GB.**
+- **Liepāja privacy verdict: publishable.** 489 pins, 0 contact details and
+  0 person-like names. No holder column is ever read: food shows the kind
+  and street address, shops show the cadastre's own word.
+- **Notice 42 widened to "VZD (Riga, Liepāja)", FOR THE OWNER'S APPROVAL AT
+  REVIEW TIME.** It names Liepāja's cadastral map and VZD's State Address
+  Register, with the elements the brief requires:
+  - VZD's own source wording and the year, "Izmantoti Valsts adrešu
+    reģistra informācijas sistēmas dati, 2026. gads";
+  - VZD named, and CC BY 4.0 linked;
+  - the changes described: addresses matched and points used to place each
+    premises, and the file not shown;
+  - "VZD has not approved these changes or this map."
+
+  The OpenStreetMap rail-geometry notice now names Liepāja's tram, its
+  stops and the city boundary.
+- **Liepāja is left out of Europe's zoom fit (`REGION_ZOOM_WITHOUT`), as
+  Riga, Stockholm and Bucharest are.** Fitted to it, the zoom dropped and 57
+  label problems appeared at every width, whatever Liepāja's own offset. It
+  lies inside the frame Riga and Bucharest already set, so the centre does
+  not move. Its label is 48.2 px, measured, placed below the dot (dy 14-34
+  pass): PROBLEMS 0.
+- **The template's "{this city's ratio to OpenStreetMap}" is left unfilled
+  for Odense and Liepāja.** Neither template city's page has one: Aarhus's
+  CVR wording and Riga's two-layer wording are what section 6 says to
+  reuse. Measuring one is an Overpass count of shops and food per city, with
+  its own caveats about OSM's tagging. **For the owner: fill it per city, or
+  drop it from the template?**
+
 ### 2026-09-30 - Odense built on tram-build; osm_tram.py written, its Aarhus control passing
 
 - **`pipeline/osm_tram.py` written to the tram-city skill's section 4
