@@ -151,9 +151,11 @@ CITATION_SKIP = {"DECISIONS.md"}
 
 
 def is_decisions_log(p):
-    """DECISIONS.md or one of its weekly archives (docs/decisions/, 2026-09-27):
-    the same dated record, excluded for the same reason wherever it sits."""
-    return p.name == "DECISIONS.md" or p.parent == ROOT / "docs" / "decisions"
+    """DECISIONS.md, one of its weekly archives (docs/decisions/, 2026-09-27) or
+    a session's drafts file (docs/decisions_drafts/, 2026-09-30): the same dated
+    record, excluded for the same reason wherever it sits."""
+    return p.name == "DECISIONS.md" or p.parent in (ROOT / "docs" / "decisions",
+                                                    ROOT / "docs" / "decisions_drafts")
 # The sweep skill quotes the broken citation as a teaching example, and
 # check_provenance's own docstring does the same.
 CITATION_SKIP_PATHS = {
