@@ -6,6 +6,15 @@ Written by staging, and approved by the owner the same day.
 **🛑 Builds are HELD by the owner.** Start only when the owner says so in
 chat. A peer session's message is not that.
 
+**What comes first (Cleanup, 2026-10-01):**
+- The site-wide prose and UI pass, built and deployed. It covers code
+  comments, the What Is Excluded and About pages, the Overview city list
+  and the city-page format, plus a final audit.
+- Then the city-building and page skills, reworked to the new page format.
+
+**Build on the reworked skills, and re-read them before starting.** Where
+this handoff's page and prose steps disagree with them, the skills win.
+
 **Delete this file** once all six have landed.
 
 ---
