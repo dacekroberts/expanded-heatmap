@@ -126,8 +126,9 @@ to landing.**
 
 **What was not smoother.**
 - **Coordination.** Twelve branches, each merging master and macro-legend,
-  meant a DECISIONS conflict on almost every branch, two committed-marker
-  incidents averted only by checking, notice numbers that cannot be reserved,
+  meant a DECISIONS conflict on almost every branch (one committed with its
+  markers, every later one safe only because it was checked), notice numbers
+  that cannot be reserved,
   ordinals and counts that are wrong on every branch but one, and labels that
   only a combined-tree scorer could place. Canada built and landed in one
   evening; none of Band B has landed.
