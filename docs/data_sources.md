@@ -2174,13 +2174,15 @@ landing.**)
   template, so site-wide as Chicago's. Reproduced word for word, including
   `www.data.kcmo.gov`, a host that does not resolve (the portal is
   data.kcmo.org). Displayed whichever document controls: it costs nothing.
-- **OWNER DECISION - the indemnity.** The same terms say any user "shall
-  indemnify and hold harmless the City from any claim ... that arises directly
-  or indirectly ... from that user's use of this data". Read as binding, the
-  project takes on an open-ended indemnity (RideKC's GTFS was barred partly over
-  one); read as overridden by the ordinance's "no restrictions or
-  requirements", it binds nothing. The licence-read did not resolve it in the
-  project's favour. **Kansas City does not land until the owner decides.**
+- **The indemnity - DECIDED by the owner (2026-09-30): the ordinance
+  controls.** The same terms say any user "shall indemnify and hold harmless the
+  City from any claim ... that arises directly or indirectly ... from that
+  user's use of this data". The owner took the reading that KCMO Code
+  § 2-2134(a)'s "no restrictions or requirements placed on use" overrides the
+  undated terms page (the dataset is declared public domain, the ordinance backs
+  it, and no step asks for acceptance), so it binds nothing here - unlike
+  RideKC's GTFS, whose terms the site itself imposes. Kansas City is cleared to
+  land. The disclaimer above is displayed regardless.
 - **MUST NOT**: use City marks (the terms reserve them); present the data as
   the City's current or accurate record (the disclaimer above says otherwise,
   and the register is frozen at 2026-01-15).
