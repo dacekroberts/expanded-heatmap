@@ -4,6 +4,36 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Gate 3 made required in tram-city; the back-fill of 25 cities deferred to after review (owner)
+
+- **Gate 3 made required in `tram-city`, not optional** (the owner asked,
+  after the tram kit retrospective found it ran in 1 of 10 builds).
+  - The operator's per-line counts go in config before step 1 is written.
+  - A tram step 1 stops on an unexplained mismatch.
+  - The source must be independent of OSM, so neither OSM nor a brief count
+    taken from it; Kansas City's check was circular for this reason.
+  - Where nothing usable is published, the gap is recorded in config, as
+    Mexico City and Barcelona record theirs.
+  - `pipeline/stations.py` was left printing rather than raising, because
+    other cities call it.
+- **A code survey of step 1 across all 85 cities found 25 with no gate 3**:
+  - 41 pass operator counts to `verify_stations`;
+  - about 16 run an equivalent of their own;
+  - 2 record it as unavailable;
+  - 25 show no trace. These are the early US nine, which predate
+    `stations.py`; Montréal, Edmonton and Vancouver; Dublin, Madrid, Riga
+    and Seoul; and this batch's nine (every tram city but Odense).
+  - The survey reads code only, so a city checked by hand at build would not
+    show.
+- **The owner's decision: the tram kit lands without the back-fill.** All 25
+  cities become one post-review item for the next deploy (`PLAN.md`, "Gate 3
+  back-fill, 25 cities"). The reason: other cities went live without the
+  check, so the batch is not held for it.
+  - Rejected: back-filling this batch's nine before landing, about 45 to 90
+    minutes. A mismatch would have meant station fixes and drift checks
+    during the review.
+  - New tram builds run gate 3 before commit.
+
 ### 2026-09-30 - Zurich built on tram-build: VBZ's trams, and the city's food and alcohol licences
 
 - **Zurich, the project's first Swiss city, built on Stockholm's template** (one city
