@@ -721,6 +721,8 @@ _NOTICES = [
      "Sacramento's SacRT Blue and Gold Lines and their stations, and the "
      "municipal boundaries used to select them, "
      "Houston's METRORail Red, Green and Purple Lines and their stations, "
+     "Kansas City's KC Streetcar and Tucson's Sun Link streetcar and their "
+     "stops, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
@@ -1536,6 +1538,12 @@ _NOTICES = [
      "subject to change at any time. It is understood that the data provided "
      "at this site is being used at one’s own risk.",
      True),
+    # Tucson (notice 70): the BUSLIC layer's licence is silent, and the owner
+    # took the permissive reading (2026-09-30) on condition that the City is
+    # credited and the pins are never called complete. The owner's wording.
+    ("City of Tucson (Tucson)",
+     "Business licence data: City of Tucson.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

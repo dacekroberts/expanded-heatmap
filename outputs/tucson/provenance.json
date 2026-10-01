@@ -1,0 +1,44 @@
+{
+  "written_utc": "2026-10-01T01:19:55+00:00",
+  "register": {
+    "layer": "https://gis.tucsonaz.gov/arcgis/rest/services/PublicMaps/OpenData_EconomicDevelopment/MapServer/3",
+    "where": "LIC_STATUS = 'Active' AND HOME_OCCUPATION = 'F'",
+    "fields": [
+      "OBJECTID",
+      "ACC_NUM",
+      "ACC_NAME",
+      "OWN_TYPE",
+      "NAIC_CODE",
+      "NAIC_DESC",
+      "LIC_TYPE",
+      "LIC_STATUS",
+      "HOME_OCCUPATION",
+      "DT_START",
+      "ADDRESS",
+      "APT",
+      "CITY",
+      "ZIP_CODE"
+    ]
+  },
+  "boundary": {
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
+    "query": {
+      "where": "GEOID='0477000'",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "f": "geojson"
+    }
+  },
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    32.2,
+    -110.99,
+    32.25,
+    -110.93
+  ],
+  "files_utc": {
+    "buslic_active.csv": "2026-10-01T01:15:47+00:00",
+    "city_boundary_tiger.geojson": "2026-10-01T01:15:48+00:00",
+    "osm_rail.json": "2026-10-01T01:19:55+00:00"
+  }
+}

@@ -108,7 +108,14 @@ CITIES = [
         "blurb": "MTS Trolley (Blue, Orange, Green, Copper, Silver lines)",
         # East of its dot: it sits south-east of Los Angeles, so the two
         # names split left/below rather than colliding.
-        "label_offset": ("start", 16, 0),
+        #
+        # MOVED WEST OF THE DOT, over the Pacific, 2026-09-30 (tram kit), when
+        # Tucson joined: east of the dot this pill covered Tucson's marker at the
+        # Global and United States zooms at all three widths. check_macro_labels.py
+        # (python -B) passes end -11 at dy -5 to +1 with Tucson at its offset
+        # (-6 meets Kansas City's pill, +2 Los Angeles's); -2 sits inside that,
+        # PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("end", -11, -2),
     },
     {
         "name": "San Francisco",
@@ -2092,6 +2099,34 @@ CITIES = [
         # collides elsewhere.
         "label_offset": ("end", -11, 8),
     },
+    {
+        "name": "Tucson",
+        "lat": 32.2226,
+        "lon": -110.9747,
+        "page": "pages/134_Tucson_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Register coordinates (92.4%)",
+        "data_age": "Active licences, fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "All three",
+        "blurb": "Sun Link, one streetcar line",
+        "region": "United States West",
+        "country": "United States",
+        "in_default_view": True,
+        # RIGHT of the dot and a little above, and SCORED: width 48.6 px measured
+        # in a browser with Space Grotesk loaded (2026-09-30). San Diego's label
+        # moved west to clear this marker (see San Diego), and Tucson is left
+        # out of United States West's zoom fit (REGION_ZOOM_WITHOUT) - fitting
+        # it zoomed California out until San Francisco's pill covered
+        # Sacramento's marker. check_macro_labels.py (python -B) passes start 11
+        # at dy -7 to -2 (-1 meets Los Angeles's pill, -8 Kansas City's); -5
+        # sits inside that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 11, -5),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -2274,7 +2309,13 @@ REGION_ORDER = [
 # Daugavpils (2026-09-30, tram kit) joins it too: at 26.5 E it is the
 # easternmost European city, 0.4 degrees east of Bucharest, so it moves the
 # centre that far east and no further.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils")}
+# Tucson (2026-09-30, tram kit) is United States West's first city outside
+# California, 6 degrees east of San Diego: fitted to it, the zoom dropped and
+# San Francisco's pill covered Sacramento's marker at every width. Left out of
+# the fit, California keeps its zoom; the centre moves about 3 degrees east and
+# Tucson's label sits on the canvas unclipped, PROBLEMS 0.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils"),
+                       "United States West": ("Tucson",)}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.

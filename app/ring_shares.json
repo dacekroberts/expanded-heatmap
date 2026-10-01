@@ -392,6 +392,11 @@
  "kansas_city": {
   "in_ring": 451,
   "all": 3561,
+  "map_blob": "a0529b90d7fa84dd89bfb12ffbb05ea130818724"
+ },
+ "tucson": {
+  "in_ring": 340,
+  "all": 5243,
   "map_blob": null
  }
 }

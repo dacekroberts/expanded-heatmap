@@ -81,7 +81,7 @@ together, so a row in either counts and a row in neither still fails.
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Kansas City |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Kansas City, Tucson |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona |
@@ -2186,6 +2186,25 @@ landing.**)
   and the register is frozen at 2026-01-15).
 - **MUST DO**: check for Finance-department data terms before a republish
   (the terms incorporate them; none found).
+
+**70. City of Tucson (Tucson) — required, and DISPLAYED** (written into
+`render_site_notices()`; tram kit, 2026-09-30; displayed once Tucson lands.
+**Renumber at landing with 69**, after France's 69-71.)
+
+- **SILENT, read as permitted by the owner (2026-09-30)**: the BUSLIC layer's
+  `licenseInfo` is an accuracy disclaimer only - nothing grants and nothing
+  restricts - and the hub invites building applications. The owner took the
+  permissive reading over two sibling City disclaimers (DTM Map Center, PDSD
+  PRO) that add "for your personal use", which the item does not incorporate.
+  Rows in [`data_sources/united-states.md`](data_sources/united-states.md).
+- **MUST DISPLAY**: "Business licence data: City of Tucson." (the owner's
+  wording, the condition of the permissive reading).
+- **MUST NOT**: present the pins as complete - the layer's own words, "should
+  not be considered a complete listing of all active businesses in Tucson".
+  The page quotes it.
+- **MUST DO**: nothing. A.R.S. 39-121.03 (commercial use of public records)
+  does not reach a non-commercial portfolio; it would if the project became
+  commercial.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

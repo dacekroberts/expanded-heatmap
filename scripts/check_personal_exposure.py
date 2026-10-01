@@ -441,6 +441,15 @@ REGISTRIES = {
     "kansas_city": dict(raw="business_licenses.csv", trade="business_name",
                         owner="dba_name", processed="businesses_clean.csv",
                         address=("address",)),
+    # Tucson: the City's BUSLIC layer has one name, `ACC_NAME`, the account
+    # (trading) name; there is no separate owner column to fall back to. Step 2
+    # shows the address for the personal OWN_TYPEs (Sole Proprietorship,
+    # Individual, Married) and for 45 account names read by eye as a person's;
+    # the person-shaped names it still shows are shop names ("BLIND PIG"). The
+    # address joins the APT field, which holds shop suites ("STE 101").
+    "tucson": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

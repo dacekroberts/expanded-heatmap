@@ -1991,6 +1991,31 @@ GREGORY J") and 26 companies named only as a person ("ALYSSA BULLIS LLC";
 
 **Stations.** All 19 KC Streetcar stops are inside the city. Not drawn: buses.
 
+### Tucson - Houston's rules on the City's licence layer, and every streetcar stop
+
+**Left out of BUSLIC** (24,191 active licences that are not home occupations; the 10,573
+active home occupations are never downloaded): 1,020 with no industry code, then, by NAICS
+code (the shared carve-outs, `pipeline/taxonomies/naics.py`):
+- non-store retailers (454): 526, of them direct sellers 432, online shops 31 and
+  vending-machine operators 26;
+- food service contractors (26), caterers (31) and mobile food (175);
+- parking (5), funeral services and cemeteries (20) and "all other personal services" (270).
+
+**Also left out**: 19 at an apartment or trailer, read from the `APT` field, as homes; 23
+points outside the city limits.
+
+**Not placed**: 539 storefront licences the City did not geocode (7.6%).
+
+**Counted once**: a business holding several licences at one address (a business licence,
+a tobacco licence, a liquor licence): 6,539 licences to 5,243 premises.
+
+**Shown, but not named**: 748 storefronts show their street address instead of a name - 692
+whose ownership type is a person's (Sole Proprietorship 525, Individual 151, Married 16;
+owner), 45 whose account name is only a person's (`config.PERSON_NAMED`, read by eye) and
+11 with no account name.
+
+**Stations.** All 21 Sun Link stops are inside the city. Not drawn: buses.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of
