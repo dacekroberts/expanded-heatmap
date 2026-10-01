@@ -21,6 +21,8 @@ passes 29 of 29 on it. In landing order:
   aarhus-baseline.
 - Czech: `czech-build` - Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional),
   Most (Regional); with Prague, a macro region of their own, **Czechia**.
+- france-insee-attribution: « Source : Insee » on the five built French pages,
+  and check M, which refuses a French page without it.
 - The misc tram session's three cities (added when they land).
 
 **Held out:** `buffalo-label` (owner, until the batch has rendered).
@@ -52,11 +54,18 @@ satellite. The misc cities' notices follow from 80.
   | 3 | 8851 | 8852 |
   | 4 | 8861 | 8862 (if it needs one) |
 
+- **Worktrees** `.claude/worktrees/review-lane-1` to `-4`, made by cleanup:
+  detached, `data/` and `.venv-lean` are junctions (to the shared data and to
+  cleanup's lean venv), `.claude/launch.json` on the lane's ports. **Never
+  rebuild or pip-install into `.venv-lean`** - it is cleanup's, through the
+  junction; lane 3's app-deps check builds its own throwaway venv in its
+  scratchpad. Unlink both junctions before a lane worktree is removed.
 - **Memory.** A lane's app is about 0.2 GB; four fit easily. Nothing here is a
   heavy job, but a lane that runs a drift check or reads a raw register goes
   through `scripts/heavy_job.py` like any session.
 - **Reports.** Each lane writes its report to its own session scratchpad and
-  sends it to the cleanup session. Every finding has its page or file, the
+  sends it to **Cleanup session [3d7ab8]** (SendMessage; "Cleanup Session
+  [dca290]" is a different project). Every finding has its page or file, the
   width and theme, what it shows, and whether it blocks the landing. Cleanup
   merges the reports into one review page for the owner.
 - **Together the lanes cover `full`.** The rule that a real deploy needs a
