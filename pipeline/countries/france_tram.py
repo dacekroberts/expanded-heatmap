@@ -36,9 +36,8 @@ from pipeline import stations as station_gates
 from pipeline.baseline import emit
 
 # The collapsed-station floor for trams. The shared gate's default (400 m) is
-# a METRO floor; every city in the batch measured a 311-510 m median, and
-# Rennes's own comment anticipated passing a floor for trams. 250 m still
-# catches an uncollapsed platform set, whose medians run under 150 m.
+# a METRO floor; every city in the batch measured a 311-510 m median. 250 m
+# still catches an uncollapsed platform set, whose medians run under 150 m.
 TRAM_SPACING_MIN_M = 250.0
 LO_LICENCES = ("lov2", "fr-lo")
 SAME_NAME_WITHIN_M = 150.0

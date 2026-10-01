@@ -1,7 +1,6 @@
 """Step 1 for every Japanese city: stations and line geometry from MLIT N02, cut
-at the city line. Built for Kobe (2026-09-27), the first Japanese city, and
-written here from the start so Osaka, Sapporo, Fukuoka, Kyoto and Tokyo share
-one copy. A city's step 1 calls run(config).
+at the city line. Built for Kobe (2026-09-27), the first Japanese city; one
+copy for every Japanese city. A city's step 1 calls run(config).
 
   * Stations: N02's, the Shinkansen dropped (japan.stations(); owner
     2026-09-24) and any config.LEFT_OUT_LINES left out, each station a platform

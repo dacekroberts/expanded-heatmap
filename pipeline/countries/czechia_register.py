@@ -26,8 +26,7 @@ from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module
 BUCKET_DIVISIONS = ("47", "56", "96")
 # The RUIAN coordinate control is PER CITY: `cfg.RUIAN_CRS_CONTROL`, one known
 # address in that city's own obec (Prague's is the castle - see its config).
-# It was a module constant here until 2026-09-27, which made every other Czech
-# town fail the check (Staging, the second-city screens).
+# As a module constant here (until 2026-09-27) it failed every other Czech town.
 
 
 def _need(path, cfg):
@@ -138,7 +137,7 @@ def build_storefronts(cfg, bbox):
     # read at once is the step's memory peak, and a city needs a few thousand
     # of its ~3 million subjects. Filtering before the dedupe keeps each ICO's
     # FIRST row in file order, exactly as the whole-file dedupe did (Prague's
-    # output reproduced byte for byte, 2026-09-30).
+    # output byte-identical, 2026-09-30).
     wanted = set(ros["ICO"].dropna())
     res = pd.concat(
         [ch[ch["ICO"].isin(wanted)]

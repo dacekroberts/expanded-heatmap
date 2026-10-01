@@ -1,8 +1,7 @@
 """Step 2 for every Japanese city: the city's own permit lists and 生活衛生
 registers, classified by japan_eigyo and placed by the MLIT join
-(japan_register.py). Built for Kobe (2026-09-27), the first Japanese city, and
-written here from the start so the other Japanese cities share one copy. A
-city's step 2 calls run(config).
+(japan_register.py). Built for Kobe (2026-09-27), the first Japanese city; one
+copy for every Japanese city. A city's step 2 calls run(config).
 
   1. Each source in config.SOURCES read by column NAME (japan_register's
      premises columns); `source` names the register ("food", "barber",
@@ -161,7 +160,7 @@ def official_shares(config, df):
 def own_point_fallback(config, joined):
     """Where the block join misses a row from a source that publishes its own
     coordinates (config.OWN_POINT_FALLBACK, e.g. {"mhlw"}), the publisher's point
-    places it: tier "own". Fukuoka's MHLW rows taught it (2026-09-28): MHLW's
+    places it: tier "own". Fukuoka's MHLW rows (2026-09-28): MHLW's
     points sit a median 36 m from the block point, closer than any town-chōme
     centroid, and the misses are rural 大字 the block file does not cover. A
     point outside CITY_BBOX is not used. Changes `joined` in place."""
@@ -249,7 +248,7 @@ def run(config, write=True):
     # MHLW publishes an address only where the filer agreed to it (Fukuoka;
     # config.ADDRESS_BY_CONSENT): a row without one cannot be placed, and its
     # count is the page's disclosure. Elsewhere a blank address stays "not a
-    # premises", as it always was.
+    # premises".
     noaddr = (df["addr"].fillna("").str.strip() == "") & df["source"].isin(getattr(config, "ADDRESS_BY_CONSENT", ()))
     if noaddr.any():
         by = df[noaddr]["source"].value_counts().to_dict()
