@@ -59,6 +59,29 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Angeles** (9-37% of rows without an industry code, a floor on every
     bucket); **Taichung** and **Taoyuan** (only 12-19% of storefronts in a
     ring: one line through a large city). Each stays Full on the macro map.
+  - [ ] **Per-city wait times as data: TABLED by the owner (2026-09-30) until
+    they are back at a desktop.** The owner's idea, relayed by the tram kit:
+    pages state train/tram waits in hand-written prose (Buffalo "about every
+    20 minutes", Houston, Sacramento, Aarhus), and nothing checks them.
+    Proposed (cleanup, 2026-09-30):
+    - drawn lines only; waits that explain an exclusion (Rome, Riga,
+      Fortaleza) stay prose;
+    - a `SERVICE` value in the city config (per line: a daytime range in
+      minutes, an optional evening/weekend range and note, source, as-of);
+    - step 3 copies it to provenance, and one shared helper renders a single
+      owner-approved template sentence;
+    - a no-fetch check measures headways from the cached GTFS (weekday
+      10:00-16:00, plus an evening and a weekend window); an OSM-built city
+      only needs a source and date;
+    - cities: Buffalo, Houston, Sacramento, Aarhus, Palma, and every
+      light-rail and tram build.
+    About 150-200 lines, an `app/` change. Open: build it, and whether to
+    show evening/weekend waits when they differ (suggested) or daytime only.
+  - [ ] **Japanese cities onto N02-25 (suggested by the Band B session,
+    2026-09-30), one drift check per city.** Hiroshima reads MLIT's 2025
+    edition, because N02-24 still draws Hiroden's track to the closed 猿猴橋町
+    stop. The six built cities stay on N02-24 (stations checked identical in
+    memory). `japan.n02(slug)` and `N02_EDITIONS` make it a per-city switch.
   - [ ] **Macro-map completeness tiers: APPROVED (owner 2026-09-28)**, not
     tied to the wait above. Dots coloured **Full #0D9488** (the current teal)
     · **Narrowed #9333EA** · **One bucket #C2410C**, one set for both themes
