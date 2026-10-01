@@ -5,13 +5,14 @@
 //   node scripts/capture_pages.mjs --out <dir> [--base http://localhost:8831]
 //        [--pages Overview,About_the_Data,Edmonton_Heatmap | --pages all | --pages cities]
 //        [--widths 375,768,1200] [--themes light,dark] [--settle 15] [--cdp 9341]
-//        [--tall]
+//        [--tall] [--max-height 8000]
 //
 // Writes <out>/<page>_<width>_<theme>.png and .txt, and <out>/errors.json
 // (console errors and exceptions per capture; an empty list is the pass).
 // `--pages all` reads every page from docs/rendered_surfaces.md (the Overview,
 // the fixed pages and every city page); `cities` only the city pages.
-// `--tall` sizes the viewport to the whole page (up to 8000 px) so one image
+// `--tall` sizes the viewport to the whole page (up to --max-height, default
+// 8000 px; a city page with the full notice list runs past it) so one image
 // holds everything; without it the image is the first screen, as a reader
 // sees it.
 //
@@ -46,6 +47,7 @@ const themes = arg('themes', 'light,dark').split(',');
 const settle = +arg('settle', '15') * 1000;
 const PORT = +arg('cdp', '9341');
 const tall = flag('tall');
+const maxHeight = +arg('max-height', '8000');
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 // Page names are given WITHOUT a leading slash (Overview, About_the_Data,
@@ -152,7 +154,7 @@ for (const p of pages) {
       await send('Page.navigate', { url: base + p });
       await sleep(settle);
       if (tall) {
-        const h = Math.min(8000, (await evalJs(HEIGHT)) || 900);
+        const h = Math.min(maxHeight, (await evalJs(HEIGHT)) || 900);
         await send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile: w < 768 });
         await sleep(2000);
       }
