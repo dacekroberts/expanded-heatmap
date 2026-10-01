@@ -4,6 +4,62 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Pre-review checks: briefs match configs, app imports clean, pages render, label widths measured; gate 3 needs PDFs; Ostrava runs a diversion timetable (owner calls open)
+
+- **Briefs against configs:** `brief_check.py --vs-config` passes for all six
+  briefs, 30 fields (mode, coverage, scope, CRS, obec codes).
+  `check_deploy_imports.py --ref czech-build`: a clean clone imports under
+  the lean venv.
+- **Pages render in the app** (lean venv, one local render; Brno, Ostrava,
+  Liberec). Each page has its title, and its snapshot caption reads its
+  provenance: ROS02 2026-08-31, KORDIS valid 2026-09-25 to 2026-12-13, OSM
+  fetched 2026-09-30. Each carries its notices, its map frame is 650 px, and
+  none shows an error.
+- **Macro-label widths measured** in the app's own document, with eight
+  table entries reproduced exactly: Brno 31.9, Plzeň 36.0, Olomouc 59.1,
+  Ostrava 51.6, Liberec (Regional) 122.9 and Most (Regional) 107.5, in
+  `scripts/check_macro_labels.py`.
+  - **The labels clash in the Europe view**, seven Czech cities round
+    Prague.
+  - **The owner's label-tier decision** (DECISIONS 2026-09-29) gives the
+    Czech tram cities no pill in the parent views and a sub-region of their
+    own.
+  - **Not built yet.** France got a North/South region split instead
+    (`macro-france`, unmerged, the cleanup session's).
+  - **So the Czech offsets wait for that decision**, and nothing was tuned.
+- **Gate 3 from the operators' own stop lists** (owner-approved, counting
+  only) is not finished. Every operator publishes its per-line stop lists
+  only as PDFs, and downloads need the owner's OK, file by file. The agents'
+  findings are in the session scratchpad, `gate3_*.txt`.
+  - **Olomouc:** the seven DPMO stop-timetable PDFs, `jr-tra-1` to
+    `jr-tra-7`, 410-600 kB each, on dpmo.cz, valid from 14 Dec 2025 and from
+    1 Sep 2026. The HTML route titles agree with our table. One thing to
+    check: our line 4 includes Fibichova, while its title ends at
+    Pavlovičky.
+  - **Liberec:** dpmlj.cz refuses this machine (an IP block, it appears).
+    IDOL's line 11 PDF (`iidol.cz/data/catalog/29/2055/83586.pdf`, valid 1
+    Dec 2025 to 12 Dec 2026) covers line 11 only; lines 2, 3 and 5 are not
+    on IDOL. Two things to check: line 11's route description passes
+    Fügnerova, which our table gives lines 2/3/5 only, and IDOL lists a
+    line 4 (Horní Hanychov to Jablonec) with no timetable.
+  - **Ostrava:** DPO's 15 PDFs (`dpo.cz/jr/2026-09-17/0NN_2026-09-17.pdf`),
+    or KODIS's regular-timetable PDFs for lines 1, 2, 4, 8, 10, 12, 14 and
+    18 only.
+  - **Most:** the agent was still running when this entry was written.
+- **Ostrava runs a DIVERSION timetable from 2026-09-17**, which KODIS's file
+  names run to 2026-12-12. DPO's network diagram is labelled as the
+  diversion state. **Line 6 is not running**, yet our map draws it on 21
+  stations. **Lines 13 (Zábřeh - Hranečník) and 19 (Dubina - Martinov) run
+  in its place.** OSM has no line 13 relation, and its line 19 has no stops.
+  OSM shows the regular network. The owner's standing rule draws works "as
+  the timetable runs" (Prague's Flora, Berlin's U6), so this is an owner
+  call, not yet put.
+- **Housekeeping:** a temporary `czech-app-tmp` entry is in the launch
+  folder's `.claude/launch.json`
+  (`.claude/worktrees/beautiful-gould-c4eede/.claude/launch.json`), which
+  this session created. Remove it once no more app renders are needed; the
+  main checkout's file is untouched.
+
 ### 2026-09-30 - Ostrava's in-city line 5 stops disclosed in prose, not listed, following Kyoto and Madrid (owner); the boardable default flipped on master (owner)
 
 - **Owner: "B, follow the precedent."** This supersedes the recommendation
