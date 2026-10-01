@@ -20,6 +20,15 @@ converge on it:
 The document is rendered as committed rather than re-written for the web: it
 was written to be published as-is, and a hand-maintained web copy would drift
 from the file the pipeline's authors actually read.
+
+ONE COUNTRY AT A TIME (owner, 2026-10-01). A country selector shows that
+country's file in docs/data_sources/ and the parts of data_sources.md that
+belong to it (its numbered notices, an indemnity accepted for one of its
+sources); the rest of data_sources.md, which applies to every city, follows in
+full. Both files stay whole on disk: app/country_sections.py splits
+data_sources.md at render time, so check_provenance.py still reads every
+numbered notice there. ?country= (the country in cities.py) opens the page on
+that country, which is how a city page links here.
 """
 
 import re
@@ -37,6 +46,15 @@ from components import (  # noqa: E402
     render_site_notices,
     set_base_font,
 )
+from country_sections import (  # noqa: E402
+    country_link,
+    country_slug,
+    country_text,
+    parts_of,
+    select_country,
+    shared_text,
+)
+from cities import COUNTRY_ORDER  # noqa: E402
 
 DOC = Path(__file__).parent.parent.parent / "docs" / "data_sources.md"
 # Split by country on 2026-09-27: the entry point above keeps the notices and
@@ -48,15 +66,23 @@ COUNTRY_DOCS = sorted((DOC.parent / "data_sources").glob("*.md"))
 # The files link to each other as FILES (`data_sources/canada.md`,
 # `../data_sources.md`), which works on GitHub and opens a blank page here:
 # the app serves its own HTML for any path. deploy-verify found the index
-# table's links dead on 2026-09-27, the day of the split. On this page every
-# file is already rendered, so each file link becomes a jump to it.
+# table's links dead on 2026-09-27, the day of the split. Here a country
+# file's link selects that country (?country=), the folder's link jumps to the
+# selector, and the entry point's link jumps to its index table, which is
+# always on the page.
 FILE_LINK = re.compile(r"\]\((?:\.\./)?data_sources/([a-z-]+)\.md\)")
 FOLDER_LINK = re.compile(r"\]\((?:\.\./)?data_sources/\)")
 ENTRY_LINK = re.compile(r"\]\(\.\./data_sources\.md\)")
+COUNTRY_OF_STEM = {country_slug(k): k for k in COUNTRY_ORDER}
+
+
+def _file_link(match):
+    country = COUNTRY_OF_STEM.get(match.group(1))
+    return f"]({country_link(country)})" if country else "](#ds-countries)"
 
 
 def in_page(text):
-    text = FILE_LINK.sub(r"](#ds-\1)", text)
+    text = FILE_LINK.sub(_file_link, text)
     text = FOLDER_LINK.sub("](#ds-countries)", text)
     return ENTRY_LINK.sub("](#where-each-countrys-sources-live)", text)
 
@@ -89,17 +115,28 @@ the day it was pulled.
 """
 )
 
+st.markdown('<div id="ds-countries"></div>', unsafe_allow_html=True)
+country = select_country("sources_country")
+
+country_doc = DOC.parent / "data_sources" / f"{country_slug(country)}.md"
+if country_doc.exists():
+    st.markdown(in_page(country_doc.read_text(encoding="utf-8")))
+else:
+    st.warning(f"docs/data_sources/{country_doc.name} is missing from this "
+               "checkout.")
 if DOC.exists():
-    st.markdown(in_page(DOC.read_text(encoding="utf-8")))
+    parts = parts_of(DOC)
+    st.markdown(in_page(country_text(parts, country)))
+    st.divider()
+    st.markdown(in_page(shared_text(parts)))
 else:
     st.warning(f"{DOC.name} is missing from this checkout.")
-if not COUNTRY_DOCS:
-    st.warning("The per-country files in docs/data_sources/ are missing from "
-               "this checkout.")
-st.markdown('<div id="ds-countries"></div>', unsafe_allow_html=True)
-for country_doc in COUNTRY_DOCS:
-    st.divider()
-    st.markdown(f'<div id="ds-{country_doc.stem}"></div>', unsafe_allow_html=True)
-    st.markdown(in_page(country_doc.read_text(encoding="utf-8")))
+
+# A country file whose country has no city in cities.py would have no place
+# under the selector; it renders here, so a file is never published unseen.
+for orphan in COUNTRY_DOCS:
+    if orphan.stem not in COUNTRY_OF_STEM:
+        st.divider()
+        st.markdown(in_page(orphan.read_text(encoding="utf-8")))
 
 render_site_notices(show_links=False)

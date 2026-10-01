@@ -485,6 +485,9 @@ notice to display — see item 5a below. These are obligations, not courtesies. 
 page and `excluded_categories.md` (see `PLAN.md`) — publishing the maps
 without them would breach terms this project has now read.
 
+Not required by anyone, but good practice and already partly done in the city
+pages' prose: naming each business registry's publishing agency.
+
 **1. OpenStreetMap — required, and ALREADY SATISFIED.** ODbL 1.0 requires
 visible credit and a licence link, "not beneath UI, behind toggles, or
 off-screen". Every rendered map emits, in the map corner:
@@ -555,6 +558,15 @@ License Agreement requires the licensee to "Clearly acknowledge MassDOT as the
 provider of the Data". No exact wording is prescribed. Same shape as LA Metro's
 obligation. The agreement itself is kept at
 `docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
+
+**This heading read "NOT YET DISPLAYED" until 2026-09-21 and was stale**, which
+is worth leaving a note about because a compliance document that understates
+compliance invites someone to re-fix a closed item and to doubt the rest of the
+gate. The outstanding part had been that the acknowledgement appeared only on
+Boston's own city page rather than "where the *site* is accessed"; that was
+closed when `app/components.py`'s `render_site_notices()` began carrying all
+five outstanding notices on **every** page, and this heading was not updated
+with the others. Verified against `_NOTICES` on 2026-09-21.
 
 **8. INEGI (Mexico City) — required, and DISPLAYED since 2026-09-22. It is TWO
 obligations rather than one.** The Términos de Libre Uso de la Información del
@@ -628,18 +640,6 @@ lines are drawn from OSM route relations (owner-approved 2026-09-22 as a
 per-city exception). ODbL 1.0 attribution was already satisfied for the
 basemap; the same credit now also covers line geometry, and notice 1's wording
 should not imply it is only about tiles.
-
-**This heading read "NOT YET DISPLAYED" until 2026-09-21 and was stale**, which
-is worth leaving a note about because a compliance document that understates
-compliance invites someone to re-fix a closed item and to doubt the rest of the
-gate. The outstanding part had been that the acknowledgement appeared only on
-Boston's own city page rather than "where the *site* is accessed"; that was
-closed when `app/components.py`'s `render_site_notices()` began carrying all
-five outstanding notices on **every** page, and this heading was not updated
-with the others. Verified against `_NOTICES` on 2026-09-21.
-
-Not required by anyone, but good practice and already partly done in the city
-pages' prose: naming each business registry's publishing agency.
 
 ### What closing this fully requires
 
@@ -755,6 +755,14 @@ built: **that was wrong, and D.C. is now built.** WMATA's terms require no
 attribution and no acknowledgement — its constraints are on what may be SAID
 (§6 accuracy, §9 deletion on termination, the trademark clause), not on what
 must be shown.
+
+What has grown instead is the pile of **permission questions**, now four: three
+"what does silence mean?" calls and the route-colour one. They are questions
+about permission rather than implementation, and they are the only items of
+that kind outstanding. Two sources' positions remain formally unestablished —
+the Census geocoder, whose terms are simply unread, and **Miami-Dade, whose
+terms do not address reuse at all.** Those two are different in kind: one is a
+document nobody has opened, the other is a document that does not exist.
 
 **9. City of Vancouver — required, and DISPLAYED.** The Open Government
 Licence – Vancouver requires this exact sentence wherever its information is
@@ -1062,6 +1070,11 @@ actualizada"* clause requires the displayed data to carry its update date; that
 clause was raised as an owner decision and resolved on 2026-09-22 (see above)
 as a misrepresentation rule rather than a liveness requirement, discharged by
 naming CRTM's own last-update date beside the map.
+
+**20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
+Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
+drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).
+"Powered by CRTM" stays verbatim.
 
 **21. Ajuntament de Barcelona — required, and DISPLAYED.** The Cens de locals
 declares CC BY 4.0, and the Open Data BCN *terms of use* — incorporated by the
@@ -2466,19 +2479,6 @@ as Norway's and Denmark's do. Their text is unchanged.
   edit, 23 May 2025); imply the city's endorsement.
 - **MUST DO**: never download `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` -
   `fetch_sources.py` names its fields and stops if one arrives.
-
-**20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
-Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
-drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).
-"Powered by CRTM" stays verbatim.
-
-What has grown instead is the pile of **permission questions**, now four: three
-"what does silence mean?" calls and the route-colour one. They are questions
-about permission rather than implementation, and they are the only items of
-that kind outstanding. Two sources' positions remain formally unestablished —
-the Census geocoder, whose terms are simply unread, and **Miami-Dade, whose
-terms do not address reuse at all.** Those two are different in kind: one is a
-document nobody has opened, the other is a document that does not exist.
 
 ## Gaps
 
