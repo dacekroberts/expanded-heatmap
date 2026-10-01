@@ -212,7 +212,9 @@ PAGE = '''"""@@NAME@@ heatmap page - embeds the pre-rendered Folium HTML.
 
 Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
 Overview.py's docstring for why this is the decided pattern
-for every city's detail page. Scaffolded by scripts/scaffold_city.py.
+for every city's detail page. Scaffolded by scripts/scaffold_city.py, in the
+city-page format of 2026-10-01 (owner): title, map, captions, bullets, map help,
+country links, notices.
 """
 
 import sys
@@ -224,6 +226,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.@@SLUG@@.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -232,37 +238,40 @@ st.set_page_config(page_title="@@NAME@@ Heatmap", page_icon="\\U0001f5fa\\ufe0f"
 set_base_font()
 
 render_city_nav("@@NAME@@")
+render_city_title("@@NAME@@")
 
-st.title("@@NAME@@: commercial density around @@SYSTEM@@ station areas")
-
-# TODO: replace every TODO line below with prose true for this city: the lines
-# (by name), which stations are included and what is left out and where the
-# list is, the data source and any known limitation. Avoid restating counts.
-st.markdown(
-    """
-TODO: describe the lines drawn (each is labeled directly on the map and in the
-legend), the stations included and excluded (the excluded ones are listed in
-`outputs/@@SLUG@@/excluded_stations.csv`), and the data source and its
-limitations.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
-
+# Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/@@SLUG@@/step@@STEP@@_map.py` to generate it.")
+
+# The date caption: cities.py's data_age. A city that reads a provenance file
+# replaces this with its own caption of the sources' dates and credits.
+render_data_age("@@NAME@@")
+
+# TODO: replace every TODO bullet with prose true for this city, as short
+# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
+# the lines by name, what is not drawn, the area and the stations left out, the
+# source and its limitations. Detail a reference page carries stays there.
+st.markdown(
+    """
+**The lines**
+
+- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
+- TODO: what is not drawn, and why.
+- TODO: the area covered; stations left out are listed on the What is counted page.
+
+**The businesses**
+
+- TODO: the data source, and any category it is missing.
+"""
+)
+
+render_map_help("three business categories (Retail, Food service and Personal services)")
+render_country_links("@@NAME@@")
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
