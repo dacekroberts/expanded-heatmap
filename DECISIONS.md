@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**244 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)](#2026-09-30---streamlit-scaling-measured-at-106-cities-memory-and-clone-fine-the-overview-list-is-long-owner)
 - [Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)](#2026-09-30---request-stops-count-as-stations-boardable_stop_ids-defaults-to-gtfs-0-2-and-3-owner)
 - [New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)](#2026-09-30---new-working-rules-a-memory-gate-for-two-heavy-jobs-decisions-drafts-overpass-pacing-pre-permitted-downloads-and-prose-owner)
 - [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
@@ -285,6 +286,26 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)
+
+- **Measured before the next review (owner: measure first, decide at
+  review).** The trial tree was master plus the 11 Band B branches and the 20
+  French batch cities, 106 in all, run from `.venv-lean`. Full figures are in
+  `docs/scaling_thresholds.md`, "Measured 2026-09-30 at 106 cities".
+  - **App memory:** about 140 MB at cold start; a 189 MB peak while the three
+    largest map pages rendered. The documented Community Cloud limits are
+    690 MB minimum and 2.7 GB maximum. Memory scales with the largest map,
+    not the city count.
+  - **`outputs/`:** 243 MB now, 263 MB with all 31; the handoff estimated
+    ~380 MB.
+  - **Clone of master:** 27 s and a 219 MB pack with full history; 19 s and
+    69 MB at depth 1.
+  - **The Overview's text list:** about 39 screens on a phone at 106 cities.
+    That is a layout call for the owner, not a limit.
+- **Recommendation for review time:** the batch can land at once on these
+  numbers. The list's layout is the one decision to make, and it need not
+  block the landing.
 
 ### 2026-09-30 - Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)
 
