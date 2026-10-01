@@ -2831,7 +2831,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "DPMB trams 1-10 and 12",
-        "region": "Europe",
+        "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
@@ -2855,7 +2855,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "PMDP trams 1, 2 and 4",
-        "region": "Europe",
+        "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
@@ -2879,7 +2879,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "DPMO trams 1-7",
-        "region": "Europe",
+        "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
@@ -2888,7 +2888,10 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # Right of the dot and a little low, SCORED in the Czechia view: above
+        # it the pill met Ostrava's (24 x 4 px); a sweep, PROBLEMS 0 at 375, 768
+        # and 1200 (cleanup, 2026-09-30).
+        "label_offset": ("start", 10, 10),
     },
     {
         "name": "Ostrava",
@@ -2903,7 +2906,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Dopravní podnik Ostrava trams (14 lines)",
-        "region": "Europe",
+        "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
@@ -2927,7 +2930,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "DPMLJ trams 2, 3, 5 and 11",
-        "region": "Europe",
+        "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
@@ -2951,7 +2954,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "DPmML trams 1-4",
-        "region": "Europe",
+        "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
@@ -2960,7 +2963,10 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # West of the dot, SCORED in the Czechia view: the default and every
+        # eastward pill covered Liberec's marker (a sweep, PROBLEMS 0 at 375,
+        # 768 and 1200, cleanup 2026-09-30).
+        "label_offset": ("end", -10, 0),
     },
 ]
 
@@ -3103,6 +3109,14 @@ REGION_ORDER = [
     # 25 at Europe's zoom is exactly what cannot work.
     "France North",
     "France South",
+    # CZECHIA (the owner's label-tier decision of 2026-09-29 gives the Czech
+    # tram cities a sub-region of their own and no pill in the parent view;
+    # built 2026-09-30 in the review rehearsal, France's mechanism). Brno,
+    # Plzeň, Olomouc, Ostrava, Liberec and Most: in Europe their six pills
+    # and Prague's overlapped every pair (99 problems over three widths).
+    # Prague stays in Europe, its metro city: moving it in too left one
+    # problem in Europe (measured both ways). Fitted zoom, no override.
+    "Czechia",
     # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
     # further country on the continent joins this view rather than adding one.
     # Brazil alone spans Porto Alegre to Fortaleza, about 3,200 km: the width
