@@ -62,9 +62,15 @@ def write_lines(kept, path):
                                ensure_ascii=False), encoding="utf-8")
 
 
-def _not_drawn_stops(elements, cfg, kept_names):
-    """Stops reached only by a NOT_DRAWN relation, with its reason."""
+def _not_drawn_stops(elements, cfg, kept_names, scope):
+    """Stops reached only by a NOT_DRAWN relation. One beyond the map's obce
+    says "outside" first, which is what app/station_scope.py reads it as; one
+    inside keeps the relation's own reason (Ostrava's line 5, two stops)."""
+    from shapely.geometry import Point
+
     nodes = {e["id"]: e for e in elements if e["type"] == "node"}
+    place = ", ".join(f"{o} ({getattr(cfg, 'OBEC_NAMES', {}).get(o, cfg.CITY_NAME)})"
+                      for o in cfg.OBEC_CODES)
     rows = []
     for r in (e for e in elements if e["type"] == "relation" and e["id"] in cfg.NOT_DRAWN):
         for m in r.get("members", []):
@@ -73,9 +79,11 @@ def _not_drawn_stops(elements, cfg, kept_names):
                 continue
             name = n.get("tags", {}).get("name")
             if name and name not in kept_names:
+                why = cfg.NOT_DRAWN[r["id"]]
+                if not scope.contains(Point(n["lon"], n["lat"])):
+                    why = f"outside obec {place}, on a line not drawn: {why}"
                 rows.append({"station": name, "lines": r["tags"].get("ref", ""),
-                             "reason": cfg.NOT_DRAWN[r["id"]],
-                             "latitude": n["lat"], "longitude": n["lon"]})
+                             "reason": why, "latitude": n["lat"], "longitude": n["lon"]})
     return pd.DataFrame(rows, columns=["station", "lines", "reason", "latitude",
                                        "longitude"]).drop_duplicates("station")
 
@@ -141,7 +149,8 @@ def step1(cfg):
                       "reason": "outside the map's obce, in " + outside["name"],
                       "latitude": outside["latitude"], "longitude": outside["longitude"]},
                      columns=cols),
-        _not_drawn_stops(els, cfg, set(st["stop_name"])),
+        _not_drawn_stops(els, cfg, set(st["stop_name"]),
+                         places.geometry.union_all()),
     ], ignore_index=True)
     excluded.to_csv(cfg.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
     keep = (inside.rename(columns={"stop_name": "station"})

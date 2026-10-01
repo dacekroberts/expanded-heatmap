@@ -4,6 +4,38 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Master's new rules merged into czech-build; Ostrava's two in-city line 5 stops need a station-scope category (owner call open)
+
+- **`origin/master` merged into `czech-build`.** It brought the heavy-job gate
+  (`scripts/heavy_job.py`), the drafts rule and a stricter
+  `check_scope_disclosure.py`, which now refuses an excluded station whose
+  reason `app/station_scope.py` reads as "Other".
+- **Ostrava's nine line 5 rows were split by place.** The seven beyond the
+  city now say "outside obec 554821 (Ostrava), on a line not drawn: …", and
+  station_scope counts them as outside. The two inside the city,
+  Poruba,koupaliště and Krásné Pole, still carry line 5's reason, because no
+  existing category is true of them. **The check fails for those two on
+  `czech-build`.**
+- **An owner call, recommended: a new category, "left out with a stub
+  line".** It would mean teaching `app/station_scope.py` the category, adding
+  a column to the excluded-stations page (`201_What_Is_Excluded.py`) and a
+  sentence there, and describing the category in
+  `docs/excluded_categories.md`. The other shapes are worse:
+  - calling them "outside" is false;
+  - dropping them from the CSV loses the station table's record of them
+    (the page text and the exclusions doc name them either way).
+  The category is shared app code and new page text, so it goes to the
+  owner, not this session.
+- **Regenerated on the branch:** `app/ring_shares.json` (the six Czech
+  cities added, no other row moved) and README's city list.
+- **Left for the lander, all landing-time work:**
+  - `check_macro_facts.py --write`, which reads every city's shared processed
+    files;
+  - the `map_inconsistencies.md` rows (cleanup's city-landed sweep);
+  - the measured macro-label widths (a real browser in the app);
+  - notice numbering, where 69-71 are France's and must land with 72 and 73;
+  - the master-list counts.
+
 ### 2026-09-30 - Plzeň built: 53 stations; the "two missing stops" were a one-day diversion (supersedes the entry below on Plzeň's gate 3)
 
 - **Plzeň's two "missing" stops were not stops.** The entry below reported
