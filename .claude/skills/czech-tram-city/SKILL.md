@@ -140,9 +140,10 @@ and `drift_check.py prague`.
   the main checkout's `data/czechia/raw/`, behind every worktree's `data/`
   junction. **Never refresh them from a city branch**: a new edition moves
   Prague too. A refresh is its own job, announced, with Prague re-run.
-- **Step 2 reads the 543 MB RES file: one heavy job machine-wide**, announced
-  to the other live sessions before it starts and when it ends
-  (`docs/session_roles.md`). Run the six step 2s one at a time.
+- **Step 2 reads the 543 MB RES file in 500,000-row chunks**, keeping only
+  the city's owners: a measured **0.37 GB peak** (Prague, 2026-09-30), so it
+  is not a heavy job under the owner's margin rule. Still run Czech step 2s
+  one at a time, since they share one disk read.
 
 The screen's figures (2026-09-27, `business_leg.py`): placement 100% in every
 city, and the restaurant control (NACE 5611 against OSM's restaurants) at 1.61
@@ -178,9 +179,11 @@ Kitchener–Waterloo's regional precedent):
 - step 2 prints and emits the placed count per obec, for the page;
 - a config with only `OBEC` (Prague) takes the old path unchanged.
 
-Make the change at the **first Czech build**, so all six configs share one
-shape. The control is Prague: its step 2 and `drift_check.py prague` must
-reproduce the committed output exactly. That is a heavy job; announce it.
+**Done 2026-09-30, on `czech-build`**, with RES read in 500,000-row chunks of
+the city's own owners. The control was Prague's step 2, run from the branch
+into the scratchpad (never into the shared `data/prague/processed/`):
+byte-identical, every baseline count equal, **peak 0.37 GB**. So a Czech
+step 2 is not a heavy job; announce it as a 0.5 GB one, one at a time.
 
 ## 3. The tram leg
 
@@ -197,9 +200,20 @@ reproduce the committed output exactly. That is a heavy job; announce it.
 - **Stations are the feed's own `parent_station` rows, Prague's shape.** All
   329 platforms the 11 lines serve have a parent (2026-09-30): 149 parents, no
   two sharing a name. Take the parent's id, name and coordinates; no name
-  collapse and no mean. Drop non-boardable stops (`boardable_stop_ids`).
-  Exit if a platform has no parent or two parents share a name, as Prague's
-  step 1 does.
+  collapse and no mean. Exit if a platform has no parent or two parents share
+  a name, as Prague's step 1 does.
+- ⚠️ **Request stops are stops.** KORDIS codes every request stop (*na
+  znamení*) `pickup_type`/`drop_off_type` **3**, which GTFS counts as
+  boardable. `boardable_stop_ids`' default accepts only 0 and dropped **25 of
+  149 stations** as "non-revenue". Pass `boardable=("0", "2", "3")`.
+- ⚠️ **The feed carries 2.5 months of timetable, so a line's union of trips
+  is too wide** (line 4: 54 stations against a 24-stop route). A line serves a
+  station when it calls there on **at least 10% of its trips in one
+  direction** (`STOP_MIN_SHARE`; Riga's threshold, per station, not per
+  exact pattern). Measured: it drops only the Vozovna Medlánky depot. Built:
+  **148 stations, 146 in the city**, 336 m median.
+- **The spacing gate's floor is 200 m for trams** (`SPACING_MIN_M`, Riga's
+  and Aarhus's), never the shared 400 m metro default.
 - **Colours are the feed's `route_color`** (DECISIONS 2026-09-30). All 11 pass
   `check_line_colours` as published; line 6's `0777C1` is closest to the pins,
   at 13.2 from Retail, recorded rather than moved (Prague's line C precedent).
@@ -208,7 +222,10 @@ reproduce the committed output exactly. That is a heavy job; announce it.
   feed's own colours in `colour`. Use `osm_tram`'s lines-only mode to
   validate the relations (every ref present, every relation kept or placed).
 - **Gate 3**: OSM's route relations' stop names per line, which are
-  independent of the feed. Prague used them the same way as its cross-check.
+  independent of the feed. Built: 9 of 11 lines agree; lines 1 and 10 run
+  variants on 12-21% of trips (line 1 via Tábor, line 10 to Technologický
+  park and Bystrc) that OSM's relations lack. The feed is the operator's, so
+  this is recorded, not "fixed".
 - **The feed self-attests nothing**, so `fetch_sources.py` records the
   calendar window (the earliest `start_date` and latest `end_date` across
   `calendar.txt` and `calendar_dates.txt`) in `provenance.json`, prints it,
@@ -244,6 +261,31 @@ If it exists, use it. Its contract:
 7. **The operator filter is optional** for the tram kit's cities. Czech
    relations all carry one (the sheets), so set it.
 
+**It exists now** (the tram kit's, on `tram-build`; taken unchanged onto
+`czech-build`, its Aarhus control passing). The Czech wrapper is
+`pipeline/countries/czechia_osm_tram.py`: a city's step 1 is
+`step1(config)` and its step 3 `step3(config, system_name)`. Step 1 writes
+each kept ref's relation with the most track to `lines.geojson`, which step 3
+draws, so the drawn lines are exactly the kept ones. What the five taught:
+
+- **An unjudged relation stops the step, and that is the point.** Plzeň's two
+  line 4 directions carry **no operator tag** in OSM: named in `NOT_DRAWN`,
+  their reverse directions kept, and the excluded list shows whether a stop
+  was lost (none was).
+- **One station under two names**: OSM names a stop's stands apart
+  (Ostrava's Hranečník (St. 1) / (St. 5), 120 m apart; Nová Huť hlavní brána
+  1 / 2, 61 m). The station gate's close-pair note finds them; fold each with
+  `STATION_NAME_ALIASES` into the spelling more lines carry.
+- **An interchange on two arms of a junction** can spread past 200 m
+  (Ostrava's Sport Aréna 321 m, Mariánské náměstí 223 m). Raise that city's
+  `COLLAPSE_MAX_SPREAD_M` on the measurement (Ostrava 330), inside Riga's 300
+  and Osaka's 400, and record the next widest name.
+- **OSM's relations can be stale.** Plzeň's gate 3 against PMDP's feed found
+  two centre stops (Jízdecká, U Synagogy) tagged as tram stops but on no
+  relation, so they go in by `STATION_ADD` node id. Where no feed can be
+  read (Olomouc, Ostrava, Liberec, Most), gate 3 is an open gap in the
+  config, never a silent pass.
+
 **Line colours: OSM tags none** in the five cities, and no operator's colours
 are licensed. Use the project's own palette (Riga's precedent, and Le Havre's
 approved call): `scripts/line_colour_search.py <slug>` with the config's
@@ -259,7 +301,9 @@ GET only). Name the source in `OPERATOR_COUNTS_SOURCE`.
 
 ### `fetch_sources.py`, per city
 
-On Prague's, with these differences:
+Thin over **`pipeline/countries/czechia_fetch.py`** (built 2026-09-30, imported
+only by fetch scripts), with `pipeline/countries/czechia_boundary.py` reading
+the boundary for the steps. On Prague's, with these differences:
 - **Feeds are rolling: always download**, even when a copy exists. That covers
   Brno's GTFS and every city's OSM query. Prague's keeps a cached copy unless
   `--force`; do not copy that for a feed.
