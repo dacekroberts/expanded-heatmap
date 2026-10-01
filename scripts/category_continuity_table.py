@@ -1668,6 +1668,8 @@ COLUMNS["kitchener_waterloo_inspection"] = {
     "mobile_unit": [loc("Mobile or at-home unit", "mobile and at-home units, by name"),
                     loc(KW_CAT, "the Mobile Vendor category (preparation premises, carts, "
                                 "catering vehicles), by type")],
+}
+
 
 PAL_VENUE = "Recreation venue, club or gaming"
 COLUMNS["palma_restauracio"] = {
