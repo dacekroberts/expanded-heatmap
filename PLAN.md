@@ -788,6 +788,25 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
+- [ ] **Gate 3 back-fill, 25 cities: after the 2026-09-30 review, for the
+  next deploy (owner, 2026-09-30).** The owner chose not to hold the tram kit
+  for it: other cities went live without the check. A code survey of step 1
+  (2026-09-30) found no operator-count check (`verify_stations(
+  expected_per_line=...)`, an equivalent of its own, or a recorded gap) in:
+  - the early US nine (Boston, Chicago, Los Angeles, Miami, New York,
+    Philadelphia, San Diego, San Francisco, Washington D.C.), which predate
+    `pipeline/stations.py`;
+  - Montréal, Edmonton and Vancouver;
+  - Dublin, Madrid, Riga and Seoul;
+  - the tram kit's nine (Liepāja, Daugavpils, Kansas City, Tucson, New
+    Orleans, Florence, Den Haag, Göteborg, Zurich).
+
+  For each, put the operator's per-line counts in config and pass them to
+  step 1, or record the gap as Mexico City and Barcelona do. A mismatch is a
+  station fix plus a drift check and a redeploy. The source rules are in
+  `tram-city` section 2, "Gate 3". A city may have been checked by hand at
+  build: look in its DECISIONS entry first.
+
 - [ ] **Sacramento's Green Line: add it back when SacRT reopens it (due by
   mid-October 2026; check from 2026-10-15).** Suspended since 2025-06-16 for
   the Railyards works; not drawn, and 7th & Richards/Township 9 is in

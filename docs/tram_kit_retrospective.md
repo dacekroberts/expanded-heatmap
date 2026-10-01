@@ -197,8 +197,9 @@ city includes that.
    3"). The operator's per-line counts go in config before step 1 is
    written. A tram step 1 stops on a mismatch. The source must be
    independent of OSM, and where none is published the gap is recorded in
-   config. The nine cities built without it owe a back-fill, or a recorded
-   gap, before landing.
+   config. The nine cities built without it land without it (owner): a
+   survey found 16 earlier cities in the same state, so all 25 are one
+   post-review item for the next deploy (`PLAN.md`).
 2. **A brief check passes only the claims written down.** For a tram brief,
    the claims that failed were the name columns, the current routing and the
    CRS. Make those three mandatory checks in every brief (a sample row shown
