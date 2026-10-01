@@ -931,7 +931,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Metro A, B and C",
-        "region": "Europe",
+        "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
@@ -1777,7 +1777,10 @@ CITIES = [
         # to it, the zoom dropped and put four label pairs on top of each
         # other. check_macro_labels.py then passes every region at 375, 768
         # and 1200 with PROBLEMS 0.
-        "label_offset": ("middle", 0, -22),
+        # Below the dot since 2026-09-30 (cleanup): Prague's move to Czechia
+        # re-centred Europe, and above it the pill sat under the theme button
+        # on a phone (79.5 x 4.6 px). A sweep: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset": ("middle", 0, 22),
     },
     {
         "name": "Bucharest",
@@ -3114,8 +3117,9 @@ REGION_ORDER = [
     # built 2026-09-30 in the review rehearsal, France's mechanism). Brno,
     # Plzeň, Olomouc, Ostrava, Liberec and Most: in Europe their six pills
     # and Prague's overlapped every pair (99 problems over three widths).
-    # Prague stays in Europe, its metro city: moving it in too left one
-    # problem in Europe (measured both ways). Fitted zoom, no override.
+    # Prague moves with them, so the view named Czechia holds every Czech
+    # city; Europe's re-centred frame then needed Stockholm's label below
+    # its dot. Fitted zoom, no override; PROBLEMS 0 at every width.
     "Czechia",
     # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
     # further country on the continent joins this view rather than adding one.
