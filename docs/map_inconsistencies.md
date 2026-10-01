@@ -463,6 +463,29 @@ match); Seoul lost it 2026-09-25 for phones. All three were restored 2026-09-27 
 the map data shipped as JSON.parse and the full maps loaded on an iPhone (DECISIONS
 2026-09-27). No reader-facing difference remains.
 
+### 13. RESOLVED 2026-09-30 - which stops count as a station: request stops
+A station-related discrepancy in the code, found before it reached a map. A
+transit feed marks each scheduled stop as boardable or not, and the GTFS
+standard has four codes: 0 regular, 1 not available, 2 phone ahead, 3 tell the
+driver (a request stop). Until 2026-09-30 `pipeline/stations.py`
+`boardable_stop_ids()` counted only 0 as a stop a reader can use, so a stop
+served only on request was dropped as if it were depot track. Brno's feed codes
+every request stop 3, and 25 of its 149 tram stations would have vanished
+(found by the Czech builds). Nothing would have flagged a station that is
+simply absent.
+- **Built maps: none affected.** All ten built cities that read a feed's
+  boardable codes were scanned (Amsterdam, Rotterdam, Berlin, Paris, Marseille,
+  Toulouse, Rennes, Oslo, Bergen, Prague). Codes 2 and 3 appear only on lines
+  those maps do not draw: Prague's buses, trams, regional rail, trolleybuses
+  and ferries (its map draws the metro); the Dutch buses and international
+  trains; Paris's demand-responsive and evening buses. Oslo, Bergen, Berlin,
+  Rennes, Toulouse and Marseille have no stop the old rule dropped, so the
+  function returns the identical set. The other eight cities' drift checks are
+  zero drift.
+- **Now:** codes 0, 2 and 3 count (owner, 2026-09-30), so a tram or
+  light-rail city with request stops keeps them. Cities that build their
+  stations from OpenStreetMap or a published list never read these codes.
+
 ---
 
 ## City by city

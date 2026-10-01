@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**242 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)](#2026-09-30---request-stops-count-as-stations-boardable_stop_ids-defaults-to-gtfs-0-2-and-3-owner)
 - [New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)](#2026-09-30---new-working-rules-a-memory-gate-for-two-heavy-jobs-decisions-drafts-overpass-pacing-pre-permitted-downloads-and-prose-owner)
 - [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
 - [Tram kit complete: all ten briefs checked; four last points for the owner; builds held](#2026-09-30---tram-kit-complete-all-ten-briefs-checked-four-last-points-for-the-owner-builds-held)
@@ -284,6 +285,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)
+
+- **`pipeline/stations.py` `boardable_stop_ids()` now treats pickup or
+  drop-off codes 0, 2 ("phone ahead") and 3 ("tell the driver") as boardable;
+  only 0 counted before (owner, 2026-09-30, approved in this session and in
+  the Czech kit's).** The Czech builds found it: Brno's feed codes every
+  request stop 3, and 25 of 149 tram stations, including Stránská skála and
+  Líšeňská, were being dropped as non-revenue. The Czech branch had added an
+  opt-in `boardable=` keyword. The flip keeps that exact signature, so the
+  branch merges cleanly and Brno's explicit argument stays harmless.
+- **No built map moves.**
+  - A read-only scan of the ten built cities that call the function (9
+    cached feeds, through the gate, measured peak 0.05 GB) found 2/3-only
+    stops solely on undrawn lines. Prague: 14,885, including 75 tram and 242
+    regional-rail stop ids; its map draws the metro. Amsterdam/Rotterdam:
+    1,816, buses and international trains. Paris: 144, demand-responsive and
+    evening buses. Berlin, Oslo, Bergen, Rennes, Toulouse and Marseille: 0.
+  - Eight cities were drift-checked on the new default (`heavy_job.py`,
+    measured peak 1.44 GB): zero drift.
+  - Oslo and Bergen were not re-run: with no stop the old rule dropped, the
+    function returns an identical set. Their drift check would only re-run a
+    step 2 near 5.4 GB that the change never touches.
+- Recorded as a station-related discrepancy (owner): theme 13 of
+  `docs/map_inconsistencies.md`, resolved.
 
 ### 2026-09-30 - New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)
 
