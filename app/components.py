@@ -738,6 +738,11 @@ _NOTICES = [
      "Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
      "select them and the address points used to place its businesses, "
      "Kitchener–Waterloo's ION line and its stops, "
+     "Odense's Letbane line and its stops, the municipal boundary used to "
+     "select them and the address points used to place its businesses, "
+     "Liepāja's tram line and its stops and the city boundary used to select "
+     "them and its businesses, Daugavpils's tram lines and their stops and the "
+     "city boundary used to select them and its businesses, "
      "Buffalo's NFTA Metro Rail line and its stations, "
      "Sacramento's SacRT Blue and Gold Lines and their stations, and the "
      "municipal boundaries used to select them, "
@@ -746,6 +751,16 @@ _NOTICES = [
      "Minneapolis's METRO Blue and Green Lines and their stations, "
      "Pittsburgh's PRT Red, Blue and Silver Lines and their stations, "
      "Dallas's DART Light Rail Red, Blue, Green and Orange Lines and their stations, "
+     "Kansas City's KC Streetcar, Tucson's Sun Link and New Orleans's five "
+     "streetcar lines and their stops, "
+     "Florence's T1 and T2 tram lines and their stops and the comune boundaries "
+     "used to select them and its businesses, "
+     "Den Haag's fourteen HTM tram lines and their stops and the municipal "
+     "boundaries used to select them and its businesses, "
+     "Göteborg's tram lines 1 to 13 and their stops and the kommun boundaries "
+     "used to select them and its businesses, "
+     "Zurich's sixteen VBZ tram lines and their stops and the municipal "
+     "boundaries used to select them and its businesses, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "Palma's Metro M1 and its stations, and the municipal boundaries used to "
      "select them, "
@@ -1039,10 +1054,12 @@ _NOTICES = [
     # its second sentence is CC BY 4.0 3(a)(1)'s modification duty. Wording
     # approved by the owner 2026-09-24.
     # Aarhus added 2026-09-29, owner-approved: the same register and cache.
-    ("Det Centrale Virksomhedsregister (Copenhagen, Aarhus)",
+    # Odense added 2026-09-30 (tram kit), the same again; for the owner's
+    # approval at review time.
+    ("Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense)",
      "Contains data from Det Centrale Virksomhedsregister (CVR), distributed by "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
-     "Copenhagen's and Aarhus's business premises are selected, classified and placed by this "
+     "Copenhagen's, Aarhus's and Odense's business premises are selected, classified and placed by this "
      "project, and a personally owned business is shown by its address rather "
      "than its name; the categories and densities are this project's own work "
      "and are not produced or endorsed by Erhvervsstyrelsen.",
@@ -1054,11 +1071,13 @@ _NOTICES = [
     # owner 2026-09-24.
     # Aarhus added 2026-09-29, owner-approved: it reads DAR's Adresse and
     # Husnummer, and takes the point from OSM's copy (osak:identifier).
-    ("Klimadatastyrelsen (Copenhagen, Aarhus)",
+    # Odense added 2026-09-30 (tram kit), Aarhus's placement; for the owner's
+    # approval at review time.
+    ("Klimadatastyrelsen (Copenhagen, Aarhus, Odense)",
      "Contains data from Klimadatastyrelsen, Danmarks Adresseregister (DAR), via "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
      "This project joins the register's addresses and address points to the "
-     "business register to place each premises; in Aarhus the points are "
+     "business register to place each premises; in Aarhus and Odense the points are "
      "OpenStreetMap's copies of them.",
      False),
     # ČSÚ - Prague's activity, form and name data (RES). CC BY 4.0 for the web
@@ -1197,11 +1216,11 @@ _NOTICES = [
     # (cbs.nl copyright page, read 2026-09-24): credit CBS, link the licence,
     # say when a figure is recalculated; no endorsement implied, no logo.
     # Wording approved by the owner 2026-09-24.
-    ("CBS (Rotterdam)",
-     "The shop-vacancy figure for Rotterdam is from CBS (Statistics Netherlands), "
-     "Landelijke Monitor Leegstand 2025, table 1, 1 January 2025, used under "
+    ("CBS (Rotterdam, Den Haag)",
+     "The shop-vacancy figures for Rotterdam and Den Haag are from CBS (Statistics "
+     "Netherlands), Landelijke Monitor Leegstand 2025, table 1, 1 January 2025, used under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) "
-     "([cbs.nl](https://www.cbs.nl/)); the share is rounded from CBS's counts. "
+     "([cbs.nl](https://www.cbs.nl/)); the shares are rounded from CBS's counts. "
      "CBS did not produce or endorse this map.",
      False),
     # FEHD's licence registers, via DATA.GOV.HK (Terms of Use v1.2, read
@@ -1227,16 +1246,24 @@ _NOTICES = [
     # VZD cadastre open data (CC BY 4.0, adopted by VZD's own data-use rules,
     # read 2026-09-24): credit, licence link, a DESCRIPTION of the changes, and
     # no implied VZD approval. Wording approved by the owner 2026-09-24.
-    ("VZD (Riga)",
-     "Riga's shops and services are from the State Land Service of Latvia's (Valsts zemes "
-     "dienests) Cadastre Information System open data — premise groups and the Riga cadastral "
-     "map — via data.gov.lv, licensed under "
+    # Liepāja and Daugavpils added 2026-09-30 (tram kit), FOR THE OWNER'S APPROVAL AT REVIEW
+    # TIME: its cadastre, and VZD's address register (aw_eka.csv, CC BY 4.0,
+    # read 2026-09-30) - VZD's own source wording, the year, and the changes.
+    ("VZD (Riga, Liepāja, Daugavpils)",
+     "Riga's, Liepāja's and Daugavpils's shops and services are from the State Land Service of Latvia's "
+     "(Valsts zemes dienests) Cadastre Information System open data — premise groups and "
+     "each city's cadastral map — via data.gov.lv, licensed under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
      "premise groups of use class 1230 whose name reads as a shop or a service were selected, "
      "placed at their building's footprint by cadastre number and reprojected; those in "
-     "buildings the city lists as degrading were removed; all are shown as one \"Shops and "
-     "services\" category and counted around tram stops. VZD has not approved these changes or "
-     "this map.",
+     "buildings Riga lists as degrading were removed; all are shown as one \"Shops and "
+     "services\" category and counted around tram stops. Liepāja's and Daugavpils's licensed food premises are "
+     "placed by address on the State Address Register: Izmantoti Valsts adrešu reģistra "
+     "informācijas sistēmas dati, 2026. gads (Valsts zemes dienests, via data.gov.lv, "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). Modified by this project: "
+     "the register's addresses were matched to the licences' addresses and their points used "
+     "to place each premises; the address file itself is not shown. VZD has not approved these "
+     "changes or this map.",
      False),
     # Riga municipality's GEO RĪGA layers (CC BY 4.0, read 2026-09-24). The
     # neighbourhoods "have no administrative-boundary status", so the merged
@@ -1700,6 +1727,52 @@ _NOTICES = [
      "rest are mapped by distance to O-Train stations; inspection results are not shown. This "
      "is not an official City of Ottawa or Ottawa Public Health product, and it is not "
      "endorsed by either.",
+     False),
+    # Kansas City (notice 80): the Data Terms of Use of Open Data KC
+    # (data.kcmo.org/terms) prescribe this paragraph "at the site where the
+    # software application ... can be accessed" - Chicago's wording on the same
+    # portal template, so displayed site-wide as Chicago's is. Word for word,
+    # the City's dead host www.data.kcmo.gov included (licence-read 2026-09-30).
+    ("City of Kansas City, Missouri (Kansas City)",
+     "This site provides applications using data that has been modified for "
+     "use from its original source, www.data.kcmo.gov, the official open data "
+     "website of the City of Kansas City. The City of Kansas City makes no "
+     "claims as to the content, accuracy, timeliness, or completeness of any "
+     "of the data provided at this site. The data provided at this site is "
+     "subject to change at any time. It is understood that the data provided "
+     "at this site is being used at one’s own risk.",
+     True),
+    # Tucson (notice 81): the BUSLIC layer's licence is silent, and the owner
+    # took the permissive reading (2026-09-30) on condition that the City is
+    # credited and the pins are never called complete. The owner's wording.
+    ("City of Tucson (Tucson)",
+     "Business licence data: City of Tucson.",
+     False),
+    # Florence (notice 82): the Comune di Firenze's four activity layers, CC BY
+    # 4.0 (its Note legali and every dataset; licence read 2026-09-30, the
+    # brief). Credit the Comune, link the licence, state the changes - Milan's
+    # notice, the same licence; no wording prescribed, so this is the project's
+    # own. Never the Comune's logo or the giglio.
+    ("Comune di Firenze (Florence)",
+     "Contains data from the Comune di Firenze (Direzione Attività Economiche e "
+     "Turismo), licensed under a [Creative Commons Attribution 4.0 International "
+     "(CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) licence: its "
+     "layers of shops, food and drink premises, beauty businesses and laundries. "
+     "This map filters, re-categorises and aggregates that data into density "
+     "measures; the filtering, categories and densities are this project's own "
+     "and are not produced or endorsed by the Comune di Firenze.",
+     False),
+    # Den Haag (notice 83): the Gemeente's Horecavergunningen layer. Its licence
+    # is silent; the owner proceeds on Amsterdam's precedent (2026-09-30) on
+    # condition that the Gemeente is credited and the layer is never called
+    # current or complete. PROPOSED wording, for review time.
+    ("Gemeente Den Haag (Den Haag)",
+     "Hospitality permit data: Gemeente Den Haag. The permit layer was last "
+     "edited on 23 May 2025 and is not a complete or current record. Changes: "
+     "the permits are filtered to food and drink premises, grouped into one "
+     "category, matched to the national buildings register by address, and "
+     "mapped by distance to tram stops. Not produced or endorsed by the "
+     "Gemeente Den Haag.",
      False),
 ]
 

@@ -809,6 +809,88 @@ COLUMNS["sacramento"] = {
                     loc("SIDEWALK VENDOR - MERCHANDISE", "street merchandise stall")],
 }
 
+COLUMNS["nola_businesstype"] = {
+    "funeral": [loc("Funeral Homes & Funeral Services", "funeral homes"),
+                loc("Cemeteries & Crematories", "cemeteries and crematories")],
+    "no_counter_food": [loc("Caterers", "caterers"), loc("Food Service Contractors", "food contractors"),
+                        loc("Special Events-Jazz Fest (Vendor)", "festival food and craft vendors")],
+    "personal_catchall": [loc("Personal Services, Other", "other personal services (812990)")],
+    "adult_hostess": absent("no type of its own: no adult-entertainment or massage-parlour type "
+                            "in the 486 values"),
+    "sex_shop": absent("no type of its own; under the all-other store retailers"),
+    "massage_commercial": [loc("Personal Care Services, Other", "other personal care (massage)")],
+    "massage_regulated": [loc("Offices of Health Practitioners, All Other Miscellaneous",
+                              "offices of other health practitioners")],
+    "car_dealer": [loc("New Car Dealers", "new car dealers"), loc("Used Car Dealers", "used car dealers"),
+                   loc("Motorcycle Dealers", "motorcycle dealers")],
+    "petrol_station": [loc("Gasoline Stations with Convenience Stores", "gas stations with stores"),
+                       loc("Gasoline Stations, Other", "other gas stations")],
+    "vehicle_repair": [loc("General Automotive Repair", "general auto repair"),
+                       loc("Automotive Body, Paint & Interior Repair & Maintenance", "auto body")],
+    "gambling": [loc("Video Draw Poker Devices", "video-poker devices"),
+                 loc("Casinos(except Hotel Casinos)", "casinos")],
+    "pawnbroker": [loc("Pawnshops", "pawnshops, Retail by R5 though NAICS calls them lenders")],
+    "nightclub": [loc("Drinking Places(Alcoholic Beverages)", "drinking places (clubs file here)")],
+    "vet": [loc("Veterinary Services", "veterinary services")],
+    "nonstore": [loc("Electronic Shopping & Mail-Order Houses", "online and mail order"),
+                 loc("Direct Selling Establishments, Other", "direct sellers"),
+                 loc("Vending Machine Operators", "vending")],
+    "parking": [loc("Parking Lots & Garages", "parking")],
+    "repair": [loc("Personal & Household Goods Repair & Maintenance, Other", "household goods repair"),
+               loc("Appliance Repair & Maintenance", "appliance repair")],
+    "lodging": [loc("Hotels(except Casino Hotels) & Motels", "hotels"),
+                loc("Bed & Breakfast Inns", "bed and breakfasts"),
+                loc("Short Term Rentals/Residential Properties", "short-term rentals")],
+    "recreation": [loc("Fitness & Recreational Sports Centers", "fitness"), loc("Museums", "museums"),
+                   loc("Motion Picture Theaters(except Drive-Ins)", "cinemas")],
+    "pharmacy": [loc("Pharmacies & Drug Stores", "pharmacies")],
+    "optician": [loc("Optical Goods Stores", "optical goods stores")],
+    "health_food": [loc("Food(Health) Supplement Stores", "health-food stores")],
+    "mobile_unit": [loc("Mobile Food Services", "food trucks"),
+                    loc("Artist-Painting on Streets", "street artists"),
+                    loc("Flea Market", "market stalls (R1: a market's stalls are not shops)")],
+}
+
+
+def _fi(source, t):
+    return {"source": source, "tipologiaattivita": t}
+
+
+COLUMNS["florence_attivita"] = {
+    "funeral": absent("no layer for funeral services: the Comune publishes shops, food service, "
+                      "beauty and laundries only"),
+    "no_counter_food": [loc(_fi("pubblici_esercizi", "56.21.01R - CATERING"), "catering"),
+                        loc(_fi("pubblici_esercizi", "56.10.01R - HOME RESTAURANT"), "home restaurant")],
+    "personal_catchall": absent("no catch-all: the beauty layer lists hair, beauty, tattoo and piercing"),
+    "tattoo": [loc(_fi("estetiche", "96.09.02 - TATUAGGI"), "tattoo")],
+    "adult_hostess": absent("no such type in the four layers"),
+    "sex_shop": absent("no type of its own; under the shop type (esercizio di vicinato)"),
+    "massage_commercial": [loc(_fi("estetiche", "96.02.02R - ESTETISTI"),
+                               "beauticians, whose trade includes aesthetic massage")],
+    "massage_regulated": absent("health massage is not in the Comune's activity layers"),
+    "car_dealer": absent("no type of its own; under the shop type"),
+    "petrol_station": absent("fuel stations are licensed outside these four layers"),
+    "vehicle_repair": absent("no repair layer"),
+    "gambling": absent("no gaming layer"),
+    "pawnbroker": absent("no type of its own"),
+    "nightclub": [loc(_fi("pubblici_esercizi", "56.10.01R - SOMMINISTRAZIONE DI ALIMENTI E BEVANDE"),
+                      "food and drink service (bars and clubs file here)")],
+    "vet": absent("no veterinary layer"),
+    "nonstore": [loc(_fi("commercio", "47.91.01R - FORMA SPECIALE (COMMERCIO ELETTRONICO)"), "online"),
+                 loc(_fi("commercio", "47.99.02R - FORMA SPECIALE (DISTRIBUTORI AUTOMATICI)"), "vending"),
+                 loc(_fi("commercio", "47.99.01R - FORMA SPECIALE (DOMICILIO DEL CONSUMATORE)"), "door to door")],
+    "parking": absent("no parking layer"),
+    "repair": absent("no repair layer"),
+    "lodging": [loc(_fi("pubblici_esercizi", "56.10.01R - RISTORANTE ALBERGO"),
+                    "restaurants inside hotels, out with lodging (premises-taxonomy step 5)")],
+    "recreation": [loc(_fi("pubblici_esercizi", "56.20.01R - SOMMINISTRAZIONE IN IMPIANTI SPORTIVI COMUNALI"),
+                       "bars in the Comune's sports grounds")],
+    "pharmacy": absent("pharmacies are licensed outside these four layers"),
+    "optician": absent("no type of its own; under the shop type"),
+    "mobile_unit": [loc(_fi("pubblici_esercizi", "SOMMINISTRAZIONE TEMPORANEA - art. 52"),
+                        "temporary service at events")],
+}
+
 SHOP = "RETAIL (SHOPS)"
 
 
@@ -1812,6 +1894,48 @@ COLUMNS["pittsburgh_inspection"] = {
 
 
 # ---------------------------------------------------------------------------
+def _dh(type_bedrijf, source="permit"):
+    return {"source": source, "type_bedrijf": type_bedrijf}
+
+
+COLUMNS["den_haag_source"] = {
+    **{rid: absent(BAG_LUMPED) for rid in (
+        "sex_shop", "massage_commercial", "massage_regulated", "car_dealer", "petrol_station",
+        "vehicle_repair", "pawnbroker", "vet", "nonstore", "parking", "repair", "pharmacy",
+        "optician", "mobile_unit")},
+    "funeral": [loc(_dh("begraafplaats en crematorium"), "a cemetery and crematorium's horeca")],
+    "no_counter_food": [loc(_dh("kantine"), "staff and care-home canteens"),
+                        loc(_dh("sportkantine"), "sports-club canteens"),
+                        loc(_dh("cateringsbedrijf"), "caterers")],
+    "personal_catchall": [loc(_dh("zalenverhuur"), "hall hire"),
+                          loc(_dh("partycentrum"), "party centres")],
+    "adult_hostess": [loc(_dh("seksinrichting"), "sex businesses the register names")],
+    "gambling": [loc(_dh("casino"), "casino"), loc(_dh("speelautomatenhal"), "gaming-machine hall")],
+    "nightclub": [loc(_dh("discotheek"), "disco"), loc(_dh("nachtclub"), "nightclub"),
+                  loc(_dh("café-discotheek"), "café with a dance floor")],
+    "lodging": [loc(_dh("hotel"), "hotel"), loc(_dh("hotel-restaurant"), "a hotel's restaurant"),
+                loc(_dh("bed & breakfast"), "bed and breakfast")],
+    "recreation": [loc(_dh("theaterfoyer"), "theatre foyers"),
+                   loc(_dh("bowlingcentrum"), "bowling"), loc(_dh("amusementshal"), "amusement hall"),
+                   loc(_dh("poolbiljart"), "pool hall"), loc(_dh("sportschool"), "gym")],
+}
+
+
+ZURICH_REGISTER = "a register of food-and-drink and alcohol-retail licences: no such licence type"
+COLUMNS["zurich_gastwirtschaft"] = {
+    **{rid: absent(ZURICH_REGISTER) for rid in (
+        "funeral", "personal_catchall", "sex_shop", "massage_commercial", "massage_regulated", "car_dealer",
+        "vehicle_repair", "gambling", "pawnbroker", "vet", "nonstore", "parking", "repair", "lodging",
+        "recreation", "pharmacy", "optician")},
+    "no_counter_food": [loc("Kantine / Mensa", "staff and institutional canteens"),
+                        loc("Ausgabestelle", "food stands, caterers and food trucks (the city's own gloss)")],
+    "adult_hostess": [loc("Cabaret / Nachtclub", "cabarets, named as such by the register")],
+    "nightclub": [loc("Dancing / Disco", "clubs and discos")],
+    "petrol_station": [loc("Tankstelle", "petrol-station shops licensed to sell alcohol")],
+    "mobile_unit": [loc("Ausgabestelle", "food trucks, filed with stands and caterers")],
+}
+
+
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
 # except the cells below, which still wait on the owner. A queued row turns stale

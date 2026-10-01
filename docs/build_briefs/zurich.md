@@ -210,14 +210,14 @@ rule for all European cities.
   },
   {
     "id": "zurich-projected-crs",
-    "claim": "The derived UTM zone is EPSG:32632",
+    "claim": "The derived UTM zone is EPSG:32632, but the build projects in LV95 (EPSG:2056), the register's own grid (the tram-city skill, section 3)",
     "kind": "utm_zone_from_longitude",
     "lon": 8.54,
     "expect": "EPSG:32632",
     "mode": "tram",
     "coverage": "narrowed",
     "scope": "city",
-    "crs": "EPSG:32632",
+    "crs": "EPSG:2056",
     "vs_config": {
       "mode": "MAP_MODE",
       "coverage": "MAP_COVERAGE",

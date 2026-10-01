@@ -1,6 +1,6 @@
 ---
 name: tram-city
-description: Build a trams-only city outside France and Czechia - the ten T1 cities in seven countries (Odense, Daugavpils, Liepāja, Kansas City, New Orleans, Tucson, Florence, Zurich, Göteborg, Den Haag) - with what every trams-only map shares - the owner's trams-only calls, rings by the spacing rule, no stop thinning anywhere (New Orleans included), the light-rail test, the shared OSM tram step 1, rolling feeds, OSM rail, the currency rule, one-bucket and narrowed pages, the macro map's mode and coverage keys, and the page text the owner approved - plus a sheet per city pointing at its country's built template. Read with the city's brief, add-city, osm-rail and publish-city, which it does not replace.
+description: Build a trams-only city outside France and Czechia - the ten T1 cities in seven countries (Odense, Daugavpils, Liepāja, Kansas City, New Orleans, Tucson, Florence, Zurich, Göteborg, Den Haag) - with what every trams-only map shares - the owner's trams-only calls, rings by the spacing rule, no stop thinning anywhere (New Orleans included), gate 3 against the operator's own stop counts in every city, the light-rail test, the shared OSM tram step 1, rolling feeds, OSM rail, the currency rule, one-bucket and narrowed pages, the macro map's mode and coverage keys, and the page text the owner approved - plus a sheet per city pointing at its country's built template. Read with the city's brief, add-city, osm-rail and publish-city, which it does not replace.
 ---
 
 # Building a trams-only city (the ten non-French, non-Czech T1 cities)
@@ -36,7 +36,10 @@ at review time only (`docs/review_time.md`).
    leaves generic. The sheet below names each city's template.
 5. Set the rings (section 3) by hand, and the CRS where section 3 says to.
    `scaffold_city.py` writes the standard rings and a WGS84 UTM zone.
-6. Write `fetch_sources.py`, which **always downloads the feed** (section 4),
+6. **Find the operator's own per-line stop counts** (section 2, "Gate 3")
+   before writing step 1, and put them in config, or record why none exist.
+   The brief's station count is not one: it is usually OSM's.
+7. Write `fetch_sources.py`, which **always downloads the feed** (section 4),
    then step 1, step 2 and the render. Then run "Before publishing".
 
 ## The owner's standing calls - do not re-ask
@@ -214,6 +217,70 @@ daytime headway from the operator's own timetable.
   Where the business source covers the city only (Zurich, Göteborg, Den
   Haag's horeca layer, Florence), **the scope cannot go regional**, so
   France's scope rule does not apply.
+
+### Gate 3 - the operator's own stop count, every city
+
+**Required, not optional.** `pipeline/stations.py`'s gates 1 and 2 (spacing,
+boardability) run by themselves. Gate 3 runs only when step 1 passes the
+operator's figures in, and **in the first ten builds it ran once** (Odense,
+25 of 25). Four drafts said "No gate 3" and five said nothing (the tram kit
+retrospective, `docs/tram_kit_retrospective.md`). It is the one check
+outside the data: Toronto's 118 and 77 agreed with every internal check and
+with nothing the TTC published. **On OSM rail it matters more, not less.**
+OSM is a volunteer map, and the brief's station count is usually OSM's own.
+
+- **Config carries it**, as Odense's does (`pipeline/odense/config.py`):
+  - `OPERATOR_STATION_COUNTS = {ref: n}`, one entry per drawn line;
+  - `OPERATOR_COUNTS_SOURCE`, which names the page or document, its
+    publisher and the date read.
+  Step 1 passes it to `verify_stations(expected_per_line=...)`, with the
+  per-line counts taken from the collapsed stations
+  (`odense/step1_stations.py`).
+- **Count the whole line, before the scope split.** An operator lists every
+  stop on a line, including those past the city boundary (Florence's T1 into
+  Scandicci, Göteborg's 4 and 12 into Mölndal). Compare per line, an
+  interchange counting once on each line it serves.
+- **Reconcile in config, never by loosening.** Where the operator's figure
+  and the build differ for a known reason, write the reason beside the
+  figure. Odense: "26 stops less Hospital Syd, not yet open". Other known
+  reasons:
+  - a `STATION_ADD` stop the operator lists;
+  - a stop the operator counts per direction;
+  - a temporary line's stops for the current timetable period (Zurich's 50
+    and 51 run to 2026-12-12).
+- **`verify_stations` prints a mismatch; a tram step 1 stops on one.** Wrap
+  it like this:
+
+  ```python
+  res = station_gates.verify_stations(...)
+  if res["per_line_mismatches"]:
+      sys.exit(...)  # name each line with both figures
+  ```
+
+  Do not change `stations.py` to raise: other cities call it.
+- **The source must be independent of OSM.** In order of preference:
+  - the operator's own line pages, stop list, network map or timetable
+    PDF, read for the count only, never republished;
+  - a public authority's page for the line;
+  - a dated secondary source (English Wikipedia's table of lines, as
+    Stockholm's gate 3), named as secondary in `OPERATOR_COUNTS_SOURCE`.
+
+  These are never the source:
+  - OSM, or a brief count derived from OSM. That is circular, as Kansas
+    City's station check was: it compared OSM against the brief's 19, which
+    came from OSM.
+  - A feed or site the owner barred (RideKC's GTFS and its schedules). Look
+    instead for another publisher of the same line (for the KC Streetcar,
+    the KC Streetcar Authority's own site, if it lists the stops).
+- **Where nothing usable is published, say so in config:**
+  `OPERATOR_STATION_COUNTS = None`, plus `OPERATOR_COUNTS_GAP`, which records
+  what was looked for, where, and the date. The draft entry repeats it, and
+  the drafts file and review time list it as a gap. A silent skip is the
+  failure this section exists to stop.
+- **Back-fill owed (2026-09-30):** Liepāja, Daugavpils, Kansas City, Tucson,
+  New Orleans, Florence, Den Haag, Göteborg and Zurich were built without
+  gate 3. Each owes it before landing, or a recorded gap. A mismatch found
+  that way is a station fix with a drift check, not a page edit.
 
 ## 3. Rings - the spacing rule
 
@@ -409,6 +476,8 @@ template goes to the owner as a proposed sentence.
 Tucson's `ACC_NAME` on personal ownership types, Florence's beauty and
 laundry points (no names, but sole traders' premises) and Den Haag's
 `AANVRAGER`**);
+gate 3 ran against the operator's per-line counts with no unexplained
+mismatch, or `OPERATOR_COUNTS_GAP` records why it could not (section 2);
 `check_provenance.py` names the city OK; `check_scope_disclosure.py` passes;
 a `docs/data_sources.md` row for every new source, the join and address layers
 included (VZD's `aw_eka.csv`); `drift_check.py <slug>`; no `TODO` left in

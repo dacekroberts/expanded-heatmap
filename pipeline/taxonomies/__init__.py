@@ -146,6 +146,15 @@ TAXONOMY_MODULES = {
     "pittsburgh_inspection": "pipeline.taxonomies.pittsburgh_inspection",
     "kitchener_waterloo_inspection": "pipeline.taxonomies.kitchener_waterloo_inspection",
     "palma_restauracio": "pipeline.taxonomies.palma_restauracio",
+    # New Orleans: NAICS-era titles with no codes, each mapped to the code it
+    # names, so naics.py decides the bucket (tram kit, 2026-09-30).
+    "nola_businesstype": "pipeline.taxonomies.nola_businesstype",
+    # Florence: the Comune's four layers, keyed on layer + type (tram kit).
+    "florence_attivita": "pipeline.taxonomies.florence_attivita",
+    # Zurich: the Stadt's Gastwirtschaftsbetriebe register (tram kit). And Den
+    # Haag's own module, if Rotterdam's does not fit its horeca layer.
+    "zurich_gastwirtschaft": "pipeline.taxonomies.zurich_gastwirtschaft",
+    "den_haag_source": "pipeline.taxonomies.den_haag_source",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

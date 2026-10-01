@@ -107,13 +107,16 @@ CITIES = [
         "record_kind": "Tax register",
         "categories": "All three",
         "blurb": "MTS Trolley (Blue, Orange, Green, Copper, Silver lines)",
-        # WEST of its dot since Dallas (2026-09-30): east of it, the pill ran
-        # across Dallas's marker in the landing view. It still clears Los
-        # Angeles's pill below; check_macro_labels.py (python -B) passes end
-        # -16 at dy -8 to 0 with Dallas at ("end", -10, -3), PROBLEMS 0 at 375,
-        # 768 and 1200 on the combined tree. (Was ("start", 16, 0): east of its
-        # dot, splitting from Los Angeles left/below.)
-        "label_offset": ("end", -16, -2),
+        # East of its dot: it sits south-east of Los Angeles, so the two
+        # names split left/below rather than colliding.
+        #
+        # MOVED WEST OF THE DOT, over the Pacific, 2026-09-30 (tram kit), when
+        # Tucson joined: east of the dot this pill covered Tucson's marker at the
+        # Global and United States zooms at all three widths. check_macro_labels.py
+        # (python -B) passes end -11 at dy -5 to +1 with Tucson at its offset
+        # (-6 meets Kansas City's pill, +2 Los Angeles's); -2 sits inside that,
+        # PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("end", -11, -2),
     },
     {
         "name": "San Francisco",
@@ -187,9 +190,15 @@ CITIES = [
         # A pill 21 px tall at dy +16 starts 5.5 px below the dot's centre,
         # which clears the 4 px marker and its 1 px ring - so it reads as
         # below the dot rather than on it.
-        # LOWERED 3 px (2026-09-30, from 16) for Pittsburgh: at 16 its pill covered
-        # Pittsburgh's marker in Global and United States.
-        "label_offset": ("middle", 0, 19),
+        #
+        # MOVED LEFT OF THE DOT 2026-09-30 (tram kit), when Kansas City joined:
+        # south of the dot this pill covered Kansas City's marker at the Global
+        # and United States zooms at all three widths, which no offset of Kansas
+        # City's own label can fix. Left of the dot, check_macro_labels.py
+        # (python -B) passes end -11 at dy -8 to +5 with Kansas City at its
+        # offset (-9 meets Toronto's pill, +8 Kansas City's); -2 sits inside
+        # that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("end", -11, -2),
     },
     {
         "name": "New York",
@@ -690,13 +699,11 @@ CITIES = [
         "region": "Europe",
         "country": "Italy",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Right of the dot: above it, Milan's pill covered Zurich's marker.
+        "label_offset": ("start", 11, 0),
     },
     {
         "name": "Paris",
@@ -892,8 +899,11 @@ CITIES = [
         # x 242-281, y 18-36; button x 180-291, y 10-42). The checker does not
         # model that button, so its PROBLEMS 0 could not see this. Below the
         # dot the label clears the button's bottom edge. Oslo also changed
-        # the frame itself - see Paris's entry.
-        "label_offset": ("middle", 0, 22),
+        # the frame itself - see Paris's entry. Moved LEFT of the dot
+        # (2026-09-30, tram kit): below it, Oslo's label met Göteborg's, and
+        # no Göteborg offset cleared both Oslo and Copenhagen. The checker
+        # now models the theme button (its BUTTONS), so PROBLEMS 0 covers it.
+        "label_offset": ("end", -11, 0),
     },
     {
         "name": "Copenhagen",
@@ -937,7 +947,9 @@ CITIES = [
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured at 47.3 px in the app's own document (2026-09-24), and
         # check_macro_labels.py passes every region at 375, 768 and 1200 with
-        # PROBLEMS 0.
+        # PROBLEMS 0. Moved left of the dot and up (2026-09-30, tram kit):
+        # above it, Prague's label met Den Haag's once Europe's frame took in
+        # the tram cities.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -984,7 +996,13 @@ CITIES = [
         # reproduced, and check_macro_labels.py passes every region at 375,
         # 768 and 1200 with PROBLEMS 0 - re-scored after merging with
         # Amsterdam, built on a separate branch the same night.
-        "label_offset": ("middle", 0, -22),
+        #
+        # MOVED RIGHT OF THE DOT 2026-09-30 (tram kit), when Florence joined:
+        # above the dot this pill covered Florence's marker in Europe at all three
+        # widths. check_macro_labels.py (python -B, an in-process grid) passes
+        # start 11 at dy -6 to +10 with Florence at its offset; +2 sits inside
+        # that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 11, 2),
     },
     {
         "name": "São Paulo",
@@ -2040,7 +2058,7 @@ CITIES = [
         # dy -37 to about -42 above the dot; higher, Calgary's and Vancouver's
         # labels; level to the right passes only at exactly dy 0. -40, PROBLEMS
         # 0 at 375, 768 and 1200.
-        "label_offset": ("middle", 0, -40),
+        "label_offset": ("end", -11, 0),
     },
     {
         "name": "Houston",
@@ -2064,6 +2082,286 @@ CITIES = [
         # Above the dot it meets San Diego's and Chicago's labels, below it
         # Monterrey's marker; check_macro_labels.py (python -B) passes start
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
+        #
+        # RAISED to dy -22, 2026-09-30 (tram kit), when New Orleans joined: level,
+        # this pill covered New Orleans's marker at the Global zoom, and lower it
+        # covers Miami's; left of the dot it meets Los Angeles's and Tucson's
+        # pills. A grid over all three sides (python -B, in-process): start 11
+        # passes dy -30 to -18 with New Orleans at its offset (-14 meets New
+        # Orleans's pill in United States East); -22 sits inside that, PROBLEMS 0
+        # at 375, 768 and 1200.
+        "label_offset": ("middle", 20, 22),
+    },
+    {
+        "name": "Odense",
+        "lat": 55.3959,
+        "lon": 10.3883,
+        "page": "pages/130_Odense_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Joined by address (98.4%)",
+        "data_age": "Weekly extract; fetched 2026-09-24",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Odense Letbane, one tram line",
+        "region": "Europe",
+        "country": "Denmark",
+        "in_default_view": False,
+        # RIGHT of the dot and a little below, and SCORED: width 50.6 px
+        # measured in a browser with Space Grotesk loaded (2026-09-30; seven
+        # built cities' widths reproduced). Above the dot it covered Aarhus's
+        # marker and overlapped Copenhagen's label; below, Amsterdam's and
+        # Berlin's; left, Aarhus's or Amsterdam's. check_macro_labels.py passes
+        # dy 5 to 8 on this side (4 covers Copenhagen's marker, 9 touches
+        # Berlin's label), and 6 sits inside that: PROBLEMS 0 at 375, 768 and
+        # 1200.
+        "label_offset": ("start", 11, 6),
+    },
+    {
+        "name": "Liepāja",
+        "lat": 56.511,
+        "lon": 21.0136,
+        "page": "pages/131_Liepaja_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Joined by address (93.9%)",
+        "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and licences",
+        "categories": "Merged",
+        "blurb": "Liepāja's one tram line",
+        "region": "Europe",
+        "country": "Latvia",
+        "in_default_view": False,
+        # BELOW the dot, and SCORED: width 48.2 px measured in a browser with
+        # Space Grotesk loaded (2026-09-30, three built cities reproduced).
+        # Above, it overlapped Riga's label; left, Copenhagen's; right, its
+        # pill covered Riga's marker. check_macro_labels.py passes dy 14 to 34
+        # below: PROBLEMS 0 at 375, 768 and 1200, with Liepāja left out of
+        # Europe's zoom (REGION_ZOOM_WITHOUT).
+        "label_offset": ("middle", 0, 22),
+    },
+    {
+        "name": "Daugavpils",
+        "lat": 55.8714,
+        "lon": 26.5161,
+        "page": "pages/132_Daugavpils_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Joined by address (95.9%)",
+        "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and licences",
+        "categories": "Merged",
+        "blurb": "Daugavpils Satiksme's five tram routes",
+        "region": "Europe",
+        "country": "Latvia",
+        "in_default_view": False,
+        # RIGHT of the dot, and SCORED: width 73.7 px measured in a browser
+        # with Space Grotesk loaded (2026-09-30). Above, its pill covered
+        # Riga's marker; below and left, it overlapped Liepāja's label.
+        # check_macro_labels.py passes dy -12 to 12 on the right: PROBLEMS 0
+        # at 375, 768 and 1200, with Daugavpils left out of Europe's zoom.
+        "label_offset": ("start", 11, 0),
+    },
+    {
+        "name": "Kansas City",
+        "lat": 39.08,
+        "lon": -94.58,
+        "page": "pages/133_Kansas_City_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        # NARROWED (the review rehearsal, 2026-09-30): the owner's rule makes a thin
+        # layer narrowed, and Houston, the precedent the tram kit kept "full" on,
+        # is narrowed under it.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Register frozen 2026-01-15; licences valid 2025-26",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "Food service thin",
+        "blurb": "KC Streetcar, one streetcar line",
+        "region": "United States East",
+        "country": "United States",
+        "in_default_view": True,
+        # LEFT of the dot and a little below, and SCORED: width 79.3 px measured
+        # in a browser with Space Grotesk loaded (2026-09-30). Inside the frame
+        # the other US cities already set, so the landing view does not move.
+        # Above or below the dot it meets Chicago's, San Diego's or San
+        # Francisco's pills at the Global and United States zooms, and right of
+        # it the East Coast's markers; Chicago's own label moved left to clear
+        # this marker (see Chicago). check_macro_labels.py (python -B) passes
+        # end -11 at dy +2 to +13 (+16 meets San Diego's pill), and 8 sits
+        # inside that: PROBLEMS 0 at 375, 768 and 1200. The cost: at 375 px in
+        # United States East the pill runs 17.3 px (19%) off the left edge,
+        # reported as clipped, not a problem; every side that avoids it
+        # collides elsewhere.
+        "label_offset": ("end", -11, 8),
+    },
+    {
+        "name": "Tucson",
+        "lat": 32.2226,
+        "lon": -110.9747,
+        "page": "pages/134_Tucson_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Register coordinates (92.4%)",
+        "data_age": "Active licences, fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "All three",
+        "blurb": "Sun Link, one streetcar line",
+        "region": "United States West",
+        "country": "United States",
+        "in_default_view": True,
+        # RIGHT of the dot and a little above, and SCORED: width 48.6 px measured
+        # in a browser with Space Grotesk loaded (2026-09-30). San Diego's label
+        # moved west to clear this marker (see San Diego), and Tucson is left
+        # out of United States West's zoom fit (REGION_ZOOM_WITHOUT) - fitting
+        # it zoomed California out until San Francisco's pill covered
+        # Sacramento's marker. check_macro_labels.py (python -B) passes start 11
+        # at dy -7 to -2 (-1 meets Los Angeles's pill, -8 Kansas City's); -5
+        # sits inside that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("end", -11, 16),
+    },
+    {
+        "name": "New Orleans",
+        "lat": 29.9511,
+        "lon": -90.0715,
+        "page": "pages/135_New_Orleans_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        # NARROWED (the review rehearsal, 2026-09-30): the owner's rule makes a thin
+        # layer narrowed, and Houston, the precedent the tram kit kept "full" on,
+        # is narrowed under it.
+        "coverage": "narrowed",
+        "placement": "Register coordinates (95.6%)",
+        "data_age": "Active licences, updated daily; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "Personal services thin",
+        "blurb": "RTA streetcars: St. Charles, Loyola/Rampart, Canal and Riverfront",
+        "region": "United States East",
+        "country": "United States",
+        "in_default_view": True,
+        # RIGHT of the dot, a little below, and SCORED: width 82.8 px measured in
+        # a browser with Space Grotesk loaded (2026-09-30). Houston's label rose
+        # to clear this marker (see Houston). check_macro_labels.py (python -B)
+        # passes start 11 at dy 0 to +8 (-2 meets Washington D.C.'s pill at the
+        # Global zoom); +4 sits inside that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 11, 4),
+    },
+    {
+        "name": "Florence",
+        "lat": 43.7696,
+        "lon": 11.2558,
+        "page": "pages/136_Florence_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Comune layers, updated daily; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        "categories": "All three",
+        "blurb": "Tramvia: T1 Leonardo and T2 Vespucci",
+        "region": "Europe",
+        "country": "Italy",
+        "in_default_view": False,
+        # RIGHT of the dot, a little above, and SCORED: width 58.1 px measured in
+        # a browser with Space Grotesk loaded (2026-09-30). Inside Europe's frame,
+        # so the region's zoom and centre do not move. Rome's label moved right
+        # to clear this marker (see Rome). check_macro_labels.py (python -B)
+        # passes start 11 at dy -12 to +6; -3 sits inside that, PROBLEMS 0 at
+        # 375, 768 and 1200.
+        "label_offset": ("start", 11, -3),
+    },
+    {
+        "name": "Göteborg",
+        "lat": 57.7089,
+        "lon": 11.9746,
+        "page": "pages/137_Goteborg_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        # ONE CATEGORY on the two-key legend (owner's tier rule of 2026-09-30: food
+        # premises only), as Stockholm; the tram kit set "narrowed" only until
+        # macro-legend landed, and asked for this flip with Stockholm's.
+        "coverage": "one_bucket",
+        "placement": "Register coordinates (99.0%)",
+        "data_age": "No dates in the register; fetched 2026-10-01",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Göteborgs Spårvägar: trams 1 to 13",
+        "region": "Europe",
+        "country": "Sweden",
+        "in_default_view": False,
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Above the dot, the scaffold's value, unmoved: the frame's
+        # tightest spot, between Oslo's label and Copenhagen's.
+        "label_offset": ("end", -11, -16),
+    },
+    {
+        "name": "Den Haag",
+        "lat": 52.0705,
+        "lon": 4.3007,
+        "page": "pages/138_Den_Haag_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Register coordinates",
+        "data_age": "Permit layer last edited 2025-05-23; BAG fetched 2026-10-01",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and permits",
+        "categories": "Merged",
+        "blurb": "HTM: trams 1-19 and RandstadRail 3, 4 and 34 (14 lines)",
+        "region": "Europe",
+        "country": "Netherlands",
+        "in_default_view": False,
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Right of the dot, the provisional value, unmoved.
+        "label_offset": ("start", 11, 0),
+    },
+    {
+        "name": "Zurich",
+        "lat": 47.3769,
+        "lon": 8.5417,
+        "page": "pages/139_Zurich_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Register kept current, last updated 2026-09-28; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "Two",
+        "blurb": "VBZ trams 2–11, 13–15, 17, 50 and 51",
+        "region": "Europe",
+        "country": "Switzerland",
+        "in_default_view": False,
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Right of the dot: above it, it met Milan's and Lille's labels.
         "label_offset": ("start", 11, 0),
     },
     {
@@ -2559,7 +2857,7 @@ CITIES = [
         # and above-right runs into Calgary's, Buffalo's or Montréal's. The
         # joint sweep's PROBLEMS 0 at 375, 768 and 1200 px, with and without
         # Ottawa's branch; width 81.6 measured in a browser.
-        "label_offset": ("end", -16, 36),
+        "label_offset": ("end", -11, -8),
     },
     {
         "name": "Pittsburgh",
@@ -3166,7 +3464,20 @@ REGION_ORDER = [
 # zoom dropped and a dozen label pairs collided at every width. Its centre
 # still counts, so Europe's frame sits about a degree further east; on a phone
 # Dublin's label clips 11 px and Bucharest's 25 px, PROBLEMS 0.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest")}
+# Liepāja (2026-09-30, tram kit) joins it on the same measurement: fitted to it,
+# the zoom dropped and 57 label problems appeared at every width, whatever
+# Liepāja's own offset. It lies inside the frame Riga and Bucharest already
+# set, so Europe's centre does not move.
+# Daugavpils (2026-09-30, tram kit) joins it too: at 26.5 E it is the
+# easternmost European city, 0.4 degrees east of Bucharest, so it moves the
+# centre that far east and no further.
+# Tucson (2026-09-30, tram kit) is United States West's first city outside
+# California, 6 degrees east of San Diego: fitted to it, the zoom dropped and
+# San Francisco's pill covered Sacramento's marker at every width. Left out of
+# the fit, California keeps its zoom; the centre moves about 3 degrees east and
+# Tucson's label sits on the canvas unclipped, PROBLEMS 0.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils"),
+                       "United States West": ("Tucson",)}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would

@@ -514,6 +514,9 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Minneapolis | METRO Blue and Green light rail | Northstar commuter rail; the Como-Harriet heritage streetcar (a museum ride) | OpenStreetMap route relations (Metro Transit's GTFS licence unread); gate 3 exact on 19 and 23 | City (TIGER) | 22 / 0 |
 | Pittsburgh | PRT light rail (the T), Red, Blue and Silver, with the downtown subway | Buses, the inclines | OpenStreetMap route relations (PRT's GTFS licence unread); gate 3 exact on 31, 24 and 31 | City (TIGER); halved rings | 31 / 0 |
 | Dallas | DART Light Rail, Red, Blue, Green and Orange | Dallas Streetcar, M-Line trolley (owner); Silver Line and TRE (commuter rail) | OpenStreetMap route relations (Houston's route); gate 3 exact | City (TIGER) | 20 / 0 |
+| Kansas City | KC Streetcar, one line | Buses | OpenStreetMap route relations (RideKC's GTFS barred, owner) | City (TIGER) | 0 / 0 |
+| Tucson | Sun Link streetcar, one line | Buses | OpenStreetMap route relations | City (TIGER) | 0 / 0 |
+| New Orleans | RTA streetcars 12, 46, 47, 48, 49 | Buses, ferries; OSM's stale ref 2 | OpenStreetMap route relations; 46 and 49 stops by node | City (TIGER; Orleans Parish) | 0 / 0 |
 | **Canada** | | | | | |
 | Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS | Vancouver + Surrey | 30 / 0 |
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
@@ -535,6 +538,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Italy** | | | | | |
 | Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
 | Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 3, 5, 14, 19 bus-replaced); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
+| Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap | Comune | 4 / 0 |
 | **France** | | | | | |
 | Paris | Métro, 16 lines + Trams T3a, T3b | RER, Transilien, other trams (T2 and T9 stubs) | IDFM GTFS | Commune | 76 / 0 |
 | Marseille | Métro 1–2 + Tramway 1–3 | TER; ferries; Aubagne tram | Métropole AMP GTFS (RTM) | Commune | 7 (Aubagne tram) / 0 |
@@ -569,9 +573,11 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
 | **Sweden** | | | | | |
 | Stockholm | Tunnelbana: Gröna, Röda and Blå linjen (routes T10–T19), one label per line | Pendeltåg, Roslagsbanan, Saltsjöbanan, trams; the unopened Yellow line | OpenStreetMap route relations (SL's GTFS needs a key); gate 3 exact on 100 | Kommune | 18 / 0 |
+| Göteborg | Göteborgs Spårvägar trams 1–13 | Buses, ferries, commuter trains; Lisebergslinjen (heritage) | OpenStreetMap route relations | Kommun | 5 / 0 |
 | **Denmark** | | | | | |
 | Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
 | Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
+| Odense | Odense Letbane, one tram line | Buses and regional trains | OpenStreetMap | Kommune | 0 / 0 |
 | **Czechia** | | | | | |
 | Prague | Metro A, B, C | Trams, funicular, ferries, suburban | PID GTFS | City | 0 / 0 |
 | Brno | Trams 1–10, 12 | Heritage tram H4, shuttle P1; S-trains, trolleybuses, ferry | KORDIS JMK GTFS (geometry OSM); gate 3 vs OSM agrees on 9 of 11 lines | City | 2 / 0 |
@@ -583,6 +589,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Netherlands** | | | | | |
 | Amsterdam | Metro 50–54 + 16 trams | Tram 3, museum tram, ferries, NS | OVapi national GTFS (GVB) | Gemeente (with Weesp) | 22 / 59 |
 | Rotterdam | RET metro A–E + 9 trams | Trams 12, 14, 18; ferries; NS | OVapi national GTFS (RET) | Gemeente | 52 / 23 |
+| Den Haag | HTM trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17, 19 and RandstadRail 3, 4, 34 (14 lines) | RandstadRail E (RET metro, a stub: 4 of 23 stops inside), the 9S short working, buses, NS | OpenStreetMap route relations | Gemeente | 64 / 0 |
 | **Brazil** | | | | | |
 | São Paulo | Metrô L1–5, L15 (monorail) + CPTM L9 | CPTM 7, 8, 10–13; L6, L17 (building) | OpenStreetMap (GeoSampa for status) | Município | 2 / 0 |
 | Rio de Janeiro | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | Município | 3 / 0 |
@@ -597,6 +604,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Hong Kong | MTR, 8 lines + Light Rail | Airport Express, Disneyland Resort Line, high-speed rail, Peak Tram, Hong Kong Tramways | OpenStreetMap (station counts checked against MTR's own lists) | Territory | 0 / 17 (Racecourse left out: race days only) |
 | **Latvia** | | | | | |
 | Riga | Rīgas satiksme trams, 7 routes | Buses, trolleybuses, Vivi suburban rail | Rīgas satiksme GTFS | City (58 neighbourhoods) | 0 / 15 |
+| Liepāja | Tram 1, the one line | Buses and suburban trains | OpenStreetMap | City | 0 / 0 |
+| Daugavpils | Trams 1-5 (3 and 5 one loop) | Buses and suburban trains | OpenStreetMap | City | 0 / 0 |
 | **South Korea** | | | | | |
 | Seoul | Seoul Metropolitan Subway: Lines 1–9, Shinbundang, Ui LRT, Sillim + 3 Korail lines | AREX, GTX-A, Seohae Line, Gimpo Goldline | OpenStreetMap (no gate 3) | City | 223 / 0 |
 | Daegu | Daegu Metro Lines 1–3 (Line 3 a monorail) | 대경선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia; operator unreachable) | City | 5 / 0 |
@@ -635,6 +644,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Australia** | | | | | |
 | Sydney | Sydney Trains T1, T2, T3, T4, T8 and T9 and Sydney Metro M1 (7 lines, refs on the map, full names in the legend) | Light rail L1-L3 (22 stops in the LGA), NSW TrainLink, ferries | OpenStreetMap route relations (Transport for NSW's GTFS needs an API key); gate 3 exact on the 16 stations inside the LGA | The City of Sydney LGA (lines cut at the boundary) | 157 / 0 |
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
+| **Switzerland** | | | | | |
+| Zurich | VBZ trams 2–11, 13–15, 17 and the 2026 construction lines 50 and 51 | S-Bahn; Forchbahn S18; trams 12 (Glattalbahn) and 20 (Limmattalbahn), stubs | OpenStreetMap route relations | City (Stadt Zürich) | 15 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -659,6 +670,9 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Minneapolis | Food hygiene register | City of Minneapolis Food Inspections, one row per violation | Its own FacilityCategory, plus a name test | 115 / 526 / — | No Personal services; Retail = food shops only ("Grocery and food shops") |
 | Pittsburgh | Food hygiene register | Allegheny County Health Department's Geocoded Food Facilities (as of 2025), one row per facility | Its own category_cd, plus a name test | 48 / 268 / — | No Personal services; Retail = food shops only ("Food-selling shops") |
 | Dallas | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 2,501 / 1,492 / 204 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
+| Kansas City | Licence register | KCMO Business License Holders (frozen 2026-01-15) | NAICS (2022 titles mapped to codes) | 273 / 52 / 126 | Food service thin: about 175 restaurants and bars in the whole register; 1,095 fee-code licences unclassifiable |
+| Tucson | Licence register | City of Tucson BUSLIC (active licences, rebuilt daily) | NAICS | 125 / 149 / 66 | Not a complete listing, in the City's own words |
+| New Orleans | Licence register | City of New Orleans Active Occupational Licenses (daily, CC0) | Own text taxonomy, mapped to NAICS codes | 935 / 978 / 218 | Personal services thin |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
@@ -680,6 +694,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Italy** | | | | | |
 | Milan | 6 licence registers | Comune di Milano premises registers | Register = category | 24,793 / 11,738 / 4,979 | Canteens and clubs partly left in Food |
 | Rome | Authorisation register | SUAP | Own authorisation types | 38,121 / 14,534 / 8,084 | Workshops with no trade missing |
+| Florence | Permit registers | Comune di Firenze's four activity layers (CC BY 4.0) | Layer and type | 2,676 / 1,086 / 673 | Exempt food service kept: some not open to the public |
 | **France** | | | | | |
 | Paris | National establishment register | SIRENE + INSEE geolocation | NAF rév. 2 (sous-classe) | 40,771 / 32,871 / 11,605 | — |
 | Marseille | same | same | same | 4,558 / 3,852 / 1,537 | — |
@@ -712,11 +727,13 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Bergen | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 1,204 / 484 / 418 | — |
 | **Sweden** | | | | | |
 | Stockholm | Food hygiene register | Stockholms stad's food inspection register (Livsmedelstillsyn), one record per premises | Its own activity types (VerksamhetsTyp), plus a name test | 943 / 3,759 / — | No Personal services; Retail = food shops only ("Food shops"); frozen since 2025-10-21 |
+| Göteborg | Food hygiene register | Göteborgs Stad's register of food businesses (Livsmedelsverksamheter, CC0, refreshed daily), one row per premises | Its own local types (`typ`), mapped to the national groups, plus a name test | 609 / 1,646 / — | No Personal services; Retail = food shops only ("Food shops"); the register carries no dates |
 | **Romania** | | | | | |
 | Bucharest | Food hygiene register | DSVSA București's registers of food units (17 category files, active rows only) | The file (the unit category), with the category text for exceptions | 5,250 / 5,994 / — | No Personal services; Retail = food shops only ("Food shops"); a quarter of premises unplaced |
 | **Denmark** | | | | | |
 | Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,708 | Tattoo studios lost with the catch-all |
 | Aarhus | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 636 / 450 / 214 | Tattoo studios lost with the catch-all |
+| Odense | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 603 / 343 / 208 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
 | Prague | National registers (location + activity) | ROS02 + RES | CZ-NACE 2025 (owner's activity) | 6,027 / 5,464 / 6,122 | About 57,000 establishments of other-activity owners missing |
 | Brno | same | same | same | 1,955 / 1,773 / 2,204 | About 18,800 establishments of other-activity owners missing |
@@ -728,6 +745,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Netherlands** | | | | | |
 | Amsterdam | Permit list + building register | Horeca permits; BAG shop units | Per-source (2 buckets) | Shops & services 9,215 / Food 3,433 | Retail and Personal merged |
 | Rotterdam | Gazette notices + building register | Permit notices; BAG shop units | Per-source (2 buckets) | Shops & services 5,211 / Food 1,771 | Retail and Personal merged |
+| Den Haag | Permit layer + building register | The Gemeente's Horecavergunningen layer; BAG shop units | Per-source (2 buckets) | Shops & services 3,813 / Food 1,968 | Retail and Personal merged |
 | **Brazil** (all nine) | Census of addresses (2022) | IBGE CNEFE | Free-text keyword rules | see below | A third to a half of plausible storefronts unreadable |
 | São Paulo | | | | 25,968 / 15,331 / 8,256 | about 1/3 unreadable |
 | Rio de Janeiro | | | | 15,085 / 10,364 / 4,784 | about 1/3 |
@@ -742,6 +760,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Hong Kong | Licence registers (food premises) | FEHD licence registers | Local (licence type) | Food service 15,833 / Food shops 3,408 / Bathhouses 34 | No general retail or personal services: FEHD does not license them |
 | **Latvia** | | | | | |
 | Riga | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 4,027 / Food 1,214 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
+| Liepāja | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 397 / Food 92 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
+| Daugavpils | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 581 / Food 75 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
 | **South Korea** | | | | | |
 | Seoul | Permit registers (17 types) | Seoul's LOCALDATA permit registers | Local (permit type) | 47,933 / 139,802 / 36,646 | Retail only the licensed trades; no general retail |
 | Daegu | Permit registers (14 types) | Daegu's republication of the national LOCALDATA registers (D-데이터허브) | Local (permit type) | 11,031 / 27,271 / 9,422 | Retail only the licensed trades; no general retail |
@@ -780,6 +800,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Australia** | | | | | |
 | Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,769 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
+| **Switzerland** | | | | | |
+| Zurich | Licence register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -801,6 +823,9 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Minneapolis | Register coordinates (97.8%); 42 not placed | Food only; 3 uncategorised facilities left out | Institutions, caterers, mobile units, stalls, food shelves and wholesale by type; contract and institutional kitchens, vending, hotels, venues, pharmacies and named cabarets by name; a grocer's second licence for one counter folded |
 | Pittsburgh | Register coordinates (98.7%); 22 not placed, 3 outside the city | Food only; a list dated 2025-08-27 | Institutional, mobile, school, processing, boarding, commissary, caterer, social-club and banquet types; venue stands, workplace micro-markets, hospital and campus outlets, hotel back of house, pharmacies, dark stores and named adult venues by name |
 | Dallas | Address join to the City's Address Points (89.8%) + Census geocoder (7.9%); 2.3% unplaced, 770 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments and trailers; address shown for a person's permit (Houston's Residential-point test cannot run: the address type codes are undocumented) |
+| Kansas City | Register coordinates (100%); 11 outside the city | Food service thin; a licence is not a shopfront | Non-store sellers, caterers, mobile food, parking; fee-code licences (1,095); licences that lapsed in 2024; address shown for a person's licence or a person-named trade name |
+| Tucson | Register coordinates (92.4%); 539 not geocoded, 23 outside the city | The City calls its list not complete | Home occupations; non-store sellers, caterers, mobile food, parking; apartments (19); address shown for a person's licence or a business named only as a person |
+| New Orleans | Register coordinates (95.6%); 219 at the register's 0,0, 1 outside the city | A licence is not a shopfront | Event and festival vendors, home offices, flea-market stalls, street artists, video poker; caterers, mobile food, parking; address shown where no business name or a person's |
 | **Canada** | | | |
 | Vancouver (Regional) | Source coordinates | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
@@ -822,6 +847,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Italy** | | | |
 | Milan | Source coordinates (loss count UNKNOWN) | Canteens/clubs partly remain; double counts | Registers not merged |
 | Rome | Address join to ANNCSU (95.7%) | Food an upper bound (no closing dates) | Online, wholesale, storage types; workshops with no trade |
+| Florence | Source coordinates (100%) | Some exempt food service not open to the public; no names or addresses | Private clubs, internal shops, nonstore, farmers, catering, hotel restaurants |
 | **France** | | | |
 | Paris | Join to INSEE geolocation (99.96%) | 1.8× OSM shop count; INSEE masking 8.5% (EC) | 47.91/47.99/47.8x, 56.29, 96.01A, 96.09Z |
 | Marseille | same (99.94%) | 2.6× OSM (1.7× on restaurants); masking 12.2% (brief, sample) | Same codes |
@@ -856,9 +882,11 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Bucharest | Address join to OpenStreetMap's address points, in the premises' own sector (74.9%) | About one storefront in four unplaced, even across sectors; fishmongers in markets lowest | Cancelled registrations, mobile units, kiosk carts, vending machines, pastry labs, in-house buffets, catering; sole traders' and person-named companies' names withheld (category shown) |
 | **Sweden** | | | |
 | Stockholm | Register coordinates (98.4%); 85 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care), caterers, event firms, food trucks and pharmacies by name; wholesale, production and "Övrigt" by type |
+| Göteborg | Register coordinates (99.0%); 29 at the register's fallback point not placed | Food only; no dates; untyped premises recovered by name only (flagged); gyms, cinemas, bingo halls and general stores registered as food premises are counted; office canteens under company names not separated | Institutional kitchens, staff restaurants, hotel breakfast rooms, caterers, mobile units, ships, vending machines and pharmacies by type or name; wholesale, production and transport by type; address shown for a premises named only as a person |
 | **Denmark** | | | |
 | Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
 | Aarhus | Address join to DAR, points from OpenStreetMap's copy (97.1%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
+| Odense | Address join to DAR, points from OpenStreetMap's copy (98.4%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
 | **Czechia** | | | |
 | Prague | Address join to RÚIAN (99.99%) | Owner's activity only; web shops | Home-address sole traders (1,500) dropped; names withheld |
 | Brno | Address join to RÚIAN (100%) | Owner's activity only; web shops | Home-address sole traders (591) dropped; names withheld |
@@ -870,12 +898,15 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Netherlands** | | | |
 | Amsterdam | Source points (22 permits unplaced) | Empty shop units about 5%; takeaways thin | Shop units also dwellings (757); canteens in venues, hotels |
 | Rotterdam | Source points | Closed premises stay up to 5 years; about 7% vacant | Dwelling units (26); alcohol, terrace, gaming permits |
+| Den Haag | Source points | Permit layer last edited 2025-05-23; about 4% of shop units vacant | Shop units also dwellings (1,928); pending permits (158); canteens, venues, hotels; trade names that are only a person's (5) |
 | **Brazil** | | | |
 | All nine | Source points (census) | Unreadable descriptions (see B); change since 2022 | Offices, parking, workshops, vacant, worship etc.; dwelling addresses show category only |
 | **Hong Kong** | | | |
 | Hong Kong | Source points: FEHD's own CSDI points, matched by licence number (28 unplaced) | Mostly restaurants; premises on different floors share one point | Food factories, canteens, cold stores, pools, entertainment and funeral trades; 2 duplicate licences counted once |
 | **Latvia** | | | |
 | Riga | Address join to the city's address points (96.8%); building footprints (99.4%) | Food a lower bound (licensed premises only); shops an upper bound (vacancy measured only in the centre) | Holder never read and unit numbers dropped (owner); 412 shops in degrading buildings |
+| Liepāja | Address join to VZD's address register (93.9%); building footprints (100%) | Food a lower bound (licensed premises only); shops an upper bound (no vacancy figure) | Holder never read and unit numbers dropped |
+| Daugavpils | Address join to VZD's address register (95.9%); building footprints (100%) | Food a lower bound (licensed premises only); shops an upper bound (no vacancy figure) | Holder never read and unit numbers dropped |
 | **South Korea** | | | |
 | Seoul | Source building points, gaps filled from other permits at the same building (98% placed; 4,875 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 138 personal names withheld; phone never read |
 | Daegu | Source building points, gaps filled from other permits at the same building (99% placed; 612 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 113 personal names withheld; phone never read; health-food addresses masked by the publisher |
@@ -914,6 +945,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Australia** | | | |
 | Sydney | Census coordinates (per building; 5,054 distinct points for 7,074 storefronts) | The City of Sydney LGA only; a five-yearly survey (2022); no names | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
+| **Switzerland** | | | |
+| Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -938,6 +971,9 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Minneapolis | Inspected within two years of 2026-09-30 (2026-09-30) | B | 0.6 mi | Yes | 36% | Trade name |
 | Pittsburgh | Active on the County's list of 2025-08-27 (2026-09-30) | B | 0.3 mi | Yes | 18% | Trade name |
 | Dallas | Active permits (2026-09-30) | B | 0.6 mi | Yes | 26% | Name; address for a person's permit |
+| Kansas City | Frozen 2026-01-15, licences valid 2025-26 (2026-09-30) | B | 0.3 mi | Yes | 13% | Trade name, else holder company; address for a person's licence |
+| Tucson | Active licences (2026-09-30) | B | 0.3 mi | Yes | 6% | Account name; address for a person's licence |
+| New Orleans | Active licences, daily (2026-09-30) | B | 0.3 mi | Yes | 45% | Business name, never the owner's; address where none |
 | **Canada** | | | | | | |
 | Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |
@@ -959,6 +995,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Italy** | | | | | | |
 | Milan | UNKNOWN (2026-09-22) | — | 0.6 mi | Yes | 87% | Sign on about 1 in 7; else address |
 | Rome | July 2025 (2026-09-24) | B | 0.6 mi | Yes | 61% | Activity + address |
+| Florence | Updated daily (2026-09-30) | B | 0.3 mi | Yes | 37% | Type only (no name or address) |
 | **France** | | | | | | |
 | Paris | SIRENE monthly; month UNKNOWN (2026-09-22) | T | 0.3 mi | Yes | 98% | Sign/usual name (about 40%), else address |
 | Marseille | same (2026-09-23) | T | 0.3 mi | Yes | 55% | same (43% named) |
@@ -993,9 +1030,11 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Bucharest | Registers of 2026-08-25 (fetched by the owner 2026-09-28) | B | 0.6 mi | Yes | 72% | Company name without its legal form; category for sole traders and person-named companies |
 | **Sweden** | | | | | | |
 | Stockholm | Inspections to 2025-10-21, layer edited 2025-10-22 (fetched 2026-09-29) | B | 0.6 mi | Yes | 89% | Premises name |
+| Göteborg | No dates; the premises active on the day fetched (2026-10-01) | B | 0.3 mi | Yes | 75% | Premises name; address for a premises named only as a person |
 | **Denmark** | | | | | | |
 | Copenhagen | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 94% | Name; address for personal owners |
 | Aarhus | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 25% | Name; address for personal owners and franchisees |
+| Odense | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 41% | Name; address for personal owners and franchisees |
 | **Czechia** | | | | | | |
 | Prague | 2026-08-31 (ROS02) | B | 0.6 mi | Yes | 70% | Name; address for persons/partnerships |
 | Brno | 2026-08-31 (ROS02) | B | 0.3 mi | Yes | 82% | Name; address for persons/partnerships |
@@ -1007,6 +1046,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Netherlands** | | | | | | |
 | Amsterdam | Live register (2026-09-24) | B | 0.6 mi | Yes | 96% | Permit name (food); address (shops) |
 | Rotterdam | Notices to 2026-09-24 (5-yr window) | B | 0.6 mi | Yes | 93% | No names; address (shops) |
+| Den Haag | Permit layer edited 2025-05-23 (2026-10-01) | B | 0.3 mi | Yes | 93% | Permit trade name (food); address (shops) |
 | **Brazil** | | | | | | |
 | São Paulo | 2022 census (file 2024-05-20) | B | 0.6 mi | Yes | 23% | Enumerator's description; category only at homes (37%) |
 | Rio de Janeiro | same | B | 0.6 mi | Yes | 28% | same (55%) |
@@ -1021,6 +1061,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Hong Kong | Registers generated 2026-09-25, points to 2026-09-23 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 91% | Shop sign, Chinese or English (308 show "No shop sign") |
 | **Latvia** | | | | | | |
 | Riga | Excise daily; cadastre prepared 2026-09-20 (fetched 2026-09-25) | B | 0.6 mi | Yes | 78% | No names; the kind (food) or the premises' registered name (shops) |
+| Liepāja | Excise daily; cadastre prepared 2026-09-20 (Riga's cache) | B | 0.3 mi | Yes | 70% | No names; the kind (food) or the premises' registered name (shops) |
+| Daugavpils | Excise daily; cadastre prepared 2026-09-20 (Riga's cache) | B | 0.3 mi | Yes | 80% | No names; the kind (food) or the premises' registered name (shops) |
 | **South Korea** | | | | | | |
 | Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes (restored 2026-09-27; dropped 2026-09-25 for phones) | 94% | Trade name in Korean (138 show "Name withheld") |
 | Daegu | Edition 2026-08, but its rows end 2025-08-31 (fetched 2026-09-27) | Yes (snapshot caption, the rows' own date) | 0.6 mi | Yes | 71% | Trade name in Korean (113 show "Name withheld") |
@@ -1059,6 +1101,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Australia** | | | | | | |
 | Sydney | Survey of 2022 (layer last edited 2025-02-12; fetched 2026-09-28) | B | 0.6 mi | Yes | 83% | Kind of business (the survey has no names) |
 | Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
+| **Switzerland** | | | | | | |
+| Zurich | Open licences, kept current; last updated 2026-09-28 (fetched 2026-09-30) | B | 0.3 mi | Yes | 92% | Trade name and licence type; address for a person-named trade name |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

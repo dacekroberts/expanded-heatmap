@@ -69,6 +69,14 @@ REGISTRIES = {
     # and the address is not carried to the map, so the unit check is skipped.
     "stockholm": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Göteborg: Livsmedelsverksamheter names the PREMISES (`namn`); no owner,
+    # representative or phone column exists. A premises named only as a person
+    # (13, read by eye from the 738 names residence.looks_personal flags, nearly
+    # all trade names) shows its street address (config.PERSON_NAMED, Kansas
+    # City's rule). An address with an apartment number (LGH) is left off; none
+    # remains among the placed storefronts.
+    "goteborg": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=("adress",)),
     # Bucharest: DSVSA's registers name the registered UNIT, most often the
     # operating company. The owner's rule (2026-09-28): the company name
     # without its legal form, and the CATEGORY ONLY for a sole trader (II,
@@ -295,6 +303,10 @@ REGISTRIES = {
     "aarhus": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
+    # Odense: Aarhus's register, step 2, placement and personal-owner rule.
+    "odense": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("business_name",)),
     # Amsterdam, the first Dutch city, two layers. The BAG shop units carry NO
     # name at all - the pin shows the unit's address - and a unit also
     # registered as a dwelling is not on the map. The hospitality permits show
@@ -323,6 +335,13 @@ REGISTRIES = {
     "riga": dict(raw=None, trade=None, owner=None,
                  processed="businesses_clean.csv",
                  address=("address",)),
+    # Liepāja: Riga's two layers through latvia_register.py, the same rules.
+    "liepaja": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",)),
+    "daugavpils": dict(raw=None, trade=None, owner=None,
+                       processed="businesses_clean.csv",
+                       address=("address",)),
     # FEHD's registers carry the SHOP SIGN (`SS`), the name on the licence
     # premises, and no licensee name at all - there is no owner column to
     # fall back to. The raw file is XML, so the processed file is read.
@@ -489,6 +508,62 @@ REGISTRIES = {
     # (2026-09-30).
     "dallas": dict(raw=None, trade=None, owner=None,
                    processed="businesses_geocoded.csv",
+                   address=("address",)),
+    # Kansas City: KCMO's licence register, whose `dba_name` is the HOLDER and
+    # `business_name` the trade name (pipeline/kansas_city/config.py). Step 2
+    # shows the address wherever the holder reads as a person (surname first,
+    # "HARRIS GREGORY J") or the trade name is a person's own; otherwise the
+    # trade name, else the holder company - so the fallback join below counts
+    # holder COMPANIES, each one a name step 2 judged not a person's. The
+    # addresses carry no unit, so the unit check reads nothing; the
+    # person-shaped names it reports are company trade names ("CROWS COFFEE",
+    # "SMOOTHIE KING"), read by eye 2026-09-30.
+    "kansas_city": dict(raw="business_licenses.csv", trade="business_name",
+                        owner="dba_name", processed="businesses_clean.csv",
+                        address=("address",)),
+    # Tucson: the City's BUSLIC layer has one name, `ACC_NAME`, the account
+    # (trading) name; there is no separate owner column to fall back to. Step 2
+    # shows the address for the personal OWN_TYPEs (Sole Proprietorship,
+    # Individual, Married) and for 45 account names read by eye as a person's;
+    # the person-shaped names it still shows are shop names ("BLIND PIG"). The
+    # address joins the APT field, which holds shop suites ("STE 101").
+    "tucson": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
+    # New Orleans: `ownername` (often a person's own name) and `businessphone` are
+    # never downloaded, so no owner fallback exists. The pin shows
+    # `businessname`; with none (783), or only a person's (25, read by eye), the
+    # address.
+    "new_orleans": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv",
+                        address=("address",)),
+    # Florence: the Comune's four layers carry no name and no address - an id, a
+    # point and a type. The pin shows the type in English. Nothing here can be
+    # a person; a beauty or laundry point can still be a sole trader's
+    # premises, which the type does not reveal.
+    "florence": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=None),
+    # Den Haag: two layers. BAG shop units carry no name - the pin shows the
+    # unit's address, and a unit also registered as a dwelling is not on the
+    # map. Food pins show the trade name from the permit layer's description
+    # (OMSCHRIJVI), with the city's bracketed staff notes removed; the
+    # applicant (AANVRAGER), KvK number and legal form are never downloaded, so
+    # there is no registrant fallback. 5 trade names that are only a person's
+    # (config: step 2's PERSON_NAMED, read by eye) show the type instead.
+    "den_haag": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv",
+                     address=("address",)),
+    # Zurich: the Stadt's Gastwirtschaftsbetriebe has ONE name, `betriebsname`,
+    # the premises' trade name; the register has no holder column, so there is
+    # no owner fallback. Step 2 shows the street address for 12 trade names read
+    # by eye as a person's own (config.PERSON_NAMED: four alcohol-retail
+    # licences in a bare personal name on residential streets, an internet shop,
+    # ambiguous ones). The ~900 person-shaped names it still shows are German
+    # and Italian trade names that residence.py's English organisation words do
+    # not catch ("Brasserie Lipp", "Tennisclub Seebach") and kiosk signs that
+    # carry a surname ("Prathees Kiosk"), read 2026-09-30.
+    "zurich": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
                    address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,

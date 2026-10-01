@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_54408190d96eef09238ea11bdd3e5a31 {
+                    position: relative;
+                    width: 1000.0px;
+                    height: 650.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+<style>
+/* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
+   render a disclosure triangle - `list-style-type` computes to
+   `disclosure-open` here - but it is a ~6 px glyph in the same colour and
+   weight as the text beside it, and on a dense map it reads as punctuation
+   rather than as something to click. Replaced with an explicit chevron plus a
+   VERB, because the chevron alone is ambiguous: this panel is anchored
+   bottom-right, so its box grows upward while its content flows downward, and
+   no arrow direction is honestly self-explanatory. "Hide"/"Show" is.
+
+   Laid out as a flex row with space-between, which keeps the marker INSIDE the
+   legend's existing width rather than extending it. That matters: the label
+   layout in _layout_labels models the open legend as a hardcoded 274 px
+   obstacle, and a wider panel would start covering line labels it currently
+   clears. Verified after the change that the open width is unchanged.
+
+   No script: the collapse is still the browser's own <details> behaviour, so
+   this is presentation only and scripts/check_map_labels.js keeps working. The
+   colour is `currentColor`, so it follows .dark-base .map-legend's own
+   `color` and needs no dark-mode rule of its own. */
+.map-legend > summary { list-style: none; display: flex;
+    align-items: baseline; justify-content: space-between; gap: 12px; }
+.map-legend > summary::-webkit-details-marker { display: none; }
+.map-legend > summary::after {
+    content: "\25BE\00A0Hide"; font: 600 11px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif);
+    opacity: 0.7; white-space: nowrap; }
+.map-legend:not([open]) > summary::after { content: "\25B8\00A0Show"; }
+.map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }
+.map-legend > summary:focus-visible { outline: 2px solid currentColor;
+    outline-offset: 2px; }
+/* THE OPEN LEGEND IS CAPPED BELOW THE BUTTON ROW, AND SCROLLS. Amsterdam
+   (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
+   tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
+   control were under the "Global View" and theme buttons (#map-actions, fixed
+   at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
+   shorter than the cap (Paris's the tallest, its top at y 84), so none of
+   them changes. min(100vh, MAP_H) is the visible map height whichever way
+   _LEGEND_BOTTOM_CSS resolves; border-box so the cap is the whole panel. The
+   header sticks, so Hide stays in reach while the rows scroll. Its background
+   is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
+   root, so it inherits from a transparent slot - measured, the rows showed
+   through the header in dark mode. */
+.map-legend { box-sizing: border-box; overflow-y: auto;
+    overscroll-behavior: contain;
+    max-height: calc(min(100vh, 650px) - 80px); }
+.map-legend > summary { position: sticky; top: -8px; z-index: 1;
+    padding-top: 8px; margin-top: -8px; background: white; }
+.dark-base .map-legend > summary { background: var(--dm-surface); }
+</style>
+
+<details open class="map-legend" style="
+    position: fixed; bottom: max(24px, calc(100vh - 626px)); right: 24px; z-index: 9999;
+    background: white; padding: 8px 14px; border: 1px solid #999;
+    border-radius: 4px; font-family: var(--hm-font, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Hiragino Sans', 'Yu Gothic', Meiryo, 'Apple SD Gothic Neo', 'Malgun Gothic', 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif); font-size: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+">
+  <summary style="font-weight: bold; cursor: pointer; user-select: none;
+    outline: none;">Legend</summary>
+  <div style="font-weight: bold; margin: 8px 0 6px;">Business Category</div>
+  
+  <div style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:11px; height:11px;
+      border-radius:50%; background:#2a78d6; margin-right:7px;
+      border:1px solid rgba(0,0,0,0.3);"></span>Shops and services
+  </div>
+
+  <div style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:11px; height:11px;
+      border-radius:50%; background:#C2185B; margin-right:7px;
+      border:1px solid rgba(0,0,0,0.3);"></span>Food service
+  </div>
+
+  <div style="font-weight: bold; margin: 10px 0 6px;">Transit Lines</div>
+  
+  <div style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:3px;
+      background:#b8860b; margin-right:7px;
+      border-radius:2px;"></span>Tram 1
+  </div>
+
+</details>
+
+<script>
+(function () {
+    var MAP_W = 1000;
+    var legend = document.querySelector('details.map-legend');
+    if (!legend) return;
+    var touched = false;
+
+    // Reader ownership is detected from an actual user gesture, NOT from the
+    // `toggle` event. `toggle` also fires for programmatic changes, and Chrome
+    // queues one for a <details open> element that lands AFTER this script
+    // attaches its listener - on a wide load `fit()` returns early, so that
+    // stray event used to set `touched` permanently and kill the breakpoint
+    // for the rest of the page's life (found by deploy-verify, 2026-09-21: the
+    // legend then covered four of New York's labels for anyone who narrowed
+    // their window rather than loading narrow). A click on the <summary> is
+    // unambiguous, and keyboard activation dispatches a click too.
+    var summary = legend.querySelector('summary');
+    if (summary) {
+        summary.addEventListener('click', function () { touched = true; });
+    }
+
+    function fit() {
+        if (touched) return;
+        var narrow = (document.documentElement.clientWidth || window.innerWidth) < MAP_W;
+        if (narrow !== !legend.open) legend.open = !narrow;
+    }
+    fit();
+    // Second pass: the 1000px map forces scrollbars at load, so the first
+    // measurement can read ~15px short; once PHONE_FIT_SCRIPT has resized the
+    // container they are gone and the width is accurate.
+    requestAnimationFrame(fit);
+    window.addEventListener('resize', fit);
+})();
+</script>
+    
+        <style>
+            .leaflet-control-layers-expanded {
+                max-height: 480px;
+                overflow-y: auto;
+            }
+        </style>
+    
+    
+<style>
+    #map-actions { position: fixed; top: 10px; right: 10px; z-index: 10000;
+        display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+        max-width: calc(100% - 56px); }   /* clear of the zoom control on a phone */
+    .map-btn {
+        font: 600 13px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); padding: 6px 12px; cursor: pointer;
+        background: #ffffff; color: #1c2b2a;
+        border: 1px solid #999999;
+        border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .map-btn[hidden] { display: none; }
+    /* THE TOOLTIP IS WHERE BUSINESS NAMES APPEAR, so it needs the font stack
+       more than anything else on the map does. Leaflet's own CSS sets
+       `"Helvetica Neue", Arial, Helvetica, sans-serif` on .leaflet-tooltip,
+       which is Latin-only - so without this rule a Japanese, Korean or Greek
+       shop name would render in whatever the browser substituted, as tofu
+       boxes or at metrics that outgrow the tooltip's own box. Added
+       2026-09-21 alongside pipeline/theme.FONT_STACK, whose own note explains
+       why the fallback ORDER matters (browsers fall through per glyph, not
+       per string). */
+    .leaflet-tooltip { font-family: var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); }
+    .map-btn:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+    #city-menu { width: 84px; text-overflow: ellipsis; }
+    @media (max-width: 480px) {
+        #map-actions { gap: 6px; }
+        .map-btn { padding: 6px 7px; font-size: 12px; }
+        #city-menu { width: 78px; }
+    }
+    .dark-base { color-scheme: dark; --dm-page: #0B1220; --dm-surface: #131C2E; --dm-surface-hover: #1A2740; --dm-surface-disabled: #0F1626; --dm-border: #23304A; --dm-text: #E6EDF7; --dm-muted: #8B9AB5; --dm-disabled-text: #5A6B8C; --dm-accent: #5eead4; --dm-ring: #C9D6EA; --dm-station: #7cc0ff;
+        background: var(--dm-page); }
+    .dark-base .leaflet-tile-pane {
+        filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
+    .dark-base .map-btn { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base .map-btn:hover { background: var(--dm-surface-hover); }
+    /* These two selectors match on the LIGHT ring and station colours, which
+       is only safe because each is used nowhere else on the map. Both the
+       selector and the drawing code below read the same LIGHT value, so they
+       cannot drift apart - changing one used to silently break the other. */
+    .dark-base path.leaflet-interactive[stroke="#2c3e50"] { stroke: var(--dm-ring); }
+    .dark-base path.leaflet-interactive[stroke="#1a5490"] {
+        stroke: var(--dm-station); fill: var(--dm-station); }
+    .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
+    .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
+    /* NO FILTER on a line label: a brightness() filter here once lifted the
+       halo with the text, so the dark page colour rendered #132039 and every
+       contrast figure measured a halo nobody saw. Each label carries its own
+       dark-theme colour in --dm-label instead (pipeline/linecolour.py,
+       "LINE LABELS"), read at 4.5:1 against exactly this halo. */
+    .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
+        text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page),
+                     -1px 1px 0 var(--dm-page), 1px 1px 0 var(--dm-page),
+                     0 0 6px var(--dm-page) !important; }
+    .dark-base .hm-line-label { color: var(--dm-label) !important; }
+    .dark-base .map-legend { background: var(--dm-surface) !important;
+        color: var(--dm-text) !important; border-color: var(--dm-border) !important; }
+    .dark-base .leaflet-bar, .dark-base .leaflet-control-layers {
+        border: 1px solid var(--dm-border); box-shadow: none; }
+    .dark-base .leaflet-bar a, .dark-base .leaflet-control-layers {
+        background-color: var(--dm-surface); color: var(--dm-text); }
+    .dark-base .leaflet-bar a { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-bar a:hover, .dark-base .leaflet-bar a:focus {
+        background-color: var(--dm-surface-hover); }
+    .dark-base .leaflet-bar a.leaflet-disabled {
+        background-color: var(--dm-surface-disabled); color: var(--dm-disabled-text); }
+    .dark-base .leaflet-control-layers-toggle { filter: invert(1); }
+    .dark-base .leaflet-control-layers-separator { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-control-attribution { background: rgba(11, 18, 32, 0.8); color: var(--dm-muted); }
+    .dark-base .leaflet-control-attribution a { color: var(--dm-accent); }
+    .dark-base .leaflet-tooltip { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .dark-base .leaflet-tooltip-top:before { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-bottom:before { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-left:before { border-left-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-right:before { border-right-color: var(--dm-border); }
+</style>
+<div id="map-actions">
+    <select id="city-menu" class="map-btn" hidden aria-label="Go to another city">
+        <option value="" selected disabled>Cities</option>
+    </select>
+    <button id="back-to-map" class="map-btn" type="button" hidden
+        aria-label="Back to the Global View map">&larr; Global View</button>
+    <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
+</div>
+<script>
+(function () {
+    var KEY = 'expanded-heatmap-theme';
+    var btn = document.getElementById('theme-toggle');
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function apply(dark) {
+        document.body.classList.toggle('dark-base', dark);
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        btn.textContent = dark ? '\u2600 Light mode' : '\u263E Dark mode';
+    }
+
+    function ambientPrefersDark() {
+        try {
+            if (window.parent !== window) {
+                var bg = window.parent.getComputedStyle(
+                    window.parent.document.body).backgroundColor;
+                var n = bg && bg.match(/[\d.]+/g);
+                if (n && n.length >= 3) {
+                    var alpha = n.length > 3 ? parseFloat(n[3]) : 1;
+                    if (alpha > 0.1) {          // transparent tells us nothing
+                        // Perceived brightness, 0-255; a binary decision does
+                        // not need full WCAG gamma expansion.
+                        var b = 0.299 * +n[0] + 0.587 * +n[1] + 0.114 * +n[2];
+                        return b < 128;
+                    }
+                }
+            }
+        } catch (e) { /* cross-origin or no parent: fall through */ }
+        return !!(window.matchMedia
+                  && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+
+    // A remembered click wins; otherwise follow the surrounding page, so a map
+    // embedded in a dark app page does not open as a white rectangle.
+    var choice = saved();
+    apply(choice === 'dark' || choice === 'light'
+          ? choice === 'dark'
+          : ambientPrefersDark());
+    btn.addEventListener('click', function () {
+        var dark = !document.body.classList.contains('dark-base');
+        apply(dark);
+        save(dark ? 'dark' : 'light');
+    });
+    window.addEventListener('storage', function (e) {
+        if (e.key === KEY) apply(e.newValue === 'dark');
+    });
+    // Follow the OS preference while the visitor has made no explicit choice.
+    // NOTE: devtools colour-scheme emulation updates matchMedia().matches
+    // WITHOUT dispatching this event inside an iframe, so this listener can
+    // only be tested with a real OS theme switch (docs/theming.md).
+    if (window.matchMedia) {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq.addEventListener) {
+            mq.addEventListener('change', function (e) {
+                if (!saved()) apply(e.matches);
+            });
+        }
+    }
+
+    // "Global View" button: only when this map is embedded in the app (it has a
+    // parent page to go back to); opened on its own it stays hidden. It clicks
+    // the app's own link to the Overview, so Streamlit navigates in place, and
+    // saves the current theme first so the macro map opens in the same mode.
+    var back = document.getElementById('back-to-map');
+    function trimSlash(p) { while (p.length > 1 && p.charAt(p.length - 1) === '/') p = p.slice(0, -1); return p; }
+    function overviewLink() {
+        var doc = window.parent.document, links = doc.querySelectorAll('a[href]');
+        for (var i = 0; i < links.length; i++) {          // the page's own link to the Overview:
+            var t = links[i].textContent;                 // hidden "All cities", switcher "Global View"
+            if (t.indexOf('All cities') !== -1 || t.indexOf('Global View') !== -1) return links[i];
+        }
+        var here = window.parent.location.pathname;      // else the link to the app's root
+        var root = trimSlash(here.substring(0, here.lastIndexOf('/') + 1));
+        for (var j = 0; j < links.length; j++) {
+            if (trimSlash(links[j].pathname) === root) return links[j];
+        }
+        return null;
+    }
+    // City menu: the other cities, read from the hidden links the app page renders
+    // (one per city, from app/cities.py), so a new city appears here without
+    // regenerating any map. The city this page belongs to is left out.
+    var menu = document.getElementById('city-menu');
+    function cityLinks() {
+        var box = window.parent.document.querySelector('.st-key-map-only-nav');
+        var out = [];
+        if (!box) return out;
+        var links = box.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].textContent.indexOf('All cities') === -1) out.push(links[i]);
+        }
+        return out;
+    }
+    // Identify "which page is this" by PAGE SLUG, not by display label.
+    //
+    // This used to derive a city name from the URL ("/Miami_Heatmap" -> "Miami")
+    // and compare it to the link's text. That breaks as soon as a city's
+    // display name is not its filename: Miami's label is "Miami (Regional)",
+    // so the comparison never matched and Miami's own map listed Miami in its
+    // "Cities" dropdown. Comparing slug to slug is immune to the label, which
+    // matters because a regional map's name will keep diverging from its
+    // filename (a Seattle build spanning twelve municipalities is the next).
+    function lastSegment(path) {
+        var parts = String(path || '').split('?')[0].split('#')[0]
+            .split('/').filter(Boolean);
+        return decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
+    }
+    function fillMenu() {
+        if (menu.options.length > 1) return;    // already built
+        var here = lastSegment(window.parent.location.pathname);
+        var links = cityLinks();
+        for (var i = 0; i < links.length; i++) {
+            var name = links[i].textContent.trim();
+            if (lastSegment(links[i].getAttribute('href')) === here) continue;
+            var o = document.createElement('option');
+            o.value = name; o.textContent = name;
+            menu.appendChild(o);
+        }
+        menu.hidden = menu.options.length < 2;
+    }
+    function goTo(link) {
+        save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
+        if (link) link.click();
+    }
+    if (window.parent !== window) {
+        back.hidden = false;
+        back.addEventListener('click', function () { goTo(overviewLink()); });
+        fillMenu();
+        setTimeout(fillMenu, 800);              // the page's links may render just after this frame
+        setTimeout(fillMenu, 2500);
+        menu.addEventListener('mousedown', fillMenu);
+        menu.addEventListener('change', function () {
+            var links = cityLinks(), want = menu.value, hit = null;
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].textContent.trim() === want) hit = links[i];
+            }
+            menu.selectedIndex = 0;
+            goTo(hit);
+        });
+    }
+})();
+</script>
+    
+<script>
+(function () {
+    var MAP_W = 1000, MAP_H = 650;
+    var BOUNDS = [[56.48181625, 21.00543675], [56.5255611, 21.0302669]];            // [[south, west], [north, east]]
+    var NAME = "map_54408190d96eef09238ea11bdd3e5a31";
+    var tries = 0;
+    // The view Folium baked in, captured before any fit runs. apply() restores
+    // it when the map returns to full width - see the else branch there.
+    var HOME = null;
+    // The width the CURRENT view was fitted for, which is not the same thing as
+    // the container's width. See apply(): a view fitted while the container was
+    // still laying out stays wrong until something notices the mismatch, and
+    // comparing widths alone cannot notice it.
+    var FITTED_AT = null;
+
+    // THE GUARD - owner's decision 2026-09-23, after the same race surfaced a
+    // THIRD way. Edmonton (2026-09-21) and Paris (2026-09-23 morning) were each
+    // fixed at the point where they broke; that afternoon Lille's embedded map
+    // loaded at zoom 8.25 against a baked 11.75 - Edmonton's exact number - and
+    // a reload fixed it. Four further loads would not reproduce it. A race that
+    // cannot be reproduced on demand cannot be fixed one trigger at a time, so
+    // this stops chasing triggers and checks the OUTCOME instead: until the
+    // reader touches the map, the view is compared with what it should be for
+    // the frame's current width, and re-fitted when it is not.
+    //
+    // "What it should be" is exactly what apply() produces - HOME at full
+    // width, fitBounds(BOUNDS, padding 26/18 each side) when narrow - computed
+    // with getBoundsZoom rather than by calling fitBounds, so a correct view is
+    // never touched and the common case stays pixel-identical.
+    //
+    // TOUCHED ends it for good. Any pointer, wheel, touch or key event inside
+    // the map means the reader is steering, and a guard that restored the
+    // view under them would be a new bug. Captured on the container, so the
+    // zoom buttons, the pins and the in-map controls all count.
+    //
+    // __HEATMAP_VIEW is read by scripts/check_map_view.js. It exposes the
+    // INPUTS (home, bounds, padding) as well as the guard's own bookkeeping, so
+    // the check can recompute the expected zoom independently instead of
+    // trusting the thing it is checking.
+    var TOUCHED = false;
+    var PAD = [26, 18];
+    var VIEW = window.__HEATMAP_VIEW = {
+        bounds: BOUNDS, mapW: MAP_W, padding: PAD, home: null,
+        expected: null, actual: null, touched: false, corrections: 0};
+
+    function wantedZoom(m, target) {
+        if (target < MAP_W && BOUNDS) {
+            return m.getBoundsZoom(L.latLngBounds(BOUNDS), false,
+                                   L.point(2 * PAD[0], 2 * PAD[1]));
+        }
+        return HOME ? HOME.zoom : null;
+    }
+
+    function guard(m) {
+        if (TOUCHED || !HOME) return;
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        if (!target) return;
+        var want = wantedZoom(m, target);
+        VIEW.expected = want;
+        VIEW.actual = m.getZoom();
+        if (want === null || Math.abs(m.getZoom() - want) < 0.01) return;
+        VIEW.corrections += 1;
+        FITTED_AT = null;   // make apply() re-fit instead of trusting the width
+        apply(m);
+        VIEW.actual = m.getZoom();
+    }
+
+    function armGuard(m) {
+        var el = m.getContainer();
+        ["pointerdown", "mousedown", "touchstart", "wheel", "keydown"].forEach(
+            function (ev) {
+                el.addEventListener(ev, function () {
+                    TOUCHED = true;
+                    VIEW.touched = true;
+                }, {capture: true, passive: true});
+            });
+        // Bounded polling for the load itself - every earlier variant of the
+        // race resolved or struck inside the first seconds...
+        var ticks = 0;
+        var iv = setInterval(function () {
+            guard(m);
+            if (TOUCHED || ++ticks >= 40) clearInterval(iv);
+        }, 500);
+        // ...and event triggers for everything slower: a page opened in a
+        // background tab (timers throttled, layout late), an embed below the
+        // fold, a bfcache restore.
+        document.addEventListener("visibilitychange", function () {
+            if (!document.hidden) guard(m);
+        });
+        window.addEventListener("pageshow", function () { guard(m); });
+        if (window.IntersectionObserver) {
+            new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) guard(m);
+            }).observe(el);
+        }
+    }
+
+    // Folium renders body HTML before the figure's script block, so this runs
+    // before the map exists - poll for it rather than assuming.
+    function ready() {
+        var m = window[NAME];
+        if (m && m.invalidateSize) return m;
+        return null;
+    }
+
+    function apply(m) {
+        var el = m.getContainer();
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        // A ZERO TARGET IS ALWAYS A BAD MEASUREMENT, NEVER A REAL WIDTH.
+        //
+        // Added 2026-09-23 after Paris rendered BLANK on first load, with
+        // `width: 0px` written onto the container and Leaflet.heat throwing
+        // "IndexSizeError: getImageData ... source width is 0". A pass that
+        // runs before the document has laid out reads clientWidth 0, and the
+        // old code wrote that straight through.
+        //
+        // It is the same RACE the else branch below documents for Edmonton -
+        // intermittent, not specific to a city, and the same page reloaded
+        // rendered correctly - but this manifestation is worse: a narrow fit
+        // is a bad view, a zero width is no map at all plus a console error.
+        // Paris is the city that exposed it because it is the heaviest map
+        // here (84,125 points), which widens the window before layout settles.
+        //
+        // Returning leaves the container alone for the later passes - immediate,
+        // rAF, 120 ms, 400 ms, 1200 ms and resize - one of which measures a
+        // laid-out document. Correct renders are untouched, because `target` is
+        // only 0 when the measurement is meaningless.
+        if (!target) return;
+        // THE EARLY RETURN USED TO BE A CORRECTNESS BUG, not just an
+        // optimisation. It read "the width already matches, so there is
+        // nothing to do" - but the VIEW can be wrong while the WIDTH is right.
+        //
+        // Observed on the deployed site 2026-09-23, on Paris: the embedded map
+        // sat at zoom 9 against its baked 12.5, showing the whole Ile-de-France
+        // with every line label flung to the frame edges. Sequence: an early
+        // pass measured the container mid-layout at some narrow width and
+        // fitted BOUNDS for THAT width; a later pass found the container now at
+        // its real 854 px, matched `target`, and returned - so the zoom from
+        // the narrow fit was never undone. Intermittent, and it survived the
+        // 2026-09-21 fix because that one only added an `else` branch AFTER
+        // this return.
+        //
+        // So the state that matters is "what width was the current view fitted
+        // for", not "what width is the container". FITTED_AT records it, and a
+        // mismatch re-fits even when the width needs no change.
+        var atWidth = Math.abs(el.getBoundingClientRect().width - target) < 1;
+        if (atWidth && FITTED_AT === target) return;
+        if (!atWidth) {
+            el.style.width = target + "px";
+            document.body.style.width = target + "px";
+            m.invalidateSize();
+        }
+        FITTED_AT = target;
+        if (target < MAP_W && BOUNDS) {
+            // Generous padding because BOUNDS holds label ANCHORS, and a label's
+            // text box extends past its anchor by up to ~70px.
+            // PAD, not a literal: the guard computes the zoom this call lands
+            // on, and a padding that drifted between the two would make it
+            // "correct" a right view forever.
+            m.fitBounds(L.latLngBounds(BOUNDS), {padding: PAD, animate: false});
+        } else if (HOME) {
+            // BACK AT FULL WIDTH, AND THIS BRANCH IS A BUG FIX, NOT SYMMETRY.
+            //
+            // Until 2026-09-21 there was no else. A pass that ran while the
+            // iframe was still laying out measured a narrow clientWidth,
+            // fitted BOUNDS at that width - which is a much lower zoom - and
+            // then the later full-width pass restored the WIDTH and left the
+            // ZOOM alone, because re-fitting was conditional on being narrow.
+            // Nothing afterwards ever corrected it, so the map sat at the
+            // narrow-width zoom at full width: Edmonton was caught embedded at
+            // zoom 8.25 against its baked 11.5, showing the whole region with
+            // every pin in one cluster. It is a RACE, so it is intermittent and
+            // not specific to a city - the same page reloaded rendered
+            // correctly, and Calgary's rendered correctly alongside the broken
+            // Edmonton.
+            //
+            // Restoring HOME rather than re-fitting BOUNDS is deliberate:
+            // Folium's baked view is what every full-width map has always
+            // shown, and a runtime fitBounds lands a quarter-step tighter
+            // (Edmonton 11.75 against 11.5). So this repairs the broken case
+            // and leaves the normal one pixel-identical.
+            m.setView(HOME.center, HOME.zoom, {animate: false});
+        }
+    }
+
+    function start() {
+        var m = ready();
+        if (!m) {
+            if (tries++ < 60) return setTimeout(start, 100);
+            return;
+        }
+        // Before the first apply(), so this is Folium's own fitted view and not
+        // something a narrow-width pass has already moved.
+        if (!HOME) {
+            HOME = {center: m.getCenter(), zoom: m.getZoom()};
+            VIEW.home = {center: [HOME.center.lat, HOME.center.lng], zoom: HOME.zoom};
+        }
+        // Applied more than once on purpose. At load the 1000px-wide map forces
+        // a horizontal scrollbar, which costs enough height to force a vertical
+        // one, so `clientWidth` reads ~15px short; once the first pass has
+        // shrunk the container both scrollbars go away and the measurement is
+        // right, but no resize event is dispatched to notice that. The later
+        // passes also settle a transient seen on the heaviest map at phone
+        // width, where the pane transform lagged a correct fit. apply() returns
+        // immediately once the width already matches, so the extra passes are
+        // free. (deploy-verify, 2026-09-21)
+        apply(m);
+        requestAnimationFrame(function () { apply(m); });
+        [120, 400, 1200].forEach(function (d) {
+            setTimeout(function () { apply(m); }, d);
+        });
+        var t = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(t);
+            t = setTimeout(function () { apply(m); guard(m); }, 150);
+        });
+        armGuard(m);
+    }
+    start();
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_54408190d96eef09238ea11bdd3e5a31";
+    var MARGIN = 6;     // px kept between a label's text and the frame edge
+    var GAP = 4;        // px between a re-placed label and its line's tip
+    var CLEAR = 2;      // px a label keeps from a button, control or legend
+    var PASSES = 4;
+    var tries = 0;
+
+    function box(x0, y0, x1, y1) { return {x0: x0, y0: y0, x1: x1, y1: y1}; }
+    function shift(b, sx, sy) { return box(b.x0 + sx, b.y0 + sy, b.x1 + sx, b.y1 + sy); }
+    function area(a, b) {
+        var w = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+        var h = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+        return w > 0 && h > 0 ? w * h : 0;
+    }
+
+    // What a label must stay clear of, in the map container's coordinates:
+    // the fixed "Global View"/theme buttons, Leaflet's own top-left controls,
+    // and the legend while it is COLLAPSED. An open legend is the reader's
+    // choice to cover part of the map; shuffling labels out from under it
+    // would only crowd them elsewhere.
+    function obstacles(m) {
+        var c = m.getContainer(), mr = c.getBoundingClientRect(), out = [];
+        function add(el) {
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            if (r.width && r.height) {
+                out.push(box(r.left - mr.left, r.top - mr.top,
+                             r.right - mr.left, r.bottom - mr.top));
+            }
+        }
+        add(document.getElementById("map-actions"));
+        var legend = document.querySelector("details.map-legend");
+        if (legend && !legend.open) add(legend);
+        c.querySelectorAll(".leaflet-top.leaflet-left .leaflet-control").forEach(add);
+        return out;
+    }
+
+    function place(m) {
+        var size = m.getSize();
+        if (!size.x || !size.y) return;
+        // Never slide a label ONTO the basemap credit, which must stay
+        // visible (ODbL). The credit is a strip along the bottom edge, so the
+        // bottom limit clears its height as well as MARGIN.
+        var att = m.getContainer().querySelector(".leaflet-control-attribution");
+        var bottom = size.y - MARGIN - (att ? att.getBoundingClientRect().height : 0);
+        function inside(b) {
+            var dx = Math.max(0, MARGIN - b.x0) - Math.max(0, b.x1 - (size.x - MARGIN));
+            var dy = Math.max(0, MARGIN - b.y0) - Math.max(0, b.y1 - bottom);
+            return [dx, dy];
+        }
+
+        // 1. Every label at its baked position, slid inside the frame if it
+        //    would be cut - exactly as before this placer existed.
+        var labels = [];
+        m.eachLayer(function (layer) {
+            if (!layer._icon || !layer.getLatLng) return;
+            var d = layer._icon.querySelector(".hm-line-label");
+            if (!d) return;
+            if (d.dataset.base === undefined) d.dataset.base = d.style.transform;
+            d.style.transform = d.dataset.base;
+            var i = layer._icon.getBoundingClientRect();
+            var r = d.getBoundingClientRect();
+            if (!r.width) return;
+            var p = m.latLngToContainerPoint(layer.getLatLng());
+            if (p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y) return;
+            var base = box(p.x + (r.left - i.left), p.y + (r.top - i.top),
+                           p.x + (r.right - i.left), p.y + (r.bottom - i.top));
+            var s = inside(base);
+            labels.push({d: d, p: p, base: base, sx: s[0], sy: s[1],
+                         b: shift(base, s[0], s[1])});
+        });
+
+        // 2. Re-place only a label that overlaps another label or an obstacle,
+        //    trying spots around its own line's tip, so it still names that
+        //    line. A label that collides with nothing never moves, so a map
+        //    that was already clean - every desktop view - is unchanged.
+        var obs = obstacles(m);
+        function cost(L, b) {
+            var c = 0;
+            labels.forEach(function (o) {
+                if (o !== L) c += area(b, box(o.b.x0 - 1, o.b.y0 - 1, o.b.x1 + 1, o.b.y1 + 1));
+            });
+            // Obstacles count with CLEAR px of margin: Edmonton's Valley Line
+            // tip sits under the collapsed legend, and the best spot beside it
+            // still overlapped the legend by one pixel - which reads as
+            // touching and which the check rightly refuses.
+            obs.forEach(function (o) {
+                c += area(b, box(o.x0 - CLEAR, o.y0 - CLEAR, o.x1 + CLEAR, o.y1 + CLEAR));
+            });
+            return c;
+        }
+        function candidates(L) {
+            var b = L.base, p = L.p;
+            var w = b.x1 - b.x0, h = b.y1 - b.y0;
+            var cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+            var at = function (x, y) { return [x - cx, y - cy]; };
+            return [
+                [2 * (p.x - cx), 0],                       // mirrored across the tip
+                [0, 2 * (p.y - cy)],
+                at(p.x, p.y - h / 2 - GAP),                // above the tip
+                at(p.x, p.y + h / 2 + GAP),                // below
+                at(p.x + w / 2 + GAP, p.y),                // right
+                at(p.x - w / 2 - GAP, p.y),                // left
+                [2 * (p.x - cx), 2 * (p.y - cy)],
+                at(p.x, p.y - 1.5 * h - 2 * GAP),          // a step further out
+                at(p.x, p.y + 1.5 * h + 2 * GAP),
+                at(p.x + w / 2 + GAP, p.y - h / 2 - GAP),  // the four diagonals
+                at(p.x - w / 2 - GAP, p.y - h / 2 - GAP),
+                at(p.x + w / 2 + GAP, p.y + h / 2 + GAP),
+                at(p.x - w / 2 - GAP, p.y + h / 2 + GAP),
+                at(p.x, p.y - 2.5 * h - 3 * GAP),          // for a tip buried
+                at(p.x, p.y + 2.5 * h + 3 * GAP)           // under an obstacle
+            ];
+        }
+        for (var pass = 0; pass < PASSES; pass++) {
+            var moved = false;
+            labels.forEach(function (L) {
+                var best = cost(L, L.b);
+                if (!best) return;
+                candidates(L).forEach(function (c) {
+                    if (!best) return;
+                    var b = shift(L.base, c[0], c[1]);
+                    var s = inside(b);
+                    b = shift(b, s[0], s[1]);
+                    var k = cost(L, b);
+                    if (k < best) {
+                        best = k; L.b = b;
+                        L.sx = c[0] + s[0]; L.sy = c[1] + s[1];
+                        moved = true;
+                    }
+                });
+            });
+            if (!moved) break;
+        }
+
+        labels.forEach(function (L) {
+            if (L.sx || L.sy) {
+                L.d.style.transform = L.d.dataset.base + " translate(" +
+                    L.sx.toFixed(1) + "px, " + L.sy.toFixed(1) + "px)";
+            }
+        });
+    }
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getSize) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        m.on("moveend zoomend resize viewreset", function () { place(m); });
+        // The collapsed legend is an obstacle and the open one is not, so a
+        // reader opening or closing it re-runs the placement.
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", function () { place(m); });
+        place(m);
+    }
+    start();
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_54408190d96eef09238ea11bdd3e5a31";
+    // One event of at least this many normalised units (L.DomEvent.
+    // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
+    // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
+    // few units each.
+    var NOTCH = 25;
+
+    function install(m) {
+        var h = m.scrollWheelZoom;
+        if (!h) return;
+        // Re-registering is the only way in: Leaflet bound the listener to the
+        // handler's own _onWheelScroll when it enabled it.
+        var was = h.enabled();
+        h.disable();
+        h._onWheelScroll = function (e) {
+            var delta = L.DomEvent.getWheelDelta(e);
+            this._delta += delta;
+            this._maxEvent = Math.max(this._maxEvent || 0, Math.abs(delta));
+            this._lastMousePos = this._map.mouseEventToContainerPoint(e);
+            if (!this._startTime) this._startTime = +new Date();
+            var left = Math.max(this._map.options.wheelDebounceTime -
+                                (+new Date() - this._startTime), 0);
+            clearTimeout(this._timer);
+            this._timer = setTimeout(L.bind(this._performZoom, this), left);
+            L.DomEvent.stop(e);
+        };
+        h._performZoom = function () {
+            var map = this._map;
+            if (map._animatingZoom) {
+                clearTimeout(this._timer);
+                this._timer = setTimeout(L.bind(this._performZoom, this), 20);
+                return;
+            }
+            var zoom = map.getZoom(), step;
+            map._stop();
+            if (this._maxEvent >= NOTCH) {
+                step = Math.min(Math.max(Math.round(Math.abs(this._delta) / this._maxEvent), 1),
+                                map.options.zoomAnimationThreshold);
+            } else {
+                // Leaflet 1.9's own curve and snap, verbatim.
+                var snap = map.options.zoomSnap || 0,
+                    d2 = this._delta / (map.options.wheelPxPerZoomLevel * 4),
+                    d3 = 4 * Math.log(2 / (1 + Math.exp(-Math.abs(d2)))) / Math.LN2;
+                step = snap ? Math.ceil(d3 / snap) * snap : d3;
+            }
+            var delta = map._limitZoom(zoom + (this._delta > 0 ? step : -step)) - zoom;
+            this._delta = 0;
+            this._maxEvent = 0;
+            this._startTime = null;
+            if (!delta) return;
+            if (map.options.scrollWheelZoom === "center") map.setZoom(zoom + delta);
+            else map.setZoomAround(this._lastMousePos, zoom + delta);
+        };
+        if (was) h.enable();
+    }
+
+    // Folium's map script is inline at the end of the body, so the map exists
+    // once parsing is done.
+    function start() { if (window[NAME]) install(window[NAME]); }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+    
+            <div class="folium-map" id="map_54408190d96eef09238ea11bdd3e5a31" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_54408190d96eef09238ea11bdd3e5a31 = L.map(
+                "map_54408190d96eef09238ea11bdd3e5a31",
+                {
+                    center: [56.503688674999985, 21.017851825000008],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13.25,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "zoomSnap": 0.25,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_61abd433960bced2bf9573a9087472bc = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_61abd433960bced2bf9573a9087472bc.addTo(map_54408190d96eef09238ea11bdd3e5a31);
+        
+    
+            var heat_map_a3fef7c5e4185fa1c553936a49d6526f = L.heatLayer(
+                JSON.parse("[[56.512687,21.007149],[56.503319,21.00986],[56.505488,21.011362],[56.506156,21.011699],[56.510902,21.006581],[56.50705,21.012344],[56.511229,21.01704],[56.504336,21.009266],[56.509903,21.014883],[56.504996,21.009562],[56.519011,21.018008],[56.511388,21.010627],[56.51495,21.018325],[56.49178,21.003773],[56.50705,21.012344],[56.486687,21.00508],[56.51276,21.007669],[56.511388,21.010627],[56.505113,21.011101],[56.507529,21.008362],[56.509743,21.011953],[56.508472,21.015134],[56.514404,21.014266],[56.514404,21.014266],[56.514404,21.014266],[56.486096,21.017132],[56.510666,21.01389],[56.509408,21.005149],[56.507489,21.010697],[56.51495,21.018325],[56.520637,21.016664],[56.509596,21.009629],[56.504418,21.013873],[56.504418,21.013873],[56.508851,21.013366],[56.512412,21.011551],[56.512412,21.011551],[56.517589,21.014603],[56.509157,21.012386],[56.509157,21.012386],[56.507489,21.010697],[56.481576,21.014031],[56.507745,21.012525],[56.507433,21.009462],[56.521343,21.019249],[56.505612,21.008096],[56.483188,21.017299],[56.505816,21.010968],[56.509743,21.011953],[56.510575,21.012902],[56.511443,21.005615],[56.516079,21.012995],[56.511038,21.01431],[56.506265,21.000761],[56.508793,21.009262],[56.510341,21.013441],[56.50621,21.015238],[56.507784,21.008231],[56.511038,21.01431],[56.508169,21.003342],[56.506466,20.999372],[56.504047,21.00795],[56.498227,21.005125],[56.510866,21.007476],[56.51071,21.012627],[56.511717,21.009299],[56.511717,21.009299],[56.5116,21.008826],[56.512548,21.010247],[56.51242,21.008587],[56.512548,21.010247],[56.50509,21.004948],[56.503871,21.012492],[56.506272,21.008864],[56.509886,21.006623],[56.512233,21.015948],[56.507296,21.012244],[56.517603,21.011417],[56.509788,21.00735],[56.502782,21.007723],[56.509743,21.011953],[56.509792,21.010082],[56.501495,21.007347],[56.506496,21.009108],[56.506047,21.008623],[56.507762,21.014142],[56.51071,21.012627],[56.506047,21.008623],[56.510244,21.009655],[56.505757,21.008985],[56.51276,21.007669],[56.519011,21.018008],[56.515315,21.016602],[56.483162,21.015361],[56.497746,21.006343],[56.506511,21.009075],[56.510124,21.006352],[56.48374,21.017851],[56.487707,21.004989],[56.508304,21.005691],[56.511602,21.016611],[56.482674,21.019871],[56.519811,21.013888],[56.508775,21.009328],[56.510018,21.010203],[56.519662,21.013648],[56.508448,21.01349],[56.509712,21.011765],[56.518716,21.012914],[56.490237,21.005122],[56.509356,21.00691],[56.508775,21.009328],[56.506511,21.009075],[56.5094,21.008351],[56.50354,21.00922],[56.508999,21.007674],[56.487707,21.004989],[56.511602,21.016611],[56.519511,21.013279],[56.48374,21.017851],[56.482416,21.02127],[56.487707,21.004989],[56.518716,21.012914],[56.503104,21.008217],[56.510351,21.009563],[56.48374,21.017851],[56.504044,21.007909],[56.501026,21.001844],[56.48374,21.017851],[56.505878,21.011856],[56.505878,21.011856],[56.500969,21.00582],[56.506017,21.005861],[56.482416,21.02127],[56.511506,21.014653],[56.5067,21.0102],[56.505922,21.00239],[56.483401,21.024419],[56.5094,21.008351],[56.505014,21.010609],[56.503751,21.010384],[56.506886,21.007539],[56.508775,21.009328],[56.508775,21.009328],[56.510018,21.010203],[56.48374,21.017851],[56.5094,21.008351],[56.506026,21.008622],[56.509712,21.011765],[56.50621,21.006586],[56.50979,21.010074],[56.509712,21.011765],[56.519768,21.016367],[56.508775,21.009328],[56.517727,21.017701],[56.503032,21.008593],[56.510124,21.006352],[56.510571,21.012887],[56.502876,21.009326],[56.483098,21.017938],[56.5094,21.008351],[56.509712,21.011765],[56.504995,21.01045],[56.50354,21.00922],[56.510018,21.010203],[56.508,21.015498],[56.526049,21.014364],[56.519155,21.012358],[56.511493,21.012774],[56.510124,21.006352],[56.5094,21.008351],[56.508556,21.017137],[56.51594,21.009789],[56.508103,21.014148],[56.506886,21.007539],[56.48374,21.017851],[56.506442,21.015318],[56.482416,21.02127],[56.510931,21.013172],[56.510722,21.013192],[56.506287,21.008844],[56.50962,21.006827],[56.48374,21.017851],[56.48374,21.017851],[56.483221,21.021029],[56.481817,21.024546],[56.511602,21.016611],[56.51149,21.013596],[56.510931,21.013172],[56.52478,21.029421],[56.509712,21.011765],[56.505787,21.005509],[56.515454,21.016668],[56.50962,21.006827],[56.505014,21.010609],[56.502225,21.002562],[56.504995,21.01045],[56.482674,21.019871],[56.49066,21.005107],[56.48374,21.017851],[56.48374,21.017851],[56.504184,21.010554],[56.5094,21.008351],[56.504184,21.010554],[56.518583,21.013116],[56.510077,21.008404],[56.506026,21.008622],[56.515787,21.016664],[56.50979,21.010074],[56.510931,21.013172],[56.482674,21.019871],[56.508453,21.007714],[56.506026,21.008622],[56.518045,21.013919],[56.510124,21.006352],[56.488622,21.002853],[56.504184,21.010554],[56.505915,21.002004],[56.48374,21.017851],[56.509282,21.003789],[56.519795,21.015783],[56.508999,21.007674],[56.502495,21.007402],[56.518142,21.014395],[56.50619,21.003502],[56.506013,21.012545],[56.50581,21.004945],[56.486629,21.005029],[56.5094,21.008351],[56.509894,21.006597],[56.50592,21.011536],[56.510514,21.005051],[56.501208,21.008113],[56.515635,21.013612],[56.517808,21.015298],[56.506106,21.004493],[56.516077,21.012983],[56.507455,21.010834],[56.50577,21.009278],[56.489606,21.00376],[56.509084,21.016931],[56.505741,21.009996],[56.506709,21.009816],[56.507386,21.01192],[56.50541,21.007964],[56.51204,21.021169],[56.506013,21.012545],[56.507386,21.01192],[56.504372,21.00998],[56.4861,21.017124],[56.487923,21.017553],[56.507338,21.012546],[56.502965,21.007574],[56.491688,21.003704],[56.507455,21.010834],[56.51863,21.024995],[56.498593,21.007952],[56.505797,21.011337],[56.504944,21.00883],[56.511495,21.008167],[56.504467,21.009727],[56.507455,21.010834],[56.512312,21.012164],[56.505775,21.010534],[56.483029,21.021863],[56.510514,21.005051],[56.50577,21.009278],[56.523995,21.011496],[56.50989,21.00706],[56.514542,21.019353],[56.504989,21.010738],[56.510395,21.00996],[56.505486,21.011342],[56.510914,21.00659],[56.5089,21.007944],[56.506258,21.011019],[56.507338,21.012546],[56.503947,21.009645],[56.503812,21.008312],[56.510688,21.012521],[56.50794,21.003804],[56.510355,21.010616],[56.508892,21.016793],[56.507338,21.012546],[56.505732,21.009804],[56.505466,21.008538],[56.505605,21.00809],[56.514022,21.018711],[56.513865,21.018651],[56.514165,21.018688],[56.523561,21.018866],[56.507338,21.012546],[56.50541,21.007964],[56.480732,21.026975],[56.521464,21.02706],[56.526787,21.032517],[56.498593,21.007952],[56.506276,21.009373],[56.487253,21.017283],[56.510622,21.008239],[56.484108,21.016287],[56.50541,21.007964],[56.50592,21.011536],[56.506512,21.009554],[56.511443,21.009229],[56.52338,21.026205],[56.52103,21.026311],[56.506512,21.009554],[56.505843,21.008817],[56.505078,21.011011],[56.519082,21.016193],[56.50592,21.011536],[56.515687,21.017991],[56.505304,21.009463],[56.520524,21.025478],[56.51991,21.014149],[56.51991,21.014149],[56.507143,21.007891],[56.500733,21.002319],[56.520524,21.025478],[56.485997,21.003397],[56.506709,21.009816],[56.523051,21.029763],[56.523051,21.029763],[56.507455,21.010834],[56.506721,21.014209],[56.517621,21.011466],[56.525853,21.011304],[56.507929,21.006136],[56.513668,21.018561],[56.518875,21.012735],[56.502282,21.012769],[56.499066,20.9994],[56.504834,21.009939],[56.506512,21.009554],[56.511294,21.008377],[56.523051,21.029763],[56.506013,21.012545],[56.505466,21.008538],[56.511235,21.017135],[56.505775,21.010534],[56.482471,21.007738],[56.510863,21.018517],[56.487375,21.004684],[56.491915,21.001981],[56.500259,21.012377],[56.509894,21.006597],[56.505602,21.008566],[56.508892,21.016793],[56.488026,21.017785],[56.522118,21.028214],[56.503985,21.009301],[56.507329,21.007382],[56.517566,21.012857],[56.505839,21.011094],[56.523624,21.020228],[56.507386,21.01192],[56.507455,21.010834],[56.517387,21.021507],[56.506918,21.006057],[56.491915,21.001981],[56.516001,21.014796],[56.515555,21.01328],[56.506556,21.010794],[56.52338,21.026205],[56.52044,21.01413],[56.508736,21.007564],[56.498593,21.007952],[56.525419,21.014577],[56.516817,21.014981],[56.506473,21.014128],[56.520524,21.025478],[56.506512,21.009554],[56.507452,21.011478],[56.482404,21.02476],[56.511852,21.018646],[56.501979,21.012276],[56.512459,21.009894],[56.500671,21.003237],[56.510595,21.006632],[56.516001,21.014796],[56.507455,21.010834],[56.509084,21.016931],[56.519115,21.014946],[56.50541,21.007964],[56.493529,21.00259],[56.505797,21.011337],[56.50989,21.00706],[56.48016,21.023141],[56.507338,21.012546],[56.510722,21.013192],[56.50989,21.00706],[56.512251,21.020617],[56.517428,21.011021],[56.505417,21.007616],[56.514216,21.012701],[56.505741,21.009996],[56.505842,21.012307],[56.523051,21.029763],[56.504372,21.00998],[56.507455,21.010834],[56.518066,21.009898],[56.525367,21.015378],[56.505909,21.008339],[56.50541,21.007964],[56.516272,21.020022],[56.51282,21.008968],[56.50558,21.008846],[56.520524,21.025478],[56.481829,21.02706],[56.513722,21.016926],[56.48283,21.017955],[56.508865,21.008172],[56.507386,21.01192],[56.513652,21.020154],[56.509818,21.007338],[56.501949,21.00566],[56.491069,21.006483],[56.506512,21.009554],[56.504761,21.009547],[56.524456,21.031147],[56.522118,21.028214],[56.524718,21.032254],[56.515635,21.013612],[56.523124,21.025549],[56.509461,21.010385],[56.509084,21.016931],[56.507338,21.012546],[56.505966,21.006265],[56.501762,21.008127],[56.514939,21.01816],[56.498972,21.010282],[56.50702,21.011912],[56.50665,21.011725],[56.510116,21.006871],[56.50558,21.008846],[56.509134,21.008352],[56.511852,21.018646],[56.484472,21.014752],[56.523604,21.016539],[56.505775,21.010534],[56.519128,21.02565],[56.483192,21.017253],[56.483321,21.016751],[56.511192,21.005868],[56.511852,21.018646],[56.491915,21.001981],[56.50541,21.007964],[56.515315,21.016602],[56.50913,21.016433],[56.486629,21.005029],[56.500799,21.002886],[56.506709,21.009816],[56.507162,21.008326],[56.513904,21.012999],[56.514451,21.018307],[56.506127,21.009101],[56.514165,21.018688],[56.510885,21.011857],[56.516916,21.011782],[56.521099,21.028503],[56.509762,21.009579],[56.50558,21.008846],[56.50791,21.008965],[56.510116,21.006871],[56.516001,21.014796],[56.507338,21.012546],[56.507338,21.012546],[56.506841,21.01051],[56.519511,21.013279],[56.510931,21.013172],[56.501026,21.001844],[56.510289,21.017339],[56.518896,21.015301],[56.510931,21.013172],[56.508775,21.009328],[56.49066,21.005107],[56.510931,21.013172],[56.511506,21.014653],[56.5094,21.008351],[56.51061,21.010193],[56.509981,21.009497],[56.508103,21.014148],[56.511493,21.012774],[56.506646,21.01556],[56.519768,21.016367],[56.510077,21.008404],[56.518583,21.013116],[56.506282,21.005502]]"),
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 18,
+  "radius": 8,
+  "blur": 10,
+  "gradient": {
+  0.3: "#FBB878",
+  0.5: "#F97316",
+  0.7: "#DE6412",
+  0.85: "#C0570F",
+  1.0: "#8F3A05",
+},
+}
+            );
+        
+    
+            heat_map_a3fef7c5e4185fa1c553936a49d6526f.addTo(map_54408190d96eef09238ea11bdd3e5a31);
+        
+    
+            var heat_map_3365a9a7ba25d77100853b9f746ce1ee = L.heatLayer(
+                JSON.parse("[[56.512687,21.007149],[56.503319,21.00986],[56.505488,21.011362],[56.506156,21.011699],[56.510902,21.006581],[56.50705,21.012344],[56.511229,21.01704],[56.504336,21.009266],[56.509903,21.014883],[56.504996,21.009562],[56.519011,21.018008],[56.511388,21.010627],[56.51495,21.018325],[56.49178,21.003773],[56.50705,21.012344],[56.486687,21.00508],[56.51276,21.007669],[56.511388,21.010627],[56.505113,21.011101],[56.507529,21.008362],[56.509743,21.011953],[56.508472,21.015134],[56.514404,21.014266],[56.514404,21.014266],[56.514404,21.014266],[56.534254,21.013694],[56.486096,21.017132],[56.510666,21.01389],[56.509408,21.005149],[56.507489,21.010697],[56.51495,21.018325],[56.533819,21.012208],[56.520637,21.016664],[56.509596,21.009629],[56.504418,21.013873],[56.504418,21.013873],[56.508851,21.013366],[56.512412,21.011551],[56.512412,21.011551],[56.53164,21.00314],[56.517589,21.014603],[56.509157,21.012386],[56.509157,21.012386],[56.507489,21.010697],[56.481576,21.014031],[56.507745,21.012525],[56.507433,21.009462],[56.521343,21.019249],[56.545412,21.018262],[56.505612,21.008096],[56.483188,21.017299],[56.533819,21.012208],[56.563764,21.017286],[56.505816,21.010968],[56.509743,21.011953],[56.506837,20.996582],[56.510575,21.012902],[56.511443,21.005615],[56.512373,21.028092],[56.516079,21.012995],[56.511038,21.01431],[56.506265,21.000761],[56.508793,21.009262],[56.510341,21.013441],[56.50621,21.015238],[56.503735,20.998893],[56.507784,21.008231],[56.510579,21.000476],[56.511038,21.01431],[56.510428,21.003615],[56.509394,20.997214],[56.510355,21.00308],[56.510395,20.998603],[56.508169,21.003342],[56.506466,20.999372],[56.510395,20.998603],[56.504047,21.00795],[56.498227,21.005125],[56.552566,21.016215],[56.510866,21.007476],[56.520074,21.005975],[56.51071,21.012627],[56.541621,21.053577],[56.504671,20.994687],[56.511717,21.009299],[56.511717,21.009299],[56.5116,21.008826],[56.514385,21.003352],[56.512548,21.010247],[56.51242,21.008587],[56.512548,21.010247],[56.50509,21.004948],[56.503871,21.012492],[56.506272,21.008864],[56.509886,21.006623],[56.512233,21.015948],[56.507296,21.012244],[56.517603,21.011417],[56.511632,21.003148],[56.501717,20.996131],[56.523823,21.005362],[56.509788,21.00735],[56.505711,20.995936],[56.502782,21.007723],[56.509743,21.011953],[56.516466,21.031804],[56.523823,21.005362],[56.509792,21.010082],[56.501495,21.007347],[56.506496,21.009108],[56.506047,21.008623],[56.507762,21.014142],[56.51071,21.012627],[56.506047,21.008623],[56.547893,21.006876],[56.490837,21.016939],[56.510244,21.009655],[56.505757,21.008985],[56.51276,21.007669],[56.519011,21.018008],[56.517974,20.989673],[56.552676,21.028551],[56.532476,21.003169],[56.515315,21.016602],[56.483162,21.015361],[56.497746,21.006343],[56.506511,21.009075],[56.510124,21.006352],[56.48374,21.017851],[56.487707,21.004989],[56.55375,21.012399],[56.52959,21.012202],[56.509802,20.998062],[56.508304,21.005691],[56.511602,21.016611],[56.482674,21.019871],[56.519811,21.013888],[56.508775,21.009328],[56.510018,21.010203],[56.52959,21.012202],[56.519662,21.013648],[56.508448,21.01349],[56.509712,21.011765],[56.518716,21.012914],[56.52959,21.012202],[56.490237,21.005122],[56.509356,21.00691],[56.508775,21.009328],[56.506511,21.009075],[56.5094,21.008351],[56.555139,21.098563],[56.50354,21.00922],[56.508999,21.007674],[56.487707,21.004989],[56.511602,21.016611],[56.519511,21.013279],[56.531889,21.008155],[56.531881,21.008868],[56.48374,21.017851],[56.545699,21.067755],[56.482416,21.02127],[56.487707,21.004989],[56.518716,21.012914],[56.503104,21.008217],[56.554054,21.017476],[56.510351,21.009563],[56.48374,21.017851],[56.504044,21.007909],[56.501026,21.001844],[56.48374,21.017851],[56.505878,21.011856],[56.528104,21.003191],[56.505878,21.011856],[56.500969,21.00582],[56.532685,21.009363],[56.506017,21.005861],[56.482416,21.02127],[56.511506,21.014653],[56.552785,21.03666],[56.5067,21.0102],[56.505922,21.00239],[56.483401,21.024419],[56.5094,21.008351],[56.549453,21.015636],[56.505014,21.010609],[56.503751,21.010384],[56.506886,21.007539],[56.508775,21.009328],[56.508775,21.009328],[56.510018,21.010203],[56.553455,21.009763],[56.48374,21.017851],[56.5094,21.008351],[56.506026,21.008622],[56.509712,21.011765],[56.50621,21.006586],[56.50979,21.010074],[56.509712,21.011765],[56.519768,21.016367],[56.535183,21.008089],[56.508775,21.009328],[56.517727,21.017701],[56.503032,21.008593],[56.508518,21.000308],[56.510124,21.006352],[56.531889,21.008155],[56.512286,20.998713],[56.510571,21.012887],[56.502876,21.009326],[56.554958,21.040964],[56.553063,21.01789],[56.544325,21.065867],[56.53666,21.003945],[56.483098,21.017938],[56.5094,21.008351],[56.527561,21.011316],[56.53666,21.003945],[56.509712,21.011765],[56.504995,21.01045],[56.50354,21.00922],[56.510018,21.010203],[56.508,21.015498],[56.554014,21.090371],[56.526049,21.014364],[56.519155,21.012358],[56.502924,21.017358],[56.511493,21.012774],[56.510124,21.006352],[56.5094,21.008351],[56.508556,21.017137],[56.553769,21.040675],[56.51594,21.009789],[56.508103,21.014148],[56.506886,21.007539],[56.48374,21.017851],[56.531541,21.003157],[56.552785,21.03666],[56.508722,21.001164],[56.554852,21.041797],[56.511514,20.998974],[56.506442,21.015318],[56.546152,21.0169],[56.482416,21.02127],[56.510931,21.013172],[56.510722,21.013192],[56.53666,21.003945],[56.530139,21.01279],[56.506287,21.008844],[56.50962,21.006827],[56.48374,21.017851],[56.500673,21.01717],[56.48374,21.017851],[56.483221,21.021029],[56.481817,21.024546],[56.511602,21.016611],[56.51149,21.013596],[56.510931,21.013172],[56.52478,21.029421],[56.509712,21.011765],[56.505787,21.005509],[56.515454,21.016668],[56.53085,21.008835],[56.50962,21.006827],[56.505014,21.010609],[56.502225,21.002562],[56.504995,21.01045],[56.482674,21.019871],[56.554536,21.039968],[56.49066,21.005107],[56.48374,21.017851],[56.48374,21.017851],[56.504184,21.010554],[56.5094,21.008351],[56.504184,21.010554],[56.518583,21.013116],[56.510077,21.008404],[56.506026,21.008622],[56.552785,21.03666],[56.515787,21.016664],[56.50979,21.010074],[56.510931,21.013172],[56.482674,21.019871],[56.508453,21.007714],[56.506026,21.008622],[56.518045,21.013919],[56.510124,21.006352],[56.554852,21.041797],[56.488622,21.002853],[56.547886,21.006888],[56.504184,21.010554],[56.505915,21.002004],[56.48374,21.017851],[56.509282,21.003789],[56.553568,21.013629],[56.531889,21.008155],[56.519795,21.015783],[56.513882,20.996208],[56.54385,21.066677],[56.509011,21.000898],[56.508999,21.007674],[56.509011,21.000898],[56.554852,21.041797],[56.502495,21.007402],[56.518142,21.014395],[56.50619,21.003502],[56.506013,21.012545],[56.50581,21.004945],[56.486629,21.005029],[56.5094,21.008351],[56.509894,21.006597],[56.50592,21.011536],[56.502365,21.019085],[56.55303,21.01636],[56.510514,21.005051],[56.536929,21.033819],[56.49069,21.016216],[56.501208,21.008113],[56.515635,21.013612],[56.54355,21.067795],[56.512078,21.025513],[56.548263,21.084692],[56.531525,21.009432],[56.541613,21.053582],[56.517808,21.015298],[56.506106,21.004493],[56.516077,21.012983],[56.507455,21.010834],[56.50577,21.009278],[56.545316,21.043603],[56.489606,21.00376],[56.503396,21.016318],[56.509084,21.016931],[56.532645,21.003936],[56.505741,21.009996],[56.501435,21.017678],[56.506709,21.009816],[56.507386,21.01192],[56.534236,21.013711],[56.50541,21.007964],[56.51204,21.021169],[56.506013,21.012545],[56.531587,21.011109],[56.507386,21.01192],[56.504372,21.00998],[56.4861,21.017124],[56.487923,21.017553],[56.507338,21.012546],[56.515235,21.025173],[56.502965,21.007574],[56.491688,21.003704],[56.517592,21.024459],[56.507455,21.010834],[56.51863,21.024995],[56.50437,20.996357],[56.498593,21.007952],[56.500984,20.996879],[56.532196,21.002396],[56.505797,21.011337],[56.504944,21.00883],[56.535199,21.012391],[56.511495,21.008167],[56.504467,21.009727],[56.492661,21.021117],[56.500913,21.017478],[56.507455,21.010834],[56.512312,21.012164],[56.532469,21.003171],[56.505775,21.010534],[56.507242,21.025079],[56.483029,21.021863],[56.510514,21.005051],[56.510959,21.004204],[56.50577,21.009278],[56.523995,21.011496],[56.529503,21.011327],[56.50989,21.00706],[56.514542,21.019353],[56.504989,21.010738],[56.55303,21.01636],[56.510395,21.00996],[56.505486,21.011342],[56.520467,21.00728],[56.53335,21.003579],[56.510914,21.00659],[56.5089,21.007944],[56.506258,21.011019],[56.517286,21.023311],[56.532469,21.003171],[56.524953,21.004316],[56.507338,21.012546],[56.503947,21.009645],[56.492661,21.021117],[56.546329,21.068426],[56.503812,21.008312],[56.510688,21.012521],[56.50794,21.003804],[56.546641,21.069186],[56.510355,21.010616],[56.508892,21.016793],[56.507338,21.012546],[56.505732,21.009804],[56.50698,21.021411],[56.489488,21.021964],[56.505466,21.008538],[56.505605,21.00809],[56.514022,21.018711],[56.513865,21.018651],[56.530938,21.044904],[56.514165,21.018688],[56.523561,21.018866],[56.507338,21.012546],[56.534472,21.05597],[56.536533,21.009565],[56.50541,21.007964],[56.529982,21.042556],[56.480732,21.026975],[56.521464,21.02706],[56.526787,21.032517],[56.498593,21.007952],[56.533195,21.012344],[56.498931,21.017139],[56.503534,21.018869],[56.506276,21.009373],[56.487253,21.017283],[56.510622,21.008239],[56.484108,21.016287],[56.50541,21.007964],[56.555746,21.040493],[56.50592,21.011536],[56.506512,21.009554],[56.511443,21.009229],[56.529711,21.044545],[56.52338,21.026205],[56.52103,21.026311],[56.552874,21.016367],[56.506512,21.009554],[56.505843,21.008817],[56.536218,21.055435],[56.552874,21.016367],[56.505078,21.011011],[56.519082,21.016193],[56.50592,21.011536],[56.552858,21.016559],[56.520147,21.006374],[56.515687,21.017991],[56.532645,21.003936],[56.505304,21.009463],[56.552174,21.036934],[56.520524,21.025478],[56.553266,21.016482],[56.51991,21.014149],[56.51991,21.014149],[56.503332,21.016762],[56.507143,21.007891],[56.500733,21.002319],[56.520524,21.025478],[56.485997,21.003397],[56.555595,21.008141],[56.506709,21.009816],[56.492661,21.021117],[56.492661,21.021117],[56.492661,21.021117],[56.523051,21.029763],[56.523051,21.029763],[56.536232,21.01912],[56.532032,21.002378],[56.507455,21.010834],[56.506721,21.014209],[56.517621,21.011466],[56.525853,21.011304],[56.554358,21.008017],[56.507929,21.006136],[56.532645,21.003936],[56.513668,21.018561],[56.518875,21.012735],[56.502282,21.012769],[56.499066,20.9994],[56.504834,21.009939],[56.506512,21.009554],[56.530075,21.014883],[56.511294,21.008377],[56.536218,21.055435],[56.523051,21.029763],[56.506013,21.012545],[56.505466,21.008538],[56.511235,21.017135],[56.507242,21.025079],[56.510959,21.004204],[56.534173,21.012834],[56.505775,21.010534],[56.482471,21.007738],[56.532418,21.015413],[56.510863,21.018517],[56.512108,21.021713],[56.487375,21.004684],[56.491915,21.001981],[56.500259,21.012377],[56.502365,21.019085],[56.509894,21.006597],[56.505602,21.008566],[56.508892,21.016793],[56.492661,21.021117],[56.488026,21.017785],[56.522118,21.028214],[56.503985,21.009301],[56.507329,21.007382],[56.504236,21.019543],[56.517566,21.012857],[56.505839,21.011094],[56.523624,21.020228],[56.507386,21.01192],[56.531525,21.009432],[56.534236,21.013711],[56.507455,21.010834],[56.517387,21.021507],[56.506918,21.006057],[56.491915,21.001981],[56.516001,21.014796],[56.552583,21.01519],[56.515555,21.01328],[56.490803,21.016907],[56.506556,21.010794],[56.52338,21.026205],[56.552874,21.016367],[56.52044,21.01413],[56.508736,21.007564],[56.505966,21.019404],[56.503332,21.016762],[56.498593,21.007952],[56.525419,21.014577],[56.516817,21.014981],[56.506473,21.014128],[56.520524,21.025478],[56.533222,21.003181],[56.552874,21.016367],[56.506512,21.009554],[56.507452,21.011478],[56.482404,21.02476],[56.511852,21.018646],[56.501979,21.012276],[56.512459,21.009894],[56.500671,21.003237],[56.510595,21.006632],[56.516001,21.014796],[56.507455,21.010834],[56.531587,21.011109],[56.509084,21.016931],[56.519115,21.014946],[56.50541,21.007964],[56.493529,21.00259],[56.505797,21.011337],[56.50989,21.00706],[56.48016,21.023141],[56.527173,21.006204],[56.507338,21.012546],[56.514386,21.003362],[56.510722,21.013192],[56.50989,21.00706],[56.512251,21.020617],[56.517428,21.011021],[56.505417,21.007616],[56.514216,21.012701],[56.505741,21.009996],[56.505842,21.012307],[56.50879,21.021578],[56.523051,21.029763],[56.504372,21.00998],[56.507455,21.010834],[56.555826,21.008274],[56.518066,21.009898],[56.515235,21.025173],[56.525367,21.015378],[56.520609,21.007066],[56.502365,21.019085],[56.505909,21.008339],[56.492661,21.021117],[56.535014,21.060425],[56.50541,21.007964],[56.533678,21.056753],[56.55215,21.043133],[56.523421,21.006322],[56.516272,21.020022],[56.51282,21.008968],[56.50558,21.008846],[56.520524,21.025478],[56.481829,21.02706],[56.513722,21.016926],[56.48283,21.017955],[56.533137,21.056577],[56.504956,20.995981],[56.508865,21.008172],[56.553959,21.042512],[56.501019,20.997138],[56.532438,21.008847],[56.507386,21.01192],[56.558045,21.000924],[56.513652,21.020154],[56.509818,21.007338],[56.519989,21.007942],[56.500383,21.017049],[56.50138,21.018392],[56.501949,21.00566],[56.517082,21.025197],[56.491069,21.006483],[56.536418,21.002947],[56.506512,21.009554],[56.504761,21.009547],[56.532314,21.01119],[56.524456,21.031147],[56.522118,21.028214],[56.524718,21.032254],[56.515635,21.013612],[56.535091,21.013212],[56.523124,21.025549],[56.509461,21.010385],[56.509084,21.016931],[56.552673,21.028535],[56.507338,21.012546],[56.511616,21.001055],[56.505966,21.006265],[56.501762,21.008127],[56.514939,21.01816],[56.498972,21.010282],[56.536218,21.055435],[56.552874,21.016367],[56.50702,21.011912],[56.50665,21.011725],[56.510116,21.006871],[56.50558,21.008846],[56.552874,21.016367],[56.509134,21.008352],[56.511852,21.018646],[56.544725,21.069633],[56.537076,21.010225],[56.484472,21.014752],[56.503332,21.016762],[56.523604,21.016539],[56.505775,21.010534],[56.553959,21.042512],[56.519128,21.02565],[56.527559,21.012022],[56.553959,21.042512],[56.483192,21.017253],[56.508399,21.026018],[56.483321,21.016751],[56.511192,21.005868],[56.511852,21.018646],[56.491915,21.001981],[56.541613,21.053582],[56.552302,21.097577],[56.532645,21.003936],[56.50541,21.007964],[56.515315,21.016602],[56.50913,21.016433],[56.554358,21.008017],[56.486629,21.005029],[56.500799,21.002886],[56.506709,21.009816],[56.507162,21.008326],[56.503822,21.014783],[56.513904,21.012999],[56.514451,21.018307],[56.506127,21.009101],[56.519433,21.005235],[56.514165,21.018688],[56.510885,21.011857],[56.516916,21.011782],[56.521099,21.028503],[56.533551,21.003571],[56.509762,21.009579],[56.50841,21.031236],[56.544973,21.05415],[56.50558,21.008846],[56.532469,21.003171],[56.50791,21.008965],[56.510116,21.006871],[56.55303,21.01636],[56.516001,21.014796],[56.507338,21.012546],[56.507338,21.012546],[56.506841,21.01051],[56.519511,21.013279],[56.510931,21.013172],[56.501026,21.001844],[56.510289,21.017339],[56.518896,21.015301],[56.510931,21.013172],[56.508775,21.009328],[56.49066,21.005107],[56.510931,21.013172],[56.511506,21.014653],[56.5094,21.008351],[56.51061,21.010193],[56.509981,21.009497],[56.508103,21.014148],[56.511493,21.012774],[56.506646,21.01556],[56.519768,21.016367],[56.510077,21.008404],[56.553537,21.091044],[56.518583,21.013116],[56.506282,21.005502]]"),
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 18,
+  "radius": 8,
+  "blur": 10,
+  "gradient": {
+  0.3: "#FBB878",
+  0.5: "#F97316",
+  0.7: "#DE6412",
+  0.85: "#C0570F",
+  1.0: "#8F3A05",
+},
+}
+            );
+        
+    
+            var feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_4faedbc704a69dea0dfc068ad6b50b40 = L.circle(
+                [56.525561, 21.030233],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_f0663ae32f5f5059bfade3e9a59d10c1 = L.circle(
+                [56.482701, 21.021605],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_4f21b1d4295dc9cc7cc4304e1510ccc3 = L.circle(
+                [56.521847, 21.021701],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_87e5a816f6624f816a9db009d4c6ad1c = L.circle(
+                [56.516053, 21.015074],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_b60efba24c9430150fac4e67607d1855 = L.circle(
+                [56.4837, 21.016136],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_e0eade6275b0d96f0ce482931869a69e = L.circle(
+                [56.500763, 21.006209],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_a249ae9241db7b236eb0d90533e07d02 = L.circle(
+                [56.487142, 21.005647],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_df5bd385c9a3245dab42cdee518006ab = L.circle(
+                [56.510929, 21.013786],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_bae7deebb378cab13cd7e42dfbed92ba = L.circle(
+                [56.497714, 21.006592],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_113b943ed3b2fb11902d483c8f3f05dd = L.circle(
+                [56.524174, 21.027102],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_acbae2b31d1e8ab7bc65a4385c23cce3 = L.circle(
+                [56.481816, 21.026369],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_dfc8765d56475367bf2b1810b6fdc1f5 = L.circle(
+                [56.520437, 21.016222],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_3cc496c2d983f289a7f51efa999166c0 = L.circle(
+                [56.504883, 21.006668],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_74d01876dd2dc045b5a8b0002ac8f7a3 = L.circle(
+                [56.508348, 21.01103],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_dff7b1129700cbbe12b3021f4bfcef53 = L.circle(
+                [56.523427, 21.017496],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_d5a8bfcfae00adbd1b1c1d8ae735887c = L.circle(
+                [56.48719, 21.009692],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_e47a8de21d780ba8f9537b9032ce883e = L.circle(
+                [56.485275, 21.012889],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var circle_0c6d565622576b89d5eaf42dd0faad4c = L.circle(
+                [56.491293, 21.005437],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71);
+        
+    
+            var feature_group_e9f9b745f294dae084533d4335ccf255 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_50ae9de050aa8ef3b4dd0dc0c186e49b = L.circle(
+                [56.525561, 21.030233],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_e3b0c453d237bab4c6fa24f1237595d3 = L.circle(
+                [56.482701, 21.021605],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_38df835daf2eb97bd7cb8f93d1f61d8b = L.circle(
+                [56.521847, 21.021701],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_1747501805dc8882ddfe34dbdf5467dc = L.circle(
+                [56.516053, 21.015074],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_88248c5416978c9b27b1b6a4d7a85896 = L.circle(
+                [56.4837, 21.016136],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_478a99859226d51473d80a2b2518ed44 = L.circle(
+                [56.500763, 21.006209],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_d50144966108792ddeb3fc2c3e7cab23 = L.circle(
+                [56.487142, 21.005647],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_5bf1a6b7c0acd169ea0869daaa9c1a80 = L.circle(
+                [56.510929, 21.013786],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_8d20c1c46ab83b24ae7011c8043c5aec = L.circle(
+                [56.497714, 21.006592],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_9af4673c07ae408e77bcd7d0ed9b5934 = L.circle(
+                [56.524174, 21.027102],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_a23e94ee8633a082509882a086ee0069 = L.circle(
+                [56.481816, 21.026369],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_d1d2378c356e6c4472c7d8f8dd0db1b0 = L.circle(
+                [56.520437, 21.016222],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_1db9758db91aebf5e1eadc236da1a777 = L.circle(
+                [56.504883, 21.006668],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_47e6fbe13ab7741d38c333e57c6507b3 = L.circle(
+                [56.508348, 21.01103],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_538599aa64cdd0da78a4f6fdde024e18 = L.circle(
+                [56.523427, 21.017496],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_cbb22cfdcf8b194baafd61a427a71039 = L.circle(
+                [56.48719, 21.009692],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_edbf59a961b0703b484a01920294ebe0 = L.circle(
+                [56.485275, 21.012889],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var circle_3a820916655a7c051b0a0aa8364cd444 = L.circle(
+                [56.491293, 21.005437],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_e9f9b745f294dae084533d4335ccf255);
+        
+    
+            var feature_group_2be10e95782158ecb778e5186dedb9a7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_0d6df57ee99440fe3213a9c46d3fee75 = L.circle(
+                [56.525561, 21.030233],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_2e512da97069cfc8458e4901f05171e8 = L.circle(
+                [56.482701, 21.021605],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_e24ff8d05d88b4c10997864deb5dc0ec = L.circle(
+                [56.521847, 21.021701],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_8e02259240207b6bb55acabe70a8ce24 = L.circle(
+                [56.516053, 21.015074],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_4a1b5b7fb03454fd2201b4dc4c52d316 = L.circle(
+                [56.4837, 21.016136],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_42224b56accfd57283970c74c6fb5e7a = L.circle(
+                [56.500763, 21.006209],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_0395412e73361029809ae903b46acd4b = L.circle(
+                [56.487142, 21.005647],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_976fcc84673c4aa7c0a321669a84eaed = L.circle(
+                [56.510929, 21.013786],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_84da8d9244c8b77500a3c55a862cca9f = L.circle(
+                [56.497714, 21.006592],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_40175727a98b02fcd215b2fc743c9536 = L.circle(
+                [56.524174, 21.027102],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_c8b5c6886d7c7fba99f1b28ff4c80508 = L.circle(
+                [56.481816, 21.026369],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_9fca9dd955280dfcd5ac9b96e2efba35 = L.circle(
+                [56.520437, 21.016222],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_612e94ea8dc099b20cf4a03c00ea3976 = L.circle(
+                [56.504883, 21.006668],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_2a5f49767969744dd165d18f2e9ab07c = L.circle(
+                [56.508348, 21.01103],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_ce284c16304b799f2b92d637f4982f82 = L.circle(
+                [56.523427, 21.017496],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_c276691da33c5ea2d8fca446d8855355 = L.circle(
+                [56.48719, 21.009692],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_86a017ff50c1af8abcc7c375362405d5 = L.circle(
+                [56.485275, 21.012889],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var circle_017a4d4ece2cf91887d31a111a192dd0 = L.circle(
+                [56.491293, 21.005437],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_2be10e95782158ecb778e5186dedb9a7);
+        
+    
+            var feature_group_bca50ad9b4bea13bcf8ef5684f3ded40 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_769f8be40355ba5f5d951d7941aa369a = L.circle(
+                [56.525561, 21.030233],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_74772c372a308c71c1599924fb7f8a26 = L.circle(
+                [56.482701, 21.021605],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_4620f39c7c18083fee7fa1ac83dffb6c = L.circle(
+                [56.521847, 21.021701],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_e6c6c0f4aac17e9cedd8d9b05344ed97 = L.circle(
+                [56.516053, 21.015074],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_357f3818cd262687e6e099da1aaaa889 = L.circle(
+                [56.4837, 21.016136],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_3da6f40aed4b8f746bd2522f8e277209 = L.circle(
+                [56.500763, 21.006209],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_f72f63b5cf87656ea136e53a346fbd0b = L.circle(
+                [56.487142, 21.005647],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_bfeb42946823f81b0dae36151b9f5cd5 = L.circle(
+                [56.510929, 21.013786],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_969c44ebc5aae8e8d5696e425ca69081 = L.circle(
+                [56.497714, 21.006592],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_35912dbd2400d944e8de6d7e30b9b6a3 = L.circle(
+                [56.524174, 21.027102],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_85b530a6c2ac59825b319bbc36cdc2e0 = L.circle(
+                [56.481816, 21.026369],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_3195a06f2247f5b915269544f186537e = L.circle(
+                [56.520437, 21.016222],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_8fcc5dd8d0b9e33171e1425f700afc45 = L.circle(
+                [56.504883, 21.006668],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_869762299a213397a1a5d43a6f721f35 = L.circle(
+                [56.508348, 21.01103],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_138ccfab255e29a1de0648ac7379ec47 = L.circle(
+                [56.523427, 21.017496],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_1902d9b587cb5bfdaf4c6b053be27a1b = L.circle(
+                [56.48719, 21.009692],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_e238848a0d61004daf72c9ff83c1002a = L.circle(
+                [56.485275, 21.012889],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var circle_8e15821ce79679bdcec363dc94c177ca = L.circle(
+                [56.491293, 21.005437],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bca50ad9b4bea13bcf8ef5684f3ded40);
+        
+    
+            var feature_group_3f645ea77bf6be715a998aa6cb88a98e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_84f6d0418ef2c44f5d5ef03571d27376 = L.circleMarker(
+                [56.525561, 21.030233],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_84f6d0418ef2c44f5d5ef03571d27376.bindTooltip(
+                `<div>
+                     <b>Brīvības iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4aadbc89c95cd23df371bbdc1607665c = L.circleMarker(
+                [56.482701, 21.021605],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_4aadbc89c95cd23df371bbdc1607665c.bindTooltip(
+                `<div>
+                     <b>Cieceres iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_24c596d2d7787b3902603127632dc5c6 = L.circleMarker(
+                [56.521847, 21.021701],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_24c596d2d7787b3902603127632dc5c6.bindTooltip(
+                `<div>
+                     <b>Dzelzceļnieku iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ba0303891cd8ead31f5e5323b74d12d4 = L.circleMarker(
+                [56.516053, 21.015074],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_ba0303891cd8ead31f5e5323b74d12d4.bindTooltip(
+                `<div>
+                     <b>Esperanto iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_61fe183313979ed2def3148ab71017d8 = L.circleMarker(
+                [56.4837, 21.016136],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_61fe183313979ed2def3148ab71017d8.bindTooltip(
+                `<div>
+                     <b>Ganību iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e094cd16b7abb0a1e5716df9d9cbb9ce = L.circleMarker(
+                [56.500763, 21.006209],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_e094cd16b7abb0a1e5716df9d9cbb9ce.bindTooltip(
+                `<div>
+                     <b>Jūrmalas iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_67b022604993725b39135e8d445694cc = L.circleMarker(
+                [56.487142, 21.005647],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_67b022604993725b39135e8d445694cc.bindTooltip(
+                `<div>
+                     <b>Klaipēdas iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c1695e6abde9a44bc20407db0f7a1af0 = L.circleMarker(
+                [56.510929, 21.013786],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_c1695e6abde9a44bc20407db0f7a1af0.bindTooltip(
+                `<div>
+                     <b>Koncertzāle</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eed62026f5ea4a16d4d774a546b6f5c7 = L.circleMarker(
+                [56.497714, 21.006592],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_eed62026f5ea4a16d4d774a546b6f5c7.bindTooltip(
+                `<div>
+                     <b>Līvas laukums</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_714b97db3bb14f3b7528cf0a623ef4ab = L.circleMarker(
+                [56.524174, 21.027102],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_714b97db3bb14f3b7528cf0a623ef4ab.bindTooltip(
+                `<div>
+                     <b>Metalurgs</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6d00b5de0f2304deb885ce3863303420 = L.circleMarker(
+                [56.481816, 21.026369],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_6d00b5de0f2304deb885ce3863303420.bindTooltip(
+                `<div>
+                     <b>Mirdzas Ķempes iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_661c02d30786fa415c2669eae9c697be = L.circleMarker(
+                [56.520437, 21.016222],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_661c02d30786fa415c2669eae9c697be.bindTooltip(
+                `<div>
+                     <b>Olimpiskais centrs</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_96c65f5f8650d9ddd57a13cbde81557c = L.circleMarker(
+                [56.504883, 21.006668],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_96c65f5f8650d9ddd57a13cbde81557c.bindTooltip(
+                `<div>
+                     <b>Pētertirgus</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_888bb511d835fa92c4b08721cb87e580 = L.circleMarker(
+                [56.508348, 21.01103],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_888bb511d835fa92c4b08721cb87e580.bindTooltip(
+                `<div>
+                     <b>Rožu laukums</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e9dcbf39a051486e36ec4f517c361c90 = L.circleMarker(
+                [56.523427, 21.017496],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_e9dcbf39a051486e36ec4f517c361c90.bindTooltip(
+                `<div>
+                     <b>Stacija</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d41fe1479f2d3e99bfe33660185c2820 = L.circleMarker(
+                [56.48719, 21.009692],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_d41fe1479f2d3e99bfe33660185c2820.bindTooltip(
+                `<div>
+                     <b>Tukuma iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b28e1f6e07c6f3a18658938ce95b0228 = L.circleMarker(
+                [56.485275, 21.012889],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_b28e1f6e07c6f3a18658938ce95b0228.bindTooltip(
+                `<div>
+                     <b>Vaiņodes iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_45ab68166f1b3ffe6dc2719d0bf241d7 = L.circleMarker(
+                [56.491293, 21.005437],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_3f645ea77bf6be715a998aa6cb88a98e);
+        
+    
+            circle_marker_45ab68166f1b3ffe6dc2719d0bf241d7.bindTooltip(
+                `<div>
+                     <b>Ventas iela</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_3f645ea77bf6be715a998aa6cb88a98e.addTo(map_54408190d96eef09238ea11bdd3e5a31);
+        
+    
+            var feature_group_95dc7d9b178eb86d2e45cf0fa38f9349 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_f41399ee0f5d194663cdd030b5ed761f = L.polyline(
+                [[56.4817613, 21.0267438], [56.4818986, 21.0259937], [56.4819145, 21.0259078], [56.4819185, 21.0258865], [56.4819559, 21.0256852], [56.4819884, 21.0255101], [56.4825695, 21.0223672], [56.4826139, 21.0221363], [56.4826383, 21.0220011], [56.4826411, 21.021986], [56.4827777, 21.0212483], [56.483245, 21.0187024], [56.4832723, 21.0185532], [56.4832769, 21.0185284], [56.4833137, 21.0183291], [56.483772, 21.0158124], [56.4837784, 21.0157772], [56.4837873, 21.0157306], [56.4838195, 21.0155556], [56.483835, 21.0154773], [56.483863, 21.0153083], [56.4838724, 21.0152594], [56.4838933, 21.0151411], [56.4838994, 21.0151067], [56.4839646, 21.0147301], [56.4839838, 21.0146403], [56.4840042, 21.0145494], [56.484028, 21.0144852], [56.4840519, 21.01442], [56.4840818, 21.0143646], [56.4841117, 21.0143183], [56.4841569, 21.0142542], [56.4842912, 21.0140802], [56.4854114, 21.0127416], [56.485616, 21.0124773], [56.4857321, 21.0123296], [56.4858461, 21.0121804], [56.485911, 21.0120971], [56.4871289, 21.0106034], [56.4871395, 21.0105902], [56.4871679, 21.0105502], [56.487197, 21.0104995], [56.4872231, 21.0104379], [56.4872331, 21.0104008], [56.4872409, 21.0103775], [56.4872539, 21.0103056], [56.4872605, 21.0102301], [56.4872607, 21.0101514], [56.4872537, 21.0100677], [56.4872519, 21.010054], [56.4871576, 21.0093524], [56.4868055, 21.0067308], [56.486792, 21.0065871], [56.4867839, 21.0064867], [56.4867766, 21.0062474], [56.4867752, 21.0060809], [56.4867761, 21.0060465], [56.4867914, 21.005959], [56.4868201, 21.0058709], [56.4868392, 21.0058122], [56.486859, 21.005777], [56.4868949, 21.0057273], [56.4869505, 21.0056994], [56.4870083, 21.0056703], [56.487273, 21.0056608], [56.4876872, 21.0056707], [56.4879739, 21.0056529], [56.4897247, 21.0055561], [56.4902424, 21.0055226], [56.4905489, 21.005502], [56.49088, 21.0054817], [56.4909134, 21.00548], [56.4911904, 21.0054664], [56.4912709, 21.0054618], [56.4921884, 21.0054009], [56.4927041, 21.0053584], [56.4928227, 21.0053527], [56.4929715, 21.0053519], [56.4932403, 21.0053716], [56.4934005, 21.0053903], [56.4954774, 21.005926], [56.495829, 21.0060104], [56.4963342, 21.0061321], [56.4969316, 21.0062761], [56.4970498, 21.0063046], [56.4971855, 21.0063667], [56.4972015, 21.0063761], [56.4976952, 21.0066681], [56.4978666, 21.0067254], [56.4979903, 21.006716], [56.4979946, 21.0067157], [56.4983688, 21.0066492], [56.4984768, 21.0066336], [56.5006316, 21.0062568], [56.5008912, 21.0062074], [56.5011605, 21.0061659], [56.5012188, 21.0061569], [56.5012355, 21.0061595], [56.5012853, 21.0061668], [56.5035515, 21.0064704], [56.5039765, 21.0065276], [56.5041688, 21.0065638], [56.5042416, 21.0065783], [56.5042927, 21.0065861], [56.5054586, 21.0068111], [56.5057896, 21.0068647], [56.5058221, 21.00687], [56.5058649, 21.0069055], [56.5058939, 21.0069296], [56.5059228, 21.0069618], [56.5059496, 21.006998], [56.5059759, 21.0070443], [56.5064836, 21.0079508], [56.5065024, 21.0079871], [56.5070131, 21.0093013], [56.5071551, 21.0096235], [56.5072332, 21.0098086], [56.5073103, 21.0099816], [56.5073414, 21.0100444], [56.5073713, 21.010091], [56.5074086, 21.0101414], [56.5074515, 21.010191], [56.5078655, 21.0105974], [56.5080713, 21.0108025], [56.5084355, 21.01113], [56.5086853, 21.0113579], [56.5087326, 21.0114205], [56.5087833, 21.0114685], [56.5088604, 21.0115334], [56.5088883, 21.0115571], [56.5094813, 21.0120628], [56.5098051, 21.0123795], [56.5099341, 21.0125407], [56.5100748, 21.012712], [56.5100929, 21.0127363], [56.5103021, 21.0130017], [56.5105734, 21.0133617], [56.5108276, 21.0136792], [56.5108883, 21.0137593], [56.5109227, 21.0138094], [56.5110235, 21.0139397], [56.511103, 21.0140391], [56.511167, 21.0140939], [56.5113637, 21.014202], [56.5118586, 21.0142765], [56.5120111, 21.0143088], [56.5122866, 21.0143648], [56.5132442, 21.0145259], [56.513355, 21.0145444], [56.513578, 21.0145834], [56.5136322, 21.0145924], [56.5140281, 21.0146515], [56.5143413, 21.0147047], [56.5149675, 21.0148151], [56.5150448, 21.0148304], [56.5152784, 21.0148799], [56.5156469, 21.0149625], [56.515877, 21.0150278], [56.5160534, 21.0150743], [56.5164855, 21.0151872], [56.5167864, 21.0152703], [56.5171078, 21.0153563], [56.5175598, 21.0154768], [56.517985, 21.0155893], [56.518259, 21.0156646], [56.5189311, 21.0158415], [56.5192008, 21.0159146], [56.519334, 21.0159507], [56.5195111, 21.0159951], [56.5197006, 21.016047], [56.520105, 21.0161561], [56.5206203, 21.0162931], [56.5207946, 21.0163366], [56.5208531, 21.016352], [56.5215613, 21.0165441], [56.5217395, 21.0165924], [56.521786, 21.0166029], [56.5218645, 21.0166265], [56.5219116, 21.0166333], [56.5219492, 21.016646], [56.5231753, 21.0169666], [56.5234888, 21.0170533], [56.5235317, 21.0170698], [56.5235742, 21.0171115], [56.5236112, 21.017153], [56.5236332, 21.0171956], [56.5236559, 21.0172539], [56.5236746, 21.0173042], [56.5236916, 21.0173959], [56.5236979, 21.0174876], [56.5236978, 21.017886], [56.5236925, 21.0179942], [56.5236795, 21.0180671], [56.52367, 21.0181012], [56.5236436, 21.0181821], [56.5236087, 21.0182522], [56.5235638, 21.0183163], [56.5224197, 21.0198664], [56.5218275, 21.0206686], [56.5217464, 21.0207785], [56.5217014, 21.0208507], [56.521679, 21.0208969], [56.5216645, 21.0209412], [56.5216484, 21.0210072], [56.5216398, 21.0210891], [56.5216382, 21.0211841], [56.5216473, 21.0212772], [56.5216749, 21.021362], [56.5217104, 21.021445], [56.5220214, 21.0221761], [56.5223834, 21.0230147], [56.5225738, 21.0234588], [56.522775, 21.0239278], [56.5228062, 21.0240009], [56.5231088, 21.024706], [56.5231502, 21.0248027], [56.5233814, 21.0253412], [56.524017, 21.0268241], [56.5240772, 21.0269647], [56.5245917, 21.0281654], [56.5249251, 21.0289249], [56.5252152, 21.0296082], [56.5256375, 21.0305762], [56.5256948, 21.0307106], [56.5257105, 21.0308221], [56.525708, 21.0309182], [56.5256993, 21.0310087], [56.5256804, 21.0311169], [56.525645, 21.0312898], [56.5256096, 21.0314382], [56.5255507, 21.0316308], [56.5254339, 21.0319371], [56.5254132, 21.0320169], [56.5254034, 21.0321459], [56.5254188, 21.032272], [56.5254457, 21.0323459], [56.5254844, 21.0324128], [56.5255719, 21.0324853], [56.5256599, 21.0324883], [56.525719, 21.0324534], [56.525784, 21.0323671], [56.5258098, 21.0323079], [56.5258253, 21.0322568], [56.5258462, 21.0320938], [56.5258414, 21.0318206], [56.5258189, 21.0313747], [56.5258116, 21.0311591], [56.5257757, 21.0308789], [56.5257295, 21.0307058], [56.5256599, 21.0305462], [56.5255374, 21.0302669]],
+                {"bubblingMouseEvents": true, "color": "#b8860b", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#b8860b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_95dc7d9b178eb86d2e45cf0fa38f9349);
+        
+    
+            var poly_line_6fbe9b2d027aa52e9a8cb629b78d606f = L.polyline(
+                [[56.5236815, 21.0175214], [56.5236733, 21.0178852], [56.5236697, 21.0180208]],
+                {"bubblingMouseEvents": true, "color": "#b8860b", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#b8860b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_95dc7d9b178eb86d2e45cf0fa38f9349);
+        
+    
+            var poly_line_b4d9030f880fccea5d4709c6dc3f280d = L.polyline(
+                [[56.487279, 21.0056908], [56.4869668, 21.005711]],
+                {"bubblingMouseEvents": true, "color": "#b8860b", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#b8860b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_95dc7d9b178eb86d2e45cf0fa38f9349);
+        
+    
+            var poly_line_e8ca50b4268148e6074afa6f77f1eeb0 = L.polyline(
+                [[56.5054578, 21.0068679], [56.5052037, 21.0068253]],
+                {"bubblingMouseEvents": true, "color": "#b8860b", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#b8860b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_95dc7d9b178eb86d2e45cf0fa38f9349);
+        
+    
+            var poly_line_1df3697aaa626526e8b30a9c21124057 = L.polyline(
+                [[56.4872715, 21.0100431], [56.487178, 21.0093372]],
+                {"bubblingMouseEvents": true, "color": "#b8860b", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#b8860b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_95dc7d9b178eb86d2e45cf0fa38f9349);
+        
+    
+            var poly_line_97e7ba4f8809d4cdb14c75ebc1cea275 = L.polyline(
+                [[56.5206181, 21.0163279], [56.5204693, 21.0162928]],
+                {"bubblingMouseEvents": true, "color": "#b8860b", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#b8860b", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_95dc7d9b178eb86d2e45cf0fa38f9349);
+        
+    
+            var marker_37f93a1515f196c83c675697027531df = L.marker(
+                [56.525537, 21.030267],
+                {
+  "zIndexOffset": 1000,
+}
+            ).addTo(feature_group_95dc7d9b178eb86d2e45cf0fa38f9349);
+        
+    
+            var div_icon_05def3b1db09f61eee28ca85de9fb15a = L.divIcon({
+  "html": "\n            \u003cdiv class=\"hm-line-label\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(-35.3px, 12.4px);\n                font-size: 14px; font-weight: bold; color: #b8860b; --dm-label: #b8860b;\n                text-shadow: -1px -1px 0 #0B1220, 1px -1px 0 #0B1220,\n                             -1px 1px 0 #0B1220, 1px 1px 0 #0B1220,\n                             0 0 6px #0B1220;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eTram 1\u003c/div\u003e\n        ",
+  "iconSize": [0, 0],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+        
+    
+                marker_37f93a1515f196c83c675697027531df.setIcon(div_icon_05def3b1db09f61eee28ca85de9fb15a);
+            
+    
+            feature_group_95dc7d9b178eb86d2e45cf0fa38f9349.addTo(map_54408190d96eef09238ea11bdd3e5a31);
+        
+    
+            var feature_group_4b508957d7544a6281b2df36c01d0830 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var fast_marker_cluster_a66ac365bf6b7f7a6f346c4148341c40 = (function(){
+                var callback = 
+        (function () {
+            var CATEGORIES = ["Shop", "Service", "Fuel station"];
+            var STATIONS = ["Esperanto iela", "Gan\u012bbu iela", "L\u012bvas laukums", "P\u0113tertirgus", "Ro\u017eu laukums", "Klaip\u0113das iela", "Koncertz\u0101le", "Cieceres iela", "Olimpiskais centrs", "Ventas iela", "J\u016brmalas iela", "Stacija", "Mirdzas \u0136empes iela", "Br\u012bv\u012bbas iela", "Vai\u0146odes iela", "Dzelzce\u013cnieku iela", "Metalurgs"];
+            var BANDS = ["Ring 2 (0.05-0.1 mi)", "Ring 1 (0-0.05 mi)", "Ring 3 (0.1-0.2 mi)", "Ring 4 (0.2-0.3 mi)"];
+            return function (row) {
+                var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {
+                    radius: 5, color: '#2a78d6', fillColor: '#2a78d6',
+                    fillOpacity: 0.85, weight: 1
+                });
+                var html = '<b>' + row[2] + '</b><br>' +
+                    'Kind: ' + CATEGORIES[row[3]] + '<br>' +
+                    'Nearest station: ' + STATIONS[row[4]] + '<br>' +
+                    BANDS[row[5]];
+                marker.bindTooltip(html, {sticky: true});
+                return marker;
+            };
+        })()
+    ;
+
+                var data = JSON.parse("[[56.515315,21.016602,\"Veikals\",0,0,0],[56.483162,21.015361,\"Tirdzniecības telpas\",0,1,1],[56.497746,21.006343,\"Veikala telpas\",0,2,1],[56.506511,21.009075,\"Veikals\",0,3,2],[56.510124,21.006352,\"Tirdzniecības telpas\",0,4,3],[56.48374,21.017851,\"Frizētava\",1,1,0],[56.487707,21.004989,\"Veikals\",0,5,1],[56.508304,21.005691,\"Datorsalons\",0,4,3],[56.511602,21.016611,\"Optikas salons\",0,6,2],[56.482674,21.019871,\"Auto rezerves daļu veikals\",0,7,0],[56.519811,21.013888,\"Tirdzniecības telpas\",0,8,0],[56.508775,21.009328,\"Tirdzniecības telpas\",0,4,0],[56.510018,21.010203,\"Veikals\",0,4,2],[56.519662,21.013648,\"Veikala telpas\",0,8,2],[56.508448,21.01349,\"Veikala telpas\",0,4,0],[56.509712,21.011765,\"Skaistumkopšanas salons\",1,4,0],[56.518716,21.012914,\"Veikals\",0,8,2],[56.490237,21.005122,\"Frizētava\",1,9,0],[56.509356,21.00691,\"Veikals\",0,4,2],[56.508775,21.009328,\"Tirdzniecības telpu grupa\",0,4,0],[56.506511,21.009075,\"Veikala telpas\",0,3,2],[56.5094,21.008351,\"Tirdzniecības telpas\",0,4,2],[56.50354,21.00922,\"Veikals\",0,3,2],[56.508999,21.007674,\"Veikals\",0,4,2],[56.487707,21.004989,\"Veikals\",0,5,1],[56.511602,21.016611,\"Aptieka\",0,6,2],[56.519511,21.013279,\"Tirdzniecības telpa\",0,8,2],[56.48374,21.017851,\"Veikals\",0,1,0],[56.482416,21.02127,\"Tirdzniecības telpa\",0,7,1],[56.487707,21.004989,\"Veikals\",0,5,1],[56.518716,21.012914,\"Veikals\",0,8,2],[56.503104,21.008217,\"Veikala telpas\",0,3,2],[56.510351,21.009563,\"Frizētava\",1,4,2],[56.48374,21.017851,\"Veikals\",0,1,0],[56.504044,21.007909,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,3,0],[56.501026,21.001844,\"Tirdzniecības telpas\",0,10,2],[56.48374,21.017851,\"Veikals\",0,1,0],[56.505878,21.011856,\"Frizētava\",1,4,2],[56.505878,21.011856,\"Veikals\",0,4,2],[56.500969,21.00582,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,10,1],[56.506017,21.005861,\"Veikals\",0,3,0],[56.482416,21.02127,\"Veikals\",0,7,1],[56.511506,21.014653,\"Veikala telpas\",0,6,0],[56.5067,21.0102,\"Tirdzniecības telpa\",0,4,2],[56.505922,21.00239,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,3,2],[56.483401,21.024419,\"Tirdzniecības telpas\",0,7,2],[56.5094,21.008351,\"Tirdzniecības telpas\",0,4,2],[56.505014,21.010609,\"Veikals\",0,3,2],[56.503751,21.010384,\"Veikals\",0,3,2],[56.506886,21.007539,\"Aptieka\",0,3,2],[56.508775,21.009328,\"Tirdzniecības telpa\",0,4,0],[56.508775,21.009328,\"Tirdzniecības telpas\",0,4,0],[56.510018,21.010203,\"Vairumtirdzniecības  un mazumtirdzniecības telpas\",0,4,2],[56.48374,21.017851,\"Tirdzniecības telpas\",0,1,0],[56.5094,21.008351,\"Veikals\",0,4,2],[56.506026,21.008622,\"Veikals\",0,3,2],[56.509712,21.011765,\"Tirdzniecības telpas\",0,4,0],[56.50621,21.006586,\"Tirdzniecības telpas\",0,3,0],[56.50979,21.010074,\"Veikals\",0,4,2],[56.509712,21.011765,\"Tirdzniecības telpas\",0,4,0],[56.519768,21.016367,\"Veikals\",0,8,1],[56.508775,21.009328,\"Tirdzniecības telpu grupa\",0,4,0],[56.517727,21.017701,\"Veikals\",0,0,2],[56.503032,21.008593,\"Veikala telpas\",0,3,2],[56.510124,21.006352,\"Tirdzniecības telpas\",0,4,3],[56.510571,21.012887,\"Veikals\",0,6,1],[56.502876,21.009326,\"Frizētava\",1,3,2],[56.483098,21.017938,\"Frizētava\",1,1,0],[56.5094,21.008351,\"Tirdzniecības telpas\",0,4,2],[56.509712,21.011765,\"Veikals\",0,4,0],[56.504995,21.01045,\"Frizētava\",1,3,2],[56.50354,21.00922,\"Veikals\",0,3,2],[56.510018,21.010203,\"Veikals\",0,4,2],[56.508,21.015498,\"Tirdzniecības telpas\",0,4,2],[56.526049,21.014364,\"Veikals\",0,11,3],[56.519155,21.012358,\"Veikala telpas\",0,8,2],[56.511493,21.012774,\"Veikals\",0,6,0],[56.510124,21.006352,\"Veikals\",0,4,3],[56.5094,21.008351,\"Tirdzniecības telpas\",0,4,2],[56.508556,21.017137,\"Veikals\",0,6,3],[56.51594,21.009789,\"Veikals\",0,0,3],[56.508103,21.014148,\"Tirdzniecības telpas\",0,4,2],[56.506886,21.007539,\"Frizētava\",1,3,2],[56.48374,21.017851,\"Ziedu salons\",0,1,0],[56.506442,21.015318,\"Solārijs\",1,4,3],[56.482416,21.02127,\"Veikala telpas\",0,7,1],[56.510931,21.013172,\"Tirdzniecības telpa\",0,6,1],[56.510722,21.013192,\"Tirdzniecības telpas\",0,6,1],[56.506287,21.008844,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,3,2],[56.50962,21.006827,\"Aptieka\",0,4,2],[56.48374,21.017851,\"Veikals\",0,1,0],[56.48374,21.017851,\"Veikals\",0,1,0],[56.483221,21.021029,\"Frizētava\",1,7,1],[56.481817,21.024546,\"Veikals\",0,12,0],[56.511602,21.016611,\"Aptieka\",0,6,2],[56.51149,21.013596,\"Tirdzniecības telpas\",0,6,1],[56.510931,21.013172,\"Tirdzniecības telpa\",0,6,1],[56.52478,21.029421,\"Veikals\",0,13,0],[56.509712,21.011765,\"Veikals\",0,4,0],[56.505787,21.005509,\"Veikals\",0,3,0],[56.515454,21.016668,\"Tirdzniecības telpas\",0,0,0],[56.50962,21.006827,\"Veikals\",0,4,2],[56.505014,21.010609,\"Veikals\",0,3,2],[56.502225,21.002562,\"Tirdzniecības telpas\",0,10,2],[56.504995,21.01045,\"Veikals\",0,3,2],[56.482674,21.019871,\"Veikals\",0,7,0],[56.49066,21.005107,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,9,1],[56.48374,21.017851,\"Veikals\",0,1,0],[56.48374,21.017851,\"Aptieka\",0,1,0],[56.504184,21.010554,\"Tirdzniecības telpas\",0,3,2],[56.5094,21.008351,\"Frizētava\",1,4,2],[56.504184,21.010554,\"Tirdzniecības telpa\",0,3,2],[56.518583,21.013116,\"Veikals\",0,8,2],[56.510077,21.008404,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,2],[56.506026,21.008622,\"Tirdzniecības telpas\",0,3,2],[56.515787,21.016664,\"Veikals\",0,0,0],[56.50979,21.010074,\"Veikals\",0,4,2],[56.510931,21.013172,\"Tirdzniecības telpa\",0,6,1],[56.482674,21.019871,\"Tirdzniecības telpa\",0,7,0],[56.508453,21.007714,\"Veikals\",0,4,2],[56.506026,21.008622,\"Tirdzniecības telpas\",0,3,2],[56.518045,21.013919,\"Veikals\",0,0,2],[56.510124,21.006352,\"Tirdzniecības telpas\",0,4,3],[56.488622,21.002853,\"Neapdzīvojama telpa - solārijs\",1,5,2],[56.504184,21.010554,\"Aptieka\",0,3,2],[56.505915,21.002004,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpa\",0,3,2],[56.48374,21.017851,\"Frizētavas telpas\",1,1,0],[56.509282,21.003789,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,4,3],[56.519795,21.015783,\"Frizētava\",1,8,1],[56.508999,21.007674,\"Veikals\",0,4,2],[56.502495,21.007402,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,10,2],[56.518142,21.014395,\"Veikala telpas\",0,0,2],[56.50619,21.003502,\"Veikals\",0,3,2],[56.506013,21.012545,\"Veikala telpas\",0,4,2],[56.50581,21.004945,\"Veikals\",0,3,0],[56.486629,21.005029,\"Tirdzniecības telpa\",0,5,1],[56.5094,21.008351,\"Tirdzniecības telpas\",0,4,2],[56.509894,21.006597,\"Veikala telpas\",0,4,3],[56.50592,21.011536,\"Tirdzniecības telpa\",0,4,2],[56.510514,21.005051,\"Tirdzniecības telpas\",0,4,3],[56.501208,21.008113,\"Veikals\",0,10,0],[56.515635,21.013612,\"Veikals\",0,0,0],[56.517808,21.015298,\"Tirdzniecības telpas\",0,0,2],[56.506106,21.004493,\"Tirdzniecības telpa\",0,3,2],[56.516077,21.012983,\"Tirdzniecības telpa\",0,0,0],[56.507455,21.010834,\"Tirdzniecības telpas\",0,4,0],[56.50577,21.009278,\"Veikala telpas\",0,3,2],[56.489606,21.00376,\"Veikals\",0,9,2],[56.509084,21.016931,\"Tirdzniecības un ofisa telpas\",0,6,2],[56.505741,21.009996,\"Veikala telpas\",0,3,2],[56.506709,21.009816,\"Tirdzniecības telpas\",0,4,2],[56.507386,21.01192,\"Veikals\",0,4,0],[56.50541,21.007964,\"Tirdzniecības telpa\",0,3,0],[56.51204,21.021169,\"Tirdzniecības telpas\",0,6,3],[56.506013,21.012545,\"Veikala telpas\",0,4,2],[56.507386,21.01192,\"Veikals\",0,4,0],[56.504372,21.00998,\"Aptieka\",0,3,2],[56.4861,21.017124,\"Tirdzniecības centrs\",0,1,2],[56.487923,21.017553,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,14,3],[56.507338,21.012546,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,0],[56.502965,21.007574,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,3,2],[56.491688,21.003704,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,9,0],[56.507455,21.010834,\"Tirdzniecības nams kurzeme\",0,4,0],[56.51863,21.024995,\"Tirdzniecības ēka\",0,15,3],[56.498593,21.007952,\"Tirdzniecības telpas\",0,2,0],[56.505797,21.011337,\"Tirdzniecības telpa\",0,4,2],[56.504944,21.00883,\"Tirdzniecības ēka\",0,3,0],[56.511495,21.008167,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,6,3],[56.504467,21.009727,\"Tirgus nojume\",0,3,2],[56.507455,21.010834,\"Tirdzniecības nams kurzeme\",0,4,0],[56.512312,21.012164,\"Vairumtirdznieības un mazumtirdzniecības telpu grupas telpas\",0,6,2],[56.505775,21.010534,\"Frizētava\",1,3,2],[56.483029,21.021863,\"Tirdzniecības centrs\",0,7,1],[56.510514,21.005051,\"Frizētava\",1,4,3],[56.50577,21.009278,\"Datorsalons\",0,3,2],[56.523995,21.011496,\"Tirdzniecības telpas\",0,11,3],[56.50989,21.00706,\"Veikala telpas\",0,4,2],[56.514542,21.019353,\"Veikals\",0,0,2],[56.504989,21.010738,\"Veikals\",0,3,2],[56.510395,21.00996,\"Tirdzniecības telpa\",0,4,2],[56.505486,21.011342,\"Veikala telpas\",0,3,2],[56.510914,21.00659,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,4,3],[56.5089,21.007944,\"Veikals\",0,4,2],[56.506258,21.011019,\"Tirdzniecības telpa\",0,4,2],[56.507338,21.012546,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,0],[56.503947,21.009645,\"Tirdzniecības nojume\",0,3,2],[56.503812,21.008312,\"Frizētava\",1,3,0],[56.510688,21.012521,\"Veikals\",0,6,0],[56.50794,21.003804,\"Tirdzniecības telpas\",0,3,3],[56.510355,21.010616,\"Mazumtirdzniecības veikals\",0,6,2],[56.508892,21.016793,\"Tirdzniecības telpas\",0,6,2],[56.507338,21.012546,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,0],[56.505732,21.009804,\"Veikals\",0,3,2],[56.505466,21.008538,\"Veikala telpas\",0,3,0],[56.505605,21.00809,\"Veikals\",0,3,0],[56.514022,21.018711,\"Veikals\",0,0,2],[56.513865,21.018651,\"Tirdzniecības telpa\",0,0,3],[56.514165,21.018688,\"Tirdzniecības telpa\",0,0,2],[56.523561,21.018866,\"Tirdzniecības telpa\",0,11,0],[56.507338,21.012546,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,0],[56.50541,21.007964,\"Tirdzniecības telpa\",0,3,0],[56.480732,21.026975,\"Tirdzniecības telpas\",0,12,0],[56.521464,21.02706,\"Automātiskās degvielas uzpildes stacijas nojume\",2,16,2],[56.526787,21.032517,\"Tirdzniecības telpa\",0,13,2],[56.498593,21.007952,\"Tirdzniecības telpas\",0,2,0],[56.506276,21.009373,\"Tirdzniecības telpas\",0,3,2],[56.487253,21.017283,\"Degvielas uzpildes stacija\",2,14,3],[56.510622,21.008239,\"Veikals\",0,4,2],[56.484108,21.016287,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,1,1],[56.50541,21.007964,\"Tirdzniecības telpa\",0,3,0],[56.50592,21.011536,\"Tirdzniecības telpas\",0,4,2],[56.506512,21.009554,\"Tirdzniecības telpas\",0,4,2],[56.511443,21.009229,\"Tirdzniecības telpa\",0,6,2],[56.52338,21.026205,\"Tirdzniecības telpa\",0,16,0],[56.52103,21.026311,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,15,2],[56.506512,21.009554,\"Tirdzniecības telpa\",0,4,2],[56.505843,21.008817,\"Veikals\",0,3,2],[56.505078,21.011011,\"Tirdzniecības telpas\",0,3,2],[56.519082,21.016193,\"Veikals\",0,8,0],[56.50592,21.011536,\"Tirdzniecības telpa\",0,4,2],[56.515687,21.017991,\"Degvielas uzpildes stacijas apkalpes ēkas ar veikalu telpas\",2,0,2],[56.505304,21.009463,\"Veikals\",0,3,2],[56.520524,21.025478,\"Veikals\",0,15,2],[56.51991,21.014149,\"Tirdzniecības telpu grupa\",0,8,0],[56.51991,21.014149,\"Tirdzniecības telpa\",0,8,0],[56.507143,21.007891,\"Salons\",0,4,2],[56.500733,21.002319,\"Tirdzniecības telpas\",0,10,2],[56.520524,21.025478,\"Veikals\",0,15,2],[56.485997,21.003397,\"Veikals\",0,5,2],[56.506709,21.009816,\"Tirdzniecības telpas\",0,4,2],[56.523051,21.029763,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,16,2],[56.523051,21.029763,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,16,2],[56.507455,21.010834,\"Tirdzniecības nams kurzeme\",0,4,0],[56.506721,21.014209,\"Tirdzniecības telpas\",0,4,2],[56.517621,21.011466,\"Veikals\",0,0,2],[56.525853,21.011304,\"Tirdzniecības telpa\",0,11,3],[56.507929,21.006136,\"Aptieka\",0,4,2],[56.513668,21.018561,\"Tirdzniecības telpa(kamīnu salons)\",0,0,3],[56.518875,21.012735,\"Veikals\",0,8,2],[56.502282,21.012769,\"Veikals\",0,10,3],[56.499066,20.9994,\"Aptieka\",0,10,3],[56.504834,21.009939,\"Tirdzniecības paviljons\",0,3,2],[56.506512,21.009554,\"Tirdzniecības telpa\",0,4,2],[56.511294,21.008377,\"Tirdzniecības telpas\",0,6,3],[56.523051,21.029763,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,16,2],[56.506013,21.012545,\"Tirdzniecības telpas\",0,4,2],[56.505466,21.008538,\"Veikala telpas\",0,3,0],[56.511235,21.017135,\"Tirdzniecības telpas\",0,6,2],[56.505775,21.010534,\"Skaistumkopšanas salons\",1,3,2],[56.482471,21.007738,\"Ziedu paviljons\",0,14,3],[56.510863,21.018517,\"Veikals\",0,6,2],[56.487375,21.004684,\"Veikals\",0,5,1],[56.491915,21.001981,\"Tirdzniecības telpa\",0,9,2],[56.500259,21.012377,\"Veikals\",0,10,3],[56.509894,21.006597,\"Veikals\",0,4,3],[56.505602,21.008566,\"Veikala telpas\",0,3,0],[56.508892,21.016793,\"Tirdzniecības telpas\",0,6,2],[56.488026,21.017785,\"Veikals\",0,14,3],[56.522118,21.028214,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,16,2],[56.503985,21.009301,\"Tirdzniecības telpa\",0,3,2],[56.507329,21.007382,\"Skaistumkopšanas salons\",1,4,2],[56.517566,21.012857,\"Pirts\",1,0,2],[56.505839,21.011094,\"Nepārtikas preču veikals\",0,4,2],[56.523624,21.020228,\"Veikals\",0,11,2],[56.507386,21.01192,\"Veikals\",0,4,0],[56.507455,21.010834,\"Tirdzniecības telpas\",0,4,0],[56.517387,21.021507,\"Dus operatora ēka\",2,0,3],[56.506918,21.006057,\"Tirdzniecības telpas\",0,3,2],[56.491915,21.001981,\"Veļas mazgātava\",1,9,2],[56.516001,21.014796,\"Tirdzniecības telpa\",0,0,1],[56.515555,21.01328,\"Veikals\",0,0,0],[56.506556,21.010794,\"Veikals\",0,4,2],[56.52338,21.026205,\"Veikals\",0,16,0],[56.52044,21.01413,\"Veikals\",0,8,0],[56.508736,21.007564,\"Veikalu un biroju ēka\",0,4,2],[56.498593,21.007952,\"Tirdzniecības telpas\",0,2,0],[56.525419,21.014577,\"Veikals\",0,11,2],[56.516817,21.014981,\"Frizētava\",1,0,0],[56.506473,21.014128,\"Tirdzniecības telpas\",0,4,2],[56.520524,21.025478,\"Tirdzniecības telpa\",0,15,2],[56.506512,21.009554,\"Tirdzniecības telpa\",0,4,2],[56.507452,21.011478,\"Tirdzniecības telpas\",0,4,0],[56.482404,21.02476,\"Veikals\",0,12,0],[56.511852,21.018646,\"Degvielas uzpildes stacija ar restorānu\",2,6,2],[56.501979,21.012276,\"Veikala telpas\",0,10,3],[56.512459,21.009894,\"Veikala telpas\",0,6,2],[56.500671,21.003237,\"Veikals\",0,10,2],[56.510595,21.006632,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,3],[56.516001,21.014796,\"Tirdzniecības telpa\",0,0,1],[56.507455,21.010834,\"Tirdzniecības telpas\",0,4,0],[56.509084,21.016931,\"Tirdzniecības un ofisa telpas\",0,6,2],[56.519115,21.014946,\"Tirdzniecības telpas\",0,8,2],[56.50541,21.007964,\"Tirdzniecības telpa\",0,3,0],[56.493529,21.00259,\"Veikals\",0,9,2],[56.505797,21.011337,\"Tirdzniecības telpa\",0,4,2],[56.50989,21.00706,\"Veikala telpa\",0,4,2],[56.48016,21.023141,\"Veikals\",0,12,2],[56.507338,21.012546,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,0],[56.510722,21.013192,\"Veikals\",0,6,1],[56.50989,21.00706,\"Veikala telpas\",0,4,2],[56.512251,21.020617,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,6,3],[56.517428,21.011021,\"Tirdzniecības telpas\",0,0,2],[56.505417,21.007616,\"Frizētava\",1,3,0],[56.514216,21.012701,\"Tirdzniecības telpa\",0,0,2],[56.505741,21.009996,\"Veikala telpas\",0,3,2],[56.505842,21.012307,\"Tirdzniecības telpu grupa\",0,4,2],[56.523051,21.029763,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,16,2],[56.504372,21.00998,\"Tirdzniecības paviljons\",0,3,2],[56.507455,21.010834,\"Tirdzniecības telpas\",0,4,0],[56.518066,21.009898,\"Tirdzniecības telpa\",0,0,3],[56.525367,21.015378,\"Tirdzniecības telpa\",0,11,2],[56.505909,21.008339,\"Datorsalons\",0,3,0],[56.50541,21.007964,\"Tirdzniecības telpa\",0,3,0],[56.516272,21.020022,\"Veikals\",0,0,2],[56.51282,21.008968,\"Tirdzniecības telpa\",0,6,3],[56.50558,21.008846,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,3,0],[56.520524,21.025478,\"Veikals\",0,15,2],[56.481829,21.02706,\"Tirdzniecības telpa\",0,12,1],[56.513722,21.016926,\"Vasaras tirdzniecības paviljons\",0,0,2],[56.48283,21.017955,\"Frizētava\",1,1,0],[56.508865,21.008172,\"Veikals\",0,4,2],[56.507386,21.01192,\"Veikals\",0,4,0],[56.513652,21.020154,\"Tirdzniecības telpa\",0,0,3],[56.509818,21.007338,\"Tirdzniecības telpas\",0,4,2],[56.501949,21.00566,\"Tirdzniecības telpa\",0,10,0],[56.491069,21.006483,\"Tirdzniecības telpas\",0,9,1],[56.506512,21.009554,\"Frizētava\",1,4,2],[56.504761,21.009547,\"Tirdzniecības paviljons\",0,3,2],[56.524456,21.031147,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpa\",0,13,0],[56.522118,21.028214,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,16,2],[56.524718,21.032254,\"Tirdzniecības paviljons\",0,13,0],[56.515635,21.013612,\"Veikals\",0,0,0],[56.523124,21.025549,\"Veikals\",0,16,0],[56.509461,21.010385,\"Veikals\",0,4,0],[56.509084,21.016931,\"Tirdzniecības telpas\",0,6,2],[56.507338,21.012546,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,4,0],[56.505966,21.006265,\"Frizētava- skaistumkopšanas salons\",1,3,0],[56.501762,21.008127,\"Krāsu veikals\",0,10,2],[56.514939,21.01816,\"Tirdzniecības centrs\",0,0,2],[56.498972,21.010282,\"Veikals\",0,2,2],[56.50702,21.011912,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,0],[56.50665,21.011725,\"Tirdzniecības telpas\",0,4,2],[56.510116,21.006871,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,3],[56.50558,21.008846,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,3,0],[56.509134,21.008352,\"Tirdzniecības telpas\",0,4,2],[56.511852,21.018646,\"Degvielas uzpildes tehniskā telpa\",2,6,2],[56.484472,21.014752,\"Tirdzniecības ēka\",0,1,0],[56.523604,21.016539,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,11,1],[56.505775,21.010534,\"Tirdzniecības telpas\",0,3,2],[56.519128,21.02565,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,15,3],[56.483192,21.017253,\"Veikals\",0,1,0],[56.483321,21.016751,\"Veikala ēka\",0,1,1],[56.511192,21.005868,\"Tirdzniecības telpas\",0,4,3],[56.511852,21.018646,\"Degvielas uzpildes stacija\",2,6,2],[56.491915,21.001981,\"Tirdzniecības telpa\",0,9,2],[56.50541,21.007964,\"Tirdzniecības telpa\",0,3,0],[56.515315,21.016602,\"Veikals\",0,0,0],[56.50913,21.016433,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,6,2],[56.486629,21.005029,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,5,1],[56.500799,21.002886,\"Veikals\",0,10,2],[56.506709,21.009816,\"Tirdzniecības telpas\",0,4,2],[56.507162,21.008326,\"Tirdzniecības telpas\",0,4,2],[56.513904,21.012999,\"Tirdzniecības telpu grupa\",0,0,2],[56.514451,21.018307,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,0,2],[56.506127,21.009101,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,3,2],[56.514165,21.018688,\"Tirdzniecības telpa\",0,0,2],[56.510885,21.011857,\"Veikals\",0,6,0],[56.516916,21.011782,\"Veikals\",0,0,2],[56.521099,21.028503,\"Tirdzniecības ēka\",0,16,3],[56.509762,21.009579,\"Veikals\",0,4,2],[56.50558,21.008846,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,3,0],[56.50791,21.008965,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupa\",0,4,0],[56.510116,21.006871,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,3],[56.516001,21.014796,\"Tirdzniecības telpa\",0,0,1],[56.507338,21.012546,\"Skaistumkopšanas salons\",1,4,0],[56.507338,21.012546,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,4,0],[56.506841,21.01051,\"Veikals\",0,4,2],[56.519511,21.013279,\"Tirdzniecības telpa\",0,8,2],[56.510931,21.013172,\"Tirdzniecības telpas\",0,6,1],[56.501026,21.001844,\"Tirdzniecības telpas\",0,10,2],[56.510289,21.017339,\"Veikals\",0,6,2],[56.518896,21.015301,\"Tirdzniecības telpas\",0,8,2],[56.510931,21.013172,\"Tirdzniecības telpa\",0,6,1],[56.508775,21.009328,\"Tirdzniecības telpas\",0,4,0],[56.49066,21.005107,\"Vairumtirdzniecības un mazumtirdzniecības telpu grupas telpas\",0,9,1],[56.510931,21.013172,\"Tirdzniecības telpa\",0,6,1],[56.511506,21.014653,\"Veikala telpas\",0,6,0],[56.5094,21.008351,\"Tirdzniecības telpas\",0,4,2],[56.51061,21.010193,\"Veikals\",0,6,2],[56.509981,21.009497,\"Tirdzniecības telpas\",0,4,2],[56.508103,21.014148,\"Tirdzniecības telpas\",0,4,2],[56.511493,21.012774,\"Frizētava\",1,6,0],[56.506646,21.01556,\"Tirdzniecības telpas\",0,4,3],[56.519768,21.016367,\"Veikals\",0,8,1],[56.510077,21.008404,\"Tirdzniecības telpas\",0,4,2],[56.518583,21.013116,\"Tirdzniecības telpas\",0,8,2],[56.506282,21.005502,\"Frizētava\",1,3,2]]");
+                var cluster = L.markerClusterGroup({
+  "animate": false,
+});
+                cluster.options.iconCreateFunction =
+                    function (cluster) {
+            var count = cluster.getChildCount();
+            var size = count <= 3 ? 18 : count <= 10 ? 26 : count <= 50 ? 34 : 42;
+            var fontSize = Math.max(9, Math.round(size * 0.42));
+            return new L.DivIcon({
+                html: '<div style="width:100%; height:100%; border-radius:50%; ' +
+                    'background:#2a78d6; opacity:0.85; ' +
+                    'border:1px solid rgba(0,0,0,0.4); display:flex; ' +
+                    'align-items:center; justify-content:center; color:#fff; ' +
+                    'font-size:' + fontSize + 'px; font-weight:600;">' +
+                    count + '</div>',
+                className: 'business-cluster-icon',
+                iconSize: new L.Point(size, size)
+            });
+        };
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = data[i];
+                    var marker = callback(row);
+                    marker.addTo(cluster);
+                }
+
+                cluster.addTo(feature_group_4b508957d7544a6281b2df36c01d0830);
+                return cluster;
+            })();
+        
+    
+            fast_marker_cluster_a66ac365bf6b7f7a6f346c4148341c40.addTo(feature_group_4b508957d7544a6281b2df36c01d0830);
+        
+    
+            feature_group_4b508957d7544a6281b2df36c01d0830.addTo(map_54408190d96eef09238ea11bdd3e5a31);
+        
+    
+            var feature_group_17a98f48dd38cb7b8906ce7947fc00d9 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var fast_marker_cluster_1e840ec1f22ddca603092b3bafcef4bd = (function(){
+                var callback = 
+        (function () {
+            var CATEGORIES = ["Bar", "Caf\u00e9", "Pizzeria", "Restaurant"];
+            var STATIONS = ["Koncertz\u0101le", "P\u0113tertirgus", "Ro\u017eu laukums", "Olimpiskais centrs", "Esperanto iela", "Ventas iela", "Klaip\u0113das iela", "Gan\u012bbu iela", "Dzelzce\u013cnieku iela", "L\u012bvas laukums", "J\u016brmalas iela"];
+            var BANDS = ["Ring 4 (0.2-0.3 mi)", "Ring 3 (0.1-0.2 mi)", "Ring 2 (0.05-0.1 mi)", "Ring 1 (0-0.05 mi)"];
+            return function (row) {
+                var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {
+                    radius: 5, color: '#C2185B', fillColor: '#C2185B',
+                    fillOpacity: 0.85, weight: 1
+                });
+                var html = '<b>' + row[2] + '</b><br>' +
+                    'Kind: ' + CATEGORIES[row[3]] + '<br>' +
+                    'Nearest station: ' + STATIONS[row[4]] + '<br>' +
+                    BANDS[row[5]];
+                marker.bindTooltip(html, {sticky: true});
+                return marker;
+            };
+        })()
+    ;
+
+                var data = JSON.parse("[[56.512687,21.007149,\"Kuģinieku iela 5\",0,0,0],[56.503319,21.00986,\"Siena iela 5\",1,1,1],[56.505488,21.011362,\"Kuršu laukums 13\",0,1,1],[56.506156,21.011699,\"Zivju iela 10/12\",0,2,1],[56.510902,21.006581,\"Jūras iela 25/29\",1,2,0],[56.50705,21.012344,\"Stendera iela 18/20\",0,2,1],[56.511229,21.01704,\"Kārļa Zāles laukums 8\",1,0,1],[56.504336,21.009266,\"Kuršu iela 7/9\",1,1,1],[56.509903,21.014883,\"Teātra iela 4\",1,0,2],[56.504996,21.009562,\"Rakstvežu iela 7\",1,1,1],[56.519011,21.018008,\"Brīvības iela 39\",1,3,1],[56.511388,21.010627,\"Radio iela 8\",1,0,1],[56.51495,21.018325,\"Jaunā ostmala 3/5\",2,4,1],[56.49178,21.003773,\"Klaipēdas iela 62\",2,5,2],[56.50705,21.012344,\"Stendera iela 18/20\",2,2,1],[56.486687,21.00508,\"Klaipēdas iela 104C\",3,6,3],[56.51276,21.007669,\"Friča Brīvzemnieka iela 7\",3,0,0],[56.511388,21.010627,\"Radio iela 8\",3,0,1],[56.505113,21.011101,\"Kuršu laukums 11\",3,1,1],[56.507529,21.008362,\"Friča Brīvzemnieka iela 53\",3,2,1],[56.509743,21.011953,\"Lielā iela 12\",0,2,1],[56.508472,21.015134,\"Baznīcas iela 14/16\",0,2,1],[56.514404,21.014266,\"Rīgas iela 7/9\",0,4,1],[56.514404,21.014266,\"Rīgas iela 7/9\",1,4,1],[56.514404,21.014266,\"Rīgas iela 7/9\",3,4,1],[56.486096,21.017132,\"Ganību iela 175/177\",0,7,1],[56.510666,21.01389,\"Lielā iela 5\",0,0,3],[56.509408,21.005149,\"Vītolu iela 6/10\",1,2,0],[56.507489,21.010697,\"Lielā iela 13\",0,2,2],[56.51495,21.018325,\"Jaunā ostmala 3/5\",1,4,1],[56.520637,21.016664,\"Rīgas iela 48\",1,3,3],[56.509596,21.009629,\"Friča Brīvzemnieka iela 36\",1,2,1],[56.504418,21.013873,\"Palmu iela 5\",0,1,0],[56.504418,21.013873,\"Palmu iela 5\",3,1,0],[56.508851,21.013366,\"Stendera iela 3\",0,2,2],[56.512412,21.011551,\"Vecā ostmala 40\",0,0,1],[56.512412,21.011551,\"Vecā ostmala 40\",3,0,1],[56.517589,21.014603,\"Pīlādžu iela 33\",0,4,1],[56.509157,21.012386,\"Lielā iela 11\",0,2,2],[56.509157,21.012386,\"Lielā iela 11\",3,2,2],[56.507489,21.010697,\"Lielā iela 13\",1,2,2],[56.481576,21.014031,\"Ganību iela 197/205\",0,7,1],[56.507745,21.012525,\"Rožu laukums 5/6\",1,2,2],[56.507433,21.009462,\"Avotu iela 2\",1,2,2],[56.521343,21.019249,\"Brīvības iela 55\",1,8,1],[56.505612,21.008096,\"Kuršu iela 2\",1,1,2],[56.483188,21.017299,\"Gaujas prospekts 5\",1,7,2],[56.505816,21.010968,\"Peldu iela 4\",1,2,1],[56.509743,21.011953,\"Lielā iela 12\",1,2,1],[56.510575,21.012902,\"Lielā iela 8\",1,0,3],[56.511443,21.005615,\"Graudu iela 21\",1,2,0],[56.516079,21.012995,\"Raiņa iela 13\",0,4,2],[56.511038,21.01431,\"Lielā iela 3\",3,0,3],[56.506265,21.000761,\"Peldu iela 54\",3,1,0],[56.508793,21.009262,\"Graudu iela 45\",1,2,2],[56.510341,21.013441,\"Lielā iela 7\",1,0,3],[56.50621,21.015238,\"Kungu iela 24\",3,2,0],[56.507784,21.008231,\"Friča Brīvzemnieka iela 52\",0,2,1],[56.511038,21.01431,\"Lielā iela 3\",0,0,3],[56.508169,21.003342,\"Republikas iela 18\",0,1,0],[56.506466,20.999372,\"Peldu iela 56\",0,1,0],[56.504047,21.00795,\"Kuršu iela 10\",1,1,2],[56.498227,21.005125,\"Robežu iela 7\",1,9,2],[56.510866,21.007476,\"Jēkaba Dubelšteina iela 14\",3,2,0],[56.51071,21.012627,\"Pasta iela 1\",0,0,3],[56.511717,21.009299,\"Jūras iela 22\",0,0,1],[56.511717,21.009299,\"Jūras iela 22\",3,0,1],[56.5116,21.008826,\"Jūras iela 24\",1,0,1],[56.512548,21.010247,\"Dzirnavu iela 4\",0,0,1],[56.51242,21.008587,\"Dzirnavu iela 10\",1,0,0],[56.512548,21.010247,\"Dzirnavu iela 4\",1,0,1],[56.50509,21.004948,\"Alejas iela 9\",1,1,2],[56.503871,21.012492,\"Eduarda Veidenbauma iela 8\",3,1,0],[56.506272,21.008864,\"Tirgoņu iela 22\",1,1,1],[56.509886,21.006623,\"Graudu iela 36/38\",0,2,1],[56.512233,21.015948,\"Vecā ostmala 29\",3,0,1],[56.507296,21.012244,\"Zivju iela 3\",0,2,2],[56.517603,21.011417,\"Raiņa iela 22\",1,4,1],[56.509788,21.00735,\"Pasta iela 28\",3,2,1],[56.502782,21.007723,\"Kuršu iela 20\",0,1,1],[56.509743,21.011953,\"Lielā iela 12\",1,2,1],[56.509792,21.010082,\"Friča Brīvzemnieka iela 33\",1,2,1],[56.501495,21.007347,\"Kuršu iela 32\",3,10,2],[56.506496,21.009108,\"Tirgoņu iela 20\",1,1,1],[56.506047,21.008623,\"Tirgoņu iela 24\",1,1,1],[56.507762,21.014142,\"Andreja Pumpura iela 10\",0,2,1],[56.51071,21.012627,\"Pasta iela 1\",1,0,3],[56.506047,21.008623,\"Tirgoņu iela 24\",0,1,1],[56.510244,21.009655,\"Friča Brīvzemnieka iela 27A\",0,2,1],[56.505757,21.008985,\"Peldu iela 14A\",0,1,1],[56.51276,21.007669,\"Friča Brīvzemnieka iela 7\",0,0,0],[56.519011,21.018008,\"Brīvības iela 39\",0,3,1]]");
+                var cluster = L.markerClusterGroup({
+  "animate": false,
+});
+                cluster.options.iconCreateFunction =
+                    function (cluster) {
+            var count = cluster.getChildCount();
+            var size = count <= 3 ? 18 : count <= 10 ? 26 : count <= 50 ? 34 : 42;
+            var fontSize = Math.max(9, Math.round(size * 0.42));
+            return new L.DivIcon({
+                html: '<div style="width:100%; height:100%; border-radius:50%; ' +
+                    'background:#C2185B; opacity:0.85; ' +
+                    'border:1px solid rgba(0,0,0,0.4); display:flex; ' +
+                    'align-items:center; justify-content:center; color:#fff; ' +
+                    'font-size:' + fontSize + 'px; font-weight:600;">' +
+                    count + '</div>',
+                className: 'business-cluster-icon',
+                iconSize: new L.Point(size, size)
+            });
+        };
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = data[i];
+                    var marker = callback(row);
+                    marker.addTo(cluster);
+                }
+
+                cluster.addTo(feature_group_17a98f48dd38cb7b8906ce7947fc00d9);
+                return cluster;
+            })();
+        
+    
+            fast_marker_cluster_1e840ec1f22ddca603092b3bafcef4bd.addTo(feature_group_17a98f48dd38cb7b8906ce7947fc00d9);
+        
+    
+            feature_group_17a98f48dd38cb7b8906ce7947fc00d9.addTo(map_54408190d96eef09238ea11bdd3e5a31);
+        
+    
+            var layer_control_a86d4cfab3532da826806e951b7bdfbf_layers = {
+                base_layers : {
+                    "Liep\u0101ja Tram Business Density Heatmap" : tile_layer_61abd433960bced2bf9573a9087472bc,
+                },
+                overlays :  {
+                    "Commercial Density (Within Station Proximity)" : heat_map_a3fef7c5e4185fa1c553936a49d6526f,
+                    "Commercial Density (All Liep\u0101ja Businesses)" : heat_map_3365a9a7ba25d77100853b9f746ce1ee,
+                    "Concentric Ring 1: 0-0.05 mi" : feature_group_8d594a79cd4ff28b2ea2f2a6c26dbf71,
+                    "Concentric Ring 2: 0.05-0.1 mi" : feature_group_e9f9b745f294dae084533d4335ccf255,
+                    "Concentric Ring 3: 0.1-0.2 mi" : feature_group_2be10e95782158ecb778e5186dedb9a7,
+                    "Concentric Ring 4: 0.2-0.3 mi" : feature_group_bca50ad9b4bea13bcf8ef5684f3ded40,
+                    "\u003cb\u003eBusinesses: Shops and services (397)\u003c/b\u003e" : feature_group_4b508957d7544a6281b2df36c01d0830,
+                    "\u003cb\u003eBusinesses: Food service (92)\u003c/b\u003e" : feature_group_17a98f48dd38cb7b8906ce7947fc00d9,
+                },
+            };
+            let layer_control_a86d4cfab3532da826806e951b7bdfbf = L.control.layers(
+                layer_control_a86d4cfab3532da826806e951b7bdfbf_layers.base_layers,
+                layer_control_a86d4cfab3532da826806e951b7bdfbf_layers.overlays,
+                {
+  "position": "topleft",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_54408190d96eef09238ea11bdd3e5a31);
+
+        
+</script>
+</html>

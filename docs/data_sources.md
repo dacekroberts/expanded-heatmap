@@ -81,20 +81,20 @@ together, so a row in either counts and a row in neither still fails.
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
-| Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |
+| Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
-| Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm |
-| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus |
+| Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm, Göteborg |
+| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
-| Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam |
-| Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga |
+| Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
+| Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon |
@@ -104,6 +104,7 @@ together, so a row in either counts and a row in neither still fails.
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
+| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
 
 ## Business registries
 
@@ -1473,7 +1474,7 @@ Sporveien's names to endorse anything (NLOD §6), or present the data
 misleadingly. **MUST DO: nothing** - no key for the static file, and Entur asks
 for no more than one download a day.
 
-**30. Det Centrale Virksomhedsregister (Copenhagen, Aarhus) — required, and DISPLAYED.** Aarhus (2026-09-29) reads the same cached generation 505, so Det Centrale Virksomhedsregister's credit is widened to name it, owner-approved.
+**30. Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads the same cached generation 505, so Det Centrale Virksomhedsregister's credit is widened to name it, owner-approved. Odense (2026-09-30, tram kit) reads it too, and the credit names it; for the owner's approval at review time.
 
 **CC BY 4.0**, from CVR's own terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/det-centrale-virksomhedsregister-cvr/`,
@@ -1486,7 +1487,7 @@ DO: nothing** - no notification, no registration of the reuse. The account is
 the owner's and closes after Copenhagen publishes (`docs/gated_access.md` item
 3); closing is licence-safe, since the grant attaches to the data.
 
-**31. Klimadatastyrelsen (Copenhagen, Aarhus) — required, and DISPLAYED.** Aarhus (2026-09-29) reads DAR's Adresse and Husnummer (generation 761) and takes each point from OpenStreetMap's copy, so Klimadatastyrelsen's notice now names OpenStreetMap's points for Aarhus, owner-approved.
+**31. Klimadatastyrelsen (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads DAR's Adresse and Husnummer (generation 761) and takes each point from OpenStreetMap's copy, so Klimadatastyrelsen's notice now names OpenStreetMap's points for Aarhus, owner-approved. Odense (2026-09-30, tram kit) is placed the same way, and the notice names it; for the owner's approval at review time.
 
 **CC BY 4.0**, from DAR's terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/danmarks-adresseregister-dar/`,
@@ -1595,7 +1596,7 @@ lines (layers 19 and 18) only; the VLT and SuperVia are OpenStreetMap's, under
 notice 1. The SIURB terms' liability clause was accepted by the owner
 2026-09-23. Wording approved by the owner 2026-09-24. **MUST DO: nothing.**
 
-**40. CBS (Rotterdam) — required, and DISPLAYED.**
+**40. CBS (Rotterdam, Den Haag) — required, and DISPLAYED.**
 
 **CC BY 4.0** (`cbs.nl/nl-nl/over-ons/website/copyright`, read 2026-09-24): credit
 CBS, link the licence, and say when a figure is recalculated. Rotterdam's page
@@ -1605,6 +1606,7 @@ of CBS's counts, which the notice says. **MUST NOT SAY**: that CBS produced or
 endorses the map; no CBS logo. KOOP's notices (Auteurswet art. 11, CC0 declared),
 the BAG (Public Domain Mark) and the national feed (CC0) need no notice. Wording
 approved by the owner 2026-09-24. **MUST DO: nothing.**
+- **Den Haag (2026-09-30, tram kit)**: its page quotes the same table (180 of 4,480 shop units, GM0518, 1 January 2025) as "about one in twenty-five"; the displayed entry now names both cities.
 
 **41. FEHD / DATA.GOV.HK / CSDI (Hong Kong) — required, and DISPLAYED.**
 
@@ -1617,7 +1619,7 @@ approved by the owner 2026-09-24. **MUST DO:** `check_personal_exposure.py hong_
 2026-09-24 (the verdict is in `DECISIONS.md`). MTR's station lists (gate 3) and ALS (a
 cross-check) are not published and need no notice.
 
-**42. VZD (Riga) — required, and DISPLAYED.**
+**42. VZD (Riga, Liepāja, Daugavpils) — required, and DISPLAYED.** Liepāja and Daugavpils (2026-09-30, tram kit) each read their own cadastral map and VZD's State Address Register (`aw_eka.csv`), so the notice names both, with VZD's own source wording for the address register ("Izmantoti Valsts adrešu reģistra informācijas sistēmas dati, 2026. gads") and the changes made; for the owner's approval at review time.
 
 **PERMITTED WITH CONDITIONS.** CC BY 4.0, adopted by VZD's own data-use rules
 (`vzd.gov.lv/lv/par-datu-izmantosanas-noteikumiem`, read 2026-09-24 by the licence-read
@@ -2380,6 +2382,89 @@ France's, on `france-build-2`).
 **32 and 33 widened in the same change.** The ČSÚ and ČÚZK notices' text names
 no city, so their titles list each Czech city as it lands (owner, 2026-09-30),
 as Norway's and Denmark's do. Their text is unchanged.
+
+**80. City of Kansas City, Missouri (Kansas City) — required, and DISPLAYED**
+(written into `render_site_notices()`; tram kit, 2026-09-30; displayed once Kansas
+City lands. **France also numbered notices 69-71 on its branch: renumber at
+landing.**)
+
+- **PERMITTED WITH CONDITIONS, and one owner decision** (`licence-read`
+  2026-09-30; the rows in [`data_sources/united-states.md`](data_sources/united-states.md)).
+  KCMO Code § 2-2134(a) (Ord. 150865, 2015) requires every portal dataset to be
+  "explicitly placed into the public domain, thereby ensuring that there are no
+  restrictions or requirements placed on use", and `kkhs-93m4` and its parent
+  `pnm4-68wg` both declare Public Domain - the City's choice, not a portal
+  default (142 of the portal's 202 datasets carry no licence).
+- **MUST DISPLAY**: the portal's Data Terms of Use (`data.kcmo.org/terms`,
+  undated) prescribe the paragraph above "at the site where the software
+  application ... can be accessed" - Chicago's wording on the same portal
+  template, so site-wide as Chicago's. Reproduced word for word, including
+  `www.data.kcmo.gov`, a host that does not resolve (the portal is
+  data.kcmo.org). Displayed whichever document controls: it costs nothing.
+- **The indemnity - DECIDED by the owner (2026-09-30): the ordinance
+  controls.** The same terms say any user "shall indemnify and hold harmless the
+  City from any claim ... that arises directly or indirectly ... from that
+  user's use of this data". The owner took the reading that KCMO Code
+  § 2-2134(a)'s "no restrictions or requirements placed on use" overrides the
+  undated terms page (the dataset is declared public domain, the ordinance backs
+  it, and no step asks for acceptance), so it binds nothing here - unlike
+  RideKC's GTFS, whose terms the site itself imposes. Kansas City is cleared to
+  land. The disclaimer above is displayed regardless.
+- **MUST NOT**: use City marks (the terms reserve them); present the data as
+  the City's current or accurate record (the disclaimer above says otherwise,
+  and the register is frozen at 2026-01-15).
+- **MUST DO**: check for Finance-department data terms before a republish
+  (the terms incorporate them; none found).
+
+**81. City of Tucson (Tucson) — required, and DISPLAYED** (written into
+`render_site_notices()`; tram kit, 2026-09-30; displayed once Tucson lands.
+**Renumber at landing with 69**, after France's 69-71.)
+
+- **SILENT, read as permitted by the owner (2026-09-30)**: the BUSLIC layer's
+  `licenseInfo` is an accuracy disclaimer only - nothing grants and nothing
+  restricts - and the hub invites building applications. The owner took the
+  permissive reading over two sibling City disclaimers (DTM Map Center, PDSD
+  PRO) that add "for your personal use", which the item does not incorporate.
+  Rows in [`data_sources/united-states.md`](data_sources/united-states.md).
+- **MUST DISPLAY**: "Business licence data: City of Tucson." (the owner's
+  wording, the condition of the permissive reading).
+- **MUST NOT**: present the pins as complete - the layer's own words, "should
+  not be considered a complete listing of all active businesses in Tucson".
+  The page quotes it.
+- **MUST DO**: nothing. A.R.S. 39-121.03 (commercial use of public records)
+  does not reach a non-commercial portfolio; it would if the project became
+  commercial.
+
+**82. Comune di Firenze (Florence) — required, and DISPLAYED** (written into
+`render_site_notices()`; tram kit, 2026-09-30; displayed once Florence lands.
+**Renumber at landing with 69 and 70**, after France's 69-71.)
+
+- **PERMITTED WITH CONDITIONS, CC BY 4.0** (the brief's licence read,
+  2026-09-30): the Comune's own Note legali ("I materiali Open data sono
+  liberamente riutilizzabili...") and CC BY 4.0 on every dataset and
+  distribution. The Regione's dati.toscana.it only harvests the layers and is
+  owed nothing. Rows in [`data_sources/italy.md`](data_sources/italy.md).
+- **MUST DISPLAY**: credit the Comune di Firenze (Direzione Attività Economiche
+  e Turismo), link CC BY 4.0, and state the changes (filtered, categorised,
+  aggregated) - no wording prescribed; Milan's notice 23 (Comune di Milano) is the model.
+- **MUST NOT**: imply the Comune's endorsement, or use its logo or the giglio.
+- **MUST DO**: nothing. The Comune's footer ties reuse of personal data to
+  d.lgs. 36/2006; the layers carry no name or address.
+
+**83. Gemeente Den Haag (Den Haag) — required, and DISPLAYED** (written into
+`render_site_notices()`; tram kit, 2026-09-30; displayed once Den Haag lands. **Renumber at landing with 69-71**, after France's 69-71.)
+
+- **SILENT and ambiguous; the owner proceeds on Amsterdam's precedent
+  (2026-09-30).** Databankenwet art. 8(2): a public body's database is
+  unprotected unless the right is expressly reserved, and nothing on the layer,
+  its web map or app reserves it; against that, denhaag.nl's site terms name
+  database rights. Rows in [`data_sources/netherlands.md`](data_sources/netherlands.md).
+- **MUST DISPLAY**: the credit "Gemeente Den Haag" (the owner's condition).
+  The notice text is a proposal, for review time.
+- **MUST NOT**: call the layer current or complete (the page gives its last
+  edit, 23 May 2025); imply the city's endorsement.
+- **MUST DO**: never download `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` -
+  `fetch_sources.py` names its fields and stops if one arrives.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

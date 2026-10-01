@@ -252,6 +252,31 @@ TEXT_WIDTH = {
     # Prague 47.3, Tokyo 40.5, London 50.9, Glasgow 56.8 and Oslo 29.0
     # reproduced (the Suwon/Bucheon/Bergen session's run).
     "Aarhus": 46.9,
+    # Odense: measured 2026-09-30 in a browser tab with Google Fonts' Space
+    # Grotesk stylesheet loaded, canvas measureText at 600 14px "Space
+    # Grotesk" after document.fonts.load; Aarhus 46.9, Prague 47.3, Oslo 29.0,
+    # Riga 29.5, Bergen 48.3, Boston 48.4 and Chicago 55.0 reproduced (tram kit).
+    "Odense": 50.6,
+    # Liepāja: measured 2026-09-30 the same way as Odense, in the same tab
+    # (Aarhus 46.9, Riga 29.5 and Odense 50.6 reproduced again; tram kit).
+    "Liepāja": 48.2,
+    # Daugavpils: measured 2026-09-30 in the same tab, the same way.
+    "Daugavpils": 73.7,
+    # Kansas City: measured 2026-09-30 the same way as Odense, in a fresh tab
+    # (Houston 56.9, Odense 50.6, Daugavpils 73.7 and Riga 29.5 reproduced).
+    "Kansas City": 79.3,
+    # Tucson: measured in the same tab as Kansas City, the same way.
+    "Tucson": 48.6,
+    # New Orleans: measured in the same tab as Kansas City, the same way.
+    "New Orleans": 82.8,
+    # Florence: measured 2026-09-30 in a fresh tab, the same way (Houston 56.9,
+    # Odense 50.6, Kansas City 79.3 and Daugavpils 73.7 reproduced).
+    "Florence": 58.1,
+    # Göteborg, Den Haag and Zurich: measured in the same tab as Florence, the
+    # same way (2026-09-30, tram kit).
+    "Göteborg": 63.6,
+    "Den Haag": 63.8,
+    "Zurich": 42.6,
     # Buffalo: measured 2026-09-29 in the local app's own document (lean venv),
     # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load;
     # Prague 47.3, Tokyo 40.5, London 50.9, Glasgow 56.8 and Oslo 29.0

@@ -73,13 +73,17 @@ FIELDS = {
     # (owner, 2026-09-28).
     # "Personal services only": Yokohama, whose city publishes its barber,
     # beauty and laundry registers and no food list (owner, 2026-09-30).
+    # "Food service thin": Kansas City, whose licence register holds about 175
+    # restaurants and bars (the review rehearsal, 2026-09-30, on the owner's rule
+    # that a thin layer is narrowed).
     "categories": {"All three", "Two", "Merged", "Retail thin",
-                   "Personal services thin", "Food premises only",
-                   "Personal services only"},
+                   "Personal services thin", "Food service thin",
+                   "Food premises only", "Personal services only"},
 }
 # The coverage tier each `categories` value needs (owner, 2026-09-30).
 TIER_OF = {"All three": "full", "Two": "narrowed", "Merged": "narrowed",
            "Retail thin": "narrowed", "Personal services thin": "narrowed",
+           "Food service thin": "narrowed",
            "Food premises only": "one_bucket", "Personal services only": "one_bucket"}
 
 

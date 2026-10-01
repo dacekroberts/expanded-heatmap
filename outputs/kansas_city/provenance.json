@@ -1,0 +1,45 @@
+{
+  "written_utc": "2026-10-01T00:52:28+00:00",
+  "register": {
+    "url": "https://data.kcmo.org/resource/kkhs-93m4.json",
+    "name": "KCMO Business License Holders",
+    "license": "Public Domain",
+    "rowsUpdatedAt": 1768519845,
+    "data_date": "2026-01-15",
+    "fields": [
+      "id",
+      "business_type",
+      "address",
+      "city",
+      "state",
+      "zipcode",
+      "business_name",
+      "dba_name",
+      "valid_license_for",
+      "location"
+    ]
+  },
+  "naics_titles": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx",
+  "boundary": {
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
+    "query": {
+      "where": "GEOID='2938000'",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "f": "geojson"
+    }
+  },
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    39.02,
+    -94.62,
+    39.13,
+    -94.54
+  ],
+  "files_utc": {
+    "business_licenses.csv": "2026-10-01T00:52:02+00:00",
+    "naics_2022_codes.xlsx": "2026-10-01T00:52:02+00:00",
+    "city_boundary_tiger.geojson": "2026-10-01T00:52:03+00:00",
+    "osm_rail.json": "2026-10-01T00:52:28+00:00"
+  }
+}

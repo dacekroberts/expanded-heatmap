@@ -374,6 +374,56 @@
   "all": 29912,
   "map_blob": "4e6a1858e44f8ebecb6578e3afc121f6ea97736e"
  },
+ "odense": {
+  "in_ring": 1154,
+  "all": 2834,
+  "map_blob": "0e1dbcdb55bf13a649bd5a5eea37a89d9f3cc271"
+ },
+ "liepaja": {
+  "in_ring": 489,
+  "all": 702,
+  "map_blob": "5c817b09d8bd570baa717675b3c437cc91ca9d64"
+ },
+ "daugavpils": {
+  "in_ring": 656,
+  "all": 819,
+  "map_blob": "deab2f16d12ea3d20b623472e1ea6c90cca8bff3"
+ },
+ "kansas_city": {
+  "in_ring": 451,
+  "all": 3561,
+  "map_blob": "a0529b90d7fa84dd89bfb12ffbb05ea130818724"
+ },
+ "tucson": {
+  "in_ring": 340,
+  "all": 5243,
+  "map_blob": "002e6c85329bc27ebe350ed58bb910df1dbd7293"
+ },
+ "new_orleans": {
+  "in_ring": 2131,
+  "all": 4689,
+  "map_blob": "bac3fc63655972b0cc0648e3afa112ccd6c70d8c"
+ },
+ "florence": {
+  "in_ring": 4435,
+  "all": 12052,
+  "map_blob": "b23d207b487cab4207c633124b3610202940c65c"
+ },
+ "goteborg": {
+  "in_ring": 2255,
+  "all": 2987,
+  "map_blob": "eb31e77c8d248dc33890f3326b682c350837a014"
+ },
+ "den_haag": {
+  "in_ring": 5781,
+  "all": 6213,
+  "map_blob": "20aeaa0cde3c6b9b2a71f2f75cfad54424de15f8"
+ },
+ "zurich": {
+  "in_ring": 3099,
+  "all": 3363,
+  "map_blob": "5bed72f479121497dfc7dce78a87576c75aa6056"
+ },
  "le_mans": {
   "in_ring": 1462,
   "all": 1991,

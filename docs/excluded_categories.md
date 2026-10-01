@@ -1669,6 +1669,27 @@ the municipality (Odder 3, Syddjurs 5, Norddjurs 3). All are listed in
 `outputs/aarhus/excluded_stations.csv`. Regional and InterCity trains are not
 drawn.
 
+### Odense - Copenhagen's register and rules, and every tram stop
+
+**Copenhagen's rules, unchanged** (the section below): production units at their
+own location address, the eight structural kinds of work plus industrial
+laundries (221 rows here: contract catering and canteens 96, event catering 61,
+retail agents 28, mobile food stalls 16, funeral services 11, home services 5,
+industrial laundries 2, personal-service agents 2), and a personally owned
+business shown by its address. **`969900` excluded on Odense's own numbers**:
+108 rows (3.6%), 84% personally owned against 46% overall; tattoo studios are
+lost with it, as in Copenhagen and Aarhus. **A supermarket registered under its
+franchisee's own name and a store number** shows its address too: 17 premises.
+**Left off because they could not be placed**: 45 premises (1.6%), 41 with no
+address id and 4 whose address has no point in OpenStreetMap.
+
+**Stations**: all 25 Odense Letbane stops in service, Tarup Center to Hjallese
+Station, every one inside the municipality, so none is excluded. SDU
+Syd/Hospital Nord, open since August 2023, is added by hand because
+OpenStreetMap's route relations leave it out. Hospital Syd opens with the new
+university hospital in 2027 and gets no ring until then. Buses and regional
+trains are not drawn.
+
 ### Copenhagen - production units, two municipalities, and a personal owner's name kept off the map
 
 **Excluded by the classification itself, anywhere in Denmark** - the same eight
@@ -2236,6 +2257,201 @@ protection zone (2024), 15% in the Old Town (2025); not measured elsewhere.
 
 **Stations.** Rīgas satiksme's seven tram routes are drawn; 15 stops are thinned by the spacing
 filter to about one per half mile. Not drawn: buses, trolleybuses and Vivi's suburban trains.
+
+### Liepāja - Riga's two layers, food placed on the national address register
+
+**Riga's rules, unchanged** (the section above), through the same shared step: food service is
+the premises licensed to sell alcohol or tobacco whose place type is food service, one per
+address and kind, so that layer is a lower bound; shops and services is every trade premises
+in the cadastre whose name reads as a shop, a service or a fuel station, an upper bound.
+**Left out of the cadastre** as in Riga: wholesale and storage, food service, gambling,
+offices, dwellings, ancillary rooms, repair workshops and stands (192 of 771 premise groups).
+Liepāja publishes no list of degrading buildings, so none is dropped for that.
+
+**Not placed** - 8 food premises (6.1%) whose address matched no point in VZD's State Address
+Register; every shop was placed at its building.
+
+**Not named** - as in Riga: the kind of place and the street address for food, the premises'
+registered name for shops. No licence holder is ever read.
+
+**Stations.** Every stop of tram 1, 18 in all, each inside the city; three are added by hand
+because OpenStreetMap's route relations miss them. Not drawn: buses and suburban trains.
+
+### Daugavpils - Riga's two layers, and every stop of all five tram routes
+
+**Riga's rules, unchanged**, through the same shared step as Liepāja: food service from the
+excise register, a lower bound; shops and services from the cadastre, an upper bound. **Left
+out of the cadastre** as in Riga: 231 of 956 trade premise groups (ancillary rooms, food
+service, wholesale and storage, gambling, repair, offices and generic names). No list of
+degrading buildings is published, so none is dropped for that.
+
+**Not placed** - 4 food premises (4.1%) whose address matched no point in VZD's State Address
+Register; every shop was placed at its building.
+
+**Not named** - as in Riga. No licence holder is ever read.
+
+**Stations.** Every stop of trams 1 to 5, 37 in all, each inside the city: all five routes are
+drawn though routes 2 and 4 run about hourly (owner, 2026-09-30), and the page states each
+route's wait. Not drawn: buses and suburban trains.
+
+### Kansas City - Houston's rules on a frozen licence register, and every streetcar stop
+
+**Left out of KCMO's Business License Holders** (15,895 rows, frozen 2026-01-15): 1,978
+licences valid for 2024 only, lapsed by the freeze (owner); 1,095 current licences whose
+industry is only a fee code ("Misc Rate 129", "Flat Rate 42"), which cannot be classified
+(owner). Then, by NAICS code (the shared carve-outs, `pipeline/taxonomies/naics.py`):
+- vending-machine operators (23) and fuel dealers (1) - NAICS 2022 has no "nonstore" code,
+  so online sellers are NOT left out: they sit under the goods they sell;
+- food service contractors (9), caterers (17) and mobile food (23);
+- parking (56), funeral services and cemeteries (36) and "all other personal services" (80).
+
+**Also left out**: 11 points outside the city limits. The register's addresses carry no unit,
+so no business is left off as a home at an apartment, as in Houston.
+
+**Missing, not excluded**: the register holds few restaurants and bars (about 175 food-service
+premises in the whole city, 26 of them full-service restaurants), so Food service is thin;
+the page says so.
+
+**Shown, but not named**: 710 storefronts show their street address instead of a name - 684
+whose licence holder is a person (the register writes a person surname first, "HARRIS
+GREGORY J") and 26 companies named only as a person ("ALYSSA BULLIS LLC";
+`config.PERSON_NAMED`, read by eye).
+
+**Stations.** All 19 KC Streetcar stops are inside the city. Not drawn: buses.
+
+### Tucson - Houston's rules on the City's licence layer, and every streetcar stop
+
+**Left out of BUSLIC** (24,191 active licences that are not home occupations; the 10,573
+active home occupations are never downloaded): 1,020 with no industry code, then, by NAICS
+code (the shared carve-outs, `pipeline/taxonomies/naics.py`):
+- non-store retailers (454): 526, of them direct sellers 432, online shops 31 and
+  vending-machine operators 26;
+- food service contractors (26), caterers (31) and mobile food (175);
+- parking (5), funeral services and cemeteries (20) and "all other personal services" (270).
+
+**Also left out**: 19 at an apartment or trailer, read from the `APT` field, as homes; 23
+points outside the city limits.
+
+**Not placed**: 539 storefront licences the City did not geocode (7.6%).
+
+**Counted once**: a business holding several licences at one address (a business licence,
+a tobacco licence, a liquor licence): 6,539 licences to 5,243 premises.
+
+**Shown, but not named**: 748 storefronts show their street address instead of a name - 692
+whose ownership type is a person's (Sole Proprietorship 525, Individual 151, Married 16;
+owner), 45 whose account name is only a person's (`config.PERSON_NAMED`, read by eye) and
+11 with no account name.
+
+**Stations.** All 21 Sun Link stops are inside the city. Not drawn: buses.
+
+### New Orleans - the City's own business types, and every stop of five streetcar lines
+
+**Left out of the Active Occupational Licenses** (16,521 active licences), by the City's own
+type (`pipeline/taxonomies/nola_businesstype.py`, every one of its 486 values with a home):
+- one-off vendors: "Special Events-Other (Vendor)" 1,264, Jazz Fest 88, Essence Fest 30,
+  Mardi Gras 13; "Home Based-Office Use Only" 357 (the brief);
+- **flea-market stalls** (344, most at the French Market) and **street artists** (281): a
+  market's stalls and stands are not shops (category_rules R1; mobile units out);
+- video-poker devices (261), hotels (294), bed and breakfasts (111), short-term rentals;
+- by the NAICS code each type's title names (the shared carve-outs): caterers (116), food
+  service contractors (88), mobile food (68), parking (203), funeral services and cemeteries
+  (26), online, direct and vending sellers (106) and "Personal Services, Other" (249), the
+  R2 catch-all.
+
+**Not placed**: 219 storefront licences the register writes at 0,0 (4.4%); 1 point outside
+the parish.
+
+**Shown, but not named**: the owner (`ownername`) is never downloaded. 808 storefronts show
+their street address - 783 with no business name and 25 whose name is only a person's
+(`config.PERSON_NAMED`, read by eye).
+
+**Stations.** Every stop of the five lines RTA runs (owner, 2026-09-30, re-taken at build):
+106 stations, all inside the city, none thinned (owner, call 13). OSM's two ref-2 relations,
+the Riverfront's old routing via Canal Street, are not drawn: RTA runs the Riverfront as 49,
+French Market to Julia Street, since Summer 2025. Not drawn: buses and ferries.
+
+### Florence - the Comune's four layers by type, and T1's Scandicci stops
+
+**Left out of the Comune's four layers** (12,641 rows; `pipeline/taxonomies/florence_attivita.py`):
+private clubs and associations (186); internal shops (128); online, mail-order, door-to-door
+and vending sellers (123); farmers selling their own produce (49); wholesale (2); catering
+(24) and home restaurants (7); temporary service at events (6); bars in the Comune's sports
+grounds (33) and restaurants in hotels (12); rows with no type in the shop and food layers
+(19). **Kept**: the 639 food-service premises the regional law exempts from the Comune's
+requirements (owner, call 16, Milan's *fuori piano* precedent) - some are not open to the
+public, and the type does not say which; the page says so.
+
+**Not named**: no layer carries a name or an address; a dot shows its type.
+
+**Stations.** T1 and T2, every stop in the comune (39). T1 runs on into Scandicci: its four
+stops there (Villa Costanza, De André, Resistenza, Aldo Moro) are drawn with the line but
+not ringed (owner, call 17), listed in `outputs/florence/excluded_stations.csv`. Not drawn:
+T3 and T4, under construction (T3.2.1 due about January 2027); buses; trains.
+
+### Den Haag - the city's permit layer and BAG shop units, and every HTM tram stop
+
+**Left out of the Gemeente's permit layer** (2,701 permits, last edited 23 May 2025;
+`pipeline/taxonomies/den_haag_source.py`): 158 applications not yet decided (owner, call 24);
+331 by type - sports-club and staff canteens and club houses, community and youth centres,
+theatre and cinema foyers, museum cafés, event sites, party centres, hall hire and cooking
+studios, members' clubs, hotels and the restaurants and bars inside hotels and hostels, care-home
+and school canteens, caterers, sex businesses, gaming halls and the casino, pool halls,
+bowling, dance schools and gyms, and 27 rows with no type (39 of the 331 typed as food but
+named by their own description as one of these); 28 whose own description records the business gone
+(closed, struck off, withdrawn, lapsed or marked historical); 42 older permits at an address
+with a newer one, counted once. **Kept**: coffeeshops (32 on the map) and beach pavilions (70).
+
+**Excluded because it is probably a home** - 1,928 shop units also registered as a dwelling
+(Amsterdam's owner call), nearly three in ten of Den Haag's shop units.
+
+**Removed as duplicates** - 561 shop units at the address of a kept permit; the permit is kept.
+
+**What cannot be excluded: closed premises and empty shops.** The permit layer was last
+edited on 23 May 2025, so a premises that closed since may still be shown; about 4% of shop
+units were registered vacant on 1 January 2025 (CBS). The building register records only a
+shop unit, so a funeral home there cannot be identified or removed.
+
+**Named** - food dots carry the trade name from the permit's description, with the city's notes
+removed; 5 that are only a person's name show the kind of place instead. The applicant, KvK
+number and legal form are never downloaded. Shop units show their address.
+
+**Stations.** HTM's trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17 and 19 and RandstadRail 3, 4 and
+34, every stop in the gemeente (166; Leidschenveen and Leidschenveen Centrum, 10 m apart, merged as one interchange). Ten lines run on into neighbouring gemeenten: their 64
+stops there (Rijswijk 17, Zoetermeer 17, Leidschendam-Voorburg 15, Delft 12, Westland,
+Lansingerland and Pijnacker-Nootdorp 1 each) are drawn with the line but not ringed (owner,
+call 26, for tram 1), listed in `outputs/den_haag/excluded_stations.csv`. Not drawn:
+RandstadRail E, RET's metro line, a stub with 4 of its 23 stops in the city (owner, call 22);
+the 9S short working; buses; NS trains.
+
+### Zurich - the city's food-and-drink licences, and its shops licensed to sell alcohol
+
+**Left out of the Stadt Zürich's Gastwirtschaftsbetriebe** (3,487 rows, every one open;
+`pipeline/taxonomies/zurich_gastwirtschaft.py`): food stands, caterers and food trucks
+(Ausgabestelle, 56); staff and institutional canteens (Kantine / Mensa, 31); premises
+exempt from the licence (Patentbefreit, 25: staff restaurants, care-home and school
+kitchens, a guest house, a beauty studio); cabarets (6); rooms hired for events (6).
+**Kept**: clubs and discos (10), as Food service (nightclubs not named as adult,
+docs/category_rules.md).
+
+**Missing, not excluded**: the register licenses food and drink, and the sale of
+alcohol, so the shops on this map are only those licensed to sell alcohol (1,028:
+supermarkets, wine shops, kiosks, petrol-station shops). Other shops and every personal
+service are absent; the page says so. About 79 of the 2,335 food licences are kitchens
+in care homes, staff restaurants, hospitals and clubhouses, licensed as ordinary
+restaurants; they remain, and the page says so.
+
+**Shown, but not named**: 12 storefronts show their street address instead of a trade
+name that is a person's own name (`config.PERSON_NAMED`, read by eye).
+
+**Stations.** Every stop of VBZ trams 2–11, 13–15, 17, 50 and 51 in the Stadt (180).
+Trams 2, 4, 10 and 50 run on into Schlieren, Zollikon, Opfikon, Kloten and Rümlang: their
+15 stops there are drawn with the lines but not ringed, listed in
+`outputs/zurich/excluded_stations.csv`. Not drawn: trams 12 (Glattalbahn, 1 of 18 stops in
+the city) and 20 (Limmattalbahn, 4 of 26), as stubs (owner, calls 19 and 25) - two of
+tram 20's city stops, Bahnhof Altstetten and Seidelhof, are on no drawn line; the
+Forchbahn S18 (owner, call 18), whose four city stops are all tram stops; the S-Bahn;
+buses. Trams 50 and 51 run only until 12 December 2026, while the Bahnhofquai stop is
+rebuilt.
 
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
@@ -3134,6 +3350,51 @@ the City.
 **Stations.** OC Transpo's O-Train Lines 1, 2 and 4, all 25 stations, every
 one inside the City: `outputs/ottawa/excluded_stations.csv` is written empty.
 Buses, including the Transitway, are not drawn.
+
+### Göteborg - the city's food register by its own types, and the Mölndal stops
+
+**Only food is on this map.** Göteborgs Stad's register of food businesses
+(Livsmedelsverksamheter) lists the premises its food control has registered; it
+holds no other trade, so clothes shops, hairdressers and the like are missing
+rather than excluded. Food shops (from kiosks to supermarkets) are a category of
+their own.
+
+**No dates.** The register carries no date of any kind: it lists the premises
+active on the day it is fetched.
+
+**Excluded by type** - 1,819 of the register's 5,066 premises, whose own type is
+not a storefront: institutional kitchens in preschools, schools, care homes, day
+centres, hospitals and youth centres (1,021); wholesale (133); mobile food (114);
+food production, breweries and coffee roasters (97); head offices (72);
+warehouses (63); pharmacies (61); food brokers (55); transport (48); delivery
+kitchens and caterers (39); animal-product establishments (29); hotel breakfast
+rooms (26); ships and ferries (20); food-contact materials makers (18);
+restaurants that only receive food cooked elsewhere, nearly all staff
+restaurants (13); the base premises of food trucks and caterers (10).
+
+**Excluded by name** - 47 restaurant-, café- or shop-typed premises that
+Stockholm's name test reads as not a storefront: churches and parish halls (13),
+schools, colleges and youth centres (12), caterers (6), prisons (3), staff
+restaurants (3), hospital cafés (3), associations (3), mobile units (2), a gym
+café (1) and a pharmacy (1). Two vending-machine operators.
+
+**Untyped premises** - 274 premises have no type (the dataset's JSON copy drops
+them). 90 are shown (owner, 2026-09-30): those whose name identifies a
+restaurant or a food shop, marked "classified from its name". 182 whose name
+says neither are left out.
+
+**Not placed** - 29 storefronts (1.0%) the register places at the Environment
+Administration's own address point, because it has no correct address for them.
+
+**Named only as a person** - 13 premises show their street address instead of
+the name.
+
+**Stations.** Trams 1-13, every stop in Göteborgs Stad (127). Trams 4 and 12
+run on into Mölndal: their five stops there (Krokslätts Fabriker, Krokslätts
+torg, Lackarebäck, Mölndals Innerstad, Mölndals sjukhus) are drawn with the
+lines but not ringed (owner, call 21), listed in
+`outputs/goteborg/excluded_stations.csv`. Not drawn: Lisebergslinjen, the
+heritage line; buses, ferries and commuter trains.
 
 ### Bucharest - the sanitary-veterinary registers, food only, placed by address
 
