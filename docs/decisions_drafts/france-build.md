@@ -5,6 +5,77 @@ Entries for `DECISIONS.md`, newest first, each exactly as it should land
 in when handed off). Anything that must cite a DECISIONS verdict cites this
 file until then.
 
+### 2026-09-30 - Angers built mark-free on `france-build-3`: 36 stops, 2,530 storefronts, page 120, notice 72
+
+- **Owner: "build angers mark-free as recommended."** Angers had been held
+  since 2026-09-29. The Métropole's terms (DECISIONS "French tram feeds
+  read") bar the network's brand "and any other mark" from anything built
+  from the data without prior agreement. Three options were put to the
+  owner:
+  - seek consent first, through a reCAPTCHA form the owner would send
+    (rejected: open-ended, and outreach is the last resort);
+  - hold Angers indefinitely (rejected);
+  - build mark-free (recommended and approved).
+- **What mark-free means here, all of it checked.**
+  - The page, the macro label, the `app/cities.py` entry, the transit
+    caption and the §4.3 notice name **Angers Loire Métropole**, never the
+    brand.
+  - The lines are **Tram A, Tram B and Tram C**. OpenStreetMap's relations
+    read "Tram <brand> A", and the brand is dropped.
+  - The feed's `feed_publisher_name` and `agency_name` (both the brand) are
+    never shown.
+  - Notice 72 names the database by its producer and its NAP id, because the
+    dataset's title and its NAP page slug both carry the brand. ODbL §4.3
+    asks only for a notice reasonably calculated to make a reader aware of
+    the source.
+  - A case-insensitive grep of `app/` and `outputs/angers/` finds the brand
+    only in `provenance.json`, the fetch record (the NAP title and the
+    feed's publisher field). The page reads only dates from that file.
+    Repository docs (this file, the brief, `docs/data_sources/france.md`)
+    cite the dataset by its real title as records.
+  - **The owner may want those scrubbed too.** That is flagged for review
+    time, not done.
+- **If the Métropole objects, the removal rule applies**: take Angers down
+  first, then record who asked.
+- **Brief** `docs/build_briefs/angers.md`, from the kit's generator: 7/7
+  checks hold on the build-day feed.
+  - The feed is ODbL, with `feed_info.txt` valid 2026-09-29 to 2026-12-28
+    and `shapes.txt` that is real track (100 to 425 points a shape against 9
+    to 25 stops).
+  - It has no `parent_station` column, so the stations are the first
+    platform per unchanged name: 85 platforms make 42 stations.
+  - No station pair is under 150 m, no names repeat, and 49007 has no legacy
+    INSEE codes.
+- **Scope: the commune of Angers**, by the approved rule. The worst line, A,
+  keeps 19 of 25 stops (76%). Six Avrillé stops on A are left out: Acacias,
+  Avrillé-Ardenne, Bascule, Bois du Roy, Plateau Mayenne and St-Gilles.
+  - Gate 3 from OpenStreetMap is exact: A 25, B 18, C 19.
+  - The median gap in scope is 390 m, so the rings are half-size.
+- **Step 2: 2,530 storefronts**: 1,183 retail, 876 food and 471 personal.
+  - 96.09Z ran at 12.5%, inside the 9.6-14.0% precedent, so both catch-alls
+    are excluded.
+  - 19.3% is masked at source, against 13.5% at the screen. The page
+    carries step 2's figure.
+  - 99.96% of rows joined to the geolocation file.
+- **The map: 1,907 of 2,530 storefronts within a ring (75%).** The colours
+  are the feed's `route_color` (data, not a mark). Tram B's 17.9 CIE76
+  against Retail is below the preferred 45 and recorded, like the other
+  cities' low pairs.
+- **Personal exposure: PASS.** No contact details. 0 of 1,907 pins carry a
+  person-like name at a residential unit. Step 2 never loads a legal-name
+  column, and 20.0% of pins look like names on the heuristic, which matches
+  the other French cities.
+- **The macro label** is in France North, measured at 47.2 px. The width was
+  measured in a browser with the Google Fonts faces loaded, and Paris,
+  Marseille, Lille (Regional), Le Havre and Saint-Étienne reproduced
+  exactly.
+  - The offset is ("middle", 0, -18). The default overlapped Rennes's
+    eastward label by 3.4 px, and below the dot it hits Nantes's.
+  - `check_macro_labels.py` scores PROBLEMS 0 on 96 cities.
+- **Landing**: page 120 and notice 72, both renumbered in landing order.
+  The branch is `france-build-3`, stacked on `france-build-2`, so Angers can
+  land with group 2 or after it.
+
 ### 2026-09-30 - The twenty French batch cities retagged to France North and South, with the legend's two fields
 
 - **Merged `origin/macro-france` (9b9ed0e, which carries macro-legend and

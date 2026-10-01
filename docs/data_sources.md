@@ -2321,6 +2321,30 @@ Hiroshima lands).
   verdict is in `docs/decisions_drafts/hiroshima.md` until it is folded into
   `DECISIONS.md`.
 
+**77. Angers Loire Métropole (Angers) — required, and DISPLAYED.**
+
+**ODbL 1.0**, declared `odc-odbl` on the NAP for Angers Loire Métropole's
+network dataset (`6178cee254e3b3f0744a1318`), under the NAP's Conditions
+Particulières (DECISIONS "French tram feeds read", 2026-09-29). **Built
+MARK-FREE** (owner, 2026-09-30): the Métropole's terms say its network's marks
+"and any other mark" of the service may not be used or mentioned in anything
+built from the data without its prior agreement, and ODbL §2.3(c) leaves marks
+outside the licence. The dataset's NAP title carries that brand, so the notice
+names the database by its producer and its NAP id, which §4.3 permits (a notice
+"reasonably calculated" to make the reader aware of the source). **MUST
+DISPLAY**:
+
+> Contains information from Angers Loire Métropole's public transport
+> timetable database (transport.data.gouv.fr dataset
+> 6178cee254e3b3f0744a1318), which is made available here under the Open
+> Database License (ODbL).
+
+It names the stations and the line geometry, both from the feed's own
+`shapes.txt`. **MUST DO**: a pure-extract station table; §4.6 by the
+repository. **MUST NOT**: show the network brand anywhere on the page, the
+macro map, the caption or this notice (the feed's `feed_publisher_name` and
+`agency_name` carry it). If the Métropole objects, the removal rule applies.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

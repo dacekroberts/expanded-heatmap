@@ -39,7 +39,11 @@ EPCI_NAMES = {
 # licence reads confirmed where they were read (Bordeaux Métropole; Syndicat
 # mixte Atoumod for the Normandie aggregate).
 PRODUCER = {"caen": "Syndicat mixte Atoumod", "rouen": "Syndicat mixte Atoumod",
-            "bordeaux": "Bordeaux Métropole"}
+            "bordeaux": "Bordeaux Métropole", "angers": "Angers Loire Métropole"}
+# Credited by the producer ALONE: Bordeaux (LO 1.0 read, 2026-09-29) and Angers,
+# MARK-FREE (owner, 2026-09-30) - the Métropole's terms bar its network brand
+# without consent, so the operator's brand never reaches the caption.
+PRODUCER_ONLY = {"bordeaux", "angers"}
 
 CONTROLS = """Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
@@ -325,10 +329,10 @@ def main():
         m = measure(cfg)
         text = prose(cfg, name, spec["operator"], m)
         owner = PRODUCER.get(slug) or legal_owner(cfg)
-        if slug == "bordeaux":
-            # LO 1.0 read (2026-09-29): Bordeaux Métropole is the producer
-            # credited; not TBM, Keolis or the exporter Mecatran.
-            credit = "Bordeaux Métropole"
+        if slug in PRODUCER_ONLY:
+            # Bordeaux: LO 1.0 read (2026-09-29), not TBM, Keolis or the
+            # exporter Mecatran. Angers: mark-free (owner, 2026-09-30).
+            credit = PRODUCER[slug]
         elif not owner:
             credit = spec["operator"]
         elif "(" in owner:

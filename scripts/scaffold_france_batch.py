@@ -61,10 +61,9 @@ NORMANDIE_LICENCE = "lov2"
 # between stations is about 550 m or less.
 HALF_RINGS_MAX_MEDIAN_M = 550
 
-HELD = {
-    "angers": "HELD (owner, 2026-09-29) until the other 20 French cities are "
-              "built: the Métropole bars naming IRIGO or its marks without consent",
-}
+# Angers was held here until the other 20 were built (owner, 2026-09-29). It is
+# released MARK-FREE (owner, 2026-09-30): see its BATCH row.
+HELD = {}
 
 # One row per city. `lines` are the feed's route_short_name values KEPT; `drop`
 # names what the feed carries on rails and the map leaves out, with the reason;
@@ -154,6 +153,15 @@ BATCH = {
                          lines=["T1", "T2"], scope="regional",
                          names={k: f"Tram {k}" for k in ("T1", "T2")},
                          feed_notes="two or three route_ids per line with differing route_color; the network spans two EPCIs"),
+    # MARK-FREE (owner, 2026-09-30, "build angers mark-free as recommended"):
+    # the Métropole's terms bar its network brand and "any other mark" from
+    # anything built from the data without consent, so the operator here is
+    # the Métropole itself, the lines are their letters, and the feed's
+    # publisher and agency fields (both the brand) are never shown.
+    "angers": dict(name="Angers", operator="Angers Loire Métropole", route_types=("0",),
+                   lines=["A", "B", "C"], scope="commune",
+                   names={k: f"Tram {k}" for k in "ABC"},
+                   feed_notes="ODbL; feed_info.txt self-attests (its publisher field is the network brand: never shown); NO parent_station column; MARK-FREE (owner, 2026-09-30)"),
 }
 # Each feed's NAP dataset id (read 2026-09-30): the provenance step reads the
 # resource's `updated` date and window from it when the zip carries no dated
@@ -169,6 +177,7 @@ NAP_IDS = {
     "brest": "55ffbe0888ee387348ccb97d", "besancon": "5b5b090988ee385b10198107",
     "orleans": "61fb1b864ba517c310952886", "le_mans": "5acb75f0c751df341652c886",
     "avignon": "5ae2e01d88ee381811e691b5", "valenciennes": "63eb6d550f2b31a8efe618fe",
+    "angers": "6178cee254e3b3f0744a1318",
 }
 # Line geometry from OpenStreetMap where the feed has no usable shapes: no
 # shapes.txt (Montpellier, Strasbourg, Le Havre), or the Normandie

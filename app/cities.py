@@ -2794,6 +2794,30 @@ CITIES = [
         # the combined tree (width 40.1 px, measured 2026-09-30).
         "label_offset": ("end", -10, -3),
     },
+    {
+        "name": "Angers",
+        "lat": 47.482,
+        "lon": -0.5469,
+        "page": "pages/120_Angers_Heatmap.py",
+        "coverage": "full",
+        "placement": "Joined to INSEE's geolocation (99.96%)",
+        "data_age": "SIRENE monthly; fetched 2026-10-01",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Angers Loire Métropole trams A, B and C",
+        "region": "France North",
+        "country": "France",
+        "mode": "tram",
+        "in_default_view": False,
+        # MARK-FREE (owner, 2026-09-30): the label is the city's name only;
+        # the network's brand appears nowhere in this entry. Raised 4 px less
+        # than the default: at ("middle", 0, -22) it overlapped Rennes's
+        # eastward label by 3.4 px, and below the dot it hits Nantes's.
+        # check_macro_labels.py, 96 cities, 375/768/1200 px: PROBLEMS 0 and
+        # no note on Angers (2026-09-30).
+        "label_offset": ("middle", 0, -18),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

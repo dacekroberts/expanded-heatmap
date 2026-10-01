@@ -1,6 +1,6 @@
 ---
 name: france-tram-city
-description: Build a French tram city - the 20-city France batch (Angers held) - on what Paris, Marseille, Toulouse, Lille and Rennes built - the SIRENE chain and its traps, the tram leg from each city's own rolling feed (mode flags lie), the owner's pure-extract station rule, the commune-or-regional scope call, 0.3 mi rings, the notices per licence, the page text the owner approved word for word, and a sheet per city. Use for any French city after Rennes, with scripts/scaffold_france_batch.py and the city's brief; read with add-city, osm-rail and publish-city, which it does not replace.
+description: Build a French tram city - the 21-city France batch (Angers built mark-free) - on what Paris, Marseille, Toulouse, Lille and Rennes built - the SIRENE chain and its traps, the tram leg from each city's own rolling feed (mode flags lie), the owner's pure-extract station rule, the commune-or-regional scope call, 0.3 mi rings, the notices per licence, the page text the owner approved word for word, and a sheet per city. Use for any French city after Rennes, with scripts/scaffold_france_batch.py and the city's brief; read with add-city, osm-rail and publish-city, which it does not replace.
 ---
 
 # Building a French tram city
@@ -15,9 +15,20 @@ leg, a scope call and its notices. Everything else is shared code.
 **The batch** is the 20 French T1 cities in `docs/tram_city_list.md`:
 Montpellier, Nice, Strasbourg, Bordeaux, Nantes, Grenoble, Rouen,
 Saint-Étienne, Dijon, Tours, Le Havre, Mulhouse, Reims, Caen, Brest, Besançon,
-Orléans, Le Mans, Avignon and Valenciennes. **Angers is HELD** (owner,
-2026-09-29) until the other 20 are built: its Métropole bars naming IRIGO or
-its other marks without consent.
+Orléans, Le Mans, Avignon and Valenciennes. **Angers, the 21st, is built
+MARK-FREE** (owner, 2026-09-30). It was held until the other 20 were built,
+because its Métropole's terms bar the network brand "and any other mark"
+without consent. So:
+- every surface the app shows names **Angers Loire Métropole**: the page, the
+  macro label, the city entry, the caption (`france_page.py`'s
+  `PRODUCER_ONLY`) and notice 77;
+- the lines are **Tram A, B and C**;
+- the feed's publisher and agency fields are never shown;
+- notice 77 names the database by producer and NAP id, because the title and
+  the page slug carry the brand.
+
+Grep `app/` and `outputs/angers/` for the brand after any rebuild. Only
+`provenance.json`, the fetch record, may carry it.
 
 **Builds are APPROVED** (owner, 2026-09-30), in landing groups per
 `docs/review_time.md`, with every brief's calls approved as recommended.
@@ -403,3 +414,4 @@ Scope, mode and every call were approved as the briefs recommended them
 | Le Mans | SETRAM T1-T2 | 35 (35) | commune | tram | the `lmm_auto` resource |
 | Avignon | Orizo T1 | 10 (10) | commune | tram | earliest feed end |
 | Valenciennes (Regional) | Transvilles T1-T2 | 48 | regional, 13, two EPCIs | tram | built last |
+| Angers | Tram A-C (mark-free) | 42 (36) | commune | tram | ODbL; no parent_station; **the brand never shown**; notice 77 by producer and NAP id |
