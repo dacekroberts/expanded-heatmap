@@ -4,6 +4,73 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Florence built on tram-build: T1 and T2, and the Comune's four layers
+
+- **Florence built on Milan's and Rome's template and `osm_tram.py`.** It
+  has 39 stations, 12,052 storefronts (exactly the brief's screen: 7,355
+  retail, 3,024 food, 1,673 personal), and 4,435 of them (36.8%) in a ring.
+  The page says "about three storefronts in eight".
+- **The trams.** T1 Leonardo and T2 Vespucci, two relations each, operator
+  Autolinee Toscane, in OSM's own colours.
+  - **79 stop positions collapse to 43 stations.** 39 are in the Comune di
+    Firenze (OSM relation 42602, ISTAT 048017).
+  - **T1's four Scandicci stops** (Villa Costanza, De André, Resistenza, Aldo
+    Moro) are drawn with the line and listed, not ringed (owner, call 17).
+    Step 1 gates 39 inside and 4 outside.
+  - **Median gap 323 m**, so the rings are halved, gated at 270-380 m.
+  - **Not drawn: eight relations with track and no stops**, all under
+    construction: T3.2.1, T3.2.2 (no ref), T4 and T2.2. The Comune says
+    T3.2.1 Libertà - Bagno a Ripoli opens about January 2027; re-check then.
+    T2's San Marco extension opened on 2026-01-25 and is already on OSM's
+    T2.
+  - **Colours.** T1 `#254395` scores 22.5 against Retail's pin and T2
+    `#5d3988` 33.7. Both are recorded, not changed, because they are the
+    source's. Label contrast passes.
+- **The taxonomy: `pipeline/taxonomies/florence_attivita.py`**, keyed on
+  layer + `tipologiaattivita`, 36 pairs each with a home, with a new
+  continuity column.
+  - **In:** the exempt food service (owner, call 16; Milan's precedent).
+    That is 464 "non soggetta a requisiti comunali" and 175 art. 53; the
+    type does not say which are not open to the public, so the page says
+    some remain.
+  - **Bakers are Retail**, Milan's call: NACE 10.71 sits in the pubblici
+    esercizi layer here but sells bread.
+  - **Tattoo, piercing and permanent make-up are Personal services.**
+  - **Out**, as the screen dropped them:
+    - clubs (186);
+    - internal shops (128);
+    - nonstore sellers (123);
+    - farmers (49);
+    - wholesale (2);
+    - catering and home restaurants (31);
+    - temporary service (6);
+    - sports-ground bars (33);
+    - hotel restaurants (12);
+    - rows with no type in the shop and food layers (19).
+
+    A row with no type in the beauty and laundry layers takes its layer's
+    bucket.
+  - **Kept, flagged:** "CENTRO COMMERCIALE" (7) as Retail. A shopping centre
+    row may overlap the shops licensed inside it.
+- **No name, no address on any layer.** A dot shows its type in English
+  ("Shop", "Restaurant or bar", "Hairdresser").
+  - 3,423 rows share a point with another; they are drawn as they are (the
+    brief).
+  - **Privacy verdict: publishable.** 4,435 pins and 16 distinct labels;
+    nothing here can be a person.
+- **Notice 71, "Comune di Firenze"**: CC BY 4.0, linked, crediting the
+  Direzione Attività Economiche e Turismo and stating the changes. Milan's
+  notice is the model, and the text is the project's own. The OSM rail
+  notice names Florence's lines and the comune boundaries.
+- **Macro label: Florence is 58.1 px** (Houston, Odense, Kansas City and
+  Daugavpils reproduced first, after the tab had drifted to another site and
+  read Houston 50.6). It sits right of the dot at ("start", 11, -3).
+  - **Rome's label moved from above its dot to the right, at ("start", 11,
+    2).** Above, it covered Florence's marker in Europe at all three widths.
+    The in-process grid passes Rome at -6 to +10 and Florence at -12 to +6.
+  - **A front-page change for deploy-verify.**
+- **Page: no frequency sentence**, flagged. GEST's timetable was not read.
+
 ### 2026-09-30 - New Orleans built on tram-build: the five lines RTA runs, and a new taxonomy
 
 - **New Orleans built on `osm_tram.py` and a new text taxonomy.** It has 106
