@@ -153,6 +153,35 @@ def thin(seqs, xy, *, spacing_m, keep_always=(), interchange=()):
     return kept, [c for c in cuts if c["station"] not in kept]
 
 
+def check_operator_counts(expected_per_line, actual_per_line):
+    """Gate 3 on its own: the operator's published per-line station counts
+    against the build's. Prints the comparison and returns {line: (build,
+    operator)} for each line that disagrees. `verify_stations` calls it; a step
+    1 that predates `verify_stations` (the early US cities) calls it directly
+    with its own per-line counts. It never raises: a caller that must stop on a
+    mismatch (a tram step 1) checks the return value."""
+    mismatched = {}
+    if expected_per_line and actual_per_line:
+        print("    against the operator's own published counts:")
+        for line, want in expected_per_line.items():
+            got = actual_per_line.get(line)
+            mark = "" if got == want else "   MISMATCH"
+            print(f"      {line:<28} feed {str(got):>4}  operator {want:>4}{mark}")
+            if got != want:
+                mismatched[line] = (got, want)
+        if mismatched:
+            print(f"    {len(mismatched)} line(s) disagree with the operator. "
+                  f"This is the gate that catches what the others cannot: "
+                  f"Toronto's 118 and 77 were internally consistent and agreed "
+                  f"with nothing published.")
+    else:
+        print("    NOTE: no operator counts supplied - gate 3 not run. It is "
+              "the only check outside the data, and the one that caught "
+              "Toronto. Pass expected_per_line wherever the agency publishes "
+              "station counts.")
+    return mismatched
+
+
 def verify_stations(*, city, platforms, stations, crs_projected,
                     expected_per_line=None, actual_per_line=None,
                     non_revenue=0, spacing_min=STATION_SPACING_MEDIAN_M_MIN,
@@ -218,25 +247,7 @@ def verify_stations(*, city, platforms, stations, crs_projected,
               f"NAMES looks like, and the median will not show it. Check the "
               f"closest pairs by name before accepting the collapse.")
 
-    mismatched = {}
-    if expected_per_line and actual_per_line:
-        print("    against the operator's own published counts:")
-        for line, want in expected_per_line.items():
-            got = actual_per_line.get(line)
-            mark = "" if got == want else "   MISMATCH"
-            print(f"      {line:<28} feed {str(got):>4}  operator {want:>4}{mark}")
-            if got != want:
-                mismatched[line] = (got, want)
-        if mismatched:
-            print(f"    {len(mismatched)} line(s) disagree with the operator. "
-                  f"This is the gate that catches what the others cannot: "
-                  f"Toronto's 118 and 77 were internally consistent and agreed "
-                  f"with nothing published.")
-    else:
-        print("    NOTE: no operator counts supplied - gate 3 not run. It is "
-              "the only check outside the data, and the one that caught "
-              "Toronto. Pass expected_per_line wherever the agency publishes "
-              "station counts.")
+    mismatched = check_operator_counts(expected_per_line, actual_per_line)
 
     return {"platforms": len(platforms), "stations": len(stations),
             "platform_median_m": round(raw_med, 1),
