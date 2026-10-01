@@ -8,8 +8,9 @@ Built with pydeck, which ships with Streamlit (no extra dependency), rather
 than folium/streamlit-folium: this project keeps folium out of the deployed
 runtime (see requirements.txt). st.pydeck_chart(on_select="rerun") returns the
 clicked marker, and st.switch_page navigates without a full page reload. A
-plain list of page links sits below the map as a fallback (keyboard access,
-and any browser where the map doesn't load).
+list of page links sits below the map as a fallback (keyboard access, and any
+browser where the map doesn't load), one section per region, the selected
+region's open.
 """
 
 import base64
@@ -708,9 +709,35 @@ elif len(REGIONS) > 1:
     )
 
 st.caption("Or pick a city from the list:")
-for city in SWITCHER_ORDER:   # grouped by country, like each city map's menu
-    st.page_link(city["page"], label=f"**{city['name']}**")
-    st.caption(city["blurb"])  # a caption wraps; a long page_link label is clipped on a phone
+# THE LIST FOLLOWS THE REGION SELECTOR (owner, 2026-10-01): one expander per
+# leaf region, the same partition the caption above counts. The regions the
+# selected view covers come first and open; every other region follows,
+# closed, in the order elsewhere_counts() names them, so the list still holds
+# every city in every view. Global opens none: 124 cities open ran to dozens
+# of phone screens.
+_leaves = [n for n in _region_names if n not in REGION_MEMBERS]
+_open = [] if region == DEFAULT_REGION else [
+    n for n in _leaves if n in REGION_MEMBERS.get(region, (region,))]
+_by_name = cities.set_index("name")
+for _leaf in _open + [n for n in _leaves if n not in _open]:
+    _rows = [c for c in SWITCHER_ORDER if c["region"] == _leaf]   # grouped by country
+    _multi = len({c["country"] for c in _rows}) > 1
+    with st.expander(f"{_leaf} ({len(_rows)})", expanded=_leaf in _open):
+        _country = None
+        for city in _rows:
+            if _multi and city["country"] != _country:
+                _country = city["country"]
+                st.markdown(f"**{_country}**")
+            st.page_link(city["page"], label=f"**{city['name']}**")
+            # The tooltip's facts as well as the blurb: a touch screen has no
+            # hover, so on a phone this list is the only place they show. One
+            # caption per city, because a caption wraps and a long page_link
+            # label is clipped on a phone.
+            _f = _by_name.loc[city["name"]]
+            st.caption(
+                f"{city['blurb']}  \n"
+                f"{_f['mode_label']} · {_f['tier_label']} · {_f['storefronts_text']}  \n"
+                f"Data: {_f['data_age']} · Placed by: {_f['placement']}")
 
 # Site-level notices, required on every page - see components._NOTICES.
 render_site_notices()
