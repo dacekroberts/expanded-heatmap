@@ -2221,7 +2221,7 @@ landing.**)
   owed nothing. Rows in [`data_sources/italy.md`](data_sources/italy.md).
 - **MUST DISPLAY**: credit the Comune di Firenze (Direzione Attività Economiche
   e Turismo), link CC BY 4.0, and state the changes (filtered, categorised,
-  aggregated) - no wording prescribed; Milan's notice 23 is the model.
+  aggregated) - no wording prescribed; Milan's notice 23 (Comune di Milano) is the model.
 - **MUST NOT**: imply the Comune's endorsement, or use its logo or the giglio.
 - **MUST DO**: nothing. The Comune's footer ties reuse of personal data to
   d.lgs. 36/2006; the layers carry no name or address.

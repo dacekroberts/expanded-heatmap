@@ -167,7 +167,7 @@ gap. So these in-ring shares are not comparable with a metro city's.
   - About 30 items are queued for review time: four new numbered notices,
     page sentences outside the template, seven published cities' label
     moves and two zoom-fit changes.
-  - France also holds notices 69 to 71, so all of them renumber at landing.
+  - France's batch used the same numbers, so all of them renumber at landing.
   - None of the ten maps has been deploy-verified.
 
   The earlier batches found their worst defects after landing: San Diego's
@@ -217,9 +217,10 @@ city includes that.
 
 All items carry a recommendation in the drafts file:
 
-- The four new notices: 69 Kansas City (KCMO's disclaimer verbatim),
-  70 Tucson, 71 Florence and 72 Den Haag (proposed text). They renumber from
-  80 in landing order.
+- The four new notices, as written on the branch:
+  notice 69 (Kansas City, Missouri; KCMO's disclaimer verbatim), notice 70 (City of Tucson), notice
+  71 (Comune di Firenze) and notice 72 (Gemeente Den Haag, proposed text).
+  They renumber from 80 in landing order.
 - Göteborg's coverage flip to `one_bucket` with Stockholm once macro-legend
   lands.
 - The two optional `sweden_livsmedel` changes. Each moves Stockholm.

@@ -225,6 +225,9 @@ SLUG_OVERRIDES = {
     "Taipei (Regional)": "taipei",
     # Mexico: four municipios as one regional page (2026-09-27).
     "Monterrey (Regional)": "monterrey",
+    # Tram kit (2026-09-30): accents dropped from the package name, as Brazil's.
+    "Liepāja": "liepaja",
+    "Göteborg": "goteborg",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are
