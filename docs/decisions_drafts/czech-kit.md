@@ -4,6 +4,97 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Gate 3 from IDOS: Olomouc, Liberec and Most exact; Ostrava partial; the regular network through works (owner)
+
+- **Gate 3 was read from IDOS's per-stop timetables, not the operators' PDFs,
+  so nothing was downloaded.** `idos.cz/<city>/zjr` lists every stop of a line
+  in both directions for a chosen date, as HTML; dpmost.cz links it as its
+  own HTML timetables. Each line was read in both directions on a regular
+  weekday, and a stop counts when either direction calls (request stops
+  included). It is a count read, nothing from it is published, and it has no
+  licence row. **Flagged for review time:** IDOS is a source the briefs did
+  not name, used only as a check. Supersedes the plan in the entry below to
+  ask for PDF downloads.
+- **Olomouc: all seven lines exact** (Mon 2026-03-16; 2026-10-01 identical):
+  11 / 14 / 16 / 20 / 10 / 14 / 14 stops. Fibichova is on line 4 toward
+  Pavlovičky only, so it counts. No change.
+  `OPERATOR_STATION_COUNTS` recorded.
+- **Liberec: three gaps found and filled; 39 stations became 40.**
+  - **Line 11's OSM relations pass Fügnerova and Sídliště Nové Vratislavice
+    without listing them**, while line 5 lists both. IDOS has line 11 calling
+    at both on every trip, in regular service and today. `osm_tram`'s
+    `station_add` refuses a name already on a route, so
+    `czechia_osm_tram.add_line_stops` reads a new `LINE_STOP_ADD`. It adds a
+    stop position to a named line, and stops the build when:
+    - the node is renamed or untagged;
+    - the line now lists the stop;
+    - the node lies more than 25 m from that line's own track.
+    All four nodes lie 0 m from it.
+  - **Šaldovo náměstí** on lines 2 and 3 is added by `STATION_ADD` from its
+    two OSM platform nodes.
+  - **Result:** gate 3 is exact at 17 / 21 / 13 / 23 (Mon 2026-06-15), 34
+    stations in Liberec and 6 in Jablonec. In-ring storefronts went from
+    1,396 to 1,405 of 2,488.
+- **Most: Litvínov, Vrchlického added on lines 1, 3 and 4; 27 stations
+  became 28.**
+  - The cache had no node of that name. Most's OSM was re-fetched, and the
+    fetch's every-tram-stop clause now brought both stop positions, which no
+    relation lists.
+  - Gate 3 is exact at 25 / 11 / 19 / 22 (Mon 2026-02-16).
+  - The re-fetch also took fresh RUIAN files, the same 2026-08-31 edition;
+    storefronts are unchanged at 1,025.
+- **Owner's call: the regular network, through temporary works.**
+  - **Most:** since 2026-03-01, with no end date published, buses replace
+    trams between Litvínov, Citadela and Záluží, and Vrchlického is closed.
+  - **Liberec:** from 2026-06-20 to at least 2026-12-12, lines 2 and 3 end at
+    Fügnerova, and Šaldovo náměstí is closed.
+  - **Ostrava:** a diversion runs from 2026-09-17 to about 2026-12-12; line 6
+    is not running, and lines 13 and 19 run instead.
+  - All three keep their track, and OSM maps it.
+  - **Rejected:** mapping today's service. It would mean redrawing all three
+    in December, and OSM cannot draw Ostrava's 13. Holding Ostrava only
+    delays it, and Most has no end date to wait for.
+  - Prague's Flora is the precedent: a station closed for reconstruction is
+    still drawn.
+- **Ostrava: gate 3 is partial, by the owner's call to re-check after the
+  diversion.** IDOS accepts only dates from 2026-09-21 to 2026-11-30, all
+  inside the diversion.
+  - **Exact:** lines 3, 4, 11, 15, 17 and 18, which the diversion leaves
+    whole.
+  - **Open until about 2026-12-13:**
+    - 1, 2 and 10: Don Bosco, which IDOS has on no line during the works,
+      though OSM tags it as a DPO stop about 400 m from Dolní Vítkovice
+      Hlubina;
+    - 7: IDOS's 7 calls at Svinov,mosty, and OSM's skips it, though our 11
+      and 17 have it;
+    - 6, 8, 12 and 14: cut or rerouted by the works.
+  - No change; 92 stations.
+- **Proposed page text, for review time** (outside the approved template, so
+  not written to the pages):
+  - **Most:** "Since March 2026 buses have replaced trams between Litvínov,
+    Citadela and Záluží during works, and Litvínov, Vrchlického is closed;
+    the map shows the regular network."
+  - **Liberec:** "From June to at least December 2026 lines 2 and 3 end at
+    Fügnerova during works, and Šaldovo náměstí is closed; the map shows the
+    regular network."
+  - **Ostrava:** "From 17 September to about 12 December 2026 DPO runs a
+    diversion timetable: line 6 does not run, and lines 13 and 19 do. The
+    map shows the regular network."
+- **check_provenance's not-forked check** was failing on the five OSM cities'
+  step 3 files (Plzeň's since its build). It is a text match for
+  `render_heatmap`, and those files call it through `czechia_osm_tram.step3`.
+  Their docstrings now name it.
+- **Results:**
+  - Baselines rewritten for Liberec and Most (intended); Olomouc and Ostrava
+    zero drift.
+  - `check_scope_disclosure` OK for 81 cities, and the Aarhus control for
+    `osm_tram` passes.
+  - `app/ring_shares.json` regenerated.
+  - Files: `pipeline/countries/czechia_osm_tram.py`,
+    `pipeline/{liberec,most,olomouc,ostrava}/config.py`, the five step 3
+    files, `docs/data_sources/czechia.md`, and the Liberec and Most pages'
+    figures.
+
 ### 2026-09-30 - Pre-review checks: briefs match configs, app imports clean, pages render, label widths measured; gate 3 needs PDFs; Ostrava runs a diversion timetable (owner calls open)
 
 - **Briefs against configs:** `brief_check.py --vs-config` passes for all six

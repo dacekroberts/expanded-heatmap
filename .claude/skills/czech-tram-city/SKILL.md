@@ -288,8 +288,23 @@ draws, so the drawn lines are exactly the kept ones. What the five taught:
   diversion. On an ordinary Wednesday at the 10% rule, line 2 matches OSM
   exactly, and lines 1 and 4 differ only by the depot. A `STATION_ADD` taken
   from a whole-feed count would have drawn rings round a one-day diversion.
-  Where no feed can be read (Olomouc, Ostrava, Liberec, Most), gate 3 is an
-  open gap in the config, never a silent pass.
+  Where no feed can be read, gate 3 comes from IDOS (below), never a silent
+  pass.
+- **A line's relation can pass a stop it calls at**, while another line's
+  relation lists that stop (Liberec's 11 at Fügnerova and Sídliště Nové
+  Vratislavice). `STATION_ADD` refuses a name already on a route, so use
+  `LINE_STOP_ADD` `{node: (line or tuple, name)}`, read by
+  `czechia_osm_tram.add_line_stops`. It stops the build when the line's own
+  track is more than 25 m from the node, or when OSM fills the gap.
+- **A stop on no relation is still in the cache**: `fetch_sources.py`'s tram
+  query also fetches every `railway=tram_stop` node in the box. A cache
+  fetched without that clause lacks it (Most's Vrchlického, 2026-09-30), so
+  re-fetch before concluding a stop is not in OSM.
+- **Map the REGULAR network through temporary works** (owner, 2026-09-30;
+  Prague's Flora is the precedent). Most's Litvínov section, Liberec's 2 and
+  3 to Šaldovo náměstí and Ostrava's diversion all keep their OSM track. A
+  stop closed for the works is added from OSM, and a dated sentence for the
+  page is drafted for review time.
 
 **Line colours: OSM tags none** in the five cities, and no operator's colours
 are licensed. Use the project's own palette (Riga's precedent, and Le Havre's
@@ -303,6 +318,20 @@ published stop list per line (a count, as Prague used Wikipedia's), or, for
 Plzeň, PMDP's feed (read 2026-09-30, permitted; lines 1, 2 and 4 as
 `route_type 0`, no colours, no shapes; `https://jizdnirady.pmdp.cz/jr/gtfs`,
 GET only). Name the source in `OPERATOR_COUNTS_SOURCE`.
+
+**Where the operators publish only PDFs, read IDOS's per-stop timetables**
+(2026-09-30). These are HTML, nothing is downloaded, and dpmost.cz links them
+as its own:
+`https://idos.cz/<city>/zjr/vysledky/?date=DD.MM.YYYY&l=Tram%20N&f=<from>&t=<to>&ttn=<City>`.
+- Read both directions on a regular weekday that is clear of works, and
+  count a stop when either direction calls.
+- Some sections need one ordinary search on the form first.
+- IDOS holds only its timetable period, and Ostrava's only from 2026-09-21.
+  A date inside long works cannot check the regular network, so record the
+  check as partial and re-check it after the works (Ostrava, about
+  2026-12-13).
+- Results so far: Olomouc is exact as built, Most after one add, and Liberec
+  after three.
 
 ### `fetch_sources.py`, per city
 
@@ -601,7 +630,7 @@ recommended** (owner, 2026-09-30).
 | Trams | OSM, operator "Dopravní podnik města Olomouce": 1-7, 14 relations; 36 stop names, all inside |
 | Spacing | 318 m: halved rings |
 | Storefronts | 2,246; restaurants 1.80× OSM |
-| Calls | **approved**: the project's palette; third in order. DPMO's feed is not used at all, not even for gate 3 |
+| Calls | **approved**: the project's palette; third in order. DPMO's feed is not used at all, not even for gate 3, which IDOS gives exact on all seven lines |
 
 ### Liberec (Regional)
 
@@ -610,7 +639,7 @@ recommended** (owner, 2026-09-30).
 | Obce | 563889 Liberec (OSM 439073, `ref` CZ0513563889) + 563510 Jablonec nad Nisou (OSM 438931, `ref` CZ0512563510) |
 | Controls | Liberec `("23653124", 50.77000, 15.05845, "Liberec Town Hall, nám. Dr. E. Beneše 1/1")`; Jablonec `("12188018", 50.72452, 15.17128, "Jablonec Town Hall, Mírové náměstí 3100/19")` |
 | CRS | EPSG:32633 |
-| Trams | OSM, operator "Dopravní podnik měst Liberce a Jablonce nad Nisou": 2, 3, 5, 11; 39 stop names in scope, every line whole (line 11: 14 + 7) |
+| Trams | OSM, operator "Dopravní podnik měst Liberce a Jablonce nad Nisou": 2, 3, 5, 11; 39 stop names in scope, every line whole (line 11: 14 + 7); **40 after gate 3** (IDOS: Šaldovo náměstí on 2 and 3, line 11 at Fügnerova and Sídliště Nové Vratislavice) |
 | Spacing | 378 m: halved rings |
 | Storefronts | 2,498 (Jablonec 618); restaurants 2.45× OSM |
 | Calls | **approved**: with Jablonec, as "Liberec (Regional)" (Liberec alone would keep line 11 at 14 of 21, 67%); the project's palette; fifth in order |
@@ -623,7 +652,7 @@ recommended** (owner, 2026-09-30).
 | Obce | 567027 Most (OSM 436570, `ref` CZ0425567027) + 567256 Litvínov (OSM 436574, `ref` CZ0425567256) |
 | Controls | Most `("25298429", 50.50284, 13.64078, "Most Town Hall (Magistrát), Radniční 1/2")`; Litvínov `("5150507", 50.59881, 13.61171, "Litvínov Town Hall, náměstí Míru 11")` |
 | CRS | EPSG:32633 |
-| Trams | OSM, operator "Dopravní podnik měst Mostu a Litvínova": 1-4, 8 relations; 27 stop names in scope, every line whole |
+| Trams | OSM, operator "Dopravní podnik měst Mostu a Litvínova": 1-4, 8 relations; 27 stop names in scope, every line whole; **28 after gate 3** (IDOS: Litvínov, Vrchlického on 1, 3 and 4, closed for works) |
 | Spacing | 514 m: halved rings, 36 m under the line |
 | Storefronts | 1,030 (Litvínov 241); restaurants 3.71× OSM (OSM thin) |
 | Calls | **approved**: built, last (the smallest Czech page), as "Most (Regional)" covering Litvínov; the project's palette |
