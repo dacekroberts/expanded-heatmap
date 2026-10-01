@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**325 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**326 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [Kansas City's full rule in Los Angeles: a registrant's own name with no trade name shows the street address (owner)](#2026-10-01---kansas-citys-full-rule-in-los-angeles-a-registrants-own-name-with-no-trade-name-shows-the-street-address-owner)
 - [Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner)](#2026-10-01---gate-3s-station-calls-made-and-kansas-citys-rule-applied-in-san-francisco-and-los-angeles-owner)
 - [The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)](#2026-10-01---the-mega-reviews-c2-deferrals-done-swedish-layer-menus-say-food-shops-24sju-and-vending-by-name-no-osm-ratio-outside-france-owner)
 - [Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls](#2026-10-01---gate-3-back-filled-in-25-cities-ten-match-eight-reconcile-seven-need-the-owners-station-calls)
@@ -370,6 +371,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - Kansas City's full rule in Los Angeles: a registrant's own name with no trade name shows the street address (owner)
+
+- **The owner: "use kansas city rule for LA"**, the open call from the entry
+  below: Kansas City's second limb, which the first pass measured and held.
+- **Where no trade name was given (`dba_name` blank), the name a Los Angeles
+  pin shows is the registrant's own; where that reads as a person, the pin
+  now shows its street address**, without any unit, wherever the address is.
+  4,788 rows, on top of the 1,030 at a dwelling unit: 5,818 in all
+  (`name_as_address`), in step 3 after the home filter as before; storefronts
+  57,494 unchanged.
+- **The person test is the exposure check's (`residence.looks_personal`), not
+  Kansas City's `holder_is_person`**, which reads Los Angeles names such as
+  "HERCULES FURNITURE" and "PLAYA VISTA SHELL" as people (17,551 rows by it).
+- **The exposure check after**: person-like names on the map 2,381 -> 1,470
+  pins, all trade names a business chose to register (public commercial
+  information, the project's rule); at a residential unit 0. Pins that can
+  only be the registrant's name 5,656 -> 4,752, none reading as a person.
+- Page sentence widened to match: "Where a business is registered under a
+  person's name alone, with no trade name, or a person's name sits at an
+  apartment or other dwelling unit, its dot shows the street address
+  instead." San Francisco's 7 fallback rows hold no person-like name, so its
+  map is unchanged.
 
 ### 2026-10-01 - Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner)
 

@@ -45,8 +45,8 @@ using; once you pick one, it carries across the other city maps.
 Some businesses in the city's registry carry corrupt coordinates, mostly
 recent registrations; these were placed by geocoding their street address
 instead of being dropped. Where a business is registered under a person's
-name alone at an apartment or other dwelling unit, its dot shows the street
-address instead.
+name alone, with no trade name, or a person's name sits at an apartment or
+other dwelling unit, its dot shows the street address instead.
 
 The heat layer is illustrative. Leaflet applies a visual blur rather than a
 statistical density estimate, so read the colour as "roughly where things

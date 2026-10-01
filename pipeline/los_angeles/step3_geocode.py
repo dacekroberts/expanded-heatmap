@@ -212,17 +212,20 @@ def main():
     personal = set(names[names.map(looks_personal)].str.upper())
     out["name_is_address"] = (names.str.upper().isin(personal)
                               & out["street_address"].map(has_residential_unit))
+    at_unit = out["name_is_address"].copy()
+    # Kansas City's second limb (owner, 2026-10-01, "use kansas city rule for
+    # LA"): where no trade name was given (dba_name blank), the name shown is
+    # the registrant's own - and where that reads as a person, the pin shows
+    # the street address too, wherever it is. The person test is the exposure
+    # check's (looks_personal), not Kansas City's holder_is_person, which reads
+    # Los Angeles names such as "HERCULES FURNITURE" as people.
+    registrant = (out["dba_name"].fillna("").str.strip() == "") & names.map(looks_personal)
+    out["name_is_address"] = out["name_is_address"] | registrant
     flagged = out["name_is_address"]
     out.loc[flagged, "business_name"] = out.loc[flagged, "street_address"].map(street_only)
-    print(f"\nPerson-like name at a dwelling unit: {int(out['name_is_address'].sum()):,} "
-          f"show the street address (pins kept)")
-    # Kansas City's second limb - a name that can only be the registrant's
-    # (dba_name blank, so step 2 shows business_name, the registrant) - is NOT
-    # applied: measured only, for the owner's decision.
-    fb = (out["dba_name"].fillna("").str.strip() == "") & ~out["name_is_address"]
-    print(f"  not applied - registrant name shown because dba_name is blank: "
-          f"{int(fb.sum()):,} rows, {int((fb & names.map(looks_personal)).sum()):,} "
-          f"of them person-like")
+    print(f"\nA person's name shows the street address instead (pins kept): "
+          f"{int(flagged.sum()):,} - at a dwelling unit {int(at_unit.sum()):,}; the "
+          f"registrant's own name, no trade name given, {int((registrant & ~at_unit).sum()):,} more")
 
     BUSINESSES_GEOCODED_CSV.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(BUSINESSES_GEOCODED_CSV, index=False)

@@ -7,12 +7,12 @@
  "san_francisco": {
   "in_ring": 11762,
   "all": 16456,
-  "map_blob": "b54c2a942bfbbdbfe7b56a5789441eeaf5cd8002"
+  "map_blob": "eb909628e2fee2cd53aab9a6c5883183d9ef2d3b"
  },
  "los_angeles": {
   "in_ring": 13892,
   "all": 57494,
-  "map_blob": "fb71ed5c46976d41ade1d3a86d2f0fa0b7ff19d5"
+  "map_blob": "f5c490af36ca0b8d0ed4d08c7256bab41f8a667c"
  },
  "chicago": {
   "in_ring": 11685,
@@ -27,7 +27,7 @@
  "philadelphia": {
   "in_ring": 4851,
   "all": 8301,
-  "map_blob": "1732f039a3a47e5007e8a6df0d8ea3c415b8914a"
+  "map_blob": "4d72cb9da51d4b204b096db135b2b2f91fd030c6"
  },
  "miami": {
   "in_ring": 3733,
@@ -62,7 +62,7 @@
  "edmonton": {
   "in_ring": 2374,
   "all": 10702,
-  "map_blob": "a2df541f6f43a883b5c82c75ea8045dc9198cf67"
+  "map_blob": "453b3e121fb48d3bc2d338c1b3d5cea3dedbe885"
  },
  "toronto": {
   "in_ring": 8752,
@@ -212,7 +212,7 @@
  "seoul": {
   "in_ring": 224381,
   "all": 239410,
-  "map_blob": "0ec9157bbf07387ba49909166d00167547a8bbf9"
+  "map_blob": "1d9077693f215023558d7c011ec11ee64c3a1927"
  },
  "taichung": {
   "in_ring": 12250,
@@ -387,7 +387,7 @@
  "daugavpils": {
   "in_ring": 656,
   "all": 819,
-  "map_blob": "1b9b1f8703d8ae8c6a4446a023a8cac6f0828ecd"
+  "map_blob": "b51776a7208d502d93865e31b40ac209445b7167"
  },
  "kansas_city": {
   "in_ring": 451,
@@ -402,7 +402,7 @@
  "new_orleans": {
   "in_ring": 2140,
   "all": 4689,
-  "map_blob": "a3fcac2e92c63386eeb929b49e0aef2f18cbdab8"
+  "map_blob": "ffbbc03ab9cb184617df7e21b461b67d82e76ce5"
  },
  "florence": {
   "in_ring": 4435,
@@ -417,7 +417,7 @@
  "den_haag": {
   "in_ring": 5781,
   "all": 6213,
-  "map_blob": "06e53b4f79f3f278d42c7423e2959673b96ddf1c"
+  "map_blob": "dfa84e6a40b2070f495e4389d504c9c6ccaacfa2"
  },
  "zurich": {
   "in_ring": 3099,

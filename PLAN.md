@@ -822,14 +822,6 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
-- [ ] **Los Angeles: a registrant's own name where no trade name was given
-  (owner call, 2026-10-01).** Kansas City's rule now shows the street address
-  for a person-like name at a dwelling unit in San Francisco and Los Angeles
-  (0 left by the exposure check). Not applied: Los Angeles rows whose trade
-  name is blank show the registrant's name - 23,941 rows, 4,788 reading as a
-  person (about 911 pins). Kansas City's own rule (Houston's sole-owner rule)
-  would show the address for those; its person test misfires on Los Angeles'
-  names, so it would need the exposure check's test.
 
 - [ ] ⏰ **Zurich: rebuild after 2026-12-12** (owner, 2026-09-30, call C1): VBZ's
   temporary construction trams 50 and 51 are drawn until then; when they stop,
