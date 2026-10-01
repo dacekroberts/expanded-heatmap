@@ -72,7 +72,8 @@ and out, from the first screen to the finalised list.
    verdicts.
 5. `docs/rule_history.md` - how each CLAUDE.md rule was learned.
 6. The retrospectives: `mexico_`, `spain_`, `canada_`, `geocoding_`,
-   `us_build_retrospective` (+ addendum).
+   `us_build_retrospective` (+ addendum), `france_batch_retrospective`, and
+   any the Czech and tram kits write as they finish.
 7. `DECISIONS.md` and the week files in `docs/decisions/` - the judgment
    calls with their numbers (read by `decisions_index.py`'s index, not end
    to end).
