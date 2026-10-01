@@ -193,10 +193,12 @@ city includes that.
 
 ## Lessons
 
-1. **Put gate 3 in `tram-city`.** Most tram operators publish per-line
-   stop lists. Make step 1 compare against them where they exist, and
-   name the gap where they do not. Back-fill the nine cities before or at
-   review time, cheapest first.
+1. **Put gate 3 in `tram-city`.** Done the same evening (section 2, "Gate
+   3"). The operator's per-line counts go in config before step 1 is
+   written. A tram step 1 stops on a mismatch. The source must be
+   independent of OSM, and where none is published the gap is recorded in
+   config. The nine cities built without it owe a back-fill, or a recorded
+   gap, before landing.
 2. **A brief check passes only the claims written down.** For a tram brief,
    the claims that failed were the name columns, the current routing and the
    CRS. Make those three mandatory checks in every brief (a sample row shown
