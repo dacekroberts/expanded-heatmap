@@ -301,7 +301,7 @@ the mode is decided per city. TER is excluded in every built French city.
 
 ## The Czech batch's rows (history: all 6 built 2026-09-30)
 
-The Czech batch was built on 2026-09-30 and left T1 for the master list's Built table. The rows below are as they stood in T1.
+The Czech batch was built on 2026-09-30 and left T1 for the master list's Built table. The rows below are as they stood in T1, screening figures; as built (the Czech kit, relayed by staging 2026-09-30), Liberec with Jablonec has 40 stations (Šaldovo náměstí counted once, on lines 2 and 3) and Most + Litvínov 28 (Litvínov, Vrchlického, on lines 1, 3 and 4, closed for works but drawn: the map shows the regular network, owner).
 
 **🇨🇿 Czechia (6, built)** — ROS02 establishments, RES activity and the RÚIAN join, as
 Prague. **Briefed 2026-09-30**: `docs/build_briefs/` brno, ostrava, plzen, olomouc,
