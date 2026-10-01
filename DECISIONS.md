@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**323 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**324 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)](#2026-10-01---the-mega-reviews-c2-deferrals-done-swedish-layer-menus-say-food-shops-24sju-and-vending-by-name-no-osm-ratio-outside-france-owner)
 - [Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls](#2026-10-01---gate-3-back-filled-in-25-cities-ten-match-eight-reconcile-seven-need-the-owners-station-calls)
 - [Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner](#2026-10-01---privacy-verdicts-registered-for-all-124-cities-san-diego-and-chicago-publish-san-francisco-and-los-angeles-held-for-the-owner)
 - [The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current](#2026-10-01---the-japan-list-regenerated-taitō-and-meguro-re-measured-hiroshima-japans-eighth-the-japan-city-skill-current)
@@ -368,6 +369,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)
+
+- **The owner: "we can do the data follow-ups other than zurich rebuild"**,
+  which includes call C2 (deferred 2026-09-30, each with a Stockholm drift
+  check).
+- **`sweden_livsmedel.layer_label = legend_label`**: both Swedish maps' layer
+  menus said "Businesses: Retail", against a legend that says "Food shops".
+  Stockholm's drift check: 5,218 storefronts unchanged; with Folium's ids
+  normalised, the map differs on that one line ("Retail (942)" becomes "Food
+  shops (942)").
+- **"24sju" a food shop by name**: a convenience-store chain Göteborg
+  registers with a blank type (2 of its 6 rows; the 4 typed ones were kept).
+  Göteborg 2,987 -> 2,989 storefronts (name-classified 90 -> 92), the baseline
+  recorded; Stockholm has none.
+- **Vending machines out by name in the module** ("vending", "smartvend",
+  "varuautomat"), moved from Göteborg's step 2, which still drops and counts
+  them first; no kept row in either city matched. The continuity table now
+  locates `nonstore` for this taxonomy instead of declaring it absent.
+- **The ratio to OpenStreetMap is dropped from the tram-city template**, not
+  filled: none of the ten non-French tram pages carries it (Aarhus, Odense's
+  model, never did), it is the French pages' comparison for SIRENE's
+  registered establishments, and filling it would spend an Overpass query per
+  city. No page changed.
+- `app/ring_shares.json` (Göteborg 2,256 of 2,989; every map's blob id
+  refreshed, all stale since the 124-map re-render) and `app/macro_facts.json`
+  (Göteborg's count) rewritten; 33 of 33 checks pass.
 
 ### 2026-10-01 - Gate 3 back-filled in 25 cities: ten match, eight reconcile, seven need the owner's station calls
 

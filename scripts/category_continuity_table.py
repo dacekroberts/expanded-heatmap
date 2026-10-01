@@ -1786,8 +1786,11 @@ COLUMNS["palma_restauracio"] = {
 COLUMNS["sweden_livsmedel"] = {
     **{rid: absent("a food-control register: food premises only") for rid in (
         "funeral", "personal_catchall", "adult_hostess", "sex_shop", "massage_commercial", "massage_regulated",
-        "car_dealer", "vehicle_repair", "pawnbroker", "vet", "nonstore", "parking", "repair", "optician",
+        "car_dealer", "vehicle_repair", "pawnbroker", "vet", "parking", "repair", "optician",
         "gambling", "lodging")},
+    # Vending machines out by name in the module since 2026-10-01 (owner, call
+    # C2; Göteborg's 24Seven Vending and SmartVend 24/7).
+    "nonstore": [loc(_se("Detaljhandel", "SmartVend 24/7"), "vending machine, by name")],
     "recreation": absent("a food-control register; 'gymnasi' in its name filter is a secondary school",
                          ignore=("skola|förskola|skolan|gymnasi|fritids|äl",)),
     "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register"),

@@ -78,7 +78,7 @@ FOOD_NAME = re.compile(
     r"deli|kitchen|kök\b|matsal(?!.*personal)|lunch|dining|trattoria|osteria|tapas|izakaya|poke|"
     r"bowl|juice|glass|gelato|hamburg|wok|dumpling|curry|meze|steakhouse|kafé|hotdog|korv")
 SHOP_NAME = re.compile(
-    r"\bica\b|coop|hemköp|willys|lidl|city gross|pressbyrån|7-eleven|seven eleven|livs|\bmat\b|"
+    r"\bica\b|coop|hemköp|willys|lidl|city gross|pressbyrån|7-eleven|seven eleven|24 ?sju|livs|\bmat\b|"
     r"market|mart\b|supermarket|butik|handel|charkuteri|fisk|ost\b|delikatess|frukt|grönt|"
     r"hälsokost|systembolaget|tobak|kiosk|servicebutik|godis|choklad|te &|kaffe")
 PHARMACY_NAME = re.compile(r"apote")
@@ -104,7 +104,11 @@ NOT_STOREFRONT_NAME = re.compile(
 # stay; Westers Catering, Stockholm Event go).
 NO_COUNTER_NAME = re.compile(
     r"food ?trucks?|matvagn|korvvagn|vagn\b|\bmobil\b|preppkök|\bprepp\b|bakomlokal|"
-    r"matdemonstrat")
+    r"matdemonstrat|"
+    # Vending machines (docs/category_rules.md, "Mobile units, kiosk carts,
+    # vending machines"), moved here from Göteborg's step 2 (owner, call C2,
+    # 2026-10-01): 24Seven Vending, SmartVend 24/7. None in Stockholm.
+    r"vending|smartvend|varuautomat")
 CATERER_NAME = re.compile(r"catering|\bevent\b")
 
 
@@ -130,6 +134,11 @@ def name_bucket(name):
 
 def legend_label(bucket):
     return {"Retail": "Food shops"}.get(bucket, bucket)
+
+
+# The map's layer menu says what the legend says (owner, call C2, 2026-10-01):
+# "Food shops", never "Retail", on both Swedish maps.
+layer_label = legend_label
 
 
 def classify(row):
@@ -160,3 +169,4 @@ assert not set(TYPE_TO_BUCKET) & EXCLUDED_TYPES
 # caterer whose only food word is "catering".
 assert not no_counter("chez kny bistro & catering") and no_counter("westers catering")
 assert no_counter("tommys farstaplan, food truck") and not no_counter("vagnhallen deli")
+assert no_counter("24seven vending") and name_bucket("24sju") == "Retail"
