@@ -116,7 +116,7 @@ CITIES = [
         # (python -B) passes end -11 at dy -5 to +1 with Tucson at its offset
         # (-6 meets Kansas City's pill, +2 Los Angeles's); -2 sits inside that,
         # PROBLEMS 0 at 375, 768 and 1200.
-        "label_offset": ("end", -11, -2),
+        "label_offset": ("end", -11, 16),
     },
     {
         "name": "San Francisco",
@@ -133,7 +133,7 @@ CITIES = [
         "record_kind": "Licence register",
         "categories": "All three",
         "blurb": "Muni Metro (J Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street) and the F Market & Wharves",
-        "label_offset": ("middle", 0, -22),
+        "label_offset": ("end", -11, 0),
     },
     {
         "name": "Los Angeles",
@@ -158,7 +158,7 @@ CITIES = [
         # (2026-09-24) labels Guadalajara at this zoom too: at 26 the two pills
         # overlapped 68.5 x 1.1 px. At 24 they clear, and the pill's top is
         # still 15 px below LA's dot.
-        "label_offset": ("middle", 0, 24),
+        "label_offset": ("end", -11, 0),
     },
     {
         "name": "Chicago",
@@ -2058,7 +2058,7 @@ CITIES = [
         # dy -37 to about -42 above the dot; higher, Calgary's and Vancouver's
         # labels; level to the right passes only at exactly dy 0. -40, PROBLEMS
         # 0 at 375, 768 and 1200.
-        "label_offset": ("end", -11, 0),
+        "label_offset": ("middle", 0, -22),
     },
     {
         "name": "Houston",
@@ -2232,7 +2232,7 @@ CITIES = [
         # Sacramento's marker. check_macro_labels.py (python -B) passes start 11
         # at dy -7 to -2 (-1 meets Los Angeles's pill, -8 Kansas City's); -5
         # sits inside that, PROBLEMS 0 at 375, 768 and 1200.
-        "label_offset": ("end", -11, 16),
+        "label_offset": ("middle", 0, 22),
     },
     {
         "name": "New Orleans",
@@ -3472,12 +3472,14 @@ REGION_ORDER = [
 # easternmost European city, 0.4 degrees east of Bucharest, so it moves the
 # centre that far east and no further.
 # Tucson (2026-09-30, tram kit) is United States West's first city outside
-# California, 6 degrees east of San Diego: fitted to it, the zoom dropped and
-# San Francisco's pill covered Sacramento's marker at every width. Left out of
-# the fit, California keeps its zoom; the centre moves about 3 degrees east and
-# Tucson's label sits on the canvas unclipped, PROBLEMS 0.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils"),
-                       "United States West": ("Tucson",)}
+# California, 6 degrees east of San Diego. The tram kit left it out of the fit;
+# that moved the centre about 3 degrees east and, on a phone (375 px), pushed
+# San Francisco's, Sacramento's and Tucson's own dots off the canvas (review
+# lane 2; the check scored clipping only for a dot on the canvas). So it is IN
+# the fit: the zoom drops and all five fit, with San Francisco's and
+# Sacramento's labels re-placed to suit (cleanup's sweep, PROBLEMS 0 in the
+# region at 375, 768 and 1200).
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils")}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would

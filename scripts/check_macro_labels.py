@@ -580,6 +580,13 @@ def main():
     widths = args.width or sorted(CANVAS)
 
     problems, clips, near, accepted = [], [], [], []
+    # A MEMBER WHOSE OWN DOT IS OFF THE CANVAS was never reported: the clipping
+    # test below runs only for a visible marker. Review lanes 1 and 2 found it
+    # twice on 2026-09-30 - Bordeaux and Nice in France South at 375 px, each
+    # leaving a fragment of its pill, and Tucson's re-centring pushing San
+    # Francisco and Sacramento off United States West. Reported, not failed,
+    # like clipping: the pinned France zooms accept it by the owner's call.
+    offframe = []
     problems.extend(caption_arithmetic())
     for region in REGIONS:
         clat, clon, zoom = region_view(region)
@@ -608,6 +615,11 @@ def main():
                 if city["name"] not in labelled:
                     continue
                 box = pill(city, x, y)
+                if not on:
+                    shows = not (box[2] < 0 or box[0] > cw or box[3] < 0 or box[1] > CANVAS_H)
+                    offframe.append(f"{region['name']:<20} {vw:>4}px  {city['name']:<24} "
+                                    f"dot off the canvas"
+                                    + (", a fragment of its pill shows" if shows else ""))
                 # A pill entirely off the canvas is not drawn and cannot collide
                 # with anything. A pill PARTLY on it can, so the test is
                 # intersection with the canvas rather than the marker being
@@ -693,6 +705,14 @@ def main():
         for line in near:
             print(f"  {line}")
         print()
+
+    if offframe and args.verbose:
+        print(f"Members whose dot is off the canvas ({len(offframe)}) - reported, not failed:")
+        for line in offframe:
+            print(f"  {line}")
+        print()
+    elif offframe:
+        print(f"{len(offframe)} member dot(s) off the canvas; --verbose to list.\n")
 
     if clips and args.verbose:
         print(f"Clipping at the canvas edge ({len(clips)}) - reported, not failed:")

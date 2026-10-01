@@ -365,6 +365,18 @@ def set_base_font():
         [data-testid="stIconMaterial"] {
             font-family: "Material Symbols Rounded" !important;
         }
+
+        /* A markdown table wider than the column scrolls inside its own box
+        instead of widening the page: the French table on What Is Excluded
+        (474 px in a 375 px viewport) and About the Data's tables (about
+        2,800 px) pushed the whole page sideways on a phone (review lane 3,
+        2026-09-30). scroll_table() does the same for tables built in code;
+        this covers the ones the docs carry. */
+        [data-testid="stMarkdownContainer"] table {
+            display: block;
+            overflow-x: auto;
+            max-width: 100%;
+        }
         </style>
         """,
         unsafe_allow_html=True,
