@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**245 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**246 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [France splits into two macro-map regions, France North and France South, at zoom 5.0 (owner)](#2026-09-30---france-splits-into-two-macro-map-regions-france-north-and-france-south-at-zoom-50-owner)
 - [Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)](#2026-09-30---request-stops-count-as-stations-boardable_stop_ids-defaults-to-gtfs-0-2-and-3-owner)
 - [New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)](#2026-09-30---new-working-rules-a-memory-gate-for-two-heavy-jobs-decisions-drafts-overpass-pacing-pre-permitted-downloads-and-prose-owner)
 - [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
@@ -287,6 +288,48 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - France splits into two macro-map regions, France North and France South, at zoom 5.0 (owner)
+
+- **Decided (owner, "go with north/south", relayed by the France builds and
+  confirmed in the cleanup session): France becomes two leaf regions, split at
+  latitude 46.5, each opened at zoom 5.0.** France's 25 cities (5 built, 20 in
+  the tram batch) cannot share one view. France's measurement on the real
+  label text: at 4.5 three labels cannot be placed and four cities fall off a
+  phone; at 5.0 one label fails and three cities fall off even at 1200 px.
+- **Europe keeps every other European city.** Labelling all 25 French cities
+  at Europe's zoom is what cannot work, so a composite Europe was rejected.
+  The French dots still show in the Europe view, labelled in their own
+  regions. Europe goes from 24 cities to 19.
+- **`REGION_ZOOM` (new, `app/cities.py`) sets a region's zoom after the fit.**
+  The `REGIONS` "zoom" field existed but nothing read it.
+  - `check_macro_labels.py` applies it the way `Overview.py` does.
+  - `Overview.py` reads it with `getattr` rather than importing the name. A
+    cached `cities.py` on Streamlit Cloud then means "no override", not the
+    2026-09-22 ImportError.
+- **Retagged on master's cities:** Paris, Lille and Rennes to France North;
+  Marseille and Toulouse to France South. Lille's label moves to
+  ("middle", 0, -20) and Rennes's to ("start", 10, 6); the other three keep
+  theirs.
+- **The 20 batch labels were placed on a combined tree** (this branch plus
+  france-build-2's entries, 95 cities).
+  - TEXT_WIDTHs were measured in the app's own document, with the font
+    checked loaded. The controls matched the table exactly: Paris 32.9,
+    Marseille 60.3, Lille (Regional) 99.7.
+  - The placement is greedy, scored by `check_macro_labels.py`'s own rules:
+    from 30 problems at the scaffold offsets to 0, with no phone-width
+    clipping in either French region.
+  - Full check on the combined tree: PROBLEMS 0 in all 14 regions at 375,
+    768 and 1200.
+  - Le Havre, the one label France's own placer could not place, is at
+    ("middle", 20, 20).
+  - Three pairs stay ambiguous by under 4 px at 1200: Le Havre/Rouen 3.8,
+    Nantes/Tours 3.5, Marseille/Avignon 3.4. In each, a label sits that much
+    nearer the neighbouring dot than its own; the cities are close.
+  - The batch offsets and widths go to the France builds, who own those
+    entries.
+- An `app/` change: review time, `map-chrome` deploy-verify, reboot. It
+  builds on `macro-legend` (12 px dots, MARKER_R 6), which it contains.
 
 ### 2026-09-30 - Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)
 

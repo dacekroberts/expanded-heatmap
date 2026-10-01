@@ -825,7 +825,7 @@ CITIES = [
         # label left of its dot is the only pair at PROBLEMS 0 in every region
         # at 375, 768 and 1200; due east covered Prague's marker, below met
         # Rennes and covered Paris.
-        "label_offset": ("start", 12, 18),
+        "label_offset": ("middle", 0, -20),
     },
     {
         "name": "Rennes",
@@ -850,7 +850,7 @@ CITIES = [
         # widths: PROBLEMS 0, and Rennes is not among the labels clipped at
         # 375 px. It sits alone in the west of France, 3.4 degrees of
         # longitude from Paris, so a label pointing up has nothing to meet.
-        "label_offset": ("middle", 0, -22),
+        "label_offset": ("start", 10, 6),
     },
     {
         "name": "Oslo",
