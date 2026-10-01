@@ -49,6 +49,7 @@ from cities import (  # noqa: E402
     DEFAULT_FRAME,
     DEFAULT_REGION,
     REGION_MEMBERS,
+    REGION_ZOOM,
     REGION_ZOOM_WITHOUT,
     REGIONS,
     cities_in,
@@ -258,7 +259,7 @@ TEXT_WIDTH = {
 
 PILL_PAD_X = 5            # background_padding=[5, 2]
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
-MARKER_R = 5.0            # get_radius=4 plus the 1 px ring
+MARKER_R = 6.0            # Overview.DOT_PX / 2: 12 px icons since 2026-09-30 (was 4 + 1 px ring)
 DEFAULT_OFFSET = ("middle", 0, -22)
 CANVAS = {375: 343, 768: 726, 1200: 1030}   # viewport -> deck canvas width
 CANVAS_H = 460
@@ -351,6 +352,9 @@ def region_view(region):
     skip = REGION_ZOOM_WITHOUT.get(frame, ())
     zs = [c for c in here if c["name"] not in skip] or here
     centre_lat, centre_lon, zoom = fit_view([c["lat"] for c in zs], [c["lon"] for c in zs])
+    # A zoom set outright (cities.REGION_ZOOM, France North and South at 5.0),
+    # applied after the fit exactly as Overview.py applies it.
+    zoom = REGION_ZOOM.get(frame, zoom)
     if frame != DEFAULT_FRAME:                  # Overview.py's re-centring block
         centre_lat = (max(lats) + min(lats)) / 2
         centre_lon = (max(lons) + min(lons)) / 2
