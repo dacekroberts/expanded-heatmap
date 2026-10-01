@@ -488,6 +488,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Buffalo | NFTA Metro Rail (light rail, one line) | NFTA's GTFS not used (OSM) | OpenStreetMap route relations; gate 3 exact on 14 | City | 0 / 0 |
 | Sacramento | SacRT light rail, Blue and Gold | Green Line (suspended; its one station closed for works) | OpenStreetMap route relations (+ Wikidata for Dos Rios); gate 3 exact on SacRT's timetables | City | 15 / 0 |
 | Houston | METRORail light rail, Red, Green and Purple | — | OpenStreetMap route relations (METRO's data agreement kept out); gate 3 exact | City (TIGER) | 0 / 0 |
+| Kansas City | KC Streetcar, one line | Buses | OpenStreetMap route relations (RideKC's GTFS barred, owner) | City (TIGER) | 0 / 0 |
 | **Canada** | | | | | |
 | Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS | Vancouver + Surrey | 30 / 0 |
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
@@ -597,6 +598,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Buffalo | 3 activity registers | City Business Licenses, NYS food stores, NYS salons | Per-source dispatch | 113 / 188 / 75 | Retail thin |
 | Sacramento | Tax register | Business Operation Tax Information | Own Business_Description | 625 / 510 / 243 | — |
 | Houston | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 1,077 / 1,052 / 94 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
+| Kansas City | Licence register | KCMO Business License Holders (frozen 2026-01-15) | NAICS (2022 titles mapped to codes) | 273 / 52 / 126 | Food service thin: about 175 restaurants and bars in the whole register; 1,095 fee-code licences unclassifiable |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
@@ -703,6 +705,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Buffalo | Register coordinates (14 rows without a point lost) | Retail thin; possible double counts | Expired licences, caterers, sidewalk cafés, chair renters, salons at an apartment; person-named salons shown by type |
 | Sacramento | Census geocoder (98.0% of addresses matched; 125 outside the city by postal address) | "ON FILE" addresses withheld and unplaceable | Expired licences, two catch-alls, online, mobile and cottage food, individual stylists and massage technicians, repairs, apartments; person-like names shown by type |
 | Houston | Address join to the City's Site Addresses (83.9%) + Census geocoder (12.4%); 3.7% unplaced, 608 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments, trailers and a person's permit at a Residential point; address shown for a person's permit |
+| Kansas City | Register coordinates (100%); 11 outside the city | Food service thin; a licence is not a shopfront | Non-store sellers, caterers, mobile food, parking; fee-code licences (1,095); licences that lapsed in 2024; address shown for a person's licence or a person-named trade name |
 | **Canada** | | | |
 | Vancouver (Regional) | Source coordinates | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
@@ -804,6 +807,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Buffalo | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 24% | Trade name; licence type for person-named salons |
 | Sacramento | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 41% | Name; description for names that read as a person's |
 | Houston | Active permits (2026-09-29) | B | 0.6 mi | Yes | 7% | Name; address for a person's permit |
+| Kansas City | Frozen 2026-01-15, licences valid 2025-26 (2026-09-30) | B | 0.3 mi | Yes | 13% | Trade name, else holder company; address for a person's licence |
 | **Canada** | | | | | | |
 | Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |

@@ -387,6 +387,11 @@
  "daugavpils": {
   "in_ring": 656,
   "all": 819,
+  "map_blob": "deab2f16d12ea3d20b623472e1ea6c90cca8bff3"
+ },
+ "kansas_city": {
+  "in_ring": 451,
+  "all": 3561,
   "map_blob": null
  }
 }

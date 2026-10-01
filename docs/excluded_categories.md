@@ -1966,6 +1966,31 @@ Register; every shop was placed at its building.
 drawn though routes 2 and 4 run about hourly (owner, 2026-09-30), and the page states each
 route's wait. Not drawn: buses and suburban trains.
 
+### Kansas City - Houston's rules on a frozen licence register, and every streetcar stop
+
+**Left out of KCMO's Business License Holders** (15,895 rows, frozen 2026-01-15): 1,978
+licences valid for 2024 only, lapsed by the freeze (owner); 1,095 current licences whose
+industry is only a fee code ("Misc Rate 129", "Flat Rate 42"), which cannot be classified
+(owner). Then, by NAICS code (the shared carve-outs, `pipeline/taxonomies/naics.py`):
+- vending-machine operators (23) and fuel dealers (1) - NAICS 2022 has no "nonstore" code,
+  so online sellers are NOT left out: they sit under the goods they sell;
+- food service contractors (9), caterers (17) and mobile food (23);
+- parking (56), funeral services and cemeteries (36) and "all other personal services" (80).
+
+**Also left out**: 11 points outside the city limits. The register's addresses carry no unit,
+so no business is left off as a home at an apartment, as in Houston.
+
+**Missing, not excluded**: the register holds few restaurants and bars (about 175 food-service
+premises in the whole city, 26 of them full-service restaurants), so Food service is thin;
+the page says so.
+
+**Shown, but not named**: 710 storefronts show their street address instead of a name - 684
+whose licence holder is a person (the register writes a person surname first, "HARRIS
+GREGORY J") and 26 companies named only as a person ("ALYSSA BULLIS LLC";
+`config.PERSON_NAMED`, read by eye).
+
+**Stations.** All 19 KC Streetcar stops are inside the city. Not drawn: buses.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

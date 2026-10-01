@@ -245,6 +245,9 @@ TEXT_WIDTH = {
     "Liepāja": 48.2,
     # Daugavpils: measured 2026-09-30 in the same tab, the same way.
     "Daugavpils": 73.7,
+    # Kansas City: measured 2026-09-30 the same way as Odense, in a fresh tab
+    # (Houston 56.9, Odense 50.6, Daugavpils 73.7 and Riga 29.5 reproduced).
+    "Kansas City": 79.3,
     # Buffalo: measured 2026-09-29 in the local app's own document (lean venv),
     # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load;
     # Prague 47.3, Tokyo 40.5, London 50.9, Glasgow 56.8 and Oslo 29.0

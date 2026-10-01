@@ -429,6 +429,18 @@ REGISTRIES = {
     "houston": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),
+    # Kansas City: KCMO's licence register, whose `dba_name` is the HOLDER and
+    # `business_name` the trade name (pipeline/kansas_city/config.py). Step 2
+    # shows the address wherever the holder reads as a person (surname first,
+    # "HARRIS GREGORY J") or the trade name is a person's own; otherwise the
+    # trade name, else the holder company - so the fallback join below counts
+    # holder COMPANIES, each one a name step 2 judged not a person's. The
+    # addresses carry no unit, so the unit check reads nothing; the
+    # person-shaped names it reports are company trade names ("CROWS COFFEE",
+    # "SMOOTHIE KING"), read by eye 2026-09-30.
+    "kansas_city": dict(raw="business_licenses.csv", trade="business_name",
+                        owner="dba_name", processed="businesses_clean.csv",
+                        address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

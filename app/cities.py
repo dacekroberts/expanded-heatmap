@@ -179,7 +179,15 @@ CITIES = [
         # A pill 21 px tall at dy +16 starts 5.5 px below the dot's centre,
         # which clears the 4 px marker and its 1 px ring - so it reads as
         # below the dot rather than on it.
-        "label_offset": ("middle", 0, 16),
+        #
+        # MOVED LEFT OF THE DOT 2026-09-30 (tram kit), when Kansas City joined:
+        # south of the dot this pill covered Kansas City's marker at the Global
+        # and United States zooms at all three widths, which no offset of Kansas
+        # City's own label can fix. Left of the dot, check_macro_labels.py
+        # (python -B) passes end -11 at dy -8 to +5 with Kansas City at its
+        # offset (-9 meets Toronto's pill, +8 Kansas City's); -2 sits inside
+        # that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("end", -11, -2),
     },
     {
         "name": "New York",
@@ -2051,6 +2059,38 @@ CITIES = [
         # check_macro_labels.py passes dy -12 to 12 on the right: PROBLEMS 0
         # at 375, 768 and 1200, with Daugavpils left out of Europe's zoom.
         "label_offset": ("start", 11, 0),
+    },
+    {
+        "name": "Kansas City",
+        "lat": 39.08,
+        "lon": -94.58,
+        "page": "pages/133_Kansas_City_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Register frozen 2026-01-15; licences valid 2025-26",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "All three",
+        "blurb": "KC Streetcar, one streetcar line",
+        "region": "United States East",
+        "country": "United States",
+        "in_default_view": True,
+        # LEFT of the dot and a little below, and SCORED: width 79.3 px measured
+        # in a browser with Space Grotesk loaded (2026-09-30). Inside the frame
+        # the other US cities already set, so the landing view does not move.
+        # Above or below the dot it meets Chicago's, San Diego's or San
+        # Francisco's pills at the Global and United States zooms, and right of
+        # it the East Coast's markers; Chicago's own label moved left to clear
+        # this marker (see Chicago). check_macro_labels.py (python -B) passes
+        # end -11 at dy +2 to +13 (+16 meets San Diego's pill), and 8 sits
+        # inside that: PROBLEMS 0 at 375, 768 and 1200. The cost: at 375 px in
+        # United States East the pill runs 17.3 px (19%) off the left edge,
+        # reported as clipped, not a problem; every side that avoids it
+        # collides elsewhere.
+        "label_offset": ("end", -11, 8),
     },
 ]
 
