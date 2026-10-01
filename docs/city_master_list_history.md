@@ -22,7 +22,11 @@ date and heading:
 - **[09-20 week]** is `docs/decisions/2026-09-20.md`.
 - **[09-13 week]** is `docs/decisions/2026-09-13.md`.
 
-Times are the project's local commit times (UTC−7). That is why an entry
+Times are the project's local commit times (UTC−7).
+
+**The list was rebuilt fresh on 2026-10-01**, after this history was written.
+Every citation of `city_master_list.md` here refers to the list as it stood on
+2026-09-30, archived word for word at `docs/city_master_list_2026-09-30.md`. That is why an entry
 dated 09-24 in the log can carry a commit on the evening of 09-23.
 
 ---
