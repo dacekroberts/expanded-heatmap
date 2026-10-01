@@ -2296,22 +2296,21 @@ CITIES = [
         "lon": 3.8785,
         "page": "pages/111_Montpellier_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (99.97%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "TaM trams 1 to 5",
-        "region": "Europe",
+        "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
     },
     {
         "name": "Strasbourg",
@@ -2319,21 +2318,20 @@ CITIES = [
         "lon": 7.7526,
         "page": "pages/112_Strasbourg_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (99.93%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "CTS trams A to F",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2342,22 +2340,24 @@ CITIES = [
         "lon": 0.1414,
         "page": "pages/113_Le_Havre_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (99.84%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "LiA trams A and B",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        # Le Havre's label is set below and right of the dot by hand: at
+        # the scaffold's default it sat on "Rouen (Regional)". At 1200 px
+        # it is within 4 px of reading as Rouen's (noted for the owner).
+        "label_offset": ("middle", 20, 20),
     },
     {
         "name": "Caen",
@@ -2365,22 +2365,21 @@ CITIES = [
         "lon": -0.3738,
         "page": "pages/114_Caen_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (100.00%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Twisto trams T1, T2 and T3",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
     },
     {
         "name": "Rouen (Regional)",
@@ -2388,21 +2387,20 @@ CITIES = [
         "lon": 1.0852,
         "page": "pages/115_Rouen_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Joined to INSEE's geolocation (99.95%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Astuce's Métro, a light rail",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2411,21 +2409,20 @@ CITIES = [
         "lon": -0.5596,
         "page": "pages/116_Bordeaux_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (99.95%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "TBM trams A to F",
-        "region": "Europe",
+        "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2434,22 +2431,21 @@ CITIES = [
         "lon": -1.5371,
         "page": "pages/117_Nantes_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (99.98%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Naolib trams 1, 2 and 3",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("start", 10, 0),
     },
     {
         "name": "Grenoble (Regional)",
@@ -2457,22 +2453,21 @@ CITIES = [
         "lon": 5.7245,
         "page": "pages/118_Grenoble_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (99.93%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "M réso trams A to E",
-        "region": "Europe",
+        "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
     },
     {
         "name": "Valenciennes (Regional)",
@@ -2480,22 +2475,21 @@ CITIES = [
         "lon": 3.5091,
         "page": "pages/119_Valenciennes_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Joined to INSEE's geolocation (99.96%)",
         "data_age": "SIRENE monthly; fetched 2026-09-30",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Transvilles trams T1 and T2",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
     },
 ]
 

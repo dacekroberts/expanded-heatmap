@@ -269,6 +269,15 @@ TEXT_WIDTH = {
     "Avignon": 54.7,
     "Saint-Étienne": 92.2,
     "Nice": 29.4,
+    "Strasbourg": 75.9,
+    "Le Havre": 57.2,
+    "Caen": 33.7,
+    "Rouen (Regional)": 115.8,
+    "Nantes (Regional)": 120.5,
+    "Valenciennes (Regional)": 162.4,
+    "Montpellier": 77.3,
+    "Bordeaux (Regional)": 137.9,
+    "Grenoble (Regional)": 133.5,
 }
 
 PILL_PAD_X = 5            # background_padding=[5, 2]
