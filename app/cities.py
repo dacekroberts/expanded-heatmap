@@ -2048,6 +2048,29 @@ CITIES = [
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
     },
+    {
+        "name": "Uijeongbu",
+        "lat": 37.7381,
+        "lon": 127.0338,
+        "page": "pages/85_Uijeongbu_Heatmap.py",
+        "coverage": "full",
+        "mode": "metro",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "The U Line, Line 1 and Line 7",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, the default, and SCORED: Uijeongbu moves the Seoul Capital
+        # Area frame's centre north (37.450 to 37.490 N, zoom unchanged, measured in
+        # memory); check_macro_labels.py (python -B) passes, PROBLEMS 0 at 375, 768
+        # and 1200, alone and on the combined tree with Namyangju and Ansan (width
+        # 68.6 px, measured 2026-09-30).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
