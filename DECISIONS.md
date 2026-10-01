@@ -302,7 +302,6 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
-<<<<<<< HEAD
 ### 2026-09-30 - Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)
 
 - **Measured before the next review (owner: measure first, decide at
@@ -1577,7 +1576,7 @@ clean.
 
 **For the batch review:** Toronto's label moved 5 px; the name test's 161
 and the 74 folds are this build's measurement, not an owner's call.
-=======
+
 ### 2026-09-29 - A download is dated in the city's own time zone; Bergen's register is 2026-09-24 (owner)
 
 - **Decided (owner): a download's date is the date in the city's own time
@@ -1614,7 +1613,6 @@ and the 74 folds are this build's measurement, not an owner's call.
   UTC date. Both were fetched before midnight UTC, so they show the right
   date, but an evening re-fetch would date itself a day ahead. Switching
   them to `as_of_date`, as Houston did, is optional.
->>>>>>> origin/bergen-date
 
 ### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
 
