@@ -82,7 +82,7 @@
  "madrid": {
   "in_ring": 49537,
   "all": 52240,
-  "map_blob": "9cdb1bcaab621d6a033a9a60cd347753a0f55e51"
+  "map_blob": "d2bc8e0a62ee421205b0ab9ae0f64ea8206b4efa"
  },
  "barcelona": {
   "in_ring": 35287,
@@ -127,7 +127,7 @@
  "oslo": {
   "in_ring": 8080,
   "all": 10678,
-  "map_blob": "9e1eeb618ca5b46f588b9a3ae089723069c03756"
+  "map_blob": "262a089577db1918acbdea8d9d05aa18956b8b3c"
  },
  "copenhagen": {
   "in_ring": 14102,
@@ -262,7 +262,7 @@
  "fukuoka": {
   "in_ring": 24619,
   "all": 29921,
-  "map_blob": "5a745d4e75bce97e3fa6c99b36004eaff4b8707e"
+  "map_blob": "5f31955dda15a918030f6ffc5df06b9aff4ea5b8"
  },
  "kyoto": {
   "in_ring": 27980,
@@ -523,6 +523,11 @@
   "in_ring": 11178,
   "all": 13103,
   "map_blob": "0381f05e32e15e8e73a3c0d85d2ef7321d732b7a"
+ },
+ "anyang": {
+  "in_ring": 9747,
+  "all": 15177,
+  "map_blob": "cbf75f65517a5ea20a2063643834109badd4fcf1"
  },
  "dallas": {
   "in_ring": 4197,

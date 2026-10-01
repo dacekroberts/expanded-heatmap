@@ -2750,6 +2750,28 @@ CITIES = [
         "label_offset": ("middle", 0, -22),
     },
     {
+        "name": "Anyang",
+        "lat": 37.3943,
+        "lon": 126.9568,
+        "page": "pages/87_Anyang_Heatmap.py",
+        "coverage": "full",
+        "mode": "metro",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 1 and Line 4",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, nudged west: at Namyangju's wider Seoul Capital Area zoom (8.10)
+        # the default pill meets Seongnam's by 5 px. check_macro_labels.py (python -B)
+        # passes middle at dx -8 to -24, PROBLEMS 0 at 375, 768 and 1200, alone and on
+        # the combined tree with every Band B branch (width 51.6 px, measured 2026-09-30).
+        "label_offset": ("middle", -14, -22),
+    },
+    {
         "name": "Dallas",
         "lat": 32.7767,
         "lon": -96.797,

@@ -239,6 +239,10 @@ TEXT_WIDTH = {
     # 14px "Space Grotesk" after document.fonts.load, with Prague 47.3, Tokyo
     # 40.5, Houston 56.9 and Toronto 52.4 reproduced exactly in the same run.
     "Uijeongbu": 68.6,
+    # Anyang: measured 2026-09-30 (Band B session), canvas measureText at 600
+    # 14px "Space Grotesk" after document.fonts.load, with Prague 47.3, Tokyo
+    # 40.5, Houston 56.9 and Toronto 52.4 reproduced exactly in the same run.
+    "Anyang": 51.6,
     # Bergen: measured 2026-09-29 in the local app's own document (lean venv),
     # canvas measureText after document.fonts.load, Space Grotesk loaded;
     # Prague, Tokyo, London, Glasgow and Oslo reproduced.

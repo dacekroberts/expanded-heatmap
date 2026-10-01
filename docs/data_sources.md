@@ -2136,7 +2136,7 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
 
-**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu) — required, and DISPLAYED**
+**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed once Incheon lands).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-29; the rows in
