@@ -38,43 +38,38 @@ else:
 
 render_data_age('Sapporo')
 
-# Prose approved by the owner 2026-09-28. The as-of dates are the lists' own
-# (config.FOOD_AS_OF, config.REGISTERS_AS_OF).
+# Prose approved by the owner 2026-09-28; set as bullets 2026-10-01. The as-of
+# dates are the lists' own (config.FOOD_AS_OF, config.REGISTERS_AS_OF).
 st.markdown(
     """
-Seven lines are drawn, each labelled on the map and in the legend: the Sapporo Municipal Subway's
-Namboku, Tōzai and Tōhō lines; the Sapporo Streetcar's loop; and JR Hokkaido's Hakodate Main,
-Chitose and Gakuen Toshi lines. Lines and stations come from MLIT's national railway data
-(国土数値情報); station names in English are from OpenStreetMap, written in one style with block
-numbers as figures (Kita-18-Jo, Nishi-11-Chome). Only stations inside Sapporo City get rings,
-because the business data covers the city alone: JR lines running on to Otaru, Ebetsu, Tōbetsu and
-the airport are cut at the city line. Line colours are this project's own, not the operators'.
+**The lines**
 
-Businesses come from Sapporo City's list of food-business permits (as of 31 March 2026) and its
-registers of barbers, beauty salons, laundries and coin laundries (as of 31 July 2026). Japan has
-no general business licence, so shops other than food shops — clothing, electronics, pharmacies —
-do not appear: the Food shops layer is food retail only (bakeries and confectioners, delis, butchers
-and fishmongers). Food businesses that only notify the city rather than hold a permit are not in
-the list, nor are salons inside hospitals and care homes, which serve their residents rather than
-the public. The list may include premises that have closed, so a dot means a permit on file, not a
-business open today. Food trucks and stalls registered to trade anywhere in the city have no fixed
-place and are left out.
+- Seven lines are drawn, each labelled on the map and in the legend: the Sapporo Municipal
+  Subway's Namboku, Tōzai and Tōhō lines; the Sapporo Streetcar's loop; and JR Hokkaido's Hakodate
+  Main, Chitose and Gakuen Toshi lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colours are this project's own, not the operators'.
+- Only stations inside Sapporo City get rings, because the business data covers the city alone: JR
+  lines running on to Otaru, Ebetsu, Tōbetsu and the airport are cut at the city line.
 
-The list gives an address but no location. Each address is matched to MLIT's address reference
-data, which places most at their street block; where only the block group (条丁目) can be found,
-the dot sits at its centre, which on Sapporo's grid is about one block. A handful of addresses
-cannot be placed. Where a business's trade name is its operator's own name, the dot shows its
-permit type instead. Names and permit types are shown in Japanese, as the city records them.
+**The businesses**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
+- From Sapporo City's list of food-business permits (as of 31 March 2026) and its registers of
+  barbers, beauty salons, laundries and coin laundries (as of 31 July 2026).
+- Japan has no general business licence, so shops other than food shops — clothing, electronics,
+  pharmacies — do not appear: the Food shops layer is food retail only (bakeries and
+  confectioners, delis, butchers and fishmongers).
+- Food businesses that only notify the city rather than hold a permit are not in the list.
+- The list may include premises that have closed, so a dot means a permit on file, not a business
+  open today.
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+**Reading the map**
+
+- The list gives an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the block group (条丁目) can be found,
+  the dot sits at its centre, which on Sapporo's grid is about one block.
+- Where a business's trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the city records them.
 """
 )
 

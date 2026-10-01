@@ -52,54 +52,40 @@ if PROVENANCE_JSON.exists():
         pass
 
 # The tram-city skill's page-text template, approved by the owner word for
-# word on 2026-09-30, filled from New Orleans's own step 1 and step 2 figures.
+# word on 2026-09-30 (set as bullets 2026-10-01), filled from New Orleans's own
+# step 1 and step 2 figures.
 # The lines are the five RTA runs (owner, 2026-09-30, re-taken at build). No
 # frequency sentence: the brief's figure was search-level and is unverified.
 st.markdown(
     """
-Five RTA streetcar lines are drawn, **St. Charles (12), Loyola/Rampart (46),
-Canal–Cemeteries (47), Canal–City Park/Museum (48) and Riverfront (49)**, each
-labelled on the map and in the legend, redrawn from OpenStreetMap's route
-geometry. New Orleans has no metro: its streetcars are its rapid transit, as
-Riga's trams are, so every streetcar stop gets rings. Buses and ferries are not
-drawn.
+**The streetcars**
 
-The map covers the **City of New Orleans**, which is Orleans Parish, as the US
-Census Bureau draws its limits. Every streetcar stop is inside it.
+- Five RTA streetcar lines are drawn, **St. Charles (12), Loyola/Rampart (46), Canal–Cemeteries
+  (47), Canal–City Park/Museum (48) and Riverfront (49)**, each labelled on the map and in the
+  legend, redrawn from OpenStreetMap's route geometry.
+- New Orleans has no metro: its streetcars are its rapid transit, as Riga's trams are, so every
+  streetcar stop gets rings. Buses and ferries are not drawn.
+- The map covers the **City of New Orleans**, which is Orleans Parish, as the US Census Bureau
+  draws its limits. Every streetcar stop is inside it.
+- **Tram stops sit closer together than metro stations**, a median of 186 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
 
-Businesses come from the City's list of **active occupational licences**, each
-placed at the point the City records for it; about one in twenty-three has no
-point and cannot be placed. The list gives each licence a type of business,
-and licences for one-off event and festival vendors, home offices, flea-market
-stalls and street artists are left out, as are caterers, food trucks, parking,
-funeral services and the catch-all "other personal services". **The map shows
-the business name the licence gives, never the owner's**; where a licence gives
-no business name, or the name is only a person's, it shows the street address.
+**The businesses**
 
-Personal services are thin on this map: 219 of the pins near stations are
-salons, barbers and the like, against 941 shops and 980 food businesses, and the
-City's catch-all "Personal Services, Other" (249 licences) is left out because
-it does not say what a business does.
+- Businesses come from the City's list of **active occupational licences**, each placed at the
+  point the City records for it; about one in twenty-three has no point and cannot be placed.
+- **The map shows the business name the licence gives, never the owner's**; where a licence gives
+  no business name, or the name is only a person's, it shows the street address.
+- Personal services are thin on this map: 219 of the pins near stations are salons, barbers and the
+  like, against 941 shops and 980 food businesses, and the City's catch-all "Personal Services,
+  Other" (249 licences) is left out because it does not say what a business does.
 
-**Read the density as a register, not a street survey.** A licence is issued to
-a business at an address, and the list does not say whether the address has a
-shop a passer-by could walk into.
+**Reading the density**
 
-**Tram stops sit closer together than metro stations**, a median of 186 m
-here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
-nine storefronts in twenty sit within a ring.** Streetcar stops here stand a
-block or two apart, so the rings join into a band along each line. Read them
-as distance from the line.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** A licence is issued to a business at an
+  address, and the list does not say whether the address has a shop a passer-by could walk into.
+- **About nine storefronts in twenty sit within a ring.** Streetcar stops here stand a block or two
+  apart, so the rings join into a band along each line. Read them as distance from the line.
 """
 )
 

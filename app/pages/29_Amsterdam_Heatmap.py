@@ -60,55 +60,50 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-24.
+# Approved by the owner 2026-09-24; set as bullets 2026-10-01.
 st.markdown(
     """
-Twenty-one lines are drawn — **GVB's metro lines 50 to 54 and its sixteen tram
-lines** — each labelled on the map and in the legend, redrawn from GVB's
-timetable data, as published in the national feed OVapi compiles, in GVB's own
-colours. Five tram lines are shown a shade lighter or darker, because GVB gives
-some lines the same colour (6 and 25, 19 and 29) and a few sit too close to a
-metro line to tell apart. Trams stop every few hundred metres, so on each tram
-line's outer stretches only about one stop per half mile is drawn as a station;
-metro stations, interchanges and each line's last stop inside the city are
-always drawn. Tram 3, which runs no service in this timetable period, the museum
-tram, ferries and national-rail (NS) trains are not drawn.
+**The lines**
 
-The map covers the **municipality of Amsterdam**, Weesp included. The 22 stops
-outside it, in Amstelveen, Diemen, Ouder-Amstel and Uithoorn, are left out: the
-lines that run on into those places are drawn whole but counted only inside the
-city, and tram 6 keeps five of its sixteen stops.
+- Twenty-one lines are drawn, **GVB's metro lines 50 to 54 and its sixteen tram lines**, each
+  labelled on the map and in the legend, redrawn from GVB's timetable data, as published in the
+  national feed OVapi compiles, in GVB's own colours.
+- Five tram lines are shown a shade lighter or darker, because GVB gives some lines the same
+  colour (6 and 25, 19 and 29) and a few sit too close to a metro line to tell apart.
+- Trams stop every few hundred metres, so on each tram line's outer stretches only about
+  one stop per half mile is drawn as a station; metro stations, interchanges and each line's last
+  stop inside the city are always drawn.
+- Tram 3, which runs no service in this timetable period, the museum tram, ferries and
+  national-rail (NS) trains are not drawn.
+- The map covers the **municipality of Amsterdam**, Weesp included. The 22 stops outside it, in
+  Amstelveen, Diemen, Ouder-Amstel and Uithoorn, are left out: the lines that run on into those
+  places are drawn whole but counted only inside the city, and tram 6 keeps five of its sixteen
+  stops.
 
-Businesses come from two of the city's own registers, which is why this map has
-two categories rather than three. **Food service** is the city's register of
-hospitality operating permits: every restaurant, café, lunchroom, snack bar,
-coffeeshop and nightclub that holds one, under the name on its permit. **Shops
-and services** comes from the national buildings register (BAG): every unit
-whose registered use is a shop and which is in use. The BAG records what a unit
-is for, not who is in it, so these dots show an address rather than a name, and
-a hairdresser looks the same as a clothes shop — the split between retail and
-personal services that other cities show is not available here. A shop unit that
-is also registered as a home is left off. Where a permit and a shop unit share
-an address, the permit is kept, because it names the business.
+**The businesses**
 
-**Read the shop layer as space set aside for shops, not as open shops.** About
-one Amsterdam shop unit in twenty stood empty at the start of 2026, by the city's
-own statistics, and no open source says which. Takeaways that need no
-hospitality permit are thin on the map, and cafés inside a sports club,
-community centre, theatre or hotel are not shown.
+- Businesses come from two of the city's own registers, which is why this map has two categories
+  rather than three.
+- **Food service** is the city's register of hospitality operating permits: every restaurant,
+  café, lunchroom, snack bar, coffeeshop and nightclub that holds one, under the name on its
+  permit.
+- **Shops and services** comes from the national buildings register (BAG): every unit whose
+  registered use is a shop and which is in use. The BAG records what a unit is for, not who is in
+  it, so these dots show an address rather than a name, and a hairdresser looks the same as a
+  clothes shop — the split between retail and personal services that other cities show is not
+  available here.
+- A shop unit that is also registered as a home is left off. Where a permit and a shop unit share
+  an address, the permit is kept, because it names the business.
+- **About nineteen storefronts in twenty sit within a station ring**, because the trams put a stop
+  near almost every street in the city.
 
-**About nineteen storefronts in twenty sit within a station ring**, because the
-trams put a stop near almost every street in the city.
+**Reading the map**
 
-Concentric ring boundaries and the two business categories (Shops and services,
-and Food service) are toggleable via the layer control in the top left. When
-enabled, business density will display as numbered circles summing areas when
-zoomed out. Zooming in will show individual dots; hover over those to see
-further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the shop layer as space set aside for shops, not as open shops.** About one Amsterdam
+  shop unit in twenty stood empty at the start of 2026, by the city's own statistics, and no open
+  source says which.
+- Takeaways that need no hospitality permit are thin on the map, and cafés inside a sports club,
+  community centre, theatre or hotel are not shown.
 """
 )
 

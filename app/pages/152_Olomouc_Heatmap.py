@@ -57,51 +57,47 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# The Czech tram template, approved by the owner 2026-09-30. Figures from this
-# city's own build (2026-09-30): 7 lines; 36 stops at a 316 m median gap; 616 restaurants against OSM's 342 (1.80); 1,742 of 2,235 storefronts in a ring.
+# The Czech tram template, approved by the owner 2026-09-30; set as bullets
+# 2026-10-01. Figures from this city's own build (2026-09-30): 7 lines; 36 stops
+# at a 316 m median gap; 616 restaurants against OSM's 342 (1.80); 1,742 of 2,235
+# storefronts in a ring.
 st.markdown(
     """
-Seven tram lines are drawn, **DPMO's trams 1 to 7**, each labelled on the map and in the
-legend. The lines and stops are drawn from OpenStreetMap, and the colours are this
-project's, because none are published for reuse. Olomouc has no metro: its trams
-are its rapid transit, as Riga's are, so every tram stop gets rings. Buses,
-trolleybuses and trains are not drawn.
+**The trams**
 
-The map covers the **city of Olomouc**.
+- Seven tram lines are drawn, **DPMO's trams 1 to 7**, each labelled on the map and in the legend.
+- The lines and stops are drawn from OpenStreetMap, and the colours are this project's, because
+  none are published for reuse.
+- Buses, trolleybuses and trains are not drawn.
+- Olomouc has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+  rings.
+- **Tram stops sit closer together than metro stations**, a median of 316 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
+- The map covers the **city of Olomouc**.
 
-Businesses come from the Czech **register of active business establishments**
-(ROS02), which records each place where a business operates at that place's own
-address, placed using the national address register (RÚIAN), the same sources as
-Prague's map. What each establishment does comes from the Czech Statistical
-Office's business register (RES). RES records one main activity per business, so
-every establishment inherits its owner's, and a chain's office or warehouse
-counts as the chain's trade. **Where a business belongs to a person trading in
-their own name, or to a partnership, the map shows its address instead of its
-name.** Where such an establishment is at the owner's own registered address,
-which is usually their home, it is left off the map altogether.
+**The businesses**
 
-**Read the density as a register, not a street survey.** Some establishments are
-newly registered and may not have opened yet. Czechia's classification files a
-web shop under the goods it sells, so some dots are businesses with no shop a
-passer-by could walk into. Against OpenStreetMap's mapped restaurants, cafés and
-takeaways in the city, the register carries about **1.8 times** as many.
-Businesses whose main activity is something else, such as a brewery's pub or a
-wholesaler's shop, are not shown, because no open source records what each
-establishment itself does.
+- Businesses come from the Czech **register of active business establishments** (ROS02), which
+  records each place where a business operates at that place's own address, placed using the
+  national address register (RÚIAN), the same sources as Prague's map.
+- What each establishment does comes from the Czech Statistical Office's business register (RES).
+  RES records one main activity per business, so every establishment inherits its owner's, and a
+  chain's office or warehouse counts as the chain's trade.
+- Businesses whose main activity is something else, such as a brewery's pub or a wholesaler's
+  shop, are not shown, because no open source records what each establishment itself does.
+- **Where a business belongs to a person trading in their own name, or to a partnership, the map
+  shows its address instead of its name.** Where such an establishment is at the owner's own
+  registered address, which is usually their home, it is left off the map altogether.
+- **About 78% of storefronts sit within a ring.**
 
-**Tram stops sit closer together than metro stations**, a median of 316 m here,
-so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About 78% of
-storefronts sit within a ring.**
+**Reading the density**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** Some establishments are newly
+  registered and may not have opened yet.
+- Czechia's classification files a web shop under the goods it sells, so some dots are businesses
+  with no shop a passer-by could walk into.
+- Against OpenStreetMap's mapped restaurants, cafés and takeaways in the city, the register carries
+  about **1.8 times** as many.
 """
 )
 

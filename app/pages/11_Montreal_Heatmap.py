@@ -46,57 +46,44 @@ render_data_age('Montréal')
 
 st.markdown(
     """
-**This map is built from a field survey rather than a licence register.** The
-Ville de Montréal walks its commercial streets each year and records what
-occupies each unit, so it counts what is actually there rather than who holds a
-permit. One consequence is worth knowing before reading the colours: roughly
-**69% of surveyed units are storefronts**, against about 28% in a
-licence-register city, so the balance between categories here reflects the
-street more directly than a licence register can.
+**The lines**
 
-**Vacant units are excluded.** The survey records them — about 3,500 of them —
-and a licence register never can. An empty shopfront is premises rather than
-commerce, so counting them would measure the supply of retail space instead.
-That is a choice, and Barcelona, whose census also records vacancy, makes the
-same one.
+- **Four lines are drawn** from the Société de transport de Montréal's own published
+  geometry, each labelled directly on the map and in the legend, in the STM's own colours:
+  Ligne 1 (Verte), Ligne 2 (Orange), Ligne 4 (Jaune) and Ligne 5 (Bleue).
+- **The REM is drawn too**, from the Réseau express métropolitain's own published data. It
+  is an automated light metro whose three services (A1 to Brossard, A3 to Anse-à-l'Orme and
+  A4 to Deux-Montagnes) share one colour, so it appears as one line labelled with all three.
+- Its sixteen stations on the island are mapped. McGill and Édouard-Montpetit are shared
+  with the Métro and appear once.
+- **64 of the Métro's 68 stations are on the island** and are mapped. The other four
+  (Cartier, De la Concorde and Montmorency in Laval, and Longueuil–Université-de-Sherbrooke)
+  are excluded, because those cities' commercial data would have to be sourced and verified
+  separately.
+- The REM loses seven stations for the same reason: Brossard, Du Quartier and Panama on the
+  South Shore, and Île-Bigras, Sainte-Dorothée, Grand-Moulin and Deux-Montagnes to the
+  north. Its line is drawn to their ends. All eleven are listed on the What is counted page.
 
-**Four lines are drawn** from the Société de transport de Montréal's own
-published geometry, each labelled directly on the map and in the legend, in the
-STM's own colours: Ligne 1 (Verte), Ligne 2 (Orange), Ligne 4 (Jaune) and
-Ligne 5 (Bleue).
+**The businesses**
 
-**The REM is drawn too**, from the Réseau express métropolitain's own published
-data. It is an automated light metro whose three services (A1 to Brossard, A3 to
-Anse-à-l'Orme and A4 to Deux-Montagnes) share one colour, so it appears as one
-line labelled with all three. Its sixteen stations on the island are mapped.
-McGill and Édouard-Montpetit are shared with the Métro and appear once.
+- **This map is built from a field survey rather than a licence register.** The Ville de
+  Montréal walks its commercial streets each year and records what occupies each unit, so it
+  counts what is actually there rather than who holds a permit.
+- Roughly **69% of surveyed units are storefronts**, against about 28% in a licence-register
+  city, so the balance between categories here reflects the street more directly than a
+  licence register can.
+- **Vacant units are excluded.** The survey records them — about 3,500 of them — and a
+  licence register never can. An empty shopfront is premises rather than commerce, so
+  counting them would measure the supply of retail space instead.
 
-**64 of the Métro's 68 stations are on the island** and are mapped. The other
-four (Cartier, De la Concorde and Montmorency in Laval, and
-Longueuil–Université-de-Sherbrooke) are excluded, because those cities'
-commercial data would have to be sourced and verified separately. The REM loses
-seven stations for the same reason: Brossard, Du Quartier and Panama on the
-South Shore, and Île-Bigras, Sainte-Dorothée, Grand-Moulin and Deux-Montagnes
-to the north. Its line is drawn to their ends. All eleven are listed in
-`outputs/montreal/excluded_stations.csv`.
+**Reading the map**
 
-**Known limitation.** The map is scoped to the agglomeration, which includes 15
-related municipalities alongside the 19 boroughs, but only about a tenth of
-surveyed units fall in those municipalities and two of them are not in the
-survey at all. The Métro does not reach them, but the REM does: five of its
-stations are in Mont-Royal, Pointe-Claire, Kirkland and Sainte-Anne-de-Bellevue,
-so read the rings there as thinner in the data, not necessarily on the ground.
-Neither unsurveyed municipality has a station.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Known limitation.** The map is scoped to the agglomeration, which includes 15 related
+  municipalities alongside the 19 boroughs, but only about a tenth of surveyed units fall in
+  those municipalities and two of them are not in the survey at all.
+- The Métro does not reach them, but the REM does: five of its stations are in Mont-Royal,
+  Pointe-Claire, Kirkland and Sainte-Anne-de-Bellevue, so read the rings there as thinner in
+  the data, not necessarily on the ground. Neither unsurveyed municipality has a station.
 """
 )
 

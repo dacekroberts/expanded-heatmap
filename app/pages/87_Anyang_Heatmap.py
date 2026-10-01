@@ -49,38 +49,34 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Bucheon's text (approved by the owner 2026-09-29), with Anyang's lines; written
-# under the owner's pre-approval of this build's prose (2026-09-30).
+# under the owner's pre-approval of this build's prose (2026-09-30); set as bullets 2026-10-01.
 st.markdown(
     """
-Two lines are drawn — **Line 1** and **Line 4** — each labelled on the map and in the legend,
-in the operators' colours. Routes and stations come from OpenStreetMap. Businesses are
-counted around stations inside Anyang only; the lines are still drawn to their ends. The two
-lines share no station in the city. No other rail line has a station in Anyang.
+**The lines**
 
-Businesses come from the **Small Enterprise and Market Service's commercial-district register**
-(소상공인시장진흥공단 상가(상권)정보), a national record of trading storefronts with a map
-position for every one: restaurants, cafés and bars; shops of every kind, from convenience
-stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care salons,
-laundries, bathhouses and massage. Left out, as on this project's other maps: offices and
-professional services, clinics, schools and academies, estate agents, lodging, gyms and
-entertainment, repairs, funeral services, staff canteens, hostess bars and household fuel
-dealers. The register is compiled nationally, and it is a different kind of record from the
-city licence data behind Seoul's, Daegu's and Busan's maps, which count only licensed trades: so
-**Anyang's Retail category is complete where those cities' is thin**, and density is not
-directly comparable between them.
+- Two lines are drawn, each labelled on the map and in the legend in the operators' colours:
+  **Line 1** and **Line 4**.
+- Routes and stations come from OpenStreetMap.
+- Businesses are counted around stations inside Anyang only; the lines are still drawn to their
+  ends.
+- The two lines share no station in the city. No other rail line has a station in Anyang.
 
-Each dot carries the storefront's name, in Korean, with its branch where it has one, and its
-kind in English. Where a registered name is a bare personal name at what reads as a home
-address, the name is withheld. The whole city is included; storefronts beyond walking distance
-of a station add to the all-city layer and nothing to the rings.
+**The businesses**
 
-Concentric ring boundaries and the three business categories (Food service, Retail and Personal
-services) are toggleable via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming in will show individual
-dots; hover over those to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a statistical density
-estimate, so read the colour as "roughly where things cluster."
+- From the **Small Enterprise and Market Service's commercial-district register**
+  (소상공인시장진흥공단 상가(상권)정보), a national record of trading storefronts with a map
+  position for every one: restaurants, cafés and bars; shops of every kind, from convenience
+  stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care
+  salons, laundries, bathhouses and massage.
+- The register is compiled nationally, and it is a different kind of record from the city
+  licence data behind Seoul's, Daegu's and Busan's maps, which count only licensed trades: so
+  **Anyang's Retail category is complete where those cities' is thin**, and density is not
+  directly comparable between them.
+- Each dot carries the storefront's name, in Korean, with its branch where it has one, and its
+  kind in English. Where a registered name is a bare personal name at what reads as a home
+  address, the name is withheld.
+- The whole city is included; storefronts beyond walking distance of a station add to the
+  all-city layer and nothing to the rings.
 """
 )
 

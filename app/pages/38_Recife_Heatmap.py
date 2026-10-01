@@ -71,42 +71,37 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended.
+# calls applied as recommended; set as bullets 2026-10-01.
 st.markdown(
     """
-Three lines are drawn — **the Metrô do Recife's Linha Centro, on its Camaragibe and
-Jaboatão branches, and Linha Sul** — each labelled on the map and in the legend, in the
-colours OpenStreetMap records. The two diesel VLT lines, to Curado and to Cabo, are not
-drawn: suburban railways are left out of these maps unless they run like a metro, and
-their stations are 3 to 4 km apart.
+**The lines**
 
-The map covers **Recife with Jaboatão dos Guararapes, Cabo de Santo Agostinho and
-Camaragibe**; Cabo has no drawn station now that its VLT is not drawn, and is counted for
-its businesses only.
+- Three lines are drawn — **the Metrô do Recife's Linha Centro, on its Camaragibe and
+  Jaboatão branches, and Linha Sul** — each labelled on the map and in the legend, in the
+  colours OpenStreetMap records.
+- The two diesel VLT lines, to Curado and to Cabo, are not drawn: suburban railways are left
+  out of these maps unless they run like a metro, and their stations are 3 to 4 km apart.
+- The map covers **Recife with Jaboatão dos Guararapes, Cabo de Santo Agostinho and
+  Camaragibe**; Cabo has no drawn station now that its VLT is not drawn, and is counted for
+  its businesses only.
 
-Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
-Census enumerators walking every street recorded each establishment, what it was, and a
-map point for it. **Read it as a 2022 picture, not today's.** IBGE did not classify the
-establishments: each dot's category is this project's reading of the enumerator's words,
-and the names were not checked against any business register. Where one entry stands
-for several shops, as in a shopping centre or a gallery, it is one dot. At an address
-that is also someone's home, the dot shows only its category.
+**The businesses**
 
-**About four in ten of the establishments that might be shops, cafés or salons carry a
-description no rule can read, and are not drawn.** Most are brand or trade names with no
-word saying what they sell.
+- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+  Census enumerators walking every street recorded each establishment, what it was, and a
+  map point for it. **Read it as a 2022 picture, not today's.**
+- IBGE did not classify the establishments: each dot's category is this project's reading of
+  the enumerator's words, and the names were not checked against any business register.
+- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+  dot.
+- At an address that is also someone's home, the dot shows only its category.
 
-**About a quarter of the storefronts sit within a station ring.**
+**Reading the map**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **About four in ten of the establishments that might be shops, cafés or salons carry a
+  description no rule can read, and are not drawn.** Most are brand or trade names with no
+  word saying what they sell.
+- **About a quarter of the storefronts sit within a station ring.**
 """
 )
 

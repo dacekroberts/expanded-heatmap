@@ -79,49 +79,39 @@ st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
 
 st.markdown(
     """
-Two STAR lines are drawn — **Métro a and Métro b** — each labelled on the map
-and in the legend, redrawn from the operator's own published geometry.
+**The métro**
 
-The map covers the **commune of Rennes**. Métro a runs entirely inside it.
-**Métro b runs past it at both ends**, so four of its fifteen stations are left
-out: Atalante and Cesson - Viasilva in Cesson-Sévigné, and La Courrouze and
-Saint-Jacques - Gaîté in Saint-Jacques-de-la-Lande. The line is still drawn to
-its ends, but those four stations get no ring and their businesses are not
-counted. They are listed in `outputs/rennes/excluded_stations.csv`. Their
-communes' businesses are in the same national register this map reads, so
-leaving them out is a choice rather than a limit of the data: the map keeps to
-the commune so that Rennes can be read alongside Paris, Marseille and Toulouse
-on the same terms.
+- Two STAR lines are drawn — **Métro a and Métro b** — each labelled on the map and in the legend,
+  redrawn from the operator's own published geometry.
+- The map covers the **commune of Rennes**. Métro a runs entirely inside it.
+- **Métro b runs past it at both ends**, so four of its fifteen stations are left out: Atalante and
+  Cesson - Viasilva in Cesson-Sévigné, and La Courrouze and Saint-Jacques - Gaîté in
+  Saint-Jacques-de-la-Lande.
+- The line is still drawn to its ends, but those four stations get no ring and their businesses
+  are not counted. They are listed on the What is counted page.
+- Their communes' businesses are in the same national register this map reads, so leaving them
+  out is a choice rather than a limit of the data: the map keeps to the commune so that Rennes can
+  be read alongside Paris, Marseille and Toulouse on the same terms.
 
-Businesses come from **SIRENE**, France's national register of établissements,
-joined to INSEE's separate geolocation file, the same sources as the other
-French cities. Roughly one active establishment in six here is marked
-non-diffusible by INSEE, which withholds its name, address and coordinates
-together, so those never reach this map. **Where SIRENE records no shop sign or
-trading name, the dot shows the establishment's address instead** — about two
-dots in five on this map.
+**The businesses**
 
-**Read the density as a register, not a street survey.** SIRENE records where a
-business is *registered*, and some registered establishments have no
-customer-facing shopfront; nothing in the data says which. Against
-OpenStreetMap's mapped restaurants in the same commune, where the two schemes
-mean nearly the same thing, this map carries about **1.3 times** as many
-points, level with Toulouse and closer to OpenStreetMap's count than Paris,
-Marseille or Lille.
+- Businesses come from **SIRENE**, France's national register of établissements, joined to
+  INSEE's separate geolocation file, the same sources as the other French cities.
+- Roughly one active establishment in six here is marked non-diffusible by INSEE, which withholds
+  its name, address and coordinates together, so those never reach this map.
+- **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
+  instead** — about two dots in five on this map.
 
-**About two storefronts in three sit within a station ring.** The category
-toggles show every storefront; the rings show the share the two lines actually
-reach.
+**Reading the density**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** SIRENE records where a business is
+  *registered*, and some registered establishments have no customer-facing shopfront; nothing in
+  the data says which.
+- Against OpenStreetMap's mapped restaurants in the same commune, where the two schemes mean
+  nearly the same thing, this map carries about **1.3 times** as many points, level with Toulouse
+  and closer to OpenStreetMap's count than Paris, Marseille or Lille.
+- **About two storefronts in three sit within a station ring.** The category toggles show every
+  storefront; the rings show the share the two lines actually reach.
 """
 )
 

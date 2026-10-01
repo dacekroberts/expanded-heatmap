@@ -49,51 +49,38 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Written under the owner's pre-approval of this build's prose (2026-09-30).
+# Written under the owner's pre-approval of this build's prose (2026-09-30); set as
+# bullets 2026-10-01.
 st.markdown(
     """
-Three lines are drawn: Pittsburgh Regional Transit's light rail, the T - the
-**PRT Red Line**, **PRT Blue Line** and **PRT Silver Line** - redrawn from
-OpenStreetMap, from their shared downtown subway and North Shore stations out
-to the South Hills. The service is light rail, not a metro: the Red Line runs
-about every 20 minutes, and the Blue and Silver Lines for part of the day
-only. Rings are drawn only around the stations inside the City of
-Pittsburgh, because the business data used here stops at the city line; the
-stations in Dormont, Mount Lebanon, Castle Shannon, Bethel Park and South Park
-are left out, and each is listed with its municipality in
-`outputs/pittsburgh/excluded_stations.csv`. Stations here are close together,
-so the rings are half the usual size, reaching 0.3 miles. Buses and the
-inclines are not drawn.
+**The lines**
 
-**This map shows food businesses only.** They come from the Allegheny County
-Health Department's list of food facilities, which covers every place the
-department licenses to serve or sell food. The map has two layers: **food
-service** (restaurants and bars) and **food-selling shops** (supermarkets,
-convenience stores, bakeries and packaged-food shops, including dollar and
-discount stores that sell food). No open register of other shops or of
-personal services covers the city, so clothes shops, hairdressers and the
-like are not on this map, except where they also sell food.
+- Three lines are drawn: Pittsburgh Regional Transit's light rail, the T - the **PRT Red Line**,
+  **PRT Blue Line** and **PRT Silver Line** - redrawn from OpenStreetMap, from their shared
+  downtown subway and North Shore stations out to the South Hills.
+- The service is light rail, not a metro: the Red Line runs about every 20 minutes, and the Blue
+  and Silver Lines for part of the day only.
+- Rings are drawn only around the stations inside the City of Pittsburgh, because the business data
+  used here stops at the city line; the stations in Dormont, Mount Lebanon, Castle Shannon, Bethel
+  Park and South Park are left out, and each is listed with its municipality on the What is counted
+  page.
+- Stations here are close together, so the rings are half the usual size, reaching 0.3 miles.
+- Buses and the inclines are not drawn.
 
-A facility is shown when the department lists it as active; this list was
-last updated on 2025-08-27. Caterers without a shop, mobile vendors,
-commissaries, food processors, schools, hospitals, care homes, social clubs
-and banquet halls are left out, as the list classes them. The list files some
-other kitchens with the restaurants and shops, so these are left out by name:
-the stands at the stadiums, arenas and events centres, the casino's outlets,
-cafés at the zoo, museums and science centre, theatres, cinemas and bowling,
-workplace micro-markets and contract caterers, hospital and campus outlets,
-hotels' own kitchens (a hotel's named bar or restaurant stays), pharmacies,
-and delivery-only stores. A name rule is imperfect, and a few such kitchens may
-remain. Inspection results are not shown.
+**The businesses**
 
-Concentric ring boundaries and the business layers are toggleable via the
-layer control in the top left. When enabled, business density will display as
-numbered circles summing areas when zoomed out. Zooming in will show
-individual dots; hover over those to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **This map shows food businesses only.** They come from the Allegheny County Health Department's
+  list of food facilities, which covers every place the department licenses to serve or sell food.
+- The map has two layers: **food service** (restaurants and bars) and **food-selling shops**
+  (supermarkets, convenience stores, bakeries and packaged-food shops, including dollar and
+  discount stores that sell food).
+- No open register of other shops or of personal services covers the city, so clothes shops,
+  hairdressers and the like are not on this map, except where they also sell food.
+- A facility is shown when the department lists it as active; this list was last updated on
+  2025-08-27.
+- The list files some other kitchens with the restaurants and shops, so these are left out by name.
+  A name rule is imperfect, and a few such kitchens may remain.
+- Inspection results are not shown.
 """
 )
 

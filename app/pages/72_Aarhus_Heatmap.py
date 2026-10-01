@@ -57,56 +57,50 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Approved by the owner 2026-09-29 (Copenhagen's text, with Aarhus's network,
-# its 15-minute light-rail test and the franchisee-name rule).
+# its 15-minute light-rail test and the franchisee-name rule); set as bullets
+# 2026-10-01.
 st.markdown(
     """
-**Letbane line L2** is drawn on the stretch built as a city tramway: from
-Aarhus H through Nørreport, the university and Skejby to Lisbjerg and Lystrup,
-with its short branch to Lisbjergskolen. It is labelled on the map and in the
-legend, and redrawn from OpenStreetMap's route geometry in the colour
-OpenStreetMap records for the Letbane. Line L1 shares its first stops, Aarhus H
-to Skolebakken, and also serves Lystrup.
+**The Letbane**
 
-The Letbane also runs beyond the city tramway on two converted railway lines,
-south to Odder and north-east to Grenaa, and those are not drawn. Midttrafik's
-own timetables show trains there every 30 minutes by day, against every 7 to 8
-minutes on the city tramway, and this site draws light rail only where it runs
-at least every 15 minutes. Their 19 stops inside the municipality and the 11
-beyond it are listed in `outputs/aarhus/excluded_stations.csv`.
+- **Letbane line L2** is drawn on the stretch built as a city tramway: from Aarhus H through
+  Nørreport, the university and Skejby to Lisbjerg and Lystrup, with its short branch to
+  Lisbjergskolen.
+- It is labelled on the map and in the legend, and redrawn from OpenStreetMap's route geometry in
+  the colour OpenStreetMap records for the Letbane.
+- Line L1 shares its first stops, Aarhus H to Skolebakken, and also serves Lystrup.
+- The Letbane also runs beyond the city tramway on two converted railway lines, south to Odder and
+  north-east to Grenaa, and those are not drawn. Midttrafik's own timetables show trains there
+  every 30 minutes by day, against every 7 to 8 minutes on the city tramway, and this site draws
+  light rail only where it runs at least every 15 minutes.
+- Their 19 stops inside the municipality and the 11 beyond it are listed on the What is counted
+  page.
+- **The station rings are smaller here.** The tramway's stops sit about 500 m apart, so the rings
+  run to 0.3 mi instead of the 0.6 mi most cities here use.
+- The map covers the **municipality of Aarhus**.
 
-The map covers the **municipality of Aarhus**. Businesses come from Denmark's
-**Central Business Register** (Det Centrale Virksomhedsregister, CVR), and
-specifically from its production units: each place where a business operates,
-recorded at that place's own address rather than its company's. Each is placed
-at its address in Denmark's official address register, Danmarks
-Adresseregister, using the address points OpenStreetMap carries for it.
-**Where a business is owned personally (a sole proprietorship, a partnership or
-any business whose registered name marks it as one person's), the map shows its
-address instead of its name**, because such businesses are usually registered
-under the owners' own names. So does a supermarket registered under its
-franchisee's own name.
+**The businesses**
 
-**Read the density as a register, not a street survey.** Some premises are
-newly registered and may not have opened yet. Denmark's classification files a
-web shop under the goods it sells, so some dots are businesses with no shop a
-passer-by could walk into, and nothing in the data says which. One catch-all
-category, *other personal services*, is left out, because most of it is people
-working from their own premises; it also holds the city's tattoo studios, which
-are therefore missing from the map. About 3% of premises cannot be placed.
+- Businesses come from Denmark's **Central Business Register** (Det Centrale
+  Virksomhedsregister, CVR), and specifically from its production units: each place where a
+  business operates, recorded at that place's own address rather than its company's.
+- Each is placed at its address in Denmark's official address register, Danmarks
+  Adresseregister, using the address points OpenStreetMap carries for it.
+- **Where a business is owned personally (a sole proprietorship, a partnership or any business
+  whose registered name marks it as one person's), the map shows its address instead of its
+  name**, because such businesses are usually registered under the owners' own names. So does a
+  supermarket registered under its franchisee's own name.
+- One catch-all category, *other personal services*, is left out, because most of it is people
+  working from their own premises; it also holds the city's tattoo studios, which are therefore
+  missing from the map.
+- **About one storefront in four sits within a ring.**
 
-**The station rings are smaller here.** The tramway's stops sit about 500 m
-apart, so the rings run to 0.3 mi instead of the 0.6 mi most cities here use.
-**About one storefront in four sits within a ring.**
+**Reading the density**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** Some premises are newly registered and
+  may not have opened yet.
+- Denmark's classification files a web shop under the goods it sells, so some dots are businesses
+  with no shop a passer-by could walk into, and nothing in the data says which.
 """
 )
 

@@ -50,49 +50,42 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-28.
+# Approved by the owner 2026-09-28; set as bullets 2026-10-01.
 st.markdown(
     """
-One line is drawn: the **Glasgow Subway**, the 15-station loop through the city
-centre, the West End and the south side, redrawn from OpenStreetMap in SPT's
-orange. Its two tunnels, the Outer and Inner Circle, are drawn as one line.
-Glasgow's suburban and national rail lines are not drawn.
+**The line**
 
-The map covers **Glasgow City**, the council area; the Subway lies wholly
-inside it.
+- One line is drawn: the **Glasgow Subway**, the 15-station loop through the city centre, the West
+  End and the south side, redrawn from OpenStreetMap in SPT's orange.
+- Its two tunnels, the Outer and Inner Circle, are drawn as one line.
+- Glasgow's suburban and national rail lines are not drawn.
+- The map covers **Glasgow City**, the council area; the Subway lies wholly inside it.
 
-**This map shows food businesses only.** They come from Glasgow City Council's
-entries in the **Food Hygiene Information Scheme**, Scotland's food hygiene
-register, run by Food Standards Scotland and published through the Food
-Standards Agency. It lists every premises the council inspects: restaurants,
-cafés, takeaways, pubs and bars, and food shops from corner shops to
-supermarkets. No open register of other shops or of personal services covers
-Glasgow, so **clothes shops, hairdressers and the like are not on this map**.
-Caterers working from home, mobile traders, and kitchens in schools, hospitals
-and care homes are left out; a workplace canteen registered as a restaurant or
-café cannot be told apart and may appear.
+**The businesses**
 
-**Read the density as a register, not a street survey.** A premises stays
-listed until the council removes it. Every business shown sits at the
-register's own map point; about one food storefront in a hundred has none and
-is not shown. A business registered at a flat, where home bakers and cooks
-register, is never placed, and neither is a childminder. Names are shown as
-registered; where a business is registered "trading as" another name, the name
-on the shop is shown.
+- **This map shows food businesses only.** They come from Glasgow City Council's entries in the
+  **Food Hygiene Information Scheme**, Scotland's food hygiene register, run by Food Standards
+  Scotland and published through the Food Standards Agency.
+- It lists every premises the council inspects: restaurants, cafés, takeaways, pubs and bars, and
+  food shops from corner shops to supermarkets.
+- No open register of other shops or of personal services covers Glasgow, so **clothes shops,
+  hairdressers and the like are not on this map**.
+- Caterers working from home, mobile traders, and kitchens in schools, hospitals and care homes
+  are left out; a workplace canteen registered as a restaurant or café cannot be told apart and
+  may appear.
+- Names are shown as registered; where a business is registered "trading as" another name, the
+  name on the shop is shown.
 
-**Only about two storefronts in five sit within a station ring.** One
-15-station loop serves the centre and the West End; most of the city's food
-businesses lie beyond it.
+**Reading the map**
 
-Concentric ring boundaries and the business categories (Food service and Food
-shops) are toggleable via the layer control in the top left. When enabled,
-business density will display as numbered circles summing areas when zoomed
-out. Zooming in will show individual dots; hover over those to see further
-details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** A premises stays listed until the
+  council removes it.
+- Every business shown sits at the register's own map point; about one food storefront in a
+  hundred has none and is not shown.
+- A business registered at a flat, where home bakers and cooks register, is never placed, and
+  neither is a childminder.
+- **Only about two storefronts in five sit within a station ring.** One 15-station loop serves the
+  centre and the West End; most of the city's food businesses lie beyond it.
 """
 )
 

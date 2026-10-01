@@ -77,51 +77,41 @@ st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
 
 st.markdown(
     """
-Four ilévia lines are drawn — **Métro 1 and 2, and Tram R and T** — each
-labelled on the map and in the legend.
+**The métro and trams**
 
-**This map covers eleven communes, not one.** The métro and tram run well
-beyond the city of Lille, out to Villeneuve-d'Ascq, Roubaix and Tourcoing, and
-a map of the commune alone would keep fewer than half of Métro 2's stations and
-only three of the tram's thirty-six. So it takes in every commune with a
-station: Lille, Roubaix, Tourcoing, Villeneuve-d'Ascq, Marcq-en-Barœul,
-Wasquehal, Croix, Mons-en-Barœul, La Madeleine, Mouvaux and Lambersart. Each is
-listed with its stations in `outputs/lille/served_communes.csv`.
+- Four ilévia lines are drawn — **Métro 1 and 2, and Tram R and T** — each labelled on the map and
+  in the legend.
+- **The lines come from two sources.** Station locations and the tram's route are published by the
+  Métropole Européenne de Lille itself. No official source publishes the métro's route, so its two
+  lines are drawn from OpenStreetMap.
+- ilévia colours both trams alike; Tram T is shown here in a darker shade of the same blue so the
+  two can be told apart.
+- **This map covers eleven communes, not one.** The métro and tram run well beyond the city of
+  Lille, out to Villeneuve-d'Ascq, Roubaix and Tourcoing, and a map of the commune alone would keep
+  fewer than half of Métro 2's stations and only three of the tram's thirty-six.
+- So it takes in every commune with a station: Lille, Roubaix, Tourcoing, Villeneuve-d'Ascq,
+  Marcq-en-Barœul, Wasquehal, Croix, Mons-en-Barœul, La Madeleine, Mouvaux and Lambersart. Each is
+  listed with its stations in `outputs/lille/served_communes.csv`.
 
-**The lines come from two sources.** Station locations and the tram's route are
-published by the Métropole Européenne de Lille itself. No official source
-publishes the métro's route, so its two lines are drawn from OpenStreetMap.
-ilévia colours both trams alike; Tram T is shown here in a darker shade of the
-same blue so the two can be told apart.
+**The businesses**
 
-Businesses come from **SIRENE**, France's national register of établissements,
-joined to INSEE's separate geolocation file, the same sources as the other
-French cities. About one active establishment in six across these communes is
-marked non-diffusible by INSEE, which withholds its name, address and
-coordinates together, so those never reach this map. **Where SIRENE records no
-shop sign or trading name, the dot shows the establishment's address instead**
-— about half the dots on this map.
+- Businesses come from **SIRENE**, France's national register of établissements, joined to
+  INSEE's separate geolocation file, the same sources as the other French cities.
+- About one active establishment in six across these communes is marked non-diffusible by INSEE,
+  which withholds its name, address and coordinates together, so those never reach this map.
+- **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
+  instead** — about half the dots on this map.
 
-**Read the density as a register, not a street survey.** SIRENE records where a
-business is *registered*, and some registered establishments have no
-customer-facing shopfront; nothing in the data says which. Against
-OpenStreetMap's mapped restaurants in the same eleven communes, where the two
-schemes mean nearly the same thing, this map carries about **1.5 times** as
-many points, inside the range of the other French cities.
+**Reading the density**
 
-**About three storefronts in five sit within a station ring.** The category
-toggles show every storefront; the rings show the share the four lines actually
-reach.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** SIRENE records where a business is
+  *registered*, and some registered establishments have no customer-facing shopfront; nothing in
+  the data says which.
+- Against OpenStreetMap's mapped restaurants in the same eleven communes, where the two schemes
+  mean nearly the same thing, this map carries about **1.5 times** as many points, inside the range
+  of the other French cities.
+- **About three storefronts in five sit within a station ring.** The category toggles show every
+  storefront; the rings show the share the four lines actually reach.
 """
 )
 

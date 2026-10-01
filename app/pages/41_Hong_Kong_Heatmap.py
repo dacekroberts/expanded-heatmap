@@ -60,44 +60,47 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-24; the third paragraph revised the same evening
+# Approved by the owner 2026-09-24; set as bullets 2026-10-01. The placement
+# paragraph (now the "Reading the map" bullets) was revised the same evening
 # when placement moved from address lookups to FEHD's own points.
 st.markdown(
     """
-Nine lines are drawn — **MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung
-Chung, Tuen Ma and East Rail lines, and the Light Rail** — each labelled on the map and in the
-legend, in MTR's own colours. Their routes and stations come from OpenStreetMap, because MTR
-publishes its stations as lists without locations; every line's station count matches MTR's own
-list. The Light Rail's twelve routes share one network of track through Tuen Mun, Yuen Long and
-Tin Shui Wai, so it is drawn as one line in a colour of this project's choosing, and its stops, a
-few hundred metres apart, are thinned to about one per half mile; stops that are also MTR
-stations, and each route's ends, are always kept. Not drawn: the Airport Express, the Disneyland
-Resort Line, the high-speed rail to the mainland, the Peak Tram, and Hong Kong Tramways, which
-runs within a few hundred metres of the Island Line for nearly all its length. Racecourse
-station, open only on race days, is left out.
+**The lines**
 
-Businesses come from the **Food and Environmental Hygiene Department's licence registers**, which
-cover restaurants and food shops but not general retail: a clothes shop, an electronics shop or a
-hair salon needs no licence from FEHD. So **this map is mostly restaurants**, and its other two
-categories are narrower than elsewhere: **Food shops** (fresh provisions, bakeries, and siu mei
-and lo mei shops) and **Bathhouses**. Read the balance between categories as a fact about Hong
-Kong's licensing, not about its streets. Food factories, cold stores, factory canteens, swimming
-pools, cinemas, karaoke and the funeral trades are licensed too, and are left out. Each dot
-carries the shop sign on its licence.
+- Nine lines are drawn — **MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung
+  Chung, Tuen Ma and East Rail lines, and the Light Rail** — each labelled on the map and in the
+  legend, in MTR's own colours.
+- Their routes and stations come from OpenStreetMap, because MTR publishes its stations as lists
+  without locations.
+- The Light Rail's twelve routes share one network of track through Tuen Mun, Yuen Long and Tin
+  Shui Wai, so it is drawn as one line in a colour of this project's choosing.
+- Its stops, a few hundred metres apart, are thinned to about one per half mile; stops that are
+  also MTR stations, and each route's ends, are always kept.
+- Not drawn: the Airport Express, the Disneyland Resort Line, the high-speed rail to the mainland,
+  the Peak Tram, and Hong Kong Tramways, which runs within a few hundred metres of the Island Line
+  for nearly all its length.
+- Racecourse station, open only on race days, is left out.
 
-The registers give an address but no location. FEHD publishes the same registers with a location
-for each licence on the Government's spatial data portal (CSDI), and this map uses FEHD's own
-points, matched to the day's register by licence number; the few licences that have no point
-there yet are left off. Premises on different floors of one building share one point, so a tower
-of restaurants shows as a stack of dots in one place.
+**The businesses**
 
-Concentric ring boundaries and the three business categories (Food service, Food shops and
-Bathhouses) are toggleable via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming in will show individual
-dots; hover over those to see further details.
+- From the **Food and Environmental Hygiene Department's licence registers**, which cover
+  restaurants and food shops but not general retail: a clothes shop, an electronics shop or a
+  hair salon needs no licence from FEHD.
+- So **this map is mostly restaurants**, and its other two categories are narrower than
+  elsewhere: **Food shops** (fresh provisions, bakeries, and siu mei and lo mei shops) and
+  **Bathhouses**.
+- Read the balance between categories as a fact about Hong Kong's licensing, not about its
+  streets.
+- Each dot carries the shop sign on its licence.
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a statistical density
-estimate, so read the colour as "roughly where things cluster."
+**Reading the map**
+
+- The registers give an address but no location. FEHD publishes the same registers with a
+  location for each licence on the Government's spatial data portal (CSDI), and this map uses
+  FEHD's own points, matched to the day's register by licence number; the few licences that have
+  no point there yet are left off.
+- Premises on different floors of one building share one point, so a tower of restaurants shows
+  as a stack of dots in one place.
 """
 )
 

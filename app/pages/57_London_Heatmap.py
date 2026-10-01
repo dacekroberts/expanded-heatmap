@@ -50,50 +50,42 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-28.
+# Approved by the owner 2026-09-28; set as bullets 2026-10-01.
 st.markdown(
     """
-Nineteen lines are drawn — the **Underground's eleven**, the **DLR**, the
-**Elizabeth line** and the **six London Overground lines** — each labelled on
-the map, with its full name in the legend, redrawn from OpenStreetMap. The
-colours are close to TfL's but not the same: some of TfL's colours are too
-close to the dot colours, so the Piccadilly line appears in mauve and the
-Northern in grey. Tramlink, National Rail services and river buses are not
-drawn.
+**The lines**
 
-The map covers **Greater London**. Lines that run on beyond it are cut at the
-boundary, and their 32 stations outside it are left out.
+- Nineteen lines are drawn — the **Underground's eleven**, the **DLR**, the **Elizabeth line** and
+  the **six London Overground lines** — each labelled on the map, with its full name in the legend,
+  redrawn from OpenStreetMap.
+- The colours are close to TfL's but not the same: some of TfL's colours are too close to the dot
+  colours, so the Piccadilly line appears in mauve and the Northern in grey.
+- Tramlink, National Rail services and river buses are not drawn.
+- The map covers **Greater London**. Lines that run on beyond it are cut at the boundary, and their
+  32 stations outside it are left out.
 
-**This map shows food businesses only.** They come from the **Food Standards
-Agency's food hygiene register**, which lists every premises a borough
-inspects: restaurants, cafés, takeaways, pubs and bars, and food shops from
-corner shops to supermarkets. No open register of other shops or of personal
-services covers London, so **clothes shops, hairdressers and the like are not
-on this map**. Caterers working from home, mobile traders, and kitchens in
-schools, hospitals and care homes are left out; a workplace canteen registered
-as a restaurant or café cannot be told apart and may appear.
+**The businesses**
 
-**Read the density as a register, not a street survey.** A premises stays
-listed until the borough removes it. Most premises sit at the register's own
-map point. Where it gives none, a business with a full postcode is placed at
-the centre of its postcode, usually within a few dozen metres of its door.
-About one food storefront in twenty has neither and is not shown, mostly in
-outer boroughs. A business run from a private address, or registered at a flat,
-is never placed. Names are
-shown as registered; where a business is registered "trading as" another name,
-the name on the shop is shown.
+- **This map shows food businesses only.** They come from the **Food Standards Agency's food
+  hygiene register**, which lists every premises a borough inspects: restaurants, cafés,
+  takeaways, pubs and bars, and food shops from corner shops to supermarkets.
+- No open register of other shops or of personal services covers London, so **clothes shops,
+  hairdressers and the like are not on this map**.
+- Caterers working from home, mobile traders, and kitchens in schools, hospitals and care homes
+  are left out; a workplace canteen registered as a restaurant or café cannot be told apart and
+  may appear.
+- Names are shown as registered; where a business is registered "trading as" another name, the
+  name on the shop is shown.
 
-**About three storefronts in four sit within a station ring.**
+**Reading the map**
 
-Concentric ring boundaries and the business categories (Food service and Food
-shops) are toggleable via the layer control in the top left. When enabled,
-business density will display as numbered circles summing areas when zoomed
-out. Zooming in will show individual dots; hover over those to see further
-details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** A premises stays listed until the
+  borough removes it.
+- Most premises sit at the register's own map point. Where it gives none, a business with a full
+  postcode is placed at the centre of its postcode, usually within a few dozen metres of its door.
+- About one food storefront in twenty has neither and is not shown, mostly in outer boroughs. A
+  business run from a private address, or registered at a flat, is never placed.
+- **About three storefronts in four sit within a station ring.**
 """
 )
 

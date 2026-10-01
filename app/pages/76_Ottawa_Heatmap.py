@@ -49,41 +49,39 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Written under the owner's pre-approval of this build's prose (2026-09-29).
+# Written under the owner's pre-approval of this build's prose (2026-09-29);
+# set as bullets 2026-10-01.
 st.markdown(
     """
-Three lines are drawn: OC Transpo's **O-Train Line 1** (Blair to Tunney's
-Pasture), **Line 2** (Bayview to Limebank) and **Line 4** (South Keys to the
-Airport), redrawn from OpenStreetMap, with all 25 of their stations. Every
-station is inside the City of Ottawa. Buses are not drawn.
+**The lines**
 
-**This map shows food businesses only.** They come from Ottawa Public Health's
-food-safety inspection data, which lists every premises the health unit
-inspects. The data carries no type for a premises, so **restaurants, cafés,
-bars and take-outs share one layer with food shops**: grocers, convenience
-stores, bakeries, butchers and pharmacies that sell food. No open register of
-other shops or of personal services covers Ottawa, so clothes shops,
-hairdressers and the like are not on this map.
+- Three lines are drawn: OC Transpo's **O-Train Line 1** (Blair to Tunney's Pasture),
+  **Line 2** (Bayview to Limebank) and **Line 4** (South Keys to the Airport), redrawn from
+  OpenStreetMap, with all 25 of their stations.
+- Every station is inside the City of Ottawa. Buses are not drawn.
 
-A premises is shown when the health unit inspected it in the two years before
-the data's date; the data records no closings, so an inspection is the only
-sign that a place still trades. Kitchens in schools, daycares, hospitals,
-care homes, churches, community centres and workplaces are left out by name,
-and so are caterers without a shop, clubs, arenas, hotels, food trucks and
-event vendors. A name rule is imperfect, and a few such kitchens may remain.
-Inspection results are not shown.
+**The businesses**
 
-**About a third of these premises sit within a station ring.** The city is
-large and mostly rural beyond the Greenbelt, and the O-Train serves its core.
+- **This map shows food businesses only.** They come from Ottawa Public Health's food-safety
+  inspection data, which lists every premises the health unit inspects.
+- The data carries no type for a premises, so **restaurants, cafés, bars and take-outs share
+  one layer with food shops**: grocers, convenience stores, bakeries, butchers and pharmacies
+  that sell food.
+- No open register of other shops or of personal services covers Ottawa, so clothes shops,
+  hairdressers and the like are not on this map.
+- A premises is shown when the health unit inspected it in the two years before the data's
+  date; the data records no closings, so an inspection is the only sign that a place still
+  trades.
+- Kitchens in schools, daycares, hospitals, care homes, churches, community centres and
+  workplaces are left out by name, and so are caterers without a shop, clubs, arenas,
+  hotels, food trucks and event vendors. A name rule is imperfect, and a few such kitchens
+  may remain.
+- Inspection results are not shown.
 
-Concentric ring boundaries and the business layer are toggleable via the
-layer control in the top left. When enabled, business density will display as
-numbered circles summing areas when zoomed out. Zooming in will show
-individual dots; hover over those to see further details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **About a third of these premises sit within a station ring.** The city is large and
+  mostly rural beyond the Greenbelt, and the O-Train serves its core.
 """
 )
 

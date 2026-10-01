@@ -44,53 +44,41 @@ render_data_age('Vancouver (Regional)')
 
 st.markdown(
     """
-**This map covers two cities, and that is the first thing to know.** SkyTrain
-is regional and Surrey has no rail of its own, so a Vancouver-only map would
-cut the network at a line no rider recognises. Of 54 stations, 20 are in
-Vancouver and 4 in Surrey; the other 30 are in Burnaby, Richmond, New
-Westminster, Coquitlam and Port Moody, whose own business registers would each
-have to be sourced and verified separately.
-`outputs/vancouver/station_municipalities.csv` records which kept station is
-where, and `excluded_stations.csv` names every station left out with the
-municipality it sits in.
+**The lines**
 
-**Three lines are drawn** from TransLink's own route geometry, each labelled
-directly on the map and in the legend: the Expo Line, the Millennium Line and
-the Canada Line, in TransLink's own colours. The West Coast Express is commuter
-rail and the SeaBus is a passenger ferry; neither is included.
+- **This map covers two cities, and that is the first thing to know.** SkyTrain is regional
+  and Surrey has no rail of its own, so a Vancouver-only map would cut the network at a line
+  no rider recognises.
+- Of 54 stations, 20 are in Vancouver and 4 in Surrey. The other 30 are in Burnaby,
+  Richmond, New Westminster, Coquitlam and Port Moody, whose own business registers would
+  each have to be sourced and verified separately; every station left out is listed on the
+  What is counted page.
+- **Three lines are drawn** from TransLink's own route geometry, each labelled directly on
+  the map and in the legend: the Expo Line, the Millennium Line and the Canada Line, in
+  TransLink's own colours.
+- The West Coast Express is commuter rail and the SeaBus is a passenger ferry; neither is
+  included.
 
-**The two cities are licensed by different authorities, so read them as two
-measurements that share a map rather than one continuous surface.** Vancouver
-records a single business type per licence; Surrey records several per licence
-and states whether a business is home-based. Home occupations are excluded - a
-home business is not a storefront - and in Surrey that is about half of the
-register. Surrey's four stations also reach a far smaller share of its own
-commerce than Vancouver's twenty do, because Surrey's shops sit along arterial
-roads the SkyTrain does not follow.
+**The businesses**
 
-**Where a licence carries no trade name, the pin shows the business type
-instead of a name.** Vancouver leaves the trade name blank on about half of its
-mappable licences and falls back to the legal name, which for a sole proprietor
-is a person's own name - the City marks those by wrapping them in parentheses.
-This project publishes public commercial information, not personal
-information, so those labels are replaced rather than the pins removed.
+- Home occupations are excluded - a home business is not a storefront - and in Surrey that
+  is about half of the register.
+- **Where a licence carries no trade name, the pin shows the business type instead of a
+  name.** Vancouver leaves the trade name blank on about half of its mappable licences and
+  falls back to the legal name, which for a sole proprietor is a person's own name - the
+  City marks those by wrapping them in parentheses.
+- This project publishes public commercial information, not personal information, so those
+  labels are replaced rather than the pins removed.
 
-**Known limitation.** Roughly half of Vancouver's current-year licences carry
-no coordinates at all and cannot be placed. They are overwhelmingly categories
-this map excludes anyway - long-term and short-term rentals, contractors,
-consultancies - but a small remainder have a real street address and are simply
-absent. Canada publishes no national geocoder, so there is no equivalent of the
-address recovery used for the US cities.
+**Reading the map**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **The two cities are licensed by different authorities, so read them as two measurements
+  that share a map rather than one continuous surface.**
+- Surrey's four stations reach a far smaller share of its own commerce than Vancouver's
+  twenty do, because Surrey's shops sit along arterial roads the SkyTrain does not follow.
+- **Known limitation.** Roughly half of Vancouver's current-year licences carry no
+  coordinates at all and cannot be placed. They are overwhelmingly categories this map
+  excludes anyway, but a small remainder have a real street address and are simply absent.
 """
 )
 

@@ -49,57 +49,47 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-29. The Green Line sentence follows the
+# Approved by the owner 2026-09-29; set as bullets 2026-10-01. The Green Line sentence follows the
 # closed-for-works rule (docs/category_rules.md, "Station scope"): name the
 # closure and when it is due back.
 st.markdown(
     """
-SacRT's **Blue Line** and **Gold Line** are drawn. Each is labelled on the map
-and in the legend, and redrawn from OpenStreetMap's route geometry in the colours
-OpenStreetMap records for it. Both run every 15 minutes through the day and every
-30 in the evening, by SacRT's timetables. The **Green Line is not drawn**: SacRT
-suspended it in June 2025 for construction in the Railyards and expects it back
-by mid-October 2026. Its one station of its own, 7th & Richards/Township 9, is
-closed for works until then; its other stops are Blue or Gold stations and are on
-the map.
+**The lines**
 
-The map covers the **City of Sacramento**. The Gold Line runs on to Rancho
-Cordova and Folsom, and both lines reach stops in unincorporated Sacramento
-County. Those stations are drawn on the line but get no ring, and are listed in
-`outputs/sacramento/excluded_stations.csv`. Downtown the lines run one way on
-7th and 8th Streets, so three pairs of stops a block apart, at Capitol, County
-Center and K Street, are each shown as one station. Dos Rios, which opened on 28
-September 2026 and is not yet in OpenStreetMap, is placed from Wikidata.
+- SacRT's **Blue Line** and **Gold Line** are drawn. Each is labelled on the map and in the legend,
+  and redrawn from OpenStreetMap's route geometry in the colours OpenStreetMap records for it.
+- Both run every 15 minutes through the day and every 30 in the evening, by SacRT's timetables.
+- The **Green Line is not drawn**: SacRT suspended it in June 2025 for construction in the
+  Railyards and expects it back by mid-October 2026. Its one station of its own, 7th &
+  Richards/Township 9, is closed for works until then; its other stops are Blue or Gold stations and
+  are on the map.
+- The map covers the **City of Sacramento**. The Gold Line runs on to Rancho Cordova and Folsom,
+  and both lines reach stops in unincorporated Sacramento County. Those stations are drawn on the
+  line but get no ring, and are listed on the What is counted page.
+- Downtown the lines run one way on 7th and 8th Streets, so three pairs of stops a block apart, at
+  Capitol, County Center and K Street, are each shown as one station.
+- Dos Rios, which opened on 28 September 2026 and is not yet in OpenStreetMap, is placed from
+  Wikidata.
 
-Businesses come from the City's **Business Operation Tax** register, which
-covers every business operating in the city. A licence is counted only if it is
-active and has not passed its expiry date. The register gives an address but no
-location, so each storefront is placed by the US Census Bureau's geocoder and
-kept only if the point falls inside the city, because a Sacramento postal
-address also covers parts of the unincorporated county. About one address in
-fifty could not be placed. Businesses whose address the City withholds ("on
-file") cannot be placed at all; most are run from home.
+**The businesses**
 
-**Where a business name reads as a person's, the map shows the kind of business
-instead** (for example "Restaurants"). The register cannot tell a sole
-proprietor's own name from a trade name, so some real trade names are shown that
-way too. A business at an apartment address is left off, as a home.
+- Businesses come from the City's **Business Operation Tax** register, which covers every business
+  operating in the city. A licence is counted only if it is active and has not passed its expiry
+  date.
+- The register gives an address but no location, so each storefront is placed by the US Census
+  Bureau's geocoder and kept only if the point falls inside the city, because a Sacramento postal
+  address also covers parts of the unincorporated county. About one address in fifty could not be
+  placed.
+- Businesses whose address the City withholds ("on file") cannot be placed at all; most are run
+  from home.
+- **Where a business name reads as a person's, the map shows the kind of business instead** (for
+  example "Restaurants"). The register cannot tell a sole proprietor's own name from a trade name,
+  so some real trade names are shown that way too.
+- A business at an apartment address is left off, as a home.
 
-Two catch-all descriptions, *Service – General* and *Other*, are left out, as
-are online sellers, caterers, street vendors, and stylists and massage
-therapists licensed as individuals rather than as premises.
+**Reading the map**
 
-**About two storefronts in five sit within a station ring.**
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **About two storefronts in five sit within a station ring.**
 """
 )
 

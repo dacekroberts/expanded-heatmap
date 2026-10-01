@@ -57,51 +57,44 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-24.
+# Approved by the owner 2026-09-24; set as bullets 2026-10-01.
 st.markdown(
     """
-Three lines are drawn — **Metro A, B and C** — each labelled on the map and in
-the legend, redrawn from the Prague Integrated Transport system's (PID) own route
-geometry in the operator's colours. Line A is shown a shade lighter so it stays
-distinct from the green of the personal-services dots. **Flora station on line A
-is closed for reconstruction** until about December 2026, so it is not drawn
-while closed, as the timetable runs; it returns when it reopens. Trams, the Petřín funicular, ferries and suburban trains
-are not drawn.
+**The lines**
 
-The map covers the **City of Prague**, and every metro station lies inside it,
-so none is left out.
+- Three lines are drawn, **Metro A, B and C**, each labelled on the map and in the legend,
+  redrawn from the Prague Integrated Transport system's (PID) own route geometry in the
+  operator's colours. Line A is shown a shade lighter so it stays distinct from the green of the
+  personal-services dots.
+- **Flora station on line A is closed for reconstruction** until about December 2026, so it is not
+  drawn while closed, as the timetable runs; it returns when it reopens.
+- Trams, the Petřín funicular, ferries and suburban trains are not drawn.
+- The map covers the **City of Prague**, and every metro station lies inside it, so none is left
+  out.
 
-Businesses come from the Czech **register of active business establishments**
-(ROS02), which records each place where a business operates at that place's own
-address, placed using the national address register (RÚIAN). What each
-establishment does comes from the Czech Statistical Office's business register
-(RES). RES records one main activity per business, so every establishment
-inherits its owner's, and a chain's office or warehouse counts as the chain's
-trade. **Where a business belongs to a person trading in their own name, or to a
-partnership, the map shows its address instead of its name.** Where such an
-establishment is at the owner's own registered address, which is usually their
-home, it is left off the map altogether.
+**The businesses**
 
-**Read the density as a register, not a street survey.** Some establishments are
-newly registered and may not have opened yet. Czechia's classification files a
-web shop under the goods it sells, so some dots are businesses with no shop a
-passer-by could walk into. Against OpenStreetMap's mapped restaurants, cafés and
-takeaways in the city, the register carries about **1.6 times** as many.
-Businesses whose main activity is something else, such as a brewery's pub or a
-wholesaler's shop, are not shown, because no open source records what each
-establishment itself does.
+- Businesses come from the Czech **register of active business establishments** (ROS02), which
+  records each place where a business operates at that place's own address, placed using the
+  national address register (RÚIAN).
+- What each establishment does comes from the Czech Statistical Office's business register (RES).
+  RES records one main activity per business, so every establishment inherits its owner's, and a
+  chain's office or warehouse counts as the chain's trade.
+- Businesses whose main activity is something else, such as a brewery's pub or a wholesaler's
+  shop, are not shown, because no open source records what each establishment itself does.
+- **Where a business belongs to a person trading in their own name, or to a partnership, the map
+  shows its address instead of its name.** Where such an establishment is at the owner's own
+  registered address, which is usually their home, it is left off the map altogether.
+- **About seven storefronts in ten sit within a station ring.**
 
-**About seven storefronts in ten sit within a station ring.**
+**Reading the density**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** Some establishments are newly
+  registered and may not have opened yet.
+- Czechia's classification files a web shop under the goods it sells, so some dots are businesses
+  with no shop a passer-by could walk into.
+- Against OpenStreetMap's mapped restaurants, cafés and takeaways in the city, the register carries
+  about **1.6 times** as many.
 """
 )
 

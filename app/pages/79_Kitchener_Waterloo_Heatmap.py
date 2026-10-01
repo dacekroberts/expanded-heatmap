@@ -51,51 +51,48 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Written under the owner's pre-approval of this build's prose (2026-09-30).
+# Written under the owner's pre-approval of this build's prose (2026-09-30);
+# set as bullets 2026-10-01.
 st.markdown(
     """
-**Two cities, one map.** ION, the Region of Waterloo's light rail (Grand River
-Transit route 301), runs from Conestoga in north Waterloo to Fairway in south
-Kitchener, redrawn from OpenStreetMap with all 19 of its stops: 8 in Waterloo
-and 11 in Kitchener. Through both downtowns the two directions run on parallel
-streets, so both are drawn, and a stop on each side counts as its own. ION's
-bus extension to Cambridge is a bus, and is not drawn. Either city alone would
-be a short map, so this page shows them together; Cambridge and the townships
-are left out.
+**The line**
 
-**This map shows food businesses and personal services.** Both come from
-Region of Waterloo Public Health's inspection data, which types every premises
-it inspects. Restaurants, take-outs, bars and snack bars are one layer; food
-shops (supermarkets, convenience stores, bakeries, butchers and produce
-sellers) are another; hair salons, barbers, aesthetics, nail, tattoo, piercing
-and similar studios are a third. The Region publishes no register of other
-shops, so clothes shops, hardware stores and the like are not on this map.
+- **Two cities, one map.** ION, the Region of Waterloo's light rail (Grand River Transit
+  route 301), runs from Conestoga in north Waterloo to Fairway in south Kitchener, redrawn
+  from OpenStreetMap with all 19 of its stops: 8 in Waterloo and 11 in Kitchener.
+- Through both downtowns the two directions run on parallel streets, so both are drawn, and
+  a stop on each side counts as its own.
+- ION's bus extension to Cambridge is a bus, and is not drawn.
+- Either city alone would be a short map, so this page shows them together; Cambridge and
+  the townships are left out.
 
-A premises is shown when Public Health inspected it in the two years before
-the data's date; the data records no closings, so an inspection is the only
-sign that a place still trades. A few premises opened since then and have no
-type yet; they are shown as restaurants, or as personal services. Kitchens in
-schools, daycares, care homes, churches, community centres and workplaces are
-left out by type, and so are caterers without a shop, banquet halls and food
-warehouses. Campus and hospital outlets, arena and stadium stands, clubs,
-cinemas and other venues, hotels, pharmacies, mobile units and the Kitchener
-Market's Saturday stalls are left out by name; a name rule is imperfect.
-Where a personal-services studio is registered under what reads as a
-person's own name, its type is shown instead. Inspection results are not
-shown, and a pin is not a rating.
+**The businesses**
 
-**About two in five of these premises sit within a station ring.** ION runs
-along the spine of both cities, through both downtowns and past both
-universities, whose campus outlets are not counted.
+- **This map shows food businesses and personal services.** Both come from Region of
+  Waterloo Public Health's inspection data, which types every premises it inspects.
+- Restaurants, take-outs, bars and snack bars are one layer; food shops (supermarkets,
+  convenience stores, bakeries, butchers and produce sellers) are another; hair salons,
+  barbers, aesthetics, nail, tattoo, piercing and similar studios are a third.
+- The Region publishes no register of other shops, so clothes shops, hardware stores and the
+  like are not on this map.
+- A premises is shown when Public Health inspected it in the two years before the data's
+  date; the data records no closings, so an inspection is the only sign that a place still
+  trades. A few premises opened since then and have no type yet; they are shown as
+  restaurants, or as personal services.
+- Kitchens in schools, daycares, care homes, churches, community centres and workplaces are
+  left out by type, and so are caterers without a shop, banquet halls and food warehouses.
+- Campus and hospital outlets, arena and stadium stands, clubs, cinemas and other venues,
+  hotels, pharmacies, mobile units and the Kitchener Market's Saturday stalls are left out
+  by name; a name rule is imperfect.
+- Where a personal-services studio is registered under what reads as a person's own name,
+  its type is shown instead.
+- Inspection results are not shown, and a pin is not a rating.
 
-Concentric ring boundaries and the business layer are toggleable via the
-layer control in the top left. When enabled, business density will display as
-numbered circles summing areas when zoomed out. Zooming in will show
-individual dots; hover over those to see further details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **About two in five of these premises sit within a station ring.** ION runs along the
+  spine of both cities, through both downtowns and past both universities, whose campus
+  outlets are not counted.
 """
 )
 

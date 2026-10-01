@@ -44,45 +44,35 @@ render_data_age('Mexico City')
 # computed.
 st.markdown(
     """
-Metro CDMX runs twelve lines — Líneas 1 to 9, A, B and 12 — and this map draws
-all of them alongside the STE Tren Ligero, which continues south from Tasqueña
-to Xochimilco. Each line is labelled directly on the map in the name its riders
-use, and appears in the legend.
+**The lines**
 
-Only stations inside Ciudad de México are mapped. Líneas A and B run north and
-east into the State of Mexico, and those stations are left out because this map
-has no business data for them — their rings would sit over blank ground. They
-are listed in `outputs/mexico_city/excluded_stations.csv`.
+- Metro CDMX runs twelve lines — Líneas 1 to 9, A, B and 12 — and this map draws all of them
+  alongside the STE Tren Ligero, which continues south from Tasqueña to Xochimilco.
+- Each line is labelled directly on the map in the name its riders use, and appears in the
+  legend.
+- Only stations inside Ciudad de México are mapped. Líneas A and B run north and east into
+  the State of Mexico, and those stations are left out because this map has no business data
+  for them — their rings would sit over blank ground. They are listed on the What is counted
+  page.
+- **The line geometry here comes from OpenStreetMap, not from the operator.** Every public
+  host for the Mexico City government, for STC Metro and for the STE is unreachable from
+  where this was built, and the Metro's transit feed is refused at its download location.
+- So the alignments are OpenStreetMap contributors' mapping of the network rather than the
+  agency's own file. For the same reason, the station count has not been checked against
+  what STC Metro publishes.
 
-**The line geometry here comes from OpenStreetMap, not from the operator.**
-Every public host for the Mexico City government, for STC Metro and for the STE
-is unreachable from where this was built, and the Metro's transit feed is
-refused at its download location. So the alignments are OpenStreetMap
-contributors' mapping of the network rather than the agency's own file. For the same
-reason, the station count has not been checked against what STC Metro
-publishes.
+**The businesses**
 
-**The businesses are a census, not a licence register, and that changes what
-the map means.** Most cities here are built from business licences: a record
-of who registered. Mexico City is built from INEGI's DENUE, compiled by
-surveying premises and recording the name on the shopfront. It is far more
-complete than a licence register, so the density shown here is **not
-comparable** with the licence-register cities' — read it as a fact about how
-the data was collected as much as about Mexico City's streets.
-
-Fixed premises only. DENUE separately records semi-fixed units — stalls and
-street posts — and those are not shown, although street commerce is a real and
-substantial part of the city's retail.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **The businesses are a census, not a licence register, and that changes what the map
+  means.** Most cities here are built from business licences: a record of who registered.
+  Mexico City is built from INEGI's DENUE, compiled by surveying premises and recording the
+  name on the shopfront.
+- It is far more complete than a licence register, so the density shown here is **not
+  comparable** with the licence-register cities' — read it as a fact about how the data was
+  collected as much as about Mexico City's streets.
+- Fixed premises only. DENUE separately records semi-fixed units — stalls and street posts —
+  and those are not shown, although street commerce is a real and substantial part of the
+  city's retail.
 """
 )
 

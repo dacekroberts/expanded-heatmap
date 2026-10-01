@@ -71,38 +71,36 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended.
+# calls applied as recommended; set as bullets 2026-10-01.
 st.markdown(
     """
-Two lines are drawn — **the VLT da Baixada Santista's Linha 1 and Linha 2** — each
-labelled on the map and in the legend, in the colours OpenStreetMap records. **Linha 2
-opened on 1 December 2025 and runs from 9 to 15h for now.** The heritage tourist tram is
-not drawn. The map covers **Santos and São Vicente**, which the lines join.
+**The lines**
 
-Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
-Census enumerators walking every street recorded each establishment, what it was, and a
-map point for it. **Read it as a 2022 picture, not today's.** IBGE did not classify the
-establishments: each dot's category is this project's reading of the enumerator's words,
-and the names were not checked against any business register. Where one entry stands
-for several shops, as in a shopping centre or a gallery, it is one dot. At an address
-that is also someone's home, the dot shows only its category.
+- Two lines are drawn — **the VLT da Baixada Santista's Linha 1 and Linha 2** — each
+  labelled on the map and in the legend, in the colours OpenStreetMap records.
+- **Linha 2 opened on 1 December 2025 and runs from 9 to 15h for now.**
+- The heritage tourist tram is not drawn.
+- The map covers **Santos and São Vicente**, which the lines join.
 
-**Almost four in ten of the establishments that might be shops, cafés or salons carry a
-description no rule can read, and are not drawn.** Most are brand or trade names with no
-word saying what they sell. Near the stops it is slightly more.
+**The businesses**
 
-**Almost half the storefronts sit within a stop's ring**, because the VLT runs through
-the dense coastal strip where most of both cities' shops are.
+- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+  Census enumerators walking every street recorded each establishment, what it was, and a
+  map point for it. **Read it as a 2022 picture, not today's.**
+- IBGE did not classify the establishments: each dot's category is this project's reading of
+  the enumerator's words, and the names were not checked against any business register.
+- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+  dot.
+- At an address that is also someone's home, the dot shows only its category.
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Almost four in ten of the establishments that might be shops, cafés or salons carry a
+  description no rule can read, and are not drawn.** Most are brand or trade names with no
+  word saying what they sell.
+- Near the stops it is slightly more.
+- **Almost half the storefronts sit within a stop's ring**, because the VLT runs through the
+  dense coastal strip where most of both cities' shops are.
 """
 )
 

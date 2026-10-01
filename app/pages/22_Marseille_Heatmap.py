@@ -72,50 +72,43 @@ st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
 
 st.markdown(
     """
-Five RTM lines are drawn — **Métro 1 and 2, Tramway 1, 2 and 3** — each
-labelled on the map and in the legend, redrawn from the operator's own
-published geometry.
+**The métro and trams**
 
-The map covers the **commune of Marseille**, and unlike most cities here that
-costs it nothing: every station on all five lines falls inside the boundary.
-What the boundary does exclude is a *sixth* rail line in the same feed — the
-tram at Aubagne, a separate town with its own network — and those seven
-stations are listed in `outputs/marseille/excluded_stations.csv`. Two other
-modes are absent by rules this project applies everywhere: the TER regional
-services are commuter rail, and ferries are not rail, though Marseille's
-harbour shuttles are closer to urban transit than that rule usually implies.
+- Five RTM lines are drawn — **Métro 1 and 2, Tramway 1, 2 and 3** — each labelled on the map and
+  in the legend, redrawn from the operator's own published geometry.
+- The map covers the **commune of Marseille**, and unlike most cities here that costs it nothing:
+  every station on all five lines falls inside the boundary.
+- What the boundary does exclude is a *sixth* rail line in the same feed — the tram at Aubagne, a
+  separate town with its own network — and those seven stations are listed on the What is counted
+  page.
+- Two other modes are absent by rules this project applies everywhere: the TER regional services
+  are commuter rail, and ferries are not rail, though Marseille's harbour shuttles are closer to
+  urban transit than that rule usually implies.
 
-Businesses come from **SIRENE**, France's national register of établissements,
-joined to INSEE's separate geolocation file — the same source Paris uses.
-Records INSEE marks non-diffusible are stripped at source, name, address and
-coordinates together, so they never reach this map. **Where SIRENE records no
-shop sign or trading name, the dot shows the establishment's address instead**
-— more than half the dots on this map.
+**The businesses**
 
-**Read the density as a register, not a street survey.** SIRENE records where a
-business is *registered*, and some registered establishments have no
-customer-facing shopfront — nothing in the data says which. Against
-OpenStreetMap's mapped shops in the same commune this map carries roughly
-**2.6 times** as many points. Part of that is the register; part is that
-OpenStreetMap covers Marseille far less completely than it covers Paris. On
-restaurants, where the two schemes mean nearly the same thing, the gap narrows
-to 1.7× — close to Paris's 1.8×, which is the comparison worth trusting.
+- Businesses come from **SIRENE**, France's national register of établissements, joined to
+  INSEE's separate geolocation file — the same source Paris uses.
+- Records INSEE marks non-diffusible are stripped at source, name, address and coordinates
+  together, so they never reach this map.
+- **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
+  instead** — more than half the dots on this map.
 
-**Fewer than six in ten of these storefronts sit within a station ring**, which
-is a fact about the city rather than the data: Marseille's commune is more than
-twice the area of Paris's and its rail network is a fifth the size. The
-category toggles show every storefront; the rings show the share the Métro and
-Tramway actually reach.
+**Reading the density**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** SIRENE records where a business is
+  *registered*, and some registered establishments have no customer-facing shopfront — nothing in
+  the data says which.
+- Against OpenStreetMap's mapped shops in the same commune this map carries roughly **2.6 times**
+  as many points. Part of that is the register; part is that OpenStreetMap covers Marseille far
+  less completely than it covers Paris.
+- On restaurants, where the two schemes mean nearly the same thing, the gap narrows to 1.7× —
+  close to Paris's 1.8×, which is the comparison worth trusting.
+- **Fewer than six in ten of these storefronts sit within a station ring**, which is a fact about
+  the city rather than the data: Marseille's commune is more than twice the area of Paris's and its
+  rail network is a fifth the size.
+- The category toggles show every storefront; the rings show the share the Métro and Tramway
+  actually reach.
 """
 )
 

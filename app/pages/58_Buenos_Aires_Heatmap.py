@@ -38,41 +38,35 @@ else:
 
 render_data_age('Buenos Aires')
 
-# Approved by the owner 2026-09-28.
+# Approved by the owner 2026-09-28; set as bullets 2026-10-01.
 st.markdown(
     """
-Six lines are drawn — Subte **Líneas A, B, C, D, E and H** — each labelled on
-the map and in the legend, from the station and track records of SBASE, the
-city company that owns the Subte, in the operator's line colours. The Premetro,
-a surface light-rail line from Línea E's southern end, is not drawn, and
-neither are the commuter railways. Every Subte station lies inside the Ciudad
-Autónoma, so none is left out.
+**The lines**
 
-The businesses come from the **city's land-use survey of 2022 to 2024**, in
-which surveyors walked every block and recorded the use of every ground floor.
-It records what a premises is used for, not who runs it, so **no business
-names are shown: each dot shows its street address and its kind of
-business**. Shops inside malls and arcades are not itemised in the survey and
-are left out, as are shopfronts whose use the surveyors could not identify
-(about one in fourteen) and homes with a business inside.
+- Six lines are drawn — Subte **Líneas A, B, C, D, E and H** — each labelled on the map and
+  in the legend, from the station and track records of SBASE, the city company that owns the
+  Subte, in the operator's line colours.
+- The Premetro, a surface light-rail line from Línea E's southern end, is not drawn, and
+  neither are the commuter railways.
+- Every Subte station lies inside the Ciudad Autónoma, so none is left out.
 
-**Read the density as a survey, not a register.** Each block was surveyed
-once, in 2022, 2023 or 2024, so a shop that has opened or closed since is shown
-as the surveyors found it. The survey gives no map points: each business is
-placed at the centre of its land parcel, so businesses in one building share a
-point.
+**The businesses**
 
-**About two storefronts in three sit within a station ring.**
+- The businesses come from the **city's land-use survey of 2022 to 2024**, in which
+  surveyors walked every block and recorded the use of every ground floor.
+- It records what a premises is used for, not who runs it, so **no business names are shown:
+  each dot shows its street address and its kind of business**.
+- Shops inside malls and arcades are not itemised in the survey and are left out, as are
+  shopfronts whose use the surveyors could not identify (about one in fourteen) and homes
+  with a business inside.
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a survey, not a register.** Each block was surveyed once, in 2022,
+  2023 or 2024, so a shop that has opened or closed since is shown as the surveyors found it.
+- The survey gives no map points: each business is placed at the centre of its land parcel,
+  so businesses in one building share a point.
+- **About two storefronts in three sit within a station ring.**
 """
 )
 

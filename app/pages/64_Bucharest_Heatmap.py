@@ -48,46 +48,43 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-29.
+# Approved by the owner 2026-09-29; set as bullets 2026-10-01.
 st.markdown(
     """
-Five lines are drawn: Metrorex's **M1** to **M5**, redrawn from OpenStreetMap,
-each labelled with its code, with its termini in the legend. M5's two
-branches, to Valea Ialomiței and to Râul Doamnei, are one line. The map covers
-the **Municipality of Bucharest**, its six sectors; every metro station lies
-inside it. Suburban trains and trams are not drawn.
+**The lines**
 
-**This map shows food businesses only.** They come from the registers of
-Bucharest's Sanitary-Veterinary and Food Safety Directorate (DSVSA București),
-which records every food unit it registers: restaurants, cafés, bars and fast
-food, and food shops from butchers and bakeries to supermarkets. No open
-register of other shops or of personal services covers Romania, so **clothes
-shops, hairdressers and the like are not on this map**. Registrations the
-Directorate has cancelled are left out, as are canteens, catering, pastry
-labs, mobile units, kiosk carts and vending machines. A premises with several
-registrations (a supermarket's butcher and bakery counters) is shown once.
-Names are the operating company's, without its legal form; a sole trader is
-shown by category only.
+- Five lines are drawn: Metrorex's **M1** to **M5**, redrawn from OpenStreetMap, each labelled
+  with its code, with its termini in the legend.
+- M5's two branches, to Valea Ialomiței and to Râul Doamnei, are one line.
+- The map covers the **Municipality of Bucharest**, its six sectors; every metro station lies
+  inside it.
+- Suburban trains and trams are not drawn.
 
-**About one storefront in four cannot be placed.** The register gives an
-address but no map position. Each premises is placed by matching its street
-and house number to OpenStreetMap's address points in its own sector. Where
-OpenStreetMap lacks the house number, spells the street differently, or has
-the same number in two places, the premises is left off rather than guessed.
-The share placed is about the same in all six sectors, and lowest for
-fishmongers, many of which trade inside markets.
+**The businesses**
 
-**About seven placed storefronts in ten sit within a station ring.**
+- **This map shows food businesses only.** They come from the registers of Bucharest's
+  Sanitary-Veterinary and Food Safety Directorate (DSVSA București), which records every food unit
+  it registers: restaurants, cafés, bars and fast food, and food shops from butchers and bakeries
+  to supermarkets.
+- No open register of other shops or of personal services covers Romania, so **clothes shops,
+  hairdressers and the like are not on this map**.
+- Registrations the Directorate has cancelled are left out, as are canteens, catering, pastry
+  labs, mobile units, kiosk carts and vending machines.
+- A premises with several registrations (a supermarket's butcher and bakery counters) is shown
+  once.
+- Names are the operating company's, without its legal form; a sole trader is shown by category
+  only.
 
-Concentric ring boundaries and the business categories (Food service and Food
-shops) are toggleable via the layer control in the top left. When enabled,
-business density will display as numbered circles summing areas when zoomed
-out. Zooming in will show individual dots; hover over those to see further
-details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **About one storefront in four cannot be placed.** The register gives an address but no map
+  position. Each premises is placed by matching its street and house number to OpenStreetMap's
+  address points in its own sector.
+- Where OpenStreetMap lacks the house number, spells the street differently, or has the same
+  number in two places, the premises is left off rather than guessed.
+- The share placed is about the same in all six sectors, and lowest for fishmongers, many of
+  which trade inside markets.
+- **About seven placed storefronts in ten sit within a station ring.**
 """
 )
 

@@ -67,48 +67,40 @@ if PROVENANCE_JSON.exists():
 
 # The tram-city skill's page-text template, approved by the owner word for
 # word on 2026-09-30, filled from Liepāja's own step 1 and step 2 figures; the
-# business paragraphs are Riga's, the template city for these two layers.
+# business paragraphs are Riga's, the template city for these two layers; set as
+# bullets 2026-10-01.
 st.markdown(
     """
-One tram line is drawn, **tram 1**, labelled on the map and in the legend,
-redrawn from OpenStreetMap's route geometry, in a colour this project chose,
-since the source records none. Liepāja has no metro: its trams are its rapid
-transit, as Riga's are, so every tram stop gets rings. Trams run about every 7
-minutes by day. Buses and suburban trains are not drawn.
+**The tram**
 
-The map covers the **city of Liepāja**.
+- One tram line is drawn, **tram 1**, labelled on the map and in the legend, redrawn from
+  OpenStreetMap's route geometry, in a colour this project chose, since the source records none.
+- Trams run about every 7 minutes by day. Buses and suburban trains are not drawn.
+- Liepāja has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+  rings.
+- **Tram stops sit closer together than metro stations**, a median of 313 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
+- The map covers the **city of Liepāja**.
 
-Businesses come from two sources. **Food service** is from the State Revenue
-Service's register of premises licensed to sell alcohol or tobacco — cafés,
-bars, restaurants and canteens — placed by address on the State Address
-Register. These dots show the kind of place and its street address, never the
-licence holder. **Shops and services** is from the national cadastre: every
-premises registered for trade whose name reads as a shop or a service, placed
-at its building.
+**The businesses**
 
-**This map has two categories, not three.** A café that sells neither alcohol
-nor tobacco is not in the licence register, so read the food layer as a lower
-bound. The cadastre records what a premises is for, not who is in it, so a
-hairdresser and a clothes shop are one category.
+- Businesses come from two sources.
+- **Food service** is from the State Revenue Service's register of premises licensed to sell
+  alcohol or tobacco — cafés, bars, restaurants and canteens — placed by address on the State
+  Address Register. These dots show the kind of place and its street address, never the licence
+  holder.
+- **Shops and services** is from the national cadastre: every premises registered for trade whose
+  name reads as a shop or a service, placed at its building.
+- **This map has two categories, not three.** A café that sells neither alcohol nor tobacco is not
+  in the licence register, so read the food layer as a lower bound. The cadastre records what a
+  premises is for, not who is in it, so a hairdresser and a clothes shop are one category.
+- **About seven storefronts in ten sit within a ring.**
 
-**Read the density as a register, not a street survey.** The cadastre does not
-record whether a premises is in use, and no vacancy figure is published for
-Liepāja, so read the shops layer as an upper bound. About 6% of licensed food
-premises cannot be placed by their address.
+**Reading the density**
 
-**Tram stops sit closer together than metro stations**, a median of 313 m
-here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
-seven storefronts in ten sit within a ring.**
-
-Concentric ring boundaries and the two business categories (Shops and services,
-and Food service) are toggleable via the layer control in the top left. When
-enabled, business density will display as numbered circles summing areas when
-zoomed out. Zooming in will show individual dots; hover over those to see
-further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** The cadastre does not record whether a
+  premises is in use, and no vacancy figure is published for Liepāja, so read the shops layer as
+  an upper bound.
 """
 )
 

@@ -54,7 +54,8 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Houston's text (pre-approved by the owner 2026-09-29), with Dallas's facts;
-# written under the owner's pre-approval of this build's prose (2026-09-30).
+# written under the owner's pre-approval of this build's prose (2026-09-30); set as
+# bullets 2026-10-01.
 # Two sentences beyond Houston's template, flagged for review time: the
 # timetable (the brief: purpose-built track, so frequency is disclosed) and the
 # thin personal-services layer (owner, 2026-09-30: narrowed, and the page says
@@ -64,52 +65,40 @@ if PROVENANCE_JSON.exists():
 # addresses still are. The in-ring share is stated on the page, as Houston's is.
 st.markdown(
     """
-DART's four light-rail lines are drawn: the **Red Line**, **Blue Line**, **Green
-Line** and **Orange Line**. Each is labelled on the map and in the legend, and
-redrawn from OpenStreetMap's route geometry in this map's own colours. Each line
-runs about every 20 minutes at peak and every 20 to 30 minutes at other times;
-downtown, where all four share the transit mall, trains come more often. 44
-stations are inside the City of Dallas; the 20 beyond it, in the suburbs and at
-DFW Airport, are left out and the lines are drawn to their ends. The Dallas
-Streetcar and the M-Line trolley are not drawn, and neither are the Silver Line
-and the TRE, which are commuter rail.
+**The lines**
 
-The map covers the **City of Dallas**, as the US Census Bureau draws its limits:
-about 990 km². Four light-rail lines radiate from downtown, so **about one
-storefront in four sits within a station ring**. The toggle for all of Dallas
-shows the rest.
+- DART's four light-rail lines are drawn: the **Red Line**, **Blue Line**, **Green Line** and
+  **Orange Line**. Each is labelled on the map and in the legend, and redrawn from OpenStreetMap's
+  route geometry in this map's own colours.
+- Each line runs about every 20 minutes at peak and every 20 to 30 minutes at other times;
+  downtown, where all four share the transit mall, trains come more often.
+- 44 stations are inside the City of Dallas; the 20 beyond it, in the suburbs and at DFW Airport,
+  are left out and the lines are drawn to their ends.
+- The Dallas Streetcar and the M-Line trolley are not drawn, and neither are the Silver Line and
+  the TRE, which are commuter rail.
 
-Businesses come from the Texas Comptroller's list of **active sales tax permit
-holders**: every outlet selling taxable goods in the state, with its industry
-code. Only outlets in Dallas are used, and a permit counts only if the outlet
-had begun trading by the date it was fetched. Texas taxes only some services, so
-many personal-service businesses, such as hair salons and barbers, hold no permit
-and do not appear. The list gives an address but no location, so each storefront
-is placed at the matching point in the City of Dallas's own address points (or
-the nearest listed number on the same side of the street), or by the US Census
-Bureau's geocoder where there is no match. The placement is approximate, not
-surveyed. It is kept only if the point falls inside the city, because a Dallas
-postal address also covers other towns. About one address in forty could not be
-placed.
+**The businesses**
 
-**Where the permit holder is a person rather than a company, the map shows the
-street address instead of a name.** That covers sole owners and partnerships of
-individuals. A business at an apartment or trailer address is left off
-altogether, as a home.
+- Businesses come from the Texas Comptroller's list of **active sales tax permit holders**: every
+  outlet selling taxable goods in the state, with its industry code. Only outlets in Dallas are
+  used, and a permit counts only if the outlet had begun trading by the date it was fetched.
+- Texas taxes only some services, so many personal-service businesses, such as hair salons and
+  barbers, hold no permit and do not appear.
+- The list gives an address but no location, so each storefront is placed at the matching point in
+  the City of Dallas's own address points (or the nearest listed number on the same side of the
+  street), or by the US Census Bureau's geocoder where there is no match. The placement is
+  approximate, not surveyed.
+- It is kept only if the point falls inside the city, because a Dallas postal address also covers
+  other towns. About one address in forty could not be placed.
+- **Where the permit holder is a person rather than a company, the map shows the street address
+  instead of a name.** That covers sole owners and partnerships of individuals.
+- A business at an apartment or trailer address is left off altogether, as a home.
 
-Online and mail-order sellers are left out by their industry code, as are
-caterers, food trucks, contract canteens, parking, funeral services and the
-catch-all "other personal services".
+**Reading the map**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- The map covers the **City of Dallas**, as the US Census Bureau draws its limits: about 990 km².
+- Four light-rail lines radiate from downtown, so **about one storefront in four sits within a
+  station ring**. The toggle for all of Dallas shows the rest.
 """
 )
 

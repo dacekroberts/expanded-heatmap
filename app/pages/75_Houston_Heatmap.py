@@ -53,54 +53,43 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Pre-approved by the owner 2026-09-29 ("same with the eventual write-ups").
+# Pre-approved by the owner 2026-09-29 ("same with the eventual write-ups"); set as
+# bullets 2026-10-01.
 # The in-ring share is stated on the page (owner, 2026-09-29: build as scoped
 # and say so).
 st.markdown(
     """
-METRORail's **Red Line**, **Green Line** and **Purple Line** are drawn. Each is
-labelled on the map and in the legend, and redrawn from OpenStreetMap's route
-geometry in this map's own colours. The Red Line runs every 6 minutes through the
-day, and the Green and Purple Lines every 12. All 40 stations are inside the City
-of Houston, so none is left out. Downtown the Green and Purple Lines run one way
-on Capitol and Rusk Streets, so Central Station's two stops a block apart are
-shown as one station.
+**The lines**
 
-The map covers the **City of Houston**, as the US Census Bureau draws its limits:
-about 1,740 km² from Kingwood to Clear Lake. Three light-rail lines serve its
-core, so **only about one storefront in thirteen sits within a station ring**,
-far fewer than in most cities on this map. The toggle for all of Houston shows
-the rest.
+- METRORail's **Red Line**, **Green Line** and **Purple Line** are drawn. Each is labelled on the
+  map and in the legend, and redrawn from OpenStreetMap's route geometry in this map's own colours.
+- The Red Line runs every 6 minutes through the day, and the Green and Purple Lines every 12.
+- All 40 stations are inside the City of Houston, so none is left out.
+- Downtown the Green and Purple Lines run one way on Capitol and Rusk Streets, so Central Station's
+  two stops a block apart are shown as one station.
 
-Businesses come from the Texas Comptroller's list of **active sales tax permit
-holders**: every outlet selling taxable goods in the state, with its industry
-code. Only outlets in Houston are used, and a permit counts only if the outlet
-had begun trading by the date it was fetched. The list gives an address but no
-location, so each storefront is placed at the matching point in the City of
-Houston's own address file, or by the US Census Bureau's geocoder where there is
-no match. It is kept only if the point falls inside the city, because a Houston
-postal address also covers other towns and unincorporated land. About one address
-in twenty-five could not be placed.
+**The businesses**
 
-**Where the permit holder is a person rather than a company, the map shows the
-street address instead of a name.** That covers sole owners and partnerships of
-individuals. Such a business is left off altogether where the City's address
-file records the point as residential, and so is any business at an apartment or
-trailer address, as a home.
+- Businesses come from the Texas Comptroller's list of **active sales tax permit holders**: every
+  outlet selling taxable goods in the state, with its industry code. Only outlets in Houston are
+  used, and a permit counts only if the outlet had begun trading by the date it was fetched.
+- The list gives an address but no location, so each storefront is placed at the matching point in
+  the City of Houston's own address file, or by the US Census Bureau's geocoder where there is no
+  match.
+- It is kept only if the point falls inside the city, because a Houston postal address also covers
+  other towns and unincorporated land. About one address in twenty-five could not be placed.
+- **Where the permit holder is a person rather than a company, the map shows the street address
+  instead of a name.** That covers sole owners and partnerships of individuals.
+- Such a business is left off altogether where the City's address file records the point as
+  residential, and so is any business at an apartment or trailer address, as a home.
 
-Online and mail-order sellers are left out by their industry code, as are
-caterers, food trucks, contract canteens, parking, funeral services and the
-catch-all "other personal services".
+**Reading the map**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- The map covers the **City of Houston**, as the US Census Bureau draws its limits: about 1,740 km²
+  from Kingwood to Clear Lake.
+- Three light-rail lines serve its core, so **only about one storefront in thirteen sits within a
+  station ring**, far fewer than in most cities on this map. The toggle for all of Houston shows
+  the rest.
 """
 )
 

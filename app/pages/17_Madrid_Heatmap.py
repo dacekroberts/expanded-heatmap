@@ -40,58 +40,37 @@ render_data_age('Madrid')
 
 st.markdown(
     """
-**The businesses are a premises census, not a licence register, and that
-changes what the map means.** Most cities here are built from business
-licences - a record of who registered. Madrid is built from the Ayuntamiento's
-*Censo de locales*, which records the unit on the street and the sign above its
-door. That is the same shape as Montréal's commercial survey, and the density
-here is close to Montréal's for that reason. It is **not comparable** with the
-licence-register cities, where what is counted is a registration rather than a
-shopfront.
+**The lines**
 
-**About one storefront premises in eleven cannot be placed on this map.** The
-register gives every premises a coordinate, but 9.2% of the ones in these three
-categories carry a literal zero rather than a location. Those are left out
-rather than guessed at. The loss is not even across the city - it falls hardest
-on Barajas and the centre - but it falls hardest of all on tourist flats and
-hostels, which this map does not show anyway.
+- **The rail network comes from CRTM's own published layers, not from a transit feed.**
+- **Metro Ligero line 1 is drawn as well**, from the same CRTM layers. It runs from Pinar de
+  Chamartín to Las Tablas through Sanchinarro, districts the Metro does not reach; all nine of its
+  stations are inside the city, and two are shared with the Metro.
+- Metro Ligero's lines 2 and 3 are not drawn: each has only one or two stations inside Madrid
+  before running on into Pozuelo and Boadilla. Line 4 is Parla's own tram.
+- **Stations outside the city are not mapped.** Forty-nine of the 249 stations on the lines drawn
+  here lie in Alcorcón, Getafe, Arganda del Rey and fifteen other municipalities.
+- Lines 10 and 12 run well past the city and are drawn in full, but mapping their stations would
+  need each municipality's own business register. They are listed on the What is counted page.
 
-**The rail network comes from CRTM's own published layers, not from a transit
-feed.** A GTFS feed for the Metro exists and downloads cleanly, but CRTM
-stopped refreshing it in May 2025 while continuing to maintain the network
-layers this map is drawn from. Where Metro de Madrid publishes a figure, the
-two reconcile: its 303 stations are 293 station-and-line records plus Metro
-Ligero's line 1, which it also operates.
+**The businesses**
 
-**Metro Ligero line 1 is drawn as well**, from the same CRTM layers. It runs
-from Pinar de Chamartín to Las Tablas through Sanchinarro, districts the Metro
-does not reach, and all nine of its stations are inside the city; two of them
-are shared with the Metro. Metro Ligero's lines 2 and 3 are not drawn: each has
-only one or two stations inside Madrid before running on into Pozuelo and
-Boadilla. Line 4 is Parla's own tram.
+- **The businesses are a premises census, not a licence register, and that changes what the map
+  means.** Most cities here are built from business licences - a record of who registered.
+- Madrid is built from the Ayuntamiento's *Censo de locales*, which records the unit on the street
+  and the sign above its door: the same shape as Montréal's commercial survey, and the density here
+  is close to Montréal's for that reason.
+- It is **not comparable** with the licence-register cities, where what is counted is a
+  registration rather than a shopfront.
+- Retail, food service and personal services, as the register's own activity classification
+  defines them. Hotels and tourist flats are excluded - they are accommodation rather than food
+  service.
 
-**Stations outside the city are not mapped.** Forty-nine of the 249 stations on
-the lines drawn here lie in Alcorcón, Getafe, Arganda del Rey and fifteen other
-municipalities; lines 10 and 12 run well past the city and are drawn in full,
-but mapping their stations would need each municipality's own business
-register. They are listed in `outputs/madrid/excluded_stations.csv`.
+**Reading the map**
 
-**What is counted, and what is not.** Retail, food service and personal
-services, as the register's own activity classification defines them. Hotels
-and tourist flats are excluded - they are accommodation rather than food
-service. So are wholesale, vehicle repair, canteens in schools, care homes and
-offices, event caterers, funeral parlours, and premises with no shopfront such
-as online and vending sales.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **About one storefront premises in eleven cannot be placed on this map.** The register gives
+  every premises a coordinate, but 9.2% of the ones in these three categories carry a literal zero
+  rather than a location. Those are left out rather than guessed at.
 """
 )
 

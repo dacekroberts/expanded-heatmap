@@ -44,46 +44,36 @@ render_data_age('Milan')
 # printed, and none of them is the rate across the map.
 st.markdown(
     """
-The map covers the **Comune di Milano** and draws the five metro lines -
-**M1 (linea rossa)**, **M2 (linea verde)**, **M3 (linea gialla)**,
-**M4 (linea blu)** and **M5 (linea lilla)** - each labelled on the map and in
-the legend, in ATM's own colours. Milan's 17 tram routes are **not** drawn:
-they are a dense street-running network whose stops sit a block or two apart,
-which needs different treatment from a metro, and the agency publishes no
-colour for any of them. Twenty-one metro stations lie outside the comune - the
-ends of M1 at Rho and Sesto, M2 at Gessate and Cologno, M4 at Linate - and are
-listed in `outputs/milan/excluded_stations.csv`.
+**The lines**
 
-**The premises come from six separate registers, and they are not merged.**
-Milan licenses neighbourhood shops, bakers, artisan food makers, bars and
-restaurants (in and out of the commercial plan) and personal services each in
-its own register, and a premises appears in whichever one licenses what it
-does. Because a single Milan address routinely holds many separate premises,
-merging the registers on address would delete real businesses - so they are
-kept apart. Where one business holds two licences it is counted twice; that is
-the deliberate direction to err in, and it is why the counts read slightly
-high rather than slightly low.
+- The map covers the **Comune di Milano** and draws the five metro lines - **M1 (linea rossa)**,
+  **M2 (linea verde)**, **M3 (linea gialla)**, **M4 (linea blu)** and **M5 (linea lilla)** - each
+  labelled on the map and in the legend, in ATM's own colours.
+- Milan's 17 tram routes are **not** drawn: they are a dense street-running network whose stops
+  sit a block or two apart, which needs different treatment from a metro, and the agency publishes
+  no colour for any of them.
+- Twenty-one metro stations lie outside the comune - the ends of M1 at Rho and Sesto, M2 at
+  Gessate and Cologno, M4 at Linate - and are listed on the What is counted page.
 
-**About one pin in seven carries a shop sign; the rest carry an address.**
-Milan records an *insegna* - the sign over the door - on only some rows, and
-three of the six registers have no name field at all. Where a sign exists it is
-shown, and where it does not the address is. No register carries an owner's
-name, so nothing here can be a person.
+**The businesses**
 
-One limitation worth stating: the register of premises licensed **outside** the
-commercial plan includes staff canteens, private clubs and parish halls
-alongside ordinary bars. Those that identify themselves are filtered out, but
-the register does not mark them reliably, so some remain.
+- **The premises come from six separate registers, and they are not merged.** Milan licenses
+  neighbourhood shops, bakers, artisan food makers, bars and restaurants (in and out of the
+  commercial plan) and personal services each in its own register.
+- A single Milan address routinely holds many separate premises, so merging the registers on
+  address would delete real businesses. Where one business holds two licences it is counted twice;
+  that is the deliberate direction to err in, and it is why the counts read slightly high rather
+  than slightly low.
+- **About one pin in seven carries a shop sign; the rest carry an address.** Milan records an
+  *insegna* - the sign over the door - on only some rows, and three of the six registers have no
+  name field at all.
+- No register carries an owner's name, so nothing here can be a person.
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- The register of premises licensed **outside** the commercial plan includes staff canteens,
+  private clubs and parish halls alongside ordinary bars. Those that identify themselves are
+  filtered out, but the register does not mark them reliably, so some remain.
 """
 )
 

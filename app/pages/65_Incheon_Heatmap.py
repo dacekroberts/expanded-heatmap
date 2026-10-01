@@ -48,40 +48,37 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Written 2026-09-29 under the owner's pre-approval of this build's prose.
+# Written 2026-09-29 under the owner's pre-approval of this build's prose; set as
+# bullets 2026-10-01.
 st.markdown(
     """
-Five lines are drawn — **Incheon Lines 1 and 2**, **Line 1** (the Gyeongin Line), **Line 7**
-and the **Suin–Bundang Line** — each labelled on the map and in the legend, in the operators'
-colours. Routes and stations come from OpenStreetMap. Businesses are counted around stations
-inside Incheon only; Line 1, Line 7 and the Suin–Bundang Line are still drawn to their ends in
-Seoul and Gyeonggi. Not drawn: the AREX airport railway, whose stops are far apart, the
-suspended airport maglev and the Wolmi Sea Train, a tourist ride.
+**The lines**
 
-Businesses come from the **Small Enterprise and Market Service's commercial-district register**
-(소상공인시장진흥공단 상가(상권)정보), a national record of trading storefronts with a map
-position for every one: restaurants, cafés and bars; shops of every kind, from convenience
-stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care salons,
-laundries, bathhouses and massage. Left out, as on this project's other maps: offices and
-professional services, clinics, schools and academies, estate agents, lodging, gyms and
-entertainment, repairs, funeral services, staff canteens, hostess bars and household fuel
-dealers. The register is compiled nationally, and it is a different kind of record from the
-city licence data behind Seoul's, Daegu's and Busan's maps, which count only licensed trades: so
-**Incheon's Retail category is complete where those cities' is thin**, and density is not
-directly comparable between them.
+- Five lines are drawn, each labelled on the map and in the legend in the operators' colours:
+  **Incheon Lines 1 and 2**, **Line 1** (the Gyeongin Line), **Line 7** and the
+  **Suin–Bundang Line**.
+- Routes and stations come from OpenStreetMap.
+- Businesses are counted around stations inside Incheon only; Line 1, Line 7 and the
+  Suin–Bundang Line are still drawn to their ends in Seoul and Gyeonggi.
+- Not drawn: the AREX airport railway, whose stops are far apart, the suspended airport maglev
+  and the Wolmi Sea Train, a tourist ride.
 
-Each dot carries the storefront's name, in Korean, with its branch where it has one, and its
-kind in English. Where a registered name is a bare personal name at what reads as a home
-address, the name is withheld. The whole city is included, Ganghwa and Ongjin with it; they have
-no subway, so they add to the all-city layer and nothing to the rings.
+**The businesses**
 
-Concentric ring boundaries and the three business categories (Food service, Retail and Personal
-services) are toggleable via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming in will show individual
-dots; hover over those to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a statistical density
-estimate, so read the colour as "roughly where things cluster."
+- From the **Small Enterprise and Market Service's commercial-district register**
+  (소상공인시장진흥공단 상가(상권)정보), a national record of trading storefronts with a map
+  position for every one: restaurants, cafés and bars; shops of every kind, from convenience
+  stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care
+  salons, laundries, bathhouses and massage.
+- The register is compiled nationally, and it is a different kind of record from the city
+  licence data behind Seoul's, Daegu's and Busan's maps, which count only licensed trades: so
+  **Incheon's Retail category is complete where those cities' is thin**, and density is not
+  directly comparable between them.
+- Each dot carries the storefront's name, in Korean, with its branch where it has one, and its
+  kind in English. Where a registered name is a bare personal name at what reads as a home
+  address, the name is withheld.
+- The whole city is included, Ganghwa and Ongjin with it; they have no subway, so they add to
+  the all-city layer and nothing to the rings.
 """
 )
 

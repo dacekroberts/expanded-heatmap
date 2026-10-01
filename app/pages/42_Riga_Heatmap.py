@@ -58,39 +58,39 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-24.
+# Approved by the owner 2026-09-24; set as bullets 2026-10-01.
 st.markdown(
     """
-Seven tram lines are drawn — **Rīgas satiksme's trams 1, 5, 7, 8, 10, 11 and 14** — each labelled
-on the map and in the legend, redrawn from Rīgas satiksme's own timetable data. Rīgas satiksme
-draws every tram line in the same red, so the colours here are this project's. Trams stop every
-400 metres or so, so on each line only about one stop per half mile is drawn as a station;
-interchanges and each line's ends are always drawn. Buses, trolleybuses and suburban trains are
-not drawn: the suburban lines run every 15 to 30 minutes at best. The map covers the city of Riga,
-all 58 neighbourhoods.
+**The trams**
 
-Businesses come from two sources, which is why this map has two categories rather than three.
-**Food service** is from the State Revenue Service's register of premises licensed to sell alcohol
-or tobacco — cafés, bars, restaurants and canteens — placed by address; a café that sells neither
-is not in it, so read this layer as a lower bound. These dots show the kind of place and its
-street address, never the licence holder. **Shops and services** is from the national cadastre:
-every premises registered for trade whose name reads as a shop or a service, placed at its
-building. The cadastre records what a premises is for, not who is in it, so a hairdresser and a
-clothes shop are one category. Premises in buildings the city lists as degrading are left off.
+- Seven tram lines are drawn, **Rīgas satiksme's trams 1, 5, 7, 8, 10, 11 and 14**, each labelled
+  on the map and in the legend, redrawn from Rīgas satiksme's own timetable data.
+- Rīgas satiksme draws every tram line in the same red, so the colours here are this project's.
+- Trams stop every 400 metres or so, so on each line only about one stop per half mile is drawn
+  as a station; interchanges and each line's ends are always drawn.
+- Buses, trolleybuses and suburban trains are not drawn: the suburban lines run every 15 to 30
+  minutes at best.
+- The map covers the city of Riga, all 58 neighbourhoods.
 
-**Read the shops layer as an upper bound.** The cadastre does not record whether a premises is in
-use, and there is no citywide vacancy figure. The city's survey of street-front ground-floor
-premises in the historic centre and its protection zone (August–November 2024) counted 20.4% of
-2,324 vacant; its own headline for the same survey is that 73% are occupied. A 2025 count of the
-Old Town alone found 15% (87 of 573). Vacancy has not been measured anywhere else in the city.
+**The businesses**
 
-Concentric ring boundaries and the two business categories (Shops and services, and Food service)
-are toggleable via the layer control in the top left. When enabled, business density will display
-as numbered circles summing areas when zoomed out. Zooming in will show individual dots; hover
-over those to see further details.
+- Businesses come from two sources, which is why this map has two categories rather than three.
+- **Food service** is from the State Revenue Service's register of premises licensed to sell
+  alcohol or tobacco — cafés, bars, restaurants and canteens — placed by address; a café that
+  sells neither is not in it, so read this layer as a lower bound. These dots show the kind of
+  place and its street address, never the licence holder.
+- **Shops and services** is from the national cadastre: every premises registered for trade whose
+  name reads as a shop or a service, placed at its building. The cadastre records what a premises
+  is for, not who is in it, so a hairdresser and a clothes shop are one category.
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a statistical density
-estimate, so read the colour as "roughly where things cluster."
+**Reading the map**
+
+- **Read the shops layer as an upper bound.** The cadastre does not record whether a premises is
+  in use, and there is no citywide vacancy figure.
+- The city's survey of street-front ground-floor premises in the historic centre and its
+  protection zone (August–November 2024) counted 20.4% of 2,324 vacant; its own headline for the
+  same survey is that 73% are occupied. A 2025 count of the Old Town alone found 15% (87 of 573).
+- Vacancy has not been measured anywhere else in the city.
 """
 )
 

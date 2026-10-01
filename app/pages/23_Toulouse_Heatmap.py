@@ -74,56 +74,45 @@ st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
 
 st.markdown(
     """
-Four Tisséo lines are drawn — **Métro A and B, Tramway T1, and Téléo** — each
-labelled on the map and in the legend, redrawn from the operator's own
-published geometry.
+**The network**
 
-**Téléo is a cable car**, and it is the first thing on this site that is not a
-train. It is drawn because Tisséo runs and tickets it exactly as it does the
-métro, because it crosses the Garonne where no other line does, and because one
-of its three stations is a Métro B interchange. It is an ordinary part of this
-network rather than a curiosity attached to it.
+- Four Tisséo lines are drawn — **Métro A and B, Tramway T1, and Téléo** — each labelled on the
+  map and in the legend, redrawn from the operator's own published geometry.
+- **Téléo is a cable car**, and it is the first thing on this site that is not a train. It is
+  drawn because Tisséo runs and tickets it exactly as it does the métro, because it crosses the
+  Garonne where no other line does, and because one of its three stations is a Métro B
+  interchange. It is an ordinary part of this network rather than a curiosity attached to it.
+- The map covers the **commune of Toulouse**, and here that costs something real. Métro A loses
+  one station and Métro B one; **Tramway T1 loses twelve of its twenty-five** — the whole branch
+  out through Blagnac and Beauzelle, the Airbus works and the exhibition centre with it. All
+  fourteen are listed on the What is counted page.
+- Blagnac's businesses are in the same national register this map reads, so leaving them out is a
+  choice rather than a limit of the data: the map keeps to the commune so that Toulouse can be
+  read alongside Paris and Marseille on the same terms.
 
-The map covers the **commune of Toulouse**, and here that costs something real.
-Métro A loses one station and Métro B one; **Tramway T1 loses twelve of its
-twenty-five** — the whole branch out through Blagnac and Beauzelle, the Airbus
-works and the exhibition centre with it. All fourteen are listed in
-`outputs/toulouse/excluded_stations.csv`. Blagnac's businesses are in the
-same national register this map reads, so leaving them out is a choice rather
-than a limit of the data: the map keeps to the commune so that Toulouse can be
-read alongside Paris and Marseille on the same terms.
+**The businesses**
 
-Businesses come from **SIRENE**, France's national register of établissements,
-joined to INSEE's separate geolocation file — the same two sources Paris and
-Marseille use. **Toulouse withholds more than either of them.** INSEE marks
-roughly one active establishment in five here as non-diffusible and strips the
-name, the address and the coordinates together, so those never reach this map
-at all. Where a street looks thin, it may be a quiet street or it may be a
-private one, and nothing in the data distinguishes them. **Where SIRENE records
-no shop sign or trading name, the dot shows the establishment's address
-instead** — about half the dots on this map.
+- Businesses come from **SIRENE**, France's national register of établissements, joined to
+  INSEE's separate geolocation file — the same two sources Paris and Marseille use.
+- **Toulouse withholds more than either of them.** INSEE marks roughly one active establishment in
+  five here as non-diffusible and strips the name, the address and the coordinates together, so
+  those never reach this map at all.
+- Where a street looks thin, it may be a quiet street or it may be a private one, and nothing in
+  the data distinguishes them.
+- **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
+  instead** — about half the dots on this map.
 
-**Read the density as a register, not a street survey.** SIRENE records where a
-business is *registered*, and some registered establishments have no
-customer-facing shopfront — nothing in the data says which. Against
-OpenStreetMap's mapped restaurants in the same commune, where the two schemes
-mean nearly the same thing, this map carries about **1.3 times** as many
-points. That is the closest of the three French cities: Paris runs 1.8× and
-Marseille 1.7×, and part of the difference here is simply the masking above.
+**Reading the density**
 
-**About two storefronts in three sit within a station ring.** The category
-toggles show every storefront; the rings show the share the four lines actually
-reach.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** SIRENE records where a business is
+  *registered*, and some registered establishments have no customer-facing shopfront — nothing in
+  the data says which.
+- Against OpenStreetMap's mapped restaurants in the same commune, where the two schemes mean
+  nearly the same thing, this map carries about **1.3 times** as many points. That is the closest
+  of the three French cities: Paris runs 1.8× and Marseille 1.7×, and part of the difference here
+  is simply the masking above.
+- **About two storefronts in three sit within a station ring.** The category toggles show every
+  storefront; the rings show the share the four lines actually reach.
 """
 )
 

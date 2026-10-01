@@ -50,47 +50,41 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Written under the owner's pre-approval of this build's prose (2026-09-30).
+# Written under the owner's pre-approval of this build's prose (2026-09-30);
+# set as bullets 2026-10-01.
 st.markdown(
     """
-One line is drawn: **Metro M1** of the Metro de Palma, run by Serveis
-Ferroviaris de Mallorca, from Plaça d'Espanya (the Estació Intermodal) to the
-university and ParcBit, redrawn from OpenStreetMap with all 10 of its
-stations, every one inside the municipality. Much of it runs in tunnel.
-**It is not a frequent service**: a train about every 20 minutes on weekdays
-in term time and every 30 to 40 minutes in the holidays, Saturdays until
-mid-afternoon, and none on Sundays. A second metro line to Marratxí no longer
-runs as a metro; SFM's trains to Inca and beyond, and buses, are not drawn.
+**The line**
 
-**This map shows food businesses only.** They come from the Consell de
-Mallorca's register of restaurant and entertainment establishments: bars,
-cafés, restaurants, music bars and nightclubs. No open register of other
-shops or of personal services covers Palma, so clothes shops, hairdressers
-and the like are not on this map. A premises is shown when the register lists
-it as active. Caterers without premises of their own are left out, and so,
-by name, are sports, golf and sailing clubs, cinemas and bingo halls, parish
-and clinic bars, and hotels (a hotel's own named café or restaurant stays). A
-name rule is imperfect.
+- One line is drawn: **Metro M1** of the Metro de Palma, run by Serveis Ferroviaris de Mallorca,
+  from Plaça d'Espanya (the Estació Intermodal) to the university and ParcBit, redrawn from
+  OpenStreetMap with all 10 of its stations, every one inside the municipality. Much of it runs in
+  tunnel.
+- **It is not a frequent service**: a train about every 20 minutes on weekdays in term time and
+  every 30 to 40 minutes in the holidays, Saturdays until mid-afternoon, and none on Sundays.
+- A second metro line to Marratxí no longer runs as a metro; SFM's trains to Inca and beyond, and
+  buses, are not drawn.
 
-**About one premises in five could not be placed.** The register gives
-coordinates for about one in eight; the rest are placed at their address,
-matched street and number to the Spanish land registry's address points, or
-at the nearest listed number on the same side of the street. Addresses with
-no street number, and streets the two sources spell differently, are left
-off the map.
+**The businesses**
 
-**About a third of the placed premises sit within a station ring.** The Metro
-runs north from the centre; the old town, the seafront and the beaches of
-Playa de Palma are beyond its reach.
+- **This map shows food businesses only.** They come from the Consell de Mallorca's register of
+  restaurant and entertainment establishments: bars, cafés, restaurants, music bars and nightclubs.
+- No open register of other shops or of personal services covers Palma, so clothes shops,
+  hairdressers and the like are not on this map.
+- A premises is shown when the register lists it as active.
+- Caterers without premises of their own are left out, and so, by name, are sports, golf and
+  sailing clubs, cinemas and bingo halls, parish and clinic bars, and hotels (a hotel's own named
+  café or restaurant stays). A name rule is imperfect.
 
-Concentric ring boundaries and the business layer are toggleable via the
-layer control in the top left. When enabled, business density will display as
-numbered circles summing areas when zoomed out. Zooming in will show
-individual dots; hover over those to see further details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **About one premises in five could not be placed.** The register gives coordinates for about one
+  in eight; the rest are placed at their address, matched street and number to the Spanish land
+  registry's address points, or at the nearest listed number on the same side of the street.
+- Addresses with no street number, and streets the two sources spell differently, are left off
+  the map.
+- **About a third of the placed premises sit within a station ring.** The Metro runs north from
+  the centre; the old town, the seafront and the beaches of Playa de Palma are beyond its reach.
 """
 )
 

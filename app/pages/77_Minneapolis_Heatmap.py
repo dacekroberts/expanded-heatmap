@@ -49,46 +49,36 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-# Written under the owner's pre-approval of this build's prose (2026-09-29).
+# Written under the owner's pre-approval of this build's prose (2026-09-29); set as
+# bullets 2026-10-01.
 st.markdown(
     """
-Two lines are drawn: Metro Transit's **METRO Blue Line** (Target Field to the
-Mall of America, by way of the airport) and **METRO Green Line** (Target Field
-to St. Paul's Union Depot), redrawn from OpenStreetMap. Rings are drawn only
-around the stations inside the City of Minneapolis, because the business data
-stops at the city line. The Green Line's stations in St. Paul and the Blue
-Line's at Fort Snelling, the airport and Bloomington are left out, and each is
-listed with its municipality in `outputs/minneapolis/excluded_stations.csv`.
-Buses and the Northstar commuter line are not drawn.
+**The lines**
 
-**This map shows food businesses only.** They come from the City of
-Minneapolis's food inspection data, which lists every facility the City
-licenses and inspects for food. The map has two layers: **food service**
-(restaurants, cafés, bars) and **food shops** (grocers, convenience stores,
-butchers, and the one liquor store the data lists). No open register of
-other shops or of personal services covers the city, so clothes shops,
-hairdressers and the like are not on this map.
+- Two lines are drawn: Metro Transit's **METRO Blue Line** (Target Field to the Mall of America, by
+  way of the airport) and **METRO Green Line** (Target Field to St. Paul's Union Depot), redrawn
+  from OpenStreetMap.
+- Rings are drawn only around the stations inside the City of Minneapolis, because the business
+  data stops at the city line.
+- The Green Line's stations in St. Paul and the Blue Line's at Fort Snelling, the airport and
+  Bloomington are left out, and each is listed with its municipality on the What is counted page.
+- Buses and the Northstar commuter line are not drawn.
 
-A facility is shown when the City inspected it in the two years before the
-data was fetched; the data records no closings, so an inspection is the only
-sign that a place still trades. Caterers without a shop, food trucks and
-carts, market stalls, food shelves, and schools, childcare and care homes are
-left out, as the data classes them. The data files some other kitchens with
-the restaurants and shops, so these are left out by name: contract caterers'
-workplace cafés, hospital and campus dining, church kitchens, vending routes,
-hotels, pharmacies, and the concession stands of theatres, arenas and clubs.
-A name rule is imperfect, and a few such kitchens may remain. A grocer
-licensed twice for one counter, once as a grocery and once as a meat market,
-is shown once. Inspection results are not shown.
+**The businesses**
 
-Concentric ring boundaries and the business layers are toggleable via the
-layer control in the top left. When enabled, business density will display as
-numbered circles summing areas when zoomed out. Zooming in will show
-individual dots; hover over those to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **This map shows food businesses only.** They come from the City of Minneapolis's food inspection
+  data, which lists every facility the City licenses and inspects for food.
+- The map has two layers: **food service** (restaurants, cafés, bars) and **food shops** (grocers,
+  convenience stores, butchers, and the one liquor store the data lists).
+- No open register of other shops or of personal services covers the city, so clothes shops,
+  hairdressers and the like are not on this map.
+- A facility is shown when the City inspected it in the two years before the data was fetched; the
+  data records no closings, so an inspection is the only sign that a place still trades.
+- The data files some other kitchens with the restaurants and shops, so these are left out by name.
+  A name rule is imperfect, and a few such kitchens may remain.
+- A grocer licensed twice for one counter, once as a grocery and once as a meat market, is shown
+  once.
+- Inspection results are not shown.
 """
 )
 

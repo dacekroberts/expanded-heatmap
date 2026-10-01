@@ -40,30 +40,20 @@ render_data_age('Los Angeles')
 
 st.markdown(
     """
-Stations are represented by blue dots along LA Metro Rail (the A, B, C, D, E
-and K Lines - each labeled directly on the map and in the legend, in Metro's
-own line colors). Only stations inside the City of Los Angeles are shown:
-the lines also serve Long Beach, Pasadena, Santa Monica and many other
-cities, whose businesses come from separate city registries. The stations
-left out are listed in `outputs/los_angeles/excluded_stations.csv`.
-Concentric ring boundaries and NAICS-coded storefronts are toggleable via
-the layer control in the top left. When enabled, business density will
-display as numbered circles summing areas when zoomed out. Zooming in will
-show individual dots; hover over those to see further details.
+**The lines**
 
-Top right: a **Cities** menu and a **Global View** button for moving between
-maps, and a light/dark switch. The map opens in whichever mode the page is
-using; once you pick one, it carries across the other city maps.
+- Stations are represented by blue dots along LA Metro Rail: the A, B, C, D, E and K Lines, each
+  labeled directly on the map and in the legend, in Metro's own line colors.
+- Only stations inside the City of Los Angeles are shown. The lines also serve Long Beach, Pasadena,
+  Santa Monica and many other cities, whose businesses come from separate city registries.
+- The stations left out are listed on the What is counted page.
 
-Some businesses in the city's registry carry corrupt coordinates, mostly
-recent registrations; these were placed by geocoding their street address
-instead of being dropped. Where a business is registered under a person's
-name alone, with no trade name, or a person's name sits at an apartment or
-other dwelling unit, its dot shows the street address instead.
+**The businesses**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- Some businesses in the city's registry carry corrupt coordinates, mostly recent registrations;
+  these were placed by geocoding their street address instead of being dropped.
+- Where a business is registered under a person's name alone, with no trade name, or a person's
+  name sits at an apartment or other dwelling unit, its dot shows the street address instead.
 """
 )
 

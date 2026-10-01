@@ -74,48 +74,40 @@ if _ENTUR_LOGO.exists():
         '<a href="https://data.norge.no/nlod/en/2.0">NLOD</a>.</span></div>',
         unsafe_allow_html=True)
 
-# Approved by the owner 2026-09-29 (Oslo's text, with Bergen's network).
+# Approved by the owner 2026-09-29 (Oslo's text, with Bergen's network); set as
+# bullets 2026-10-01.
 st.markdown(
     """
-Both lines of **Bybanen**, Bergen's light rail, are drawn — **Bybanen 1**
-(Byparken – Bergen Airport Flesland) and **Bybanen 2** (Kaigaten –
-Fyllingsdalen) — each labelled on the map and in the legend, redrawn from
-Skyss's published route geometry. Neither Skyss's data nor OpenStreetMap gives
-the two lines different colours, so line 1 is shown in the colour
-OpenStreetMap records for Bybanen and line 2 in a colour chosen for this map.
-Ferries are not drawn.
+**The lines**
 
-The map covers the **municipality of Bergen**, which holds every Bybanen stop,
-the airport included. Byparken and Kaigaten, the two lines' city-centre
-termini a block apart, are shown as two stops.
+- Both lines of **Bybanen**, Bergen's light rail, are drawn, **Bybanen 1** (Byparken – Bergen
+  Airport Flesland) and **Bybanen 2** (Kaigaten – Fyllingsdalen), each labelled on the map and in
+  the legend, redrawn from Skyss's published route geometry.
+- Neither Skyss's data nor OpenStreetMap gives the two lines different colours, so line 1 is shown
+  in the colour OpenStreetMap records for Bybanen and line 2 in a colour chosen for this map.
+- Ferries are not drawn.
+- The map covers the **municipality of Bergen**, which holds every Bybanen stop, the airport
+  included.
+- Byparken and Kaigaten, the two lines' city-centre termini a block apart, are shown as two stops.
 
-Businesses come from Norway's **Central Coordinating Register for Legal
-Entities** (Enhetsregisteret), kept by the Brønnøysund Register Centre, and
-specifically from its register of business premises, each recorded at the
-address where it operates rather than where its company is registered. Each
-premises is placed using Kartverket's official address register. **Where a
-business belongs to a sole trader, the map shows its address instead of its
-name**, because a sole trader's business is usually registered under the
-owner's own name.
+**The businesses**
 
-**Read the density as a register, not a street survey.** Some premises are
-newly registered and may not have opened yet, and Norway's classification files
-a web shop under the goods it sells, so some dots are businesses with no shop a
-passer-by could walk into; nothing in the data says which.
+- Businesses come from Norway's **Central Coordinating Register for Legal Entities**
+  (Enhetsregisteret), kept by the Brønnøysund Register Centre, and specifically from its register
+  of business premises, each recorded at the address where it operates rather than where its
+  company is registered.
+- Each premises is placed using Kartverket's official address register.
+- **Where a business belongs to a sole trader, the map shows its address instead of its name**,
+  because a sole trader's business is usually registered under the owner's own name.
+- **About three storefronts in five sit within a station ring.** Bybanen runs south from the
+  centre, and the municipality reaches north to Åsane, where there is no light rail.
 
-**About three storefronts in five sit within a station ring.** Bybanen runs
-south from the centre, and the municipality reaches north to Åsane, where
-there is no light rail.
+**Reading the density**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** Some premises are newly registered and
+  may not have opened yet.
+- Norway's classification files a web shop under the goods it sells, so some dots are businesses
+  with no shop a passer-by could walk into; nothing in the data says which.
 """
 )
 

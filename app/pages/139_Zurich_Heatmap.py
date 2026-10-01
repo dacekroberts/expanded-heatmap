@@ -61,72 +61,59 @@ if PROVENANCE_JSON.exists():
         pass
 
 # The tram-city skill's page-text template, approved by the owner word for
-# word on 2026-09-30, filled from Zurich's own step 1 and step 2 figures; the
-# business paragraphs follow Stockholm's, the template city for one city
-# register, and Seoul's for a partial retail layer. Sentences the template
-# does not cover are flagged in the build's DECISIONS draft: the colour
-# clause, the not-drawn trams 12, 20 and the Forchbahn, the 2026 construction
-# lines 50 and 51, and the person-name rule. No frequency sentence: no
-# operator timetable was read for it.
+# word on 2026-09-30, filled from Zurich's own step 1 and step 2 figures; set
+# as bullets 2026-10-01. The business paragraphs follow Stockholm's, the
+# template city for one city register, and Seoul's for a partial retail layer.
+# Sentences the template does not cover are flagged in the build's DECISIONS
+# draft: the colour clause, the not-drawn trams 12, 20 and the Forchbahn, the
+# 2026 construction lines 50 and 51, and the person-name rule. No frequency
+# sentence: no operator timetable was read for it.
 st.markdown(
     """
-Sixteen VBZ tram lines are drawn, **trams 2 to 11, 13, 14, 15, 17, 50 and 51**,
-each labelled on the map and in the legend, redrawn from OpenStreetMap's route
-geometry, in VBZ's colours as OpenStreetMap records them, except where two
-lines share one: trams 9, 11, 15, 50 and 51 take a shade of their own, and tram
-10's magenta is darkened so it stays distinct from the Food service dots.
-Zurich has no metro: its trams are its rapid transit, as Riga's are, so every
-tram stop gets rings. Trams 50 and 51 run only while the Bahnhofquai stop is
-rebuilt, until December 2026; they take over the northern ends of trams 4, 11,
-13 and 14, which run shortened until then. Buses, the S-Bahn and the Forchbahn
-(S18) are not drawn: the Forchbahn is a suburban railway, and its four stops in
-the city are all tram stops too. Trams 12 and 20, the Glattalbahn's airport line
-and the Limmattalbahn, run almost entirely outside the city and are not drawn,
-so two of tram 20's stops in the city, Bahnhof Altstetten and Seidelhof, are on
-no drawn line and get no ring.
+**The trams**
 
-The map covers the **Stadt Zürich**, the city itself. Trams 2, 4, 10 and 50 run
-on into Schlieren, Zollikon, Opfikon, Kloten and Rümlang, so their 15 stops
-there are left out. The lines are still drawn to their ends, but those stops
-get no ring and their businesses are not counted. They are listed in
-`outputs/zurich/excluded_stations.csv`.
+- Sixteen VBZ tram lines are drawn, **trams 2 to 11, 13, 14, 15, 17, 50 and 51**, each labelled on
+  the map and in the legend, redrawn from OpenStreetMap's route geometry.
+- They are in VBZ's colours as OpenStreetMap records them, except where two lines share one: trams
+  9, 11, 15, 50 and 51 take a shade of their own, and tram 10's magenta is darkened so it stays
+  distinct from the Food service dots.
+- Zurich has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+  rings.
+- **Tram stops sit closer together than metro stations**, a median of 282 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
+- Trams 50 and 51 run only while the Bahnhofquai stop is rebuilt, until December 2026.
+- Buses, the S-Bahn and the Forchbahn (S18) are not drawn: the Forchbahn is a suburban railway,
+  and its four stops in the city are all tram stops too.
+- Trams 12 and 20, the Glattalbahn's airport line and the Limmattalbahn, run almost entirely
+  outside the city and are not drawn, so two of tram 20's stops in the city, Bahnhof Altstetten
+  and Seidelhof, are on no drawn line and get no ring.
+- The map covers the **Stadt Zürich**, the city itself. Trams 2, 4, 10 and 50 run on into
+  Schlieren, Zollikon, Opfikon, Kloten and Rümlang, so their 15 stops there are left out.
+- The lines are still drawn to their ends, but those stops get no ring and their businesses are
+  not counted. They are listed on the What is counted page.
 
-Businesses come from the **Stadt Zürich's register of licensed food and drink
-premises** (Gastwirtschaftsbetriebe), kept by the city police's licensing
-office: restaurants, cafés, bars, clubs and takeaways, and the shops, kiosks
-and petrol stations licensed to sell alcohol. The register lists open premises
-only. Each is placed at the point the register records for it, and each dot
-shows the trade name and the kind of licence; where a trade name is a person's
-own name, the dot shows the street address instead. Canteens, cabarets, event
-rooms, food stands and caterers are left out.
+**The businesses**
 
-**This map has two categories, not three.** Its shops are only those licensed
-to sell alcohol: supermarkets, wine shops, kiosks and petrol-station shops,
-among others. A clothes shop, a bookshop or a bakery that sells no alcohol
-needs no such licence and is absent, so read the Licensed shops layer as a
-slice of the city's retail, not all of it. The register holds no hairdressers,
-beauty salons or other personal services.
+- Businesses come from the **Stadt Zürich's register of licensed food and drink premises**
+  (Gastwirtschaftsbetriebe): restaurants, cafés, bars, clubs and takeaways, and the shops, kiosks
+  and petrol stations licensed to sell alcohol. The register lists open premises only.
+- Each is placed at the point the register records for it, and each dot shows the trade name and
+  the kind of licence; where a trade name is a person's own name, the dot shows the street address
+  instead.
+- **This map has two categories, not three.** Its shops are only those licensed to sell alcohol:
+  supermarkets, wine shops, kiosks and petrol-station shops, among others.
+- A clothes shop, a bookshop or a bakery that sells no alcohol needs no such licence and is
+  absent, so read the Licensed shops layer as a slice of the city's retail, not all of it.
+- The register holds no hairdressers, beauty salons or other personal services.
 
-**Read the density as a register, not a street survey.** Some restaurant
-licences belong to kitchens that are not open to the public, in care homes,
-staff restaurants, hospitals and clubhouses; about one food licence in thirty
-is of this kind, and they remain. Likewise, a few shop licences belong to
-offices and online sellers with no shop. Several premises often share one
-address, and each is counted.
+**Reading the density**
 
-**Tram stops sit closer together than metro stations**, a median of 282 m
-here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
-nine storefronts in ten sit within a ring.**
-
-Concentric ring boundaries and the two business categories (Licensed shops and
-Food service) are toggleable via the layer control in the top left. When
-enabled, business density will display as numbered circles summing areas when
-zoomed out. Zooming in will show individual dots; hover over those to see
-further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** Some restaurant licences belong to
+  kitchens that are not open to the public, in care homes, staff restaurants, hospitals and
+  clubhouses; about one food licence in thirty is of this kind, and they remain.
+- Likewise, a few shop licences belong to offices and online sellers with no shop.
+- Several premises often share one address, and each is counted.
+- **About nine storefronts in ten sit within a ring.**
 """
 )
 

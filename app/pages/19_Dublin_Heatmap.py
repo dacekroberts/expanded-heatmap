@@ -40,43 +40,38 @@ render_data_age('Dublin')
 
 st.markdown(
     """
-The map covers **four local authorities** - Dublin City, Fingal, South Dublin
-and Dun Laoghaire-Rathdown - rather than the city alone, because the Luas and
-the DART run through all four. Three lines are drawn: the **Luas Red Line**,
-the **Luas Green Line** and the **DART**, each labelled on the map and in the
-legend. Commuter and InterCity services are not: Iarnrod Eireann runs them over
-the same tracks, but they are not urban rail, and they are left out here as
-commuter rail is on most maps on this site. Two DART stations, Bray
-Daly and Greystones, lie in County Wicklow outside all four authorities - they
-and the reason are listed in `outputs/dublin/excluded_stations.csv`.
+**The lines**
 
-**Large parts of this map have no rail near them, and showing that is
-deliberate.** Much of Fingal and South Dublin lies beyond every drawn line:
-Swords, Fingal's largest town, has no rail station of any kind, and Clondalkin
-and Lucan are reached only by commuter services this map does not draw. Read
-the empty stretches as a fact about where Dublin built rail, not about where
-Dublin has shops.
+- Three lines are drawn: the **Luas Red Line**, the **Luas Green Line** and the **DART**, each
+  labelled on the map and in the legend.
+- Commuter and InterCity services are not: Iarnrod Eireann runs them over the same tracks, but
+  they are not urban rail, and they are left out here as commuter rail is on most maps on this
+  site.
+- The map covers **four local authorities** - Dublin City, Fingal, South Dublin and Dun
+  Laoghaire-Rathdown - rather than the city alone, because the Luas and the DART run through all
+  four.
+- Two DART stations, Bray Daly and Greystones, lie in County Wicklow outside all four authorities -
+  they and the reason are listed on the What is counted page.
 
-**The pins carry addresses, not business names.** Ireland's rateable valuation
-register, published by Tailte Eireann, records *premises* rather than
-occupiers - it has no trade-name column, no occupier column and no owner
-column. Each pin therefore shows the address a valuation is filed against, and
-the use recorded against it. That is the whole of what the source knows, and it
-is why this map names no businesses.
+**The businesses**
 
-Categories are the register's own recorded uses, grouped into three. A premises
-can carry more than one use - a shop with offices above it, a salon behind a
-shopfront - in which case the more specific trading use is the one shown.
+- **The pins carry addresses, not business names.** Ireland's rateable valuation register,
+  published by Tailte Eireann, records *premises* rather than occupiers - it has no trade-name
+  column, no occupier column and no owner column.
+- Each pin therefore shows the address a valuation is filed against, and the use recorded against
+  it. That is the whole of what the source knows, and it is why this map names no businesses.
+- Categories are the register's own recorded uses, grouped into three. A premises can carry more
+  than one use - a shop with offices above it, a salon behind a shopfront - in which case the more
+  specific trading use is the one shown.
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
+**Reading the map**
 
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Large parts of this map have no rail near them, and showing that is deliberate.** Much of
+  Fingal and South Dublin lies beyond every drawn line.
+- Swords, Fingal's largest town, has no rail station of any kind, and Clondalkin and Lucan are
+  reached only by commuter services this map does not draw.
+- Read the empty stretches as a fact about where Dublin built rail, not about where Dublin has
+  shops.
 """
 )
 

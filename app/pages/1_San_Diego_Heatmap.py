@@ -42,21 +42,10 @@ render_data_age('San Diego')
 
 st.markdown(
     """
-Stations are represented by blue dots along the MTS Trolley's five lines
-(Blue, Orange, Green, Copper, Silver - each labeled directly on the map).
-Concentric ring boundaries and NAICS-geocoded storefronts are toggleable
-via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming
-in will show individual dots; hover over those to see further details.
+**The lines**
 
-Top right: a **Cities** menu and a **Global View** button for moving
-between maps, and a light/dark switch. The map opens in whichever mode
-the page is using; once you pick one, it carries across the other city
-maps.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than
-a statistical density estimate, so read the colour as "roughly where
-things cluster."
+- Stations are represented by blue dots along the MTS Trolley's five lines: Blue, Orange, Green,
+  Copper and Silver, each labeled directly on the map.
 """
 )
 

@@ -39,42 +39,31 @@ else:
 render_data_age('San Francisco')
 
 # The F Market & Wharves added 2026-09-27 (the tram rescope), wording approved
-# by the owner.
+# by the owner; set as bullets 2026-10-01.
 st.markdown(
     """
-Stations are represented by blue dots along seven lines: Muni Metro's six (J
-Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street) and the
-F Market & Wharves streetcar, each labeled directly on the map and in the
-legend. Every underground
-subway station is shown; the street-running stretches of each line are
-thinned to roughly one station per half mile (plus each line's terminals
-and any transfer points) so the rings stay readable - the excluded
-stations are documented in `outputs/san_francisco/excluded_stations.csv`.
+**The lines**
 
-**BART and Caltrain are not on this map.** Both are regional rail crossing
-county lines, and commuter rail is left out here as on most maps on this site.
-Where BART and Muni Metro share a station, the station is here as the Muni one
-it also is — Embarcadero, Montgomery, Powell and Civic Center are all mapped,
-as are the Balboa Park and Glen Park interchanges. The cable cars are out, as a
-different mode. The F Market & Wharves streetcar is drawn, because it runs along
-the Embarcadero to Fisherman's Wharf, which no Muni Metro line reaches. Where it
-stops directly above a Muni Metro station, the two count as one station.
+- Stations are represented by blue dots along seven lines: Muni Metro's six (J Church, K Ingleside,
+  L Taraval, M Ocean View, N Judah, T Third Street) and the F Market & Wharves streetcar, each
+  labeled directly on the map and in the legend.
+- Every underground subway station is shown. The street-running stretches of each line are thinned
+  to roughly one station per half mile (plus each line's terminals and any transfer points) so the
+  rings stay readable; the excluded stations are listed on the What is counted page.
+- **BART and Caltrain are not on this map.** Both are regional rail crossing county lines, and
+  commuter rail is left out here as on most maps on this site.
+- Where BART and Muni Metro share a station, the station is here as the Muni one it also is:
+  Embarcadero, Montgomery, Powell and Civic Center are all mapped, as are the Balboa Park and Glen
+  Park interchanges.
+- The cable cars are out, as a different mode.
+- The F Market & Wharves streetcar is drawn, because it runs along the Embarcadero to Fisherman's
+  Wharf, which no Muni Metro line reaches. Where it stops directly above a Muni Metro station, the
+  two count as one station.
 
-Concentric ring boundaries and NAICS-geocoded storefronts are toggleable
-via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming
-in will show individual dots; hover over those to see further details.
-Where a business is registered under a person's name alone at an apartment
-or other dwelling unit, its dot shows the street address instead.
+**The businesses**
 
-Top right: a **Cities** menu and a **Global View** button for moving
-between maps, and a light/dark switch. The map opens in whichever mode
-the page is using; once you pick one, it carries across the other city
-maps.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than
-a statistical density estimate, so read the colour as "roughly where
-things cluster."
+- Where a business is registered under a person's name alone at an apartment or other dwelling
+  unit, its dot shows the street address instead.
 """
 )
 

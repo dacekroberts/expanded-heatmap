@@ -60,49 +60,42 @@ if PROVENANCE_JSON.exists():
 # A courtesy credit, not a licence condition: CC0 asks for none (owner, 2026-09-28).
 st.caption("Business data: IHK Berlin (CC0).")
 
-# Approved by the owner 2026-09-28.
+# Approved by the owner 2026-09-28; set as bullets 2026-10-01.
 st.markdown(
     """
-Twenty-five lines are drawn — **U-Bahn U1 to U9** and the **S-Bahn's sixteen
-lines**, the Ring (S41 and S42) among them — each labelled on the map and in the
-legend, redrawn from the Berlin-Brandenburg transport association's (VBB) own
-timetable geometry. The colours are close to the operators' but not the same:
-several S-Bahn lines share one colour on the official map, and each line here
-needs its own. **The U6 north of Kurt-Schumacher-Platz is closed for
-rebuilding** until about August 2027, so its five stations to Alt-Tegel are not
-drawn. Trams, regional trains and ferries are not drawn.
+**The lines**
 
-The map covers the **Land of Berlin**. The S-Bahn runs on into Brandenburg; its
-36 stations there are left out, since the business data stops at the city
-boundary.
+- Twenty-five lines are drawn — **U-Bahn U1 to U9** and the **S-Bahn's sixteen lines**, the Ring
+  (S41 and S42) among them — each labelled on the map and in the legend, redrawn from the
+  Berlin-Brandenburg transport association's (VBB) own timetable geometry.
+- The colours are close to the operators' but not the same: several S-Bahn lines share one colour
+  on the official map, and each line here needs its own.
+- **The U6 north of Kurt-Schumacher-Platz is closed for rebuilding** until about August 2027, so
+  its five stations to Alt-Tegel are not drawn.
+- Trams, regional trains and ferries are not drawn.
+- The map covers the **Land of Berlin**. The S-Bahn runs on into Brandenburg; its 36 stations
+  there are left out, since the business data stops at the city boundary.
 
-Businesses come from the **Berlin Chamber of Industry and Commerce (IHK
-Berlin)**, which publishes its members' business premises as points, each with
-its economic activity. It publishes no names, so each dot is labelled with its
-kind of business. **Craft businesses belong to a different chamber and are not
-in it**: hairdressers, laundries and dry cleaners are almost entirely missing,
-and bakers and butchers are thin, so Personal services shows only part of what
-is on the street — beauty and nail salons, spas, saunas and massage.
+**The businesses**
 
-**Read the density as a register, not a street survey.** Closures and moves
-reach the register late, and a business can be registered where there is no
-shop — an office, a business centre or a home. General non-food retail, mostly
-traders selling online or at markets, is left off; a web shop that names what it
-sells cannot be told apart from a shop. Against OpenStreetMap at four station
-areas, the register carries about 1.2 to 1.5 times as many restaurants, cafés
-and bars.
+- Businesses come from the **Berlin Chamber of Industry and Commerce (IHK Berlin)**, which
+  publishes its members' business premises as points, each with its economic activity.
+- It publishes no names, so each dot is labelled with its kind of business.
+- **Craft businesses belong to a different chamber and are not in it**: hairdressers, laundries
+  and dry cleaners are almost entirely missing, and bakers and butchers are thin, so Personal
+  services shows only part of what is on the street — beauty and nail salons, spas, saunas and
+  massage.
 
-**About eight storefronts in ten sit within a station ring.**
+**Reading the map**
 
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **Read the density as a register, not a street survey.** Closures and moves reach the register
+  late, and a business can be registered where there is no shop — an office, a business centre or
+  a home.
+- General non-food retail, mostly traders selling online or at markets, is left off; a web shop
+  that names what it sells cannot be told apart from a shop.
+- Against OpenStreetMap at four station areas, the register carries about 1.2 to 1.5 times as
+  many restaurants, cafés and bars.
+- **About eight storefronts in ten sit within a station ring.**
 """
 )
 
