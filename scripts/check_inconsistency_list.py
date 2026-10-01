@@ -71,13 +71,16 @@ FIELDS = {
     # is inspections, not licences; renamed for Hong Kong too (owner, 2026-09-28).
     # "Personal services thin": Berlin, whose chamber register has no crafts
     # (owner, 2026-09-28).
+    # "Personal services only": Yokohama, whose city publishes its barber,
+    # beauty and laundry registers and no food list (owner, 2026-09-30).
     "categories": {"All three", "Two", "Merged", "Retail thin",
-                   "Personal services thin", "Food premises only"},
+                   "Personal services thin", "Food premises only",
+                   "Personal services only"},
 }
 # The coverage tier each `categories` value needs (owner, 2026-09-30).
 TIER_OF = {"All three": "full", "Two": "narrowed", "Merged": "narrowed",
            "Retail thin": "narrowed", "Personal services thin": "narrowed",
-           "Food premises only": "one_bucket"}
+           "Food premises only": "one_bucket", "Personal services only": "one_bucket"}
 
 
 def field_problems(cities):

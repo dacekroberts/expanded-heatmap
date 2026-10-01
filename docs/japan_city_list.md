@@ -19,7 +19,7 @@
 | **Tokyo (8 wards)** | ✅ built | 8 food + 7 personal-services only | **43,638** ⚠️ | 11,895 | 16,297 | ⚠️ **56%** of 81,024 | **99.7%** | 197 | Built 2026-09-28, Japan's sixth and last. 8 food wards on; the 15 without a usable food list drawn as hollow stations (owner). ⚠️ 3 partial food lists |
 | **Hiroshima** | 🟣 C | 8 | **11,078** | 4,086 | **0**, none published | ✅ **99%** of 12,855 | **96.2%** | — | Food only: no personal-services list is published. Also: the network is streetcars plus the elevated Astram Line, a trams-only edge case (Band T's question), noted under the first-blocker rule |
 | **Sendai** | 🔴 D | 5 | **10,544** | 1,700 | 3,377 | ✅ **101%** of 12,417 | **95.5%** | — | Needs the city's permission; letter drafted, not sent |
-| **Yokohama** | 🟣 C | 18 | no current list | — | complete (2026-04-01) | no list; official 29,358 | — | — | Personal services only, no page for now (owner, 2026-09-24). No food list in any era; MHLW's opt-in slice is 2,912 restaurants |
+| **Yokohama** | ✅ built | 18 | no current list | — | 7,896 rows, complete (2026-04-01) | no list; official 29,358 | — | — | Built 2026-09-30, Japan's seventh: personal services only (owner, 2026-09-29), 98.0% placed at block. No food list in any era; MHLW's opt-in slice is 2,912 restaurants |
 | **Nagoya** | ✗ discarded | 16 | no current list | — | beauty list only | no list; official 33,776 | — | — | Discarded 2026-09-24 (owner): no standing list ever, and the monthly files omit renewals, so no rebuild can work |
 
 ### Osaka — by ward

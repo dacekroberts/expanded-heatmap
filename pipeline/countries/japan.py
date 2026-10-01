@@ -77,6 +77,9 @@ CITIES = {
     # Band A 2026-09-24 (owner), on a register rebuilt from its permit stream
     "kyoto": {"name": "京都市", "pref": "26", "epsg": 32653,
               "wards": [f"261{n:02d}" for n in range(1, 12)]},
+    # Band B 2026-09-29 (owner): personal services only, the 18 wards
+    "yokohama": {"name": "横浜市", "pref": "14", "epsg": 32654,
+                 "wards": [f"141{n:02d}" for n in range(1, 19)]},
 }
 
 

@@ -1424,6 +1424,28 @@ _NOTICES = [
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
      False),
+    # Yokohama (notice 75): the city's registers are CC BY 4.0 (the dataset
+    # page and the city's open-data terms, read 2026-09-30), and the city
+    # prescribes the credit for a modified work: 「この地図は、以下の著作物を改変
+    # して利用しています。」, the title with its date, 神奈川県横浜市, and the licence
+    # with its link. MUST NOT: present the map as the city's work, or imply its
+    # endorsement. MLIT as in Kobe's. Written under the owner's pre-approval of
+    # this build's prose (2026-09-30).
+    ("Yokohama City and MLIT (Yokohama)",
+     "Yokohama's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "環境衛生関係施設一覧（理容所・美容所・クリーニング所施設一覧、令和８年４月１日現在）、神奈川県横浜市"
+     "（[https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/seikatsu/kaiteki/kankyodata.html](https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/seikatsu/kaiteki/kankyodata.html)）、"
+     "クリエイティブ・コモンズ・ライセンス 表示4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）. "
+     "(This map modifies the City of Yokohama's lists of barbers, beauty salons and laundries as of "
+     "1 April 2026, used under CC BY 4.0: this project selected the premises with a fixed place, placed "
+     "each by its address, and counted them around stations.) The lists may include premises that have "
+     "closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Yokohama and MLIT did not make "
+     "and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

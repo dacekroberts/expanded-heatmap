@@ -1,0 +1,42 @@
+station,lines,reason,latitude,longitude
+すずかけ台,DT,"in another prefecture, outside 横浜市 (the permit list covers the city only)",35.51715436891519,139.4817929251509
+つくし野,DT,"in another prefecture, outside 横浜市 (the permit list covers the city only)",35.52706500455492,139.48494
+六郷土手,KK,"in another prefecture, outside 横浜市 (the permit list covers the city only)",35.540530000488744,139.707565
+南町田グランベリーパーク,DT,"in another prefecture, outside 横浜市 (the permit list covers the city only)",35.51151500003502,139.47044000000002
+成瀬,JH,"in another prefecture, outside 横浜市 (the permit list covers the city only)",35.53541598852281,139.4729103462271
+雑色,KK,"in another prefecture, outside 横浜市 (the permit list covers the city only)",35.549775000506536,139.715035
+つきみ野,DT,"in 大和市, outside 横浜市 (the permit list covers the city only)",35.510555711783994,139.45872475037254
+中央林間,DT,"in 大和市, outside 横浜市 (the permit list covers the city only)",35.50781000003051,139.445115
+大和,SO,"in 大和市, outside 横浜市 (the permit list covers the city only)",35.469930000009946,139.46099999999998
+相模大塚,SO,"in 大和市, outside 横浜市 (the permit list covers the city only)",35.47054000007523,139.44115499999998
+元住吉,TY,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.565705002209036,139.65471499999998
+向河原,JN,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.5721750017864,139.66729500000002
+平間,JN,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.560565001074444,139.67109499999998
+新丸子,TY,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.580460001820505,139.66194000000002
+武蔵中原,JN,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.58056000090151,139.64213999999998
+武蔵小杉,JN TY,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.57610129908945,139.6596360351126
+武蔵小杉,SJ,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.57467665524257,139.66341733816546
+武蔵新城,JN,"in 川崎市中原区, outside 横浜市 (the permit list covers the city only)",35.587415001787406,139.62909
+宮前平,DT,"in 川崎市宮前区, outside 横浜市 (the permit list covers the city only)",35.58499580666555,139.5824945445182
+宮崎台,DT,"in 川崎市宮前区, outside 横浜市 (the permit list covers the city only)",35.587125693236544,139.5909295338962
+鷺沼,DT,"in 川崎市宮前区, outside 横浜市 (the permit list covers the city only)",35.57972396734703,139.57315631023093
+京急川崎,KK,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.53301000085318,139.70094
+八丁畷,JN KK,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.52304750033884,139.69141250001036
+大川,JI,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.495405000437046,139.71137999999996
+小田栄,JN,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.51441502200071,139.7050781232378
+川崎新町,JN,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.518325000437436,139.69925999999998
+扇町,JI,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.50174000052352,139.72242
+昭和,JI,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.5068560021007,139.72394982078495
+武蔵白石,JI,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.50193000008963,139.70653
+浜川崎,JN JI,"in 川崎市川崎区, outside 横浜市 (the permit list covers the city only)",35.510022500119256,139.71365749947293
+尻手,JN,"in 川崎市幸区, outside 横浜市 (the permit list covers the city only)",35.53097500228098,139.6843
+川崎,JK JT JN,"in 川崎市幸区, outside 横浜市 (the permit list covers the city only)",35.531365002512835,139.69681
+新川崎,JO,"in 川崎市幸区, outside 横浜市 (the permit list covers the city only)",35.551723498671535,139.6715410433033
+鹿島田,JN,"in 川崎市幸区, outside 横浜市 (the permit list covers the city only)",35.551455000877,139.67497999999998
+梶が谷,DT,"in 川崎市高津区, outside 横浜市 (the permit list covers the city only)",35.593733325792705,139.60566983079954
+京急田浦,KK,"in 横須賀市, outside 横浜市 (the permit list covers the city only)",35.30102147013141,139.62518890558223
+追浜,KK,"in 横須賀市, outside 横浜市 (the permit list covers the city only)",35.31564607525893,139.62491358974086
+湘南台,B SI,"in 藤沢市, outside 横浜市 (the permit list covers the city only)",35.39624000030012,139.46612
+藤沢,JT,"in 藤沢市, outside 横浜市 (the permit list covers the city only)",35.33883346754153,139.48641978778957
+神武寺,KZ,"in 逗子市, outside 横浜市 (the permit list covers the city only)",35.30628000045055,139.59288999999998
+逗子・葉山,KZ,"in 逗子市, outside 横浜市 (the permit list covers the city only)",35.29428169585941,139.58053521358005

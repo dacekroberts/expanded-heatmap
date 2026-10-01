@@ -498,5 +498,10 @@
   "in_ring": 1187,
   "all": 3432,
   "map_blob": "8698b88b2aa7dd1cd151a54d992dc4ea657a4d51"
+ },
+ "yokohama": {
+  "in_ring": 6540,
+  "all": 7843,
+  "map_blob": "691a9d989c532d9fb4171368872bd6a27bf47272"
  }
 }
