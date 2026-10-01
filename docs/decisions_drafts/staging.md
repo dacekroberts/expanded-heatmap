@@ -4,6 +4,51 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - The UK six briefed, with a prose hold; builds held (owner)
+
+- **The owner (2026-10-01)**: "no, I want to wait on builds. generate the
+  briefs now". And: "have the sessions wait on drafting prose. I'm currently
+  in the middle of reworking site prose and want that to complete before
+  these builds resort to generating the old prose."
+- **Six briefs** are in `docs/build_briefs/`: `manchester.md`,
+  `birmingham.md`, `edinburgh.md`, `sheffield.md`, `nottingham.md` and
+  `blackpool.md`. **The handoff** is `docs/handoff_uk_six_2026-10-01.md`.
+- **Every brief and the handoff open with the prose hold.**
+  - Draft no page text: no description, scope sentence, What Is Excluded
+    entries, notice wording beyond the licensor's attribution, or
+    README/Overview copy.
+  - Do not copy London's, Glasgow's or Newcastle's page text.
+  - Leave `TODO(prose-hold)` markers and do not scaffold `app/pages` text.
+  - The 2026-09-30 approved-template pre-permission is suspended for this
+    round.
+- **Measured for the briefs, 2026-10-01**: FSA per-authority counts and
+  file sizes (HEAD); one Overpass query per city, run in sequence (tram
+  relations, stop names, council boundaries with GSS codes); and which
+  operator pages answer scripts.
+- **Each brief carries the checks the tram kit's retrospective said
+  briefs lacked**:
+  - every authority's FSA file is listed;
+  - the FHRS terms still name the OGL;
+  - the operator's own stop list, where it answers scripts (TfGM, West
+    Midlands Metro, Edinburgh Trams, NET);
+  - OSM relations and refs;
+  - the CRS fallback.
+- **Found while briefing:**
+  - **Nottingham (Regional) is 3,702 storefronts, not 4,723**, an addition
+    error at the screen. The master list and the approval entry above are
+    corrected.
+  - **West Midlands Metro's Line 2 (Wednesbury–Dudley) is in OSM**, its
+    stops marked "[Aug 2026]". Whether it is open is a Step 0 check, and
+    adding Dudley is the owner's call.
+  - **Sheffield's and Blackpool's operator sites refuse scripts** (a
+    Radware CAPTCHA; 403). Gate 3's proposed source is NaPTAN (DfT, OGL),
+    a new source that needs the owner's OK.
+  - **Blackpool:** select Wyre (207), not Wyre Forest (153).
+  - **Nottingham:** the city is a unitary authority at admin_level 6 beside
+    three admin_level 8 districts. Union the four, never the county.
+  - **Colours:** Sheffield's Yellow (`#FFFF00`) will need darkening. NET's
+    two lines share one colour. Blackpool and Edinburgh carry none in OSM.
+
 ### 2026-10-01 - The UK six approved with their scopes: four regional pages, two city pages (owner)
 
 - **The owner: "yes to the set"**, on staging's recommendations. All six
@@ -16,7 +61,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   | 2 | **Birmingham (Regional)** | Birmingham, Sandwell and Wolverhampton, built now | 9,827 | Birmingham alone holds 16 of 35 stops |
   | 3 | **Edinburgh** | the city | 3,933 | Every stop is inside it |
   | 4 | **Sheffield** | the city, without the Rotherham Tram-Train | 3,447 | The Tram-Train runs every 30 minutes on converted railway (Aarhus L1's precedent); food first, the city's rates list a later screen |
-  | 5 | **Nottingham (Regional)** | the city, Broxtowe, Rushcliffe and Ashfield | 4,723 | Beeston's 9 stops and the line ends draw filled rings |
+  | 5 | **Nottingham (Regional)** | the city, Broxtowe, Rushcliffe and Ashfield | 3,702 (first written 4,723, an addition error; corrected the same day) | Beeston's 9 stops and the line ends draw filled rings |
   | 6 | **Blackpool (Regional)** | Blackpool and Wyre | 1,744 | Keeps Cleveleys and Fleetwood, the terminus |
 
 - **The Dudley branch** (West Midlands Metro, about late 2026) becomes a
