@@ -57,6 +57,19 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   note for each, "shows 'Source : Insee' only inside a conditional block". It
   is a note and not a failure so the batch is not held up by this branch. Once
   the template moves the line out, the note can become a failure.
-- **Verified:** `check_provenance.py` all recorded, and check M OK for the
-  five; `check_deploy_imports.py` and a `deploy-verify` run (scope
-  `map-chrome`) on this branch, results in the commit that records them.
+- **Verified at 7bbab98.** `check_provenance.py` reported "All recorded",
+  with check M OK for the five. `check_deploy_imports.py --ref 7bbab98` (run
+  from the main checkout, because this worktree has no `.venv-lean`) reported
+  PROBLEMS 0. A `deploy-verify` run (scope `map-chrome`) passed all five
+  pages:
+  - The caption reads verbatim, once, between the transit caption and the
+    map. On Lille it follows the MEL/Ilévia provenance caption, because Lille
+    has no "Transit data ©" line.
+  - No exceptions; the maps render; the notices block is present.
+  - `check_map_attribution.js` found the credit uncovered on Paris and
+    Rennes at 1000x650, 1024x768 and 375x812.
+  - Madrid, the control, was unchanged.
+
+  **No reboot is needed for this change alone**: page files only, and no
+  module Overview.py imports. At review time the reboot question is still
+  computed from the whole push's `app/` diff.
