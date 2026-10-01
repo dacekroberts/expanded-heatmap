@@ -1445,6 +1445,7 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Yokohama and MLIT did not make "
      "and do not endorse this map.",
+     False),
     # Hiroshima (notice 76): the city's full list is PDL 1.0 through DataEye
     # (dataset 5672; the owner accepted the reading for the full-list file,
     # 2026-09-24), with DataEye's prescribed 出典 pattern and who processed it;
@@ -1621,10 +1622,8 @@ _NOTICES = [
     # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
     # under the owner's pre-approval of this build's prose. Covers every Korean city on
     # the register (Incheon; the Gyeonggi satellites add their names).
-    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju)",
-     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon and Namyangju are from the Small "
-    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Ansan)",
-     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon and Ansan are from the Small "
+    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan)",
+     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju and Ansan are from the Small "
      "Enterprise and "
      "Market Service's "
      "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "
