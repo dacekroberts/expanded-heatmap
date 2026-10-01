@@ -599,6 +599,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Yongin | EverLine, Suin–Bundang, Shinbundang Lines | GTX-A | OpenStreetMap (gate 3 on all three) | City | 67 / 0 |
 | Suwon | Line 1, Suin–Bundang, Shinbundang Lines | — | OpenStreetMap (gate 3 on two lines; Line 1 not gated) | City | 129 / 0 |
 | Bucheon | Line 1, Line 7, Seohae Line | — | OpenStreetMap (gate 3 on Line 7; Line 1 and Seohae not gated) | City | 121 / 0 |
+| Namyangju | Line 4, Line 8, Gyeongui–Jungang Line, Gyeongchun Line | — | OpenStreetMap (no whole-line gate; each line's in-city stations read against its line table) | City | 105 / 0 |
 | **Taiwan** | | | | | |
 | Taichung | Taichung Metro Green Line | Taiwan Railway, high-speed rail | Operator's station table + OpenStreetMap route (gate 3 exact) | City | 0 / 0 |
 | Taoyuan | Taoyuan Airport MRT (line A) | Taiwan Railway, high-speed rail | National station layer + OSM route (gate 3 exact, one dated addition) | City | 7 / 0 |
@@ -732,6 +733,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Yongin | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 4,991 / 6,052 / 1,960 | — |
 | Suwon | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 5,816 / 7,541 / 2,571 | — |
 | Bucheon | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 6,999 / 8,087 / 3,007 | — |
+| Namyangju | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 4,008 / 4,436 / 1,623 | — |
 | **Taiwan** | | | | | |
 | Taichung | National tax register | FIA business tax register | Industry code division | 6,283 / 3,970 / 1,932 | One line in a large city: 19% of storefronts in a ring |
 | Taoyuan | National tax register | FIA business tax register | Industry code division | 2,455 / 1,813 / 821 | The airport line misses the city's largest centre: 12% in a ring |
@@ -854,6 +856,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Yongin | Register coordinates (100%) | None | Incheon's; 16 personal names withheld |
 | Suwon | Register coordinates (100%) | None | Incheon's; 37 personal names withheld |
 | Bucheon | Register coordinates (100%) | None | Incheon's; 28 personal names withheld |
+| Namyangju | Register coordinates (100%) | None | Incheon's; 37 personal names withheld |
 | **Taiwan** | | | |
 | Taichung | Address join to the city's door plates (92.2%; 5,599 unplaced) | Stalls unplaced; a department store is one point | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
 | Taoyuan | Address join to the city's door plates (93.6%; 3,097 unplaced) | Stalls and rural addresses unplaced | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
@@ -987,6 +990,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Yongin | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 55% | Trade name in Korean, with the branch |
 | Suwon | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 48% | Trade name in Korean, with the branch |
 | Bucheon | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 80% | Trade name in Korean, with the branch |
+| Namyangju | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 55% | Trade name in Korean, with the branch |
 | **Taiwan** | | | | | | |
 | Taichung | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 19% | Trade name in Chinese, or the line of business (11,907) |
 | Taoyuan | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 12% | Trade name in Chinese, or the line of business (7,230) |

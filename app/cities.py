@@ -2677,6 +2677,29 @@ CITIES = [
         # combined tree with Yokohama (width 66.3 px, measured 2026-09-30).
         "label_offset": ("middle", 0, 54),
     },
+    {
+        "name": "Namyangju",
+        "lat": 37.636,
+        "lon": 127.216,
+        "page": "pages/83_Namyangju_Heatmap.py",
+        "coverage": "full",
+        "mode": "metro",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 4, Line 8, and the Gyeongui–Jungang and Gyeongchun Lines",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, the default, and SCORED: Namyangju sits at the Seoul Capital
+        # Area view's east edge, clear of Seoul's and Goyang's pills; it widens the
+        # region's frame (zoom 8.10), and check_macro_labels.py (python -B) still
+        # passes every label there, PROBLEMS 0 at 375, 768 and 1200 on the combined
+        # tree (width 75.8 px, measured 2026-09-30).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

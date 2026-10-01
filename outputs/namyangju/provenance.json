@@ -1,0 +1,45 @@
+{
+  "semas": {
+    "file": "sbiz_15083033.zip",
+    "page": "https://www.data.go.kr/data/15083033/fileData.do",
+    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N",
+    "bytes": 352699739,
+    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
+    "retrieved": "2026-09-29T09:34:52+00:00",
+    "edition": "2026-06-30"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "host": "overpass.kumi.systems",
+    "query": "[out:json][timeout:600];(relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](37.52,127.1,37.81,127.45);relation[\"type\"=\"route\"][\"route\"=\"train\"][\"ref\"~\"^(수인·분당|경의·중앙|경강|서해|GTX-A|경춘)$\"](37.52,127.1,37.81,127.45);)->.r;.r out geom;node(r.r);out body;",
+    "bytes": 1235571,
+    "sha256": "4d2f80a726252e549ed3583f2aed3bbee14b74757d80323f38961dbe6d2650e3",
+    "elements": {
+      "relation": 36,
+      "node": 603
+    },
+    "osm_base": "2026-07-28T02:16:18Z"
+  },
+  "osm_station_names": {
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:240];(node[\"railway\"=\"station\"](37.52,127.1,37.81,127.45);way[\"railway\"=\"station\"](37.52,127.1,37.81,127.45););out tags center;",
+    "bytes": 31095,
+    "sha256": "65d33d4fa341904e0c0ca318aa94933b212e706473ed322240a6f142aec885fa",
+    "elements": {
+      "node": 49
+    },
+    "osm_base": "2026-10-01T00:15:07Z"
+  },
+  "osm_boundary": {
+    "file": "osm_boundary.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:240];relation(2409175)[\"name\"=\"남양주시\"];out geom;",
+    "bytes": 25898,
+    "sha256": "daf5877b5008c8e717a029ffb4504b4f96c88a16ee4a3983b1f2ad45c5b33a2f",
+    "elements": {
+      "relation": 1
+    },
+    "osm_base": "2026-10-01T00:15:07Z"
+  }
+}

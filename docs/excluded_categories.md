@@ -3136,6 +3136,25 @@ and the Seohae Line, 14 stations. The Seohae Line is drawn here (owner): in
 Bucheon it has its own track and stations, unlike Goyang. No undrawn line has
 a station in Bucheon.
 
+### Namyangju - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+section above).
+
+**Out by name**: hostess bars 120, dance halls 1, staff canteens 36,
+household fuel dealers 36; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 37 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Namyangju's boundary (the lines drawn to their ends;
+stations outside in `outputs/namyangju/excluded_stations.csv`): Line 4, Line 8,
+the Gyeongui-Jungang and Gyeongchun Lines, 17 stations. GTX-A and Seoul's Lines
+2, 5, 6 and 9, which reach the query box, have no station in Namyangju and are
+not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
