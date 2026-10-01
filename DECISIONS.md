@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**258 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**259 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -59,6 +59,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 **2026-09-29**
 
 - [Ottawa built on Ottawa Public Health's inspection feed: food only, 4,896 premises, 25 stations](#2026-09-29---ottawa-built-on-ottawa-public-healths-inspection-feed-food-only-4896-premises-25-stations)
+- [A download is dated in the city's own time zone; Bergen's register is 2026-09-24 (owner)](#2026-09-29---a-download-is-dated-in-the-citys-own-time-zone-bergens-register-is-2026-09-24-owner)
 - [Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)](#2026-09-29---anyang-briefed-on-its-ring-share-the-satellites-in-the-seoul-capital-area-view-only-owner)
 - [Band B's last eight: the owner's four calls before the builds](#2026-09-29---band-bs-last-eight-the-owners-four-calls-before-the-builds)
 - [The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)](#2026-09-29---the-next-gyeonggi-satellites-briefed-namyangju-ansan-uijeongbu-owners-scope)
@@ -301,6 +302,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+<<<<<<< HEAD
 ### 2026-09-30 - Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)
 
 - **Measured before the next review (owner: measure first, decide at
@@ -1575,6 +1577,44 @@ clean.
 
 **For the batch review:** Toronto's label moved 5 px; the name test's 161
 and the 74 folds are this build's measurement, not an owner's call.
+=======
+### 2026-09-29 - A download is dated in the city's own time zone; Bergen's register is 2026-09-24 (owner)
+
+- **Decided (owner): a download's date is the date in the city's own time
+  zone.** Three conventions were in use. Page captions built from
+  provenance take the UTC date (`fetched_utc` or `files_utc`, first ten
+  characters: Paris, Marseille, Toulouse, Lille, Rennes, Oslo, Bergen,
+  Buffalo and Sacramento). Hand-written records (DECISIONS, briefs,
+  `docs/data_sources/`, `docs/map_inconsistencies.md`, `data_age` in
+  `app/cities.py`) take this machine's Pacific date. `houston-caption` reads
+  provenance's `as_of_date`. The city's own zone gives the right answer in
+  both disputed cases: Houston's fetch on the evening of 2026-09-29, local
+  time, is 2026-09-29, and Bergen's is 2026-09-24. For European cities the
+  UTC date almost always matches the local one, so their captions stand.
+  Rejected: UTC everywhere, which dates an American evening fetch a day
+  ahead, and the machine's Pacific date, which dates a European morning
+  download a day behind.
+- **Bergen's register is dated 2026-09-24.** `underenheter.csv.gz` was
+  cached at 2026-09-24T01:30:45Z (provenance `files_utc`): 03:30 on
+  2026-09-24 in Norway, and 18:30 on 2026-09-23 in Pacific time. The live
+  page caption already said 2026-09-24, while the front page's `data_age`
+  said "Register 2026-09-23", so the site contradicted itself. Now
+  2026-09-24, with the Pacific date noted, in:
+  - `data_age`, which reads "Register 2026-09-24";
+  - Bergen's row in `docs/map_inconsistencies.md` (`check_macro_facts.py`
+    holds `data_age` to it);
+  - Bergen's row in `docs/data_sources/norway.md`;
+  - `docs/build_briefs/bergen.md`.
+
+  The earlier entries that say 2026-09-23 are left standing, since it is
+  the same download. The transit feed (2026-09-27T21:20:01Z, 23:20 in
+  Norway) is unchanged. Oslo's `data_age` already said 2026-09-24. An
+  `app/` change, queued for the next review.
+- **Not done, flagged:** Buffalo's and Sacramento's captions still take the
+  UTC date. Both were fetched before midnight UTC, so they show the right
+  date, but an evening re-fetch would date itself a day ahead. Switching
+  them to `as_of_date`, as Houston did, is optional.
+>>>>>>> origin/bergen-date
 
 ### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
 

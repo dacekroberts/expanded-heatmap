@@ -963,7 +963,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Valenciennes (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 69% | Sign/usual name (about 51%), else address |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
-| Bergen | Register downloaded 2026-09-23; transit 2026-09-27 | B | 0.6 mi | Yes | 59% | Name; address for sole traders |
+| Bergen | Register downloaded 2026-09-24 (Norway's date; 2026-09-23 in Pacific time); transit 2026-09-27 | B | 0.6 mi | Yes | 59% | Name; address for sole traders |
 | **Romania** | | | | | | |
 | Bucharest | Registers of 2026-08-25 (fetched by the owner 2026-09-28) | B | 0.6 mi | Yes | 72% | Company name without its legal form; category for sole traders and person-named companies |
 | **Sweden** | | | | | | |
