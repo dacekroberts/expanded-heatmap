@@ -2,21 +2,20 @@
 
 WHY THIS EXISTS. The macro map is the app's only navigation, and its label
 layout is hand-tuned pixel offsets in `app/cities.py`. Three defects have
-shipped from it, each found by eye or by an agent rather than by a check:
+shipped from it, none caught by a check:
 
-  - a pill covering its OWN marker (Guadalajara, spotted by the owner on the
-    rendered map: the opaque pill erased the teal dot entirely);
+  - a pill covering its OWN marker (Guadalajara: the opaque pill erased the
+    teal dot entirely);
   - a pill covering ANOTHER city's marker (New York's pill erases Boston's dot
-    in the composite view - 0 rendered teal pixels against 32-65 for every
+    in the composite view: 0 rendered teal pixels against 32-65 for every
     other city);
   - a pill overlapping another pill (Toronto x Boston, 30x12 px).
 
-An ad-hoc check written for the region split found none of the last two,
-because it scored only each REGION'S OWN MEMBER CITIES. Every city is drawn in
-every region - the view is centred, not filtered - so a non-member still
-renders at the frame edge and still collides. `docs/` calls that the blind
-spot it was: "Los Angeles" x "San Diego" overlap 20.5 x 11.2 px in United
-States East, where neither is a member.
+Scoring only each REGION'S OWN MEMBER CITIES misses the last two. Every city
+is drawn in every region (the view is centred, not filtered), so a
+non-member still renders at the frame edge and still collides: "Los Angeles"
+x "San Diego" overlap 20.5 x 11.2 px in United States East, where neither is
+a member.
 
 So this scores EVERY city in EVERY region at EVERY width, and it is a script
 rather than a note because the offsets are re-tuned whenever a city is added.
@@ -91,23 +90,17 @@ TOUCH = 1.0
 # examined comes back as a problem rather than inheriting the exemption.
 #
 # Keyed (region, then the two names sorted).
-# EMPTIED 2026-09-23, and by removing the CAUSE rather than the symptom.
+# EMPTIED 2026-09-23 by removing the CAUSE rather than the symptom. Its one
+# entry (Guadalajara x Los Angeles in the United States view, a 1.1 px
+# abutment of two pill BACKGROUNDS with the glyphs clear, accepted by the
+# owner) and the two Marseille would have added were all a NON-MEMBER's label
+# colliding inside a view it does not belong to; the list would have grown by
+# about one entry per international city. `Overview.py` now labels only a
+# region's own cities, composites included, so none of them can occur.
 #
-# This held one entry - Guadalajara x Los Angeles in the United States view,
-# an owner's call agreeing with deploy-verify that a 1.1 px abutment of two
-# pill BACKGROUNDS, with the glyphs clear, was legible rather than a defect.
-# Marseille's arrival was about to add two more, and that is what made the
-# shape visible: all three were a NON-MEMBER's label colliding inside a view it
-# does not belong to, and the list would have grown by roughly one entry per
-# international city forever.
-#
-# `Overview.py` now labels only a region's own cities, composites included, so
-# none of the three collisions can occur at all. An accepted-overlap entry is a
-# judgement that a real collision is harmless; these are no longer real.
-#
-# The mechanism stays, because the reasoning above it is still right: an entry
-# here says THIS pair, in THIS region, at THESE measured dimensions has been
-# looked at - and nothing else has. It is not a loosened threshold.
+# The mechanism stays: an entry here says THIS pair, in THIS region, at THESE
+# measured dimensions has been looked at, and nothing else has. It is not a
+# loosened threshold.
 ACCEPTED_OVERLAPS = {}
 ACCEPTED_TOL = 0.5
 
@@ -133,15 +126,15 @@ KNOWN_STACKED = {
 STACKED_TOL = 0.2
 
 # THE MAP'S OWN CONTROLS, which sit above the label canvas and hide whatever is
-# under them. Not modelled until 2026-09-23, so the check scored PROBLEMS 0
-# while Oslo's pill - the Europe frame's northernmost city, label above its dot
-# - was entirely under the theme button at 375px (label x 242-281 y 18-36,
-# button x 180-291 y 10-42; found by Oslo's deploy-verify, not by this).
+# under them. Modelled since 2026-09-23; before that the check scored PROBLEMS
+# 0 while Oslo's pill (the Europe frame's northernmost city, label above its
+# dot) was entirely under the theme button at 375px (label x 242-281 y 18-36,
+# button x 180-291 y 10-42).
 #
 # Measured in the deployed app's own frame (/~/+/) at 375px (canvas 343) and
-# 1200px (canvas 1030), each after a screenshot forced a real frame - a hidden
-# pane reported the Mapbox controls at a 300px-wide layout. Offsets are from
-# the canvas's RIGHT edge because that is how the CSS places them:
+# 1200px (canvas 1030), each in a rendered frame: a hidden pane reports the
+# Mapbox controls at a 300px-wide layout. Offsets are from the canvas's RIGHT
+# edge because that is how the CSS places them:
 #   theme button  `#macro-theme-toggle { top: 10px; right: 52px }` - 111 px wide
 #                 with "☀ Light mode", 103.5 with "☾ Dark mode"; the wider is
 #                 used, since either can be showing. 32 px tall.
@@ -270,12 +263,12 @@ def caption_arithmetic():
 
     ASSERTS A PROPERTY, IT DOES NOT RE-IMPLEMENT THE SUM. A check that
     recomputed the caption the way Overview.py does would agree with it while
-    both were wrong, which is precisely what happened: the caption said
+    both were wrong, as on the live site on 2026-09-22: the caption said
     "every region except this one", `REGIONS` holds composites AND their
     halves, and selecting "United States" reported its own nine cities as
-    elsewhere - 3 in United States West, 6 in United States East - on the
+    elsewhere (3 in United States West, 6 in United States East) on the
     DEFAULT view of the front page. Europe read "4 shown, 25 elsewhere" out of
-    20 cities. Found on the live site 2026-09-22, not by a check.
+    20 cities.
 
     shown + elsewhere == total is true of any correct partition and false of
     that bug, whatever code computes it.
@@ -312,12 +305,12 @@ def main():
     widths = args.width or sorted(CANVAS)
 
     problems, clips, near, accepted = [], [], [], []
-    # A MEMBER WHOSE OWN DOT IS OFF THE CANVAS was never reported: the clipping
-    # test below runs only for a visible marker. Review lanes 1 and 2 found it
-    # twice on 2026-09-30 - Bordeaux and Nice in France South at 375 px, each
-    # leaving a fragment of its pill, and Tucson's re-centring pushing San
-    # Francisco and Sacramento off United States West. Reported, not failed,
-    # like clipping: the pinned France zooms accept it by the owner's call.
+    # A MEMBER WHOSE OWN DOT IS OFF THE CANVAS: the clipping test below runs
+    # only for a visible marker, so this is listed separately (2026-09-30:
+    # Bordeaux and Nice in France South at 375 px, each leaving a fragment of
+    # its pill; Tucson's re-centring pushing San Francisco and Sacramento off
+    # United States West). Reported, not failed, like clipping: the pinned
+    # France zooms accept it by the owner's call.
     offframe = []
     stacked = []
     problems.extend(caption_arithmetic())
@@ -336,9 +329,9 @@ def main():
             # members, so a non-member contributes a dot and no pill. Getting
             # this wrong in either direction hides a defect: scoring LABELS for
             # members only was the blind spot that let "Los Angeles" x "San
-            # Diego" overlap 20.5 x 11.2 px in United States East while a check
-            # called that region clean, and scoring every city's label now would
-            # report pills the app no longer draws.
+            # Diego" overlap 20.5 x 11.2 px in United States East unreported,
+            # and scoring every city's label now would report pills the app no
+            # longer draws.
             # EVERY REGION LABELS ITS OWN CITIES, composites included since
             # 2026-09-23 - see Overview.py for the measurement that ended the
             # composite's exemption. `region["cities"]` already resolves a
@@ -369,11 +362,11 @@ def main():
             for city, x, y, box, marker_on in placed:
                 # A marker is ERASED when its CENTRE falls inside the pill: the
                 # pill is opaque (alpha 235) and drawn above the markers, so the
-                # dot stops reading as a position at all - which is how
-                # Guadalajara's disappeared. A pill merely touching a dot's edge
-                # is not that, and scoring it as such flags Philadelphia against
-                # New York, a pair deploy-verify measured as BOTH rendering
-                # normally. Grazing contact is listed under `near` instead.
+                # dot stops reading as a position at all (Guadalajara's). A pill
+                # merely touching a dot's edge is not that: scored as such it
+                # flags Philadelphia against New York, a pair deploy-verify
+                # measured as BOTH rendering normally. Grazing contact is listed
+                # under `near` instead.
                 for other, ox, oy, _ in markers:
                     # In Global a non-winner's dot is drawn faded UNDER the
                     # pills by design (Overview.py); only a winner's counts.

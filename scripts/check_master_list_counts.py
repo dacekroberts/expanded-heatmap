@@ -8,11 +8,10 @@ and no city sits in two lists.
 Exits non-zero naming every disagreement. Read-only, standard library only.
 
 WHY. `CLAUDE.md` sends every session to this file to READ COUNTS OFF, and the
-counts were the part of it that kept going wrong. The efficiency review of
-2026-09-27 (docs/efficiency_review_2026-09-27.md, finding 5) found that 79 of
-its last 149 edits changed a count in a heading or the summary block, and at
-least five commits existed only to fix counts that had drifted. The file
-recorded its own failures and kept repeating them:
+counts were the part of it that kept going wrong: 79 of its last 149 edits
+changed a count in a heading or the summary block, and at least five commits
+existed only to fix drifted counts (docs/efficiency_review_2026-09-27.md,
+finding 5). For example:
 
   - the summary box read 20 / 33 / 30 from 2026-09-22 while the band sections
     below it moved on ("the hand-kept summary is the first thing to drift");
@@ -21,11 +20,11 @@ recorded its own failures and kept repeating them:
   - on 2026-09-27 Band A's figure was "corrected from a stale 10 + 28" and the
     candidate total "from a stale 24 to 20", both in the same day's edits.
 
-Each count is stated in up to four places - a heading, the summary box, the
-band table, and sometimes a sub-group line - and each place was corrected by
-hand, separately. A person republishing the list in chat is told to "verify the
-band counts sum to the candidate total before sending", because "that
-arithmetic has been wrong twice". That is a check, so it is one now.
+Each count is stated in up to four places (a heading, the summary box, the
+band table, sometimes a sub-group line), each corrected by hand, separately.
+The instruction to "verify the band counts sum to the candidate total before
+sending", because "that arithmetic has been wrong twice", is a check, so it
+is one now.
 
 It also enforces the owner's rule of 2026-09-27: a city sits in ONE place -
 Built, one band, or the discards - never two. Built cities keep their struck-out
@@ -44,10 +43,10 @@ next `##`):
   4. a `**▲ Name** <flag>` paragraph opener (Stockholm and Zurich).
 
 The owner's chat format puts every city in a table row, and the first form is
-the one to use. The other three are recognised because Band A and Band C
-already hold cities written up that way; a city added in a shape none of these
-recognises is reported as a count that disagrees, with the members that WERE
-found listed, so the fix is visible.
+the one to use. The other three are recognised because Band A and Band C hold
+cities written up that way; a city added in a shape none of these recognises
+is reported as a count that disagrees, with the members that WERE found
+listed, so the fix is visible.
 
 A Band A member is BUILT if its row is marked ✅ or struck through, or if its
 name is in the Built table. Names are compared without parentheticals, so
@@ -88,10 +87,9 @@ BOLD = re.compile(r"\*\*(.+?)\*\*")
 SEP = re.compile(r"^\|[\s:|-]+\|\s*$")
 BAND_HEAD = re.compile(r"^## .*\bBand ([A-Z])\b")
 TIER_HEAD = re.compile(r"^## .*?\b(T\d)\b")
-# Every band letter a candidate can sit in. B reopened (passed: narrower
-# pages) and N created (no page for now) by the owner 2026-09-28, when C
-# closed; later the same day N was retooled as C (closer to a page) and D
-# split into D (blocked, the owner can act) and R (restricted).
+# Every band letter a candidate can sit in (owner, 2026-09-28): B (passed:
+# narrower pages), C (closer to a page), D (blocked, the owner can act) and R
+# (restricted).
 LETTERS = "ABCDRT"
 
 
@@ -421,14 +419,14 @@ def _count(cell):
 
 
 def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
-    """The '## ✅ Current by country' table against the bands (added 2026-09-27).
+    """Check the '## ✅ Current by country' table against the bands (added
+    2026-09-27).
 
-    That table is a VIEW of the bands, and it went stale for four days before
-    anyone noticed: it said 30 built, listed Brazil as candidates and Japan in
-    Band B (Staging rebuilt it on 2026-09-27 and suggested this check). Checked:
-    the columns sum to the real totals; the Total row, including its
-    'A n · C n · T n · D n', agrees; each country's Built figure matches the
-    Built table; and a row that NAMES its candidates names as many as it
+    That table is a VIEW of the bands, and it went stale for four days
+    unnoticed: it said 30 built, listed Brazil as candidates and Japan in Band
+    B. Checked: the columns sum to the real totals; the Total row, including
+    its 'A n · C n · T n · D n', agrees; each country's Built figure matches
+    the Built table; and a row that NAMES its candidates names as many as it
     counts, each one in a band its Bands column lists.
     """
     problems = []

@@ -27,12 +27,11 @@ avoid:
      on the same footing as every built city.
 
   2. **Count the UNION of the rings, never the sum of per-station counts.**
-     A first version of this measurement summed per-station counts and
-     reported Montreal at 440 per station against a true 151, because the
-     Metro's stations are close enough that one business sits inside several
-     rings. The union is the number of distinct businesses near rail; the sum
-     is a different quantity and is not what any other figure in this project
-     means.
+     Summing per-station counts reports Montreal at 440 per station against a
+     true 151, because the Metro's stations are close enough that one
+     business sits inside several rings. The union is the number of distinct
+     businesses near rail; the sum is a different quantity and is not what
+     any other figure in this project means.
 
 Montreal needs no category map: its `SCIAN` IS NAICS, so `naics.py` applies
 unchanged. That is also why it is the cheapest of the four still unbuilt.
@@ -349,8 +348,8 @@ def main():
 
 if __name__ == "__main__":
     # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py
-    # crashed on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
+    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py,
+    # on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

@@ -42,23 +42,21 @@ ROOT = Path(__file__).resolve().parent.parent
 # step 2 falls back to when trade is blank; processed/address: for the
 # unit-indicator check (None to skip).
 REGISTRIES = {
-    # Dublin is the STRONGEST case in the project and the only one where the
-    # answer is structural rather than measured: the Irish rateable valuation
-    # register carries NO name column of ANY kind - no trade name, no occupier,
-    # no ratepayer, no owner. 19 fields, all address, classification, valuation
-    # and geometry, and step 2 ASSERTS that none matching
+    # Dublin: the answer is structural rather than measured. The Irish rateable
+    # valuation register carries NO name column of ANY kind (no trade name,
+    # occupier, ratepayer or owner): 19 fields, all address, classification,
+    # valuation and geometry. Step 2 ASSERTS that no column matching
     # name|occupier|tenant|owner|ratepayer|proprietor|person|contact arrives,
-    # exiting if a future refresh adds one.
+    # and exits if a future refresh adds one.
     #
-    # So there is no trade/owner fallback pair to join against, as for New York
-    # and Philadelphia - but unlike those two the absence is a property of the
-    # source rather than of what this project chose to download. Los Angeles'
-    # failure mode (a blank trade name falling back to a registrant's own name
-    # at their home) CANNOT occur here. The register is also non-domestic by
-    # statute, so the residence question does not arise either.
+    # As for New York and Philadelphia there is no trade/owner fallback pair,
+    # but here the absence is a property of the source, not of what this
+    # project downloads. Los Angeles' failure mode (a blank trade name falling
+    # back to a registrant's own name at their home) CANNOT occur. The register
+    # is non-domestic by statute, so the residence question does not arise.
     #
-    # `business_name` holds the STREET ADDRESS, which is why the address
-    # columns and the name column are the same field.
+    # `business_name` holds the STREET ADDRESS, so the address column and the
+    # name column are the same field.
     "dublin": dict(raw=None, trade=None, owner=None, name_is_address=True,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
@@ -110,79 +108,70 @@ REGISTRIES = {
                       address=("address",), korean=True, withheld="Name withheld"),
     "anyang": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                    address=("address",), korean=True, withheld="Name withheld"),
-    # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
-    # trade name (`insegna`) and the rest carry the street address, because
-    # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on
-    # the two food ones, and ABSENT from three of the six registers entirely.
+    # Milan is a HYBRID: ~20% of pins carry a real trade name (`insegna`) and
+    # the rest carry the street address, because `insegna` is 17.6% populated
+    # on the retail register, 23.8% and 9.1% on the two food ones, and ABSENT
+    # from three of the six registers.
     #
-    # None of the six carries a personal name - no titolare, ragione_sociale
-    # or nominativo, confirmed against live headers, and step 2 EXITS if one
-    # ever appears. So this is the France/Edmonton pattern (the publisher
-    # stripped it) and the fallback is an address rather than an owner, which
-    # is why Los Angeles' failure mode cannot occur.
+    # None of the six carries a personal name (no titolare, ragione_sociale or
+    # nominativo in the live headers), and step 2 EXITS if one ever appears.
+    # This is the France/Edmonton pattern (the publisher stripped it): the
+    # fallback is an address rather than an owner, so Los Angeles' failure
+    # mode cannot occur.
     #
     # `name_is_address` is NOT set, unlike Dublin's: it is true of ~80% of
-    # rows rather than all of them, so the heuristics below are measuring a
-    # mixture. Read a person-like hit as "check whether this is an Italian
-    # street name or a sole trader's shop sign" - both are present, and the
-    # second is exactly what this script is for.
+    # rows, not all, so the heuristics below measure a mixture. Read a
+    # person-like hit as "an Italian street name or a sole trader's shop
+    # sign?" - both occur, and the second is what this script is for.
     "milan": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("business_name",)),
-    # Paris is Milan's hybrid again, and the reasoning is worth keeping because
-    # this city had the LARGEST measured temptation in the project to do
-    # otherwise. SIRENE carries a premises name on only 37.2% of built rows, and
-    # `StockUniteLegale` would have closed nine tenths of that gap by joining
+    # Paris is Milan's hybrid again, and had the largest measured temptation to
+    # do otherwise. SIRENE carries a premises name on only 37.2% of built rows,
+    # and `StockUniteLegale` would close nine tenths of that gap by joining
     # `denominationUniteLegale` on siren. It is not joined, and the file is not
-    # even downloaded.
+    # downloaded.
     #
     # WHY: for a sole trader that column holds `nomUniteLegale` and
     # `prenomUsuelUniteLegale` - A PERSON'S NAME. Measured 2026-09-22, 8.7% of
     # Paris storefront rows are natural persons and 9.4% of the UNNAMED ones
-    # are, so a blind fallback across the bucket would have published on the
-    # order of TEN THOUSAND individuals' names, against the ~4,000 Los Angeles
-    # nearly shipped. A guard on categorieJuridique == "1000" was measured as
-    # safe and REJECTED anyway: "safe if the guard is built" does real work in
-    # that sentence, and the hybrid needs no guard at all.
+    # are, so a blind fallback would publish on the order of TEN THOUSAND
+    # individuals' names, against the ~4,000 Los Angeles nearly shipped. A
+    # guard on categorieJuridique == "1000" measured as safe and was REJECTED
+    # anyway: it is only safe if the guard is built, and the hybrid needs no
+    # guard at all.
     #
     # So the fallback is the street address, as in Dublin and Milan, and step 2
-    # ASSERTS that no personal-name column ever reaches it - a structural claim
-    # rather than a measurement, which is what makes Los Angeles' failure mode
-    # impossible here rather than merely unlikely. France also masks
-    # non-diffusible records at source (name, address AND geolocation), which
-    # removed 13.3% of active Paris rows before any of this ran.
-    # ⚠ NOT name_is_address=True. That flag is Dublin's case - a register with
-    # no name column at all - and Paris carries a real premises name on 37.2%
-    # of built pins, so it is Milan's hybrid and takes Milan's shape. Setting
-    # the flag also prints Dublin's own verification note (Irish streets named
-    # after people, floor lists) as though it had been checked here, which it
-    # had not.
+    # ASSERTS that no personal-name column ever reaches it: a structural claim
+    # rather than a measurement, which makes Los Angeles' failure mode
+    # impossible here rather than unlikely. France also masks non-diffusible
+    # records at source (name, address AND geolocation): 13.3% of active Paris
+    # rows.
+    # ⚠ NOT name_is_address=True. That flag is Dublin's case (no name column at
+    # all); Paris carries a real premises name on 37.2% of built pins, so it
+    # takes Milan's shape. The flag also prints Dublin's own verification note
+    # (Irish streets named after people, floor lists), which was never checked
+    # here.
     "paris": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("business_name",)),
-    # Marseille is Paris's entry unchanged, and that is the point rather than
-    # laziness: both read ONE national register through ONE shared step 2
+    # Marseille is Paris's entry unchanged, deliberately: both read ONE national
+    # register through ONE shared step 2
     # (`pipeline/countries/france_register.py`), so the structural claim is the
-    # same claim - no personal-name column is ever loaded, therefore no pin can
-    # be one. The three remaining French cities will inherit it identically.
-    #
-    # What differs is only the fill rate: Marseille shows a premises name on
-    # 43.8% of pins against Paris's 37.3%, so it falls back to the address less
-    # often. Better data, same guarantee.
+    # same claim - no personal-name column is ever loaded, so no pin can be
+    # one. Only the fill rate differs: a premises name on 43.8% of pins against
+    # Paris's 37.3%.
     "marseille": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("business_name",)),
-    # Toulouse, the third on the same shared step 2 and so the same structural
-    # guarantee again. Its fill rate is the best of the three at 51.9%, and
-    # that is partly EARNED rather than given: excluding `96.09Z` removed 1,429
-    # rows whose naming rate was the worst in the file, so the figure rose from
-    # 50.6% to 51.9% as a side effect of a filter taken for other reasons.
+    # Toulouse: the same shared step 2, the same structural guarantee. Fill
+    # rate 51.9%, up from 50.6% as a side effect of excluding `96.09Z` for
+    # other reasons (1,429 rows with the worst naming rate in the file).
     "toulouse": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv",
                      address=("business_name",)),
-    # Lille (Regional): the same shared French step 2 across eleven
-    # communes rather than one, so the same structural guarantee - no
-    # registrant-name column is ever loaded, in any of them.
+    # Lille (Regional): the same shared French step 2 across eleven communes,
+    # so the same structural guarantee in each.
     "lille": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("business_name",)),
@@ -198,9 +187,8 @@ REGISTRIES = {
     "bergen": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
-    # Rennes, the fifth and last French city on the same shared step 2: the
-    # same structural guarantee. Its premises-name rate is the best of the
-    # five at 59.1%.
+    # Rennes: the same shared step 2 and structural guarantee. Premises-name
+    # rate 59.1%, the best of the first five French cities.
     "rennes": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
@@ -218,21 +206,14 @@ REGISTRIES = {
                   processed="businesses_clean.csv",
                   address=("business_name",))
        for slug in ("brno", "plzen", "olomouc", "ostrava", "liberec", "most")},
-    # Copenhagen, the first Danish city: Oslo's structural guarantee, from
-    # CVR. The parent company's legal form is joined for every premises, and
-    # a personally owned one (Enkeltmandsvirksomhed, PMV) - or any name with
-    # the sole-trader marker "v/" - shows its address, never its name. CVR's
-    # `coNavn` (c/o, a person on 25% of storefront rows) is never loaded and
-    # step 2 asserts it. No registrant-name column exists to fall back to.
-    # São Paulo, the first Brazilian city: IBGE's CNEFE has NO owner or
-    # registrant column at all - a pin shows the census enumerator's
-    # description of the establishment, or, at an address that also holds a
-    # dwelling, only its category (the owner's decision of 2026-09-23,
-    # structural, in pipeline/countries/brazil_register.py). So the fallback
-    # failure cannot occur; the only route to a person's name is a first name
-    # inside a description at a non-dwelling address (`BAR DO PAULO`), which
-    # is a trade name there. No address column is carried, so the unit check
-    # is skipped.
+    # São Paulo: IBGE's CNEFE has NO owner or registrant column at all. A pin
+    # shows the census enumerator's description of the establishment or, at
+    # an address that also holds a dwelling, only its category (the owner's
+    # decision of 2026-09-23, structural, in
+    # pipeline/countries/brazil_register.py). So the fallback failure cannot
+    # occur; the only route to a person's name is a first name inside a
+    # description at a non-dwelling address (`BAR DO PAULO`), which is a trade
+    # name there. No address column is carried, so the unit check is skipped.
     "sao_paulo": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
     # Berlin: IHK Berlin's Gewerbedaten carries NO name and NO street column of
@@ -295,6 +276,12 @@ REGISTRIES = {
                    processed="businesses_clean.csv", address=None),
     "rio_de_janeiro": dict(raw=None, trade=None, owner=None,
                            processed="businesses_clean.csv", address=None),
+    # Copenhagen: Oslo's structural guarantee, from CVR. The parent company's
+    # legal form is joined for every premises, and a personally owned one
+    # (Enkeltmandsvirksomhed, PMV), or any name with the sole-trader marker
+    # "v/", shows its address, never its name. CVR's `coNavn` (c/o, a person on
+    # 25% of storefront rows) is never loaded and step 2 asserts it. No
+    # registrant-name column exists to fall back to.
     "copenhagen": dict(raw=None, trade=None, owner=None,
                        processed="businesses_clean.csv",
                        address=("business_name",)),
@@ -348,11 +335,6 @@ REGISTRIES = {
     "hong_kong": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",)),
-    # Seoul's seventeen LOCALDATA registers carry the premises' trade name and
-    # NO operator column (no 대표자, 성명 or 이름 in any of them); the telephone
-    # column is never read, which step 2 asserts. So there is no fallback pair,
-    # and the Latin heuristic cannot read Hangul: `korean` runs the Korean pass
-    # (pipeline/korean_names.py) instead.
     # Taiwan's national tax register publishes no owner column; the risk is a
     # sole proprietor registered under the owner's own name. `taiwan` runs the
     # rule test above; the Latin heuristic cannot read Chinese.
@@ -365,6 +347,11 @@ REGISTRIES = {
     "taoyuan": dict(raw=None, trade=None, owner=None,
                     processed="businesses_clean.csv",
                     address=("address",), taiwan=True),
+    # Seoul's seventeen LOCALDATA registers carry the premises' trade name and
+    # NO operator column (no 대표자, 성명 or 이름 in any of them); the telephone
+    # column is never read, which step 2 asserts. So there is no fallback pair,
+    # and the Latin heuristic cannot read Hangul: `korean` runs the Korean pass
+    # (pipeline/korean_names.py) instead.
     "seoul": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), korean=True, withheld="Name withheld"),
@@ -474,10 +461,6 @@ REGISTRIES = {
     "hiroshima": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",), japan=True),
-    # Houston: the Texas Comptroller's sales-tax permits. No taxpayer column is
-    # ever downloaded but the organisation type (fetch_sources names its
-    # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its
-    # address, so the names left are companies' - which this run measures.
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no
@@ -499,6 +482,10 @@ REGISTRIES = {
     "pittsburgh": dict(raw=None, trade=None, owner=None,
                        processed="businesses_clean.csv",
                        address=("address",)),
+    # Houston: the Texas Comptroller's sales-tax permits. No taxpayer column is
+    # ever downloaded but the organisation type (fetch_sources names its
+    # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its
+    # address, so the names left are companies' - which this run measures.
     "houston": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),
@@ -580,11 +567,10 @@ REGISTRIES = {
     # Miami never loads a registrant-name column either: OWNERNAME is populated
     # on 100% of rows and is frequently a person, so fetch_sources.py does not
     # download it and step 2 asserts it and every MAIL* field stay absent.
-    # There is therefore no trade/owner fallback pair to join against, and -
-    # unlike Los Angeles (68% blank dba_name) and D.C. (49%) - none is needed,
-    # because BUSNAME is present on every row. So `raw`, `trade` and `owner`
-    # are None and the fallback measure reports as structurally absent, which
-    # is a stronger statement than a low count.
+    # Unlike Los Angeles (68% blank dba_name) and D.C. (49%), no fallback is
+    # needed: BUSNAME is present on every row. So `raw`, `trade` and `owner`
+    # are None and the fallback measure reports as structurally absent, a
+    # stronger statement than a low count.
     #
     # Its address is one free-text field, so the unit check is a regex over
     # BUSADDR rather than a structured column the way New York's is.
@@ -610,15 +596,15 @@ REGISTRIES = {
     "boston": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
-    # MADRID IS THE STRONGEST STRUCTURAL CASE IN THIS PROJECT, and the reason
-    # differs from every city above. New York, Philadelphia, Miami and Boston
-    # all have a registrant-name column and decline to download it. Madrid's
-    # register HAS NONE TO DECLINE: all 47 columns of the Censo de locales were
-    # listed on 2026-09-22 and not one is an owner, titular, NIF/CIF, razon
-    # social or contact field. The only name-shaped column is
-    # `nombre_agrupacion`, which names a MARKET or SHOPPING CENTRE a unit sits
-    # inside. Step 2 asserts twelve personal column names stay absent, so a
-    # publisher widening the file raises rather than leaks.
+    # MADRID IS A STRUCTURAL CASE for a different reason from every city above.
+    # New York, Philadelphia, Miami and Boston all have a registrant-name
+    # column and decline to download it. Madrid's register HAS NONE TO DECLINE:
+    # of the 47 columns of the Censo de locales (listed 2026-09-22), not one is
+    # an owner, titular, NIF/CIF, razon social or contact field. The only
+    # name-shaped column is `nombre_agrupacion`, which names a MARKET or
+    # SHOPPING CENTRE a unit sits inside. Step 2 asserts twelve personal column
+    # names stay absent, so a publisher widening the file raises rather than
+    # leaks.
     #
     # `rotulo` (the shop sign) is populated on 100% of kept premises and step 2
     # RAISES if any is blank, so there is no fallback path even in principle.
@@ -645,17 +631,16 @@ REGISTRIES = {
     # run.
     "barcelona": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
-    # Washington D.C. is the first city since Chicago where the trade/owner
-    # fallback pair genuinely EXISTS and has to be measured rather than
-    # reported as structurally absent. Its step 2 falls back from
-    # ENTITYTRADENAME to ENTITYNAME, which is the legal entity's name - a
-    # company name for a corporation, and sometimes a person's.
+    # Washington D.C.: the trade/owner fallback pair EXISTS and is measured,
+    # not reported as structurally absent. Step 2 falls back from
+    # ENTITYTRADENAME to ENTITYNAME, the legal entity's name: a company name
+    # for a corporation, and sometimes a person's.
     #
-    # Step 0 read that as "the Los Angeles trap at half LA's severity", on a
-    # 49% blank-trade-name rate. That rate was measured before the category
-    # exclusions, and General Business - 11,074 office rows, mostly with no
-    # trade name - is most of it. On the rows that reach the map the gap is
-    # 26.9%, and 85.6% of those carry a company-shaped ENTITYNAME.
+    # The 49% blank-trade-name rate Step 0 read as "the Los Angeles trap at
+    # half LA's severity" was measured before the category exclusions, and
+    # General Business (11,074 office rows, mostly with no trade name) is most
+    # of it. On the rows that reach the map the gap is 26.9%, and 85.6% of
+    # those carry a company-shaped ENTITYNAME.
     #
     # It also carries a STRUCTURAL entity-type signal, like Philadelphia's:
     # ENTITYTYPE names the legal form, and it spells sole trading two ways, so
@@ -670,74 +655,44 @@ REGISTRIES = {
                           entity_type="ENTITYTYPE",
                           entity_individual=("Sole Proprietorship",
                                              "Domestic Sole Proprietor")),
-    # Vancouver is REGIONAL (Vancouver + Surrey) and the only entry here whose
-    # processed file mixes two registries. `raw` points at Vancouver's own
-    # export, because Surrey's has no trade/owner pair to join against: it
-    # publishes a single BusinessName and no second name column, so Surrey
-    # rows cannot be a substituted fallback by construction.
-    #
-    # Vancouver's fallback pair genuinely exists, as D.C.'s does:
-    # businesstradename -> businessname, blank on 49.6% of MAPPABLE rows (the
-    # 63.0% in the build brief was measured before the coordinate and category
-    # exclusions - the denominator error this project keeps re-learning).
-    #
-    # ITS STRUCTURAL SIGNAL IS A NAME FORMAT, NOT A COLUMN, which is why
-    # entity_type is absent here even though the city has a structural signal
-    # as good as Philadelphia's or D.C.'s: Vancouver WRAPS A SOLE PROPRIETOR'S
-    # OWN NAME IN PARENTHESES - "(Christopher Colonia)", "(Qi Liu)". Step 2
-    # uses it as the primary signal, unioned with the person-name regex, and
-    # records the result in two columns of the processed file:
-    # `registrant_name` and `name_suppressed`. Those are reported below
-    # instead of an entity_type.
-    #
-    # So read this city's person-like-name percentage as a CROSS-CHECK of a
-    # structural measure, the same way round as Philadelphia's.
-    #
-    # Its `sep` is ";" - see the read_csv note in check().
-    # Montréal is the ONLY city here whose source is a field SURVEY rather
-    # than a licence register, and it has the strongest privacy position of
-    # the eleven. `NOM_ETAB` is the ESTABLISHMENT's name, populated on 100% of
+    # Montréal's source is a field SURVEY rather than a licence register.
+    # `NOM_ETAB` is the ESTABLISHMENT's name, populated on 100% of
     # rows, and the survey publishes no registrant, owner, agent or contact
-    # column at all - so there is no fallback pair to join against and no pin
-    # CAN be a person's name this pipeline substituted. Reported as
-    # structurally absent, which is a stronger statement than a low count.
-    #
-    # The publisher did the privacy work upstream by surveying PREMISES rather
-    # than licensees, which is the `read-licence` step-6b question answered in
-    # the most favourable direction available.
+    # column at all, so no pin CAN be a person's name this pipeline
+    # substituted. Reported as structurally absent, a stronger statement than
+    # a low count. The publisher did the privacy work upstream by surveying
+    # PREMISES rather than licensees (the `read-licence` step-6b question,
+    # answered in the most favourable direction).
     #
     # Its address is one free-text field (`ADRESSE`), so the unit check is a
-    # regex over it as Miami's is - and SUITE, which the survey does carry, is
+    # regex over it as Miami's is. SUITE, which the survey carries, is
     # deliberately not joined in: a suite number in a shopping centre is
     # commercial, and 1,940 of these rows are in one.
     "montreal": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv",
                      address=("address",)),
-    # Calgary joins Montréal and Miami in the "structurally absent" group,
-    # and for the cleanest reason yet: `tradename` is blank on ZERO of its
-    # 23,203 rows and the register carries no second name column at all, so
-    # there is no fallback pair to join against and no pin CAN be a
-    # substituted name. `homeoccind` is `N` on every row, so the register also
-    # asserts nothing about home occupation - what stands in for it is the
-    # `(HOME BASED)` and `(MOBILE)` suffixes on individual categories, which
-    # the taxonomy excludes.
+    # Calgary is "structurally absent", like Montréal and Miami: `tradename` is
+    # blank on ZERO of its 23,203 rows and the register carries no second name
+    # column, so no pin CAN be a substituted name. `homeoccind` is `N` on every
+    # row, so the register asserts nothing about home occupation; what stands
+    # in for it is the `(HOME BASED)` and `(MOBILE)` suffixes on individual
+    # categories, which the taxonomy excludes.
     #
     # Its address is one free-text field, so the unit check is a regex over it
     # as Miami's and Montréal's are.
     "calgary": dict(raw=None, trade=None, owner=None,
                     processed="businesses_clean.csv",
                     address=("address",)),
-    # Edmonton is the STRONGEST of the "structurally absent" group, and for a
-    # reason none of the others have: the register publishes exactly ONE name
-    # column and it is the business's. There is no registrant, owner or contact
-    # field at all - so unlike Calgary (no blank tradenames) or Montreal (no
-    # second name), there is not merely nothing to fall back ON, there is
-    # nothing to fall back TO. No pin CAN be a person's name.
+    # Edmonton: the register publishes exactly ONE name column, the
+    # business's, and no registrant, owner or contact field at all. Unlike
+    # Calgary (no blank tradenames) or Montreal (no second name), there is
+    # nothing to fall back TO, so no pin CAN be a person's name.
     #
-    # Its own privacy work goes further than this project's: `<REDACTED FOR
-    # PRIVACY>` replaces the address on 1,729 of the 25,105 Commercial rows,
-    # and it takes the COORDINATES with it (redacted rows carrying coordinates:
-    # zero), so those records cannot be mapped at all. `read-licence` step 6b.
+    # The publisher's own privacy work goes further than this project's:
+    # `<REDACTED FOR PRIVACY>` replaces the address on 1,729 of the 25,105
+    # Commercial rows and takes the COORDINATES with it (redacted rows carrying
+    # coordinates: zero), so those records cannot be mapped at all.
+    # `read-licence` step 6b.
     # Address is one free-text field, so the unit check is a regex over it as
     # Miami's, Montreal's and Calgary's are.
     "edmonton": dict(raw=None, trade=None, owner=None,
@@ -753,12 +708,34 @@ REGISTRIES = {
     "toronto": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),
+    # Vancouver is REGIONAL (Vancouver + Surrey) and the only entry here whose
+    # processed file mixes two registries. `raw` points at Vancouver's own
+    # export, because Surrey's has no trade/owner pair to join against: it
+    # publishes a single BusinessName and no second name column, so Surrey
+    # rows cannot be a substituted fallback by construction.
+    #
+    # Vancouver's fallback pair exists, as D.C.'s does: businesstradename ->
+    # businessname, blank on 49.6% of MAPPABLE rows (the build brief's 63.0%
+    # was measured before the coordinate and category exclusions: the
+    # denominator error this project keeps re-learning).
+    #
+    # ITS STRUCTURAL SIGNAL IS A NAME FORMAT, NOT A COLUMN, so entity_type is
+    # absent even though the signal is as good as Philadelphia's or D.C.'s:
+    # Vancouver WRAPS A SOLE PROPRIETOR'S OWN NAME IN PARENTHESES
+    # ("(Christopher Colonia)", "(Qi Liu)"). Step 2 uses it as the primary
+    # signal, unioned with the person-name regex, and records the result in
+    # two columns of the processed file, `registrant_name` and
+    # `name_suppressed`, reported below instead of an entity_type. Read this
+    # city's person-like-name percentage as a CROSS-CHECK of a structural
+    # measure, the same way round as Philadelphia's.
+    #
+    # Its `sep` is ";" - see the read_csv note in check().
     "vancouver": dict(raw="vancouver_business_licences.csv", sep=";",
                       trade="businesstradename", owner="businessname",
                       processed="businesses_clean.csv",
                       address=("address",)),
-    # Mexico City has the strongest structural position of any city here, and
-    # it is the PUBLISHER's doing rather than this pipeline's. INEGI omits
+    # Mexico City's structural position is the PUBLISHER's doing rather than
+    # this pipeline's. INEGI omits
     # `raz_social` entirely when the owner is a persona fisica - its own data
     # dictionary says "para proteger la confidencialidad de la informacion" -
     # and `nom_estab` is defined as the name on the shopfront, "visible y
@@ -769,14 +746,14 @@ REGISTRIES = {
     # has no mechanism here. Step 2 additionally forbids telefono, correoelec,
     # www and raz_social and asserts they never arrive.
     #
-    # ADDRESS IS None AND THAT IS A MEASUREMENT GAP, NOT A PASS - recorded the
-    # way San Diego's and Boston's gaps are. businesses_clean.csv carries no
-    # address column because the map needs none, so the unit-indicator check
-    # cannot run from here. DENUE does have `numero_int`, a STRUCTURED interior
-    # number (better evidence than a regex over free text, per the
-    # multi-source-city skill), and step 2 measures and prints its rate without
-    # publishing the column - adding a unit number to the output to check for
-    # unit numbers would be self-defeating.
+    # ADDRESS IS None AND THAT IS A MEASUREMENT GAP, NOT A PASS, like San
+    # Diego's and Boston's. businesses_clean.csv carries no address column
+    # because the map needs none, so the unit-indicator check cannot run from
+    # here. DENUE has `numero_int`, a STRUCTURED interior number (better
+    # evidence than a regex over free text, per the multi-source-city skill);
+    # step 2 measures and prints its rate without publishing the column, since
+    # adding a unit number to the output to check for unit numbers would be
+    # self-defeating.
     "mexico_city": dict(raw=None, trade=None, owner=None,
                         processed="businesses_clean.csv",
                         address=None),
@@ -831,21 +808,19 @@ REGISTRIES.update({
 # "residential" (DECISIONS.md, 2026-09-21): STE in the Diamond District is an
 # office, APT is someone's home.
 #
-# CORRECTED 2026-09-21. These lists contradicted their own source write-up,
-# `docs/passover_name_filtering_skill.md`, on three designators, and the
-# contradiction inflated every city's reported residential share:
-#   FL / FLOOR and RM / ROOM were listed as RESIDENTIAL here and COMMERCIAL
-#     there. "FL 3" and "RM 200" are an office floor and a room in a
-#     commercial building; a dwelling is APT or UNIT. Moved to commercial.
-#   SPC was listed as COMMERCIAL here and RESIDENTIAL there. A "space" is a
-#     mobile-home or trailer space, which is a home. Moved to residential,
-#     with SPACE and TRLR added alongside it.
+# Aligned 2026-09-21 with the source write-up,
+# `docs/passover_name_filtering_skill.md`, on three designators; the mismatch
+# had inflated every city's reported residential share:
+#   FL / FLOOR and RM / ROOM are COMMERCIAL: "FL 3" and "RM 200" are an office
+#     floor and a room in a commercial building; a dwelling is APT or UNIT.
+#   SPC is RESIDENTIAL: a "space" is a mobile-home or trailer space, a home.
+#     SPACE and TRLR sit alongside it.
 # The source's list also includes a bare LOT as residential (a trailer lot).
-# That is deliberately NOT adopted: in these registries "LOT" is at least as
-# likely to appear in a parking-lot address, and it could not be verified
-# either way, so adopting it would trade a known error for an unknown one.
-# PH / BSMT / REAR / LOWR are kept as residential - secondary dwelling units,
-# a refinement the source write-up predates rather than contradicts.
+# Deliberately NOT adopted: in these registries "LOT" is at least as likely to
+# be a parking-lot address, and it could not be verified either way, so
+# adopting it would trade a known error for an unknown one.
+# PH / BSMT / REAR / LOWR are residential (secondary dwelling units), a
+# refinement the source write-up predates rather than contradicts.
 UNIT_RESIDENTIAL = re.compile(
     r"\b(APT|APARTMENT|UNIT|PH|BSMT|REAR|LOWR|SPC|SPACE|TRLR)\b")
 UNIT_COMMERCIAL = re.compile(
@@ -871,18 +846,17 @@ UNIT = re.compile(r"\b(APT|UNIT|STE|SUITE|SPC|#)\b")
 # --- Contact details -------------------------------------------------------
 # A different exposure from a name, and a worse one: a name at a commercial
 # address identifies a business, while an email address or mobile number is a
-# direct line to a person. Added 2026-09-21 after a repo grep - not this script
-# - found a Gmail address published as a New York pin's business name. Neither
-# test above could have caught it: an email fails PERSON and contains an "@",
-# and NOT_A_NAME does not list "@", so it was reported as clean.
+# direct line to a person. Added 2026-09-21, when a Gmail address had been
+# published as a New York pin's business name and the tests above reported it
+# clean: an email fails PERSON, and NOT_A_NAME does not list "@".
 EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 # Conservative on purpose: a 10-digit run with separators, not any long number
 # (a licence number or a street number must not match).
 PHONE = re.compile(r"(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}")
 # "C/O JOHN SMITH" names a person who is not the business. The separator is
 # MANDATORY: an optional one (`C[/.]?O`) matches the bare abbreviation "CO" and
-# flagged every "SAUSAGE CO" and "TYPEWRITER CO" in the project - 567 false
-# positives across five cities before this was tightened.
+# flagged every "SAUSAGE CO" and "TYPEWRITER CO" in the project (567 false
+# positives across five cities).
 CARE_OF = re.compile(r"\bC[/.]O\b|\bCARE\s+OF\b|\bATTN\b")
 
 # "Andrew Polhemus (Molto Bene Ravioli Co)" - a registry that formats
@@ -913,9 +887,9 @@ def mask_phone(num):
 
 
 def report_contact_details(rows, names):
-    """Contact details and surname-first names in the DISPLAYED pin text.
-    Prints masked values: the point is to find and count them, not reprint
-    them."""
+    """Report contact details and surname-first names in the DISPLAYED pin
+    text. Prints masked values: the point is to find and count them, not
+    reprint them."""
     emails, phones, commas, care_of = [], [], [], []
     for row, name in zip(rows, names):
         category = html.unescape(str(row[3])) if len(row) > 3 else ""
@@ -963,23 +937,23 @@ def report_contact_details(rows, names):
 
 
 def pins(slug):
-    """[lat, lon, name, classification, station, ring] for every pin in the map.
+    """Return [lat, lon, name, classification, station, ring] for every pin in
+    the map.
 
     row[3] IS AN INDEX INTO A PER-LAYER LOOKUP TABLE since 2026-09-22, not the
-    classification string, because map_common indexes it to shrink the rendered
-    file (Mexico City: 106 distinct values across 283,345 rows, ~7 MB inline).
-    This resolves it back to the string so every caller below is unchanged.
+    classification string: map_common indexes it to shrink the rendered file
+    (Mexico City: 106 distinct values across 283,345 rows, ~7 MB inline). This
+    resolves it back to the string so every caller below is unchanged.
 
-    The pairing is positional: map_common emits the callback - and therefore
-    `var CATEGORIES` - BEFORE its `var data`, once per category layer, so the
-    Nth table belongs to the Nth data block. Verified against a rendered file
-    rather than assumed.
+    The pairing is positional: map_common emits the callback, and therefore
+    `var CATEGORIES`, BEFORE its `var data`, once per category layer, so the
+    Nth table belongs to the Nth data block (checked against a rendered file).
 
     A bare string at row[3] is still accepted, so a map rendered before the
-    change reads correctly instead of raising - which matters because these
-    outputs are committed and are re-rendered city by city.
+    change reads correctly instead of raising; these outputs are committed and
+    re-rendered city by city.
 
-    SINCE 2026-09-27 the rows ship as `var data = JSON.parse("...")` - a JS
+    SINCE 2026-09-27 the rows ship as `var data = JSON.parse("...")`, a JS
     string holding the JSON, because WebKit will not compile a literal of
     more than ~107k-131k elements (map_common, above `_js_json`). The string
     is itself valid JSON, so it decodes with two json.loads calls. The old
@@ -1218,11 +1192,11 @@ def check(slug):
 
 
 def main():
-    # The report prints business names, and since Hong Kong, Seoul and Taiwan
-    # those include Han and Hangul. A Windows console defaults to cp1252 and
-    # raised UnicodeEncodeError partway through the run (2026-09-27), so the
-    # privacy gate stopped before the cities after it. UTF-8 regardless of the
-    # console; the cjk-text skill records the same trap.
+    # The report prints business names, including Han and Hangul. A Windows
+    # console defaults to cp1252 and raises UnicodeEncodeError partway through
+    # the run, stopping the privacy gate before the remaining cities
+    # (2026-09-27). UTF-8 regardless of the console; the cjk-text skill
+    # records the same trap.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

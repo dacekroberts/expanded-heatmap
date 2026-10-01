@@ -1,14 +1,14 @@
-"""Screen a Brazilian city from IBGE's CNEFE 2022 - the census address file,
-which turns out to be a FIELD SURVEY of every non-residential address.
+"""Screen a Brazilian city from IBGE's CNEFE 2022, the census address file:
+a FIELD SURVEY of every non-residential address.
 
 WHY THIS EXISTS
 ---------------
-Brazil was carried as "CNPJ plus geocoding at national scale". On 2026-09-23
-two things changed that: Receita now serves CNPJ only to Brazilian networks
-(15 of 16 check nodes reset, the Brazilian one answered 200), and CNEFE 2022
-turned out to carry `DSC_ESTABELECIMENTO` - the enumerator's identification of
-every establishment - with a field-collected coordinate. No register, no
-geocoder: the census walked every block face.
+Brazil was carried as "CNPJ plus geocoding at national scale" until
+2026-09-23: Receita serves CNPJ only to Brazilian networks (15 of 16 check
+nodes reset, the Brazilian one answered 200), and CNEFE 2022 carries
+`DSC_ESTABELECIMENTO`, the enumerator's identification of every
+establishment, with a field-collected coordinate. No register, no geocoder:
+the census walked every block face.
 
 It is national, one schema, so this one script screens every Brazilian city.
 
@@ -30,9 +30,9 @@ so that rule cannot apply as written. The adaptation:
     hall) is removed before "SALAO" (a hair salon) can claim it, and
     "DEPOSITO DE BEBIDAS" (a drinks shop) before "DEPOSITO" (a warehouse).
   * The UNMATCHED share is the catch-all, measured like any other catch-all,
-    and a fixed random sample of it is printed to be READ - the skill's
-    "what does the catch-all actually mean" step, which is the only way to
-    know whether storefronts are hiding in it.
+    and a fixed random sample of it is printed to be READ (the skill's "what
+    does the catch-all actually mean" step), the only way to know whether
+    storefronts are hiding in it.
   * Buckets follow the NAICS boundaries every built city uses: Retail = 44-45
     minus non-store, Food service = 722 (NOT accommodation), Personal services
     = 812 minus parking. So car washes, auto repair, gyms, shoe and phone
@@ -239,13 +239,13 @@ RULES = [
 BUCKETS = ("Retail", "Food service", "Personal services")
 
 
-# --- enumerator misspellings, caught by EDIT DISTANCE rather than by listing -
-# The unmatched remainder was full of one-letter slips of words the rules
-# already know - RESTAUTANTE, CABELEIRO, MADEREIRA, GARRAGEM, HORTIFRUTE,
-# METALUGICA. Listing them one at a time is the SPELLING table's job and
-# never finishes; this corrects any token within 1 edit (2 for long words) of
-# a vocabulary word, applied ONLY to rows that would otherwise be unmatched,
-# and cached per distinct token so it stays cheap.
+# --- enumerator misspellings, matched by EDIT DISTANCE rather than listed ---
+# The unmatched remainder is full of one-letter slips of words the rules
+# already know: RESTAUTANTE, CABELEIRO, MADEREIRA, GARRAGEM, HORTIFRUTE,
+# METALUGICA. Listing them one at a time (the SPELLING table) never finishes;
+# this corrects any token within 1 edit (2 for long words) of a vocabulary
+# word, applied ONLY to rows that would otherwise be unmatched, and cached per
+# distinct token so it stays cheap.
 VOCAB = sorted(set("""
 RESTAURANTE LANCHONETE PIZZARIA SORVETERIA CHURRASCARIA PASTELARIA CAFETERIA
 HAMBURGUERIA BOTEQUIM CERVEJARIA CHOPERIA PETISCARIA TEMAKERIA ESFIHARIA
@@ -312,14 +312,14 @@ ABSOLUTE = ("vacant", "no description")
 
 
 def classify(desc_norm):
-    """(label, bucket) for a normalised description; bucket None = not mapped.
+    """Return (label, bucket) for a normalised description; bucket None = not
+    mapped.
 
-    THE HEAD NOUN WINS. A Portuguese trade description puts it first - BAR DO
-    CLUBE, DELICIAS DA PRACA, RESTAURANTE DO HOTEL - so the rule whose match
+    THE HEAD NOUN WINS. A Portuguese trade description puts it first (BAR DO
+    CLUBE, DELICIAS DA PRACA, RESTAURANTE DO HOTEL), so the rule whose match
     starts EARLIEST in the string decides, and rule order breaks a tie (which
-    is how SALAO DE FESTAS beats SALAO). The first version took the first
-    RULE that matched anywhere, and would have dropped all three of those
-    examples as a club, a square and a hotel.
+    is how SALAO DE FESTAS beats SALAO). Taking the first RULE that matches
+    anywhere drops all three examples as a club, a square and a hotel.
     """
     best = None
     for i, (label, bucket, pat) in enumerate(RULES):
@@ -527,8 +527,8 @@ def main():
 
 if __name__ == "__main__":
     # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py
-    # crashed on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
+    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py,
+    # on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

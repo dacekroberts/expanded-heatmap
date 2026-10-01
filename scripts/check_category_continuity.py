@@ -10,8 +10,8 @@ WHY THIS EXISTS
 `docs/category_rules.md` holds the owner's cross-city rules - funeral out,
 canteens out, the "other personal services" catch-all out, commercial massage
 kept, car dealers kept, and so on - each with the cities it was measured on.
-It is prose, and prose is read past: Korea's SEMAS taxonomy was first proposed
-with massage left out, which would have made Korea the only country to drop it
+It is prose, and prose is read past: Korea's SEMAS taxonomy was proposed with
+massage left out, which would have made Korea the only country to drop it
 (DECISIONS 2026-09-29, "Incheon built on SEMAS's national storefront
 register"). A rule nobody runs is a rule the next city breaks.
 
@@ -445,7 +445,8 @@ def selftest():
     del cols["calgary_licencetype"]["tattoo"]
     case("B  an optional rule the module names, left out, fails", check(t), "B calgary_licencetype")
 
-    # D. A stale exception: Montréal's caterer exception pointed at a code that obeys the rule.
+    # D. A stale exception: Montréal's caterer exception pointed at a code that
+    # obeys the rule.
     t, cols = fresh()
     first(cols, "naics_montreal", "no_counter_food", "exception").row = "722310"
     case("D  a stale exception fails", check(t), "D naics_montreal: rule no_counter_food")
@@ -457,8 +458,8 @@ def selftest():
 
     # D. A pending departure the code has since brought into line. Any pending
     # cell will do: give it the row of a loc() in the same cell, which obeys the
-    # rule by construction. (This case named Boston's nightclub cell until the
-    # owner ruled on it, 2026-09-30, and the self-test crashed with it.)
+    # rule by construction. Not a named cell: one disappears when the owner
+    # rules on it (Boston's nightclub cell, 2026-09-30, crashed the self-test).
     t, cols = fresh()
     target = next(((s, rid, e, loc_e) for s, col in cols.items() for rid, cell in col.items()
                    for e in (cell if isinstance(cell, list) else [cell]) if e.kind == "pending"
