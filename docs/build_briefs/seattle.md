@@ -129,6 +129,135 @@ Then the multi-municipality work in `PLAN.md`, which is most of the cost.
 ## Still unknown
 
 - Everything in "Still to do" above.
-- Every other jurisdiction on Link's 1 and 2 Lines. Each is its own Step 0,
-  and Seattle's data says nothing about any of them.
-- The rail leg: the Link GTFS has not been read for this brief.
+- ~~Every other jurisdiction on Link's 1 and 2 Lines.~~ Screened 2026-10-01:
+  see the next section.
+- The rail leg: the Link GTFS has not been read for this brief. The OSM
+  station set below stands in until it is.
+
+---
+
+## The regional screen - every jurisdiction on the 1 and 2 Lines (2026-10-01)
+
+The owner's scope (2026-10-01): **a regional build with multiple city
+registers**, held as before. This section is what that build has to pull. It
+comes from staging, using one Overpass query and four metadata-only screens.
+Nothing was downloaded in bulk and no request was sent. The scratch output is
+in that session's scratchpad.
+
+### Stations: 37, in 11 cities
+
+From OSM's four Link route relations (1 Line 3494092 and 5517060; 2 Line
+17499739 and 17499740), each stop placed in its OSM admin_level 8 city:
+
+| City | Stations |
+|---|---|
+| Seattle | 17: Northgate to Rainier Beach on the 1 Line, plus Judkins Park on the 2 Line |
+| Bellevue | 6: South Bellevue, East Main, Bellevue Downtown, Wilburton, Spring District, BelRed |
+| Redmond | 4: Overlake Village, Redmond Technology, Marymoor Village, Downtown Redmond |
+| Shoreline | 2: Shoreline South/148th, Shoreline North/185th |
+| SeaTac | 2: SeaTac/Airport, Angle Lake |
+| Kent | 2: Kent Des Moines, Star Lake |
+| Lynnwood | 1: Lynnwood City Center |
+| Mountlake Terrace | 1 |
+| Tukwila | 1: Tukwila International Boulevard |
+| Federal Way | 1: Federal Way Downtown |
+| Mercer Island | 1 |
+
+The cross-lake 2 Line (Mercer Island, Judkins Park) opened on 2026-03-28,
+per Sound Transit's news release.
+
+**The 0.6 mi rings reach beyond the station cities.** Measured in UTM 10N
+against King County's city polygons:
+- **Des Moines:** 42% of Kent Des Moines' ring and 3% of Star Lake's. It has
+  no station.
+- **Unincorporated King County:** about 33% of Marymoor Village's ring, 15%
+  of Downtown Redmond's and about 16% of Star Lake's.
+- **Bellevue:** 41% of Overlake Village's ring, which is in Redmond.
+- **SeaTac:** 53% of Tukwila International Boulevard's ring.
+- **Federal Way:** 29% of Star Lake's ring.
+- **Slivers:** Beaux Arts (5% of South Bellevue's ring) and Lake Forest Park
+  (at the edge of Shoreline North's ring).
+- **No ring reaches** Burien, Renton, Normandy Park, Auburn, Kirkland, Clyde
+  Hill, Medina, Edmonds or Brier.
+
+### What each jurisdiction publishes
+
+| Jurisdiction | Licensed by | Retail | Food | Personal services |
+|---|---|---|---|---|
+| **Seattle** | the city (SLIM) | **own register** (above) | own register + King County food | own register |
+| **Bellevue** | the city (applied for through FileLocal) | **own register**: "Business Licenses (All)", 82,155 rows, NAICS, lat/long, daily; 1,770 in-city active rows in the buckets | own + King County food | own |
+| **Redmond** | state BLS since 2021 | own layer **frozen about 2020** (1,902 rows; no dates) | King County food | frozen layer only |
+| **Federal Way** | state BLS | shopping-centre extract, 2024 snapshot (1,048 points, no classification) | King County food | the same extract |
+| **Shoreline** | the city (own licence) | lookup tool only (`business.shorelinewa.gov`, capped at 100) | King County food | none |
+| **Kent, Des Moines** | the cities, through FileLocal | none published | King County food | none |
+| **Tukwila, SeaTac, Mercer Island** | state BLS | none | King County food | none |
+| **Lynnwood, Mountlake Terrace** | state BLS | none | **no current source** (below) | none |
+| **Unincorporated King County** | the county | none | King County food | none |
+
+### The regional sources
+
+- **Food, King County: Public Health – Seattle & King County, "Food
+  Establishment Inspection Data"** (`data.kingcounty.gov`, Socrata
+  `r878-4sxa`).
+  - 12,296 businesses across 108,905 rows, covering 2021-01-04 to
+    2026-09-29.
+  - **No coordinates**, but `parcel_number` is filled for 12,131. They join
+    to King County's public parcels (`PIN`, `LAT`/`LON`) or to its address
+    points (674,254, carrying `CTYNAME`).
+  - It behaves as a current-permit snapshot: 12,119 businesses were last
+    inspected in 2025 or 2026.
+  - It also covers grocery, meat/fish and bakery retail.
+  - The `city` field is the **postal** city, so scope by point-in-boundary.
+  - **Licence: conflicting.** The Socrata field says Public Domain. The
+    ArcGIS copy (`EPL_BusinessPoint`, which carries `Business_Status` and
+    points) says no redistribution without written authorization.
+    `licence-read` decides.
+- **Food, Snohomish County (Lynnwood, Mountlake Terrace).**
+  - The only layer is "Food Service Establishments (2025)": 3,699 points,
+    598 of them in Lynnwood and 92 in Mountlake Terrace. It has **no date,
+    status or licence field**, so it fails the currency rule.
+  - The county health department's portal is per-search only.
+- **Statewide: WA Liquor and Cannabis Board on- and off-premise lists**
+  (XLSX, dated 2026-09-29).
+  - The only source spanning both counties: food (on-premise) and
+    grocery/convenience (off-premise).
+  - **Not downloaded**: that needs the owner's OK.
+  - Its terms say records "may not be used for commercial purposes".
+- **No bulk source exists** for:
+  - **the state's business licences** (DOR BLS: lookup only; a bulk list
+    needs a Declaration of Non-Commercial Purpose);
+  - **personal-services licences** (DOL: counts only).
+- **Use-class fallbacks** (assessor present use per parcel; Snohomish
+  address points' `USECODE`):
+  - Parcel-level, with no names and no personal-services class in King
+    County.
+  - A cross-check only.
+
+### What the build has to pull
+
+1. **Seattle's register**: its licence read is still owed.
+2. **Bellevue's register**:
+   - It carries a "commercial use … prohibited" disclaimer, so it needs a
+     licence read.
+   - Licences never expire, so closed businesses linger (2,938 in-city
+     active rows were issued before 2015).
+   - 1,174 sole proprietorships, and 4,185 rows in residential zones.
+     `check_personal_exposure.py` is essential.
+3. **King County food inspections**, joined to the parcels: food for every
+   King County city and the unincorporated rings. Licence read first.
+4. **Lynnwood and Mountlake Terrace food**: the owner's call. One of:
+   - the LCB list (a download and a terms read);
+   - the 2025 Snohomish layer with its date on the page (it fails part 1 of
+     the currency rule);
+   - leave both cities' stations hollow, Tokyo's precedent.
+5. **Retail and personal services outside Seattle and Bellevue**: none
+   published.
+   - The routes are public-records requests: Shoreline, Kent and Des Moines
+     to the city; the BLS cities through DOR, which needs a non-commercial
+     declaration.
+   - That is outreach, the owner's last resort.
+   - Without it, those cities are food-only beside two full cities, and the
+     page states each city's coverage (the Tokyo and Band B precedents).
+6. **Rings that cross a city line** take the neighbour's data or are stated
+   as unmapped: Des Moines and unincorporated King County have King County
+   food only.
