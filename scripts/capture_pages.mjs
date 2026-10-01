@@ -135,7 +135,10 @@ const HEIGHT = `(() => {
 })()`;
 
 const report = {};
-const name = (p) => (p === '/' ? 'Overview' : p.replace(/^\//, ''));
+// A file name Windows accepts: a page with a query string (?region=Europe)
+// would otherwise put "?" and "=" in it.
+const name = (p) => (p === '/' ? 'Overview' : p.replace(/^\//, '').replace(/^\?/, 'Overview_')
+  .replace(/[^A-Za-z0-9_-]+/g, '-'));
 for (const p of pages) {
   for (const w of widths) {
     for (const theme of themes) {

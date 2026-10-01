@@ -18,6 +18,8 @@ import math
 import sys
 from pathlib import Path
 
+import copy
+
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
@@ -34,6 +36,7 @@ from cities import (
     REGIONS,
     SWITCHER_ORDER,
 )
+from label_competition import compete
 from components import (
     SITE_NAME,
     render_macro_map_theme,
@@ -157,6 +160,9 @@ HIGHLIGHT = [251, 191, 36, 255]
 # at 10 px was too thin to see or tap, so 12. check_macro_labels.py's MARKER_R
 # is half of this - change both together.
 DOT_PX = 12
+# In Global, the dots of cities that did not win a label (see the competition
+# below) draw faded under the pills.
+LOSER_DOT_OPACITY = 0.45
 
 
 def _hex(rgb):
@@ -544,10 +550,52 @@ if _frame_region != DEFAULT_FRAME:
 # Carto basemap: pydeck's own default style needs a Mapbox token; Carto's
 # public styles don't. (Tile provider is still an open decision before
 # deploying - see PLAN.md.)
+# GLOBAL'S LABELS ARE WON, NOT LISTED (owner, 2026-10-01): the cities compete
+# for space at this view's zoom - trams and minor cities out, the rest ranked
+# by mode, size and coverage, each trying its own offset and then four others -
+# in app/label_competition.py, which check_macro_labels.py and
+# check_deploy_imports.py score too. Europe had become a block of overlapping
+# names, and hand-placing offsets against every neighbour did not scale.
+if region == DEFAULT_REGION:
+    _won = compete(CITIES, view.latitude, view.longitude, view.zoom,
+                   _FACTS.get("storefronts", {}))
+    _lab = cities[cities["name"].isin(_won)].copy()
+    _lab["anchor"] = _lab["name"].map(lambda n: _won[n][0])
+    _lab["dx"] = _lab["name"].map(lambda n: _won[n][1])
+    _lab["dy"] = _lab["name"].map(lambda n: _won[n][2])
+    labels.data = _lab
+    # THE WINNERS ON TOP (owner, 2026-10-01). Every other city's dot draws
+    # UNDER the pills and FADED: at world zoom a city that lost on space may
+    # sit beneath a winner's pill, and reappears as the reader zooms in (pills
+    # stay a fixed pixel size while the dots spread). The winners' dots draw at
+    # full strength ABOVE the pills - the competition keeps every pill off its
+    # own dot and off every winner's - so each name reads next to its city.
+    # Opacity, not size or a coloured ring: a larger dot would crowd the
+    # spacing the other views were tuned at, and a ring that reads on the
+    # light basemap vanishes on the dark one. The invisible picking layer
+    # splits the same way, so a pill's click is never caught by a dot under it.
+    _is_won = cities["name"].isin(_won)
+
+    def _part(layer, rows, suffix="", **props):
+        part = copy.copy(layer)
+        part.data = rows
+        if suffix:
+            part.id = layer.id + suffix
+        for k, v in props.items():
+            setattr(part, k, v)
+        return part
+    _layers = [_part(dots, cities[~_is_won], "-low", opacity=LOSER_DOT_OPACITY),
+               _part(markers, cities[~_is_won], "-low"),
+               labels,
+               _part(dots, cities[_is_won]), _part(markers, cities[_is_won])]
+else:
+    _layers = [dots, markers, labels]
+
 deck = pdk.Deck(
     # The invisible picking layer sits ABOVE the icons, so its amber hover
-    # highlight covers the hovered dot; the name pills stay on top of both.
-    layers=[dots, markers, labels],
+    # highlight covers the hovered dot; in a region view the name pills stay
+    # on top of both (in Global, under them - above).
+    layers=_layers,
     initial_view_state=view,
     # repeat=True draws the layers on EVERY copy of the world, not only the
     # primary one (-180..180). The basemap always repeats; without this, a
@@ -619,7 +667,8 @@ st.markdown(
 # for why the pill matters more. Both layers carry the same `name`, so the
 # lookup is identical; whichever layer deck.gl picked, the first hit wins.
 objects = (event.selection.objects or {}) if event else {}
-picked = objects.get("cities", []) or objects.get("city-labels", [])
+picked = (objects.get("cities", []) or objects.get("cities-low", [])
+          or objects.get("city-labels", []))
 if picked:
     target = next((c for c in CITIES if c["name"] == picked[0].get("name")), None)
     if target:

@@ -252,78 +252,55 @@ try:
         y0 = y + dy - PILL_H / 2
         return x0, x0 + w, y0, y0 + PILL_H
 
-    # THE LANDING VIEW ("Global" since 2026-09-24) LABELS EVERY CITY, and the
-    # owner accepted that Europe and South America pile up at the edge of a
-    # wide screen there - each has its own region for reading them. So score
-    # only the labelled cities whose MARKER falls on the 343 px phone canvas,
-    # the frame fit_view is sized for: North America today, by arithmetic
-    # rather than by list. check_macro_labels.py applies the same rule and
-    # scores every other region in full.
-    def _on_phone(c):
-        x = (c["lon"] - CLON) / 360 * SCALE + 343 / 2
-        y = (_mercy(c["lat"]) - _mercy(CLAT)) * SCALE + 460 / 2
-        return 0 <= x <= 343 and 0 <= y <= 460
+    # GLOBAL'S LABELS ARE WON, NOT LISTED (owner, 2026-10-01): the landing
+    # view labels the winners of app/label_competition.py's competition, at
+    # their winning offsets. Score exactly those, with the competition's own
+    # measured widths - this file's 7 px-per-character model is too coarse to
+    # judge placements that tight. The competition already refuses every
+    # failure below; this runs it from a CLEAN CLONE under the lean venv, so a
+    # broken import or a city with no measured width shows here first.
+    import json as _json
+    import cities as _cm
+    from label_competition import compete as _compete, pill_box as _pill, TEXT_WIDTH as _TW
+    with open(os.path.join(os.path.dirname(_cm.__file__), "macro_facts.json"),
+              encoding="utf-8") as _f:
+        _facts = _json.load(_f).get("storefronts", {})
+    _won = _compete(_ALL, CLAT, CLON, ZOOM, _facts)
+    if not _won:
+        problems.append("macro map: the Global label competition chose no labels")
+    _unmeasured = sorted(n for n in _won if n not in _TW)
+    if _unmeasured:
+        problems.append(f"macro map: no measured text width for {_unmeasured} - "
+                        "add each to TEXT_WIDTH in app/label_competition.py")
+    _by = {c["name"]: c for c in _ALL}
 
-    # A minor city is not labelled in the landing view (owner, 2026-09-30):
-    # the same rule as Overview.py and check_macro_labels.py.
-    _CC = [c for c in _cities_in(_RO[0]) if _on_phone(c) and c.get("label_tier") != "minor"]
+    def _xy(c, W):
+        return ((c["lon"] - CLON) / 360 * SCALE + W / 2,
+                (_mercy(c["lat"]) - _mercy(CLAT)) * SCALE + 460 / 2)
 
     seen = set()
     for W in (343, 726, 1030):          # 375 / 768 / 1200 px viewports
-        boxes = {c["name"]: _box(c, W) for c in _CC}
+        boxes = {n: _pill(n, *_xy(_by[n], W), off) for n, off in _won.items()}
         names = sorted(boxes)
         for i, n1 in enumerate(names):
+            a = boxes[n1]
             for n2 in names[i + 1:]:
-                a, b = boxes[n1], boxes[n2]
-                ox = min(a[1], b[1]) - max(a[0], b[0])
-                oy = min(a[3], b[3]) - max(a[2], b[2])
-                # >1 px on BOTH axes, not >0. Pills that ABUT are fine and
-                # common - deploy-verify measured Toronto and New York touching
-                # at 0 px from rendered pixels and reported it as clearance,
-                # not collision. Flagging a sub-pixel touch would make this
-                # check fail permanently, and a check that always fails is a
-                # check somebody disables. Real collisions are tens of pixels:
-                # Boston/Toronto was 30x12, Philadelphia/Washington D.C. was
-                # 102x13.
+                b = boxes[n2]
+                ox = min(a[2], b[2]) - max(a[0], b[0])
+                oy = min(a[3], b[3]) - max(a[1], b[1])
+                # >1 px on both axes: abutting pills are not a collision.
                 if ox > 1 and oy > 1 and (n1, n2) not in seen:
                     seen.add((n1, n2))
-                    problems.append(
-                        f"macro map: {n1!r} and {n2!r} labels overlap by "
-                        f"{ox:.0f}x{oy:.0f} px - adjust label_offset in "
-                        "cities.py (offsets are PIXELS at a pinned zoom)")
-        for c in _CC:
-            # San Francisco (2026-09-30): its label sits LEFT of its dot so that
-            # United States West, refitted to Tucson, keeps San Francisco's and
-            # Sacramento's pills apart; in the landing view at 343 px that
-            # clips 26.8 px (26%) at the west edge - the same accepted phone
-            # trade-off as Washington D.C.'s 43% at the east edge, which
-            # check_macro_labels.py reports and does not fail. Every position
-            # that avoids the clip collides in United States West (swept).
-            if _box(c, W)[0] < 0 and c["name"] not in ("Vancouver (Regional)", "San Francisco"):
-                problems.append(f"macro map: {c['name']!r} label is clipped by "
-                                f"the west edge at a {W}px canvas")
-            # A LABEL MUST NOT COVER ITS OWN MARKER. The pills are opaque
-            # (alpha 235), so a pill over a dot erases the dot - Guadalajara
-            # shipped with no visible marker on 2026-09-22 because
-            # ("end", 12, 0) put its pill across its own point, and the owner
-            # found it by looking at the map rather than any check finding it.
-            #
-            # Deliberately ONLY the city's own dot. Pills covering OTHER
-            # cities' dots happen in the east-coast cluster by design - the
-            # dots there are 6-15 px apart and cities.py documents that as an
-            # accepted trade-off - so flagging those would be noise.
-            x0, x1, y0, y1 = _box(c, W)
-            dx_, dy_ = ((c["lon"] - CLON) / 360 * SCALE + W / 2,
-                        (_mercy(c["lat"]) - _mercy(CLAT)) * SCALE + 230)
-            if (x0 - 5 < dx_ < x1 + 5) and (y0 - 5 < dy_ < y1 + 5):
-                key = ("owndot", c["name"])
-                if key not in seen:
-                    seen.add(key)
-                    problems.append(
-                        f"macro map: {c['name']!r} label pill covers its own "
-                        "marker - the dot will be invisible. A pill is 17 px "
-                        "tall and a marker 5 px in radius, so |dy| >= 14, or "
-                        "move it clear horizontally.")
+                    problems.append(f"macro map: {n1!r} and {n2!r} Global labels overlap "
+                                    f"by {ox:.0f}x{oy:.0f} px")
+            # A pill must never cover its own dot or another winner's: winners'
+            # dots draw ABOVE the pills in Global and would sit on the name.
+            for n2 in names:
+                dx_, dy_ = _xy(_by[n2], W)
+                if a[0] < dx_ < a[2] and a[1] < dy_ < a[3] and ("dot", n1, n2) not in seen:
+                    seen.add(("dot", n1, n2))
+                    problems.append(f"macro map: {n1!r}'s Global pill covers "
+                                    + ("its own dot" if n1 == n2 else f"{n2!r}'s dot"))
 except Exception:
     problems.append("label-collision check raised:\n" + traceback.format_exc())
 

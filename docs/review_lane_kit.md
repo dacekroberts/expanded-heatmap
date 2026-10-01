@@ -108,8 +108,10 @@ refuses any proposal whose old text has changed since. That is CLAUDE.md's
 
 ## 7. Reports
 
-Each lane writes `data/_review/lane-N/report.md` and messages **Cleanup session
-[3d7ab8]** ("Cleanup Session [dca290]" is a different project). Every finding:
+Each lane writes `data/_review/lane-N/report.md` and messages the cleanup
+session, by the name `ListAgents` shows for it (its bracketed id changes when a
+session restarts: "[3d7ab8]" became "[f2d0ed]" on 2026-10-01; "Cleanup Session"
+with a capital S is a different project). Every finding:
 the page or file, the width and theme, what it shows, and whether it blocks
 the landing. Cleanup fixes on its own branch; the lane that found a defect
 re-checks only that defect, at the narrow scope. Owner only: the iPhone check,

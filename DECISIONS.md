@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**327 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**328 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [Global's labels are won in a competition: trams and minor cities out, the rest ranked by mode, size and coverage; losing dots faded under the pills (owner)](#2026-10-01---globals-labels-are-won-in-a-competition-trams-and-minor-cities-out-the-rest-ranked-by-mode-size-and-coverage-losing-dots-faded-under-the-pills-owner)
 - [The review lane kit: the mega-review's lessons built as tools before the prose and UI pass (owner)](#2026-10-01---the-review-lane-kit-the-mega-reviews-lessons-built-as-tools-before-the-prose-and-ui-pass-owner)
 - [Kansas City's full rule in Los Angeles: a registrant's own name with no trade name shows the street address (owner)](#2026-10-01---kansas-citys-full-rule-in-los-angeles-a-registrants-own-name-with-no-trade-name-shows-the-street-address-owner)
 - [Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner)](#2026-10-01---gate-3s-station-calls-made-and-kansas-citys-rule-applied-in-san-francisco-and-los-angeles-owner)
@@ -372,6 +373,55 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - Global's labels are won in a competition: trams and minor cities out, the rest ranked by mode, size and coverage; losing dots faded under the pills (owner)
+
+- **The owner: Europe "is a mess to look at in global view"**; not hiding
+  other continents' labels ("then it wouldn't be a truly global view"), but a
+  filter: a static one taking a tier out of the running, and a competition
+  between neighbours fighting for map space, scored from the legend.
+- **First, the French and Czech tram cities moved to the minor label tier**
+  (27: every non-metro city in France North, France South and Czechia,
+  Rouen's light rail included): labelled only in their own region. Paris,
+  Lille, Rennes, Marseille, Toulouse and Prague stay eligible. It did not
+  clear Europe by itself: Global labelled every city, framed on North
+  America, and the 2026-09-24 acceptance of the pile-up at the right edge no
+  longer held at 124 cities.
+- **deck.gl's CollisionFilterExtension was tried first and fails here.** It
+  is in Streamlit's bundle and works for plain shapes (circles), but hides
+  every TextLayer label (or leaves faint ghosts: the collision pass tests
+  each glyph, and a label's own letters collide) and every IconLayer pill
+  image, at any zoom and after interaction. So the competition runs in
+  Python: `app/label_competition.py`, which the Overview,
+  `check_macro_labels.py` and `check_deploy_imports.py` all import. The
+  measured text widths moved there from `check_macro_labels.py`.
+- **The rule.** Static filter: a tram city (orange) or minor-tier city never
+  carries a Global label. Not the hollow one-category fill, which the owner
+  first proposed too: it would have taken London, Hong Kong, Philadelphia and
+  Stockholm out, and it measures this project's data, not the city. Ranking,
+  highest first: mode (metro > light rail > tram), then storefronts, then
+  coverage (owner: "size before coverage"; coverage first labelled Lille but
+  not London, Berlin or Osaka), then name - lexicographic, not summed, since
+  a sum put Rouen above Stockholm. Each city in turn tries its own
+  `label_offset`, then right, left, above and below; it wins the first
+  position that overlaps no placed pill, covers neither its own dot nor a
+  winner's, and sits under none of the map's controls wherever the pill is on
+  screen. A city whose own dot already lies under a higher-ranked pill does
+  not win (Copenhagen's under Berlin's). It covers the whole world, not the
+  opening frame: São Paulo and Sydney sit below the first screen. 54 of 124
+  win; Global's zoom is fixed, so one result serves every screen width.
+- **Drawing.** In Global the non-winners' dots draw UNDER the pills at 0.45
+  opacity (the owner's idea, over a larger winner dot or a coloured ring: size
+  would crowd spacing tuned at 12 px, a ring that reads on the light basemap
+  vanishes on the dark one); the winners' dots draw at full strength above.
+  A city that lost on space reappears as the reader zooms in. The invisible
+  picking layer splits the same way, so a pill's click is never caught by a
+  dot under it. Region views are unchanged.
+- **The checks score exactly the winners**: `check_macro_labels.py` (Global =
+  the competition's winners at their offsets; only winners' dots count as
+  covered) PROBLEMS 0 at 375, 768 and 1200; `check_deploy_imports.py` from a
+  clean clone, with the competition's measured widths in place of its
+  7 px-per-character model.
 
 ### 2026-10-01 - The review lane kit: the mega-review's lessons built as tools before the prose and UI pass (owner)
 
