@@ -8,8 +8,8 @@ NAICS is unavailable here despite appearing in the schema. `CATGRYNAME` (150
 active values) is the usable classification; `CLASSDESC` (35 values) is the
 coarser Florida statutory grouping above it, and `OCCDESC` is free text.
 
-VERIFIED 2026-09-21 against the full distinct-value pull - all 150 values
-active at that date, county-wide, not a sample. Every value below carries an
+The mapping covers the full county-wide distinct-value pull of 2026-09-21: all
+150 values active at that date. Every value below carries an
 explicit verdict, a bucket or None, so a later reader can tell "checked, not a
 match" from "not yet checked". Unknown values classify as None and step 2
 prints any it meets, so an upstream rename surfaces instead of silently
@@ -22,7 +22,7 @@ Buckets mean the same thing as in the NAICS cities (see naics.py):
 Permanent fixed premises only; mobile and itinerant vending is excluded, as it
 is in every other city.
 
-FIVE FINDINGS FROM HAND-SAMPLING, none of which the category name gives you:
+FIVE FINDINGS FROM HAND-SAMPLING, none of which the category name reveals:
 
   "SERVICE BUSINESS" (28,010 county / 4,900 city) is this file's biggest
   category and is NOT storefront services. Sampled: paralegals, management

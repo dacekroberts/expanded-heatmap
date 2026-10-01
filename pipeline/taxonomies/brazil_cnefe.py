@@ -14,11 +14,11 @@ map missed about one storefront in six near its stations and many of those
 misses were plain words the rules lacked (PIZZA beside PIZZARIA, BURGUER beside
 HAMBURGUER). Every figure in the nine Brazilian briefs was measured on version
 1. One rename: the screen's `classify(desc_norm)` is `classify_text` here,
-because the taxonomy interface's `classify()` takes a row. Written by the São
-Paulo build session on the owner's decision of 2026-09-24
-(docs/session_roles.md gives shared taxonomy code to staging by default;
-staging was told). **The screen is to import its rules from here, so there is
-one copy; until it does, the screen is version 1.**
+because the taxonomy interface's `classify()` takes a row. Written from the
+São Paulo build on the owner's decision of 2026-09-24 (docs/session_roles.md
+gives shared taxonomy code to staging by default). **The screen is to import
+its rules from here, so there is one copy; until it does, the screen is
+version 1.**
 
 **THE DESCRIPTION IS CLASSIFIED ONCE, IN STEP 2, NEVER AT RENDER.**
 `classify_description()` reads `DSC_ESTABELECIMENTO`; the reader stores the
@@ -336,9 +336,9 @@ def classify_text(desc_norm):
     THE HEAD NOUN WINS. A Portuguese trade description puts it first - BAR DO
     CLUBE, DELICIAS DA PRACA, RESTAURANTE DO HOTEL - so the rule whose match
     starts EARLIEST in the string decides, and rule order breaks a tie (which
-    is how SALAO DE FESTAS beats SALAO). The first version took the first
-    RULE that matched anywhere, and would have dropped all three of those
-    examples as a club, a square and a hotel.
+    is how SALAO DE FESTAS beats SALAO). Taking the first RULE that matches
+    anywhere drops all three of those examples as a club, a square and a
+    hotel.
     """
     best = None
     for i, (label, bucket, pat) in enumerate(RULES):
@@ -392,23 +392,23 @@ for _d, _want in [("FUNELARIA E PINTURA", "auto / repair"),
 #
 # 1 = staging's rules exactly as screened (scripts/screen_cnefe.py, 2026-09-23)
 #     - every figure in the nine Brazilian build briefs was measured on it.
-# 2 = 2026-09-24, the owner's call, after São Paulo's map was found to miss
-#     about one storefront in six near its stations: WEAK_RULES below.
+# 2 = 2026-09-24, the owner's call, after São Paulo's map missed about one
+#     storefront in six near its stations: WEAK_RULES below.
 #
-# WEAK, BECAUSE THE FIRST ATTEMPT WAS NOT. The same words added to RULES
-# rescued 3,814 unmatched São Paulo rows and also MOVED 238 rows version 1 had
-# already placed, mostly wrongly - under "the head noun wins", PET became the
-# head of `PET BANHO E TOSA` (pet grooming, a personal service) and of
-# `PET ... CLINICA VETERINARIA` (a vet, excluded), and PAO the head of
+# WEAK, BECAUSE AS ORDINARY RULES THEY MISROUTE ROWS. The same words added to
+# RULES rescued 3,814 unmatched São Paulo rows and also MOVED 238 rows
+# version 1 had already placed, mostly wrongly - under "the head noun wins",
+# PET became the head of `PET BANHO E TOSA` (pet grooming, a personal service)
+# and of `PET ... CLINICA VETERINARIA` (a vet, excluded), and PAO the head of
 # `KI PAO DISTRIBUIDORA DE PAES`. A word that names a trade only when nothing
 # else in the string does is a fallback, like the edit-distance pass: so these
 # are consulted only for a row that is still unmatched after it, and version 2
 # cannot change any row version 1 classified - the briefs' figures for
 # classified rows stand; only the unmatched share shrinks.
 #
-# Every word was read first in São Paulo's unmatched rows, its most frequent
-# captures listed and read (scratch, 2026-09-24). Whole words, so PAO never
-# meets SAO PAULO and PET never PETROBRAS. Read and REJECTED: SOFA (a quarter
+# Each word's most frequent captures in São Paulo's unmatched rows were read
+# before it was added (2026-09-24). Whole words, so PAO never meets SAO PAULO
+# and PET never PETROBRAS. Read and REJECTED: SOFA (a quarter
 # of its rows upholstery repair), FRUTA (street stalls, fruit trucks,
 # distributors), PECAS (machine parts as often as shop parts). Earliest match
 # wins as above; on a tie, food first, so PAO DE QUEIJO (a café chain) beats

@@ -18,9 +18,8 @@ city from that city's cleaned data if it's ever wanted.
 
 # The broad groups used for classification, map colouring and the legend.
 # Prefix match on the code as a string, so "44" catches 441, 4411, 44111.
-# Widening this changes results materially - it is one of the most
-# consequential analyst choices in this kind of project; record any change
-# in DECISIONS.md. Candidates worth a sensitivity check: "71" Arts,
+# Widening this changes results materially; record any change in
+# DECISIONS.md. Candidates worth a sensitivity check: "71" Arts,
 # entertainment, recreation; "721" Accommodation; "621" Ambulatory health
 # care (clinics, dentists).
 #

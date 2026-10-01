@@ -31,8 +31,8 @@ Event caterers are institutional under R1 (the Minneapolis call); a shop that
 also caters ("... TAKEOUT AND CATERING", "... DELI & CATERING") stays.
 
 A name rule both over- and under-catches. The patterns are phrases, not bare
-words, because the bare-word list caught SCHOOL HOUSE PIZZA, MARRIOTT
-RESIDENCE INN and UNIVERSITY TAVERN; every hit was read at the build and
+words, because bare words catch SCHOOL HOUSE PIZZA, MARRIOTT RESIDENCE INN
+and UNIVERSITY TAVERN; every hit was read at the build and
 `outputs/ottawa/excluded_premises.csv` lists each one with its rule.
 """
 import re

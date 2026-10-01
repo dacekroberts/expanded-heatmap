@@ -15,9 +15,9 @@ exactly that:
 
 `docs/global_country_shortlist.md` recorded "SCIAN = NAICS, so the taxonomy may
 transfer". Measured against DENUE on 2026-09-22, that is right for two buckets
-of three and wrong for the largest. Pointing naics.py at DENUE would have found
-**no rows at all** under 44/45 while silently leaving 212,251 CDMX retail rows -
-45.87% of the whole file - unclassified.
+of three and wrong for the largest. naics.py pointed at DENUE finds **no rows
+at all** under 44/45 and silently leaves 212,251 CDMX retail rows - 45.87% of
+the whole file - unclassified.
 
 So this module exists for two prefixes, and is otherwise naics.py's logic. It
 is deliberately a separate module rather than a flag on naics.py: the two
@@ -52,8 +52,8 @@ project, against Philadelphia's 79% landlords and Finland's 53% real estate.
 #        project has never counted 811 in any city.
 #   813  Civic, religious and professional associations - 5,392 in Jalisco.
 #        Not a storefront.
-# Counting `72` instead of `722` inflated this project's own first reading of
-# CDMX food service from 57,168 to 58,167 before it was caught.
+# Counting `72` instead of `722` once inflated this project's CDMX food service
+# from 57,168 to 58,167.
 SCIAN_GROUPS = [
     ("Retail", ("46",)),
     ("Food service", ("722",)),

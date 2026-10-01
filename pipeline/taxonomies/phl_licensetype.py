@@ -5,8 +5,8 @@ Source: "Licenses and Inspections Business Licenses" (Carto SQL API,
 phl.carto.com, table `business_licenses`). No NAICS field exists anywhere in
 its 48 columns; the classification field is `licensetype`.
 
-VERIFIED 2026-09-21 against the full distinct-value pull (all 50 licence types
-active at that date, not a sample). Every type below carries an explicit
+The mapping covers the full distinct-value pull of 2026-09-21: all 50 licence
+types active at that date. Every type below carries an explicit
 verdict - a bucket or None - so a later reader can tell "checked, not a match"
 from "not yet checked". Unknown types classify as None, and step 2 prints any
 it meets, so an upstream rename surfaces instead of silently dropping rows.
@@ -24,8 +24,8 @@ this was not. See docs/decisions/2026-09-20.md (Philadelphia, 2026-09-21)
 and the `multi-source-city` skill,
 whose Step 2 archetypes all failed here.
 
-Two findings from hand-sampling that a licence type's NAME does not give you,
-both of which had my first guess backwards:
+Two findings from hand-sampling that a licence type's NAME does not reveal;
+both invert the obvious reading:
 
   "Vendor - Motor Vehicle Sales" is NOT car dealers. It licenses vending FROM
   a motor vehicle: the sampled holders are "CHA CHA LUNCH TRUCK", "FOOD TRUCK
@@ -94,7 +94,7 @@ LICENSETYPE_TO_BUCKET = {
     # city in this project (see naics.py) - a cart is not a storefront. Note
     # that mobile FOOD is here too, despite NAICS 722330 sitting inside the
     # Food service prefix, because "permanent premises" is the line this city's
-    # data actually lets us draw and the licence types name it explicitly.
+    # data can draw and the licence types name it explicitly.
     "FOOD ESTAB, RETAIL NON-PERMANENT LOCATION (ANNUAL)": None,  # 689
     "FOOD ESTAB, RETAIL NON-PERMANENT LOCATION (EVENT)": None,   # 21
     "VENDOR - MOTOR VEHICLE SALES": None,               # 279 (food trucks - see docstring)
