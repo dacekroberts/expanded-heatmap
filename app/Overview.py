@@ -292,7 +292,14 @@ cities["dy"] = offsets.map(lambda o: o[2])
 # stays visible and clickable in every view, which is what makes the caption's
 # "every city is on the map" true - and `elsewhere_counts` still names the
 # regions a reader has not opened.
-_members = {c["name"] for c in _region_cities[region]}
+#
+# A MINOR CITY IS LABELLED ONLY IN ITS OWN REGION (the owner's label tiers,
+# 2026-09-29; first applied 2026-09-30 to Tucson, Kansas City and New Orleans,
+# whose pills met Monterrey's and Los Angeles's at the landing zoom). Its dot
+# and tooltip stay in every view; `label_tier` in cities.py names it, and
+# check_macro_labels.py applies the same rule.
+_members = {c["name"] for c in _region_cities[region]
+            if c.get("label_tier") != "minor" or c.get("region") == region}
 label_cities = cities[cities["name"].isin(_members)]
 
 markers = pdk.Layer(

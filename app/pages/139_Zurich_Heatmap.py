@@ -104,6 +104,11 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _files = _prov.get("files_utc") or {}
         _upd = ((_prov.get("register") or {}).get("date_last_updated") or "").strip()
+        # ISO like every other caption (owner, 2026-09-30, call B7): the source
+        # writes "28.09.2026".
+        _d = _upd.split(".")
+        if len(_d) == 3 and all(p.isdigit() for p in _d) and len(_d[2]) == 4:
+            _upd = f"{_d[2]}-{_d[1].zfill(2)}-{_d[0].zfill(2)}"
         _reg = (_files.get("gastwirtschaftsbetriebe.geojson") or "")[:10]
         _rail = (_files.get("osm_rail.json") or "")[:10]
         if _reg and _rail:

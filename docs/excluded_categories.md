@@ -36,11 +36,12 @@ Francisco, the 'L' in Chicago, Metro de Madrid in Madrid. Anything else that
 carries people around that city is not on the map, and the rings are drawn only
 around the stations that are.
 
-**That network is rail in every city but one.** Toulouse's Téléo is an aerial
-cable car, and it is drawn - because Tisséo runs and tickets it exactly as it
+**That network is rail in every city but two.** Toulouse's Téléo is an aerial
+cable car, and it is drawn because Tisséo runs and tickets it exactly as it
 does the métro, because it crosses the Garonne where no other line does, and
-because one of its three stations is a Métro B interchange. It is the only
-non-rail mode on this site, and its own section below has the reasoning. **So
+because one of its three stations is a Métro B interchange. Brest's cable car
+is drawn on the same ground. They are the only non-rail modes on this site,
+and Toulouse's section below has the reasoning. **So
 the question a mode has to answer is not "does it run on rails" but "is it part
 of the network this city's riders use as its rapid transit"** - which is the
 same question the tram and commuter-rail paragraphs below are answering.
@@ -1429,11 +1430,11 @@ reading of the language would have got wrong.
 
 **Funeral services (`96.03Z`) are excluded** — 261 here.
 
-**Car dealers are not on the French maps, unlike every other city here.**
-SIRENE files vehicle sales in their own division, not with retail. Four selling
-codes would add about 9,500 pins across the five cities (5,384 in Paris), but
-95% record no employees and about a quarter carry a premises name: mostly
-one-person traders, probably registered at home. Left off on that ground
+**Car dealers are not on the French maps.** SIRENE files vehicle sales in
+their own division, not with retail. Four selling codes would have added about
+9,500 pins across the first five French cities (5,384 in Paris), but 95% record
+no employees and about a quarter carry a premises name: mostly one-person
+traders, probably registered at home. Left off on that ground
 (owner, 2026-09-29).
 
 **What is left is still more than a street survey would find, and that is

@@ -2293,6 +2293,10 @@ lands).
 - **MUST DISPLAY**: the city's own form for a modified work -
   `この地図は、以下の著作物を改変して利用しています。環境衛生関係施設一覧（理容所・美容所・クリーニング所施設一覧、令和８年４月１日現在）、神奈川県横浜市、クリエイティブ・コモンズ・ライセンス 表示4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）`
   - with an English gloss saying what was modified, and the dataset page linked.
+  - **As rendered** (owner, 2026-09-30, call B5): the site places the dataset
+    page's URL in brackets after 神奈川県横浜市, inside the prescribed sentence.
+    Accepted as displayed: the link adds to the credit and changes none of
+    its words.
 - **MUST NOT**: present the map as the city's work; imply its endorsement; say
   the pins are businesses open now (the registers record no closures).
 - **MUST DO:** `check_personal_exposure.py yokohama` with its Japan pass (the

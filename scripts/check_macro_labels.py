@@ -485,13 +485,18 @@ def scored_labels(region, clat, clon, zoom):
     built inside that frame is scored here without anyone remembering to add
     it.
     """
+    # A minor city is labelled only in its own region - Overview.py's rule
+    # (owner's label tiers, 2026-09-29; first applied 2026-09-30).
+    def labelled(c):
+        return c.get("label_tier") != "minor" or c.get("region") == region["name"]
+
     if region["name"] != DEFAULT_REGION:
-        return {c["name"] for c in region["cities"]}
+        return {c["name"] for c in region["cities"] if labelled(c)}
     cw = CANVAS[375]
     out = set()
     for c in CITIES:
         x, y = project(c["lat"], c["lon"], clat, clon, zoom, cw, CANVAS_H)
-        if 0 <= x <= cw and 0 <= y <= CANVAS_H:
+        if 0 <= x <= cw and 0 <= y <= CANVAS_H and labelled(c):
             out.add(c["name"])
     return out
 

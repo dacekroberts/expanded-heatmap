@@ -1777,7 +1777,7 @@ _NOTICES = [
     # Den Haag (notice 83): the Gemeente's Horecavergunningen layer. Its licence
     # is silent; the owner proceeds on Amsterdam's precedent (2026-09-30) on
     # condition that the Gemeente is credited and the layer is never called
-    # current or complete. PROPOSED wording, for review time.
+    # current or complete. Wording approved by the owner 2026-09-30 (call C1).
     ("Gemeente Den Haag (Den Haag)",
      "Hospitality permit data: Gemeente Den Haag. The permit layer was last "
      "edited on 23 May 2025 and is not a complete or current record. Changes: "

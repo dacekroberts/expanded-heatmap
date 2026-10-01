@@ -2204,6 +2204,9 @@ CITIES = [
         # United States East the pill runs 17.3 px (19%) off the left edge,
         # reported as clipped, not a problem; every side that avoids it
         # collides elsewhere.
+        # MINOR (owner, 2026-09-30, call A1): labelled only in its own region;
+        # a dot and tooltip on the landing and United States views.
+        "label_tier": "minor",
         "label_offset": ("end", -11, 8),
     },
     {
@@ -2232,6 +2235,9 @@ CITIES = [
         # Sacramento's marker. check_macro_labels.py (python -B) passes start 11
         # at dy -7 to -2 (-1 meets Los Angeles's pill, -8 Kansas City's); -5
         # sits inside that, PROBLEMS 0 at 375, 768 and 1200.
+        # MINOR (owner, 2026-09-30, call A1): labelled only in its own region;
+        # a dot and tooltip on the landing and United States views.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, 22),
     },
     {
@@ -2260,6 +2266,9 @@ CITIES = [
         # to clear this marker (see Houston). check_macro_labels.py (python -B)
         # passes start 11 at dy 0 to +8 (-2 meets Washington D.C.'s pill at the
         # Global zoom); +4 sits inside that, PROBLEMS 0 at 375, 768 and 1200.
+        # MINOR (owner, 2026-09-30, call A1): labelled only in its own region;
+        # a dot and tooltip on the landing and United States views.
+        "label_tier": "minor",
         "label_offset": ("start", 11, 4),
     },
     {
@@ -3553,6 +3562,13 @@ if _untagged:
 # does not make a metro city a tram city. Each city's value was approved by the
 # owner; a new city's goes to the owner with its build.
 MODES = ("metro", "light_rail", "tram")
+# The owner's label tiers (2026-09-29): a "minor" city is labelled only in its
+# own region's view; every other city is an anchor, labelled wherever its
+# region's view or a composite of it is open. Absent means anchor.
+LABEL_TIERS = ("minor",)
+_bad_tier = [c["name"] for c in CITIES if "label_tier" in c and c["label_tier"] not in LABEL_TIERS]
+if _bad_tier:
+    raise ValueError(f"cities.py: {_bad_tier} have a label_tier not in {LABEL_TIERS}")
 _unmoded = [c["name"] for c in CITIES if c.get("mode") not in MODES]
 if _unmoded:
     raise ValueError(

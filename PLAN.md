@@ -814,6 +814,22 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
+- [ ] ⏰ **Zurich: rebuild after 2026-12-12** (owner, 2026-09-30, call C1): VBZ's
+  temporary construction trams 50 and 51 are drawn until then; when they stop,
+  re-run Zurich's step 1 and step 3 and drift-check it.
+- [ ] **Deferred from the mega-review (owner, 2026-09-30, call C2)**, each with a
+  drift check of Stockholm as well: Göteborg's `sweden_livsmedel.layer_label`
+  (both Swedish menus saying "Food shops"); "24sju" and vending words in the
+  Swedish name rules; and the template's "ratio to OpenStreetMap" clause for
+  Odense and Liepāja (fill it with an Overpass count per city, or drop it).
+- [ ] **For the site-wide prose and UI pass (owner, 2026-09-30, calls A3, A6, A7,
+  B6)**: dots on top of dots (Yokohama on Tokyo, Kitchener–Waterloo on Toronto;
+  draw the older city on top or give the pair a regional view); hide a pill
+  whose own dot is off the canvas (Bordeaux's "Regional)", Nice's "N"); a short
+  label for a long regional name (Most is cut to "(Regional)" at 375 px); and
+  the Korean nightclub difference disclosed on What Is Excluded (the SEMAS
+  satellites leave out dance halls, Seoul keeps nightclubs), with the two
+  "as in every other city" sentences corrected.
 - [ ] **Gate 3 back-fill, 25 cities: after the 2026-09-30 review, for the
   next deploy (owner, 2026-09-30).** The owner chose not to hold the tram kit
   for it: other cities went live without the check. A code survey of step 1

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**266 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**267 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [The mega-review's calls, all approved as recommended; the minor label tier's first slice (owner)](#2026-09-30---the-mega-reviews-calls-all-approved-as-recommended-the-minor-label-tiers-first-slice-owner)
 - [Review lane 4's mechanical findings fixed on the rehearsal; ten French privacy verdicts recorded](#2026-09-30---review-lane-4s-mechanical-findings-fixed-on-the-rehearsal-ten-french-privacy-verdicts-recorded)
 - [Czechia is its own macro region, Prague in it; the mega-review prepared as one rehearsal branch and four lanes (owner)](#2026-09-30---czechia-is-its-own-macro-region-prague-in-it-the-mega-review-prepared-as-one-rehearsal-branch-and-four-lanes-owner)
 - [Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)](#2026-09-30---streamlit-scaling-measured-at-106-cities-memory-and-clone-fine-the-overview-list-is-long-owner)
@@ -308,6 +309,58 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - The mega-review's calls, all approved as recommended; the minor label tier's first slice (owner)
+
+The owner: "I agree with all of your calls", on the review page's list (the
+four review lanes and the build sessions' open items). Each as recommended:
+
+- **A1 - the minor label tier, first slice.** Tucson, Kansas City and New
+  Orleans carry `label_tier: "minor"`: labelled only in their own region
+  (United States West or East), a dot and tooltip on the landing and United
+  States views. Overview.py and `check_macro_labels.py` apply one rule; a
+  validator in cities.py refuses an unknown tier. It cleared the last
+  failing label check, Tucson's pill on Monterrey's at the landing zoom,
+  which no offset of Tucson, Monterrey, Los Angeles or San Diego could.
+- **A2 - Kansas City and New Orleans narrowed** under the owner's rule that a
+  thin layer is narrowed ("Food service thin", added to the checks' list, and
+  "Personal services thin"); Houston, the tram kit's precedent for "full", is
+  narrowed under the same rule.
+- **A3, A6, A7 - accepted for this landing, fixed in the prose and UI pass
+  (PLAN):** Yokohama's dot on Tokyo's and Kitchener–Waterloo's on Toronto's;
+  pill fragments of members whose dot is off a phone's canvas (Bordeaux,
+  Nice; Daugavpils as Dublin and Bucharest); Most cut to "(Regional)" in
+  Czechia at 375 px, where every position and zoom was swept.
+- **A4 - Tucson back in United States West's fit**, reversing the tram kit's
+  exclusion: out of it, three of the region's five dots fell off a phone.
+- **A5 - the published labels re-placed on the combined tree** (Stockholm,
+  Göteborg, Houston, Minneapolis, Chicago, San Diego, Los Angeles, San
+  Francisco, Sacramento; Prague's tram-kit move dropped, as Prague is in
+  Czechia), each measured at 375, 768 and 1200 px.
+- **B1, B2, B3 - page text written as proposed:** What Is Excluded names two
+  non-rail modes (Toulouse's Téléo and Brest's cable car) and drops the false
+  "unlike every other city here" about car dealers; New Orleans's page says
+  its personal-services layer is thin.
+- **B4 - Dallas's third template departure** (Houston's residential clause,
+  which its address file cannot support) approved.
+- **B5 - Yokohama's credit as rendered**, with the dataset URL inside the
+  prescribed sentence, recorded in notice 75.
+- **B6 - the Korean nightclub difference** is disclosed, not changed: drafted
+  for the prose pass (PLAN).
+- **B7 - Zurich's caption date in ISO.**
+- **C1 - the tram kit's calls as it recommended:** Zurich (dance clubs kept
+  under R5; trams 50 and 51 drawn, with a December rebuild in PLAN; about 79
+  institutional kitchens left in and disclosed; seven colours moved off
+  VBZ's; the page sentences); Den Haag (coffeeshops kept; shop units that are
+  also dwellings left off, as Amsterdam; the page sentences; **notice 83 word
+  for word**); Göteborg's page proposals; Kansas City's trade-name pins and
+  page sentences; notice 42 widened for Liepāja and Daugavpils; Odense's CVR
+  and Klimadatastyrelsen notices; Daugavpils out of Europe's fit; Florence's
+  seven shopping-centre rows kept; no frequency sentence where a timetable
+  was not read (Florence, New Orleans).
+- **C2 - deferred, each with a Stockholm drift check (PLAN):** Göteborg's
+  `layer_label` and the "24sju" and vending name rules, and the template's
+  ratio-to-OpenStreetMap clause for Odense and Liepāja.
 
 ### 2026-09-30 - Review lane 4's mechanical findings fixed on the rehearsal; ten French privacy verdicts recorded
 
