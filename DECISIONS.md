@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**269 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**271 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Buffalo's label south of its dot in United States East, by a per-region offset; map-refresh assembled (owner)](#2026-09-30---buffalos-label-south-of-its-dot-in-united-states-east-by-a-per-region-offset-map-refresh-assembled-owner)
 - [Seoul labelled in East Asia and the landing view; the Seoul Capital Area's satellites minor (owner)](#2026-09-30---seoul-labelled-in-east-asia-and-the-landing-view-the-seoul-capital-areas-satellites-minor-owner)
 - [Personal exposure: PASS for Zurich, Göteborg and Den Haag; lane 4's last findings fixed](#2026-09-30---personal-exposure-pass-for-zurich-göteborg-and-den-haag-lane-4s-last-findings-fixed)
 - [The mega-review's calls, all approved as recommended; the minor label tier's first slice (owner)](#2026-09-30---the-mega-reviews-calls-all-approved-as-recommended-the-minor-label-tiers-first-slice-owner)
@@ -312,6 +313,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Buffalo's label south of its dot in United States East, by a per-region offset; map-refresh assembled (owner)
+
+- **The owner: "include buffalo label after measuring to see if necessary".**
+  Measured on the combined tree: Buffalo's label sits at ("end", -11, -46),
+  46 px above and left of its dot, where in United States East it reads as
+  Toronto's (the owner's complaint of 2026-09-29). No single offset moves it
+  south: in the landing and United States views every south position covers
+  Pittsburgh's, New York's or Philadelphia's dot (16 tried, 12 to 48
+  problems) - the East Coast cluster sits right below it. So it was necessary,
+  and it needed the per-region offsets scoped on 2026-09-29.
+- **`label_offset_by_region`**: an optional city key mapping a region's name
+  to (anchor, dx, dy), used only in that region's view; Overview.py and
+  check_macro_labels.py read it, and a validator refuses an unknown region or
+  a malformed offset. Buffalo: `{"United States East": ("end", -8, 16)}`,
+  south and a little left, PROBLEMS 0 in every region at 375, 768 and 1200;
+  its pill grazes the edge of Pittsburgh's dot there, which keeps its own
+  label to click (Tucson's unclickable dot had none). The old
+  `buffalo-label` branch (a global move, plus Chicago's) is superseded.
+- **map-refresh assembled for one landing**: the line highlight on all 124
+  maps, the render-only drift mode, the Osaka phone-label fix (a wider placer
+  for wide-tier maps; only Osaka's map changed when all 124 were
+  re-rendered), Seoul's label and the review lessons, and this.
 
 ### 2026-09-30 - Seoul labelled in East Asia and the landing view; the Seoul Capital Area's satellites minor (owner)
 

@@ -244,6 +244,16 @@ def _offset(value):
 
 
 offsets = offsets.map(_offset)
+# A CITY MAY PLACE ITS LABEL DIFFERENTLY IN ONE REGION'S VIEW (owner, 2026-09-30:
+# Buffalo south of its dot in United States East, where above it the pill read
+# as Toronto's, while the landing view's East Coast cluster leaves no room
+# below). `label_offset_by_region` maps a region name to (anchor, dx, dy);
+# check_macro_labels.py scores the same override.
+if "label_offset_by_region" in cities:
+    _by_region = cities["label_offset_by_region"].map(
+        lambda d: tuple(d[region]) if isinstance(d, dict) and region in d else None)
+    offsets = pd.Series([b if b is not None else o for b, o in zip(_by_region, offsets)],
+                        index=offsets.index)
 cities["anchor"] = offsets.map(lambda o: o[0])
 cities["dx"] = offsets.map(lambda o: o[1])
 cities["dy"] = offsets.map(lambda o: o[2])

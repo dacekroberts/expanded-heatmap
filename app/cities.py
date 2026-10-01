@@ -2057,6 +2057,11 @@ CITIES = [
         # with `python -B`: a same-length rewrite of this file inside one
         # second reuses the stale .pyc); -46 is the middle. PROBLEMS 0 at 375,
         # 768 and 1200.
+        # SOUTH OF ITS DOT IN UNITED STATES EAST (owner, 2026-09-30; measured
+        # necessary): above it there, the pill read as Toronto's. The landing and
+        # United States views keep the offset below - every south position
+        # there covers Pittsburgh's, New York's or Philadelphia's dot.
+        "label_offset_by_region": {"United States East": ("end", -8, 16)},
         "label_offset": ("end", -11, -46),
     },
     {
@@ -3613,6 +3618,12 @@ _bad_tier = [c["name"] for c in CITIES if "label_tier" in c and c["label_tier"] 
 # satellites are minor - so East Asia names Seoul again, as the label-tier
 # decision of 2026-09-29 planned ("East Asia gets Seoul's label back").
 # Overview.py and check_macro_labels.py read it.
+_bad_rof = [c["name"] for c in CITIES if "label_offset_by_region" in c and not (
+    isinstance(c["label_offset_by_region"], dict)
+    and all(r in REGION_ORDER and len(v) == 3 for r, v in c["label_offset_by_region"].items()))]
+if _bad_rof:
+    raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
+                     "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
 REGION_LABELS_ALSO = {"East Asia": ("Seoul Capital Area",)}
 if _bad_tier:
     raise ValueError(f"cities.py: {_bad_tier} have a label_tier not in {LABEL_TIERS}")
