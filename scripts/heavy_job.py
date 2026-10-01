@@ -11,7 +11,7 @@ grep held 4.7 GB more. So admission reads available memory, now.
 
     python scripts/heavy_job.py run --label "oslo step 2" --peak-gb 5.4 --session cleanup -- python pipeline/oslo/step2_clean_businesses.py
     python scripts/heavy_job.py status
-    python scripts/heavy_job.py start --label L --peak-gb N --session S --pid P   # a job you cannot wrap
+    python scripts/heavy_job.py start --label L --peak-gb N --session S --pid P   # a job that cannot be wrapped
     python scripts/heavy_job.py end --pid P
     python scripts/heavy_job.py --selftest                                         # touches nothing
 

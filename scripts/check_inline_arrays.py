@@ -70,7 +70,7 @@ def literals(js):
             stack.append([tok, 0, m.start()])
         elif tok in "])}":
             want = {"]": "[", ")": "(", "}": "{"}[tok]
-            # Unbalanced input (a regex literal we did not recognise): drop to
+            # Unbalanced input (an unrecognised regex literal): drop to
             # the nearest matching opener rather than miscount everything after.
             while stack and stack[-1][0] != want:
                 stack.pop()
