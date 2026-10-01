@@ -4,6 +4,41 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - MHLW's food file counted for five Japanese cities: Utsunomiya and Kitakyushu to A; Kagoshima, Okayama and Kōchi to B (owner approved the downloads)
+
+- **The owner approved the five downloads (2026-10-01).** Each is from
+  `i2fas.mhlw.go.jp` (PDL 1.0, read for Fukuoka), 2.9–7.2 MB, and is kept
+  in the staging scratchpad, never in the repo.
+- **MHLW's file carries 85–91% of each city's restaurant permits in force.**
+  - The rows are permits from 2021-06 on, all 許可.
+  - Each city appears to enter every new permit there, not only the online
+    filings.
+  - The counts are open 飲食店営業 rows against the FY2024 in-force count.
+
+  | City | Open permits | In force | Share | With an address |
+  |---|---|---|---|---|
+  | Utsunomiya | 4,901 | 5,761 | 85% | 99% |
+  | Kitakyushu | 10,760 | 12,733 | 85% | 86% |
+  | Kagoshima | 5,914 | 6,823 | 87% | 76% |
+  | Okayama | 7,582 | 8,409 | 90% | 74% |
+  | Kōchi | 4,564 | 4,999 | 91% | 54% |
+
+  MHLW publishes an address only by consent (Fukuoka's precedent).
+- **The verdicts**, on the reduced-bucket bar's placement rule (about 70%):
+  - **Utsunomiya to A.** Food plus the CC BY personal-services lists.
+  - **Kitakyushu to A.** Personal services have no laundry list, which is
+    disclosed.
+  - **Kagoshima to B, food only.** Its personal lists are a new-openings
+    stream.
+  - **Okayama to B, food only.** Its personal lists need the city's
+    permission.
+  - **Kōchi to B, personal services only.** Its food places 54%, under the
+    bar.
+- **The list now holds A 7 · B 11 · C 4 · D 1 · R 22 = 45.**
+  `check_master_list_counts.py` passes.
+- **No row values were printed.** The counting script printed counts,
+  column names and years only.
+
 ### 2026-10-01 - The master list rebuilt fresh: 45 candidates from the post-review screens; Band R and the discards carried over (owner)
 
 - **The owner's ask (2026-10-01)**: run the Job 2 probes, then "generate a
