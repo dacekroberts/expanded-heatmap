@@ -3100,7 +3100,10 @@ CITIES = [
         # the landing view, so San Diego's label moved west (its entry). check_macro_labels.py
         # (python -B) passes end -10 at dy -6 to 0, PROBLEMS 0 at 375, 768 and 1200 on
         # the combined tree (width 40.1 px, measured 2026-09-30).
-        "label_offset": ("end", -10, -3),
+        # RAISED to dy -16 (review lane 3, 2026-09-30): at -3 its pill covered half
+        # of Tucson's dot in the landing and United States views, where Tucson,
+        # minor, has no pill - a click on Tucson opened Dallas 12 of 12 times.
+        "label_offset": ("end", -11, -16),
     },
     {
         "name": "Angers",
