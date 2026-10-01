@@ -498,6 +498,13 @@ reader had already found and immediately found five more.
   sides interleave by real time, and refuses to write unless the result equals
   the union of both sides' full stages. Run `scripts/decisions_index.py`
   afterwards.
+- **A failed resolution must not be committed.** On 2026-09-30, on
+  kitchener-waterloo, the script's write hit a Windows file lock (Errno 22),
+  the merge was committed with its markers, and the pre-push hook passed it
+  (fixed in 3d93d29). The script now retries once and then stops with a
+  message saying the file still holds markers, and
+  `scripts/check_conflict_markers.py` fails the hook on any marker in a
+  tracked file.
 
 <a id="memory"></a>
 ### The memory cap

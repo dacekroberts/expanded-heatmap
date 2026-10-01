@@ -41,6 +41,8 @@ CHECKS = [
     ["scripts/check_category_continuity.py"],
     ["scripts/check_category_continuity.py", "--selftest"],
     ["scripts/check_city_registry.py"],
+    ["scripts/check_conflict_markers.py"],
+    ["scripts/check_conflict_markers_selftest.py"],
     ["scripts/check_discard_evidence.py"],
     ["scripts/check_inconsistency_list.py"],
     ["scripts/check_inline_arrays.py"],

@@ -220,6 +220,8 @@ python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
 python scripts/check_city_registry.py                   # after merging
+python scripts/check_conflict_markers.py [--file PATH]  # after merging; a marker git left in any tracked file
+python scripts/check_conflict_markers_selftest.py       # touches nothing
 python scripts/check_plan_done.py [--verbose]           # REPORTS only
 python scripts/check_stale_claims.py                    # REPORTS only
 python scripts/check_stale_claims.py --only E           # "only city" claims; when a city lands
