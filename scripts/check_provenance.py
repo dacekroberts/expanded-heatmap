@@ -51,7 +51,9 @@ WHAT IT CHECKS
      Insee » », and Paris, Marseille, Toulouse, Lille and Rennes all shipped
      naming SIRENE and INSEE in prose without that string, unnoticed until
      2026-09-30. The page is parsed, not grepped, so a comment quoting the
-     string does not count; only a literal passed to an `st.*` call does.
+     string does not count; only a literal passed to an `st.*` call does, and
+     not one inside an if/try block, where a missing provenance file could
+     drop it (the France template did, until 2026-09-30).
   K. Three of `CLAUDE.md`'s invariants that a new city could break silently:
 
      - **the basemap attribution is on every rendered map, and nothing is
@@ -384,9 +386,10 @@ PRESCRIBED_CREDITS = {
 
 def check_prescribed_credits():
     """M: every page of a PRESCRIBED_CREDITS country passes the string to an
-    st.* call. Returns (problems, notes). A note is a page that shows the
-    string only inside an if/try block - Le Mans's template nests it in the
-    provenance block, so a missing provenance file would drop it."""
+    st.* call outside any if/try/with/loop block. The France template first
+    nested it in the provenance block, so a missing provenance file dropped
+    the credit with the snapshot; moved out 2026-09-30 (owner), and a page
+    that nests it again fails."""
     cities = []
     for node in ast.parse(read(CITIES_PY)).body:
         if isinstance(node, ast.Assign) and any(
@@ -396,7 +399,7 @@ def check_prescribed_credits():
                          for k, v in zip(d.keys, d.values)}
                 cities.append(pairs)
 
-    problems, notes = [], []
+    problems = []
     for country, (credit, where) in PRESCRIBED_CREDITS.items():
         # French typography puts a no-break space before the colon; a page
         # that does so still quotes INSEE verbatim.
@@ -432,9 +435,10 @@ def check_prescribed_credits():
                 problems.append(f"{c.get('name')} ({c.get('page')}) never "
                                 f"displays '{credit}' ({where})")
             elif all(shown):
-                notes.append(f"{c.get('name')} shows '{credit}' only inside a "
-                             f"conditional block")
-    return problems, notes
+                problems.append(f"{c.get('name')} ({c.get('page')}) shows "
+                                f"'{credit}' only inside a conditional block, "
+                                f"so a missing file can drop it - move it out")
+    return problems
 
 
 def displayed_notices():
@@ -1026,14 +1030,13 @@ def main():
         print("  built credits: every file Tokyo's roster reads has its credit")
 
     # --- M, credits a licence prescribes word for word ------------------------
-    pc, pc_notes = check_prescribed_credits()
+    pc = check_prescribed_credits()
     if pc:
         failures.append(("prescribed credits", pc))
     else:
         print(f"  prescribed credits: every page of "
-              f"{', '.join(PRESCRIBED_CREDITS)} quotes its licence's credit")
-    for s in pc_notes:
-        print(f"      note: {s}")
+              f"{', '.join(PRESCRIBED_CREDITS)} quotes its licence's credit, "
+              f"unconditionally")
 
     # --- E, the master list's own counts -------------------------------------
     regions = []

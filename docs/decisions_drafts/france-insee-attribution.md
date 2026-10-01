@@ -4,6 +4,20 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Check M refuses a prescribed credit shown only inside a conditional block (owner)
+
+- **Check M now fails a page that shows a prescribed credit only inside an
+  if/try/with/loop block, where it used to print a note.** Owner's call, after
+  the France template moved « Source : Insee » out of the provenance block
+  (`france-insee-template`, taken onto `france-build` at `c35f596` and
+  `france-build-2` at `f8999e6`). With no French page nesting the credit any
+  more, the note could catch only a regression, and a regression drops a
+  licence obligation whenever a provenance file is missing. Tested: Le Mans as
+  it stood before the move (`5d97a9e`) fails, Le Mans after it passes, and
+  all twenty generated pages on `france-build-2` pass. On this branch
+  `check_provenance.py` reports "All recorded". This supersedes the
+  owner-call bullet in the entry below.
+
 ### 2026-09-30 - « Source : Insee » on Paris, Marseille, Toulouse, Lille and Rennes; check M refuses a French page without it
 
 - **The five built French pages now display INSEE's prescribed credit.**
