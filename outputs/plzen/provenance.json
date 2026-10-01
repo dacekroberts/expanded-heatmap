@@ -55,11 +55,18 @@
       "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_554791_ADR.csv.zip",
       "bytes": 655885,
       "sha256": "f09a8dc7ce83e5f9087c4157f555ebb99aeacefc0079e0a933d6368ebb2a9107",
-      "retrieved": "2026-09-30T23:42:31+00:00",
+      "retrieved": "2026-10-01T00:20:24+00:00",
       "edition": "20260831_OB_554791_ADR.csv.zip"
     }
   },
   "osm_boundary_host": "overpass-api.de",
   "osm_tram_host": "overpass-api.de",
-  "osm_fetched": "2026-09-30T23:43:18+00:00"
+  "osm_fetched": "2026-10-01T00:21:30+00:00",
+  "pmdp_gtfs": {
+    "file": "pmdp_gtfs.zip",
+    "url": "https://jizdnirady.pmdp.cz/jr/gtfs",
+    "bytes": 950393,
+    "sha256": "e638c2b3ae9705b938d6a9402a149c94838db04ebaa8b93b2f98ce2ecd8ba331",
+    "retrieved": "2026-10-01T00:20:26+00:00"
+  }
 }

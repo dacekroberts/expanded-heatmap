@@ -33,6 +33,10 @@ def main():
 
     print("\nPlzeň:")
     F.ruian(config, prov)
+    # PMDP's GTFS, for gate 3 only (owner, 2026-09-30: "OSM for lines and stops,
+    # the feed as a cross-check"). GET only - the host refuses HEAD.
+    F.download(config.PMDP_GTFS_URL, config.PMDP_GTFS_ZIP, "pmdp_gtfs.zip (PMDP)", b"PK\x03\x04")
+    F.record(prov, "pmdp_gtfs", config.PMDP_GTFS_ZIP, config.PMDP_GTFS_URL, F.now())
     prov["osm_boundary_host"] = F.osm_boundaries(config)
     prov["osm_tram_host"] = F.osm_trams(config)
     prov["osm_fetched"] = F.now()

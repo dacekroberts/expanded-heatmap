@@ -4,6 +4,80 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Olomouc, Ostrava, Liberec (Regional) and Most (Regional) built on osm_tram.py; Plzeň's gate 3 finds two stops OSM's relations lack
+
+- **The four built on the tram kit's `pipeline/osm_tram.py`**, taken
+  unchanged from `tram-build` so both branches carry one file; its Aarhus
+  control passes on `czech-build`. A shared Czech wrapper,
+  `pipeline/countries/czechia_osm_tram.py`, runs step 1 and step 3, and each
+  city's step files are a few lines. Step 1 writes the kept relations'
+  geometry (each ref's relation with the most track, platform outlines left
+  out, Aarhus's rule) to `lines.geojson`. Step 3 draws that file, and
+  `line_colour_search.py` reads it, so what is drawn is exactly what was
+  kept.
+
+  | City | Stations | Lines | Median gap | In a ring |
+  |---|---|---|---|---|
+  | Olomouc | 36 | 7 | 316 m | 1,742 / 2,235 (78%) |
+  | Ostrava | 92 | 14 | 431 m | 2,941 / 3,960 (74%) |
+  | Liberec (Regional) | 39 (Liberec 33, Jablonec 6) | 4 | 355 m | 1,396 / 2,488 (56%) |
+  | Most (Regional) | 27 (Most 15, Litvínov 12) | 4 | 522 m | 664 / 1,025 (65%) |
+
+  Every median is under 550 m, so all keep the halved rings. Most's is 28 m
+  under the line.
+- **Ostrava's three judgments:**
+  - **NOT_DRAWN.** It names line 5's two relations (owner), lines 9 and 19
+    (no stop members) and an unref'd line 11 depot variant. Line 5's stops
+    are listed in `excluded_stations.csv` with the reason (9 rows).
+  - **A 330 m collapse instead of 200.** Two names are interchanges whose
+    stops sit on different arms of a junction: Sport Aréna at 321 m (lines
+    2/7 on one arm, 11/12 on the other) and Mariánské náměstí at 223 m.
+    That is within Riga's 300 m and Osaka's 400 m; the next widest name is
+    173 m.
+  - **Two stand pairs folded by name alias.** The station gate's close-pair
+    note found them: Hranečník (St. 1) into (St. 5), 120 m apart, and Nová
+    Huť hlavní brána 1 into 2, 61 m apart. One station under two names
+    would have taken two sets of rings. Each folds into the spelling more
+    lines carry, because `osm_tram` never invents a bare name.
+  - **Result:** 94 stations became 92, and the closest pair is now 168 m.
+- **The palettes are the project's own** (owner), from
+  `line_colour_search.py` with target hues spaced evenly round the wheel in
+  line order, HSL (h, 70%, 45%). Every line is 3:1 on both map pages and 45
+  or more from every pin. The closest pairs: Olomouc 19.4; Ostrava 18.3
+  within 500 m and 15.8 anywhere (lines 10 and 11, never near each other);
+  Liberec and Most 88.3; Plzeň 124.7. `check_map_markup.py` passes on all 80
+  maps.
+- **Checks on the four maps:** `check_map_view.js` passes at 1280 and 375
+  px, with no corrections, and the attribution check passes at 1000x650 and
+  1280x900. **Privacy verdicts, from `check_personal_exposure.py`: publish,
+  for all four.** No contact details, and no person-like name at a
+  residential unit. The heuristic flags 7.7 to 9.4%, all of them company
+  names, as in Prague and Brno.
+- **Pages written from the approved template**, with no departure from it.
+  Ostrava, Liberec and Most carry the OpenStreetMap-gaps sentence (ratios
+  2.3, 2.5 and 3.3). "{City} has no metro" names the core town on the two
+  regional pages ("Liberec", "Most").
+- **Gate 3 runs only in Plzeň, and there it found a gap.** PMDP's feed (the
+  approved cross-check) serves Jízdecká and U Synagogy on lines 1, 2 and 4.
+  OSM tags both as tram stops (nodes 10314072849 and 10315344302) but puts
+  them on no route relation. The feed also runs line 4 via Hlavní pošta and
+  Náměstí Republiky, while OSM does not; the abbreviation "Nám. Generála
+  Píky" is a spelling difference only.
+  - **What OSM gives:** 53 stations from the route relations, the brief's
+    figure exactly, and a set the feed shows to be two short.
+  - **The fix:** `osm_tram`'s `STATION_ADD`. It takes one line per node, so
+    a backward-compatible change (a tuple of refs) was put to the tram kit,
+    who own the module. Plzeň's page waits for it.
+  - **Two untagged directions:** two line 4 relations carry no operator tag
+    in OSM, and are named in `NOT_DRAWN`; their reverse directions are kept.
+    No stop is lost, and the excluded list is empty.
+- **Gate 3 is not run for Olomouc, Ostrava, Liberec or Most**, and is
+  recorded as an open gap in each config. Olomouc's DPMO feed is excluded by
+  the owner's call. Ostrava's and Liberec's feeds were unreachable at the
+  screen, and Most has none. Plzeň shows what OSM's relations can miss.
+  Reading each operator's published stop lists would close the gap; that
+  belongs at review time.
+
 ### 2026-09-30 - Brno rendered and checked: 146 stations, 11 lines, 82.4% of storefronts in a ring; privacy verdict publish
 
 - **Brno's map is rendered on `czech-build`.**

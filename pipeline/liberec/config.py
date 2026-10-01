@@ -60,8 +60,8 @@ CRS_PROJECTED = "EPSG:32633"
 
 # --- Ring geometry ---------------------------------------------------------
 METERS_PER_MILE = 1609.344
-# HALVED ON THE SPACING RULE: the brief measured a 378 m median stop gap
-# across both obce.
+# HALVED ON THE SPACING RULE: step 1 measured a 355 m median nearest-neighbour
+# gap between the 39 stations across both obce (2026-09-30; the screen read 378).
 RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
 RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
@@ -72,16 +72,35 @@ RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 # screen. Lines 2, 3, 5 and 11; line 11 is the interurban, 14 stops in Liberec
 # and 7 in Jablonec.
 TRAM_SOURCE = "osm"
+CITY_NAME = "Liberec (Regional)"
+# Stop positions of one name are one station, at their mean, when they lie
+# within this of each other (pipeline/osm_tram.py's collapse; Aarhus's rule).
+COLLAPSE_MAX_SPREAD_M = 200
+# The station-spacing gate's floor for TRAM stops (pipeline/stations.py): the
+# shared 400 m default is a metro figure. Riga's, Aarhus's and Brno's 200 m.
+SPACING_MIN_M = 200.0
 OSM_TRAM_OPERATOR = "Dopravní podnik měst Liberce a Jablonce nad Nisou"
 OSM_TRAM_BBOX = (50.69, 14.95, 50.82, 15.22)   # (s, w, n, e), the brief's check box
 LINE_ORDER = ["2", "3", "5", "11"]
 LINE_NAMES = {k: f"Tram {k}" for k in LINE_ORDER}
-# TODO (step 1, once pipeline/osm_tram.py exists): NOT_DRAWN,
-# EXPECTED_INSIDE_PER_LINE, gate 3, and the palette (owner, 2026-09-30).
+# Every route=tram relation in the box is the operator's and is kept
+# (8 relations, 2026-09-30), so nothing is NOT_DRAWN.
 NOT_DRAWN = {}
-LINES = {}
-LINE_COLOURS = {}
-EXPECTED_INSIDE_PER_LINE = {}
+# TARGET hues for scripts/line_colour_search.py: evenly spaced round the
+# wheel in line order, HSL (h, 70%, 45%) - no operator colours are licensed
+# (owner, 2026-09-30). The search picks the feasible colour nearest each.
+LINES = {"2": {"hue": "#C32222"}, "3": {"hue": "#73C322"}, "5": {"hue": "#22C3C3"}, "11": {"hue": "#7322C3"}}
+# THIS PROJECT'S colours (owner, 2026-09-30), from `python
+# scripts/line_colour_search.py liberec` on 2026-09-30: every line 3:1 on both
+# map pages and CIE76 >= 45 from every pin; closest pair 88.3 (3, 5).
+LINE_COLOURS = {"2": "#C02008", "3": "#50A800", "5": "#00A0B8", "11": "#8830D0"}
+# WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1. Measured
+# 2026-09-30: 39 stations, all inside the two obce - 33 in Liberec and 6 in
+# Jablonec nad Nisou (the brief's screen read 32 + 7: one stop lies on the
+# other side of the line than its stop-name count assumed). Every line whole.
+EXPECTED_INSIDE_PER_LINE = {"2": 16, "3": 20, "5": 13, "11": 21}
+# GATE 3 IS NOT RUN: DPMLJ's own feed reset the connection at the screen, and
+# no other count was read. An open gap, recorded.
 OPERATOR_STATION_COUNTS = {}
 OPERATOR_COUNTS_SOURCE = ""
 

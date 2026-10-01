@@ -2,38 +2,67 @@
 
 Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
 Overview.py's docstring for why this is the decided pattern
-for every city's detail page. Scaffolded by scripts/scaffold_city.py.
+for every city's detail page. Scaffolded by scripts/scaffold_city.py; the text
+is the Czech tram template (czech-tram-city section 7), approved by the owner
+2026-09-30 word for word, filled with this city's own figures.
 """
 
+import json
 import sys
 from pathlib import Path
 
 import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.most.config import HEATMAP_HTML  # noqa: E402
+from pipeline.most.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
     render_site_notices,
     set_base_font,
 )
 
-st.set_page_config(page_title="Most (Regional) Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
+st.set_page_config(page_title="Most (Regional) Heatmap", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
 render_city_nav("Most (Regional)")
 
-st.title("Most (Regional): commercial density around DPmML trams station areas")
+st.title("Most (Regional): commercial density around tram stops")
 
-# TODO: replace every TODO line below with prose true for this city: the lines
-# (by name), which stations are included and what is left out and where the
-# list is, the data source and any known limitation. Avoid restating counts.
+# The Czech tram template, approved by the owner 2026-09-30. Figures from this
+# city's own build (2026-09-30): 4 lines; 27 stops at a 522 m median gap; 267 restaurants against OSM's 80 (3.34); 664 of 1,025 storefronts in a ring.
 st.markdown(
     """
-TODO: describe the lines drawn (each is labeled directly on the map and in the
-legend), the stations included and excluded (the excluded ones are listed in
-`outputs/most/excluded_stations.csv`), and the data source and its
-limitations.
+Four tram lines are drawn, **DPmML's trams 1 to 4**, each labelled on the map and in the
+legend. The lines and stops are drawn from OpenStreetMap, and the colours are this
+project's, because none are published for reuse. Most has no metro: its trams
+are its rapid transit, as Riga's are, so every tram stop gets rings. Buses,
+trolleybuses and trains are not drawn.
+
+The map covers the **towns of Most and Litvínov, which the trams join**.
+
+Businesses come from the Czech **register of active business establishments**
+(ROS02), which records each place where a business operates at that place's own
+address, placed using the national address register (RÚIAN), the same sources as
+Prague's map. What each establishment does comes from the Czech Statistical
+Office's business register (RES). RES records one main activity per business, so
+every establishment inherits its owner's, and a chain's office or warehouse
+counts as the chain's trade. **Where a business belongs to a person trading in
+their own name, or to a partnership, the map shows its address instead of its
+name.** Where such an establishment is at the owner's own registered address,
+which is usually their home, it is left off the map altogether.
+
+**Read the density as a register, not a street survey.** Some establishments are
+newly registered and may not have opened yet. Czechia's classification files a
+web shop under the goods it sells, so some dots are businesses with no shop a
+passer-by could walk into. Against OpenStreetMap's mapped restaurants, cafés and
+takeaways in the city, the register carries about **3.3 times** as many.
+OpenStreetMap maps fewer restaurants here than in Prague, so the ratio says as much about OpenStreetMap's gaps as about the register. Businesses whose main activity is something else, such as a brewery's pub or a
+wholesaler's shop, are not shown, because no open source records what each
+establishment itself does.
+
+**Tram stops sit closer together than metro stations**, a median of 522 m here,
+so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About 65% of
+storefronts sit within a ring.**
 
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
@@ -47,6 +76,25 @@ cluster."
 """
 )
 
+# The snapshot dates, read from outputs/most/provenance.json so they cannot
+# go stale on the next fetch: ROS02's own snapshot date, and when the tram lines
+# and stops were fetched from OpenStreetMap.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _snap = _prov.get("ros02_snapshot", "")
+        _osm = (_prov.get("osm_fetched") or "")[:10]
+        _bits = []
+        if _snap:
+            _bits.append(f"establishments as of **{_snap}** (ROS02)")
+        if _osm:
+            _bits.append(f"tram lines and stops from OpenStreetMap, fetched **{_osm}**")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
+
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
@@ -57,7 +105,5 @@ else:
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
 # be accessed". See components._NOTICES. OMITTING THIS IS A LICENCE
-# BREACH, not a cosmetic gap: four city pages shipped without it because
-# this template did, and on those pages the five mandatory notices were
-# absent rather than collapsed.
+# BREACH, not a cosmetic gap.
 render_site_notices()

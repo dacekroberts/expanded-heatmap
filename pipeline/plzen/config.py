@@ -29,6 +29,11 @@ LINES_GEOJSON = DATA_PROCESSED / "lines.geojson"
 
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
 OSM_TRAM_JSON = DATA_RAW / "osm_tram.json"
+# PMDP's GTFS - gate 3's independent count only (read 2026-09-30, PERMITTED;
+# no colours, no shapes). Credited on the page's notices if used, on the
+# stricter CC BY reading (the brief).
+PMDP_GTFS_URL = "https://jizdnirady.pmdp.cz/jr/gtfs"
+PMDP_GTFS_ZIP = DATA_RAW / "pmdp_gtfs.zip"
 
 # --- Scope ---------------------------------------------------------------
 #
@@ -56,8 +61,9 @@ CRS_PROJECTED = "EPSG:32633"
 
 # --- Ring geometry ---------------------------------------------------------
 METERS_PER_MILE = 1609.344
-# HALVED ON THE SPACING RULE (docs/ring_rules.md): the brief measured a 294 m
-# median gap between the stops, under the ~550 m line. Step 1 re-measures it.
+# HALVED ON THE SPACING RULE (docs/ring_rules.md): step 1 measured a 306 m
+# median nearest-neighbour gap between the 53 stations (2026-09-30; the brief's
+# screen read 294), under the ~550 m line.
 RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
 RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
@@ -68,6 +74,13 @@ RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 # colours and no shapes (read 2026-09-30, permitted), so it can only cross-check.
 # Lines 1, 2 and 4, every stop inside the city (53 stop names, the brief).
 TRAM_SOURCE = "osm"
+CITY_NAME = "Plzeň"
+# Stop positions of one name are one station, at their mean, when they lie
+# within this of each other (pipeline/osm_tram.py's collapse; Aarhus's rule).
+COLLAPSE_MAX_SPREAD_M = 200
+# The station-spacing gate's floor for TRAM stops (pipeline/stations.py): the
+# shared 400 m default is a metro figure. Riga's, Aarhus's and Brno's 200 m.
+SPACING_MIN_M = 200.0
 OSM_TRAM_OPERATOR = "Plzeňské městské dopravní podniky, a.s."
 OSM_TRAM_BBOX = (49.68, 13.27, 49.81, 13.48)   # (s, w, n, e), the brief's check box
 LINE_ORDER = ["1", "2", "4"]
@@ -76,10 +89,28 @@ LINE_NAMES = {k: f"Tram {k}" for k in LINE_ORDER}
 # depot run from Vozovna Slovany, by relation id), EXPECTED_INSIDE_PER_LINE,
 # gate 3 from PMDP's feed, and the palette from line_colour_search.py with
 # evenly spaced target hues (owner, 2026-09-30).
-NOT_DRAWN = {}
-LINES = {}
-LINE_COLOURS = {}
-EXPECTED_INSIDE_PER_LINE = {}
+NOT_DRAWN = {
+    14668713: "depot run from Vozovna Slovany (no ref, no stop members)",
+    14668682: "1X, depot run to Vozovna Slovany (no stop members)",
+    14722301: "4X, depot run to Vozovna Slovany (no stop members)",
+    # LINE 4's Bory/Univerzita -> Košutka directions carry NO operator tag in OSM
+    # (2026-09-30), so the operator filter cannot keep them. Their reverse
+    # directions are kept (1995933, 10427675); any stop only these two reach
+    # would be listed in excluded_stations.csv - none is (step 1).
+    1995932: "line 4, Bory -> Košutka: no operator tag in OSM; its reverse is kept",
+    10427674: "line 4, Univerzita -> Košutka: no operator tag in OSM; its reverse is kept",
+}
+# TARGET hues for scripts/line_colour_search.py: evenly spaced round the
+# wheel in line order, HSL (h, 70%, 45%) - no operator colours are licensed
+# (owner, 2026-09-30). The search picks the feasible colour nearest each.
+LINES = {"1": {"hue": "#C32222"}, "2": {"hue": "#22C322"}, "4": {"hue": "#2222C3"}}
+# THIS PROJECT'S colours (owner, 2026-09-30), from `python
+# scripts/line_colour_search.py plzen` on 2026-09-30: every line 3:1 on both
+# map pages and CIE76 >= 45 from every pin; closest pair 124.7 (1, 2).
+LINE_COLOURS = {"1": "#C02008", "2": "#00A800", "4": "#6040E8"}
+# WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1. Measured
+# 2026-09-30: 53 stations, all inside obec 554791 (the brief's 19 / 23 / 19).
+EXPECTED_INSIDE_PER_LINE = {"1": 19, "2": 23, "4": 19}
 OPERATOR_STATION_COUNTS = {}
 OPERATOR_COUNTS_SOURCE = ""
 

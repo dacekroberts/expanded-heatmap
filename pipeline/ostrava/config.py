@@ -57,7 +57,8 @@ CRS_PROJECTED = "EPSG:32634"
 
 # --- Ring geometry ---------------------------------------------------------
 METERS_PER_MILE = 1609.344
-# HALVED ON THE SPACING RULE: the brief measured a 424 m median stop gap.
+# HALVED ON THE SPACING RULE: step 1 measured a 431 m median nearest-neighbour
+# gap between the 92 stations (2026-09-30; the brief's screen read 424).
 RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
 RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
@@ -69,18 +70,55 @@ RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 # Budišovice, is LEFT OUT (owner, 2026-09-30): 3 of its 10 stops are in the city
 # (30%), below every stub precedent; it costs Poruba,koupaliště and Krásné Pole.
 TRAM_SOURCE = "osm"
+CITY_NAME = "Ostrava"
+# Stop positions of one name are one station, at their mean, when they lie
+# within this of each other (pipeline/osm_tram.py's collapse; Aarhus's rule).
+# 330 m HERE, NOT 200, on measurement (2026-09-30): two names are interchanges
+# whose stops sit on different arms of a junction - Sport Aréna 321 m (lines
+# 2/7 on one arm, 11/12 on the other) and Mariánské náměstí 223 m (three stops
+# round the square). Inside Riga's 300 and Osaka's 400 for real interchanges;
+# the next widest name is 173 m.
+COLLAPSE_MAX_SPREAD_M = 330
+# The station-spacing gate's floor for TRAM stops (pipeline/stations.py): the
+# shared 400 m default is a metro figure. Riga's, Aarhus's and Brno's 200 m.
+SPACING_MIN_M = 200.0
 OSM_TRAM_OPERATOR = "Dopravní podnik Ostrava"
 OSM_TRAM_BBOX = (49.73, 18.10, 49.91, 18.38)   # (s, w, n, e), the brief's check box
 LINE_ORDER = ["1", "2", "3", "4", "6", "7", "8", "10", "11", "12", "14", "15", "17", "18"]
 LINE_NAMES = {k: f"Tram {k}" for k in LINE_ORDER}
-# TODO (step 1, once pipeline/osm_tram.py exists): NOT_DRAWN by relation id -
-# line 5 (owner), 9 and 19 (no stop members), 19177807 (an unref'd line 11
-# variant) and anything else in the box - EXPECTED_INSIDE_PER_LINE, gate 3, and
-# the palette from line_colour_search.py (owner, 2026-09-30).
-NOT_DRAWN = {}
-LINES = {}
-LINE_COLOURS = {}
-EXPECTED_INSIDE_PER_LINE = {}
+# ONE STATION UNDER TWO NAMES, twice (step 1's close-pair note, 2026-09-30):
+# OSM names two stands of one stop separately. Hranečník (St. 1) [10/14] and
+# (St. 5) [4/10/12/14], 120 m apart, are stands of the one interchange; Nová Huť
+# hlavní brána 1 and 2 [14, 4/14], 61 m apart, a direction pair. Each folds into
+# the spelling more lines carry (osm_tram requires both spellings present, so a
+# stale alias stops the step; it never invents a bare name).
+STATION_NAME_ALIASES = {
+    "Hranečník (St. 1)": "Hranečník (St. 5)",
+    "Nová Huť hlavní brána 1": "Nová Huť hlavní brána 2",
+}
+NOT_DRAWN = {
+    3163382: "line 5, the suburban line to Budišovice: 3 of its 10 stops in the city (owner, 2026-09-30)",
+    10693394: "line 5, the suburban line to Budišovice: 3 of its 10 stops in the city (owner, 2026-09-30)",
+    917552: "line 9: no stop members in OSM (a special or peak service)",
+    3163171: "line 19: no stop members in OSM (a special or peak service)",
+    19177807: "an unref'd line 11 variant from the Poruba depot (Poruba,vozovna - Zábřeh)",
+}
+# TARGET hues for scripts/line_colour_search.py: evenly spaced round the
+# wheel in line order, HSL (h, 70%, 45%) - no operator colours are licensed
+# (owner, 2026-09-30). The search picks the feasible colour nearest each.
+LINES = {"1": {"hue": "#C32222"}, "2": {"hue": "#C36722"}, "3": {"hue": "#C3AC22"}, "4": {"hue": "#95C322"}, "6": {"hue": "#50C322"}, "7": {"hue": "#22C339"}, "8": {"hue": "#22C37E"}, "10": {"hue": "#22C3C3"}, "11": {"hue": "#227EC3"}, "12": {"hue": "#2239C3"}, "14": {"hue": "#5022C3"}, "15": {"hue": "#9522C3"}, "17": {"hue": "#C322AC"}, "18": {"hue": "#C32267"}}
+# THIS PROJECT'S colours (owner, 2026-09-30), from `python
+# scripts/line_colour_search.py ostrava` on 2026-09-30: every line 3:1 on both
+# map pages and CIE76 >= 45 from every pin; closest pair within 500 m 18.3 (12, 14); anywhere 15.8 (10, 11).
+LINE_COLOURS = {"1": "#C02008", "2": "#C06820", "3": "#A89000", "4": "#70A000", "6": "#30A800", "7": "#688008", "8": "#687028", "10": "#00A0B8", "11": "#007890", "12": "#6048E0", "14": "#8030E8", "15": "#9828C8", "17": "#C820B0", "18": "#D060C8"}
+# WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1. Measured
+# 2026-09-30: 92 stations, all inside obec 554821 (the brief's 96 less line 5's
+# two own stops and the two stand pairs folded above). Min gap 168 m.
+EXPECTED_INSIDE_PER_LINE = {"1": 23, "2": 25, "3": 25, "4": 28, "6": 21, "7": 23,
+                            "8": 28, "10": 14, "11": 22, "12": 25, "14": 18,
+                            "15": 15, "17": 22, "18": 28}
+# GATE 3 IS NOT RUN: no Dopravní podnik Ostrava feed was reachable at the screen
+# and none was read since. An open gap, recorded.
 OPERATOR_STATION_COUNTS = {}
 OPERATOR_COUNTS_SOURCE = ""
 
