@@ -14,6 +14,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.milan.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -22,13 +26,22 @@ st.set_page_config(page_title="Milan Heatmap", page_icon="\U0001f5fa\ufe0f", lay
 set_base_font()
 
 render_city_nav("Milan")
+render_city_title('Milan')
+
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/milan/step3_map.py` to generate it.")
+
+render_data_age('Milan')
 
 # "One pin in seven" below is step 2's own "shop sign on" line (15.3% of every
 # storefront, 15.4% of the within-ring pins, 2026-09-23). It read "a fifth"
 # until then - the per-register rates (17.7% on the largest) were the only ones
 # printed, and none of them is the rate across the map.
-st.title("Milan: commercial density around Metropolitana di Milano station areas")
-
 st.markdown(
     """
 The map covers the **Comune di Milano** and draws the five metro lines -
@@ -74,12 +87,8 @@ cluster."
 """
 )
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/milan/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Milan')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -365,7 +365,11 @@ def main():
         print(f"===== {display}\n{text}\n\n  caption credit: {credit}\n")
         if not args.write:
             continue
-        pages = sorted((ROOT / "app" / "pages").glob(f"*_{'_'.join(p.capitalize() for p in slug.split('_'))}_Heatmap.py"))
+        # The page number, then the name: a bare "*_Orleans_Heatmap.py" also
+        # matched 135_New_Orleans_Heatmap.py once New Orleans was built.
+        stem = "_".join(p.capitalize() for p in slug.split("_"))
+        pages = sorted(p for p in (ROOT / "app" / "pages").glob(f"*_{stem}_Heatmap.py")
+                       if re.fullmatch(rf"\d+_{stem}_Heatmap\.py", p.name))
         if len(pages) != 1:
             sys.exit(f"{slug}: expected one page file, found {[p.name for p in pages]}")
         page = PAGE

@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.pittsburgh.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,28 @@ st.set_page_config(page_title="Pittsburgh Heatmap", page_icon="\U0001f5fa️", l
 set_base_font()
 
 render_city_nav("Pittsburgh")
+render_city_title('Pittsburgh')
 
-st.title("Pittsburgh: food businesses around light-rail stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/pittsburgh/step3_map.py` to generate it.")
+
+# The list's own date and the fetch date, read from outputs/pittsburgh/
+# provenance.json so they cannot go stale on the next fetch.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _reg, _date = _prov.get("register_date"), _prov.get("as_of_date")
+        if _reg and _date:
+            st.caption(f"Snapshot: the Allegheny County Health Department's food facilities as "
+                       f"updated on **{_reg}**, fetched on {_date}.")
+    except (ValueError, OSError, AttributeError, TypeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Written under the owner's pre-approval of this build's prose (2026-09-30).
 st.markdown(
@@ -74,25 +97,8 @@ cluster."
 """
 )
 
-# The list's own date and the fetch date, read from outputs/pittsburgh/
-# provenance.json so they cannot go stale on the next fetch.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _reg, _date = _prov.get("register_date"), _prov.get("as_of_date")
-        if _reg and _date:
-            st.caption(f"Snapshot: the Allegheny County Health Department's food facilities as "
-                       f"updated on **{_reg}**, fetched on {_date}.")
-    except (ValueError, OSError, AttributeError, TypeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/pittsburgh/step3_map.py` to generate it.")
+render_map_help('business layers')
+render_country_links('Pittsburgh')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -17,6 +17,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.olomouc.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -25,8 +28,34 @@ st.set_page_config(page_title="Olomouc Heatmap", page_icon="\U0001f5fa️", layo
 set_base_font()
 
 render_city_nav("Olomouc")
+render_city_title('Olomouc')
 
-st.title("Olomouc: commercial density around tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/olomouc/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/olomouc/provenance.json so they cannot
+# go stale on the next fetch: ROS02's own snapshot date, and when the tram lines
+# and stops were fetched from OpenStreetMap.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _snap = _prov.get("ros02_snapshot", "")
+        _osm = (_prov.get("osm_fetched") or "")[:10]
+        _bits = []
+        if _snap:
+            _bits.append(f"establishments as of **{_snap}** (ROS02)")
+        if _osm:
+            _bits.append(f"tram lines and stops from OpenStreetMap, fetched **{_osm}**")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # The Czech tram template, approved by the owner 2026-09-30. Figures from this
 # city's own build (2026-09-30): 7 lines; 36 stops at a 316 m median gap; 616 restaurants against OSM's 342 (1.80); 1,742 of 2,235 storefronts in a ring.
@@ -76,31 +105,8 @@ cluster."
 """
 )
 
-# The snapshot dates, read from outputs/olomouc/provenance.json so they cannot
-# go stale on the next fetch: ROS02's own snapshot date, and when the tram lines
-# and stops were fetched from OpenStreetMap.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _snap = _prov.get("ros02_snapshot", "")
-        _osm = (_prov.get("osm_fetched") or "")[:10]
-        _bits = []
-        if _snap:
-            _bits.append(f"establishments as of **{_snap}** (ROS02)")
-        if _osm:
-            _bits.append(f"tram lines and stops from OpenStreetMap, fetched **{_osm}**")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/olomouc/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Olomouc')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

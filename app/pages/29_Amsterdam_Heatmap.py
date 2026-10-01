@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.amsterdam.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,39 @@ st.set_page_config(page_title="Amsterdam Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("Amsterdam")
+render_city_title('Amsterdam')
 
-st.title("Amsterdam: commercial density around metro and tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/amsterdam/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/amsterdam/provenance.json so they cannot
+# go stale on the next fetch: the day the two registers were retrieved (the
+# city's API serves the current state, with no date of its own), and the window
+# OVapi's national feed declares for itself.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _gtfs = _prov.get("gtfs_feed_info") or {}
+        _start, _end = _gtfs.get("feed_start_date", ""), _gtfs.get("feed_end_date", "")
+        _snap = _prov.get("permits_snapshot", "")
+        _bits = []
+        if _snap:
+            _bits.append(f"permits and shop units as retrieved on **{_snap}** "
+                         f"(city register, BAG)")
+        if _start and _end:
+            _bits.append(f"metro and tram timetable data valid "
+                         f"**{_start[:4]}-{_start[4:6]}-{_start[6:]}** to "
+                         f"**{_end[:4]}-{_end[4:6]}-{_end[6:]}** (OVapi)")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-24.
 st.markdown(
@@ -78,36 +112,8 @@ cluster."
 """
 )
 
-# The snapshot dates, read from outputs/amsterdam/provenance.json so they cannot
-# go stale on the next fetch: the day the two registers were retrieved (the
-# city's API serves the current state, with no date of its own), and the window
-# OVapi's national feed declares for itself.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _gtfs = _prov.get("gtfs_feed_info") or {}
-        _start, _end = _gtfs.get("feed_start_date", ""), _gtfs.get("feed_end_date", "")
-        _snap = _prov.get("permits_snapshot", "")
-        _bits = []
-        if _snap:
-            _bits.append(f"permits and shop units as retrieved on **{_snap}** "
-                         f"(city register, BAG)")
-        if _start and _end:
-            _bits.append(f"metro and tram timetable data valid "
-                         f"**{_start[:4]}-{_start[4:6]}-{_start[6:]}** to "
-                         f"**{_end[:4]}-{_end[4:6]}-{_end[6:]}** (OVapi)")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/amsterdam/step3_map.py` to generate it.")
+render_map_help('two business categories (Shops and services, and Food service)')
+render_country_links('Amsterdam')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

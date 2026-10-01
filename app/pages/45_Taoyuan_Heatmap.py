@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.taoyuan.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,37 @@ st.set_page_config(page_title="Taoyuan Heatmap", page_icon="\U0001f5fa️", layo
 set_base_font()
 
 render_city_nav("Taoyuan")
+render_city_title('Taoyuan')
 
-st.title("Taoyuan: commercial density around Airport MRT stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/taoyuan/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/taichung/provenance.json so they cannot
+# go stale on the next fetch: the register's own data date, the door-plate
+# file's edition, and the OpenStreetMap extract's date.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _reg = (_prov.get("fia_register") or {}).get("data_date") or ""
+        _plates = (_prov.get("doorplates") or {}).get("edition") or ""
+        _osm = ((_prov.get("osm_rail") or {}).get("osm_base") or "")[:10]
+        _bits = []
+        if _reg:
+            _bits.append(f"tax register dated **{_reg}** (Fiscal Information Agency)")
+        if _plates:
+            _bits.append(f"door plates from **{_plates}** (Taoyuan City Government)")
+        if _osm:
+            _bits.append(f"the line's route as mapped in OpenStreetMap on **{_osm}**")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-25.
 st.markdown(
@@ -67,34 +99,8 @@ estimate, so read the colour as "roughly where things cluster."
 """
 )
 
-# The snapshot dates, read from outputs/taichung/provenance.json so they cannot
-# go stale on the next fetch: the register's own data date, the door-plate
-# file's edition, and the OpenStreetMap extract's date.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _reg = (_prov.get("fia_register") or {}).get("data_date") or ""
-        _plates = (_prov.get("doorplates") or {}).get("edition") or ""
-        _osm = ((_prov.get("osm_rail") or {}).get("osm_base") or "")[:10]
-        _bits = []
-        if _reg:
-            _bits.append(f"tax register dated **{_reg}** (Fiscal Information Agency)")
-        if _plates:
-            _bits.append(f"door plates from **{_plates}** (Taoyuan City Government)")
-        if _osm:
-            _bits.append(f"the line's route as mapped in OpenStreetMap on **{_osm}**")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/taoyuan/step3_map.py` to generate it.")
+render_map_help('three business categories (Food service, Retail and Personal services)')
+render_country_links('Taoyuan')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

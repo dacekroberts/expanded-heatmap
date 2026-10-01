@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.rotterdam.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,41 @@ st.set_page_config(page_title="Rotterdam Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("Rotterdam")
+render_city_title('Rotterdam')
 
-st.title("Rotterdam: commercial density around metro and tram stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/rotterdam/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/rotterdam/provenance.json so they cannot
+# go stale on the next fetch: the day the permit notices and the BAG units were
+# retrieved (both serve their current state), and the window OVapi's national
+# feed declares for itself.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _gtfs = _prov.get("gtfs_feed_info") or {}
+        _start, _end = _gtfs.get("feed_start_date", ""), _gtfs.get("feed_end_date", "")
+        _notices = ((_prov.get("notices") or {}).get("retrieved") or "")[:10]
+        _bag = ((_prov.get("bag_units") or {}).get("retrieved") or "")[:10]
+        _bits = []
+        if _notices:
+            _bits.append(f"permit notices published to **{_notices}** (the official gazette, via KOOP)")
+        if _bag:
+            _bits.append(f"shop units as registered on **{_bag}** (BAG, via PDOK)")
+        if _start and _end:
+            _bits.append(f"metro and tram timetable data valid "
+                         f"**{_start[:4]}-{_start[4:6]}-{_start[6:]}** to "
+                         f"**{_end[:4]}-{_end[4:6]}-{_end[6:]}** (OVapi)")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-24, with the first paragraph revised the same
 # evening once trams 14 and 18 were found to be temporary works services.
@@ -79,38 +115,8 @@ estimate, so read the colour as "roughly where things cluster."
 """
 )
 
-# The snapshot dates, read from outputs/rotterdam/provenance.json so they cannot
-# go stale on the next fetch: the day the permit notices and the BAG units were
-# retrieved (both serve their current state), and the window OVapi's national
-# feed declares for itself.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _gtfs = _prov.get("gtfs_feed_info") or {}
-        _start, _end = _gtfs.get("feed_start_date", ""), _gtfs.get("feed_end_date", "")
-        _notices = ((_prov.get("notices") or {}).get("retrieved") or "")[:10]
-        _bag = ((_prov.get("bag_units") or {}).get("retrieved") or "")[:10]
-        _bits = []
-        if _notices:
-            _bits.append(f"permit notices published to **{_notices}** (the official gazette, via KOOP)")
-        if _bag:
-            _bits.append(f"shop units as registered on **{_bag}** (BAG, via PDOK)")
-        if _start and _end:
-            _bits.append(f"metro and tram timetable data valid "
-                         f"**{_start[:4]}-{_start[4:6]}-{_start[6:]}** to "
-                         f"**{_end[:4]}-{_end[4:6]}-{_end[6:]}** (OVapi)")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/rotterdam/step3_map.py` to generate it.")
+render_map_help('two business categories (Shops and services, and Food service)')
+render_country_links('Rotterdam')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

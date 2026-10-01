@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.den_haag.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,35 @@ st.set_page_config(page_title="Den Haag Heatmap", page_icon="\U0001f5fa️", lay
 set_base_font()
 
 render_city_nav("Den Haag")
+render_city_title('Den Haag')
 
-st.title("Den Haag: commercial density around tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/den_haag/step3_map.py` to generate it.")
+
+# The dates, read from outputs/den_haag/provenance.json so they cannot go
+# stale: the permit layer's own last edit (it is never called current), and the
+# days the BAG units and the OSM lines were fetched.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _horeca = _prov.get("horeca") or {}
+        _edited = (_horeca.get("data_last_edited_utc") or "")[:10]
+        _files = _prov.get("files_utc") or {}
+        _bag = (_files.get("bag_verblijfsobjecten_winkelfunctie.json") or "")[:10]
+        _rail = (_files.get("osm_rail.json") or "")[:10]
+        if _edited and _bag and _rail:
+            st.caption(f"Permit data from the Gemeente Den Haag, its permit layer last edited "
+                       f"**{_edited}**; shop units from the BAG (Kadaster, via PDOK), fetched "
+                       f"**{_bag}**; the tram lines and their stops from OpenStreetMap, "
+                       f"fetched **{_rail}**.")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # The tram-city skill's page-text template, approved by the owner word for
 # word on 2026-09-30, filled from Den Haag's own step 1 and step 2 figures; the
@@ -95,32 +125,8 @@ cluster."
 """
 )
 
-# The dates, read from outputs/den_haag/provenance.json so they cannot go
-# stale: the permit layer's own last edit (it is never called current), and the
-# days the BAG units and the OSM lines were fetched.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _horeca = _prov.get("horeca") or {}
-        _edited = (_horeca.get("data_last_edited_utc") or "")[:10]
-        _files = _prov.get("files_utc") or {}
-        _bag = (_files.get("bag_verblijfsobjecten_winkelfunctie.json") or "")[:10]
-        _rail = (_files.get("osm_rail.json") or "")[:10]
-        if _edited and _bag and _rail:
-            st.caption(f"Permit data from the Gemeente Den Haag, its permit layer last edited "
-                       f"**{_edited}**; shop units from the BAG (Kadaster, via PDOK), fetched "
-                       f"**{_bag}**; the tram lines and their stops from OpenStreetMap, "
-                       f"fetched **{_rail}**.")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/den_haag/step3_map.py` to generate it.")
+render_map_help('two business categories (Shops and services, and Food service)')
+render_country_links('Den Haag')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

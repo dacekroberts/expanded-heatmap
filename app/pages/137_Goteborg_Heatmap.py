@@ -16,6 +16,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.goteborg.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -24,12 +27,20 @@ st.set_page_config(page_title="Göteborg Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("Göteborg")
+render_city_title('Göteborg')
 
-st.title("Göteborg: food businesses around tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/goteborg/step3_map.py` to generate it.")
 
 # The fetch dates, read from outputs/goteborg/provenance.json so they cannot go
 # stale: the register carries no dates, so the day it was fetched is its date.
 _reg, _rail = "", ""
+
 if PROVENANCE_JSON.exists():
     try:
         _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
@@ -39,6 +50,9 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
+if _reg and _rail:
+    st.caption(f"Food business data from Göteborgs Stad (CC0), fetched **{_reg}**; the tram "
+               f"lines and their stops from OpenStreetMap, fetched **{_rail}**.")
 
 def _long(iso):
     try:
@@ -46,7 +60,6 @@ def _long(iso):
     except ValueError:
         return "the fetch date below"
     return f"{d.day} {d:%B %Y}"
-
 
 # The tram-city skill's page-text template, approved by the owner word for
 # word on 2026-09-30, filled from Göteborg's own step 1 and step 2 figures;
@@ -110,16 +123,8 @@ cluster."
 """
 )
 
-if _reg and _rail:
-    st.caption(f"Food business data from Göteborgs Stad (CC0), fetched **{_reg}**; the tram "
-               f"lines and their stops from OpenStreetMap, fetched **{_rail}**.")
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/goteborg/step3_map.py` to generate it.")
+render_map_help('business categories (Food service and Food shops)')
+render_country_links('Göteborg')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -19,6 +19,10 @@ from pipeline.tokyo.config import HEATMAP_HTML, OUTPUTS  # noqa: E402
 from pipeline.tokyo.wards import WARDS  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_map_help,
     render_site_notices,
     scroll_table,
     set_base_font,
@@ -28,8 +32,17 @@ st.set_page_config(page_title="Tokyo Heatmap", page_icon="\U0001f5fa️", layout
 set_base_font()
 
 render_city_nav("Tokyo")
+render_city_title('Tokyo')
 
-st.title("Tokyo: commercial density around rail stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/tokyo/step3_map.py` to generate it.")
+
+render_data_age('Tokyo')
 
 # Prose approved by the owner 2026-09-28.
 st.markdown(
@@ -62,6 +75,7 @@ of restaurant permits in that ward:
 )
 
 shares = OUTPUTS / "official_shares.json"
+
 if shares.exists():
     by_code = {c: w for c, w in WARDS.items()}
     rows = sorted(json.loads(shares.read_text(encoding="utf-8")), key=lambda r: -r["share_pct"])
@@ -115,12 +129,8 @@ cluster."
 """
 )
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/tokyo/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Tokyo')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

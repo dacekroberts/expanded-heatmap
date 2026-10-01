@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.houston.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,32 @@ st.set_page_config(page_title="Houston Heatmap", page_icon="\U0001f5fa️", layo
 set_base_font()
 
 render_city_nav("Houston")
+render_city_title('Houston')
 
-st.title("Houston: commercial density around METRORail station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/houston/step4_map.py` to generate it.")
+
+# The fetch date, read from outputs/houston/provenance.json so it cannot go
+# stale: permits count if the outlet had begun trading by it (config.AS_OF_DATE).
+# as_of_date, not the file's UTC timestamp: the fetch ran on the evening of
+# 2026-09-29 in Houston, after midnight UTC, and the timestamp read 2026-09-30
+# while step 2 applied 2026-09-29 (deploy-verify, 2026-09-29).
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _files = _prov.get("files_utc") or {}
+        _taken = (_prov.get("as_of_date")
+                  or (_files.get("sales_tax_permits_houston.csv") or "")[:10])
+        if _taken:
+            st.caption(f"Sales tax permits fetched **{_taken}**.")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Pre-approved by the owner 2026-09-29 ("same with the eventual write-ups").
 # The in-ring share is stated on the page (owner, 2026-09-29: build as scoped
@@ -77,29 +104,8 @@ cluster."
 """
 )
 
-# The fetch date, read from outputs/houston/provenance.json so it cannot go
-# stale: permits count if the outlet had begun trading by it (config.AS_OF_DATE).
-# as_of_date, not the file's UTC timestamp: the fetch ran on the evening of
-# 2026-09-29 in Houston, after midnight UTC, and the timestamp read 2026-09-30
-# while step 2 applied 2026-09-29 (deploy-verify, 2026-09-29).
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _files = _prov.get("files_utc") or {}
-        _taken = (_prov.get("as_of_date")
-                  or (_files.get("sales_tax_permits_houston.csv") or "")[:10])
-        if _taken:
-            st.caption(f"Sales tax permits fetched **{_taken}**.")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/houston/step4_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Houston')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

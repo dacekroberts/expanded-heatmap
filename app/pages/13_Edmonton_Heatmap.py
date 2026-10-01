@@ -14,6 +14,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.edmonton.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -22,8 +26,17 @@ st.set_page_config(page_title="Edmonton Heatmap", page_icon="\U0001f5fa\ufe0f", 
 set_base_font()
 
 render_city_nav("Edmonton")
+render_city_title('Edmonton')
 
-st.title("Edmonton: commercial density around ETS LRT station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/edmonton/step3_map.py` to generate it.")
+
+render_data_age('Edmonton')
 
 st.markdown(
     """
@@ -89,12 +102,8 @@ cluster."
 """
 )
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/edmonton/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Edmonton')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

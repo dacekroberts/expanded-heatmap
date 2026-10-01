@@ -1942,6 +1942,19 @@ def render_data_age(name):
     st.caption(f"Data: {city_entry(name)['data_age']}.")
 
 
+# The layer control's icon as the maps draw it: Leaflet 1.9.3's own image, from
+# the CDN every heatmap.html already loads Leaflet from (pipeline/map_common.py
+# inverts it on a dark map). Shown on a light tile, as the map's light-mode
+# control draws it, so it reads in both page themes.
+_LAYERS_ICON = (
+    '<img src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/images/layers.png" '
+    'srcset="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/images/layers-2x.png 2x" '
+    'alt="layers icon" width="20" height="20" style="vertical-align:middle;'
+    'background:#fff;border:1px solid rgba(0,0,0,0.25);border-radius:4px;'
+    'padding:2px;margin:0 2px">'
+)
+
+
 def render_map_help(layers="business categories"):
     """How to use the map, the same on every city page: pipeline/map_common.py
     draws every map with the same controls. `layers` is the page's own name
@@ -1950,7 +1963,7 @@ def render_map_help(layers="business categories"):
     st.markdown(
         "**Using the map**\n\n"
         f"- Concentric ring boundaries and the {layers} are "
-        "toggleable via the layer control in the top left.\n"
+        f"toggleable via the layer control {_LAYERS_ICON} in the top left.\n"
         "- When enabled, business density will display as numbered circles "
         "summing areas when zoomed out. Zooming in will show individual dots; "
         "hover over those to see further details.\n"
@@ -1960,7 +1973,8 @@ def render_map_help(layers="business categories"):
         "across the other city maps.\n"
         "- The heat layer is illustrative. Leaflet applies a visual blur "
         "rather than a statistical density estimate, so read the colour as "
-        "“roughly where things cluster.”"
+        "“roughly where things cluster.”",
+        unsafe_allow_html=True,   # the icon's <img>
     )
 
 

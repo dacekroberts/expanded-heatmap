@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.sacramento.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,28 @@ st.set_page_config(page_title="Sacramento Heatmap", page_icon="\U0001f5fa️", l
 set_base_font()
 
 render_city_nav("Sacramento")
+render_city_title('Sacramento')
 
-st.title("Sacramento: commercial density around SacRT light-rail stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/sacramento/step4_map.py` to generate it.")
+
+# The fetch date, read from outputs/sacramento/provenance.json so it cannot go
+# stale: licences are counted if unexpired on it (config.AS_OF_DATE).
+if PROVENANCE_JSON.exists():
+    try:
+        _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
+        _taken = (_files.get("business_operation_tax_active.csv") or "")[:10]
+        if _taken:
+            st.caption(f"Business licences fetched **{_taken}** and counted if "
+                       f"unexpired on that date.")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-29. The Green Line sentence follows the
 # closed-for-works rule (docs/category_rules.md, "Station scope"): name the
@@ -80,25 +103,8 @@ cluster."
 """
 )
 
-# The fetch date, read from outputs/sacramento/provenance.json so it cannot go
-# stale: licences are counted if unexpired on it (config.AS_OF_DATE).
-if PROVENANCE_JSON.exists():
-    try:
-        _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
-        _taken = (_files.get("business_operation_tax_active.csv") or "")[:10]
-        if _taken:
-            st.caption(f"Business licences fetched **{_taken}** and counted if "
-                       f"unexpired on that date.")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/sacramento/step4_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Sacramento')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.daugavpils.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,44 @@ st.set_page_config(page_title="Daugavpils Heatmap", page_icon="\U0001f5fa️", l
 set_base_font()
 
 render_city_nav("Daugavpils")
+render_city_title('Daugavpils')
 
-st.title("Daugavpils: commercial density around tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/daugavpils/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/daugavpils/provenance.json so they cannot
+# go stale on the next fetch: the portal's own last-modified dates for the
+# excise register, the premise groups, the cadastral map and the address
+# register, and the date the OSM tram file was taken.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+
+        def _lm(key):
+            return ((_prov.get(key) or {}).get("last_modified") or "")[:10]
+
+        _rail = (((_prov.get("osm") or {}).get("rail") or {}).get("file_utc") or "")[:10]
+        _bits = []
+        if _lm("excise"):
+            _bits.append(f"excise licences as published **{_lm('excise')}** (VID, via data.gov.lv)")
+        if _lm("premise_groups"):
+            _bits.append(f"cadastre premise groups as published **{_lm('premise_groups')}** "
+                         f"(VZD, via data.gov.lv)")
+        if _lm("address_register"):
+            _bits.append(f"address register as published **{_lm('address_register')}** "
+                         f"(VZD, via data.gov.lv)")
+        if _rail:
+            _bits.append(f"tram line and stops from OpenStreetMap, fetched **{_rail}**")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # The tram-city skill's page-text template, approved by the owner word for
 # word on 2026-09-30, filled from Daugavpils's own step 1 and step 2 figures; the
@@ -75,41 +114,8 @@ cluster."
 """
 )
 
-# The snapshot dates, read from outputs/daugavpils/provenance.json so they cannot
-# go stale on the next fetch: the portal's own last-modified dates for the
-# excise register, the premise groups, the cadastral map and the address
-# register, and the date the OSM tram file was taken.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-
-        def _lm(key):
-            return ((_prov.get(key) or {}).get("last_modified") or "")[:10]
-
-        _rail = (((_prov.get("osm") or {}).get("rail") or {}).get("file_utc") or "")[:10]
-        _bits = []
-        if _lm("excise"):
-            _bits.append(f"excise licences as published **{_lm('excise')}** (VID, via data.gov.lv)")
-        if _lm("premise_groups"):
-            _bits.append(f"cadastre premise groups as published **{_lm('premise_groups')}** "
-                         f"(VZD, via data.gov.lv)")
-        if _lm("address_register"):
-            _bits.append(f"address register as published **{_lm('address_register')}** "
-                         f"(VZD, via data.gov.lv)")
-        if _rail:
-            _bits.append(f"tram line and stops from OpenStreetMap, fetched **{_rail}**")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/daugavpils/step3_map.py` to generate it.")
+render_map_help('two business categories (Shops and services, and Food service)')
+render_country_links('Daugavpils')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

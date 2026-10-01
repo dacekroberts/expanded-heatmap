@@ -18,6 +18,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.brasilia.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -26,8 +29,46 @@ st.set_page_config(page_title="Brasília Heatmap", page_icon="\U0001f5fa\ufe0f",
 set_base_font()
 
 render_city_nav("Brasília")
+render_city_title('Brasília')
 
-st.title("Brasília: commercial density around metro stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/brasilia/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/brasilia/provenance.json so they cannot
+# go stale on the next fetch: the date IBGE published each CNEFE file (the
+# server's Last-Modified, which fetch_sources.py records) and the day each
+# rail source was read.
+_RAIL = [
+    ('rail lines and stations from OpenStreetMap',
+     ('osm_rail', 'osm_train')),
+]
+
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _cnefe = [v for k, v in _prov.items() if k.startswith("cnefe") and isinstance(v, dict)]
+        _pub = sorted({parsedate_to_datetime(v["last_modified"]).date().isoformat()
+                       for v in _cnefe if v.get("last_modified")})
+        _bits = []
+        if _pub:
+            _bits.append("establishments as recorded in the 2022 census (IBGE CNEFE, "
+                         + ("files" if len(_cnefe) > 1 else "file") + " dated **"
+                         + " to ".join(dict.fromkeys((_pub[0], _pub[-1]))) + "**)")
+        for _what, _keys in _RAIL:
+            _got = sorted(str(_prov[k]["retrieved"])[:10] for k in _keys
+                          if isinstance(_prov.get(k), dict) and _prov[k].get("retrieved"))
+            if _got:
+                _bits.append(f"{_what}, retrieved **{_got[-1]}**")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, TypeError, KeyError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
 # calls applied as recommended.
@@ -69,42 +110,8 @@ cluster."
 """
 )
 
-# The snapshot dates, read from outputs/brasilia/provenance.json so they cannot
-# go stale on the next fetch: the date IBGE published each CNEFE file (the
-# server's Last-Modified, which fetch_sources.py records) and the day each
-# rail source was read.
-_RAIL = [
-    ('rail lines and stations from OpenStreetMap',
-     ('osm_rail', 'osm_train')),
-]
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _cnefe = [v for k, v in _prov.items() if k.startswith("cnefe") and isinstance(v, dict)]
-        _pub = sorted({parsedate_to_datetime(v["last_modified"]).date().isoformat()
-                       for v in _cnefe if v.get("last_modified")})
-        _bits = []
-        if _pub:
-            _bits.append("establishments as recorded in the 2022 census (IBGE CNEFE, "
-                         + ("files" if len(_cnefe) > 1 else "file") + " dated **"
-                         + " to ".join(dict.fromkeys((_pub[0], _pub[-1]))) + "**)")
-        for _what, _keys in _RAIL:
-            _got = sorted(str(_prov[k]["retrieved"])[:10] for k in _keys
-                          if isinstance(_prov.get(k), dict) and _prov[k].get("retrieved"))
-            if _got:
-                _bits.append(f"{_what}, retrieved **{_got[-1]}**")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, TypeError, KeyError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/brasilia/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Brasília')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

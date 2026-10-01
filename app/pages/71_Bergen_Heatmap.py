@@ -16,6 +16,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.bergen.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -24,8 +27,52 @@ st.set_page_config(page_title="Bergen Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Bergen")
+render_city_title('Bergen')
 
-st.title("Bergen: commercial density around Bybanen light-rail stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/bergen/step3_map.py` to generate it.")
+
+# The snapshot date, read from outputs/bergen/provenance.json so it cannot go
+# stale on the next fetch. Entur's feed_info declares NO validity window -
+# Toulouse's case, not Rennes' - so the fetch date is the only thing pinning
+# the snapshot, and no window is stated because none is published. Bergen's
+# feed and register were cached before this build ran, so the dates are each
+# cached FILE's own (provenance "files_utc"), not the provenance run's.
+if PROVENANCE_JSON.exists():
+    try:
+        _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
+        _taken = (_files.get("rb_sky-aggregated-gtfs.zip") or "")[:10]
+        _register = (_files.get("underenheter.csv.gz") or "")[:10]
+        if _taken and _register:
+            st.caption(f"Transit data from Skyss via Entur, snapshot taken **{_taken}**; "
+                       f"business register downloaded **{_register}**.")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
+
+# ENTUR'S SPECIFIED CREDIT, WITH ITS LOGO, beside the data it covers. Entur
+# asks for "Data made available by Entur + (logo)"; the owner's call
+# (2026-09-24) was to show the logo. The file is Entur's own, unaltered, from
+# its RGB logo pack. Entur's rules: the primary (blue) logo on a light
+# background, at least 20 px - so it sits on a white chip whatever the page
+# theme, and the SVG's 800x400 canvas is drawn 56 px tall because the mark
+# fills ~39% of it, putting the visible logo at ~22 px.
+_ENTUR_LOGO = Path(__file__).parent.parent / "assets" / "entur" / "Enturlogo_Blue_RGB.svg"
+
+if _ENTUR_LOGO.exists():
+    _b64 = base64.b64encode(_ENTUR_LOGO.read_bytes()).decode("ascii")
+    st.markdown(
+        '<div style="display:flex;align-items:center;gap:10px;margin:0 0 0.6rem">'
+        '<span style="background:#ffffff;border-radius:6px;display:inline-flex">'
+        f'<img src="data:image/svg+xml;base64,{_b64}" alt="Entur" height="56"></span>'
+        '<span style="font-size:0.85rem">Data made available by Entur, under the '
+        '<a href="https://data.norge.no/nlod/en/2.0">NLOD</a>.</span></div>',
+        unsafe_allow_html=True)
 
 # Approved by the owner 2026-09-29 (Oslo's text, with Bergen's network).
 st.markdown(
@@ -72,48 +119,8 @@ cluster."
 """
 )
 
-# The snapshot date, read from outputs/bergen/provenance.json so it cannot go
-# stale on the next fetch. Entur's feed_info declares NO validity window -
-# Toulouse's case, not Rennes' - so the fetch date is the only thing pinning
-# the snapshot, and no window is stated because none is published. Bergen's
-# feed and register were cached before this build ran, so the dates are each
-# cached FILE's own (provenance "files_utc"), not the provenance run's.
-if PROVENANCE_JSON.exists():
-    try:
-        _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
-        _taken = (_files.get("rb_sky-aggregated-gtfs.zip") or "")[:10]
-        _register = (_files.get("underenheter.csv.gz") or "")[:10]
-        if _taken and _register:
-            st.caption(f"Transit data from Skyss via Entur, snapshot taken **{_taken}**; "
-                       f"business register downloaded **{_register}**.")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-# ENTUR'S SPECIFIED CREDIT, WITH ITS LOGO, beside the data it covers. Entur
-# asks for "Data made available by Entur + (logo)"; the owner's call
-# (2026-09-24) was to show the logo. The file is Entur's own, unaltered, from
-# its RGB logo pack. Entur's rules: the primary (blue) logo on a light
-# background, at least 20 px - so it sits on a white chip whatever the page
-# theme, and the SVG's 800x400 canvas is drawn 56 px tall because the mark
-# fills ~39% of it, putting the visible logo at ~22 px.
-_ENTUR_LOGO = Path(__file__).parent.parent / "assets" / "entur" / "Enturlogo_Blue_RGB.svg"
-if _ENTUR_LOGO.exists():
-    _b64 = base64.b64encode(_ENTUR_LOGO.read_bytes()).decode("ascii")
-    st.markdown(
-        '<div style="display:flex;align-items:center;gap:10px;margin:0 0 0.6rem">'
-        '<span style="background:#ffffff;border-radius:6px;display:inline-flex">'
-        f'<img src="data:image/svg+xml;base64,{_b64}" alt="Entur" height="56"></span>'
-        '<span style="font-size:0.85rem">Data made available by Entur, under the '
-        '<a href="https://data.norge.no/nlod/en/2.0">NLOD</a>.</span></div>',
-        unsafe_allow_html=True)
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/bergen/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Bergen')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

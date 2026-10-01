@@ -20,6 +20,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.lille.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -28,8 +31,49 @@ st.set_page_config(page_title="Lille (Regional) Heatmap", page_icon="\U0001f5fa�
 set_base_font()
 
 render_city_nav("Lille (Regional)")
+render_city_title('Lille (Regional)')
 
-st.title("Lille (Regional): commercial density around Métro and Tramway station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/lille/step3_map.py` to generate it.")
+
+# Licence Ouverte 2.0 asks for the producer AND « la date de dernière mise à
+# jour ». MEL's layers carry no update date (tramway_lignes has only a
+# metadata dateStamp, 2024-06-03), so the retrieval date is shown and the
+# caption SAYS it is the retrieval date - the brief's instruction, and the
+# honest reading of an obligation the source gives no way to meet literally.
+# Read from outputs/lille/provenance.json so it cannot go stale on a re-fetch.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _taken = (_prov.get("fetched_utc") or "")[:10]
+        if _taken:
+            st.caption(
+                "Station locations, tram routes and line colours © Métropole "
+                "Européenne de Lille and Ilévia, Licence Ouverte 2.0, retrieved "
+                f"**{_taken}**. MEL publishes no update date for these layers, "
+                "so this is the date they were read. Métro routes © "
+                "OpenStreetMap contributors.")
+    except (ValueError, OSError):
+        # A malformed provenance file must not take the page down.
+        pass
+
+# INSEE's prescribed attribution, verbatim: reuse is permitted « sous réserve
+# de mentionner la source sous la forme « Source : Insee » »
+# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). It covers
+# SIRENE and its geolocation file. Kept outside the provenance block so a
+# missing or malformed provenance file cannot drop it, and
+# check M of scripts/check_provenance.py refuses a French page without it.
+# The edition is hardcoded because outputs/<city>/provenance.json does not
+# record it: it is the title fetch_sources.py recorded for the shared national
+# cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
+# refetch.
+st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
+           " and its geolocation file.")
 
 st.markdown(
     """
@@ -81,46 +125,8 @@ cluster."
 """
 )
 
-# Licence Ouverte 2.0 asks for the producer AND « la date de dernière mise à
-# jour ». MEL's layers carry no update date (tramway_lignes has only a
-# metadata dateStamp, 2024-06-03), so the retrieval date is shown and the
-# caption SAYS it is the retrieval date - the brief's instruction, and the
-# honest reading of an obligation the source gives no way to meet literally.
-# Read from outputs/lille/provenance.json so it cannot go stale on a re-fetch.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _taken = (_prov.get("fetched_utc") or "")[:10]
-        if _taken:
-            st.caption(
-                "Station locations, tram routes and line colours © Métropole "
-                "Européenne de Lille and Ilévia, Licence Ouverte 2.0, retrieved "
-                f"**{_taken}**. MEL publishes no update date for these layers, "
-                "so this is the date they were read. Métro routes © "
-                "OpenStreetMap contributors.")
-    except (ValueError, OSError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-# INSEE's prescribed attribution, verbatim: reuse is permitted « sous réserve
-# de mentionner la source sous la forme « Source : Insee » »
-# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). It covers
-# SIRENE and its geolocation file. Kept outside the provenance block so a
-# missing or malformed provenance file cannot drop it, and
-# check M of scripts/check_provenance.py refuses a French page without it.
-# The edition is hardcoded because outputs/<city>/provenance.json does not
-# record it: it is the title fetch_sources.py recorded for the shared national
-# cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
-# refetch.
-st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
-           " and its geolocation file.")
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/lille/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Lille (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

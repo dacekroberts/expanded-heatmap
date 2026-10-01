@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.bucharest.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,27 @@ st.set_page_config(page_title="Bucharest Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("Bucharest")
+render_city_title('Bucharest')
 
-st.title("Bucharest: food businesses around metro stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/bucharest/step3_map.py` to generate it.")
+
+# The registers' own date, read from outputs/bucharest/provenance.json so it
+# cannot go stale on the next fetch.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _date = _prov.get("register_date")
+        if _date:
+            st.caption(f"Snapshot: DSVSA București's registers as published on **{_date}**.")
+    except (ValueError, OSError, AttributeError, TypeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-29.
 st.markdown(
@@ -69,24 +91,8 @@ cluster."
 """
 )
 
-# The registers' own date, read from outputs/bucharest/provenance.json so it
-# cannot go stale on the next fetch.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _date = _prov.get("register_date")
-        if _date:
-            st.caption(f"Snapshot: DSVSA București's registers as published on **{_date}**.")
-    except (ValueError, OSError, AttributeError, TypeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/bucharest/step3_map.py` to generate it.")
+render_map_help('business categories (Food service and Food shops)')
+render_country_links('Bucharest')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.hong_kong.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,39 @@ st.set_page_config(page_title="Hong Kong Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("Hong Kong")
+render_city_title('Hong Kong')
 
-st.title("Hong Kong: commercial density around MTR stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/hong_kong/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/hong_kong/provenance.json so they cannot
+# go stale on the next fetch: the registers' own generation date, the latest
+# record update in FEHD's point layers, and the OpenStreetMap extract's date.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _gen = max((_prov.get(k) or {}).get("generation_date") or ""
+                   for k in ("fehd_restaurants", "fehd_other_food", "fehd_non_food"))
+        _pts = max((_prov.get(k) or {}).get("latest_record_update") or ""
+                   for k in ("csdi_restaurants", "csdi_other_food", "csdi_non_food"))
+        _osm = ((_prov.get("osm_rail") or {}).get("osm_base") or "")[:10]
+        _bits = []
+        if _gen:
+            _bits.append(f"licence registers generated **{_gen}** (FEHD, via DATA.GOV.HK)")
+        if _pts:
+            _bits.append(f"licence locations updated to **{_pts}** (FEHD, via the CSDI Portal)")
+        if _osm:
+            _bits.append(f"MTR and Light Rail lines as mapped in OpenStreetMap on **{_osm}**")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-24; the third paragraph revised the same evening
 # when placement moved from address lookups to FEHD's own points.
@@ -67,36 +101,8 @@ estimate, so read the colour as "roughly where things cluster."
 """
 )
 
-# The snapshot dates, read from outputs/hong_kong/provenance.json so they cannot
-# go stale on the next fetch: the registers' own generation date, the latest
-# record update in FEHD's point layers, and the OpenStreetMap extract's date.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _gen = max((_prov.get(k) or {}).get("generation_date") or ""
-                   for k in ("fehd_restaurants", "fehd_other_food", "fehd_non_food"))
-        _pts = max((_prov.get(k) or {}).get("latest_record_update") or ""
-                   for k in ("csdi_restaurants", "csdi_other_food", "csdi_non_food"))
-        _osm = ((_prov.get("osm_rail") or {}).get("osm_base") or "")[:10]
-        _bits = []
-        if _gen:
-            _bits.append(f"licence registers generated **{_gen}** (FEHD, via DATA.GOV.HK)")
-        if _pts:
-            _bits.append(f"licence locations updated to **{_pts}** (FEHD, via the CSDI Portal)")
-        if _osm:
-            _bits.append(f"MTR and Light Rail lines as mapped in OpenStreetMap on **{_osm}**")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/hong_kong/step3_map.py` to generate it.")
+render_map_help('three business categories (Food service, Food shops and Bathhouses)')
+render_country_links('Hong Kong')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -14,6 +14,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.yokohama.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -22,8 +26,17 @@ st.set_page_config(page_title="Yokohama Heatmap", page_icon="\U0001f5fa️", lay
 set_base_font()
 
 render_city_nav("Yokohama")
+render_city_title('Yokohama')
 
-st.title("Yokohama: barbers, beauty salons and laundries around rail stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/yokohama/step3_map.py` to generate it.")
+
+render_data_age('Yokohama')
 
 # Written under the owner's pre-approval of this build's prose (2026-09-30),
 # from Kobe's page (the Japanese template) and Palma's (a one-layer page). It
@@ -70,12 +83,8 @@ cluster."
 """
 )
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/yokohama/step3_map.py` to generate it.")
+render_map_help('business layer')
+render_country_links('Yokohama')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

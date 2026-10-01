@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.copenhagen.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,31 @@ st.set_page_config(page_title="Copenhagen Heatmap", page_icon="\U0001f5fa️", l
 set_base_font()
 
 render_city_nav("Copenhagen")
+render_city_title('Copenhagen')
 
-st.title("Copenhagen: commercial density around Metro and S-tog station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/copenhagen/step3_map.py` to generate it.")
+
+# The snapshot date, read from outputs/copenhagen/provenance.json so it cannot
+# go stale on the next fetch: the CVR weekly generation the join was built on.
+# All six CVR entities are one generation (fetch_sources refuses a mix), so
+# any of them dates it; Virksomhed carries Datafordeler's generation time.
+if PROVENANCE_JSON.exists():
+    try:
+        _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("datafordeler", {})
+        _times = sorted(v.get("generation_time") or "" for k, v in _files.items()
+                        if k.startswith("cvr/") and v.get("generation_time"))
+        if _times:
+            st.caption(f"Business and address data from Datafordeler's weekly "
+                       f"extracts, generated **{_times[0][:10]}**.")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-24, with the partnership and catch-all
 # clauses matching the two calls taken that day (DECISIONS.md).
@@ -82,28 +108,8 @@ cluster."
 """
 )
 
-# The snapshot date, read from outputs/copenhagen/provenance.json so it cannot
-# go stale on the next fetch: the CVR weekly generation the join was built on.
-# All six CVR entities are one generation (fetch_sources refuses a mix), so
-# any of them dates it; Virksomhed carries Datafordeler's generation time.
-if PROVENANCE_JSON.exists():
-    try:
-        _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("datafordeler", {})
-        _times = sorted(v.get("generation_time") or "" for k, v in _files.items()
-                        if k.startswith("cvr/") and v.get("generation_time"))
-        if _times:
-            st.caption(f"Business and address data from Datafordeler's weekly "
-                       f"extracts, generated **{_times[0][:10]}**.")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/copenhagen/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Copenhagen')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

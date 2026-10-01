@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.odense.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,37 @@ st.set_page_config(page_title="Odense Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Odense")
+render_city_title('Odense')
 
-st.title("Odense: commercial density around Odense Letbane tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/odense/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/odense/provenance.json so they cannot
+# go stale: the CVR weekly generation the join was built on (the national
+# cache Copenhagen fetched), and the dates the OSM tram and address-point
+# files were taken.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _times = sorted(v.get("generation_time") or ""
+                        for k, v in (_prov.get("datafordeler") or {}).items()
+                        if k.startswith("cvr/") and v.get("generation_time"))
+        _osm = _prov.get("osm") or {}
+        _points = ((_osm.get("address_points") or {}).get("file_utc") or "")[:10]
+        _rail = ((_osm.get("rail") or {}).get("file_utc") or "")[:10]
+        if _times and _points and _rail:
+            st.caption(f"Business and address data from Datafordeler's weekly "
+                       f"extracts, generated **{_times[0][:10]}**; address points "
+                       f"from OpenStreetMap, fetched **{_points}**; the tram line "
+                       f"and its stops from OpenStreetMap, fetched **{_rail}**.")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # The tram-city skill's page-text template, approved by the owner word for
 # word on 2026-09-30, filled from Odense's own step 1 and step 2 figures; the
@@ -74,34 +106,8 @@ cluster."
 """
 )
 
-# The snapshot dates, read from outputs/odense/provenance.json so they cannot
-# go stale: the CVR weekly generation the join was built on (the national
-# cache Copenhagen fetched), and the dates the OSM tram and address-point
-# files were taken.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _times = sorted(v.get("generation_time") or ""
-                        for k, v in (_prov.get("datafordeler") or {}).items()
-                        if k.startswith("cvr/") and v.get("generation_time"))
-        _osm = _prov.get("osm") or {}
-        _points = ((_osm.get("address_points") or {}).get("file_utc") or "")[:10]
-        _rail = ((_osm.get("rail") or {}).get("file_utc") or "")[:10]
-        if _times and _points and _rail:
-            st.caption(f"Business and address data from Datafordeler's weekly "
-                       f"extracts, generated **{_times[0][:10]}**; address points "
-                       f"from OpenStreetMap, fetched **{_points}**; the tram line "
-                       f"and its stops from OpenStreetMap, fetched **{_rail}**.")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/odense/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Odense')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

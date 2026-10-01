@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.palma.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,29 @@ st.set_page_config(page_title="Palma Heatmap", page_icon="\U0001f5fa️", layout
 set_base_font()
 
 render_city_nav("Palma")
+render_city_title('Palma')
 
-st.title("Palma: bars, cafés and restaurants around Metro stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/palma/step3_map.py` to generate it.")
+
+# The register's own last-update date, read from outputs/palma/provenance.json
+# (GOIB's terms require it to be shown).
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _date = _prov.get("as_of_date")
+        if _date:
+            st.caption(f"Snapshot: the Consell de Mallorca's register as last updated on "
+                       f"**{_date}**; Catastro's address points as accessed on "
+                       f"**{_prov.get('files_utc', {}).get('A.ES.SDGC.AD.07040.zip', '')[:10]}**.")
+    except (ValueError, OSError, AttributeError, TypeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Written under the owner's pre-approval of this build's prose (2026-09-30).
 st.markdown(
@@ -70,26 +94,8 @@ cluster."
 """
 )
 
-# The register's own last-update date, read from outputs/palma/provenance.json
-# (GOIB's terms require it to be shown).
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _date = _prov.get("as_of_date")
-        if _date:
-            st.caption(f"Snapshot: the Consell de Mallorca's register as last updated on "
-                       f"**{_date}**; Catastro's address points as accessed on "
-                       f"**{_prov.get('files_utc', {}).get('A.ES.SDGC.AD.07040.zip', '')[:10]}**.")
-    except (ValueError, OSError, AttributeError, TypeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/palma/step3_map.py` to generate it.")
+render_map_help('business layer')
+render_country_links('Palma')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

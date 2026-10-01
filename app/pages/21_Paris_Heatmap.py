@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.paris.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,50 @@ st.set_page_config(page_title="Paris Heatmap", page_icon="\U0001f5fa\ufe0f", lay
 set_base_font()
 
 render_city_nav("Paris")
+render_city_title('Paris')
 
-st.title("Paris: commercial density around Métro and tram station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/paris/step3_map.py` to generate it.")
+
+# LICENCE MOBILITES Art. 5.7 - the transit data's snapshot date and update
+# interval must be DISPLAYED, and this is the only city page that carries such
+# an obligation (notice 24). Read from outputs/paris/provenance.json rather
+# than hardcoded, because the IDFM zip contains no feed_info.txt: nothing
+# inside the artifact records when it was current, so fetch_sources.py captures
+# it and this line is the only honest way to show it.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _taken = (_prov.get("fetched_utc") or "")[:10]
+        _valid = (_prov.get("nap") or {}).get("end_date") or ""
+        if _taken:
+            _line = (f"Transit data © Île-de-France Mobilités, snapshot taken "
+                     f"**{_taken}**")
+            if _valid:
+                _line += f", feed valid to **{_valid}**"
+            st.caption(_line + ".")
+    except (ValueError, OSError):
+        # A malformed or unreadable provenance file must not take the page
+        # down; the notices below are the load-bearing obligation.
+        pass
+
+# INSEE's prescribed attribution, verbatim: reuse is permitted « sous réserve
+# de mentionner la source sous la forme « Source : Insee » »
+# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). It covers
+# SIRENE and its geolocation file. Kept outside the provenance block so a
+# missing or malformed provenance file cannot drop it, and
+# check M of scripts/check_provenance.py refuses a French page without it.
+# The edition is hardcoded because outputs/<city>/provenance.json does not
+# record it: it is the title fetch_sources.py recorded for the shared national
+# cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
+# refetch.
+st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
+           " and its geolocation file.")
 
 # Trams T3a and T3b added 2026-09-27 (the tram rescope), wording approved by
 # the owner.
@@ -80,47 +125,8 @@ cluster."
 """
 )
 
-# LICENCE MOBILITES Art. 5.7 - the transit data's snapshot date and update
-# interval must be DISPLAYED, and this is the only city page that carries such
-# an obligation (notice 24). Read from outputs/paris/provenance.json rather
-# than hardcoded, because the IDFM zip contains no feed_info.txt: nothing
-# inside the artifact records when it was current, so fetch_sources.py captures
-# it and this line is the only honest way to show it.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _taken = (_prov.get("fetched_utc") or "")[:10]
-        _valid = (_prov.get("nap") or {}).get("end_date") or ""
-        if _taken:
-            _line = (f"Transit data © Île-de-France Mobilités, snapshot taken "
-                     f"**{_taken}**")
-            if _valid:
-                _line += f", feed valid to **{_valid}**"
-            st.caption(_line + ".")
-    except (ValueError, OSError):
-        # A malformed or unreadable provenance file must not take the page
-        # down; the notices below are the load-bearing obligation.
-        pass
-
-# INSEE's prescribed attribution, verbatim: reuse is permitted « sous réserve
-# de mentionner la source sous la forme « Source : Insee » »
-# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). It covers
-# SIRENE and its geolocation file. Kept outside the provenance block so a
-# missing or malformed provenance file cannot drop it, and
-# check M of scripts/check_provenance.py refuses a French page without it.
-# The edition is hardcoded because outputs/<city>/provenance.json does not
-# record it: it is the title fetch_sources.py recorded for the shared national
-# cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
-# refetch.
-st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
-           " and its geolocation file.")
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/paris/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Paris')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.rennes.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,56 @@ st.set_page_config(page_title="Rennes Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Rennes")
+render_city_title('Rennes')
 
-st.title("Rennes: commercial density around Métro station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/rennes/step3_map.py` to generate it.")
+
+# The snapshot, read from outputs/rennes/provenance.json rather than hardcoded
+# so it cannot go stale on the next fetch.
+#
+# ✅ THIS FEED SELF-ATTESTS - Marseille's case, not Paris's or Toulouse's - so
+# the caption can name the window STAR itself published the feed for, from
+# feed_info.txt, alongside the date this project took it. A four-week window:
+# when it has lapsed, the fix is a refetch.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _taken = (_prov.get("fetched_utc") or "")[:10]
+        _fi = _prov.get("feed_info") or {}
+
+        def _iso(d):
+            d = str(d or "")
+            return f"{d[:4]}-{d[4:6]}-{d[6:8]}" if len(d) == 8 and d.isdigit() else ""
+
+        _start, _end = _iso(_fi.get("feed_start_date")), _iso(_fi.get("feed_end_date"))
+        if _taken:
+            _line = "Transit data © STAR (Keolis Rennes)"
+            if _start and _end:
+                _line += (f", from the feed STAR published for **{_start}** to "
+                          f"**{_end}**")
+            st.caption(_line + f"; snapshot taken **{_taken}**.")
+    except (ValueError, OSError):
+        # A malformed provenance file must not take the page down.
+        pass
+
+# INSEE's prescribed attribution, verbatim: reuse is permitted « sous réserve
+# de mentionner la source sous la forme « Source : Insee » »
+# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). It covers
+# SIRENE and its geolocation file. Kept outside the provenance block so a
+# missing or malformed provenance file cannot drop it, and
+# check M of scripts/check_provenance.py refuses a French page without it.
+# The edition is hardcoded because outputs/<city>/provenance.json does not
+# record it: it is the title fetch_sources.py recorded for the shared national
+# cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
+# refetch.
+st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
+           " and its geolocation file.")
 
 st.markdown(
     """
@@ -74,53 +125,8 @@ cluster."
 """
 )
 
-# The snapshot, read from outputs/rennes/provenance.json rather than hardcoded
-# so it cannot go stale on the next fetch.
-#
-# ✅ THIS FEED SELF-ATTESTS - Marseille's case, not Paris's or Toulouse's - so
-# the caption can name the window STAR itself published the feed for, from
-# feed_info.txt, alongside the date this project took it. A four-week window:
-# when it has lapsed, the fix is a refetch.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _taken = (_prov.get("fetched_utc") or "")[:10]
-        _fi = _prov.get("feed_info") or {}
-
-        def _iso(d):
-            d = str(d or "")
-            return f"{d[:4]}-{d[4:6]}-{d[6:8]}" if len(d) == 8 and d.isdigit() else ""
-
-        _start, _end = _iso(_fi.get("feed_start_date")), _iso(_fi.get("feed_end_date"))
-        if _taken:
-            _line = "Transit data © STAR (Keolis Rennes)"
-            if _start and _end:
-                _line += (f", from the feed STAR published for **{_start}** to "
-                          f"**{_end}**")
-            st.caption(_line + f"; snapshot taken **{_taken}**.")
-    except (ValueError, OSError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-# INSEE's prescribed attribution, verbatim: reuse is permitted « sous réserve
-# de mentionner la source sous la forme « Source : Insee » »
-# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). It covers
-# SIRENE and its geolocation file. Kept outside the provenance block so a
-# missing or malformed provenance file cannot drop it, and
-# check M of scripts/check_provenance.py refuses a French page without it.
-# The edition is hardcoded because outputs/<city>/provenance.json does not
-# record it: it is the title fetch_sources.py recorded for the shared national
-# cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
-# refetch.
-st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
-           " and its geolocation file.")
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/rennes/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Rennes')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

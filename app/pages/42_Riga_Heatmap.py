@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.riga.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,37 @@ st.set_page_config(page_title="Riga Heatmap", page_icon="\U0001f5fa️", layout=
 set_base_font()
 
 render_city_nav("Riga")
+render_city_title('Riga')
 
-st.title("Riga: commercial density around tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/riga/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/riga/provenance.json so they cannot go
+# stale on the next fetch: the portal's own last-modified date for the excise
+# register and the cadastre, and which monthly tram timetable file was read.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _ex = ((_prov.get("excise") or {}).get("last_modified") or "")[:10]
+        _pg = ((_prov.get("premise_groups") or {}).get("last_modified") or "")[:10]
+        _gt = _prov.get("gtfs") or {}
+        _bits = []
+        if _ex:
+            _bits.append(f"excise licences as published **{_ex}** (VID, via data.gov.lv)")
+        if _pg:
+            _bits.append(f"cadastre premise groups as published **{_pg}** (VZD, via data.gov.lv)")
+        if _gt.get("last_modified"):
+            _bits.append(f"tram timetable published **{_gt['last_modified'][:10]}** (Rīgas satiksme)")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-24.
 st.markdown(
@@ -62,34 +94,8 @@ estimate, so read the colour as "roughly where things cluster."
 """
 )
 
-# The snapshot dates, read from outputs/riga/provenance.json so they cannot go
-# stale on the next fetch: the portal's own last-modified date for the excise
-# register and the cadastre, and which monthly tram timetable file was read.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _ex = ((_prov.get("excise") or {}).get("last_modified") or "")[:10]
-        _pg = ((_prov.get("premise_groups") or {}).get("last_modified") or "")[:10]
-        _gt = _prov.get("gtfs") or {}
-        _bits = []
-        if _ex:
-            _bits.append(f"excise licences as published **{_ex}** (VID, via data.gov.lv)")
-        if _pg:
-            _bits.append(f"cadastre premise groups as published **{_pg}** (VZD, via data.gov.lv)")
-        if _gt.get("last_modified"):
-            _bits.append(f"tram timetable published **{_gt['last_modified'][:10]}** (Rīgas satiksme)")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/riga/step3_map.py` to generate it.")
+render_map_help()
+render_country_links('Riga')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

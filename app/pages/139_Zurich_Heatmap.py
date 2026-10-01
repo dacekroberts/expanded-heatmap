@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.zurich.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,39 @@ st.set_page_config(page_title="Zurich Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Zurich")
+render_city_title('Zurich')
 
-st.title("Zurich: commercial density around tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/zurich/step3_map.py` to generate it.")
+
+# The register's own last-update date and the fetch dates, read from
+# outputs/zurich/provenance.json so they cannot go stale on the next fetch.
+# The register is CC0; the city asks for "Source: Stadt Zürich" as a courtesy.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _files = _prov.get("files_utc") or {}
+        _upd = ((_prov.get("register") or {}).get("date_last_updated") or "").strip()
+        # ISO like every other caption (owner, 2026-09-30, call B7): the source
+        # writes "28.09.2026".
+        _d = _upd.split(".")
+        if len(_d) == 3 and all(p.isdigit() for p in _d) and len(_d[2]) == 4:
+            _upd = f"{_d[2]}-{_d[1].zfill(2)}-{_d[0].zfill(2)}"
+        _reg = (_files.get("gastwirtschaftsbetriebe.geojson") or "")[:10]
+        _rail = (_files.get("osm_rail.json") or "")[:10]
+        if _reg and _rail:
+            _as_of = f"last updated **{_upd}**, " if _upd else ""
+            st.caption(f"Premises data: Stadt Zürich, Gastwirtschaftsbetriebe (CC0), "
+                       f"{_as_of}fetched **{_reg}**; the tram lines and their stops "
+                       f"from OpenStreetMap, fetched **{_rail}**.")
+    except (ValueError, OSError, AttributeError, TypeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # The tram-city skill's page-text template, approved by the owner word for
 # word on 2026-09-30, filled from Zurich's own step 1 and step 2 figures; the
@@ -96,36 +130,8 @@ cluster."
 """
 )
 
-# The register's own last-update date and the fetch dates, read from
-# outputs/zurich/provenance.json so they cannot go stale on the next fetch.
-# The register is CC0; the city asks for "Source: Stadt Zürich" as a courtesy.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _files = _prov.get("files_utc") or {}
-        _upd = ((_prov.get("register") or {}).get("date_last_updated") or "").strip()
-        # ISO like every other caption (owner, 2026-09-30, call B7): the source
-        # writes "28.09.2026".
-        _d = _upd.split(".")
-        if len(_d) == 3 and all(p.isdigit() for p in _d) and len(_d[2]) == 4:
-            _upd = f"{_d[2]}-{_d[1].zfill(2)}-{_d[0].zfill(2)}"
-        _reg = (_files.get("gastwirtschaftsbetriebe.geojson") or "")[:10]
-        _rail = (_files.get("osm_rail.json") or "")[:10]
-        if _reg and _rail:
-            _as_of = f"last updated **{_upd}**, " if _upd else ""
-            st.caption(f"Premises data: Stadt Zürich, Gastwirtschaftsbetriebe (CC0), "
-                       f"{_as_of}fetched **{_reg}**; the tram lines and their stops "
-                       f"from OpenStreetMap, fetched **{_rail}**.")
-    except (ValueError, OSError, AttributeError, TypeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/zurich/step3_map.py` to generate it.")
+render_map_help('two business categories (Licensed shops and Food service)')
+render_country_links('Zurich')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.anyang.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,27 @@ st.set_page_config(page_title="Anyang Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Anyang")
+render_city_title('Anyang')
 
-st.title("Anyang: commercial density around subway stations")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/anyang/step3_map.py` to generate it.")
+
+# The register's edition, read from outputs/anyang/provenance.json so it
+# cannot go stale on the next fetch.
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _ed = (_prov.get("semas") or {}).get("edition")
+        if _ed:
+            st.caption(f"Snapshot: SEMAS's storefront register, edition of **{_ed}**.")
+    except (ValueError, OSError, AttributeError, TypeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Bucheon's text (approved by the owner 2026-09-29), with Anyang's lines; written
 # under the owner's pre-approval of this build's prose (2026-09-30).
@@ -62,24 +84,8 @@ estimate, so read the colour as "roughly where things cluster."
 """
 )
 
-# The register's edition, read from outputs/anyang/provenance.json so it
-# cannot go stale on the next fetch.
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _ed = (_prov.get("semas") or {}).get("edition")
-        if _ed:
-            st.caption(f"Snapshot: SEMAS's storefront register, edition of **{_ed}**.")
-    except (ValueError, OSError, AttributeError, TypeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/anyang/step3_map.py` to generate it.")
+render_map_help('three business categories (Food service, Retail and Personal services)')
+render_country_links('Anyang')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

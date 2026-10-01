@@ -14,6 +14,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.mexico_city.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -22,8 +26,17 @@ st.set_page_config(page_title="Mexico City Heatmap", page_icon="\U0001f5fa\ufe0f
 set_base_font()
 
 render_city_nav("Mexico City")
+render_city_title('Mexico City')
 
-st.title("Mexico City: commercial density around Metro CDMX station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/mexico_city/step3_map.py` to generate it.")
+
+render_data_age('Mexico City')
 
 # No counts in this prose, deliberately: add-city Step 8's rule is that a
 # station count or a "twelve lines" in page text is literal and goes stale when
@@ -73,12 +86,8 @@ cluster."
 """
 )
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/mexico_city/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Mexico City')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

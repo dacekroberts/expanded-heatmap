@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.prague.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,8 +26,36 @@ st.set_page_config(page_title="Prague Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Prague")
+render_city_title('Prague')
 
-st.title("Prague: commercial density around metro station areas")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/prague/step3_map.py` to generate it.")
+
+# The snapshot dates, read from outputs/prague/provenance.json so they cannot
+# go stale on the next fetch: ROS02's own snapshot date, and the window PID's
+# feed declares for itself (two weeks, so it moves with every refetch).
+if PROVENANCE_JSON.exists():
+    try:
+        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _gtfs = _prov.get("gtfs_feed_info") or {}
+        _start, _end = _gtfs.get("feed_start_date", ""), _gtfs.get("feed_end_date", "")
+        _snap = _prov.get("ros02_snapshot", "")
+        _bits = []
+        if _snap:
+            _bits.append(f"establishments as of **{_snap}** (ROS02)")
+        if _start and _end:
+            _bits.append(f"metro timetable data valid **{_start[:4]}-{_start[4:6]}-{_start[6:]}** "
+                         f"to **{_end[:4]}-{_end[4:6]}-{_end[6:]}** (PID)")
+        if _bits:
+            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+    except (ValueError, OSError, AttributeError):
+        # A malformed provenance file must not take the page down.
+        pass
 
 # Approved by the owner 2026-09-24.
 st.markdown(
@@ -74,33 +105,8 @@ cluster."
 """
 )
 
-# The snapshot dates, read from outputs/prague/provenance.json so they cannot
-# go stale on the next fetch: ROS02's own snapshot date, and the window PID's
-# feed declares for itself (two weeks, so it moves with every refetch).
-if PROVENANCE_JSON.exists():
-    try:
-        _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
-        _gtfs = _prov.get("gtfs_feed_info") or {}
-        _start, _end = _gtfs.get("feed_start_date", ""), _gtfs.get("feed_end_date", "")
-        _snap = _prov.get("ros02_snapshot", "")
-        _bits = []
-        if _snap:
-            _bits.append(f"establishments as of **{_snap}** (ROS02)")
-        if _start and _end:
-            _bits.append(f"metro timetable data valid **{_start[:4]}-{_start[4:6]}-{_start[6:]}** "
-                         f"to **{_end[:4]}-{_end[4:6]}-{_end[6:]}** (PID)")
-        if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
-    except (ValueError, OSError, AttributeError):
-        # A malformed provenance file must not take the page down.
-        pass
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/prague/step3_map.py` to generate it.")
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_country_links('Prague')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
