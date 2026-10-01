@@ -1339,6 +1339,26 @@ _NOTICES = [
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
      False),
+    # Hiroshima (notice 69): the city's full list is PDL 1.0 through DataEye
+    # (dataset 5672; the owner accepted the reading for the full-list file,
+    # 2026-09-24), with DataEye's prescribed 出典 pattern and who processed it;
+    # MHLW as in Fukuoka's; MLIT as in Kobe's, N02 in its 2025 edition. Written
+    # under the owner's pre-approval of this build's prose (2026-09-30), from
+    # Fukuoka's approved wording.
+    ("Hiroshima City, MHLW and MLIT (Hiroshima)",
+     "Hiroshima's businesses: 出典：「食品営業許可一覧」（広島広域都市圏・広島県オープンデータポータルサイト）"
+     "（[https://hiroshima-opendata.dataeye.jp/datasets/5672](https://hiroshima-opendata.dataeye.jp/datasets/5672)）を加工して作成"
+     "（「食品営業許可施設一覧（令和8年3月末時点）」, Hiroshima City); and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, showed a premises in both lists "
+     "once, placed each by its address or the ministry's own coordinates, and counted them around "
+     "stations. The ministry's list holds only filings whose applicants agreed to publish them and is "
+     "not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Hiroshima City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

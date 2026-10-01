@@ -385,7 +385,7 @@ def branch_split(config, key, sections, claimed=()):
     walked, so BRANCHES' ORDER matters (Osaka: the left-out Umekita-Fukushima
     track first, then the Umekita track the Osaka Higashi Line runs on)."""
     b = config.BRANCHES[key]
-    st = japan.stations()
+    st = japan.stations(slug=config.SLUG)
     st = st[(st["N02_004"] == b["line"][0]) & (st["N02_003"] == b["line"][1])].to_crs(config.CRS_PROJECTED)
     term = _platform_at(config, st, b["terminus"], b.get("terminus_at"))
     if "junction_at" in b:
@@ -419,7 +419,8 @@ def branch_split(config, key, sections, claimed=()):
 
 
 def write_lines(config, near, st):
-    sec = japan._read_geojson(japan.N02_ZIP, japan.N02_SECTIONS).to_crs(config.CRS_GEOGRAPHIC)
+    _, zp, _, member = japan.n02(config.SLUG)
+    sec = japan._read_geojson(zp, member).to_crs(config.CRS_GEOGRAPHIC)
     sec = sec[sec["N02_002"] != japan.SHINKANSEN]
     sec = sec[sec.geometry.intersects(near)]
     pair = pd.Series(list(zip(sec["N02_004"], sec["N02_003"])), index=sec.index)
@@ -468,7 +469,7 @@ def run(config):
     near = gpd.GeoSeries([city], crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED).buffer(DRAW_BEYOND_M)
     near = near.to_crs(config.CRS_GEOGRAPHIC).iloc[0]
 
-    st = japan.stations()
+    st = japan.stations(slug=config.SLUG)
     st = st[st.geometry.within(near)].copy()
     check_routes(config, st)
     join_groups(config, st)
@@ -525,8 +526,12 @@ def run(config):
     in_plat = platforms[platforms["group"].isin(keep["group"])].to_crs(config.CRS_GEOGRAPHIC)
     in_plat = in_plat.assign(latitude=in_plat.geometry.y, longitude=in_plat.geometry.x)
     print()
+    # Gate 1's floor: 400 m by default; a city whose stations are mostly tram
+    # stops sets config.SPACING_MIN_M (Hiroshima's Hiroden, 2026-09-30: 200 m,
+    # the value Paris, Marseille, Amsterdam and Riga take).
     station_gates.verify_stations(
         city=config.NAME, platforms=in_plat, stations=keep, crs_projected=config.CRS_PROJECTED,
+        spacing_min=getattr(config, "SPACING_MIN_M", station_gates.STATION_SPACING_MEDIAN_M_MIN),
         expected_per_line={config.LINE_NAMES[k]: n for k, n in config.GATE3["lines"].items()},
         actual_per_line={config.LINE_NAMES[k]: per_line[k] for k in config.GATE3["lines"]})
     print(f"    gate 3 source: {config.GATE3['source']}")

@@ -2321,6 +2321,47 @@ ward line.
   are not drawn on their own.
 - The Shinkansen does not count.
 
+### Hiroshima - the city's counter-application food list and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes only their new
+  openings, as PDFs, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business licence.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 4,584 national filings whose applicants did not publish an address (1,779 of
+  them restaurants, one restaurant in seven).
+- 453 food trucks, street and festival stalls and other temporary or mobile
+  permits, and 13 rows with no fixed place.
+- 719 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 485 school, hospital and staff canteens, 309 vending machines, 40 mail-order
+  businesses, 40 entertainment venues, 28 premises inside hotels and inns, 13
+  caterers (仕出し) and 51 snack bars and cabarets.
+- 67 closed premises, which the national filings keep, marked.
+
+**Counted** - every counter-application permit in force at the end of March
+2026 (each permit's expiry date is that day or later), and the national filings
+as downloaded on 30 September 2026. The city's monthly lists of new permits
+since are not added. 66 of the 1,278 bakery, confectioner and deli rows (5.2%)
+have a trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 589 repeat permits are shown once, and 146 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 150 rows (1.0%), mostly rural addresses in the outer wards, and
+the Shareo underground mall. Another 124 sit at their town's centre, and 242 national filings at
+their own coordinates.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type. Only the city's list names its operators.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 13 stations beyond it: 7 in Hatsukaichi, 3 in Saka, and 1 each in
+  Fuchu, Kaita and Higashihiroshima.
+- The Shinkansen does not count.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

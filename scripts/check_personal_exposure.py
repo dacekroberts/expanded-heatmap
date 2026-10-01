@@ -411,6 +411,14 @@ REGISTRIES = {
     "sacramento": dict(raw=None, trade=None, owner=None,
                        processed="businesses_geocoded.csv",
                        address=("street", "unit")),
+    # Hiroshima: the city's counter-application list (個人 and 法人 sheets) and
+    # MHLW's filings. 申請者名 and 代表者名 are read only by the name rule, in
+    # memory; MHLW's rows name no individual operator, so the rule cannot run
+    # there (Fukuoka's case). The Japan pass tests what reached the map
+    # (2026-09-30).
+    "hiroshima": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv",
+                      address=("address",), japan=True),
     # Houston: the Texas Comptroller's sales-tax permits. No taxpayer column is
     # ever downloaded but the organisation type (fetch_sources names its
     # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its
