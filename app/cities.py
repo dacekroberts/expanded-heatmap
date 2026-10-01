@@ -3171,8 +3171,10 @@ REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest")}
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would
 # open further out and its labels would collide; fit_view sizes for a 320 px
-# reference, so at 5.0 a few cities sit a pan away on a phone (5 in the north,
-# Nice in the south), and the list beneath the map always has them. Overview.py
+# reference, so at 5.0 a few cities sit a pan away on a phone (Brest, Strasbourg,
+# Mulhouse and Besancon in the north; Bordeaux and Nice in the south, each
+# leaving a fragment of its pill at the edge - review lane 1, 2026-09-30, at 375
+# px), and the list beneath the map always has them. Overview.py
 # and check_macro_labels.py both apply it; the centre is still each region's own.
 REGION_ZOOM = {"France North": 5.0, "France South": 5.0}
 

@@ -27,8 +27,11 @@ without consent. So:
 - notice 77 names the database by producer and NAP id, because the title and
   the page slug carry the brand.
 
-Grep `app/` and `outputs/angers/` for the brand after any rebuild. Only
-`provenance.json`, the fetch record, may carry it.
+Grep `app/`, `outputs/angers/` AND the docs the app renders - `docs/data_sources/`,
+`docs/data_sources.md`, `docs/excluded_categories.md` - for the brand after any
+rebuild: the About the Data page shows `docs/data_sources/france.md` verbatim,
+and its Angers row named the brand until review lanes 1 and 4 caught it
+(2026-09-30). Only `provenance.json`, the fetch record, may carry it.
 
 **Builds are APPROVED** (owner, 2026-09-30), in landing groups per
 `docs/review_time.md`, with every brief's calls approved as recommended.
