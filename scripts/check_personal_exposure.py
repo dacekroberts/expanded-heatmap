@@ -429,6 +429,13 @@ REGISTRIES = {
     "minneapolis": dict(raw=None, trade=None, owner=None,
                         processed="businesses_clean.csv",
                         address=("address",)),
+    # Pittsburgh: Allegheny County's geocoded food facilities. One name column
+    # (facility_name); the file has no owner or person column, and step 2
+    # reads named columns only. No fallback; a sole trader's facility name can
+    # be their own - measured here.
+    "pittsburgh": dict(raw=None, trade=None, owner=None,
+                       processed="businesses_clean.csv",
+                       address=("address",)),
     "houston": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),

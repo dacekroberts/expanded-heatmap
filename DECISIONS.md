@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**252 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**254 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -42,6 +42,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
+- [Pittsburgh is one category on the two-key macro legend (owner)](#2026-09-30---pittsburgh-is-one-category-on-the-two-key-macro-legend-owner)
+- [Pittsburgh built on Allegheny County's food facilities; WPRDC's indemnity accepted (owner)](#2026-09-30---pittsburgh-built-on-allegheny-countys-food-facilities-wprdcs-indemnity-accepted-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 - [Ottawa is one category on the two-key macro legend (owner)](#2026-09-30---ottawa-is-one-category-on-the-two-key-macro-legend-owner)
@@ -930,6 +932,89 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
     passes at 67%.
   - **Most + Litvínov:** 1,030 storefronts; building it last is
     recommended.
+
+### 2026-09-30 - Pittsburgh is one category on the two-key macro legend (owner)
+
+The owner's call, relayed by the cleanup session: food shops are food-like and
+are not a second category, so Pittsburgh's macro dot is **one_bucket** (hollow),
+with `categories` "Food premises only", and its `mode` is **light_rail** (the
+highest-order mode its map draws). This branch merges `origin/macro-legend`,
+which carries the two-key legend, the 12 px dots (`MARKER_R` 6) and the tier
+rules, so it is built on them from the start. Its categories move from "Two" to "Food premises only", and table B's note now reads "Retail = food shops only (\"Food-selling shops\")", the wording the rule reads. The labels were re-scored at the new dot size on this branch and on the combined tree (master, macro-legend, ottawa, minneapolis and this one: 78 cities): PROBLEMS 0 with Chicago's and Washington D.C.'s moves unchanged; Buffalo's offset stays as on master.
+
+### 2026-09-30 - Pittsburgh built on Allegheny County's food facilities; WPRDC's indemnity accepted (owner)
+
+**Built** on branch `pittsburgh`, page 78, region United States East, in the
+default frame (inside the box the framed US cities already span). Band B,
+under the owner's pre-approval of downloads and page prose (2026-09-30).
+1,730 storefronts (food service 1,335, food-selling shops 395), 316 within the
+0.3 mi rings (18%), 20 stations.
+
+**Licence (owner, 2026-09-30).** CC0 on the package and resource, nothing to
+display (licence-read agent). WPRDC's Data Use Agreement binds by use and
+adds an uncapped indemnity of the University of Pittsburgh, UCSUR, the City
+and the County: **accepted by the owner for this source**, as for Hong Kong,
+Sacramento and Palma. It also asks that Non-Public Information found in the
+data be reported to WPRDC's project manager and not used - a duty that a
+`check_personal_exposure.py` finding would trigger. None was found.
+
+**Status 7 is out of business**: the resource's own description says so;
+its data dictionary's text values (Active, Complete, Pending, Expired) do not
+match the numeric field, and the resource note is the specific one. Active is
+`status` 1 with no `bus_cl_date` (3,204 in the wards). The list is dated
+2025-08-27, within the one clock; the page states the date. The newer
+inspections table (2026-08-05) shares no facility id and WPRDC's SQL endpoint
+refuses scripts (403, respected), so it is not used.
+
+**Rail.** OSM, PRT's GTFS licence unread (the owner's Buffalo, Houston and
+Minneapolis choice). Whitelisted on `network` (Red's four relations say
+operator "PRT", the others "Pittsburgh Regional Transit"); a line may have
+more than two relations (Red's Overbrook short working). Gate 3 exact on 31,
+24 and 31 (Wikipedia). 20 in the city, 452 m median, so the **halved rings**
+(the spacing rule); the 31 beyond in `excluded_stations.csv` with their
+municipality. Three close pairs (Overbrook Junction/Willow 76 m,
+Fallowfield/Hampshire 119 m, Boggs/Palm Garden 129 m) are separate stops on
+parallel alignments, not one station under two names. **Blue moves from OSM's
+#77b6e4 to #59bcde**: 37.8 ΔE from the Retail pins this page draws; #59bcde
+is the least move (11.8) that clears 46 against every bucket, and sits
+further from Silver than the original did.
+
+**The register decides first.** 201, 202, 211, 212 are food service;
+111-118 food-selling shops, **supermarkets and bakeries included** (111, 112,
+117, 118 were missing from the brief's list; food shops by any reading), and
+"Chain Packaged Food Only" (116) keeps general retailers that sell packaged
+food (T J Maxx, Dollar General, Five Below): real storefronts. Out by type:
+1,056 - institutional, mobile, school, processing, boarding and nursing,
+commissary, caterer (R1), social-club (members' bars, Ottawa's call),
+banquet-hall and temporary types.
+
+**Then a name test inside them (393), Minneapolis's layer adapted**: the
+County licenses each stand of a venue as "Acrisure Stadium / Walk Thru Brew
+139", so the host name decides. Venues 254 (stadium, arena, events-centre,
+casino - R5 - zoo, museum, theatre, cinema, bowling, golf, the private city
+clubs), institutional 96 (Market C workplace micro-markets, contract
+caterers, UPMC and AHN hospital outlets, campus dining, church cafés,
+employee cafeterias, commissaries, caterers with no counter), pharmacies 25,
+**hotels by Ottawa's rule** 14 (a hotel's back of house and bare hotel names
+out; its own named bar or restaurant stays - "Hotel Monaco / The Commoner"),
+dark stores 2, and 2 the name calls a cabaret or a gentlemen's club (R3).
+"Strip District" is a neighbourhood, and "The Church Brew Works" a brewpub:
+both stay.
+
+**Personal information** (`check_personal_exposure.py pittsburgh`): the file
+has no person column; 0 of 316 pins have a person-like name at a residential
+unit; the heuristic's 30 flagged names were read and all are trade names.
+
+**Macro label.** Width 70.7 (browser; Prague 47.3, Tokyo 40.5, Houston 56.9,
+Toronto 52.4 reproduced). The landing view's eastern cluster left one gap,
+below the dot: **Pittsburgh ("middle", -15, 32), Chicago's label lowered 3 px
+(19) and Washington D.C.'s moved 5 px right (19)**. Solved against a combined
+tree (master plus the ottawa and minneapolis branches plus this one: 78
+cities) and on this branch alone: PROBLEMS 0 at 375, 768 and 1200 px. D.C.'s
+label, already clipped at phone width, clips 5 px more (39% to 43% in Global;
+7% to 11% in United States East) - reported by the check, not failed.
+
+**For the batch review:** Chicago's and D.C.'s labels moved; Blue's colour.
 
 ### 2026-09-30 - Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)
 

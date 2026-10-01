@@ -1,0 +1,419 @@
+source_key,business_name,description,address,reason
+201903040004,Rick's Cabaret & Sports Bar,Chain Restaurant with Liquor,135 9th Street,Adult venue
+201709270001,Spearmint Rhino Gentlemen's Club,Chain Restaurant with Liquor,1620 Pennsylvania  Avenue,Adult venue
+202207280005,Cambria Hotel Social Circle,Restaurant with Liquor,1320 Centre Avenue,Hotel back of house
+202410070024,Hampton Inn & Suites,Chain Restaurant with Liquor,1247 Smallman Street,Hotel back of house
+202301030004,Marriott City Center / Gift Shop,Packaged Food Only,112 Washington Place,Hotel back of house
+200103090008,Omni William Penn Hotel / Employee Cafe,Chain Restaurant without Liquor,530 William Penn Place,Hotel back of house
+200103090001,Omni William Penn Hotel / Main Kitchen,Restaurant with Liquor,530 William Penn Place,Hotel back of house
+202504100002,Renaissance Pittsburgh / 14th Floor Club Lounge,Restaurant with Liquor,107 6th Street,Hotel back of house
+200112200008,Sheraton Station Square / Employee Cafeteria,Restaurant without Liquor,300 Station Square Drive,Hotel back of house
+199911190006,Sheraton Station Square / Main Kitchen-Banquet,Chain Restaurant with Liquor,300 Station Square Drive,Hotel back of house
+202410070072,SpringHill Suites SouthSide Works,Chain Restaurant with Liquor,2950 Water  Street,Hotel back of house
+201705220003,The Pavilion Pantry @ Hilton Garden Inn,Packaged Food Only,250 Forbes Avenue,Hotel back of house
+41776,Westin Hotel / Banquet Kitchen,Chain Restaurant with Liquor,1000 Penn Avenue,Hotel back of house
+41775,"Westin Hotel / Main Kitchen, Penn City Grille, Employee Cafeteria",Chain Restaurant with Liquor,1000 Penn Avenue,Hotel back of house
+201106150002,Wyndham Grand / Banquet Kitchen,Chain Restaurant with Liquor,600 Commonwealth Place,Hotel back of house
+201106150001,Wyndham Grand / Employee Cafeteria,Chain Restaurant without Liquor,600 Commonwealth Place,Hotel back of house
+202304130001,3 2 Go @ CCAC Allegheny Campus,Chain Packaged Food Only,839 Ridge Avenue,Institutional kitchen
+200905040003,AFC Sushi @ Children's Hospital,Restaurant without Liquor,4401 Penn Avenue,Institutional kitchen
+202409060004,AHN West Penn Hospital Market C,Packaged Food Only,4800 Friendship Avenue,Institutional kitchen
+41380,Allegheny General Hospital Gift Shop,Chain Packaged Food Only,320 North Avenue,Institutional kitchen
+201804240003,Atarashi @ UPMC Presbyterian,Chain Restaurant without Liquor,200 Lothrop Street,Institutional kitchen
+202505150004,BNY Client Services Center 7th Floor Catering Kitchen and Coffee Bar,Chain Restaurant without Liquor,500 Ross Street,Institutional kitchen
+202108270008,BNY Client Services Center Cafeteria,Chain Restaurant without Liquor,500 Ross Street,Institutional kitchen
+201711270003,Bad Azz BBQ Commissary,Restaurant without Liquor,1000 Becks Run Road,Institutional kitchen
+202303150004,BeanThru @ Allegheny General Hospital,Chain Restaurant without Liquor,320 North Avenue,Institutional kitchen
+202203280003,Brother Andre's Cafe @ Epiphany Church,Chain Restaurant without Liquor,184 Washington Place,Institutional kitchen
+202404040002,CMU / Cohon Center / Au Bon Pain @ Skibo Cafe,Chain Restaurant without Liquor,5032 Forbes Avenue,Institutional kitchen
+202208250010,CMU / Cohon Center / Revolution Noodle,Restaurant without Liquor,5032 Forbes Avenue,Institutional kitchen
+202308220002,CMU / College of Fine Arts / Elegant Edge @ Zebra Lounge,Restaurant without Liquor,4919 Frew Street,Institutional kitchen
+202308140002,CMU / Forbes Beeler Apartments / Scotty’s Market,Chain Retail/Convenience Store,5093 Forbes Avenue,Institutional kitchen
+202109070011,CMU / Gates Center / La Prima Espresso Company,Chain Restaurant without Liquor,4902 Forbes Avenue,Institutional kitchen
+202208250009,CMU / Hunt Library / De Fer Coffee & Tea,Chain Restaurant without Liquor,4909 Frew Street,Institutional kitchen
+202310020010,CMU / Morewood Gardens / The Underground - Stack'd,Restaurant without Liquor,1060 Morewood Avenue,Institutional kitchen
+202108190007,CMU / Newell-Simon Hall / Hunan Express,Restaurant without Liquor,4804 Forbes Avenue,Institutional kitchen
+200608290003,CMU / Resnik House / Taste of India,Restaurant without Liquor,5125 Margaret Morrison Street,Institutional kitchen
+202208190005,CMU / Resnik House / The Pavilion / The Edge,Restaurant without Liquor,5125 Margaret Morrison Street,Institutional kitchen
+202110280007,CMU / Resnik House Tartans Pavilion / Tahini,Restaurant without Liquor,5125 Margaret Morrison Street,Institutional kitchen
+202308240001,CMU / Scaife Hall / Redhawk Coffee Co.,Chain Restaurant without Liquor,4805 Frew  Street,Institutional kitchen
+202208190004,CMU / Scott Hall / Ruge Atrium - Wild Blue Sushi,Chain Restaurant without Liquor,346 Hamerschlag Drive,Institutional kitchen
+202310270005,CMU / Tepper School of Business / Millie's Coffee 'n' Creamery,Restaurant without Liquor,4765 Forbes Avenue,Institutional kitchen
+201808300001,CMU / Wean Hall / La Prima Espresso,Chain Restaurant without Liquor,311 Hamerschlag Drive,Institutional kitchen
+202107300002,Cafe Bon Appetit @ Aurora Headquarters,Chain Restaurant without Liquor,1654 Smallman Street,Institutional kitchen
+202109230004,Cafe Bon Appetit @ Aurora Tech PIT 3,Chain Restaurant without Liquor,50 33rd Street,Institutional kitchen
+202204270004,Cafe Bon Appetit @ Aurora Tech Pit 5,Chain Restaurant without Liquor,85 36th Street,Institutional kitchen
+201801020011,Chatham University / Cafe Rachel @ Woodland Hall,Chain Restaurant with Liquor,191 Chapel Hill Road,Institutional kitchen
+200907270006,Chatham University / Eastside Cafe,Restaurant without Liquor,6585 Penn  Avenue,Institutional kitchen
+200911180009,Children's Hospital / Lori's Gifts,Chain Retail/Convenience Store,4401 Penn Ave / 1St Fl - Main,Institutional kitchen
+202503050004,Duolingo Cafeteria,Restaurant without Liquor,125 Beatty Street,Institutional kitchen
+202109270003,Duquesne University / Connections @ Student Union,Retail/Convenience Store,1000 Locust Street,Institutional kitchen
+201509010006,Duquesne University / Fisher Market Express @ Fisher Hall,Retail/Convenience Store,711 Forbes  Avenue,Institutional kitchen
+202412200003,Duquesne University / Forbes Market @ McGinley Hall,Retail/Convenience Store,1045 Forbes Avenue,Institutional kitchen
+201509280006,Duquesne University / Freshens @ Power Center,Chain Restaurant without Liquor,1019 Forbes Avenue,Institutional kitchen
+202308290002,Duquesne University / Market @ Brottier Hall,Packaged Food Only,700 Forbes Avenue,Institutional kitchen
+202408140003,Duquesne University / Neighborhood Roastery @ Power Center,Restaurant without Liquor,1009 Forbes Avenue,Institutional kitchen
+202410230005,Duquesne University / Res Sipsa Market @ Kline School of Law,Retail/Convenience Store,900 Locust Street,Institutional kitchen
+201312090004,Duquesne University / Starbucks @ Student Union,Chain Restaurant without Liquor,1000 Locust Street,Institutional kitchen
+201908200001,Duquesne University / The Business Leader Bistro @ Rockwell Hall,Restaurant without Liquor,600 Forbes Avenue,Institutional kitchen
+201603100002,Federated Investors Employee Cafeteria,Restaurant without Liquor,1001 Liberty Avenue,Institutional kitchen
+8157,Gateway Clipper / Dock & Commissary,Restaurant with Liquor,350 Station Square  Drive,Institutional kitchen
+202507090004,Laurel Foodsystems @ Cellone's Bakery Inc,Chain Packaged Food Only,663 Napor Boulevard,Institutional kitchen
+202507230003,Laurel Foodsystems @ Citizens Four,Chain Packaged Food Only,444 Liberty  Avenue,Institutional kitchen
+202507090003,Laurel Foodsystems @ Ferguson Plumbing,Chain Packaged Food Only,2006 Broadhead Fording Road,Institutional kitchen
+202505160011,Laurel Foodsystems @ Pitt Ohio Express,Chain Packaged Food Only,15 27th Street,Institutional kitchen
+201910250002,Market C @ AAA,Chain Retail/Convenience Store,5900 Baum Boulevard,Institutional kitchen
+202401250004,Market C @ AHN Allegheny General Hospital,Chain Retail/Convenience Store,320 North Avenue,Institutional kitchen
+202304210004,Market C @ AHN Cancer Center,Chain Retail/Convenience Store,320 North Avenue,Institutional kitchen
+202409180001,Market C @ Allegheny Professional Building Neuro Center,Packaged Food Only,490 North  Avenue,Institutional kitchen
+202309070009,Market C @ Buncher Company,Chain Retail/Convenience Store,1251 Waterfront Place,Institutional kitchen
+202402070010,Market C @ CMU Software Engineering Institute,Chain Retail/Convenience Store,4500 5th Avenue,Institutional kitchen
+202210310001,Market C @ Hitachi Rail,Chain Retail/Convenience Store,1000 Technology Drive,Institutional kitchen
+202506270007,Market C @ Matthews International Corp - Bronze Division,Chain Packaged Food Only,1315 West Liberty Avenue,Institutional kitchen
+202310200003,Market C @ Mellon Institute,Retail/Convenience Store,4400 5th  Avenue,Institutional kitchen
+202308170001,Market C @ PPG Industries Headquarters,Chain Retail/Convenience Store,1 PPG Place,Institutional kitchen
+201812240005,Market C @ Pittsburgh Post-Gazette,Chain Retail/Convenience Store,358 North Shore  Drive,Institutional kitchen
+202301100005,Market C @ U.S. Steel Tower 24th Floor,Chain Retail/Convenience Store,600 Grant Street,Institutional kitchen
+202306150004,Market C @ UPMC Biomedical Science Tower,Retail/Convenience Store,203 Lothrop Street,Institutional kitchen
+201909040001,Market C @ UPMC Children's Hospital of Pittsburgh,Chain Retail/Convenience Store,4401 Penn Avenue,Institutional kitchen
+202209290002,Market C @ UPMC Children's Primary Care Center,Chain Packaged Food Only,3420 5th Avenue,Institutional kitchen
+201812240001,Market C @ UPMC Clinical Lab,Chain Retail/Convenience Store,110 McKee  Place,Institutional kitchen
+202312210006,Market C @ UPMC Magee-Womens Hospital,Chain Retail/Convenience Store,300 Halket Street,Institutional kitchen
+202306080001,Market C @ UPMC Mercy Pavilion,Chain Packaged Food Only,1622 Locust Street,Institutional kitchen
+202507010001,Market C @ UPMC Montefiore,Chain Packaged Food Only,3459 Fifth Avenue,Institutional kitchen
+202209290003,Market C @ UPMC Presbyterian Falk Clinic,Chain Retail/Convenience Store,3601 5th Avenue,Institutional kitchen
+201812240003,Market C @ UPMC Quantum One,Chain Retail/Convenience Store,2 Hot Metal Street,Institutional kitchen
+201807260004,Market C @ UPMC Shadyside,Chain Retail/Convenience Store,5150 Centre Avenue,Institutional kitchen
+201910030001,Market C @ UPMC St Margaret,Chain Retail/Convenience Store,815 Freeport  Road,Institutional kitchen
+202208110003,Market C @ UPMC Western Psychiatric Institute & Clinic,Chain Retail/Convenience Store,3811 O'Hara Street,Institutional kitchen
+202401120005,Market C @ Wesco Distribution,Chain Packaged Food Only,225 Station Square Drive,Institutional kitchen
+201812170007,Market C Ground Floor @ UPMC Mercy Hospital,Chain Retail/Convenience Store,1400 Locust  Street,Institutional kitchen
+202107270001,Market C Vendette 2nd Floor @ UPMC Mercy Hospital,Chain Retail/Convenience Store,1400 Locust Street,Institutional kitchen
+202108160003,Parkhurst / Argo AI Employee Cafeteria,Chain Restaurant without Liquor,2545 Railroad Street,Institutional kitchen
+202501240002,Parkhurst Dining @ FNB eStore Cafe,Restaurant without Liquor,626 Washington Place,Institutional kitchen
+201709060007,Parkhurst Dining @ Kairos- Riverside Terrace,Restaurant without Liquor,201 Isabella Street,Institutional kitchen
+202208220003,Pitt Eats / Big Idea Center / Saxbys,Chain Restaurant without Liquor,3601 Forbes Avenue,Institutional kitchen
+202108230010,Pitt Eats / Cathedral of Learning / Saxbys,Chain Restaurant without Liquor,4200 5th Avenue,Institutional kitchen
+202212290002,Pitt Eats / Hillman Library First Floor / Saxbys,Chain Restaurant without Liquor,3960 Forbes Avenue,Institutional kitchen
+202006120009,Pitt Eats Bruce Hall / Forbes Street Market,Chain Retail/Convenience Store,3955 Forbes Avenue,Institutional kitchen
+201808150002,Point Park University / Point Perk Starbucks,Restaurant without Liquor,100 Wood Street,Institutional kitchen
+201602090012,Starbucks Coffee #27117 @ University of Pittsburgh Amos Hall,Chain Restaurant without Liquor,4022 5th  Avenue,Institutional kitchen
+201804050007,Starbucks Coffee @ Children's Hospital,Chain Restaurant without Liquor,4401 Penn Avenue,Institutional kitchen
+201909270001,The Forge PGH / Pomegranate Catering,Restaurant with Liquor,3345 Penn Avenue,Institutional kitchen
+200607240002,UPMC / West End Cafe,Restaurant without Liquor,5150 Centre  Avenue,Institutional kitchen
+200803180004,UPMC Executive Kitchen (62nd Floor) @ US Steel Tower,Restaurant without Liquor,600 Grant Street,Institutional kitchen
+57895,UPMC Magee-Womens Hospital Gift Shop,Packaged Food Only,300 Halket  Street,Institutional kitchen
+200612120002,UPMC Montefiore 7th Floor / Brick Side Eatery,Restaurant without Liquor,3459 5th Avenue,Institutional kitchen
+44778,UPMC Montefiore Gift Shop,Retail/Convenience Store,3459 5th Ave,Institutional kitchen
+201504060002,UPMC Montefiore LHAS Coffee Shop,Restaurant without Liquor,3459 5th Ave,Institutional kitchen
+201009140005,UPMC Presbyterian / Starbucks #7190,Chain Restaurant without Liquor,200 Lothrop Street,Institutional kitchen
+202507070002,UPMC Presbyterian Market C / 11th Floor,Chain Retail/Convenience Store,200 Lothrop Street,Institutional kitchen
+202503040001,UPMC Staging Kitchen (55th Floor) @ US Steel Tower,Restaurant without Liquor,600 Grant Street,Institutional kitchen
+200906150001,UPMC Staging Kitchen (60th Floor) @ US Steel Tower,Restaurant without Liquor,600 Grant Street,Institutional kitchen
+202310250008,Uptown Cafe @ UPMC Mercy Pavilion,Restaurant without Liquor,1622 Locust Street,Institutional kitchen
+202208080005,Ace Sushi @ Kuhn's Market #4,Chain Retail/Convenience Store,3125 Banksville Road,No point in the register
+202412050001,Aldi #15,Chain Packaged Food Only,450 56th Street,No point in the register
+201912180002,Alex's Pit Stop,Packaged Food Only,7910 Tioga Street,No point in the register
+202202030004,Antneys Ice Cream,Restaurant with Liquor,1316 Poplar Street,No point in the register
+202503050006,Barista Cafe @ Duolingo,Restaurant without Liquor,141 Saint Clair  Street,No point in the register
+201902150003,Blue Slide Market,Retail/Convenience Store,2333 Beechwood Boulevard,No point in the register
+200809110007,Café Phipps,Restaurant without Liquor,1 Schenley  Drive,No point in the register
+37872,Chinatown Inn,Restaurant with Liquor,520 3rd  Avenue,No point in the register
+202305150005,Craig Distributing Company,Packaged Food Only,313 Craig Street,No point in the register
+199912100011,Enrico Biscotti Cafe,Restaurant without Liquor,2022 Spring Way,No point in the register
+202501270003,GG's Cafe,Restaurant without Liquor,300 Craig Street,No point in the register
+201603030003,Hi Sound Karaoke,Restaurant with Liquor,6316 Forbes Avenue,No point in the register
+38336,Khalil's II Restaurant,Restaurant with Liquor,4757 Baum Boulevard,No point in the register
+201906130001,La Cocina de Betty,Restaurant without Liquor,1605 Broadway Avenue,No point in the register
+202306270004,Little Corner Grill House,Restaurant without Liquor,301-303 Craig Street,No point in the register
+202312200005,McDonald's,Chain Restaurant without Liquor,148 Euclid Avenue,No point in the register
+202507240002,Pittsburgh Popcorn Co Strip District,Chain Packaged Food Only,209 21  Street,No point in the register
+201507020006,Shuman's All in One,Retail/Convenience Store,7210 Frankstown Avenue,No point in the register
+201305030002,Subway Sandwiches & Salads,Chain Restaurant without Liquor,417 7th Avenue,No point in the register
+200501270008,Sunoco Market 24,Chain Retail/Convenience Store,123 Negley Avenue,No point in the register
+10074,The Original Oyster House,Restaurant with Liquor,20 Market Square,No point in the register
+202308160001,Wushiland Boba,Chain Restaurant without Liquor,300 Craig Street,No point in the register
+202112130002,DashMart,Chain Retail/Convenience Store,3232 Penn Avenue,Nonstore or vending
+202102180004,goPuff,Retail/Convenience Store,6601 Hamilton Avenue,Nonstore or vending
+202001300001,CVS / Pharmacy #2348,Chain Packaged Food Only,3422 Forbes  Avenue,Pharmacy
+200011200001,CVS / Pharmacy #3189,Chain Packaged Food Only,510 Brookline Boulevard,Pharmacy
+2207,CVS / Pharmacy #4008,Chain Packaged Food Only,242 5th Avenue,Pharmacy
+52902,CVS / Pharmacy #4152,Chain Packaged Food Only,5600 Wilkins Avenue,Pharmacy
+201311290007,CVS / Pharmacy #4369,Chain Packaged Food Only,4610 Centre Avenue,Pharmacy
+201710240004,CVS Pharmacy #10767,Chain Packaged Food Only,4664 Browns Hill  Road,Pharmacy
+1046,Elizabeth Pharmacy,Packaged Food Only,5041 2nd Avenue,Pharmacy
+202404180001,Hieber’s Pharmacy @ The Terminal Building,Restaurant without Liquor,1759 Smallman Street,Pharmacy
+201603210001,Hilltop Pharmacy,Packaged Food Only,818 Warrington Avenue,Pharmacy
+202205160002,Rite Aid #0273,Chain Packaged Food Only,2655 Carson Street,Pharmacy
+200007250003,Rite Aid Phamacies #10931,Chain Packaged Food Only,2501 Banksville Road,Pharmacy
+36144,Rite Aid Pharmacies #0268,Chain Packaged Food Only,5504 Walnut St,Pharmacy
+1919,Rite Aid Pharmacies #0272,Chain Packaged Food Only,209 Atwood St,Pharmacy
+200409160002,Rite Aid Pharmacies #0274,Chain Packaged Food Only,1700 Murray Avenue,Pharmacy
+57192,Rite Aid Pharmacies #04965,Chain Packaged Food Only,201 Grace Street,Pharmacy
+200007140001,Rite Aid Pharmacies #10924,Chain Packaged Food Only,5633 Baum Boulevard,Pharmacy
+11082,Rite Aid Pharmacies #10925,Chain Packaged Food Only,2150 Brownsville Rd,Pharmacy
+11075,Rite Aid Pharmacies #10930,Chain Packaged Food Only,3700 Forbes Ave,Pharmacy
+35195,Rite Aid Pharmacies #10939,Chain Packaged Food Only,4411 Howley St,Pharmacy
+199910080003,Rite Aid Pharmacies #1094,Chain Packaged Food Only,3210 Banksville Road,Pharmacy
+50515,Rite Aid Pharmacies #3412,Chain Packaged Food Only,1800-14 Morningside Avenue,Pharmacy
+200605260007,Walgreens #09281,Chain Retail/Convenience Store,5956 Centre  Avenue,Pharmacy
+200811210006,Walgreens #10345,Chain Packaged Food Only,7628 Penn Avenue,Pharmacy
+201507020012,Waltmire Pharmacy,Chain Packaged Food Only,1435 Spring Garden Avenue,Pharmacy
+1134,Wilson's Pharmacy,Packaged Food Only,4101 Penn  Avenue,Pharmacy
+201904190001,B & M Market,Retail/Convenience Store,3038 Chartiers Avenue,Point outside the City
+202204080005,Inner Groove Brewing,Chain Restaurant with Liquor,837 Warrington Avenue,Point outside the City
+202208110010,The Promise Center of Homewood,Restaurant without Liquor,7825 Hamilton Avenue,Point outside the City
+201510050003,Acrisure Stadium / 1.03.01 Champion's Club Artisan & Ales #150C,Chain Restaurant without Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201510050001,Acrisure Stadium / 1.03.01 Champion's Club Italian Station C151,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201510050009,Acrisure Stadium / 1.03.01 Champion's Club Main Bar C148,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202409040004,Acrisure Stadium / 1.03.01 Walk Thru Brew #150C,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130012,Acrisure Stadium / 1.09.01 Potato Patch #106,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130003,Acrisure Stadium / 1.11.02 Goal Line Stand #108,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130014,Acrisure Stadium / 1.13.02-03 Primanti Brothers #110,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130015,Acrisure Stadium / 1.15.02-03 Tenders Love & Chicken #112,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130018,Acrisure Stadium / 1.17.02-03 Goal Line Stand #114,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201510050005,Acrisure Stadium / 1.56.05 Champion's Club Grill C149,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201510050002,Acrisure Stadium / 1.56.05 Champion's Club Pantry,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201510050007,Acrisure Stadium / 2.01.01 Steel City Classics 146S,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201510050008,Acrisure Stadium / 2.02.01 Caliente Pizza 151S,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201510050006,Acrisure Stadium / 2.03.01 Burgatory + 2.54.01 Tenders #147S,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130021,Acrisure Stadium / 2.24.02-03 PGH Pierogi House #119,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130023,Acrisure Stadium / 2.26.02-03 Goal Line Stand #120,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130026,Acrisure Stadium / 2.28.02-03 Grid Iron Grill #122,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140001,Acrisure Stadium / 2.30.02 Steel City Classics #124,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200107130002,Acrisure Stadium / 2.34.01-03 Vending Room #127 + Stillhouse #128,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140012,Acrisure Stadium / 2.36.02-03 Heinz Red Zone #129,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140013,Acrisure Stadium / 2.38.02-03 Little Caesars Pizza #130,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140015,Acrisure Stadium / 2.40.02-03 Primanti Brothers #132,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140016,Acrisure Stadium / 2.42.02 Goal Line Stand #134,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140017,Acrisure Stadium / 2.44.02-03 Chickie's & Pete's #136,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140018,Acrisure Stadium / 2.46.02-03 Goal Line Stand #138,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140024,Acrisure Stadium / 3.09.02-03 Caliente Pizza #206,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140026,Acrisure Stadium / 3.12.01-02 Pick 6 Sammies #209,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130002,"Acrisure Stadium / 3.14.04 East Club Bar #211 & Portable Units 204, 205, 207, 214",Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201511120004,Acrisure Stadium / 3.15.01-02 Steel City Grill #212,Restaurant with Liquor,500 Art Rooney  Avenue,"Recreation venue, casino or club"
+200108150001,Acrisure Stadium / 3.18.02 Old Allegheny Cafe #215,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202508060014,Acrisure Stadium / 3.20.01 Steel City Classics #216,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202508060015,Acrisure Stadium / 3.36.01 Steel City Classics #229,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108140027,Acrisure Stadium / 3.37.01 Caliente #230,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150005,Acrisure Stadium / 3.40.02-03 Pick 6 Sammies #233,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200109120001,"Acrisure Stadium / 3.42.02 West Club Bar #235 & Portable Units 231, 240, 237, 238",Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150006,Acrisure Stadium / 3.43.02-03 Steel City Grill #236,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150007,Acrisure Stadium / 3.46.02-03 Old Allegheny Cafe Rm#239,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200608010003,Acrisure Stadium / 4.25.02 The North End #305 Concession & Vending,Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200608010004,"Acrisure Stadium / 4.31.02 The North End #310 Concession, 4.30.01 Vending #308#311#307",Chain Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150013,Acrisure Stadium / 5.29.02-03 Grid Iron Grill & First Down Fries #424,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108130004,Acrisure Stadium / 5.31.02 West End Bridge Grill #426,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150021,Acrisure Stadium / 6.11.03 Caliente + Goal Line Stand #508,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150023,Acrisure Stadium / 6.13.02-03 Grid Iron Grill #509,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150024,Acrisure Stadium / 6.15.02-03 Heinz Red Zone #511,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108150025,Acrisure Stadium / 6.17.02-03 Goal Line Stand #513,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202309070005,Acrisure Stadium / 6.19.02 Steel City Classics #515,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108160001,Acrisure Stadium / 6.39.02 Caliente + Goal Line Stand #531,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108160002,Acrisure Stadium / 6.41.02-03 Grid Iron Grill #533,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108160003,Acrisure Stadium / 6.43.02-03 Goal Line Stand #535,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+200108160004,Acrisure Stadium / 6.45.02-03 Goal Line Stand #538,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202309070006,Acrisure Stadium / 6.47.03 Steel City Classics #539,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202507150002,Acrisure Stadium / Auntie Anne's Portable Cart #1 #121AA,Chain Restaurant without Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202507150004,Acrisure Stadium / Auntie Anne's Portable Cart #2 #136AA,Chain Restaurant without Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202408300006,Acrisure Stadium / Bridges N'at Portable #507,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202409050001,Acrisure Stadium / Bridges N'at Portable #527,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201808240001,Acrisure Stadium / Francos Pizza + Pub 33,Restaurant with Liquor,500 Art Rooney  Avenue,"Recreation venue, casino or club"
+202409200003,Acrisure Stadium / Renegade Pub #140,Restaurant with Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202309070007,Acrisure Stadium / Room #400A Beverage Refill #426,Restaurant without Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202309070008,Acrisure Stadium / Room #400B Beverage Refill #418,Restaurant without Liquor,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060004,Acrisure Stadium / Walk Thru Brew 101,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060016,Acrisure Stadium / Walk Thru Brew 104,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060015,Acrisure Stadium / Walk Thru Brew 111,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060014,Acrisure Stadium / Walk Thru Brew 116A,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060013,Acrisure Stadium / Walk Thru Brew 119,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060010,Acrisure Stadium / Walk Thru Brew 131,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060009,Acrisure Stadium / Walk Thru Brew 133,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060008,Acrisure Stadium / Walk Thru Brew 139,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060007,Acrisure Stadium / Walk Thru Brew 141,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060006,Acrisure Stadium / Walk Thru Brew 142,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060005,Acrisure Stadium / Walk Thru Brew 143,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060021,Acrisure Stadium / Walk Thru Brew 417,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060020,Acrisure Stadium / Walk Thru Brew 419,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060003,Acrisure Stadium / Walk Thru Brew 504,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060024,Acrisure Stadium / Walk Thru Brew 510,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060023,Acrisure Stadium / Walk Thru Brew 512,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060022,Acrisure Stadium / Walk Thru Brew 517,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060019,Acrisure Stadium / Walk Thru Brew 528,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060018,Acrisure Stadium / Walk Thru Brew 532,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202310060017,Acrisure Stadium / Walk Thru Brew 537,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+202311150003,Acrisure Stadium / Walk Thru Brew T18,Packaged Food Only,500 Art Rooney Avenue,"Recreation venue, casino or club"
+201202030003,Atria's Kookaburra Kitchen @ The National Aviary,Restaurant without Liquor,700 Arch Street,"Recreation venue, casino or club"
+200304070017,Byham Theater,Restaurant with Liquor,101 6th Street,"Recreation venue, casino or club"
+201511300005,Carnegie Museum / Cafe Carnegie,Restaurant with Liquor,4400 Forbes  Avenue,"Recreation venue, casino or club"
+201511300007,Carnegie Museum / Fossil Fuels Cafe,Restaurant with Liquor,4400 Forbes  Avenue,"Recreation venue, casino or club"
+200005030006,City Theatre Company,Restaurant with Liquor,1300-1308 Bingham Street,"Recreation venue, casino or club"
+200306100003,"DLCC / Hall A2 & Pantry A1; (2F08, 2F32)",Restaurant with Liquor,1000 Ft Duquesne Boulevard,"Recreation venue, casino or club"
+200306100004,DLCC / Hall B Concession (2D28),Restaurant with Liquor,1000 Ft Duquesne Boulevard,"Recreation venue, casino or club"
+200306100005,DLCC / Hall C Concession (2B05),Restaurant with Liquor,1000 Ft Duquesne Boulevard,"Recreation venue, casino or club"
+200306100006,DLCC / Hall D Concession (1B11),Restaurant with Liquor,1000 Ft Duquesne Boulevard,"Recreation venue, casino or club"
+200306100007,DLCC / Hall E Concession (1B09),Restaurant with Liquor,1000 Ft Duquesne Boulevard,"Recreation venue, casino or club"
+8488,Duquesne Club,Restaurant with Liquor,325 6th Avenue,"Recreation venue, casino or club"
+52830,Duquesne Club Health & Fitness,Restaurant with Liquor,339 6th Avenue,"Recreation venue, casino or club"
+202101150001,Duquesne UPMC Cooper Fieldhouse / Club Kitchen & Bar,Restaurant with Liquor,1304 Forbes Avenue,"Recreation venue, casino or club"
+202101150002,Duquesne UPMC Cooper Fieldhouse / Main Concession,Restaurant with Liquor,1304 Forbes Avenue,"Recreation venue, casino or club"
+202101150003,Duquesne UPMC Cooper Fieldhouse / Satellite Concession,Restaurant with Liquor,1304 Forbes Avenue,"Recreation venue, casino or club"
+202106070004,Five Iron Golf,Chain Restaurant with Liquor,2 PPG Place,"Recreation venue, casino or club"
+200409280003,Greer Cabaret Theater & Club Car Bar,Restaurant with Liquor,655 Penn Avenue,"Recreation venue, casino or club"
+53478,Highland Park Zoo / Animal Connections Café,Restaurant without Liquor,1 Wild  Place,"Recreation venue, casino or club"
+45678,Highland Park Zoo / The Village Restaurant,Restaurant without Liquor,1 Wild  Place,"Recreation venue, casino or club"
+46347,Highland Park Zoo Safari Plaza / Jambo Grill,Restaurant without Liquor,1 Wild  Place,"Recreation venue, casino or club"
+45677,Highland Park Zoo Safari Plaza / Wild Burgher & The Beer Den,Restaurant without Liquor,1 Wild  Place,"Recreation venue, casino or club"
+202206100004,Highmark Stadium / City View Riverhounds Event Center,Restaurant with Liquor,510 Station Square  Drive,"Recreation venue, casino or club"
+202206100006,Highmark Stadium / Riverhounds Concession #1,Restaurant without Liquor,510 Station Square  Drive,"Recreation venue, casino or club"
+202206100007,Highmark Stadium / Riverhounds Concession #2,Restaurant without Liquor,510 Station Square  Drive,"Recreation venue, casino or club"
+202206100008,Highmark Stadium / Riverhounds Concession #3,Restaurant without Liquor,510 Station Square  Drive,"Recreation venue, casino or club"
+48939,Manor Theatre,Restaurant with Liquor,1729 Murray Avenue,"Recreation venue, casino or club"
+202103160001,Mecka Fitness and Nutrition,Chain Restaurant without Liquor,2908 Smallman Street,"Recreation venue, casino or club"
+201904120007,PNC Park / 00.34.01 In-Seat Service,Restaurant with Liquor,115 Federal  Street,"Recreation venue, casino or club"
+200104230022,PNC Park / 01.08.02 Smallman Street Deli's Deli Dogs #135,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120014,PNC Park / 01.32.03 Press Dining Kitchen,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120019,PNC Park / 01.402.10 Remax Realty Home Plate Lounge,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230023,PNC Park / 01.57.02 Cannonball Burger #146,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230026,PNC Park / 01.59.01 Chicken on the Hill #144,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200204150001,PNC Park / 01.64.02 Manny's Bar-B-Q & Market,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202304250003,PNC Park / 02.18.03 Ballpark Burghers #133 & Cocktails #134,Chain Restaurant with Liquor,115 Federal  Street,"Recreation venue, casino or club"
+200104200006,PNC Park / 02.19.02 Chickie's & Pete's #131-132,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201605160005,PNC Park / 02.20.01 Walk Thru Bru #130,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104200008,PNC Park / 02.23.01 Faves on Third Express #128 & 02.218.01 Vendor Commissary #129,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202303310003,PNC Park / 02.24.01 Walk Thru Bru #112 & 02.44.01 Vendor Commissary #113,Retail/Convenience Store,115 Federal Street,"Recreation venue, casino or club"
+200104230004,PNC Park / 02.25.01 The Chicken Pitt #127,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104200010,PNC Park / 02.28.01 Faves on Third #123,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230005,PNC Park / 02.30.01 Ball Park Burghers #120,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230006,PNC Park / 02.33.01 Faves at Home / Cookies & Creamery #119,Restaurant without Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230010,PNC Park / 02.415.02 Chickie's & Pete's #115,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230001,PNC Park / 02.44.01-02 Faves on First #114,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230009,PNC Park / 02.47.01 Ballpark Burghers #108 / TLC #109,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230008,PNC Park / 02.47.01 Primanti Brothers #110,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230007,PNC Park / 02.50.01 Sweet Spot #107,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202303310002,PNC Park / 02.51.02 Right Field Market #107A,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120013,PNC Park / 04.15.02 Bierbauer's Grille #213,Restaurant with Liquor,115 Federal  Street,"Recreation venue, casino or club"
+201904120006,PNC Park / 04.24.02 City of Champions Bourbon & Pantry #228,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120008,PNC Park / 04.28.03 Bridges Burger Company #222 & Beer Cooler 04.26.06,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120010,PNC Park / 04.32.03 IL Forno Pizza #219,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120015,PNC Park / 04.35.03 Wigle Bar & Walk Thru Bru's / Sweet Spot & Mini Melts #215-217,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120016,PNC Park / 04.47.01 Tenders Love & Chicken #210,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120009,PNC Park / 04.48.01 Wigle Reserve & Pantry #207-208,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230011,PNC Park / 04.53.01 All You Can Eat  #201-205,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230018,PNC Park / 05.19.01 Federal Street Grille #332,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230012,PNC Park / 05.25.01 North Shore Refreshments Co. #328 & 05.24.01 Vendor Commissary#329,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202503140001,PNC Park / 05.27.02 Fan Favorite Express #323,Packaged Food Only,115 Federal Street,"Recreation venue, casino or club"
+200104230013,PNC Park / 05.28.01 North Shore Refreshments Co. #322,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230017,PNC Park / 05.33.01 North Shore Refreshments Co. #318,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230016,PNC Park / 05.415.01 Federal Street Grille #314,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230015,PNC Park / 05.46.01 Chickie's & Pete's #310,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230014,PNC Park / 05.49.01 North Shore Refreshments Co. #307,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200104230030,PNC Park / 05.52.01 North Shore Refreshments Co. #305 & 05.53.01 Vendor #303,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201505270003,PNC Park / Cinderlands Corner Bar @ Left Field Rotunda,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201904120012,PNC Park / Club Level Real Azul/Valr VIP Lounge,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201704070002,PNC Park / Crow's Nest Bar #103,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202204140011,PNC Park / Fat Head's Brewery Bull Pen Tap Bar #140,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+200804070001,PNC Park / Left Field Lounge,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202405130008,PNC Park / Mini Melts Crow's Nest #106,Restaurant without Liquor,115 Federal Street,"Recreation venue, casino or club"
+202405130007,PNC Park / Mini Melts Upper Concourse #315,Restaurant without Liquor,115 Federal Street,"Recreation venue, casino or club"
+202204080003,PNC Park / NachoRita #137,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201106210012,PNC Park / Pirates Players Lounge,Restaurant without Liquor,115 Federal Street,"Recreation venue, casino or club"
+202204140012,PNC Park / Riverwalk Miller Lite Landing #140,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201206060001,PNC Park / Skull Bar #101,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+201505270004,PNC Park / Terrace Bar #317,Chain Restaurant with Liquor,115 Federal  Street,"Recreation venue, casino or club"
+201704100008,PNC Park / The Market #117,Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202303310001,PNC Park / Walk Thru Bru #125,Packaged Food Only,115 Federal  Street,"Recreation venue, casino or club"
+202403180001,PNC Park / Walk Thru Bru #136,Packaged Food Only,115 Federal Street,"Recreation venue, casino or club"
+202403180002,PNC Park / Walk Thru Bru #312,Packaged Food Only,115 Federal Street,"Recreation venue, casino or club"
+202403180003,PNC Park / Walk Thru Bru #325,Packaged Food Only,115 Federal Street,"Recreation venue, casino or club"
+202503110004,PNC Park / Wigle Bar @ North Shore,Chain Restaurant with Liquor,115 Federal Street,"Recreation venue, casino or club"
+202410180004,PPG PAINTS Arena / #105 Nacho Chick Portable,Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008100004,PPG PAINTS Arena / #105 Polish Hill Grill Portable,Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+202312280007,PPG PAINTS Arena / #106 Twisted Tea Portable,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+201008180001,PPG PAINTS Arena / #116 Fresh Favorites Portable,Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+202312280005,PPG PAINTS Arena / #118 Yuengling Portable Bar,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+202312280009,PPG PAINTS Arena / #213 Lebatt Blue Zone Portable,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+202312280004,PPG PAINTS Arena / #233 Yuengling Portable Bar,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+202312280008,PPG PAINTS Arena / #234 Surfside Market,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+202312280011,PPG PAINTS Arena / 03.01.01 #101 Drink Market,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+202312280012,PPG PAINTS Arena / 03.01.01 #104 Drink Market,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+201008090018,PPG PAINTS Arena / 03.01.01 #116 GetGo Cafe & Market,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+202104210003,PPG PAINTS Arena / 03.01.01 #120 BET Rivers Bar,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090021,PPG PAINTS Arena / 03.01.03 #111 Make Stand,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090022,PPG PAINTS Arena / 03.01.03 #112 Captain Morgan Club Bar,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090011,PPG PAINTS Arena / 03.01.03 #113 Club Classics Stand,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+202101290001,PPG PAINTS Arena / 03.03.02 #115 Ford Lounge & Ford Lounge Prep Kitchen,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201401090001,PPG PAINTS Arena / 03.10.01 #119 Pittsburgh Classics Express Market,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090005,PPG PAINTS Arena / 03.16.01 #101 Make Stand,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090004,PPG PAINTS Arena / 03.16.01 #102 First National Bank Club Bar,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090006,PPG PAINTS Arena / 03.16.01 #103 First National Bank Club Classics Stand,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090015,"PPG PAINTS Arena / 03.25.03 03.27.01 #106 #108 / Labatt Bar, Bud Light Bar",Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090019,PPG PAINTS Arena / 03.26.01 #107 The Milk Shake Factory Stand,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090009,"PPG PAINTS Arena / 03.26.02 #107 #108 #109 / Arena Favorites, Smashburger, Arena Classics Stands",Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+202101290002,PPG PAINTS Arena / 03.28.05 #109 Drink Market,Chain Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+202101290003,PPG PAINTS Arena / 06.01.01 #215 Drink Market,Chain Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+202312280010,PPG PAINTS Arena / 06.01.01 #225 Cutwater Market,Packaged Food Only,1001 5th Avenue,"Recreation venue, casino or club"
+201008090010,"PPG PAINTS Arena / 06.03.02-03 #223 #224 / Classics, Smokehouse Stands, Labatt Blue Portable",Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090016,PPG PAINTS Arena / 06.10.01 #230 Union Forge Stand,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090012,"PPG PAINTS Arena / 06.12.01 #231 #232 / Classics, Arena Favorites, TLC",Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090017,"PPG PAINTS Arena / 06.25.01-.02 #211 #212 / Southern Tier, Caliente, Classics Stands",Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201007190008,PPG PAINTS Arena / Lexus Club,Chain Restaurant with Liquor,1001 5th  Avenue,"Recreation venue, casino or club"
+201008090013,PPG PAINTS Arena / Suite Kitchen Rm #P4D,Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090014,"PPG PAINTS Arena / Suite Pantry #P4A, #P4B",Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090003,"PPG PAINTS Arena /03.12.02#119#121#122/Primanti Bros.&KeystoneFavorites,TL&C,Tacos on 5th Stands",Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090008,"PPG PAINTS Arena /06.20.04#204#205#206#207/Drink Market,Hall of Favs,Burgatory,Igloo Bar",Chain Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+201008090007,"PPG PAINTS Arena Event Level /  01.15.05 Suites 66, 91, 92 & Pantry",Chain Restaurant with Liquor,1001 5th  Avenue,"Recreation venue, casino or club"
+202309010005,PPG PAINTS Arena Event Level / 01.25.01 Casamigos Club,Restaurant with Liquor,1001 5th Avenue,"Recreation venue, casino or club"
+202006290002,Petersen Events / Campus View Club & Kitchen #103,Chain Restaurant with Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006250005,Petersen Events Center / Hardwood Cafe,Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202412200008,Petersen Events Ctr / Auntie Anne's,Chain Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202412200007,Petersen Events Ctr / Auntie Anne's Kiosk,Chain Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006250002,Petersen Events Ctr / Baseline Grill,Chain Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006120015,Petersen Events Ctr / Burrito Bowl,Chain Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006120020,Petersen Events Ctr / Chick-Fil-A,Chain Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006250003,Petersen Events Ctr / Coaches Corner,Chain Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006290004,Petersen Events Ctr / Fastbreak #1,Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202111090003,Petersen Events Ctr / I.C. Light Baseline Club,Chain Restaurant with Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006160003,Petersen Events Ctr / Panther Pub,Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006150003,Petersen Events Ctr / Shake Smart,Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202006150004,Petersen Events Ctr / Steel City Subs,Restaurant without Liquor,3719 Terrace Street,"Recreation venue, casino or club"
+202312080002,Pitt Eats / Petersen Events Center / Pitt on the Go,Packaged Food Only,3719 Terrace Street,"Recreation venue, casino or club"
+202006150013,Pitt Eats Petersen Sports Complex,Restaurant without Liquor,385 Champions Drive,"Recreation venue, casino or club"
+201801090007,Pittsburgh Fitness Project,Packaged Food Only,5500 Butler Street,"Recreation venue, casino or club"
+200110110002,Pittsburgh Golf Club Cafe,Restaurant with Liquor,5280 Northumberland  Street,"Recreation venue, casino or club"
+10636,Pittsburgh Golf Club Restaurant,Restaurant with Liquor,5280 Northumberland  Street,"Recreation venue, casino or club"
+199912030005,Pittsburgh Public Theater @ O'Reilly Theater,Restaurant with Liquor,621 Penn Avenue,"Recreation venue, casino or club"
+201812170001,Reis & Irvy's Froyo @ Carnegie Science Center,Chain Restaurant without Liquor,1 Allegheny  Avenue,"Recreation venue, casino or club"
+200907210009,Rivers Casino / 44Six Club,Restaurant with Liquor,777 Casino Dr,"Recreation venue, casino or club"
+201909260001,Rivers Casino / BetRivers Sportsbook Bar,Restaurant with Liquor,777 Casino Drive,"Recreation venue, casino or club"
+202311090003,Rivers Casino / Black Card Lounge,Restaurant with Liquor,777 Casino Drive,"Recreation venue, casino or club"
+200907210001,Rivers Casino / Casino Service Bar #1,Restaurant with Liquor,777 Casino Dr,"Recreation venue, casino or club"
+200907210002,Rivers Casino / Casino Service Bar #2,Restaurant with Liquor,777 Casino Dr,"Recreation venue, casino or club"
+200907210003,Rivers Casino / Casino Service Bar #3,Restaurant with Liquor,777 Casino Dr,"Recreation venue, casino or club"
+200907210007,Rivers Casino / Drum Bar,Restaurant with Liquor,777 Casino Dr,"Recreation venue, casino or club"
+200907210012,Rivers Casino / Flipt,Restaurant without Liquor,777 Casino Dr,"Recreation venue, casino or club"
+200907210022,Rivers Casino / Grand View Buffet Production Kitchen,Restaurant without Liquor,777 Casino Dr,"Recreation venue, casino or club"
+200907210005,Rivers Casino / Grand View Buffet Service Station #2,Restaurant with Liquor,777 Casino Dr,"Recreation venue, casino or club"
+202012070003,Rivers Casino / Martorano's Prime,Restaurant with Liquor,777 Casino Drive,"Recreation venue, casino or club"
+202003120002,Rivers Casino / Mian Noodle Bar,Restaurant without Liquor,777 Casino  Drive,"Recreation venue, casino or club"
+200907210018,Rivers Casino / Pastry Kitchen,Chain Bakery,777 Casino Dr,"Recreation venue, casino or club"
+200907210011,Rivers Casino / Spiral Bar,Restaurant with Liquor,777 Casino Dr,"Recreation venue, casino or club"
+202311210001,Rivers Casino / Starbucks,Chain Restaurant without Liquor,777 Casino Drive,"Recreation venue, casino or club"
+200907210013,Rivers Casino / Team Dining Room,Restaurant without Liquor,777 Casino Dr,"Recreation venue, casino or club"
+200911250009,Rivers Casino / Wheelhouse Bar & Grill,Restaurant with Liquor,777 Casino Drive,"Recreation venue, casino or club"
+201602010019,Riverview Cafe @ Carnegie Science Center,Restaurant with Liquor,1 Allegheny  Avenue,"Recreation venue, casino or club"
+201405140004,Row House Cinema / Bierport Taproom,Restaurant with Liquor,4115 Butler Street,"Recreation venue, casino or club"
+202106160003,Spins Bowl Pittsburgh Lounge,Restaurant with Liquor,5840 Buttermilk Hollow Road,"Recreation venue, casino or club"
+202106160002,Spins Bowl Pittsburgh Snack Bar,Restaurant without Liquor,5840 Buttermilk Hollow  Road,"Recreation venue, casino or club"
+201104110002,Stage AE / BBQ Stand,Chain Restaurant with Liquor,400 North Shore Drive,"Recreation venue, casino or club"
+201011300001,Stage AE / Backstage Kitchen,Chain Restaurant without Liquor,400 North Shore Drive,"Recreation venue, casino or club"
+201011300005,Stage AE / Beer Wall,Chain Restaurant with Liquor,400 North Shore Drive,"Recreation venue, casino or club"
+201011300002,Stage AE / Concession Stand,Chain Restaurant without Liquor,400 North Shore Drive,"Recreation venue, casino or club"
+201011300003,Stage AE / Lower Bar,Chain Restaurant with Liquor,400 North Shore Drive,"Recreation venue, casino or club"
+201011300004,Stage AE / Upper Bar,Chain Restaurant with Liquor,400 North Shore Drive,"Recreation venue, casino or club"
+200803270001,The New Hazlett Theater,Restaurant with Liquor,6 Allegheny Square East,"Recreation venue, casino or club"
+56238,The Rangos Giant Cinema @ Carnegie Science Center,Restaurant without Liquor,1 Allegheny  Avenue,"Recreation venue, casino or club"
+200008230002,UPMC Rooney Sports Complex / Steeler Training Facility Cafe,Restaurant without Liquor,3400 Water Street,"Recreation venue, casino or club"
+202006120014,University Club,Restaurant with Liquor,123 University Place,"Recreation venue, casino or club"
+54608,Upstairs Saloon / Arsenal Bowling Lanes,Restaurant with Liquor,4310 Butler  Street,"Recreation venue, casino or club"
+200710230004,Waterworks Cinemas,Restaurant without Liquor,930 Freeport  Road,"Recreation venue, casino or club"

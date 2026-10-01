@@ -143,6 +143,7 @@ TAXONOMY_MODULES = {
     "sacramento": "pipeline.taxonomies.sacramento",
     "ottawa_inspection": "pipeline.taxonomies.ottawa_inspection",
     "minneapolis_inspection": "pipeline.taxonomies.minneapolis_inspection",
+    "pittsburgh_inspection": "pipeline.taxonomies.pittsburgh_inspection",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 
