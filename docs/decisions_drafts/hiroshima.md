@@ -5,6 +5,14 @@ entries in their own drafts file, and the cleanup session folds every drafts
 file into `DECISIONS.md` in one pass. Newest first, each entry exactly as it
 should land.
 
+### 2026-09-30 - Hiroshima's macro mode "metro" approved (owner)
+
+The build set `mode` "metro" on precedent - JR West's suburban heavy rail
+(Melbourne's "suburban heavy rail only") and the grade-separated Astram Line
+(Monterrey's and Newcastle's) - and flagged it for the owner's review with the
+other per-city modes (the build entry below). **Approved by the owner,
+2026-09-30** (relayed by the cleanup session). Nothing changes in the build.
+
 ### 2026-09-30 - Shared Japanese code: a per-city N02 edition, and a per-city station-gate floor
 
 Two backward-compatible changes for Hiroshima; the six built Japanese cities
