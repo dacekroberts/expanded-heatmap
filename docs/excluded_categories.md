@@ -2791,6 +2791,24 @@ and the Seohae Line, 14 stations. The Seohae Line is drawn here (owner): in
 Bucheon it has its own track and stations, unlike Goyang. No undrawn line has
 a station in Bucheon.
 
+### Anyang - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+section above).
+
+**Out by name**: hostess bars 313, dance halls 20, staff canteens 47,
+household fuel dealers 26; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 28 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Anyang's boundary (the lines drawn to their ends;
+stations outside in `outputs/anyang/excluded_stations.csv`): Line 1 and Line 4,
+7 stations. Anyang was built on its ring share below the satellites' station
+test (owner, 2026-09-29). No other line has a station in the city.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
