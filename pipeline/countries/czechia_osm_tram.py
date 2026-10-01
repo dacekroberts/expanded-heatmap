@@ -20,8 +20,10 @@ STEP 1, in order:
   5. the drawn geometry - each kept ref's relation with the most track - to
      LINES_GEOJSON, which step 3 draws and line_colour_search.py reads, so what
      is drawn is exactly what was kept.
-A stop that only a NOT_DRAWN relation reaches (Ostrava's line 5) is listed in
-excluded_stations.csv with that relation's reason, as the scope is disclosed.
+A stop that only a NOT_DRAWN relation reaches is listed in excluded_stations.csv
+when it lies BEYOND the map's obce, as outside; one inside the city is disclosed
+in prose instead (Kyoto's and Madrid's precedent, owner 2026-09-30) - Ostrava's
+line 5 is the case.
 """
 import json
 import sys
