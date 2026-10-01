@@ -102,6 +102,19 @@ if PROVENANCE_JSON.exists():
         # down; the notices below are the load-bearing obligation.
         pass
 
+# INSEE's prescribed attribution, verbatim: reuse is permitted « sous réserve
+# de mentionner la source sous la forme « Source : Insee » »
+# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). It covers
+# SIRENE and its geolocation file. Kept outside the provenance block so a
+# missing or malformed provenance file cannot drop it, and
+# check M of scripts/check_provenance.py refuses a French page without it.
+# The edition is hardcoded because outputs/<city>/provenance.json does not
+# record it: it is the title fetch_sources.py recorded for the shared national
+# cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
+# refetch.
+st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
+           " and its geolocation file.")
+
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).

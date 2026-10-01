@@ -46,6 +46,12 @@ WHAT IT CHECKS
      (notice 56) comes from `pipeline/tokyo/credits.py`, one entry per file its
      ward roster reads, and a roster file without one - a ward switched on
      later - fails, as does a credit for a file no longer read (2026-09-28).
+  M. A licence that prescribes its credit WORD FOR WORD is quoted on every
+     page of that country. INSEE permits reuse only « sous la forme « Source :
+     Insee » », and Paris, Marseille, Toulouse, Lille and Rennes all shipped
+     naming SIRENE and INSEE in prose without that string, unnoticed until
+     2026-09-30. The page is parsed, not grepped, so a comment quoting the
+     string does not count; only a literal passed to an `st.*` call does.
   K. Three of `CLAUDE.md`'s invariants that a new city could break silently:
 
      - **the basemap attribution is on every rendered map, and nothing is
@@ -365,6 +371,70 @@ def check_built_credits():
     if tuple(credits.MHLW_FILES) != tuple(wards.MHLW_WARDS):
         out.append(f"MHLW's slice is read for {wards.MHLW_WARDS} but credited for {credits.MHLW_FILES}")
     return out
+
+
+# M: country -> (the credit its licence prescribes verbatim, where that is
+# recorded). Only strings a licence PRESCRIBES go here - not ones this project
+# chose - so an entry is a quotation, and the evidence is the cited file.
+PRESCRIBED_CREDITS = {
+    "France": ("Source : Insee",
+               "docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1"),
+}
+
+
+def check_prescribed_credits():
+    """M: every page of a PRESCRIBED_CREDITS country passes the string to an
+    st.* call. Returns (problems, notes). A note is a page that shows the
+    string only inside an if/try block - Le Mans's template nests it in the
+    provenance block, so a missing provenance file would drop it."""
+    cities = []
+    for node in ast.parse(read(CITIES_PY)).body:
+        if isinstance(node, ast.Assign) and any(
+                getattr(t_, "id", None) == "CITIES" for t_ in node.targets):
+            for d in node.value.elts:
+                pairs = {getattr(k, "value", None): getattr(v, "value", None)
+                         for k, v in zip(d.keys, d.values)}
+                cities.append(pairs)
+
+    problems, notes = [], []
+    for country, (credit, where) in PRESCRIBED_CREDITS.items():
+        # French typography puts a no-break space before the colon; a page
+        # that does so still quotes INSEE verbatim.
+        pattern = re.compile(re.escape(credit).replace(r"\ ", "[   ]"))
+        pages = [c for c in cities if c.get("country") == country]
+        if not pages:
+            # A limb that examines nothing must not report success.
+            problems.append(f"no city in app/cities.py has country "
+                            f"'{country}' - PRESCRIBED_CREDITS checked nothing")
+        for c in pages:
+            page = ROOT / "app" / (c.get("page") or "")
+            if not page.is_file():
+                problems.append(f"{c.get('name')}: page {c.get('page')} not found")
+                continue
+            tree = ast.parse(read(page))
+            shown = []          # (call, nested inside if/try?)
+
+            def visit(node, nested):
+                if (isinstance(node, ast.Call)
+                        and isinstance(node.func, ast.Attribute)
+                        and getattr(node.func.value, "id", None) == "st"
+                        and any(isinstance(n, ast.Constant)
+                                and isinstance(n.value, str)
+                                and pattern.search(n.value)
+                                for a in node.args for n in ast.walk(a))):
+                    shown.append(nested)
+                for child in ast.iter_child_nodes(node):
+                    visit(child, nested or isinstance(
+                        node, (ast.If, ast.Try, ast.With, ast.For, ast.While)))
+
+            visit(tree, False)
+            if not shown:
+                problems.append(f"{c.get('name')} ({c.get('page')}) never "
+                                f"displays '{credit}' ({where})")
+            elif all(shown):
+                notes.append(f"{c.get('name')} shows '{credit}' only inside a "
+                             f"conditional block")
+    return problems, notes
 
 
 def displayed_notices():
@@ -954,6 +1024,16 @@ def main():
         failures.append(("built credits", lc))
     else:
         print("  built credits: every file Tokyo's roster reads has its credit")
+
+    # --- M, credits a licence prescribes word for word ------------------------
+    pc, pc_notes = check_prescribed_credits()
+    if pc:
+        failures.append(("prescribed credits", pc))
+    else:
+        print(f"  prescribed credits: every page of "
+              f"{', '.join(PRESCRIBED_CREDITS)} quotes its licence's credit")
+    for s in pc_notes:
+        print(f"      note: {s}")
 
     # --- E, the master list's own counts -------------------------------------
     regions = []
