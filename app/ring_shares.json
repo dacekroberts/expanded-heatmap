@@ -538,5 +538,35 @@
   "in_ring": 1907,
   "all": 2530,
   "map_blob": "510e0da3d00843cd0597f319495ac65b710c7e52"
+ },
+ "brno": {
+  "in_ring": 5932,
+  "all": 7200,
+  "map_blob": "93c2d27d58e90123b66c4e49bac696f12e0fa31a"
+ },
+ "plzen": {
+  "in_ring": 2508,
+  "all": 3508,
+  "map_blob": "2f75ea1b32f0c01a6701ac6a0fb1a2feabf7ba2d"
+ },
+ "olomouc": {
+  "in_ring": 1742,
+  "all": 2235,
+  "map_blob": "3d11bf154ce9e801f0884563d5bcd975bb5c9584"
+ },
+ "ostrava": {
+  "in_ring": 2941,
+  "all": 3960,
+  "map_blob": "6591bb4ba624ddc1a98f7e249e4c1179f7554740"
+ },
+ "liberec": {
+  "in_ring": 1405,
+  "all": 2488,
+  "map_blob": "5778d60520777890315b47f0343aea7f0a39fb4d"
+ },
+ "most": {
+  "in_ring": 664,
+  "all": 1025,
+  "map_blob": "b2a5a94fbec72019318747fb30e6bc06cd68a959"
  }
 }

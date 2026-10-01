@@ -1,0 +1,42 @@
+"""Brno step 2: ROS02 + RES + RUIAN -> the storefronts trading in obec 582786.
+
+    python pipeline/brno/step2_clean_businesses.py
+
+Thin over `pipeline/countries/czechia_register.py`, Prague's step 2. Everything
+about reading the registers is national; what is Brno's own lives in
+`config.py` - the obec, its RUIAN control and the sanity box.
+
+What a reader should know before trusting the counts printed below:
+
+  * the location is the ESTABLISHMENT's (ROS02), never the owner's seat (RES);
+  * the activity is the OWNER's single CZ-NACE 2025 code, inherited by every
+    establishment it holds;
+  * a natural person's premises at their own registered seat is excluded, and
+    every other natural person's or partnership's pin shows its address.
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from pipeline.brno import config  # noqa: E402
+from pipeline.countries.czechia_register import build_storefronts  # noqa: E402
+
+
+def main():
+    config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
+    out = build_storefronts(config, config.BRNO_BBOX)
+    out.to_csv(config.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")
+    print(f"\n  {len(out):,} storefronts -> "
+          f"{config.BUSINESSES_CLEAN_CSV.relative_to(config.ROOT)}")
+    print(f"  placed extent: lat {out['latitude'].min():.4f}-{out['latitude'].max():.4f}, "
+          f"lon {out['longitude'].min():.4f}-{out['longitude'].max():.4f}")
+
+
+if __name__ == "__main__":
+    # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
+    # Czech letters. UTF-8 regardless of the console.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+    main()

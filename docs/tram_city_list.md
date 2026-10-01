@@ -1,4 +1,4 @@
-# 🟤 Tram city list — 16 cities (split from the master list 2026-09-29)
+# 🟤 Tram city list — 10 cities (split from the master list 2026-09-29)
 
 **Band T of [`docs/city_master_list.md`](city_master_list.md), in a file of its
 own** (owner, 2026-09-29), so the tram cities can be sorted and worked through
@@ -20,9 +20,9 @@ network-type colours (DECISIONS "Yes to trams-only maps").
 
 | Tier | What these cities ARE | Cities |
 |---|---|---|
-| 🟤 **T1** | **Ready if trams-only maps are approved.** All three buckets, access open, rail measured; grouped by country pipeline, which is how the build cost falls. Since 2026-09-30 also the cities that passed Band B's reduced-bucket bar from T2 | **16** |
+| 🟤 **T1** | **Ready if trams-only maps are approved.** All three buckets, access open, rail measured; grouped by country pipeline, which is how the build cost falls. Since 2026-09-30 also the cities that passed Band B's reduced-bucket bar from T2 | **10** |
 | 🟤 **T2** | **Trams plus a bucket gap. Closed 2026-09-30** (owner): three to T1, Utrecht to Band R, three to the discards | **0** |
-| **Total** | | **16** |
+| **Total** | | **10** |
 
 **EDGE** (light rail partly built to metro standard, the owner's tag
 2026-09-27) is now a flag on a row, not a group: the rest of the EDGE group
@@ -123,7 +123,7 @@ Florence's full read.
 
 ---
 
-## 🟤 T1 — ready if trams-only maps are approved (16 cities)
+## 🟤 T1 — ready if trams-only maps are approved (10 cities)
 
 **Every one passed all three buckets on a national or city register this
 project has already built on** (the 2026-09-27 second-city screens and wave 2;
@@ -132,20 +132,6 @@ measurement and its licence reads. **Stores near stations** is storefronts
 within 966 m of a station, the screen's measure. French builds use France's
 own config (a 483 m outer ring, Lambert-93), so the build recounts.
 **Build-time calls are listed per row** and put when each brief is written.
-
-**🇨🇿 Czechia (6)** — ROS02 establishments, RES activity and the RÚIAN join, as
-Prague. **Briefed 2026-09-30**: `docs/build_briefs/` brno, ostrava, plzen, olomouc,
-liberec (Liberec (Regional), with Jablonec) and most (Most (Regional), with Litvínov); **every call and the prose approved by the owner 2026-09-30**, build order Brno, Plzeň, Olomouc, Ostrava, Liberec, Most;
-trams from OSM everywhere but Brno, whose stops come from KORDIS's CC BY feed. `czechia_register.ruian()`'s coordinate control is per city now.
-
-| City | Rail (stations in the town) | Spacing | R / F / P; restaurants × OSM | Build-time calls |
-|---|---|---|---|---|
-| **Brno** | 11 lines, **146 stations**; line 2 keeps 21 of 23. IDS JMK GTFS, CC BY 4.0 | 337 m | 2,520 / 2,126 / 2,583 = **7,229**; 1.61× (Prague 1.59–1.63×) | The strongest trams-only find anywhere |
-| **Ostrava** | 96 stations; **line 5 is a stub (10 → 3)**. No GTFS, rail from OSM | 430 m | 1,309 / 1,101 / 1,561 = 3,971; 2.23× | Line 5 |
-| **Plzeň** | Lines 1, 2 and 4: 53 stations, all inside | 306 m | 1,225 / 863 / 1,425 = 3,513; 1.99× | PMDP's GTFS licence contradicts itself (CC BY against a CC0-like record): read it, or take OSM |
-| **Olomouc** | Lines 1–7: 36 stations | 309 m | 811 / 620 / 815 = 2,246; 1.80× | DPMO's GTFS declares no licence: OSM, or a read |
-| **Liberec** | 34 stations alone (line 11 keeps 21 → 15); 41 with Jablonec, every line whole. DPMLJ's GTFS resets the connection, so OSM | 349 m | 1,880 alone; **2,498 with Jablonec**; 2.45× | With Jablonec or without |
-| **Most + Litvínov** | Joint scope 27 stations, every line whole. **Most alone fails the stub test** (lines keep 6 of 18, 9 of 21, 12 of 24) | — | 429 / 267 / 334 = 1,030; 3.71× | Joint scope is required; low value |
 
 **🇩🇰 Denmark (1), 🇱🇻 Latvia (2)**
 
@@ -312,6 +298,24 @@ the mode is decided per city. TER is excluded in every built French city.
 | Le Mans | T1, T2 | 35 / 35 | 901 / 632 / 484 (1.54×) | 1,763 | Use the `gtfs_setram_lmm_auto` resource; `flex` has no tram |
 | Avignon | T1 | 10 / 10 | 1,146 / 896 / 408 (1.86×) | 1,684 | Small |
 | Valenciennes | T1, T2 | 12 / 48 (T2: 24%) | 514 / 412 / 192 (2.02×) | 1,027; 1,984 over 13 communes in 2 EPCIs | **Regional scope**; low interest |
+
+## The Czech batch's rows (history: all 6 built 2026-09-30)
+
+The Czech batch was built on 2026-09-30 and left T1 for the master list's Built table. The rows below are as they stood in T1.
+
+**🇨🇿 Czechia (6, built)** — ROS02 establishments, RES activity and the RÚIAN join, as
+Prague. **Briefed 2026-09-30**: `docs/build_briefs/` brno, ostrava, plzen, olomouc,
+liberec (Liberec (Regional), with Jablonec) and most (Most (Regional), with Litvínov); **every call and the prose approved by the owner 2026-09-30**, build order Brno, Plzeň, Olomouc, Ostrava, Liberec, Most;
+trams from OSM everywhere but Brno, whose stops come from KORDIS's CC BY feed. `czechia_register.ruian()`'s coordinate control is per city now.
+
+| City | Rail (stations in the town) | Spacing | R / F / P; restaurants × OSM | Build-time calls |
+|---|---|---|---|---|
+| **Brno** | 11 lines, **146 stations**; line 2 keeps 21 of 23. IDS JMK GTFS, CC BY 4.0 | 337 m | 2,520 / 2,126 / 2,583 = **7,229**; 1.61× (Prague 1.59–1.63×) | The strongest trams-only find anywhere |
+| **Ostrava** | 96 stations; **line 5 is a stub (10 → 3)**. No GTFS, rail from OSM | 430 m | 1,309 / 1,101 / 1,561 = 3,971; 2.23× | Line 5 |
+| **Plzeň** | Lines 1, 2 and 4: 53 stations, all inside | 306 m | 1,225 / 863 / 1,425 = 3,513; 1.99× | PMDP's GTFS licence contradicts itself (CC BY against a CC0-like record): read it, or take OSM |
+| **Olomouc** | Lines 1–7: 36 stations | 309 m | 811 / 620 / 815 = 2,246; 1.80× | DPMO's GTFS declares no licence: OSM, or a read |
+| **Liberec** | 34 stations alone (line 11 keeps 21 → 15); 41 with Jablonec, every line whole. DPMLJ's GTFS resets the connection, so OSM | 349 m | 1,880 alone; **2,498 with Jablonec**; 2.45× | With Jablonec or without |
+| **Most + Litvínov** | Joint scope 27 stations, every line whole. **Most alone fails the stub test** (lines keep 6 of 18, 9 of 21, 12 of 24) | — | 429 / 267 / 334 = 1,030; 3.71× | Joint scope is required; low value |
 
 ## Revisit if trams-only maps are approved (discards, not candidates)
 

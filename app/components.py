@@ -749,6 +749,9 @@ _NOTICES = [
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "Palma's Metro M1 and its stations, and the municipal boundaries used to "
      "select them, "
+     "Brno's tram lines and the tram lines and stops of Plzeň, Olomouc, Ostrava, "
+     "Liberec and Jablonec nad Nisou, and Most and Litvínov, with those towns' "
+     "boundaries, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
@@ -1064,7 +1067,10 @@ _NOTICES = [
     # by a direct link, and mark modified or derived data as such and never
     # present it as unchanged official statistics (read 2026-09-23/24).
     # Wording approved by the owner 2026-09-24.
-    ("Czech Statistical Office (Prague)",
+    # The title lists every Czech city, as Norway's and Denmark's do (owner,
+    # 2026-09-30): the text names none. ⚠ At landing, list only the Czech cities
+    # that land - czech-build carries all six.
+    ("Czech Statistical Office (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most)",
      "Contains data from the Czech Statistical Office's business register "
      "(Registr ekonomických subjektů, RES), used under the [ČSÚ conditions of use]"
      "(https://csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu) "
@@ -1076,7 +1082,7 @@ _NOTICES = [
     # ČÚZK - RUIAN addresses. The Czech conditions page PRESCRIBES the credit
     # format "ČÚZK, [rok]" (the file's year), a link to the conditions, and a
     # description of the modification. Wording approved by the owner 2026-09-24.
-    ("ČÚZK (Prague)",
+    ("ČÚZK (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most)",
      "ČÚZK, 2026. Address points from the Registry of Territorial Identification, "
      "Addresses and Real Estate (RÚIAN), under the [ČÚZK conditions]"
      "(https://www.cuzk.gov.cz/Predpisy/Podminky-poskytovani-prostor-dat-a-sitovych-sluzeb/Podminky-poskytovani-prostorovych-dat-CUZK.aspx) "
@@ -1094,6 +1100,34 @@ _NOTICES = [
      "three metro lines are selected and redrawn, stations are reduced to one point "
      "each, and line A's colour is lightened. Not "
      "produced or endorsed by ROPID or DPP.",
+     False),
+    # KORDIS JMK - Brno's tram stops. CC BY 4.0 under KORDIS's own grant
+    # (idsjmk.cz/a/kontakty.html, read 2026-09-30); the feed's agency.txt
+    # credits "IDS JMK (Data from: KORDIS JMK, DPMB)", which CC BY 3(a)(1)(A)
+    # says to retain; data.brno.cz distributes it. No IDS JMK, KORDIS or DPMB
+    # logos. Notice 78. Wording approved by the owner 2026-09-30, word for word.
+    ("KORDIS JMK (Brno)",
+     "Tram stops for Brno come from the IDS JMK timetable data (GTFS) published by "
+     "KORDIS JMK, a.s., with data from KORDIS JMK and DPMB, and distributed by the "
+     "Statutory City of Brno at data.brno.cz, under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) "
+     "([feed](https://kordis-jmk.cz/gtfs/gtfs.zip)). Changes: the 11 regular tram "
+     "lines are selected, each stop is reduced to one point, and distance rings are "
+     "computed around it. Not produced or endorsed by KORDIS JMK, DPMB or the City "
+     "of Brno.",
+     False),
+    # PMDP - Plzeň's gate 3 only (its per-line stop counts); nothing from it is
+    # drawn. Read 2026-09-30, PERMITTED; the record contradicts itself (CC BY in
+    # the description, no-rights terms on the distribution), so it is credited
+    # on the stricter CC BY reading. The credit sentence is the brief's (owner,
+    # 2026-09-30); the framing around it is flagged for review. Never the city's
+    # arms or PMDP's logo. Notice 79.
+    ("PMDP (Plzeň)",
+     "Plzeň's tram stops are checked against Plzeňské městské dopravní podniky, a.s. "
+     "(PMDP), GTFS published by the Statutory City of Plzeň at opendata.plzen.eu, "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), modified by this "
+     "project: only its stop counts per line are used, and nothing from it is drawn. "
+     "Not produced or endorsed by PMDP or the City of Plzeň.",
      False),
     # Gemeente Amsterdam - hospitality permits. The register's own licence is
     # SILENT (`Licentie: -`; a retired 2022 catalogue said CC BY), so CC BY 4.0

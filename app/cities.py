@@ -2818,6 +2818,150 @@ CITIES = [
         # no note on Angers (2026-09-30).
         "label_offset": ("middle", 0, -18),
     },
+    {
+        "name": "Brno",
+        "lat": 49.1951,
+        "lon": 16.6068,
+        "page": "pages/150_Brno_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined by address (100%)",
+        "data_age": "As of 2026-08-31",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "DPMB trams 1-10 and 12",
+        "region": "Europe",
+        "country": "Czechia",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Plzeň",
+        "lat": 49.7384,
+        "lon": 13.3736,
+        "page": "pages/151_Plzen_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined by address (100%)",
+        "data_age": "As of 2026-08-31",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "PMDP trams 1, 2 and 4",
+        "region": "Europe",
+        "country": "Czechia",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Olomouc",
+        "lat": 49.5938,
+        "lon": 17.2509,
+        "page": "pages/152_Olomouc_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined by address (100%)",
+        "data_age": "As of 2026-08-31",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "DPMO trams 1-7",
+        "region": "Europe",
+        "country": "Czechia",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ostrava",
+        "lat": 49.8209,
+        "lon": 18.2625,
+        "page": "pages/153_Ostrava_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined by address (100%)",
+        "data_age": "As of 2026-08-31",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Dopravní podnik Ostrava trams (14 lines)",
+        "region": "Europe",
+        "country": "Czechia",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Liberec (Regional)",
+        "lat": 50.7671,
+        "lon": 15.0562,
+        "page": "pages/154_Liberec_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined by address (100%)",
+        "data_age": "As of 2026-08-31",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "DPMLJ trams 2, 3, 5 and 11",
+        "region": "Europe",
+        "country": "Czechia",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Most (Regional)",
+        "lat": 50.503,
+        "lon": 13.6362,
+        "page": "pages/155_Most_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined by address (100%)",
+        "data_age": "As of 2026-08-31",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "DPmML trams 1-4",
+        "region": "Europe",
+        "country": "Czechia",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

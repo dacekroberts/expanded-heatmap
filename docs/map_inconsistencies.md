@@ -574,6 +574,12 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
 | **Czechia** | | | | | |
 | Prague | Metro A, B, C | Trams, funicular, ferries, suburban | PID GTFS | City | 0 / 0 |
+| Brno | Trams 1–10, 12 | Heritage tram H4, shuttle P1; S-trains, trolleybuses, ferry | KORDIS JMK GTFS (geometry OSM); gate 3 vs OSM agrees on 9 of 11 lines | City | 2 / 0 |
+| Plzeň | Trams 1, 2, 4 | Relief and depot runs 1X, 4X; trolleybuses | OpenStreetMap route relations; gate 3 vs PMDP GTFS (depot only) | City | 0 / 0 |
+| Olomouc | Trams 1–7 | — | OpenStreetMap route relations; gate 3 exact (IDOS) | City | 0 / 0 |
+| Ostrava | Trams 1–4, 6–8, 10–12, 14, 15, 17, 18 | Line 5 (suburban, 2 in-city stops); lines 9, 19 (no stops in OSM); trolleybuses | OpenStreetMap route relations; gate 3 partial (IDOS, diversion) | City | 7 / 0 |
+| Liberec (Regional) | Trams 2, 3, 5, 11 | — | OpenStreetMap route relations (+3 stops); gate 3 exact (IDOS) | Liberec + Jablonec nad Nisou | 0 / 0 |
+| Most (Regional) | Trams 1–4 | — | OpenStreetMap route relations (+1 stop); gate 3 exact (IDOS) | Most + Litvínov | 0 / 0 |
 | **Netherlands** | | | | | |
 | Amsterdam | Metro 50–54 + 16 trams | Tram 3, museum tram, ferries, NS | OVapi national GTFS (GVB) | Gemeente (with Weesp) | 22 / 59 |
 | Rotterdam | RET metro A–E + 9 trams | Trams 12, 14, 18; ferries; NS | OVapi national GTFS (RET) | Gemeente | 52 / 23 |
@@ -713,6 +719,12 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Aarhus | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 636 / 450 / 214 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
 | Prague | National registers (location + activity) | ROS02 + RES | CZ-NACE 2025 (owner's activity) | 6,027 / 5,464 / 6,122 | About 57,000 establishments of other-activity owners missing |
+| Brno | same | same | same | 1,955 / 1,773 / 2,204 | About 18,800 establishments of other-activity owners missing |
+| Plzeň | same | same | same | 783 / 608 / 1,117 | About 7,200 establishments of other-activity owners missing |
+| Olomouc | same | same | same | 587 / 483 / 672 | About 4,800 establishments of other-activity owners missing |
+| Ostrava | same | same | same | 956 / 773 / 1,212 | About 9,000 establishments of other-activity owners missing |
+| Liberec (Regional) | same | same | same | 449 / 352 / 604 | About 6,200 establishments of other-activity owners missing |
+| Most (Regional) | same | same | same | 299 / 153 / 212 | About 2,000 establishments of other-activity owners missing |
 | **Netherlands** | | | | | |
 | Amsterdam | Permit list + building register | Horeca permits; BAG shop units | Per-source (2 buckets) | Shops & services 9,215 / Food 3,433 | Retail and Personal merged |
 | Rotterdam | Gazette notices + building register | Permit notices; BAG shop units | Per-source (2 buckets) | Shops & services 5,211 / Food 1,771 | Retail and Personal merged |
@@ -849,6 +861,12 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Aarhus | Address join to DAR, points from OpenStreetMap's copy (97.1%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
 | **Czechia** | | | |
 | Prague | Address join to RÚIAN (99.99%) | Owner's activity only; web shops | Home-address sole traders (1,500) dropped; names withheld |
+| Brno | Address join to RÚIAN (100%) | Owner's activity only; web shops | Home-address sole traders (591) dropped; names withheld |
+| Plzeň | Address join to RÚIAN (100%) | Owner's activity only; web shops | Home-address sole traders (299) dropped; names withheld |
+| Olomouc | Address join to RÚIAN (100%) | Owner's activity only; web shops | Home-address sole traders (223) dropped; names withheld |
+| Ostrava | Address join to RÚIAN (100%) | Owner's activity only; web shops | Home-address sole traders (207) dropped; names withheld |
+| Liberec (Regional) | Address join to RÚIAN, two obce (100%) | Owner's activity only; web shops; surrounding municipalities not counted | Home-address sole traders (283) dropped; names withheld |
+| Most (Regional) | Address join to RÚIAN, two obce (100%) | Owner's activity only; web shops; surrounding municipalities not counted | Home-address sole traders (104) dropped; names withheld |
 | **Netherlands** | | | |
 | Amsterdam | Source points (22 permits unplaced) | Empty shop units about 5%; takeaways thin | Shop units also dwellings (757); canteens in venues, hotels |
 | Rotterdam | Source points | Closed premises stay up to 5 years; about 7% vacant | Dwelling units (26); alcohol, terrace, gaming permits |
@@ -980,6 +998,12 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Aarhus | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 25% | Name; address for personal owners and franchisees |
 | **Czechia** | | | | | | |
 | Prague | 2026-08-31 (ROS02) | B | 0.6 mi | Yes | 70% | Name; address for persons/partnerships |
+| Brno | 2026-08-31 (ROS02) | B | 0.3 mi | Yes | 82% | Name; address for persons/partnerships |
+| Plzeň | 2026-08-31 (ROS02) | B | 0.3 mi | Yes | 71% | Name; address for persons/partnerships |
+| Olomouc | 2026-08-31 (ROS02) | B | 0.3 mi | Yes | 78% | Name; address for persons/partnerships |
+| Ostrava | 2026-08-31 (ROS02) | B | 0.3 mi | Yes | 74% | Name; address for persons/partnerships |
+| Liberec (Regional) | 2026-08-31 (ROS02) | B | 0.3 mi | Yes | 56% | Name; address for persons/partnerships |
+| Most (Regional) | 2026-08-31 (ROS02) | B | 0.3 mi | Yes | 65% | Name; address for persons/partnerships |
 | **Netherlands** | | | | | | |
 | Amsterdam | Live register (2026-09-24) | B | 0.6 mi | Yes | 96% | Permit name (food); address (shops) |
 | Rotterdam | Notices to 2026-09-24 (5-yr window) | B | 0.6 mi | Yes | 93% | No names; address (shops) |

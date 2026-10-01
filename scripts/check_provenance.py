@@ -239,6 +239,11 @@ SLUG_OVERRIDES = {
     "Valenciennes (Regional)": "valenciennes",
     # Canada: Kitchener and Waterloo as one regional page (2026-09-30).
     "Kitchener–Waterloo (Regional)": "kitchener_waterloo",
+    # Czechia: accents dropped from the package name; two obce each as one
+    # regional page (2026-09-30).
+    "Plzeň": "plzen",
+    "Liberec (Regional)": "liberec",
+    "Most (Regional)": "most",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are

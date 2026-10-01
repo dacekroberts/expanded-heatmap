@@ -25,7 +25,7 @@ Mapped so far:
 - **France:** Paris, Marseille, Toulouse, Lille (Regional), Rennes, Le Mans, Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice, Montpellier, Strasbourg, Le Havre, Caen, Rouen (Regional), Bordeaux (Regional), Nantes (Regional), Grenoble (Regional), Valenciennes (Regional), Angers
 - **Norway:** Oslo, Bergen
 - **Denmark:** Copenhagen, Aarhus
-- **Czechia:** Prague
+- **Czechia:** Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional)
 - **Netherlands:** Amsterdam, Rotterdam
 - **Brazil:** São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional)
 - **Hong Kong:** Hong Kong

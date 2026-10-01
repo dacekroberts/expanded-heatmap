@@ -332,6 +332,13 @@ TEXT_WIDTH = {
     # loaded; Paris 32.9, Marseille 60.3, Lille (Regional) 99.7, Le Havre 57.2
     # and Saint-Étienne 92.2 reproduced exactly.
     "Angers": 47.2,
+    # The six Czech tram cities: measured 2026-09-30 in the local app's own
+    # document (lean venv, czech-build), canvas measureText at 600 14px "Space
+    # Grotesk" after document.fonts.load, with eight entries reproduced exactly
+    # in the same run - Prague 47.3, Copenhagen 85.5, Oslo 29.0, Rennes 49.7,
+    # Toulouse 60.4, Paris 32.9, Lille (Regional) 99.7, Milan 36.3.
+    "Brno": 31.9, "Plzeň": 36.0, "Olomouc": 59.1, "Ostrava": 51.6,
+    "Liberec (Regional)": 122.9, "Most (Regional)": 107.5,
 }
 
 PILL_PAD_X = 5            # background_padding=[5, 2]
