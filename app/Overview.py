@@ -723,21 +723,28 @@ for _leaf in _open + [n for n in _leaves if n not in _open]:
     _rows = [c for c in SWITCHER_ORDER if c["region"] == _leaf]   # grouped by country
     _multi = len({c["country"] for c in _rows}) > 1
     with st.expander(f"{_leaf} ({len(_rows)})", expanded=_leaf in _open):
-        _country = None
+        # Grouped by country where a region holds more than one, three cities
+        # to a row; Streamlit stacks columns into one below 640 px.
+        _groups = {}
         for city in _rows:
-            if _multi and city["country"] != _country:
-                _country = city["country"]
-                st.markdown(f"**{_country}**")
-            st.page_link(city["page"], label=f"**{city['name']}**")
-            # The tooltip's facts as well as the blurb: a touch screen has no
-            # hover, so on a phone this list is the only place they show. One
-            # caption per city, because a caption wraps and a long page_link
-            # label is clipped on a phone.
-            _f = _by_name.loc[city["name"]]
-            st.caption(
-                f"{city['blurb']}  \n"
-                f"{_f['mode_label']} · {_f['tier_label']} · {_f['storefronts_text']}  \n"
-                f"Data: {_f['data_age']} · Placed by: {_f['placement']}")
+            _groups.setdefault(city["country"], []).append(city)
+        for _country, _group in _groups.items():
+            if _multi:
+                st.caption(f"**{_country}**")
+            for _i in range(0, len(_group), 3):
+                for _col, city in zip(st.columns(3), _group[_i:_i + 3]):
+                    with _col:
+                        st.page_link(city["page"], label=f"**{city['name']}**")
+                        # The tooltip's facts as well as the blurb: a touch
+                        # screen has no hover, so on a phone this list is the
+                        # only place they show. A caption wraps; a long
+                        # page_link label is clipped on a phone.
+                        _f = _by_name.loc[city["name"]]
+                        st.caption(
+                            f"{city['blurb']}  \n"
+                            f"{_f['mode_label']} · {_f['tier_label']} · "
+                            f"{_f['storefronts_text']}  \n"
+                            f"Data: {_f['data_age']} · Placed by: {_f['placement']}")
 
 # Site-level notices, required on every page - see components._NOTICES.
 render_site_notices()
