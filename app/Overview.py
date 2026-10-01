@@ -300,6 +300,11 @@ cities["dy"] = offsets.map(lambda o: o[2])
 # check_macro_labels.py applies the same rule.
 _members = {c["name"] for c in _region_cities[region]
             if c.get("label_tier") != "minor" or c.get("region") == region}
+# And another region's ANCHORS where this view is set to label them (East Asia
+# names Seoul; owner, 2026-09-30) - see REGION_LABELS_ALSO in cities.py.
+_also = getattr(sys.modules.get("cities"), "REGION_LABELS_ALSO", {}).get(region, ())
+_members |= {c["name"] for c in CITIES if c.get("region") in _also
+             and c.get("label_tier") != "minor"}
 label_cities = cities[cities["name"].isin(_members)]
 
 markers = pdk.Layer(
