@@ -90,7 +90,7 @@ together, so a row in either counts and a row in neither still fails.
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
-| Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm |
+| Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm, Göteborg |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
@@ -104,6 +104,7 @@ together, so a row in either counts and a row in neither still fails.
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
+| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
 
 ## Business registries
 

@@ -1764,6 +1764,21 @@ COLUMNS["den_haag_source"] = {
 }
 
 
+ZURICH_REGISTER = "a register of food-and-drink and alcohol-retail licences: no such licence type"
+COLUMNS["zurich_gastwirtschaft"] = {
+    **{rid: absent(ZURICH_REGISTER) for rid in (
+        "funeral", "personal_catchall", "sex_shop", "massage_commercial", "massage_regulated", "car_dealer",
+        "vehicle_repair", "gambling", "pawnbroker", "vet", "nonstore", "parking", "repair", "lodging",
+        "recreation", "pharmacy", "optician")},
+    "no_counter_food": [loc("Kantine / Mensa", "staff and institutional canteens"),
+                        loc("Ausgabestelle", "food stands, caterers and food trucks (the city's own gloss)")],
+    "adult_hostess": [loc("Cabaret / Nachtclub", "cabarets, named as such by the register")],
+    "nightclub": [loc("Dancing / Disco", "clubs and discos")],
+    "petrol_station": [loc("Tankstelle", "petrol-station shops licensed to sell alcohol")],
+    "mobile_unit": [loc("Ausgabestelle", "food trucks, filed with stands and caterers")],
+}
+
+
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
 # except the cells below, which still wait on the owner. A queued row turns stale

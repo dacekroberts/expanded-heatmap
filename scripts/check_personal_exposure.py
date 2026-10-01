@@ -69,6 +69,14 @@ REGISTRIES = {
     # and the address is not carried to the map, so the unit check is skipped.
     "stockholm": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Göteborg: Livsmedelsverksamheter names the PREMISES (`namn`); no owner,
+    # representative or phone column exists. A premises named only as a person
+    # (13, read by eye from the 738 names residence.looks_personal flags, nearly
+    # all trade names) shows its street address (config.PERSON_NAMED, Kansas
+    # City's rule). An address with an apartment number (LGH) is left off; none
+    # remains among the placed storefronts.
+    "goteborg": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=("adress",)),
     # Bucharest: DSVSA's registers name the registered UNIT, most often the
     # operating company. The owner's rule (2026-09-28): the company name
     # without its legal form, and the CATEGORY ONLY for a sole trader (II,
@@ -473,6 +481,18 @@ REGISTRIES = {
     "den_haag": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv",
                      address=("address",)),
+    # Zurich: the Stadt's Gastwirtschaftsbetriebe has ONE name, `betriebsname`,
+    # the premises' trade name; the register has no holder column, so there is
+    # no owner fallback. Step 2 shows the street address for 12 trade names read
+    # by eye as a person's own (config.PERSON_NAMED: four alcohol-retail
+    # licences in a bare personal name on residential streets, an internet shop,
+    # ambiguous ones). The ~900 person-shaped names it still shows are German
+    # and Italian trade names that residence.py's English organisation words do
+    # not catch ("Brasserie Lipp", "Tennisclub Seebach") and kiosk signs that
+    # carry a surname ("Prathees Kiosk"), read 2026-09-30.
+    "zurich": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

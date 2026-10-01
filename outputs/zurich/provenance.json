@@ -1,0 +1,26 @@
+{
+  "written_utc": "2026-10-01T02:41:07+00:00",
+  "register": {
+    "url": "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Gastwirtschaftsbetriebe",
+    "layer": "gastwirtschaftsbetriebe",
+    "features": 3487,
+    "licence": "cc-zero",
+    "date_last_updated": "28.09.2026",
+    "metadata_modified": "2026-09-30T08:34:53.415515"
+  },
+  "osm": {
+    "rail_host": "overpass-api.de",
+    "gemeinden_host": "overpass-api.de",
+    "bbox": [
+      47.32,
+      8.4,
+      47.47,
+      8.65
+    ]
+  },
+  "files_utc": {
+    "gastwirtschaftsbetriebe.geojson": "2026-10-01T02:38:10+00:00",
+    "osm_rail.json": "2026-10-01T02:40:44+00:00",
+    "osm_gemeinden.json": "2026-10-01T02:41:07+00:00"
+  }
+}

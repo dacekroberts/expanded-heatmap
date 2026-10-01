@@ -1,82 +1,89 @@
 """Step 3 - Render Zurich's heatmap to a standalone HTML file.
 
 All rendering lives in pipeline/map_common.py; this file supplies only what is
-Zurich-specific. Scaffolded by scripts/scaffold_city.py.
+Zurich-specific.
 
 Input:  data/zurich/processed/stations.csv
         data/zurich/processed/businesses_clean.csv
-        data/zurich/raw/gtfs.zip                    (for the line overlay)
-        data/zurich/raw/city_boundary.geojson       (label anchoring)
+        data/zurich/raw/osm_rail.json        (the lines, OSM's route relations)
+        data/zurich/raw/osm_gemeinden.json   (label anchoring)
 Output: outputs/zurich/heatmap.html
 
 Run:  python pipeline/zurich/step3_map.py
-"""
 
+The lines come from OSM through load_osm_line_shapes, drawn whole: trams 2, 4,
+10 and 50 are drawn to their ends outside the Stadt, whose stops get no ring.
+"""
+import json
 import sys
 from pathlib import Path
 
-import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
+from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.zurich.config import (  # noqa: E402
-    STATIONS_CSV,
     BUSINESSES_CLEAN_CSV,
-    CITY_BOUNDARY_GEOJSON,
-    GTFS_ZIP,
-    HEATMAP_HTML,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
+    DRAWN_LINES,
+    HEATMAP_HTML,
+    LINE_COLOURS,
+    LINE_NAMES,
+    OSM_COLOURS,
+    OSM_ROUTES_JSON,
     RING_EDGES_METERS,
     RING_LABELS,
-    LINE_NAMES,
+    STATIONS_CSV,
     TAXONOMY_SYSTEM,
 )
+from pipeline.zurich.gemeinden import city_geometry  # noqa: E402
 
-# TODO: route_id -> (shape_id, colour). shape_id is each line's single most-used
-# trip shape (count trips per shape for the route and take the mode; if that
-# shape lies outside the city, pick the one that reaches it and say why).
-# Colours: the agency's own where unambiguous, else your own palette, distinct
-# from the business-category colours.
-LINE_SHAPES = {}
-# Per-line label end override: "start" or "end" forces which end of a line its
-# label goes at; the default (automatic) picks the tail end farthest from the
-# other lines, on the stretch inside the city - override only if a rendered map
-# shows that landing badly.
+SYSTEM = "VBZ"
+
+# Per-line label end override: "start" or "end". Default picks the tail
+# farthest from the other lines, on the stretch inside the Stadt.
 LINE_LABEL_ENDS = {}
 
-LINE_SPECS = {
-    key: (shape_id, color, LINE_NAMES[key], LINE_LABEL_ENDS.get(key))
-    for key, (shape_id, color) in LINE_SHAPES.items()
-}
 
-
-def city_geometry():
-    """The city's limits, so each line's label goes at the tail of the stretch
-    inside the city (lines that run on past it)."""
-    boundary = gpd.read_file(CITY_BOUNDARY_GEOJSON)
-    boundary = boundary.set_crs(CRS_GEOGRAPHIC) if boundary.crs is None else boundary.to_crs(CRS_GEOGRAPHIC)
-    # TODO: if the layer holds several cities, select this city's record first.
-    return boundary.geometry.union_all()
+def check_osm_colours():
+    """Every drawn ref's relations still carry the colour config records."""
+    rels = [e for e in json.loads(OSM_ROUTES_JSON.read_text(encoding="utf-8"))["elements"]
+            if e["type"] == "relation" and e.get("tags", {}).get("route") == "tram"]
+    for ref in DRAWN_LINES:
+        seen = {(r["tags"].get("colour") or "").upper() for r in rels if r["tags"].get("ref") == ref}
+        if seen != {OSM_COLOURS[ref].upper()}:
+            sys.exit(f"tram {ref}: OSM's colour is now {sorted(seen)}, config records "
+                     f"{OSM_COLOURS[ref]} - re-take the colour decision")
 
 
 def main():
-    if not LINE_SHAPES:
-        sys.exit("Fill in LINE_SHAPES (and LINE_NAMES in config.py) first: every drawn line needs a label and a legend entry.")
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV):
+    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, OSM_ROUTES_JSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first.")
+    check_osm_colours()
+
+    line_specs = {ref: (ref, LINE_COLOURS[ref], LINE_NAMES[ref], LINE_LABEL_ENDS.get(ref))
+                  for ref in DRAWN_LINES}
+    lines = load_osm_line_shapes(OSM_ROUTES_JSON, line_specs, SYSTEM)
+    missing = sorted(set(DRAWN_LINES) - set(lines))
+    if missing:
+        sys.exit(f"no geometry for {missing} - a line this project draws must come "
+                 f"from real geometry")
+
+    stations = pd.read_csv(STATIONS_CSV)
+    businesses = pd.read_csv(BUSINESSES_CLEAN_CSV)
+    print(f"\n  {len(stations):,} stations, {len(businesses):,} storefronts")
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Zurich VBZ Business Density Heatmap",
+        map_title="Zurich VBZ Tram Business Density Heatmap",
         city_name="Zurich",
-        system_name="VBZ",
-        stations=pd.read_csv(STATIONS_CSV),
-        businesses=pd.read_csv(BUSINESSES_CLEAN_CSV),
+        system_name=SYSTEM,
+        stations=stations,
+        businesses=businesses,
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, LINE_SPECS, "VBZ"),
+        lines=lines,
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,
@@ -87,7 +94,7 @@ def main():
 
 if __name__ == "__main__":
     # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters. UTF-8 regardless.
+    # some letters. UTF-8 regardless.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

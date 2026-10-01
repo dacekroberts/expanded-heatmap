@@ -1,0 +1,16 @@
+station,lines,reason,latitude,longitude
+Bahnhof Balsberg,10,"in Kloten (BFS 62), outside the Stadt Zürich",47.44157485,8.56847755
+Fracht,10,"in Kloten (BFS 62), outside the Stadt Zürich",47.452101400000004,8.57102535
+Zürich Flughafen,10,"in Kloten (BFS 62), outside the Stadt Zürich",47.450166499999995,8.5641115
+Bahnhof Glattbrugg,10,"in Opfikon (BFS 66), outside the Stadt Zürich",47.4305492,8.5593648
+Fernsehstudio,50,"in Opfikon (BFS 66), outside the Stadt Zürich",47.41823225,8.5616459
+Glattpark,10/50,"in Opfikon (BFS 66), outside the Stadt Zürich",47.420457325,8.557027425000001
+Lindberghplatz,10,"in Opfikon (BFS 66), outside the Stadt Zürich",47.4252178,8.560499799999999
+Unterriet,10,"in Opfikon (BFS 66), outside the Stadt Zürich",47.43803245,8.562716850000001
+Bäuler,10,"in Rümlang (BFS 97), outside the Stadt Zürich",47.43502345,8.55750205
+Gasometerbrücke,2,"in Schlieren (BFS 247), outside the Stadt Zürich",47.3977046,8.46022005
+Geissweid,2,"in Schlieren (BFS 247), outside the Stadt Zürich",47.3980565,8.44456825
+Mülligen,2,"in Schlieren (BFS 247), outside the Stadt Zürich",47.39597055,8.46675235
+Schlieren Zentrum/Bahnhof,2,"in Schlieren (BFS 247), outside the Stadt Zürich",47.397839000000005,8.44849255
+Wagonsfabrik,2,"in Schlieren (BFS 247), outside the Stadt Zürich",47.39852955,8.4542445
+Rehalp,4,"in Zollikon (BFS 161), outside the Stadt Zürich",47.3509155,8.5830172

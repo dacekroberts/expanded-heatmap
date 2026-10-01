@@ -4,6 +4,199 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Zurich built on tram-build: VBZ's trams, and the city's food and alcohol licences
+
+- **Zurich, the project's first Swiss city, built on Stockholm's template** (one city
+  register, the city only), Seoul's and Gyeonggi's precedent for partial retail, and the
+  shared `osm_tram.py`. 180 stations, 3,363 storefronts (2,335 Food service, 1,028
+  Licensed shops), 3,099 of them (92.1%) in a ring; the page says "about nine storefronts
+  in ten".
+- **`add-country` for Switzerland, kept to what one build established**:
+  `docs/data_sources/switzerland.md`. Commerce is licensed and published municipally and
+  by trade; the Stadt's CKAN geodata downloads are an Angular page, so the WFS is the
+  route; CC0; LV95 (EPSG:2056) is the national grid and the register's own. No other Swiss
+  city was probed.
+- **The register: `Gastwirtschaftsbetriebe`, 3,487 rows through the WFS, every one
+  `Offen` and `jahr` 2026** (the publisher: only open premises are published), last
+  updated 2026-09-28. Every row has an LV95 point; the WFS's WGS84 point agrees to
+  0.07 m at most, and step 2 gates it. All 3,363 storefronts lie in the Stadt. The second
+  CKAN hit (`sid_wipo_...od1111`) is the same register's year-end counts, not a source.
+- **The taxonomy: `pipeline/taxonomies/zurich_gastwirtschaft.py`**, keyed on
+  `betriebsart`, 14 values each with a home (the publisher documents 11), an unknown one
+  raising; a continuity column (handed over).
+  - Food service: Gastwirtschaft, Nebenwirtschaft, Kleinwirtschaft, Take Away, the one
+    seasonal outdoor restaurant, and **Dancing / Disco (10) - FLAGGED: the brief's screen
+    had dance halls out (food 2,325); the standing rule keeps nightclubs not named as
+    adult (category_rules R5), so the build follows the rule (2,335).** Owner to confirm.
+  - Licensed shops (the Retail bucket, partial): Kleinverkaufsstelle 954, Kiosk 53,
+    Tankstelle 21 (owner, 2026-09-30).
+  - Out: Ausgabestelle 56 (the city files caterers, kiosks with seating and food trucks
+    there; R1), Kantine / Mensa 31 (R1), Patentbefreit 25 (a catch-all, read by name),
+    Cabaret / Nachtclub 6 (R3), Veranstaltungsraum 6.
+  - **Non-storefront share: 3.6% out by type, plus about 79 institutional kitchens
+    licensed as ordinary restaurants (3.4% of food; care homes, staff restaurants,
+    hospitals, clubhouses, by a name pattern with a few false hits such as "Noerd
+    Kantine").** Göteborg's equivalent was 26.5%. Not filtered: Stockholm's name rule was
+    the owner's call on 13% of its register; here the page says they remain. **FLAGGED for
+    the owner.** A few Kleinverkaufsstelle licences are offices and online sellers; the
+    page says so.
+- **Names.** The dot shows `betriebsname` and the licence type in English with the
+  register's word ("Shop licensed to sell alcohol (Kleinverkaufsstelle)"). 12 trade names
+  read by eye as a person's own show the address (`config.PERSON_NAMED`, Kansas City's and
+  New Orleans's rule); kiosk signs with a surname stay. Privacy verdict: publishable
+  (the read in place of `check_personal_exposure.py`, which needs the registry entry).
+- **The trams.** 36 `route=tram` relations kept (refs 2-11, 13-15, 17, 50, 51), eight
+  judged out in `NOT_DRAWN`: tram 12 (1 of 18 stops in the Stadt; the brief's screen said
+  2; still a stub, call 19), tram 20 (4 of 26, call 25; Bahnhof Altstetten and Seidelhof
+  are on no drawn line and get no ring) and the Forchbahn S18 (call 18; its four city
+  stops are all tram stops).
+  - **Trams 50 and 51 drawn - FLAGGED.** They are VBZ's construction lines for the 2026
+    timetable (14 Dec 2025 - 12 Dec 2026, Bahnhofquai/HB rebuilt): they replace the
+    northern halves of 4, 11, 13 and 14 and are the only trams at their outer stops (31
+    and 27 stops in the city). Call 2's floor: Transit's published VBZ timetable shows
+    trips every 15 minutes (a secondary source; VBZ's own pages read did not state a
+    headway). Dropping them would leave Seebach, Auzelg, Frankental and Altstetten Nord
+    unringed. **The map is a 2026 map: when the Bahnhofquai reopens, 4, 11, 13 and 14
+    change back and Zurich must be rebuilt** (a PLAN item for December 2026; step 1 stops
+    once OSM drops refs 50 and 51).
+  - 417 stop positions -> 195 stations; Waffenplatzstrasse's two directions sit 233 m
+    apart under one stop code (uic_ref 8591415), so the collapse limit is 240 m for this
+    city. 180 in the Stadt, 15 outside (trams 2, 4, 10, 50: Schlieren, Zollikon, Opfikon,
+    Kloten, Rümlang), drawn and listed. The variant runs (9's peak run to Triemli, 8's
+    Sunday run to the Zoo) add no stop of their own.
+  - **Median gap 282 m** (brief 283), halved rings, gated at 240-330 m.
+  - **Colours - FLAGGED, outside OSM's.** VBZ gives 2/15, 3/11 and 4/9 one colour each
+    and 7/50/51 black; two lines with one colour are refused, so the lower number keeps
+    VBZ's and the other moves (Den Haag's "one moves"): 15 `#F07A86`, 11 `#005A25`, 9
+    `#8A4FA8`, 50 `#4D4D4D`, 51 `#858585`. Tram 10's `#CE1F75` was Delta-E 11.9 from the
+    Food service pins and is darkened to `#8E1450` (20.2; Seoul's line 8). Tram 7's
+    `#000000` raises in `linecolour.dark_label` (a colour darker than the dark halo is
+    moved darker), so it is drawn `#262626` (London drew the Northern's black as a grey).
+    Step 3 asserts OSM still records VBZ's colours.
+- **CRS: EPSG:2056 (LV95)**, overriding the scaffold's UTM 32N (the tram-city skill).
+  At integration, 2056 was added to `check_provenance.py`'s NATIONAL_GRIDS (5.9-10.5 E)
+  and the brief's `zurich-projected-crs` check now carries `crs` EPSG:2056 (its derived
+  UTM zone claim is unchanged and still true).
+- **Page.** The template, filled from the build. **Sentences outside the template,
+  FLAGGED**: the colour clause; "Trams 50 and 51 run only while the Bahnhofquai stop is
+  rebuilt ..."; the not-drawn sentence (buses, the S-Bahn, the Forchbahn and why; trams 12
+  and 20 and the two unringed stops); the person-name clause; the "Read the density"
+  caveats (institutional kitchens, offices and online sellers, shared addresses). No
+  frequency sentence: no operator timetable was read for one.
+- **Licence read: PERMITTED (CC0)**; no notice required; the caption credits "Stadt
+  Zürich" as the city recommends. The OSM rail notice gains a Zurich clause.
+- **Rejected:** keeping the brief's food count by leaving clubs out (breaks R5); a
+  name filter on institutional kitchens without the owner (Stockholm's was an owner
+  call); leaving 50 and 51 out (would unring the city's north and west ends for the
+  whole of 2026); drawing duplicate colours (refused at render).
+
+### 2026-09-30 - Göteborg built on tram-build: trams 1-13, and the city's food register by its own types
+
+- **Göteborg built on Stockholm's template and `osm_tram.py`.** 127 stations,
+  2,987 storefronts (2,110 Food service, 877 Food shops), and 2,255 of them
+  (75.5%) in a ring. The page says "about three storefronts in four".
+  `coverage` is `narrowed` on tram-build, as Stockholm's is here; the
+  owner's `one_bucket` for "Food premises only" (2026-09-30) is on
+  origin/macro-legend, whose checks it needs, and Göteborg moves with
+  Stockholm when that branch lands (the coordinator, at integration: the
+  agent wrote `one_bucket`, which both of this branch's checks refuse).
+- **The bucket question raised in the brief needed no new call.** The brief's
+  refreshed table and the tram-city skill settle it: food shops count as food.
+  The register holds food premises only.
+- **The trams.** 26 relations, two per line except 13. Lisebergslinjen
+  (444922, heritage) is not drawn.
+  - **305 stop positions collapse to 132 stations**; 127 are in Göteborgs Stad
+    (OSM 935611, 1,030.4 km² with the sea).
+  - **4 and 12 drawn to their ends** (owner, call 21). The stub test passes: 4
+    keeps 15 of 20 (75%), 12 keeps 13 of 18 (72%). Their 5 Mölndal stops are
+    listed, not ringed. Step 1 re-runs the test each build.
+  - **Median gap 390 m** (brief 378), so the rings are halved, gated at
+    320-430 m.
+  - **Colours: OSM's.** Where a line's two relations differ (5, 6, 7, 8, 10),
+    the drawn relation's colour is taken. Where it is a CSS word (4 "green", 11
+    "black"), the other's hex.
+  - **Line 4 lightened** to `#00BB70`. OSM's `#00A261` was 8.8 from the
+    Personal services pins; +0.05 lightness gives 13.3 (Prague's precedent for
+    the same green). Rejected: darkening, for Lille's dark-basemap reason.
+  - **Line 1 is OSM's white.** Its label passes on a dark halo (18.7:1), so it
+    is kept.
+  - Labels "Tram 1" to "Tram 13", Riga's form (Västtrafik's own is "Spårvagn
+    1").
+- **The register: Livsmedelsverksamheter's CSV** (CC0 on the distribution
+  node), 5,066 rows, no dates.
+  - **`sweden_livsmedel.py` is unchanged.** Göteborg's `typ` is its own local
+    vocabulary (47 values), not Stockholm's national groups. So step 2 maps the
+    10 storefront types to the module's two groups and excludes the other 37
+    with a reason (1,819 rows). A new type stops the step. The pin shows the
+    national group.
+  - **Out, by type, with some public premises among them**:
+    - "RESTAURANG - mottagning" (13): 11 are staff restaurants;
+    - FRUKOSTSERVERING (26): hotel breakfast rooms;
+    - FARTYG (20): ships, 3 cafés among them;
+    - KAFFEROSTERI (8): production;
+    - APOTEK (61): `category_rules.md`.
+  - **Bakeries and ice-cream makers with a shop are Food shops**;
+    ice-cream kiosks are Food service.
+  - **Blank `typ` (274)**: classified by the module's name rules (owner, call
+    20). 92 kept, 182 dropped. "24SJU" (2) is dropped because the module does
+    not know it. A Göteborg-only rule would not survive step 3, which
+    re-classifies from the name.
+  - **The module's name test drops 47 typed premises.** Among them are public
+    cafés at two hospitals, a children's hospital, Trädgårdsföreningen and a
+    gym. That is Stockholm's rule, and changing it moves Stockholm.
+  - **Vending machines out by name (2)**: category rule.
+- **The fallback point: 29 storefronts (1.0%) not placed.** The distribution's
+  description says premises with no correct address, or mobile, are placed at
+  the Environment Administration's address point.
+  - 135 register rows sit within 16.5 m of the AMBULERANDE rows' median, then
+    none within 42 m.
+  - Florida Pizzeria's own address is Väderlekstorget 6.
+  - New Orleans's 0,0 precedent. Rejected: keeping them, which would pile 29
+    restaurants and shops on one Majorna street corner.
+- **Privacy verdict: publishable.** The register names premises. 13 of the 738
+  person-shaped names read as a person's own and show their street address
+  (Kansas City's rule). No placed storefront is at an apartment.
+- **No notice for the register** (CC0). The OSM rail notice names Göteborg's
+  lines and the kommun boundaries.
+- **Page: the tram-city template with Stockholm's business wording.** No
+  frequency sentence (no timetable read). PROPOSALS outside the template,
+  flagged for review time:
+  - "in OpenStreetMap's own colours, line 4's made a little lighter so it
+    stands apart from the dots";
+  - "Buses, ferries and commuter trains are not drawn, and neither is
+    Lisebergslinjen, the heritage tram line.";
+  - the Mölndal sentence in the plural ("Trams 4 and 12 run on into Mölndal,
+    so their 5 stops ... The lines are still drawn to their ends");
+  - the business-source paragraph, including "Where a premises is registered
+    under a person's name alone, its dot shows the street address instead" and
+    "Premises the register has no correct address for are placed at the
+    Administration's own address, so they are not shown: about one storefront
+    in a hundred";
+  - the one-bucket paragraph's list of what is left out, and "It holds food
+    premises only". Stockholm's "No open register of other shops ... covers"
+    was not reused: no second-source probe has been run for Göteborg
+    (reprobe-city);
+  - the register caveat: "A food registration is not always a food business:
+    gyms, cinemas, bingo halls and general stores that sell some food are
+    registered as cafés or food shops and are counted, and a few staff
+    restaurants registered under a company name remain";
+  - the title "Göteborg: food businesses around tram stops" (Stockholm's
+    form).
+- **Pending for review time**:
+  - `coverage`: flip Göteborg to `one_bucket` with Stockholm when
+    macro-legend lands;
+  - `sweden_livsmedel.layer_label` would make both Swedish layer menus say
+    "Food shops", and `24sju`/vending words in its name rules; each moves
+    Stockholm, so drift-check Stockholm if applied.
+- **Macro labels, settled with Zurich's and Den Haag's** (the coordinator):
+  a grid search over the six crowded Europe labels, PROBLEMS 0 at 375, 768
+  and 1200. Göteborg stays above its dot (the scaffold's value); Oslo moves
+  left of its dot (below it met Göteborg's, and no Göteborg offset cleared
+  both Oslo and Copenhagen); Prague moves left and up (`("end", -11, -8)`;
+  above, it met Den Haag's); Milan and Zurich go right of their dots
+  (Milan's pill covered Zurich's marker); Den Haag keeps `("start", 11, 0)`.
+  The checker models the theme button that once hid Oslo's label.
+
 ### 2026-09-30 - Den Haag built on tram-build: HTM's 14 tram lines, the city's permit layer and the BAG
 
 - **Den Haag built on Rotterdam's template and `osm_tram.py`, with Amsterdam's

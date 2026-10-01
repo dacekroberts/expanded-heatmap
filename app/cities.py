@@ -670,13 +670,11 @@ CITIES = [
         "region": "Europe",
         "country": "Italy",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Right of the dot: above it, Milan's pill covered Zurich's marker.
+        "label_offset": ("start", 11, 0),
     },
     {
         "name": "Paris",
@@ -866,8 +864,11 @@ CITIES = [
         # x 242-281, y 18-36; button x 180-291, y 10-42). The checker does not
         # model that button, so its PROBLEMS 0 could not see this. Below the
         # dot the label clears the button's bottom edge. Oslo also changed
-        # the frame itself - see Paris's entry.
-        "label_offset": ("middle", 0, 22),
+        # the frame itself - see Paris's entry. Moved LEFT of the dot
+        # (2026-09-30, tram kit): below it, Oslo's label met Göteborg's, and
+        # no Göteborg offset cleared both Oslo and Copenhagen. The checker
+        # now models the theme button (its BUTTONS), so PROBLEMS 0 covers it.
+        "label_offset": ("end", -11, 0),
     },
     {
         "name": "Copenhagen",
@@ -909,8 +910,10 @@ CITIES = [
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured at 47.3 px in the app's own document (2026-09-24), and
         # check_macro_labels.py passes every region at 375, 768 and 1200 with
-        # PROBLEMS 0.
-        "label_offset": ("middle", 0, -22),
+        # PROBLEMS 0. Moved left of the dot and up (2026-09-30, tram kit):
+        # above it, Prague's label met Den Haag's once Europe's frame took in
+        # the tram cities.
+        "label_offset": ("end", -11, -8),
     },
     {
         "name": "Amsterdam",
@@ -2197,16 +2200,24 @@ CITIES = [
         "lat": 57.7089,
         "lon": 11.9746,
         "page": "pages/137_Goteborg_Heatmap.py",
-        "blurb": "Göteborgs Spårvägar (TODO: list the lines)",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (99.0%)",
+        "data_age": "No dates in the register; fetched 2026-10-01",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Göteborgs Spårvägar: trams 1 to 13",
         "region": "Europe",
         "country": "Sweden",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Above the dot, the scaffold's value, unmoved: the frame's
+        # tightest spot, between Oslo's label and Copenhagen's.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2227,12 +2238,10 @@ CITIES = [
         "region": "Europe",
         "country": "Netherlands",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Right of the dot, the provisional value, unmoved.
         "label_offset": ("start", 11, 0),
     },
     {
@@ -2240,17 +2249,24 @@ CITIES = [
         "lat": 47.3769,
         "lon": 8.5417,
         "page": "pages/139_Zurich_Heatmap.py",
-        "blurb": "VBZ (TODO: list the lines)",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Register kept current, last updated 2026-09-28; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "Two",
+        "blurb": "VBZ trams 2–11, 13–15, 17, 50 and 51",
         "region": "Europe",
         "country": "Switzerland",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
+        # Prague, Göteborg, Den Haag and Zurich together, with every
+        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
+        # 768 and 1200. Right of the dot: above it, it met Milan's and Lille's labels.
+        "label_offset": ("start", 11, 0),
     },
 ]
 

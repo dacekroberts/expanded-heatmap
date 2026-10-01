@@ -2095,6 +2095,36 @@ call 26, for tram 1), listed in `outputs/den_haag/excluded_stations.csv`. Not dr
 RandstadRail E, RET's metro line, a stub with 4 of its 23 stops in the city (owner, call 22);
 the 9S short working; buses; NS trains.
 
+### Zurich - the city's food-and-drink licences, and its shops licensed to sell alcohol
+
+**Left out of the Stadt Zürich's Gastwirtschaftsbetriebe** (3,487 rows, every one open;
+`pipeline/taxonomies/zurich_gastwirtschaft.py`): food stands, caterers and food trucks
+(Ausgabestelle, 56); staff and institutional canteens (Kantine / Mensa, 31); premises
+exempt from the licence (Patentbefreit, 25: staff restaurants, care-home and school
+kitchens, a guest house, a beauty studio); cabarets (6); rooms hired for events (6).
+**Kept**: clubs and discos (10), as Food service (nightclubs not named as adult,
+docs/category_rules.md).
+
+**Missing, not excluded**: the register licenses food and drink, and the sale of
+alcohol, so the shops on this map are only those licensed to sell alcohol (1,028:
+supermarkets, wine shops, kiosks, petrol-station shops). Other shops and every personal
+service are absent; the page says so. About 79 of the 2,335 food licences are kitchens
+in care homes, staff restaurants, hospitals and clubhouses, licensed as ordinary
+restaurants; they remain, and the page says so.
+
+**Shown, but not named**: 12 storefronts show their street address instead of a trade
+name that is a person's own name (`config.PERSON_NAMED`, read by eye).
+
+**Stations.** Every stop of VBZ trams 2–11, 13–15, 17, 50 and 51 in the Stadt (180).
+Trams 2, 4, 10 and 50 run on into Schlieren, Zollikon, Opfikon, Kloten and Rümlang: their
+15 stops there are drawn with the lines but not ringed, listed in
+`outputs/zurich/excluded_stations.csv`. Not drawn: trams 12 (Glattalbahn, 1 of 18 stops in
+the city) and 20 (Limmattalbahn, 4 of 26), as stubs (owner, calls 19 and 25) - two of
+tram 20's city stops, Bahnhof Altstetten and Seidelhof, are on no drawn line; the
+Forchbahn S18 (owner, call 18), whose four city stops are all tram stops; the S-Bahn;
+buses. Trams 50 and 51 run only until 12 December 2026, while the Bahnhofquai stop is
+rebuilt.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of
@@ -2839,6 +2869,51 @@ boundary: 82 stations inside it.
   2026-09-28); with pendeltåg and the local railways, the brief measured 92.3%
   of storefronts in a ring against 88.7% without.
 - The Yellow line (Gul linje), under construction, is not drawn.
+
+### Göteborg - the city's food register by its own types, and the Mölndal stops
+
+**Only food is on this map.** Göteborgs Stad's register of food businesses
+(Livsmedelsverksamheter) lists the premises its food control has registered; it
+holds no other trade, so clothes shops, hairdressers and the like are missing
+rather than excluded. Food shops (from kiosks to supermarkets) are a category of
+their own.
+
+**No dates.** The register carries no date of any kind: it lists the premises
+active on the day it is fetched.
+
+**Excluded by type** - 1,819 of the register's 5,066 premises, whose own type is
+not a storefront: institutional kitchens in preschools, schools, care homes, day
+centres, hospitals and youth centres (1,021); wholesale (133); mobile food (114);
+food production, breweries and coffee roasters (97); head offices (72);
+warehouses (63); pharmacies (61); food brokers (55); transport (48); delivery
+kitchens and caterers (39); animal-product establishments (29); hotel breakfast
+rooms (26); ships and ferries (20); food-contact materials makers (18);
+restaurants that only receive food cooked elsewhere, nearly all staff
+restaurants (13); the base premises of food trucks and caterers (10).
+
+**Excluded by name** - 47 restaurant-, café- or shop-typed premises that
+Stockholm's name test reads as not a storefront: churches and parish halls (13),
+schools, colleges and youth centres (12), caterers (6), prisons (3), staff
+restaurants (3), hospital cafés (3), associations (3), mobile units (2), a gym
+café (1) and a pharmacy (1). Two vending-machine operators.
+
+**Untyped premises** - 274 premises have no type (the dataset's JSON copy drops
+them). 90 are shown (owner, 2026-09-30): those whose name identifies a
+restaurant or a food shop, marked "classified from its name". 182 whose name
+says neither are left out.
+
+**Not placed** - 29 storefronts (1.0%) the register places at the Environment
+Administration's own address point, because it has no correct address for them.
+
+**Named only as a person** - 13 premises show their street address instead of
+the name.
+
+**Stations.** Trams 1-13, every stop in Göteborgs Stad (127). Trams 4 and 12
+run on into Mölndal: their five stops there (Krokslätts Fabriker, Krokslätts
+torg, Lackarebäck, Mölndals Innerstad, Mölndals sjukhus) are drawn with the
+lines but not ringed (owner, call 21), listed in
+`outputs/goteborg/excluded_stations.csv`. Not drawn: Lisebergslinjen, the
+heritage line; buses, ferries and commuter trains.
 
 ### Bucharest - the sanitary-veterinary registers, food only, placed by address
 

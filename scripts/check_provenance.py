@@ -400,6 +400,10 @@ NATIONAL_GRIDS = {
     # hard-codes 2154 works in Paris and puts every pin in the sea in
     # Fort-de-France - without raising. These bounds are what raises.
     2154: ("Lambert-93", -5.5, 10.0),                   # France (métropole)
+    # Switzerland: the Stadt Zürich's Gastwirtschaftsbetriebe ships its points
+    # in LV95 (`ekoord`/`nkoord`, e.g. 2680564 / 1252613), swisstopo's national
+    # grid; OSM's Gemeinde boundaries carry swissBOUNDARIES3D. Zurich, 2026-09-30.
+    2056: ("CH1903+ / LV95", 5.9, 10.5),                # Switzerland
 }
 
 
