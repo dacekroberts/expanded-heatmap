@@ -11,7 +11,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from cities import MAP_ONLY_NAV, SWITCHER_ORDER
+from cities import CITIES, MAP_ONLY_NAV, SWITCHER_ORDER
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 # pipeline/theme.py imports nothing, so it is safe for the lean deploy venv
@@ -376,6 +376,15 @@ def set_base_font():
             display: block;
             overflow-x: auto;
             max-width: 100%;
+        }
+
+        /* A city page's subtitle (render_city_title), set close under the
+        city's name and quieter than it. */
+        .st-key-city-title h1 { padding-bottom: 0.1rem; }
+        .st-key-city-title p.city-subtitle {
+            margin: 0;
+            font-size: 1.05rem;
+            opacity: 0.75;
         }
         </style>
         """,
@@ -1884,3 +1893,84 @@ def render_site_notices(show_links: bool = True):
         "stay visible. The overview map's basemap is \u00a9 CARTO."
     )
     st.caption(_UNSETTLED_TERMS)
+
+
+# --- The city page's own pieces (format set by the owner, 2026-10-01) -------
+#
+# Order on every city page: render_city_title, then the map (st.iframe at
+# height 650; scripts/check_map_attribution.js depends on that height), then
+# the date caption and the city's own credits, then the page's bullets,
+# render_map_help, render_country_links, and render_site_notices last.
+# Nothing renders between the title block and the map, so a reader arriving
+# from the macro map sees the map without scrolling.
+
+# Title plus subtitle rather than one long title, which wrapped badly on a
+# phone for names like "Kitchener–Waterloo (Regional)" (owner, 2026-10-01).
+CITY_SUBTITLE = "Transit-centered commercial density heatmap"
+
+
+def city_entry(name):
+    """The city's entry in cities.CITIES; `name` is the same string the page
+    passes to render_city_nav."""
+    for city in CITIES:
+        if city["name"] == name:
+            return city
+    raise KeyError(f"{name!r} is not a name in cities.CITIES")
+
+
+def render_city_title(name):
+    """The city's name, centred, with CITY_SUBTITLE beneath it. Also trims
+    the empty space above it on city pages only, so more of the map shows on
+    the first screen of a phone: the top padding (6rem by default), and the
+    16 px gap each invisible element above the title (the style blocks, the
+    hidden city links) adds, 64 px measured at 375 px."""
+    st.markdown("<style>[data-testid='stMainBlockContainer'] "
+                "{ padding-top: 3.5rem !important; }"
+                "[data-testid='stElementContainer']:has(style),"
+                "div:has(> .st-key-map-only-nav) { display: none; }</style>",
+                unsafe_allow_html=True)
+    with st.container(key="city-title"):
+        st.title(name, anchor=False, text_alignment="center")
+        st.markdown(f'<p class="city-subtitle">{CITY_SUBTITLE}</p>',
+                    unsafe_allow_html=True, text_alignment="center")
+
+
+def render_data_age(name):
+    """The date caption under the map for a page that reads no provenance
+    file: the city's data_age from cities.py, the text the Overview's city
+    list shows."""
+    st.caption(f"Data: {city_entry(name)['data_age']}.")
+
+
+def render_map_help(layers="business categories"):
+    """How to use the map, the same on every city page: pipeline/map_common.py
+    draws every map with the same controls. `layers` is the page's own name
+    for its business layers ("business layer" on a one-bucket map, "three
+    business categories (Retail, Food service and Personal services)")."""
+    st.markdown(
+        "**Using the map**\n\n"
+        f"- Concentric ring boundaries and the {layers} are "
+        "toggleable via the layer control in the top left.\n"
+        "- When enabled, business density will display as numbered circles "
+        "summing areas when zoomed out. Zooming in will show individual dots; "
+        "hover over those to see further details.\n"
+        "- Top right: a **Cities** menu and a **Global View** button for "
+        "moving between maps, and a light/dark switch. The map opens in "
+        "whichever mode the page is using; once you pick one, it carries "
+        "across the other city maps.\n"
+        "- The heat layer is illustrative. Leaflet applies a visual blur "
+        "rather than a statistical density estimate, so read the colour as "
+        "“roughly where things cluster.”"
+    )
+
+
+def render_country_links(name):
+    """Links to the two reference pages, opened on the city's country. The
+    deep-link contract with those pages: ?country=<the city's country value
+    in cities.py>, which Streamlit URL-encodes."""
+    country = city_entry(name)["country"]
+    with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
+        st.page_link(EXCLUSIONS_PAGE, query_params={"country": country},
+                     label=f"What is counted, and what is not: {country}")
+        st.page_link(ABOUT_DATA_PAGE, query_params={"country": country},
+                     label=f"Where this data comes from: {country}")
