@@ -745,6 +745,7 @@ _NOTICES = [
      "Ottawa's O-Train Lines 1, 2 and 4 and their stations, "
      "Minneapolis's METRO Blue and Green Lines and their stations, "
      "Pittsburgh's PRT Red, Blue and Silver Lines and their stations, "
+     "Dallas's DART Light Rail Red, Blue, Green and Orange Lines and their stations, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "Palma's Metro M1 and its stations, and the municipal boundaries used to "
      "select them, "

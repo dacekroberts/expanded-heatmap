@@ -513,6 +513,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Houston | METRORail light rail, Red, Green and Purple | — | OpenStreetMap route relations (METRO's data agreement kept out); gate 3 exact | City (TIGER) | 0 / 0 |
 | Minneapolis | METRO Blue and Green light rail | Northstar commuter rail; the Como-Harriet heritage streetcar (a museum ride) | OpenStreetMap route relations (Metro Transit's GTFS licence unread); gate 3 exact on 19 and 23 | City (TIGER) | 22 / 0 |
 | Pittsburgh | PRT light rail (the T), Red, Blue and Silver, with the downtown subway | Buses, the inclines | OpenStreetMap route relations (PRT's GTFS licence unread); gate 3 exact on 31, 24 and 31 | City (TIGER); halved rings | 31 / 0 |
+| Dallas | DART Light Rail, Red, Blue, Green and Orange | Dallas Streetcar, M-Line trolley (owner); Silver Line and TRE (commuter rail) | OpenStreetMap route relations (Houston's route); gate 3 exact | City (TIGER) | 20 / 0 |
 | **Canada** | | | | | |
 | Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS | Vancouver + Surrey | 30 / 0 |
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
@@ -649,6 +650,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Houston | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 1,077 / 1,052 / 94 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | Minneapolis | Food hygiene register | City of Minneapolis Food Inspections, one row per violation | Its own FacilityCategory, plus a name test | 115 / 526 / — | No Personal services; Retail = food shops only ("Grocery and food shops") |
 | Pittsburgh | Food hygiene register | Allegheny County Health Department's Geocoded Food Facilities (as of 2025), one row per facility | Its own category_cd, plus a name test | 48 / 268 / — | No Personal services; Retail = food shops only ("Food-selling shops") |
+| Dallas | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 2,501 / 1,492 / 204 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
@@ -782,6 +784,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Houston | Address join to the City's Site Addresses (83.9%) + Census geocoder (12.4%); 3.7% unplaced, 608 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments, trailers and a person's permit at a Residential point; address shown for a person's permit |
 | Minneapolis | Register coordinates (97.8%); 42 not placed | Food only; 3 uncategorised facilities left out | Institutions, caterers, mobile units, stalls, food shelves and wholesale by type; contract and institutional kitchens, vending, hotels, venues, pharmacies and named cabarets by name; a grocer's second licence for one counter folded |
 | Pittsburgh | Register coordinates (98.7%); 22 not placed, 3 outside the city | Food only; a list dated 2025-08-27 | Institutional, mobile, school, processing, boarding, commissary, caterer, social-club and banquet types; venue stands, workplace micro-markets, hospital and campus outlets, hotel back of house, pharmacies, dark stores and named adult venues by name |
+| Dallas | Address join to the City's Address Points (89.8%) + Census geocoder (7.9%); 2.3% unplaced, 770 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments and trailers; address shown for a person's permit (Houston's Residential-point test cannot run: the address type codes are undocumented) |
 | **Canada** | | | |
 | Vancouver (Regional) | Source coordinates | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
@@ -910,6 +913,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Houston | Active permits (2026-09-29) | B | 0.6 mi | Yes | 7% | Name; address for a person's permit |
 | Minneapolis | Inspected within two years of 2026-09-30 (2026-09-30) | B | 0.6 mi | Yes | 36% | Trade name |
 | Pittsburgh | Active on the County's list of 2025-08-27 (2026-09-30) | B | 0.3 mi | Yes | 18% | Trade name |
+| Dallas | Active permits (2026-09-30) | B | 0.6 mi | Yes | 26% | Name; address for a person's permit |
 | **Canada** | | | | | | |
 | Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |

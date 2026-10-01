@@ -107,9 +107,13 @@ CITIES = [
         "record_kind": "Tax register",
         "categories": "All three",
         "blurb": "MTS Trolley (Blue, Orange, Green, Copper, Silver lines)",
-        # East of its dot: it sits south-east of Los Angeles, so the two
-        # names split left/below rather than colliding.
-        "label_offset": ("start", 16, 0),
+        # WEST of its dot since Dallas (2026-09-30): east of it, the pill ran
+        # across Dallas's marker in the landing view. It still clears Los
+        # Angeles's pill below; check_macro_labels.py (python -B) passes end
+        # -16 at dy -8 to 0 with Dallas at ("end", -10, -3), PROBLEMS 0 at 375,
+        # 768 and 1200 on the combined tree. (Was ("start", 16, 0): east of its
+        # dot, splitting from Los Angeles left/below.)
+        "label_offset": ("end", -16, -2),
     },
     {
         "name": "San Francisco",
@@ -2744,6 +2748,29 @@ CITIES = [
         # and 1200, alone and on the combined tree with Namyangju and Ansan (width
         # 68.6 px, measured 2026-09-30).
         "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Dallas",
+        "lat": 32.7767,
+        "lon": -96.797,
+        "page": "pages/86_Dallas_Heatmap.py",
+        "coverage": "narrowed",
+        "mode": "light_rail",
+        "placement": "Joined by address (89.8%) and geocoded (7.9%)",
+        "data_age": "Active permits; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Tax register",
+        "categories": "Personal services thin",
+        "blurb": "DART Light Rail: the Red, Blue, Green and Orange Lines",
+        "region": "United States East",
+        "country": "United States",
+        "in_default_view": True,
+        # LEFT OF THE DOT, in a narrow window: Dallas lands between San Diego's,
+        # Los Angeles's and Houston's pills and under Chicago's and Minneapolis's in
+        # the landing view, so San Diego's label moved west (its entry). check_macro_labels.py
+        # (python -B) passes end -10 at dy -6 to 0, PROBLEMS 0 at 375, 768 and 1200 on
+        # the combined tree (width 40.1 px, measured 2026-09-30).
+        "label_offset": ("end", -10, -3),
     },
 ]
 

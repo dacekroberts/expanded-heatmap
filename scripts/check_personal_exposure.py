@@ -475,6 +475,13 @@ REGISTRIES = {
     "houston": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),
+    # Dallas: Houston's register and rules (no taxpayer column ever downloaded;
+    # a person's permit shows its address). Houston's Residential-point test
+    # cannot run: the City's Address Points do not document their type codes
+    # (2026-09-30).
+    "dallas": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_geocoded.csv",
+                   address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

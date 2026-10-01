@@ -1,0 +1,15 @@
+{
+  "census_geocoded": 1349,
+  "home_unit_dropped": 771,
+  "joined": 15081,
+  "joined_nearest": 225,
+  "name_as_address": 3408,
+  "outside_city": 768,
+  "placed": 15885,
+  "premises": 17049,
+  "stations_excluded": 20,
+  "stations_in_scope": 44,
+  "stop_positions": 128,
+  "storefront_rows": 18275,
+  "unplaced": 394
+}

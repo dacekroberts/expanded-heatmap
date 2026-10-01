@@ -13,12 +13,12 @@ Comptroller register, the same privacy rules, a city address layer for placement
 | | Proposed | Why |
 |---|---|---|
 | **`mode`** | **`light_rail`** | DART light rail, no metro (San Diego's class) |
-| **`coverage`** | **`full`** | All three buckets from the Comptroller's NAICS codes |
+| **`coverage`** | ~~`full`~~ **`narrowed`**, categories "Personal services thin" (owner, 2026-09-30, at the build) | As Houston on the same register: Texas taxes few personal services, so the layer is thin (204 of 4,197 in-ring pins) |
 | **Scope** | **City of Dallas** (OSM relation 6571629, 1,018 km²) | Permits flagged inside city limits, then point-in-boundary |
 | **Lines drawn** | DART Red, Blue, Green and Orange | Silver Line and TRE are commuter rail, not drawn; the Dallas Streetcar and the M-Line trolley are a build call |
 | **Rings** | standard 0.1 / 0.2 / 0.3 / 0.6 mi | Median gap 1,397 m |
 | **Settled** | The address layer's indemnity **accepted** (owner, 2026-09-30) | `docs/data_sources.md`, "Dallas's indemnity" |
-| **Call** | Dallas Streetcar (tram, 6 stops) and M-Line trolley: recommend **out** | Houston draws its METRORail only; the M-Line is a heritage trolley |
+| **Call** | Dallas Streetcar (tram, 6 stops) and M-Line trolley: ✅ **out (owner, 2026-09-30, at the build)** | Houston draws its METRORail only; the M-Line is a heritage trolley |
 
 ---
 
@@ -93,7 +93,7 @@ Comptroller register, the same privacy rules, a city address layer for placement
     "lon": -96.8,
     "expect": "EPSG:32614",
     "mode": "light_rail",
-    "coverage": "full",
+    "coverage": "narrowed",
     "scope": "city",
     "crs": "EPSG:32614",
     "vs_config": {"mode": "MAP_MODE", "coverage": "MAP_COVERAGE", "scope": "SCOPE", "crs": "CRS_PROJECTED"}

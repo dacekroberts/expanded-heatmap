@@ -523,5 +523,10 @@
   "in_ring": 11178,
   "all": 13103,
   "map_blob": "0381f05e32e15e8e73a3c0d85d2ef7321d732b7a"
+ },
+ "dallas": {
+  "in_ring": 4197,
+  "all": 15884,
+  "map_blob": "3fc9d032ef402b486b15e77d4944a08a85b4b652"
  }
 }
