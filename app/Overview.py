@@ -15,6 +15,7 @@ and any browser where the map doesn't load).
 import base64
 import json
 import math
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -460,6 +461,14 @@ _here = _region_cities[_frame_region]
 _skip = REGION_ZOOM_WITHOUT.get(_frame_region, ())
 _zoom_set = [c for c in _here if c["name"] not in _skip] or _here
 view = fit_view([c["lat"] for c in _zoom_set], [c["lon"] for c in _zoom_set])
+# A zoom set outright (cities.REGION_ZOOM: France North and South at 5.0). Read
+# with getattr, NOT imported by name: Streamlit Cloud can serve a cached
+# cities.py after a push until the app is rebooted, and a missing name in a
+# `from cities import` takes the whole Overview down (2026-09-22). A stale
+# module simply means no override.
+_zoom_override = getattr(sys.modules.get("cities"), "REGION_ZOOM", {}).get(_frame_region)
+if _zoom_override is not None:
+    view = pdk.ViewState(latitude=view.latitude, longitude=view.longitude, zoom=_zoom_override)
 
 # RE-CENTRE ON THE REGION'S OWN MIDPOINT, KEEPING THE FITTED ZOOM. The heading
 # on this block used to read "RE-CENTRE, NEVER RE-ZOOM", which stopped being

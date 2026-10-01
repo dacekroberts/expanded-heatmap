@@ -49,6 +49,7 @@ from cities import (  # noqa: E402
     DEFAULT_FRAME,
     DEFAULT_REGION,
     REGION_MEMBERS,
+    REGION_ZOOM,
     REGION_ZOOM_WITHOUT,
     REGIONS,
     cities_in,
@@ -351,6 +352,9 @@ def region_view(region):
     skip = REGION_ZOOM_WITHOUT.get(frame, ())
     zs = [c for c in here if c["name"] not in skip] or here
     centre_lat, centre_lon, zoom = fit_view([c["lat"] for c in zs], [c["lon"] for c in zs])
+    # A zoom set outright (cities.REGION_ZOOM, France North and South at 5.0),
+    # applied after the fit exactly as Overview.py applies it.
+    zoom = REGION_ZOOM.get(frame, zoom)
     if frame != DEFAULT_FRAME:                  # Overview.py's re-centring block
         centre_lat = (max(lats) + min(lats)) / 2
         centre_lon = (max(lons) + min(lons)) / 2

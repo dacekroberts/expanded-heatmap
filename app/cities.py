@@ -696,7 +696,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis) and trams T3a and T3b",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
         # TURNED BELOW THE DOT 2026-09-24, when Oslo joined Europe, and the
@@ -723,7 +723,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "RTM Métro 1–2 and Tramway 1–3",
-        "region": "Europe",
+        "region": "France South",
         "country": "France",
         "in_default_view": False,
         # BELOW THE MARKER, not above, and the check chose it rather than
@@ -764,7 +764,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Tisséo Métro A–B, Tramway T1 and the Téléo cable car",
-        "region": "Europe",
+        "region": "France South",
         "country": "France",
         "in_default_view": False,
         # ANCHORED "end" SO THE LABEL RUNS WEST, and the check chose it.
@@ -800,7 +800,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "ilévia Métro 1–2 and Tram R–T, across eleven communes",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
         # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN - not left
@@ -840,7 +840,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "STAR Métro a and b",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
         # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN. Width
@@ -2178,6 +2178,17 @@ REGION_ORDER = [
     # force the frame open; that is a measurement (`check_macro_labels.py`
     # scores every city in every region at three widths), not a judgement.
     "Europe",
+    # FRANCE NORTH AND FRANCE SOUTH (owner, 2026-09-30, "go with north/south"),
+    # split at latitude 46.5. France's 25 cities (5 built, 20 in the tram batch)
+    # cannot share one view at ANY zoom: measured on the real label text, at 4.5
+    # three labels cannot be placed and four cities fall off a phone; at 5.0 one
+    # label fails and Marseille, Lille and Valenciennes fall off even at 1200 px -
+    # France is taller than the 650 px canvas. Two leaf regions at REGION_ZOOM
+    # 5.0 place every label. Europe keeps every other European city: the French
+    # dots still show there, labelled in their own region, because labelling all
+    # 25 at Europe's zoom is exactly what cannot work.
+    "France North",
+    "France South",
     # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
     # further country on the continent joins this view rather than adding one.
     # Brazil alone spans Porto Alegre to Fortaleza, about 3,200 km: the width
@@ -2225,6 +2236,14 @@ REGION_ORDER = [
 # Dublin's label clips 11 px and Bucharest's 25 px, PROBLEMS 0.
 REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest")}
 
+# A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
+# and France South at 5.0, where every French label places. Fitted, each would
+# open further out and its labels would collide; fit_view sizes for a 320 px
+# reference, so at 5.0 a few cities sit a pan away on a phone (5 in the north,
+# Nice in the south), and the list beneath the map always has them. Overview.py
+# and check_macro_labels.py both apply it; the centre is still each region's own.
+REGION_ZOOM = {"France North": 5.0, "France South": 5.0}
+
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
 REGION_MEMBERS["Global"] = tuple(
@@ -2247,7 +2266,7 @@ def cities_in(region):
 
 
 REGIONS = [
-    {"name": name, "cities": cities_in(name), "zoom": None}
+    {"name": name, "cities": cities_in(name), "zoom": REGION_ZOOM.get(name)}
     for name in REGION_ORDER
     if cities_in(name)
 ]
