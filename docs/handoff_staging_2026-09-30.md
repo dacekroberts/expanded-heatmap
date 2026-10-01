@@ -66,11 +66,43 @@ drafts file, `docs/decisions_drafts/staging.md`.
 The owner approved the run (2026-10-01): Seattle researched as a regional
 build (`docs/build_briefs/seattle.md`), then the ranked probes, then a fresh
 master list with Band R and the discards carried over. The list is
-`docs/city_master_list.md` (A 5, B 8, C 9, D 1, R 22; 119 discards); the
-old one is archived at `docs/city_master_list_2026-09-30.md`. Item 2 (the
-"too thin" discards against rule 4) was not run: the discards carried
-over as they stand. The owner calls the new list raises are in the drafts
-file, `docs/decisions_drafts/staging.md`.
+`docs/city_master_list.md`. The old one is archived at
+`docs/city_master_list_2026-09-30.md`.
+
+Since then MHLW's file was counted (the owner approved the five downloads):
+Utsunomiya and Kitakyushu went to A; Kagoshima, Okayama and Kōchi to B. The
+list now holds **A 7 · B 11 · C 4 · D 1 · R 22 = 45, with 119 discards**.
+
+Item 2 (the "too thin" discards against rule 4) was not run: the discards
+carried over as they stand.
+
+## NEXT - pick up here (owner held, 2026-10-01)
+
+1. **The UK six: the owner's calls are pending.** They were shown in chat on
+   2026-10-01 with these recommendations:
+   - Manchester (Regional): the 7 districts.
+   - Birmingham (Regional): 3 authorities, built now; Dudley as a watch
+     item.
+   - Sheffield: without the Rotherham Tram-Train, food only first; the
+     rates list screened later.
+   - Nottingham: the city alone, or regional (the owner's choice).
+   - Edinburgh: as is.
+   - Blackpool: with Wyre, or not at all.
+
+   The figures are in Band B of the list. The agent's per-authority counts
+   are in the old session's scratchpad (`uk_trams/fsa_counts.json`) and may
+   be gone.
+2. **Other calls the fresh list raises:**
+   - Fukui: share-alike or the older CC BY copy.
+   - Tbilisi: enterprise rows and individual entrepreneurs.
+   - Seattle: licence reads for Seattle, King County food and Bellevue;
+     Lynnwood and Mountlake Terrace food.
+   - Downloads for Tempe, Burnaby and Arlington.
+   - Confirming the 19 new discards.
+   - Brisbane's commuter-rail test.
+3. **Cleanup was re-rendering 11 cities in the shared `data/`** on
+   2026-10-01. If `check_macro_facts` or `check_ring_shares` blocks a push,
+   tell Cleanup; never write those cities' facts from staging.
 
 ## Open with the owner (carried over)
 
