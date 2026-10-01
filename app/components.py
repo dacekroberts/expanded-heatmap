@@ -1623,6 +1623,8 @@ _NOTICES = [
     # the register (Incheon; the Gyeonggi satellites add their names).
     ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju)",
      "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon and Namyangju are from the Small "
+    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Ansan)",
+     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon and Ansan are from the Small "
      "Enterprise and "
      "Market Service's "
      "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "

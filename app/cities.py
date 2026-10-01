@@ -2700,6 +2700,28 @@ CITIES = [
         # tree (width 75.8 px, measured 2026-09-30).
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Ansan",
+        "lat": 37.3219,
+        "lon": 126.8309,
+        "page": "pages/84_Ansan_Heatmap.py",
+        "coverage": "full",
+        "mode": "metro",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 4, the Suin–Bundang Line and the Seohae Line",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, the default, and SCORED: Ansan lies inside the Seoul Capital
+        # Area frame (no zoom change, measured in memory); check_macro_labels.py
+        # (python -B) passes, PROBLEMS 0 at 375, 768 and 1200, alone and on the
+        # combined tree with Namyangju (width 41.5 px, measured 2026-09-30).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
