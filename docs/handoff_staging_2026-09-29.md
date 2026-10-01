@@ -1,5 +1,8 @@
 # Handoff - staging role, the tram question (2026-09-29)
 
+> **Superseded by `docs/handoff_staging_2026-09-30.md`** (2026-09-30): every
+> item in NEXT below is done. Kept because older handoffs link here.
+
 For a FRESH staging session. It replaces `docs/handoff_staging_2026-09-28.md`
 (deleted). Read once, then follow the pointers. **Delete a section when its
 item is done.**
