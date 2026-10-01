@@ -24,6 +24,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-09-30**
 
+- [Seoul labelled in East Asia and the landing view; the Seoul Capital Area's satellites minor (owner)](#2026-09-30---seoul-labelled-in-east-asia-and-the-landing-view-the-seoul-capital-areas-satellites-minor-owner)
 - [Personal exposure: PASS for Zurich, Göteborg and Den Haag; lane 4's last findings fixed](#2026-09-30---personal-exposure-pass-for-zurich-göteborg-and-den-haag-lane-4s-last-findings-fixed)
 - [The mega-review's calls, all approved as recommended; the minor label tier's first slice (owner)](#2026-09-30---the-mega-reviews-calls-all-approved-as-recommended-the-minor-label-tiers-first-slice-owner)
 - [Review lane 4's mechanical findings fixed on the rehearsal; ten French privacy verdicts recorded](#2026-09-30---review-lane-4s-mechanical-findings-fixed-on-the-rehearsal-ten-french-privacy-verdicts-recorded)
@@ -311,6 +312,24 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Seoul labelled in East Asia and the landing view; the Seoul Capital Area's satellites minor (owner)
+
+- **The owner, after the landing: Seoul should still show on the macro
+  map's global and East Asia views.** Seoul sits in the Seoul Capital Area
+  region, and a region labels its own cities, so East Asia showed Seoul's
+  dot unnamed, and the landing view labelled all eleven Korean cities on
+  top of one another.
+- **The second slice of the label tiers (2026-09-29 design):** the ten
+  satellites (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju,
+  Ansan, Uijeongbu, Anyang) carry `label_tier: "minor"`, labelled only in
+  the Seoul Capital Area. `REGION_LABELS_ALSO = {"East Asia": ("Seoul
+  Capital Area",)}` makes East Asia label that region's anchors - Seoul -
+  as the design planned ("East Asia gets Seoul's label back"). Overview.py
+  and check_macro_labels.py read both; PROBLEMS 0 in all 15 regions at 375,
+  768 and 1200, and one local render of East Asia shows Seoul named clear
+  of Daegu.
+- On branch `seoul-label`, for the owner's review with the line highlight.
 
 ### 2026-09-30 - Personal exposure: PASS for Zurich, Göteborg and Den Haag; lane 4's last findings fixed
 

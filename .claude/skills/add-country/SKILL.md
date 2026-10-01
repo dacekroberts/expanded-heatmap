@@ -836,19 +836,22 @@ The number that decides whether a city is worth building is **businesses within
 the outermost ring per in-city station** - the measure that made D.C. strong
 (~173) despite keeping only 40 of 98 stations, and Boston weak (~39).
 
-Canada's result, and why it matters that population was not the guide:
+Canada's result as built (`docs/canada_retrospective.md`, Part Two; the
+screen's figures - Vancouver 861 to Toronto 41 - were wrong station counts and
+denominators, moved by up to 1.8x in the builds), and why it matters that
+population was not the guide:
 
-| City | Sites/station |
+| City | Storefronts per in-city station |
 |---|---|
-| Vancouver | **861** |
-| Surrey | 549 |
-| Montréal | 252 |
-| Edmonton | 153 |
-| Calgary | 103 |
-| **Toronto** | **41** |
+| Vancouver (with Surrey) | **206** |
+| Montréal | 151 |
+| Calgary | 137 |
+| Surrey | 135 |
+| **Toronto** | **81** |
+| Edmonton | 79 |
 
-**The largest city came last**, because it licenses food and trades but not
-general retail - two buckets, Boston's shape. Anyone choosing on population
+**The largest city came fifth of six**, because it licenses food and trades but
+not general retail - two buckets, Boston's shape. Anyone choosing on population
 would have built the worst of the six first.
 
 ## Failure modes seen in one country profile

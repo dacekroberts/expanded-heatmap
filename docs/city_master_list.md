@@ -716,7 +716,8 @@ on each gap sends it to B (a narrower page) or keeps it here.
 
 ▼ **Yokohama 🇯🇵 (history: passed to Band B 2026-09-29 on the amended rule 1). Joined 2026-09-24 from the open gap (owner's call): personal services only, and
 no page for now.**
-- **Personal services**: complete, 17,408 premises as of 2026-04-01, declared CC BY (barbers
+- **Personal services** (as screened; the 2026-09-29 recount is 7,896, and 17,408 could not be
+  traced - DECISIONS, "The Band C measurements"): complete, 17,408 premises as of 2026-04-01, declared CC BY (barbers
   3,380, beauty 11,062, cleaning 2,966). Also a pharmacy list (1,719) and a drug-store list (611),
   whose licence page is unread.
 - **Food: none in any era.** Four places were checked:
