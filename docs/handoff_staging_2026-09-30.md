@@ -78,20 +78,18 @@ carried over as they stand.
 
 ## NEXT - pick up here (owner held, 2026-10-01)
 
-1. **The UK six: the owner's calls are pending.** They were shown in chat on
-   2026-10-01 with these recommendations:
-   - Manchester (Regional): the 7 districts.
-   - Birmingham (Regional): 3 authorities, built now; Dudley as a watch
-     item.
-   - Sheffield: without the Rotherham Tram-Train, food only first; the
-     rates list screened later.
-   - Nottingham: the city alone, or regional (the owner's choice).
-   - Edinburgh: as is.
-   - Blackpool: with Wyre, or not at all.
-
-   The figures are in Band B of the list. The agent's per-authority counts
-   are in the old session's scratchpad (`uk_trams/fsa_counts.json`) and may
-   be gone.
+1. **The UK six: approved, briefed, builds HELD (owner, 2026-10-01).**
+   - **Scopes:** Manchester (Regional), Birmingham (Regional), Edinburgh,
+     Sheffield (without the Tram-Train), Nottingham (Regional) and Blackpool
+     (Regional).
+   - **Briefs:** in `docs/build_briefs/`. The kit is
+     `docs/handoff_uk_six_2026-10-01.md`, with its **prose hold**: no page
+     text until the owner's prose rework lands.
+   - **To re-run:** four brief checks printed RETRY on their OSM claim
+     (Overpass overloaded). Re-run them for Manchester, Edinburgh,
+     Sheffield and Nottingham.
+   - **Open with the owner:** NaPTAN for gate 3 in Sheffield and Blackpool;
+     Birmingham's Line 2 status.
 2. **Other calls the fresh list raises:**
    - Fukui: share-alike or the older CC BY copy.
    - Tbilisi: enterprise rows and individual entrepreneurs.
