@@ -5,12 +5,11 @@
     python scripts/check_stray_bullets.py --all      # every doc under docs/ (not in the hook)
     python scripts/check_stray_bullets.py --file PATH [PATH ...]
 
-WHY THIS FILE EXISTS. Markdown lets a bullet list interrupt a paragraph. A
-sentence that uses a spaced hyphen as its dash ("the city - its data") and
-wraps just before the hyphen puts `- ` at the start of a line, and the app
-draws a bullet in the middle of the paragraph. `deploy-verify` found three in
-docs/excluded_categories.md on 2026-09-27, each fixed by moving the dash up a
-line; nothing would have caught a fourth.
+WHY. Markdown lets a bullet list interrupt a paragraph. A sentence that uses
+a spaced hyphen as its dash ("the city - its data") and wraps just before the
+hyphen puts `- ` at the start of a line, and the app draws a bullet in the
+middle of the paragraph. Three reached docs/excluded_categories.md
+(2026-09-27), each fixed by moving the dash up a line.
 
 THE SHAPE. A line starting `- `, `* ` or `+ ` (up to three spaces in, after
 any blockquote marker), in a paragraph that did not start as a list, whose

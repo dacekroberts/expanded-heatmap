@@ -4,7 +4,7 @@ project that names premises itself.
 WHY THIS ONE IS EASIER THAN IT LOOKS
 ------------------------------------
 96 categories sounds like Miami's 150 or Surrey's 210, but Calgary does most of
-the classifying for you. It suffixes its own categories with the thing every
+the classifying itself. It suffixes its own categories with the thing every
 other city has to infer:
 
     - PREMISES          a fixed place the public enters

@@ -1,37 +1,35 @@
 """Every built city's scope must be disclosed on the public exclusions page.
 
-This project scopes each city twice - which rail network its map is drawn
-around, and which businesses are counted near it - and both are invisible from
+This project scopes each city twice (which rail network its map is drawn
+around, and which businesses are counted near it), and both are invisible from
 the map. `docs/excluded_categories.md` is where a reader is told, and
 `app/pages/201_What_Is_Excluded.py` renders it with a generated station table
 spliced in.
 
-The gap this closes is the one that prompted it: a reader asked whether BART
-was in the San Francisco build. It is not, deliberately and for a recorded
-reason - and nothing published said so. A city whose scope is undisclosed looks
-exactly like a city that was checked, which is the same argument that made
-`check_provenance.py` a script rather than a paragraph.
+A reader once asked whether BART was in the San Francisco build. It is not,
+deliberately and for a recorded reason, and nothing published said so. A city
+whose scope is undisclosed looks exactly like a city that was checked, the
+same argument that made `check_provenance.py` a script rather than a paragraph.
 
 Four properties, all fail-closed:
 
   A  the document still carries the heading the page splices the station table
-     at, exactly once - the page falls back to appending the table if it is
+     at, exactly once: the page falls back to appending the table if it is
      missing, and a silent fallback nobody checks is how this rots;
   B  the station-scope section is still there at all;
   C  every city in `app/cities.py` derives an `outputs/<slug>/` directory, so
      no city's row in the generated table is silently empty;
   D  every city is named in the BUSINESS half of the document, after that
-     heading. Being named in the transit half is not enough - a city can be
+     heading. Being named in the transit half is not enough: a city can be
      mentioned as "Cercanías in Madrid" while none of its own business
-     exclusions are written down, which is exactly the state four cities were
-     found in.
+     exclusions are written down (four cities were once in that state).
 
 Property E rides along with C: every committed `excluded_stations.csv` must
 classify into a shape the page understands, so a city arriving with a new
 schema shows up here rather than as a wrong number on the live site.
 
 Property F rides along with E: a city whose file thins stops by spacing must
-say so where a reader can find it - on its own page, or by name in the
+say so where a reader can find it: on its own page, or by name in the
 document's spacing-filter paragraph (owner, 2026-09-29). The station table
 gives only a count, so without one of the two a reader cannot tell which
 lines were thinned. A city that passes on its page alone is printed as a NOTE,
@@ -50,15 +48,15 @@ from pathlib import Path
 
 # app/station_scope.py holds the one vocabulary for reading these files. It is
 # imported rather than restated: two copies would drift, and the drift would be
-# invisible - the page bucketing a new city's stations under "Other" while this
-# check went on passing. Imported inside main() once --root is known.
+# invisible (the page bucketing a new city's stations under "Other" while this
+# check went on passing). Imported inside main() once --root is known.
 
 # Cities whose business-side exclusions are NOT yet written into
-# docs/excluded_categories.md. A dated defect, not a pass - and it expires:
+# docs/excluded_categories.md. A dated defect, not a pass, and it expires:
 # once a city here IS documented, this check FAILS until it is removed from
 # the list, so the list cannot quietly outlive the gap it records.
-# Empty as of 2026-09-23: the five cities this check first named - Montréal,
-# Madrid, Barcelona, Dublin and Milan - were written up rather than parked.
+# Empty since 2026-09-23, when Montréal, Madrid, Barcelona, Dublin and Milan
+# were written up rather than parked.
 KNOWN_GAPS = {}
 
 BUSINESS_HEADING = "## Which businesses are counted"
@@ -117,8 +115,7 @@ def main():
 
     # A LOOP OVER NOTHING SATISFIES EVERY ASSERTION IN IT. Properties C, D and
     # E are all per-city, so an empty list would print OK having examined
-    # nothing - the same hole check_no_fetch_in_steps.py's self-test found in
-    # its sibling as a glob that matched no files.
+    # nothing (the same hole as a glob that matches no files).
     if not cities:
         problems.append(
             "app/cities.py declares no cities at all, so this check would "

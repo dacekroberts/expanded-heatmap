@@ -3,8 +3,8 @@ the cities it cannot check.
 
     python scripts/drift_check_selftest.py
 
-WHY THIS FILE EXISTS. Render-only is only safe while it runs the MAP step and
-nothing else: seven cities have a step 3 that geocodes or address-joins
+WHY. Render-only is only safe while it runs the MAP step and nothing else:
+seven cities have a step 3 that geocodes or address-joins
 (step3_geocode.py, step3_place.py) before a step4_map.py, and a mode that ran
 "step 3" by number would geocode in a render check, or skip those cities' maps.
 It must also refuse, not pass, a city whose processed inputs are missing. So

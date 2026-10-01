@@ -19,8 +19,7 @@ Per ward:
 
 For Tokyo it also checks whether each ward's food list is COMPLETE. A list
 whose earliest permit date is 2021 or later holds only the permits since the
-2021 reform. That is how Chūō, Kōtō and Minato were found partial on
-2026-09-24.
+2021 reform (Chūō, Kōtō and Minato, 2026-09-24).
 
 Privacy: date and type columns are selected by EXACT name. A pattern once
 matched 法人名 through 法 and printed operator names. Nothing here prints a

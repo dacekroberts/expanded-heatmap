@@ -1,7 +1,7 @@
 """The official restaurant counts every Japanese permit list is measured against.
 
-Moved here from scripts/japan_ward_table.py on 2026-09-28 (Tokyo's groundwork),
-so the build's share check and the ward table read one copy:
+One copy for the build's share check and scripts/japan_ward_table.py
+(2026-09-28):
 
   * **Tokyo's statistical yearbook, table 19-8** (`data/tokyo/raw/tn24qv190800.csv`):
     飲食店営業 per special ward at the end of the latest fiscal year (FY2024).

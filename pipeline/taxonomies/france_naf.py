@@ -113,8 +113,8 @@ CATCH_ALL_CODES = {
 NOT_PREMISES = {
     # Distance selling - 15.5% of Paris's bucket rows, and the brief's single
     # largest correction. These sit INSIDE the retail division and have no
-    # storefront at all. An earlier note called 47.91B "24% of the retail
-    # division", which understated the problem by looking at one code of four.
+    # storefront at all. All four count; a figure for 47.91B alone ("24% of
+    # the retail division") understates the problem.
     "47.91A": "vente à distance - no premises",
     "47.91B": "vente à distance - no premises",
     "47.99A": "vente à domicile - no premises",

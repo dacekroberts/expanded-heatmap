@@ -11,10 +11,11 @@ and the three information pages sit at 200, 201 and 202 (90-92 until
 the sidebar. The next free city slot is one past the highest `*_Heatmap.py`,
 which `scripts/scaffold_city.py`'s `next_page_number()` returns on its own
 (it refuses a number that reaches the info pages). Nothing needs
-reserving by hand - just do not renumber a city page without updating its
-`page` value here, since these two are the only link between them. `lat`/`lon` place the
-city's marker on the macro map; they only need to be a sensible centre of its
-mapped area, not the exact centre of the city's own map.
+reserving by hand, but never renumber a city page without updating its `page`
+value here: these two are the only link between them.
+
+`lat`/`lon` place the city's marker on the macro map; they only need to be a
+sensible centre of its mapped area, not the exact centre of the city's own map.
 
 Deliberately app-side and tiny: a fuller per-city registry (map centre,
 CRS, taxonomy, data sources) is still open in PLAN.md and would live with
@@ -30,18 +31,16 @@ This replaced a three-sided "top"/"left"/"right" enum on 2026-09-21, because
 three sides at a ~20 px offset could not separate the east-coast cluster:
 Washington D.C., Philadelphia, New York and Boston sit 6-15 px apart at the
 continental zoom this map is fitted to, and their name pills are 56-126 px
-wide, so with D.C. added there were 11 label collisions - "Philadelphia" and
-"Washington D.C." overlapping by 102x13 px, one unreadable smear.
+wide, so with D.C. added there were 11 label collisions ("Philadelphia" and
+"Washington D.C." overlapping by 102x13 px).
 
 THE OFFSETS ARE IN PIXELS, AND THE MAP IS ZOOMABLE. That combination is what
 constrains this layout, and it is the one thing to understand before changing
 any number here. A pixel offset does not follow its dot: zoom in and the four
 eastern dots spread apart while their names stay put, so a name placed far
-from its dot ends up pointing at nothing. An earlier version of this stacked
-those four names VERTICALLY at dy -130/-102/-74/-46, in latitude order, which
-was collision-free at every width and looked wrong the moment a reader zoomed
-in - the owner's screenshot showed "Boston" adrift 130 px from a dot that had
-moved elsewhere.
+from its dot ends up pointing at nothing. Stacking those four names
+VERTICALLY (dy -130/-102/-74/-46, in latitude order) was collision-free at
+every width but, once a reader zoomed in, left "Boston" 130 px from its dot.
 
 So the four eastern names sit EAST of their dots and near-parallel to them,
 at dy -24/-8/+8/+24: close enough to track their own dot (24 px of drift at
@@ -55,7 +54,7 @@ layer of extra pages, which costs more than this layout does. Locking the view
 would have allowed the vertical stack instead.
 
 THE ACCEPTED TRADE-OFF: at phone width these four names are clipped by the
-right edge - Washington D.C. is 54% visible, Philadelphia 59%, New York 77%,
+right edge: Washington D.C. is 54% visible, Philadelphia 59%, New York 77%,
 Boston 79%. That is structural, not tuning. "Washington D.C." is a 126 px pill
 whose dot sits at x~271 in a 340 px canvas, leaving 69 px to its east, so no
 `dx` fits it; the only anchor that would is "middle", which spends width on
@@ -107,12 +106,9 @@ CITIES = [
         "record_kind": "Tax register",
         "categories": "All three",
         "blurb": "MTS Trolley (Blue, Orange, Green, Copper, Silver lines)",
-        # East of its dot: it sits south-east of Los Angeles, so the two
-        # names split left/below rather than colliding.
-        #
-        # MOVED WEST OF THE DOT, over the Pacific, 2026-09-30 (tram kit), when
-        # Tucson joined: east of the dot this pill covered Tucson's marker at the
-        # Global and United States zooms at all three widths. check_macro_labels.py
+        # WEST OF THE DOT, over the Pacific, since 2026-09-30 (Tucson joined):
+        # east of the dot this pill covered Tucson's marker at the Global and
+        # United States zooms at all three widths. check_macro_labels.py
         # (python -B) passes end -11 at dy -5 to +1 with Tucson at its offset
         # (-6 meets Kansas City's pill, +2 Los Angeles's); -2 sits inside that,
         # PROBLEMS 0 at 375, 768 and 1200.
@@ -151,13 +147,13 @@ CITIES = [
         "categories": "All three",
         "blurb": "Metro Rail (A, B, C, D, E, K Lines)",
         # BELOW its dot, not west of it. Westward, "Los Angeles" ran off the
-        # left edge at phone width - the "flush at 375 px" problem - and
-        # widening the view to make room would have lowered the zoom.
+        # left edge at phone width, and widening the view to make room would
+        # have lowered the zoom.
         #
-        # dy 24, not the original 26, since the Global landing view
-        # (2026-09-24) labels Guadalajara at this zoom too: at 26 the two pills
-        # overlapped 68.5 x 1.1 px. At 24 they clear, and the pill's top is
-        # still 15 px below LA's dot.
+        # dy 24, not 26, since the Global landing view (2026-09-24) labels
+        # Guadalajara at this zoom too: at 26 the two pills overlapped
+        # 68.5 x 1.1 px. At 24 they clear, and the pill's top is still 15 px
+        # below LA's dot.
         "label_offset": ("end", -11, 0),
     },
     {
@@ -175,26 +171,14 @@ CITIES = [
         "record_kind": "Licence register",
         "categories": "All three",
         "blurb": "CTA 'L' (Red, Blue, Brown, Green, Orange, Pink, Purple Lines)",
-        # SOUTH of its dot, moved 2026-09-21 for the same pre-emptive reason
-        # as Vancouver's. Above its dot this label occupied x 439-510,
-        # y 158.9-179.9, and **Toronto's dot lands at x 506.6, y 182.0** -
-        # touching that box's corner. Toronto's own label will need the band
-        # above and east of its dot, which is precisely what this frees.
-        #
-        # dy is +16 and NOT larger, which is counter-intuitive: a bigger
-        # southward offset is WORSE here, because "San Diego" runs east from
-        # its own dot to about x 464 at y 224-245, and Chicago's box spans
-        # x 439-510. Pushing Chicago further south walks it into that pill.
-        # +16 is the measured maximum clearance (7.9 px); +26 collided.
-        #
-        # A pill 21 px tall at dy +16 starts 5.5 px below the dot's centre,
-        # which clears the 4 px marker and its 1 px ring - so it reads as
-        # below the dot rather than on it.
-        #
-        # MOVED LEFT OF THE DOT 2026-09-30 (tram kit), when Kansas City joined:
-        # south of the dot this pill covered Kansas City's marker at the Global
-        # and United States zooms at all three widths, which no offset of Kansas
-        # City's own label can fix. Left of the dot, check_macro_labels.py
+        # LEFT OF THE DOT since 2026-09-30 (Kansas City joined). Above the dot
+        # this pill (x 439-510, y 158.9-179.9) touched **Toronto's dot at
+        # x 506.6, y 182.0**, and Toronto's label needs the band above and east
+        # of its dot (moved south 2026-09-21). South of the dot, at dy +16 (the
+        # measured maximum: +26 collided with San Diego's pill, then running
+        # east), it covered Kansas City's marker at the Global and United
+        # States zooms at all three widths, which no offset of Kansas City's
+        # own label can fix. Left of the dot, check_macro_labels.py
         # (python -B) passes end -11 at dy -8 to +5 with Kansas City at its
         # offset (-9 meets Toronto's pill, +8 Kansas City's); -2 sits inside
         # that, PROBLEMS 0 at 375, 768 and 1200.
@@ -219,20 +203,18 @@ CITIES = [
                  "Island Railway",
         # East of its dot, second from the top of the eastern column.
         #
-        # dx IS 24 AND NOT 14, because at 14 this pill ERASED BOSTON'S MARKER -
-        # deploy-verify measured 0 teal pixels for Boston in the landing view at
-        # 1200 and 768 px, against 32-65 for every other city. Boston's dot
-        # lands at x 627.0 while this pill spanned x 624.5-695.9 at y
-        # 180.4-198.4, so the dot sat inside an opaque pill drawn above it. Same
-        # defect as Guadalajara's, one view over, and it went unseen because the
-        # check of the day scored pills against pills and not against markers.
+        # dx IS 24 AND NOT 14: at 14 this pill ERASED BOSTON'S MARKER (0 teal
+        # pixels for Boston in the landing view at 1200 and 768 px, against
+        # 32-65 for every other city). Boston's dot lands at x 627.0 and the
+        # pill spanned x 624.5-695.9 at y 180.4-198.4, so the dot sat inside an
+        # opaque pill drawn above it; the same defect as Guadalajara's.
         #
         # East rather than down: the eastern column's vertical slots are 16 px
         # apart and +8 is Philadelphia's, so any dy that clears Boston's dot
         # walks into another name. dx 22 is the arithmetic minimum (Boston's dot
         # centre plus its 5 px radius); 24 leaves 2.5 px. It costs 10 px more
-        # clipping at 375 px - 27% of the pill against 13% - which is the same
-        # accepted trade-off as Washington D.C.'s 39% two rows below.
+        # clipping at 375 px (27% of the pill against 13%), the same accepted
+        # trade-off as Washington D.C.'s 39% two rows below.
         "label_offset": ("start", 24, -8),
     },
     {
@@ -313,9 +295,10 @@ CITIES = [
         "categories": "All three",
         "blurb": "WMATA Metrorail (Red, Blue, Green, Yellow, Orange, Silver "
                  "Lines; the 40 stations inside the District)",
-        # East of its dot, bottom of the eastern column - the southernmost
-        # of the four, and the widest name, so it clips first on a phone.
-        # MOVED 5 px RIGHT (2026-09-30, from 14) to open the gap Pittsburgh's label sits in.
+        # East of its dot, bottom of the eastern column - the southernmost of
+        # the four, and the widest name, so it clips first on a phone. MOVED 5
+        # px RIGHT (2026-09-30, from 14) to open the gap Pittsburgh's label
+        # sits in.
         "label_offset": ("start", 19, 24),
     },
     {
@@ -340,27 +323,24 @@ CITIES = [
         # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
         # flag exists. See IN_DEFAULT_VIEW below.
         "in_default_view": False,
-        # WEST of its dot, moved 2026-09-21 to pre-empt a collision that was
-        # measured rather than anticipated. Running EAST, this 184 px pill
-        # occupied x 348-532 at y 129.6-150.6 - and **Calgary's dot lands at
+        # WEST of its dot since 2026-09-21. Running EAST, this 184 px pill
+        # occupied x 348-532 at y 129.6-150.6, and **Calgary's dot lands at
         # x 371.6, y 139.4, inside that box**, with Edmonton's at x 373.8 just
-        # above it. So the longest label on the map sat directly across the
-        # next two Canadian cities' dots.
+        # above it.
         #
         # West is empty: it is the westernmost entry, with ocean beyond, and
         # San Francisco's label sits 30 px lower in y.
         #
         # THE COST, measured and accepted: at 400 px the canvas puts this dot
         # at x 109, so a west-running pill needs 196 px where 109 exist and
-        # about 44% of it is clipped by the left edge - worse than Washington
-        # D.C.'s 54%-visible. Same trade-off the eastern four already carry,
-        # and the same mitigation: the pill stays clickable and the Overview
-        # carries a full text-link list of every city beneath the map.
+        # about 44% of it is clipped by the left edge (worse than Washington
+        # D.C.'s 54%-visible). The eastern four's trade-off and mitigation: the
+        # pill stays clickable and the Overview lists every city beneath the
+        # map.
         "label_offset": ("end", -12, -10),
     },
     {
-        # Accented display name, ASCII page filename - the one thing this
-        # city's build brief flagged as untested. The name here and
+        # Accented display name, ASCII page filename. The name here and
         # render_city_nav()'s argument on the page must match each other;
         # neither has to match the filename.
         "name": "Montréal",
@@ -382,26 +362,23 @@ CITIES = [
         # is still on canvas at every width - it sits only ~18 px from
         # Boston's - so this is about the FIT, not about visibility.
         "in_default_view": False,
-        # WELL ABOVE its dot, and the direction is measured rather than
-        # chosen. Montréal's dot is the NORTHERNMOST on the map, so north is
-        # the only empty side: Boston sits 10 px east and 17 px SOUTH, New
-        # York 26 px south, Chicago 55 px WEST and 20 px south.
-        #
-        # It took three tries, and each rejection was a measurement:
-        #   west, ("end", -12, -6)     - drove an ~80 px pill across CHICAGO's.
-        #   centred, ("middle", 0,-30) - cleared Chicago but collided with
-        #                                VANCOUVER's, because "Vancouver
-        #                                (Regional)" is a ~184 px pill running
-        #                                east from its dot and reaching x~532.
+        # WELL ABOVE its dot, by measurement. Montréal's dot is the
+        # NORTHERNMOST on the map, so north is the only empty side: Boston sits
+        # 10 px east and 17 px SOUTH, New York 26 px south, Chicago 55 px WEST
+        # and 20 px south.
+        #   west, ("end", -12, -6)     - drives an ~80 px pill across CHICAGO's.
+        #   centred, ("middle", 0,-30) - clears Chicago but collides with
+        #                                VANCOUVER's ~184 px pill, which runs
+        #                                east from its dot to x~532.
         #   east and high, this one    - clears Vancouver's pill by ~9 px
         #                                horizontally and Boston's by ~6 px
         #                                vertically, at 400, 854 and 1200 px.
         # Montréal is wedged between the two longest names on the map, so if
         # either of those labels is ever moved or renamed, re-check this one.
-        # Raised 10 px, -34 -> -44 (2026-09-29, Ottawa's build): Ottawa's
-        # label, 165 km west, found no clean spot in the Global frame beside
-        # Toronto, Boston and Montréal as they stood; a joint sweep of the two
-        # offsets scored PROBLEMS 0 at all three widths with this one.
+        # Raised 10 px, -34 -> -44 (2026-09-29) for Ottawa, 165 km west, which
+        # had no clean spot in the Global frame beside Toronto, Boston and
+        # Montréal; a joint sweep of the two offsets scored PROBLEMS 0 at all
+        # three widths.
         "label_offset": ("start", 12, -44),
     },
     {
@@ -411,9 +388,8 @@ CITIES = [
         "lat": 51.0447,
         "lon": -114.0719,
         "page": "pages/12_Calgary_Heatmap.py",
-        # 45, not 83. The feed publishes 83 PLATFORMS and this blurb said so
-        # until the collapse was written - the same error the Canada ranking
-        # made. See pipeline/calgary/config.py.
+        # The blurb's 45 stations, not 83: the feed publishes 83 PLATFORMS.
+        # See pipeline/calgary/config.py.
         "coverage": "full",
         "mode": "light_rail",
         "placement": "Register coordinates",
@@ -422,16 +398,15 @@ CITIES = [
         "record_kind": "Licence register",
         "categories": "All three",
         "blurb": "CTrain (Red and Blue Lines, 45 stations)",
-        # Outside the default view, as every non-US city is - it keeps
+        # Outside the default view, as every non-US city is: it keeps
         # fit_view's zoom pinned at 1.4525 so no existing label moves.
         "in_default_view": False,
-        # EAST and slightly SOUTH of its dot, and the reason is Edmonton.
-        # Their dots are 16 px apart vertically - Calgary at x 372, y 139;
-        # Edmonton at x 374, y 124 - which is the east-coast cluster's problem
-        # in miniature. So these two split the way those four did: Calgary
-        # takes the SOUTH offset and Edmonton will take the NORTH one, both
-        # running east into the space Vancouver's label vacated when it moved
-        # west on 2026-09-21. That move was made for exactly this.
+        # EAST and slightly SOUTH of its dot, because of Edmonton. Their dots
+        # are 16 px apart vertically (Calgary at x 372, y 139; Edmonton at
+        # x 374, y 124), the east-coast cluster's problem in miniature, so the
+        # two split the way those four did: Calgary takes the SOUTH offset and
+        # Edmonton the NORTH one, both running east into the space Vancouver's
+        # label vacated when it moved west on 2026-09-21.
         "label_offset": ("start", 12, 9),
     },
     {
@@ -480,19 +455,14 @@ CITIES = [
         # inside the US span and its latitude only just north of Boston's - so
         # its dot lands near the frame's top edge rather than off the map.
         "in_default_view": False,
-        # EAST of its dot and slightly ABOVE, which is the band Chicago's label
-        # was moved south to free on 2026-09-21 - see the Chicago entry, which
-        # recorded Toronto's dot at x 506.6, y 182.0 before this city existed.
-        # Running east keeps it clear of Boston and New York, which sit east of
-        # their own dots further south.
-        # ABOVE and WEST of its dot. Its pill overlapped "Boston" by 30x12 px
-        # (measured from rendered pixels) and covered Montréal's marker; both
-        # went unnoticed because nothing checked either. ("end", 0, -16) clears
-        # Boston, clears Montréal's dot, and keeps Toronto's own dot visible.
-        # RAISED 5 px (2026-09-30, from -16) for Minneapolis: at -16 Toronto's
-        # pill covered Minneapolis's marker in Global at every width, and no
-        # placement of Minneapolis's alone cleared it. The joint sweep's PROBLEMS
-        # 0 at 375, 768 and 1200 px, with and without Ottawa's branch applied.
+        # ABOVE and WEST of its dot. At its earlier offset, east of the dot and
+        # slightly above, its pill overlapped "Boston" by 30x12 px (measured
+        # from rendered pixels) and covered Montréal's marker. ("end", 0, -16)
+        # clears Boston, clears Montréal's dot, and keeps Toronto's own dot
+        # visible. RAISED 5 px (2026-09-30, from -16) for Minneapolis: at -16
+        # Toronto's pill covered Minneapolis's marker in Global at every width,
+        # and no placement of Minneapolis's alone cleared it. The joint sweep
+        # scored PROBLEMS 0 at 375, 768 and 1200 px, with and without Ottawa.
         "label_offset": ("end", 0, -21),
     },
     {
@@ -517,26 +487,24 @@ CITIES = [
         # and the pinned zoom is untouched.
         "in_default_view": False,
         # SOUTH of its dot, AND THIS KEY MUST EXIST AT ALL. Omitting it took the
-        # whole Overview page down from 2026-09-22 until deploy-verify caught it:
-        # pd.DataFrame fills a key some entries omit with float('nan'), the
-        # offset resolver tested `v is None`, and `tuple(nan)` raised
-        # TypeError on every load - map, city list, caption and site notices all
-        # replaced by a traceback. Overview.py is scalar-safe now, but every
-        # city still declares one, because fifteen cities happening to have one
-        # is what hid the bug.
+        # whole Overview page down from 2026-09-22: pd.DataFrame fills a key
+        # some entries omit with float('nan'), the offset resolver tested
+        # `v is None`, and `tuple(nan)` raised TypeError on every load (map,
+        # city list, caption and site notices all replaced by a traceback).
+        # Overview.py is scalar-safe now, but every city still declares one,
+        # because fifteen cities happening to have one is what hid the bug.
         #
         # Above its dot (the old default) this pill measured x338-426 y264-281
         # and collided with BOTH "Los Angeles" (13x1 px) and
-        # "Guadalajara (Regional)" (19x0 px). At dy +22 it sits y308-325 and
-        # clears both - including the Los Angeles overlap, which predated this
-        # city and was reported as out of scope.
+        # "Guadalajara (Regional)" (19x0 px). At dy +22 it sat at y308-325 and
+        # cleared both.
         #
         # dy 22 -> 32 on 2026-09-27, when Monterrey arrived. In the landing
         # view the three Mexican markers sit within ~25 px of each other, and
-        # Guadalajara's pill had to move from above its dot (where it covered
-        # Monterrey's marker) to below it - which needs this pill 10 px lower
-        # so the two stack instead of colliding. Chosen by a joint search of all
-        # three offsets scored with check_macro_labels.py's own geometry, then
+        # Guadalajara's pill moved from above its dot (where it covered
+        # Monterrey's marker) to below it, which needs this pill 10 px lower
+        # so the two stack instead of colliding. Chosen by a joint search of
+        # all three offsets with check_macro_labels.py's own geometry, then
         # confirmed by the check itself.
         "label_offset": ("middle", 0, 32),
     },
@@ -563,28 +531,24 @@ CITIES = [
         # Outside the United States frame, like Mexico City and every Canadian
         # city - see IN_DEFAULT_VIEW below.
         "in_default_view": False,
-        # West of its dot, ending AT the point rather than short of it. The
-        # first attempt, ("end", -14, 0), was measured by deploy-verify from
-        # real pixels as overlapping "Mexico City" by 19x0 px and, at 375 px,
-        # clipped 15 px by the west canvas edge - rendering as
-        # "uadalajara (Regional)". Dropping dx to 0 moves the pill 14 px east:
-        # it clears Mexico City outright and its west edge lands on-canvas at
-        # every width. Chosen against a projection model that reproduces four
-        # pixel-measured pills to within 2 px, not by eye.
+        # ("end", -14, 0) overlapped "Mexico City" by 19x0 px (measured from
+        # real pixels) and, at 375 px, was clipped 15 px by the west canvas
+        # edge, rendering as "uadalajara (Regional)". Dropping dx to 0 moved
+        # the pill 14 px east: it cleared Mexico City outright and its west
+        # edge landed on-canvas at every width. Chosen against a projection
+        # model that reproduces four pixel-measured pills to within 2 px.
         #
-        # ABOVE its dot, and the dy is the whole point. ("end", 12, 0) put the
-        # pill's right edge 17 px right of the marker with dy 0 centring it
-        # vertically on that marker - so the opaque pill (alpha 235) ERASED
-        # Guadalajara's teal dot entirely. The owner spotted it on the rendered
-        # map; no check here was looking for a label covering a marker, only
-        # for labels covering each other.
+        # The dy is the whole point. ("end", 12, 0) put the pill's right edge
+        # 17 px right of the marker with dy 0 centring it vertically on that
+        # marker, so the opaque pill (alpha 235) ERASED Guadalajara's teal dot
+        # entirely.
         #
         # The three constraints conflict on dx alone: clearing the dot with an
         # "end" anchor needs dx <= -10, and clearing the west canvas edge at
-        # 360 px needs dx >= +10. So dy has to do the work - a pill is 17 px
+        # 360 px needs dx >= +10. So dy has to do the work: a pill is 17 px
         # tall and a marker 5 px in radius, which needs |dy| >= 14. At
-        # ("middle", 0, -16) the label sits above its dot, clears it, and also
-        # clears Mexico City and Miami at every width.
+        # ("middle", 0, -16) the label sat above its dot, cleared it, and also
+        # cleared Mexico City and Miami at every width.
         #
         # BELOW its dot since 2026-09-27: above it, the pill covered
         # Monterrey's marker in the landing view, where Monterrey sits 21 px
@@ -612,14 +576,10 @@ CITIES = [
         "region": "Europe",
         "country": "Spain",
         # Outside the United States frame, like every non-US city - see
-        # IN_DEFAULT_VIEW below. The first city here in EUROPE, which is what
-        # the region model was always going to have to absorb.
+        # IN_DEFAULT_VIEW below. The first city in EUROPE.
         "in_default_view": False,
-        # ABOVE its dot, and this key MUST EXIST AT ALL - Mexico City omitting
-        # it took the whole Overview page down on 2026-09-22, because
-        # pd.DataFrame fills a missing key with float('nan') and `nan is None`
-        # is False. Overview.py is scalar-safe now; every city still declares
-        # one, because fifteen cities happening to have one is what hid that.
+        # ABOVE its dot, and this key MUST EXIST AT ALL: Mexico City omitting
+        # it took the whole Overview page down on 2026-09-22 (see its entry).
         #
         # Madrid is alone in its region and far from every other city on the
         # map, so nothing constrains this but the canvas edge. Measured by
@@ -643,18 +603,18 @@ CITIES = [
                  "the city)",
         # Outside the United States frame, like every non-US city. OMITTING
         # THIS IS NOT NEUTRAL: IN_DEFAULT_VIEW defaults a missing key to TRUE,
-        # so Barcelona silently joined the landing frame and stretched it from
-        # California to Catalonia. The symptom named innocent cities -
-        # check_deploy_imports reported Calgary/Toronto and Guadalajara/Los
-        # Angeles colliding and three labels clipped off the west edge, because
-        # everything had been compressed to fit an Atlantic-wide view.
+        # so Barcelona once joined the landing frame and stretched it from
+        # California to Catalonia. The symptoms named other cities (Calgary/
+        # Toronto and Guadalajara/Los Angeles colliding, three labels clipped
+        # off the west edge), because everything was compressed to fit an
+        # Atlantic-wide view.
         "in_default_view": False,
         # Spain's two cities sit 500 km apart but frame close together, and
-        # Madrid's label goes ABOVE its marker - so Barcelona's goes to the
+        # Madrid's label goes ABOVE its marker, so Barcelona's goes to the
         # RIGHT rather than stacking into it. Omitting this key is not a
-        # neutral default: pd.DataFrame fills a missing key with float('nan'),
-        # and nan is truthy, which is what took the Overview down on
-        # 2026-09-22.
+        # neutral default either: pd.DataFrame fills a missing key with
+        # float('nan'), and nan is truthy, which is what took the Overview down
+        # on 2026-09-22.
         "label_offset": ("start", 14, 6),
         "region": "Europe",
         "country": "Spain",
@@ -699,10 +659,10 @@ CITIES = [
         "region": "Europe",
         "country": "Italy",
         "in_default_view": False,
-        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
-        # Prague, Göteborg, Den Haag and Zurich together, with every
-        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
-        # 768 and 1200. Right of the dot: above it, Milan's pill covered Zurich's marker.
+        # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
+        # Göteborg, Den Haag and Zurich together gives check_macro_labels.py
+        # PROBLEMS 0 at 375, 768 and 1200. Right of the dot: above it, Milan's
+        # pill covered Zurich's marker.
         "label_offset": ("start", 11, 0),
     },
     {
@@ -721,15 +681,14 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # TURNED BELOW THE DOT 2026-09-24, when Oslo joined Europe, and the
-        # check chose it. Oslo is far enough north that the Europe frame
-        # zoomed out, which pressed the French cities together: at the old
-        # ("middle", 0, -22) Paris's pill covered Lille (Regional)'s marker
-        # and overlapped Rennes' label at all three widths (6 problems).
-        # Scored alternatives: below, right ("start", 12, 4) and upper-right
-        # ("start", 10, -14) all 0; left ("end", -12, 4) covered Rennes.
-        # Below keeps it clear of both neighbours that crowd it - Lille to
-        # the north, Rennes to the west.
+        # BELOW THE DOT since 2026-09-24, when Oslo joined Europe. Oslo is far
+        # enough north that the Europe frame zoomed out, which pressed the
+        # French cities together: at the old ("middle", 0, -22) Paris's pill
+        # covered Lille (Regional)'s marker and overlapped Rennes' label at all
+        # three widths (6 problems). Scored alternatives: below, right
+        # ("start", 12, 4) and upper-right ("start", 10, -14) all 0; left
+        # ("end", -12, 4) covered Rennes. Below keeps it clear of both
+        # neighbours that crowd it: Lille to the north, Rennes to the west.
         "label_offset": ("middle", 0, 22),
     },
     {
@@ -748,29 +707,26 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # BELOW THE MARKER, not above, and the check chose it rather than
-        # taste. Marseille's width was measured at 60.3 px in a real browser
-        # with Space Grotesk loaded (five known cities reproduced the table
-        # exactly, which is what proves the font loaded). At the scaffold's
-        # default ("middle", 0, -22) it collided TWICE in the United States
-        # view at 1200 px - Madrid x Marseille 28.4 x 2.9 px and
-        # Milan x Marseille 43.4 x 6.2 px - because every European city here
-        # points its label straight up and Marseille sits between them.
+        # BELOW THE MARKER, not above, chosen by the check rather than taste
+        # (width 60.3 px). At the scaffold's default ("middle", 0, -22) it
+        # collided TWICE in the United States view at 1200 px (Madrid x
+        # Marseille 28.4 x 2.9 px, Milan x Marseille 43.4 x 6.2 px), because
+        # every European city here points its label straight up and Marseille
+        # sits between them.
         #
-        # The same offset every other European city uses, and deliberately so
-        # after two attempts to tune it away. Marseille is boxed in - Paris
-        # north, Milan north-east, Madrid west, Barcelona south-west, and
-        # Barcelona's own label points up into Marseille's space - so moving
-        # it above collided with Madrid and Milan, and moving it below then
-        # collided with Barcelona at 38.6 x 12.1 px.
+        # The same offset every other European city uses, deliberately, after
+        # two attempts to tune it away. Marseille is boxed in (Paris north,
+        # Milan north-east, Madrid west, Barcelona south-west, and Barcelona's
+        # own label points up into Marseille's space), so above collided with
+        # Madrid and Milan, and below with Barcelona at 38.6 x 12.1 px.
         #
         # OWNER'S CALL 2026-09-23: the two remaining overlaps happen only in
         # the UNITED STATES view, where Europe is a corner cluster, and chasing
-        # them is not worth it as coverage goes global - a parent region labels
+        # them is not worth it as coverage goes global: a parent region labels
         # every city on earth, so this class of collision grows with the map
         # rather than with any defect. Recorded in check_macro_labels.py's
-        # ACCEPTED_OVERLAPS with the measured numbers, which is the mechanism
-        # built for exactly this and which still fails if the geometry moves.
+        # ACCEPTED_OVERLAPS with the measured numbers; it still fails if the
+        # geometry moves.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -789,24 +745,17 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # ANCHORED "end" SO THE LABEL RUNS WEST, and the check chose it.
-        # Toulouse's width was measured at 60.4 px in a real browser with
-        # Space Grotesk loaded (six cities already in the table reproduced
-        # exactly, which is what proves the font loaded rather than a
-        # fallback).
-        #
-        # At the scaffold's default ("middle", 0, -22) it collided with
-        # MARSEILLE at 19.5 x 12.5 px in the Europe view at all three widths.
-        # The cause is geometric rather than cosmetic: Toulouse is 43.60 N and
-        # Marseille 43.30 N, so at this scale their labels sit at the same
-        # HEIGHT, and both pointed straight up with the same offset.
+        # ANCHORED "end" SO THE LABEL RUNS WEST, chosen by the check (width
+        # 60.4 px). At the scaffold's default ("middle", 0, -22) it collided
+        # with MARSEILLE at 19.5 x 12.5 px in the Europe view at all three
+        # widths: Toulouse is 43.60 N and Marseille 43.30 N, so at this scale
+        # their labels sit at the same HEIGHT, and both pointed straight up.
         #
         # Toulouse is WEST of Marseille (1.44 E against 5.37 E), so running
         # its label leftward separates them along the axis they actually
-        # differ on instead of fighting for vertical space. Moving it DOWN was
-        # the other option and was rejected: Barcelona sits south at 41.39 N
-        # with its own label pointing up, which is the collision Marseille's
-        # comment records hitting at 38.6 x 12.1 px.
+        # differ on. DOWN was rejected: Barcelona sits south at 41.39 N with
+        # its own label pointing up (the collision Marseille's entry records
+        # at 38.6 x 12.1 px).
         "label_offset": ("end", -8, -22),
     },
     {
@@ -825,14 +774,10 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN - not left
-        # unexamined. Width measured at 99.7 px in a real browser with Space
-        # Grotesk loaded (five cities already in the table reproduced
-        # exactly), then check_macro_labels.py scored every region at three
-        # widths: PROBLEMS 0. Lille sat north of every other European city
-        # here, so a label pointing up had nothing to meet - unlike
-        # Toulouse, whose default collided with Marseille at the same
-        # latitude and had to be turned west.
+        # THE SCAFFOLD'S DEFAULT first scored clean (width 99.7 px;
+        # check_macro_labels.py, every region at three widths, PROBLEMS 0):
+        # Lille sat north of every other European city here, so a label
+        # pointing up had nothing to meet.
         #
         # TURNED UP AND WEST 2026-09-24, when Amsterdam arrived north of it:
         # the pill above the dot covered Amsterdam's marker at 375, 768 and
@@ -843,10 +788,9 @@ CITIES = [
         # TURNED DOWN AND EAST 2026-09-28, when London arrived north-west of
         # it: the up-and-west pill covered London's marker at every width
         # whatever London's own label did. Scored as a pair with London's 12
-        # candidates (scratch score_pair.py): lower-right here with London's
-        # label left of its dot is the only pair at PROBLEMS 0 in every region
-        # at 375, 768 and 1200; due east covered Prague's marker, below met
-        # Rennes and covered Paris.
+        # candidates, lower-right here with London's label left of its dot is
+        # the only pair at PROBLEMS 0 in every region at 375, 768 and 1200;
+        # due east covered Prague's marker, below met Rennes and covered Paris.
         "label_offset": ("middle", 0, -20),
     },
     {
@@ -865,13 +809,11 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN. Width
-        # measured at 49.7 px in the deployed app's own frame with Space
-        # Grotesk loaded (six cities already in the table reproduced
-        # exactly), then check_macro_labels.py scored every region at three
-        # widths: PROBLEMS 0, and Rennes is not among the labels clipped at
-        # 375 px. It sits alone in the west of France, 3.4 degrees of
-        # longitude from Paris, so a label pointing up has nothing to meet.
+        # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN (width 49.7 px):
+        # check_macro_labels.py scored every region at three widths, PROBLEMS
+        # 0, and Rennes is not among the labels clipped at 375 px. It sits
+        # alone in the west of France, 3.4 degrees of longitude from Paris, so
+        # a label pointing up has nothing to meet.
         "label_offset": ("start", 10, 6),
     },
     {
@@ -890,19 +832,14 @@ CITIES = [
         "region": "Europe",
         "country": "Norway",
         "in_default_view": False,
-        # TURNED BELOW THE DOT, and not by check_macro_labels.py. Width 29.0
-        # px, measured in the deployed app's own frame with six table entries
-        # reproducing exactly. The scaffold's ("middle", 0, -22) scored clean
-        # against every label and dot - but Oslo is the northernmost city in
-        # the Europe frame, and deploy-verify (2026-09-24) found its name
-        # ENTIRELY under the macro map's "Light mode" button at 375 px (label
-        # x 242-281, y 18-36; button x 180-291, y 10-42). The checker does not
-        # model that button, so its PROBLEMS 0 could not see this. Below the
-        # dot the label clears the button's bottom edge. Oslo also changed
-        # the frame itself - see Paris's entry. Moved LEFT of the dot
-        # (2026-09-30, tram kit): below it, Oslo's label met Göteborg's, and
-        # no Göteborg offset cleared both Oslo and Copenhagen. The checker
-        # now models the theme button (its BUTTONS), so PROBLEMS 0 covers it.
+        # LEFT of the dot since 2026-09-30: below it, Oslo's label met
+        # Göteborg's, and no Göteborg offset cleared both Oslo and Copenhagen.
+        # Above it (the scaffold's ("middle", 0, -22)), Oslo, the northernmost
+        # city in the Europe frame, sat ENTIRELY under the macro map's "Light
+        # mode" button at 375 px (label x 242-281, y 18-36; button x 180-291,
+        # y 10-42; 2026-09-24). The checker now models the theme button (its
+        # BUTTONS), so PROBLEMS 0 covers it. Oslo also changed the frame
+        # itself: see Paris's entry.
         "label_offset": ("end", -11, 0),
     },
     {
@@ -921,11 +858,10 @@ CITIES = [
         "region": "Europe",
         "country": "Denmark",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured at 85.5 px in the app's own document (2026-09-24), and
-        # check_macro_labels.py passes every region at 375, 768 and 1200 with
-        # PROBLEMS 0 - Copenhagen sits mid-frame in Europe, clear of Oslo to
-        # the north and of the map's controls.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0. Copenhagen
+        # sits mid-frame in Europe, clear of Oslo to the north and of the map's
+        # controls.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -944,12 +880,10 @@ CITIES = [
         "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured at 47.3 px in the app's own document (2026-09-24), and
-        # check_macro_labels.py passes every region at 375, 768 and 1200 with
-        # PROBLEMS 0. Moved left of the dot and up (2026-09-30, tram kit):
-        # above it, Prague's label met Den Haag's once Europe's frame took in
-        # the tram cities.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0. Moved left
+        # of the dot and up (2026-09-30): above it, Prague's label met Den
+        # Haag's once Europe's frame took in the tram cities.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -968,11 +902,10 @@ CITIES = [
         "region": "Europe",
         "country": "Netherlands",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured at 76.5 px in the app's own document with nine entries
-        # reproduced, and check_macro_labels.py passes every region at 375,
-        # 768 and 1200 with PROBLEMS 0 - after Lille's label was turned up
-        # and west, since Lille's pill had covered this marker.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0, once
+        # Lille's label was turned up and west (Lille's pill had covered this
+        # marker).
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -991,14 +924,8 @@ CITIES = [
         "region": "Europe",
         "country": "Italy",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured at 37.5 px in the app's own document with nine entries
-        # reproduced, and check_macro_labels.py passes every region at 375,
-        # 768 and 1200 with PROBLEMS 0 - re-scored after merging with
-        # Amsterdam, built on a separate branch the same night.
-        #
-        # MOVED RIGHT OF THE DOT 2026-09-30 (tram kit), when Florence joined:
-        # above the dot this pill covered Florence's marker in Europe at all three
+        # RIGHT OF THE DOT since 2026-09-30, when Florence joined: above the
+        # dot this pill covered Florence's marker in Europe at all three
         # widths. check_macro_labels.py (python -B, an in-process grid) passes
         # start 11 at dy -6 to +10 with Florence at its offset; +2 sits inside
         # that, PROBLEMS 0 at 375, 768 and 1200.
@@ -1021,11 +948,10 @@ CITIES = [
         "country": "Brazil",
         "in_default_view": False,
         # LEFT of the dot, not above: Santos's dot is 6 px away at South
-        # America's zoom (3.04) and Rio's 40 px east, so the three names
-        # go three ways - São Paulo west, Rio east, Santos below. Scored: the
-        # label width was measured in the app's own document with eleven
-        # entries reproduced, and check_macro_labels.py passes every region at
-        # 375, 768 and 1200 with PROBLEMS 0.
+        # America's zoom (3.04) and Rio's 40 px east, so the three names go
+        # three ways (São Paulo west, Rio east, Santos below). Scored:
+        # check_macro_labels.py passes every region at 375, 768 and 1200 with
+        # PROBLEMS 0.
         "label_offset": ("end", -11, 0),
     },
     {
@@ -1044,10 +970,9 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # RIGHT of the dot, clear of São Paulo's name 40 px west. Scored: the
-        # label width was measured in the app's own document with eleven
-        # entries reproduced, and check_macro_labels.py passes every region at
-        # 375, 768 and 1200 with PROBLEMS 0.
+        # RIGHT of the dot, clear of São Paulo's name 40 px west. Scored:
+        # check_macro_labels.py passes every region at 375, 768 and 1200 with
+        # PROBLEMS 0.
         "label_offset": ("start", 11, 0),
     },
     {
@@ -1066,10 +991,8 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured in the app's own document with eleven entries reproduced,
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ('middle', 0, -22),
     },
     {
@@ -1088,10 +1011,8 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured in the app's own document with eleven entries reproduced,
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ('middle', 0, -22),
     },
     {
@@ -1110,10 +1031,8 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured in the app's own document with eleven entries reproduced,
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ('middle', 0, -22),
     },
     {
@@ -1132,16 +1051,11 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured in the app's own document with eleven entries reproduced,
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0.
-        # Up and right since Buenos Aires joined the region (2026-09-28): the
-        # wider view put the above-dot pill under the zoom buttons at 375 px,
-        # and right or below met Recife. Scored PROBLEMS 0 at 375, 768, 1200.
-        # Left of its dot (deploy-verify, review time 2026-09-28): right of it,
-        # the South America view's right edge cut the name by 35% at 375 px once
-        # Buenos Aires widened the view. Left of it: PROBLEMS 0 and nothing clipped.
+        # LEFT of its dot and up (2026-09-28). Once Buenos Aires widened the
+        # South America view, the above-dot pill sat under the zoom buttons at
+        # 375 px, right or below met Recife, and up-and-right was cut 35% by
+        # the view's right edge at 375 px. Left: PROBLEMS 0 at 375, 768 and
+        # 1200, and nothing clipped.
         "label_offset": ("end", -12, -10),
     },
     {
@@ -1160,12 +1074,9 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured in the app's own document with eleven entries reproduced,
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0.
-        # 7.5 px (5%) clipped at the west edge at phone width -
-        # reported, not failed, the class Guadalajara's 6% is in.
+        # Above the dot it scored PROBLEMS 0 with 7.5 px (5%) clipped at the
+        # west edge at phone width (reported, not failed: the class
+        # Guadalajara's 6% is in).
         # Right of the dot since Buenos Aires joined the region (2026-09-28):
         # above met Santos's pill and below met Buenos Aires's. Scored
         # PROBLEMS 0 at 375, 768 and 1200.
@@ -1187,10 +1098,8 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured in the app's own document with eleven entries reproduced,
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ('middle', 0, -22),
     },
     {
@@ -1210,10 +1119,8 @@ CITIES = [
         "country": "Brazil",
         "in_default_view": False,
         # BELOW the dot: São Paulo's dot sits 6 px away, so its name runs
-        # west and this one drops under both. Scored: the label width was
-        # measured in the app's own document with eleven entries reproduced,
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0.
+        # west and this one drops under both. Scored: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ('middle', 0, 22),
     },
     {
@@ -1234,8 +1141,7 @@ CITIES = [
         "in_default_view": False,
         # UP AND LEFT of the dot, the only placement that scores: Amsterdam's
         # name sits above, Lille's to the south-west and Prague's pill to the
-        # east. Width 70.7 px measured in the app's own document, thirteen
-        # entries reproduced; check_macro_labels.py passes every region at
+        # east (width 70.7 px). check_macro_labels.py passes every region at
         # 375, 768 and 1200 with PROBLEMS 0. TIGHT: dy -11 touches Lille's pill
         # and -13 Amsterdam's (1-2 px), so the next European city near here
         # re-scores this one first.
@@ -1407,14 +1313,12 @@ CITIES = [
         "region": "East Asia",
         "country": "South Korea",
         "in_default_view": False,
-        # Below the dot, away from Daegu to the north-west (width 41.9 px,
-        # measured 2026-09-27): above it, Busan's pill grazed Daegu's marker,
-        # and to its right the two pills overlapped (check_macro_labels.py
-        # --verbose). With Daegu's label to its left, neither grazes.
         # LOWER LEFT since 2026-09-28: below the dot, Busan's pill covered
         # Fukuoka's marker. Of 432 placements of Busan, Daegu and Kobe scored
         # with Fukuoka's label below its dot, this is the one clean one that
-        # moves a single existing label.
+        # moves a single existing label. Above the dot Busan's pill grazed
+        # Daegu's marker, and to its right the two pills overlapped (width
+        # 41.9 px, measured 2026-09-27).
         "label_offset": ("end", -10, 16),
     },
     {
@@ -1483,14 +1387,12 @@ CITIES = [
         "region": "East Asia",
         "country": "Japan",
         "in_default_view": False,
-        # BELOW its dot: Kobe sits ~28 km west at the same latitude, and the
-        # two pills above their dots overlapped 44 x 18 px at every width.
-        # Kobe keeps its label above. Scored clear by check_macro_labels.py at
-        # 375, 768 and 1200 (width 40.6 px, measured 2026-09-27 in the app's
-        # own document).
         # RIGHT of its dot since 2026-09-28: Sapporo widened the East Asia
         # frame, and below the dot Osaka's pill then met Busan's (4.0 x 13.6
-        # px at every width). Kobe's label stays above its own dot.
+        # px at every width). Above the dot it overlapped Kobe's pill by
+        # 44 x 18 px at every width: Kobe sits ~28 km west at the same
+        # latitude and keeps its label above. Width 40.6 px, measured
+        # 2026-09-27.
         "label_offset": ("start", 12, 8),
     },
     {
@@ -1498,8 +1400,8 @@ CITIES = [
         "lat": 43.0687,
         "lon": 141.3508,
         "page": "pages/52_Sapporo_Heatmap.py",
-        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
-        # figures are table C's and D's in docs/map_inconsistencies.md.
+        # Macro-map facts, owner-approved 2026-09-28: the figures are table
+        # C's and D's in docs/map_inconsistencies.md.
         "coverage": "narrowed",
         "mode": "metro",
         "placement": "Joined to address blocks (86.0%)",
@@ -1521,8 +1423,8 @@ CITIES = [
         "lat": 33.59,
         "lon": 130.4,
         "page": "pages/53_Fukuoka_Heatmap.py",
-        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
-        # figures are table C's and D's in docs/map_inconsistencies.md.
+        # Macro-map facts, owner-approved 2026-09-28: the figures are table
+        # C's and D's in docs/map_inconsistencies.md.
         "coverage": "narrowed",
         "mode": "metro",
         "placement": "Joined to address blocks (98.1%); ministry coordinates where missed",
@@ -1546,8 +1448,8 @@ CITIES = [
         "lat": 35.01,
         "lon": 135.77,
         "page": "pages/54_Kyoto_Heatmap.py",
-        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
-        # figures are table C's and D's in docs/map_inconsistencies.md.
+        # Macro-map facts, owner-approved 2026-09-28: the figures are table
+        # C's and D's in docs/map_inconsistencies.md.
         "coverage": "narrowed",
         "mode": "metro",
         "placement": "Joined to address blocks (93.2%)",
@@ -1559,8 +1461,8 @@ CITIES = [
         "region": "East Asia",
         "country": "Japan",
         "in_default_view": False,
-        # FAR ABOVE its dot (width 40.2 px, measured 2026-09-28 in the app's
-        # own document): at the usual 22 px it met Kobe's label, which sits
+        # FAR ABOVE its dot (width 40.2 px, measured 2026-09-28): at the
+        # usual 22 px it met Kobe's label, which sits
         # above Kobe's dot to the south-west; right of the dot it met Osaka's.
         # Of 35 Kyoto / Kobe placements scored, 40 px up is the nearest clean
         # one that moves no existing label. check_macro_labels.py: clear at
@@ -1586,8 +1488,8 @@ CITIES = [
         "region": "East Asia",
         "country": "Japan",
         "in_default_view": False,
-        # RIGHT of its dot, a little up (width 40.5 px, measured 2026-09-28 in
-        # the app's own document): at the usual 22 px below it met Osaka's
+        # RIGHT of its dot, a little up (width 40.5 px, measured 2026-09-28):
+        # at the usual 22 px below it met Osaka's
         # label, which the East Asia frame draws close by; above, Kobe's and
         # Kyoto's. Of nine placements scored, this and 40 px below were clean,
         # and this sits nearer its dot. check_macro_labels.py: clear at 375,
@@ -1600,9 +1502,9 @@ CITIES = [
         "lon": 13.405,
         "page": "pages/56_Berlin_Heatmap.py",
         # Owner-approved 2026-09-28. rail_extra, record_kind and categories are
-        # the "Why the maps differ" page's fields (worktree-cleanup, landing at
-        # review time); "Chamber of commerce register" and "Personal services
-        # thin" are new allowed values there.
+        # the "Why the maps differ" page's fields; "Chamber of commerce
+        # register" and "Personal services thin" were added as allowed values
+        # there for Berlin.
         "coverage": "narrowed",
         "mode": "metro",
         "placement": "Register coordinates",
@@ -1614,10 +1516,8 @@ CITIES = [
         "region": "Europe",
         "country": "Germany",
         "in_default_view": False,
-        # Above the dot, and SCORED rather than assumed: the label width was
-        # measured at 38.8 px in the app's own document (2026-09-28, five
-        # entries reproduced), and check_macro_labels.py passes every region
-        # at 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED rather than assumed: check_macro_labels.py
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1626,8 +1526,8 @@ CITIES = [
         "lon": -0.1278,
         "page": "pages/57_London_Heatmap.py",
         # Owner-approved 2026-09-28. rail_extra, record_kind and categories are
-        # the "Why the maps differ" page's fields (worktree-cleanup, landing at
-        # review time); "Food hygiene register" is a new allowed value there.
+        # the "Why the maps differ" page's fields; "Food hygiene register" was
+        # added as an allowed value there for London.
         "coverage": "one_bucket",
         "mode": "metro",
         "placement": "Register coordinates (91%) and postcode centres (4%)",
@@ -1639,9 +1539,8 @@ CITIES = [
         "region": "Europe",
         "country": "United Kingdom",
         "in_default_view": False,
-        # Left of the dot, and SCORED: the label width was measured at 50.9 px
-        # in the app's own document (2026-09-28, five entries reproduced).
-        # Above met Amsterdam and Rotterdam; below and right met Rennes or
+        # Left of the dot, SCORED (width 50.9 px). Above met Amsterdam and
+        # Rotterdam; below and right met Rennes or
         # Lille. With Lille's label turned down and east, left of the dot is
         # PROBLEMS 0 in every region at 375, 768 and 1200.
         "label_offset": ("end", -12, 5),
@@ -1663,10 +1562,9 @@ CITIES = [
         "region": "South America",
         "country": "Argentina",
         "in_default_view": False,
-        # Above the dot, and SCORED: the label width was measured at 87.4 px in
-        # the deployed app's own frame (2026-09-28, seven entries reproduced),
-        # and with Fortaleza and Porto Alegre moved, every region passes at
-        # 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED (width 87.4 px): with Fortaleza and Porto
+        # Alegre moved, every region passes at 375, 768 and 1200 with
+        # PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1686,14 +1584,10 @@ CITIES = [
         "region": "Europe",
         "country": "United Kingdom",
         "in_default_view": False,
-        # Above the dot, and SCORED: the label width was measured at 56.8 px in
-        # the deployed app's own frame (2026-09-28, three entries reproduced),
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0. Nothing else is near it on the Europe view.
-        # Beside its dot, not above: see Newcastle (Regional)'s note.
-        # Right of its dot after all (deploy-verify, review time 2026-09-28): left
-        # of it, the Europe view's left edge cut the name to "sgow" at 375 px
-        # (41% clipped). Right of it: PROBLEMS 0 and nothing clipped.
+        # Beside its dot, not above: see Newcastle (Regional)'s note. RIGHT of
+        # the dot (2026-09-28): left of it, the Europe view's left edge cut the
+        # name to "sgow" at 375 px (41% clipped). Right of it: PROBLEMS 0 and
+        # nothing clipped. Width 56.8 px.
         "label_offset": ("start", 12, -4),
     },
     {
@@ -1701,7 +1595,7 @@ CITIES = [
         "lat": 54.9738,
         "lon": -1.6131,
         "page": "pages/60_Newcastle_Heatmap.py",
-        # Owner-approved 2026-09-28, London's values; rail_extra "—": the
+        # Owner-approved 2026-09-28, London's values; rail_extra a dash: the
         # Metro is its own system, its Sunderland stretch on shared track
         # disclosed on the page.
         "coverage": "one_bucket",
@@ -1715,16 +1609,11 @@ CITIES = [
         "region": "Europe",
         "country": "United Kingdom",
         "in_default_view": False,
-        # Above the dot, and SCORED: the label width was measured at 143.1 px
-        # in the deployed app's own frame (2026-09-28, four entries
-        # reproduced), and check_macro_labels.py passes every region at 375,
-        # 768 and 1200 with PROBLEMS 0 - scored WITHOUT Glasgow, which is on
-        # its own branch; re-score when both have landed.
-        # Glasgow and Newcastle together (review time 2026-09-28, owner): each was
-        # scored without the other, and above-the-dot Newcastle covered Glasgow's
-        # marker at 1200 px. A search of 48 pairs passed only with Newcastle lifted
-        # 48 px and Glasgow's name beside its dot. The owner accepted the drift
-        # a 48 px lift costs when zoomed in; check_macro_labels.py PROBLEMS 0.
+        # 48 px ABOVE the dot (owner, 2026-09-28; width 143.1 px). At the usual
+        # offset above the dot Newcastle covered Glasgow's marker at 1200 px. A
+        # search of 48 pairs passed only with Newcastle lifted 48 px and
+        # Glasgow's name beside its dot. The owner accepted the drift a 48 px
+        # lift costs when zoomed in; check_macro_labels.py PROBLEMS 0.
         "label_offset": ("middle", 0, -48),
     },
     {
@@ -1744,10 +1633,9 @@ CITIES = [
         "region": "Oceania",
         "country": "Australia",
         "in_default_view": False,
-        # Above the dot, and SCORED: the label width was measured at 51.4 px in
-        # the deployed app's own frame (2026-09-28, three entries reproduced),
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0. Alone in Oceania until Melbourne arrives.
+        # Above the dot, SCORED (width 51.4 px): check_macro_labels.py passes
+        # every region at 375, 768 and 1200 with PROBLEMS 0. Alone in Oceania
+        # until Melbourne arrives.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1767,10 +1655,8 @@ CITIES = [
         "region": "Oceania",
         "country": "Australia",
         "in_default_view": False,
-        # Above the dot, and SCORED: the label width was measured at 72.4 px in
-        # the deployed app's own frame (2026-09-28, three entries reproduced),
-        # and check_macro_labels.py passes every region at 375, 768 and 1200
-        # with PROBLEMS 0, Sydney included.
+        # Above the dot, SCORED (width 72.4 px): check_macro_labels.py passes
+        # every region at 375, 768 and 1200 with PROBLEMS 0, Sydney included.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1789,15 +1675,12 @@ CITIES = [
         "region": "Europe",
         "country": "Sweden",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 72.1 px measured in the deployed
-        # app's own frame (2026-09-29, four entries reproduced). Europe's zoom
-        # leaves Stockholm out, as it does Riga (REGION_ZOOM_WITHOUT): fitted
-        # to it, the zoom dropped and put four label pairs on top of each
-        # other. check_macro_labels.py then passes every region at 375, 768
-        # and 1200 with PROBLEMS 0.
-        # Below the dot since 2026-09-30 (cleanup): Prague's move to Czechia
-        # re-centred Europe, and above it the pill sat under the theme button
-        # on a phone (79.5 x 4.6 px). A sweep: PROBLEMS 0 at 375, 768, 1200.
+        # BELOW the dot since 2026-09-30: Prague's move to Czechia re-centred
+        # Europe, and above it the pill sat under the theme button on a phone
+        # (79.5 x 4.6 px); PROBLEMS 0 at 375, 768, 1200. Width 72.1 px.
+        # Europe's zoom leaves Stockholm out, as it does Riga
+        # (REGION_ZOOM_WITHOUT): fitted to it, the zoom dropped and put four
+        # label pairs on top of each other.
         "label_offset": ("middle", 0, 22),
     },
     {
@@ -1816,10 +1699,9 @@ CITIES = [
         "region": "Europe",
         "country": "Romania",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 69.8 px measured in the deployed
-        # app's own frame (2026-09-29, four entries reproduced). Europe's zoom
-        # leaves Bucharest out (REGION_ZOOM_WITHOUT); check_macro_labels.py
-        # then passes every region at 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED (width 69.8 px). Europe's zoom leaves
+        # Bucharest out (REGION_ZOOM_WITHOUT); check_macro_labels.py then
+        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1839,9 +1721,7 @@ CITIES = [
         "country": "South Korea",
         "in_default_view": False,
         # BELOW the dot since Bucheon joined (2026-09-29): above, its pill
-        # covered Bucheon's marker at all three widths. Width 54.4 px measured
-        # in the deployed app's own frame (2026-09-29, four entries
-        # reproduced). Labelled in the Seoul Capital Area region only;
+        # covered Bucheon's marker at all three widths (width 54.4 px).
         # check_macro_labels.py passes every region at 375, 768 and 1200 with
         # PROBLEMS 0.
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
@@ -1866,10 +1746,8 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 52.1 px measured in the deployed app's
-        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
-        # Capital Area region; check_macro_labels.py passes every region at
-        # 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED (width 52.1 px): check_macro_labels.py passes
+        # every region at 375, 768 and 1200 with PROBLEMS 0.
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
@@ -1892,10 +1770,8 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 71.4 px measured in the deployed app's
-        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
-        # Capital Area region; check_macro_labels.py passes every region at
-        # 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED (width 71.4 px): check_macro_labels.py passes
+        # every region at 375, 768 and 1200 with PROBLEMS 0.
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
@@ -1918,10 +1794,8 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 45.9 px measured in the deployed app's
-        # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
-        # Capital Area region; check_macro_labels.py passes every region at
-        # 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED (width 45.9 px): check_macro_labels.py passes
+        # every region at 375, 768 and 1200 with PROBLEMS 0.
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
@@ -1944,10 +1818,8 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 45.3 px measured in the local app's
-        # own document (2026-09-29, seven entries reproduced). Labelled in the
-        # Seoul Capital Area region; check_macro_labels.py passes every region
-        # at 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED (width 45.3 px): check_macro_labels.py passes
+        # every region at 375, 768 and 1200 with PROBLEMS 0.
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
@@ -1970,10 +1842,8 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 60.1 px measured in the local app's
-        # own document (2026-09-29, seven entries reproduced). Labelled in the
-        # Seoul Capital Area region; check_macro_labels.py passes every region
-        # at 375, 768 and 1200 with PROBLEMS 0.
+        # Above the dot, SCORED (width 60.1 px): check_macro_labels.py passes
+        # every region at 375, 768 and 1200 with PROBLEMS 0.
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
@@ -1996,12 +1866,11 @@ CITIES = [
         "region": "Europe",
         "country": "Norway",
         "in_default_view": False,
-        # Above the dot, and SCORED: width 48.3 px measured in the local app's
-        # own document (2026-09-29, five entries reproduced, Oslo's included).
-        # Bergen is now the Europe frame's northernmost city, Oslo's position
-        # when its label hid under the "Light mode" button; at 375 px Bergen
-        # sits far enough west that its label clears the button (seen in the
-        # browser, 2026-09-29). check_macro_labels.py: PROBLEMS 0.
+        # Above the dot, SCORED (width 48.3 px). Bergen is the Europe frame's
+        # northernmost city, Oslo's position when its label hid under the
+        # "Light mode" button; at 375 px Bergen sits far enough west that its
+        # label clears the button (2026-09-29). check_macro_labels.py:
+        # PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2020,12 +1889,11 @@ CITIES = [
         "region": "Europe",
         "country": "Denmark",
         "in_default_view": False,
-        # LEFT of the dot and a little below, and SCORED: width 46.9 px
-        # measured in the local app's own document (2026-09-29, Prague, Tokyo,
-        # London, Glasgow and Oslo reproduced). Above the dot, the default, it
-        # overlapped Copenhagen's label (53.4 x 9.7 px) at every width; below,
-        # Berlin's. check_macro_labels.py passes dy 6 to 16 here, and 10 is the
-        # middle of that range: PROBLEMS 0 at 375, 768 and 1200.
+        # LEFT of the dot and a little below, SCORED (width 46.9 px). Above the
+        # dot, the default, it overlapped Copenhagen's label (53.4 x 9.7 px) at
+        # every width; below, Berlin's. check_macro_labels.py passes dy 6 to 16
+        # here, and 10 is the middle of that range: PROBLEMS 0 at 375, 768 and
+        # 1200.
         "label_offset": ("end", -11, 10),
     },
     {
@@ -2049,17 +1917,15 @@ CITIES = [
         # Vancouver lesson, below). It is still labelled in Global, United
         # States and United States East.
         "in_default_view": False,
-        # ABOVE-LEFT AND HIGH, and SCORED: width 48.8 px measured 2026-09-29 in
-        # the local app's own document (the Suwon/Bucheon/Bergen session). At
-        # this zoom Buffalo's dot is ~2 px from Toronto's, so the two names
-        # stack: nearer the dot it overlaps Toronto's label in Global, higher
-        # still Edmonton's. check_macro_labels.py passes dy -40 to -50 (read
-        # with `python -B`: a same-length rewrite of this file inside one
-        # second reuses the stale .pyc); -46 is the middle. PROBLEMS 0 at 375,
-        # 768 and 1200.
+        # ABOVE-LEFT AND HIGH, SCORED (width 48.8 px). At this zoom Buffalo's
+        # dot is ~2 px from Toronto's, so the two names stack: nearer the dot
+        # it overlaps Toronto's label in Global, higher still Edmonton's.
+        # check_macro_labels.py passes dy -40 to -50 (read with `python -B`: a
+        # same-length rewrite of this file inside one second reuses the stale
+        # .pyc); -46 is the middle. PROBLEMS 0 at 375, 768 and 1200.
         # SOUTH OF ITS DOT IN UNITED STATES EAST (owner, 2026-09-30; measured
-        # necessary): above it there, the pill read as Toronto's. The landing and
-        # United States views keep the offset below - every south position
+        # necessary): above it there, the pill read as Toronto's. The landing
+        # and United States views keep the offset below: every south position
         # there covers Pittsburgh's, New York's or Philadelphia's dot.
         "label_offset_by_region": {"United States East": ("end", -8, 16)},
         "label_offset": ("end", -11, -46),
@@ -2080,9 +1946,8 @@ CITIES = [
         "region": "United States West",
         "country": "United States",
         "in_default_view": True,
-        # HIGH ABOVE THE DOT, and SCORED: width 81.3 px measured 2026-09-29 in
-        # the local app's own document (the Suwon/Bucheon/Bergen session). At
-        # this zoom Sacramento is a few px from San Francisco, whose label sits
+        # HIGH ABOVE THE DOT, SCORED (width 81.3 px). At this zoom Sacramento
+        # is a few px from San Francisco, whose label sits
         # at -22, so the names stack. check_macro_labels.py (python -B) passes
         # dy -37 to about -42 above the dot; higher, Calgary's and Vancouver's
         # labels; level to the right passes only at exactly dy 0. -40, PROBLEMS
@@ -2112,7 +1977,7 @@ CITIES = [
         # Monterrey's marker; check_macro_labels.py (python -B) passes start
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         #
-        # RAISED to dy -22, 2026-09-30 (tram kit), when New Orleans joined: level,
+        # RAISED to dy -22, 2026-09-30, when New Orleans joined: level,
         # this pill covered New Orleans's marker at the Global zoom, and lower it
         # covers Miami's; left of the dot it meets Los Angeles's and Tucson's
         # pills. A grid over all three sides (python -B, in-process): start 11
@@ -2126,8 +1991,7 @@ CITIES = [
         "lat": 55.3959,
         "lon": 10.3883,
         "page": "pages/130_Odense_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
         "coverage": "full",
         "placement": "Joined by address (98.4%)",
@@ -2139,14 +2003,12 @@ CITIES = [
         "region": "Europe",
         "country": "Denmark",
         "in_default_view": False,
-        # RIGHT of the dot and a little below, and SCORED: width 50.6 px
-        # measured in a browser with Space Grotesk loaded (2026-09-30; seven
-        # built cities' widths reproduced). Above the dot it covered Aarhus's
-        # marker and overlapped Copenhagen's label; below, Amsterdam's and
-        # Berlin's; left, Aarhus's or Amsterdam's. check_macro_labels.py passes
-        # dy 5 to 8 on this side (4 covers Copenhagen's marker, 9 touches
-        # Berlin's label), and 6 sits inside that: PROBLEMS 0 at 375, 768 and
-        # 1200.
+        # RIGHT of the dot and a little below, SCORED (width 50.6 px). Above
+        # the dot it covered Aarhus's marker and overlapped Copenhagen's label;
+        # below, Amsterdam's and Berlin's; left, Aarhus's or Amsterdam's.
+        # check_macro_labels.py passes dy 5 to 8 on this side (4 covers
+        # Copenhagen's marker, 9 touches Berlin's label), and 6 sits inside
+        # that: PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 6),
     },
     {
@@ -2154,8 +2016,7 @@ CITIES = [
         "lat": 56.511,
         "lon": 21.0136,
         "page": "pages/131_Liepaja_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
         "coverage": "narrowed",
         "placement": "Joined by address (93.9%)",
@@ -2167,12 +2028,11 @@ CITIES = [
         "region": "Europe",
         "country": "Latvia",
         "in_default_view": False,
-        # BELOW the dot, and SCORED: width 48.2 px measured in a browser with
-        # Space Grotesk loaded (2026-09-30, three built cities reproduced).
-        # Above, it overlapped Riga's label; left, Copenhagen's; right, its
-        # pill covered Riga's marker. check_macro_labels.py passes dy 14 to 34
-        # below: PROBLEMS 0 at 375, 768 and 1200, with Liepāja left out of
-        # Europe's zoom (REGION_ZOOM_WITHOUT).
+        # BELOW the dot, SCORED (width 48.2 px). Above, it overlapped Riga's
+        # label; left, Copenhagen's; right, its pill covered Riga's marker.
+        # check_macro_labels.py passes dy 14 to 34 below: PROBLEMS 0 at 375,
+        # 768 and 1200, with Liepāja left out of Europe's zoom
+        # (REGION_ZOOM_WITHOUT).
         "label_offset": ("middle", 0, 22),
     },
     {
@@ -2180,8 +2040,7 @@ CITIES = [
         "lat": 55.8714,
         "lon": 26.5161,
         "page": "pages/132_Daugavpils_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
         "coverage": "narrowed",
         "placement": "Joined by address (95.9%)",
@@ -2193,8 +2052,7 @@ CITIES = [
         "region": "Europe",
         "country": "Latvia",
         "in_default_view": False,
-        # RIGHT of the dot, and SCORED: width 73.7 px measured in a browser
-        # with Space Grotesk loaded (2026-09-30). Above, its pill covered
+        # RIGHT of the dot, SCORED (width 73.7 px). Above, its pill covered
         # Riga's marker; below and left, it overlapped Liepāja's label.
         # check_macro_labels.py passes dy -12 to 12 on the right: PROBLEMS 0
         # at 375, 768 and 1200, with Daugavpils left out of Europe's zoom.
@@ -2205,12 +2063,11 @@ CITIES = [
         "lat": 39.08,
         "lon": -94.58,
         "page": "pages/133_Kansas_City_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
-        # NARROWED (the review rehearsal, 2026-09-30): the owner's rule makes a thin
-        # layer narrowed, and Houston, the precedent the tram kit kept "full" on,
-        # is narrowed under it.
+        # NARROWED (2026-09-30): the owner's rule makes a thin layer narrowed,
+        # and Houston, the precedent once cited for "full", is narrowed under
+        # it.
         "coverage": "narrowed",
         "placement": "Register coordinates (100%)",
         "data_age": "Register frozen 2026-01-15; licences valid 2025-26",
@@ -2221,9 +2078,9 @@ CITIES = [
         "region": "United States East",
         "country": "United States",
         "in_default_view": True,
-        # LEFT of the dot and a little below, and SCORED: width 79.3 px measured
-        # in a browser with Space Grotesk loaded (2026-09-30). Inside the frame
-        # the other US cities already set, so the landing view does not move.
+        # LEFT of the dot and a little below, SCORED (width 79.3 px). Inside
+        # the frame the other US cities already set, so the landing view does
+        # not move.
         # Above or below the dot it meets Chicago's, San Diego's or San
         # Francisco's pills at the Global and United States zooms, and right of
         # it the East Coast's markers; Chicago's own label moved left to clear
@@ -2243,8 +2100,7 @@ CITIES = [
         "lat": 32.2226,
         "lon": -110.9747,
         "page": "pages/134_Tucson_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
         "coverage": "full",
         "placement": "Register coordinates (92.4%)",
@@ -2256,12 +2112,11 @@ CITIES = [
         "region": "United States West",
         "country": "United States",
         "in_default_view": True,
-        # BELOW the dot, SCORED on the combined review tree (2026-09-30): width
-        # 48.6 px measured in a browser with Space Grotesk loaded. Tucson is IN
-        # United States West's zoom fit since review lane 2 found three of the
-        # region's dots off a phone without it, and the region's California
-        # labels were re-placed for that zoom. It is MINOR (below), so its pill
-        # shows only in United States West; PROBLEMS 0 at 375, 768 and 1200.
+        # BELOW the dot, SCORED (2026-09-30; width 48.6 px). Tucson is IN
+        # United States West's zoom fit (without it, three of the region's dots
+        # fell off a phone), and the region's California labels were re-placed
+        # for that zoom. It is MINOR (below), so its pill shows only in United
+        # States West; PROBLEMS 0 at 375, 768 and 1200.
         # MINOR (owner, 2026-09-30, call A1): labelled only in its own region;
         # a dot and tooltip on the landing and United States views.
         "label_tier": "minor",
@@ -2272,12 +2127,11 @@ CITIES = [
         "lat": 29.9511,
         "lon": -90.0715,
         "page": "pages/135_New_Orleans_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
-        # NARROWED (the review rehearsal, 2026-09-30): the owner's rule makes a thin
-        # layer narrowed, and Houston, the precedent the tram kit kept "full" on,
-        # is narrowed under it.
+        # NARROWED (2026-09-30): the owner's rule makes a thin layer narrowed,
+        # and Houston, the precedent once cited for "full", is narrowed under
+        # it.
         "coverage": "narrowed",
         "placement": "Register coordinates (95.6%)",
         "data_age": "Active licences, updated daily; fetched 2026-09-30",
@@ -2288,9 +2142,8 @@ CITIES = [
         "region": "United States East",
         "country": "United States",
         "in_default_view": True,
-        # RIGHT of the dot, a little below, and SCORED: width 82.8 px measured in
-        # a browser with Space Grotesk loaded (2026-09-30). Houston's label rose
-        # to clear this marker (see Houston). check_macro_labels.py (python -B)
+        # RIGHT of the dot, a little below, SCORED (width 82.8 px). Houston's
+        # label rose to clear this marker (see Houston). check_macro_labels.py (python -B)
         # passes start 11 at dy 0 to +8 (-2 meets Washington D.C.'s pill at the
         # Global zoom); +4 sits inside that, PROBLEMS 0 at 375, 768 and 1200.
         # MINOR (owner, 2026-09-30, call A1): labelled only in its own region;
@@ -2303,8 +2156,7 @@ CITIES = [
         "lat": 43.7696,
         "lon": 11.2558,
         "page": "pages/136_Florence_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
         "coverage": "full",
         "placement": "Register coordinates (100%)",
@@ -2316,12 +2168,11 @@ CITIES = [
         "region": "Europe",
         "country": "Italy",
         "in_default_view": False,
-        # RIGHT of the dot, a little above, and SCORED: width 58.1 px measured in
-        # a browser with Space Grotesk loaded (2026-09-30). Inside Europe's frame,
-        # so the region's zoom and centre do not move. Rome's label moved right
-        # to clear this marker (see Rome). check_macro_labels.py (python -B)
-        # passes start 11 at dy -12 to +6; -3 sits inside that, PROBLEMS 0 at
-        # 375, 768 and 1200.
+        # RIGHT of the dot, a little above, SCORED (width 58.1 px). Inside
+        # Europe's frame, so the region's zoom and centre do not move. Rome's
+        # label moved right to clear this marker (see Rome).
+        # check_macro_labels.py (python -B) passes start 11 at dy -12 to +6; -3
+        # sits inside that, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, -3),
     },
     {
@@ -2329,12 +2180,10 @@ CITIES = [
         "lat": 57.7089,
         "lon": 11.9746,
         "page": "pages/137_Goteborg_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
-        # ONE CATEGORY on the two-key legend (owner's tier rule of 2026-09-30: food
-        # premises only), as Stockholm; the tram kit set "narrowed" only until
-        # macro-legend landed, and asked for this flip with Stockholm's.
+        # ONE CATEGORY on the two-key legend (owner's tier rule of 2026-09-30:
+        # food premises only), as Stockholm.
         "coverage": "one_bucket",
         "placement": "Register coordinates (99.0%)",
         "data_age": "No dates in the register; fetched 2026-10-01",
@@ -2345,11 +2194,11 @@ CITIES = [
         "region": "Europe",
         "country": "Sweden",
         "in_default_view": False,
-        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
-        # Prague, Göteborg, Den Haag and Zurich together, with every
-        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
-        # 768 and 1200. Above the dot, the scaffold's value, unmoved: the frame's
-        # tightest spot, between Oslo's label and Copenhagen's.
+        # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
+        # Göteborg, Den Haag and Zurich together gives check_macro_labels.py
+        # PROBLEMS 0 at 375, 768 and 1200. Above the dot, the scaffold's value,
+        # unmoved: the frame's tightest spot, between Oslo's label and
+        # Copenhagen's.
         "label_offset": ("end", -11, -16),
     },
     {
@@ -2357,8 +2206,7 @@ CITIES = [
         "lat": 52.0705,
         "lon": 4.3007,
         "page": "pages/138_Den_Haag_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
         "coverage": "narrowed",
         "placement": "Register coordinates",
@@ -2370,10 +2218,10 @@ CITIES = [
         "region": "Europe",
         "country": "Netherlands",
         "in_default_view": False,
-        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
-        # Prague, Göteborg, Den Haag and Zurich together, with every
-        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
-        # 768 and 1200. Right of the dot, the provisional value, unmoved.
+        # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
+        # Göteborg, Den Haag and Zurich together gives check_macro_labels.py
+        # PROBLEMS 0 at 375, 768 and 1200. Right of the dot, the provisional
+        # value, unmoved.
         "label_offset": ("start", 11, 0),
     },
     {
@@ -2381,8 +2229,7 @@ CITIES = [
         "lat": 47.3769,
         "lon": 8.5417,
         "page": "pages/139_Zurich_Heatmap.py",
-        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
-        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        # The macro legend's two keys (owner, 2026-09-30).
         "mode": "tram",
         "coverage": "narrowed",
         "placement": "Register coordinates (100%)",
@@ -2394,10 +2241,10 @@ CITIES = [
         "region": "Europe",
         "country": "Switzerland",
         "in_default_view": False,
-        # SCORED, 2026-09-30 (tram kit): a grid search over Milan, Oslo,
-        # Prague, Göteborg, Den Haag and Zurich together, with every
-        # width measured, gives check_macro_labels.py PROBLEMS 0 at 375,
-        # 768 and 1200. Right of the dot: above it, it met Milan's and Lille's labels.
+        # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
+        # Göteborg, Den Haag and Zurich together gives check_macro_labels.py
+        # PROBLEMS 0 at 375, 768 and 1200. Right of the dot: above it, it met
+        # Milan's and Lille's labels.
         "label_offset": ("start", 11, 0),
     },
     {
@@ -2417,10 +2264,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2440,10 +2286,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("start", 10, 0),
     },
     {
@@ -2463,10 +2308,9 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2486,10 +2330,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -16),
     },
     {
@@ -2509,10 +2352,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("end", -10, 0),
     },
     {
@@ -2532,10 +2374,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2555,10 +2396,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2578,10 +2418,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2601,10 +2440,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2624,10 +2462,9 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -24),
     },
     {
@@ -2647,10 +2484,9 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2670,10 +2506,9 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("end", -10, 0),
     },
     {
@@ -2693,10 +2528,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2716,10 +2550,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         # Le Havre's label is set below and right of the dot by hand: at
         # the scaffold's default it sat on "Rouen (Regional)". At 1200 px
         # it is within 4 px of reading as Rouen's (noted for the owner).
@@ -2742,10 +2575,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("end", -10, 0),
     },
     {
@@ -2765,10 +2597,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2788,10 +2619,9 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2811,10 +2641,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("start", 10, 0),
     },
     {
@@ -2834,10 +2663,9 @@ CITIES = [
         "region": "France South",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("end", -10, 0),
     },
     {
@@ -2857,10 +2685,9 @@ CITIES = [
         "region": "France North",
         "country": "France",
         "in_default_view": False,
-        # MEASURED by the cleanup session on a combined tree (macro-france
-        # plus the twenty French batch cities, 95 in all), 2026-09-30:
-        # check_macro_labels.py scored PROBLEMS 0 in every region at
-        # 375/768/1200 px.
+        # MEASURED on a combined tree (macro-france plus the twenty French
+        # batch cities, 95 in all), 2026-09-30: check_macro_labels.py scored
+        # PROBLEMS 0 in every region at 375/768/1200 px.
         "label_offset": ("end", -10, 0),
     },
     {
@@ -2883,8 +2710,7 @@ CITIES = [
         # East and high, with Montréal's raised 10 px to make room: every
         # placement of Ottawa's alone collided with Toronto's, Boston's or
         # Montréal's pill in the Global frame (a sweep of 900 offsets). The
-        # joint sweep's PROBLEMS 0, at 375, 768 and 1200 px; width 47.5
-        # measured in a browser.
+        # joint sweep scored PROBLEMS 0 at 375, 768 and 1200 px; width 47.5.
         "label_offset": ("start", 10, -25),
     },
     {
@@ -2911,8 +2737,8 @@ CITIES = [
         # BELOW-LEFT, with Toronto's raised 5 px to make room: every placement
         # of Minneapolis's alone left Toronto's pill over its marker in Global,
         # and above-right runs into Calgary's, Buffalo's or Montréal's. The
-        # joint sweep's PROBLEMS 0 at 375, 768 and 1200 px, with and without
-        # Ottawa's branch; width 81.6 measured in a browser.
+        # joint sweep scored PROBLEMS 0 at 375, 768 and 1200 px, with and
+        # without Ottawa; width 81.6.
         "label_offset": ("end", -11, -8),
     },
     {
@@ -2935,11 +2761,11 @@ CITIES = [
         # box the framed US cities already span (south of Boston, west of New
         # York), so it joins without re-fitting the pinned zoom.
         "in_default_view": True,
-        # BELOW, a little left: the one gap in the landing view's eastern cluster, between
-        # San Diego's pill and Washington D.C.'s, with D.C.'s moved 5 px right and Chicago's
-        # 3 px down to open it. Solved against the combined tree (master + the ottawa and
-        # minneapolis branches + this one): PROBLEMS 0 at 375, 768 and 1200 px; width 70.7
-        # measured in a browser.
+        # BELOW, a little left: the one gap in the landing view's eastern
+        # cluster, between San Diego's pill and Washington D.C.'s, with D.C.'s
+        # moved 5 px right and Chicago's 3 px down to open it. Solved with
+        # Ottawa and Minneapolis in place: PROBLEMS 0 at 375, 768 and 1200 px;
+        # width 70.7.
         "label_offset": ("middle", -15, 32),
     },
     {
@@ -2963,9 +2789,8 @@ CITIES = [
         # Above the eastern cluster, over Montréal's and Edmonton's pills:
         # every closer placement of a 207 px label collided with Toronto's,
         # Buffalo's, Montréal's or Edmonton's pill in the Global frame.
-        # PROBLEMS 0 at 375, 768 and 1200 px on this branch and with Ottawa,
-        # Minneapolis and Pittsburgh combined; width 207.2 measured in a
-        # browser.
+        # PROBLEMS 0 at 375, 768 and 1200 px, alone and with Ottawa,
+        # Minneapolis and Pittsburgh; width 207.2.
         "label_offset": ("middle", 0, -84),
     },
     {
@@ -2987,9 +2812,8 @@ CITIES = [
         "in_default_view": False,
         # East of the dot, in the open sea: the default above collided with
         # Barcelona's marker and pill in the Europe frame. PROBLEMS 0 at 375,
-        # 768 and 1200 px on this branch and with Ottawa, Minneapolis,
-        # Pittsburgh and Kitchener–Waterloo combined; width 40.1 measured in a
-        # browser.
+        # 768 and 1200 px, alone and with Ottawa, Minneapolis, Pittsburgh and
+        # Kitchener–Waterloo; width 40.1.
         "label_offset": ("start", 11, 0),
     },
     {
@@ -3082,7 +2906,7 @@ CITIES = [
         "country": "South Korea",
         "in_default_view": False,
         # Above the dot, the default, and SCORED: Ansan lies inside the Seoul Capital
-        # Area frame (no zoom change, measured in memory); check_macro_labels.py
+        # Area frame (no zoom change); check_macro_labels.py
         # (python -B) passes, PROBLEMS 0 at 375, 768 and 1200, alone and on the
         # combined tree with Namyangju (width 41.5 px, measured 2026-09-30).
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
@@ -3108,8 +2932,8 @@ CITIES = [
         "country": "South Korea",
         "in_default_view": False,
         # Above the dot, the default, and SCORED: Uijeongbu moves the Seoul Capital
-        # Area frame's centre north (37.450 to 37.490 N, zoom unchanged, measured in
-        # memory); check_macro_labels.py (python -B) passes, PROBLEMS 0 at 375, 768
+        # Area frame's centre north (37.450 to 37.490 N, zoom unchanged);
+        # check_macro_labels.py (python -B) passes, PROBLEMS 0 at 375, 768
         # and 1200, alone and on the combined tree with Namyangju and Ansan (width
         # 68.6 px, measured 2026-09-30).
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
@@ -3137,7 +2961,7 @@ CITIES = [
         # Above the dot, nudged west: at Namyangju's wider Seoul Capital Area zoom (8.10)
         # the default pill meets Seongnam's by 5 px. check_macro_labels.py (python -B)
         # passes middle at dx -8 to -24, PROBLEMS 0 at 375, 768 and 1200, alone and on
-        # the combined tree with every Band B branch (width 51.6 px, measured 2026-09-30).
+        # the combined tree (width 51.6 px, measured 2026-09-30).
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
@@ -3160,14 +2984,15 @@ CITIES = [
         "region": "United States East",
         "country": "United States",
         "in_default_view": True,
-        # LEFT OF THE DOT, in a narrow window: Dallas lands between San Diego's,
-        # Los Angeles's and Houston's pills and under Chicago's and Minneapolis's in
-        # the landing view, so San Diego's label moved west (its entry). check_macro_labels.py
-        # (python -B) passes end -10 at dy -6 to 0, PROBLEMS 0 at 375, 768 and 1200 on
-        # the combined tree (width 40.1 px, measured 2026-09-30).
-        # RAISED to dy -16 (review lane 3, 2026-09-30): at -3 its pill covered half
-        # of Tucson's dot in the landing and United States views, where Tucson,
-        # minor, has no pill - a click on Tucson opened Dallas 12 of 12 times.
+        # LEFT OF THE DOT, in a narrow window: Dallas lands between San
+        # Diego's, Los Angeles's and Houston's pills and under Chicago's and
+        # Minneapolis's in the landing view, so San Diego's label moved west
+        # (its entry). check_macro_labels.py (python -B) passes end -10 at dy
+        # -6 to 0, PROBLEMS 0 at 375, 768 and 1200 on the combined tree (width
+        # 40.1 px, measured 2026-09-30). RAISED to dy -16 (2026-09-30): at -3
+        # its pill covered half of Tucson's dot in the landing and United
+        # States views, where Tucson, minor, has no pill - a click on Tucson
+        # opened Dallas 12 of 12 times.
         "label_offset": ("end", -11, -16),
     },
     {
@@ -3270,7 +3095,7 @@ CITIES = [
         # it refuses a guessed one.
         # Right of the dot and a little low, SCORED in the Czechia view: above
         # it the pill met Ostrava's (24 x 4 px); a sweep, PROBLEMS 0 at 375, 768
-        # and 1200 (cleanup, 2026-09-30).
+        # and 1200 (2026-09-30).
         "label_offset": ("start", 10, 10),
     },
     {
@@ -3347,8 +3172,8 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         # West of the dot, SCORED in the Czechia view: the default and every
-        # eastward pill covered Liberec's marker (a sweep, PROBLEMS 0 at 375,
-        # 768 and 1200, cleanup 2026-09-30).
+        # eastward pill covered Liberec's marker (a sweep: PROBLEMS 0 at 375,
+        # 768 and 1200; 2026-09-30).
         "label_offset": ("end", -10, 0),
     },
 ]
@@ -3464,13 +3289,10 @@ REGION_ORDER = [
     "Canada West",
     "Canada East",
     "Mexico",
-    # EUROPE IS ONE REGION, NOT ONE PER COUNTRY, and it was briefly the other
-    # way. Spain arrived 2026-09-22 with Madrid as the first region outside
-    # North America; Ireland and Italy followed the same day with Dublin and
-    # Milan, and three regions holding four cities made the shape of the
-    # problem obvious - the list would have grown by one entry per country
-    # while the map it indexes stayed the same size. Collapsed on the owner's
-    # decision the same day, before France's six cities could make it five.
+    # EUROPE IS ONE REGION, NOT ONE PER COUNTRY (owner, 2026-09-22). Spain,
+    # Ireland and Italy briefly made three regions holding four cities: one
+    # region per country grows the list by an entry per country while the map
+    # it indexes stays the same size.
     #
     # NOTE WHAT THIS IS NOT. North America is split (United States West/East,
     # Canada West/East) because those countries are 3,300 km wide and a single
@@ -3494,12 +3316,12 @@ REGION_ORDER = [
     "France South",
     # CZECHIA (the owner's label-tier decision of 2026-09-29 gives the Czech
     # tram cities a sub-region of their own and no pill in the parent view;
-    # built 2026-09-30 in the review rehearsal, France's mechanism). Brno,
-    # Plzeň, Olomouc, Ostrava, Liberec and Most: in Europe their six pills
-    # and Prague's overlapped every pair (99 problems over three widths).
-    # Prague moves with them (owner, 2026-09-30), so the view named Czechia holds every Czech
-    # city; Europe's re-centred frame then needed Stockholm's label below
-    # its dot. Fitted zoom, no override; PROBLEMS 0 at every width.
+    # built 2026-09-30 on France's mechanism). Brno, Plzeň, Olomouc, Ostrava,
+    # Liberec and Most: in Europe their six pills and Prague's overlapped every
+    # pair (99 problems over three widths). Prague moves with them (owner,
+    # 2026-09-30), so the view named Czechia holds every Czech city; Europe's
+    # re-centred frame then needed Stockholm's label below its dot. Fitted
+    # zoom, no override; PROBLEMS 0 at every width.
     "Czechia",
     # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
     # further country on the continent joins this view rather than adding one.
@@ -3546,21 +3368,20 @@ REGION_ORDER = [
 # zoom dropped and a dozen label pairs collided at every width. Its centre
 # still counts, so Europe's frame sits about a degree further east; on a phone
 # Dublin's label clips 11 px and Bucharest's 25 px, PROBLEMS 0.
-# Liepāja (2026-09-30, tram kit) joins it on the same measurement: fitted to it,
-# the zoom dropped and 57 label problems appeared at every width, whatever
+# Liepāja (2026-09-30) joins it on the same measurement: fitted to it, the
+# zoom dropped and 57 label problems appeared at every width, whatever
 # Liepāja's own offset. It lies inside the frame Riga and Bucharest already
 # set, so Europe's centre does not move.
-# Daugavpils (2026-09-30, tram kit) joins it too: at 26.5 E it is the
-# easternmost European city, 0.4 degrees east of Bucharest, so it moves the
-# centre that far east and no further.
-# Tucson (2026-09-30, tram kit) is United States West's first city outside
-# California, 6 degrees east of San Diego. The tram kit left it out of the fit;
-# that moved the centre about 3 degrees east and, on a phone (375 px), pushed
-# San Francisco's, Sacramento's and Tucson's own dots off the canvas (review
-# lane 2; the check scored clipping only for a dot on the canvas). So it is IN
-# the fit: the zoom drops and all five fit, with San Francisco's and
-# Sacramento's labels re-placed to suit (cleanup's sweep, PROBLEMS 0 in the
-# region at 375, 768 and 1200).
+# Daugavpils (2026-09-30) joins it too: at 26.5 E it is the easternmost
+# European city, 0.4 degrees east of Bucharest, so it moves the centre that
+# far east and no further.
+# Tucson (2026-09-30), United States West's first city outside California and
+# 6 degrees east of San Diego, is IN the fit. Left out, it moved the centre
+# about 3 degrees east and, on a phone (375 px), pushed San Francisco's,
+# Sacramento's and Tucson's own dots off the canvas (the check then scored
+# clipping only for a dot on the canvas). In the fit the zoom drops and all
+# five fit, with San Francisco's and Sacramento's labels re-placed to suit
+# (PROBLEMS 0 in the region at 375, 768 and 1200).
 REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils")}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
@@ -3568,9 +3389,9 @@ REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", 
 # open further out and its labels would collide; fit_view sizes for a 320 px
 # reference, so at 5.0 a few cities sit a pan away on a phone (Brest, Strasbourg,
 # Mulhouse and Besancon in the north; Bordeaux and Nice in the south, each
-# leaving a fragment of its pill at the edge - review lane 1, 2026-09-30, at 375
-# px), and the list beneath the map always has them. Overview.py
-# and check_macro_labels.py both apply it; the centre is still each region's own.
+# leaving a fragment of its pill at the edge at 375 px), and the list beneath
+# the map always has them. Overview.py and check_macro_labels.py both apply
+# it; the centre is still each region's own.
 REGION_ZOOM = {"France North": 5.0, "France South": 5.0}
 
 # Global is every region that is not itself a composite, derived rather than
@@ -3602,15 +3423,14 @@ REGIONS = [
 
 
 def elsewhere_counts(region):
-    """(name, count) for the regions a given region does NOT cover.
+    """Return (name, count) for the regions a given region does NOT cover.
 
     LEAVES ONLY, AND THAT IS THE WHOLE POINT. `REGIONS` holds composites and
     their halves, which overlap, so "every region except this one" counts the
-    same city twice. Selecting "United States" described its own nine cities
-    as "3 in United States West, 6 in United States East" *elsewhere*, on the
-    default view of the front page; selecting a leaf listed the composite that
-    contains it. Shipped with the Europe macro-region change and found on the
-    live site 2026-09-22.
+    same city twice. Selecting "United States" once described its own nine
+    cities as "3 in United States West, 6 in United States East" *elsewhere*,
+    on the front page's default view, and selecting a leaf listed the
+    composite that contains it (live site, 2026-09-22).
 
     The invariant a caller can rely on, and `scripts/check_macro_labels.py`
     asserts for every region: len(cities_in(region)) + sum of these counts
@@ -3673,14 +3493,13 @@ if _unmoded:
 #   - within a region, countries in the order their first city was built;
 #   - within a country, cities in build order.
 #
-# Country grouping came first (build order alone put Rome ten places after
-# Milan); region grouping followed the same evening, because country order by
-# first build keeps a continent together only while countries happen to be
-# built continent by continent - the first city of a new European country
-# built after Taiwan would have landed after the East Asian cities. A country
-# whose cities sit in more than one region (Canada West/East) sorts by the
-# earliest of them. CITIES itself stays in build order, because page numbers
-# and the macro map follow it.
+# Build order alone put Rome ten places after Milan, hence the country
+# grouping. Country order by first build keeps a continent together only while
+# countries happen to be built continent by continent (the first city of a new
+# European country built after Taiwan would land after the East Asian cities),
+# hence the region grouping. A country whose cities sit in more than one
+# region (Canada West/East) sorts by the earliest of them. CITIES itself stays
+# in build order, because page numbers and the macro map follow it.
 #
 # `country` is not `region`: a region is a macro-map VIEW (Canada is two,
 # Europe is one), a country is what a reader groups by.

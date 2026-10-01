@@ -1,16 +1,13 @@
 """Transit-line colour separation, measured rather than eyeballed.
 
 Calgary's Blue Line shipped as Calgary Transit's own `#0072CE`, which is
-**CIE76 Delta-E 3.3 from Retail's `#2a78d6`** - the same blue as the pins drawn
-on top of it. Nobody measured it. It surfaced only when Edmonton's build ran
-this check for the first time, weeks later, while choosing a different city's
-palette.
+**CIE76 Delta-E 3.3 from Retail's `#2a78d6`**, the same blue as the pins drawn
+on top of it, and went unmeasured for weeks.
 
 TWO THRESHOLDS, AND THE GAP BETWEEN THEM IS A RECORDED DECISION
 ---------------------------------------------------------------
-The obvious implementation - refuse to render any line within ~45 Delta-E of a
-category colour - is **wrong for this project**, and measuring before building
-it is what showed that. Surveyed 2026-09-21 across all fourteen cities:
+Refusing to render any line within ~45 Delta-E of a category colour is
+**wrong for this project**. Surveyed 2026-09-21 across all fourteen cities:
 
     13.6  New York    #009952   (MTA green)
     14.0  New York    #0062CF   (MTA blue)
@@ -40,15 +37,13 @@ So:
 
 Separation is an **INTRA-CITY** constraint. Each city renders its own map with
 its own legend and on-map labels, so two cities sharing a red can never be
-confused - Edmonton's Metro red is deliberately Calgary's Red Line red. Nothing
+confused (Edmonton's Metro red is deliberately Calgary's Red Line red). Nothing
 here compares across cities, and it should not: the usable palette runs out
-long before the city list does, and the cost of pretending otherwise lands on
-later cities as colours that read badly against their own pins.
+long before the city list does, and a cross-city rule would push later cities
+into colours that read badly against their own pins.
 
-CIE76 rather than CIEDE2000: it is what this project's existing figures were
-computed with, and swapping the metric would silently move every recorded
-number. Consistency is worth more here than the last few points of perceptual
-accuracy.
+CIE76 rather than CIEDE2000: this project's existing figures were computed
+with it, and swapping the metric would silently move every recorded number.
 """
 
 import colorsys
@@ -88,46 +83,43 @@ def delta_e(a, b):
     return math.sqrt((la - lb) ** 2 + (aa - ab) ** 2 + (ba - bb) ** 2)
 
 
-# LINE LABELS, in both themes, and readers who could not read them. A line label
-# is drawn in its line's colour on a halo, and until 2026-09-24 both themes got
-# it wrong in different ways:
+# LINE LABELS, in both themes. A line label is drawn in its line's colour on a
+# halo, and until 2026-09-24 both themes failed in different ways:
 #
 #   - DARK (the default) lifted every label with `filter: brightness(1.8)`,
 #     which scales each sRGB channel and so does nothing for a colour whose
 #     light is all in blue (Porto Alegre's navy Trensurb read at 1.91:1). The
 #     filter sat on the label element, so it brightened the HALO too: the dark
-#     page colour rendered #132039, and a model measuring against #0B1220 was
-#     measuring a halo nobody saw (the map-chrome deploy check, 2026-09-24).
-#   - LIGHT drew every label on a white halo, where 145 of 235 - the agencies'
-#     yellows and oranges - read under 4.5:1 (Milan's M3 at 1.08:1).
+#     page colour rendered #132039, so contrast measured against #0B1220 was
+#     measured against a halo never drawn.
+#   - LIGHT drew every label on a white halo, where 145 of 235 (the agencies'
+#     yellows and oranges) read under 4.5:1 (Milan's M3 at 1.08:1).
 #
 # The owner's calls (2026-09-24), both at WCAG's 4.5:1 for text of this size:
 #
-#   - Dark: lighten a label that fails (the owner's option), and - since the
-#     deploy check - with no filter. Each label carries an explicit dark-theme
-#     colour, lightened by the smallest HSL step that reaches 4.5:1 against the
-#     halo actually drawn, the page colour. (Its STARTING shade was first the
-#     old filter's; superseded the same evening - see "DARK LABELS START FROM
-#     THE LINE'S OWN COLOUR" below.)
+#   - Dark: lighten a label that fails, with no filter. Each label carries an
+#     explicit dark-theme colour, lightened by the smallest HSL step that
+#     reaches 4.5:1 against the halo actually drawn, the page colour. (Its
+#     starting shade: see "DARK LABELS START FROM THE LINE'S OWN COLOUR" below.)
 #   - Light: NOT the dark treatment mirrored. Darkening to 4.5:1 moved the
 #     median failing label by CIE76 19.9 and turned every yellow olive, so a
 #     label no longer matched its line. Instead a label keeps its colour and
-#     takes the halo it reads better on - the dark page colour for most, white
-#     for navy - and a mid-tone that misses on both gets the smallest
+#     takes the halo it reads better on (the dark page colour for most, white
+#     for navy), and a mid-tone that misses on both gets the smallest
 #     lightness step away from its halo (at most Delta-E 3.7 in the survey).
 #
 # The lines themselves are untouched in both themes.
 # scripts/check_map_markup.py measures every committed label the same way.
 #
 # DARK LABELS START FROM THE LINE'S OWN COLOUR, NOT THE OLD FILTER'S SHADE
-# (owner, 2026-09-24, the same evening). The first dark rule kept "what the
-# filter produced": each channel x1.8, clipped at 255. Clipping destroys hue.
-# It turned orange lines' labels YELLOW (Washington's, Boston's and San Diego's
-# Orange Lines, Marseille's T1, Rome's Metro A), and it merged 21 pairs of
-# different lines into one label colour across 10 cities (Paris 1, 9 and 10 all
-# #ffff00). A label is now its line's agency colour, lightened by the smallest
-# HSL step that reaches 4.5:1 only when it needs to. Most do not, so the
-# median label is its line's colour exactly.
+# (owner, 2026-09-24). Starting from "what the filter produced" (each channel
+# x1.8, clipped at 255) destroys hue: it turned orange lines' labels YELLOW
+# (Washington's, Boston's and San Diego's Orange Lines, Marseille's T1, Rome's
+# Metro A), and merged 21 pairs of different lines into one label colour
+# across 10 cities (Paris 1, 9 and 10 all #ffff00). A label is now its line's
+# agency colour, lightened by the smallest HSL step that reaches 4.5:1 only
+# when it needs to. Most do not, so the median label is its line's colour
+# exactly.
 #
 # Lightening alone brings DARK colours together (two navies or two purples
 # lifted to the same readable lightness), so dark_label_colours() then SEPARATES

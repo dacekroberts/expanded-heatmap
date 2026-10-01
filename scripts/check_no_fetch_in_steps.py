@@ -12,16 +12,16 @@ reasons no commit here caused.
 The defect is invisible on a developer machine, because every such step guards
 its download with `if cache.exists()`, and the cache is `data/<city>/raw/`,
 which is gitignored. So it is offline exactly when someone has already run it,
-and reaches the network on every fresh checkout - including in CI, and
-including inside a drift check that then reports "zero drift" about a file it
-just re-downloaded. Demonstrated 2026-09-22: a drift check in a fresh worktree
-pulled a 39 MB DENUE zip and three Overpass responses before reporting no
-drift, while Toronto - which keeps fetching in `fetch_sources.py` - stopped
-correctly with "no data/<city>/raw/ - nothing to run against".
+and reaches the network on every fresh checkout, including in CI and inside a
+drift check that then reports "zero drift" about a file it just re-downloaded.
+On 2026-09-22 a drift check in a fresh worktree pulled a 39 MB DENUE zip and
+three Overpass responses before reporting no drift, while Toronto (which
+fetches in `fetch_sources.py`) stopped correctly with "no data/<city>/raw/ -
+nothing to run against".
 
-Toronto also proved the hazard is not theoretical the same day: re-fetching its
-register produced a map missing a storefront that is in the committed one,
-while the row-count baseline reported identical because the counts matched.
+The hazard is real: the same day, re-fetching Toronto's register produced a
+map missing a storefront that is in the committed one, while the row-count
+baseline reported identical because the counts matched.
 
 THE RULE. Downloading lives in `pipeline/<city>/fetch_sources.py`, which is
 deliberately not named `step*.py` so `drift_check.py` never runs it. A step
@@ -31,16 +31,15 @@ WHAT THIS CHECKS THAT A GREP WOULD NOT
 --------------------------------------
 Transitive reach. `pipeline/census_geocoder.py` imports `requests` and is
 imported by three cities' `step3_geocode.py`, so those steps fetch without any
-HTTP client appearing in them - the same defect one import deeper, and the
-reason this walks the shared `pipeline/*.py` modules too. It was found by
-writing this check, not before it.
+HTTP client appearing in them: the same defect one import deeper, and the
+reason this walks the shared `pipeline/*.py` modules too.
 
 GUARDED IS A THIRD ANSWER, NOT A PASS IN DISGUISE. The geocoder cannot move to
 a fetch script: its input is a batch of addresses the step computes, so there
-is no URL to hoist. What was actually wrong there was narrower - a DRIFT CHECK
-must never fetch, while a person running the step may - so the fix is a guard
-at that boundary (`pipeline/offline.py`), and this check reports such a module
-as guarded rather than either failing it or pretending it is offline. A guard
+is no URL to hoist. The real rule there is narrower (a DRIFT CHECK must never
+fetch, while a person running the step may), so the fix is a guard at that
+boundary (`pipeline/offline.py`), and this check reports such a module as
+guarded rather than either failing it or pretending it is offline. A guard
 nobody arms is worse than none, so the last limb below reads
 `pipeline/drift_check.py` and fails if it does not set the variable.
 """
@@ -73,11 +72,9 @@ HTTP_MODULES = {
 # Dated defects, not passes. Each entry says what is wrong and where the fix
 # is; an entry that has stopped being true fails this check as loudly as a new
 # violation, so the list cannot rot into a permanent exemption.
-# EMPTY, and the two entries that were here are why the staleness rule above
-# exists. Madrid's step1 and step2 were listed as fixed-on-a-branch-not-yet-on-
-# master; when spain-app-wiring landed on 2026-09-22 the fix arrived and the
-# entries went stale in the same commit, which this check fails on. Deleting
-# them was a required part of landing the branch, not a tidy-up afterwards.
+# EMPTY since 2026-09-22, when the branch carrying the fix for Madrid's step1
+# and step2 landed: an entry goes stale in the same commit as its fix, and
+# deleting it is part of landing that fix, not a tidy-up afterwards.
 KNOWN_GAPS = {}
 
 # A shared module is GUARDED if it calls this before requesting. See
@@ -106,7 +103,7 @@ def imported_modules(path):
 
 
 def calls_guard(path):
-    """Does this module call refuse_if_offline() anywhere?"""
+    """Return True if this module calls refuse_if_offline() anywhere."""
     tree = ast.parse(path.read_text(encoding="utf-8"))
     for node in ast.walk(tree):
         if isinstance(node, ast.Call):
@@ -265,8 +262,8 @@ def main():
 
 if __name__ == "__main__":
     # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py
-    # crashed on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
+    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py,
+    # on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

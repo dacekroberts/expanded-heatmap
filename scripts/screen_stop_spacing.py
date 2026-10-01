@@ -1,54 +1,51 @@
 """Measure tram / light-rail stop density for a city, against two CONTROLS.
 
-WHY THIS EXISTS
----------------
+WHY
+---
 Milan excluded its trams because "stops sit one or two blocks apart: San
 Francisco's Muni Metro shape, which needs docs/sub_transit_line_filters.md
 rather than a line list". San Diego's Trolley is also route_type 0 and needed
-no such file. So the question "does this city's tram network need sub-line
-filtering?" is a real, recurring one - and it is asked of every tram-only
-candidate (Zurich, Goteborg, Stockholm so far).
+no such file. So "does this city's tram network need sub-line filtering?" is
+a recurring question, asked of every tram-only candidate (Zurich, Goteborg,
+Stockholm so far).
 
 READ THIS BEFORE TRUSTING ITS OUTPUT
 ------------------------------------
 **As of 2026-09-23 this script's CONTROLS DO NOT SEPARATE.** San Francisco
 (which needed the filters) measured 89 m and San Diego (which needed none)
-measured 98 m - nine metres apart. A metric that gives the same answer to
+measured 98 m, nine metres apart. A metric that gives the same answer to
 both cannot be measuring what distinguishes them.
 
 What it appears to measure instead is NETWORK CONVERGENCE: both cities' lines
 bunch downtown, so nearest-neighbour picks up CROSS-LINE proximity rather
 than along-line spacing. That is the same shape as Oslo's
-`organisasjonsform` - a field that is fully populated and answers a different
+`organisasjonsform`: a field that is fully populated and answers a different
 question than the one asked of it.
 
 **So: run it, read the controls FIRST, and do not record a verdict unless the
-controls separate.** The controls are not decoration; they are the thing that
-tells you whether the run means anything. If you improve the metric, the test
-of the improvement is whether SF and San Diego pull apart.
+controls separate.** The controls are what say whether the run means
+anything. The test of any improvement to the metric is whether SF and San
+Diego pull apart.
 
 A BETTER METRIC WOULD MEASURE ALONG-LINE SPACING
 ------------------------------------------------
 i.e. consecutive stops within one route relation, which needs each relation's
-ordered stop members. That was tried (v2) and abandoned for a reason worth
-keeping - see the efficiency note below.
+ordered stop members. Fetching those one route at a time was abandoned for
+the reason below.
 
-OVERPASS EFFICIENCY - THE RULE THIS SCRIPT ENCODES
---------------------------------------------------
+OVERPASS EFFICIENCY: THE RULE THIS SCRIPT ENCODES
+-------------------------------------------------
 **ONE query per CITY. Never one per route, and never one per station.**
 
-Three versions of this test were written on 2026-09-23:
+Measured on 2026-09-23:
 
-  v1  used `map_to_area` on a boundary relation. An unindexed relation yields
-      an EMPTY area, which then matches nothing - San Francisco returned
-      0 route relations and the failure was SILENT. A bbox needs no index.
-
-  v2  fixed that (SF returned 22 relations) but then made ONE ROUND TRIP PER
-      ROUTE. Against a load-shedding Overpass that ground for 12 minutes on a
-      single city; its worst case was 22 routes x 2 mirrors x 2 retries x a
-      300 s timeout.
-
-  v3  one query per city. Five cities, ~5 minutes, done.
+  - `map_to_area` on a boundary relation: an unindexed relation yields an
+    EMPTY area, which matches nothing. San Francisco returned 0 route
+    relations and the failure was SILENT. A bbox needs no index.
+  - ONE ROUND TRIP PER ROUTE (SF: 22 relations): against a load-shedding
+    Overpass that ground for 12 minutes on a single city; its worst case was
+    22 routes x 2 mirrors x 2 retries x a 300 s timeout.
+  - One query per city: five cities, ~5 minutes.
 
 The same bottleneck caused a 504 on Bucharest's brief-check and a 10-minute
 Seoul probe the same day. **Per-item round trips against a rate-limited

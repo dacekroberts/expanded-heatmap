@@ -131,11 +131,10 @@ def legend_label(bucket: str) -> str:
 def _norm(value) -> str:
     """Upper-cased and stripped, and SCALAR-SAFE rather than None-safe.
 
-    `(value or "")` is not enough and the difference is not theoretical: pandas
-    fills a missing cell with **float('nan')**, which is TRUTHY, so the `or`
-    passes it straight through and `.strip()` raises `AttributeError: 'float'
-    object has no attribute 'strip'`. Madrid's register has missing
-    `desc_epigrafe` cells, so this fired on the first real run.
+    `(value or "")` is not enough: pandas fills a missing cell with
+    **float('nan')**, which is TRUTHY, so the `or` passes it straight through
+    and `.strip()` raises `AttributeError: 'float' object has no attribute
+    'strip'`. Madrid's register has missing `desc_epigrafe` cells.
 
     Same defect that took the whole Overview page down on 2026-09-22, where
     `v is None` missed the same nan and `tuple(nan)` raised. Testing the TYPE
@@ -217,9 +216,9 @@ for _div, _epi, _want in [
 assert classify({"desc_division": "ACTIVIDADES INMOBILIARIAS"}) is None
 assert classify({}) is None
 
-# A MISSING cell arrives from pandas as float('nan'), not as None or "". This
-# fired on the first real run and is the same defect that took the Overview
-# page down on 2026-09-22, so it is pinned here rather than remembered.
+# A MISSING cell arrives from pandas as float('nan'), not as None or "". The
+# same defect took the Overview page down on 2026-09-22, so it is pinned here
+# rather than remembered.
 assert classify({"desc_division": float("nan"), "desc_epigrafe": float("nan")}) is None
 assert classify({"desc_division": "SERVICIOS DE COMIDAS Y BEBIDAS",
                  "desc_epigrafe": float("nan")}) == "Food service", \

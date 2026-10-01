@@ -9,31 +9,30 @@ WHY THIS EXISTS
 ---------------
 `docs/build_briefs/<city>.md` caches Step 0's answers so a build does not
 re-derive them. It caches Step 0's MISTAKES with equal confidence, and the
-MEASURED/ASSERTED labels did not prevent that.
+MEASURED/ASSERTED labels do not prevent that.
 
-Edmonton, built 2026-09-21, inherited three wrong claims from its own brief -
-and every one of them was a single HTTP call from being caught:
+Edmonton (built 2026-09-21) inherited three wrong claims from its brief, each
+a single HTTP call from being caught:
 
-  1. "A BETTER PATH EXISTS, and it sidesteps staleness entirely" - the brief
+  1. "A BETTER PATH EXISTS, and it sidesteps staleness entirely": the brief
      RECOMMENDED eight Socrata GTFS tables over the agency zip. They were
-     expired. One read of their `calendar_dates` range would have said so, and
-     reading each table's `updatedAt` was the brief's own argument FOR them.
-  2. "Edmonton's feed carries no `feed_info.txt`" - the agency feed has one.
-  3. "No required notice, uniquely among the Canadian candidates" - a
+     expired, which one read of their `calendar_dates` range shows.
+  2. "Edmonton's feed carries no `feed_info.txt`": the agency feed has one.
+  3. "No required notice, uniquely among the Canadian candidates": a
      redistribution clause applies that the credit sentence does not mention.
 
-And a fourth, from the country profile rather than the brief: 33 stations,
-where three of the 33 are garages nobody can board at.
+A fourth came from the country profile: 33 stations, three of them garages
+nobody can board at.
 
 **The label was not the failure. The prose was.** By the time a brief says "a
-better path exists", the ASSERTED tag three paragraphs up has been metabolised
-into a recommendation, and nobody re-opens the question. A claim survives being
+better path exists", the ASSERTED tag three paragraphs up has become a
+recommendation, and nobody re-opens the question. A claim survives being
 reasoned from only if something re-runs it.
 
-So: a brief declares its checkable claims in a fenced ```brief-checks block,
-JSON, right beside the prose that relies on them. Writing the claim and writing
-its check is one act, and drift between them shows up as a FAIL rather than as
-a confident sentence.
+So a brief declares its checkable claims in a fenced ```brief-checks block,
+JSON, beside the prose that relies on them. Writing the claim and writing its
+check is one act, and drift between them shows up as a FAIL rather than as a
+confident sentence.
 
 **This does not replace `add-city` Step 0.** It protects the claims a brief
 already made. A brief with no checks block is reported, not skipped silently.
@@ -41,8 +40,8 @@ already made. A brief with no checks block is reported, not skipped silently.
 ADDING A CHECK KIND
 -------------------
 Write a function taking (spec, ctx) and returning (ok, detail), then register
-it in CHECKS. Every kind is derived from something that actually went wrong in
-this project; resist adding speculative ones.
+it in CHECKS. Every kind derives from something that went wrong in this
+project; do not add speculative ones.
 """
 
 import argparse
@@ -58,12 +57,11 @@ from pathlib import Path
 
 import requests
 
-# Verify against the OPERATING SYSTEM's trust store, not only Python's bundle.
-# Python's bundle lacks Taiwan's government root (GRCA), so every data.taipei /
-# FIA check failed on certificates rather than on facts; the OS store trusts
-# it. Verification stays ON - this widens what is trusted to what the OS
-# trusts, and never switches checking off. Optional: absent truststore, the
-# bundle is used as before.
+# Verify against the OPERATING SYSTEM's trust store, not only Python's bundle,
+# which lacks Taiwan's government root (GRCA): without it every data.taipei /
+# FIA check fails on certificates rather than on facts. Verification stays ON;
+# this widens what is trusted to what the OS trusts. Optional: without
+# truststore, the bundle is used.
 try:
     import truststore
     truststore.inject_into_ssl()
@@ -91,9 +89,9 @@ def fetch(url, name, *, force=False, timeout=900, max_age_days=None):
 
     `max_age_days` refetches a cached copy older than that. GTFS passes 7:
     most feeds this project reads are ROLLING (the French tram feeds run four
-    to twelve weeks ahead), so a brief re-run at build time weeks after the
-    brief was written must read today's feed, not the brief-writer's
-    (owner's standing rule, 2026-09-29: never cache a feed across weeks).
+    to twelve weeks ahead), so a brief re-run at build time must read today's
+    feed, not the brief-writer's (owner's standing rule, 2026-09-29: never
+    cache a feed across weeks).
     """
     CACHE.mkdir(parents=True, exist_ok=True)
     path = CACHE / name
@@ -158,10 +156,10 @@ def http_contains(spec, ctx):
     Written for Milan, where the licence VERSION is invisible to the obvious
     endpoint: CKAN's `package_show` reports `license_id: cc-by` with no
     number, and only the portal's DCAT-AP_IT serialisation carries
-    `owl:versionInfo "4.0"`. A brief that pinned its licence claim to
-    `package_show` would keep passing while the version - which decides the
-    attribution obligations - went unwatched. That is this project's recurring
-    shape: a check that cannot see the thing it is guarding.
+    `owl:versionInfo "4.0"`. A licence claim pinned to `package_show` would
+    keep passing while the version, which decides the attribution
+    obligations, went unwatched: a check that cannot see the thing it is
+    guarding.
 
     `present` / `absent` are lists of literal substrings, matched
     case-insensitively against the response text. Not a parser: the point is
@@ -170,11 +168,9 @@ def http_contains(spec, ctx):
     """
     # A CHECK WITH NOTHING TO LOOK FOR MUST FAIL, NOT PASS. Until 2026-09-23
     # sixteen checks across ten briefs declared `"contains": "..."`, a key this
-    # function never read - so each passed on any HTTP 200 and could not see
-    # the licence, field or layer it was written to guard. That is this kind's
-    # own docstring's failure ("a check that cannot see the thing it is
-    # guarding"), reproduced by a spelling. A string where a list belongs is
-    # the same trap one character over: "CC0" iterates as "C", "C", "0".
+    # function never read, so each passed on any HTTP 200 and could not see
+    # what it was written to guard. A string where a list belongs is the same
+    # trap: "CC0" iterates as "C", "C", "0".
     if "contains" in spec:
         return False, ("spec uses 'contains', which this kind does not read - "
                        "write \"present\": [...] so the check can see its claim")
@@ -234,7 +230,7 @@ def gtfs_feed_window(spec, ctx):
 
 def gtfs_calendar_window(spec, ctx):
     """calendar_dates' real span, for a feed that declares no feed_info.
-    This is what showed Edmonton's eight Socrata tables were expired."""
+    This shows Edmonton's eight Socrata tables were expired."""
     from datetime import date
     z = gtfs(spec["url"], ctx)
     cd = table(z, "calendar_dates.txt")
@@ -261,7 +257,7 @@ def gtfs_route_type_counts(spec, ctx):
 
 
 def gtfs_stations(spec, ctx):
-    """THE most error-prone number in this project, and now three checks in one.
+    """Station counts: THE most error-prone number in this project.
 
     Toronto recorded 234 stations that were platforms; Calgary 83 that were
     platforms; Edmonton 33 of which three are garages. So this measures:
@@ -286,8 +282,7 @@ def gtfs_stations(spec, ctx):
     trips = table(z, "trips.txt")
     keep = trips[trips["route_id"].isin(set(rail["route_id"]))]
     # IN CHUNKS, filtered as it goes. Nantes' stop_times.txt is 579 MB and the
-    # tram is a sliver of it; reading it whole to keep that sliver costs
-    # gigabytes a brief check has no business spending (2026-09-30).
+    # tram is a sliver of it; reading it whole costs gigabytes (2026-09-30).
     want_trips = set(keep["trip_id"])
     parts = []
     with z.open("stop_times.txt") as f:
@@ -348,7 +343,7 @@ def gtfs_stations(spec, ctx):
             ok = False
             bits.append(f"MISMATCH {key}: got {got}, brief says {spec[key]}")
 
-    # spacing: the diagnostic that caught Toronto and Calgary
+    # spacing: the platform-vs-station test (Toronto, Calgary)
     if len(rev_st) > 1:
         import geopandas as gpd
         crs = spec.get("crs")
@@ -368,15 +363,13 @@ def gtfs_stations(spec, ctx):
 
 
 def ckan_rows(spec, ctx):
-    """CKAN datastore row count. Note datastore_search_sql 404s on Toronto's
+    """CKAN datastore row count. datastore_search_sql 404s on Toronto's
     portal, so this uses datastore_search.
 
-    `limit=1`, not `limit=0`. Toronto's CKAN returns `total` either way;
-    Barcelona's omits it entirely when `limit=0`, so both of Barcelona's row
-    claims failed with `KeyError: 'total'` against a portal that was answering
-    correctly. One wasted row is cheaper than a check that only works on the
-    portal it was written against - and every remaining candidate city in this
-    project is on a non-Toronto CKAN."""
+    `limit=1`, not `limit=0`: Toronto's CKAN returns `total` either way, but
+    Barcelona's omits it when `limit=0` (`KeyError: 'total'` against a portal
+    answering correctly). One wasted row is cheaper than a check that only
+    works on the portal it was written against."""
     url = f"https://{spec['domain']}/api/3/action/datastore_search"
     r = requests.get(url, params={"resource_id": spec["resource_id"], "limit": 1},
                      headers=HEADERS, timeout=300)
@@ -431,8 +424,8 @@ def socrata_count(spec, ctx):
 def socrata_distinct_split(spec, ctx):
     """Distinct values of a multi-valued column. Three of six Canadian
     registers store several categories per row, and a naive value_counts
-    returns COMBINATIONS - which is how Edmonton's 60 categories were recorded
-    as 67 and Calgary's 96 as 173."""
+    returns COMBINATIONS: Edmonton's 60 categories were recorded as 67 and
+    Calgary's 96 as 173."""
     import pandas as pd
     url = f"https://{spec['domain']}/resource/{spec['view']}.csv"
     params = {"$select": spec["column"], "$limit": spec.get("limit", 100000)}
@@ -464,24 +457,22 @@ def taxonomy_catchall(spec, ctx):
     """How much of a classification column is a CATCH-ALL, at each level of the
     taxonomy - the measurement that decides which level a city keys on.
 
-    WHY THIS IS A CHECK RATHER THAN A PARAGRAPH. Barcelona's census publishes
-    four levels of the same taxonomy, and the natural-looking one is wrong:
+    WHY A CHECK RATHER THAN A PARAGRAPH. Barcelona's census publishes four
+    levels of the same taxonomy, and the natural-looking one is wrong:
     `Nom_Grup_Activitat` puts **35% of active rows into `Altres`**, while
-    `Nom_Activitat` - the finest - has an explicit home for all 75 of its
-    values. That is the opposite of Madrid, whose own multi-level scheme is
-    keyed nearer the top, and both cities are right. The deciding number is the
-    catch-all share per level, and until now it was measured during step 2, by
-    which point the config, the taxonomy module and the map script have all
-    been written against a level someone guessed at.
+    `Nom_Activitat`, the finest, has an explicit home for all 75 of its
+    values. Madrid's multi-level scheme is keyed nearer the top, and both
+    cities are right. The deciding number is the catch-all share per level;
+    measured during step 2, it arrives after the config, the taxonomy module
+    and the map script have been written against a guessed level.
 
     It also catches the second failure in the same family: a catch-all that is
     small but MEANS SEVERAL THINGS. Barcelona's `Altres` is 1,545 rows spread
-    across five different parents - food retail, retail/wholesale, services,
-    food service and genuinely-other - so a share under the threshold is a
-    reason to look at `by_parent`, not a reason to stop looking. Pass
-    `parent_column` to get that breakdown; it is what tells you whether the
-    catch-all can be dispatched (Chicago's `EXTRA_COLUMNS` mechanism) or has to
-    be dropped.
+    across five different parents (food retail, retail/wholesale, services,
+    food service and genuinely-other), so a share under the threshold is a
+    reason to look at `by_parent`, not to stop looking. `parent_column` gives
+    that breakdown, which decides whether the catch-all can be dispatched
+    (Chicago's `EXTRA_COLUMNS` mechanism) or has to be dropped.
 
     A share over `max_share` is a brief to correct - by keying a level deeper -
     never a threshold to raise.
@@ -514,11 +505,11 @@ def taxonomy_catchall(spec, ctx):
                     f"denominator and NOT as catch-all")
 
     # Every other level, reported only. This is the comparison the decision is
-    # actually made on, so a brief that declares it shows its working.
+    # made on, so a brief that declares it shows its working.
     for other in spec.get("compare", []):
         # parent_column dropped: it is only meaningful for the keyed column,
-        # and leaving it in asked one portal for the same field twice and got
-        # HTTP 500 - a comparison level IS often the parent level.
+        # and a comparison level is often the parent level, so leaving it in
+        # asks the portal for the same field twice (one answered HTTP 500).
         o_spec = {k: v for k, v in spec.items() if k != "parent_column"}
         o_spec["column"] = other
         o_vals, _ = _classification_column(o_spec, ctx)
@@ -543,12 +534,10 @@ def taxonomy_catchall(spec, ctx):
 
 
 def _classification_column(spec, ctx):
-    """One or two columns of a live register, as pandas Series.
+    """Return one or two columns of a live register, as pandas Series.
 
-    Speaks the two portal shapes this project actually meets. Kept beside
-    `taxonomy_catchall` rather than generalised further, because the next
-    portal will want its own paging rule and guessing it now would be
-    inventing a requirement.
+    Speaks the two portal shapes this project meets (Socrata, CKAN). Not
+    generalised further: the next portal will want its own paging rule.
     """
     import pandas as pd
     cols = [spec["column"]]
@@ -620,8 +609,7 @@ def utm_zone_from_longitude(spec, ctx):
 
 def endpoint_absent(spec, ctx):
     """An endpoint this project must NOT rely on. Toronto's
-    datastore_search_sql 404s, and recording that it does is what stops the
-    next session rediscovering it."""
+    datastore_search_sql 404s; recording that stops it being rediscovered."""
     try:
         r = requests.get(spec["url"], headers=HEADERS, timeout=120)
         code = r.status_code
@@ -635,18 +623,16 @@ def endpoint_absent(spec, ctx):
 def arcgis_layer(spec, ctx):
     """An ArcGIS feature layer's record count AND how recently it was edited.
 
-    Exists because a brief can watch the wrong product and report healthy.
-    Madrid's brief carried a tripwire on CRTM's Metro GTFS - "when this check
-    FAILS, CRTM has refreshed it and the rail decision should be revisited" -
-    and that check kept PASSING while the decision it guarded was already
-    stale, because CRTM publishes the same network TWICE: a GTFS feed it
-    stopped refreshing in 2025-05, and ArcGIS feature layers it still edits
-    (M4_Red, 2026-06-05). The tripwire watched the feed and the build wanted
-    the network.
+    A brief can watch the wrong product and report healthy. Madrid's brief
+    carried a tripwire on CRTM's Metro GTFS ("when this check FAILS, CRTM has
+    refreshed it and the rail decision should be revisited") that kept
+    PASSING while the decision it guarded was already stale: CRTM publishes
+    the same network TWICE, a GTFS feed it stopped refreshing in 2025-05 and
+    ArcGIS feature layers it still edits (M4_Red, 2026-06-05).
 
     So this checks the thing actually consumed. `max_age_days` is the point:
     a layer that silently stops being maintained is the Edmonton failure in
-    its most general form, and freshness here is read from the server's own
+    its most general form, and freshness is read from the server's own
     `editingInfo.lastEditDate` rather than from a catalogue's `modified`.
     """
     base = spec["url"].rstrip("/")
@@ -697,10 +683,9 @@ def arcgis_layer(spec, ctx):
 #
 # Several mirrors, tried in order, and an EMPTY 200 IS A HOST FAILURE rather
 # than an answer about the city. `pipeline/countries/mexico.py` records
-# overpass.osm.ch returning 272 bytes over an empty set, which a caller
-# reported as "every ref has exactly 2 direction relations" - a confident
-# statement about nothing. So an empty result moves to the next host and is
-# never cached.
+# overpass.osm.ch returning 272 bytes over an empty set, reported as "every ref
+# has exactly 2 direction relations": a confident statement about nothing. So
+# an empty result moves to the next host and is never cached.
 OVERPASS_HOSTS = (
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",
@@ -731,7 +716,8 @@ def _is_overload(exc):
 
 
 def _overpass_once(host, query, timeout):
-    """One mirror. Returns elements, or raises with why this host is no good.
+    """Query one mirror. Return its elements, or raise with why this host is
+    no good.
 
     Two ways a mirror lies with HTTP 200, both seen on 2026-09-22:
 
@@ -758,22 +744,22 @@ def _overpass_once(host, query, timeout):
 
 
 def _overpass(query, timeout=180, _skip=()):
-    """First mirror that answers. Returns (elements, host).
+    """Return (elements, host) from the first mirror that answers.
 
     ⚠ A 504 OR A READ TIMEOUT HERE MAY BE THE QUERY RATHER THAN THE HOST, and
-    naming that in the error is what stops the next person waiting out a
-    cost problem. It is not always the query: on the same day a tags-only
-    query, with no geometry at all, 504'd on overpass-api.de and timed out
-    on kumi. Rule out cost first because it is the part you control.
-    Measured 2026-09-23 on the Toulouse commune bbox, same tag, minutes apart:
-    `node+way` with `out center` drew a 504 from overpass-api.de and a read
-    timeout from kumi, while `node` alone with `out body` answered in seconds
-    on the first host tried. `out center` makes Overpass resolve every way's
-    member nodes; the node half is typically 90%+ of a POI answer anyway
-    (restaurant nodes were 827 of 889, 93.0%).
+    the error says so, so a cost problem is not waited out. It is not always
+    the query (on the same day a tags-only query, with no geometry, 504'd on
+    overpass-api.de and timed out on kumi), but cost is the part under
+    control, so rule it out first. Measured 2026-09-23 on the Toulouse
+    commune bbox, same tag, minutes apart: `node+way` with `out center` drew a
+    504 from overpass-api.de and a read timeout from kumi, while `node` alone
+    with `out body` answered in seconds on the first host tried. `out center`
+    makes Overpass resolve every way's member nodes; the node half is
+    typically 90%+ of a POI answer anyway (restaurant nodes were 827 of 889,
+    93.0%).
 
     So write the cheap query first and add ways as a SECOND query if the node
-    answer is not enough - and never compare a node-only count with a
+    answer is not enough, and never compare a node-only count with a
     node+way one, which measures the query rather than the city.
 
     `timeout` is 180 rather than 300 for the same reason: a city-bbox query
@@ -813,11 +799,11 @@ def _overpass(query, timeout=180, _skip=()):
 def osm_route_refs(spec, ctx):
     """Route RELATIONS and distinct REFS per mode, inside a bbox.
 
-    Exists because Barcelona's brief recorded its 54 OSM relations as
-    subway 28 / tram 22 / funicular 4 when the truth is tram 20 / funicular 6.
-    Two relations sat in the wrong column and the total still summed to 54, so
-    no arithmetic on that table could catch it - only re-measuring the parts.
-    A breakdown that adds up is not a breakdown that is correct.
+    Barcelona's brief recorded its 54 OSM relations as subway 28 / tram 22 /
+    funicular 4 when the truth is tram 20 / funicular 6. The total still
+    summed to 54, so no arithmetic on that table could catch it; only
+    re-measuring the parts can. A breakdown that adds up is not a breakdown
+    that is correct.
 
     It reports BOTH counts because they fail in opposite directions, and one
     city can carry both failures at once. Barcelona's 28 subway relations must
@@ -901,24 +887,21 @@ def osm_route_refs(spec, ctx):
 def row_count(spec, ctx):
     """A COUNT the brief states, against a committed output file.
 
-    WHY THIS KIND EXISTS. Every other check here tests LIVENESS - a URL
-    resolves, a feed carries a file, a layer has fields. None of them can see a
-    stale NUMBER, and on 2026-09-23 that gap cost real work: Paris's brief was
-    re-verified 7/7 against live sources that morning, and by the afternoon the
-    build had found "77 stations outside the commune" was 76 and "322 total"
-    was 321. Both checks passed the whole time, because no check stood behind
-    any count in the file.
+    WHY. Every other check here tests LIVENESS (a URL resolves, a feed carries
+    a file, a layer has fields), and none can see a stale NUMBER. On
+    2026-09-23 Paris's brief passed 7/7 against live sources while "77
+    stations outside the commune" was 76 and "322 total" was 321, because no
+    check stood behind any count in the file.
 
     `CLAUDE.md` asks that writing a claim and writing its test be one act. A
     brief full of measured numbers and no numeric check is that rule half
     applied.
 
     DELIBERATELY LOCAL AND OFFLINE. It reads `outputs/`, which is committed, so
-    it runs on a fresh clone with no network and costs nothing. The
-    register-scale numbers (Paris's 149,166 bucket rows) are NOT checkable this
-    way - re-reading a 2,210 MB parquet is not something a brief check may do -
-    and those stay guarded by step 2's own printed filters instead. Claiming
-    otherwise would be worse than the gap.
+    it runs on a fresh clone with no network and costs nothing. Register-scale
+    numbers (Paris's 149,166 bucket rows) are NOT checkable this way: a brief
+    check may not re-read a 2,210 MB parquet, so those stay guarded by step
+    2's own printed filters. Claiming otherwise would be worse than the gap.
 
     Spec:
       path       repo-relative file, normally under outputs/
@@ -991,21 +974,18 @@ CHECKS = {
 def compare_to_config(city, specs):
     """Diff a brief's declared expectations against the BUILT city's config.
 
-    `brief_check` otherwise tests a brief against the live sources - which is
-    what it is for, and is not the same claim as "the brief matches the build".
-    Toronto proved the difference: its checks reported 9/9 while expecting 111
-    stations where the build produced 110, because they encoded the strip
-    patterns the build had since improved on. **A check can only test what it
-    encodes.**
+    `brief_check` otherwise tests a brief against the live sources, which is
+    not the same claim as "the brief matches the build". Toronto's checks
+    reported 9/9 while expecting 111 stations where the build produced 110,
+    because they encoded the strip patterns the build had since improved on.
+    **A check can only test what it encodes.**
 
     A spec opts in with a `vs_config` map of {its own field: CONFIG_CONSTANT}.
     """
     import importlib
     # Invalidated because this tool READS a file that was probably just edited,
-    # and a stale .pyc gives a confidently wrong answer. Seen while building
-    # this: the config on disk said 110, the check reported 111 and FAILED
-    # against a correct file. Same class as everything else this tool exists
-    # for - an instrument that has not been checked is not evidence.
+    # and a stale .pyc gives a confidently wrong answer (the config on disk
+    # said 110; the check reported 111 and FAILED against a correct file).
     importlib.invalidate_caches()
     try:
         config = importlib.import_module(f"pipeline.{city}.config")
@@ -1071,10 +1051,8 @@ def main():
         tag = " (BUILT - claims are history, but still checkable)" if built else ""
         print(f"\n=== {path.stem}{tag}: {len(specs)} claim(s) ===")
         if args.vs_config:
-            # Not a live check. This asks a different question: does the brief
-            # still describe the city that was actually BUILT? Toronto's checks
-            # reported 9/9 while expecting 111 stations against a build
-            # producing 110, because a check can only test what it encodes.
+            # Not a live check: does the brief still describe the city that
+            # was BUILT? See compare_to_config.
             ok, lines = compare_to_config(path.stem, specs)
             for line in lines:
                 print(line)
@@ -1130,8 +1108,8 @@ def main():
 
 if __name__ == "__main__":
     # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py
-    # crashed on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
+    # Hangul, Han and kana, and on Czech and Latvian letters (a Korean claim,
+    # 2026-09-27). UTF-8 regardless of the console.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

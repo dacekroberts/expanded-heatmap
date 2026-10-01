@@ -4,10 +4,10 @@
 
 CLAUDE.md: run `check_personal_exposure.py <city>` before publishing a city and
 record the verdict in DECISIONS.md. Ten French cities were registered in that
-script with no verdict ever written, and only a reviewer reading the log found
-it (review lane 4, 2026-09-30). The log is prose in many styles, so this check
-reads a registry instead: `docs/privacy_verdicts.md`, one table row per city -
-its verdict, the date, and the heading of the DECISIONS entry that records it.
+script with no verdict ever written (2026-09-30), and only a reading of the log
+showed it. The log is prose in many styles, so this check reads a registry
+instead: `docs/privacy_verdicts.md`, one table row per city (its verdict, the
+date, and the heading of the DECISIONS entry that records it).
 
 It fails when:
   * a city in `app/cities.py` has no row, or a row names no built city;
@@ -30,8 +30,8 @@ if hasattr(sys.stdout, "reconfigure"):
 # publish-structural: the source carries no person-name field at all (Dublin's
 # valuation register), so there is nothing to expose.
 VERDICTS = {"publish", "publish-structural"}
-# pending: a known open question for the owner. Reported, not failed - like
-# check_macro_labels' KNOWN_STACKED - and it still has to cite the entry that
+# pending: a known open question for the owner. Reported, not failed (like
+# check_macro_labels' KNOWN_STACKED), and it still has to cite the entry that
 # states the question.
 PENDING = "pending"
 

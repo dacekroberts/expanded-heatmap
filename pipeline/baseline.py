@@ -1,16 +1,12 @@
 """Per-step row counts as data, so `drift_check` can diff them instead of
-telling you to find them by eye.
+leaving them to be compared by eye.
 
 WHY
 ---
 `drift_check` compares the rendered OUTPUT FILES byte for byte, which catches a
-map that changed and says nothing about a count that changed. Its own closing
-line has been: *"Compare the step row counts above against the latest baseline
-entry in DECISIONS.md."* By hand. Against a file that is now 5,400 lines and 103
-entries.
-
-That is the wrong shape of work, and it hides the exact failure this project
-keeps having: **a count can move without an output file looking wrong.** A
+map that changed and says nothing about a count that changed. Without this,
+the counts were compared by hand against the latest baseline entry in
+DECISIONS.md, and **a count can move without an output file looking wrong**: a
 filter that silently starts dropping 2,000 more rows still renders a plausible
 map.
 
@@ -28,9 +24,8 @@ moved. `--update-baseline` rewrites the file, which is what to run when a
 change to the counts is intended.
 
 The marker is a printed line rather than a return value because steps are run
-as subprocesses and their stdout is already captured - nothing else has to
-change, and a step that never calls `emit()` simply has no baseline, which is
-reported rather than treated as passing.
+as subprocesses and their stdout is already captured. A step that never calls
+`emit()` has no baseline, which is reported rather than treated as passing.
 
 **Emit the figures a reader of the city page would care about**, not every
 intermediate: rows in, rows after the storefront filter, per-bucket counts,
@@ -90,7 +85,7 @@ def save(city: str, counts: dict) -> Path:
 
 
 def compare(city: str, measured: dict):
-    """Returns (ok, lines_to_print). Missing baseline is reported, not failed -
+    """Return (ok, lines_to_print). A missing baseline is reported, not failed:
     a city that has never emitted one is a gap to fill, not a regression."""
     if not measured:
         return True, [f"  baseline: {city} emits none "

@@ -13,7 +13,7 @@ Builds a throwaway git repository in a temp folder, touches nothing here:
 PASS means: the guarded resolution keeps the new entry, puts no archived entry
 back, and `decisions_index.py --check` is clean; AND the same merge with the
 guard switched off (`--archive-glob ""`) does put them back and `--check`
-catches it. The second half is the control - a guard that cannot be seen to
+catches it. The second half is the control: a guard that cannot be seen to
 fail proves nothing.
 """
 import os
@@ -56,7 +56,7 @@ OLD = ["2026-09-24 - Second week", "2026-09-21 - Second week", "2026-09-18 - Fir
 def run(repo, *cmd, ok=True):
     # A git hook runs with GIT_DIR, GIT_INDEX_FILE and friends pointing at the
     # REAL repository; left in place they make every command here act on it
-    # instead of the throwaway one. Found when the pre-push hook first ran this.
+    # instead of the throwaway one (seen under the pre-push hook).
     env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
     p = subprocess.run(list(cmd), cwd=repo, capture_output=True, text=True,
                        encoding="utf-8", errors="replace", env=env)

@@ -6,10 +6,10 @@
 
 WHY. overpass.osm.ch serves a Swiss-only extract. For any query outside
 Switzerland it answers HTTP 200 with an empty result, or zero counts for
-`out count` - shaped exactly like "nothing here". It sat in three host lists
+`out count`, shaped exactly like "nothing here". It sat in three host lists
 (pipeline/osm.py, pipeline/countries/mexico.py, scripts/brief_check.py) until
-2026-09-27, when a second-city screen (Staging) got zeros for Daugavpils,
-Aarhus, Zoetermeer and Amstelveen. The fetchers reject a fully empty answer,
+2026-09-27, when a screen got zeros for Daugavpils, Aarhus, Zoetermeer and
+Amstelveen. The fetchers reject a fully empty answer,
 but a rotation that lands on a regional extract is a silent hazard for any
 new query shape, so the list itself is checked.
 

@@ -115,7 +115,7 @@ def osm_station_query(bbox):
 
 def osm_tram_stop_query(bbox):
     """OSM tags a tram stop railway=tram_stop, which osm_station_query does not
-    take: Osaka's 22 in-city Hankai stops had no name until this ran
+    take: without this, Osaka's 22 in-city Hankai stops have no name
     (2026-09-27). Any city with a tram N02 draws needs it (Sapporo's streetcar,
     Tokyo's Arakawa Line)."""
     box = "({},{},{},{})".format(*bbox)

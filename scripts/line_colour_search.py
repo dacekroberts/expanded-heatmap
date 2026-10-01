@@ -6,13 +6,13 @@ pages and clear CIE76 45 from every category pin. Each line, in config order,
 takes the feasible colour nearest its operator's own hue (config.LINES[key]
 ["hue"]; lightness weighted half), holding:
   * CIE76 >= NEAR_DE from every line already chosen that comes within NEAR_M
-    of it (step 1's lines.geojson, in the city's projected CRS) - lines a
+    of it (step 1's lines.geojson, in the city's projected CRS): lines a
     reader sees side by side;
   * CIE76 >= linecolour.HARD_FLOOR from every other line in the city, which
     check_line_colours() and check_map_markup.py require.
 Osaka's 34 lines sat at the limit of the city-wide search (closest pair 18.0);
-Tokyo's 52 do not fit it, which is why the constraint is spatial (the Tokyo
-build handoff, 2026-09-28). The dark-mode labels are then separated the way
+Tokyo's 52 do not fit it, which is why the constraint is spatial
+(2026-09-28). The dark-mode labels are then separated the way
 the renderer does it (dark_label_colours), so a choice it cannot draw fails
 here, not at render.
 

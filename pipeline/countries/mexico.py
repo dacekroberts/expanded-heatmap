@@ -2,7 +2,7 @@
 
 Everything here was verified identical for Ciudad de México (entidad 09,
 462,732 units) and Jalisco (entidad 14, 401,813). Nothing here is asserted from
-one city - that was the point of waiting for the second.
+one city.
 
 Sources, both keyless:
   * Businesses - INEGI DENUE, bulk CSV per entidad federativa. No token, no
@@ -39,12 +39,9 @@ SOURCE_ENCODING = "latin-1"
 DENUE_NAME_COLUMN = "nom_estab"        # the exterior sign - see the note below
 DENUE_ACTIVITY_COLUMN = "nombre_act"   # -> the taxonomy's VALUE_COLUMN
 DENUE_CODE_COLUMN = "codigo_act"       # -> `scian`, what classify() reads
-# CONSUMED by both Mexican cities' step 2 since 2026-09-22. They previously
-# wrote the literals "cve_ent" and "municipio" directly - BOTH cities, not just
-# the one that scopes by municipio - so a DENUE column rename would have been
-# fixed here, in the national file, and missed in two step files. That is
-# precisely what profiling a country once is meant to prevent, and it was found
-# by asking why nothing read these.
+# CONSUMED by both Mexican cities' step 2 since 2026-09-22, so a DENUE column
+# rename is fixed here once rather than missed in step files that wrote the
+# literals "cve_ent" and "municipio" themselves.
 DENUE_STATE_COLUMN = "cve_ent"
 DENUE_MUNICIPIO_COLUMN = "municipio"
 # The municipio's three-digit INEGI code. cve_ent + cve_mun is the same key
@@ -104,7 +101,7 @@ DENUE_INTERIOR_COLUMN = "numero_int"
 
 # --- OpenStreetMap ----------------------------------------------------------
 #
-# More than one host, tried in order. Measured over this build: overpass-api.de
+# More than one host, tried in order. Measured on the Mexico builds: overpass-api.de
 # returned 504 on several requests and 429 on one, kumi.systems 504 on several,
 # osm.ch answered 200 with an EMPTY body once - all at different times, for the
 # same query. A failure is a fact about that host, not about the city, so a
@@ -151,14 +148,13 @@ def denue_member(state_code):
 #   §1(h)  non-endorsement.
 #
 # The displayed text lives in app/components.py's _NOTICES, keyed on INEGI
-# rather than on a city - which is why Guadalajara became the first city here
-# to need no new notice entry at all.
+# rather than on a city, so a second Mexican city needs no new notice entry
+# (Guadalajara needed none).
 LICENCE_NAME = "Términos de Libre Uso de la Información del INEGI"
 LICENCE_STORED_AT = "docs/licenses/inegi-terminos-libre-uso-informacion.pdf"
-# NOT AUTHORITATIVE, and nothing read this until it was checked on
-# 2026-09-22. The string INEGI actually requires is displayed from
-# `app/components.py`'s `_NOTICES`, which carries its own verbatim copy; this
-# one is read by nothing. Two copies of a PRESCRIBED attribution with no
+# NOT AUTHORITATIVE: nothing reads this (checked 2026-09-22). The string INEGI
+# actually requires is displayed from `app/components.py`'s `_NOTICES`, which
+# carries its own verbatim copy. Two copies of a PRESCRIBED attribution with no
 # stated owner is how a displayed notice quietly stops matching the licence,
 # so: **the `_NOTICES` entry is the one that must be right.** Change that
 # first, and only then mirror it here.

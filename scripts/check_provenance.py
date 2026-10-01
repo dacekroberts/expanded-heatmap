@@ -1,131 +1,103 @@
-"""Fail when a built city's provenance is not actually recorded.
+"""Fail when a built city's provenance is not recorded.
 
     python scripts/check_provenance.py [--strict]
 
-WHY THIS EXISTS, AND WHY IT IS A SCRIPT RATHER THAN A PARAGRAPH
----------------------------------------------------------------
-`CLAUDE.md` calls `docs/data_sources.md` the only way a build can be
-reproduced, and `add-city` Step 0.4 makes recording a source a build
-requirement. Both were followed, and both were followed for the US cities
-only. Twice:
+WHY A SCRIPT RATHER THAN A RULE
+-------------------------------
+`CLAUDE.md` makes `docs/data_sources.md` the only record a build can be
+reproduced from, and `add-city` Step 0.4 requires every source to be recorded there.
+**A city whose provenance is unrecorded looks identical to a city that was
+checked**, and a prose rule cannot tell the two apart. Canada (2026-09-21)
+and Mexico (2026-09-22) both shipped with endpoints unrecorded.
 
-  - **Canada, 2026-09-21.** Six municipalities built. Their NOTICES went into
-    `data_sources.md` the same day, correctly. Their ENDPOINTS did not reach
-    the three provenance tables at all, their FEEDS never reached the GTFS
-    licence table, and one publisher - the Province of British Columbia, whose
-    layer names 30 stations - was never read. Found 2026-09-22, a day later.
-  - **Mexico, 2026-09-22.** Mexico City and Guadalajara built. Same omission,
-    caught by this script on the day it was written rather than by a reader.
-
-Each time the gap was invisible in exactly the way that matters: **a city whose
-provenance is unrecorded looks identical to a city that was checked.** A prose
-rule cannot tell those apart. This can.
-
-The thing both misses have in common is that the country was PROFILED before
-any of its cities was built, so a whole country's sources arrived through
-`add-country` - which writes `docs/<country>_step0_endpoints.md` - and the
-per-city step that would have copied them into `data_sources.md` was never the
-step anyone was on. So the check is deliberately keyed on the BUILT CITY, not
-on the country file.
+Both times the country was profiled before any of its cities was built, so
+its sources arrived through `add-country` (which writes
+`docs/<country>_step0_endpoints.md`) and the per-city step that copies them
+into `data_sources.md` was skipped. The check is therefore keyed on the BUILT
+CITY, not on the country file.
 
 WHAT IT CHECKS
 --------------
   A. Every city in `app/cities.py` has at least one row naming it in each of
      the three provenance tables.
-  B. Every URL constant that a city's `pipeline/<slug>/config.py` actually
-     resolves to appears verbatim in `data_sources.md`. This is the strongest
-     check here and the one that catches a source nobody thought of as a
-     source - a naming layer, a parcel join, a geocoder.
+  B. Every URL constant a city's `pipeline/<slug>/config.py` resolves to
+     appears verbatim in `data_sources.md`. The strongest check here: it
+     catches sources nobody thought of as sources (a naming layer, a parcel
+     join, a geocoder).
   C. `app/components.py`'s `_NOTICES` and `data_sources.md`'s numbered notices
      are in bijection. A required string displayed but unexplained, or
-     explained but not displayed, both fail.
-  D. Notice numbers are unique and contiguous from 1. They were neither: the
-     list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
-     because each country's block was appended without renumbering.
-  L. A notice BUILT from config credits every file the city reads: Tokyo's
-     (notice 56) comes from `pipeline/tokyo/credits.py`, one entry per file its
-     ward roster reads, and a roster file without one - a ward switched on
-     later - fails, as does a credit for a file no longer read (2026-09-28).
+     explained but not displayed, fails.
+  D. Notice numbers are unique and contiguous from 1. Appending a country's
+     block without renumbering once left two item 8s and two item 15s.
+  L. A notice BUILT from config credits every file the city reads. Tokyo's
+     (notice 56) comes from `pipeline/tokyo/credits.py`, one entry per file
+     its ward roster reads; a roster file without a credit (a ward switched
+     on later) fails, as does a credit for a file no longer read.
   M. A licence that prescribes its credit WORD FOR WORD is quoted on every
      page of that country. INSEE permits reuse only « sous la forme « Source :
-     Insee » », and Paris, Marseille, Toulouse, Lille and Rennes all shipped
-     naming SIRENE and INSEE in prose without that string, unnoticed until
-     2026-09-30. The page is parsed, not grepped, so a comment quoting the
-     string does not count; only a literal passed to an `st.*` call does, and
-     not one inside an if/try block, where a missing provenance file could
-     drop it (the France template did, until 2026-09-30).
-  K. Three of `CLAUDE.md`'s invariants that a new city could break silently:
+     Insee » »; Paris, Marseille, Toulouse, Lille and Rennes shipped without
+     that string until 2026-09-30. The page is parsed, not grepped: only a
+     literal passed to an `st.*` call counts (a comment quoting it does not),
+     and not one inside an if/try block, where a missing provenance file
+     could drop it.
+  K. Three `CLAUDE.md` invariants a new city could break silently:
 
-     - **the basemap attribution is on every rendered map, and nothing is
-       parked on top of it.** ODbL requires it to stay visible; nothing
-       verified it, and it is the one obligation here that is breached by
-       OMISSION rather than by a wrong string. Since 2026-09-23 this also
-       requires the legend's `bottom` to be clamped against the map's own
-       height, because "in the file" and "on the screen" turned out to be
-       different questions - the legend covered the credit in every city at
-       any viewport taller than the map.
-     - **each city's `CRS_PROJECTED` matches its own longitude.** The invariant
-       is that the projected CRS is derived per city and NEVER copied, and a
-       copied one is invisible: distances come out wrong by a few per cent
-       rather than erroring.
-     - **each city's map step calls `render_heatmap()` and builds no
+     - **The basemap attribution is on every rendered map, and nothing sits
+       on top of it.** ODbL requires it to stay visible, and it is the one
+       obligation here breached by OMISSION rather than by a wrong string.
+       Since 2026-09-23 the legend's `bottom` must also be clamped against
+       the map's own height: unclamped, the legend covered the credit in
+       every city at any viewport taller than the map.
+     - **Each city's `CRS_PROJECTED` matches its own longitude.** The
+       projected CRS is derived per city and NEVER copied; a copied one does
+       not error, it measures distances wrong by a few per cent.
+     - **Each city's map step calls `render_heatmap()` and builds no
        `folium.Map` of its own**, so the shared renderer is not forked.
 
   J. Every `outputs/...` file NAMED in a page's prose or in the docs exists and
-     is committed. These are not files the app opens - it reads one
-     `heatmap.html` per city through an iframe - they are **promises to a
-     reader**: "the stations excluded are listed in
-     `outputs/montreal/excluded_stations.csv`". `outputs/` is committed and
-     `data/` is not, so a city added in a hurry can cite a file that never
-     leaves the machine it was built on, and nothing about the page looks
-     wrong. Clean when written, 17 paths; it exists for the seventeenth city.
+     is committed. The app reads only one `heatmap.html` per city; these
+     files are **promises to a reader** ("the stations excluded are listed in
+     `outputs/montreal/excluded_stations.csv`"). `outputs/` is committed and
+     `data/` is not, so a page can cite a file that never leaves the machine
+     it was built on, and nothing about the page looks wrong.
 
-  I. Every markdown table in the provenance docs actually renders: no row
-     orphaned from its header by intervening prose, and no row whose cell
-     count differs from its header's. **Markdown fails silently here** - an
-     orphaned row renders as literal pipe-delimited text and looks fine in a
-     diff - and it has happened twice: Edmonton's and Toronto's rows were
-     orphaned in two tables at once, and Philadelphia's OPA row carried five
-     cells against a six-cell header. This check was written inline six times
-     during one sweep before being committed, which is the usual sign.
+  I. Every markdown table in the provenance docs renders: no row orphaned
+     from its header by intervening prose, and no row whose cell count
+     differs from its header's. **Markdown fails silently here**: an orphaned
+     row renders as literal pipe-delimited text and looks fine in a diff.
+     Seen twice: Edmonton's and Toronto's rows orphaned in two tables, and
+     Philadelphia's OPA row with five cells under a six-cell header.
 
-  H. Every relative markdown link in the docs resolves. `vancouver.md` linked
-     `[session_roles.md](session_roles.md)` from inside `docs/build_briefs/`,
-     which pointed at a sibling that never existed - it needed `../`. Fenced
+  H. Every relative markdown link in the docs resolves (a brief in
+     `docs/build_briefs/` once linked a sibling that needed `../`). Fenced
      code is stripped first, because Overpass QL (`["network"="<Net>"](bbox)`)
-     reads exactly like a markdown link and is not one.
+     reads like a markdown link and is not one.
 
   G. Every stored licence in `docs/licenses/` has a SHA-256 listed in that
-     directory's README, and it MATCHES. This is a compliance artefact, not
-     housekeeping: the hashes exist so the clauses quoted in `data_sources.md`
-     are checkable against the text that was actually agreed to, and a stale
-     one silently ends that. Two were stale on 2026-09-22 because
-     `.gitattributes` sets `* text=auto eol=lf` and git rewrote CRLF to LF
-     after the hash was taken - so the recorded digests described bytes that
-     existed nowhere. Two more files had no hash at all.
+     directory's README, and it MATCHES. A compliance record, not
+     housekeeping: the hashes make the clauses quoted in `data_sources.md`
+     checkable against the text actually agreed to. `.gitattributes` sets
+     `* text=auto eol=lf`, so a hash taken before git rewrote CRLF to LF
+     describes bytes that exist nowhere (two were stale on 2026-09-22).
 
   F. Every `notice N` / `item N` citation of the notices list still points at
      the notice it MEANT. A range check cannot do this: renumbering on
      2026-09-22 moved Edmonton from item 14 to 15, and
-     `docs/build_briefs/edmonton.md` went on saying "item 14 carries it" - a
-     citation that still RESOLVED, to Calgary. So the check compares the cited
-     notice's subject against the subjects named around the citation, and
-     fails when the neighbourhood is talking about a different notice's
-     subject than the one it cites.
+     `docs/build_briefs/edmonton.md` went on saying "item 14 carries it", a
+     citation that still RESOLVED, to Calgary. So the check compares the
+     cited notice's subject with the subjects named around the citation, and
+     fails when they name a different notice's subject.
 
-  E. `docs/city_master_list.md`'s built counts match `app/cities.py` - the
-     total and the per-country figures. That file is the one place `CLAUDE.md`
-     says to READ COUNTS OFF, so its numbers are load-bearing in a way no other
-     document's are. A sweep on 2026-09-22 verified them by hand and they were
-     right to the entry; this makes that verification repeatable instead of
-     annual. **A count in a file whose job is to carry counts gets checked; a
-     count anywhere else gets deleted** - which is why this lives here and not
-     in `check_stale_claims.py`.
+  E. `docs/city_master_list.md`'s built counts (the total and per country)
+     match `app/cities.py`. `CLAUDE.md` says to READ COUNTS OFF that file, so
+     its numbers are load-bearing. **A count in a file whose job is to carry
+     counts gets checked; a count anywhere else gets deleted**, which is why
+     this lives here and not in `check_stale_claims.py`.
 
 KNOWN_GAPS below is a list of DEFECTS, not exemptions. Entries are dated, the
-report prints them loudly, and a stale entry - one naming a city that is now
-recorded - fails the check, so the list can only shrink. `--strict` ignores it
-entirely and is what CI should run once the list is empty.
+report prints them loudly, and a stale entry (a city that is now recorded)
+fails the check, so the list can only shrink. `--strict` ignores it entirely
+and is what CI should run once the list is empty.
 """
 
 import argparse
@@ -140,12 +112,12 @@ ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
 
 DATA_SOURCES = ROOT / "docs" / "data_sources.md"
-# SPLIT BY COUNTRY 2026-09-27. The entry point keeps the preamble, the numbered
+# Split by country 2026-09-27. The entry point keeps the preamble, the numbered
 # notices and the deploy gate; each country's rows of the three provenance
-# tables, and every section about its cities' sources, moved verbatim to
+# tables, and every section about its cities' sources, live in
 # docs/data_sources/<country>.md under the same headings. A and B read the
 # entry point and every country file together; C, D and F read the notices,
-# which stay in the entry point only.
+# which are in the entry point only.
 DATA_SOURCES_DIR = ROOT / "docs" / "data_sources"
 CITIES_PY = ROOT / "app" / "cities.py"
 COMPONENTS_PY = ROOT / "app" / "components.py"
@@ -159,8 +131,8 @@ CITATION_SKIP = {"DECISIONS.md"}
 
 
 def is_decisions_log(p):
-    """DECISIONS.md, one of its weekly archives (docs/decisions/, 2026-09-27) or
-    a session's drafts file (docs/decisions_drafts/, 2026-09-30): the same dated
+    """Return True for DECISIONS.md, its weekly archives (docs/decisions/) and
+    the build sessions' drafts files (docs/decisions_drafts/): the same dated
     record, excluded for the same reason wherever it sits."""
     return p.name == "DECISIONS.md" or p.parent in (ROOT / "docs" / "decisions",
                                                     ROOT / "docs" / "decisions_drafts")
@@ -170,12 +142,11 @@ CITATION_SKIP_PATHS = {
     ".claude/skills/consistency-sweep/SKILL.md",
     "scripts/check_provenance.py",
 }
-# "item N" IS AMBIGUOUS and the first version of this check ignored that. At
-# least three numbered namespaces exist: the notices list, the deploy-gate list
-# under "What closing this fully requires", and `global_country_shortlist.md`'s
-# own "#### Item N" probe sweep. Reporting all of them against the notices list
-# produced thirteen "unverifiable" notes, every one of which was a citation of
-# a DIFFERENT list - noise that would have taught people to skip the section.
+# "item N" IS AMBIGUOUS. At least three numbered lists exist: the notices list,
+# the deploy-gate list under "What closing this fully requires", and
+# `global_country_shortlist.md`'s own "#### Item N" probe sweep. Reading all of
+# them as notices citations produced thirteen "unverifiable" notes, every one
+# a citation of a DIFFERENT list.
 #
 # So only two forms are treated as notices citations:
 #   - "notice N", which is unambiguous; and
@@ -183,30 +154,27 @@ CITATION_SKIP_PATHS = {
 #     data_sources.md, which is how a cross-file citation of that list reads.
 # Anything else is left alone rather than guessed at.
 # The number may be bold or quoted: a bold notice number followed by the wrong
-# city escaped the first form, and three stale numbers reached the About page
-# (review lane 4, 2026-09-30).
+# city escaped the plain form, and three stale numbers reached the About page
+# (2026-09-30).
 CITATION_RE = re.compile(r"\b(?:item|notice)s?\s+[*\"“]*(\d{1,2})\b", re.I)
 NOTICE_WORD_RE = re.compile(r"notice|data_sources", re.I)
 
-# A DOCUMENT THAT DECLARES ITSELF SUPERSEDED IS A TRAIL, NOT A CLAIM, and its
+# A DOCUMENT THAT DECLARES ITSELF SUPERSEDED IS A TRAIL, NOT A CLAIM: its
 # citations point at the list AS IT WAS. Checking them is the same mistake as
-# checking DECISIONS.md, which is skipped two constants above for exactly this
-# reason: "it records what a citation said on a date."
+# checking DECISIONS.md, skipped above because "it records what a citation said
+# on a date."
 #
-# Found 2026-09-23 via canada-required-notices.md, whose header reads
-# "SUPERSEDED 2026-09-22 ... Where this file and those disagree, those win."
-# It cites "Items 9, 10, 14, 16" against the phrase "Four municipal OGLs"
-# without naming the four cities, so the subject test could not confirm item 9
-# was Vancouver's and reported it unverifiable. The citation is correct; it is
-# simply written about a numbering this file no longer governs. Naming the
-# cities to satisfy the check would have edited a historical trail to please a
-# script - the correction runs the wrong way round.
+# Example: canada-required-notices.md ("SUPERSEDED 2026-09-22 ...") cites
+# "Items 9, 10, 14, 16" for "Four municipal OGLs" without naming the cities, so
+# the subject test reported item 9 unverifiable. The citation is correct for the
+# numbering it was written against; editing a historical trail to satisfy a
+# script would run the correction the wrong way round.
 SUPERSEDED_RE = re.compile(r"^\W*\*{0,2}SUPERSEDED\b", re.I | re.M)
 SUPERSEDED_SCAN_CHARS = 600
 
 
 def declares_itself_superseded(text):
-    """Does this document say, up front, that it no longer governs?"""
+    """Return True if the document says, up front, that it no longer governs."""
     return bool(SUPERSEDED_RE.search(text[:SUPERSEDED_SCAN_CHARS]))
 
 # Defects awaiting work, each with the date it was recorded. NOT an allowlist:
@@ -314,10 +282,10 @@ def section(text, heading):
     """Return the slice of `text` under the `## heading` LINE, up to the next
     `## ` heading line, or "" when the file has no such heading.
 
-    Anchored to a whole line because "## Transit feeds" is a substring of
-    "### Transit feeds (GTFS) — checked ...". Ending at the next `## ` is what
-    the single-file version's list of four headings amounted to: nothing but
-    `###` headings sat between them."""
+    Anchored to a whole line because "## Transit feeds" is a substring of the
+    "### Transit feeds (GTFS)" heading. Ending at the next `## ` matches the
+    single-file version's list of four headings: only `###` headings sat
+    between them."""
     m = re.search(r"^" + re.escape(heading) + r"[ \t]*$", text, re.M)
     if not m:
         return ""
@@ -413,10 +381,9 @@ PRESCRIBED_CREDITS = {
 
 def check_prescribed_credits():
     """M: every page of a PRESCRIBED_CREDITS country passes the string to an
-    st.* call outside any if/try/with/loop block. The France template first
-    nested it in the provenance block, so a missing provenance file dropped
-    the credit with the snapshot; moved out 2026-09-30 (owner), and a page
-    that nests it again fails."""
+    st.* call outside any if/try/with/loop block. Nested in the provenance
+    block, a missing provenance file drops the credit with the snapshot (the
+    France template did until 2026-09-30); a page that nests it fails."""
     cities = []
     for node in ast.parse(read(CITIES_PY)).body:
         if isinstance(node, ast.Assign) and any(
@@ -481,13 +448,11 @@ UTM_FAMILIES = (326, 327, 258, 269)
 
 # A national grid is admitted where the country publishes its data in one and a
 # UTM zone would mean transforming OUT of the CRS the publisher measured in.
-# This is not a relaxation: each entry still has to contain the city's own
-# longitude, so a copied CRS fails here exactly as it does for UTM. What it
-# stops asserting is that "projected metres" must always mean "UTM", which was
-# only ever true of the cities built so far.
+# Each entry still has to contain the city's own longitude, so a copied CRS
+# fails here exactly as it does for UTM.
 #
-# Add an entry only with the evidence that the SOURCES ship in it - not because
-# a national grid exists. Ireland qualifies because both Tailte Eireann's
+# Add an entry only with evidence that the SOURCES ship in it, not because a
+# national grid exists. Ireland qualifies because both Tailte Eireann's
 # valuation register (Xitm/Yitm) and its boundary layer (wkid 2157) are already
 # EPSG:2157, and Dublin sits within a quarter-degree of UTM zone 29's eastern
 # edge, where that zone's distortion is worst.
@@ -496,8 +461,8 @@ NATIONAL_GRIDS = {
     # METROPOLITAN France only. The domain is deliberately tight: SIRENE's
     # geolocation file carries a PER-ROW `epsg` column holding 2154 alongside
     # 2975 (Réunion), 5490 (Antilles) and 2972 (Guyane), so a French build that
-    # hard-codes 2154 works in Paris and puts every pin in the sea in
-    # Fort-de-France - without raising. These bounds are what raises.
+    # hard-codes 2154 works in Paris and silently puts every pin in the sea in
+    # Fort-de-France. These bounds are what raises.
     2154: ("Lambert-93", -5.5, 10.0),                   # France (métropole)
     # Switzerland: the Stadt Zürich's Gastwirtschaftsbetriebe ships its points
     # in LV95 (`ekoord`/`nkoord`, e.g. 2680564 / 1252613), swisstopo's national
@@ -510,36 +475,29 @@ def check_invariants(names, lons):
     """K: three CLAUDE.md invariants a new city could break silently."""
     problems = []
 
-    # 1. ODbL: the basemap credit must be on every rendered map - PRESENT,
-    #    LINKED, and NOT UNDERNEATH THE LEGEND.
+    # 1. ODbL: the basemap credit must be on every rendered map: PRESENT,
+    #    LINKED, and NOT UNDERNEATH THE LEGEND. The third clause dates from
+    #    2026-09-23, when the credit was in every file and covered by the
+    #    legend in every city at any viewport taller than the map.
     #
-    #    The third clause was added 2026-09-23. Until then this checked only
-    #    that the credit was in the file, and it was: in every city, at every
-    #    viewport taller than the map, the legend covered it completely. The
-    #    file said "visible" and the render said otherwise, which is the exact
-    #    shape of failure the rest of this script exists to catch.
-    #
-    #    Layout cannot be measured by reading HTML, so this does not try. What
-    #    it checks is that the MECHANISM is present: the legend is
-    #    position:fixed against the viewport's bottom edge while the credit is
-    #    absolutely positioned against the MAP's, so the legend's `bottom` has
-    #    to be clamped against the map's own height or the two collide as soon
-    #    as the frame is taller than the map. Both numbers are read out of the
-    #    same committed file, so this compares the map that shipped against the
-    #    clamp that shipped with it. The real measurement is
-    #    scripts/check_map_attribution.js, which hit-tests a rendered map at
-    #    several viewport heights - but that one needs a browser and an agent,
-    #    and CLAUDE.md says to skip deploy-verify for pipeline-only work.
-    #    pipeline/map_common.py IS pipeline-only work, so without this half the
-    #    only check that sees the regression is the one the rules say not to
-    #    run.
+    #    Layout cannot be measured by reading HTML, so this checks that the
+    #    MECHANISM is present: the legend is position:fixed against the
+    #    viewport's bottom edge while the credit is absolutely positioned
+    #    against the MAP's, so the legend's `bottom` has to be clamped against
+    #    the map's own height or the two collide as soon as the frame is
+    #    taller than the map. Both numbers come from the same committed file,
+    #    so the map that shipped is compared with the clamp that shipped with
+    #    it. The real measurement is scripts/check_map_attribution.js (a
+    #    browser hit-test at several viewport heights), but CLAUDE.md skips
+    #    deploy-verify for pipeline-only work, and pipeline/map_common.py IS
+    #    pipeline-only work; without this half, the only check that sees the
+    #    regression is one the rules say not to run.
     #
     #    A LOOP OVER NOTHING PASSES ALL THREE CLAUSES. Clause 3 below is
-    #    anchored to `names` - a city with no map script fails - but this one
-    #    had no anchor, so a renamed map file or a moved outputs/ would have
-    #    reported every map credited, linked and clear having read none. Found
-    #    2026-09-23 when the third clause was handed over; the same hole was
-    #    closed that day in check_scope_disclosure.py, and is the one
+    #    anchored to `names` (a city with no map script fails); this one fails
+    #    when the glob matches no maps, so a renamed map file or a moved
+    #    outputs/ cannot report every map credited, linked and clear having
+    #    read none. check_scope_disclosure.py has the same guard, the case
     #    check_no_fetch_in_steps_selftest.py calls "a glob that matches nothing".
     maps = sorted(ROOT.glob("outputs/*/heatmap.html"))
     if not maps:
@@ -582,10 +540,10 @@ def check_invariants(names, lons):
     # 2. The projected CRS is derived per city, never copied.
     #
     #    Every skip below is RECORDED, not just taken. main() already refuses a
-    #    run that read fewer longitudes than cities, but a city could still drop
-    #    out here by having no config at its derived slug or a CRS_PROJECTED
-    #    that is not a literal this regex reads - an f-string, or a value
-    #    imported from pipeline/countries/. Either way the limb would examine
+    #    run that read fewer longitudes than cities, but a city can still drop
+    #    out here with no config at its derived slug, or with a CRS_PROJECTED
+    #    that is not a literal this regex reads (an f-string, or a value
+    #    imported from pipeline/countries/). Unrecorded, the limb would examine
     #    one city fewer and print the same green line.
     skipped = []
     for name in names:
@@ -658,9 +616,9 @@ def check_cited_outputs():
     globs = ("app/**/*.py", "docs/**/*.md", "CLAUDE.md")
     for g in globs:
         for q in sorted(ROOT.glob(g)):
-            # DECISIONS.md is excluded everywhere for the same reason; a past
-            # entry may name a file that has since been renamed, and that is
-            # an accurate record rather than a broken promise.
+            # Decisions logs are excluded everywhere: a past entry may name a
+            # file since renamed, which is an accurate record, not a broken
+            # promise.
             if not q.is_file() or is_decisions_log(q):
                 continue
             for m in re.finditer(r"outputs/[A-Za-z0-9_./-]+\.(?:csv|html|json)",
@@ -722,8 +680,7 @@ def check_tables():
             if cols is None:
                 # A HEADER row sits immediately above its own delimiter, so at
                 # this point it legitimately has no width yet. Look ahead one
-                # line before calling it orphaned - the inline version of this
-                # check flagged every header in the file.
+                # line before calling it orphaned.
                 nxt = lines[i] if i < len(lines) else ""
                 if delim.match(nxt):
                     continue
@@ -739,11 +696,10 @@ def check_tables():
 # THIS REPOSITORY'S OWN FILES, AND NOTHING ELSE UNDER ITS ROOT.
 #
 # `.claude/**/*.md` reaches into `.claude/worktrees/<session>/`, and a sibling
-# session's worktree contains its own `.venv-lean`. That is how this check came
-# to report a broken link in **Streamlit's bundled documentation** - a file
-# belonging to a dependency, inside another session's working copy, which this
+# session's worktree contains its own `.venv-lean`; unfiltered, this check
+# reported a broken link in **Streamlit's bundled documentation**, a file this
 # project neither wrote nor can fix. A checker that reports other people's
-# files trains you to skim its output.
+# files trains its readers to skim its output.
 _NOT_OURS = ("/worktrees/", "/site-packages/", "/node_modules/",
              "/.venv", "/__pycache__/")
 
@@ -809,13 +765,11 @@ def check_licence_hashes():
         #
         # docs/licenses/README.md says to compute these "from the COMMITTED
         # file, never from the file you just fetched", because `.gitattributes`
-        # sets `* text=auto eol=lf` and git rewrites CRLF on the way in. This
-        # check used to read the working tree, which contradicts that on any
-        # checkout where a file sits with CRLF - and one does:
+        # sets `* text=auto eol=lf` and git rewrites CRLF on the way in. A
+        # working tree can still hold CRLF:
         # `cta-developer-license-agreement.html` is 230,064 bytes committed and
-        # 232,828 on a Windows working tree. The listed hash was RIGHT and the
-        # checker was wrong, which is the worse way round, because the message
-        # it printed told you to go and change the correct value.
+        # 232,828 on a Windows working tree. Hashing the working tree would call
+        # the correct listed hash wrong and ask for it to be changed.
         raw = q.read_bytes()
         actual = hashlib.sha256(raw).hexdigest()
         if actual != digest:
@@ -907,8 +861,8 @@ def check_citations(doc):
                     # A TABLE ROW IS ITS OWN NEIGHBOURHOOD. Its source is named
                     # in its own cells, often more than 400 characters before
                     # the citation, while the rows above and below name other
-                    # sources: 14 rows read as citing the wrong notice when the
-                    # bold form was first allowed (2026-10-01).
+                    # sources: a 400-character window read 14 rows as citing
+                    # the wrong notice (2026-10-01).
                     window = line + " " + p.stem.replace("_", " ")
                 else:
                     window = text[lo:m.end() + 400] + " " + p.stem.replace("_", " ")
@@ -933,9 +887,9 @@ def check_citations(doc):
                                 f"stops at {max(subjects)}")
                     continue
                 # "notice N (Place)" names its notice outright, so judge the
-                # place, not the neighbourhood - the stale form the About page
-                # showed ("notice **69 (Palma)**", review lane 4, 2026-09-30).
-                # Only a place that IS some notice's place is judged.
+                # place, not the neighbourhood (the About page once showed a
+                # stale "notice **69 (Palma)**"). Only a place that IS some
+                # notice's place is judged.
                 pm = CITED_PLACE_RE.match(text, m.end())
                 if pm:
                     cited_place = norm_place(pm.group(1))
@@ -1155,12 +1109,10 @@ def main():
         print(f"      note: {s}")
 
     # --- K, invariants a new city could break silently ------------------------
-    # `ast.literal_eval`, NOT `node.value` - a negative number is a UnaryOp
+    # `ast.literal_eval`, NOT `node.value`: a negative number is a UnaryOp
     # wrapping a Constant, so `getattr(v, "value", None)` returns None for
-    # every western longitude in the file. The first version of this did that
-    # and parsed ZERO of sixteen, so the CRS limb below examined nothing while
-    # reporting success. Caught by negative-testing the limb rather than by
-    # reading it.
+    # every western longitude in the file. Reading `.value` parsed ZERO of
+    # sixteen, and the CRS limb below examined nothing while reporting success.
     lons = {}
     for node in ast.parse(read(CITIES_PY)).body:
         if isinstance(node, ast.Assign) and any(

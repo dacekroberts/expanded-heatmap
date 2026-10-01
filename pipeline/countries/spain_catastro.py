@@ -13,8 +13,8 @@ the name) and a `AD:PostalDescriptor` (the postcode, "7001" for 07001).
     address point: street id, street text, type code, the normalised name key,
     the number and its suffix, the postcode, x, y.
   * `street_key(text, catastro=...)` is the normalisation both sides share.
-    It was found by READING MISSES at the Palma build (the skill's step 5),
-    not anticipated; any change re-runs Palma's control (its 581 register
+    It comes from READING MISSES at the Palma build (the skill's step 5);
+    any change re-runs Palma's control (its 581 register
     coordinates, compared with where the join puts them) before it counts.
   * `Joiner(addresses).place(name, number, suffix, type_code, postcode)`
     returns the tier and the point: "exact" (the street and the number),
