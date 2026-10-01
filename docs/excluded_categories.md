@@ -226,6 +226,10 @@ but also for taquerias and cafés; all of it counts as food service.
 - adult venues (40), entertainment (55), card rooms (2), parking (59), funeral
   services (7) and a seasonal lot (1).
 
+The entertainment licences are mostly DJs, bands, media companies and event
+services. One or two nightclubs hold only this licence and are not on the map;
+clubs holding a bar licence are.
+
 **Not placed**: 74 addresses the Census geocoder could not match inside the
 city's box (2%), and 125 matched points with a Sacramento postal address that
 lie outside the city limits. 4 businesses at an apartment address are left off
@@ -456,7 +460,10 @@ food-store licences) and the City's regulated slice.
 (23), which have no counter of their own; and sidewalk-café permits (137), a
 restaurant's permission to use the pavement rather than a premises. The City's
 other licence types (elevators, fuel devices, amusement shows and the like) are
-regulated activities, not storefronts.
+regulated activities, not storefronts. A petrol station with a shop is on the
+map through its State food-store licence. Dance-hall licences (24) are left out
+as well: the current ones belong to community and banquet halls, and a club
+licensed only for dancing, with no restaurant licence, would not appear.
 
 **Left out of the State's salon file**: chair and room renters (65),
 individuals working inside another licensee's shop, and 3 salons at an
@@ -592,6 +599,11 @@ about 90 recreation and production licences (`Billiards/Sippio` 38, `Bowling
 Alley` 10, seven Farmer Brewery/Winery/Distillery pouring licences, and five
 `Fortune Teller`), which are NAICS 713/312 territory that no bucket covers in
 any city here.
+
+Also left out: 17 **General On Premise** all-alcohol licences. Ten of those
+venues are on the map already, through their Inspectional Services food permit;
+the rest are theatres, a college, public institutions and a single bar, so
+taking the licence type would add almost nothing the map is meant to show.
 
 From the food data, `MFW` (Mobile Food Walk On, 10 premises) is out as mobile
 trade is everywhere else, and the cannabis register's one `Delivery (operator)`

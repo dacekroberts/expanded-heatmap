@@ -691,10 +691,12 @@ COLUMNS["boston_licensecat"] = {
     "pawnbroker": absent("no general-retail source"),
     "nightclub": [loc({"source": "isd_food", "business_category": "FS"},
                       "eating and drinking permit, where a club with food lands"),
-                  pending({"source": "licensing_board", "business_category": "GOP All Alc."},
-                          "General On Premise all-alcohol licence (bars and clubs)", None, "2026-09-29",
-                          "left out as 'NAICS 713/312 territory'; a bar or club with no ISD food "
-                          "permit is off the map. Not measured.")],
+                  exception({"source": "licensing_board", "business_category": "GOP All Alc."},
+                            "General On Premise all-alcohol licence (bars and clubs)", None,
+                            "Four continuity departures kept out and disclosed",
+                            "kept out, disclosed: of 17 licensees 10 are on the map through an ISD "
+                            "food permit; the 7 left are 1 bar (The Spud Bar), theatres, a college "
+                            "and institutions, so the licence type would add mostly non-bars")],
     "vet": absent("not in these registers"),
     "nonstore": [loc({"source": "cannabis", "business_category": "Delivery (operator)"}, "delivery")],
     "parking": absent("not in these registers"),
@@ -729,20 +731,21 @@ COLUMNS["buffalo"] = {
     "petrol_station": [
         loc(_buf("GAS & GO EXPRESS", "nys_store"),
             "a station with a shop holds a State food-store licence (44 such names, Joe's Kwik Marts)"),
-        pending(_buf("Cert. Operation Fuel Device"), "certificate of operation for a fuel device (1,182)",
-                None, "2026-09-29",
-                "the City's only record of every pump is a device certificate, left out as not a "
-                "premises (like elevators); a station without a food-store licence is off the map. "
-                "Not measured")],
+        exception(_buf("Cert. Operation Fuel Device"), "certificate of operation for a fuel device (1,182)",
+                  None, "Four continuity departures kept out and disclosed",
+                  "closed: not a pump register. The holders are apartments, churches, colleges and "
+                  "factories (fuel-burning equipment); the only petrol retailers among them, three "
+                  "7-Elevens, are already mapped through the State food-store licence")],
     "vehicle_repair": absent("no repair or car-wash code; Tire Handler is a scrap-tire permit"),
     "gambling": absent("no betting, lottery, bingo or casino code; Coin-controlled Amusements are "
                        "arcade machines (recreation)"),
     "pawnbroker": [loc(_buf("Pawnbroker"), "pawnbroker")],
     "nightclub": [
         loc(_buf("Restaurant / Dance"), "restaurant licensed for dancing"),
-        pending(_buf("Dance Hall"), "dance hall (24)", None, "2026-09-29",
-                "left out as an adjunct licence; a club holding no Restaurant licence would be off "
-                "the map. Not measured")],
+        exception(_buf("Dance Hall"), "dance hall (24)", None, "Four continuity departures kept out and disclosed",
+                  "kept out, disclosed: of 7 current sites 3 are mapped and 4 are community or "
+                  "banquet halls far from any station; 5 club-like licences near stations have "
+                  "lapsed - re-check at Buffalo's next refresh")],
     "vet": absent("no veterinary code"),
     "nonstore": [loc(_buf("Vending Machine"), "vending machine")],
     "parking": [loc(_buf("Parking Lot"), "parking lot"),
@@ -771,7 +774,11 @@ COLUMNS["sacramento"] = {
     "adult_hostess": [loc("ADULT ENTERTAINMENT", "adult entertainment")],
     "sex_shop": absent("no type of its own; under RETAIL SALES - GENERAL"),
     "massage_commercial": [loc("MASSAGE - ESTABLISHMENT", "massage establishment")],
-    "massage_regulated": [loc("MASSAGE - TECHNICIAN", "certified massage technician, a person")],
+    # Confirmed by the owner (2026-09-30) as a PRIVACY exclusion, not as
+    # regulated massage: California's certificate is not a health licence, but
+    # each one names a person rather than a premises.
+    "massage_regulated": [loc("MASSAGE - TECHNICIAN", "certified massage technician: a licence "
+                                                      "naming a person, out for privacy (owner)")],
     "car_dealer": [loc("AUTOMOBILE DEALERS - NEW / USED", "car dealers"),
                    loc("AUTOMOBILE DEALERS - USED", "used car dealers")],
     "petrol_station": [loc("SERVICE STATIONS", "service stations")],
@@ -781,9 +788,10 @@ COLUMNS["sacramento"] = {
     "pawnbroker": [loc("PAWNBROKERS", "pawnbroker")],
     "nightclub": [
         loc("BARS - TAVERNS", "bars and taverns, where a club with a bar licence files"),
-        pending("ENTERTAINMENT", "entertainment (44 in the city)", None, "2026-09-29",
-                "left out as recreation and events; a hand read of the names is mostly DJs, bands "
-                "and media, but a few may be clubs (LA KALLE, CLUB FANTASY)")],
+        exception("ENTERTAINMENT", "entertainment (41 current)", None, "Four continuity departures kept out and disclosed",
+                  "kept out, disclosed: about 2 are clubs with a public floor (Channel 24, La "
+                  "Kalle); 3 are adult venues (rule R3); the rest are DJs, bands, media and event "
+                  "services")],
     "vet": [loc("VETERINARIANS", "veterinarians")],
     "nonstore": [loc("RETAIL SALES - ONLINE", "online retail"), loc("VENDING MACHINES", "vending")],
     "parking": [loc("PARKING LOTS/SERVICES", "parking")],
@@ -795,7 +803,7 @@ COLUMNS["sacramento"] = {
     "pharmacy": [loc("DRUGS STORES & PHARMACIES", "pharmacies")],
     "optician": absent("no optician type: OPTOMETRISTS are eye doctors' offices (NAICS 621320, "
                        "health care, out as in the NAICS cities); optical shops file under "
-                       "RETAIL SALES - GENERAL"),
+                       "RETAIL SALES - GENERAL; confirmed by the owner 2026-09-30"),
     "mobile_unit": [loc("MOBILE VENDOR - FOOD", "food truck"),
                     loc("MOBILE VENDOR - ICE CREAM", "ice-cream vendor"),
                     loc("SIDEWALK VENDOR - MERCHANDISE", "street merchandise stall")],
@@ -1809,14 +1817,10 @@ COLUMNS["pittsburgh_inspection"] = {
 # except the cells below, which still wait on the owner. A queued row turns stale
 # (and fails) when its fix lands: make it a loc() in the same change.
 # ---------------------------------------------------------------------------
-AWAITING_OWNER = {
-    ("boston_licensecat", "nightclub"): "measure first: how many bars and clubs hold no ISD food permit",
-    # Found when these columns were added (2026-09-29, after the owner's list was ruled on).
-    ("buffalo", "petrol_station"): "measure first: how many fuel-device sites hold no State "
-                                   "food-store licence",
-    ("buffalo", "nightclub"): "measure first: how many Dance Hall licensees hold no Restaurant licence",
-    ("sacramento", "nightclub"): "read the 44 ENTERTAINMENT names for clubs with a public floor",
-}
+# Empty since 2026-09-30: the owner ruled on the last four (Boston's GOP
+# licences, Buffalo's fuel devices and dance halls, Sacramento's ENTERTAINMENT)
+# after they were counted - each is now an exception() with its reason.
+AWAITING_OWNER = {}
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "

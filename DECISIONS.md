@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**260 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**263 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -49,6 +49,9 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Pittsburgh is one category on the two-key macro legend (owner)](#2026-09-30---pittsburgh-is-one-category-on-the-two-key-macro-legend-owner)
 - [Pittsburgh built on Allegheny County's food facilities; WPRDC's indemnity accepted (owner)](#2026-09-30---pittsburgh-built-on-allegheny-countys-food-facilities-wprdcs-indemnity-accepted-owner)
+- [The three continuity disclosures written; Pittsburgh's mode; six merged branches deleted (owner)](#2026-09-30---the-three-continuity-disclosures-written-pittsburghs-mode-six-merged-branches-deleted-owner)
+- [Four continuity departures kept out and disclosed (owner)](#2026-09-30---four-continuity-departures-kept-out-and-disclosed-owner)
+- [Continuity: Sacramento's two precedents confirmed; the four waiting cells counted (owner)](#2026-09-30---continuity-sacramentos-two-precedents-confirmed-the-four-waiting-cells-counted-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 - [Ottawa is one category on the two-key macro legend (owner)](#2026-09-30---ottawa-is-one-category-on-the-two-key-macro-legend-owner)
@@ -997,6 +1000,7 @@ gains the city's slug override; `check_personal_exposure.py` its registry entry.
   the model and a content-based estimate, so only a label actually under the
   legend can move) needs a full drift check and waits for review time. It is
   in PLAN, not built.
+
 ### 2026-09-30 - The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod
 
 - **The approved `licence-read` of "Agrégat des réseaux urbains et
@@ -1226,6 +1230,102 @@ label, already clipped at phone width, clips 5 px more (39% to 43% in Global;
 7% to 11% in United States East) - reported by the check, not failed.
 
 **For the batch review:** Chicago's and D.C.'s labels moved; Blue's colour.
+
+### 2026-09-30 - The three continuity disclosures written; Pittsburgh's mode; six merged branches deleted (owner)
+
+- **The owner approved the drafted disclosures, and they are in
+  `docs/excluded_categories.md`.**
+  - Buffalo: a petrol station with a shop is mapped through its State
+    licence, and dance-hall licences are left out.
+  - Sacramento: one or two nightclubs hold only an entertainment licence.
+    They are unnamed, because the identification came from general
+    knowledge.
+  - Boston: the 17 General On Premise licences.
+  - City pages get no line (owner): site-wide prose edits come later.
+- **Pittsburgh's `mode` is light rail (owner, 2026-09-30).** Its branch was
+  asked to carry it, and to move to one category under the food-shops rule.
+- **Deleted on GitHub (owner):** aarhus, buffalo, sacramento, houston,
+  continuity-buffalo-sacramento and handoff-band-b. Each was confirmed an
+  ancestor of origin/master immediately before. Their local copies were
+  deleted with the lightrail worktree.
+
+### 2026-09-30 - Four continuity departures kept out and disclosed (owner)
+
+- **The owner approved all four recommendations on the counts below.** Each
+  of the last `AWAITING_OWNER` cells is now an `exception()` in
+  `scripts/category_continuity_table.py`, with its reason, and the list is
+  empty. In each case the record type left out holds almost none of the
+  businesses the rules keep, so taking it in would mostly add the wrong
+  places.
+  - **Buffalo, fuel devices: closed.** It is not a pump register. The petrol
+    retailers among its holders are already mapped through the State
+    food-store licence.
+  - **Buffalo, Dance Hall: kept out, disclosed.** The four current unmapped
+    sites are community or banquet halls far from any station. Re-check at
+    Buffalo's next refresh, in case the five lapsed club-like licences near
+    stations renew.
+  - **Sacramento, ENTERTAINMENT: kept out, disclosed.** It has about 2 clubs
+    (Channel 24, La Kalle) among DJs, bands, media and event services; its
+    adult venues fall under R3.
+  - **Boston, GOP all-alcohol: kept out, disclosed.** 10 of 17 licensees
+    are mapped through an ISD food permit. The rest are 1 bar, theatres, a
+    college and institutions, plus one more bar under a related type.
+- **The self-test's pending-departure case no longer names a cell.** It
+  named Boston's nightclub cell and crashed (StopIteration) once that became
+  an exception. It now takes any pending cell and gives it the row of a
+  `loc()` beside it.
+- The published disclosures (Buffalo, Sacramento, Boston:
+  `docs/excluded_categories.md` and the city pages) go to the owner as drafts
+  first.
+
+### 2026-09-30 - Continuity: Sacramento's two precedents confirmed; the four waiting cells counted (owner)
+
+- **Confirmed (owner):**
+  - **Sacramento's OPTOMETRISTS stay out** as eye doctors' offices (NAICS
+    621320, health care, as in the NAICS cities).
+  - **Its MASSAGE - TECHNICIAN licences stay out, as a privacy exclusion.**
+    California's certificate is not a health licence, so the
+    regulated-massage precedent (Vancouver's and Toronto's RMTs) does not
+    carry over. But each licence names a person, not a premises.
+  - Both cells in `scripts/category_continuity_table.py` now say so.
+- **The four `AWAITING_OWNER` cells were counted (owner: "count first")**,
+  read-only, against each city's kept rows (`processed/businesses_clean.csv`).
+  Buffalo's and Boston's committed raw files hold none of these record types:
+  Buffalo filters at download to `CITY_LICENCE_CODES`, and Boston keeps only
+  Retail and Druggist board rows. So two public API reads went to the
+  session scratchpad only, not to `data/`.
+  - **Buffalo "Cert. Operation Fuel Device" (1,182) is not a pump register.**
+    Every row is code COO, and the holders are apartments, churches, colleges
+    and factories, which reads as fuel-burning equipment (boilers). That is
+    inferred from the holders; the City Code was not read. Only 19
+    certificates at 16 sites carry a fuel or auto name. The only real petrol
+    retailers are three 7-Elevens, all already mapped through the State
+    food-store licence. Two sites are unclear (Delta Sonic Car Wash;
+    "Filling Station", 719 Seneca), both more than 2 km from a station.
+  - **Buffalo Dance Hall (24 licences, 21 sites; 8 licences at 7 sites
+    current on 2026-09-29).** Three current sites are already mapped. The four
+    current sites with no kept row are community or banquet halls (a Polish
+    cadets' hall, an Orthodox church, a banquet centre, a civic centre), all
+    1.6-6.1 km from a station. Five lapsed licences are club-like and in
+    ring, among them Metropolitan Entertainment Complex and The Black
+    Butterfly, both lapsed 2026-08-01, possibly awaiting renewal.
+  - **Sacramento ENTERTAINMENT: 41 current (44 across all dates).** About 2
+    are likely clubs with a public floor, Channel 24 and La Kalle; that is
+    identified from general knowledge, not a source. 3 are adult venues,
+    which belong to rule R3, not nightclubs: Club Fantasy, KC at the same
+    address, and an adult bookstore. The rest:
+    - 12 DJs, bands and event services;
+    - 7 media or studios;
+    - 8 other venues or recreation;
+    - 2 associations;
+    - 3 unclear;
+    - 4 licences in a person's own name.
+  - **Boston "GOP All Alc." (17 active licensees).** 10 are already mapped
+    through an ISD food permit at the same address, or by name for one. The 7
+    unmapped are 1 bar (The Spud Bar, East Boston), 1 event venue, 2
+    theatres, a college, an aquarium concession and an island education
+    centre. Other GOP-family licences add one more unmapped bar or lounge,
+    Black Market Social.
 
 ### 2026-09-30 - Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)
 

@@ -455,12 +455,22 @@ def selftest():
     first(cols, "naics_montreal", "no_counter_food", "exception").decision = "no such decision, 1999"
     case("D  an exception with no DECISIONS heading fails", check(t), "D naics_montreal")
 
-    # D. A pending departure the code has since brought into line.
+    # D. A pending departure the code has since brought into line. Any pending
+    # cell will do: give it the row of a loc() in the same cell, which obeys the
+    # rule by construction. (This case named Boston's nightclub cell until the
+    # owner ruled on it, 2026-09-30, and the self-test crashed with it.)
     t, cols = fresh()
-    first(cols, "boston_licensecat", "nightclub", "pending").row = {"source": "isd_food",
-                                                                    "business_category": "FS"}
-    case("D  a pending departure now resolved fails (make it a loc)", check(t),
-         "D boston_licensecat: rule nightclub")
+    target = next(((s, rid, e, loc_e) for s, col in cols.items() for rid, cell in col.items()
+                   for e in (cell if isinstance(cell, list) else [cell]) if e.kind == "pending"
+                   for loc_e in (cell if isinstance(cell, list) else [cell])
+                   if loc_e.kind == "loc" and getattr(loc_e, "row", None) is not None), None)
+    if target is None:
+        print("skip D  a pending departure now resolved: no pending cell with a loc() beside it")
+    else:
+        s, rid, e, loc_e = target
+        e.row = loc_e.row
+        case("D  a pending departure now resolved fails (make it a loc)", check(t),
+             f"D {s}: rule {rid}")
 
     # E. An outside() entry whose token has gone from its file.
     t, cols = fresh()
