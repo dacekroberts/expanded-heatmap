@@ -163,12 +163,17 @@ def status_text(jobs):
     return "\n".join(lines)
 
 
-def admit(label, peak_gb, session, pid):
+def admit(label, peak_gb, session, pid, available_gb=None):
+    """`available_gb` is for the selftest only: the live figure otherwise. The
+    selftest once failed while two lanes and a drift check held the machine's
+    memory - it had asked the real machine (review rehearsal, 2026-09-30)."""
     ledger, lock, _ = paths()
     with Lock(lock):
         jobs = live(_read(ledger, []))
         held = {j["pid"]: tree_rss(j["pid"]) / GB for j in jobs}
-        ok, why, _ = decide(jobs, peak_gb, psutil.virtual_memory().available / GB, held)
+        if available_gb is None:
+            available_gb = psutil.virtual_memory().available / GB
+        ok, why, _ = decide(jobs, peak_gb, available_gb, held)
         if ok:
             jobs.append({"pid": pid, "label": label, "peak_gb": peak_gb, "session": session,
                          "started": time.strftime("%Y-%m-%d %H:%M:%S")})
@@ -249,11 +254,12 @@ def selftest():
     with tempfile.TemporaryDirectory() as d:
         os.environ["HEAVY_JOB_DIR"] = d
         try:
-            ok1, _, _ = admit("a", 0.1, "t", os.getpid())
+            ok1, _, _ = admit("a", 0.1, "t", os.getpid(), available_gb=8.0)
             case("admit writes the ledger", ok1 and len(_read(paths()[0], [])) == 1)
             remove(os.getpid(), 0.05)
+            hist = _read(paths()[2], [])
             case("remove empties the ledger and records the measured peak",
-                 _read(paths()[0], []) == [] and _read(paths()[2], [])[0]["measured_gb"] == 0.05)
+                 _read(paths()[0], []) == [] and bool(hist) and hist[0]["measured_gb"] == 0.05)
             lock = paths()[1]
             lock.write_text("")
             os.utime(lock, (time.time() - 120, time.time() - 120))

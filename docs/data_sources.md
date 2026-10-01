@@ -2384,9 +2384,8 @@ no city, so their titles list each Czech city as it lands (owner, 2026-09-30),
 as Norway's and Denmark's do. Their text is unchanged.
 
 **80. City of Kansas City, Missouri (Kansas City) — required, and DISPLAYED**
-(written into `render_site_notices()`; tram kit, 2026-09-30; displayed once Kansas
-City lands. **France also numbered notices 69-71 on its branch: renumber at
-landing.**)
+(written into `render_site_notices()`; tram kit, 2026-09-30, as 69; renumbered
+80 in landing order, after France's, Band B's and Czechia's.)
 
 - **PERMITTED WITH CONDITIONS, and one owner decision** (`licence-read`
   2026-09-30; the rows in [`data_sources/united-states.md`](data_sources/united-states.md)).

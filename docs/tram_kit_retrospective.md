@@ -219,9 +219,9 @@ city includes that.
 All items carry a recommendation in the drafts file:
 
 - The four new notices, as written on the branch:
-  notice 69 (Kansas City, Missouri; KCMO's disclaimer verbatim), notice 70 (City of Tucson), notice
-  71 (Comune di Firenze) and notice 72 (Gemeente Den Haag, proposed text).
-  They renumber from 80 in landing order.
+  Kansas City, Missouri (KCMO's disclaimer verbatim), City of Tucson, Comune
+  di Firenze and Gemeente Den Haag (proposed text), written as 69-72 on the
+  branch and renumbered 80-83 in landing order.
 - Göteborg's coverage flip to `one_bucket` with Stockholm once macro-legend
   lands.
 - The two optional `sweden_livsmedel` changes. Each moves Stockholm.

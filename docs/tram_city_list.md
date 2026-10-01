@@ -1,4 +1,4 @@
-# 🟤 Tram city list — 10 cities (split from the master list 2026-09-29)
+# 🟤 Tram city list — 0 cities (split from the master list 2026-09-29)
 
 **Band T of [`docs/city_master_list.md`](city_master_list.md), in a file of its
 own** (owner, 2026-09-29), so the tram cities can be sorted and worked through
@@ -20,9 +20,9 @@ network-type colours (DECISIONS "Yes to trams-only maps").
 
 | Tier | What these cities ARE | Cities |
 |---|---|---|
-| 🟤 **T1** | **Ready if trams-only maps are approved.** All three buckets, access open, rail measured; grouped by country pipeline, which is how the build cost falls. Since 2026-09-30 also the cities that passed Band B's reduced-bucket bar from T2 | **10** |
+| 🟤 **T1** | **Ready if trams-only maps are approved.** All three buckets, access open, rail measured; grouped by country pipeline, which is how the build cost falls. Since 2026-09-30 also the cities that passed Band B's reduced-bucket bar from T2 | **0** |
 | 🟤 **T2** | **Trams plus a bucket gap. Closed 2026-09-30** (owner): three to T1, Utrecht to Band R, three to the discards | **0** |
-| **Total** | | **10** |
+| **Total** | | **0** |
 
 **EDGE** (light rail partly built to metro standard, the owner's tag
 2026-09-27) is now a flag on a row, not a group: the rest of the EDGE group
@@ -123,7 +123,7 @@ Florence's full read.
 
 ---
 
-## 🟤 T1 — ready if trams-only maps are approved (10 cities)
+## 🟤 T1 — ready if trams-only maps are approved (0 cities; emptied 2026-09-30)
 
 **Every one passed all three buckets on a national or city register this
 project has already built on** (the 2026-09-27 second-city screens and wave 2;
@@ -132,45 +132,6 @@ measurement and its licence reads. **Stores near stations** is storefronts
 within 966 m of a station, the screen's measure. French builds use France's
 own config (a 483 m outer ring, Lambert-93), so the build recounts.
 **Build-time calls are listed per row** and put when each brief is written.
-
-**🇩🇰 Denmark (1), 🇱🇻 Latvia (2)**
-
-| City | Network | Business | Build-time calls |
-|---|---|---|---|
-| **Odense** 🇩🇰 | Letbane, one line, 24 stops in OSM against the operator's 26 (440 m); every 7.5 min | 1,629 / 649 / 612 = **2,890** | Placement through OSM's DAR address points (98.4%, the owner's call 2026-09-27) |
-| **Daugavpils** 🇱🇻 | Routes 1–5, **38 stop names**, all inside (281 m); route 1 every 10 min, the others about hourly | Riga's two layers: food 98 (95.9% placed), shops and services 722 (100%); 81.5% within 483 m | Rail from OSM (the GTFS declares no licence); VZD's address file `aw_eka.csv` (CC BY 4.0) is a new source needing its own `data_sources.md` row |
-| **Liepāja** 🇱🇻 | One line, **18 stop names** (309 m), about every 7 min | Food 131 (93.9%), shops and services 583 (100%); 69.7% within 483 m | As Daugavpils |
-
-**🇺🇸 United States (3)** — Kansas City moved here from the discards on
-2026-09-27 (owner: "Kansas City trams okay"); New Orleans and Tucson from wave
-2's US screen (owner, 2026-09-28).
-
-| City | Network | Business | Build-time calls |
-|---|---|---|---|
-| **Kansas City** 🇺🇸 | The KC Streetcar, **one line**. **Measured 2026-09-27 from OSM** (relations 7825409/7825410, Riverfront–UMKC with the Main Street extension): **18 stops, all inside Kansas City, Missouri**, about 9.6 km at a mean 0.56 km. It passes the stub test; OSM carries no colour. **Frequency read 2026-09-27 from RideKC's GTFS** (`gtfs_8_27_26.zip`, valid 2026-07-12 to 2026-10-03; route 601 "KC Streetcar", `route_type` 0; terms declared "free for anyone to use", not read): **every ~10 min all day, seven days a week**, 05:15 to past midnight | "KCMO Business License Holders" (Socrata `kkhs-93m4`): **15,895 rows**, geocoded, all three buckets in readable categories (Beauty Salons 662, Barber Shops 146, Clothing Retailers 192, Supermarkets 154); explicitly PUBLIC_DOMAIN. **Frozen 2026-01-15, holding 2025's licences** (Phase 2) | **The page gives the data date** (owner, 2026-09-29, Stockholm's precedent); pick a colour (OSM has none); `dba_name` is often a person ("HARRIS GREGORY J") - a privacy filter; `business_type` mixes fee codes ("Flat Rate 16", "Misc Rate 129") with activities |
-| **New Orleans** 🇺🇸 | RTA streetcars 12, 47, 48 and 2: **110 unique stop names, all inside the city** (161 m, the densest on this list); no line cut. Frequency search-level only (~10 min, varies by line): read RTA's GTFS at build | "Active Occupational Licenses" (Socrata `iqay-p646`, **CC0**, 16,481 rows, updated 2026-09-26, points on 100%): **~2,411 / 1,934 / 1,057** (3.4× / 1.9× / 20× OSM) | A small text taxonomy (NAICS-style descriptions, no codes); drop "Special Events-Other (Vendor)" (1,258) and "Home Based-Office Use Only" (357); `ownername` - `check_personal_exposure.py`; thin 110 street stops (Philadelphia's and San Francisco's filter) |
-| **Tucson** 🇺🇸 | Sun Link, **21 stops, all inside** (266 m); every 10 min on weekdays 07–18, 20 in evenings and at weekends | The city's BUSLIC layer (`gis.tucsonaz.gov`, 34,764 active of 93,483, updated 2026-09-22), NAICS, active and not home-based: **4,056 / 2,011 / 1,245** (2.7× / 2.2× / 6.3×), points; terms an "as is" disclaimer, no licence named | A licence read; about 6,250 active licences are individuals' (privacy check); `naics.py` fits unchanged; the daytime-only 10-minute service disclosed |
-
-**🇮🇹 Italy (1)** — joined 2026-09-28 from wave 2's second group (owner's
-call), with coordinates on every row. Santa Cruz–La Laguna, which joined
-with it, moved to T2 on 2026-09-29 (its data, not its tram).
-
-| City | Network | Business | Build-time calls |
-|---|---|---|---|
-| **Florence** 🇮🇹 | Tramvia T1 and T2: **39 stations inside the comune** (322 m); T1 keeps 22 of 26 (4 in Scandicci), T2 20 of 20. GEST's GTFS in the Regione Toscana feed, declared CC BY 4.0. T3 under construction (due end of 2026) | The Comune's layers on dati.toscana.it, declared CC BY 4.0: commercio in sede fissa, pubblici esercizi, attività estetiche, tintolavanderie. **7,355 / 3,024 / 1,673** (2.49× / 1.45× / 4.62× OSM) after dropping private clubs, internal shops, e-commerce, vending, farmers; **coordinates on 100%**, rows carry only an id and a type code (no names) | **639 food rows are exempt categories** (464 "non soggetta a requisiti comunali", 175 art. 53): Milan's *fuori piano* question (without them food is 2,385, 1.14×); Scandicci's 4 stops; a full licence read; 3,424 rows share a point |
-
-**🇨🇭 Switzerland (1), 🇸🇪 Sweden (1), 🇳🇱 Netherlands (1)** — from T2 on
-2026-09-30 (owner). Each was read against Band B's reduced-bucket bar (the
-master list); the rows below are what passed. The old T2 rows and the
-Göteborg and Zurich write-ups are kept in the history section below.
-
-| City | Network | Business, measured 2026-09-30 | Build-time calls |
-|---|---|---|---|
-| **Zurich** 🇨🇭 | 18 tram refs, all coloured, plus the Forchbahn (S18); no metro. The S-Bahn is named on the page as excluded (it fails on coverage) | `Gastwirtschaftsbetriebe` (WFS, CC0), 3,487 rows, **every row `Offen` and stamped 2026**, all with LV95 points (EPSG:2056): **food 2,325** (Gastwirtschaft 2,099 and the smaller kinds). **Partial retail (owner): 1,028 shops licensed to sell alcohol** (Kleinverkaufsstelle 954, kiosks 53, petrol stations 21), the tobacco-retail precedent of Seoul and Gyeonggi, the gap disclosed | Personal services absent, disclosed. **Measured 2026-09-30 (live OSM, Stadt relation 1682248)**: **182 tram stop names inside, 283 m median gap, so halved rings.** Stub test per line: 2 (83%), 4 (94%) and **10 (Glattalbahn, 72%)** pass, and the rest are whole. **Out as stubs: 12 (Glattalbahn, 2 of 18, 11%), 20 (Limmattalbahn, 4 of 26, 15%) and the Forchbahn S18 (light_rail, 4 of 20, 20%)**. Name S18 with the S-Bahn as excluded, which keeps `mode` tram (the tram kit's recommendation). **Refs 50 and 51** are OSM tram relations wholly inside (Auzelg – Frankental 31 of 33; Seebach – Altstetten Nord 27 of 27). Confirm at the build that they are daytime services before drawing them. **Macro legend (proposed)**: `mode` tram, `coverage` narrowed |
-| **Göteborg** 🇸🇪 | 13 tram lines, 127 stops inside Göteborgs Stad; lines 4 and 12 run on into Mölndal | `Livsmedelsverksamheter` (CC0, daily, "all active"), 5,066 rows (5,063 on 2026-09-23), lat/lon on every row: **food service 2,167** (restaurants 1,595, cafés 484…), **food shops 906 as retail** (grocers 685, health food, fish, meat, bakeries, pharmacies; New York's precedent); institutions, wholesale and transport 1,719 out; 274 with a blank `typ` to classify or drop. **The rows carry no date (owner): the page says so**, as for New York State's food stores, Milan and Surrey | Take the CSV, never the rowstore JSON (`docs/build_briefs/goteborg.md`). Personal services absent, disclosed. The stub test for lines 4 and 12. **Macro legend (proposed)**: `mode` tram, `coverage` one_bucket (food shops count as food under the two-key legend) |
-| **Den Haag** 🇳🇱 (EDGE) | 14 HTM lines plus RandstadRail E: 172 stop places; worst line tram 1, 20 of 37 (54%, over Toulouse's 52%). RET metro E keeps 4 of 23 stops in the city | **The city's own horeca permit layer**, which the 2026-09-27 screen missed: `Horeca_nieuw` layer 2 on ArcGIS Online (shown on the denhaag.nl permit map), 2,701 permits with points on all; **2,543 granted or notified**, 158 pending; **about 2,352 food premises** once event sites, sports canteens, clubhouses, coffeeshops and the like are out. Rows run to 2025; the layer was last edited 2025-05-23. Plus the BAG's **6,560 shop units** (1.75× OSM), Rotterdam's shape | **Licence read 2026-09-30: silent and ambiguous** (nothing grants or bars reuse; denhaag.nl's site terms name database rights; the layer is not on the open-data portal, whose horeca placeholder is "in onderzoek"). **The owner proceeds on Amsterdam's precedent (2026-09-30)**: credit "Gemeente Den Haag", never call the layer current or complete. Never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` (the city's own map hides all three). Never show `AANVRAGER` (34% are one-person firms): the trade name comes from `OMSCHRIJVI`, which needs its double-encoded UTF-8 repaired. Line E's 4 stops. **Brief 2026-09-30: `docs/build_briefs/den_haag.md`** (161 stops, 335 m; line E out as a stub, approved). **Macro legend**: `mode` **tram** (with E out, every drawn line is OSM `route=tram`), `coverage` **narrowed**: Rotterdam's shape, BAG shop units merge retail and personal services, as Rotterdam and Amsterdam are `narrowed` (the tram kit, 2026-09-30) |
-
----
 
 ## 🟤 T2 — trams plus a bucket gap (0 cities; closed 2026-09-30)
 
@@ -316,6 +277,49 @@ trams from OSM everywhere but Brno, whose stops come from KORDIS's CC BY feed. `
 | **Olomouc** | Lines 1–7: 36 stations | 309 m | 811 / 620 / 815 = 2,246; 1.80× | DPMO's GTFS declares no licence: OSM, or a read |
 | **Liberec** | 34 stations alone (line 11 keeps 21 → 15); 41 with Jablonec, every line whole. DPMLJ's GTFS resets the connection, so OSM | 349 m | 1,880 alone; **2,498 with Jablonec**; 2.45× | With Jablonec or without |
 | **Most + Litvínov** | Joint scope 27 stations, every line whole. **Most alone fails the stub test** (lines keep 6 of 18, 9 of 21, 12 of 24) | — | 429 / 267 / 334 = 1,030; 3.71× | Joint scope is required; low value |
+
+## The tram kit's rows (history: all 10 built 2026-09-30)
+
+The tram kit built its ten cities on 2026-09-30, and they left T1 for the master list's Built table, emptying this list. The rows below are as they stood in T1.
+
+**🇩🇰 Denmark (1), 🇱🇻 Latvia (2)**
+
+| City | Network | Business | Build-time calls |
+|---|---|---|---|
+| **Odense** 🇩🇰 | Letbane, one line, 24 stops in OSM against the operator's 26 (440 m); every 7.5 min | 1,629 / 649 / 612 = **2,890** | Placement through OSM's DAR address points (98.4%, the owner's call 2026-09-27) |
+| **Daugavpils** 🇱🇻 | Routes 1–5, **38 stop names**, all inside (281 m); route 1 every 10 min, the others about hourly | Riga's two layers: food 98 (95.9% placed), shops and services 722 (100%); 81.5% within 483 m | Rail from OSM (the GTFS declares no licence); VZD's address file `aw_eka.csv` (CC BY 4.0) is a new source needing its own `data_sources.md` row |
+| **Liepāja** 🇱🇻 | One line, **18 stop names** (309 m), about every 7 min | Food 131 (93.9%), shops and services 583 (100%); 69.7% within 483 m | As Daugavpils |
+
+**🇺🇸 United States (3)** — Kansas City moved here from the discards on
+2026-09-27 (owner: "Kansas City trams okay"); New Orleans and Tucson from wave
+2's US screen (owner, 2026-09-28).
+
+| City | Network | Business | Build-time calls |
+|---|---|---|---|
+| **Kansas City** 🇺🇸 | The KC Streetcar, **one line**. **Measured 2026-09-27 from OSM** (relations 7825409/7825410, Riverfront–UMKC with the Main Street extension): **18 stops, all inside Kansas City, Missouri**, about 9.6 km at a mean 0.56 km. It passes the stub test; OSM carries no colour. **Frequency read 2026-09-27 from RideKC's GTFS** (`gtfs_8_27_26.zip`, valid 2026-07-12 to 2026-10-03; route 601 "KC Streetcar", `route_type` 0; terms declared "free for anyone to use", not read): **every ~10 min all day, seven days a week**, 05:15 to past midnight | "KCMO Business License Holders" (Socrata `kkhs-93m4`): **15,895 rows**, geocoded, all three buckets in readable categories (Beauty Salons 662, Barber Shops 146, Clothing Retailers 192, Supermarkets 154); explicitly PUBLIC_DOMAIN. **Frozen 2026-01-15, holding 2025's licences** (Phase 2) | **The page gives the data date** (owner, 2026-09-29, Stockholm's precedent); pick a colour (OSM has none); `dba_name` is often a person ("HARRIS GREGORY J") - a privacy filter; `business_type` mixes fee codes ("Flat Rate 16", "Misc Rate 129") with activities |
+| **New Orleans** 🇺🇸 | RTA streetcars 12, 47, 48 and 2: **110 unique stop names, all inside the city** (161 m, the densest on this list); no line cut. Frequency search-level only (~10 min, varies by line): read RTA's GTFS at build | "Active Occupational Licenses" (Socrata `iqay-p646`, **CC0**, 16,481 rows, updated 2026-09-26, points on 100%): **~2,411 / 1,934 / 1,057** (3.4× / 1.9× / 20× OSM) | A small text taxonomy (NAICS-style descriptions, no codes); drop "Special Events-Other (Vendor)" (1,258) and "Home Based-Office Use Only" (357); `ownername` - `check_personal_exposure.py`; thin 110 street stops (Philadelphia's and San Francisco's filter) |
+| **Tucson** 🇺🇸 | Sun Link, **21 stops, all inside** (266 m); every 10 min on weekdays 07–18, 20 in evenings and at weekends | The city's BUSLIC layer (`gis.tucsonaz.gov`, 34,764 active of 93,483, updated 2026-09-22), NAICS, active and not home-based: **4,056 / 2,011 / 1,245** (2.7× / 2.2× / 6.3×), points; terms an "as is" disclaimer, no licence named | A licence read; about 6,250 active licences are individuals' (privacy check); `naics.py` fits unchanged; the daytime-only 10-minute service disclosed |
+
+**🇮🇹 Italy (1)** — joined 2026-09-28 from wave 2's second group (owner's
+call), with coordinates on every row. Santa Cruz–La Laguna, which joined
+with it, moved to T2 on 2026-09-29 (its data, not its tram).
+
+| City | Network | Business | Build-time calls |
+|---|---|---|---|
+| **Florence** 🇮🇹 | Tramvia T1 and T2: **39 stations inside the comune** (322 m); T1 keeps 22 of 26 (4 in Scandicci), T2 20 of 20. GEST's GTFS in the Regione Toscana feed, declared CC BY 4.0. T3 under construction (due end of 2026) | The Comune's layers on dati.toscana.it, declared CC BY 4.0: commercio in sede fissa, pubblici esercizi, attività estetiche, tintolavanderie. **7,355 / 3,024 / 1,673** (2.49× / 1.45× / 4.62× OSM) after dropping private clubs, internal shops, e-commerce, vending, farmers; **coordinates on 100%**, rows carry only an id and a type code (no names) | **639 food rows are exempt categories** (464 "non soggetta a requisiti comunali", 175 art. 53): Milan's *fuori piano* question (without them food is 2,385, 1.14×); Scandicci's 4 stops; a full licence read; 3,424 rows share a point |
+
+**🇨🇭 Switzerland (1), 🇸🇪 Sweden (1), 🇳🇱 Netherlands (1)** — from T2 on
+2026-09-30 (owner). Each was read against Band B's reduced-bucket bar (the
+master list); the rows below are what passed. The old T2 rows and the
+Göteborg and Zurich write-ups are kept in the history section below.
+
+| City | Network | Business, measured 2026-09-30 | Build-time calls |
+|---|---|---|---|
+| **Zurich** 🇨🇭 | 18 tram refs, all coloured, plus the Forchbahn (S18); no metro. The S-Bahn is named on the page as excluded (it fails on coverage) | `Gastwirtschaftsbetriebe` (WFS, CC0), 3,487 rows, **every row `Offen` and stamped 2026**, all with LV95 points (EPSG:2056): **food 2,325** (Gastwirtschaft 2,099 and the smaller kinds). **Partial retail (owner): 1,028 shops licensed to sell alcohol** (Kleinverkaufsstelle 954, kiosks 53, petrol stations 21), the tobacco-retail precedent of Seoul and Gyeonggi, the gap disclosed | Personal services absent, disclosed. **Measured 2026-09-30 (live OSM, Stadt relation 1682248)**: **182 tram stop names inside, 283 m median gap, so halved rings.** Stub test per line: 2 (83%), 4 (94%) and **10 (Glattalbahn, 72%)** pass, and the rest are whole. **Out as stubs: 12 (Glattalbahn, 2 of 18, 11%), 20 (Limmattalbahn, 4 of 26, 15%) and the Forchbahn S18 (light_rail, 4 of 20, 20%)**. Name S18 with the S-Bahn as excluded, which keeps `mode` tram (the tram kit's recommendation). **Refs 50 and 51** are OSM tram relations wholly inside (Auzelg – Frankental 31 of 33; Seebach – Altstetten Nord 27 of 27). Confirm at the build that they are daytime services before drawing them. **Macro legend (proposed)**: `mode` tram, `coverage` narrowed |
+| **Göteborg** 🇸🇪 | 13 tram lines, 127 stops inside Göteborgs Stad; lines 4 and 12 run on into Mölndal | `Livsmedelsverksamheter` (CC0, daily, "all active"), 5,066 rows (5,063 on 2026-09-23), lat/lon on every row: **food service 2,167** (restaurants 1,595, cafés 484…), **food shops 906 as retail** (grocers 685, health food, fish, meat, bakeries, pharmacies; New York's precedent); institutions, wholesale and transport 1,719 out; 274 with a blank `typ` to classify or drop. **The rows carry no date (owner): the page says so**, as for New York State's food stores, Milan and Surrey | Take the CSV, never the rowstore JSON (`docs/build_briefs/goteborg.md`). Personal services absent, disclosed. The stub test for lines 4 and 12. **Macro legend (proposed)**: `mode` tram, `coverage` one_bucket (food shops count as food under the two-key legend) |
+| **Den Haag** 🇳🇱 (EDGE) | 14 HTM lines plus RandstadRail E: 172 stop places; worst line tram 1, 20 of 37 (54%, over Toulouse's 52%). RET metro E keeps 4 of 23 stops in the city | **The city's own horeca permit layer**, which the 2026-09-27 screen missed: `Horeca_nieuw` layer 2 on ArcGIS Online (shown on the denhaag.nl permit map), 2,701 permits with points on all; **2,543 granted or notified**, 158 pending; **about 2,352 food premises** once event sites, sports canteens, clubhouses, coffeeshops and the like are out. Rows run to 2025; the layer was last edited 2025-05-23. Plus the BAG's **6,560 shop units** (1.75× OSM), Rotterdam's shape | **Licence read 2026-09-30: silent and ambiguous** (nothing grants or bars reuse; denhaag.nl's site terms name database rights; the layer is not on the open-data portal, whose horeca placeholder is "in onderzoek"). **The owner proceeds on Amsterdam's precedent (2026-09-30)**: credit "Gemeente Den Haag", never call the layer current or complete. Never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` (the city's own map hides all three). Never show `AANVRAGER` (34% are one-person firms): the trade name comes from `OMSCHRIJVI`, which needs its double-encoded UTF-8 repaired. Line E's 4 stops. **Brief 2026-09-30: `docs/build_briefs/den_haag.md`** (161 stops, 335 m; line E out as a stub, approved). **Macro legend**: `mode` **tram** (with E out, every drawn line is OSM `route=tram`), `coverage` **narrowed**: Rotterdam's shape, BAG shop units merge retail and personal services, as Rotterdam and Amsterdam are `narrowed` (the tram kit, 2026-09-30) |
+
+---
 
 ## Revisit if trams-only maps are approved (discards, not candidates)
 

@@ -155,6 +155,29 @@ def rename_into(src, dst):
     return apply
 
 
+def _plant_t1(lines, name, stated=1):
+    """Plant a one-row country sub-group under the tram list's T1 heading and
+    return the new lines and the row's index. The tram list emptied on
+    2026-09-30 (every T1 city built), so a case that needs a live tram row
+    brings its own rather than proving nothing."""
+    for i, l in enumerate(lines):
+        if M.TIER_HEAD.match(l) and "T1" in l:
+            block = ["", f"**🇦🇶 Selftestland ({stated})**", "",
+                     "| City | Network |", "|---|---|", f"| **{name}** | a tram |", ""]
+            out = lines[:i + 1] + block + lines[i + 1:]
+            return out, i + 1 + 5
+    return None, None
+
+
+def plant_subgroup_drift(text):
+    """A planted T1 sub-group stating 2 over a one-row table."""
+    lines, _ = _plant_t1(text.split("\n"), "Selftestville", stated=2)
+    if lines is None:
+        return None
+    plant_subgroup_drift.expect = "the table below it has 1"
+    return "\n".join(lines)
+
+
 def tram_into(dst):
     """A tram-list row renamed to a city already in master-list Band `dst`: a
     city in two lists ACROSS the two files; `dst` None renames it to a built
@@ -166,6 +189,11 @@ def tram_into(dst):
             if M.TIER_HEAD.match(t):
                 rows.update(M.members(lines, s, e))
         row = _table_row(rows, lines)
+        if not row:
+            # The tram list is empty (2026-09-30): plant the row instead.
+            planted, i = _plant_t1(lines, "Selftestville")
+            if planted is not None:
+                lines, row = planted, ("Selftestville", i)
         if dst is None:
             names = [n for r in _built(main) for n in r[3]]
             hit = (names[0], None) if names else None
@@ -257,8 +285,10 @@ CASES = [
 
     # Re-aimed at the tram list 2026-09-29: Band T's country sub-groups moved
     # there with its rows, and the master list kept none.
-    ("a sub-group count drifted (the tram list's first one-country sub-group, +1)",
-     bump(r"^\*\*\S+ [^*(,]+ \((\d+)\)\*\*", "the table below it has {old}"), None, "tram"),
+    # And to a planted T1 sub-group 2026-09-30, when every T1 city was built and
+    # the tram list kept none.
+    ("a sub-group count drifted (a planted T1 sub-group states 2 over one row)",
+     plant_subgroup_drift, None, "tram"),
 
     ("by country: a row's Candidates figure drifted",
      by_country_bump(2, "the Candidates column sums to"), None),
