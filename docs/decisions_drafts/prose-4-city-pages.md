@@ -4,6 +4,40 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - City pages: the stations left out are listed on the page itself; eight sentence fixes (owner)
+
+- **What Is Excluded shows a count per city, not station names.** Three of
+  the six writers found it. The pass had replaced "listed in
+  `outputs/<slug>/excluded_stations.csv`" with "listed on the What is
+  counted page", which was not true. Before the pass, the names were only in
+  that repository file, which no site reader could open either.
+- **The owner chose to list them on the city page (2026-10-01).**
+  `components.render_excluded_stations` draws the city's file under the
+  bullets, in a collapsed "Stations left out (N)" list with the columns
+  Station, Lines and Why. "Why" is the file's own `reason`, or its place
+  column, or "outside the city" for the boundary-only files (Madrid, the
+  `distance_outside_m` files).
+  - The 41 pointers now read "listed below".
+  - Washington D.C.'s per-state claim, Boston's per-reason claim and
+    Minneapolis's and Pittsburgh's per-municipality claims hold through the
+    Why column, so the writers' "counts them" proposals were not needed.
+  - Both page templates carry the call.
+- **Applied with the owner's approval (2026-10-01)**, from the writers'
+  proposals:
+  - Edmonton, Lille and Miami drop a repository path. The substance stays
+    on the page.
+  - Liberec and Most compare OpenStreetMap "in the two towns". The
+    2026-09-30 restaurant control counted inside each regional polygon, and
+    the register side was both towns' sum (448 + 139; 212 + 55).
+  - Toulouse loses "the closest of the three French cities".
+  - New York now says "most cities on this site".
+  - Göteborg now "shows food only, not three categories".
+- **Fixed without a proposal, as consequences of the layout:**
+  - "Below" became "above" where a caption now sits above the prose
+    (Daegu, Busan, and Göteborg's date fallback).
+  - Riga's and Hiroshima's map help names their two categories again, as
+    their old controls paragraphs did.
+
 ### 2026-10-01 - City pages: one format for all 124, approved on three samples (owner)
 
 - **The format** (owner, set in the prose-pass plan, `docs/prose_pass_2026-10-01.md`):
@@ -40,5 +74,18 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   which clicks the hidden city links, still works. The OSM credit inside the
   map is clear at 375 px with the legend forced open (clamp 24/24).
 - **Repository paths left the page text.** The sentence "listed in
-  `outputs/<slug>/excluded_stations.csv`" now points to the What is counted
-  page, which renders that file for the city.
+  `outputs/<slug>/excluded_stations.csv`" became "listed below" (see the
+  entry above).
+- **The rollout.**
+  - **Layout:** a restructuring script moved the blocks on 101 pages
+    (`data/_review/prose-4-city-pages/restructure_pages.py`), and
+    `france_page.py` regenerated the 21 French template pages. Every
+    sentence and figure was kept; only the station-list pointer changed.
+  - **Bullets:** six writers, one family each, converted the prose. Only
+    `st.markdown` text changed, which was checked against HEAD by AST.
+  - **Claims moved:** 117 claims left the pages for the reference pages,
+    plus Seoul's 3. All are listed in
+    `data/_review/prose-4-city-pages/claims_moved.md`.
+- **Found on the way:** `france_page.py` matched New Orleans's page when
+  writing Orléans's, because its glob had no page number. It now matches the
+  number as well as the name.
