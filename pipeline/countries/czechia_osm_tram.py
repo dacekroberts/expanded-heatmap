@@ -63,9 +63,14 @@ def write_lines(kept, path):
 
 
 def _not_drawn_stops(elements, cfg, kept_names, scope):
-    """Stops reached only by a NOT_DRAWN relation. One beyond the map's obce
-    says "outside" first, which is what app/station_scope.py reads it as; one
-    inside keeps the relation's own reason (Ostrava's line 5, two stops)."""
+    """Stops reached only by a NOT_DRAWN relation and lying BEYOND the map's
+    obce, listed as outside (what app/station_scope.py reads them as).
+
+    A not-drawn line's stops INSIDE the city are not listed: they are
+    disclosed in prose - the city's page and its section of
+    docs/excluded_categories.md - as Kyoto's Sagano line and Madrid's Metro
+    Ligero ML2 and ML3 are (owner, 2026-09-30, "follow the precedent").
+    Ostrava's line 5 is the case: Poruba,koupaliště and Krásné Pole."""
     from shapely.geometry import Point
 
     nodes = {e["id"]: e for e in elements if e["type"] == "node"}
@@ -78,12 +83,12 @@ def _not_drawn_stops(elements, cfg, kept_names, scope):
             if not n or not m.get("role", "").startswith("stop"):
                 continue
             name = n.get("tags", {}).get("name")
-            if name and name not in kept_names:
-                why = cfg.NOT_DRAWN[r["id"]]
-                if not scope.contains(Point(n["lon"], n["lat"])):
-                    why = f"outside obec {place}, on a line not drawn: {why}"
+            if (name and name not in kept_names
+                    and not scope.contains(Point(n["lon"], n["lat"]))):
                 rows.append({"station": name, "lines": r["tags"].get("ref", ""),
-                             "reason": why, "latitude": n["lat"], "longitude": n["lon"]})
+                             "reason": (f"outside obec {place}, on a line not drawn: "
+                                        f"{cfg.NOT_DRAWN[r['id']]}"),
+                             "latitude": n["lat"], "longitude": n["lon"]})
     return pd.DataFrame(rows, columns=["station", "lines", "reason", "latitude",
                                        "longitude"]).drop_duplicates("station")
 

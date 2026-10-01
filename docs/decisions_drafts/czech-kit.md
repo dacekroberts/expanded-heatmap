@@ -4,6 +4,31 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Ostrava's in-city line 5 stops disclosed in prose, not listed, following Kyoto and Madrid (owner); the boardable default flipped on master (owner)
+
+- **Owner: "B, follow the precedent."** This supersedes the recommendation
+  in the entry below. A new station-scope category, "left out with a stub
+  line", would have served two stops in 81 cities, and the precedent runs
+  the other way: Kyoto's Sagano Scenic Railway and Madrid's Metro Ligero ML2
+  and ML3 were left out as stubs, and their stops were never listed in an
+  excluded-stations file, only disclosed in prose.
+  - **What changed:** `czechia_osm_tram._not_drawn_stops` now lists a
+    not-drawn line's stops only when they lie beyond the map's obce, as
+    outside. Ostrava's file has gone from 9 rows to 7.
+  - **Disclosed in prose:** Poruba,koupaliště and Krásné Pole, in Ostrava's
+    section of `docs/excluded_categories.md`. The page says line 5 is not
+    drawn, with 3 of its 10 stops in the city.
+  - **No app change.** `check_scope_disclosure.py` passes for all 81 cities.
+    Ostrava's baseline is rewritten (`stations_excluded` 9 to 7, intended).
+- **The boardable default was flipped by the cleanup session** (owner,
+  2026-09-30, approved in both sessions): `boardable_stop_ids` defaults to
+  ("0", "2", "3") on master since `d928f50`, with cleanup's proof that no
+  built map moved (theme 13 of `docs/map_inconsistencies.md`).
+  - **On `czech-build`:** master was merged and `pipeline/stations.py`
+    resolved to master's version, byte-identical.
+  - **Brno:** its explicit argument now restates the default and stays, to
+    say why Brno depends on it. Brno re-ran with zero drift.
+
 ### 2026-09-30 - Master's new rules merged into czech-build; Ostrava's two in-city line 5 stops need a station-scope category (owner call open)
 
 - **`origin/master` merged into `czech-build`.** It brought the heavy-job gate
