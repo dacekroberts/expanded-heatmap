@@ -4,6 +4,80 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Tucson built on tram-build: Sun Link and the City's BUSLIC layer
+
+- **Tucson built on Houston's rules and `osm_tram.py`.** It has 21
+  stations, 5,243 storefronts, and 340 of them (6.5%) in a ring. The page
+  says "about one storefront in fifteen".
+- **Sun Link.** OSM relations 3920972 and 12426661, ref "Sun Link". Their 23
+  stop positions collapse to the brief's 21 stations; downtown runs on
+  one-way couplets, so each direction's stops keep their own names. All are
+  inside the City as TIGER draws it (place 0477000, 629.4 km²).
+  - **Median gap 265 m**, exactly the brief's, so the rings are halved, and
+    step 1 gates the median at 200-340 m. No gate 3.
+  - **Colour `#e65100`, deep orange, 59.7 against Food service.** Teal
+    `#00838f` was tried first and scored 42.3 against Personal services.
+  - The page states the frequency: 10 minutes on weekdays 07-18, and 20
+    otherwise.
+- **Scope: TIGER, not the brief's OSM relation 253824.** This is Houston's
+  layer, and it costs no Overpass query while both mirrors were 504ing.
+  Every stop is inside either way.
+- **BUSLIC (layer 3), step by step.**
+  - The server filter is `LIC_STATUS = 'Active' AND HOME_OCCUPATION = 'F'`,
+    asserted again in step 2. That is 24,191 licences; the 10,573 active
+    home occupations are never downloaded.
+  - **7,120 storefront licences** by NAICS: Retail 4,049, Food 1,779,
+    Personal 1,292. The brief screened 4,056, 2,011 and 1,245.
+    - 539 (7.6%) have no point. The page says "about one licence in
+      thirteen".
+    - 23 lie outside the city.
+    - 19 have APT in the `APT` field and are left off as homes. The field is
+      otherwise shop suites ("STE 101"), so only APT, APARTMENT and TRLR
+      count.
+  - **6,539 licences collapse to 5,243 premises.** A business holds a
+    business licence, a tobacco licence and a liquor licence at one
+    address, so rows collapse on name and address.
+- **Names (call 15).** The address is shown for 748 premises:
+  - **692 with a personal OWN_TYPE**: Sole Proprietorship 525, Individual
+    151, Married 16;
+  - **45 whose account name is only a person's**, Kansas City's rule. All
+    642 distinct shown names that `residence.looks_personal` reads as a
+    person's were read by eye. The 45 are listed in `config.PERSON_NAMED`,
+    and step 2 stops if one disappears. The rest are shop names ("RATHER
+    KEEN", "BLIND PIG") or brands ("SONNY ANGEL").
+  - **11 with no account name.**
+
+  2,040 storefronts have no OWN_TYPE at all. Their account names are trade
+  names apart from those in the list.
+- **Privacy verdict: publishable.** 340 pins:
+  - 0 contact details;
+  - 0 surname-first names;
+  - 0 person-like names at a residential unit;
+  - 69 person-like by the heuristic, all shop names from the list read by
+    eye (22% of them at an STE suite).
+- **Licence: SILENT, read as permitted by the owner.** Notice 70, "Business
+  licence data: City of Tucson.", is the owner's wording. The page quotes the
+  layer's own words: the list "should not be considered a complete listing".
+  The OSM rail notice now names Kansas City's and Tucson's streetcars. It had
+  missed Kansas City's in the first commit.
+- **Macro label: Tucson is 48.6 px, right of the dot at ("start", 11, -5).**
+  - **San Diego's label moved from east of its dot to west, over the
+    Pacific, at ("end", -11, -2).** East of its dot it covered Tucson's
+    marker at the Global and United States zooms. The scan: San Diego
+    passes dy -5 to +1, and Tucson -7 to -2.
+  - **Tucson is left out of United States West's zoom fit**
+    (`REGION_ZOOM_WITHOUT`), as Riga is out of Europe's. Fitted to Tucson,
+    the zoom dropped and San Francisco's pill covered Sacramento's marker.
+    - **Rejected: moving San Francisco's and Los Angeles's labels west too.**
+      It also scores PROBLEMS 0, but San Francisco's pill then clips 26-37%
+      off the left edge at 375 px.
+    - Left out of the fit, California keeps its zoom, and the centre moves
+      about 3° east.
+  - **Two front-page changes for deploy-verify at review:** San Diego's
+    label, and United States West's centre.
+- **Notice numbering.** Notices 69 (Kansas City) and 70 (Tucson) clash with
+  France's 69-71, so they are renumbered at landing.
+
 ### 2026-09-30 - Kansas City built on tram-build: the KC Streetcar and KCMO's frozen licence register
 
 - **Kansas City built on Houston's rules and `osm_tram.py`.** It has 19
