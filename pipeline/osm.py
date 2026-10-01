@@ -90,10 +90,22 @@ exactly how the Toulouse probe earned its first 406.
 spend `retries x hosts x timeout` - up to half an hour - printing nothing, so
 a throttled run was indistinguishable from a hung one. It now prints each
 attempt and honours a total `deadline`.
+
+⚠ AND A 504, A 429 OR A TIMEOUT MEANS WAIT A MINUTE. The owner's rule
+(CLAUDE.md, 2026-09-30): after a 504 or 429, wait at least 60 s before a
+retry, never in a tight loop. Both public mirrors were 504ing under several
+sessions' load, and `fetch()` was backing off 5 s after the first round - the
+tram-kit session watched Tucson's fetch do exactly that. So a round whose
+failures include one of those waits `OVERLOAD_WAIT_S` or more (escalating),
+a deadline too short for the wait gives up instead of retrying early, and a
+host that refused is not asked again within the minute by a later `fetch()`
+in the same run. Other failures (an empty 200, a remark, all-zero counts) are
+not load, and keep the short backoff.
 """
 
 import json
 import time
+import urllib.error
 import urllib.request
 
 from pipeline.osm_cache import NEVER_A_STATION, load  # noqa: F401
@@ -119,6 +131,29 @@ OVERPASS_HOSTS = (
 OVERPASS_USER_AGENT = (
     "expanded-heatmap city profiling (github.com/dacekroberts/expanded-heatmap)"
 )
+
+# The owner's floor after a 504, a 429 or a timeout (see the docstring).
+OVERLOAD_WAIT_S = 60
+OVERLOAD_HTTP_CODES = (429, 504)
+
+# Host name -> time.monotonic() of its last 504, 429 or timeout in this
+# process, so a second fetch() does not ask a host that refused seconds ago.
+_overloaded_at = {}
+
+
+def is_overload(exc):
+    """True for a 504, a 429 or a timeout - the failures the 60 s rule covers."""
+    if isinstance(exc, urllib.error.HTTPError):
+        return exc.code in OVERLOAD_HTTP_CODES
+    return isinstance(exc, TimeoutError) or "timed out" in str(exc).lower()
+
+
+def overload_wait_left(name):
+    """Seconds before host `name` may be asked again; 0 if it has not refused."""
+    at = _overloaded_at.get(name)
+    if at is None:
+        return 0.0
+    return max(0.0, OVERLOAD_WAIT_S - (time.monotonic() - at))
 
 
 def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
@@ -155,12 +190,27 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
 
     problems = []
     for attempt in range(retries):
+        overloaded = False
         for host in OVERPASS_HOSTS:
             name = host.split("/")[2]
             left = _left()
             if left is not None and left <= 0:
                 problems.append(f"deadline of {deadline}s exhausted")
                 break
+            wait = overload_wait_left(name)
+            if wait > 0:
+                # Refused by an earlier fetch() in this run. Wait out the
+                # owner's minute, or skip the host if the deadline cannot.
+                if left is not None and left < wait + 10:
+                    problems.append(f"{name}: refused under {OVERLOAD_WAIT_S}s "
+                                    f"ago and the deadline leaves {left:.0f}s")
+                    _say(f"[{attempt}] {name} -> skipped, refused under "
+                         f"{OVERLOAD_WAIT_S}s ago")
+                    continue
+                _say(f"[{attempt}] {name} refused under {OVERLOAD_WAIT_S}s "
+                     f"ago, waiting {wait:.0f}s")
+                time.sleep(wait)
+                left = _left()
             per = timeout if left is None else max(10, min(timeout, left))
             _say(f"[{attempt}] {name} (timeout {per:.0f}s)")
             try:
@@ -170,16 +220,24 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
                 with urllib.request.urlopen(req, timeout=per) as r:
                     payload = json.loads(r.read().decode("utf-8"))
             except Exception as exc:
-                # An HTTP 504 here is nearly always the QUERY, not the host -
-                # see the docstring. Named in the message so the next person
-                # reads it as a cost problem rather than an outage.
+                # An HTTP 504 here may be the QUERY or the host - see the
+                # docstring. Named in the message so the next person rules out
+                # cost before reading it as an outage. Either way it is load,
+                # and the owner's minute applies before this host is asked again.
                 hint = ""
-                if "504" in str(exc) or "timed out" in str(exc).lower():
-                    hint = " (504/timeout - try nodes-only, drop `out center`)"
+                if is_overload(exc):
+                    overloaded = True
+                    _overloaded_at[name] = time.monotonic()
+                    hint = " (504/429/timeout - try nodes-only, drop `out center`)"
                 problems.append(f"{name}: {type(exc).__name__}{hint}")
                 _say(f"[{attempt}] {name} -> {type(exc).__name__}{hint}")
                 continue
             if payload.get("remark"):
+                # "Query timed out" in a remark is the server's own timeout,
+                # which is load in the same way as a 504.
+                if "timed out" in str(payload["remark"]).lower():
+                    overloaded = True
+                    _overloaded_at[name] = time.monotonic()
                 problems.append(f"{name}: remark {payload['remark']!r}")
                 _say(f"[{attempt}] {name} -> remark")
                 continue
@@ -215,7 +273,18 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
             # Escalating rather than flat: a throttling host that refused a
             # moment ago is unlikely to have changed its mind in 5 seconds.
             nap = 5 * (attempt + 1) ** 2
-            if left is not None:
+            if overloaded:
+                # The owner's floor, escalating above it: 60 s, 120 s, ... A
+                # deadline that cannot fit the wait plus a 10 s request gives
+                # up here rather than retrying early.
+                nap = max(nap, OVERLOAD_WAIT_S * (attempt + 1))
+                if left is not None and left < nap + 10:
+                    problems.append(f"a 504/429/timeout needs {nap}s before a "
+                                    f"retry and the deadline leaves {left:.0f}s")
+                    _say(f"all hosts failed, {nap}s backoff does not fit the "
+                         "deadline - giving up")
+                    break
+            elif left is not None:
                 nap = min(nap, max(0, left))
             _say(f"all hosts failed, backing off {nap:.0f}s")
             time.sleep(nap)
