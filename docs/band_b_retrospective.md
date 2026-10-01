@@ -86,6 +86,67 @@ because the rows were written by then.
   a recommendation with its tradeoff. Others arrived by relay: K-W's record
   kind, Palma's and Hiroshima's metro mode, and Anyang's assignment.
 
+## How smoothly it ran, against the early US and Canadian builds
+
+The fair comparison is with Los Angeles, New York, Vancouver and Montreal - the
+builds that wrote the rules this band ran on (`us_build_retrospective.md`,
+`canada_retrospective.md`). The short answer: **building was much smoother;
+integration was not, and part of the smoothness is integration cost deferred
+to landing.**
+
+**What made the builds smoother - almost all of it inherited.**
+- **The errors that defined the early builds were caught by gates, not by
+  re-reading.** Canada's dominant class was the denominator (Montreal's 440
+  storefronts per station, summed over rings, was 151; Calgary's and Toronto's
+  "stations" were platforms), each found after a ranking had been published.
+  Here the same classes appeared and stopped at a gate before any commit:
+  Hiroshima's tram stops tripped the platform-spacing gate (and were genuinely
+  close, so the floor moved by precedent, not by eye); every gate-3 mismatch
+  (Dallas, Line 4, the Gyeongchun Line) was traced to a fact before it passed.
+- **Briefs were checked, not discovered.** Vancouver and Montreal were
+  re-briefed in the middle of their build day; Toronto's brief checks were
+  "stale and passing". Every Band B city arrived with a brief whose
+  `brief-checks` ran first, and a brief that was wrong (Yokohama's 17,408,
+  Dallas's "full", Hiroshima's open licence point) was corrected in the brief,
+  not worked around in code.
+- **Licences were already read.** The US build's three worst corrections were
+  licence positions taken from a cited page instead of the instrument (New
+  York's footer, Philadelphia's terms by reference). Here every source had a
+  `licence-read` verdict before the build, and the open points were owner calls
+  already made (Pittsburgh's and Dallas's indemnities, Hiroshima's full list).
+- **Privacy was a check with a verdict.** Los Angeles taught that a missing
+  trade name falls back to a person; here `check_personal_exposure.py` ran on
+  every city with a printed verdict, and the Japanese and Korean name rules,
+  Houston's organisation-type rule and the home-address rules were already
+  shared code.
+- **Templates instead of new pipelines.** Vancouver needed two registries, two
+  taxonomies, a parcel join and a boundary that was a line; New York needed
+  four registries and a dispatching taxonomy. Ten of the twelve Band B cities
+  were an existing template with a config.
+
+**What was not smoother.**
+- **Coordination.** Twelve branches, each merging master and macro-legend,
+  meant a DECISIONS conflict on almost every branch, two committed-marker
+  incidents averted only by checking, notice numbers that cannot be reserved,
+  ordinals and counts that are wrong on every branch but one, and labels that
+  only a combined-tree scorer could place. Canada built and landed in one
+  evening; none of Band B has landed.
+- **Rules changing mid-run.** The two-key legend re-tiered three finished
+  cities; the drafts rule, the heavy-job gate and the Overpass rule arrived
+  between builds. Each was cheap to adopt, but each is another reason a
+  branch's state depends on when it was cut.
+- **A fixed per-city overhead.** Fourteen gates and a drift check per city is
+  far more ceremony than Los Angeles had. It is what made the builds
+  predictable, and it is why a small satellite still took a full gate run.
+
+**The mistakes changed kind.** The early builds' mistakes were measurement
+mistakes - wrong denominators, platforms counted as stations, stale mirrors,
+licence positions taken on trust. Band B's (below) were framing and process
+mistakes: a question put to the owner on the wrong rule, a precedent not
+weighed, a chained commit, a guessed width, CRLF, a probe that printed too
+much. That is the signature of a pipeline whose measurements are now guarded
+and whose remaining risk sits in the human steps around it.
+
 ## What changed during the run
 
 Rules arrived while builds were in flight, and each branch took them at its
