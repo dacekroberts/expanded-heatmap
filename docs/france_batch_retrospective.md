@@ -50,7 +50,9 @@ kit existed.
   `check_macro_facts`, `check_macro_labels`, `check_deploy_imports` and
   linecolour.
   - Personal exposure passed on all 21: 0 contact details, and 0 person-like
-    names at a residential unit.
+    names at a residential unit. Ten of the 21 verdicts were recorded only at
+    review (`DECISIONS.md`, 2026-09-30, "Review lane 4's mechanical findings
+    fixed on the rehearsal; ten French privacy verdicts recorded").
   - Every city recorded zero drift against its baseline.
 - **The approved page template** meant no page text needed reading back. The
   three approved departures (Rouen, Brest, Nice) and two proposals (Reims's
@@ -97,8 +99,9 @@ for the doc generators, which were written mid-batch and run on ten at once.
 
 ### 3. Coordination across sessions (a cost of the day's parallelism, not of the batch)
 
-- **Page numbers collided** with Band B (76-86), so France moved to 100-120
-  on every branch. Notice numbers 69-72 will renumber at landing.
+- **Page numbers collided** with Band B (76-87), so France moved to 100-120
+  on every branch. Notice numbers also collided; France landed as 69-71 (and
+  Angers as 77), the others renumbered in landing order.
 - **Five group-2 fetches exited** because their scaffolds moved branches
   while `fetch_batch` was still running. This session's own sequencing
   error; they were re-fetched.

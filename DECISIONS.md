@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**267 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**268 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Personal exposure: PASS for Zurich, Göteborg and Den Haag; lane 4's last findings fixed](#2026-09-30---personal-exposure-pass-for-zurich-göteborg-and-den-haag-lane-4s-last-findings-fixed)
 - [The mega-review's calls, all approved as recommended; the minor label tier's first slice (owner)](#2026-09-30---the-mega-reviews-calls-all-approved-as-recommended-the-minor-label-tiers-first-slice-owner)
 - [Review lane 4's mechanical findings fixed on the rehearsal; ten French privacy verdicts recorded](#2026-09-30---review-lane-4s-mechanical-findings-fixed-on-the-rehearsal-ten-french-privacy-verdicts-recorded)
 - [Czechia is its own macro region, Prague in it; the mega-review prepared as one rehearsal branch and four lanes (owner)](#2026-09-30---czechia-is-its-own-macro-region-prague-in-it-the-mega-review-prepared-as-one-rehearsal-branch-and-four-lanes-owner)
@@ -310,6 +311,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-30 - Personal exposure: PASS for Zurich, Göteborg and Den Haag; lane 4's last findings fixed
+
+- **`check_personal_exposure.py` run 2026-09-30 on Zurich, Göteborg and Den
+  Haag**, whose verdicts the tram kit recorded only as reads by eye (review
+  lane 4): **PASS for all three.** No step 2 loads an owner or licence-holder
+  column, so no pin can show one; 0 contact details; 0 person-like names at
+  a residential unit (of 3,099, 2,255 and 5,781 pins). The heuristic's
+  person-shaped shares (26.8%, 24.8%, 10.2%) are trade names such as German
+  and Italian restaurant names, as the tram kit's reads found.
+- **Fixed on the rehearsal:** Den Haag's source row read "(notice NN)" (now
+  83); the stale renumbering and "for review time" notes on notices 30, 31,
+  42, 68 and 72-83, and the drafts' and retrospectives' pre-renumbering
+  numbers; notice 75's verdict cited a drafts file that does not exist
+  (now yokohama.md); What Is Excluded's "car dealers count as shops
+  everywhere except France" now reads "wherever a register lists them",
+  following call B2.
+- **Left for the prose pass (PLAN), not landing blockers:** the top of What
+  Is Excluded generalises across cities in ways the tram kit outgrew (light
+  rail drawn only at 15-minute headways, against Daugavpils's hourly routes;
+  the commuter-rail list; ring sizes; Florence's not-drawn line list). Kansas
+  City's notice keeps the terms' curly apostrophe, which matched the live
+  terms when read.
+
 ### 2026-09-30 - The mega-review's calls, all approved as recommended; the minor label tier's first slice (owner)
 
 The owner: "I agree with all of your calls", on the review page's list (the
@@ -380,8 +404,9 @@ four review lanes and the build sessions' open items). Each as recommended:
   `docs/data_sources/france.md`**, whose Angers row named the network brand
   twice (the dataset title and `feed_info.txt`'s publisher). Both now say the
   brand is not shown; the dataset id stays. The brand remains only in
-  files no page renders: provenance JSON, Angers's brief, the tram list and
-  the tram batch's handoff.
+  files no page renders: provenance JSON and Angers's config (its
+  `GTFS_DATASET`, the source of the provenance value), Angers's brief, the
+  tram list and the tram batch's handoff.
 - **Notice numbers from before the renumbering**, on rendered pages: Palma
   74 (spain.md), KORDIS 78 and PMDP 79 (czechia.md), and Bucharest 67
   (romania.md, stale since Stockholm's landing). In the drafts, before the
@@ -412,8 +437,9 @@ four review lanes and the build sessions' open items). Each as recommended:
   Ostrava's), each from a sweep.
 - **The batch as one branch.** `review-rehearsal` (cleanup's worktree, not
   pushed) merges every queued branch in landing order - France (with
-  macro-france and Angers), Band B, the Korean satellites, Dallas, the five
-  page fixes, Czech - with git's rerere recording each resolution. Notices
+  macro-france), Band B, the Korean satellites, Dallas, the five page fixes,
+  Anyang, Angers, Czech, then the INSEE attribution and the tram kit - with
+  git's rerere recording each resolution. Notices
   renumbered in landing order: 69-71 France, 72 Ottawa, 73 Region of
   Waterloo, 74 Palma, 75 Yokohama, 76 Hiroshima, 77 Angers, 78 KORDIS,
   79 PMDP; 68 names every Korean satellite. Two merges had silently broken

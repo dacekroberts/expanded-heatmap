@@ -151,7 +151,8 @@ are shops and stay. And gambling: betting shops, casinos, arcades and lottery
 agencies. Where a register files one of these under the same label as ordinary
 businesses, it cannot be separated and stays on the map; each city's section
 says where. Newsstands and kiosks, pawnbrokers, karaoke bars and nightclubs are
-kept, and car dealers count as shops everywhere except France.
+kept, and car dealers count as shops wherever a register lists them, except
+in France.
 
 The rest of this page is the other half — what is excluded from the business
 side, city by city, and what is missing from it rather than excluded.

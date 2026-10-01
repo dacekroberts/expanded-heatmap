@@ -2227,14 +2227,12 @@ CITIES = [
         "region": "United States West",
         "country": "United States",
         "in_default_view": True,
-        # RIGHT of the dot and a little above, and SCORED: width 48.6 px measured
-        # in a browser with Space Grotesk loaded (2026-09-30). San Diego's label
-        # moved west to clear this marker (see San Diego), and Tucson is left
-        # out of United States West's zoom fit (REGION_ZOOM_WITHOUT) - fitting
-        # it zoomed California out until San Francisco's pill covered
-        # Sacramento's marker. check_macro_labels.py (python -B) passes start 11
-        # at dy -7 to -2 (-1 meets Los Angeles's pill, -8 Kansas City's); -5
-        # sits inside that, PROBLEMS 0 at 375, 768 and 1200.
+        # BELOW the dot, SCORED on the combined review tree (2026-09-30): width
+        # 48.6 px measured in a browser with Space Grotesk loaded. Tucson is IN
+        # United States West's zoom fit since review lane 2 found three of the
+        # region's dots off a phone without it, and the region's California
+        # labels were re-placed for that zoom. It is MINOR (below), so its pill
+        # shows only in United States West; PROBLEMS 0 at 375, 768 and 1200.
         # MINOR (owner, 2026-09-30, call A1): labelled only in its own region;
         # a dot and tooltip on the landing and United States views.
         "label_tier": "minor",

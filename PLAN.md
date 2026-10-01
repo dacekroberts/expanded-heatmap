@@ -825,7 +825,8 @@ every key, account and letter:
 - [ ] **For the site-wide prose and UI pass (owner, 2026-09-30, calls A3, A6, A7,
   B6)**: dots on top of dots (Yokohama on Tokyo, Kitchener–Waterloo on Toronto;
   draw the older city on top or give the pair a regional view); hide a pill
-  whose own dot is off the canvas (Bordeaux's "Regional)", Nice's "N"); a short
+  whose own dot is off the canvas (Bordeaux's "Regional)", Nice's "N"; Daugavpils, off Europe's edge at 375 px,
+  as Dublin and Bucharest); a short
   label for a long regional name (Most is cut to "(Regional)" at 375 px); and
   the Korean nightclub difference disclosed on What Is Excluded (the SEMAS
   satellites leave out dance halls, Seoul keeps nightclubs), with the two

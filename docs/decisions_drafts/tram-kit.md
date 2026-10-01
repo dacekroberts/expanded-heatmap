@@ -319,7 +319,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   for RandstadRail E); RandstadRail E's sentence; the business paragraph
   (Amsterdam's wording, adapted); the vacancy and permit-scope caveats. No
   frequency sentence: no timetable was read.
-- **Notice 72 "Gemeente Den Haag"**: proposed text, for review time. Notice 40
+- **Notice 83 "Gemeente Den Haag"**: proposed text, for review time. Notice 40
   (CBS) now names Den Haag too. The OSM rail notice names Den Haag's lines and
   the gemeente boundaries.
 
@@ -377,7 +377,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
     brief).
   - **Privacy verdict: publishable.** 4,435 pins and 16 distinct labels;
     nothing here can be a person.
-- **Notice 71, "Comune di Firenze"**: CC BY 4.0, linked, crediting the
+- **Notice 82, "Comune di Firenze"**: CC BY 4.0, linked, crediting the
   Direzione Attività Economiche e Turismo and stating the changes. Milan's
   notice is the model, and the text is the project's own. The OSM rail
   notice names Florence's lines and the comune boundaries.
@@ -552,7 +552,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - 0 person-like names at a residential unit;
   - 69 person-like by the heuristic, all shop names from the list read by
     eye (22% of them at an STE suite).
-- **Licence: SILENT, read as permitted by the owner.** Notice 70, "Business
+- **Licence: SILENT, read as permitted by the owner.** Notice 81, "Business
   licence data: City of Tucson.", is the owner's wording. The page quotes the
   layer's own words: the list "should not be considered a complete listing".
   The OSM rail notice now names Kansas City's and Tucson's streetcars. It had
@@ -572,8 +572,9 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
       about 3° east.
   - **Two front-page changes for deploy-verify at review:** San Diego's
     label, and United States West's centre.
-- **Notice numbering.** Notices 69 (Kansas City) and 70 (Tucson) clash with
-  France's 69-71, so they are renumbered at landing.
+- **Notice numbering.** Notices 80 (Kansas City) and 81 (Tucson); first
+  numbered 69 and 70, which clashed with France's 69-71, and renumbered at
+  landing.
 
 ### 2026-09-30 - Kansas City built on tram-build: the KC Streetcar and KCMO's frozen licence register
 
@@ -679,7 +680,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
     the City's choice, not a portal default.
   - **The disclaimer.** The portal's undated Data Terms of Use prescribe a
     disclaimer for any derivative application. It is Chicago's wording on
-    the same portal template, so it is displayed site-wide as **notice 69**,
+    the same portal template, so it is displayed site-wide as **notice 80**,
     verbatim, including the dead host `www.data.kcmo.gov`.
   - **The indemnity.** The same terms claim an open-ended indemnity from
     "any user of the data". RideKC's GTFS was barred partly over one.
@@ -689,7 +690,8 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
       acceptance step, so the indemnity is read as binding nothing.
     - **Rejected:** asking data@kcmo.org first, and dropping the city.
   - **Notice numbering.** France also numbered notices 69-71 on its branch,
-    so renumber at landing.
+    so the kit's four notices were renumbered 80-83 at landing, in landing
+    order.
 
 ### 2026-09-30 - Daugavpils built on tram-build: all five routes, 37 stations
 

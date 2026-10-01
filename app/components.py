@@ -1066,8 +1066,8 @@ _NOTICES = [
     # its second sentence is CC BY 4.0 3(a)(1)'s modification duty. Wording
     # approved by the owner 2026-09-24.
     # Aarhus added 2026-09-29, owner-approved: the same register and cache.
-    # Odense added 2026-09-30 (tram kit), the same again; for the owner's
-    # approval at review time.
+    # Odense added 2026-09-30 (tram kit), the same again; approved by the
+    # owner 2026-09-30 (call C1).
     ("Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense)",
      "Contains data from Det Centrale Virksomhedsregister (CVR), distributed by "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
@@ -1083,8 +1083,8 @@ _NOTICES = [
     # owner 2026-09-24.
     # Aarhus added 2026-09-29, owner-approved: it reads DAR's Adresse and
     # Husnummer, and takes the point from OSM's copy (osak:identifier).
-    # Odense added 2026-09-30 (tram kit), Aarhus's placement; for the owner's
-    # approval at review time.
+    # Odense added 2026-09-30 (tram kit), Aarhus's placement; approved by the
+    # owner 2026-09-30 (call C1).
     ("Klimadatastyrelsen (Copenhagen, Aarhus, Odense)",
      "Contains data from Klimadatastyrelsen, Danmarks Adresseregister (DAR), via "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
@@ -1258,8 +1258,8 @@ _NOTICES = [
     # VZD cadastre open data (CC BY 4.0, adopted by VZD's own data-use rules,
     # read 2026-09-24): credit, licence link, a DESCRIPTION of the changes, and
     # no implied VZD approval. Wording approved by the owner 2026-09-24.
-    # Liepāja and Daugavpils added 2026-09-30 (tram kit), FOR THE OWNER'S APPROVAL AT REVIEW
-    # TIME: its cadastre, and VZD's address register (aw_eka.csv, CC BY 4.0,
+    # Liepāja and Daugavpils added 2026-09-30 (tram kit), approved by the owner
+    # 2026-09-30 (call C1): its cadastre, and VZD's address register (aw_eka.csv, CC BY 4.0,
     # read 2026-09-30) - VZD's own source wording, the year, and the changes.
     ("VZD (Riga, Liepāja, Daugavpils)",
      "Riga's, Liepāja's and Daugavpils's shops and services are from the State Land Service of Latvia's "

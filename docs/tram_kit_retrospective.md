@@ -83,7 +83,7 @@ gap. So these in-ring shares are not comparable with a metro city's.
 | Elapsed | about 3 days | about 7 h, after a day of profiling | about 1 h for 20 after the module; Angers about 15 min | 3 h 43 m from the module; about 6 h from the first brief |
 | Per city | hours to a day | 48 min to 1 h 44 m | a few minutes, generated | 15 to 36 min in sequence; 40 to 55 min in parallel |
 | Decided before code | almost nothing | a country profile | 20 briefs, a skill, a batch scaffold | 10 briefs, a skill, 28 owner calls, a page template |
-| Shared code | `map_common`, taxonomies, drift check | the same plus briefs mid-batch | one module, a scaffold | `osm_tram`, `latvia_register`, seven template cities |
+| Shared code | `map_common`, taxonomies, drift check | the same plus briefs mid-batch | one module, a scaffold | `osm_tram`, `latvia_register`, eight template cities |
 | Rework of built cities | about 10 correction commits; method changed per city | station counts wrong in 4 of 5; 3 to 5 later fixes | fewer than ten generator defects, each reaching 10 to 20 files | none redone; three integration fixes |
 | Privacy | retrofitted after build (SD 42 to 315, LA 1,252, 812990) | read from the licence; part of the carve-out | the pipeline's rules | personal columns never downloaded; person-named lists read by eye; a verdict per city |
 | Licences | three positions inverted after reading; one prohibition after build | three trusted from cited pages | read in the kit | read in the briefs; one indemnity surfaced after the build commit |
@@ -151,12 +151,14 @@ gap. So these in-ring shares are not comparable with a metro city's.
   Kansas City's station check compared OSM against the brief's count, which
   came from OSM itself. The cause is a skill gap: `osm-rail`'s checklist
   asks for per-line counts wherever the operator publishes them, but
-  `tram-city` never mentions it.
+  `tram-city` never mentioned it. Since fixed: `tram-city` now requires gate
+  3 for new builds, and a 25-city back-fill is in `PLAN.md` (lesson 1).
 - **Parallel agents produced builds that each needed integrating.**
   - Den Haag left an interchange split under two names.
-  - Göteborg wrote a coverage tier that only exists on an unmerged branch
-    (`one_bucket`, from macro-legend). It is set to `narrowed`, matching
-    Stockholm on this branch, until that lands.
+  - Göteborg wrote a coverage tier that only existed on an unmerged branch
+    (`one_bucket`, from macro-legend). It was set to `narrowed` until that
+    landed, and is now one category (`one_bucket`, with Stockholm) under the
+    owner's tier rule.
   - Zurich needed a new national grid in `check_provenance.py` and a
     corrected brief.
 
@@ -167,7 +169,9 @@ gap. So these in-ring shares are not comparable with a metro city's.
   - About 30 items are queued for review time: four new numbered notices,
     page sentences outside the template, seven published cities' label
     moves and two zoom-fit changes.
-  - France's batch used the same numbers, so all of them renumber at landing.
+  - France's batch used the same numbers, so at landing every notice from 69
+    up was numbered in landing order: France 69-71, Ottawa to Plzeň 72-79,
+    the kit's four 80-83.
   - None of the ten maps has been deploy-verified.
 
   The earlier batches found their worst defects after landing: San Diego's
@@ -184,7 +188,7 @@ gap. So these in-ring shares are not comparable with a metro city's.
 ### Not like-for-like
 
 Most of the speed is the cities themselves. Most have 1 to 14 lines and 18
-to 180 stations. There were seven template cities to copy (Aarhus, Riga,
+to 180 stations. There were eight template cities to copy (Aarhus, Riga,
 Houston, Milan and Rome, Stockholm, Rotterdam and Amsterdam). The briefs
 existed before the build. The US and Canada built the infrastructure this
 batch used: the scaffold, the exposure check, `stations.py`, `linecolour`,
@@ -223,13 +227,14 @@ All items carry a recommendation in the drafts file:
   di Firenze and Gemeente Den Haag (proposed text), written as 69-72 on the
   branch and renumbered 80-83 in landing order.
 - Göteborg's coverage flip to `one_bucket` with Stockholm once macro-legend
-  lands.
+  lands (done: one category, under the owner's tier rule).
 - The two optional `sweden_livsmedel` changes. Each moves Stockholm.
 - Zurich's four flags: Dancing / Disco kept, trams 50 and 51 drawn,
   institutional kitchens disclosed, seven colours moved. Drawing 50 and 51
   needs a dated plan item to rebuild Zurich after 12 December 2026.
 - Den Haag's four flags: coffeeshops kept, the dwelling rule, tram 10
   peak-only, the notice text.
-- Kansas City's thin food service, kept as `full` on Houston's precedent.
+- Kansas City's thin food service, kept as `full` on Houston's precedent
+  (since narrowed, with Houston, under the owner's thin-layer rule, call A2).
 - The label moves for seven published cities and the two zoom-fit changes.
 - Page sentences outside the template, per city.
