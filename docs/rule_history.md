@@ -349,6 +349,14 @@ reader had already found and immediately found five more.
   `drift_check.py` ends by telling you to find "the latest baseline entry" in
   it - the index is how. `--check` fails if it is stale. Keep
   `docs/project_context.md` to current state, no counts.
+- **Since 2026-09-30, build sessions write drafts, and only cleanup writes
+  `DECISIONS.md` (owner).** Every branch appended to the same file, so every
+  landing batch began with a DECISIONS conflict per branch. That day one was
+  committed with its conflict markers in: `merge_append_only.py` hit a
+  Windows file lock (Errno 22), and the merge went through anyway. None of
+  the 26 checks looked for markers. One drafts file per session
+  (`docs/decisions_drafts/`) never conflicts, and one fold by cleanup
+  replaces a merge per branch.
 
 <a id="drift-churn"></a>
 ### Drift check churn in outputs/
@@ -514,6 +522,19 @@ reader had already found and immediately found five more.
   once can pass the 12 GB tree cap by themselves. The cap stops one runaway;
   it cannot stop two capped jobs from filling the machine, so the
   announcement covers what the cap does not (`docs/session_roles.md`).
+- **Since 2026-09-30, two heavy jobs at most, each admitted by
+  `scripts/heavy_job.py` against MEASURED available memory (owner).** The
+  owner allowed two concurrent jobs "under the memory thresholds". The first
+  reading, two jobs whose declared peaks sum to 12 GB, was wrong the same
+  hour: psutil showed 15.9 GB total, 2.3 GB available and 1.6 GB of page file
+  in use. The apps alone (eight Claude sessions, a browser) held about 8 GB,
+  and an orphaned `grep -o` over a licence page's text, its parent session
+  gone, held 4.7 GB. So the gate reads available memory at admission,
+  reserves what running jobs have yet to claim, keeps a 2 GB margin, and
+  records each job's measured peak. The first two measured: France's SIRENE
+  step 2 at 0.37 GB (estimated 1.5) and the Czech register control at
+  0.37 GB (estimated 2.5), both streamed. A gate was chosen over a monitor
+  because a monitor polls all day and reacts after the damage.
 
 ## Commands
 

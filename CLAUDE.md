@@ -39,6 +39,10 @@ a rule, not before obeying one.
 - Brazilian city -> `brazil-city`; Taiwanese city -> `taiwan-city`; Japanese
   city -> `japan-city`; French city -> `france-tram-city`; a trams-only
   city outside France and Czechia -> `tram-city`. [#country-skills]
+- **Overpass: one query in flight per session, one per city** (never parallel
+  or per-route), and after a 504 or 429 wait at least 60 s before a retry,
+  never in a tight loop (owner, 2026-09-30: both public mirrors were 504ing
+  under several sessions' load).
 - Rail from OpenStreetMap, not GTFS -> `osm-rail`. Put a lesson where the next
   city must pass through it - a raising check in shared code, then a skill - not
   in a sibling city's comments. [#osm-rail]
@@ -127,8 +131,12 @@ a rule, not before obeying one.
 
 - **Commit after each green step.** The commit is the baseline
   `pipeline/drift_check.py` diffs against.
-- **Log every judgment call in `DECISIONS.md`** as it's made (`decisions-entry`
-  skill). Never edit an old entry; add a new one, then run
+- **Log every judgment call** as it's made (`decisions-entry` skill). **A build
+  session writes it to its own drafts file,
+  `docs/decisions_drafts/<session-or-branch>.md`, never to `DECISIONS.md`**;
+  the cleanup session folds every drafts file into `DECISIONS.md` in one pass
+  when the owner hands them off, and a check or gate cites the draft until
+  then (owner, 2026-09-30). Never edit an old entry; add a new one, then run
   `python scripts/decisions_index.py` (`--check` fails if stale). Entries older
   than the current week (Sunday to Saturday) live in `docs/decisions/<Sunday>.md`,
   moved verbatim by `scripts/archive_decisions.py` at the start of each week.
@@ -157,7 +165,15 @@ a rule, not before obeying one.
   to the working directory or the home directory** - an explicit path, or a
   gitignored `data/<city>/raw/`. Never commit it; findings go in
   `docs/data_sources.md` and `docs/city_master_list.md`. [#scratch]
-- Draft interpretive prose in chat before writing it to a file.
+- **Downloads and prose a build's brief and skill cover are pre-permitted**
+  (owner, 2026-09-30). A build fetches the sources its brief and skill name
+  (feeds, registers, boundaries, address files, OSM) from the publisher's own
+  host or the brief's portal without asking, still with their licence rows
+  and notices; a source NOT in the brief goes to the owner first. Page text
+  written from an approved template needs no read-back in chat; a sentence the
+  template does not cover is a proposal, flagged in your drafts file and at
+  review time, and does not stop the build. Other interpretive prose is still
+  drafted in chat before it is written to a file.
 - **A backslash or a backtick never goes into a Bash command. Write the
   content to a file with the Write tool and run the file.** Escapes, not
   length, are the test; quoting the heredoc delimiter does not help.
@@ -166,10 +182,14 @@ a rule, not before obeying one.
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
 - **Python is capped at 8 GB a process, 12 GB with its children**
-  (`scripts/python_memcap.py`, installed as `usercustomize.py`). **One heavy
-  job on the machine at a time, announced to every live session before it
-  starts and when it ends** (`docs/session_roles.md`); drift checks run
-  `--jobs 2` at most, one per machine. A `MemoryError` is a script to fix,
+  (`scripts/python_memcap.py`, installed as `usercustomize.py`). **At most two
+  heavy jobs on the machine, each admitted by the gate against the memory
+  actually available: `python scripts/heavy_job.py run --label <job> --peak-gb
+  <N> --session <you> -- <command>`** (owner, 2026-09-30;
+  `docs/session_roles.md`). A refused job waits (`--wait <minutes>`) and says
+  so to the others; `heavy_job.py status` names what is holding the memory. An
+  unknown peak counts as 8 GB. Drift checks run `--jobs 2` at most, one per
+  machine. A `MemoryError` is a script to fix,
   never a cap to raise. Never hand-write a PDF or font decoder: `pdftotext`
   or `pypdf`, one page first. [#memory]
 - **Resolve a conflicted append-only file with
@@ -210,6 +230,7 @@ node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
 python scripts/decisions_index.py [--check]
 python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
+python scripts/heavy_job.py run --label <job> --peak-gb <N> --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory
 python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # archived entries count as present
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country>   # add --dry-run first

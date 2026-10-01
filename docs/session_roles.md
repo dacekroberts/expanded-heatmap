@@ -193,39 +193,65 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 
 ## The shared files everyone appends to
 
-`DECISIONS.md`, `PLAN.md` and `CLAUDE.md` have no owner — every session writes
-to them. Same-day `DECISIONS.md` entries will conflict occasionally; the
-resolution is always **keep both**, since the file is append-only by
-convention. A visible conflict is a better failure than the silent overwrite
-the shared tree produced.
+`PLAN.md` and `CLAUDE.md` have no owner — every session writes to them.
+**`DECISIONS.md` is written by the cleanup session only, since 2026-09-30
+(owner).** Every other session keeps its entries in its own drafts file,
+`docs/decisions_drafts/<session-or-branch>.md`: the `decisions-entry` format,
+newest first, each entry exactly as it should land. A build session commits
+it on its own branch; a docs session may push its own file to master, since
+one file per session never conflicts. Cleanup folds every drafts file into
+`DECISIONS.md` in one pass when the owner hands them off, then empties them.
+Until then, anything that must cite a DECISIONS verdict (a continuity
+exception, a privacy verdict, a publish gate) cites the draft's heading;
+`check_category_continuity.py` reads drafts headings too.
+
+Why: the same-day `DECISIONS.md` conflicts between branches cost a merge per
+branch, and on 2026-09-30 one of them committed conflict markers when the
+merge tool hit a Windows file lock. For a conflict that still happens, the
+resolution is always **keep both**
+(`python scripts/merge_append_only.py DECISIONS.md`).
 
 One courtesy that avoids most of it: **do not edit a shared file that another
 session currently has modified and uncommitted.** `git status` in the main
 checkout shows this. Leave the line for them, or add it after they commit.
 
-## One heavy job on the machine at a time
+## At most two heavy jobs, each admitted by the gate
 
 Every session shares one 16 GB machine. On 2026-09-28 heavy jobs from several
 sessions overlapped, the machine ran out of memory, and Windows closed the
 Claude app twice, ending every session's turn (DECISIONS; `CLAUDE.md`
-`[#memory]`). Owner's rule, 2026-09-28:
+`[#memory]`). The owner's rule of 2026-09-28 was one heavy job at a time,
+announced by message. **Since 2026-09-30 (owner) two may run at once, each
+admitted by `scripts/heavy_job.py`** against the memory actually available.
 
 - **A heavy job** is anything likely to pass 2 GB or run for minutes: a
   multi-city drift check, a full re-render, `deploy-verify`, a join or read
   of a national or prefecture-wide file, a whole-document PDF extraction,
   and a single city whose step 2 loads a large register (Oslo's peaks near
-  5.4 GB).
-- **Only one runs at a time, across all sessions.** Before starting one,
-  message every other live session (`ListAgents`, then `SendMessage`): what
-  it is and roughly how long. Message again when it ends, whether it passed
-  or failed. A session that has a start notice holds its own heavy job until
-  the end notice.
-- If two start notices cross, the earlier one goes first.
+  5.4 GB). A streamed read is not: France's SIRENE step 2 measured 0.37 GB.
+- **Run it through the gate:**
+  `python scripts/heavy_job.py run --label "<city> <step>" --peak-gb <N> --session <you> -- <command>`.
+  It admits the job only if fewer than two are running and available memory,
+  less what running jobs have yet to claim, covers the peak plus 2 GB. It
+  removes the entry when the job ends and records the MEASURED peak, so state
+  the last measured figure next time (`heavy_job.py status` lists them). An
+  unknown peak counts as 8 GB.
+- **Why measured, not a fixed budget:** on 2026-09-30 the apps alone (eight
+  Claude sessions, a browser) held about 8 GB and an orphaned `grep` 4.7 GB
+  more, with 2.3 GB free. A sum of declared peaks would have admitted a job
+  into that.
+- **Refused?** `--wait <minutes>` retries every 30 s. Tell the other sessions
+  you are waiting and on what; `status` names every process over 1.5 GB, which
+  is how a stray process gets found. Start and end notices are otherwise no
+  longer needed: the gate's ledger (`data/_heavy_jobs.json`, shared through
+  the `data/` junction) is the notice.
+- **A job you cannot wrap** (a subagent's, a browser run): `heavy_job.py start
+  --pid <its pid> ...` before, `end --pid <pid>` after. A dead pid drops off
+  on its own, so a crash never blocks anyone.
 - `drift_check.py` enforces its own share: one run per machine, `--jobs 2`
-  at most. The Python cap (8 GB a process, 12 GB with its children) turns a
-  runaway into a `MemoryError` instead of a crash, but two capped jobs can
-  still fill the machine, so the notice is still needed.
-- Light work needs no notice: greps, git, `check_all.py`, one small city's
+  at most. The Python cap (8 GB a process, 12 GB with its children) stays as
+  the backstop: it turns a runaway into a `MemoryError` instead of a crash.
+- Light work needs no gate: greps, git, `check_all.py`, one small city's
   steps.
 
 ## Subagents are not sessions, and the split is not the same one

@@ -14,6 +14,20 @@ between this file and `docs/project_context.md`, which describes the
 
 ## Where it goes
 
+**A build or docs session writes to its OWN drafts file, not to
+`DECISIONS.md`** (owner, 2026-09-30): `docs/decisions_drafts/<session-or-branch>.md`,
+e.g. `docs/decisions_drafts/tram-kit.md`. Same format and voice as below,
+newest first, each `### YYYY-MM-DD - <label>` section exactly as it should
+land. Commit it on your own branch (a docs session may push its own file to
+master; one file per session never conflicts). Do not run
+`decisions_index.py` for a drafts file. The cleanup session folds every
+drafts file into `DECISIONS.md` in one pass when the owner hands them off,
+then empties them. Until the fold, cite the draft's heading wherever a
+DECISIONS heading is required: `check_category_continuity.py` reads drafts
+headings as well.
+
+**The cleanup session** writes `DECISIONS.md` directly, as follows.
+
 Newest first under `## Changes`, inside the most recent
 `### YYYY-MM-DD - <label>` dated section; start a new dated section if it's
 the first entry of a new day/session.
