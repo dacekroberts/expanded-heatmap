@@ -204,8 +204,9 @@ step 2 is not a heavy job; announce it as a 0.5 GB one, one at a time.
   a name, as Prague's step 1 does.
 - ⚠️ **Request stops are stops.** KORDIS codes every request stop (*na
   znamení*) `pickup_type`/`drop_off_type` **3**, which GTFS counts as
-  boardable. `boardable_stop_ids`' default accepts only 0 and dropped **25 of
-  149 stations** as "non-revenue". Pass `boardable=("0", "2", "3")`.
+  boardable. `boardable_stop_ids`' old default accepted only 0 and dropped **25
+  of 149 stations** as "non-revenue"; the default is `("0", "2", "3")` since
+  `d928f50` (owner, 2026-09-30), so a new step needs no argument.
 - ⚠️ **The feed carries 2.5 months of timetable, so a line's union of trips
   is too wide** (line 4: 54 stations against a 24-stop route). A line serves a
   station when it calls there on **at least 10% of its trips in one

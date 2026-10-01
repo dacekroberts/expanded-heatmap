@@ -79,7 +79,7 @@ def nearest_neighbour_m(lon, lat, crs_projected, crs_geographic="EPSG:4326"):
 
 
 def boardable_stop_ids(stop_times, *, pickup="pickup_type",
-                       drop_off="drop_off_type", boardable=("0",)):
+                       drop_off="drop_off_type", boardable=("0", "2", "3")):
     """Stop ids where at least one stop_time allows boarding or alighting.
 
     GTFS uses 0/blank for "regularly scheduled" and 1 for "not available". A
@@ -87,13 +87,17 @@ def boardable_stop_ids(stop_times, *, pickup="pickup_type",
     garage access points and its Health Sciences tail track, 1,947/1,947/1,430
     stop_times apiece and not one boardable.
 
-    ⚠ 2 ("phone the agency") and 3 ("coordinate with the driver") are ALSO
-    boardable under the GTFS spec - a REQUEST STOP. KORDIS JMK codes every Brno
-    request stop (na znamení) 3/3, and the default below dropped 25 of Brno's
-    149 tram stations as "non-revenue" (2026-09-30). The default is kept at
-    ("0",) only so no built city's output moves unannounced; a feed with
-    request stops passes `boardable=("0", "2", "3")`. Whether any built city's
-    feed carries 2 or 3 is an open check (handed to cleanup, 2026-09-30).
+    2 ("phone the agency") and 3 ("coordinate with the driver") are boardable
+    too: a REQUEST STOP, which a reader can use. Until 2026-09-30 only 0 counted,
+    and KORDIS JMK, which codes every Brno request stop 3/3, lost 25 of Brno's
+    149 tram stations to it - with nothing to flag a station that is simply
+    absent. The default now follows the GTFS spec (owner, 2026-09-30). A scan
+    of the ten built cities that call this found 2/3 only on lines their maps
+    do not draw (Prague's buses, trams and regional rail; the Dutch buses and
+    international trains; Paris's demand-responsive buses). Eight of them
+    drift-checked at zero drift; Oslo's and Bergen's feeds have no stop the old
+    rule dropped, so the set is identical (docs/map_inconsistencies.md, theme
+    13). Pass `boardable=("0",)` only to reproduce the old behaviour.
     """
     if pickup not in stop_times.columns or drop_off not in stop_times.columns:
         return None      # the feed does not say; caller must not infer

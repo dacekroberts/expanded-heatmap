@@ -104,7 +104,9 @@ def main():
     st = pd.concat(parts, ignore_index=True)
     # REQUEST STOPS ARE STOPS: KORDIS codes every request stop (na znamení)
     # pickup/drop_off 3, "coordinate with the driver" - boardable under GTFS.
-    # The shared default ("0" only) dropped 25 of the 149 stations.
+    # The old shared default ("0" only) dropped 25 of the 149 stations; the
+    # default is ("0", "2", "3") since d928f50 (owner, 2026-09-30), so this
+    # argument now restates it, kept to say why Brno depends on it.
     boardable = station_gates.boardable_stop_ids(st, boardable=("0", "2", "3"))
     before = st["stop_id"].nunique()
     st = st[st["stop_id"].isin(boardable)]
