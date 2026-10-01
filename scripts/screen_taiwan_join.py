@@ -24,7 +24,7 @@ THE NORMALISATION THAT MATTERED
 -------------------------------
 - NFKC: full-width digits (９１號) to ASCII.
 - Chinese section numerals to digits: 四段 -> 4段.
-- ONE sub-number separator from 之, －, -, ― (U+2015), —, –. The first pass
+- ONE sub-number separator from 之, －, -, ― (U+2015), U+2014, U+2013. The first pass
   missed ― and read 89.1% instead of 92.5%: one character, 3.4 points.
 - Chained sub-numbers (Taichung): ２之３之２號 -> 2-3-2.
 - Floors dropped (a door plate is the building); "39、41號" takes the first.

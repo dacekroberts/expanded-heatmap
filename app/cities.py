@@ -1701,7 +1701,7 @@ CITIES = [
         "lat": 54.9738,
         "lon": -1.6131,
         "page": "pages/60_Newcastle_Heatmap.py",
-        # Owner-approved 2026-09-28, London's values; rail_extra "—": the
+        # Owner-approved 2026-09-28, London's values; rail_extra a dash: the
         # Metro is its own system, its Sunderland stretch on shared track
         # disclosed on the page.
         "coverage": "one_bucket",

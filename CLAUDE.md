@@ -201,6 +201,21 @@ a rule, not before obeying one.
   from one side** - a conflict region is not everything the other side added.
   Run `scripts/decisions_index.py` afterwards. [#merge-append-only]
 
+## Code comments
+
+Neutral voice: no "I", "we" or "you"; short statements of what and why,
+readable by an outsider but useful to whoever changes the code next. Keep
+every measured value, every "re-measure if X changes" warning and every
+pointer to `DECISIONS.md`, `docs/rule_history.md` or a skill. How something
+was found or verified gets one line at most; the full story belongs in the
+decisions log. Never touch dated log text, verbatim licence quotes or any
+string that renders. `scripts/check_provenance.py` is the reference example.
+
+**No em dashes in any comment or docstring**, including CSS/JS comments
+inside strings (`pipeline/map_common.py`'s ship in every committed map, so
+rewording one means re-rendering). Enforced by
+`python scripts/check_no_em_dashes.py`. Visible text is exempt.
+
 ## Commands
 
 ```bash
@@ -224,6 +239,7 @@ python scripts/check_overpass_hosts.py [--live|--selftest]   # every Overpass mi
 python scripts/check_worktree_data.py <worktree> [--list]   # before removing a worktree
 python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
+python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
 python scripts/check_city_registry.py                   # after merging
 python scripts/check_conflict_markers.py [--file PATH]  # after merging; a marker git left in any tracked file

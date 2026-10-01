@@ -414,7 +414,8 @@ def _names(d):
 
 
 def _count(cell):
-    """The leading figure of a 'Built' or 'Candidates' cell; '—' is 0."""
+    """Return the leading figure of a 'Built' or 'Candidates' cell; a cell
+    holding only a dash is 0."""
     m = re.match(r"^\s*\*\*(\d+)\*\*", cell)
     return int(m.group(1)) if m else (0 if clean(cell) == "" else None)
 
