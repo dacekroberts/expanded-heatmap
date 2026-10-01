@@ -21,7 +21,7 @@ built on Prague's modules.
 | **Scope** | **Most (Regional)**: Most + Litvínov; the page names Litvínov in its scope sentence | See the rail section |
 | **Lines drawn** | Trams 1–4 (OSM) | |
 | **Rings** | halved: median gap 514 m | The owner's spacing rule (`docs/ring_rules.md`) |
-| **Call (approved): Build it** | **Last of the six**: 1,030 storefronts, 27 stops, the smallest Czech page | |
+| **Call (approved): Build it** | **Last of the six**: 1,030 storefronts, 27 stops, the smallest Czech page | Built 2026-09-30 with 28 stops and 1,025 storefronts: Litvínov, Vrchlického (lines 1, 3 and 4) is closed for works, but the map shows the regular network (owner) |
 | **Call (approved): Colours** | the project's palette, `line_colour_search.py`, evenly spaced hues | |
 
 ---
@@ -34,7 +34,7 @@ built on Prague's modules.
 |---|---|---|
 | Obce | 567027 | **567027 + 567256** |
 | Rail | Trams 1–4 (DPmML) | same |
-| Stop names in scope | lines keep 12 of 24, 6 of 18, 9 of 21 | **27, every line whole** |
+| Stop names in scope | lines keep 12 of 24, 6 of 18, 9 of 21 | **27, every line whole** (28 as built, 2026-09-30: Litvínov, Vrchlického) |
 | Median station gap | — | **514 m**, so halved rings (under 550) |
 | Storefronts placed (screen) | 789 | **1,030** (Litvínov 241) |
 | Projected CRS | **EPSG:32633** (13.64° E) | same |
@@ -93,7 +93,7 @@ forms (`NAME_SUPPRESSED_FORMS`).
 
 ## Build-time calls
 
-1. **Build it at all?** It is T1 and passes, but it is **the smallest Czech page** (1,030 storefronts, 27 stops), and the screen marked it low value. Recommend building it last of the six, or asking the owner then.
+1. **Build it at all?** It is T1 and passes, but it is **the smallest Czech page** (1,030 storefronts, 27 stops at the screen; 28 stops and 1,025 storefronts as built 2026-09-30), and the screen marked it low value. Recommend building it last of the six, or asking the owner then.
 2. **Litvínov's RÚIAN control**: measured (above).
 3. **The palette** (approved, owner 2026-09-30): choose at the build with `scripts/line_colour_search.py` (3:1 contrast on both map pages, CIE76 45 or more from every pin), aiming at evenly spaced hues, since no operator hue is licensed.
 

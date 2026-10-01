@@ -34,7 +34,7 @@ built on Prague's modules.
 |---|---|---|
 | Obce | 563889 | **563889 + 563510** |
 | Rail | Trams 2, 3, 5 and 11 (DPMLJ) | same |
-| Stop names in scope | 32 | **39** (line 11 adds 7 in Jablonec) |
+| Stop names in scope | 32 | **39** (line 11 adds 7 in Jablonec); **40 as built** (2026-09-30: Šaldovo náměstí on lines 2 and 3) |
 | Worst line | 11: 14 of 21 (67%) | **every line whole** |
 | Median station gap | — | **378 m**, so halved rings |
 | Storefronts placed (screen) | 1,880 | **2,498** (Jablonec 618) |
