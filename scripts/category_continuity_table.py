@@ -1737,6 +1737,33 @@ COLUMNS["sweden_livsmedel"] = {
 
 
 # ---------------------------------------------------------------------------
+def _dh(type_bedrijf, source="permit"):
+    return {"source": source, "type_bedrijf": type_bedrijf}
+
+
+COLUMNS["den_haag_source"] = {
+    **{rid: absent(BAG_LUMPED) for rid in (
+        "sex_shop", "massage_commercial", "massage_regulated", "car_dealer", "petrol_station",
+        "vehicle_repair", "pawnbroker", "vet", "nonstore", "parking", "repair", "pharmacy",
+        "optician", "mobile_unit")},
+    "funeral": [loc(_dh("begraafplaats en crematorium"), "a cemetery and crematorium's horeca")],
+    "no_counter_food": [loc(_dh("kantine"), "staff and care-home canteens"),
+                        loc(_dh("sportkantine"), "sports-club canteens"),
+                        loc(_dh("cateringsbedrijf"), "caterers")],
+    "personal_catchall": [loc(_dh("zalenverhuur"), "hall hire"),
+                          loc(_dh("partycentrum"), "party centres")],
+    "adult_hostess": [loc(_dh("seksinrichting"), "sex businesses the register names")],
+    "gambling": [loc(_dh("casino"), "casino"), loc(_dh("speelautomatenhal"), "gaming-machine hall")],
+    "nightclub": [loc(_dh("discotheek"), "disco"), loc(_dh("nachtclub"), "nightclub"),
+                  loc(_dh("café-discotheek"), "café with a dance floor")],
+    "lodging": [loc(_dh("hotel"), "hotel"), loc(_dh("hotel-restaurant"), "a hotel's restaurant"),
+                loc(_dh("bed & breakfast"), "bed and breakfast")],
+    "recreation": [loc(_dh("theaterfoyer"), "theatre foyers"),
+                   loc(_dh("bowlingcentrum"), "bowling"), loc(_dh("amusementshal"), "amusement hall"),
+                   loc(_dh("poolbiljart"), "pool hall"), loc(_dh("sportschool"), "gym")],
+}
+
+
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
 # except the cells below, which still wait on the owner. A queued row turns stale

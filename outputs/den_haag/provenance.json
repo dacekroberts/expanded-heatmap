@@ -1,0 +1,48 @@
+{
+  "written_utc": "2026-10-01T02:37:04+00:00",
+  "horeca": {
+    "url": "https://services7.arcgis.com/b8OtZx5E96LVMxxJ/arcgis/rest/services/Horeca_nieuw/FeatureServer/2",
+    "features": 2701,
+    "fields": [
+      "FID",
+      "ID",
+      "JAAR",
+      "DOSSIER",
+      "STATUS",
+      "OMSCHRIJVI",
+      "STRAAT",
+      "HUISNR",
+      "HUISLT",
+      "TOEV",
+      "POSTCODE",
+      "STADSDEEL",
+      "TYPEBEDRIJ",
+      "CATEGORIE"
+    ],
+    "data_last_edited_utc": "2025-05-23T08:27:52+00:00",
+    "retrieved": "2026-10-01T02:34:42+00:00",
+    "sha256": "c5019e6679c6c12c8f3f458652a59aa9744601015b4a4e19166e98f6bf11582c"
+  },
+  "bag_units": {
+    "url": "https://service.pdok.nl/lv/bag/wfs/v2_0",
+    "records": 6560,
+    "retrieved": "2026-10-01T02:35:02+00:00",
+    "sha256": "107cb4c31f72b5460d123cec09ed62c25f231b82bf201ce5bed90f6706bc73bd"
+  },
+  "osm": {
+    "rail_host": "overpass.kumi.systems",
+    "gemeenten_host": "overpass-api.de",
+    "bbox": [
+      51.96,
+      4.18,
+      52.14,
+      4.56
+    ]
+  },
+  "files_utc": {
+    "horeca_vergunningen.json": "2026-10-01T02:34:42+00:00",
+    "bag_verblijfsobjecten_winkelfunctie.json": "2026-10-01T02:35:02+00:00",
+    "osm_rail.json": "2026-10-01T02:36:38+00:00",
+    "osm_gemeenten.json": "2026-10-01T02:37:04+00:00"
+  }
+}

@@ -555,6 +555,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Netherlands** | | | | | |
 | Amsterdam | Metro 50–54 + 16 trams | Tram 3, museum tram, ferries, NS | OVapi national GTFS (GVB) | Gemeente (with Weesp) | 22 / 59 |
 | Rotterdam | RET metro A–E + 9 trams | Trams 12, 14, 18; ferries; NS | OVapi national GTFS (RET) | Gemeente | 52 / 23 |
+| Den Haag | HTM trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17, 19 and RandstadRail 3, 4, 34 (14 lines) | RandstadRail E (RET metro, a stub: 4 of 23 stops inside), the 9S short working, buses, NS | OpenStreetMap route relations | Gemeente | 64 / 0 |
 | **Brazil** | | | | | |
 | São Paulo | Metrô L1–5, L15 (monorail) + CPTM L9 | CPTM 7, 8, 10–13; L6, L17 (building) | OpenStreetMap (GeoSampa for status) | Município | 2 / 0 |
 | Rio de Janeiro | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | Município | 3 / 0 |
@@ -668,6 +669,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Netherlands** | | | | | |
 | Amsterdam | Permit list + building register | Horeca permits; BAG shop units | Per-source (2 buckets) | Shops & services 9,215 / Food 3,433 | Retail and Personal merged |
 | Rotterdam | Gazette notices + building register | Permit notices; BAG shop units | Per-source (2 buckets) | Shops & services 5,211 / Food 1,771 | Retail and Personal merged |
+| Den Haag | Permit layer + building register | The Gemeente's Horecavergunningen layer; BAG shop units | Per-source (2 buckets) | Shops & services 3,813 / Food 1,968 | Retail and Personal merged |
 | **Brazil** (all nine) | Census of addresses (2022) | IBGE CNEFE | Free-text keyword rules | see below | A third to a half of plausible storefronts unreadable |
 | São Paulo | | | | 25,968 / 15,331 / 8,256 | about 1/3 unreadable |
 | Rio de Janeiro | | | | 15,085 / 10,364 / 4,784 | about 1/3 |
@@ -778,6 +780,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Netherlands** | | | |
 | Amsterdam | Source points (22 permits unplaced) | Empty shop units about 5%; takeaways thin | Shop units also dwellings (757); canteens in venues, hotels |
 | Rotterdam | Source points | Closed premises stay up to 5 years; about 7% vacant | Dwelling units (26); alcohol, terrace, gaming permits |
+| Den Haag | Source points | Permit layer last edited 2025-05-23; about 4% of shop units vacant | Shop units also dwellings (1,928); pending permits (158); canteens, venues, hotels; trade names that are only a person's (5) |
 | **Brazil** | | | |
 | All nine | Source points (census) | Unreadable descriptions (see B); change since 2022 | Offices, parking, workshops, vacant, worship etc.; dwelling addresses show category only |
 | **Hong Kong** | | | |
@@ -883,6 +886,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Netherlands** | | | | | | |
 | Amsterdam | Live register (2026-09-24) | B | 0.6 mi | Yes | 96% | Permit name (food); address (shops) |
 | Rotterdam | Notices to 2026-09-24 (5-yr window) | B | 0.6 mi | Yes | 93% | No names; address (shops) |
+| Den Haag | Permit layer edited 2025-05-23 (2026-10-01) | B | 0.3 mi | Yes | 93% | Permit trade name (food); address (shops) |
 | **Brazil** | | | | | | |
 | São Paulo | 2022 census (file 2024-05-20) | B | 0.6 mi | Yes | 23% | Enumerator's description; category only at homes (37%) |
 | Rio de Janeiro | same | B | 0.6 mi | Yes | 28% | same (55%) |

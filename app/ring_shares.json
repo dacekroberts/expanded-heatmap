@@ -407,6 +407,21 @@
  "florence": {
   "in_ring": 4435,
   "all": 12052,
+  "map_blob": "b23d207b487cab4207c633124b3610202940c65c"
+ },
+ "goteborg": {
+  "in_ring": 2255,
+  "all": 2987,
+  "map_blob": null
+ },
+ "den_haag": {
+  "in_ring": 5781,
+  "all": 6213,
+  "map_blob": null
+ },
+ "zurich": {
+  "in_ring": 3099,
+  "all": 3363,
   "map_blob": null
  }
 }

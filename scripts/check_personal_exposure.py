@@ -463,6 +463,16 @@ REGISTRIES = {
     # premises, which the type does not reveal.
     "florence": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv", address=None),
+    # Den Haag: two layers. BAG shop units carry no name - the pin shows the
+    # unit's address, and a unit also registered as a dwelling is not on the
+    # map. Food pins show the trade name from the permit layer's description
+    # (OMSCHRIJVI), with the city's bracketed staff notes removed; the
+    # applicant (AANVRAGER), KvK number and legal form are never downloaded, so
+    # there is no registrant fallback. 5 trade names that are only a person's
+    # (config: step 2's PERSON_NAMED, read by eye) show the type instead.
+    "den_haag": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv",
+                     address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

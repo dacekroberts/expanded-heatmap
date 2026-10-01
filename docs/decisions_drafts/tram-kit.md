@@ -4,6 +4,102 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Den Haag built on tram-build: HTM's 14 tram lines, the city's permit layer and the BAG
+
+- **Den Haag built on Rotterdam's template and `osm_tram.py`, with Amsterdam's
+  precedent for the city's own permit layer.** 166 stations, 6,213 storefronts
+  (Shops and services 4,071, Food service 2,142), and 5,781 (93%) in a ring.
+  The page says "about nine storefronts in ten".
+- **The trams.** Trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17 and 19 and
+  RandstadRail 3, 4 and 34, two OSM relations each, operator HTM, every one
+  `route=tram`, so `mode` is `tram`. RandstadRail E (OSM `route=subway`) is out
+  as a stub (owner, call 22).
+  - **489 stop positions collapse to 231 stations**; 167 are in the Gemeente
+    Den Haag (OSM 192736, 98.1 km²). 64 on ten lines are outside and listed,
+    not ringed (owner, call 26, for tram 1: 20 of its 37 inside here, 54%,
+    against the brief's 19 of 37).
+  - **Six stop names belong to two stops each** (Oosteinde 8.8 km apart,
+    Beresteinlaan 1.0 km, Fahrenheitstraat 905 m, Weimarstraat 568 m,
+    Loosduinseweg 520 m, Duinstraat 351 m). Name collapse would have averaged
+    each pair into one point between them. Step 1 groups a name's positions at
+    300 m single linkage and labels a split name by its lines
+    ("Weimarstraat (line 11)"). No name's groups fall between 230 and 350 m.
+    Rejected: renaming by street or place, which would be this project's
+    words, not HTM's.
+  - **The collapse's spread gate is 250 m, not the shared 200 m**, for two
+    stops whose platforms stand apart after the split: Station Hollands Spoor
+    (A/B and C/D, 206 m) and Mozartlaan (228 m, staggered).
+  - **Median gap 324 m** (brief 335; 322 before the merge below), so the
+    rings are halved, gated at 280-400 m.
+  - **Leidschenveen (RandstadRail 3, 4, 34) and Leidschenveen Centrum (19),
+    10 m apart, merged by explicit alias** at integration (the coordinator,
+    2026-09-30): one interchange, one ring set - Houston's couplet and New
+    Orleans's Canal Street pairs, Oslo's rule. The agent had left them apart
+    as an owner question; the precedent settles it. 166 stations in the
+    gemeente.
+  - **Not drawn:** 9S (two relations, a short working of 9) and RET's
+    Rotterdam tram 8 (in the fetch box only), both in `NOT_DRAWN`.
+  - **Colours.** OSM's own, with three changes, each by the smallest HSL step
+    that clears 13 from every other line (Rotterdam's rule): 19 darkened to
+    `#9f0e11` (it shared `#c01115` with 1); 16 lightened to `#fb8540` (it was
+    Delta-E 2.9 from 4's `#fc751c`, a pair the brief did not list); 10 amber
+    `#fbc02d` and 34 brown `#5d4037` from the palette (no OSM colour). Tram
+    15's `#e63a6b` is 11.9 from Food service's pins, recorded, not changed.
+    Label contrast passes.
+- **The taxonomy: `pipeline/taxonomies/den_haag_source.py`**, Rotterdam's
+  two-source shape with Amsterdam's permit mapping, keyed on the repaired
+  `TYPEBEDRIJ` (73 values, each with a home; an unknown one raises), with a new continuity column.
+  `rotterdam_source` could not be used: it classifies gazette notice kinds.
+  - **In:** restaurants, cafés, lunchrooms, takeaways, snack bars, beach
+    pavilions (70 on the map), coffeeshops (32, Amsterdam's and Rotterdam's call),
+    nightclubs, sports bars, bakeries' cafés, and six `attractiecentrum`
+    permits that are each a restaurant by their own description.
+  - **Out (331):** canteens and club houses, community and youth centres,
+    theatre and cinema foyers, event sites, party centres, hall hire, cooking
+    studios, members' clubs, hotels and their restaurants (Florence's rule),
+    the department store (Amsterdam's `Warenhuis`), caterers, sex businesses,
+    gaming, recreation, and blank types (26 blank and 1 "niet van
+    toepassing", as the brief).
+  - **39 food-typed permits re-typed by their own description**: care-home
+    and school canteens 9, club canteens, sports halls and a stadium 9,
+    museum and theatre cafés 4, hotel and hostel bars and restaurants 15, an
+    "erotic entertainment" disco 1, an association's meeting room 1.
+- **The permit layer.** 158 pending applications out (owner, call 24).
+  - **Fetched by named field**; `AANVRAGER`, `KVKNUMMER` and `RECHTSVORM` are
+    never requested, and the fetch stops if one arrives.
+  - **Double-encoded UTF-8 repaired** in 1,145 fields (`cafÃ©` -> `café`);
+    the step stops if any description is still garbled.
+  - **28 permits whose own description records the business gone are left
+    out** ("opgeheven", "uit KvK", "ingetrokken", "vervallen", "historisch",
+    "vertrokken" ...). Kept: a closure order that ran out in 2024, and an
+    operator trading under a notification after giving up the permit. The
+    brief had read the layer as dropping closures by removal; it mostly does.
+  - **42 older permits at an address with a newer one are counted once**,
+    the newest kept.
+  - **The trade name** is the description with the city's bracketed staff
+    notes, "MELDING" and the leading lower-case type words removed. 39 that
+    are only a type word show the type.
+- **The BAG.** 6,560 shop-class units in use (PDOK, Rotterdam's query, 4.9 MB,
+  no heavy job needed). **1,928 also registered as a dwelling are left off**
+  (Amsterdam's owner call), 29% of Den Haag's units against Rotterdam's 26 and
+  Amsterdam's 757. 561 at a kept permit's address are de-duplicated by address
+  (Amsterdam's rule; Rotterdam's notices had no address and used 3 m).
+- **Privacy verdict: publishable.** 643 shown names match residence.py's
+  shape test; read by eye, five are only a person's name and show the type
+  (`PERSON_NAMED`). The descriptions' staff notes, which name people, are
+  stripped. No applicant column is downloaded.
+- **Vacancy: CBS, Landelijke Monitor Leegstand 2025, table 1**: 180 of 4,480
+  shop units in scope (4%), 1 January 2025; "about one in twenty-five".
+- **Page sentences outside the template, flagged:** the colour sentence
+  (10 and 34 coloured by this project, 1/19 and 4/16 a shade apart);
+  "Den Haag has no metro of its own" (the template's "has no metro", adapted
+  for RandstadRail E); RandstadRail E's sentence; the business paragraph
+  (Amsterdam's wording, adapted); the vacancy and permit-scope caveats. No
+  frequency sentence: no timetable was read.
+- **Notice 72 "Gemeente Den Haag"**: proposed text, for review time. Notice 40
+  (CBS) now names Den Haag too. The OSM rail notice names Den Haag's lines and
+  the gemeente boundaries.
+
 ### 2026-09-30 - Florence built on tram-build: T1 and T2, and the Comune's four layers
 
 - **Florence built on Milan's and Rome's template and `osm_tram.py`.** It

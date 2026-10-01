@@ -93,7 +93,7 @@ together, so a row in either counts and a row in neither still fails.
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
-| Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam |
+| Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
@@ -1595,7 +1595,7 @@ lines (layers 19 and 18) only; the VLT and SuperVia are OpenStreetMap's, under
 notice 1. The SIURB terms' liability clause was accepted by the owner
 2026-09-23. Wording approved by the owner 2026-09-24. **MUST DO: nothing.**
 
-**40. CBS (Rotterdam) — required, and DISPLAYED.**
+**40. CBS (Rotterdam, Den Haag) — required, and DISPLAYED.**
 
 **CC BY 4.0** (`cbs.nl/nl-nl/over-ons/website/copyright`, read 2026-09-24): credit
 CBS, link the licence, and say when a figure is recalculated. Rotterdam's page
@@ -1605,6 +1605,7 @@ of CBS's counts, which the notice says. **MUST NOT SAY**: that CBS produced or
 endorses the map; no CBS logo. KOOP's notices (Auteurswet art. 11, CC0 declared),
 the BAG (Public Domain Mark) and the national feed (CC0) need no notice. Wording
 approved by the owner 2026-09-24. **MUST DO: nothing.**
+- **Den Haag (2026-09-30, tram kit)**: its page quotes the same table (180 of 4,480 shop units, GM0518, 1 January 2025) as "about one in twenty-five"; the displayed entry now names both cities.
 
 **41. FEHD / DATA.GOV.HK / CSDI (Hong Kong) — required, and DISPLAYED.**
 
@@ -2223,6 +2224,21 @@ landing.**)
 - **MUST NOT**: imply the Comune's endorsement, or use its logo or the giglio.
 - **MUST DO**: nothing. The Comune's footer ties reuse of personal data to
   d.lgs. 36/2006; the layers carry no name or address.
+
+**72. Gemeente Den Haag (Den Haag) — required, and DISPLAYED** (written into
+`render_site_notices()`; tram kit, 2026-09-30; displayed once Den Haag lands. **Renumber at landing with 69-71**, after France's 69-71.)
+
+- **SILENT and ambiguous; the owner proceeds on Amsterdam's precedent
+  (2026-09-30).** Databankenwet art. 8(2): a public body's database is
+  unprotected unless the right is expressly reserved, and nothing on the layer,
+  its web map or app reserves it; against that, denhaag.nl's site terms name
+  database rights. Rows in [`data_sources/netherlands.md`](data_sources/netherlands.md).
+- **MUST DISPLAY**: the credit "Gemeente Den Haag" (the owner's condition).
+  The notice text is a proposal, for review time.
+- **MUST NOT**: call the layer current or complete (the page gives its last
+  edit, 23 May 2025); imply the city's endorsement.
+- **MUST DO**: never download `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` -
+  `fetch_sources.py` names its fields and stops if one arrives.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

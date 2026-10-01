@@ -2060,6 +2060,41 @@ stops there (Villa Costanza, De André, Resistenza, Aldo Moro) are drawn with th
 not ringed (owner, call 17), listed in `outputs/florence/excluded_stations.csv`. Not drawn:
 T3 and T4, under construction (T3.2.1 due about January 2027); buses; trains.
 
+### Den Haag - the city's permit layer and BAG shop units, and every HTM tram stop
+
+**Left out of the Gemeente's permit layer** (2,701 permits, last edited 23 May 2025;
+`pipeline/taxonomies/den_haag_source.py`): 158 applications not yet decided (owner, call 24);
+331 by type - sports-club and staff canteens and club houses, community and youth centres,
+theatre and cinema foyers, museum cafés, event sites, party centres, hall hire and cooking
+studios, members' clubs, hotels and the restaurants and bars inside hotels and hostels, care-home
+and school canteens, caterers, sex businesses, gaming halls and the casino, pool halls,
+bowling, dance schools and gyms, and 27 rows with no type (39 of the 331 typed as food but
+named by their own description as one of these); 28 whose own description records the business gone
+(closed, struck off, withdrawn, lapsed or marked historical); 42 older permits at an address
+with a newer one, counted once. **Kept**: coffeeshops (32 on the map) and beach pavilions (70).
+
+**Excluded because it is probably a home** - 1,928 shop units also registered as a dwelling
+(Amsterdam's owner call), nearly three in ten of Den Haag's shop units.
+
+**Removed as duplicates** - 561 shop units at the address of a kept permit; the permit is kept.
+
+**What cannot be excluded: closed premises and empty shops.** The permit layer was last
+edited on 23 May 2025, so a premises that closed since may still be shown; about 4% of shop
+units were registered vacant on 1 January 2025 (CBS). The building register records only a
+shop unit, so a funeral home there cannot be identified or removed.
+
+**Named** - food dots carry the trade name from the permit's description, with the city's notes
+removed; 5 that are only a person's name show the kind of place instead. The applicant, KvK
+number and legal form are never downloaded. Shop units show their address.
+
+**Stations.** HTM's trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17 and 19 and RandstadRail 3, 4 and
+34, every stop in the gemeente (166; Leidschenveen and Leidschenveen Centrum, 10 m apart, merged as one interchange). Ten lines run on into neighbouring gemeenten: their 64
+stops there (Rijswijk 17, Zoetermeer 17, Leidschendam-Voorburg 15, Delft 12, Westland,
+Lansingerland and Pijnacker-Nootdorp 1 each) are drawn with the line but not ringed (owner,
+call 26, for tram 1), listed in `outputs/den_haag/excluded_stations.csv`. Not drawn:
+RandstadRail E, RET's metro line, a stub with 4 of its 23 stops in the city (owner, call 22);
+the 9S short working; buses; NS trains.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

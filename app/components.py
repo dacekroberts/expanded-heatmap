@@ -725,6 +725,8 @@ _NOTICES = [
      "streetcar lines and their stops, "
      "Florence's T1 and T2 tram lines and their stops and the comune boundaries "
      "used to select them and its businesses, "
+     "Den Haag's fourteen HTM tram lines and their stops and the municipal "
+     "boundaries used to select them and its businesses, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
@@ -1075,11 +1077,11 @@ _NOTICES = [
     # (cbs.nl copyright page, read 2026-09-24): credit CBS, link the licence,
     # say when a figure is recalculated; no endorsement implied, no logo.
     # Wording approved by the owner 2026-09-24.
-    ("CBS (Rotterdam)",
-     "The shop-vacancy figure for Rotterdam is from CBS (Statistics Netherlands), "
-     "Landelijke Monitor Leegstand 2025, table 1, 1 January 2025, used under "
+    ("CBS (Rotterdam, Den Haag)",
+     "The shop-vacancy figures for Rotterdam and Den Haag are from CBS (Statistics "
+     "Netherlands), Landelijke Monitor Leegstand 2025, table 1, 1 January 2025, used under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) "
-     "([cbs.nl](https://www.cbs.nl/)); the share is rounded from CBS's counts. "
+     "([cbs.nl](https://www.cbs.nl/)); the shares are rounded from CBS's counts. "
      "CBS did not produce or endorse this map.",
      False),
     # FEHD's licence registers, via DATA.GOV.HK (Terms of Use v1.2, read
@@ -1559,6 +1561,18 @@ _NOTICES = [
      "This map filters, re-categorises and aggregates that data into density "
      "measures; the filtering, categories and densities are this project's own "
      "and are not produced or endorsed by the Comune di Firenze.",
+     False),
+    # Den Haag (notice 72): the Gemeente's Horecavergunningen layer. Its licence
+    # is silent; the owner proceeds on Amsterdam's precedent (2026-09-30) on
+    # condition that the Gemeente is credited and the layer is never called
+    # current or complete. PROPOSED wording, for review time.
+    ("Gemeente Den Haag (Den Haag)",
+     "Hospitality permit data: Gemeente Den Haag. The permit layer was last "
+     "edited on 23 May 2025 and is not a complete or current record. Changes: "
+     "the permits are filtered to food and drink premises, grouped into one "
+     "category, matched to the national buildings register by address, and "
+     "mapped by distance to tram stops. Not produced or endorsed by the "
+     "Gemeente Den Haag.",
      False),
 ]
 

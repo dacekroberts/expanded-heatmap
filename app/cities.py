@@ -2214,7 +2214,16 @@ CITIES = [
         "lat": 52.0705,
         "lon": 4.3007,
         "page": "pages/138_Den_Haag_Heatmap.py",
-        "blurb": "HTM (TODO: list the lines)",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Register coordinates",
+        "data_age": "Permit layer last edited 2025-05-23; BAG fetched 2026-10-01",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and permits",
+        "categories": "Merged",
+        "blurb": "HTM: trams 1-19 and RandstadRail 3, 4 and 34 (14 lines)",
         "region": "Europe",
         "country": "Netherlands",
         "in_default_view": False,
@@ -2224,7 +2233,7 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        "label_offset": ("start", 11, 0),
     },
     {
         "name": "Zurich",
