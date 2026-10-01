@@ -3175,6 +3175,25 @@ Bucheon's precedent): in Ansan it has its own track and stations. Line 1,
 Incheon Line 1 and GTX-A, which reach the query box, have no station in Ansan
 and are not drawn. Daebudo has no rail.
 
+### Uijeongbu - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+section above).
+
+**Out by name**: hostess bars 201, dance halls 3, staff canteens 24,
+household fuel dealers 16; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 11 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Uijeongbu's boundary (the lines drawn to their ends;
+stations outside in `outputs/uijeongbu/excluded_stations.csv`): the U Line,
+Line 1 and Line 7, 20 stations. Line 4 and GTX-A, which reach the query box,
+have no station in Uijeongbu and are not drawn; the U Line's two depot-shuttle
+trips are part of the drawn line.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
