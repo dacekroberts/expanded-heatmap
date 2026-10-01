@@ -292,7 +292,8 @@ draws, so the drawn lines are exactly the kept ones. What the five taught:
   pass.
 - **A line's relation can pass a stop it calls at**, while another line's
   relation lists that stop (Liberec's 11 at Fügnerova and Sídliště Nové
-  Vratislavice). `STATION_ADD` refuses a name already on a route, so use
+  Vratislavice). `STATION_ADD` refuses a node already on a route (still so
+  after tram-build's 2aeed892 made its name check per line), so use
   `LINE_STOP_ADD` `{node: (line or tuple, name)}`, read by
   `czechia_osm_tram.add_line_stops`. It stops the build when the line's own
   track is more than 25 m from the node, or when OSM fills the gap.
