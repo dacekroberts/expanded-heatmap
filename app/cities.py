@@ -2027,6 +2027,31 @@ CITIES = [
         # Europe's zoom (REGION_ZOOM_WITHOUT).
         "label_offset": ("middle", 0, 22),
     },
+    {
+        "name": "Daugavpils",
+        "lat": 55.8714,
+        "lon": 26.5161,
+        "page": "pages/132_Daugavpils_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Joined by address (95.9%)",
+        "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and licences",
+        "categories": "Merged",
+        "blurb": "Daugavpils Satiksme's five tram routes",
+        "region": "Europe",
+        "country": "Latvia",
+        "in_default_view": False,
+        # RIGHT of the dot, and SCORED: width 73.7 px measured in a browser
+        # with Space Grotesk loaded (2026-09-30). Above, its pill covered
+        # Riga's marker; below and left, it overlapped Liepāja's label.
+        # check_macro_labels.py passes dy -12 to 12 on the right: PROBLEMS 0
+        # at 375, 768 and 1200, with Daugavpils left out of Europe's zoom.
+        "label_offset": ("start", 11, 0),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -2206,7 +2231,10 @@ REGION_ORDER = [
 # the zoom dropped and 57 label problems appeared at every width, whatever
 # Liepāja's own offset. It lies inside the frame Riga and Bucharest already
 # set, so Europe's centre does not move.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja")}
+# Daugavpils (2026-09-30, tram kit) joins it too: at 26.5 E it is the
+# easternmost European city, 0.4 degrees east of Bucharest, so it moves the
+# centre that far east and no further.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils")}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.

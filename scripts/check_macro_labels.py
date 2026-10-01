@@ -243,6 +243,8 @@ TEXT_WIDTH = {
     # Liepāja: measured 2026-09-30 the same way as Odense, in the same tab
     # (Aarhus 46.9, Riga 29.5 and Odense 50.6 reproduced again; tram kit).
     "Liepāja": 48.2,
+    # Daugavpils: measured 2026-09-30 in the same tab, the same way.
+    "Daugavpils": 73.7,
     # Buffalo: measured 2026-09-29 in the local app's own document (lean venv),
     # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load;
     # Prague 47.3, Tokyo 40.5, London 50.9, Glasgow 56.8 and Oslo 29.0

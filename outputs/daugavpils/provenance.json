@@ -1,0 +1,47 @@
+{
+  "written_utc": "2026-10-01T00:21:00+00:00",
+  "osm": {
+    "rail": {
+      "host": "overpass-api.de",
+      "file_utc": "2026-10-01T00:25:24+00:00"
+    },
+    "city_boundary": {
+      "host": "overpass-api.de",
+      "file_utc": "2026-10-01T00:25:24+00:00"
+    }
+  },
+  "cadastral_map": {
+    "file": "0002000_kk_shp.zip",
+    "url": "https://data.gov.lv/dati/dataset/b28f0eed-73b0-4e44-94e7-b04b11bf0b69/resource/a55953fb-b4ce-4c10-aa0d-c89119b3428f/download/0002000_kk_shp.zip",
+    "bytes": 7940676,
+    "sha256": "6a0687081547418025f32f0abe7fbf44eecafdeee212c97af663e6f8548d6320",
+    "retrieved": "2026-10-01T00:25:28+00:00",
+    "last_modified": "2026-09-26T09:41:29.544574"
+  },
+  "address_register": {
+    "file": "aw_eka.csv",
+    "url": "https://data.gov.lv/dati/dataset/6b06a7e8-dedf-4705-a47b-2a7c51177473/resource/a510737a-18ce-400f-ad4b-04fce5228272/download/aw_eka.csv",
+    "bytes": 141686740,
+    "sha256": "e99669fe0a102d833129559cbeb688ad3c1582d0a52346cb9accb523c41caada",
+    "retrieved": "2026-10-01T00:25:41+00:00",
+    "last_modified": "2026-09-30T19:52:13.568264"
+  },
+  "excise": {
+    "file": "pdb_akclicences_odata.csv",
+    "url": "https://data.gov.lv/dati/dataset/a1adb6dd-a4a1-41c9-9177-c1cd942e012e/resource/f88cd5ea-61b0-42e8-a0a8-25504dfbcdc9/download/pdb_akclicences_odata.csv",
+    "bytes": 222926577,
+    "sha256": "2310b00ec6605bce1c09aeabc94cf8d971b2c5bdc9fc1d9c6b26529e8c286c8f",
+    "retrieved": "2026-09-25T04:05:17+00:00",
+    "last_modified": "2026-09-24T05:04:37.962797",
+    "cached_by": "riga"
+  },
+  "premise_groups": {
+    "file": "premisegroup.zip",
+    "url": "https://data.gov.lv/dati/dataset/be841486-4af9-4d38-aa14-6502a2ddb517/resource/5d8b1cfa-1e67-4b77-a6ac-b4e37eba0d7e/download/premisegroup.zip",
+    "bytes": 65616651,
+    "sha256": "4084dcf8323214cde466bbab41d0c796cb9f59b542a0e549ddd18fa6b439ad8f",
+    "retrieved": "2026-09-25T04:05:24+00:00",
+    "last_modified": "2026-09-20T19:10:59.319384",
+    "cached_by": "riga"
+  }
+}

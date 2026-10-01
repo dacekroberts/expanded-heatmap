@@ -1949,6 +1949,23 @@ registered name for shops. No licence holder is ever read.
 **Stations.** Every stop of tram 1, 18 in all, each inside the city; three are added by hand
 because OpenStreetMap's route relations miss them. Not drawn: buses and suburban trains.
 
+### Daugavpils - Riga's two layers, and every stop of all five tram routes
+
+**Riga's rules, unchanged**, through the same shared step as Liepāja: food service from the
+excise register, a lower bound; shops and services from the cadastre, an upper bound. **Left
+out of the cadastre** as in Riga: 231 of 956 trade premise groups (ancillary rooms, food
+service, wholesale and storage, gambling, repair, offices and generic names). No list of
+degrading buildings is published, so none is dropped for that.
+
+**Not placed** - 4 food premises (4.1%) whose address matched no point in VZD's State Address
+Register; every shop was placed at its building.
+
+**Not named** - as in Riga. No licence holder is ever read.
+
+**Stations.** Every stop of trams 1 to 5, 37 in all, each inside the city: all five routes are
+drawn though routes 2 and 4 run about hourly (owner, 2026-09-30), and the page states each
+route's wait. Not drawn: buses and suburban trains.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

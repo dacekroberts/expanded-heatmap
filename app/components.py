@@ -715,7 +715,8 @@ _NOTICES = [
      "Odense's Letbane line and its stops, the municipal boundary used to "
      "select them and the address points used to place its businesses, "
      "Liepāja's tram line and its stops and the city boundary used to select "
-     "them and its businesses, "
+     "them and its businesses, Daugavpils's tram lines and their stops and the "
+     "city boundary used to select them and its businesses, "
      "Buffalo's NFTA Metro Rail line and its stations, "
      "Sacramento's SacRT Blue and Gold Lines and their stations, and the "
      "municipal boundaries used to select them, "
@@ -1100,18 +1101,18 @@ _NOTICES = [
     # VZD cadastre open data (CC BY 4.0, adopted by VZD's own data-use rules,
     # read 2026-09-24): credit, licence link, a DESCRIPTION of the changes, and
     # no implied VZD approval. Wording approved by the owner 2026-09-24.
-    # Liepāja added 2026-09-30 (tram kit), FOR THE OWNER'S APPROVAL AT REVIEW
+    # Liepāja and Daugavpils added 2026-09-30 (tram kit), FOR THE OWNER'S APPROVAL AT REVIEW
     # TIME: its cadastre, and VZD's address register (aw_eka.csv, CC BY 4.0,
     # read 2026-09-30) - VZD's own source wording, the year, and the changes.
-    ("VZD (Riga, Liepāja)",
-     "Riga's and Liepāja's shops and services are from the State Land Service of Latvia's "
+    ("VZD (Riga, Liepāja, Daugavpils)",
+     "Riga's, Liepāja's and Daugavpils's shops and services are from the State Land Service of Latvia's "
      "(Valsts zemes dienests) Cadastre Information System open data — premise groups and "
      "each city's cadastral map — via data.gov.lv, licensed under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
      "premise groups of use class 1230 whose name reads as a shop or a service were selected, "
      "placed at their building's footprint by cadastre number and reprojected; those in "
      "buildings Riga lists as degrading were removed; all are shown as one \"Shops and "
-     "services\" category and counted around tram stops. Liepāja's licensed food premises are "
+     "services\" category and counted around tram stops. Liepāja's and Daugavpils's licensed food premises are "
      "placed by address on the State Address Register: Izmantoti Valsts adrešu reģistra "
      "informācijas sistēmas dati, 2026. gads (Valsts zemes dienests, via data.gov.lv, "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). Modified by this project: "
