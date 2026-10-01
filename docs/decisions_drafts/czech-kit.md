@@ -205,7 +205,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
     files;
   - the `map_inconsistencies.md` rows (cleanup's city-landed sweep);
   - the measured macro-label widths (a real browser in the app);
-  - notice numbering, where 69-71 are France's and must land with 72 and 73;
+  - notice numbering, where 69-71 are France's and must land with 78 and 79;
   - the master-list counts.
 
 ### 2026-09-30 - Plzeň built: 53 stations; the "two missing stops" were a one-day diversion (supersedes the entry below on Plzeň's gate 3)
@@ -242,7 +242,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
     check at 1000x650 and 1280x900, all pass with no corrections.
   - **Privacy verdict:** publish. No contact details, no person-like name at
     a residential unit, and 6.2% heuristic flags, all company names.
-- **PMDP is credited as notice 73**, on the stricter CC BY reading, since its
+- **PMDP is credited as notice 79**, on the stricter CC BY reading, since its
   counts were used.
   - **The credit** is the brief's (owner-approved).
   - **The framing around it is this session's and is flagged for review:**
@@ -367,7 +367,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   Ostrava, Liberec and Most are over 2, so their pages carry the approved
   sentence on OpenStreetMap's gaps.
 - **Brno's page is written from the approved template**, with no departure
-  from it. Brno's own notice is number 72 (France holds 69-71 on
+  from it. Brno's own notice is number 78 (France holds 69-71 on
   `france-build-2`). The ČSÚ and ČÚZK notice titles now list the six Czech
   cities, and items 32 and 33 in `data_sources.md` match. The "OpenStreetMap
   (rail geometry)" notice names the Czech tram lines.
@@ -378,7 +378,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   for 81 cities. `check_provenance.py` gained the Czech display-name
   overrides (Plzeň, Liberec (Regional), Most (Regional)).
 - **For the lander, at landing:**
-  - Notices 69-71 must land before or with 72, or the contiguity check
+  - Notices 69-71 must land before or with 78, or the contiguity check
     fails.
   - The ČSÚ/ČÚZK titles and the OSM notice name all six cities, so a
     partial landing trims them to the cities that land.

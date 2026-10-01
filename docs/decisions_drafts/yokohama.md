@@ -83,7 +83,7 @@ operator's name; 4 trade names contain the operator's full name plus a business
 word, which the owner's rule shows. 申請者役職 and 施設電話番号 are never read.
 
 **Licence.** CC BY 4.0 (read 2026-09-30 by the `licence-read` agent): the city's
-prescribed credit for a modified work, with an English gloss, in notice 69.
+prescribed credit for a modified work, with an English gloss, in notice 75.
 MLIT's credits as in Kobe's. **Macro label**: width 68.8 px (measured 2026-09-30,
 controls reproduced); the dot sits 2 px from Tokyo's, so the pill goes right of it
 and above Tokyo's, ("start", 12, -42), clear from dy -34 to -56; PROBLEMS 0 on the

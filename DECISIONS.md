@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**265 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**266 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Review lane 4's mechanical findings fixed on the rehearsal; ten French privacy verdicts recorded](#2026-09-30---review-lane-4s-mechanical-findings-fixed-on-the-rehearsal-ten-french-privacy-verdicts-recorded)
 - [Czechia is its own macro region, Prague in it; the mega-review prepared as one rehearsal branch and four lanes (owner)](#2026-09-30---czechia-is-its-own-macro-region-prague-in-it-the-mega-review-prepared-as-one-rehearsal-branch-and-four-lanes-owner)
 - [Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)](#2026-09-30---streamlit-scaling-measured-at-106-cities-memory-and-clone-fine-the-overview-list-is-long-owner)
 - [France splits into two macro-map regions, France North and France South, at zoom 5.0 (owner)](#2026-09-30---france-splits-into-two-macro-map-regions-france-north-and-france-south-at-zoom-50-owner)
@@ -307,6 +308,38 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Review lane 4's mechanical findings fixed on the rehearsal; ten French privacy verdicts recorded
+
+- **Personal exposure: PASS for Besançon, Avignon, Tours, Dijon, Reims,
+  Orléans, Mulhouse, Brest, Saint-Étienne and Nice**, the ten French batch
+  cities whose verdict was never written (lane 4: the drafts registered them
+  in the script but recorded no result). `check_personal_exposure.py` run
+  2026-09-30 on each: no registrant-name column is loaded (the shared French
+  step 2's structural guarantee), 0 contact details, and 0 person-like names
+  at a residential unit in nine. **Besançon's one is "PH CREATION", a
+  hairdresser's shop sign**: the check read "PH" as a penthouse unit, so it is
+  a false positive, and the city passes with the rest.
+- **Dallas's caption read the file's UTC date** (2026-10-01, the evening of
+  09-30 in Dallas) where provenance, `data_age` and step 2 say 2026-09-30. It
+  now reads `as_of_date` first, as Houston's page does since houston-caption.
+- **Angers is mark-free (owner), and the About the Data page renders
+  `docs/data_sources/france.md`**, whose Angers row named the network brand
+  twice (the dataset title and `feed_info.txt`'s publisher). Both now say the
+  brand is not shown; the dataset id stays. The brand remains only in
+  provenance JSON, which no page displays.
+- **Notice numbers from before the renumbering**, on rendered pages: Palma
+  74 (spain.md), KORDIS 78 and PMDP 79 (czechia.md), and Bucharest 67
+  (romania.md, stale since Stockholm's landing). In the drafts, before the
+  fold: Angers 77 (france-build.md, a heading among them), Brno 78 and PMDP 79
+  (czech-kit.md), Yokohama 75, Hiroshima 76. `check_provenance.py`'s citation
+  pattern misses a bolded number; widening it was tried and fails 14 table
+  rows on the subject test, so it is in PLAN rather than the hook.
+- **Not changed here:** lane 4's false sentences on the What Is Excluded page
+  (Brest's cable car against "the only non-rail mode"; car dealers "unlike
+  every other city"; "about 9,500 pins across the five cities") are prose and
+  go to the owner as drafts, with its three owner calls (Dallas's third
+  template departure, the Korean dance-hall split, Yokohama's 出典 sentence).
 
 ### 2026-09-30 - Czechia is its own macro region, Prague in it; the mega-review prepared as one rehearsal branch and four lanes (owner)
 

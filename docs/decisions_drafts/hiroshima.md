@@ -112,7 +112,7 @@ file or committed; later probes printed column names and counts only.
 **Licence.** The brief's one open point (whether the city's dataset-level PDL
 1.0 covers the full-list file) was decided by the owner on 2026-09-24
 (`docs/decisions/2026-09-20.md`, the Japan re-banding entry); the row in
-`docs/data_sources/japan.md` now says so. Notice 69: DataEye's prescribed 出典
+`docs/data_sources/japan.md` now says so. Notice 76: DataEye's prescribed 出典
 pattern, MHLW's as in Fukuoka's, MLIT's as in Kobe's. **Macro label**: width
 66.3 px (measured 2026-09-30, controls reproduced), ("middle", 0, 54) below the
 dot and under Fukuoka's pill, clear from dy 48 to 62; PROBLEMS 0 on the

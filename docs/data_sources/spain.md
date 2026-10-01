@@ -211,7 +211,7 @@ Catastro's INSPIRE Addresses declare **CC BY 4.0 DG Catastro** (IDEE, 2025-01-28
 the EU high-value-dataset record, 2026-05-21), and the ATOM feed asks that the
 "D. G. of the Cadastre (Ministry of Finance) is mentioned as author and owner
 of the information"; the permissive reading of its 2016 PDF is the owner's (C).
-Both are displayed in notice **69 (Palma)**, with the join stated and
+Both are displayed in notice **74 (Palma)**, with the join stated and
 Catastro's access date. The address layer itself is never published.
 
 #### Madrid — `censo de locales`, read 2026-09-22 (**BUILT 2026-09-22**)

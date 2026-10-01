@@ -5,7 +5,7 @@ Entries for `DECISIONS.md`, newest first, each exactly as it should land
 in when handed off). Anything that must cite a DECISIONS verdict cites this
 file until then.
 
-### 2026-09-30 - Angers built mark-free on `france-build-3`: 36 stops, 2,530 storefronts, page 120, notice 72
+### 2026-09-30 - Angers built mark-free on `france-build-3`: 36 stops, 2,530 storefronts, page 120, notice 77
 
 - **Owner: "build angers mark-free as recommended."** Angers had been held
   since 2026-09-29. The Métropole's terms (DECISIONS "French tram feeds
@@ -24,7 +24,7 @@ file until then.
     read "Tram <brand> A", and the brand is dropped.
   - The feed's `feed_publisher_name` and `agency_name` (both the brand) are
     never shown.
-  - Notice 72 names the database by its producer and its NAP id, because the
+  - Notice 77 names the database by its producer and its NAP id, because the
     dataset's title and its NAP page slug both carry the brand. ODbL §4.3
     asks only for a notice reasonably calculated to make a reader aware of
     the source.
@@ -72,7 +72,7 @@ file until then.
   - The offset is ("middle", 0, -18). The default overlapped Rennes's
     eastward label by 3.4 px, and below the dot it hits Nantes's.
   - `check_macro_labels.py` scores PROBLEMS 0 on 96 cities.
-- **Landing**: page 120 and notice 72, both renumbered in landing order.
+- **Landing**: page 120 and notice 77, both renumbered in landing order.
   The branch is `france-build-3`, stacked on `france-build-2`, so Angers can
   land with group 2 or after it.
 
