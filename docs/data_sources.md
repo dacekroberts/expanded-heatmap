@@ -2174,6 +2174,20 @@ France's, on `france-build-2`).
 - **MUST NOT**: imply endorsement, or use the IDS JMK, KORDIS or DPMB logos.
 - **MUST DO**: nothing.
 
+**73. PMDP (Plzeň) — displayed on the stricter reading** (written into
+`render_site_notices()` on `czech-build`; displayed once Plzeň lands).
+
+- **PERMITTED** (read 2026-09-30): PMDP's GTFS record contradicts itself, CC BY
+  in the description against no-rights terms on the distribution, and either
+  permits use. **Used for gate 3 only** - the stop names each tram line serves
+  on an ordinary weekday; nothing from it is drawn.
+- **MUST DISPLAY (stricter reading)**: the brief's credit, "Plzeňské městské
+  dopravní podniky, a.s. (PMDP), GTFS published by the Statutory City of Plzeň
+  at opendata.plzen.eu, CC BY 4.0, modified by this project"; the sentence
+  around it is this session's, flagged for review time.
+- **MUST NOT**: the city's coat of arms or PMDP's logo; any implied endorsement.
+- **MUST DO**: nothing.
+
 **32 and 33 widened in the same change.** The ČSÚ and ČÚZK notices' text names
 no city, so their titles list each Czech city as it lands (owner, 2026-09-30),
 as Norway's and Denmark's do. Their text is unchanged.

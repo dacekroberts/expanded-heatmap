@@ -1015,6 +1015,19 @@ _NOTICES = [
      "computed around it. Not produced or endorsed by KORDIS JMK, DPMB or the City "
      "of Brno.",
      False),
+    # PMDP - Plzeň's gate 3 only (its per-line stop counts); nothing from it is
+    # drawn. Read 2026-09-30, PERMITTED; the record contradicts itself (CC BY in
+    # the description, no-rights terms on the distribution), so it is credited
+    # on the stricter CC BY reading. The credit sentence is the brief's (owner,
+    # 2026-09-30); the framing around it is flagged for review. Never the city's
+    # arms or PMDP's logo. Notice 73.
+    ("PMDP (Plzeň)",
+     "Plzeň's tram stops are checked against Plzeňské městské dopravní podniky, a.s. "
+     "(PMDP), GTFS published by the Statutory City of Plzeň at opendata.plzen.eu, "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), modified by this "
+     "project: only its stop counts per line are used, and nothing from it is drawn. "
+     "Not produced or endorsed by PMDP or the City of Plzeň.",
+     False),
     # Gemeente Amsterdam - hospitality permits. The register's own licence is
     # SILENT (`Licentie: -`; a retired 2022 catalogue said CC BY), so CC BY 4.0
     # is displayed on the owner's choice of 2026-09-24, which satisfies both

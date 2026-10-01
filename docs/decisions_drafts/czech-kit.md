@@ -4,6 +4,50 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Plzeň built: 53 stations; the "two missing stops" were a one-day diversion (supersedes the entry below on Plzeň's gate 3)
+
+- **Plzeň's two "missing" stops were not stops.** The entry below reported
+  that gate 3 against PMDP's feed found Jízdecká and U Synagogy missing
+  from OSM's relations, to be added. That was a counting error. Both are
+  served only by service 44, which has no weekday flags and runs on
+  2026-10-10 alone (`calendar_dates`): a one-day diversion. No trip calls at
+  both U Synagogy and Sady Pětatřicátníků, 58 m apart; a trip uses one or
+  the other. The 10% trip share had been counted over the whole six-month
+  feed, with no weighting for the days a trip runs.
+- **Gate 3 by service day.** These are the stop names each line serves on
+  Wednesday 2026-10-07, at the 10% rule.
+  - Line 2 has 23, and OSM 23.
+  - Line 1 has 20, OSM 19; the extra is the Vozovna Slovany depot stop.
+  - Line 4 has 29, OSM 19. Every extra is a station already in the set,
+    reached by a depot-bound variant over line 1's track, except the depot.
+  - **So the station SET matches PMDP's but for the depot**, which is left
+    out as Brno's Vozovna Medlánky is. The same pattern held on 2026-10-14
+    and 11-11.
+  - The counts sit in the config with that reason; gate 3 prints the two
+    per-line mismatches, as Prague's did.
+- **Not added:** the `STATION_ADD` entries were removed before any map was
+  rendered with them. The tram kit's tuple-of-refs extension (97ba25a, taken
+  whole onto `czech-build`) stays, harmless and useful. The shared tram query
+  (`czechia_fetch.osm_trams`) now also fetches every tagged tram stop in the
+  box, which a future add needs; steps read relation members only, so no
+  station moves.
+- **Built:** 53 stations, all inside, at a 306 m median gap. 2,508 of 3,508
+  storefronts (71%) sit in a ring, and the restaurant ratio is 2.0 (1.99, so
+  no OpenStreetMap-gaps sentence).
+  - **Checks:** `check_map_view.js` at 1280 and 375 px, and the attribution
+    check at 1000x650 and 1280x900, all pass with no corrections.
+  - **Privacy verdict:** publish. No contact details, no person-like name at
+    a residential unit, and 6.2% heuristic flags, all company names.
+- **PMDP is credited as notice 73**, on the stricter CC BY reading, since its
+  counts were used.
+  - **The credit** is the brief's (owner-approved).
+  - **The framing around it is this session's and is flagged for review:**
+    "Plzeň's tram stops are checked against …: only its stop counts per line
+    are used, and nothing from it is drawn. Not produced or endorsed by PMDP
+    or the City of Plzeň."
+- **The lesson is in the skill**: count a feed by service day, never over the
+  whole file.
+
 ### 2026-09-30 - Olomouc, Ostrava, Liberec (Regional) and Most (Regional) built on osm_tram.py; Plzeň's gate 3 finds two stops OSM's relations lack
 
 - **The four built on the tram kit's `pipeline/osm_tram.py`**, taken

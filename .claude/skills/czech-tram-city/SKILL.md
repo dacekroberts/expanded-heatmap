@@ -280,11 +280,15 @@ draws, so the drawn lines are exactly the kept ones. What the five taught:
   (Ostrava's Sport Aréna 321 m, Mariánské náměstí 223 m). Raise that city's
   `COLLAPSE_MAX_SPREAD_M` on the measurement (Ostrava 330), inside Riga's 300
   and Osaka's 400, and record the next widest name.
-- **OSM's relations can be stale.** Plzeň's gate 3 against PMDP's feed found
-  two centre stops (Jízdecká, U Synagogy) tagged as tram stops but on no
-  relation, so they go in by `STATION_ADD` node id. Where no feed can be
-  read (Olomouc, Ostrava, Liberec, Most), gate 3 is an open gap in the
-  config, never a silent pass.
+- ⚠️ **Count a feed by SERVICE DAY, never over the whole file.** Plzeň's gate 3
+  first counted PMDP's trips across its six-month calendar and "found" two
+  centre stops OSM lacks, Jízdecká and U Synagogy. Both run on **one day
+  only** (service 44: no weekday flags, 2026-10-10 by `calendar_dates`), a
+  diversion. On an ordinary Wednesday at the 10% rule, line 2 matches OSM
+  exactly, and lines 1 and 4 differ only by the depot. A `STATION_ADD` taken
+  from a whole-feed count would have drawn rings round a one-day diversion.
+  Where no feed can be read (Olomouc, Ostrava, Liberec, Most), gate 3 is an
+  open gap in the config, never a silent pass.
 
 **Line colours: OSM tags none** in the five cities, and no operator's colours
 are licensed. Use the project's own palette (Riga's precedent, and Le Havre's

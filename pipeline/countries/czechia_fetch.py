@@ -159,11 +159,16 @@ def osm_boundaries(cfg):
 
 
 def osm_trams(cfg):
-    """Every route=tram relation in the box, with way geometry, and its nodes."""
+    """Every route=tram relation in the box, with way geometry, and its nodes -
+    plus every tagged tram stop in the box, which a STATION_ADD needs: such a
+    stop is on no relation (Plzeň's Jízdecká and U Synagogy, 2026-09-30), so
+    node(r) alone never fetches it. Steps read relation members only, so the
+    extra nodes move no one's stations."""
     s, w, n, e = cfg.OSM_TRAM_BBOX
     q = ("[out:json][timeout:120];"
          f'relation["type"="route"]["route"="tram"]({s},{w},{n},{e});'
-         "out geom;node(r);out body;")
+         "out geom;"
+         f'(node(r);node["railway"="tram_stop"]({s},{w},{n},{e}););out body;')
     return overpass(q, cfg.OSM_TRAM_JSON, "osm_tram")
 
 

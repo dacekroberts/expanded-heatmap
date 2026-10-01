@@ -111,8 +111,18 @@ LINE_COLOURS = {"1": "#C02008", "2": "#00A800", "4": "#6040E8"}
 # WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1. Measured
 # 2026-09-30: 53 stations, all inside obec 554791 (the brief's 19 / 23 / 19).
 EXPECTED_INSIDE_PER_LINE = {"1": 19, "2": 23, "4": 19}
-OPERATOR_STATION_COUNTS = {}
-OPERATOR_COUNTS_SOURCE = ""
+# GATE 3, from PMDP's GTFS (the approved cross-check): the stop names each line
+# serves on an ordinary Wednesday (2026-10-07), at Brno's 10%-of-trips rule.
+# Line 2 agrees exactly. Line 1's one extra is the Vozovna Slovany depot stop;
+# line 4's ten extras are a depot-bound variant over line 1's track, every stop
+# of it already a station here but the depot, which is left out as Brno's
+# Vozovna Medlánky is. So the station SET matches PMDP's but for the depot.
+# Jízdecká and U Synagogy, which a whole-feed count added, run on ONE day only
+# (service 44, no weekday flags, 2026-10-10 by calendar_dates): a diversion,
+# not stops, so they are not added.
+OPERATOR_STATION_COUNTS = {"Tram 1": 20, "Tram 2": 23, "Tram 4": 29}
+OPERATOR_COUNTS_SOURCE = ("PMDP GTFS, stop names per line on Wed 2026-10-07 at >= 10% of "
+                          "trips; 1 and 4 differ by the depot and line 4's depot variant")
 
 # --- Business filtering ------------------------------------------------
 
