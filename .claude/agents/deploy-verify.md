@@ -312,3 +312,8 @@ merely updated.
   wrong and let the caller decide.
 - If cleanup fails for a reason you can't quickly resolve, say so rather
   than proceeding on uncertain state.
+- **Declare a sweep's REAL peak to the memory gate** (`scripts/heavy_job.py`).
+  A headless browser is several hundred MB, and a sweep that drives several at
+  once adds them up: the map-refresh check of 2026-10-01 declared 3 GB and
+  measured 7.43 GB with three Edge instances. Count each browser instance, or
+  run one at a time.
