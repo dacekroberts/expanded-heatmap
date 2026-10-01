@@ -63,7 +63,7 @@ st.markdown(
 
 **The businesses**
 
-- **This map shows food businesses only**, in two business categories (Retail and Food service).
+- **This map shows food businesses only.**
 - Hiroshima City publishes no complete list of barbers, beauty salons or laundries, only its new
   openings, so personal services are not on this map.
 - Japan has no general business licence, so shops other than food shops (clothing, electronics,
@@ -92,7 +92,7 @@ st.markdown(
 """
 )
 
-render_map_help()
+render_map_help("two business categories (Retail and Food service)")
 render_country_links('Hiroshima')
 
 # The notices that publishing requires, on EVERY page rather than one -

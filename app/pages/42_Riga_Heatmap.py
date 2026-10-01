@@ -94,7 +94,7 @@ st.markdown(
 """
 )
 
-render_map_help()
+render_map_help("two business categories (Shops and services, and Food service)")
 render_country_links('Riga')
 
 # The notices that publishing requires, on EVERY page rather than one -
