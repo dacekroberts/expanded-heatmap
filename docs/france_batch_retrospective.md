@@ -6,7 +6,9 @@ pure-extract station tables. Then the builds, on `france-build` (group 1,
 11 cities), `france-build-2` (group 2, 9) and `france-build-3` (Angers, built
 mark-free). This file answers one question: **did quantity cause mistakes, or
 did the French pipeline carry the batch?** The detail behind each figure is
-in `docs/decisions_drafts/france-build.md`.
+in `docs/decisions_drafts/france-build.md`, which is on the build branches
+until the cities land. It was written before landing; the landing itself is
+not covered here.
 
 ## The short answer
 
