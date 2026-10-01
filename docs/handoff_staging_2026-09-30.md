@@ -111,6 +111,93 @@ should live and whether it is published as an artifact (it reads as a report
 for others, so an artifact is likely). Cite each claim to its file or
 DECISIONS entry; never repeat counts the list itself holds without its date.
 
+### Parked until after review time (owner, 2026-09-30)
+
+The outline below was drafted in chat on 2026-09-30. The owner deferred
+the file until review time ends, so the history describes the list after
+the review batch lands (Cleanup's `review-rehearsal` moves it to 114 built,
+28 candidates). Still open with the owner: whether the outline needs
+changes; where the file lives (recommended:
+`docs/city_master_list_history.md`, with a pointer from
+`docs/project_context.md`); whether to publish it as an artifact
+(recommended: yes, with the numbers chart).
+
+**Outline, as drafted (sources in brackets):**
+1. Before the list, 09-18 to 09-21. The US screen went from 25 to 10 to 9.
+   Denver and San Jose taught live-verify. Dropping NAICS turned three of
+   the four largest cities from fail to pass ("the single
+   highest-leverage decision", US addendum). Canada went 13 to 6, with
+   rail removing 6, and built five in about seven hours.
+2. The global screen, 09-21: 87 countries, 2,476 static feeds. The filter
+   order was flipped to premises data first and rail last. Four qualifying
+   shapes; a company register is a category error
+   (`global_country_shortlist.md`).
+3. Tiers to bands, 09-22 and 09-23. The list's first state was 14 built,
+   48 candidates, 14 discards. Rules from that churn: "a letter is for a
+   heading", and a band closes when its condition stops being true. The
+   coordinates band closed by succeeding. Summary drift (20/33/30 against
+   22/29/32) led to `check_master_list_counts.py`.
+4. Evidence rules, 09-22 to 09-24: "not reached" is not a discard (11
+   rows); a country ruling needs two cities; the discard audit (12, then 5,
+   to the open gap); evidence columns and `check_discard_evidence.py`; the
+   gap emptied 09-24.
+5. Methods: the browser first (the 09-22 sweep); enumerate, don't search
+   (Stockholm, Zurich 938 of 1,128, Hong Kong 3,821, Berlin 2,626
+   packages, India 288,011 titles); a different host (seven cities);
+   nonsense-term controls; an address file before a geocoder (four for
+   four); IP-level refusals are the limit, which became Band R.
+6. Widening, 09-27 and 09-28: wave 1 (+43, 32 of them trams-only); wave 2;
+   the transit-gap re-screen (seven cities built 09-28). Candidates peaked
+   at 87.
+7. The scheme settles, 09-27 to 09-30: Band T and first-blocker-wins
+   (D→C→T, then D→T→C the same evening); N retooled as C; R split from D;
+   T moved to its own file; the light-rail test (ten cities left T);
+   trams approved 09-29; C closed 09-29; T2 closed 09-30.
+8. The filters, each with its triggering case: the reduced-bucket bar
+   (rule 1 amended for Yokohama); one currency rule (three clocks lasted
+   about 15 minutes); the light-rail test; the stub test (52% Toulouse,
+   42% accepted); about 70% placement; licence verdicts; personal
+   information.
+9. Reversals: Dallas, Berlin, Kansas City, Monterrey, Hiroshima, Yokohama
+   (17,408 to 7,896), Singapore, Paris, Amsterdam, the UK and Australia.
+10. What each first build taught the next: Mexico, Spain, France,
+    Brazil/Taiwan/Japan (joins), Czechia (a different agency), Band B
+    (template plus config; mistakes moved to framing).
+11. Numbers over time, end of day on master's first-parent history, as
+    built / candidates / discards:
+
+    | Date | Built | Candidates | Discards |
+    |---|---|---|---|
+    | 09-22 | 20 | 31 | 30 |
+    | 09-23 | 27 | 33 | 16 |
+    | 09-24 | 42 | 24 | 27 |
+    | 09-25 | 46 | 20 | 27 |
+    | 09-27 | 50 | 63 | 51 |
+    | 09-28 | 62 | 80 | 91 |
+    | 09-29 | 75 | 66 | 97 |
+    | 09-30 | 75 | 64 | 100 |
+
+    09-22 opened at 14 / 48 / 14. Add the post-review state.
+
+**Checks found while drafting:**
+- **Settled:** Zaragoza's 36% is the share of addresses with a house
+  number (61% are a bare street; `city_master_list.md`, its discard row).
+  It is not a measured placement rate.
+- **Open:** the discard audit's commits fall on the night of 09-23, but
+  the log dates it 09-24.
+- **Open:** when Berlin went back into the discards between 09-22 and
+  09-28 is not pinned down.
+- **Miscitations:**
+  - This handoff's Job 2 calls Tempe, Alicante and the rest "the
+    transit-gap list's not-reached rows". They are wave 2's.
+  - The master list credits "enumerate providers" to `add-country` §2. The
+    method is written up in the shortlist's "Tier 5 closed by browser
+    navigation".
+- **Stale, for Cleanup:**
+  - The master list still gives Yokohama 17,408 premises.
+  - `add-country`'s station-density table still has Canada's
+    pre-correction figures.
+
 ## Job 2 - probes and re-probes worth running (after Job 1)
 
 **Bring a ranked probe list to the owner first** (recommendation and
@@ -141,6 +228,74 @@ Candidates already on record:
 - **Not staging's**: the regional add-ons to built cities (Rio + Duque de
   Caxias, Belo Horizonte + Contagem, Vancouver (Regional), Los Angeles + Long
   Beach, D.C. + Arlington) are builds for main, in PLAN.
+
+### Ranked list, brought to the owner 2026-09-30; held until after review
+
+The owner likes the scope. Order: Job 1 after the review, then this list.
+Nothing here is approved yet; bring it back for approval then.
+
+Several groups below were **never screened**: they are absent from every list
+file and from the decision log (grep, 2026-09-30).
+
+1. **UK tram and light-rail cities on the FSA register** (Manchester
+   Metrolink, Birmingham's West Midlands Metro, Sheffield Supertram,
+   Nottingham NET, Edinburgh Trams on FSS as Glasgow).
+   - Why: the UK's ruling was overturned 09-28; London, Glasgow and
+     Newcastle are built food-only on the same keyless register under a
+     licence already read; trams were approved 09-29.
+   - Cost: the cheapest new cities available. London's step 2 with an
+     authority filter; per city, one Overpass query, the light-rail test or
+     the trams rule, and a placement measure.
+   - Tradeoff: food-only pages. Metrolink is largely converted railway, so
+     the frequency gate applies.
+   - Recommended: yes, first.
+2. **The "too thin" discards against rule 4** (Aubagne, Trondheim, Detroit,
+   Milwaukee, Tampa).
+   - Why: they were discarded 09-27/28 as "too thin, reversible". The next
+     day, the reduced-bucket bar's rule 4 said size and in-ring share are
+     "disclosed on the page, never a gate".
+   - Cost: Aubagne and Trondheim are already measured. Detroit, Milwaukee
+     and Tampa need the 09-29 checks: currency, and placement (Tampa is
+     unplaced). Detroit also needs its People Mover read on Kobe's Port
+     Liner precedent.
+   - The principle is the owner's call first.
+3. **Japan's tram cities and remaining designated cities** (Kumamoto,
+   Okayama, Kagoshima, Nagasaki, Hakodate, Matsuyama, Toyama, Kōchi,
+   Toyohashi, Fukui, Utsunomiya LRT, Sakai, Kitakyushu).
+   - Why: the Japan screen covered only the ten subway cities.
+   - The question per city: does the city or prefecture publish its
+     food-permit lists as a file, under reusable terms?
+   - Cost: medium. 13 publishers, CJK, and Sendai's terms trap.
+   - Recommended: yes, one batch after the UK, terms read first.
+4. **Countries out on "no urban rail" from the feed catalogue**.
+   - Why: `global_country_shortlist.md` says to revisit them "only if the
+     project ever takes tram-only cities".
+   - Candidates: Luxembourg, Sarajevo, Belgrade; Tbilisi (a metro, so a
+     misfiling); and rail the catalogue never carried: Casablanca, Rabat,
+     Tunis, Santo Domingo, Lagos, Addis Ababa. Zagreb is excluded: it was
+     measured negative on data.
+   - Method: the business side first, stopping at the first negative.
+   - Prior: low; Luxembourg is the likeliest.
+5. **Seattle, the City of Seattle alone**.
+   - Why: deferred by the owner 09-21 with a multi-municipality scope.
+     Single-municipality scopes have passed since (Melbourne, Sydney,
+     Toulouse).
+   - The probe: one Overpass query for the stub test.
+   - It reopens the owner's own scope call.
+6. **The nine portals that refuse scripts, tried in the in-app browser
+   first** (Burnaby, Arlington, Tempe, Zaragoza, Brescia, Catania,
+   Cagliari, Alicante, Alcobendas).
+   - A plain page load is no bypass. Whatever refuses it goes to the owner,
+     and any download needs the owner's OK.
+   - Utrecht refused a real browser too.
+7. **Dated watch items now due**.
+   - Salvador's VLT: a line on a built map.
+   - Teresina's all-day 15-minute service: rail is its only blocker.
+   - Jaén has no register, so skip it.
+8. **Deferred: pattern-deprioritised** (Dresden, Leipzig, Kraków, Wrocław,
+   Graz, Adelaide, the Gold Coast, Canberra).
+9. **Deferred: Band R re-checks**. Every block was measured within the last
+   week.
 
 ## Open with the owner (carried over)
 
