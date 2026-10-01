@@ -905,12 +905,6 @@ every key, account and letter:
 
 ## Later / maybe
 
-- [ ] **`check_provenance.py` misses bolded notice citations** (review lane
-  4, 2026-09-30): `notice **69 (Palma)**` escaped `CITATION_RE`, so three stale
-  numbers reached the About page and were fixed by hand. Allowing `\**` before
-  the number (tried 2026-09-30) finds them but fails 14 table rows whose
-  neighbouring cell names a different source: the subject test needs to read
-  a table row's own cells before the pattern can widen.
 - [ ] Ridership (out of scope; revisit only if asked).
 - [ ] Adopt `safe-rename` (or fold its checklist into `add-city`) once a
   README, deployment or devcontainer exists to keep in sync.

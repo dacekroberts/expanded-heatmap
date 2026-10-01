@@ -182,7 +182,10 @@ CITATION_SKIP_PATHS = {
 #   - "item N" where the surrounding text also says "notice" or names
 #     data_sources.md, which is how a cross-file citation of that list reads.
 # Anything else is left alone rather than guessed at.
-CITATION_RE = re.compile(r"\b(?:item|notice)s?\s+(\d{1,2})\b", re.I)
+# The number may be bold or quoted: a bold notice number followed by the wrong
+# city escaped the first form, and three stale numbers reached the About page
+# (review lane 4, 2026-09-30).
+CITATION_RE = re.compile(r"\b(?:item|notice)s?\s+[*\"“]*(\d{1,2})\b", re.I)
 NOTICE_WORD_RE = re.compile(r"notice|data_sources", re.I)
 
 # A DOCUMENT THAT DECLARES ITSELF SUPERSEDED IS A TRAIL, NOT A CLAIM, and its
@@ -849,11 +852,36 @@ def notice_subjects(doc):
     return out
 
 
+def notice_places(doc):
+    """{number: place} - the parenthetical a notice's heading ends with, the
+    city or region it is for: "(Palma)", "(Taipei (Regional))". Compared
+    without "(Regional)" and case, by norm_place()."""
+    out = {}
+    for n, heading in notice_headings(doc):
+        h = heading.strip().strip("*")
+        i = h.find(" (")
+        if i >= 0 and h.endswith(")"):
+            out[n] = norm_place(h[i + 2:-1])
+    return out
+
+
+def norm_place(text):
+    return re.sub(r"[()*]", "", re.sub(r"\(regional\)", "", text.lower())).strip()
+
+
+# "notice **74 (Palma)**": the place written right after the number.
+CITED_PLACE_RE = re.compile(r"\**\s*\(([^()]+(?:\([^()]*\))?)\)")
+
+
 def check_citations(doc):
     """F: does each `item N` still point at the notice it meant?"""
     subjects = notice_subjects(doc)
     if not subjects:
         return [], []
+    places = notice_places(doc)
+    by_place = {}
+    for k, pl in places.items():
+        by_place.setdefault(pl, set()).add(k)
     hard, soft = [], []
     superseded = []
     for g in CITATION_GLOBS:
@@ -872,7 +900,18 @@ def check_citations(doc):
                 n = int(m.group(1))
                 cited = m.group(0).lower()
                 lo = max(0, m.start() - 400)
-                window = text[lo:m.end() + 400] + " " + p.stem.replace("_", " ")
+                line_start = text.rfind(chr(10), 0, m.start()) + 1
+                line_end = text.find(chr(10), m.end())
+                line = text[line_start:line_end if line_end >= 0 else len(text)]
+                if line.lstrip().startswith("|"):
+                    # A TABLE ROW IS ITS OWN NEIGHBOURHOOD. Its source is named
+                    # in its own cells, often more than 400 characters before
+                    # the citation, while the rows above and below name other
+                    # sources: 14 rows read as citing the wrong notice when the
+                    # bold form was first allowed (2026-10-01).
+                    window = line + " " + p.stem.replace("_", " ")
+                else:
+                    window = text[lo:m.end() + 400] + " " + p.stem.replace("_", " ")
                 # Disambiguate the namespace before judging the number.
                 if not cited.startswith("notice"):
                     # Three other namespaces say "item N" within a sentence
@@ -893,12 +932,34 @@ def check_citations(doc):
                     hard.append(f"{rel}: cites item {n}, but the notices list "
                                 f"stops at {max(subjects)}")
                     continue
+                # "notice N (Place)" names its notice outright, so judge the
+                # place, not the neighbourhood - the stale form the About page
+                # showed ("notice **69 (Palma)**", review lane 4, 2026-09-30).
+                # Only a place that IS some notice's place is judged.
+                pm = CITED_PLACE_RE.match(text, m.end())
+                if pm:
+                    cited_place = norm_place(pm.group(1))
+                    if cited_place == places.get(n):
+                        continue
+                    if cited_place in by_place:
+                        hard.append(
+                            f"{rel}: cites notice {n} ({pm.group(1)}), but notice "
+                            f"{n} is {subjects[n]}'s"
+                            + (f" ({places[n]})" if n in places else "")
+                            + f"; {pm.group(1)} is notice "
+                            + ", ".join(str(k) for k in sorted(by_place[cited_place])))
+                        continue
                 wl = window.lower()
                 here = subjects[n].lower()
                 if here in wl:
                     continue                      # cites its own subject: fine
+                # A row that cites two notices (a feed's and OSM's) names
+                # both subjects: each is accounted for by its own citation.
+                cited_here = ({int(c.group(1)) for c in CITATION_RE.finditer(line)}
+                              if line.lstrip().startswith("|") else set())
                 others = sorted({s for k, s in subjects.items()
-                                 if k != n and s.lower() in wl and len(s) > 4})
+                                 if k != n and k not in cited_here
+                                 and s.lower() in wl and len(s) > 4})
                 if others:
                     hard.append(
                         f"{rel}: cites item {n} ({subjects[n]}), but the text "
