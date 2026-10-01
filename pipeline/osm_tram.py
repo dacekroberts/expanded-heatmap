@@ -27,10 +27,13 @@ THE CONTRACT
   step and is named (Daugavpils's Stropu ciemats is on the routes untagged).
 * **`station_add` by node id** for a tagged stop on no route relation
   (Odense's SDU Syd/Hospital Nord), or a stop a relation lists only as a
-  named platform (Liepāja's Rožu laukums). Each names its line and its
-  expected name; the step stops if OSM renamed it, untagged it, or has since
-  put a stop of that name on a route, so a stale add cannot outlive the gap
-  it filled.
+  named platform (Liepāja's Rožu laukums). Each names its line - or a tuple
+  of lines (Plzeň's Jízdecká, 1/2/4) - and its expected name; the step stops
+  if OSM renamed it, untagged it, or has since put a stop of that name on a
+  route, so a stale add cannot outlive the gap it filled.
+* **`accept_members` by node id** for a stop member of a kept relation that
+  carries a name but no stop tag (Daugavpils's Stropu ciemats), with the
+  same staleness checks.
 * **Name collapse at the mean, within `max_spread_m`** (Aarhus's): one
   station per name, its lines joined in the city's order.
 * **Scope over a union of polygons** (`split_by_places`): stations outside
@@ -123,19 +126,26 @@ def select_relations(elements, *, routes, refs, operator=None, not_drawn=None,
 
 
 def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
-              station_add=None, name_aliases=None, verbose=True):
+              station_add=None, name_aliases=None, accept_members=None, verbose=True):
     """One row per (line, stop node): line, node, stop_name, latitude,
     longitude, source ("route" or "added").
 
-    station_add: {node id: (line ref, expected name)} for a tagged stop on no
-      kept relation.
+    station_add: {node id: (line ref or tuple of refs, expected name)} for a
+      stop on no kept relation. A tuple adds one row per ref, for a stop
+      several lines serve (Plzeň's Jízdecká, lines 1, 2 and 4).
     name_aliases: {spelling: canonical} for one stop spelled two ways; both
       spellings must be present, or the alias is stale.
+    accept_members: {node id: expected name} for a STOP MEMBER of a kept
+      relation that carries a name but no stop tag (Daugavpils's Stropu
+      ciemats, tagged only as a bus-stop platform). Each was looked at; the
+      step stops if the node is retagged as a stop (remove the entry), renamed,
+      or no longer a stop member.
     """
     kept = select_relations(elements, routes=routes, refs=refs, operator=operator,
                             not_drawn=not_drawn, verbose=verbose)
     nodes = {e["id"]: e for e in elements if e["type"] == "node"}
-    rows = []
+    accept = dict(accept_members or {})
+    rows, accepted = [], set()
     for ref, rs in kept.items():
         for r in rs:
             for m in r["members"]:
@@ -143,14 +153,26 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
                     continue
                 n = nodes.get(m["ref"])
                 nt = (n or {}).get("tags", {})
-                if not n or not _is_stop(nt) or not nt.get("name"):
+                if n and m["ref"] in accept:
+                    if _is_stop(nt):
+                        sys.exit(f"accepted member {m['ref']} ({accept[m['ref']]}) is now "
+                                 f"tagged as a stop - remove it from accept_members")
+                    if nt.get("name") != accept[m["ref"]]:
+                        sys.exit(f"accepted member {m['ref']}: OSM now names it "
+                                 f"{nt.get('name')!r}, not {accept[m['ref']]!r} - re-read it")
+                    accepted.add(m["ref"])
+                elif not n or not _is_stop(nt) or not nt.get("name"):
                     sys.exit(f"{ref} relation {r['id']}: stop member node {m['ref']} "
-                             f"({nt.get('name', 'no name')!r}) is not a named "
+                             f"({nt.get('name', 'no name')!r}, tags {nt}) is not a named "
                              f"stop_position or tram_stop - fix the reading, or "
-                             f"name the stop in config")
+                             f"name it in accept_members")
                 rows.append({"line": ref, "node": n["id"], "stop_name": nt["name"],
                              "latitude": n["lat"], "longitude": n["lon"],
                              "source": "route"})
+    stale = sorted(set(accept) - accepted)
+    if stale:
+        sys.exit(f"accept_members names node(s) no longer a stop member of a kept "
+                 f"relation: {stale} - re-read OSM")
     q = pd.DataFrame(rows).drop_duplicates(["line", "node"])
 
     on_routes, route_names = set(q["node"]), set(q["stop_name"])
@@ -172,13 +194,16 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
         if node_id in on_routes or name in route_names:
             sys.exit(f"STATION_ADD node {node_id} ({name}) is now on a route "
                      f"relation as a stop - OSM filled the gap; remove the add")
-        if ref not in kept:
-            sys.exit(f"STATION_ADD node {node_id} names line {ref!r}, not a kept ref")
+        lines = (ref,) if isinstance(ref, str) else tuple(ref)
+        unknown = [x for x in lines if x not in kept]
+        if not lines or unknown:
+            sys.exit(f"STATION_ADD node {node_id} names line(s) {unknown or lines!r}, "
+                     f"not kept refs")
         q = pd.concat([q, pd.DataFrame([{
-            "line": ref, "node": node_id, "stop_name": name, "latitude": n["lat"],
-            "longitude": n["lon"], "source": "added"}])], ignore_index=True)
+            "line": x, "node": node_id, "stop_name": name, "latitude": n["lat"],
+            "longitude": n["lon"], "source": "added"} for x in lines])], ignore_index=True)
         if verbose:
-            print(f"    ADD  node {node_id} {name!r} on {ref}")
+            print(f"    ADD  node {node_id} {name!r} on {'/'.join(lines)}")
 
     for old, new in (name_aliases or {}).items():
         if not (q["stop_name"] == old).any() or not (q["stop_name"] == new).any():
