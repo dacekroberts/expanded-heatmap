@@ -86,6 +86,25 @@ LINE_NAMES = {k: f"Tram {k}" for k in LINE_ORDER}
 # Every route=tram relation in the box is the operator's and is kept
 # (8 relations, 2026-09-30), so nothing is NOT_DRAWN.
 NOT_DRAWN = {}
+# THE REGULAR NETWORK, NOT TODAY'S (owner, 2026-09-30): from 2026-06-20 to at
+# least 2026-12-12 lines 2 and 3 end at Fügnerova, and Šaldovo náměstí is
+# closed for the works (IDOS). OSM keeps the track and the stop only as two
+# platform nodes, on no relation; both are added for lines 2 and 3, as IDOS
+# has them on 2026-06-15.
+STATION_ADD = {
+    612457988: (("2", "3"), "Šaldovo náměstí"),
+    4825357131: (("2", "3"), "Šaldovo náměstí"),
+}
+# Line 11 calls at Fügnerova and Sídliště Nové Vratislavice on every trip, in
+# regular service and today (IDOS, 2026-06-15 and 2026-10-01); its two OSM
+# relations pass both without listing them, and line 5 lists them. Each stop
+# position is added to line 11 (czechia_osm_tram.add_line_stops).
+LINE_STOP_ADD = {
+    4538307888: ("11", "Fügnerova"),
+    4538308197: ("11", "Fügnerova"),
+    649882240: ("11", "Sídliště Nové Vratislavice"),
+    5793026873: ("11", "Sídliště Nové Vratislavice"),
+}
 # TARGET hues for scripts/line_colour_search.py: evenly spaced round the
 # wheel in line order, HSL (h, 70%, 45%) - no operator colours are licensed
 # (owner, 2026-09-30). The search picks the feasible colour nearest each.
@@ -98,11 +117,15 @@ LINE_COLOURS = {"2": "#C02008", "3": "#50A800", "5": "#00A0B8", "11": "#8830D0"}
 # 2026-09-30: 39 stations, all inside the two obce - 33 in Liberec and 6 in
 # Jablonec nad Nisou (the brief's screen read 32 + 7: one stop lies on the
 # other side of the line than its stop-name count assumed). Every line whole.
-EXPECTED_INSIDE_PER_LINE = {"2": 16, "3": 20, "5": 13, "11": 21}
-# GATE 3 IS NOT RUN: DPMLJ's own feed reset the connection at the screen, and
-# no other count was read. An open gap, recorded.
-OPERATOR_STATION_COUNTS = {}
-OPERATOR_COUNTS_SOURCE = ""
+# 2026-09-30, after gate 3: 40 stations - Šaldovo náměstí added on 2 and 3,
+# and line 11's two missing calls.
+EXPECTED_INSIDE_PER_LINE = {"2": 17, "3": 21, "5": 13, "11": 23}
+# GATE 3, from IDOS's per-stop timetables (DPMLJ's own site and feed refuse
+# us): both directions of each line on Monday 2026-06-15, regular service,
+# five days before the works; a stop counts when either direction calls.
+OPERATOR_STATION_COUNTS = {"Tram 2": 17, "Tram 3": 21, "Tram 5": 13, "Tram 11": 23}
+OPERATOR_COUNTS_SOURCE = ("IDOS zastávkové jízdní řády, idos.cz/liberec/zjr, "
+                          "2026-06-15, both directions (read 2026-09-30)")
 
 # --- Business filtering ------------------------------------------------
 

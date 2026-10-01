@@ -55,7 +55,7 @@
       "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_567027_ADR.csv.zip",
       "bytes": 144234,
       "sha256": "cbb11cc9f063c031908540196aa95403341d641f60f75d74b6c6934ead9f2cc0",
-      "retrieved": "2026-09-30T23:46:18+00:00",
+      "retrieved": "2026-10-01T01:57:13+00:00",
       "edition": "20260831_OB_567027_ADR.csv.zip"
     },
     "567256": {
@@ -63,11 +63,11 @@
       "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_567256_ADR.csv.zip",
       "bytes": 90014,
       "sha256": "43175fcd2641a36245d7e53bd3f2eec83158aabd75b411cd6743b1b1e37b3e3e",
-      "retrieved": "2026-09-30T23:46:19+00:00",
+      "retrieved": "2026-10-01T01:57:15+00:00",
       "edition": "20260831_OB_567256_ADR.csv.zip"
     }
   },
-  "osm_boundary_host": "overpass.kumi.systems",
+  "osm_boundary_host": "overpass-api.de",
   "osm_tram_host": "overpass-api.de",
-  "osm_fetched": "2026-09-30T23:50:05+00:00"
+  "osm_fetched": "2026-10-01T01:58:15+00:00"
 }

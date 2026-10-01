@@ -1,6 +1,7 @@
 """Step 3 - Render Ostrava's heatmap to a standalone HTML file.
 
-All rendering lives in pipeline/map_common.py; `czechia_osm_tram.step3` draws
+All rendering is pipeline/map_common.py's `render_heatmap()`, which
+`czechia_osm_tram.step3` calls - never forked; it draws
 the lines step 1 kept (data/ostrava/processed/lines.geojson) in the project's
 own colours (config.LINE_COLOURS, from scripts/line_colour_search.py).
 

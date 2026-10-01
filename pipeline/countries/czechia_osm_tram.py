@@ -10,7 +10,8 @@ downloads.
 STEP 1, in order:
   1. the operator's route=tram relations, every one KEPT (by ref) or named in
      the config's NOT_DRAWN with a reason - osm_tram exits otherwise;
-  2. their stop members, collapsed by name at the mean within
+  2. their stop members, plus the config's STATION_ADD and LINE_STOP_ADD (a
+     stop a line's timetable calls at that its relations skip), collapsed by name at the mean within
      COLLAPSE_MAX_SPREAD_M (Aarhus's rule, the OSM rule: France's never-a-mean
      rule came from the French portal's conditions);
   3. the station gates (pipeline/stations.py) at the tram floor SPACING_MIN_M,
@@ -64,6 +65,61 @@ def write_lines(kept, path):
                                ensure_ascii=False), encoding="utf-8")
 
 
+LINE_STOP_MAX_M = 25
+
+
+def add_line_stops(q, elements, cfg):
+    """LINE_STOP_ADD: {node id: (line ref or tuple of refs, expected name)} for a
+    stop the operator's timetable has a line call at, which that line's OSM
+    relations pass without listing, while another kept line lists it - Liberec's
+    line 11 at Fügnerova and Sídliště Nové Vratislavice (IDOS, 2026-09-30).
+    osm_tram's station_add refuses a name already on a route, so this is its
+    per-line counterpart. Stops the step when the node is gone, renamed or
+    untagged, when the name is on no kept route (use STATION_ADD), when the line
+    now lists it (OSM filled the gap; remove the add), and when the node lies
+    more than LINE_STOP_MAX_M from that line's own track."""
+    adds = getattr(cfg, "LINE_STOP_ADD", None) or {}
+    if not adds:
+        return q
+    from shapely.geometry import LineString, Point
+    from shapely.ops import unary_union
+
+    nodes = {e["id"]: e for e in elements if e["type"] == "node"}
+    kept = osm_tram.select_relations(elements, routes=ROUTES, refs=cfg.LINE_ORDER,
+                                     operator=cfg.OSM_TRAM_OPERATOR,
+                                     not_drawn=cfg.NOT_DRAWN, verbose=False)
+    rows = []
+    for node_id, (ref, name) in adds.items():
+        n = nodes.get(node_id)
+        nt = (n or {}).get("tags", {})
+        if not n or not osm_tram._is_stop(nt) or nt.get("name") != name:
+            sys.exit(f"LINE_STOP_ADD node {node_id}: OSM now has {nt.get('name')!r} "
+                     f"(tags {nt}), not a stop named {name!r} - re-read it")
+        if not (q["stop_name"] == name).any():
+            sys.exit(f"LINE_STOP_ADD node {node_id} ({name}) is on no kept route - "
+                     f"a stop no line lists is a STATION_ADD")
+        for x in ((ref,) if isinstance(ref, str) else tuple(ref)):
+            if x not in kept:
+                sys.exit(f"LINE_STOP_ADD node {node_id} names line {x!r}, not a kept ref")
+            if ((q["line"] == x) & (q["stop_name"] == name)).any():
+                sys.exit(f"LINE_STOP_ADD node {node_id} ({name}): line {x} now lists it - "
+                         f"OSM filled the gap; remove the add")
+            track = gpd.GeoSeries([unary_union([
+                LineString([(p["lon"], p["lat"]) for p in m["geometry"]])
+                for r in kept[x] for m in _track(r)])], crs=cfg.CRS_GEOGRAPHIC
+            ).to_crs(cfg.CRS_PROJECTED).iloc[0]
+            pt = gpd.GeoSeries([Point(n["lon"], n["lat"])], crs=cfg.CRS_GEOGRAPHIC
+                               ).to_crs(cfg.CRS_PROJECTED).iloc[0]
+            gap = track.distance(pt)
+            if gap > LINE_STOP_MAX_M:
+                sys.exit(f"LINE_STOP_ADD node {node_id} ({name}) lies {gap:.0f} m from "
+                         f"line {x}'s track - not a stop that line passes")
+            rows.append({"line": x, "node": node_id, "stop_name": name,
+                         "latitude": n["lat"], "longitude": n["lon"], "source": "added"})
+            print(f"    LINE ADD node {node_id} {name!r} on {x} ({gap:.0f} m from its track)")
+    return pd.concat([q, pd.DataFrame(rows)], ignore_index=True)
+
+
 def _not_drawn_stops(elements, cfg, kept_names, scope):
     """Stops reached only by a NOT_DRAWN relation and lying BEYOND the map's
     obce, listed as outside (what app/station_scope.py reads them as).
@@ -105,6 +161,7 @@ def step1(cfg):
                            operator=cfg.OSM_TRAM_OPERATOR, not_drawn=cfg.NOT_DRAWN,
                            station_add=getattr(cfg, "STATION_ADD", None),
                            name_aliases=getattr(cfg, "STATION_NAME_ALIASES", None))
+    q = add_line_stops(q, els, cfg)
     platforms, st = osm_tram.collapse(q, refs=cfg.LINE_ORDER, crs_projected=cfg.CRS_PROJECTED,
                                       max_spread_m=cfg.COLLAPSE_MAX_SPREAD_M)
 

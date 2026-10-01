@@ -88,6 +88,15 @@ LINE_NAMES = {k: f"Tram {k}" for k in LINE_ORDER}
 # Every route=tram relation in the box is the operator's and is kept
 # (8 relations, 2026-09-30), so nothing is NOT_DRAWN.
 NOT_DRAWN = {}
+# THE REGULAR NETWORK, NOT TODAY'S (owner, 2026-09-30): from 2026-03-01, with no
+# end date published, buses replace trams between Litvínov, Citadela and
+# Záluží, and "Litvínov, Vrchlického" (DPmML's "u dílen") is closed. OSM keeps
+# the track and both stop positions, on no relation; they are added for lines
+# 1, 3 and 4, as IDOS has them on 2026-02-16.
+STATION_ADD = {
+    639297139: (("1", "3", "4"), "Litvínov, Vrchlického"),
+    4079925900: (("1", "3", "4"), "Litvínov, Vrchlického"),
+}
 # TARGET hues for scripts/line_colour_search.py: evenly spaced round the
 # wheel in line order, HSL (h, 70%, 45%) - no operator colours are licensed
 # (owner, 2026-09-30). The search picks the feasible colour nearest each.
@@ -98,12 +107,15 @@ LINES = {"1": {"hue": "#C32222"}, "2": {"hue": "#73C322"}, "3": {"hue": "#22C3C3
 LINE_COLOURS = {"1": "#C02008", "2": "#50A800", "3": "#00A0B8", "4": "#8830D0"}
 # WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1. Measured
 # 2026-09-30: 27 stations, all inside the two obce - 15 in Most, 12 in Litvínov.
-# Every line whole (the reason the scope is joint).
-EXPECTED_INSIDE_PER_LINE = {"1": 24, "2": 11, "3": 18, "4": 21}
-# GATE 3 IS NOT RUN: DPmML publishes no feed this project has read. An open
-# gap, recorded.
-OPERATOR_STATION_COUNTS = {}
-OPERATOR_COUNTS_SOURCE = ""
+# Every line whole (the reason the scope is joint). 2026-09-30, after gate 3:
+# 28 stations - Litvínov, Vrchlického added on 1, 3 and 4.
+EXPECTED_INSIDE_PER_LINE = {"1": 25, "2": 11, "3": 19, "4": 22}
+# GATE 3, from IDOS's per-stop timetables, which dpmost.cz links as its own HTML
+# timetables: both directions of each line on Monday 2026-02-16, regular
+# service before the works; a stop counts when either direction calls.
+OPERATOR_STATION_COUNTS = {"Tram 1": 25, "Tram 2": 11, "Tram 3": 19, "Tram 4": 22}
+OPERATOR_COUNTS_SOURCE = ("IDOS zastávkové jízdní řády, idos.cz/most/zjr, "
+                          "2026-02-16, both directions (read 2026-09-30)")
 
 # --- Business filtering ------------------------------------------------
 

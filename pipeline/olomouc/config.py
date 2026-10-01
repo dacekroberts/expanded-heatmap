@@ -91,11 +91,15 @@ LINE_COLOURS = {"1": "#C02008", "2": "#A89000", "3": "#30A800", "4": "#68A008", 
 # WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1. Measured
 # 2026-09-30: 36 stations, all inside obec 500496 (the brief's figures).
 EXPECTED_INSIDE_PER_LINE = {"1": 11, "2": 14, "3": 16, "4": 20, "5": 10, "6": 14, "7": 14}
-# GATE 3 IS NOT RUN: DPMO's feed is not used at all (owner, 2026-09-30), and no
-# other count of DPMO's stops per line was read. An open gap, recorded - Plzeň's
-# gate 3 against PMDP found two centre stops OSM's relations lack.
-OPERATOR_STATION_COUNTS = {}
-OPERATOR_COUNTS_SOURCE = ""
+# GATE 3, from IDOS's per-stop timetables (DPMO's feed is not used at all,
+# owner 2026-09-30, and its own stop lists are PDFs only): both directions of
+# each line on Monday 2026-03-16, regular service; 2026-10-01 is identical. A
+# stop counts when either direction calls - line 4 calls at Fibichova and
+# Pavlovická toward Pavlovičky only.
+OPERATOR_STATION_COUNTS = {"Tram 1": 11, "Tram 2": 14, "Tram 3": 16, "Tram 4": 20,
+                           "Tram 5": 10, "Tram 6": 14, "Tram 7": 14}
+OPERATOR_COUNTS_SOURCE = ("IDOS zastávkové jízdní řády, idos.cz/olomouc/zjr, "
+                          "2026-03-16, both directions (read 2026-09-30)")
 
 # --- Business filtering ------------------------------------------------
 

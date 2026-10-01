@@ -29,7 +29,7 @@ render_city_nav("Liberec (Regional)")
 st.title("Liberec (Regional): commercial density around tram stops")
 
 # The Czech tram template, approved by the owner 2026-09-30. Figures from this
-# city's own build (2026-09-30): 4 lines; 39 stops at a 355 m median gap; 587 restaurants against OSM's 237 (2.48); 1,396 of 2,488 storefronts in a ring.
+# city's own build (2026-09-30): 4 lines; 40 stops at a 355 m median gap; 587 restaurants against OSM's 237 (2.48); 1,405 of 2,488 storefronts in a ring.
 st.markdown(
     """
 Four tram lines are drawn, **DPMLJ's trams 2, 3, 5 and 11**, each labelled on the map and in the

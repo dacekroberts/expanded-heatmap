@@ -117,10 +117,21 @@ LINE_COLOURS = {"1": "#C02008", "2": "#C06820", "3": "#A89000", "4": "#70A000", 
 EXPECTED_INSIDE_PER_LINE = {"1": 23, "2": 25, "3": 25, "4": 28, "6": 21, "7": 23,
                             "8": 28, "10": 14, "11": 22, "12": 25, "14": 18,
                             "15": 15, "17": 22, "18": 28}
-# GATE 3 IS NOT RUN: no Dopravní podnik Ostrava feed was reachable at the screen
-# and none was read since. An open gap, recorded.
-OPERATOR_STATION_COUNTS = {}
-OPERATOR_COUNTS_SOURCE = ""
+# GATE 3, PARTIAL (owner, 2026-09-30: re-check after the diversion). This map
+# is the REGULAR network (owner, 2026-09-30), but DPO runs a diversion
+# timetable from 2026-09-17 to about 2026-12-12 - line 6 not running, 13 and 19
+# instead - and IDOS's per-stop timetables only accept dates from 2026-09-21.
+# Six lines match the diversion timetable stop for stop (IDOS, 2026-10-01,
+# both directions) and are counted here. The other eight are open until IDOS
+# shows a regular date, about 2026-12-13: 1, 2 and 10 (Don Bosco, which IDOS
+# has on no line during the works), 7 (Svinov,mosty, which IDOS's 7 calls at
+# and OSM's 7 skips), and 6, 8, 12 and 14 (cut or rerouted by the works).
+OPERATOR_STATION_COUNTS = {"Tram 3": 25, "Tram 4": 28, "Tram 11": 22,
+                           "Tram 15": 15, "Tram 17": 22, "Tram 18": 28}
+OPERATOR_COUNTS_SOURCE = ("IDOS zastávkové jízdní řády, idos.cz/ostrava/zjr, "
+                          "2026-10-01, both directions, six lines the diversion "
+                          "leaves whole (read 2026-09-30); the other eight open "
+                          "until about 2026-12-13")
 
 # --- Business filtering ------------------------------------------------
 

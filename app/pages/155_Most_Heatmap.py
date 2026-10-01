@@ -29,7 +29,7 @@ render_city_nav("Most (Regional)")
 st.title("Most (Regional): commercial density around tram stops")
 
 # The Czech tram template, approved by the owner 2026-09-30. Figures from this
-# city's own build (2026-09-30): 4 lines; 27 stops at a 522 m median gap; 267 restaurants against OSM's 80 (3.34); 664 of 1,025 storefronts in a ring.
+# city's own build (2026-09-30): 4 lines; 28 stops at a 512 m median gap; 267 restaurants against OSM's 80 (3.34); 664 of 1,025 storefronts in a ring.
 st.markdown(
     """
 Four tram lines are drawn, **DPmML's trams 1 to 4**, each labelled on the map and in the
@@ -60,7 +60,7 @@ OpenStreetMap maps fewer restaurants here than in Prague, so the ratio says as m
 wholesaler's shop, are not shown, because no open source records what each
 establishment itself does.
 
-**Tram stops sit closer together than metro stations**, a median of 522 m here,
+**Tram stops sit closer together than metro stations**, a median of 512 m here,
 so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About 65% of
 storefronts sit within a ring.**
 
