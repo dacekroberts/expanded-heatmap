@@ -1399,6 +1399,7 @@ cannot reach the map.
 | Nantes (Regional) | 15.6% | 19.1% | none (regional scope) |
 | Grenoble (Regional) | 11.4% | 18.4% | none (regional scope) |
 | Valenciennes (Regional) | 9.2% | 16.0% | none (regional scope) |
+| Angers | 12.5% | 19.3% | 6 in Avrillé |
 
 ### Bergen - Oslo's register and rules
 

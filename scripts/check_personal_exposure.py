@@ -676,7 +676,7 @@ REGISTRIES.update({
     for slug in ("montpellier", "nice", "strasbourg", "bordeaux", "nantes",
                  "grenoble", "rouen", "saint_etienne", "dijon", "tours",
                  "le_havre", "mulhouse", "reims", "caen", "brest", "besancon",
-                 "orleans", "le_mans", "avignon", "valenciennes")
+                 "orleans", "le_mans", "avignon", "valenciennes", "angers")
 })
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.

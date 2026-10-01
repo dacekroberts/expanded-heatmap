@@ -278,6 +278,11 @@ TEXT_WIDTH = {
     "Montpellier": 77.3,
     "Bordeaux (Regional)": 137.9,
     "Grenoble (Regional)": 133.5,
+    # Angers: measured 2026-09-30 by the France build session, canvas
+    # measureText at 600 14px "Space Grotesk" after the Google Fonts faces
+    # loaded; Paris 32.9, Marseille 60.3, Lille (Regional) 99.7, Le Havre 57.2
+    # and Saint-Étienne 92.2 reproduced exactly.
+    "Angers": 47.2,
 }
 
 PILL_PAD_X = 5            # background_padding=[5, 2]

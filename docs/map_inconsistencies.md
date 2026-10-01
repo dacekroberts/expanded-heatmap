@@ -555,6 +555,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Nantes (Regional) | Tram 1, Tram 2, Tram 3 | — | Naolib GTFS | 6 communes served | 0 / 0 |
 | Grenoble (Regional) | Tram A, Tram B, Tram C, Tram D, Tram E | — | M réso GTFS | 12 communes served | 0 / 0 |
 | Valenciennes (Regional) | Tram T1, Tram T2 | — | Transvilles GTFS | 13 communes served | 0 / 0 |
+| Angers | Tram A, Tram B, Tram C | — | Angers Loire Métropole GTFS | Commune | 6 / 0 |
 | **Norway** | | | | | |
 | Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
 | Bergen | Bybanen 1 and 2 (light rail) | Ferries | Skyss via Entur GTFS | Kommune | 0 / 0 |
@@ -681,6 +682,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Nantes (Regional) | same | same | same | 1,916 / 1,576 / 654 | — |
 | Grenoble (Regional) | same | same | same | 1,913 / 1,868 / 753 | — |
 | Valenciennes (Regional) | same | same | same | 790 / 549 / 270 | — |
+| Angers | same | same | same | 843 / 715 / 349 | — |
 | **Norway** | | | | | |
 | Oslo | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 4,197 / 2,082 / 1,801 | — |
 | Bergen | National establishment register | Enhetsregisteret sub-units | SN2025 (NACE Rev. 2.1) | 1,204 / 484 / 418 | — |
@@ -804,6 +806,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Nantes (Regional) | same (99.98%) | Masking 19.1% | Same codes |
 | Grenoble (Regional) | same (99.93%) | Masking 18.4% | Same codes |
 | Valenciennes (Regional) | same (99.96%) | Masking 16.0% | Same codes |
+| Angers | same (99.96%) | Masking 19.3%; 6 stops out | Same codes |
 | **Norway** | | | |
 | Oslo | Address join to Matrikkelen (96.8%) | Web shops cannot be excluded | 8 no-premises codes, 96.990, bankrupt parents; sole-trader names withheld |
 | Bergen | Address join to Matrikkelen (96.2%) | Web shops cannot be excluded | Oslo's; 96.990 on Bergen's own numbers; sole-trader names withheld |
@@ -922,6 +925,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Nantes (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 63% | Sign/usual name (about 57%), else address |
 | Grenoble (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 78% | Sign/usual name (about 56%), else address |
 | Valenciennes (Regional) | SIRENE 01 septembre 2026 (2026-09-30) | B | 0.3 mi | Yes | 69% | Sign/usual name (about 51%), else address |
+| Angers | SIRENE 01 septembre 2026 (2026-10-01) | B | 0.3 mi | Yes | 75% | Sign/usual name (about 60%), else address |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
 | Bergen | Register downloaded 2026-09-23; transit 2026-09-27 | B | 0.6 mi | Yes | 59% | Name; address for sole traders |

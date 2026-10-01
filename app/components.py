@@ -910,6 +910,21 @@ _NOTICES = [
      "categories, the line colours and the densities are this project's own "
      "work and are not produced or endorsed by LiA or Le Havre Seine Métropole.",
      True),
+    # ANGERS, MARK-FREE (owner, 2026-09-30): the Métropole's terms bar its
+    # network brand and "any other mark" from anything built from the data
+    # without consent, and the NAP dataset's title carries that brand. So the
+    # database is named by its producer and its NAP id, which §4.3 allows: the
+    # notice need only make a reader aware the content came from it.
+    ("Angers Loire Métropole (Angers)",
+     "Contains information from Angers Loire Métropole's public transport "
+     "timetable database ([transport.data.gouv.fr dataset "
+     "6178cee254e3b3f0744a1318](https://transport.data.gouv.fr/datasets/6178cee254e3b3f0744a1318)), "
+     "which is made available here under the Open Database License (ODbL). "
+     "Tram station locations and line geometry for Angers are drawn from that "
+     "feed; the stations kept, the rings, the categories and the densities "
+     "are this project's own work and are not produced or endorsed by Angers "
+     "Loire Métropole.",
+     True),
     # BRØNNØYSUNDREGISTRENE - Oslo's business register. NLOD 2.0: section 5
     # says to attribute "as specified by the licensor", and Brønnøysund's API
     # documentation specifies nothing beyond "License: NLOD" (read
