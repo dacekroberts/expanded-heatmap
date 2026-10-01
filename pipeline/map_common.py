@@ -1389,6 +1389,15 @@ LINE_HIGHLIGHT_SCRIPT = """
             var last = g.lastChild;
             while (last && !last._hmLine) last = last.previousSibling;
             var ref = last ? last.nextSibling : null;
+            // Already in this order? Then touch nothing: re-inserting the path
+            // under the pointer detaches it, and the browser never sends it
+            // mouseout - which left a hover stuck on (map-refresh check).
+            var run = [], n = last;
+            while (n && run.length < paths.length) {
+                if (n._hmLine) run.unshift(n);
+                n = n.previousSibling;
+            }
+            if (run.length === paths.length && run.every(function (x, i) { return x === paths[i]; })) return;
             paths.forEach(function (p) { if (p.parentNode === g) g.insertBefore(p, ref); });
         }
 
@@ -1442,7 +1451,7 @@ LINE_HIGHLIGHT_SCRIPT = """
                 var d = distance(lines[k], e.layerPoint);
                 if (d <= TOL) found.push({k: k, d: d, z: k === shown ? keys.length : i});
             });
-            if (!found.length) { sel = null; show(); return; }
+            if (!found.length) { clearTimeout(outTimer); sel = null; hov = null; show(); return; }
             var near = Math.min.apply(null, found.map(function (f) { return f.d; }));
             var best = null;
             found.forEach(function (f) {
@@ -1472,9 +1481,17 @@ LINE_HIGHLIGHT_SCRIPT = """
                     layer.on("mouseout", function () { hover(null); });
                 });
             });
+            m.on("mousemove", function (e) {
+                if (hov === null || !lines[hov]) return;
+                var t = e.originalEvent && e.originalEvent.target;
+                if (legend && t && legend.contains(t)) return;
+                if (distance(lines[hov], e.layerPoint) > TOL) hover(null);
+            });
         }
         document.addEventListener("keydown", function (e) {
-            if (e.key === "Escape" && sel !== null) { sel = null; show(); }
+            if (e.key === "Escape" && (sel !== null || hov !== null)) {
+                clearTimeout(outTimer); sel = null; hov = null; show();
+            }
         });
     }
     start();
