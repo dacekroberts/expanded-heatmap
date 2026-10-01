@@ -49,6 +49,7 @@ from cities import (  # noqa: E402
     DEFAULT_FRAME,
     DEFAULT_REGION,
     REGION_MEMBERS,
+    REGION_ZOOM,
     REGION_ZOOM_WITHOUT,
     REGIONS,
     cities_in,
@@ -254,11 +255,25 @@ TEXT_WIDTH = {
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
     "Philadelphia": 82.3, "San Diego": 67.4, "San Francisco": 94.3,
     "Toronto": 52.4, "Vancouver (Regional)": 144.4, "Washington D.C.": 110.3,
+    # The French tram batch: measured 2026-09-30 by the cleanup session in
+    # the app's own document with the font loaded (controls Paris 32.9,
+    # Marseille 60.3 and Lille 99.7 reproduced exactly).
+    "Le Mans": 55.6,
+    "Besançon": 66.8,
+    "Tours": 36.7,
+    "Dijon": 33.8,
+    "Reims": 40.0,
+    "Orléans": 50.7,
+    "Mulhouse": 65.8,
+    "Brest": 36.2,
+    "Avignon": 54.7,
+    "Saint-Étienne": 92.2,
+    "Nice": 29.4,
 }
 
 PILL_PAD_X = 5            # background_padding=[5, 2]
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
-MARKER_R = 5.0            # get_radius=4 plus the 1 px ring
+MARKER_R = 6.0            # Overview.DOT_PX / 2: 12 px icons since 2026-09-30 (was 4 + 1 px ring)
 DEFAULT_OFFSET = ("middle", 0, -22)
 CANVAS = {375: 343, 768: 726, 1200: 1030}   # viewport -> deck canvas width
 CANVAS_H = 460
@@ -351,6 +366,9 @@ def region_view(region):
     skip = REGION_ZOOM_WITHOUT.get(frame, ())
     zs = [c for c in here if c["name"] not in skip] or here
     centre_lat, centre_lon, zoom = fit_view([c["lat"] for c in zs], [c["lon"] for c in zs])
+    # A zoom set outright (cities.REGION_ZOOM, France North and South at 5.0),
+    # applied after the fit exactly as Overview.py applies it.
+    zoom = REGION_ZOOM.get(frame, zoom)
     if frame != DEFAULT_FRAME:                  # Overview.py's re-centring block
         centre_lat = (max(lats) + min(lats)) / 2
         centre_lon = (max(lons) + min(lons)) / 2
