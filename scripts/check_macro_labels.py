@@ -255,6 +255,20 @@ TEXT_WIDTH = {
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
     "Philadelphia": 82.3, "San Diego": 67.4, "San Francisco": 94.3,
     "Toronto": 52.4, "Vancouver (Regional)": 144.4, "Washington D.C.": 110.3,
+    # The French tram batch: measured 2026-09-30 by the cleanup session in
+    # the app's own document with the font loaded (controls Paris 32.9,
+    # Marseille 60.3 and Lille 99.7 reproduced exactly).
+    "Le Mans": 55.6,
+    "Besançon": 66.8,
+    "Tours": 36.7,
+    "Dijon": 33.8,
+    "Reims": 40.0,
+    "Orléans": 50.7,
+    "Mulhouse": 65.8,
+    "Brest": 36.2,
+    "Avignon": 54.7,
+    "Saint-Étienne": 92.2,
+    "Nice": 29.4,
 }
 
 PILL_PAD_X = 5            # background_padding=[5, 2]

@@ -5,6 +5,33 @@ Entries for `DECISIONS.md`, newest first, each exactly as it should land
 in when handed off). Anything that must cite a DECISIONS verdict cites this
 file until then.
 
+### 2026-09-30 - The twenty French batch cities retagged to France North and South, with the legend's two fields
+
+- **Merged `origin/macro-france` (9b9ed0e, which carries macro-legend and
+  master) into `france-build` and `france-build-2`**, and set each of the
+  twenty entries to the cleanup session's measurement: the region (France
+  North at latitude 46.5 and up, 14 cities; France South, 6), its
+  `label_offset`, and its label width in `check_macro_labels.py`'s
+  `TEXT_WIDTH` (measured in the app's own document with the font loaded;
+  Paris, Marseille and Lille reproduced exactly). `france-build` carries
+  group 1's eleven, and `france-build-2` adds group 2's nine.
+- **Le Havre is the one hand-set label**, ("middle", 20, 20), below and right
+  of its dot. At the default it sat on "Rouen (Regional)". At 1200 px it is
+  within 4 px of reading as Rouen's, as are Nantes/Tours and
+  Marseille/Avignon. Cleanup noted this for the owner; it is not a
+  failure.
+- **The legend's two fields.** `coverage` is `full` for all twenty
+  (SIRENE carries all three buckets, "All three" in every entry). `mode` is
+  `tram` for nineteen and `light_rail` for Rouen (Regional), as Rouen's brief
+  proposed and the owner approved with the eight calls. Brest's cable car
+  does not change its mode: the dot shows the highest-order mode the map
+  draws, which is tram.
+- **`check_macro_labels.py`: PROBLEMS 0**, 14 regions at 375, 768 and
+  1200 px, on 86 cities (`france-build`) and 95 (`france-build-2`). This
+  matches cleanup's combined-tree score. `check_all` leaves one failure on
+  each branch: the master list's Built and France counts, which move at
+  landing.
+
 ### 2026-09-30 - The France macro view: North and South at zoom 5.0, released to cleanup (owner)
 
 - **Owner: "go with north/south, release it to cleanup."** France becomes two
