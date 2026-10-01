@@ -3117,7 +3117,7 @@ REGION_ORDER = [
     # built 2026-09-30 in the review rehearsal, France's mechanism). Brno,
     # Plzeň, Olomouc, Ostrava, Liberec and Most: in Europe their six pills
     # and Prague's overlapped every pair (99 problems over three widths).
-    # Prague moves with them, so the view named Czechia holds every Czech
+    # Prague moves with them (owner, 2026-09-30), so the view named Czechia holds every Czech
     # city; Europe's re-centred frame then needed Stockholm's label below
     # its dot. Fitted zoom, no override; PROBLEMS 0 at every width.
     "Czechia",

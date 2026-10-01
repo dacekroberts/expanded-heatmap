@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**264 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**265 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Czechia is its own macro region, Prague in it; the mega-review prepared as one rehearsal branch and four lanes (owner)](#2026-09-30---czechia-is-its-own-macro-region-prague-in-it-the-mega-review-prepared-as-one-rehearsal-branch-and-four-lanes-owner)
 - [Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)](#2026-09-30---streamlit-scaling-measured-at-106-cities-memory-and-clone-fine-the-overview-list-is-long-owner)
 - [France splits into two macro-map regions, France North and France South, at zoom 5.0 (owner)](#2026-09-30---france-splits-into-two-macro-map-regions-france-north-and-france-south-at-zoom-50-owner)
 - [Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)](#2026-09-30---request-stops-count-as-stations-boardable_stop_ids-defaults-to-gtfs-0-2-and-3-owner)
@@ -306,6 +307,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-30 - Czechia is its own macro region, Prague in it; the mega-review prepared as one rehearsal branch and four lanes (owner)
+
+- **Czechia (owner: "yes prague moved in okay").** The owner's label-tier
+  decision of 2026-09-29 gave the Czech tram cities a sub-region of their own.
+  On the combined tree, Europe's view failed 99 times over three widths: the
+  six Czech pills and Prague's overlapped every pair. Measured both ways:
+  - the six alone in Czechia left Europe clean, but a view named Czechia
+    without Prague reads wrongly and the master list's country count (7)
+    could not match its region row (6);
+  - Prague in as well left one problem, Stockholm's pill under the theme
+    button at 375 px once Europe re-centred, fixed with its label below the
+    dot. **PROBLEMS 0 in all 15 regions at 375, 768 and 1200.**
+  Fitted zoom, no override. Most's label sits west of its dot (eastward it
+  covered Liberec's marker) and Olomouc's right and low (above, it met
+  Ostrava's), each from a sweep.
+- **The batch as one branch.** `review-rehearsal` (cleanup's worktree, not
+  pushed) merges every queued branch in landing order - France (with
+  macro-france and Angers), Band B, the Korean satellites, Dallas, the five
+  page fixes, Czech - with git's rerere recording each resolution. Notices
+  renumbered in landing order: 69-71 France, 72 Ottawa, 73 Region of
+  Waterloo, 74 Palma, 75 Yokohama, 76 Hiroshima, 77 Angers, 78 KORDIS,
+  79 PMDP; 68 names every Korean satellite. Two merges had silently broken
+  code (Yokohama's notice tuple, Kitchener–Waterloo's continuity column) and
+  were repaired; every later commit compiled the files it touched first.
+- **Counts reconciled.** The French batch and four satellites had never
+  entered the master list: 114 built, 28 candidates (R 18, T 10); Band B
+  emptied, the Gyeonggi satellites' row closed with Anyang (owner's rule);
+  France's and Czechia's rows moved from T1 to history sections. The
+  master-list selftest's three Band B cases re-aimed at Band R and the tram
+  list. `check_all` 29 of 29.
+- **Four lanes (owner).** `docs/review_lanes_2026-09-30.md`: lane sessions on
+  one pinned commit, each in its own worktree and ports, look and report;
+  cleanup alone fixes and lands. Started once the misc tram session's three
+  cities are merged.
 
 ### 2026-09-30 - Streamlit scaling measured at 106 cities: memory and clone fine, the Overview list is long (owner)
 
