@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**259 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**260 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -30,8 +30,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)](#2026-09-30---new-working-rules-a-memory-gate-for-two-heavy-jobs-decisions-drafts-overpass-pacing-pre-permitted-downloads-and-prose-owner)
 - [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
 - [Tram kit complete: all ten briefs checked; four last points for the owner; builds held](#2026-09-30---tram-kit-complete-all-ten-briefs-checked-four-last-points-for-the-owner-builds-held)
-- [A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)](#2026-09-30---a-new-record-kind-health-inspection-register-for-kitchenerwaterloo-owner)
 - [Dallas's address-layer indemnity accepted (owner)](#2026-09-30---dallass-address-layer-indemnity-accepted-owner)
+- [A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)](#2026-09-30---a-new-record-kind-health-inspection-register-for-kitchenerwaterloo-owner)
 - [Palma's macro mode "metro" approved (owner)](#2026-09-30---palmas-macro-mode-metro-approved-owner)
 - [Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity](#2026-09-30---zurich-göteborg-and-den-haag-briefed-for-the-tram-kit-dallass-address-layer-carries-an-open-ended-indemnity)
 - [Palma built on M1 alone, its register placed by a Catastro join; M1's timetable disclosed, not disqualifying (owner)](#2026-09-30---palma-built-on-m1-alone-its-register-placed-by-a-catastro-join-m1s-timetable-disclosed-not-disqualifying-owner)
@@ -42,6 +42,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Kitchener–Waterloo built on the Region's two inspection registers, typed from their bulk tables; the tables' licence read as the portal's (owner)](#2026-09-30---kitchenerwaterloo-built-on-the-regions-two-inspection-registers-typed-from-their-bulk-tables-the-tables-licence-read-as-the-portals-owner)
 - [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
 - [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
+- [Madrid, Oslo and Fukuoka line labels cleared; the legend model is wrong (owner)](#2026-09-30---madrid-oslo-and-fukuoka-line-labels-cleared-the-legend-model-is-wrong-owner)
 - [The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod](#2026-09-30---the-normandie-aggregate-read-its-tram-shapes-are-stop-to-stop-so-caen-rouen-and-le-havre-draw-from-openstreetmap-its-concédant-is-atoumod)
 - [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
 - [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
@@ -494,16 +495,6 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   consequence, with building as approved recommended, rather than reopened
   unasked.
 
-### 2026-09-30 - A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)
-
-The owner added a `record_kind` value, relayed by the cleanup session: **"Health
-inspection register"**, for a public-health inspection register that covers food
-premises AND personal-service settings. Kitchener–Waterloo's build entry had used
-"Food hygiene register" as the nearest existing value and said so; its register (the
-Region of Waterloo Public Health's food and personal-services inspections) now takes
-the new value. `scripts/check_inconsistency_list.py` lists it in `FIELDS`; table B's
-row already said "Food hygiene register" and now says the new value, so the two agree.
-
 ### 2026-09-30 - Dallas's address-layer indemnity accepted (owner)
 
 - **The owner accepted the open-ended indemnity in the City of Dallas's GIS
@@ -518,6 +509,16 @@ row already said "Food hygiene register" and now says the new value, so the two 
     Band A city, and it waits for the owner's go on builds.
 - **Files:** `docs/data_sources.md` (a new "Dallas's indemnity" subsection)
   and `docs/city_master_list.md` (Dallas's row).
+
+### 2026-09-30 - A new record kind, "Health inspection register", for Kitchener–Waterloo (owner)
+
+The owner added a `record_kind` value, relayed by the cleanup session: **"Health
+inspection register"**, for a public-health inspection register that covers food
+premises AND personal-service settings. Kitchener–Waterloo's build entry had used
+"Food hygiene register" as the nearest existing value and said so; its register (the
+Region of Waterloo Public Health's food and personal-services inspections) now takes
+the new value. `scripts/check_inconsistency_list.py` lists it in `FIELDS`; table B's
+row already said "Food hygiene register" and now says the new value, so the two agree.
 
 ### 2026-09-30 - Palma's macro mode "metro" approved (owner)
 
@@ -963,6 +964,39 @@ gains the city's slug override; `check_personal_exposure.py` its registry entry.
   written to the skill**, which lists its parts until the owner approves
   it.
 
+### 2026-09-30 - Madrid, Oslo and Fukuoka line labels cleared; the legend model is wrong (owner)
+
+- **Three line labels fixed by forcing which end of the line carries them
+  (`LINE_LABEL_ENDS`), step 3 re-rendered for those cities only (owner's go,
+  2026-09-30).**
+  - **Oslo, T-bane 2 -> "start".** At the solver's own 1000 x 650 it ran
+    57 x 9 px under the open legend. The 2026-09-29 review had logged this
+    as a 1024 x 768 issue.
+  - **Fukuoka, Kūkō Line -> "end".** It sat 4 x 21 px under the legend; this
+    was new, found by the audit below. "start" left it there.
+  - **Madrid, Ramal Ópera–Príncipe Pío -> "end".** At 343 px its label
+    touched Línea 5's. All four single-end variants were rendered and checked:
+    Ramal "end" and Línea 5 "start" are clean at 1000, 375 and 343; the other
+    two reproduce the overlap. The Ramal, two stations long, moves least.
+  - **Checks.** `scripts/check_map_labels.js`, run against each map in a
+    frame of the width under test, is clean for all three at 1000, 375 and
+    343, and for Oslo also at 854 with the legend open. Positive control:
+    master's Oslo map fails it at 1000 ("under legend: T-bane 2").
+  - **Drift.** `drift_check.py oslo fukuoka` and `madrid` report only
+    `heatmap.html` changed. Fukuoka's 31 and Madrid's 19 baseline figures are
+    unchanged; Oslo emits none. `check_all` 26/26; `check_inline_arrays`
+    reports 0 over the cap.
+- **Found: the solver's legend model is wrong in both directions.** It
+  models the open legend as `178 + 19 x lines`. Measured with the legend
+  open in a 1000 x 650 frame across all 75 cities, the real legend differs
+  by -32 to +114 px: 33 cities are taller than modelled (Melbourne +114,
+  Sydney +42, Kyoto and Paris +34), and 29 are shorter. At 1000 x 650 that put
+  three labels under the legend: Oslo's, Fukuoka's and Osaka's "JR
+  Gakkentoshi Line" (13 x 21 px). Osaka is left to the session that holds it.
+  No two labels overlapped in any city. A shared fix (legend height = max of
+  the model and a content-based estimate, so only a label actually under the
+  legend can move) needs a full drift check and waits for review time. It is
+  in PLAN, not built.
 ### 2026-09-30 - The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod
 
 - **The approved `licence-read` of "Agrégat des réseaux urbains et
