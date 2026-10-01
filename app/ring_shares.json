@@ -373,5 +373,105 @@
   "in_ring": 2224,
   "all": 29912,
   "map_blob": "4e6a1858e44f8ebecb6578e3afc121f6ea97736e"
+ },
+ "le_mans": {
+  "in_ring": 1462,
+  "all": 1991,
+  "map_blob": "3a5a128edd409dcfbfd472f15307464c2db44a78"
+ },
+ "besancon": {
+  "in_ring": 1300,
+  "all": 2042,
+  "map_blob": "c740b97a20bb3804ca84e98be34d5336d5441a6e"
+ },
+ "avignon": {
+  "in_ring": 622,
+  "all": 2416,
+  "map_blob": "7116083e1e25fc39a948f98961250087cec8355a"
+ },
+ "tours": {
+  "in_ring": 1741,
+  "all": 2652,
+  "map_blob": "57a3ea53af2b15c63548e3a2373ec0fb934dc059"
+ },
+ "dijon": {
+  "in_ring": 1777,
+  "all": 2668,
+  "map_blob": "e1f3d149ef57f62adfeca76bd12db18be1bb1951"
+ },
+ "reims": {
+  "in_ring": 1457,
+  "all": 2662,
+  "map_blob": "5489490e8003aeca923c0bb3da7dc9db0469f1f5"
+ },
+ "orleans": {
+  "in_ring": 1568,
+  "all": 1852,
+  "map_blob": "beb642cc3a4bd886870f77988908282191033826"
+ },
+ "mulhouse": {
+  "in_ring": 1704,
+  "all": 2155,
+  "map_blob": "56563dea6e15fb9303d84d0cee9a4b9dc741a132"
+ },
+ "brest": {
+  "in_ring": 1517,
+  "all": 1980,
+  "map_blob": "ec7b052983b2376a4a6dda308837f3dfbe80aa12"
+ },
+ "saint_etienne": {
+  "in_ring": 2276,
+  "all": 2998,
+  "map_blob": "cc0835eb634e7dcc970e2c7ead700916452551bc"
+ },
+ "nice": {
+  "in_ring": 8086,
+  "all": 10063,
+  "map_blob": "10501c61bfddb446c7080a3549299daea4df70f4"
+ },
+ "montpellier": {
+  "in_ring": 5443,
+  "all": 6276,
+  "map_blob": "21ef6e0fb7bdd74a52e188f6d20d8ac8ee881adb"
+ },
+ "strasbourg": {
+  "in_ring": 4779,
+  "all": 5614,
+  "map_blob": "5bd4901fa3012afd52a05347b1bd24347d27bb56"
+ },
+ "le_havre": {
+  "in_ring": 1461,
+  "all": 2433,
+  "map_blob": "6ab6631622c93283fc28cf53dc3b7747cd4c06d6"
+ },
+ "caen": {
+  "in_ring": 1567,
+  "all": 2214,
+  "map_blob": "4c984acc90328dbfb49de6d03378ea3eef6d90df"
+ },
+ "rouen": {
+  "in_ring": 2584,
+  "all": 4167,
+  "map_blob": "23bdbe7fdf543f0ff8715f14075ad0677f54edfd"
+ },
+ "bordeaux": {
+  "in_ring": 8381,
+  "all": 12807,
+  "map_blob": "566893a341055dc588b5862fa1b6161a6a09d224"
+ },
+ "nantes": {
+  "in_ring": 4146,
+  "all": 6570,
+  "map_blob": "89fc4e397719d58417689c85bc169213e6d29cc1"
+ },
+ "grenoble": {
+  "in_ring": 4534,
+  "all": 5781,
+  "map_blob": "d1a89b88c724eb274da8a05a6e67db7a78c4c21c"
+ },
+ "valenciennes": {
+  "in_ring": 1609,
+  "all": 2330,
+  "map_blob": "61adcdef97da57ec0266adec71ba9b3931e87f5c"
  }
 }

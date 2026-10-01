@@ -22,7 +22,7 @@ Mapped so far:
 - **Spain:** Madrid, Barcelona
 - **Ireland:** Dublin
 - **Italy:** Milan, Rome
-- **France:** Paris, Marseille, Toulouse, Lille (Regional), Rennes
+- **France:** Paris, Marseille, Toulouse, Lille (Regional), Rennes, Le Mans, Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice, Montpellier, Strasbourg, Le Havre, Caen, Rouen (Regional), Bordeaux (Regional), Nantes (Regional), Grenoble (Regional), Valenciennes (Regional)
 - **Norway:** Oslo, Bergen
 - **Denmark:** Copenhagen, Aarhus
 - **Czechia:** Prague

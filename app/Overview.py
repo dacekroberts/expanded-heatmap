@@ -12,8 +12,10 @@ plain list of page links sits below the map as a fallback (keyboard access,
 and any browser where the map doesn't load).
 """
 
+import base64
 import json
 import math
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -122,35 +124,91 @@ _FACTS = json.loads((Path(__file__).parent / "macro_facts.json").read_text(encod
 #
 # Derived from pipeline/theme.py rather than written as literals, so they
 # cannot drift from the rest of the chrome. Alpha is appended per use.
-TEAL = rgb_list(LIGHT["accent"], 235)      # marker fill, and the "full" tier
-# COMPLETENESS TIERS (owner, 2026-09-28): each dot is coloured by how complete
-# its city's business data is. One set for both themes, because these are
-# WebGL colours the dark-mode filter never reaches; validated with the dataviz
-# skill's validate_palette.js on the light basemap and its filtered dark form
-# (normal-vision floor 27.1, worst colour-blind pair 13.7; DECISIONS). Each
-# city's tier is `coverage` in cities.py, which scripts/check_macro_facts.py
-# checks against docs/map_inconsistencies.md.
-TIERS = {
-    "full": ("Full data", TEAL),
-    "narrowed": ("Narrowed: a category missing, merged or partial", [0x93, 0x33, 0xEA, 235]),
-    "one_bucket": ("One category only", [0xC2, 0x41, 0x0C, 235]),
+TEAL = rgb_list(LIGHT["accent"], 235)      # the metro colour
+# A DOT'S COLOUR IS ITS NETWORK, ITS FILL ITS COMPLETENESS (owner, 2026-09-29
+# and 2026-09-30; this replaced colour-as-completeness from 2026-09-28).
+#
+# COLOUR = the highest-order mode the city's map draws (`mode` in cities.py:
+# metro > light rail > tram). The three colours are the set validated for the
+# completeness tiers, re-run 2026-09-30 with the dataviz skill's
+# validate_palette.js on the light basemap and its filtered dark form: normal-
+# vision floor 27.1, worst colour-blind pair 13.7 deutan / 17.0 tritan; below
+# 3:1 only over water, as the teal always was, relieved by each dot's white
+# ring, its name pill and the text legend. One set for both themes, because
+# these are WebGL colours the dark-mode filter never reaches.
+MODES = {
+    "metro": ("Metro", TEAL),
+    "light_rail": ("Light rail", [0x93, 0x33, 0xEA, 235]),
+    "tram": ("Tram", [0xC2, 0x41, 0x0C, 235]),
 }
+# FILL decays with completeness (`coverage` in cities.py, which
+# scripts/check_macro_facts.py holds to docs/map_inconsistencies.md): solid =
+# full, the BOTTOM half = narrowed (a level, read as "partly full", not a pie
+# read as shares), a hollow ring with a pale centre = one category. So colour
+# never has to be decoded for completeness, nor fill for mode.
+FILLS = {"full": "Full data", "narrowed": "Narrowed data", "one_bucket": "One category"}
 DARK = rgb_list(LIGHT["text"], 255)        # label text, on the pill below
 PILL = rgb_list(LIGHT["surface"], 235)     # the pill behind each name
 OUTLINE = rgb_list(LIGHT["surface"], 255)  # ring around each marker
 # Interaction feedback, deliberately outside the palette: it has to differ from
-# both the teal marker and the category colours to read as "this one".
+# every mode colour to read as "this one".
 HIGHLIGHT = [251, 191, 36, 255]
+# Drawn diameter of a dot, ring included. 10 px until 2026-09-30; a hollow ring
+# at 10 px was too thin to see or tap, so 12. check_macro_labels.py's MARKER_R
+# is half of this - change both together.
+DOT_PX = 12
 
-# Per-dot tier colour and tooltip text. A missing tier or count falls back
+
+def _hex(rgb):
+    return "#%02x%02x%02x" % tuple(rgb[:3])
+
+
+def _dot_svg(colour, fill):
+    """One dot as SVG in a 24-unit box (2 units = 1 px at DOT_PX): a 1 px ring
+    in the surface colour, then the mode colour as a disc, a bottom-half level
+    or a 2 px ring around a pale centre."""
+    c, pale = _hex(colour), _hex(OUTLINE)
+    body = f'<circle cx="12" cy="12" r="12" fill="{pale}"/><circle cx="12" cy="12" r="10" fill="{c}"/>'
+    if fill == "narrowed":
+        # A 1.5 px ring with only the inner disc's TOP half pale, leaving the
+        # lower half in colour. Painting a whole pale disc and a coloured half
+        # over it left the pale disc's anti-aliased edge as a hairline round
+        # the lower arc.
+        body += f'<path d="M5 12 A7 7 0 0 1 19 12 Z" fill="{pale}"/>'
+    elif fill == "one_bucket":
+        body += f'<circle cx="12" cy="12" r="6" fill="{pale}"/>'
+    return body
+
+
+def _svg_uri(svg, w, h):
+    head = f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">'
+    return "data:image/svg+xml;base64," + base64.b64encode((head + svg + "</svg>").encode()).decode()
+
+
+# ONE SPRITE for all nine dots, drawn at 4x so it stays sharp on a phone's
+# high-density screen; each row of the layer's data carries only a short key.
+_CELL = 4 * DOT_PX
+_ICON_KEYS = [(m, f) for m in MODES for f in FILLS]
+ICON_ATLAS = _svg_uri("".join(
+    f'<svg x="{i * _CELL}" y="0" width="{_CELL}" height="{_CELL}" viewBox="0 0 24 24">'
+    f'{_dot_svg(MODES[m][1], f)}</svg>' for i, (m, f) in enumerate(_ICON_KEYS)),
+    _CELL * len(_ICON_KEYS), _CELL)
+# anchorY MUST be the centre: deck.gl's default is the icon's bottom edge, which
+# would stand every dot 6 px north of its city.
+ICON_MAPPING = {f"{m}-{f}": {"x": i * _CELL, "y": 0, "width": _CELL, "height": _CELL,
+                             "anchorX": _CELL / 2, "anchorY": _CELL / 2, "mask": False}
+                for i, (m, f) in enumerate(_ICON_KEYS)}
+
+# Per-dot icon and tooltip text. A missing mode, tier or count falls back
 # rather than raising: this page lists every city, and one city's absent fact
 # must not take the whole Overview down (the label_offset NaN lesson, below).
-_tier = cities["coverage"].where(cities["coverage"].isin(list(TIERS)), "full") \
+_tier = cities["coverage"].where(cities["coverage"].isin(list(FILLS)), "full") \
     if "coverage" in cities else pd.Series(["full"] * len(cities), index=cities.index)
-cities["fill"] = _tier.map(lambda t: TIERS[t][1])
-# The tooltip takes a short tier name; the legend under the map explains it.
-_TIER_SHORT = {"full": "Full data", "narrowed": "Narrowed data", "one_bucket": "One category only"}
-cities["tier_label"] = _tier.map(_TIER_SHORT.get)
+_mode = cities["mode"].where(cities["mode"].isin(list(MODES)), "metro") \
+    if "mode" in cities else pd.Series(["metro"] * len(cities), index=cities.index)
+cities["icon"] = _mode + "-" + _tier
+cities["tier_label"] = _tier.map(FILLS.get)
+cities["mode_label"] = _mode.map(lambda m: MODES[m][0])
 _counts = _FACTS.get("storefronts", {})
 cities["storefronts_text"] = cities["name"].map(
     lambda n: f"{_counts[n]:,} storefronts" if n in _counts else "storefront count pending")
@@ -264,17 +322,36 @@ markers = pdk.Layer(
     # Pittsburgh. Displacement was considered and is arithmetically dead. The
     # remaining overlap is cosmetic only: since the name pills became pickable,
     # clicking no longer depends on hitting a dot.
-    get_radius=4,
+    #
+    # SINCE 2026-09-30 THIS LAYER DRAWS NOTHING: the dots are the IconLayer
+    # below (a half-filled circle is beyond a ScatterplotLayer). It stays for
+    # picking and the amber hover highlight, at the icons' size, so the
+    # selection code keys on the same "cities" id. Alpha 1, not 0: a fully
+    # transparent fill is not something to rely on for picking.
+    get_radius=DOT_PX / 2,
     # pdk.types.String, not a bare str: pydeck would serialize "pixels" as the
     # expression "@@=pixels" (an undefined variable) and break the radius.
     radius_units=pdk.types.String("pixels"),
-    get_fill_color="fill",
-    get_line_color=OUTLINE,
-    stroked=True,
-    line_width_min_pixels=1,
+    get_fill_color=[0, 0, 0, 1],
+    stroked=False,
     pickable=True,
     auto_highlight=True,
     highlight_color=HIGHLIGHT,
+)
+# The visible dots: one sprite, nine cells (3 modes x 3 fills), keyed per city.
+dots = pdk.Layer(
+    "IconLayer",
+    id="city-dots",
+    data=cities,
+    get_position="[lon, lat]",
+    # pdk.types.String for the same reason as "pixels": a bare "data:..." string
+    # is parsed as an expression and the page fails with "Unexpected ':'".
+    icon_atlas=pdk.types.String(ICON_ATLAS),
+    icon_mapping=ICON_MAPPING,
+    get_icon="icon",
+    get_size=DOT_PX,
+    size_units=pdk.types.String("pixels"),
+    pickable=False,
 )
 # Permanent city-name labels (not hover-only), consistent with the per-city
 # maps' rule that things a reader needs to identify are always visible.
@@ -384,6 +461,14 @@ _here = _region_cities[_frame_region]
 _skip = REGION_ZOOM_WITHOUT.get(_frame_region, ())
 _zoom_set = [c for c in _here if c["name"] not in _skip] or _here
 view = fit_view([c["lat"] for c in _zoom_set], [c["lon"] for c in _zoom_set])
+# A zoom set outright (cities.REGION_ZOOM: France North and South at 5.0). Read
+# with getattr, NOT imported by name: Streamlit Cloud can serve a cached
+# cities.py after a push until the app is rebooted, and a missing name in a
+# `from cities import` takes the whole Overview down (2026-09-22). A stale
+# module simply means no override.
+_zoom_override = getattr(sys.modules.get("cities"), "REGION_ZOOM", {}).get(_frame_region)
+if _zoom_override is not None:
+    view = pdk.ViewState(latitude=view.latitude, longitude=view.longitude, zoom=_zoom_override)
 
 # RE-CENTRE ON THE REGION'S OWN MIDPOINT, KEEPING THE FITTED ZOOM. The heading
 # on this block used to read "RE-CENTRE, NEVER RE-ZOOM", which stopped being
@@ -438,7 +523,9 @@ if _frame_region != DEFAULT_FRAME:
 # public styles don't. (Tile provider is still an open decision before
 # deploying - see PLAN.md.)
 deck = pdk.Deck(
-    layers=[markers, labels],
+    # The invisible picking layer sits ABOVE the icons, so its amber hover
+    # highlight covers the hovered dot; the name pills stay on top of both.
+    layers=[dots, markers, labels],
     initial_view_state=view,
     # repeat=True draws the layers on EVERY copy of the world, not only the
     # primary one (-180..180). The basemap always repeats; without this, a
@@ -459,7 +546,7 @@ deck = pdk.Deck(
         # The tier, storefront count, placement and data age (owner,
         # 2026-09-28): the facts a dot's size would have carried, without
         # letting big cities swallow their neighbours' dots and labels.
-        "html": "<b>{name}</b><br/>{blurb}<br/>{tier_label} · {storefronts_text}"
+        "html": "<b>{name}</b><br/>{blurb}<br/>{mode_label} · {tier_label} · {storefronts_text}"
                 "<br/>Placed by: {placement}<br/>Data: {data_age}",
         "style": {
             "backgroundColor": LIGHT["text"],
@@ -477,16 +564,31 @@ event = st.pydeck_chart(
     height=460,
 )
 
-# The tier legend: text beside each swatch, so the tier never rests on colour
-# alone (the dataviz rule; several tiers sit under 3:1 over water). The ink is
-# the theme's own text colour; only the swatches carry the tier colours.
+# The two-key legend (owner, 2026-09-30): the mode colours as solid dots, then
+# the three fills in a neutral grey, each with its words beside it, so neither
+# key rests on colour alone (the dataviz rule; the colours sit under 3:1 over
+# water). The swatches are the map's own dot drawings; the ink is the theme's
+# text colour.
+_GREY = rgb_list(LIGHT["muted"], 255)
+
+
+def _legend_row(title, items):
+    return (
+        '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;'
+        'font-size:0.85rem;margin:2px 0">'
+        f'<span style="font-weight:600">{title}</span>'
+        + "".join(
+            f'<span style="white-space:nowrap"><img src="{_svg_uri(_dot_svg(c, f), 24, 24)}" '
+            f'width="{DOT_PX}" height="{DOT_PX}" alt="" style="margin-right:6px;'
+            f'vertical-align:-1px">{label}</span>'
+            for label, c, f in items)
+        + "</div>")
+
+
 st.markdown(
-    '<div style="display:flex;flex-wrap:wrap;gap:4px 18px;font-size:0.85rem;margin:2px 0 6px">'
-    + "".join(
-        f'<span style="white-space:nowrap"><span style="display:inline-block;width:10px;'
-        f'height:10px;border-radius:50%;background:rgb({c[0]},{c[1]},{c[2]});'
-        f'box-shadow:0 0 0 1px #ffffff;margin-right:6px;vertical-align:-1px"></span>{label}</span>'
-        for label, c in TIERS.values())
+    '<div style="margin:2px 0 6px">'
+    + _legend_row("Rail network", [(label, c, "full") for label, c in MODES.values()])
+    + _legend_row("Business data", [(label, _GREY, f) for f, label in FILLS.items()])
     + "</div>",
     unsafe_allow_html=True,
 )

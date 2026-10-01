@@ -41,6 +41,10 @@ CENTROID_QUALITY = "33"
 
 BUCKET_DIVISIONS = ("47", "56", "96")
 
+# The last build_storefronts() call's funnel counts (rows in scope, active,
+# diffusible, masked), for a caller that records them. Read-only to callers.
+LAST_RUN = {}
+
 
 def _text(series):
     """A column as plain text, with every flavour of blank collapsed to "".
@@ -140,6 +144,7 @@ def build_storefronts(cfg, city_name, bbox):
 
     print("SIRENE, streaming row groups:")
     df, total_rows = _read_city_rows(cfg)
+    total_in_scope = len(df)
     print(f"  {total_rows:,} rows in the file")
     print(f"  {len(df):,} in {city_name} (codeCommune starts "
           f"{'/'.join(cfg.COMMUNE_PREFIXES)})")
@@ -162,6 +167,12 @@ def build_storefronts(cfg, city_name, bbox):
     print(f"  {len(df):,} publicly diffusible "
           f"({before - len(df):,} masked at source, "
           f"{(before - len(df)) / before * 100:.1f}%)")
+    # Recorded for the caller (the France tram batch writes it to
+    # outputs/<city>/sirene_facts.json, which its page quotes). Printing only,
+    # as before, for every city that does not read it.
+    LAST_RUN.clear()
+    LAST_RUN.update({"rows_in_scope": int(total_in_scope), "active": int(before),
+                     "diffusible": int(len(df)), "masked": int(before - len(df))})
 
     # --- taxonomy ----------------------------------------------------------
     df["naf_code"] = df[cfg.NAF_COLUMN].map(NAF.normalise_code)
@@ -204,6 +215,7 @@ def build_storefronts(cfg, city_name, bbox):
     geo = geo.drop_duplicates(subset=[cfg.JOIN_KEY])
     print(f"  {len(geo):,} matched ({len(geo) / max(len(df), 1) * 100:.2f}% "
           f"coverage)")
+    LAST_RUN.update({"to_join": int(len(df)), "joined": int(len(geo))})
 
     # THE CRS IS PER ROW. Hard-coding 2154 works in every metropolitan city and
     # would put every pin in the sea in Fort-de-France, without erroring.

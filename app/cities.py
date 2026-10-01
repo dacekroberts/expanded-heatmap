@@ -100,6 +100,7 @@ CITIES = [
         "lon": -117.1611,
         "page": "pages/1_San_Diego_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Register coordinates (98.4%)",
         "data_age": "Fetched 2026-09-18 (no source date)",
         "rail_extra": "Trams",
@@ -118,6 +119,7 @@ CITIES = [
         "lon": -122.4414,
         "page": "pages/2_San_Francisco_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-19 (no source date)",
         "rail_extra": "Trams",
@@ -134,6 +136,7 @@ CITIES = [
         "lon": -118.31,
         "page": "pages/3_Los_Angeles_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates; corrupt ones geocoded (98.7%)",
         "data_age": "Fetched 2026-09-19 (no source date)",
         "rail_extra": "Trams",
@@ -158,6 +161,7 @@ CITIES = [
         "lon": -87.6298,
         "page": "pages/4_Chicago_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Active licences, fetched 2026-09-20",
         "rail_extra": "—",
@@ -188,7 +192,8 @@ CITIES = [
         "lat": 40.7128,
         "lon": -74.006,
         "page": "pages/5_New_York_Heatmap.py",
-        "coverage": "full",
+        "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register coordinates, some geocoded (1.4% lost)",
         "data_age": "Fetched 2026-09-21 (no source date)",
         "rail_extra": "—",
@@ -222,12 +227,13 @@ CITIES = [
         "lat": 39.9526,
         "lon": -75.1652,
         "page": "pages/6_Philadelphia_Heatmap.py",
-        "coverage": "narrowed",
+        "coverage": "one_bucket",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Active licences, fetched 2026-09-21",
         "rail_extra": "Trams",
         "record_kind": "Licence register",
-        "categories": "Two",
+        "categories": "Food premises only",
         "blurb": "SEPTA Metro — the Market–Frankford and Broad Street Lines, "
                  "plus the subway-surface and Girard Avenue trolleys",
         # East of its dot, third from the top of the eastern column.
@@ -245,6 +251,7 @@ CITIES = [
         "lon": -80.1937,
         "page": "pages/7_Miami_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Tax year 2026, fetched 2026-09-21",
         "rail_extra": "—",
@@ -264,6 +271,7 @@ CITIES = [
         "lon": -71.0589,
         "page": "pages/8_Boston_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
         "rail_extra": "Trams",
@@ -282,6 +290,7 @@ CITIES = [
         "lon": -77.0369,
         "page": "pages/9_Washington_DC_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates, some geocoded (85.8%)",
         "data_age": "Active licences, fetched 2026-09-21",
         "rail_extra": "—",
@@ -305,6 +314,7 @@ CITIES = [
         "lon": -123.1207,
         "page": "pages/10_Vancouver_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Current-year licences, fetched 2026-09-21",
         "rail_extra": "—",
@@ -344,6 +354,7 @@ CITIES = [
         "lon": -73.5674,
         "page": "pages/11_Montreal_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Survey coordinates (100%)",
         "data_age": "2025 survey",
         "rail_extra": "—",
@@ -384,6 +395,7 @@ CITIES = [
         # until the collapse was written - the same error the Canada ranking
         # made. See pipeline/calgary/config.py.
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
         "rail_extra": "Trams",
@@ -410,6 +422,7 @@ CITIES = [
         "lon": -113.4909,
         "page": "pages/13_Edmonton_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
         "rail_extra": "Trams",
@@ -435,6 +448,7 @@ CITIES = [
         "lon": -79.3832,
         "page": "pages/14_Toronto_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Joined by address (93.8%)",
         "data_age": "Current licences, fetched 2026-09-21",
         "rail_extra": "Trams",
@@ -463,6 +477,7 @@ CITIES = [
         "lon": -99.1332,
         "page": "pages/15_Mexico_City_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates (100%)",
         "data_age": "DENUE May 2026 edition, fetched 2026-09-22",
         "rail_extra": "Trams",
@@ -512,6 +527,7 @@ CITIES = [
         "lon": -103.3496,
         "page": "pages/16_Guadalajara_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Register coordinates",
         "data_age": "DENUE May 2026 edition, fetched 2026-09-22",
         "rail_extra": "Trams",
@@ -561,6 +577,7 @@ CITIES = [
         "lon": -3.7038,
         "page": "pages/17_Madrid_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates (9.2% without, left out)",
         "data_age": "Refreshed daily; fetched 2026-09-22",
         "rail_extra": "Trams",
@@ -591,6 +608,7 @@ CITIES = [
         "lon": 2.1686,
         "page": "pages/18_Barcelona_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Survey coordinates",
         "data_age": "2022 survey",
         "rail_extra": "—",
@@ -623,6 +641,7 @@ CITIES = [
         "lon": -6.2603,
         "page": "pages/19_Dublin_Heatmap.py",
         "coverage": "full",
+        "mode": "tram",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-22 (no source date)",
         "rail_extra": "Both",
@@ -646,6 +665,7 @@ CITIES = [
         "lon": 9.19,
         "page": "pages/20_Milan_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-22 (no source date)",
         "rail_extra": "—",
@@ -669,13 +689,14 @@ CITIES = [
         "lon": 2.3522,
         "page": "pages/21_Paris_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined to INSEE's geolocation (99.96%)",
         "data_age": "SIRENE monthly; fetched 2026-09-22",
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis) and trams T3a and T3b",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
         # TURNED BELOW THE DOT 2026-09-24, when Oslo joined Europe, and the
@@ -695,13 +716,14 @@ CITIES = [
         "lon": 5.3698,
         "page": "pages/22_Marseille_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined to INSEE's geolocation (99.94%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "RTM Métro 1–2 and Tramway 1–3",
-        "region": "Europe",
+        "region": "France South",
         "country": "France",
         "in_default_view": False,
         # BELOW THE MARKER, not above, and the check chose it rather than
@@ -735,13 +757,14 @@ CITIES = [
         "lon": 1.4442,
         "page": "pages/23_Toulouse_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined to INSEE's geolocation (99.93%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Tisséo Métro A–B, Tramway T1 and the Téléo cable car",
-        "region": "Europe",
+        "region": "France South",
         "country": "France",
         "in_default_view": False,
         # ANCHORED "end" SO THE LABEL RUNS WEST, and the check chose it.
@@ -770,13 +793,14 @@ CITIES = [
         "lon": 3.0573,
         "page": "pages/24_Lille_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined to INSEE's geolocation (99.98%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "ilévia Métro 1–2 and Tram R–T, across eleven communes",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
         # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN - not left
@@ -801,7 +825,7 @@ CITIES = [
         # label left of its dot is the only pair at PROBLEMS 0 in every region
         # at 375, 768 and 1200; due east covered Prague's marker, below met
         # Rennes and covered Paris.
-        "label_offset": ("start", 12, 18),
+        "label_offset": ("middle", 0, -20),
     },
     {
         "name": "Rennes",
@@ -809,13 +833,14 @@ CITIES = [
         "lon": -1.68,
         "page": "pages/25_Rennes_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined to INSEE's geolocation (99.97%)",
         "data_age": "SIRENE monthly; fetched 2026-09-23",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "STAR Métro a and b",
-        "region": "Europe",
+        "region": "France North",
         "country": "France",
         "in_default_view": False,
         # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN. Width
@@ -825,7 +850,7 @@ CITIES = [
         # widths: PROBLEMS 0, and Rennes is not among the labels clipped at
         # 375 px. It sits alone in the west of France, 3.4 degrees of
         # longitude from Paris, so a label pointing up has nothing to meet.
-        "label_offset": ("middle", 0, -22),
+        "label_offset": ("start", 10, 6),
     },
     {
         "name": "Oslo",
@@ -833,6 +858,7 @@ CITIES = [
         "lon": 10.7522,
         "page": "pages/26_Oslo_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined by address (96.8%)",
         "data_age": "Fetched 2026-09-24 (no source date)",
         "rail_extra": "Trams",
@@ -860,6 +886,7 @@ CITIES = [
         "lon": 12.5683,
         "page": "pages/27_Copenhagen_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined by address (98.3%)",
         "data_age": "Weekly extract; fetched 2026-09-24",
         "rail_extra": "Suburban rail",
@@ -882,6 +909,7 @@ CITIES = [
         "lon": 14.4378,
         "page": "pages/28_Prague_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined by address (99.99%)",
         "data_age": "As of 2026-08-31",
         "rail_extra": "—",
@@ -903,6 +931,7 @@ CITIES = [
         "lon": 4.8936,
         "page": "pages/29_Amsterdam_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Live register; fetched 2026-09-24",
         "rail_extra": "Trams",
@@ -925,6 +954,7 @@ CITIES = [
         "lon": 12.4829,
         "page": "pages/30_Rome_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined by address (95.7%)",
         "data_age": "July 2025",
         "rail_extra": "Both",
@@ -947,6 +977,7 @@ CITIES = [
         "lon": -46.6333,
         "page": "pages/31_Sao_Paulo_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "Suburban rail",
@@ -970,6 +1001,7 @@ CITIES = [
         "lon": -43.1729,
         "page": "pages/32_Rio_de_Janeiro_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "Both",
@@ -991,6 +1023,7 @@ CITIES = [
         "lon": -43.9345,
         "page": "pages/33_Belo_Horizonte_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "—",
@@ -1012,6 +1045,7 @@ CITIES = [
         "lon": -47.8828,
         "page": "pages/34_Brasilia_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "—",
@@ -1033,6 +1067,7 @@ CITIES = [
         "lon": -38.5014,
         "page": "pages/35_Salvador_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "—",
@@ -1054,6 +1089,7 @@ CITIES = [
         "lon": -38.5267,
         "page": "pages/36_Fortaleza_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "—",
@@ -1081,6 +1117,7 @@ CITIES = [
         "lon": -51.2177,
         "page": "pages/37_Porto_Alegre_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "—",
@@ -1107,6 +1144,7 @@ CITIES = [
         "lon": -34.877,
         "page": "pages/38_Recife_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "—",
@@ -1128,6 +1166,7 @@ CITIES = [
         "lon": -46.3336,
         "page": "pages/39_Santos_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Census coordinates",
         "data_age": "2022 census",
         "rail_extra": "Trams",
@@ -1150,6 +1189,7 @@ CITIES = [
         "lon": 4.4792,
         "page": "pages/40_Rotterdam_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Permits to 2026-09-24 (5-year window)",
         "rail_extra": "Trams",
@@ -1173,7 +1213,8 @@ CITIES = [
         "lat": 22.3193,
         "lon": 114.1694,
         "page": "pages/41_Hong_Kong_Heatmap.py",
-        "coverage": "narrowed",
+        "coverage": "one_bucket",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "Registers of 2026-09-25",
         "rail_extra": "Trams",
@@ -1196,6 +1237,7 @@ CITIES = [
         "lon": 24.1052,
         "page": "pages/42_Riga_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "tram",
         "placement": "Joined by address (96.8%)",
         "data_age": "Cadastre of 2026-09-20; excise licences daily",
         "rail_extra": "Trams",
@@ -1215,6 +1257,7 @@ CITIES = [
         "lon": 126.978,
         "page": "pages/43_Seoul_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register building points (98%)",
         "data_age": "Updated to 2026-09-24",
         "rail_extra": "—",
@@ -1235,6 +1278,7 @@ CITIES = [
         "lon": 120.6736,
         "page": "pages/44_Taichung_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined by door plate (92.2%)",
         "data_age": "Register of 2026-09-25",
         "rail_extra": "—",
@@ -1256,6 +1300,7 @@ CITIES = [
         "lon": 121.301,
         "page": "pages/45_Taoyuan_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined by door plate (93.6%)",
         "data_age": "Register of 2026-09-25",
         "rail_extra": "—",
@@ -1278,6 +1323,7 @@ CITIES = [
         "lon": 121.5319,
         "page": "pages/46_Taipei_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Joined by door plate (91.8-95.0%)",
         "data_age": "Register of 2026-09-25",
         "rail_extra": "Trams",
@@ -1290,7 +1336,7 @@ CITIES = [
         # EAST of its dot: Taoyuan's dot sits a few pixels west at the East Asia
         # zoom (Taoyuan's name goes west). Scored by check_macro_labels.py (width
         # 112.5 px, measured 2026-09-25).
-        "label_offset": ("start", 10, 0),
+        "label_offset": ("start", 12, 0),
     },
     {
         "name": "Daegu",
@@ -1298,6 +1344,7 @@ CITIES = [
         "lon": 128.6014,
         "page": "pages/48_Daegu_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register building points (99%)",
         "data_age": "Rows end 2025-08-31",
         "rail_extra": "—",
@@ -1317,6 +1364,7 @@ CITIES = [
         "lon": 129.0756,
         "page": "pages/49_Busan_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register building points (99%)",
         "data_age": "Frozen at 2026-04-15",
         "rail_extra": "—",
@@ -1346,6 +1394,7 @@ CITIES = [
         "lon": -100.3161,
         "page": "pages/47_Monterrey_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "DENUE May 2026 edition, fetched 2026-09-27",
         "rail_extra": "—",
@@ -1370,6 +1419,7 @@ CITIES = [
         "lon": 135.195,
         "page": "pages/50_Kobe_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Joined to address blocks (97.3%)",
         "data_age": "Permits in force 2026-03-31",
         "rail_extra": "Suburban rail",
@@ -1390,6 +1440,7 @@ CITIES = [
         "lon": 135.5023,
         "page": "pages/51_Osaka_Heatmap.py",
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Joined to address blocks (99.1%)",
         "data_age": "Permits as of 2026-06-30",
         "rail_extra": "Both",
@@ -1407,7 +1458,7 @@ CITIES = [
         # RIGHT of its dot since 2026-09-28: Sapporo widened the East Asia
         # frame, and below the dot Osaka's pill then met Busan's (4.0 x 13.6
         # px at every width). Kobe's label stays above its own dot.
-        "label_offset": ("start", 10, 8),
+        "label_offset": ("start", 12, 8),
     },
     {
         "name": "Sapporo",
@@ -1417,6 +1468,7 @@ CITIES = [
         # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
         # figures are table C's and D's in docs/map_inconsistencies.md.
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Joined to address blocks (86.0%)",
         "data_age": "Permits as of 2026-03-31",
         "rail_extra": "Both",
@@ -1439,6 +1491,7 @@ CITIES = [
         # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
         # figures are table C's and D's in docs/map_inconsistencies.md.
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Joined to address blocks (98.1%); ministry coordinates where missed",
         "data_age": "Permits as of 2026-08-31; ministry filings fetched 2026-09-27",
         "rail_extra": "Suburban rail",
@@ -1463,6 +1516,7 @@ CITIES = [
         # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
         # figures are table C's and D's in docs/map_inconsistencies.md.
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Joined to address blocks (93.2%)",
         "data_age": "Rebuilt from permits to 2026-07-31 (an upper bound)",
         "rail_extra": "Both",
@@ -1488,6 +1542,7 @@ CITIES = [
         # Macro-map facts (owner-approved 2026-09-28): the figures are table
         # C's and D's in docs/map_inconsistencies.md.
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Joined to address blocks (99.7%)",
         "data_age": "Ward lists dated 2022-11-30 to 2026-09-02",
         "rail_extra": "Both",
@@ -1516,6 +1571,7 @@ CITIES = [
         # review time); "Chamber of commerce register" and "Personal services
         # thin" are new allowed values there.
         "coverage": "narrowed",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "As of 2026-09-01",
         "rail_extra": "Suburban rail",
@@ -1539,7 +1595,8 @@ CITIES = [
         # Owner-approved 2026-09-28. rail_extra, record_kind and categories are
         # the "Why the maps differ" page's fields (worktree-cleanup, landing at
         # review time); "Food hygiene register" is a new allowed value there.
-        "coverage": "narrowed",
+        "coverage": "one_bucket",
+        "mode": "metro",
         "placement": "Register coordinates (91%) and postcode centres (4%)",
         "data_age": "Extracts of 2026-09-09 to 2026-09-16",
         "rail_extra": "Suburban rail",
@@ -1554,7 +1611,7 @@ CITIES = [
         # Above met Amsterdam and Rotterdam; below and right met Rennes or
         # Lille. With Lille's label turned down and east, left of the dot is
         # PROBLEMS 0 in every region at 375, 768 and 1200.
-        "label_offset": ("end", -10, 5),
+        "label_offset": ("end", -12, 5),
     },
     {
         "name": "Buenos Aires",
@@ -1563,6 +1620,7 @@ CITIES = [
         "page": "pages/58_Buenos_Aires_Heatmap.py",
         # Owner-approved 2026-09-28: the "Why the maps differ" row.
         "coverage": "full",
+        "mode": "metro",
         "placement": "Parcel centres (99.8%) and block centres (0.1%)",
         "data_age": "Surveyed 2022–2024",
         "rail_extra": "—",
@@ -1584,7 +1642,8 @@ CITIES = [
         "lon": -4.2514,
         "page": "pages/59_Glasgow_Heatmap.py",
         # Owner-approved 2026-09-28, London's values on Scotland's scheme.
-        "coverage": "narrowed",
+        "coverage": "one_bucket",
+        "mode": "metro",
         "placement": "Register coordinates (99%)",
         "data_age": "Extract of 2026-09-14",
         "rail_extra": "—",
@@ -1612,7 +1671,8 @@ CITIES = [
         # Owner-approved 2026-09-28, London's values; rail_extra "—": the
         # Metro is its own system, its Sunderland stretch on shared track
         # disclosed on the page.
-        "coverage": "narrowed",
+        "coverage": "one_bucket",
+        "mode": "metro",
         "placement": "Register coordinates (90%) and postcode centres (10%)",
         "data_age": "Extracts of 2026-09-09 to 2026-09-16",
         "rail_extra": "—",
@@ -1641,6 +1701,7 @@ CITIES = [
         "page": "pages/61_Sydney_Heatmap.py",
         # Owner-approved 2026-09-28.
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates (per building)",
         "data_age": "Survey of 2022",
         "rail_extra": "Suburban rail",
@@ -1663,6 +1724,7 @@ CITIES = [
         "page": "pages/62_Melbourne_Heatmap.py",
         # Owner-approved 2026-09-28.
         "coverage": "full",
+        "mode": "metro",
         "placement": "Census coordinates (per property)",
         "data_age": "Census of 2024",
         "rail_extra": "Suburban rail",
@@ -1683,7 +1745,8 @@ CITIES = [
         "lat": 59.3293,
         "lon": 18.0686,
         "page": "pages/63_Stockholm_Heatmap.py",
-        "coverage": "narrowed",
+        "coverage": "one_bucket",
+        "mode": "metro",
         "placement": "Register coordinates (98.4%)",
         "data_age": "Register frozen at 2025-10-21",
         "rail_extra": "—",
@@ -1706,7 +1769,8 @@ CITIES = [
         "lat": 44.4268,
         "lon": 26.1025,
         "page": "pages/64_Bucharest_Heatmap.py",
-        "coverage": "narrowed",
+        "coverage": "one_bucket",
+        "mode": "metro",
         "placement": "Joined by address (74.9%)",
         "data_age": "Registers of 2026-08-25",
         "rail_extra": "—",
@@ -1728,6 +1792,7 @@ CITIES = [
         "lon": 126.7052,
         "page": "pages/65_Incheon_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "SEMAS edition of 2026-06-30",
         "rail_extra": "—",
@@ -1751,6 +1816,7 @@ CITIES = [
         "lon": 126.832,
         "page": "pages/66_Goyang_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "SEMAS edition of 2026-06-30",
         "rail_extra": "—",
@@ -1772,6 +1838,7 @@ CITIES = [
         "lon": 127.1265,
         "page": "pages/67_Seongnam_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "SEMAS edition of 2026-06-30",
         "rail_extra": "—",
@@ -1793,6 +1860,7 @@ CITIES = [
         "lon": 127.1776,
         "page": "pages/68_Yongin_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "SEMAS edition of 2026-06-30",
         "rail_extra": "—",
@@ -1814,6 +1882,7 @@ CITIES = [
         "lon": 127.0286,
         "page": "pages/69_Suwon_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "SEMAS edition of 2026-06-30",
         "rail_extra": "—",
@@ -1835,6 +1904,7 @@ CITIES = [
         "lon": 126.766,
         "page": "pages/70_Bucheon_Heatmap.py",
         "coverage": "full",
+        "mode": "metro",
         "placement": "Register coordinates",
         "data_age": "SEMAS edition of 2026-06-30",
         "rail_extra": "—",
@@ -1856,6 +1926,7 @@ CITIES = [
         "lon": 5.3221,
         "page": "pages/71_Bergen_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Joined by address (96.2%)",
         "data_age": "Register 2026-09-23; transit fetched 2026-09-27 (no source date)",
         "rail_extra": "Trams",
@@ -1879,6 +1950,7 @@ CITIES = [
         "lon": 10.2108,
         "page": "pages/72_Aarhus_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Joined by address (97.1%)",
         "data_age": "Weekly extract; fetched 2026-09-24",
         "rail_extra": "Trams",
@@ -1901,7 +1973,8 @@ CITIES = [
         "lat": 42.8864,
         "lon": -78.8784,
         "page": "pages/73_Buffalo_Heatmap.py",
-        "coverage": "full",
+        "coverage": "narrowed",
+        "mode": "light_rail",
         "placement": "Register coordinates",
         "data_age": "Licences unexpired on 2026-09-29; fetched 2026-09-29",
         "rail_extra": "Trams",
@@ -1932,6 +2005,7 @@ CITIES = [
         "lon": -121.4944,
         "page": "pages/74_Sacramento_Heatmap.py",
         "coverage": "full",
+        "mode": "light_rail",
         "placement": "Geocoded by address (98.0%)",
         "data_age": "Licences unexpired on 2026-09-29; fetched 2026-09-29",
         "rail_extra": "Trams",
@@ -1955,12 +2029,13 @@ CITIES = [
         "lat": 29.7604,
         "lon": -95.3698,
         "page": "pages/75_Houston_Heatmap.py",
-        "coverage": "full",
+        "coverage": "narrowed",
+        "mode": "light_rail",
         "placement": "Joined by address (83.9%) and geocoded (12.4%)",
         "data_age": "Active permits; fetched 2026-09-29",
         "rail_extra": "Trams",
         "record_kind": "Tax register",
-        "categories": "All three",
+        "categories": "Personal services thin",
         "blurb": "METRORail: the Red, Green and Purple Lines",
         # EAST, on the owner's split of 2026-09-22: West is California, East is
         # Chicago and everything else in the country.
@@ -1972,6 +2047,449 @@ CITIES = [
         # Monterrey's marker; check_macro_labels.py (python -B) passes start
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 0),
+    },
+    {
+        "name": "Le Mans",
+        "lat": 47.982,
+        "lon": 0.2012,
+        "page": "pages/100_Le_Mans_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "SETRAM trams T1 and T2",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Besançon",
+        "lat": 47.2603,
+        "lon": 6.0185,
+        "page": "pages/101_Besancon_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Ginko trams T1 and T2",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("start", 10, 0),
+    },
+    {
+        "name": "Avignon",
+        "lat": 43.9416,
+        "lon": 4.8368,
+        "page": "pages/102_Avignon_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.96%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Orizo tram T1",
+        "region": "France South",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Tours",
+        "lat": 47.3945,
+        "lon": 0.6847,
+        "page": "pages/103_Tours_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Fil Bleu tram A",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -16),
+    },
+    {
+        "name": "Dijon",
+        "lat": 47.3319,
+        "lon": 5.0446,
+        "page": "pages/104_Dijon_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Divia trams T1 and T2",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
+    },
+    {
+        "name": "Reims",
+        "lat": 49.2531,
+        "lon": 4.0481,
+        "page": "pages/105_Reims_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Grand Reims Mobilités trams T1 and T2",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Orléans",
+        "lat": 47.8734,
+        "lon": 1.9173,
+        "page": "pages/106_Orleans_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.95%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "TAO trams A and B",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Mulhouse",
+        "lat": 47.7525,
+        "lon": 7.3259,
+        "page": "pages/107_Mulhouse_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Soléa trams 1, 2 and 3",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Brest",
+        "lat": 48.4085,
+        "lon": -4.4873,
+        "page": "pages/108_Brest_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Bibus trams A and B and the cable car",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Saint-Étienne",
+        "lat": 45.4242,
+        "lon": 4.4142,
+        "page": "pages/109_Saint_Etienne_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "STAS trams T1, T2 and T3",
+        "region": "France South",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -24),
+    },
+    {
+        "name": "Nice",
+        "lat": 43.7031,
+        "lon": 7.2437,
+        "page": "pages/110_Nice_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.96%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Lignes d'Azur trams 1, 2, 3 and B",
+        "region": "France South",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Montpellier",
+        "lat": 43.61,
+        "lon": 3.8785,
+        "page": "pages/111_Montpellier_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.97%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "TaM trams 1 to 5",
+        "region": "France South",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
+    },
+    {
+        "name": "Strasbourg",
+        "lat": 48.569,
+        "lon": 7.7526,
+        "page": "pages/112_Strasbourg_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.93%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "CTS trams A to F",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Le Havre",
+        "lat": 49.496,
+        "lon": 0.1414,
+        "page": "pages/113_Le_Havre_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.84%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "LiA trams A and B",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        # Le Havre's label is set below and right of the dot by hand: at
+        # the scaffold's default it sat on "Rouen (Regional)". At 1200 px
+        # it is within 4 px of reading as Rouen's (noted for the owner).
+        "label_offset": ("middle", 20, 20),
+    },
+    {
+        "name": "Caen",
+        "lat": 49.1845,
+        "lon": -0.3738,
+        "page": "pages/114_Caen_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (100.00%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Twisto trams T1, T2 and T3",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
+    },
+    {
+        "name": "Rouen (Regional)",
+        "lat": 49.4411,
+        "lon": 1.0852,
+        "page": "pages/115_Rouen_Heatmap.py",
+        "coverage": "full",
+        "mode": "light_rail",
+        "placement": "Joined to INSEE's geolocation (99.95%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Astuce's Métro, a light rail",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Bordeaux (Regional)",
+        "lat": 44.8637,
+        "lon": -0.5596,
+        "page": "pages/116_Bordeaux_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.95%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "TBM trams A to F",
+        "region": "France South",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Nantes (Regional)",
+        "lat": 47.2382,
+        "lon": -1.5371,
+        "page": "pages/117_Nantes_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.98%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Naolib trams 1, 2 and 3",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("start", 10, 0),
+    },
+    {
+        "name": "Grenoble (Regional)",
+        "lat": 45.1836,
+        "lon": 5.7245,
+        "page": "pages/118_Grenoble_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.93%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "M réso trams A to E",
+        "region": "France South",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
+    },
+    {
+        "name": "Valenciennes (Regional)",
+        "lat": 50.362,
+        "lon": 3.5091,
+        "page": "pages/119_Valenciennes_Heatmap.py",
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Joined to INSEE's geolocation (99.96%)",
+        "data_age": "SIRENE monthly; fetched 2026-09-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Transvilles trams T1 and T2",
+        "region": "France North",
+        "country": "France",
+        "in_default_view": False,
+        # MEASURED by the cleanup session on a combined tree (macro-france
+        # plus the twenty French batch cities, 95 in all), 2026-09-30:
+        # check_macro_labels.py scored PROBLEMS 0 in every region at
+        # 375/768/1200 px.
+        "label_offset": ("end", -10, 0),
     },
 ]
 
@@ -2103,6 +2621,17 @@ REGION_ORDER = [
     # force the frame open; that is a measurement (`check_macro_labels.py`
     # scores every city in every region at three widths), not a judgement.
     "Europe",
+    # FRANCE NORTH AND FRANCE SOUTH (owner, 2026-09-30, "go with north/south"),
+    # split at latitude 46.5. France's 25 cities (5 built, 20 in the tram batch)
+    # cannot share one view at ANY zoom: measured on the real label text, at 4.5
+    # three labels cannot be placed and four cities fall off a phone; at 5.0 one
+    # label fails and Marseille, Lille and Valenciennes fall off even at 1200 px -
+    # France is taller than the 650 px canvas. Two leaf regions at REGION_ZOOM
+    # 5.0 place every label. Europe keeps every other European city: the French
+    # dots still show there, labelled in their own region, because labelling all
+    # 25 at Europe's zoom is exactly what cannot work.
+    "France North",
+    "France South",
     # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
     # further country on the continent joins this view rather than adding one.
     # Brazil alone spans Porto Alegre to Fortaleza, about 3,200 km: the width
@@ -2150,6 +2679,14 @@ REGION_ORDER = [
 # Dublin's label clips 11 px and Bucharest's 25 px, PROBLEMS 0.
 REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest")}
 
+# A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
+# and France South at 5.0, where every French label places. Fitted, each would
+# open further out and its labels would collide; fit_view sizes for a 320 px
+# reference, so at 5.0 a few cities sit a pan away on a phone (5 in the north,
+# Nice in the south), and the list beneath the map always has them. Overview.py
+# and check_macro_labels.py both apply it; the centre is still each region's own.
+REGION_ZOOM = {"France North": 5.0, "France South": 5.0}
+
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
 REGION_MEMBERS["Global"] = tuple(
@@ -2172,7 +2709,7 @@ def cities_in(region):
 
 
 REGIONS = [
-    {"name": name, "cities": cities_in(name), "zoom": None}
+    {"name": name, "cities": cities_in(name), "zoom": REGION_ZOOM.get(name)}
     for name in REGION_ORDER
     if cities_in(name)
 ]
@@ -2205,6 +2742,19 @@ if _untagged:
         f"not a tag - tag the half the city is in. "
         f"Every city needs one - the macro map opens on a region and a city "
         f"without one would be reachable only from the text list."
+    )
+
+# A dot's colour on the macro map (owner, 2026-09-29): the HIGHEST-ORDER mode
+# the city's own map draws, metro > light rail > tram. "Trams" in `rail_extra`
+# does not make a metro city a tram city. Each city's value was approved by the
+# owner; a new city's goes to the owner with its build.
+MODES = ("metro", "light_rail", "tram")
+_unmoded = [c["name"] for c in CITIES if c.get("mode") not in MODES]
+if _unmoded:
+    raise ValueError(
+        f"cities.py: {_unmoded} have no `mode`, or one not in {MODES}. It is "
+        f"the highest-order mode the city's map draws and colours its macro "
+        f"dot; pandas would otherwise fill a missing one with NaN."
     )
 
 # --- CITY SWITCHER ORDER -----------------------------------------------------

@@ -1,0 +1,22 @@
+{
+  "fetched_utc": "2026-09-30T23:39:55+00:00",
+  "gtfs_url": "https://www.data.gouv.fr/api/1/datasets/r/982e0826-4118-42d9-9b73-c3d3b455cd4f",
+  "gtfs_licence": "lov2",
+  "boundary_url": "https://geo.api.gouv.fr/communes/59606?geometry=contour&format=geojson",
+  "feed_info": null,
+  "nap": {
+    "dataset": "Réseau urbain Transvilles",
+    "dataset_updated": "2026-09-30T02:41:42.417778Z",
+    "resource_updated": "2026-08-19T07:55:43.956000Z",
+    "start_date": "2026-08-14",
+    "end_date": "2026-12-31",
+    "licence": "lov2"
+  },
+  "osm_query": "[out:json][timeout:120];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](50.27,3.34,50.52,3.66);out geom;",
+  "osm_host": "overpass-api.de",
+  "osm_relations": 10,
+  "sirene_etab_title": "Sirene : Fichier StockEtablissement - 01 septembre 2026 (format parquet)",
+  "sirene_etab_last_modified": "2026-09-01T09:08:32.653000+00:00",
+  "sirene_geoloc_title": "Sirene : Fichier géolocalisation établissements - septembre 2026 (format parquet)",
+  "sirene_geoloc_last_modified": "2026-09-21T07:01:06.423000+00:00"
+}

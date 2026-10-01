@@ -1,0 +1,25 @@
+stop_id,station,lines,reason,latitude,longitude
+42163,Aube Rouge,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.638554307420385,3.9247811010044846
+42157,Centurions,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.63276271988455,3.915644130944707
+42151,Charles de Gaulle,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.628598067540835,3.8977097552811975
+42153,Clairval,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.63014213944512,3.902528054132482
+42167,Georges Pompidou,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.649312879132495,3.9209601094271407
+42155,La Galine,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.63142535446048,3.908952140417933
+42159,Notre-Dame de Sablassou,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.634211317131275,3.9222021458050973
+42165,Via Domitia,2,"in Castelnau-le-Lez (34057), outside commune 34172",43.64672985378054,3.9294282633059496
+45101,Clapiers,5,"in Clapiers (34077), outside commune 34172",43.65369722392234,3.87267721438292
+42169,Jacou,2,"in Jacou (34120), outside commune 34172",43.65451244621156,3.9127244075898546
+43101,Juvignac,3,"in Juvignac (34123), outside commune 34172",43.61745385711838,3.809967134698776
+43147,Boirargues,3,"in Lattes (34129), outside commune 34172",43.58537107116693,3.920102576234732
+43161,Cougourlude,3,"in Lattes (34129), outside commune 34172",43.57133837393404,3.913954775260493
+43259,Lattes Centre,3,"in Lattes (34129), outside commune 34172",43.57067116593091,3.9050691604418577
+43149,Soriech,3,"in Lattes (34129), outside commune 34172",43.58262404937188,3.925666718239312
+45102,Montferrier-sur-Lez,5,"in Montferrier-sur-Lez (34169), outside commune 34172",43.65139475426143,3.8672282829856552
+43151,EcoPôle,3,"in Pérols (34198), outside commune 34172",43.578042171462236,3.9350531917231084
+43153,Parc Expo,3,"in Pérols (34198), outside commune 34172",43.5728571811557,3.9456477486040993
+43155,Pérols Centre,3,"in Pérols (34198), outside commune 34172",43.56538466796881,3.957231371163817
+43201,Pérols Étang de l'Or,3,"in Pérols (34198), outside commune 34172",43.55787993452893,3.9635947134788316
+42105,La Condamine,2,"in Saint-Jean-de-Védas (34270), outside commune 34172",43.571991287312905,3.8443681238136937
+42101,Saint-Jean de Védas Centre,2,"in Saint-Jean-de-Védas (34270), outside commune 34172",43.57491636435485,3.830576204354026
+42103,Saint-Jean le Sec,2,"in Saint-Jean-de-Védas (34270), outside commune 34172",43.57081747455927,3.83782903624238
+42107,Victoire 2,2,"in Saint-Jean-de-Védas (34270), outside commune 34172",43.575164079078775,3.849805611446077

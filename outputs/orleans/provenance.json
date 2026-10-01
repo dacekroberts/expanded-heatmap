@@ -1,0 +1,26 @@
+{
+  "fetched_utc": "2026-09-30T23:08:55+00:00",
+  "gtfs_url": "https://www.data.gouv.fr/api/1/datasets/r/b2dfbaa3-47e9-4749-b6a4-750bebd760e7",
+  "gtfs_licence": "lov2",
+  "boundary_url": "https://geo.api.gouv.fr/communes/45234?geometry=contour&format=geojson",
+  "feed_info": {
+    "feed_publisher_name": "TAO (Orléans)",
+    "feed_start_date": "20260918",
+    "feed_end_date": "20270103"
+  },
+  "nap": {
+    "dataset": "Réseau urbain TAO",
+    "dataset_updated": "2026-09-30T00:57:46.255629Z",
+    "resource_updated": "2026-09-28T17:33:08.000000Z",
+    "start_date": "2026-09-18",
+    "end_date": "2027-01-03",
+    "licence": "lov2"
+  },
+  "osm_query": "[out:json][timeout:120];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](47.79,1.86,47.95,1.97);out geom;",
+  "osm_host": "overpass-api.de",
+  "osm_relations": 4,
+  "sirene_etab_title": "Sirene : Fichier StockEtablissement - 01 septembre 2026 (format parquet)",
+  "sirene_etab_last_modified": "2026-09-01T09:08:32.653000+00:00",
+  "sirene_geoloc_title": "Sirene : Fichier géolocalisation établissements - septembre 2026 (format parquet)",
+  "sirene_geoloc_last_modified": "2026-09-21T07:01:06.423000+00:00"
+}

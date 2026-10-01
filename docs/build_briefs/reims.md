@@ -6,6 +6,16 @@
 
 ---
 
+> **CORRECTED AT BUILD (2026-09-30): Reims has TWO public tram lines, T1 and
+> T2, not one.** Since 2025-11-24 Grand Reims Mobilités runs T1 (Neufchâtel -
+> Hôpital Debré, 21 stops) and T2 (Neufchâtel - Gare Champagne TGV, 22 stops),
+> the former lines A and B (fr.wikipedia's "Tramway de Reims"; OpenStreetMap's
+> relations agree). The feed still carries one route, `TRAM`, so the build
+> splits its trips by terminus (`ROUTE_BRANCHES` in the config), and draws and
+> labels T1 and T2. Gate 3 is exact against the published 21 and 22. The
+> "one line in the legend" below is superseded. Build log:
+> `docs/decisions_drafts/france-build.md`.
+
 ## The one-line summary
 
 One tram line with two branches, 21 of 24 stops in the commune, and a feed that calls it a metro.

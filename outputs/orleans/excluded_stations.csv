@@ -1,0 +1,20 @@
+stop_id,station,lines,reason,latitude,longitude
+ORLEANS:StopArea:TBUSTI1,Bustière,A,"in Fleury-les-Aubrais (45147), outside commune 45234",47.929253,1.91293
+ORLEANS:StopArea:TAUBRA1,Gare des Aubrais,A,"in Fleury-les-Aubrais (45147), outside commune 45234",47.926533,1.907023
+ORLEANS:StopArea:A_Jules_Verne,Jules Verne,A,"in Fleury-les-Aubrais (45147), outside commune 45234",47.928166,1.925048
+ORLEANS:StopArea:TLAMBA1,Lamballe,A,"in Fleury-les-Aubrais (45147), outside commune 45234",47.928085,1.91938
+ORLEANS:StopArea:B_Georges_Pompidou,Georges Pompidou,B,"in La Chapelle-Saint-Mesmin (45075), outside commune 45234",47.896812,1.854195
+ORLEANS:StopArea:TLARRY1,Larry - Saint Fiacre,A,"in Olivet (45232), outside commune 45234",47.854198,1.909503
+ORLEANS:StopArea:TAULNA1,Les Aulnaies,A,"in Olivet (45232), outside commune 45234",47.846413,1.916943
+ORLEANS:StopArea:TLORET1,Lorette,A,"in Olivet (45232), outside commune 45234",47.849735,1.925371
+ORLEANS:StopArea:TVHUGO1,Victor Hugo,A,"in Olivet (45232), outside commune 45234",47.857269,1.905087
+ORLEANS:StopArea:A_Zenith,Zénith,A,"in Olivet (45232), outside commune 45234",47.869202,1.912409
+ORLEANS:StopArea:TCLARC1,Clos de l'Arche,B,"in Saint-Jean-de-Braye (45284), outside commune 45234",47.909924,1.964342
+ORLEANS:StopArea:B_Clos_du_Hameau,Clos du Hameau,B,"in Saint-Jean-de-Braye (45284), outside commune 45234",47.911011,1.976329
+ORLEANS:StopArea:TGAUBR1,Gaudier-Brzeska,B,"in Saint-Jean-de-Braye (45284), outside commune 45234",47.910267,1.945995
+ORLEANS:StopArea:TLBLUM1,Léon Blum,B,"in Saint-Jean-de-Braye (45284), outside commune 45234",47.91037,1.969019
+ORLEANS:StopArea:TPTBOR1,Pont Bordeau,B,"in Saint-Jean-de-Braye (45284), outside commune 45234",47.909069,1.95302
+ORLEANS:StopArea:TVERVI1,Verville,B,"in Saint-Jean-de-Braye (45284), outside commune 45234",47.90929,1.958545
+ORLEANS:StopArea:TMLKIN1,Martin Luther King,B,"in Saint-Jean-de-la-Ruelle (45285), outside commune 45234",47.901871,1.866842
+ORLEANS:StopArea:TTANGU1,Rol Tanguy,B,"in Saint-Jean-de-la-Ruelle (45285), outside commune 45234",47.902664,1.871698
+ORLEANS:StopArea:TTFONT1,Trois Fontaines,B,"in Saint-Jean-de-la-Ruelle (45285), outside commune 45234",47.902004,1.860241

@@ -1356,6 +1356,50 @@ same national register, so this is a scoping choice rather than a data limit.
 project** - 17.5% here - with the name, the address and the coordinates removed
 together, so those rows cannot reach the map.
 
+### The French tram cities - Paris's register and rules, city by city
+
+**Everything excluded in Paris is excluded in each of these cities, for the
+same reasons** - the four no-premises trades, the wholesale laundry, funeral
+services, and the two catch-alls `96.09Z` and `56.29B`. They were measured
+again for each city rather than inherited: the `96.09Z` share below is the one
+each city's own build printed, against 9.6-14.0% in Paris, Marseille,
+Toulouse, Lille and Rennes.
+
+**Stops beyond a commune boundary are excluded for being in another commune.**
+Each line is drawn to its ends, but no ring is drawn around those stops, and
+their businesses are not counted. They are listed, with the commune each lies
+in, at `outputs/<city>/excluded_stations.csv`. Those communes' businesses are in
+the same national register, so this is a scoping choice rather than a data
+limit. A city marked "(Regional)" is scoped to every commune its lines serve,
+so it leaves no stop out.
+
+**The share withheld by INSEE is withheld by INSEE, not by this project**, with
+the name, the address and the coordinates removed together, so those rows
+cannot reach the map.
+
+| City | `96.09Z` excluded | Withheld by INSEE | Stops left out, by commune |
+|---|---|---|---|
+| Le Mans | 13.0% | 15.8% | none |
+| Besançon | 10.5% | 15.9% | 2 in Chalezeule |
+| Avignon | 9.4% | 14.5% | none |
+| Tours | 11.2% | 19.0% | 7 in Joué-lès-Tours |
+| Dijon | 13.4% | 18.7% | 3 in Chenôve; 3 in Quetigny |
+| Reims | 11.9% | 17.7% | 2 in Bezannes; 1 in Bétheny |
+| Orléans | 11.9% | 19.8% | 4 in Fleury-les-Aubrais; 1 in La Chapelle-Saint-Mesmin; 5 in Olivet; 6 in Saint-Jean-de-Braye; 3 in Saint-Jean-de-la-Ruelle |
+| Mulhouse | 8.9% | 12.7% | 1 in Lutterbach |
+| Brest | 12.0% | 18.2% | 1 in Gouesnou; 1 in Guipavas |
+| Saint-Étienne | 8.6% | 16.8% | 5 in Saint-Priest-en-Jarez |
+| Nice | 12.4% | 15.9% | none |
+| Montpellier | 13.0% | 18.7% | 8 in Castelnau-le-Lez; 1 in Clapiers; 1 in Jacou; 1 in Juvignac; 4 in Lattes; 1 in Montferrier-sur-Lez; 4 in Pérols; 4 in Saint-Jean-de-Védas |
+| Strasbourg | 10.3% | 15.9% | 5 in Eckbolsheim; 3 in Hœnheim; 8 in Illkirch-Graffenstaden; 3 in Kehl, Germany; 2 in Lingolsheim; 3 in Ostwald; 5 in Schiltigheim |
+| Le Havre | 10.7% | 15.8% | 1 in Octeville-sur-Mer |
+| Caen | 11.2% | 17.5% | 2 in Fleury-sur-Orne; 5 in Hérouville-Saint-Clair; 2 in Ifs |
+| Rouen (Regional) | 9.5% | 17.3% | none (regional scope) |
+| Bordeaux (Regional) | 13.7% | 17.5% | none (regional scope) |
+| Nantes (Regional) | 15.6% | 19.1% | none (regional scope) |
+| Grenoble (Regional) | 11.4% | 18.4% | none (regional scope) |
+| Valenciennes (Regional) | 9.2% | 16.0% | none (regional scope) |
+
 ### Bergen - Oslo's register and rules
 
 **Oslo's rules, unchanged** (the section below): the register's premises,
