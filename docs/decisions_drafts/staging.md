@@ -4,6 +4,28 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - The UK six approved with their scopes: four regional pages, two city pages (owner)
+
+- **The owner: "yes to the set"**, on staging's recommendations. All six
+  are food-only pages on the FSA register, London's filter and Glasgow's
+  privacy rules.
+
+  | # | Page | Scope | Storefronts | Why |
+  |---|---|---|---|---|
+  | 1 | **Manchester (Regional)** | the 7 Metrolink districts | 12,451 | Manchester alone holds 42 of 99 stops, a stub |
+  | 2 | **Birmingham (Regional)** | Birmingham, Sandwell and Wolverhampton, built now | 9,827 | Birmingham alone holds 16 of 35 stops |
+  | 3 | **Edinburgh** | the city | 3,933 | Every stop is inside it |
+  | 4 | **Sheffield** | the city, without the Rotherham Tram-Train | 3,447 | The Tram-Train runs every 30 minutes on converted railway (Aarhus L1's precedent); food first, the city's rates list a later screen |
+  | 5 | **Nottingham (Regional)** | the city, Broxtowe, Rushcliffe and Ashfield | 4,723 | Beeston's 9 stops and the line ends draw filled rings |
+  | 6 | **Blackpool (Regional)** | Blackpool and Wyre | 1,744 | Keeps Cleveleys and Fleetwood, the terminus |
+
+- **The Dudley branch** (West Midlands Metro, about late 2026) becomes a
+  dated watch item, not a reason to wait.
+- **The build order is largest first**, so the first city pilots the shared
+  code and the rest become configs.
+- **Recorded in the master list's Band B** (the rows reordered, two renamed
+  "(Regional)"). `check_master_list_counts.py` passes.
+
 ### 2026-10-01 - MHLW's food file counted for five Japanese cities: Utsunomiya and Kitakyushu to A; Kagoshima, Okayama and Kōchi to B (owner approved the downloads)
 
 - **The owner approved the five downloads (2026-10-01).** Each is from
