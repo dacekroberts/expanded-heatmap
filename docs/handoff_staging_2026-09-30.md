@@ -229,6 +229,74 @@ Candidates already on record:
   Caxias, Belo Horizonte + Contagem, Vancouver (Regional), Los Angeles + Long
   Beach, D.C. + Arlington) are builds for main, in PLAN.
 
+### Ranked list, brought to the owner 2026-09-30; held until after review
+
+The owner likes the scope. Order: Job 1 after the review, then this list.
+Nothing here is approved yet; bring it back for approval then.
+
+Several groups below were **never screened**: they are absent from every list
+file and from the decision log (grep, 2026-09-30).
+
+1. **UK tram and light-rail cities on the FSA register** (Manchester
+   Metrolink, Birmingham's West Midlands Metro, Sheffield Supertram,
+   Nottingham NET, Edinburgh Trams on FSS as Glasgow).
+   - Why: the UK's ruling was overturned 09-28; London, Glasgow and
+     Newcastle are built food-only on the same keyless register under a
+     licence already read; trams were approved 09-29.
+   - Cost: the cheapest new cities available. London's step 2 with an
+     authority filter; per city, one Overpass query, the light-rail test or
+     the trams rule, and a placement measure.
+   - Tradeoff: food-only pages. Metrolink is largely converted railway, so
+     the frequency gate applies.
+   - Recommended: yes, first.
+2. **The "too thin" discards against rule 4** (Aubagne, Trondheim, Detroit,
+   Milwaukee, Tampa).
+   - Why: they were discarded 09-27/28 as "too thin, reversible". The next
+     day, the reduced-bucket bar's rule 4 said size and in-ring share are
+     "disclosed on the page, never a gate".
+   - Cost: Aubagne and Trondheim are already measured. Detroit, Milwaukee
+     and Tampa need the 09-29 checks: currency, and placement (Tampa is
+     unplaced). Detroit also needs its People Mover read on Kobe's Port
+     Liner precedent.
+   - The principle is the owner's call first.
+3. **Japan's tram cities and remaining designated cities** (Kumamoto,
+   Okayama, Kagoshima, Nagasaki, Hakodate, Matsuyama, Toyama, Kōchi,
+   Toyohashi, Fukui, Utsunomiya LRT, Sakai, Kitakyushu).
+   - Why: the Japan screen covered only the ten subway cities.
+   - The question per city: does the city or prefecture publish its
+     food-permit lists as a file, under reusable terms?
+   - Cost: medium. 13 publishers, CJK, and Sendai's terms trap.
+   - Recommended: yes, one batch after the UK, terms read first.
+4. **Countries out on "no urban rail" from the feed catalogue**.
+   - Why: `global_country_shortlist.md` says to revisit them "only if the
+     project ever takes tram-only cities".
+   - Candidates: Luxembourg, Sarajevo, Belgrade; Tbilisi (a metro, so a
+     misfiling); and rail the catalogue never carried: Casablanca, Rabat,
+     Tunis, Santo Domingo, Lagos, Addis Ababa. Zagreb is excluded: it was
+     measured negative on data.
+   - Method: the business side first, stopping at the first negative.
+   - Prior: low; Luxembourg is the likeliest.
+5. **Seattle, the City of Seattle alone**.
+   - Why: deferred by the owner 09-21 with a multi-municipality scope.
+     Single-municipality scopes have passed since (Melbourne, Sydney,
+     Toulouse).
+   - The probe: one Overpass query for the stub test.
+   - It reopens the owner's own scope call.
+6. **The nine portals that refuse scripts, tried in the in-app browser
+   first** (Burnaby, Arlington, Tempe, Zaragoza, Brescia, Catania,
+   Cagliari, Alicante, Alcobendas).
+   - A plain page load is no bypass. Whatever refuses it goes to the owner,
+     and any download needs the owner's OK.
+   - Utrecht refused a real browser too.
+7. **Dated watch items now due**.
+   - Salvador's VLT: a line on a built map.
+   - Teresina's all-day 15-minute service: rail is its only blocker.
+   - Jaén has no register, so skip it.
+8. **Deferred: pattern-deprioritised** (Dresden, Leipzig, Kraków, Wrocław,
+   Graz, Adelaide, the Gold Coast, Canberra).
+9. **Deferred: Band R re-checks**. Every block was measured within the last
+   week.
+
 ## Open with the owner (carried over)
 
 - Atlanta: whether to tell the City its 2024 layer exposes reported revenue.
