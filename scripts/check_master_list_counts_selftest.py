@@ -157,7 +157,8 @@ def rename_into(src, dst):
 
 def tram_into(dst):
     """A tram-list row renamed to a city already in master-list Band `dst`: a
-    city in two lists ACROSS the two files. Needs both texts."""
+    city in two lists ACROSS the two files; `dst` None renames it to a built
+    city instead. Needs both texts."""
     def apply(text, other):
         lines, main = text.split("\n"), other.split("\n")
         rows = {}
@@ -165,10 +166,16 @@ def tram_into(dst):
             if M.TIER_HEAD.match(t):
                 rows.update(M.members(lines, s, e))
         row = _table_row(rows, lines)
-        hit = _table_row(_bands(main).get(dst, {}), main)
+        if dst is None:
+            names = [n for r in _built(main) for n in r[3]]
+            hit = (names[0], None) if names else None
+            places = "Built AND Band T"
+        else:
+            hit = _table_row(_bands(main).get(dst, {}), main)
+            places = f"Band {dst} AND Band T"
         if not row or not hit:
             return None
-        apply.expect = f"{hit[0]} is in Band {dst} AND Band T"
+        apply.expect = f"{hit[0]} is in {places}"
         out = list(lines)
         out[row[1]] = out[row[1]].replace(row[0], hit[0], 1)
         return "\n".join(out)
@@ -268,12 +275,14 @@ CASES = [
     # Aimed at Band R since 2026-09-28, when D emptied (its rows moved to R and C).
     # Re-aimed from Band T to Band C 2026-09-29, when Band T's rows moved to the
     # tram list and the master list's Band T section stopped holding any; and
-    # from Band C to Band B the same day, when Band C closed (owner).
-    ("a city in two bands (a Band R row renamed to a Band B city)",
-     rename_into("R", "B"), None),
+    # from Band C to Band B the same day, when Band C closed (owner); and to
+    # Band R and the tram list 2026-09-30, when Band B emptied (the review
+    # rehearsal): Band R is the one master-list band left with rows.
+    ("a city in two bands (a tram row renamed to a Band R city)",
+     tram_into("R"), None, "tram"),
 
-    ("a built city still listed in a band (a Band B row renamed to a built city)",
-     rename_into("B", None), None),
+    ("a built city still listed in a band (a Band R row renamed to a built city)",
+     rename_into("R", None), None),
 
     ("no band recognised at all - the vacuous pass",
      drop_bands, "no '## ... Band X' sections"),
@@ -290,8 +299,8 @@ CASES = [
     ("tram list: the tier table's count drifted (T2, +1)",
      bump(r"^\| 🟤 \*\*T2\*\* \|.*\| \*\*(\d+)\*\*", "tier table says T2 {new}"), None, "tram"),
 
-    ("tram list: a city in two lists across the files (a tram row renamed to a Band B city)",
-     tram_into("B"), None, "tram"),
+    ("tram list: a built city still on the tram list (a tram row renamed to a built city)",
+     tram_into(None), None, "tram"),
 
     ("tram list: a city row left behind in the master list's Band T section",
      row_left_in_band_t, "a move half made", "main"),
