@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**263 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**264 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -52,6 +52,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The three continuity disclosures written; Pittsburgh's mode; six merged branches deleted (owner)](#2026-09-30---the-three-continuity-disclosures-written-pittsburghs-mode-six-merged-branches-deleted-owner)
 - [Four continuity departures kept out and disclosed (owner)](#2026-09-30---four-continuity-departures-kept-out-and-disclosed-owner)
 - [Continuity: Sacramento's two precedents confirmed; the four waiting cells counted (owner)](#2026-09-30---continuity-sacramentos-two-precedents-confirmed-the-four-waiting-cells-counted-owner)
+- [Aarhus's baseline recorded: zero drift (owner)](#2026-09-30---aarhuss-baseline-recorded-zero-drift-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 - [Ottawa is one category on the two-key macro legend (owner)](#2026-09-30---ottawa-is-one-category-on-the-two-key-macro-legend-owner)
@@ -1326,6 +1327,25 @@ label, already clipped at phone width, clips 5 px more (39% to 43% in Global;
     theatres, a college, an aquarium concession and an island education
     centre. Other GOP-family licences add one more unmapped bar or lounge,
     Black Market Social.
+
+### 2026-09-30 - Aarhus's baseline recorded: zero drift (owner)
+
+- **`drift_check.py aarhus --update-baseline --jobs 1`, the heavy slot
+  deferred at the second review (owner).** It ran on master's pipeline code
+  (branch `aarhus-baseline` from origin/master), announced to the live
+  sessions before and after. Result: **zero drift**. `excluded_stations.csv`
+  and `provenance.json` are identical, and `heatmap.html` is identical after
+  Folium-id normalisation; the two files the run left modified were
+  reverted.
+- **`outputs/aarhus/baseline.json`, 10 figures:**
+  - bucket rows 5,884; storefront rows 5,419; storefronts placed 5,102;
+  - name shown 2,828; personally owned 2,244;
+  - stop positions 89, stations in the kommune 39, collapsed 50, excluded
+    30, in scope 20.
+
+  The map plots 1,300 in-ring points of 5,102. Letbane L2's #30556E sits
+  42.7 from the Retail pins (below the preferred 45, as recorded at the
+  build).
 
 ### 2026-09-30 - Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)
 
