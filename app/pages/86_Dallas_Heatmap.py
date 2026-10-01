@@ -31,7 +31,10 @@ st.title("Dallas: commercial density around DART light rail stations")
 # Two sentences beyond Houston's template, flagged for review time: the
 # timetable (the brief: purpose-built track, so frequency is disclosed) and the
 # thin personal-services layer (owner, 2026-09-30: narrowed, and the page says
-# why). The in-ring share is stated on the page, as Houston's is.
+# why). A third, found by review lane 4: Houston's clause leaving off a business
+# the City's address file marks residential is dropped, because Dallas's
+# residential rule cannot run (the owner's flag); apartment and trailer
+# addresses still are. The in-ring share is stated on the page, as Houston's is.
 st.markdown(
     """
 DART's four light-rail lines are drawn: the **Red Line**, **Blue Line**, **Green

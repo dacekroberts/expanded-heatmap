@@ -327,7 +327,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `docs/data_sources/france.md`**, whose Angers row named the network brand
   twice (the dataset title and `feed_info.txt`'s publisher). Both now say the
   brand is not shown; the dataset id stays. The brand remains only in
-  provenance JSON, which no page displays.
+  files no page renders: provenance JSON, Angers's brief, the tram list and
+  the tram batch's handoff.
 - **Notice numbers from before the renumbering**, on rendered pages: Palma
   74 (spain.md), KORDIS 78 and PMDP 79 (czechia.md), and Bucharest 67
   (romania.md, stale since Stockholm's landing). In the drafts, before the
