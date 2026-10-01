@@ -240,6 +240,9 @@ TEXT_WIDTH = {
     # Grotesk" after document.fonts.load; Aarhus 46.9, Prague 47.3, Oslo 29.0,
     # Riga 29.5, Bergen 48.3, Boston 48.4 and Chicago 55.0 reproduced (tram kit).
     "Odense": 50.6,
+    # Liepāja: measured 2026-09-30 the same way as Odense, in the same tab
+    # (Aarhus 46.9, Riga 29.5 and Odense 50.6 reproduced again; tram kit).
+    "Liepāja": 48.2,
     # Buffalo: measured 2026-09-29 in the local app's own document (lean venv),
     # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load;
     # Prague 47.3, Tokyo 40.5, London 50.9, Glasgow 56.8 and Oslo 29.0

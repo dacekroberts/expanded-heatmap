@@ -1930,6 +1930,25 @@ protection zone (2024), 15% in the Old Town (2025); not measured elsewhere.
 **Stations.** Rīgas satiksme's seven tram routes are drawn; 15 stops are thinned by the spacing
 filter to about one per half mile. Not drawn: buses, trolleybuses and Vivi's suburban trains.
 
+### Liepāja - Riga's two layers, food placed on the national address register
+
+**Riga's rules, unchanged** (the section above), through the same shared step: food service is
+the premises licensed to sell alcohol or tobacco whose place type is food service, one per
+address and kind, so that layer is a lower bound; shops and services is every trade premises
+in the cadastre whose name reads as a shop, a service or a fuel station, an upper bound.
+**Left out of the cadastre** as in Riga: wholesale and storage, food service, gambling,
+offices, dwellings, ancillary rooms, repair workshops and stands (192 of 771 premise groups).
+Liepāja publishes no list of degrading buildings, so none is dropped for that.
+
+**Not placed** - 8 food premises (6.1%) whose address matched no point in VZD's State Address
+Register; every shop was placed at its building.
+
+**Not named** - as in Riga: the kind of place and the street address for food, the premises'
+registered name for shops. No licence holder is ever read.
+
+**Stations.** Every stop of tram 1, 18 in all, each inside the city; three are added by hand
+because OpenStreetMap's route relations miss them. Not drawn: buses and suburban trains.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

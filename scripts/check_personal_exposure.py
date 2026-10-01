@@ -313,6 +313,10 @@ REGISTRIES = {
     "riga": dict(raw=None, trade=None, owner=None,
                  processed="businesses_clean.csv",
                  address=("address",)),
+    # Liepāja: Riga's two layers through latvia_register.py, the same rules.
+    "liepaja": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",)),
     # FEHD's registers carry the SHOP SIGN (`SS`), the name on the licence
     # premises, and no licensee name at all - there is no owner column to
     # fall back to. The raw file is XML, so the processed file is read.

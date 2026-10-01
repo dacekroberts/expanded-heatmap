@@ -542,6 +542,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Hong Kong | MTR, 8 lines + Light Rail | Airport Express, Disneyland Resort Line, high-speed rail, Peak Tram, Hong Kong Tramways | OpenStreetMap (station counts checked against MTR's own lists) | Territory | 0 / 17 (Racecourse left out: race days only) |
 | **Latvia** | | | | | |
 | Riga | Rīgas satiksme trams, 7 routes | Buses, trolleybuses, Vivi suburban rail | Rīgas satiksme GTFS | City (58 neighbourhoods) | 0 / 15 |
+| Liepāja | Tram 1, the one line | Buses and suburban trains | OpenStreetMap | City | 0 / 0 |
 | **South Korea** | | | | | |
 | Seoul | Seoul Metropolitan Subway: Lines 1–9, Shinbundang, Ui LRT, Sillim + 3 Korail lines | AREX, GTX-A, Seohae Line, Gimpo Goldline | OpenStreetMap (no gate 3) | City | 223 / 0 |
 | Daegu | Daegu Metro Lines 1–3 (Line 3 a monorail) | 대경선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia; operator unreachable) | City | 5 / 0 |
@@ -649,6 +650,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Hong Kong | Licence registers (food premises) | FEHD licence registers | Local (licence type) | Food service 15,833 / Food shops 3,408 / Bathhouses 34 | No general retail or personal services: FEHD does not license them |
 | **Latvia** | | | | | |
 | Riga | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 4,027 / Food 1,214 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
+| Liepāja | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 397 / Food 92 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
 | **South Korea** | | | | | |
 | Seoul | Permit registers (17 types) | Seoul's LOCALDATA permit registers | Local (permit type) | 47,933 / 139,802 / 36,646 | Retail only the licensed trades; no general retail |
 | Daegu | Permit registers (14 types) | Daegu's republication of the national LOCALDATA registers (D-데이터허브) | Local (permit type) | 11,031 / 27,271 / 9,422 | Retail only the licensed trades; no general retail |
@@ -745,6 +747,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Hong Kong | Source points: FEHD's own CSDI points, matched by licence number (28 unplaced) | Mostly restaurants; premises on different floors share one point | Food factories, canteens, cold stores, pools, entertainment and funeral trades; 2 duplicate licences counted once |
 | **Latvia** | | | |
 | Riga | Address join to the city's address points (96.8%); building footprints (99.4%) | Food a lower bound (licensed premises only); shops an upper bound (vacancy measured only in the centre) | Holder never read and unit numbers dropped (owner); 412 shops in degrading buildings |
+| Liepāja | Address join to VZD's address register (93.9%); building footprints (100%) | Food a lower bound (licensed premises only); shops an upper bound (no vacancy figure) | Holder never read and unit numbers dropped |
 | **South Korea** | | | |
 | Seoul | Source building points, gaps filled from other permits at the same building (98% placed; 4,875 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 138 personal names withheld; phone never read |
 | Daegu | Source building points, gaps filled from other permits at the same building (99% placed; 612 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 113 personal names withheld; phone never read; health-food addresses masked by the publisher |
@@ -852,6 +855,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Hong Kong | Registers generated 2026-09-25, points to 2026-09-23 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 91% | Shop sign, Chinese or English (308 show "No shop sign") |
 | **Latvia** | | | | | | |
 | Riga | Excise daily; cadastre prepared 2026-09-20 (fetched 2026-09-25) | B | 0.6 mi | Yes | 78% | No names; the kind (food) or the premises' registered name (shops) |
+| Liepāja | Excise daily; cadastre prepared 2026-09-20 (Riga's cache) | B | 0.3 mi | Yes | 70% | No names; the kind (food) or the premises' registered name (shops) |
 | **South Korea** | | | | | | |
 | Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes (restored 2026-09-27; dropped 2026-09-25 for phones) | 94% | Trade name in Korean (138 show "Name withheld") |
 | Daegu | Edition 2026-08, but its rows end 2025-08-31 (fetched 2026-09-27) | Yes (snapshot caption, the rows' own date) | 0.6 mi | Yes | 71% | Trade name in Korean (113 show "Name withheld") |

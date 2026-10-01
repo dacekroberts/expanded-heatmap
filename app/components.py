@@ -714,6 +714,8 @@ _NOTICES = [
      "select them and the address points used to place its businesses, "
      "Odense's Letbane line and its stops, the municipal boundary used to "
      "select them and the address points used to place its businesses, "
+     "Liepāja's tram line and its stops and the city boundary used to select "
+     "them and its businesses, "
      "Buffalo's NFTA Metro Rail line and its stations, "
      "Sacramento's SacRT Blue and Gold Lines and their stations, and the "
      "municipal boundaries used to select them, "
@@ -1098,16 +1100,24 @@ _NOTICES = [
     # VZD cadastre open data (CC BY 4.0, adopted by VZD's own data-use rules,
     # read 2026-09-24): credit, licence link, a DESCRIPTION of the changes, and
     # no implied VZD approval. Wording approved by the owner 2026-09-24.
-    ("VZD (Riga)",
-     "Riga's shops and services are from the State Land Service of Latvia's (Valsts zemes "
-     "dienests) Cadastre Information System open data — premise groups and the Riga cadastral "
-     "map — via data.gov.lv, licensed under "
+    # Liepāja added 2026-09-30 (tram kit), FOR THE OWNER'S APPROVAL AT REVIEW
+    # TIME: its cadastre, and VZD's address register (aw_eka.csv, CC BY 4.0,
+    # read 2026-09-30) - VZD's own source wording, the year, and the changes.
+    ("VZD (Riga, Liepāja)",
+     "Riga's and Liepāja's shops and services are from the State Land Service of Latvia's "
+     "(Valsts zemes dienests) Cadastre Information System open data — premise groups and "
+     "each city's cadastral map — via data.gov.lv, licensed under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
      "premise groups of use class 1230 whose name reads as a shop or a service were selected, "
      "placed at their building's footprint by cadastre number and reprojected; those in "
-     "buildings the city lists as degrading were removed; all are shown as one \"Shops and "
-     "services\" category and counted around tram stops. VZD has not approved these changes or "
-     "this map.",
+     "buildings Riga lists as degrading were removed; all are shown as one \"Shops and "
+     "services\" category and counted around tram stops. Liepāja's licensed food premises are "
+     "placed by address on the State Address Register: Izmantoti Valsts adrešu reģistra "
+     "informācijas sistēmas dati, 2026. gads (Valsts zemes dienests, via data.gov.lv, "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). Modified by this project: "
+     "the register's addresses were matched to the licences' addresses and their points used "
+     "to place each premises; the address file itself is not shown. VZD has not approved these "
+     "changes or this map.",
      False),
     # Riga municipality's GEO RĪGA layers (CC BY 4.0, read 2026-09-24). The
     # neighbourhoods "have no administrative-boundary status", so the merged

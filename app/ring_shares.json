@@ -377,6 +377,11 @@
  "odense": {
   "in_ring": 1154,
   "all": 2834,
+  "map_blob": "0e1dbcdb55bf13a649bd5a5eea37a89d9f3cc271"
+ },
+ "liepaja": {
+  "in_ring": 489,
+  "all": 702,
   "map_blob": null
  }
 }

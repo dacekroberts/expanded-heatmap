@@ -26,9 +26,11 @@ THE CONTRACT
   `railway=tram_stop`**, named. An untagged or unnamed stop member stops the
   step and is named (Daugavpils's Stropu ciemats is on the routes untagged).
 * **`station_add` by node id** for a tagged stop on no route relation
-  (Odense's SDU Syd/Hospital Nord). Each names its line and its expected
-  name; the step stops if OSM renamed it, untagged it, or has since put it on
-  a route, so a stale add cannot outlive the gap it filled.
+  (Odense's SDU Syd/Hospital Nord), or a stop a relation lists only as a
+  named platform (Liepāja's Rožu laukums). Each names its line and its
+  expected name; the step stops if OSM renamed it, untagged it, or has since
+  put a stop of that name on a route, so a stale add cannot outlive the gap
+  it filled.
 * **Name collapse at the mean, within `max_spread_m`** (Aarhus's): one
   station per name, its lines joined in the city's order.
 * **Scope over a union of polygons** (`split_by_places`): stations outside
@@ -151,20 +153,25 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
                              "source": "route"})
     q = pd.DataFrame(rows).drop_duplicates(["line", "node"])
 
-    on_routes = set(q["node"])
+    on_routes, route_names = set(q["node"]), set(q["stop_name"])
     for node_id, (ref, name) in (station_add or {}).items():
         n = nodes.get(node_id)
         nt = (n or {}).get("tags", {})
         if not n:
             sys.exit(f"STATION_ADD node {node_id} ({name}) is not in the cache - "
                      f"the fetch must ask for it")
-        if not _is_stop(nt) or nt.get("name") != name:
+        # A PLATFORM node is accepted for an add, and only for an add: Liepāja's
+        # Rožu laukums is on both route relations as a `platform` member with no
+        # stop position at all (2026-09-30). Each add is named in config and
+        # looked at, so this widens nothing a route relation reads.
+        if (not (_is_stop(nt) or nt.get("public_transport") == "platform")
+                or nt.get("name") != name):
             sys.exit(f"STATION_ADD node {node_id}: OSM now has {nt.get('name')!r}, "
                      f"tagged {({k: nt.get(k) for k, _ in STOP_TAGS})}, not a stop "
-                     f"named {name!r} - re-read it")
-        if node_id in on_routes:
+                     f"or platform named {name!r} - re-read it")
+        if node_id in on_routes or name in route_names:
             sys.exit(f"STATION_ADD node {node_id} ({name}) is now on a route "
-                     f"relation - OSM filled the gap; remove the add")
+                     f"relation as a stop - OSM filled the gap; remove the add")
         if ref not in kept:
             sys.exit(f"STATION_ADD node {node_id} names line {ref!r}, not a kept ref")
         q = pd.concat([q, pd.DataFrame([{

@@ -94,7 +94,7 @@ together, so a row in either counts and a row in neither still fails.
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam |
-| Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga |
+| Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon |
@@ -1617,7 +1617,7 @@ approved by the owner 2026-09-24. **MUST DO:** `check_personal_exposure.py hong_
 2026-09-24 (the verdict is in `DECISIONS.md`). MTR's station lists (gate 3) and ALS (a
 cross-check) are not published and need no notice.
 
-**42. VZD (Riga) — required, and DISPLAYED.**
+**42. VZD (Riga, Liepāja) — required, and DISPLAYED.** Liepāja (2026-09-30, tram kit) reads its own cadastral map and VZD's State Address Register (`aw_eka.csv`), so the notice names both, with VZD's own source wording for the address register ("Izmantoti Valsts adrešu reģistra informācijas sistēmas dati, 2026. gads") and the changes made; for the owner's approval at review time.
 
 **PERMITTED WITH CONDITIONS.** CC BY 4.0, adopted by VZD's own data-use rules
 (`vzd.gov.lv/lv/par-datu-izmantosanas-noteikumiem`, read 2026-09-24 by the licence-read

@@ -2001,6 +2001,32 @@ CITIES = [
         # 1200.
         "label_offset": ("start", 11, 6),
     },
+    {
+        "name": "Liepāja",
+        "lat": 56.511,
+        "lon": 21.0136,
+        "page": "pages/131_Liepaja_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Joined by address (93.9%)",
+        "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "rail_extra": "Trams",
+        "record_kind": "Property register and licences",
+        "categories": "Merged",
+        "blurb": "Liepāja's one tram line",
+        "region": "Europe",
+        "country": "Latvia",
+        "in_default_view": False,
+        # BELOW the dot, and SCORED: width 48.2 px measured in a browser with
+        # Space Grotesk loaded (2026-09-30, three built cities reproduced).
+        # Above, it overlapped Riga's label; left, Copenhagen's; right, its
+        # pill covered Riga's marker. check_macro_labels.py passes dy 14 to 34
+        # below: PROBLEMS 0 at 375, 768 and 1200, with Liepāja left out of
+        # Europe's zoom (REGION_ZOOM_WITHOUT).
+        "label_offset": ("middle", 0, 22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -2176,7 +2202,11 @@ REGION_ORDER = [
 # zoom dropped and a dozen label pairs collided at every width. Its centre
 # still counts, so Europe's frame sits about a degree further east; on a phone
 # Dublin's label clips 11 px and Bucharest's 25 px, PROBLEMS 0.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest")}
+# Liepāja (2026-09-30, tram kit) joins it on the same measurement: fitted to it,
+# the zoom dropped and 57 label problems appeared at every width, whatever
+# Liepāja's own offset. It lies inside the frame Riga and Bucharest already
+# set, so Europe's centre does not move.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja")}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
