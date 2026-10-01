@@ -5,6 +5,28 @@ Entries for `DECISIONS.md`, newest first, each exactly as it should land
 in when handed off). Anything that must cite a DECISIONS verdict cites this
 file until then.
 
+### 2026-09-30 - The France macro view: North and South at zoom 5.0, released to cleanup (owner)
+
+- **Owner: "go with north/south, release it to cleanup."** France becomes two
+  macro-map regions, France North (latitude 46.5 and up, 17 cities) and France
+  South (8), each with a `REGIONS` zoom override of 5.0. It was put after the
+  owner asked whether zooming in on one France region could fit every label.
+- **Measured on the 25 cities France will show** (the five built French
+  cities and the twenty batch cities, Angers held), with the real label text
+  (" (Regional)" on five). Staging's placer and projection were used, with
+  widths estimated at 7 px a character where none is measured.
+  - **One region fails at every zoom.** At 4.5, 3 labels cannot be placed
+    and 4 cities fall off a 375 px canvas. At 5.0, Marseille, Lille and
+    Valenciennes fall off even at 1200 px. France is taller than the 650 px
+    canvas allows.
+  - **The split works at 5.0.** North: nothing off-canvas at 768 or
+    1200 px, and Le Havre's label needs a hand-set offset (it is crowded by
+    "Rouen (Regional)"). South: every label places.
+- **Released to the cleanup session** (handoff section 4, held until then)
+  for the `REGIONS` and `REGION_ORDER` entries, the five built cities'
+  region tags, and the twenty labels' widths and offsets. France retags the
+  twenty batch entries on its own branches once the region names exist.
+
 ### 2026-09-30 - France landing group 2 built: Montpellier, Strasbourg, Le Havre, Caen, Rouen, Bordeaux, Nantes, Grenoble, Valenciennes
 
 - **All twenty French cities are now built through step 3**: group 1 on
