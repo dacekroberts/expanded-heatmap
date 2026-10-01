@@ -51,6 +51,9 @@ a rule, not before obeying one.
 - More than one session at once -> `docs/session_roles.md`. [#session-roles]
 - Auditing rather than building -> `consistency-sweep`; prefer a check to a
   correction. [#consistency-sweep]
+- A review in lanes (several sessions, one pinned commit) ->
+  `docs/review_lane_kit.md`: lanes, ports, surfaces, captures, prose
+  proposals, teardown.
 
 ## Invariants
 
@@ -234,6 +237,10 @@ python scripts/check_deploy_imports.py [--ref REF]      # before ANY push touchi
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
 python scripts/decisions_index.py [--check]
+python scripts/rendered_surfaces.py [--write|--check]   # every surface the app renders -> docs/rendered_surfaces.md
+python scripts/review_lanes.py create --sha <commit> --lanes <n> | list | remove   # review-lane worktrees
+node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name,Name] [--widths ...] [--themes light,dark] [--cdp N]   # one browser; --peak-gb 1.5
+python scripts/prose_proposals.py collate | apply --ids <id,id> | --selftest   # lanes' prose proposals -> the owner's list
 python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
 python scripts/heavy_job.py run --label <job> --peak-gb <N> --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory
 python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/

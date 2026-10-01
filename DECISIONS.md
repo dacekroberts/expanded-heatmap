@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**326 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**327 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [The review lane kit: the mega-review's lessons built as tools before the prose and UI pass (owner)](#2026-10-01---the-review-lane-kit-the-mega-reviews-lessons-built-as-tools-before-the-prose-and-ui-pass-owner)
 - [Kansas City's full rule in Los Angeles: a registrant's own name with no trade name shows the street address (owner)](#2026-10-01---kansas-citys-full-rule-in-los-angeles-a-registrants-own-name-with-no-trade-name-shows-the-street-address-owner)
 - [Gate 3's station calls made and Kansas City's rule applied in San Francisco and Los Angeles (owner)](#2026-10-01---gate-3s-station-calls-made-and-kansas-citys-rule-applied-in-san-francisco-and-los-angeles-owner)
 - [The mega-review's C2 deferrals done: Swedish layer menus say "Food shops", 24sju and vending by name, no OSM ratio outside France (owner)](#2026-10-01---the-mega-reviews-c2-deferrals-done-swedish-layer-menus-say-food-shops-24sju-and-vending-by-name-no-osm-ratio-outside-france-owner)
@@ -371,6 +372,43 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - The review lane kit: the mega-review's lessons built as tools before the prose and UI pass (owner)
+
+- **The owner: "build the mega review lessons right now while i write out the
+  plan"**, for the site-wide prose and UI pass. `docs/review_lane_kit.md` is
+  the standing setup every lane run shares; a run's own lane plan stays a
+  dated doc.
+- **Lesson 3, every rendered surface**: `scripts/rendered_surfaces.py` reads
+  the app's code and writes `docs/rendered_surfaces.md` - 124 city pages, 3
+  fixed pages and the Overview; 26 rendered docs (`data_sources.md` with its 24
+  country files, `excluded_categories.md`); every city's
+  `excluded_stations.csv` on What Is Excluded; the two app JSON files.
+  `--check` is in `check_all`, so a new page cannot be left off.
+- **Lesson 4, ports, folders and click scripts**: `scripts/review_lanes.py`
+  creates lane worktrees on one pinned commit with `data/` and `.venv-lean`
+  as junctions to the main checkout's, ports 88N1/88N2 and DevTools 93N1 in
+  each lane's launch.json under deploy-verify's names, and a shared,
+  gitignored review folder `data/_review/lane-N/`; `remove` unlinks the
+  junctions before removing the worktree and stops if `data/` loses an entry
+  (tested create, list and remove: data/ intact). `scripts/capture_pages.mjs`
+  drives one headless Edge through page x width x theme (prefers-color-scheme
+  emulated), saving a screenshot, the page's and the map's text, and console
+  errors; measured 1.1 GB, so a capture declares 1.5 GB to the gate. Page
+  names go without a leading slash: Git Bash rewrote "/" into a Windows path.
+  The live /~/+ route's _stcore/health and host-config 404s are filtered as
+  noise.
+- **The prose handback**: `scripts/prose_proposals.py` - lanes write
+  proposals (old text copied from the file, new text, why, precedent, `fix` or
+  `proposal`) to their review folder; `collate` validates each (old text in
+  its file exactly once, no two overlapping in the file) and writes one
+  numbered list for the owner; `apply --ids` makes only the approved
+  replacements, refusing any whose old text has changed. Its selftest (8
+  cases) is in `check_all`. This is CLAUDE.md's "drafted in chat before it is
+  written" at the scale of a site-wide pass.
+- **Lessons 1 and 2** were already met: the four checks of the morning
+  replace most of lane 4's reading (the kit's table), and the kit says to
+  start after the last build lands, or pin and give late cities a delta pass.
 
 ### 2026-10-01 - Kansas City's full rule in Los Angeles: a registrant's own name with no trade name shows the street address (owner)
 
