@@ -56,10 +56,11 @@ cluster."
 
 # The snapshot, read from outputs/orleans/provenance.json rather than
 # hardcoded so it cannot go stale on the next fetch. Licence Ouverte 2.0 asks for the producer and the date of the data.
-# SIRENE's line carries INSEE's prescribed « Source : Insee ».
+_edition = ""
 if PROVENANCE_JSON.exists():
     try:
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
+        _edition = (_prov.get("sirene_etab_title") or "").split(" - ")[-1].split(" (")[0]
         _taken = (_prov.get("fetched_utc") or "")[:10]
         _fi = _prov.get("feed_info") or {}
         _nap = _prov.get("nap") or {}
@@ -75,13 +76,18 @@ if PROVENANCE_JSON.exists():
             if _start and _end:
                 _line += f", from the feed published for **{_start}** to **{_end}**"
             st.caption(_line + f"; snapshot taken **{_taken}**.")
-            _edition = (_prov.get("sirene_etab_title") or "").split(" - ")[-1].split(" (")[0]
-            st.caption("Business data: Source : Insee, SIRENE"
-                       + (f" ({_edition} edition)" if _edition else "")
-                       + " and its geolocation file.")
     except (ValueError, OSError):
         # A malformed provenance file must not take the page down.
         pass
+
+# INSEE's prescribed credit, verbatim: « Source : Insee »
+# (docs/licenses/france-licence-ouverte-2.0.md, MUST DISPLAY 1). Outside the
+# provenance block so a missing or malformed provenance file cannot drop it;
+# only the edition comes from that file. Check M of
+# scripts/check_provenance.py notes a page that nests it again.
+st.caption("Business data: Source : Insee, SIRENE"
+           + (f" ({_edition} edition)" if _edition else "")
+           + " and its geolocation file.")
 
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
