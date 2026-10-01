@@ -1844,6 +1844,10 @@ CITIES = [
         # reproduced). Labelled in the Seoul Capital Area region only;
         # check_macro_labels.py passes every region at 375, 768 and 1200 with
         # PROBLEMS 0.
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, 22),
     },
     {
@@ -1866,6 +1870,10 @@ CITIES = [
         # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
         # Capital Area region; check_macro_labels.py passes every region at
         # 375, 768 and 1200 with PROBLEMS 0.
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1888,6 +1896,10 @@ CITIES = [
         # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
         # Capital Area region; check_macro_labels.py passes every region at
         # 375, 768 and 1200 with PROBLEMS 0.
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1910,6 +1922,10 @@ CITIES = [
         # own frame (2026-09-29, four entries reproduced). Labelled in the Seoul
         # Capital Area region; check_macro_labels.py passes every region at
         # 375, 768 and 1200 with PROBLEMS 0.
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1932,6 +1948,10 @@ CITIES = [
         # own document (2026-09-29, seven entries reproduced). Labelled in the
         # Seoul Capital Area region; check_macro_labels.py passes every region
         # at 375, 768 and 1200 with PROBLEMS 0.
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -1954,6 +1974,10 @@ CITIES = [
         # own document (2026-09-29, seven entries reproduced). Labelled in the
         # Seoul Capital Area region; check_macro_labels.py passes every region
         # at 375, 768 and 1200 with PROBLEMS 0.
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -2033,6 +2057,11 @@ CITIES = [
         # with `python -B`: a same-length rewrite of this file inside one
         # second reuses the stale .pyc); -46 is the middle. PROBLEMS 0 at 375,
         # 768 and 1200.
+        # SOUTH OF ITS DOT IN UNITED STATES EAST (owner, 2026-09-30; measured
+        # necessary): above it there, the pill read as Toronto's. The landing and
+        # United States views keep the offset below - every south position
+        # there covers Pittsburgh's, New York's or Philadelphia's dot.
+        "label_offset_by_region": {"United States East": ("end", -8, 16)},
         "label_offset": ("end", -11, -46),
     },
     {
@@ -3010,6 +3039,10 @@ CITIES = [
         # region's frame (zoom 8.10), and check_macro_labels.py (python -B) still
         # passes every label there, PROBLEMS 0 at 375, 768 and 1200 on the combined
         # tree (width 75.8 px, measured 2026-09-30).
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3032,6 +3065,10 @@ CITIES = [
         # Area frame (no zoom change, measured in memory); check_macro_labels.py
         # (python -B) passes, PROBLEMS 0 at 375, 768 and 1200, alone and on the
         # combined tree with Namyangju (width 41.5 px, measured 2026-09-30).
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3055,6 +3092,10 @@ CITIES = [
         # memory); check_macro_labels.py (python -B) passes, PROBLEMS 0 at 375, 768
         # and 1200, alone and on the combined tree with Namyangju and Ansan (width
         # 68.6 px, measured 2026-09-30).
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3077,6 +3118,10 @@ CITIES = [
         # the default pill meets Seongnam's by 5 px. check_macro_labels.py (python -B)
         # passes middle at dx -8 to -24, PROBLEMS 0 at 375, 768 and 1200, alone and on
         # the combined tree with every Band B branch (width 51.6 px, measured 2026-09-30).
+        # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
+        # a dot and tooltip in East Asia and on the landing view, where Seoul
+        # is the region's one label.
+        "label_tier": "minor",
         "label_offset": ("middle", -14, -22),
     },
     {
@@ -3568,6 +3613,18 @@ MODES = ("metro", "light_rail", "tram")
 # region's view or a composite of it is open. Absent means anchor.
 LABEL_TIERS = ("minor",)
 _bad_tier = [c["name"] for c in CITIES if "label_tier" in c and c["label_tier"] not in LABEL_TIERS]
+# A VIEW THAT ALSO LABELS ANOTHER REGION'S ANCHORS (owner, 2026-09-30): East
+# Asia labels the Seoul Capital Area's anchor cities - Seoul, since the ten
+# satellites are minor - so East Asia names Seoul again, as the label-tier
+# decision of 2026-09-29 planned ("East Asia gets Seoul's label back").
+# Overview.py and check_macro_labels.py read it.
+_bad_rof = [c["name"] for c in CITIES if "label_offset_by_region" in c and not (
+    isinstance(c["label_offset_by_region"], dict)
+    and all(r in REGION_ORDER and len(v) == 3 for r, v in c["label_offset_by_region"].items()))]
+if _bad_rof:
+    raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
+                     "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
+REGION_LABELS_ALSO = {"East Asia": ("Seoul Capital Area",)}
 if _bad_tier:
     raise ValueError(f"cities.py: {_bad_tier} have a label_tier not in {LABEL_TIERS}")
 _unmoded = [c["name"] for c in CITIES if c.get("mode") not in MODES]

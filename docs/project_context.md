@@ -940,7 +940,8 @@ Cities built and running end to end (pipeline, map, app page):
 - **Osaka** - Japan's second city, and the proof that Kobe's shared steps
   carry: a config and three thin steps. It draws a dense network - Osaka Metro and the New Tram, JR West, Hankyu, Hanshin, Keihan,
   Kintetsu, Nankai and the Hankai tram, cut at the city line - which took a
-  measured colour search and a third, wider label pass in `map_common` (owner).
+  measured colour search and a third, wider label pass in `map_common` (owner),
+  plus, on phones, a second label placer that only wide-tier maps carry.
   N02's legal line filing is split into public lines by branch walks, one of
   them left out as limited-express-only track (owner). The join is checked
   against the coordinates the city publishes beside each permit. The name rule

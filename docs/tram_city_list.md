@@ -246,7 +246,7 @@ the mode is decided per city. TER is excluded in every built French city.
 | **Grenoble** | Tram A–E | 36 / 81 (C and D: 36%) | 1,541 / 1,601 / 598 (1.51×) | 3,716; 5,455 over 12 communes | **Regional scope**; **Licence read 2026-09-29: ODbL, permitted with the notice.** |
 | **Rouen** (EDGE: the "métro", a light rail with a central tunnel) | 2 branches | 10 / 31 (32%) | 1,505 / 1,190 / 512 (1.73×) | 2,868; 3,634 over 5 communes | **Regional scope**; Astuce's own host timed out, so rail from the Normandie regional feed |
 | Saint-Étienne | T1–T3 | 35 / 40 (81%) | 1,333 / 1,164 / 531 (1.71×) | 2,523 | — |
-| Angers | A–C | 36 / 42 (76%) | 1,183 / 876 / 493 (1.48×) | 2,380 | Was held (owner, 2026-09-29): the Métropole bars naming IRIGO or its other marks without consent (licence read 2026-09-29). **Built MARK-FREE on `france-build-3`** (owner, 2026-09-30; drafts `docs/decisions_drafts/france-build.md`). |
+| Angers | A–C | 36 / 42 (76%) | 1,183 / 876 / 493 (1.48×) | 2,380 | Was held (owner, 2026-09-29): the Métropole bars naming IRIGO or its other marks without consent (licence read 2026-09-29). **Built MARK-FREE on `france-build-3`** (owner, 2026-09-30; `DECISIONS.md`, "Angers built mark-free"). |
 | Dijon | T1–T2 | 28 / 34 (82%) | 1,192 / 968 / 532 (1.50×) | 2,358 | — |
 | Tours | A | 22 / 29 (76%) | 1,244 / 925 / 492 (1.52×) | 2,335 | — |
 | Le Havre | A, B (Jenner tunnel) | 22 / 23 | 1,027 / 880 / 552 (1.95×) | 2,143 | Line C is in OSM only, not in service; **Licence read 2026-09-29: ODbL, permitted; no shapes and no colours in the feed.** |

@@ -119,6 +119,14 @@ def check_file(path, blocks):
     for name, pieces in blocks:
         missing = [p for p in pieces if p not in html]
         if len(missing) == len(pieces):
+            # A CONDITIONAL block (map_common.CONDITIONAL_BLOCKS) goes only into
+            # the maps that need it - DENSE_LABEL_SCRIPT into a map whose
+            # labels used the wide tier - so its absence is not staleness. What
+            # this cannot see is a map that SHOULD have it and was rendered
+            # before it existed; when it was added (2026-09-29) that was Osaka
+            # alone, re-rendered with it. drift_check.py sees the rest.
+            if name in map_common.CONDITIONAL_BLOCKS:
+                continue
             problems.append(f"{name} is MISSING")
         elif missing:
             problems.append(f"{name} is an OLDER version ({len(missing)} of "
@@ -136,7 +144,8 @@ def main():
 
     if args.list:
         for name, pieces in blocks:
-            print(f"  {name:24s} {len(pieces):3d} fixed pieces")
+            where = "  (conditional)" if name in map_common.CONDITIONAL_BLOCKS else ""
+            print(f"  {name:24s} {len(pieces):3d} fixed pieces{where}")
         return 0
 
     files = [args.file] if args.file else sorted(ROOT.glob("outputs/*/heatmap.html"))

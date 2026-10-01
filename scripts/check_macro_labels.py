@@ -49,6 +49,7 @@ from cities import (  # noqa: E402
     DEFAULT_FRAME,
     DEFAULT_REGION,
     REGION_MEMBERS,
+    REGION_LABELS_ALSO,
     REGION_ZOOM,
     REGION_ZOOM_WITHOUT,
     REGIONS,
@@ -491,7 +492,12 @@ def scored_labels(region, clat, clon, zoom):
         return c.get("label_tier") != "minor" or c.get("region") == region["name"]
 
     if region["name"] != DEFAULT_REGION:
-        return {c["name"] for c in region["cities"] if labelled(c)}
+        # Plus another region's anchors where this view labels them (East Asia
+        # names Seoul) - REGION_LABELS_ALSO in cities.py, as Overview.py reads it.
+        also = REGION_LABELS_ALSO.get(region["name"], ())
+        return ({c["name"] for c in region["cities"] if labelled(c)}
+                | {c["name"] for c in CITIES if c.get("region") in also
+                   and c.get("label_tier") != "minor"})
     cw = CANVAS[375]
     out = set()
     for c in CITIES:
@@ -512,8 +518,10 @@ def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
     return x, y
 
 
-def pill(city, x, y):
-    anchor, dx, dy = tuple(city.get("label_offset") or DEFAULT_OFFSET)
+def pill(city, x, y, region_name=None):
+    # A region's own override first (label_offset_by_region, Overview.py's rule).
+    off = (city.get("label_offset_by_region") or {}).get(region_name)
+    anchor, dx, dy = tuple(off or city.get("label_offset") or DEFAULT_OFFSET)
     try:
         w = TEXT_WIDTH[city["name"]]
     except KeyError:
@@ -619,7 +627,7 @@ def main():
                 markers.append((city, x, y, on))   # a coverage target either way
                 if city["name"] not in labelled:
                     continue
-                box = pill(city, x, y)
+                box = pill(city, x, y, region["name"])
                 if not on:
                     shows = not (box[2] < 0 or box[0] > cw or box[3] < 0 or box[1] > CANVAS_H)
                     offframe.append(f"{region['name']:<20} {vw:>4}px  {city['name']:<24} "

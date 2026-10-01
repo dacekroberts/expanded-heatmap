@@ -58,7 +58,7 @@ STATUS = {
     "kyoto": ("Kyoto", "✅ built", "Built 2026-09-28, Japan's fifth. Rebuilt register: an upper bound"),
     "tokyo": ("Tokyo (8 wards)", "✅ built", "Built 2026-09-28, Japan's sixth and last. 8 food wards on; the 15 without "
                                         "a usable food list drawn as hollow stations (owner)"),
-    "hiroshima": ("Hiroshima", "✅ built", "Built 2026-09-30, Japan's seventh: food only (no personal-services list "
+    "hiroshima": ("Hiroshima", "✅ built", "Built 2026-09-30, Japan's eighth: food only (no personal-services list "
                                          "is published; owner, 2026-09-29), with Hiroden's streetcars drawn and "
                                          "MHLW's addressed filings; about one restaurant in seven withholds its "
                                          "address"),

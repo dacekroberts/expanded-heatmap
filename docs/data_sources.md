@@ -2202,8 +2202,8 @@ It names only the stations. The feed has no shapes and no colours: the line
 geometry is OpenStreetMap's (notice 1), and the colours are the project's own,
 since LiA's website terms claim its colour scheme (licence read 2026-09-29). The
 Normandie aggregate's LiA shapes, stop-to-stop lines, are not used, so the
-aggregate's licence question for LiA's data does not arise (DECISIONS drafts,
-`docs/decisions_drafts/france-build.md`). **MUST DO**: a pure-extract station
+aggregate's licence question for LiA's data does not arise (`DECISIONS.md`,
+the France build entries). **MUST DO**: a pure-extract station
 table; §4.6 by the repository.
 
 **72. City of Ottawa (Ottawa) — required, and DISPLAYED**
@@ -2301,8 +2301,7 @@ into `render_site_notices()` 2026-09-30, after Tokyo's; displayed, landed
   the pins are businesses open now (the registers record no closures).
 - **MUST DO:** `check_personal_exposure.py yokohama` with its Japan pass (the
   operator's own name is never shown as a trade name), run 2026-09-30; the
-  verdict is in `docs/decisions_drafts/yokohama.md` until it is folded into
-  `DECISIONS.md`. Contact for removals: ir-seikatsueisei@city.yokohama.lg.jp.
+  verdict is in `DECISIONS.md` ("Yokohama built", 2026-09-30). Contact for removals: ir-seikatsueisei@city.yokohama.lg.jp.
 
 **76. Hiroshima City, MHLW and MLIT (Hiroshima) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-09-30, after Tokyo's; displayed,
@@ -2324,8 +2323,7 @@ landed 2026-09-30).
   ministry logos; claim MHLW's list is complete or accurate.
 - **MUST DO:** `check_personal_exposure.py hiroshima` with its Japan pass (the
   operator's own name is never shown as a trade name), run 2026-09-30; the
-  verdict is in `docs/decisions_drafts/hiroshima.md` until it is folded into
-  `DECISIONS.md`.
+  verdict is in `DECISIONS.md` ("Hiroshima built", 2026-09-30).
 
 **77. Angers Loire Métropole (Angers) — required, and DISPLAYED.**
 

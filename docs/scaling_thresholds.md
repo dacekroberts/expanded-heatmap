@@ -255,6 +255,35 @@ last one matters because swapping the global `sys.stdout` per worker instead
 would race and print one city's row counts under another city's heading, which
 looks correct and is not.
 
+## 124 cities — `drift_check.py --render-only`, measured 2026-09-30
+
+A change to map rendering alone (`pipeline/map_common.py`'s drawing, the
+theme) cannot move what steps 1-2 write to `data/<city>/processed/`, yet the
+full sweep re-runs every register read. **`--render-only` runs one step per
+city, the `step*_map.py` file** (step3_map.py in 117 cities, step4_map.py in
+the seven with a geocode or address-join step 3, which it never runs), under
+the same offline guard and the same `outputs/` diff. It assumes the processed
+inputs are current - `data/` is shared by every worktree - so it is **never
+the pre-deploy gate**; the full sweep stays the default.
+
+**Measured on master's 124 cities, `--jobs 2`, through `heavy_job.py`:**
+
+- **Zero drift.** Every map re-rendered identical after Folium-id
+  normalisation, against `processed/` as the shared folder held it.
+- **Wall time 231 s** for all 124 (3 min 51 s). Per city 1.7 s (Buffalo,
+  Glasgow, the small tram cities) to 24.7 s (Paris); Seoul 16.5 s, Oslo
+  12.4 s, Mexico City 10.7 s. The per-city times sum to 458 s, so two jobs
+  very nearly halve it.
+- **Measured peak 1.79 GB** for the whole run (the driver and both map steps,
+  sampled every 2 s by the gate). Seoul, the largest map (23.1 MB), measured
+  1.93 GB alone; a 2 s sample can miss a short spike, so read both as about
+  2 GB. Declared 4.5 GB.
+
+The full sweep's peak is set by step 2's register reads (Oslo's near 5.4 GB);
+the map step's is under half that even for the largest map. Whether
+render-only may run more than two cities at once is the owner's call (not
+taken; `MAX_JOBS` is unchanged).
+
 ## CORRECTION, 2026-09-21 — RAM is NOT a function of city count
 
 The "~40 cities strains Streamlit's memory" line below was inherited from this

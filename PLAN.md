@@ -534,11 +534,19 @@ evidence section.
   and 52 had their links fixed before the push (DECISIONS).
   - [ ] **Owner: reboot the deployed app** (`cities.py`, `components.py`
     changed), then the live check.
-- [ ] **Osaka's line labels overlap at phone width** (deploy-verify
+- [x] **Osaka's line labels overlap at phone width** (deploy-verify
   2026-09-28): 22 pairs at 343 px, 12 at 375, none at 854 or desktop;
   "Hankyu Takarazuka Line" starts 11 px under the layer-control button. The
   project total at 343 was 2 (2026-09-20); Kobe has 0. A shared-label-code
   fix, so it batches with a full re-render at a review time.
+  - Fixed 2026-09-29 on branch `claude/relaxed-diffie-d6eb1b`, held for review
+    time (DECISIONS): `DENSE_LABEL_SCRIPT`, injected only into maps whose labels
+    used the wide tier - Osaka alone - so NO full re-render is needed; only
+    Osaka's map changed. 0 problems at 343, 375, 854 and 1280.
+  - [ ] Unqueued: Madrid's one 343 px touch ("Línea 5" / "Ramal") clears
+    with the same block (measured by injection); reaching it needs the trigger
+    widened and Madrid re-rendered. Oslo's "T-bane 2" under the legend at
+    1024x768 standalone is a different cause (the open legend), not this.
 - **Build order (owner, 2026-09-28, after Tokyo landed): the build queue is
   WIPED and two new frontrunners lead it - Berlin, then London** (both Band
   B, each the first city in a new country: `add-country`, then `add-city`).

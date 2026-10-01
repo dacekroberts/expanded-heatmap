@@ -948,6 +948,266 @@ LABEL_CLAMP_SCRIPT = """
 })();
 </script>
 """
+# A SECOND, WIDER PHONE PLACER, for a map whose desktop layout already needed
+# the wide label tier (_LABEL_WIDE_CLEARANCES). Added 2026-09-29.
+#
+# LABEL_CLAMP_SCRIPT re-places a colliding label among 15 spots around its own
+# tip, which is enough for every map but one: Osaka's 34 labels had 22
+# overlapping pairs at 343px and 12 at 375px (the 2026-09-29 full
+# deploy-verify, scripts/check_map_labels.js). At the phone fit - zoom 10.75
+# on a 343 x 650 frame - the labels cover 43% of the frame and most start in
+# one knot of line tips, so every spot beside a tip is taken.
+#
+# So after the clamp has run, this moves ONLY a label that still overlaps
+# another label or a control, measured with no margin (a label 1px clear of
+# its neighbour is readable and stays put; with a margin, a desktop Osaka
+# label moved), in two steps:
+#   1. the nearest spot that collides less, from a grid of about a thousand
+#      around its tip - the tip under the box or beside it, the box level with
+#      the tip or in rows above and below - never more than __LABEL_REACH__ px
+#      from the tip, the widest stand-off the desktop layout itself allows
+#      (owner, 2026-09-27);
+#   2. if it still overlaps, a spot blocked only by one or two labels that
+#      each have a clean spot of their own to move to - all or nothing.
+# Measured on Osaka: 22 -> 0 overlaps at 343px, 12 -> 0 at 375px, no label
+# moved at 854 or 1280, about 20 ms a run on the dev machine (the clamp itself
+# takes 35-70). The first version took 240 ms; the cutoffs in hits() and
+# clean() are what brought it down, and it runs on every moveend.
+#
+# INJECTED ONLY WHERE THE WIDE TIER WAS USED, so no other map changes by a
+# byte - the third label pass's argument, one block on. Written into
+# LABEL_CLAMP_SCRIPT it would have changed every committed map and failed
+# check_render_current.py until a full re-render. On 2026-09-29 Osaka was the
+# only one of 68 committed maps with a wide-tier label. It also clears
+# Madrid's one 343px overlap (measured by injecting it); reaching Madrid is a
+# change to the trigger in render_heatmap() plus Madrid's re-render.
+#
+# It runs after the clamp on every event the clamp listens to - a timeout puts
+# it after every synchronous handler, whichever registered first - and undoes
+# its own last move when the clamp has not reset the label since.
+DENSE_LABEL_SCRIPT = """
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    var MARGIN = 6;     // as LABEL_CLAMP_SCRIPT: px from the frame edge
+    var CLEAR = 2;      // as LABEL_CLAMP_SCRIPT: px from a button, control or legend
+    var GAP = 4;        // px between a label and its line's tip
+    var REACH = __LABEL_REACH__;   // px: no label box further than this from its own tip
+    var STEP_X = 8, STEP_Y = 6;
+    var PASSES = 8;
+    var tries = 0, waits = 0;
+
+    function box(x0, y0, x1, y1) { return {x0: x0, y0: y0, x1: x1, y1: y1}; }
+    function shift(b, sx, sy) { return box(b.x0 + sx, b.y0 + sy, b.x1 + sx, b.y1 + sy); }
+    function area(a, b) {
+        var w = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+        var h = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+        return w > 0 && h > 0 ? w * h : 0;
+    }
+    function reach(b, p) {
+        var dx = Math.max(b.x0 - p.x, 0, p.x - b.x1);
+        var dy = Math.max(b.y0 - p.y, 0, p.y - b.y1);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function place(m) {
+        var size = m.getSize();
+        if (!size.x || !size.y) return;
+        var c = m.getContainer(), mr = c.getBoundingClientRect();
+        var att = c.querySelector(".leaflet-control-attribution");
+        var bottom = size.y - MARGIN - (att ? att.getBoundingClientRect().height : 0);
+        function inside(b) {
+            var dx = Math.max(0, MARGIN - b.x0) - Math.max(0, b.x1 - (size.x - MARGIN));
+            var dy = Math.max(0, MARGIN - b.y0) - Math.max(0, b.y1 - bottom);
+            return shift(b, dx, dy);
+        }
+        var obs = [], bare = [];
+        function add(el) {
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            if (r.width && r.height) {
+                obs.push(box(r.left - mr.left - CLEAR, r.top - mr.top - CLEAR,
+                             r.right - mr.left + CLEAR, r.bottom - mr.top + CLEAR));
+                bare.push(box(r.left - mr.left, r.top - mr.top,
+                              r.right - mr.left, r.bottom - mr.top));
+            }
+        }
+        add(document.getElementById("map-actions"));
+        var legend = document.querySelector("details.map-legend");
+        if (legend && !legend.open) add(legend);
+        c.querySelectorAll(".leaflet-top.leaflet-left .leaflet-control").forEach(add);
+
+        // Every label where LABEL_CLAMP_SCRIPT left it. Undo this script's own
+        // last move first if the clamp has not re-run since (its handler
+        // resets every label to its baked transform, ours then appends).
+        var labels = [], early = false;
+        m.eachLayer(function (layer) {
+            if (!layer._icon || !layer.getLatLng) return;
+            var d = layer._icon.querySelector(".hm-line-label");
+            if (!d) return;
+            if (d.dataset.base === undefined) early = true;
+            if (d.dataset.dense !== undefined && d.style.transform === d.dataset.dense) {
+                d.style.transform = d.dataset.preDense;
+            }
+            var i = layer._icon.getBoundingClientRect();
+            var r = d.getBoundingClientRect();
+            if (!r.width) return;
+            var p = m.latLngToContainerPoint(layer.getLatLng());
+            if (p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y) return;
+            var b = box(p.x + (r.left - i.left), p.y + (r.top - i.top),
+                        p.x + (r.right - i.left), p.y + (r.bottom - i.top));
+            labels.push({d: d, p: p, b0: b, b: b});
+        });
+        // LABEL_CLAMP_SCRIPT has not placed the labels yet (it records each
+        // baked transform as data-base on its first run): wait for it, or it
+        // would record this script's move as the baked position.
+        if (early) {
+            if (waits++ < 50) setTimeout(function () { place(m); }, 100);
+            return;
+        }
+
+        // How much of box b is covered by other labels (each with a pixel of
+        // margin) and obstacles - summed only until it reaches `upto`, since a
+        // spot that bad is rejected whatever the rest adds.
+        function hits(L, b, upto) {
+            var k = 0, i, o, w, h;
+            upto = upto === undefined ? Infinity : upto;
+            for (i = 0; i < obs.length && k < upto; i++) k += area(b, obs[i]);
+            for (i = 0; i < labels.length && k < upto; i++) {
+                o = labels[i];
+                if (o === L) continue;
+                w = Math.min(b.x1, o.b.x1 + 1) - Math.max(b.x0, o.b.x0 - 1);
+                h = Math.min(b.y1, o.b.y1 + 1) - Math.max(b.y0, o.b.y0 - 1);
+                if (w > 0 && h > 0) k += w * h;
+            }
+            return k;
+        }
+        // hits(L, b) === 0, stopping at the first collision: step 2 asks it of
+        // every spot a blocker might move to, and most collide.
+        function clean(L, b) {
+            var i, o;
+            for (i = 0; i < obs.length; i++) if (area(b, obs[i])) return false;
+            for (i = 0; i < labels.length; i++) {
+                o = labels[i];
+                if (o !== L && o.b.x0 - 1 < b.x1 && b.x0 < o.b.x1 + 1 &&
+                    o.b.y0 - 1 < b.y1 && b.y0 < o.b.y1 + 1) return false;
+            }
+            return true;
+        }
+        // Whether a label really overlaps something, with no margin. Only such
+        // a label moves: the margins in hits() choose between spots, but a
+        // label 1 px clear of its neighbour is readable and stays put (a
+        // desktop Osaka label did move, before this).
+        function overlapped(L) {
+            return labels.some(function (o) { return o !== L && area(L.b, o.b); }) ||
+                   bare.some(function (o) { return area(L.b, o); });
+        }
+        // Spots for the label's box, nearest its own tip first: the tip under
+        // the box anywhere along its width, or the box beside the tip; the box
+        // level with the tip or in rows above and below it - never further
+        // from the tip than REACH.
+        function spots(L) {
+            if (!L.spots) L.spots = spotsFor(L);
+            return L.spots;
+        }
+        function spotsFor(L) {
+            var w = L.b0.x1 - L.b0.x0, h = L.b0.y1 - L.b0.y0, p = L.p;
+            var xs = [], ys = [], out = [], f, d;
+            for (f = 0; f <= 8; f++) xs.push(p.x - f / 8 * w);
+            for (d = GAP; d <= REACH; d += STEP_X) xs.push(p.x + d, p.x - w - d);
+            for (f = -2; f <= 2; f++) ys.push(p.y - h / 2 + f / 4 * h);
+            for (d = GAP; d <= REACH; d += STEP_Y) ys.push(p.y + d, p.y - h - d);
+            xs.forEach(function (x) {
+                ys.forEach(function (y) {
+                    var b = inside(box(x, y, x + w, y + h));
+                    var r = reach(b, p);
+                    if (r <= REACH) out.push({b: b, r: r});
+                });
+            });
+            out.sort(function (a, b) { return a.r - b.r; });
+            return out;
+        }
+
+        // 1. A label that still overlaps something takes the nearest spot that
+        //    collides less, the most-crowded label first.
+        for (var pass = 0; pass < PASSES; pass++) {
+            var moved = false;
+            labels.slice().sort(function (a, b) { return hits(b, b.b) - hits(a, a.b); })
+                .forEach(function (L) {
+                    if (!overlapped(L)) return;
+                    var best = hits(L, L.b), to = null;
+                    spots(L).some(function (s) {
+                        var k = hits(L, s.b, best);
+                        if (k < best) { best = k; to = s.b; }
+                        return !best;
+                    });
+                    if (to) { L.b = to; moved = true; }
+                });
+            if (!moved) break;
+        }
+
+        // 2. A label still colliding may make room: it takes a spot blocked
+        //    only by one or two other labels, if each of those has a clean spot
+        //    of its own to move to. All or nothing.
+        labels.filter(overlapped)
+            .sort(function (a, b) { return (b.b0.x1 - b.b0.x0) - (a.b0.x1 - a.b0.x0); })
+            .forEach(function (L) {
+                if (!overlapped(L)) return;
+                spots(L).some(function (s) {
+                    var blockers = labels.filter(function (o) {
+                        return o !== L && area(s.b, box(o.b.x0 - 1, o.b.y0 - 1, o.b.x1 + 1, o.b.y1 + 1));
+                    });
+                    if (!blockers.length || blockers.length > 2) return false;
+                    if (obs.some(function (o) { return area(s.b, o); })) return false;
+                    var was = [L.b].concat(blockers.map(function (o) { return o.b; }));
+                    L.b = s.b;
+                    var ok = blockers.every(function (o) {
+                        var hold = o.b;
+                        o.b = box(-1e6, -1e6, -1e6, -1e6);   // out of its own way
+                        var to = null;
+                        spots(o).some(function (t) {
+                            if (clean(o, t.b)) { to = t.b; return true; }
+                            return false;
+                        });
+                        o.b = to || hold;
+                        return !!to;
+                    });
+                    if (ok && clean(L, L.b)) return true;
+                    L.b = was[0];
+                    blockers.forEach(function (o, n) { o.b = was[n + 1]; });
+                    return false;
+                });
+            });
+
+        labels.forEach(function (L) {
+            var sx = L.b.x0 - L.b0.x0, sy = L.b.y0 - L.b0.y0;
+            if (!sx && !sy) return;
+            L.d.dataset.preDense = L.d.style.transform;
+            L.d.style.transform += " translate(" + sx.toFixed(1) + "px, " + sy.toFixed(1) + "px)";
+            L.d.dataset.dense = L.d.style.transform;
+        });
+    }
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getSize) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var later = function () { setTimeout(function () { place(m); }, 0); };
+        m.on("moveend zoomend resize viewreset", later);
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", later);
+        later();
+    }
+    start();
+})();
+</script>
+"""
+# Blocks render_heatmap() injects into SOME maps only. check_render_current.py
+# holds a map that carries one to its current version, and does not ask for it
+# in a map that has none.
+CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT",)
 # Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (headless Edge,
 # trusted input over CDP, median of three fresh loads; DECISIONS.md has the
 # tables). The wheel felt laggier than +/- for a reason that was not speed:
@@ -1044,6 +1304,200 @@ WHEEL_ZOOM_SCRIPT = """
 })();
 </script>
 """
+# PICK ONE LINE OUT (owner, 2026-09-30, from the live site on an iPhone).
+# Where lines share track, the one drawn last covers the rest completely:
+# Daugavpils' line 2 was never visible under the purple, Saint-Etienne's trams
+# hid one another, Reims' T1 sat under T2. Tapping a line's LEGEND row, or the
+# line itself, draws that whole line on top and thicker and fades the others;
+# tapping it again, empty map, or another line restores or switches. A mouse
+# hovering a line or a row previews the same. A line hidden end to end can
+# only be reached through the legend, which is why every row is a button.
+#
+# Nothing is redrawn. Each line's polylines carry `hm-line hm-line-<n>` and
+# its label and legend row `data-line="<n>"` (render_heatmap, n = the line's
+# order), and a state is two CSS classes on the paths plus a reorder of the
+# line paths INSIDE their own run of the SVG - so a picked line goes above the
+# other lines but stays under the business dots, which are added after it.
+# CSS stroke-width overrides the attribute, so the dark theme's
+# `path[stroke-width="4"]` rule still matches a thickened line.
+#
+# A tap on the map is matched to a line by distance, not by what was hit: a
+# 4 px line is too thin to tap, and the hidden line is never what was hit.
+# Leaflet's own clipped, projected `_parts` are measured, as its
+# _containsPoint does. A tap on a business dot, station or ring is left alone.
+# The legend's open/collapsed state is never touched.
+LINE_HIGHLIGHT_SCRIPT = """
+<style>
+.map-legend .hm-line-row { cursor: pointer; border-radius: 3px; }
+.map-legend .hm-line-row:focus-visible { outline: none;
+    background: rgba(127,127,127,0.16); box-shadow: 0 0 0 3px rgba(127,127,127,0.16); }
+@media (hover: hover) {
+    .map-legend .hm-line-row:hover { background: rgba(127,127,127,0.16);
+        box-shadow: 0 0 0 3px rgba(127,127,127,0.16); } }
+.map-legend .hm-line-row.hm-on { background: rgba(127,127,127,0.28);
+    box-shadow: 0 0 0 3px rgba(127,127,127,0.28); }
+.map-legend .hm-line-row.hm-on > span { transform: scaleY(2); }
+.map-legend.hm-picking .hm-line-row:not(.hm-on) { opacity: 0.6; }
+.leaflet-overlay-pane path.hm-line.hm-dim { stroke-opacity: 0.25; }
+.leaflet-overlay-pane path.hm-line.hm-hot { stroke-width: 7px; stroke-opacity: 1; }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.eachLayer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var lines = {};
+        function line(k) { return lines[k] || (lines[k] = {polys: [], label: null}); }
+        m.eachLayer(function (layer) {
+            var c = layer.options && layer.options.className;
+            var hit = typeof c === "string" && /\\bhm-line-(\\d+)\\b/.exec(c);
+            if (hit && layer._path) {
+                line(hit[1]).polys.push(layer);
+                layer._path._hmLine = true;
+            } else if (layer._icon) {
+                var d = layer._icon.querySelector(".hm-line-label[data-line]");
+                if (d) line(d.getAttribute("data-line")).label = layer;
+            }
+        });
+        var keys = Object.keys(lines).filter(function (k) {
+            return lines[k].polys.length;
+        }).sort(function (a, b) { return a - b; });
+        if (!keys.length) return;
+        var legend = document.querySelector("details.map-legend");
+        var rows = legend ? legend.querySelectorAll(".hm-line-row[data-line]") : [];
+        var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+        var HOVER = mq("(hover: hover) and (pointer: fine)");
+        var TOL = mq("(pointer: coarse)") ? 16 : 7;
+        var sel = null, hov = null, shown = null, outTimer = null;
+
+        // The picked line's paths go last within the run of line paths, so
+        // above every other line and still under anything drawn after them.
+        function restack(top) {
+            var paths = [];
+            keys.forEach(function (k) {
+                if (k !== top) lines[k].polys.forEach(function (p) { paths.push(p._path); });
+            });
+            if (top !== null) lines[top].polys.forEach(function (p) { paths.push(p._path); });
+            var g = paths[0].parentNode;
+            if (!g) return;
+            var last = g.lastChild;
+            while (last && !last._hmLine) last = last.previousSibling;
+            var ref = last ? last.nextSibling : null;
+            // Already in this order? Then touch nothing: re-inserting the path
+            // under the pointer detaches it, and the browser never sends it
+            // mouseout - which left a hover stuck on (map-refresh check).
+            var run = [], n = last;
+            while (n && run.length < paths.length) {
+                if (n._hmLine) run.unshift(n);
+                n = n.previousSibling;
+            }
+            if (run.length === paths.length && run.every(function (x, i) { return x === paths[i]; })) return;
+            paths.forEach(function (p) { if (p.parentNode === g) g.insertBefore(p, ref); });
+        }
+
+        function show() {
+            var want = hov !== null ? hov : sel;
+            if (want === shown) return;
+            shown = want;
+            keys.forEach(function (k) {
+                var on = k === want, rec = lines[k];
+                rec.polys.forEach(function (p) {
+                    p._path.classList.toggle("hm-hot", on);
+                    p._path.classList.toggle("hm-dim", want !== null && !on);
+                });
+                if (rec.label) rec.label.setZIndexOffset(on ? 1500 : 1000);
+            });
+            for (var i = 0; i < rows.length; i++) {
+                var on = rows[i].getAttribute("data-line") === want;
+                rows[i].classList.toggle("hm-on", on);
+                rows[i].setAttribute("aria-pressed", on ? "true" : "false");
+            }
+            if (legend) legend.classList.toggle("hm-picking", want !== null);
+            restack(want);
+        }
+        function pick(k) { sel = sel === k ? null : k; show(); }
+        // A short delay before a hover ends, so moving from one line onto the
+        // line beside it, or a path being restacked under the pointer, does
+        // not flash the whole map back to normal in between.
+        function hover(k) {
+            clearTimeout(outTimer);
+            if (k !== null) { hov = k; show(); return; }
+            outTimer = setTimeout(function () { hov = null; show(); }, 80);
+        }
+
+        function distance(rec, p) {
+            var d = Infinity;
+            rec.polys.forEach(function (layer) {
+                (layer._parts || []).forEach(function (part) {
+                    for (var i = 1; i < part.length; i++) {
+                        d = Math.min(d, L.LineUtil.pointToSegmentDistance(p, part[i - 1], part[i]));
+                    }
+                });
+            });
+            return d;
+        }
+
+        m.on("click", function (e) {
+            var t = e.originalEvent && e.originalEvent.target;
+            if (t && t.classList && t.classList.contains("leaflet-interactive") && !t._hmLine) return;
+            var found = [];
+            keys.forEach(function (k, i) {
+                var d = distance(lines[k], e.layerPoint);
+                if (d <= TOL) found.push({k: k, d: d, z: k === shown ? keys.length : i});
+            });
+            if (!found.length) { clearTimeout(outTimer); sel = null; hov = null; show(); return; }
+            var near = Math.min.apply(null, found.map(function (f) { return f.d; }));
+            var best = null;
+            found.forEach(function (f) {
+                if (f.d <= near + 1 && (!best || f.z > best.z)) best = f;
+            });
+            pick(best.k);
+        });
+
+        for (var i = 0; i < rows.length; i++) {
+            (function (row) {
+                var k = row.getAttribute("data-line");
+                if (!lines[k]) return;
+                row.addEventListener("click", function () { pick(k); });
+                row.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(k); }
+                });
+                if (HOVER) {
+                    row.addEventListener("mouseenter", function () { hover(k); });
+                    row.addEventListener("mouseleave", function () { hover(null); });
+                }
+            })(rows[i]);
+        }
+        if (HOVER) {
+            keys.forEach(function (k) {
+                lines[k].polys.forEach(function (layer) {
+                    layer.on("mouseover", function () { hover(k); });
+                    layer.on("mouseout", function () { hover(null); });
+                });
+            });
+            m.on("mousemove", function (e) {
+                if (hov === null || !lines[hov]) return;
+                var t = e.originalEvent && e.originalEvent.target;
+                if (legend && t && legend.contains(t)) return;
+                if (distance(lines[hov], e.layerPoint) > TOL) hover(null);
+            });
+        }
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && (sel !== null || hov !== null)) {
+                clearTimeout(outTimer); sel = null; hov = null; show();
+            }
+        });
+    }
+    start();
+})();
+</script>
+"""
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -1053,9 +1507,12 @@ LEGEND_ROW = """
 """
 # A short colored line swatch, not a dot - distinguishes transit lines from
 # business categories at a glance, so a reader isn't relying on the on-map
-# line labels alone (automatic placement can land imperfectly).
+# line labels alone (automatic placement can land imperfectly). Each row is
+# also the button that picks its line out (LINE_HIGHLIGHT_SCRIPT); `line` is
+# the line's order, the same n as its polylines' hm-line-<n> class.
 LEGEND_LINE_ROW = """
-  <div style="display:flex; align-items:center; margin:3px 0;">
+  <div class="hm-line-row" data-line="{line}" role="button" tabindex="0" aria-pressed="false"
+    style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:16px; height:3px;
       background:{color}; margin-right:7px;
       border-radius:2px;"></span>{label}
@@ -1389,7 +1846,7 @@ def _clearance(tip):
 LIGHT_LABEL_HALO = "#ffffff"
 
 
-def add_line_label(feature_group, tip, label, color, dark=None):
+def add_line_label(feature_group, tip, label, color, dark=None, line=None):
     """A permanent, always-visible line-name label at the tail end of the line
     - NOT a hover tooltip. Use the line's real public-facing name.
 
@@ -1397,8 +1854,12 @@ def add_line_label(feature_group, tip, label, color, dark=None):
     element - extra pixels of clearance - from _label_candidates: the label is
     centred just beyond the tip along the line's own direction, offset in
     pixels by the label's own size so it clears the line whatever the angle,
-    and it stays put relative to the tip at every zoom."""
+    and it stays put relative to the tip at every zoom.
+
+    `line`: the line's order in render_heatmap, written as data-line so
+    LINE_HIGHLIGHT_SCRIPT can lift this label with its line."""
     lat, lon, ux, uy = tip[:4]
+    data_line = "" if line is None else f' data-line="{int(line)}"'
     dx, dy, _hw, _hh = _label_offset(label, ux, uy, _clearance(tip))
     # Both themes read at 4.5:1: the light theme's colour and halo (a yellow
     # keeps its colour on a dark halo rather than turning olive), and the dark
@@ -1416,7 +1877,7 @@ def add_line_label(feature_group, tip, label, color, dark=None):
             icon_size=(0, 0),
             icon_anchor=(0, 0),
             html=f"""
-            <div class="hm-line-label" style="
+            <div class="hm-line-label"{data_line} style="
                 position: absolute; left: 0; top: 0;
                 transform: translate(-50%, -50%) translate({dx:.1f}px, {dy:.1f}px);
                 font-size: 14px; font-weight: bold; color: {light}; --dm-label: {dark};
@@ -1933,9 +2394,9 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     """
     names = legend_names or {}
     line_rows = "".join(
-        LEGEND_LINE_ROW.format(color=color, label=html.escape(
+        LEGEND_LINE_ROW.format(line=n, color=color, label=html.escape(
             f"{label} {names[key]}" if key in names else label))
-        for key, (_coords, color, label, _end) in lines.items()
+        for n, (key, (_coords, color, label, _end)) in enumerate(lines.items())
     )
     if no_data_stations:
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
@@ -2218,13 +2679,16 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # different lines never share one - see linecolour.dark_label_colours.
     dark_labels = dark_label_colours({k: v[1] for k, v in lines.items()},
                                      dark_halo=DARK["page"], city=city_name)
-    for key, (segments, color, label, _end) in lines.items():
+    # `n` ties a line's polylines, label and legend row together for
+    # LINE_HIGHLIGHT_SCRIPT; build_legend numbers its rows in this same order.
+    for n, (key, (segments, color, label, _end)) in enumerate(lines.items()):
         rail_layer = folium.FeatureGroup(name=f"{system_name}: {names.get(key, label)}", show=True, control=False)
         # One polyline per alignment; a branching trunk keeps one label and one
         # legend entry (see load_line_shapes).
         for segment in segments:
-            folium.PolyLine(segment, color=color, weight=4, opacity=0.85).add_to(rail_layer)
-        add_line_label(rail_layer, tips[key], label, color, dark=dark_labels[key])
+            folium.PolyLine(segment, color=color, weight=4, opacity=0.85,
+                            class_name=f"hm-line hm-line-{n}").add_to(rail_layer)
+        add_line_label(rail_layer, tips[key], label, color, dark=dark_labels[key], line=n)
         rail_layer.add_to(m)
 
     # Category grouping via the city's own taxonomy, never a hardcoded one.
@@ -2302,10 +2766,21 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # sliding it, not by zooming. See LABEL_CLAMP_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         LABEL_CLAMP_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # A map that needed labels standing in the wide tier on the desktop gets
+    # the wider phone placer too - and only such a map, so no other changes.
+    # See DENSE_LABEL_SCRIPT.
+    if any(_clearance(t) in _LABEL_WIDE_CLEARANCES for t in tips.values()):
+        m.get_root().html.add_child(folium.Element(
+            DENSE_LABEL_SCRIPT.replace("__MAP_NAME__", m.get_name())
+            .replace("__LABEL_REACH__", f"{max(_LABEL_WIDE_CLEARANCES):g}")))
     # Mouse-wheel zoom that neither drops notches nor moves less than a click.
     # See WHEEL_ZOOM_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         WHEEL_ZOOM_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # A line's legend row, or the line itself, picks it out above the others.
+    # See LINE_HIGHLIGHT_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        LINE_HIGHLIGHT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
 
     # A declared language: its font order on --hm-font, which every shared
     # block reads through theme.FONT_VAR, so the shared blocks stay identical.

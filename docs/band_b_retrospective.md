@@ -2,8 +2,8 @@
 
 A record of the Band B build session (worktree `band-b`, 2026-09-29 to
 2026-09-30), written so the next batch of builds is cheaper. The cities' own
-facts live on their branches (each `docs/decisions_drafts/<city>.md`, or
-`DECISIONS.md` for the first five) and in their briefs; this file is the
+facts live in `DECISIONS.md` (the later cities' drafts files were folded in
+on 2026-10-01) and in their briefs; this file is the
 narrative that connects them, and the record of what went wrong.
 
 **Twelve cities, twelve branches, nothing on master.** Every branch was cut from

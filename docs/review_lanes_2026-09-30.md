@@ -158,3 +158,32 @@ After this lands, the owner plans a second delegated review: every element of
 the site except the maps themselves, made succinct and readable for a general
 audience. It gets its own lane plan then; findings from lane 4 that are about
 tone rather than correctness are kept for it, not fixed now.
+
+## How it went (the lanes' own summaries, 2026-09-30)
+
+| Lane | Active work | Wall time | Tokens (session + agents) | Blockers |
+|---|---|---|---|---|
+| 1 French cities | ~25 min | 3 h | ~394k | 1 (Angers brand on About the Data) |
+| 2 Band B, Czechia, trams (run as a cleanup agent; its session stopped after "ready") | 19 min | 19 min | ~252k | 3 |
+| 3 Shared surfaces | ~1 h | 2 h | ~637k | 0, and 3 should-fix |
+| 4 Prose and records | ~45 min | 3 h | ~1.2M | 8, over two rounds |
+
+About 2.5M tokens in all, against about 300k for one full deploy-verify at
+124 cities - which would have caught at most the three map findings of lanes
+1-3, and none of the privacy verdicts, stale notice numbers, false What Is
+Excluded sentences, off-canvas dots or Dallas's caption date (9 of the 12
+blockers). Wall time was set by the last build landing mid-review and by the
+fix rounds between, not by the lanes, which mostly waited.
+
+**For the next large review:**
+1. Turn the recurring misses into checks: a recorded privacy verdict per
+   city, notice citations (bold numbers and "NN"), a brand guard over every
+   rendered doc, dots on top of dots. Most of lane 4's reading - the costliest
+   lane, about 1M tokens of Explore agents - becomes a script run.
+2. Start the lanes only after the last build lands: the tram kit's arrival
+   cost every lane a delta round.
+3. List every rendered surface in the lane doc (the About page renders
+   `docs/data_sources/*.md`).
+4. Give each lane its ports, temp folders and reusable click scripts up front.
+5. Already done: check_macro_labels lists members whose dot is off the canvas.
+
