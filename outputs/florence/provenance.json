@@ -1,0 +1,43 @@
+{
+  "written_utc": "2026-10-01T02:11:06+00:00",
+  "layers": {
+    "commercio": {
+      "url": "https://datigis.comune.fi.it/json/commercio_sede_fissa_od.json",
+      "features": 7546,
+      "last_modified": "Wed, 30 Sep 2026 02:15:03 GMT"
+    },
+    "pubblici_esercizi": {
+      "url": "https://datigis.comune.fi.it/json/pubblici_esercizi_od.json",
+      "features": 3421,
+      "last_modified": "Wed, 30 Sep 2026 02:25:02 GMT"
+    },
+    "estetiche": {
+      "url": "https://datigis.comune.fi.it/json/attivita_estetiche_od.json",
+      "features": 1495,
+      "last_modified": "Thu, 01 Oct 2026 02:05:05 GMT"
+    },
+    "tintolavanderie": {
+      "url": "https://datigis.comune.fi.it/json/tintolavanderie_od.json",
+      "features": 179,
+      "last_modified": "Wed, 30 Sep 2026 02:35:01 GMT"
+    }
+  },
+  "osm": {
+    "rail_host": "overpass-api.de",
+    "comuni_host": "overpass.kumi.systems",
+    "bbox": [
+      43.72,
+      11.15,
+      43.84,
+      11.34
+    ]
+  },
+  "files_utc": {
+    "commercio_sede_fissa_od.json": "2026-10-01T02:09:50+00:00",
+    "pubblici_esercizi_od.json": "2026-10-01T02:09:51+00:00",
+    "attivita_estetiche_od.json": "2026-10-01T02:09:53+00:00",
+    "tintolavanderie_od.json": "2026-10-01T02:09:54+00:00",
+    "osm_rail.json": "2026-10-01T02:10:17+00:00",
+    "osm_comuni.json": "2026-10-01T02:11:06+00:00"
+  }
+}

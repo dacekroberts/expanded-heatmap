@@ -402,6 +402,11 @@
  "new_orleans": {
   "in_ring": 2131,
   "all": 4689,
+  "map_blob": "bac3fc63655972b0cc0648e3afa112ccd6c70d8c"
+ },
+ "florence": {
+  "in_ring": 4435,
+  "all": 12052,
   "map_blob": null
  }
 }

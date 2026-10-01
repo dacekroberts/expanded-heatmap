@@ -2042,6 +2042,24 @@ their street address - 783 with no business name and 25 whose name is only a per
 the Riverfront's old routing via Canal Street, are not drawn: RTA runs the Riverfront as 49,
 French Market to Julia Street, since Summer 2025. Not drawn: buses and ferries.
 
+### Florence - the Comune's four layers by type, and T1's Scandicci stops
+
+**Left out of the Comune's four layers** (12,641 rows; `pipeline/taxonomies/florence_attivita.py`):
+private clubs and associations (186); internal shops (128); online, mail-order, door-to-door
+and vending sellers (123); farmers selling their own produce (49); wholesale (2); catering
+(24) and home restaurants (7); temporary service at events (6); bars in the Comune's sports
+grounds (33) and restaurants in hotels (12); rows with no type in the shop and food layers
+(19). **Kept**: the 639 food-service premises the regional law exempts from the Comune's
+requirements (owner, call 16, Milan's *fuori piano* precedent) - some are not open to the
+public, and the type does not say which; the page says so.
+
+**Not named**: no layer carries a name or an address; a dot shows its type.
+
+**Stations.** T1 and T2, every stop in the comune (39). T1 runs on into Scandicci: its four
+stops there (Villa Costanza, De André, Resistenza, Aldo Moro) are drawn with the line but
+not ringed (owner, call 17), listed in `outputs/florence/excluded_stations.csv`. Not drawn:
+T3 and T4, under construction (T3.2.1 due about January 2027); buses; trains.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

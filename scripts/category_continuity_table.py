@@ -843,6 +843,46 @@ COLUMNS["nola_businesstype"] = {
                     loc("Flea Market", "market stalls (R1: a market's stalls are not shops)")],
 }
 
+
+def _fi(source, t):
+    return {"source": source, "tipologiaattivita": t}
+
+
+COLUMNS["florence_attivita"] = {
+    "funeral": absent("no layer for funeral services: the Comune publishes shops, food service, "
+                      "beauty and laundries only"),
+    "no_counter_food": [loc(_fi("pubblici_esercizi", "56.21.01R - CATERING"), "catering"),
+                        loc(_fi("pubblici_esercizi", "56.10.01R - HOME RESTAURANT"), "home restaurant")],
+    "personal_catchall": absent("no catch-all: the beauty layer lists hair, beauty, tattoo and piercing"),
+    "tattoo": [loc(_fi("estetiche", "96.09.02 - TATUAGGI"), "tattoo")],
+    "adult_hostess": absent("no such type in the four layers"),
+    "sex_shop": absent("no type of its own; under the shop type (esercizio di vicinato)"),
+    "massage_commercial": [loc(_fi("estetiche", "96.02.02R - ESTETISTI"),
+                               "beauticians, whose trade includes aesthetic massage")],
+    "massage_regulated": absent("health massage is not in the Comune's activity layers"),
+    "car_dealer": absent("no type of its own; under the shop type"),
+    "petrol_station": absent("fuel stations are licensed outside these four layers"),
+    "vehicle_repair": absent("no repair layer"),
+    "gambling": absent("no gaming layer"),
+    "pawnbroker": absent("no type of its own"),
+    "nightclub": [loc(_fi("pubblici_esercizi", "56.10.01R - SOMMINISTRAZIONE DI ALIMENTI E BEVANDE"),
+                      "food and drink service (bars and clubs file here)")],
+    "vet": absent("no veterinary layer"),
+    "nonstore": [loc(_fi("commercio", "47.91.01R - FORMA SPECIALE (COMMERCIO ELETTRONICO)"), "online"),
+                 loc(_fi("commercio", "47.99.02R - FORMA SPECIALE (DISTRIBUTORI AUTOMATICI)"), "vending"),
+                 loc(_fi("commercio", "47.99.01R - FORMA SPECIALE (DOMICILIO DEL CONSUMATORE)"), "door to door")],
+    "parking": absent("no parking layer"),
+    "repair": absent("no repair layer"),
+    "lodging": [loc(_fi("pubblici_esercizi", "56.10.01R - RISTORANTE ALBERGO"),
+                    "restaurants inside hotels, out with lodging (premises-taxonomy step 5)")],
+    "recreation": [loc(_fi("pubblici_esercizi", "56.20.01R - SOMMINISTRAZIONE IN IMPIANTI SPORTIVI COMUNALI"),
+                       "bars in the Comune's sports grounds")],
+    "pharmacy": absent("pharmacies are licensed outside these four layers"),
+    "optician": absent("no type of its own; under the shop type"),
+    "mobile_unit": [loc(_fi("pubblici_esercizi", "SOMMINISTRAZIONE TEMPORANEA - art. 52"),
+                        "temporary service at events")],
+}
+
 SHOP = "RETAIL (SHOPS)"
 
 

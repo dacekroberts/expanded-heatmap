@@ -954,7 +954,13 @@ CITIES = [
         # reproduced, and check_macro_labels.py passes every region at 375,
         # 768 and 1200 with PROBLEMS 0 - re-scored after merging with
         # Amsterdam, built on a separate branch the same night.
-        "label_offset": ("middle", 0, -22),
+        #
+        # MOVED RIGHT OF THE DOT 2026-09-30 (tram kit), when Florence joined:
+        # above the dot this pill covered Florence's marker in Europe at all three
+        # widths. check_macro_labels.py (python -B, an in-process grid) passes
+        # start 11 at dy -6 to +10 with Florence at its offset; +2 sits inside
+        # that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 11, 2),
     },
     {
         "name": "São Paulo",
@@ -2159,6 +2165,32 @@ CITIES = [
         # passes start 11 at dy 0 to +8 (-2 meets Washington D.C.'s pill at the
         # Global zoom); +4 sits inside that, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, 4),
+    },
+    {
+        "name": "Florence",
+        "lat": 43.7696,
+        "lon": 11.2558,
+        "page": "pages/136_Florence_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Comune layers, updated daily; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        "categories": "All three",
+        "blurb": "Tramvia: T1 Leonardo and T2 Vespucci",
+        "region": "Europe",
+        "country": "Italy",
+        "in_default_view": False,
+        # RIGHT of the dot, a little above, and SCORED: width 58.1 px measured in
+        # a browser with Space Grotesk loaded (2026-09-30). Inside Europe's frame,
+        # so the region's zoom and centre do not move. Rome's label moved right
+        # to clear this marker (see Rome). check_macro_labels.py (python -B)
+        # passes start 11 at dy -12 to +6; -3 sits inside that, PROBLEMS 0 at
+        # 375, 768 and 1200.
+        "label_offset": ("start", 11, -3),
     },
 ]
 

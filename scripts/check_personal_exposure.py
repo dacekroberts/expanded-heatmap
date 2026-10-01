@@ -457,6 +457,12 @@ REGISTRIES = {
     "new_orleans": dict(raw=None, trade=None, owner=None,
                         processed="businesses_clean.csv",
                         address=("address",)),
+    # Florence: the Comune's four layers carry no name and no address - an id, a
+    # point and a type. The pin shows the type in English. Nothing here can be
+    # a person; a beauty or laundry point can still be a sole trader's
+    # premises, which the type does not reveal.
+    "florence": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=None),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

@@ -144,6 +144,8 @@ TAXONOMY_MODULES = {
     # New Orleans: NAICS-era titles with no codes, each mapped to the code it
     # names, so naics.py decides the bucket (tram kit, 2026-09-30).
     "nola_businesstype": "pipeline.taxonomies.nola_businesstype",
+    # Florence: the Comune's four layers, keyed on layer + type (tram kit).
+    "florence_attivita": "pipeline.taxonomies.florence_attivita",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

@@ -86,7 +86,7 @@ together, so a row in either counts and a row in neither still fails.
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
-| Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |
+| Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
@@ -2205,6 +2205,22 @@ landing.**)
 - **MUST DO**: nothing. A.R.S. 39-121.03 (commercial use of public records)
   does not reach a non-commercial portfolio; it would if the project became
   commercial.
+
+**71. Comune di Firenze (Florence) — required, and DISPLAYED** (written into
+`render_site_notices()`; tram kit, 2026-09-30; displayed once Florence lands.
+**Renumber at landing with 69 and 70**, after France's 69-71.)
+
+- **PERMITTED WITH CONDITIONS, CC BY 4.0** (the brief's licence read,
+  2026-09-30): the Comune's own Note legali ("I materiali Open data sono
+  liberamente riutilizzabili...") and CC BY 4.0 on every dataset and
+  distribution. The Regione's dati.toscana.it only harvests the layers and is
+  owed nothing. Rows in [`data_sources/italy.md`](data_sources/italy.md).
+- **MUST DISPLAY**: credit the Comune di Firenze (Direzione Attività Economiche
+  e Turismo), link CC BY 4.0, and state the changes (filtered, categorised,
+  aggregated) - no wording prescribed; Milan's notice 23 is the model.
+- **MUST NOT**: imply the Comune's endorsement, or use its logo or the giglio.
+- **MUST DO**: nothing. The Comune's footer ties reuse of personal data to
+  d.lgs. 36/2006; the layers carry no name or address.
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

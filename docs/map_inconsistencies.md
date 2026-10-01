@@ -532,6 +532,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Italy** | | | | | |
 | Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
 | Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 3, 5, 14, 19 bus-replaced); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
+| Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap | Comune | 4 / 0 |
 | **France** | | | | | |
 | Paris | Métro, 16 lines + Trams T3a, T3b | RER, Transilien, other trams (T2 and T9 stubs) | IDFM GTFS | Commune | 76 / 0 |
 | Marseille | Métro 1–2 + Tramway 1–3 | TER; ferries; Aubagne tram | Métropole AMP GTFS (RTM) | Commune | 7 (Aubagne tram) / 0 |
@@ -644,6 +645,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Italy** | | | | | |
 | Milan | 6 licence registers | Comune di Milano premises registers | Register = category | 24,793 / 11,738 / 4,979 | Canteens and clubs partly left in Food |
 | Rome | Authorisation register | SUAP | Own authorisation types | 38,121 / 14,534 / 8,084 | Workshops with no trade missing |
+| Florence | Permit registers | Comune di Firenze's four activity layers (CC BY 4.0) | Layer and type | 2,676 / 1,086 / 673 | Exempt food service kept: some not open to the public |
 | **France** | | | | | |
 | Paris | National establishment register | SIRENE + INSEE geolocation | NAF rév. 2 (sous-classe) | 40,771 / 32,871 / 11,605 | — |
 | Marseille | same | same | same | 4,558 / 3,852 / 1,537 | — |
@@ -753,6 +755,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Italy** | | | |
 | Milan | Source coordinates (loss count UNKNOWN) | Canteens/clubs partly remain; double counts | Registers not merged |
 | Rome | Address join to ANNCSU (95.7%) | Food an upper bound (no closing dates) | Online, wholesale, storage types; workshops with no trade |
+| Florence | Source coordinates (100%) | Some exempt food service not open to the public; no names or addresses | Private clubs, internal shops, nonstore, farmers, catering, hotel restaurants |
 | **France** | | | |
 | Paris | Join to INSEE geolocation (99.96%) | 1.8× OSM shop count; INSEE masking 8.5% (EC) | 47.91/47.99/47.8x, 56.29, 96.01A, 96.09Z |
 | Marseille | same (99.94%) | 2.6× OSM (1.7× on restaurants); masking 12.2% (brief, sample) | Same codes |
@@ -857,6 +860,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Italy** | | | | | | |
 | Milan | UNKNOWN (2026-09-22) | — | 0.6 mi | Yes | 87% | Sign on about 1 in 7; else address |
 | Rome | July 2025 (2026-09-24) | B | 0.6 mi | Yes | 61% | Activity + address |
+| Florence | Updated daily (2026-09-30) | B | 0.3 mi | Yes | 37% | Type only (no name or address) |
 | **France** | | | | | | |
 | Paris | SIRENE monthly; month UNKNOWN (2026-09-22) | T | 0.3 mi | Yes | 98% | Sign/usual name (about 40%), else address |
 | Marseille | same (2026-09-23) | T | 0.3 mi | Yes | 55% | same (43% named) |

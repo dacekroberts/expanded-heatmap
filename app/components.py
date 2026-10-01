@@ -723,6 +723,8 @@ _NOTICES = [
      "Houston's METRORail Red, Green and Purple Lines and their stations, "
      "Kansas City's KC Streetcar, Tucson's Sun Link and New Orleans's five "
      "streetcar lines and their stops, "
+     "Florence's T1 and T2 tram lines and their stops and the comune boundaries "
+     "used to select them and its businesses, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
@@ -1543,6 +1545,20 @@ _NOTICES = [
     # credited and the pins are never called complete. The owner's wording.
     ("City of Tucson (Tucson)",
      "Business licence data: City of Tucson.",
+     False),
+    # Florence (notice 71): the Comune di Firenze's four activity layers, CC BY
+    # 4.0 (its Note legali and every dataset; licence read 2026-09-30, the
+    # brief). Credit the Comune, link the licence, state the changes - Milan's
+    # notice, the same licence; no wording prescribed, so this is the project's
+    # own. Never the Comune's logo or the giglio.
+    ("Comune di Firenze (Florence)",
+     "Contains data from the Comune di Firenze (Direzione Attività Economiche e "
+     "Turismo), licensed under a [Creative Commons Attribution 4.0 International "
+     "(CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) licence: its "
+     "layers of shops, food and drink premises, beauty businesses and laundries. "
+     "This map filters, re-categorises and aggregates that data into density "
+     "measures; the filtering, categories and densities are this project's own "
+     "and are not produced or endorsed by the Comune di Firenze.",
      False),
 ]
 

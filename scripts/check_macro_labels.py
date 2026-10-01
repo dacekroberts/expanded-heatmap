@@ -252,6 +252,9 @@ TEXT_WIDTH = {
     "Tucson": 48.6,
     # New Orleans: measured in the same tab as Kansas City, the same way.
     "New Orleans": 82.8,
+    # Florence: measured 2026-09-30 in a fresh tab, the same way (Houston 56.9,
+    # Odense 50.6, Kansas City 79.3 and Daugavpils 73.7 reproduced).
+    "Florence": 58.1,
     # Buffalo: measured 2026-09-29 in the local app's own document (lean venv),
     # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load;
     # Prague 47.3, Tokyo 40.5, London 50.9, Glasgow 56.8 and Oslo 29.0
