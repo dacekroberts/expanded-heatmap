@@ -382,7 +382,11 @@ CITIES = [
         #                                vertically, at 400, 854 and 1200 px.
         # Montréal is wedged between the two longest names on the map, so if
         # either of those labels is ever moved or renamed, re-check this one.
-        "label_offset": ("start", 12, -34),
+        # Raised 10 px, -34 -> -44 (2026-09-29, Ottawa's build): Ottawa's
+        # label, 165 km west, found no clean spot in the Global frame beside
+        # Toronto, Boston and Montréal as they stood; a joint sweep of the two
+        # offsets scored PROBLEMS 0 at all three widths with this one.
+        "label_offset": ("start", 12, -44),
     },
     {
         "name": "Calgary",
@@ -2490,6 +2494,30 @@ CITIES = [
         # check_macro_labels.py scored PROBLEMS 0 in every region at
         # 375/768/1200 px.
         "label_offset": ("end", -10, 0),
+    },
+    {
+        "name": "Ottawa",
+        "lat": 45.4215,
+        "lon": -75.6972,
+        "page": "pages/76_Ottawa_Heatmap.py",
+        # One category (owner, 2026-09-30): food shops count as food.
+        "coverage": "one_bucket",
+        "mode": "light_rail",
+        "placement": "Feed coordinates (99.6%)",
+        "data_age": "Inspected within two years of 2026-09-29",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "O-Train: Lines 1, 2 and 4",
+        "region": "Canada East",
+        "country": "Canada",
+        "in_default_view": False,
+        # East and high, with Montréal's raised 10 px to make room: every
+        # placement of Ottawa's alone collided with Toronto's, Boston's or
+        # Montréal's pill in the Global frame (a sweep of 900 offsets). The
+        # joint sweep's PROBLEMS 0, at 375, 768 and 1200 px; width 47.5
+        # measured in a browser.
+        "label_offset": ("start", 10, -25),
     },
 ]
 

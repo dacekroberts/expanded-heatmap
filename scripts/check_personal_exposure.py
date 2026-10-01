@@ -415,6 +415,13 @@ REGISTRIES = {
     # ever downloaded but the organisation type (fetch_sources names its
     # columns; step 2 asserts); a person's permit (IS, PI, ES) shows its
     # address, so the names left are companies' - which this run measures.
+    # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
+    # has one name column (the premises name) and a phone, never read (step 2
+    # names its columns and asserts it). No owner column exists, so no
+    # fallback; a home-based caterer's name could be their own - measured here.
+    "ottawa": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
     "houston": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),

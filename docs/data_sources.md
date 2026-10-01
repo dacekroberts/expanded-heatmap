@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.
 | Country | File | Cities |
 |---|---|---|
 | United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston |
-| Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto |
+| Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
@@ -2203,6 +2203,24 @@ Normandie aggregate's LiA shapes, stop-to-stop lines, are not used, so the
 aggregate's licence question for LiA's data does not arise (DECISIONS drafts,
 `docs/decisions_drafts/france-build.md`). **MUST DO**: a pure-extract station
 table; §4.6 by the repository.
+
+**72. City of Ottawa (Ottawa) — required, and DISPLAYED**
+(written into `render_site_notices()`; displayed once Ottawa lands).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-09-29; the Ottawa rows in
+  [`data_sources/canada.md`](data_sources/canada.md)): Ottawa Public Health's
+  inspection feed and the City's 2022-2026 wards both carry the Open Government
+  Licence – City of Ottawa v2.0 in their `licenseInfo`.
+- **MUST DISPLAY**, verbatim and linked to the licence: "Contains information
+  licensed under the Open Government Licence – City of Ottawa." The notice also
+  credits Ottawa Public Health / City of Ottawa and states the changes.
+- **MUST NOT**: suggest official status or endorsement, or use the City's or
+  OPH's names as marks. Personal information is outside the grant (MFIPPA):
+  `check_personal_exposure.py ottawa`, run 2026-09-29, finds premises names only;
+  the verdict is in `DECISIONS.md`.
+- **MUST DO**: nothing. The item says the feed "will be retired in Q1 2026";
+  the cached copy stays licensed as accessed.
+- **Ottawa's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1

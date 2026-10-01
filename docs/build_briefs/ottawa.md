@@ -5,6 +5,26 @@ test) and 2026-09-29 (the Band C audit; this brief).** Band B, a
 reduced-bucket page (owner, 2026-09-29): **food only**. Run
 `python scripts/brief_check.py ottawa` before writing code.
 
+> **Measured at the build, 2026-09-29 (branch `ottawa`)** - these supersede
+> the figures below:
+> - **4,896 food premises**, not ~5,300: of 5,747 inspected since 2024-09-29,
+>   597 institutional kitchens (event caterers included, R1), 83 clubs and
+>   arenas, 110 mobile and event vendors and 39 hotels, B&Bs and funeral
+>   homes are left out by name (owner, 2026-09-29), 14 have no point and 8 a
+>   point outside the City. The brief's single-word list over-caught (SCHOOL
+>   HOUSE PIZZA, UNIVERSITY TAVERN); the rules are phrases, in
+>   `pipeline/taxonomies/ottawa_inspection.py`.
+> - **Food shops and pharmacies stay in the one layer** (owner), labelled
+>   "Restaurants and food shops".
+> - **32.4% in a ring**. 25 stations, gate 3 exact against Wikipedia's
+>   infoboxes (octranspo.com refuses scripted clients).
+> - **The feed host challenges a client with no user agent** (Imperva, HTTP
+>   200 HTML); the project's identifying agent is served the zip.
+> - **Boundary**: the City's 2022-2026 wards dissolved, 2,892.4 km2.
+> - **Line colours**: Line 1 `#D41F11`, Line 2 `#739C0D` (OC Transpo's red and
+>   green moved to clear 45 Delta-E), Line 4 `#F2A900`.
+> - **Region `Canada East`**, not "North America".
+
 | | |
 |---|---|
 | Rail | O-Train **Lines 1, 2 and 4** (light rail): **25 stations** (the screen's count, platforms within 150 m merged), 884 m median gap; every 6–12 min |
@@ -50,6 +70,7 @@ choice for the US cities; OC Transpo's GTFS licence is unread.
 | Source | Status |
 |---|---|
 | The inspection feed (City of Ottawa / Ottawa Public Health) | **READ 2026-09-29: PERMITTED WITH CONDITIONS** under the **Open Government Licence – City of Ottawa v2.0** (the item's `licenseInfo`). **Display, verbatim**: *"Contains information licensed under the Open Government Licence – City of Ottawa."* Link it to the licence where possible, and credit "Ottawa Public Health / City of Ottawa". **Must not**: suggest official status or endorsement, or use the City's or OPH's names as marks. Personal information is outside the grant (MFIPPA), so `check_personal_exposure.py` matters for home-based premises named for a person. Nothing to *do* |
+| OpenStreetMap | ODbL, notice 1 (OpenStreetMap) |
 
 ⚠️ **The item says "This dataset will be retired in Q1 2026"**, yet the feed
 is still updated daily (Last-Modified 2026-09-29). **Fetch early and cache**:
@@ -58,7 +79,6 @@ version in force when the data was accessed, so a retirement would not
 withdraw them. The zip holds only the LIVES files (businesses, inspections,
 violations, feed_info, legend, canned_comments), with no licence file of its
 own.
-| OSM | ODbL, notice 1 |
 
 ```brief-checks
 [

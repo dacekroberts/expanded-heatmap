@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**250 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -44,12 +44,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
+- [Ottawa is one category on the two-key macro legend (owner)](#2026-09-30---ottawa-is-one-category-on-the-two-key-macro-legend-owner)
 - [Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)](#2026-09-30---macro-legend-approved-hong-kong-and-philadelphia-one-category-builds-told-owner)
 - [Macro dots by network and fill; food shops are food; thin layers are narrowed (owner)](#2026-09-30---macro-dots-by-network-and-fill-food-shops-are-food-thin-layers-are-narrowed-owner)
 
 **2026-09-29**
 
+- [Ottawa built on Ottawa Public Health's inspection feed: food only, 4,896 premises, 25 stations](#2026-09-29---ottawa-built-on-ottawa-public-healths-inspection-feed-food-only-4896-premises-25-stations)
 - [Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)](#2026-09-29---anyang-briefed-on-its-ring-share-the-satellites-in-the-seoul-capital-area-view-only-owner)
+- [Band B's last eight: the owner's four calls before the builds](#2026-09-29---band-bs-last-eight-the-owners-four-calls-before-the-builds)
 - [The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)](#2026-09-29---the-next-gyeonggi-satellites-briefed-namyangju-ansan-uijeongbu-owners-scope)
 - [Second batch review: nine branches merged, 75 cities; builds pause](#2026-09-29---second-batch-review-nine-branches-merged-75-cities-builds-pause)
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
@@ -1058,6 +1061,16 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
     repository's LF) and `docs/city_master_list.md` (counts, Utrecht's R
     row, three discard rows, the country table). `check_master_list_counts`
     and `check_discard_evidence` pass.
+
+### 2026-09-30 - Ottawa is one category on the two-key macro legend (owner)
+
+The owner's call, relayed by the cleanup session: food shops are food-like and
+are not a second category, so Ottawa's macro dot is **one_bucket** (hollow),
+with `categories` "Food premises only", and its `mode` is **light_rail** (the
+highest-order mode its map draws). This branch merges `origin/macro-legend`,
+which carries the two-key legend, the 12 px dots (`MARKER_R` 6) and the tier
+rules, so it is built on them from the start. Its table B row was already one layer ("— / 1,586 / —"); its labels score PROBLEMS 0 at the new dot size.
+
 ### 2026-09-30 - Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)
 
 - **Approved (owner):** every city's `mode` as proposed (including Monterrey
@@ -1143,6 +1156,66 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   ("Two": food plus "Retail = food retail") would be one category under the
   food-shops rule. The owner named it narrowed, so it stays narrowed pending
   their word.
+### 2026-09-29 - Ottawa built on Ottawa Public Health's inspection feed: food only, 4,896 premises, 25 stations
+
+- **Canada's sixth city, a food-only page (owner's reduced-bucket bar),
+  branch `ottawa`, page 76, region Canada East.** OC Transpo's O-Train Lines
+  1, 2 and 4 from OpenStreetMap. Business leg: Ottawa Public Health's
+  food-safety inspection feed, a Yelp LIVES zip (feed_date 20260929), cached
+  first because its item says it "will be retired in Q1 2026".
+- **The feed host challenges a client with no user agent.** curl's default
+  agent got Imperva's "Pardon Our Interruption" page (HTTP 200, 6 KB of
+  HTML); the project's identifying agent was served the zip. Nothing was
+  worked around, and `fetch_sources.py` refuses an answer that is not a zip.
+- **Rail: 25 stations, gate 3 exact.** Line 1 13, Line 2 11, Line 4 3;
+  Bayview and South Keys each collapse to one station across two lines; the
+  direction-suffixed platform names fold by rule (43 stop positions, widest
+  name 15 m). Median gap 891 m, so standard rings. Gate 3's source is
+  Wikipedia's line infoboxes (revisions of 2026-09-19): octranspo.com
+  answers a scripted client 403, and that refusal is respected. Every
+  station is inside the City; `excluded_stations.csv` is empty.
+- **Boundary: the City's 2022-2026 wards, dissolved** (Vancouver's
+  precedent), under the same Open Government Licence – City of Ottawa as the
+  feed: 24 wards, 2,892.4 km2 against ~2,790 km2 of land, gated.
+- **Line colours measured**: OC Transpo's red and green sat 44.1 from Food
+  service's magenta and 34.2 from Personal services' green, so each moved the
+  least distance that clears 45 (Line 1 `#D41F11`, Line 2 `#739C0D`); Line 4's
+  gold `#F2A900` is kept.
+- **Currency: inspected within two years of the feed date**, the only clock
+  the feed has (no status, no closing date): 5,747 of 12,961 premises.
+- **Left out by name (owner, 2026-09-29, both recommendations taken)**,
+  829 premises, each listed with its rule in
+  `outputs/ottawa/excluded_premises.csv`: 597 institutional kitchens
+  (including contract caterers' outlets and event caterers with no shop,
+  R1), 83 clubs and recreation venues, 110 mobile and event vendors, and 39
+  hotels, B&Bs and funeral homes. The brief's single-word list caught SCHOOL
+  HOUSE PIZZA, MARRIOTT RESIDENCE INN and UNIVERSITY TAVERN, so the rules are
+  phrases (`pipeline/taxonomies/ottawa_inspection.py`). A second read (a
+  given-name probe and word counts) found breakfast programmes, care homes
+  and child services the first list missed; they were added. 14 premises
+  have no point and 8 a point outside the City.
+- **Food shops and pharmacies stay in the one layer (owner)**, labelled
+  "Restaurants and food shops", the FSA cities' precedent for an inspection
+  register's pharmacies. The continuity table records the forecourt-shop,
+  pharmacy and health-food rows as exceptions under this entry: kept, in
+  Food service rather than Retail, because no field separates them.
+- **Privacy verdict: publish.** `check_personal_exposure.py ottawa`: 0
+  e-mails, 0 phone numbers, 0 c/o markers, 0 person-like names at a
+  residential unit; 3 "name (qualifier)" pins, all qualifiers such as
+  "(retail stand)". The shared `looks_personal` shape test flags 27% of pins,
+  and a read of 120 found trade names throughout (TIM HORTONS, FIVE GUYS, NO
+  FRILLS), so it is not applied as a suppression rule here (Sacramento
+  applies it); a given-name probe of all 4,896 names found businesses and
+  institutions only. `phone_number` is never read.
+- **Macro label: Montréal's moved too.** Ottawa's label width is 47.5,
+  measured in a browser with Prague 47.3 and Tokyo 40.5 reproduced. A sweep
+  of about 900 offsets for Ottawa alone left one Global-frame collision at
+  every placement (Toronto's, Boston's or Montréal's pill). A joint sweep
+  found Ottawa `("start", 10, -25)` with Montréal raised 10 px (`-34` ->
+  `-44`): `check_macro_labels.py` PROBLEMS 0 in 12 regions at 375, 768 and
+  1200 px. That is a visible change to a deployed city's label, so it goes to
+  review time with the rest.
+- **Result: 4,896 food premises, 1,586 in a ring (32.4%).**
 
 ### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
 
@@ -1169,6 +1242,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   - **Files:** `docs/build_briefs/gyeonggi.md` and
     `docs/city_master_list.md`.
 
+### 2026-09-29 - Band B's last eight: the owner's four calls before the builds
+
+- **Gyeonggi: Namyangju, Ansan and Uijeongbu, each on its own page, as
+  recommended; the row closes after them (owner).** The three are the
+  remaining satellites with 12 or more stations (17, 12 and 20 OSM station
+  nodes, a floor). **The rest stay possible, not discarded**: Hwaseong
+  (19,499 storefronts, 7 stations), Anyang (14,815, 7) and Gimpo (11,453, 9,
+  its Goldline screened EDGE), noted here at the owner's request as possible
+  further pages.
+- **Hiroshima: build on the permissive reading of the city list's licence
+  (owner).** That reading is the city's dataset-level PDL 1.0 on DataEye,
+  plus the page calling the list open data. The full-list file has no
+  DataEye entry of its own and sits on a page that declares no licence. The
+  city was not asked (outreach is the last resort).
+- **Hiroshima: Hiroden's streetcars are drawn if they are substantial or
+  integral to the network (owner),** under the tram approval of 2026-09-29.
+  The build measures that from N02 and the operator's own figures and
+  records the result.
+- **Downloads and page write-ups are pre-approved for all eight (owner),**
+  as they were for Houston.
+- **Usage:** the weekly limit stood at 93% when the builds began. The
+  owner's 98% stop from the second review's entry applies, and they work in
+  steps.
 ### 2026-09-29 - The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)
 
 - **Briefed Namyangju, Ansan and Uijeongbu as additions to

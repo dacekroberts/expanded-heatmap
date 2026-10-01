@@ -250,6 +250,11 @@ TEXT_WIDTH = {
     # canvas measureText at 600 14px "Space Grotesk" after document.fonts.load,
     # in the Suwon/Bucheon/Bergen session's run that measured Sacramento.
     "Houston": 56.9,
+    # Ottawa: measured 2026-09-29 by canvas measureText at 600 14px "Space
+    # Grotesk" after document.fonts.load, the font from Google Fonts as the app
+    # loads it; Prague 47.3, Tokyo 40.5, Houston 56.9 and Toronto 52.4 reproduced
+    # in the same run (the Band B build session).
+    "Ottawa": 47.5,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

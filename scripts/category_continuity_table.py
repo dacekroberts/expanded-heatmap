@@ -1653,6 +1653,31 @@ COLUMNS["sweden_livsmedel"] = {
                           "Food service", "2026-09-29", CATERING_BRANCH)],
 }
 
+OTTAWA = "Ottawa built on Ottawa Public Health's inspection feed"
+OTTAWA_ONE_LAYER = ("the feed has no type field, so food shops share the one Food service layer, "
+                    "labelled 'Restaurants and food shops' (owner, 2026-09-29): kept, not out")
+COLUMNS["ottawa_inspection"] = {
+    **{rid: absent("a food-safety inspection register: food premises only") for rid in (
+        "personal_catchall", "adult_hostess", "sex_shop", "massage_commercial", "massage_regulated",
+        "car_dealer", "vehicle_repair", "gambling", "pawnbroker", "vet", "nonstore", "parking", "repair",
+        "optician")},
+    "funeral": [loc("Lodging or funeral home", "funeral homes, by name")],
+    "no_counter_food": [
+        loc("Institutional kitchen", "schools, care homes, staff cafeterias, contract and event caterers, "
+                                     "by name")],
+    "mobile_unit": [loc("Mobile or event vendor", "food trucks and special-event vendors")],
+    "lodging": [loc("Lodging or funeral home", "hotels' breakfast rooms and banquet kitchens, B&Bs")],
+    "recreation": [loc("Club or recreation venue", "golf, curling and yacht clubs, Legion halls, arenas")],
+    "nightclub": [loc("Food premises", "bars and clubs inspected for food")],
+    "petrol_station": [exception("Food premises", "forecourt shops inspected for food (Petro-Canada, "
+                                 "Shell Select)", "Food service", OTTAWA, OTTAWA_ONE_LAYER)],
+    "pharmacy_food_register": [exception("Food premises", "pharmacies inspected for food (Shoppers Drug "
+                                         "Mart, Rexall)", "Food service", OTTAWA, OTTAWA_ONE_LAYER)],
+    "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register"),
+    "health_food": [exception("Food premises", "health-food and bulk shops inspected for food",
+                              "Food service", OTTAWA, OTTAWA_ONE_LAYER)],
+}
+
 
 # ---------------------------------------------------------------------------
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row

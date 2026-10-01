@@ -716,6 +716,7 @@ _NOTICES = [
      "Sacramento's SacRT Blue and Gold Lines and their stations, and the "
      "municipal boundaries used to select them, "
      "Houston's METRORail Red, Green and Purple Lines and their stations, "
+     "Ottawa's O-Train Lines 1, 2 and 4 and their stations, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
@@ -1533,6 +1534,25 @@ _NOTICES = [
      "이용허락범위 제한 없음. Changes: filtered to shops, food and drink and personal services, "
      "grouped into three categories, and mapped by distance to stations; the categories and "
      "counts are this project's, not SEMAS's. Not produced or endorsed by SEMAS.",
+     False),
+    # Ottawa: Ottawa Public Health's food-safety inspection feed and the City's
+    # 2022-2026 wards, both under the Open Government Licence - City of Ottawa
+    # v2.0 (the items' licenseInfo, read 2026-09-29). Its attribution sentence is
+    # PRESCRIBED and is reproduced VERBATIM, with the en dash, linked to the
+    # licence; the credit names Ottawa Public Health / City of Ottawa. The
+    # licence bars implying official status or endorsement and using the City's
+    # or OPH's names as marks. Written under the owner's pre-approval of this
+    # build's prose (2026-09-29).
+    ("City of Ottawa (Ottawa)",
+     "Contains information licensed under the [Open Government Licence – City of "
+     "Ottawa](https://ottawa.ca/en/city-hall/get-know-your-city/open-data#open-data-licence-version-2-0). "
+     "Food premises for Ottawa are from Ottawa Public Health / City of Ottawa's public health "
+     "inspection data (food safety), and the city boundary from the City's 2022-2026 wards. "
+     "Changes: the premises are limited to those inspected in the last two years, "
+     "institutional kitchens, clubs, mobile vendors and hotels are left out by name, and the "
+     "rest are mapped by distance to O-Train stations; inspection results are not shown. This "
+     "is not an official City of Ottawa or Ottawa Public Health product, and it is not "
+     "endorsed by either.",
      False),
 ]
 

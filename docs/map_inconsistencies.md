@@ -517,6 +517,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
 | Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS | City | 0 / 0 |
 | Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
+| Ottawa | O-Train Lines 1, 2 and 4 (light rail) | Buses, the Transitway | OpenStreetMap route relations (OC Transpo's GTFS licence unread); gate 3 exact against Wikipedia | City (its own wards) | 0 / 0 |
 | **Mexico** | | | | | |
 | Mexico City | Metro, 12 lines + Tren Ligero | not stated (Tren Suburbano, Cablebús) | OpenStreetMap | CDMX | 10 / 0 |
 | Guadalajara (Regional) | Tren Ligero L1–L4 | — | OpenStreetMap (only GTFS expired 2023, lacks L4) | 4 municipios; Tonalá out | no CSV (all in scope) / 0 |
@@ -643,6 +644,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Calgary | Licence register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
 | Edmonton | Licence register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
 | Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,474 / 1,950 | Retail = regulated slice only |
+| Ottawa | Food hygiene register | Ottawa Public Health's food-safety inspection data (LIVES), one record per premises | None: a premises kind from the name | — / 1,586 / — | No Personal services; no Retail layer: food shops sit inside the one layer, labelled "Restaurants and food shops" |
 | **Mexico** | | | | | |
 | Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,798 / 12,018 | Street stalls excluded |
 | Guadalajara (Regional) | National statistical register | INEGI DENUE | SCIAN | 26,341 / 6,698 / 3,623 | Street stalls excluded |
@@ -766,6 +768,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Calgary | Source point | No home-business flag | Endorsements; body rub / escort (sensitivity) |
 | Edmonton | Source coordinates | Personal services overstated | Non-commercial licence types (43%); adult services (sensitivity) |
 | Toronto | Address join to One Address Repository (93.8%) | Retail absent; plazas under-counted | Cancelled licences; endorsements; person-held; adult premises (sensitivity) |
+| Ottawa | Feed coordinates (99.6% of kept premises); 14 not placed, 8 outside the City | Food only; no type field, so restaurants and food shops are one layer; current by inspection within two years | Institutional kitchens, event caterers, clubs and arenas, mobile vendors, hotels and funeral homes by name |
 | **Mexico** | | | |
 | Mexico City | Source coordinates (100%) | Street stalls not shown | Semifijo units, SCIAN 469, 812410 |
 | Guadalajara (Regional) | Source coordinates | Street stalls not shown | Same as Mexico City; Tonalá |
@@ -884,6 +887,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Calgary | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 41% | Trade name |
 | Edmonton | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 22% | Business name |
 | Toronto | Current licences (2026-09-21) | — | 0.6 mi | Yes | 48% | Operating name |
+| Ottawa | Inspected since 2024-09-29 (feed 2026-09-29) | B | 0.6 mi | Yes | 32% | Premises name |
 | **Mexico** | | | | | | |
 | Mexico City | DENUE 05_2026 (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 47% | Shop sign |
 | Guadalajara (Regional) | DENUE 05_2026 (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 31% | Shop sign |
