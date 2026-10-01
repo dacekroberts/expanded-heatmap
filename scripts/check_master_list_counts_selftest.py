@@ -2,13 +2,13 @@
 
     python scripts/check_master_list_counts_selftest.py
 
-WHY THIS FILE EXISTS. The check reads a document that sessions rewrite every
-day, through heuristics about its shape (which tables are city tables, which
-headings are city write-ups). A check like that fails in the quiet direction:
-a reshaped band stops being recognised, its members count as zero, and - if the
-heading's count happened to be edited the same way - nothing is reported. The
-only evidence that it still decides anything is watching it refuse a file that
-is wrong in each way it claims to catch, and pass the real one.
+WHY. The check reads a document that sessions rewrite every day, through
+heuristics about its shape (which tables are city tables, which headings are
+city write-ups). A check like that fails in the quiet direction: a reshaped
+band stops being recognised, its members count as zero, and, if the heading's
+count happened to be edited the same way, nothing is reported. The only
+evidence that it still decides anything is watching it refuse a file that is
+wrong in each way it claims to catch, and pass the real one.
 
 NOTHING IN THE REPOSITORY IS MODIFIED. Every case copies the live
 `docs/city_master_list.md` into a temporary file, breaks the copy with one
@@ -17,9 +17,9 @@ that matches nothing is reported as a BROKEN TEST rather than a pass: the live
 file has moved on and the case must be re-aimed, or it proves nothing.
 
 The child's output is BYTES, forced to UTF-8 and decoded with
-`errors="replace"` - city names such as "Liepāja" and "Göteborg" otherwise come
+`errors="replace"`: city names such as "Liepāja" and "Göteborg" otherwise come
 back empty through a Windows console codepage and read as "expected text not
-found" (the trap check_scope_disclosure_selftest.py met twice).
+found" (seen twice in check_scope_disclosure_selftest.py).
 """
 
 import os
@@ -48,11 +48,10 @@ def run(path):
 def bump(pattern, expect):
     """A mutation adding 1 to the count captured by `pattern`, whatever it is now.
 
-    The counts cases used to name the number ("**33**" -> "**34**"), so every
-    legitimate change to the list - five discards added, Kansas City moved to
-    Band T, both on 2026-09-27 - broke the self-test and with it the pre-push
-    hook. Reading the current number keeps each case aimed. `expect` may use
-    {old} and {new}.
+    A case that names the number ("**33**" -> "**34**") breaks on every
+    legitimate change to the list, and with it the pre-push hook (twice on
+    2026-09-27). Reading the current number keeps each case aimed. `expect`
+    may use {old} and {new}.
     """
     rx = re.compile(pattern, re.M)
 
@@ -78,11 +77,11 @@ def drop_bands(text):
 
 
 # --- targets picked from the live file ---------------------------------------
-# The cases below used to name their rows (Ottawa, then Bergen; Gimhae renamed
-# Brno; Avignon renamed Rennes; Canada), and each broke - taking the pre-push
-# hook with it - whenever that row changed (Staging re-aimed one on 2026-09-27,
-# e56c471). They now find a row of the right SHAPE through the check's own
-# parsers, so an edit to any one city's row cannot break them.
+# A case that names its row breaks, and takes the pre-push hook with it,
+# whenever that row changes (Ottawa's, Bergen's, Gimhae's, Avignon's and
+# Canada's did, up to 2026-09-27). These find a row of
+# the right SHAPE through the check's own parsers, so an edit to any one
+# city's row cannot break them.
 
 def _section(lines, pattern):
     return next(((s, e) for t, s, e in M.sections(lines) if re.match(pattern, t)), None)
@@ -283,10 +282,8 @@ CASES = [
     ("a Built row's per-country count drifted",
      bump(r"^\| \*\*[^*|]+\*\* \((\d+)", "lists {old} cities"), None),
 
-    # Re-aimed at the tram list 2026-09-29: Band T's country sub-groups moved
-    # there with its rows, and the master list kept none.
-    # And to a planted T1 sub-group 2026-09-30, when every T1 city was built and
-    # the tram list kept none.
+    # Country sub-groups live only in the tram list (2026-09-29), and every T1
+    # city is built (2026-09-30), so the case plants its own T1 sub-group.
     ("a sub-group count drifted (a planted T1 sub-group states 2 over one row)",
      plant_subgroup_drift, None, "tram"),
 
@@ -302,12 +299,8 @@ CASES = [
     ("by country: a named city is not in the band its row lists",
      wrong_band, "its Bands column says"),
 
-    # Aimed at Band R since 2026-09-28, when D emptied (its rows moved to R and C).
-    # Re-aimed from Band T to Band C 2026-09-29, when Band T's rows moved to the
-    # tram list and the master list's Band T section stopped holding any; and
-    # from Band C to Band B the same day, when Band C closed (owner); and to
-    # Band R and the tram list 2026-09-30, when Band B emptied (the review
-    # rehearsal): Band R is the one master-list band left with rows.
+    # Aimed at Band R and the tram list since 2026-09-30: Band R is the one
+    # master-list band left with rows (D, T, C and B emptied 2026-09-28 to 30).
     ("a city in two bands (a tram row renamed to a Band R city)",
      tram_into("R"), None, "tram"),
 

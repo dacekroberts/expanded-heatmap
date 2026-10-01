@@ -9,7 +9,7 @@ Exits non-zero naming each map whose largest inline array literal has more
 than CAP elements. Read-only. `--selftest` imports pipeline/map_common.py and
 runs Node, so it needs the pipeline environment; the plain check needs neither.
 
-WHY. WebKit - the engine under every iOS browser - refuses to compile one
+WHY. WebKit (the engine under every iOS browser) refuses to compile one
 inline array literal above roughly 107k-131k elements, and the map goes blank
 with no visible error. That blanked Mexico City, Taipei, São Paulo and Seoul on
 the owner's iPhone (DECISIONS 2026-09-27). map_common now ships per-business
@@ -41,13 +41,12 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # Largest inline array literal (elements at its own level) a committed map may
 # carry. The owner's iPhone 16 Pro (iOS 18.7) compiles 110,861 heat pairs and
-# refuses 110,862 - a limit on literals made of literals; a flat array of a
-# million numbers compiled (probe, 2026-09-27). The owner then closed the
-# exact-limit question: with the
-# data out of literal form the exact number decides nothing, so this cap is
-# final rather than provisional. After the JSON.parse fix the largest literal
-# on any re-rendered map is about 1,000 elements, so the cap costs nothing and
-# leaves a factor of five under the proven figure for slower or older devices.
+# refuses 110,862, a limit on literals made of literals; a flat array of a
+# million numbers compiled (2026-09-27). With the data out of literal form the
+# exact limit decides nothing, so the owner made this cap final rather than
+# provisional. After the JSON.parse fix the largest literal on any re-rendered
+# map is about 1,000 elements, so the cap costs nothing and leaves a factor of
+# five under the proven figure for slower or older devices.
 CAP = 20_000
 
 SCRIPT = re.compile(r"<script\b[^>]*>(.*?)</script\s*>", re.S | re.I)

@@ -1,9 +1,9 @@
 """Probe a candidate geodata or tabular endpoint and say what it ACTUALLY is.
 
 The companion to `screen_rail.py`. That one answers "is there a GTFS feed";
-this one answers the question the 2026-09-21 global screen discovered was the
-real one: **does a national mapping agency publish station points and line
-geometry**, and does a business register carry premises with coordinates.
+this one answers the question that decides a screen (2026-09-21): **does a
+national mapping agency publish station points and line geometry**, and does
+a business register carry premises with coordinates.
 
     python scripts/probe_geodata.py targets.tsv
     python scripts/probe_geodata.py < targets.tsv
@@ -13,8 +13,8 @@ Input is tab-separated, `#` comments and blanks ignored:
     Japan-N02<TAB>https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip
     Korea-stations<TAB>https://data.kric.go.kr/rips/dataset/download.file?...
 
-For each target it reports: reachability, real content type, and - for
-anything geospatial or tabular - the row count, geometry types, CRS and
+For each target it reports: reachability, real content type, and (for
+anything geospatial or tabular) the row count, geometry types, CRS and
 columns. It names the two things a screen must not confuse:
 
 - **POINTS vs LINES.** This project draws and labels every transit line, so a
@@ -24,12 +24,12 @@ columns. It names the two things a screen must not confuse:
   a false pass.
 - **PREMISES vs AGGREGATE.** A row that is a summary cannot be mapped. This
   killed Istanbul (counts per district), Japan's Economic Census (counts per
-  area) and Seoul's 상권분석서비스 (per district per quarter) - the last of
-  which was the best disguised, because its categories matched this project's
-  three buckets exactly. The prober flags a coordinate column when it finds
-  one, and its absence is the thing to look at.
+  area) and Seoul's 상권분석서비스 (per district per quarter), the last the
+  best disguised, because its categories matched this project's three
+  buckets exactly. The prober flags a coordinate column when it finds one,
+  and its absence is the thing to look at.
 
-Three transport traps it handles, all of which cost real time:
+Three transport traps it handles:
 
 - **Python's TLS stack fails where curl succeeds.** `data.gcis.nat.gov.tw`
   refused `requests` with an SSLError and served curl a 4.5 MB CSV. A probe

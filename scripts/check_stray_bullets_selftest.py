@@ -2,10 +2,10 @@
 
     python scripts/check_stray_bullets_selftest.py
 
-WHY THIS FILE EXISTS. The check decides by the shape of the line before a
-dash, and a rule like that is easy to get wrong in either direction: too loose
-and it passes the wrap that deploy-verify found on 2026-09-27, too tight and
-it fails every list that follows a lead-in sentence. So each case is a small
+WHY. The check decides by the shape of the line before a dash, and a rule
+like that is easy to get wrong in either direction: too loose and it passes
+the wrap found on 2026-09-27, too tight and it fails every list that follows
+a lead-in sentence. So each case is a small
 document with a known answer, checked for its EXPECTED MESSAGE and not just
 its exit code; one case re-creates the real defect in a copy of the live
 docs/excluded_categories.md; and the positive control runs the real scope.

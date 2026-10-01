@@ -14,8 +14,8 @@ tokens (docs/efficiency_review_2026-09-27.md, change 1). The owner chose a
 weekly archive over a monthly one because every entry so far is from
 September: a monthly archive would move nothing until October 1.
 
-WHAT IT PROMISES. Entries move VERBATIM - the append-only rule is about the
-entries, not the file they sit in - and the script refuses to write unless every
+WHAT IT PROMISES. Entries move VERBATIM (the append-only rule is about the
+entries, not the file they sit in), and the script refuses to write unless every
 heading it read is still present exactly once across the live file and the
 archives, with each moved section byte-identical. An archive file that already
 exists (an entry dated last week that landed late) is merged into, newest

@@ -16,16 +16,16 @@ RUN TAIPEI FIRST - IT IS THE CONTROL
 ------------------------------------
 A generalised parser once read Taipei at 91.7% against a measured 92.5%,
 because its street pattern forbade the characters stripped as district and
-village (市, 鎮, 里) and so failed every street CONTAINING one - 市民大道,
-鎮三街. A control that must reproduce before any other city counts is what
-caught it. Any change to `parse()` re-runs Taipei first.
+village (市, 鎮, 里) and so failed every street CONTAINING one (市民大道,
+鎮三街). Taipei must reproduce before any other city counts: any change to
+`parse()` re-runs Taipei first.
 
 THE NORMALISATION THAT MATTERED
 -------------------------------
 - NFKC: full-width digits (９１號) to ASCII.
 - Chinese section numerals to digits: 四段 -> 4段.
-- ONE sub-number separator from 之, －, -, ― (U+2015), U+2014, U+2013. The first pass
-  missed ― and read 89.1% instead of 92.5%: one character, 3.4 points.
+- ONE sub-number separator from 之, －, -, ― (U+2015), U+2014, U+2013. Without
+  ― the join reads 89.1% instead of 92.5%: one character, 3.4 points.
 - Chained sub-numbers (Taichung): ２之３之２號 -> 2-3-2.
 - Floors dropped (a door plate is the building); "39、41號" takes the first.
 - Pre-upgrade county prefixes (桃園縣, 臺中縣, 臺北縣) accepted - checked
@@ -33,8 +33,8 @@ THE NORMALISATION THAT MATTERED
 
 WHAT THE MISSES ARE
 -------------------
-Mostly market stalls (環南市場…攤位) and stalls under viaducts (高架橋下) - real
-premises with no door plate - and rural addresses with no street name. Read
+Mostly market stalls (環南市場…攤位) and stalls under viaducts (高架橋下), real
+premises with no door plate, and rural addresses with no street name. Read
 the printed samples; the misses are not random.
 
 Needs (gitignored, never committed): the register zip and the city's

@@ -1,36 +1,29 @@
 """PreToolUse/Bash guard: refuse a heredoc or `-c` string that carries escapes.
 
-WHY THIS IS A HOOK AND NOT A PARAGRAPH
---------------------------------------
-`CLAUDE.md` has carried the rule since 2026-09-22 - "write multi-line text with
-the Write tool, never a shell heredoc" - with three dated incidents under it.
-It was read at session start and broken again the same day: a probe written as
+WHY A HOOK RATHER THAN A RULE
+-----------------------------
+`CLAUDE.md` has carried the rule since 2026-09-22, and it was broken four
+times while it stood: a probe written as
 `re.findall(r'Use[s]?:\\s*([^<\\\\]{0,60})', t)` inside a `python - <<'PYEOF'`
-arrived as `[^<\\]`, an unterminated character set. That is four occurrences
-against a rule that exists, so the rule is not the missing piece - enforcement
-is. This project's own meta-rule says so: put the lesson where the next caller
-must pass through it, as a raising check, not as prose.
+arrived as `[^<\\]`, an unterminated character set. The lesson goes where the
+next caller must pass through it, as a raising check, not as prose.
 
-TWO THINGS THE PROSE RULE GOT WRONG, BOTH FIXED HERE
-----------------------------------------------------
-1. It reads as being about MULTI-LINE TEXT - "commit messages, DECISIONS.md
-   entries, page prose". A one-line regex probe does not feel like that, so the
-   rule did not seem to apply. The real trigger is BACKSLASHES AND BACKTICKS,
-   at any length.
-2. **Quoting the delimiter does not save you.** `<<'PYEOF'` should stop shell
-   expansion, and the mangling happened anyway, because the rewriting is not
-   bash's. Nothing in the written rule said this.
+Two points the prose rule missed:
+1. The trigger is BACKSLASHES AND BACKTICKS, at any length, not multi-line
+   text. A one-line regex probe is covered.
+2. **Quoting the delimiter does not help.** `<<'PYEOF'` stops shell
+   expansion, and the mangling happens anyway, because the rewriting is not
+   bash's.
 
 WHAT IT BLOCKS, AND WHAT IT DELIBERATELY DOES NOT
 -------------------------------------------------
 Only the intersection: a heredoc or an inline interpreter string (`python -c`,
 `perl -e`, `node -e`) AND a backslash or backtick somewhere in the command.
 
-A plain `grep "\\.py$"` is untouched - it is not a heredoc. A heredoc of plain
-prose with no escapes is untouched. Blocking every backslash would fire on
-every Windows path in this repository, and blocking every heredoc would fire
-on cases that have never once gone wrong. A guard that cries wolf gets
-disabled, and then it guards nothing.
+A plain `grep "\\.py$"` is untouched (not a heredoc), and so is a heredoc of
+plain prose with no escapes. Blocking every backslash would fire on every
+Windows path in this repository, and blocking every heredoc would fire on
+cases that have never gone wrong. A guard that cries wolf gets disabled.
 
 FAIL-OPEN BY DESIGN. Any error here allows the command. This is a style guard,
 not a security control, and a broken guard must not wedge every Bash call.

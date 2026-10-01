@@ -13,12 +13,11 @@ heading found in two files - live and archived, or two archives - fails
 
 WHY
 ---
-`DECISIONS.md` is append-only and must stay that way - it is the reasoning
-trail, and an edited entry is a lost one. But it is now **5,421 lines and
-57,609 words across 100 dated sections**, and `pipeline/drift_check.py` ends
-every run by telling you to "compare the step row counts above against the
-latest baseline entry in DECISIONS.md". Finding that by eye is the friction
-this removes.
+`DECISIONS.md` is append-only and must stay that way: it is the reasoning
+trail, and an edited entry is a lost one. It reached **5,421 lines and 57,609
+words across 100 dated sections**, and `pipeline/drift_check.py` ends every
+run with "compare the step row counts above against the latest baseline entry
+in DECISIONS.md". The index replaces finding that entry by eye.
 
 The index is GENERATED, between two markers, so it cannot go stale the way a
 hand-written table of contents would. It touches no entry: the append-only rule

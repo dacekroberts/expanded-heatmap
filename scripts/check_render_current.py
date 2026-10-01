@@ -10,20 +10,19 @@ pipeline/map_common.py.
 
 WHY. A change to the shared renderer reaches a city only when that city's map
 is re-rendered. On 2026-09-24 Oslo was built on a branch while the zoom-lag fix
-landed on master, and Oslo's committed map shipped WITHOUT WHEEL_ZOOM_SCRIPT
-until the zoom session happened to re-render it. Only a full
-`drift_check.py --jobs 4` would have noticed, and nothing required one on that
-merge. This is the cheap guard, proposed by that session: seconds, no pipeline.
+landed on master, and Oslo's committed map shipped WITHOUT WHEEL_ZOOM_SCRIPT.
+Only a full `drift_check.py --jobs 4` would have noticed, and nothing required
+one on that merge. This is the cheap guard: seconds, no pipeline.
 
-DERIVED, NOT LISTED. The blocks are read from map_common.py itself - every
+DERIVED, NOT LISTED. The blocks are read from map_common.py itself (every
 module-level string named *_SCRIPT, *_HTML or *_CSS that the module also
-references somewhere other than its own definition - so a block added next
-month is covered without editing this file. A hand-kept list is exactly what
-goes stale.
+references somewhere other than its own definition), so a block added later
+is covered without editing this file. A hand-kept list is exactly what goes
+stale.
 
-WHOLE BLOCKS, NOT MARKERS. Each block is split at its per-city slots -
-`__NAME__` tokens that render_heatmap() fills with .replace(), and `{field}`
-slots that build_legend() fills with .format() - and EVERY fixed piece of at
+WHOLE BLOCKS, NOT MARKERS. Each block is split at its per-city slots
+(`__NAME__` tokens that render_heatmap() fills with .replace(), and `{field}`
+slots that build_legend() fills with .format()), and EVERY fixed piece of at
 least MIN_PIECE characters must appear verbatim in the map. So a map rendered
 before a block was EDITED fails too, not only one that lacks it entirely.
 `@@TOKEN@@` placeholders are resolved in Python before a block leaves the
@@ -32,16 +31,15 @@ module (THEME_TOGGLE_HTML asserts it), so they never reach here.
 COMMENTS DO NOT COUNT (2026-09-27). Both the block and the map are compared
 with comments stripped: `/* ... */`, `<!-- ... -->`, and whole lines that
 start with `//`. Before this, editing only a comment in map_common.py failed
-every committed map, and the fix was a re-render of all 46 - the
-efficiency review found comment-only diffs inside a full re-render
+every committed map and forced a re-render of all 46
 (docs/efficiency_review_2026-09-27.md, finding 4). A committed map may now
 carry an older comment; that is harmless, because nothing executes it. A
 trailing `code; // note` comment still counts, because stripping `//` in
 mid-line would also cut every `https://`.
 
 WHAT IT DOES NOT SEE: per-city options (a city's own label override, or
-render_heatmap(animate_clusters=...)), and anything outside these blocks -
-Folium's own markup, the data. That is drift_check.py's job; this is the fast
+render_heatmap(animate_clusters=...)), and anything outside these blocks
+(Folium's own markup, the data). That is drift_check.py's job; this is the fast
 subset that catches the one failure a merge makes easy.
 """
 
@@ -86,9 +84,9 @@ def shared_blocks():
                  "longer matches anything, so this check would pass vacuously")
     # A piece that is a substring of ANOTHER block's text cannot tell the two
     # apart: every script block opens `<script> (function () { var NAME = "`,
-    # so the first control run called Oslo's pre-wheel map an "OLDER version"
-    # of WHEEL_ZOOM_SCRIPT when it had never had one - that boilerplate piece
-    # matched LABEL_CLAMP_SCRIPT's opening. Only distinctive pieces count.
+    # so Oslo's pre-wheel map once read as an "OLDER version" of
+    # WHEEL_ZOOM_SCRIPT, through LABEL_CLAMP_SCRIPT's matching opening. Only
+    # distinctive pieces count.
     texts = {name: uncommented(vars(map_common)[name]) for name, _ in blocks}
     distinct = []
     for name, pieces in blocks:
@@ -120,8 +118,8 @@ def check_file(path, blocks):
         missing = [p for p in pieces if p not in html]
         if len(missing) == len(pieces):
             # A CONDITIONAL block (map_common.CONDITIONAL_BLOCKS) goes only into
-            # the maps that need it - DENSE_LABEL_SCRIPT into a map whose
-            # labels used the wide tier - so its absence is not staleness. What
+            # the maps that need it (DENSE_LABEL_SCRIPT into a map whose
+            # labels used the wide tier), so its absence is not staleness. What
             # this cannot see is a map that SHOULD have it and was rendered
             # before it existed; when it was added (2026-09-29) that was Osaka
             # alone, re-rendered with it. drift_check.py sees the rest.

@@ -4,10 +4,10 @@
     python scripts/readme_cities.py --check   # fail if it is stale (check_all runs this)
 
 WHY. The README is the project's public front door on GitHub, and its city
-list was hand-kept. On 2026-09-27 the city-landed sweep for Monterrey, Daegu
-and Busan found it missing about twenty live cities - every Taiwanese and
-Brazilian city, Hong Kong, Riga, Copenhagen, Prague, Amsterdam, Rotterdam and
-Rome among them - while `app/cities.py` listed all 49. A list that restates
+list was hand-kept. On 2026-09-27 it was missing about twenty live cities
+(every Taiwanese and Brazilian city, Hong Kong, Riga, Copenhagen, Prague,
+Amsterdam, Rotterdam and Rome among them) while `app/cities.py` listed all 49.
+A list that restates
 another list drifts; one generated from it cannot.
 
 The list sits between two markers and is grouped by `country`, in the order

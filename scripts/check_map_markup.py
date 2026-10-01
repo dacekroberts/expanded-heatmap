@@ -1,15 +1,15 @@
-"""Check what no browser script measured about every committed map, and what
-two deploy checks found by reading pixels and markup (2026-09-24).
+"""Check every committed map for what no browser script measures: label
+contrast, legend markup and dark-mode label colours (2026-09-24).
 
   A  Every line label reads at WCAG's 4.5:1 in BOTH themes, against the halo
      the browser actually draws:
-       - light: the label's inline colour on its inline text-shadow halo -
+       - light: the label's inline colour on its inline text-shadow halo:
          white, or the dark page colour for a colour that reads better there
          (the owner's halo swap; 145 of 235 labels failed on white, Milan's M3
          at 1.08:1);
        - dark (the default): its `--dm-label` colour on the dark page colour.
          Every label must carry one, and the dark rule must put NO filter on
-         the label - a brightness() filter once lifted the halo with the text,
+         the label: a brightness() filter once lifted the halo with the text,
          so the figures measured a halo nobody saw.
   B  The legend's inline `style` attribute is intact. The font stack's double
      quotes once closed it at "Segoe UI", and every legend lost its size, its
@@ -17,9 +17,9 @@ two deploy checks found by reading pixels and markup (2026-09-24).
   C  No two DIFFERENT lines share a dark-mode label colour. Within one map, two
      labels whose light-theme colours differ (CIE76 >= HARD_FLOOR) must not come
      out within HARD_FLOOR of each other in dark mode. The x1.8 dark rule did
-     that 21 times in 10 cities - Paris 1, 9 and 10 all #ffff00 - and no check
-     looked (Rotterdam's deploy check, 2026-09-24). Lines an agency coloured
-     alike stay alike and are not counted.
+     that 21 times in 10 cities (Paris 1, 9 and 10 all #ffff00) unchecked
+     until 2026-09-24. Lines an agency coloured alike stay alike and are not
+     counted.
 
     python scripts/check_map_markup.py [--verbose] [--root DIR]
 """

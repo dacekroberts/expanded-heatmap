@@ -2,23 +2,22 @@
 
     python scripts/check_no_fetch_in_steps_selftest.py
 
-WHY THIS FILE EXISTS. A check that has only ever been seen to pass is an
-assertion about its author's intent, not about the code - the
-`consistency-sweep` rule is "never ship a check you have not watched fail",
-and this project has twice shipped a limb that was quietly examining nothing:
-`check_provenance.py`'s CRS limb parsed 0 of 16 longitudes while printing
-green, because negative numbers are `ast.UnaryOp` rather than `ast.Constant`.
-Watching it once is not enough either, because the next person to edit the
-check inherits the claim and not the evidence.
+WHY. A check that has only ever been seen to pass is an assertion about its
+author's intent, not about the code. The `consistency-sweep` rule is "never
+ship a check you have not watched fail", and this project has twice shipped a
+limb that was quietly examining nothing: `check_provenance.py`'s CRS limb
+parsed 0 of 16 longitudes while printing green, because negative numbers are
+`ast.UnaryOp` rather than `ast.Constant`. Watching it once is not enough
+either: the next person to edit the check inherits the claim, not the
+evidence.
 
 NOTHING IN THE REPOSITORY IS MODIFIED. Every case copies the files the check
 reads into a temporary tree, breaks the copy, and runs the check there with
-`--root`. An earlier version of this mutated the working tree and restored it
-in a `finally`, which is one Ctrl-C away from leaving a broken repository -
-and which is also how its first run produced a false result: it read bytes and
-patched "...\\n" patterns against a working-tree file that is CRLF, so every
-pattern matched nothing and the harness reported a working check as broken.
-Hence `read_text`, which normalises newlines, everywhere below.
+`--root`. Mutating the working tree and restoring it in a `finally` is one
+Ctrl-C away from a broken repository. Reading bytes and patching "...\\n"
+patterns against a CRLF working-tree file matches nothing and reports a
+working check as broken; hence `read_text`, which normalises newlines,
+everywhere below.
 """
 
 import shutil
@@ -83,8 +82,8 @@ CASES = [
      lambda t: t.replace("import json\n", "import json\nimport requests\n", 1),
      "pipeline/guadalajara/step1_stations.py", 1),
 
-    # The transitive limb, which is what found the three geocode steps. A
-    # guarded module is reported and classified, never silently passed.
+    # The transitive limb. A guarded module is reported and classified, never
+    # silently passed.
     ("a step importing a guarded shared module is classified, not failed",
      "pipeline/guadalajara/step1_stations.py",
      lambda t: t.replace(
@@ -106,13 +105,9 @@ CASES = [
      "not armed", 1),
 
     # A KNOWN_GAPS list that cannot expire becomes a place defects go to be
-    # forgotten.
-    # This case used to insert its fake entry ahead of Madrid's real one. That
-    # stopped matching anything on 2026-09-22, when spain-app-wiring landed
-    # Madrid's fix and the two entries were deleted - so the case silently
-    # proved nothing until the "mutation matched nothing" report caught it.
-    # It now writes into an EMPTY table, which is the state the list should
-    # normally be in.
+    # forgotten. The case writes into an EMPTY table, the state the list
+    # should normally be in; aimed at a real entry, it stops matching the day
+    # that entry is fixed (Madrid's, 2026-09-22).
     ("a KNOWN_GAPS entry that has quietly been fixed",
      "scripts/check_no_fetch_in_steps.py",
      lambda t: t.replace(

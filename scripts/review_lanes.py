@@ -5,14 +5,14 @@ pinned commit, each with its own ports and review folder.
     python scripts/review_lanes.py list
     python scripts/review_lanes.py remove [--lanes 4]                # unlinks junctions first
 
-What the 2026-09-30 mega-review did by hand, and learned (lessons 2 and 4,
+What the 2026-09-30 mega-review did by hand (lessons 2 and 4,
 docs/review_lanes_2026-09-30.md; the kit is docs/review_lane_kit.md):
 
   * every lane on ONE commit, detached, so findings refer to the same tree;
   * `data/` and `.venv-lean` are JUNCTIONS to the main checkout's (never a
     copy: data/ is one shared folder, and a lane never pip-installs);
-  * its own ports - Streamlit 88N1, static maps 88N2, the capture browser's
-    DevTools port 93N1 - written into the worktree's .claude/launch.json under
+  * its own ports (Streamlit 88N1, static maps 88N2, the capture browser's
+    DevTools port 93N1), written into the worktree's .claude/launch.json under
     deploy-verify's configuration names, so two lanes never stop each other's
     servers;
   * its own review folder, data/_review/lane-N/ (shared, gitignored): the

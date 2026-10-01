@@ -1,9 +1,8 @@
 """Import smoke test against a CLEAN CLONE, in the lean deploy environment.
 
-WHY THIS EXISTS. On 2026-09-22 the live app was down for over three hours with
-`ImportError: cannot import name 'DEFAULT_REGION' from 'cities'`, and every
-check this project had reported green throughout. Two defects in one file got
-past them:
+WHY. On 2026-09-22 the live app was down for over three hours with
+`ImportError: cannot import name 'DEFAULT_REGION' from 'cities'` while every
+other check reported green. Two defects in one file got past them:
 
   1. `app/cities.py` gained `DEFAULT_REGION`/`REGIONS`, `app/Overview.py`
      started importing them, and a deployment that had one file and not the
@@ -12,16 +11,16 @@ past them:
      filled it with `float('nan')`, `nan is None` was False, and `tuple(nan)`
      raised `TypeError` on every page load.
 
-Neither was reachable by the existing checks, and the reason is structural:
+Neither is reachable by the other checks, for structural reasons:
 
   * `drift_check.py` runs the PIPELINE. It never imports `app/`.
   * `deploy-verify` runs the app, but from the WORKING TREE and always in a
-    FRESH process - so it cannot see an uncommitted file, and it cannot see a
-    stale module in a long-running process by construction.
+    FRESH process, so it cannot see an uncommitted file, nor a stale module
+    in a long-running process.
 
-So this script does the two things neither can: it runs against a clean clone
-of a committed ref (what a deploy actually gets), and it checks the app's
-module-level imports and the specific data shapes that have broken it.
+So this script runs against a clean clone of a committed ref (what a deploy
+actually gets), and checks the app's module-level imports and the specific
+data shapes that have broken it.
 
 It does NOT start a server and is not a substitute for `deploy-verify`. It is
 the cheap check to run before every push that touches `app/` or `pipeline/`.
@@ -44,10 +43,9 @@ from pathlib import Path
 
 # A CLONE ON WINDOWS CANNOT BE DELETED WITH A PLAIN rmtree. Git writes its pack
 # files read-only, and Windows refuses to delete a read-only file, so every
-# run until 2026-09-23 left `.git/objects/pack/pack-*.{idx,pack,rev}` behind:
-# 53 `deploy-imports-*` folders, 1.7 GB, found by Oslo's deploy-verify. The
-# old `ignore_errors=True` is why nobody saw it. So: clear the read-only bit
-# and retry, and SAY so if a folder still will not go.
+# run until 2026-09-23 left `.git/objects/pack/pack-*.{idx,pack,rev}` behind
+# (53 `deploy-imports-*` folders, 1.7 GB), hidden by `ignore_errors=True`. So:
+# clear the read-only bit and retry, and SAY so if a folder still will not go.
 def _make_writable_and_retry(func, path, _exc):
     os.chmod(path, stat.S_IWRITE)
     func(path)
@@ -63,7 +61,7 @@ def remove_tree(path):
 
 
 # Clones older than this came from an earlier run, not a concurrent one, so
-# they are cleared at the start of every run - which also cleared the backlog.
+# they are cleared at the start of every run.
 STALE_AFTER_S = 2 * 3600
 
 
@@ -338,8 +336,7 @@ def main():
                               capture_output=True, text=True).stdout.strip()
         print(f"  at {head}")
 
-        # A clone has no __pycache__, which is exactly the point: a stale .pyc
-        # is one of the things this check exists to make impossible.
+        # A clone has no __pycache__, so a stale .pyc cannot mask a defect.
         inner = clone / "_deploy_import_check.py"
         inner.write_text(INNER, encoding="utf-8")
         r = subprocess.run([str(LEAN), str(inner)], cwd=str(clone),
