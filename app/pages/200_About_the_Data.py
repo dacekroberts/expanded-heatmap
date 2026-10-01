@@ -97,7 +97,9 @@ with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
 
 st.title("Where this data comes from")
 
-st.markdown(
+# Rendered after the selected country's section (owner, 2026-10-01): a reader
+# arriving from a city page lands on that country with no scrolling.
+INTRO = (
     """
 Every dataset behind these maps is a public register, and this page is the
 project's own provenance record: the exact endpoint each one was fetched from,
@@ -128,8 +130,11 @@ if DOC.exists():
     parts = parts_of(DOC)
     st.markdown(in_page(country_text(parts, country)))
     st.divider()
+    st.markdown(INTRO)
     st.markdown(in_page(shared_text(parts)))
 else:
+    st.divider()
+    st.markdown(INTRO)
     st.warning(f"{DOC.name} is missing from this checkout.")
 
 # A country file whose country has no city in cities.py would have no place

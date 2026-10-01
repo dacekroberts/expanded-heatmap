@@ -236,41 +236,37 @@ def _label(name):
 
 
 def select_country(key):
-    """The country selector, set from ?country= and writing its choice back to
-    the URL so the view can be shared. Returns the chosen country.
+    """The selector: a region, then that region's countries. Set from
+    ?country= and writing its choice back to the URL so the view can be
+    shared. Returns the chosen country.
 
-    A horizontal st.radio labelled "<Name> (<n cities>)", the same control as
-    the Overview's region selector (cleanup, 2026-10-01). Two forms are piloted
-    for the owner: one radio of every country, or a region radio and then that
-    region's countries (?selector=regions while the pilot lasts).
+    Horizontal st.radio rows labelled "<Name> (<n cities>)", the same control
+    as the Overview's region selector (cleanup, 2026-10-01). The owner chose the
+    two-step form over one radio of every country on 2026-10-01: at 375 px the
+    single radio was 396 px tall, the region row is 127 px and the tallest
+    country row (Europe, 14 countries) 281 px. A region with one country shows
+    no second row.
 
     The URL is applied only when it changed since this page last wrote it: a
     click updates the widget before the rerun, while the URL still holds the
     previous country, and re-applying it then would undo the click.
     """
     applied = key + "_applied"
+    region_key = key + "_region"
     wanted = st.query_params.get("country")
     if wanted not in COUNTRY_ORDER:
         wanted = None
-    two_step = st.query_params.get("selector") == "regions"
-    country_key = key
     if wanted and wanted != st.session_state.get(applied):
         st.session_state[applied] = wanted
-        if two_step:
-            st.session_state[key + "_region"] = GROUP_OF[wanted]
-            country_key = f"{key}_{GROUP_OF[wanted]}"
-        st.session_state[country_key] = wanted
+        st.session_state[region_key] = GROUP_OF[wanted]
+        st.session_state[f"{key}_{GROUP_OF[wanted]}"] = wanted
 
-    if two_step:
-        region_key = key + "_region"
-        if st.session_state.get(region_key) not in GROUPS:
-            st.session_state[region_key] = GROUP_OF[wanted or COUNTRY_ORDER[0]]
-        region = st.radio("Region", list(GROUPS), format_func=_label,
-                          horizontal=True, key=region_key)
-        options = GROUPS[region]
-        country_key = f"{key}_{region}"
-    else:
-        options = COUNTRY_ORDER
+    if st.session_state.get(region_key) not in GROUPS:
+        st.session_state[region_key] = GROUP_OF[wanted or COUNTRY_ORDER[0]]
+    region = st.radio("Region", list(GROUPS), format_func=_label,
+                      horizontal=True, key=region_key)
+    options = GROUPS[region]
+    country_key = f"{key}_{region}"
     if st.session_state.get(country_key) not in options:
         st.session_state[country_key] = (wanted if wanted in options
                                          else options[0])

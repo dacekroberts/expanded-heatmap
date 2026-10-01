@@ -83,7 +83,9 @@ with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
 
 st.title("What is counted, and what is not")
 
-st.markdown(
+# Rendered after the selected country's section (owner, 2026-10-01): a reader
+# arriving from a city page lands on that country with no scrolling.
+INTRO = (
     """
 These maps answer a narrow question - how much walk-in commerce sits within a
 few hundred metres of a rapid-transit station - and they answer it by leaving
@@ -173,6 +175,7 @@ if DOC.exists():
     st.markdown(country_text(parts, country, {PER_CITY_SECTION: per_city}))
 
     st.divider()
+    st.markdown(INTRO)
     text = shared_text(parts, skip_titles=(PER_CITY_SECTION,))
     head, marker, tail = text.partition(BUSINESS_HEADING)
     st.markdown(head)
@@ -190,6 +193,7 @@ them is named in its city's `excluded_stations.csv`.
 
     st.markdown(marker + tail)
 else:
+    st.markdown(INTRO)
     st.warning(f"{DOC.name} is missing from this checkout.")
 
 render_site_notices(show_links=False)
