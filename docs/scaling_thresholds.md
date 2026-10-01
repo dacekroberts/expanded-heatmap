@@ -8,6 +8,35 @@ Each entry says what actually breaks, the number where it starts to hurt, and
 what to do about it. Where a claim was measured or verified, that is stated;
 where it is an estimate, it says so.
 
+## Measured 2026-09-30 at 106 cities, before the Band B and France landings
+
+On a measurement-only trial tree: master's 75 cities plus the 11 Band B
+branches and the 20 French batch cities (their outputs, pages and city
+entries copied in), run from `.venv-lean`, which is what Streamlit Community
+Cloud installs.
+
+- **App memory: no pressure.** The server held about 140 MB at cold start and
+  with the Overview open, and it stayed there after the largest map pages.
+  Sampled every 50 ms while Seoul (23.1 MB), Mexico City (16.6 MB) and Bordeaux
+  rendered back to back, the peak was **189 MB**. Streamlit Community Cloud's
+  documented limits are 690 MB minimum and 2.7 GB maximum (checked
+  2026-09-30). The cost does not grow with the city count: each page reads its
+  map from disk when it renders (`st.iframe(path)`), so it depends on the
+  largest single map and on concurrent viewers.
+- **`outputs/`: 243 MB now, 263 MB with all 31.** The batch's maps are small
+  (0.3-2.1 MB; trams-only maps carry few lines). The handoff's estimate of
+  about 380 MB was about 5x too high for this batch. The largest maps do not
+  change.
+- **Deploy clone: no pressure.** A fresh clone of master from GitHub took 27 s
+  with full history (219 MB pack) and 19 s at depth 1 (69 MB). The batch adds
+  about 20 MB before compression, against GitHub's 1 GB soft limit.
+- **The Overview's city list: the one real cost.** At 106 cities on a 375 px
+  phone the page is 31,896 px, about **39 screens**, almost all of it the text
+  list (each city's name and its rail-system line). On a 1024 px desktop the
+  main column is 18,807 px. It works, but it reads as a wall. That is a
+  layout question for the owner (for example grouping the list by region,
+  collapsing it, or dropping the rail-system line), not a limit.
+
 ## Correction, 2026-09-21 — the headline number was wrong by about 3x
 
 The first version of this file estimated **3–10 MB per city** and concluded

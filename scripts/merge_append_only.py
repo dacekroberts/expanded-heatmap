@@ -49,6 +49,7 @@ import pathlib
 import re
 import subprocess
 import sys
+import time
 
 if hasattr(sys.stdout, "reconfigure"):  # city names carry accents; cp1252 raises
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -102,6 +103,36 @@ def introduced_at(heading, base, tip, path):
     log = git("log", "--format=%ct", "--reverse", "-S", body,
               f"{base}..{tip}", "--", path).split()
     return int(log[0]) if log else None
+
+
+def write_or_die(path, text):
+    """Write the resolution and read it back; retry once, then stop LOUDLY.
+
+    On 2026-09-30 (branch kitchener-waterloo) this write hit a Windows file lock
+    (OSError, Errno 22), the traceback scrolled past, and the merge was
+    committed with its markers still in DECISIONS.md (removed in 3d93d29). A
+    lock held by an editor or a sync client is often gone a moment later, so
+    one retry; after that the message says what state the file is in.
+    `scripts/check_conflict_markers.py` in the pre-push hook is the backstop.
+    """
+    for attempt in (1, 2):
+        try:
+            path.write_text(text, encoding="utf-8", newline="\n")
+            if path.read_text(encoding="utf-8") == text:
+                return
+            problem = "the file read back differs from what was written"
+        except OSError as exc:
+            problem = f"{type(exc).__name__}: {exc}"
+        if attempt == 1:
+            print(f"{path}: write failed ({problem}); retrying once in 2 s",
+                  file=sys.stderr)
+            time.sleep(2)
+    raise SystemExit(
+        f"\n{path}: WRITE FAILED TWICE - {problem}\n"
+        f"  The file still holds its conflict markers, or is half written.\n"
+        f"  DO NOT `git add` or commit it. Close whatever holds it open (an editor,\n"
+        f"  a sync client, another session), restore git's conflicted version with\n"
+        f"  `git checkout --merge -- {path}`, and run this script again.")
 
 
 def main():
@@ -245,7 +276,7 @@ def main():
     if args.dry_run:
         print("\n--dry-run: nothing written")
         return
-    path.write_text(rebuilt, encoding="utf-8", newline="\n")
+    write_or_die(path, rebuilt)
     print(f"\nwrote {path}. Next: `git add {path}`"
           + (", and `python scripts/decisions_index.py` first"
              if path.name == "DECISIONS.md" else ""))
