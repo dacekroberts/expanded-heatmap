@@ -52,11 +52,20 @@ Le Havre. Each notice goes in `docs/data_sources/` before its page exists.
 
 Word for word in `.claude/skills/france-tram-city/SKILL.md`, section 6.
 
-## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time) - HELD
+## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time) - RELEASED
 
-**HELD (owner, 2026-09-29) until the France kit has made real progress.**
-The cleanup session is to claim this role (sections 4 and 5) and was told to
-wait; the owner or staging says when to start.
+**RELEASED 2026-09-30 to the cleanup session (owner: "go with north/south,
+release it to cleanup").** The twenty French cities are built on
+`france-build` and `france-build-2` (pages 100-119), and the macro labels are
+the last check before France landing group 1. **France North and France South
+at a zoom of 5.0**, re-measured on the 25 cities France will show, with the
+real label text: one France region fails at every zoom (at 5.0, Marseille,
+Lille and Valenciennes fall off a 1200 px canvas), while the split places
+every label except Le Havre's, which needs a hand-set offset beside "Rouen
+(Regional)". Cleanup does the `REGIONS` and `REGION_ORDER` entries, the five
+built cities' tags and the twenty labels' widths and offsets; France retags
+its twenty batch entries once the names exist. Brief sent to "Cleanup session"
+in chat, 2026-09-30.
 
 PLAN, under "Macro-map completeness tiers", holds both items. **Measured
 2026-09-29 for the France view** (scratch
