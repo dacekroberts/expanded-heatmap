@@ -822,6 +822,14 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
+- [ ] **San Francisco and Los Angeles: the apartment population (owner call,
+  2026-10-01).** Their privacy verdicts are `pending` in
+  `docs/privacy_verdicts.md`: a person-like name at a residential unit on 61
+  (0.52%) and 331 (2.38%) pins, the multi-family population left open on
+  2026-09-21. Recommended: Kansas City's rule (the street address shown
+  instead of a name that reads as a person's own at a residential unit), with
+  a drift check and a redeploy for each; then set both rows to `publish`.
+
 - [ ] ⏰ **Zurich: rebuild after 2026-12-12** (owner, 2026-09-30, call C1): VBZ's
   temporary construction trams 50 and 51 are drawn until then; when they stop,
   re-run Zurich's step 1 and step 3 and drift-check it.

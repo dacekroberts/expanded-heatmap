@@ -41,7 +41,7 @@ Run these in order. Each catches a class nothing else does.
 |---|---|---|
 | 1 | `python scripts/check_no_fetch_in_steps.py` | a step that reaches the network, **including through a shared module** |
 | 2 | `python pipeline/drift_check.py --jobs 2` (a heavy job: announce it, per `docs/session_roles.md`) | committed outputs that no longer regenerate |
-| 3 | `python scripts/check_personal_exposure.py <city>` | a person's name at their address |
+| 3 | `python scripts/check_personal_exposure.py <city>`; record the verdict in DECISIONS and its row in `docs/privacy_verdicts.md` | a person's name at their address; a city published with no verdict (`check_privacy_verdicts.py`) |
 | 4 | `python scripts/check_provenance.py`, `python scripts/check_inconsistency_list.py` and `python scripts/check_ring_shares.py` | a city whose sources were never recorded; notices vs `_NOTICES`; a city with no row in `docs/map_inconsistencies.md` (the internal evidence for the "Why the maps differ" page), or without its three summary fields in `app/cities.py` (`rail_extra`, `record_kind`, `categories`) or its in-ring share in `app/ring_shares.json` (`--write` after the final render), which that page's table is built from |
 | 5 | `python scripts/brief_check.py <city>` | a brief's claims that stopped being true |
 | 6 | **merge to your branch, commit** | — |

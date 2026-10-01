@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**321 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**322 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
+- [Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner](#2026-10-01---privacy-verdicts-registered-for-all-124-cities-san-diego-and-chicago-publish-san-francisco-and-los-angeles-held-for-the-owner)
 - [The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current](#2026-10-01---the-japan-list-regenerated-taitō-and-meguro-re-measured-hiroshima-japans-eighth-the-japan-city-skill-current)
 - [The decisions drafts folded in: 48 entries from 17 drafts files, the files removed](#2026-10-01---the-decisions-drafts-folded-in-48-entries-from-17-drafts-files-the-files-removed)
 - [The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)](#2026-10-01---the-master-lists-history-written-docscity_master_list_historymd-published-as-an-artifact-owner)
@@ -366,6 +367,44 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-01 - Privacy verdicts registered for all 124 cities; San Diego and Chicago publish, San Francisco and Los Angeles held for the owner
+
+- **A registry and a check** (review lesson 1, 2026-09-30: lane 4 found ten
+  French cities with no verdict ever written): `docs/privacy_verdicts.md`
+  holds one row per built city - verdict, date, and the heading of the entry
+  that records it - and `scripts/check_privacy_verdicts.py` (in `check_all`)
+  fails when a built city has no row, a verdict is not `publish`,
+  `publish-structural` or `pending`, or the cited entry is missing or never
+  names the city. `pending` is reported, not failed.
+- **120 verdicts found by reading** every city's entries (an agent, checked by
+  script: each heading resolves to one entry, each quoted sentence is in it):
+  publish 111, publish-structural 9 (Dublin, Rome, Berlin, Sydney, Liepāja,
+  Rotterdam, Riga, Buenos Aires, Florence: no person-name field on any pin).
+  Where a city was re-checked, the latest verdict is cited. Nineteen records
+  state the check's numbers without a verdict word (New York, Boston, the
+  first French five, the UK four, Taiwan's three among them); they are
+  `publish`, as published on those numbers.
+- **Four never had one: San Diego, San Francisco, Chicago and Los Angeles**,
+  the first cities built (2026-09-21): their entries hold measurements and the
+  home-business filters, not a verdict. `check_personal_exposure.py` run
+  2026-10-01:
+  - San Diego: 1 person-like name at a residential unit of 2,228 pins
+    (0.04%); no registrant-name fallback; **publish**.
+  - Chicago: 24 of 11,685 (0.21%); 3 pins can only be the legal-name
+    fallback; **publish**, at New York's 0.19% and Dallas's 0.10%.
+  - San Francisco: 61 of 11,762 (0.52%); 6 pins can only be the
+    ownership-name fallback. **Pending.**
+  - Los Angeles: **331 of 13,892 (2.38%)**, and 5,779 pins (41.6%) can only be
+    the registrant-name fallback, since 68% of raw rows have no trade name.
+    **Pending.**
+  - Both are the "apartment population" left open on 2026-09-21 (844 and 194
+    pins then): a person-like name at an APT/UNIT address in a multi-family
+    building, which the single-family parcel filters cannot reach. It was
+    never closed. Recommended to the owner: Kansas City's rule - a pin whose
+    name reads as a person's own at a residential unit shows its street
+    address instead of the name - a step 2 change, a drift check and a
+    redeploy for each city.
 
 ### 2026-10-01 - The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current
 

@@ -83,8 +83,9 @@ a rule, not before obeying one.
   trade name, never a registrant's own name at what looks like their home,
   even from a public registry. Run `python scripts/check_personal_exposure.py
   <city>` before publishing a city and after any change to its step 2 or
-  taxonomy; record the verdict in `DECISIONS.md`. Suspect catch-all codes
-  first. [#personal-info]
+  taxonomy; record the verdict in `DECISIONS.md` and its row in
+  `docs/privacy_verdicts.md` (`check_privacy_verdicts.py` fails a city
+  without one). Suspect catch-all codes first. [#personal-info]
 - **Never remove the basemap attribution:** `© OpenStreetMap contributors`,
   linked to the OSM copyright page, visible on the render (ODbL 1.0); a new
   tile provider swaps in its own. Check K of `check_provenance.py` refuses an
