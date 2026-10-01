@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**250 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**252 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
@@ -45,8 +45,10 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
 - [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 - [Ottawa is one category on the two-key macro legend (owner)](#2026-09-30---ottawa-is-one-category-on-the-two-key-macro-legend-owner)
+- [Minneapolis is one category on the two-key macro legend (owner)](#2026-09-30---minneapolis-is-one-category-on-the-two-key-macro-legend-owner)
 - [Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)](#2026-09-30---macro-legend-approved-hong-kong-and-philadelphia-one-category-builds-told-owner)
 - [Macro dots by network and fill; food shops are food; thin layers are narrowed (owner)](#2026-09-30---macro-dots-by-network-and-fill-food-shops-are-food-thin-layers-are-narrowed-owner)
+- [Minneapolis built on the City's food inspections, with a name test inside its types](#2026-09-30---minneapolis-built-on-the-citys-food-inspections-with-a-name-test-inside-its-types)
 
 **2026-09-29**
 
@@ -312,6 +314,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Recommendation for review time:** the batch can land at once on these
   numbers. The list's layout is the one decision to make, and it need not
   block the landing.
+
 ### 2026-09-30 - France splits into two macro-map regions, France North and France South, at zoom 5.0 (owner)
 
 - **Decided (owner, "go with north/south", relayed by the France builds and
@@ -483,6 +486,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   approved rule halves the city's stops. It was brought to the owner as a
   consequence, with building as approved recommended, rather than reopened
   unasked.
+
 ### 2026-09-30 - Dallas's address-layer indemnity accepted (owner)
 
 - **The owner accepted the open-ended indemnity in the City of Dallas's GIS
@@ -597,6 +601,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Builds stay held**: the approval covers the calls, not the go. The kit
   is complete apart from checking those three briefs when staging lands
   them.
+
 ### 2026-09-30 - The Czech batch's calls and prose approved as recommended (owner)
 
 - **Owner: "I approve all recommended approaches to the calls", then "and
@@ -714,6 +719,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **The page-text template was drafted in chat for the owner**, as France's
   was. The skill's section 7 is marked pending, and no Czech page text is
   written until it is approved.
+
 ### 2026-09-30 - The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held
 
 - **Wrote `.claude/skills/tram-city/SKILL.md` for the ten T1 cities that
@@ -777,6 +783,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **The trams-only page-text template is drafted in chat for the owner, not
   written to the skill**, which lists its parts until the owner approves
   it.
+
 ### 2026-09-30 - The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod
 
 - **The approved `licence-read` of "Agrégat des réseaux urbains et
@@ -880,6 +887,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   read that day's feed, not this session's cache. The second keeps Nantes's
   579 MB `stop_times.txt` from being read whole. Edmonton's brief re-ran
   9 of 9 after the change.
+
 ### 2026-09-30 - The six Czech tram cities briefed; three licence calls (owner)
 
 - **Briefed Brno, Ostrava, Plzeň, Olomouc, Liberec (Regional) and Most +
@@ -1071,6 +1079,15 @@ highest-order mode its map draws). This branch merges `origin/macro-legend`,
 which carries the two-key legend, the 12 px dots (`MARKER_R` 6) and the tier
 rules, so it is built on them from the start. Its table B row was already one layer ("— / 1,586 / —"); its labels score PROBLEMS 0 at the new dot size.
 
+### 2026-09-30 - Minneapolis is one category on the two-key macro legend (owner)
+
+The owner's call, relayed by the cleanup session: food shops are food-like and
+are not a second category, so Minneapolis's macro dot is **one_bucket** (hollow),
+with `categories` "Food premises only", and its `mode` is **light_rail** (the
+highest-order mode its map draws). This branch merges `origin/macro-legend`,
+which carries the two-key legend, the 12 px dots (`MARKER_R` 6) and the tier
+rules, so it is built on them from the start. Its categories move from "Two" to "Food premises only"; table B's "115 / 526 / —" with "Retail = food shops only" is the one-category shape the new rule reads. Its labels score PROBLEMS 0 at the new dot size.
+
 ### 2026-09-30 - Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)
 
 - **Approved (owner):** every city's `mode` as proposed (including Monterrey
@@ -1156,6 +1173,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   ("Two": food plus "Retail = food retail") would be one category under the
   food-shops rule. The owner named it narrowed, so it stays narrowed pending
   their word.
+
 ### 2026-09-29 - Ottawa built on Ottawa Public Health's inspection feed: food only, 4,896 premises, 25 stations
 
 - **Canada's sixth city, a food-only page (owner's reduced-bucket bar),
@@ -1217,6 +1235,86 @@ rules, so it is built on them from the start. Its table B row was already one la
   review time with the rest.
 - **Result: 4,896 food premises, 1,586 in a ring (32.4%).**
 
+### 2026-09-30 - Minneapolis built on the City's food inspections, with a name test inside its types
+
+**Built** on branch `minneapolis`, page 77, region United States East (Chicago's;
+the brief's "North America" is no region), out of the default frame for
+Buffalo's reason. Band B's second of eight, under the owner's pre-approval of
+downloads and write-ups (2026-09-29). 1,793 storefronts (food service 1,401,
+food shops 392), 641 in the rings (35.7%), 15 stations.
+
+**Rail.** OSM, Metro Transit's GTFS licence unread (the owner's Buffalo and
+Houston choice). Gate 3 exact on 19 and 23, from Wikipedia: Metro Transit's
+line pages state no count (Ottawa's position). **15 stations in the city, not
+the brief's 16 or its stub test's 19**: Target Field's two platforms and "US
+Bank Stadium" / "U.S. Bank Stadium" fold (the latter by alias). The 22 outside
+are in `excluded_stations.csv` with their TIGER county subdivision (St. Paul 14,
+Bloomington 4, Fort Snelling Unorganized Territory 4). The box's `tram`
+relation is the Minnesota Streetcar Museum's Como-Harriet heritage ride, not
+the airport's people mover the brief named: not drawn. **Green keeps OSM's
+#008144**, ΔE 18.6 against the Personal services pin colour, a bucket this
+page never draws (96.9 and 112.1 against the two it does); clearing 46 would
+need a near-black green 28 ΔE from the agency's. Stockholm's food-only page
+kept its official green the same way.
+
+**The register decides first.** RESTAURANT is food service; GROCERY, MEAT
+MARKET, MARKET and LIQOFFSALE (one off-sale liquor store, NAICS 445320) are
+food shops, New York's precedent. Out by type: institutions, board and
+lodging, caterers (R1, where the brief had kept them as food), food trucks,
+carts, limited mobile units, a market vendor and vendors, food shelves,
+wholesale, and **3 with no category** (two of them restaurants by name: left
+out, not guessed).
+
+**Then a name test inside the kept types** (161), because the register files
+a contract caterer's workplace café or a hospital cafeteria as a RESTAURANT
+and a vending route or a workplace micro-market as a GROCERY. Stockholm's
+precedent for canteens by name in a typed register, and each rule a row of
+`docs/category_rules.md`: institutional kitchens 57 (R1), hotels 43
+(lodging), venues and clubs 33 (recreation; the private clubs as Ottawa's
+call), vending 21 (nonstore), pharmacies 5 (a food register's pharmacies are
+out; Ottawa's one layer is its own owner exception, not this page's), and 2
+the register's own name calls a cabaret (R3). THE NICOLLET DINER AND ROXY'S
+CABARET, a diner, stays; so does a caterer whose name also names a
+restaurant, café or bakery. A university name is campus dining on a
+RESTAURANT and a bookstore on a GROCERY, which stays.
+
+**One shop, one pin (measured, Retail only).** 74 grocers hold a GROCERY and
+a MEAT MARKET licence for one counter under one name and street address; the
+second is folded and listed. Restaurants are not folded: two licences under
+one name and street address are an operator's separate bars in a building,
+told apart by unit. A supermarket's deli, licensed as a RESTAURANT, keeps its
+own pin (Ottawa's keep-each-id precedent).
+
+**Not placed: 42** with no point in any inspection row (two Cub Foods, two
+Lunds & Byerlys stores among them); not geocoded, because an address join
+comes first and was not worth its cost at 2%. A facility's point is its
+latest row that has one.
+
+**Licence.** CC0 1.0 on the dataset itself (licence-read agent, 2026-09-30):
+PERMITTED, nothing to display or do; the rail-geometry notice now names
+Minneapolis's lines.
+
+**Personal information** (`check_personal_exposure.py minneapolis`): no
+owner column is downloaded, and InspectorComments, FoodCodeText and APN are
+never requested. 0 of 641 pins have a person-like name at a residential
+unit; the heuristic's 87 distinct flagged names were read and every one is a
+trade name (DOKKEN SUPERETTE, CHATTERBOX PUB, LEEANN CHIN), the upper-case
+two-word shape Ottawa found. Displayed as the register gives it, up to a
+first line break (two names carry a clerk's memo on a second line). The
+excluded-premises file names only the kept types' left-outs: BOARD AND
+LODGING's names include people's own at homes, and it is counted, never
+listed.
+
+**Macro label.** Width 81.6 measured in a browser (Prague 47.3, Tokyo 40.5,
+Houston 56.9, Toronto 52.4 reproduced). No placement of Minneapolis's alone
+cleared Toronto's pill in Global; **Toronto's label raised 5 px** (end 0 -16
+to -21) with Minneapolis's below-left (end -16 36): PROBLEMS 0 at 375, 768
+and 1200 px, and the same with Ottawa's branch applied, so the two merge
+clean.
+
+**For the batch review:** Toronto's label moved 5 px; the name test's 161
+and the 74 folds are this build's measurement, not an owner's call.
+
 ### 2026-09-29 - Anyang briefed on its ring share; the satellites in the Seoul Capital Area view only (owner)
 
 - **Briefed Anyang with the three satellites (owner, 2026-09-29), past the
@@ -1265,6 +1363,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Usage:** the weekly limit stood at 93% when the builds began. The
   owner's 98% stop from the second review's entry applies, and they work in
   steps.
+
 ### 2026-09-29 - The next Gyeonggi satellites briefed: Namyangju, Ansan, Uijeongbu (owner's scope)
 
 - **Briefed Namyangju, Ansan and Uijeongbu as additions to
@@ -1377,6 +1476,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   rejected: the rule as given is either, and the page is where a reader of
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
+
 ### 2026-09-29 - Houston built: METRORail from OSM, a joined sales-tax register, a person's permit shown by address
 
 - **Houston built, 29,912 storefronts around 40 stations, branch `houston`
@@ -1565,6 +1665,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Text approved by the owner 2026-09-29**: the page, Sacramento added to
   the OpenStreetMap rail-geometry notice, and the Sacramento section of
   `docs/excluded_categories.md`.
+
 ### 2026-09-29 - Baltimore to the discards on currency; Palma's three licence calls (owner)
 
 - **Baltimore moved from B to the discards on currency (owner: "dubious").**
@@ -1674,6 +1775,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   request to the city's inspections department (outreach, the last resort).
 - **Band C now holds 5**: Singapore, Istanbul, Ankara, Perth and Ho Chi Minh
   City, each with its "what would change it". B 7 → 9.
+
 ### 2026-09-29 - Buffalo built: NFTA Metro Rail, three registers, a Census boundary
 
 - **Buffalo built on New York's multi-source shape, 1,564 storefronts around 14
@@ -1763,6 +1865,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Text approved by the owner 2026-09-29**: the page, Buffalo added to the
   OpenStreetMap rail-geometry notice, and the Buffalo section of
   `docs/excluded_categories.md`.
+
 ### 2026-09-29 - The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected
 
 - **Ottawa passes the reduced-bucket bar and moves to B.** Its public-health
@@ -1801,6 +1904,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   97.8–98.7% at block level on the shared `japan_register` join, and about
   100% with town-chōme. It stays in B.
 - B 5 → 7, C 9 → 7.
+
 ### 2026-09-29 - Aarhus built: the city tramway, Copenhagen's register, OSM's address points
 
 - **Aarhus built on Copenhagen's modules, 5,102 storefronts around 20 stations,
@@ -1881,6 +1985,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   Klimadatastyrelsen notices widened to "(Copenhagen, Aarhus)", Aarhus added
   to the OpenStreetMap rail-geometry notice (with its address points), and
   the Aarhus section of `docs/excluded_categories.md`.
+
 ### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
 
 - **Rule 1 now reads "at least one full bucket at register quality", not
@@ -2012,6 +2117,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
   `docs/build_briefs/bergen.md`, `scripts/check_macro_labels.py`,
   `scripts/check_personal_exposure.py`.
+
 ### 2026-09-29 - Category fix batch re-run: 32 cities moved, 8 did not; no new personal exposure
 
 - **The owner's approved category fixes (commit 12501db) were re-run across 40
@@ -2205,6 +2311,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
   `docs/build_briefs/gyeonggi.md`, `scripts/check_macro_labels.py`,
   `scripts/check_personal_exposure.py`.
+
 ### 2026-09-29 - Light-rail build briefs: Buffalo, Houston and Sacramento (staging)
 
 - **Buffalo's "Active" means nothing: 42.8% of bucket rows are past their
@@ -2369,6 +2476,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
   `docs/city_master_list.md`, `docs/build_briefs/gyeonggi.md`,
   `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+
 ### 2026-09-29 - Category check: three older calls confirmed (owner)
 
 - **Three departures the category check listed as pending are confirmed and
@@ -2485,6 +2593,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - No taxonomy's behaviour changed. Files: `scripts/check_category_continuity.py`,
   `scripts/category_continuity_table.py`, `scripts/check_all.py`, and
   `docs/category_rules.md` (a pointer to the check).
+
 ### 2026-09-29 - Light-rail build briefs: Bergen and Aarhus (staging)
 
 - **Bergen's brief: Oslo's modules on kommune 4601, with three Oslo settings
@@ -2705,6 +2814,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   published city changes. The table of every built city is
   `docs/ring_rules.md`, generated by `scripts/ring_rules_table.py` (owner:
   "save these tables").
+
 ### 2026-09-29 - Stockholm's caterers, event firms and food trucks out by name (owner)
 
 - **Food with no counter of its own left Stockholm's map by name (owner),
@@ -2760,6 +2870,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   unchanged control, renders; no `stException` anywhere. The only console
   errors are the deep-link `_stcore/health` and `host-config` 404s every page
   logs, Boston's included.
+
 ### 2026-09-29 - Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill
 
 - **The owner's final call on the tram list: yes**, after the audit and its
@@ -2874,6 +2985,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   200-202 in this batch, and a deployed app that is not rebooted keeps its
   imported `components.py`, whose page constants would then name files that
   no longer exist.
+
 ### 2026-09-29 - Goyang, Seongnam and Yongin built on SEMAS's register, one page each (owner); a Seoul Capital Area macro-map region (owner)
 
 - **Built on branch `gyeonggi`, stacked on `incheon`** (they read its SEMAS
@@ -2936,6 +3048,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/city_master_list.md`, `docs/build_briefs/gyeonggi.md`,
   `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`,
   `scripts/check_master_list_counts.py`.
+
 ### 2026-09-29 - Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner
 
 - **The licence read (`licence-read` agent) found no grant and a likely
@@ -3081,6 +3194,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
   `docs/build_briefs/incheon.md`, the two skills, `CLAUDE.md`,
   `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+
 ### 2026-09-29 - Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)
 
 - **Supersedes the same day's discard in "The tram list's data re-checked
@@ -3181,6 +3295,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   still unread (none deciding keep or drop); `docs/city_master_list.md` the
   discard row and the Spain row. `check_master_list_counts.py` and
   `check_discard_evidence.py` pass.
+
 ### 2026-09-29 - Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)
 
 - **All 41 cities re-rendered, one at a time, with master's shared processed
@@ -3369,6 +3484,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   section was brought current as well (Tallinn is in R; Rijswijk and Delft
   left C for T on 2026-09-27). Measuring scripts and caches in
   `data/_staging_scratch_2026-09-29/band_t_audit/`.
+
 ### 2026-09-29 - Bucharest built: DSVSA's food registers placed by an address join in each premises' own sector (74.9%); person-named companies by category (owner); privacy clean
 
 - **Built on branch `bucharest`, page 64, notice 66 on the branch (67 once
@@ -3431,6 +3547,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
   `docs/city_master_list.md`, `docs/build_briefs/bucharest.md`,
   `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+
 ### 2026-09-29 - Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session
 
 - **Follow-ups on the measured counts (owner):**
@@ -3538,6 +3655,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
   `docs/city_master_list.md`, `docs/build_briefs/stockholm.md`,
   `scripts/check_macro_labels.py`, `scripts/check_personal_exposure.py`.
+
 ### 2026-09-28 - Stockholm: the 225 untyped premises recognised by name go on the map, flagged (owner); T-bana only (owner); the full register fetched (owner)
 
 - **The 225 untyped premises are added (owner).** These are the ones the name
@@ -3559,6 +3677,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   Livsmedelstillsyn layer 41, every field. Measured beforehand from a
   2,000-row sample at 564 bytes a row: about 165 MB in 145 pages.
 - Files: `DECISIONS.md` (the build's own files follow on branch `stockholm`).
+
 ### 2026-09-29 - Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch
 
 - **Funeral services (owner, 2026-09-28): coded, not yet rendered.**
@@ -3727,6 +3846,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Never published:** phone numbers, deposit and rent, and the
   rights-holder and livestock identifiers. No owner-name column was found.
 - Files: `docs/build_briefs/gyeonggi.md`.
+
 ### 2026-09-28 - Second batch live after the owner's reboot, checked on the live URL
 
 - **Page 92:** 62 rows; Melbourne's in-ring share reads 96% and Sydney's
@@ -3805,6 +3925,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   licence reads are running: Incheon's data.go.kr lists, the KESA
   lift-building file, and Gyeonggi's data portal. Per-city counts and
   stations will decide which satellites come first.
+
 ### 2026-09-28 - Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)
 
 - **Merged into `worktree-cleanup` in land order:** Buenos Aires (77da039),
@@ -3880,6 +4001,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   (not food shops) and the rest. That gives about 5,996 placed
   storefronts.
 - Files: `docs/build_briefs/stockholm.md`.
+
 ### 2026-09-28 - Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)
 
 - **ANZSIC 9539 "Other Personal Services n.e.c." excluded in both Australian
@@ -4096,6 +4218,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/data_sources/australia.md` (new), `docs/excluded_categories.md`,
   `docs/map_inconsistencies.md`, `docs/city_master_list.md`,
   `docs/build_briefs/sydney.md`.
+
 ### 2026-09-28 - Funeral services come off every map (owner); audit and plan
 
 - **Owner's call, confirmed in the cleanup session** (first relayed from the
@@ -4133,6 +4256,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   then drift checks. The new `docs/excluded_categories.md` wording goes to
   the owner first. A full `deploy-verify` runs at review time. PLAN has the
   item.
+
 ### 2026-09-28 - Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations
 
 - **The owner fetched eight files** from the registered retail units of
@@ -4362,6 +4486,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `docs/data_sources.md`, `docs/data_sources/united-kingdom.md`,
   `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
   `docs/city_master_list.md`, `docs/build_briefs/glasgow.md`.
+
 ### 2026-09-28 - Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured
 
 - **Licence reads (`licence-read`, one per source), both PERMITTED WITH
@@ -4497,6 +4622,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   Fortaleza moved up-right (its pill had gone under the zoom buttons at 375
   px) and Porto Alegre right of its dot (it met Santos).** Scored PROBLEMS 0 in
   every region at 375, 768 and 1200.
+
 ### 2026-09-28 - Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)
 
 - **Moved Lisbon to Band R, request only (owner's call), after the owner
@@ -4552,6 +4678,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Housekeeping:** PLAN's page 92, Berlin and London items are ticked. The
   memory reminder to place the inconsistency list on the site was removed,
   because it is on the site.
+
 ### 2026-09-28 - Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)
 
 - **Moved Delhi to Band R (owner's call) after the owner checked MCD's
@@ -4655,6 +4782,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Next:** the owner reboots (the batch changes `app/cities.py`,
   `app/components.py` and `app/station_scope.py`), then the live site is
   checked, including one city nobody touched.
+
 ### 2026-09-28 - Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)
 
 - **Mapped every `TIPO2` among Buenos Aires' 87,028 active UNICOMERCIAL
@@ -4688,6 +4816,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `route=tram` relations, ref P, colour #F38733, network "Subte de Buenos
   Aires". The count needs the parcel join and waits for the machine's heavy
   job to end. The Tramway Historico (heritage) is out regardless.
+
 ### 2026-09-28 - Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)
 
 - **Moved Kaohsiung, Tallinn and Sendai from D to R, and renamed R
@@ -4743,6 +4872,7 @@ rules, so it is built on them from the start. Its table B row was already one la
     owner's approval of the restructure. Files:
     `docs/city_master_list.md`, `docs/global_transit_gap.md`,
     `docs/handoff_staging_2026-09-28.md`, both scripts.
+
 ### 2026-09-28 - London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too
 
 - **Decided (owner)**: a storefront the FSA gives a FULL postcode and no point
@@ -4821,6 +4951,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   discards. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - London's page, notice 57, macro entry and disclosures written (owner-approved); Lille's macro label turned for London
 
 - **Approved by the owner and written**: the page text
@@ -5009,6 +5140,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   licence). Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - London's rail: Underground, DLR, Elizabeth line and the six Overground lines; Tramlink left out (owner)
 
 - **Decided (owner), as recommended**: the Underground (11 lines), the DLR,
@@ -5128,6 +5260,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   now say page reads only. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - Berlin's page, notice 57, macro entry and disclosures written (owner-approved); the exposure verdict; a "closed for works" station category
 
 - **Approved by the owner and written**: the page text
@@ -5371,6 +5504,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Open for the owner (brief, "Calls for the owner")**: `47122`; a partial
   Personal services bucket; trams; and the two downloads (the register CSV,
   126,348,283 bytes, and VBB's GTFS, 78,379,003 bytes).
+
 ### 2026-09-28 - "Why the maps differ" built (page 92), waiting for review time
 
 - **Built on `worktree-cleanup` with the owner's approved text** (the eleven
@@ -5497,6 +5631,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   source date" for Mexico City and Guadalajara; "What Is Excluded" says
   "Commuter rail is excluded everywhere" (`app/pages/91_What_Is_Excluded.py`
   L78), which eleven maps contradict.
+
 ### 2026-09-28 - Berlin's personal-services gap corrected: only hairdressers and laundries are missing
 
 - **Corrected the Berlin probe's personal-services finding: the register
@@ -5576,6 +5711,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **For the owner:** all six Japanese pages call their layer "the Retail
   layer", but every Japanese map (and Hong Kong's) labels it "Food shops".
   Published wording, queued for review time.
+
 ### 2026-09-28 - Tokyo live after the owner's reboot, checked on the live URL
 
 - **The owner rebooted the app after `80a7a76`.** On the live URL: the Tokyo
@@ -5651,6 +5787,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   (B 5 → 6) and 84 → 83 discards. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time
 
 - **Approved (owner) and written**: Tokyo's section in
@@ -5725,6 +5862,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   no open-data page. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)
 
 - **The Economic Census join control ran for all six Japanese cities**
@@ -6084,6 +6222,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   re-screened. Files: `docs/city_master_list.md` (Band B, by country,
   countries ruled out), `docs/global_country_shortlist.md` (the UK rows),
   `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - Worktrees `main-build` and `tokyo-sources` retired (owner)
 
 - **Retired on the owner's word and both sessions' own**, both sessions
@@ -6128,6 +6267,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   item, which still names only Kobe and Osaka. Noted, not changed: Kyoto's
   in-ring counts in the table add up to 27,975 against DECISIONS' "27,980
   in a ring" (share 86% either way; the table takes the map's layer menu).
+
 ### 2026-09-28 - Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree
 
 - **The roster, `pipeline/tokyo/wards.py`**, is the one place a ward is
@@ -6277,6 +6417,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   11:55-12:20 under `data/` and the worktrees intact (Python compiles, the
   census xlsx passes a zip test, Sapporo's map ends in `</html>`); every
   Claude and project JSON config parses; 17 memory files intact.
+
 ### 2026-09-28 - Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved
 
 - **"Staging and build handoff" hands over both of its roles (owner).** The
@@ -6298,6 +6439,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - Scratch that would have gone with this session's scratchpad is in
   `data/_staging_scratch_2026-09-28b/` (the Incheon join and interpolation
   scripts, the Baltimore listings, the line-colour search).
+
 ### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
 
 - **Found that Suginami publishes no food-premises list at all, so it is OFF,
@@ -6446,6 +6588,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   and `ota data.pdf` (Ōta's August 2026 new-permits PDF, 331,986 B). Both hold
   operators' names and are awaiting the owner's call. Later licence reads are
   told never to open a PDF in the browser: HEAD and WebFetch only.
+
 ### 2026-09-28 - Vancouver's exclusion sentence no longer says "as in every city here" (owner)
 
 - **`docs/excluded_categories.md`, Vancouver: "Also excluded, as in every city
@@ -6455,6 +6598,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   Osaka kept confectionery and deli manufacturing permits (菓子製造業,
   そうざい製造業) as Retail, so not every city excludes manufacturing. Landed
   with the 2026-09-28 review-time batch.
+
 ### 2026-09-28 - Before Tokyo: a ward-source skill and share check here, a research worktree for the missing wards, hollow stations where a ward has no data (owner)
 
 - **The owner's order for Tokyo's groundwork**, from this session's five
@@ -6532,6 +6676,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   published text awaiting the owner's approval. **When Sapporo lands** its
   entry needs the three fields (narrowed; its table C and D rows hold 86.0%,
   2026-03-31 and 2026-07-31) and a `--write`, or the check refuses the push.
+
 ### 2026-09-28 - Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)
 
 - **Built on `worktree-japan`**: 32,355 storefronts (Retail 4,598 · Food
@@ -6718,6 +6863,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   `check_master_list_counts.py` became `LETTERS = "ABCDNT"`, and four
   `check_master_list_counts_selftest.py` cases aimed at Band C's text were
   re-aimed at B and T; 18 of 18 behave. Nothing a check decides was relaxed.
+
 ### 2026-09-28 - Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)
 
 - **Two food lists, one shared step 2.** The city's BODIK list (permits from
@@ -6800,6 +6946,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   checkout's. Sapporo itself is held for review time on `build-sapporo`
   (DECISIONS on that branch). The handoff is
   `docs/handoff_japan_2026-09-28.md`.
+
 ### 2026-09-28 - Sapporo built on the shared Japanese modules: Japan's third city (held for review time)
 
 - **Sapporo built on `build-sapporo`, almost entirely as a config**: its
@@ -7182,6 +7329,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   - Japan pass: 9 operator's-own trade names in the raw files, 9 pins showing
     their permit type, **0 shown**.
   - Publishable on this measure.
+
 ### 2026-09-27 - One shared thin(): Rome, Amsterdam and Rotterdam ported, measured in the projected CRS; no stop moved
 
 - **The sub-transit-line thinning filter now lives once, as
@@ -7312,6 +7460,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   - The handoff is `docs/handoff_osaka_2026-09-27.md`.
   - Osaka's cache was on disk from screening. The OSM station-name query is
     its one remaining download and waits for the owner's OK.
+
 ### 2026-09-27 - Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change
 
 - **Switching the tram thinning filter from haversine on lat/lon to the
@@ -7571,6 +7720,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   - Hiroshima rose (block 96.0% -> 96.3%, unplaced 2.3% -> 2.0%), the same
     pattern with 広島市立.
   - Kobe's screen is unchanged at 97.1 / 2.6 / 0.3.
+
 ### 2026-09-27 - Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)
 
 - **ML1 is drawn, from CRTM's `M10_Red` feature services, the Metro layers'
@@ -7753,6 +7903,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   tracked changes. A session started there would otherwise have read the
   rules from before today's changes: the long CLAUDE.md, no pre-push hook and
   no archive.
+
 ### 2026-09-27 - Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out
 
 - **Ottawa → Band C** (food only), as recommended. Cleanup had already
@@ -7794,6 +7945,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Colours measured with `pipeline/linecolour.py`**: REM ΔE 27 from Métro
   Line 1, Rome's tram 8 ≈70 from every line, F Market 27 from J. All pass the
   floor of 10.
+
 ### 2026-09-27 - Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked
 
 - **The owner rebooted** after the push of 9dc08de. The app woke within
@@ -7936,6 +8088,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **Skills now say which file a new row goes in:** read-licence, licence-read,
   add-city, add-country, multi-source-city and brazil-city. CLAUDE.md gains one
   clause.
+
 ### 2026-09-27 - Busan built on its own branch, stacked on Daegu's: 89,798 storefronts, 110 stations, Lines 1-4 and the Busan-Gimhae LRT
 
 - **Where and what (owner, 2026-09-27).** Its own worktree
@@ -8112,6 +8265,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   no urban rail, although it has 6 light-rail routes and was ruled out on data.
   Separately, the list's "Current by country" table is stale (30 built, Brazil
   as candidates, Japan in Band B), and no check covers it.
+
 ### 2026-09-27 - Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine
 
 - **Wrote `docs/build_briefs/busan.md`** (8/8 checks live) and handed it to
@@ -8147,6 +8301,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   time with backoff) into the main checkout's `data/busan/raw/`. Only field
   names and counts were read; `sitetel` was never read, and no row was
   printed.
+
 ### 2026-09-27 - Daegu's page, blurb, notice 48 and exclusions section approved and written; deploy-verify held until after Busan (owner)
 
 - **Approved as drafted in chat**: the page prose (Seoul's, adapted, plus a
@@ -8475,6 +8630,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   byte-identical. Column names and counts only were read; no row was printed.
 - `scripts/brief_check.py` crashes printing a Korean claim to a cp1252
   console; `PYTHONIOENCODING=utf-8` works around it. Not fixed here.
+
 ### 2026-09-27 - Process efficiency review: batch approvals first, then trim what loads, then archive DECISIONS by month (owner)
 
 - **The owner chose the order: change 2 (one approval review a day and one
@@ -8621,6 +8777,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - **The screens' 1.1 GB of downloads were copied into the main checkout's
   `data/`** (no-clobber); `check_worktree_data.py` reports every file present
   at the same size.
+
 ### 2026-09-27 - overpass.osm.ch removed from every Overpass host list; all-zero counts refused; check_overpass_hosts.py keeps regional extracts out
 
 - **Reported by Staging (second-city screens, relayed as owner-approved)**:
@@ -8719,6 +8876,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   "OSM", which `check_provenance.py`'s citation check reads as naming INEGI;
   it now names OpenStreetMap. `city_master_list.md`'s Built count is 47 on
   this branch; its Band A counts are left to the staging session.
+
 ### 2026-09-27 - East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)
 
 - **Found that the 2026-09-22 closures of Daegu and Busan were findings about
@@ -8787,6 +8945,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   slip is on file, not only in a transcript.
 - Macau (separate jurisdiction, not a built country) was not screened for
   business data; its LRT would class as an edge network.
+
 ### 2026-09-27 - Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region
 
 - **The defect, confirmed in a render before fixing**: on a canvas wider
@@ -8941,6 +9100,7 @@ rules, so it is built on them from the start. Its table B row was already one la
 - Also fixed: `monterrey.md` cited notice 1 beside "OSM" without naming
   OpenStreetMap, which `check_provenance.py` refused (Cleanup's catch). It
   passes now.
+
 ### 2026-09-27 - Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse
 
 - **What the owner saw**: after the JSON.parse fix went live, Seoul, São
@@ -8996,6 +9156,7 @@ rules, so it is built on them from the start. Its table B row was already one la
     exact hex is read from the operator's vector PDF at build.
 - Monterrey now has nothing blocking its build. Recorded in `monterrey.md`
   and `city_master_list.md`.
+
 ### 2026-09-27 - Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final
 
 - **Owner's call**: mark the array-limit probe done, as a problem-solving
@@ -9183,6 +9344,7 @@ rules, so it is built on them from the start. Its table B row was already one la
   ~758 MB of page memory in Chrome. That needs the owner's browser matrix,
   and none of the phone workarounds (Seoul's dropped layer, mobile mode) is
   reversed until it has run.
+
 ### 2026-09-27 - Trams count; Band T (trams only) created; first blocker wins, universally (owner)
 
 - **The owner ruled that trams count as rail for this project** ("count
@@ -9402,6 +9564,7 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **Reboot required** (owner's action): this push changes `app/cities.py`
   and `app/components.py`. The live check, including one untouched city,
   follows the reboot.
+
 ### 2026-09-27 - Wave 2, group 1 banded: Kitchener–Waterloo to T, eleven discards, Contagem and Duque de Caxias as regional add-ons (owner)
 
 - **Canada, Brazil and Ireland screened by three agents** on the wave-1 brief
@@ -9532,6 +9695,7 @@ Recorded by the cleanup session from the Main Building Session's findings of
   `git worktree list`.
 - **One interruption:** the permission check for commands returned no
   verdict for several minutes. Nothing was touched until it came back.
+
 ### 2026-09-28 - Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)
 
 - **The US screened by two agents** (unbuilt metro and light-rail cities;

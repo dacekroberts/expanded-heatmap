@@ -1,0 +1,35 @@
+{
+  "written_utc": "2026-09-30T10:36:39+00:00",
+  "osm_host": "overpass.kumi.systems",
+  "osm_bbox": [
+    44.8,
+    -93.4,
+    45.1,
+    -93.05
+  ],
+  "as_of_date": "2026-09-30",
+  "files_utc": {
+    "food_inspections.json": "2026-09-30T10:35:34+00:00",
+    "city_boundary_tiger.geojson": "2026-09-30T10:35:30+00:00",
+    "county_subdivisions_tiger.geojson": "2026-09-30T10:35:31+00:00",
+    "osm_rail.json": "2026-09-30T10:36:39+00:00"
+  },
+  "sources": {
+    "food_inspections": {
+      "endpoint": "https://services.arcgis.com/afSMGVsC7QlRK1kZ/arcgis/rest/services/Food_Inspections/FeatureServer/0/query",
+      "fields": [
+        "OBJECTID",
+        "HealthFacilityIDNumber",
+        "FacilityCategory",
+        "BusinessName",
+        "FullAddress",
+        "City",
+        "ZipCode",
+        "DateOfInspection",
+        "InspectionIDNumber",
+        "Latitude",
+        "Longitude"
+      ]
+    }
+  }
+}

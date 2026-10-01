@@ -5,6 +5,21 @@ and 2026-09-29 (the Band C audit; this brief).** Band B, a reduced-bucket
 page (owner, 2026-09-29): food plus grocery, **no personal services**. Run
 `python scripts/brief_check.py minneapolis` before writing code.
 
+> **Measured at the build (2026-09-30), where it corrects the table below.**
+> **15 stations inside the city, not 16**: Blue 11 of 19, Green 9 of 23 (39%)
+> once Target Field's two platforms and "US Bank Stadium" / "U.S. Bank
+> Stadium" fold; gate 3 exact on 19 and 23 (Wikipedia; Metro Transit's pages
+> state no count). The `tram` relation CHCL is the Minnesota Streetcar
+> Museum's Como-Harriet heritage line, not the airport's people mover; not
+> drawn either way. Caterers are **out** (R1), not food. Region is `"United
+> States East"` (Chicago's). **1,793 storefronts** (food 1,401, food shops 392)
+> after a name test inside RESTAURANT and GROCERY (contract caterers, hospital
+> and campus dining, vending, hotels, venues, pharmacies, two cabarets: 161)
+> and 74 second licences of one shop folded; 42 have no point in any row;
+> 35.7% in the rings. CC0 read by the licence-read agent: nothing to display.
+> The brief-check's OSM claim failed on the day on an Overpass 504, an outage;
+> the fetch succeeded on the second mirror.
+
 | | |
 |---|---|
 | Rail | METRO **Blue** and **Green** light rail: **16 stations inside the city** (OSM), 618 m median gap; every 12–15 min. The airport's people mover (OSM `tram` CHCL) is not drawn |

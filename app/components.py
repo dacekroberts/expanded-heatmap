@@ -717,6 +717,7 @@ _NOTICES = [
      "municipal boundaries used to select them, "
      "Houston's METRORail Red, Green and Purple Lines and their stations, "
      "Ottawa's O-Train Lines 1, 2 and 4 and their stations, "
+     "Minneapolis's METRO Blue and Green Lines and their stations, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "

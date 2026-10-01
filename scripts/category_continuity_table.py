@@ -1679,6 +1679,35 @@ COLUMNS["ottawa_inspection"] = {
 }
 
 
+COLUMNS["minneapolis_inspection"] = {
+    **{rid: absent("a food-inspection register: food facilities only") for rid in (
+        "funeral", "personal_catchall", "sex_shop", "massage_commercial", "massage_regulated",
+        "car_dealer", "vehicle_repair", "gambling", "pawnbroker", "vet", "parking", "repair",
+        "optician")},
+    "no_counter_food": [
+        loc("CATERER", "caterers, by the register's own type"),
+        loc("INSTITUTION", "schools, childcare and care homes, by type"),
+        loc("Institutional kitchen", "contract caterers' workplace cafes, hospital, school, church and "
+                                     "campus dining, event caterers, commissary kitchens, by name")],
+    "adult_hostess": [loc("Adult venue", "venues the register's own name calls a cabaret")],
+    "petrol_station": [loc("GROCERY", "forecourt shops licensed as groceries (Holiday Stationstore)")],
+    "nightclub": [loc("RESTAURANT", "bars and clubs licensed for food")],
+    "nonstore": [loc("Vending", "vending routes (Canteen Vending), by name")],
+    "lodging": [loc("Hotel", "hotels' kitchens and pantry shops, by name"),
+                loc("BOARD AND LODGING", "board and lodging houses, by type")],
+    "recreation": [loc("Recreation venue or club", "theatre, cinema, arena and bowling concessions, "
+                                                   "event centres, gyms, private clubs, by name")],
+    "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register, "
+                       "which is where the module's pharmacy strings are located",
+                       ignore=("Pharmacy", r"\bPHARMACY\b")),
+    "pharmacy_food_register": [loc("Pharmacy", "pharmacies licensed as groceries, by name")],
+    "health_food": [loc("GROCERY", "health-food shops licensed as groceries (General Nutrition Center)")],
+    "mobile_unit": [loc("FOOD TRUCK", "food trucks"), loc("FOOD CART", "food carts"),
+                    loc("LIMITED MOBILE", "limited mobile units"),
+                    loc("MRKTVENDOR", "a farmers' market vendor"), loc("VENDOR", "vendors")],
+}
+
+
 # ---------------------------------------------------------------------------
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
