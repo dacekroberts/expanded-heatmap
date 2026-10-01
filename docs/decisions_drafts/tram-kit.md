@@ -4,6 +4,119 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Odense built on tram-build; osm_tram.py written, its Aarhus control passing
+
+- **`pipeline/osm_tram.py` written to the tram-city skill's section 4
+  contract (commit 17f906c on `tram-build`), and its control passes:
+  `scripts/osm_tram_control.py` reproduces Aarhus's `stations.csv` exactly**
+  on Aarhus's cache: 20 stations, the same names, lines and kommune, and
+  coordinates within 1e-9 degrees. It is Aarhus's `stop_rows()` generalised:
+  - `select_relations` keeps relations on ref + route (+ operator), and exits
+    on any relation that is neither kept nor in `not_drawn`, on a stale
+    `not_drawn` id, and on a ref with no kept relation. It is also the
+    lines-only mode.
+  - `stop_rows` takes stop members tagged `stop_position` or `tram_stop`,
+    unions a ref's relations, takes `station_add` by node with its expected
+    name, and applies aliases whose two spellings must both be present.
+  - `collapse` is Aarhus's name collapse at 200 m.
+  - `split_by_places` scopes over a union of polygons.
+
+  Aarhus's own step 1 was not rewired: its output is the independent answer
+  the control compares against. The signature, return shape and branch went
+  to the Czech kit (which was waiting on them) and to the France build
+  session. Staging, the app/chrome owner while no third window runs, was told
+  before the file was written.
+- **Odense built: 25 stations, 2,834 storefronts placed (98.4%).**
+  - **Rail.** OSM's two `route=tram` relations (ref L, operator Keolis)
+    carry 24 stop names on 48 stop positions. SDU Syd/Hospital Nord was added
+    by its two direction nodes (7942163365, 7942163366), as the approved
+    call. Gate 3 ran against the operator's figure: 25 against 25, the
+    operator's 26 stops less Hospital Syd. Every station is in Odense Kommune
+    (304.7 km² as OSM draws it). The line is drawn whole with
+    `load_osm_line_shapes`.
+  - **Spacing.** The median gap measured 430 m, not the brief's 441, and
+    holds the halved rings; step 1 stops outside 380-500 m.
+  - **Stray node.** Idrætsparken's node 9034508024 is also on no relation.
+    It is a second stop position 10 m from Idrætsparken's member node, not a
+    station, so it was left alone.
+  - **Businesses.** CVR generation 505 through Aarhus's chain: 3,208 rows in
+    divisions 47/56/96 and 221 structurally excluded, leaving 2,987. `969900`
+    was dropped (108 rows, 3.6%, 84% personally owned against 46%), leaving
+    2,879, of which 2,834 were placed. The screen of 2026-09-27 counted 210
+    structural exclusions and 2,998 storefronts. The build's filter is the
+    shared one, so the build's figure stands.
+  - **Rings.** 1,154 storefronts sit within a ring (40.7%), in-ring
+    R/F/P 603/343/208.
+- **Hospital Syd is a watch item, not a row in `excluded_stations.csv`.**
+  The approved call was "out until it opens in 2027". Listing it failed
+  `check_scope_disclosure.py`: What Is Excluded has no category for a stop
+  not yet in service, and adding one is an `app/station_scope.py` change and
+  an owner call. A stop that is not yet in service is not part of the
+  network, so no category is needed. Step 1's `check_not_yet_open` stops the
+  build when OSM puts Hospital Syd on a route or drops its tag. The page does
+  not mention it. **For PLAN.md: add Hospital Syd when the new OUH opens
+  (due 2027).** Rejected: a new "not yet open" category, which is new public
+  wording for one stop.
+- **The frequency sentence is left out of Odense's page.** It is optional in
+  the template (braces). Odense Letbane's own køreplan page, valid from
+  10 August 2026, states Saturday (7.5 min), Sunday (10 min) and Friday
+  evening (10 min), but no weekday figure. The brief's 7.5 minutes came from
+  the screen, so it is not stated. Rejseplanen is never read. The owner's
+  per-city interval value (sent to cleanup) can carry it later.
+- **Line colour `#b8860b` (dark goldenrod)**, this project's own, since OSM
+  records none. CIE76 74.8 from the nearest pin (Personal services);
+  `check_map_markup.py` PROBLEMS 0. Aarhus's `#30556E` was tried first and
+  scored 42.7 against Retail, under the preferred 45.
+- **Macro label.** The width measured 50.6 px in a browser tab with Google
+  Fonts' Space Grotesk. Seven built cities' widths reproduced exactly:
+  Aarhus 46.9, Prague 47.3, Oslo 29.0, Riga 29.5, Bergen 48.3, Boston 48.4
+  and Chicago 55.0. The offset is `("start", 11, 6)`: only dy 5-8 on the
+  right passes. Above the dot, the label covered Aarhus's marker and
+  overlapped Copenhagen's label; below, it overlapped Amsterdam's and
+  Berlin's. `check_macro_labels.py` PROBLEMS 0.
+- **Odense privacy verdict: publishable**, on Aarhus's precedent.
+  `check_personal_exposure.py odense` found 1,154 pins, 0 contact details
+  and 0 person-like names at a residential unit. The heuristic's 170
+  distinct person-like names were read in full: brands and chains (Arnold
+  Busck, Harald Nyborg, Magasin, ZARA) and company-form shops, cafés and
+  salons trading under a founder's name (HENRIK GUNDTOFT, Ingvard
+  Christensen, Nadja Holst). Personally owned forms are already shown by
+  address. The one bracketed hit, "GreenMind Odense (Kongensgade)", is a
+  chain branch.
+- **Three displayed notices widened to name Odense, FOR THE OWNER'S APPROVAL
+  AT REVIEW TIME** (Aarhus's were owner-approved on 2026-09-29):
+  - CVR, notice 30: "(Copenhagen, Aarhus, Odense)", "Copenhagen's, Aarhus's
+    and Odense's business premises";
+  - Klimadatastyrelsen, notice 31: "in Aarhus and Odense the points are
+    OpenStreetMap's copies of them";
+  - OpenStreetMap (rail geometry): "Odense's Letbane line and its stops, the
+    municipal boundary used to select them and the address points used to
+    place its businesses".
+
+  They sit on `tram-build` and ship only when `app/` lands.
+- **Step 2 is not a heavy job: measured peak 0.70 GB.**
+  - The gate (`scripts/heavy_job.py`) refused it first at the 5.5 GB
+    declared from Aarhus's brief: 6.9 GB available, against 5.5 + 2. That
+    "about 5 GB" was the size of the files read, not memory.
+  - It was re-run under `HEATMAP_MEMCAP_TEST_GB=4.5`, a hard cap that can
+    only lower the per-process limit. The declared 4.5 GB peak was then true
+    by construction, and was admitted.
+  - A Danish step 2 can be declared at 1 GB from now on.
+- **Page numbers by block**, agreed between sessions so the landings don't
+  collide:
+  - Band B: 76-86;
+  - France: 100-119;
+  - tram kit: 130-139 (Odense 130);
+  - Czech: 150-155.
+- **Left for the landing, not done on the branch**:
+  - README's city list (`readme_cities.py`);
+  - the master list's built counts;
+  - `map_inconsistencies.md`'s prose counts (section 6, "half the size in
+    seven cities").
+
+  Each is a shared count that every concurrent build would change on its
+  own branch, so each is set once, at landing.
+
 ### 2026-09-30 - All builds activated, with six working rules for concurrent sessions (owner)
 
 - **The owner gave the go for every build session**: Band B, the France
