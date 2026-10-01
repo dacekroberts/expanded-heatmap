@@ -4,6 +4,60 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - Daugavpils built on tram-build: all five routes, 37 stations
+
+- **Daugavpils built on Riga's layers through `latvia_register.py`.** It
+  has 37 stations, 819 storefronts, and 80.1% of them in a ring (the
+  screen: 81.5%).
+- **All nine OSM relations, refs 1-4, were kept: all five routes are drawn**
+  (the owner's overrule of call 28). Ref 3 carries three relations:
+  - route 3, Cietoksnis-Stropu ezers, one relation each way;
+  - the loop the operator's own linked page calls route 5. OSM tags it 3.
+
+  Their stops are unioned. Route 3 adds Balvu iela and Stropu ciemats.
+  Route 3's track lies almost wholly on the loop's (0.07-0.09 km off it), so
+  the loop is drawn once, labelled "Trams 3 and 5". The page states each
+  route's wait, from the brief: 1 every 10-15 min, 3 and 5 every 20-30, 2
+  and 4 about hourly.
+- **37 stations, not the brief's 38.** The brief counted "Lokomotīvju demo",
+  one direction's misspelling of Lokomotīvju depo on routes 2 and 4, as a
+  stop of its own. It is aliased.
+- **Stropu ciemats is a stop member of both route-3 relations**, but it is
+  tagged only highway=bus_stop and public_transport=platform. It was
+  accepted by node through osm_tram's new `accept_members`.
+- **There is no operator whitelist.** The relations spell the operator
+  "Daugavpils Satiksme AS" and, on route 2, "SIA". Every tram relation in
+  the box is one of the nine.
+- **Median gap 291 m: the rings are halved.** No gate 3: no operator count
+  was read.
+- **Businesses.** Food: 98 premises, 94 placed (95.9%) on VZD's address
+  register (15,221 existing addresses in the city). Shops and services: 725
+  of 956 premise groups, all placed. The screen's 722 predates the
+  2026-09-29 rule changes. Step 2's measured peak was 0.30 GB.
+- **Colours.** Riga's orange, brown and gold for 1, 2 and 4. Deep purple
+  `#4a148c` for 3 and 5: Riga's cyan scored 40.9 against Personal services,
+  and the purple scores 47.1 against the nearest pin and 78+ against the
+  other lines.
+- **Privacy verdict: publishable.** 656 pins, 0 person-like names, 0
+  contact details; no holder column is ever read.
+- **Daugavpils was also left out of Europe's zoom fit.** At 26.5° E it is
+  the easternmost European city, 0.4° east of Bucharest, so it moves
+  Europe's centre that far east. That is a front-page change that
+  deploy-verify should look at in the review batch. Its label is 73.7 px,
+  right of the dot (dy -12 to 12 pass): PROBLEMS 0.
+- **Notice 42 now reads "VZD (Riga, Liepāja, Daugavpils)"**, and the OSM
+  notice names Daugavpils's trams. Both are for the owner's approval at
+  review time.
+- **`osm_tram.py` gained two backward-compatible options** (commit 97ba25a).
+  The Czech kit takes the same file.
+  - `station_add` accepts a tuple of refs. This was the Czech kit's
+    request, for Plzeň's Jízdecká and U Synagogy, which lines 1, 2 and 4
+    all serve.
+  - `accept_members` accepts a named stop member that has no stop tag.
+
+  The Aarhus control passes, and Odense's and Liepāja's figures are
+  unchanged.
+
 ### 2026-09-30 - Liepāja built on tram-build; Riga's step 2 lifted into latvia_register.py
 
 - **Riga's step 2 was lifted into `pipeline/countries/latvia_register.py`,
