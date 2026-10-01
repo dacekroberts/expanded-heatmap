@@ -12,8 +12,34 @@ Usage:
                                                    #   changes can affect
     python pipeline/drift_check.py --changed --list    # show them, run nothing
     python pipeline/drift_check.py --since HEAD~3  # cities affected since a ref
+    python pipeline/drift_check.py --render-only   # only each city's MAP step
+                                                   #   (see "RENDER-ONLY" below)
 
-Exit code 0 = zero drift, 1 = real drift (or a step failed).
+Exit code 0 = zero drift, 1 = real drift (or a step failed, or a city was
+refused).
+
+RENDER-ONLY (`--render-only`, 2026-09-30). A change that touches only map
+rendering (pipeline/map_common.py's drawing, theme.py) cannot change what
+steps 1-2 write to data/<city>/processed/, yet the full sweep re-runs them for
+every city - and their register reads are what make the sweep the heaviest
+job on the machine. `--render-only` runs exactly ONE step per city: the file
+named `step*_map.py` (step3_map.py in 117 cities, step4_map.py in the seven
+that have a step 3 before it). It does NOT run step3_geocode.py or
+step3_place.py: those join or geocode businesses into
+data/<city>/processed/businesses_geocoded.csv - a map INPUT, never an
+outputs/ file (checked 2026-09-30 for all seven) - and geocoding is not
+rendering. The map step still runs under the offline guard, and outputs/ is
+diffed exactly as the full check diffs it.
+
+What it ASSUMES, and the reason it is never the pre-deploy gate: that
+data/<city>/processed/ is current for the code being checked. data/ is one
+folder shared by every worktree, so processed files are whatever the last
+run of steps 1-2 (on any branch) left there; the city header prints how many
+processed files there are and when the newest was written, so a reader can
+see it. A city with no processed inputs at all is REFUSED (counted as a
+failure) rather than reported clean; a city with no map step, or more than
+one, is refused too. The baseline counts are not checked, since no map step
+emits any. `--update-baseline` with `--render-only` is refused.
 
 --changed exists because the full sweep is O(number of cities) on a gate
 that is supposed to run after every pipeline change, and the project keeps
@@ -69,6 +95,7 @@ import re
 import subprocess
 import sys
 import threading
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -171,8 +198,59 @@ def check_baseline(city: str, measured: dict, *, update: bool = False) -> bool:
     return ok
 
 
-def run_steps(city: str):
-    """Run a city's steps in order. Returns (ok, emitted_baseline_figures).
+def map_steps(city: str) -> list:
+    """A city's map-rendering step(s): `step*_map.py`. Exactly one is valid."""
+    return sorted((ROOT / "pipeline" / city).glob("step*_map.py"))
+
+
+def render_only_refusal(city: str) -> str | None:
+    """Why `--render-only` cannot check this city, or None when it can."""
+    found = map_steps(city)
+    if len(found) != 1:
+        names = ", ".join(p.name for p in found) or "none"
+        return (f"pipeline/{city}/ has {len(found)} step*_map.py files ({names}); "
+                "render-only needs exactly one. Run the full check for this city.")
+    processed = ROOT / "data" / city / "processed"
+    if not processed.is_dir() or not any(p.is_file() for p in processed.rglob("*")):
+        return (f"data/{city}/processed/ is missing or empty. Render-only re-runs "
+                "only the map step, which reads steps 1-2's output from there. "
+                f"Run the full check instead: python pipeline/drift_check.py {city}")
+    return None
+
+
+def show_processed_inputs(city: str):
+    files = [p for p in (ROOT / "data" / city / "processed").rglob("*") if p.is_file()]
+    newest = max(files, key=lambda p: p.stat().st_mtime)
+    when = datetime.datetime.fromtimestamp(newest.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
+    print(f"  processed inputs: {len(files)} file(s), newest {newest.name} modified {when} "
+          "(render-only assumes these are current)")
+
+
+def check_city(city: str, *, render_only: bool, update_baseline: bool) -> bool:
+    """One city's whole check, printed to stdout. Returns True when clean."""
+    print(f"\n=== {city} ===")
+    if render_only:
+        started = time.monotonic()
+        refusal = render_only_refusal(city)
+        if refusal:
+            print(f"  REFUSED: {refusal}")
+            return False
+        show_processed_inputs(city)
+        ran, _ = run_steps(city, only=map_steps(city))
+        ok = ran and compare_outputs(city)
+        print("\n  baseline: not checked (render-only runs no step that emits counts)")
+        print(f"  render-only: {city} took {time.monotonic() - started:.1f} s")
+        return ok
+    show_raw_inputs(city)
+    ran, measured = run_steps(city)
+    if not ran:
+        return False
+    ok = compare_outputs(city)
+    return check_baseline(city, measured, update=update_baseline) and ok
+
+
+def run_steps(city: str, only: list | None = None):
+    """Run a city's steps in order (or just `only`). Returns (ok, emitted_baseline_figures).
 
     The figures come from `##BASELINE key=value` lines a step prints via
     pipeline.baseline.emit(). Captured here because stdout already is, so a step
@@ -188,7 +266,8 @@ def run_steps(city: str):
     env = {**os.environ, "PYTHONIOENCODING": "utf-8",
            offline.NO_NETWORK_ENV: "1"}
     measured = {}
-    for step in sorted((ROOT / "pipeline" / city).glob("step*.py")):
+    steps = only if only is not None else sorted((ROOT / "pipeline" / city).glob("step*.py"))
+    for step in steps:
         print(f"\n  >> {step.name}")
         proc = subprocess.run(
             [sys.executable, str(step)], cwd=ROOT, env=env, capture_output=True, text=True,
@@ -314,6 +393,12 @@ def main():
     update_baseline = "--update-baseline" in args
     if update_baseline:
         args = [a for a in args if a != "--update-baseline"]
+    render_only = "--render-only" in args
+    if render_only:
+        args = [a for a in args if a != "--render-only"]
+        if update_baseline:
+            sys.exit("--update-baseline cannot be used with --render-only: the counts "
+                     "come from steps 1-2, which render-only does not run.")
     jobs = 1
     if "--jobs" in args:
         i = args.index("--jobs")
@@ -362,15 +447,7 @@ def main():
         # a long sweep shows progress and the output is byte-identical to what
         # this script has always produced.
         for city in requested:
-            print(f"\n=== {city} ===")
-            show_raw_inputs(city)
-            ran, measured = run_steps(city)
-            if not ran:
-                all_clean = False
-                continue
-            if not compare_outputs(city):
-                all_clean = False
-            if not check_baseline(city, measured, update=update_baseline):
+            if not check_city(city, render_only=render_only, update_baseline=update_baseline):
                 all_clean = False
     else:
         # --jobs N: cities run concurrently. Safe because each city touches only
@@ -428,11 +505,7 @@ def main():
         def one_city(city: str):
             buf = io.StringIO()
             proxy.bind(buf)          # touches only THIS thread's local
-            print(f"\n=== {city} ===")
-            show_raw_inputs(city)
-            ran, measured = run_steps(city)
-            ok = ran and compare_outputs(city)
-            ok = check_baseline(city, measured, update=update_baseline) and ok
+            ok = check_city(city, render_only=render_only, update_baseline=update_baseline)
             return city, ok, buf.getvalue()
 
         sys.stdout = proxy
@@ -451,6 +524,10 @@ def main():
                 all_clean = False
 
     print("\nRESULT:", "zero drift" if all_clean else "DRIFT or failure - see above")
+    if render_only:
+        print("RENDER-ONLY: only each city's map step ran, against data/<city>/processed/ "
+              "as it stands, which this mode assumes is current. It is not the pre-deploy "
+              "gate: run without --render-only for that.")
     if len(requested) < len(all_cities):
         skipped = sorted(set(all_cities) - set(requested))
         print(f"PARTIAL: {len(requested)} of {len(all_cities)} cities. Not checked: {', '.join(skipped)}.")
