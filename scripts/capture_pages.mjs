@@ -129,9 +129,12 @@ const TEXT = `(() => {
   walk(document, 1);
   return parts.join('\\n');
 })()`;
+// The tallest scroll height of any candidate container. querySelector() on the
+// selector list returned the OUTER frame (stAppViewContainer), which is always
+// one viewport tall, so --tall never grew (found by prose agent 3, 2026-10-01).
 const HEIGHT = `(() => {
-  const main = document.querySelector('[data-testid="stMain"], section.main, [data-testid="stAppViewContainer"]');
-  return Math.max(document.documentElement.scrollHeight, main ? main.scrollHeight : 0);
+  const els = document.querySelectorAll('[data-testid="stMain"], section.main, [data-testid="stAppViewContainer"], [data-testid="stMainBlockContainer"]');
+  return Math.max(document.documentElement.scrollHeight, ...[...els].map(e => e.scrollHeight));
 })()`;
 
 const report = {};
