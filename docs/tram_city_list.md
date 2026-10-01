@@ -1,4 +1,4 @@
-# 🟤 Tram city list — 41 cities (split from the master list 2026-09-29)
+# 🟤 Tram city list — 37 cities (split from the master list 2026-09-29)
 
 **Band T of [`docs/city_master_list.md`](city_master_list.md), in a file of its
 own** (owner, 2026-09-29), so the tram cities can be sorted and worked through
@@ -14,15 +14,15 @@ belongs in the master list's bands, not here.
 
 **The owner's final call (2026-09-29): yes to trams-only maps**, after
 the audit and its memo ("The Tram Question"). T1 can be briefed and
-built; T2 still needs each gap's verdict. Rings are sized per city and no
+built. **T2 closed on 2026-09-30** when each gap had its verdict (owner). Rings are sized per city and no
 stops are thinned (owner); the macro map gets label tiers and
 network-type colours (DECISIONS "Yes to trams-only maps").
 
 | Tier | What these cities ARE | Cities |
 |---|---|---|
-| 🟤 **T1** | **Ready if trams-only maps are approved.** All three buckets, access open, rail measured; grouped by country pipeline, which is how the build cost falls | **34** |
-| 🟤 **T2** | **Trams plus a bucket gap.** Two yeses needed: trams-only maps, and a verdict on the gap (the owner's Band B / C call) | **7** |
-| **Total** | | **41** |
+| 🟤 **T1** | **Ready if trams-only maps are approved.** All three buckets, access open, rail measured; grouped by country pipeline, which is how the build cost falls. Since 2026-09-30 also the cities that passed Band B's reduced-bucket bar from T2 | **37** |
+| 🟤 **T2** | **Trams plus a bucket gap. Closed 2026-09-30** (owner): three to T1, Utrecht to Band R, three to the discards | **0** |
+| **Total** | | **37** |
 
 **EDGE** (light rail partly built to metro standard, the owner's tag
 2026-09-27) is now a flag on a row, not a group: the rest of the EDGE group
@@ -72,7 +72,7 @@ operator's GTFS for frequency, worst daytime hour at the median stop):
 | Aarhus | 3% | 97% / 0% | L2 15 min; **L1 30 min on converted railway** | 666 m | light rail on its new tramway → A |
 | Bergen | **40%** | 58% / 3% | 7–8 min | 622 m | light rail → A |
 | Pittsburgh | 30% | 70% / 0% | Red 20 min; Blue, Silver part-day | 437 m (suburban street stops in the box) | light rail (the Buffalo rule) → C |
-| Santa Cruz–La Laguna | 4% | 0% / **96.5%** | L1 5–6 min, L2 10–12 (Metrotenerife) | 510–549 m | tram; **in T2 on its data** (below) |
+| Santa Cruz–La Laguna | 4% | 0% / **96.5%** | L1 5–6 min, L2 10–12 (Metrotenerife) | 510–549 m | tram; **discarded 2026-09-30 on placement** (57.7%, the master list) |
 
 **Hiroshima left as well, on a different ground**: MLIT's N02 × N03 puts the
 Astram Line (22 stations, an automated guideway like Kobe's drawn Port Liner)
@@ -123,7 +123,7 @@ Florence's full read.
 
 ---
 
-## 🟤 T1 — ready if trams-only maps are approved (34 cities)
+## 🟤 T1 — ready if trams-only maps are approved (37 cities)
 
 **Every one passed all three buckets on a national or city register this
 project has already built on** (the 2026-09-27 second-city screens and wave 2;
@@ -164,7 +164,9 @@ the mode is decided per city. TER is excluded in every built French city.
 | Valenciennes | T1, T2 | 12 / 48 (T2: 24%) | 514 / 412 / 192 (2.02×) | 1,027; 1,984 over 13 communes in 2 EPCIs | **Regional scope**; low interest |
 
 **🇨🇿 Czechia (6)** — ROS02 establishments, RES activity and the RÚIAN join, as
-Prague. `czechia_register.ruian()`'s coordinate control is per city now.
+Prague. **Briefed 2026-09-30**: `docs/build_briefs/` brno, ostrava, plzen, olomouc,
+liberec (Liberec (Regional), with Jablonec) and most (Most (Regional), with Litvínov); **every call and the prose approved by the owner 2026-09-30**, build order Brno, Plzeň, Olomouc, Ostrava, Liberec, Most;
+trams from OSM everywhere but Brno, whose stops come from KORDIS's CC BY feed. `czechia_register.ruian()`'s coordinate control is per city now.
 
 | City | Rail (stations in the town) | Spacing | R / F / P; restaurants × OSM | Build-time calls |
 |---|---|---|---|---|
@@ -201,9 +203,38 @@ with it, moved to T2 on 2026-09-29 (its data, not its tram).
 |---|---|---|---|
 | **Florence** 🇮🇹 | Tramvia T1 and T2: **39 stations inside the comune** (322 m); T1 keeps 22 of 26 (4 in Scandicci), T2 20 of 20. GEST's GTFS in the Regione Toscana feed, declared CC BY 4.0. T3 under construction (due end of 2026) | The Comune's layers on dati.toscana.it, declared CC BY 4.0: commercio in sede fissa, pubblici esercizi, attività estetiche, tintolavanderie. **7,355 / 3,024 / 1,673** (2.49× / 1.45× / 4.62× OSM) after dropping private clubs, internal shops, e-commerce, vending, farmers; **coordinates on 100%**, rows carry only an id and a type code (no names) | **639 food rows are exempt categories** (464 "non soggetta a requisiti comunali", 175 art. 53): Milan's *fuori piano* question (without them food is 2,385, 1.14×); Scandicci's 4 stops; a full licence read; 3,424 rows share a point |
 
+**🇨🇭 Switzerland (1), 🇸🇪 Sweden (1), 🇳🇱 Netherlands (1)** — from T2 on
+2026-09-30 (owner). Each was read against Band B's reduced-bucket bar (the
+master list); the rows below are what passed. The old T2 rows and the
+Göteborg and Zurich write-ups are kept in the history section below.
+
+| City | Network | Business, measured 2026-09-30 | Build-time calls |
+|---|---|---|---|
+| **Zurich** 🇨🇭 | 18 tram refs, all coloured, plus the Forchbahn (S18); no metro. The S-Bahn is named on the page as excluded (it fails on coverage) | `Gastwirtschaftsbetriebe` (WFS, CC0), 3,487 rows, **every row `Offen` and stamped 2026**, all with LV95 points (EPSG:2056): **food 2,325** (Gastwirtschaft 2,099 and the smaller kinds). **Partial retail (owner): 1,028 shops licensed to sell alcohol** (Kleinverkaufsstelle 954, kiosks 53, petrol stations 21), the tobacco-retail precedent of Seoul and Gyeonggi, the gap disclosed | Personal services absent, disclosed. **Measured 2026-09-30 (live OSM, Stadt relation 1682248)**: **182 tram stop names inside, 283 m median gap, so halved rings.** Stub test per line: 2 (83%), 4 (94%) and **10 (Glattalbahn, 72%)** pass, and the rest are whole. **Out as stubs: 12 (Glattalbahn, 2 of 18, 11%), 20 (Limmattalbahn, 4 of 26, 15%) and the Forchbahn S18 (light_rail, 4 of 20, 20%)**. Name S18 with the S-Bahn as excluded, which keeps `mode` tram (the tram kit's recommendation). **Refs 50 and 51** are OSM tram relations wholly inside (Auzelg – Frankental 31 of 33; Seebach – Altstetten Nord 27 of 27). Confirm at the build that they are daytime services before drawing them. **Macro legend (proposed)**: `mode` tram, `coverage` narrowed |
+| **Göteborg** 🇸🇪 | 13 tram lines, 127 stops inside Göteborgs Stad; lines 4 and 12 run on into Mölndal | `Livsmedelsverksamheter` (CC0, daily, "all active"), 5,066 rows (5,063 on 2026-09-23), lat/lon on every row: **food service 2,167** (restaurants 1,595, cafés 484…), **food shops 906 as retail** (grocers 685, health food, fish, meat, bakeries, pharmacies; New York's precedent); institutions, wholesale and transport 1,719 out; 274 with a blank `typ` to classify or drop. **The rows carry no date (owner): the page says so**, as for New York State's food stores, Milan and Surrey | Take the CSV, never the rowstore JSON (`docs/build_briefs/goteborg.md`). Personal services absent, disclosed. The stub test for lines 4 and 12. **Macro legend (proposed)**: `mode` tram, `coverage` one_bucket (food shops count as food under the two-key legend) |
+| **Den Haag** 🇳🇱 (EDGE) | 14 HTM lines plus RandstadRail E: 172 stop places; worst line tram 1, 20 of 37 (54%, over Toulouse's 52%). RET metro E keeps 4 of 23 stops in the city | **The city's own horeca permit layer**, which the 2026-09-27 screen missed: `Horeca_nieuw` layer 2 on ArcGIS Online (shown on the denhaag.nl permit map), 2,701 permits with points on all; **2,543 granted or notified**, 158 pending; **about 2,352 food premises** once event sites, sports canteens, clubhouses, coffeeshops and the like are out. Rows run to 2025; the layer was last edited 2025-05-23. Plus the BAG's **6,560 shop units** (1.75× OSM), Rotterdam's shape | **Licence read 2026-09-30: silent and ambiguous** (nothing grants or bars reuse; denhaag.nl's site terms name database rights; the layer is not on the open-data portal, whose horeca placeholder is "in onderzoek"). **The owner proceeds on Amsterdam's precedent (2026-09-30)**: credit "Gemeente Den Haag", never call the layer current or complete. Never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` (the city's own map hides all three). Never show `AANVRAGER` (34% are one-person firms): the trade name comes from `OMSCHRIJVI`, which needs its double-encoded UTF-8 repaired. Line E's 4 stops. **Brief 2026-09-30: `docs/build_briefs/den_haag.md`** (161 stops, 335 m; line E out as a stub, approved). **Macro legend**: `mode` **tram** (with E out, every drawn line is OSM `route=tram`), `coverage` **narrowed**: Rotterdam's shape, BAG shop units merge retail and personal services, as Rotterdam and Amsterdam are `narrowed` (the tram kit, 2026-09-30) |
+
 ---
 
-## 🟤 T2 — trams plus a bucket gap (7 cities)
+## 🟤 T2 — trams plus a bucket gap (0 cities; closed 2026-09-30)
+
+**Closed by the owner on 2026-09-30**, when each of its seven cities was
+read against Band B's reduced-bucket bar (the master list, "Passed on the
+reduced-bucket bar"):
+
+| Was in T2 | Verdict (owner, 2026-09-30) | On what |
+|---|---|---|
+| Zurich | **T1** | Food at register quality, current, 100% placed; alcohol-licensed shops as partial retail |
+| Göteborg | **T1** | Food service and food shops, "all active", 100% placed; undated rows disclosed |
+| Den Haag | **T1** | The city's own horeca permit layer (found 2026-09-30) plus the BAG, Rotterdam's shape; licence read pending |
+| Utrecht | **Band R** | Its portal answers 403 to this machine and to a browser; the reachable food layer is partial and cannot drop closures |
+| Santa Cruz–La Laguna | **Discarded** | Placement: the Catastro join places 57.7% |
+| Rijswijk | **Discarded** | No food source; the regional Den Haag scope is no longer needed |
+| Delft | **Discarded** | As Rijswijk |
+
+## The bucket-gap tier before its verdicts (history, closed 2026-09-30)
+
+*Kept as it stood on 2026-09-29; the verdicts are in the closed tier above.*
 
 Each needs two yeses: trams-only maps, and a verdict on its gap. Zurich,
 Göteborg, Utrecht and Den Haag moved in from Band C on 2026-09-27 (owner's

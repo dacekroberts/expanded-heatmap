@@ -20,10 +20,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**245 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-30**
 
+- [Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)](#2026-09-30---request-stops-count-as-stations-boardable_stop_ids-defaults-to-gtfs-0-2-and-3-owner)
+- [New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)](#2026-09-30---new-working-rules-a-memory-gate-for-two-heavy-jobs-decisions-drafts-overpass-pacing-pre-permitted-downloads-and-prose-owner)
+- [Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)](#2026-09-30---daugavpils-draws-its-whole-network-and-states-its-waits-the-frequency-floor-is-for-an-outlier-route-only-owner)
+- [Tram kit complete: all ten briefs checked; four last points for the owner; builds held](#2026-09-30---tram-kit-complete-all-ten-briefs-checked-four-last-points-for-the-owner-builds-held)
+- [Dallas's address-layer indemnity accepted (owner)](#2026-09-30---dallass-address-layer-indemnity-accepted-owner)
+- [Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity](#2026-09-30---zurich-göteborg-and-den-haag-briefed-for-the-tram-kit-dallass-address-layer-carries-an-open-ended-indemnity)
+- [The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in](#2026-09-30---the-13-non-french-t1-briefs-refreshed-for-the-tram-kits-the-owners-approvals-written-in)
+- [The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)](#2026-09-30---the-tram-kits-24-calls-and-its-page-text-template-approved-as-recommended-builds-still-held-owner)
+- [The Czech batch's calls and prose approved as recommended (owner)](#2026-09-30---the-czech-batchs-calls-and-prose-approved-as-recommended-owner)
+- [Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail](#2026-09-30---tram-kit-four-more-briefs-checked-new-orleans-recommended-unthinned-every-brief-so-far-takes-osm-rail)
+- [The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held](#2026-09-30---the-czech-batch-kit-a-czech-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-agreed-builds-still-held)
+- [The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held](#2026-09-30---the-tram-kit-a-cross-country-tram-city-skill-no-batch-scaffold-one-shared-osm-tram-module-with-the-czech-kit-builds-still-held)
+- [The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod](#2026-09-30---the-normandie-aggregate-read-its-tram-shapes-are-stop-to-stop-so-caen-rouen-and-le-havre-draw-from-openstreetmap-its-concédant-is-atoumod)
+- [The France batch's eight calls approved as recommended; builds go ahead (owner)](#2026-09-30---the-france-batchs-eight-calls-approved-as-recommended-builds-go-ahead-owner)
+- [The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held](#2026-09-30---the-france-batch-kit-a-france-tram-city-skill-a-batch-scaffold-20-briefs-builds-still-held)
+- [The six Czech tram cities briefed; three licence calls (owner)](#2026-09-30---the-six-czech-tram-cities-briefed-three-licence-calls-owner)
+- [Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)](#2026-09-30---wave-2-follow-ups-dallas-to-band-a-st-louis-discarded-den-haags-licence-on-amsterdams-precedent-owner)
+- [T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)](#2026-09-30---t2-closed-zurich-göteborg-and-den-haag-to-t1-utrecht-to-r-three-to-the-discards-owner)
 - [Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)](#2026-09-30---macro-legend-approved-hong-kong-and-philadelphia-one-category-builds-told-owner)
 - [Macro dots by network and fill; food shops are food; thin layers are narrowed (owner)](#2026-09-30---macro-dots-by-network-and-fill-food-shops-are-food-thin-layers-are-narrowed-owner)
 
@@ -270,6 +288,713 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-30 - Request stops count as stations: boardable_stop_ids defaults to GTFS 0, 2 and 3 (owner)
+
+- **`pipeline/stations.py` `boardable_stop_ids()` now treats pickup or
+  drop-off codes 0, 2 ("phone ahead") and 3 ("tell the driver") as boardable;
+  only 0 counted before (owner, 2026-09-30, approved in this session and in
+  the Czech kit's).** The Czech builds found it: Brno's feed codes every
+  request stop 3, and 25 of 149 tram stations, including Stránská skála and
+  Líšeňská, were being dropped as non-revenue. The Czech branch had added an
+  opt-in `boardable=` keyword. The flip keeps that exact signature, so the
+  branch merges cleanly and Brno's explicit argument stays harmless.
+- **No built map moves.**
+  - A read-only scan of the ten built cities that call the function (9
+    cached feeds, through the gate, measured peak 0.05 GB) found 2/3-only
+    stops solely on undrawn lines. Prague: 14,885, including 75 tram and 242
+    regional-rail stop ids; its map draws the metro. Amsterdam/Rotterdam:
+    1,816, buses and international trains. Paris: 144, demand-responsive and
+    evening buses. Berlin, Oslo, Bergen, Rennes, Toulouse and Marseille: 0.
+  - Eight cities were drift-checked on the new default (`heavy_job.py`,
+    measured peak 1.44 GB): zero drift.
+  - Oslo and Bergen were not re-run: with no stop the old rule dropped, the
+    function returns an identical set. Their drift check would only re-run a
+    step 2 near 5.4 GB that the change never touches.
+- Recorded as a station-related discrepancy (owner): theme 13 of
+  `docs/map_inconsistencies.md`, resolved.
+
+### 2026-09-30 - New working rules: a memory gate for two heavy jobs, DECISIONS drafts, Overpass pacing, pre-permitted downloads and prose (owner)
+
+- **The owner activated all builds and set working rules, relayed by the
+  tram kit and confirmed in the cleanup session (2026-09-30).** They are
+  written into `CLAUDE.md`, `docs/session_roles.md`, the `decisions-entry`
+  skill and `docs/rule_history.md`.
+- **Heavy jobs: at most two, each admitted by `scripts/heavy_job.py` against
+  measured available memory.**
+  - The relayed reading, two jobs whose peaks sum to 12 GB, was dropped: at
+    the time psutil showed 2.3 GB available of 15.9 GB. The apps held about
+    8 GB, and an orphaned `grep` (PID 17392, parent session gone) held
+    4.7 GB. It had ended by the next reading, 6.2 GB available.
+  - The gate is a wrapper (`run ... -- <command>`). It admits a job if fewer
+    than two are running and available memory, less what running jobs have
+    yet to claim, covers the peak plus 2 GB. It removes the entry at exit and
+    records the measured peak.
+  - The ledger is `data/_heavy_jobs.json`, shared through the `data/`
+    junction and gitignored (`data/_heavy_jobs*`). Dead pids drop on read,
+    and writes take an O_EXCL lock.
+  - A selftest (9 cases, touching nothing) runs in `check_all.py`. A smoke
+    run was admitted and measured 0.31 GB.
+  - A gate was chosen over a memory monitor: a monitor polls all day and
+    reacts after the damage.
+  - Measured peaks so far: France's SIRENE step 2 0.37 GB, the Czech
+    register control 0.37 GB.
+- **DECISIONS drafts:** build and docs sessions write
+  `docs/decisions_drafts/<session>.md`, and cleanup folds them in when the
+  owner hands them off.
+  - `check_category_continuity.py` now accepts a heading from a drafts file,
+    so an exception can cite its draft before the fold.
+  - `check_provenance.py` skips a drafts file's `item N` citations, as it
+    does DECISIONS', since several branches can claim the same notice number
+    until landing.
+- **Overpass:** one query in flight per session, one per city, and at least
+  60 s after a 504 or 429.
+- **Downloads and prose:**
+  - Sources named in a build's brief and skill may be fetched without asking,
+    with licence rows and notices as usual. A source not in the brief goes
+    to the owner first.
+  - Page text from an approved template needs no read-back in chat. A
+    sentence the template does not cover is flagged in the session's drafts
+    file and at review time.
+- **Not written as standing rules:** the tram kit's priority over the Czech
+  builds, and the owner's change of plan (no 5-hour throttle). Both are
+  session coordination, not project rules.
+
+### 2026-09-30 - Daugavpils draws its whole network and states its waits; the frequency floor is for an outlier route only (owner)
+
+- **Call 28 overruled (owner): "like with buffalo 50% of network shouldn't
+  fall if the norm is longer waits."**
+  - **What changes:** Daugavpils draws routes 1-5 (38 stop names), and the
+    page states each route's wait: route 1 every 10-15 minutes, the Stropu
+    loop 20-30 each way, routes 2 and 4 about hourly. The kit's
+    recommendation was route 1 only, 19 of 38 stops, under call 2's
+    20-minute floor.
+  - **Call 2 narrowed:** the floor now drops only an outlier route, one
+    slow route on a network that otherwise meets it (Zurich's 50 and 51 if
+    they do not run by day). It never drops a network whose norm is longer
+    waits. That is Buffalo's precedent, where the slower timetable is
+    disclosed, not disqualifying. Where the line between the two falls is
+    the owner's, brought with the share of stops the slow route alone
+    serves.
+  - **Supersedes** call 6 in "The tram kit's 24 calls and its page-text
+    template approved".
+- **Calls 25-27 approved as recommended (owner):**
+  - Zurich's tram 20 (Limmattalbahn, 4 of 26 stops inside) is out as a
+    stub;
+  - Den Haag's tram 1 (51%) is drawn to its end with the stops outside
+    listed;
+  - Den Haag's page says "**The permit data runs to 2025.** The city last
+    edited its permit layer on 23 May 2025, so premises that opened or
+    closed since then may be missing or still shown", added to the
+    template's currency paragraph.
+- **Owner's idea, sent to the cleanup session:** a per-city interval value
+  passed to the city page, so waits are shown as structured data rather
+  than written into each page's prose. It is not decided here and would be
+  an `app/` change for review time.
+
+### 2026-09-30 - Tram kit complete: all ten briefs checked; four last points for the owner; builds held
+
+- **Zurich 4/4, Göteborg 4/4, Den Haag 3/3** (`brief_check.py`). Zurich's
+  first run failed its OSM claim while two Overpass hosts were returning
+  504s, and passed on a re-run. All ten briefs now carry an owner table,
+  the approved calls and `vs_config` fields. Kansas City's and New Orleans's
+  briefs were renamed to their pipeline slugs. **Every one of the ten takes
+  halved rings** (median gaps 164-441 m) and OSM rail.
+- **The briefs confirmed the facts behind calls 18-24**, measured on live
+  OSM: the Forchbahn (20% inside) and Glattalbahn 12 (11%) are stubs, and
+  Glattalbahn 10 (72%) is drawn; Göteborg's 4 (75%) and 12 (72%) pass;
+  RandstadRail E (17%) is a stub. Den Haag's `mode` became `tram` under
+  call 22's rule, since every drawn line is OSM `route=tram`.
+- **Four points went to the owner** (handoff section 3, calls 25-28):
+  - Zurich's tram 20 (Limmattalbahn, 15% inside), which staging put out on
+    the stub rule;
+  - Den Haag's tram 1 at 51%, drawn on the 42% precedent;
+  - a currency sentence for Den Haag's horeca layer, last edited
+    2025-05-23;
+  - Daugavpils under the 20-minute floor.
+- **Daugavpils measured by the kit** (one Overpass query, 2026-09-30):
+  route 1 serves 19 of the 38 stop names. The other 19, on routes 2-4 and
+  the Stropu loop, are served only by routes that fail the floor, so the
+  approved rule halves the city's stops. It was brought to the owner as a
+  consequence, with building as approved recommended, rather than reopened
+  unasked.
+### 2026-09-30 - Dallas's address-layer indemnity accepted (owner)
+
+- **The owner accepted the open-ended indemnity in the City of Dallas's GIS
+  data disclaimer (2026-09-30: "Accept")**, for the Address Points layer the
+  Dallas build places permits on (90.0% on a sample).
+  - **The rejected alternative:** placing through the Census geocoder
+    (Sacramento's route), which was offered with its placement rate
+    unmeasured.
+  - **Precedent:** the fourth such acceptance, after Hong Kong, Sacramento and
+    Palma.
+  - **The build:** Dallas's one pre-build item is cleared. It is the only
+    Band A city, and it waits for the owner's go on builds.
+- **Files:** `docs/data_sources.md` (a new "Dallas's indemnity" subsection)
+  and `docs/city_master_list.md` (Dallas's row).
+
+### 2026-09-30 - Zurich, Göteborg and Den Haag briefed for the tram kit; Dallas's address layer carries an open-ended indemnity
+
+- **The last three T1 briefs, with the owner's pre-approved calls confirmed
+  by measurement (live OSM, 2026-09-30).**
+  - **Zurich:** 182 stops at 283 m. The Forchbahn S18 (20% inside) and
+    Glattalbahn 12 (11%) are out as stubs, as approved. Glattalbahn 10
+    passes at 72%. **Limmattalbahn 20 (15%) is out on the same rule**,
+    which was not in the kit's list. Refs 50 and 51 are drawn only if they
+    run by day. `coverage` is narrowed.
+  - **Göteborg:** 127 stops at 378 m. Lines 4 and 12 keep 75% and 72%,
+    so both are drawn to their ends, as approved. A first name pass
+    recovers about 74 of the 274 untyped rows. `coverage` is one_bucket.
+  - **Den Haag** (new `den_haag.md`): 161 stops at 335 m, on 14 tram
+    lines. RandstadRail E is out as a stub (17%), as approved, which makes
+    `mode` tram rather than light_rail. Tram 1 keeps 51%, under
+    Toulouse's 52% and over the owner's 42%. `coverage` is narrowed, and
+    the 158 pending permits are out.
+- **Dallas's AddressPoints, licence read: SILENT on reuse, with an
+  open-ended indemnity.**
+  - **The terms:** the City's GIS disclaimer (2015-12-04, now ArcGIS item
+    `115c0fe8…`; the PDF link is dead) treats any use as acceptance. It
+    requires users to "indemnify, defend, and hold harmless The City of
+    Dallas" for any use of the data.
+  - **Not on the portal:** the layer is not on dallasopendata.com.
+  - **Status:** an owner call, which blocks the Band A build until it is
+    answered.
+- **Files:** `docs/build_briefs/zurich.md`, `goteborg.md`, `den_haag.md`
+  and `docs/tram_city_list.md`.
+
+### 2026-09-30 - The 13 non-French T1 briefs refreshed for the tram kits; the owner's approvals written in
+
+- **All 13 briefs now open with a "For the owner, with the build" table**
+  (Brest's shape), giving `mode`, a literal `coverage`, scope, lines, rings
+  and each call.
+  - **`vs_config` fields** (mode, coverage, scope, crs, and obec codes for
+    the Czech six) sit on each brief's CRS check, so `brief_check.py
+    --vs-config` holds a build to them.
+  - **The approvals are written in:** the Czech batch's calls (owner, bd9a083)
+    and the tram kit's 24 (owner, cdee504).
+  - **Checks:** every brief passes, re-run where Overpass timed out.
+- **Measured for the kits (2026-09-30):**
+  - **Daugavpils's headways** (worst daytime hour one way, the operator's
+    timetable read for headway only): route 1 4–6 an hour; routes 3 and 5,
+    one loop, 2–3 each; route 2 0–3; route 4 1. Under the approved 20-minute
+    floor, **route 1 only** is drawn.
+  - **Brno's stations** are the feed's 149 parent stations, 147 inside the
+    city. The tram list's 146 was the screen's.
+  - **The Jablonec and Litvínov RÚIAN controls:** 12188018 and 5150507,
+    against OSM.
+  - **New Orleans:** 38.1% of licences within 0.3 mi with every stop kept,
+    37.2% thinned at 400 m, so no thinning (approved).
+  - **Zurich** (live OSM, for the tram list): 182 stops at a 283 m median
+    gap. Glattalbahn 12 (11%), Limmattalbahn 20 (15%) and the Forchbahn S18
+    (20%) are stubs, while 10 keeps 72%. Refs 50 and 51 are wholly inside.
+- **Corrections:**
+  - **Regions:** the US three take "United States East" (Kansas City, New
+    Orleans) and "United States West" (Tucson), not "North America".
+  - **File names:** `kansas_city.md` and `new_orleans.md` renamed to match
+    their pipeline slugs.
+  - **Coverage:** Latvia and Den Haag are `narrowed`, Rotterdam's and Riga's
+    merged shape.
+  - **Palette:** the dangling "(below)" references now point to
+    `line_colour_search.py`.
+  - **Name:** "Most (Regional)" (owner).
+
+### 2026-09-30 - The tram kit's 24 calls and its page-text template approved as recommended; builds still held (owner)
+
+- **Owner: "Agree with recommended options for all"**, covering the 24 calls
+  in `docs/handoff_tram_kit_2026-09-30.md`, the trams-only page-text
+  template among them.
+  - **The template** is now section 6 of the `tram-city` skill. It is
+    France's structure with the rail from OpenStreetMap. It adds a
+    one-bucket or narrowed paragraph, a currency paragraph (Kansas City's
+    data date, Göteborg's undated rows) and New Orleans's
+    ring-band sentence.
+  - **A route is drawn only if it runs at least every 20 minutes by day**
+    (Buffalo, the slowest drawn). A stop served only by slower routes is
+    listed as infrequent. This decides Daugavpils's hourly routes once
+    their headways are read.
+  - **No city on the tram list is thinned**: New Orleans keeps all 110
+    stops, against the handoff's named exception.
+  - **Coverage**: Daugavpils, Liepāja and Den Haag are `narrowed`
+    ("Merged"), overriding the tram list's `full` for Den Haag. Odense is
+    `mode` `tram`.
+  - **The per-city data calls**: Kansas City keeps 2025-26 licences, drops
+    fee codes with the count shown, and withholds personal `dba_name`s.
+    Tucson withholds `ACC_NAME` for personal ownership types. New Orleans
+    drops event vendors and home offices. Florence keeps its exempt food
+    rows on Milan's *fuori piano* precedent, and is commune-only.
+  - **The line calls**: Zurich's Forchbahn and Den Haag's RandstadRail E
+    are left out. The Glattalbahn and Göteborg's Mölndal lines take the
+    stub test. Göteborg's blank-`typ` rows are classified by name or
+    dropped. Den Haag's pending permits are out.
+- **Calls 18-24 (Zurich, Göteborg, Den Haag) were approved before their
+  briefs landed**, so a brief whose measurement changes the facts behind
+  one sends that call back to the owner.
+- **Builds stay held**: the approval covers the calls, not the go. The kit
+  is complete apart from checking those three briefs when staging lands
+  them.
+### 2026-09-30 - The Czech batch's calls and prose approved as recommended (owner)
+
+- **Owner: "I approve all recommended approaches to the calls", then "and
+  prose"**, for the nine calls the Czech kit put after "The Czech batch kit".
+  - **Colours:** the five OSM cities (Ostrava, Plzeň, Olomouc, Liberec and
+    Most) use the project's own palette, from `scripts/line_colour_search.py`
+    with evenly spaced target hues. Brno keeps its feed colours.
+  - **Ostrava's line 5 is left out.** 3 of its 10 stops are in the city, and
+    leaving it out costs Poruba,koupaliště and Krásné Pole.
+  - **Liberec is "Liberec (Regional)", with Jablonec nad Nisou.**
+  - **Most is built last, as "Most (Regional)"**, covering Litvínov. The
+    brief's "Most and Litvínov (Regional)" was the rejected name; the page
+    names Litvínov in its scope sentence.
+  - **Brno's H4 and P1 are left out.**
+  - **`mode` `tram` and `coverage` `full`** for all six.
+  - **OSM stops collapse by name** at the mean within 200 m (Aarhus's rule);
+    Brno's stations are the feed's parents.
+  - **The build order** is Brno, Plzeň, Olomouc, Ostrava, Liberec, Most.
+- **The prose is approved word for word.** It covers the page-text template
+  and the new "KORDIS JMK (Brno)" notice. It also extends the ČSÚ and ČÚZK
+  notice titles to each Czech city as it lands, with their text unchanged.
+  `.claude/skills/czech-tram-city/SKILL.md` sections 6 and 7 carry it, and
+  any departure is an owner call.
+- **Not taken as the go on builds.** The approval covers the calls and the
+  prose; the handoff asks for an explicit go before any Czech city is
+  scaffolded, so builds still wait for it. When it comes, they run on a build
+  branch, and `app/` lands at review time.
+
+### 2026-09-30 - Tram kit: four more briefs checked; New Orleans recommended unthinned; every brief so far takes OSM rail
+
+- **Florence 4/4, Kansas City 3/3, New Orleans and Tucson** (see the handoff)
+  were checked against the `tram-city` skill. **All seven landed briefs take
+  their rail from OpenStreetMap**: Kansas City because RideKC's GTFS is barred
+  (owner, 2026-09-30, site terms restricting schedules), the rest because the
+  feed declares no licence or is not needed for geometry. That settles the
+  shared `pipeline/osm_tram.py` beyond doubt. The skill's "three to five"
+  is now seven of ten, and it adds a contract point: relations with no stop
+  members go into `NOT_DRAWN`, as New Orleans's 46 and 49 and Florence's T3
+  and T4 relations need.
+- **New Orleans: no thinning recommended, against the handoff's named
+  exception.** Its brief keeps all 110 stops (164 m median). The handoff
+  had named it the one case for the street-stop filter. But that filter's
+  own shape test (`docs/sub_transit_line_filters.md`, "When this
+  applies") is a central corridor with sparse stations plus dense surface
+  branches, and New Orleans is uniformly dense with no corridor. Thinning
+  there would also put businesses a block from a stop outside the rings.
+  Put to the owner as call 13; the alternative is `thin()` at about 400 m.
+- **Kansas City's median gap is 413 m** over OSM's 19 stops (the brief), not
+  the screen's ~560 m mean, so every city measured so far takes halved rings.
+- **Staging told:** the three US briefs give the region "North America",
+  which `app/cities.py` does not have ("United States East" for Kansas City
+  and New Orleans, "United States West" for Tucson); and the hyphenated
+  brief names do not match the pipeline slugs `--vs-config` imports.
+
+### 2026-09-30 - The Czech batch kit: a czech-tram-city skill, no batch scaffold, one shared OSM tram module agreed; builds still held
+
+- **The kit is written; nothing was built.** This covers handoff sections 1 and 2
+  (`docs/handoff_czech_batch_2026-09-30.md`), and the skill is
+  `.claude/skills/czech-tram-city/SKILL.md`. No city was scaffolded, no
+  pipeline step was run and nothing was written to `app/`. `brief_check.py`
+  on the six briefs: 23 of 23 claims hold (Plzeň's OSM claim on a second
+  run, after both Overpass mirrors timed out on the first).
+- **No batch scaffold script, on the measurement.** Of the 39 constants in
+  Prague's `config.py`:
+  - about 21 would be identical in all six Czech tram configs (the paths,
+    the halved rings, the taxonomy, the catch-all rule, `mode` and
+    `coverage`);
+  - about 8 differ per city and are already in the briefs (the slug, the
+    obec codes, the RÚIAN controls, the CRS, the scope, the lines, the query
+    box), which is about 48 typed values in all;
+  - about 10 exist only on build day (relation ids, colours, per-line
+    counts, gate 3, the boundary area, the storefront box).
+  France's script paid because it computed station counts, medians and
+  scope from twenty screen tables. Here those figures are in the briefs, and
+  step 1 re-measures them. `scaffold_city.py` already writes the rest and
+  derives Ostrava's 34N from the longitude. So the skill carries a config
+  template and a sheet per city instead, and `brief_check.py --vs-config`
+  diffs the typed values against the brief. Staging was asked to add the
+  mappings (`OBEC_CODES`, `CRS_PROJECTED`, `SCOPE`, `MAP_MODE`,
+  `MAP_COVERAGE`).
+- **One country-neutral `pipeline/osm_tram.py`, agreed with the tram kit
+  session.** Five Czech cities and several of the tram kit's ten take their
+  trams from OSM, so one module serves both kits rather than one copy each.
+  - **Who writes it:** whichever OSM tram build goes first, from Aarhus's
+    `stop_rows()`. The control is Aarhus's inputs reproducing its
+    `stations.csv`, and the app/chrome role is told first.
+  - **The contract in both skills:** every relation is kept or placed in
+    `NOT_DRAWN` by id. A line's stops are the union of its relations. Stop
+    members may be tagged `stop_position` or `tram_stop`, and `STATION_ADD`
+    takes a node id. Stops collapse by name at the mean within 200 m. Scope
+    can be a union of polygons, the operator filter is optional, and a
+    lines-only mode serves Brno.
+  - **Rejected:** France's never-a-mean rule for OSM stations. It came from
+    the French portal's Conditions Particulières on ODbL feeds, which do not
+    reach OSM or Czechia.
+- **Brno's stations are the feed's own `parent_station` rows**, not a name
+  collapse. In the live KORDIS feed, all 329 platforms the 11 regular lines
+  serve have a parent: 149 stations, no two sharing a name. That is Prague's
+  shape. Staging was asked to change the brief's "collapse platforms by
+  name". **All 11 feed colours pass `check_line_colours` as published.** Line
+  6's `0777C1` is closest to the pins, at 13.2 from Retail, and is recorded
+  rather than moved. OSM's Brno relations carry all 11 refs and the same
+  colours, so the geometry matches the feed by ref.
+- **The two-obec change to `czechia_register.py` is specified, not made.**
+  Liberec (Regional) and Most (Regional) need `OBEC_CODES` and a RÚIAN
+  control per file. The change is made at the first Czech build, with
+  Prague's step 2 and `drift_check.py prague` as the control. It is shared
+  code and a heavy job, so it is build work, held with the builds.
+- **Found in the briefs and sent to staging** (the briefs are staging's):
+  - five briefs point to a palette section "below" that does not exist;
+  - Brno's station count is 147 in the brief, 146 in
+    `docs/tram_city_list.md`, and 149 parents network-wide;
+  - Ostrava had 33 relations on the day, where the brief says 34;
+  - Jablonec's and Litvínov's RÚIAN controls are still unmeasured.
+- **The page-text template was drafted in chat for the owner**, as France's
+  was. The skill's section 7 is marked pending, and no Czech page text is
+  written until it is approved.
+### 2026-09-30 - The tram kit: a cross-country tram-city skill, no batch scaffold, one shared OSM tram module with the Czech kit; builds still held
+
+- **Wrote `.claude/skills/tram-city/SKILL.md` for the ten T1 cities that
+  are neither French nor Czech** (`docs/handoff_tram_kit_2026-09-30.md`).
+  They span seven countries, one to three per country, so it is one
+  cross-country skill rather than a country skill. It carries what they
+  share: the owner's trams-only calls, rings by the spacing rule, no
+  thinning except New Orleans's street-stop filter, the light-rail test and
+  `mode`, rolling feeds, OSM rail, the currency rule, `coverage`, and the
+  page-text parts. A sheet per city names its built template (Aarhus, Riga,
+  Milan and Rome, Stockholm, Rotterdam, a US register city). Nothing was
+  scaffolded or built, and nothing touched `app/`.
+- **No batch scaffold, on the measurement.** The ten copy seven different
+  template configs (153 to 304 lines each), and Zurich has none (a new
+  country). The largest group sharing one business config is Latvia's two;
+  the US three have three different registers. Beyond `scaffold_city.py`,
+  which already writes the config, step 3, the page and the `cities.py`
+  entry with `--mode`, a batch script could write only the halved ring
+  edges and labels (2 lines in about 9 cities) and two CRS overrides
+  (Odense `EPSG:25832`, Zurich `EPSG:2056`). That is about 20 lines of hand
+  edits, against France's 675-line script for 20 cities on one config
+  shape. So each city runs `scaffold_city.py` and copies its template.
+- **The code that does repeat goes into shared modules at the first build
+  instead.** The OSM tram step 1 is needed by three to five of these ten
+  (Odense, Daugavpils, Liepāja, perhaps Zurich and Göteborg) and by five of
+  the six Czech cities. **Agreed with the Czech kit: one
+  `pipeline/osm_tram.py`**, written by whichever OSM tram build goes first.
+  It is Aarhus's `stop_rows()` generalised:
+  - `STATION_ADD` by node (Odense's SDU Syd/Hospital Nord, Liepāja's
+    Brīvības iela and Klaipēdas iela);
+  - `tram_stop` or `stop_position` members accepted;
+  - an optional operator filter;
+  - every matching relation kept or listed in `NOT_DRAWN`;
+  - several relations per ref;
+  - a union of scope polygons;
+  - a lines-only mode.
+
+  Its control is Aarhus's inputs reproducing Aarhus's `stations.csv`.
+  Latvia's step 2 is lifted from Riga's into
+  `pipeline/countries/latvia_register.py` at the first Latvian build, with
+  Riga's drift check as the control. Both modules are shared paths, so the
+  app/chrome role is told first. Rejected: a batch script (above), and
+  copying Aarhus's 293-line step 1 per city, the shape
+  `france_register.py` exists to prevent.
+- **OSM stations collapse at the name mean, Aarhus's rule.** France's
+  never-a-mean rule came from the French portal's ODbL conditions for the
+  feeds, so it applies here only to an ODbL GTFS feed.
+- **Brief checks, 2026-09-30:** Odense 2/2, Daugavpils 4/4, Liepāja 4/4.
+  Liepāja's first run was 3/4, with Overpass mirrors disagreeing on the
+  relation count (1 against 2): a host problem, which passed on re-run.
+- **Staging asked for** a Brest-style "For the owner, with the build"
+  table in every brief, and literal `coverage` values: the Latvian briefs
+  say "as Riga's", and Riga is `narrowed`, "Merged". Also asked for:
+  - Den Haag's `coverage`: the tram list proposes `full`, but Rotterdam,
+    its shape, is `narrowed`, "Merged";
+  - Daugavpils's per-route headways (the screen had routes 2-4 hourly);
+  - Zurich's Forchbahn, its Glattalbahn stub test and refs 50 and 51;
+  - New Orleans's in-ring share with and without the street-stop filter;
+  - Kansas City's median gap and colour;
+  - `vs_config` fields on the GTFS briefs.
+- **The trams-only page-text template is drafted in chat for the owner, not
+  written to the skill**, which lists its parts until the owner approves
+  it.
+### 2026-09-30 - The Normandie aggregate read: its tram shapes are stop-to-stop, so Caen, Rouen and Le Havre draw from OpenStreetMap; its Concédant is Atoumod
+
+- **The approved `licence-read` of "Agrégat des réseaux urbains et
+  interurbains de Normandie"** (NAP 5ced52ed8b4c4177b679d377) found a data
+  fact first. **Every tram shape in it is an `AUTO_` shape whose points are
+  exactly the trip's stops**: straight lines between stops, not track. The
+  agent found it on the 2026-09-27 copy, and it was confirmed on 2026-09-30's
+  copy: Rouen's métro 20 of 20, Le Havre's A and B 9 of 9, Caen's T1 25 of 25,
+  T2 17 of 17 and T3 15 of 15. Its buses carry real `CALC_` shapes.
+- **So Le Havre takes its geometry from OpenStreetMap**, the fallback the
+  owner approved, and uses nothing from the aggregate. Its LiA stops equal
+  LiA's own ODbL feed to 5 decimals, so it adds nothing. That makes the one
+  ambiguity the read found moot: whether LiA's part of an aggregate declared
+  LO 2.0 stays ODbL (Atoumod's legal notice says partners keep their data).
+  **Caen and Rouen also draw their lines from OpenStreetMap**, a builder's
+  call on the same grounds as Montpellier and Strasbourg, whose feeds have no
+  shapes. Their stations still come from the aggregate.
+- **The Concédant is Syndicat mixte Atoumod** (SIREN 200052488; Le Havre
+  Seine Métropole, Caen la Mer, Métropole Rouen Normandie and the Région are
+  among its members). It is not the Région Normandie, as the kit's briefs had
+  said, and not Cityway, the exporter named in `feed_info.txt`. Caen and
+  Rouen: **PERMITTED WITH CONDITIONS** under LO 2.0. The credit names
+  Atoumod and the date of last update, taken from the data.gouv resource's
+  `last_modified` at fetch (`feed_info.txt` has none). No logos; own colours.
+  The briefs, the skill and the scaffold's notes are corrected.
+
+### 2026-09-30 - The France batch's eight calls approved as recommended; builds go ahead (owner)
+
+- **Owner: "approved, all eight as recommended"**, the list the kit put
+  after "The France batch kit". **The scope rule** stands: under half of the
+  worst line's stations in the commune goes regional. So Nantes is regional,
+  with Bordeaux, Grenoble, Rouen and Valenciennes. **Rouen's `mode` is
+  `light_rail`**, and its page's second sentence reads "Rouen's métro is a
+  light rail running mostly on the street, so every stop gets rings". **On a
+  Licence Ouverte feed only, a same-name pair** (case and accents ignored)
+  within 150 m keeps its first row, never a mean or a rename; ODbL feeds stay
+  pure extracts (Bordeaux's five pairs, Caen's one). **Brest's cable car is
+  drawn** on Toulouse's Téléo precedent: 41 stations, 39 in the commune, the
+  page saying "two tram lines and the cable car". **Nice's route B is
+  drawn.** **Le Havre's geometry comes from the Normandie aggregate** after a
+  `licence-read`, sent the same day, with OpenStreetMap as the fallback.
+  **Valenciennes is built last.** **Builds go ahead in landing groups**
+  (`docs/review_time.md`).
+- **The builds run in the France kit's worktree on a build branch**, never
+  pushed to master, since landing `app/` is deploying. Docs, skills and
+  scripts still go to master on their own commits. The skill, the scaffold
+  script and the 20 briefs now carry the approvals.
+
+### 2026-09-30 - The France batch kit: a france-tram-city skill, a batch scaffold, 20 briefs; builds still held
+
+- **The kit is written; nothing was built.** Handoff section 1
+  (`docs/handoff_tram_batch_2026-09-29.md`): `.claude/skills/france-tram-city/SKILL.md`,
+  `scripts/scaffold_france_batch.py` (tested with `--dry-run` and
+  `--preview-dir` only; a real run refuses without `--go`), and
+  `docs/build_briefs/<slug>.md` for the 20 cities (Angers held). Every brief
+  passes `brief_check.py`: 146 of 146 claims. No city was scaffolded, no
+  pipeline step run, nothing written to `app/`.
+- **Every feed was read live on 2026-09-30**, and the read found what the
+  screen had not recorded. **Strasbourg's feed has no `shapes.txt`** (with
+  Montpellier and Le Havre, three of 20 need geometry from elsewhere; OSM
+  through `osm-rail` is recommended). **Brest's feed carries a cable car**
+  (route C, `route_type 6`) and **two fictitious stops**, `FIC_LIB1/2`, track
+  switches marked boardable on 40 of 1,038 stop_times; they are excluded as
+  Edmonton's garages were. **Nice has a sixth tram route, B** (Aéroport T2 -
+  CADAM, 6 stops). **Dijon's two lines share one colour.** **The Normandie
+  aggregate carries LiA's lines with shapes** under LO 2.0, a candidate
+  geometry for Le Havre that needs its own licence read first, because it
+  republishes LiA's ODbL data. Astuce's own host refused connections again,
+  so Rouen stays on the aggregate.
+- **Station tables re-measured under the owner's pure-extract rule** (the
+  parent's own row, else the first platform in `stops.txt` order per
+  unchanged name, never a mean), written to the screen folder as
+  `stations_pure_2026-09-30/`, which the scaffold reads before the screen's
+  own `stations/`. The screen's collapse differed: Montpellier line 3 29
+  stations, not 36; Bordeaux 140, not 135; Brest 39, not 41. The kit
+  applies the rule to every French feed, not only the ODbL ones, pending
+  the owner's call on Licence Ouverte same-name pairs (Bordeaux's five,
+  Caen's one), rather than a looser rule for 16 feeds and a strict one for
+  three.
+- **Scope rule proposed, not decided**: under half of the worst line's
+  stations in the commune goes regional, half or more stays commune-only.
+  It fits Toulouse (52%, commune) and Lille (Métro 2 43%, regional). It
+  makes Bordeaux, Grenoble, Rouen, Valenciennes and **Nantes (48.5%)**
+  regional; Nantes is the one it decides, and the brief puts both sides.
+  **Rouen's `mode` proposed `light_rail`**: its feed types it metro, and the
+  page template's "has no metro" sentence needs one owner-approved change
+  for a line called "Métro". Every other city is `tram`, and all 20 are
+  `coverage` `full`.
+- **The scaffold writes configs and a thin step 2, not step 1 or the
+  fetch.** Twenty copies of Rennes's 240-line step 1 is what
+  `france_register.py` exists to prevent, and Rennes's step 1 averages a
+  name group, which the pure-extract rule forbids. The skill has the first
+  batch build write a shared `pipeline/countries/france_tram.py`. Brief
+  files use the pipeline slug (`le_havre.md`, not `le-havre.md`), so
+  `brief_check.py le_havre --vs-config` reaches `pipeline.le_havre.config`.
+  Each brief's licence check carries the proposed scope, mode and coverage
+  as `vs_config` fields.
+- **`brief_check.py`: a cached GTFS zip older than 7 days is refetched, and
+  `stop_times.txt` is read in chunks filtered by trip.** The first enforces
+  the owner's rolling-feed rule: a brief checked at build weeks from now must
+  read that day's feed, not this session's cache. The second keeps Nantes's
+  579 MB `stop_times.txt` from being read whole. Edmonton's brief re-ran
+  9 of 9 after the change.
+### 2026-09-30 - The six Czech tram cities briefed; three licence calls (owner)
+
+- **Briefed Brno, Ostrava, Plzeň, Olomouc, Liberec (Regional) and Most +
+  Litvínov** (`docs/build_briefs/`, each brief-check passing: 6/6, 3/3, 3/3,
+  3/3, 4/4 and 4/4). All six are on Prague's national chain, placed 100%
+  through RÚIAN, with ROS02 dated 2026-08-31.
+  - **Rings:** every city takes halved rings under the owner's spacing
+    rule. The median gaps run 294–514 m.
+  - **RÚIAN controls:** each config's coordinate check was measured
+    against OSM or the building's own coordinates. Brno used the New Town
+    Hall, Ostrava the Magistrát at 30. dubna 35, Plzeň náměstí Republiky
+    1, Olomouc Horní náměstí 583, Liberec its town hall and Most Radniční
+    1/2. Jablonec's and Litvínov's are left to the build, after Overpass
+    timeouts.
+  - **Ostrava** is in **UTM 34N**, not 33N: 18.29° E.
+- **Brno's tram feed: KORDIS's own CC BY 4.0 grant, and the file is
+  fetched from `kordis-jmk.cz` (owner).**
+  - **The rejected reading:** data.brno.cz's retired 2021 licence page,
+    which adds a keep-the-licence clause and a resale ban.
+  - **Line geometry** comes from OSM, since the feed has no `shapes.txt`.
+  - **Line colours** come from the feed's `route_color`.
+  - **H4 and P1** (heritage and event services, no weekday trips) are
+    recommended out.
+- **Olomouc's trams come from OSM (owner).** DPMO's feed declares nothing.
+  Permission would rest on a reading of zákon 106/1999 §4b, and the feed's
+  colours are all white.
+- **Plzeň's PMDP feed was read: PERMITTED.** It contradicts itself (CC BY
+  in the description, no-rights terms on the distribution), and both
+  permit use. It has no colours and no shapes, so OSM draws the lines and
+  the feed is at most a stop-name cross-check.
+- **Long Beach's breach-only indemnity was accepted (owner)**, as
+  Hong Kong's, Sacramento's and Palma's were. The licence is an express
+  grant in the MapsLB Terms of Use.
+- **Open calls left in the briefs:**
+  - **Line colours:** OSM tags none in the five OSM cities, so a chosen
+    palette is needed (Le Havre's precedent).
+  - **Ostrava's line 5:** a suburban line with 3 of 10 stops in the city;
+    leaving it out is recommended, which costs two stops.
+  - **Liberec's scope:** with Jablonec is recommended; Liberec alone
+    passes at 67%.
+  - **Most + Litvínov:** 1,030 storefronts; building it last is
+    recommended.
+
+### 2026-09-30 - Wave-2 follow-ups: Dallas to Band A, St. Louis discarded, Den Haag's licence on Amsterdam's precedent (owner)
+
+- **Dallas moved from the discards to Band A (owner: "yes agree on den haag
+  and dallas").** Its 2026-09-21 discard rested on the city's certificates
+  of occupancy stopping in 2022.
+  - **The register:** the Comptroller's `jrea-zgmq` (public domain,
+    Houston's register) holds 44,760 outlets flagged DALLAS inside city
+    limits, with permits to 2026-09-26. That is 19,557 storefronts once
+    non-store retail (4,350) and parking (256) leave.
+  - **Placement:** a 300-row sample joined to the City's AddressPoints
+    (395,893 main addresses) places 90.0% (exact 88.3%).
+  - **Rail:** DART light rail has 44 stations inside the city, at a
+    1,397 m median gap. The worst line, Orange, keeps 57% of its stations.
+  - **In-ring share:** 24.4% within 0.6 mi (a 400-row sample).
+  - **Before a build:** the AddressPoints licence (an accuracy disclaimer
+    only) needs a read.
+- **Fort Worth and Austin stay discarded, now on rail.**
+  - **Fort Worth:** 22,352 outlets in the file, but TEXRail and the TRE
+    are commuter lines.
+  - **Austin:** the register the 2026-09-18 row found missing is there
+    (37,228 outlets). Its Red Line, measured from Capital Metro's GTFS
+    (`r4v4-vz24`), runs 1–2 trains an hour each way at the median stop.
+    That fails the 15-minute gate for converted railway, so the row's
+    kind changed from absence to rail.
+- **St. Louis was discarded as a stream, not a register**, Norfolk's
+  precedent.
+  - **The permits:** its occupancy permits run from 1991 to date (10,635
+    applications 2021–2026) but record a business arriving, never
+    leaving.
+  - **The API:** the Commercial Occupancy API is a live queue of 60
+    pending applications.
+  - Counts: A 0 → 1, candidates 63 → 64, discards 100
+    (Dallas out, St. Louis in).
+- **Den Haag's horeca permit layer proceeds on Amsterdam's precedent (the
+  owner's call on an AMBIGUOUS licence read).**
+  - **Why ambiguous:** nothing grants or bars reuse. Under Databankenwet
+    art. 8(2) a public body's database is unprotected unless the right
+    is expressly reserved. Against that: denhaag.nl's site terms name
+    database rights, the layer is not on the open-data portal, and the
+    portal's horeca placeholder is "in onderzoek".
+  - **The rejected alternative:** asking datashop@denhaag.nl, since
+    outreach is the last resort.
+  - **Conditions:**
+    - credit "Gemeente Den Haag";
+    - never call the layer current or complete;
+    - never fetch `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM`, which the
+      city's own map hides.
+- **Richmond (BC) is NOT PERMITTED as it stands** (licence read).
+  - **The terms:** there is no open-data licence. The site-wide
+    copyright notice limits material to "research purposes and private
+    use only", with written permission required, closer to Philadelphia
+    than to a silent source.
+  - **The data:** the directory holds 11,517 current licences, 4,012 in
+    the buckets, addresses only.
+  - **Next step:** it stays out of Vancouver's rescope unless the owner
+    asks the City.
+- **New Westminster joins at 99.8%.** 907 resident licences in the
+  buckets (approved 2025–2026) match the City's Address Points (42,690).
+- **Rio's Gramacho–Saracuruna section fails the frequency gate.** Rio's
+  three add-on stations (Duque de Caxias, Corte Oito and Gramacho) pass.
+  - **The evidence** is search-level: SuperVia's notices. The 12-minute
+    peak runs Central–Gramacho only; one notice gave Gramacho–Saracuruna
+    a 50-minute average; the Moovit timetable shows short turns at
+    Gramacho.
+  - **The consequence:** beyond Gramacho, Campos Elíseos, Jardim
+    Primavera and Saracuruna are left unringed.
+- **Macro legend:** the three new T1 rows carry the proposed `mode` and
+  `coverage` (the cleanup session's two-key legend). Göteborg is
+  `one_bucket`, since food shops count as food.
+- **Still running:** Long Beach's licence read.
+- **Files:** `docs/city_master_list.md`, `docs/tram_city_list.md`,
+  `PLAN.md`.
+
+### 2026-09-30 - T2 closed: Zurich, Göteborg and Den Haag to T1, Utrecht to R, three to the discards (owner)
+
+- **The tram list's bucket-gap tier (T2) closed on the owner's calls
+  ("accept all").** Each of its seven cities was read against Band B's
+  reduced-bucket bar (2026-09-29), currency first. T 41 → 37 (T1 34 → 37,
+  T2 7 → 0), R 17 → 18, candidates 66 → 63, discards 97 → 100.
+  - **Zurich → T1.** `Gastwirtschaftsbetriebe` (WFS, CC0) holds 3,487
+    rows, every one `Offen` and stamped `jahr` 2026, all with LV95
+    points: food 2,325.
+    - **The owner said yes to a partial retail layer:** 1,028 shops
+      licensed to sell alcohol (Kleinverkaufsstelle 954, kiosks 53, petrol
+      stations 21), on the tobacco-retail precedent of Seoul and
+      Gyeonggi, the gap disclosed.
+  - **Göteborg → T1.** `Livsmedelsverksamheter` (CC0, daily, "all
+    active"): 5,066 rows with lat/lon on all. Food service 2,167, and
+    food shops 906 as retail (New York's precedent).
+    - **The rows carry no date, and the owner said the page states it**,
+      as for New York State's food stores, Milan and Surrey.
+    - The count moved 5,063 → 5,066 in a week, which is the evidence
+      the list is maintained.
+  - **Den Haag → T1, on a register the 2026-09-27 screen missed.**
+    - **The source:** the city's horeca permit layer (`Horeca_nieuw`
+      layer 2 on ArcGIS Online, displayed by the denhaag.nl permit map
+      modified 2026-07-02). 2,701 permits with a point on every one:
+      2,543 granted or notified, 158 pending, about 2,352 food premises
+      after exclusions.
+    - **Currency:** rows run to 2025, and the layer was last edited
+      2025-05-23.
+    - **With the BAG's 6,560 shop units, this is Rotterdam's shape.**
+      It supersedes T2's "no current food source: the city's register
+      froze at the end of 2020".
+    - **Still open:** the layer declares no licence, and a licence read
+      is running. The applicant field is never shown (34% are one-person
+      firms).
+  - **Utrecht → Band R.** `open.utrecht.nl` and `data.utrecht.nl` answer
+    nginx 403 to scripts and to a real browser; `utrecht.dataplatform.nl`
+    times out. ArcGIS Online holds no Utrecht horeca layer.
+    - **The reachable food layer fails:** it is rebuilt from Gemeenteblad
+      notices (822, 0.78× OSM) and cannot drop a closed business, since
+      Utrecht's permits do not expire.
+    - **R was preferred to a discard**, since a read from an allowed
+      network could find a register like Den Haag's.
+  - **Santa Cruz–La Laguna → discards, on placement.**
+    - **The join:** the Cabildo's hostelería register (3,658
+      restaurants, addresses only, CC BY declared, monthly) to Catastro's
+      INSPIRE addresses for 38900 and 38023 (73,841 points, EPSG:32628).
+      Exact 1,756 plus nearest same-side number 356 gives **57.7%**.
+    - **The ceiling:** 20.6% of rows carry no house number, so 79% at
+      most.
+    - **The addresses are not revised:** unmatched streets include names
+      the city has since changed (General Franco).
+  - **Rijswijk and Delft → discards (absence).** Neither publishes a food
+    source: Delft's ArcGIS org (455 items) has terrace maps only, and
+    Rijswijk has no open-data page.
+    - **The province's facility layers were checked and rejected:** they
+      are OpenStreetMap re-processed, not a register.
+    - **The BAG alone fails rule 3.** It is a use class per unit, which
+      passed as Rotterdam's second layer but not as a page's only layer.
+    - **The regional Den Haag scope they were kept for is no longer
+      needed.**
+  - **Files:** `docs/tram_city_list.md` (T2 closed with a verdict table,
+    three T1 rows, the old tier kept as history, CRLF normalised to the
+    repository's LF) and `docs/city_master_list.md` (counts, Utrecht's R
+    row, three discard rows, the country table). `check_master_list_counts`
+    and `check_discard_evidence` pass.
 ### 2026-09-30 - Macro legend approved; Hong Kong and Philadelphia one category; builds told (owner)
 
 - **Approved (owner):** every city's `mode` as proposed (including Monterrey

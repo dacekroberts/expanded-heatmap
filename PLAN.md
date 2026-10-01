@@ -59,6 +59,29 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Angeles** (9-37% of rows without an industry code, a floor on every
     bucket); **Taichung** and **Taoyuan** (only 12-19% of storefronts in a
     ring: one line through a large city). Each stays Full on the macro map.
+  - [ ] **Per-city wait times as data: TABLED by the owner (2026-09-30) until
+    they are back at a desktop.** The owner's idea, relayed by the tram kit:
+    pages state train/tram waits in hand-written prose (Buffalo "about every
+    20 minutes", Houston, Sacramento, Aarhus), and nothing checks them.
+    Proposed (cleanup, 2026-09-30):
+    - drawn lines only; waits that explain an exclusion (Rome, Riga,
+      Fortaleza) stay prose;
+    - a `SERVICE` value in the city config (per line: a daytime range in
+      minutes, an optional evening/weekend range and note, source, as-of);
+    - step 3 copies it to provenance, and one shared helper renders a single
+      owner-approved template sentence;
+    - a no-fetch check measures headways from the cached GTFS (weekday
+      10:00-16:00, plus an evening and a weekend window); an OSM-built city
+      only needs a source and date;
+    - cities: Buffalo, Houston, Sacramento, Aarhus, Palma, and every
+      light-rail and tram build.
+    About 150-200 lines, an `app/` change. Open: build it, and whether to
+    show evening/weekend waits when they differ (suggested) or daytime only.
+  - [ ] **Japanese cities onto N02-25 (suggested by the Band B session,
+    2026-09-30), one drift check per city.** Hiroshima reads MLIT's 2025
+    edition, because N02-24 still draws Hiroden's track to the closed 猿猴橋町
+    stop. The six built cities stay on N02-24 (stations checked identical in
+    memory). `japan.n02(slug)` and `N02_EDITIONS` make it a per-city switch.
   - [ ] **Macro-map completeness tiers: APPROVED (owner 2026-09-28)**, not
     tied to the wait above. Dots coloured **Full #0D9488** (the current teal)
     · **Narrowed #9333EA** · **One bucket #C2410C**, one set for both themes
@@ -117,8 +140,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - [ ] **Groundwork before the tram batch (staging's list, 2026-09-29; ~68 →
     ~110 cities)**, in the recommended order: (1) a France batch kit - a
     `france-tram-city` skill and a script writing the 21 configs from the
-    screen's station files and fetching all 21 feeds at once (Czechia's six
-    likewise, smaller); (2) the licence reads up front (Bordeaux LO 1.0, the
+    screen's station files (Czechia's six likewise, smaller) - **France DONE
+    2026-09-30**: the skill, `scripts/scaffold_france_batch.py` and 20 briefs
+    (Angers held); feeds are fetched at build, never cached; builds wait for
+    the owner's go and the calls in each brief; (2) the licence reads up front (Bordeaux LO 1.0, the
     four ODbL feeds, Plzeň and Olomouc GTFS, Tucson, RideKC, Florence), each
     notice in `docs/data_sources.md` before a page exists; (3) page text by
     template, one French paragraph approved once; (4) the macro-map items
@@ -344,6 +369,23 @@ Desktop is unaffected — the label is fully visible there.
         terms reserve the right to restrict access) for "Los Angeles
         (Regional)": 8 A Line stations, active licences ~1,590 / 1,464 /
         920, a `FULLNAME` column (privacy).
+      - **Run 2026-09-30 (staging; DECISIONS "Wave-2 follow-ups")**: (1)
+        **Dallas to Band A** (owner); Fort Worth and Austin stay out on rail.
+        (2) **St. Louis to the discards**: a stream of occupancy permits,
+        no closures. (3) Moot: Minneapolis and Pittsburgh were measured and
+        passed on 2026-09-29, Buffalo and Houston are built, and St. Louis
+        is discarded. (4) **New Westminster joins at 99.8%**; **Richmond's
+        directory is NOT PERMITTED as it stands** (site-wide "research and
+        private use only"; written permission, an owner call). (5) **The
+        shuttle fails beyond Gramacho**: SuperVia's own notices (the 12-minute
+        peak runs Central–Gramacho only; one notice gave Gramacho–Saracuruna
+        a 50-minute average). The three stations the add-on needs, up to
+        Gramacho, pass. (6) **Long Beach: PERMITTED WITH CONDITIONS**. Its
+        "Business Licenses Public View" (20,264 active, in-city, not home-based)
+        carries an express grant in the MapsLB Terms of Use. **The breach-only
+        indemnity was accepted by the owner (2026-09-30)**. Never imply
+        endorsement. Withhold `FULLNAME` where there is no `DBANAME` (12,854),
+        and drop the Pacific placeholder points.
       - **Reads from the owner's own browser**: Burnaby (Vancouver's
         rescope), Tempe, **Arlington** (its "Active Business Licenses" for a
         D.C. add-on: 11 of D.C.'s 32 excluded Virginia stations), Zaragoza,
@@ -353,7 +395,10 @@ Desktop is unaffected — the label is fully visible there.
       - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded
         stations (Duque de Caxias, Corte Oito, Gramacho); CNEFE 18,698
         storefronts. **First a rail test for the Gramacho–Saracuruna shuttle**,
-        which the scope would bring in.
+        which the scope would bring in. **Run 2026-09-30**: up to Gramacho
+        passes; Campos Elíseos, Jardim Primavera and Saracuruna, beyond it,
+        fail (search-level: SuperVia's notices; no timetable feed found), so
+        the line is drawn to its end and only those three are left unringed.
       - **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
         Eldorado; CNEFE 13,011. Belo Horizonte becomes "(Regional)".
       - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
@@ -366,6 +411,14 @@ Desktop is unaffected — the label is fully visible there.
       left**: Burnaby's `gis.burnaby.ca` refuses scripted requests (17,286
       licences per the portal: an owner's browser fetch, as Bucharest);
       Richmond's business directory declares no licence (a `licence-read`).
+      **2026-09-30**: New Westminster measured, 907 resident licences in the
+      buckets (retail 379, food 303, personal 225; approved 2025–2026),
+      **99.8% joined** to the City's Address Points (42,690). **Richmond:
+      NOT PERMITTED as it stands**. It has no open-data licence; the site's
+      copyright notice allows "research purposes and private use only",
+      written permission required (buslic@richmond.ca), so it stays out
+      unless the owner asks. Its directory: 11,517 current licences, 4,012
+      in the buckets, addresses only.
     - **Watch items from group 1**, each a dated re-check: Salvador's VLT
       (trial running since 2026-06-29; draw it on Salvador's map once in
       revenue service); Teresina (all-day 15-minute service); the Hazel

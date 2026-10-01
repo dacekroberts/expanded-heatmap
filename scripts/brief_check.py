@@ -76,6 +76,8 @@ sys.path.insert(0, str(ROOT))
 BRIEFS = ROOT / "docs" / "build_briefs"
 # data/*/raw/ is already gitignored, so this path needs no .gitignore change.
 CACHE = ROOT / "data" / "_brief_check" / "raw"
+# A cached GTFS zip older than this is refetched - see fetch().
+GTFS_MAX_AGE_DAYS = 7
 
 HEADERS = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
 BLOCK = re.compile(r"```brief-checks\s*\n(.*?)\n```", re.S)
@@ -83,12 +85,21 @@ BLOCK = re.compile(r"```brief-checks\s*\n(.*?)\n```", re.S)
 
 # --- plumbing -------------------------------------------------------------
 
-def fetch(url, name, *, force=False, timeout=900):
-    """Download to the gitignored cache, or reuse it."""
+def fetch(url, name, *, force=False, timeout=900, max_age_days=None):
+    """Download to the gitignored cache, or reuse it.
+
+    `max_age_days` refetches a cached copy older than that. GTFS passes 7:
+    most feeds this project reads are ROLLING (the French tram feeds run four
+    to twelve weeks ahead), so a brief re-run at build time weeks after the
+    brief was written must read today's feed, not the brief-writer's
+    (owner's standing rule, 2026-09-29: never cache a feed across weeks).
+    """
     CACHE.mkdir(parents=True, exist_ok=True)
     path = CACHE / name
     if path.exists() and not force:
-        return path
+        age_days = (dt.datetime.now().timestamp() - path.stat().st_mtime) / 86400
+        if max_age_days is None or age_days <= max_age_days:
+            return path
     r = requests.get(url, headers=HEADERS, timeout=timeout)
     r.raise_for_status()
     path.write_bytes(r.content)
@@ -100,7 +111,8 @@ def slug(url):
 
 
 def gtfs(url, ctx):
-    return zipfile.ZipFile(fetch(url, slug(url) + ".zip", force=ctx["force"]))
+    return zipfile.ZipFile(fetch(url, slug(url) + ".zip", force=ctx["force"],
+                                 max_age_days=GTFS_MAX_AGE_DAYS))
 
 
 def table(z, name, **kw):
@@ -272,10 +284,18 @@ def gtfs_stations(spec, ctx):
         rail = rail[rail[col].fillna("").str.match(spec["route_name_regex"])]
     trips = table(z, "trips.txt")
     keep = trips[trips["route_id"].isin(set(rail["route_id"]))]
-    st = table(z, "stop_times.txt",
-               usecols=lambda c: c in {"trip_id", "stop_id", "pickup_type",
-                                       "drop_off_type"})
-    st = st[st["trip_id"].isin(set(keep["trip_id"]))]
+    # IN CHUNKS, filtered as it goes. Nantes' stop_times.txt is 579 MB and the
+    # tram is a sliver of it; reading it whole to keep that sliver costs
+    # gigabytes a brief check has no business spending (2026-09-30).
+    want_trips = set(keep["trip_id"])
+    parts = []
+    with z.open("stop_times.txt") as f:
+        for chunk in pd.read_csv(
+                f, dtype=str, chunksize=1_000_000,
+                usecols=lambda c: c in {"trip_id", "stop_id", "pickup_type",
+                                        "drop_off_type"}):
+            parts.append(chunk[chunk["trip_id"].isin(want_trips)])
+    st = pd.concat(parts, ignore_index=True)
     stops = table(z, "stops.txt")
     served = stops[stops["stop_id"].isin(set(st["stop_id"]))].copy()
 
