@@ -4,6 +4,117 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-09-30 - New Orleans built on tram-build: the five lines RTA runs, and a new taxonomy
+
+- **New Orleans built on `osm_tram.py` and a new text taxonomy.** It has 106
+  stations, 4,689 storefronts, and 2,131 of them (45%) in a ring. The page
+  says "about nine storefronts in twenty". The brief screened 38.1% over
+  its 110 stops.
+- **The brief's lines were out of date; the owner re-took the call at build
+  ("draw what runs", 2026-09-30).**
+  - The brief drew 12, 47, 48 and OSM's "2", with 46 and 49 out "unless in
+    service".
+  - RTA's service-changes page (Fall '26 schedules, effective 2026-09-20)
+    says 46 Rampart/UPT "will officially reopen for service" (Summer '25).
+    It also says 49 Riverfront "will now run along the river from the
+    French Market to Julia Street" and "will no longer service Canal
+    Street, Loyola Avenue, or Union Passenger Terminal".
+  - **Drawn: 12, 46, 47, 48, 49.** OSM's two ref-2 relations are the old
+    Riverfront routing via Canal Street, and are `NOT_DRAWN`, superseded.
+  - **Rejected:** the Riverfront alone, without 46, which drops a line that
+    runs; and the brief as written, which draws a routing RTA no longer
+    runs.
+- **46's and 49's stops come from OSM's own tram-stop nodes.** 46's are
+  relation members with no role, and 49's stand beside its track. 32 nodes
+  were assigned to their line by distance to its track (0-10 m) and added
+  by node. John Churchill Chase Street, 260 m off 49's new track, is not
+  served.
+- **Stop names.**
+  - **46 shares three Loyola Avenue stations with 47**: OSM's 47 runs
+    Loyola to the terminal, so Tulane, Poydras Street and Julia Street merge
+    as 46/47.
+  - **The riverfront's own Poydras Street and Julia Street**, 600 m away,
+    are renamed "Riverfront at Poydras" and "Riverfront at Julia".
+  - **Four one-stop-two-names pairs are merged by explicit alias**, 6-26 m
+    apart, each direction named for its own side's cross street: Canal at
+    Basin / Elk Place, Canal at LaSalle / Marais, St. Charles at MLK /
+    Melpomene, Canal at North / South Claiborne. That is Houston's couplet
+    rule.
+  - The result is 192 stop positions, 110 names and 106 stations.
+- **`osm_tram.py`, two backward-compatible changes.** The Czech kit takes
+  the same file. The Aarhus control passes, and drift checks for the five
+  earlier tram cities are below.
+  - **`station_add` takes an optional third element, the shown name**, for
+    one node. A name alias renames every node of a spelling, so it could
+    not separate the two Poydras stops.
+  - **The gap check is per line.** An add is stale when its own line already
+    has the stop. A stop of that name on another line is a shared station.
+    Before, any route stop of the name refused the add.
+- **Rings: median gap 186 m** (the brief read 164 m over its 110), so the
+  rings are halved, step 1 gates the median at 120-220 m, and no stop is
+  thinned (call 13). The page carries the template's band sentence.
+- **Colours: OSM's own**, with the CSS keywords resolved by their CSS
+  definitions:
+  - 12 `green` #008000 scores 37.2;
+  - 47 `red` #FF0000 scores 62.3;
+  - 48 #90EE90 scores 30.5;
+  - 49 #5C2E86 scores 37.8;
+  - 46 has no colour in OSM and takes the project's #b8860b, 74.8.
+
+  Three are under the preferred 45. They are recorded, not changed, because
+  they are the source's colours. `check_map_markup` passes, and every label
+  reads at 4.5:1.
+- **The taxonomy: `pipeline/taxonomies/nola_businesstype.py`**, a new
+  continuity column, and a brief check.
+  - **Method.** `businesstype` is one level with 486 values: NAICS-era
+    titles with no codes, often inverted and misspelt, plus a dozen of the
+    City's own permit types. 187 match a NAICS 2017 or 2022 title exactly,
+    and 341 do once the inversion and the typos are undone. 17 storefront
+    and edge types were coded by hand. Each value maps to the NAICS code its
+    title names, so `naics.py` decides the bucket and every shared carve-out
+    holds.
+  - **The trap:** "Personal Services, Other" (249) title-matches the
+    4-digit group 8129, which keeps rows. It is the 812990 catch-all (R2),
+    coded so and asserted at import.
+  - **Catch-all share, declared in the brief:** 676 of 16,521 (4.1%).
+  - **Out, not NAICS:**
+    - the brief's two types;
+    - festival and Carnival vendors;
+    - **flea-market stalls (344)**, on category_rules R1: a market's stalls
+      and stands are out;
+    - street artists (281), video poker (261) and short-term rentals.
+  - **Kept:** pawnshops (7) stay Retail by R5, though NAICS files them as
+    lenders.
+  - Buckets: Food 1,808, Retail 2,452, Personal 710 licences.
+- **The register, step by step** (`iqay-p646`, CC0, daily). `ownername` and
+  `businessphone` are never downloaded, and the step asserts it.
+  - 4,970 licences are storefront types.
+  - **219 sit at the register's 0,0**, ungeocoded, and are counted as
+    unplaced; the page says "about one in twenty-three". One more point lies
+    outside the parish.
+  - 4,750 collapse to 4,689 premises.
+  - Two care-of or attention tails are cut from names: "HANGER PROST & ORTH
+    C/O GREG MYERS" put a person's name on a pin.
+  - **808 show the address**: 783 with no business name, and 25 whose name
+    is only a person's (`config.PERSON_NAMED`). All 697 person-shaped
+    names were read by eye, and ambiguous ones are listed. Brands and bars
+    are kept ("KATE SPADE", "ERIN ROSE").
+- **Privacy verdict: publishable.** 2,131 pins:
+  - 0 contact details after the tail cut;
+  - 0 surname-first names;
+  - 2 person-like names at a unit, both restaurants (Johnny Sanchez, Willa
+    Jean) in commercial units;
+  - one bracketed name, "OTHER PLACE (THE)", a bar.
+- **Page: no frequency sentence**, flagged. The brief's "about every 10
+  minutes" was search-level, and RTA's schedules were not read for it.
+- **Macro label: New Orleans is 82.8 px, right of the dot at ("start", 11,
+  4).** **Houston's label rose from level to dy -22.** Level, it covered New
+  Orleans's marker at the Global zoom; lower, it covers Miami's; left, it
+  meets Los Angeles's and Tucson's.
+  - The search was an in-process grid over Houston × New Orleans, about 160
+    sets. Houston passes start 11 at dy -30 to -18, and New Orleans 0 to +8.
+  - **A front-page change for deploy-verify at review.**
+
 ### 2026-09-30 - Tucson built on tram-build: Sun Link and the City's BUSLIC layer
 
 - **Tucson built on Houston's rules and `osm_tram.py`.** It has 21
