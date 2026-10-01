@@ -1,12 +1,10 @@
-"""Station-count verification, shared - because it was wrong in four of five
-Canadian cities, in five separate copies of per-city code, differently each
-time.
+"""Station-count verification, shared: it was wrong in four of five Canadian
+cities, in five separate copies of per-city code, differently each time.
 
 WHY THIS IS A MODULE AND THE COLLAPSE ITSELF IS NOT
 ---------------------------------------------------
-The tempting version of this file owns the collapse. It should not, and the
-five builds are the evidence: every feed collapses differently, and the
-differences are real rather than incidental.
+The collapse stays per city. In the five Canadian builds every feed collapsed
+differently, and the differences are real rather than incidental.
 
     Edmonton    `parent_station` populated on all 65 stops - one groupby
     Calgary     no parent_station; a DIRECTION PREFIX (NB/SB/EB/WB), three
@@ -22,8 +20,8 @@ differences are real rather than incidental.
 A shared collapse would have to grow a flag for each of those, and the flags
 would be the per-city code again with extra indirection.
 
-**What was missing every time was not the collapse. It was the check.** So
-this module owns the checks, and every city's `step1` must call
+**What was missing every time was not the collapse but the check.** So this
+module owns the checks, and every city's `step1` must call
 `verify_stations()` on whatever its own collapse produced. The failures were:
 
   Toronto   234 platforms reported as 234 stations, twice - the second time
@@ -40,16 +38,15 @@ Three gates, because each of those needs a different one:
   1. SPACING - the platform-vs-station diagnostic. A name check cannot catch
      Calgary; 17 m between "stations" can.
   2. BOARDABILITY - a stop a revenue trip touches is not automatically a place
-     a passenger can use. Only Edmonton has needed this so far, and only
-     because somebody looked.
+     a passenger can use (first needed in Edmonton).
   3. THE OPERATOR'S OWN COUNT - the one check that is outside the data. Toronto
      at 110 agrees with the TTC's published per-line figures; its earlier 118
      and 77 agreed with nothing, and no amount of internal consistency would
      have said so.
 
 Gate 3 is the one to reach for first when a number feels wrong. The other two
-are automatic; that one requires going and reading what the agency publishes,
-which is exactly why it kept being skipped.
+are automatic; that one requires reading what the agency publishes, which is
+why it kept being skipped.
 """
 
 import math
@@ -64,9 +61,9 @@ PLATFORM_SPACING_MEDIAN_M_MAX = 150.0
 
 
 def nearest_neighbour_m(lon, lat, crs_projected, crs_geographic="EPSG:4326"):
-    """Distance from each point to its closest neighbour, in metres.
+    """Return the distance from each point to its closest neighbour, in metres.
 
-    Projected, never computed in degrees - this project's first invariant.
+    Projected, never computed in degrees: this project's first invariant.
     """
     import geopandas as gpd
     pts = gpd.GeoSeries(gpd.points_from_xy(lon, lat),
@@ -80,24 +77,24 @@ def nearest_neighbour_m(lon, lat, crs_projected, crs_geographic="EPSG:4326"):
 
 def boardable_stop_ids(stop_times, *, pickup="pickup_type",
                        drop_off="drop_off_type", boardable=("0", "2", "3")):
-    """Stop ids where at least one stop_time allows boarding or alighting.
+    """Return the stop ids where at least one stop_time allows boarding or
+    alighting.
 
     GTFS uses 0/blank for "regularly scheduled" and 1 for "not available". A
-    stop where BOTH are 1 on EVERY stop_time is infrastructure - Edmonton's two
+    stop where BOTH are 1 on EVERY stop_time is infrastructure: Edmonton's two
     garage access points and its Health Sciences tail track, 1,947/1,947/1,430
     stop_times apiece and not one boardable.
 
     2 ("phone the agency") and 3 ("coordinate with the driver") are boardable
     too: a REQUEST STOP, which a reader can use. Until 2026-09-30 only 0 counted,
     and KORDIS JMK, which codes every Brno request stop 3/3, lost 25 of Brno's
-    149 tram stations to it - with nothing to flag a station that is simply
-    absent. The default now follows the GTFS spec (owner, 2026-09-30). A scan
-    of the ten built cities that call this found 2/3 only on lines their maps
+    149 tram stations to it, with nothing to flag a station that is simply
+    absent. The default now follows the GTFS spec (owner, 2026-09-30). In the
+    ten built cities that called this then, 2/3 appear only on lines their maps
     do not draw (Prague's buses, trams and regional rail; the Dutch buses and
-    international trains; Paris's demand-responsive buses). Eight of them
-    drift-checked at zero drift; Oslo's and Bergen's feeds have no stop the old
-    rule dropped, so the set is identical (docs/map_inconsistencies.md, theme
-    13). Pass `boardable=("0",)` only to reproduce the old behaviour.
+    international trains; Paris's demand-responsive buses), and none of their
+    station sets changed (docs/map_inconsistencies.md, theme 13). Pass
+    `boardable=("0",)` only to reproduce the old behaviour.
     """
     if pickup not in stop_times.columns or drop_off not in stop_times.columns:
         return None      # the feed does not say; caller must not infer
@@ -230,12 +227,12 @@ def verify_stations(*, city, platforms, stations, crs_projected,
 
     # THE MEDIAN CANNOT SEE A HANDFUL OF UNCOLLAPSED NAMES, and a handful is
     # the usual number. Barcelona passed gate 1 at a 520 m median while two of
-    # its busiest interchanges sat in the set TWICE - FGC writes
+    # its busiest interchanges sat in the set TWICE: FGC writes
     # "Barcelona-Placa Catalunya" where TMB writes "Catalunya", 178 m apart,
-    # and the same for Espanya at 198 m. Two names out of 114 move a median not
-    # at all. It was the nearest-neighbour MINIMUM that showed it.
+    # and the same for Espanya at 198 m. Two names out of 114 do not move a
+    # median; the nearest-neighbour MINIMUM shows them.
     #
-    # Printed rather than raised, because a genuinely close pair does exist -
+    # Printed rather than raised, because genuinely close pairs exist:
     # Barcelona's own Sant Gervasi and Placa Molina are two real FGC stations
     # 40 m apart, and L11's Casa de l'Aigua sits 230 m from Trinitat Nova. So
     # this cannot be a threshold; it is a prompt to go and look.

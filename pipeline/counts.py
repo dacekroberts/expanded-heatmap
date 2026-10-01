@@ -1,8 +1,7 @@
 """Percentages that cannot be written without naming the set they measure.
 
 THE MOST FREQUENT ERROR IN THIS PROJECT, BY A WIDE MARGIN. Eight instances by
-2026-09-21, six during the Canadian builds and two more committed *while
-writing up the other six*:
+2026-09-21, six of them during the Canadian builds:
 
     Montreal 440 per station, summing per-station counts   -> 151, on the union
     Toronto 41 per PLATFORM across 234                     -> per station
@@ -14,9 +13,9 @@ writing up the other six*:
     "names blank on 21.4% of rows"                         -> 0.5% of map rows
 
 Every one is the same shape: a number correct for some set, reported as though
-it were correct for the set the reader has in mind. And the pattern survived
-being documented as a known fault in `CLAUDE.md`, in `add-city`, and in the
-decisions log - **knowing the failure mode did not prevent it.**
+it were correct for the set the reader has in mind. The pattern survived
+being documented as a known fault in `CLAUDE.md`, in `add-city` and in the
+decisions log: **knowing the failure mode did not prevent it.**
 
 So this module makes the unlabelled form unavailable rather than discouraged.
 `pct()` takes the set's name as a required argument and puts it in the output:
@@ -26,7 +25,7 @@ So this module makes the unlabelled form unavailable rather than discouraged.
 
 Use it for any share that reaches a print, a page, a brief or a commit message.
 Where a figure genuinely has two defensible denominators, print BOTH with
-`pct_both()` - that is what Toronto's 71.4%/92.8% needed and did not get.
+`pct_both()`, as Toronto's 71.4%/92.8% needed.
 """
 
 
@@ -62,7 +61,7 @@ def pct_both(n_a, of_a, label_a, n_b, of_b, label_b, *, places=1):
 
 
 def per(n, of, label, *, places=0):
-    """'<x> per <label>' with the denominator shown - for density figures.
+    """'<x> per <label>' with the denominator shown, for density figures.
 
     >>> per(8739, 108, "station")
     '81 per station (8,739 across 108)'

@@ -7,11 +7,11 @@ batch's own contents, so re-running skips completed batches (a timeout
 partway through costs one batch) and - unlike a bare batch-number key - a
 changed input can never be served a stale answer.
 
-That kept `pipeline/drift_check.py` deterministic **only after the first
-run** - on a fresh checkout it geocoded over the network and then reported
-whether the result had drifted, which is a different question. Since
-2026-09-22 a drift check sets `HEATMAP_NO_NETWORK` and an uncached batch
-refuses rather than fetching; see pipeline/offline.py.
+The cache alone keeps `pipeline/drift_check.py` deterministic **only after
+the first run**: on a fresh checkout it would geocode over the network, which
+is a different question from drift. Since 2026-09-22 a drift check sets
+`HEATMAP_NO_NETWORK` and an uncached batch refuses rather than fetching; see
+pipeline/offline.py.
 
 Interface: geocode_addresses() returns only the rows the Census matched;
 callers decide what to do with the rest and must sanity-check the returned
@@ -79,7 +79,7 @@ def _geocode_batch(payload: pd.DataFrame, cache_dir: Path, batch_num: int) -> pd
 
 def geocode_addresses(df: pd.DataFrame, *, id_col: str, street_col: str, zip_col: str,
                       city, state: str, cache_dir: Path) -> pd.DataFrame:
-    """Geocode df's addresses. Returns DataFrame[id, latitude, longitude,
+    """Geocode df's addresses. Return DataFrame[id, latitude, longitude,
     match_type] for matched rows only (Census returns "lon,lat" in one field;
     it is split here, in that order).
 

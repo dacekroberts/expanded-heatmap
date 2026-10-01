@@ -1,6 +1,6 @@
 """Detecting a business that is really someone's home, shared across cities.
 
-Why this module exists: the residence test in
+Why: the residence test in
 `scripts/check_personal_exposure.py` can only fire on an `APT`/`FL`/`RM`/`#`
 indicator in the address text, so it cannot see a sole trader at a detached
 house. Measured against city property registers on 2026-09-21, that blind spot
@@ -13,11 +13,11 @@ was three orders of magnitude wide in the NAICS cities:
     Los Angeles  ~1,000-2,000 pins
     San Diego     unmeasured, and the only city with no signal at all
 
-The pattern is always the same - a person's name displayed at a parcel the
-city's own assessor calls residential and which the owner occupies - so the
+The pattern is always the same (a person's name displayed at a parcel the
+city's own assessor calls residential and which the owner occupies), so the
 logic lives here and each city supplies its own columns.
 
-**The lesson that cost the most to learn: land use alone is not a signal.** In a
+**Land use alone is not a signal.** In a
 dense city, shops sit inside residential buildings. "Residential parcel" flags
 7.95% of Philadelphia's pins, including 147 thirty-plus-seat restaurants on
 `APARTMENTS > 4 UNITS` parcels; New York's single largest category under its
@@ -113,7 +113,7 @@ def has_residential_unit(address) -> bool:
 
 def flag_home_based(names, *, residential, owner_occupied=None,
                     individual=None):
-    """Rows that are a person's name at what the city says is a home.
+    """Flag rows that are a person's name at what the city says is a home.
 
     names:          Series of displayed business names.
     residential:    boolean Series - the parcel is PURELY residential by the

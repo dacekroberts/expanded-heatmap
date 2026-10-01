@@ -1,24 +1,23 @@
-"""Reading a cached OpenStreetMap result - the half of `pipeline/osm.py` that
+"""Reading a cached OpenStreetMap result: the half of `pipeline/osm.py` that
 a `step*.py` is allowed to import.
 
-WHY THIS IS A SEPARATE MODULE FROM `osm.py`, WHICH HOLDS ONE FUNCTION
---------------------------------------------------------------------
+WHY A SEPARATE MODULE FROM `osm.py`
+-----------------------------------
 `scripts/check_no_fetch_in_steps.py` asks what a step's imports can reach, one
 level deep, and a module is either UNGUARDED (a step importing it fails) or
 GUARDED (a step importing it passes, because the module refuses to request
 while a drift check is running). `pipeline/osm.py` contains `fetch()` and
-therefore `urllib.request`, so Barcelona's step 1 - which only ever reads a
-cache - failed that check on the strength of an import it never calls.
+therefore `urllib.request`, so a step that only reads a cache (Barcelona's
+step 1) failed the check on an import it never calls.
 
-Neither of the two obvious fixes is honest. Marking `osm.py` GUARDED would say
-"this step may fetch, but not during a drift check", when the truth is that it
-cannot fetch at all; it would also hand every future city a door through which
-a step could fetch and still pass. Suppressing the finding says nothing at all.
+Marking `osm.py` GUARDED would say "this step may fetch, but not during a
+drift check" when it cannot fetch at all, and would let any future step fetch
+and still pass. Suppressing the finding says nothing.
 
-So the cache reader moved here, where there is no HTTP client to import, and
-`osm.py` stays UNGUARDED on purpose: any `step*.py` that imports it is a real
-violation and the check still says so loudly. `fetch_sources.py` files import
-`osm.py`; step files import this.
+So the cache reader lives here, with no HTTP client to import, and `osm.py`
+stays UNGUARDED on purpose: any `step*.py` that imports it is a real
+violation and the check says so. `fetch_sources.py` files import `osm.py`;
+step files import this.
 """
 
 import json
@@ -36,9 +35,8 @@ def load(cache_path, what):
 
     This is what a `step*.py` calls. `fetch()` belongs to `fetch_sources.py`
     alone, because `drift_check.py` re-runs every `step*.py` and a drift check
-    has to be deterministic and offline - San Francisco's `fetch_sources.py`
-    states that as an invariant, and since 2026-09-22 it holds for all
-    eighteen cities rather than fifteen of them.
+    has to be deterministic and offline (an invariant for every city built by
+    2026-09-22, and for every city since).
     """
     if not cache_path.exists():
         raise SystemExit(
