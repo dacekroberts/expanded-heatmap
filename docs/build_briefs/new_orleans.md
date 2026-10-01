@@ -121,6 +121,20 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
       "scope": "SCOPE",
       "crs": "CRS_PROJECTED"
     }
+  },
+  {
+    "id": "new-orleans-catchall-share",
+    "claim": "businesstype is one level (486 values); its catch-alls - the R2 'Personal Services, Other' and the two 'all other' store types NAICS keeps - are under 5% of the register (build, 2026-09-30: 676 of 16,521, 4.1%)",
+    "kind": "taxonomy_catchall",
+    "domain": "data.nola.gov",
+    "view": "iqay-p646",
+    "column": "businesstype",
+    "catchall": [
+      "Personal Services, Other",
+      "Miscellaneous Store Retailers(except Tobacco), All Other",
+      "General Merchandise Stores, All Other"
+    ],
+    "max_share": 0.05
   }
 ]
 ```

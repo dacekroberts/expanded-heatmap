@@ -1986,7 +1986,15 @@ CITIES = [
         # Above the dot it meets San Diego's and Chicago's labels, below it
         # Monterrey's marker; check_macro_labels.py (python -B) passes start
         # 11 at dy -8 to +6, PROBLEMS 0 at 375, 768 and 1200.
-        "label_offset": ("start", 11, 0),
+        #
+        # RAISED to dy -22, 2026-09-30 (tram kit), when New Orleans joined: level,
+        # this pill covered New Orleans's marker at the Global zoom, and lower it
+        # covers Miami's; left of the dot it meets Los Angeles's and Tucson's
+        # pills. A grid over all three sides (python -B, in-process): start 11
+        # passes dy -30 to -18 with New Orleans at its offset (-14 meets New
+        # Orleans's pill in United States East); -22 sits inside that, PROBLEMS 0
+        # at 375, 768 and 1200.
+        "label_offset": ("start", 11, -22),
     },
     {
         "name": "Odense",
@@ -2126,6 +2134,31 @@ CITIES = [
         # at dy -7 to -2 (-1 meets Los Angeles's pill, -8 Kansas City's); -5
         # sits inside that, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset": ("start", 11, -5),
+    },
+    {
+        "name": "New Orleans",
+        "lat": 29.9511,
+        "lon": -90.0715,
+        "page": "pages/135_New_Orleans_Heatmap.py",
+        # The macro legend's two keys (owner, 2026-09-30; origin/macro-legend):
+        # `mode` set by hand until scaffold_city.py --mode lands with it.
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Register coordinates (95.6%)",
+        "data_age": "Active licences, updated daily; fetched 2026-09-30",
+        "rail_extra": "Trams",
+        "record_kind": "Licence register",
+        "categories": "All three",
+        "blurb": "RTA streetcars: St. Charles, Loyola/Rampart, Canal and Riverfront",
+        "region": "United States East",
+        "country": "United States",
+        "in_default_view": True,
+        # RIGHT of the dot, a little below, and SCORED: width 82.8 px measured in
+        # a browser with Space Grotesk loaded (2026-09-30). Houston's label rose
+        # to clear this marker (see Houston). check_macro_labels.py (python -B)
+        # passes start 11 at dy 0 to +8 (-2 meets Washington D.C.'s pill at the
+        # Global zoom); +4 sits inside that, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("start", 11, 4),
     },
 ]
 

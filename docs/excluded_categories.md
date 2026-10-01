@@ -2016,6 +2016,32 @@ owner), 45 whose account name is only a person's (`config.PERSON_NAMED`, read by
 
 **Stations.** All 21 Sun Link stops are inside the city. Not drawn: buses.
 
+### New Orleans - the City's own business types, and every stop of five streetcar lines
+
+**Left out of the Active Occupational Licenses** (16,521 active licences), by the City's own
+type (`pipeline/taxonomies/nola_businesstype.py`, every one of its 486 values with a home):
+- one-off vendors: "Special Events-Other (Vendor)" 1,264, Jazz Fest 88, Essence Fest 30,
+  Mardi Gras 13; "Home Based-Office Use Only" 357 (the brief);
+- **flea-market stalls** (344, most at the French Market) and **street artists** (281): a
+  market's stalls and stands are not shops (category_rules R1; mobile units out);
+- video-poker devices (261), hotels (294), bed and breakfasts (111), short-term rentals;
+- by the NAICS code each type's title names (the shared carve-outs): caterers (116), food
+  service contractors (88), mobile food (68), parking (203), funeral services and cemeteries
+  (26), online, direct and vending sellers (106) and "Personal Services, Other" (249), the
+  R2 catch-all.
+
+**Not placed**: 219 storefront licences the register writes at 0,0 (4.4%); 1 point outside
+the parish.
+
+**Shown, but not named**: the owner (`ownername`) is never downloaded. 808 storefronts show
+their street address - 783 with no business name and 25 whose name is only a person's
+(`config.PERSON_NAMED`, read by eye).
+
+**Stations.** Every stop of the five lines RTA runs (owner, 2026-09-30, re-taken at build):
+106 stations, all inside the city, none thinned (owner, call 13). OSM's two ref-2 relations,
+the Riverfront's old routing via Canal Street, are not drawn: RTA runs the Riverfront as 49,
+French Market to Julia Street, since Summer 2025. Not drawn: buses and ferries.
+
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

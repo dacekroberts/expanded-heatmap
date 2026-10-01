@@ -450,6 +450,13 @@ REGISTRIES = {
     "tucson": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
+    # New Orleans: `ownername` (often a person's own name) and `businessphone` are
+    # never downloaded, so no owner fallback exists. The pin shows
+    # `businessname`; with none (783), or only a person's (25, read by eye), the
+    # address.
+    "new_orleans": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv",
+                        address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

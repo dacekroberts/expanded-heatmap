@@ -801,6 +801,48 @@ COLUMNS["sacramento"] = {
                     loc("SIDEWALK VENDOR - MERCHANDISE", "street merchandise stall")],
 }
 
+COLUMNS["nola_businesstype"] = {
+    "funeral": [loc("Funeral Homes & Funeral Services", "funeral homes"),
+                loc("Cemeteries & Crematories", "cemeteries and crematories")],
+    "no_counter_food": [loc("Caterers", "caterers"), loc("Food Service Contractors", "food contractors"),
+                        loc("Special Events-Jazz Fest (Vendor)", "festival food and craft vendors")],
+    "personal_catchall": [loc("Personal Services, Other", "other personal services (812990)")],
+    "adult_hostess": absent("no type of its own: no adult-entertainment or massage-parlour type "
+                            "in the 486 values"),
+    "sex_shop": absent("no type of its own; under the all-other store retailers"),
+    "massage_commercial": [loc("Personal Care Services, Other", "other personal care (massage)")],
+    "massage_regulated": [loc("Offices of Health Practitioners, All Other Miscellaneous",
+                              "offices of other health practitioners")],
+    "car_dealer": [loc("New Car Dealers", "new car dealers"), loc("Used Car Dealers", "used car dealers"),
+                   loc("Motorcycle Dealers", "motorcycle dealers")],
+    "petrol_station": [loc("Gasoline Stations with Convenience Stores", "gas stations with stores"),
+                       loc("Gasoline Stations, Other", "other gas stations")],
+    "vehicle_repair": [loc("General Automotive Repair", "general auto repair"),
+                       loc("Automotive Body, Paint & Interior Repair & Maintenance", "auto body")],
+    "gambling": [loc("Video Draw Poker Devices", "video-poker devices"),
+                 loc("Casinos(except Hotel Casinos)", "casinos")],
+    "pawnbroker": [loc("Pawnshops", "pawnshops, Retail by R5 though NAICS calls them lenders")],
+    "nightclub": [loc("Drinking Places(Alcoholic Beverages)", "drinking places (clubs file here)")],
+    "vet": [loc("Veterinary Services", "veterinary services")],
+    "nonstore": [loc("Electronic Shopping & Mail-Order Houses", "online and mail order"),
+                 loc("Direct Selling Establishments, Other", "direct sellers"),
+                 loc("Vending Machine Operators", "vending")],
+    "parking": [loc("Parking Lots & Garages", "parking")],
+    "repair": [loc("Personal & Household Goods Repair & Maintenance, Other", "household goods repair"),
+               loc("Appliance Repair & Maintenance", "appliance repair")],
+    "lodging": [loc("Hotels(except Casino Hotels) & Motels", "hotels"),
+                loc("Bed & Breakfast Inns", "bed and breakfasts"),
+                loc("Short Term Rentals/Residential Properties", "short-term rentals")],
+    "recreation": [loc("Fitness & Recreational Sports Centers", "fitness"), loc("Museums", "museums"),
+                   loc("Motion Picture Theaters(except Drive-Ins)", "cinemas")],
+    "pharmacy": [loc("Pharmacies & Drug Stores", "pharmacies")],
+    "optician": [loc("Optical Goods Stores", "optical goods stores")],
+    "health_food": [loc("Food(Health) Supplement Stores", "health-food stores")],
+    "mobile_unit": [loc("Mobile Food Services", "food trucks"),
+                    loc("Artist-Painting on Streets", "street artists"),
+                    loc("Flea Market", "market stalls (R1: a market's stalls are not shops)")],
+}
+
 SHOP = "RETAIL (SHOPS)"
 
 

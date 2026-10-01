@@ -397,6 +397,11 @@
  "tucson": {
   "in_ring": 340,
   "all": 5243,
+  "map_blob": "002e6c85329bc27ebe350ed58bb910df1dbd7293"
+ },
+ "new_orleans": {
+  "in_ring": 2131,
+  "all": 4689,
   "map_blob": null
  }
 }

@@ -141,6 +141,9 @@ TAXONOMY_MODULES = {
     "sweden_livsmedel": "pipeline.taxonomies.sweden_livsmedel",
     "buffalo": "pipeline.taxonomies.buffalo",
     "sacramento": "pipeline.taxonomies.sacramento",
+    # New Orleans: NAICS-era titles with no codes, each mapped to the code it
+    # names, so naics.py decides the bucket (tram kit, 2026-09-30).
+    "nola_businesstype": "pipeline.taxonomies.nola_businesstype",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

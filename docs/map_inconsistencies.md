@@ -513,6 +513,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Houston | METRORail light rail, Red, Green and Purple | — | OpenStreetMap route relations (METRO's data agreement kept out); gate 3 exact | City (TIGER) | 0 / 0 |
 | Kansas City | KC Streetcar, one line | Buses | OpenStreetMap route relations (RideKC's GTFS barred, owner) | City (TIGER) | 0 / 0 |
 | Tucson | Sun Link streetcar, one line | Buses | OpenStreetMap route relations | City (TIGER) | 0 / 0 |
+| New Orleans | RTA streetcars 12, 46, 47, 48, 49 | Buses, ferries; OSM's stale ref 2 | OpenStreetMap route relations; 46 and 49 stops by node | City (TIGER; Orleans Parish) | 0 / 0 |
 | **Canada** | | | | | |
 | Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS | Vancouver + Surrey | 30 / 0 |
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
@@ -624,6 +625,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Houston | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 1,077 / 1,052 / 94 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | Kansas City | Licence register | KCMO Business License Holders (frozen 2026-01-15) | NAICS (2022 titles mapped to codes) | 273 / 52 / 126 | Food service thin: about 175 restaurants and bars in the whole register; 1,095 fee-code licences unclassifiable |
 | Tucson | Licence register | City of Tucson BUSLIC (active licences, rebuilt daily) | NAICS | 125 / 149 / 66 | Not a complete listing, in the City's own words |
+| New Orleans | Licence register | City of New Orleans Active Occupational Licenses (daily, CC0) | Own text taxonomy, mapped to NAICS codes | 935 / 978 / 218 | Personal services thin |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
@@ -732,6 +734,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Houston | Address join to the City's Site Addresses (83.9%) + Census geocoder (12.4%); 3.7% unplaced, 608 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments, trailers and a person's permit at a Residential point; address shown for a person's permit |
 | Kansas City | Register coordinates (100%); 11 outside the city | Food service thin; a licence is not a shopfront | Non-store sellers, caterers, mobile food, parking; fee-code licences (1,095); licences that lapsed in 2024; address shown for a person's licence or a person-named trade name |
 | Tucson | Register coordinates (92.4%); 539 not geocoded, 23 outside the city | The City calls its list not complete | Home occupations; non-store sellers, caterers, mobile food, parking; apartments (19); address shown for a person's licence or a business named only as a person |
+| New Orleans | Register coordinates (95.6%); 219 at the register's 0,0, 1 outside the city | A licence is not a shopfront | Event and festival vendors, home offices, flea-market stalls, street artists, video poker; caterers, mobile food, parking; address shown where no business name or a person's |
 | **Canada** | | | |
 | Vancouver (Regional) | Source coordinates | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
@@ -835,6 +838,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Houston | Active permits (2026-09-29) | B | 0.6 mi | Yes | 7% | Name; address for a person's permit |
 | Kansas City | Frozen 2026-01-15, licences valid 2025-26 (2026-09-30) | B | 0.3 mi | Yes | 13% | Trade name, else holder company; address for a person's licence |
 | Tucson | Active licences (2026-09-30) | B | 0.3 mi | Yes | 6% | Account name; address for a person's licence |
+| New Orleans | Active licences, daily (2026-09-30) | B | 0.3 mi | Yes | 45% | Business name, never the owner's; address where none |
 | **Canada** | | | | | | |
 | Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |

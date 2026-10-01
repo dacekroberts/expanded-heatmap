@@ -1,0 +1,41 @@
+{
+  "written_utc": "2026-10-01T01:41:46+00:00",
+  "register": {
+    "url": "https://data.nola.gov/resource/iqay-p646.json",
+    "name": "Active Occupational Licenses",
+    "license": "Creative Commons 1.0 Universal (Public Domain Dedication)",
+    "rowsUpdatedAt": 1790742621,
+    "rows_updated": "2026-09-30",
+    "fields": [
+      "businesslicensenumber",
+      "businessname",
+      "businesstype",
+      "businessaddress",
+      "suite",
+      "zip",
+      "businessstartdate",
+      "the_geom"
+    ]
+  },
+  "boundary": {
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
+    "query": {
+      "where": "GEOID='2255000'",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "f": "geojson"
+    }
+  },
+  "osm_host": "overpass.kumi.systems",
+  "osm_bbox": [
+    29.9,
+    -90.14,
+    30.0,
+    -90.03
+  ],
+  "files_utc": {
+    "occupational_licenses.csv": "2026-10-01T01:40:35+00:00",
+    "city_boundary_tiger.geojson": "2026-10-01T01:40:36+00:00",
+    "osm_rail.json": "2026-10-01T01:41:46+00:00"
+  }
+}

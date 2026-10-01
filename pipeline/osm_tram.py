@@ -132,7 +132,9 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
 
     station_add: {node id: (line ref or tuple of refs, expected name)} for a
       stop on no kept relation. A tuple adds one row per ref, for a stop
-      several lines serve (Plzeň's Jízdecká, lines 1, 2 and 4).
+      several lines serve (Plzeň's Jízdecká, lines 1, 2 and 4). An optional
+      third element is the name the station takes, for one node only (New
+      Orleans's two "Poydras Street" stops, 600 m apart on two lines).
     name_aliases: {spelling: canonical} for one stop spelled two ways; both
       spellings must be present, or the alias is stale.
     accept_members: {node id: expected name} for a STOP MEMBER of a kept
@@ -175,8 +177,14 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
                  f"relation: {stale} - re-read OSM")
     q = pd.DataFrame(rows).drop_duplicates(["line", "node"])
 
-    on_routes, route_names = set(q["node"]), set(q["stop_name"])
-    for node_id, (ref, name) in (station_add or {}).items():
+    on_routes, route_q = set(q["node"]), q[["line", "stop_name"]].copy()
+    for node_id, spec in (station_add or {}).items():
+        # (ref, OSM name) or (ref, OSM name, shown name): the third renames ONE
+        # node, for two lines' stops OSM names alike far apart (New Orleans's
+        # "Poydras Street" on Loyola Avenue and on the riverfront, 2026-09-30),
+        # which a name alias - every node of a spelling - cannot separate.
+        ref, name = spec[0], spec[1]
+        shown = spec[2] if len(spec) > 2 else name
         n = nodes.get(node_id)
         nt = (n or {}).get("tags", {})
         if not n:
@@ -191,19 +199,26 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
             sys.exit(f"STATION_ADD node {node_id}: OSM now has {nt.get('name')!r}, "
                      f"tagged {({k: nt.get(k) for k, _ in STOP_TAGS})}, not a stop "
                      f"or platform named {name!r} - re-read it")
-        if node_id in on_routes or name in route_names:
-            sys.exit(f"STATION_ADD node {node_id} ({name}) is now on a route "
-                     f"relation as a stop - OSM filled the gap; remove the add")
         lines = (ref,) if isinstance(ref, str) else tuple(ref)
+        # The gap is per line: an add is stale when the node, or a stop of the
+        # name it takes, is on ITS OWN line's relations. Another line's stop of
+        # that name is a shared station (New Orleans's 46 joining 47's Loyola
+        # Avenue stops) or, renamed, a different one.
+        own = set(route_q.loc[route_q["line"].isin(lines), "stop_name"])
+        if node_id in on_routes or shown in own:
+            sys.exit(f"STATION_ADD node {node_id} ({name}) is now on a route "
+                     f"relation of {'/'.join(lines)} as a stop - OSM filled the gap; "
+                     f"remove the add")
         unknown = [x for x in lines if x not in kept]
         if not lines or unknown:
             sys.exit(f"STATION_ADD node {node_id} names line(s) {unknown or lines!r}, "
                      f"not kept refs")
         q = pd.concat([q, pd.DataFrame([{
-            "line": x, "node": node_id, "stop_name": name, "latitude": n["lat"],
+            "line": x, "node": node_id, "stop_name": shown, "latitude": n["lat"],
             "longitude": n["lon"], "source": "added"} for x in lines])], ignore_index=True)
         if verbose:
-            print(f"    ADD  node {node_id} {name!r} on {'/'.join(lines)}")
+            print(f"    ADD  node {node_id} {name!r} on {'/'.join(lines)}"
+                  + (f" as {shown!r}" if shown != name else ""))
 
     for old, new in (name_aliases or {}).items():
         if not (q["stop_name"] == old).any() or not (q["stop_name"] == new).any():
