@@ -60,6 +60,97 @@ for them):
 
 ---
 
+### 2026-10-02 - Sheffield built: Supertram's three routes, the Tram-Train left out, gate 3 against NaPTAN only
+
+- **Scope (owner, 2026-10-01):** the City of Sheffield, FSA authority 425
+  only; Rotherham (420) is out with the Tram-Train. The boundary is OSM
+  relation 106956 (admin_level 8, GSS E08000039), 368.0 km², gated at
+  350-385. On the UK six's shared steps (`pipeline/countries/uk.py`), config
+  only; no shared file edited. Re-run on e2452466 with no change: none of its
+  new options is needed, and step 2's exact-duplicate rule removes no row.
+- **The lines are OSM's three Supertram routes,** each a directional pair
+  merged by London's branch rule (`LINE_OSM_REFS`): Blue (165857, 9701743)
+  19.3 km, Yellow (165852, 9701823) 13.6 km, Purple (165858, 9701599)
+  8.0 km. OSM's relations match the operator's routes one for one, so no
+  routing (`LINE_STOPS`) is needed. Labels "Blue route", "Yellow route",
+  "Purple route", with the ends in the legend (OSM's from/to tags). The
+  operator's own naming could not be read (its site refuses scripts); the
+  route names are the brief's.
+- **The Tram-Train (ref TT, relations 9701871 and 9701872) is not drawn**
+  (owner, 2026-10-01): every 30 minutes on Network Rail track beyond
+  Tinsley, which fails the converted-railway frequency gate (Aarhus L1's
+  precedent). Its stops in Sheffield are all on the Yellow route; its three
+  in Rotherham go with it.
+- **Purple is drawn at about hourly** (Buffalo's rule: purpose-built track,
+  so disclosed, not disqualifying; owner, 2026-10-01). It alone serves 2 of
+  the 48 stops (Herdings Park, Herdings / Leighton Road). The page states
+  the wait.
+- **Stations:** 91 stop positions collapse to 48 by name (the widest,
+  Granville Road / The Sheffield College, 141 m across). OSM spells one stop
+  two ways across Yellow's directions ("Carbrook/Ikea", "Carbrook/IKEA"),
+  merged by `STATION_NAME_ALIASES`. All 48 are inside the city; none thinned,
+  none excluded.
+- **Gate 3, NaPTAN only.** supertram.com serves a Radware CAPTCHA to scripts
+  and Stagecoach's page returns 403 (2026-10-02); neither was passed, so
+  `OPERATOR_STATION_COUNTS = None` with `OPERATOR_COUNTS_GAP` (owner,
+  2026-10-01: NaPTAN is the only independent source). NaPTAN holds 51 active
+  MET records for `9400ZZSY`, 48 inside the city, matched name by name: 48 of
+  48. Six NaPTAN names differ from OSM's and are paired by position in
+  `NAPTAN_NAME_ALIASES` (1 to 72 m). One is a rename: NaPTAN's "Kelham
+  Island" carries Shalesmoor's ATCO code (9400ZZSYSHL), stands 3 m from OSM's
+  Shalesmoor, and was revised 2025-05-08. The map keeps OSM's name; showing
+  "Kelham Island" goes to the owner.
+- **The light-rail test:** the kept track is 100% `railway=tram` (56.7 km of
+  route track, each way once), 4.3% in tunnel or on a bridge, with a 444 m
+  median gap. **Recommended `mode`: `tram`** (Odense's precedent; Manchester's
+  100% light_rail and 703 m is the contrast). The owner approves it with the
+  build.
+- **Rings: halved** (0.05 / 0.1 / 0.2 / 0.3 mi; Aarhus's). The median gap in
+  scope is 444 m (min 145, Castle Square to Fitzalan Square / Ponds Forge,
+  both in NaPTAN), under the spacing rule's 550 m; step 1 stops outside
+  390-500.
+- **Colours:** `scripts/line_colour_search.py sheffield` gives Blue #8018F8
+  (OSM's #0000FF reads about 2.2:1 on the dark page), Yellow #989800 (OSM's
+  #FFFF00 fails 3:1 on the light page; darkened as Tours and Dijon were) and
+  Purple #A030A0. Every one is 45.4 or more from the pins; the closest pair
+  is 55.1 (Blue, Purple); the dark-mode labels are distinct.
+- **Businesses, step by step:**
+  - 4,859 register rows in 1 authority, extract 2026-10-02.
+  - 3,447 storefront rows (the brief's 3,447).
+  - 4 at a "Flat" address are never placed; no childminders.
+  - 163 have no FSA point. Of those, 70 are placed at a Code-Point centroid
+    and 93 (2.7%) are not placed: 13 with a full postcode not in the edition,
+    80 with no usable postcode, none with an outward code only.
+  - 2 fall outside the sanity box (bad FSA points, one on the south coast,
+    one north-east of the city) and 0 outside the city.
+  - 8 trading-as names show the trade name.
+  - **3,348 storefronts placed** (Food service 2,365, Food shops 983):
+    97.9% at the FSA's point, 2.1% at a centroid. The FSA point share of
+    storefront rows on the full file is 95.3%, under the brief's sample
+    figure of 96.4%; 97.3% of storefront rows are placed, which the lead
+    accepted (2026-10-02): the full file against the brief's sample.
+  - 1,162 (34.7%) sit within a ring: Food service 869, Food shops 293.
+  - Canteens by name are at least 1.5% of Restaurant/Cafe/Canteen, not
+    separated (London's lower bound).
+  - Excluded by type: other catering 529, hospitals/childcare/caring 336,
+    schools 261, mobile caterers 142, manufacturers 68, distributors 37,
+    hotels 29, farmers 7, importers 3.
+- **Personal exposure (`check_personal_exposure.py sheffield`):** 1,162
+  pins, 1,061 distinct names; no fallback name exists; 0 emails, phone
+  numbers or c/o markers; 0 surname-first names and 1 "person's name (trade
+  name)" shape; the heuristic reads 299 (25.7%) as person-like, mostly cafés
+  and takeaways named for people. **Verdict: publish**, London's,
+  Newcastle's and Manchester's on the same register and guards.
+- **CRS:** UTM 30N (EPSG:32630), as the built UK cities.
+- **Notices:** 91 (FSA, Sheffield) and 92 (Ordnance Survey, Sheffield),
+  Newcastle's 62 and 63 with the city and date changed; NaPTAN's 86 covers
+  gate 3.
+- **Page:** `app/pages/159_Sheffield_Heatmap.py`, under the headings "The
+  trams", "The businesses" and "Reading the map": Newcastle's FSA bullets
+  with Sheffield's figures (one in thirty-seven unplaced; one in three in a
+  ring) and the tram template's line bullets. Five proposals are listed for
+  the owner.
+
 ### 2026-10-02 - Edinburgh built, third of the UK six: one tram line on OSM's two through relations, gate 3 exact against Edinburgh Trams and NaPTAN, the short register disclosed
 
 - **Scope (owner, 2026-10-01):** the City of Edinburgh, FSA code 773 on Food

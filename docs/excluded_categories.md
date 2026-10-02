@@ -3464,6 +3464,51 @@ every one inside the City of Edinburgh; none is listed on Edinburgh's page as
 left out.
 - Buses and national rail trains are not drawn.
 
+### Sheffield - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises Sheffield City Council inspects for food hygiene; no open register of
+other shops or of personal services covers the city, so clothes shops,
+hairdressers and the like are missing rather than excluded. Food shops
+(grocers, off-licenses, bakers, butchers, newsagents selling food,
+supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (529), where home caterers
+and event kitchens sit; mobile caterers (142); hospitals, childcare and care
+homes (336); schools, colleges and universities (261); hotels and guest
+houses (29); manufacturers and packers (68); distributors and transporters
+(37); importers and exporters (3); farmers and growers (7).
+
+**Not placed: flats** - 4 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 70 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 93 food storefronts (2.7%) with neither a location nor a
+usable full postcode. A business run from a private address is published
+without a location or a full postcode and is never placed.
+
+**Shown under its trade name** - 8 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 2 whose register location
+lies far outside the city.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.5% of that type read as one by name.
+
+**Stations.** All 48 Supertram stops, on the Blue, Yellow and Purple routes,
+every one inside the city; none is listed on Sheffield's page as left out.
+The Purple route runs about hourly; it is drawn, and its wait is stated on the
+page.
+- The Tram-Train to Rotherham is not drawn: it runs every 30 minutes, on
+  national rail track beyond Tinsley, under the 15-minute test for a converted
+  railway. Every stop it serves in Sheffield is on the Yellow route; its three
+  in Rotherham (Magna, Rotherham Central, Rotherham Parkgate) lie outside the
+  city.
+- Buses and national rail trains are not drawn.
+
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
 **One council, one survey year.** The City of Sydney's Floor Space and
