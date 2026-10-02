@@ -114,7 +114,8 @@ food only, keyless, the Open Government Licence already read, London's
 storefront filter and Glasgow's flat-address and childminder rules. Counts
 are food storefronts (service plus food shops) from the FSA API, 2026-10-01.
 Rail is from each operator; no OSM yet, so gate 3 and the light-rail test's
-track share come at Step 0.
+track share come at Step 0. **Released to one build session on 2026-10-02**
+(owner; `docs/handoff_uk_six_2026-10-01.md`).
 
 | City | The page | Source | Rail | Owner calls |
 |---|---|---|---|---|
@@ -705,6 +706,10 @@ candidates whose build must decide it (Japan, Seoul, Hong Kong, São Paulo).
   measurement for whether a region frames its cities. *(This bullet said
   `REGION_ORDER` was still `["United States", "Canada"]` until 2026-09-23 — it
   now holds seven entries.)*
+- **The UK six are the minor label tier, in a UK region of their own** (owner,
+  2026-10-02, "the high-density cluster rule"). London, Glasgow and Newcastle
+  move with them and stay eligible. The recipe is in
+  `docs/handoff_uk_six_2026-10-01.md`.
 - **The Japan batch (Band A's seven, Band B's five, Takaoka if it leaves R) is the minor
   label tier, as France and Czechia are** (owner, 2026-10-02): each new city
   loses its pill in the macro views. That means a Japan sub-region, every

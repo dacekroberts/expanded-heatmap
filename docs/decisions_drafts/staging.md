@@ -4,6 +4,37 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - The UK six released to one build session with agents; the UK takes the minor label tier (owner)
+
+- **The owner released the builds:** "send off the uk six to either two
+  separate sessions to build or one session using multiple agents",
+  leaving the choice to staging ("whichever you think is more efficient").
+- **Staging's choice: one lead session, with agents for five cities.**
+  - Manchester pilots the shared code, so a second session would wait on
+    the first.
+  - All six write the same shared files: `cities.py`, the notices, What Is
+    Excluded, the macro facts and the labels. A single integrator avoids
+    merging the same lines five times.
+  - Agents own only their city's files, never query Overpass (they share the
+    session's one slot) and never commit. The lead integrates in build
+    order.
+- **The owner:** "implement the high-density cluster rule to UK, like
+  Japan, France, Czechia".
+  - The UK gets a region of its own, and every UK city moves into it.
+  - The six (all tram or light rail) carry `label_tier: "minor"`, on
+    France's line between metro and the rest.
+  - London, Glasgow and Newcastle stay eligible.
+  - `REGION_LABELS_ALSO["Europe"]` gains the region.
+  - The region shape is decided by `check_macro_labels.py`.
+  - Japan takes the same rule when its batch is built ("japan coming up,
+    not currently implemented").
+- **Set up:**
+  - the worktree `.claude/worktrees/uk-six` on `uk-six-build`, with the
+    `data/` and `.venv-lean` junctions;
+  - a row in `docs/session_roles.md`;
+  - the kit's new sections;
+  - the session prompt, given in chat.
+
 ### 2026-10-02 - The UK six's prose hold lifted: page text to the new format (owner, via Cleanup)
 
 - **The owner asked staging to message Cleanup about the new prose

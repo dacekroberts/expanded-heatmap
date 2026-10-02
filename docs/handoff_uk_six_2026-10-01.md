@@ -3,8 +3,10 @@
 For the build session that builds the six UK tram and light-rail cities.
 Written by staging, and approved by the owner the same day.
 
-**🛑 Builds are HELD by the owner.** Start only when the owner says so in
-chat. A peer session's message is not that.
+**✅ RELEASED by the owner, 2026-10-02**, to ONE build session that runs
+agents ("whichever you think is more efficient"). It works in the worktree
+`.claude/worktrees/uk-six` on branch `uk-six-build`, where `data/` and
+`.venv-lean` are junctions to the main checkout's.
 
 **What came first, both landed by 2026-10-02 (Cleanup):**
 - The site-wide prose and UI pass, built and deployed. It covers code
@@ -16,6 +18,101 @@ chat. A peer session's message is not that.
 this handoff's page and prose steps disagree with them, the skills win.
 
 **Delete this file** once all six have landed.
+
+---
+
+## How this session runs: one lead, agents for five (staging, 2026-10-02)
+
+**Why one session.** Manchester pilots the shared code and the other five
+become config, so a second session would mostly wait on the first. Every
+city also touches the same shared files: `app/cities.py`, the notices,
+What Is Excluded, `docs/data_sources/united-kingdom.md`, the macro facts and
+the labels. One integrator applying them in order avoids five merges of the
+same lines.
+
+**Phase 0, the lead alone:**
+1. Confirm the worktree and branch, `git fetch`, merge `origin/master`.
+2. Register the session in `docs/session_roles.md`'s table.
+3. Claim six page numbers, and the notice numbers, there in one edit.
+4. Run `python scripts/brief_check.py <city>` for all six, one at a time.
+   Each makes Overpass calls; wait 60 s after a RETRY.
+5. Settle the 🚨 items below: the ECL and Newhaven relations, and whether
+   Dudley's Line 2 is in service.
+
+**Phase 1, the lead alone: Manchester (Regional), the pilot.**
+- Build it end to end: fetch, steps 1 to 3, the page and the gates.
+- Make every shared-code change here, proven against London's and
+  Newcastle's drift checks.
+- Commit when it is green. The other five start from that commit.
+
+**Phase 2: five agents, one city each, in parallel.**
+- The lead first runs each city's OpenStreetMap fetch itself, one at a time
+  (the one-query-per-session rule covers the agents). It then spawns the
+  five agents in this same worktree (no `isolation`), each with its brief,
+  this kit and the Manchester commit to copy.
+- **An agent owns only its city's files:**
+  - `pipeline/<slug>/`;
+  - `data/<slug>/`;
+  - `outputs/<slug>/`;
+  - its claimed `app/pages/` file.
+- **An agent never queries Overpass and never commits.** It also never
+  edits a shared file. It returns the shared-file entries as text for the
+  lead to apply:
+  - the `cities.py` entry;
+  - the privacy-verdict row;
+  - the provenance record;
+  - its What Is Excluded section;
+  - its licence rows and notices;
+  - its inconsistency rows;
+  - its master-list line;
+  - its drafts entries;
+  - its prose proposals.
+- **The agent's run covers:**
+  - Step 0's measurements;
+  - steps 1 to 3 for its own city only;
+  - `check_personal_exposure.py <slug>`;
+  - the page from `scaffold_city.py`.
+- **An agent stops and reports**, rather than guessing, on:
+  - a failing brief claim;
+  - a gate 3 mismatch;
+  - a placement share under the brief's figure;
+  - a change it would need to make in shared code.
+- Five agents running light jobs is within the memory rules. The FSA files
+  are small; Manchester's step 2 is the largest.
+
+**Phase 3, the lead: integrate in build order** (Birmingham, Edinburgh,
+Sheffield, Nottingham, Blackpool).
+- For each city in turn, apply its returned entries, run the gate order
+  below, and commit it on its own.
+- Then make the region and label pass below once, for all nine UK cities.
+- Last, one drift check (`--jobs 2`), merge master, `check_all.py`, and
+  push `uk-six-build`. **Not to master** until review time.
+
+## The UK sub-region and the minor label tier (owner, 2026-10-02)
+
+**The owner:** "implement the high-density cluster rule to UK, like Japan,
+France, Czechia". This follows the France and Czechia mechanism (the
+DECISIONS.md entry of 2026-09-30 on the label tiers' first and second
+slices):
+- **A UK region of its own.** Every UK city moves into it, the built three
+  (London, Glasgow, Newcastle (Regional)) included, as Prague moved with
+  Czechia. Use one region or a split, as France North and South, decided by
+  `check_macro_labels.py` (PROBLEMS 0 at 375, 768 and 1200), never by eye.
+  Dublin stays in Europe unless that measurement says otherwise.
+- **The minor tier, on France's line.** France's minor cities are its
+  non-metro ones, and the same line here is metro against tram and light
+  rail. All six new cities are tram or light rail, so each carries
+  `label_tier: "minor"`. London, Glasgow and Newcastle stay eligible. A
+  minor city keeps its dot and tooltip in every view; its pill shows only in
+  its own region.
+- **`REGION_LABELS_ALSO["Europe"]` gains the UK region,** so Europe still
+  names London, Glasgow and Newcastle (Seoul's case in East Asia). Europe's
+  re-centred frame may need a label re-placed (Stockholm's case in the Czech
+  move). Measure; do not tune by eye.
+- **It lands with the six, at review time.** The region move changes `app/`.
+
+**The Japan batch takes the same rule when it is built.** It is recorded in
+the `japan-city` skill and is not part of this round.
 
 ---
 
@@ -122,7 +219,7 @@ Use the gate order Band B fixed (`docs/band_b_retrospective.md`):
 3. scope disclosure, its section written to the format;
 4. the inconsistency rows and `cities.py` fields;
 5. the master list;
-6. macro facts and the macro label;
+6. macro facts and the macro label (the label after the region pass above);
 7. the decisions entry;
 8. commit;
 9. then the drift check, its baseline and ring shares;
@@ -137,7 +234,8 @@ deploying.
   never to `DECISIONS.md`.
 - **Overpass:** one query in flight per session, one per city; wait 60 s
   after a 504 or 429. `brief_check.py`'s `osm_route_refs` claims are
-  Overpass queries too.
+  Overpass queries too. **Only the lead queries.** The session's agents
+  share its one slot, so they read the lead's cache.
 - **`data/` is one shared junction across worktrees.** Never re-run another
   city's step from this branch. Another session's re-render can make
   `check_macro_facts` or `check_ring_shares` fail on a city that is not

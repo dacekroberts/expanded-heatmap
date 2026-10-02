@@ -78,7 +78,9 @@ carried over as they stand.
 
 ## NEXT - pick up here (owner held, 2026-10-01)
 
-1. **The UK six: approved, briefed, builds HELD (owner, 2026-10-01).**
+1. **The UK six: approved, briefed, RELEASED 2026-10-02** to one build
+   session with agents (worktree `uk-six`, branch `uk-six-build`), with the
+   UK region and minor label tier (owner).
    - **Scopes:** Manchester (Regional), Birmingham (Regional), Edinburgh,
      Sheffield (without the Tram-Train), Nottingham (Regional) and Blackpool
      (Regional).
@@ -130,6 +132,7 @@ carried over as they stand.
    - **Takaoka re-checked 2026-10-02:** the licence is CC BY 4.0, but the
      list cannot be reached (the old CSV gives 404 and the new platform
      403). **Moved to R by the owner** (2026-10-02).
+   - **The twelve Japan briefs, one batch: started 2026-10-02 (owner).**
    - **The Japan batch is the minor label tier** (owner, 2026-10-02): the
      recipe is in the `japan-city` skill's standing calls, the master list's
      "Before building" and the drafts.
