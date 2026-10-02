@@ -14,6 +14,40 @@ them off.
 
 
 
+
+### 2026-10-02 - Kōchi built, barbers and beauty salons only
+
+- **Kōchi built on the shared Japanese steps (the one-bucket agent, applied by
+  the lead): 1,406 storefronts (barbers 323, beauty salons 1,083), 67
+  stations, 5 lines; 677 pins within a ring (48%).** Page 173, notice 108,
+  `mode: tram`, minor tier. Personal services only, with NO laundry list
+  (disclosed, as Kitakyushu).
+- **The register: the full lists of 2026-03-31 and the seven monthly
+  additions, in `config.source_rows`, pinned at 2026-08-31 and disclosed as an
+  upper bound** (openings added, closures not; Kyoto's call). Only the premises
+  and name-rule columns leave the reader. The full lists are complete against
+  e-Stat FY2024 第10表 (327 barbers and 1,061 salons a year earlier, against
+  321 and 1,074), read from Hakodate's cached table, no new download.
+- **The join:** block 95.8%, chōme 4.2%, none 0 (the 高埇 rows now place). GSI's
+  address search on 100 block hits: median 21 m, all within 250 m.
+- **Rail:** N02-25, 67 stations, halved rings (median 271 m), gate 1's 200 m
+  floor. Tosaden's four lines drawn BY LINE, as Hiroden's: the operator signs
+  each by name, and its two services each join two of them at はりまや橋 rather
+  than share track. Gate 3 from Tosaden's route map (one timetable per stop, 76
+  stops = N02's 34 + 33 + 8 + 4 less the shared はりまや橋): Sanbashi 8 = 8,
+  Ekimae 4 = 4; the brief's third-party "Ino 32" was wrong. 39 cited overrides,
+  1 alias (文珠通 / OSM's 文殊通), 1 name OSM lacks (田辺島通).
+- **Privacy verdict: publish.** Japan pass 0.
+- **No Economic Census control:** the shared control measures 飲食店, which this
+  page does not carry; the official count and the GSI sample stand in.
+- **Proposals for review time:** "**This map shows personal services only:
+  barbers and beauty salons.**" (the brief's flag); "Kōchi City publishes no
+  list of laundries, so they are not on this map."; "Restaurants, cafés and
+  shops are not on this map either: the national list of food businesses gives
+  an address for only about half of Kōchi's restaurants."; the sources
+  bullet (Kyoto's without laundries); the upper-bound bullet (Kyoto's
+  adapted); the notice's English gloss.
+
 ### 2026-10-02 - Okayama built, MHLW's filings alone
 
 - **Okayama built on the shared Japanese steps (the MHLW-led agent, applied by

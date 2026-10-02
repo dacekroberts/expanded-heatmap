@@ -3508,6 +3508,32 @@ line.
   Hayashima and Tamano, and 1 each in Kumenan, Bizen, Soja and Akaiwa.
 - The Shinkansen is not drawn.
 
+### Kōchi - the city's barber and beauty-salon lists only, joined to MLIT's address blocks
+
+**Left out**
+- Laundries: the city publishes no list of them.
+- Every food business and every shop: the national list of food businesses
+  gives an address for only about half of Kōchi's restaurants, so this map
+  shows barbers and beauty salons only (owner, 2026-10-01).
+- 3 beauty salons registered to work anywhere in the city (一円), with no fixed
+  place.
+
+**Counted** - every barber and beauty salon on the city's complete lists of 31
+March 2026 (321 and 1,074; the official count a year earlier was 327 and
+1,061), plus the 20 new premises listed each month to 31 August 2026.
+Closures since March are not published, so the count is an upper bound.
+
+**One pin per premises** - 6 repeat registrations are shown once.
+
+**Not placed** - none. 59 sit at their town's center, mostly rural addresses
+written with 甲 / 乙 lot numbers.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 19 stations beyond it: 10 in Ino and 9 in Nankoku.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

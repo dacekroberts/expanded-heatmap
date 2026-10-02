@@ -43,25 +43,50 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Kōchi")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Yokohama's and Kyoto's pages
+# (approved wording, pre-approved for this build, 2026-09-30); the sentences
+# they do not cover are proposals in docs/decisions_drafts/japan-batch.md (the
+# one-bucket line, without laundries, is one). The as-of dates are the lists'
+# own (config.SOURCE_AS_OF; the register pinned at config.REGISTERS_AS_OF). The
+# median is step 1's (2026-10-02).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Five lines are drawn, each labeled on the map and in the legend: Tosaden's Ino, Gomen, Sanbashi
+  and Ekimae tram lines, and JR Shikoku's Dosan Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Kōchi City get rings, because the business data covers the city alone:
+  lines running on to Ino and Nankoku are cut at the city line.
+- **Tram stops sit closer together than metro stations**, a median of 271 m here, so the
+  rings are drawn at half the usual size (0.05 to 0.3 mi).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows personal services only: barbers and beauty salons.**
+- Kōchi City publishes no list of laundries, so they are not on this map.
+- Restaurants, cafés and shops are not on this map either: the national list of food businesses
+  gives an address for only about half of Kōchi's restaurants.
+- Barbers and beauty salons come from the city's complete lists as of 31 March 2026 and the new
+  premises listed each month since, to 31 August 2026.
+- The city lists new premises each month but not closures, so a premises that closed after March
+  is still counted. The map shows an upper bound, and a dot is a premises on the lists, not
+  necessarily one open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the district can be found, the dot
+  sits at the district's center.
+- Where a business's trade name is its operator's own name, the dot shows its register type
+  instead.
+- Names and types are shown in Japanese, as the city records them.
+- **About half of the premises sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("business layer")
 render_excluded_stations("Kōchi")
 render_country_links("Kōchi")
 

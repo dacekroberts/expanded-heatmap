@@ -1778,6 +1778,24 @@ _NOTICES = [
      "not drawn). The list may include premises that have closed. MHLW and MLIT did not make and do not en"
      "dorse this map.",
      False),
+    # Kōchi (notice 108): the city's lists are CC BY 4.0 (the page's open-data
+    # rule and the 高知市オープンデータ利用規約), in its prescribed processed form
+    # (第1); no city symbols or logos (第3). MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Matsuyama's and Yokohama's approved wording under
+    # the owner's pre-approval of template prose (2026-09-30).
+    ("Kōchi City and MLIT (Kōchi)",
+     "Kōchi's businesses: 出典：「理容所一覧」「美容所一覧」（高知市）"
+     "（[https://www.city.kochi.kochi.jp/soshiki/36/opendata.html](https://www.city.kochi.kochi.jp/soshiki/36/opendata.html)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Kōchi's lists of barbers and beauty salons as of 31 March 2026 "
+     "and its monthly lists of new premises to August 2026: this project selected the premises with a "
+     "fixed place, placed each by its address, and counted them around stations.) The lists may "
+     "include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Kōchi and MLIT did not make "
+     "and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
