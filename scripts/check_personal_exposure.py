@@ -792,6 +792,16 @@ REGISTRIES = {
     # guarantees, which this check cannot see.
     "manchester": dict(raw=None, trade=None, owner=None,
                        processed="businesses_clean.csv", address=None),
+    "birmingham": dict(raw=None, trade=None, owner=None,
+                       processed="businesses_clean.csv", address=None),
+    "edinburgh": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
+    "sheffield": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
+    "nottingham": dict(raw=None, trade=None, owner=None,
+                       processed="businesses_clean.csv", address=None),
+    "blackpool": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
 }
 
 # The France tram batch (2026-09-30): twenty-one cities on the same shared French

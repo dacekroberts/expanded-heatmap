@@ -59,6 +59,9 @@ BRANCH_NEAR_M = 300
 BRANCH_MIN_NEW_M = 1000
 HOP_MAX_M = 6000      # a routed hop longer than this is a wrong anchor, not a line
 ANCHOR_SLACK_M = 40   # a station's anchors: track vertices up to this much further than its nearest
+# Every CSV is written with LF line ends: pandas writes the platform's (CRLF on
+# Windows), which leaves committed outputs/ churning after every run.
+LF = chr(10)
 
 
 def fetch_hint(config):
@@ -343,16 +346,27 @@ def step1(config):
         line_keys = list(config.LINE_OSM_REFS)
 
     # Gate 3, the operator: counted over the whole network, before the scope.
+    # An operator whose site refuses scripts (Sheffield's, Blackpool's) leaves
+    # NaPTAN as the only independent source (owner, 2026-10-01): the config
+    # then sets OPERATOR_STATION_COUNTS = None and says why in
+    # OPERATOR_COUNTS_GAP (the tram-city rule: never a silent skip).
     print()
-    actual = {k: (len(st) if k == NETWORK else
-                  int(st["lines"].str.split("/").apply(lambda ls: k in ls).sum()))
-              for k in config.OPERATOR_STATION_COUNTS}
+    counts = config.OPERATOR_STATION_COUNTS
+    if counts is None:
+        gap = getattr(config, "OPERATOR_COUNTS_GAP", "")
+        if not gap:
+            sys.exit("OPERATOR_STATION_COUNTS is None with no OPERATOR_COUNTS_GAP saying why")
+        actual = None
+    else:
+        actual = {k: (len(st) if k == NETWORK else
+                      int(st["lines"].str.split("/").apply(lambda ls: k in ls).sum()))
+                  for k in counts}
     res = station_gates.verify_stations(
         city=config.CITY_NAME, platforms=platforms, stations=st,
         crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M,
-        expected_per_line=config.OPERATOR_STATION_COUNTS, actual_per_line=actual)
-    print(f"    gate 3 source: {config.OPERATOR_COUNTS_SOURCE}")
-    if res["per_line_mismatches"]:
+        expected_per_line=counts, actual_per_line=actual)
+    print(f"    gate 3 source: {config.OPERATOR_COUNTS_SOURCE if counts else 'NaPTAN only - ' + gap}")
+    if res.get("per_line_mismatches"):
         sys.exit("gate 3: the build disagrees with the operator's own count - "
                  + "; ".join(f"{line}: build {b}, operator {o}"
                              for line, (b, o) in res["per_line_mismatches"].items()))
@@ -387,12 +401,12 @@ def step1(config):
     ex = (outside.rename(columns={"stop_name": "station"})
           .assign(reason=f"outside {config.SCOPE_LABEL}")
           [["station", "lines", "reason", "latitude", "longitude"]].sort_values("station"))
-    ex.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
+    ex.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8", lineterminator=LF)
     keep = (inside.rename(columns={"stop_name": "station"})
             [["station", "lines", "latitude", "longitude"]].sort_values("station")
             .reset_index(drop=True))
     keep.insert(0, "stop_id", keep["station"])
-    keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")
+    keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8", lineterminator=LF)
     print(f"\n  {len(keep)} stations -> {config.STATIONS_CSV.relative_to(config.ROOT)}; "
           f"{len(ex)} excluded -> {config.EXCLUDED_STATIONS_CSV.relative_to(config.ROOT)}")
     print(f"  per line: " + ", ".join(
@@ -484,7 +498,7 @@ def step2(config, tax_module):
     out = df.rename(columns={"FHRSID": "fhrsid", "BusinessName": "business_name",
                              "LocalAuthorityName": "authority"})[
         ["fhrsid", "business_name", "latitude", "longitude", TAX.VALUE_COLUMN, "authority", "placement"]]
-    out.to_csv(config.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")
+    out.to_csv(config.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8", lineterminator=LF)
     bucket = out[TAX.VALUE_COLUMN].map(lambda v: TAX.classify({TAX.VALUE_COLUMN: v}))
     print(f"\n  {len(out):,} storefronts -> {config.BUSINESSES_CLEAN_CSV.relative_to(config.ROOT)}")
     counts = bucket.value_counts()
