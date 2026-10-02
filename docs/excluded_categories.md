@@ -3146,8 +3146,8 @@ and laundries (March 2026). 26 of the 674 bakery, confectioner and deli rows
 
 **One pin per premises** - 181 repeat permits are shown once.
 
-**Not placed** - 98 rows (1.4%), addresses MLIT's block and town files do not
-key. Another 372 sit at their town's center, and 525 food rows at the
+**Not placed** - 104 rows (1.5%), addresses MLIT's block and town files do not
+key. Another 394 sit at their town's center, and 497 food rows at the
 ministry's own coordinates for the same premises.
 
 **Names not shown** - 5 pins whose trade name is the operator's own name show
@@ -3299,8 +3299,8 @@ downloaded on 2 October 2026. 44 of the 627 bakery, confectioner and deli rows
 the city's list for a premises already in the national filings.
 
 **Not placed** - 17 rows (0.2%), mostly 新里町 addresses with 丙 / 丁 lot numbers,
-which restart in each part of the town. Another 120 sit at their town's
-center, and 230 national filings at their own coordinates.
+which restart in each part of the town. Another 123 sit at their town's
+center, and 227 national filings at their own coordinates.
 
 **Names not shown** - 1 pin whose trade name is the operator's own name shows
 its permit type. Only the city's lists name their operators.
@@ -3456,7 +3456,7 @@ they are kept (owner, 2026-09-24).
 **One pin per premises** - 351 repeat permits are shown once, and 166 rows of
 the city's list for a premises already in the national filings.
 
-**Not placed** - 5 rows (0.1%). Another 70 sit at their town's center, and 291
+**Not placed** - 8 rows (0.1%). Another 73 sit at their town's center, and 285
 national filings at their own coordinates.
 
 **Names not shown** - none: the city's list names its operators, and no trade
@@ -3496,7 +3496,7 @@ rows (6.9%) have a trade name that reads as a factory; they are kept (owner,
 
 **One pin per premises** - 401 repeat permits are shown once.
 
-**Not placed** - 3 rows. Another 2 sit at their town's center, and 610 at the
+**Not placed** - 16 rows (0.2%). Another 2 sit at their town's center, and 597 at the
 ministry's own coordinates.
 
 **Names not shown** - none: the national filings do not say who the operator

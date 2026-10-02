@@ -625,9 +625,9 @@
   "map_blob": "d175a41aeff224e1020a246bce7d35397e77f547"
  },
  "toyama": {
-  "in_ring": 3054,
-  "all": 6590,
-  "map_blob": "87150f7cbc72227d3f54fb172fe8963da2827306"
+  "in_ring": 3052,
+  "all": 6584,
+  "map_blob": "68bf23426137d524bbc2b6ff07c243bb23cb3dc9"
  },
  "kumamoto": {
   "in_ring": 5492,
@@ -647,7 +647,7 @@
  "utsunomiya": {
   "in_ring": 3789,
   "all": 8048,
-  "map_blob": "10a1c4cf5348145d8fd41894cc1c06bbff48ce56"
+  "map_blob": "88cb0a78850fb452f89db565ad17c8a6b3140773"
  },
  "kitakyushu": {
   "in_ring": 10587,
@@ -665,14 +665,14 @@
   "map_blob": "50be7833dbaa46d8be1a3adaed23e6329661c800"
  },
  "kagoshima": {
-  "in_ring": 3980,
-  "all": 6591,
-  "map_blob": "83e7177c77a7b04ef0841d74838b409520292a38"
+  "in_ring": 3975,
+  "all": 6588,
+  "map_blob": "8989ef228a74d49e87a12d59b47af10593eadbb1"
  },
  "okayama": {
   "in_ring": 4174,
-  "all": 6590,
-  "map_blob": "ada076b5d2bed31cacc5310225dac8dc40873a4d"
+  "all": 6577,
+  "map_blob": "dbecd7b33efb25a24b87c97bfa346fd235ca8b54"
  },
  "kochi": {
   "in_ring": 677,

@@ -4,6 +4,44 @@ Entries in the `decisions-entry` format, newest first, each exactly as it
 should land in `DECISIONS.md`. Cleanup folds them in when the owner hands
 them off.
 
+### 2026-10-02 - The owner's four calls on the Japan batch, and MHLW's default points refused
+
+- **The owner's calls (2026-10-02, in chat), on the batch entry's list:**
+  (1) Japan West stays pinned at zoom 6.0, accepting the phone-width
+  trade-off; (2) the shared default-point guard, built here; (3) the page and
+  notice sentences flagged as proposals are accepted as written, with Fukui's
+  CC BY-SA notice and `LICENSE` section and Kitakyushu's companies-only
+  operator names; (4) the landing steps as listed (the re-render of the built
+  cities below after the merge, `check_map_view.js`, one `deploy-verify`, the
+  reboot), at review time.
+- **The guard (`pipeline/countries/japan_step2.py`):** a publisher point, to
+  4 decimal places (about 10 m), given to rows in 3 or more distinct (ward,
+  town) is a default point, not a premises (`shared_points`,
+  `SHARED_POINT_TOWNS = 3`). `own_point_fallback` never places a row on one,
+  so the row keeps its town-chōme centroid or stays unplaced, and
+  `point_donors` never lends one. Each city emits
+  `own_point_default_refused`. **Rejected:** a list of known default points
+  per city (city halls), since a new edition can move them and the shape test
+  needs no upkeep.
+- **Measured on the batch (re-run, baselines updated):** Utsunomiya 3 rows on
+  2 default points (storefronts unchanged at 8,048; its own points' median
+  distance from their town-chōme centroid falls from 170,314 m to 79 m);
+  Kagoshima 6 rows on 1 point (6,591 to 6,588 storefronts); Okayama 13 rows
+  on 1 point (6,590 to 6,577; unplaced 3 to 16); Toyama's MHLW donor points
+  28 fewer (6,590 to 6,584). Matsuyama, Kumamoto, Nagasaki, Kitakyushu and
+  Sakai unchanged (0 refused): the 9 Kitakyushu pins the batch entry counted
+  sit on points shared by fewer than 3 towns, so the guard leaves them.
+- **Measured on the built cities in memory only (the shared `data/` folder
+  untouched):** Fukuoka 20 rows refused, Hiroshima 4 (13,567 to 13,565
+  storefronts), Tokyo 0. **Hiroshima joins Fukuoka and Tokyo in the landing
+  re-render**; this branch commits none of the three.
+- **Fixed in passing:** `official_shares()` wrote its JSON even when step 2
+  ran with `write=False` (a measurement), and in text mode (CRLF on
+  Windows). It now writes only when the step writes, as bytes.
+- **A proposal, not written:** Okayama's What Is Excluded section could say
+  that 13 of its 16 unplaced rows carry the ministry's stand-in point. The
+  page format has no template sentence for it, so it waits for review time.
+
 ### 2026-10-02 - The Japan batch landed on its branch: twelve cities, what the agents did, and what waits for review time
 
 - **All twelve built and committed on `japan-batch-build`, one commit per city

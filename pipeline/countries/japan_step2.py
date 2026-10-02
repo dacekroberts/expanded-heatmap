@@ -120,7 +120,7 @@ def own_coordinates_check(config, df):
             emit(f"own_coords_{tier}_within_250m_pct", round(100 * (t <= 250).mean(), 1))
 
 
-def official_shares(config, df):
+def official_shares(config, df, write=True):
     """Each municipality's share of the official restaurant count
     (japan_official: Tokyo's yearbook per ward, e-Stat per city), measured the
     Tokyo brief's way: the lists' 飲食店 permit rows, vehicles and stalls
@@ -155,9 +155,34 @@ def official_shares(config, df):
         emit(f"official_count_{code}", official)
         out.append({"municipality": muni, "code": code, "rows": n, "official": official, "share_pct": share,
                     "source": source})
+    if not write:
+        return
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
-    (config.OUTPUTS / "official_shares.json").write_text(
-        json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # bytes, so Windows text mode never turns the committed LF file to CRLF
+    (config.OUTPUTS / "official_shares.json").write_bytes(
+        (json.dumps(out, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
+
+
+# A publisher's DEFAULT point (owner, 2026-10-02): MHLW parks a filing it
+# cannot place on one stand-in coordinate, Kagoshima's and Utsunomiya's city
+# halls, a point given to rows in 13 different towns in Okayama. A point the
+# publisher gives to rows in this many distinct towns or more is never used to
+# place a row; the row keeps its town-chōme centroid, or stays unplaced.
+SHARED_POINT_TOWNS = 3
+
+
+def _pt4(p):
+    return (round(p[0], 4), round(p[1], 4))
+
+
+def shared_points(rows):
+    """The publisher points (to about 10 m) given to rows in SHARED_POINT_TOWNS
+    or more distinct (ward, town) pairs: default points, not premises."""
+    towns = collections.defaultdict(set)
+    for w, t, p in rows:
+        if p is not None and p == p:
+            towns[_pt4(p)].add((w, t))
+    return {pt for pt, ts in towns.items() if len(ts) >= SHARED_POINT_TOWNS}
 
 
 def own_point_fallback(config, joined):
@@ -166,14 +191,23 @@ def own_point_fallback(config, joined):
     places it: tier "own". Fukuoka's MHLW rows (2026-09-28): MHLW's
     points sit a median 36 m from the block point, closer than any town-chōme
     centroid, and the misses are rural 大字 the block file does not cover. A
-    point outside CITY_BBOX is not used. Changes `joined` in place."""
+    point outside CITY_BBOX is not used, nor a default point (shared_points).
+    Changes `joined` in place."""
     sources = getattr(config, "OWN_POINT_FALLBACK", set())
     if not sources:
         return
     bb = config.CITY_BBOX
+    mine = joined["source"].isin(sources)
+    default = shared_points(zip(joined.loc[mine, "ward"], joined.loc[mine, "town"], joined.loc[mine, "pub"]))
     inb = joined["pub"].map(lambda p: p is not None and p == p and bb["lat_min"] <= p[0] <= bb["lat_max"]
-                            and bb["lon_min"] <= p[1] <= bb["lon_max"])
-    take = joined["source"].isin(sources) & (joined["tier"] != "block") & inb
+                            and bb["lon_min"] <= p[1] <= bb["lon_max"] and _pt4(p) not in default)
+    refused = mine & (joined["tier"] != "block") & joined["pub"].map(
+        lambda p: p is not None and p == p and _pt4(p) in default)
+    if refused.any():
+        print(f"  a default point ({len(default)} given to {SHARED_POINT_TOWNS}+ towns) refused for "
+              f"{int(refused.sum()):,} rows")
+    emit("own_point_default_refused", int(refused.sum()))
+    take = mine & (joined["tier"] != "block") & inb
     for tier, n in joined.loc[take, "tier"].value_counts().items():
         print(f"  the publisher's own point where the block join gave {tier}: {n:,}")
         emit(f"own_point_from_{tier}", int(n))
@@ -199,13 +233,14 @@ def point_donors(config, joined):
     for recipient, donor in donors.items():
         ps = jr.permits_from_rows(source_rows(config, donor), config.PREFECTURE, municipality(config, donor),
                                   wardless)
+        default = shared_points((p["ward"], p["town"], p["pub"]) for p in ps)
         pts = collections.defaultdict(set)
         for p in ps:
             if p["pub"] and not p["closed"] and p["name"]:
-                pts[(p["ward"], p["town"], jr._name_key(p["name"]))].add((round(p["pub"][0], 4), round(p["pub"][1], 4)))
+                pts[(p["ward"], p["town"], jr._name_key(p["name"]))].add(_pt4(p["pub"]))
         one = {k: next(iter(v)) for k, v in pts.items() if len(v) == 1}
-        one = {k: v for k, v in one.items()
-               if bb["lat_min"] <= v[0] <= bb["lat_max"] and bb["lon_min"] <= v[1] <= bb["lon_max"]}
+        one = {k: v for k, v in one.items() if v not in default
+               and bb["lat_min"] <= v[0] <= bb["lat_max"] and bb["lon_min"] <= v[1] <= bb["lon_max"]}
         keys = [(w, t, jr._name_key(n)) for w, t, n in zip(joined["ward"], joined["town"], joined["name"])]
         take = pd.Series([k in one for k in keys], index=joined.index)
         take &= (joined["source"] == recipient) & (joined["tier"] != "block")
@@ -283,7 +318,7 @@ def run(config, write=True):
     df["name_is_operator"] = df["name_is_operator"] | prem.isin(flagged)
     print(f"  name rule by premises: {int(spread.sum())} more row(s) share a flagged row's block and trade name")
     emit("name_rule_spread_rows", int(spread.sum()))
-    official_shares(config, df)
+    official_shares(config, df, write)
     # MHLW's open data keeps closed premises, marked (Fukuoka's second source)
     closed = df["closed"]
     if closed.any():

@@ -12,6 +12,7 @@
   "not_storefront": 3213,
   "own_coords_block_median_m": 33,
   "own_coords_block_within_250m_pct": "96.8",
+  "own_point_default_refused": 0,
   "own_point_from_chome": 95,
   "own_point_from_none": 116,
   "repeat_permits_dropped": 967,
