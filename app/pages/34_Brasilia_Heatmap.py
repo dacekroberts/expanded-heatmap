@@ -18,6 +18,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.brasilia.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -26,48 +30,15 @@ st.set_page_config(page_title="Brasília Heatmap", page_icon="\U0001f5fa\ufe0f",
 set_base_font()
 
 render_city_nav("Brasília")
+render_city_title('Brasília')
 
-st.title("Brasília: commercial density around metro stations")
-
-# Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended.
-st.markdown(
-    """
-Two lines are drawn — **Metrô-DF's Linha Verde and Linha Laranja** — each labelled on
-the map and in the legend, in the colours OpenStreetMap records. The lines and stations
-are OpenStreetMap's; the Federal District's own station list is used only to check which
-stations are open. 104 Sul and Onoyama, still being built, are not drawn. The map covers
-the whole **Federal District**, which is a single município.
-
-Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
-Census enumerators walking every street recorded each establishment, what it was, and a
-map point for it. **Read it as a 2022 picture, not today's.** IBGE did not classify the
-establishments: each dot's category is this project's reading of the enumerator's words,
-and the names were not checked against any business register. Where one entry stands
-for several shops, as in a shopping centre or a gallery, it is one dot. At an address
-that is also someone's home, the dot shows only its category.
-
-**About four in ten of the establishments that might be shops, cafés or salons carry a
-description no rule can read, and are not drawn.** Most are brand or trade names with no
-word saying what they sell.
-
-Brasília's addresses name a block rather than a door, so "an address that is also a
-home" is judged by the block's lot — which is why so many dots here show only a category.
-
-**About one storefront in seven sits within a station ring**, because the metro runs
-south-west from the Plano Piloto and most of the District is far from it.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/brasilia/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/brasilia/provenance.json so they cannot
 # go stale on the next fetch: the date IBGE published each CNEFE file (the
@@ -77,6 +48,7 @@ _RAIL = [
     ('rail lines and stations from OpenStreetMap',
      ('osm_rail', 'osm_train')),
 ]
+
 if PROVENANCE_JSON.exists():
     try:
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
@@ -99,12 +71,44 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/brasilia/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
+# calls applied as recommended; set as bullets 2026-10-01.
+st.markdown(
+    """
+**The lines**
+
+- Two lines are drawn — **Metrô-DF's Linha Verde and Linha Laranja** — each labelled on the
+  map and in the legend, in the colours OpenStreetMap records.
+- The lines and stations are OpenStreetMap's.
+- 104 Sul and Onoyama, still being built, are not drawn.
+- The map covers the whole **Federal District**, which is a single município.
+
+**The businesses**
+
+- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+  Census enumerators walking every street recorded each establishment, what it was, and a
+  map point for it. **Read it as a 2022 picture, not today's.**
+- IBGE did not classify the establishments: each dot's category is this project's reading of
+  the enumerator's words, and the names were not checked against any business register.
+- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+  dot.
+- At an address that is also someone's home, the dot shows only its category.
+- Brasília's addresses name a block rather than a door, so "an address that is also a home"
+  is judged by the block's lot — which is why so many dots here show only a category.
+
+**Reading the map**
+
+- **About four in ten of the establishments that might be shops, cafés or salons carry a
+  description no rule can read, and are not drawn.** Most are brand or trade names with no
+  word saying what they sell.
+- **About one storefront in seven sits within a station ring**, because the metro runs
+  south-west from the Plano Piloto and most of the District is far from it.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Brasília")
+render_country_links('Brasília')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.rennes.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,56 +27,15 @@ st.set_page_config(page_title="Rennes Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Rennes")
+render_city_title('Rennes')
 
-st.title("Rennes: commercial density around Métro station areas")
-
-st.markdown(
-    """
-Two STAR lines are drawn — **Métro a and Métro b** — each labelled on the map
-and in the legend, redrawn from the operator's own published geometry.
-
-The map covers the **commune of Rennes**. Métro a runs entirely inside it.
-**Métro b runs past it at both ends**, so four of its fifteen stations are left
-out: Atalante and Cesson - Viasilva in Cesson-Sévigné, and La Courrouze and
-Saint-Jacques - Gaîté in Saint-Jacques-de-la-Lande. The line is still drawn to
-its ends, but those four stations get no ring and their businesses are not
-counted. They are listed in `outputs/rennes/excluded_stations.csv`. Their
-communes' businesses are in the same national register this map reads, so
-leaving them out is a choice rather than a limit of the data: the map keeps to
-the commune so that Rennes can be read alongside Paris, Marseille and Toulouse
-on the same terms.
-
-Businesses come from **SIRENE**, France's national register of établissements,
-joined to INSEE's separate geolocation file, the same sources as the other
-French cities. Roughly one active establishment in six here is marked
-non-diffusible by INSEE, which withholds its name, address and coordinates
-together, so those never reach this map. **Where SIRENE records no shop sign or
-trading name, the dot shows the establishment's address instead** — about two
-dots in five on this map.
-
-**Read the density as a register, not a street survey.** SIRENE records where a
-business is *registered*, and some registered establishments have no
-customer-facing shopfront; nothing in the data says which. Against
-OpenStreetMap's mapped restaurants in the same commune, where the two schemes
-mean nearly the same thing, this map carries about **1.3 times** as many
-points, level with Toulouse and closer to OpenStreetMap's count than Paris,
-Marseille or Lille.
-
-**About two storefronts in three sit within a station ring.** The category
-toggles show every storefront; the rings show the share the two lines actually
-reach.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/rennes/step3_map.py` to generate it.")
 
 # The snapshot, read from outputs/rennes/provenance.json rather than hardcoded
 # so it cannot go stale on the next fetch.
@@ -115,12 +78,47 @@ if PROVENANCE_JSON.exists():
 st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
            " and its geolocation file.")
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/rennes/step3_map.py` to generate it.")
+st.markdown(
+    """
+**The métro**
+
+- Two STAR lines are drawn — **Métro a and Métro b** — each labelled on the map and in the legend,
+  redrawn from the operator's own published geometry.
+- The map covers the **commune of Rennes**. Métro a runs entirely inside it.
+- **Métro b runs past it at both ends**, so four of its fifteen stations are left out: Atalante and
+  Cesson - Viasilva in Cesson-Sévigné, and La Courrouze and Saint-Jacques - Gaîté in
+  Saint-Jacques-de-la-Lande.
+- The line is still drawn to its ends, but those four stations get no ring and their businesses
+  are not counted. They are listed below.
+- Their communes' businesses are in the same national register this map reads, so leaving them
+  out is a choice rather than a limit of the data: the map keeps to the commune so that Rennes can
+  be read alongside Paris, Marseille and Toulouse on the same terms.
+
+**The businesses**
+
+- Businesses come from **SIRENE**, France's national register of établissements, joined to
+  INSEE's separate geolocation file, the same sources as the other French cities.
+- Roughly one active establishment in six here is marked non-diffusible by INSEE, which withholds
+  its name, address and coordinates together, so those never reach this map.
+- **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
+  instead** — about two dots in five on this map.
+
+**Reading the density**
+
+- **Read the density as a register, not a street survey.** SIRENE records where a business is
+  *registered*, and some registered establishments have no customer-facing shopfront; nothing in
+  the data says which.
+- Against OpenStreetMap's mapped restaurants in the same commune, where the two schemes mean
+  nearly the same thing, this map carries about **1.3 times** as many points, level with Toulouse
+  and closer to OpenStreetMap's count than Paris, Marseille or Lille.
+- **About two storefronts in three sit within a station ring.** The category toggles show every
+  storefront; the rings show the share the two lines actually reach.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Rennes")
+render_country_links('Rennes')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

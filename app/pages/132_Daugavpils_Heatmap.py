@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.daugavpils.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,57 +27,15 @@ st.set_page_config(page_title="Daugavpils Heatmap", page_icon="\U0001f5fa️", l
 set_base_font()
 
 render_city_nav("Daugavpils")
+render_city_title('Daugavpils')
 
-st.title("Daugavpils: commercial density around tram stops")
-
-# The tram-city skill's page-text template, approved by the owner word for
-# word on 2026-09-30, filled from Daugavpils's own step 1 and step 2 figures; the
-# business paragraphs are Riga's, the template city for these two layers.
-st.markdown(
-    """
-Daugavpils Satiksme's five tram routes are drawn, **trams 1, 2, 3, 4 and 5**,
-each labelled on the map and in the legend (3 and 5 share one line), redrawn
-from OpenStreetMap's route geometry, in colours this project chose, since the
-source records none. Daugavpils has no metro: its trams are its rapid transit,
-as Riga's are, so every tram stop gets rings. Trams run about every 10 to 15
-minutes by day on route 1 and every 20 to 30 minutes on routes 3 and 5; routes
-2 and 4 run about once an hour. Buses and suburban trains are not drawn.
-
-The map covers the **city of Daugavpils**.
-
-Businesses come from two sources. **Food service** is from the State Revenue
-Service's register of premises licensed to sell alcohol or tobacco — cafés,
-bars, restaurants and canteens — placed by address on the State Address
-Register. These dots show the kind of place and its street address, never the
-licence holder. **Shops and services** is from the national cadastre: every
-premises registered for trade whose name reads as a shop or a service, placed
-at its building.
-
-**This map has two categories, not three.** A café that sells neither alcohol
-nor tobacco is not in the licence register, so read the food layer as a lower
-bound. The cadastre records what a premises is for, not who is in it, so a
-hairdresser and a clothes shop are one category.
-
-**Read the density as a register, not a street survey.** The cadastre does not
-record whether a premises is in use, and no vacancy figure is published for
-Daugavpils, so read the shops layer as an upper bound. About 4% of licensed food
-premises cannot be placed by their address.
-
-**Tram stops sit closer together than metro stations**, a median of 287 m
-here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
-four storefronts in five sit within a ring.**
-
-Concentric ring boundaries and the two business categories (Shops and services,
-and Food service) are toggleable via the layer control in the top left. When
-enabled, business density will display as numbered circles summing areas when
-zoomed out. Zooming in will show individual dots; hover over those to see
-further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/daugavpils/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/daugavpils/provenance.json so they cannot
 # go stale on the next fetch: the portal's own last-modified dates for the
@@ -104,12 +66,51 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/daugavpils/step3_map.py` to generate it.")
+# The tram-city skill's page-text template, approved by the owner word for
+# word on 2026-09-30, filled from Daugavpils's own step 1 and step 2 figures; the
+# business paragraphs are Riga's, the template city for these two layers; set as
+# bullets 2026-10-01.
+st.markdown(
+    """
+**The trams**
+
+- Daugavpils Satiksme's five tram routes are drawn, **trams 1, 2, 3, 4 and 5**, each labelled on
+  the map and in the legend (3 and 5 share one line), redrawn from OpenStreetMap's route geometry,
+  in colours this project chose, since the source records none.
+- Trams run about every 10 to 15 minutes by day on route 1 and every 20 to 30 minutes on routes 3
+  and 5; routes 2 and 4 run about once an hour.
+- Buses and suburban trains are not drawn.
+- Daugavpils has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+  rings.
+- **Tram stops sit closer together than metro stations**, a median of 287 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
+- The map covers the **city of Daugavpils**.
+
+**The businesses**
+
+- Businesses come from two sources.
+- **Food service** is from the State Revenue Service's register of premises licensed to sell
+  alcohol or tobacco — cafés, bars, restaurants and canteens — placed by address on the State
+  Address Register. These dots show the kind of place and its street address, never the licence
+  holder.
+- **Shops and services** is from the national cadastre: every premises registered for trade whose
+  name reads as a shop or a service, placed at its building.
+- **This map has two categories, not three.** A café that sells neither alcohol nor tobacco is not
+  in the licence register, so read the food layer as a lower bound. The cadastre records what a
+  premises is for, not who is in it, so a hairdresser and a clothes shop are one category.
+- **About four storefronts in five sit within a ring.**
+
+**Reading the density**
+
+- **Read the density as a register, not a street survey.** The cadastre does not record whether a
+  premises is in use, and no vacancy figure is published for Daugavpils, so read the shops layer
+  as an upper bound.
+"""
+)
+
+render_map_help('two business categories (Shops and services, and Food service)')
+render_excluded_stations("Daugavpils")
+render_country_links('Daugavpils')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

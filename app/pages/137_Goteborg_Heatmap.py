@@ -16,6 +16,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.goteborg.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -24,12 +28,20 @@ st.set_page_config(page_title="Göteborg Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("Göteborg")
+render_city_title('Göteborg')
 
-st.title("Göteborg: food businesses around tram stops")
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/goteborg/step3_map.py` to generate it.")
 
 # The fetch dates, read from outputs/goteborg/provenance.json so they cannot go
 # stale: the register carries no dates, so the day it was fetched is its date.
 _reg, _rail = "", ""
+
 if PROVENANCE_JSON.exists():
     try:
         _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
@@ -39,87 +51,70 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
+if _reg and _rail:
+    st.caption(f"Food business data from Göteborgs Stad (CC0), fetched **{_reg}**; the tram "
+               f"lines and their stops from OpenStreetMap, fetched **{_rail}**.")
 
 def _long(iso):
     try:
         d = date.fromisoformat(iso)
     except ValueError:
-        return "the fetch date below"
+        return "the fetch date above"
     return f"{d.day} {d:%B %Y}"
-
 
 # The tram-city skill's page-text template, approved by the owner word for
 # word on 2026-09-30, filled from Göteborg's own step 1 and step 2 figures;
 # the business paragraphs follow Stockholm's, the template city for a Swedish
-# food register. No frequency sentence: no timetable was read for it.
+# food register; set as bullets 2026-10-01. No frequency sentence: no timetable
+# was read for it.
 st.markdown(
     f"""
-Thirteen Göteborgs Spårvägar tram lines are drawn, **Tram 1 to Tram 13**,
-each labelled on the map and in the legend, redrawn from OpenStreetMap's route
-geometry, in OpenStreetMap's own colours, line 4's made a little lighter so it
-stands apart from the dots. Göteborg has no metro: its trams are its rapid
-transit, as Riga's are, so every tram stop gets rings. Buses, ferries and
-commuter trains are not drawn, and neither is Lisebergslinjen, the heritage
-tram line.
+**The trams**
 
-The map covers **Göteborgs Stad**, the City of Gothenburg. Trams 4 and 12 run
-on into Mölndal, so their 5 stops there are left out. The lines are still
-drawn to their ends, but those stops get no ring and their businesses are not
-counted. They are listed in `outputs/goteborg/excluded_stations.csv`.
+- Thirteen Göteborgs Spårvägar tram lines are drawn, **Tram 1 to Tram 13**, each labelled on the
+  map and in the legend, redrawn from OpenStreetMap's route geometry, in OpenStreetMap's own
+  colours, line 4's made a little lighter so it stands apart from the dots.
+- Buses, ferries and commuter trains are not drawn, and neither is Lisebergslinjen, the heritage
+  tram line.
+- Göteborg has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+  rings.
+- **Tram stops sit closer together than metro stations**, a median of 390 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
+- The map covers **Göteborgs Stad**, the City of Gothenburg. Trams 4 and 12 run on into Mölndal,
+  so their 5 stops there are left out.
+- The lines are still drawn to their ends, but those stops get no ring and their businesses are
+  not counted. They are listed below.
 
-**The premises come from the City of Gothenburg's register of food
-businesses** (Livsmedelsverksamheter), kept by its Environment Administration.
-Each dot is placed at the point the register records for it and shows the
-premises' name and its type. Where a premises is registered under a person's
-name alone, its dot shows the street address instead. Premises the register
-has no correct address for are placed at the Administration's own address, so
-they are not shown: about one storefront in a hundred.
+**The businesses**
 
-**This map has one category, not three.** The register lists every premises
-the city's food control has registered: restaurants, cafés and bars, and food
-shops from kiosks to supermarkets, shown as Food service and Food shops. It
-holds food premises only, so **clothes shops, hairdressers and the like are
-not on this map**. Kitchens in preschools, schools, care homes and hospitals
-are left out by their type or their name, and so are staff restaurants, hotel
-breakfast rooms, caterers, food trucks, ships, vending machines, pharmacies,
-wholesalers and food producers. Where the register gives a premises no type,
-it is shown only if its name identifies a restaurant or a food shop, and its
-pin is marked "classified from its name".
+- **The premises come from the City of Gothenburg's register of food businesses**
+  (Livsmedelsverksamheter), kept by its Environment Administration.
+- Each dot is placed at the point the register records for it and shows the premises' name and
+  its type. Where a premises is registered under a person's name alone, its dot shows the street
+  address instead.
+- **This map shows food only, not three categories.** The register lists every premises the city's food
+  control has registered: restaurants, cafés and bars, and food shops from kiosks to
+  supermarkets, shown as Food service and Food shops.
+- It holds food premises only, so **clothes shops, hairdressers and the like are not on this
+  map**.
+- Where the register gives a premises no type, it is shown only if its name identifies a
+  restaurant or a food shop, and its pin is marked "classified from its name".
+- **About three storefronts in four sit within a ring.**
 
-**The register carries no dates.** It lists the food businesses active on the
-day it was fetched ({_long(_reg)}), and says nothing about when each opened.
+**Reading the density**
 
-**Read the density as a register, not a street survey.** A food registration
-is not always a food business: gyms, cinemas, bingo halls and general stores
-that sell some food are registered as cafés or food shops and are counted, and
-a few staff restaurants registered under a company name remain.
-
-**Tram stops sit closer together than metro stations**, a median of 390 m
-here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
-three storefronts in four sit within a ring.**
-
-Concentric ring boundaries and the business categories (Food service and Food
-shops) are toggleable via the layer control in the top left. When enabled,
-business density will display as numbered circles summing areas when zoomed
-out. Zooming in will show individual dots; hover over those to see further
-details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
+- **The register carries no dates.** It lists the food businesses active on the day it was
+  fetched ({_long(_reg)}), and says nothing about when each opened.
+- **Read the density as a register, not a street survey.** A food registration is not always a
+  food business: gyms, cinemas, bingo halls and general stores that sell some food are registered
+  as cafés or food shops and are counted, and a few staff restaurants registered under a company
+  name remain.
 """
 )
 
-if _reg and _rail:
-    st.caption(f"Food business data from Göteborgs Stad (CC0), fetched **{_reg}**; the tram "
-               f"lines and their stops from OpenStreetMap, fetched **{_rail}**.")
-
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/goteborg/step3_map.py` to generate it.")
+render_map_help('business categories (Food service and Food shops)')
+render_excluded_stations("Göteborg")
+render_country_links('Göteborg')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.copenhagen.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,64 +27,15 @@ st.set_page_config(page_title="Copenhagen Heatmap", page_icon="\U0001f5fa️", l
 set_base_font()
 
 render_city_nav("Copenhagen")
+render_city_title('Copenhagen')
 
-st.title("Copenhagen: commercial density around Metro and S-tog station areas")
-
-# Approved by the owner 2026-09-24, with the partnership and catch-all
-# clauses matching the two calls taken that day (DECISIONS.md).
-st.markdown(
-    """
-Eleven lines are drawn — **Metro lines M1 to M4 and S-tog lines A, B, Bx, C, E,
-F and H** — each labelled on the map and in the legend, redrawn from
-OpenStreetMap's route geometry in the operators' own colours. Two S-tog lines, A
-and F, are shown a shade lighter so they stay distinct from the Metro lines whose
-colours they nearly share. S-tog is Copenhagen's suburban rail network, and most
-maps on this site leave that kind of line out. It is drawn here because inside
-the city it runs like a metro, every ten minutes on its own tracks, and reaches
-many districts the Metro does not.
-
-The map covers the **municipalities of Copenhagen and Frederiksberg**.
-Frederiksberg is a separate municipality entirely surrounded by Copenhagen, with
-seven Metro stations of its own, so leaving it out would leave a hole in the
-middle of the map. The S-tog lines run far beyond both, out to Køge, Hillerød and
-Frederikssund. Their stations out there are drawn on the line but get no ring,
-and their businesses are not counted; the same goes for the Metro's two airport
-stations in Tårnby. They are listed in `outputs/copenhagen/excluded_stations.csv`.
-
-Businesses come from Denmark's **Central Business Register** (Det Centrale
-Virksomhedsregister, CVR), and specifically from its production units: each place
-where a business operates, recorded at that place's own address rather than its
-company's. Each is placed using Denmark's official address register, Danmarks
-Adresseregister. **Where a business is owned personally (a sole proprietorship, a
-partnership or any business whose registered name marks it as one person's), the
-map shows its address instead of its name**, because such businesses are usually
-registered under the owners' own names. So does a supermarket registered under
-its franchisee's own name.
-
-**Read the density as a register, not a street survey.** Some premises are newly
-registered and may not have opened yet. Denmark's classification files a web shop
-under the goods it sells, so some dots are businesses with no shop a passer-by
-could walk into, and nothing in the data says which. Against OpenStreetMap's
-mapped restaurants, cafés and takeaways in the same two municipalities, the
-register carries about **1.1 times** as many. One catch-all category, *other
-personal services*, is left out, because most of it is people working from their
-own premises; it also holds Copenhagen's tattoo studios, which are therefore
-missing from the map. A small share of premises (under 2%) carry no official
-address and cannot be placed.
-
-**About nineteen storefronts in twenty sit within a station ring.**
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/copenhagen/step3_map.py` to generate it.")
 
 # The snapshot date, read from outputs/copenhagen/provenance.json so it cannot
 # go stale on the next fetch: the CVR weekly generation the join was built on.
@@ -98,12 +53,56 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/copenhagen/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-24, with the partnership and catch-all
+# clauses matching the two calls taken that day (DECISIONS.md); set as bullets
+# 2026-10-01.
+st.markdown(
+    """
+**The lines**
+
+- Eleven lines are drawn, **Metro lines M1 to M4 and S-tog lines A, B, Bx, C, E, F and H**, each
+  labelled on the map and in the legend, redrawn from OpenStreetMap's route geometry in the
+  operators' own colours. Two S-tog lines, A and F, are shown a shade lighter so they stay
+  distinct from the Metro lines whose colours they nearly share.
+- S-tog is Copenhagen's suburban rail network, and most maps on this site leave that kind of line
+  out. It is drawn here because inside the city it runs like a metro, every ten minutes on its own
+  tracks, and reaches many districts the Metro does not.
+- The map covers the **municipalities of Copenhagen and Frederiksberg**. Frederiksberg is a
+  separate municipality entirely surrounded by Copenhagen, with seven Metro stations of its own,
+  so leaving it out would leave a hole in the middle of the map.
+- The S-tog lines run far beyond both, out to Køge, Hillerød and Frederikssund. Their stations out
+  there are drawn on the line but get no ring, and their businesses are not counted; the same goes
+  for the Metro's two airport stations in Tårnby. They are listed below.
+
+**The businesses**
+
+- Businesses come from Denmark's **Central Business Register** (Det Centrale
+  Virksomhedsregister, CVR), and specifically from its production units: each place where a
+  business operates, recorded at that place's own address rather than its company's.
+- Each is placed using Denmark's official address register, Danmarks Adresseregister.
+- **Where a business is owned personally (a sole proprietorship, a partnership or any business
+  whose registered name marks it as one person's), the map shows its address instead of its
+  name**, because such businesses are usually registered under the owners' own names. So does a
+  supermarket registered under its franchisee's own name.
+- One catch-all category, *other personal services*, is left out, because most of it is people
+  working from their own premises; it also holds Copenhagen's tattoo studios, which are therefore
+  missing from the map.
+- **About nineteen storefronts in twenty sit within a station ring.**
+
+**Reading the density**
+
+- **Read the density as a register, not a street survey.** Some premises are newly registered and
+  may not have opened yet.
+- Denmark's classification files a web shop under the goods it sells, so some dots are businesses
+  with no shop a passer-by could walk into, and nothing in the data says which.
+- Against OpenStreetMap's mapped restaurants, cafés and takeaways in the same two municipalities,
+  the register carries about **1.1 times** as many.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Copenhagen")
+render_country_links('Copenhagen')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
