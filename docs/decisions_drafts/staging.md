@@ -4,6 +4,27 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Seattle (Regional) released to its own session, Tbilisi queued behind it (owner)
+
+- **The owner: "should we pass the seattle regional brief to a new session?
+  and queue Tbilisi after?"**, then "yes" to staging's plan.
+- **One lead, with agents only for clean splits.** Seattle (Regional) is one
+  page from five sources across 11 cities, meeting in one step 2, so it does
+  not split by city the way the UK and Japan batches do. The Liquor Board
+  layer and the Snohomish filter are the agent-able legs.
+- **Tbilisi waits on three conditions:**
+  - Seattle is green;
+  - the owner answers its three calls (placeholder coordinates, division
+    45, region);
+  - the UK session's region pass has landed, since that pass changes
+    Europe's frame and Tbilisi's label is measured there.
+- **Numbers:** pages 174 (Seattle) and 175 (Tbilisi); notices from 109.
+- **Set up:**
+  - `.claude/worktrees/seattle-tbilisi` on `seattle-tbilisi-build`, with
+    the junctions and no upstream;
+  - the kit `docs/handoff_seattle_tbilisi_2026-10-02.md`;
+  - the prompt, given in chat.
+
 ### 2026-10-02 - Georgia profiled, Tbilisi briefed; Geostat's terms stored
 
 - **`add-country` for Georgia** (`docs/georgia_step0_endpoints.md`). There

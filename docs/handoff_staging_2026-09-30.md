@@ -137,7 +137,11 @@ carried over as they stand.
      `japan-batch`, branch `japan-batch-build`,
      `docs/handoff_japan_batch_2026-10-02.md`). Pages: UK 156–161, Japan
      162–173.
-   - **Next (owner, 2026-10-02): the Seattle (Regional) and Tbilisi briefs.**
+   - **Seattle (Regional) and Tbilisi: briefed 2026-10-02**; Seattle RELEASED
+     to one session (worktree `seattle-tbilisi`, branch
+     `seattle-tbilisi-build`, `docs/handoff_seattle_tbilisi_2026-10-02.md`),
+     Tbilisi queued behind it until the owner answers its three calls.
+     Pages 174 and 175.
    - **The Japan batch is the minor label tier** (owner, 2026-10-02): the
      recipe is in the `japan-city` skill's standing calls, the master list's
      "Before building" and the drafts.
