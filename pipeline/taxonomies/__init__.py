@@ -151,6 +151,7 @@ TAXONOMY_MODULES = {
     "zurich_gastwirtschaft": "pipeline.taxonomies.zurich_gastwirtschaft",
     "den_haag_source": "pipeline.taxonomies.den_haag_source",
     "seattle": "pipeline.taxonomies.seattle",
+    "georgia_nace": "pipeline.taxonomies.georgia_nace",
 }
 
 
