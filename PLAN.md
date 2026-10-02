@@ -922,6 +922,14 @@ every key, account and letter:
     unplaced rows carry the ministry's stand-in point.
   - **The default-point guard refuses a point only when 3 or more towns
     share it.** Kitakyushu's 9 pins on points shared by fewer towns stay.
+  - **Found by the landing's deploy check:**
+    - No Japanese page, built or new, says the stations left out are
+      "listed below" (`docs/city_page_format.md` item 6). For the
+      family-consistency wording batch.
+    - East Asia names the Japanese anchors through `REGION_LABELS_ALSO`, but
+      Sapporo's dot sits off the top of East Asia's frame at every width, and
+      at 375 Tokyo and Osaka do too. Not blocking: Japan East and West show
+      them. Re-place the labels, or leave Sapporo out of East Asia's anchors.
 - [ ] **Found at the UK six landing (2026-10-02), none blocking:**
   - **The "OpenStreetMap (rail geometry)" notice** lists the cities whose
     rail data comes from OSM, but it names none of the nine UK cities, and
