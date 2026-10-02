@@ -23,7 +23,7 @@ label instead of the name.
 
 The brief said Vancouver has no structural signal for this and would need a
 regex. It has one: **the registry wraps a sole proprietor's own name in
-PARENTHESES** - "(Christopher Colonia)", "(Qi Liu)", "(Dale Hudson)". 4,383 of
+PARENTHESES** - "(Given-name Surname)". 4,383 of
 29,660 mappable rows, 750 of the storefront set. That is the City's own marking
 of an individual registrant, not an inference, and it is this city's equivalent
 of D.C.'s ENTITYTYPE.

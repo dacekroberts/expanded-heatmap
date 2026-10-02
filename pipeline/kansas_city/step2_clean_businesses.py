@@ -17,7 +17,7 @@ What a reader should know before trusting the counts printed below:
   * **A person's business shows its address, not a name** (Houston's
     sole-owner rule, owner call 11). `dba_name` is the LICENCE HOLDER on every
     row (config explains); where it reads as a person - the register writes
-    people surname first, "HARRIS GREGORY J" - the business is a person's, and
+    people surname first, "SURNAME GIVEN-NAME INITIAL" - the business is a person's, and
     the pin shows its address. Otherwise the pin shows the trade name
     (`business_name`) where the register has one, else the holder company -
     unless that trade name is itself a person's (config.PERSON_NAMED_TRADE).
@@ -52,8 +52,8 @@ FETCH = "pipeline/kansas_city/fetch_sources.py"
 HOME_UNIT = r"\s(?:APT|APARTMENT|TRLR)\b"
 
 # THE HOLDER TEST. The register writes a person surname first, letters only:
-# SURNAME GIVEN [MIDDLE...] [initial] [JR|SR|II|III|IV] - "HARRIS GREGORY J",
-# "SOHR SARA", "SOARES DE LIMA NETO NICOLAU". Two to six words, no digits or
+# SURNAME GIVEN [MIDDLE...] [initial] [JR|SR|II|III|IV] - "SURNAME GIVEN-NAME INITIAL",
+# "SURNAME GIVEN-NAME", a four-part surname then one given name. Two to six words, no digits or
 # "&", and no organisation word (residence.py's list, plus the legal and trade
 # words this register's companies carry, read off the holders the shape test
 # caught, 2026-09-30). It is meant to over-fire: a false "person" only shows
@@ -80,7 +80,7 @@ TRAILING_FORM = re.compile(r"[\s,.]*\b(L\.?\s?L\.?\s?C\.?|INC\.?|CORP\.?|CO\.?|L
 
 
 def strip_legal_form(name):
-    """"ALYSSA BULLIS LLC" -> "ALYSSA BULLIS"; a trailing THE too ("... LLC THE")."""
+    """"GIVEN-NAME SURNAME LLC" -> "GIVEN-NAME SURNAME"; a trailing THE too ("... LLC THE")."""
     s = str(name or "").strip()
     for _ in range(2):
         s = re.sub(r"\s+THE$", "", TRAILING_FORM.sub("", s).strip(" ,."))

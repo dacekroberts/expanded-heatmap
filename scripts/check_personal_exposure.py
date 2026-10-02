@@ -499,7 +499,7 @@ REGISTRIES = {
     # Kansas City: KCMO's licence register, whose `dba_name` is the HOLDER and
     # `business_name` the trade name (pipeline/kansas_city/config.py). Step 2
     # shows the address wherever the holder reads as a person (surname first,
-    # "HARRIS GREGORY J") or the trade name is a person's own; otherwise the
+    # "SURNAME GIVEN-NAME INITIAL") or the trade name is a person's own; otherwise the
     # trade name, else the holder company - so the fallback join below counts
     # holder COMPANIES, each one a name step 2 judged not a person's. The
     # addresses carry no unit, so the unit check reads nothing; the
@@ -722,7 +722,7 @@ REGISTRIES = {
     # ITS STRUCTURAL SIGNAL IS A NAME FORMAT, NOT A COLUMN, so entity_type is
     # absent even though the signal is as good as Philadelphia's or D.C.'s:
     # Vancouver WRAPS A SOLE PROPRIETOR'S OWN NAME IN PARENTHESES
-    # ("(Christopher Colonia)", "(Qi Liu)"). Step 2 uses it as the primary
+    # ("(Given-name Surname)"). Step 2 uses it as the primary
     # signal, unioned with the person-name regex, and records the result in
     # two columns of the processed file, `registrant_name` and
     # `name_suppressed`, reported below instead of an entity_type. Read this

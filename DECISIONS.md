@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**328 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**329 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
@@ -34,6 +34,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The Japan list regenerated: Taitō and Meguro re-measured, Hiroshima Japan's eighth; the japan-city skill current](#2026-10-01---the-japan-list-regenerated-taitō-and-meguro-re-measured-hiroshima-japans-eighth-the-japan-city-skill-current)
 - [The decisions drafts folded in: 48 entries from 17 drafts files, the files removed](#2026-10-01---the-decisions-drafts-folded-in-48-entries-from-17-drafts-files-the-files-removed)
 - [The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)](#2026-10-01---the-master-lists-history-written-docscity_master_list_historymd-published-as-an-artifact-owner)
+- [Registrants' own names taken out of the docs: the What Is Excluded hotfix, then the internal files](#2026-10-01---registrants-own-names-taken-out-of-the-docs-the-what-is-excluded-hotfix-then-the-internal-files)
 
 **2026-09-30**
 
@@ -13528,3 +13529,34 @@ Recorded by the cleanup session from the Main Building Session's findings of
   Osaka keep manufacturing permits as Retail, so the phrase no longer holds.
 - **Not audited:** the other hand-kept counts `check_stale_claims` flags (59
   in all). Only those touching these seven cities were read.
+
+### 2026-10-01 - Registrants' own names taken out of the docs: the What Is Excluded hotfix, then the internal files
+
+- **Found by prose agent 5's audit:** `docs/excluded_categories.md`, which
+  renders verbatim on the public What Is Excluded page, printed three real
+  registrants' names as examples. Two were Kansas City's: a person licence
+  holder (the surname-first example) and a company named only as a person.
+  The third was a Vancouver sole proprietor (the parentheses example).
+  `check_personal_exposure.py` reads the maps, not this doc, so no check
+  caught it.
+- **Hotfix, owner-approved, pushed alone first** (a6f966d1): each name became
+  a neutral placeholder, "SURNAME GIVEN-NAME INITIAL", "a person's full name
+  followed by LLC" and "(Given-name Surname)". It is docs only, and the page
+  reads the file on every run, so no reboot was needed. Checked live: the
+  page shows the placeholders and none of the names.
+- **The internal files, scrubbed the same way (owner):**
+  - Kansas City's build brief, config comments and step 2 docstrings;
+  - Vancouver's step 2 docstring;
+  - `check_personal_exposure.py`'s comments;
+  - the tram handoff, the tram city list and the tram retrospective.
+  Comments only: each file's AST, docstrings removed, is unchanged.
+- **Left as they are:**
+  - **This log and `docs/decisions/2026-09-20.md`.** They are append-only,
+    so the names in the Kansas City entries and the Vancouver archive entry
+    stay.
+  - **Git history.** It keeps every name. Removing them from history would
+    take a rewrite and a force-push, which the owner has not asked for.
+  - **The working `PERSON_NAMED` lists** (Kansas City, Göteborg, New Orleans
+    and Tucson; Bucharest's and Den Haag's step 2 read lists like them). Step
+    2 uses these real names to withhold them; storing them as hashes instead
+    is the owner's call.

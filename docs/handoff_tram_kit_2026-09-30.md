@@ -143,7 +143,7 @@ re-asked.
 | Daugavpils, Liepāja | 8 | The credit for VZD's address file (CC BY 4.0, a join layer) | Extend notice 42 to name the address register, with VZD's own wording and the year | brief |
 | Liepāja | 9 | Brīvības iela (the named terminus) and Klaipēdas iela, on no route relation | Add both by node | brief |
 | Kansas City | 10 | Keep `valid_license_for` 2025 and 2026 only (1,978 licences for 2024 out) | Yes: the licences current at the freeze; the page gives the date | brief |
-| Kansas City | 11 | `dba_name` is often a person ("HARRIS GREGORY J") | Withhold it where it reads as a person, Houston's sole-owner rule; the exposure check decides the pattern | brief |
+| Kansas City | 11 | `dba_name` is often a person ("SURNAME GIVEN-NAME INITIAL") | Withhold it where it reads as a person, Houston's sole-owner rule; the exposure check decides the pattern | brief |
 | Kansas City | 12 | `business_type` fee codes ("Misc Rate 129" 328, "Flat Rate 42" 91) | Drop them and state the count on the page; the titles map to NAICS 2022 codes for `naics.py` | brief |
 | New Orleans | 13 | **Thinning.** The handoff named New Orleans the exception to no-thinning; its brief keeps all 110 stops (164 m) | **Keep every stop.** The street-stop filter's own shape test fails: it is for a central corridor plus dense branches, and New Orleans is uniformly dense. Thinning would leave businesses a block from a stop outside the rings. The rings form a band along each line, and the page says why | brief vs handoff |
 | New Orleans | 14 | "Special Events-Other (Vendor)" (1,258) and "Home Based-Office Use Only" (357) | Drop both: no counter of their own (`docs/category_rules.md` R1) | brief |
