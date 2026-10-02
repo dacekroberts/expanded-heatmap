@@ -1795,6 +1795,41 @@ _NOTICES = [
      "mapped by distance to tram stops. Not produced or endorsed by the "
      "Gemeente Den Haag.",
      False),
+    # Manchester (notice 84): the FSA's FHRS data for the seven Metrolink
+    # districts, Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Manchester)",
+     "Manchester's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Manchester's postcode centroids (notice 85): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Manchester)",
+     "Where the Food Standards Agency lists a Manchester food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # NaPTAN (notice 86): gate 3's second source for the UK tram and
+    # light-rail cities, counted only. The OGL's default statement, since the
+    # Department prescribes none (licence-read 2026-10-02). Wording proposed
+    # 2026-10-02, for the owner at review time.
+    ("Department for Transport, NaPTAN (United Kingdom)",
+     "Stop counts on the UK's tram and light-rail maps are checked against NaPTAN, the "
+     "National Public Transport Access Nodes dataset published by the Department for "
+     "Transport. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The "
+     "Department for Transport does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

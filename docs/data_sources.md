@@ -2465,6 +2465,63 @@ renumbered 83 in landing order; displayed, landed 2026-09-30.)
 - **MUST DO**: never download `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` -
   `fetch_sources.py` names its fields and stops if one arrives.
 
+**84. Food Standards Agency (Manchester) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the seven
+  Metrolink districts' councils are on England's FHRS, under the **Open
+  Government Licence v3** with the FSA's conditions. The OGL statement linked;
+  each council's extract date (2026-10-02); no rating, logo or imagery. The
+  credit is London's and Newcastle's, "Food Standards Agency, UK food hygiene
+  rating data", as a notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (10) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py manchester`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Manchester's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**85. Ordnance Survey (Manchester) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 673 Manchester food storefronts the FSA lists with a full
+  postcode and no point (5.4% of storefront rows); never a private address.
+  Units kept to the seven districts' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/manchester/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
+**86. Department for Transport, NaPTAN (United Kingdom) — required, and
+DISPLAYED** (written into `render_site_notices()` with the UK six,
+2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read`, 2026-10-02)<!-- /internal -->: NaPTAN, the
+  National Public Transport Access Nodes dataset, is published under the
+  **Open Government Licence v3.0** (the publisher's own terms page,
+  `beta-naptan.dft.gov.uk/terms-conditions`; data.gov.uk's record says the
+  same). No separate terms on the API (`naptan.api.dft.gov.uk`), and no
+  attribution of the Department's own, so the OGL's default applies.
+- **Used for** gate 3 of the UK tram and light-rail cities: each map's stops
+  are matched name by name against NaPTAN's active stop areas (stop type MET,
+  ATCO area 940) inside its scope. Nothing from NaPTAN is drawn on a map.
+- **MUST DISPLAY**: "Contains public sector information licensed under the
+  Open Government Licence v3.0.", with the licence linked. Whether a count
+  checked against the data needs the credit at all is arguable; displaying it
+  is the cautious reading.
+- **MUST NOT**: imply the Department's endorsement (OGL); use a DfT logo or
+  the Royal Arms; present NaPTAN as complete.
+- Wording proposed 2026-10-02, for the owner at review time.
+
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

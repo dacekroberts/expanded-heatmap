@@ -34,7 +34,7 @@ Mapped so far:
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima
 - **Germany:** Berlin
-- **United Kingdom:** London, Glasgow, Newcastle (Regional)
+- **United Kingdom:** London, Glasgow, Newcastle (Regional), Manchester (Regional)
 - **Argentina:** Buenos Aires
 - **Australia:** Sydney, Melbourne
 - **Sweden:** Stockholm, Göteborg
@@ -140,7 +140,7 @@ the code freely; for the data, go to the source.
 
 **Credits carried by the committed data** (where a source asks for its credit
 wherever derived data is republished, and `outputs/` republishes it):
-`outputs/london/` and `outputs/newcastle/` place some food premises at their postcode's centre from
+`outputs/london/`, `outputs/newcastle/` and `outputs/manchester/` place some food premises at their postcode's center from
 Ordnance Survey's postcode data, under the Open Government Licence v3.0 -
 Contains Ordnance Survey data © Crown copyright and database right 2026.
 Contains Royal Mail data © Royal Mail copyright and database right 2026.

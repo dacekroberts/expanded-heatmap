@@ -65,9 +65,13 @@ def rows(text):
 
 
 def entries(root=ROOT):
-    """{heading: entry text} over DECISIONS.md and its weekly archives."""
+    """{heading: entry text} over DECISIONS.md, its weekly archives and the
+    build sessions' drafts files, which a verdict cites until Cleanup folds
+    them in (CLAUDE.md, owner 2026-09-30; check_category_continuity.py reads
+    the drafts too)."""
     out = {}
-    for p in [root / "DECISIONS.md", *sorted((root / "docs" / "decisions").glob("*.md"))]:
+    for p in [root / "DECISIONS.md", *sorted((root / "docs" / "decisions").glob("*.md")),
+              *sorted((root / "docs" / "decisions_drafts").glob("*.md"))]:
         for part in re.split(r"(?m)^(?=### )", p.read_text(encoding="utf-8")):
             m = re.match(r"### (\d{4}-\d{2}-\d{2}) - (.+)", part)
             if m:

@@ -3332,6 +3332,47 @@ lines, the Sunderland branch included (owner, 2026-09-28): between Pelaw and
 Sunderland it runs on track shared with national rail.
 - Northern's national rail trains are not drawn.
 
+### Manchester (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the seven councils Metrolink serves (Manchester, Salford, Trafford,
+Bury, Rochdale, Oldham and Tameside) inspect for food hygiene; no open
+register of other shops or of personal services covers them, so clothes
+shops, hairdressers and the like are missing rather than excluded. Food shops
+(grocers, off-licenses, bakers, butchers, newsagents selling food,
+supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (1,980), where home caterers
+and event kitchens sit; mobile caterers (742); hospitals, childcare and care
+homes (1,093); schools, colleges and universities (894); hotels and guest
+houses (190); manufacturers and packers (118); distributors and transporters
+(133); importers and exporters (22); farmers and growers (9).
+
+**Not placed: flats** - 10 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 673 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 478 food storefronts (3.8%) with neither a location nor a
+usable full postcode, most in Bury (7.2%) and Tameside (6.2%). A business run
+from a private address is published without a location or a full postcode and
+is never placed.
+
+**Shown under its trade name** - 51 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 10 whose register location
+lies outside the seven districts.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 2.5% of that type read as one by name.
+
+**Stations.** All 99 Metrolink stops, on TfGM's nine lines, every one inside
+the seven districts; none is listed on Manchester (Regional)'s page as left
+out. Stockport, Bolton and Wigan have no Metrolink stop and are not on the map.
+- Buses and national rail trains are not drawn.
+
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
 **One council, one survey year.** The City of Sydney's Floor Space and

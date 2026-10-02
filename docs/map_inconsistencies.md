@@ -54,7 +54,7 @@ dense-looking city may simply have more complete records.
   and Taipei (the national business tax register, FIA).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
-- **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
+- **A food hygiene register:** London, Newcastle (Regional) and Manchester (Regional) (the Food Standards
   Agency's FHRS), every food premises a borough or council inspects, and nothing
   else; Glasgow the same on Scotland's scheme (Food Standards Scotland's FHIS),
   every premises the council inspects. Stockholm's is the city's own food
@@ -74,18 +74,18 @@ dense-looking city may simply have more complete records.
   Mexico City, Guadalajara, Monterrey, Madrid and Barcelona already say their density
   is "not comparable" with licence-register cities; Montréal's makes the point without
   those words (checked 2026-09-28). Buenos Aires's page says to read its
-  density "as a survey, not a register"; London's, Glasgow's and Newcastle
-  (Regional)'s "as a register, not a street survey" (checked 2026-09-29).
+  density "as a survey, not a register"; London's, Glasgow's, Newcastle
+  (Regional)'s and Manchester (Regional)'s "as a register, not a street survey" (checked 2026-09-29).
 
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Stockholm, Bucharest.
+- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Manchester (Regional), Stockholm, Bucharest.
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
-  London, Glasgow and Newcastle (Regional) (grocers, off-licences, bakers,
+  London, Glasgow, Newcastle (Regional) and Manchester (Regional) (grocers, off-licences, bakers,
   butchers, newsagents with food and supermarkets, named "Food shops" as in the
   Japanese cities); Stockholm the same, kiosks to supermarkets;
   Bucharest the same, butchers and bakeries to supermarkets.
@@ -195,7 +195,8 @@ register covers them all, or because the rail network only makes sense that way.
 - **Labelled "(Regional)":** Miami (Miami-Dade County), Vancouver (with Surrey),
   Guadalajara (4 municipios), Monterrey (4 municipios), Lille (11 communes), Fortaleza (4), Porto Alegre (6),
   Recife (4), Santos (with São Vicente), Taipei (with New Taipei), Newcastle
-  (Regional) (the five Tyne and Wear districts).
+  (Regional) (the five Tyne and Wear districts), Manchester (Regional) (the seven
+  Metrolink districts).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -289,7 +290,8 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   Busan, Taichung, Taoyuan, Taipei, the six Japanese cities, Berlin (the register's monthly
   date, 2026-09-01), London (each borough's extract date, 2026-09-09
   to 2026-09-16), Glasgow (the council's extract date, 2026-09-14), Newcastle
-  (Regional) (each council's, 2026-09-09 to 2026-09-16), Buenos Aires (the
+  (Regional) (each council's, 2026-09-09 to 2026-09-16), Manchester (Regional)
+  (each council's, 2026-10-02), Buenos Aires (the
   survey years, in the prose), Sydney (the survey year) and Melbourne (the
   census year), Stockholm (the register's last edit, 2025-10-22) and
   Bucharest (the registers' date, 2026-08-25).
@@ -324,7 +326,8 @@ really shopfronts. Several pages say which way their map leans.
   twenty has no location and no full postcode and is not placed, a quarter in
   Redbridge and a fifth in Havering); Glasgow (about one food storefront in a
   hundred has no map point and is not placed); Newcastle (Regional) (about one
-  in fourteen unplaced, most in North Tyneside and Sunderland); Buenos Aires
+  in fourteen unplaced, most in North Tyneside and Sunderland); Manchester
+  (Regional) (about one in twenty-six unplaced, most in Bury and Tameside); Buenos Aires
   (shopfronts whose use the surveyors could not identify, 7.2% and 32% in Villa
   Riachuelo, are dropped, and shops inside malls and arcades are not itemised).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
@@ -339,8 +342,8 @@ really shopfronts. Several pages say which way their map leans.
   mark closures, and those are left out); Berlin (closures and moves reach the
   register late; registered premises may have no shopfront, including web shops and
   business centres; about 1.2 to 1.5 times OpenStreetMap's restaurants, cafés and
-  bars at four station areas); London, Glasgow and Newcastle (Regional) (a
-  premises stays listed until the council removes it, as each page says).
+  bars at four station areas); London, Glasgow, Newcastle (Regional) and
+  Manchester (Regional) (a premises stays listed until the council removes it, as each page says).
 - **Undisclosed on the city page:** San Francisco (only about 37% of rows carry a
   NAICS code) and Los Angeles (about 9% carry none), so both are floors. San Diego
   undercounts neighbourhoods registered under their own name. All three are open
@@ -395,7 +398,7 @@ classifies or licenses them.
   concession stands, Bay ferry bars and a few restaurants. **Brazil:** food
   trucks, trailers, kiosks and stalls cannot be told from fixed premises in the
   census's descriptions and count as whatever the rest of the description names.
-  **London, Glasgow, Newcastle (Regional):** a workplace canteen registered as a
+  **London, Glasgow, Newcastle (Regional), Manchester (Regional):** a workplace canteen registered as a
   restaurant or café cannot be told apart; not measured.
 - **Street and market stalls:** excluded in Mexico City, Guadalajara and Monterrey;
   by code in France (47.8x) and Taiwan (street and market stalls, e.g. 2,669 in
@@ -639,6 +642,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | London | Underground (11 lines), DLR, Elizabeth line and the six London Overground lines (19 lines, short names on the map, full names in the legend) | Tramlink, National Rail, river buses | OpenStreetMap route relations (TfL publishes no GTFS; its API's line strings are straight lines between stations); 8 stations OSM's relations omit added from its station nodes; gate 3 exact on 14 counts | Greater London (lines cut at the boundary) | 32 / 0 |
 | Glasgow | Glasgow Subway (one 15-station loop, its two tunnels drawn as one line) | Suburban and national rail (the Argyle and North Clyde lines and the rest) | OpenStreetMap route relations (SPT publishes no GTFS for the Subway); gate 3 exact on 15 | Glasgow City (the loop lies wholly inside) | 0 / 0 |
 | Newcastle (Regional) | Tyne and Wear Metro, Green and Yellow lines (the Sunderland branch included) | Northern's national rail trains | OpenStreetMap route relations; gate 3 exact on 60 | The five Tyne and Wear districts | 0 / 0 |
+| Manchester (Regional) | Manchester Metrolink (light rail), TfGM's nine lines (Green, Purple, Yellow, Burgundy, Blue, Pink, Anthracite, Red, Navy), routed over OpenStreetMap's track through TfGM's stop lists | Buses and national rail trains | OpenStreetMap route relations; gate 3 exact on 99 (TfGM) and name by name against NaPTAN | The seven Metrolink districts | 0 / 0 |
 | **Argentina** | | | | | |
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
 | **Australia** | | | | | |
@@ -795,6 +799,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,360 / 29,214 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Glasgow | Food hygiene register | Glasgow City Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 405 / 1,588 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Manchester (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 7 councils | FSA business type | 1,843 / 4,359 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,612 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 | **Australia** | | | | | |
@@ -940,6 +945,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,000 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | Glasgow | Register coordinates (99%); 55 not placed | Food only; about one storefront in a hundred unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a flat address or a childminder never placed; the name after "trading as" shown |
 | Newcastle (Regional) | Register coordinates (90%) and postcode centres (10%, OS postcode centroids for a full postcode with no register point); 489 not placed | Food only; about one storefront in fourteen unplaced, most in North Tyneside and Sunderland; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Manchester (Regional) | Register coordinates (94%) and postcode centers (6%, OS postcode centroids for a full postcode with no register point); 478 not placed | Food only; about one storefront in twenty-six unplaced, most in Bury and Tameside; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
 | **Australia** | | | |
@@ -1096,6 +1102,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | London | Extracts of 2026-09-09 to 2026-09-16, per borough (fetched 2026-09-28) | B | 0.6 mi | Yes | 74% | Registered name; the trade name where registered "trading as" |
 | Glasgow | Extract of 2026-09-14 (fetched 2026-09-28) | B | 0.6 mi | Yes | 42% | Registered name; the trade name where registered "trading as" |
 | Newcastle (Regional) | Extracts of 2026-09-09 to 2026-09-16, per council (fetched 2026-09-28) | B | 0.6 mi | Yes | 54% | Registered name; the trade name where registered "trading as" |
+| Manchester (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.6 mi | Yes | 52% | Registered name; the trade name where registered "trading as" |
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
 | **Australia** | | | | | | |

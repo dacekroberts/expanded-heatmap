@@ -1000,6 +1000,14 @@ Cities built and running end to end (pipeline, map, app page):
   missing from OSM's route data are added from its station records (retired
   automatically once OSM carries them), and the Elizabeth line and most of the
   Overground are selected by name because OSM tags them `network=National Rail`.
+- **Manchester (Regional)** - Metrolink across the seven districts it serves;
+  the pilot of the UK six (built 2026-10-02 on `pipeline/countries/uk.py` and
+  `uk_fetch.py`, which the other five take as config). Food only on the FSA
+  register, London's method. **The lines are TfGM's nine, routed over OSM's
+  track** through TfGM's own stop lists, because OSM's service relations
+  predate TfGM's September 2026 change. Gate 3 runs against the operator and,
+  name by name, against NaPTAN, the DfT's national stop register (ATCO area
+  940 holds every tram stop). Light rail on the light-rail test.
 - **Buenos Aires** - the Subte's six lines (A-E and H) inside the Ciudad
   Autónoma; Argentina's first city. The businesses are **a street survey**, the
   city's Relevamiento Usos del Suelo 2022-2024: uses, not businesses, so no

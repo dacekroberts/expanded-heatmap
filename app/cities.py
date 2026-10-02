@@ -3153,6 +3153,39 @@ CITIES = [
         # 768 and 1200; 2026-09-30).
         "label_offset": ("end", -10, 0),
     },
+    {
+        "name": "Manchester (Regional)",
+        "lat": 53.4808,
+        "lon": -2.2426,
+        "page": "pages/160_Manchester_Heatmap.py",
+        # The UK six (2026-10-02), Newcastle's values. `mode` light_rail on the
+        # light-rail test: OSM maps 100% of the kept track railway=light_rail,
+        # 10.2% in tunnel or on a bridge, a 703 m median gap (San Diego's
+        # precedent); the owner approves it with the build. rail_extra
+        # "Trams" as Calgary's (light rail counts).
+        "coverage": "one_bucket",
+        "mode": "light_rail",
+        "placement": "Register coordinates (94%) and postcode centers (6%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Manchester Metrolink, TfGM's nine lines",
+        "region": "Europe",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in its own region.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
