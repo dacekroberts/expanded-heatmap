@@ -549,6 +549,13 @@ save repeating the work:
   owner-occupancy exemption) gave 0.39%, against the 0.00% the unit indicator
   reported. Treat what it finds as a **scope** question first - a home food
   business is not a storefront - which is easier to justify and fixes both.
+- **Names read by eye as a person's own are listed as KEYS, never as names**
+  (owner, 2026-10-01): `PERSON_NAMED` in the city's config holds each name's
+  `python pipeline/name_keys.py "NAME"` output, and step 2 compares
+  `keys_of(column)` against it (Kansas City is the worked example). A plain
+  list would publish in the repository the people the map leaves out;
+  `scripts/check_name_keys.py` fails one. Never write the name beside its key,
+  nor in DECISIONS.md, a brief or a commit message: count them instead.
 
 **Sample the catch-all classification codes for this city, and decide.**
 `pipeline/taxonomies/naics.py` lists the NAICS catch-alls (812990, 812930,

@@ -152,15 +152,15 @@ FEE_CODE = r"^(?:Misc|Flat) Rate \d+[A-Z]?$"
 # chains named for a founder ("JOHNNY WAS", "KENDRA SCOTT", "EILEEN FISHER"),
 # which are brands. The register is frozen, so the list is measured, not
 # guessed; step 2 stops if one of them is no longer shown.
+# Keys, not names (pipeline/name_keys.py): a new name's key is its output.
 PERSON_NAMED = (
-    # trade names
-    "AMEED JAARA", "NEVA J WILLIAMS", "KELSEY WOOD", "ADAMS RACHEL", "KHALID JAVED",
-    "CABALLERO KAREN", "ROBERTA GENE", "MUHAMMAD J FAKHAR", "JOSEPH FIGUEIREDO",
-    # holder companies, legal form stripped
-    "ALYSSA BULLIS", "ANDREW DESHON", "CHELSEA VANSICKLE", "ELSA ARMEDARIZ",
-    "HAYLEY SANTELL", "HOLLY LINES", "JANEE POE", "JASON POLLEN", "JENNIFER ANASTASIA",
-    "LAUREN ALEXANDRA", "MARK BRANNON", "MAZIN SHAYS", "MIKIAYLA ARRAS", "RACHAEL WELKER",
-    "ROSS MILLER", "SHARYN BLOND", "VANCE ARNOLDY",
+    "adfded197c319f26", "5b180c71183ee94d", "4e2b54d42e350efe", "e2f94955f17c8718",
+    "39f72d9e664f9a92", "8d0b215ce1aa0d61", "dc67f68e6680e5ab", "ff1294999fc5e21b",
+    "6e91c46eb1388dc7", "9c29a8022d6272d8", "b2f4fa15c37f462b", "50024764b58f3866",
+    "84e140087ab9c033", "7f76d0517b6fb4be", "10c8444cf29abe14", "b08c251880946bee",
+    "ef90352706036ee3", "1a7603624c76aac4", "d9cd168f6b8dfe76", "fbc2826f6f1fd51a",
+    "e05777a98cb0c78d", "d10954a8a23d1c47", "4cf6280f331729dc", "406f8c76fa815d13",
+    "563a766f654c596e", "d7dd6ed16acd1e58",
 )
 
 # Sanity bounds for the register's points: the city's extent plus a margin.

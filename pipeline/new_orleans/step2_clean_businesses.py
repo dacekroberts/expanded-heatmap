@@ -33,6 +33,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.new_orleans import config  # noqa: E402
+from pipeline.name_keys import keys_of  # noqa: E402
 from pipeline.new_orleans.step1_stations import city_polygon  # noqa: E402
 from pipeline.residence import looks_personal  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront  # noqa: E402
@@ -94,10 +95,11 @@ def main():
     print(f"  one row per premises (name + address): {before:,} -> {len(df):,}")
 
     no_name = df["businessname"] == ""
-    person_named = ~no_name & df["businessname"].isin(config.PERSON_NAMED)
-    gone = set(config.PERSON_NAMED) - set(df.loc[person_named, "businessname"])
+    name_keys = keys_of(df["businessname"])
+    person_named = ~no_name & name_keys.isin(config.PERSON_NAMED)
+    gone = set(config.PERSON_NAMED) - set(name_keys[person_named])
     if gone:
-        sys.exit(f"PERSON_NAMED names no longer shown: {sorted(gone)} - re-read the list "
+        sys.exit(f"PERSON_NAMED keys no longer matched: {sorted(gone)} - re-read the list "
                  f"against the register")
     df["name_is_address"] = no_name | person_named
     df["business_name"] = df["businessname"].where(~df["name_is_address"], df["address"])

@@ -34,6 +34,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.den_haag import config  # noqa: E402
 from pipeline.den_haag.gemeenten import gemeente_geometry  # noqa: E402
+from pipeline.name_keys import keys_of  # noqa: E402
 from pipeline.residence import looks_personal  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront  # noqa: E402
 from pipeline.taxonomies import den_haag_source as TAX  # noqa: E402
@@ -87,8 +88,11 @@ RETYPE = (
 # "Toko Asli", "Bakker Tim") or brands ("Bram Ladage", "Walter Benedict").
 # Step 2 stops if one of these is no longer shown, so a refresh re-reads the
 # list.
-PERSON_NAMED = ("Giorgio Rosa", "Masfegh Popal", "Sabir Harput", "Serhat Aydemir",
-                "Toros Santiago")
+# Keys, not names (pipeline/name_keys.py): a new name's key is its output.
+PERSON_NAMED = (
+    "44d2d6136a9da2d4", "9d222fb5a73cd27a", "d627bb6e214ba612", "83207fb3a7398a27",
+    "5ac7fcf5956684f1",
+)
 
 # Leading words the register writes before a trade name, in lower case
 # ("restaurant Pex", "koffiehuis/broodjeszaak Le Papillon"), its misspellings
@@ -237,10 +241,11 @@ def load_permits():
     df["business_name"] = df["OMSCHRIJVI"].map(trade_name)
     unnamed = df["business_name"].isna()
     print(f"  {int(unnamed.sum())} descriptions are only a type word - the pin shows the type")
-    person = df["business_name"].isin(PERSON_NAMED)
-    gone = set(PERSON_NAMED) - set(df.loc[person, "business_name"])
+    name_keys = keys_of(df["business_name"])
+    person = name_keys.isin(PERSON_NAMED)
+    gone = set(PERSON_NAMED) - set(name_keys[person])
     if gone:
-        sys.exit(f"PERSON_NAMED names no longer shown: {sorted(gone)} - re-read the list")
+        sys.exit(f"PERSON_NAMED keys no longer matched: {sorted(gone)} - re-read the list")
     print(f"  {int(person.sum())} trade names that are only a person's name - the pin shows "
           f"the type (PERSON_NAMED)")
     emit("names_withheld", int(person.sum()))

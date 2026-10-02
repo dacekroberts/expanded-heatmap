@@ -283,10 +283,12 @@ VENDING_NAME = r"(?i)vending|smartvend"
 # word scan of the rest; nearly all are trade names ("Kalle Glader", "Joe
 # Farelli", "Evas Paley", "Gustav Vasa" are restaurants). Ambiguous names are
 # listed, which only shows an address in place of a name.
+# Keys, not names (pipeline/name_keys.py): a new name's key is its output.
 PERSON_NAMED = (
-    "Abo Wadea", "Anders Gullberg", "Anshu Lodha", "Astrid Gustafsson", "Batoul Rammal",
-    "Diana Afro", "Juan Font", "Kamel Nassim", "Lib-Wam Leslaw Mielniczuk", "Naji Ayoub",
-    "Radhika Khaterpal", "Ramona Bejat", "Traktör Mikael Sande",
+    "578f1d18872ce082", "2a6687c3791234ab", "95b64a7872957160", "5c5c656aa410c114",
+    "0392a0a211610fb8", "c31d7849e3dd9d35", "87e85dd2761c5313", "caea2d2f74adad27",
+    "ca9b1295162aa7f3", "b6206474a043e5ba", "04f820ecc08b2e51", "c8a219d2dc0f3001",
+    "8d78a7044f0bb59b",
 )
 
 # Sanity bounds for the register's points: Göteborg's extent (the brief's lat

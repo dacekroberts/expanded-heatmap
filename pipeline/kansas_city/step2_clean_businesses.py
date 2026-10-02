@@ -20,7 +20,7 @@ What a reader should know before trusting the counts printed below:
     people surname first, "SURNAME GIVEN-NAME INITIAL" - the business is a person's, and
     the pin shows its address. Otherwise the pin shows the trade name
     (`business_name`) where the register has one, else the holder company -
-    unless that trade name is itself a person's (config.PERSON_NAMED_TRADE).
+    unless that trade name is itself a person's (config.PERSON_NAMED).
   * **At an apartment or a trailer, a business is a home**, and is left off
     (Sacramento's owner call, Houston's rule). The register's addresses carry
     no unit at all (0 of the kept rows, 2026-09-30), so the test is kept for a
@@ -40,6 +40,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.kansas_city import config  # noqa: E402
+from pipeline.name_keys import keys_of  # noqa: E402
 from pipeline.kansas_city.step1_stations import city_polygon  # noqa: E402
 from pipeline.residence import looks_organisational, looks_personal  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront  # noqa: E402
@@ -212,10 +213,11 @@ def main():
     # unless the company is named only as a person (config.PERSON_NAMED).
     person_held = df["dba_name"].map(holder_is_person)
     bare = df["_shown"].map(strip_legal_form)
-    person_named = ~person_held & bare.isin(config.PERSON_NAMED)
-    gone = set(config.PERSON_NAMED) - set(bare[person_named])
+    bare_keys = keys_of(bare)
+    person_named = ~person_held & bare_keys.isin(config.PERSON_NAMED)
+    gone = set(config.PERSON_NAMED) - set(bare_keys[person_named])
     if gone:
-        sys.exit(f"PERSON_NAMED names no longer shown: {sorted(gone)} - re-read the list "
+        sys.exit(f"PERSON_NAMED keys no longer matched: {sorted(gone)} - re-read the list "
                  f"against the register")
     print(f"  holder reads as a person: {int(person_held.sum()):,}; a company named only "
           f"as a person (config.PERSON_NAMED): {int(person_named.sum()):,}")

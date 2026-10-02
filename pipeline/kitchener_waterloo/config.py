@@ -155,7 +155,10 @@ CITY_KEEP = None
 # their type instead, as it does for the two-word ones. A three-word version
 # of the test was measured and rejected: it flagged 26 trade names (FIRST
 # CHOICE HAIRCUTTERS, NEW AGE LASER) for this one.
-PERSON_NAMES = {"Dalia Quinones Olaya"}
+# Keys, not names (pipeline/name_keys.py): a new name's key is its output.
+PERSON_NAMES = {
+    "6677a5860f02a84c",
+}
 
 TAXONOMY_SYSTEM = "kitchener_waterloo_inspection"
 RAW_CLASSIFICATION_COLUMN = "premises_kind"

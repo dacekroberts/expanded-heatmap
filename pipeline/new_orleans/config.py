@@ -281,10 +281,13 @@ NEW_ORLEANS_BBOX = {
 # eye on 2026-09-30 from the 697 shown names residence.py reads as a person's; the
 # rest are shop names or brands ("ERIN ROSE", a bar; "KATE SPADE"). Ambiguous names
 # are listed, which only shows an address in place of a name.
+# Keys, not names (pipeline/name_keys.py): a new name's key is its output.
 PERSON_NAMED = (
-    "ADAM CLARK", "ALEXANDER CARRE", "ALORA ROOD", "BARBARA CLARK", "DONNA TESI", "FISCHER GAMBINO",
-    "GINGER TAYLOR", "GLENDA IVY", "GLYNN BAI", "JANICE HERRON", "JELANI HANKINS", "KYLA BERNBERG",
-    "LUCY ROSE", "MAURICE ALVARADO", "MELEAH DRAUGHTER", "NATTY ADAMS", "NEWMAN KEATON", "NISH LEE",
-    "PATRICIA JOHNSTON", "PORTER LYON", "PRESTON L PITTS", "PURCELL DANIEL", "STEPHANIE TARRANT",
-    "SUZANNE L ORMAND", "TREVA MAY",
+    "c9cdded7ef9f6867", "b978a986a427f91f", "3d011d7cf8d953ed", "bc81fd0a1b9ff06d",
+    "458ae58d978bff83", "1d14111a731194a4", "7082753baf804bfa", "f5bf25d9e52cbf10",
+    "a03e380a42362fb3", "1142342f7eefcc0d", "c4a6d6c1ecf90ca8", "2b26d439b67219e2",
+    "c03f0a7b8a906f49", "d8bf98300ab4b900", "a1f21182a7dc4bb7", "939fb670441a2b55",
+    "c92c93fe861ec2ce", "3d09149114dd098f", "026c8d8bdf36d4e4", "04d2fbed72675524",
+    "92d5e04658992158", "c9df58b3997cff84", "bc9e58efb3ee62b6", "cbefd6b38b896b41",
+    "61594c65500878ef",
 )

@@ -88,7 +88,10 @@ a rule, not before obeying one.
   <city>` before publishing a city and after any change to its step 2 or
   taxonomy; record the verdict in `DECISIONS.md` and its row in
   `docs/privacy_verdicts.md` (`check_privacy_verdicts.py` fails a city
-  without one). Suspect catch-all codes first. [#personal-info]
+  without one). Suspect catch-all codes first. A list of names withheld as
+  a person's own holds KEYS, never the names (`pipeline/name_keys.py`;
+  `check_name_keys.py` fails a plain one), and no doc, brief or decisions
+  entry quotes a registrant's own name as an example. [#personal-info]
 - **Never remove the basemap attribution:** `© OpenStreetMap contributors`,
   linked to the OSM copyright page, visible on the render (ODbL 1.0); a new
   tile provider swaps in its own. Check K of `check_provenance.py` refuses an
@@ -224,6 +227,8 @@ python scripts/check_overpass_hosts.py [--live|--selftest]   # every Overpass mi
 python scripts/check_worktree_data.py <worktree> [--list]   # before removing a worktree
 python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
+python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
+python pipeline/name_keys.py "NAME" ["NAME" ...]        # the key to list for a name read as a person's own
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
 python scripts/check_city_registry.py                   # after merging
 python scripts/check_conflict_markers.py [--file PATH]  # after merging; a marker git left in any tracked file

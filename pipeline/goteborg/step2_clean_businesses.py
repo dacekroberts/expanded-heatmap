@@ -35,6 +35,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.goteborg import config  # noqa: E402
 from pipeline.goteborg.kommuner import goteborg_geometry  # noqa: E402
+from pipeline.name_keys import keys_of  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
 TAX = load_taxonomy_module(config.TAXONOMY_SYSTEM)
@@ -164,10 +165,11 @@ def main():
 
     # A premises named only as a person shows its address (config.PERSON_NAMED).
     p = p.copy()
-    person = p["business_name"].isin(config.PERSON_NAMED)
-    gone = set(config.PERSON_NAMED) - set(p.loc[person, "business_name"])
+    name_keys = keys_of(p["business_name"])
+    person = name_keys.isin(config.PERSON_NAMED)
+    gone = set(config.PERSON_NAMED) - set(name_keys[person])
     if gone:
-        sys.exit(f"PERSON_NAMED names no longer shown: {sorted(gone)} - re-read the list")
+        sys.exit(f"PERSON_NAMED keys no longer matched: {sorted(gone)} - re-read the list")
     if (person & p["name_classified"]).any():
         sys.exit("a PERSON_NAMED premises is classified by its name - its bucket would be "
                  "lost with the name; decide it by hand")

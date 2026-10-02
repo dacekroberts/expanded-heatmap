@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**329 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**330 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
@@ -35,6 +35,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The decisions drafts folded in: 48 entries from 17 drafts files, the files removed](#2026-10-01---the-decisions-drafts-folded-in-48-entries-from-17-drafts-files-the-files-removed)
 - [The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)](#2026-10-01---the-master-lists-history-written-docscity_master_list_historymd-published-as-an-artifact-owner)
 - [Registrants' own names taken out of the docs: the What Is Excluded hotfix, then the internal files](#2026-10-01---registrants-own-names-taken-out-of-the-docs-the-what-is-excluded-hotfix-then-the-internal-files)
+- [Withheld names are kept as keys: seven cities' PERSON_NAMED lists hashed](#2026-10-01---withheld-names-are-kept-as-keys-seven-cities-person_named-lists-hashed)
 
 **2026-09-30**
 
@@ -13560,3 +13561,35 @@ Recorded by the cleanup session from the Main Building Session's findings of
     and Tucson; Bucharest's and Den Haag's step 2 read lists like them). Step
     2 uses these real names to withhold them; storing them as hashes instead
     is the owner's call.
+
+### 2026-10-01 - Withheld names are kept as keys: seven cities' PERSON_NAMED lists hashed
+
+- **Owner's call, following the docs scrub:** the lists step 2 uses to
+  withhold a name read by eye as a person's own were plain text in seven
+  cities (Kansas City, Göteborg, New Orleans, Tucson, Zurich and
+  Kitchener-Waterloo in their configs, and Den Haag in its step 2): 127 names
+  in all. A plain list publishes, in the repository, the people the map leaves
+  out.
+- **Each name is now its key:** the first 16 hex digits of its SHA-256, taken
+  of the name exactly as step 2 compares it (`pipeline/name_keys.py`).
+  - Step 2 compares `keys_of(column)` against the keys, so the same rows
+    match. A blank never matches, as before.
+  - The step's "no longer shown" stop now prints keys.
+  - `python pipeline/name_keys.py "NAME"` gives a new name's key.
+  - A key is not a secret, since anyone with the public register can
+    recompute it. What it does is keep a curated list of people out of the
+    repository.
+- **Proof the maps did not move:** `drift_check.py` on the seven cities, run
+  through the heavy-job gate, gave zero drift (measured peak 0.16 GB).
+  - The maps, `excluded_premises.csv` and the baselines are identical.
+  - Every step 2 passed its own "no longer shown" stop, so every key matched
+    its rows.
+- **Search after the change:** apart from this log, no tracked file holds any
+  of the 127 names, and none appears on the seven cities' maps.
+- **So it stays that way:**
+  - `scripts/check_name_keys.py` is in `check_all` and fails any
+    `PERSON_NAME*` constant in `pipeline/` that holds a plain name;
+  - `CLAUDE.md`'s privacy invariant and the `add-city` skill say the same,
+    and add that no doc quotes a registrant's own name as an example.
+- **Kansas City's step 2 docstring** cited `config.PERSON_NAMED_TRADE`, which
+  does not exist; it now cites `config.PERSON_NAMED`.
