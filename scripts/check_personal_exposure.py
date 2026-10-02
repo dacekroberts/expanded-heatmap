@@ -337,7 +337,7 @@ REGISTRIES = {
                       address=("address",)),
     # Taiwan's national tax register publishes no owner column; the risk is a
     # sole proprietor registered under the owner's own name. `taiwan` runs the
-    # rule test above; the Latin heuristic cannot read Chinese.
+    # Taiwan rule test in `check()`; the Latin heuristic cannot read Chinese.
     "taichung": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv",
                      address=("address",), taiwan=True),
@@ -708,8 +708,8 @@ REGISTRIES = {
     "toronto": dict(raw=None, trade=None, owner=None,
                     processed="businesses_geocoded.csv",
                     address=("address",)),
-    # Vancouver is REGIONAL (Vancouver + Surrey) and the only entry here whose
-    # processed file mixes two registries. `raw` points at Vancouver's own
+    # Vancouver is REGIONAL (Vancouver + Surrey), so its processed file mixes
+    # two registries (New York's mixes four). `raw` points at Vancouver's own
     # export, because Surrey's has no trade/owner pair to join against: it
     # publishes a single BusinessName and no second name column, so Surrey
     # rows cannot be a substituted fallback by construction.
@@ -789,7 +789,7 @@ REGISTRIES = {
                       processed="businesses_clean.csv", address=None),
 }
 
-# The France tram batch (2026-09-30): twenty cities on the same shared French
+# The France tram batch (2026-09-30): twenty-one cities on the same shared French
 # step 2 as Paris to Rennes (pipeline/countries/france_register.py), so the same
 # structural guarantee - no registrant-name column is ever loaded, and a row
 # without a shop sign or usual name shows its address. One entry each, so the

@@ -105,7 +105,9 @@ DENUE_INTERIOR_COLUMN = "numero_int"
 # returned 504 on several requests and 429 on one, kumi.systems 504 on several,
 # osm.ch answered 200 with an EMPTY body once - all at different times, for the
 # same query. A failure is a fact about that host, not about the city, so a
-# caller must try the others and must not cache an empty 200.
+# caller must try the others and must not cache an empty 200. osm.ch is no
+# longer listed: it serves a Swiss-only extract, empty everywhere else
+# (scripts/check_overpass_hosts.py).
 OVERPASS_HOSTS = (
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",

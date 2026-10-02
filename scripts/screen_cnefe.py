@@ -82,7 +82,7 @@ def rx(*words):
     return re.compile(r"\b(" + "|".join(words) + r")")
 
 
-# --- ordered rules: first match wins ---------------------------------------
+# --- rules: the earliest match in the string wins, order breaks a tie ----
 # (label, bucket-or-None, compiled pattern). bucket None = excluded, with the
 # label as the reason. ORDER IS THE DESIGN - see the module docstring.
 RULES = [

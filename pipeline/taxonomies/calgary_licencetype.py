@@ -40,8 +40,9 @@ FIVE JUDGMENT CALLS, EACH MET BEFORE IN THIS PROJECT
 
 2. **`PERSONAL SERVICE (INDEPENDENT CHAIR OPERATOR)` (160) is dropped.** A
    chair renter inside someone else's salon is a person, not a storefront, and
-   counting them double-counts the salon. New York drops its NYS
-   `DOSAERENTER`/`DOSBARSHOPOWNER` split for exactly this reason.
+   counting them double-counts the salon. New York drops its NYS chair
+   renters, `DOSAERENTER` and `DOSBARRENTER`, for exactly this reason (the
+   barber shop owner, `DOSBARSHOPOWNER`, is kept).
 
 3. **`MASSAGE CENTRE (COMMERCIAL)` (917) COUNTS, although Vancouver's
    `Massage Therapy (RMT)` does not.** The difference is real and legal:

@@ -92,7 +92,8 @@ def counts_for(csv_path, city):
 
 
 def scope_rows(root, cities):
-    """One dict per city: name, the network mapped, and the three counts.
+    """One dict per city: name, the network mapped, and the five counts
+    from `counts_for()`.
 
     `counts` is None for a city with no excluded_stations.csv at all - every
     station of its network is on its map - which the caller renders as a dash

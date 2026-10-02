@@ -295,9 +295,9 @@ def legend_label(bucket):
 # The enumeration is a CLOSED LIST, so prove it at import
 # ---------------------------------------------------------------------------
 #
-# Barcelona's module carries the same assertion for the same reason: a value
-# added by a future refresh would otherwise fall through `classify()` silently
-# and simply not appear on the map. NAF rév. 2 has been stable since 2008, so
+# A value added by a future refresh would otherwise fall through `classify()`
+# silently and simply not appear on the map. (Barcelona's module has the same
+# closed-list risk and lists its census values, but asserts nothing about them.) NAF rév. 2 has been stable since 2008, so
 # this should never fire - which is exactly when a silent drift would go
 # unnoticed for longest.
 

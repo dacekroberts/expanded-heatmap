@@ -197,27 +197,20 @@ except Exception:
 # --- macro-map label collisions --------------------------------------------
 # Label pills are placed by PIXEL offsets at a pinned zoom, so every added city
 # can collide with an existing one, and the failure is invisible until someone
-# looks at the map. Boston and Toronto overlapped by 30x12 px unnoticed. This
-# model reproduced four pixel-measured pills to within 2 px on 2026-09-22.
+# looks at the map. Boston and Toronto overlapped by 30x12 px unnoticed.
 try:
     import math
     from cities import CITIES as _ALL, IN_DEFAULT_VIEW as _IDV
     from cities import REGION_ORDER as _RO, cities_in as _cities_in
 
-    # ⚠ SCORE ONLY THE CITIES THIS VIEW ACTUALLY LABELS, which since
-    # 2026-09-23 is the region's own and no longer every city on earth.
-    # `Overview.py` dropped the composite's exemption after measuring that all
-    # three collisions in the landing view involved a NON-MEMBER and 6 of its
-    # 13 non-member labels were drawn off-canvas at 375 px anyway.
-    #
-    # This check kept its OWN copy of the collision model - a second
-    # implementation of check_macro_labels.py's geometry - so it went on
-    # reporting two Marseille overlaps that the app no longer draws. Caught by
-    # running it, which is the argument for running it. The duplication itself
-    # is left standing deliberately: this file must work from a CLEAN CLONE
-    # with only the lean venv, so importing the other script is not free.
-    # Recorded in PLAN.md as worth unifying.
-    _MARKERS = _ALL          # every city still renders a DOT in every view
+    # Only the Global landing view is scored here, the view a reader opens
+    # first; check_macro_labels.py scores every region. The geometry is
+    # app/label_competition.py's, imported (it loads under the lean venv), so
+    # the two cannot disagree. `_fit` computes the zoom and centre the
+    # competition runs at. `_MARKERS`, `_box` and the CHAR_W / PAD_W / PILL_H
+    # values are left from the earlier, self-contained collision model and
+    # are unused.
+    _MARKERS = _ALL
 
     def _fit(lats, lons, w=320, h=460, fill=0.7, west_pad=0.12):
         lon_min = min(lons) - west_pad * max(max(lons) - min(lons), 0.5)

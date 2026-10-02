@@ -17,8 +17,12 @@ non-member still renders at the frame edge and still collides: "Los Angeles"
 x "San Diego" overlap 20.5 x 11.2 px in United States East, where neither is
 a member.
 
-So this scores EVERY city in EVERY region at EVERY width, and it is a script
-rather than a note because the offsets are re-tuned whenever a city is added.
+So this scores, at EVERY width, every city each region labels: its own
+members (a minor-tier city only in its own region) plus REGION_LABELS_ALSO,
+and in the Global landing view the winners of app/label_competition.py. Every
+city's marker counts as something a pill may not cover, except that in Global
+only winners' dots do. It is a script rather than a note because the offsets
+are re-tuned whenever a city is added.
 
 The model is Web-Mercator arithmetic against `fit_view`'s own maths, with text
 widths measured once in a real browser with the real font loaded (see
@@ -187,17 +191,11 @@ def region_view(region):
 def scored_labels(region, clat, clon, zoom):
     """Which cities' pills this region is held to.
 
-    A region labels its own cities and is scored on all of them. THE LANDING
-    VIEW IS THE EXCEPTION (owner's decision 2026-09-24, see DEFAULT_REGION in
-    cities.py): it labels every city on the planet at the United States zoom,
-    so on a wide screen Europe and South America pile up at the right-hand
-    side. The owner accepted that; each has its own region, scored in full.
-
-    So the landing view is held to the cities whose MARKERS fall on the
-    phone-width canvas, the frame fit_view is sized for. That is North
-    America today, decided by the arithmetic and not by a list, so a city
-    built inside that frame is scored here without anyone remembering to add
-    it.
+    A region labels its own cities (a minor-tier city only in its own
+    region) and any REGION_LABELS_ALSO anchors, and is scored on all of them.
+    THE LANDING VIEW IS THE EXCEPTION: since 2026-10-01 it labels only the
+    winners of app/label_competition.py's competition (GLOBAL_WON), across the
+    whole world, and is scored on exactly those.
     """
     # A minor city is labelled only in its own region - Overview.py's rule
     # (owner's label tiers, 2026-09-29; first applied 2026-09-30).
