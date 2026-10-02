@@ -13,6 +13,43 @@ them off.
 
 
 
+
+### 2026-10-02 - Okayama built, MHLW's filings alone
+
+- **Okayama built on the shared Japanese steps (the MHLW-led agent, applied by
+  the lead): 6,590 storefronts (Food service 4,627, Retail 1,963), 49
+  stations, 8 lines; 4,174 pins within a ring (63%).** Page 172, notice 107,
+  `mode: metro`, minor tier. Food only (Band B).
+- **The business leg:** MHLW alone. Block 91.2% (Food service 93.3%, brief
+  93.1), MHLW's point 8.7%, 3 unplaced. 1,976 of 7,582 open restaurant permits
+  publish no address (one in four). The name rule runs nowhere (owner,
+  2026-10-02). 2 yatai counted. MHLW's point sits a median 39 m from the block
+  point, 97.2% within 250 m.
+- **Rail:** N02-25, 49 stations, 14 excluded. Okaden drawn by line; gate 3
+  exact (Higashiyama 10, Seikibashi 7) from its own 2025-12-01 timetables.
+  JR West's lines under their signed names (吉備線 Momotaro, 宇野線 Uno Minato,
+  本四備讃線 Seto-Ohashi, the last a one-station stub, 植松, kept as cut). The
+  long Okaden names read "Saidaijicho (Harenowa)" and "Higashiyama (Okaden
+  Museum)". Median gap 1,467 m: standard rings. 16 overrides, 2 aliases.
+- **Census control: 1.53 against an official / census ratio of 2.79:
+  explained** (one restaurant in four withholds its address, and permits from
+  before 2021-06 are not in the file). 1 food pin, an own point at the city's
+  edge, falls outside every N03 ward.
+- **Privacy verdict: publish.**
+- **The 菓子 / そうざい factory share:** 39 of 566 (6.9%), kept.
+- **Process note:** the MHLW-led agent ran Okayama's `fetch_sources.py osm`
+  once before the lead's file existed, sending one tram-stop query to
+  overpass-api.de (33 elements, no 504 or 429, no retry), against the
+  one-query-per-session rule; it may have overlapped the lead's own Okayama
+  query. The lead's file then replaced it before step 1 ran; stations.csv is
+  byte-identical either way.
+- **Proposals for review time:** "Okayama City publishes its lists of barbers,
+  beauty salons and laundries only as PDFs, under terms that do not allow
+  reuse, so personal services are not on this map."; the source bullet
+  ("...the permits and notifications Okayama City has recorded since June 2021
+  ... Permits granted before then and still in force are not in it."); the
+  whole-page name bullet (Hiroshima's MHLW wording); the in-ring percentage.
+
 ### 2026-10-02 - Kagoshima built, food only
 
 - **Kagoshima built on the shared Japanese steps (the MHLW-led agent, applied

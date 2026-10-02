@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -2667,6 +2667,24 @@ at review time).
 - **MUST DO:** `check_personal_exposure.py kagoshima` with its Japan pass, run
   2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
   ("Kagoshima built", 2026-10-02).<!-- /internal -->
+
+**107. MHLW and MLIT (Okayama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Okayama's businesses come
+  from MHLW's open data alone, **PDL 1.0**, as in Fukuoka's (54). MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+  The city's own pages are not used (their default reserves reuse).
+- **MUST DISPLAY**: MHLW's source and processed-by credit, linking its top
+  page only; MLIT's credit lines.
+- **MUST NOT**: present processed data as MHLW's own; use the ministry's logo;
+  claim its list is complete or accurate (its fields are opt-in).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py okayama` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Okayama built", 2026-10-02).<!-- /internal -->
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

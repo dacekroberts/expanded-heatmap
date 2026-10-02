@@ -3467,6 +3467,47 @@ line.
 - Left out: 3 stations beyond it: 1 each in Aira, Ibusuki and Hioki.
 - The Shinkansen is not drawn.
 
+### Okayama - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes its lists only as
+  PDFs under terms that do not allow reuse, so this map shows food businesses
+  only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Permits granted before June 2021 and still in force, which the national
+  filings do not hold (about 827 restaurants).
+- 3,379 national filings whose filers did not publish an address (1,976 of
+  them restaurants, one restaurant in four).
+- 32 temporary or mobile permits and 607 rows with no fixed place (licensed for
+  the whole city, 市内一円).
+- 519 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 338 school, hospital and staff canteens, 204 vending machines, 21 mail-order
+  businesses, 7 entertainment venues, 38 premises inside hotels and inns, 11
+  caterers (仕出し) and 153 snack bars and cabarets.
+- 32 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on 2 October 2026. 2 fixed
+street stalls (屋台) are counted. 39 of the 566 bakery, confectioner and deli
+rows (6.9%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 401 repeat permits are shown once.
+
+**Not placed** - 3 rows. Another 2 sit at their town's center, and 610 at the
+ministry's own coordinates.
+
+**Names not shown** - none: the national filings do not say who the operator
+is, so the name rule cannot run here (owner, 2026-10-02).
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 14 stations beyond it: 3 each in Kurashiki and Setouchi, 2 each in
+  Hayashima and Tamano, and 1 each in Kumenan, Bizen, Soja and Akaiwa.
+- The Shinkansen is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

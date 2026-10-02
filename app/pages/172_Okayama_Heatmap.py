@@ -43,25 +43,56 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Okayama")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Hiroshima's page (approved wording,
+# pre-approved for this build, 2026-09-30); MHLW's name-rule bullet covers the
+# whole page (owner, 2026-10-02). The sentences no template covers are
+# proposals in the batch's drafts file. MHLW's file states no date, so it is
+# dated by download. One restaurant in four withholds its address (1,976 of
+# 7,582 open permits, 2026-10-02). The ring share, 63.3%, is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Eight lines are drawn, each labeled on the map and in the legend: Okaden's Higashiyama and
+  Seikibashi tram lines; and JR West's Sanyo, Ako, Momotaro, Tsuyama, Uno Minato and Seto-Ohashi
+  lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Okayama City get rings, because the business data covers the city alone:
+  JR lines running on to Kurashiki, Hayashima, Tamano, Soja, Akaiwa, Setouchi, Bizen and Kumenan
+  are cut at the city line.
+- The Shinkansen is not drawn (Okayama appears as a JR station).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Okayama City publishes its lists of barbers, beauty salons and laundries only as PDFs, under
+  terms that do not allow reuse, so personal services are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear either.
+- The food businesses come from the Ministry of Health, Labour and Welfare's filing system, whose
+  open data holds the permits and notifications Okayama City has recorded since June 2021
+  (downloaded 2 October 2026). Permits granted before then and still in force are not in it.
+- The Food shops layer is food retail only, and it is partial: shops that only notify rather than
+  hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
+  chose to publish in the ministry's list.
+- The list may include premises that have closed, so a dot means a permit on file, not a business
+  open today.
+
+**Reading the map**
+
+- About one restaurant in four in Okayama chose not to publish its address in the national filing
+  system and is not on this map. Where they are is not known.
+- The rest are matched to MLIT's address reference data, which places most at their street block;
+  where that fails, the dot sits at the ministry's own coordinates.
+- The ministry's list does not say who the operator is, so a trade name that is its operator's own
+  name cannot be checked here.
+- Names and permit types are shown in Japanese, as the list records them.
+- **About 63% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Okayama")
 render_country_links("Okayama")
 
