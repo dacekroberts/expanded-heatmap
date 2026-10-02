@@ -1,0 +1,284 @@
+<title>Prose Pass Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a sticky filter rail above one reading column of proposal cards; a
+   decision bar fixed to the bottom carries the count and the copy button. */
+:root {
+  --bg: #f6f7f5;
+  --panel: #ffffff;
+  --ink: #1d2422;
+  --muted: #5d6965;
+  --line: #d9dfdc;
+  --accent: #0f6b5c;
+  --accent-ink: #ffffff;
+  --del-bg: #fbe3df;
+  --del-ink: #8a2316;
+  --ins-bg: #dcf1e3;
+  --ins-ink: #155c33;
+  --fix: #9a5b00;
+  --fix-bg: #fdf0d9;
+  --skip: #6f6f6f;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131816; --panel: #1b2220; --ink: #e4ebe8; --muted: #9aa8a3; --line: #2e3835;
+    --accent: #4fb8a4; --accent-ink: #0d1412;
+    --del-bg: #3b1d19; --del-ink: #f3b0a5; --ins-bg: #173323; --ins-ink: #9fe0b5;
+    --fix: #f0b860; --fix-bg: #3a2c12; --skip: #9a9a9a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131816; --panel: #1b2220; --ink: #e4ebe8; --muted: #9aa8a3; --line: #2e3835;
+  --accent: #4fb8a4; --accent-ink: #0d1412;
+  --del-bg: #3b1d19; --del-ink: #f3b0a5; --ins-bg: #173323; --ins-ink: #9fe0b5;
+  --fix: #f0b860; --fix-bg: #3a2c12; --skip: #9a9a9a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 120px; }
+h1 { font-size: 1.6rem; margin: 0 0 4px; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0 0 16px; max-width: 70ch; }
+.tally { display: flex; flex-wrap: wrap; gap: 8px 18px; font-variant-numeric: tabular-nums; margin-bottom: 14px; color: var(--muted); }
+.tally b { color: var(--ink); }
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.row .lab { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); min-width: 52px; }
+.chip { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 999px; padding: 3px 11px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chip:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+input[type=search] { font: inherit; flex: 1 1 220px; min-width: 0; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); }
+.bulk { font: inherit; font-size: 0.85rem; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; }
+.sets { margin: 16px 0 6px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 10px 14px; }
+.sets summary { cursor: pointer; font-weight: 700; }
+.sets ul { margin: 8px 0 2px; padding-left: 18px; display: grid; gap: 6px; }
+.list { display: grid; gap: 12px; margin-top: 14px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+.card.approved { border-color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
+.card.skipped { opacity: 0.6; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+.id { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.kind { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 1px 7px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); }
+.kind.fix { color: var(--fix); background: var(--fix-bg); border-color: transparent; }
+.title { font-weight: 700; flex: 1 1 300px; min-width: 0; }
+.file { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); overflow-wrap: anywhere; }
+.why { color: var(--muted); font-size: 0.92rem; }
+.why::before { content: "Why: "; font-weight: 700; color: var(--ink); }
+.set-note { font-size: 0.85rem; color: var(--fix); }
+.diff { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); border-radius: 6px; padding: 8px 10px; max-height: 420px; overflow: auto; }
+.diff del { background: var(--del-bg); color: var(--del-ink); text-decoration: line-through; }
+.diff ins { background: var(--ins-bg); color: var(--ins-ink); text-decoration: none; }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.acts button { font: inherit; font-size: 0.88rem; padding: 5px 14px; border-radius: 6px; cursor: pointer; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.acts .ap[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.acts .sk[aria-pressed="true"] { background: var(--skip); border-color: var(--skip); color: var(--panel); }
+.empty { color: var(--muted); padding: 24px 0; text-align: center; }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--panel); border-top: 1px solid var(--line); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: center; z-index: 10; font-variant-numeric: tabular-nums; }
+.bar .copy { font: inherit; font-weight: 700; padding: 7px 16px; border-radius: 6px; border: 0; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.bar .reset { font: inherit; font-size: 0.85rem; background: transparent; border: 0; color: var(--muted); text-decoration: underline; cursor: pointer; }
+#out { width: 100%; max-width: 980px; font-family: var(--font-mono); font-size: 0.75rem; min-height: 60px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 6px; }
+@media (prefers-reduced-motion: no-preference) { .card { transition: box-shadow .15s, opacity .15s; } }
+</style>
+
+<div class="wrap">
+  <h1>__HEADING__</h1>
+  <p class="lede">Every proposal the lanes wrote, at __COMMIT__. Approve or skip each one, or approve a whole filtered view, then copy the approved IDs back into the chat. Fixes correct a fact; wording proposals only reword. Decisions stay in this browser.</p>
+__NOTE__
+  <div class="tally" id="tally"></div>
+
+__SETS_PANEL__
+
+  <div class="rail" role="region" aria-label="Filters">
+    <div class="row"><span class="lab">Area</span><span id="areas" class="row"></span></div>
+    <div class="row"><span class="lab">Type</span><span id="kinds" class="row"></span>
+      <span class="lab" style="margin-left:8px">Status</span><span id="stats" class="row"></span></div>
+    <div class="row">
+      <input type="search" id="q" placeholder="Search a city, a file, a word" aria-label="Search proposals">
+      <button class="bulk" id="bulkApprove" type="button">Approve all shown</button>
+      <button class="bulk" id="bulkSkip" type="button">Skip all shown</button>
+    </div>
+  </div>
+
+  <div class="list" id="list"></div>
+</div>
+
+<div class="bar">
+  <span id="barCount"></span>
+  <button class="copy" id="copy" type="button">Copy approved IDs</button>
+  <button class="reset" id="reset" type="button">Clear decisions</button>
+  <textarea id="out" readonly hidden aria-label="Approved IDs"></textarea>
+</div>
+
+<script type="application/json" id="data">__DATA__</script>
+<script>
+(function () {
+  var ITEMS = JSON.parse(document.getElementById('data').textContent);
+  var KEY = 'prose-pass-review-v1';
+  var SETS = __SETS_JSON__;
+  function shortId(id) { var m = id.match(/-(P\d+)$/); return m ? m[1] : id; }
+  function area(f) {
+    if (/^app\/pages\/\d+_.*_Heatmap\.py$/.test(f)) return 'City pages';
+    if (f === 'docs/excluded_categories.md') return 'What Is Excluded doc';
+    if (f === 'docs/data_sources.md') return 'About the Data doc';
+    if (f.indexOf('docs/data_sources/') === 0) return 'Country docs';
+    if (f === 'scripts/france_page.py') return 'French template';
+    if (f.indexOf('app/') === 0) return 'App text';
+    return 'Code comments';
+  }
+  ITEMS.forEach(function (it) {
+    it.area = area(it.file);
+    it.short = shortId(it.id);
+    it.notes = SETS.filter(function (s) { return s.ids.indexOf(it.short) >= 0; }).map(function (s) { return s.note; });
+    it.hay = (it.id + ' ' + it.title + ' ' + it.file + ' ' + it.why + ' ' + it.old + ' ' + it.new).toLowerCase();
+  });
+  var AREAS = ['City pages', 'What Is Excluded doc', 'About the Data doc', 'Country docs', 'App text', 'French template', 'Code comments'];
+
+  var dec = {};
+  try { dec = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { dec = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(dec)); } catch (e) {} }
+
+  var f = { area: 'All', kind: 'All', status: 'All', q: '' };
+
+  function chips(el, opts, key) {
+    el.innerHTML = '';
+    opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.textContent = o.label;
+      b.setAttribute('aria-pressed', String(f[key] === o.value));
+      b.addEventListener('click', function () { f[key] = o.value; render(); });
+      el.appendChild(b);
+    });
+  }
+
+  function tokens(s) { return s.match(/\s+|[^\s]+/g) || []; }
+  function diff(a, b) {
+    var x = tokens(a), y = tokens(b), n = x.length, m = y.length;
+    if (n * m > 400000) return '<del>' + esc(a) + '</del>\n<ins>' + esc(b) + '</ins>';
+    var dp = new Array(n + 1);
+    for (var i = 0; i <= n; i++) { dp[i] = new Uint16Array(m + 1); }
+    for (i = n - 1; i >= 0; i--) for (var j = m - 1; j >= 0; j--)
+      dp[i][j] = x[i] === y[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    var out = [], del = [], ins = [];
+    function flush() {
+      if (del.length) out.push('<del>' + esc(del.join('')) + '</del>');
+      if (ins.length) out.push('<ins>' + esc(ins.join('')) + '</ins>');
+      del = []; ins = [];
+    }
+    i = 0; j = 0;
+    while (i < n && j < m) {
+      if (x[i] === y[j]) { flush(); out.push(esc(x[i])); i++; j++; }
+      else if (dp[i + 1][j] >= dp[i][j + 1]) { del.push(x[i]); i++; }
+      else { ins.push(y[j]); j++; }
+    }
+    while (i < n) del.push(x[i++]);
+    while (j < m) ins.push(y[j++]);
+    flush();
+    return out.join('');
+  }
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function visible() {
+    var q = f.q.trim().toLowerCase();
+    return ITEMS.filter(function (it) {
+      if (f.area !== 'All' && it.area !== f.area) return false;
+      if (f.kind !== 'All' && it.kind !== f.kind) return false;
+      var s = dec[it.id] || 'open';
+      if (f.status !== 'All' && s !== f.status) return false;
+      return !q || it.hay.indexOf(q) >= 0;
+    });
+  }
+
+  var LIMIT = 60, shown = LIMIT;
+  function card(it) {
+    var s = dec[it.id] || 'open';
+    var c = document.createElement('article');
+    c.className = 'card' + (s === 'approved' ? ' approved' : s === 'skipped' ? ' skipped' : '');
+    c.innerHTML =
+      '<div class="top"><span class="kind ' + (it.kind === 'fix' ? 'fix' : '') + '">' + (it.kind === 'fix' ? 'Fix' : 'Wording') + '</span>' +
+      '<span class="title"></span><span class="id"></span></div>' +
+      '<div class="file"></div><div class="why"></div>' +
+      it.notes.map(function (n) { return '<div class="set-note"></div>'; }).join('') +
+      '<div class="diff">' + diff(it.old, it.new) + '</div>' +
+      '<div class="acts"><button type="button" class="ap">Approve</button><button type="button" class="sk">Skip</button></div>';
+    c.querySelector('.title').textContent = it.title;
+    c.querySelector('.id').textContent = it.short;
+    c.querySelector('.file').textContent = it.file;
+    c.querySelector('.why').textContent = it.why;
+    c.querySelectorAll('.set-note').forEach(function (el, k) { el.textContent = it.notes[k]; });
+    var ap = c.querySelector('.ap'), sk = c.querySelector('.sk');
+    ap.setAttribute('aria-pressed', String(s === 'approved'));
+    sk.setAttribute('aria-pressed', String(s === 'skipped'));
+    ap.addEventListener('click', function () { dec[it.id] = s === 'approved' ? undefined : 'approved'; if (!dec[it.id]) delete dec[it.id]; save(); render(true); });
+    sk.addEventListener('click', function () { dec[it.id] = s === 'skipped' ? undefined : 'skipped'; if (!dec[it.id]) delete dec[it.id]; save(); render(true); });
+    return c;
+  }
+
+  function counts() {
+    var a = 0, k = 0;
+    ITEMS.forEach(function (it) { if (dec[it.id] === 'approved') a++; else if (dec[it.id] === 'skipped') k++; });
+    return { a: a, k: k, o: ITEMS.length - a - k };
+  }
+
+  function render(keepScroll) {
+    if (!keepScroll) shown = LIMIT;
+    var areaOpts = [{ label: 'All ' + ITEMS.length, value: 'All' }].concat(AREAS.map(function (a) {
+      return { label: a + ' ' + ITEMS.filter(function (it) { return it.area === a; }).length, value: a };
+    }));
+    chips(document.getElementById('areas'), areaOpts, 'area');
+    chips(document.getElementById('kinds'), [{ label: 'All', value: 'All' }, { label: 'Fixes', value: 'fix' }, { label: 'Wording', value: 'proposal' }], 'kind');
+    chips(document.getElementById('stats'), [{ label: 'All', value: 'All' }, { label: 'Undecided', value: 'open' }, { label: 'Approved', value: 'approved' }, { label: 'Skipped', value: 'skipped' }], 'status');
+    var v = visible(), list = document.getElementById('list');
+    list.innerHTML = '';
+    if (!v.length) { list.innerHTML = '<p class="empty">Nothing matches these filters.</p>'; }
+    v.slice(0, shown).forEach(function (it) { list.appendChild(card(it)); });
+    if (v.length > shown) {
+      var more = document.createElement('button');
+      more.type = 'button'; more.className = 'bulk'; more.style.justifySelf = 'center';
+      more.textContent = 'Show ' + Math.min(LIMIT, v.length - shown) + ' more of ' + (v.length - shown) + ' remaining';
+      more.addEventListener('click', function () { shown += LIMIT; render(true); });
+      list.appendChild(more);
+    }
+    var c = counts();
+    document.getElementById('tally').innerHTML =
+      '<span><b>' + ITEMS.length + '</b> proposals</span><span><b>' + ITEMS.filter(function (i) { return i.kind === 'fix'; }).length + '</b> fixes</span>' +
+      '<span><b>' + c.a + '</b> approved</span><span><b>' + c.k + '</b> skipped</span><span><b>' + c.o + '</b> undecided</span>' +
+      '<span>showing <b>' + v.length + '</b></span>';
+    document.getElementById('barCount').textContent = c.a + ' approved · ' + c.k + ' skipped · ' + c.o + ' undecided';
+    document.getElementById('bulkApprove').textContent = 'Approve all ' + v.length + ' shown';
+    document.getElementById('bulkSkip').textContent = 'Skip all ' + v.length + ' shown';
+  }
+
+  function bulk(state) { visible().forEach(function (it) { dec[it.id] = state; }); save(); render(true); }
+  document.getElementById('bulkApprove').addEventListener('click', function () { bulk('approved'); });
+  document.getElementById('bulkSkip').addEventListener('click', function () { bulk('skipped'); });
+  document.getElementById('q').addEventListener('input', function (e) { f.q = e.target.value; render(); });
+
+  var armed = false;
+  document.getElementById('reset').addEventListener('click', function (e) {
+    if (!armed) { armed = true; e.target.textContent = 'Click again to clear all'; setTimeout(function () { armed = false; e.target.textContent = 'Clear decisions'; }, 3000); return; }
+    dec = {}; save(); armed = false; e.target.textContent = 'Clear decisions'; render();
+  });
+
+  document.getElementById('copy').addEventListener('click', function (e) {
+    var words = ITEMS.filter(function (it) { return it.kind !== 'fix'; });
+    var ids = words.filter(function (it) { return dec[it.id] === 'approved'; }).map(function (it) { return it.short; });
+    var skipped = words.filter(function (it) { return dec[it.id] === 'skipped'; }).length;
+    var text = 'Approve ' + ids.length + ' of ' + words.length + ' wording proposals (' + skipped + ' skipped): ' + ids.join(', ');
+    var out = document.getElementById('out');
+    out.value = text;
+    var btn = e.target;
+    function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = 'Copy approved IDs'; }, 2000); }
+    try {
+      navigator.clipboard.writeText(text).then(function () { done('Copied ' + ids.length + ' IDs'); },
+        function () { out.hidden = false; out.select(); done('Select and copy below'); });
+    } catch (err) { out.hidden = false; out.select(); done('Select and copy below'); }
+  });
+
+  render();
+})();
+</script>

@@ -106,6 +106,20 @@ the owner. The owner approves by ID; cleanup runs `apply --ids ...` (or
 refuses any proposal whose old text has changed since. That is CLAUDE.md's
 "drafted in chat before it is written" at the scale of a site-wide pass.
 
+**Past a few dozen proposals, give the owner a page, not a list.**
+`python scripts/proposals_page.py --out <scratchpad>/review.html --commit <sha>
+[--sets sets.json]` builds one card per proposal with a word-level diff,
+filters by area, type and status, approve or skip per card or per filtered view,
+and a button that copies the approved IDs back into the chat. Publish it as a
+private Artifact. `--sets` lists proposals that must be approved together (a
+template change and the pages it writes, one sentence reworded everywhere). The
+worked example is the 2026-10-01 prose and UI pass: 507 proposals, the 116
+fixes approved first with `--kind fix`, then all 391 wording proposals with
+the copied line (https://claude.ai/artifact/Pr5A9UwBgamasE7odYfHW5, pinned).
+After applying, re-run any template a proposal changed (`france_page.py
+<slugs> --write`), and carry a reworded template sentence into the skills that
+write it for the next city.
+
 ## 7. Reports
 
 Each lane writes `data/_review/lane-N/report.md` and messages the cleanup

@@ -76,6 +76,7 @@ CHECKS = [
     ["scripts/readme_cities.py", "--check"],
     ["scripts/rendered_surfaces.py", "--check"],
     ["scripts/prose_proposals.py", "--selftest"],
+    ["scripts/proposals_page.py", "--selftest"],
     ["scripts/archive_decisions_selftest.py"],
 ]
 
