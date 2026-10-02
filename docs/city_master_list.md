@@ -32,7 +32,7 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **124** across 24 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **44** — A 7 · B 12 · C 2 · D 0 · R 23 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser)* |
+> | **Candidates** | **44** — A 7 · B 12 · C 1 · D 0 · R 24 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
 > | **Discarded** | **121**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
 >
@@ -78,9 +78,9 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 |---|---|---|
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **7** |
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **12** |
-| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **2** |
+| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **1** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
-| ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **23** |
+| ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **24** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
 | | **Candidates** | **44** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
@@ -131,18 +131,17 @@ track share come at Step 0.
 | **Kōchi** 🇯🇵 | Personal services only | **理容/美容 1,074** (CC BY 4.0, 2026-03-31); no laundry list | Tosaden (4 lines); JR Dosan | **Food fails placement**: MHLW holds 4,564 open restaurant permits (91% of 4,999) but only **54% with an address**, under the bar's 70% |
 | **Tbilisi** 🇬🇪 | All three buckets, a business register (chains undercounted, disclosed) | Geostat's Business Register: **63,511 active units with a factual address in Tbilisi, 91% with coordinates**; NACE Rev.2: retail 14,493, food 1,628, personal services 1,374; terms allow "any purpose, including commercial", with attribution | Tbilisi Metro, 2 lines, about 23 stations | **Approved (owner, 2026-10-01): accepted with the undercount disclosed** (enterprises, not premises: a chain appears once); **individual entrepreneurs shown as unnamed dots, category only** (Taichung's precedent); personal ID columns dropped at fetch. Then a licence read of Geostat's terms and `add-country` for Georgia **Licence read 2026-10-01: PERMITTED WITH CONDITIONS**: Geostat's terms allow any use "without prior permission"; name Geostat as the source (also the statistics law, Art. 43(6)); no logo. Next: `add-country` for Georgia. |
 
-## 🟣 Band C — closer to a page (2 cities)
+## 🟣 Band C — closer to a page (1 city)
 
 | City | What there is | What stands between it and a band |
 |---|---|---|
 | **Seattle (Regional)** 🇺🇸 | **Held by the owner for a regional build with multiple city registers (2026-10-01).** Link's 1 and 2 Lines: 37 stations in 11 cities. Seattle's register and Bellevue's ("Business Licenses (All)", NAICS, daily) cover all three buckets; King County's food inspections (12,296 businesses, current to 2026-09-29, parcel-joinable) cover food in every King County city | Licence reads: Seattle's (unresolved), King County food (a Public Domain field against a no-redistribution notice), Bellevue's ("commercial use … prohibited"). Lynnwood and Mountlake Terrace food (the owner's call). Retail and personal services outside Seattle and Bellevue are unpublished (records requests are outreach). In full: `docs/build_briefs/seattle.md`. **Owner (2026-10-01):** retail and personal services outside Seattle and Bellevue are accepted as unpublished and disclosed per city IF further probing finds no further bucket; Bellevue's never-expiring licences get an issue-date cutoff measured at build and brought to the owner **Licences read 2026-10-01:** Seattle's register permitted (non-commercial, owner-confirmed); Bellevue's and King County's ambiguous, **read as permitted by the owner (option 1)**, the removal rule the safety net; detail in the brief. A separate Seattle-only build exists (owner, 2026-10-01). |
-| **Takaoka** 🇯🇵 | Toyama Prefecture's food CSV (3,128 Takaoka rows, monthly, no operator-name column); personal lists yearly (2025-03-31) | **Licence settled 2026-10-02: CC BY 4.0** (the old portal's dataset page, archived 2026-05-21, and its terms; the new platform's front page says the same of all its data). **Now access:** the old portal's host no longer resolves and the CSV answers 404 (it was read 2026-09-30). The new data platform answers 403 to the built-in browser as well as to fetches; no other public copy was found. Its last update was 2026-03-02 despite "monthly". Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR |
 
 ## 🔴 Band D — blocked, but the owner can act alone (0 cities)
 
 *Empty since 2026-10-01: Tempe, its only row, went to the discards once the owner fetched its list (a 33-page PDF with no addresses).*
 
-## ⚫ Band R — restricted or request only (23 cities; created 2026-09-28)
+## ⚫ Band R — restricted or request only (24 cities; created 2026-09-28)
 
 **Carried over unchanged from the 2026-09-30 list (owner, 2026-10-01)**, with four rows added the same day: Kraków from the pattern screen, and Brescia, Catania and Alicante, whose portals refused the built-in browser as well as scripts.
 
@@ -177,6 +176,7 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Catania** 🇮🇹 | ⚠️ **NOT screened behind the block (wave 2; re-read 2026-10-01).** No Comune di Catania organisation on `dati.gov.it` | 🚧 `opendata.comune.catania.it` times out; `etnaopen.comune.catania.it` shows a firewall "Access Denied" page to the browser pane (2026-10-01) | As Brescia |
 | **Alicante** 🇪🇸 | ⚠️ **NOT screened behind the block (wave 2; re-read 2026-10-01).** Only the IAE tax files for 2017 and 2020 found, which are stale and leave out most small traders | 🚧 `datosabiertos.alicante.es` times out to scripts and the browser pane (2026-10-01); `www.alicante.es` answers | As Brescia |
 | **Richmond (BC)** 🇨🇦 | ✅ **Screened (2026-09-30), Vancouver (Regional)'s add-on**: the City's business directory, 11,517 current licences, **4,012 in the buckets**, addresses only (an address join); Canada Line stations inside the city | 🚫 **Request only**: no open-data licence; the site's copyright notice allows "research purposes and private use only", with written permission required for anything else | **A written request to the City** (`buslic@richmond.ca`), the owner's to send; nothing drafted or sent. Moved to R by the owner 2026-10-01 |
+| **Takaoka** 🇯🇵 | ✅ **Licence settled 2026-10-02: CC BY 4.0** (the old prefecture portal's dataset page, archived 2026-05-21, and its terms; the new platform's front page says the same of all its data). Screened 2026-09-30: Toyama Prefecture's food CSV, 3,128 Takaoka rows, no operator-name column, last updated 2026-03-02 though labelled monthly; personal lists yearly (2025-03-31), also `cc-by`. Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR | 🚧 **The list can no longer be reached (2026-10-02).** The old portal (`opendata.pref.toyama.jp`) no longer resolves and the CSV on `toyama-pref.box.com` answers 404. The new data platform's catalogue (`ckan.tdcp.pref.toyama.jp`) answers 403 to scripts and the browser pane while its front page answers 200; most likely a block on access from outside Japan. **Not routed around.** No other public copy found | A read of the platform's catalogue from an allowed network, or a public link from the prefecture. Moved to R by the owner 2026-10-02, from Band C |
 
 ## 🟤 Band T — retired (0 cities; retired 2026-10-01, trams-only maps approved 2026-09-29)
 
@@ -545,7 +545,7 @@ it, not a band.
 | 🇭🇰 Hong Kong | **1** | — | — | Built; the East Asia region |
 | 🇰🇷 South Korea | **13** | **3** — Daejeon, Gwangju, Gimhae | R | **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
 | 🇹🇼 Taiwan | **3** | **1** — Kaohsiung | R | Its door-plate file is geo-blocked to Taiwan |
-| 🇯🇵 Japan | **8** | **14** — Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Takaoka, Sendai | A, B, C, R | The tram and designated cities screened 2026-10-01; MHLW's file counted the same day settled five (Utsunomiya and Kitakyushu to A; Kagoshima, Okayama and Kōchi to B). Toyohashi discarded. Sendai still needs the city's permission |
+| 🇯🇵 Japan | **8** | **14** — Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Takaoka, Sendai | A, B, R | The tram and designated cities screened 2026-10-01; MHLW's file counted the same day settled five (Utsunomiya and Kitakyushu to A; Kagoshima, Okayama and Kōchi to B). Toyohashi discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
 | 🇧🇷 Brazil | **9** | — | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons (owner; PLAN). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
 | 🇸🇪 Sweden | **2** | — | — | **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
 | 🇨🇭 Switzerland | **1** | — | — | **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
@@ -583,7 +583,7 @@ it, not a band.
 | 🇹🇳 Tunisia | — | — | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | — | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | — | — | Addis Ababa discarded 2026-10-01 |
-| **Total** | **124** | **44** |  | A 7 · B 12 · C 2 · D 0 · R 23. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **124** | **44** |  | A 7 · B 12 · C 1 · D 0 · R 24. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 
@@ -705,7 +705,7 @@ candidates whose build must decide it (Japan, Seoul, Hong Kong, São Paulo).
   measurement for whether a region frames its cities. *(This bullet said
   `REGION_ORDER` was still `["United States", "Canada"]` until 2026-09-23 — it
   now holds seven entries.)*
-- **The Japan batch (Band A's seven, Band B's five, Takaoka) is the minor
+- **The Japan batch (Band A's seven, Band B's five, Takaoka if it leaves R) is the minor
   label tier, as France and Czechia are** (owner, 2026-10-02): each new city
   loses its pill in the macro views. That means a Japan sub-region, every
   Japanese city moved into it and East Asia still naming the anchors. The

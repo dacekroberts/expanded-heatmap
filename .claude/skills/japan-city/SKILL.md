@@ -90,7 +90,7 @@ the owner reminded Kobe's build that it exists for the cities after it.
   are** (owner, 2026-10-02): the smallest cities lose their pills in the
   macro views to cut clutter. Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki,
   Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi and
-  Takaoka (if it moves up) each carry `label_tier: "minor"`: dot and tooltip
+  Takaoka (in R since 2026-10-02, if it leaves) each carry `label_tier: "minor"`: dot and tooltip
   in every view, pill only in its own region. The eight built cities stay
   eligible. A minor tag alone takes the pill out of Global only; in East Asia
   it still shows. So follow the whole precedent (DECISIONS.md, 2026-09-30,

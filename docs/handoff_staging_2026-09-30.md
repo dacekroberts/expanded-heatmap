@@ -91,7 +91,7 @@ carried over as they stand.
      Birmingham if Line 2 is open at build.
 2. **The fresh list's calls, as of 2026-10-01 late.** Every call below is in
    `docs/decisions_drafts/staging.md`, newest first. The list holds
-   A 7 · B 12 · C 2 · D 0 · R 23 = 44 candidates, with 121 discards.
+   A 7 · B 12 · C 1 · D 0 · R 24 = 44 candidates, with 121 discards.
    - **Decided:**
      - the 19 discards confirmed;
      - Tbilisi to B (undercount accepted, individual entrepreneurs as
@@ -129,8 +129,7 @@ carried over as they stand.
      San Francisco's new facts with its prose pass (d85b47a7).
    - **Takaoka re-checked 2026-10-02:** the licence is CC BY 4.0, but the
      list cannot be reached (the old CSV gives 404 and the new platform
-     403). Staging recommends R; the owner's answer is pending (see the
-     drafts).
+     403). **Moved to R by the owner** (2026-10-02).
    - **The Japan batch is the minor label tier** (owner, 2026-10-02): the
      recipe is in the `japan-city` skill's standing calls, the master list's
      "Before building" and the drafts.

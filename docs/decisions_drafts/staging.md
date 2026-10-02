@@ -4,7 +4,7 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
-### 2026-10-02 - Takaoka's licence is CC BY 4.0, but its food list can no longer be reached
+### 2026-10-02 - Takaoka's licence is CC BY 4.0, but its food list can no longer be reached; to Band R (owner)
 
 - **The owner asked for a faster re-check by new methods** after the agent
   stalled ("go ahead with the takaoka"). It was run in the main session,
@@ -38,7 +38,8 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 - **Staging's recommendation is R, by the Kraków, Brescia, Catania and
   Alicante precedent** (portals that refuse the built-in browser). It would
   reopen when the platform answers or the prefecture publishes a public link.
-  This waits on the owner.
+- **Owner: "yes move takaoka to R"** (2026-10-02). The list holds
+  A 7 · B 12 · C 1 · D 0 · R 24 = 44 candidates, with 121 discards.
 
 ### 2026-10-02 - The Japan batch goes to the minor label tier, as France and Czechia did (owner)
 
@@ -50,7 +51,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - Band A's seven: Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki,
     Utsunomiya, Kitakyushu.
   - Band B's five: Sakai, Hakodate, Kagoshima, Okayama, Kōchi.
-  - Takaoka, if it moves up from C.
+  - Takaoka, if it leaves R.
   - Each carries `label_tier: "minor"`. The eight built Japanese cities stay
     eligible.
 - **The precedent is the whole France and Czechia mechanism, not the tag
