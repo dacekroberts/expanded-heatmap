@@ -87,8 +87,15 @@ carry it, so it is drawn.
 ## Scope, CRS, region
 
 - **Page name "Blackpool (Regional)"** (owner).
-- **CRS:** EPSG:27700. UTM 30N (EPSG:32630) is the fallback.
-- **Region:** `"Europe"`.
+- **CRS:** UTM 30N **EPSG:32630**, as London's, Glasgow's and Newcastle's
+  `CRS_PROJECTED` (corrected 2026-10-02 from the UK lead's report).
+  EPSG:27700 is only Code-Point Open's source CRS.
+- **NaPTAN files every tram stop under ATCO area 940** (the national tram
+  area), not the local area codes; select the build's stops from 940 by
+  location (UK lead, 2026-10-02).
+- **Region:** the UK's own region, with `label_tier: "minor"` (owner,
+  2026-10-02); until the integration pass creates it, `"Europe"`. See the
+  kit's "The UK sub-region and the minor label tier".
 - **Rings:** the promenade stops are close together. Measure the median
   stop gap: if it is about 550 m or less, use halved rings
   (`docs/ring_rules.md`).
@@ -129,7 +136,7 @@ carry it, so it is drawn.
   },
   {
     "id": "blackpool-projected-crs-fallback",
-    "claim": "Blackpool's derived UTM zone is 30N (EPSG:32630), the fallback to EPSG:27700",
+    "claim": "Blackpool's projected CRS is UTM 30N (EPSG:32630), as the built UK cities'",
     "kind": "utm_zone_from_longitude",
     "lon": -3.0503,
     "expect": "EPSG:32630"

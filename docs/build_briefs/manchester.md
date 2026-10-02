@@ -112,8 +112,11 @@ point. Outward-code-only rows are private addresses and are never placed.
     no colour.
 - **99 distinct stop names**, matching TfGM's 99.
 
-🚨 **Collapse services into lines.** Metrolink publishes eight lines plus
-the Trafford Park line, coloured as above. Collapse the relations on
+🚨 **Collapse services into lines.** ⚠️ **Corrected 2026-10-02 (UK lead):**
+since the 14 September change TfGM's network map names **nine colour
+lines** (Green, Purple, Yellow, Burgundy, Blue, Pink, Anthracite, Red,
+Navy), and five have no OSM relation; the build routes them over OSM's
+track (`docs/decisions_drafts/uk-six.md`). The colours above predate it. Collapse the relations on
 `colour` (one line per colour), not on `ref`. Then decide what the ECL
 relation is (likely a duplicate of the Eccles line) before drawing it.
 Every line gets its public name as a label and a legend entry. Take the
@@ -142,9 +145,15 @@ names from TfGM's network map, not from the service refs.
 - **Stub check:** Manchester alone holds 42 of 99 stops. Eccles keeps 0 of
   10, Trafford Park 0 of 6, and Oldham–Rochdale 3 of 19. The regional scope
   is required.
-- **CRS:** British National Grid **EPSG:27700**, as London; UTM 30N
-  (EPSG:32630) is the derived fallback.
-- **Region:** `"Europe"`.
+- **CRS:** UTM 30N **EPSG:32630**, as London's, Glasgow's and Newcastle's
+  `CRS_PROJECTED` (corrected 2026-10-02 from the UK lead's report).
+  EPSG:27700 is only Code-Point Open's source CRS.
+- **NaPTAN files every tram stop under ATCO area 940** (the national tram
+  area), not the local area codes; select the build's stops from 940 by
+  location (UK lead, 2026-10-02).
+- **Region:** the UK's own region, with `label_tier: "minor"` (owner,
+  2026-10-02); until the integration pass creates it, `"Europe"`. See the
+  kit's "The UK sub-region and the minor label tier".
 - **Rings:** standard, unless the median stop gap measures about 550 m or
   less (`docs/ring_rules.md`).
 
@@ -192,7 +201,7 @@ names from TfGM's network map, not from the service refs.
   },
   {
     "id": "manchester-projected-crs-fallback",
-    "claim": "Manchester's derived UTM zone is 30N (EPSG:32630), the fallback to British National Grid EPSG:27700",
+    "claim": "Manchester's projected CRS is UTM 30N (EPSG:32630), as the built UK cities'",
     "kind": "utm_zone_from_longitude",
     "lon": -2.2426,
     "expect": "EPSG:32630"
