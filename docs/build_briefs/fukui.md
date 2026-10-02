@@ -216,14 +216,12 @@ Project to **UTM 53N (EPSG:32653)**.
 
 ## Open items
 
-- 🚨 **The name rule on a list that withholds sole traders' names**: Fukui
+- ✅ **`mode`: `tram` (owner, 2026-10-02).** JR Etsumi-hoku 12 stations, a rural line, against Echizen Railway's 18 and the Fukubu Line's 15. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
+- ✅ **The name rule on a list that withholds sole traders' names: accepted
+  (owner, 2026-10-02)**: Fukui
   names operators for companies only, so the rule flags 20 food rows and
   cannot see the rest. Recommendation: accept it as the owner accepted MHLW's
   rows for Fukuoka, with the matching page bullet.
-- 🚨 **`mode`**: no metro; railways (JR, Hapi-line, Echizen, Fukubu) and a
-  street section. The skill's rule (the highest-order mode drawn) would say
-  `metro`; the urban backbone says `tram`. The owner's call; no built
-  precedent.
 - ⚠️ **The share-alike build items**: `LICENSE` line, data-sources row and
   notice (above). The credit wording is a proposal for the drafts file.
 - ⚠️ `japan_eigyo`: 飲食店 and 喫茶店 (93 old-law restaurants).

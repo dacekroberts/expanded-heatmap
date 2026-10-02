@@ -172,6 +172,7 @@ Project to **UTM 53N (EPSG:32653)**.
 
 ## Open items
 
+- ✅ **`mode`: `metro` (owner, 2026-10-02).** JR about 33 stations on six lines against Okaden's 16: JR is the backbone. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ✅ **A whole city without the name rule: DECIDED, the precedent extends
   (owner, 2026-10-02, "approve all recommendations").** Fukuoka's and Hiroshima's MHLW
   rows were accepted without it beside a city list that had it; here MHLW is

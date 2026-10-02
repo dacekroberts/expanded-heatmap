@@ -193,6 +193,7 @@ East Asia today, moving to the Japan sub-region with the batch. Project to
 
 ## Still open
 
+- ✅ **`mode`: `tram` (owner, 2026-10-02).** JR Hakodate 3 stations against the tram's 26. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ✅ **Whether 抜粋 cut any rows: it did not** (owner, 2026-10-02: the e-Stat
   download approved). The files hold 1,100 of the official 1,122 fixed
   premises (98.0%; beauty 677 of 677), see "What 抜粋 cut" above. 抜粋 is the

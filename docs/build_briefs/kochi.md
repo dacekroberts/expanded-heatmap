@@ -177,6 +177,7 @@ Project to **UTM 53N (EPSG:32653)**.
 
 ## Open items
 
+- ✅ **`mode`: `tram` (owner, 2026-10-02).** JR Dosan 10 stations against Tosaden's 58. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ⚠️ **Page wording**: the approved one-bucket line is Yokohama's ("barbers,
   beauty salons and laundries"); Kōchi has no laundry list, so "barbers and
   beauty salons" is a sentence outside the template, a proposal for the drafts

@@ -169,6 +169,7 @@ Japan sub-region (minor tier, above). Project to **UTM 52N (EPSG:32652)**.
 
 ## Open items
 
+- ✅ **`mode`: `tram` (owner, 2026-10-02).** JR about 20 stations (Ibusuki-Makurazaki, Kagoshima, Nippō, sharing 鹿児島中央 and 鹿児島) against the tram's 35. The nearest call of the twelve. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ✅ **Band B, food only, holds**: 80.5% placeable among fixed premises; the
   personal lists are a stream of openings (re-read 2026-10-02).
 - ⚠️ **The two shared-code additions** (`ADDR_COLS` 営業所の所在地, `NAME_COLS`

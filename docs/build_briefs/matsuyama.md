@@ -213,6 +213,7 @@ Project to **UTM 53N (EPSG:32653)**.
 
 ## Open items
 
+- ✅ **`mode`: `tram` (owner, 2026-10-02).** JR Yosan 11 stations against the city tram's 35 and Iyotetsu's suburban lines. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ✅ **MHLW as a second source: DECIDED, both uses (owner, 2026-10-02,
   "approve all recommendations").** The city's list is complete and carries
   every address, so MHLW adds no restaurant. Two uses, both with precedent:

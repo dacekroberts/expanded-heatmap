@@ -200,6 +200,7 @@ East Asia today, moving to the Japan sub-region with the batch. Project to
 
 ## Still open
 
+- ✅ **`mode`: `metro` (owner, 2026-10-02).** the Midōsuji subway is drawn (3 stations); JR Hanwa has 7. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ✅ **The Midōsuji is drawn, cut at the city line: 3 stations** (北花田,
   新金岡, 中百舌鳥) (owner, 2026-10-02). All three are Sakai's own, with the
   city's permits around them; Osaka's page draws the other 16, as the Hankai

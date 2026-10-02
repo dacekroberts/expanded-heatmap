@@ -50,14 +50,20 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   other showed an operator's own name and phone number. Nothing reached a
   file. Separately, N03 boundary zips (the skill's own source) were saved
   under each city's `data/<slug>/raw/`.
-- **Open with the owner:**
-  - Toyama's and Fukui's lists name only company operators, so the name rule
-    tests almost nothing. Staging recommends accepting it, as for MHLW's
-    rows.
-  - Each city's `mode`. Staging recommends Dublin's precedent (commuter rail
-    drawn beside trams does not make a city metro): tram for nine,
-    light_rail for Utsunomiya and Kitakyushu, metro for Sakai (the
-    Midōsuji).
+- **Settled the same day (owner: "approve 1, approve 2 unless there is
+  substantial JR, JR reads as metro"):**
+  - Toyama's and Fukui's company-only operator names are accepted, as
+    MHLW's rows were.
+  - Each city's `mode` follows Dublin's precedent unless JR is substantial.
+    Staging read "substantial" as JR being the city's largest network by
+    stations inside the city line:
+    - `metro`: Okayama (JR about 33 against Okaden's 16), Kitakyushu (JR
+      about 28 against the monorail's 13) and Sakai (the Midōsuji);
+    - `light_rail`: Utsunomiya;
+    - `tram`: Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Kagoshima,
+      Hakodate and Kōchi.
+  - Kagoshima is the nearest call: JR about 20 against the tram's 35.
+  - Recorded in each brief and in the `japan-city` skill's standing calls.
 
 ### 2026-10-02 - The UK six released to one build session with agents; the UK takes the minor label tier (owner)
 

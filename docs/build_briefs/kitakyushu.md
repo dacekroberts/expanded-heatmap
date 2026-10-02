@@ -197,6 +197,7 @@ East Asia today, moving to the Japan sub-region with the batch. Project to
 
 ## Still open
 
+- ✅ **`mode`: `metro` (owner, 2026-10-02).** JR about 28 stations on five lines against the monorail's 13 and Chikuho's 13: JR is the backbone. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ⚠️ **Shared code** (each re-runs the Minato control and the city screens):
   `NAME_COLS` + 屋号名称; `OPERATOR_COLS` + 代表者氏名.
 - ⚠️ **Old-law expiries** dropped by 許可終了日 against the pinned `as_of`;

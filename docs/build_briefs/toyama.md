@@ -230,16 +230,14 @@ Project to **UTM 53N (EPSG:32653)**.
 
 ## Open items
 
-- 🚨 **The name rule on a list that withholds sole traders' names**: Toyama
+- ✅ **`mode`: `tram` (owner, 2026-10-02).** JR Takayama 10 stations against the tram's 39 with the Port line. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
+- ✅ **The name rule on a list that withholds sole traders' names: accepted
+  (owner, 2026-10-02)**: Toyama
   publishes 営業者名 for companies only, so the rule compares almost nothing
   (13 food rows flagged). Recommendation: accept it as the owner accepted
   MHLW's rows for Fukuoka, and use the page's MHLW-style bullet ("the list
   does not say who the operator is, so this cannot be checked there") for
   the unnamed rows.
-- 🚨 **`mode`**: every built Japanese city has a subway or Astram (`metro`).
-  Toyama draws JR and Chitetsu railways plus a tram, and no metro; the skill's
-  rule (the highest-order mode drawn) would say `metro`, the network's
-  backbone says `tram`. The owner's call; no built precedent.
 - ⚠️ MHLW's points as the chōme-tier fallback (614 of 738 rows), above.
 - ⚠️ The merged-header reader, `ADDR_COLS` / `NAME_COLS` additions and the
   ward-less flag, above; each re-runs the Minato control.

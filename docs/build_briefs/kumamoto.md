@@ -196,6 +196,7 @@ Japan sub-region (minor tier, above). Project to **UTM 52N (EPSG:32652)**.
 
 ## Open items
 
+- ✅ **`mode`: `tram` (owner, 2026-10-02).** JR about 17 stations (Kagoshima and Hōhi, sharing 熊本) against the tram's 35. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ⚠️ **Food retail is MHLW's opt-in online slice only** (784 addressed rows,
   mostly notifications); the page says so, as Hiroshima's and Fukuoka's.
 - ⚠️ **The two shared-code additions** (`ADDR_COLS` 営業所所在地1;

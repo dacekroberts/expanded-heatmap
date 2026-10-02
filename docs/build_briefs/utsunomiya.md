@@ -205,10 +205,7 @@ Project to **UTM 54N (EPSG:32654)**.
 
 ## Open items
 
-- 🚨 **`mode`**: no metro; JR and Tobu railways and a purpose-built light
-  rail. The skill's rule (the highest-order mode drawn) would say `metro`;
-  the network's own backbone says `light_rail`. The owner's call; no built
-  precedent.
+- ✅ **`mode`: `light_rail` (owner, 2026-10-02).** JR about 4 stations against the light rail's 15. The owner's rule (2026-10-02): Dublin's precedent, so commuter rail drawn beside a tram does not make a city `metro`, "unless there is substantial JR, JR reads as metro". Staging read substantial as JR being the city's largest rail network by stations inside the city line..
 - ⚠️ The Fukuoka config shape: `SOURCES` (mhlw, food, four registers),
   `SUPERSEDES`, `OWN_POINT_FALLBACK` for MHLW, `ADDRESS_BY_CONSENT`,
   `SOURCE_AS_OF` per source (MHLW's month, the city list's 令和８年７月).
