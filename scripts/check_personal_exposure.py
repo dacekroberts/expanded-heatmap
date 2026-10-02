@@ -469,6 +469,15 @@ REGISTRIES = {
     "matsuyama": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",), japan=True),
+    # The rest of the 2026-10-01 Japanese batch (2026-10-02), each on the shared
+    # steps: every list's operator column is read only by the name rule, in
+    # memory (japan_register.OPERATOR_COLS); MHLW's rows and BODIK's
+    # national-schema lists name no individual operator. The Japan pass tests
+    # what reached the map.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("toyama", "kumamoto", "fukui", "nagasaki", "utsunomiya", "kitakyushu", "sakai",
+                    "hakodate", "kagoshima", "okayama", "kochi")},
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no
