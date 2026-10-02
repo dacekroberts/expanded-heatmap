@@ -42,6 +42,18 @@ else:
 # The date caption: cities.py's data_age. A city that reads a provenance file
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Seattle (Regional)")
+# The credits the sources require on the city's own page (notices 109-113):
+# King County's two texts word for word, Snohomish County's in the owner's
+# words, the Liquor Board's list date and its own note. Unconditional.
+st.caption(
+    "Food inspection data: Public Health – Seattle & King County. Data provided by "
+    "permission of King County. Lynnwood and Mountlake Terrace food: Snohomish County, "
+    "Food Service Establishments (2025). Shops licensed to sell alcohol: Washington State "
+    "Liquor and Cannabis Board, off-premise licensee list of September 29, 2026, whose "
+    "reports the Board says \"contain possible errors due to a known data transfer "
+    "issue\". Business license data: City of Seattle; City of Bellevue. Rail: "
+    "OpenStreetMap."
+)
 
 # The scaffold's bullets filled in for the city (2026-10-02); New York's
 # multi-source bullets are the model for The businesses. Sentences beyond the

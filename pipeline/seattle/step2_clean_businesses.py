@@ -52,9 +52,11 @@ from pipeline.residence import has_residential_unit, looks_organisational, looks
 from pipeline.seattle import config  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 from pipeline.taxonomies.seattle import (  # noqa: E402
+    FOOD_NAME_KINDS,
     KC_CLASSIFICATION_OUT,
     KC_CLASSIFICATION_TO_BUCKET,
     SOURCE_PRIORITY,
+    food_premises_kind,
 )
 
 SHARED = ["source", "source_key", "business_name", "business_category", "naics",
@@ -400,6 +402,20 @@ def main():
         m = df["source"] == s
         print(f"  {s:<11} {int((m & keep & in_scope).sum()):>6,} of {int(m.sum()):>6,}")
     df = df[keep & in_scope].copy()
+
+    # The food registers' name layer (Minneapolis's precedent; the taxonomy's
+    # FOOD_NAME_PATTERNS): a workplace cafeteria, vending route, hotel kitchen,
+    # members' club or pharmacy filed as food service is written as its kind,
+    # which maps to no bucket.
+    food = df["source"].isin(["kc_food", "sno_food"])
+    kinds = [food_premises_kind(c, n) for c, n in
+             zip(df.loc[food, "business_category"], df.loc[food, "business_name"])]
+    df.loc[food, "business_category"] = kinds
+    named = df.loc[food, "business_category"].isin(FOOD_NAME_KINDS)
+    print("\nThe food registers' name layer (left out by name):")
+    for (s, k), n in df.loc[food][named].groupby(["source", "business_category"]).size().items():
+        print(f"  {s:<9} {k:<26} {n:>4}")
+        emit(f"name_kind_{s}_{k.lower().replace(' ', '_')}", int(n))
 
     before = len(df)
     df = filter_to_storefront(df, config.TAXONOMY_SYSTEM)

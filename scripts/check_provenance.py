@@ -226,6 +226,8 @@ SLUG_OVERRIDES = {
     # Tram kit (2026-09-30): accents dropped from the package name, as Brazil's.
     "Liepāja": "liepaja",
     "Göteborg": "goteborg",
+    # Seattle (Regional): eleven cities on one page (2026-10-02).
+    "Seattle (Regional)": "seattle",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are

@@ -1853,6 +1853,65 @@ COLUMNS["ottawa_inspection"] = {
 }
 
 
+def _sea(naics_code, source="seattle"):
+    return {"source": source, "naics": naics_code}
+
+
+def _kc(category, source="kc_food"):
+    return {"source": source, "business_category": category}
+
+
+# Seattle (Regional): Seattle's and Bellevue's registers on NAICS 2022 (codes
+# read from Seattle's layer 2026-10-02), King County food by classification
+# and name kind, the Liquor Board's off-premise privileges.
+COLUMNS["seattle"] = {
+    "funeral": [loc(_sea("812210"), "funeral homes"), loc(_sea("812220"), "cemeteries")],
+    "funeral_goods": [loc(_sea("459999"), "all other miscellaneous retailers (monument dealers)")],
+    "no_counter_food": [loc(_sea("722310"), "food service contractors"),
+                        loc(_sea("722320"), "caterers"),
+                        loc(_kc("Catering Operation"), "King County catering operations"),
+                        loc(_kc("School Lunch Program"), "school kitchens"),
+                        loc(_kc("Institutional kitchen"), "workplace cafeterias, contract caterers, "
+                                                          "hospital and campus dining, by name")],
+    "personal_catchall": [loc(_sea("812990"), "all other personal services")],
+    "tattoo": [loc(_sea("812199"), "other personal care services (tattoo parlours)")],
+    "adult_hostess": [loc(_kc("Adult venue"), "a food premises the register's name calls a cabaret")],
+    "korean_karaoke_bar": absent("no such trade in these registers"),
+    "sex_shop": [loc(_sea("459999"), "all other miscellaneous retailers (sex shops file here)")],
+    "massage_commercial": [loc(_sea("812199"), "other personal care services (massage)")],
+    "massage_regulated": [loc(_sea("621399"), "offices of all other health practitioners")],
+    "car_dealer": [loc(_sea("441110"), "new car dealers"), loc(_sea("441120"), "used car dealers")],
+    "petrol_station": [loc(_sea("457110"), "gasoline stations with convenience stores"),
+                       loc(_kc("GROCERY STORE - BEER/WINE", "lcb_retail"),
+                           "a forecourt shop holding the Liquor Board's grocery privilege")],
+    "vehicle_repair": [loc(_sea("811111"), "general automotive repair")],
+    "gambling": [loc(_sea("713290"), "other gambling industries")],
+    "pawnbroker": absent("no code of its own: NAICS files pawnshops under 522299 with every other "
+                         "non-bank lender, as in every NAICS city"),
+    "nightclub": [loc(_sea("722410"), "drinking places (nightclubs file here)")],
+    "vet": [loc(_sea("541940"), "veterinary services")],
+    "nonstore": [loc(_sea("445132"), "vending machine operators (NAICS 2022)"),
+                 loc(_sea("457210"), "fuel dealers (NAICS 2022)"),
+                 loc(_kc("Vending"), "vending routes and workplace micro-markets, by name")],
+    "parking": [loc(_sea("812930"), "parking lots and garages")],
+    "repair": [loc(_sea("811210"), "electronic equipment repair")],
+    "lodging": [loc(_sea("721110"), "hotels and motels"),
+                loc(_kc("Hotel"), "hotels' kitchens, by name"),
+                loc(_kc("Bed and Breakfast Operation"), "King County bed and breakfasts")],
+    "recreation": [loc(_sea("713940"), "fitness centres"),
+                   loc(_kc("Recreation venue or club"), "theatres, cinemas, members' clubs and "
+                                                        "airline lounges, by name")],
+    "pharmacy": [loc(_sea("456110"), "pharmacies and drug retailers")],
+    "pharmacy_food_register": [loc(_kc("Pharmacy"), "pharmacies holding a food permit, by name")],
+    "optician": [loc(_sea("456130"), "optical goods retailers")],
+    "health_food": [loc(_sea("456191"), "food (health) supplement retailers")],
+    "person_licence": absent("no person-held licence type: Seattle and Bellevue license "
+                             "businesses, and no personal-services register is used elsewhere"),
+    "mobile_unit": [loc(_sea("722330"), "mobile food services"),
+                    loc(_kc("Mobile Food Unit"), "King County mobile food units")],
+}
+
+
 COLUMNS["minneapolis_inspection"] = {
     **{rid: absent("a food-inspection register: food facilities only") for rid in (
         "funeral", "personal_catchall", "sex_shop", "massage_commercial", "massage_regulated",

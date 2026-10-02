@@ -506,6 +506,63 @@ State food store are merged into the State's row.
 
 **Stations**: all fourteen NFTA Metro Rail stations, every one inside the city.
 
+### Seattle (Regional) — five publishers, and what each one leaves out
+
+**Missing, not excluded: personal services outside Seattle and Bellevue, and
+most retail.** Only Seattle and Bellevue publish business licenses. In the
+other nine station cities (Redmond, Shoreline, SeaTac, Kent, Tukwila, Federal
+Way, Mercer Island, Lynnwood and Mountlake Terrace), food comes from King
+County's and Snohomish County's food records, Retail holds only food shops and
+shops licensed to sell alcohol, and no personal services are shown: none of
+those cities publishes them.
+
+**Left out of Seattle's register**: 988 licenses whose location lies outside
+the city although the address reads Seattle, most in unincorporated King County
+and Burien; a restaurant license not renewed for 2026 (174) unless King County
+inspected a matching business in 2025 or 2026; one headquarters on an upper
+floor, as an office. Licenses for shops and services not renewed for 2026 are
+kept (992 retail, 435 personal services), so some shown may have closed.
+
+**Left out of Bellevue's register**: canceled licenses, and licenses issued
+before 2010 (322), because Bellevue's licenses never expire. Bellevue's
+restaurants come from King County's inspections instead.
+
+**Left out of King County's food inspections**: businesses last inspected
+before 2025; mobile food units, school kitchens, caterers, nonprofit
+institutions, commissary kitchens and donated-food distributors, which have no
+counter of their own; bed and breakfasts. Left out by name: staff cafeterias at
+workplaces (Microsoft, Amazon, Google, Meta, Boeing and others) and contract
+caterers (499), hotel kitchens (145), vending routes (62), members' clubs,
+theaters and airline lounges (36), and pharmacies (9). 107 businesses whose
+parcel has no address point are not placed.
+
+**Left out of Snohomish County's list**: school kitchens, donated-food
+distributors, food trucks, catering, vending and concessions, and the same
+kinds of names as King County's. The list dates from 2025, no newer than
+November 19, 2025.
+
+**Left out of the Liquor Board's list**: licenses that are not active,
+wine-reseller and gift-delivery privileges, and 428 premises whose address
+could not be matched to a county address point (most lie outside the two
+Snohomish station cities; three Mountlake Terrace shops at one address and four
+shops inside the airport are among them).
+
+**Names**: a business licensed under a person's own name shows its category
+instead (Seattle 90, Bellevue 50, and 26 more at a residential unit), and so
+does a Bellevue license with no trade name (260).
+
+**Counted once**: a business in two sources is counted once, matched on address
+and name; a grocer in a food record and in the Liquor Board's list or
+Bellevue's register at the same address is counted once (55).
+
+**Stations**: all 39 Link stations, in 11 cities; Pinehurst, opened September
+30, 2026, is placed from Sound Transit's station page. Where a ring crosses a
+city line, the part beyond it takes the neighbor's data: King County's food
+inspections and the Liquor Board's list in Des Moines and unincorporated King
+County, Snohomish County's list in unincorporated Snohomish County. The Seattle
+Streetcar, the T Line in Tacoma, Sounder trains and the airport's SEA
+Underground are not drawn.
+
 ### Chicago — non-storefront license types
 
 Chicago classifies by license type rather than NAICS, so its exclusions are

@@ -7,11 +7,11 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 ### 2026-10-02 - Seattle (Regional) privacy verdict: publish
 
 - **Seattle (Regional) privacy verdict: publish.** `check_personal_exposure.py
-  seattle` on the rendered map (5,750 pins inside the rings): no registrant
+  seattle` on the rendered map (5,589 pins inside the rings): no registrant
   fallback can exist, because no source's legal-name, contact, phone or
   mailing column is ever downloaded (step 2 asserts it); 0 emails, 0 phone
   numbers, 0 surname-first names; **0 person-like names at a residential
-  unit**. The heuristic's 1,132 person-shaped names (19.7%) are shape
+  unit**. The heuristic's 1,117 person-shaped names (20.0%) are shape
   matches on premises names, led by General Food Services (280) and
   restaurants (248); 52 of them sit at a commercial unit (STE, BLDG, FL, RM).
 - **What makes it structural rather than lucky:** a Seattle trade name that
@@ -23,14 +23,15 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   rule took them off.
 - **Re-run after any change to step 2 or the taxonomy** (`CLAUDE.md`).
 
-### 2026-10-02 - Seattle (Regional): five sources in one step 2, 14,854 storefronts; the name rule on structural signals; two owner questions
+### 2026-10-02 - Seattle (Regional): five sources in one step 2, 14,500 storefronts; the name rule on structural signals; two owner questions
 
-- **Step 2 built on the owner's settled calls; 14,854 storefronts** in 13
-  places (Seattle 10,429, Bellevue 2,074, Kent 491, Lynnwood 357, Redmond
-  358, Federal Way 351, Tukwila 271, SeaTac 208, Shoreline 169, Mountlake
-  Terrace 69, Mercer Island 54, Des Moines 19, the unincorporated slivers 4):
-  Food service 6,211, Retail 6,109, Personal services 2,534. 5,750 lie inside
-  a ring.
+- **Step 2 built on the owner's settled calls; 14,500 storefronts** in 13
+  places (Seattle 10,298, Bellevue 2,029, Kent 469, Lynnwood 344, Federal Way
+  339, Redmond 295, Tukwila 245, SeaTac 176, Shoreline 164, Mountlake
+  Terrace 66, Mercer Island 53, Des Moines 19, the unincorporated slivers 3):
+  Retail 6,010, Food service 5,956, Personal services 2,534. 5,589 lie inside
+  a ring. (Sources: Seattle 9,349, King County food 3,193, Bellevue 1,415,
+  Snohomish food 352, the Liquor Board 191.)
 - **Seattle's register:** 54,689 rows; 1,246 exact duplicate rows (an export
   artifact) dropped, then one row per location at its latest licence
   (53,281); 988 outside the city by point-in-polygon dropped
@@ -51,7 +52,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 - **King County food is a source in Seattle too**, as the brief's table has
   it ("own register + King County food"): 1,572 of the 5,182 inspected
   businesses in Seattle match no register row by trade name or street
-  address, and join as King County rows; 1,080 are storefronts in the scope.
+  address, and join as King County rows; 949 are storefronts in the scope after the name layer.
   The first build had read King County as a cross-reference only in Seattle,
   which left a quarter of the city's inspected food premises off the map.
 - **King County food placed by parcel** through the County's address points:
@@ -82,13 +83,13 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 - **Unincorporated Snohomish County:** 0.34 km2 of Lynnwood City Center's
   ring lies outside the city. By rule 7 it takes the neighbour's data, which
   is the same Snohomish layer (`User_Fld` UNINCORPORATED) and the Liquor
-  Board's list: 3 storefronts.
+  Board's list: 2 storefronts.
 - **Snohomish layer (agent leg):** 310 and 56 facilities reproduced. A
   facility holding Restaurant and Grocery permits (250 county-wide) is a
   Grocery: 249 of the 250 hold a GROCERY permit, and their Restaurant
   permits are the store's deli, meat, bakery and coffee counters. One
   UNINCORPORATED facility lies inside Mountlake Terrace's polygon, so the
-  city shows 57.
+  city's count includes it.
 - **The Liquor Board's off-premise list (agent leg), dated 2026-09-29:**
   8,793 privilege rows; King and Snohomish 3,151; licence ACTIVE (ISSUED)
   2,010 licences; a current (approved, not terminated) privilege 1,861;
@@ -103,9 +104,32 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   box, by design. The same matcher reproduces King County food's own parcel
   for 96.6% of rows (within 50 m). Never geocoded, never fuzzy; three
   Mountlake Terrace shops at one spread address and four airport concourse
-  shops are left off. 186 premises reach the map, outside Seattle and
+  shops are left off. 191 premises reach the map, outside Seattle and
   Bellevue. The Board's data-transfer notice is still on its lists page and
   is repeated on the page.
+- **Snohomish County's Building Address Points (the Liquor Board join
+  target in Lynnwood and Mountlake Terrace) read SILENT, with the food
+  layer's conditions** (`licence-read`, 2026-10-02): the item is in the
+  County's open-data catalogue and its own `licenseInfo` carries the
+  County's disclaimer (no warranty, hold-harmless, no commercial use of lists
+  of individuals); nothing to display or do. The owner's permissive reading
+  of the sibling food layer extends to it on firmer ground. Its description
+  adds "Any other use of these data are not directly supported by Snohomish
+  County", read as "no support", not a prohibition.
+- **King County food and Snohomish food: a name layer** (Minneapolis's and
+  Pittsburgh's precedent, `docs/category_rules.md`): a workplace cafeteria or
+  contract caterer (499; Microsoft's campus files its cafes as "BUILDING nn",
+  27 in Redmond), a hotel kitchen (152), a vending route or micro-market
+  (64), a members' club, theater or airline lounge (36), a pharmacy (11) is
+  left out by name. Minneapolis's patterns were adapted, not imported: its
+  CHURCH pattern took CHURCH'S CHICKEN and its CAFETERIA pattern a public cafe;
+  BOEING FIELD CHEVRON is kept. The total fell from 14,854 to 14,500.
+- **Proposals for the owner's review (sentences no template covers):** the
+  page's bullets on the five publishers, the lapsed-license sentence, the
+  Bellevue cutoff, the Snohomish date, and the name rule; the caption of
+  credits under the map; and the five notices' displayed text (109 to 113),
+  King County's two prescribed texts word for word, Snohomish's in the
+  owner's words, the rest the project's own.
 - **For the owner, with recommendations (the build follows the settled
   calls until answered):**
   1. **Street-only matches for lapsed Seattle food.** Recommend keeping a
@@ -117,8 +141,8 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
      Lynnwood 19, Mountlake Terrace 13). Recommend taking them by
      point-in-place, the rule every other source here follows: the field
      was chosen over the postal city, and a blank is evidence of neither.
-     It would move Lynnwood from 310 to 329 and Mountlake Terrace from 57
-     to 70.
+     It would move Lynnwood from 310 to 329 facilities and Mountlake
+     Terrace from 56 to 69.
 
 ### 2026-10-02 - Seattle (Regional): rail from OpenStreetMap, 39 stations in 11 cities, Pinehurst placed from Sound Transit
 
