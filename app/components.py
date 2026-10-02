@@ -1586,7 +1586,7 @@ _NOTICES = [
      "licensed under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
      "this project: storefront types selected, premises at a flat address left out, premises "
-     "without a location placed at their postcode's centre, or left out where they have no "
+     "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade "
      "names shown where a business is registered under another name. No hygiene rating is "
      "shown. The Food Standards Agency does not endorse this map.",
@@ -1598,7 +1598,7 @@ _NOTICES = [
     # (trademarks are outside the OGL). Wording approved by the owner 2026-09-28.
     ("Ordnance Survey (London)",
      "Where the Food Standards Agency lists a London food business without a map point, it is "
-     "placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
@@ -1619,7 +1619,7 @@ _NOTICES = [
      "(Subterráneos de Buenos Aires, SBASE), all published by the Gobierno de la Ciudad de "
      "Buenos Aires on BA Data under the [Creative Commons Attribution 2.5 Argentina licence]"
      "(http://creativecommons.org/licenses/by/2.5/ar/). Modified by this project: filtered to "
-     "storefronts, grouped into three categories, and placed at the centre of each parcel, or "
+     "storefronts, grouped into three categories, and placed at the center of each parcel, or "
      "of its block where the parcel is not listed; station names follow OpenStreetMap's "
      "spelling. The Gobierno de la Ciudad de Buenos Aires does not endorse this map.",
      False),
@@ -1646,7 +1646,7 @@ _NOTICES = [
      "licensed under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
      "this project: storefront types selected, premises at a flat address left out, premises "
-     "without a location placed at their postcode's centre, or left out where they have no "
+     "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
      False),
@@ -1654,7 +1654,7 @@ _NOTICES = [
     # same file and edition. Wording approved by the owner 2026-09-28.
     ("Ordnance Survey (Newcastle)",
      "Where the Food Standards Agency lists a Newcastle food business without a map point, it "
-     "is placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "

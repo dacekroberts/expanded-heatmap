@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**354 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**355 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -41,6 +41,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Blackpool (Regional) built, the last of the UK six: one tramway with the North Station spur, gate 3 on NaPTAN alone, halved rings](#2026-10-02---blackpool-regional-built-the-last-of-the-uk-six-one-tramway-with-the-north-station-spur-gate-3-on-naptan-alone-halved-rings)
 - [The United Kingdom becomes a region of its own; the UK six take the minor label tier (owner)](#2026-10-02---the-united-kingdom-becomes-a-region-of-its-own-the-uk-six-take-the-minor-label-tier-owner)
 - [The owner's calls on the five builds after Manchester: all tram, Edinburgh keeps its centroids, Sheffield keeps Shalesmoor, the proposals accepted (owner)](#2026-10-02---the-owners-calls-on-the-five-builds-after-manchester-all-tram-edinburgh-keeps-its-centroids-sheffield-keeps-shalesmoor-the-proposals-accepted-owner)
+- [The UK six landed ahead of the other batches, with two queued fixes bundled into the same reboot (owner)](#2026-10-02---the-uk-six-landed-ahead-of-the-other-batches-with-two-queued-fixes-bundled-into-the-same-reboot-owner)
 
 **2026-10-01**
 
@@ -14874,3 +14875,43 @@ Recorded by the cleanup session from the Main Building Session's findings of
   could not be read (its site serves a CAPTCHA). A PLAN watch item re-reads it.
 - **4. The 22 prose proposals on the five pages are accepted**, with
   Edinburgh's notice 89 and its "A short register." paragraph.
+
+### 2026-10-02 - The UK six landed ahead of the other batches, with two queued fixes bundled into the same reboot (owner)
+
+- **The owner's call:** "pre-empt UK for deploying" while the Japan batch and
+  Seattle/Tbilisi keep building. It is review time for this one batch.
+  - `uk-six-build` (8c59d945) merged with no conflict, and its nine draft
+    entries were folded in above.
+  - Its 84-96 notice claim was released from `session_roles.md`.
+  - The handoff was kept with a "landed" banner rather than deleted: the six
+    briefs, the master list and `session_roles.md` cite it.
+- **The gate:**
+  - `check_all` passed 44 of 44. `check_deploy_imports`, `check_render_current`
+    and `check_city_registry` (130 to 130) are clean.
+  - The full drift run was not needed: `pipeline/countries/uk.py` and
+    `uk_fetch.py` are imported by the six new cities only. The UK lead's
+    zero-drift run covers the nine UK cities.
+- **The deploy check ran as two parallel `deploy-verify` lanes** (scope
+  city-added; `docs/review_lane_kit.md` section 7b). Both passed:
+  - all six cities' pages and maps, at three widths and more;
+  - the United Kingdom and Europe region views;
+  - London, Glasgow and Newcastle after their region move;
+  - the UK sections of both reference pages.
+
+  Three non-blocking findings went to PLAN: Glasgow's Europe label clipped
+  65% at 375 px, the OSM rail-geometry notice's city list, and the
+  scaffold's GTFS-only map template.
+- **Bundled, owner's two review-time items, so one reboot covers them:**
+  - **Legend rows.** `build_legend` drops the on-map label when the full name
+    already starts with it, so "Green line Green line (Tyne and Wear Metro)"
+    reads "Green line (Tyne and Wear Metro)". London, Sydney and Melbourne
+    change the same way.
+    - Four maps were re-rendered (render-only, peak 0.68 GB). After Folium-id
+      normalization they differ from HEAD only in the legend rows: 2, 19, 7
+      and 6.
+    - Glasgow, Bucharest and Stockholm are unchanged: their full names do not
+      start with the label.
+  - **"centre" becomes "center"** in five notice sentences of our own:
+    London's and Newcastle's FSA and Ordnance Survey notices, and Buenos
+    Aires's. The Crown copyright and Royal Mail statements are unchanged.
+    `check_provenance` passes.

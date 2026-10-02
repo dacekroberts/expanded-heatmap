@@ -2380,12 +2380,15 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     hollow stations (Tokyo's wards with no data), so the legend says what a
     hollow station means; a map without them keeps its legend byte for byte.
     legend_names: {key: full name} where the on-map label is a line code
-    (render_heatmap); the row reads "code  full name".
+    (render_heatmap); the row reads "code  full name", or the full name
+    alone when it already starts with the label (Newcastle's "Green line
+    (Tyne and Wear Metro)", owner 2026-10-02).
     """
     names = legend_names or {}
     line_rows = "".join(
         LEGEND_LINE_ROW.format(line=n, color=color, label=html.escape(
-            f"{label} {names[key]}" if key in names else label))
+            names[key] if key in names and names[key].startswith(label)
+            else f"{label} {names[key]}" if key in names else label))
         for n, (key, (_coords, color, label, _end)) in enumerate(lines.items())
     )
     if no_data_stations:
