@@ -31,11 +31,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - **Birmingham: the Eastside stops beyond Millennium Point** (Curzon Street,
     Meriden Street, Digbeth High Street), active in NaPTAN, not on the
     operator's maps page on 2026-10-02. Add them when they open.
-  - **Edinburgh's centroid tier** (owner's call): the kit's Code-Point tier
-    (57 storefronts, 1.5%) against Glasgow's precedent of none; notice 90 goes
-    if it is dropped.
-  - **Sheffield's Shalesmoor stop**, which NaPTAN renamed "Kelham Island" in
-    2025 (owner's call on the shown name; `STATION_RENAMES` would do it).
+  - **Sheffield's Shalesmoor stop**: NaPTAN renamed it "Kelham Island" in 2025;
+    the map keeps Shalesmoor (owner, 2026-10-02). Re-read the operator's own
+    name if its site ever answers a script.
   - **Sheffield's business-rates list**, a later second bucket (owner,
     2026-10-01): a licence read, an address join and a call on "Shop And
     Premises".

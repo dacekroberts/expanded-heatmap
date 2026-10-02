@@ -2520,7 +2520,7 @@ DISPLAYED** (written into `render_site_notices()` with the UK six,
   is the cautious reading.
 - **MUST NOT**: imply the Department's endorsement (OGL); use a DfT logo or
   the Royal Arms; present NaPTAN as complete.
-- Wording proposed 2026-10-02, for the owner at review time.
+- Wording approved by the owner 2026-10-02.
 
 **87. Food Standards Agency (Birmingham) — required, and DISPLAYED** (written
 into `render_site_notices()` with the UK six, 2026-10-02.)
@@ -2598,8 +2598,8 @@ into `render_site_notices()` with the UK six, 2026-10-02.)
 - **The repository carries the credit too**, as for London: committed
   `outputs/edinburgh/` republishes the derived locations (README's credits).
 - Wording: Newcastle's Ordnance Survey notice 63, with the city changed.<!-- internal -->
-- **Open for the owner:** whether Edinburgh keeps the centroid tier (the kit)
-  or follows Glasgow's precedent of none; if Glasgow's, this notice goes.<!-- /internal -->
+- **Kept by the owner (2026-10-02):** Edinburgh keeps the centroid tier, the
+  kit's rule, over Glasgow's precedent of none.<!-- /internal -->
 
 **91. Food Standards Agency (Sheffield) — required, and DISPLAYED** (written
 into `render_site_notices()` with the UK six, 2026-10-02.)

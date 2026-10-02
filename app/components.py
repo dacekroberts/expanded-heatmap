@@ -1820,8 +1820,8 @@ _NOTICES = [
      False),
     # NaPTAN (notice 86): gate 3's second source for the UK tram and
     # light-rail cities, counted only. The OGL's default statement, since the
-    # Department prescribes none (licence-read 2026-10-02). Wording proposed
-    # 2026-10-02, for the owner at review time.
+    # Department prescribes none (licence-read 2026-10-02). Wording approved
+    # by the owner 2026-10-02.
     ("Department for Transport, NaPTAN (United Kingdom)",
      "Stop counts on the UK's tram and light-rail maps are checked against NaPTAN, the "
      "National Public Transport Access Nodes dataset published by the Department for "

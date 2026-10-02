@@ -172,6 +172,6 @@ NAPTAN_NAME_ALIASES = {
     "Sheffield Stn - Hallam Uni": "Sheffield Station / Sheffield Hallam University",  # 3-4 m
     # The same stop renamed: ATCO 9400ZZSYSHL (Shalesmoor's code), 3 m from
     # OSM's Shalesmoor, its street "Shalesmoor", revised 2025-05-08. The map
-    # keeps OSM's name; showing "Kelham Island" is the owner's call.
+    # keeps OSM's name, Shalesmoor (owner, 2026-10-02).
     "Kelham Island": "Shalesmoor",
 }

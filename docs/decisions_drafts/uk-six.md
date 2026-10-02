@@ -11,7 +11,12 @@ accepted and note this 3. display 4. accepted" - calls 1 to 3 below as
 recommended, and the prose proposals below accepted. The entry "The owner's
 first four UK six calls" records them.
 
-**Still open for the owner, from the five builds after Manchester:**
+**Answered by the owner, 2026-10-02 (in chat):** "1. tram 2. keep centroids
+3. keep Shalesmoor 4. accepted" - the four items below, each as recommended.
+The entry "The owner's calls on the five builds after Manchester" records
+them.
+
+**From the five builds after Manchester (answered, above):**
 
 - **The five cities' `mode`: `tram`** in each (the light-rail test: 100%
   `railway=tram` in every one, 0.0-7.1% in tunnel or on a bridge; the tram
@@ -90,6 +95,23 @@ for them):
   session's.
 
 ---
+
+### 2026-10-02 - The owner's calls on the five builds after Manchester: all tram, Edinburgh keeps its centroids, Sheffield keeps Shalesmoor, the proposals accepted (owner)
+
+- **The owner, ahead of review time:** "1. tram 2. keep centroids 3. keep
+  Shalesmoor 4. accepted".
+- **1. `mode` is `tram`** for Birmingham (Regional), Edinburgh, Sheffield,
+  Nottingham (Regional) and Blackpool (Regional), on the light-rail test (100%
+  `railway=tram` in each, 0.0-7.1% in tunnel or on a bridge; the tram list's
+  default). Manchester (Regional) stays `light_rail`.
+- **2. Edinburgh keeps the Code-Point centroid tier**, the kit's rule for all
+  six (57 storefronts, 1.5%; unplaced 4.6% with it, 6.1% without), over
+  Glasgow's precedent of none. Notice 90 (Ordnance Survey (Edinburgh)) stays.
+- **3. Sheffield's map keeps OSM's "Shalesmoor"** for the stop NaPTAN renamed
+  "Kelham Island" (2025-05-08, the same ATCO code); the operator's own name
+  could not be read (its site serves a CAPTCHA). A PLAN watch item re-reads it.
+- **4. The 22 prose proposals on the five pages are accepted**, with
+  Edinburgh's notice 89 and its "A short register." paragraph.
 
 ### 2026-10-02 - The United Kingdom becomes a region of its own; the UK six take the minor label tier (owner)
 

@@ -3170,8 +3170,8 @@ CITIES = [
         # The UK six (2026-10-02), Newcastle's values. `mode` light_rail on the
         # light-rail test: OSM maps 100% of the kept track railway=light_rail,
         # 10.2% in tunnel or on a bridge, a 703 m median gap (San Diego's
-        # precedent); the owner approves it with the build. rail_extra
-        # "Trams" as Calgary's (light rail counts).
+        # precedent; owner, 2026-10-02). rail_extra "Trams" as Calgary's
+        # (light rail counts).
         "coverage": "one_bucket",
         "mode": "light_rail",
         "placement": "Register coordinates (94%) and postcode centers (6%)",
@@ -3295,8 +3295,8 @@ CITIES = [
         "page": "pages/160_Nottingham_Heatmap.py",
         # The UK six (2026-10-02), Manchester's values. `mode` tram on the
         # light-rail test: OSM maps 100% of the kept track railway=tram, 5.5% in
-        # tunnel or on a bridge, a 432 m median gap (the tram list's default); the
-        # owner approves it with the build. rail_extra "Trams" as Calgary's and
+        # tunnel or on a bridge, a 432 m median gap (the tram list's default;
+        # owner, 2026-10-02). rail_extra "Trams" as Calgary's and
         # Manchester's. placement: 3,383 FSA points, 95 Code-Point centroids;
         # data_age: each council's ExtractDate (provenance.json).
         "coverage": "one_bucket",
