@@ -54,7 +54,7 @@ from components import (  # noqa: E402
     scroll_table,
     set_base_font,
 )
-from country_sections import country_text, parts_of, select_country, shared_text  # noqa: E402
+from country_sections import country_text, parts_of, public, select_country, shared_text  # noqa: E402
 from station_scope import scope_rows  # noqa: E402
 
 ROOT = Path(__file__).parent.parent.parent
@@ -171,11 +171,11 @@ if DOC.exists():
         "A dash means nothing is left out: every station of that city's "
         "network is on its map."
     )
-    st.markdown(country_text(parts, country, {PER_CITY_SECTION: per_city}))
+    st.markdown(public(country_text(parts, country, {PER_CITY_SECTION: per_city})))
 
     st.divider()
     st.markdown(INTRO)
-    text = shared_text(parts, skip_titles=(PER_CITY_SECTION,))
+    text = public(shared_text(parts, skip_titles=(PER_CITY_SECTION,)))
     head, marker, tail = text.partition(BUSINESS_HEADING)
     st.markdown(head)
 

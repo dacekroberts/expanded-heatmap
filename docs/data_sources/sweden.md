@@ -1,11 +1,11 @@
 # Data sources — Sweden
 
-The Sweden part of the project's provenance record,
+<!-- internal -->The Sweden part of the project's provenance record,
 [`data_sources.md`](../data_sources.md), split out by country. The numbered
 notices this project must display, the removal-request commitment and the
 deploy gate apply to every country and are kept in that record. Stockholm's
 and Göteborg's build briefs are in the project's repository
-(`docs/build_briefs/stockholm.md`, `docs/build_briefs/goteborg.md`).
+(`docs/build_briefs/stockholm.md`, `docs/build_briefs/goteborg.md`).<!-- /internal -->
 
 ## Business registries
 

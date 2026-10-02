@@ -157,6 +157,19 @@ def parts_of(path):
     return _parts_of(str(path), path.stat().st_mtime_ns)
 
 
+INTERNAL = re.compile(r"<!-- internal -->.*?<!-- /internal -->", re.S)
+
+
+def public(text):
+    """The text a reader sees: every `<!-- internal -->` ... `<!-- /internal -->`
+    passage removed (how the project maintains a record, not what it records;
+    owner, 2026-10-01). The doc keeps the passage, and GitHub hides the markers.
+    An unclosed marker removes nothing, so a typo never swallows the rest of a
+    page."""
+    text = INTERNAL.sub("", text)
+    return re.sub(r"\n{3,}", "\n\n", text)
+
+
 def shared_text(parts, skip_titles=()):
     """The shared parts, joined back in document order."""
     return "\n".join("\n".join(p["lines"]) for p in parts

@@ -1,10 +1,10 @@
 # Data sources — Romania
 
-The Romania part of the project's provenance record,
+<!-- internal -->The Romania part of the project's provenance record,
 [`data_sources.md`](../data_sources.md), split out by country. The numbered
 notices this project must display, the removal-request commitment and the
 deploy gate apply to every country and are kept in that record. Bucharest's
-build brief is in the project's repository (`docs/build_briefs/bucharest.md`).
+build brief is in the project's repository (`docs/build_briefs/bucharest.md`).<!-- /internal -->
 
 ## Business registries
 

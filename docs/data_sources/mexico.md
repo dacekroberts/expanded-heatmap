@@ -1,10 +1,10 @@
 # Data sources — Mexico
 
-The Mexico part of the project's provenance record,
+<!-- internal -->The Mexico part of the project's provenance record,
 [`data_sources.md`](../data_sources.md), split out by country on 2026-09-27.
 The numbered notices this project must display, the removal-request
 commitment and the deploy gate apply to every country and are kept in
-that record.
+that record.<!-- /internal -->
 
 ## Business registries
 

@@ -51,6 +51,7 @@ from country_sections import (  # noqa: E402
     country_slug,
     country_text,
     parts_of,
+    public,
     select_country,
     shared_text,
 )
@@ -82,6 +83,7 @@ def _file_link(match):
 
 
 def in_page(text):
+    text = public(text)
     text = FILE_LINK.sub(_file_link, text)
     text = FOLDER_LINK.sub("](#ds-countries)", text)
     return ENTRY_LINK.sub("](#where-each-countrys-sources-live)", text)
@@ -104,7 +106,8 @@ INTRO = (
 Every dataset behind these maps is public, and this page is the
 project's own provenance record: the exact web address each one was downloaded
 from, the filter applied at download, the date it was retrieved, and the
-licence or terms it carries. It is shown here exactly as the project keeps it.
+licence or terms it carries. It is shown here as the project keeps it, without
+the notes on maintaining it.
 
 It is long on purpose. Three things in it are worth knowing before reading
 any map: **a government open-data portal does not guarantee open terms** (Los
@@ -130,7 +133,7 @@ if DOC.exists():
     st.markdown(in_page(country_text(parts, country)))
     st.divider()
     st.markdown(INTRO)
-    st.markdown(in_page(shared_text(parts)))
+    st.markdown(in_page(shared_text(parts, skip_titles=("How to keep this current",))))
 else:
     st.divider()
     st.markdown(INTRO)

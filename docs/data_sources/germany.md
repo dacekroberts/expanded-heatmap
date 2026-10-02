@@ -1,13 +1,13 @@
 # Data sources — Germany
 
-The Germany part of the project's provenance record,
+<!-- internal -->The Germany part of the project's provenance record,
 [`data_sources.md`](../data_sources.md), split out by country. The numbered
 notices this project must display, the removal-request commitment and the
 deploy gate apply to every country and are kept in that record. Germany's
 country profile is a section of Berlin's build brief, in the project's
 repository (`docs/build_briefs/berlin.md`): Berlin is the country's only viable
 city (Munich, Frankfurt, Cologne and Hamburg were discarded on 2026-09-24 and
-2026-09-28).
+2026-09-28).<!-- /internal -->
 
 ## Business registries
 

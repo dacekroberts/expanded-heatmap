@@ -1,10 +1,10 @@
 # Data sources — United States
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
+<!-- internal -->Part of [`data_sources.md`](../data_sources.md), the project's provenance
 record, split by country on 2026-09-27: this file holds the United States rows
 of its tables and the sections about this country's sources. The numbered
 notices this project must display, the removal-request commitment and the
-deploy gate are in the main file, not here.
+deploy gate are in the main file, not here.<!-- /internal -->
 
 ## Business registries
 

@@ -75,10 +75,10 @@ What stays here applies to every city: the rules above, the notes on the
 transit and boundary tables, the basemap, the removal-request commitment, the
 obligations that are not notices, the numbered notices and the deploy gate.
 
-**Adding a city adds its rows to its country's file**, under the same headings
+<!-- internal -->**Adding a city adds its rows to its country's file**, under the same headings
 used here; a country's first city creates that file and a row in this table.
 `scripts/check_provenance.py` reads this file and every file in `data_sources/`
-together, so a row in either counts and a row in neither still fails.
+together, so a row in either counts and a row in neither still fails.<!-- /internal -->
 
 | Country | File | Cities |
 |---|---|---|
@@ -143,7 +143,7 @@ row there would have meant empty columns.
   not OpenStreetMap's. **Madrid sat under the OpenStreetMap heading for part of
   2026-09-22**, which was wrong in the way this subsection exists to prevent.
 
-**Why more than one Overpass mirror, and how one is chosen.** They are tried
+<!-- internal -->**Why more than one Overpass mirror, and how one is chosen.** They are tried
 **in the configured order**, and the first host returning HTTP 200 with a
 **non-empty `elements` list** wins; any other outcome (a non-200, an
 exception, or a 200 with an empty body) moves on to the next. More than one,
@@ -167,7 +167,7 @@ or a drift check never depends on which mirror answered. Mexico City makes one
 pass over the host list, sleeping 2 s between hosts. Guadalajara now fetches
 through the shared OpenStreetMap module, which makes **two passes** before
 giving up, pausing 5 s between them, or at least 60 s after a 504, a 429 or a
-timeout.
+timeout.<!-- /internal -->
 
 ## Boundary layers
 
@@ -642,7 +642,7 @@ per-city exception). ODbL 1.0 attribution was already satisfied for the
 basemap; the same credit now also covers line geometry, and notice 1's wording
 should not imply it is only about tiles.
 
-### What closing this fully requires
+<!-- internal -->### What closing this fully requires
 
 1. ~~Read Chicago's data terms of use~~ — **done 2026-09-21**, and it produced
    a mandatory notice (above).
@@ -759,7 +759,7 @@ What has grown instead is the pile of **permission questions**, now four: three
 that kind outstanding. Two sources' positions remain formally unestablished:
 the Census geocoder, whose terms are simply unread, and **Miami-Dade, whose
 terms do not address reuse at all.** One is a document nobody has opened; the
-other is a document that does not exist.
+other is a document that does not exist.<!-- /internal -->
 
 **9. City of Vancouver — required, and DISPLAYED.** The Open Government
 Licence – Vancouver requires this exact sentence wherever its information is
@@ -1615,8 +1615,8 @@ approved by the owner 2026-09-24. **MUST DO: nothing.**
 source, acknowledge the Government's and FEHD's intellectual property, attribute the
 Government, FEHD and DATA.GOV.HK, and name the CSDI Portal as a source - one paragraph. Both
 carry the uncapped indemnity the owner accepted (see "Hong Kong's indemnity"). Wording
-approved by the owner 2026-09-24. **MUST DO:** `check_personal_exposure.py hong_kong`, run
-2026-09-24 (the verdict is in `DECISIONS.md`). MTR's station lists (used only to check the
+approved by the owner 2026-09-24. <!-- internal -->**MUST DO:** `check_personal_exposure.py hong_kong`, run
+2026-09-24 (the verdict is in `DECISIONS.md`).<!-- /internal --> MTR's station lists (used only to check the
 station count) and the Address Lookup Service (ALS, a cross-check) are not published and need no notice.
 
 **42. VZD (Riga, Liepāja, Daugavpils) — required, and DISPLAYED.** Liepāja and Daugavpils (added with the tram cities, 2026-09-30) each use their own cadastral map and VZD's State Address Register (`aw_eka.csv`). The notice names both, with VZD's own source wording for the address register ("Izmantoti Valsts adrešu reģistra informācijas sistēmas dati, 2026. gads") and the changes made; approved by the owner 2026-09-30.
@@ -1643,8 +1643,8 @@ a condition of the licence (§三(二)), in the annex's prescribed form, plus th
 the source, no emblems, no implied endorsement, and do not present the filtered points as the
 register - the notice says what was selected and changed. **National**: each Taiwanese city
 adds its name to this notice rather than a second one. Wording approved by the owner
-2026-09-25. **MUST DO:** `check_personal_exposure.py taichung` (the name-rule test), run
-2026-09-25 (the verdict is in `DECISIONS.md`).
+2026-09-25. <!-- internal -->**MUST DO:** `check_personal_exposure.py taichung` (the name-rule test), run
+2026-09-25 (the verdict is in `DECISIONS.md`).<!-- /internal -->
 
 **45. Taichung City Government and Taichung MRT (Taichung) — required, and DISPLAYED.**
 
@@ -1689,8 +1689,8 @@ before using unmarked material is recorded, not adopted. The credit is the sugge
 Metropolitan City, D-데이터허브 (linked), originally 한국지역정보개발원 - with the fourteen permit
 types, the edition and **the rows' real date (2025-09-02; the edition is named August 2026)**,
 Seoul's describe-the-changes line and a non-endorsement line. Wording approved by the owner
-2026-09-27. **MUST DO:** `check_personal_exposure.py daegu`, run 2026-09-27 (the verdict is in
-`DECISIONS.md`). **If Daegu objects, the page comes down.**
+2026-09-27. <!-- internal -->**MUST DO:** `check_personal_exposure.py daegu`, run 2026-09-27 (the verdict is in
+`DECISIONS.md`).<!-- /internal --> **If Daegu objects, the page comes down.**
 
 **49. Busan Metropolitan City (Busan) — required, and DISPLAYED.**
 
@@ -1701,8 +1701,8 @@ platform itself authored (owner-accepted). The credit names the Ministry's local
 licensing data as the source, Big-데이터웨이브 (linked) and its 구군 인허가포털 Open API as the
 channel, the fourteen permit types and **the frozen snapshot's date (2026-04-15)**, with Seoul's
 describe-the-changes line and a non-endorsement line. Wording approved by the owner 2026-09-27.
-**MUST DO:** never read or publish `sitetel`, the telephone field (the build refuses to load it);
-`check_personal_exposure.py busan`, run 2026-09-27 (the verdict is in `DECISIONS.md`). Any
+**MUST DO:** never read or publish `sitetel`, the telephone field (the build refuses to load it)<!-- internal -->;
+`check_personal_exposure.py busan`, run 2026-09-27 (the verdict is in `DECISIONS.md`)<!-- /internal -->. Any
 objection from Busan is honoured, not argued.
 
 **50. City of Kobe and MLIT (Kobe) — required, and DISPLAYED.**
@@ -1715,9 +1715,9 @@ the prescribed `出典：「生活衛生関係許可施設等の情報提供」�
 pick stations and is **never drawn** (the Survey Act). **MUST NOT**: look as if the city made the
 map; use city logos; say the pins are businesses open now (the city's page warns closed premises
 remain). **If the city asks, remove its credit** (CC BY 2.1 JP art. 5). Wording approved by the
-owner 2026-09-27. **MUST DO:** `check_personal_exposure.py kobe` with its Japan pass (the
+owner 2026-09-27. <!-- internal -->**MUST DO:** `check_personal_exposure.py kobe` with its Japan pass (the
 operator's own name is never shown as a trade name), run 2026-09-27; the verdict is in
-`DECISIONS.md`.
+`DECISIONS.md`.<!-- /internal -->
 
 **51. Réseau express métropolitain (Montréal) — required, and DISPLAYED** (written
 into `render_site_notices()` 2026-09-27, wording approved by the owner; displayed
@@ -1750,10 +1750,10 @@ route geometry", which stays true.
   4.0) only picks stations and is **never drawn**.
 - **MUST NOT**: present the map as the city's own; use city logos; say the pins
   are businesses open now.
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py osaka` with its Japan pass, run
   2026-09-27: 0 operator names shown, 9 withheld. The verdict is in
-  `DECISIONS.md`.
+  `DECISIONS.md`.<!-- /internal -->
 
 **53. Sapporo City and MLIT (Sapporo) — required, and DISPLAYED** (written into
 `render_site_notices()`; displayed since Sapporo landed).
@@ -1771,10 +1771,10 @@ route geometry", which stays true.
   4.0) only picks stations and is **never drawn**.
 - **MUST NOT**: imply endorsement; use city logos (第4条); call the pins
   operating businesses. **Fetch from `ckan.pf-sapporo.jp` only.**
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py sapporo` with its Japan pass, run
   2026-09-28: 0 operator names shown, 6 withheld (7 pins). The verdict is in
-  `DECISIONS.md`.
+  `DECISIONS.md`.<!-- /internal -->
 
 **54. Fukuoka City, MHLW and MLIT (Fukuoka) — required, and DISPLAYED** (written
 into `render_site_notices()`; displayed since Fukuoka landed).
@@ -1800,12 +1800,12 @@ into `render_site_notices()`; displayed since Fukuoka landed).
 - Both cost clauses are the fault-based class the owner accepted 2026-09-24.
 - **MUST NOT**: imply endorsement; use city or ministry logos; call the pins
   operating businesses.
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py fukuoka` with its Japan pass, run
   2026-09-28: 0 operator names shown; 4 trade names that are the operator's
   own name, shown by permit type on 5 pins. MHLW's rows cannot be tested (no
   individual-operator column; owner accepted 2026-09-28). The verdict is in
-  `DECISIONS.md`.
+  `DECISIONS.md`.<!-- /internal -->
 
 **55. Kyoto City and MLIT (Kyoto) — required, and DISPLAYED** (written into
 `render_site_notices()`; displayed since Kyoto landed).
@@ -1825,11 +1825,11 @@ into `render_site_notices()`; displayed since Fukuoka landed).
   the pins as operating businesses - closures are invisible in a rebuilt
   register, and the page says it is an upper bound. **Fetch from
   `data.city.kyoto.lg.jp` only.**
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py kyoto` with its Japan pass, run
   2026-09-28: 0 operator names shown; 21 trade names that are the operator's
   own name in the raw lists, 8 pins showing their permit type. The verdict is
-  in `DECISIONS.md`.
+  in `DECISIONS.md`.<!-- /internal -->
 
 **56. Tokyo's wards, MHLW and MLIT (Tokyo) — required, and DISPLAYED** (written
 into `render_site_notices()`, its businesses part BUILT from
@@ -1867,12 +1867,12 @@ into `render_site_notices()`, its businesses part BUILT from
   republish (they may change without notice).
 - Cost clauses: Tokyo §6, Setagaya §4, Meguro 第8項, Taito's through Tokyo §6 -
   the fault-based class the owner accepted 2026-09-24. Shibuya has none.
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py tokyo` with its Japan pass, run
   2026-09-28: 0 operator names shown; 4 trade names that are the operator's
   own name in the raw lists, 2 pins showing their permit type. The lists
   without an individual-operator column cannot be tested (owner accepted
-  2026-09-28, disclosed on the page). The verdict is in `DECISIONS.md`.
+  2026-09-28, disclosed on the page). The verdict is in `DECISIONS.md`.<!-- /internal -->
 
 **57. VBB Verkehrsverbund Berlin-Brandenburg (Berlin) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed since Berlin landed).
@@ -1893,11 +1893,11 @@ into `render_site_notices()`, its businesses part BUILT from
   (dl-de/zero-2.0 on the WFS), neither with any condition. The page carries a
   courtesy credit, "Business data: IHK Berlin (CC0)" (owner, 2026-09-28), and
   no IHK logo (CC0 §4(a) releases no trademark).
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py berlin`, run 2026-09-28: the
   register has no name column of any kind, so 0 pins can show a person's name;
   every pin's title is one of 208 IHK branch labels. The verdict is in
-  `DECISIONS.md`.
+  `DECISIONS.md`.<!-- /internal -->
 
 **58. Food Standards Agency (London) — required, and DISPLAYED** (written into
 `render_site_notices()`; displayed since London landed).
@@ -1920,9 +1920,9 @@ into `render_site_notices()`, its businesses part BUILT from
   placed, a trading-as name shows the name on the shop.
 - **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
   logo; display a rating.
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py london`, run 2026-09-28: no fallback
-  name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+  name exists, 0 contact details; the verdict is in `DECISIONS.md`.<!-- /internal -->
 - **London's rail is OpenStreetMap data** (ODbL, notice 1): the basemap credit
   covers its stations and track too.
 
@@ -1965,10 +1965,10 @@ landed).
   unversioned `cc-by`, Parcelas' resources 4.0): the one credit satisfies 2.5 AR
   and 4.0 both, and the data is never described as "CC BY 4.0" alone.
 - **MUST NOT**: use a GCBA or BA Data logo; imply endorsement. If the city asks
-  for its credit to be removed, remove it (s.4(a)).
+  for its credit to be removed, remove it (s.4(a)).<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py buenos_aires`, run 2026-09-28: the
   survey carries no name column; pins read as the street address (owner); the
-  verdict is in `DECISIONS.md`.
+  verdict is in `DECISIONS.md`.<!-- /internal -->
 - **Station names follow OpenStreetMap** (ODbL, notice 1), matched to SBASE's
   points; the credit says so.
 - Wording approved by the owner 2026-09-28.
@@ -1997,9 +1997,9 @@ landed).
   address is never placed (185), nor one named as a childminder (5).
 - **MUST NOT**: imply official status or endorsement by FSS or the FSA (OGL);
   use either body's logo; display a result.
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py glasgow`, run 2026-09-28: no
-  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.<!-- /internal -->
 - **Glasgow's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **58 (Food Standards Agency, London) amended the same day (owner, 2026-09-28)**: its "Modified by this project"
@@ -2022,9 +2022,9 @@ into `render_site_notices()`; displayed since Newcastle landed).
   shown after "trading as".
 - **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
   logo; display a rating.
-- Wording approved by the owner 2026-09-28.
+- Wording approved by the owner 2026-09-28.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py newcastle`, run 2026-09-28: no
-  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.<!-- /internal -->
 - **Newcastle's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **63. Ordnance Survey (Newcastle) — required, and DISPLAYED** (written into
@@ -2060,9 +2060,9 @@ into `render_site_notices()`; displayed since Newcastle landed).
   (`cityofsydney.nsw.gov.au/terms-conditions`) bar republishing its content
   without written authorisation; the read judged them written for that site's
   pages and not incorporated by the data hub, where Creative Commons governs.
-- **MUST DO:** nothing to the publisher. `check_personal_exposure.py sydney`,
+- **MUST DO:** nothing to the publisher. <!-- internal -->`check_personal_exposure.py sydney`,
   run 2026-09-28: the survey has no names, so no pin can show one; the verdict
-  is in `DECISIONS.md`.
+  is in `DECISIONS.md`.<!-- /internal -->
 - **Sydney's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **65. City of Melbourne (Melbourne) — required, and DISPLAYED** (written into
@@ -2081,9 +2081,9 @@ into `render_site_notices()`; displayed since Newcastle landed).
 - **MUST NOT**: imply endorsement (§2(a)(6)); use DataVic's "© Copyright State
   Government of Victoria" (DataVic's own material).
 - **MUST DO:** nothing to the publisher ("#melbdata" is an invitation).
-  Privacy is not licensed (§2(b)(1)): `check_personal_exposure.py melbourne`,
+  Privacy is not licensed (§2(b)(1))<!-- internal -->: `check_personal_exposure.py melbourne`,
   run 2026-09-28, finds only trading names and no fallback; the verdict is in
-  `DECISIONS.md`.
+  `DECISIONS.md`<!-- /internal -->.
 - **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **66. Stockholms stad (Stockholm) — displayed by choice, not required**
@@ -2103,10 +2103,10 @@ into `render_site_notices()`; displayed since Newcastle landed).
   Wording approved by the owner 2026-09-29.
 - **MUST NOT**: present the map as the official register, or imply Stockholms
   stad produced or endorses it.
-- **MUST DO**: nothing. `brief_check.py stockholm` re-reads the Hub feed; if it
-  changes, the verdict is re-argued. Privacy: `check_personal_exposure.py
+- **MUST DO**: nothing. <!-- internal -->`brief_check.py stockholm` re-reads the Hub feed; if it
+  changes, the verdict is re-argued.<!-- /internal --> <!-- internal -->Privacy: `check_personal_exposure.py
   stockholm`, run 2026-09-29, finds only premises names and no fallback; the
-  verdict is in `DECISIONS.md`.
+  verdict is in `DECISIONS.md`.<!-- /internal -->
 - **Stockholm's rail, boundary and naming layer are OpenStreetMap data** (ODbL,
   notice 1).
 
@@ -2127,9 +2127,9 @@ into `render_site_notices()`; displayed since Newcastle landed).
   ANSVSA produced or endorses it.
 - **MUST DO**: nothing to the publisher. The owner downloads the files in
   their own browser (a condition of the city's screening memo); the clearance
-  cookie the site's browser check sets is never reused by a script. Privacy:
+  cookie the site's browser check sets is never reused by a script. <!-- internal -->Privacy:
   `check_personal_exposure.py bucharest`, run 2026-09-29; the verdict is in
-  `DECISIONS.md`.
+  `DECISIONS.md`.<!-- /internal -->
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
 
@@ -2212,9 +2212,9 @@ table; §4.6 by the repository.
   licensed under the Open Government Licence – City of Ottawa." The notice also
   credits Ottawa Public Health / City of Ottawa and states the changes.
 - **MUST NOT**: suggest official status or endorsement, or use the City's or
-  OPH's names as marks. Personal information is outside the grant (MFIPPA):
+  OPH's names as marks. Personal information is outside the grant (MFIPPA)<!-- internal -->:
   `check_personal_exposure.py ottawa`, run 2026-09-29, finds premises names only;
-  the verdict is in `DECISIONS.md`.
+  the verdict is in `DECISIONS.md`<!-- /internal -->.
 - **MUST DO**: nothing. The item says the feed "will be retired in Q1 2026";
   the cached copy stays licensed as accessed.
 - **Ottawa's rail is OpenStreetMap data** (ODbL, notice 1).
@@ -2247,9 +2247,9 @@ table; §4.6 by the repository.
   or its source. The layers' descriptions add that the results are what an
   inspector observed on the day and that no endorsement of any premises is
   implied, so the page shows no results and says a pin is not a rating.
-  Personal information is outside the grant (MFIPPA):
+  Personal information is outside the grant (MFIPPA)<!-- internal -->:
   `check_personal_exposure.py kitchener_waterloo`, run 2026-09-30, finds 0
-  person-like names at a residential unit; the verdict is in `DECISIONS.md`.
+  person-like names at a residential unit; the verdict is in `DECISIONS.md`<!-- /internal -->.
 - **MUST DO**: nothing.
 - **Kitchener–Waterloo's rail is OpenStreetMap data** (ODbL, notice 1).
 
@@ -2266,9 +2266,9 @@ table; §4.6 by the repository.
   update (2026-09-07) and that the data were modified; Catastro named as
   author and owner, CC BY 4.0 linked, the join stated, the access date.
 - **MUST NOT**: imply that GOIB, the Consell or Catastro endorses the map, or
-  present it as Catastro information. `check_personal_exposure.py palma`, run
+  present it as Catastro information. <!-- internal -->`check_personal_exposure.py palma`, run
   2026-09-30: trade names only (`Explotador/s` never read); the verdict is in
-  `DECISIONS.md`.
+  `DECISIONS.md`.<!-- /internal -->
 - **MUST DO**: nothing required; GOIB "urges" projects to tell it (not done:
   a courtesy, like Barcelona's, recorded).
 - **Palma's rail is OpenStreetMap data** (ODbL, notice 1).
@@ -2294,9 +2294,9 @@ into `render_site_notices()` 2026-09-30, after Tokyo's; displayed, landed
     its words.
 - **MUST NOT**: present the map as the city's work; imply its endorsement; say
   the pins are businesses open now (the registers record no closures).
-- **MUST DO:** `check_personal_exposure.py yokohama` with its Japan pass (the
+- <!-- internal -->**MUST DO:** `check_personal_exposure.py yokohama` with its Japan pass (the
   operator's own name is never shown as a trade name), run 2026-09-30; the
-  verdict is in `DECISIONS.md` ("Yokohama built", 2026-09-30). Contact for removals: ir-seikatsueisei@city.yokohama.lg.jp.
+  verdict is in `DECISIONS.md` ("Yokohama built", 2026-09-30).<!-- /internal --> Contact for removals: ir-seikatsueisei@city.yokohama.lg.jp.
 
 **76. Hiroshima City, MHLW and MLIT (Hiroshima) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-09-30, after Tokyo's; displayed,
@@ -2315,10 +2315,10 @@ landed 2026-09-30).
   and who did the processing (PDL 1.0); MHLW's source and processed-by credit,
   linking its top page only; MLIT's credit lines.
 - **MUST NOT**: present processed data as the city's or MHLW's own; use city or
-  ministry logos; claim MHLW's list is complete or accurate.
+  ministry logos; claim MHLW's list is complete or accurate.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py hiroshima` with its Japan pass (the
   operator's own name is never shown as a trade name), run 2026-09-30; the
-  verdict is in `DECISIONS.md` ("Hiroshima built", 2026-09-30).
+  verdict is in `DECISIONS.md` ("Hiroshima built", 2026-09-30).<!-- /internal -->
 
 **77. Angers Loire Métropole (Angers) — required, and DISPLAYED.**
 

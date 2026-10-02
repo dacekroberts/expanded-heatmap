@@ -1,11 +1,11 @@
 # Data sources — Australia
 
-The Australia part of the project's provenance record,
+<!-- internal -->The Australia part of the project's provenance record,
 [`data_sources.md`](../data_sources.md), split out by country. The numbered
 notices this project must display, the removal-request commitment and the
 deploy gate apply to every country and are kept in that record. Sydney's and
 Melbourne's build briefs are in the project's repository
-(`docs/build_briefs/sydney.md`, `docs/build_briefs/melbourne.md`).
+(`docs/build_briefs/sydney.md`, `docs/build_briefs/melbourne.md`).<!-- /internal -->
 
 ## Business registries
 
