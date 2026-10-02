@@ -2315,8 +2315,8 @@ premises in the whole city, 26 of them full-service restaurants), so Food servic
 the page says so.
 
 **Shown, but not named**: 710 storefronts show their street address instead of a name - 684
-whose licence holder is a person (the register writes a person surname first, "HARRIS
-GREGORY J") and 26 companies named only as a person ("ALYSSA BULLIS LLC";
+whose licence holder is a person (the register writes a person surname first, "SURNAME
+GIVEN-NAME INITIAL") and 26 companies named only as a person (a person's full name followed by "LLC";
 `config.PERSON_NAMED`, read by eye).
 
 **Stations.** All 19 KC Streetcar stops are inside the city. Not drawn: buses.
@@ -3766,7 +3766,7 @@ of 5.7 points.
   registrant sitting at home. **Vancouver is one of the exceptions, where the
   registry answers this itself** - as D.C.'s entity type and the French
   register's legal form also do - and it answers in the name field: it wraps a
-  sole proprietor's own name in PARENTHESES - "(Qi Liu)" - so the primary
+  sole proprietor's own name in PARENTHESES - "(Given-name Surname)" - so the primary
   signal there is the City's own marking rather than a guess. The pattern test is still run alongside it,
   because each catches people the other misses: the parentheses find 63
   storefront rows the pattern misses, mostly three-part and non-Anglo names,
