@@ -32,7 +32,7 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **124** across 24 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **45** — A 7 · B 12 · C 3 · D 1 · R 22 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser)* |
+> | **Candidates** | **46** — A 7 · B 12 · C 3 · D 1 · R 23 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser)* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
 > | **Discarded** | **119**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day)* |
 >
@@ -69,7 +69,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 45
+## Candidates — 46
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
@@ -80,9 +80,9 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **12** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **3** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **1** |
-| ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **22** |
+| ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **23** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **45** |
+| | **Candidates** | **46** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
 | *Discarded* | Measured negative, evidence named | *119* |
 
@@ -145,7 +145,7 @@ track share come at Step 0.
 |---|---|---|
 | **Tempe** 🇺🇸 | "Tempe General Business License List as of September 3, 2026", one document updated monthly (format and size unstated); Valley Metro light rail | **Approve one download** (`tempe.gov/home/showpublisheddocument/118800/...`) so the list can be read; it refuses scripts |
 
-## ⚫ Band R — restricted or request only (22 cities; created 2026-09-28)
+## ⚫ Band R — restricted or request only (23 cities; created 2026-09-28)
 
 **Carried over unchanged from the 2026-09-30 list (owner, 2026-10-01)**, with four rows added the same day: Kraków from the pattern screen, and Brescia, Catania and Alicante, whose portals refused the built-in browser as well as scripts.
 
@@ -179,6 +179,7 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Brescia** 🇮🇹 | ⚠️ **NOT screened behind the block (wave 2, 2026-09-28; re-read 2026-10-01).** Brescia's 23 datasets harvested to `dati.gov.it` carry no commercial list | 🚧 `dati.comune.brescia.it` times out to scripts and the browser pane (2026-10-01); `www.comune.brescia.it` answers | A read of the city catalogue from an allowed network |
 | **Catania** 🇮🇹 | ⚠️ **NOT screened behind the block (wave 2; re-read 2026-10-01).** No Comune di Catania organisation on `dati.gov.it` | 🚧 `opendata.comune.catania.it` times out; `etnaopen.comune.catania.it` shows a firewall "Access Denied" page to the browser pane (2026-10-01) | As Brescia |
 | **Alicante** 🇪🇸 | ⚠️ **NOT screened behind the block (wave 2; re-read 2026-10-01).** Only the IAE tax files for 2017 and 2020 found, which are stale and leave out most small traders | 🚧 `datosabiertos.alicante.es` times out to scripts and the browser pane (2026-10-01); `www.alicante.es` answers | As Brescia |
+| **Richmond (BC)** 🇨🇦 | ✅ **Screened (2026-09-30), Vancouver (Regional)'s add-on**: the City's business directory, 11,517 current licences, **4,012 in the buckets**, addresses only (an address join); Canada Line stations inside the city | 🚫 **Request only**: no open-data licence; the site's copyright notice allows "research purposes and private use only", with written permission required for anything else | **A written request to the City** (`buslic@richmond.ca`), the owner's to send; nothing drafted or sent. Moved to R by the owner 2026-10-01 |
 
 ## 🟤 Band T — retired (0 cities; retired 2026-10-01, trams-only maps approved 2026-09-29)
 
@@ -196,14 +197,14 @@ not counted here.
 - **Vancouver (Regional)**:
   - Burnaby's "Business Licences" layer opens in a browser: 19,959 approved
     licences, current to 2027-08-31, under Open Government Licence –
-    Burnaby. A named fetch needs the owner's approval, since the host
-    refuses scripts.
+    Burnaby. **The download was approved by the owner on 2026-10-01**: the
+    Hub export, or paged queries of layer 17.
   - New Westminster joins at 99.8%.
-  - Richmond is NOT PERMITTED as it stands.
+  - Richmond is NOT PERMITTED as it stands: Band R since 2026-10-01 (owner).
 - **Washington D.C. + Arlington**: Arlington's current business licence
   list (12,212 records, weekly, 2026-09-25) has addresses and section codes
-  but no coordinates. It needs an address join, a licence read and the
-  owner's OK for its 379 KB download.
+  but no coordinates. It needs an address join and a licence read. **The
+  379 KB download was approved by the owner on 2026-10-01.**
 - **Los Angeles + Long Beach**: PERMITTED WITH CONDITIONS (2026-09-30).
 - **Rio + Duque de Caxias, Belo Horizonte + Contagem**: in `PLAN.md`.
 
@@ -506,7 +507,7 @@ dataset title**.
 | Country | Built | Candidates | Bands | What stands between it and the next city |
 |---|---|---|---|---|
 | 🇺🇸 United States | **18** | **2** — Seattle (Regional), Tempe | C, D | Seattle held for a regional build (Link's 11 cities; licence reads first); Tempe's list needs one download approved. Built: 18 |
-| 🇨🇦 Canada | **7** | — | — | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's four SkyTrain suburbs are a rescope in PLAN, probes first. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
+| 🇨🇦 Canada | **7** | **1** — Richmond (BC) | R | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's four SkyTrain suburbs are a rescope in PLAN, probes first. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
 | 🇲🇽 Mexico | **3** | **0** | — | Complete on the current screen: Monterrey (Regional) built 2026-09-27 and published with Daegu and Busan |
 | 🇪🇸 Spain | **3** | **1** — Alicante | R | Alicante's portal refuses the browser too (2026-10-01); Alcobendas discarded |
 | 🇮🇪 Ireland | **1** | — | — | Complete: wave 2 (2026-09-27) found no second city. Dublin's map already covers all four Dublin councils; Cork, Limerick, Galway and Waterford have no urban rail. Re-screen Cork when Luas Cork opens |
@@ -558,7 +559,7 @@ dataset title**.
 | 🇹🇳 Tunisia | — | — | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | — | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | — | — | Addis Ababa discarded 2026-10-01 |
-| **Total** | **124** | **45** |  | A 7 · B 12 · C 3 · D 1 · R 22. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **124** | **46** |  | A 7 · B 12 · C 3 · D 1 · R 23. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 

@@ -86,8 +86,8 @@ five take as config.
 
    | City | Item | Needs |
    |---|---|---|
-   | Sheffield, Blackpool | **Gate 3's source.** The operators' sites refuse scripts (a Radware CAPTCHA; 403). Proposed: NaPTAN (DfT, OGL), a new source | **The owner's OK** before download, plus a licence row. Without it, record the gap in config |
-   | Birmingham | **Line 2 (the Dudley line) is in OSM.** If it is in passenger service, Dudley would join the scope | **The owner's call**, before adding Dudley |
+   | All six | **Gate 3's source: NaPTAN** (DfT, OGL), approved by the owner 2026-10-01. Sheffield's and Blackpool's operators refuse scripts, so it is their only independent source | A licence row and its notice; the build downloads it without asking |
+   | Birmingham | **Line 2 (the Dudley line) is in OSM** | **Pre-approved (owner, 2026-10-01):** if it is in passenger service at build, add Dudley (FSA 409) as a fourth authority |
    | Manchester | The **ECL** relation | Identify it before drawing |
    | Edinburgh | The **"Tram Extension to Newhaven"** relation | Identify it before drawing |
 

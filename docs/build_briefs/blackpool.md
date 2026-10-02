@@ -77,9 +77,7 @@ carry it, so it is drawn.
 - `blackpooltransport.com` returns 403 to scripts. Never work around it.
 - **Proposed: NaPTAN** (Department for Transport, OGL), its tram stops for
   Lancashire and Blackpool.
-- **NaPTAN is a new source, so it needs the owner's OK** before download,
-  plus its licence row.
-- Without it, the gap is recorded in config.
+- **NaPTAN approved as gate 3's source in all six (owner, 2026-10-01)**: the Department for Transport's national stop register (OGL), downloaded for the build's area. It needs a licence row in `docs/data_sources.md` and its notice.** The build downloads it without asking.
 
 ## Scope, CRS, region
 
@@ -92,7 +90,7 @@ carry it, so it is drawn.
 
 ## Still unknown
 
-- 🚨 **Gate 3's source** (above).
+- ✅ **Gate 3's source**: NaPTAN, approved (owner, 2026-10-01).
 - ⚠️ **The spur in OSM**, and **spacing** for the rings.
 - ⚠️ **Wyre's placement** from its full file.
 - ⚠️ **Personal exposure**, and a row in `docs/privacy_verdicts.md`.

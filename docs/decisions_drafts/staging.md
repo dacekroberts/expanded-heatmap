@@ -4,6 +4,44 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - The owner's calls 5-10: downloads approved, NaPTAN for the UK six, Dudley pre-approved, Atlanta's note filed, Richmond to R (owner)
+
+- **5. Downloads approved:**
+  - **Tempe's business licence list**: staging fetches and screens it.
+  - **Burnaby's licence layer and Arlington's licence list**: for main's
+    Vancouver (Regional) and D.C. + Arlington add-on builds. Recorded in the
+    master list's add-ons note.
+- **6. NaPTAN** (the Department for Transport's stop register, OGL) is gate
+  3's independent source in all six UK briefs. It is the only one for
+  Sheffield and Blackpool, whose operators refuse scripts. It needs a
+  licence row and its notice at build.
+- **7. Birmingham:** if West Midlands Metro's Line 2 is in passenger service
+  at build, **Dudley (FSA 409) joins as a fourth authority**, pre-approved.
+  It is written into the brief and the handoff.
+- **8. Atlanta:** a note telling the City its 2024 licence layer exposes
+  reported revenue is **drafted and filed, not to be sent**
+  (`docs/notifications/atlanta-revenue-exposure.md`). The owner: "unlikely
+  to send". It quotes no revenue value.
+- **9. Dublin's vacant premises and the three undatable sources** (NYS food
+  stores, Milan, Surrey): "disclose the lack of info where we need".
+  - That is page text, so under the prose hold it goes to the prose pass,
+    not to staging.
+  - Cleanup was told the same day.
+- **10. Richmond (BC) is in Band R, request only** (owner: "is request
+  required? if so put into R").
+  - It is: the City's business directory carries no open-data licence, and
+    its copyright notice allows "research purposes and private use only",
+    with written permission required.
+  - The request (`buslic@richmond.ca`) is the owner's to send. Nothing is
+    drafted.
+  - **The list now holds A 7 · B 12 · C 3 · D 1 · R 23 = 46.**
+- **Approved to run, and started the same day:**
+  - licence reads of Seattle's register, King County's food inspections,
+    Bellevue's licences and Geostat's register (plus Fukui's, from call 2);
+  - the four UK brief re-runs that printed RETRY;
+  - Brisbane's commuter-rail test;
+  - a re-check of Takaoka's licence page.
+
 ### 2026-10-01 - The owner's calls on the fresh list: discards confirmed, Tbilisi to B, Fukui and Seattle conditional (owner)
 
 - **1. The 19 new discards are confirmed** (owner: "confirm all"). The
