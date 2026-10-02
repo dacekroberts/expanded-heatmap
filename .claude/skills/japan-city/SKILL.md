@@ -86,6 +86,24 @@ the owner reminded Kobe's build that it exists for the cities after it.
 - **No page says "currently operating"**: the lists keep closed premises.
 - **Region: East Asia**. Country: "Japan". Projected CRS from
   `japan.CITIES[slug]["epsg"]` (Sapporo and Tokyo 54N, Fukuoka 52N).
+- **The 2026-10-01 batch is the minor label tier, as France and Czechia
+  are** (owner, 2026-10-02): the smallest cities lose their pills in the
+  macro views to cut clutter. Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki,
+  Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi and
+  Takaoka (if it moves up) each carry `label_tier: "minor"`: dot and tooltip
+  in every view, pill only in its own region. The eight built cities stay
+  eligible. A minor tag alone takes the pill out of Global only; in East Asia
+  it still shows. So follow the whole precedent (DECISIONS.md, 2026-09-30,
+  the label tiers' first and second slices):
+  - Japan gets its own sub-region. Use one region or a split, as France
+    North and South, by `check_macro_labels.py` (PROBLEMS 0 at 375, 768 and
+    1200), never by eye.
+  - Every Japanese city moves into it, built ones included, as Prague moved
+    with Czechia.
+  - `REGION_LABELS_ALSO["East Asia"]` adds the Japan region, so East Asia
+    still names Tokyo, Osaka and the other anchors, as it names Seoul.
+  - The first city of the batch makes this change, and it lands at review
+    time with that city's `app/` diff.
 
 ## The traps Kobe measured
 

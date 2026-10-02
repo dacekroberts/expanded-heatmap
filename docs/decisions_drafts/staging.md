@@ -4,6 +4,66 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Takaoka's licence is CC BY 4.0, but its food list can no longer be reached
+
+- **The owner asked for a faster re-check by new methods** after the agent
+  stalled ("go ahead with the takaoka"). It was run in the main session,
+  with sites and executes permitted.
+- **Licence: PERMITTED WITH CONDITIONS, CC BY 4.0.**
+  - The old portal's dataset page (`opendata.pref.toyama.jp/dataset/syokuhin`,
+    Wayback Machine 2026-05-21) gives the licence as 「クリエイティブ・コモンズ
+    表示」. The creator is 生活衛生課, the list was last updated 2026-03-02,
+    and the frequency is given as 月単位.
+  - The portal's terms (Wayback Machine 2026-03-16) apply CC BY 4.0 to all
+    content. The exceptions are logos and content marked with other rules,
+    and the food list carries no such mark. The 出典 example is
+    「出典：[データタイトル]富山県ホームページ（当該ページのURL）」, with
+    「を加工して作成」 added for edited data.
+  - The new platform's public front page (`ckan-front.tdcp.pref.toyama.jp`)
+    says all its data is under CC BY 4.0, with credit.
+  - The first screen's API read (2026-09-30) recorded `cc-by` on the
+    barber, beauty-salon and laundry lists too.
+  - The archive was read only because the old portal was retired: its host
+    no longer resolves. Archived copies of the blocked platform were not
+    looked for.
+- **Access is the blocker now.**
+  - The 2026-03-01 CSV on `toyama-pref.box.com` answers 404. It was read on
+    2026-09-30.
+  - The new platform's catalogue (`ckan.tdcp.pref.toyama.jp`) answers 403 to
+    the built-in browser as well as to the fetchers, while its front page
+    answers 200. The likeliest cause is a block on access from outside Japan.
+    It was not worked around.
+  - The national catalogue has ministry data only. A search found no other
+    public link to the list.
+- **Staging's recommendation is R, by the Kraków, Brescia, Catania and
+  Alicante precedent** (portals that refuse the built-in browser). It would
+  reopen when the platform answers or the prefecture publishes a public link.
+  This waits on the owner.
+
+### 2026-10-02 - The Japan batch goes to the minor label tier, as France and Czechia did (owner)
+
+- **The owner:** "for this new batch of japanese cities, carry over an item
+  to eventual build session that these need to be implemented like france
+  and czechia where the smallest cities lose their macro-view pills to
+  reduce clutter".
+- **The batch:**
+  - Band A's seven: Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki,
+    Utsunomiya, Kitakyushu.
+  - Band B's five: Sakai, Hakodate, Kagoshima, Okayama, Kōchi.
+  - Takaoka, if it moves up from C.
+  - Each carries `label_tier: "minor"`. The eight built Japanese cities stay
+    eligible.
+- **The precedent is the whole France and Czechia mechanism, not the tag
+  alone.** The tag removes a pill only outside the city's own region, and
+  every Japanese city is tagged East Asia today. So:
+  - a Japan sub-region, one or split, measured by `check_macro_labels.py`;
+  - every Japanese city moved into it, as Prague moved with Czechia;
+  - `REGION_LABELS_ALSO["East Asia"]` gains it, so the anchors keep their
+    pills there (Seoul's case).
+- **Recorded for the build session** in the `japan-city` skill's standing
+  calls and in the master list's "Before building". Nothing in `app/`
+  changes now: it lands with the batch's first city at review time.
+
 ### 2026-10-01 - Brisbane to the discards on rail; a commuter-rail revisit group of twelve (owner)
 
 - **The owner: "stays in discard, create commuter rail discard group to

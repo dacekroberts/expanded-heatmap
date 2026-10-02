@@ -136,7 +136,7 @@ track share come at Step 0.
 | City | What there is | What stands between it and a band |
 |---|---|---|
 | **Seattle (Regional)** 🇺🇸 | **Held by the owner for a regional build with multiple city registers (2026-10-01).** Link's 1 and 2 Lines: 37 stations in 11 cities. Seattle's register and Bellevue's ("Business Licenses (All)", NAICS, daily) cover all three buckets; King County's food inspections (12,296 businesses, current to 2026-09-29, parcel-joinable) cover food in every King County city | Licence reads: Seattle's (unresolved), King County food (a Public Domain field against a no-redistribution notice), Bellevue's ("commercial use … prohibited"). Lynnwood and Mountlake Terrace food (the owner's call). Retail and personal services outside Seattle and Bellevue are unpublished (records requests are outreach). In full: `docs/build_briefs/seattle.md`. **Owner (2026-10-01):** retail and personal services outside Seattle and Bellevue are accepted as unpublished and disclosed per city IF further probing finds no further bucket; Bellevue's never-expiring licences get an issue-date cutoff measured at build and brought to the owner **Licences read 2026-10-01:** Seattle's register permitted (non-commercial, owner-confirmed); Bellevue's and King County's ambiguous, **read as permitted by the owner (option 1)**, the removal rule the safety net; detail in the brief. A separate Seattle-only build exists (owner, 2026-10-01). |
-| **Takaoka** 🇯🇵 | Toyama Prefecture's food CSV (3,128 Takaoka rows, monthly, no operator-name column); personal lists yearly (2025-03-31) | The per-dataset licence: the prefecture's new catalogue answers 403 to this machine and its site default is Sendai's. Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR |
+| **Takaoka** 🇯🇵 | Toyama Prefecture's food CSV (3,128 Takaoka rows, monthly, no operator-name column); personal lists yearly (2025-03-31) | **Licence settled 2026-10-02: CC BY 4.0** (the old portal's dataset page, archived 2026-05-21, and its terms; the new platform's front page says the same of all its data). **Now access:** the old portal's host no longer resolves and the CSV answers 404 (it was read 2026-09-30). The new data platform answers 403 to the built-in browser as well as to fetches; no other public copy was found. Its last update was 2026-03-02 despite "monthly". Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR |
 
 ## 🔴 Band D — blocked, but the owner can act alone (0 cities)
 
@@ -705,5 +705,10 @@ candidates whose build must decide it (Japan, Seoul, Hong Kong, São Paulo).
   measurement for whether a region frames its cities. *(This bullet said
   `REGION_ORDER` was still `["United States", "Canada"]` until 2026-09-23 — it
   now holds seven entries.)*
+- **The Japan batch (Band A's seven, Band B's five, Takaoka) is the minor
+  label tier, as France and Czechia are** (owner, 2026-10-02): each new city
+  loses its pill in the macro views. That means a Japan sub-region, every
+  Japanese city moved into it and East Asia still naming the anchors. The
+  `japan-city` skill's standing calls give the whole recipe.
 - `add-country` first for any country this project has never built in — every
   candidate country except France.
