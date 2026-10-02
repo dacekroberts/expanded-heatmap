@@ -1687,6 +1687,28 @@ _NOTICES = [
      "情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. Utsunomiya City"
      ", MHLW and MLIT did not make and do not endorse this map.",
      False),
+    # Kitakyushu (notice 103): the city's three BODIK lists, CC BY 4.0 with the 第6条 credit per
+    # resource; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    ("Kitakyushu City, MHLW and MLIT (Kitakyushu)",
+     "Kitakyushu's businesses: 北九州市保健福祉局 保健衛生課「食品衛生法等許可施設一覧（2026(令和8)年3月中）」（[https://data.bodik.jp/dataset"
+     "/822fb681-346a-444e-b482-33c67b50cac3/resource/afce5cb5-8582-4295-8a98-494db2e25466](https://data.bo"
+     "dik.jp/dataset/822fb681-346a-444e-b482-33c67b50cac3/resource/afce5cb5-8582-4295-8a98-494db2e25466)）,"
+     " 北九州市保健福祉局 東部・西部生活衛生課「理容所施設一覧（2026(令和8)年8月31日時点）」（[https://data.bodik.jp/dataset/8be510bd-5f67-4570-"
+     "a250-b34ffdac8d37/resource/c0503e76-86d9-4f14-a052-f17ac06951d0](https://data.bodik.jp/dataset/8be51"
+     "0bd-5f67-4570-a250-b34ffdac8d37/resource/c0503e76-86d9-4f14-a052-f17ac06951d0)）「美容所施設一覧（2026(令和8)年8月"
+     "31日時点）」（[https://data.bodik.jp/dataset/c8266fc8-5d1f-4d3b-93aa-44486f5187ea/resource/e958d9fd-6e3d-4"
+     "7bf-b557-96af0c3a44ca](https://data.bodik.jp/dataset/c8266fc8-5d1f-4d3b-93aa-44486f5187ea/resource/e"
+     "958d9fd-6e3d-47bf-b557-96af0c3a44ca)）（[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）を加工し"
+     "て作成; and 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出"
+     "一覧」を加工して作成. Processed by this project, which selected the storefront types, kept the city's old perm"
+     "its still in term at the end of August 2026, showed a premises in both lists once, placed each by it"
+     "s address or the ministry's own coordinates, and counted them around stations. The ministry's list h"
+     "olds only filings whose applicants agreed to publish them and is not complete. Their locations: 出典：位"
+     "置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. Lines"
+     " and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値情報（行政区域データ） (CC BY 4.0; not dr"
+     "awn). The lists may include premises that have closed. Kitakyushu City, MHLW and MLIT did not make a"
+     "nd do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

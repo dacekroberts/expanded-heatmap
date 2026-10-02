@@ -3311,6 +3311,52 @@ line.
   each in Nikko, Takanezawa and Kanuma.
 - The Shinkansen is not drawn.
 
+### Kitakyushu - the city's old-law food list, its barber and beauty registers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Laundries: the city publishes no list of them.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 4,719 national filings whose filers did not publish an address (1,484 of
+  them restaurants, one restaurant in seven).
+- 966 rows of the city's old-law list whose permit had ended by 31 August 2026.
+- 370 food trucks, street and festival stalls and other temporary or mobile
+  permits, and 1,198 rows with no fixed place.
+- 1,054 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter (among
+  them 168 of the city's 食品販売業, a prefectural permit).
+- 764 school, hospital and staff canteens, 211 vending machines, 16 mail-order
+  businesses, 130 entertainment venues, 61 premises inside hotels and inns, 61
+  caterers (仕出し) and 546 snack bars and cabarets.
+- 65 closed premises, which the national filings keep, marked.
+
+**Counted** - the city's old-law food permits (its list as of 31 March 2026)
+still in term on 31 August 2026, its barber and beauty registers as of 31
+August 2026, and the national filings as downloaded on 2 October 2026. 2 fixed
+street stalls (屋台) are counted. 44 of the 1,108 bakery, confectioner and deli
+rows (4.0%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 967 repeat permits are shown once, and 223 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 2 rows. Another 33 sit at their town's center, and 211
+national filings at their own coordinates.
+
+**Names not shown** - none. The city's lists name an operator only where it is
+a company, and the national filings name none, so a sole trader's own name
+cannot be checked.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 19 stations beyond it: 6 each in Nakama and Nogata, 2 in
+  Mizumaki, 1 each in Kanda, Onga, Kurate and Kawara, and Shimonoseki in
+  Yamaguchi.
+- The Shinkansen is not drawn. The Sarakurayama cable car and the Mojiko Retro
+  sightseeing train, which are sightseeing lines, are not drawn. Nishi-Kurosaki
+  on the Chikuho line closed on 31 July 2026.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

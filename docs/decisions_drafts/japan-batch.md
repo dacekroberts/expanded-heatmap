@@ -9,6 +9,51 @@ them off.
 
 
 
+
+### 2026-10-02 - Kitakyushu built, two food lists and no laundries
+
+- **Kitakyushu built on the shared Japanese steps (the MHLW-led agent, applied
+  by the lead): 14,883 storefronts (Food service 8,071, Retail 3,745, Personal
+  services 3,067), 53 stations, 8 lines; 10,587 pins within a ring (71%).**
+  Page 168, notice 103, `mode: metro`, minor tier.
+- **The business leg:** MHLW's file; the city's old-law list with `in_term` on
+  許可終了日 against 2026-08-31, MHLW's date (2,417 of 3,383 kept); barbers and
+  beauty salons; no laundry list, disclosed (Berlin's gap). `SUPERSEDES`
+  dropped 223 old-law rows. 1,484 of 10,760 open restaurant permits publish no
+  address (one in seven). 2 yatai counted.
+- **The join:** block 98.5%, MHLW's point 1.3%, town-chōme 0.2%, 2 unplaced;
+  MHLW permits 98.6% (the brief's), old-law 99.0%. MHLW's point sits a median
+  33 m from the block point, 96.8% within 250 m.
+- **The name rule cannot reach a sole trader here:** the city fills 営業者氏名
+  / 代表者氏名 only for companies (food in term 1,191 of 2,417, 1,168 with a
+  company marker; barbers 57 of 817; beauty 470 of 2,282). 0 flagged in term.
+  Accepted on Toyama's and Fukui's position (owner, 2026-10-02: a list that
+  names companies only); the page says so.
+- **Rail:** N02-25, 53 stations, 19 excluded. 西黒崎 dropped through the new
+  `CLOSED_STATIONS`. The funicular and the retro line left out (Kobe's and
+  Kyoto's precedents). N02's 筑豊線 split by `BRANCHES`: 若松-折尾 (10,683 m of
+  track) is the Wakamatsu Line; the rest is the Fukuhoku Yutaka Line, a
+  one-station stub (折尾) kept as cut, under Fukuoka's naming, so the Wakamatsu
+  label does not run onto Fukuhoku Yutaka track. JR Sanyo's 門司 stub kept as
+  cut (gray: JR Kyushu gives that line no colour). Gate 3: Monorail 13 = 13.
+  No tram-stop file: the station query names Chikuho's stops (the lead's
+  tram-stop query returned empty from every mirror). 16 overrides; JR and
+  Monorail 城野 and 志井 are separate groups, "Jono (JR)" / "Jono (Monorail)".
+  Median gap 780 m: standard rings.
+- **Census control: 1.95 against an official / census ratio of 3.08:
+  explained** (one restaurant in seven without an address; the old list in
+  term only).
+- **Privacy verdict: publish.**
+- **The 菓子 / そうざい factory share:** 44 of 1,108 (4.0%), kept.
+- **Proposals for review time:** "Nishi-Kurosaki on the Chikuho line closed on
+  31 July 2026 and is not shown."; "The city publishes no list of laundries, so
+  laundries are not on this map."; the old-law bullet "(as of 31 March 2026),
+  shown where still in term at the end of August 2026"; the name bullet "The
+  city's lists name an operator only where it is a company, and the ministry's
+  list does not say who the operator is, so a trade name that is a sole
+  trader's own name cannot be checked here."; the in-ring percentage form; the
+  notice's processed-by clause on the old permits.
+
 ### 2026-10-02 - Utsunomiya built, Fukuoka's two-source shape with personal services
 
 - **Utsunomiya built on the shared Japanese steps (the MHLW-led agent, applied
