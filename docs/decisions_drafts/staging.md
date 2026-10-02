@@ -4,6 +4,45 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - Seattle regional: the 2025 Snohomish layer approved for Lynnwood and Mountlake Terrace food (owner, 4a); the Liquor Board lists screened (4b)
+
+- **4a approved (owner: "use").** Lynnwood's and Mountlake Terrace's food
+  comes from Snohomish County's "Food Service Establishments (2025)" layer
+  (598 and 92 points), under the currency rule's "a frozen part may sit
+  beside a current whole, its date on the page" (Tokyo's precedent).
+  Conditional on two build-time checks:
+  - **It is a complete snapshot.** Check it against the county's published
+    count of permitted establishments, and against the Liquor Board's
+    on-premise rows (Lynnwood 113, Mountlake Terrace 24).
+  - **Its date comes from more than the catalogue's "(2025)" label.**
+
+  If it proves partial, those stations are drawn hollow.
+- **4b probing (owner: "ok to fetch and screen")**: the Washington Liquor
+  and Cannabis Board's Off Premise and On Premise lists, dated 2026-09-29,
+  1.5 and 1.9 MB, kept in the staging scratchpad.
+  - **Off premise:** 8,793 rows statewide (7,791 active), mostly grocery
+    stores (beer/wine), spirits retailers, beer/wine specialty shops and
+    wine resellers.
+  - **On premise:** 9,993 rows (9,511 active), mostly restaurants, lounges,
+    taverns and nightclubs.
+  - **Both** carry status, expiry, a premises address and city (no
+    coordinates), plus `Licensee`, phone and mailing columns that are never
+    published.
+  - **Terms:** the page says records "may not be used for commercial
+    purposes" (RCW 42.56.070(8)), which the owner's non-commercial
+    confirmation meets. A formal licence read is owed at build.
+- **The finding: a partial retail layer exists in every suburb**: shops
+  licensed to sell alcohol, in both counties (Lynnwood 133, Kent 134,
+  Federal Way 106, Shoreline 66, Redmond 64, Tukwila 48, SeaTac 40,
+  Mountlake Terrace 25, Des Moines 24, Mercer Island 16, all statuses).
+  That is Zurich's precedent: alcohol-licensed shops as a partial layer
+  beside a full food register, disclosed.
+- **Staging recommends** adding the active off-premise rows as that partial
+  layer, and using on-premise only as a check on the Snohomish layer.
+  **The owner's call is pending.**
+- **Personal services remain unpublished outside Seattle and Bellevue**,
+  disclosed per city (4b).
+
 ### 2026-10-01 - Five licence reads: Seattle and Geostat permitted; Bellevue and King County ambiguous and read as permitted (owner, option 1); Fukui's share-alike to the owner
 
 - **Seattle's business register: PERMITTED WITH CONDITIONS.**
