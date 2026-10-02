@@ -384,17 +384,22 @@ def load_station_scope(root):
     return module
 
 
-def next_page_number(pages_dir):
-    nums = [int(m.group(1)) for p in pages_dir.glob("*_Heatmap.py") if (m := re.match(r"(\d+)_", p.name))]
-    n = max(nums, default=0) + 1
-    # The info pages start at 200 (renumbered from 90 on 2026-09-29, when
-    # the city list outgrew 89 slots). A city page must never take one.
-    info = [int(m.group(1)) for p in pages_dir.glob("*.py")
-            if not p.name.endswith("_Heatmap.py") and (m := re.match(r"(\d+)_", p.name))]
-    if info and n >= min(info):
-        sys.exit(f"next city page would be {n}, at or past the first info page "
-                 f"({min(info)}); renumber the info pages higher first")
-    return n
+def page_numbers(pages_dir):
+    return {int(m.group(1)) for p in pages_dir.glob("*.py") if (m := re.match(r"(\d+)_", p.name))}
+
+
+def next_page_number(pages_dir, wanted=None):
+    """One past the highest numbered page, or `wanted` (--page-number) when a
+    session builds in a block reserved for it (docs/session_roles.md): two
+    sessions taking max + 1 on separate branches pick the same number. The
+    info pages carry no number (owner, 2026-10-02), so a city never reaches
+    them."""
+    taken = page_numbers(pages_dir)
+    if wanted is None:
+        return max(taken, default=0) + 1
+    if wanted in taken:
+        sys.exit(f"page number {wanted} is taken; the next in the session's block is the one to use")
+    return wanted
 
 
 def region_order(text):
@@ -586,6 +591,9 @@ def main():
                     help="the city's country, spelled as the other cities in app/cities.py "
                          "spell it (\"Brazil\", \"Netherlands\"). REQUIRED: the city "
                          "switcher groups by it and cities.py raises at import without it.")
+    ap.add_argument("--page-number", type=int,
+                    help="the app page's number, from the block docs/session_roles.md reserves "
+                         "for this session; without it, one past the highest page")
     ap.add_argument("--map-step", type=int, default=3, help="number of the map step (3, or 4 if a geocoding step is inserted)")
     ap.add_argument("--new-region", action="store_true",
                     help="the region is new to the project: append it to REGION_ORDER in app/cities.py. Without this a region not already there is REFUSED, because the entry would import-fail and nothing in a build imports the app")
@@ -657,7 +665,7 @@ def main():
     if existing and not args.force:
         page_rel = f"pages/{existing[0].name}"   # re-run: keep the page already there
     else:
-        page_rel = f"pages/{next_page_number(pages)}_{page_stem(args.slug)}_Heatmap.py"
+        page_rel = f"pages/{next_page_number(pages, args.page_number)}_{page_stem(args.slug)}_Heatmap.py"
     if scope.slug(page_rel) != args.slug:
         sys.exit(f"refusing: {page_rel} resolves to outputs/{scope.slug(page_rel)}/ "
                  f"but this city's outputs are outputs/{args.slug}/. The live "
