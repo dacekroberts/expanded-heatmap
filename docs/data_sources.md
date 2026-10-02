@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -2528,6 +2528,26 @@ at review time).
 - **MUST DO:** `check_personal_exposure.py kumamoto` with its Japan pass, run
   2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
   ("Kumamoto built", 2026-10-02).<!-- /internal -->
+
+**100. Fukui City and MLIT (Fukui) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-01 and 2026-10-02; the Japan rows
+  in [`data_sources/japan.md`](data_sources/japan.md)). The city's lists are
+  **CC BY-SA** (the site policy's default, no version named). **Share-alike
+  accepted (owner, 2026-10-01): `outputs/fukui/` is offered under CC BY-SA 4.0**
+  (`LICENSE`). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as
+  in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn**.
+  No MHLW credit: its file is not used.
+- **MUST DISPLAY**: 福井市, both list titles with their page URLs, CC BY-SA,
+  and that the data was processed; the offer of the Fukui outputs under CC
+  BY-SA 4.0; MLIT's credit lines.
+- **MUST NOT**: imply the city's endorsement; claim accuracy on the city's
+  authority.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fukui` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Fukui built", 2026-10-02).<!-- /internal -->
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

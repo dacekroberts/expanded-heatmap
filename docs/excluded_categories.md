@@ -3200,6 +3200,38 @@ line.
 - Left out: 10 stations beyond it: 7 in Koshi and 1 each in Uto, Gyokuto and
   Kikuyo.
 
+### Fukui - the city's month-end food and 環境衛生 lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food: they notify rather than hold a permit.
+- Food trucks and stalls: the city's list holds fixed premises only. 1 more
+  register row has no fixed place.
+- 342 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+
+**Counted** - every permit for a fixed premises on the city's list for the end
+of August 2026 (2,984 restaurants, 85% of the official count, which includes
+vehicles and stalls), and the barbers, beauty salons and laundries on the same
+date. The city removes closures each month. 28 of the 599 bakery, confectioner
+and deli rows (4.7%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 292 repeat permits are shown once.
+
+**Not placed** - 75 rows (1.4%), mostly newer land readjustments (石盛, 栗森,
+東森田) that MLIT's files do not key yet. Another 565 sit at their town's
+center, many of them rural 大字 on the coast and up the valleys.
+
+**Names not shown** - 6 pins whose trade name is the operator's own name show
+their permit type. The city names an operator only where it is a company, so
+the rest cannot be checked.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 14 stations beyond it: 5 in Sabae, 4 in Sakai, 3 in Eiheiji and 2
+  in Ono.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

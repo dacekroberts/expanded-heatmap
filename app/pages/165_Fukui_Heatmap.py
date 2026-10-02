@@ -43,25 +43,49 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Fukui")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Matsuyama's page (approved wording,
+# pre-approved for this build, 2026-09-30); the sentences it does not cover
+# are proposals in the Japan batch's drafts file. The as-of date is the
+# lists' own (config.SOURCE_AS_OF, the R8.8月末 sheet).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Five lines are drawn, each labeled on the map and in the legend: Fukui Railway's Fukubu Line,
+  Echizen Railway's Mikuni Awara and Katsuyama Eiheiji lines, the Hapi-line Fukui and JR West's
+  Etsumi-Hoku Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Fukui City get rings, because the business data covers the city alone:
+  lines running on to Sabae, Sakai, Eiheiji and Ono are cut at the city line.
+- The Shinkansen is not drawn (Fukui appears as a station of the lines above).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Fukui City's lists of food-business permits and of barbers, beauty salons and laundries,
+  all as of 31 August 2026.
+- The food list holds fixed premises only, so food trucks and stalls are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Food businesses that only notify the city rather than hold a permit, such as many convenience
+  stores and greengrocers, are not in the list.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the district can be found, the dot
+  sits at the district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead; the city's
+  lists name an operator only where it is a company, so this cannot be checked for the rest.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **More than half of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Fukui")
 render_country_links("Fukui")
 

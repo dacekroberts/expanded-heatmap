@@ -1625,6 +1625,25 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Kumamoto City, MHLW and MLIT did not make and do not endorse this map.",
      False),
+    # Fukui (notice 100): the city's lists are CC BY-SA (the site policy's
+    # default), so the Fukui outputs are offered under CC BY-SA 4.0 (owner,
+    # 2026-10-01; LICENSE); MLIT as in Kobe's, N02 in its 2025 edition. The
+    # wording is a proposal for review time (the drafts file).
+    ("Fukui City and MLIT (Fukui)",
+     "Fukui's businesses: 出典：福井市「食品衛生法に基づく営業許可施設一覧」"
+     "（[https://www.city.fukui.lg.jp/fukusi/eisei/syokuhin/p070519.html](https://www.city.fukui.lg.jp/fukusi/eisei/syokuhin/p070519.html)）、"
+     "「環境衛生関係施設一覧」（[https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518.html](https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518.html)）"
+     "を加工して作成（CC BY-SA）. (This map modifies the City of Fukui's lists of food permits and of barbers, "
+     "beauty salons and laundries as of 31 August 2026, used under CC BY-SA.) This project offers the Fukui "
+     "map, and the Fukui data it derived from these lists, under "
+     "[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). "
+     "Processed by this project, which selected the storefront types, placed each by its address and "
+     "counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Fukui City and MLIT did not make and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

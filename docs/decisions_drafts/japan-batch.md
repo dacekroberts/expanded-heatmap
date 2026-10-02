@@ -6,6 +6,44 @@ them off.
 
 
 
+
+### 2026-10-02 - Fukui built, the project's first CC BY-SA output
+
+- **Fukui built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 4,932 storefronts (Food service 2,908, Retail 751, Personal
+  services 1,273), 45 stations, 5 lines; 2,982 pins within a ring (60%).**
+  Page 165, notice 100, `mode: tram`, minor tier.
+- **The business leg:** the newest month-end sheet of each workbook, sheet 0
+  confirmed as `R8.8月末`, read with `city_rows(sheet=0)` in `source_rows`,
+  which stops if the first sheet changes. 飲食店 and 喫茶店 read (2,984
+  restaurants, 85% of the official 3,508). MHLW kept out of `SOURCE_FILES`
+  entirely (a count control); the closure workbooks not read (closures are
+  already out of each month's sheet). Join: block 87.9%, town-chōme 10.7%,
+  unplaced 1.4% (land readjustments MLIT does not key), as briefed.
+- **The share-alike items (owner, 2026-10-01):** a section in `LICENSE`
+  offering `outputs/fukui/` under CC BY-SA 4.0, the licence row and notice
+  100. Their wording is a proposal for review time.
+- **Rail:** N02-25, 45 stations, 14 excluded. The Fukubu Line's two classes as
+  one line. No tram-stop query: OSM tags the six street stops as stations
+  (the lead's tram-stop query returned empty from every mirror, twice). 清明
+  has no English anywhere: "Seimei" (Hepburn). OSM named the Fukubu terminus
+  福井駅 "Fukui", colliding with JR 福井 142 m away: "Fukui-eki". Gate 3 cannot
+  run (no line wholly inside); by hand, Fukui Railway's station guide names the
+  same 25 Fukubu Line stations as N02. Median gap 793 m: standard rings.
+- **Census control: 1.85, inside the built cities' 1.56-1.92** (official /
+  census 2.24).
+- **Privacy verdict: publish.** The Japan pass prints 0; 6 pins show their
+  permit type (20 raw food rows, the brief's); companies-only naming accepted
+  (owner, 2026-10-02).
+- **The 菓子 / そうざい factory share:** 28 of 599 (4.7%), kept.
+- **Proposals for review time:** the notice and the `LICENSE` section; "The
+  food list holds fixed premises only, so food trucks and stalls are not on
+  this map."; the companies-only name-rule bullet (as Toyama's); "More than
+  half of storefronts sit within a ring." Known in shared code, not fixed:
+  `japan_fetch.fetch_city` counts rows with `city_rows(dest)`, so Fukui's
+  provenance records all twelve sheets' rows (food 52,021); step 2 reads the
+  newest sheet only.
+
 ### 2026-10-02 - Kumamoto built, Hiroshima's two-source shape with personal services
 
 - **Kumamoto built on the shared Japanese steps (the city-lists agent, applied
