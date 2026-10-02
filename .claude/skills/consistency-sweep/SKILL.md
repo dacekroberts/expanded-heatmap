@@ -337,11 +337,14 @@ back, and only some of it is checked:
 - **Process notes on a rendered doc.** Check scripts, `DECISIONS.md`,
   `PLAN.md`, skill and agent names, build briefs and internal docs either stay
   off those docs or sit between `<!-- internal -->` and `<!-- /internal -->`
-  (`country_sections.public()` strips them). No check decides this: grep the
-  rendered docs for `check_`, `DECISIONS`, `PLAN.md`, `licence-read`,
-  `build_briefs` and read each hit outside a marker. A marker that holds a `|`
-  or crosses a blank line is a defect too, and so is prose that reads badly
-  with the span deleted.
+  (`country_sections.public()` strips them). No check decides whether a
+  note needs hiding: grep the rendered docs for `check_`, `DECISIONS`,
+  `PLAN.md`, `licence-read`, `build_briefs` and read each hit outside a
+  marker. `check_internal_markers.py` decides the markers themselves: closed,
+  never nested, no `|`, no blank line crossed except by a whole block, and no
+  broken seam (empty parentheses, a space before punctuation, an empty
+  bullet). Prose that reads badly with the span deleted is still for a reader
+  to catch.
 - **British spelling in reader-facing text.** No check decides this either:
   grep for `licence`, `colour`, `centre`, `neighbourhood`, `labelled`, `grey`,
   `-ise`, and leave what is kept as written (required notices, license titles,

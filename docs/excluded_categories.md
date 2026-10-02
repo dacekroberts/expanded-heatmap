@@ -9,8 +9,8 @@ counted near them. Each one leaves things out on purpose, and neither is
 visible from the map itself, which is why they are written down here.
 
 Business counts were recorded when each city was built or last rebuilt.
-Station counts are computed from each city's `excluded_stations.csv` every time
-this page is shown, so they cannot drift. The reasoning behind each decision,
+Station counts are computed from each city's list of stations left out every
+time this page is shown, so they cannot drift. The reasoning behind each decision,
 with sample sizes, is in the project's decision log (`DECISIONS.md`); where each
 city's data comes from is on the "Where this data comes from" page.
 
@@ -93,8 +93,8 @@ station within walking distance.
 ### Stations left out of a network that IS mapped
 
 Three things remove a station from a network this project maps. Every such
-station is listed by name in its city's `excluded_stations.csv`, published with
-the project, and counted in the table on this page.
+station is listed by name on its city's page and counted in the table on this
+page.
 
 - **It is outside the city.** Rail networks do not stop at municipal
   boundaries, and business registers do: one city's register cannot say what is
@@ -244,7 +244,7 @@ person's own name; the rest are trade names the test cannot tell apart.
 each downtown couplet as one. 14 are outside it (8 in unincorporated
 Sacramento County, 3 in Rancho Cordova, 3 in Folsom), and 7th &
 Richards/Township 9 is closed for works while the Green Line is suspended. All
-are listed in `outputs/sacramento/excluded_stations.csv`.
+are listed on Sacramento's page.
 
 ### Houston — non-store sellers by code, homes, and a person's permit shown by address
 
@@ -431,8 +431,8 @@ them two Cub Foods and two Lunds & Byerlys stores; they are not geocoded.
 **Stations** - rings are drawn around the 15 stations inside the city. The
 Green Line's 14 stations in St. Paul and the Blue Line's 4 in Bloomington and
 4 in Fort Snelling Unorganized Territory (the airport among them) are left
-out, because the register stops at the city line; all are listed in
-`outputs/minneapolis/excluded_stations.csv`.
+out, because the register stops at the city line; all are listed on
+Minneapolis's page.
 
 ### Pittsburgh - the County's food facilities, food only, with a name test
 
@@ -473,8 +473,8 @@ the city's polygon.
 **Stations** - rings are drawn around the 20 stations inside the city. The
 31 stations of the South Hills branches beyond the city line (Bethel Park 17,
 Castle Shannon 7, Dormont 3, Mount Lebanon 3, South Park 1) are left out,
-because the list is used here within the city only; all are listed in
-`outputs/pittsburgh/excluded_stations.csv`.
+because the list is used here within the city only; all are listed on
+Pittsburgh's page.
 
 ### Buffalo — three registers, expired licenses, and salon names
 
@@ -1643,8 +1643,8 @@ any other line in this project loses.** Tramway T1 runs out through Blagnac and
 Beauzelle to the Airbus works and the exhibition center, and this map covers the
 commune of Toulouse, so those twelve stops and the rings around them are not
 drawn. Métro A loses Balma-Gramont and Métro B loses Ramonville on the same
-rule. All fourteen are listed, with the commune each lies in, at
-`outputs/toulouse/excluded_stations.csv`. Blagnac's businesses are in the
+rule. All fourteen are listed, with the commune each lies in, on Toulouse's
+page. Blagnac's businesses are in the
 same national register, so this is a scoping choice rather than a data limit -
 the map keeps to the commune so that Toulouse, Paris and Marseille are drawn on
 the same terms.
@@ -1691,8 +1691,8 @@ registered at home - rows with no employee band are 28.8% catch-all, against
 and including both of its ends.** Atalante and Cesson - Viasilva are in
 Cesson-Sévigné; La Courrouze and Saint-Jacques - Gaîté are in
 Saint-Jacques-de-la-Lande. The line is drawn to its ends, but no ring is drawn
-around those four. They are listed, with the commune each lies in, at
-`outputs/rennes/excluded_stations.csv`. Those communes' businesses are in the
+around those four. They are listed, with the commune each lies in, on Rennes's
+page. Those communes' businesses are in the
 same national register, so this is a scoping choice rather than a data limit.
 
 **About one active establishment in six is withheld by INSEE, not by this
@@ -1711,8 +1711,8 @@ Toulouse, Lille and Rennes.
 **Stops beyond a commune boundary are excluded for being in another commune.**
 Each line is drawn to its ends, but no ring is drawn around those stops, and
 their businesses are not counted. They are listed, with the commune each lies
-in, at `outputs/<city>/excluded_stations.csv`. Those communes' businesses are in
-the same national register, so this is a scoping choice rather than a data
+in, on each city's page. Those communes' businesses are in the same national
+register, so this is a scoping choice rather than a data
 limit. A city marked "(Regional)" is scoped to every commune its lines serve,
 so it leaves no stop out.
 
@@ -1793,8 +1793,8 @@ business name is the owner's own. They remain on the map; only the name is
 withheld.
 
 **Twelve T-bane stations are excluded for being in Bærum**, on the western
-branches of lines 2, 3 and 5, and are listed with their municipality in
-`outputs/oslo/excluded_stations.csv`. **Ferries are not drawn**, as in
+branches of lines 2, 3 and 5, and are listed with their municipality on Oslo's
+page. **Ferries are not drawn**, as in
 Marseille.
 
 ### Aarhus - Copenhagen's register and rules, and a city tramway without its railways
@@ -1818,8 +1818,8 @@ and Lisbjergskolen. **Nineteen Letbane stops inside the municipality are
 excluded**, 12 on Odderbanen and 7 on Grenaabanen. Both are converted railway
 lines running every 30 minutes by day, under this site's 15-minute test for
 light rail (Midttrafik's timetables, read 2026-09-29). So are the 11 stops beyond
-the municipality (Odder 3, Syddjurs 5, Norddjurs 3). All are listed in
-`outputs/aarhus/excluded_stations.csv`. Regional and InterCity trains are not
+the municipality (Odder 3, Syddjurs 5, Norddjurs 3). All are listed on Aarhus's
+page. Regional and InterCity trains are not
 drawn.
 
 ### Odense - Copenhagen's register and rules, and every tram stop
@@ -1883,8 +1883,8 @@ municipalities are not counted, although the national register holds them.
 
 **Fifty-nine stations are excluded for being outside the two municipalities** -
 fifty-seven S-tog stations on the lines' suburban reaches and the Metro's two
-airport stations in Tårnby - and are listed with their municipality in
-`outputs/copenhagen/excluded_stations.csv`. **Regional and InterCity trains are
+airport stations in Tårnby - and are listed with their municipality on
+Copenhagen's page. **Regional and InterCity trains are
 not drawn, nor the Hovedstadens Letbane**, which has no stop in either
 municipality.
 
@@ -2540,7 +2540,7 @@ public, and the type does not say which; the page says so.
 
 **Stations.** T1 and T2, every stop in the comune (39). T1 runs on into Scandicci: its four
 stops there (Villa Costanza, De André, Resistenza, Aldo Moro) are drawn with the line but
-not ringed (owner), listed in `outputs/florence/excluded_stations.csv`. Not drawn:
+not ringed (owner), listed on Florence's page. Not drawn:
 T3 and T4, under construction (T3.2.1 due about January 2027); buses; trains.
 
 ### Den Haag - the city's permit layer and BAG shop units, and every HTM tram stop
@@ -2574,7 +2574,7 @@ number and legal form are never downloaded. Shop units show their address.
 34, every stop in the gemeente (166; Leidschenveen and Leidschenveen Centrum, 10 m apart, merged as one interchange). Ten lines run on into neighboring gemeenten: their 64
 stops there (Rijswijk 17, Zoetermeer 17, Leidschendam-Voorburg 15, Delft 12, Westland,
 Lansingerland and Pijnacker-Nootdorp 1 each) are drawn with the line but not ringed
-(owner), listed in `outputs/den_haag/excluded_stations.csv`. Not drawn:
+(owner), listed on Den Haag's page. Not drawn:
 RandstadRail E, RET's metro line, a stub with 4 of its 23 stops in the city (owner);
 the 9S short working; buses; NS trains.
 
@@ -2599,8 +2599,8 @@ name that is a person's own name (read by eye).
 
 **Stations.** Every stop of VBZ trams 2–11, 13–15, 17, 50 and 51 in the Stadt (180).
 Trams 2, 4, 10 and 50 run on into Schlieren, Zollikon, Opfikon, Kloten and Rümlang: their
-15 stops there are drawn with the lines but not ringed, listed in
-`outputs/zurich/excluded_stations.csv`. Not drawn: trams 12 (Glattalbahn, 1 of 18 stops in
+15 stops there are drawn with the lines but not ringed, listed on Zurich's page.
+Not drawn: trams 12 (Glattalbahn, 1 of 18 stops in
 the city) and 20 (Limmattalbahn, 4 of 26), as stubs (owner) - two of
 tram 20's city stops, Bahnhof Altstetten and Seidelhof, are on no drawn line; the
 Forchbahn S18 (owner), whose four city stops are all tram stops; the S-Bahn;
@@ -3367,8 +3367,7 @@ just outside OpenStreetMap's outline of the council area.
 
 **Stations.** Sydney Trains' T1, T2, T3, T4, T8 and T9 and Sydney Metro's M1,
 cut at the council boundary: 16 stations inside it.
-- Left out: 157 stations beyond the boundary, listed in
-  `outputs/sydney/excluded_stations.csv`.
+- Left out: 157 stations beyond the boundary, listed on Sydney's page.
 - **Light rail (L1, L2, L3; 22 stops in the area) is not drawn** (owner,
   2026-09-28); with it, about nine storefronts in ten would sit within a ring
   (93.0%, measured before the build), against 83.4% without it.
@@ -3404,8 +3403,8 @@ clothing and footwear) are Retail.
 **Stations.** Metro Trains' six line groups, cut at the council boundary: 17
 stations inside it.
 - Left out: 199 stations beyond the boundary, Richmond among them (its
-  platforms' center lies just outside, on Punt Road), listed in
-  `outputs/melbourne/excluded_stations.csv`.
+  platforms' center lies just outside, on Punt Road), listed on Melbourne's
+  page.
 - **Trams (22 routes, 155 stops in the area) are not drawn** (owner,
   2026-09-28); with them, 99.1% of storefronts would sit within a ring
   (measured before the build), against 96.0% without them.
@@ -3458,7 +3457,7 @@ institutions by name, and about 470 whose name says nothing.
 **Stations.** The Tunnelbana's three lines (seven routes), cut at the kommun
 boundary: 82 stations inside it.
 - Left out: 18 stations in Solna, Sundbyberg, Danderyd, Huddinge and Botkyrka,
-  listed with their kommun in `outputs/stockholm/excluded_stations.csv`.
+  listed with their kommun on Stockholm's page.
 - Pendeltåg, Roslagsbanan, Saltsjöbanan and the trams are not drawn (owner,
   2026-09-28); with pendeltåg and the local railways, 92.3% of storefronts
   would be in a ring, against 88.7% without (measured before the build).
@@ -3545,8 +3544,7 @@ the name.
 **Stations.** Trams 1-13, every stop in Göteborgs Stad (127). Trams 4 and 12
 run on into Mölndal: their five stops there (Krokslätts Fabriker, Krokslätts
 torg, Lackarebäck, Mölndals Innerstad, Mölndals sjukhus) are drawn with the
-lines but not ringed (owner), listed in
-`outputs/goteborg/excluded_stations.csv`. Not drawn: Lisebergslinjen, the
+lines but not ringed (owner), listed on Göteborg's page. Not drawn: Lisebergslinjen, the
 heritage line; buses, ferries and commuter trains.
 
 ### Bucharest - the sanitary-veterinary registers, food only, placed by address
@@ -3620,8 +3618,8 @@ name at an address that reads residential (Seoul's rule).
 
 **Stations.** Incheon Lines 1 and 2, Line 1, Line 7 and the Suin-Bundang Line:
 79 stations inside Incheon.
-- Left out: 151 stations of those lines in Seoul and Gyeonggi, listed in
-  `outputs/incheon/excluded_stations.csv`; the lines are drawn to their ends.
+- Left out: 151 stations of those lines in Seoul and Gyeonggi, listed on
+  Incheon's page; the lines are drawn to their ends.
 - AREX, the suspended airport maglev and the Wolmi Sea Train are not drawn.
 
 ### Goyang, Seongnam and Yongin - SEMAS's national storefront register, all three buckets
@@ -3639,7 +3637,7 @@ services, wedding halls and matchmaking.
 personal name at an address that reads residential.
 
 **Stations**, each city cut at its own boundary (the lines drawn to their
-ends; stations outside in each city's `excluded_stations.csv`):
+ends; stations outside are listed on each city's page):
 - Goyang: Line 3 and the Gyeongui-Jungang Line, 20 stations. The Seohae Line
   (on the Gyeongui-Jungang track through the same stations) and GTX-A (its
   Kintex stop) are not drawn.
@@ -3662,7 +3660,7 @@ and matchmaking.
 name at an address that reads residential.
 
 **Stations**, cut at Suwon's boundary (the lines drawn to their ends;
-stations outside in `outputs/suwon/excluded_stations.csv`): Line 1, the
+stations outside are listed on Suwon's page): Line 1, the
 Suin-Bundang and Shinbundang Lines, 14 stations. No undrawn line has a
 station in Suwon.
 
@@ -3680,7 +3678,7 @@ and matchmaking.
 name at an address that reads residential.
 
 **Stations**, cut at Bucheon's boundary (the lines drawn to their ends;
-stations outside in `outputs/bucheon/excluded_stations.csv`): Line 1, Line 7
+stations outside are listed on Bucheon's page): Line 1, Line 7
 and the Seohae Line, 14 stations. The Seohae Line is drawn here (owner): in
 Bucheon it has its own track and stations, unlike Goyang. No undrawn line has
 a station in Bucheon.
@@ -3699,7 +3697,7 @@ and matchmaking.
 name at an address that reads residential.
 
 **Stations**, cut at Namyangju's boundary (the lines drawn to their ends;
-stations outside in `outputs/namyangju/excluded_stations.csv`): Line 4, Line 8,
+stations outside are listed on Namyangju's page): Line 4, Line 8,
 the Gyeongui-Jungang and Gyeongchun Lines, 17 stations. GTX-A and Seoul's Lines
 2, 5, 6 and 9, which pass near the city, have no station in Namyangju and are
 not drawn.
@@ -3718,7 +3716,7 @@ and matchmaking.
 name at an address that reads residential.
 
 **Stations**, cut at Ansan's boundary (the lines drawn to their ends;
-stations outside in `outputs/ansan/excluded_stations.csv`): Line 4, the
+stations outside are listed on Ansan's page): Line 4, the
 Suin-Bundang and Seohae Lines, 13 stations. The Seohae Line is drawn (owner,
 Bucheon's precedent): in Ansan it has its own track and stations. Line 1,
 Incheon Line 1 and GTX-A, which pass near the city, have no station in Ansan
@@ -3738,7 +3736,7 @@ and matchmaking.
 name at an address that reads residential.
 
 **Stations**, cut at Uijeongbu's boundary (the lines drawn to their ends;
-stations outside in `outputs/uijeongbu/excluded_stations.csv`): the U Line,
+stations outside are listed on Uijeongbu's page): the U Line,
 Line 1 and Line 7, 20 stations. Line 4 and GTX-A, which pass near the city,
 have no station in Uijeongbu and are not drawn; the U Line's two depot-shuttle
 trips are part of the drawn line.
@@ -3757,7 +3755,7 @@ and matchmaking.
 name at an address that reads residential.
 
 **Stations**, cut at Anyang's boundary (the lines drawn to their ends;
-stations outside in `outputs/anyang/excluded_stations.csv`): Line 1 and Line 4,
+stations outside are listed on Anyang's page): Line 1 and Line 4,
 7 stations. Anyang has fewer stations than the other satellite cities had to
 have, and was built for the share of its storefronts within a ring instead
 (owner, 2026-09-29). No other line has a station in the city.

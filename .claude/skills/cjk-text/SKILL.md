@@ -136,8 +136,9 @@ And one project rule bites harder here: a regex holding a Unicode escape
 Hong Kong it misread in both directions:
 
 - **Its person-name heuristic flagged 14.7% of pins, and every one was a trade
-  name.** It reads two capitalised words as a name: `KWOK YIN`,
-  `Wealthy Garden`, `INANIWA YOSUKE`.
+  name.** It reads two capitalised words as a name: a shop sign
+  of two romanized Chinese syllables ("SURNAME GIVEN-NAME" in shape), a
+  romanized Japanese restaurant brand, `Wealthy Garden`.
 - **Its residence test counts `UNIT` as residential.** In Hong Kong, UNIT is how
   commercial space is numbered. All 144 "person-like name at a residential unit"
   hits were mall and office units (`SHOP UNIT LG19, LG/F, THE SOUTHSIDE`).

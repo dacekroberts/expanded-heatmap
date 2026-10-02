@@ -89,8 +89,11 @@ strips it at render time.
   parenthetical first ("(read 2026-09-24 by the licence-read agent)"), a
   sentence only when all of it is process, a bullet only when all of it is.
 - **A marker never contains a `|`** (a table cell boundary) and never
-  crosses a blank line. Re-read the text with the spans deleted: no
-  dangling "and", no empty parentheses.
+  crosses a blank line, unless it hides a whole passage as a block (the open
+  marker at the start of a line, the close at the end of one). Re-read the
+  text with the spans deleted: no dangling "and", no empty parentheses.
+  `python scripts/check_internal_markers.py` (in `check_all`) checks all of
+  this except the reading.
 
 ## 4. American spelling
 
@@ -115,7 +118,8 @@ Surname)"). A list step 2 uses to withhold names holds keys
 `check_name_keys.py` fails a plain one. A person's own license to work inside
 someone else's shop is left out: San Francisco's practitioner licenses
 (`DECISIONS.md`, 2026-10-01) and New York's, Calgary's and Edmonton's chair
-renters are the precedents.
+renters are the precedents (`docs/category_rules.md`, its own row since
+2026-10-02).
 
 ## 6. Who approves the words
 

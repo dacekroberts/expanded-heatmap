@@ -34,8 +34,8 @@ Toulouse, Lille and Rennes.
 **Stops beyond a commune boundary are excluded for being in another commune.**
 Each line is drawn to its ends, but no ring is drawn around those stops, and
 their businesses are not counted. They are listed, with the commune each lies
-in, at `outputs/<city>/excluded_stations.csv`. Those communes' businesses are in
-the same national register, so this is a scoping choice rather than a data
+in, on each city's page. Those communes' businesses are in the same national
+register, so this is a scoping choice rather than a data
 limit. A city marked "(Regional)" is scoped to every commune its lines serve,
 so it leaves no stop out.
 

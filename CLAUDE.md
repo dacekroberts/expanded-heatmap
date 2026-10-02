@@ -247,6 +247,7 @@ python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
 python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
+python scripts/check_internal_markers.py [--selftest]   # every <!-- internal --> span closed, contained, clean
 python pipeline/name_keys.py "NAME" ["NAME" ...]        # the key to list for a name read as a person's own
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
 python scripts/check_city_registry.py                   # after merging

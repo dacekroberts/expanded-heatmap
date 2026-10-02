@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**339 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
 - [The prose and UI pass landed and live after the owner's reboot; the deploy check run in parallel lanes](#2026-10-02---the-prose-and-ui-pass-landed-and-live-after-the-owners-reboot-the-deploy-check-run-in-parallel-lanes)
 - [The city-building skills rewritten to the new page format; one French name restored (owner)](#2026-10-02---the-city-building-skills-rewritten-to-the-new-page-format-one-french-name-restored-owner)
+- [The skills rework's five follow-ups: stations "listed on the city's page", a person-license rule, a marker check (owner)](#2026-10-02---the-skills-reworks-five-follow-ups-stations-listed-on-the-citys-page-a-person-license-rule-a-marker-check-owner)
 
 **2026-10-01**
 
@@ -14030,3 +14031,59 @@ Recorded by the cleanup session from the Main Building Session's findings of
     every taxonomy answers it.
   - Whether the internal markers and the spelling should get checks of their
     own.
+
+### 2026-10-02 - The skills rework's five follow-ups: stations "listed on the city's page", a person-license rule, a marker check (owner)
+
+- **What Is Excluded no longer sends readers to a repository file** (owner:
+  "can change to listed on city page").
+  - The 26 pointers to `excluded_stations.csv` in
+    `docs/excluded_categories.md` now say the stations are listed on the
+    city's page. That includes the two general lines, on how the counts are
+    made and where the names are.
+  - `scripts/france_excluded_section.py` writes the same wording, and its
+    output for the 21 French cities equals the doc byte for byte.
+  - Left for the later wording batch (PLAN):
+    - 20 cells of About the Data's tables that point to the same files;
+    - five pointers to `excluded_premises.csv`, which no page shows.
+- **Each page family made consistent with itself in a later wording batch**,
+  presented as a Markdown list (owner). The splits the skills rework found
+  are listed in PLAN.
+- **A category rule for a person's own license** (owner: "add the row unless
+  the check failure is difficult to resolve").
+  - It was not difficult. The rule is optional with keywords, the mechanism
+    the Korean karaoke-bar rule uses, so only the 5 of 48 taxonomies whose
+    own vocabulary names such a license had to answer:
+    - Calgary's independent chair operators;
+    - Sacramento's independent stylists and massage technicians;
+    - Edmonton's accredited practitioners, plus its Massage Practitioner
+      licenses dropped before classify();
+    - New York's area and barber chair renters, dropped in step 2;
+    - D.C.'s "Beauty Booth".
+  - "Practitioner" alone matched medical and professional offices, which are
+    out anyway, so the keywords name the trades: tattoo, piercing, massage and
+    enhancement practitioners, and chair or booth renters.
+  - **One departure found:** D.C. keeps "Beauty Booth" (6 pins, a chair
+    rented inside a salon) as Personal services. It is pending for the owner
+    in the check and in PLAN, not changed.
+  - San Francisco's rule sits in its config. The shared NAICS module names no
+    such license, so no cell was needed for it.
+- **`scripts/check_internal_markers.py`, in `check_all`** (owner: "cheap
+  check"). It reads `country_sections.py`'s own pattern, so the two cannot
+  drift. In the rendered docs it fails on:
+  - a misspelled marker;
+  - an unclosed or nested one;
+  - a span holding a `|`;
+  - a span crossing a blank line, unless it hides a whole block;
+  - a broken seam: empty parentheses, a space before punctuation, a dangling
+    dash, an empty bullet.
+
+  13 selftest cases. Its first run found six spans:
+  - two whole process sections hidden as blocks, now allowed;
+  - four double spaces, which Markdown collapses, so that rule was dropped.
+
+  All 164 spans pass.
+- **The Hong Kong examples in `cjk-text`** ("KWOK YIN", "INANIWA YOSUKE") are
+  trade names, but they read like people's names, and that was the point of
+  quoting them. They are replaced with descriptions of their shape. No other
+  tracked file names them except the Hong Kong map, which shows them as shop
+  signs.

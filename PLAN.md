@@ -855,6 +855,31 @@ every key, account and letter:
     register publishes future-dated cancellations, so a re-run days later
     moves the baseline (2026-10-02: 18,218 -> 18,215). Measure against the
     fetch date instead, or record it (the date fixes item (f) above).
+- [ ] ⏸ **A wording batch: each page family made consistent with itself**
+  (owner, 2026-10-02: a later batch, presented as a Markdown list rather than
+  a review page). Found by the skills rework; the skills follow the majority
+  wording until then:
+  - the tram pages place the in-ring share in two places (last under The
+    businesses on five, last under Reading the density on five), and Den
+    Haag's third heading is "Reading the map" where the other nine say
+    "Reading the density";
+  - the Japanese pages split 3-3 on the no-general-license sentence: dashes
+    (Kobe, Osaka, Sapporo) or parentheses (Fukuoka, Kyoto, Hiroshima); Kobe
+    alone says "The city notes that premises which have closed may still be
+    listed"; Taichung alone says "high-speed rail services";
+  - About the Data still points to `outputs/<city>/excluded_stations.csv` in
+    20 table cells of `docs/data_sources/*.md` (Sydney, Melbourne, Brno,
+    Berlin, Dublin, Milan, Rome, Mexico City, Amsterdam, Incheon, Seoul,
+    Daegu, Busan, Barcelona, Stockholm, Zurich, London, Philadelphia,
+    Minneapolis, Pittsburgh): What Is Excluded now says "listed on the city's
+    page" (owner, 2026-10-02), and these could match;
+  - What Is Excluded still points to `excluded_premises.csv` for Minneapolis,
+    Pittsburgh, Kitchener-Waterloo, Palma and Ottawa. No page shows those
+    rows, so the sentence needs another wording, not "listed on the page".
+- [ ] ⏸ **D.C.'s "Beauty Booth" (6 pins), kept as Personal services**: a chair
+  rented inside a salon, which the person-license rule (2026-10-02,
+  `docs/category_rules.md`) takes out. Pending for the owner in
+  `check_category_continuity.py`; drop it, or record it as an exception.
 - [ ] ⏸ **After the prose and UI pass lands (owner, 2026-10-01):**
   - **The site notices footer**: every city page lists all of the site's
     numbered notices (82) at its foot, inline for now. The owner wants a later
