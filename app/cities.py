@@ -3619,12 +3619,13 @@ REGION_ORDER = [
     # Seoul is about 2,100 km and to Sapporo about 3,400, past the 3,300 at which
     # Canada was split, so re-score it when Japan lands rather than assume.
     "East Asia",
-    # JAPAN (owner, 2026-10-02): the 2026-10-01 batch is the minor label tier,
-    # as France and Czechia are, so Japan is a view of its own and every
-    # Japanese city moves into it, the eight built ones included, as Prague
-    # moved with Czechia. East Asia still names the eight anchors
-    # (REGION_LABELS_ALSO). One region or a split, decided by
-    # check_macro_labels.py at 375, 768 and 1200.
+    # JAPAN WEST AND JAPAN EAST (owner, 2026-10-02): the 2026-10-01 batch is the
+    # minor label tier, as France and Czechia are, so Japan has views of its own
+    # and every Japanese city moves into them, the eight built ones included, as
+    # Prague moved with Czechia. East Asia still names the eight anchors
+    # (REGION_LABELS_ALSO). Split at 136 E by check_macro_labels.py: one Japan
+    # view failed at every width (46 problems each, Osaka's and Sakai's dots
+    # 2.6 px apart); two place every label, Japan West at REGION_ZOOM 6.0.
     "Japan West",
     "Japan East",
     # SEOUL CAPITAL AREA (owner, 2026-09-29): Seoul, Incheon and the Gyeonggi
