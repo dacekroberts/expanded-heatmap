@@ -913,6 +913,20 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
+- [ ] **Found at the UK six landing (2026-10-02), none blocking:**
+  - **The "OpenStreetMap (rail geometry)" notice** lists the cities whose
+    rail data comes from OSM, but it names none of the nine UK cities, and
+    other later cities are missing too. The basemap's "© OpenStreetMap
+    contributors" credit meets ODbL either way. Bring it up to date, or reword
+    it as a general statement, at the next `app/` batch.
+  - **Glasgow's Europe label is about 65% clipped at 375 px**, at the frame's
+    left edge, since the UK's cities left Europe. Every other placement
+    collides: above hits Newcastle's pill, below hits Dublin's, and to the
+    right covers Edinburgh's dot. The clipping is reported, not failed; the
+    pill stays clickable and the list under the map names Glasgow.
+  - **`scaffold_city.py` has only the GTFS map template.** An OSM-rail city
+    that drops `GTFS_ZIP` from its config fails at import until its map step
+    is replaced. A `--rail-source osm` template would save that step.
 - [ ] ⏸ **D.C.'s "Beauty Booth" (6 pins), kept as Personal services**: a chair
   rented inside a salon, which the person-license rule (2026-10-02,
   `docs/category_rules.md`) takes out. Pending for the owner in
