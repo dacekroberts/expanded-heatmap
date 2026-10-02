@@ -197,6 +197,12 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 at once never take the same "next free" number: the UK six **156–161**
 (build order), the Japan batch **162–173** (its kit's table order). Notice
 numbers are claimed here, by the session, before one is written.
+**Scaffold with the reserved number:** `scaffold_city.py ... --page-number
+<N>`. Without it the script takes one past the highest page on the session's
+own branch, which is the collision. It refuses a number already taken. The
+three info pages carry no number since 2026-10-02 (`About_the_Data.py`,
+`What_Is_Excluded.py`, `Why_the_Maps_Differ.py`), so no block ever reaches
+them.
 
 ## The shared files everyone appends to
 

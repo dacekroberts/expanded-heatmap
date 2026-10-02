@@ -408,9 +408,9 @@ SITE_NAME = "Storefronts Near Transit"
 # take 1..n. At nine cities the next city would be page 10 - which these two
 # already occupied. Moving them to the 90s leaves 10-89 free for cities and
 # keeps them last in the sidebar, which is where they belong.
-ABOUT_DATA_PAGE = "pages/200_About_the_Data.py"
-EXCLUSIONS_PAGE = "pages/201_What_Is_Excluded.py"
-DIFFERENCES_PAGE = "pages/202_Why_the_Maps_Differ.py"
+ABOUT_DATA_PAGE = "pages/About_the_Data.py"
+EXCLUSIONS_PAGE = "pages/What_Is_Excluded.py"
+DIFFERENCES_PAGE = "pages/Why_the_Maps_Differ.py"
 
 # Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
 # and the sources are recorded in docs/data_sources.md, "Notices this project

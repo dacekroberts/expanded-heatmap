@@ -4,6 +4,65 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Seattle (Regional): rail from OSM, Snohomish read permissively, HQ rows with the head-office rule, 2023-2024 licences dropped, Bellevue food from King County (owner)
+
+- **Sound Transit's GTFS is not used** (owner: "we can use openstreetmap
+  here"). Its Transit Data Terms add a "No Changes" clause, a duty to pass
+  the terms on, an open indemnity, an email registration and usage metrics.
+  Rail comes from OSM. Gate 3's count comes from Sound Transit's station
+  pages.
+- **Snohomish County's food layer: "permissive read".**
+  - The layer's own terms are SILENT. Item
+    `75bf161b46ba484a97e6d7f1c63f21a4` was published by Public Works Solid
+    Waste and is not in the open-data catalogue.
+  - The county's GIS data disclaimer is read as governing, with its
+    hold-harmless for errors in the data.
+  - Credit "Snohomish County, Food Service Establishments (2025)", never the
+    health department. The removal rule is the safety net.
+- **Snohomish permit types: "keep only those points"**, Restaurant and
+  Grocery. That is R1 (2026-09-29): school kitchens, donated-food
+  distributors, food trucks, caterers, vending and concessions are out.
+  Lynnwood keeps 310 facilities and Mountlake Terrace 56.
+- **Seattle's lapsed licences: "drop 2023-2024"** (986 bucket rows, 9.8%).
+  Staging had reported the loss as not small: by trade name, 35 to 38% of
+  those food rows match a currently inspected business, against 65% for
+  2026, so about half may still be open.
+- **Seattle's `HEADER QUARTER` rows: "keep, use head-office rule".** Both
+  location types are kept, and Taipei's and Taichung's head-office rule
+  applies to headquarters rows. It flags 9 rows.
+- **Bellevue: King County food plus the cutoff.** The owner's reply
+  ("makes more sense now check") was read back. The owner chose Bellevue's
+  food from King County's inspections, current by construction, and the
+  2010 issue-date cutoff for Bellevue's retail and personal services only.
+  Before 2010, only 42% of Bellevue's food rows had a currently inspected
+  business at their address.
+
+### 2026-10-02 - Seattle (Regional): the Liquor Board's lists PERMITTED WITH CONDITIONS; non-commercial holds for a portfolio project (owner)
+
+- **The `licence-read` verdict (2026-10-02): PERMITTED WITH CONDITIONS.**
+  - The Washington State Liquor and Cannabis Board publishes no licence and
+    no terms of use, and the list file (`Off Premise09292026.xlsx`, 8,795
+    rows) carries none.
+  - The only rule on reuse is the lists page's note: "Per RCW 42.56.070(8),
+    records received through the Public Records Act may not be used for
+    commercial purposes." The statute itself restricts the agency's
+    disclosure of "lists of individuals".
+  - The published layer drops `Licensee`, phone and mailing columns, so it
+    shows trade names at premises.
+  - No wording is prescribed and nothing is owed. The removal contact is
+    publicrecords@lcb.wa.gov.
+- **The owner's calls:**
+  1. **"yes non-commercial"**: a free map in a personal portfolio, with
+     nothing sold, no ads, no paid tier and no client use, meets the
+     condition. The agent's lean was the same: MRSC's summary of SEIU 925
+     treats publicizing one's work as too remote to be commercial. The same
+     condition covers Seattle's own register.
+  2. **"yes"**: the city page discloses the Board's notice that its list
+     reports "contain possible errors due to a known data transfer issue",
+     if it is still on the lists page at build. The page also states the
+     list's date and never calls it complete, accurate or current (the
+     privacy policy's accuracy disclaimer).
+
 ### 2026-10-02 - UK six briefs corrected from the UK lead's report
 
 - **The UK lead's report, after Manchester's build on page 156:**

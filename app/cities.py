@@ -5,14 +5,14 @@ Adding a city means adding its entry here (plus its page under app/pages/).
 `page` is relative to the entry script (app/Overview.py), which is what
 st.page_link and st.switch_page expect.
 
-PAGE NUMBERING: cities are numbered 1..N in the order they were IMPLEMENTED,
-and the three information pages sit at 200, 201 and 202 (90-92 until
-2026-09-29) so they never compete for a city's slot and always sort last in
-the sidebar. The next free city slot is one past the highest `*_Heatmap.py`,
-which `scripts/scaffold_city.py`'s `next_page_number()` returns on its own
-(it refuses a number that reaches the info pages). Nothing needs
-reserving by hand, but never renumber a city page without updating its `page`
-value here: these two are the only link between them.
+PAGE NUMBERING: cities are numbered in the order they were IMPLEMENTED, in
+blocks where batches were built in parallel. The three information pages carry
+no number (owner, 2026-10-02; 90-92, then 200-202, before), so they never
+compete for a city's slot and always sort after the cities in the sidebar.
+`scripts/scaffold_city.py` takes one past the highest page, or `--page-number`
+from the block `docs/session_roles.md` reserves for a parallel session. Never
+renumber a city page without updating its `page` value here: these two are
+the only link between them.
 
 `lat`/`lon` place the city's marker on the macro map; they only need to be a
 sensible center of its mapped area, not the exact center of the city's own map.
@@ -74,7 +74,7 @@ variable). Re-check all three widths after changing any of them, or after
 adding a city whose name is long.
 
 `rail_extra`, `record_kind` and `categories` are the city's row in the summary
-table on the "Why the maps differ" page (pages/202_Why_the_Maps_Differ.py): what
+table on the "Why the maps differ" page (pages/Why_the_Maps_Differ.py): what
 is drawn beyond the metro, what kind of record the businesses come from, and
 whether all three categories are there. Each must be one of the values
 scripts/check_inconsistency_list.py lists, and is read from the city's rows in
