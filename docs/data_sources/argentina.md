@@ -8,7 +8,7 @@ build brief is in the project's repository (`docs/build_briefs/buenos-aires.md`)
 Argentina was screened as Tier 4 in the project's country shortlist
 (`docs/global_country_shortlist.md`).<!-- /internal -->
 
-**Country profile (add-country, one source, one city).** Argentina has no
+**Country profile (<!-- internal -->add-country, <!-- /internal -->one source, one city).** Argentina has no
 national premises register in use here; Buenos Aires is built on the city's own
 open-data portal, BA Data (`data.buenosaires.gob.ar`, CKAN). Its API refuses
 non-browser clients with a 245-byte "Request Rejected" page; the files it links
@@ -26,7 +26,7 @@ comes from the CDN. License: BA Data's datasets declare **CC BY 2.5 AR**.
 
 | City | Agency / system | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
-| Buenos Aires | **Subte: Estaciones** (Subterráneos de Buenos Aires, SBASE) — the Subte's station points (90, one per line served) and track (98 segments) | `https://cdn.buenosaires.gob.ar/datosabiertos/datasets/sbase/subte-estaciones/estaciones_de_subte.geojson` (17,133 bytes, sha256 `e392abf0d923e5ea7cebc1c463f9b7471f062ad22527fb628fe0f480d2f32cc3`) and `https://cdn.buenosaires.gob.ar/datosabiertos/datasets/sbase/subte-estaciones/red_subte.geojson` (40,850 bytes, sha256 `aef377072b153f7e1093c146b1fa70cf07ae66866f1589bee2180d3041b407ad`), both last modified 2026-09-01; dataset page `https://data.buenosaires.gob.ar/dataset/subte-estaciones` | 2026-09-28 | **Positions and track** (owner's download OK 2026-09-28). Agency layers rank ahead of OSM (`osm-rail`); the city's Subte GTFS ships without a `routes.txt`. Gate 3 exact on six lines: A 18, B 17, C 9, D 16, E 18, H 12. Every segment lies within 30 m of OSM's route; Línea E's are drawn twice and dissolved. License **CC BY 2.5 AR** — notice **60** |
+| Buenos Aires | **Subte: Estaciones** (Subterráneos de Buenos Aires, SBASE) — the Subte's station points (90, one per line served) and track (98 segments) | `https://cdn.buenosaires.gob.ar/datosabiertos/datasets/sbase/subte-estaciones/estaciones_de_subte.geojson` (17,133 bytes, sha256 `e392abf0d923e5ea7cebc1c463f9b7471f062ad22527fb628fe0f480d2f32cc3`) and `https://cdn.buenosaires.gob.ar/datosabiertos/datasets/sbase/subte-estaciones/red_subte.geojson` (40,850 bytes, sha256 `aef377072b153f7e1093c146b1fa70cf07ae66866f1589bee2180d3041b407ad`), both last modified 2026-09-01; dataset page `https://data.buenosaires.gob.ar/dataset/subte-estaciones` | 2026-09-28 | **Positions and track** (owner's download OK 2026-09-28). Agency layers rank ahead of OSM<!-- internal --> (`osm-rail`)<!-- /internal -->; the city's Subte GTFS ships without a `routes.txt`. Gate 3 exact on six lines: A 18, B 17, C 9, D 16, E 18, H 12. Every segment lies within 30 m of OSM's route; Línea E's are drawn twice and dissolved. License **CC BY 2.5 AR** — notice **60** |
 | Buenos Aires | **OpenStreetMap route relations** for the Subte (`network=Subte de Buenos Aires`, 12 `route=subway` relations) and the Premetro (4 `route=tram`, ref P) | The Overpass mirrors in `pipeline/osm.py`: the relations with geometry, and their stop nodes (211 elements) | 2026-09-28 | **The cross-check and the station names.** OSM's per-line counts equal SBASE's; each SBASE point takes the name of the nearest OSM stop on its line (all 90 within 150 m, median 24 m), because SBASE drops accents and carries one out-of-date name. The Premetro is measured, not drawn (owner). OSM, **ODbL 1.0** — notice 1 |
 
 ## Boundary layers

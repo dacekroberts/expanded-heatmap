@@ -15,12 +15,12 @@ that record.<!-- /internal -->
 ### Dublin — endpoints and findings, verified 2026-09-22
 
 Recorded before the build, while the endpoints were being verified; Dublin
-has since been built (the tables below). The full evidence and its six checks,
-all passing, are in Dublin's build brief (`docs/build_briefs/dublin.md`).
+has since been built (the tables below).<!-- internal --> The full evidence and its six checks,
+all passing, are in Dublin's build brief (`docs/build_briefs/dublin.md`).<!-- /internal -->
 
-**The first Irish city, and Ireland yields only this one**, so the national
+**The first Irish city, and Ireland yields only this one**<!-- internal -->, so the national
 questions are answered inside the city brief rather than in a separate country
-profile.
+profile<!-- /internal -->.
 
 **Businesses** — Tailte Éireann, the Irish rateable valuation register, through
 a keyless JSON API:
@@ -67,8 +67,8 @@ and it is structural rather than measured.
 **Classification is `Uses` (963 distinct values), not `Category` (13).**
 `Category` cannot separate this project's three buckets: 1,483 of 2,335
 food-service rows and 677 of 744 personal-service rows both sit inside
-`RETAIL (SHOPS)`. See the brief for the catch-all measurement, which inverts
-Barcelona's rule.
+`RETAIL (SHOPS)`.<!-- internal --> See the brief for the catch-all measurement, which inverts
+Barcelona's rule.<!-- /internal -->
 
 > **TAILTE WITHHOLDS FLOOR-LEVEL DETAIL FOR NAMED PROPERTY TYPES, AND IT DOES
 > NOT AFFECT THIS BUILD — MEASURED.** `tailte.ie/home/api/` warns of missing
@@ -98,8 +98,8 @@ provenance check and for copying:
 
 > **USE THE FEATURESERVER, NOT THE HUB DOWNLOAD.** `data.gov.ie`'s resource
 > list points at `data-osi.opendata.arcgis.com/api/download/v1/items/...`,
-> which is the **async job endpoint that answers HTTP 202** — the Surrey trap
-> in `add-country`. The FeatureServer above is synchronous and takes a
+> which is the **async job endpoint that answers HTTP 202**<!-- internal --> — the Surrey trap
+> in `add-country`<!-- /internal -->. The FeatureServer above is synchronous and takes a
 > where-clause.
 
 > **THE LAYER IS MULTIPART.** Fingal returns **46** polygons and Dún
@@ -108,8 +108,8 @@ provenance check and for copying:
 > station gets tested against Lambay Island.
 
 **Rail** — the **National Transport Authority's national GTFS**, not
-OpenStreetMap. ⚠️ **This corrects what this section said when Dublin's brief
-was written.**
+OpenStreetMap.<!-- internal --> ⚠️ **This corrects what this section said when Dublin's brief
+was written.**<!-- /internal -->
 
 `https://www.transportforireland.ie/transitData/Data/GTFS_All.zip`
 
@@ -121,10 +121,10 @@ re-uploaded archive. Three routes are drawn: `10000 GREEN g a` (Luas Green,
 `2`). Commuter and InterCity are other `route_id`s under the same
 `route_type 2` and are excluded.
 
-> **THE BRIEF ASSERTED "OPENSTREETMAP, NOT A FEED" WITHOUT CHECKING FOR ONE,
+> <!-- internal -->**THE BRIEF ASSERTED "OPENSTREETMAP, NOT A FEED" WITHOUT CHECKING FOR ONE,
 > AND THAT WAS MADRID'S FAILURE REPEATED.** The `osm-rail` order is agency GIS
 > layers → agency GTFS → OSM **on a recorded ground**; neither of the first two
-> had been run. Both pass. The NTA also publishes a **Feature Service already
+> had been run. Both pass. <!-- /internal -->The NTA also publishes a **Feature Service already
 > in EPSG:2157** — 14,079 stops, 6,507 route polylines, at
 > `services-eu1.arcgis.com/p0UmGrpumWZYhF0p/` — whose `GTFS - Stops` layer even
 > carries `local_authority` pre-populated in the boundary layer's spelling.
@@ -152,8 +152,8 @@ stations is why a second opinion is kept.
 
 > **OSM TAGS ALL FOUR DART RELATIONS `network=Commuter`** — the same value the
 > Northern, Western and South Western services carry. A `network` filter drops
-> Dublin's principal line, which a run proved before the source changed. The
-> `osm-rail` rule that a `network` tag is a label and not evidence, measured.
+> Dublin's principal line, which a run proved before the source changed.<!-- internal --> The
+> `osm-rail` rule that a `network` tag is a label and not evidence, measured.<!-- /internal -->
 
 > **`overpass.osm.ch` RETURNED AN EMPTY 200 FOR THIS QUERY ON 2026-09-22.**
 > `pipeline/osm.py` rejects that; a hand-rolled fetch does not, and the first
@@ -165,7 +165,7 @@ stations is why a second opinion is kept.
 
 | City | System / operator | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
-| Dublin | **National Transport Authority national GTFS** — 3 drawn routes: `10000 GREEN g a` (Luas Green, `route_type 0`), `10000 RED g a` (Luas Red, `0`) and `BRAY-HOWTH-I` (DART, `2`) | `https://www.transportforireland.ie/transitData/Data/GTFS_All.zip` | 2026-09-22 | **The brief said "OpenStreetMap, not a feed" and was WRONG — corrected during the build** (Madrid's failure in its general form). Why the feed is trusted, its size and trim, its empty `route_color` and the OSM cross-check are in "Dublin — endpoints and findings" above; OSM tags all four DART relations `network=Commuter`, so the whitelist is on `ref`. ODbL 1.0 for the cross-check — notice **1** |
+| Dublin | **National Transport Authority national GTFS** — 3 drawn routes: `10000 GREEN g a` (Luas Green, `route_type 0`), `10000 RED g a` (Luas Red, `0`) and `BRAY-HOWTH-I` (DART, `2`) | `https://www.transportforireland.ie/transitData/Data/GTFS_All.zip` | 2026-09-22 | <!-- internal -->**The brief said "OpenStreetMap, not a feed" and was WRONG — corrected during the build** (Madrid's failure in its general form). <!-- /internal -->Why the feed is trusted, its size and trim, its empty `route_color` and the OSM cross-check are in "Dublin — endpoints and findings" above; OSM tags all four DART relations `network=Commuter`, so the whitelist is on `ref`. ODbL 1.0 for the cross-check — notice **1** |
 
 ## Boundary layers
 

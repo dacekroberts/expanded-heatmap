@@ -6,7 +6,7 @@ notices this project must display, the removal-request commitment and the
 deploy gate apply to every country and are kept in that record. Zurich's
 build brief is in the project's repository (`docs/build_briefs/zurich.md`).<!-- /internal -->
 
-## The country, in brief (`add-country`, 2026-09-30)
+## The country, in brief<!-- internal --> (`add-country`, 2026-09-30)<!-- /internal -->
 
 Switzerland's first city is Zurich, so these are the national facts one build
 established, each with what it rests on. They are not a screen of other Swiss
@@ -14,13 +14,13 @@ cities: none has been probed.
 
 | Question | Answer for Switzerland | Evidence |
 |---|---|---|
-| Where commerce is recorded | **Municipally, by trade.** The Stadt Zürich publishes its own register of the food-and-drink and alcohol-retail premises it licenses (Stadtpolizei, Fachgruppe Bewilligung Gastro). No general-retail or personal-services register was found for the city, and the national business statistics (STATENT) are aggregate | the register, read 2026-09-30; the Zurich catalog sweep in the project's master-list evidence (`docs/city_master_list_evidence.md`; control `zzqqxxnonsense` -> 0, 2026-09-23) |
-| Portal | **CKAN** at `data.stadt-zuerich.ch`. 🚨 **Its geodata download URLs return an Angular page, not data**: use the city's **WFS** (`ogd.stadt-zuerich.ch/wfs/geoportal/<Dataset>`), which serves GeoJSON with no key | the brief; re-checked 2026-09-30 |
+| Where commerce is recorded | **Municipally, by trade.** The Stadt Zürich publishes its own register of the food-and-drink and alcohol-retail premises it licenses (Stadtpolizei, Fachgruppe Bewilligung Gastro). No general-retail or personal-services register was found for the city, and the national business statistics (STATENT) are aggregate | the register, read 2026-09-30; the Zurich catalog sweep<!-- internal --> in the project's master-list evidence<!-- /internal --> (<!-- internal -->`docs/city_master_list_evidence.md`; <!-- /internal -->control `zzqqxxnonsense` -> 0, 2026-09-23) |
+| Portal | **CKAN** at `data.stadt-zuerich.ch`. 🚨 **Its geodata download URLs return an Angular page, not data**: use the city's **WFS** (`ogd.stadt-zuerich.ch/wfs/geoportal/<Dataset>`), which serves GeoJSON with no key | <!-- internal -->the brief; <!-- /internal -->re-checked 2026-09-30 |
 | License | **CC0** on the Stadt's open data, "with few exceptions"; the city recommends "Quelle: Stadt Zürich" but does not require it | the dataset's CKAN record and the city's legal notice (below) |
 | Personal information | **The register publishes the premises' trade name, never a holder column** (19 columns, none a person). Some trade names are a person's own name, so the project's name rule applies (Kansas City's and New Orleans's). The Swiss data-protection act itself was not read: the publisher's choice of columns did the first part of the work | the register's columns, 2026-09-30 |
 | Home signal | **None in the register.** No home-based flag; the name rule is the only guard | the register's columns |
 | Geocoder | **Not needed for Zurich**: every row carries its own LV95 point | 3,487 of 3,487 rows, 2026-09-30 |
-| Coordinates | **CH1903+ / LV95, EPSG:2056, in meters** - the national grid, used as the build's projected CRS instead of a UTM zone (the tram-city skill). The WFS's GeoJSON also carries WGS84 points; the two agree to 0.07 m at most | step 2's control, 2026-09-30 |
+| Coordinates | **CH1903+ / LV95, EPSG:2056, in meters** - the national grid, used as the build's projected CRS instead of a UTM zone<!-- internal --> (the tram-city skill)<!-- /internal -->. The WFS's GeoJSON also carries WGS84 points; the two agree to 0.07 m at most | step 2's control, 2026-09-30 |
 | Classification | The register's own `betriebsart`, **single-valued**, 14 values (the publisher's documentation lists 11; three more appear in the data) | `pipeline/taxonomies/zurich_gastwirtschaft.py` |
 | Encoding | UTF-8 GeoJSON; German names with umlauts read cleanly | the fetch |
 | Rail | **Trams, from OpenStreetMap.** Zurich has no metro; VBZ's tram relations all carry a `colour`, and the Swiss national GTFS (`gtfs:feed` CH-Alle on the relations) was not needed and was not fetched or read | step 1, 2026-09-30 |

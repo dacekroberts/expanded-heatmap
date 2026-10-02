@@ -142,10 +142,10 @@ licences**, which is Spain's country-level pattern.
 > rejected CRTM's own Metro GTFS — which downloads cleanly — precisely BECAUSE
 > CRTM stopped refreshing it in May 2025, and took the maintained feature
 > layers instead. The notice states CRTM's own last-update date (5 June 2026)
-> and that the map shows the network as recorded then. And
+> and that the map shows the network as recorded then.<!-- internal --> And
 > `scripts/brief_check.py`'s `arcgis_layer` check carries `max_age_days` on
 > both layers, so this is a commitment a check FAILS on rather than one a
-> comment promises.
+> comment promises.<!-- /internal -->
 >
 > This is a reasoned position on a clause that is clear once read in context,
 > not a generous reading of an ambiguous one. The full text is stored at
@@ -170,10 +170,10 @@ and only those inside the city).
 
 | City | System / operator | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
-| Madrid | **CRTM Metro — ArcGIS feature services, NOT a GTFS feed** (Consorcio Regional de Transportes de Madrid) | `https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer` — layer **0 `M4_Estaciones`** (293 station-per-line points) and layer **4 `M4_Tramos`** (560 polylines) | 2026-09-22 | **The first rail in this project from an operator's feature services rather than a feed, and the reason is a LICENCE condition rather than a preference.** CRTM publishes the same network twice: a Metro GTFS it stopped refreshing on **2025-05-30**, and these services it still edits (**2026-06-05**). Its licence obliges a reuser to keep displayed information *"siempre actualizada"*, which a feed abandoned sixteen months ago cannot satisfy — so the feed is rejected although it downloads cleanly. `scripts/brief_check.py` watches these layers' `editingInfo.lastEditDate` with its `arcgis_layer` check kind, because the pre-existing tripwire watched the FEED and would have kept passing while the decision it guarded went stale. Both layers are natively **EPSG:25830**, the same CRS as the premises register, so the build never reprojects for geometry |
+| Madrid | **CRTM Metro — ArcGIS feature services, NOT a GTFS feed** (Consorcio Regional de Transportes de Madrid) | `https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer` — layer **0 `M4_Estaciones`** (293 station-per-line points) and layer **4 `M4_Tramos`** (560 polylines) | 2026-09-22 | **The first rail in this project from an operator's feature services rather than a feed, and the reason is a LICENCE condition rather than a preference.** CRTM publishes the same network twice: a Metro GTFS it stopped refreshing on **2025-05-30**, and these services it still edits (**2026-06-05**). Its licence obliges a reuser to keep displayed information *"siempre actualizada"*, which a feed abandoned sixteen months ago cannot satisfy — so the feed is rejected although it downloads cleanly.<!-- internal --> `scripts/brief_check.py` watches these layers' `editingInfo.lastEditDate` with its `arcgis_layer` check kind, because the pre-existing tripwire watched the FEED and would have kept passing while the decision it guarded went stale.<!-- /internal --> Both layers are natively **EPSG:25830**, the same CRS as the premises register, so the build never reprojects for geometry |
 | Madrid | **CRTM Metro Ligero — ArcGIS feature services** (added 2026-09-27, the tram rescope) | `https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M10_Red/FeatureServer` — layer **0 `M10_Estaciones`** (57 station-per-line points) and layer **4 `M10_Tramos`** (100 polylines) | 2026-09-27 | **The Metro layers' sibling, under the same terms**: the ArcGIS item "Datos Abiertos: Elementos de la Red de Metro Ligero" declares the same `http://www.crtm.es/licencia-de-uso` and "© CRTM" as `M4_Red`, and was last edited the same day (**2026-06-05**), so the existing CRTM notice and its stated date cover it unchanged. Same schema, EPSG:25830. **Only ML1 is read** (owner, 2026-09-27): ML2 and ML3 are stubs inside Madrid and ML4 is Parla's tram. Parla's stations carry `LINEAS` "4" while its tramos are "4-1"/"4-2". ML1's colour is not in these layers: it is read from the sibling `M10_Lineas` service's renderer (rgb 39, 84, 211) |
 | Palma | Metro de Palma **M1** (SFM) - **OpenStreetMap** | Overpass, `route=light_rail` relations 1664324 and 7781525; gate 3 against TIB's stop list (`https://www.tib.org/en/linies-i-horaris/metro/-/linia/M1`, rendered by script, read in a browser) | 2026-09-30 | 10 stations, all in Palma, 648 m median, standard rings. **M2 (relations 4635401, 7781524) is not drawn**: TIB, the Consorci de Transports de Mallorca's timetable site, lists one metro line; the Marratxí corridor is SFM's trains T1-T3 (suburban rail). M1's timetable (every 20 min in term, 30-40 in holidays, no Sunday service) is disclosed, not disqualifying: purpose-built track (the owner's light-rail test, Buffalo's call). ODbL 1.0 - notice **1** and the rail-geometry notice |
-| Barcelona | **OpenStreetMap** — 14 metro refs (L1–L12, with L9 and L10 each split into two disconnected segments) plus the **Montjuic (TMB)** and **Vallvidrera (FGC)** funiculars: 16 drawn lines across **two operators** | The three Overpass mirrors in `pipeline/osm.py`, bbox `41.30,2.03,41.50,2.30` | 2026-09-22 | **Why not the agency feed:** TMB's GTFS is registration-gated (`api.tmb.cat` returns **401** unauthenticated, watched by `brief_check.py`), and the agency route would need **four feeds** — TMB, FGC, TRAM and TRAM Besos — with four licences and four cadences. OSM returns the network in one query with **every line carrying its own name and colour**, so no palette is invented. **Scope is the operators' own `network` tag**: the 14 metro refs and both funiculars are tagged `Metro de Barcelona` or `Metro del Valles`; **FT (Tibidabo)** carries no network tag and is run by the municipal parks company, and trams T1–T6 are `Trambaix`/`Trambesos` — both excluded. ⚠️ **The mirrors disagree about this bbox** (tram/funicular counts, and `L10N` vs `L10 Nord`), so the fetch is cached and the build normalises refs. ODbL 1.0 — notice **1** and the rail-geometry notice |
+| Barcelona | **OpenStreetMap** — 14 metro refs (L1–L12, with L9 and L10 each split into two disconnected segments) plus the **Montjuic (TMB)** and **Vallvidrera (FGC)** funiculars: 16 drawn lines across **two operators** | The three Overpass mirrors in `pipeline/osm.py`, bbox `41.30,2.03,41.50,2.30` | 2026-09-22 | **Why not the agency feed:** TMB's GTFS is registration-gated (`api.tmb.cat` returns **401** unauthenticated<!-- internal -->, watched by `brief_check.py`<!-- /internal -->), and the agency route would need **four feeds** — TMB, FGC, TRAM and TRAM Besos — with four licences and four cadences. OSM returns the network in one query with **every line carrying its own name and colour**, so no palette is invented. **Scope is the operators' own `network` tag**: the 14 metro refs and both funiculars are tagged `Metro de Barcelona` or `Metro del Valles`; **FT (Tibidabo)** carries no network tag and is run by the municipal parks company, and trams T1–T6 are `Trambaix`/`Trambesos` — both excluded. ⚠️ **The mirrors disagree about this bbox** (tram/funicular counts, and `L10N` vs `L10 Nord`), so the fetch is cached and the build normalises refs. ODbL 1.0 — notice **1** and the rail-geometry notice |
 
 ## Boundary layers
 
@@ -257,8 +257,8 @@ data rather than merely crediting the source. **Obligation 6 is the first time
 a licence has contractually forbidden what this project's privacy invariant
 already forbids voluntarily**, and it bears directly on the `rotulo` field:
 combining a trade name with a precise address is exactly the operation the
-clause is about, so the existing `check_personal_exposure.py` gate is a licence
-obligation here, not only a house rule.
+clause is about<!-- internal -->, so the existing `check_personal_exposure.py` gate is a licence
+obligation here, not only a house rule<!-- /internal -->.
 
 Also recorded: the disclaimer is ordinary (no warranty, no guarantee of
 continuity, reuser bears the risk), and reusers are placed under the sanctions
@@ -301,8 +301,8 @@ ODbL-style share-alike is a live question elsewhere in this project (CDMX).
 > **actualizada**"*
 
 **Displaying an expired feed is in direct tension with this.** `mdb-794`'s
-calendar ended 2026-05-27. The build brief had listed "use the expired feed
-anyway, since station positions do not expire" as a defensible third option.
+calendar ended 2026-05-27. "Use the expired feed anyway, since station
+positions do not expire" had been listed as a defensible third option.
 **It is no longer defensible on these terms** — not because station geometry
 goes stale, but because the licence obliges the reuser to keep what is shown
 up to date, and this project cannot honour that with a feed CRTM has stopped

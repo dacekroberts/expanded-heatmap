@@ -118,7 +118,7 @@ Rio's mapped rows and **1.1%** of São Paulo's; the structural rule reaches
 and like Milan, where ~82% of pins carry no trade name, fewer published names
 is a privacy asset rather than a loss.
 
-#### Brazil's rail sources, read 2026-09-23 by the `licence-read` agent
+#### Brazil's rail sources<!-- internal -->, read 2026-09-23 by the `licence-read` agent<!-- /internal -->
 
 | Source | Verdict | What it requires |
 |---|---|---|

@@ -122,8 +122,8 @@ the project, and counted in the table on this page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam and Riga, Rome's tram 8, and Hong Kong's Light Rail. The reasoning is in
-  `docs/sub_transit_line_filters.md`.
+  Rotterdam and Riga, Rome's tram 8, and Hong Kong's Light Rail.<!-- internal --> The reasoning is in
+  `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
   it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
   minutes on its city tramway but every 30 minutes on the two converted railway
@@ -2373,7 +2373,7 @@ from its address.
 **Counted once** - 2 second licenses held under the same shop sign at the same address.
 
 **Named** - each dot carries the shop sign on its license; the registers hold no licensee's name.
-308 licenses carry FEHD's "no record" placeholder and show "No shop sign on the licence".
+308 licenses carry FEHD's "no record" placeholder and show "No shop sign on the license".
 
 **Stations.** MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung Chung, Tuen Ma
 and East Rail lines and the Light Rail are drawn. Not drawn: the Airport Express (Airport and
