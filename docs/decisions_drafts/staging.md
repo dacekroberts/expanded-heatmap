@@ -4,6 +4,35 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - Fukui takes the CC BY-SA 4.0 offer (owner); Tempe's licence list has no address
+
+- **Fukui (owner: "use the SA 4.0").** The current lists are used: food,
+  2026-08, with closures; and 理容/美容/クリーニング. The site default is
+  CC BY-SA.
+- **What the Fukui build owes:**
+  - **The share-alike offer itself:** a line in `LICENSE` and in the
+    data-sources entry, offering `outputs/fukui/` (the map and any derived
+    Fukui data) under CC BY-SA 4.0. It is the project's first share-alike
+    licence on its own output.
+  - **The credit:** 福井市, the list titles and page URLs, CC BY-SA (with no
+    version claimed for the city's licence), and a statement that the data
+    was processed.
+  - **What never appears:** no endorsement, no claim of accuracy on the
+    city's authority.
+  - **The site policy's open-ended prohibited acts (§4) are accepted
+    knowingly**, Taoyuan's pattern.
+  - **Privacy:** `check_personal_exposure.py` covers the policy's privacy
+    clause (6).
+- **Tempe's General Business License List was read.**
+  - The owner fetched it in their browser (`tempe.pdf`, at the main
+    checkout's root). Staging copied it to its scratchpad.
+  - It is a 33-page PDF, as of 2026-09-03, with four columns: licence
+    number, business name, business activity and website. **There is no
+    address**, so nothing can be placed (Denver's original failure).
+  - The City's ArcGIS app covers short-term rentals and tobacco only.
+  - **Staging recommends the discards on a measured negative**, the owner
+    to confirm. The row stays in Band D until then.
+
 ### 2026-10-01 - Seattle regional: the Liquor Board's off-premise licences become a partial retail layer (owner)
 
 - **The owner said "yes"** to staging's recommendation.
