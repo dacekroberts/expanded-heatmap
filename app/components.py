@@ -1924,11 +1924,18 @@ def render_city_title(name):
     the empty space above it on city pages only, so more of the map shows on
     the first screen of a phone: the top padding (6rem by default), and the
     16 px gap each invisible element above the title (the style blocks, the
-    hidden city links) adds, 64 px measured at 375 px."""
+    hidden city links) adds, 64 px measured at 375 px.
+
+    The map is centered under the title (owner, 2026-10-02). Its embed is
+    1000 px wide, so this moves it only where the column is wider (1230 px at
+    a 1400 px window); at 1000 px and below it already fills the column and
+    auto margins resolve to 0."""
     st.markdown("<style>[data-testid='stMainBlockContainer'] "
                 "{ padding-top: 3.5rem !important; }"
                 "[data-testid='stElementContainer']:has(style),"
-                "div:has(> .st-key-map-only-nav) { display: none; }</style>",
+                "div:has(> .st-key-map-only-nav) { display: none; }"
+                "[data-testid='stElementContainer']:has(> iframe[data-testid='stIFrame']) "
+                "{ margin-left: auto; margin-right: auto; }</style>",
                 unsafe_allow_html=True)
     with st.container(key="city-title"):
         st.title(name, anchor=False, text_alignment="center")
