@@ -4,6 +4,34 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - The UK six's prose hold lifted: page text to the new format (owner, via Cleanup)
+
+- **The owner asked staging to message Cleanup about the new prose
+  guidelines.** Cleanup confirmed that nothing pending keeps the hold. The
+  builds stay held until the owner releases them.
+- **The kit's prose hold is replaced** by a "Page text" section
+  (`docs/handoff_uk_six_2026-10-01.md`). Each of the six briefs' banners and
+  final bullets is replaced the same way. The pointers:
+  - `docs/city_page_format.md`;
+  - `add-city` step 8, then `scaffold-city`, `publish-city` (step 5a),
+    `premises-taxonomy` step 8 and `read-licence` step 9;
+  - `scaffold_city.py`'s template, which is the new format and is run for
+    real.
+- **Cleanup's corrections to the old hold:**
+  - London's, Glasgow's and Newcastle's converted bullets are now the
+    approved FSA and FHIS wording.
+  - A city-specific sentence is a proposal, and does not stop the build.
+  - The template pre-permission applies again.
+  - What Is Excluded has a section per city, with its stations "listed on
+    <City>'s page".
+  - The OGL title, the FSA's and FHIS's business-type names and line and
+    station names stay as published.
+- **The Japan batch's minor-tier bullet stays where it is** (Cleanup, after
+  its rework).
+- **For the record (Cleanup):** city pages' maps are now centered on wide
+  screens (`components.py`, 33f2a379, owner; rebooted and checked live).
+  The builds have nothing to do; `render_city_title` applies it.
+
 ### 2026-10-02 - Takaoka's licence is CC BY 4.0, but its food list can no longer be reached; to Band R (owner)
 
 - **The owner asked for a faster re-check by new methods** after the agent

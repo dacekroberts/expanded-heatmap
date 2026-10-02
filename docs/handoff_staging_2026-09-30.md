@@ -83,8 +83,8 @@ carried over as they stand.
      Sheffield (without the Tram-Train), Nottingham (Regional) and Blackpool
      (Regional).
    - **Briefs:** in `docs/build_briefs/`. The kit is
-     `docs/handoff_uk_six_2026-10-01.md`, with its **prose hold**: no page
-     text until the owner's prose rework lands.
+     `docs/handoff_uk_six_2026-10-01.md`, with the prose hold **lifted 2026-10-02** (Cleanup confirmed; page text
+     to `docs/city_page_format.md`).
    - **All six briefs pass every claim** (the last RETRY, Edinburgh's,
      re-run 2026-10-02).
    - **Settled with the owner:** NaPTAN for gate 3 in all six; Dudley joins
