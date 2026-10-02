@@ -106,6 +106,14 @@ city. The URLs do not change, since Streamlit drops the number from the
 path. `next_page_number()` now refuses a city number that reaches the first
 info page, so the collision above cannot recur silently.
 
+**Unnumbered since 2026-10-02 (owner):** `About_the_Data.py`,
+`What_Is_Excluded.py`, `Why_the_Maps_Differ.py`. Streamlit sorts unnumbered
+pages after every numbered one, so this threshold is gone: no count of cities
+reaches them, and the refusal above was removed with it. What remains is two
+parallel sessions taking the same next number, which
+`scaffold_city.py --page-number` and the blocks in `docs/session_roles.md`
+handle.
+
 The lesson worth keeping: **"verified not a problem" was true of the question
 asked and hid a real defect one layer down.** The sort was fine; the slot was
 not.

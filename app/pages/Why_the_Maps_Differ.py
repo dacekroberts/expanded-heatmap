@@ -1,7 +1,7 @@
 """Why the maps differ - the reader's version of docs/map_inconsistencies.md.
 
-The third information page, beside 200_About_the_Data.py (where the data comes
-from) and 201_What_Is_Excluded.py (what is left out). This one answers the
+The third information page, beside About_the_Data.py (where the data comes
+from) and What_Is_Excluded.py (what is left out). This one answers the
 question a reader asks when comparing two cities: why does this map look
 different from that one? The owner's shape (DECISIONS, 2026-09-28): its own
 page, linked from every page's footer; eleven short themes written for a

@@ -175,7 +175,10 @@ two slices):
 
 - **Page numbers are pre-assigned to avoid a collision:** UK six **156–161**,
   Japan batch **162–173**, in table order (Matsuyama 162 … Kōchi 173).
-  Recorded in `docs/session_roles.md`.
+  Recorded in `docs/session_roles.md`. **Pass it to the scaffold:**
+  `scaffold_city.py ... --page-number 162` (and so on). Without it the script
+  takes one past the highest page on this branch, which is 156, the UK six's
+  first.
 - **Notice numbers:** claim them in `docs/session_roles.md` before writing
   one, and re-read the table first. The UK session claims there too.
 - **`app/cities.py`'s `REGION_ORDER`:**

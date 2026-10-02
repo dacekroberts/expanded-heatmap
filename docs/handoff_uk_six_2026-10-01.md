@@ -133,7 +133,10 @@ keeps the hold. A build writes its page text to these:
    - `publish-city`, whose gate step 5a checks the page against the format;
    - `premises-taxonomy` step 8, for labels;
    - `read-licence` step 9, for rows and notices.
-3. **`scripts/scaffold_city.py`'s page template is the new format.** Run it
+3. **Scaffold with the reserved page number**, `--page-number 156` to `161`
+   in build order (`docs/session_roles.md`): it is what keeps the Japan
+   batch's 162-173 from colliding with these.
+4. **`scripts/scaffold_city.py`'s page template is the new format.** Run it
    for real, not as a dry run.
 
 **Rules for this round (Cleanup, 2026-10-02):**

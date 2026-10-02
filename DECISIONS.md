@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**342 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -28,6 +28,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The city-building skills rewritten to the new page format; one French name restored (owner)](#2026-10-02---the-city-building-skills-rewritten-to-the-new-page-format-one-french-name-restored-owner)
 - [The skills rework's five follow-ups: stations "listed on the city's page", a person-license rule, a marker check (owner)](#2026-10-02---the-skills-reworks-five-follow-ups-stations-listed-on-the-citys-page-a-person-license-rule-a-marker-check-owner)
 - [The map centered on city pages, and a check that every city page keeps the format (owner)](#2026-10-02---the-map-centered-on-city-pages-and-a-check-that-every-city-page-keeps-the-format-owner)
+- [The info pages lose their numbers; a session scaffolds into its reserved page block (owner)](#2026-10-02---the-info-pages-lose-their-numbers-a-session-scaffolds-into-its-reserved-page-block-owner)
 
 **2026-10-01**
 
@@ -14127,3 +14128,37 @@ Recorded by the cleanup session from the Main Building Session's findings of
     - the scaffold writes no `data_age`, so a new page raises `KeyError`
       until it is filled;
     - `france_page.py` always writes the half-size ring bullet.
+
+### 2026-10-02 - The info pages lose their numbers; a session scaffolds into its reserved page block (owner)
+
+- **The three info pages carry no number** (owner: "page numbers for the
+  pages we have had to keep moving"). They are now `About_the_Data.py`,
+  `What_Is_Excluded.py` and `Why_the_Maps_Differ.py`.
+  - They were 90-92 until 2026-09-29, then 200-202, and the city pages would
+    have reached 200 again at about 75 more cities.
+  - Streamlit takes a page's address from its file name without the number,
+    so `/About_the_Data` and the `?country=` links are unchanged. It sorts
+    unnumbered pages after every numbered one, where the info pages already
+    were.
+  - Checked locally: the three pages and a city page render at the same
+    addresses; `?country=Spain` opens Spain; Edmonton's links carry
+    `?country=Canada`.
+  - Current references were updated:
+    - `components.py`'s three page constants;
+    - docstrings in `cities.py` and `station_scope.py`;
+    - four checks' messages;
+    - `add-city`;
+    - `rendered_surfaces.py`, whose sort assumed a number. Unnumbered pages
+      now sort last, as Streamlit does.
+
+    Dated logs and handoffs keep the old names.
+- **`scaffold_city.py --page-number N`.** Two sessions building at once each
+  took one past the highest page on their own branch, so both took the same
+  number; that collision is behind the France renumbering of 2026-09-30.
+  - Staging had already reserved blocks (UK six 156-161, Japan 162-173,
+    `docs/session_roles.md`), but the scaffold had no way to use them.
+  - It now takes the reserved number and refuses one already taken. Without
+    the flag it behaves as before.
+  - The obsolete guard against reaching the info pages is gone.
+  - `session_roles.md`, both batch kits and `scaffold-city` say to pass the
+    flag. The UK and Japan build sessions were told directly.
