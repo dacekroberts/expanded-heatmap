@@ -3542,7 +3542,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Seoul Capital Area")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "United Kingdom", "Seoul Capital Area")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
