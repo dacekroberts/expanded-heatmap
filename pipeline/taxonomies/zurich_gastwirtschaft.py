@@ -54,7 +54,7 @@ TYPES = {
     # --- Retail: shops licensed to sell alcohol (1,028) ------------------------
     "Kleinverkaufsstelle": (R, "Shop licensed to sell alcohol"),                # 954
     "Kiosk": (R, "Kiosk"),                                                      # 53
-    "Tankstelle": (R, "Petrol station shop"),                                   # 21
+    "Tankstelle": (R, "Gas station shop"),                                   # 21
     # --- Out (124) --------------------------------------------------------------
     "Ausgabestelle": (OUT, "food stand, caterer or food truck"),                # 56
     "Kantine / Mensa": (OUT, "canteen"),                                        # 31

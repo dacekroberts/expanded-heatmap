@@ -37,12 +37,12 @@
  "boston": {
   "in_ring": 2410,
   "all": 3164,
-  "map_blob": "9c0977b3245b5771dcd3a60a2daa718be05f56ac"
+  "map_blob": "64b7e2cbbdee1ab4fc977c343466bbb10f681fe5"
  },
  "washington_dc": {
   "in_ring": 3849,
   "all": 5207,
-  "map_blob": "89a1984232a293fde94ee2fa0e7fa0e84c69e575"
+  "map_blob": "80012248af38e745639b1984edda9c4ed0ca5a6c"
  },
  "vancouver": {
   "in_ring": 4618,
@@ -57,17 +57,17 @@
  "calgary": {
   "in_ring": 6156,
   "all": 15072,
-  "map_blob": "79a9f6a976f568d6070eae1b9c0659b71d8d8e25"
+  "map_blob": "d510775617fb3671434996a45107f8521612e6a5"
  },
  "edmonton": {
   "in_ring": 2374,
   "all": 10702,
-  "map_blob": "453b3e121fb48d3bc2d338c1b3d5cea3dedbe885"
+  "map_blob": "e4defe1116666934206d236bbe1d3190f0e74aa7"
  },
  "toronto": {
   "in_ring": 8749,
   "all": 18215,
-  "map_blob": "24aff90a851f19dd8a2e63772c14bf635d42d349"
+  "map_blob": "6be2a8738e2aaf4ab01ae96eb337a3b1cec3f0c5"
  },
  "mexico_city": {
   "in_ring": 131667,
@@ -202,7 +202,7 @@
  "hong_kong": {
   "in_ring": 19275,
   "all": 21135,
-  "map_blob": "2e080cf771d700c36384987c622cc21b5fc19258"
+  "map_blob": "7086032bd7d36f7da2048b310b13d37caf3e118c"
  },
  "riga": {
   "in_ring": 5213,
@@ -212,7 +212,7 @@
  "seoul": {
   "in_ring": 224381,
   "all": 239410,
-  "map_blob": "1d9077693f215023558d7c011ec11ee64c3a1927"
+  "map_blob": "9c0bf68944a640e614eae21be2876a5f372a5b08"
  },
  "taichung": {
   "in_ring": 12250,
@@ -232,12 +232,12 @@
  "daegu": {
   "in_ring": 47724,
   "all": 67212,
-  "map_blob": "6fcc94cce10711570f149342bea19c5d6ad9c908"
+  "map_blob": "5e530419fd6494109d47507c5c46f2d0a8f2fd79"
  },
  "busan": {
   "in_ring": 66348,
   "all": 89798,
-  "map_blob": "5cf03ddf5c4bcff87f8af9a2ec68278cfe5007ad"
+  "map_blob": "55bfa7a2271f42ba8795d413e825e711b4d2cde7"
  },
  "monterrey": {
   "in_ring": 14630,
@@ -322,32 +322,32 @@
  "incheon": {
   "in_ring": 56426,
   "all": 82671,
-  "map_blob": "7e1140ff80f71609e09010e801deb852f63ffa17"
+  "map_blob": "9065ba13a534a447fb23014576c01eb06ed60859"
  },
  "goyang": {
   "in_ring": 18519,
   "all": 27808,
-  "map_blob": "5dc5236134dadfb57855883f128e2d9f172307f8"
+  "map_blob": "e78d4a23d78434a3a7b7e53b2441a35a1e8ebd7a"
  },
  "seongnam": {
   "in_ring": 19418,
   "all": 25529,
-  "map_blob": "c1a07159a4d7aae9165c215fe6a5e1a057460791"
+  "map_blob": "866f6d39a332f8f020b098c1b3226273d3276477"
  },
  "yongin": {
   "in_ring": 13003,
   "all": 23481,
-  "map_blob": "8bc0acc37637858a3decccacf4a71d262f76cb45"
+  "map_blob": "0f3ee54c8dc2e04700f9b6015d30c63ff57ff1f7"
  },
  "suwon": {
   "in_ring": 15928,
   "all": 33433,
-  "map_blob": "a6e6724837bb6d19b8c95d504e18bca811d2985b"
+  "map_blob": "4ff9b96d928109245d186af3ec5aab158b8cbce2"
  },
  "bucheon": {
   "in_ring": 18093,
   "all": 22512,
-  "map_blob": "3c561e00bc28df88560c1f892d443046d79051bf"
+  "map_blob": "ac76413e8d7052782c5f9d84d3a7f5144562ff45"
  },
  "bergen": {
   "in_ring": 2106,
@@ -407,7 +407,7 @@
  "florence": {
   "in_ring": 4435,
   "all": 12052,
-  "map_blob": "9e70cdafbd8424a99e576ce5e8ddb8f37c2a496e"
+  "map_blob": "e5d4754ae85569a49c095b2d3cd88583d9801700"
  },
  "goteborg": {
   "in_ring": 2256,
@@ -422,7 +422,7 @@
  "zurich": {
   "in_ring": 3099,
   "all": 3363,
-  "map_blob": "1efb6a502b17c090a16c52b90bdf09c9f80b4065"
+  "map_blob": "02b85fd13f2c02c3fe36dab502376d24b3fa87c7"
  },
  "le_mans": {
   "in_ring": 1462,
@@ -562,22 +562,22 @@
  "namyangju": {
   "in_ring": 10067,
   "all": 18344,
-  "map_blob": "a86cd3b4d313c218c7990a210ea802a239c438fa"
+  "map_blob": "850d99a9b2bc32321fdc32a6ee0626cacedc4eae"
  },
  "ansan": {
   "in_ring": 12575,
   "all": 19711,
-  "map_blob": "92b284b0ac5257842eaac9ad6c17c22085308758"
+  "map_blob": "0ddac7811ded6a64e39e2aedb0a7942dc4e0c401"
  },
  "uijeongbu": {
   "in_ring": 11178,
   "all": 13103,
-  "map_blob": "7c3a0b6d219e044a353df1cc7fe1c4f1da04f310"
+  "map_blob": "fab0a15fe01db851e9dafb20e17f62a25023d2f6"
  },
  "anyang": {
   "in_ring": 9747,
   "all": 15177,
-  "map_blob": "4c7040bf71d6e3102b64b87e373d60d957f60726"
+  "map_blob": "3a77c5973454c4e92d153e277489e997889120f2"
  },
  "dallas": {
   "in_ring": 4197,

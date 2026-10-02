@@ -110,7 +110,7 @@ KINDS = {
     "아이스크림 할인점": "Ice-cream shop", "정육점": "Butcher", "채소/과일 소매업": "Greengrocer",
     "꽃집": "Florist", "사무기기 소매업": "Office equipment", "사진기/기타 광학기기 소매업": "Cameras",
     "안경렌즈 소매업": "Optician", "애완동물/애완용품 소매업": "Pets and pet supplies",
-    "가스 충전소": "LPG station", "주유소": "Petrol station",
+    "가스 충전소": "LPG station", "주유소": "Gas station",
     "문구/회화용품 소매업": "Stationery", "서점": "Bookshop", "운동용품 소매업": "Sporting goods",
     "음반/비디오물 소매업": "Music and video", "자전거 소매업": "Bicycles", "장난감 소매업": "Toys",
     "생수/음료 소매업": "Drinks", "얼음 소매업": "Ice", "우유 소매업": "Milk", "주류 소매업": "Liquor store",

@@ -840,6 +840,21 @@ every key, account and letter:
     `CHAR_W` / `PAD_W` / `PILL_H`); the probe imports
     `app/label_competition.py` now. Delete them, and the comment that names
     them.
+- [ ] **Found by the prose pass's parallel deploy check (2026-10-02), all
+  already on master and not blocking:**
+  - **Map label crowding:** Pittsburgh at 375 and 343 ("PRT Silver Line"
+    touches the collapsed legend, about 6x4 px); Yokohama at 343 (two overlaps,
+    "Tokyu Kodomonokuni Line" x "Tokyu Shin-yokohama Line" about 29x6 px);
+    Osaka at 1000x650 with the legend open ("JR Gakkentoshi Line" runs about
+    14 px under it). Each reproduces with `scripts/check_map_labels.js`; the
+    labels stay legible.
+  - **San Diego's page is thin:** one bullet of its own and no businesses
+    section, against 5-22 elsewhere.
+  - **A step whose output depends on the run date:** Toronto's step 2 drops a
+    license once its Cancel Date has passed, measured against today, and the
+    register publishes future-dated cancellations, so a re-run days later
+    moves the baseline (2026-10-02: 18,218 -> 18,215). Measure against the
+    fetch date instead, or record it (the date fixes item (f) above).
 - [ ] ⏸ **After the prose and UI pass lands (owner, 2026-10-01):**
   - **The site notices footer**: every city page lists all of the site's
     numbered notices (82) at its foot, inline for now. The owner wants a later

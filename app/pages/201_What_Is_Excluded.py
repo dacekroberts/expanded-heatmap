@@ -72,7 +72,7 @@ BUSINESS_HEADING = "## Which businesses are counted"
 PER_CITY_SECTION = "Excluded in one city"
 COUNTRY_OF = {c["name"]: c["country"] for c in CITIES}
 
-st.set_page_config(page_title=f"What is excluded — {SITE_NAME}",
+st.set_page_config(page_title=f"What is counted, and what is not — {SITE_NAME}",
                    page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
@@ -163,7 +163,9 @@ if DOC.exists():
     per_city = "\n".join(next(p["lines"] for p in parts
                               if p["title"] == PER_CITY_SECTION))
 
-    st.header(f"Stations left out in {country}")
+    # "the United States", "the Netherlands", "the United Kingdom".
+    article = "the " if country in ("United States", "Netherlands", "United Kingdom") else ""
+    st.header(f"Stations left out in {article}{country}")
     header, body = station_table(
         [r for r in rows if COUNTRY_OF[r["name"]] == country], totals)
     scroll_table(header, body, right=header[2:])

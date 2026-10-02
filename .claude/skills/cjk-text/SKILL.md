@@ -114,7 +114,7 @@ And one project rule bites harder here: a regex holding a Unicode escape
   Hangul. Python's `re` has no `\p{Han}`.
 - **Publishers write placeholders, not blanks.** 308 FEHD licences carry
   `No Record` or `(no record found)` in the shop-sign field; they show as
-  "No shop sign on the licence". TO CHECK in each CJK register: the Chinese-,
+  "No shop sign on the license". TO CHECK in each CJK register: the Chinese-,
   Japanese- or Korean-language placeholder, which a Latin pattern will not see.
 
 ## 5. The privacy check cannot read these scripts - MEASURED
