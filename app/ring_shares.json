@@ -202,7 +202,7 @@
  "hong_kong": {
   "in_ring": 19275,
   "all": 21135,
-  "map_blob": "7086032bd7d36f7da2048b310b13d37caf3e118c"
+  "map_blob": "9f57e0b733a36d947c43b9685ff0386f21ee8dd0"
  },
  "riga": {
   "in_ring": 5213,
@@ -260,8 +260,8 @@
   "map_blob": "cdadc006d78116d2e169a37cc1860ece6e49d791"
  },
  "fukuoka": {
-  "in_ring": 24619,
-  "all": 29921,
+  "in_ring": 24615,
+  "all": 29917,
   "map_blob": "fa769ffe22f513183f284080ebf3b4a2d5e74685"
  },
  "kyoto": {
@@ -270,8 +270,8 @@
   "map_blob": "6ff321523f868e9b97372f546f76ab538510f362"
  },
  "tokyo": {
-  "in_ring": 59889,
-  "all": 61377,
+  "in_ring": 59887,
+  "all": 61375,
   "map_blob": "6655cea6f494171d36dabce1a527c1f153b3bd2d"
  },
  "berlin": {
@@ -282,7 +282,7 @@
  "london": {
   "in_ring": 41574,
   "all": 56491,
-  "map_blob": "396eb07fa93d0003b63b0a387319a6d68021110b"
+  "map_blob": "afbb5a30ad9cbf262d96730a201373ec0c40229e"
  },
  "buenos_aires": {
   "in_ring": 41633,
@@ -297,17 +297,17 @@
  "newcastle": {
   "in_ring": 3358,
   "all": 6171,
-  "map_blob": "3999a5a0c69e3b2d98c567e9abe0cb2984370756"
+  "map_blob": "346cd3d040a8b9cf6272b6e69eb03cd02aa2b751"
  },
  "sydney": {
   "in_ring": 5901,
   "all": 7074,
-  "map_blob": "0d45b05b29daadb6707d53309b1993b680ce423a"
+  "map_blob": "12463e42a5a26665eb7e86405a75ff48e7696825"
  },
  "melbourne": {
   "in_ring": 4760,
   "all": 4959,
-  "map_blob": "12007c8baea195fcd9d0107d32c48703a1ed85b7"
+  "map_blob": "3a10e98c6dd6566467875ff9e9b330d487b5210c"
  },
  "stockholm": {
   "in_ring": 4666,
@@ -322,32 +322,32 @@
  "incheon": {
   "in_ring": 56426,
   "all": 82671,
-  "map_blob": "9065ba13a534a447fb23014576c01eb06ed60859"
+  "map_blob": "e2c65cc3ba29be099df5415f4cb5dd058229a65a"
  },
  "goyang": {
   "in_ring": 18519,
   "all": 27808,
-  "map_blob": "e78d4a23d78434a3a7b7e53b2441a35a1e8ebd7a"
+  "map_blob": "f332a12d0f840f88eba6f24ae90db2b616a6f540"
  },
  "seongnam": {
   "in_ring": 19418,
   "all": 25529,
-  "map_blob": "866f6d39a332f8f020b098c1b3226273d3276477"
+  "map_blob": "8bac0e9a002b95fc403ee13a011176c5f85ac9b9"
  },
  "yongin": {
   "in_ring": 13003,
   "all": 23481,
-  "map_blob": "0f3ee54c8dc2e04700f9b6015d30c63ff57ff1f7"
+  "map_blob": "c7ea84b6ca5238c14201f62d41cbaf242657127f"
  },
  "suwon": {
   "in_ring": 15928,
   "all": 33433,
-  "map_blob": "4ff9b96d928109245d186af3ec5aab158b8cbce2"
+  "map_blob": "9f49a41cb23a852bd8bde1d2f851a9bae368cdd6"
  },
  "bucheon": {
   "in_ring": 18093,
   "all": 22512,
-  "map_blob": "ac76413e8d7052782c5f9d84d3a7f5144562ff45"
+  "map_blob": "21d05fe0bcf124479093b2ac6bcd3deed16f19a8"
  },
  "bergen": {
   "in_ring": 2106,
@@ -422,7 +422,7 @@
  "zurich": {
   "in_ring": 3099,
   "all": 3363,
-  "map_blob": "02b85fd13f2c02c3fe36dab502376d24b3fa87c7"
+  "map_blob": "2568a25ff349a785da7699e155cca47bca5dedb2"
  },
  "le_mans": {
   "in_ring": 1462,
@@ -555,29 +555,29 @@
   "map_blob": "95eb39f1f1d211c8428c3aa34dea9579ea85bc1b"
  },
  "hiroshima": {
-  "in_ring": 9134,
-  "all": 13567,
+  "in_ring": 9132,
+  "all": 13565,
   "map_blob": "b00ea50f1e7b086eaee4a039bc197cdc7066ee0a"
  },
  "namyangju": {
   "in_ring": 10067,
   "all": 18344,
-  "map_blob": "850d99a9b2bc32321fdc32a6ee0626cacedc4eae"
+  "map_blob": "8aeb9bd56b64d2de8f9dbd412a8450fc3ae8e4fb"
  },
  "ansan": {
   "in_ring": 12575,
   "all": 19711,
-  "map_blob": "0ddac7811ded6a64e39e2aedb0a7942dc4e0c401"
+  "map_blob": "1e68ac0a2812269f2d3505eea174ee374c82f681"
  },
  "uijeongbu": {
   "in_ring": 11178,
   "all": 13103,
-  "map_blob": "fab0a15fe01db851e9dafb20e17f62a25023d2f6"
+  "map_blob": "27fa58189941708a86dd57be002f66e8c9982d85"
  },
  "anyang": {
   "in_ring": 9747,
   "all": 15177,
-  "map_blob": "3a77c5973454c4e92d153e277489e997889120f2"
+  "map_blob": "c12ce820cece3db5588e4269f7d4fd7cf7fc2bcd"
  },
  "dallas": {
   "in_ring": 4197,
@@ -652,7 +652,7 @@
  "matsuyama": {
   "in_ring": 5136,
   "all": 9285,
-  "map_blob": "d175a41aeff224e1020a246bce7d35397e77f547"
+  "map_blob": "7647fc67c5cd7aa334e17777106c51b6305f6cc3"
  },
  "toyama": {
   "in_ring": 3052,

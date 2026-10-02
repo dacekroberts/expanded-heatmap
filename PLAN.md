@@ -913,6 +913,15 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
+- [ ] **Left by the Japan batch (landed 2026-10-02), for the owner:**
+  - **`japan_fetch.fetch_city` counts a file's rows with `city_rows(dest)`**,
+    not the city config's own reader, so Fukui's and Toyama's recorded
+    provenance row counts are wrong; their pins are right. A small shared
+    fix, recommended by the Japan lead.
+  - **A prose proposal for Okayama's page:** a sentence saying 13 of its 16
+    unplaced rows carry the ministry's stand-in point.
+  - **The default-point guard refuses a point only when 3 or more towns
+    share it.** Kitakyushu's 9 pins on points shared by fewer towns stay.
 - [ ] **Found at the UK six landing (2026-10-02), none blocking:**
   - **The "OpenStreetMap (rail geometry)" notice** lists the cities whose
     rail data comes from OSM, but it names none of the nine UK cities, and
