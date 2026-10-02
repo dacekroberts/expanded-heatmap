@@ -1732,6 +1732,23 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Sakai City, MHLW and MLIT did not make and do not endorse this map.",
      False),
+    # Hakodate (notice 105): the city's registers are CC BY 2.1 JP (the list
+    # page), credited in Kobe's 出典 form with © and the licence link; MLIT as in
+    # Kobe's, N02 in its 2025 edition. Written from Kobe's and Yokohama's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30).
+    ("Hakodate City and MLIT (Hakodate)",
+     "Hakodate's businesses: 出典：「環境衛生関係施設等の情報」（函館市）"
+     "（[https://www.city.hakodate.hokkaido.jp/docs/2019072900024/](https://www.city.hakodate.hokkaido.jp/docs/2019072900024/)）を加工して作成 "
+     "(© Hakodate City; [CC BY 2.1 JP](https://creativecommons.org/licenses/by/2.1/jp/)). "
+     "(This map modifies the City of Hakodate's lists of barbers, beauty salons and laundries as of "
+     "31 August 2026: this project selected the premises with a fixed place, placed each by its "
+     "address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Hakodate and MLIT did not make "
+     "and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

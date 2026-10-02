@@ -11,6 +11,41 @@ them off.
 
 
 
+
+### 2026-10-02 - Hakodate built, personal services only
+
+- **Hakodate built on the shared Japanese steps (the one-bucket agent, applied
+  by the lead): 1,077 storefronts (barbers 281, beauty salons 656, laundries
+  140), 29 stations, 3 lines; 331 pins within a ring (31%).** Page 170,
+  notice 105, `mode: tram`, minor tier. Personal services only (Band B,
+  Yokohama's page); the city publishes no food register.
+- **The registers as of 2026-08-31, read below their title rows by the shared
+  reader.** The 3 無店舗 laundry rows are not premises; 23 repeats shown once.
+  The official count (e-Stat FY2024 第10表 / 第11表, a measurement, not drawn,
+  recorded by a city-local `fetch_sources.py estat` part): 1,100 of 1,122
+  (98.0%).
+- **The join:** block 94.0%, chōme 6.0%, none 0 (the brief exactly). GSI's
+  address search on 100 block hits: median 51 m, 99 within 250 m, measured
+  with a scratch variant: the shared `screen_japan_join.py --gsi` adds
+  北海道函館市 to addresses that already start with 函館市, so GSI answered a
+  generic point (median 7,186 m). Suggested fix for that script (Cleanup's):
+  add only the prefecture when the address starts with the city.
+- **Rail:** N02-25, 29 stations, halved rings (median 363 m), gate 1's 200 m
+  floor. The tram's four legal sections drawn as ONE line, "Hakodate City
+  Tram" (Sapporo's and Matsuyama's precedent; routes 2 and 5 share the track
+  from 湯の川 to 十字街). The South Hokkaido Railway's one station (五稜郭) stays
+  as cut. Gate 3: 26 = 26. The naming-rights stop 函館アリーナ前 is
+  "Hakodate-arena-mae", following the Japanese beside it and leaving out the
+  sponsor's name. 24 cited overrides.
+- **Privacy verdict: publish.** Japan pass 0; 1 pin shows its register type.
+- **No Economic Census control** (no food); the GSI sample is the coordinate
+  check.
+- **Proposals for review time:** "Hakodate City publishes its registers of
+  these premises, but no register of food businesses or of other shops, so
+  restaurants, cafés and shops are not on this map." (Yokohama's sentence with
+  "register"); the tram one-line sentence; the notice's English gloss. The
+  opening view (a wide N03 extent) is for review time's map-view check.
+
 ### 2026-10-02 - Sakai built, food only, on a register rebuilt to August 2026
 
 - **Sakai built on the shared Japanese steps (the one-bucket agent, applied by

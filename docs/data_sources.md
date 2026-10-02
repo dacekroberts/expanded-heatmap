@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -2628,6 +2628,25 @@ at review time).
 - **MUST DO:** `check_personal_exposure.py sakai` with its Japan pass,
   run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
   ("Sakai built", 2026-10-02).<!-- /internal -->
+
+**105. Hakodate City and MLIT (Hakodate) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's registers are
+  **CC BY 2.1 JP**, declared on the list page. MLIT's 位置参照情報 and N02 (the
+  2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act). e-Stat's 衛生行政報告例 was
+  used as a measurement only and is not drawn.
+- **MUST DISPLAY**: `出典：「環境衛生関係施設等の情報」（函館市）（https://www.city.hakodate.hokkaido.jp/docs/2019072900024/）を加工して作成`,
+  © Hakodate City and the CC BY 2.1 JP link; MLIT's credit lines.
+- **MUST NOT**: present the map as the city's work; imply its endorsement; say
+  the pins are businesses open now. **If the city asks, remove its credit**
+  (CC BY 2.1 JP art. 5).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py hakodate` with its Japan pass,
+  run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Hakodate built", 2026-10-02).<!-- /internal -->
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

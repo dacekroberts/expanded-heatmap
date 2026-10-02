@@ -3403,6 +3403,32 @@ line.
 - The Midōsuji Line keeps its 3 stations in Sakai and the Hankai tram 15 of
   its 31 stops; Osaka's map draws the rest.
 
+### Hakodate - the city's barber, beauty and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the city publishes only each month's
+  new food permits, not a register, so this map shows personal services only
+  (owner, 2026-10-01).
+- 3 laundry pick-up services with no shop (無店舗).
+
+**Counted** - every barber, beauty salon and laundry on the registers of 31
+August 2026, laundry counters that take in and return washing included. The
+files publish some of each register's fields, not some of its rows: they hold
+1,100 premises against the official 1,122 of March 2025. No closures are
+recorded beside them, so some may have closed since.
+
+**One pin per premises** - 23 repeat registrations are shown once.
+
+**Not placed** - none. 66 sit at their town's center.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its register type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 4 stations beyond it: 3 in Hokuto and 1 in Nanae.
+- The South Hokkaido Railway keeps one station inside the city, Goryokaku.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
