@@ -2578,7 +2578,8 @@ into `render_site_notices()` with the UK six, 2026-10-02.)
 - **MUST NOT**: imply official status or endorsement by FSS or the FSA (OGL);
   use either body's logo; display a result.
 - Wording: Glasgow's Food Standards Scotland notice 61, with the city and date
-  changed and Manchester's centroid clause (notice 84) added.<!-- internal -->
+  changed and the centroid clause of Manchester's Food Standards Agency
+  notice 84 added.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py edinburgh`, run 2026-10-02: no
   fallback name exists, 0 contact details; the verdict is in the session's
   drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
@@ -2671,6 +2672,42 @@ into `render_site_notices()` with the UK six, 2026-10-02.)
   Units kept to the four council areas' GSS codes.
 - **The repository carries the credit too**, as for London: committed
   `outputs/nottingham/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
+**95. Food Standards Agency (Blackpool) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): Blackpool's
+  and Wyre's councils are on England's FHRS, under the **Open Government
+  Licence v3** with the FSA's conditions. The OGL statement linked; each
+  council's extract date (2026-10-02); no rating, logo or imagery. The credit
+  is London's and Newcastle's, "Food Standards Agency, UK food hygiene rating
+  data", as a notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py blackpool`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Blackpool's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**96. Ordnance Survey (Blackpool) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 67 Blackpool and Wyre food storefronts the FSA lists with a
+  full postcode and no point (3.8% of storefront rows); never a private
+  address. Units kept to the two councils' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/blackpool/` republishes the derived locations (README's credits).
 - Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
 
 ## Gaps

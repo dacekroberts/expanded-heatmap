@@ -191,6 +191,7 @@ SLUG_OVERRIDES = {
     "Newcastle (Regional)": "newcastle",
     "Birmingham (Regional)": "birmingham",
     "Manchester (Regional)": "manchester",
+    "Blackpool (Regional)": "blackpool",
     "Nottingham (Regional)": "nottingham",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",

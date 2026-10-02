@@ -3554,6 +3554,47 @@ Gedling and the rest of Nottinghamshire have no NET stop and are not on the
 map.
 - Buses and national rail trains are not drawn.
 
+### Blackpool (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the two councils the tramway serves (Blackpool and Wyre) inspect for
+food hygiene; no open register of other shops or of personal services covers
+them, so clothes shops, hairdressers and the like are missing rather than
+excluded. Food shops (grocers, off-licenses, bakers, butchers, newsagents
+selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (165), where home caterers
+and event kitchens sit; mobile caterers (84); hospitals, childcare and care
+homes (188); schools, colleges and universities (104); hotels and guest
+houses (405); manufacturers and packers (24); distributors and transporters
+(4); farmers and growers (2).
+
+**Not placed: flats** - 4 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 67 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 90 food storefronts (5.2%) with neither a location nor a
+usable full postcode, almost all in Wyre (86, 12.0% of Wyre's). A business
+run from a private address is published without a location or a full
+postcode and is never placed.
+
+**Shown under its trade name** - 1 business registered "trading as" another
+name shows the name on the shop.
+
+**Left off because they are outside the area** - 2 whose register location
+lies outside Blackpool and Wyre.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.9% of that type read as one by name.
+
+**Stations.** All 40 Blackpool Tramway stops, Starr Gate to Fleetwood Ferry
+with the North Station spur, every one inside Blackpool and Wyre; none is
+listed on Blackpool (Regional)'s page as left out. Fylde, to the south, has
+no tram stop and is not on the map.
+- Buses and national rail trains are not drawn.
+
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
 **One council, one survey year.** The City of Sydney's Floor Space and

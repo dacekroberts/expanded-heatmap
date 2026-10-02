@@ -60,6 +60,86 @@ for them):
 
 ---
 
+### 2026-10-02 - Blackpool (Regional) built, the last of the UK six: one tramway with the North Station spur, gate 3 on NaPTAN alone, halved rings
+
+- **Scope (owner, 2026-10-01):** Blackpool (898) and Wyre (207). Exactly two
+  FSA codes are asserted, never Wyre Forest (153). The boundary is the union
+  of OSM relations 148603 (Blackpool, admin_level 6) and 148604 (Wyre,
+  admin_level 8): 372.1 km² in UTM 30N. The fetch's first gate of 290-350
+  stopped it, because OSM draws both coastal boundaries to low water
+  (Blackpool 43.1, Wyre 329.0 km²). The lead re-gated it to 355-390.
+- **Rail:** OSM's 2 tram relations, both ref T1 (7119569 Southbound,
+  10841330 Northbound), with no network, operator or colour tags. Both run
+  "via North Station", and **both carry the Blackpool North spur** (opened
+  2024) with North Station as a stop member. London's branch rule draws the
+  longer relation (18.8 km). Its track passes 4.9 m from North Station, so
+  the spur survives the default thresholds. Nothing is in `NOT_DRAWN`.
+- **Stations:** 78 stop positions collapse to 40 by name. North Pier's two
+  positions are 216 m apart, either side of the Talbot Square junction stop,
+  so the collapse limit is 250 m (Den Haag's), not 200. All 40 are inside
+  the scope (26 in Blackpool, 14 in Wyre; Anchorsholme Lane is the first
+  Blackpool stop) and none is thinned.
+- **Gate 3, NaPTAN only.** `blackpooltransport.com` returns 403 to a script
+  request (2026-10-01 and 2026-10-02) and is not passed, so
+  `OPERATOR_STATION_COUNTS = None`, with `OPERATOR_COUNTS_GAP` saying why
+  (the tram-city rule: never a silent skip).
+  - NaPTAN holds 41 active MET records under `9400ZZBP` (ATCO area 940). One
+    is a London station (Battersea Power Station) that the scope polygon
+    keeps out, leaving 40.
+  - All 40 match name by name. Three are aliased by position, each 3-4 m
+    from the OSM stop: Anchorsholme -> Anchorsholme Lane, St Chad's -> St
+    Chad's Road, and Talbot Road -> Talbot Square (NaPTAN's record created
+    2024-05-29, with the spur). The map keeps OSM's names.
+- **Rings: halved.** The median gap in scope is 357 m (min 105, max 690),
+  under the spacing rule's 550 m, and the step gates it at 315-400. The
+  station floor is Kansas City's 150 m (the platform median is 14 m), since
+  Manchester's 350 sits too close to this median.
+- **The light-rail test:** 100% `railway=tram` (36.7 km of route track), 0.0%
+  in tunnel or on a bridge, a 357 m median gap, and about every 10 minutes by
+  day (the brief). **`mode` is `tram`**: a street and promenade tramway, the
+  tram kit's precedent.
+- **Colour:** OSM records none and the operator's site refuses scripts, so
+  the hue is the project's own (#6A2C91; the tram kit's call 3).
+  `line_colour_search.py blackpool` draws it as #9840A8, 45.1 from the pins
+  and 3:1 on both pages. The label is "Blackpool Tramway" and the legend
+  adds "(Starr Gate - Fleetwood Ferry)".
+- **Businesses, step by step:**
+  - 2,720 register rows in 2 authorities, both extracted 2026-10-02, with 0
+    exact duplicates.
+  - 1,744 storefront rows, the brief's count exactly.
+  - 4 at a "Flat" address are never placed; there are no childminders.
+  - 157 have no FSA point. Of those, 67 are placed at a Code-Point centroid
+    and 90 (5.2%) are not: Wyre 86 (12.0%), Blackpool 4 (0.4%). 0 had an
+    outward code only, 87 had no usable postcode, and 3 had a full postcode
+    not in Code-Point.
+  - 0 fall outside the sanity box and 2 outside the scope.
+  - 1 trading-as name shows the trade name.
+  - **1,648 storefronts placed** (Food service 1,143, Food shops 505): 95.9%
+    at the FSA's point, 4.1% at a centroid.
+  - **Wyre's point share on the full file is 83.2%**, under the brief's sample
+    figure of 84.5% (Blackpool 96.4% against 95.8%); accepted by the lead
+    (2026-10-02): the full file against a sample. Its private addresses
+    arrive with an empty postcode, not an outward code, so they show as "no
+    usable postcode" and are never placed.
+  - 820 (49.8%) sit within a ring: Food service 593, Food shops 227.
+  - Canteens by name are at least 1.9% of Restaurant/Cafe/Canteen, and are
+    not separated.
+- **Personal exposure (`check_personal_exposure.py blackpool`):**
+  - 820 pins and 785 distinct names. No fallback name exists.
+  - 0 emails, phone numbers or c/o markers; 0 surname-first names; 5
+    "person's name (trade name)" shapes.
+  - The heuristic reads 218 (26.6%) as person-like, mostly cafés, takeaways
+    and shops named for people.
+  - **Verdict: publish**, on London's, Newcastle's and Manchester's
+    precedent.
+- **CRS:** UTM 30N (EPSG:32630).
+- **Notices:** 95 (FSA, Blackpool) and 96 (Ordnance Survey, Blackpool) are
+  Manchester's 84 and 85 with the city and figures changed. Notice 86
+  (NaPTAN) covers gate 3.
+- **Page:** `app/pages/161_Blackpool_Heatmap.py` (page 161). Its bullets are
+  Newcastle's FSA bullets and the tram template's line bullets under "The
+  tram". The proposals are listed in the owner's section.
+
 ### 2026-10-02 - Nottingham (Regional) built: NET's two lines from both directions' relations, gate 3 exact against NET and NaPTAN, halved rings, tram
 
 - **Scope (owner, 2026-10-01):** the four councils NET serves (Nottingham
