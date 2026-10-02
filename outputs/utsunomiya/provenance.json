@@ -1,0 +1,128 @@
+{
+  "city_barber": {
+    "as_of": "2026-07-31",
+    "bytes": 37085,
+    "dataset_page": "https://catalog.city.utsunomiya.tochigi.jp/dataset/riyoujoichiran",
+    "file": "092011_seikatsueisei_kankyo_riyozyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:53+00:00",
+    "rows": 461,
+    "sha256": "f1ee4ae4812cd401c9bb8257150ecf6d10e106b57fa002ec747a18ce135e6bad",
+    "url": "https://catalog.city.utsunomiya.tochigi.jp/dataset/787d42bf-ef7a-4cfb-bfe3-b2d436402253/resource/0aa9d94e-369a-4e7b-8d48-5ab874f3d4da/download/092011_seikatsueisei_kankyo_riyozyo.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-07-31",
+    "bytes": 150428,
+    "dataset_page": "https://catalog.city.utsunomiya.tochigi.jp/dataset/ubiyouzyo",
+    "file": "092011_seikatsueisei_kankyo_-biyozyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:56+00:00",
+    "rows": 1367,
+    "sha256": "8085a8490bab4d3ffb7bbfba4cf996a3a81048cd34d129696375e3ff73a144eb",
+    "url": "https://catalog.city.utsunomiya.tochigi.jp/dataset/dcb9f255-2a52-4930-90ab-6c1fda354c87/resource/ec507449-b946-4e29-bb6e-e921cdd5bef3/download/092011_seikatsueisei_kankyo_-biyozyo.csv"
+  },
+  "city_food": {
+    "as_of": "2026-07-31",
+    "bytes": 267150,
+    "dataset_page": "https://catalog.city.utsunomiya.tochigi.jp/dataset/syokuhinneigyoukyoka",
+    "file": "092011_seikatsueisei_shokuhin_shokuhin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:51+00:00",
+    "rows": 1120,
+    "sha256": "5c82d2844b87a7e776c87303e31590195953115f0d1cce525e064c7c8c08ac37",
+    "url": "https://catalog.city.utsunomiya.tochigi.jp/dataset/4b5cae93-4640-4b4e-87bb-a5e18042366c/resource/a53500f2-7ba1-4e77-a906-e17dc5b60714/download/092011_seikatsueisei_shokuhin_shokuhin.csv"
+  },
+  "city_laundry_agent": {
+    "as_of": "2026-07-31",
+    "bytes": 14614,
+    "dataset_page": "https://catalog.city.utsunomiya.tochigi.jp/dataset/kuriiningutoritsugiichiran",
+    "file": "092011_seikatsueisei_kankyo_-kuriningutoritsugi.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:58+00:00",
+    "rows": 100,
+    "sha256": "b42d7d2ecf8ba7a8ba57edb8f004699d99bad029cc3ba60077f4a92c31ca3f91",
+    "url": "https://catalog.city.utsunomiya.tochigi.jp/dataset/467b3c29-17b4-4b38-bd49-55b9bec46670/resource/908957e0-e854-4992-8d7e-a4b0d3556b7a/download/092011_seikatsueisei_kankyo_-kuriningutoritsugi.csv"
+  },
+  "city_laundry_general": {
+    "as_of": "2026-07-31",
+    "bytes": 8337,
+    "dataset_page": "https://catalog.city.utsunomiya.tochigi.jp/dataset/kuriininguippanichiran",
+    "file": "092011_seikatsueisei_kankyo_kurininguippan.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:00+00:00",
+    "rows": 74,
+    "sha256": "502dd9314223790aff8c674a20807a6065690de6e7350f6dc350d8f7fd69b14e",
+    "url": "https://catalog.city.utsunomiya.tochigi.jp/dataset/8004a533-3811-4d56-b103-02f154d3e1f7/resource/6e285563-ece3-4f7b-a0fd-757cf6e93c34/download/092011_seikatsueisei_kankyo_kurininguippan.csv"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 3664411,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "09201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:03+00:00",
+    "rows": 8396,
+    "sha256": "1d554a6eb952c0beff8d127b3118562620ccb0831b64da7da209680386be2c87",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=09201_food_business_all.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_09201_block": {
+    "bytes": 488945,
+    "file": "09201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:06+00:00",
+    "sha256": "084c286b57005fd194a119a1b206a469bcf18b595c0e0066ea387562937223e9",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/09201-24.0a.zip"
+  },
+  "isj_09201_chome": {
+    "bytes": 12569,
+    "file": "09201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:08+00:00",
+    "sha256": "f8b090b54001c268ec78f66bff4425f6475aaa18aa8c346be7e5d3beca079d75",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/09201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 2700229,
+    "file": "data/japan/raw/N03-20250101_09_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:11+00:00",
+    "sha256": "9ec72bac1625fcf044652b7a1c235fe3c86e88a1b04418c4111f2db0edf57e3d",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_09_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 12695,
+    "elements": 24,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T21:29:41Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](36.45,139.73,36.75,140.03);way[\"railway\"=\"station\"](36.45,139.73,36.75,140.03););out tags center;",
+    "retrieved": "2026-10-02T21:31:29+00:00",
+    "sha256": "3d2b4eac36abd116bb995a1d5a77609f23ab39d1565e88f3f6dda3e309c1d736"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 20004,
+    "elements": 42,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-06-01T08:52:28Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](36.45,139.73,36.75,140.03);out body;",
+    "retrieved": "2026-10-02T21:35:47+00:00",
+    "sha256": "60f351f438db2470559ba257f2035b427e6f970ea81948b07922be8b79857b42"
+  }
+}

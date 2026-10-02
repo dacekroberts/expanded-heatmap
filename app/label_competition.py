@@ -214,6 +214,13 @@ TEXT_WIDTH = {
     "Yokohama": 68.8,
     # Hiroshima, 2026-09-30; the same controls as Ottawa.
     "Hiroshima": 66.3,
+    # The Japan batch, 2026-10-02, as Odense in a browser tab with Google
+    # Fonts' Space Grotesk loaded (canvas measureText after
+    # document.fonts.load); controls Houston, Odense, Kansas City, Hiroshima,
+    # Yokohama, Daugavpils, Ottawa and Toronto, each reproduced to 0.1 px.
+    "Matsuyama": 79.0, "Toyama": 52.2, "Kumamoto": 72.2, "Fukui": 36.2, "Nagasaki": 61.1,
+    "Utsunomiya": 81.3, "Kitakyushu": 76.3, "Sakai": 36.0, "Hakodate": 64.1, "Kagoshima": 73.8,
+    "Okayama": 61.7, "Kōchi": 37.6,
     # Dallas, 2026-09-30; controls Prague, Tokyo, Houston, Toronto, Yokohama.
     "Dallas": 40.1,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,

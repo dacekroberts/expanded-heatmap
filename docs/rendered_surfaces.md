@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**130 city pages, 3 fixed pages and the Overview; 26 rendered docs; 2 app data files.**
+**142 city pages, 3 fixed pages and the Overview; 26 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -165,3 +165,15 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Sheffield_Heatmap` | Sheffield | `sheffield` | ✓ |
 | `/Nottingham_Heatmap` | Nottingham (Regional) | `nottingham` | ✓ |
 | `/Blackpool_Heatmap` | Blackpool (Regional) | `blackpool` | ✓ |
+| `/Matsuyama_Heatmap` | Matsuyama | `matsuyama` | ✓ |
+| `/Toyama_Heatmap` | Toyama | `toyama` | ✓ |
+| `/Kumamoto_Heatmap` | Kumamoto | `kumamoto` | ✓ |
+| `/Fukui_Heatmap` | Fukui | `fukui` | ✓ |
+| `/Nagasaki_Heatmap` | Nagasaki | `nagasaki` | ✓ |
+| `/Utsunomiya_Heatmap` | Utsunomiya | `utsunomiya` | ✓ |
+| `/Kitakyushu_Heatmap` | Kitakyushu | `kitakyushu` | ✓ |
+| `/Sakai_Heatmap` | Sakai | `sakai` | ✓ |
+| `/Hakodate_Heatmap` | Hakodate | `hakodate` | ✓ |
+| `/Kagoshima_Heatmap` | Kagoshima | `kagoshima` | ✓ |
+| `/Okayama_Heatmap` | Okayama | `okayama` | ✓ |
+| `/Kochi_Heatmap` | Kōchi | `kochi` | ✓ |

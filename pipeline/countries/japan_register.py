@@ -53,8 +53,13 @@ VARIANTS = str.maketrans({"曾": "曽", "靱": "靭", "﨑": "崎", "ヶ": "ケ"
                           "齊": "斉", "濵": "浜", "髙": "高", "德": "徳", "槇": "槙",
                           # Kyoto's misses (rule B): MLIT itself spells 藪/薮 both ways
                           "祗": "祇", "薮": "藪", "壺": "壷", "檜": "桧", "籠": "篭", "竈": "竃", "龍": "竜",
-                          "淵": "渕", "秡": "祓"})
-STRING_VARIANTS = (("鍛治", "鍛冶"), ("廻リ", "廻り"))
+                          "淵": "渕", "秡": "祓",
+                          # Kōchi's misses (2026-10-02): its lists write the town 高埇
+                          # (U+57C7, outside JIS X 0208); MLIT's cp932 file writes 高埆
+                          "埇": "埆"})
+# Kōchi's: MHLW writes the same town in kana, 高そね (6 register rows unplaced
+# before; the brief's measurement)
+STRING_VARIANTS = (("鍛治", "鍛冶"), ("廻リ", "廻り"), ("高そね", "高埆"))
 
 
 # Kyoto's own private-use code points for 祇 (祇園). Private-use characters are
@@ -110,6 +115,20 @@ def norm_town(s):
         s = s.replace(a, b)
     # Kyoto's misses: MLIT writes 深草スゝハキ町 where permits repeat the kana
     s = re.sub(r"(.)[ゝヽ]", r"\1\1", s)
+    # Utsunomiya's misses (2026-10-02): an ASCII hyphen for the katakana long
+    # vowel (インタ-パ-ク, MLIT's インターパーク). Only between katakana, so a
+    # block number's hyphen is never touched.
+    s = re.sub(r"(?<=[ァ-ヺ])[-‐－―ｰ](?=[ァ-ヺ]|$)", "ー", s)
+    # Matsuyama's and Okayama's misses: katakana ニ for the numeral 二
+    # (ニ番町, 下石井ニ丁目)
+    s = re.sub(r"ニ(?=番町|丁目)", "二", s)
+    # Sakai's chōme is N丁 with no 目 (2026-10-02): MLIT names 780 of its
+    # town-chōme 翁橋町一丁, and the permits write 翁橋町1丁1-1, which the
+    # hyphen shift in join_city reads as 翁橋町1丁目 block 1 once MLIT's key
+    # says 丁目 too (block 33.7% to 95.8%). Only at the END of a town name:
+    # 八丁堀, 六丁の目 and 三丁町 are names, not chōme. No built city's MLIT
+    # file has the form; Toyama's one (婦中町十五丁) reads the same on both sides.
+    s = re.sub(r"([〇一二三四五六七八九十]+|[0-9]+)丁$", r"\1丁目", s)
     # Sapporo's grid (南16条西10丁目) takes the same rule before 条 as before 丁目.
     return re.sub(r"([〇一二三四五六七八九十]+)(丁目|条)",
                   lambda m: f"{kanji_number(m.group(1))}{m.group(2)}" if kanji_number(m.group(1)) else m.group(0), s)
@@ -235,7 +254,25 @@ ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", 
              "営業所所在地（所在地_連結標記", "施設所在地（所在地_連結標記）",
              # Shibuya's national-schema export (Tokyo, 2026-09-28): without it
              # the shared step read none of its 39,304 rows
-             "施設所在地_連結表記")
+             "施設所在地_連結表記",
+             # The 2026-10-02 batch, each list's own spelling, after every older
+             # one so a built city's choice of column never changes:
+             # Matsuyama's food CSVs (a FULL-WIDTH low line) and its XLS registers;
+             "所在地＿連結表記", "施設所在地１",
+             # Kumamoto's registers (without it city_rows read 0 rows of 2,714);
+             "営業所所在地1",
+             # Kagoshima's old-law list; Kōchi's full registers (from the town);
+             "営業所の所在地", "施設住所名称",
+             # Toyama's registers and food workbook (a merged header, see
+             # xlsx_rows); Utsunomiya's old-law list (its 申請者住所 is the
+             # operator's own address and is never read)
+             "所在地", "施設住所", "営業所")
+
+
+# Header cells as one key: Utsunomiya's general-laundry register pads its
+# headers with spaces ( 　名称, 2026-10-02). str.strip takes U+3000 too.
+def _head(c):
+    return "" if c is None else str(c).replace("\n", "").replace("\r", "").strip()
 
 
 TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "施設（種別）等", "種別", "業種",
@@ -247,24 +284,54 @@ TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の
 
 # 名称 last: the Tokyo catalogue's 生活衛生 registers (Taitō's, Shibuya's) name
 # the premises so, and without it their rows had no name (Tokyo, 2026-09-28)
-NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号", "施設の名称", "施設屋号", "名称")
+NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号", "施設の名称", "施設屋号", "名称",
+             # The 2026-10-02 batch: Matsuyama (food CSV, XLS registers), Toyama,
+             # Fukui's, Utsunomiya's and Kōchi's registers, Kitakyushu's old-law
+             # list (3,383 rows had no name without it), Sakai, Kagoshima
+             "施設名称1", "施設名称１", "施設名", "営業所名称", "屋号名称", "営業所の名称",
+             "営業所の名称、屋号又は商号")
 
 
-def xlsx_rows(data):
+def xlsx_rows(data, sheet=None, merged_header=False):
     """Every sheet that has an address column, header found by that column (a
-    sheet may open with title rows). Summary sheets without one are skipped."""
+    sheet may open with title rows). Summary sheets without one are skipped.
+
+    `sheet` reads one sheet only, by name (spaces ignored) or index: Fukui's
+    workbooks hold twelve month-end sheets, the newest first, and the newest
+    IS the list (2026-10-02). `merged_header`: a header cell merged across
+    several columns names only its first, so the unnamed columns after it are
+    joined into it - Toyama's food workbook writes 施設住所 over municipality,
+    town, number and building (H1:K1), and read cell by cell its address was
+    「富山市」 alone. Opt-in, since a built city's unnamed column is not a merge."""
     import openpyxl
     wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=True)
-    for ws in wb.worksheets:
+    sheets = wb.worksheets
+    if sheet is not None:
+        sheets = ([sheets[sheet]] if isinstance(sheet, int)
+                  else [ws for ws in sheets if ws.title.replace(" ", "").replace("　", "") == sheet])
+        if not sheets:
+            raise ValueError(f"no sheet {sheet!r} in the workbook")
+    for ws in sheets:
         head = None
         for r in ws.iter_rows(values_only=True):
-            cells = ["" if c is None else str(c).replace("\n", "").strip() for c in r]
+            cells = [_head(c) for c in r]
             if head is None:
                 if any(c in ADDR_COLS for c in cells):
                     head = cells
                 continue
-            if any(cells):
+            if not any(cells):
+                continue
+            if not merged_header:
                 yield dict(zip(head, cells))
+                continue
+            row, last = {}, None
+            for h, c in zip(head, cells):
+                if h:
+                    last = h
+                    row[h] = c
+                elif last is not None:
+                    row[last] += c
+            yield row
 
 
 def zip_member_name(info):
@@ -277,19 +344,25 @@ def zip_member_name(info):
         return info.filename
 
 
-def city_rows(path):
-    """Rows as dicts from a CSV, an XLSX, or XLSX members of a ZIP
-    ('file.zip::part' keeps only members whose name contains part)."""
+def city_rows(path, sheet=None, merged_header=False):
+    """Rows as dicts from a CSV, an XLSX, an old .xls, or XLSX members of a ZIP
+    ('file.zip::part' keeps only members whose name contains part). `sheet`
+    and `merged_header` are xlsx_rows'."""
     path, _, part = str(path).partition("::")
     if path.lower().endswith(".zip"):
         with zipfile.ZipFile(path) as zf:
             for info in zf.infolist():
                 nm = zip_member_name(info)
                 if nm.lower().endswith(".xlsx") and part in nm:
-                    yield from xlsx_rows(zf.read(info))
+                    yield from xlsx_rows(zf.read(info), sheet, merged_header)
         return
     if path.lower().endswith(".xlsx"):
-        yield from xlsx_rows(Path(path).read_bytes())
+        yield from xlsx_rows(Path(path).read_bytes(), sheet, merged_header)
+        return
+    if path.lower().endswith(".xls"):
+        # Matsuyama's registers are the old BIFF format (2026-10-02), which
+        # openpyxl cannot open; workbook_tables reads it through xlrd
+        yield from workbook_tables(path)
         return
     text = decode(Path(path).read_bytes())
     head = text.split("\n", 1)[0]
@@ -300,7 +373,39 @@ def city_rows(path):
         text = "\n".join(r[0] for r in csv.reader(io.StringIO(text)) if r)
         head = text.split("\n", 1)[0]
     delim = "\t" if head.count("\t") > head.count(",") else ","
-    yield from csv.DictReader(io.StringIO(text), delimiter=delim)
+    rows = csv.reader(io.StringIO(text), delimiter=delim)
+    first = next(rows, None)
+    if first is None:
+        return
+    hi, header, skipped = 0, first, []
+    # The header found by its address column, as xlsx_rows does (2026-10-02):
+    # Hakodate's registers open with one or two title rows, Matsuyama's
+    # new-law food list with an empty line. A file with no address column in
+    # its first 30 rows keeps its first line, as before.
+    if not any(_head(c) in ADDR_COLS for c in first):
+        skipped = [first]
+        for r in rows:
+            skipped.append(r)
+            if any(_head(c) in ADDR_COLS for c in r):
+                header, hi = r, len(skipped) - 1
+                break
+            if len(skipped) >= 30:
+                break
+        if hi == 0:
+            rows = iter(skipped[1:] + list(rows))
+    head = [_head(c) for c in header]
+    # csv.DictReader's own shape: blank lines skipped, missing cells None,
+    # surplus cells under the key None
+    for r in rows:
+        if not r:
+            continue
+        d = dict(zip(head, r))
+        if len(r) > len(head):
+            d[None] = r[len(head):]
+        elif len(r) < len(head):
+            for h in head[len(r):]:
+                d.setdefault(h, None)
+        yield d
 
 
 def _cell(v):
@@ -463,21 +568,42 @@ def load_city_isj(isj_dir):
     return blocks, chome
 
 
-def load_city_permits(path, pref, city):
+def load_city_permits(path, pref, city, wardless=False):
     """Own-format city lists: one address string naming the ward. Reads only the
     premises columns - never 営業者名 / 申請者名 / 開設者 (people)."""
-    return permits_from_rows(city_rows(path), pref, city)
+    return permits_from_rows(city_rows(path), pref, city, wardless)
+
+
+def in_term(rows, end_cols, as_of):
+    """The rows whose permit is still in term on `as_of` (a date, never today):
+    the first of `end_cols` that reads as a date (wareki or ISO) is the
+    expiry. An old-law list keeps permits past their expiry until its next
+    edition (Kitakyushu's 許可終了日: 1,373 of 3,383 rows end before
+    2026-10-02; Utsunomiya's 満了年月日3), so a build drops them against its
+    pinned as-of. A row with no readable expiry is kept."""
+    for r in rows:
+        end = next((d for d in (wareki_date(r.get(c)) for c in end_cols) if d), None)
+        if end is None or end >= as_of:
+            yield r
 
 
 VARIATION_SELECTORS = re.compile("[︀-️\U000e0100-\U000e01ef]")
 
 
-def permits_from_rows(rows, pref, city):
-    """load_city_permits for rows already read - Kyoto's rebuilt register."""
+def permits_from_rows(rows, pref, city, wardless=False):
+    """load_city_permits for rows already read - Kyoto's rebuilt register.
+
+    `wardless`: a city with no wards (japan.CITIES' "wardless"; the 2026-10-02
+    batch). Its address is never split at a 区, because its neighbourhoods end
+    in one (Toyama's 太田北区, 五福六区; Fukui's 土地区画整理事業) and MLIT keys
+    every town under an empty ward."""
     out = []
     for r in rows:
         addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
         a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
+        # Utsunomiya's beauty register (2026-10-02): a line break inside the
+        # address, the building after it; the parse below reads one line
+        a = a.replace("\r", "").replace("\n", "")
         # Kyoto's misses (2026-09-28): an ideographic variation selector after a
         # kanji (高辻 + U+E0100 in 20 rows) picks a glyph, never a different town
         a = VARIATION_SELECTORS.sub("", a)
@@ -489,7 +615,9 @@ def permits_from_rows(rows, pref, city):
             a = a[i + len(city):]
         if city == "京都市":
             a = a.translate(KYOTO_GAIJI)
-        if city.endswith("区"):
+        if wardless:
+            ward, rest = "", a
+        elif city.endswith("区"):
             # a Tokyo special ward's own list: the ward IS the municipality, and
             # Taitō's addresses start at the town (浅草一丁目…)
             ward, rest = city, a
@@ -528,8 +656,10 @@ def permits_from_rows(rows, pref, city):
                     "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
                     # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
                     # the city") - Sendai's festival stalls (仮設, 臨時) are written so -
-                    # and 無店舗 ("no shop"): Meguro's laundry pick-ups at 目黒区内
-                    "mobile": not addr.strip() or "一円" in addr
+                    # and 無店舗 ("no shop"): Meguro's laundry pick-ups at 目黒区内;
+                    # Matsuyama writes "within the health centre's area" (保健所管内
+                    # / 保健所管轄内) for its vehicles and stalls (277 food rows)
+                    "mobile": not addr.strip() or "一円" in addr or "保健所管" in addr
                     or any(w in next((r[c] for c in TYPE_COLS if r.get(c)), "") for w in ("自動車", "無店舗"))})
     return out
 
@@ -608,8 +738,19 @@ def join_city(permits, blocks, chome):
 # Tokyo's (2026-09-28): the catalogue registers' 法人代表者氏名 (Taitō, Shibuya),
 # a company's representative - a person, as 代表者名. The national-schema food
 # lists (Chūō, Minato, Shinjuku, Kōtō, Shibuya) carry 法人名 only, as MHLW's do.
+# The 2026-10-02 batch, each list's spelling (without them the rule compared
+# nothing there): Matsuyama's 申請者個人名 (food) and 開設者氏名 (registers;
+# Kumamoto's and Hakodate's too); Kumamoto's 代表者氏名（法人のみ）; Fukui's
+# 申請者名(法人名) (food, half-width brackets), 申請者名（法人名） (registers,
+# full-width) and 法人代表者名; Utsunomiya's registers' 開設者 and 代表者;
+# Kitakyushu's 代表者氏名. And Matsuyama's registers' 開設者法人名 / 営業者法人名:
+# filled on every row, with no company marker on 443 of 485 barbers, so a
+# sole trader's own name sits there and 開設者氏名 holds only a company's
+# representative (one laundry flagged, as the brief measured).
 OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名", "営業者氏名", "開設者法人名（開設者氏名）",
-                 "申請者＿申請者名", "申請者氏名", "法人代表者氏名")
+                 "申請者＿申請者名", "申請者氏名", "法人代表者氏名",
+                 "申請者個人名", "開設者氏名", "代表者氏名（法人のみ）", "申請者名(法人名)", "申請者名（法人名）",
+                 "法人代表者名", "開設者", "代表者", "代表者氏名", "開設者法人名", "営業者法人名")
 
 
 def _name_key(s):

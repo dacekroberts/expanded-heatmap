@@ -74,8 +74,10 @@ RULES = [
     ("bento shop", "Retail", r"^弁当販売"),
     ("other food and drink sales", "Retail", r"その他の食料・飲料販売|^他食販(店舗|包装)"),
     # --- Food service
-    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶)"),
-    ("café", "Food service", r"喫茶店営業|^喫茶店舗"),
+    # Fukui's old-law permits spell the type short, 飲食店 and 喫茶店 (93
+    # restaurants, 2026-10-02): without the whole-value forms they fell to "no rule"
+    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶)|^飲食店$"),
+    ("café", "Food service", r"喫茶店営業|^喫茶店舗|^喫茶店$"),
 ]
 _COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in RULES]
 
@@ -101,8 +103,10 @@ FORM_RULES = [
     # 2026-09-28; 81 in Fukuoka). Tokyo has no ろ店; its two 屋台 rows are
     # fixed bento stalls in office plazas (京橋, 六本木; MHLW, 2026-09-28).
     ("yatai: a fixed street stall (Fukuoka's 屋台)", "Food service", r"ろ店|屋台"),
+    # 事業場食堂 / 事業所食堂, a workplace canteen: Matsuyama's old-law 業態
+    # (22 rows, 2026-10-02), as 社員食堂 elsewhere
     ("institutional catering", None, r"給食|社員食堂|職員食堂|会社食堂|学生食堂|学校食堂|寮食堂|老人ホーム|福祉施設|"
-                                     r"栄養管理室|病院|保育園|幼稚園|小学校"),
+                                     r"栄養管理室|病院|保育園|幼稚園|小学校|事業場食堂|事業所食堂"),
     ("inside accommodation", None, r"旅館|ホテル"),
     ("entertainment venue", None, r"カラオケ|麻雀|遊技場|ネットカフェ|漫画喫茶"),
     # (owner, 2026-09-29) the same two rules as RULES, in the filer's words:
@@ -185,7 +189,8 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
                   ("菓子製造業", "Retail"), ("菓子製造業（期間申請）", None), ("⑪ 菓子製造業", "Retail"),
                   ("そうざい製造業", "Retail"), ("複合型そうざい製造業", None), ("⑬ その他の食料・飲料販売業", "Retail"),
                   ("⑫ 自動販売機による販売業（…）", None), ("コップ式自動販売機", None), ("食肉処理業", None),
-                  ("喫茶店営業（自動販売機）", None), ("他食販自販", None), ("乳販自販", None)):
+                  ("喫茶店営業（自動販売機）", None), ("他食販自販", None), ("乳販自販", None),
+                  ("飲食店", "Food service"), ("喫茶店", "Food service"), ("飲食店（自動車）", None)):
     assert classify({VALUE_COLUMN: _v}) == _want, (_v, classify({VALUE_COLUMN: _v}), _want)
 assert classify({VALUE_COLUMN: "取次所", "source": "laundry"}) == "Personal services"
 assert classify({VALUE_COLUMN: "無店舗取次店", "source": "laundry"}) is None
@@ -200,6 +205,7 @@ assert classify({VALUE_COLUMN: "一般理容所", "source": "barber"}) == "Perso
 # 業態 (Fukuoka): a form excludes, or makes a restaurant a shop, but never brings a row in
 for _v, _f, _want in (("① 飲食店営業", "自動車200L", None), ("① 飲食店営業", "仮設営業（季節的営業）", None),
                       ("① 飲食店営業", "学校給食", None), ("① 飲食店営業", "社員食堂", None),
+                      ("飲食店営業", "事業場食堂", None),
                       ("飲食店営業", "旅館", None), ("① 飲食店営業", "コンビニエンスストア", "Retail"),
                       ("① 飲食店営業", "居酒屋", "Food service"), ("① 飲食店営業", float("nan"), "Food service"),
                       ("⑪ 百貨店、総合スーパー", "ドラッグストア", "Retail"), ("食肉処理業", "スーパー", None),
