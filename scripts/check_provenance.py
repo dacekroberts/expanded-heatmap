@@ -192,6 +192,8 @@ SLUG_OVERRIDES = {
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",
+    # Japan batch (2026-10-02): the macron dropped from the package name.
+    "Kōchi": "kochi",
     # Brazil: accents dropped from the package name, and the regional pages'
     # suffix, as for Lille.
     "São Paulo": "sao_paulo",
