@@ -110,8 +110,15 @@ Village" and "Dudley Street, Guns Village"). Alias it.
 - **Stub check:** Birmingham alone holds 16 of 35 stops (46%), a stub.
   Sandwell has 10 and Wolverhampton 9 (the screen's assignment by stop
   coordinates).
-- **CRS:** EPSG:27700; UTM 30N (EPSG:32630) is the fallback.
-- **Region:** `"Europe"`.
+- **CRS:** UTM 30N **EPSG:32630**, as London's, Glasgow's and Newcastle's
+  `CRS_PROJECTED` (corrected 2026-10-02 from the UK lead's report).
+  EPSG:27700 is only Code-Point Open's source CRS.
+- **NaPTAN files every tram stop under ATCO area 940** (the national tram
+  area), not the local area codes; select the build's stops from 940 by
+  location (UK lead, 2026-10-02).
+- **Region:** the UK's own region, with `label_tier: "minor"` (owner,
+  2026-10-02); until the integration pass creates it, `"Europe"`. See the
+  kit's "The UK sub-region and the minor label tier".
 
 ## Still unknown
 
@@ -157,7 +164,7 @@ Village" and "Dudley Street, Guns Village"). Alias it.
   },
   {
     "id": "birmingham-projected-crs-fallback",
-    "claim": "Birmingham's derived UTM zone is 30N (EPSG:32630), the fallback to EPSG:27700",
+    "claim": "Birmingham's projected CRS is UTM 30N (EPSG:32630), as the built UK cities'",
     "kind": "utm_zone_from_longitude",
     "lon": -1.8904,
     "expect": "EPSG:32630"

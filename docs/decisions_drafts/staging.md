@@ -4,6 +4,22 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - UK six briefs corrected from the UK lead's report
+
+- **The UK lead's report, after Manchester's build on page 156:**
+  - **CRS.** Every brief said "EPSG:27700, as London". London's, Glasgow's
+    and Newcastle's `CRS_PROJECTED` is UTM 30N (EPSG:32630). EPSG:27700 is
+    only Code-Point Open's source CRS. Corrected in all six, together with
+    each CRS check's claim text.
+  - **Metrolink.** TfGM's network map now names nine colour lines, and five
+    have no OSM relation since the 14 September change. Manchester's brief
+    is marked corrected and points to `docs/decisions_drafts/uk-six.md`.
+  - **NaPTAN** files every tram stop under ATCO area 940. Added to all six.
+- **Each brief's region line** now names the UK region and the minor tier
+  (owner, 2026-10-02), which superseded "Europe".
+- **Numbers.** The UK six hold notices 84–96, so the Japan batch starts at
+  97 or later. Pages: UK 156–161, Japan 162–173.
+
 ### 2026-10-02 - The Japan batch released to one build session with agents; page numbers pre-assigned (owner)
 
 - **The owner: "yes, write the kit, worktree and prompt"**, after staging's
