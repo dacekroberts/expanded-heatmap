@@ -67,8 +67,8 @@ st.markdown(
     """
 **The tram**
 
-- One tram line is drawn, **Odense Letbane**, labelled on the map and in the legend, redrawn from
-  OpenStreetMap's route geometry, in a colour this project chose, since the source records none.
+- One tram line is drawn, **Odense Letbane**, labeled on the map and in the legend, redrawn from
+  OpenStreetMap's route geometry, in a color this project chose, since the source records none.
 - Buses and regional trains are not drawn.
 - Odense has no metro, so its tram is its rapid transit, as in Riga. Every tram stop here gets
   rings.

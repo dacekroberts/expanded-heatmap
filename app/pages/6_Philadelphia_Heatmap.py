@@ -57,7 +57,7 @@ st.markdown(
   **Market–Frankford Line** and **Broad Street Line** (with its Ridge Spur), which run
   grade-separated, and the **Subway–Surface Trolleys** and **Girard Avenue Trolley**, which run in
   the street.
-- Each is labelled directly on the map and in the legend, and the trolleys' five branches are drawn
+- Each is labeled directly on the map and in the legend, and the trolleys' five branches are drawn
   wherever they diverge.
 - **11th St on the Market–Frankford Line is not drawn**: SEPTA closed it on 5 September 2026 to
   rebuild it with elevators and expects it back on 30 August 2027. Until then L trains run through
@@ -78,17 +78,17 @@ st.markdown(
 **The businesses**
 
 - **Two categories here, not three: Personal services is missing from the data, not just from the
-  map.** Philadelphia licenses activities, not businesses, and has no salon, barber or nail licence
+  map.** Philadelphia licenses activities, not businesses, and has no salon, barber or nail license
   of any kind, so, as in Boston, this category has no source to draw on.
 - Retail is narrow for a related reason. What the city licenses is food retail, so Retail here
   means bodegas, mini-markets and beer distributors, plus the big-box tier (Target, CVS, Dollar
   Tree, Ross), which appears only because those stores also sell packaged food.
-- A clothing shop, bookshop or hardware store needs no licence, so it is simply not here; pavement
+- A clothing shop, bookshop or hardware store needs no license, so it is simply not here; pavement
   newsstands mostly are not either, since the register holds neither a coordinate nor an address
   for them.
 - Read the balance between the two categories as a fact about Philadelphia's licensing, not about
   its high streets.
-- Where one business holds several licences (a restaurant with pavement seating holds two), it is
+- Where one business holds several licenses (a restaurant with pavement seating holds two), it is
   counted once.
 """
 )

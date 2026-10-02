@@ -75,14 +75,14 @@ st.markdown(
     """
 **The métro and trams**
 
-- Five RTM lines are drawn — **Métro 1 and 2, Tramway 1, 2 and 3** — each labelled on the map and
+- Five RTM lines are drawn — **Métro 1 and 2, Tramway 1, 2 and 3** — each labeled on the map and
   in the legend, redrawn from the operator's own published geometry.
 - The map covers the **commune of Marseille**, and unlike most cities here that costs it nothing:
   every station on all five lines falls inside the boundary.
 - What the boundary does exclude is a *sixth* rail line in the same feed — the tram at Aubagne, a
   separate town with its own network — and those seven stations are listed below.
 - Two other modes are absent by rules this project applies everywhere: TER regional trains are
-  commuter rail, and ferries are not rail. Marseille's harbour shuttles are closer to urban
+  commuter rail, and ferries are not rail. Marseille's harbor shuttles are closer to urban
   transit than that rule usually implies.
 
 **The businesses**

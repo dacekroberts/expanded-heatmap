@@ -54,10 +54,10 @@ NUMBER_WORDS = {w: i for i, w in enumerate(
 
 FIELDS = {
     "rail_extra": {"Trams", "Suburban rail", "Both", "—"},
-    "record_kind": {"Licence register", "Permit registers", "Street survey or census",
+    "record_kind": {"License register", "Permit registers", "Street survey or census",
                     "National register", "Tax register", "Property register",
-                    "Food licences", "Property register and permits",
-                    "Property register and licences",
+                    "Food licenses", "Property register and permits",
+                    "Property register and licenses",
                     # Berlin: IHK Berlin's Gewerbedaten, the chamber's membership
                     # list as premises points (owner, 2026-09-28).
                     "Chamber of commerce register",
@@ -67,7 +67,7 @@ FIELDS = {
                     # Kitchener–Waterloo: the Region's public-health inspections
                     # cover food and personal services (owner, 2026-09-30).
                     "Health inspection register"},
-    # "Food premises only" was "Food licences only" until London, whose register
+    # "Food premises only" was "Food licenses only" until London, whose register
     # is inspections, not licences; renamed for Hong Kong too (owner, 2026-09-28).
     # "Personal services thin": Berlin, whose chamber register has no crafts
     # (owner, 2026-09-28).

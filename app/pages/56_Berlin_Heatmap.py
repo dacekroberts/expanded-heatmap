@@ -67,9 +67,9 @@ st.markdown(
 **The lines**
 
 - Twenty-five lines are drawn — **U-Bahn U1 to U9** and the **S-Bahn's sixteen lines**, the Ring
-  (S41 and S42) among them — each labelled on the map and in the legend, redrawn from the
+  (S41 and S42) among them — each labeled on the map and in the legend, redrawn from the
   Berlin-Brandenburg transport association's (VBB) own timetable geometry.
-- The colours are close to the operators' but not the same: several S-Bahn lines share one colour
+- The colors are close to the operators' but not the same: several S-Bahn lines share one color
   on the official map, and each line here needs its own.
 - **The U6 north of Kurt-Schumacher-Platz is closed for rebuilding** until about August 2027, so
   its five stations to Alt-Tegel are not drawn.
@@ -81,7 +81,7 @@ st.markdown(
 
 - Businesses come from the **Berlin Chamber of Industry and Commerce (IHK Berlin)**, which
   publishes its members' business premises as points, each with its economic activity.
-- It publishes no names, so each dot is labelled with its kind of business.
+- It publishes no names, so each dot is labeled with its kind of business.
 - **Craft businesses belong to a different chamber and are not in it**: hairdressers, laundries
   and dry cleaners are almost entirely missing, and bakers and butchers are thin. So Personal
   services shows only part of what is on the street: beauty and nail salons, spas, saunas and
@@ -90,7 +90,7 @@ st.markdown(
 **Reading the map**
 
 - **Read the density as a register, not a street survey.** Closures and moves reach the register
-  late, and a business can be registered where there is no shop — an office, a business centre or
+  late, and a business can be registered where there is no shop — an office, a business center or
   a home.
 - General non-food retail, mostly traders selling online or at markets, is left off; a web shop
   that names what it sells cannot be told apart from a shop.

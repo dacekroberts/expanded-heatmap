@@ -67,11 +67,11 @@ st.markdown(
 **The lines**
 
 - Twenty-one lines are drawn, **GVB's metro lines 50 to 54 and its sixteen tram lines**, each
-  labelled on the map and in the legend, redrawn from GVB's timetable data, as published in the
-  national feed OVapi compiles, in GVB's own colours.
+  labeled on the map and in the legend, redrawn from GVB's timetable data, as published in the
+  national feed OVapi compiles, in GVB's own colors.
 - Five tram lines are shown a shade lighter or darker, because GVB gives some lines the same
-  colour (6 and 25, 19 and 29) and a few sit too close to a metro line to tell apart.
-- Trams stop every few hundred metres, so on each tram line's outer stretches only about
+  color (6 and 25, 19 and 29) and a few sit too close to a metro line to tell apart.
+- Trams stop every few hundred meters, so on each tram line's outer stretches only about
   one stop per half mile is drawn as a station; metro stations, interchanges and each line's last
   stop inside the city are always drawn.
 - Tram 3 (no service in this timetable period), the museum tram, ferries and national-rail (NS)
@@ -104,7 +104,7 @@ st.markdown(
   shop unit in twenty stood empty at the start of 2026, by the city's own statistics, and no open
   source says which.
 - Takeaways that need no hospitality permit are thin on the map, and cafés inside a sports club,
-  community centre, theatre or hotel are not shown.
+  community center, theatre or hotel are not shown.
 """
 )
 

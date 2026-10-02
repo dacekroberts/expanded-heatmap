@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- One Fil Bleu tram line is drawn, **Tram A**, labelled on the map and in the legend, from the operator's own published timetable feed.
+- One Fil Bleu tram line is drawn, **Tram A**, labeled on the map and in the legend, from the operator's own published timetable feed.
 - Tours has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 380 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Tours**. **Tram A runs past it**, so seven stops beyond the boundary are left out: Bulle D'o, Joué H. de Ville, Lycée J. Monnet, Pont Volant, Rabière, Rotière and République in Joué-lès-Tours.

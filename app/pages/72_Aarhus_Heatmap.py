@@ -67,8 +67,8 @@ st.markdown(
 - **Letbane line L2** is drawn on the stretch built as a city tramway: from Aarhus H through
   Nørreport, the university and Skejby to Lisbjerg and Lystrup, with its short branch to
   Lisbjergskolen.
-- It is labelled on the map and in the legend, and redrawn from OpenStreetMap's route geometry in
-  the colour OpenStreetMap records for the Letbane.
+- It is labeled on the map and in the legend, and redrawn from OpenStreetMap's route geometry in
+  the color OpenStreetMap records for the Letbane.
 - Line L1 shares its first stops, Aarhus H to Skolebakken, and also serves Lystrup.
 - The Letbane also runs beyond the city tramway on two converted railway lines, south to Odder and
   north-east to Grenaa, and those are not drawn. Midttrafik's own timetables show trains there

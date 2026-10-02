@@ -77,8 +77,8 @@ st.markdown(
     """
 **The lines**
 
-- Two lines are drawn — **Metrô-DF's Linha Verde and Linha Laranja** — each labelled on the
-  map and in the legend, in the colours OpenStreetMap records.
+- Two lines are drawn — **Metrô-DF's Linha Verde and Linha Laranja** — each labeled on the
+  map and in the legend, in the colors OpenStreetMap records.
 - The lines and stations are OpenStreetMap's.
 - Two stations still being built, 104 Sul and Onoyama, are not drawn.
 - The map covers the whole **Federal District**, which is a single município.
@@ -91,7 +91,7 @@ st.markdown(
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of
   the enumerator's words, and the names were not checked against any business register.
-- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
   dot.
 - At an address that is also someone's home, the dot shows only its category.
 - Brasília's addresses name a block rather than a door, so "an address that is also a home"

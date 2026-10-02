@@ -82,7 +82,7 @@ st.markdown(
     """
 **The métro**
 
-- Two STAR lines are drawn — **Métro a and Métro b** — each labelled on the map and in the legend,
+- Two STAR lines are drawn — **Métro a and Métro b** — each labeled on the map and in the legend,
   redrawn from the operator's own published geometry.
 - The map covers the **commune of Rennes**. Métro a runs entirely inside it.
 - **Métro b runs past it at both ends**, so four of its fifteen stations are left out: Atalante and

@@ -57,7 +57,7 @@ st.markdown(
 
 - Three lines are drawn: the Tunnelbana's **Gröna linjen** (routes T17, T18 and T19), **Röda
   linjen** (T13 and T14) and **Blå linjen** (T10 and T11), redrawn from OpenStreetMap. Each line
-  is labelled once, and the legend names its routes.
+  is labeled once, and the legend names its routes.
 - Pendeltåg commuter trains, Roslagsbanan, Saltsjöbanan and the trams are not drawn.
 - The map covers **Stockholms kommun**, the City of Stockholm. The lines' outer stations in Solna,
   Sundbyberg, Danderyd, Huddinge and Botkyrka lie outside it and are not drawn. They are listed

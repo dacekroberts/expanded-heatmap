@@ -80,7 +80,7 @@ st.markdown(
   date; the data records no closings, so an inspection is the only sign that a place still
   trades. A few premises opened after the data's date and have no type yet; they are shown as
   restaurants, or as personal services.
-- Kitchens in schools, daycares, care homes, churches, community centres and workplaces are
+- Kitchens in schools, daycares, care homes, churches, community centers and workplaces are
   left out by type, and so are caterers without a shop, banquet halls and food warehouses.
 - Campus and hospital outlets, arena and stadium stands, clubs, cinemas and other venues,
   hotels, pharmacies, mobile units and the Kitchener Market's Saturday stalls are left out

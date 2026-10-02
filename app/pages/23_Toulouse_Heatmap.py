@@ -77,14 +77,14 @@ st.markdown(
     """
 **The network**
 
-- Four Tisséo lines are drawn — **Métro A and B, Tramway T1, and Téléo** — each labelled on the
+- Four Tisséo lines are drawn — **Métro A and B, Tramway T1, and Téléo** — each labeled on the
   map and in the legend, redrawn from the operator's own published geometry.
 - **Téléo is a cable car**, and it is the first thing on this site that is not a train. It is
   drawn because Tisséo runs and tickets it as it does the métro, it crosses the Garonne where no
   other line does, and one of its three stations is a Métro B interchange.
 - The map covers the **commune of Toulouse**, and here that costs something real. Métro A loses
   one station and Métro B one; **Tramway T1 loses twelve of its twenty-five** — the whole branch
-  out through Blagnac and Beauzelle, the Airbus works and the exhibition centre with it. All
+  out through Blagnac and Beauzelle, the Airbus works and the exhibition center with it. All
   fourteen are listed below.
 - Blagnac's businesses are in the same national register this map reads, so leaving them out is a
   choice rather than a limit of the data: the map keeps to the commune so that Toulouse can be

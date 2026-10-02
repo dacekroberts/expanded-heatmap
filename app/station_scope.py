@@ -47,7 +47,7 @@ def classify(reason, city):
 
     `outside` covers two things a reader sees as one: a station standing in
     another municipality, and a line in the same feed that belongs to a
-    neighbouring town's own network - Marseille's file carries seven stations
+    neighboring town's own network - Marseille's file carries seven stations
     of "Aubagne's tram, not Marseille's". Both mean the station is not in the
     city this map is built from.
 

@@ -44,7 +44,7 @@ st.markdown(
 **The lines**
 
 - Three lines are drawn: the **Luas Red Line**, the **Luas Green Line** and the **DART**, each
-  labelled on the map and in the legend.
+  labeled on the map and in the legend.
 - Commuter and InterCity trains are not drawn. Iarnrod Eireann runs them over the same tracks,
   but they are not urban rail, and most maps on this site leave commuter rail out.
 - The map covers **four local authorities** - Dublin City, Fingal, South Dublin and Dun

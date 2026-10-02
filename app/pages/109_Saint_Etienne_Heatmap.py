@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Three STAS tram lines are drawn, **Tram T1, Tram T2 and Tram T3**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Three STAS tram lines are drawn, **Tram T1, Tram T2 and Tram T3**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Saint-Étienne has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 320 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Saint-Étienne**. **Tram T1 and Tram T3 run past it**, so five stops beyond the boundary are left out: Cite Agriculture, Hopital Nord, Lycee S. Weil, Musee Art Mod. and Parc-Champirol in Saint-Priest-en-Jarez.

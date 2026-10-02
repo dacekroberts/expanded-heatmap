@@ -60,7 +60,7 @@ st.markdown(
   over the other; the Tokaido and Shonan-Shinjuku lines run in the wards only on track drawn here,
   and are not drawn separately.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
-  English are from OpenStreetMap. Line colours are this project's own, not the operators'.
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside the 23 special wards count, because the business data covers the wards
   alone: lines running on into Saitama, Chiba, Kanagawa and the Tama area are cut at the ward line.
 - The Shinkansen is not drawn, nor are the Narita Sky Access and the Saitama Railway, each with a
@@ -68,7 +68,7 @@ st.markdown(
 
 **The wards**
 
-- Each of the 23 special wards runs its own health centre and publishes its own list of
+- Each of the 23 special wards runs its own health center and publishes its own list of
   food-business permits, or none.
 - Eight publish a list usable here: Chuo, Minato, Shinjuku, Taito, Koto, Meguro, Setagaya and
   Shibuya.
@@ -111,7 +111,7 @@ st.markdown(
 - Barbers, beauty salons and laundries come from the registers of Minato, Taito, Meguro and
   Shibuya. Seven more wards publish such registers, but a ward without a food list stays hollow,
   because food is most of what a station counts.
-- Japan has no general business licence, so shops other than food shops do not appear. The Food
+- Japan has no general business license, so shops other than food shops do not appear. The Food
   shops layer is food retail only, by permit type: bakeries and confectioners, delis, butchers and
   fishmongers.
 - Shops selling only packaged food have filed a notification rather than a permit since 2021, and
@@ -121,7 +121,7 @@ st.markdown(
 
 - The lists give an address but no location. Each address is matched to MLIT's address reference
   data, which places 99.7% at their street block; where only the town can be found, the dot sits
-  at its centre, and a national filing that does not match is placed at its own coordinates.
+  at its center, and a national filing that does not match is placed at its own coordinates.
 - Where a trade name is its operator's own name, the dot shows its permit type instead. Most of
   the lists name only companies, and two wards withhold individual operators' names themselves,
   so this check covers only the lists that name their operators.

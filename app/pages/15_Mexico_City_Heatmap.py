@@ -49,7 +49,7 @@ st.markdown(
 
 - Metro CDMX runs twelve lines — Líneas 1 to 9, A, B and 12 — and this map draws all of them
   alongside the STE Tren Ligero, which continues south from Tasqueña to Xochimilco.
-- Each line is labelled directly on the map in the name its riders use, and appears in the
+- Each line is labeled directly on the map in the name its riders use, and appears in the
   legend.
 - Only stations inside Ciudad de México are mapped. Líneas A and B run north and east into
   the State of Mexico, and those stations are left out because this map has no business data
@@ -63,12 +63,12 @@ st.markdown(
 
 **The businesses**
 
-- **The businesses are a census, not a licence register, and that changes what the map
-  means.** Most cities here are built from business licences: a record of who registered.
+- **The businesses are a census, not a license register, and that changes what the map
+  means.** Most cities here are built from business licenses: a record of who registered.
   Mexico City is built from DENUE, the national business register of INEGI (Mexico's
   statistics agency), compiled by surveying premises and recording the name on the shopfront.
-- It is far more complete than a licence register, so the density shown here is **not
-  comparable** with the licence-register cities' — read it as a fact about how the data was
+- It is far more complete than a license register, so the density shown here is **not
+  comparable** with the license-register cities' — read it as a fact about how the data was
   collected as much as about Mexico City's streets.
 - Fixed premises only. DENUE separately records semi-fixed units — stalls and street posts —
   and those are not shown, although street commerce is a real and substantial part of the

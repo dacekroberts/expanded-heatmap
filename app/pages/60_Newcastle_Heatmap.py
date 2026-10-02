@@ -57,9 +57,9 @@ st.markdown(
 **The lines**
 
 - Two lines are drawn, the Tyne and Wear Metro's **Green line** (Airport to South Hylton) and
-  **Yellow line** (St James to South Shields, round the coast), each labelled on the map and
+  **Yellow line** (St James to South Shields, round the coast), each labeled on the map and
   redrawn from OpenStreetMap.
-- The colours are close to Nexus's but not the same, so they stay distinct from the dot colours.
+- The colors are close to Nexus's but not the same, so they stay distinct from the dot colors.
 - Between Pelaw and Sunderland the Green line runs on track shared with national rail trains; its
   stations are all drawn, as the Metro serves them. Northern's national rail trains are not drawn.
 - The map covers the five districts of **Tyne and Wear**: Newcastle upon Tyne, Gateshead, North
@@ -83,7 +83,7 @@ st.markdown(
 - **Read the density as a register, not a street survey.** A premises stays listed until the
   council removes it.
 - Most premises sit at the register's own map point. Where it gives none, a business with a full
-  postcode is placed at the centre of its postcode, usually within a few dozen metres of its door.
+  postcode is placed at the center of its postcode, usually within a few dozen meters of its door.
 - About one food storefront in fourteen has neither and is not shown. A business run from a
   private address, or registered at a flat, is never placed.
 - **About half the storefronts sit within a station ring.**

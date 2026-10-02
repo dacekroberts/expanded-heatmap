@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Two Bibus tram lines and the cable car are drawn, **Tram A, Tram B and Téléphérique**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Two Bibus tram lines and the cable car are drawn, **Tram A, Tram B and Téléphérique**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Brest has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 430 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Brest**. **Tram A runs past it**, so two stops beyond the boundary are left out: Porte de Gouesnou in Gouesnou; Porte de Guipavas in Guipavas.

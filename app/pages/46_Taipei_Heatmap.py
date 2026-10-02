@@ -68,7 +68,7 @@ st.markdown(
 - Twelve lines are drawn — **Taipei Metro's Wenhu, Tamsui–Xinyi, Songshan–Xindian,
   Zhonghe–Xinlu and Bannan lines, with the Xinbeitou and Xiaobitan branches; New Taipei's Circular
   and Sanying lines and the Danhai and Ankeng light rail; and the Taoyuan Airport MRT** — each
-  labelled on the map and in the legend, in the colours OpenStreetMap carries for them.
+  labeled on the map and in the legend, in the colors OpenStreetMap carries for them.
 - Taipei and New Taipei are mapped together: New Taipei surrounds Taipei, and most lines run
   through both.
 - Routes and stations come from OpenStreetMap.

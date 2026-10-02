@@ -62,8 +62,8 @@ st.markdown(
     """
 **The lines**
 
-- METRORail's **Red Line**, **Green Line** and **Purple Line** are drawn. Each is labelled on the
-  map and in the legend, and redrawn from OpenStreetMap's route geometry in this map's own colours.
+- METRORail's **Red Line**, **Green Line** and **Purple Line** are drawn. Each is labeled on the
+  map and in the legend, and redrawn from OpenStreetMap's route geometry in this map's own colors.
 - The Red Line runs every 6 minutes through the day, and the Green and Purple Lines every 12.
 - All 40 stations are inside the City of Houston, so none is left out.
 - Downtown the Green and Purple Lines run one way on Capitol and Rusk Streets, so Central Station's

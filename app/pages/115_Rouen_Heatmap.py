@@ -80,7 +80,7 @@ st.markdown(
     """
 **The métro**
 
-- One Astuce line is drawn, **Métro**, labelled on the map and in the legend, its stops from the Normandie region's published timetable feed and its track from OpenStreetMap.
+- One Astuce line is drawn, **Métro**, labeled on the map and in the legend, its stops from the Normandie region's published timetable feed and its track from OpenStreetMap.
 - Rouen's métro is a light rail running mostly on the street, so every stop gets rings.
 - **Stops sit closer together than metro stations**, a median of 380 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **five communes of the Métropole Rouen Normandie** that the métro serves.

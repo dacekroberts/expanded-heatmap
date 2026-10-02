@@ -63,9 +63,9 @@ st.markdown(
     """
 **The lines**
 
-- Five lines are drawn, each labelled on the map and in the legend in the operators' colours:
+- Five lines are drawn, each labeled on the map and in the legend in the operators' colors:
   **Busan Metro Lines 1 to 4 and the Busan–Gimhae LRT**. Line 4's blue is darkened so it stays
-  distinct from the Retail dots, and Line 4 runs on rubber tyres (a light metro).
+  distinct from the Retail dots, and Line 4 runs on rubber tires (a light metro).
 - Routes and stations come from OpenStreetMap, because no transit feed is published.
 - Businesses are counted around stations inside Busan only, since the permit data covers Busan
   only; Line 2 and the LRT are still drawn to their ends in Yangsan and Gimhae.
@@ -81,7 +81,7 @@ st.markdown(
   retail, bakeries, butchers, food shops, shops licensed to sell tobacco, department stores and
   marts, and health-food shops.
 - Korea licenses these trades rather than retail in general, so a clothes shop, a bookshop or a
-  phone shop needs no such permit and is absent: **the Retail category leans towards food and
+  phone shop needs no such permit and is absent: **the Retail category leans toward food and
   convenience stores**. Read the balance between categories as a fact about Korea's licensing,
   not about Busan's streets.
 - Convenience stores and confectioners that hold a café permit are counted as shops.

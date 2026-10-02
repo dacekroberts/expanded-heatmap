@@ -172,8 +172,8 @@ def _hex(rgb):
 
 def _dot_svg(colour, fill):
     """One dot as SVG in a 24-unit box (2 units = 1 px at DOT_PX): a 1 px ring
-    in the surface colour, then the mode colour as a disc, a bottom-half level
-    or a 2 px ring around a pale centre."""
+    in the surface color, then the mode color as a disc, a bottom-half level
+    or a 2 px ring around a pale center."""
     c, pale = _hex(colour), _hex(OUTLINE)
     body = f'<circle cx="12" cy="12" r="12" fill="{pale}"/><circle cx="12" cy="12" r="10" fill="{c}"/>'
     if fill == "narrowed":
@@ -704,7 +704,7 @@ elif len(REGIONS) > 1:
         # East Asia (Hong Kong, 2026-09-24) was the first one-city region.
         f"Showing {_n_here} {'city' if _n_here == 1 else 'cities'} in {region} — "
         f"{_elsewhere} elsewhere. Every city is on the map: switch region "
-        "above to re-centre, or use the list below, which always has all of "
+        "above to re-center, or use the list below, which always has all of "
         "them."
     )
 

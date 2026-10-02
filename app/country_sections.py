@@ -253,7 +253,7 @@ def select_country(key):
     ?country= and writing its choice back to the URL so the view can be
     shared. Returns the chosen country.
 
-    Horizontal st.radio rows labelled "<Name> (<n cities>)", the same control
+    Horizontal st.radio rows labeled "<Name> (<n cities>)", the same control
     as the Overview's region selector (cleanup, 2026-10-01). The owner chose the
     two-step form over one radio of every country on 2026-10-01: at 375 px the
     single radio was 396 px tall, the region row is 127 px and the tallest

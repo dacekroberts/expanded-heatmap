@@ -85,7 +85,7 @@ st.markdown(
 - Addresses with no street number, and streets the two sources spell differently, are left off
   the map.
 - **About a third of the placed premises sit within a station ring.** The Metro runs north from
-  the centre; the old town, the seafront and the beaches of Playa de Palma are beyond its reach.
+  the center; the old town, the seafront and the beaches of Playa de Palma are beyond its reach.
 """
 )
 

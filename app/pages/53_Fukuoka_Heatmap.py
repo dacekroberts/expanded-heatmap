@@ -48,11 +48,11 @@ st.markdown(
     """
 **The lines**
 
-- Nine lines are drawn, each labelled on the map and in the legend: the Fukuoka City Subway's
+- Nine lines are drawn, each labeled on the map and in the legend: the Fukuoka City Subway's
   Kūkō, Hakozaki and Nanakuma lines; JR Kyushu's Kagoshima Main, Chikuhi, Fukuhoku Yutaka and
   Kashii lines; and Nishitetsu's Tenjin Ōmuta and Kaizuka lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
-  English are from OpenStreetMap. Line colours are this project's own, not the operators'.
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Fukuoka City get rings, because the business data covers the city alone: JR
   and Nishitetsu lines running on to Itoshima, Kasuya, Kasuga and Ōnojō are cut at the city line.
 - The Hakata-Minami line, whose only station in the city is Hakata, is not drawn.
@@ -66,7 +66,7 @@ st.markdown(
   appears once.
 - Barbers and beauty salons come from the city's registers as of 31 August 2026, laundries as of
   31 March 2026.
-- Japan has no general business licence, so shops other than food shops (clothing, electronics,
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than
   hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they

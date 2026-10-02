@@ -55,7 +55,7 @@ st.markdown(
     """
 **The lines**
 
-- Three lines are drawn, each labelled on the map and in the legend in the operators' colours:
+- Three lines are drawn, each labeled on the map and in the legend in the operators' colors:
   **Line 1**, **Line 7** and the **Seohae Line**.
 - Routes and stations come from OpenStreetMap.
 - Businesses are counted around stations inside Bucheon only; the lines are still drawn to their
@@ -70,7 +70,7 @@ st.markdown(
   position for every one: restaurants, cafés and bars; shops of every kind, from convenience
   stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care
   salons, laundries, bathhouses and massage.
-- This national register is a different kind of record from the city licence data behind
+- This national register is a different kind of record from the city license data behind
   Seoul's, Daegu's and Busan's maps, which count only licensed trades. So **Bucheon's Retail
   category is complete where those cities' is thin**, and density is not directly comparable
   between them.

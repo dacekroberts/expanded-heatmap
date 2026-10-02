@@ -73,7 +73,7 @@ st.markdown(
 - A premises is shown when the health unit inspected it in the two years before the data's
   date; the data records no closings, so an inspection is the only sign that a place still
   trades.
-- Kitchens in schools, daycares, hospitals, care homes, churches, community centres and
+- Kitchens in schools, daycares, hospitals, care homes, churches, community centers and
   workplaces are left out by name, and so are caterers without a shop, clubs, arenas,
   hotels, food trucks and event vendors. A name rule is imperfect, and a few such kitchens
   may remain.

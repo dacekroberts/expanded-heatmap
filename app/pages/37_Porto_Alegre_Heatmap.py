@@ -77,8 +77,8 @@ st.markdown(
     """
 **The line**
 
-- One line is drawn — **Trensurb's Linha 1**, from Mercado to Novo Hamburgo — labelled on
-  the map and in the legend, in the colour OpenStreetMap records.
+- One line is drawn — **Trensurb's Linha 1**, from Mercado to Novo Hamburgo — labeled on
+  the map and in the legend, in the color OpenStreetMap records.
 - The airport people mover is not drawn.
 - The map covers the **six municípios the line runs through**: Porto Alegre, Canoas,
   Esteio, Sapucaia do Sul, São Leopoldo and Novo Hamburgo, because under a third of the line's
@@ -92,7 +92,7 @@ st.markdown(
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of
   the enumerator's words, and the names were not checked against any business register.
-- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
   dot.
 - At an address that is also someone's home, the dot shows only its category.
 

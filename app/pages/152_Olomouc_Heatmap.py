@@ -66,8 +66,8 @@ st.markdown(
     """
 **The trams**
 
-- Seven tram lines are drawn, **DPMO's trams 1 to 7**, each labelled on the map and in the legend.
-- The lines and stops are drawn from OpenStreetMap, and the colours are this project's, because
+- Seven tram lines are drawn, **DPMO's trams 1 to 7**, each labeled on the map and in the legend.
+- The lines and stops are drawn from OpenStreetMap, and the colors are this project's, because
   none are published for reuse.
 - Buses, trolleybuses and trains are not drawn.
 - Olomouc has no metro, so its trams are its rapid transit, as in Riga. Every tram stop

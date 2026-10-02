@@ -65,10 +65,10 @@ st.markdown(
 **The line**
 
 - One line is drawn — **Taichung Metro's Green Line**, from Beitun Main Station to HSR Taichung
-  Station — labelled on the map and in the legend.
+  Station — labeled on the map and in the legend.
 - Its stations and their names come from Taichung Metro's own station table, and its route from
   OpenStreetMap, because the station table carries no route.
-- Neither source gives the line a colour, so it is drawn in a green of this project's choosing.
+- Neither source gives the line a color, so it is drawn in a green of this project's choosing.
 - Every station is inside the city. Taiwan Railway and high-speed rail services are not drawn.
 
 **The businesses**

@@ -2,11 +2,11 @@
 
 Global labels the whole world at one zoom, so its pills cannot all fit (Europe
 became a block of overlapping names), and hand-placing each city's offset
-against every neighbour does not scale. Instead the cities compete:
+against every neighbor does not scale. Instead the cities compete:
 
   1. A STATIC FILTER takes some out of the running: a tram city (orange on the
      legend) and a minor-tier city (`label_tier` in cities.py) never carry a
-     Global label. Their dots and tooltips stay; each is labelled in its own
+     Global label. Their dots and tooltips stay; each is labeled in its own
      region's view.
   2. The rest are RANKED, highest first, by RANK_ORDER: mode (metro > light
      rail > tram) first, then storefronts and coverage (full > narrowed > one
@@ -17,7 +17,7 @@ against every neighbour does not scale. Instead the cities compete:
      above and below its dot. The first position that overlaps no pill
      already placed, covers neither its own dot nor the dot of any city that
      has already won a label, and sits under none of the map's controls wins.
-     A city with no such position goes unlabelled, and so does a city whose
+     A city with no such position goes unlabeled, and so does a city whose
      own dot already lies under a higher-ranked city's pill (Copenhagen's
      under Berlin's, 2026-10-01: its dot would have drawn over Berlin's name).
 
@@ -25,7 +25,7 @@ A LOWER-RANKED CITY'S DOT MAY SIT UNDER A PILL, because in Global the dots are
 drawn ABOVE the pills (Overview.py): no dot is ever erased or unclickable; at
 worst it sits on a pill's edge. At world zoom Europe is a few dozen pixels
 across (a pill beside Paris reaches Prague), so keeping every pill off every
-dot left Paris, Berlin and Marseille unlabelled (measured 2026-10-01).
+dot left Paris, Berlin and Marseille unlabeled (measured 2026-10-01).
 
 The competition covers the whole world, not the opening frame: the map pans,
 and São Paulo or Sydney below the first screen must win their labels too.
@@ -269,7 +269,7 @@ CANDIDATES = (("start", 11, 0), ("end", -11, 0), ("middle", 0, -22), ("middle", 
 
 
 def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
-    """Web-Mercator pixel position on a w x h canvas centred on the view."""
+    """Web-Mercator pixel position on a w x h canvas centered on the view."""
     scale = 512 * 2 ** zoom
     x = w / 2 + ((lon + 180) / 360 - (centre_lon + 180) / 360) * scale
 

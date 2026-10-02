@@ -46,7 +46,7 @@ if PROVENANCE_JSON.exists():
         _reg = (_prov.get("register") or {}).get("data_date") or ""
         _rail = ((_prov.get("files_utc") or {}).get("osm_rail.json") or "")[:10]
         if _reg and _rail:
-            st.caption(f"Business licence data from the City of Kansas City, Missouri, "
+            st.caption(f"Business license data from the City of Kansas City, Missouri, "
                        f"last updated **{_reg}**; the streetcar line and its stops from "
                        f"OpenStreetMap, fetched **{_rail}**.")
     except (ValueError, OSError, AttributeError):
@@ -63,8 +63,8 @@ st.markdown(
     """
 **The streetcar**
 
-- One streetcar line is drawn, the **KC Streetcar**, labelled on the map and in the legend,
-  redrawn from OpenStreetMap's route geometry, in a colour this project chose, since the source
+- One streetcar line is drawn, the **KC Streetcar**, labeled on the map and in the legend,
+  redrawn from OpenStreetMap's route geometry, in a color this project chose, since the source
   records none.
 - Kansas City has no metro: its streetcar is its rapid transit, as Riga's trams are, so every stop
   gets rings.
@@ -81,12 +81,12 @@ st.markdown(
 - **Where the license holder is a person rather than a company, the map shows the street address
   instead of a name**, and so it does where a company trades under a person's own name. Elsewhere
   the map shows the name the business trades under.
-- **The licence data dates from 15 January 2026**, and holds licences valid for 2025 and 2026.
+- **The license data dates from 15 January 2026**, and holds licenses valid for 2025 and 2026.
   Businesses that opened since then are missing, and any that closed may still be shown.
 
 **Reading the density**
 
-- **Read the density as a register, not a street survey.** A licence is issued to a business at an
+- **Read the density as a register, not a street survey.** A license is issued to a business at an
   address, and the list does not say whether the address has a shop a passer-by could walk into.
 - The industry codes it uses file a web shop under the goods it sells, so some dots are businesses
   with no shop at all, and nothing in the data says which.

@@ -59,7 +59,7 @@ if PROVENANCE_JSON.exists():
         _start = _iso(_fi.get("feed_start_date") or _nap.get("start_date"))
         _end = _iso(_fi.get("feed_end_date") or _nap.get("end_date"))
         if _taken:
-            _line = "Transit data © SI de mobilité et d'organisation urbaine du Valenciennois (Transvilles), via transport.data.gouv.fr"
+            _line = "Transit data © SI de mobilité et d'organization urbaine du Valenciennois (Transvilles), via transport.data.gouv.fr"
             if _start and _end:
                 _line += f", from the feed published for **{_start}** to **{_end}**"
             st.caption(_line + f"; snapshot taken **{_taken}**.")
@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Two Transvilles tram lines are drawn, **Tram T1 and Tram T2**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Two Transvilles tram lines are drawn, **Tram T1 and Tram T2**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Valenciennes has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 510 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **13 communes of Valenciennes Métropole and the Porte du Hainaut** that the trams serve.

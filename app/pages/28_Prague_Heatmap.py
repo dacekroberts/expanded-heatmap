@@ -63,9 +63,9 @@ st.markdown(
     """
 **The lines**
 
-- Three lines are drawn, **Metro A, B and C**, each labelled on the map and in the legend,
+- Three lines are drawn, **Metro A, B and C**, each labeled on the map and in the legend,
   redrawn from the Prague Integrated Transport system's (PID) own route geometry in the
-  operator's colours. Line A is shown a shade lighter so it stays distinct from the green of the
+  operator's colors. Line A is shown a shade lighter so it stays distinct from the green of the
   personal-services dots.
 - **Flora station on line A is closed for reconstruction** until about December 2026. Like the
   timetable, the map leaves it out until it reopens.

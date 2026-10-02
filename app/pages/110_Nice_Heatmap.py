@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Four Lignes d'Azur tram lines are drawn, **Tram 1, Tram 2, Tram 3 and Tram B**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Four Lignes d'Azur tram lines are drawn, **Tram 1, Tram 2, Tram 3 and Tram B**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Nice has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 410 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Nice**.

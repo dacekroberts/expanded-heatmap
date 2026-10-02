@@ -44,7 +44,7 @@ if PROVENANCE_JSON.exists():
         _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
         _taken = (_files.get("business_operation_tax_active.csv") or "")[:10]
         if _taken:
-            st.caption(f"Business licences fetched **{_taken}** and counted if "
+            st.caption(f"Business licenses fetched **{_taken}** and counted if "
                        f"unexpired on that date.")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
@@ -57,8 +57,8 @@ st.markdown(
     """
 **The lines**
 
-- SacRT's **Blue Line** and **Gold Line** are drawn. Each is labelled on the map and in the legend,
-  and redrawn from OpenStreetMap's route geometry in the colours OpenStreetMap records for it.
+- SacRT's **Blue Line** and **Gold Line** are drawn. Each is labeled on the map and in the legend,
+  and redrawn from OpenStreetMap's route geometry in the colors OpenStreetMap records for it.
 - Both run every 15 minutes through the day and every 30 in the evening, by SacRT's timetables.
 - The **Green Line is not drawn**: SacRT suspended it in June 2025 for construction in the
   Railyards and expects it back by mid-October 2026. Its one station of its own, 7th &
@@ -75,7 +75,7 @@ st.markdown(
 **The businesses**
 
 - Businesses come from the City's **Business Operation Tax** register, which covers every business
-  operating in the city. A licence is counted only if it is active and has not passed its expiry
+  operating in the city. A license is counted only if it is active and has not passed its expiry
   date.
 - The register gives an address but no location, so each storefront is placed by the US Census
   Bureau's geocoder. It is kept only if the point falls inside the city, because a Sacramento

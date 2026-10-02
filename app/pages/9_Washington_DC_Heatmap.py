@@ -56,14 +56,14 @@ st.markdown(
 - **All three categories come from one register here**, which is unusual in this project:
   Washington's Basic Business License register licenses restaurants, shops and salons alike. In
   Boston and Philadelphia, by contrast, a whole category has no source at all.
-- **Most of that register is not a business.** Of the 61,329 active licences inside the District,
+- **Most of that register is not a business.** Of the 61,329 active licenses inside the District,
   37,195 are residential rentals, and a further 11,074 are "General Business", Washington's default
-  category for offices. Both are excluded, leaving about 6,500 licences at roughly 5,200 premises.
-  A raw licence count for this city would describe its housing stock, not its high streets.
-- **One large licence category is ambiguous.** Washington issues a "Delicatessen" licence to
+  category for offices. Both are excluded, leaving about 6,500 licenses at roughly 5,200 premises.
+  A raw license count for this city would describe its housing stock, not its high streets.
+- **One large license category is ambiguous.** Washington issues a "Delicatessen" license to
   sandwich shops and cafés, and also to corner shops and convenience stores. It is counted as food
   service, which fits most of them, but about 180 premises here hold it with no other descriptive
-  licence and could read either way.
+  license and could read either way.
 - **Some pins were placed from their address rather than the register.** The published latitude
   and longitude are unusable (literally 39 and -77 on every row), and the register's real
   coordinates are missing on about 7% of these premises.
@@ -74,13 +74,13 @@ st.markdown(
   numbers, so the check has little to read: its zero is a gap in the measurement, not a proven
   result.
 - What this city has instead is the register's own record of legal form: 14 pins, 0.36% of the
-  map, are a sole proprietorship displaying what reads as a person's name, and each holds a licence
+  map, are a sole proprietorship displaying what reads as a person's name, and each holds a license
   that requires commercial premises.
 
 **The lines**
 
-- **Six lines are drawn**, each labelled directly on the map and in the legend: the Red, Blue,
-  Green, Yellow, Orange and Silver Lines, in the colours WMATA's own schedule data gives them.
+- **Six lines are drawn**, each labeled directly on the map and in the legend: the Red, Blue,
+  Green, Yellow, Orange and Silver Lines, in the colors WMATA's own schedule data gives them.
 - **This is the District, not the Metrorail network.** 58 of Metrorail's 98 stations lie outside
   it (32 in Virginia, 26 in Maryland), each listed with its state below.
 - A station in Arlington or Silver Spring would need Virginia's or Maryland's own business data,

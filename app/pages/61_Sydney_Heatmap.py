@@ -56,10 +56,10 @@ st.markdown(
 **The lines**
 
 - Seven lines are drawn: Sydney Trains' **T1, T2, T3, T4, T8 and T9** and Sydney Metro's **M1**,
-  each labelled on the map, with its full name in the legend, redrawn from OpenStreetMap.
-- The colours are close to Transport for NSW's but not the same: some are too close to the dot
-  colours, so T4 and M1 appear in slate.
-- Sydney Trains is suburban rail that runs as a metro through the city centre; every station in
+  each labeled on the map, with its full name in the legend, redrawn from OpenStreetMap.
+- The colors are close to Transport for NSW's but not the same: some are too close to the dot
+  colors, so T4 and M1 appear in slate.
+- Sydney Trains is suburban rail that runs as a metro through the city center; every station in
   the area is shown.
 - **Light rail is not drawn.** The L1, L2 and L3 lines have 22 stops in the area; with them, about
   nine storefronts in ten would sit within a ring, against eight in ten without them.
@@ -69,7 +69,7 @@ st.markdown(
 
 - The map covers the **City of Sydney** council area only: the CBD, Pyrmont and Ultimo, Surry
   Hills, Redfern, Green Square, Kings Cross and the inner suburbs to Glebe and Newtown.
-- Neighbouring councils publish no comparable survey, so they are not on the map.
+- Neighboring councils publish no comparable survey, so they are not on the map.
 - Lines are cut at the boundary, and the stations beyond it are left out.
 
 **The businesses**
@@ -79,7 +79,7 @@ st.markdown(
   **2022** survey, the latest.
 - It gives each business an industry class and a map point but **no name**, so a dot shows what
   kind of business it is, not what it is called.
-- Points are placed per building, so the shops in a shopping centre share one point.
+- Points are placed per building, so the shops in a shopping center share one point.
 - Shops, food and personal services are all shown.
 - **About five storefronts in six sit within a station ring.**
 """

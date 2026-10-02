@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Five M réso tram lines are drawn, **Tram A, Tram B, Tram C, Tram D and Tram E**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Five M réso tram lines are drawn, **Tram A, Tram B, Tram C, Tram D and Tram E**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Grenoble has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 370 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **12 communes of Grenoble-Alpes Métropole** that the trams serve.

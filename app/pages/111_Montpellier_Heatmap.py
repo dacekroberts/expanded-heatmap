@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Five TaM tram lines are drawn, **Tram 1, Tram 2, Tram 3, Tram 4 and Tram 5**, each labelled on the map and in the legend, their stops from the operator's own published timetable feed and their track from OpenStreetMap.
+- Five TaM tram lines are drawn, **Tram 1, Tram 2, Tram 3, Tram 4 and Tram 5**, each labeled on the map and in the legend, their stops from the operator's own published timetable feed and their track from OpenStreetMap.
 - Montpellier has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 420 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Montpellier**. **Tram 2, Tram 3 and Tram 5 run past it**, so 24 stops beyond the boundary are left out: Aube Rouge, Centurions, Charles de Gaulle, Clairval, Georges Pompidou, La Galine, Notre-Dame de Sablassou and Via Domitia in Castelnau-le-Lez; Clapiers in Clapiers; Jacou in Jacou; Juvignac in Juvignac; Boirargues, Cougourlude, Lattes Centre and Soriech in Lattes; Montferrier-sur-Lez in Montferrier-sur-Lez; EcoPôle, Parc Expo, Pérols Centre and Pérols Étang de l'Or in Pérols; La Condamine, Saint-Jean de Védas Centre, Saint-Jean le Sec and Victoire 2 in Saint-Jean-de-Védas.

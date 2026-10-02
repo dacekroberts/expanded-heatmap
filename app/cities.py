@@ -15,9 +15,9 @@ reserving by hand, but never renumber a city page without updating its `page`
 value here: these two are the only link between them.
 
 `lat`/`lon` place the city's marker on the macro map; they only need to be a
-sensible centre of its mapped area, not the exact centre of the city's own map.
+sensible center of its mapped area, not the exact center of the city's own map.
 
-Deliberately app-side and tiny: a fuller per-city registry (map centre,
+Deliberately app-side and tiny: a fuller per-city registry (map center,
 CRS, taxonomy, data sources) is still open in PLAN.md and would live with
 the pipeline, not here - the deployed app must stay free of pipeline
 dependencies.
@@ -126,7 +126,7 @@ CITIES = [
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-19 (no source date)",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "Muni Metro (J Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street) and the F Market & Wharves",
         "label_offset": ("end", -11, 0),
@@ -162,9 +162,9 @@ CITIES = [
         "coverage": "full",
         "mode": "metro",
         "placement": "Register coordinates",
-        "data_age": "Active licences, fetched 2026-09-20",
+        "data_age": "Active licenses, fetched 2026-09-20",
         "rail_extra": "—",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "CTA 'L' (Red, Blue, Brown, Green, Orange, Pink, Purple Lines)",
         # LEFT OF THE DOT since 2026-09-30 (Kansas City joined). Above the dot
@@ -223,9 +223,9 @@ CITIES = [
         "coverage": "one_bucket",
         "mode": "metro",
         "placement": "Register coordinates",
-        "data_age": "Active licences, fetched 2026-09-21",
+        "data_age": "Active licenses, fetched 2026-09-21",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "Food premises only",
         "blurb": "SEPTA Metro — the Market–Frankford and Broad Street Lines, "
                  "plus the subway-surface and Girard Avenue trolleys",
@@ -285,9 +285,9 @@ CITIES = [
         "coverage": "full",
         "mode": "metro",
         "placement": "Register coordinates, some geocoded (85.8%)",
-        "data_age": "Active licences, fetched 2026-09-21",
+        "data_age": "Active licenses, fetched 2026-09-21",
         "rail_extra": "—",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "WMATA Metrorail (Red, Blue, Green, Yellow, Orange, Silver "
                  "Lines; the 40 stations inside the District)",
@@ -311,9 +311,9 @@ CITIES = [
         "coverage": "full",
         "mode": "metro",
         "placement": "Register coordinates",
-        "data_age": "Current-year licences, fetched 2026-09-21",
+        "data_age": "Current-year licenses, fetched 2026-09-21",
         "rail_extra": "—",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "SkyTrain (24 stations across Vancouver and Surrey)",
         # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
@@ -391,7 +391,7 @@ CITIES = [
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "CTrain (Red and Blue Lines, 45 stations)",
         # Outside the default view, as every non-US city is: it keeps
@@ -417,7 +417,7 @@ CITIES = [
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-21 (no source date)",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "ETS LRT (Capital, Metro and Valley Lines)",
         # OUTSIDE THE DEFAULT VIEW, like the other three Canadian cities. See
@@ -441,9 +441,9 @@ CITIES = [
         "coverage": "narrowed",
         "mode": "metro",
         "placement": "Joined by address (93.8%)",
-        "data_age": "Current licences, fetched 2026-09-21",
+        "data_age": "Current licenses, fetched 2026-09-21",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "Retail thin",
         "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT)",
         # OUTSIDE THE DEFAULT VIEW, like the other Canadian cities. Toronto is
@@ -649,7 +649,7 @@ CITIES = [
         "placement": "Register coordinates",
         "data_age": "Fetched 2026-09-22 (no source date)",
         "rail_extra": "—",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
         "region": "Europe",
@@ -904,7 +904,7 @@ CITIES = [
         "placement": "Joined by address (95.7%)",
         "data_age": "July 2025",
         "rail_extra": "Both",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "Metro A, B, B1, C, Roma–Viterbo and Tram 8",
         "region": "Europe",
@@ -1143,7 +1143,7 @@ CITIES = [
         "placement": "Register coordinates",
         "data_age": "Registers of 2026-09-25",
         "rail_extra": "Trams",
-        "record_kind": "Food licences",
+        "record_kind": "Food licenses",
         "categories": "Food premises only",
         "blurb": "MTR's eight urban lines and the Light Rail",
         "region": "East Asia",
@@ -1164,9 +1164,9 @@ CITIES = [
         "coverage": "narrowed",
         "mode": "tram",
         "placement": "Joined by address (96.8%)",
-        "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "data_age": "Cadastre of 2026-09-20; excise licenses daily",
         "rail_extra": "Trams",
-        "record_kind": "Property register and licences",
+        "record_kind": "Property register and licenses",
         "categories": "Merged",
         "blurb": "Rīgas satiksme's seven tram lines",
         "region": "Europe",
@@ -1516,7 +1516,7 @@ CITIES = [
         # added as an allowed value there for London.
         "coverage": "one_bucket",
         "mode": "metro",
-        "placement": "Register coordinates (91%) and postcode centres (4%)",
+        "placement": "Register coordinates (91%) and postcode centers (4%)",
         "data_age": "Extracts of 2026-09-09 to 2026-09-16",
         "rail_extra": "Suburban rail",
         "record_kind": "Food hygiene register",
@@ -1539,7 +1539,7 @@ CITIES = [
         # Owner-approved 2026-09-28: the "Why the maps differ" row.
         "coverage": "full",
         "mode": "metro",
-        "placement": "Parcel centres (99.8%) and block centres (0.1%)",
+        "placement": "Parcel centers (99.8%) and block centers (0.1%)",
         "data_age": "Surveyed 2022–2024",
         "rail_extra": "—",
         "record_kind": "Street survey or census",
@@ -1586,7 +1586,7 @@ CITIES = [
         # disclosed on the page.
         "coverage": "one_bucket",
         "mode": "metro",
-        "placement": "Register coordinates (90%) and postcode centres (10%)",
+        "placement": "Register coordinates (90%) and postcode centers (10%)",
         "data_age": "Extracts of 2026-09-09 to 2026-09-16",
         "rail_extra": "—",
         "record_kind": "Food hygiene register",
@@ -1890,7 +1890,7 @@ CITIES = [
         "coverage": "narrowed",
         "mode": "light_rail",
         "placement": "Register coordinates",
-        "data_age": "Licences unexpired on 2026-09-29; fetched 2026-09-29",
+        "data_age": "Licenses unexpired on 2026-09-29; fetched 2026-09-29",
         "rail_extra": "Trams",
         "record_kind": "Permit registers",
         "categories": "Retail thin",
@@ -1924,7 +1924,7 @@ CITIES = [
         "coverage": "full",
         "mode": "light_rail",
         "placement": "Geocoded by address (98.0%)",
-        "data_age": "Licences unexpired on 2026-09-29; fetched 2026-09-29",
+        "data_age": "Licenses unexpired on 2026-09-29; fetched 2026-09-29",
         "rail_extra": "Trams",
         "record_kind": "Tax register",
         "categories": "All three",
@@ -1998,9 +1998,9 @@ CITIES = [
         "mode": "tram",
         "coverage": "narrowed",
         "placement": "Joined by address (93.9%)",
-        "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "data_age": "Cadastre of 2026-09-20; excise licenses daily",
         "rail_extra": "Trams",
-        "record_kind": "Property register and licences",
+        "record_kind": "Property register and licenses",
         "categories": "Merged",
         "blurb": "Liepāja's one tram line",
         "region": "Europe",
@@ -2022,9 +2022,9 @@ CITIES = [
         "mode": "tram",
         "coverage": "narrowed",
         "placement": "Joined by address (95.9%)",
-        "data_age": "Cadastre of 2026-09-20; excise licences daily",
+        "data_age": "Cadastre of 2026-09-20; excise licenses daily",
         "rail_extra": "Trams",
-        "record_kind": "Property register and licences",
+        "record_kind": "Property register and licenses",
         "categories": "Merged",
         "blurb": "Daugavpils Satiksme's five tram routes",
         "region": "Europe",
@@ -2048,9 +2048,9 @@ CITIES = [
         # it.
         "coverage": "narrowed",
         "placement": "Register coordinates (100%)",
-        "data_age": "Register frozen 2026-01-15; licences valid 2025-26",
+        "data_age": "Register frozen 2026-01-15; licenses valid 2025-26",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "Food service thin",
         "blurb": "KC Streetcar, one streetcar line",
         "region": "United States East",
@@ -2082,9 +2082,9 @@ CITIES = [
         "mode": "tram",
         "coverage": "full",
         "placement": "Register coordinates (92.4%)",
-        "data_age": "Active licences, fetched 2026-09-30",
+        "data_age": "Active licenses, fetched 2026-09-30",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "All three",
         "blurb": "Sun Link, one streetcar line",
         "region": "United States West",
@@ -2112,9 +2112,9 @@ CITIES = [
         # it.
         "coverage": "narrowed",
         "placement": "Register coordinates (95.6%)",
-        "data_age": "Active licences, updated daily; fetched 2026-09-30",
+        "data_age": "Active licenses, updated daily; fetched 2026-09-30",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "Personal services thin",
         "blurb": "RTA streetcars: St. Charles, Loyola/Rampart, Canal and Riverfront",
         "region": "United States East",
@@ -2212,7 +2212,7 @@ CITIES = [
         "placement": "Register coordinates (100%)",
         "data_age": "Register kept current, last updated 2026-09-28; fetched 2026-09-30",
         "rail_extra": "Trams",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "Two",
         "blurb": "VBZ trams 2–11, 13–15, 17, 50 and 51",
         "region": "Europe",
@@ -2780,7 +2780,7 @@ CITIES = [
         "placement": "Register coordinates (13.2%) and joined by address (66.4%)",
         "data_age": "Register of 2026-09-07",
         "rail_extra": "Suburban rail",
-        "record_kind": "Licence register",
+        "record_kind": "License register",
         "categories": "Food premises only",
         "blurb": "Metro de Palma: M1",
         "region": "Europe",
@@ -3455,7 +3455,7 @@ _unmoded = [c["name"] for c in CITIES if c.get("mode") not in MODES]
 if _unmoded:
     raise ValueError(
         f"cities.py: {_unmoded} have no `mode`, or one not in {MODES}. It is "
-        f"the highest-order mode the city's map draws and colours its macro "
+        f"the highest-order mode the city's map draws and colors its macro "
         f"dot; pandas would otherwise fill a missing one with NaN."
     )
 

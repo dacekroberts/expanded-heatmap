@@ -59,10 +59,10 @@ st.markdown(
   Belgrave, Glen Waverley and Lilydale lines), **Clifton Hill** (Hurstbridge and Mernda),
   **Northern** (Craigieburn and Upfield), **Cross City** (Werribee, Williamstown and Sandringham),
   **Frankston**, and the **Metro Tunnel** (Sunbury, Cranbourne and Pakenham).
-- A group's lines share one track through the city, so each group is drawn once and labelled on
+- A group's lines share one track through the city, so each group is drawn once and labeled on
   the map, with its lines named in the legend.
-- The colours are close to Metro Trains' but not the same, so they stay distinct from the dot
-  colours.
+- The colors are close to Metro Trains' but not the same, so they stay distinct from the dot
+  colors.
 - Metro Trains is suburban rail that runs as a metro through the City Loop and the Metro Tunnel;
   every station in the area is shown.
 - **Trams are not drawn.** With them, nearly every storefront would sit within a ring, against 96%
@@ -74,7 +74,7 @@ st.markdown(
 
 - The map covers the **City of Melbourne** council area only: the CBD, Docklands, Southbank,
   Carlton, North Melbourne, Parkville, Kensington and East Melbourne.
-- Neighbouring councils publish no comparable census, so they are not on the map.
+- Neighboring councils publish no comparable census, so they are not on the map.
 - Lines are cut at the boundary, and the stations beyond it, Richmond among them, are left out.
 
 **The businesses**
@@ -82,7 +82,7 @@ st.markdown(
 - **The businesses come from the City of Melbourne's Census of Land Use and Employment**, which
   records every business establishment in the area with its trading name and industry class. This
   map uses the **2024** census.
-- Points are placed per property, so the shops in a shopping centre or an arcade share one point.
+- Points are placed per property, so the shops in a shopping center or an arcade share one point.
 - Shops, food and personal services are all shown, including businesses on upper floors.
 - **Nearly all storefronts sit within a station ring**, because the stations are close together
   across a small, dense area.

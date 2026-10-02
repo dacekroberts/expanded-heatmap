@@ -69,8 +69,8 @@ st.markdown(
 **The lines**
 
 - DART's four light-rail lines are drawn: the **Red Line**, **Blue Line**, **Green Line** and
-  **Orange Line**. Each is labelled on the map and in the legend, and redrawn from OpenStreetMap's
-  route geometry in this map's own colours.
+  **Orange Line**. Each is labeled on the map and in the legend, and redrawn from OpenStreetMap's
+  route geometry in this map's own colors.
 - Each line runs about every 20 minutes at peak and every 20 to 30 minutes at other times;
   downtown, where all four share the transit mall, trains come more often.
 - 44 stations are inside the City of Dallas; the 20 beyond it, in the suburbs and at DFW Airport,

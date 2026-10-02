@@ -70,10 +70,10 @@ st.markdown(
 **The trams**
 
 - Fourteen HTM tram lines are drawn, **trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17 and 19, and
-  RandstadRail 3, 4 and 34**, each labelled on the map and in the legend, redrawn from
-  OpenStreetMap's route geometry, in OpenStreetMap's own colours.
-- OpenStreetMap records no colour for trams 10 and 34, so they are in colours this project chose.
-  Trams 1 and 19, which share one colour, and 4 and 16, which nearly do, are shown a shade apart.
+  RandstadRail 3, 4 and 34**, each labeled on the map and in the legend, redrawn from
+  OpenStreetMap's route geometry, in OpenStreetMap's own colors.
+- OpenStreetMap records no color for trams 10 and 34, so they are in colors this project chose.
+  Trams 1 and 19, which share one color, and 4 and 16, which nearly do, are shown a shade apart.
 - RandstadRail E, Rotterdam's metro line, has 4 of its 23 stops in the city, all served by
   RandstadRail 3 and 4 as well, and is not drawn. Buses, the short 9S tram working and
   national-rail (NS) trains are not drawn.

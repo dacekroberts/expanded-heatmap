@@ -47,7 +47,7 @@ if PROVENANCE_JSON.exists():
         _reg = (_files.get("buslic_active.csv") or "")[:10]
         _rail = (_files.get("osm_rail.json") or "")[:10]
         if _reg and _rail:
-            st.caption(f"Business licence data: City of Tucson, fetched **{_reg}**; the "
+            st.caption(f"Business license data: City of Tucson, fetched **{_reg}**; the "
                        f"streetcar line and its stops from OpenStreetMap, fetched "
                        f"**{_rail}**.")
     except (ValueError, OSError, AttributeError):
@@ -64,8 +64,8 @@ st.markdown(
     """
 **The streetcar**
 
-- One streetcar line is drawn, **Sun Link**, labelled on the map and in the legend, redrawn from
-  OpenStreetMap's route geometry, in a colour this project chose, since the source records none.
+- One streetcar line is drawn, **Sun Link**, labeled on the map and in the legend, redrawn from
+  OpenStreetMap's route geometry, in a color this project chose, since the source records none.
 - Tucson has no metro: its streetcar is its rapid transit, as Riga's trams are, so every stop gets
   rings.
 - Streetcars run about every 10 minutes on weekdays from 7 am to 6 pm, and every 20 minutes in the
@@ -77,19 +77,19 @@ st.markdown(
 
 **The businesses**
 
-- Businesses come from the City of Tucson's list of **active business licences**, with each
-  licence's industry code, placed at the point the City records for it and kept only if that point
+- Businesses come from the City of Tucson's list of **active business licenses**, with each
+  license's industry code, placed at the point the City records for it and kept only if that point
   falls inside the city.
-- Licences for a home occupation are left out, and so is any business at an apartment or trailer
+- Licenses for a home occupation are left out, and so is any business at an apartment or trailer
   address, as a home.
-- About one licence in thirteen has no point and cannot be placed.
-- **Where the licence holder is a person rather than a company, the map shows the street address
+- About one license in thirteen has no point and cannot be placed.
+- **Where the license holder is a person rather than a company, the map shows the street address
   instead of a name**, and so it does where a business is named only as a person.
 
 **Reading the density**
 
 - **Read the density as a register, not a street survey.** The City says its list should not be
-  considered a complete listing of all active businesses in Tucson, and a licence is issued to a
+  considered a complete listing of all active businesses in Tucson, and a license is issued to a
   business at an address whether or not a passer-by could walk in.
 - **About one storefront in fifteen sits within a ring.**
 """

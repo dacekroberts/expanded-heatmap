@@ -44,7 +44,7 @@ st.markdown(
     """
 **The lines**
 
-- **Two lines are drawn** from Calgary Transit's own route geometry, in its own colours: the
+- **Two lines are drawn** from Calgary Transit's own route geometry, in its own colors: the
   Red Line and the Blue Line. They share the downtown 7 Avenue trunk, where eight stations
   are served by both.
 - **Every CTrain station is inside Calgary**, so nothing here was excluded for lying in
@@ -53,18 +53,18 @@ st.markdown(
 
 **The businesses**
 
-- **Calgary's licence register says which businesses have premises**, a distinction most
+- **Calgary's license register says which businesses have premises**, a distinction most
   registers here leave to be inferred. Its own categories carry it as a suffix —
   `RETAIL DEALER - PREMISES` against `RETAIL DEALER - NO PREMISES`, and `(MOBILE)`,
   `(HOME BASED)`, `(MAIL ORDER)` and `(DIRECT SALES)` alongside them.
-- So the City did most of the classifying, and about two-thirds of its active licences are
+- So the City did most of the classifying, and about two-thirds of its active licenses are
   storefronts, against roughly a quarter in a typical register.
-- **Alcohol and patio licences are not counted as businesses.** A restaurant holding
+- **Alcohol and patio licenses are not counted as businesses.** A restaurant holding
   `FOOD SERVICE - PREMISES`, `ALCOHOL BEVERAGE SALES (RESTAURANT)` and `OUTDOOR PATIO` is
-  one restaurant, not three. Those endorsements are the main reason so many licences carry
+  one restaurant, not three. Those endorsements are the main reason so many licenses carry
   several categories.
 - **A small number of categories are excluded on grounds beyond scope**, chiefly body rub
-  centres and escort agencies; they are listed with the reasoning on the "What is counted,
+  centers and escort agencies; they are listed with the reasoning on the "What is counted,
   and what is not" page.
 
 **Reading the map**
@@ -72,13 +72,13 @@ st.markdown(
 - **Read the balance between Food service and Retail with care here.** Food service is the
   larger category on this map, which is unusual — and it is a consequence of how Calgary
   licenses rather than of what is on the street.
-- About two in five active licences carry more than one category, most often a premises
-  licence plus its alcohol or patio endorsements, and where a single premises is licensed
+- About two in five active licenses carry more than one category, most often a premises
+  license plus its alcohol or patio endorsements, and where a single premises is licensed
   for both retail and food this map counts it as food. A convenience store with a hot
   counter lands in Food service.
 - **Known limitation.** Calgary publishes no usable home-business flag: the register's
   home-business field reads `N` (no) on every single row. So, unlike Surrey or Edmonton, the
-  City does not tell us which licences are home-based, and no inference is attempted. The
+  City does not tell us which licenses are home-based, and no inference is attempted. The
   `(HOME BASED)` and `(MOBILE)` category suffixes catch the cases the City does mark.
 """
 )

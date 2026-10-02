@@ -53,16 +53,16 @@ st.markdown(
 - Miami-Dade County licenses business tax receipts for all 34 of its municipalities in a single
   file, so covering the whole line cost nothing extra. Six municipalities hold stations, and every
   station is on the map.
-- **Three lines are drawn**, each labelled directly on the map and in the legend: Metrorail, and the
+- **Three lines are drawn**, each labeled directly on the map and in the legend: Metrorail, and the
   Metromover's Inner and Omni/Brickell loops.
 - Metrorail appears once even though Miami-Dade Transit signs it as two lines, Green and Orange:
   its timetable feed publishes a single route for both, so the map uses the name every station
   sign carries rather than invent a split the feed does not contain.
-- The MIA Airport People Mover is left out because it runs terminal to rental-car centre with no
+- The MIA Airport People Mover is left out because it runs terminal to rental-car center with no
   surrounding commerce to measure, and Tri-Rail is commuter rail, left out here as on most maps on
   this site.
-- The line colours are this project's own rather than the agency's: Miami-Dade's own orange and two
-  greens collide with the business-category colours and with each other.
+- The line colors are this project's own rather than the agency's: Miami-Dade's own orange and two
+  greens collide with the business-category colors and with each other.
 
 **The businesses**
 
@@ -72,8 +72,8 @@ st.markdown(
   consultancies and agencies), is excluded. It also holds some genuine trade repair, so **this map
   undercounts small repair and service premises in Miami.** The full list and the reasoning are on
   the "What is counted, and what is not" page.
-- One premises can hold several licences at once (a restaurant with an entertainment permit and a
-  retail licence is three rows in the raw file), so each premises is counted once, matched on name
+- One premises can hold several licenses at once (a restaurant with an entertainment permit and a
+  retail license is three rows in the raw file), so each premises is counted once, matched on name
   and address, with the more specific category winning over general retail. Roughly two thousand
   premises were merged this way.
 
@@ -82,7 +82,7 @@ st.markdown(
 - **The rings are worth turning on selectively here.** They start switched off, as they do on every
   city on this site.
 - Metrorail's stations are far apart, a median 1.1 km, so their rings read cleanly. The
-  Metromover's nineteen sit a median 235 m apart, and every one of them falls inside a neighbour's
+  Metromover's nineteen sit a median 235 m apart, and every one of them falls inside a neighbor's
   outer ring, so switching the rings on makes downtown one indistinguishable wash while the
   Metrorail corridor stays legible.
 - Each business is assigned to its nearest station either way, so nothing is double-counted.

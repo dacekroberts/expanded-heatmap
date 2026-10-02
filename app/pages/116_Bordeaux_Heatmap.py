@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Six TBM tram lines are drawn, **Tram A, Tram B, Tram C, Tram D, Tram E and Tram F**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Six TBM tram lines are drawn, **Tram A, Tram B, Tram C, Tram D, Tram E and Tram F**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Bordeaux has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 440 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **14 communes of Bordeaux Métropole** that the trams serve.

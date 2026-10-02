@@ -77,11 +77,11 @@ st.markdown(
 **The lines**
 
 - Eleven lines are drawn, **T-bane lines 1 to 5 and tram (trikk) lines 12, 13, 15, 17, 18 and
-  19**, each labelled on the map and in the legend, redrawn from Ruter's published route geometry.
-- The map uses the per-line colours from Ruter's own network maps; two are shown a shade lighter
+  19**, each labeled on the map and in the legend, redrawn from Ruter's published route geometry.
+- The map uses the per-line colors from Ruter's own network maps; two are shown a shade lighter
   so they stay distinct from each other and from the business dots.
 - Tram 15 runs most of line 12's route while the Briskeby line is closed for rebuilding. It has no
-  published colour of its own, so the map gives it one.
+  published color of its own, so the map gives it one.
 - Ferries are not drawn.
 - The map covers the **municipality of Oslo**. The T-bane's western branches run on into Bærum,
   so twelve of their stations, out to Kolsås and Østerås, are drawn on the line but get no ring,

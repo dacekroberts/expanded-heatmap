@@ -56,7 +56,7 @@ st.markdown(
     """
 **The line**
 
-- One line is drawn: the **Glasgow Subway**, the 15-station loop through the city centre, the West
+- One line is drawn: the **Glasgow Subway**, the 15-station loop through the city center, the West
   End and the south side, redrawn from OpenStreetMap in SPT's orange.
 - Its two tunnels, the Outer and Inner Circle, are drawn as one line.
 - Glasgow's suburban and national rail lines are not drawn.
@@ -86,7 +86,7 @@ st.markdown(
 - A business registered at a flat, where home bakers and cooks register, is never placed, and
   neither is a childminder.
 - **Only about two storefronts in five sit within a station ring.** One 15-station loop serves the
-  centre and the West End; most of the city's food businesses lie beyond it.
+  center and the West End; most of the city's food businesses lie beyond it.
 """
 )
 

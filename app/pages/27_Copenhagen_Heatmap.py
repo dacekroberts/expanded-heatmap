@@ -61,9 +61,9 @@ st.markdown(
 **The lines**
 
 - Eleven lines are drawn, **Metro lines M1 to M4 and S-tog lines A, B, Bx, C, E, F and H**, each
-  labelled on the map and in the legend, redrawn from OpenStreetMap's route geometry in the
-  operators' own colours. Two S-tog lines, A and F, are shown a shade lighter so they stay
-  distinct from the Metro lines whose colours they nearly share.
+  labeled on the map and in the legend, redrawn from OpenStreetMap's route geometry in the
+  operators' own colors. Two S-tog lines, A and F, are shown a shade lighter so they stay
+  distinct from the Metro lines whose colors they nearly share.
 - S-tog is Copenhagen's suburban rail network, and most maps on this site leave that kind of line
   out. It is drawn here because inside the city it runs like a metro, every ten minutes on its own
   tracks, and reaches many districts the Metro does not.

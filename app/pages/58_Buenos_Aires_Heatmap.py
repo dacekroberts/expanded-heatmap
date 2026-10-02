@@ -44,9 +44,9 @@ st.markdown(
     """
 **The lines**
 
-- Six lines are drawn — Subte **Líneas A, B, C, D, E and H** — each labelled on the map and
+- Six lines are drawn — Subte **Líneas A, B, C, D, E and H** — each labeled on the map and
   in the legend, from the station and track records of SBASE, the city company that owns the
-  Subte, in the operator's line colours.
+  Subte, in the operator's line colors.
 - The Premetro, a surface light-rail line from Línea E's southern end, is not drawn, and
   neither are the commuter railways.
 - Every Subte station lies inside the Ciudad Autónoma, so none is left out.
@@ -65,7 +65,7 @@ st.markdown(
 
 - **Read the density as a survey, not a register.** Each block was surveyed once, in 2022,
   2023 or 2024, so a shop that has opened or closed since is shown as the surveyors found it.
-- The survey gives no map points: each business is placed at the centre of its land parcel,
+- The survey gives no map points: each business is placed at the center of its land parcel,
   so businesses in one building share a point.
 - **About two storefronts in three sit within a station ring.**
 """

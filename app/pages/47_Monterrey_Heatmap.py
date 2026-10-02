@@ -48,9 +48,9 @@ st.markdown(
 **The lines**
 
 - Metrorrey runs three lines and this map draws all of them: Línea 1, east–west from
-  Talleres to Exposición; Línea 2, north from the city centre to Sendero in General
+  Talleres to Exposición; Línea 2, north from the city center to Sendero in General
   Escobedo; and Línea 3, from General I. Zaragoza north-east to Hospital Metropolitano.
-- Each line is labelled directly on the map in the name its riders use, and appears in the
+- Each line is labeled directly on the map in the name its riders use, and appears in the
   legend.
 - Líneas 4 and 6, a monorail network, are under construction and are not drawn.
 - **This is a regional map, not a city one.** Línea 2 runs north out of Monterrey through
@@ -70,12 +70,12 @@ st.markdown(
 
 **The businesses**
 
-- **The businesses are a census, not a licence register, and that changes what the map
-  means.** Most cities here are built from business licences: a record of who registered.
+- **The businesses are a census, not a license register, and that changes what the map
+  means.** Most cities here are built from business licenses: a record of who registered.
   Monterrey, like Mexico City and Guadalajara, is built from DENUE, the national business register of INEGI (Mexico's
   statistics agency), compiled by surveying premises and recording the name on the shopfront.
-- It is far more complete than a licence register, so the density shown here is **not
-  comparable** with the licence-register cities' — read it as a fact about how the data was
+- It is far more complete than a license register, so the density shown here is **not
+  comparable** with the license-register cities' — read it as a fact about how the data was
   collected as much as about Monterrey's streets.
 - Fixed premises only. DENUE separately records semi-fixed units — stalls and street posts —
   and those are not shown, although street commerce is a real part of the region's retail.

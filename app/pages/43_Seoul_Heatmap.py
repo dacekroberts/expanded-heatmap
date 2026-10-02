@@ -67,7 +67,7 @@ st.markdown(
     """
 **The lines**
 
-- Fifteen lines are drawn, each labelled on the map and in the legend in its operator's colours:
+- Fifteen lines are drawn, each labeled on the map and in the legend in its operator's colors:
   **Lines 1 to 9, the Shinbundang Line, the Ui LRT and the Sillim Line, and three Korail lines
   signed as part of the subway: the Gyeongui–Jungang, Suin–Bundang and Gyeongchun lines**.
   Line 8's pink is darkened so it stays distinct from the Food service dots.
@@ -85,7 +85,7 @@ st.markdown(
   nail salons, barbers, laundries and public baths; and, for retail, bakeries, butchers, food
   shops, shops licensed to sell tobacco, department stores and marts, and health-food shops.
 - Korea licenses these trades rather than retail in general, so a clothes shop, a bookshop or a
-  phone shop needs no such permit and is absent: **the Retail category leans towards food and
+  phone shop needs no such permit and is absent: **the Retail category leans toward food and
   convenience stores**. Read the balance between categories as a fact about Korea's licensing,
   not about Seoul's streets.
 - Convenience stores and confectioners that hold a café permit are counted as shops.

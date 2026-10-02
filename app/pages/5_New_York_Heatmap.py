@@ -55,9 +55,9 @@ st.markdown(
 - Every MTA rail station in the five boroughs is included, and none was excluded for lying outside
   the city: the network does not leave it.
 - What is drawn is **lines, not services**: the 4, 5 and 6 are one physical line up Lexington
-  Avenue, so they appear once, grouped the way the MTA's own map colours them.
+  Avenue, so they appear once, grouped the way the MTA's own map colors them.
 - Each of the eleven (the numbered Manhattan trunks, the lettered Brooklyn and Queens lines, the
-  three shuttles and the Staten Island Railway) is labelled directly on the map and in the legend,
+  three shuttles and the Staten Island Railway) is labeled directly on the map and in the legend,
   and a trunk's branches are drawn wherever its services diverge.
 - **The station rings are smaller here, reaching 0.3 mi instead of the usual 0.6.** Stations sit a
   median 480 m apart, so 0.6-mile rings would reach past the next two stations in every direction
@@ -67,12 +67,12 @@ st.markdown(
 
 **The businesses**
 
-- **Four registries, because New York has no general business licence.** Food service comes from
+- **Four registries, because New York has no general business license.** Food service comes from
   the Health Department's restaurant permits, grocery and bodega retail from the State's retail food
-  store licences, salons and barbers from the State's appearance-enhancement licences, and a narrow
-  slice of regulated retail from the city's own Consumer and Worker Protection licences.
+  store licenses, salons and barbers from the State's appearance-enhancement licenses, and a narrow
+  slice of regulated retail from the city's own Consumer and Worker Protection licenses.
 - So **the Retail category here covers less of the trade than in most cities on this site.** A
-  clothing shop or a bookshop needs no licence from any of these four registries, so it is simply
+  clothing shop or a bookshop needs no license from any of these four registries, so it is simply
   absent, while restaurants appear because the city inspects them.
 - Read the balance between categories as a fact about New York's licensing, not about its high
   streets.

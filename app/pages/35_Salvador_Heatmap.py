@@ -77,10 +77,10 @@ st.markdown(
     """
 **The lines**
 
-- Two lines are drawn — **Linha 1-Vermelha and Linha 2-Azul** — each labelled on the map and
+- Two lines are drawn — **Linha 1-Vermelha and Linha 2-Azul** — each labeled on the map and
   in the legend.
-- The lines and stations are OpenStreetMap's, which records no colours for them, so each is
-  drawn in the colour the operator names it by, red and blue.
+- The lines and stations are OpenStreetMap's, which records no colors for them, so each is
+  drawn in the color the operator names it by, red and blue.
 - The map covers the **município of Salvador**; Linha 2's last station, Aeroporto, lies just
   over the boundary in Lauro de Freitas and is not counted.
 
@@ -92,7 +92,7 @@ st.markdown(
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of
   the enumerator's words, and the names were not checked against any business register.
-- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
   dot.
 - At an address that is also someone's home, the dot shows only its category.
 

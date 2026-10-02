@@ -54,7 +54,7 @@ if PROVENANCE_JSON.exists():
         _taken = (_prov.get("fetched_utc") or "")[:10]
         if _taken:
             st.caption(
-                "Station locations, tram routes and line colours © Métropole "
+                "Station locations, tram routes and line colors © Métropole "
                 "Européenne de Lille and Ilévia, Licence Ouverte 2.0, retrieved "
                 f"**{_taken}**. MEL publishes no update date for these layers, "
                 "so this is the date they were read. Métro routes © "
@@ -80,12 +80,12 @@ st.markdown(
     """
 **The métro and trams**
 
-- Four ilévia lines are drawn — **Métro 1 and 2, and Tram R and T** — each labelled on the map and
+- Four ilévia lines are drawn — **Métro 1 and 2, and Tram R and T** — each labeled on the map and
   in the legend.
 - **The lines come from two sources.** Station locations and the tram's route are published by the
   Métropole Européenne de Lille itself. No official source publishes the métro's route, so its two
   lines are drawn from OpenStreetMap.
-- ilévia colours both trams alike; Tram T is shown here in a darker shade of the same blue so the
+- ilévia colors both trams alike; Tram T is shown here in a darker shade of the same blue so the
   two can be told apart.
 - **This map covers eleven communes, not one.** The métro and tram run well beyond the city of
   Lille, out to Villeneuve-d'Ascq, Roubaix and Tourcoing, and a map of the commune alone would keep

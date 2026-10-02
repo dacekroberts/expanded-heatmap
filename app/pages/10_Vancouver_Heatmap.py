@@ -49,14 +49,14 @@ st.markdown(
 
 - **This map covers two cities, Vancouver and Surrey.** SkyTrain is regional and Surrey has
   no rail of its own, so a Vancouver-only map would cut the network at a line no rider
-  recognises.
+  recognizes.
 - Of 54 stations, 20 are in Vancouver and 4 in Surrey. The other 30 are in Burnaby,
   Richmond, New Westminster, Coquitlam and Port Moody. They are left out because each of those
   cities' business registers would have to be sourced and verified separately; all 30 are
   listed below.
-- **Three lines are drawn** from TransLink's own route geometry, each labelled directly on
+- **Three lines are drawn** from TransLink's own route geometry, each labeled directly on
   the map and in the legend: the Expo Line, the Millennium Line and the Canada Line, in
-  TransLink's own colours.
+  TransLink's own colors.
 - The West Coast Express is commuter rail and the SeaBus is a passenger ferry; neither is
   included.
 
@@ -64,8 +64,8 @@ st.markdown(
 
 - Home occupations are excluded - a home business is not a storefront - and in Surrey that
   is about half of the register.
-- **Where a licence carries no trade name, the pin shows the business type instead of a
-  name.** Vancouver leaves the trade name blank on about half of its mappable licences and
+- **Where a license carries no trade name, the pin shows the business type instead of a
+  name.** Vancouver leaves the trade name blank on about half of its mappable licenses and
   shows the legal name instead, in parentheses; for a sole proprietor that is a person's own
   name.
 - This project publishes public commercial information, not personal information, so those
@@ -77,7 +77,7 @@ st.markdown(
   that share a map rather than one continuous surface.**
 - Surrey's four stations reach a far smaller share of its own commerce than Vancouver's
   twenty do, because Surrey's shops sit along arterial roads the SkyTrain does not follow.
-- **Known limitation.** Roughly half of Vancouver's current-year licences carry no
+- **Known limitation.** Roughly half of Vancouver's current-year licenses carry no
   coordinates at all and cannot be placed. Nearly all are in categories this map excludes
   anyway, but a few have a real street address and are missing.
 """

@@ -80,9 +80,9 @@ st.markdown(
 **The lines**
 
 - Nine lines are drawn — **MetrôRio Linhas 1, 2 and 4, the VLT Carioca's four lines, and
-  SuperVia's Deodoro and Saracuruna lines** — each labelled on the map and in the legend.
+  SuperVia's Deodoro and Saracuruna lines** — each labeled on the map and in the legend.
 - The metro comes from the city's own map layers; the VLT and SuperVia lines are
-  OpenStreetMap's, in the colours OpenStreetMap records, a few shown a shade lighter to stay
+  OpenStreetMap's, in the colors OpenStreetMap records, a few shown a shade lighter to stay
   distinct.
 - Suburban railways are left out of these maps unless, inside the city, they run like a
   metro. SuperVia's Deodoro and Saracuruna lines do: stations about 1.2 to 1.3 km apart, a
@@ -101,7 +101,7 @@ st.markdown(
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of
   the enumerator's words, and the names were not checked against any business register.
-- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
   dot.
 - At an address that is also someone's home, the dot shows only its category.
 
@@ -112,7 +112,7 @@ st.markdown(
   word saying what they sell.
 - Near the stations it is a little more, about 35 in a hundred.
 - **More than a quarter of the storefronts sit within a station ring**, most of them in the
-  centre and the south zone, where the metro and the VLT run.
+  center and the south zone, where the metro and the VLT run.
 """
 )
 

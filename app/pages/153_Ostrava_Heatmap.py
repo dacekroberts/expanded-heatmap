@@ -67,8 +67,8 @@ st.markdown(
 **The trams**
 
 - Fourteen tram lines are drawn, **Dopravní podnik Ostrava's trams 1 to 4, 6 to 8, 10 to 12, 14,
-  15, 17 and 18**, each labelled on the map and in the legend.
-- The lines and stops are drawn from OpenStreetMap, and the colours are this project's, because
+  15, 17 and 18**, each labeled on the map and in the legend.
+- The lines and stops are drawn from OpenStreetMap, and the colors are this project's, because
   none are published for reuse.
 - Buses, trolleybuses and trains are not drawn.
 - Ostrava has no metro, so its trams are its rapid transit, as in Riga. Every tram stop

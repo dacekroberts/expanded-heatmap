@@ -57,10 +57,10 @@ st.markdown(
 **The lines**
 
 - Nineteen lines are drawn — the **Underground's eleven**, the **DLR**, the **Elizabeth line** and
-  the **six London Overground lines** — each labelled on the map, with its full name in the legend,
+  the **six London Overground lines** — each labeled on the map, with its full name in the legend,
   redrawn from OpenStreetMap.
-- The colours are close to TfL's but not the same: some of TfL's colours are too close to the dot
-  colours, so the Piccadilly line appears in mauve and the Northern in grey.
+- The colors are close to TfL's but not the same: some of TfL's colors are too close to the dot
+  colors, so the Piccadilly line appears in mauve and the Northern in gray.
 - Tramlink, National Rail services and river buses are not drawn.
 - The map covers **Greater London**. Lines that run on beyond it are cut at the boundary, and their
   32 stations outside it are left out.
@@ -83,7 +83,7 @@ st.markdown(
 - **Read the density as a register, not a street survey.** A premises stays listed until the
   borough removes it.
 - Most premises sit at the register's own map point. Where it gives none, a business with a full
-  postcode is placed at the centre of its postcode, usually within a few dozen metres of its door.
+  postcode is placed at the center of its postcode, usually within a few dozen meters of its door.
 - About one food storefront in twenty has neither and is not shown, mostly in outer boroughs. A
   business run from a private address, or registered at a flat, is never placed.
 - **About three storefronts in four sit within a station ring.**

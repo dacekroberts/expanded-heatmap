@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- One Orizo tram line is drawn, **Tram T1**, labelled on the map and in the legend, from the operator's own published timetable feed.
+- One Orizo tram line is drawn, **Tram T1**, labeled on the map and in the legend, from the operator's own published timetable feed.
 - Avignon has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 480 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Avignon**.

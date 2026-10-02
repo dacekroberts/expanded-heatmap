@@ -69,10 +69,10 @@ st.markdown(
     """
 **The trams**
 
-- Eleven tram lines are drawn, **DPMB's trams 1 to 10 and 12**, each labelled on the map and in
+- Eleven tram lines are drawn, **DPMB's trams 1 to 10 and 12**, each labeled on the map and in
   the legend.
 - The stops come from the IDS JMK timetable data published by KORDIS JMK, and the lines are shown
-  in the operator's colours; their routes are drawn from OpenStreetMap, because the timetable data
+  in the operator's colors; their routes are drawn from OpenStreetMap, because the timetable data
   carries none.
 - Buses, trolleybuses and trains are not drawn, nor the heritage tram H4 or the event shuttle P1.
 - Brno has no metro, so its trams are its rapid transit, as in Riga. Every tram stop

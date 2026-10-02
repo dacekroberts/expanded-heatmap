@@ -47,7 +47,7 @@ st.markdown(
     """
 **The lines**
 
-- Thirty-four lines are drawn, each labelled on the map and in the legend: Osaka Metro's Midōsuji,
+- Thirty-four lines are drawn, each labeled on the map and in the legend: Osaka Metro's Midōsuji,
   Tanimachi, Yotsubashi, Chūō, Sennichimae, Sakaisuji, Nagahori Tsurumi-ryokuchi and Imazatosuji
   lines and the New Tram; JR West's Osaka Loop, JR Kyoto, JR Kobe, JR Tōzai, JR Gakkentoshi, Osaka
   Higashi, JR Yumesaki, JR Yamatoji and JR Hanwa lines; Hankyu's Kobe, Takarazuka, Kyoto and Senri
@@ -55,7 +55,7 @@ st.markdown(
   Osaka and Minami-Osaka lines; Nankai's Main, Kōya and Shiomibashi lines; and the Hankai tram's
   Hankai and Uemachi lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
-  English are from OpenStreetMap. Line colours are this project's own, not the operators'; with
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'; with
   this many lines, a few labels stand a little off their line.
 - Only stations inside Osaka City get rings, because the business data covers the city alone:
   lines running on to Sakai, Higashiōsaka, Suita, Yao, Moriguchi and beyond are cut at the city
@@ -67,7 +67,7 @@ st.markdown(
 
 - From Osaka City's list of food-business permits (as of 30 June 2026) and its registers of
   barbers, beauty salons and laundries (as of 31 March 2026).
-- Japan has no general business licence, so shops other than food shops — clothing, electronics,
+- Japan has no general business license, so shops other than food shops — clothing, electronics,
   pharmacies — do not appear: the Food shops layer is food retail only (bakeries and
   confectioners, delis, butchers and fishmongers).
 - Food businesses that only notify the city rather than hold a permit, such as many convenience
@@ -84,7 +84,7 @@ st.markdown(
 
 - The list gives an address but no location. Each address is matched to MLIT's address reference
   data, which places nearly all at their street block; where only the district can be found, the
-  dot sits at the district's centre.
+  dot sits at the district's center.
 - Where a business's trade name is its operator's own name, the dot shows its permit type instead.
 - Names and permit types are shown in Japanese, as the city records them.
 """

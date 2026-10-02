@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Two Grand Reims Mobilités tram lines are drawn, **Tram T1 and Tram T2**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Two Grand Reims Mobilités tram lines are drawn, **Tram T1 and Tram T2**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Reims has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 370 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Reims**. **Tram T1 and Tram T2 run past it**, so three stops beyond the boundary are left out: Gare de Champagne-Ardenne TGV and Polyclinique in Bezannes; Neufchatel in Bétheny.

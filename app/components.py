@@ -64,7 +64,7 @@ _MACRO_THEME_CSS = """
     font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
     background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
     border: 1px solid @@LIGHT_BORDER@@;
-    /* The only colour here deliberately left outside pipeline/theme.py: a
+    /* The only color here deliberately left outside pipeline/theme.py: a
        black drop shadow is theme-agnostic, and it simply stops mattering on a
        dark surface rather than looking wrong. Same value in map_common.py. */
     border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
@@ -74,7 +74,7 @@ body.dark-base #macro-theme-toggle { background: @@DARK_SURFACE@@; color: @@DARK
     border-color: @@DARK_BORDER@@; }
 body.dark-base #macro-theme-toggle:hover { background: @@DARK_SURFACE_HOVER@@; }
 /* Only the basemap canvas is filtered; the markers and labels are a separate
-   canvas, so they keep their colours. Same filter as the city maps. */
+   canvas, so they keep their colors. Same filter as the city maps. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-canvas {
     filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
 @@CONTROLS@@
@@ -179,7 +179,7 @@ _MACRO_CONTROLS_CSS = """
    sit "beneath UI, behind toggles, or off-screen", and render_site_notices()
    below already refuses an st.expander for the same reason - a required notice
    behind a toggle is not displayed. A library default is not an exemption, so
-   the compact behaviour is overridden rather than accepted.
+   the compact behavior is overridden rather than accepted.
 
    Not scoped to `body.dark-base`: the obligation does not depend on the theme.
    The city maps are Leaflet, whose attribution control has no compact mode, so
@@ -217,16 +217,16 @@ body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: 
    the (dark-themed) page's near-white text - rgb(230,237,247) on Mapbox's
    half-white strip - and read only as its two links. The strip was also
    half-transparent, so a name pill under it showed through the text. Links use
-   the TEXT colour in light mode, not the accent: the teal accent is ~3.7:1 on
+   the TEXT color in light mode, not the accent: the teal accent is ~3.7:1 on
    white. check_macro_attribution.mjs measures all of this at 4.5:1. */
 [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@LIGHT_SURFACE@@ !important; color: @@LIGHT_MUTED@@; }
 [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@LIGHT_TEXT@@; }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@DARK_ATTRIB_BG@@ !important; color: @@DARK_MUTED@@; }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@DARK_ACCENT@@; }
 /* deck.gl's tooltip is an HTML overlay (class `deck-tooltip`), so unlike the
-   marker and label layers it CAN be themed. pydeck writes its colours inline
+   marker and label layers it CAN be themed. pydeck writes its colors inline
    from the `tooltip` style dict, hence !important. Without this the macro
-   map's tooltip stayed the light-mode green-grey while every city map's
+   map's tooltip stayed the light-mode green-gray while every city map's
    tooltip was slate. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .deck-tooltip {
     background: @@DARK_SURFACE@@ !important; color: @@DARK_TEXT@@ !important;
@@ -297,8 +297,8 @@ def scroll_table(columns, rows, right=(), min_width=None):
     (2026-09-23). An HTML table in an overflow box does neither, and its text
     stays in the page. `rows` are sequences of already-formatted strings;
     `right` names the columns to right-align (figures); `min_width` (px)
-    keeps a wide table from squashing its columns before it scrolls. Colours
-    are left to the theme, with a grey rule that reads in both.
+    keeps a wide table from squashing its columns before it scrolls. Colors
+    are left to the theme, with a gray rule that reads in both.
     """
     import html
 
@@ -1806,7 +1806,7 @@ _NOTICES = [
 _NON_AFFILIATION = (
     "This is an independent project. It is not affiliated with, sponsored by "
     "or endorsed by any transit agency or city government named here. Line "
-    "names and route colours are used only to identify each line as its "
+    "names and route colors are used only to identify each line as its "
     "riders know it. No agency logo, wordmark or route symbol is reproduced."
 )
 
@@ -1823,7 +1823,7 @@ _NON_AFFILIATION = (
 # three are meant to say the same thing.
 _UNSETTLED_TERMS = (
     "**One city rests on terms that are unresolved, and that is stated rather "
-    "than glossed.** Philadelphia's business licences and city limits carry "
+    "than glossed.** Philadelphia's business licenses and city limits carry "
     "the “City of Philadelphia License”, which reserves the City's "
     "rights without granting any — and the dataset page also binds a "
     "reader to the City's separate Terms of Use, which permit residents to "
@@ -1833,12 +1833,12 @@ _UNSETTLED_TERMS = (
     "without the prior written permission of the City”. Read literally "
     "and applied to a dataset, that would not permit this map, which filters "
     "and redraws what it publishes. Read as what it appears to be — terms "
-    "written for web pages, sitting beside a dataset licence that contains no "
+    "written for web pages, sitting beside a dataset license that contains no "
     "such prohibition, under an Open Data Program whose purpose is public "
     "reuse — it would. **That question is open, it has not been resolved "
-    "in this project's favour, and if the City confirms the restrictive "
+    "in this project's favor, and if the City confirms the restrictive "
     "reading Philadelphia comes off this site** — the same way a request "
-    "about a single listing is honoured rather than argued. A written request "
+    "about a single listing is honored rather than argued. A written request "
     "for the City's position was sent on 21 September 2026. Whatever comes "
     "back, silence will not be treated as permission."
 )
@@ -1851,7 +1851,7 @@ _AS_RECORDED = (
     "retrieval date recorded for that source, redrawn and filtered. Registers "
     "lag the street: a shop that closed last month may still appear, and one "
     "that opened last month may not. Read each map as what a city's own "
-    "licence records showed on that date, not as a census of what is open."
+    "license records showed on that date, not as a census of what is open."
 )
 
 
@@ -1890,7 +1890,7 @@ def render_site_notices(show_links: bool = True):
     st.caption(
         "**OpenStreetMap** \u2014 basemap \u00a9 OpenStreetMap contributors, "
         "available under the Open Database License. The attribution also "
-        "appears in the corner of every map, where its licence requires it to "
+        "appears in the corner of every map, where its license requires it to "
         "stay visible. The overview map's basemap is \u00a9 CARTO."
     )
     st.caption(_UNSETTLED_TERMS)
@@ -1920,7 +1920,7 @@ def city_entry(name):
 
 
 def render_city_title(name):
-    """The city's name, centred, with CITY_SUBTITLE beneath it. Also trims
+    """The city's name, centered, with CITY_SUBTITLE beneath it. Also trims
     the empty space above it on city pages only, so more of the map shows on
     the first screen of a phone: the top padding (6rem by default), and the
     16 px gap each invisible element above the title (the style blocks, the
@@ -1973,7 +1973,7 @@ def render_map_help(layers="business categories"):
         "whichever mode the page is using; once you pick one, it carries "
         "across the other city maps.\n"
         "- The heat layer is illustrative: a visual blur, not a statistical "
-        "density estimate. Read its colour as “roughly where things cluster.”",
+        "density estimate. Read its color as “roughly where things cluster.”",
         unsafe_allow_html=True,   # the icon's <img>
     )
 

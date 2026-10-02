@@ -45,7 +45,7 @@ st.markdown(
 
 - **Five lines are drawn** from the TTC's own route geometry: Lines 1, 2 and 4 of the
   subway, and Lines 5 and 6, which are light rail.
-- Four of the five use the TTC's own colours; Line 2's green was darkened because the
+- Four of the five use the TTC's own colors; Line 2's green was darkened because the
   agency's green is almost exactly the green used for Personal services pins, and the two
   were indistinguishable where a line ran under its own stations.
 - **The 18 streetcar routes are not included** — they run in traffic every block or two, and
@@ -58,14 +58,14 @@ st.markdown(
 **The businesses**
 
 - **Toronto licenses food and trades, but not general retail.** There is no grocer, clothing
-  shop, pharmacy or hardware store here, because the City requires no licence for any of
+  shop, pharmacy or hardware store here, because the City requires no license for any of
   them, so none appears in any register to map.
 - What the Retail category holds instead is the *regulated* slice: second-hand shops, pawn
   shops, precious-metal buyers, smoke and vape shops, pet shops and fireworks vendors — the
   trades a city licenses because it wants to watch them.
-- **Cancelled licences are excluded, and most of the register is cancelled.** This is a
-  licence history going back two decades rather than a snapshot, so roughly three rows in
-  four record a licence that has already ended. Only current ones are mapped.
+- **Canceled licenses are excluded, and most of the register is canceled.** This is a
+  license history going back two decades rather than a snapshot, so roughly three rows in
+  four record a license that has already ended. Only current ones are mapped.
 
 **Reading the map**
 
@@ -78,7 +78,7 @@ st.markdown(
   way the United States does.
 - The City's own One Address Repository supplied the coordinates, and about one storefront
   in sixteen could not be matched — mostly plazas and malls the repository does not carry as
-  a single address, so a few shopping centres are under-counted rather than any district
+  a single address, so a few shopping centers are under-counted rather than any district
   being missed.
 """
 )

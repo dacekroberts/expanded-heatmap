@@ -54,7 +54,7 @@ st.markdown(
     """
 **The lines**
 
-- Five lines are drawn: Metrorex's **M1** to **M5**, redrawn from OpenStreetMap, each labelled
+- Five lines are drawn: Metrorex's **M1** to **M5**, redrawn from OpenStreetMap, each labeled
   with its code, with its termini in the legend.
 - M5's two branches, to Valea Ialomiței and to Râul Doamnei, are one line.
 - The map covers the **Municipality of Bucharest**, its six sectors; every metro station lies
@@ -69,7 +69,7 @@ st.markdown(
   to supermarkets.
 - No open register of other shops or of personal services covers Romania, so **clothes shops,
   hairdressers and the like are not on this map**.
-- Registrations the Directorate has cancelled are left out, as are canteens, catering, pastry
+- Registrations the Directorate has canceled are left out, as are canteens, catering, pastry
   labs, mobile units, kiosk carts and vending machines.
 - A premises with several registrations (a supermarket's butcher and bakery counters) is shown
   once.

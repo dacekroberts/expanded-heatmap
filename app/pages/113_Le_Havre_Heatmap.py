@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Two LiA tram lines are drawn, **Tram A and Tram B**, each labelled on the map and in the legend, their stops from the operator's own published timetable feed and their track from OpenStreetMap.
+- Two LiA tram lines are drawn, **Tram A and Tram B**, each labeled on the map and in the legend, their stops from the operator's own published timetable feed and their track from OpenStreetMap.
 - Le Havre has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 430 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Le Havre**. **Tram A runs past it**, so one stop beyond the boundary is left out: Grand Hameau in Octeville-sur-Mer.

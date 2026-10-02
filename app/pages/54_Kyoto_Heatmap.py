@@ -45,12 +45,12 @@ st.markdown(
     """
 **The lines**
 
-- Eighteen lines are drawn, each labelled on the map and in the legend: the Kyoto Municipal
+- Eighteen lines are drawn, each labeled on the map and in the legend: the Kyoto Municipal
   Subway's Karasuma and Tōzai lines; JR West's Kyoto, Biwako, Sagano, Nara and Kosei lines;
   Keihan's Main, Ōtō, Uji and Keishin lines; Hankyu's Kyoto and Arashiyama lines; Kintetsu's Kyoto
   Line; the Randen's Arashiyama and Kitano lines; and Eiden's Eizan and Kurama lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
-  English are from OpenStreetMap. Line colours are this project's own, not the operators'.
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Kyoto City get rings, because the business data covers the city alone:
   lines running on to Ōtsu, Uji, Mukō, Nagaokakyō and Yawata are cut at the city line.
 - The Sagano Scenic Railway and the Eizan and Kurama cable cars, which are sightseeing lines, are
@@ -67,7 +67,7 @@ st.markdown(
   today.
 - Barbers, beauty salons and laundries come from the city's complete lists as of 31 March 2026 and
   the new premises listed each month since.
-- Japan has no general business licence, so shops other than food shops (clothing, electronics,
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear. The Food shops layer is food retail only, by permit type: bakeries
   and confectioners, delis, butchers and fishmongers.
 - Shops selling only packaged food have filed a notification rather than a permit since 2021 and
@@ -77,7 +77,7 @@ st.markdown(
 
 - The lists give an address but no location. Each address is matched to MLIT's address reference
   data, which places most at their street block; where only the town can be found, the dot sits
-  at its centre.
+  at its center.
 - Kyoto's central addresses name the street corner before the town (河原町通三条上る下丸屋町),
   and the match reads past the corner to the town.
 - Where a business's trade name is its operator's own name, the dot shows its permit type instead.

@@ -82,14 +82,14 @@ st.markdown(
 **The lines**
 
 - Both lines of **Bybanen**, Bergen's light rail, are drawn, **Bybanen 1** (Byparken – Bergen
-  Airport Flesland) and **Bybanen 2** (Kaigaten – Fyllingsdalen), each labelled on the map and in
+  Airport Flesland) and **Bybanen 2** (Kaigaten – Fyllingsdalen), each labeled on the map and in
   the legend, redrawn from Skyss's published route geometry.
-- Neither Skyss's data nor OpenStreetMap gives the two lines different colours, so line 1 is shown
-  in the colour OpenStreetMap records for Bybanen and line 2 in a colour chosen for this map.
+- Neither Skyss's data nor OpenStreetMap gives the two lines different colors, so line 1 is shown
+  in the color OpenStreetMap records for Bybanen and line 2 in a color chosen for this map.
 - Ferries are not drawn.
 - The map covers the **municipality of Bergen**, which holds every Bybanen stop, the airport
   included.
-- Byparken and Kaigaten, the two lines' city-centre termini a block apart, are shown as two stops.
+- Byparken and Kaigaten, the two lines' city-center termini a block apart, are shown as two stops.
 
 **The businesses**
 
@@ -101,7 +101,7 @@ st.markdown(
 - **Where a business belongs to a sole trader, the map shows its address instead of its name**,
   because a sole trader's business is usually registered under the owner's own name.
 - **About three storefronts in five sit within a station ring.** Bybanen runs south from the
-  centre, and the municipality reaches north to Åsane, where there is no light rail.
+  center, and the municipality reaches north to Åsane, where there is no light rail.
 
 **Reading the density**
 

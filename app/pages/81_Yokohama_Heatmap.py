@@ -47,13 +47,13 @@ st.markdown(
     """
 **The lines**
 
-- Twenty lines are drawn, each labelled on the map and in the legend: the Yokohama Municipal
+- Twenty lines are drawn, each labeled on the map and in the legend: the Yokohama Municipal
   Subway's Blue and Green lines; JR East's Keihin-Tohoku / Negishi, Tokaido, Yokosuka, Yokohama,
   Nambu and Tsurumi lines and the Sotetsu-JR Link Line; the Keikyu Main and Zushi lines; Tokyu's
   Toyoko, Den-en-toshi, Kodomonokuni and Shin-yokohama lines; the Minatomirai Line; Sotetsu's
   Main, Izumino and Shin-yokohama lines; and the Kanazawa Seaside Line, an automated guideway.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
-  English are from OpenStreetMap. Line colours are this project's own, not the operators'.
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Yokohama City get rings, because the business data covers the city alone:
   lines running on to Tokyo, Kawasaki, Machida, Yamato, Fujisawa, Kamakura, Zushi and Yokosuka are
   cut at the city line.
@@ -72,7 +72,7 @@ st.markdown(
 
 - The registers give an address but no location. Each address is matched to MLIT's address
   reference data, which places almost all at their street block; where only the district can be
-  found, the dot sits at the district's centre.
+  found, the dot sits at the district's center.
 - Where a business's trade name is its operator's own name, the dot shows its register type
   instead.
 - Names and types are shown in Japanese, as the city records them.

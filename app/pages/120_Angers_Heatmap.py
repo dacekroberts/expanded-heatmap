@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Three Angers Loire Métropole tram lines are drawn, **Tram A, Tram B and Tram C**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Three Angers Loire Métropole tram lines are drawn, **Tram A, Tram B and Tram C**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Angers has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 390 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Angers**. **Tram A runs past it**, so six stops beyond the boundary are left out: Acacias, Avrillé-Ardenne, Bascule, Bois du Roy, Plateau Mayenne and St-Gilles in Avrillé.

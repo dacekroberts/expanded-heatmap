@@ -45,12 +45,12 @@ st.markdown(
     """
 **The lines**
 
-- Fifteen lines are drawn, each labelled on the map and in the legend: Kobe Municipal Subway's
+- Fifteen lines are drawn, each labeled on the map and in the legend: Kobe Municipal Subway's
   Seishin-Yamate, Hokushin and Kaigan lines, the Port Liner and Rokkō Liner, JR West's JR Kobe,
   Wadamisaki and JR Takarazuka lines, the Hankyu Kobe Line, the Hanshin Main Line, the Sanyō Main
   Line, the Kobe Kōsoku Line, and Kobe Electric Railway's Arima, Sanda and Ao lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
-  English are from OpenStreetMap. Line colours are this project's own, not the operators'.
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Kobe City get rings, because the business data covers the city alone: lines
   running on to Ashiya, Akashi, Sanda and Miki are cut at the city line.
 - The Shinkansen is not drawn (Shin-Kobe appears as a subway station), nor are the Maya and Rokkō
@@ -60,7 +60,7 @@ st.markdown(
 
 - From Kobe City's list of food-business permits (all permits in force at the end of March 2026)
   and its registers of barbers, beauty salons and laundries.
-- Japan has no general business licence, so shops other than food shops — clothing, electronics,
+- Japan has no general business license, so shops other than food shops — clothing, electronics,
   pharmacies — do not appear: the Food shops layer is food retail only (bakeries and
   confectioners, delis, butchers and fishmongers).
 - Food businesses that only notify the city rather than hold a permit, such as many convenience
@@ -72,7 +72,7 @@ st.markdown(
 
 - The list gives an address but no location. Each address is matched to MLIT's address reference
   data, which places most at their street block; where only the district can be found, the dot
-  sits at the district's centre.
+  sits at the district's center.
 - Where a business's trade name is its operator's own name, the dot shows its permit type instead.
 - Names and permit types are shown in Japanese, as the city records them.
 """

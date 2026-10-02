@@ -66,8 +66,8 @@ st.markdown(
     """
 **The trams**
 
-- Four tram lines are drawn, **DPmML's trams 1 to 4**, each labelled on the map and in the legend.
-- The lines and stops are drawn from OpenStreetMap, and the colours are this project's, because
+- Four tram lines are drawn, **DPmML's trams 1 to 4**, each labeled on the map and in the legend.
+- The lines and stops are drawn from OpenStreetMap, and the colors are this project's, because
   none are published for reuse.
 - Buses, trolleybuses and trains are not drawn.
 - Most has no metro, so its trams are its rapid transit, as in Riga. Every tram stop

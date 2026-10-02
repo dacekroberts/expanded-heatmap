@@ -56,7 +56,7 @@ st.markdown(
     """
 **The lines**
 
-- Five lines are drawn, each labelled on the map and in the legend in the operators' colours:
+- Five lines are drawn, each labeled on the map and in the legend in the operators' colors:
   **Incheon Lines 1 and 2**, **Line 1** (the Gyeongin Line), **Line 7** and the
   **Suin–Bundang Line**.
 - Routes and stations come from OpenStreetMap.
@@ -72,7 +72,7 @@ st.markdown(
   position for every one: restaurants, cafés and bars; shops of every kind, from convenience
   stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care
   salons, laundries, bathhouses and massage.
-- This national register is a different kind of record from the city licence data behind
+- This national register is a different kind of record from the city license data behind
   Seoul's, Daegu's and Busan's maps, which count only licensed trades. So **Incheon's Retail
   category is complete where those cities' is thin**, and density is not directly comparable
   between them.

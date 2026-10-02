@@ -48,7 +48,7 @@ st.markdown(
 **The lines**
 
 - Guadalajara's Tren Ligero runs four lines and this map draws all of them. Each line is
-  labelled directly on the map in the name its riders use, and appears in the legend.
+  labeled directly on the map in the name its riders use, and appears in the legend.
 - Líneas 1 and 2 are the original network, from 1989 and 1994; Línea 3 opened in 2020,
   connecting Zapopan, Guadalajara and Tlaquepaque; Línea 4 opened in December 2025, running
   south to Tlajomulco de Zúñiga.
@@ -59,19 +59,19 @@ st.markdown(
   included. Tonalá is not included: no line reaches it.
 - **The line geometry comes from OpenStreetMap, not from a transit feed.** A transit feed
   (GTFS) for Guadalajara does exist, but it has only three lines: a map built from it would
-  have lacked an operating line, eight stations and twenty-one kilometres while looking
+  have lacked an operating line, eight stations and twenty-one kilometers while looking
   complete. OpenStreetMap has all four.
 - Where SITEUR, the operator, publishes a station count, this map matches it: ten for
   Línea 2 and eight for Línea 4.
 
 **The businesses**
 
-- **The businesses are a census, not a licence register, and that changes what the map
-  means.** Most cities here are built from business licences: a record of who registered.
+- **The businesses are a census, not a license register, and that changes what the map
+  means.** Most cities here are built from business licenses: a record of who registered.
   Guadalajara, like Mexico City, is built from DENUE, the national business register of INEGI (Mexico's
   statistics agency), compiled by surveying premises and recording the name on the shopfront.
-- It is far more complete than a licence register, so the density shown here is **not
-  comparable** with the licence-register cities' — read it as a fact about how the data was
+- It is far more complete than a license register, so the density shown here is **not
+  comparable** with the license-register cities' — read it as a fact about how the data was
   collected as much as about Guadalajara's streets.
 - Fixed premises only. DENUE separately records semi-fixed units — stalls and street posts —
   and those are not shown, although street commerce is a real part of the region's retail.

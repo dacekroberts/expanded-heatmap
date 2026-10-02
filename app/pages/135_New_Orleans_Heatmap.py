@@ -45,7 +45,7 @@ if PROVENANCE_JSON.exists():
         _reg = (_prov.get("register") or {}).get("rows_updated") or ""
         _rail = ((_prov.get("files_utc") or {}).get("osm_rail.json") or "")[:10]
         if _reg and _rail:
-            st.caption(f"Occupational licence data from the City of New Orleans, updated "
+            st.caption(f"Occupational license data from the City of New Orleans, updated "
                        f"**{_reg}**; the streetcar lines and their stops from "
                        f"OpenStreetMap, fetched **{_rail}**.")
     except (ValueError, OSError, AttributeError):
@@ -62,7 +62,7 @@ st.markdown(
 **The streetcars**
 
 - Five RTA streetcar lines are drawn, **St. Charles (12), Loyola/Rampart (46), Canal–Cemeteries
-  (47), Canal–City Park/Museum (48) and Riverfront (49)**, each labelled on the map and in the
+  (47), Canal–City Park/Museum (48) and Riverfront (49)**, each labeled on the map and in the
   legend, redrawn from OpenStreetMap's route geometry.
 - New Orleans has no metro: its streetcars are its rapid transit, as Riga's trams are, so every
   streetcar stop gets rings. Buses and ferries are not drawn.
@@ -73,17 +73,17 @@ st.markdown(
 
 **The businesses**
 
-- Businesses come from the City's list of **active occupational licences**, each placed at the
+- Businesses come from the City's list of **active occupational licenses**, each placed at the
   point the City records for it; about one in twenty-three has no point and cannot be placed.
-- **The map shows the business name the licence gives, never the owner's**; where a licence gives
+- **The map shows the business name the license gives, never the owner's**; where a license gives
   no business name, or the name is only a person's, it shows the street address.
 - Personal services are thin on this map: 219 of the pins near stations are salons, barbers and the
   like, against 941 shops and 980 food businesses. The City's catch-all "Personal Services, Other"
-  (249 licences) is left out because it does not say what a business does.
+  (249 licenses) is left out because it does not say what a business does.
 
 **Reading the density**
 
-- **Read the density as a register, not a street survey.** A licence is issued to a business at an
+- **Read the density as a register, not a street survey.** A license is issued to a business at an
   address, and the list does not say whether the address has a shop a passer-by could walk into.
 - **About nine storefronts in twenty sit within a ring.** Streetcar stops here stand a block or two
   apart, so the rings join into a band along each line. Read them as distance from the line.

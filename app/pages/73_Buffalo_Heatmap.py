@@ -44,7 +44,7 @@ if PROVENANCE_JSON.exists():
         _files = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8")).get("files_utc") or {}
         _taken = (_files.get("city_licences.csv") or "")[:10]
         if _taken:
-            st.caption(f"Business licences fetched **{_taken}** and counted if "
+            st.caption(f"Business licenses fetched **{_taken}** and counted if "
                        f"unexpired on that date.")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
@@ -57,8 +57,8 @@ st.markdown(
 **The line**
 
 - **NFTA Metro Rail**, Buffalo's one light-rail line, is drawn from DL&W, by the waterfront, to
-  University. It is labelled on the map and in the legend, and redrawn from OpenStreetMap's route
-  geometry in the colour OpenStreetMap records for it.
+  University. It is labeled on the map and in the legend, and redrawn from OpenStreetMap's route
+  geometry in the color OpenStreetMap records for it.
 - All fourteen stations are inside the city, and none is left out.
 - The line runs on the surface through the downtown transit mall and mostly in tunnel beyond it.
 - **Trains run about every 20 minutes** through the day and evening, by NFTA's published
@@ -66,23 +66,23 @@ st.markdown(
 
 **The businesses**
 
-- **Three registers, because Buffalo has no general business licence.** Restaurants, laundries and
+- **Three registers, because Buffalo has no general business license.** Restaurants, laundries and
   a slice of regulated retail (butchers, used-car and second-hand dealers, pawnbrokers, pet shops,
-  tobacco sellers) come from the City's own business licences.
-- Grocery, deli and convenience stores come from New York State's retail food store licences, and
-  salons and barbers from the State's appearance-enhancement and barber business licences.
+  tobacco sellers) come from the City's own business licenses.
+- Grocery, deli and convenience stores come from New York State's retail food store licenses, and
+  salons and barbers from the State's appearance-enhancement and barber business licenses.
 - So **the Retail category covers less of the trade than in most cities here**: a clothing shop or
-  a bookshop needs none of these licences and is simply absent. Read the balance between categories
+  a bookshop needs none of these licenses and is simply absent. Read the balance between categories
   as a fact about Buffalo's licensing, not about its high streets.
-- Every licence in the City's file is marked active, including many that expired years ago, so **a
-  City licence is counted only if it has not passed its expiry date**.
+- Every license in the City's file is marked active, including many that expired years ago, so **a
+  City license is counted only if it has not passed its expiry date**.
 - The State's two files are placed at their own points and kept only inside the city limits.
 - Where one business appears in two registers it is counted once; a grocer that both the City and
   the State license is matched on its street address. A business listed differently in two
   registers can still be counted twice.
 - The State's food-store list carries no dates of its own and was last refreshed by the State on
   30 September 2025.
-- **A salon licensed under a person's own name shows its licence type instead** (for example
+- **A salon licensed under a person's own name shows its license type instead** (for example
   "Barber shop"), and a salon at an apartment address is left off, as a home.
 
 **Reading the map**

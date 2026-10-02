@@ -50,11 +50,11 @@ st.markdown(
     """
 **The lines**
 
-- Twelve lines are drawn, each labelled on the map and in the legend: the Astram Line; JR West's
+- Twelve lines are drawn, each labeled on the map and in the legend: the Astram Line; JR West's
   Sanyo, Kabe, Geibi and Kure lines; and Hiroden's streetcar network, its Main, Ujina, Eba,
   Yokogawa, Hakushima and Minami lines and the Miyajima Line out to the west.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
-  English are from OpenStreetMap. Line colours are this project's own, not the operators'.
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Hiroshima City get rings, because the business data covers the city alone:
   lines running on to Hatsukaichi, Fuchu, Kaita, Saka and Higashihiroshima are cut at the city
   line.
@@ -67,7 +67,7 @@ st.markdown(
 - **This map shows food businesses only.**
 - Hiroshima City publishes no complete list of barbers, beauty salons or laundries, only its new
   openings, so personal services are not on this map.
-- Japan has no general business licence, so shops other than food shops (clothing, electronics,
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear either.
 - The food businesses come from two lists. Hiroshima City's own list holds every food-business
   permit applied for at a city counter and in force at the end of March 2026.

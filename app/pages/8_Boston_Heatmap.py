@@ -56,25 +56,25 @@ st.markdown(
 **The businesses**
 
 - **Personal services is absent, not thin.** There is no hairdresser, barber or nail salon on this
-  map, and that is not a filter: no such licence exists as data at any level of government.
+  map, and that is not a filter: no such license exists as data at any level of government.
 - **Retail is narrow.** What is here is retail *food* (groceries, convenience stores, bodegas), plus
   package stores and cannabis dispensaries. A clothes shop, a bookshop or a hardware store needs no
-  licence from any of the three registries behind this map, so it is simply absent. Read the
+  license from any of the three registries behind this map, so it is simply absent. Read the
   balance between the two categories accordingly.
 - **Three sources, combined.** Food service and retail food come from Inspectional Services'
   food-establishment records; package stores come from the Licensing Board; cannabis dispensaries
   from its cannabis register.
-- A premises holding licences from more than one of them is counted once.
+- A premises holding licenses from more than one of them is counted once.
 - **A limit of the privacy check.** This project checks whether a published name could be a
   person's name at their own home. Boston's addresses carry no apartment or suite numbers at all,
   so the check has nothing to read here: its zero is a gap in the measurement, not a proven
   result.
-- What actually limits the exposure is the sources: a food-service licence and a package-store
-  licence both require commercial premises, so a home cannot hold one.
+- What actually limits the exposure is the sources: a food-service license and a package-store
+  license both require commercial premises, so a home cannot hold one.
 
 **The lines**
 
-- **Five lines are drawn**, each labelled directly on the map and in the legend: the Red, Orange,
+- **Five lines are drawn**, each labeled directly on the map and in the legend: the Red, Orange,
   Blue and Green Lines and the Mattapan Trolley.
 - Regional Rail is a separate system and is not included, as commuter rail is left out on most
   maps here.

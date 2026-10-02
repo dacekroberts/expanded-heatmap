@@ -57,12 +57,12 @@ st.markdown(
 
 **The businesses**
 
-- **The businesses are a premises census, not a licence register, and that changes what the map
-  means.** Most cities here are built from business licences - a record of who registered.
+- **The businesses are a premises census, not a license register, and that changes what the map
+  means.** Most cities here are built from business licenses - a record of who registered.
 - Madrid is built from the Ayuntamiento's *Censo de locales*, which records the unit on the street
   and the sign above its door: the same shape as Montréal's commercial survey, and the density here
   is close to Montréal's for that reason.
-- It is **not comparable** with the licence-register cities, where what is counted is a
+- It is **not comparable** with the license-register cities, where what is counted is a
   registration rather than a shopfront.
 - The map counts retail, food service and personal services as the register's own activity
   classification defines them. Hotels and tourist flats are excluded, as accommodation rather than

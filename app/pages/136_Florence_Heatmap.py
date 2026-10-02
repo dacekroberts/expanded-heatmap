@@ -62,8 +62,8 @@ st.markdown(
     """
 **The trams**
 
-- Two tram lines are drawn, **T1 Leonardo and T2 Vespucci**, each labelled on the map and in the
-  legend, redrawn from OpenStreetMap's route geometry, in OpenStreetMap's own colours.
+- Two tram lines are drawn, **T1 Leonardo and T2 Vespucci**, each labeled on the map and in the
+  legend, redrawn from OpenStreetMap's route geometry, in OpenStreetMap's own colors.
 - Florence has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets
   rings.
 - Lines T3 and T4 are under construction and are not drawn. Buses and trains are not drawn.

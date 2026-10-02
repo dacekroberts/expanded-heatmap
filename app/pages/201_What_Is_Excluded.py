@@ -26,7 +26,7 @@ edit here. The reading of those files lives in `app/station_scope.py`, shared
 with `scripts/check_scope_disclosure.py` so that one vocabulary decides both
 what is shown and what is enforced.
 
-It also carries the standing commitment that a removal request is honoured
+It also carries the standing commitment that a removal request is honored
 rather than argued, which is the one thing on this site a reader might need to
 act on.
 
@@ -88,12 +88,12 @@ st.title("What is counted, and what is not")
 INTRO = (
     """
 These maps answer a narrow question - how much walk-in commerce sits within a
-few hundred metres of a rapid-transit station - and they answer it by leaving
+few hundred meters of a rapid-transit station - and they answer it by leaving
 two different things out.
 
 **Which stations.** Each map covers one rapid-transit network, the one named
 on that city's page. Commuter rail is left out, except where it runs like a metro inside the city
-(*Why the maps differ* says where). Stations in neighbouring municipalities
+(*Why the maps differ* says where). Stations in neighboring municipalities
 are dropped, because no register covers them. Where a light-rail line stops
 every other block, its surface stops are thinned so the rings stay readable.
 
@@ -101,7 +101,7 @@ every other block, its surface stops are thinned so the rings stay readable.
 mean every retailer; "Food service" does not mean every kitchen. Some things
 are **excluded**, by a choice made here that can be reversed. Vending machines
 and mail-order sellers are not storefronts. Parking garages sit outside this
-project's question. And a few licence codes that cover any kind of business
+project's question. And a few license codes that cover any kind of business
 were dropped, because sampling showed they were mostly home-based sole traders
 rather than shops. Other things are **missing**, which is not a choice at all.
 Philadelphia and Boston license no personal-service trade that publishes

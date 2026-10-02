@@ -77,8 +77,8 @@ st.markdown(
     """
 **The line**
 
-- One line is drawn — **Metrofor's Linha Sul** — labelled on the map and in the legend, in
-  the colour OpenStreetMap records.
+- One line is drawn — **Metrofor's Linha Sul** — labeled on the map and in the legend, in
+  the color OpenStreetMap records.
 - Metrofor's three diesel lines — Linha Oeste, the Parangaba–Mucuripe VLT and the airport
   branch — are not drawn: suburban railways are left out of these maps unless they run like
   a metro, and these run every 30 to 60 minutes.
@@ -94,7 +94,7 @@ st.markdown(
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of
   the enumerator's words, and the names were not checked against any business register.
-- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
   dot.
 - At an address that is also someone's home, the dot shows only its category.
 

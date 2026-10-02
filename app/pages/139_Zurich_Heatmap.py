@@ -73,9 +73,9 @@ st.markdown(
     """
 **The trams**
 
-- Sixteen VBZ tram lines are drawn, **trams 2 to 11, 13, 14, 15, 17, 50 and 51**, each labelled on
+- Sixteen VBZ tram lines are drawn, **trams 2 to 11, 13, 14, 15, 17, 50 and 51**, each labeled on
   the map and in the legend, redrawn from OpenStreetMap's route geometry.
-- They are in VBZ's colours as OpenStreetMap records them, except where two lines share one: trams
+- They are in VBZ's colors as OpenStreetMap records them, except where two lines share one: trams
   9, 11, 15, 50 and 51 take a shade of their own, and tram 10's magenta is darkened so it stays
   distinct from the Food service dots.
 - Zurich has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets
@@ -99,20 +99,20 @@ st.markdown(
   (Gastwirtschaftsbetriebe): restaurants, cafés, bars, clubs and takeaways, and the shops, kiosks
   and petrol stations licensed to sell alcohol. The register lists open premises only.
 - Each is placed at the point the register records for it, and each dot shows the trade name and
-  the kind of licence; where a trade name is a person's own name, the dot shows the street address
+  the kind of license; where a trade name is a person's own name, the dot shows the street address
   instead.
 - **This map has two categories, not three.** Its shops are only those licensed to sell alcohol:
   supermarkets, wine shops, kiosks and petrol-station shops, among others.
-- A clothes shop, a bookshop or a bakery that sells no alcohol needs no such licence and is
+- A clothes shop, a bookshop or a bakery that sells no alcohol needs no such license and is
   absent, so read the Licensed shops layer as a slice of the city's retail, not all of it.
 - The register holds no hairdressers, beauty salons or other personal services.
 
 **Reading the density**
 
-- **Read the density as a register, not a street survey.** Some restaurant licences belong to
+- **Read the density as a register, not a street survey.** Some restaurant licenses belong to
   kitchens that are not open to the public, in care homes, staff restaurants, hospitals and
-  clubhouses; about one food licence in thirty is of this kind, and they remain.
-- Likewise, a few shop licences belong to offices and online sellers with no shop.
+  clubhouses; about one food license in thirty is of this kind, and they remain.
+- Likewise, a few shop licenses belong to offices and online sellers with no shop.
 - Several premises often share one address, and each is counted.
 - **About nine storefronts in ten sit within a ring.**
 """

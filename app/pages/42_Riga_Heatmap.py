@@ -48,7 +48,7 @@ if PROVENANCE_JSON.exists():
         _gt = _prov.get("gtfs") or {}
         _bits = []
         if _ex:
-            _bits.append(f"excise licences as published **{_ex}** (VID, via data.gov.lv)")
+            _bits.append(f"excise licenses as published **{_ex}** (VID, via data.gov.lv)")
         if _pg:
             _bits.append(f"cadastre premise groups as published **{_pg}** (VZD, via data.gov.lv)")
         if _gt.get("last_modified"):
@@ -64,14 +64,14 @@ st.markdown(
     """
 **The trams**
 
-- Seven tram lines are drawn, **Rīgas satiksme's trams 1, 5, 7, 8, 10, 11 and 14**, each labelled
+- Seven tram lines are drawn, **Rīgas satiksme's trams 1, 5, 7, 8, 10, 11 and 14**, each labeled
   on the map and in the legend, redrawn from Rīgas satiksme's own timetable data.
-- Rīgas satiksme draws every tram line in the same red, so the colours here are this project's.
-- Trams stop every 400 metres or so, so on each line only about one stop per half mile is drawn
+- Rīgas satiksme draws every tram line in the same red, so the colors here are this project's.
+- Trams stop every 400 meters or so, so on each line only about one stop per half mile is drawn
   as a station; interchanges and each line's ends are always drawn.
 - Buses, trolleybuses and suburban trains are not drawn: the suburban lines run every 15 to 30
   minutes at best.
-- The map covers the city of Riga, all 58 neighbourhoods.
+- The map covers the city of Riga, all 58 neighborhoods.
 
 **The businesses**
 
@@ -79,7 +79,7 @@ st.markdown(
 - **Food service** is from the State Revenue Service's register of premises licensed to sell
   alcohol or tobacco — cafés, bars, restaurants and canteens — placed by address; a café that
   sells neither is not in it, so read this layer as a lower bound. These dots show the kind of
-  place and its street address, never the licence holder.
+  place and its street address, never the license holder.
 - **Shops and services** is from the national cadastre: every premises registered for trade whose
   name reads as a shop or a service, placed at its building. The cadastre records what a premises
   is for, not who is in it, so a hairdresser and a clothes shop are one category.
@@ -88,7 +88,7 @@ st.markdown(
 
 - **Read the shops layer as an upper bound.** The cadastre does not record whether a premises is
   in use, and there is no citywide vacancy figure.
-- The city's survey of street-front ground-floor premises in the historic centre and its
+- The city's survey of street-front ground-floor premises in the historic center and its
   protection zone (August–November 2024) counted 20.4% of 2,324 vacant; its own headline for the
   same survey is that 73% are occupied. A 2025 count of the Old Town alone found 15% (87 of 573).
 - Vacancy has not been measured anywhere else in the city.

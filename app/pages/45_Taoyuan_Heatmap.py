@@ -65,16 +65,16 @@ st.markdown(
 **The line**
 
 - One line is drawn — **the Taoyuan Airport MRT**, from Taipei Main Station to Laojie River —
-  labelled on the map and in the legend, in the colour OpenStreetMap carries for its all-stop
+  labeled on the map and in the legend, in the color OpenStreetMap carries for its all-stop
   trains.
-- Its stations come from the national land-survey centre's station layer and its route from
+- Its stations come from the national land-survey center's station layer and its route from
   OpenStreetMap.
 - The line starts in Taipei and runs through New Taipei, but businesses are counted only around its
   stations inside Taoyuan, because the storefronts on this page are Taoyuan's; the line is still
   drawn to its ends.
 - Express trains stop at only some of these stations.
 - The line was built to reach the airport and does not pass through Taoyuan District, the city's
-  largest centre, so most of Taoyuan's storefronts lie outside the station rings; the whole-city
+  largest center, so most of Taoyuan's storefronts lie outside the station rings; the whole-city
   heat layer shows them all.
 - Taiwan Railway and high-speed rail are not drawn.
 

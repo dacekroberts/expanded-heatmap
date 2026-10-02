@@ -106,7 +106,7 @@ INTRO = (
 Every dataset behind these maps is public, and this page is the
 project's own provenance record: the exact web address each one was downloaded
 from, the filter applied at download, the date it was retrieved, and the
-licence or terms it carries. It is shown here as the project keeps it, without
+license or terms it carries. It is shown here as the project keeps it, without
 the notes on maintaining it.
 
 It is long on purpose. Three things in it are worth knowing before reading

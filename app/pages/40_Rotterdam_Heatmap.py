@@ -70,11 +70,11 @@ st.markdown(
     """
 **The lines**
 
-- Fourteen lines are drawn, **RET's metro lines A to E and its nine tram lines**, each labelled on
+- Fourteen lines are drawn, **RET's metro lines A to E and its nine tram lines**, each labeled on
   the map and in the legend, redrawn from RET's timetable data as published in the national feed
-  OVapi compiles, in RET's own colours. Trams 1 and 11, which RET gives one colour, are shown a
+  OVapi compiles, in RET's own colors. Trams 1 and 11, which RET gives one color, are shown a
   shade apart.
-- Trams stop every few hundred metres, so on each tram line's outer stretches only about
+- Trams stop every few hundred meters, so on each tram line's outer stretches only about
   one stop per half mile is drawn as a station; metro stations, interchanges and each line's last
   stop inside the city are always drawn.
 - Trams 4, 6 and 8 are drawn on their usual routes: until 22 November they are shortened for
@@ -102,7 +102,7 @@ st.markdown(
   it, so these dots show an address rather than a name, and a hairdresser looks the same as a
   clothes shop.
 - A shop unit that is also registered as a home is left off, and where a permit and a shop unit
-  are a few metres apart, the permit is kept.
+  are a few meters apart, the permit is kept.
 - **More than nine storefronts in ten sit within a station ring**, because the trams put a stop
   near most streets in the city.
 

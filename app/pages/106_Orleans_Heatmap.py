@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Two TAO tram lines are drawn, **Tram A and Tram B**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Two TAO tram lines are drawn, **Tram A and Tram B**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Orléans has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 380 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Orléans**. **Tram A and Tram B run past it**, so 19 stops beyond the boundary are left out: Bustière, Gare des Aubrais, Jules Verne and Lamballe in Fleury-les-Aubrais; Georges Pompidou in La Chapelle-Saint-Mesmin; Larry - Saint Fiacre, Les Aulnaies, Lorette, Victor Hugo and Zénith in Olivet; Clos de l'Arche, Clos du Hameau, Gaudier-Brzeska, Léon Blum, Pont Bordeau and Verville in Saint-Jean-de-Braye; Martin Luther King, Rol Tanguy and Trois Fontaines in Saint-Jean-de-la-Ruelle.

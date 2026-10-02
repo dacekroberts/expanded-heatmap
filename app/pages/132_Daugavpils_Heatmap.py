@@ -51,7 +51,7 @@ if PROVENANCE_JSON.exists():
         _rail = (((_prov.get("osm") or {}).get("rail") or {}).get("file_utc") or "")[:10]
         _bits = []
         if _lm("excise"):
-            _bits.append(f"excise licences as published **{_lm('excise')}** (VID, via data.gov.lv)")
+            _bits.append(f"excise licenses as published **{_lm('excise')}** (VID, via data.gov.lv)")
         if _lm("premise_groups"):
             _bits.append(f"cadastre premise groups as published **{_lm('premise_groups')}** "
                          f"(VZD, via data.gov.lv)")
@@ -74,9 +74,9 @@ st.markdown(
     """
 **The trams**
 
-- Daugavpils Satiksme's five tram routes are drawn, **trams 1, 2, 3, 4 and 5**, each labelled on
+- Daugavpils Satiksme's five tram routes are drawn, **trams 1, 2, 3, 4 and 5**, each labeled on
   the map and in the legend (3 and 5 share one line), redrawn from OpenStreetMap's route geometry,
-  in colours this project chose, since the source records none.
+  in colors this project chose, since the source records none.
 - Trams run about every 10 to 15 minutes by day on route 1 and every 20 to 30 minutes on routes 3
   and 5; routes 2 and 4 run about once an hour.
 - Buses and suburban trains are not drawn.
@@ -91,12 +91,12 @@ st.markdown(
 - Businesses come from two sources.
 - **Food service** is from the State Revenue Service's register of premises licensed to sell
   alcohol or tobacco — cafés, bars, restaurants and canteens — placed by address on the State
-  Address Register. These dots show the kind of place and its street address, never the licence
+  Address Register. These dots show the kind of place and its street address, never the license
   holder.
 - **Shops and services** is from the national cadastre: every premises registered for trade whose
   name reads as a shop or a service, placed at its building.
 - **This map has two categories, not three.** A café that sells neither alcohol nor tobacco is not
-  in the licence register, so read the food layer as a lower bound. The cadastre records what a
+  in the license register, so read the food layer as a lower bound. The cadastre records what a
   premises is for, not who is in it, so a hairdresser and a clothes shop are one category.
 - **About four storefronts in five sit within a ring.**
 

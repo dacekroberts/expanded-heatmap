@@ -80,7 +80,7 @@ st.markdown(
     """
 **The trams**
 
-- Two Ginko tram lines are drawn, **Tram T1 and Tram T2**, each labelled on the map and in the legend, from the operator's own published timetable feed.
+- Two Ginko tram lines are drawn, **Tram T1 and Tram T2**, each labeled on the map and in the legend, from the operator's own published timetable feed.
 - Besançon has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 360 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Besançon**. **Tram T1 runs past it**, so two stops beyond the boundary are left out: Chalezeule - Chalezeule and Chalezeule - Marnières in Chalezeule.

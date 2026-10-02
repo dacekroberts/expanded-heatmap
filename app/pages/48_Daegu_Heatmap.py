@@ -64,7 +64,7 @@ st.markdown(
     """
 **The lines**
 
-- Three lines are drawn, each labelled on the map and in the legend in the operator's colours:
+- Three lines are drawn, each labeled on the map and in the legend in the operator's colors:
   **Daegu Metro Lines 1, 2 and 3**. Line 2's green is darkened so it stays distinct from the
   Personal services dots, and Line 3 is a monorail.
 - Routes and stations come from OpenStreetMap, because Korea's national station dataset does not
@@ -82,7 +82,7 @@ st.markdown(
   retail, bakeries, butchers, food shops, shops licensed to sell tobacco, department stores and
   marts, and health-food shops.
 - Korea licenses these trades rather than retail in general, so a clothes shop, a bookshop or a
-  phone shop needs no such permit and is absent: **the Retail category leans towards food and
+  phone shop needs no such permit and is absent: **the Retail category leans toward food and
   convenience stores**. Read the balance between categories as a fact about Korea's licensing,
   not about Daegu's streets.
 - Convenience stores and confectioners that hold a café permit are counted as shops.

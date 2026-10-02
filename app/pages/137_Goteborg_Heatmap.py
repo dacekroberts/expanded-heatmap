@@ -71,9 +71,9 @@ st.markdown(
     f"""
 **The trams**
 
-- Thirteen Göteborgs Spårvägar tram lines are drawn, **Tram 1 to Tram 13**, each labelled on the
+- Thirteen Göteborgs Spårvägar tram lines are drawn, **Tram 1 to Tram 13**, each labeled on the
   map and in the legend, redrawn from OpenStreetMap's route geometry. They are in OpenStreetMap's
-  own colours, with line 4's made a little lighter so it stands apart from the dots.
+  own colors, with line 4's made a little lighter so it stands apart from the dots.
 - Buses, ferries and commuter trains are not drawn, and neither is Lisebergslinjen, the heritage
   tram line.
 - Göteborg has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets

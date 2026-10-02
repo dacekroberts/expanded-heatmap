@@ -8,7 +8,7 @@ Before this list, the endpoints were scattered: some in a city's `config.py`
 comment header, some only inside a `step*.py` error message, and several (San
 Francisco's boundary layer among them) nowhere at all. Kept in one place, a
 reader can check the work, a dead endpoint shows up before a rebuild fails,
-and each source's licence can be read one source at a time.
+and each source's license can be read one source at a time.
 
 **Every source is public.** Nearly all are government datasets; the main
 exception is OpenStreetMap, the volunteer-built map behind the basemap and
@@ -19,17 +19,17 @@ Datafordeler (Copenhagen) a registration.
 ## How to keep this current
 
 - **Adding a city adds its rows here, in the same commit** — provenance *and*
-  licence together. The `add-city` skill makes both a Step 0 requirement and
+  license together. The `add-city` skill makes both a Step 0 requirement and
   re-checks them at Step 9; a city whose data is mapped but whose terms are
   unrecorded is not finished, because afterwards that gap is invisible — it
   looks exactly like a city that was checked.
 - Record the **endpoint**, the **server-side filter** (the download is often
   filtered — that filter is part of the provenance), and the **date retrieved**.
-- Record the **licence, and anything the source requires this project to
+- Record the **license, and anything the source requires this project to
   display**. Do not infer permissive terms from the fact that a source is
   government open data: the review below found everything from public-domain
   dedications to a feed that forbids modifying its data, and both extremes
-  inside one city. Socrata states a licence directly at
+  inside one city. Socrata states a license directly at
   `<domain>/api/views/<id>.json` (`license`, `licenseId`, `attribution`); a
   missing value there means "go read the terms", not "no restrictions".
 - **A new required notice goes in the notices section below**, which gates the
@@ -38,7 +38,7 @@ Datafordeler (Copenhagen) a registration.
 - When an endpoint dies, leave the old row and mark it dead with the date,
   rather than overwriting it. Dataset IDs get retired: New York's borough
   boundaries moved from `tqmj-j8zm` (now 404) to `gthc-hcne`, and the MTA
-  retired its `web.mta.info/developers` GTFS path in favour of an S3 bucket.
+  retired its `web.mta.info/developers` GTFS path in favor of an S3 bucket.
   A silently-replaced URL loses that history.
 - Raw downloads are **not** committed (`data/<city>/raw/` is gitignored). Only
   the rendered `outputs/` are. So these endpoints plus the recorded filters are
@@ -55,12 +55,12 @@ Datafordeler (Copenhagen) a registration.
   `latin-1`. Note that mojibake
   in a *terminal* is usually the Windows console codepage, not the file — check
   the bytes before changing the declaration.
-- **Read a new city's whole catalogue, do not grep it.** Listing every package
+- **Read a new city's whole catalog, do not grep it.** Listing every package
   name and reading them costs about a minute and ~3 KB; keyword-filtering the
   list reintroduces exactly the bias that pulling the full list was meant to
   remove. Montréal proved it on 2026-09-21: `locaux-commerciaux`, a 28,621-row
   agglomeration-wide survey of street-level commerce with NAICS codes and 100%
-  coordinates, contains none of the words *business*, *licence*, *permis*,
+  coordinates, contains none of the words *business*, *license*, *permis*,
   *entreprise* or *commerce*, and a keyword scan wrongly concluded the city was
   food-only. Neither does `unités d'évaluation foncière`, its property roll.
 
@@ -70,7 +70,7 @@ Datafordeler (Copenhagen) a registration.
 about 55,000 words, almost all of them about single cities. Each country's
 part now lives in its own file under [`data_sources/`](data_sources/), moved
 word for word with its headings: its rows of the business, transit, boundary,
-geocoding and licence tables, and every section about its cities' sources.
+geocoding and license tables, and every section about its cities' sources.
 What stays here applies to every city: the rules above, the notes on the
 transit and boundary tables, the basemap, the removal-request commitment, the
 obligations that are not notices, the numbered notices and the deploy gate.
@@ -133,13 +133,13 @@ row there would have meant empty columns.
 - **Mexico City and Guadalajara were the first to come from OpenStreetMap via
   Overpass**, because no usable feed exists; many cities have followed, each
   listed in its country's file. An OSM source also has no agency holding the
-  licence: all are **ODbL 1.0**, covered by **notice 1**, which since these
+  license: all are **ODbL 1.0**, covered by **notice 1**, which since these
   builds covers *data* and not only basemap tiles.
 - **Madrid comes from CRTM's own ArcGIS feature services**, and there the
   operator's feed exists and downloads cleanly — it is rejected because CRTM's
-  licence obliges a reuser to keep displayed information *“siempre
+  license obliges a reuser to keep displayed information *“siempre
   actualizada”* and that feed has not been refreshed since 2025-05-30. A
-  licence consequence rather than an absence, and the licence is CRTM's own,
+  license consequence rather than an absence, and the license is CRTM's own,
   not OpenStreetMap's. **Madrid sat under the OpenStreetMap heading for part of
   2026-09-22**, which was wrong in the way this subsection exists to prevent.
 
@@ -188,9 +188,9 @@ Hong Kong (the Address Lookup Service cross-check).
 
 Rendered maps use Folium's default OpenStreetMap tiles. Attribution is in the
 rendered HTML. Choosing a tile provider deliberately is still an open
-decision (see "Basemap tiles" under the licences below).
+decision (see "Basemap tiles" under the licenses below).
 
-## Licences and terms of use
+## Licenses and terms of use
 
 Reviewed 2026-09-21. This records what each source's own published terms say,
 and what could not be established. It is a developer's reading of public
@@ -211,10 +211,10 @@ agency-branding question). What stays here is what applies to every city.
 
 Line geometry is redrawn from each feed's `shapes.txt` into every map, so these
 terms bear directly on what is published. **No feed in this project declares a
-licence in `feed_info.txt`** — LA Metro's even includes a `feed_license` column
+license in `feed_info.txt`** — LA Metro's even includes a `feed_license` column
 and leaves it empty, pointing to its developer terms instead. Several feeds ship
 no `feed_info.txt` at all (Miami, Calgary, Toronto), and two ship one that
-carries a validity window but no licence (Montréal, Vancouver), so in every case
+carries a validity window but no license (Montréal, Vancouver), so in every case
 the agency's own terms page is the only source and every row below was read from
 one.
 
@@ -233,8 +233,8 @@ was actually agreed to rather than against a URL that may have moved on.
 The maps render **OpenStreetMap** tiles, fetched directly from
 `https://tile.openstreetmap.org/{z}/{x}/{y}.png`.
 
-- **Data licence: ODbL 1.0.** Attribution is required — credit OpenStreetMap
-  and link to the licence, visibly, not "beneath UI, behind toggles, or
+- **Data license: ODbL 1.0.** Attribution is required — credit OpenStreetMap
+  and link to the license, visibly, not "beneath UI, behind toggles, or
   off-screen".
 - **This requirement is met.** Every rendered map emits
   `© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>
@@ -250,9 +250,9 @@ The maps render **OpenStreetMap** tiles, fetched directly from
   open decision as choosing a tile provider, and it should be settled
   deliberately rather than by default.
 
-## Commitment: removal requests are honoured, not argued
+## Commitment: removal requests are honored, not argued
 
-Every licence reviewed here enforces the same way. Chicago's terms say the
+Every license reviewed here enforces the same way. Chicago's terms say the
 city "may require a user of this data to terminate any and all display,
 distribution or other use"; Open NY says the State may require you, "by
 providing you with a notice in writing", to cease using or displaying its
@@ -260,7 +260,7 @@ content; LA Metro says that on termination you "shall immediately remove the
 Transport Information and all references to it". The remedy contemplated
 throughout is a request to stop.
 
-**A second trigger, added 2026-09-21: an unresolved licence position is
+**A second trigger, added 2026-09-21: an unresolved license position is
 enough.** Points 1-5 below fire when a publisher *asks*; this one fires when
 this project *finds out*. **It has exactly one live subject, Philadelphia.**
 Three questions prompted it, and on 2026-09-21 two closed: SEPTA expressly
@@ -276,12 +276,12 @@ attributions, so a reader learns it at the same moment they learn where the
 data came from. That footer, this paragraph and the *What is counted, and
 what is not* page are one promise and are kept consistent.
 
-**A third trigger, added 2026-09-22: a licence that ENDS BY ITS OWN TERMS.**
+**A third trigger, added 2026-09-22: a license that ENDS BY ITS OWN TERMS.**
 The first two fire on a publisher asking and on this project finding out.
 This one fires on neither — **Licence Mobilités Art. 11.1 terminates *de plein
 droit, sans préavis* on breach**, so the grant can simply stop, with no notice
 to receive and nothing to discover. It is the first revocable grant in this
-project: CC BY, Licence Ouverte, the PSI licences and ODbL are all perpetual,
+project: CC BY, Licence Ouverte, the PSI licenses and ODbL are all perpetual,
 and none of them can lapse without someone saying so.
 
 **Owner's decision 2026-09-22: this is ACCEPTED, and Paris is built on it.**
@@ -295,7 +295,7 @@ back. The rejected alternative was declining to build Paris at all, which
 would have cost the only national register in the screen that buys six cities,
 to avoid a risk that is answerable by taking one page down.
 
-**This project commits, in advance, to honouring such a request.** Stated so
+**This project commits, in advance, to honoring such a request.** Stated so
 that it is a standing position rather than a decision made under pressure:
 
 1. **If a data publisher asks this project to stop displaying its data, it
@@ -309,8 +309,8 @@ that it is a standing position rather than a decision made under pressure:
    as a removal request under point 2 and actioned first; any disagreement
    about whether the concern was well-founded is separate from taking the pin
    down.
-4. **A request is honoured even if this project believes it is in the right.**
-   The licence review found nothing forbidding what is built here, and that
+4. **A request is honored even if this project believes it is in the right.**
+   The license review found nothing forbidding what is built here, and that
    conclusion does not change the answer to a request. Being permitted to
    display something is not a reason to insist on displaying it.
 5. **Removal is the immediate action; the reasoning gets recorded afterwards**
@@ -324,7 +324,7 @@ want something removed should be able to see it without asking first.
 ## Obligations that are NOT notices — four classes, one per publisher
 
 **A notice is text on a page. These are not.** Each was found by reading a
-licence that also granted permission freely, which is why they are easy to
+license that also granted permission freely, which is why they are easy to
 miss: the grant is the headline and the obligation is a subordinate clause.
 
 | Class | Who | What it actually requires |
@@ -332,9 +332,9 @@ miss: the grant is the headline and the obligation is a subordinate clause.
 | **An act owed to the publisher** | **Barcelona** 🇪🇸 | *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* A message a person sends. Drafted at `docs/notifications/barcelona-city-council.md`, **not yet sent** |
 | **A live account that must STAY live** | **WMATA** (Washington D.C.) 🇺🇸 | The terms are an API agreement, so §9(i) ends the grant when the account ends — and what lapses is the right to **publish the page**. Gate item 10 |
 | ✅ **A liability ACCEPTED** | **Hong Kong** 🇭🇰 | **ACCEPTED BY THE OWNER 2026-09-22.** *"you shall **indemnify** the Government and the Relevant Organisations against any allegations or claims of infringement of the rights of any person and all costs, losses, damages and liabilities incurred … which in any case arise **directly or indirectly** in relation to your use, reproduction and/or distribution of the Data"*. See the section below for what the earlier record omitted |
-| 🔧 **AN ACCESS A PERSON MUST OBTAIN** | **Copenhagen / Denmark** 🇩🇰 | **Added 2026-09-23 at the owner's request.** CVR's premises data needs a **Datafordeler account the owner creates by hand**, and the terms pages sit behind a **Cloudflare interactive challenge** this project does not defeat — so both the registration and the reading are **human-only work**. Unlike WMATA's API agreement (above), the licence here is **CC BY 4.0, which attaches to the DATA and is irrevocable**, so the owner's standing practice (*register, take the data, terminate, revoke*) is safe here and unsafe for WMATA. ✅ **Close the account freely; the right to publish survives.** The similarity is the registration effort, not the obligation (see below) |
+| 🔧 **AN ACCESS A PERSON MUST OBTAIN** | **Copenhagen / Denmark** 🇩🇰 | **Added 2026-09-23 at the owner's request.** CVR's premises data needs a **Datafordeler account the owner creates by hand**, and the terms pages sit behind a **Cloudflare interactive challenge** this project does not defeat — so both the registration and the reading are **human-only work**. Unlike WMATA's API agreement (above), the license here is **CC BY 4.0, which attaches to the DATA and is irrevocable**, so the owner's standing practice (*register, take the data, terminate, revoke*) is safe here and unsafe for WMATA. ✅ **Close the account freely; the right to publish survives.** The similarity is the registration effort, not the obligation (see below) |
 
-**Copenhagen and WMATA look alike at the signup form and diverge immediately after it.** Both made the owner register; only one made the account load-bearing. **The test is what the terms ARE** — an API agreement licenses *you*, so it can be withdrawn from you, while a public licence licenses *the data*, and nothing you do to your account reaches it. Recording the two in one row would have told a later reader to keep a Danish account alive forever, and implied that closing it revokes the right to publish Copenhagen. **Neither is true.**
+**Copenhagen and WMATA look alike at the signup form and diverge immediately after it.** Both made the owner register; only one made the account load-bearing. **The test is what the terms ARE** — an API agreement licenses *you*, so it can be withdrawn from you, while a public license licenses *the data*, and nothing you do to your account reaches it. Recording the two in one row would have told a later reader to keep a Danish account alive forever, and implied that closing it revokes the right to publish Copenhagen. **Neither is true.**
 
 **Hong Kong's was weighed before building, not after.** Everything
 else in `data.gov.hk`'s Terms of Use v1.2 (26 May 2025) is generous — download,
@@ -362,7 +362,7 @@ the earlier citation of it:
 1. **"arise directly or indirectly"** — the earlier quote elided it. Broad
    causation, not just proximate.
 2. **There is NO notice-and-defend clause.** The Government need not tell you a
-   claim exists, you have no right to control or even join the defence, and
+   claim exists, you have no right to control or even join the defense, and
    nothing obliges them to mitigate or to seek your consent before settling.
    Most commercial indemnities temper exposure exactly there. This one does
    not.
@@ -379,7 +379,7 @@ It is not "anything that goes wrong because of the map". A third party must
 assert *their rights* against the Government, over this project's use of a
 **government public register** republished with the attribution the same
 paragraph requires. That is a narrow path, and the project's standing
-commitment to **honour removal requests without argument** cuts off the likeliest
+commitment to **honor removal requests without argument** cuts off the likeliest
 escalation before it becomes a claim.
 
 **Probability low, magnitude unbounded** — which is the combination that gets
@@ -400,9 +400,9 @@ mis-priced, so it was priced deliberately.
    home, so the privacy filter is the risk control, not a formality.
 3. **This entry is condition three**, dated and reasoned.
 
-**Extended 2026-09-24 to the CSDI Portal's terms.** The build places each licence at FEHD's
+**Extended 2026-09-24 to the CSDI Portal's terms.** The build places each license at FEHD's
 own point from the CSDI Portal, whose terms (`portal.csdi.gov.hk/csdi-webpage/doc/TNC`, read
-2026-09-24 by the licence-read agent) have the same shape and the same uncapped indemnity, and
+2026-09-24 by the license-read agent) have the same shape and the same uncapped indemnity, and
 one addition: to *"identify clearly the Government and the CSDI Portal as the source"*, which
 notice 41 does. The owner accepted it in chat on 2026-09-24, with the switch from the Address
 Lookup Service (ALS). The privacy condition was run the same day: FEHD's registers carry
@@ -419,7 +419,7 @@ stays deferred on those grounds regardless.
 #### Sacramento's indemnity — ACCEPTED 2026-09-29
 
 The City of Sacramento's **Open Data Terms of Use** (the same text as its Open
-Data Policy, pp. 13–18; read 2026-09-29 by the licence-read agent) govern the
+Data Policy, pp. 13–18; read 2026-09-29 by the license-read agent) govern the
 Business Operation Tax layer. They carry the same shape again: the user "will
 indemnify, defend at his/her sole cost and expense, and hold harmless the
 City … even if the claim may be groundless, false or fraudulent". There is no
@@ -430,14 +430,14 @@ terms were read. **The owner accepted the indemnity on 2026-09-29 with that
 fact stated.** As with Hong Kong, the acceptance covers this one source; it
 is not a notice or a build step. The Hub's "Request permission to use" label
 on the same dataset was settled the same day: Esri's label for an
-empty licence field, not a term, since the City's Terms grant use (owner, 2026-09-29;
+empty license field, not a term, since the City's Terms grant use (owner, 2026-09-29;
 `docs/build_briefs/sacramento.md`). Built on 2026-09-29.
 
 #### Palma's indemnity — ACCEPTED 2026-09-29
 
 GOIB's *Política i termes d'ús*, which govern the Consell de Mallorca's
-restaurant register on the Balearic open-data catalogue (read 2026-09-29 by
-the licence-read agent), carry the same shape again. The reuser "accepta
+restaurant register on the Balearic open-data catalog (read 2026-09-29 by
+the license-read agent), carry the same shape again. The reuser "accepta
 indemnitzar, així com eximir al Govern de les Illes Balears … de qualsevol
 responsabilitat … pel mer ús, reproducció, modificació o distribució de la
 informació", with no cap. **The owner accepted it on 2026-09-29, for this
@@ -452,7 +452,7 @@ The City of Dallas's **Standard GIS Data Disclaimer of Liability** (2015-12-04; 
 linked PDF is dead, and the current copy is ArcGIS item `115c0fe8ed4b4a12a669f5e48dc56d52`)
 governs the City's **Address Points** layer (item `0a5c879d970f4b32b744476e29e0e54b`),
 which the Dallas build uses only to place the Comptroller's permit addresses. It was
-read on 2026-09-30 by the licence-read agent.
+read on 2026-09-30 by the license-read agent.
 - **The shape:** the same again. The user agrees to "indemnify, defend, and hold
   harmless The City of Dallas" for any liability arising from errors in the data
   or from its use.
@@ -467,7 +467,7 @@ read on 2026-09-30 by the licence-read agent.
 
 ## Notices this project MUST display when published
 
-This is the operative output of the licence review. As of 2026-09-21, for the
+This is the operative output of the license review. As of 2026-09-21, for the
 **nine** cities built: **five sources require specific text or
 acknowledgement, and one of the five is already satisfied** (OpenStreetMap);
 Chicago, SFMTA, LA Metro and — since Boston was built — MassDOT were
@@ -490,7 +490,7 @@ Not required by anyone, but good practice and already partly done in the city
 pages' prose: naming each business registry's publishing agency.
 
 **1. OpenStreetMap — required, and ALREADY SATISFIED.** ODbL 1.0 requires
-visible credit and a licence link, "not beneath UI, behind toggles, or
+visible credit and a license link, "not beneath UI, behind toggles, or
 off-screen". Every rendered map emits, in the map corner:
 
 > `© OpenStreetMap contributors` — linked to

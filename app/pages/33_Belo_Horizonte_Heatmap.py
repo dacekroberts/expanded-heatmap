@@ -77,8 +77,8 @@ st.markdown(
     """
 **The lines**
 
-- Two lines are drawn — **Metrô BH Linha 1 and Linha 2** — each labelled on the map and in
-  the legend, in the colours OpenStreetMap records.
+- Two lines are drawn — **Metrô BH Linha 1 and Linha 2** — each labeled on the map and in
+  the legend, in the colors OpenStreetMap records.
 - **Linha 2 opened on 3 July 2026 with two stations and runs only at weekday peak hours for
   now.**
 - The map covers the **município of Belo Horizonte**; Linha 1's two western stations, in
@@ -92,7 +92,7 @@ st.markdown(
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of
   the enumerator's words, and the names were not checked against any business register.
-- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
   dot.
 - At an address that is also someone's home, the dot shows only its category.
 

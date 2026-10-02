@@ -79,11 +79,11 @@ st.markdown(
 **The métro and trams**
 
 - Sixteen Métro lines are drawn — Lignes 1 to 14 plus the two short branch lines, 3bis and 7bis —
-  each labelled on the map and in the legend, redrawn from Île-de-France Mobilités' own published
+  each labeled on the map and in the legend, redrawn from Île-de-France Mobilités' own published
   geometry.
 - Trams T3a and T3b are drawn too. They circle the city along the boulevards des Maréchaux and
   reach the edge districts between the Métro's radial ends.
-- Île-de-France Mobilités gives T3a and T3b the same colours as Lignes 5 and 12, so this map draws
+- Île-de-France Mobilités gives T3a and T3b the same colors as Lignes 5 and 12, so this map draws
   them in two lighter shades of its own, not RATP's.
 - The map covers the **commune of Paris**. Métro stations outside it are not drawn, and every one
   is listed below.

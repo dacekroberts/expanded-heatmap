@@ -30,7 +30,7 @@ that record.<!-- /internal -->
 | Rio de Janeiro | **IPP / DATA.RIO** (Prefeitura do Rio) - MetrôRio stations (layer 19, per-line flags) and lines (layer 18), **CC BY 4.0, a notice REQUIRED**; **OpenStreetMap** - the VLT Carioca's four lines and SuperVia Deodoro and Saracuruna (the rail test) | `https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Transporte_Trafego/Transporte_publico/MapServer/19/query?where=1%3D1&outFields=*&outSR=4326&f=geojson` and `.../MapServer/18/query?...`; OSM: every rail route relation in the bbox | 2026-09-24 | The agency's VLT layer (9) is NOT used: its line flags give 20/14/11/14 where pt.wikipedia lists 16/11/10/11 and OSM agrees. Gate 3: metro 20/26/6 and 41, VLT 30, Deodoro 19. The SIURB terms' liability clause accepted by the owner 2026-09-23 |
 | Belo Horizonte | **OpenStreetMap** - Metrô BH Linha 1 and Linha 2 (opened 2026-07-03, peak hours; drawn, owner) | every rail route relation in the bbox | 2026-09-24 | Gate 3 against pt.wikipedia's text (22 in operation); its table is stale by Nova Suíça. The Vitória-Minas passenger train (intercity) left out. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Brasília | **OpenStreetMap** - Metrô-DF Linha Verde and Linha Laranja; **IPEDF** `geonode:ESTACOES_METRO` (public domain) read for status only | every rail route relation in the bbox; `https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&typeNames=geonode:ESTACOES_METRO` | 2026-09-24 | Gate 3 against pt.wikipedia's 27; the IPEDF layer (2023) is stale by 106 Sul, 110 Sul and Estrada Parque (opened 2020). OpenStreetMap, ODbL 1.0 - notice 1 |
-| Salvador | **OpenStreetMap** - Metrô de Salvador Linha 1 and Linha 2 (CCR Metrô Bahia) | every rail route relation in the bbox | 2026-09-24 | OSM carries no colours; the operator's line NAMES (Vermelha, Azul) resolved through the CSS table. Aeroporto station is in Lauro de Freitas - excluded. OpenStreetMap, ODbL 1.0 - notice 1 |
+| Salvador | **OpenStreetMap** - Metrô de Salvador Linha 1 and Linha 2 (CCR Metrô Bahia) | every rail route relation in the bbox | 2026-09-24 | OSM carries no colors; the operator's line NAMES (Vermelha, Azul) resolved through the CSS table. Aeroporto station is in Lauro de Freitas - excluded. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Fortaleza (Regional) | **OpenStreetMap** - Metrofor Linha Sul | every rail route relation in the bbox | 2026-09-24 | The diesel lines through the rail test: Linha Oeste and the Aeroporto branch fail; the Parangaba-Mucuripe VLT is borderline and out (owner, 2026-09-24). Metrofor's GTFS host has an expired certificate - not bypassed. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Porto Alegre (Regional) | **OpenStreetMap** - Trensurb Linha 1 | every rail route relation in the bbox | 2026-09-24 | The Aeromóvel airport connector not drawn (owner). OpenStreetMap, ODbL 1.0 - notice 1 |
 | Recife (Regional) | **OpenStreetMap** - Metrô do Recife Linha Centro (both branches) and Linha Sul | every rail route relation in the bbox | 2026-09-24 | The diesel VLTs fail the rail test on spacing. The city's ODbL station file is a cross-check only, never read by a step. OpenStreetMap, ODbL 1.0 - notice 1 |
@@ -50,13 +50,13 @@ that record.<!-- /internal -->
 | Recife (Regional) | **OpenStreetMap** admin_level-8 relations carrying `IBGE:GEOCODIGO` in the bbox (-8.4, -35.15, -7.92, -34.83), polygonised from outer and inner ways, area-gated | The three Overpass mirrors in `pipeline/osm.py` | IBGE 2611606, 2607901, 2602902, 2603454 (the owner's regional scope, 2026-09-23); the rest name excluded stations only. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Santos (Regional) | **OpenStreetMap** admin_level-8 relations carrying `IBGE:GEOCODIGO` in the bbox (-24.05, -46.6, -23.85, -46.2), polygonised from outer and inner ways, area-gated | The three Overpass mirrors in `pipeline/osm.py` | IBGE 3548500, 3551009 (the owner's regional scope, 2026-09-23); the rest name excluded stations only. OpenStreetMap, ODbL 1.0 - notice 1 |
 
-## Licences and terms of use
+## Licenses and terms of use
 
 ### Explicit and permissive — confirmed
 
-| Source | Licence | Attribution declared |
+| Source | License | Attribution declared |
 |---|---|---|
-| **Brazil — IBGE CNEFE 2022** (**built 2026-09-24**: nine cities, one national module) | **Free use by federal law** — Decree 8.777/2016 art. 4 and Lei 14.129/2021 art. 29 — subject to LGPD principles. **No IBGE licence document exists.** Read 2026-09-23; four restrictive readings recorded in the Brazil section below | **Required** (the decree's definition of open data: *"limitando-se a creditar a autoria ou a fonte"*). No wording prescribed; use `Fonte: IBGE, Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.` |
+| **Brazil — IBGE CNEFE 2022** (**built 2026-09-24**: nine cities, one national module) | **Free use by federal law** — Decree 8.777/2016 art. 4 and Lei 14.129/2021 art. 29 — subject to LGPD principles. **No IBGE license document exists.** Read 2026-09-23; four restrictive readings recorded in the Brazil section below | **Required** (the decree's definition of open data: *"limitando-se a creditar a autoria ou a fonte"*). No wording prescribed; use `Fonte: IBGE, Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.` |
 
 ### 🇧🇷 Brazil — IBGE's CNEFE 2022 (built 2026-09-24): the grant is a LAW, not a document
 
@@ -66,10 +66,10 @@ Demográfico 2022 — one CSV per município, keyless, at
 Every address in the country with a field-collected coordinate; rows with
 `COD_ESPECIE = 6` carry `DSC_ESTABELECIMENTO`, the enumerator's
 identification of the establishment. **It is Brazil's business leg AND its
-coordinate leg** — no CNPJ, no geocoder. Read 2026-09-23 by the project's licence
+coordinate leg** — no CNPJ, no geocoder. Read 2026-09-23 by the project's license
 reader; its full working was not kept in the repository.
 
-**PERMITTED WITH CONDITIONS — and no IBGE document grants it.** No licence
+**PERMITTED WITH CONDITIONS — and no IBGE document grants it.** No license
 exists anywhere machine-readable: the FTP is a bare listing, the zips hold
 only the CSV, the dictionary is silent, and CNEFE is **not on dados.gov.br**.
 The grant is federal law that binds IBGE as a public foundation:
@@ -81,7 +81,7 @@ The grant is federal law that binds IBGE as a public foundation:
 - **Lei 14.129/2021, art. 29**: *"...são de livre utilização pela sociedade,
   observados os princípios dispostos no art. 6º da Lei nº 13.709 [LGPD]."*
 - The FTP's own line: *"Todos os arquivos aqui disponíveis são públicos."*
-  — a statement that they are public, not a licence.
+  — a statement that they are public, not a license.
 
 **Two conditions, neither of them an act owed to IBGE:**
 
@@ -90,10 +90,10 @@ The grant is federal law that binds IBGE as a public foundation:
    (CNEFE), Censo Demográfico 2022.`** It is displayed as notice 38 (Brazil).
 2. **LGPD principles for any personal data published** (art. 29's proviso;
    LGPD art. 7 §3 — *finalidade, boa-fé e interesse público*). **This makes
-   the privacy rule below a licence condition, not house style.**
+   the privacy rule below a license condition, not house style.**
 
 **Four restrictive readings were found and NOT resolved in this project's
-favour by the reader. The owner decided on 2026-09-23 to proceed on the law**,
+favor by the reader. The owner decided on 2026-09-23 to proceed on the law**,
 on a recorded reasoned position — the Philadelphia shape:
 
 | | Reading | Why the project proceeds |
@@ -104,7 +104,7 @@ on a recorded reasoned position — the Philadelphia shape:
 | **D** | CNEFE is **not in IBGE's open-data plan** and not on dados.gov.br | Art. 4 speaks of data *"disponibilizados"*, not only catalogued datasets |
 
 **What may not be SAID** (from IBGE's own documentation, not its terms):
-the names were **not checked against any register or standardised**, so never
+the names were **not checked against any register or standardized**, so never
 present them as verified business names; **IBGE did not classify the
 establishments** — the three categories are this project's reading of free text;
 and **the data are not current** — they are the 2022 census fieldwork.
@@ -122,7 +122,7 @@ is a privacy asset rather than a loss.
 
 | Source | Verdict | What it requires |
 |---|---|---|
-| **Rio de Janeiro** — `pgeo3.rio.rj.gov.br/.../Transporte_Trafego/Transporte_publico/MapServer` layers 19, 18, 9, 10 (metro stations and lines, VLT stops and lines) | **PERMITTED WITH CONDITIONS — CC BY 4.0**, declared at SERVICE level (`info/iteminfo`: *"This work is licensed under a Creative Commons Attribution 4.0 International License"*) and on all four Data.Rio items | Credit **"Prefeitura da Cidade do Rio de Janeiro / Instituto Pereira Passos (IPP)"**, the licence link, a link to the data, and **a statement that the data was modified** (CC BY §3(a)(1)(B) — required, not optional). Operator names and colours (MetrôRio, VLT Carioca) come from elsewhere and are **not licensed** by it |
+| **Rio de Janeiro** — `pgeo3.rio.rj.gov.br/.../Transporte_Trafego/Transporte_publico/MapServer` layers 19, 18, 9, 10 (metro stations and lines, VLT stops and lines) | **PERMITTED WITH CONDITIONS — CC BY 4.0**, declared at SERVICE level (`info/iteminfo`: *"This work is licensed under a Creative Commons Attribution 4.0 International License"*) and on all four Data.Rio items | Credit **"Prefeitura da Cidade do Rio de Janeiro / Instituto Pereira Passos (IPP)"**, the license link, a link to the data, and **a statement that the data was modified** (CC BY §3(a)(1)(B) — required, not optional). Operator names and colors (MetrôRio, VLT Carioca) come from elsewhere and are **not licensed** by it |
 | **São Paulo** — GeoSampa WFS `estacao_metro`, `linha_metro` | ⚠️ **AMBIGUOUS IN A WAY THAT MATTERS — owner decision** | See below |
 
 **Rio: the "sem alteração" clause does NOT apply.** Data.Rio's *"Uso público,
@@ -142,9 +142,9 @@ as *"pessoas naturais que utilizarem o Sistema por meio de login de acesso"*.
 Even if it binds, it prohibits nothing the build does — it is **fault-based
 liability for damage caused**, narrower than Hong Kong's indemnity, closer to
 IBGE's portal clause. **Owner call — ✅ ACCEPTED 2026-09-23**: Rio's rail
-comes from these layers, with OSM as the colour source and cross-check.
+comes from these layers, with OSM as the color source and cross-check.
 
-**São Paulo: the licence may not reach the layers.** GeoSampa declares
+**São Paulo: the license may not reach the layers.** GeoSampa declares
 **CC BY-SA 4.0** on these layers, but its own *Créditos › Licença dos dados*
 says: *"A licença CC BY-SA exibida no mapa aplica-se exclusivamente aos dados
 geoespaciais das camadas, produzidos pelos órgãos da Prefeitura de São
@@ -166,7 +166,7 @@ Paulo."*
   ring geometry must be offered under CC BY-SA; broad: the rendered São Paulo
   map is Adapted Material.
 
-**Not resolved in this project's favour.** The one party who can settle A
+**Not resolved in this project's favor.** The one party who can settle A
 against B is `geosampa@prefeitura.sp.gov.br`.
 
 ✅ **DECIDED 2026-09-23 by the owner — the question is AVOIDED, not answered:

@@ -78,8 +78,8 @@ st.markdown(
 **The lines**
 
 - Seven lines are drawn — **Metrô Linhas 1-Azul, 2-Verde, 3-Vermelha, 4-Amarela, 5-Lilás
-  and 15-Prata, and CPTM's Linha 9-Esmeralda** — each labelled on the map and in the legend,
-  in the colours OpenStreetMap records for them. Linha 15 is a monorail.
+  and 15-Prata, and CPTM's Linha 9-Esmeralda** — each labeled on the map and in the legend,
+  in the colors OpenStreetMap records for them. Linha 15 is a monorail.
 - The lines and stations are OpenStreetMap's.
 - Linhas 6-Laranja and 17-Ouro are still being built and are not drawn.
 - Suburban railways are left out of these maps unless, inside the city, they run like a
@@ -98,7 +98,7 @@ st.markdown(
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of
   the enumerator's words, and the names were not checked against any business register.
-- Where one entry stands for several shops, as in a shopping centre or a gallery, it is one
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
   dot.
 - At an address that is also someone's home, the dot shows only its category.
 
@@ -111,7 +111,7 @@ st.markdown(
   under-drawn: judging by hand-read samples, the map misses roughly one storefront in ten
   to one in seven within the station rings.
 - **About one storefront in five sits within a station ring**, because the rail, dense in
-  the centre, leaves most of a very large city beyond walking distance of a station.
+  the center, leaves most of a very large city beyond walking distance of a station.
 """
 )
 

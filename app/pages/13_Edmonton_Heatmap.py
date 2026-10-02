@@ -45,8 +45,8 @@ st.markdown(
 
 - **Three lines are drawn** from Edmonton Transit Service's own route geometry: the Capital
   Line, the Metro Line and the Valley Line.
-- The colours are this site's rather than the agency's. ETS signs Capital blue and Valley
-  green, and both sit too close to the Retail and Personal services pin colours to stay
+- The colors are this site's rather than the agency's. ETS signs Capital blue and Valley
+  green, and both sit too close to the Retail and Personal services pin colors to stay
   readable on top of them, so each line keeps its hue and is darkened until it separates.
 - The Metro Line shares the Capital Line's track from downtown to Health Sciences/Jubilee,
   where Edmonton Transit Service's published line ends; its weekend trips on to Century Park
@@ -60,13 +60,13 @@ st.markdown(
 
 **The businesses**
 
-- **Edmonton's licence register says whether a business runs from a home, and the City
+- **Edmonton's license register says whether a business runs from a home, and the City
   removes the address when it does.** A single field separates commercial premises from
-  home-based trades, mobile operators, and licences held by a person rather than a place.
-- Where a licence belongs to an individual, Edmonton replaces the street address with
+  home-based trades, mobile operators, and licenses held by a person rather than a place.
+- Where a license belongs to an individual, Edmonton replaces the street address with
   `<REDACTED FOR PRIVACY>` and takes the coordinates away with it, so those records cannot
   be placed on a map at all. The privacy work here was done upstream, by the publisher.
-- **Adult services and body rub centres are left off**, as in Calgary, along with several
+- **Adult services and body rub centers are left off**, as in Calgary, along with several
   categories that merge a trade this map counts with one it does not. What is excluded, and
   why, is on the "What is counted, and what is not" page.
 
@@ -78,9 +78,9 @@ st.markdown(
   ordinary shops are well covered, unlike several large US cities that license no general
   retail at all and whose maps show almost none of it.
 - **Personal services is overstated, by a knowable amount.** Edmonton's accredited "Health
-  Enhancement Centre" licence covers massage and spa premises, which belong in this
+  Enhancement Centre" license covers massage and spa premises, which belong in this
   category, but also physiotherapy and chiropractic clinics, which are regulated health care
-  and do not. The register does not distinguish them, and roughly a quarter of that licence
+  and do not. The register does not distinguish them, and roughly a quarter of that license
   class reads as a clinic.
 - It is counted anyway, so that Edmonton stays comparable with Calgary. Read this category
   as slightly generous here.
