@@ -98,7 +98,7 @@ code. Model the module on `pipeline/taxonomies/france_naf.py` (divisions 47 /
   printout.)
 - **Unclassified**: `Z` "ACTIVITY UNKNOWN" on 683 of 63,511 (1.1%); none in a
   bucket by construction.
-- **Division 45 is OUTSIDE the three divisions and needs a call** (🚨 below):
+- **Division 45 is OUTSIDE the three divisions** (decided below, 2026-10-02):
   45.32.0 parts retail 1,060 · 45.11.2 vehicle retail 435 · 45.11.1
   wholesale-and-retail 117 · 45.19.0 21; repair 45.20.0 661 stays out.
 
@@ -131,7 +131,7 @@ code. Model the module on `pipeline/taxonomies/france_naf.py` (divisions 47 /
    placeholder on this map. **Recommend: drop and disclose**, by an explicit
    list of points in config, re-derived at build from the rule "a point
    carrying 50+ rows whose commonest legal-entity factual address is a bare
-   district or settlement name, or blank" (🚨 below).
+   district or settlement name, or blank" (decided below, 2026-10-02).
 3. **Not placeholders: the markets.** Lilo (Kakheti Highway 112, 484 kept
    rows) and Eliava (Tsabadze 8 and Khosharauli, 309), plus the Station
    Square market streets (several points of 20-90 rows each), carry real
@@ -204,7 +204,7 @@ Stations: all 23. Business rows: factual address in region 11.
 - **Region**: `add-city` says every European city tags `Europe`; Tbilisi at
   44.8 E is far east of every built European city, and `app/cities.py`'s
   `REGION_ORDER` comment says to re-measure Europe's frame "when a city appears
-  far enough east". 🚨 below.
+  far enough east". Decided below, 2026-10-02.
 - **Country** string: `Georgia`; file `docs/data_sources/georgia.md`.
   ⚠️ "Georgia" is also a US state in this project's text (Atlanta's row):
   check that `app/country_sections.py` files Atlanta's sections under the
@@ -212,18 +212,33 @@ Stations: all 23. Business rows: factual address in region 11.
 
 ## Open items
 
-- 🚨 **Placeholder coordinates** (1,295 kept rows on ten centroid points, 805
-  of them on four metro stations). **Recommend: drop and disclose**, like
+- ✅ **Placeholder coordinates: DROP AND DISCLOSE (owner, 2026-10-02,
+  "approve all three").** 1,295 kept rows sit on ten centroid points, 805
+  of them on four metro stations. Recommended: drop and disclose, like
   Madrid's zero coordinates. Alternative: keep and disclose, which inflates
   Isani, Didube, Samgori and Liberty Square by 164-255 dots each.
-- 🚨 **Division 45** (motor vehicles). The precedent (R4) keeps car dealers in
+- ✅ **Division 45: THE PRECEDENT (owner, 2026-10-02).** Motor vehicles. The precedent (R4) keeps car dealers in
   Retail and leaves repair out; France is the disclosed exception that drops
   the whole division. **Recommend the precedent**: keep 45.11.2 vehicle retail
   (435), 45.19.0 (21) and 45.32.0 parts retail (1,060, the NAICS 441310
   analogue); leave out 45.11.1 "wholesale and retail" (117, the wholesale half
   decides it) and all repair. About +1,516 Retail rows, unmeasured for
   coordinates.
-- 🚨 **Region**: tag `Europe` (the rule), then run `check_macro_labels.py`; if
+- ✅ **Region: a NEW leaf region, "West Asia" (owner, 2026-10-02).** The
+  owner: "actually tbilisi is quite far away from other cities", "west asia
+  could work too", "if georgia is officially in asia … we don't need to
+  modify europe".
+  - The UN M49 geoscheme puts Georgia in Western Asia, with Armenia,
+    Azerbaijan, Turkey and Cyprus.
+  - Dublin to Tbilisi is about 3,700 km, past the 3,300 km at which Canada
+    was split.
+  - Named for the area, as East Asia and Oceania were, so a later Baku,
+    Yerevan or Ankara joins it.
+  - **Europe is not modified.** `REGION_ORDER` gains "West Asia" with a
+    comment saying why, and `scaffold_city.py` needs `--new-region`.
+  - The label check is run as for any region. One city has nothing to
+    collide with, and its pill shows in Global.
+  Earlier the same day: `Europe`, measured, approved and then reopened. Tag `Europe` (the rule), then run `check_macro_labels.py`; if
   Europe's frame fails with Tbilisi in it, a new region is the owner's call.
   **Recommend `Europe`**, measured.
 - ⚠️ **"Active" lags new businesses**: kept rows first registered in 2021

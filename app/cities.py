@@ -3356,6 +3356,20 @@ REGION_ORDER = [
     "Oceania",
 ]
 
+# THE COUNTRY VIEWS GO LAST IN THE REGION MENU (owner, 2026-10-02): the small
+# views carved out of a continental region for one country's cities, listed
+# after every continental region. REGION_ORDER stays geographic, because
+# COUNTRY_ORDER (the Cities menu) ranks countries by it; MENU_ORDER is what the
+# region selector, the caption naming the other regions and the city list
+# under the map follow. A new country view (the United Kingdom's and Japan's,
+# 2026-10-02) is added here as well as to REGION_ORDER.
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Seoul Capital Area")
+MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
+              + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
+if set(COUNTRY_VIEWS) - set(REGION_ORDER):
+    raise ValueError(f"cities.py: COUNTRY_VIEWS {sorted(set(COUNTRY_VIEWS) - set(REGION_ORDER))} "
+                     f"are not in REGION_ORDER")
+
 # A REGION'S ZOOM FITTED WITHOUT AN OUTLIER; its centre still takes every city.
 # Riga (2026-09-24) sits far north-east of Europe's other 15 cities, and fitting
 # Europe to it lowered the region's zoom one step - which, since the offsets are
@@ -3422,7 +3436,7 @@ def cities_in(region):
 
 REGIONS = [
     {"name": name, "cities": cities_in(name), "zoom": REGION_ZOOM.get(name)}
-    for name in REGION_ORDER
+    for name in MENU_ORDER
     if cities_in(name)
 ]
 
@@ -3442,7 +3456,7 @@ def elsewhere_counts(region):
     == len(CITIES).
     """
     covered = set(REGION_MEMBERS.get(region, (region,)))
-    return [(n, len(cities_in(n))) for n in REGION_ORDER
+    return [(n, len(cities_in(n))) for n in MENU_ORDER
             if n in LEAF_REGIONS and n not in covered and cities_in(n)]
 
 _untagged = [c["name"] for c in CITIES if c.get("region") not in LEAF_REGIONS]
