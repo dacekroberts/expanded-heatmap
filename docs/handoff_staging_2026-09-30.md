@@ -132,7 +132,12 @@ carried over as they stand.
    - **Takaoka re-checked 2026-10-02:** the licence is CC BY 4.0, but the
      list cannot be reached (the old CSV gives 404 and the new platform
      403). **Moved to R by the owner** (2026-10-02).
-   - **The twelve Japan briefs, one batch: started 2026-10-02 (owner).**
+   - **The twelve Japan briefs: done 2026-10-02**, every call settled; the
+     builds RELEASED the same day to one session with agents (worktree
+     `japan-batch`, branch `japan-batch-build`,
+     `docs/handoff_japan_batch_2026-10-02.md`). Pages: UK 156–161, Japan
+     162–173.
+   - **Next (owner, 2026-10-02): the Seattle (Regional) and Tbilisi briefs.**
    - **The Japan batch is the minor label tier** (owner, 2026-10-02): the
      recipe is in the `japan-city` skill's standing calls, the master list's
      "Before building" and the drafts.

@@ -86,6 +86,11 @@ the owner reminded Kobe's build that it exists for the cities after it.
 - **No page says "currently operating"**: the lists keep closed premises.
 - **Region: East Asia**. Country: "Japan". Projected CRS from
   `japan.CITIES[slug]["epsg"]` (Sapporo and Tokyo 54N, Fukuoka 52N).
+- **`mode` for a city without a subway** (owner, 2026-10-02): Dublin's
+  precedent, so JR drawn beside a tram or light rail does not make it
+  `metro`, "unless there is substantial JR, JR reads as metro": JR is
+  the city's largest rail network by stations inside the city line
+  (Okayama, Kitakyushu). Each batch brief records its city's mode.
 - **The 2026-10-01 batch is the minor label tier, as France and Czechia
   are** (owner, 2026-10-02): the smallest cities lose their pills in the
   macro views to cut clutter. Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki,

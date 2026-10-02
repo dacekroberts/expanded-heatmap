@@ -24,11 +24,11 @@ precedent it follows):
 **Prose proposals** (sentences no template covers; the build did not stop
 for them):
 
-- `app/pages/160_Manchester_Heatmap.py`: "Each line follows OpenStreetMap's
+- `app/pages/156_Manchester_Heatmap.py`: "Each line follows OpenStreetMap's
   track through its stops as TfGM lists them." Why: the lines are routed,
   not OSM's relations, and the tram template's "redrawn from OpenStreetMap's
   route geometry" would not be true.
-- `app/pages/160_Manchester_Heatmap.py`: "Trams run about every 15 minutes on
+- `app/pages/156_Manchester_Heatmap.py`: "Trams run about every 15 minutes on
   each line by day." It is the tram template's frequency bullet with "on each
   line" added.
 - Notice 86's text (`app/components.py`): "Stop counts on the UK's tram and
@@ -150,6 +150,6 @@ for them):
   attribution of the Department's own, no API terms. Display the OGL's
   default statement with the licence linked; never imply DfT's endorsement
   or use its logo.
-- **Page:** `app/pages/160_Manchester_Heatmap.py` (page 160 claimed in
+- **Page:** `app/pages/156_Manchester_Heatmap.py` (page 156, staging's pre-assignment in
   `docs/session_roles.md`). Newcastle's FSA bullets plus the tram template's
   line bullets; two proposals are listed above.

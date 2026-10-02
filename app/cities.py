@@ -3157,7 +3157,7 @@ CITIES = [
         "name": "Manchester (Regional)",
         "lat": 53.4808,
         "lon": -2.2426,
-        "page": "pages/160_Manchester_Heatmap.py",
+        "page": "pages/156_Manchester_Heatmap.py",
         # The UK six (2026-10-02), Newcastle's values. `mode` light_rail on the
         # light-rail test: OSM maps 100% of the kept track railway=light_rail,
         # 10.2% in tunnel or on a bridge, a 703 m median gap (San Diego's
