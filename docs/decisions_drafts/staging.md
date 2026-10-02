@@ -4,6 +4,61 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Twelve Japanese briefs written; the owner's calls on Matsuyama, Okayama, Sakai, Hakodate and Nagasaki (owner)
+
+- **The owner: "start the japan briefs, 12 as one batch okay".** There are
+  four agents with three cities each, every one writing only its own brief
+  files. None queried Overpass, edited shared code or committed. All 12
+  briefs are in `docs/build_briefs/`. Staging re-ran every check: 122 of 122
+  claims hold (http, CKAN and UTM only).
+- **The owner's calls ("approve all recommendations", then "nagasaki b,
+  download ok"):**
+  - **Matsuyama:** MHLW is a second source. Its own points go where the
+    block join misses (81.9% to 92.7%), and its notifications become a
+    partial food-retail bucket, disclosed (Fukuoka and Hiroshima).
+  - **Okayama:** with MHLW as its only source, the name rule cannot run. The
+    precedent extends: Hiroshima's MHLW bullet covers the whole page.
+  - **Sakai:**
+    - The Midōsuji Line is drawn cut at the city line (3 stations, not 2).
+    - The monthly new and closure files are covered by the page's
+      open-data notice (Hiroshima's precedent).
+  - **Hakodate:** the e-Stat download was approved. The FY2024 counts total
+    1,122 against the excerpt's 1,100 (98.0%), so 抜粋 means columns, not
+    rows.
+  - **Nagasaki: (b)**, the 2023 BODIK snapshot plus MHLW's current filings
+    (Tokyo's precedent). One agent downloaded the city's current list, which
+    needs the city's permission, to measure it only. The owner approved that
+    after the fact. It is not a source.
+- **Master-list corrections from the briefs (2026-10-02):**
+  - Matsuyama's and Nagasaki's coordinate columns are empty.
+  - Nagasaki's lists date from 2023-06-30 and 2023-03-31; 2025-03 is the
+    upload. Its tram has 38 stops.
+  - Kōchi has 1,415 premises (barbers 321 were missing).
+  - Toyama's tram has 39 stops with the Port line.
+  - Fukui's Fukubu Line has 15 stations in the city.
+  - Sakai has 15 Hankai stops.
+  - No band changes.
+- **Build-time shared-code items, listed in each brief:**
+  - column spellings for `japan_register` (address, name, operator);
+  - Sakai's 1丁 rule;
+  - Fukui's 飲食店 / 喫茶店 old-law types (93 rows);
+  - Kagoshima and Fukui on the 2025 N02 edition.
+
+  Each is followed by the Minato control.
+- **Slips, logged as before:** two agents printed register rows to their
+  consoles. One showed a shop name and address, plus two operator names; the
+  other showed an operator's own name and phone number. Nothing reached a
+  file. Separately, N03 boundary zips (the skill's own source) were saved
+  under each city's `data/<slug>/raw/`.
+- **Open with the owner:**
+  - Toyama's and Fukui's lists name only company operators, so the name rule
+    tests almost nothing. Staging recommends accepting it, as for MHLW's
+    rows.
+  - Each city's `mode`. Staging recommends Dublin's precedent (commuter rail
+    drawn beside trams does not make a city metro): tram for nine,
+    light_rail for Utsunomiya and Kitakyushu, metro for Sakai (the
+    Midōsuji).
+
 ### 2026-10-02 - The UK six released to one build session with agents; the UK takes the minor label tier (owner)
 
 - **The owner released the builds:** "send off the uk six to either two
