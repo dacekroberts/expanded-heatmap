@@ -113,7 +113,7 @@ carried over as they stand.
      - Atlanta's note filed, not sent
        (`docs/notifications/atlanta-revenue-exposure.md`);
      - "disclose the lack of info" passed to Cleanup's prose pass.
-   - **OPEN: Brisbane (Band C).**
+   - **DECIDED 2026-10-01: Brisbane to the discards on rail; the commuter-rail revisit group created (twelve cities). Detail below is history.**
      - Spacing passes: 83 stations, median gap 1,012 m.
      - Frequency fails: 30 minutes off-peak on every line (a strike-reduced
        timetable now); at best 15 minutes on five trunk sections in the
