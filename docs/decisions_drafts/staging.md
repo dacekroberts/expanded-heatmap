@@ -4,6 +4,24 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - Tempe to the discards: its licence list has no address (owner)
+
+- **The owner: "save evidence, delete root, discard".**
+- **The evidence is saved** at
+  `data/tempe/raw/Tempe_General_Business_License_List_2026-09-03.pdf`
+  (gitignored, so local and never committed). It is byte-identical to the
+  owner's browser download.
+- **The owner's root copy is deleted** (`expanded-heatmap/tempe.pdf`, at
+  the main checkout's root).
+- **Tempe moves from Band D to the discards**, a `measured` row. The list
+  carries licence number, business name, business activity and website,
+  and no address, so nothing can be placed. The City's ArcGIS app covers
+  short-term rentals and tobacco only. It would reopen with a list that has
+  premises addresses.
+- **Band D is empty.** The list now holds **A 7 · B 12 · C 3 · D 0 · R 23 =
+  45 candidates, with 120 discards.** The count, discard-evidence and
+  self-test checks pass.
+
 ### 2026-10-01 - Fukui takes the CC BY-SA 4.0 offer (owner); Tempe's licence list has no address
 
 - **Fukui (owner: "use the SA 4.0").** The current lists are used: food,

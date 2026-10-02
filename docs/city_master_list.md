@@ -32,9 +32,9 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **124** across 24 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **46** — A 7 · B 12 · C 3 · D 1 · R 23 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser)* |
+> | **Candidates** | **45** — A 7 · B 12 · C 3 · D 0 · R 23 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser)* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
-> | **Discarded** | **119**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day)* |
+> | **Discarded** | **120**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner))* |
 >
 > *Counts are checked by `scripts/check_master_list_counts.py`; the
 > discard rows' evidence by `scripts/check_discard_evidence.py`.*
@@ -69,7 +69,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 46
+## Candidates — 45
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
@@ -79,12 +79,12 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **7** |
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **12** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **3** |
-| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **1** |
+| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
 | ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **23** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **46** |
+| | **Candidates** | **45** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
-| *Discarded* | Measured negative, evidence named | *119* |
+| *Discarded* | Measured negative, evidence named | *120* |
 
 ## 🟢 Band A — ready to build (7 ready + 0 ✅ BUILT)
 
@@ -139,11 +139,9 @@ track share come at Step 0.
 | **Takaoka** 🇯🇵 | Toyama Prefecture's food CSV (3,128 Takaoka rows, monthly, no operator-name column); personal lists yearly (2025-03-31) | The per-dataset licence: the prefecture's new catalogue answers 403 to this machine and its site default is Sendai's. Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR |
 | **Brisbane** 🇦🇺 | Brisbane City Council's Food Safety Permits: 8,050 current, CC BY 4.0, refreshed daily (2026-09-30); name, address, rating, no coordinates | Found in passing (2026-10-01); Step 0 not run. The rail is Queensland Rail's suburban network, so the commuter-rail test decides it (`docs/commuter_rail_list.md`); then an address join |
 
-## 🔴 Band D — blocked, but the owner can act alone (1 city)
+## 🔴 Band D — blocked, but the owner can act alone (0 cities)
 
-| City | What there is | The owner's act |
-|---|---|---|
-| **Tempe** 🇺🇸 | "Tempe General Business License List as of September 3, 2026", one document updated monthly (format and size unstated); Valley Metro light rail | **Approve one download** (`tempe.gov/home/showpublisheddocument/118800/...`) so the list can be read; it refuses scripts **Read 2026-10-01 (the owner fetched it in their browser): a 33-page PDF of licence number, business name, business activity and website, with NO address**, so nothing can be placed. Recommended to the discards on a measured negative; the owner to confirm. |
+*Empty since 2026-10-01: Tempe, its only row, went to the discards once the owner fetched its list (a 33-page PDF with no addresses).*
 
 ## ⚫ Band R — restricted or request only (23 cities; created 2026-09-28)
 
@@ -221,7 +219,7 @@ not counted here.
 | ION Stage 2 | In planning |
 | Zurich's rebuild | After 12 December 2026 (PLAN) |
 
-## DISCARDED — 119 cities, each naming its evidence
+## DISCARDED — 120 cities, each naming its evidence
 
 ▼ **2026-10-01 — nineteen rows from the post-review screens** (staging's recommendations, confirmed by the owner the same day), in their own table below: Toyohashi (Japan), Dresden, Leipzig, Graz, Luxembourg City, Wrocław, Adelaide, the Gold Coast and Canberra (the cities a country pattern had left unscreened), Belgrade, Sarajevo, Santo Domingo, Casablanca, Rabat–Salé, Tunis, Lagos and Addis Ababa (the countries once ruled out on "no urban rail", each failing on its business data), and Cagliari and Alcobendas (wave 2's not-reached rows, now read in a browser).
 
@@ -476,7 +474,7 @@ dataset title**.
 ---
 
 
-**Added 2026-10-01** (the post-review screens; confirmed by the owner the same day).
+**Added 2026-10-01** (the post-review screens; confirmed by the owner the same day; Tempe added later the same day).
 
 | City | Kind | Methods | City host asked? | Why |
 |---|---|---|---|---|
@@ -499,6 +497,7 @@ dataset title**.
 | **Addis Ababa** 🇪🇹 | absence | read `aacatb.gov.et` (the city Trade Bureau: laws and directives) · read `etrade.gov.et` (licensing system endpoints only) · search for a national portal (`data.gov.et` does not resolve; aggregates elsewhere) | yes — `aacatb.gov.et` | **No published licence list (2026-10-01)** |
 | **Cagliari** 🇮🇹 | absence | enumerated `opendata.comune.cagliari.it` in a browser (795 datasets; 0 hits for nine commercial terms, "Stradario" 3 as the control) · read its Economia theme (7 budget files, 2009–2012) | yes — `opendata.comune.cagliari.it` | **No premises register in the Comune's own catalogue (2026-10-01)** |
 | **Alcobendas** 🇪🇸 | measured | read `empresasycomercios.alcobendas.org` (shops "que voluntariamente han solicitado su inscripción") · read `datos.alcobendas.org` (the package withdrawn; the `datos.gob.es` copy last modified 2022-11-27) | yes — both city hosts | **A voluntary directory, withdrawn and stale (2026-10-01)**: not a register |
+| **Tempe** 🇺🇸 | measured | measured the City's General Business License List (a 33-page PDF, as of 2026-09-03, fetched by the owner in their browser since the host refuses scripts; kept locally in `data/tempe/raw/`): four columns, licence number, business name, business activity and website · read the City's ArcGIS "Tempe Business License" app (short-term rentals 1,061 and tobacco 133 only) | yes — `tempe.gov` and its ArcGIS org | **No address in the list (2026-10-01, owner's call)**, so nothing can be placed: Denver's original failure. Valley Metro light rail. What would reopen it: a licence list with premises addresses |
 
 ## ✅ Current by country — 2026-10-01
 
@@ -506,7 +505,7 @@ dataset title**.
 
 | Country | Built | Candidates | Bands | What stands between it and the next city |
 |---|---|---|---|---|
-| 🇺🇸 United States | **18** | **2** — Seattle (Regional), Tempe | C, D | Seattle held for a regional build (Link's 11 cities; licence reads first); Tempe's list needs one download approved. Built: 18 |
+| 🇺🇸 United States | **18** | **1** — Seattle (Regional) | C | Seattle held for a regional build (Link's 11 cities; licence reads first); Tempe's list needs one download approved. Built: 18 |
 | 🇨🇦 Canada | **7** | **1** — Richmond (BC) | R | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's four SkyTrain suburbs are a rescope in PLAN, probes first. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
 | 🇲🇽 Mexico | **3** | **0** | — | Complete on the current screen: Monterrey (Regional) built 2026-09-27 and published with Daegu and Busan |
 | 🇪🇸 Spain | **3** | **1** — Alicante | R | Alicante's portal refuses the browser too (2026-10-01); Alcobendas discarded |
@@ -559,7 +558,7 @@ dataset title**.
 | 🇹🇳 Tunisia | — | — | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | — | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | — | — | Addis Ababa discarded 2026-10-01 |
-| **Total** | **124** | **46** |  | A 7 · B 12 · C 3 · D 1 · R 23. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **124** | **45** |  | A 7 · B 12 · C 3 · D 0 · R 23. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 
