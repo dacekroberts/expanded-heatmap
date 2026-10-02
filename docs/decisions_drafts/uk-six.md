@@ -11,6 +11,37 @@ accepted and note this 3. display 4. accepted" - calls 1 to 3 below as
 recommended, and the prose proposals below accepted. The entry "The owner's
 first four UK six calls" records them.
 
+**Still open for the owner, from the five builds after Manchester:**
+
+- **The five cities' `mode`: `tram`** in each (the light-rail test: 100%
+  `railway=tram` in every one, 0.0-7.1% in tunnel or on a bridge; the tram
+  list's default). Only Manchester is light rail.
+- **Edinburgh's centroid tier**: kept, as the kit says (57 storefronts, 1.5%;
+  unplaced 4.6% with it, 6.1% without). Glasgow's precedent is none.
+  Recommended: keep. If not, notice 90 goes.
+- **Sheffield's Shalesmoor stop**, which NaPTAN renamed "Kelham Island" in 2025
+  (same ATCO code, 3 m apart); OSM and the map say Shalesmoor. Recommended:
+  keep Shalesmoor until the operator's own name can be read (its site serves
+  a CAPTCHA).
+- **22 prose proposals on the five pages** (each city's entry below lists its
+  own, with the reason). They are template sentences made singular for one
+  line, scope bullets in Manchester's accepted shape, frequency bullets with
+  the city's figures, and one sentence each for what no template covers:
+  Birmingham's two short branches and Line 2 not yet open, Sheffield's
+  Tram-Train and Purple's hourly service, Blackpool's North Station spur,
+  Nottingham's shared OSM colour. Also new: Edinburgh's notice 89 (Glasgow's
+  61 with a centroid clause) and its "A short register." paragraph in What Is
+  Excluded.
+
+**For staging (the briefs) and Cleanup** (each city's entry has the detail):
+the briefs' sample placement shares against the full files (Edinburgh 96.6%
+against 93.9%, Sheffield 96.4% against 95.3%, Wyre 84.5% against 83.2%,
+Rushcliffe 80.2% against 79.6%); Nottingham's half-line relations (they are
+one per direction); Edinburgh's eight Newhaven stops under NaPTAN's Tyne and
+Wear prefix; `docs/map_inconsistencies.md` section 6's "seven cities" heading
+(reworded "some cities" here); `scaffold_city.py`'s OSM-city map template,
+which imports a `GTFS_ZIP` the config never defines.
+
 **Calls to approve with the builds** (each is a recommendation, with the
 precedent it follows):
 
@@ -59,6 +90,36 @@ for them):
   session's.
 
 ---
+
+### 2026-10-02 - The United Kingdom becomes a region of its own; the UK six take the minor label tier (owner)
+
+- **The owner:** "implement the high-density cluster rule to UK, like Japan,
+  France, Czechia" (2026-10-02, the kit). On Czechia's mechanism:
+  - every UK city, London, Glasgow and Newcastle (Regional) included, moves
+    from Europe into a region named **United Kingdom** (`REGION_ORDER`, after
+    Czechia; `country_sections.REGION_GROUP` files it under Europe);
+  - the six tram and light-rail cities carry `label_tier: "minor"`, France's
+    line between metro and the rest: a dot and tooltip in every view, a pill
+    only in the United Kingdom;
+  - `REGION_LABELS_ALSO["Europe"]` gains the United Kingdom, so Europe still
+    labels London, Glasgow and Newcastle.
+- **One region, no split**, decided by `check_macro_labels.py`: PROBLEMS 0 in
+  all 16 regions at 375, 768 and 1200 once five labels were placed, each
+  searched with the check's own geometry (`label_offset_by_region`):
+  - United Kingdom: Glasgow below its dot (above it, its pill covered
+    Edinburgh's marker), Manchester west of its dot (it covered Blackpool's
+    and overlapped Sheffield's), Nottingham right and a little high (it
+    covered Sheffield's);
+  - Europe: Glasgow west of its dot (Edinburgh's marker again), and Rotterdam
+    right and low, since Europe's re-centred frame put its pill over
+    Birmingham's and Nottingham's dots (Stockholm's case in the Czech move).
+- **The label widths** were measured in the browser pane with Space Grotesk
+  loaded: Manchester (Regional) 153.9, Birmingham (Regional) 153.2, Edinburgh
+  69.3, Sheffield 59.7, Nottingham (Regional) 151.7, Blackpool (Regional)
+  139.7. The control, Newcastle (Regional), read its recorded 143.1.
+- **Dublin stays in Europe**: the measurement needed no move.
+- **The master list's Built table** gives the United Kingdom its own row (9),
+  as `check_provenance.py` E counts built cities per region.
 
 ### 2026-10-02 - Blackpool (Regional) built, the last of the UK six: one tramway with the North Station spur, gate 3 on NaPTAN alone, halved rings
 

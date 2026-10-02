@@ -49,7 +49,7 @@ PLACE_AT_CENTROIDS = True
 CITY_BOUNDARY_GEOJSON = DATA_RAW / "city_boundary.geojson"
 BOUNDARY_OSM_RELATIONS = {1920901: "City of Edinburgh"}
 # The relation measures 272.9 km2 in UTM 30N (the fetch, 2026-10-02).
-BOUNDARY_AREA_KM2 = (240, 300)
+BOUNDARY_AREA_KM2 = (260, 285)
 
 # Rail: Edinburgh Trams, OpenStreetMap. One query (uk_fetch.osm_query): the bbox's
 # route=tram relations and the boundaries with geometry, the routes' member

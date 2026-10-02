@@ -54,10 +54,11 @@ dense-looking city may simply have more complete records.
   and Taipei (the national business tax register, FIA).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
-- **A food hygiene register:** London, Newcastle (Regional) and Manchester (Regional) (the Food Standards
+- **A food hygiene register:** London, Newcastle (Regional), Manchester (Regional),
+  Birmingham (Regional), Sheffield, Nottingham (Regional) and Blackpool (Regional) (the Food Standards
   Agency's FHRS), every food premises a borough or council inspects, and nothing
-  else; Glasgow the same on Scotland's scheme (Food Standards Scotland's FHIS),
-  every premises the council inspects. Stockholm's is the city's own food
+  else; Glasgow and Edinburgh the same on Scotland's scheme (Food Standards Scotland's FHIS),
+  every premises the council inspects (Edinburgh's register is short against Glasgow's). Stockholm's is the city's own food
   inspection register (Livsmedelstillsyn), one row per inspection reduced to one
   per premises, and frozen since October 2025. Bucharest's is the sanitary-veterinary
   directorate's register of food units (DSVSA București), active registrations only.
@@ -75,17 +76,18 @@ dense-looking city may simply have more complete records.
   is "not comparable" with licence-register cities; Montréal's makes the point without
   those words (checked 2026-09-28). Buenos Aires's page says to read its
   density "as a survey, not a register"; London's, Glasgow's, Newcastle
-  (Regional)'s and Manchester (Regional)'s "as a register, not a street survey" (checked 2026-09-29).
+  (Regional)'s, and the UK six's, "as a register, not a street survey" (checked 2026-09-29).
 
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Manchester (Regional), Stockholm, Bucharest.
+- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Manchester (Regional),
+  Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Stockholm, Bucharest.
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
-  London, Glasgow, Newcastle (Regional) and Manchester (Regional) (grocers, off-licences, bakers,
+  London, Glasgow, Newcastle (Regional) and the UK six (grocers, off-licences, bakers,
   butchers, newsagents with food and supermarkets, named "Food shops" as in the
   Japanese cities); Stockholm the same, kiosks to supermarkets;
   Bucharest the same, butchers and bakeries to supermarkets.
@@ -162,7 +164,11 @@ run on top of a metro network.
   ML1), Paris (T3a and T3b); these last four from 2026-09-27. Osaka (the Hankai
   tram, Hankai and Uemachi lines), Sapporo (the streetcar loop), Kyoto (the
   Randen's two lines and the Keihan Keishin Line, tramways in MLIT's data), Tokyo
-  (the Tokyo Sakura Tram and the Tokyu Setagaya Line).
+  (the Tokyo Sakura Tram and the Tokyu Setagaya Line). The UK six, each its city's whole
+  network: Manchester (Regional) (Metrolink, light rail), Birmingham (Regional) (West
+  Midlands Metro), Edinburgh (Edinburgh Trams), Sheffield (Supertram; the Tram-Train to
+  Rotherham not drawn), Nottingham (Regional) (NET) and Blackpool (Regional) (the
+  Blackpool Tramway).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Copenhagen (the Letbane has no stop in
@@ -196,7 +202,9 @@ register covers them all, or because the rail network only makes sense that way.
   Guadalajara (4 municipios), Monterrey (4 municipios), Lille (11 communes), Fortaleza (4), Porto Alegre (6),
   Recife (4), Santos (with São Vicente), Taipei (with New Taipei), Newcastle
   (Regional) (the five Tyne and Wear districts), Manchester (Regional) (the seven
-  Metrolink districts).
+  Metrolink districts), Birmingham (Regional) (Birmingham, Sandwell and Wolverhampton),
+  Nottingham (Regional) (the city, Broxtowe, Rushcliffe and Ashfield), Blackpool (Regional)
+  (Blackpool and Wyre).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -216,12 +224,13 @@ register covers them all, or because the rail network only makes sense that way.
   empty. The French cities keep to the commune so that they stay comparable with one
   another, although SIRENE covers the neighbouring communes too.
 
-### 6. The rings are half the size in seven cities, so ring counts do not compare
+### 6. The rings are half the size in some cities, so ring counts do not compare
 **Reader sentence:** In cities where stations are very close together, the rings are
 drawn at half size, so the pin counts in the layer menu cover a smaller area than in
 other cities.
 - **Rings 0.05 / 0.1 / 0.2 / 0.3 mi:** New York, Paris, Marseille, Toulouse, Lille,
-  Rennes, Oslo.
+  Rennes, Oslo; Birmingham (Regional), Sheffield, Nottingham (Regional) and Blackpool
+  (Regional) (2026-10-02).
 - **Rings 0.1 / 0.2 / 0.3 / 0.6 mi:** every other city.
 - **Reason:** where stations are a median 340–540 m apart, a 0.6 mi ring reaches past
   the next stations (city configs, `RING_EDGES_MILES`).
@@ -234,7 +243,7 @@ how far the network reaches, not on the data.
   (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
 - **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte
   18%, Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
-  Recife 23%, Los Angeles 24%, San Diego 24%.
+  Recife 23%, Los Angeles 24%, San Diego 24%, Birmingham (Regional) 17%.
 - **Reason:** network extent against the area in scope. Share = in-ring heat points ÷
   all-storefront heat points in each committed map.
 
@@ -291,7 +300,9 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   date, 2026-09-01), London (each borough's extract date, 2026-09-09
   to 2026-09-16), Glasgow (the council's extract date, 2026-09-14), Newcastle
   (Regional) (each council's, 2026-09-09 to 2026-09-16), Manchester (Regional)
-  (each council's, 2026-10-02), Buenos Aires (the
+  (each council's, 2026-10-02), Birmingham (Regional), Edinburgh, Sheffield and Blackpool
+  (Regional) (each council's, 2026-10-02), Nottingham (Regional) (each council's,
+  2026-10-01 to 2026-10-02), Buenos Aires (the
   survey years, in the prose), Sydney (the survey year) and Melbourne (the
   census year), Stockholm (the register's last edit, 2025-10-22) and
   Bucharest (the registers' date, 2026-08-25).
@@ -327,7 +338,11 @@ really shopfronts. Several pages say which way their map leans.
   Redbridge and a fifth in Havering); Glasgow (about one food storefront in a
   hundred has no map point and is not placed); Newcastle (Regional) (about one
   in fourteen unplaced, most in North Tyneside and Sunderland); Manchester
-  (Regional) (about one in twenty-six unplaced, most in Bury and Tameside); Buenos Aires
+  (Regional) (about one in twenty-six unplaced, most in Bury and Tameside); Birmingham
+  (Regional) (about one in twenty-seven, most in Sandwell and Birmingham); Edinburgh (about
+  one in twenty-two, and a register short against Glasgow's); Sheffield (about one in
+  thirty-seven); Nottingham (Regional) (about one in eighteen, most in Rushcliffe, 14.2%);
+  Blackpool (Regional) (about one in nineteen, almost all in Wyre); Buenos Aires
   (shopfronts whose use the surveyors could not identify, 7.2% and 32% in Villa
   Riachuelo, are dropped, and shops inside malls and arcades are not itemised).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
@@ -343,7 +358,8 @@ really shopfronts. Several pages say which way their map leans.
   register late; registered premises may have no shopfront, including web shops and
   business centres; about 1.2 to 1.5 times OpenStreetMap's restaurants, cafés and
   bars at four station areas); London, Glasgow, Newcastle (Regional) and
-  Manchester (Regional) (a premises stays listed until the council removes it, as each page says).
+  Manchester (Regional) and the rest of the UK six (a premises stays listed until the council
+  removes it, as each page says).
 - **Undisclosed on the city page:** San Francisco (only about 37% of rows carry a
   NAICS code) and Los Angeles (about 9% carry none), so both are floors. San Diego
   undercounts neighbourhoods registered under their own name. All three are open
@@ -398,7 +414,7 @@ classifies or licenses them.
   concession stands, Bay ferry bars and a few restaurants. **Brazil:** food
   trucks, trailers, kiosks and stalls cannot be told from fixed premises in the
   census's descriptions and count as whatever the rest of the description names.
-  **London, Glasgow, Newcastle (Regional), Manchester (Regional):** a workplace canteen registered as a
+  **London, Glasgow, Newcastle (Regional) and the UK six:** a workplace canteen registered as a
   restaurant or café cannot be told apart; not measured.
 - **Street and market stalls:** excluded in Mexico City, Guadalajara and Monterrey;
   by code in France (47.8x) and Taiwan (street and market stalls, e.g. 2,669 in

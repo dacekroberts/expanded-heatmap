@@ -253,7 +253,8 @@ TEXT_WIDTH = {
     "Liberec (Regional)": 122.9, "Most (Regional)": 107.5,
     # The UK six, 2026-10-02, after the Google Fonts face loaded in the
     # browser pane; controls Newcastle (Regional) 143.1, London, Glasgow.
-    "Manchester (Regional)": 153.9,
+    "Manchester (Regional)": 153.9, "Birmingham (Regional)": 153.2, "Edinburgh": 69.3,
+    "Sheffield": 59.7, "Nottingham (Regional)": 151.7, "Blackpool (Regional)": 139.7,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

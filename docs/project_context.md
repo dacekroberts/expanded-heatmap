@@ -1008,6 +1008,15 @@ Cities built and running end to end (pipeline, map, app page):
   predate TfGM's September 2026 change. Gate 3 runs against the operator and,
   name by name, against NaPTAN, the DfT's national stop register (ATCO area
   940 holds every tram stop). Light rail on the light-rail test.
+- **The rest of the UK six** (built 2026-10-02 on Manchester's shared steps, as
+  config): **Birmingham (Regional)** (West Midlands Metro, Line 2 to Dudley not
+  yet open), **Edinburgh** (one tram line, on Scotland's FHIS as Glasgow),
+  **Sheffield** (Supertram without the Tram-Train; gate 3 on NaPTAN alone, as
+  its operator's site refuses scripts), **Nottingham (Regional)** (NET's two
+  lines) and **Blackpool (Regional)** (the tramway with its North Station spur;
+  NaPTAN alone). All food only, all trams. Every UK city sits in a **United
+  Kingdom** region of its own, the six on the minor label tier; Europe still
+  labels London, Glasgow and Newcastle.
 - **Buenos Aires** - the Subte's six lines (A-E and H) inside the Ciudad
   Autónoma; Argentina's first city. The businesses are **a street survey**, the
   city's Relevamiento Usos del Suelo 2022-2024: uses, not businesses, so no

@@ -21,6 +21,25 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **The UK six's watch items** (built 2026-10-02 on `uk-six-build`):
+  - **Birmingham (Regional): West Midlands Metro Line 2 (Wednesbury - Dudley)**,
+    due about 1 November 2026 (Dudley Council's leader; the 28 August date was
+    missed). Once in passenger service, take relation 17248967 out of
+    `NOT_DRAWN`, add Dudley (FSA 409) as a fourth authority (pre-approved by
+    the owner, 2026-10-01), and drop Line 2's five Sandwell stops from
+    `NAPTAN_EXPLAINED`.
+  - **Birmingham: the Eastside stops beyond Millennium Point** (Curzon Street,
+    Meriden Street, Digbeth High Street), active in NaPTAN, not on the
+    operator's maps page on 2026-10-02. Add them when they open.
+  - **Edinburgh's centroid tier** (owner's call): the kit's Code-Point tier
+    (57 storefronts, 1.5%) against Glasgow's precedent of none; notice 90 goes
+    if it is dropped.
+  - **Sheffield's Shalesmoor stop**, which NaPTAN renamed "Kelham Island" in
+    2025 (owner's call on the shown name; `STATION_RENAMES` would do it).
+  - **Sheffield's business-rates list**, a later second bucket (owner,
+    2026-10-01): a licence read, an address join and a call on "Shop And
+    Premises".
+
 - [ ] Owner: `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB, superseded by
   `gtfs-openov-nl.zip`) and `data/rome/raw/rome_static_gtfs.zip` (46.8 MB,
   downloaded, then not used) may be deleted from the main checkout.
