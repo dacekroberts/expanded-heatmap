@@ -63,8 +63,18 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
        East Asia and is named for the area, so a later Baku, Yerevan or
        Ankara joins it. Europe is not modified.
      - The owner first floated Europe West and East regions, with a look by
-       Cleanup. The message to Cleanup failed to send. Once Georgia's
-       classification settled Tbilisi, it was no longer needed.
+       Cleanup. The first message to Cleanup failed to send. The owner then
+       asked that Cleanup be told every option, and it was.
+     - **Closed: Europe is NOT split** (owner, 2026-10-02, after Cleanup's
+       measurement with `fit_view` and `label_competition.compete` at 375,
+       768 and 1200).
+       - Europe today: 26 cities, zoom 2.81, all labelled.
+       - Without the UK: 23 cities, zoom 2.81, all labelled.
+       - A West/North-East split: zoom 2.91 and 2.76, no gain.
+       - A North/South split: zoom 2.24 and 2.10, with only 6 of 8 and 9 of
+         15 labelled.
+       - The only crowding is Den Haag, Rotterdam and Amsterdam (3-8 px). It
+         stays on the stacked-dots review list.
 - **Tbilisi now waits only on Seattle being green** (`docs/handoff_seattle_tbilisi_2026-10-02.md`).
 
 ### 2026-10-02 - Seattle (Regional) released to its own session, Tbilisi queued behind it (owner)
