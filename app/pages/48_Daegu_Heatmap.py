@@ -16,6 +16,10 @@ from pipeline.daegu.config import (  # noqa: E402
     EDITION, HEATMAP_HTML, PROVENANCE_JSON, REGISTERS)
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -24,55 +28,15 @@ st.set_page_config(page_title="Daegu Heatmap", page_icon="\U0001f5fa️", layout
 set_base_font()
 
 render_city_nav("Daegu")
+render_city_title('Daegu')
 
-st.title("Daegu: commercial density around subway stations")
-
-# Approved by the owner 2026-09-27.
-st.markdown(
-    """
-Three lines are drawn — **Daegu Metro Lines 1, 2 and 3** — each labelled on the map and in the
-legend, in the operator's colours; Line 2's green is darkened so it stays distinct from the
-Personal services dots, and Line 3 is a monorail. Routes and stations come from OpenStreetMap,
-because Korea's national station dataset does not include Daegu Metro. Businesses are counted
-around stations inside Daegu only, since the permit files cover Daegu only; Lines 1 and 2 are
-still drawn to their ends in Gyeongsan. Not drawn: the Daegyeong Line (대경선), a Korail commuter
-line whose stops in Daegu are about 4 km apart, and intercity trains. Seodaegu, served only by
-the Daegyeong Line, has no ring.
-
-Businesses come from **Daegu Metropolitan City's permit files** on its D-데이터허브 portal, the
-national licensing records the city republishes for all its districts and counties: restaurants,
-cafés and karaoke bars; hair, beauty and nail salons, barbers, laundries and public baths; and,
-for retail, bakeries, butchers, food shops, shops licensed to sell tobacco, department stores and
-marts, and health-food shops. Korea licenses these trades rather than retail in general, so a
-clothes shop, a bookshop or a phone shop needs no such permit and is absent: **the Retail
-category leans towards food and convenience stores**. Read the balance between categories as a
-fact about Korea's licensing, not about Daegu's streets. Convenience stores and confectioners that
-hold a café permit are counted as shops. Left out: lodging, veterinary clinics, hostess bars and
-cabarets, food trucks and caterers, wholesale meat, milk and egg traders, and health-food sellers
-who trade online or door to door.
-
-**The data is older than its label.** The city publishes these files as its August 2026 edition,
-but the newest permits, closures and updates in them date from the end of August 2025, so the
-map shows Daegu as it stood then. The snapshot line below gives the date the records themselves
-carry.
-
-Each dot carries the name on the permit, in Korean, and its kind in English. A shop often holds
-several permits (a convenience store can hold tobacco, café and health-food permits at once), so
-each is counted once per building: by brand for the five convenience-store chains, and by name
-otherwise. The files place each permit at its building; where a permit has no location, the
-location of another permit at the same address is used, and the few that still cannot be placed
-are left off. Where a registered name is a bare personal name at what reads as a home address,
-the name is withheld.
-
-Concentric ring boundaries and the three business categories (Food service, Retail and Personal
-services) are toggleable via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming in will show individual
-dots; hover over those to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a statistical density
-estimate, so read the colour as "roughly where things cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/daegu/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/daegu/provenance.json so they cannot go
 # stale on the next fetch: the newest record update across the files - which is
@@ -95,12 +59,46 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/daegu/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-27; set as bullets 2026-10-01.
+st.markdown(
+    """
+**The lines**
+
+- Three lines are drawn, each labeled on the map and in the legend in the operator's colors:
+  **Daegu Metro Lines 1, 2 and 3**. Line 2's green is darkened so it stays distinct from the
+  Personal services dots, and Line 3 is a monorail.
+- Routes and stations come from OpenStreetMap, because Korea's national station dataset does not
+  include Daegu Metro.
+- Businesses are counted around stations inside Daegu only, since the permit files cover Daegu
+  only; Lines 1 and 2 are still drawn to their ends in Gyeongsan.
+- Not drawn: the Daegyeong Line (대경선), a Korail commuter line whose stops in Daegu are about
+  4 km apart, and intercity trains. Seodaegu, served only by the Daegyeong Line, has no ring.
+
+**The businesses**
+
+- From **Daegu Metropolitan City's permit files** on its D-데이터허브 portal, the national
+  licensing records the city republishes for all its districts and counties: restaurants, cafés
+  and karaoke bars; hair, beauty and nail salons, barbers, laundries and public baths; and, for
+  retail, bakeries, butchers, food shops, shops licensed to sell tobacco, department stores and
+  marts, and health-food shops.
+- Korea licenses these trades rather than retail in general, so a clothes shop, a bookshop or a
+  phone shop needs no such permit and is absent: **the Retail category leans toward food and
+  convenience stores**. Read the balance between categories as a fact about Korea's licensing,
+  not about Daegu's streets.
+- Convenience stores and confectioners that hold a café permit are counted as shops.
+- **The data is older than its label.** The city publishes these files as its August 2026
+  edition, but the newest permits, closures and updates in them date from the end of August
+  2025, so the map shows Daegu as it stood then. The snapshot line above gives the date the
+  records themselves carry.
+- A shop holding several permits is counted once per building.
+- Each dot carries the name on the permit, in Korean, and its kind in English. Where a registered
+  name is a bare personal name at what reads as a home address, the name is withheld.
+"""
+)
+
+render_map_help('three business categories (Food service, Retail and Personal services)')
+render_excluded_stations("Daegu")
+render_country_links('Daegu')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

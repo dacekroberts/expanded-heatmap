@@ -11,7 +11,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from cities import MAP_ONLY_NAV, SWITCHER_ORDER
+from cities import CITIES, MAP_ONLY_NAV, SWITCHER_ORDER
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 # pipeline/theme.py imports nothing, so it is safe for the lean deploy venv
@@ -64,7 +64,7 @@ _MACRO_THEME_CSS = """
     font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
     background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
     border: 1px solid @@LIGHT_BORDER@@;
-    /* The only colour here deliberately left outside pipeline/theme.py: a
+    /* The only color here deliberately left outside pipeline/theme.py: a
        black drop shadow is theme-agnostic, and it simply stops mattering on a
        dark surface rather than looking wrong. Same value in map_common.py. */
     border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
@@ -74,7 +74,7 @@ body.dark-base #macro-theme-toggle { background: @@DARK_SURFACE@@; color: @@DARK
     border-color: @@DARK_BORDER@@; }
 body.dark-base #macro-theme-toggle:hover { background: @@DARK_SURFACE_HOVER@@; }
 /* Only the basemap canvas is filtered; the markers and labels are a separate
-   canvas, so they keep their colours. Same filter as the city maps. */
+   canvas, so they keep their colors. Same filter as the city maps. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-canvas {
     filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
 @@CONTROLS@@
@@ -179,7 +179,7 @@ _MACRO_CONTROLS_CSS = """
    sit "beneath UI, behind toggles, or off-screen", and render_site_notices()
    below already refuses an st.expander for the same reason - a required notice
    behind a toggle is not displayed. A library default is not an exemption, so
-   the compact behaviour is overridden rather than accepted.
+   the compact behavior is overridden rather than accepted.
 
    Not scoped to `body.dark-base`: the obligation does not depend on the theme.
    The city maps are Leaflet, whose attribution control has no compact mode, so
@@ -217,16 +217,16 @@ body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: 
    the (dark-themed) page's near-white text - rgb(230,237,247) on Mapbox's
    half-white strip - and read only as its two links. The strip was also
    half-transparent, so a name pill under it showed through the text. Links use
-   the TEXT colour in light mode, not the accent: the teal accent is ~3.7:1 on
+   the TEXT color in light mode, not the accent: the teal accent is ~3.7:1 on
    white. check_macro_attribution.mjs measures all of this at 4.5:1. */
 [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@LIGHT_SURFACE@@ !important; color: @@LIGHT_MUTED@@; }
 [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@LIGHT_TEXT@@; }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@DARK_ATTRIB_BG@@ !important; color: @@DARK_MUTED@@; }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@DARK_ACCENT@@; }
 /* deck.gl's tooltip is an HTML overlay (class `deck-tooltip`), so unlike the
-   marker and label layers it CAN be themed. pydeck writes its colours inline
+   marker and label layers it CAN be themed. pydeck writes its colors inline
    from the `tooltip` style dict, hence !important. Without this the macro
-   map's tooltip stayed the light-mode green-grey while every city map's
+   map's tooltip stayed the light-mode green-gray while every city map's
    tooltip was slate. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .deck-tooltip {
     background: @@DARK_SURFACE@@ !important; color: @@DARK_TEXT@@ !important;
@@ -297,8 +297,8 @@ def scroll_table(columns, rows, right=(), min_width=None):
     (2026-09-23). An HTML table in an overflow box does neither, and its text
     stays in the page. `rows` are sequences of already-formatted strings;
     `right` names the columns to right-align (figures); `min_width` (px)
-    keeps a wide table from squashing its columns before it scrolls. Colours
-    are left to the theme, with a grey rule that reads in both.
+    keeps a wide table from squashing its columns before it scrolls. Colors
+    are left to the theme, with a gray rule that reads in both.
     """
     import html
 
@@ -376,6 +376,15 @@ def set_base_font():
             display: block;
             overflow-x: auto;
             max-width: 100%;
+        }
+
+        /* A city page's subtitle (render_city_title), set close under the
+        city's name and quieter than it. */
+        .st-key-city-title h1 { padding-bottom: 0.1rem; }
+        .st-key-city-title p.city-subtitle {
+            margin: 0;
+            font-size: 1.05rem;
+            opacity: 0.75;
         }
         </style>
         """,
@@ -1797,7 +1806,7 @@ _NOTICES = [
 _NON_AFFILIATION = (
     "This is an independent project. It is not affiliated with, sponsored by "
     "or endorsed by any transit agency or city government named here. Line "
-    "names and route colours are used only to identify each line as its "
+    "names and route colors are used only to identify each line as its "
     "riders know it. No agency logo, wordmark or route symbol is reproduced."
 )
 
@@ -1814,7 +1823,7 @@ _NON_AFFILIATION = (
 # three are meant to say the same thing.
 _UNSETTLED_TERMS = (
     "**One city rests on terms that are unresolved, and that is stated rather "
-    "than glossed.** Philadelphia's business licences and city limits carry "
+    "than glossed.** Philadelphia's business licenses and city limits carry "
     "the “City of Philadelphia License”, which reserves the City's "
     "rights without granting any — and the dataset page also binds a "
     "reader to the City's separate Terms of Use, which permit residents to "
@@ -1824,12 +1833,12 @@ _UNSETTLED_TERMS = (
     "without the prior written permission of the City”. Read literally "
     "and applied to a dataset, that would not permit this map, which filters "
     "and redraws what it publishes. Read as what it appears to be — terms "
-    "written for web pages, sitting beside a dataset licence that contains no "
+    "written for web pages, sitting beside a dataset license that contains no "
     "such prohibition, under an Open Data Program whose purpose is public "
     "reuse — it would. **That question is open, it has not been resolved "
-    "in this project's favour, and if the City confirms the restrictive "
+    "in this project's favor, and if the City confirms the restrictive "
     "reading Philadelphia comes off this site** — the same way a request "
-    "about a single listing is honoured rather than argued. A written request "
+    "about a single listing is honored rather than argued. A written request "
     "for the City's position was sent on 21 September 2026. Whatever comes "
     "back, silence will not be treated as permission."
 )
@@ -1842,7 +1851,7 @@ _AS_RECORDED = (
     "retrieval date recorded for that source, redrawn and filtered. Registers "
     "lag the street: a shop that closed last month may still appear, and one "
     "that opened last month may not. Read each map as what a city's own "
-    "licence records showed on that date, not as a census of what is open."
+    "license records showed on that date, not as a census of what is open."
 )
 
 
@@ -1872,7 +1881,8 @@ def render_site_notices(show_links: bool = True):
     # displayed. So they render inline, always, in small type.
     st.caption(
         "**Required source notices.** Reproduced as each source's terms "
-        "require. Full provenance, with endpoints and retrieval dates, is on "
+        "require. Each source's full record, with the web address it was downloaded "
+        "from and the date, is on "
         "the \u201cWhere this data comes from\u201d page."
     )
     for heading, text, verbatim in _NOTICES:
@@ -1880,7 +1890,143 @@ def render_site_notices(show_links: bool = True):
     st.caption(
         "**OpenStreetMap** \u2014 basemap \u00a9 OpenStreetMap contributors, "
         "available under the Open Database License. The attribution also "
-        "appears in the corner of every map, where its licence requires it to "
+        "appears in the corner of every map, where its license requires it to "
         "stay visible. The overview map's basemap is \u00a9 CARTO."
     )
     st.caption(_UNSETTLED_TERMS)
+
+
+# --- The city page's own pieces (format set by the owner, 2026-10-01) -------
+#
+# Order on every city page: render_city_title, then the map (st.iframe at
+# height 650; scripts/check_map_attribution.js depends on that height), then
+# the date caption and the city's own credits, then the page's bullets,
+# render_map_help, render_country_links, and render_site_notices last.
+# Nothing renders between the title block and the map, so a reader arriving
+# from the macro map sees the map without scrolling.
+
+# Title plus subtitle rather than one long title, which wrapped badly on a
+# phone for names like "Kitchener–Waterloo (Regional)" (owner, 2026-10-01).
+CITY_SUBTITLE = "Transit-centered commercial density heatmap"
+
+
+def city_entry(name):
+    """The city's entry in cities.CITIES; `name` is the same string the page
+    passes to render_city_nav."""
+    for city in CITIES:
+        if city["name"] == name:
+            return city
+    raise KeyError(f"{name!r} is not a name in cities.CITIES")
+
+
+def render_city_title(name):
+    """The city's name, centered, with CITY_SUBTITLE beneath it. Also trims
+    the empty space above it on city pages only, so more of the map shows on
+    the first screen of a phone: the top padding (6rem by default), and the
+    16 px gap each invisible element above the title (the style blocks, the
+    hidden city links) adds, 64 px measured at 375 px."""
+    st.markdown("<style>[data-testid='stMainBlockContainer'] "
+                "{ padding-top: 3.5rem !important; }"
+                "[data-testid='stElementContainer']:has(style),"
+                "div:has(> .st-key-map-only-nav) { display: none; }</style>",
+                unsafe_allow_html=True)
+    with st.container(key="city-title"):
+        st.title(name, anchor=False, text_alignment="center")
+        st.markdown(f'<p class="city-subtitle">{CITY_SUBTITLE}</p>',
+                    unsafe_allow_html=True, text_alignment="center")
+
+
+def render_data_age(name):
+    """The date caption under the map for a page that reads no provenance
+    file: the city's data_age from cities.py, the text the Overview's city
+    list shows."""
+    st.caption(f"Data: {city_entry(name)['data_age']}.")
+
+
+# The layer control's icon as the maps draw it: Leaflet 1.9.3's own image, from
+# the CDN every heatmap.html already loads Leaflet from (pipeline/map_common.py
+# inverts it on a dark map). Shown on a light tile, as the map's light-mode
+# control draws it, so it reads in both page themes.
+_LAYERS_ICON = (
+    '<img src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/images/layers.png" '
+    'srcset="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/images/layers-2x.png 2x" '
+    'alt="layers icon" width="20" height="20" style="vertical-align:middle;'
+    'background:#fff;border:1px solid rgba(0,0,0,0.25);border-radius:4px;'
+    'padding:2px;margin:0 2px">'
+)
+
+
+def render_map_help(layers="business categories"):
+    """How to use the map, the same on every city page: pipeline/map_common.py
+    draws every map with the same controls. `layers` is the page's own name
+    for its business layers ("business layer" on a one-bucket map, "three
+    business categories (Retail, Food service and Personal services)")."""
+    st.markdown(
+        "**Using the map**\n\n"
+        f"- The layer control {_LAYERS_ICON} in the top left turns the rings "
+        f"around each station and the {layers} on and off.\n"
+        "- Zoomed out, a business layer shows numbered circles, each counting "
+        "the businesses in its area. Zoom in to see individual dots, and hover "
+        "over a dot for its details.\n"
+        "- Top right: a **Cities** menu and a **Global View** button for "
+        "moving between maps, and a light/dark switch. The map opens in "
+        "whichever mode the page is using; once you pick one, it carries "
+        "across the other city maps.\n"
+        "- The heat layer is illustrative: a visual blur, not a statistical "
+        "density estimate. Read its color as “roughly where things cluster.”",
+        unsafe_allow_html=True,   # the icon's <img>
+    )
+
+
+def render_excluded_stations(name):
+    """The stations the city's map leaves out, collapsed under its bullets:
+    the rows of outputs/<slug>/excluded_stations.csv, which a page's bullets
+    point to as "listed below" (owner, 2026-10-01; What Is Excluded shows only
+    a count per city). Nothing renders for a city with no file or an empty one.
+
+    The files do not share a schema (app/station_scope.py). "Why" is the
+    file's `reason` as written; a file without one records the place instead
+    (located_in, state, commune or municipality), and a file with neither
+    holds only stations outside the city's boundary (Madrid, and the
+    distance_outside_m files), which station_scope counts the same way."""
+    import csv
+    from station_scope import slug
+
+    path = (Path(__file__).parent.parent / "outputs" / slug(city_entry(name)["page"])
+            / "excluded_stations.csv")
+    if not path.exists():
+        return
+    with open(path, encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        columns = reader.fieldnames or []
+        rows = list(reader)
+    if not rows:
+        return
+    lines_col = next((c for c in ("lines", "line") if c in columns), None)
+    place_col = next((c for c in ("located_in", "state", "commune", "municipality")
+                      if c in columns), None)
+
+    def why(row):
+        if (row.get("reason") or "").strip():
+            return row["reason"].strip()
+        if place_col and (row.get(place_col) or "").strip():
+            return f"in {row[place_col].strip()}"
+        return "outside the city"
+
+    header = ["Station"] + (["Lines"] if lines_col else []) + ["Why"]
+    body = [[row.get("station", "")] + ([row.get(lines_col, "")] if lines_col else [])
+            + [why(row)] for row in rows]
+    with st.expander(f"Stations left out ({len(rows):,})"):
+        scroll_table(header, body, min_width=480)
+
+
+def render_country_links(name):
+    """Links to the two reference pages, opened on the city's country. The
+    deep-link contract with those pages: ?country=<the city's country value
+    in cities.py>, which Streamlit URL-encodes."""
+    country = city_entry(name)["country"]
+    with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
+        st.page_link(EXCLUSIONS_PAGE, query_params={"country": country},
+                     label=f"What is counted, and what is not: {country}")
+        st.page_link(ABOUT_DATA_PAGE, query_params={"country": country},
+                     label=f"Where this data comes from: {country}")

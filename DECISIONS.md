@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**330 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**337 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
@@ -36,6 +36,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)](#2026-10-01---the-master-lists-history-written-docscity_master_list_historymd-published-as-an-artifact-owner)
 - [Registrants' own names taken out of the docs: the What Is Excluded hotfix, then the internal files](#2026-10-01---registrants-own-names-taken-out-of-the-docs-the-what-is-excluded-hotfix-then-the-internal-files)
 - [Withheld names are kept as keys: seven cities' PERSON_NAMED lists hashed](#2026-10-01---withheld-names-are-kept-as-keys-seven-cities-person_named-lists-hashed)
+- [San Francisco leaves out individual practitioner licences (owner)](#2026-10-01---san-francisco-leaves-out-individual-practitioner-licences-owner)
+- [Neutral code comments, phase 1: shared code, scripts and three app modules (owner)](#2026-10-01---neutral-code-comments-phase-1-shared-code-scripts-and-three-app-modules-owner)
+- [The two reference pages show one country at a time (owner)](#2026-10-01---the-two-reference-pages-show-one-country-at-a-time-owner)
+- [The Overview's city list follows the region selector (owner)](#2026-10-01---the-overviews-city-list-follows-the-region-selector-owner)
+- [City pages: the stations left out are listed on the page itself; eight sentence fixes (owner)](#2026-10-01---city-pages-the-stations-left-out-are-listed-on-the-page-itself-eight-sentence-fixes-owner)
+- [City pages: one format for all 124, approved on three samples (owner)](#2026-10-01---city-pages-one-format-for-all-124-approved-on-three-samples-owner)
+- [The prose and UI pass: the audit's 507 proposals approved, internal notes hidden, US spelling site-wide (owner)](#2026-10-01---the-prose-and-ui-pass-the-audits-507-proposals-approved-internal-notes-hidden-us-spelling-site-wide-owner)
 
 **2026-09-30**
 
@@ -13593,3 +13600,342 @@ Recorded by the cleanup session from the Main Building Session's findings of
     and add that no doc quotes a registrant's own name as an example.
 - **Kansas City's step 2 docstring** cited `config.PERSON_NAMED_TRADE`, which
   does not exist; it now cites `config.PERSON_NAMED`.
+
+### 2026-10-01 - San Francisco leaves out individual practitioner licences (owner)
+
+- **Found by prose agent 5** while checking a pin that showed a person's own
+  name. In San Francisco's data, each "TATTOO, BODY PIERCING, PRACTITIONER"
+  licence is one artist's personal registration, usually at a studio that
+  already has its own pin from its facility licence. The owner said to drop
+  them. GENERAL MASSAGE PRACTITIONER is the same kind of licence, and the
+  owner dropped it too. These are the only practitioner licence types in the
+  data.
+- **The rule** (`config.PRACTITIONER_ONLY_LICENCES`, step 2): a row goes when
+  every licence in `lic_code_descriptions_list` is a practitioner's and at
+  least one is. A row that also holds a facility or establishment licence is
+  the shop, and stays. OUTCALL MASSAGE SERVICE goes only with a practitioner
+  licence: an outcall licence alone stays (3 rows), since the owner was not
+  asked about those.
+- **Precedent:** New York, Calgary and Edmonton leave out chair renters, a
+  person working inside someone else's shop.
+- **Measured exactly** (step 2 run twice in-process, rule off and on, compared
+  by `uniqueid`): 62 pins go, 53 tattoo, 7 massage, and 2 massage with an
+  outcall licence. 42 of the 62 share an address with a pin that remains.
+  Storefronts go from 16,456 to 16,394, and in-ring pins from 11,762 to 11,720.
+  - Retail 5,039 -> 5,038; Personal services 2,132 -> 2,091; Food unchanged.
+  - The drift check shows only the map and the storefront figure moving; the
+    baseline is updated.
+- **Privacy:** `check_personal_exposure.py san_francisco` finds 0 person-like
+  names at a residential unit among 11,720 pins. The verdict stays publish;
+  `docs/privacy_verdicts.md` now cites this entry.
+- **Disclosed** in `excluded_categories.md`, San Francisco's section, in the
+  owner-approved sentence. `map_inconsistencies.md` tables B and C,
+  `app/macro_facts.json` and `app/ring_shares.json` are updated to match.
+
+### 2026-10-01 - Neutral code comments, phase 1: shared code, scripts and three app modules (owner)
+
+- **The owner chose the style before this session** (handoff
+  `neutral-comment-style.md` at the main checkout's root): neutral voice; an
+  audience of both an outside reader and whoever changes the code next;
+  verification history one line at most; no em dashes in any comment.
+- **Pilot approved 2026-10-01**: `scripts/check_provenance.py`, 404 -> 356
+  comment lines. The owner was shown what was removed (sixteen items: the
+  Canada and Mexico diaries, "clean when written, 17 paths", "written inline
+  six times", the first-version and lane-number narration) and approved it
+  as the rollout's reference example. `CLAUDE.md`'s new "Code comments"
+  section names it.
+- **Scope, phase 1**: 168 tracked `.py` files: `pipeline/*.py`,
+  `pipeline/countries/`, `pipeline/taxonomies/`, `scripts/` (less
+  `france_page.py`, `scaffold_city.py`, `scaffold_france_batch.py`, agent
+  4's), `app/cities.py`, `app/station_scope.py`, `app/label_competition.py`
+  and `.claude/hooks/block_heredoc.py`. The per-city folders
+  `pipeline/<city>/` are phase 2, the owner's call later.
+- **Comment and docstring lines, before -> after**: `pipeline/*.py` 2,010 ->
+  1,963; `pipeline/countries/` 2,186 -> 2,145; `pipeline/taxonomies/` 5,180 ->
+  5,172; `scripts/` 4,383 -> 4,248; the three app modules 1,657 -> 1,376; the
+  hook 42 -> 35. Total 15,458 -> 14,939. The taxonomies barely move because
+  their comments are decision records, kept whole.
+- **Comments only, verified**: every file's AST, with docstrings and
+  comments removed, is identical to 06b79f8c, and every non-docstring string
+  literal is unchanged, including the CSS and JS comments
+  `pipeline/map_common.py` embeds in every `heatmap.html` (stricter than the
+  handoff's check, on purpose). The one code change is `check_all.py`'s new
+  entry.
+- **`scripts/check_no_em_dashes.py`**, in `check_all.py`: no em dash in any
+  `#` comment, docstring or CSS/JS/HTML comment inside a string, across all
+  tracked `.py` files; visible text exempt. Watched failing first on planted
+  copies (a docstring, a `#` comment, a CSS comment inside one of
+  `map_common.py`'s strings; a visible label and a printed message stayed
+  quiet). It found four em dashes in comments, all in phase-1 files and all
+  quoting a dash as data or a heading; each is now paraphrased ("a dash",
+  "U+2014"). **`map_common.py`'s embedded map CSS/JS carries none**, so the
+  rule needs no map re-render.
+- **Judgment calls in the rollout**:
+  - **Comments that are wrong about the code were kept and listed**, not
+    fixed (a comment pass is not the moment to change claims): see
+    `data/_review/prose-1-comments/report.md`.
+  - **Comparative rankings dropped from `check_personal_exposure.py`**
+    ("the STRONGEST case in the project" for Dublin, Madrid, Edmonton and
+    Mexico City; "the ONLY city whose source is a field survey" for
+    Montréal): they contradicted each other, and Montréal's is no longer
+    true. The structural reasoning under each stays.
+  - **Stale forward-looking text dropped**: `pipeline/countries/__init__.py`'s
+    "the next four countries" (all now built), france.py's "the two cities
+    this project wants first".
+  - **Four REGISTRIES comments moved** in `check_personal_exposure.py`
+    (Copenhagen's, Seoul's, Houston's, Vancouver's sat above the
+    neighbouring entry).
+  - **Headings that miscounted their own lists** were corrected or lost the
+    count (drift_check.py "Two things" over three; screen_rail.py "Three
+    traps" over four; check_stale_claims.py "Two more" over five).
+  - **Left verbatim**: dated log text (france.py's 2026-09-22 Lyon block),
+    licence quotes (LA Metro's and MTA's "you"), the STARTING VALUE comments
+    in `app/cities.py` (`scaffold_city.py` writes that text), format specs
+    and usage lines in docstrings the code prints.
+- **Checks**: `check_all.py` 36 of 36 (with `check_no_em_dashes.py`);
+  `check_deploy_imports.py --ref HEAD` clean; `drift_check.py --render-only
+  --jobs 1` through the memory gate: zero drift, all 124 maps identical after
+  Folium-id normalization. No render-only peak was on record, so the owner
+  set the declaration at 3 GB rather than the unknown-peak 8 GB; **measured
+  peak 1.61 GB**, now in the gate's history.
+
+### 2026-10-01 - The two reference pages show one country at a time (owner)
+
+- **The owner's brief (option B)**: keep What Is Excluded and Where this data
+  comes from as their own pages, but show one country's section at a time
+  under a selector, with the all-city material where a reader expects it.
+- **The selector is a region radio, then that region's countries** (owner,
+  2026-10-01, chosen in session from two piloted forms). Both are horizontal
+  `st.radio` rows labelled "<Name> (<n cities>)", the Overview region
+  selector's control (cleanup's request).
+  - Measured at 375 px: one radio of all 24 countries was **396 px** tall.
+    The region row is **127 px**, and the tallest country row (Europe, 14
+    countries) is **281 px**. The Overview's region radio is 319 px.
+  - The regions are the macro map's, with a country's halves folded
+    together: North America, Europe, South America, East Asia, Oceania.
+    Oceania has one country, so it shows no second row.
+- **Placement (owner)**: the selector directly under the title, then the
+  country's section, then the page intro and the all-city material. Before
+  this, the selector sat **1,473 px** down the page at 375, below the intro,
+  so a reader arriving from a city page landed about two screens above their
+  country.
+- **Default (owner)**: United States, first in `cities.COUNTRY_ORDER` (the
+  Cities dropdown's order). `?country=` with a `cities.py` country opens that
+  country and its region; an unknown or missing value opens the default
+  without an error.
+- **The documents stay whole on disk; the split is made at render time**
+  (`app/country_sections.py`). Splitting `excluded_categories.md` into files
+  per country, as `data_sources/` was on 2026-09-27, was rejected:
+  `check_scope_disclosure.py`, `check_provenance.py` (numbered notices),
+  `check_barred_marks.py`, `check_stale_claims.py`, `check_stray_bullets.py`
+  and `scripts/france_excluded_section.py` all read the single file.
+  - **How a part gets a country:** a heading that names exactly one
+    country's cities (or the country, or an alias such as SFMTA) is that
+    country's. A heading naming none inherits its parent's country. One
+    naming two countries stays shared. Inside the notices section, each
+    numbered notice is judged by its title the same way.
+  - **Anything unmatched stays shared, so a part can be misfiled but never
+    dropped.** A new city's section lands under its country with no edit.
+- **Nothing lost, measured**: both pages were captured before the change.
+  After it, all 24 country views of each page were captured. Every line of
+  the before text renders after, at least as many times: **0 lines lost** on
+  either page (`data/_review/prose-2-excluded-sources/text_diff.md`). The
+  only new lines are the selector labels and the heading "Stations left out
+  in <country>".
+- **The station table is per country**, under that heading. Its columns
+  follow the site-wide totals, so every country shows the same columns. The
+  site-wide total paragraph stays in the shared part.
+- **Four paragraphs of `docs/data_sources.md` were moved back, verbatim**,
+  so the split files each with its own notice.
+  - The note that notice 7's heading "read NOT YET DISPLAYED" was moved back
+    above notice 8, its place before INEGI was inserted (`0fa3e557`).
+  - "**20 amended in the same change**" was moved under notice 20. It had
+    drifted below notice 83.
+  - "What has grown instead" was moved back after "Where this leaves the
+    project", where `95edc72b` put it.
+  - "Not required by anyone, but good practice ..." was moved to the head of
+    the list, before notice 1. It is the one move with no earlier position to
+    restore: its old place, after notice 8, would have filed it under Mexico.
+- **Rejected**: a single 24-country radio (the owner's choice, on the height
+  above), and a selectbox (cleanup: one kind of control across the site).
+
+### 2026-10-01 - The Overview's city list follows the region selector (owner)
+
+- **The problem**: the list under the macro map was every city's link and
+  blurb in one run, 124 cities long - dozens of phone screens.
+- **The owner's direction**: one control, not two. The map's existing region
+  selector drives the list.
+- **Built**:
+  - one closed section (`st.expander`) per leaf region, labelled like the
+    selector, e.g. "Europe (26)";
+  - the selected view's regions come first and open (United States opens
+    its West and East halves);
+  - every other region follows closed, in `REGION_ORDER` - the partition
+    `cities.elsewhere_counts()` counts. So every view still lists all 124
+    cities, and the caption "the list below, which always has all of them"
+    stays true, unchanged.
+- **The owner's three calls (2026-10-01), each the recommended option**:
+  - Global opens no section: 13 closed sections, about one phone screen.
+    Rejected: opening the United States to match the map's frame, and
+    opening everything (today's length).
+  - Each row keeps its link and blurb and adds the map tooltip's facts
+    (mode, tier, storefront count; data age, placed by). A touch screen has
+    no hover, so on a phone the list is the only place these show. Cost:
+    Europe open measures 5,691 px at 375 against about half that blurb-only.
+  - A small grey country label groups the cities where a region spans
+    several countries.
+- **Layout**: three cities to a row (`st.columns(3)`), which Streamlit stacks
+  below 640 px. Europe open at 1200 went from 4,472 px in one column to
+  3,258 px.
+- **Unchanged**: the map, its layers, the label competition, the selector's
+  behaviour, every caption. No new dependency, no new module, no new prose
+  (every label is existing tooltip text or a region or country name).
+- **Checks**:
+  - `check_macro_labels.py`: PROBLEMS 0, caption arithmetic true in all 15
+    regions;
+  - `check_all.py`: 35 of 35;
+  - `check_deploy_imports.py --ref HEAD`: clean.
+
+### 2026-10-01 - City pages: the stations left out are listed on the page itself; eight sentence fixes (owner)
+
+- **What Is Excluded shows a count per city, not station names.** Three of
+  the six writers found it. The pass had replaced "listed in
+  `outputs/<slug>/excluded_stations.csv`" with "listed on the What is
+  counted page", which was not true. Before the pass, the names were only in
+  that repository file, which no site reader could open either.
+- **The owner chose to list them on the city page (2026-10-01).**
+  `components.render_excluded_stations` draws the city's file under the
+  bullets, in a collapsed "Stations left out (N)" list with the columns
+  Station, Lines and Why. "Why" is the file's own `reason`, or its place
+  column, or "outside the city" for the boundary-only files (Madrid, the
+  `distance_outside_m` files).
+  - The 41 pointers now read "listed below".
+  - Washington D.C.'s per-state claim, Boston's per-reason claim and
+    Minneapolis's and Pittsburgh's per-municipality claims hold through the
+    Why column, so the writers' "counts them" proposals were not needed.
+  - Both page templates carry the call.
+- **Applied with the owner's approval (2026-10-01)**, from the writers'
+  proposals:
+  - Edmonton, Lille and Miami drop a repository path. The substance stays
+    on the page.
+  - Liberec and Most compare OpenStreetMap "in the two towns". The
+    2026-09-30 restaurant control counted inside each regional polygon, and
+    the register side was both towns' sum (448 + 139; 212 + 55).
+  - Toulouse loses "the closest of the three French cities".
+  - New York now says "most cities on this site".
+  - Göteborg now "shows food only, not three categories".
+- **Fixed without a proposal, as consequences of the layout:**
+  - "Below" became "above" where a caption now sits above the prose
+    (Daegu, Busan, and Göteborg's date fallback).
+  - Riga's and Hiroshima's map help names their two categories again, as
+    their old controls paragraphs did.
+
+### 2026-10-01 - City pages: one format for all 124, approved on three samples (owner)
+
+- **The format** (owner, set in the prose-pass plan, `docs/prose_pass_2026-10-01.md`):
+  - the city's name, centred, with the subtitle "Transit-centered
+    commercial density heatmap" (`components.render_city_title`);
+  - the map next, nothing in between, still embedded at height 650;
+  - the date and credit captions directly under the map;
+  - the prose as bullets under short headings;
+  - "Using the map" (`components.render_map_help`), the same on every page;
+  - links to What Is Excluded and About the Data with `?country=<country>`
+    (`components.render_country_links`, the contract with agent 2);
+  - `render_site_notices()` last, inline as before.
+- **Samples shown 2026-10-01**: Le Mans (the French template), Chicago and
+  Seoul, at 375 and 1200 px, light and dark
+  (`data/_review/prose-4-city-pages/samples*/`).
+- **The owner's calls on the samples (2026-10-01)**:
+  - **Long pages are shortened like Seoul's**: detail that a reference page
+    already carries is left there, and every claim moved off a page is
+    listed in this pass's report.
+  - **Credits and dates under the map, notices in the footer.** The owner
+    asked for a later look at how the footer notices are presented.
+  - **"Using the map" approved**, with the layer control's icon shown in
+    the text. The icon is Leaflet 1.9.3's own `layers.png`, from the CDN
+    every map already loads Leaflet from, on a light tile so it reads in
+    both themes. The "Top right: a Cities menu ..." sentence, on 6 pages
+    before, is now on every page: it describes controls every map shares.
+  - **A date caption for every page.** The 30 pages that read no provenance
+    file show `cities.py`'s `data_age` (`components.render_data_age`).
+  - **Link labels kept for now**: "What is counted, and what is not:
+    <country>" and "Where this data comes from: <country>".
+- **Also changed**: the empty space above the title on city pages, from 6rem
+  of padding and four invisible 16 px elements to 3.5rem. Measured at 375 px,
+  the map's top moved from 248 px to 184 px. The map's Global View button,
+  which clicks the hidden city links, still works. The OSM credit inside the
+  map is clear at 375 px with the legend forced open (clamp 24/24).
+- **Repository paths left the page text.** The sentence "listed in
+  `outputs/<slug>/excluded_stations.csv`" became "listed below" (see the
+  entry above).
+- **The rollout.**
+  - **Layout:** a restructuring script moved the blocks on 101 pages
+    (`data/_review/prose-4-city-pages/restructure_pages.py`), and
+    `france_page.py` regenerated the 21 French template pages. Every
+    sentence and figure was kept; only the station-list pointer changed.
+  - **Bullets:** six writers, one family each, converted the prose. Only
+    `st.markdown` text changed, which was checked against HEAD by AST.
+  - **Claims moved:** 117 claims left the pages for the reference pages,
+    plus Seoul's 3. All are listed in
+    `data/_review/prose-4-city-pages/claims_moved.md`.
+- **The full capture ran as three jobs (owner, 2026-10-01: "allow three if
+  it stays under 10gb memory", then "i give the say-so").**
+  - Two jobs ran through `scripts/heavy_job.py`. The third ran outside it,
+    because the gate's `MAX_JOBS = 2` has no override and the file is not
+    this agent's to edit.
+  - A watchdog summed the three jobs' memory every 15 seconds and would have
+    stopped the third above 10 GB.
+  - One capture job measured a 2.50 GB peak against the 1.5 GB the review kit
+    says to declare, so the kit's figure is low for a city-page capture.
+- **Found on the way:** `france_page.py` matched New Orleans's page when
+  writing Orléans's, because its glob had no page number. It now matches the
+  number as well as the name.
+
+### 2026-10-01 - The prose and UI pass: the audit's 507 proposals approved, internal notes hidden, US spelling site-wide (owner)
+
+- **Agent 5's audit**:
+  - 507 proposals collated: 116 fixes and 391 wording.
+  - The owner approved all 116 fixes, then all 391 wording proposals,
+    through a review page built for the list (`scripts/proposals_page.py`;
+    the worked example is pinned at
+    https://claude.ai/artifact/Pr5A9UwBgamasE7odYfHW5).
+  - Applied with `prose_proposals.py apply`, none refused.
+  - The French template was re-run on its 21 pages, and the reworded Riga
+    sentence carried into the three tram skills.
+  - One proposal (P1314) carried a doubled line into `argentina.md`, and it
+    was removed. No two proposals overlapped.
+- **The owner's three calls on the audit's findings:**
+  - **About the Data shows no internal maintenance.** A passage between
+    `<!-- internal -->` markers stays in the doc but is not rendered
+    (`country_sections.public()`). "How to keep this current" is skipped
+    whole. Where a tooling clause sat beside a public obligation, only the
+    clause is hidden.
+  - **"What is missing" and "Honest limits" move to their cities.** The text
+    moved verbatim, each city's into its own section; the general limits
+    stay shared.
+  - **US spelling.** 1,167 words on the pages and the docs they render, plus
+    the maps' own labels in 21 maps. These stay as written:
+    - the required notices;
+    - licence titles;
+    - quoted text;
+    - register categories;
+    - official names (Hong Kong's licence types, ANZSIC classes, stations).
+
+    "Off-licence" became "Liquor store".
+- **Owner call 9 (staging's drafts, calls 5-10).** Dublin, New York, Milan
+  and Surrey each say what their source cannot state. The wording was
+  approved in chat.
+- **San Francisco leaves out individual practitioner licenses** (its own
+  entry above).
+- **Toronto re-rendered at today's licences.** Step 2 drops a licence once
+  its Cancel Date has passed, measured against today. Three licences in the
+  2026-09-21 fetch were cancelled with effect from 2026-09-30 and
+  2026-10-01, so the count went from 18,218 to 18,215. Master's own code
+  gives the same result.
+  - **The lesson:** a source that publishes future-dated cancellations makes
+    a step's output depend on the run date. PLAN's "record each source's
+    newest row date at fetch time" item is the fix to consider.
+- **Shared data/:** two re-runs on this branch (San Francisco, Toronto)
+  changed files that the staging session's pre-push check reads. San
+  Francisco's was restored until the landing; Toronto's could not be,
+  because master's code produces the new figure too.

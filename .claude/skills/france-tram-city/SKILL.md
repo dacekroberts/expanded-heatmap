@@ -328,8 +328,8 @@ licence read requires.
 
 > {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
 > and in the legend, from the operator's own published timetable feed. {City}
-> has no metro: its trams are its rapid transit, as Riga's are, so every tram
-> stop gets rings.
+> has no metro, so its trams are its rapid transit, as in Riga. Every tram
+> stop here gets rings.
 >
 > The map covers the **{commune of City / N communes of the Métropole}**.
 > {Where a line runs past it: which stops are left out and why, as Rennes's

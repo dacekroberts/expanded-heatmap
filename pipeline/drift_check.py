@@ -2,14 +2,14 @@
 outputs/ against what is committed at git HEAD.
 
 The deployed app only ever reads outputs/, so outputs/ can silently drift
-from what the pipeline would actually produce if a script changes and
-nobody re-runs it. This is the check that catches that.
+from what the pipeline would produce if a script changes and nobody re-runs
+it. This check catches that.
 
 Usage:
     python pipeline/drift_check.py                 # every city
     python pipeline/drift_check.py san_diego       # just one
-    python pipeline/drift_check.py --changed       # only the cities your
-                                                   #   changes can affect
+    python pipeline/drift_check.py --changed       # only the cities the
+                                                   #   working changes can affect
     python pipeline/drift_check.py --changed --list    # show them, run nothing
     python pipeline/drift_check.py --since HEAD~3  # cities affected since a ref
     python pipeline/drift_check.py --render-only   # only each city's MAP step
@@ -21,13 +21,13 @@ refused).
 RENDER-ONLY (`--render-only`, 2026-09-30). A change that touches only map
 rendering (pipeline/map_common.py's drawing, theme.py) cannot change what
 steps 1-2 write to data/<city>/processed/, yet the full sweep re-runs them for
-every city - and their register reads are what make the sweep the heaviest
-job on the machine. `--render-only` runs exactly ONE step per city: the file
+every city, and their register reads make the sweep the heaviest job on the
+machine. `--render-only` runs exactly ONE step per city: the file
 named `step*_map.py` (step3_map.py in 117 cities, step4_map.py in the seven
 that have a step 3 before it). It does NOT run step3_geocode.py or
 step3_place.py: those join or geocode businesses into
-data/<city>/processed/businesses_geocoded.csv - a map INPUT, never an
-outputs/ file (checked 2026-09-30 for all seven) - and geocoding is not
+data/<city>/processed/businesses_geocoded.csv (a map INPUT, never an
+outputs/ file; checked 2026-09-30 for all seven), and geocoding is not
 rendering. The map step still runs under the offline guard, and outputs/ is
 diffed exactly as the full check diffs it.
 
@@ -55,9 +55,9 @@ adding cities. It maps changed files to the cities they can actually reach:
 It is deliberately conservative: a shared file means the full sweep, because
 a wrong "nothing to do" here is invisible until a deploy shows stale output.
 --changed is the fast gate for ordinary work; the unfiltered sweep is still
-what you run before a deploy or when recording a baseline in DECISIONS.md.
+the one to run before a deploy or when recording a baseline in DECISIONS.md.
 
-Two things it deliberately handles:
+Three things it deliberately handles:
 - Folium writes a random 32-hex-char id into every element on each save, so
   a raw diff of heatmap.html shows a change on every run. Those ids are
   normalized out before comparing.
@@ -70,15 +70,15 @@ Two things it deliberately handles:
   regenerated CSV would otherwise always look like drift. Git normalizes the
   same way on commit, so this matches what actually gets committed.
 
-It re-runs against the raw files already in data/<city>/raw/ - it does NOT
+It re-runs against the raw files already in data/<city>/raw/; it does NOT
 re-download. It prints each raw input's size and modified time so a reader
 can tell code drift (raw files unchanged, outputs changed) from source
 drift (raw files were refreshed since the baseline).
 
 `--jobs N` runs CITIES concurrently (default 1, at most MAX_JOBS = 2 since
-2026-09-28's memory crashes; one drift check per machine at a time). The full sweep is
-this project's only O(n)-in-pipeline-runs cost, so it is the binding
-operational limiter as the city count grows - see
+2026-09-28's memory crashes; one drift check per machine at a time). The full
+sweep is this project's only O(n)-in-pipeline-runs cost, so it is the binding
+operational limiter as the city count grows; see
 `docs/scaling_thresholds.md`. Steps WITHIN a city stay sequential, because
 step 2 consumes step 1's output; the parallelism is strictly across cities,
 which is safe since each touches only its own `data/<city>/` and
@@ -183,7 +183,7 @@ def check_baseline(city: str, measured: dict, *, update: bool = False) -> bool:
     """Diff a city's emitted row counts against outputs/<city>/baseline.json.
 
     The output files are compared byte for byte elsewhere; this catches what
-    that cannot - a COUNT that moved while the map still rendered plausibly.
+    that cannot: a COUNT that moved while the map still rendered plausibly.
     """
     if update and measured:
         path = baseline.save(city, measured)
@@ -250,15 +250,15 @@ def check_city(city: str, *, render_only: bool, update_baseline: bool) -> bool:
 
 
 def run_steps(city: str, only: list | None = None):
-    """Run a city's steps in order (or just `only`). Returns (ok, emitted_baseline_figures).
+    """Run a city's steps in order (or just `only`). Return (ok, emitted_baseline_figures).
 
     The figures come from `##BASELINE key=value` lines a step prints via
     pipeline.baseline.emit(). Captured here because stdout already is, so a step
-    needs no other change to be watched - and filtered out of the echoed output,
+    needs no other change to be watched, and filtered out of the echoed output,
     since they are data rather than narration.
     """
     # A DRIFT CHECK MUST NOT REACH THE NETWORK. Steps do not download their
-    # own inputs any more (scripts/check_no_fetch_in_steps.py enforces it),
+    # own inputs (scripts/check_no_fetch_in_steps.py enforces it),
     # but three step3_geocode.py files still call the US Census geocoder for
     # batches they compute themselves, which cannot move to a fetch script.
     # This makes such a call refuse here while leaving it available to a
@@ -321,8 +321,8 @@ def resolve_changed(ref: str, all_cities) -> list:
     touches_pipeline = any(p.startswith(("pipeline/", "outputs/")) for p in paths)
     if ref == "HEAD" and not touches_pipeline:
         # Nothing uncommitted reaches the pipeline. The usual reason is that the
-        # change was just committed - which is exactly when "commit after each
-        # green step" says to run this - so look one commit back rather than
+        # change was just committed (exactly when "commit after each green
+        # step" says to run this), so look one commit back rather than
         # reporting nothing to do and being trusted.
         try:
             paths = changed_paths("HEAD~1")
@@ -345,8 +345,8 @@ LOCK_OFFSET = 1 << 20  # lock a byte past the text, so a waiter can read who hol
 def hold_machine_lock():
     """One drift check at a time on this machine, across every worktree.
 
-    On 2026-09-28 heavy jobs from several sessions overlapped and the machine
-    ran out of memory twice, closing the Claude app (DECISIONS). The lock file
+    On 2026-09-28 overlapping heavy jobs ran the machine out of memory twice
+    (DECISIONS.md). The lock file
     sits in the git directory every worktree shares, and the lock is the
     operating system's: it dies with the process, so a crash leaves nothing
     stale to clear. Returns the open file; the lock lasts while it is open.
@@ -387,9 +387,8 @@ def main():
     list_only = "--list" in args
     args = [a for a in args if a != "--list"]
 
-    # --jobs N runs CITIES concurrently. Default 1, i.e. exactly the old
-    # behaviour on the default path - see the note at the parallel branch for
-    # why the default was not flipped.
+    # --jobs N runs CITIES concurrently. Default 1; see "WHY THE DEFAULT IS
+    # STILL 1" at the parallel branch.
     update_baseline = "--update-baseline" in args
     if update_baseline:
         args = [a for a in args if a != "--update-baseline"]
@@ -443,18 +442,14 @@ def main():
     lock = hold_machine_lock()  # noqa: F841 - held until the process exits
     all_clean = True
     if jobs == 1:
-        # The default path, unchanged: print straight to stdout as it goes, so
-        # a long sweep shows progress and the output is byte-identical to what
-        # this script has always produced.
+        # The default path: print straight to stdout as it goes, so a long
+        # sweep shows progress, in the same output format as before --jobs.
         for city in requested:
             if not check_city(city, render_only=render_only, update_baseline=update_baseline):
                 all_clean = False
     else:
-        # --jobs N: cities run concurrently. Safe because each city touches only
-        # its own data/<city>/ and outputs/<city>/, and the only shared call is
-        # `git ls-tree`, which is read-only and takes no index lock. The STEPS
-        # WITHIN a city stay sequential - step 2 consumes step 1's output - so
-        # the parallelism is strictly across cities.
+        # --jobs N: cities run concurrently (safe for the reasons in the
+        # module docstring). The STEPS WITHIN a city stay sequential.
         #
         # Threads rather than processes: the work is `subprocess.run`, which
         # releases the GIL while it waits, so threads get the full speedup with
@@ -464,24 +459,21 @@ def main():
         # requested order rather than the completion order. Interleaved prints
         # from concurrent cities would make the report unreadable, and worse,
         # would attach a step's row counts to the wrong city.
-        # WHY THE DEFAULT IS STILL 1. The full sweep is the pre-deploy gate and
-        # the only part of this project whose cost is O(n) in PIPELINE RUNS
-        # rather than file comparisons - which makes it the binding operational
-        # limiter as the city count grows (docs/scaling_thresholds.md). Running
-        # cities concurrently fixes that. It is opt-in anyway because each
-        # city's step 2 loads a full business dataset through geopandas, and
-        # four of those at once is four times the peak memory: New York's is the
-        # largest, so --jobs 4 on a small machine can swap or be killed, and a
-        # killed sweep before a deploy is worse than a slow one. MAX_JOBS caps
-        # it (see there); the default stays the one that always works.
+        # WHY THE DEFAULT IS STILL 1. Running cities concurrently answers the
+        # sweep's O(n) cost (docs/scaling_thresholds.md), but each city's step
+        # 2 loads a full business dataset through geopandas, and four of those
+        # at once is four times the peak memory: New York's is the largest, so
+        # --jobs 4 on a small machine can swap or be killed, and a killed sweep
+        # before a deploy is worse than a slow one. MAX_JOBS caps it (see
+        # there); the default stays the one that always works.
         print(f"\n(running {len(requested)} cities with --jobs {jobs}; "
               "each city's report is printed as a block when it finishes)")
 
         # A THREAD-LOCAL stdout proxy, installed once. Swapping `sys.stdout`
         # per worker instead would be a race: it is one global, so two threads
         # assigning it concurrently clobber each other and a city's step row
-        # counts end up printed under a different city's heading - which is
-        # worse than no parallelism, because it looks fine.
+        # counts end up printed under a different city's heading, which is
+        # worse than no parallelism because it looks fine.
         real_stdout = sys.stdout
 
         class _PerThreadOut:
@@ -532,11 +524,10 @@ def main():
         skipped = sorted(set(all_cities) - set(requested))
         print(f"PARTIAL: {len(requested)} of {len(all_cities)} cities. Not checked: {', '.join(skipped)}.")
         print("Run without a filter before a deploy, or when recording a baseline.")
-    # This used to say "compare the step row counts above against the latest
-    # baseline entry in DECISIONS.md" - by hand, against a file that is now 103
-    # entries and 57k words. A city with outputs/<city>/baseline.json has that
-    # diff done for it above; one without is named here so the gap is visible
-    # rather than silently unchecked.
+    # Row counts were once compared by hand against the latest baseline entry
+    # in DECISIONS.md. A city with outputs/<city>/baseline.json has that diff
+    # done above; one without is named here so the gap is visible rather than
+    # silently unchecked.
     print("Row counts are diffed against outputs/<city>/baseline.json where one "
           "exists (--update-baseline to record an intended change).")
     print("Cities with no baseline yet emit no figures - see pipeline/baseline.py.")

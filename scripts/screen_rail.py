@@ -27,24 +27,24 @@ else. **route_type 2 is commuter rail and is deliberately NOT urban rail** -
 this project excludes it in every city built so far, so a city whose only rail
 is type 2 reads as "no urban rail" here, which is the intended answer.
 
-Three traps this exists to catch, all real:
+Traps this exists to catch, all real:
 
-- **A catalogue mirror can be STALE and silently missing a whole mode.** This
-  is the one that actually bit, on 2026-09-21. The Mobility Database copy of
-  Toronto's TTC feed had `feed_end_date 20260606` - expired three months
-  earlier - and contained **no subway at all**: 209 bus, 17 tram, 2 ferry, zero
-  route_type 1, with the only subway-named entries being shuttle *buses*. The
-  screen read 17 trams and concluded Toronto "codes its subway as type 0",
-  which is false. The agency's own feed has 3 subway lines as route_type 1 plus
-  20 trams. **This script now prints each feed's expiry and flags stale ones -
-  heed it, and prefer the agency's own feed wherever one is published.**
+- **A catalogue mirror can be STALE and silently missing a whole mode.** On
+  2026-09-21 the Mobility Database copy of Toronto's TTC feed had
+  `feed_end_date 20260606` (expired three months earlier) and contained **no
+  subway at all**: 209 bus, 17 tram, 2 ferry, zero route_type 1, the only
+  subway-named entries being shuttle *buses*. Reading 17 trams as "Toronto
+  codes its subway as type 0" was false: the agency's own feed has 3 subway
+  lines as route_type 1 plus 20 trams. **This script prints each feed's
+  expiry and flags stale ones - heed it, and prefer the agency's own feed
+  wherever one is published.**
 - **An agency may genuinely code its subway as type 0.** San Francisco's Muni
   Metro is route_type 0. A high type-0 count is a prompt to read the route
   names, never a finished answer.
 - **An agency may publish only GTFS EXTENDED route types**, the 3- and 4-digit
   TPEG-derived set, in which a metro is 401 rather than 1. Reading only the
-  basic 0-12 values reported Berlin, Hamburg, Stockholm and Oslo as having no
-  urban rail on 2026-09-21, when all four have one. Both sets are handled now.
+  basic 0-12 values reports Berlin, Hamburg, Stockholm and Oslo as having no
+  urban rail, when all four have one. Both sets are handled.
 - **A regional agency's feed covers cities that have no rail of their own.**
   TransLink's feed carries Surrey's SkyTrain stations; Vancouver's own city
   screen would miss that. Check whether rail physically reaches a candidate
@@ -65,11 +65,11 @@ OTHER = {2: "commuter rail", 3: "bus", 4: "ferry", 6: "aerial", 11: "trolleybus"
 
 # GTFS EXTENDED route types - the TPEG-derived 3- and 4-digit set. Many
 # European agencies publish ONLY these, and a screen that knows just the basic
-# 0-12 values reports "no urban rail" for a city with a working metro. That is
-# not hypothetical: on 2026-09-21 this script called Berlin, Hamburg, Stockholm
-# and Oslo rail-free. Decoded, their counts were Berlin 400:9 (the U-Bahn has 9
-# lines), Hamburg 402:4 (4), Stockholm 401:7 (the tunnelbana has 7) and Oslo
-# 401:5 (the T-bane has 5) - every one an exact match for the real network.
+# 0-12 values reports "no urban rail" for a city with a working metro (Berlin,
+# Hamburg, Stockholm and Oslo, 2026-09-21). Decoded, their counts were Berlin
+# 400:9 (the U-Bahn has 9 lines), Hamburg 402:4 (4), Stockholm 401:7 (the
+# tunnelbana has 7) and Oslo 401:5 (the T-bane has 5): every one an exact
+# match for the real network.
 #
 # 109 (Suburban Railway) is the S-Bahn family and is deliberately NOT urban
 # rail here, for the same reason basic type 2 is not: this project excludes
@@ -251,8 +251,8 @@ def main():
 
 if __name__ == "__main__":
     # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py
-    # crashed on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
+    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py,
+    # on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

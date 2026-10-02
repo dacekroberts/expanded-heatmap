@@ -1,8 +1,8 @@
 """Resolve a conflicted APPEND-ONLY file without losing an entry.
 
 `DECISIONS.md` is append-only and two sessions append to the top of it at once,
-so every master<->staging merge conflicts there. The conflict is never a real
-disagreement - both sides only added - so the resolution is mechanical, and
+so a merge of two branches that both appended to it conflicts there. The conflict is never a real
+disagreement (both sides only added), so the resolution is mechanical, and
 this script does it rather than leaving it to hand-editing.
 
 WHY IT IS A SCRIPT AND NOT A NOTE. The obvious hand resolution is to take one
@@ -11,16 +11,16 @@ SILENTLY DELETES ENTRIES, and on 2026-09-22 it nearly did: master and staging
 collided on nine entries at the top of `## Changes`, but staging had added a
 TENTH lower down ("Japan is a BUILD, and it goes last") which had no competing
 change beside it, so git auto-merged it OUTSIDE the conflict markers. Rebuilding
-from master's stage would have dropped it, and an append-only log gives you no
-way to notice afterwards.
+from master's stage would have dropped it, and an append-only log gives no way
+to notice afterwards.
 
     A conflict region shows where the two sides DISAGREED.
     It does not show everything the other side ADDED.
 
 So this script edits only the conflict regions of git's own merged file, leaves
 everything git already resolved alone, and refuses to write unless the result
-contains exactly the union of the headings in both sides' full stages - which
-is the check that would have caught the near-miss.
+contains exactly the union of the headings in both sides' full stages: the
+check that would have caught the near-miss.
 
 Ordering is MEASURED, not chosen: each new entry is dated by the commit that
 introduced it, so entries from the two sides interleave by real time rather
@@ -31,13 +31,13 @@ Usage, from inside a conflicted merge:
     python scripts/merge_append_only.py DECISIONS.md [--dry-run]
 
 Then, for DECISIONS.md, run `python scripts/decisions_index.py` before
-committing - the index is generated and this script does not touch it beyond
+committing: the index is generated and this script does not touch it beyond
 keeping both sides' links.
 
 ARCHIVED ENTRIES COUNT AS PRESENT. Since 2026-09-27 older entries move weekly to
 `docs/decisions/` (`scripts/archive_decisions.py`). A branch that forked before
 an archive run still carries those entries in DECISIONS.md, so a union of the
-two sides would put them straight back - the check above would even pass,
+two sides would put them straight back, and the check above would even pass,
 because the union is what it checks. So any heading present in `--archive-glob`
 on EITHER side is dropped from the resolution and from the union, and the
 result is refused if one survives anyway (for example because git merged it
@@ -108,9 +108,9 @@ def introduced_at(heading, base, tip, path):
 def write_or_die(path, text):
     """Write the resolution and read it back; retry once, then stop LOUDLY.
 
-    On 2026-09-30 (branch kitchener-waterloo) this write hit a Windows file lock
-    (OSError, Errno 22), the traceback scrolled past, and the merge was
-    committed with its markers still in DECISIONS.md (removed in 3d93d29). A
+    On 2026-09-30 this write hit a Windows file lock (OSError, Errno 22), the
+    traceback scrolled past, and the merge was committed with its markers
+    still in DECISIONS.md (removed in 3d93d29). A
     lock held by an editor or a sync client is often gone a moment later, so
     one retry; after that the message says what state the file is in.
     `scripts/check_conflict_markers.py` in the pre-push hook is the backstop.

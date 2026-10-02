@@ -19,12 +19,12 @@ personal-service licence in Boston at any level of government reachable as
 data: Massachusetts licenses cosmetology and barbering at STATE level through
 the Board of Registration of Cosmetology and Barbering, and publishes no
 address-bearing export - its register is the ePLACE/MADOL portal, a per-licence
-lookup with no bulk download. Verified three independent ways on 2026-09-21:
-Socrata's cross-domain discovery API returns no Massachusetts source for
-cosmetology, barber, salon, hair, nail salon, body art or tattoo; data.mass.gov
-is not a data portal at all (HTML 404 from both the Socrata and CKAN entry
-points); and opendata.mass.gov does not resolve. Same structural cause as
-Philadelphia, which is the only other two-bucket city here. Recorded in
+lookup with no bulk download. As of 2026-09-21, Socrata's cross-domain
+discovery API returns no Massachusetts source for cosmetology, barber, salon,
+hair, nail salon, body art or tattoo; data.mass.gov is not a data portal (HTML
+404 from both the Socrata and CKAN entry points); and opendata.mass.gov does
+not resolve. Same structural cause as
+Philadelphia, also a two-bucket city. Recorded in
 docs/excluded_categories.md under what is MISSING rather than excluded,
 because everything else there was a choice and this was not.
 
@@ -143,13 +143,13 @@ CANNABIS_BUCKETS = {
     "Delivery (operator)": None,                                          #  1
 }
 
-FIELD_LABEL = "Licence category"
+FIELD_LABEL = "License category"
 VALUE_COLUMN = "business_category"
 EXTRA_COLUMNS = ("source",)
 
 # A premises can hold licences in both buckets: 55 hold FS+RF, 31 hold FT+RF
-# and 31 hold FS+FT+RF. Food service wins, and the tradeoff is worth stating
-# because the sample does not settle it cleanly - the FT+RF group contains
+# and 31 hold FS+FT+RF. Food service wins, though the sample does not settle
+# it cleanly: the FT+RF group contains
 # both eateries ("Bostonian Pizza", "Charley's Philly Steaks") and genuine
 # grocers with a hot counter ("Shaw's Supermarkets No. 1208", "Jhade
 # Supermarket", "Ramirez Grocery"). FS/FT is a prepared-food licence, so a

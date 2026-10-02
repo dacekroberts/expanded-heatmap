@@ -18,6 +18,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.sao_paulo.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -26,55 +30,15 @@ st.set_page_config(page_title="São Paulo Heatmap", page_icon="\U0001f5fa\ufe0f"
 set_base_font()
 
 render_city_nav("São Paulo")
+render_city_title('São Paulo')
 
-st.title("São Paulo: commercial density around metro and CPTM stations")
-
-# Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended.
-st.markdown(
-    """
-Seven lines are drawn — **Metrô Linhas 1-Azul, 2-Verde, 3-Vermelha, 4-Amarela, 5-Lilás
-and 15-Prata, and CPTM's Linha 9-Esmeralda** — each labelled on the map and in the legend,
-in the colours OpenStreetMap records for them. The lines and stations are
-OpenStreetMap's. The city's own station list (GeoSampa) is used only to check which
-lines are running and how many stations each has. Linha 15 is a monorail. Linhas
-6-Laranja and 17-Ouro are still being built and are not drawn.
-
-Suburban railways are left out of these maps unless, inside the city, they run like a
-metro. CPTM's Linha 9 does: a train comes every 4 to 7 minutes along the Pinheiros river,
-and most of its stations have no metro nearby, though they are about 1.8 km apart.
-CPTM's other lines, with stations 2 to 3.5 km apart, are not drawn, and neither are buses
-or bus corridors. The map covers the **município of São Paulo**; Linha 9 is drawn to its
-end in Osasco, but its two stations there are not counted.
-
-Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
-Census enumerators walking every street recorded each establishment, what it was, and a
-map point for it. **Read it as a 2022 picture, not today's.** IBGE did not classify the
-establishments: each dot's category is this project's reading of the enumerator's words,
-and the names were not checked against any business register. Where one entry stands
-for several shops, as in a shopping centre or a gallery, it is one dot. At an address
-that is also someone's home, the dot shows only its category.
-
-**About a third of the establishments that might be shops, cafés or salons carry a
-description no rule can read, and are not drawn.** Most are brand or trade names with no
-word saying what they sell. They are commoner in commercial districts and near stations,
-so those areas are under-drawn: judging by hand-read samples, the map misses roughly one
-storefront in ten to one in seven within the station rings.
-
-**About one storefront in five sits within a station ring**, because the rail, dense in
-the centre, leaves most of a very large city beyond walking distance of a station.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/sao_paulo/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/sao_paulo/provenance.json so they cannot
 # go stale on the next fetch: the date IBGE published each CNEFE file (the
@@ -84,6 +48,7 @@ _RAIL = [
     ('rail lines and stations from OpenStreetMap',
      ('osm_rail', 'osm_train')),
 ]
+
 if PROVENANCE_JSON.exists():
     try:
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
@@ -106,12 +71,53 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/sao_paulo/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
+# calls applied as recommended; set as bullets 2026-10-01.
+st.markdown(
+    """
+**The lines**
+
+- Seven lines are drawn — **Metrô Linhas 1-Azul, 2-Verde, 3-Vermelha, 4-Amarela, 5-Lilás
+  and 15-Prata, and CPTM's Linha 9-Esmeralda** — each labeled on the map and in the legend,
+  in the colors OpenStreetMap records for them. Linha 15 is a monorail.
+- The lines and stations are OpenStreetMap's.
+- Linhas 6-Laranja and 17-Ouro are still being built and are not drawn.
+- Suburban railways are left out of these maps unless, inside the city, they run like a
+  metro. CPTM's Linha 9 does: a train comes every 4 to 7 minutes along the Pinheiros river,
+  and most of its stations have no metro nearby, though they are about 1.8 km apart.
+- CPTM's other lines, with stations 2 to 3.5 km apart, are not drawn, and neither are buses
+  or bus corridors.
+- The map covers the **município of São Paulo**; Linha 9 is drawn to its end in Osasco, but
+  its two stations there are not counted.
+
+**The businesses**
+
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
+  Census enumerators walking every street recorded each establishment, what it was, and a
+  map point for it. **Read it as a 2022 picture, not today's.**
+- IBGE did not classify the establishments: each dot's category is this project's reading of
+  the enumerator's words, and the names were not checked against any business register.
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
+  dot.
+- At an address that is also someone's home, the dot shows only its category.
+
+**Reading the map**
+
+- **About a third of the establishments that might be shops, cafés or salons carry a
+  description no rule can read, and are not drawn.** Most are brand or trade names with no
+  word saying what they sell.
+- They are commoner in commercial districts and near stations, so those areas are
+  under-drawn: judging by hand-read samples, the map misses roughly one storefront in ten
+  to one in seven within the station rings.
+- **About one storefront in five sits within a station ring**, because the rail, dense in
+  the center, leaves most of a very large city beyond walking distance of a station.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("São Paulo")
+render_country_links('São Paulo')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

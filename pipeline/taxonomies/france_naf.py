@@ -1,12 +1,13 @@
 """NAF rév. 2 - France's national activity classification, keyed at the
 sous-classe (level 5).
 
-**NATIONAL, NOT PER-CITY.** NAF is INSEE's, and `pipeline/countries/france.py`
-names five cities that inherit it (`BUILD_SEQUENCE`: paris, marseille,
-toulouse, lille, rennes). Every other local taxonomy in this directory belongs
-to one city because the register belongs to one city; SIRENE is one register
+**NATIONAL, NOT PER-CITY.** NAF is INSEE's, and every French city
+inherits it, not only the five that `pipeline/countries/france.py`'s
+`BUILD_SEQUENCE` names (paris, marseille, toulouse, lille, rennes). Every
+other local taxonomy in this directory belongs to one city
+because the register belongs to one city; SIRENE is one register
 for the whole country, so this module is written once and a correction here
-reaches all five. Per-city verdicts do NOT belong in this file - see
+reaches all of them. Per-city verdicts do NOT belong in this file - see
 "What this module deliberately does NOT decide" below.
 
 **WHY THE SOUS-CLASSE, THE FINEST LEVEL.** `premises-taxonomy`'s deciding
@@ -61,7 +62,7 @@ VALUE_COLUMN = "naf_label"
 EXTRA_COLUMNS = ("naf_code",)
 
 # The source column in SIRENE, for the city config's RAW_CLASSIFICATION_COLUMN.
-# Kept here rather than in each config so the five cities cannot drift apart.
+# Kept here rather than in each config so the French cities cannot drift apart.
 #
 # ⚠ THIS IS NAF rev. 2, AND SIRENE ALSO PUBLISHES NAF 2025. Do not switch the
 # column without rebuilding NAF_LABELS: the two schemes share division and
@@ -113,8 +114,8 @@ CATCH_ALL_CODES = {
 NOT_PREMISES = {
     # Distance selling - 15.5% of Paris's bucket rows, and the brief's single
     # largest correction. These sit INSIDE the retail division and have no
-    # storefront at all. An earlier note called 47.91B "24% of the retail
-    # division", which understated the problem by looking at one code of four.
+    # storefront at all. All four count; a figure for 47.91B alone ("24% of
+    # the retail division") understates the problem.
     "47.91A": "vente à distance - no premises",
     "47.91B": "vente à distance - no premises",
     "47.99A": "vente à domicile - no premises",
@@ -295,9 +296,9 @@ def legend_label(bucket):
 # The enumeration is a CLOSED LIST, so prove it at import
 # ---------------------------------------------------------------------------
 #
-# Barcelona's module carries the same assertion for the same reason: a value
-# added by a future refresh would otherwise fall through `classify()` silently
-# and simply not appear on the map. NAF rév. 2 has been stable since 2008, so
+# A value added by a future refresh would otherwise fall through `classify()`
+# silently and simply not appear on the map. (Barcelona's module has the same
+# closed-list risk and lists its census values, but asserts nothing about them.) NAF rév. 2 has been stable since 2008, so
 # this should never fire - which is exactly when a silent drift would go
 # unnoticed for longest.
 

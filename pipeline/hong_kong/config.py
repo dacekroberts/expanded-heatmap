@@ -139,7 +139,7 @@ SPACING_MIN_M = 200.0
 # --- Business filtering ------------------------------------------------
 
 TAXONOMY_SYSTEM = "hong_kong_fehd"
-NO_SHOP_SIGN = "No shop sign on the licence"
+NO_SHOP_SIGN = "No shop sign on the license"
 # FEHD's DIST code 31: food trucks, filed as a district of their own.
 FOOD_TRUCK_DISTRICT = "Food Truck"
 RAW_CLASSIFICATION_COLUMN = "licence_type"

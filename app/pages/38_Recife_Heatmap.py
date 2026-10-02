@@ -18,6 +18,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.recife.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -26,48 +30,15 @@ st.set_page_config(page_title="Recife (Regional) Heatmap", page_icon="\U0001f5fa
 set_base_font()
 
 render_city_nav("Recife (Regional)")
+render_city_title('Recife (Regional)')
 
-st.title("Recife: commercial density around metro stations")
-
-# Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended.
-st.markdown(
-    """
-Three lines are drawn — **the Metrô do Recife's Linha Centro, on its Camaragibe and
-Jaboatão branches, and Linha Sul** — each labelled on the map and in the legend, in the
-colours OpenStreetMap records. The two diesel VLT lines, to Curado and to Cabo, are not
-drawn: suburban railways are left out of these maps unless they run like a metro, and
-their stations are 3 to 4 km apart.
-
-The map covers **Recife with Jaboatão dos Guararapes, Cabo de Santo Agostinho and
-Camaragibe**; Cabo has no drawn station now that its VLT is not drawn, and is counted for
-its businesses only.
-
-Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
-Census enumerators walking every street recorded each establishment, what it was, and a
-map point for it. **Read it as a 2022 picture, not today's.** IBGE did not classify the
-establishments: each dot's category is this project's reading of the enumerator's words,
-and the names were not checked against any business register. Where one entry stands
-for several shops, as in a shopping centre or a gallery, it is one dot. At an address
-that is also someone's home, the dot shows only its category.
-
-**About four in ten of the establishments that might be shops, cafés or salons carry a
-description no rule can read, and are not drawn.** Most are brand or trade names with no
-word saying what they sell.
-
-**About a quarter of the storefronts sit within a station ring.**
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/recife/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/recife/provenance.json so they cannot
 # go stale on the next fetch: the date IBGE published each CNEFE file (the
@@ -77,6 +48,7 @@ _RAIL = [
     ('rail lines and stations from OpenStreetMap',
      ('osm_rail', 'osm_train')),
 ]
+
 if PROVENANCE_JSON.exists():
     try:
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
@@ -99,12 +71,45 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/recife/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
+# calls applied as recommended; set as bullets 2026-10-01.
+st.markdown(
+    """
+**The lines**
+
+- Three lines are drawn — **the Metrô do Recife's Linha Centro, on its Camaragibe and
+  Jaboatão branches, and Linha Sul** — each labeled on the map and in the legend, in the
+  colors OpenStreetMap records.
+- The two diesel VLT lines, to Curado and to Cabo, are not drawn: suburban railways are left
+  out of these maps unless they run like a metro, and their stations are 3 to 4 km apart.
+- The map covers **Recife with Jaboatão dos Guararapes, Cabo de Santo Agostinho and
+  Camaragibe**; Cabo has no drawn station, since its VLT is not drawn, and is counted for
+  its businesses only.
+
+**The businesses**
+
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
+  Census enumerators walking every street recorded each establishment, what it was, and a
+  map point for it. **Read it as a 2022 picture, not today's.**
+- IBGE did not classify the establishments: each dot's category is this project's reading of
+  the enumerator's words, and the names were not checked against any business register.
+- Where one entry stands for several shops, as in a shopping center or a gallery, it is one
+  dot.
+- At an address that is also someone's home, the dot shows only its category.
+
+**Reading the map**
+
+- **About four in ten of the establishments that might be shops, cafés or salons carry a
+  description no rule can read, and are not drawn.** Most are brand or trade names with no
+  word saying what they sell.
+- **About a quarter of the storefronts sit within a station ring.**
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Recife (Regional)")
+render_country_links('Recife (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

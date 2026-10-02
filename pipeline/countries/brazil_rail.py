@@ -1,6 +1,6 @@
-"""Step 1 for a Brazilian city whose rail comes from OpenStreetMap - shared,
-written once before the second OSM city (osm-rail's meta-lesson: a lesson in
-one city's code does not reach the next). Reads the cache only.
+"""Step 1 for a Brazilian city whose rail comes from OpenStreetMap. Shared,
+because a lesson in one city's code does not reach the next (osm-rail).
+Reads the cache only.
 
 The config supplies:
   OSM_RAIL_JSON, OSM_MUNICIPIOS_JSON      the fetch's two caches

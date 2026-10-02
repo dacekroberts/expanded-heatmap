@@ -3,26 +3,24 @@
     python scripts/check_stray_downloads.py
 
 Lists every untracked, non-ignored file sitting directly in the root of ANY
-checkout of this repository - the main one and every worktree - with its size
+checkout of this repository (the main one and every worktree) with its size
 and modification time, and exits non-zero if there is one. Read-only.
 
 WHY A CHECK AND NOT A RULE. CLAUDE.md already says probe output goes to the
 session scratchpad or a gitignored data/<city>/raw/, and on 2026-09-23 three
 PDFs still landed in the main checkout's root: Rio's SIURB decree, data.taipei's
-user manual and PID's logo manual. None was written by a shell command a rule
-could have caught. They were BROWSER-PANE DOWNLOADS, answered by the owner at a
-prompt while away from the desktop, and the pane saves into the main checkout's
-root whatever folder the session meant to use (the Staging Session's diagnosis).
-No working rule reaches a download dialog, so the only place to catch one is
-afterwards. Two of the three had no recorded source URL by the time anyone
-looked, which is the cost of finding them late.
+user manual and PID's logo manual. They were BROWSER-PANE DOWNLOADS, approved by
+the owner at a prompt while away from the desktop, and the pane saves into the
+main checkout's root whatever folder the session meant to use. No working rule
+reaches a download dialog, so the only place to catch one is afterwards. Two
+of the three had no recorded source URL by the time they were found.
 
 WHY ONLY THE ROOT. Untracked files deeper in a worktree are usually a build in
-progress - a new city's pipeline before its first commit - and flagging them
+progress (a new city's pipeline before its first commit), and flagging them
 would make this cry wolf. New files at the root are almost never intended:
 everything the project keeps there is already tracked.
 
-Where a found file belongs is a judgment, not a rule - see
+Where a found file belongs is a judgment, not a rule: see
 docs/licenses/README.md for terms documents (unaltered, with source URL and
 SHA-256), data/<city>/raw/ for reference captures, and ask the session that
 downloaded it before moving anything it may still be reading.

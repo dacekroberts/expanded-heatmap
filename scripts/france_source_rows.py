@@ -38,15 +38,15 @@ def rows(slug):
     codes = ", ".join(f"`{c}`" for c in cfg.COMMUNE_PREFIXES)
     join = (f"{facts['joined'] / facts['to_join'] * 100:.2f}%" if facts.get("to_join")
             else "see step 2")
-    reg = (f"| {name} | **INSEE SIRENE `StockEtablissement`**, the national parquet every French "
-           f"city reads, joined on `siret` to INSEE's geolocation file (the France tram batch, "
-           f"shared step 2 `france_register.py`) | All three buckets via NAF rév. 2 at the "
+    # Wording owner-approved 2026-10-01 (prose pass, P1326).
+    reg = (f"| {name} | **INSEE SIRENE `StockEtablissement`**, as Paris, joined on `siret` to "
+           f"INSEE's geolocation file | All three categories via NAF rév. 2 at the "
            f"sous-classe. **{facts['storefronts']:,} storefronts** ({facts['retail']:,} retail, "
            f"{facts['food']:,} food, {facts['personal']:,} personal), coordinate coverage "
-           f"**{join}** | Paris's row above, unchanged; the 3 GB pair cached nationally | "
+           f"**{join}** | As Paris; the national cache | "
            f"`codeCommuneEtablissement` in {codes}. {facts['active']:,} active rows, "
-           f"**{facts['masked'] / facts['active'] * 100:.1f}% masked at source**; both catch-alls "
-           f"(96.09Z, 56.29B) excluded on the French precedent. Licence **Licence Ouverte 2.0** "
+           f"**{facts['masked'] / facts['active'] * 100:.1f}% masked at source**; miscellaneous "
+           f"classes 96.09Z and 56.29B excluded, as in Paris. Licence **Licence Ouverte 2.0** "
            f"(`lov2`), « Source : Insee » on the page | {date} |")
     fi = prov.get("feed_info") or {}
     nap = prov.get("nap") or {}

@@ -21,6 +21,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.philadelphia.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -29,78 +34,68 @@ st.set_page_config(page_title="Philadelphia Heatmap", page_icon="\U0001f5fa\ufe0
 set_base_font()
 
 render_city_nav("Philadelphia")
+render_city_title('Philadelphia')
 
-st.title("Philadelphia: commercial density around SEPTA Metro station areas")
-
-# The 11th St sentence follows the closed-for-works rule
-# (docs/category_rules.md, "Station scope"), in the wording of Sacramento's
-# page: name the closure and when it is due back.
-st.markdown(
-    """
-Every open SEPTA Metro station inside Philadelphia is mapped, across four lines: the
-**Market–Frankford Line** and **Broad Street Line** (with its Ridge Spur),
-which run grade-separated, and the **Subway–Surface Trolleys** and **Girard
-Avenue Trolley**, which run in the street. Each is labelled directly on the map
-and in the legend, and the trolleys' five branches are drawn wherever they
-diverge. **11th St on the Market–Frankford Line is not drawn**: SEPTA closed it
-on 5 September 2026 to rebuild it with elevators and expects it back on 30
-August 2027. It is closed for works until then, and L trains run through it
-without stopping.
-
-**The two kinds of line are treated differently, because they are different
-kinds of line.** Market–Frankford and Broad Street stations sit a median 700 m
-apart, so every one inside the city is kept. The trolleys stop every 130 m or
-so — closer together than the innermost ring this map draws — so they are
-thinned to roughly one stop per half-mile measured along the track, keeping
-each branch's terminals, the Center City tunnel stations all five share, and
-every point where a trolley meets a subway line. Every stop cut this way is
-listed in `outputs/philadelphia/excluded_stations.csv`, along with the six
-stations that lie outside the city in Upper Darby, Yeadon and Darby.
-
-Two SEPTA Metro lines are absent because they never enter Philadelphia: the
-Norristown High Speed Line and the Media–Sharon Hill trolleys both begin at
-69th Street in Upper Darby. Regional Rail is left out as well — like Metra in
-Chicago and the LIRR in New York it is commuter rail, and SEPTA brands it
-separately from SEPTA Metro.
-
-**Two categories here, not three, and the missing one is missing from the data
-rather than from the map.** Philadelphia licenses activities, not businesses,
-and there is no salon, barber or nail licence of any kind; Pennsylvania
-publishes its cosmetology licensees only as county totals with no addresses. So
-**Personal services is absent entirely** — as in Boston, a whole category
-here has no source to draw on.
-
-Retail is narrow for a related reason. What the city licenses is food retail, so
-Retail here means bodegas, mini-markets and beer distributors, plus the big-box
-tier — Target, CVS, Dollar Tree, Ross — which appears only because those stores
-also sell packaged food. A clothing shop, bookshop or hardware store needs no
-licence, so it is simply not here; pavement newsstands mostly are not either,
-since the register holds neither a coordinate nor an address for them. Read the
-balance between the two categories as a fact about Philadelphia's licensing, not
-about its high streets. Where one business holds several licences — a restaurant
-with pavement seating holds two — it is counted once.
-
-Ring boundaries and both business categories are toggleable via the layer
-control at the top left. When categories are enabled, density shows as numbered
-circles that sum areas when zoomed out; zooming in reveals individual dots, and
-hovering over one gives its details.
-
-Top right: a **Cities** menu and a **Global View** button for moving between
-maps, and a light/dark switch. The map opens in whichever mode the page is
-using; once you pick one, it carries across the other city maps.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
-
+# Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/philadelphia/step3_map.py` to generate it.")
+
+render_data_age('Philadelphia')
+
+# The 11th St sentence follows the closed-for-works rule
+# (docs/category_rules.md, "Station scope"), in the wording of Sacramento's
+# page: name the closure and when it is due back.
+st.markdown(
+    """
+**The lines**
+
+- Every open SEPTA Metro station inside Philadelphia is mapped, across four lines: the
+  **Market–Frankford Line** and **Broad Street Line** (with its Ridge Spur), which run
+  grade-separated, and the **Subway–Surface Trolleys** and **Girard Avenue Trolley**, which run in
+  the street.
+- Each is labeled directly on the map and in the legend, and the trolleys' five branches are drawn
+  wherever they diverge.
+- **11th St on the Market–Frankford Line is not drawn**: SEPTA closed it on 5 September 2026 to
+  rebuild it with elevators and expects it back on 30 August 2027. Until then L trains run through
+  it without stopping.
+- **The two kinds of line are treated differently.** Market–Frankford and Broad Street stations sit
+  a median 700 m apart, so every one inside the city is kept.
+- The trolleys stop every 130 m or so, closer together than the innermost ring this map draws.
+  So they are thinned to roughly one stop per half-mile measured along the track, keeping each
+  branch's terminals, the Center City tunnel stations all five share, and every point where a
+  trolley meets a subway line.
+- Every stop cut this way is listed below, along with the six stations that
+  lie outside the city in Upper Darby, Yeadon and Darby.
+- Two SEPTA Metro lines are absent because they never enter Philadelphia: the Norristown High Speed
+  Line and the Media–Sharon Hill trolleys both begin at 69th Street in Upper Darby.
+- Regional Rail is left out as well. Like Metra in Chicago and the LIRR in New York it is commuter
+  rail, and SEPTA brands it separately from SEPTA Metro.
+
+**The businesses**
+
+- **Two categories here, not three: Personal services is missing from the data, not just from the
+  map.** Philadelphia licenses activities, not businesses, and has no salon, barber or nail license
+  of any kind, so, as in Boston, this category has no source to draw on.
+- Retail is narrow for a related reason. What the city licenses is food retail, so Retail here
+  means bodegas, mini-markets and beer distributors, plus the big-box tier (Target, CVS, Dollar
+  Tree, Ross), which appears only because those stores also sell packaged food.
+- A clothing shop, bookshop or hardware store needs no license, so it is simply not here; pavement
+  newsstands mostly are not either, since the register holds neither a coordinate nor an address
+  for them.
+- Read the balance between the two categories as a fact about Philadelphia's licensing, not about
+  its high streets.
+- Where one business holds several licenses (a restaurant with pavement seating holds two), it is
+  counted once.
+"""
+)
+
+render_map_help('two business categories (Retail and Food service)')
+render_excluded_stations("Philadelphia")
+render_country_links('Philadelphia')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

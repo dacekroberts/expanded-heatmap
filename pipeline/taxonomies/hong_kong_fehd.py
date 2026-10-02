@@ -20,7 +20,7 @@ Scope follows every other city's three buckets, which is NAICS's line:
     shopfronts at all.
 """
 
-FIELD_LABEL = "Licence type"
+FIELD_LABEL = "License type"
 VALUE_COLUMN = "licence_type"
 EXTRA_COLUMNS = ("licence_code",)
 

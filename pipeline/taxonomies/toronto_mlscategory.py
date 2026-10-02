@@ -21,8 +21,8 @@ about Toronto's licensing regime rather than about its high streets.
 **The bucket is drawn anyway, and disclosed** - the New York treatment, decided
 by the owner on 2026-09-21. The rejected alternative was leaving Retail out
 entirely and drawing two buckets: it reads as a stronger statement but discards
-3,475 real storefronts and would make Toronto the only city whose legend
-differs from the other thirteen. The city page and
+3,475 real storefronts and would have made Toronto's legend
+differ from those of the thirteen cities built before it. The city page and
 `docs/excluded_categories.md` both say what the category does and does not
 contain, under *missing* rather than *excluded*.
 
@@ -83,7 +83,7 @@ Counts are the 2026-09-21 pull of CKAN resource
 `169e90ba-3ae0-43dd-8b2f-919e87002f50`, 159,872 rows.
 """
 
-FIELD_LABEL = "Licence category"
+FIELD_LABEL = "License category"
 VALUE_COLUMN = "mls_category"
 
 # Toronto's Category is single-valued, so this never resolves a multi-category

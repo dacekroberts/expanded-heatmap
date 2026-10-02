@@ -1,41 +1,35 @@
 # Data sources — Spain
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Spain rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+<!-- internal -->Part of [`data_sources.md`](../data_sources.md), the project's provenance
+record, split by country on 2026-09-27: this file holds the Spain rows
+of its tables and the sections about this country's sources. The numbered
+notices this project must display, the removal-request commitment and the
+deploy gate are in the main file, not here.<!-- /internal -->
 
 ## Business registries
 
 | City | Source | Provides | Endpoint | Filter at download | Retrieved |
 |---|---|---|---|---|---|
-| Madrid | Ayuntamiento de Madrid **Censo de locales, sus actividades y terrazas de hostelería y restauración** (CKAN package `200085-0-censo-locales`, resource `200085-5-censo-locales` — the locales × actividades join, 225,660 rows × 47 columns) | All three buckets, via the city's own `epigrafe` scheme — a **premises field survey**, not a licence register, so the Montréal and Barcelona shape rather than the Philadelphia one | **Resolved at fetch time**, not hardcoded: `https://datos.madrid.es/api/3/action/package_show` is queried for the package and the download URL taken from the resource whose id is `200085-5-censo-locales`. **THE DOWNLOAD URL ROTS** — it embeds a build timestamp (`200085_20260922_053829.csv`) that changes on every refresh, so a hardcoded URL 404s silently within days. The first source in this project whose URL is not durable. Note `datos.madrid.es` is **CKAN 2.9.11 at the bare host**; an earlier screen recorded it unreachable on the path `/egob`, which was a fact about the guess rather than about the portal | none server-side (CKAN serves the whole file). **UTF-8 WITH BOM and SEMICOLON-delimited**, both declared in `config.py` rather than inferred — a BOM read as data corrupts the first column name. Step 2 keeps `desc_situacion_local == 'Abierto'`, which is also the residence filter: the register carries **`Uso vivienda` (8,486)** as its own status, so residence is answered by the source rather than inferred, Canada's licence-level pattern rather than the US parcel join. **This register carries NO registrant name at all** — all 47 columns were listed on 2026-09-22 and not one is an owner, titular, NIF/CIF, razón social or contact field, the same structural position as Edmonton's register; step 2 asserts twelve personal column names stay absent and **raises** if a kept premises lacks its `rotulo` | 2026-09-22 |
-| Palma | The Consell de Mallorca's **Registre d'Establiments de Restauració i Entreteniment de Mallorca** (GOIB catalogue, CKAN `empreses-restauracio-entreteniment-mallorca`, `https://intranet.caib.es/opendatacataleg/dataset/empreses-restauracio-entreteniment-mallorca`), island-wide, resource last modified 2026-09-07 | **Food service only**: bars, cafés, restaurants, music bars and nightclubs, typed by `Grup`. 10,607 rows, 4,375 in `Municipi` PALMA, 4,372 active (`Estat = Alta`); catering (9) out by type, 58 more by name. No retail or personal-services source exists for Palma (none of the catalogue's 399 datasets) | `https://intranet.caib.es/opendatacataleg/files/dataset/empreses_restauracio_mallorca/empreses_restauracio_mallorca.csv` | none (whole file; `;`-separated, UTF-8 with a BOM). **`Explotador/s` is never read** (the operator, sometimes a person with a tax id); `REGISTER_COLUMNS` names the eleven read. Coordinates (`UTM (X)`/`UTM(Y)`, ETRS89 / UTM 31N) on 13% of Palma's rows; the rest are joined to Catastro (the next row) | 2026-09-28 |
+| Madrid | Ayuntamiento de Madrid **Censo de locales, sus actividades y terrazas de hostelería y restauración** (CKAN package `200085-0-censo-locales`, resource `200085-5-censo-locales` — the locales × actividades join, 225,660 rows × 47 columns) | All three buckets, via the city's own `epigrafe` scheme — a **premises field survey**, not a license register, so the Montréal and Barcelona shape rather than the Philadelphia one | **Resolved at fetch time**, not hardcoded: `https://datos.madrid.es/api/3/action/package_show` is queried for the package and the download URL taken from the resource whose id is `200085-5-censo-locales`. **THE DOWNLOAD URL ROTS** — it embeds a build timestamp (`200085_20260922_053829.csv`) that changes on every refresh, so a hardcoded URL 404s silently within days. The first source in this project whose URL is not durable. Note `datos.madrid.es` is **CKAN 2.9.11 at the bare host**; an earlier screen recorded it unreachable on the path `/egob`, which was a fact about the guess rather than about the portal | none server-side (CKAN serves the whole file). **UTF-8 WITH BOM and SEMICOLON-delimited**, both declared in `config.py` rather than inferred — a BOM read as data corrupts the first column name. Step 2 keeps `desc_situacion_local == 'Abierto'`, which is also the residence filter: the register carries **`Uso vivienda` (8,486)** as its own status, so residence is answered by the source rather than inferred, Canada's license-level pattern rather than the US parcel join. **This register carries NO registrant name at all** — all 47 columns were listed on 2026-09-22 and not one is an owner, titular, NIF/CIF, razón social or contact field, the same structural position as Edmonton's register; step 2 asserts twelve personal column names stay absent and **raises** if a kept premises lacks its `rotulo` | 2026-09-22 |
+| Palma | The Consell de Mallorca's **Registre d'Establiments de Restauració i Entreteniment de Mallorca** (GOIB catalog, CKAN `empreses-restauracio-entreteniment-mallorca`, `https://intranet.caib.es/opendatacataleg/dataset/empreses-restauracio-entreteniment-mallorca`), island-wide, resource last modified 2026-09-07 | **Food service only**: bars, cafés, restaurants, music bars and nightclubs, typed by `Grup`. 10,607 rows, 4,375 in `Municipi` PALMA, 4,372 active (`Estat = Alta`); catering (9) out by type, 58 more by name. No retail or personal-services source exists for Palma (none of the catalog's 399 datasets) | `https://intranet.caib.es/opendatacataleg/files/dataset/empreses_restauracio_mallorca/empreses_restauracio_mallorca.csv` | none (whole file; `;`-separated, UTF-8 with a BOM). **`Explotador/s` is never read** (the operator, sometimes a person with a tax id); `REGISTER_COLUMNS` names the eleven read. Coordinates (`UTM (X)`/`UTM(Y)`, ETRS89 / UTM 31N) on 13% of Palma's rows; the rest are joined to Catastro (the next row) | 2026-09-28 |
 | Palma — **address points, not a business source** | The Dirección General del Catastro's **INSPIRE Addresses** for Palma (07040), from the province-07 ATOM feed (`https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/07/ES.SDGC.AD.atom_07.xml`): 55,609 points, 2,973 street names, EPSG:25831, dated 2026-08-21 | Places the register's premises that carry no coordinate, by street and number (pipeline/countries/spain_catastro.py): 59.3% exact, 7.1% at the nearest listed number on the same side within 6, 20.4% of kept premises unplaced. The control (512 rows with both a register coordinate and a joined point): median 1.1 m apart, 92.2% within 100 m | `https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/07/07040-PALMA/A.ES.SDGC.AD.07040.zip` | none (whole file). **Catastro's certificate chain fails with Python's bundled store**: `truststore` (the OS store), verification on. The GML declares the INSPIRE 3.0 URNs, not the 4.0 schema URLs | 2026-09-30 |
-| Barcelona | Ajuntament de Barcelona **Cens de locals en planta baixa amb activitat econòmica** (CKAN package `cens-locals-planta-baixa-act-economica`, resource `99764d55-b1be-4281-b822-4277442cc721`) | All three buckets, via the census's own four-level Catalan activity scheme — a **premises field survey**, not a licence register, so the Montréal and Madrid shape rather than the licence cities'. **THE YEAR IS A DECISION:** the **2022** survey holds 66,088 rows and is complete; the **2024** resource (`38babeec-5c47-43d3-84e7-b13a4b89004f`) holds 44,000 and is **geographically incomplete** — Sant Andreu −83%, Nou Barris −76%, Horta-Guinardó −69% against 2022, while Ciutat Vella is −5%, so a map built on it would show the periphery as commercially dead | `https://opendata-ajuntament.barcelona.cat/data/api/3/action` — `datastore_search`, paged at 10,000 | `fields=` restricted to **11 of the census's 50 columns**, and that list IS the privacy control. `Nom_Local` is a trade name and 100% populated, so there is **no registrant-name column to fall back to**; `Referencia_Cadastral` exists in the source and is deliberately never requested. **The vacancy filter is applied in step 2 and is mandatory**: `Nom_Principal_Activitat` is `Actiu` on 58,908 rows and `Sense activitat Econòmica` on 7,180 — empty units for sale or to let. Licence **CC BY 4.0** plus the Open Data BCN terms — notice **21**, and the outstanding duty to notify the Council | 2026-09-22 |
+| Barcelona | Ajuntament de Barcelona **Cens de locals en planta baixa amb activitat econòmica** (CKAN package `cens-locals-planta-baixa-act-economica`, resource `99764d55-b1be-4281-b822-4277442cc721`) | All three buckets, via the census's own four-level Catalan activity scheme — a **premises field survey**, not a license register, so the Montréal and Madrid shape rather than the license cities'. **THE YEAR IS A DECISION:** the **2022** survey holds 66,088 rows and is complete; the **2024** resource (`38babeec-5c47-43d3-84e7-b13a4b89004f`) holds 44,000 and is **geographically incomplete** — Sant Andreu −83%, Nou Barris −76%, Horta-Guinardó −69% against 2022, while Ciutat Vella is −5%, so a map built on it would show the periphery as commercially dead | `https://opendata-ajuntament.barcelona.cat/data/api/3/action` — `datastore_search`, paged at 10,000 | `fields=` restricted to **11 of the census's 50 columns**, and that list IS the privacy control. `Nom_Local` is a trade name and 100% populated, so there is **no registrant-name column to fall back to**; `Referencia_Cadastral` exists in the source and is deliberately never requested. **The vacancy filter is applied in step 2 and is mandatory**: `Nom_Principal_Activitat` is `Actiu` on 58,908 rows and `Sense activitat Econòmica` on 7,180 — empty units for sale or to let. License **CC BY 4.0** plus the Open Data BCN terms — notice **21**, and the outstanding duty to notify the Council | 2026-09-22 |
 
 ### Madrid — endpoints and findings, verified 2026-09-22
 
 **The first Spanish city, and the first anywhere in this project whose rail
-comes from an operator's ArcGIS feature services rather than a feed.** Country
-profile: `docs/spain_step0_endpoints.md`. Step 0 evidence and its checks:
-`docs/build_briefs/madrid.md` (13/13).
+comes from an operator's ArcGIS feature services rather than a feed.**
 
-**Businesses** — Ayuntamiento de Madrid, *Censo de locales, sus actividades y
-terrazas de hostelería y restauración*. `datos.madrid.es` is **CKAN 2.9.11 at
-the bare host** (an earlier screen recorded it unreachable on the path
-`/egob` — a fact about the guess). Package `200085-0-censo-locales`, resource
-**`200085-5-censo-locales`**, the locales × actividades join: 225,660 rows ×
-47 columns, **UTF-8 with BOM, semicolon-delimited**, coordinates in
-**EPSG:25830**.
+**Businesses**: Ayuntamiento de Madrid, *Censo de locales, sus actividades y
+terrazas de hostelería y restauración* (package and resource in the row
+above): 225,660 rows × 47 columns, **UTF-8 with BOM, semicolon-delimited**,
+coordinates in **EPSG:25830**.
 
 > **THE DOWNLOAD URL ROTS.** It embeds a build timestamp
-> (`200085_20260922_053829.csv`) that changes on every refresh, so
-> `step2_clean_businesses.py` resolves it from `package_show` by **resource
-> id** at fetch time. This is the first source in the project whose URL is not
-> durable, and a hardcoded one 404s silently within days.
+> (`200085_20260922_053829.csv`) that changes on every refresh, so the
+> download script resolves it from `package_show` by **resource id** each
+> time. A hardcoded URL 404s silently within days; this is the first source in
+> the project whose URL is not durable.
 
 A **premises field survey**, not a licence register — the Montréal and
 Barcelona shape — so the "79% of this register is landlords" correction that
@@ -74,13 +68,10 @@ layer **0 `M4_Estaciones`** (293 station-per-line points) and layer
 the premises data, so the build never reprojects for geometry.
 
 > **NOT the GTFS, and that is a LICENCE consequence rather than a preference.**
-> CRTM publishes the same network twice: a GTFS feed it stopped refreshing in
-> **2025-05-30**, and feature services it still edits (**2026-06-05**). Its
-> licence obliges a reuser to keep displayed information *"siempre
-> actualizada"*, which a feed abandoned sixteen months ago cannot satisfy.
-> `scripts/brief_check.py` watches the feature layers' `editingInfo.lastEditDate`
-> with the `arcgis_layer` check kind, because the pre-existing tripwire watched
-> the FEED and would have kept passing while the decision it guarded went stale.
+> CRTM stopped refreshing its GTFS on **2025-05-30** but still edits these
+> layers (**2026-06-05**), and its licence asks a reuser to keep displayed
+> information *"siempre actualizada"*. The Madrid row under Transit feeds below
+> gives the detail, including the check that watches the layers' edit date.
 
 **Boundary** — *Término municipal de Madrid*,
 `geoportal.madrid.es/fsdescargas/IDEAM_WBGEOPORTAL/LIMITES_ADMINISTRATIVOS/Termino_Municipal/Termino_Municipal.zip`
@@ -151,14 +142,13 @@ licences**, which is Spain's country-level pattern.
 > rejected CRTM's own Metro GTFS — which downloads cleanly — precisely BECAUSE
 > CRTM stopped refreshing it in May 2025, and took the maintained feature
 > layers instead. The notice states CRTM's own last-update date (5 June 2026)
-> and that the map shows the network as recorded then. And
+> and that the map shows the network as recorded then.<!-- internal --> And
 > `scripts/brief_check.py`'s `arcgis_layer` check carries `max_age_days` on
 > both layers, so this is a commitment a check FAILS on rather than one a
-> comment promises.
+> comment promises.<!-- /internal -->
 >
 > This is a reasoned position on a clause that is clear once read in context,
-> not a generous reading of an ambiguous one — the distinction `read-licence`
-> step 8 draws. The full text is stored at
+> not a generous reading of an ambiguous one. The full text is stored at
 > `docs/licenses/crtm-licencia-de-uso.txt` so the reading can be checked against
 > the document rather than against this summary.
 
@@ -169,9 +159,10 @@ Metro Ligero ML1's 9, that is 302 — a residual of **one**, consistent with
 Pinar de Chamartín being counted by the operator in both networks. Two of the
 operator's own conventions have to be applied first: it counts a station **once
 per line** (which is why 303 sits against 242 distinct names) and it **includes
-ML1**, which it operates. **303 must never reach the page**: this project maps
-**193 distinct stations inside the término municipal**, a different quantity in
-three ways at once.
+ML1**, which it operates. **The map does not use 303**: it maps **200 distinct
+stations inside the término municipal** (the Metro's 193, plus ML1's nine less
+the two it shares with the Metro), a different quantity (distinct stations,
+and only those inside the city).
 
 ## Transit feeds
 
@@ -179,10 +170,10 @@ three ways at once.
 
 | City | System / operator | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
-| Madrid | **CRTM Metro — ArcGIS feature services, NOT a GTFS feed** (Consorcio Regional de Transportes de Madrid) | `https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer` — layer **0 `M4_Estaciones`** (293 station-per-line points) and layer **4 `M4_Tramos`** (560 polylines) | 2026-09-22 | **The first rail in this project from an operator's feature services rather than a feed, and the reason is a LICENCE condition rather than a preference.** CRTM publishes the same network twice: a Metro GTFS it stopped refreshing on **2025-05-30**, and these services it still edits (**2026-06-05**). Its licence obliges a reuser to keep displayed information *"siempre actualizada"*, which a feed abandoned sixteen months ago cannot satisfy — so the feed is rejected although it downloads cleanly. `scripts/brief_check.py` watches these layers' `editingInfo.lastEditDate` with its `arcgis_layer` check kind, because the pre-existing tripwire watched the FEED and would have kept passing while the decision it guarded went stale. Both layers are natively **EPSG:25830**, the same CRS as the premises register, so the build never reprojects for geometry |
+| Madrid | **CRTM Metro — ArcGIS feature services, NOT a GTFS feed** (Consorcio Regional de Transportes de Madrid) | `https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer` — layer **0 `M4_Estaciones`** (293 station-per-line points) and layer **4 `M4_Tramos`** (560 polylines) | 2026-09-22 | **The first rail in this project from an operator's feature services rather than a feed, and the reason is a LICENCE condition rather than a preference.** CRTM publishes the same network twice: a Metro GTFS it stopped refreshing on **2025-05-30**, and these services it still edits (**2026-06-05**). Its licence obliges a reuser to keep displayed information *"siempre actualizada"*, which a feed abandoned sixteen months ago cannot satisfy — so the feed is rejected although it downloads cleanly.<!-- internal --> `scripts/brief_check.py` watches these layers' `editingInfo.lastEditDate` with its `arcgis_layer` check kind, because the pre-existing tripwire watched the FEED and would have kept passing while the decision it guarded went stale.<!-- /internal --> Both layers are natively **EPSG:25830**, the same CRS as the premises register, so the build never reprojects for geometry |
 | Madrid | **CRTM Metro Ligero — ArcGIS feature services** (added 2026-09-27, the tram rescope) | `https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M10_Red/FeatureServer` — layer **0 `M10_Estaciones`** (57 station-per-line points) and layer **4 `M10_Tramos`** (100 polylines) | 2026-09-27 | **The Metro layers' sibling, under the same terms**: the ArcGIS item "Datos Abiertos: Elementos de la Red de Metro Ligero" declares the same `http://www.crtm.es/licencia-de-uso` and "© CRTM" as `M4_Red`, and was last edited the same day (**2026-06-05**), so the existing CRTM notice and its stated date cover it unchanged. Same schema, EPSG:25830. **Only ML1 is read** (owner, 2026-09-27): ML2 and ML3 are stubs inside Madrid and ML4 is Parla's tram. Parla's stations carry `LINEAS` "4" while its tramos are "4-1"/"4-2". ML1's colour is not in these layers: it is read from the sibling `M10_Lineas` service's renderer (rgb 39, 84, 211) |
 | Palma | Metro de Palma **M1** (SFM) - **OpenStreetMap** | Overpass, `route=light_rail` relations 1664324 and 7781525; gate 3 against TIB's stop list (`https://www.tib.org/en/linies-i-horaris/metro/-/linia/M1`, rendered by script, read in a browser) | 2026-09-30 | 10 stations, all in Palma, 648 m median, standard rings. **M2 (relations 4635401, 7781524) is not drawn**: TIB, the Consorci de Transports de Mallorca's timetable site, lists one metro line; the Marratxí corridor is SFM's trains T1-T3 (suburban rail). M1's timetable (every 20 min in term, 30-40 in holidays, no Sunday service) is disclosed, not disqualifying: purpose-built track (the owner's light-rail test, Buffalo's call). ODbL 1.0 - notice **1** and the rail-geometry notice |
-| Barcelona | **OpenStreetMap** — 14 metro refs (L1–L12, with L9 and L10 each split into two disconnected segments) plus the **Montjuic (TMB)** and **Vallvidrera (FGC)** funiculars: 16 drawn lines across **two operators** | The three Overpass mirrors in `pipeline/osm.py`, bbox `41.30,2.03,41.50,2.30` | 2026-09-22 | **Why not the agency feed:** TMB's GTFS is registration-gated (`api.tmb.cat` returns **401** unauthenticated, watched by `brief_check.py`), and the agency route would need **four feeds** — TMB, FGC, TRAM and TRAM Besos — with four licences and four cadences. OSM returns the network in one query with **every line carrying its own name and colour**, so no palette is invented. **Scope is the operators' own `network` tag**: the 14 metro refs and both funiculars are tagged `Metro de Barcelona` or `Metro del Valles`; **FT (Tibidabo)** carries no network tag and is run by the municipal parks company, and trams T1–T6 are `Trambaix`/`Trambesos` — both excluded. ⚠️ **The mirrors disagree about this bbox** (tram/funicular counts, and `L10N` vs `L10 Nord`), so the fetch is cached and the build normalises refs. ODbL 1.0 — notice **1** and the rail-geometry notice |
+| Barcelona | **OpenStreetMap** — 14 metro refs (L1–L12, with L9 and L10 each split into two disconnected segments) plus the **Montjuic (TMB)** and **Vallvidrera (FGC)** funiculars: 16 drawn lines across **two operators** | The three Overpass mirrors in `pipeline/osm.py`, bbox `41.30,2.03,41.50,2.30` | 2026-09-22 | **Why not the agency feed:** TMB's GTFS is registration-gated (`api.tmb.cat` returns **401** unauthenticated<!-- internal -->, watched by `brief_check.py`<!-- /internal -->), and the agency route would need **four feeds** — TMB, FGC, TRAM and TRAM Besos — with four licences and four cadences. OSM returns the network in one query with **every line carrying its own name and colour**, so no palette is invented. **Scope is the operators' own `network` tag**: the 14 metro refs and both funiculars are tagged `Metro de Barcelona` or `Metro del Valles`; **FT (Tibidabo)** carries no network tag and is run by the municipal parks company, and trams T1–T6 are `Trambaix`/`Trambesos` — both excluded. ⚠️ **The mirrors disagree about this bbox** (tram/funicular counts, and `L10N` vs `L10 Nord`), so the fetch is cached and the build normalises refs. ODbL 1.0 — notice **1** and the rail-geometry notice |
 
 ## Boundary layers
 
@@ -266,8 +257,8 @@ data rather than merely crediting the source. **Obligation 6 is the first time
 a licence has contractually forbidden what this project's privacy invariant
 already forbids voluntarily**, and it bears directly on the `rotulo` field:
 combining a trade name with a precise address is exactly the operation the
-clause is about, so the existing `check_personal_exposure.py` gate is a licence
-obligation here, not only a house rule.
+clause is about<!-- internal -->, so the existing `check_personal_exposure.py` gate is a licence
+obligation here, not only a house rule<!-- /internal -->.
 
 Also recorded: the disclaimer is ordinary (no warranty, no guarantee of
 continuity, reuser bears the risk), and reusers are placed under the sanctions
@@ -310,13 +301,13 @@ ODbL-style share-alike is a live question elsewhere in this project (CDMX).
 > **actualizada**"*
 
 **Displaying an expired feed is in direct tension with this.** `mdb-794`'s
-calendar ended 2026-05-27. The build brief had listed "use the expired feed
-anyway, since station positions do not expire" as a defensible third option.
+calendar ended 2026-05-27. "Use the expired feed anyway, since station
+positions do not expire" had been listed as a defensible third option.
 **It is no longer defensible on these terms** — not because station geometry
 goes stale, but because the licence obliges the reuser to keep what is shown
 up to date, and this project cannot honour that with a feed CRTM has stopped
-refreshing. Madrid's rail leg must come from a current CRTM item or from
-OpenStreetMap.
+refreshing. Madrid's rail therefore comes from CRTM's maintained feature
+services instead (the Madrid rows under Transit feeds above).
 
 **Obligations, all of them conditions rather than courtesies:**
 
@@ -354,13 +345,10 @@ change that is made shall take effect as soon as it is published."*
 
 ### ✅ DECIDED 2026-09-22 — Barcelona is published on a DISCLOSED POSITION
 
-This section previously said a human should confirm the live page before
-publishing. That was attempted on 2026-09-22 and **the page returned
-hCaptcha** — *"PLEASE PROVE THAT YOU ARE HUMAN"* — which this project does not
-defeat. The owner's decision was to publish anyway, on a disclosed position,
-rather than hold the city. Recorded here because **a precondition that is
-knowingly not met has to say so**, rather than sit in the file reading like a
-plan somebody will get to.
+A human was to confirm the live terms page before publishing. That was
+attempted on 2026-09-22 and **the page returned hCaptcha** (*"PLEASE PROVE
+THAT YOU ARE HUMAN"*), which this project does not defeat. The owner decided to
+publish anyway, on a disclosed position, rather than hold the city.
 
 **What IS verified, live, today.** The *declared licence* needs no CAPTCHA:
 `package_show` on the CKAN API returns `license_id: CC-BY-4.0`, `license_title:
@@ -431,12 +419,11 @@ incorporate expressly:
 - **the source must be cited**
 - ⚠️ **"the most up-to-date data are referred to"**
 
-**That last one bears directly on the census-year decision.** The build brief
-recommends the **2022** resource because the 2024 one is geographically
-incomplete (down 69–83% in four districts). Article 8 pulls the other way.
-The two are reconcilable — using the most recent *complete* survey, and saying
-so on the page — but it must be a stated decision, not a silent one, and the
-page must name the census year either way.
+**That last one bears directly on the census-year decision.** The build uses
+the **2022** resource because the 2024 one is geographically incomplete (down
+69–83% in four districts), and Article 8 pulls the other way. The two are
+reconciled by using the most recent *complete* survey and saying so: the
+Barcelona page names the 2022 census year and why.
 
 **Not claimed:** the *"Open Data BCN"* denomination and logo are registered
 trademarks (M 3713011, M 3746181) and are excluded from reuse, as are images

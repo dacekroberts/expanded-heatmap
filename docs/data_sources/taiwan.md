@@ -1,11 +1,10 @@
 # Data sources — Taiwan
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Taiwan rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+<!-- internal -->The Taiwan part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country on 2026-09-27.
+The numbered notices this project must display, the removal-request
+commitment and the deploy gate apply to every country and are kept in
+that record.<!-- /internal -->
 
 ## Business registries
 
@@ -21,9 +20,9 @@ point, not here.
 
 | City | System / operator | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
-| Taichung | **Taichung Metro's Green Line**: stations from the operator's own table (臺中捷運綠線車站資訊, 臺中捷運股份有限公司, data.gov.tw 144164; code, Chinese and English names, coordinates) and the route from OpenStreetMap (relations 11330355/11330356, 臺中捷運綠線) | `https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=f9511cc5-4799-4df9-98b7-0b0f89fc2be9`; OSM via the Overpass mirrors in `pipeline/taichung/config.py` | 2026-09-25 | Gate 3 exact: OSM's 18 stops against the operator's 18, every station within 23 m of the route. The operator's table repeats code G17 (烏日, 高鐵臺中站); keyed by name. No colour in either source: this project's green (owner). Station table OGDL v1 - notice 45; OSM, ODbL 1.0 - notice 1 |
+| Taichung | **Taichung Metro's Green Line**: stations from the operator's own table (臺中捷運綠線車站資訊, 臺中捷運股份有限公司, data.gov.tw 144164; code, Chinese and English names, coordinates) and the route from OpenStreetMap (relations 11330355/11330356, 臺中捷運綠線) | `https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=f9511cc5-4799-4df9-98b7-0b0f89fc2be9`; OSM via the Overpass mirrors in `pipeline/taichung/config.py` | 2026-09-25 | Gate 3 exact: OSM's 18 stops against the operator's 18, every station within 23 m of the route. The operator's table repeats code G17 (烏日, 高鐵臺中站); keyed by name. No color in either source: this project's green (owner). Station table OGDL v1 - notice 45; OSM, ODbL 1.0 - notice 1 |
 | Taoyuan | **The Taoyuan Airport MRT**: station points from the national 捷運車站 layer (內政部國土測繪中心, data.gov.tw 73233; the rows 桃園機場捷運…站_A<n>, whose ADDRESS says which city each is in), the route from OSM's all-stop relation (6937083, `#2C5AA5`), and gate 3 against Taoyuan Metro's own list (桃園捷運路線車站基本資料, data.gov.tw 128390) | `https://opdadm.moi.gov.tw/api/v1/no-auth/resource/api/dataset/63A7BA62-C429-4F2D-8B73-21AAB9E6EAE0/resource/4C11DFAE-ED20-4843-89E7-08D23CADAA16/download`; `https://opendata.tycg.gov.tw/api/dataset/8c1fe832-fe4a-4033-a283-25ab39a99d93/resource/5535111f-9af5-40b9-9e58-a4d382fb8b2c/download`; the network record (128388, the line and its operator 桃園大眾捷運股份有限公司) `https://opendata.tycg.gov.tw/api/dataset/434a3d9f-ebc1-474b-b8b7-da53eb340b48/resource/35cd3ed3-42a4-401d-90bd-7f5b82588169/download`; OSM via the Overpass mirrors in `pipeline/taoyuan/config.py` | 2026-09-25 | Gate 3 exact, 22 against 22, after one recorded addition: the operator's XML is dated 2018-10-01 and lacks A22 老街溪 (opened 2023), which the national layer and OSM both carry. Every station point within 57 m of the route. 15 stations in Taoyuan kept; A1-A6 and A9 outside. The operator's "StationList.xml" resource (128394) is byte-identical to the route file and has no coordinates. All OGDL v1 - notice 46, Taoyuan City Government, NLSC and Taoyuan Metro; OSM, ODbL 1.0 - notice 1 |
-| Taipei (Regional) | **OpenStreetMap** - every metro and light-rail line in the two cities (owner): Taipei Metro's BR, R, G, O and BL with the Xinbeitou and Xiaobitan branches, New Taipei's Circular (Y) and Sanying (LB) lines and the Danhai (V) and Ankeng (K) light rail, and the Airport MRT; relations matched on `ref`, stations by route membership, English names from `name:en` | the Overpass mirrors in `pipeline/taipei/config.py` (subway, light_rail and monorail relations in the metro's box); Taipei Metro's list `https://data.taipei/api/dataset/8bf00fa8-86a5-437e-b5c7-9bc0fe0e2971/resource/e3c0e67f-5916-405f-ad9a-41f52a65c2d2/download` (臺北捷運路線車站資料服務, data.gov.tw 131326) | 2026-09-25 | **Why not the agency:** Taipei's network map carries no colours and may lack New Taipei's lines (owner, 2026-09-25). **Gate 3 exact on all seven Taipei Metro lines and branches** (24/28/2/19/2/26/23). R01 kept: in the operator's list and tagged an active stop, only OSM's English label said "under construction" (owner). `colour=orange` resolved through the CSS table to #FFA500. 153 stations in the two cities (74 Taipei, 79 New Taipei), 15 Airport MRT stations in Taoyuan outside. Scope by door plates within 300 m - no boundary read. Station list OGDL v1 - notice 47, Taipei and New Taipei City Governments and Taipei Metro; OSM, ODbL 1.0 - notice 1 |
+| Taipei (Regional) | **OpenStreetMap** - every metro and light-rail line in the two cities (owner): Taipei Metro's BR, R, G, O and BL with the Xinbeitou and Xiaobitan branches, New Taipei's Circular (Y) and Sanying (LB) lines and the Danhai (V) and Ankeng (K) light rail, and the Airport MRT; relations matched on `ref`, stations by route membership, English names from `name:en` | the Overpass mirrors in `pipeline/taipei/config.py` (subway, light_rail and monorail relations in the metro's box); Taipei Metro's list `https://data.taipei/api/dataset/8bf00fa8-86a5-437e-b5c7-9bc0fe0e2971/resource/e3c0e67f-5916-405f-ad9a-41f52a65c2d2/download` (臺北捷運路線車站資料服務, data.gov.tw 131326) | 2026-09-25 | **Why not the agency:** Taipei's network map carries no colors and may lack New Taipei's lines (owner, 2026-09-25). **Gate 3 exact on all seven Taipei Metro lines and branches** (24/28/2/19/2/26/23). R01 kept: in the operator's list and tagged an active stop, only OSM's English label said "under construction" (owner). `colour=orange` resolved through the CSS table to #FFA500. 153 stations in the two cities (74 Taipei, 79 New Taipei), 15 Airport MRT stations in Taoyuan outside. Scope by door plates within 300 m - no boundary read. Station list OGDL v1 - notice 47, Taipei and New Taipei City Governments and Taipei Metro; OSM, ODbL 1.0 - notice 1 |
 
 ## Boundary layers
 
@@ -33,9 +32,9 @@ point, not here.
 | Taoyuan | **None** - the register is scoped by its address prefix (桃園市), and each station's city is the national layer's own ADDRESS | - | 15 of the line's 22 stations are in Taoyuan |
 | Taipei (Regional) | **None** - the register is scoped by address prefix, and a station is in the region when either city's own door-plate file has plates within 300 m | - | Overpass 504ed on every boundary query on 2026-09-25 |
 
-## Licences and terms of use
+## Licenses and terms of use
 
-### 🇹🇼 Taiwan (Taichung built 2026-09-25) — read 2026-09-23 and 2026-09-25 by the `licence-read` agent
+### 🇹🇼 Taiwan (Taichung built 2026-09-25)<!-- internal --> — read 2026-09-23 and 2026-09-25 by the `licence-read` agent<!-- /internal -->
 
 | Source | Verdict | What it requires |
 |---|---|---|
@@ -43,12 +42,12 @@ point, not here.
 | **The national business tax register** — `全國營業(稅籍)登記資料集` (財政部財政資訊中心 / FIA, `eip.fia.gov.tw/data/BGMOPEN1.zip`, data.gov.tw 9400) — the BUSINESS leg for every Taiwanese city | **PERMITTED WITH CONDITIONS — OGDL v1** (`license: "1"`), plus the FIA's own *政府網站資料開放宣告*, which repeats the grant and adds: cite the source (*"應註明出處"*); no marks or emblems; no implied endorsement; and **§二(二): personal data that is public must still be handled under the Personal Data Protection Act by the user** | The same prescribed 顯名聲明, e.g. `財政部財政資訊中心 2026 全國營業(稅籍)登記資料集（資料日期 YYYY-MM-DD）` — the CSV's first data row carries its own date. ⚠️ **Do not present the filtered, geolocated points as the register itself** (FIA 四) |
 | **TDX** (交通部運輸資料流通服務平臺) metro endpoints | ⛔ **NOT USED.** Its own terms (not OGDL): scripted access needs a **registered member key**; keyless is a browser-only visitor mode, 20 calls/day per IP; registration wants a Taiwanese mobile number or manual review. The server now enforces it (curl 401, browser 200) and **it is not worked around** | — |
 | **Taichung door plates** — `臺中市115年1月至各月份GIS門牌資料` (臺中市政府數位發展局, opendata.taichung.gov.tw, monthly CSVs on Google Drive) | **PERMITTED WITH CONDITIONS — OGDL v1**, read 2026-09-25 off the dataset's own page (授權方式) | The 顯名聲明 - notice 45 |
-| **Taichung Metro's Green Line stations** — `臺中捷運綠線車站資訊` (臺中捷運股份有限公司, data.gov.tw 144164) | **PERMITTED WITH CONDITIONS — OGDL v1** (`license: "1"`), read 2026-09-25 | The 顯名聲明 - notice 45. No line colour published on the pages read |
+| **Taichung Metro's Green Line stations** — `臺中捷運綠線車站資訊` (臺中捷運股份有限公司, data.gov.tw 144164) | **PERMITTED WITH CONDITIONS — OGDL v1** (`license: "1"`), read 2026-09-25 | The 顯名聲明 - notice 45. No line color published on the pages read |
 | **Taoyuan door plates** — `桃園市門牌位置坐標資料` (桃園市政府民政局, data.gov.tw 157689) | **PERMITTED WITH CONDITIONS — OGDL v1**, read 2026-09-25; plus the portal FAQ's condition (accepted, notice 46) | The 顯名聲明 - notice 46 |
 | **The national 捷運車站 layer** (內政部國土測繪中心, data.gov.tw 73233) | **OGDL v1** (`license: "1"`), 2026-09-25 | The 顯名聲明 - notice 46 |
-| **Taoyuan Metro's station list** — `桃園捷運路線車站基本資料` (桃園捷運公司, data.gov.tw 128390) | **PERMITTED WITH CONDITIONS — OGDL v1**, read 2026-09-25 | The 顯名聲明 - notice 46. No line colour on the pages read |
+| **Taoyuan Metro's station list** — `桃園捷運路線車站基本資料` (桃園捷運公司, data.gov.tw 128390) | **PERMITTED WITH CONDITIONS — OGDL v1**, read 2026-09-25 | The 顯名聲明 - notice 46. No line color on the pages read |
 | **New Taipei door plates** — `新北市門牌位置數值資料` (新北市政府民政局, data.gov.tw 168887) | **PERMITTED WITH CONDITIONS — OGDL v1**, read 2026-09-25; the portal FAQ adds nothing | The 顯名聲明 - notice 47 |
-| **Taipei Metro's station list** — `臺北捷運路線車站資料服務` (臺北大眾捷運股份有限公司, data.gov.tw 131326) | **PERMITTED WITH CONDITIONS — OGDL v1**, plus the company's own open-data declaration (accepted, notice 47), read 2026-09-25 | The 顯名聲明 - notice 47. No line colour on the pages read |
+| **Taipei Metro's station list** — `臺北捷運路線車站資料服務` (臺北大眾捷運股份有限公司, data.gov.tw 131326) | **PERMITTED WITH CONDITIONS — OGDL v1**, plus the company's own open-data declaration (accepted, notice 47), read 2026-09-25 | The 顯名聲明 - notice 47. No line color on the pages read |
 
 **A fault-based liability clause — RAISED, owner call.** OGDL v1 §六(三):
 *"使用者...因故意或過失，致資料提供機關遭受損害，或第三人因此向資料提供機關請求賠償損害，使用者應對各機關負賠償責任。"*
@@ -69,10 +68,10 @@ Protection Act reaches a foreign reuser of Taiwanese residents' data (第51條
 for companies and branches (legal entities), and for sole proprietors only
 when the name carries a business marker (行/店/社/館/坊…); otherwise the tooltip
 shows the category. It errs toward hiding, which the publisher's own refusal
-argues for. Removal requests under PDPA 第3條/第19條 are honoured, which the
+argues for. Removal requests under PDPA 第3條/第19條 are honored, which the
 project's standing commitment already says.
 
 **Taiwan's rail comes from the agencies instead**, keyless and under OGDL v1
-(one read covers the licence; each source still needs its attribution line):
+(one read covers the license; each source still needs its attribution line):
 Taipei's `臺北都會區大眾捷運系統路網圖` and `車站點位圖`, Taichung Metro's
-Green Line stations, the national land-survey centre's `捷運車站` layer.
+Green Line stations, the national land-survey center's `捷運車站` layer.

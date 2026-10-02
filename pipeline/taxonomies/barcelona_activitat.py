@@ -20,20 +20,22 @@ level fails in the way that matters most:
   City build made once with SCIAN 72 and Madrid avoided by splitting
   HOSTELERIA.
 
-So the mapping enumerates all 75 values of `Nom_Activitat`. That is a closed
-list rather than a prefix rule, so a value added in a future refresh would fall
-through - which is why `UNMAPPED_IS_AN_ERROR` exists below and why the
-import-time assertion checks the enumeration against the measured census.
+So the mapping enumerates all 75 values of `Nom_Activitat` on active
+premises (74 once case and accents are normalised). That is a closed list
+rather than a prefix rule, so a value added in a future refresh would fall
+through `classify()` silently. `UNMAPPED_IS_AN_ERROR` below lists every value
+seen in the 2022 census for that comparison, but nothing reads it yet: no
+assertion checks the enumeration against the census.
 
-**TWO CALLS THE PUBLISHER'S OWN HIERARCHY MADE, NOT ME.** Both were about to go
-the other way on a reading of the Catalan:
+**TWO CALLS THE PUBLISHER'S OWN HIERARCHY MAKES.** A reading of the Catalan
+alone would put both the other way:
 
 - **`Plats preparats (no degustacio)` (202) is RETAIL, not food service.**
   Barcelona files it under `Quotidia alimentari` - daily food shopping -
   alongside the butcher and the greengrocer, not under the restaurants group.
   The `(no degustacio)` qualifier is the publisher saying there is no
-  consumption on the premises. A prepared-food counter you carry home is a
-  food shop.
+  consumption on the premises. A prepared-food counter whose food is carried
+  home is a food shop.
 - **`Fotografia` (144) is RETAIL.** Filed under `Comerc al detall`, so the
   camera-and-printing shop reading is the publisher's, not the portrait-studio
   reading that would have made it a personal service.

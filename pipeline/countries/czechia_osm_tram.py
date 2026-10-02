@@ -11,9 +11,10 @@ STEP 1, in order:
   1. the operator's route=tram relations, every one KEPT (by ref) or named in
      the config's NOT_DRAWN with a reason - osm_tram exits otherwise;
   2. their stop members, plus the config's STATION_ADD and LINE_STOP_ADD (a
-     stop a line's timetable calls at that its relations skip), collapsed by name at the mean within
-     COLLAPSE_MAX_SPREAD_M (Aarhus's rule, the OSM rule: France's never-a-mean
-     rule came from the French portal's conditions);
+     stop a line's timetable calls at that its relations skip), collapsed by
+     name at the mean within COLLAPSE_MAX_SPREAD_M (Aarhus's rule, the OSM
+     rule; France's never-a-mean rule comes from the French portal's
+     conditions);
   3. the station gates (pipeline/stations.py) at the tram floor SPACING_MIN_M,
      with gate 3 where the config names an independent count;
   4. scope over the obce (one or two), asserted against

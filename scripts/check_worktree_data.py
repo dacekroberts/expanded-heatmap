@@ -10,13 +10,13 @@ is in. Read-only: it never copies, moves or deletes. Copy first (docs/session_ro
 
 WHY. `git worktree remove` deletes ignored files without asking, and data/ is
 ignored. The retirement checklist already said to copy "any data/<city>/ the
-main checkout lacks", and on 2026-09-27 it was learned that the old staging
-worktree had gone with ~1.2 GB that existed nowhere else - Japan's city
-registers, the national ISJ/N02/N03/e-Stat files under data/japan and
-data/mhlw (not cities, so a per-city reading of the rule skips them), and
-caches for unbuilt cities that no fetch_sources.py re-creates. A sentence in a
-checklist is read past; a refusal is not. It follows junctions' TARGETS only to
-compare sizes, and reports a junction as such rather than walking into it.
+main checkout lacks", and on 2026-09-27 a removed worktree took ~1.2 GB that
+existed nowhere else: Japan's city registers, the national ISJ/N02/N03/e-Stat
+files under data/japan and data/mhlw (not cities, so a per-city reading of the
+rule skips them), and caches for unbuilt cities that no fetch_sources.py
+re-creates. A sentence in a checklist is read past; a refusal is not. A
+junction or symlink inside data/ is skipped without a report: its target lives
+elsewhere, so it is neither walked into nor compared.
 """
 
 import argparse

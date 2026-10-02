@@ -7,30 +7,25 @@ legend/coloring/toggle logic actually uses; no taxonomy-specific code
 (a NAICS prefix, a Chicago license_code) should leak past this layer into
 app/pipeline code that isn't the taxonomy module itself.
 
-This exists because criterion 3 of the 2026-09-18 city screen
-(docs/decisions/2026-09-13.md, "City selection, live verification, taxonomy
-plurality") was originally "has NAICS + geocoding," and live verification found that
-requirement too strict: New York, Chicago, and Philadelphia all have solid,
-live, geocoded business-license data, just under their own local taxonomy
-instead of NAICS. Rather than disqualify real cities over a naming
-difference, each city's config names which taxonomy system its raw data
-uses (`TAXONOMY_SYSTEM`), and the matching module here does the mapping
-into buckets.
+Criterion 3 of the 2026-09-18 city screen (docs/decisions/2026-09-13.md,
+"City selection, live verification, taxonomy plurality") first read "has
+NAICS + geocoding", which proved too strict: New York, Chicago and
+Philadelphia all have live, geocoded business-license data under their own
+local taxonomy instead of NAICS. So each city's config names the taxonomy
+system its raw data uses (`TAXONOMY_SYSTEM`), and the matching module here
+maps it into buckets.
 """
 
-# The default bucket set. A city's taxonomy module is not required to populate all three (a
-# thin dataset might only support one or two), but should not invent a
-# fourth without updating this list - the legend/coloring logic iterates
-# over this fixed set.
+# The default bucket set. A taxonomy module need not populate all three (a
+# thin dataset may support only one or two), but should not invent a fourth
+# without updating this list: the legend/coloring logic iterates over it.
 CATEGORY_BUCKETS = [
     ("Retail", "#2a78d6"),
-    # MAGENTA, NOT ORANGE, and it is the heat layer that forced it. Changed
-    # 2026-09-21 together with map_common.HEAT_GRADIENT, because the two are
-    # one decision: the old `#eb6834` sat **3.1 degrees of hue and Delta-E 9.5**
-    # from the heat ramp's own midpoint, so a food-service pin was already
-    # nearly the same colour as the wash it was drawn on - a live problem, not
-    # a predicted one. Against the new burnt-orange ramp it would have been
-    # Delta-E 10.7.
+    # MAGENTA, NOT ORANGE, because of the heat layer. Changed 2026-09-21
+    # together with map_common.HEAT_GRADIENT (one decision): the old `#eb6834`
+    # sat **3.1 degrees of hue and Delta-E 9.5** from the heat ramp's own
+    # midpoint, so a food-service pin was nearly the colour of the wash under
+    # it. Against the new burnt-orange ramp it would be Delta-E 10.7.
     #
     # `#C2185B` sits 48.2 degrees off the new ramp's midpoint and Delta-E 49.6
     # from its nearest stop: a 4.6x separation. The three buckets stay distinct
@@ -42,8 +37,8 @@ CATEGORY_BUCKETS = [
 ]
 
 # Registered lazily (import the taxonomy module by name via this dict) so
-# adding a new taxonomy - a new US city's own license field, or a future
-# non-US system like NACE - never requires touching this file's imports.
+# adding a new taxonomy - a new US city's own license field, or a non-US
+# system like NACE (czech_nace2025) - never requires touching this file's imports.
 # Each module must expose:
 #   classify(row: dict) -> str | None
 #       a bucket name from CATEGORY_BUCKETS, or None if the row doesn't map
@@ -107,8 +102,8 @@ TAXONOMY_MODULES = {
     "ba_usos_suelo": "pipeline.taxonomies.ba_usos_suelo",
     "milan_source": "pipeline.taxonomies.milan_source",
     # NAF rev. 2 - the FIRST taxonomy here that is NATIONAL rather than a
-    # city's own. SIRENE is one register for the whole country, so five French
-    # cities (france.py's BUILD_SEQUENCE) share this module and a correction
+    # city's own. SIRENE is one register for the whole country, so every French
+    # city shares this module and a correction
     # reaches all of them. Keyed at the sous-classe, Barcelona's shape: the
     # groupe level puts 49.4% of Paris in "other" against 19.3% at level 5.
     "france_naf": "pipeline.taxonomies.france_naf",
@@ -155,7 +150,6 @@ TAXONOMY_MODULES = {
     # Haag's own module, if Rotterdam's does not fit its horeca layer.
     "zurich_gastwirtschaft": "pipeline.taxonomies.zurich_gastwirtschaft",
     "den_haag_source": "pipeline.taxonomies.den_haag_source",
-    # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 
 

@@ -217,6 +217,25 @@ CITY_KEEP = "San Francisco"
 #     a small share of the total, so it is excluded here.
 NAICS_EXCLUDE_CODES = {"812990"}
 
+# INDIVIDUAL PRACTITIONER LICENCES are left out (owner, 2026-10-01): a row whose
+# licences (`lic_code_descriptions_list`) are ALL in this set is one person's
+# own licence to work, not a premises. Most tattoo practitioners work in a
+# studio that already has its own pin from its facility licence (42 of 53
+# share its address, measured on the 2026-09-19 fetch), and the row shows the
+# artist's own name. A row that also holds a facility or establishment licence
+# is the shop and stays. New York, Calgary and Edmonton leave out chair
+# renters for the same reason (a person working inside someone else's shop).
+# GENERAL MASSAGE PRACTITIONER is the same shape (one person's licence; 9
+# pins, none sharing an address with a shop); the solo massage establishments
+# above are out for privacy already. OUTCALL MASSAGE SERVICE, a home-visit
+# licence, counts as part of a practitioner's set, but a row needs at least
+# one practitioner licence to go: outcall alone is left as it was (3 rows).
+PRACTITIONER_ONLY_LICENCES = {
+    "TATTOO, BODY PIERCING, PRACTITIONER",
+    "GENERAL MASSAGE PRACTITIONER",
+    "OUTCALL MASSAGE SERVICE",
+}
+
 # Encoding of this city's RAW source files, declared rather than inferred.
 # pandas defaults to UTF-8 and raises on anything else - safe, but it leaves
 # the next person to guess, and reaching for latin-1 to silence a

@@ -3,15 +3,14 @@
     python scripts/check_conflict_markers.py                     # every tracked text file
     python scripts/check_conflict_markers.py --file PATH [PATH ...]
 
-WHY THIS FILE EXISTS. On 2026-09-30, on branch kitchener-waterloo,
-`scripts/merge_append_only.py DECISIONS.md` failed on a Windows file lock
-(OSError, Errno 22) and the merge was committed anyway, with `<<<<<<< HEAD`,
-`=======` and `>>>>>>> origin/master` still in DECISIONS.md. The pre-push hook
-passed it 26 of 26: no check read for markers, and `decisions_index.py --check`
-only compares headings to the index, which a conflict leaves intact. It was
-found by eye and removed in 3d93d29. A marker breaks whatever reads the file -
-a Python module will not import, a JSON or CSV will not parse, a doc renders
-both sides - and an append-only log gives no other sign of it.
+WHY. On 2026-09-30 `scripts/merge_append_only.py DECISIONS.md` failed on a
+Windows file lock (OSError, Errno 22) and the merge was committed anyway, with
+`<<<<<<< HEAD`, `=======` and `>>>>>>> origin/master` still in DECISIONS.md
+(removed in 3d93d29). The pre-push hook passed it 26 of 26: no check read for
+markers, and `decisions_index.py --check` only compares headings to the index,
+which a conflict leaves intact. A marker breaks whatever reads the file (a
+Python module will not import, a JSON or CSV will not parse, a doc renders
+both sides), and an append-only log gives no other sign of it.
 
 THE SHAPE. git writes a conflict as a line starting `<<<<<<< ` (ours), an
 optional `||||||| ` (the base, under merge.conflictStyle=diff3), a bare

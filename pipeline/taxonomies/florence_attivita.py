@@ -42,7 +42,7 @@ TYPES = {
     ("commercio", "47.10.0R - ESERCIZIO DI VICINATO"): (R, "Shop"),                       # 7,016
     ("commercio", "47.10.2R - MEDIA STRUTTURA DI VENDITA"): (R, "Medium-sized store"),    # 208
     ("commercio", "47.10.4R - GRANDE STRUTTURA DI VENDITA"): (R, "Large store"),          # 12
-    ("commercio", "CENTRO COMMERCIALE"): (R, "Shopping centre"),                          # 7
+    ("commercio", "CENTRO COMMERCIALE"): (R, "Shopping center"),                          # 7
     ("commercio", "47.10.6R - FORMA SPECIALE (SPACCIO INTERNO)"): (OUT, "internal shop"),  # 128
     ("commercio", "47.91.01R - FORMA SPECIALE (COMMERCIO ELETTRONICO)"): (OUT, "online"),  # 65
     ("commercio", "47.91.01R - FORMA SPECIALE (VENDITA PER CORRISPONDENZA)"): (OUT, "mail order"),  # 7

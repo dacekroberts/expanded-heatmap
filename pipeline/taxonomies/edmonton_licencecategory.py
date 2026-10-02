@@ -2,7 +2,8 @@
 
 WHY EDMONTON IS THE CHEAPEST CANADIAN REGISTER SO FAR
 -----------------------------------------------------
-Two things the other five Canadian candidates make you infer, Edmonton states:
+Two things the other five Canadian candidates leave to inference, Edmonton
+states:
 
 1. **`licencetype` says whether a licence is a premises or a person.**
    `Commercial` (25,105) against `Home Based` (14,114), `Non-Resident`
@@ -48,14 +49,14 @@ SIX JUDGMENT CALLS, FOUR OF THEM SETTLED BY SAMPLING RATHER THAN BY RULE
 ------------------------------------------------------------------------
 The merged-category rule this project uses elsewhere - when one category spans
 in-scope and out-of-scope trades and cannot be split, leave it out, because the
-term nearest the actual trade wins - would have got two of these WRONG. Names
-were sampled instead, and the sample overrode the rule twice.
+term nearest the actual trade wins - gets two of these WRONG. Names were
+sampled instead, and the sample overrode the rule twice.
 
 1. **`General Business` (154) is excluded.** The catch-all, and the one value
-   that says nothing about the business. **Hand-sampled the 111 rows carrying
-   it alone:** parking operators (IMPARK x4, IMPERIAL PARKING, two City Centre
-   parkades), coach and scooter fleets (TRAXX COACHLINES, FIRST STUDENT, BIRD
-   CANADA, LIME), home-care agencies (HOME INSTEAD, CAREPROS, HARMONY
+   that says nothing about the business. **The 111 rows carrying it alone,
+   sampled by hand:** parking operators (IMPARK x4, IMPERIAL PARKING, two City
+   Centre parkades), coach and scooter fleets (TRAXX COACHLINES, FIRST STUDENT,
+   BIRD CANADA, LIME), home-care agencies (HOME INSTEAD, CAREPROS, HARMONY
    CAREGIVING), shelters and churches (EDMONTON WOMEN'S SHELTER, HOPE MISSION),
    daycares (KIDS VILLAGE, BAMBINI) and a market garden (RIVERBEND GARDENS).
    **Zero storefront retail, food or personal services.** Parking is the
@@ -66,8 +67,8 @@ were sampled instead, and the sample overrode the rule twice.
 2. **`Vehicle Wash / Fueling Station` (336) is excluded**, although Vancouver
    counts its `Gas Station` as Retail. Vancouver's category is pure; Edmonton's
    merges a car wash (NAICS 811192, the repair family this project excludes
-   everywhere) with a fuel retailer (NAICS 457, which it counts). **Sampled the
-   40 rows carrying it alone:** A1A CAR WASH, MILLCREEK CAR WASH, MINT
+   everywhere) with a fuel retailer (NAICS 457, which it counts). **The 40 rows
+   carrying it alone:** A1A CAR WASH, MILLCREEK CAR WASH, MINT
    SMARTWASH, CLEAN GETAWAY, KINGSWAY, DUGGAN, MINIT, BLUE SKY, KLARITY, ULTRA
    and a truck wash - against two COSTCO GASOLINE and one AFD PETROLEUM. So the
    part that is genuinely retail is almost never alone: 248 of the 336 also
@@ -87,9 +88,9 @@ were sampled instead, and the sample overrode the rule twice.
    would be an artefact of wording, not a difference in the cities.
 
 4. **The `Health Enhancement` family splits four ways, and only the accredited
-   CENTRE counts.** Edmonton uses one phrase for four different things, and the
-   brief's assumption that all of it was Vancouver's `Health Enhancement
-   Services` did not survive sampling:
+   CENTRE counts.** Edmonton uses one phrase for four different things; the
+   brief assumed all of it was Vancouver's `Health Enhancement Services`, and
+   sampling says otherwise:
 
    - `Health Enhancement Centre (Accredited)` (560) -> **Personal services.**
      **MEASURED** on business names: 34.3% massage, 11.8% spa/nail/hair,
@@ -139,7 +140,7 @@ were sampled instead, and the sample overrode the rule twice.
 Counts are the 2026-09-21 pull, `licencetype == 'Commercial'`, split on `";"`.
 """
 
-FIELD_LABEL = "Licence category"
+FIELD_LABEL = "License category"
 VALUE_COLUMN = "business_licence_category"
 
 # A premises holding several categories gets ONE pin, and this decides its

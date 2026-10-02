@@ -204,6 +204,21 @@ a rule, not before obeying one.
   from one side** - a conflict region is not everything the other side added.
   Run `scripts/decisions_index.py` afterwards. [#merge-append-only]
 
+## Code comments
+
+Neutral voice: no "I", "we" or "you"; short statements of what and why,
+readable by an outsider but useful to whoever changes the code next. Keep
+every measured value, every "re-measure if X changes" warning and every
+pointer to `DECISIONS.md`, `docs/rule_history.md` or a skill. How something
+was found or verified gets one line at most; the full story belongs in the
+decisions log. Never touch dated log text, verbatim licence quotes or any
+string that renders. `scripts/check_provenance.py` is the reference example.
+
+**No em dashes in any comment or docstring**, including CSS/JS comments
+inside strings (`pipeline/map_common.py`'s ship in every committed map, so
+rewording one means re-rendering). Enforced by
+`python scripts/check_no_em_dashes.py`. Visible text is exempt.
+
 ## Commands
 
 ```bash
@@ -227,6 +242,7 @@ python scripts/check_overpass_hosts.py [--live|--selftest]   # every Overpass mi
 python scripts/check_worktree_data.py <worktree> [--list]   # before removing a worktree
 python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
+python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
 python pipeline/name_keys.py "NAME" ["NAME" ...]        # the key to list for a name read as a person's own
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
@@ -244,8 +260,9 @@ node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page
 python scripts/decisions_index.py [--check]
 python scripts/rendered_surfaces.py [--write|--check]   # every surface the app renders -> docs/rendered_surfaces.md
 python scripts/review_lanes.py create --sha <commit> --lanes <n> | list | remove   # review-lane worktrees
-node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name,Name] [--widths ...] [--themes light,dark] [--cdp N]   # one browser; --peak-gb 1.5
+node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name,Name] [--widths ...] [--themes light,dark] [--cdp N]   # one browser; --peak-gb 2.5
 python scripts/prose_proposals.py collate | apply --ids <id,id> | --selftest   # lanes' prose proposals -> the owner's list
+python scripts/proposals_page.py --out <html> --commit <sha> [--sets json]   # the owner's review page for a long proposals list
 python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
 python scripts/heavy_job.py run --label <job> --peak-gb <N> --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory
 python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/

@@ -2,11 +2,11 @@
 
     python scripts/check_conflict_markers_selftest.py
 
-WHY THIS FILE EXISTS. The check is only worth having if it fails on the shape
-that reached a commit on 2026-09-30 (DECISIONS.md with all three markers, see
-the check's docstring) and passes the shapes that merely resemble it - above
-all a Markdown heading underlined with `=======`, which this repository's docs
-are free to use. So each case is a small file with a known answer, checked for
+WHY. The check is only worth having if it fails on the shape that reached a
+commit on 2026-09-30 (DECISIONS.md with all three markers, see the check's
+docstring) and passes the shapes that merely resemble it, above all a Markdown
+heading underlined with `=======`, which this repository's docs are free to
+use. So each case is a small file with a known answer, checked for
 its EXPECTED MESSAGE and not just its exit code; one case splices a conflict
 into a copy of the live DECISIONS.md; and the positive control runs the real
 scope, which must pass.

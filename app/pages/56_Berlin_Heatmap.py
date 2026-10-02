@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.berlin.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,54 +27,15 @@ st.set_page_config(page_title="Berlin Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Berlin")
+render_city_title('Berlin')
 
-st.title("Berlin: commercial density around U-Bahn and S-Bahn station areas")
-
-# Approved by the owner 2026-09-28.
-st.markdown(
-    """
-Twenty-five lines are drawn — **U-Bahn U1 to U9** and the **S-Bahn's sixteen
-lines**, the Ring (S41 and S42) among them — each labelled on the map and in the
-legend, redrawn from the Berlin-Brandenburg transport association's (VBB) own
-timetable geometry. The colours are close to the operators' but not the same:
-several S-Bahn lines share one colour on the official map, and each line here
-needs its own. **The U6 north of Kurt-Schumacher-Platz is closed for
-rebuilding** until about August 2027, so its five stations to Alt-Tegel are not
-drawn. Trams, regional trains and ferries are not drawn.
-
-The map covers the **Land of Berlin**. The S-Bahn runs on into Brandenburg; its
-36 stations there are left out, since the business data stops at the city
-boundary.
-
-Businesses come from the **Berlin Chamber of Industry and Commerce (IHK
-Berlin)**, which publishes its members' business premises as points, each with
-its economic activity. It publishes no names, so each dot is labelled with its
-kind of business. **Craft businesses belong to a different chamber and are not
-in it**: hairdressers, laundries and dry cleaners are almost entirely missing,
-and bakers and butchers are thin, so Personal services shows only part of what
-is on the street — beauty and nail salons, spas, saunas and massage.
-
-**Read the density as a register, not a street survey.** Closures and moves
-reach the register late, and a business can be registered where there is no
-shop — an office, a business centre or a home. General non-food retail, mostly
-traders selling online or at markets, is left off; a web shop that names what it
-sells cannot be told apart from a shop. Against OpenStreetMap at four station
-areas, the register carries about 1.2 to 1.5 times as many restaurants, cafés
-and bars.
-
-**About eight storefronts in ten sit within a station ring.**
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/berlin/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/berlin/provenance.json so they cannot
 # go stale on the next fetch: the register's own monthly date (IHK's last
@@ -92,15 +57,52 @@ if PROVENANCE_JSON.exists():
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
         pass
+
 # A courtesy credit, not a licence condition: CC0 asks for none (owner, 2026-09-28).
 st.caption("Business data: IHK Berlin (CC0).")
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/berlin/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-28; set as bullets 2026-10-01.
+st.markdown(
+    """
+**The lines**
+
+- Twenty-five lines are drawn — **U-Bahn U1 to U9** and the **S-Bahn's sixteen lines**, the Ring
+  (S41 and S42) among them — each labeled on the map and in the legend, redrawn from the
+  Berlin-Brandenburg transport association's (VBB) own timetable geometry.
+- The colors are close to the operators' but not the same: several S-Bahn lines share one color
+  on the official map, and each line here needs its own.
+- **The U6 north of Kurt-Schumacher-Platz is closed for rebuilding** until about August 2027, so
+  its five stations to Alt-Tegel are not drawn.
+- Trams, regional trains and ferries are not drawn.
+- The map covers the **Land of Berlin**. The S-Bahn runs on into Brandenburg; its 36 stations
+  there are left out, since the business data stops at the city boundary.
+
+**The businesses**
+
+- Businesses come from the **Berlin Chamber of Industry and Commerce (IHK Berlin)**, which
+  publishes its members' business premises as points, each with its economic activity.
+- It publishes no names, so each dot is labeled with its kind of business.
+- **Craft businesses belong to a different chamber and are not in it**: hairdressers, laundries
+  and dry cleaners are almost entirely missing, and bakers and butchers are thin. So Personal
+  services shows only part of what is on the street: beauty and nail salons, spas, saunas and
+  massage.
+
+**Reading the map**
+
+- **Read the density as a register, not a street survey.** Closures and moves reach the register
+  late, and a business can be registered where there is no shop — an office, a business center or
+  a home.
+- General non-food retail, mostly traders selling online or at markets, is left off; a web shop
+  that names what it sells cannot be told apart from a shop.
+- Against OpenStreetMap at four station areas, the register carries about 1.2 to 1.5 times as
+  many restaurants, cafés and bars.
+- **About eight storefronts in ten sit within a station ring.**
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Berlin")
+render_country_links('Berlin')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

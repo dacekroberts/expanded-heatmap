@@ -6,7 +6,7 @@ lane works from.
     python scripts/rendered_surfaces.py --check    # fail if that file is stale (check_all)
 
 Lesson 3 of the 2026-09-30 mega-review (docs/review_lanes_2026-09-30.md):
-"list every rendered surface in the lane doc" - the About page renders
+"list every rendered surface in the lane doc". The About page renders
 docs/data_sources/*.md verbatim, no lane's list said so, and a barred brand
 reached it. A hand-kept list goes stale with the next page; this one is
 derived:

@@ -11,7 +11,7 @@ grep held 4.7 GB more. So admission reads available memory, now.
 
     python scripts/heavy_job.py run --label "oslo step 2" --peak-gb 5.4 --session cleanup -- python pipeline/oslo/step2_clean_businesses.py
     python scripts/heavy_job.py status
-    python scripts/heavy_job.py start --label L --peak-gb N --session S --pid P   # a job you cannot wrap
+    python scripts/heavy_job.py start --label L --peak-gb N --session S --pid P   # a job that cannot be wrapped
     python scripts/heavy_job.py end --pid P
     python scripts/heavy_job.py --selftest                                         # touches nothing
 
@@ -24,7 +24,7 @@ measured 0.37 GB (2026-09-30); Oslo's step 2 peaks near 5.4 GB.
 ADMISSION: fewer than MAX_JOBS live entries, and
     available - reserved >= peak + MARGIN_GB
 where `reserved` is each live job's declared peak minus what it already
-holds - a job that has just started has not reached its peak, and without the
+holds: a job that has just started has not reached its peak, and without the
 reservation two jobs started seconds apart would both be admitted and collide.
 An unknown peak is DEFAULT_PEAK_GB, the per-process cap. Refused: exit 3,
 with the status printed so the refused session can see the culprit.
@@ -164,9 +164,9 @@ def status_text(jobs):
 
 
 def admit(label, peak_gb, session, pid, available_gb=None):
-    """`available_gb` is for the selftest only: the live figure otherwise. The
-    selftest once failed while two lanes and a drift check held the machine's
-    memory - it had asked the real machine (review rehearsal, 2026-09-30)."""
+    """`available_gb` is for the selftest only: the live figure otherwise. A
+    selftest that asks the real machine fails whenever other jobs hold its
+    memory (2026-09-30)."""
     ledger, lock, _ = paths()
     with Lock(lock):
         jobs = live(_read(ledger, []))

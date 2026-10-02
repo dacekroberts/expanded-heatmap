@@ -38,6 +38,7 @@ import re
 import shutil
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -153,7 +154,18 @@ def apply(root, ids=None, kind=None):
         raw = path.read_bytes().decode("utf-8")
         crlf = "\r\n" in raw
         text = raw.replace("\r\n", "\n").replace(p["old"], p["new"], 1)
-        path.write_bytes((text.replace("\n", "\r\n") if crlf else text).encode("utf-8"))
+        data = (text.replace("\n", "\r\n") if crlf else text).encode("utf-8")
+        # Windows refuses a write now and then while another process (an
+        # editor, a scanner) holds the file: retry briefly rather than stop
+        # half-applied (2026-10-01, the fixes' first run).
+        for attempt in range(5):
+            try:
+                path.write_bytes(data)
+                break
+            except OSError:
+                if attempt == 4:
+                    raise
+                time.sleep(0.5)
         done.append(p["id"])
     log = review_dir(root) / "applied.json"
     prior = json.loads(log.read_text(encoding="utf-8")) if log.exists() else []

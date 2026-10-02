@@ -98,7 +98,7 @@ KINDS = {
                  "공동탕업+찜질시설서비스영업": "Public bath and jjimjilbang",
                  "한증막업": "Dry sauna (hanjeungmak)"},
     "OA-16096": {"대형마트": "Hypermarket", "백화점": "Department store",
-                 "쇼핑센터": "Shopping centre", "복합쇼핑몰": "Shopping mall",
+                 "쇼핑센터": "Shopping center", "복합쇼핑몰": "Shopping mall",
                  "시장": "Market", "전문점": "Specialist superstore"},
 }
 CONVENIENCE_STORE = "Convenience store"

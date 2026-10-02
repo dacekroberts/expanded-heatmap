@@ -2,9 +2,9 @@
 not NAICS.
 
 Chicago's live-verified business-license source is "Business Licenses"
-(Socrata data.cityofchicago.org, id r5kz-chrr) - full address and lat/long
-confirmed populated, but a catalog-wide search for "NAICS" on that portal
-returned zero results. The real classification fields are
+(Socrata data.cityofchicago.org, id r5kz-chrr): full address and lat/long
+populated, but a catalog-wide search for "NAICS" on that portal returns
+nothing. The real classification fields are
 `license_code`/`license_description` (e.g. "7009 / Pharmaceutical
 Representative") and `business_activity_id`/`business_activity` (e.g.
 "990 / Markets/Promotes Pharmaceuticals..."). See docs/data_sources.md

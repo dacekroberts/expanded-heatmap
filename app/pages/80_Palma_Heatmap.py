@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.palma.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,52 +27,15 @@ st.set_page_config(page_title="Palma Heatmap", page_icon="\U0001f5fa️", layout
 set_base_font()
 
 render_city_nav("Palma")
+render_city_title('Palma')
 
-st.title("Palma: bars, cafés and restaurants around Metro stations")
-
-# Written under the owner's pre-approval of this build's prose (2026-09-30).
-st.markdown(
-    """
-One line is drawn: **Metro M1** of the Metro de Palma, run by Serveis
-Ferroviaris de Mallorca, from Plaça d'Espanya (the Estació Intermodal) to the
-university and ParcBit, redrawn from OpenStreetMap with all 10 of its
-stations, every one inside the municipality. Much of it runs in tunnel.
-**It is not a frequent service**: a train about every 20 minutes on weekdays
-in term time and every 30 to 40 minutes in the holidays, Saturdays until
-mid-afternoon, and none on Sundays. A second metro line to Marratxí no longer
-runs as a metro; SFM's trains to Inca and beyond, and buses, are not drawn.
-
-**This map shows food businesses only.** They come from the Consell de
-Mallorca's register of restaurant and entertainment establishments: bars,
-cafés, restaurants, music bars and nightclubs. No open register of other
-shops or of personal services covers Palma, so clothes shops, hairdressers
-and the like are not on this map. A premises is shown when the register lists
-it as active. Caterers without premises of their own are left out, and so,
-by name, are sports, golf and sailing clubs, cinemas and bingo halls, parish
-and clinic bars, and hotels (a hotel's own named café or restaurant stays). A
-name rule is imperfect.
-
-**About one premises in five could not be placed.** The register gives
-coordinates for about one in eight; the rest are placed at their address,
-matched street and number to the Spanish land registry's address points, or
-at the nearest listed number on the same side of the street. Addresses with
-no street number, and streets the two sources spell differently, are left
-off the map.
-
-**About a third of the placed premises sit within a station ring.** The Metro
-runs north from the centre; the old town, the seafront and the beaches of
-Playa de Palma are beyond its reach.
-
-Concentric ring boundaries and the business layer are toggleable via the
-layer control in the top left. When enabled, business density will display as
-numbered circles summing areas when zoomed out. Zooming in will show
-individual dots; hover over those to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/palma/step3_map.py` to generate it.")
 
 # The register's own last-update date, read from outputs/palma/provenance.json
 # (GOIB's terms require it to be shown).
@@ -84,12 +51,47 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/palma/step3_map.py` to generate it.")
+# Written under the owner's pre-approval of this build's prose (2026-09-30);
+# set as bullets 2026-10-01.
+st.markdown(
+    """
+**The line**
+
+- One line is drawn: **Metro M1** of the Metro de Palma, run by Serveis Ferroviaris de Mallorca,
+  from Plaça d'Espanya (the Estació Intermodal) to the university and ParcBit, redrawn from
+  OpenStreetMap with all 10 of its stations, every one inside the municipality. Much of it runs in
+  tunnel.
+- **It is not a frequent service**: a train about every 20 minutes on weekdays in term time and
+  every 30 to 40 minutes in the holidays, Saturdays until mid-afternoon, and none on Sundays.
+- A second metro line to Marratxí no longer runs as a metro; SFM's trains to Inca and beyond, and
+  buses, are not drawn.
+
+**The businesses**
+
+- **This map shows food businesses only.** They come from the Consell de Mallorca's register of
+  restaurant and entertainment establishments: bars, cafés, restaurants, music bars and nightclubs.
+- No open register of other shops or of personal services covers Palma, so clothes shops,
+  hairdressers and the like are not on this map.
+- A premises is shown when the register lists it as active.
+- Caterers without premises of their own are left out, and so, by name, are sports, golf and
+  sailing clubs, cinemas and bingo halls, parish and clinic bars, and hotels (a hotel's own named
+  café or restaurant stays). A name rule is imperfect.
+
+**Reading the map**
+
+- **About one premises in five could not be placed.** The register gives coordinates for about one
+  in eight; the rest are placed at their address, matched street and number to the Spanish land
+  registry's address points, or at the nearest listed number on the same side of the street.
+- Addresses with no street number, and streets the two sources spell differently, are left off
+  the map.
+- **About a third of the placed premises sit within a station ring.** The Metro runs north from
+  the center; the old town, the seafront and the beaches of Playa de Palma are beyond its reach.
+"""
+)
+
+render_map_help('business layer')
+render_excluded_stations("Palma")
+render_country_links('Palma')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

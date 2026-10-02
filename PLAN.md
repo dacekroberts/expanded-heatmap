@@ -822,6 +822,55 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
+- [ ] **Three code problems found by the comment pass (owner, 2026-10-01: add,
+  do later)**, each its own small change with a drift check of the city it
+  touches:
+  - **Barcelona's closed list is never checked.** The taxonomy enumerates the
+    74 normalised `Nom_Activitat` values of the 2022 census, and
+    `UNMAPPED_IS_AN_ERROR` lists them, but nothing reads it: a value a refresh
+    adds falls through `classify()` and silently leaves the map. Fix: step 2
+    exits naming any active-premises value outside `UNMAPPED_IS_AN_ERROR`
+    (France's NAF module asserts its own list at import the same way).
+  - **Norway's "unmatched by bucket" print reports a row count**
+    (`pipeline/countries/norway_register.py`, about lines 207-211: `str[:1].size`
+    is the number of rows, not a breakdown). Console output only; nothing on
+    the map is wrong. Fix the print to group by bucket.
+  - **`check_deploy_imports.py`'s probe keeps unused code** from its old,
+    self-contained collision model (`_MARKERS`, `_box`, `DEFAULT_OFFSET`,
+    `CHAR_W` / `PAD_W` / `PILL_H`); the probe imports
+    `app/label_competition.py` now. Delete them, and the comment that names
+    them.
+- [ ] **Found by the prose pass's parallel deploy check (2026-10-02), all
+  already on master and not blocking:**
+  - **Map label crowding:** Pittsburgh at 375 and 343 ("PRT Silver Line"
+    touches the collapsed legend, about 6x4 px); Yokohama at 343 (two overlaps,
+    "Tokyu Kodomonokuni Line" x "Tokyu Shin-yokohama Line" about 29x6 px);
+    Osaka at 1000x650 with the legend open ("JR Gakkentoshi Line" runs about
+    14 px under it). Each reproduces with `scripts/check_map_labels.js`; the
+    labels stay legible.
+  - **San Diego's page is thin:** one bullet of its own and no businesses
+    section, against 5-22 elsewhere.
+  - **A step whose output depends on the run date:** Toronto's step 2 drops a
+    license once its Cancel Date has passed, measured against today, and the
+    register publishes future-dated cancellations, so a re-run days later
+    moves the baseline (2026-10-02: 18,218 -> 18,215). Measure against the
+    fetch date instead, or record it (the date fixes item (f) above).
+- [ ] ⏸ **After the prose and UI pass lands (owner, 2026-10-01):**
+  - **The site notices footer**: every city page lists all of the site's
+    numbered notices (82) at its foot, inline for now. The owner wants a later
+    look at how it is presented (a collapsed list, or only the city's own
+    notices with a link to the rest).
+  - **Neutral comments, phase 2: `pipeline/<city>/`** (owner's call; held
+    until the landing and the city-skill rework, so the reworked skills carry
+    the style first). About 25,000 comment and docstring lines in 785 files
+    across 124 city folders; the same kit as phase 1 (agent 1's spec, the
+    comments-only AST verifier, `check_no_em_dashes.py`, a render-only drift
+    check).
+  - **Comments inside the maps' embedded CSS and JS**
+    (`pipeline/map_common.py`'s strings): left out of phase 1 because
+    rewording one changes every committed map, so it needs a full re-render
+    and a drift check at review time.
+
 
 - [ ] ⏰ **Zurich: rebuild after 2026-12-12** (owner, 2026-09-30, call C1): VBZ's
   temporary construction trams 50 and 51 are drawn until then; when they stop,

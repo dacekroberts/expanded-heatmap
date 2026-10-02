@@ -39,8 +39,8 @@ ESTAB_INDICATOR = "COD_INDICADOR_ESTAB_ENDERECO"
 # A WHITELIST, so a level not seen yet is dropped rather than drawn. Levels 1-4
 # put a pin on the right block face at worst; a tract's point is not the
 # premises. São Paulo, 2026-09-24, mapped rows: 98.46 / 0.10 / 0.39 / 1.05% at
-# levels 1-4, and 13 rows (0.01%) at 6 - Rio's brief flagged its 0.2% at 6 as
-# the thing to decide, and this is the decision.
+# levels 1-4, and 13 rows (0.01%) at 6. This settles the 0.2% at level 6 that
+# Rio's brief left to decide.
 COORD_LEVELS_KEEP = ("1", "2", "3", "4")
 
 
@@ -55,8 +55,8 @@ COORD_LEVELS_KEEP = ("1", "2", "3", "4")
 # style.
 
 def address_key(row):
-    """One ADDRESS, as the dwelling test compares it - lifted unchanged from
-    scripts/screen_cnefe.py, whose figures the briefs quote."""
+    """Return one ADDRESS as the dwelling test compares it; identical to
+    scripts/screen_cnefe.py's, whose figures the briefs quote."""
     # Where the door number is blank and the first complement is a LOTE,
     # the lot IS the address (Brasilia names a block, not a door: 98.5%
     # of its "shared with a dwelling" rows had no number, so street +

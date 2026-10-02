@@ -1,4 +1,4 @@
-"""The project's theme palettes - the single source for every colour that is
+"""The project's theme palettes: the single source for every colour that is
 part of the *chrome*, as opposed to the data.
 
 Three places render a theme and they must agree:
@@ -27,17 +27,16 @@ docs/theming.md.
 """
 
 # --- Type -------------------------------------------------------------------
-# One font stack, for the same reason there is one palette: before this, the
-# city maps and the macro map each said `sans-serif` and nothing said what that
-# resolved to.
+# One font stack, for the same reason there is one palette: otherwise the city
+# maps and the macro map each say `sans-serif` and nothing says what that
+# resolves to.
 #
 # **The non-Latin fallbacks are the point.** A bare `sans-serif` leaves the
 # browser to choose, which is fine for Latin text and unreliable for anything
-# else - missing glyphs render as tofu boxes, and a substituted face changes
+# else: missing glyphs render as tofu boxes, and a substituted face changes
 # the line metrics so a tooltip can outgrow its own box. The 2026-09-21 country
 # screen found candidate cities whose business names are Japanese, Korean,
-# Traditional Chinese, Greek, Hebrew, Latvian and Czech, so this stops being
-# hypothetical the moment a non-Latin city is built.
+# Traditional Chinese, Greek, Hebrew, Latvian and Czech.
 #
 # The order matters and is not arbitrary. Browsers fall through **per glyph**,
 # not per string, so the Latin/Greek/Cyrillic faces come first and the CJK
@@ -50,10 +49,10 @@ docs/theming.md.
 # every map but one script's. Han unification puts Chinese and Japanese on the
 # same code points, so whichever CJK face comes first draws EVERY Han
 # character: with Japanese first, Hong Kong's shop signs rendered in Japanese
-# glyph forms (骨 and 直 are the classic cases). They were legible, and to a
-# Hong Kong reader they looked foreign. Cantonese-only characters a Japanese
-# face lacks (嘅, 冇, 啲) fell through to the next face, so one sign could mix
-# two typefaces. Found by Hong Kong's deploy check, 2026-09-24.
+# glyph forms (骨 and 直 are the classic cases), legible but foreign to a Hong
+# Kong reader. Cantonese-only characters a Japanese face lacks (嘅, 冇, 啲) fell
+# through to the next face, so one sign could mix two typefaces (Hong Kong,
+# 2026-09-24).
 #
 # So font_stack(lang) puts the map's own script's faces first among the CJK
 # ones, and the Latin faces stay ahead of all of them (the reason is above).
@@ -102,8 +101,7 @@ FONT_VAR = f"var(--hm-font, {FONT_STACK})"
 # --- Dark: "midnight slate" -------------------------------------------------
 # Cool blue-navy, chosen to sit beside the maps' dark basemap, which is an
 # invert + hue-rotate CSS filter and so renders blue-grey. Contrast figures are
-# measured against DARK["page"], and every one was recomputed rather than taken
-# on trust. See docs/theming.md for the full table.
+# measured against DARK["page"]; see docs/theming.md for the full table.
 DARK = {
     "page": "#0B1220",              # body behind the map
     "surface": "#131C2E",           # legend, controls, tooltip, buttons
@@ -164,16 +162,16 @@ STREAMLIT_DARK = {
 # chosen one. Used by both the city maps (THEME_TOGGLE_HTML) and the macro map
 # (_MACRO_THEME_JS), so the rule is written once.
 #
-# Why read a background colour rather than ask a framework. Streamlit exposes
-# no theme signal at all - no `data-theme` on <html> or <body>, no CSS custom
-# property (checked 2026-09-21). But whichever of System / Light / Dark the
+# Why read a background colour: Streamlit exposes no theme signal at all (no
+# `data-theme` on <html> or <body>, no CSS custom property; checked
+# 2026-09-21). But whichever of System / Light / Dark the
 # visitor picks, the page's own background reflects it, and a map iframe is
 # same-origin with its host, so reading that background detects all three.
 # `prefers-color-scheme` alone would only match the default System case and
 # would be wrong the moment someone picks Light or Dark explicitly.
 #
-# A standalone map has no host to read - `window.parent === window` and its own
-# background is the thing being decided - so it falls back to the OS
+# A standalone map has no host to read (`window.parent === window`, and its own
+# background is the thing being decided), so it falls back to the OS
 # preference.
 #
 # An explicit click always wins over this, and is remembered; see the callers.
@@ -224,7 +222,7 @@ def rgb_list(hex_color, alpha=255):
 def rgba(hex_color, alpha):
     """"#0B1220", 0.8 -> "rgba(11, 18, 32, 0.8)". For the one place a colour
     needs transparency (the map attribution strip), so the page colour is not
-    re-typed as literal channel values the way it used to be."""
+    re-typed as literal channel values."""
     h = hex_color.lstrip("#")
     r, g, b = (int(h[i:i + 2], 16) for i in (0, 2, 4))
     return f"rgba({r}, {g}, {b}, {alpha})"

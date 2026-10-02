@@ -16,6 +16,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.rome.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -24,78 +28,15 @@ st.set_page_config(page_title="Rome Heatmap", page_icon="\U0001f5fa️", layout=
 set_base_font()
 
 render_city_nav("Rome")
+render_city_title('Rome')
 
-st.title("Rome: commercial density around metro, urban rail and tram stations")
-
-# Approved by the owner 2026-09-24, with the Roma-Viterbo urban service drawn
-# on the owner's call the same morning. Tram 8 added 2026-09-27 (the tram
-# rescope), wording approved by the owner.
-st.markdown(
-    """
-Six lines are drawn — **Metro A, B, B1 and C, the Roma–Viterbo railway's urban
-service** from Piazzale Flaminio to Montebello, **and Tram 8** — each labelled on the map
-and in the legend. The metro is in ATAC's colours, with the B1 branch a shade
-lighter than line B so the two stay distinct. The lines and stations are
-OpenStreetMap's, because the data Rome's transport agency publishes comes with a
-condition that it be used for travel information.
-
-Suburban railways are left out of these maps unless, inside the city, they run
-like a metro. The Roma–Viterbo urban service does: its stations are under a
-kilometre apart, a train comes every 10 to 15 minutes, and it serves the
-districts north of Flaminio that no metro line reaches. The Roma–Lido railway
-(Metromare) does not, because its stations are about two kilometres apart and
-its trains come every 15 to 20 minutes, so Ostia and Acilia have no station
-rings. Rome's other trams, the Roma–Viterbo railway beyond Montebello and
-suburban trains are not drawn.
-
-**Tram 8 is drawn** from Casaletto to Piazza Venezia, because it serves
-Monteverde and Trastevere, which no metro line reaches. It is shown as it runs
-most of the time: a longer variant to Porta Maggiore makes about one trip in
-fourteen and is not drawn. Its stops are only a few hundred metres apart, closer
-than the rings are built for, so one stop about every half mile along the line
-is kept, plus both ends. San Francisco's, Amsterdam's and Rotterdam's tram lines
-are thinned the same way. The stops left out are listed in
-`outputs/rome/excluded_stations.csv`.
-
-The map covers the **comune di Roma**, Ostia included. Metro C's last stop,
-Monte Compatri – Pantano, is in a neighbouring comune and is not counted; the
-line is drawn to it.
-
-Businesses come from **Roma Capitale's register of productive activities**
-(SUAP), which records each authorised premises at its own street address, placed
-using Italy's national archive of house numbers (ANNCSU). The register carries
-no business names, so each dot shows what the premises is authorised for and its
-address. About one premises in twenty has an address that could not be matched
-to a house number and is left off. A premises authorised for more than one kind
-of trade, such as a bar that also sells goods, is shown once, under the more
-specific one.
-
-**Read the food-and-drink layer as an upper bound.** The register records no
-closing date, and it lists about 2.7 times as many restaurants, bars and cafés
-as OpenStreetMap maps in the city. The difference is not concentrated in old
-registrations — the oldest premises are the likeliest to match a mapped place —
-so part of it is OpenStreetMap under-mapping Rome's bars and part is recently
-registered premises that may not have opened. The newest register file is from
-**July 2025**. Many workshops record no trade at all and are not shown; of those
-that do, food makers such as pizza-by-the-slice counters and pastry shops count
-as food service, and laundries, nail bars and tattoo studios as personal
-services, while repair shops and garages are left out.
-
-**About three storefronts in five sit within a station ring**, because Rome's rail,
-dense in the centre, leaves much of a very large comune beyond walking distance
-of a station.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/rome/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/rome/provenance.json so they cannot go
 # stale on the next fetch: the SUAP file's own month (in its name, e.g.
@@ -106,6 +47,7 @@ _MESI = {"gennaio": "January", "febbraio": "February", "marzo": "March",
          "aprile": "April", "maggio": "May", "giugno": "June", "luglio": "July",
          "agosto": "August", "settembre": "September", "ottobre": "October",
          "novembre": "November", "dicembre": "December"}
+
 if PROVENANCE_JSON.exists():
     try:
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
@@ -126,12 +68,62 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/rome/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-24, with the Roma-Viterbo urban service drawn
+# on the owner's call the same morning. Tram 8 added 2026-09-27 (the tram
+# rescope), wording approved by the owner; set as bullets 2026-10-01.
+st.markdown(
+    """
+**The lines**
+
+- Six lines are drawn — **Metro A, B, B1 and C, the Roma–Viterbo railway's urban service** from
+  Piazzale Flaminio to Montebello, **and Tram 8** — each labeled on the map and in the legend.
+- The metro is in ATAC's colors, with the B1 branch a shade lighter than line B so the two stay
+  distinct.
+- The lines and stations come from OpenStreetMap, because Rome's transport agency publishes its
+  data on condition that it be used for travel information.
+- Suburban railways are left out of these maps unless, inside the city, they run like a metro. The
+  Roma–Viterbo urban service does: its stations are under a kilometer apart, a train comes every
+  10 to 15 minutes, and it serves the districts north of Flaminio that no metro line reaches.
+- The Roma–Lido railway (Metromare) does not, because its stations are about two kilometers apart
+  and its trains come every 15 to 20 minutes, so Ostia and Acilia have no station rings.
+- Rome's other trams, the Roma–Viterbo railway beyond Montebello and suburban trains are not drawn.
+- **Tram 8 is drawn** from Casaletto to Piazza Venezia, because it serves Monteverde and
+  Trastevere, which no metro line reaches. A longer variant to Porta Maggiore makes about one trip
+  in fourteen and is not drawn.
+- Tram 8's stops are only a few hundred meters apart, closer than the rings are built for, so one
+  stop about every half mile along the line is kept, plus both ends. San Francisco's, Amsterdam's
+  and Rotterdam's tram lines are thinned the same way. The stops left out are listed below.
+- The map covers the **comune di Roma**, Ostia included. Metro C's last stop, Monte Compatri –
+  Pantano, is in a neighboring comune and is not counted; the line is drawn to it.
+
+**The businesses**
+
+- Businesses come from **Roma Capitale's register of productive activities** (SUAP), which records
+  each authorized premises at its own street address, placed using Italy's national archive of
+  house numbers (ANNCSU).
+- The register carries no business names, so each dot shows what the premises is authorized for
+  and its address.
+- About one premises in twenty has an address that could not be matched to a house number and is
+  left off.
+- A premises authorized for more than one kind of trade, such as a bar that also sells goods, is
+  shown once, under the more specific one.
+
+**Reading the map**
+
+- **Read the food-and-drink layer as an upper bound.** The register records no closing date, and
+  it lists about 2.7 times as many restaurants, bars and cafés as OpenStreetMap maps in the city.
+- The difference is not concentrated in old registrations: the oldest premises are the likeliest
+  to match a mapped place. So part of it is OpenStreetMap under-mapping Rome's bars, and part is
+  recently registered premises that may not have opened.
+- The newest register file is from **July 2025**.
+- **About three storefronts in five sit within a station ring**, because Rome's rail, dense in the
+  center, leaves much of a very large comune beyond walking distance of a station.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Rome")
+render_country_links('Rome')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -9,8 +9,8 @@ and a ward far off either way says the join, the list or the scope is wrong
 there. Not a share to publish - the census is 2021 and counts establishments,
 not permits.
 
-LIGHT BY DESIGN: the first attempt (2026-09-28) dissolved each prefecture's
-whole N03 file and died with a MemoryError beside a drift check. This keeps
+LIGHT BY DESIGN: dissolving each prefecture's whole N03 file died with a
+MemoryError beside a drift check (2026-09-28). This keeps
 only the city's own ward polygons (N03_007 in japan.CITIES[slug]["wards"]),
 dissolved per ward, and joins the pins point-in-polygon, one city at a time.
 Still announce it as a heavy job (CLAUDE.md [#memory]).
@@ -79,8 +79,8 @@ def main():
     print(f"control: {japan_official.CENSUS_SOURCE}; {len(census):,} municipalities")
     for slug in sys.argv[1:] or CITIES:
         control(slug, census)
-        # its first version is a suspect in 2026-09-28's second crash: report
-        # the peak, so a heavy run is measured, not assumed light
+        # Report the peak, so a heavy run is measured, not assumed light (an
+        # earlier version is a suspect in 2026-09-28's second crash).
         try:
             import psutil
             print(f"    peak memory so far: {psutil.Process().memory_info().peak_wset / 2 ** 30:.2f} GB")

@@ -14,6 +14,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.los_angeles.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -22,44 +27,41 @@ st.set_page_config(page_title="Los Angeles Heatmap", page_icon="\U0001f5fa️", 
 set_base_font()
 
 render_city_nav("Los Angeles")
+render_city_title('Los Angeles')
 
-st.title("Los Angeles: commercial density around Metro Rail station areas")
-
-st.markdown(
-    """
-Stations are represented by blue dots along LA Metro Rail (the A, B, C, D, E
-and K Lines - each labeled directly on the map and in the legend, in Metro's
-own line colors). Only stations inside the City of Los Angeles are shown:
-the lines also serve Long Beach, Pasadena, Santa Monica and many other
-cities, whose businesses come from separate city registries. The stations
-left out are listed in `outputs/los_angeles/excluded_stations.csv`.
-Concentric ring boundaries and NAICS-coded storefronts are toggleable via
-the layer control in the top left. When enabled, business density will
-display as numbered circles summing areas when zoomed out. Zooming in will
-show individual dots; hover over those to see further details.
-
-Top right: a **Cities** menu and a **Global View** button for moving between
-maps, and a light/dark switch. The map opens in whichever mode the page is
-using; once you pick one, it carries across the other city maps.
-
-Some businesses in the city's registry carry corrupt coordinates, mostly
-recent registrations; these were placed by geocoding their street address
-instead of being dropped. Where a business is registered under a person's
-name alone, with no trade name, or a person's name sits at an apartment or
-other dwelling unit, its dot shows the street address instead.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
-
+# Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/los_angeles/step4_map.py` to generate it.")
+
+render_data_age('Los Angeles')
+
+st.markdown(
+    """
+**The lines**
+
+- Stations are represented by blue dots along LA Metro Rail: the A, B, C, D, E and K Lines, each
+  labeled directly on the map and in the legend, in Metro's own line colors.
+- Only stations inside the City of Los Angeles are shown. The lines also serve Long Beach, Pasadena,
+  Santa Monica and many other cities, whose businesses come from separate city registries.
+- The stations left out are listed below.
+
+**The businesses**
+
+- Some businesses in the city's registry carry corrupt coordinates, mostly recent registrations;
+  these were placed from their street address instead of being dropped.
+- Where a business is registered under a person's name alone, with no trade name, or a person's
+  name sits at an apartment or other dwelling unit, the map shows its street address instead of a
+  name.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Los Angeles")
+render_country_links('Los Angeles')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

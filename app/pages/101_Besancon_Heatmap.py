@@ -19,6 +19,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.besancon.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -27,32 +31,15 @@ st.set_page_config(page_title="Besançon Heatmap", page_icon="\U0001f5fa\ufe0f",
 set_base_font()
 
 render_city_nav("Besançon")
+render_city_title("Besançon")
 
-st.title("Besançon: commercial density around tram stops")
-
-st.markdown(
-    """
-Two Ginko tram lines are drawn, **Tram T1 and Tram T2**, each labelled on the map and in the legend, from the operator's own published timetable feed. Besançon has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
-
-The map covers the **commune of Besançon**. **Tram T1 runs past it**, so two stops beyond the boundary are left out: Chalezeule - Chalezeule and Chalezeule - Marnières in Chalezeule. The line is still drawn to its ends, but those stops get no ring and their businesses are not counted; they are listed in `outputs/besancon/excluded_stations.csv`. Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
-
-Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as Paris, Marseille, Toulouse, Lille and Rennes. About 16% of active establishments here are marked non-diffusible by INSEE, which withholds their name, address and coordinates together, so they never reach this map. Where SIRENE records no shop sign or trading name, the dot shows the address instead.
-
-**Read the density as a register, not a street survey.** SIRENE records where a business is *registered*, and some registered establishments have no customer-facing shopfront; nothing in the data says which. Against OpenStreetMap's mapped restaurants in the commune of Besançon, where the two schemes mean nearly the same thing, this map carries about **1.8 times** as many points.
-
-**Tram stops sit closer together than metro stations**, a median of 360 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps. **About 64% of storefronts sit within a ring.**
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/besancon/step3_map.py` to generate it.")
 
 # The snapshot, read from outputs/besancon/provenance.json rather than
 # hardcoded so it cannot go stale on the next fetch. Licence Ouverte 2.0 asks for the producer and the date of the data.
@@ -89,12 +76,34 @@ st.caption("Business data: Source : Insee, SIRENE"
            + (f" ({_edition} edition)" if _edition else "")
            + " and its geolocation file.")
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/besancon/step3_map.py` to generate it.")
+st.markdown(
+    """
+**The trams**
+
+- Two Ginko tram lines are drawn, **Tram T1 and Tram T2**, each labeled on the map and in the legend, from the operator's own published timetable feed.
+- Besançon has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
+- **Tram stops sit closer together than metro stations**, a median of 360 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
+- The map covers the **commune of Besançon**. **Tram T1 runs past it**, so two stops beyond the boundary are left out: Chalezeule - Chalezeule and Chalezeule - Marnières in Chalezeule.
+- The line is still drawn to its ends, but those stops get no ring and their businesses are not counted; they are listed below.
+- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as most of the French maps do.
+
+**The businesses**
+
+- Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as the other French maps.
+- INSEE withholds the name, address and coordinates of about 16% of active establishments here (those it marks non-diffusible), so they never reach this map.
+- Where SIRENE records no shop sign or trading name, the dot shows the address instead.
+- **About 64% of storefronts sit within a ring.**
+
+**Reading the density**
+
+- **Read the density as a register, not a street survey.** SIRENE records where a business is *registered*, and some registered establishments have no customer-facing shopfront; nothing in the data says which.
+- Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the same way, this map has about **1.8 times** as many in the commune of Besançon as OpenStreetMap does.
+"""
+)
+
+render_map_help("three business categories (Retail, Food service and Personal services)")
+render_excluded_stations("Besançon")
+render_country_links("Besançon")
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -7,9 +7,12 @@ from the city's OWN build: step 1's stations and exclusions, step 2's
     python scripts/france_page.py <slug> --write                 # write the page
 
 Run it after steps 1-3. It overwrites the city's existing page file (found by
-slug, as scaffold_city.py names it). The controls paragraph and the heat caveat
-are Rennes's, verbatim; the transit caption names the feed's producer (the NAP
-dataset's legal owner) and the operator, with the feed window from
+slug, as scaffold_city.py names it). The page follows the city-page format of
+2026-10-01 (owner): title and subtitle, the map, the captions, then the
+template's sentences as bullets under short headings. The controls paragraph
+and the heat caveat are Rennes's, verbatim, now rendered for every city by
+components.render_map_help; the transit caption names the feed's producer (the
+NAP dataset's legal owner) and the operator, with the feed window from
 `provenance.json`; a business caption carries INSEE's « Source : Insee ».
 
 DEPARTURES FROM THE TEMPLATE are only the owner-approved ones (2026-09-30):
@@ -29,7 +32,8 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 SCREEN = ROOT / "data" / "_staging_scratch_2026-09-27" / "second_cities" / "france"
-NUMBERS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six"}
+NUMBERS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven",
+           8: "Eight", 9: "Nine"}
 EPCI_NAMES = {
     "bordeaux": "Bordeaux Métropole", "nantes": "Nantes Métropole",
     "grenoble": "Grenoble-Alpes Métropole", "rouen": "the Métropole Rouen Normandie",
@@ -45,15 +49,9 @@ PRODUCER = {"caen": "Syndicat mixte Atoumod", "rouen": "Syndicat mixte Atoumod",
 # without consent, so the operator's brand never reaches the caption.
 PRODUCER_ONLY = {"bordeaux", "angers"}
 
-CONTROLS = """Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster.\""""
+# The controls sentence's own words for this template; components.render_map_help
+# renders the rest of Rennes's controls paragraph and the heat caveat.
+CATEGORIES = "three business categories (Retail, Food service and Personal services)"
 
 
 def readable(name):
@@ -120,15 +118,16 @@ def measure(cfg):
             "masked_share": facts["masked"] / facts["active"], "excluded": ex}
 
 
-def scope_paragraph(cfg, name, m):
+def scope_bullets(cfg, name, m):
     slug = cfg.OUTPUTS.name
     if cfg.SCOPE == "regional":
         n = len(cfg.EXPECTED_SERVED_COMMUNES)
         verb = "the métro serves" if slug == "rouen" else "the trams serve"
-        return f"The map covers the **{n} communes of {EPCI_NAMES[slug]}** that {verb}."
+        return [f"The map covers the **{NUMBERS.get(n, str(n)).lower()} communes of "
+                f"{EPCI_NAMES[slug]}** that {verb}."]
     text = f"The map covers the **commune of {name}**."
     if not m["excluded"]:
-        return text
+        return [text]
     by_place = {}
     for r in m["excluded"]:
         place = re.sub(r"^in (.*?)(?: \(\d+\))?, outside commune \d+$", r"\1", r["reason"])
@@ -140,20 +139,25 @@ def scope_paragraph(cfg, name, m):
     places = "; ".join(f"{joined(sorted(v))} in {p}" for p, v in by_place.items())
     run = "runs" if len(lines) == 1 else "run"
     one = k == 1
-    return (f"{text} **{names} {run} past it**, so {NUMBERS.get(k, str(k)).lower()} "
-            f"stop{'s' if not one else ''} beyond the boundary {'are' if not one else 'is'} "
-            f"left out: {places}. The line{'s are' if len(lines) != 1 else ' is'} still "
-            f"drawn to {'their' if len(lines) != 1 else 'its'} ends, but "
-            + ("that stop gets no ring and its businesses are not counted; it is listed in "
-               if one else
-               "those stops get no ring and their businesses are not counted; they are "
-               "listed in ")
-            + f"`outputs/{slug}/excluded_stations.csv`. "
-            + ("Its commune's" if one else "Their communes'")
-            + " businesses are in the same national register this map reads, so leaving "
-            + ("it" if one else "them")
-            + " out is a choice rather than a limit of the data: the map keeps to the "
-              "commune, as the other French maps do.")
+    # The stops' list moved from a repository path to the page itself:
+    # components.render_excluded_stations renders outputs/<slug>/excluded_stations.csv
+    # under the bullets (owner, 2026-10-01).
+    return [
+        f"{text} **{names} {run} past it**, so {NUMBERS.get(k, str(k)).lower()} "
+        f"stop{'s' if not one else ''} beyond the boundary {'are' if not one else 'is'} "
+        f"left out: {places}.",
+        f"The line{'s are' if len(lines) != 1 else ' is'} still "
+        f"drawn to {'their' if len(lines) != 1 else 'its'} ends, but "
+        + ("that stop gets no ring and its businesses are not counted; it is listed below."
+           if one else
+           "those stops get no ring and their businesses are not counted; they are "
+           "listed below."),
+        ("Its commune's" if one else "Their communes'")
+        + " businesses are in the same national register this map reads, so leaving "
+        + ("it" if one else "them")
+        + " out is a choice rather than a limit of the data: the map keeps to the "
+          "commune, as most of the French maps do.",
+    ]
 
 
 def source_clause(cfg, n):
@@ -171,49 +175,62 @@ def source_clause(cfg, n):
     return f"{its} stops from {feed} and {its} track from OpenStreetMap"
 
 
-def first_paragraph(cfg, name, operator):
+def first_bullets(cfg, name, operator):
     slug = cfg.OUTPUTS.name
     names = [cfg.LINE_NAMES[k] for k in cfg.LINE_KEYS]
     if slug == "rouen":   # approved departure, owner 2026-09-30
-        return (f"One {operator} line is drawn, **{names[0]}**, labelled on the map and in "
-                f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}. Rouen's métro "
-                f"is a light rail running mostly on the street, so every stop gets rings.")
+        return [f"One {operator} line is drawn, **{names[0]}**, labelled on the map and in "
+                f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}.",
+                "Rouen's métro is a light rail running mostly on the street, so every stop "
+                "gets rings."]
+    rapid = (f"{name} has no metro, so its trams are its rapid transit, as in Riga. Every "
+             f"tram stop here gets rings.")
     if slug == "brest":   # approved departure, owner 2026-09-30
         trams = [cfg.LINE_NAMES[k] for k in cfg.LINE_KEYS if k != "C"]
-        return (f"Two {operator} tram lines and the cable car are drawn, "
+        return [f"Two {operator} tram lines and the cable car are drawn, "
                 f"**{joined(trams + [cfg.LINE_NAMES['C']])}**, each labelled on the map and in "
-                f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}. {name} has no "
-                f"metro: its trams are its rapid transit, as Riga's are, so every tram stop "
-                f"gets rings.")
+                f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}.", rapid]
     n = len(names)
-    return (f"{NUMBERS[n]} {operator} tram line{'s are' if n != 1 else ' is'} drawn, "
+    return [f"{NUMBERS[n]} {operator} tram line{'s are' if n != 1 else ' is'} drawn, "
             f"**{joined(names)}**, {'each ' if n != 1 else ''}labelled on the map and in the "
-            f"legend, {source_clause(cfg, len(cfg.LINE_KEYS))}. {name} has no metro: "
-            f"its trams are its rapid transit, as Riga's are, so every tram stop gets rings.")
+            f"legend, {source_clause(cfg, len(cfg.LINE_KEYS))}.", rapid]
+
+
+def bullets(heading, items):
+    return f"**{heading}**\n\n" + "\n".join(f"- {s}" for s in items)
 
 
 def prose(cfg, name, operator, m):
+    """The approved template's sentences, one or two to a bullet, under three
+    headings (format of 2026-10-01, owner)."""
     share = round(m["masked_share"] * 100)
     stops = "Stops" if cfg.OUTPUTS.name == "rouen" else "Tram stops"
+    lines = "The métro" if cfg.OUTPUTS.name == "rouen" else "The trams"
     return "\n\n".join([
-        first_paragraph(cfg, name, operator),
-        scope_paragraph(cfg, name, m),
-        "Businesses come from **SIRENE**, France's national register of établissements, "
-        "joined to INSEE's geolocation file, the same sources as Paris, Marseille, Toulouse, "
-        f"Lille and Rennes. About {share}% of active establishments here are marked "
-        "non-diffusible by INSEE, which withholds their name, address and coordinates "
-        "together, so they never reach this map. Where SIRENE records no shop sign or trading "
-        "name, the dot shows the address instead.",
-        "**Read the density as a register, not a street survey.** SIRENE records where a "
-        "business is *registered*, and some registered establishments have no customer-facing "
-        "shopfront; nothing in the data says which. Against OpenStreetMap's mapped restaurants "
-        f"in the commune of {name}, where the two schemes mean nearly the same thing, this map "
-        f"carries about **{m['osm_ratio']:.1f} times** as many points.",
-        f"**{stops} sit closer together than metro stations**, a median of "
-        f"{round(m['median_m'] / 10) * 10:,.0f} m here, so the rings are drawn at half the usual "
-        f"size (0.05 to 0.3 mi), as on the other French maps. **About {round(m['in_ring'] * 100)}% "
-        "of storefronts sit within a ring.**",
-        CONTROLS,
+        bullets(lines, [
+            *first_bullets(cfg, name, operator),
+            f"**{stops} sit closer together than metro stations**, a median of "
+            f"{round(m['median_m'] / 10) * 10:,.0f} m here, so the rings are drawn at half "
+            "the usual size (0.05 to 0.3 mi), as on the other French maps.",
+            *scope_bullets(cfg, name, m),
+        ]),
+        bullets("The businesses", [
+            "Businesses come from **SIRENE**, France's national register of établissements, "
+            "joined to INSEE's geolocation file, the same sources as the other French maps.",
+            f"INSEE withholds the name, address and coordinates of about {share}% of active "
+            "establishments here (those it marks non-diffusible), so they never reach this map.",
+            "Where SIRENE records no shop sign or trading name, the dot shows the address "
+            "instead.",
+            f"**About {round(m['in_ring'] * 100)}% of storefronts sit within a ring.**",
+        ]),
+        bullets("Reading the density", [
+            "**Read the density as a register, not a street survey.** SIRENE records where a "
+            "business is *registered*, and some registered establishments have no "
+            "customer-facing shopfront; nothing in the data says which.",
+            f"Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the "
+            f"same way, this map has about **{m['osm_ratio']:.1f} times** as many in the "
+            f"commune of {name} as OpenStreetMap does.",
+        ]),
     ])
 
 
@@ -238,6 +255,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.@@SLUG@@.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -246,14 +267,15 @@ st.set_page_config(page_title="@@DISPLAY@@ Heatmap", page_icon="\\U0001f5fa\\ufe
 set_base_font()
 
 render_city_nav("@@DISPLAY@@")
+render_city_title("@@DISPLAY@@")
 
-st.title("@@DISPLAY@@: commercial density around @@STOPS@@")
-
-st.markdown(
-    """
-@@PROSE@@
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/@@SLUG@@/step3_map.py` to generate it.")
 
 # The snapshot, read from outputs/@@SLUG@@/provenance.json rather than
 # hardcoded so it cannot go stale on the next fetch. @@LICENCE_NOTE@@
@@ -290,12 +312,15 @@ st.caption("Business data: Source : Insee, SIRENE"
            + (f" ({_edition} edition)" if _edition else "")
            + " and its geolocation file.")
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/@@SLUG@@/step3_map.py` to generate it.")
+st.markdown(
+    """
+@@PROSE@@
+"""
+)
+
+render_map_help("@@CATEGORIES@@")
+render_excluded_stations("@@DISPLAY@@")
+render_country_links("@@DISPLAY@@")
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
@@ -342,12 +367,16 @@ def main():
         print(f"===== {display}\n{text}\n\n  caption credit: {credit}\n")
         if not args.write:
             continue
-        pages = sorted((ROOT / "app" / "pages").glob(f"*_{'_'.join(p.capitalize() for p in slug.split('_'))}_Heatmap.py"))
+        # The page number, then the name: a bare "*_Orleans_Heatmap.py" also
+        # matched 135_New_Orleans_Heatmap.py once New Orleans was built.
+        stem = "_".join(p.capitalize() for p in slug.split("_"))
+        pages = sorted(p for p in (ROOT / "app" / "pages").glob(f"*_{stem}_Heatmap.py")
+                       if re.fullmatch(rf"\d+_{stem}_Heatmap\.py", p.name))
         if len(pages) != 1:
             sys.exit(f"{slug}: expected one page file, found {[p.name for p in pages]}")
         page = PAGE
         for k, v in {"DISPLAY": display, "SLUG": slug, "PROSE": text,
-                     "STOPS": "métro stops" if slug == "rouen" else "tram stops",
+                     "CATEGORIES": CATEGORIES,
                      "CREDIT": credit, "LICENCE_NOTE": LICENCE_NOTES[cfg.GTFS_LICENCE]}.items():
             page = page.replace(f"@@{k}@@", v)
         compile(page, str(pages[0]), "exec")

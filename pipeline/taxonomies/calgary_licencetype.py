@@ -4,7 +4,7 @@ project that names premises itself.
 WHY THIS ONE IS EASIER THAN IT LOOKS
 ------------------------------------
 96 categories sounds like Miami's 150 or Surrey's 210, but Calgary does most of
-the classifying for you. It suffixes its own categories with the thing every
+the classifying itself. It suffixes its own categories with the thing every
 other city has to infer:
 
     - PREMISES          a fixed place the public enters
@@ -40,8 +40,9 @@ FIVE JUDGMENT CALLS, EACH MET BEFORE IN THIS PROJECT
 
 2. **`PERSONAL SERVICE (INDEPENDENT CHAIR OPERATOR)` (160) is dropped.** A
    chair renter inside someone else's salon is a person, not a storefront, and
-   counting them double-counts the salon. New York drops its NYS
-   `DOSAERENTER`/`DOSBARSHOPOWNER` split for exactly this reason.
+   counting them double-counts the salon. New York drops its NYS chair
+   renters, `DOSAERENTER` and `DOSBARRENTER`, for exactly this reason (the
+   barber shop owner, `DOSBARSHOPOWNER`, is kept).
 
 3. **`MASSAGE CENTRE (COMMERCIAL)` (917) COUNTS, although Vancouver's
    `Massage Therapy (RMT)` does not.** The difference is real and legal:
@@ -68,7 +69,7 @@ FIVE JUDGMENT CALLS, EACH MET BEFORE IN THIS PROJECT
 Measured 2026-09-21 on all 23,203 rows.
 """
 
-FIELD_LABEL = "Licence type"
+FIELD_LABEL = "License type"
 VALUE_COLUMN = "licencetype"
 
 # A premises holding several categories - 9,136 of 23,203 rows - resolves to

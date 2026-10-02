@@ -2,9 +2,8 @@
 pipeline/<slug>/fetch_sources.py calls main() with its config, and
 drift_check.py never runs it.
 
-Kobe's fetch was copied once, for Osaka, with a per-source URL map; Sapporo
-would have been the third copy (PLAN, "Japan"), so it lives here. What a city
-declares in its config:
+Shared rather than copied per city (PLAN, "Japan"). What a city declares in
+its config:
 
   * SOURCE_FILES  {key: (file, URL, dataset page)} - the city's own lists, one
                   entry per register; SOURCES ({key: file}) and source_csv()
@@ -15,7 +14,7 @@ declares in its config:
   * ISJ_DIR, STATION_OSM_JSON, OSM_BBOX, OUTPUTS, PROVENANCE_JSON;
   * TRAM_OSM_JSON only if N02 draws a tram there: OSM tags its stops
     railway=tram_stop, which the station query does not take (Osaka's Hankai
-    line; Sapporo's streetcar and Tokyo's Arakawa Line will need it).
+    line, Sapporo's streetcar, Tokyo's Arakawa Line).
 
 A file already on disk is kept and recorded, dated by its modification time;
 --force re-downloads. Each file goes into outputs/<slug>/provenance.json

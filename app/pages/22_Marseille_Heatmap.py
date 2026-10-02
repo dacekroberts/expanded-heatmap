@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.marseille.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,57 +27,15 @@ st.set_page_config(page_title="Marseille Heatmap", page_icon="\U0001f5fa\ufe0f",
 set_base_font()
 
 render_city_nav("Marseille")
+render_city_title('Marseille')
 
-st.title("Marseille: commercial density around Métro and Tramway station areas")
-
-st.markdown(
-    """
-Five RTM lines are drawn — **Métro 1 and 2, Tramway 1, 2 and 3** — each
-labelled on the map and in the legend, redrawn from the operator's own
-published geometry.
-
-The map covers the **commune of Marseille**, and unlike most cities here that
-costs it nothing: every station on all five lines falls inside the boundary.
-What the boundary does exclude is a *sixth* rail line in the same feed — the
-tram at Aubagne, a separate town with its own network — and those seven
-stations are listed in `outputs/marseille/excluded_stations.csv`. Two other
-modes are absent by rules this project applies everywhere: the TER regional
-services are commuter rail, and ferries are not rail, though Marseille's
-harbour shuttles are closer to urban transit than that rule usually implies.
-
-Businesses come from **SIRENE**, France's national register of établissements,
-joined to INSEE's separate geolocation file — the same source Paris uses.
-Records INSEE marks non-diffusible are stripped at source, name, address and
-coordinates together, so they never reach this map. **Where SIRENE records no
-shop sign or trading name, the dot shows the establishment's address instead**
-— more than half the dots on this map.
-
-**Read the density as a register, not a street survey.** SIRENE records where a
-business is *registered*, and some registered establishments have no
-customer-facing shopfront — nothing in the data says which. Against
-OpenStreetMap's mapped shops in the same commune this map carries roughly
-**2.6 times** as many points. Part of that is the register; part is that
-OpenStreetMap covers Marseille far less completely than it covers Paris. On
-restaurants, where the two schemes mean nearly the same thing, the gap narrows
-to 1.7× — close to Paris's 1.8×, which is the comparison worth trusting.
-
-**Fewer than six in ten of these storefronts sit within a station ring**, which
-is a fact about the city rather than the data: Marseille's commune is more than
-twice the area of Paris's and its rail network is a fifth the size. The
-category toggles show every storefront; the rings show the share the Métro and
-Tramway actually reach.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/marseille/step3_map.py` to generate it.")
 
 # The snapshot date, read from outputs/marseille/provenance.json rather than
 # hardcoded so it cannot go stale on the next fetch. Marseille's feed DOES
@@ -109,12 +71,50 @@ if PROVENANCE_JSON.exists():
 st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
            " and its geolocation file.")
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/marseille/step3_map.py` to generate it.")
+st.markdown(
+    """
+**The métro and trams**
+
+- Five RTM lines are drawn — **Métro 1 and 2, Tramway 1, 2 and 3** — each labeled on the map and
+  in the legend, redrawn from the operator's own published geometry.
+- The map covers the **commune of Marseille**, and unlike most cities here that costs it nothing:
+  every station on all five lines falls inside the boundary.
+- What the boundary does exclude is a *sixth* rail line in the same feed — the tram at Aubagne, a
+  separate town with its own network — and those seven stations are listed below.
+- Two other modes are absent by rules this project applies everywhere: TER regional trains are
+  commuter rail, and ferries are not rail. Marseille's harbor shuttles are closer to urban
+  transit than that rule usually implies.
+
+**The businesses**
+
+- Businesses come from **SIRENE**, France's national register of établissements, joined to
+  INSEE's separate geolocation file — the same source Paris uses.
+- Records INSEE marks non-diffusible are stripped at source, name, address and coordinates
+  together, so they never reach this map.
+- **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
+  instead** — more than half the dots on this map.
+
+**Reading the density**
+
+- **Read the density as a register, not a street survey.** SIRENE records where a business is
+  *registered*, and some registered establishments have no customer-facing shopfront — nothing in
+  the data says which.
+- Against OpenStreetMap's mapped shops in the same commune this map carries roughly **2.6 times**
+  as many points. Part of that is the register; part is that OpenStreetMap covers Marseille far
+  less completely than it covers Paris.
+- On restaurants, where the two schemes mean nearly the same thing, the gap narrows to 1.7× —
+  close to Paris's 1.8×, which is the comparison worth trusting.
+- **Fewer than six in ten of these storefronts sit within a station ring**, which is a fact about
+  the city rather than the data: Marseille's commune is more than twice the area of Paris's and its
+  rail network is a fifth the size.
+- The category toggles show every storefront; the rings show the share the Métro and Tramway
+  actually reach.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Marseille")
+render_country_links('Marseille')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

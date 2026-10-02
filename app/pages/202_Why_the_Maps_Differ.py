@@ -100,10 +100,10 @@ likely to notice. Each city's page has the details, and the table at the end
 sums up every city in one row.
 
 **Each map counts a different kind of record.** Cities don't all publish the
-same kind of list. Some maps are drawn from a business-licence register, some
+same kind of list. Some maps are drawn from a business-license register, some
 from a street survey or census, some from a national business or tax register,
 and some from permits for particular trades. Hong Kong's, for example, is built
-from food licences alone. Each counts something slightly different (a licence,
+from food licenses alone. Each counts something slightly different (a license,
 a premises, a company), so a denser map is not necessarily a busier city.
 Compare patterns within a city rather than totals between cities.
 
@@ -112,14 +112,14 @@ Retail, Food service and Personal services. Some can't, because the city
 doesn't license that trade or its records can't tell trades apart.
 Philadelphia and Boston have no Personal services layer. Amsterdam, Rotterdam
 and Riga merge Retail and Personal services into one "Shops and services"
-layer. In Japan, where only food shops need a licence, the shop layer holds
+layer. In Japan, where only food shops need a license, the shop layer holds
 food shops alone. A missing or thin layer is a gap in the records, not a quiet
 street.
 
 **Suburban trains appear on only a few maps.** Most maps draw metro-type lines
 and leave commuter rail off. A commuter line is included where, inside the
 city, it works like a metro: stations close together, frequent trains, and
-neighbourhoods no metro reaches. Dublin's DART and Copenhagen's S-tog are drawn
+neighborhoods no metro reaches. Dublin's DART and Copenhagen's S-tog are drawn
 for that reason; Paris's RER is not. The Japanese maps draw their JR and
 private railways as well.
 
@@ -131,14 +131,14 @@ differently, so tram lines are the least consistent part of the rail layer.
 
 **Some maps cover one city, others a region.** Most maps stop at the city
 boundary. Stations beyond it are drawn on their line but get no rings, because
-the business records stop there too. Maps labelled "(Regional)" cover several
+the business records stop there too. Maps labeled "(Regional)" cover several
 municipalities that share one register or one network, such as Miami-Dade
 County, or Taipei with New Taipei. Tokyo is a special case: its rail is drawn
 across all 23 wards, but only some wards publish usable data, and stations in
 the others are drawn hollow.
 
 **Some cities have half-size rings.** Where stations are only a few hundred
-metres apart, as in Paris, New York or Oslo, the rings are drawn at half the
+meters apart, as in Paris, New York or Oslo, the rings are drawn at half the
 usual size so they don't swallow the next station. The pin counts in those
 maps' layer menus cover a smaller area and don't compare with other cities'
 counts.
@@ -150,7 +150,7 @@ st.markdown(
 **How much of a city's storefronts lie near a station varies widely.** Each
 page gives the share of the city's storefronts that fall inside its rings.
 Across the site it runs from {share_range}. A high share can mean the rail
-network reaches most of the city, or that the source covers mainly the centre.
+network reaches most of the city, or that the source covers mainly the center.
 A low one means much of the city's commerce is far from rail. The share
 describes the city and its data, not how good its transit is.
 """
@@ -197,8 +197,9 @@ scroll_table(cols,
                else r[c] for c in cols] for r in rows],
              right=("Storefronts near a station",), min_width=760)
 st.caption(
-    "\"Trams\" includes light rail. \"Retail thin\" or \"Personal services thin\" "
-    "means that layer holds only part of its trades, such as the ones the city "
+    "\"Trams\" includes light rail. \"Retail thin\", \"Food service thin\" or "
+    "\"Personal services thin\" means that layer holds only part of its trades, "
+    "such as the ones the city "
     "licenses. \"Storefronts near a station\" is the "
     "share of the map's storefronts inside its station rings."
 )

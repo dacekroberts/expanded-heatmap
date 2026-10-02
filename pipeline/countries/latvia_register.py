@@ -1,11 +1,11 @@
 """Latvia's step 2, shared: food service from VID's excise register, shops and
 services from VZD's cadastre premise groups (Riga's two layers).
 
-Lifted from Riga's step 2 for the tram kit's second and third Latvian cities,
-Liepāja and Daugavpils (the tram-city skill, section 4). Riga's step 2 is now
-a thin call into this module, and the control is that Riga's output does not
-move: `scripts/latvia_register_control.py` builds Riga's frame here and
-compares it, row for row, with Riga's committed `businesses_clean.csv`.
+Lifted from Riga's step 2 for Liepāja and Daugavpils (the tram-city skill,
+section 4); Riga's step 2 is a thin call into this module. The control is that
+Riga's output does not move: `scripts/latvia_register_control.py` builds Riga's
+frame here and compares it, row for row, with Riga's committed
+`businesses_clean.csv`.
 
 THE CLASSIFICATION STAYS IN RIGA'S CONFIG. The excise columns, the food
 pattern and the cadastre's name rules (NAME_RULES, NAME_KEEP, NAME_KIND) are
@@ -267,8 +267,8 @@ def combine(cfg, layers, city_poly):
 
 
 def utf8_console():
-    """A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    Latvian letters. UTF-8 regardless of the console."""
+    """Write stdout and stderr as UTF-8: a Windows console defaults to cp1252
+    and raises UnicodeEncodeError on Latvian letters."""
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

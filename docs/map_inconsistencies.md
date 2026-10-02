@@ -656,30 +656,30 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 |---|---|---|---|---|---|
 | **United States** | | | | | |
 | San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 551 / 598 | Undercount: neighbourhoods registered under own name (PLAN) |
-| San Francisco | Licence register | Registered Business Locations | NAICS | 5,065 / 4,591 / 2,132 | Floor: about 37% of rows have NAICS (DEC) |
+| San Francisco | License register | Registered Business Locations | NAICS | 5,038 / 4,591 / 2,091 | Floor: about 37% of rows have NAICS (DEC) |
 | Los Angeles | Tax register | Listing of Active Businesses | NAICS | 8,069 / 3,817 / 2,014 | Floor: about 9% of rows lack NAICS (DEC) |
-| Chicago | Licence register | Business Licenses | Own licence types | 5,476 / 4,196 / 2,049 | — |
+| Chicago | License register | Business Licenses | Own licence types | 5,476 / 4,196 / 2,049 | — |
 | New York | 4 activity registers | DOHMH, NYS food stores, NYS salons, DCWP | Per-source dispatch | 14,822 / 22,060 / 7,478 | Retail thin |
-| Philadelphia | Licence register (activities) | L&I Business Licenses | Own licence types | 770 / 4,081 / — | No Personal services; Retail = food retail |
+| Philadelphia | License register (activities) | L&I Business Licenses | Own licence types | 770 / 4,081 / — | No Personal services; Retail = food retail |
 | Miami (Regional) | Tax register | Local Business Tax (county) | Own CATGRYNAME (NAICS column empty) | 1,961 / 1,215 / 557 | Repair and service premises under-counted |
 | Boston | 3 activity registers | Food inspections, Licensing Board, cannabis | Per-source dispatch | 530 / 1,880 / — | No Personal services; Retail = food, package, cannabis |
-| Washington D.C. | Licence register | Basic Business License | Own BUSINESSACTIVITY | 899 / 2,603 / 345 | "Delicatessen" (1,065) ambiguous, counted as Food |
+| Washington D.C. | License register | Basic Business License | Own BUSINESSACTIVITY | 899 / 2,603 / 345 | "Delicatessen" (1,065) ambiguous, counted as Food |
 | Buffalo | 3 activity registers | City Business Licenses, NYS food stores, NYS salons | Per-source dispatch | 113 / 188 / 75 | Retail thin |
 | Sacramento | Tax register | Business Operation Tax Information | Own Business_Description | 625 / 510 / 243 | — |
 | Houston | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 1,077 / 1,052 / 94 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | Minneapolis | Food hygiene register | City of Minneapolis Food Inspections, one row per violation | Its own FacilityCategory, plus a name test | 115 / 526 / — | No Personal services; Retail = food shops only ("Grocery and food shops") |
 | Pittsburgh | Food hygiene register | Allegheny County Health Department's Geocoded Food Facilities (as of 2025), one row per facility | Its own category_cd, plus a name test | 48 / 268 / — | No Personal services; Retail = food shops only ("Food-selling shops") |
 | Dallas | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 2,501 / 1,492 / 204 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
-| Kansas City | Licence register | KCMO Business License Holders (frozen 2026-01-15) | NAICS (2022 titles mapped to codes) | 273 / 52 / 126 | Food service thin: about 175 restaurants and bars in the whole register; 1,095 fee-code licences unclassifiable |
-| Tucson | Licence register | City of Tucson BUSLIC (active licences, rebuilt daily) | NAICS | 125 / 149 / 66 | Not a complete listing, in the City's own words |
-| New Orleans | Licence register | City of New Orleans Active Occupational Licenses (daily, CC0) | Own text taxonomy, mapped to NAICS codes | 935 / 978 / 218 | Personal services thin |
+| Kansas City | License register | KCMO Business License Holders (frozen 2026-01-15) | NAICS (2022 titles mapped to codes) | 273 / 52 / 126 | Food service thin: about 175 restaurants and bars in the whole register; 1,095 fee-code licences unclassifiable |
+| Tucson | License register | City of Tucson BUSLIC (active licences, rebuilt daily) | NAICS | 125 / 149 / 66 | Not a complete listing, in the City's own words |
+| New Orleans | License register | City of New Orleans Active Occupational Licenses (daily, CC0) | Own text taxonomy, mapped to NAICS codes | 935 / 978 / 218 | Personal services thin |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
-| Calgary | Licence register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
-| Edmonton | Licence register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
+| Calgary | License register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
+| Edmonton | License register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
 | Kitchener–Waterloo (Regional) | Health inspection register | Region of Waterloo Public Health's food and personal-services inspection layers, typed from its bulk tables | Its own inspection types (SUBCATEGORY), plus a name test | 143 / 545 / 177 | Retail = food shops only ("Food shops"); no general-retail register |
-| Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,474 / 1,950 | Retail = regulated slice only |
+| Toronto | License register | MLS licences | Own MLS category | 328 / 6,471 / 1,950 | Retail = regulated slice only |
 | Ottawa | Food hygiene register | Ottawa Public Health's food-safety inspection data (LIVES), one record per premises | None: a premises kind from the name | — / 1,586 / — | No Personal services; no Retail layer: food shops sit inside the one layer, labelled "Restaurants and food shops" |
 | **Mexico** | | | | | |
 | Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,798 / 12,018 | Street stalls excluded |
@@ -688,7 +688,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Spain** | | | | | |
 | Madrid | Premises census | Censo de locales | Own epígrafe | 26,197 / 15,171 / 8,032 | — |
 | Barcelona | Street survey (2022) | Cens de locals en planta baixa | Own 4-level scheme (finest level) | 20,287 / 9,976 / 5,673 | 458 mixed retail/wholesale rows dropped |
-| Palma | Licence register | The Consell de Mallorca's register of restaurant and entertainment establishments (GOIB catalogue) | Its own types (Grup), plus a name test | — / 1,187 / — | No Retail; No Personal services |
+| Palma | License register | The Consell de Mallorca's register of restaurant and entertainment establishments (GOIB catalogue) | Its own types (Grup), plus a name test | — / 1,187 / — | No Retail; No Personal services |
 | **Ireland** | | | | | |
 | Dublin | Property register | Rateable valuation list | Register's own "Uses" | 5,225 / 1,703 / 532 | — |
 | **Italy** | | | | | |
@@ -757,7 +757,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Recife (Regional) | | | | 6,547 / 2,058 / 1,753 | about 4 in 10 |
 | Santos (Regional) | | | | 3,113 / 1,482 / 790 | almost 4 in 10 |
 | **Hong Kong** | | | | | |
-| Hong Kong | Licence registers (food premises) | FEHD licence registers | Local (licence type) | Food service 15,833 / Food shops 3,408 / Bathhouses 34 | No general retail or personal services: FEHD does not license them |
+| Hong Kong | License registers (food premises) | FEHD licence registers | Local (licence type) | Food service 15,833 / Food shops 3,408 / Bathhouses 34 | No general retail or personal services: FEHD does not license them |
 | **Latvia** | | | | | |
 | Riga | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 4,027 / Food 1,214 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
 | Liepāja | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 397 / Food 92 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
@@ -801,7 +801,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,769 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 | **Switzerland** | | | | | |
-| Zurich | Licence register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
+| Zurich | License register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -809,7 +809,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 |---|---|---|---|
 | **United States** | | | |
 | San Diego | Source coordinates (98.4% populated) | None on page | Nonstore 454, parking (project-wide) |
-| San Francisco | Source point | Surface stops thinned | 812990 "solo massage" |
+| San Francisco | Source point | Surface stops thinned | 812990 "solo massage"; individual practitioner licences (tattoo, massage), 2026-10-01 |
 | Los Angeles | Source + Census geocoder for corrupt points (98.7% recovered) | Corrupt coordinates geocoded | 812990 catch-all (30.7% of storefronts) |
 | Chicago | Source coordinates | Licences without coordinates left off | Home-based, peddlers, endorsements, Limited Business |
 | New York | Source + Census geocoder (582 of 1,449 recovered; 1.4% lost) | Retail thin; possible double counts | Person-held licences, contractors, chair renters |

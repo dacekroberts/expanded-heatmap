@@ -17,7 +17,7 @@ tooltip shows Vancouver's "Limited Service Food Establishment" or Surrey's
 HOW THE BUCKETS WERE DECIDED
 ----------------------------
 Not invented here. Anchored on `naics.py`, so this city stays comparable with
-the five NAICS cities rather than drawing its own line:
+the NAICS cities rather than drawing its own line:
 
     Retail             NAICS 44-45, LESS 454 "nonstore retailers"
     Food service       NAICS 722
@@ -31,12 +31,11 @@ entertainment/recreation (71), accommodation (721), wholesale (42),
 manufacturing (31-33), construction (23), transport (48-49), administrative
 support (56), and repair and maintenance (811).
 
-That last one is worth naming because it is counter-intuitive and it is
-consistent: NAICS puts **repair** in 811 and **personal care** in 812, and
-only 812 is a bucket here. So a hairdresser counts and a shoe repairer does
-not; Surrey's Tailor, Dressmaker, Upholstery, Locksmith, Sharpening Service
-and Repair Service are all None, matching Vancouver's own "General Repair and
-Maintenance".
+The last is counter-intuitive but consistent: NAICS puts **repair** in 811
+and **personal care** in 812, and only 812 is a bucket here. So a hairdresser
+counts and a shoe repairer does not; Surrey's Tailor, Dressmaker, Upholstery,
+Locksmith, Sharpening Service and Repair Service are all None, matching
+Vancouver's own "General Repair and Maintenance".
 
 FIVE JUDGMENT CALLS, RECORDED RATHER THAN BURIED
 ------------------------------------------------

@@ -53,6 +53,7 @@ CHECKS = [
     ["scripts/check_map_markup.py"],
     ["scripts/check_master_list_counts.py"],
     ["scripts/check_master_list_counts_selftest.py"],
+    ["scripts/check_no_em_dashes.py"],
     ["scripts/check_name_keys.py"],
     ["scripts/check_name_keys.py", "--selftest"],
     ["pipeline/name_keys.py", "--selftest"],
@@ -75,6 +76,7 @@ CHECKS = [
     ["scripts/readme_cities.py", "--check"],
     ["scripts/rendered_surfaces.py", "--check"],
     ["scripts/prose_proposals.py", "--selftest"],
+    ["scripts/proposals_page.py", "--selftest"],
     ["scripts/archive_decisions_selftest.py"],
 ]
 

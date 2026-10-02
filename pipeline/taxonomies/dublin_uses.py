@@ -12,11 +12,11 @@ WHY SEGMENTS AND NOT WHOLE STRINGS. `Uses` is multi-valued: comma-separated,
 with `-` as a null placeholder ("SHOP, -", "-, RESTAURANT", "STORE, YARD").
 963 distinct strings reduce to **318 distinct segments**, and mapping segments
 means a combination this project has never seen still classifies. 1,869 rows
-carry two real uses, confirmed against `ValuationReport` - "STORE, YARD"
-resolves to floors STORE and YARD - so these are genuine mixed-use premises,
-not a formatting artefact.
+carry two real uses; in `ValuationReport`, "STORE, YARD" resolves to floors
+STORE and YARD, so these are genuine mixed-use premises, not a formatting
+artefact.
 
-BUCKET BOUNDARIES ARE NAICS', NOT THIS MODULE'S. The twelve NAICS and
+BUCKET BOUNDARIES ARE NAICS', NOT THIS MODULE'S. The NAICS and
 NAICS-like cities use Retail = 44/45, Food service = 722, Personal services =
 812, so Dublin follows the same lines rather than inventing its own. Every
 judgment call where the Irish vocabulary does not map cleanly is named below,
@@ -219,11 +219,10 @@ def display_value(value):
     defines one and falls back to the raw column otherwise.
 
     The register stores a fixed number of use slots per premises and fills the
-    unused ones with `-`, so the raw string reads "-, SHOP". `_segments()` has
-    dropped that placeholder for CLASSIFICATION since this city was built; the
-    tooltip was showing the raw column and therefore the placeholder.
-    Measured on the committed map 2026-09-22: **6,750 of 7,595 pins (88.9%)
-    displayed a `-` segment**, and **none was entirely blank**, which is why
+    unused ones with `-`, so the raw string reads "-, SHOP". `_segments()`
+    drops that placeholder for CLASSIFICATION; this drops it for the tooltip.
+    On the committed map of 2026-09-22, **6,750 of 7,595 pins (88.9%)
+    displayed a `-` segment** and **none was entirely blank**, which is why
     the placeholder can be dropped outright rather than merely sorted last.
 
     Falls back to the raw value if nothing survives, rather than rendering an

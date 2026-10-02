@@ -10,16 +10,16 @@ WHY. On 2026-09-24 merging Rome's branch with master FUSED two cities'
 appended `app/cities.py` entries into ONE dict: the conflict region held only
 each entry's interior, so resolving it dropped the `}, {` between them.
 Rome's keys silently overwrote Amsterdam's. The file parsed, the app loaded,
-and the site listed 29 cities with no Amsterdam - no error anywhere. The build
-session caught it by counting (DECISIONS.md, "Rome: the page text written,
-notices 36 and 37, merged with Amsterdam").
+and the site listed 29 cities with no Amsterdam, with no error anywhere
+(DECISIONS.md, "Rome: the page text written, notices 36 and 37, merged with
+Amsterdam").
 
 TWO TESTS, because the failure has two faces:
 
   1. DUPLICATE KEYS in any dict literal in the file. A fused entry has two
      "name"s and two "page"s, and Python keeps the last without a word. This
      is read from the SOURCE (ast), because once the module is imported the
-     duplicate is already gone - which is the whole problem.
+     duplicate is already gone.
   2. PAGES <-> ENTRIES. Every app/pages/*_Heatmap.py is referenced by exactly
      one CITIES entry's "page", every entry's "page" exists, and no two entries
      share a name. A fused merge leaves one page with no entry.
@@ -71,10 +71,9 @@ def city_entries(tree):
 
 
 def field(entry, name):
-    """The value PYTHON would see: the LAST occurrence of a repeated key. The
-    first control read the first occurrence and reported Rome's page as the
-    orphan, when in the real merge Rome overwrote Amsterdam and Amsterdam
-    was the city that vanished."""
+    """The value PYTHON would see: the LAST occurrence of a repeated key.
+    Reading the first occurrence reports the wrong city as the orphan: in the
+    real merge Rome overwrote Amsterdam, and Amsterdam vanished."""
     found = None
     for k, v in zip(entry.keys, entry.values):
         if k is not None and literal_key(k) == name:

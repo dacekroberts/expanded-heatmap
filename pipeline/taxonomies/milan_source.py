@@ -45,13 +45,13 @@ SOURCE_BUCKETS = {
 
 # --- the tooltip's activity line -------------------------------------------
 #
-# WHY RULES AND NOT A REGEX. The first version normalised case and split
-# concatenations with a `(?<=[a-z])(?=[A-Z])` seam, and it failed three ways at
-# once on real values: `non alimentare` / `Non Alimentare` / `Alimentare`
-# survived as three labels because only ALL-CAPS was being folded;
-# `alimentarenon alimentare` has a lower-to-lower seam so it was never split;
-# and `BAR CAFFTavola fredda` has an upper-to-upper one. The vocabulary is
-# small and bounded per register, so it is written out instead of guessed at.
+# WHY RULES AND NOT A REGEX. Normalising case and splitting concatenations at a
+# `(?<=[a-z])(?=[A-Z])` seam fails three ways on real values: `non alimentare`
+# / `Non Alimentare` / `Alimentare` survive as three labels when only ALL-CAPS
+# is folded; `alimentarenon alimentare` has a lower-to-lower seam, so it is
+# never split; and `BAR CAFFTavola fredda` has an upper-to-upper one. The
+# vocabulary is small and bounded per register, so it is written out instead
+# of guessed at.
 #
 # Order matters - first match wins - so the more specific pattern comes first.
 # Anything unmatched falls back to the register's own name, which is always

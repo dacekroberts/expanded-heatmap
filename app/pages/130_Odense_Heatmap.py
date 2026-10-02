@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.odense.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,56 +27,15 @@ st.set_page_config(page_title="Odense Heatmap", page_icon="\U0001f5fa️", layou
 set_base_font()
 
 render_city_nav("Odense")
+render_city_title('Odense')
 
-st.title("Odense: commercial density around Odense Letbane tram stops")
-
-# The tram-city skill's page-text template, approved by the owner word for
-# word on 2026-09-30, filled from Odense's own step 1 and step 2 figures; the
-# business paragraphs are Aarhus's, the template city for CVR.
-st.markdown(
-    """
-One tram line is drawn, **Odense Letbane**, labelled on the map and in the
-legend, redrawn from OpenStreetMap's route geometry, in a colour this project
-chose, since the source records none. Odense has no metro: its tram is its
-rapid transit, as Riga's trams are, so every tram stop gets rings. Buses and
-regional trains are not drawn.
-
-The map covers the **municipality of Odense**.
-
-Businesses come from Denmark's **Central Business Register** (Det Centrale
-Virksomhedsregister, CVR), and specifically from its production units: each
-place where a business operates, recorded at that place's own address rather
-than its company's. Each is placed at its address in Denmark's official
-address register, Danmarks Adresseregister, using the address points
-OpenStreetMap carries for it. **Where a business is owned personally (a sole
-proprietorship, a partnership or any business whose registered name marks it
-as one person's), the map shows its address instead of its name**, because
-such businesses are usually registered under the owners' own names. So does a
-supermarket registered under its franchisee's own name.
-
-**Read the density as a register, not a street survey.** Some premises are
-newly registered and may not have opened yet. Denmark's classification files a
-web shop under the goods it sells, so some dots are businesses with no shop a
-passer-by could walk into, and nothing in the data says which. One catch-all
-category, *other personal services*, is left out, because most of it is people
-working from their own premises; it also holds the city's tattoo studios, which
-are therefore missing from the map. About 2% of premises cannot be placed.
-
-**Tram stops sit closer together than metro stations**, a median of 430 m
-here, so the rings are drawn at half the usual size (0.05 to 0.3 mi). **About
-two storefronts in five sit within a ring.**
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/odense/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/odense/provenance.json so they cannot
 # go stale: the CVR weekly generation the join was built on (the national
@@ -96,12 +59,51 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/odense/step3_map.py` to generate it.")
+# The tram-city skill's page-text template, approved by the owner word for
+# word on 2026-09-30, filled from Odense's own step 1 and step 2 figures; the
+# business paragraphs are Aarhus's, the template city for CVR; set as bullets
+# 2026-10-01.
+st.markdown(
+    """
+**The tram**
+
+- One tram line is drawn, **Odense Letbane**, labeled on the map and in the legend, redrawn from
+  OpenStreetMap's route geometry, in a color this project chose, since the source records none.
+- Buses and regional trains are not drawn.
+- Odense has no metro, so its tram is its rapid transit, as in Riga. Every tram stop here gets
+  rings.
+- **Tram stops sit closer together than metro stations**, a median of 430 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
+- The map covers the **municipality of Odense**.
+
+**The businesses**
+
+- Businesses come from Denmark's **Central Business Register** (Det Centrale
+  Virksomhedsregister, CVR), and specifically from its production units: each place where a
+  business operates, recorded at that place's own address rather than its company's.
+- Each is placed at its address in Denmark's official address register, Danmarks
+  Adresseregister, using the address points OpenStreetMap carries for it.
+- **Where a business is owned personally (a sole proprietorship, a partnership or any business
+  whose registered name marks it as one person's), the map shows its address instead of its
+  name**, because such businesses are usually registered under the owners' own names. So does a
+  supermarket registered under its franchisee's own name.
+- One broad category, *other personal services*, is left out, because most of it is people
+  working from their own premises; it also holds the city's tattoo studios, which are therefore
+  missing from the map.
+- **About two storefronts in five sit within a ring.**
+
+**Reading the density**
+
+- **Read the density as a register, not a street survey.** Some premises are newly registered and
+  may not have opened yet.
+- Denmark's classification files a web shop under the goods it sells, so some dots are businesses
+  with no shop a passer-by could walk into, and nothing in the data says which.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Odense")
+render_country_links('Odense')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

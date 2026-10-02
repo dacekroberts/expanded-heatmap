@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.toulouse.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,63 +27,15 @@ st.set_page_config(page_title="Toulouse Heatmap", page_icon="\U0001f5fa️", lay
 set_base_font()
 
 render_city_nav("Toulouse")
+render_city_title('Toulouse')
 
-st.title("Toulouse: commercial density around Métro, Tramway and Téléo station areas")
-
-st.markdown(
-    """
-Four Tisséo lines are drawn — **Métro A and B, Tramway T1, and Téléo** — each
-labelled on the map and in the legend, redrawn from the operator's own
-published geometry.
-
-**Téléo is a cable car**, and it is the first thing on this site that is not a
-train. It is drawn because Tisséo runs and tickets it exactly as it does the
-métro, because it crosses the Garonne where no other line does, and because one
-of its three stations is a Métro B interchange. It is an ordinary part of this
-network rather than a curiosity attached to it.
-
-The map covers the **commune of Toulouse**, and here that costs something real.
-Métro A loses one station and Métro B one; **Tramway T1 loses twelve of its
-twenty-five** — the whole branch out through Blagnac and Beauzelle, the Airbus
-works and the exhibition centre with it. All fourteen are listed in
-`outputs/toulouse/excluded_stations.csv`. Blagnac's businesses are in the
-same national register this map reads, so leaving them out is a choice rather
-than a limit of the data: the map keeps to the commune so that Toulouse can be
-read alongside Paris and Marseille on the same terms.
-
-Businesses come from **SIRENE**, France's national register of établissements,
-joined to INSEE's separate geolocation file — the same two sources Paris and
-Marseille use. **Toulouse withholds more than either of them.** INSEE marks
-roughly one active establishment in five here as non-diffusible and strips the
-name, the address and the coordinates together, so those never reach this map
-at all. Where a street looks thin, it may be a quiet street or it may be a
-private one, and nothing in the data distinguishes them. **Where SIRENE records
-no shop sign or trading name, the dot shows the establishment's address
-instead** — about half the dots on this map.
-
-**Read the density as a register, not a street survey.** SIRENE records where a
-business is *registered*, and some registered establishments have no
-customer-facing shopfront — nothing in the data says which. Against
-OpenStreetMap's mapped restaurants in the same commune, where the two schemes
-mean nearly the same thing, this map carries about **1.3 times** as many
-points. That is the closest of the three French cities: Paris runs 1.8× and
-Marseille 1.7×, and part of the difference here is simply the masking above.
-
-**About two storefronts in three sit within a station ring.** The category
-toggles show every storefront; the rings show the share the four lines actually
-reach.
-
-Concentric ring boundaries and the three business categories (Retail, Food
-service and Personal services) are toggleable via the layer control in the top
-left. When enabled, business density will display as numbered circles summing
-areas when zoomed out. Zooming in will show individual dots; hover over those
-to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a
-statistical density estimate, so read the colour as "roughly where things
-cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/toulouse/step3_map.py` to generate it.")
 
 # The snapshot date, read from outputs/toulouse/provenance.json rather than
 # hardcoded so it cannot go stale on the next fetch.
@@ -117,12 +73,51 @@ if PROVENANCE_JSON.exists():
 st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
            " and its geolocation file.")
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/toulouse/step3_map.py` to generate it.")
+st.markdown(
+    """
+**The network**
+
+- Four Tisséo lines are drawn — **Métro A and B, Tramway T1, and Téléo** — each labeled on the
+  map and in the legend, redrawn from the operator's own published geometry.
+- **Téléo is a cable car**, and it is the first thing on this site that is not a train. It is
+  drawn because Tisséo runs and tickets it as it does the métro, it crosses the Garonne where no
+  other line does, and one of its three stations is a Métro B interchange.
+- The map covers the **commune of Toulouse**, and here that costs something real. Métro A loses
+  one station and Métro B one; **Tramway T1 loses twelve of its twenty-five** — the whole branch
+  out through Blagnac and Beauzelle, the Airbus works and the exhibition center with it. All
+  fourteen are listed below.
+- Blagnac's businesses are in the same national register this map reads, so leaving them out is a
+  choice rather than a limit of the data: the map keeps to the commune so that Toulouse can be
+  read alongside Paris and Marseille on the same terms.
+
+**The businesses**
+
+- Businesses come from **SIRENE**, France's national register of établissements, joined to
+  INSEE's separate geolocation file — the same two sources Paris and Marseille use.
+- **More is withheld here than in either of them.** INSEE marks roughly one active establishment
+  in five here as non-diffusible and withholds its name, address and coordinates together, so
+  those never reach this map.
+- So a street that looks thin may be a quiet one, or one whose businesses are withheld; nothing in
+  the data tells the two apart.
+- **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
+  instead** — about half the dots on this map.
+
+**Reading the density**
+
+- **Read the density as a register, not a street survey.** SIRENE records where a business is
+  *registered*, and some registered establishments have no customer-facing shopfront — nothing in
+  the data says which.
+- Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the same way, this
+  map has about **1.3 times** as many in the commune as OpenStreetMap does, closer than Paris's
+  1.8× or Marseille's 1.7×; part of the difference here is simply the masking above.
+- **About two storefronts in three sit within a station ring.** The category toggles show every
+  storefront; the rings show the share the four lines actually reach.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("Toulouse")
+render_country_links('Toulouse')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

@@ -2,8 +2,7 @@
 
 Shared by every Japanese city. **Moved here unchanged from
 `scripts/screen_japan_join.py` on 2026-09-24**, so the screen that measured
-the join and the builds that use it run one set of rules, not two copies.
-Brazil's CNEFE taxonomy made the same move before its second build. The
+the join and the builds that use it run one set of rules, not two copies. The
 script still owns the measurement: tiers, misses, the GSI cross-check, and
 Minato as the control.
 

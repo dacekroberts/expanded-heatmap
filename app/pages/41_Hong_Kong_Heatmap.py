@@ -15,6 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.hong_kong.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -23,49 +27,15 @@ st.set_page_config(page_title="Hong Kong Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("Hong Kong")
+render_city_title('Hong Kong')
 
-st.title("Hong Kong: commercial density around MTR stations")
-
-# Approved by the owner 2026-09-24; the third paragraph revised the same evening
-# when placement moved from address lookups to FEHD's own points.
-st.markdown(
-    """
-Nine lines are drawn — **MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung
-Chung, Tuen Ma and East Rail lines, and the Light Rail** — each labelled on the map and in the
-legend, in MTR's own colours. Their routes and stations come from OpenStreetMap, because MTR
-publishes its stations as lists without locations; every line's station count matches MTR's own
-list. The Light Rail's twelve routes share one network of track through Tuen Mun, Yuen Long and
-Tin Shui Wai, so it is drawn as one line in a colour of this project's choosing, and its stops, a
-few hundred metres apart, are thinned to about one per half mile; stops that are also MTR
-stations, and each route's ends, are always kept. Not drawn: the Airport Express, the Disneyland
-Resort Line, the high-speed rail to the mainland, the Peak Tram, and Hong Kong Tramways, which
-runs within a few hundred metres of the Island Line for nearly all its length. Racecourse
-station, open only on race days, is left out.
-
-Businesses come from the **Food and Environmental Hygiene Department's licence registers**, which
-cover restaurants and food shops but not general retail: a clothes shop, an electronics shop or a
-hair salon needs no licence from FEHD. So **this map is mostly restaurants**, and its other two
-categories are narrower than elsewhere: **Food shops** (fresh provisions, bakeries, and siu mei
-and lo mei shops) and **Bathhouses**. Read the balance between categories as a fact about Hong
-Kong's licensing, not about its streets. Food factories, cold stores, factory canteens, swimming
-pools, cinemas, karaoke and the funeral trades are licensed too, and are left out. Each dot
-carries the shop sign on its licence.
-
-The registers give an address but no location. FEHD publishes the same registers with a location
-for each licence on the Government's spatial data portal (CSDI), and this map uses FEHD's own
-points, matched to the day's register by licence number; the few licences that have no point
-there yet are left off. Premises on different floors of one building share one point, so a tower
-of restaurants shows as a stack of dots in one place.
-
-Concentric ring boundaries and the three business categories (Food service, Food shops and
-Bathhouses) are toggleable via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming in will show individual
-dots; hover over those to see further details.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than a statistical density
-estimate, so read the colour as "roughly where things cluster."
-"""
-)
+# Nothing between the title and the map (owner, 2026-10-01).
+if HEATMAP_HTML.exists():
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
+else:
+    st.info("No map yet. Run `python pipeline/hong_kong/step3_map.py` to generate it.")
 
 # The snapshot dates, read from outputs/hong_kong/provenance.json so they cannot
 # go stale on the next fetch: the registers' own generation date, the latest
@@ -80,9 +50,9 @@ if PROVENANCE_JSON.exists():
         _osm = ((_prov.get("osm_rail") or {}).get("osm_base") or "")[:10]
         _bits = []
         if _gen:
-            _bits.append(f"licence registers generated **{_gen}** (FEHD, via DATA.GOV.HK)")
+            _bits.append(f"license registers generated **{_gen}** (FEHD, via DATA.GOV.HK)")
         if _pts:
-            _bits.append(f"licence locations updated to **{_pts}** (FEHD, via the CSDI Portal)")
+            _bits.append(f"license locations updated to **{_pts}** (FEHD, via the CSDI Portal)")
         if _osm:
             _bits.append(f"MTR and Light Rail lines as mapped in OpenStreetMap on **{_osm}**")
         if _bits:
@@ -91,12 +61,53 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
-    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
-    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
-    st.iframe(HEATMAP_HTML, width=1000, height=650)
-else:
-    st.info("No map yet. Run `python pipeline/hong_kong/step3_map.py` to generate it.")
+# Approved by the owner 2026-09-24; set as bullets 2026-10-01. The placement
+# paragraph (now the "Reading the map" bullets) was revised the same evening
+# when placement moved from address lookups to FEHD's own points.
+st.markdown(
+    """
+**The lines**
+
+- Nine lines are drawn — **MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung
+  Chung, Tuen Ma and East Rail lines, and the Light Rail** — each labeled on the map and in the
+  legend, in MTR's own colors.
+- Their routes and stations come from OpenStreetMap, because MTR publishes its stations as lists
+  without locations.
+- The Light Rail's twelve routes share one network of track through Tuen Mun, Yuen Long and Tin
+  Shui Wai, so it is drawn as one line in a color of this project's choosing.
+- Its stops, a few hundred meters apart, are thinned to about one per half mile; stops that are
+  also MTR stations, and each route's ends, are always kept.
+- Not drawn: the Airport Express, the Disneyland Resort Line, the high-speed rail to the mainland,
+  the Peak Tram, and Hong Kong Tramways, which runs within a few hundred meters of the Island Line
+  for nearly all its length.
+- Racecourse station, open only on race days, is left out.
+
+**The businesses**
+
+- From the **Food and Environmental Hygiene Department's license registers** (FEHD), which cover
+  restaurants and food shops but not general retail: a clothes shop, an electronics shop or a
+  hair salon needs no license from FEHD.
+- So **this map is mostly restaurants**, and its other two categories are narrower than
+  elsewhere: **Food shops** (fresh provisions, bakeries, and siu mei and lo mei shops) and
+  **Bathhouses**.
+- Read the balance between categories as a fact about Hong Kong's licensing, not about its
+  streets.
+- Each dot carries the shop sign on its license.
+
+**Reading the map**
+
+- The registers give an address but no location. FEHD also publishes them on the Government's
+  spatial data portal (CSDI), with a location for each license.
+- This map uses those points, matched to the day's register by license number; the few licenses
+  with no point there yet are left off.
+- Premises on different floors of one building share one point, so a tower of restaurants shows
+  as a stack of dots in one place.
+"""
+)
+
+render_map_help('three business categories (Food service, Food shops and Bathhouses)')
+render_excluded_stations("Hong Kong")
+render_country_links('Hong Kong')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

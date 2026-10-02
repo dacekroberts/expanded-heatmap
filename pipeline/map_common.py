@@ -77,11 +77,10 @@ HEAT_GRADIENT = {0.3: "#FBB878", 0.5: "#F97316", 0.7: "#DE6412",
                  0.85: "#C0570F", 1.0: "#8F3A05"}
 
 # The canvas every fixed-position overlay and the whole label layout are
-# computed against - the size passed to folium.Map in render_heatmap and the
-# size app/pages/*.py embeds with st.iframe. Defined here rather than beside
-# the label-layout constants, where it used to live: three comment blocks
-# below this line name it before it was defined, and _LEGEND_BOTTOM_CSS needs
-# its value at import time.
+# computed against: the size passed to folium.Map in render_heatmap and the
+# size app/pages/*.py embeds with st.iframe. Defined up here, not beside the
+# label-layout constants, because _LEGEND_BOTTOM_CSS needs its value at import
+# time and the comment blocks below refer to it.
 _MAP_W, _MAP_H = 1000, 650
 
 # Dark Mode toggle: a plain fixed-position button, NOT a Leaflet control. The
@@ -388,40 +387,39 @@ _LEGEND_CSS = """
 # The legend is `position: fixed`, so its bottom is measured from the
 # VIEWPORT's bottom edge. Leaflet's basemap attribution is `position:
 # absolute` inside the map container, so its bottom is measured from the MAP's
-# bottom edge - and the map is a fixed _MAP_H tall (see the folium.Map call in
+# bottom edge, and the map is a fixed _MAP_H tall (see the folium.Map call in
 # render_heatmap). Those two edges are the same line at exactly one viewport
 # height, _MAP_H. Any taller and the map's bottom edge rises while the legend
 # stays pinned to the viewport, and the legend swallows the attribution.
 #
-# Measured 2026-09-23 on Toulouse, hit-testing five points along the
-# attribution strip with document.elementFromPoint:
+# Measured 2026-09-23 on Toulouse, five points hit-tested along the
+# attribution strip (document.elementFromPoint), unclamped:
 #
 #     1000x650  what app/pages/*.py embeds with st.iframe      0/5 covered
 #     1024x768  outputs/<city>/heatmap.html opened directly    5/5 covered
 #     375x812   after a reader re-opens the collapsed legend   5/5 covered
 #
-# EVERY city, not one - the geometry is entirely in this file. The embedded
-# size passed on a 10 px margin, and nothing pinned it there: that is the real
-# defect. CLAUDE.md makes the visible basemap credit a hard invariant (ODbL
-# 1.0 requires it not to sit behind UI), so a change to the iframe height, a
-# responsive embed, or a reader opening the file directly each breached it
-# silently.
+# EVERY city, not one: the geometry is entirely in this file. The embedded
+# size passed on a 10 px margin with nothing pinning it there. CLAUDE.md makes
+# the visible basemap credit a hard invariant (ODbL 1.0 requires it not to sit
+# behind UI), and a change to the iframe height, a responsive embed, or a
+# reader opening the file directly each breached it silently.
 #
 # `max()` clamps the legend's bottom to 24 px above the MAP's bottom edge
 # rather than the viewport's. At the embedded size that is the same position
-# it already had, so the embed is pixel-unchanged; at every taller viewport it
+# as unclamped, so the embed is pixel-unchanged; at every taller viewport it
 # clears the 14 px attribution strip by the same 10 px. Shorter than _MAP_H
-# the map overflows and the page scrolls, and there `max()` picks 24px -
-# today's behaviour, with the attribution clear once scrolled to.
+# the map overflows and the page scrolls, and there `max()` picks 24px, with
+# the attribution clear once scrolled to.
 #
-# It also repairs a model that was quietly wrong: _layout_labels treats the
-# open legend as an obstacle whose bottom sits at _MAP_H - 24 in map
-# coordinates. That held only at a 650 px viewport. It now holds at every
-# height at or above one.
+# It also keeps a model true: _layout_labels treats the open legend as an
+# obstacle whose bottom sits at _MAP_H - 24 in map coordinates. Unclamped,
+# that held only at a 650 px viewport; clamped, it holds at every height at
+# or above that.
 #
 # DO NOT replace this with a plain offset. The offset that clears the
 # attribution is a function of viewport height, so any single number is right
-# at exactly one height - which is the bug, not the fix. Moving the
+# at exactly one height, which is the bug, not the fix. Moving the
 # attribution to the bottom-LEFT does not work either: measured at 375 px, the
 # open legend occupies x 133-351 and a bottom-left attribution would occupy
 # x 0-197, so they still overlap.
@@ -433,11 +431,10 @@ _LEGEND_CSS = """
 _LEGEND_BOTTOM_CSS = f"max(24px, calc(100vh - {_MAP_H - 24}px))"
 
 # FONT_STACK quotes its family names with DOUBLE quotes ("Segoe UI"), and the
-# legend's style sits in a double-quoted attribute - so until 2026-09-24 the
+# legend's style sits in a double-quoted attribute, so until 2026-09-24 the
 # first family name closed the attribute, and every legend lost its 13px size,
-# its shadow and every fallback font, rendering in Leaflet's Latin-only default
-# (Brazil's deploy check found it; Chicago's map had the same markup). CSS
-# accepts either quote, so the inline copy uses single quotes.
+# its shadow and every fallback font, rendering in Leaflet's Latin-only default.
+# CSS accepts either quote, so the inline copy uses single quotes.
 _LEGEND_FONT_STACK = FONT_VAR.replace('"', "'")
 
 LEGEND_HTML = """
@@ -468,8 +465,8 @@ LEGEND_HTML = """
 # at its true width. Collapsed it is a small "Legend" tab that covers nothing,
 # and it is still one click from open. Wide frames are unaffected.
 #
-# A reader who opens or closes it themselves owns it from then on - the
-# breakpoint stops fighting them (`touched`).
+# A reader who opens or closes it owns it from then on: the breakpoint stops
+# overriding them (`touched`).
 LEGEND_AUTOFIT_SCRIPT = """
 <script>
 (function () {
@@ -515,17 +512,16 @@ LEGEND_AUTOFIT_SCRIPT = """
 # 1 of New York's 11 line labels visible, 0 of Chicago's 7.
 #
 # So the container keeps its fixed size for initialisation and is resized to the
-# frame immediately afterwards. Resizing AFTER init is safe - the bug is about an
-# unresolved size at construction, not a small one - and `invalidateSize()` is
+# frame immediately afterwards. Resizing AFTER init is safe (the bug is about an
+# unresolved size at construction, not a small one), and `invalidateSize()` is
 # Leaflet's own supported way to do it. The view is then re-fitted to the station
 # bounds, which Python supplies rather than the script sniffing marker colours.
 #
 # What this does NOT fix: label PLACEMENT. `_layout_labels` chooses label
 # positions server-side against a _MAP_W x _MAP_H canvas, so at phone width they
-# can overlap each other and the cluster badges. Going from "one label visible"
-# to "most labels visible but some crowded" is the improvement; laying them out
-# correctly for a phone would need a second render at phone dimensions. See
-# PLAN.md.
+# can overlap each other and the cluster badges. LABEL_CLAMP_SCRIPT (below)
+# re-places a label that collides with another label or a control; it does not
+# avoid cluster badges (PLAN.md, "Optional label follow-ups").
 PHONE_FIT_SCRIPT = """
 <script>
 (function () {
@@ -751,22 +747,22 @@ PHONE_FIT_SCRIPT = """
 })();
 </script>
 """
-# KEEPS EVERY LINE LABEL INSIDE THE FRAME, by sliding it - never by zooming.
+# KEEPS EVERY LINE LABEL INSIDE THE FRAME, by sliding it, never by zooming.
 #
 # A label's text reaches up to ~220px past the anchor at its line's tip, and
 # PHONE_FIT_SCRIPT fits the ANCHORS (with 26px of padding), so on a phone a
 # label at the tail of an outlying line ran off the frame: 22 of 25 cities,
 # 35 of 155 labels at 375px and 33 at 343px, measured 2026-09-23 by
-# scripts/check_map_labels.js - Rennes' "Métro b" cut to "Métr" in the app.
+# scripts/check_map_labels.js (Rennes' "Métro b" cut to "Métr" in the app).
 #
-# Zooming out until every label fitted was built and measured first, and
-# rejected: it removed every clip but took New York from 9.5 to 8.75 at 343px,
-# shrinking the city to a knot of stacked labels, and raised overlapping label
-# pairs across the 25 cities from 28 to 49. Sliding keeps the view exactly
-# as it was - zoom, centre, PHONE_FIT_SCRIPT and its guard are untouched - and
-# moves only a label that would otherwise be cut, only as far as it must, and
-# only while its line's tip is on screen: once a reader pans the tip away, the
-# label leaves with it, as it always did.
+# Zooming out until every label fitted was measured and rejected: it removed
+# every clip but took New York from 9.5 to 8.75 at 343px, shrinking the city
+# to a knot of stacked labels, and raised overlapping label pairs across the
+# 25 cities from 28 to 49. Sliding keeps the view exactly as it was (zoom,
+# centre, PHONE_FIT_SCRIPT and its guard are untouched) and moves only a
+# label that would otherwise be cut, only as far as it must, and only while
+# its line's tip is on screen: once a reader pans the tip away, the label
+# leaves with it.
 #
 # Re-run on every moveend/zoomend/resize, from the label's baked transform, so
 # a slide never accumulates. The measurement is the label box relative to its
@@ -780,7 +776,7 @@ PHONE_FIT_SCRIPT = """
 # pairs at 375px and 17 at 343px; seven other cities had 28 between them. So
 # after the slide, any label overlapping another label, the fixed buttons,
 # Leaflet's top-left controls or the COLLAPSED legend tries spots around its
-# own line's tip - mirrored, above, below, right, left, a step further out -
+# own line's tip (mirrored, above, below, right, left, a step further out)
 # and takes the first clear one, or the least-overlapping. A label that
 # collides with nothing never moves, so every desktop view, already laid out
 # clean in Python, is unchanged. The open legend is not an obstacle: opening
@@ -953,37 +949,37 @@ LABEL_CLAMP_SCRIPT = """
 #
 # LABEL_CLAMP_SCRIPT re-places a colliding label among 15 spots around its own
 # tip, which is enough for every map but one: Osaka's 34 labels had 22
-# overlapping pairs at 343px and 12 at 375px (the 2026-09-29 full
-# deploy-verify, scripts/check_map_labels.js). At the phone fit - zoom 10.75
-# on a 343 x 650 frame - the labels cover 43% of the frame and most start in
-# one knot of line tips, so every spot beside a tip is taken.
+# overlapping pairs at 343px and 12 at 375px (2026-09-29,
+# scripts/check_map_labels.js). At the phone fit (zoom 10.75 on a 343 x 650
+# frame) the labels cover 43% of the frame and most start in one knot of line
+# tips, so every spot beside a tip is taken.
 #
 # So after the clamp has run, this moves ONLY a label that still overlaps
 # another label or a control, measured with no margin (a label 1px clear of
 # its neighbour is readable and stays put; with a margin, a desktop Osaka
 # label moved), in two steps:
 #   1. the nearest spot that collides less, from a grid of about a thousand
-#      around its tip - the tip under the box or beside it, the box level with
-#      the tip or in rows above and below - never more than __LABEL_REACH__ px
+#      around its tip (the tip under the box or beside it, the box level with
+#      the tip or in rows above and below), never more than __LABEL_REACH__ px
 #      from the tip, the widest stand-off the desktop layout itself allows
 #      (owner, 2026-09-27);
 #   2. if it still overlaps, a spot blocked only by one or two labels that
-#      each have a clean spot of their own to move to - all or nothing.
+#      each have a clean spot of their own to move to, all or nothing.
 # Measured on Osaka: 22 -> 0 overlaps at 343px, 12 -> 0 at 375px, no label
 # moved at 854 or 1280, about 20 ms a run on the dev machine (the clamp itself
-# takes 35-70). The first version took 240 ms; the cutoffs in hits() and
-# clean() are what brought it down, and it runs on every moveend.
+# takes 35-70). It runs on every moveend, so the cutoffs in hits() and clean()
+# matter: without them a run took 240 ms.
 #
 # INJECTED ONLY WHERE THE WIDE TIER WAS USED, so no other map changes by a
-# byte - the third label pass's argument, one block on. Written into
+# byte (the third label pass's argument, one block on). Written into
 # LABEL_CLAMP_SCRIPT it would have changed every committed map and failed
 # check_render_current.py until a full re-render. On 2026-09-29 Osaka was the
 # only one of 68 committed maps with a wide-tier label. It also clears
 # Madrid's one 343px overlap (measured by injecting it); reaching Madrid is a
 # change to the trigger in render_heatmap() plus Madrid's re-render.
 #
-# It runs after the clamp on every event the clamp listens to - a timeout puts
-# it after every synchronous handler, whichever registered first - and undoes
+# It runs after the clamp on every event the clamp listens to (a timeout puts
+# it after every synchronous handler, whichever registered first), and undoes
 # its own last move when the clamp has not reset the label since.
 DENSE_LABEL_SCRIPT = """
 <script>
@@ -1208,14 +1204,14 @@ DENSE_LABEL_SCRIPT = """
 # holds a map that carries one to its current version, and does not ask for it
 # in a map that has none.
 CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT",)
-# Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (headless Edge,
-# trusted input over CDP, median of three fresh loads; DECISIONS.md has the
-# tables). The wheel felt laggier than +/- for a reason that was not speed:
-# Leaflet's _tryAnimatedZoom returns early while a zoom animation is running,
-# so every wheel step that fires during the 250 ms animation is DISCARDED. A
-# five-notch roll zoomed Paris 1.5 levels and three quick notches 0.75, so the
-# reader rolled again and waited again. One notch was also 0.75 of a level
-# against the buttons' 1, because the wheel snaps to zoomSnap (0.25).
+# Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (median of three
+# fresh loads; DECISIONS.md has the tables). The wheel lagged behind +/- for a
+# reason other than speed: Leaflet's _tryAnimatedZoom returns early while a
+# zoom animation is running, so every wheel step that fires during the 250 ms
+# animation is DISCARDED. A five-notch roll zoomed Paris 1.5 levels and three
+# quick notches 0.75, so the reader rolled again and waited again. One notch
+# was also 0.75 of a level against the buttons' 1, because the wheel snaps to
+# zoomSnap (0.25).
 #
 # So the map's wheel handler is replaced with one that:
 #   * never discards: a step due while an animation runs waits for it to land
@@ -1223,17 +1219,17 @@ CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT",)
 #   * zooms a NOTCHED wheel one whole level per notch, like one click on +/-
 #     (owner's decision 2026-09-23), capped at zoomAnimationThreshold so a big
 #     roll still animates;
-#   * leaves anything finer - a trackpad - on Leaflet's own curve and snap.
+#   * leaves anything finer (a trackpad) on Leaflet's own curve and snap.
 #     Whole levels there were measured and rejected: with nothing discarded,
 #     a half-second trackpad swipe went from 12.5 to 19.
 #
-# zoomSnap stays 0.25 - _fit_view, PHONE_FIT_SCRIPT's guard and
+# zoomSnap stays 0.25: _fit_view, PHONE_FIT_SCRIPT's guard and
 # scripts/check_map_view.js all depend on it. A whole-level step from x.5
-# lands on x.5, so the wheel and the buttons now share one ladder of zooms.
+# lands on x.5, so the wheel and the buttons share one ladder of zooms.
 #
-# The guard's touch detection is untouched: it listens for `wheel` on the
+# The guard's touch detection is unaffected: it listens for `wheel` on the
 # container in the CAPTURE phase, which runs before this handler, so a wheel
-# zoom still ends the guard exactly as before.
+# zoom still ends the guard.
 WHEEL_ZOOM_SCRIPT = """
 <script>
 (function () {
@@ -1505,7 +1501,7 @@ LEGEND_ROW = """
       border:1px solid rgba(0,0,0,0.3);"></span>{label}
   </div>
 """
-# A short colored line swatch, not a dot - distinguishes transit lines from
+# A short coloured line swatch, not a dot: it distinguishes transit lines from
 # business categories at a glance, so a reader isn't relying on the on-map
 # line labels alone (automatic placement can land imperfectly). Each row is
 # also the button that picks its line out (LINE_HIGHLIGHT_SCRIPT); `line` is
@@ -1531,22 +1527,21 @@ LEGEND_NO_DATA_ROWS = """
 
 
 def load_line_shapes(gtfs_zip, line_specs, system_name):
-    """Real line geometries from GTFS shapes.txt - the actual alignment,
+    """Return real line geometries from GTFS shapes.txt: the actual alignment,
     not straight lines between stations.
 
     line_specs: {key: (shape_id, color, real-world public name, label end)}
-    where label end is None (automatic), "start" or "end" - which end of the
+    where label end is None (automatic), "start" or "end": which end of the
     line its label goes at (see add_line_label).
 
     `shape_id` may instead be a tuple/list of shape_ids, for a line that is one
     named thing to riders but several alignments in the feed. New York needs
     this: a subway trunk (the "6 Av (B/D/F/M)" line) runs as one line through
     the core and branches outside it, so its geometry is several shapes sharing
-    one label, one colour and one legend entry. A single shape_id behaves
-    exactly as before.
+    one label, one colour and one legend entry.
 
     Returns {key: (segments, color, label, end)} where `segments` is a list of
-    coordinate lists, longest first - so `segments[0]` is the line's primary
+    coordinate lists, longest first, so `segments[0]` is the line's primary
     alignment, which is what the label is anchored to.
     """
     if not gtfs_zip.exists():
@@ -1571,41 +1566,38 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
             #
             # These vertices are the one place the project reproduces an
             # agency's data verbatim: a polyline IS the feed's own geometry.
-            # Two agencies restrict altering it - LA Metro requires you "not
+            # Two agencies restrict altering it: LA Metro requires you "not
             # change, tamper, dismantle, augment, misrepresent or otherwise
             # modify the Transport Information", and the MTA's terms say "You
             # will not modify or delete any of the data" (while permitting "an
             # app that uses some but not all of the data", which is what
             # dropping commuter rail and drawing 29 services as 11 trunks is).
-            # Rounding to 0.11 m is invisible and would almost certainly never
-            # be anyone's idea of modifying a transit feed, but the project's
-            # rule is to comply rather than to read such a clause generously.
+            # Rounding to 0.11 m is invisible, but the project's rule is to
+            # comply rather than to read such a clause generously.
             #
-            # Measured 2026-09-21, over EVERY vertex rather than a sample -
-            # sampling the first few thousand characters gave the wrong answer
-            # for the one feed that matters:
+            # Measured 2026-09-21 over EVERY vertex (sampling the first few
+            # thousand characters gave the wrong answer for LA Metro):
             #   LA Metro  max 10 dp, 21.0% of coords over 6 dp  <- WAS rounded
             #   MTS       max  8 dp, 99.2% over 6 dp            <- WAS rounded
             #   CTA       max  8 dp, 99.2% over 6 dp            <- WAS rounded
             #   MTA       max  6 dp,  0.0% over 6 dp            <- no-op
             #   SFMTA     max  6 dp,  0.0% over 6 dp            <- no-op
             #   SEPTA     max  6 dp,  0.0% over 6 dp            <- no-op
-            # So the old rounding really was altering LA Metro's geometry, on a
-            # fifth of its vertices - the tightest licence in the project - and
-            # this exemption is what makes the recorded verdict ("the rail
-            # alignment is the feed's own geometry, displayed as that line")
-            # literally true. MTA's clause, which prompted the check, turned
-            # out to be moot: its feed is already 6 dp. MTS and CTA were being
-            # rounded too, and neither restricts modification.
+            # So rounding altered LA Metro's geometry (the tightest licence in
+            # the project) on a fifth of its vertices, and this exemption is
+            # what makes the recorded verdict ("the rail alignment is the
+            # feed's own geometry, displayed as that line") literally true.
+            # MTA's feed is already 6 dp. MTS and CTA were being rounded too,
+            # and neither restricts modification.
             #
-            # PLAN.md also carries a live proposal to lower COORD_DP to 5 dp to
-            # shrink New York's map. Keep this exemption if you do: at 5 dp the
-            # old behaviour would have begun altering MTA's geometry as well,
-            # as a silent side effect of a size tweak.
+            # Keep this exemption if COORD_DP is ever lowered to 5 dp (a
+            # PLAN.md proposal, to shrink New York's map): at 5 dp, rounding
+            # would alter MTA's geometry too, as a silent side effect of a size
+            # tweak.
             #
             # Station coordinates deliberately stay rounded: most cities derive
             # them by averaging a parent station's platform stops, so they are
-            # this project's own computed values rather than agency data - and
+            # this project's own computed values rather than agency data, and
             # unrounded they emit 15 dp of floating-point noise.
             segments.append(list(zip(pts["shape_pt_lat"].astype(float),
                                      pts["shape_pt_lon"].astype(float))))
@@ -1619,18 +1611,18 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
 
 
 def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
-    """Real line geometries from OpenStreetMap route relations - the same
-    return contract as load_line_shapes, for a city whose agency publishes no
-    reachable feed.
+    """Return real line geometries from OpenStreetMap route relations, with the
+    same return contract as load_line_shapes, for a city whose agency publishes
+    no reachable feed.
 
     THIS EXISTS BECAUSE GTFS IS NOT THE ONLY SHAPE OF RAIL DATA, and all
     fourteen cities built before Mexico City happened to use it. Every
     `*.cdmx.gob.mx` host is unreachable, so CDMX's geometry is OSM's; Taipei's
     TDX, Sao Paulo's GeoSampa WFS and Israel's shapefiles are all non-GTFS too.
     Keeping both loaders here, returning the same thing, is what stops a city
-    forking render_heatmap - the project's standing rule.
+    forking render_heatmap (the project's standing rule).
 
-    line_specs: {key: (ref, color, real-world public name, label end)} - the
+    line_specs: {key: (ref, color, real-world public name, label end)}, the
     same 4-tuple as the GTFS loader, with OSM's `ref` tag standing in for a
     shape_id. `ref` is what riders see on the line ("1", "A", "12"), and in
     CDMX it is populated on all 26 relations.
@@ -1847,11 +1839,11 @@ LIGHT_LABEL_HALO = "#ffffff"
 
 
 def add_line_label(feature_group, tip, label, color, dark=None, line=None):
-    """A permanent, always-visible line-name label at the tail end of the line
-    - NOT a hover tooltip. Use the line's real public-facing name.
+    """Add a permanent, always-visible line-name label at the tail end of the
+    line (NOT a hover tooltip). Use the line's real public-facing name.
 
     `tip` is (lat, lon, ux, uy) from _tail_end, or the same with a fifth
-    element - extra pixels of clearance - from _label_candidates: the label is
+    element (extra pixels of clearance) from _label_candidates: the label is
     centred just beyond the tip along the line's own direction, offset in
     pixels by the label's own size so it clears the line whatever the angle,
     and it stays put relative to the tip at every zoom.
@@ -1953,10 +1945,10 @@ def _label_candidates(coords, tip):
 
     ORDER IS THE CONTRACT. `_layout_labels` takes the first candidate that is
     clean, so anything appended here can only be reached by a label that would
-    otherwise have been drawn on top of something - which is why the clearance
-    tier could be added without moving a single label in the seventeen cities
-    that were already placing all of theirs (confirmed by drift_check, not
-    assumed). Never insert a new kind of candidate in the middle."""
+    otherwise have been drawn on top of something. That is why the clearance
+    tier moved no label in the seventeen cities that were already placing all
+    of theirs (drift_check showed it). Never insert a new kind of candidate in
+    the middle."""
     cands = []
     for angle in _LABEL_ANGLES:
         r = np.radians(angle)
@@ -1995,7 +1987,7 @@ def _layout_labels(points, candidates, labels, n_lines, center, zoom):
     cost counts labels that could not be placed cleanly (0 = all clean).
 
     The unplaced keys are carried out rather than just counted so the failure
-    can name the line: "1 label could not be placed" sends you looking at
+    can name the line: "1 label could not be placed" sends a reader looking at
     thirteen lines, and the label in question is the one fact the solver
     already knows."""
     cx, cy = _project_px(center[0], center[1], zoom)
@@ -2055,8 +2047,8 @@ def _choose_view(points, candidates, labels, n_lines, center=None, zoom=None):
     candidates in one: the search stops at the first view that places
     everything, so a candidate that rescues an EARLIER view silently changes
     which view a city gets. Added in one pass, the clearance tier moved San
-    Francisco's map centre ~1 km west and sent one label off its line - a city
-    whose labels were all placed cleanly already. Two passes keep the rule
+    Francisco's map centre ~1 km west and sent one label off its line, in a
+    city whose labels were all placed cleanly already. Two passes keep the rule
     "nothing changes for a city that was already clean" true rather than
     plausible, and drift_check is what proves it."""
     first = {k: c[0] for k, c in candidates.items()}
@@ -2115,21 +2107,19 @@ def _choose_view(points, candidates, labels, n_lines, center=None, zoom=None):
     # view and threw the count away. Madrid shipped that way on 2026-09-22:
     # three overlapping pairs, with **Línea 2 drawn underneath the Ramal label
     # and invisible at every width**. The legend row was there, so nothing in
-    # the build or the legend looked wrong - it took a rendered screenshot in
-    # deploy-verify to see it, one commit before a deploy.
+    # the build or the legend looked wrong; only a rendered view showed it.
     #
     # Raising rather than warning, because this is the project's oldest
-    # invariant - every drawn line gets a permanent on-map label AND a legend
-    # entry - and a warning in a build that prints hundreds of lines is a
+    # invariant (every drawn line gets a permanent on-map label AND a legend
+    # entry), and a warning in a build that prints hundreds of lines is a
     # warning nobody reads. Seventeen of eighteen cities were already at cost 0
     # when this was added, so it fails only where a label really is unreadable.
     #
     # To clear it: pass an explicit `center`/`zoom` for the city (a dense radial
     # network gives the solver little room), or force the crowded lines' label
-    # ends with "start"/"end" in their spec - though note that a forced end is
-    # no help at all to a CIRCULAR line, whose two ends are the same point.
-    # That is what Madrid turned out to need, and why the second pass above
-    # exists instead.
+    # ends with "start"/"end" in their spec. A forced end is no help to a
+    # CIRCULAR line, whose two ends are the same point; Madrid's needed the
+    # second pass above.
     if best[0]:
         named = ", ".join(f"{labels[k]!r} (line key {k!r})" for k in best[4])
         raise ValueError(
@@ -2176,7 +2166,7 @@ def nearest_station_and_ring(businesses, stations, crs_geographic, crs_projected
 
 
 # WHY THE BIG ARRAYS ARE SHIPPED AS JSON.parse("...") AND NOT AS LITERALS
-# (2026-09-27). WebKit - every iOS browser - refuses to compile one inline
+# (2026-09-27). WebKit (every iOS browser) refuses to compile one inline
 # array literal above roughly 107k-131k elements ("RangeError: Maximum call
 # stack size exceeded"), and the map goes blank with no visible error. Every
 # map that failed on the owner's iPhone had a heat literal of 133,335+ points;
@@ -2202,7 +2192,7 @@ def _js_json(data):
     json.dumps of that text (a JSON string is a valid JS string literal), then
     the characters HTML or old engines could still misread are replaced with
     their \\u escapes, which decode back to the same characters inside the
-    string - `<` (so no `</script>` or `<!--` can close or confuse the
+    string: `<` (so no `</script>` or `<!--` can close or confuse the
     element), `>`, `&`, and U+2028/U+2029 (line terminators in pre-2019 JS).
 
     allow_nan=False because JSON.parse rejects NaN: a bad row must fail the
@@ -2267,25 +2257,25 @@ class ParsedFastMarkerCluster(FastMarkerCluster):
 
 def _esc(value):
     """HTML-escape a value for the tooltip. Business names come from public
-    datasets but are still free text - an unescaped '<' or '&' breaks the
+    datasets but are still free text: an unescaped '<' or '&' breaks the
     hover text or injects markup."""
     return "" if pd.isna(value) else html.escape(str(value), quote=True)
 
 
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
                   value_column, show=True, display=None, animate=False):
-    """One toggleable, clustered, coloured pin layer for a category bucket.
-    Returns the number of points (0 = nothing added). `animate`: see
+    """Add one toggleable, clustered, coloured pin layer for a category bucket.
+    Return the number of points (0 = nothing added). `animate`: see
     render_heatmap's `animate_clusters`."""
     # Station name, ring band AND the classification value each repeat once per
     # pin, so each is emitted ONCE in a lookup table and referenced by integer
     # index. Nothing is lost: the callback resolves them before display.
     #
-    # The classification value was added to this 2026-09-22, and Mexico City is
-    # why. Its `scian_actividad` has **106 distinct values across 283,345
-    # rows**, averaging 55 characters - "Comercio al por menor en tiendas de
+    # The classification value is indexed since 2026-09-22, because of Mexico
+    # City: its `scian_actividad` has **106 distinct values across 283,345
+    # rows**, averaging 55 characters ("Comercio al por menor en tiendas de
     # abarrotes, ultramarinos y misceláneas" appears 12,462 times in one
-    # rendered file. Inline that is ~7 MB of a 19 MB map. Every city benefits:
+    # rendered file). Inline that is ~7 MB of a 19 MB map. Every city benefits:
     # a classification field is a code or a category name drawn from a small
     # vocabulary, which is the definition of a good index candidate. Station
     # and band indexing was already worth ~1.2 MB on New York.
@@ -2302,8 +2292,8 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     # A taxonomy may define display_value() to say how its classification
     # column should READ, as distinct from how it classifies. Dublin's
     # register pads unused use-slots with "-", so the raw column rendered as
-    # "Use: -, SHOP" on 88.9% of its pins while the classifier had been
-    # dropping the placeholder all along.
+    # "Use: -, SHOP" on 88.9% of its pins while the classifier dropped the
+    # placeholder.
     _display = display or (lambda v: v)
     stations, bands, cats, data = {}, {}, {}, []
     for row in rows.itertuples():
@@ -2320,7 +2310,7 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     if not data:
         return 0
     # An IIFE returning the function, so the two tables are built once when
-    # `var callback = ...` is assigned - NOT once per pin. FastMarkerCluster
+    # `var callback = ...` is assigned, NOT once per pin. FastMarkerCluster
     # injects this as a statement and then calls callback(row) in its loop.
     callback = f"""
         (function () {{
@@ -2375,15 +2365,15 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
 # label is placed around). A legend sizes to its longest row; every map's rows
 # fitted this until Tokyo's "code + full name" rows ("JO  JR Yokosuka / Sobu
 # Rapid Line") made its legend 409 px wide and it covered 5 labels at the 1000
-# px frame (deploy-verify, 2026-09-28). A map with legend_names is therefore
+# px frame (2026-09-28). A map with legend_names is therefore
 # capped at this width and its long rows wrap, so the model stays true.
 LEGEND_MODEL_W = 274
 _LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</style>"
 
 
 def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None):
-    """Fixed-position legend generated from the buckets actually present
-    and the taxonomy's own legend text - nothing taxonomy-specific here.
+    """Build the fixed-position legend from the buckets actually present
+    and the taxonomy's own legend text; nothing taxonomy-specific here.
 
     bucket_colors: [(bucket name, color)]; legend_label: bucket -> text;
     lines: {key: (coords, color, label, end)}. no_data_stations: the map draws
@@ -2435,13 +2425,13 @@ def _label_anchor_coords(coords, label_focus):
 # worse one: a name at a commercial address identifies a business, an email
 # address is a direct line to a person.
 #
-# Found 2026-09-21 by grepping the repo for an unrelated reason, not by any
-# check this project ran - scripts/check_personal_exposure.py tested for
-# person-like names and an email matches none of its patterns. One pin in
-# 91,000 (a New York "Tobacco Retail Dealer" registered under a Gmail address).
+# Found 2026-09-21, outside any check: scripts/check_personal_exposure.py
+# tests for person-like names, and an email matches none of its patterns. One
+# pin in 91,000 (a New York "Tobacco Retail Dealer" registered under a Gmail
+# address).
 #
 # Enforced HERE, in the shared renderer, rather than in the city's step 2 that
-# happened to have the problem: this is the one place every city's pins pass
+# had the problem: this is the one place every city's pins pass
 # through, so a city added later cannot reintroduce it by forgetting. Decided
 # 2026-09-21; see DECISIONS.md.
 _CONTACT_EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
@@ -2461,7 +2451,7 @@ def _has_contact_details(name) -> bool:
 def drop_contact_details(businesses):
     """Remove rows whose displayed name carries an email address or phone
     number. Such a row has no usable public trade name, so it is dropped the
-    way a blank one would be - masking would still leak a partial."""
+    way a blank one would be; masking would still leak a partial."""
     if "business_name" not in businesses.columns:
         return businesses
     flagged = businesses["business_name"].map(_has_contact_details)
@@ -2510,7 +2500,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     2026-09-28: full names left 9 labels unplaceable at 1000 px and short names
     59 overlapping pairs at 343 px; the codes place all 52 at both). The line
     spec's label is then the code drawn on the map, and the legend row reads
-    "code  full name" - so every line keeps a permanent label AND a legend
+    "code  full name", so every line keeps a permanent label AND a legend
     entry, and check_map_labels.js still finds each label in the legend. The
     colour checks and layer names use the full name, since one operator may
     give several lines one code (Seibu's SI). Omitted, nothing changes.
@@ -2525,36 +2515,34 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     city's businesses_clean.csv as a DataFrame (needs latitude, longitude,
     business_name and the taxonomy's VALUE_COLUMN). lines: output of
     load_line_shapes. system_name prefixes each line's layer name (e.g.
-    "Trolley", "Muni Metro"). label_focus: optional shapely geometry (lon/lat)
-    - line labels go at the tail ends of the part of each line inside it (see
+    "Trolley", "Muni Metro"). label_focus: optional shapely geometry (lon/lat);
+    line labels go at the tail ends of the part of each line inside it (see
     _label_anchor_coords); omit only for cities whose whole lines stay in view.
     center/zoom: leave None (the default) to fit the view to the stations and
     every line label together, so all labels are visible on first load; pass
     either to override.
 
     rings_shown: whether the concentric ring layers start switched on.
-    **FALSE for every city since 2026-09-21** - the owner's call, for a cleaner
+    **FALSE for every city since 2026-09-21**: the owner's call, for a cleaner
     first view. The rings stay in the layer control, one click away, and each
     business is still assigned to its NEAREST station whatever the rings show,
     so nothing about the counts depends on this.
 
-    It had been True by default, with New York and Miami the two exceptions on
+    Before that it was True by default, with New York and Miami off on
     measured grounds: New York's 496 stations sit a median 482 m apart and
     Miami's nineteen Metromover stations a median 235 m, so in both the rings
-    merged into one indistinct wash downtown. That reasoning is kept here
-    because it is why the toggle exists at all - but it turned out to describe
-    the general case rather than two special ones, since every city's downtown
-    cluster does some of this. Passing True is still supported for a city whose
-    stations are sparse enough to want them on.
+    merged into one indistinct wash downtown. That is why the toggle exists,
+    and every city's downtown cluster does some of it. Passing True is still
+    supported for a city whose stations are sparse enough to want them on.
 
     animate_clusters: whether Leaflet.markercluster animates clusters splitting
     and merging at the end of each zoom. **FALSE for every city since
-    2026-09-23** - the owner's call, on measurement: the animation runs a
+    2026-09-23**: the owner's call, on measurement. The animation runs a
     further ~300 ms after the map's own zoom animation, and turning it off took
     a Paris cluster click from 828 ms to settle to 408 ms (Toulouse 615 to 311)
     and a +/- click from 653 to 384 ms. The map's zoom still animates; the
     clusters simply regroup at the end instead of flying apart. Kept as a
-    per-city switch so a light map can have it back - the owner's suggested
+    per-city switch so a light map can have it back; the owner's suggested
     rule is a measured lag threshold, and PLAN.md holds that open item.
     """
     taxonomy = load_taxonomy_module(taxonomy_system)
@@ -2562,8 +2550,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     # A line the reader cannot tell from the pins drawn on top of it is not a
     # drawn line. Measured here, at render, because Calgary's Blue Line shipped
-    # Delta-E 3.3 from Retail blue - the same colour - and went unnoticed until
-    # a different city's build ran the check for the first time. Raises only in
+    # Delta-E 3.3 from Retail blue (the same colour) and went unnoticed until
+    # another city's build first ran the check. Raises only in
     # genuine-duplicate range; agency colours below the preferred figure are
     # reported every render and kept, per the owner's branding decision. See
     # pipeline/linecolour.py for why there are two thresholds.
@@ -2577,10 +2565,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     _require_lang_for_cjk(businesses, lang, city_name)
     # Stations in a ward with NO business data (a `no_data` column; Tokyo's,
     # owner 2026-09-28) are drawn hollow and get no rings, and no business is
-    # counted to them - a business near a ward edge goes to its nearest station
+    # counted to them: a business near a ward edge goes to its nearest station
     # WITH data. Ward boundaries cannot be drawn (N03, the Survey Act), so the
     # hollow station is the only place the map says so. A city without the
-    # column renders exactly as before.
+    # column is unaffected.
     no_data = (stations["no_data"].fillna(False).astype(bool) if "no_data" in stations.columns
                else pd.Series(False, index=stations.index))
     ringed = stations[~no_data] if no_data.any() else stations
@@ -2612,7 +2600,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # known open bug (github.com/Leaflet/Leaflet.heat/issues/95) where an
     # uncaught IndexSizeError fires on init if the container's size isn't
     # resolved yet, which silently stops every later .addTo(map) call in the
-    # generated script - rings, markers and the layer control never render,
+    # generated script (rings, markers and the layer control never render),
     # with no visible console error. The app pages embed the map at this
     # same fixed size; change them together.
     m = folium.Map(location=center, zoom_start=zoom, tiles=None, width=1000, height=650, zoomSnap=0.25)
@@ -2629,7 +2617,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # cities that is a modest cost; in Mexico City it is 283,345 pairs against
     # 133,362 in the default layer, and DENUE is an establishment census rather
     # than a licence register, so the gap is structural rather than a quirk.
-    # Passing False drops the layer and says so on the city page - the map's
+    # Passing False drops the layer and says so on the city page: the map's
     # own question is density AROUND stations, and this layer is context.
     if all_city_heat:
         ParsedHeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
@@ -2676,7 +2664,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # Transit lines: always-on context, permanent label + legend entry each
     # (label tips were worked out above, before the map was created).
     # Dark-theme label colours are chosen for the whole city at once, so two
-    # different lines never share one - see linecolour.dark_label_colours.
+    # different lines never share one; see linecolour.dark_label_colours.
     dark_labels = dark_label_colours({k: v[1] for k, v in lines.items()},
                                      dark_halo=DARK["page"], city=city_name)
     # `n` ties a line's polylines, label and legend row together for
@@ -2728,7 +2716,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     ))
 
     # Collapsed by default: many toggleable layers would otherwise cover a
-    # large share of the map. Top-left, not Leaflet's top-right default -
+    # large share of the map. Top-left, not Leaflet's top-right default:
     # the map has a fixed 1000px width and a top-right control can be
     # pushed off the visible edge when Streamlit's content area is narrower.
     folium.LayerControl(collapsed=True, position="topleft").add_to(m)
@@ -2751,10 +2739,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         .replace("__MAP_NAME__", m.get_name())
         # Bounds include the LINE LABEL anchors, not just the stations. A label
         # sits beyond its line's tip, so fitting to stations alone crops labels
-        # off a narrow frame - deploy-verify measured only 2 of San Francisco's
-        # 6 and 4 of Los Angeles' 6 visible at 375px when this fitted stations
-        # only. `_choose_view` already fits the desktop view to stations and
-        # labels together; this matches it.
+        # off a narrow frame: only 2 of San Francisco's 6 and 4 of Los Angeles'
+        # 6 were visible at 375px when this fitted stations only.
+        # `_choose_view` already fits the desktop view to stations and labels
+        # together; this matches it.
         .replace("__BOUNDS__", json.dumps([
             [min([float(stations["latitude"].min())] + [float(t[0]) for t in tips.values()]),
              min([float(stations["longitude"].min())] + [float(t[1]) for t in tips.values()])],
@@ -2767,7 +2755,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     m.get_root().html.add_child(folium.Element(
         LABEL_CLAMP_SCRIPT.replace("__MAP_NAME__", m.get_name())))
     # A map that needed labels standing in the wide tier on the desktop gets
-    # the wider phone placer too - and only such a map, so no other changes.
+    # the wider phone placer too, and only such a map, so no other changes.
     # See DENSE_LABEL_SCRIPT.
     if any(_clearance(t) in _LABEL_WIDE_CLEARANCES for t in tips.values()):
         m.get_root().html.add_child(folium.Element(
@@ -2804,10 +2792,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
               f"{len(businesses):,} available (all-{city_name} toggle), "
               f"across {len(stations)} stations")
     else:
-        # Do not advertise a toggle that was not built. This line said
-        # "283,345 available (all-Mexico City toggle)" for one render after
-        # the layer was dropped, which is the stale-prose failure this project
-        # greps city pages for.
+        # Do not advertise a toggle that was not built. This line once said
+        # "283,345 available (all-Mexico City toggle)" after the layer was
+        # dropped: the stale-prose failure this project greps city pages for.
         print(f"{len(in_rings):,} points plotted (within-ring), across "
               f"{len(stations)} stations. The all-{city_name} heat layer is "
               f"OFF for this city ({len(businesses):,} businesses not drawn).")

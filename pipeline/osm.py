@@ -1,13 +1,13 @@
-"""Fetching from OpenStreetMap, shared - because a mirror can lie in THREE
-ways and each one was learned separately, in a different city.
+"""Fetching from OpenStreetMap, shared: a mirror can lie in THREE ways, and
+each one was learned separately, in a different city.
 
 WHY THIS IS A MODULE
 --------------------
-`pipeline/countries/mexico.py` already carries the host list and two of the
+`pipeline/countries/mexico.py` also carries the host list and two of the
 three rules, written when Mexico City and Guadalajara were built. It is the
-wrong home: Overpass is not Mexican, and Barcelona is the third city to need
+wrong home: Overpass is not Mexican, and Barcelona was the third city to need
 it. The meta-rule in `osm-rail` is that a lesson written in one city's config
-does not reach the next city - so the fetching rules live here, where the next
+does not reach the next city, so the fetching rules live here, where the next
 OSM city passes through them.
 
 (Mexico's own constants are deliberately left in place rather than re-pointed
@@ -19,10 +19,10 @@ THE THREE WAYS A MIRROR LIES WITH HTTP 200
 ------------------------------------------
 1. **An EMPTY elements list.** `overpass.osm.ch` returned 272 bytes over an
    empty set during the Mexico build, and a caller reported it as "every ref
-   has exactly 2 direction relations" - a confident statement about nothing.
+   has exactly 2 direction relations": a confident statement about nothing.
    Measured again 2026-09-22: the same host, twice, no error field.
 
-2. **A `remark`.** Overpass signals an aborted query - timeout, out of memory -
+2. **A `remark`.** Overpass signals an aborted query (timeout, out of memory)
    in a top-level `remark` field, alongside whatever partial data it managed.
    HTTP is still 200.
 
@@ -35,26 +35,22 @@ THE THREE WAYS A MIRROR LIES WITH HTTP 200
 (1) and (2) are detectable here and are treated as host failures. **(3) is
 not**, which is why `fetch()` CACHES and why anything comparing a count
 against an expectation must confirm across two mirrors before believing a
-disagreement - see `scripts/brief_check.py`'s `osm_route_refs`.
+disagreement; see `scripts/brief_check.py`'s `osm_route_refs`.
 
 AND THE MIRRORS DISAGREE WITH EACH OTHER, which is not a failure mode but a
 fact. Measured on the Barcelona bbox: `overpass-api.de` returns 20 tram and 6
 funicular relations and calls the northern L10 segment `L10N`;
 `overpass.kumi.systems` returns 22 and 4 and calls it `L10 Nord`. Neither is
-corrupt - they run different planet extracts. So a build must not key anything
+corrupt; they run different planet extracts. So a build must not key anything
 on a live tag value, and a cached fetch is the only reproducible one.
 
-A 504 IS EITHER YOUR QUERY OR THE HOST - CHECK THE PART YOU CONTROL FIRST
--------------------------------------------------------------------------
-Added 2026-09-23 after the Toulouse build lost ten minutes to it.
-
-⚠ CORRECTED THE SAME DAY. This heading first said a 504 USUALLY means the
-query, on the strength of one pair of observations. Two hours later, while
-scoping Lille, a TAGS-ONLY relation query - the cheapest query there is, no
-geometry at all - drew a 504 from overpass-api.de and a read timeout from
-kumi.systems, twice in a row. So a 504 is sometimes the host and nothing
-else. What holds is narrower: query cost is the half you CONTROL, so rule it
-out first, then treat what is left as a fact about the host.
+A 504 IS EITHER THE QUERY OR THE HOST - CHECK THE QUERY FIRST
+-------------------------------------------------------------
+(2026-09-23.) A 504 is sometimes the host and nothing else: a TAGS-ONLY
+relation query, the cheapest query there is with no geometry at all, drew a
+504 from overpass-api.de and a read timeout from kumi.systems, twice in a row
+(Lille). But query cost is the half the caller CONTROLS, so rule it out
+first, then treat what is left as a fact about the host.
 
 `out center` on **ways** is the expensive part of a typical POI query. Overpass
 has to resolve every way's member nodes to compute a centroid, so a combined
@@ -74,30 +70,30 @@ So, in order:
    node+way total in Toulouse, 93.0%.
 2. **Add ways only if the node answer is not enough**, as a SECOND query, and
    say in the caller which shape produced the number. A node-only count and a
-   node+way count must never be compared with each other - that measures the
+   node+way count must never be compared with each other: that measures the
    query, not the city.
 3. **Keep `[timeout:N]` inside the query low** (90 is plenty for a city bbox).
    The HTTP timeout is a ceiling on waiting; the in-query one is what lets
-   Overpass give up and tell you so.
+   Overpass give up and say so.
 
-⚠ AND A BARE CLIENT SIGNATURE DRAWS HTTP 406 from `overpass-api.de` - the
+⚠ AND A BARE CLIENT SIGNATURE DRAWS HTTP 406 from `overpass-api.de`: the
 client-signature refusal `add-country` describes, not an IP block. This module
 always sends `OVERPASS_USER_AGENT`, so callers that go through `fetch()` are
-covered; an ad-hoc probe written with plain `requests` is not, and that is
-exactly how the Toulouse probe earned its first 406.
+covered; an ad-hoc probe written with plain `requests` is not (the Toulouse
+probe drew a 406 that way).
 
-⚠ FINALLY, A SLOW RUN MUST NOT BE A SILENT ONE. `fetch()` used to be able to
-spend `retries x hosts x timeout` - up to half an hour - printing nothing, so
-a throttled run was indistinguishable from a hung one. It now prints each
+⚠ FINALLY, A SLOW RUN MUST NOT BE A SILENT ONE. Without a deadline `fetch()`
+could spend `retries x hosts x timeout` (up to half an hour) printing nothing,
+so a throttled run was indistinguishable from a hung one. It prints each
 attempt and honours a total `deadline`.
 
 ⚠ AND A 504, A 429 OR A TIMEOUT MEANS WAIT A MINUTE. The owner's rule
 (CLAUDE.md, 2026-09-30): after a 504 or 429, wait at least 60 s before a
 retry, never in a tight loop. Both public mirrors were 504ing under several
-sessions' load, and `fetch()` was backing off 5 s after the first round - the
-tram-kit session watched Tucson's fetch do exactly that. So a round whose
-failures include one of those waits `OVERLOAD_WAIT_S` or more (escalating),
-a deadline too short for the wait gives up instead of retrying early, and a
+sessions' load, and `fetch()` was backing off 5 s after the first round (seen
+on Tucson's fetch). So a round whose failures include one of those waits
+`OVERLOAD_WAIT_S` or more (escalating), a deadline too short for the wait
+gives up instead of retrying early, and a
 host that refused is not asked again within the minute by a later `fetch()`
 in the same run. Other failures (an empty 200, a remark, all-zero counts) are
 not load, and keep the short backoff.
@@ -158,17 +154,17 @@ def overload_wait_left(name):
 
 def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
           deadline=900, verbose=True):
-    """Overpass elements for `query`, cached at `cache_path`.
+    """Return the Overpass elements for `query`, cached at `cache_path`.
 
     The cache is not an optimisation. A rebuild has to produce the same map as
-    the commit it is compared against, and the live answer demonstrably does
-    not - two mirrors return different data for the same bbox on the same day.
-    So the JSON is written once, committed as the city's raw input is not, and
+    the commit it is compared against, and the live answer does not: two
+    mirrors return different data for the same bbox on the same day. So the
+    JSON is written once, committed as the city's raw input is not, and
     re-read thereafter; `force=True` re-fetches deliberately.
 
     `deadline` is a TOTAL wall-clock budget in seconds across every host and
-    retry, and it exists because the old shape could burn `retries x hosts x
-    timeout` in silence. Pass None to wait as long as it takes.
+    retry, so a run cannot burn `retries x hosts x timeout` in silence. Pass
+    None to wait as long as it takes.
 
     `timeout` is per request and defaults to 180 rather than 300: a city-bbox
     query that has not answered in three minutes is an expensive query, and
@@ -245,11 +241,11 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
                 problems.append(f"{name}: empty 200")
                 _say(f"[{attempt}] {name} -> empty 200 (not trusted)")
                 continue
-            # An `out count` answer is never empty - it is one `count` element
-            # - so a host holding no data for this area answers with zeros and
+            # An `out count` answer is never empty (it is one `count` element),
+            # so a host holding no data for this area answers with zeros and
             # passes the check above. overpass.osm.ch (a Swiss-only extract)
             # did exactly that for Daugavpils, Aarhus, Zoetermeer and
-            # Amstelveen (Staging, 2026-09-27). All-zero counts are treated
+            # Amstelveen (2026-09-27). All-zero counts are treated
             # like an empty 200: a real "none here" is confirmed by another
             # mirror answering the same.
             els = payload["elements"]

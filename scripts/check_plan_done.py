@@ -84,10 +84,9 @@ def main():
         title = re.sub(r"[*`]", "", body.splitlines()[0][6:]).strip()[:70]
         cited = [c for c in CITED.findall(body)
                  if any(c.lower().rstrip(".") in h.lower() for _, h in heads)]
-        # A recorded item can still hold live work - Prague's carried an open
-        # reminder (Flora reopens around December 2026) and Copenhagen's open
-        # owner actions, and both were first reported REMOVABLE. Open work
-        # outranks a citation.
+        # A recorded item can still hold live work (Prague's carried an open
+        # reminder, Flora reopens around December 2026; Copenhagen's, open
+        # owner actions). Open work outranks a citation.
         open_work = OPEN.search(body)
         if open_work:
             verdict = "KEEP(open)"

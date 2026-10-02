@@ -16,6 +16,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.san_diego.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
     render_city_nav,
+    render_city_title,
+    render_country_links,
+    render_data_age,
+    render_excluded_stations,
+    render_map_help,
     render_site_notices,
     set_base_font,
 )
@@ -24,35 +29,30 @@ st.set_page_config(page_title="San Diego Heatmap", page_icon="\U0001f5fa️", la
 set_base_font()
 
 render_city_nav("San Diego")
+render_city_title('San Diego')
 
-st.title("San Diego: commercial density around Trolley station areas")
-
-st.markdown(
-    """
-Stations are represented by blue dots along the MTS Trolley's five lines
-(Blue, Orange, Green, Copper, Silver - each labeled directly on the map).
-Concentric ring boundaries and NAICS-geocoded storefronts are toggleable
-via the layer control in the top left. When enabled, business density
-will display as numbered circles summing areas when zoomed out. Zooming
-in will show individual dots; hover over those to see further details.
-
-Top right: a **Cities** menu and a **Global View** button for moving
-between maps, and a light/dark switch. The map opens in whichever mode
-the page is using; once you pick one, it carries across the other city
-maps.
-
-The heat layer is illustrative. Leaflet applies a visual blur rather than
-a statistical density estimate, so read the colour as "roughly where
-things cluster."
-"""
-)
-
+# Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/san_diego/step3_map.py` to generate it.")
+
+render_data_age('San Diego')
+
+st.markdown(
+    """
+**The lines**
+
+- Stations are represented by blue dots along the MTS Trolley's five lines: Blue, Orange, Green,
+  Copper and Silver, each labeled directly on the map.
+"""
+)
+
+render_map_help('three business categories (Retail, Food service and Personal services)')
+render_excluded_stations("San Diego")
+render_country_links('San Diego')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can

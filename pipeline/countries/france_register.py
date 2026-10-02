@@ -1,16 +1,15 @@
 """SIRENE -> one French city's storefronts. Shared by every French city.
 
 WHY THIS IS SHARED RATHER THAN COPIED. SIRENE is ONE national register, so a
-per-city step 2 is the same 250 lines five times over - the same `"A"`-not-
+per-city step 2 is the same 250 lines five times over: the same `"A"`-not-
 `"Actif"` trap, the same diffusion mask, the same per-row `epsg`, the same
-`qualite_xy` class, the same Milan-hybrid naming. `CLAUDE.md` already makes
-this an invariant for rendering ("City step3_map.py files are thin and must not
-fork it"), and the reasoning is identical here: five copies must stay in
-agreement, and nothing makes them.
+`qualite_xy` class, the same Milan-hybrid naming. `CLAUDE.md` makes this an
+invariant for rendering (thin city map steps, one shared renderer), and the
+reasoning is identical here: five copies must stay in agreement, and nothing
+makes them.
 
-Introduced 2026-09-23 while building the SECOND French city, deliberately
-before a third could set the per-city pattern - the same timing argument that
-moved the parquets into one national cache.
+Introduced 2026-09-23 with the second French city, as the national parquet
+cache was.
 
 ⚠ **DELIBERATELY NOT IN `france.py`.** That module is imported by every French
 city's `config.py`, which `app/pages/*.py` imports in turn, so it must stay
@@ -53,9 +52,8 @@ def _text(series):
     backs string columns with pyarrow, so `.astype(str)` on a null yields <NA>
     rather than the string "nan" - and <NA> then passes an `!= ""` test, so a
     row with no name counts as named and writes an EMPTY field to the CSV.
-    That is exactly what happened on Paris: step 2 reported "premises name
-    present on 97,445 rows (100.0%)" against a register measured at 38%, while
-    the first CSV row had a blank name. A 100% fill rate was the tell.
+    On Paris, step 2 reported "premises name present on 97,445 rows (100.0%)"
+    against a register measured at 38%. A 100% fill rate is the tell.
     """
     return series.fillna("").astype(str).str.strip()
 
@@ -168,8 +166,8 @@ def build_storefronts(cfg, city_name, bbox):
           f"({before - len(df):,} masked at source, "
           f"{(before - len(df)) / before * 100:.1f}%)")
     # Recorded for the caller (the France tram batch writes it to
-    # outputs/<city>/sirene_facts.json, which its page quotes). Printing only,
-    # as before, for every city that does not read it.
+    # outputs/<city>/sirene_facts.json, which its page quotes). Every other
+    # city only prints them.
     LAST_RUN.clear()
     LAST_RUN.update({"rows_in_scope": int(total_in_scope), "active": int(before),
                      "diffusible": int(len(df)), "masked": int(before - len(df))})

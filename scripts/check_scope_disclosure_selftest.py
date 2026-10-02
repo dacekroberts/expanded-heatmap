@@ -2,33 +2,31 @@
 
     python scripts/check_scope_disclosure_selftest.py
 
-WHY THIS FILE EXISTS, when five of the six checks here have no self-test. This
-one's vocabulary is DESIGNED to be edited by a later session: every city that
-arrives with an unfamiliar exclusion shape widens it. Marseille forced exactly
-that within an hour of the check existing - `commune` added to the boundary
-columns, and a new reason pattern for "Aubagne's tram, not Marseille's". The
-edits land in `app/station_scope.py`, which the LIVE PAGE imports to build its
-station table, so a session widening the classifier to make the check pass can
-quietly change what readers are shown. An edit is when a silent break happens,
-and this check has a predictable future editor.
+WHY. This check's vocabulary is DESIGNED to be edited later: every city that
+arrives with an unfamiliar exclusion shape widens it. Marseille did within an
+hour of the check existing (`commune` added to the boundary columns, and a new
+reason pattern for "Aubagne's tram, not Marseille's"). The edits land in
+`app/station_scope.py`, which the LIVE PAGE imports to build its station
+table, so widening the classifier to make the check pass can quietly change
+what readers are shown. An edit is when a silent break happens, and this check
+has a predictable future editor.
 
 NOTHING IN THE REPOSITORY IS MODIFIED. Every case copies what the check reads
 into a temporary tree, breaks the copy, and runs the check there with `--root`.
 
-TWO TRAPS THIS FILE IS BUILT AROUND, both met for real on 2026-09-23:
+TWO TRAPS THIS FILE IS BUILT AROUND, both met on 2026-09-23:
 
   * **The fixture must be complete, or every case fails for the wrong reason.**
-    The scratchpad ancestor of this file copied `app/cities.py` and not
-    `app/station_scope.py`, so all eight cases died on an ImportError. It read
-    as a strict check rather than a broken harness, and only the positive
-    control at the end said otherwise. Hence `app/*.py` wholesale below: a
-    third module must not be able to repeat it.
+    A fixture that copied `app/cities.py` and not `app/station_scope.py`
+    failed all eight cases on an ImportError, which read as a strict check
+    rather than a broken harness; only the positive control showed otherwise.
+    Hence `app/*.py` wholesale below: a third module must not be able to
+    repeat it.
   * **A subprocess's output is BYTES.** This check prints city names, and
     "Montréal" leaves a piped Python on Windows in the console codepage; a
     strict UTF-8 decode raises and hands back an EMPTY stdout, which reads as
-    "the expected text was not found". That produced two false failures in one
-    session, so the child is forced to UTF-8 AND decoded with
-    `errors="replace"`.
+    "the expected text was not found" (two false failures). So the child is
+    forced to UTF-8 AND decoded with `errors="replace"`.
 """
 
 import os
@@ -117,7 +115,7 @@ def drop_from_business_half(city):
 
     Editing the whole document would also strip it from the station half, and
     the case is specifically that being named in the transit half is not
-    enough - "Cercanías in Madrid" says nothing about Madrid's businesses.
+    enough: "Cercanías in Madrid" says nothing about Madrid's businesses.
     """
     def apply(root):
         path = root / DOC
@@ -171,9 +169,9 @@ def thinning_undisclosed(city, page):
 def no_cities_at_all(root):
     """An empty city list must not pass vacuously.
 
-    The sibling self-test's best case is a glob narrowed to match nothing,
-    which "passes every assertion ever written". The same hole exists here:
-    with no cities, properties C, D and E examine nothing at all.
+    The same hole as a glob narrowed to match nothing, which "passes every
+    assertion ever written": with no cities, properties C, D and E examine
+    nothing at all.
     """
     path = root / "app" / "cities.py"
     text = path.read_text(encoding="utf-8")
@@ -245,8 +243,8 @@ def main():
     print(f"Self-test for {CHECK.relative_to(ROOT).as_posix()}\n")
     results = [case(*c) for c in CASES]
 
-    # THE POSITIVE CONTROL, and it is not a formality: it is what distinguishes
-    # "the check fires on everything" from "the harness is broken".
+    # THE POSITIVE CONTROL: it distinguishes "the check fires on everything"
+    # from "the harness is broken".
     with tempfile.TemporaryDirectory() as tmp:
         code, out = run(build_tree(Path(tmp)))
     clean = code == 0

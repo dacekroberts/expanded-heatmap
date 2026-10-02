@@ -240,11 +240,11 @@ if _overlap:
     raise AssertionError(f"activity both mapped and excluded: {sorted(_overlap)}")
 
 # Every value seen in the register on 2026-09-21, so classify() can tell "a
-# category I decided to exclude" from "a category that did not exist when this
+# category deliberately excluded" from "a category that did not exist when this
 # was written". The second is worth a look; the first is not.
 SEEN = frozenset(_BUCKETS) | frozenset(EXCLUDED)
 
-FIELD_LABEL = "D.C. licence category"
+FIELD_LABEL = "D.C. license category"
 VALUE_COLUMN = "business_category"
 
 # When one licensee holds several kept licence types at one address, which
@@ -253,8 +253,8 @@ VALUE_COLUMN = "business_category"
 # Retail: no licensee anywhere in the register mixes Personal services with
 # another bucket, so this list's third entry never decides anything.
 #
-# Food service first, consistent with Boston. Checked against the alternative
-# rather than assumed: a more elaborate rule that ranks a licence naming what
+# Food service first, consistent with Boston. A more elaborate rule that ranks
+# a licence naming what
 # the premises IS ("Restaurant", "Grocery Store") above an endorsement it
 # merely holds ("Cigarette Sales", "Patent Medicine") produces an IDENTICAL
 # split - Retail 1,355, Food service 3,322, Personal services 538 - so the

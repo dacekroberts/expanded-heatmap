@@ -5,9 +5,8 @@
 
 A city whose publisher bars its brand without consent declares it in its
 config: `BARRED_MARKS = ("Irigo",)` (Angers, owner 2026-09-30, MARK-FREE). The
-brand reached the About page once, through `docs/data_sources/france.md`'s
-Angers row, and two review lanes had to find it by reading (2026-09-30). This
-turns that reading into a script run.
+brand reached the About page once (2026-09-30), through
+`docs/data_sources/france.md`'s Angers row, and only a reading caught it.
 
 Rendered surfaces, all of them:
   * every file under `app/` (page text, captions, notices, the city registry,

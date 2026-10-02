@@ -9,43 +9,40 @@ report; it is for a human mid-sweep, not for CI.
 
 WHY THESE CATEGORIES
 --------------------
-(This heading said "WHY THESE THREE" over four categories until 2026-09-23 -
-a hand-kept count, in the checker for hand-kept counts.)
-
-On 2026-09-22 a cleanup sweep found classes of stale prose that no existing
-check could see, in a project whose every check was about data:
+Classes of stale prose that no data check can see (first found by a sweep on
+2026-09-22):
 
   A. **Future tense about a present that arrived.** Three files said Canada was
      unbuilt while six municipalities were built; a fourth said it of D.C. Each
-     read perfectly - it was describing a world that no longer existed.
+     read perfectly, describing a world that no longer existed.
   B. **Hand-kept counts.** Four were wrong in one file, and one contradicted
      itself two clauses later ("thirteen sources", then "six of the twelve").
   C. **Headings whose contents moved on.** `## Transit feeds (GTFS)` held three
      rail sources that were not GTFS.
-  D. **Config constants no script reads.** The comment above a dead constant is
-     usually describing a plan that did not happen.
+  D. **Config constants no script reads.** The comment above a dead constant
+     usually describes a plan that did not happen.
      `pipeline/san_diego/config.py` says a per-point lookup was "REPLACED" by a
-     bulk download; it was not - bulk was attempt 2 of 3 and was abandoned at
-     ~26 s per page, and `PARCEL_QUERY_BBOX` and `PARCEL_PAGE_SIZE` survive,
-     read by nothing. The constant is harmless; **the comment is the defect**,
+     bulk download; it was not (bulk was attempt 2 of 3, abandoned at ~26 s
+     per page), and `PARCEL_QUERY_BBOX` and `PARCEL_PAGE_SIZE` survive, read
+     by nothing. The constant is harmless; **the comment is the defect**,
      because the next reader trusts it over the call.
-  E. **Universal claims on the published surface** - "the only city", "no
-     other city", "every other city", "every city here". Added 2026-09-23
-     after one day corrected over twenty, each written when fewer cities
+  E. **Universal claims on the published surface**: "the only city", "no
+     other city", "every other city", "every city here". Added 2026-09-23,
+     when one day corrected over twenty, each written when fewer cities
      existed: "no other city here needed more than one source" (Boston needed
      three, Milan six), Edmonton as "the only register" with no name but the
      business's while Madrid's entry called its identical position "stronger
      than any other city here". **At least three were false the day they were
-     written** - so this is not only rot; authors generalise from the cities
-     they happen to be thinking of. Run it when a city lands: every hit is a
-     bet on the next city, and the fix for a lost one is a comparison with a
-     CATEGORY ("than a licence register can"), never another "only". Proved
-     against history: run on the two commits before that day's fixes it finds
-     all 19 phrases it was pointed at, and on the commit after, none.
+     written**: authors generalise from the cities they happen to be thinking
+     of. Run it when a city lands: every hit is a bet on the next city, and
+     the fix for a lost one is a comparison with a CATEGORY ("than a licence
+     register can"), never another "only". On the two commits before that
+     day's fixes it finds all 19 phrases it was pointed at; on the commit
+     after, none.
 
 WHAT KEEPS THE NOISE DOWN, AND WHY EACH RULE IS THERE
 -----------------------------------------------------
-Every rule below was added because the version without it was unusable.
+Without each rule below, the report was unusable.
 
   - **`DECISIONS.md`, `PLAN.md`, handovers and retrospectives are excluded.**
     The first is append-only history, where "no Canadian city is built" is a
@@ -59,13 +56,13 @@ Every rule below was added because the version without it was unusable.
   - **A future-tense marker only counts when the same line names something that
     IS built.** "Not yet a row" beside Washington D.C. matters; the identical
     phrase beside an unscreened country is a plan, not a defect.
-  - **Counts must be SPELLED OUT, never digits.** The first version matched
-    digits and returned **1,012 hits**, almost every one a measurement
-    ("664,662 rows", "28,621-row") that is data and belongs there. Every real
-    defect was a prose count of the project's own furniture - "fourteen
-    cities", "thirteen sources", "the eight registries", "All six of these
-    agreements", "Two files". Spelling a number out is the tell that a human is
-    counting something they can see.
+  - **Counts must be SPELLED OUT, never digits.** Matching digits returned
+    **1,012 hits**, almost every one a measurement ("664,662 rows",
+    "28,621-row") that is data and belongs there. Every real defect was a
+    prose count of the project's own furniture: "fourteen cities", "thirteen
+    sources", "the eight registries", "All six of these agreements", "Two
+    files". Spelling a number out is the tell that a human is counting
+    something they can see.
   - **Quoted spans are skipped.** A correction usually quotes the sentence it
     replaces, and flagging the fix as the defect trains people to ignore the
     report.
@@ -84,49 +81,46 @@ if hasattr(sys.stdout, "reconfigure"):
 
 ROOT = Path(__file__).parent.parent
 
-# Append-only history and open work. See the docstring - this is not an
-# oversight, and re-including them is how this check becomes unreadable.
+# Append-only history and open work. See the docstring: deliberate, and
+# re-including them makes this check unreadable.
 EXCLUDE_NAMES = {"DECISIONS.md", "PLAN.md"}
 
-# POINT-IN-TIME RECORDS, and the reason they are excluded is stronger than
-# "noisy": their counts are correct as of a stated date, and **updating one
-# would destroy the record**. `passover_opus5.md` pins itself to commit
-# 520c165 and says in its own opening that it is "a map and a set of claims to
-# test, not a source of truth"; a retrospective describes what was true when it
-# was written. A count in one of these is evidence, not drift - it is only a
-# defect if it was wrong ON THAT DATE, which this check cannot know.
+# POINT-IN-TIME RECORDS, excluded for a stronger reason than "noisy": their
+# counts are correct as of a stated date, and **updating one would destroy the
+# record**. `passover_opus5.md` pins itself to commit 520c165 and calls itself
+# "a map and a set of claims to test, not a source of truth"; a retrospective
+# describes what was true when it was written. A count in one of these is
+# evidence, not drift: a defect only if it was wrong ON THAT DATE, which this
+# check cannot know.
 #
-# This is the distinction the whole category turns on: a CURRENT-STATE document
-# that carries a count has a maintenance burden, and a DATED one does not.
+# The distinction the whole category turns on: a CURRENT-STATE document that
+# carries a count has a maintenance burden, and a DATED one does not.
 EXCLUDE_PATTERNS = ("passover_*.md", "*retrospective*.md", "*_addendum.md")
 
 # Build briefs are the same shape: each is Step 0's answers AS OF a date, and
-# `CLAUDE.md` says outright that a brief "caches Step 0's mistakes as
-# confidently as its findings". Calgary's says it is "the biggest map of the
-# four remaining", which was true during the Canada build and is a snapshot,
-# not drift. Their claims are re-verified by `scripts/brief_check.py` against
-# live sources, which is the right instrument - this one cannot tell a stale
-# brief from an accurate record of a past probe.
+# `CLAUDE.md` says a brief "caches Step 0's mistakes as confidently as its
+# findings". Calgary's says it is "the biggest map of the four remaining", a
+# snapshot from the Canada build, not drift. `scripts/brief_check.py`
+# re-verifies their claims against live sources; this check cannot tell a
+# stale brief from an accurate record of a past probe.
 # docs/notifications holds letters this project owes a publisher. "NOT YET
-# SENT" is their CORRECT state, not a stale claim - the whole point of the
-# file is to track an act that has not happened. Excluded for the same reason
-# as build_briefs: a document whose subject is pendency cannot be audited for
-# writing about pendency.
+# SENT" is their CORRECT state: the file tracks an act that has not happened.
+# A document whose subject is pendency cannot be audited for writing about
+# pendency.
 EXCLUDE_DIRS = ("docs/build_briefs", "docs/notifications")
 
-# Two more, each for a reason already established above rather than a new one.
+# More exclusions, each for a reason established above.
 #
 # `city_master_list.md` is the file `CLAUDE.md` says to READ COUNTS OFF, so its
-# numbers are maintained by design and flagging all eight of them forever would
-# train people to skip this report. They are not unchecked: they moved to
-# `check_provenance.py` check E, which compares them to `app/cities.py` and
-# FAILS - a count in a file whose job is to carry counts gets checked, a count
-# anywhere else gets deleted.
+# numbers are maintained by design and flagging them forever would train
+# people to skip this report. They are checked elsewhere: `check_provenance.py`
+# check E compares them to `app/cities.py` and FAILS. A count in a file whose
+# job is to carry counts gets checked; a count anywhere else gets deleted.
 #
-# `global_country_shortlist.md` and `canada_step0_endpoints.md` are the two
-# evidence trails - `CLAUDE.md` calls the first "every probe logged", and the
-# second was relabelled an evidence trail on 2026-09-22. Their counts are dated
-# probe findings, the same case as the retrospectives.
+# `global_country_shortlist.md` and `canada_step0_endpoints.md` are evidence
+# trails (`CLAUDE.md` calls the first "every probe logged"; the second was
+# relabelled one on 2026-09-22). Their counts are dated probe findings, the
+# same case as the retrospectives.
 #
 # `city_master_list_evidence.md` is the master list's own evidence trail, moved
 # out of it on 2026-09-27 word for word: the closed bands, the emptied open gap,
@@ -175,8 +169,8 @@ COUNTABLE = (r"cit(?:y|ies)|sources?|registr(?:y|ies)|notices?|agreements?|"
 # of this project, "six pre-1998 municipalities" is a historical fact, and "six
 # Canadian cities" is a true scoped count. None of those rot.
 #
-# What rots is a TOTALISING claim - one asserting how many of a thing the
-# project has right now. Every real defect had that shape: "**All six** of these
+# What rots is a TOTALISING claim, asserting how many of a thing the project
+# has right now. Every real defect had that shape: "**All six** of these
 # agreements", "**the eight** registries", "for the **fourteen** cities now
 # built". So the count must be introduced by "all" or "the", or followed by a
 # phrase that scopes it to the whole project.
@@ -264,15 +258,14 @@ def check_a(files, vocab, verbose):
                 i = low.find(marker)
                 if i < 0 or in_quotes(i, spans):
                     continue
-                # PROXIMITY, NOT THE WHOLE LINE. A markdown table row
-                # runs past 600 characters, so "Screened 2026-09-21, not yet
-                # a full Step 0" - accurate prose about an UNBUILT city -
-                # matched "Boston" mentioned 400 characters further along the
-                # same row and was reported as a stale claim. Same defect
-                # shape as check_provenance's `item N` citation namespaces:
-                # the marker and the name were never related, only adjacent
-                # in a file. Measured 2026-09-23: this took category A from
-                # three findings, all of them noise, to one that is real.
+                # PROXIMITY, NOT THE WHOLE LINE. A markdown table row runs
+                # past 600 characters, so "Screened 2026-09-21, not yet a full
+                # Step 0" (accurate prose about an UNBUILT city) matched
+                # "Boston" 400 characters further along the same row. Same
+                # defect shape as check_provenance's `item N` citation
+                # namespaces: the marker and the name are only adjacent in a
+                # file. Measured 2026-09-23: category A went from three
+                # findings, all noise, to one that is real.
                 near = low[max(0, i - NEAR_CHARS):i + len(marker) + NEAR_CHARS]
                 named = [v for v in vocab if v.lower() in near]
                 if named or verbose:
@@ -324,20 +317,19 @@ def _check_c_file(p):
 
 
 def country_without_a_city(rel):
-    """Is this a country profile no city imports YET?
+    """Return True for a country profile no city imports YET.
 
-    `add-country` exists so the national facts are profiled ONCE, before
-    the first city in that country is built - so a profile whose
-    constants nothing reads is that workflow working, not a defect.
-    Reporting them as dead would mean this check fires forty-odd false
-    positives every time someone follows the documented process, and a
-    report people learn to skip is worse than no report.
+    `add-country` profiles the national facts ONCE, before the first city in
+    that country is built, so a profile whose constants nothing reads is that
+    workflow working, not a defect. Reporting them as dead would fire
+    forty-odd false positives every time the documented process is followed,
+    and a report people learn to skip is worse than no report.
 
     The distinction is exact and cheap: does any city config import this
-    profile? Mexico's does, from two cities, so its three unread
-    constants ARE findings. France's does not, from none, so its
-    forty-six are deferred until Paris lands - at which point they become
-    findings automatically, with no edit here.
+    profile? Mexico's and France's do (3 and 26 cities), so their unread
+    constants ARE findings. A profile no city imports yet is deferred until
+    its first city lands - at which point its constants become findings
+    automatically, with no edit here.
     """
     if not rel.startswith("pipeline/countries/"):
         return False
@@ -353,16 +345,15 @@ def check_d():
 
     KNOWN FALSE NEGATIVE: attribution is by NAME, not by module. A constant
     that is dead in one city's config is not reported when another city
-    defines and consumes one of the same name - Barcelona's
+    defines and consumes one of the same name: Barcelona's
     OSM_STATION_RAILWAY is unread there while Guadalajara's is live, so only
-    its sibling OSM_STATION_KIND surfaced on 2026-09-23. Following that one
-    constant found the real defect anyway, but the blind spot is real and
-    shared config vocabularies are exactly where it bites. Fixing it means
+    its sibling OSM_STATION_KIND surfaced (2026-09-23). Shared config
+    vocabularies are exactly where this blind spot bites. Fixing it means
     resolving each read back to the module it imports from.
 
-    Deterministic enough to trust - these configs are imported by name - but it
-    REPORTS rather than fails, because a dead constant is a signal to go and
-    read the comment above it, not a defect in itself.
+    Deterministic enough to trust (these configs are imported by name), but it
+    REPORTS rather than fails: a dead constant is a signal to read the comment
+    above it, not a defect in itself.
     """
     import ast as _ast
     import io as _io
@@ -371,12 +362,10 @@ def check_d():
     def code_only(src):
         """Strip comments and strings, so a MENTION is not counted as a READ.
 
-        This is not a refinement, it is the difference between the check
-        working and not. The first version counted raw text, and the very
-        constants it was written to find - San Diego's PARCEL_QUERY_BBOX and
-        PARCEL_PAGE_SIZE - came back clean, because THIS FILE's own docstring
-        names them as the worked example. The checker's documentation of the
-        bug masked the bug.
+        Not a refinement: on raw text, the very constants this was written to
+        find (San Diego's PARCEL_QUERY_BBOX and PARCEL_PAGE_SIZE) come back
+        clean, because THIS FILE's own docstring names them as the worked
+        example.
         """
         try:
             out = []
@@ -440,16 +429,15 @@ PUBLISHED_DOCS = ("docs/excluded_categories.md", "docs/data_sources.md",
                   "docs/data_sources/*.md")
 
 # COMPARISONS ONLY. Every one of the eleven false claims found on 2026-09-23
-# compared a city with the rest - "the only", "no other", "every other", "any
+# compared a city with the rest: "the only", "no other", "every other", "any
 # other", "elsewhere on this site". None was a bare "every city" or "every
 # map": those describe what the pipeline does to all maps ("dropped from every
-# map"), are usually enforced in code, and were 30 of the 44 hits the first
-# version of this category printed. A list that long gets skimmed, then
-# ignored, which is the cry-wolf failure the module docstring warns about.
+# map"), are usually enforced in code, and were 30 of 44 hits when included.
+# A list that long gets skimmed, then ignored (the cry-wolf failure the module
+# docstring warns about).
 #
 # Words are joined by \s+ so a claim split over two source lines still
-# matches - the probe that preceded this was a line grep, and those are
-# exactly the claims it would have missed.
+# matches; a line grep misses exactly those.
 _S = r"\s+"
 UNIVERSAL_RE = re.compile(
     r"\b(?:"
@@ -458,10 +446,9 @@ UNIVERSAL_RE = re.compile(
     r"|only" + _S + r"city"
     r"|(?:every|any)" + _S + r"other" + _S + r"(?:city|cities|map|maps)"
     # A bare "every city" is usually pipeline behaviour; "every city HERE" or
-    # "ON THIS SITE" is a claim about the set of built cities, and it is the
-    # shape of the two instances found earlier that day - "trams are excluded
-    # in every city here that has them", "Every map here covers one rail
-    # network". Both were falsified by the next city to land.
+    # "ON THIS SITE" is a claim about the set of built cities: "trams are
+    # excluded in every city here that has them", "Every map here covers one
+    # rail network". Both were falsified by the next city to land.
     r"|every" + _S + r"(?:city|map)" + _S +
     r"(?:here|on" + _S + r"this" + _S + r"site)"
     r"|no" + _S + r"other" + _S + r"(?:city|map|register|registry)"
@@ -476,7 +463,7 @@ UI_LABELS = {"All cities"}
 
 
 def _published_texts():
-    """(path, first_line, text) for every piece of reader-facing prose.
+    """Yield (path, first_line, text) for every piece of reader-facing prose.
 
     From a page: every string literal EXCEPT docstrings, because a docstring is
     addressed to the next editor, and "the decided pattern for every city's
@@ -530,9 +517,8 @@ def check_e():
             end = len(flat) if end < 0 else end + 1
             # CENTRED ON THE MATCH, not cut from the sentence's start: a
             # markdown table row is one "sentence" hundreds of characters
-            # long, and the first version printed its opening while the
-            # flagged phrase sat past the truncation - a hit that did not
-            # show what it was flagging.
+            # long, and cut from its start the flagged phrase falls past the
+            # truncation.
             a, b = max(start, pos - 90), min(end, pos + len(phrase) + 110)
             excerpt = ("..." if a > start else "") + flat[a:b].strip(" *") + \
                 ("..." if b < end else "")

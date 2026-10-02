@@ -21,7 +21,8 @@ MINATO IS THE CONTROL - run it first after ANY change to the normalisation,
 and nothing else counts until it reproduces.
 
 Normalisation is found by READING MISSES (`--misses`), never by anticipating.
-Each rule below names the misses that motivated it.
+Each rule in pipeline/countries/japan_register.py names the misses that
+motivated it.
 
 Needs (gitignored, never committed), under data/<city>/raw/: the permit CSV and
 the two ISJ zips. Downloading is fetch work, not this script's.
