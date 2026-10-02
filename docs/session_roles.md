@@ -94,6 +94,7 @@ step instead of an implicit race.
 | Czech kit (2026-09-30: `docs/handoff_czech_batch_2026-09-30.md`) | `.claude/worktrees/czech-kit` | `worktree-czech-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
 | UK six builds (released 2026-10-02: `docs/handoff_uk_six_2026-10-01.md`; one lead session with agents) | `.claude/worktrees/uk-six` | `uk-six-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
 | Japan batch builds, twelve cities (released 2026-10-02: `docs/handoff_japan_batch_2026-10-02.md`; one lead session with agents; registered 2026-10-02) | `.claude/worktrees/japan-batch` | `japan-batch-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-02:** pages **162-173** as pre-assigned (Matsuyama 162, Toyama 163, Kumamoto 164, Fukui 165, Nagasaki 166, Utsunomiya 167, Kitakyushu 168, Sakai 169, Hakodate 170, Kagoshima 171, Okayama 172, Kōchi 173); notice numbers **97-108**, one per city in the same order (Matsuyama 97 ... Kōchi 108), each city's list, MHLW where used, and MLIT, as notices 50-56, 75 and 76; claimed after the UK six's 84-96 |
+| Seattle (Regional), then Tbilisi (released 2026-10-02: `docs/handoff_seattle_tbilisi_2026-10-02.md`; one lead session, Tbilisi queued) | `.claude/worktrees/seattle-tbilisi` | `seattle-tbilisi-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
 | Tram kit, the ten other T1 cities (2026-09-30: `docs/handoff_tram_kit_2026-09-30.md`; holding before builds) | `.claude/worktrees/tram-kit` | `worktree-tram-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build` - the name every build since Dublin has actually used, rather than the `worktree-<role>` form above. Delete the branch when the worktree goes: merged build branches have tended to outlive their worktrees |
 
@@ -195,8 +196,13 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 
 **Page numbers pre-assigned (staging, 2026-10-02)**, so two batches building
 at once never take the same "next free" number: the UK six **156–161**
-(build order), the Japan batch **162–173** (its kit's table order). Notice
-numbers are claimed here, by the session, before one is written.
+(build order), the Japan batch **162–173** (its kit's table order),
+Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
+here, by the session, before one is written: the UK six hold 84–96 and the
+Japan batch 97–108 on their branches, so the Seattle session starts at 109.
+Check D of `check_provenance.py` reads every range in that sentence and lets
+a branch skip exactly those numbers; any other gap still fails. Keep the
+ranges in that one sentence, and delete a batch's range once it lands.
 **Scaffold with the reserved number:** `scaffold_city.py ... --page-number
 <N>`. Without it the script takes one past the highest page on the session's
 own branch, which is the collision. It refuses a number already taken. The

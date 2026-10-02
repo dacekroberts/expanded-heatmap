@@ -153,6 +153,14 @@ in practice `app/cities.py` (changes with *every* city) or `app/components.py`
 (changes whenever a notice does). A new page file under `app/pages/` alone does
 not.
 
+**Renaming or removing a page that a cached module names breaks EVERY page
+until the reboot**, not just that page. On 2026-10-02 the info pages lost
+their numbers. The cached `components.py` still linked
+`pages/201_What_Is_Excluded.py`, and every city page and the Overview raised
+`StreamlitPageNotFoundError` in the footer until the owner rebooted. Push such
+a change only when the owner can reboot straight away, and check one city
+page live after.
+
 **`deploy-verify` cannot tell you this and will sometimes say the opposite in
 good faith.** It judges the diff it is handed. Hand it three commits that touch
 only `pipeline/` and it will correctly report that no reboot is triggered —
