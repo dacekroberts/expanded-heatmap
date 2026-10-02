@@ -109,6 +109,9 @@ slices):
   names London, Glasgow and Newcastle (Seoul's case in East Asia). Europe's
   re-centred frame may need a label re-placed (Stockholm's case in the Czech
   move). Measure; do not tune by eye.
+- **Add the UK region (or both halves) to `cities.COUNTRY_VIEWS`** as well as
+  `REGION_ORDER` (owner, 2026-10-02): the country views go last in the region
+  menu, after every larger view.
 - **It lands with the six, at review time.** The region move changes `app/`.
 
 **The Japan batch takes the same rule when it is built.** It is recorded in

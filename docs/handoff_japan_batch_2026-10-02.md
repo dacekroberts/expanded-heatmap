@@ -168,6 +168,9 @@ two slices):
 - **`REGION_LABELS_ALSO["East Asia"]` gains the Japan region,** beside the
   Seoul Capital Area, so East Asia still names the eight. East Asia's frame
   will re-centre; measure, then re-place a label if needed.
+- **Add the Japan region (or both halves) to `cities.COUNTRY_VIEWS`** as well
+  as `REGION_ORDER` (owner, 2026-10-02): the country views go last in the
+  region menu, after every larger view.
 - **It lands with the twelve, at review time.** The region move changes
   `app/`.
 
