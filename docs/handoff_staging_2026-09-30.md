@@ -125,11 +125,8 @@ carried over as they stand.
      - **Owner: discard**, with Cross River Rail (2029) as the reopen
        trigger, and a commuter-rail revisit group of twelve after the
        discard table.
-   - **HELD PUSH (2026-10-02):** the Brisbane commit waits on
-     worktree-staging. `check_macro_facts` fails on Toronto (18,218 against
-     18,215: three licences' cancellation dates passed). Cleanup lands the
-     fix with its prose pass and messages when clear. Then fetch, merge,
-     run the checks and push. **Never write Toronto's facts from staging.**
+   - **Pushed 2026-10-02** (b9a06c8e), after Cleanup landed Toronto's and
+     San Francisco's new facts with its prose pass (d85b47a7).
    - **Takaoka's licence re-check** (an agent) was still running on
      2026-10-02.
 3. **Cleanup was re-rendering cities in the shared `data/`** on
