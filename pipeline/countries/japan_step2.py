@@ -14,8 +14,10 @@ copy for every Japanese city. A city's step 2 calls run(config).
      kept and the tier travels with the row; unplaced rows are dropped,
      counted and sampled. Where a list publishes its own coordinates and the
      config names it in OWN_POINT_FALLBACK, a block miss takes the publisher's
-     point instead (tier "own"; Fukuoka's MHLW rows). Where one premises is in
-     two lists (config.SUPERSEDES), the older list's row goes (Fukuoka).
+     point instead (tier "own"; Fukuoka's MHLW rows), or another publisher's
+     point for the same premises (config.POINT_DONORS; Toyama). Where one
+     premises is in two lists (config.SUPERSEDES), the older list's row goes
+     (Fukuoka).
   4. One pin per premises and bucket: rows repeating (address, trade name,
      bucket) are one premises holding several permits of one kind.
   5. The name rule (owner 2026-09-27): where the trade name IS the operator's
@@ -28,7 +30,8 @@ copy for every Japanese city. A city's step 2 calls run(config).
 Config needs: SOURCES, source_csv(), REQUIRED_COLUMNS, ISJ_DIR, PREFECTURE,
 MUNICIPALITY, CITY_BBOX, TAXONOMY_SYSTEM, BUSINESSES_CLEAN_CSV, SLUG. Optional,
 each named where it is defined: source_rows, SOURCE_MUNICIPALITY, SOURCE_KIND,
-ADDRESS_BY_CONSENT, OWN_POINT_FALLBACK, SUPERSEDES. Reads the cache and NEVER
+ADDRESS_BY_CONSENT, OWN_POINT_FALLBACK, POINT_DONORS, SUPERSEDES; a city
+without wards says so in japan.CITIES ("wardless"). Reads the cache and NEVER
 fetches.
 """
 import collections
@@ -178,6 +181,48 @@ def own_point_fallback(config, joined):
     joined.loc[take, "tier"] = "own"
 
 
+def point_donors(config, joined):
+    """Where the block join misses a row and ANOTHER publisher lists the same
+    premises with its own point, that point places it (config.POINT_DONORS =
+    {recipient source: donor source}; tier "own"). Toyama (2026-10-02): its
+    own list is complete but carries no coordinates, its 大字 addresses miss
+    MLIT's block file (12.2% at a town centroid a median 360 m away), and
+    MHLW's open data has a point for 614 of those 738 rows. The donor is read
+    for its points only, never drawn: matched on ward, town and trade name,
+    and used only where every donor row of that key gives one point (to about
+    10 m) inside CITY_BBOX. Changes `joined` in place."""
+    donors = getattr(config, "POINT_DONORS", {})
+    if not donors:
+        return
+    bb = config.CITY_BBOX
+    wardless = japan_wardless(config)
+    for recipient, donor in donors.items():
+        ps = jr.permits_from_rows(source_rows(config, donor), config.PREFECTURE, municipality(config, donor),
+                                  wardless)
+        pts = collections.defaultdict(set)
+        for p in ps:
+            if p["pub"] and not p["closed"] and p["name"]:
+                pts[(p["ward"], p["town"], jr._name_key(p["name"]))].add((round(p["pub"][0], 4), round(p["pub"][1], 4)))
+        one = {k: next(iter(v)) for k, v in pts.items() if len(v) == 1}
+        one = {k: v for k, v in one.items()
+               if bb["lat_min"] <= v[0] <= bb["lat_max"] and bb["lon_min"] <= v[1] <= bb["lon_max"]}
+        keys = [(w, t, jr._name_key(n)) for w, t, n in zip(joined["ward"], joined["town"], joined["name"])]
+        take = pd.Series([k in one for k in keys], index=joined.index)
+        take &= (joined["source"] == recipient) & (joined["tier"] != "block")
+        for tier, n in joined.loc[take, "tier"].value_counts().items():
+            print(f"  {donor}'s point for a {recipient} row where the block join gave {tier}: {n:,}")
+            emit(f"point_from_{donor}_{tier}", int(n))
+        joined["pt"] = [one[k] if t else pt for t, k, pt in zip(take, keys, joined["pt"])]
+        joined.loc[take, "tier"] = "own"
+
+
+def japan_wardless(config):
+    """A city without wards (japan.CITIES' "wardless"): its addresses are never
+    split at a 区 (japan_register.permits_from_rows)."""
+    from pipeline.countries import japan
+    return bool(japan.CITIES.get(config.SLUG, {}).get("wardless"))
+
+
 def drop_superseded(config, df):
     """One premises in two lists (config.SUPERSEDES = {newer: (older, ...)}):
     Fukuoka's city list holds permits from before 2021-06 and MHLW's the online
@@ -213,7 +258,7 @@ def run(config, write=True):
         if missing:
             sys.exit(f"{key}: header lacks {missing}")
         flags = [jr.name_is_operator(r) for r in rows]
-        ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key))
+        ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key), japan_wardless(config))
         for p, f in zip(ps, flags):
             p["source"], p["name_is_operator"], p["muni"] = key, f, municipality(config, key)
             p["kind"] = kind(config, key)
@@ -275,6 +320,7 @@ def run(config, write=True):
     # --- the join --------------------------------------------------------------
     joined = pd.DataFrame(jr.join_city(df.to_dict("records"), blocks, chome))
     own_point_fallback(config, joined)
+    point_donors(config, joined)
     tab = pd.crosstab(joined["bucket"], joined["tier"], margins=True)
     print("  the join by bucket:\n" + "\n".join("    " + ln for ln in tab.to_string().splitlines()))
     for tier, n in joined["tier"].value_counts().items():

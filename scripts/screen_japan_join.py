@@ -46,9 +46,10 @@ from pathlib import Path
 DATA = Path(__file__).resolve().parent.parent / "data"
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 # The join itself lives in the pipeline, shared with the builds; this script MEASURES it.
+from pipeline.countries import japan  # noqa: E402
 from pipeline.countries.japan_register import (  # noqa: E402
-    haversine_m, join, join_city, kyoto_permit_stream, load_city_isj, load_city_permits, load_isj, load_permits,
-    permits_from_rows)
+    city_rows, haversine_m, join, join_city, kyoto_permit_stream, load_city_isj, load_city_permits, load_isj,
+    load_permits, permits_from_rows)
 
 # municipality -> (municipality code, name, permit CSV, ISJ block zip, ISJ chōme zip)
 MUNICIPALITIES = {
@@ -125,19 +126,64 @@ CITIES = {
     "kyoto-life": ("京都府", "京都市", ["kyoto/raw/00530/*令和8年3月末*", "kyoto/raw/00530/*新規*"], "kyoto/raw/isj"),
 }
 
+# The 2026-10-01 batch (built from 2026-10-02): each city's own lists, its
+# registers (-life) and MHLW's file (-mhlw) where its brief measured one. A
+# city without wards reads its addresses whole (japan.CITIES' "wardless").
+_rows = lambda f, **kw: (lambda: city_rows(DATA / f, **kw))  # noqa: E731
+for _slug, _pref, _city, _food, _life, _mhlw in (
+        ("matsuyama", "愛媛県", "松山市",
+         ["matsuyama/raw/382019_food_business_all_2026031.csv", "matsuyama/raw/382019_food_business_all_2026032.csv"],
+         ["matsuyama/raw/riyou.zen.xls", "matsuyama/raw/biyou.zen.xls", "matsuyama/raw/clean.zen.xls"], "38201"),
+        # Toyama's workbooks write merged headers (施設住所 over four columns)
+        ("toyama", "富山県", "富山市", [_rows("toyama/raw/syokuhin.xlsx", merged_header=True)],
+         [_rows(f"toyama/raw/{f}", merged_header=True)
+          for f in ("riyosyo202603.xlsx", "biyosyo202603.xlsx", "cleaning202603.xlsx")], "16201"),
+        ("kumamoto", "熊本県", "熊本市", ["kumamoto/raw/Insyokutenneigyoukyoka.csv"],
+         ["kumamoto/raw/riyoujo_list.xlsx", "kumamoto/raw/biyoujo_list.xlsx", "kumamoto/raw/kurininngujyo-list.xlsx"],
+         "43100"),
+        # Fukui's workbooks hold twelve month-end sheets, the newest first
+        ("fukui", "福井県", "福井市", [_rows("fukui/raw/11syokuhin_202608.xlsx", sheet=0)],
+         [_rows(f"fukui/raw/{f}", sheet=0)
+          for f in ("01riyou_202608.xlsx", "02biyou_202608.xlsx", "03cleaning_202608.xlsx")], "18201"),
+        ("nagasaki", "長崎県", "長崎市", ["nagasaki/raw/422011_food_business_all.csv"],
+         ["nagasaki/raw/422011_riyosho_all.csv", "nagasaki/raw/422011_biyosho_all.csv",
+          "nagasaki/raw/422011_cleners_all.csv"], "42201"),
+        ("utsunomiya", "栃木県", "宇都宮市", ["utsunomiya/raw/092011_seikatsueisei_shokuhin_shokuhin.csv"],
+         [f"utsunomiya/raw/092011_seikatsueisei_kankyo_{f}.csv"
+          for f in ("riyozyo", "-biyozyo", "-kuriningutoritsugi", "kurininguippan")], "09201"),
+        ("kitakyushu", "福岡県", "北九州市", ["kitakyushu/raw/401005_shokuhineiseihotokyokashisetsuichiran_20260331.xlsx"],
+         ["kitakyushu/raw/401005_riyosyoichiran_20260831.csv", "kitakyushu/raw/401005_biyosyoichiran_20260831.csv"],
+         "40100"),
+        ("sakai", "大阪府", "堺市", ["sakai/raw/R80401.csv"], [], "27140"),
+        ("hakodate", "北海道", "函館市", [],
+         ["hakodate/raw/202608riyo.csv", "hakodate/raw/202608biyo.csv", "hakodate/raw/R80831cleaning.csv"], None),
+        ("kagoshima", "鹿児島県", "鹿児島市", ["kagoshima/raw/opendetar8_6matsu.csv"], [], "46201"),
+        ("okayama", "岡山県", "岡山市", [], [], "33100"),
+        ("kochi", "高知県", "高知市", [],
+         ["kochi/raw/269801_1162162_misc.xlsx", "kochi/raw/269801_1162161_misc.xlsx",
+          *[f"kochi/raw/269801_11621{n}_misc.xlsx" for n in (63, 64, 65, 67, 68, 70, 71)]], "39201")):
+    _isj = f"{_slug}/raw/isj"
+    if _food:
+        CITIES[_slug] = (_pref, _city, _food, _isj)
+    if _life:
+        CITIES[f"{_slug}-life"] = (_pref, _city, _life, _isj)
+    if _mhlw:
+        CITIES[f"{_slug}-mhlw"] = (_pref, _city, [f"{_slug}/raw/{_mhlw}_food_business_all.csv"], _isj)
+
 
 def run_city(key, show_misses=False):
     pref, city, files, isj = CITIES[key]
+    wardless = bool(japan.CITIES.get(key.split("-")[0], {}).get("wardless"))
     blocks, chome = load_city_isj(DATA / isj)
     ps = []
     for f in files:
-        if callable(f):  # a rebuilt register (Kyoto)
-            ps += permits_from_rows(f(), pref, city)
+        if callable(f):  # a rebuilt register (Kyoto), or a reader with options
+            ps += permits_from_rows(f(), pref, city, wardless)
         elif "*" in f:
             for path in sorted(DATA.glob(f)):
-                ps += load_city_permits(path, pref, city)
+                ps += load_city_permits(path, pref, city, wardless)
         else:
-            ps += load_city_permits(DATA / f, pref, city)
+            ps += load_city_permits(DATA / f, pref, city, wardless)
     join_city(ps, blocks, chome)
     fixed = [p for p in ps if not p["mobile"]]
     t = collections.Counter(p["tier"] for p in fixed)

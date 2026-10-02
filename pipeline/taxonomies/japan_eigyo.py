@@ -74,8 +74,10 @@ RULES = [
     ("bento shop", "Retail", r"^弁当販売"),
     ("other food and drink sales", "Retail", r"その他の食料・飲料販売|^他食販(店舗|包装)"),
     # --- Food service
-    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶)"),
-    ("café", "Food service", r"喫茶店営業|^喫茶店舗"),
+    # Fukui's old-law permits spell the type short, 飲食店 and 喫茶店 (93
+    # restaurants, 2026-10-02): without the whole-value forms they fell to "no rule"
+    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶)|^飲食店$"),
+    ("café", "Food service", r"喫茶店営業|^喫茶店舗|^喫茶店$"),
 ]
 _COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in RULES]
 
@@ -185,7 +187,8 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
                   ("菓子製造業", "Retail"), ("菓子製造業（期間申請）", None), ("⑪ 菓子製造業", "Retail"),
                   ("そうざい製造業", "Retail"), ("複合型そうざい製造業", None), ("⑬ その他の食料・飲料販売業", "Retail"),
                   ("⑫ 自動販売機による販売業（…）", None), ("コップ式自動販売機", None), ("食肉処理業", None),
-                  ("喫茶店営業（自動販売機）", None), ("他食販自販", None), ("乳販自販", None)):
+                  ("喫茶店営業（自動販売機）", None), ("他食販自販", None), ("乳販自販", None),
+                  ("飲食店", "Food service"), ("喫茶店", "Food service"), ("飲食店（自動車）", None)):
     assert classify({VALUE_COLUMN: _v}) == _want, (_v, classify({VALUE_COLUMN: _v}), _want)
 assert classify({VALUE_COLUMN: "取次所", "source": "laundry"}) == "Personal services"
 assert classify({VALUE_COLUMN: "無店舗取次店", "source": "laundry"}) is None
