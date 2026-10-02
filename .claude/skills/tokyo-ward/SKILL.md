@@ -100,7 +100,8 @@ Tokyo or the city that taught it):
 - **`OFFICIAL_SHARES = True`**: the share check, below.
 - **MHLW's slice for a ward**: a source keyed like `mhlw_13103` with its own
   `SOURCE_MUNICIPALITY`, in `ADDRESS_BY_CONSENT` and `OWN_POINT_FALLBACK`
-  (Fukuoka's mechanisms), and **`SUPERSEDES = {"minato": ("mhlw_13103",)}`**:
+  (Fukuoka's mechanisms), and **`SUPERSEDES = {"food_13103": ("mhlw_13103",)}`**
+  (`tokyo/config.py` builds it from `wards.MHLW_WARDS`):
   the ward's own row wins where both lists hold a premises (same ward, town,
   block, trade name and bucket). MHLW's files are cached in `data/mhlw/raw/`
   (13101-13104, 13108, 13113, 13116).
@@ -198,6 +199,19 @@ once in prose. Tokyo's config lists its MHLW sources in `SHARE_SKIP`.
 4. `python pipeline/tokyo/fetch_sources.py isj` (its address files), then the
    three steps: step 1 turns its stations from hollow to ringed by itself, and
    step 2 prints and emits its share.
-5. The map checks, drift (`--update-baseline`: an intended change), the page's
-   ward table (from `official_shares.json`), `excluded_categories.md`, the
-   notice, DECISIONS. Published prose waits for the owner.
+5. The map checks, drift (`--update-baseline`: an intended change), the
+   notice, the drafts file (`docs/decisions_drafts/<session>.md`, never
+   `DECISIONS.md` directly).
+6. **The reader-facing text, in the format of `docs/city_page_format.md`.**
+   The page's ward table fills itself from `official_shares.json`, and the
+   ward's `share_note` is its "The list" cell. The bullets under **The wards**
+   and the dates bullet under the table name the wards, so a new ward changes
+   them: "<N> publish a list usable here: <wards>.", "The other <n> publish no
+   usable list: ...", and the ward's date in "The lists' dates differ: ...".
+   That is filling in approved sentences (no read-back); a new sentence is a
+   proposal for the drafts file and review time (spec, section 6). In
+   `docs/excluded_categories.md`, the change goes in the Tokyo section
+   (`### Tokyo - <n> wards' own food lists, ...`), whose heading names the
+   count; in `docs/data_sources/japan.md`, the ward's rows; the credit is
+   built by `credits.py`. No repository path, script or check name on the
+   page or in those two docs' rendered text.

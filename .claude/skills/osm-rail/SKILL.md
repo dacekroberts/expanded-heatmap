@@ -261,9 +261,22 @@ OSM is **ODbL 1.0**: attribution, not a bar on modification. A rendered map is
 a Produced Work, so share-alike does not reach it. But note what changes: every
 map already carries `© OpenStreetMap contributors` for the **basemap**, and
 once a city's line geometry is OSM that credit covers **data** too. Say so in
-`docs/data_sources.md` rather than letting the existing notice imply it is only
-about tiles. No file goes in `docs/licenses/` - ODbL is a published public
-licence, not an agency document that can be revoked without notice.
+the city's row under "Rail geometry that is not a GTFS feed" in
+`docs/data_sources/<country>.md` ("OpenStreetMap, **ODbL 1.0** - notice 1"; the
+Buenos Aires rows are the model) rather than letting the existing notice imply
+it is only about tiles. That file renders on About the Data: the row states the
+query, the date and the cross-check, and keeps skill and script names out or
+between `<!-- internal -->` markers (`read-licence` step 9). No file goes in
+`docs/licenses/` - ODbL is a published public licence, not an agency document
+that can be revoked without notice.
+
+## What reaches the reader
+
+The page's **The lines** bullets say, in plain words, that routes and stations
+come from OpenStreetMap and why (Seoul's: "because Korea's national station
+dataset carries no line routes"), which lines are drawn, and what is not drawn.
+Stations left out are "listed below" (`render_excluded_stations`), never a
+file path. Format and order: `docs/city_page_format.md` section 1.
 
 ## Three more, from Taiwan (2026-09-25)
 
@@ -299,4 +312,6 @@ licence, not an agency document that can be revoked without notice.
 - [ ] A real `User-Agent` sent, a total deadline set, and every attempt printed
       - a 504 investigated as query cost before it is called an outage
 - [ ] One alignment drawn per line; spacing gate run and its median sane
-- [ ] Attribution scope updated in `docs/data_sources.md`
+- [ ] Attribution scope updated in the city's rows in
+      `docs/data_sources/<country>.md`, with no process notes in rendered text
+- [ ] The page's **The lines** bullets name OSM as the source and say why

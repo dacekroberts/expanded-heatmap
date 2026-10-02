@@ -81,7 +81,7 @@ the owner reminded Kobe's build that it exists for the cities after it.
 - **Sightseeing funiculars are left out** (Kobe's Maya and Rokkō, 2026-09-27),
   and their stations are NOT written to `excluded_stations.csv` (that file is
   for stations cut from a network that IS drawn; `check_scope_disclosure.py`
-  refuses any other reason). The page says so.
+  refuses any other reason). The page says so in a bullet under **The lines**.
 - **Fault-based cost clauses** are accepted for all of Japan (2026-09-24).
 - **No page says "currently operating"**: the lists keep closed premises.
 - **Region: East Asia**. Country: "Japan". Projected CRS from
@@ -153,6 +153,75 @@ credited as not drawn, then the two MUST-NOTs. Kobe's (notice 50):
 The MLIT lines are the same in every city; copy them, change only the city
 part. `check_provenance.py` matches the notice heading against its numbered
 item in `docs/data_sources.md`.
+
+## The page and the reference docs - `docs/city_page_format.md`
+
+Read the spec before writing any reader-facing text. `scaffold_city.py` writes
+the page in the current format; fill its bullets, never copy an older page.
+Every Japanese page so far: `render_city_title("<City>")`, the map, then
+`render_data_age("<City>")` as the caption, then bullets under **The lines**,
+**The businesses** and **Reading the map** (Tokyo adds **The wards**), then
+`render_map_help`, `render_excluded_stations`, `render_country_links`,
+`render_site_notices()`. No intro above the map, no controls paragraph of the
+city's own, no repository path in the text.
+
+**The template**, as the built pages carry it (Kobe, Osaka, Sapporo, Fukuoka,
+Kyoto, Yokohama, Hiroshima; approved wording, so no read-back - fill the
+`<...>`). Anything else is a proposal for the drafts file (spec, section 6).
+
+- **The lines**
+  - "<N> lines are drawn, each labeled on the map and in the legend: <the
+    operators' lines by public name>."
+  - "Lines and stations come from MLIT's national railway data (国土数値情報);
+    station names in English are from OpenStreetMap. Line colors are this
+    project's own, not the operators'."
+  - "Only stations inside <City> City get rings, because the business data
+    covers the city alone: lines running on to <neighbors> are cut at the
+    city line."
+  - "The Shinkansen is not drawn." (with "(<station> appears as a <...>
+    station)" where it shares one), and any sightseeing line left out: "The
+    <...> cable cars, which are sightseeing lines, are not drawn."
+- **The businesses**
+  - "From <City> City's list of food-business permits (as of <date>) and its
+    registers of barbers, beauty salons and laundries (as of <date>)."
+  - "Japan has no general business license, so shops other than food shops
+    (clothing, electronics, pharmacies) do not appear: the Food shops layer is
+    food retail only (bakeries and confectioners, delis, butchers and
+    fishmongers)."
+  - "Food businesses that only notify the city rather than hold a permit, such
+    as many convenience stores and greengrocers, are not in the list."
+  - "The list may include premises that have closed, so a dot means a permit
+    on file, not a business open today." (never "currently operating")
+  - A one-bucket city leads with it in bold: "**This map shows food businesses
+    only.**" (Hiroshima), "**This map shows personal services only: barbers,
+    beauty salons and laundries.**" (Yokohama).
+- **Reading the map**
+  - "The list gives an address but no location. Each address is matched to
+    MLIT's address reference data, which places most at their street block;
+    where only the district can be found, the dot sits at the district's
+    center."
+  - "Where a business's trade name is its operator's own name, the dot shows
+    its permit type instead."
+  - "Names and permit types are shown in Japanese, as the city records them."
+  - With MHLW's filings (Fukuoka, Hiroshima): "About one restaurant in <n> in
+    <City> chose not to publish its address in the national filing system and
+    is not on this map. Where they are is not known.", and the name-rule
+    bullet becomes "In the city's own list, where a trade name is its
+    operator's own name, the dot shows its permit type instead; the ministry's
+    list does not say who the operator is, so this cannot be checked there."
+- `render_map_help("three business categories (Food shops, Food service and
+  Personal services)")`; Hiroshima's "two business categories (Food shops and
+  Food service)".
+
+**What Is Excluded** (`docs/excluded_categories.md`): one section, `### <City> -
+<the city's lists>, joined to MLIT's address blocks`, under "Excluded in one
+city", in Hiroshima's shape: **Left out**, **Counted**, **One pin per
+premises**, **Not placed**, **Names not shown**, **Stations.** The city's own
+gaps and limits stay in that section, never the shared "What is missing" or
+"Honest limits". **About the Data**: the city's rows in
+`docs/data_sources/japan.md` and its numbered notice in `docs/data_sources.md`;
+how a source was found or checked goes to the drafts file, or between
+`<!-- internal -->` markers.
 
 ## Before any city: the briefs predate Kobe
 

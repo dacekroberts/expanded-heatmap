@@ -1,6 +1,6 @@
 ---
 name: deploy-verify
-description: Use after any change to the Streamlit app (app/, app/pages/, app/components.py), the shared map code (pipeline/map_common.py), or any outputs/<city>/ file the app reads, to verify it renders correctly before it is reported as done. Runs the app from the lean deploy-only venv (what Streamlit Community Cloud installs, not the full pipeline environment), reports findings, and shuts the servers down. ALWAYS STATE A SCOPE - `scope: city-added`, `scope: map-chrome`, `scope: app-deps` or `scope: full` - a full sweep costs ~186k tokens and ~27 min and most changes need only part of it. An unstated scope runs `map-chrome`, NOT `full`; `full` is for a BATCH before a real deploy, not for re-checking one repaired defect.
+description: Use after any change to the Streamlit app (app/, app/pages/, app/components.py), the shared map code (pipeline/map_common.py), or any outputs/<city>/ file the app reads, to verify it renders correctly before it is reported as done. Runs the app from the lean deploy-only venv (what Streamlit Community Cloud installs, not the full pipeline environment), reports findings, and shuts the servers down. ALWAYS STATE A SCOPE - `scope: city-added`, `scope: map-chrome`, `scope: app-deps` or `scope: full` - a full sweep of 124 cities took about 75 min as one agent (2026-10-02; split it into lanes, docs/review_lane_kit.md 7b), and most changes need only part of it. An unstated scope runs `map-chrome`, NOT `full`; `full` is for a BATCH before a real deploy, not for re-checking one repaired defect.
 tools: Bash, Read, Glob, Grep, mcp__Claude_Browser__preview_start, mcp__Claude_Browser__preview_stop, mcp__Claude_Browser__preview_logs, mcp__Claude_Browser__preview_list, mcp__Claude_Browser__navigate, mcp__Claude_Browser__computer, mcp__Claude_Browser__find, mcp__Claude_Browser__read_page, mcp__Claude_Browser__read_console_messages, mcp__Claude_Browser__read_network_requests, mcp__Claude_Browser__get_page_text, mcp__Claude_Browser__javascript_tool, mcp__Claude_Browser__resize_window, mcp__Claude_Browser__tabs_context
 ---
 
@@ -12,7 +12,8 @@ concisely; don't re-explain the change back, just what you found.
 ## Scope: run only the checks the change can actually break
 
 A full sweep is 5 pages x 3 widths x theme x click paths and costs roughly
-186k tokens and 27 minutes. Most changes cannot break most of that. **The
+186k tokens and 27 minutes when the site had far fewer cities; at 124 cities one
+agent took about 75 minutes (2026-10-02). Most changes cannot break most of that. **The
 caller states a scope in the prompt.**
 
 **If no scope is stated, run `map-chrome` and say so in the report.** This
@@ -77,6 +78,17 @@ negotiable, because the cheaper scopes each leave a blind spot and this is
 the only run that closes all of them at once. Also the right choice when
 several changes have accumulated unverified: batching is cheaper than
 repeated partial runs.
+
+**A `full` run may be one lane of several** (`docs/review_lane_kit.md`
+section 7b; one agent took about 75 minutes over 124 cities, lanes of about
+41 took the longest lane's time). When the caller gives you a share of the
+cities, follow the caller's overrides: use only your own server pair
+(`streamlit-app-lean-dvN`, `heatmap-static-dvN`) and your own `tabId` on every
+browser call; never stop another agent's server or clear `__pycache__`
+(steps 1 and 8 change accordingly); and because a hidden browser pane gives a
+tab a 0x0 viewport, load each page or map in an `<iframe>` of the exact size
+inside your tab, run the check scripts against that frame's document, and
+reload the tab every ten maps or so.
 
 Whatever the scope, steps **1** (clean slate), **8** (tear down) and **9**
 (report) always run, and a failure outside your scope that you happen to
@@ -147,8 +159,28 @@ Run only the steps your scope lists (see Scope above).
    current one) and opens the chosen one in place, and the light/dark mode
    carries over each way.
 4. **Each city page** (one per `app/pages/*_Heatmap.py`): the embedded map
-   iframe is present and loaded, the page title matches, no error/
-   exception block on the page.
+   iframe is present and loaded, no error/exception block on the page, and
+   the page is in the city-page format (`docs/city_page_format.md` section 1),
+   top to bottom with nothing added between the parts:
+   - the city's name alone as the heading, centered, over the subtitle
+     "Transit-centered commercial density heatmap";
+   - the map directly under it (embedded at height 650), with no paragraph,
+     caption or control in between;
+   - the date caption ("Data: ..." or the city's own snapshot caption) and any
+     credit the city's sources require, directly under the map;
+   - short bullets under bold headings (**The lines**, **The businesses**);
+   - "Using the map", the same text on every page;
+   - a collapsed **"Stations left out (N)"** expander, when the city's
+     `excluded_stations.csv` has rows (the bullets say "listed below");
+   - two links, "What is counted, and what is not: <Country>" and "Where this
+     data comes from: <Country>", each opening its page with `?country=` set
+     to the city's country and showing that country's sections;
+   - the required notices last, inline, visible without expanding anything.
+
+   Report as a finding: a paragraph or control of the page's own above the
+   map, a repository path, script, check or skill name in the page text, a
+   missing expander where the file has rows, a link that opens the wrong
+   country, or notices missing or out of place.
 5. **Each standalone heatmap** via `heatmap-static`: the legend lists the
    category buckets and one row per transit line; permanent line labels
    render; no console errors. Read `scripts/check_map_labels.js` and run its

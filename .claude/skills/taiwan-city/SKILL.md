@@ -84,7 +84,7 @@ Taipei build downloads them.
    高鐵臺中站 both code G17. Key stations by name; record, do not fix.
 8. **A one-line city is mostly outside its rings.** Taichung: 12,588 of
    66,115 storefronts (19%) are in a ring. The whole-city heat layer shows the
-   rest; say so on the page if the owner wants it said.
+   rest; Taichung's and Taoyuan's pages say so in a bullet (below).
 9. **Misses the parser does not reach** (left, not fixed - `parse()` has a
    control): a village name containing 路 (`六路里臺灣大道...`), a lane with no
    street (`中興１巷２６號`), intersections (`廍子路與祥順二路口`), and stalls
@@ -106,6 +106,62 @@ sentence + `https://data.gov.tw/license`. Taichung's sources:
 
 The FIA notice is national: the next city ADDS its own door-plate and rail
 notices and names itself in the FIA one; it does not add a second FIA notice.
+
+## The page and the reference docs - `docs/city_page_format.md`
+
+Read the spec before writing any reader-facing text. `scaffold_city.py` writes
+the page in the current format; fill its bullets, never copy an older page.
+The three Taiwanese pages: `render_city_title("<City>")`, the map, then their
+own provenance caption in place of `render_data_age` ("Snapshot: tax register
+dated **<date>** (Fiscal Information Agency); door plates from **<edition>**
+(<City> City Government); <the line's route / the lines> as mapped in
+OpenStreetMap on **<date>**."), then bullets under **The line** (or **The
+lines**), **The businesses** and **Reading the map**, then `render_map_help`,
+`render_excluded_stations`, `render_country_links`, `render_site_notices()`.
+
+**The template**, as Taichung, Taoyuan and Taipei (Regional) carry it
+(approved wording, so no read-back - fill the `<...>`). Anything else is a
+proposal for the drafts file (spec, section 6).
+
+- **The line(s)**
+  - "One line is drawn — **<line>**, from <A> to <B> — labeled on the map and
+    in the legend" or "<N> lines are drawn — **<lines>** — each labeled on the
+    map and in the legend, in the colors OpenStreetMap carries for them."
+  - Where the stations and the route come from, one bullet.
+  - "Taiwan Railway and high-speed rail are not drawn."
+  - A one-line city: "<Why>, so most of <City>'s storefronts lie outside the
+    station rings; the whole-city heat layer shows them all."
+- **The businesses**, the same on every Taiwanese page:
+  - "From Taiwan's **national business tax register** (Fiscal Information
+    Agency), which lists every trading location, each branch of a company
+    separately, with an address and an industry code. Shops, food service and
+    personal services are read from the code."
+  - "Brands trading inside a department store are generally not registered at
+    its address, so a department store tends to appear as a single point."
+- **Reading the map**
+  - "The register gives an address but no location. Each address is matched to
+    <City>'s own door-plate file, which gives every door plate its
+    coordinates."
+  - "Addresses with no door plate — most often market stalls, stalls in front
+    of a building, and rural addresses — cannot be placed and are left off."
+  - "Where a sole proprietor's registered name is not clearly a trade name, the
+    dot shows its line of business instead: in Taiwan a small business is
+    often registered under its owner's own name, and the Fiscal Information
+    Agency itself declines to publish owners' names."
+  - "Names and lines of business are shown in Chinese, as the register records
+    them."
+- `render_map_help("three business categories (Food service, Retail and
+  Personal services)")`.
+
+**What Is Excluded** (`docs/excluded_categories.md`): one section under
+"Excluded in one city", `### <City> - the same register and rules as Taichung,
+<what is its own>`, in Taoyuan's shape: **Left out**, **Not placed**, **Names
+not shown**, **Stations.** The city's own gaps and limits stay in it, never
+the shared "What is missing" or "Honest limits". **About the Data**: the
+city's rows in `docs/data_sources/taiwan.md` (its door plates and rail) and its
+notices; who read a licence and how a source was checked go to the drafts file
+or between `<!-- internal -->` markers, as the Taiwan licence heading already
+does.
 
 ## What Taoyuan added (2026-09-25, the second city)
 

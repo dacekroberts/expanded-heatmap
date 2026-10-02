@@ -59,7 +59,14 @@ exact.
    prohibited.
 3. **MUST DISPLAY** — any text the terms require on the site, **verbatim where
    the wording is prescribed**. This becomes a numbered notice, so give the
-   exact string, not a paraphrase.
+   exact string, not a paraphrase. Where no wording is prescribed and you
+   suggest some, mark it as a suggestion and write it the way the caller
+   will publish it (`read-licence` step 9, `docs/city_page_format.md`
+   sections 3 and 4): the license's title exactly as the publisher writes it
+   ("Open Government Licence – Vancouver", "Licence Ouverte"), the rest in US
+   English, and no process note (this agent's name, a check script,
+   `DECISIONS.md`) in the text a reader sees. The caller wraps any process
+   detail it records beside the verdict in `<!-- internal -->` markers.
 4. **MUST DO** — any affirmative act owed to the publisher: notifying them,
    registering, supplying statistics, requesting permission. **This is a
    separate category from item 3 and is the one most often missed**, because

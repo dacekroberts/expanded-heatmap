@@ -29,6 +29,9 @@ a rule, not before obeying one.
 - Classification is not NAICS -> `premises-taxonomy`. Measure the catch-all
   share at each level with `brief_check.py`'s `taxonomy_catchall` kind first;
   there is no default level. [#premises-taxonomy]
+- Writing a city's page, or its sections of What Is Excluded and About the
+  Data -> `docs/city_page_format.md`: the page order, bullets, sections that
+  name the city, process notes kept off rendered docs, American spelling.
 - Keeping or dropping any category, in any city -> `docs/category_rules.md`
   first; recommend the precedent, and bring a departure to the owner with the
   precedent it breaks.

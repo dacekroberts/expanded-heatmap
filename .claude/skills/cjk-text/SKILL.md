@@ -78,10 +78,23 @@ And one project rule bites harder here: a regex holding a Unicode escape
   edition, and 7,159 of its in-ring tooltips contain Chinese anyway - shop signs
   such as `章記香港仔魚旦王` or `Harvest House 加賀屋 (Peace & Joyful)`. Plan for
   CJK on the map in every CJK city, whichever edition is read.
-- **Taiwan's and Japan's registers are single-language** - the brief says so
-  for Taiwan's national tax register. Their maps will show names in Chinese or
-  Japanese only. That is correct; decide in the page text whether a reader
-  needs to be told.
+- **Taiwan's, Japan's and Korea's registers are single-language** - the brief
+  says so for Taiwan's national tax register. Their maps show names in
+  Chinese, Japanese or Korean only. That is correct, and every built page tells
+  the reader in one bullet under **Reading the map** (or **The businesses**),
+  in its family's approved wording (`docs/city_page_format.md`, section 1):
+  - Japan: "Names and permit types are shown in Japanese, as the city records
+    them."
+  - Taiwan: "Names and lines of business are shown in Chinese, as the register
+    records them."
+  - Korea (Seoul, the model page): "Each dot carries the name on the permit, in
+    Korean, and its kind in English."
+- **A kind shown in English is reader-facing text, so it is American
+  English** (owner, 2026-10-01; spec, section 4). Korea's English labels
+  (`pipeline/taxonomies/korea_sbiz.py`, `korea_localdata.py`) read "Watches
+  and jewelry", "Tires", "Liquor store", "Gas station", "Shopping center". The
+  register's own category name in its own script stays as written, as do
+  official names and licence titles.
 - **Join on an identifier, never on text.** Hong Kong's register and its point
   layer joined by licence number; the shop signs were identical on 99.7% of
   rows, which is high and still not a key.
@@ -139,10 +152,12 @@ address that reads residential is withheld; 138 withheld) and Taiwan's
 `taiwan=True` pass, which tests the owner's RULE rather than a name list (a sole
 proprietor's name is shown only with a business marker; the marker list leaves
 out characters that occur in given names - 美, 軒, and the surname 莊). Both print
-a count that must be ZERO. A Japanese city adds its own pass the same way.
+a count that must be ZERO. Japan's `japan=True` pass followed (2026-09-27): it
+tests the owner's name rule (`japan-city`) on what reached the map, and also
+prints a count that must be zero.
 
-Before those existed - and for any CJK script without one - until the check has a CJK-aware pass (Seoul's brief already asks for one, and it
-belongs in the check rather than here), do what Hong Kong did. Find out whether
+For a CJK register no pass covers yet (a new pass belongs in the check rather
+than here), do what Hong Kong did. Find out whether
 the register carries a person's name at all - FEHD's carries the shop sign and
 no licensee, which settled Hong Kong structurally. Then read a sample of the
 flagged pins in the original script, decide, and record the verdict in
@@ -168,8 +183,9 @@ flagged pins in the original script, decide, and record the verdict in
   **`render_heatmap` now RAISES** when business names contain CJK characters
   and no `lang` is given, so this cannot be forgotten. A new language needs its
   faces and order added to `_CJK_FACES` and `_CJK_ORDER` in `theme.py` first.
-- **Languages used so far**: `zh-HK` (Hong Kong), `ko` (Seoul), `zh-TW` (Taichung,
-  Taoyuan). The render raised without one on every CJK city, as designed.
+- **Languages used so far**: `zh-HK` (Hong Kong), `ko` (Seoul and the other
+  Korean cities), `zh-TW` (the Taiwanese cities), `ja` (the Japanese cities).
+  The render raised without one on every CJK city, as designed.
 - **Tooltip metrics.** A CJK face changes line height and width; the Hong Kong
   deploy check saw no overflow, but a Chinese-only or Japanese-only register
   puts CJK in every tooltip, so look again.
@@ -177,7 +193,8 @@ flagged pins in the original script, decide, and record the verdict in
   (Regional)"). Measure each label's width in the live app's frame with five
   known widths reproduced, as `scripts/check_macro_labels.py` requires.
 - **Page text.** Space Grotesk has no CJK. If a page quotes a name in its own
-  script, check it in the rendered page.
+  script (the Japanese pages quote 国土数値情報), check it in the rendered page.
+  The page's layout and wording rules are `docs/city_page_format.md`.
 
 ## Checklist for a CJK city
 
@@ -186,7 +203,8 @@ flagged pins in the original script, decide, and record the verdict in
 - [ ] OSM name-tag coverage printed per tag before choosing; any fallback rule
       counted; unmatched nodes stop the step
 - [ ] Operator/OSM name disagreements resolved by an ID, recorded with it
-- [ ] Language edition chosen and stated; joins made on identifiers
+- [ ] Language edition chosen and stated on the page, in its family's bullet;
+      English kind labels in American spelling; joins made on identifiers
 - [ ] NFKC before every text key; full-width share counted; placeholders found
       in the register's own language
 - [ ] Privacy: does the register carry a person's name at all? A sample read in

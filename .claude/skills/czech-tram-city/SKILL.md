@@ -32,18 +32,22 @@ master: `app/` lands at review time only.
    (the last section). The calls in both were put to the owner together.
 3. `python scripts/scaffold_city.py --slug <slug> --name "<Name>"
    --system-name "<operator> trams" --taxonomy czech_nace2025 --lat <lat>
-   --lon <lon> --region Europe --country Czechia --dry-run`, then without
-   `--dry-run` once the owner has said go. Pass **the city's own longitude**:
-   the script derives the UTM zone from it, which is what makes Ostrava 34N.
-   Add `--mode tram` once the macro-legend branch has landed (its
-   `scaffold_city.py` requires it).
+   --lon <lon> --region Czechia --country Czechia --mode tram --dry-run`,
+   then without `--dry-run` once the owner has said go. Pass **the city's
+   own longitude**: the script derives the UTM zone from it, which is what
+   makes Ostrava 34N. `--mode` is required.
 4. Replace the generated `config.py` with the Czech template (section 8) and
    fill it from the sheet. Replace the generated step 3's GTFS line loader
    with `load_osm_line_shapes` (every Czech tram city draws its geometry from
    OSM, Brno included).
 5. Write step 2 as Prague's (41 lines, a call to `build_storefronts`), step 1
    on `pipeline/osm_tram.py` (section 3), and `fetch_sources.py` (section 3).
-   Run the steps, render, and run "Before publishing".
+   Run the steps and render.
+6. Fill the page `scaffold_city.py` wrote (already in the city-page format)
+   from section 7, and write the city's sections of
+   `docs/excluded_categories.md` and `docs/data_sources/czechia.md` (section
+   6). The format for all three is `docs/city_page_format.md`; never start a
+   page by copying an older one. Then run "Before publishing".
 
 **No batch scaffold script** (DECISIONS "The Czech batch kit": measured, it
 does not pay for six cities). Everything a script would fill is on the
@@ -84,8 +88,8 @@ sheets below.
   `content.idsjmk.cz` copy.
 - **Olomouc's trams come from OSM** (owner, 2026-09-30): DPMO's feed declares
   no licence, and its colours are all white.
-- **Every Czech city tags `"region": "Europe"`.** A Central Europe split is
-  the app/chrome role's question, not this skill's.
+- **Every Czech city tags `"region": "Czechia"`** (owner, 2026-09-30:
+  DECISIONS "Czechia is its own macro region, Prague in it").
 - **Buses, trolleybuses and trains are never drawn.** Brno's S-trains fail the
   spacing rule (11 stations at a 1,974 m median gap; the tram audit,
   2026-09-29).
@@ -422,73 +426,98 @@ geometry)".
 
 Also, for each city: a row per new source in `docs/data_sources/czechia.md`
 (the feed or the OSM tram relations, the RÚIAN file, the boundary) **before the
-page exists**; the excluded categories in `docs/excluded_categories.md`; and
-`check_scope_disclosure.py` passing.
+page exists**; the excluded categories in `docs/excluded_categories.md`, under
+a heading that names the city (`### Brno - Prague's register, and trams as the
+rapid transit` is the shape), with the city's own gaps and limits in that
+section; and `check_scope_disclosure.py` passing. Write both for the reader:
+the data, its terms, its notices and what is counted. How a source was found
+or checked stays out, or goes between `<!-- internal -->` markers
+(`docs/city_page_format.md`, sections 2 and 3).
 
 ## 7. Page text - approved by the owner, word for word (2026-09-30)
 
-Braces are per-city facts, filled from this city's own step 1, step 2 and
-rendered map, never from a brief. Brackets choose a variant. **Departures are
-owner calls, never edits.**
+The page `scaffold_city.py` writes is already in the city-page format
+(`docs/city_page_format.md`, section 1): `render_city_title("{City}")` (the
+name alone, over the shared subtitle; the old "{City}: commercial density
+around tram stops" title is gone), the map, the caption, the bullets below
+under bold headings, then `render_map_help`, `render_excluded_stations`,
+`render_country_links` and `render_site_notices` last. The wording is the
+template as the six built pages carry it after the 2026-10-01 prose pass
+(`app/pages/150_Brno_Heatmap.py` to `155_Most_Heatmap.py`). Braces are
+per-city facts, filled from this city's own step 1, step 2 and rendered map,
+never from a brief. Brackets choose a variant. A sentence from this template
+needs no read-back. **Departures are owner calls, never edits**: a sentence
+the template does not cover is a proposal, flagged in the session's drafts
+file (`docs/city_page_format.md`, section 6).
 
-**Title**: "{City}: commercial density around tram stops" (Riga's).
+**Caption**, directly under the map (from `provenance.json`): "Snapshot:
+establishments as of **{DATPLAT}** (ROS02); tram timetable data valid
+**{start}** to **{end}** (KORDIS JMK)." for Brno; for the OSM cities, the
+second half reads "tram lines and stops from OpenStreetMap, fetched
+**{date}**". Dates are ISO.
 
-> {N} tram lines are drawn, **{operator}'s trams {lines}**, each labelled on
-> the map and in the legend. *[Brno:]* The stops come from the IDS JMK
-> timetable data published by KORDIS JMK, and the lines are shown in the
-> operator's colours; their routes are drawn from OpenStreetMap, because the
-> timetable data carries none. *[The other five:]* The lines and stops are
-> drawn from OpenStreetMap, and the colours are this project's, because none
-> are published for reuse. {City} has no metro, so its trams are its rapid
-> transit, as in Riga. Every tram stop here gets rings. Buses, trolleybuses
-> and trains are not drawn{Brno: ", nor the heritage tram H4 or the event
-> shuttle P1"}.
+> **The trams**
 >
-> The map covers the **{city of X / cities of Liberec and Jablonec nad Nisou,
-> which tram line 11 joins / towns of Most and Litvínov, which the trams
-> join}**. {Brno: "Line 2's last two stops, in Modřice beyond the city
-> boundary, are left out." / Ostrava: "Line 5, the suburban line to Budišovice,
-> is not drawn: only 3 of its 10 stops are in the city."}
+> - {N} tram lines are drawn, **{operator}'s trams {lines}**, each labeled on
+>   the map and in the legend.
+> - *[Brno:]* The stops come from the IDS JMK timetable data published by
+>   KORDIS JMK, and the lines are shown in the operator's colors; their routes
+>   are drawn from OpenStreetMap, because the timetable data carries none.
+>   *[The other five:]* The lines and stops are drawn from OpenStreetMap, and
+>   the colors are this project's, because none are published for reuse.
+> - Buses, trolleybuses and trains are not drawn{Brno: ", nor the heritage
+>   tram H4 or the event shuttle P1"}.
+> - {City} has no metro, so its trams are its rapid transit, as in Riga.
+>   Every tram stop here gets rings.
+> - **Tram stops sit closer together than metro stations**, a median of
+>   {spacing} m here, so the rings are drawn at half the usual size (0.05 to
+>   0.3 mi).
+> - The map covers the **{city of X / cities of Liberec and Jablonec nad
+>   Nisou, which tram line 11 joins / towns of Most and Litvínov, which the
+>   trams join}**. {Brno: "Line 2's last two stops, in Modřice beyond the
+>   city boundary, are left out." / Ostrava: "Line 5, the suburban line to
+>   Budišovice, is not drawn: only 3 of its 10 stops are in the city."}
 >
-> Businesses come from the Czech **register of active business establishments**
-> (ROS02), which records each place where a business operates at that place's
-> own address, placed using the national address register (RÚIAN), the same
-> sources as Prague's map. What each establishment does comes from the Czech
-> Statistical Office's business register (RES). RES records one main activity
-> per business, so every establishment inherits its owner's, and a chain's
-> office or warehouse counts as the chain's trade. **Where a business belongs to
-> a person trading in their own name, or to a partnership, the map shows its
-> address instead of its name.** Where such an establishment is at the owner's
-> own registered address, which is usually their home, it is left off the map
-> altogether.
+> **The businesses**
 >
-> **Read the density as a register, not a street survey.** Some establishments
-> are newly registered and may not have opened yet. Czechia's classification
-> files a web shop under the goods it sells, so some dots are businesses with
-> no shop a passer-by could walk into. Against OpenStreetMap's mapped
-> restaurants, cafés and takeaways in the city, the register carries about
-> **{ratio} times** as many. {Where the ratio is over 2 (Ostrava, Liberec and
-> Most at the screen): "OpenStreetMap maps fewer restaurants here than in
-> Prague, so the ratio says as much about OpenStreetMap's gaps as about the
-> register."} Businesses whose main activity is something else, such as a
-> brewery's pub or a wholesaler's shop, are not shown, because no open source
-> records what each establishment itself does.
+> - Businesses come from the Czech **register of active business
+>   establishments** (ROS02), which records each place a business operates at
+>   that place's own address. The national address register (RÚIAN) puts each
+>   one on the map; Prague's map uses the same two sources.
+> - What each establishment does comes from the Czech Statistical Office's
+>   business register (RES). RES records one main activity per business, so
+>   every establishment inherits its owner's, and a chain's office or
+>   warehouse counts as the chain's trade.
+> - Businesses whose main activity is something else, such as a brewery's pub
+>   or a wholesaler's shop, are not shown, because no open source records
+>   what each establishment itself does.
+> - **Where a business belongs to a person trading in their own name, or to a
+>   partnership, the map shows its address instead of its name.** Where such
+>   an establishment is at the owner's own registered address, which is
+>   usually their home, it is left off the map altogether.
+> - **About {share}% of storefronts sit within a ring.**
 >
-> **Tram stops sit closer together than metro stations**, a median of
-> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
-> 0.3 mi). **About {share} of storefronts sit within a ring.**
+> **Reading the density**
+>
+> - **Read the density as a register, not a street survey.** Some
+>   establishments are newly registered and may not have opened yet.
+> - Czechia's classification files a web shop under the goods it sells, so
+>   some dots are businesses with no shop a passer-by could walk into.
+> - Against OpenStreetMap's mapped restaurants, cafés and takeaways in the
+>   {city / two cities / two towns}, the register carries about **{ratio, to
+>   one decimal} times** as many. {Where the ratio is over 2 (Ostrava,
+>   Liberec and Most as built): "OpenStreetMap maps fewer restaurants here
+>   than in Prague, so the ratio says as much about OpenStreetMap's gaps as
+>   about the register."}
 
-Then the controls paragraph and the heat-layer caveat, exactly as on Prague's
-page (`app/pages/28_Prague_Heatmap.py`).
-
-**Caption** (from `provenance.json`): "Snapshot: establishments as of **{DATPLAT}**
-(ROS02); tram timetable data valid **{start}** to **{end}** (KORDIS JMK)" for
-Brno; for the OSM cities, the second half reads "tram lines and stops from
-OpenStreetMap, fetched **{date}**".
+Then `render_map_help("three business categories (Retail, Food service and
+Personal services)")`, the same on every page: no controls paragraph or heat
+caveat of the city's own. Stations left out (Brno's Modřice stops) are listed
+on the page by `render_excluded_stations`; never a repository path, script or
+check name in page text.
 
 A city whose build-day median stop gap is over about 550 m (only Most is
-close) keeps the standard rings and drops the last paragraph's first
-sentence.
+close) keeps the standard rings and drops the ring bullet.
 
 ## 8. The config template
 
@@ -566,11 +595,14 @@ check carries the mappings (staging, 2026-09-30). `SCOPE` is `"obec"` or
 `python scripts/check_personal_exposure.py <slug>`, after adding the city to
 its table in Prague's shape (`processed="businesses_clean.csv"`,
 `address=("business_name",)`: the structural guarantee by legal form), with
-the verdict in `DECISIONS.md`; `python scripts/check_provenance.py` names the city OK; `python
+the verdict in the session's drafts file and `docs/privacy_verdicts.md`;
+`python scripts/check_provenance.py` names the city OK; `python
 scripts/check_scope_disclosure.py` passes; `python scripts/check_map_markup.py`
-passes (line-colour contrast); `python pipeline/drift_check.py <slug>`; `grep
--rn TODO pipeline/<slug> app` is empty; a `DECISIONS.md` entry
-(`decisions-entry`). Then `publish-city`.
+passes (line-colour contrast); the page and the city's reference-doc sections
+read as `docs/city_page_format.md` sets out; `python pipeline/drift_check.py
+<slug>`; `grep -rn TODO pipeline/<slug> app` is empty; a decisions entry in
+the session's drafts file (`docs/decisions_drafts/<session-or-branch>.md`,
+`decisions-entry`). Then `publish-city`.
 
 ## The six, one sheet each
 

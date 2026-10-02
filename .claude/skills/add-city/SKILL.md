@@ -21,8 +21,12 @@ country.** Ten European countries are on the remaining screen and they describe
 one readable view between them; a region per country means ten entries to
 create, order and later merge.
 
-`Spain` is a leftover from before this rule and **must be retired to `Europe`**
+`Spain` was a leftover from before this rule and has been retired to `Europe`
 — see `docs/scaling_thresholds.md`, "EVERY EUROPEAN CITY TAGS ONE REGION".
+The two exceptions are the owner's, not a pattern: French cities tag
+`France North` or `France South` and Czech cities `Czechia` (owner,
+2026-09-29/30; the comments at `REGION_ORDER` in `app/cities.py`), because
+their labels could not share Europe's view.
 
 This lives here rather than in a sibling city's config because a lesson written
 in the previous city's comments does not reach the next city — the meta-rule
@@ -177,6 +181,14 @@ endpoints are in front of you: recording them later is how San Francisco's
 boundary layer ended up with no recorded URL at all. If an endpoint you tried
 is dead, record that too, with its date - a replaced URL that leaves no trace
 hides the fact that dataset IDs get retired.
+
+**That file is a reader's page too:** About the Data renders it, one country at
+a time. Write the city's rows for the reader (the data, its terms, its
+notices, what is counted), and keep how a source was found, checked or decided
+in your drafts file and the brief. A process pointer that must stay (a check
+script, a skill or agent name, `DECISIONS.md`) goes between
+`<!-- internal -->` markers. The rules are `docs/city_page_format.md`,
+sections 2 and 3.
 
 4. **Licence and required notices, per source, in the same pass.** A city is
    not verified until this is recorded in `docs/data_sources/<country>.md` alongside its
@@ -654,30 +666,80 @@ right.
 
 ## Step 8 - Wire into the app
 
-- `app/pages/N_<City>_Heatmap.py`: the static-HTML-embed pattern
-  (`st.iframe(HEATMAP_HTML, width=1000, height=650)`, fixed size matching the map; not the deprecated `st.components.v1.html`), not
-  `streamlit-folium`. Call `components.set_base_font()`.
+**Everything a reader sees follows `docs/city_page_format.md`** (owner,
+2026-10-01): the page (section 1), the city's sections of the two reference
+pages (sections 2 and 3), US spelling (section 4), names (section 5) and who
+approves the words (section 6). Read it before writing any of them, and never
+start a page by copying an older one.
+
+- **The page, `app/pages/N_<Slug>_Heatmap.py`, is written by
+  `scaffold_city.py` in that format.** In order, with nothing added between
+  the parts: `render_city_nav("<Name>")` (it renders the hidden links the
+  map's "Global View" button and Cities menu click, so never omit it; the name
+  matches the `cities.py` entry) and `render_city_title("<Name>")` (the name
+  alone, centered, over the shared subtitle; never an `st.title` of the
+  page's own); the map, `st.iframe(HEATMAP_HTML, width=1000, height=650)`
+  (static HTML, never `streamlit-folium` or the deprecated
+  `st.components.v1.html`; the OSM credit's check depends on that height);
+  the captions (`render_data_age`, or the city's own provenance caption, plus
+  any credit its sources prescribe word for word); the bullets;
+  `render_map_help(...)`, `render_excluded_stations(...)`,
+  `render_country_links(...)`; and `render_site_notices()` last, inline.
+  `set_base_font()` follows `st.set_page_config`. If a page file is ever
+  renamed, update its `page` path in `cities.py`.
+- **The bullets.** Replace every TODO bullet under **The lines** and **The
+  businesses** (a third bold heading only when the city needs one;
+  `app/pages/43_Seoul_Heatmap.py` is the model). One claim per bullet, in
+  plain words for a general reader: the lines drawn, by name (each labeled on
+  the map and in the legend), what is not drawn and why, the area covered, a
+  station closed for works and when it is due back, any lines thinned by
+  spacing, the source and what it cannot show. Stations left out are "listed
+  below" (`render_excluded_stations` lists them). **Never on the page:** an
+  intro paragraph above the map, a controls paragraph of the city's own
+  (`render_map_help` is it), a repository path or file name
+  (`outputs/...`, `pipeline/...`), a script, check or skill name, the decision
+  log, a build brief. Detail a reference page already carries stays there,
+  reached by `render_country_links`. The scaffold's bullets, filled in for the
+  city, need no read-back; a sentence no template covers is a proposal,
+  flagged in your drafts file and at review time, and the build goes on.
+- **The city's sections of the two reference pages.** In
+  `docs/excluded_categories.md`, every heading for the city names the city
+  (`### <City> - <what it leaves out>` under "Excluded in one city", or the
+  rail section's matching heading), because the page files a section under a
+  country by the city its heading names. What the city's source cannot show
+  and its own limits go in that section, never in the shared "What is
+  missing rather than excluded" or "Honest limits" sections, which hold only
+  what is true of every city. Its rows and notices in
+  `docs/data_sources/<country>.md` follow the same rule (Step 0). Process
+  notes stay out of both, or go between `<!-- internal -->` markers.
+  `check_scope_disclosure.py` still decides that both halves of the city's
+  scope reach the reader; `check_stray_bullets.py` catches a wrapped dash
+  that the app would draw as a bullet.
 - Add the city to the `CITIES` list in `app/cities.py` (name, marker lat/lon,
   page path, blurb). That one entry feeds the clickable macro map on the
-  Overview, its fallback link list, and every city page's switcher. In the
-  new page, call `components.render_city_nav("<City name>")` (in the map-only
-  pilot it renders only the hidden link the map's "Global View" button clicks, so
-  never omit it) (the name must
-  match the entry) instead of a bare back-link. If a page file is ever
-  renamed, update its `page` path in `cities.py`.
+  Overview, its fallback link list, and every city page's switcher.
+- **Give the entry its reader-facing phrases**, which `scaffold_city.py` does
+  not write: `data_age` (the caption `render_data_age` puts under the map, and
+  the Overview's tooltip and city list; the page raises `KeyError` without
+  it) and `placement` (the tooltip's "Placed by:"). Copy the phrasing
+  of a built city of the same family; `check_macro_facts.py` refuses either
+  field missing, and any date, year or percentage in them that the city's row
+  in table C (placement) or D (data age) of `docs/map_inconsistencies.md`
+  does not carry.
 - **Give the entry its three summary fields** (owner, 2026-09-28): the city's
   row in the table on the "Why the maps differ" page
   (`app/pages/202_Why_the_Maps_Differ.py`) is built from them.
   - `rail_extra`: what the map draws beyond the metro. `"Trams"` (light rail
     counts; a light metro such as Montréal's REM does not), `"Suburban rail"`,
     `"Both"` or `"—"`.
-  - `record_kind`: what the businesses come from, e.g. `"Licence register"`,
+  - `record_kind`: what the businesses come from, e.g. `"License register"`,
     `"Permit registers"`, `"National register"`, `"Tax register"`.
   - `categories`: `"All three"`, `"Two"`, `"Merged"`, `"Retail thin"`,
-    `"Personal services thin"` or `"Food premises only"`. It must agree with
-    `coverage` (owner, 2026-09-30): "All three" is `full`; "Two", "Merged"
-    and either "thin" value are `narrowed`; "Food premises only" is
-    `one_bucket`. **Food shops are food**, not a second category: a register of
+    `"Personal services thin"`, `"Food service thin"`, `"Food premises only"`
+    or `"Personal services only"`. It must agree with `coverage` (owner,
+    2026-09-30): "All three" is `full`; "Two", "Merged" and any "thin" value
+    are `narrowed`; the two "only" values are `one_bucket`. **Food shops are
+    food**, not a second category: a register of
     restaurants plus food shops is one category, even though table B counts
     the shops under Retail.
 - **The macro-map dot has TWO KEYS, and the entry sets both** (owner,
@@ -713,17 +775,22 @@ right.
   station counts, "half mile" are literal text, not computed values, and go
   stale when the pipeline changes. Prefer wording that doesn't restate
   numbers; where it must, re-check it each time the city's pipeline changes.
+  Grep it for `outputs/`, `pipeline/`, `scripts/` and `.py` too: none belongs
+  in page text.
 - **Never let the city's name become the project's identity.**
 
-Then run the `deploy-verify` agent (lean venv; the macro map shows every city,
-clicking each marker opens its page, each switcher works, each map renders).
+Then check the page with one quick browser render; the `deploy-verify` agent
+(scope `city-added`: lean venv, the macro map shows every city, clicking each
+marker opens its page, each switcher works, each map renders) runs once per
+batch at review time (`CLAUDE.md`, `publish-city`).
 
 ## Step 9 - Commit, log, plan
 
 - Run `python pipeline/drift_check.py <city>` after committing the city, to
   confirm outputs regenerate identically.
-- Add `DECISIONS.md` entries (see the `decisions-entry` skill): the city
-  added with per-step row counts, every scoping decision and rejected
+- Add decisions entries (see the `decisions-entry` skill), in the session's
+  drafts file `docs/decisions_drafts/<session-or-branch>.md`, never in
+  `DECISIONS.md` itself (`CLAUDE.md`): the city added with per-step row counts, every scoping decision and rejected
   alternative, workarounds (a mirror host, a hand-curated alias list), and
   known limitations. Counts go there, not in `project_context.md`.
 - Update `docs/project_context.md` (current state only - which cities exist,

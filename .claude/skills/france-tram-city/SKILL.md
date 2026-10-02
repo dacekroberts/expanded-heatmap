@@ -57,11 +57,15 @@ Build on a branch, never on master: `app/` lands at review time only.
    what it wrote, settle the public names, and clear every remaining to-do.
 5. Steps 1, 2 and 3. A French step 2 peaks at about 0.4 GB (measured): light
    work, no notice needed. Then `python scripts/france_page.py <slug>
-   --write` writes the page from the approved template, with every brace from
-   the build. `python scripts/france_source_rows.py <slug> --write` adds the
-   source rows, and `python scripts/france_excluded_section.py` rewrites the
-   batch's section of `docs/excluded_categories.md`. Then the checks under
-   "Before publishing".
+   --write` writes the whole page from the approved template (section 6),
+   with every brace from the build, in the city-page format
+   (`docs/city_page_format.md`, section 1). Never edit the page's figures by
+   hand or start it from an older page; re-run the script after a rebuild.
+   `python scripts/france_source_rows.py <slug> --write` adds the source rows
+   to `docs/data_sources/france.md`, and `python
+   scripts/france_excluded_section.py` rewrites the batch's section of
+   `docs/excluded_categories.md` (format: `docs/city_page_format.md`,
+   sections 2 and 3). Then the checks under "Before publishing".
 
 ## What already exists - reuse it, do not rewrite it
 
@@ -89,9 +93,9 @@ Build on a branch, never on master: `app/` lands at review time only.
   does), its newest row is under five years old, and the data date goes on
   the page.
 - **The page text is approved word for word** (below).
-- **Every French city tags `"region": "Europe"`** today. A France North /
-  France South split at latitude 46.5 is recommended and HELD with the
-  app/chrome role (handoff section 4). It is not this skill's to make.
+- **A French city tags `"region": "France North"` at latitude 46.5 and up,
+  `"France South"` below** (owner, 2026-09-30: DECISIONS "France splits into
+  two macro-map regions, France North and France South, at zoom 5.0").
 - **TER is excluded in every French city; ferries are excluded** (Marseille,
   2026-09-23, recorded as revisitable). **Aerial lifts are drawn**:
   Toulouse's Téléo (owner, 2026-09-23), and Brest's cable car on that
@@ -315,55 +319,115 @@ For every city, also:
   notice where OSM supplies geometry;
 - a row per new source in `docs/data_sources/france.md`: the feed, the
   commune contour or EPCI file, and any geometry source. Write it before the
-  page exists.
+  page exists, for the reader: the data, its terms and its notices. How a
+  source was found or checked stays out of the rendered doc, or goes between
+  `<!-- internal -->` markers (`docs/city_page_format.md`, section 3).
 
 ## 6. Page text - approved by the owner, word for word (2026-09-29)
 
-Braces are per-city facts, filled from this city's own measurements (step 1,
-step 2 and the rendered map), never from the brief's screen figures. The
-controls paragraph and the heat-layer caveat stay exactly as on Rennes's
-page (`app/pages/25_Rennes_Heatmap.py`), and so does the transit caption
-(from `provenance.json`), with the operator's credit and any notice its
-licence read requires.
+`scripts/france_page.py` writes this section's text, and the page around it,
+in the city-page format (`docs/city_page_format.md`, section 1): the title
+(`render_city_title`), the map, the two captions, the bullets below, then
+`render_map_help`, `render_excluded_stations`, `render_country_links` and
+`render_site_notices` last. The wording is as the 21 built pages carry it
+after the 2026-10-01 prose pass (`app/pages/100_Le_Mans_Heatmap.py` to
+`120_Angers_Heatmap.py`). Braces are per-city facts, filled from this city's
+own measurements (step 1, step 2 and the rendered map), never from the
+brief's screen figures. A sentence from this template needs no read-back.
 
-> {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
-> and in the legend, from the operator's own published timetable feed. {City}
-> has no metro, so its trams are its rapid transit, as in Riga. Every tram
-> stop here gets rings.
+**The captions**, directly under the map, from `provenance.json`:
+
+> Transit data © {producer} ({operator}), via transport.data.gouv.fr, from the
+> feed published for **{start}** to **{end}**; snapshot taken **{date}**.
 >
-> The map covers the **{commune of City / N communes of the Métropole}**.
-> {Where a line runs past it: which stops are left out and why, as Rennes's
-> page does.}
+> Business data: Source : Insee, SIRENE ({edition} edition) and its
+> geolocation file.
+
+The credit is the NAP dataset's legal owner with the operator; the producer
+alone for Bordeaux and Angers (`PRODUCER_ONLY`), and Syndicat mixte Atoumod
+for the Normandie aggregate (section 5). « Source : Insee » stays verbatim
+and outside the provenance block (check M of `check_provenance.py`).
+
+**The prose**, as bullets under three bold headings:
+
+> **The trams**
 >
-> Businesses come from **SIRENE**, France's national register of
-> établissements, joined to INSEE's geolocation file, the same sources as
-> Paris, Marseille, Toulouse, Lille and Rennes. {Share} of active
-> establishments here are marked non-diffusible by INSEE, which withholds
-> their name, address and coordinates together, so they never reach this map.
-> Where SIRENE records no shop sign or trading name, the dot shows the address
-> instead.
+> - {N} {operator} tram lines are drawn, **{lines}**, each labeled on the map
+>   and in the legend, from the operator's own published timetable feed.
+> - {City} has no metro, so its trams are its rapid transit, as in Riga.
+>   Every tram stop here gets rings.
+> - **Tram stops sit closer together than metro stations**, a median of
+>   {spacing, to the nearest 10} m here, so the rings are drawn at half the
+>   usual size (0.05 to 0.3 mi), as on the other French maps.
+> - The map covers the **commune of {City}**. *[Regional:]* The map covers
+>   the **{n} communes of {EPCI}** that the trams serve.
 >
-> **Read the density as a register, not a street survey.** {Same paragraph as
-> Rennes, with this city's ratio to OpenStreetMap's restaurants.}
+> *[Where a line runs past the commune:]*
+> - The map covers the **commune of {City}**. **{Lines} run past it**, so
+>   {k} stops beyond the boundary are left out: {stops} in {commune}; {stops}
+>   in {commune}.
+> - The lines are still drawn to their ends, but those stops get no ring and
+>   their businesses are not counted; they are listed below.
+> - Their communes' businesses are in the same national register this map
+>   reads, so leaving them out is a choice rather than a limit of the data:
+>   the map keeps to the commune, as most of the French maps do.
 >
-> **Tram stops sit closer together than metro stations**, a median of
-> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
-> 0.3 mi), as on the other French maps. **About {share} of storefronts sit
-> within a ring.**
+> **The businesses**
+>
+> - Businesses come from **SIRENE**, France's national register of
+>   établissements, joined to INSEE's geolocation file, the same sources as
+>   the other French maps.
+> - INSEE withholds the name, address and coordinates of about {share}% of
+>   active establishments here (those it marks non-diffusible), so they never
+>   reach this map.
+> - Where SIRENE records no shop sign or trading name, the dot shows the
+>   address instead.
+> - **About {share}% of storefronts sit within a ring.**
+>
+> **Reading the density**
+>
+> - **Read the density as a register, not a street survey.** SIRENE records
+>   where a business is *registered*, and some registered establishments have
+>   no customer-facing shopfront; nothing in the data says which.
+> - Counting restaurants alone, which SIRENE and OpenStreetMap define in
+>   nearly the same way, this map has about **{ratio} times** as many in the
+>   commune of {City} as OpenStreetMap does.
+
+One stop left out takes the singular ("one stop beyond the boundary is left
+out", "that stop gets no ring and its businesses are not counted; it is
+listed below", "Its commune's businesses ... leaving it out"); one line, "{Line} runs
+past it" and "The line is still drawn to its ends". The stops are "listed below" because
+`render_excluded_stations` lists them on the page: never a repository path in
+page text. Then `render_map_help("three business categories (Retail, Food
+service and Personal services)")`, the same on every page: no controls
+paragraph or heat caveat of the city's own.
+
+**Where the track comes from OpenStreetMap** (no usable shapes: Montpellier,
+Strasbourg, Le Havre, Caen, Rouen), the first bullet ends "..., their stops
+from the operator's own published timetable feed and their track from
+OpenStreetMap" ("the Normandie region's published timetable feed" for Caen and
+Rouen). That clause is the generator's departure from the approved wording,
+flagged for the owner at review time (`france_page.py`'s `source_clause`).
 
 A city whose median stop gap is over about 550 m keeps the standard rings and
-drops the last paragraph's first sentence.
+drops the ring bullet (none in the batch measured over 510 m; the generator
+writes it for every city, so that city's page is a departure for the owner).
 
 **Departures are owner calls, never edits.** Three are approved
 (2026-09-30):
 
-- **Rouen**: the first paragraph's second sentence reads "Rouen's métro is a
-  light rail running mostly on the street, so every stop gets rings."
-- **Brest**: "two tram lines and the cable car".
-- **Nice**: its line count includes route B.
+- **Rouen**: the heading is **The métro** and the ring bullet starts
+  "**Stops sit closer together ...**"; the first two bullets read "One Astuce
+  line is drawn, **Métro**, labeled on the map and in the legend, ..." and
+  "Rouen's métro is a light rail running mostly on the street, so every stop
+  gets rings."
+- **Brest**: "Two Bibus tram lines and the cable car are drawn, **Tram A,
+  Tram B and Téléphérique**, ...".
+- **Nice**: its line count includes route B ("Four Lignes d'Azur tram lines").
 
 Anything else that does not fit the template goes to the owner as a
-proposed sentence.
+proposed sentence, flagged in the session's drafts file
+(`docs/city_page_format.md`, section 6).
 
 ## 7. The macro map and the app entry
 
@@ -371,9 +435,10 @@ proposed sentence.
   dot colour, the highest-order mode drawn (`metro` > `light_rail` >
   `tram`); `coverage` is the fill. SIRENE carries all three buckets, so
   every French city is `"full"`. `mode` is `"tram"` for 19 cities and
-  `"light_rail"` is approved for Rouen. `scaffold_city.py --mode` arrives
-  with that branch; until it lands, the batch script prints the values to
-  set by hand from `MAP_MODE` and `MAP_COVERAGE`.
+  `"light_rail"` is approved for Rouen. The batch script passes `--mode` to
+  `scaffold_city.py` (which requires it) from the city's spec;
+  `scaffold_city.py` writes no `coverage`, so set it in the `cities.py`
+  entry from `MAP_COVERAGE`.
 - The label width is measured in a real browser for `check_macro_labels.py`
   (`scaffold_city.py`'s step 5), and the France view is the app/chrome
   role's question.
@@ -383,12 +448,17 @@ proposed sentence.
 
 ## Before publishing (each city)
 
-`python scripts/check_personal_exposure.py <slug>` (verdict in
-`DECISIONS.md`); `python scripts/check_provenance.py` names the city OK;
-`python scripts/check_scope_disclosure.py` passes, with the excluded
-categories in `docs/excluded_categories.md` and the rail scope on the page;
-`python pipeline/drift_check.py <slug>`; `grep -rn TODO pipeline/<slug> app`
-is empty; a `DECISIONS.md` entry (`decisions-entry`). Then `publish-city`.
+`python scripts/check_personal_exposure.py <slug>` (verdict in the
+session's drafts file and `docs/privacy_verdicts.md`); `python
+scripts/check_provenance.py` names the city OK; `python
+scripts/check_scope_disclosure.py` passes, with the excluded categories in
+`docs/excluded_categories.md` and the rail scope on the page; the page, its
+captions and its reference-doc rows read as `docs/city_page_format.md` sets
+out (no repository path, script or check name in page text); `python
+pipeline/drift_check.py <slug>`; `grep -rn TODO pipeline/<slug> app` is
+empty; a decisions entry in the session's drafts file
+(`docs/decisions_drafts/<session-or-branch>.md`, `decisions-entry`). Then
+`publish-city`.
 
 ## The batch, one line each
 

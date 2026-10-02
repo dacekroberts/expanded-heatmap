@@ -270,16 +270,21 @@ the step, not deleting the constant.
 
 ### 5a. Promises to a reader that nobody can keep
 
-A page that says "the excluded stations are listed in
-`outputs/montreal/excluded_stations.csv`" has made a claim on behalf of someone
-who will go and look. `outputs/` is committed and `data/` is not, so a city
-added in a hurry can cite a file that never leaves the machine it was built
+A page that said "the excluded stations are listed in
+`outputs/montreal/excluded_stations.csv`" made a claim on behalf of someone
+who would go and look. `outputs/` is committed and `data/` is not, so a city
+added in a hurry could cite a file that never leaves the machine it was built
 on - and nothing about the page looks wrong from the inside.
 
 `check_provenance.py` check J resolves every `outputs/...` path named in a page
 or a doc and fails if it is missing OR merely uncommitted. It was clean when
 written, across 17 paths; it exists for the seventeenth city rather than for
 the sixteen that are already right.
+
+Since 2026-10-01 a repository path on a city page is a defect in itself, even
+when it resolves: the page lists the stations with `render_excluded_stations`
+and its bullets say "listed below" (`docs/city_page_format.md` section 1,
+"Never on a page"). Check J still guards the docs that cite a file.
 
 ### 8a. Compliance artefacts that quietly stop being evidence
 
@@ -311,6 +316,49 @@ git worktree prune --dry-run -v
 git branch --merged origin/master
 git rev-list --count origin/master..<branch>   # 0 = safe to delete
 ```
+
+### 9. Reader-facing text that left the 2026-10-01 formats
+
+The prose and UI pass set one format for what a city publishes, in
+`docs/city_page_format.md`. Each part of it is a place a later edit drifts
+back, and only some of it is checked:
+
+- **A city page out of order.** Title and subtitle (`render_city_title`), the
+  map, captions, bullets under bold headings, `render_map_help`,
+  `render_excluded_stations`, `render_country_links`, `render_site_notices()`
+  last. Look for an `st.title`, a paragraph above the map, a controls paragraph
+  of the page's own, or a path, script, check or skill name in page text.
+  `scripts/rendered_surfaces.py` lists every page to read.
+- **A reference-doc section that files under no country.** In
+  `docs/excluded_categories.md` and `docs/data_sources/<country>.md` every
+  heading for a city names the city (`app/country_sections.py` files by it),
+  and a city's gaps and limits sit in its own section, never in the shared
+  "What is missing rather than excluded" or "Honest limits".
+- **Process notes on a rendered doc.** Check scripts, `DECISIONS.md`,
+  `PLAN.md`, skill and agent names, build briefs and internal docs either stay
+  off those docs or sit between `<!-- internal -->` and `<!-- /internal -->`
+  (`country_sections.public()` strips them). No check decides this: grep the
+  rendered docs for `check_`, `DECISIONS`, `PLAN.md`, `licence-read`,
+  `build_briefs` and read each hit outside a marker. A marker that holds a `|`
+  or crosses a blank line is a defect too, and so is prose that reads badly
+  with the span deleted.
+- **British spelling in reader-facing text.** No check decides this either:
+  grep for `licence`, `colour`, `centre`, `neighbourhood`, `labelled`, `grey`,
+  `-ise`, and leave what is kept as written (required notices, license titles,
+  quotes, a register's own category names, official names, code identifiers
+  and file names). Section 4 of the spec has the list.
+- **A registrant's own name.** `check_name_keys.py` fails a plain withheld-name
+  list in `pipeline/`; no check reads the docs, briefs or decisions entries for
+  one. A name used as an example is a defect: replace it with a placeholder.
+
+**A wording finding on a rendered surface is a proposal, not an edit.** Write
+it in the `scripts/prose_proposals.py` format (`kind: fix` for a factual error
+with one right answer, `proposal` for wording), collate, and let the owner
+approve by ID; past a few dozen, give the owner a review page with
+`scripts/proposals_page.py` (`docs/review_lane_kit.md` section 6). After
+applying, re-run any template a proposal changed (`france_page.py <slugs>
+--write`, `scaffold_city.py`'s `PAGE`) and carry the sentence into the skills
+that write it.
 
 ## What this role does NOT touch
 
@@ -378,8 +426,18 @@ it needs that session's context.
 
 ## Checks that exist today
 
+`python scripts/check_all.py` runs every pass/fail check below that needs no
+argument and no browser (`--list` names them); the pre-push hook calls it. The
+table covers the ones a sweep reads most.
+
 | Check | What it decides |
 |---|---|
+| `python scripts/check_all.py [--list]` | every pass/fail check in one run, offline, about 30 s; what the pre-push hook runs |
+| `python scripts/check_name_keys.py [--selftest]` | no `PERSON_NAME*` list in `pipeline/` holds a plain name rather than a key (`pipeline/name_keys.py`); it does not read docs, briefs or `DECISIONS.md` |
+| `python scripts/check_scope_disclosure.py` | both halves of every city's scope (its rail and its businesses) reach the reader |
+| `python scripts/check_stray_bullets.py` | no wrapped spaced hyphen in a rendered doc that the app would draw as a bullet mid-paragraph |
+| `python scripts/rendered_surfaces.py --check` | `docs/rendered_surfaces.md`, the list of every surface the app renders, is current |
+| `python scripts/prose_proposals.py collate` / `apply --ids ...` | not a check: validates a review's wording proposals into one list for the owner and applies only the approved ones; `scripts/proposals_page.py` turns a long list into a review page |
 | `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves**; **every table row renders and matches its header's width**; **every `outputs/` file named in prose exists and is committed**; **OSM attribution on every map, every CRS matches its longitude, no map step forks the renderer** |
 | `python scripts/decisions_index.py --check` | `DECISIONS.md`'s generated index is current |
 | `python pipeline/drift_check.py` | committed `outputs/` still match what the pipeline produces |

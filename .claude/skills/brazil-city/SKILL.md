@@ -90,8 +90,9 @@ same query strings, so a fresh checkout reproduces the cache.
 5. **The unreadable share is highest where the map looks.** São Paulo: 40.0%
    of possible storefronts unreadable inside the rings, 30.6% beyond. Station
    areas are commercial districts full of bare trade names. Run `build_check`,
-   read a fresh sample, and state the estimate on the page (São Paulo's: "one
-   storefront in ten to one in seven within the station rings").
+   read a fresh sample, and state the estimate on the page, under **Reading
+   the map** (São Paulo's: "the map misses roughly one storefront in ten to
+   one in seven within the station rings").
 6. **At an address that also holds a dwelling, the pin shows its category** -
    the owner's decision, an LGPD condition, structural. Brasília's addresses
    name a block, not a door; the lot-aware key handles it and is already in
@@ -200,16 +201,60 @@ Santo Agostinho 2602902 + Camaragibe 2603454 · bbox (-8.40, -35.15, -7.92, -34.
 
 ## How the batch came out (2026-09-24) - for the next Brazilian city
 
-- **The pages are generated**, from one template holding the census paragraphs
-  (São Paulo's approved wording, one figure changed per city). A further city
-  copies its neighbour's page and changes the rail paragraph, the unreadable
-  share and the closing sentence - not the census paragraphs.
+- **The pages were generated in 2026-09**, from one template holding the
+  census paragraphs (São Paulo's approved wording, one figure changed per
+  city); the 2026-10-01 pass set them as bullets. The page format is now
+  `docs/city_page_format.md` (read it before writing any reader-facing text):
+  a further city starts from `scaffold_city.py`'s page, never a copy of an
+  older one, and fills it as below.
 - **The caption reads its dates from `provenance.json`**: the CNEFE zip's
   `last_modified` (IBGE's server date, 2024-05-20 for every file so far - the
-  fetch now records it on download) and the rail cache's `retrieved`.
+  fetch now records it on download) and the rail cache's `retrieved`. It
+  replaces the scaffold's `render_data_age` and reads "Snapshot:
+  establishments as recorded in the 2022 census (IBGE CNEFE, file(s) dated
+  **<date>**); <rail source>, retrieved **<date>**." (São Paulo's code, with
+  the city's own `_RAIL` list.)
+- **The page's bullets** (São Paulo, Rio de Janeiro, Salvador and the rest;
+  approved wording, no read-back):
+  - **The lines**: "<N> lines are drawn — **<lines>** — each labeled on the
+    map and in the legend", where the lines and stations come from, the rail
+    test ("Suburban railways are left out of these maps unless, inside the
+    city, they run like a metro. <Line> does: <its spacing and frequency>."),
+    what is not drawn and why, and "The map covers the **município of
+    <City>**; <stations beyond it> are not counted." A new city's rail
+    sentences are its own, so each is a proposal for the drafts file and
+    review time (spec, section 6).
+  - **The businesses**, verbatim on every Brazilian page: "Businesses come
+    from **the national address register of the 2022 census** (CNEFE), kept by
+    IBGE, Brazil's statistics agency. Census enumerators walking every street
+    recorded each establishment, what it was, and a map point for it. **Read
+    it as a 2022 picture, not today's.**"; "IBGE did not classify the
+    establishments: each dot's category is this project's reading of the
+    enumerator's words, and the names were not checked against any business
+    register."; "Where one entry stands for several shops, as in a shopping
+    center or a gallery, it is one dot."; "At an address that is also
+    someone's home, the dot shows only its category." (Brasília adds one
+    bullet on its block addresses.)
+  - **Reading the map**: "**About a third of the establishments that might be
+    shops, cafés or salons carry a description no rule can read, and are not
+    drawn.** Most are brand or trade names with no word saying what they
+    sell." with the city's own share from `build_check` ("Almost half" in
+    Porto Alegre), the near-station figure where it differs, and the ring
+    share in bold ("**About one storefront in five sits within a station
+    ring.**").
+  - `render_map_help("three business categories (Retail, Food service and
+    Personal services)")`.
 - **`docs/excluded_categories.md`'s section is built from the step 2 log**:
   the classification table gives the excluded counts, and the unreadable figure
-  is `unmatched` plus `catch-all`. Keep São Paulo's shape.
+  is `unmatched` plus `catch-all`. Keep São Paulo's shape, under "Excluded in
+  one city": `### <City> - the same census, <what is its own>`, then
+  **Excluded by what the enumerator wrote**, **Missing rather than excluded**,
+  **Shown, but not named**, **One dot for many**, **Stations.** and the
+  shared census blocks. The city's own gaps and limits stay in that section,
+  never the shared "What is missing" or "Honest limits". Its rows in
+  `docs/data_sources/brazil.md` carry the data and its terms; who read a
+  licence goes between `<!-- internal -->` markers, as the Brazil rail
+  heading there does.
 - **Macro-map labels**: São Paulo and Santos sit 6 px apart at South America's
   fitted zoom (3.04), so São Paulo's name runs west, Rio's east and Santos's
   below. A new city near either needs its label scored with all three.

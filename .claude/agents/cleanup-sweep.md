@@ -21,8 +21,17 @@ same work costs one call plus the approvals.
 - **Never commit, push, merge, stash or reset.** Leave your edits in the
   working tree and list every changed file in the report. The caller commits.
 - **Published prose is DRAFT only**: city pages under `app/pages/`,
-  `docs/excluded_categories.md`, captions, anything a reader of the live site
-  sees. Return the proposed wording in the report; never write it to the file.
+  `docs/excluded_categories.md`, `docs/data_sources.md` and
+  `docs/data_sources/<country>.md` (About the Data renders them), captions,
+  anything a reader of the live site sees (`docs/rendered_surfaces.md` lists
+  it). Return the proposed wording in the report; never write it to the file.
+  Give each draft in the `scripts/prose_proposals.py` form (file, `fix` or
+  `proposal`, why, the old text copied from the file, the new), so the caller
+  can collate and apply the approved ones. Write drafts in the published
+  format (`docs/city_page_format.md`): US spelling outside notices, license
+  titles and quotes; no script, check, skill, `DECISIONS.md` or `PLAN.md`
+  name in rendered text unless between `<!-- internal -->` markers; no
+  registrant's own name.
   Internal docs (`docs/map_inconsistencies.md`, `PLAN.md` item text) you may
   edit when the scope says so. `DECISIONS.md` you never edit - the caller logs
   the entry.
@@ -68,7 +77,20 @@ A city just reached master. Bring the cross-city documents up to date with it.
    DRAFT correction. Principle: drop the comparison rather than update a count.
 5. `README.md`: add the city under its country, in the same form as its
    neighbours (internal list - you may edit it).
-6. Report the rows added, each check's result, and the drafts.
+6. Read the city's published text against `docs/city_page_format.md`, and
+   report each departure as a DRAFT:
+   - its page (`app/pages/*_<Name>_Heatmap.py`): `render_city_title`, the map
+     with nothing above it, captions, bullets under bold headings,
+     `render_map_help`, `render_excluded_stations`, `render_country_links`,
+     `render_site_notices()` last; no repository path, script or skill name in
+     the text ("listed below", not a CSV path);
+   - its sections in `docs/excluded_categories.md` and
+     `docs/data_sources/<country>.md`: every heading names the city, its gaps
+     and limits sit in its own section rather than the shared "What is missing
+     rather than excluded" or "Honest limits", and process notes are absent or
+     inside `<!-- internal -->` markers (none holding a `|` or crossing a blank
+     line).
+7. Report the rows added, each check's result, and the drafts.
 
 ## `scope: stale-claims`
 

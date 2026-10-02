@@ -42,7 +42,8 @@ What the two diagnosed cities looked like:
 **Two traps at this step:**
 
 - **A dataset title is not evidence.** Both of the above were recorded in
-  `docs/city_shortlist.md` as viable single sources on the strength of their
+  the city shortlist of the time (`docs/city_shortlist.md`, retired
+  2026-09-27 for `docs/city_master_list.md`) as viable single sources on the strength of their
   titles and a schema check. The schema was fine; the *contents* answered a
   different question.
 - **A big row count hides the problem.** Philadelphia's 118,535 active
@@ -98,7 +99,14 @@ For each source, before it is used:
    MUST display when published" section, which gates the public deploy.
 4. **Anything needing a human decision** - a purpose limitation, a bar on
    modification. Raise it; do not read the clause generously. Record the
-   verdict and its reasoning in `DECISIONS.md` and attribute the call.
+   verdict and its reasoning in the session's drafts file
+   (`docs/decisions_drafts/`, folded into `DECISIONS.md` later) and attribute
+   the call.
+
+The rows and notices are reader text on About the Data: one row per source
+under the city's name, the city's coverage gaps in its own rows, no process
+notes outside `<!-- internal -->` markers (`docs/city_page_format.md`,
+sections 2 and 3).
 
 **Findings worth carrying in, all of them counter-intuitive:**
 
@@ -135,6 +143,8 @@ New York's shape, which needed **no change to `map_common.py`**:
 - `VALUE_COLUMN` holds **each source's own category string**, so a tooltip
   shows the registry's own words ("Pizza", "Retail food store").
 - `FIELD_LABEL` must be generic ("Category") - it is shared across sources.
+  It renders in every tooltip, so it and any English label the module
+  writes are American English (`premises-taxonomy` Step 8).
 - The city's `config.py` gets a `SOURCES` table: per source, the raw file, the
   endpoint, the **server-side filter applied at download**, and which columns
   carry the name, category and address.
@@ -159,7 +169,7 @@ licence *and* a city tobacco licence. Three sources, one storefront.
 - **Under-merging is the safer error.** A spelling difference between two
   registries leaves a business counted twice, which inflates density slightly
   rather than erasing storefronts. **Print both numbers** so the trade-off is
-  visible, and state it on the city page.
+  visible, and state it on the city page (New York's bullet is in Step 6).
 - **Rank the sources** (`SOURCE_PRIORITY`): the registry that identifies a
   business most specifically wins. Food permit, then grocery licence, then
   salon licence, then the city's regulated licences.
@@ -192,17 +202,40 @@ city to `scripts/check_personal_exposure.py` and run it after step 2, per
 
 **Then say what the map does not cover, on the city page.** If a bucket is
 thin, a reader will otherwise infer something about the city's high streets
-from a fact about its licensing. New York's page is the model:
+from a fact about its licensing. The page format is `docs/city_page_format.md`
+section 1: these are bullets under **The businesses**, between the map's
+captions and "Using the map". New York's bullets, as the page carries them
+now, are the model:
 
-> the Retail category is less complete in New York than in the other cities. A
-> clothing shop or a bookshop needs no licence from any of these four
-> registries, so it is simply absent, while restaurants are close to fully
-> covered. Read the balance between categories as a fact about New York's
-> licensing, not about its high streets.
+> - **Four registries, because New York has no general business license.**
+>   Food service comes from the Health Department's restaurant permits, grocery
+>   and bodega retail from the State's retail food store licenses, salons and
+>   barbers from the State's appearance-enhancement licenses, and a narrow
+>   slice of regulated retail from the city's own Consumer and Worker
+>   Protection licenses.
+> - So **the Retail category here covers less of the trade than in most
+>   cities on this site.** A clothing shop or a bookshop needs no license from
+>   any of these four registries, so it is simply absent, while restaurants
+>   appear because the city inspects them.
+> - Read the balance between categories as a fact about New York's
+>   licensing, not about its high streets.
+> - Where one business appears in two registries it is counted once, matched
+>   on address and name; a spelling difference between two registries can
+>   leave it counted twice.
 
-Record the same in `docs/excluded_categories.md` under what is *missing*
-rather than *excluded* - the distinction matters, because everything else on
-that page was a choice and this was not.
+These fill in the scaffold's **The businesses** bullet ("the data source, and
+any category it is missing"), so a new city's version needs no read-back; a
+sentence beyond what the scaffold's bullets cover is a proposal, flagged in
+the drafts file (`docs/city_page_format.md`, section 6), and the build goes
+on.
+
+Record the same in `docs/excluded_categories.md`, **in the city's own
+section** (`### <City> - ...` under "Excluded in one city"), as what is
+*missing* rather than *excluded*: New York's section carries it as a
+paragraph led "**Missing rather than excluded**". The shared "What is missing
+rather than excluded" and "Honest limits" sections hold only what is true of
+every city. The distinction matters, because everything else on that page was
+a choice and this was not.
 
 ## Checklist
 
@@ -219,7 +252,8 @@ that page was a choice and this was not.
 - [ ] Dedup on address + name, both numbers printed, priority ranked, adjunct
       licences last
 - [ ] No registrant-name column loaded anywhere; an assertion proves it
-- [ ] `scripts/check_personal_exposure.py` run and the verdict in
-      `DECISIONS.md`
-- [ ] Thin buckets stated on the city page and in
-      `docs/excluded_categories.md`
+- [ ] `scripts/check_personal_exposure.py` run, the verdict in the drafts
+      file and its row in `docs/privacy_verdicts.md`
+- [ ] Thin buckets stated as bullets under **The businesses** on the city
+      page and in the city's own section of `docs/excluded_categories.md`
+      (`docs/city_page_format.md`)

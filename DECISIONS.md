@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**338 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**339 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
 - [The prose and UI pass landed and live after the owner's reboot; the deploy check run in parallel lanes](#2026-10-02---the-prose-and-ui-pass-landed-and-live-after-the-owners-reboot-the-deploy-check-run-in-parallel-lanes)
+- [The city-building skills rewritten to the new page format; one French name restored (owner)](#2026-10-02---the-city-building-skills-rewritten-to-the-new-page-format-one-french-name-restored-owner)
 
 **2026-10-01**
 
@@ -13971,3 +13972,61 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **Torn down:** the five prose worktrees, each checked with
   `check_worktree_data.py` and with its junctions unlinked first. Their
   branches were deleted once each was confirmed in origin/master.
+
+### 2026-10-02 - The city-building skills rewritten to the new page format; one French name restored (owner)
+
+- **The owner's standing instruction (2026-10-01):** once the prose and UI pass
+  was deployed, rework the city-building and page skills to the new formats,
+  and hold the UK builds until then.
+- **One spec, which the skills point to:** `docs/city_page_format.md`. It covers
+  - the page order;
+  - bullets under bold headings;
+  - the city's headings in the two reference docs naming the city, with its
+    own gaps and limits in its own section;
+  - process notes kept off the rendered docs, or between internal markers;
+  - American spelling and what stays as written;
+  - no registrant's name in any doc;
+  - who approves the words.
+
+  `CLAUDE.md`'s "Where to start" points to it.
+- **Five agents in parallel, each with its own files:**
+  - the core build skills;
+  - the three tram skills;
+  - Japan, Tokyo wards, Taiwan, Brazil and CJK text;
+  - country, multi-source, taxonomy and re-probe;
+  - the support skills and the three agent definitions.
+
+  Each skill's template sentences now match the pages as they stand. They
+  were compared against the generator (`france_page.py`) or against two to ten
+  built pages per family. No data, category, station or privacy rule changed.
+- **Fixed on the way:**
+  - **`france_page.py` still wrote "labelled".** Re-running it would have
+    reverted the US spelling on 21 pages, so it now writes "labeled". With
+    that change, re-running it reproduces 20 of the 21 pages byte for byte.
+  - **The 21st, Valenciennes, was a defect of the US-spelling pass.** The pass
+    had respelled the operator's French name, "SI de mobilité et
+    d'organisation urbaine du Valenciennois", as "d'organization". The
+    generator restored the official name. A scan of the spelling commit's
+    changed lines for non-English context found no other case.
+  - **`pipeline-drift-check` told a session to rename `data/` aside.** That
+    folder is shared by every worktree, so the step now uses
+    `check_deploy_imports.py`'s clean clone.
+  - Stale facts:
+    - `tram-city` had Kansas City and New Orleans as `full`; they are
+      `narrowed`.
+    - `reprobe-city` listed Singapore, now discarded, among the one-bucket
+      cities.
+    - `deploy-verify`'s cost figure now carries the 75 minutes measured at
+      124 cities.
+- **Left for the owner (listed in the report):**
+  - What Is Excluded still points readers to `outputs/<city>/excluded_stations.csv`
+    in about a dozen city sections, and `france_excluded_section.py` writes the
+    same.
+  - Small wording splits between pages of one family. The tram pages place
+    the in-ring share in two different places, and Den Haag's third heading
+    differs. The Japanese pages split 3-3 on dashes versus parentheses.
+  - Whether to add a `category_rules.md` row for a person's own license
+    inside someone else's shop. Adding it fails the continuity check until
+    every taxonomy answers it.
+  - Whether the internal markers and the spelling should get checks of their
+    own.
