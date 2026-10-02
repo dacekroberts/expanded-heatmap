@@ -1795,6 +1795,157 @@ _NOTICES = [
      "mapped by distance to tram stops. Not produced or endorsed by the "
      "Gemeente Den Haag.",
      False),
+    # Manchester (notice 84): the FSA's FHRS data for the seven Metrolink
+    # districts, Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Manchester)",
+     "Manchester's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Manchester's postcode centroids (notice 85): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Manchester)",
+     "Where the Food Standards Agency lists a Manchester food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # NaPTAN (notice 86): gate 3's second source for the UK tram and
+    # light-rail cities, counted only. The OGL's default statement, since the
+    # Department prescribes none (licence-read 2026-10-02). Wording approved
+    # by the owner 2026-10-02.
+    ("Department for Transport, NaPTAN (United Kingdom)",
+     "Stop counts on the UK's tram and light-rail maps are checked against NaPTAN, the "
+     "National Public Transport Access Nodes dataset published by the Department for "
+     "Transport. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The "
+     "Department for Transport does not endorse this map.",
+     False),
+    # Birmingham (notice 87): the FSA's FHRS data for the three West Midlands
+    # Metro districts, Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Birmingham)",
+     "Birmingham's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Birmingham's postcode centroids (notice 88): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Birmingham)",
+     "Where the Food Standards Agency lists a Birmingham food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Edinburgh (notice 89): Scotland's FHIS data for the City of Edinburgh, Glasgow's
+    # notice 61 with the city and date changed and Manchester's centroid clause added.
+    ("Food Standards Scotland (Edinburgh)",
+     "Edinburgh's food businesses are from Food Standards Scotland, Food Hygiene Information "
+     "Scheme data, via the Food Standards Agency, extracted on 2026-10-02. Contains public "
+     "sector information licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected; premises at a flat address or registered as a "
+     "childminder left out; premises without a location placed at their postcode's center, or "
+     "left out where they have no full postcode; trade names shown where a business is "
+     "registered under another name. No inspection result is shown. Neither Food Standards "
+     "Scotland nor the Food Standards Agency endorses this map.",
+     False),
+    # Edinburgh's postcode centroids (notice 90): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Edinburgh)",
+     "Where the Food Standards Agency lists an Edinburgh food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Sheffield (notice 91): the FSA's FHRS data for the City of Sheffield,
+    # Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Sheffield)",
+     "Sheffield's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Sheffield's postcode centroids (notice 92): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Sheffield)",
+     "Where the Food Standards Agency lists a Sheffield food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Nottingham (notice 93): the FSA's FHRS data for the four NET council
+    # areas, Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Nottingham)",
+     "Nottingham's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted between 2026-10-01 and 2026-10-02. Contains public sector information "
+     "licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Nottingham's postcode centroids (notice 94): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Nottingham)",
+     "Where the Food Standards Agency lists a Nottingham food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Blackpool (notice 95): the FSA's FHRS data for Blackpool and Wyre,
+    # Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Blackpool)",
+     "Blackpool's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Blackpool's postcode centroids (notice 96): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Blackpool)",
+     "Where the Food Standards Agency lists a Blackpool food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

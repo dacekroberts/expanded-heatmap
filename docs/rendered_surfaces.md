@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**124 city pages, 3 fixed pages and the Overview; 26 rendered docs; 2 app data files.**
+**130 city pages, 3 fixed pages and the Overview; 26 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -159,3 +159,9 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Ostrava_Heatmap` | Ostrava | `ostrava` | ✓ |
 | `/Liberec_Heatmap` | Liberec (Regional) | `liberec` | ✓ |
 | `/Most_Heatmap` | Most (Regional) | `most` | ✓ |
+| `/Manchester_Heatmap` | Manchester (Regional) | `manchester` | ✓ |
+| `/Birmingham_Heatmap` | Birmingham (Regional) | `birmingham` | ✓ |
+| `/Edinburgh_Heatmap` | Edinburgh | `edinburgh` | ✓ |
+| `/Sheffield_Heatmap` | Sheffield | `sheffield` | ✓ |
+| `/Nottingham_Heatmap` | Nottingham (Regional) | `nottingham` | ✓ |
+| `/Blackpool_Heatmap` | Blackpool (Regional) | `blackpool` | ✓ |

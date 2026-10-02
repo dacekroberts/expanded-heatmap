@@ -1,0 +1,32 @@
+{
+  "fetched_utc": "2026-10-02T19:41:29+00:00",
+  "fsa_file_url": "https://ratings.food.gov.uk/OpenDataFiles/FHRS{code}en-GB.xml",
+  "fsa_authorities": {
+    "405": "Bury",
+    "415": "Manchester",
+    "418": "Oldham",
+    "419": "Rochdale",
+    "422": "Salford",
+    "430": "Tameside",
+    "431": "Trafford"
+  },
+  "fsa_extract_dates": {
+    "Bury": "2026-10-02",
+    "Manchester": "2026-10-02",
+    "Oldham": "2026-10-02",
+    "Rochdale": "2026-10-02",
+    "Salford": "2026-10-02",
+    "Tameside": "2026-10-02",
+    "Trafford": "2026-10-02"
+  },
+  "fsa_extract_range": [
+    "2026-10-02",
+    "2026-10-02"
+  ],
+  "codepoint_edition": "2026-08",
+  "osm_fetched_utc": "2026-10-02T19:41:29+00:00",
+  "naptan_url": "https://naptan.api.dft.gov.uk/v1/access-nodes?dataFormat=csv&atcoAreaCodes={code}",
+  "naptan_atco_areas": [
+    "940"
+  ]
+}

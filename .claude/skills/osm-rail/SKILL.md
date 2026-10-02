@@ -294,6 +294,31 @@ file path. Format and order: `docs/city_page_format.md` section 1.
   Overpass 504ed on every boundary query. Entrances sit in the same layer
   (`…站-出入口1`): select the station rows by name pattern, a whitelist.
 
+## OSM's service relations can lag the operator's lines (Manchester, 2026-10-02)
+
+**Compare OSM's relations with the operator's CURRENT line list before
+drawing a relation as a line.** Metrolink's 23 relations carried 11 service
+refs from before TfGM's 14 September 2026 change, and five of TfGM's nine
+lines (Purple, Yellow, Burgundy, Blue, Red) ran where no relation did. Every
+stop was still right, and only the services had moved. A label from the
+operator over a relation's geometry would have named a line that no longer
+runs there.
+
+- **The owner's rule (2026-10-02):** the lines may be the operator's own,
+  ROUTED over the kept relations' track through the operator's stop
+  sequences. `pipeline/countries/uk.py` does it (`LINE_STOPS` in the config,
+  `routed_lines`). The routing is the shortest track path stop to stop. Each
+  stop anchors on both tracks of a double-track line, because each direction
+  is its own way, joined only at crossovers.
+- **The relations stay KEPT** for their stops and track. Only the drawing
+  changes.
+- **Gate 3 then cannot be per line**, since the lines are the operator's own
+  lists. It runs on the network total and name by name against a second
+  source (NaPTAN in the UK).
+- **The operator's list has slips too** (TfGM's "Abramham Moss", and a stop
+  left out between two that the track joins): alias them in config, never in
+  OSM's names.
+
 ## Checklist
 
 - [ ] Ground for not using GTFS recorded in the city's config, and approved -

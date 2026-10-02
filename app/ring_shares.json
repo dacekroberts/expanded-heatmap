@@ -618,5 +618,35 @@
   "in_ring": 664,
   "all": 1025,
   "map_blob": "525408951d114fdca732119e4c0d512e42a826ea"
+ },
+ "manchester": {
+  "in_ring": 6202,
+  "all": 11963,
+  "map_blob": "7ed0e86936eb5ac2a28984771dd2794c5353c34d"
+ },
+ "birmingham": {
+  "in_ring": 1642,
+  "all": 9383,
+  "map_blob": "508b0b06386ba94b0227dba8257e0a62d9480bde"
+ },
+ "edinburgh": {
+  "in_ring": 2226,
+  "all": 3750,
+  "map_blob": "59aa87b1ee9f4dba03cae8fae6968f2ab237fa5d"
+ },
+ "sheffield": {
+  "in_ring": 1162,
+  "all": 3348,
+  "map_blob": "307868653de6621d1f1d99a72c527b80879d51de"
+ },
+ "nottingham": {
+  "in_ring": 1210,
+  "all": 3478,
+  "map_blob": "a541119fb02954a04886ee9a4951a5eecc37e007"
+ },
+ "blackpool": {
+  "in_ring": 820,
+  "all": 1648,
+  "map_blob": "6b36c0d3ce1739d62ff7908c52a5bfdee49ecef8"
  }
 }

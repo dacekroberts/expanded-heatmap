@@ -1132,6 +1132,11 @@ CITIES = [
         # and -13 Amsterdam's (1-2 px), so the next European city near here
         # re-scores this one first.
         "label_offset": ("end", -9, -12),
+        # Right of the dot and low in Europe since the UK moved out (2026-10-02):
+        # Europe's re-centred frame put its pill over Birmingham's and
+        # Nottingham's markers.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"Europe": ("start", 10, 26)},
     },
     {
         "name": "Hong Kong",
@@ -1522,7 +1527,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Underground, DLR, Elizabeth line and 6 Overground lines",
-        "region": "Europe",
+        "region": "United Kingdom",
         "country": "United Kingdom",
         "in_default_view": False,
         # Left of the dot, SCORED (width 50.9 px). Above met Amsterdam and
@@ -1567,7 +1572,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Glasgow Subway, one 15-station loop",
-        "region": "Europe",
+        "region": "United Kingdom",
         "country": "United Kingdom",
         "in_default_view": False,
         # Beside its dot, not above: see Newcastle (Regional)'s note. RIGHT of
@@ -1575,6 +1580,10 @@ CITIES = [
         # name to "sgow" at 375 px (41% clipped). Right of it: PROBLEMS 0 and
         # nothing clipped. Width 56.8 px.
         "label_offset": ("start", 12, -4),
+        # BELOW the dot in the United Kingdom and WEST of it in Europe (2026-10-02,
+        # the UK region pass): Glasgow's pill covered Edinburgh's marker in both.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"United Kingdom": ("middle", 0, 22), "Europe": ("end", -10, 0)},
     },
     {
         "name": "Newcastle (Regional)",
@@ -1592,7 +1601,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Tyne and Wear Metro, Green and Yellow lines",
-        "region": "Europe",
+        "region": "United Kingdom",
         "country": "United Kingdom",
         "in_default_view": False,
         # 48 px ABOVE the dot (owner, 2026-09-28; width 143.1 px). At the usual
@@ -3153,6 +3162,197 @@ CITIES = [
         # 768 and 1200; 2026-09-30).
         "label_offset": ("end", -10, 0),
     },
+    {
+        "name": "Manchester (Regional)",
+        "lat": 53.4808,
+        "lon": -2.2426,
+        "page": "pages/156_Manchester_Heatmap.py",
+        # The UK six (2026-10-02), Newcastle's values. `mode` light_rail on the
+        # light-rail test: OSM maps 100% of the kept track railway=light_rail,
+        # 10.2% in tunnel or on a bridge, a 703 m median gap (San Diego's
+        # precedent; owner, 2026-10-02). rail_extra "Trams" as Calgary's
+        # (light rail counts).
+        "coverage": "one_bucket",
+        "mode": "light_rail",
+        "placement": "Register coordinates (94%) and postcode centers (6%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Manchester Metrolink, TfGM's nine lines",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in its own region.
+        "label_tier": "minor",
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # WEST of the dot in the United Kingdom (2026-10-02): above it, the pill
+        # covered Blackpool's marker and overlapped Sheffield's.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"United Kingdom": ("end", -10, 0)},
+    },
+    {
+        "name": "Birmingham (Regional)",
+        "lat": 52.4862,
+        "lon": -1.8904,
+        "page": "pages/157_Birmingham_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: OSM maps 100% of the kept track railway=tram, 7.1% in
+        # tunnel or on a bridge, a 442 m median gap (Riga's tram control; the lead
+        # accepted it 2026-10-02). rail_extra "Trams" as Manchester's. The blurb
+        # names one line: Line 2 (Wednesbury - Dudley) is not yet in passenger
+        # service.
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (95%) and postcode centers (5%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "West Midlands Metro, one line",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
+    {
+        "name": "Edinburgh",
+        "lat": 55.9533,
+        "lon": -3.1883,
+        "page": "pages/158_Edinburgh_Heatmap.py",
+        # The UK six (2026-10-02), Glasgow's values on Scotland's scheme with the
+        # kit's centroid tier. `mode` tram on the light-rail test: OSM maps 100% of the
+        # kept track railway=tram, 4.6% in tunnel or on a bridge, a 614 m median gap
+        # (Dublin's Luas and Riga's precedent). placement 98.5% / 1.5% of the 3,750
+        # placed; data_age the council file's one ExtractDate; rail_extra "Trams" as
+        # Odense's and Göteborg's (the trams are the whole network).
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (98%) and postcode centers (2%)",
+        "data_age": "Extract of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Edinburgh Trams, one tram line",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
+    {
+        "name": "Sheffield",
+        "lat": 53.3811,
+        "lon": -1.4701,
+        "page": "pages/159_Sheffield_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: OSM maps 100% of the kept track railway=tram, 4.3% in
+        # tunnel or on a bridge, a 444 m median gap (Odense's precedent); the owner
+        # approves it with the build. rail_extra "Trams" as Odense's. data_age in
+        # Glasgow's singular form: one council's extract.
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (98%) and postcode centers (2%)",
+        "data_age": "Extract of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Sheffield Supertram, the Blue, Yellow and Purple routes",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
+    {
+        "name": "Nottingham (Regional)",
+        "lat": 52.9548,
+        "lon": -1.1505,
+        "page": "pages/160_Nottingham_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: OSM maps 100% of the kept track railway=tram, 5.5% in
+        # tunnel or on a bridge, a 432 m median gap (the tram list's default;
+        # owner, 2026-10-02). rail_extra "Trams" as Calgary's and
+        # Manchester's. placement: 3,383 FSA points, 95 Code-Point centroids;
+        # data_age: each council's ExtractDate (provenance.json).
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (97%) and postcode centers (3%)",
+        "data_age": "Extracts of 2026-10-01 to 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Nottingham Express Transit, Lines 1 and 2",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+        # Right of the dot and a little high in the United Kingdom (2026-10-02):
+        # above it, the pill covered Sheffield's marker.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"United Kingdom": ("start", 8, -14)},
+    },
+    {
+        "name": "Blackpool (Regional)",
+        "lat": 53.8175,
+        "lon": -3.0503,
+        "page": "pages/161_Blackpool_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: 100% railway=tram, 0.0% in tunnel or on a bridge, a 357 m
+        # median gap; street and promenade track (the tram kit's trams). rail_extra
+        # "Trams" as every tram city. placement: 95.9% at the FSA's point, 4.1% at a
+        # postcode centroid, of 1,648.
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (96%) and postcode centers (4%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Blackpool Tramway, one tram line",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -3300,6 +3500,13 @@ REGION_ORDER = [
     # re-centred frame then needed Stockholm's label below its dot. Fitted
     # zoom, no override; PROBLEMS 0 at every width.
     "Czechia",
+    # THE UNITED KINGDOM (owner, 2026-10-02: "implement the high-density cluster
+    # rule to UK, like Japan, France, Czechia"), on Czechia's mechanism: every UK
+    # city, London, Glasgow and Newcastle (Regional) included, in a view of its
+    # own; the six tram and light-rail cities are minor (their pills only here),
+    # and Europe still labels the three metro cities (REGION_LABELS_ALSO).
+    # One region or a split is decided by check_macro_labels.py.
+    "United Kingdom",
     # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
     # further country on the continent joins this view rather than adding one.
     # Brazil alone spans Porto Alegre to Fortaleza, about 3,200 km: the width
@@ -3335,7 +3542,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Seoul Capital Area")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "United Kingdom", "Seoul Capital Area")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
@@ -3462,7 +3669,7 @@ _bad_rof = [c["name"] for c in CITIES if "label_offset_by_region" in c and not (
 if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
-REGION_LABELS_ALSO = {"East Asia": ("Seoul Capital Area",)}
+REGION_LABELS_ALSO = {"East Asia": ("Seoul Capital Area",), "Europe": ("United Kingdom",)}
 if _bad_tier:
     raise ValueError(f"cities.py: {_bad_tier} have a label_tier not in {LABEL_TIERS}")
 _unmoded = [c["name"] for c in CITIES if c.get("mode") not in MODES]

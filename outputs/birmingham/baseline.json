@@ -1,0 +1,14 @@
+{
+  "bucket_food_service": 5796,
+  "bucket_retail": 3588,
+  "duplicate_rows_dropped": 1,
+  "median_gap_m": 442,
+  "naptan_in_scope": 43,
+  "not_placed": 369,
+  "placed_at_centroid": 433,
+  "register_rows": 15215,
+  "stations_in_scope": 35,
+  "stop_positions": 67,
+  "storefront_rows": 9816,
+  "storefronts_placed": 9384
+}

@@ -3332,6 +3332,269 @@ lines, the Sunderland branch included (owner, 2026-09-28): between Pelaw and
 Sunderland it runs on track shared with national rail.
 - Northern's national rail trains are not drawn.
 
+### Manchester (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the seven councils Metrolink serves (Manchester, Salford, Trafford,
+Bury, Rochdale, Oldham and Tameside) inspect for food hygiene; no open
+register of other shops or of personal services covers them, so clothes
+shops, hairdressers and the like are missing rather than excluded. Food shops
+(grocers, off-licenses, bakers, butchers, newsagents selling food,
+supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (1,980), where home caterers
+and event kitchens sit; mobile caterers (742); hospitals, childcare and care
+homes (1,093); schools, colleges and universities (894); hotels and guest
+houses (190); manufacturers and packers (118); distributors and transporters
+(133); importers and exporters (22); farmers and growers (9).
+
+**Not placed: flats** - 10 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 673 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 478 food storefronts (3.8%) with neither a location nor a
+usable full postcode, most in Bury (7.2%) and Tameside (6.2%). A business run
+from a private address is published without a location or a full postcode and
+is never placed.
+
+**Shown under its trade name** - 51 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 10 whose register location
+lies outside the seven districts.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 2.5% of that type read as one by name.
+
+**Stations.** All 99 Metrolink stops, on TfGM's nine lines, every one inside
+the seven districts; none is listed on Manchester (Regional)'s page as left
+out. Stockport, Bolton and Wigan have no Metrolink stop and are not on the map.
+- Buses and national rail trains are not drawn.
+
+### Birmingham (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the three councils West Midlands Metro serves (Birmingham, Sandwell
+and Wolverhampton) inspect for food hygiene; no open register of other shops
+or of personal services covers them, so clothes shops, hairdressers and the
+like are missing rather than excluded. Food shops (grocers, off-licenses,
+bakers, butchers, newsagents selling food, supermarkets) are a category of
+their own.
+
+**Excluded by type** - other catering premises (2,340), where home caterers
+and event kitchens sit; mobile caterers (694); hospitals, childcare and care
+homes (1,225); schools, colleges and universities (772); hotels and guest
+houses (109); manufacturers and packers (105); distributors and transporters
+(128); importers and exporters (22); farmers and growers (3).
+
+**Not placed: flats** - 53 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 433 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 369 food storefronts (3.8%) with neither a location nor a
+usable full postcode, most in Sandwell (4.2%) and Birmingham (4.1%). A
+business run from a private address is published without a location or a
+full postcode and is never placed.
+
+**Shown under its trade name** - 45 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 10 whose register location
+lies outside the three districts.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.9% of that type read as one by name.
+
+**Stations.** All 35 West Midlands Metro stops, on its one line, every one
+inside the three districts; none is listed on Birmingham (Regional)'s page as
+left out. Line 2 (Wednesbury - Dudley) is not yet in passenger service and is
+not drawn; its stops in Sandwell get no ring, and Dudley is not on the map.
+- Buses and national rail trains are not drawn.
+
+### Edinburgh - the food hygiene register, food only
+
+**Only food is on this map.** The City of Edinburgh Council's entries in
+Scotland's Food Hygiene Information Scheme list the premises the council
+inspects for food hygiene; no open register of other shops or of personal
+services covers Edinburgh, so clothes shops, hairdressers and the like are
+missing rather than excluded. Food shops (grocers, off-licenses, bakers,
+butchers, newsagents selling food, supermarkets) are a category of their own.
+
+**A short register.** The council's file lists 5,144 premises, against
+Glasgow's 6,632 for a city of similar size, and matches the count the Food
+Standards Agency publishes for the council. Four of the scheme's types are
+absent from it altogether: mobile caterers, distributors and transporters,
+importers and exporters, and farmers and growers, none of them a storefront
+type. Other retailers (628 against Glasgow's 1,150) and takeaways (680 against
+1,109) are also low. The map shows the register as published and adds nothing
+to it.
+
+**Excluded by type** - other catering premises (341), where home caterers and
+event kitchens sit; hospitals, childcare and care homes (307); hotels and guest
+houses (222); schools, colleges and universities (202); manufacturers and
+packers (139).
+
+**Not placed: flats and childminders** - none in Edinburgh's file; a food
+storefront registered at a flat, or a childminder listed as a café, is never
+placed (the flat and childminder rules, owner 2026-09-28).
+
+**Placed at their postcode's center** - 57 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 182 food storefronts (4.6%) with neither a location nor a
+full postcode in Ordnance Survey's file: 151 with no usable postcode, 31 with
+one the file does not hold. A business run from a private address is published
+without a location or a full postcode and is never placed.
+
+**Shown under its trade name** - 5 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the city** - 1 whose location lies outside
+the City of Edinburgh.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.4% of that type read as one by name.
+
+**Stations.** All 23 Edinburgh Trams stops, Edinburgh Airport to Newhaven,
+every one inside the City of Edinburgh; none is listed on Edinburgh's page as
+left out.
+- Buses and national rail trains are not drawn.
+
+### Sheffield - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises Sheffield City Council inspects for food hygiene; no open register of
+other shops or of personal services covers the city, so clothes shops,
+hairdressers and the like are missing rather than excluded. Food shops
+(grocers, off-licenses, bakers, butchers, newsagents selling food,
+supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (529), where home caterers
+and event kitchens sit; mobile caterers (142); hospitals, childcare and care
+homes (336); schools, colleges and universities (261); hotels and guest
+houses (29); manufacturers and packers (68); distributors and transporters
+(37); importers and exporters (3); farmers and growers (7).
+
+**Not placed: flats** - 4 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 70 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 93 food storefronts (2.7%) with neither a location nor a
+usable full postcode. A business run from a private address is published
+without a location or a full postcode and is never placed.
+
+**Shown under its trade name** - 8 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 2 whose register location
+lies far outside the city.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.5% of that type read as one by name.
+
+**Stations.** All 48 Supertram stops, on the Blue, Yellow and Purple routes,
+every one inside the city; none is listed on Sheffield's page as left out.
+The Purple route runs about hourly; it is drawn, and its wait is stated on the
+page.
+- The Tram-Train to Rotherham is not drawn: it runs every 30 minutes, on
+  national rail track beyond Tinsley, under the 15-minute test for a converted
+  railway. Every stop it serves in Sheffield is on the Yellow route; its three
+  in Rotherham (Magna, Rotherham Central, Rotherham Parkgate) lie outside the
+  city.
+- Buses and national rail trains are not drawn.
+
+### Nottingham (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the four councils NET serves (the City of Nottingham, Broxtowe,
+Rushcliffe and Ashfield) inspect for food hygiene; no open register of other
+shops or of personal services covers them, so clothes shops, hairdressers and
+the like are missing rather than excluded. Food shops (grocers,
+off-licenses, bakers, butchers, newsagents selling food, supermarkets) are a
+category of their own.
+
+**Excluded by type** - other catering premises (750), where home caterers
+and event kitchens sit; mobile caterers (267); hospitals, childcare and care
+homes (439); schools, colleges and universities (336); hotels and guest
+houses (47); manufacturers and packers (115); distributors and transporters
+(46); importers and exporters (6); farmers and growers (47).
+
+**Not placed: flats and childminders** - 4 food storefronts registered at a
+flat address, where home businesses register, and 1 named as a childminder
+(the flat and childminder rules, owner 2026-09-28).
+
+**Placed at their postcode's center** - 97 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 210 food storefronts (5.7%) with neither a location nor a
+usable full postcode. **Rushcliffe's share is the highest: 79 of its food
+storefronts (14.2%) are not placed**, and the register gives a location for
+only 80% of them, so Rushcliffe is thinner on the map than the city. Ashfield
+follows (7.2%). A business run from a private address is published without a
+location or a full postcode and is never placed.
+
+**Shown under its trade name** - 7 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 9 whose register location
+lies outside the four council areas.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 4.3% of that type read as one by name.
+
+**Stations.** All 50 NET stops, on Lines 1 and 2, every one inside the four
+council areas; none is listed on Nottingham (Regional)'s page as left out.
+Gedling and the rest of Nottinghamshire have no NET stop and are not on the
+map.
+- Buses and national rail trains are not drawn.
+
+### Blackpool (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the two councils the tramway serves (Blackpool and Wyre) inspect for
+food hygiene; no open register of other shops or of personal services covers
+them, so clothes shops, hairdressers and the like are missing rather than
+excluded. Food shops (grocers, off-licenses, bakers, butchers, newsagents
+selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (165), where home caterers
+and event kitchens sit; mobile caterers (84); hospitals, childcare and care
+homes (188); schools, colleges and universities (104); hotels and guest
+houses (405); manufacturers and packers (24); distributors and transporters
+(4); farmers and growers (2).
+
+**Not placed: flats** - 4 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 67 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 90 food storefronts (5.2%) with neither a location nor a
+usable full postcode, almost all in Wyre (86, 12.0% of Wyre's). A business
+run from a private address is published without a location or a full
+postcode and is never placed.
+
+**Shown under its trade name** - 1 business registered "trading as" another
+name shows the name on the shop.
+
+**Left off because they are outside the area** - 2 whose register location
+lies outside Blackpool and Wyre.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.9% of that type read as one by name.
+
+**Stations.** All 40 Blackpool Tramway stops, Starr Gate to Fleetwood Ferry
+with the North Station spur, every one inside Blackpool and Wyre; none is
+listed on Blackpool (Regional)'s page as left out. Fylde, to the south, has
+no tram stop and is not on the map.
+- Buses and national rail trains are not drawn.
+
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
 **One council, one survey year.** The City of Sydney's Floor Space and
