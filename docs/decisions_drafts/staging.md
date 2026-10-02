@@ -4,6 +4,55 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - Five licence reads: Seattle and Geostat permitted; Bellevue and King County ambiguous and read as permitted (owner, option 1); Fukui's share-alike to the owner
+
+- **Seattle's business register: PERMITTED WITH CONDITIONS.**
+  - The layer is federated on data.seattle.gov (`wmtg-dzy4`). Its Open Data
+    Terms of Use ("by using data made available through this site the user
+    agrees…") and Open Data Policy V1.0 support reuse.
+  - No attribution is required, and nothing is owed.
+  - The condition: data configurable as "a list of individuals" may not be
+    used "for a commercial purpose". The owner confirmed the project is
+    non-commercial ("no commercial, nothing sold", 2026-10-01), and it must
+    stay so.
+- **Bellevue's licences (all): ambiguous.**
+  - The data's licence field bars only commercial use or sale without
+    written authorization.
+  - The portal's linked Terms of Use allow only "own personal,
+    non-commercial use", with all other rights reserved.
+- **King County food inspections: ambiguous.**
+  - The Socrata dataset is declared Public Domain. The portal's own data
+    terms granted reuse, but they are now a 404 (last archived 2023).
+  - The live site-wide terms forbid publishing without written permission.
+- **The owner chose option 1 for both, "defensible": read as permitted.**
+  - The data's own declarations govern.
+  - King County: display "Public Health – Seattle & King County" and the
+    legend "Data provided by permission of King County"; no marks, no
+    implied endorsement; no USPS-derived fields (`CTYNAME`,
+    `POSTALCTYNAME`, ZIP+4) from the address points.
+  - Bellevue: credit the City of Bellevue.
+  - The removal rule is the safety net for both.
+  - The owner also noted a **separate Seattle-only build already exists**.
+- **Geostat's Business Register: PERMITTED WITH CONDITIONS.**
+  - The terms allow any use "without prior permission". The condition is
+    to name Geostat as the source, which the statistics law also requires
+    (Art. 43(6)). No logo.
+  - Two points stand, neither a prohibition:
+    - statistical confidentiality: public-registry data is exempt under
+      Art. 34(4);
+    - Georgia's personal-data law: processing public data is lawful, and a
+      restriction request is honoured, as the removal rule already does.
+  - Tbilisi needs `add-country` for Georgia next.
+- **Fukui's site-default CC BY-SA: PERMITTED WITH CONDITIONS.**
+  - Share-alike would oblige offering `outputs/fukui/` under CC BY-SA 4.0
+    (in `LICENSE`), the project's first share-alike licence on its own
+    output.
+  - The personal-services lists exist only under BY-SA, so only a food-only
+    page on the older CC BY copy avoids it.
+  - **The owner's call.**
+- **Recorded in `docs/build_briefs/seattle.md`** ("What the build has to
+  pull") and on the master list's Seattle, Tbilisi and Fukui rows.
+
 ### 2026-10-01 - The owner's calls 5-10: downloads approved, NaPTAN for the UK six, Dudley pre-approved, Atlanta's note filed, Richmond to R (owner)
 
 - **5. Downloads approved:**
