@@ -60,6 +60,104 @@ for them):
 
 ---
 
+### 2026-10-02 - Birmingham (Regional) built: West Midlands Metro's one line, gate 3 exact against the operator and NaPTAN, Line 2 not yet open
+
+- **Scope (owner, 2026-10-01):** the three districts West Midlands Metro
+  serves (Birmingham 402, Sandwell 423, Wolverhampton 436). Exactly three FSA
+  codes are asserted. The boundary is the union of OSM relations 162378,
+  162485 and 173722, 422.8 km², gated at 400-445.
+- **Line 2 and Dudley are not on the map (the lead, 2026-10-02).** The
+  operator's maps page (`westmidlandsmetro.com/maps/`, read 2026-10-02) lists
+  35 stops, none on Line 2. The opening missed its 28 August 2026 date, and
+  Dudley Council's leader gives 1 November 2026. Relation 17248967 sits in
+  `NOT_DRAWN`, and the brief's pre-approved Dudley branch does not apply.
+  Watch item for PLAN: Line 2 with Dudley (FSA 409), about 1 November 2026.
+- **One drawn line, West Midlands Metro.** OSM's 6 ref-1 relations are
+  service patterns of one line: Wolverhampton Station or Wolverhampton St
+  Georges to Edgbaston Village each way, and the Millennium Point branch each
+  way. The operator's page names no line ("the Metro"), so the label is the
+  system's name, as the one-line precedents (Odense Letbane, Sun Link, KC
+  Streetcar). The legend adds "(Wolverhampton - Edgbaston Village)".
+- **The branch rule takes Birmingham's thresholds** (`BRANCH_NEAR_M` 30,
+  `BRANCH_MIN_NEW_M` 50; shared change e2452466). The Eastside branch adds
+  about 415 m of track beyond 30 m of the main relation, and the St Georges
+  stub adds 72 m. Under London's defaults (300 m, 1,000 m), Millennium Point
+  sat 397 m, Albert Street 220 m and Wolverhampton St Georges 100 m off the
+  drawn line. At 30 m and 50 m, 3 of the 6 relations are drawn (23.8 km), and
+  every station is within 4 m of the line.
+- **Role-less stop members** (shared change e2452466). The four Wolverhampton
+  - Edgbaston Village relations list their stops with an empty role, 118
+  memberships. `ROLELESS_STOP_RELATIONS` reads them as stops, and the step
+  stops once OSM gives them roles. Rejected: 49 `STATION_ADD` entries by node,
+  the build's first draft.
+- **Stations:** 67 stop positions collapse to 35 by name (the widest, Bilston
+  Central, 46 m across). "Dudley Street, Guns Village" is aliased to "Dudley
+  Street Guns Village". All 35 are inside the three districts, and none is
+  thinned. The closest pair is Pipers Row and Wolverhampton St Georges, 173 m
+  apart, two stops the operator lists.
+- **Gate 3, exact on both sources:**
+  - The operator's maps page lists 35 stops (its stop links and zone list),
+    all on Line 1, Albert Street and Millennium Point included. The build has
+    35.
+  - NaPTAN holds 43 active MET records (prefix `9400ZZWM`, ATCO area 940)
+    inside the scope, and 35 match name by name. NaPTAN's "Centenary Square"
+    is Library (6 m), and its "Wednesbury Central" is Wednesbury, Great
+    Western Street (98 m; the next stop is 537 m away).
+  - Eight records are explained: Line 2's five in Sandwell (Birmingham New
+    Road, Dudley Port, Great Bridge, Horseley Road, Sedgley Road), and three
+    Eastside stops beyond Millennium Point that the operator does not list yet
+    (Curzon Street, Digbeth High Street, Meriden Street). Watch item for PLAN:
+    the Eastside stops, when they open.
+- **Rings: halved.** The median gap in scope is 442 m, under the spacing
+  rule's 550 m, so the rings are 0.05 to 0.3 mi, with bounds of 390-500 m.
+- **The light-rail test:** the kept track is 100% `railway=tram` (47.6 km of
+  route track, each way once), 7.1% in tunnel or on a bridge, with a 442 m
+  median gap. Frequency is every 4-11 minutes by day (the operator's maps
+  page), which meets the converted-railway gate on the former Great Western
+  trackbed from Snow Hill to Priestfield. **`mode`: `tram`**, on Riga's tram
+  control (2%, 0/98%, 360 m) and Santa Cruz-La Laguna's tram verdict (the
+  lead accepted it, 2026-10-02).
+- **Colour:** `scripts/line_colour_search.py birmingham` gives `#F000B8`, the
+  nearest feasible colour to OSM's `#ec008c`: 45.2 from every pin, 4.81:1 and
+  3.89:1 on the two pages.
+- **A duplicated register row** (shared change e2452466). Sandwell's file
+  lists FHRSID 372079 twice, identical on every field read. It is kept once,
+  and an FHRSID whose rows differ still stops the step.
+- **Businesses, step by step:**
+  - 15,215 register rows in 3 authorities, with extracts all of 2026-10-02;
+    1 duplicate row kept once.
+  - 9,816 storefront rows (the brief's API count was 9,827 a day earlier).
+  - 53 at a "Flat" address are never placed; no childminders.
+  - 802 have no FSA point. Of those, 433 are placed at a Code-Point centroid
+    and 369 (3.8%) are not placed: Sandwell 4.2%, Birmingham 4.1%,
+    Wolverhampton 1.9%. No row had an outward code only, 331 had no usable
+    postcode, and 38 had a full postcode that is not in Code-Point.
+  - 2 fall outside the sanity box and 8 outside the districts.
+  - 45 trading-as names show the trade name.
+  - **9,384 storefronts placed** (Food service 5,796, Food shops 3,588):
+    95.4% at the FSA's point, 4.6% at a centroid. The FSA-point share is
+    96.4% in Birmingham, 91.2% in Sandwell and 96.0% in Wolverhampton, each
+    above the brief's sample.
+  - The render's contact-detail scrub drops 1 more (9,383). 1,642 (17.5%)
+    sit within a ring: Food service 1,162, Food shops 480.
+  - Canteens by name are at least 1.9% of Restaurant/Cafe/Canteen, not
+    separated (London's lower bound).
+- **Personal exposure (`check_personal_exposure.py birmingham`):**
+  - 1,642 pins and 1,512 distinct names. No fallback name exists.
+  - 0 emails or phone numbers. 1 "c/o" marker, a contract caterer at a
+    company site.
+  - 1 surname-first name and 8 "person's name (trade name)" shapes.
+  - The heuristic reads 370 (22.5%) as person-like, mostly cafés and shops
+    named for people.
+  - **Verdict: publish**, London's, Newcastle's and Manchester's: the same
+    register and the same structural guards.
+- **CRS:** UTM 30N (EPSG:32630), as the built UK cities.
+- **Notices:** 87 (FSA, Birmingham) and 88 (Ordnance Survey, Birmingham) are
+  Manchester's 84 and 85 with the city and figures changed. NaPTAN is notice 86.
+- **Page:** `app/pages/157_Birmingham_Heatmap.py`. Newcastle's FSA bullets
+  plus the tram template's line bullets; the proposals are listed in the
+  owner's section.
+
 ### 2026-10-02 - The owner's first four UK six calls: Manchester is light rail, its lines are TfGM's routed over OSM's track, NaPTAN's notice is displayed, the proposals accepted (owner)
 
 - **The owner, answering ahead of review time:** "1. light rail, 2.

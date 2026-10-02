@@ -643,6 +643,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Glasgow | Glasgow Subway (one 15-station loop, its two tunnels drawn as one line) | Suburban and national rail (the Argyle and North Clyde lines and the rest) | OpenStreetMap route relations (SPT publishes no GTFS for the Subway); gate 3 exact on 15 | Glasgow City (the loop lies wholly inside) | 0 / 0 |
 | Newcastle (Regional) | Tyne and Wear Metro, Green and Yellow lines (the Sunderland branch included) | Northern's national rail trains | OpenStreetMap route relations; gate 3 exact on 60 | The five Tyne and Wear districts | 0 / 0 |
 | Manchester (Regional) | Manchester Metrolink (light rail), TfGM's nine lines (Green, Purple, Yellow, Burgundy, Blue, Pink, Anthracite, Red, Navy), routed over OpenStreetMap's track through TfGM's stop lists | Buses and national rail trains | OpenStreetMap route relations; gate 3 exact on 99 (TfGM) and name by name against NaPTAN | The seven Metrolink districts | 0 / 0 |
+| Birmingham (Regional) | West Midlands Metro (tram), one line, Wolverhampton - Edgbaston Village with its Wolverhampton St Georges and Millennium Point branches | Line 2 (Wednesbury - Dudley, not yet open), buses and national rail trains | OpenStreetMap route relations; gate 3 exact on 35 (the operator) and name by name against NaPTAN | The three Metro districts | 0 / 0 |
 | **Argentina** | | | | | |
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
 | **Australia** | | | | | |
@@ -800,6 +801,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Glasgow | Food hygiene register | Glasgow City Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 405 / 1,588 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Manchester (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 7 councils | FSA business type | 1,843 / 4,359 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Birmingham (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 3 councils | FSA business type | 480 / 1,162 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,612 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 | **Australia** | | | | | |
@@ -946,6 +948,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Glasgow | Register coordinates (99%); 55 not placed | Food only; about one storefront in a hundred unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a flat address or a childminder never placed; the name after "trading as" shown |
 | Newcastle (Regional) | Register coordinates (90%) and postcode centres (10%, OS postcode centroids for a full postcode with no register point); 489 not placed | Food only; about one storefront in fourteen unplaced, most in North Tyneside and Sunderland; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | Manchester (Regional) | Register coordinates (94%) and postcode centers (6%, OS postcode centroids for a full postcode with no register point); 478 not placed | Food only; about one storefront in twenty-six unplaced, most in Bury and Tameside; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Birmingham (Regional) | Register coordinates (95%) and postcode centers (5%, OS postcode centroids for a full postcode with no register point); 369 not placed | Food only; about one storefront in twenty-seven unplaced, most in Sandwell and Birmingham; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
 | **Australia** | | | |
@@ -1103,6 +1106,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Glasgow | Extract of 2026-09-14 (fetched 2026-09-28) | B | 0.6 mi | Yes | 42% | Registered name; the trade name where registered "trading as" |
 | Newcastle (Regional) | Extracts of 2026-09-09 to 2026-09-16, per council (fetched 2026-09-28) | B | 0.6 mi | Yes | 54% | Registered name; the trade name where registered "trading as" |
 | Manchester (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.6 mi | Yes | 52% | Registered name; the trade name where registered "trading as" |
+| Birmingham (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 17% | Registered name; the trade name where registered "trading as" |
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
 | **Australia** | | | | | | |

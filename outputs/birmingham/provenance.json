@@ -1,0 +1,24 @@
+{
+  "fetched_utc": "2026-10-02T20:25:44+00:00",
+  "fsa_file_url": "https://ratings.food.gov.uk/OpenDataFiles/FHRS{code}en-GB.xml",
+  "fsa_authorities": {
+    "402": "Birmingham",
+    "423": "Sandwell",
+    "436": "Wolverhampton"
+  },
+  "fsa_extract_dates": {
+    "Birmingham": "2026-10-02",
+    "Sandwell": "2026-10-02",
+    "Wolverhampton": "2026-10-02"
+  },
+  "fsa_extract_range": [
+    "2026-10-02",
+    "2026-10-02"
+  ],
+  "codepoint_edition": "2026-08",
+  "osm_fetched_utc": "2026-10-02T20:25:44+00:00",
+  "naptan_url": "https://naptan.api.dft.gov.uk/v1/access-nodes?dataFormat=csv&atcoAreaCodes={code}",
+  "naptan_atco_areas": [
+    "940"
+  ]
+}

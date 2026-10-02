@@ -3373,6 +3373,48 @@ the seven districts; none is listed on Manchester (Regional)'s page as left
 out. Stockport, Bolton and Wigan have no Metrolink stop and are not on the map.
 - Buses and national rail trains are not drawn.
 
+### Birmingham (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the three councils West Midlands Metro serves (Birmingham, Sandwell
+and Wolverhampton) inspect for food hygiene; no open register of other shops
+or of personal services covers them, so clothes shops, hairdressers and the
+like are missing rather than excluded. Food shops (grocers, off-licenses,
+bakers, butchers, newsagents selling food, supermarkets) are a category of
+their own.
+
+**Excluded by type** - other catering premises (2,340), where home caterers
+and event kitchens sit; mobile caterers (694); hospitals, childcare and care
+homes (1,225); schools, colleges and universities (772); hotels and guest
+houses (109); manufacturers and packers (105); distributors and transporters
+(128); importers and exporters (22); farmers and growers (3).
+
+**Not placed: flats** - 53 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 433 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 369 food storefronts (3.8%) with neither a location nor a
+usable full postcode, most in Sandwell (4.2%) and Birmingham (4.1%). A
+business run from a private address is published without a location or a
+full postcode and is never placed.
+
+**Shown under its trade name** - 45 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 10 whose register location
+lies outside the three districts.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.9% of that type read as one by name.
+
+**Stations.** All 35 West Midlands Metro stops, on its one line, every one
+inside the three districts; none is listed on Birmingham (Regional)'s page as
+left out. Line 2 (Wednesbury - Dudley) is not yet in passenger service and is
+not drawn; its stops in Sandwell get no ring, and Dudley is not on the map.
+- Buses and national rail trains are not drawn.
+
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
 **One council, one survey year.** The City of Sydney's Floor Space and
