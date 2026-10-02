@@ -326,9 +326,10 @@ back, and only some of it is checked:
 - **A city page out of order.** Title and subtitle (`render_city_title`), the
   map, captions, bullets under bold headings, `render_map_help`,
   `render_excluded_stations`, `render_country_links`, `render_site_notices()`
-  last. Look for an `st.title`, a paragraph above the map, a controls paragraph
-  of the page's own, or a path, script, check or skill name in page text.
-  `scripts/rendered_surfaces.py` lists every page to read.
+  last. `check_city_page_format.py` fails the order and a path, script or
+  check name in page text; read for what it cannot see: an `st.title`, a
+  controls paragraph of the page's own, a skill name, bullets that do not read
+  well. `scripts/rendered_surfaces.py` lists every page to read.
 - **A reference-doc section that files under no country.** In
   `docs/excluded_categories.md` and `docs/data_sources/<country>.md` every
   heading for a city names the city (`app/country_sections.py` files by it),

@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
 - [The prose and UI pass landed and live after the owner's reboot; the deploy check run in parallel lanes](#2026-10-02---the-prose-and-ui-pass-landed-and-live-after-the-owners-reboot-the-deploy-check-run-in-parallel-lanes)
 - [The city-building skills rewritten to the new page format; one French name restored (owner)](#2026-10-02---the-city-building-skills-rewritten-to-the-new-page-format-one-french-name-restored-owner)
 - [The skills rework's five follow-ups: stations "listed on the city's page", a person-license rule, a marker check (owner)](#2026-10-02---the-skills-reworks-five-follow-ups-stations-listed-on-the-citys-page-a-person-license-rule-a-marker-check-owner)
+- [The map centered on city pages, and a check that every city page keeps the format (owner)](#2026-10-02---the-map-centered-on-city-pages-and-a-check-that-every-city-page-keeps-the-format-owner)
 
 **2026-10-01**
 
@@ -14087,3 +14088,42 @@ Recorded by the cleanup session from the Main Building Session's findings of
   quoting them. They are replaced with descriptions of their shape. No other
   tracked file names them except the Hong Kong map, which shows them as shop
   signs.
+
+### 2026-10-02 - The map centered on city pages, and a check that every city page keeps the format (owner)
+
+- **The map is centered under the title** (owner, 2026-10-02:
+  "center the heatmaps on each city page rather than offset-left").
+  - The 1000 px embed sat flush left in the content column, which is 1230 px
+    at a 1400 px window. Auto margins on its container now center it, with
+    115 px on each side. The rule is one CSS rule in `render_city_title`, which
+    all 124 pages call (33f2a379).
+  - At 1000 px and below, the map already fills the column, so the margins
+    resolve to 0. At 375 px (333 wide), at 768 and at 1000 nothing moved: the
+    height stays 650 and nothing scrolls sideways.
+  - It was measured three times, each in same-size frames: injected into the
+    live site, then on a local render, then live again after the owner's
+    reboot (Valenciennes, Seoul, Chicago).
+- **`scripts/check_city_page_format.py`, in `check_all`** (owner, after
+  asking whether the build infrastructure holds the new rules). It reads each
+  page's code, without running it, and fails a page where:
+  - anything renders before the title, or between the title and the map;
+  - `render_site_notices()` is not last;
+  - map help, the stations list or the country links are missing, or come
+    before the map;
+  - rendered text names a repository path, a script, a check or the decision
+    log.
+
+  There are 9 selftest cases, and all 124 pages pass. The bullets, the
+  spelling and the process notes on the reference docs stay with the
+  publish-city read-through.
+- **Infrastructure audit, the same day:**
+  - The generators write the new format. The British spellings left in
+    `scaffold_city.py`, `france_page.py` and `scaffold_france_batch.py` are
+    in comments and identifiers, never in rendered text.
+  - The only unbuilt-city briefs with old guidance are the seven UK briefs,
+    whose prose hold staging is replacing with pointers to
+    `docs/city_page_format.md`.
+  - Two loose ends stay with the skills (owner):
+    - the scaffold writes no `data_age`, so a new page raises `KeyError`
+      until it is filled;
+    - `france_page.py` always writes the half-size ring bullet.

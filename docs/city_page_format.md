@@ -46,6 +46,10 @@ copying an older one. The order, with nothing added between the parts:
 `pipeline/...`, a script), a check or skill name, the decision log, a
 build brief. The reader cannot open any of them.
 
+`python scripts/check_city_page_format.py` (in `check_all`) fails a page out
+of this order, with a part missing, or with a path, script, check or the
+decision log in its text. The bullets themselves are for a reader.
+
 ## 2. The city's sections in the two reference docs
 
 Both pages show one country at a time. `app/country_sections.py` files a

@@ -59,6 +59,8 @@ CHECKS = [
     ["pipeline/name_keys.py", "--selftest"],
     ["scripts/check_internal_markers.py"],
     ["scripts/check_internal_markers.py", "--selftest"],
+    ["scripts/check_city_page_format.py"],
+    ["scripts/check_city_page_format.py", "--selftest"],
     ["scripts/check_no_fetch_in_steps.py"],
     ["scripts/check_no_fetch_in_steps_selftest.py"],
     ["scripts/check_overpass_hosts.py"],

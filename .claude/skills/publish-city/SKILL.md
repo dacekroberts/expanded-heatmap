@@ -44,7 +44,7 @@ Run these in order. Each catches a class nothing else does.
 | 3 | `python scripts/check_personal_exposure.py <city>`; record the verdict in DECISIONS and its row in `docs/privacy_verdicts.md` | a person's name at their address; a city published with no verdict (`check_privacy_verdicts.py`) |
 | 4 | `python scripts/check_provenance.py`, `python scripts/check_inconsistency_list.py` and `python scripts/check_ring_shares.py` | a city whose sources were never recorded; notices vs `_NOTICES`; a city with no row in `docs/map_inconsistencies.md` (the internal evidence for the "Why the maps differ" page), or without its three summary fields in `app/cities.py` (`rail_extra`, `record_kind`, `categories`) or its in-ring share in `app/ring_shares.json` (`--write` after the final render), which that page's table is built from |
 | 5 | `python scripts/brief_check.py <city>` | a brief's claims that stopped being true |
-| 5a | **read the page and the city's doc sections against `docs/city_page_format.md`** (below) | a page in the old layout, a path or script name in page text, a city's gap filed under a shared heading; no script checks the order or the wording |
+| 5a | **read the page and the city's doc sections against `docs/city_page_format.md`** (below) | a city's gap filed under a shared heading, wording that does not read well; `check_city_page_format.py` (in `check_all`) already fails a page out of order or a path in its text |
 | 6 | **merge to your branch, commit** | — |
 | 7 | `python scripts/check_deploy_imports.py` | an import that works locally and not on a clean clone under the lean venv |
 | 8 | `deploy-verify` (scope below) | what the rendered page actually looks like |
@@ -102,6 +102,7 @@ it top to bottom:
 
 | Check | Reads | Fails (or reports) |
 |---|---|---|
+| `check_city_page_format.py` | every `app/pages/*_Heatmap.py`, as code | the title not first, anything between the title and the map, `render_site_notices()` not last, map help, the stations list or the country links missing; a repository path, script, check or the decision log named in rendered text |
 | `check_deploy_imports.py` | every `app/pages/*_Heatmap.py` | no `render_site_notices()`; no `render_city_nav`, or its name not the `cities.py` name; a `page_title` not starting with the city's name |
 | `check_scope_disclosure.py` (property F) | the city's page and `docs/excluded_categories.md` | a city whose stations are thinned by spacing and which says so in neither ("thinned", "one stop per half mile") |
 | `check_provenance.py` J | page prose and the docs | an `outputs/...` file named there that is not committed (the format names none on a page) |
@@ -110,8 +111,9 @@ it top to bottom:
 | `check_stale_claims.py --only E` | `app/Overview.py`, `app/pages/*.py` and the rendered docs | reports "the only", "no other", "every other" claims; never fails |
 | `rendered_surfaces.py --check` | every page under `app/` | `docs/rendered_surfaces.md` stale: run `--write` after adding a page |
 
-None of them checks the order of the parts, the bullets, the spelling or the
-process notes: that is the read-through above.
+None of them checks the bullets, the spelling or the process notes on the
+reference docs (`check_internal_markers.py` checks only the markers): that is
+the read-through above.
 
 ---
 
