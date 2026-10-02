@@ -4,6 +4,32 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Seattle (Regional): the Liquor Board's lists PERMITTED WITH CONDITIONS; non-commercial holds for a portfolio project (owner)
+
+- **The `licence-read` verdict (2026-10-02): PERMITTED WITH CONDITIONS.**
+  - The Washington State Liquor and Cannabis Board publishes no licence and
+    no terms of use, and the list file (`Off Premise09292026.xlsx`, 8,795
+    rows) carries none.
+  - The only rule on reuse is the lists page's note: "Per RCW 42.56.070(8),
+    records received through the Public Records Act may not be used for
+    commercial purposes." The statute itself restricts the agency's
+    disclosure of "lists of individuals".
+  - The published layer drops `Licensee`, phone and mailing columns, so it
+    shows trade names at premises.
+  - No wording is prescribed and nothing is owed. The removal contact is
+    publicrecords@lcb.wa.gov.
+- **The owner's calls:**
+  1. **"yes non-commercial"**: a free map in a personal portfolio, with
+     nothing sold, no ads, no paid tier and no client use, meets the
+     condition. The agent's lean was the same: MRSC's summary of SEIU 925
+     treats publicizing one's work as too remote to be commercial. The same
+     condition covers Seattle's own register.
+  2. **"yes"**: the city page discloses the Board's notice that its list
+     reports "contain possible errors due to a known data transfer issue",
+     if it is still on the lists page at build. The page also states the
+     list's date and never calls it complete, accurate or current (the
+     privacy policy's accuracy disclaimer).
+
 ### 2026-10-02 - UK six briefs corrected from the UK lead's report
 
 - **The UK lead's report, after Manchester's build on page 156:**
