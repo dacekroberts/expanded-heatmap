@@ -2558,6 +2558,48 @@ into `render_site_notices()` with the UK six, 2026-10-02.)
   `outputs/birmingham/` republishes the derived locations (README's credits).
 - Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
 
+**89. Food Standards Scotland (Edinburgh) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, Glasgow's reading (notice 61): the City of
+  Edinburgh Council runs Scotland's **Food Hygiene Information Scheme** (FHIS),
+  not England's FHRS. The FSA's terms put the whole open-data file, FHIS records
+  included, under the **Open Government Licence**, and Food Standards Scotland
+  publishes the same council's data itself under "Open Government Licence
+  (v3)". The OGL statement with a link to the licence; the date the information
+  was updated (the file's extract date, 2026-10-02). No result ("Pass",
+  "Improvement Required"), logo or imagery is shown.
+- **Credit wording**: Glasgow's, "Food Standards Scotland, Food Hygiene
+  Information Scheme data, via the Food Standards Agency". **Never "FHRS"** for
+  Scotland.
+- **Personal data**: Glasgow's rules: home and mobile caterers out by type, a
+  private address never placed, a storefront at a "Flat" address (0) or named
+  as a childminder (0) never placed, the trade name shown after "trading as".
+- **MUST NOT**: imply official status or endorsement by FSS or the FSA (OGL);
+  use either body's logo; display a result.
+- Wording: Glasgow's Food Standards Scotland notice 61, with the city and date
+  changed and Manchester's centroid clause (notice 84) added.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py edinburgh`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Edinburgh's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**90. Ordnance Survey (Edinburgh) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 57 Edinburgh food storefronts the FSA lists with a full
+  postcode and no point (1.4% of storefront rows); never a private address.
+  Units kept to the City of Edinburgh's GSS code (S12000036).
+- **The repository carries the credit too**, as for London: committed
+  `outputs/edinburgh/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.<!-- internal -->
+- **Open for the owner:** whether Edinburgh keeps the centroid tier (the kit)
+  or follows Glasgow's precedent of none; if Glasgow's, this notice goes.<!-- /internal -->
+
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

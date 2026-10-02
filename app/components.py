@@ -1853,6 +1853,30 @@ _NOTICES = [
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
      False),
+    # Edinburgh (notice 89): Scotland's FHIS data for the City of Edinburgh, Glasgow's
+    # notice 61 with the city and date changed and Manchester's centroid clause added.
+    ("Food Standards Scotland (Edinburgh)",
+     "Edinburgh's food businesses are from Food Standards Scotland, Food Hygiene Information "
+     "Scheme data, via the Food Standards Agency, extracted on 2026-10-02. Contains public "
+     "sector information licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected; premises at a flat address or registered as a "
+     "childminder left out; premises without a location placed at their postcode's center, or "
+     "left out where they have no full postcode; trade names shown where a business is "
+     "registered under another name. No inspection result is shown. Neither Food Standards "
+     "Scotland nor the Food Standards Agency endorses this map.",
+     False),
+    # Edinburgh's postcode centroids (notice 90): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Edinburgh)",
+     "Where the Food Standards Agency lists an Edinburgh food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

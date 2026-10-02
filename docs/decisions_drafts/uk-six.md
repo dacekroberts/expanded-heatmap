@@ -60,6 +60,102 @@ for them):
 
 ---
 
+### 2026-10-02 - Edinburgh built, third of the UK six: one tram line on OSM's two through relations, gate 3 exact against Edinburgh Trams and NaPTAN, the short register disclosed
+
+- **Scope (owner, 2026-10-01):** the City of Edinburgh, FSA code 773 on Food
+  Standards Scotland's FHIS (SchemeType 2); exactly one code asserted. The
+  boundary is OSM relation 1920901 (admin_level 6, GSS S12000036), 272.9 km² in
+  UTM 30N, gated at 240-300.
+- **Config on Manchester's contract.** No shared module was edited.
+- **The line is one, from OSM's two through relations.** The three tram
+  relations carry no ref, network or operator tag.
+  - Newhaven => Airport (2632877, 23 stops) and Airport => Newhaven (4116776,
+    22, ending at Ocean Terminal) take the ref "Tram" through
+    `REF_BY_RELATION` and are merged by London's branch rule (one direction
+    drawn, 18.4 km).
+  - The label is the operator's name, "Edinburgh Trams"; the legend adds
+    "(Airport - Newhaven)", as the timetables page writes the ends.
+  - No colour in OSM or from the operator, so the project's own hue
+    `#b8860b` (Odense's and Kansas City's); `line_colour_search.py` gives
+    `#B88810`, 73.6 from every pin, 5.86:1 dark and 3.20:1 light.
+- **"Tram Extension to Newhaven" (11819309) is not drawn.** No stop members,
+  `start_date` 2023-06-07, the council's extension page as its website, and
+  100% of its 9.3 km within 15 m of both through relations' track: a leftover
+  of the extension's construction mapping. It sits in `NOT_DRAWN` with that
+  reason.
+- **Stations:** 45 stop positions collapse to 23 by name (the widest, Port of
+  Leith, 50 m across). All 23 are inside the city; none is thinned.
+- **Gate 3, exact on both sources:**
+  - Edinburgh Trams: the route map on `edinburghtrams.com/timetables` names
+    23 stops (read 2026-10-02), a whole-network count for the one line. The
+    page's timetable table lists only 13 timing points.
+  - NaPTAN: 23 active MET records in area 940 inside the city, matched name by
+    name. The eight Newhaven-extension stops (Picardy Place to Newhaven) are
+    filed under the Tyne and Wear prefix `9400ZZTW`, the other 15 under
+    `9400ZZED`. NaPTAN's "West End - Princes Street" is aliased to West End
+    (`NAPTAN_NAME_ALIASES`), the name OSM and the operator use. Inactive York
+    Place and the depot fall out on status.
+- **Rings: standard.** The median gap in scope is 614 m (min 338, mean 645, max
+  1,199), over the spacing rule's 550 m and clear of the 540-570 m owner band;
+  `MEDIAN_GAP_BOUNDS_M` 570-700.
+- **The light-rail test:** the kept track is 100% `railway=tram` (36.8 km of
+  route track, each way once), 4.6% in tunnel or on a bridge, with a 614 m
+  median gap. Trams run every 7 minutes by day, every 10 early and in the
+  evenings, on purpose-built track. **`mode` is `tram`** (lead, 2026-10-02):
+  Dublin's Luas, a street tram that clears the spacing at 575 m, and Riga's
+  control (2%, 98% tram).
+- **The placement share, against the brief's 96.6%.** The brief's figure was
+  a first-page API sample, whose default order leans to 5-rated premises
+  (Manchester's Tameside sample read off the same way). The full file gives
+  93.9% at the FSA's point and 95.4% placed (4.6% unplaced), within the built
+  cities' range (London 5.0%, Manchester 3.8%); settled by the lead
+  2026-10-02 and disclosed on the page in Newcastle's words ("about one food
+  storefront in twenty-two").
+- **The centroid tier is kept (the kit), an open item for the owner.** It
+  places 57 storefronts (1.5% of those placed): unplaced is 4.6% with it, 6.1%
+  without. Glasgow's precedent is no centroids, at 1.2% without a point, where
+  its 22 full postcodes would have added about 0.5%. Notice 90 stays while the
+  tier does.
+- **The register is short, disclosed rather than padded.** 5,144 premises
+  against Glasgow's 6,632. It matches the FSA's published `EstablishmentCount`
+  (5,144, last published 2026-10-02) and the file's ItemCount; FSS publishes no
+  count, and its own copy of the council file is listed at 4.6 MB, in line with
+  the FSA's 4,797,465 bytes. Four types are absent: Mobile caterer,
+  Distributors/Transporters, Importers/Exporters and Farmers/growers (Glasgow
+  425, 84, 23, 1), none a storefront type. Retailers - other (628 against
+  1,150) and Takeaway/sandwich shop (680 against 1,109) are low against
+  Glasgow's. Stated in Edinburgh's section of What Is Excluded as a limit.
+- **Businesses, step by step:**
+  - 5,144 register rows, extract 2026-10-02; 3,933 storefront rows.
+  - 0 at a "Flat" address, 0 childminders.
+  - 239 have no FSA point: 57 placed at a Code-Point centroid, 182 (4.6%) not
+    placed (151 with no usable postcode, 149 of them blank; 31 with a full
+    postcode Code-Point does not hold); no outward-code-only rows.
+  - 0 outside the sanity box, 1 outside the city.
+  - 5 trading-as names show the trade name.
+  - **3,750 storefronts placed** (Food service 2,995, Food shops 755): 98.5%
+    at the FSA's point, 1.5% at a centroid.
+  - 2,226 (59.4%) sit within a ring: Food service 1,854, Food shops 372.
+  - Canteens by name are at least 1.4% of Restaurant/Cafe/Canteen (26 of
+    1,818), not separated (London's lower bound).
+- **Personal exposure (`check_personal_exposure.py edinburgh`):**
+  - 2,226 pins and 2,010 distinct names. No fallback name exists, since step
+    2 never loads an owner column.
+  - 0 emails, phone numbers or c/o markers; 0 surname-first names.
+  - 6 (0.3%) "person's name (trade name)" shapes.
+  - The heuristic reads 554 (24.9%) as person-like, which on this register is
+    mostly cafés, takeaways and pubs named for people.
+  - **Verdict: publish**, Glasgow's, London's, Newcastle's and Manchester's:
+    the same register, the same structural guards.
+- **CRS:** UTM 30N (EPSG:32630), as London, Glasgow and Newcastle.
+- **Notices:** 89 (Food Standards Scotland, Edinburgh) is Glasgow's 61 with the
+  city and date changed and Manchester's centroid clause added; 90 (Ordnance
+  Survey, Edinburgh) is Newcastle's 63 with the city changed; NaPTAN is notice
+  86, as for every UK city.
+- **Page:** `app/pages/158_Edinburgh_Heatmap.py` (page 158). Glasgow's FHIS
+  bullets, Newcastle's placement bullets and the tram template's line bullets
+  under "The tram"; the proposals are listed above.
+
 ### 2026-10-02 - Birmingham (Regional) built: West Midlands Metro's one line, gate 3 exact against the operator and NaPTAN, Line 2 not yet open
 
 - **Scope (owner, 2026-10-01):** the three districts West Midlands Metro

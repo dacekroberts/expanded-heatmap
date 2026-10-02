@@ -3415,6 +3415,55 @@ left out. Line 2 (Wednesbury - Dudley) is not yet in passenger service and is
 not drawn; its stops in Sandwell get no ring, and Dudley is not on the map.
 - Buses and national rail trains are not drawn.
 
+### Edinburgh - the food hygiene register, food only
+
+**Only food is on this map.** The City of Edinburgh Council's entries in
+Scotland's Food Hygiene Information Scheme list the premises the council
+inspects for food hygiene; no open register of other shops or of personal
+services covers Edinburgh, so clothes shops, hairdressers and the like are
+missing rather than excluded. Food shops (grocers, off-licenses, bakers,
+butchers, newsagents selling food, supermarkets) are a category of their own.
+
+**A short register.** The council's file lists 5,144 premises, against
+Glasgow's 6,632 for a city of similar size, and matches the count the Food
+Standards Agency publishes for the council. Four of the scheme's types are
+absent from it altogether: mobile caterers, distributors and transporters,
+importers and exporters, and farmers and growers, none of them a storefront
+type. Other retailers (628 against Glasgow's 1,150) and takeaways (680 against
+1,109) are also low. The map shows the register as published and adds nothing
+to it.
+
+**Excluded by type** - other catering premises (341), where home caterers and
+event kitchens sit; hospitals, childcare and care homes (307); hotels and guest
+houses (222); schools, colleges and universities (202); manufacturers and
+packers (139).
+
+**Not placed: flats and childminders** - none in Edinburgh's file; a food
+storefront registered at a flat, or a childminder listed as a café, is never
+placed (the flat and childminder rules, owner 2026-09-28).
+
+**Placed at their postcode's center** - 57 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 182 food storefronts (4.6%) with neither a location nor a
+full postcode in Ordnance Survey's file: 151 with no usable postcode, 31 with
+one the file does not hold. A business run from a private address is published
+without a location or a full postcode and is never placed.
+
+**Shown under its trade name** - 5 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the city** - 1 whose location lies outside
+the City of Edinburgh.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.4% of that type read as one by name.
+
+**Stations.** All 23 Edinburgh Trams stops, Edinburgh Airport to Newhaven,
+every one inside the City of Edinburgh; none is listed on Edinburgh's page as
+left out.
+- Buses and national rail trains are not drawn.
+
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
 **One council, one survey year.** The City of Sydney's Floor Space and
