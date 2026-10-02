@@ -4,6 +4,43 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - The UK six built on their branch; brief corrections received; numbers ledger
+
+- **The UK lead reports all six built on `uk-six-build`,** pushed and held
+  for review time. Its brief corrections, each in its city's entry in
+  `docs/decisions_drafts/uk-six.md`:
+  - **Placement on the full files, below the briefs' samples:** Edinburgh
+    95.4% placed (93.9% at a point) against the brief's 96.6%; Sheffield
+    95.3% against 96.4%; Wyre 83.2% against 84.5% (its private addresses
+    arrive with an EMPTY postcode); Rushcliffe 79.6% against 80.2%.
+  - **Nottingham:** each OSM relation is one direction end to end; NET lists
+    50 stops, not about 51; Rushcliffe holds 4.
+  - **Edinburgh:** the Newhaven stops are under NaPTAN's 9400ZZTW prefix.
+    "23 stops" is the timetables page's map; its table lists 13.
+  - **Birmingham:** every 4 to 11 minutes by day, not 8 to 12. Line 2 is
+    still not open (due about 1 November), so Dudley stays out.
+  - **Sheffield:** OSM's 52 names are 51 stops, one spelled two ways. NaPTAN
+    renamed Shalesmoor "Kelham Island" in 2025.
+  - **Blackpool:** 26 stops in Blackpool and 14 in Wyre.
+- **The master list's Band B rows are left as they are on master.** The UK
+  branch's own master-list step (gate 5) moves the six to Built at landing.
+  Editing the same rows here would only make that merge conflict. The
+  corrected figures land with them.
+- **The lead's open items for the owner:** Edinburgh's centroid tier, and
+  Sheffield's stop name (Shalesmoor or Kelham Island).
+- **The numbers ledger (2026-10-02):**
+
+  | Session | Pages | Notices |
+  |---|---|---|
+  | UK six | 156–161 | 84–96 |
+  | Japan batch | 162–173 | 97–108 |
+  | Seattle (Regional) | 174 | 109–113 |
+  | Tbilisi | 175 | 114–116 |
+
+  Each block is claimed on its own branch's `docs/session_roles.md`.
+  Seattle's brief passes 16 of 16, and Seattle (Regional) is scaffolded at
+  page 174.
+
 ### 2026-10-02 - Tbilisi's three calls, all as recommended (owner)
 
 - **The owner: "approve all three tbilisi recommendations".**
