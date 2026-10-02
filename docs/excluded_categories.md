@@ -370,6 +370,25 @@ shop — about 5,000 of the latter statewide. They are not a separate storefront
 and counting them would both double-count the shop and put an individual on the
 map. Only the business licences are used.
 
+**Missing rather than excluded** - Because New York has no general business licence, a shop is only in this map if
+some regulator happens to license it. Restaurants are inspected, so they are
+close to completely covered. Grocers, bodegas and delis hold state food store
+licences, so they are covered. Salons and barbers hold state licences, so they
+are covered. But a clothing shop, a bookshop, a hardware store or a florist
+needs no licence from any of these four registries, and so does not appear at
+all.
+
+The practical effect is that New York's Retail category is thinner than its
+Food service one, and thinner than Retail in the cities whose registries cover
+all trades. **Read the balance between categories in
+New York as a fact about the city's licensing, not about its high streets.**
+
+In New York, where a business appears in two of the four registries it is
+counted once, matched on address and name. Two registries spelling the same
+name differently will leave it counted twice. That was the deliberate choice:
+one New York address often holds many separate shops, so merging on address
+alone would have deleted real businesses.
+
 ### Minneapolis - the food inspection register, food only, with a name test
 
 **Only food is on this map.** The City of Minneapolis's food inspection data
@@ -535,6 +554,33 @@ curb markets (10). Newsstands are kept, as small walk-in shops. A business
 holding several licences is counted once, so a restaurant with pavement seating
 appears as a restaurant rather than twice.
 
+**Philadelphia is the same problem one step further: a whole category is
+missing.** New York's four registries at least covered all three — its Retail
+was thin, not absent. Philadelphia licenses no personal-service business of any
+kind. There is no salon, barber, nail, cosmetology, massage or laundry licence
+in the city's register, and Pennsylvania publishes its cosmetology licensees
+only as **county totals with no addresses**, while the State Board's
+verification system answers one licence at a time with no bulk export. Every
+alternative was checked live and each failed for a different reason; they are
+listed under the United States on *Where this data comes from*.
+
+So **Philadelphia's map has two categories, not three, and Personal services is
+absent entirely.** Its Retail is narrow for New York's reason as well: what the
+city licenses is *food* retail, so Retail there means bodegas, mini-markets and
+beer distributors, plus a big-box tier (Target, CVS, Dollar Tree, Ross) that
+appears only because those stores also sell packaged food. Pavement newsstands
+are largely absent too — the register holds neither a coordinate nor a street
+address for 60 of the 75 licensed. None of this is a choice this project made,
+and the city page says so on its face rather than leaving a reader to infer
+something about Philadelphia's high streets from a fact about its licensing.
+
+**Where a registry records a licence holder and a trading name in one field,
+the trading name is what is shown.** Philadelphia formats these as "LEGAL
+NAME (TRADE NAME)", so 456 pins that would have displayed a licence holder's
+own name now show the name above the shop instead. A person trading under
+their own name with no trading name recorded is still shown as they
+registered.
+
 ### Miami — offices, wholesale, and one very large service catch-all
 
 Miami-Dade's Local Business Tax receipt is issued to every business of any
@@ -615,6 +661,38 @@ taking the licence type would add almost nothing the map is meant to show.
 From the food data, `MFW` (Mobile Food Walk On, 10 premises) is out as mobile
 trade is everywhere else, and the cannabis register's one `Delivery (operator)`
 is out for the same reason — neither has a shopfront.
+
+**Boston is Philadelphia's case again, for the same structural reason and in
+a narrower form.** It licenses food and alcohol and essentially no other
+trade, so its map has two categories rather than three and Personal services
+is absent entirely. The cause is identical: Massachusetts licenses cosmetology
+and barbering at **state** level, through the Board of Registration of
+Cosmetology and Barbering, whose register is a per-licence ePLACE/MADOL lookup
+with no bulk export and no addresses. That was checked three independent ways
+rather than assumed: Socrata's search across every portal it hosts finds no
+Massachusetts source for cosmetology, barber, salon, hair, nail salon, body art
+or tattoo; `data.mass.gov` is not a data portal at all (both the Socrata and
+CKAN entry points answer "not found"); and `opendata.mass.gov` has no site at
+all.
+
+Boston's Retail is narrower still than Philadelphia's. What exists is retail
+**food** (groceries, convenience stores, bodegas), package stores and cannabis
+dispensaries - so a clothes shop, a bookshop or a hardware store is absent for
+New York's reason on top of Philadelphia's. The honest description of Boston's
+map is **food-and-drink density with a retail-food edge**, not commercial
+density, and its city page leads with that rather than burying it.
+
+One source could have changed this and was deliberately not used. Boston's
+`Business Inventory` is a summer-2025 field survey carrying exactly this
+project's three categories - 243 beauty services among them, plus clothing,
+jewellery and tailoring. Its own notes give the reason it cannot be used: it
+covers "every storefront in downtown Boston, as well as comprehensive data on
+3 major commercial corridors in Mattapan, Jamaica Plain, and Allston", which is
+37 grid cells of a city. A density surface built on a partial survey shows
+where surveyors walked rather than where commerce is, and mixing it in would
+have made four neighbourhoods read as three-category and the rest as two. It is
+listed under the United States on *Where this data comes from* as available and
+unused, with the trigger for revisiting it: a city-wide survey.
 
 ### Washington D.C. — an office catch-all, and a register that is mostly homes
 
@@ -794,6 +872,44 @@ other way:
 cities' exclusions were justified that way before any privacy argument -
 consistent with how Los Angeles' and Philadelphia's were framed. Vancouver's
 name-suppression policy is separate and is described under "Honest limits".
+
+**Vancouver loses about half its register to missing coordinates, and no
+geocoder exists to recover it.** Of 58,346 current-year Issued licences, only
+29,660 carry coordinates. Most of the remainder is categories excluded anyway -
+long-term and short-term rentals, general and trade contractors, consulting,
+which between them account for 20,915 of the unmappable rows - but **1,583 rows
+have a real street address and no coordinates**, and they are simply absent.
+There is no Canadian equivalent of the US Census bulk geocoder, which is what
+recovers those rows in Los Angeles and Washington D.C. Vancouver does publish a
+`property-addresses` layer that could serve the same purpose, but it has never
+been match-tested, so the loss is recorded rather than quietly closed.
+
+**Surrey's four stations reach much less of their city than Vancouver's twenty
+do**, and that is geography rather than data. 15% of Surrey's storefronts fall
+within the outer ring, against 51% in Vancouver, because Surrey's commerce sits
+along arterial roads the SkyTrain does not follow. Read the two cities on that
+map as two measurements sharing a frame, not one continuous surface.
+
+**Vancouver's residence filter finds nothing, and that is a measurement
+rather than a gap.** Its two-hop parcel join (business point to parcel to the
+tax roll's zoning) places 99.9% of points and reaches a zoning class for
+99.7%, but the pairing it exists for - residential zoning AND a substituted
+personal name - leaves **one row**, and that row is a false positive: a real
+corner grocery whose name reads as a surname plus a word. Zoning alone is
+deliberately NOT used, because the 146 residentially-zoned storefronts there
+are Restaurant 32, Limited Service Food 29, Retail Dealer 23 and so on -
+Vancouver's legal non-conforming corner shops and neighbourhood restaurants,
+which a zoning filter would delete wholesale. The join is kept because it is
+what justifies not filtering.
+
+**Vancouver's unit designators cannot indicate a residence at all**, so the
+usual APT/UNIT proxy must not be read there. The city uses "Unit" generically
+for commercial suites: 12,803 of 29,660 mappable rows say `Unit` against
+**two** that say `Apt`. The project's privacy check therefore
+reports a 6.73% "person-like name at a residential unit" figure for Vancouver
+that is an artifact of the city's conventions - San Diego's measurement gap
+inverted, a false high rather than a false low. The zoning measure above is
+the one its verdict rests on.
 
 ### Montréal - vacant units, which a survey can see and a register cannot
 
@@ -1176,6 +1292,42 @@ the register's own placeholder.
 
 **Nightclubs count as food service** — 36 active premises, about 32 new pins
 once geocoded — as in every other city. Adult entertainment clubs stay out.
+
+**Toronto's general retail is ABSENT**, and that was not a choice.
+
+Toronto licenses food and trades, and not general retail. There is no licence
+category for a grocer, a clothing shop, a pharmacy, a hardware store or general
+merchandise, so none of them exists in any register to map. What the Retail
+category holds instead is the **regulated slice alone** - the trades a city
+licenses because it wants to watch them: `VAPOUR PRODUCT RETAILER` (351),
+`SECOND HAND SHOP` (219), `PRECIOUS METAL SHOP` (85), `PAWN SHOP` (41),
+`SMOKE SHOP` (28), `PET SHOP` (20), `SECOND HAND SALVAGE SHOP` (10) and
+`PERMANENT FIREWORKS VENDOR` (5).
+
+Of the licences that reach the map, **759 of 18,186 (4.2%) are retail**,
+against 13,385 food service and 4,042 personal services. So
+**read Toronto's Retail layer as a narrow regulated slice of what is actually
+on the street, and the balance between its three categories as a fact about
+Toronto's licensing rather than about its high streets.** Unlike New York,
+whose four registries at least covered all three categories thinly, Toronto has
+no second source at any level of government that would fill the gap.
+
+**The Retail category is drawn rather than omitted**, decided by the owner on
+2026-09-21. The rejected alternative was leaving Retail out and drawing two
+categories: it reads as a stronger statement but discards 759 real storefronts and
+would have made Toronto's legend the odd one out among the fourteen cities
+built by then. New York's page is the model for the disclosure.
+
+**Toronto also loses about one storefront in sixteen to geocoding, and the loss
+is NOT spread by district.** Its register carries no coordinates at all, so
+every pin was placed by matching its address against the City's One Address
+Repository - 93.8% matched. The missing 6.2% concentrates on plaza and mall
+addresses the repository does not carry as a single string (`1571 SANDHURST
+CIR`, 44 rows; `8 WESTMORE DR`, 25), so a handful of shopping centres are
+under-counted rather than any district being missed. Checked on the axis that
+would distort the map: across the wards holding at least 200 storefront rows
+the match rate runs 75.4% to 99.3%, a **1.3x spread** with a standard deviation
+of 5.7 points.
 
 ### Mexico City - street stalls, a nonstore twin, and a heuristic that does not speak Spanish
 
@@ -3626,132 +3778,10 @@ have, and was built for the share of its storefronts within a ring instead
 
 ## What is missing rather than excluded
 
-
-
-Some things on this map are absent for a different reason, and they are worth
-separating from everything above. Every exclusion so far was a choice. In **New
-York**, **Philadelphia** and **Boston**, some of what is missing was never
-available to choose.
-
-Because New York has no general business licence, a shop is only in this map if
-some regulator happens to license it. Restaurants are inspected, so they are
-close to completely covered. Grocers, bodegas and delis hold state food store
-licences, so they are covered. Salons and barbers hold state licences, so they
-are covered. But a clothing shop, a bookshop, a hardware store or a florist
-needs no licence from any of these four registries, and so does not appear at
-all.
-
-The practical effect is that New York's Retail category is thinner than its
-Food service one, and thinner than Retail in the cities whose registries cover
-all trades. **Read the balance between categories in
-New York as a fact about the city's licensing, not about its high streets.**
-
-**Vancouver loses about half its register to missing coordinates, and no
-geocoder exists to recover it.** Of 58,346 current-year Issued licences, only
-29,660 carry coordinates. Most of the remainder is categories excluded anyway -
-long-term and short-term rentals, general and trade contractors, consulting,
-which between them account for 20,915 of the unmappable rows - but **1,583 rows
-have a real street address and no coordinates**, and they are simply absent.
-There is no Canadian equivalent of the US Census bulk geocoder, which is what
-recovers those rows in Los Angeles and Washington D.C. Vancouver does publish a
-`property-addresses` layer that could serve the same purpose, but it has never
-been match-tested, so the loss is recorded rather than quietly closed.
-
-**Surrey's four stations reach much less of their city than Vancouver's twenty
-do**, and that is geography rather than data. 15% of Surrey's storefronts fall
-within the outer ring, against 51% in Vancouver, because Surrey's commerce sits
-along arterial roads the SkyTrain does not follow. Read the two cities on that
-map as two measurements sharing a frame, not one continuous surface.
-
-**Philadelphia is the same problem one step further: a whole category is
-missing.** New York's four registries at least covered all three — its Retail
-was thin, not absent. Philadelphia licenses no personal-service business of any
-kind. There is no salon, barber, nail, cosmetology, massage or laundry licence
-in the city's register, and Pennsylvania publishes its cosmetology licensees
-only as **county totals with no addresses**, while the State Board's
-verification system answers one licence at a time with no bulk export. Every
-alternative was checked live and each failed for a different reason; they are
-listed under the United States on *Where this data comes from*.
-
-So **Philadelphia's map has two categories, not three, and Personal services is
-absent entirely.** Its Retail is narrow for New York's reason as well: what the
-city licenses is *food* retail, so Retail there means bodegas, mini-markets and
-beer distributors, plus a big-box tier (Target, CVS, Dollar Tree, Ross) that
-appears only because those stores also sell packaged food. Pavement newsstands
-are largely absent too — the register holds neither a coordinate nor a street
-address for 60 of the 75 licensed. None of this is a choice this project made,
-and the city page says so on its face rather than leaving a reader to infer
-something about Philadelphia's high streets from a fact about its licensing.
-
-**Boston is Philadelphia's case again, for the same structural reason and in
-a narrower form.** It licenses food and alcohol and essentially no other
-trade, so its map has two categories rather than three and Personal services
-is absent entirely. The cause is identical: Massachusetts licenses cosmetology
-and barbering at **state** level, through the Board of Registration of
-Cosmetology and Barbering, whose register is a per-licence ePLACE/MADOL lookup
-with no bulk export and no addresses. That was checked three independent ways
-rather than assumed: Socrata's search across every portal it hosts finds no
-Massachusetts source for cosmetology, barber, salon, hair, nail salon, body art
-or tattoo; `data.mass.gov` is not a data portal at all (both the Socrata and
-CKAN entry points answer "not found"); and `opendata.mass.gov` has no site at
-all.
-
-Boston's Retail is narrower still than Philadelphia's. What exists is retail
-**food** (groceries, convenience stores, bodegas), package stores and cannabis
-dispensaries - so a clothes shop, a bookshop or a hardware store is absent for
-New York's reason on top of Philadelphia's. The honest description of Boston's
-map is **food-and-drink density with a retail-food edge**, not commercial
-density, and its city page leads with that rather than burying it.
-
-One source could have changed this and was deliberately not used. Boston's
-`Business Inventory` is a summer-2025 field survey carrying exactly this
-project's three categories - 243 beauty services among them, plus clothing,
-jewellery and tailoring. Its own notes give the reason it cannot be used: it
-covers "every storefront in downtown Boston, as well as comprehensive data on
-3 major commercial corridors in Mattapan, Jamaica Plain, and Allston", which is
-37 grid cells of a city. A density surface built on a partial survey shows
-where surveyors walked rather than where commerce is, and mixing it in would
-have made four neighbourhoods read as three-category and the rest as two. It is
-listed under the United States on *Where this data comes from* as available and
-unused, with the trigger for revisiting it: a city-wide survey.
-
-
-**Toronto's general retail is ABSENT**, and that was not a choice.
-
-Toronto licenses food and trades, and not general retail. There is no licence
-category for a grocer, a clothing shop, a pharmacy, a hardware store or general
-merchandise, so none of them exists in any register to map. What the Retail
-category holds instead is the **regulated slice alone** - the trades a city
-licenses because it wants to watch them: `VAPOUR PRODUCT RETAILER` (351),
-`SECOND HAND SHOP` (219), `PRECIOUS METAL SHOP` (85), `PAWN SHOP` (41),
-`SMOKE SHOP` (28), `PET SHOP` (20), `SECOND HAND SALVAGE SHOP` (10) and
-`PERMANENT FIREWORKS VENDOR` (5).
-
-Of the licences that reach the map, **759 of 18,186 (4.2%) are retail**,
-against 13,385 food service and 4,042 personal services. So
-**read Toronto's Retail layer as a narrow regulated slice of what is actually
-on the street, and the balance between its three categories as a fact about
-Toronto's licensing rather than about its high streets.** This is
-Toronto's licensing rather than about its high streets.** Unlike New York,
-whose four registries at least covered all three categories thinly, Toronto has
-no second source at any level of government that would fill the gap.
-
-**The Retail category is drawn rather than omitted**, decided by the owner on
-2026-09-21. The rejected alternative was leaving Retail out and drawing two
-categories: it reads as a stronger statement but discards 759 real storefronts and
-would have made Toronto's legend the odd one out among the fourteen cities
-built by then. New York's page is the model for the disclosure.
-
-**Toronto also loses about one storefront in sixteen to geocoding, and the loss
-is NOT spread by district.** Its register carries no coordinates at all, so
-every pin was placed by matching its address against the City's One Address
-Repository - 93.8% matched. The missing 6.2% concentrates on plaza and mall
-addresses the repository does not carry as a single string (`1571 SANDHURST
-CIR`, 44 rows; `8 WESTMORE DR`, 25), so a handful of shopping centres are
-under-counted rather than any district being missed. Checked on the axis that
-would distort the map: across the wards holding at least 200 storefront rows
-the match rate runs 75.4% to 99.3%, a **1.3x spread** with a standard deviation
-of 5.7 points.
+Some things on these maps are absent for a different reason, and they are worth
+separating from everything above. Every exclusion so far was a choice; some of
+what is missing was never available to choose. Where a city has such a gap, its
+own section above describes it.
 
 ## Honest limits
 
@@ -3769,35 +3799,11 @@ of 5.7 points.
   **88 pins across Vancouver and Surrey display their business type instead of
   a name.** No pin shows a name the pipeline substituted for a missing trade
   name.
-- **Vancouver's residence filter finds nothing, and that is a measurement
-  rather than a gap.** Its two-hop parcel join (business point to parcel to the
-  tax roll's zoning) places 99.9% of points and reaches a zoning class for
-  99.7%, but the pairing it exists for - residential zoning AND a substituted
-  personal name - leaves **one row**, and that row is a false positive: a real
-  corner grocery whose name reads as a surname plus a word. Zoning alone is
-  deliberately NOT used, because the 146 residentially-zoned storefronts there
-  are Restaurant 32, Limited Service Food 29, Retail Dealer 23 and so on -
-  Vancouver's legal non-conforming corner shops and neighbourhood restaurants,
-  which a zoning filter would delete wholesale. The join is kept because it is
-  what justifies not filtering.
-- **Vancouver's unit designators cannot indicate a residence at all**, so the
-  usual APT/UNIT proxy must not be read there. The city uses "Unit" generically
-  for commercial suites: 12,803 of 29,660 mappable rows say `Unit` against
-  **two** that say `Apt`. The project's privacy check therefore
-  reports a 6.73% "person-like name at a residential unit" figure for Vancouver
-  that is an artifact of the city's conventions - San Diego's measurement gap
-  inverted, a false high rather than a false low. The zoning measure above is
-  the one its verdict rests on.
 - A residential address is inferred from indicators like "APT" or a space
   number. It is a proxy. In San Diego it cannot be measured at all: that
   registry stores unit values as bare numbers with no label, so the text gives
   nothing to match. New York is the one city where it can be measured properly,
   because its licence data records the unit type as its own field.
-- In New York, where a business appears in two of the four registries it is
-  counted once, matched on address and name. Two registries spelling the same
-  name differently will leave it counted twice. That was the deliberate choice:
-  one New York address often holds many separate shops, so merging on address
-  alone would have deleted real businesses.
 - A small residual remains in Los Angeles and San Francisco, spread thinly
   across ordinary storefront categories rather than concentrated in one.
 - No individual business record was checked against any other source, and
@@ -3809,12 +3815,6 @@ of 5.7 points.
   description of a business. This is enforced once in the shared renderer, so
   it applies to every city including ones added later. Three rows in New York
   were removed this way on 2026-09-21, and one in Monterrey on 2026-09-27.
-- **Where a registry records a licence holder and a trading name in one field,
-  the trading name is what is shown.** Philadelphia formats these as "LEGAL
-  NAME (TRADE NAME)", so 456 pins that would have displayed a licence holder's
-  own name now show the name above the shop instead. A person trading under
-  their own name with no trading name recorded is still shown as they
-  registered.
 - These decisions concern what is *appropriate* to publish. What each dataset's
   licence *permits* is a separate question; only Philadelphia's is still open
   (see the next section).
