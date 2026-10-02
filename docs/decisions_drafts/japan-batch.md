@@ -4,6 +4,40 @@ Entries in the `decisions-entry` format, newest first, each exactly as it
 should land in `DECISIONS.md`. Cleanup folds them in when the owner hands
 them off.
 
+### 2026-10-02 - The Japan views: Japan West and Japan East, every Japanese city moved, the batch minor (owner's tier call)
+
+- **Japan is two views, Japan West and Japan East, split at 136° E, decided by
+  `check_macro_labels.py` as the owner's recipe asks (France and Czechia's
+  mechanism, DECISIONS 2026-09-30).** One Japan view failed at every width:
+  at its fitted zoom 46 problems per width, Osaka's and Sakai's dots 2.6 px
+  apart. Japan West (13: Kyushu, Shikoku, Chūgoku and Kansai) and Japan East
+  (7: Fukui, Toyama, Tokyo, Yokohama, Utsunomiya, Hakodate, Sapporo).
+- **Japan West's zoom is pinned at 6.0 (`REGION_ZOOM`, France's precedent).**
+  Fitted, Osaka's and Sakai's dots sit 5.0 px apart, inside one marker radius
+  (the check's rule for dots in their own region); at 6.0 they are 6.7 px apart.
+  No phone-fitted frame clears it: Sakai's city hall is 10 km from Osaka's.
+- **All twenty Japanese cities moved** from East Asia (the eight built ones
+  too, as Prague moved with Czechia); the twelve of the batch carry
+  `label_tier: "minor"`; `REGION_LABELS_ALSO["East Asia"]` gains both views,
+  so East Asia still names the eight anchors; both views join `COUNTRY_VIEWS`
+  (owner, 2026-10-02, via Cleanup: country views last in the menu).
+- **Offsets from a search** with the check's own scorer (in memory, then
+  written): Kobe, Osaka, Kyoto, Sapporo, Yokohama and Hiroshima carry a
+  `label_offset_by_region` for their Japan view; Kobe's default offset moved
+  to the end of its dot (its pill covered Fukui's marker in East Asia).
+  **PROBLEMS 0, 17 regions x 375, 768 and 1200**, every caption accounting for
+  all 136 cities. The twelve pill widths measured in a browser with Space
+  Grotesk loaded, eight controls reproduced to 0.1 px (`label_competition.py`).
+- **For the owner at review time (reported by the check, not failed):** on a
+  phone (375 px) Japan West's pinned zoom leaves 9 of its 13 dots a pan away,
+  more than France's four; and East Asia, re-centred on Hong Kong, Taiwan and
+  Korea once Japan left it, leaves the Japanese anchors off a phone's canvas
+  (at 768 only Sapporo). The alternative is the fitted zoom with Osaka x Sakai
+  listed in `check_macro_labels.KNOWN_STACKED` (Cleanup's check; Kobe x Osaka
+  is listed there today), which shows every Japan West dot on a phone with
+  those two stacked. Recommendation: keep the pinned 6.0, France's precedent,
+  since the list beneath the map reaches every city.
+
 ### 2026-10-02 - Matsuyama built, the pilot of the Japan batch
 
 - **Matsuyama built on the shared Japanese steps: 9,285 storefronts (Food
