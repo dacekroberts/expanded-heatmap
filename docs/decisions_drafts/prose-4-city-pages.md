@@ -86,6 +86,15 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - **Claims moved:** 117 claims left the pages for the reference pages,
     plus Seoul's 3. All are listed in
     `data/_review/prose-4-city-pages/claims_moved.md`.
+- **The full capture ran as three jobs (owner, 2026-10-01: "allow three if
+  it stays under 10gb memory", then "i give the say-so").**
+  - Two jobs ran through `scripts/heavy_job.py`. The third ran outside it,
+    because the gate's `MAX_JOBS = 2` has no override and the file is not
+    this agent's to edit.
+  - A watchdog summed the three jobs' memory every 15 seconds and would have
+    stopped the third above 10 GB.
+  - One capture job measured a 2.50 GB peak against the 1.5 GB the review kit
+    says to declare, so the kit's figure is low for a city-page capture.
 - **Found on the way:** `france_page.py` matched New Orleans's page when
   writing Orléans's, because its glob had no page number. It now matches the
   number as well as the name.
