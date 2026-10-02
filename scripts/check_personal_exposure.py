@@ -424,6 +424,14 @@ REGISTRIES = {
     "buffalo": dict(raw="nys_retail_food_stores.csv", trade="dba_name",
                     owner="entity_name", processed="businesses_clean.csv",
                     address=("address", "unit")),
+    # Seattle (Regional): five sources, none with a registrant fallback.
+    # Seattle's and Bellevue's legal names, contacts and mailing addresses are
+    # never downloaded (step 2 asserts); a Seattle trade name that IS the legal
+    # name (asked of the server, ids only) and reads as a person's, a
+    # Bellevue sole proprietor's, or a blank name shows the category (step 2).
+    # The food registers and the Liquor Board name premises; measured here.
+    "seattle": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=("address",)),
     # Sacramento: the City's Business Operation Tax register. The owner's name,
     # phone and mailing columns are never downloaded (fetch_sources names its
     # columns; step 2 asserts), so no fallback exists; Business_Name is shown,

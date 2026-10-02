@@ -3153,6 +3153,34 @@ CITIES = [
         # 768 and 1200; 2026-09-30).
         "label_offset": ("end", -10, 0),
     },
+    {
+        "name": "Seattle (Regional)",
+        "lat": 47.6062,
+        "lon": -122.3321,
+        "page": "pages/174_Seattle_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Register coordinates; food placed by parcel (99.1%)",
+        "data_age": "Seattle, Bellevue and King County fetched 2026-10-02; Snohomish food 2025",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        # Personal services are published by Seattle and Bellevue only: the
+        # other nine station cities have none (the brief, 4b).
+        "categories": "Personal services thin",
+        "blurb": "Link light rail (1 and 2 Lines, 39 stations across 11 cities)",
+        "region": "United States West",
+        "country": "United States",
+        "mode": "light_rail",
+        # NOT IN THE DEFAULT FRAME although a US city: at 47.61 N Seattle is
+        # north of every framed US city, and joining IN_DEFAULT_VIEW would
+        # re-fit the pinned 1.4525 zoom every label offset here was measured
+        # at (Vancouver's and Buffalo's reason).
+        "in_default_view": False,
+        # WEST of its dot, scored by check_macro_labels.py 2026-10-02 (width
+        # 120.5 measured): 15 regions x 3 widths, PROBLEMS 0. Above, the pill
+        # covered Calgary's marker; east or below it overlapped Minneapolis's
+        # pill (below, Sacramento's and Chicago's too) in the United States view.
+        "label_offset": ("end", -12, 0),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

@@ -1,0 +1,61 @@
+{
+  "written_utc": "2026-10-02T22:04:50+00:00",
+  "osm_bbox": [
+    47.28,
+    -122.42,
+    47.84,
+    -122.08
+  ],
+  "as_of_date": "2026-10-02",
+  "files_utc": {
+    "osm_rail.json": "2026-10-02T21:07:59+00:00",
+    "kc_city_polygons.geojson": "2026-10-02T21:03:25+00:00",
+    "sno_city_polygons_tiger.geojson": "2026-10-02T21:05:01+00:00",
+    "kc_address_points.csv": "2026-10-02T21:14:56+00:00",
+    "sno_address_points.csv": "2026-10-02T21:16:16+00:00",
+    "seattle_licences.csv": "2026-10-02T21:16:37+00:00",
+    "seattle_trade_is_legal.csv": "2026-10-02T21:25:43+00:00",
+    "bellevue_licences.csv": "2026-10-02T21:17:45+00:00",
+    "kc_food_inspections.csv": "2026-10-02T21:17:50+00:00",
+    "sno_food_establishments.csv": "2026-10-02T21:17:53+00:00"
+  },
+  "sources": {
+    "seattle": {
+      "endpoint": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Seattle_Business_License/FeatureServer/0",
+      "query": {
+        "where": "1=1",
+        "outFields": "objectid,BUSLIC_ID,BUSLIC_LOCATION_ID,BUSLIC_BUSINESS_ID,BUSLIC_YEAR_NUM,BUSLIC_EXPIRATION_DATE,BUSLIC_TRADE_NAME,BUSLIC_LOCATION_TYPE,BUSLIC_STATUS_TYPE,BUSLIC_NAICS_CODE,BUSLIC_NAICS_DESC,BUSLIC_LOCATION_ADRS_TEXT,BUSLIC_OPENDATE"
+      }
+    },
+    "seattle_same_name": {
+      "endpoint": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Seattle_Business_License/FeatureServer/0",
+      "query": {
+        "where": "BUSLIC_TRADE_NAME = BUSLIC_LEGAL_NAME",
+        "outFields": "objectid,BUSLIC_LOCATION_ID"
+      }
+    },
+    "bellevue": {
+      "endpoint": "https://services1.arcgis.com/EYzEZbDhXZjURPbP/arcgis/rest/services/Business_Licenses_(All)/FeatureServer/3",
+      "query": {
+        "where": "1=1",
+        "outFields": "OBJECTID,BusinessId,Dba,Naic,LegalEntityType,FirstActivityDate,CancelDate,IssueDate,PhysicalAddressLine1,PhysicalAddressLine2,PhysicalCity,NeighborhoodArea,PlanningZone,Latitude,Longitude"
+      }
+    },
+    "kc_food": {
+      "endpoint": "https://data.kingcounty.gov/resource/r878-4sxa.csv",
+      "query": {
+        "$select": "business_id,name,program_identifier,classification,seating_range,risk_category,address,city,zip_code,parcel_number,inspection_date,inspection_type,inspection_closed_business,inspection_serial_num",
+        "$order": "business_id,inspection_date,inspection_serial_num",
+        "$limit": "500000"
+      }
+    },
+    "sno_food": {
+      "endpoint": "https://services6.arcgis.com/z6WYi9VRHfgwgtyW/arcgis/rest/services/Food_Service_Establishments/FeatureServer/0",
+      "query": {
+        "where": "1=1",
+        "outFields": "OBJECTID,User_Fld,USER_Name,USER_Full_Site_Address,USER_City,USER_Program_Element,USER_Program_Identifier,USER_Facility_ID,USER_Record_ID,Icon"
+      }
+    }
+  },
+  "osm_host": "overpass.kumi.systems"
+}
