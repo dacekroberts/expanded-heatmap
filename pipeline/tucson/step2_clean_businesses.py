@@ -33,6 +33,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
+from pipeline.name_keys import keys_of  # noqa: E402
 from pipeline.residence import looks_personal  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront  # noqa: E402
 from pipeline.taxonomies.naics import VALUE_COLUMN  # noqa: E402
@@ -101,10 +102,11 @@ def main():
     # A PERSON'S BUSINESS SHOWS ITS ADDRESS (owner, call 15): by OWN_TYPE, and
     # by an account name that is only a person's (config.PERSON_NAMED).
     person_type = df["OWN_TYPE"].isin(config.PERSONAL_OWN_TYPES)
-    person_named = ~person_type & df["ACC_NAME"].isin(config.PERSON_NAMED)
-    gone = set(config.PERSON_NAMED) - set(df.loc[person_named, "ACC_NAME"])
+    name_keys = keys_of(df["ACC_NAME"])
+    person_named = ~person_type & name_keys.isin(config.PERSON_NAMED)
+    gone = set(config.PERSON_NAMED) - set(name_keys[person_named])
     if gone:
-        sys.exit(f"PERSON_NAMED names no longer shown: {sorted(gone)} - re-read the list "
+        sys.exit(f"PERSON_NAMED keys no longer matched: {sorted(gone)} - re-read the list "
                  f"against the register")
     df["name_is_address"] = person_type | person_named | no_name
     print(f"  personal ownership type: {int(person_type.sum()):,} "

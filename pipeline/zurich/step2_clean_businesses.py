@@ -30,6 +30,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
+from pipeline.name_keys import keys_of  # noqa: E402
 from pipeline.residence import looks_personal  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront  # noqa: E402
 from pipeline.taxonomies.zurich_gastwirtschaft import TYPES  # noqa: E402
@@ -102,10 +103,11 @@ def main():
     df["address"] = (df["strasselang"].fillna("").str.strip() + " "
                      + df["hnr"].fillna("").astype(str).str.strip()).str.strip()
     name = df["betriebsname"].fillna("").str.strip()
-    person = name.isin(config.PERSON_NAMED)
-    gone = set(config.PERSON_NAMED) - set(name[person])
+    name_keys = keys_of(name)
+    person = name_keys.isin(config.PERSON_NAMED)
+    gone = set(config.PERSON_NAMED) - set(name_keys[person])
     if gone:
-        sys.exit(f"PERSON_NAMED names no longer in the register: {sorted(gone)} - re-read "
+        sys.exit(f"PERSON_NAMED keys no longer in the register: {sorted(gone)} - re-read "
                  f"the list against it")
     df["business_name"] = name.where(~person, df["address"])
     print(f"  trade names that are a person's own name (config.PERSON_NAMED), shown as the "

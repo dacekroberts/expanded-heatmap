@@ -43,6 +43,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.kitchener_waterloo import config  # noqa: E402
+from pipeline.name_keys import keys_of  # noqa: E402
 from pipeline.residence import looks_personal  # noqa: E402
 
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
@@ -152,7 +153,7 @@ def main():
     df["business_name"] = df["FacilityName"].str.strip()
     ps = df["premises_kind"] == PERSONAL
     person = ps & ((df["business_name"].map(looks_personal) & ~df["business_name"].str.upper(
-        ).str.contains(BEAUTY_TRADE)) | df["business_name"].isin(config.PERSON_NAMES))
+        ).str.contains(BEAUTY_TRADE)) | keys_of(df["business_name"]).isin(config.PERSON_NAMES))
     df.loc[person, "business_name"] = df.loc[person, "premises_type"].where(
         df.loc[person, "premises_type"].fillna("") != "", "Personal services")
     print(f"\nPersonal-services names that read as a person's: {int(person.sum()):,} show "

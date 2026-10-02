@@ -155,17 +155,20 @@ PERSONAL_OWN_TYPES = ("Sole Proprietorship", "Individual", "Married")
 # residence.py's shape test reads as a person's: 642 names, all but these 45
 # shop names ("RATHER KEEN", "BLIND PIG") or brands ("SONNY ANGEL"). Step 2
 # stops if one of them is no longer shown, so a refresh re-reads the list.
+# Keys, not names (pipeline/name_keys.py): a new name's key is its output.
 PERSON_NAMED = (
-    "ADRIANA AHUMADA", "ARACELI NOLASCO", "CAITLYN COLUSSY", "CELIA L RODRIGUEZ",
-    "CHARLENE MELISSA", "CITA SCOTT", "CONNI HOGAN", "CONSEPCION LEON", "COURTNEY PIET",
-    "DEIDRA INGRAHAM", "DOREEN M MENNEN", "ELIZA MARTINEZ", "ERIN WELLS", "GREEN CECILIA",
-    "HEATHER STROCK", "JACKIE ARTHUR", "JENNIFER MALONEY", "JESSE ZOERNIG", "KARLA ANAYA",
-    "KATE MAMMANA", "KL TAFOYA", "KYLE HALEY", "LAURIE SAUNDERS", "LILIANA OCANO",
-    "LILLIAN L JIMENEZ", "LYNN M COLE", "LYNN O BJELLAND", "MAGDALENE DRECHSLER",
-    "MEGAN HOLLANDER", "MICHAEL D HIGGINS", "NICOLE BROADHEAD", "ORI ALLAN", "PAMELA MAACK",
-    "PATRICIA G HUGHES", "PHAM VU", "RICHARD T RODGERS", "ROBYN THWAITS", "SALLY GOLOS",
-    "SHAHIDA PARIDES", "SHERRY L CANNON", "STEPHEN DUARTE", "STEVE ORNELAS", "SUSAN MCGILL",
-    "TONYA TWINE", "YONG LEE",
+    "36651ae5975449dc", "308b00601e27e289", "291d5a29ac6c15b9", "e9b97b19c5386482",
+    "0fd3a051bce2c666", "4232ed74cbd043fe", "33bf32e76cd51b18", "6ef6df70ca05a30f",
+    "e0e8a0cca8c78ff2", "949f958e43b918ca", "7888b7d166847338", "c2fe9d692d897a1e",
+    "3fcd721329f6a90c", "ca9cb27362eaacef", "b2abd0eedec6a09e", "aa966ea85a7f6586",
+    "b8df5d2b41cc7c26", "7ebef3b7607ac47c", "8785cd4d72ef2397", "6a68bd6a9cd11f31",
+    "ccfc332fb6169373", "4c60a73621368c34", "37967b401da1f259", "ffd9c57c35fcb5bc",
+    "031fd687c73ef6d9", "26921be07797a09f", "b0eeb4d525a87d5a", "694cd3329660a4c7",
+    "512ba652061321d0", "2b578e4527ba6212", "28a22c4e835a0eea", "733c87b88279a68b",
+    "ff9c8fafa0f4b126", "d835ebd2293e3354", "504a42aec6e8d621", "18924cd80f2bc93e",
+    "27b10d6082fc1658", "12db90d2c70a5f33", "d3b1ec46df57bbd7", "8726eea746621d69",
+    "13b02cf5e5fb6cfb", "4c03b642bb417549", "0254478dfa4c24a2", "362f1a6223a390d9",
+    "e92e14f046052efd",
 )
 
 # Sanity bounds for the register's points: the city's extent plus a margin.

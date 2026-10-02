@@ -227,10 +227,11 @@ RAW_CLASSIFICATION_COLUMN = "betriebsart"
 # name. Kiosk names that carry a surname beside a trade word ("Prathees Kiosk",
 # "Velauthapillai Sathiyamohan Kiosk") are the sign over a kiosk, not a home,
 # and stay.
+# Keys, not names (pipeline/name_keys.py): a new name's key is its output.
 PERSON_NAMED = (
-    "A. Sorkine Hornung Internetshop", "City Golf Shop / Oskar Kübli", "Danai Ioannidou",
-    "Don Weber", "Hans Jaeger", "Henri Maillardet", "JAI Paramalingam", "John Reed",
-    "Marco Lanter", "Markus Forster", "Seebach Vanithanathan", "Xisto Macedo",
+    "972cdb095e3dbc13", "4420337d0b67c3eb", "c5b652b77f4e8166", "de0243a33e5b090c",
+    "74d9c73a2644070d", "df34b39d451359cb", "ef2f4f3bbf289cc2", "b57d1c3bace30240",
+    "8f22254b3c4ef876", "d25cea98774acff1", "4359d43cf52af236", "3de0dde757f56394",
 )
 
 # Sanity bounds for the placed points: the Stadt plus a margin.
