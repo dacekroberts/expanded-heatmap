@@ -3357,6 +3357,52 @@ line.
   sightseeing train, which are sightseeing lines, are not drawn. Nishi-Kurosaki
   on the Chikuho line closed on 31 July 2026.
 
+### Sakai - the city's food list, rebuilt to August 2026, and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes them only as PDF
+  documents, outside its open data, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 1,825 national notifications whose filers did not publish an address.
+- 999 food trucks, street and festival stalls, peddlers and other rows
+  licensed anywhere in the city (市内一円; 370 of them vehicles), and 64 more
+  marked temporary or mobile.
+- 454 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 903 vending machines, 744 school, hospital and staff canteens, 279 snack bars
+  and cabarets, 231 entertainment venues, 53 mail-order businesses, 45
+  premises inside hotels and inns and 11 caterers (仕出し).
+- 430 permits the city's monthly lists record as closed, 383 past their expiry
+  date with no closure recorded, and 7 closed premises the national filings
+  keep, marked.
+
+**Counted** - every food permit in force on 1 April 2026, plus the permits
+granted each month to August 2026, less the closures, kept while within their
+term on 31 August 2026; and the national notifications as downloaded on 2
+October 2026. The national filings' permits are not added: the city's own
+list holds every permit (101% of the official restaurant count). 24 of the 782
+bakery, confectioner and deli rows (3.1%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 332 repeat permits are shown once, and 389 rows of
+the city's list for a premises already in the national notifications.
+
+**Not placed** - 2 rows. Another 317 sit at their town's center, and 99
+national notifications at their own coordinates.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type. The national notifications do not name their operators.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 31 stations beyond it: 17 in Osaka, 4 in Takaishi, 3 each in
+  Izumi and Ōsakasayama, 2 in Kawachinagano, and 1 each in Tondabayashi and
+  Izumiōtsu.
+- The Midōsuji Line keeps its 3 stations in Sakai and the Hankai tram 15 of
+  its 31 stops; Osaka's map draws the rest.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

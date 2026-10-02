@@ -10,6 +10,50 @@ them off.
 
 
 
+
+### 2026-10-02 - Sakai built, food only, on a register rebuilt to August 2026
+
+- **Sakai built on the shared Japanese steps (the one-bucket agent, applied by
+  the lead): 8,023 storefronts (Food service 5,720, Retail 2,303), 42
+  stations, 6 lines; 6,046 pins within a ring (75%).** Page 169, notice 104,
+  `mode: metro`, minor tier. Food only (Band B, Hiroshima's page): the barber,
+  beauty and laundry lists are PDFs.
+- **The register is REBUILT in `config.source_rows` (Kyoto's shape):** the
+  2026-04-01 list (10,123) plus the April-August new-permit files (777), less
+  the closures matched by 許可番号 (430 of 432 numbers), then
+  `japan_register.in_term` on 許可満了日 against AS_OF 2026-08-31, pinned: 383
+  dropped, 10,087 in term (the brief's figures exactly). Only the premises and
+  name-rule columns leave the reader; 営業者住所 / 営業者方書 never do. MHLW adds
+  its notifications only.
+- **The join:** block 95.2%, MHLW's own point 1.1% (99 notifications), chōme
+  3.6%, 2 unplaced; the city's rows 96.1% block: the brief's 95.8% held through
+  the shared 1丁 rule. MHLW's own coordinates: median 49 m, 95.1% within 250 m.
+- **One premises in both lists: MHLW's notification row stays, the city's row
+  goes (`SUPERSEDES = {"mhlw": ("food",)}`), 389 rows**, mostly konbini and
+  supermarkets holding a city counter permit and filing a notification for the
+  shop: Matsuyama's direction; the name rule is applied per premises before
+  this step, so a flagged city row still withholds the kept MHLW row.
+- **Rail:** N02-25, 42 stations, standard rings (median 611 m). The Midōsuji
+  drawn cut to 北花田, 新金岡 and 中百舌鳥 (owner); the Hankai tram 15 of 31
+  stops. **The Hagoromo branch is NOT split** from 阪和線: inside the city it has
+  no station of its own (鳳 is the Hanwa Line's), and split off it would be a
+  second labeled line about 1 km long with nothing to ring. Line names as
+  Osaka's map spells the same lines (Midōsuji, Nankai Kōya). Gate 3: Hankai 15
+  = 15, Midōsuji 3 = 3. 5 cited overrides (OSM misreads 寺地町 and 高須神社), 2
+  aliases, 2 names OSM lacks.
+- **Census control: 2.18 against an official / census ratio of 3.13:
+  explained** (the list holds 101% of the official count; stalls, vehicles,
+  konbini permits moved to Retail, canteens and snack bars are not Food service
+  pins). The list page's warning that some names are overwritten 廃業連絡 /
+  廃業確認 was checked: 0 in this edition.
+- **Privacy verdict: publish.** Japan pass 0; 1 pin shows its permit type.
+- **The 菓子 / そうざい factory share:** 24 of 782 (3.1%), kept.
+- **Proposals for review time:** "Sakai City publishes its lists of barbers,
+  beauty salons and laundries only as PDF documents, outside its open data, so
+  personal services are not on this map."; the rebuild bullet (Kyoto's adapted
+  to a register with closures); the Reading-the-map ending for ministry filings;
+  the notice's English gloss.
+
 ### 2026-10-02 - Kitakyushu built, two food lists and no laundries
 
 - **Kitakyushu built on the shared Japanese steps (the MHLW-led agent, applied

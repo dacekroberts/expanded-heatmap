@@ -43,25 +43,52 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Sakai")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Hiroshima's and Kyoto's pages
+# (approved wording, pre-approved for this build, 2026-09-30); the sentences
+# they do not cover are proposals in docs/decisions_drafts/japan-batch.md. The
+# rebuild's dates are config.SOURCE_AS_OF and config.AS_OF; MHLW's file states
+# none, so it is dated by download.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Six lines are drawn, each labeled on the map and in the legend: the Hankai Line, a tram; Osaka
+  Metro's Midōsuji Line; Nankai's Main, Kōya and Semboku lines; and JR West's Hanwa Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Sakai City get rings, because the business data covers the city alone:
+  lines running on to Osaka, Takaishi, Izumi and Osakasayama are cut at the city line.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Sakai City publishes its lists of barbers, beauty salons and laundries only as PDF documents,
+  outside its open data, so personal services are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear either.
+- The food businesses are rebuilt from Sakai City's list of food-business permits as of 1 April
+  2026 and its monthly lists of new permits and closures since, keeping each permit still within
+  its term on 31 August 2026, the last date the newest monthly lists cover.
+- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
+  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
+  Welfare's open data (downloaded 2 October 2026), so that part of the Food shops layer is partial.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails for a ministry filing, the dot
+  sits at the ministry's own coordinates, and otherwise at its district's center.
+- In the city's own list, where a trade name is its operator's own name, the dot shows its permit
+  type instead; the ministry's list does not say who the operator is, so this cannot be checked
+  there.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About three-quarters of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Sakai")
 render_country_links("Sakai")
 
