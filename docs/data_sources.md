@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -2464,6 +2464,27 @@ renumbered 83 in landing order; displayed, landed 2026-09-30.)
   edit, 23 May 2025); imply the city's endorsement.
 - **MUST DO**: never download `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` -
   `fetch_sources.py` names its fields and stops if one arrives.
+
+**97. Matsuyama City, MHLW and MLIT (Matsuyama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's five lists are
+  **CC BY 4.0** through its open-data site's terms (第2条). MHLW's open data is
+  **PDL 1.0**, as in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the city's form for a modified work,
+  `この地図は以下の著作物を改変して利用しています。食品営業許可全施設一覧、理容所全施設一覧、美容所全施設一覧、クリーニング所全施設一覧、松山市、クリエイティブ・コモンズ・ライセンス 表示 4.0（https://creativecommons.org/licenses/by/4.0/）`
+  (the city's open-data logo may not stand in for it); MHLW's source and
+  processed-by credit, linking its top page only; MLIT's credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate; uses against
+  public order or national security (the city's 第4条).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py matsuyama` with its Japan pass,
+  run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Matsuyama built", 2026-10-02).<!-- /internal -->
 
 ## Gaps
 

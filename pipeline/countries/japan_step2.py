@@ -211,7 +211,7 @@ def point_donors(config, joined):
         take &= (joined["source"] == recipient) & (joined["tier"] != "block")
         for tier, n in joined.loc[take, "tier"].value_counts().items():
             print(f"  {donor}'s point for a {recipient} row where the block join gave {tier}: {n:,}")
-            emit(f"point_from_{donor}_{tier}", int(n))
+            emit(f"point_from_{donor}_for_{recipient}_{tier}", int(n))
         joined["pt"] = [one[k] if t else pt for t, k, pt in zip(take, keys, joined["pt"])]
         joined.loc[take, "tier"] = "own"
 

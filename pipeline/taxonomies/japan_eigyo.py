@@ -103,8 +103,10 @@ FORM_RULES = [
     # 2026-09-28; 81 in Fukuoka). Tokyo has no ろ店; its two 屋台 rows are
     # fixed bento stalls in office plazas (京橋, 六本木; MHLW, 2026-09-28).
     ("yatai: a fixed street stall (Fukuoka's 屋台)", "Food service", r"ろ店|屋台"),
+    # 事業場食堂 / 事業所食堂, a workplace canteen: Matsuyama's old-law 業態
+    # (22 rows, 2026-10-02), as 社員食堂 elsewhere
     ("institutional catering", None, r"給食|社員食堂|職員食堂|会社食堂|学生食堂|学校食堂|寮食堂|老人ホーム|福祉施設|"
-                                     r"栄養管理室|病院|保育園|幼稚園|小学校"),
+                                     r"栄養管理室|病院|保育園|幼稚園|小学校|事業場食堂|事業所食堂"),
     ("inside accommodation", None, r"旅館|ホテル"),
     ("entertainment venue", None, r"カラオケ|麻雀|遊技場|ネットカフェ|漫画喫茶"),
     # (owner, 2026-09-29) the same two rules as RULES, in the filer's words:
@@ -203,6 +205,7 @@ assert classify({VALUE_COLUMN: "一般理容所", "source": "barber"}) == "Perso
 # 業態 (Fukuoka): a form excludes, or makes a restaurant a shop, but never brings a row in
 for _v, _f, _want in (("① 飲食店営業", "自動車200L", None), ("① 飲食店営業", "仮設営業（季節的営業）", None),
                       ("① 飲食店営業", "学校給食", None), ("① 飲食店営業", "社員食堂", None),
+                      ("飲食店営業", "事業場食堂", None),
                       ("飲食店営業", "旅館", None), ("① 飲食店営業", "コンビニエンスストア", "Retail"),
                       ("① 飲食店営業", "居酒屋", "Food service"), ("① 飲食店営業", float("nan"), "Food service"),
                       ("⑪ 百貨店、総合スーパー", "ドラッグストア", "Retail"), ("食肉処理業", "スーパー", None),

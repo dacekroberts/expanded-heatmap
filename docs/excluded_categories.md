@@ -3088,6 +3088,45 @@ line.
   Fuchu, Kaita and Higashihiroshima.
 - The Shinkansen is not drawn.
 
+### Matsuyama - the city's food, barber, beauty and laundry lists and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 2,209 national notifications whose filers did not publish an address.
+- 328 food trucks, street and festival stalls and other rows with no fixed
+  place (the city writes 保健所管内, "within the health center's area", for
+  them), and 39 more marked temporary or mobile.
+- 606 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 190 vending machines, 137 school, hospital and staff canteens, 33 caterers
+  (仕出し), 19 mail-order businesses and 12 premises inside hotels and inns.
+- 3 closed premises, which the national filings keep, marked.
+
+**Counted** - every food permit in force on 31 March 2026 (the city's two
+lists, under the old and the new food law), the city's full lists of barbers,
+beauty salons and laundries on the same date, and the national notifications
+as downloaded on 2 October 2026. The national filings' permits are not added:
+the city's own list holds every permit (103% of the official restaurant
+count). 33 of the 729 bakery, confectioner and deli rows (4.5%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 905 repeat permits are shown once, and 136 rows of
+the city's lists for a premises already in the national notifications.
+
+**Not placed** - 84 rows (0.8%), mostly rural 大字 and island addresses written
+with 甲 / 乙 lot numbers, which MLIT's block file does not key. Another 852 sit
+at their town's center, and 1,062 at the ministry's own coordinates for the
+same premises (699 of them rows of the city's lists).
+
+**Names not shown** - 3 pins whose trade name is the operator's own name show
+their permit type. The national notifications do not name their operators.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 11 stations beyond it: 6 in Tōon and 5 in Masaki.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

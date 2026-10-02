@@ -743,11 +743,14 @@ def join_city(permits, blocks, chome):
 # Kumamoto's and Hakodate's too); Kumamoto's 代表者氏名（法人のみ）; Fukui's
 # 申請者名(法人名) (food, half-width brackets), 申請者名（法人名） (registers,
 # full-width) and 法人代表者名; Utsunomiya's registers' 開設者 and 代表者;
-# Kitakyushu's 代表者氏名.
+# Kitakyushu's 代表者氏名. And Matsuyama's registers' 開設者法人名 / 営業者法人名:
+# filled on every row, with no company marker on 443 of 485 barbers, so a
+# sole trader's own name sits there and 開設者氏名 holds only a company's
+# representative (one laundry flagged, as the brief measured).
 OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名", "営業者氏名", "開設者法人名（開設者氏名）",
                  "申請者＿申請者名", "申請者氏名", "法人代表者氏名",
                  "申請者個人名", "開設者氏名", "代表者氏名（法人のみ）", "申請者名(法人名)", "申請者名（法人名）",
-                 "法人代表者名", "開設者", "代表者", "代表者氏名")
+                 "法人代表者名", "開設者", "代表者", "代表者氏名", "開設者法人名", "営業者法人名")
 
 
 def _name_key(s):

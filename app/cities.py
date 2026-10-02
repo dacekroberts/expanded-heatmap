@@ -3153,6 +3153,34 @@ CITIES = [
         # 768 and 1200; 2026-09-30).
         "label_offset": ("end", -10, 0),
     },
+    {
+        "name": "Matsuyama",
+        "lat": 33.8392,
+        "lon": 132.7657,
+        "page": "pages/162_Matsuyama_Heatmap.py",
+        "coverage": "narrowed",
+        "mode": "tram",
+        "placement": "Joined to address blocks (80.8%); ministry coordinates where missed",
+        "data_age": "Permits and registers as of 2026-03-31; ministry notifications fetched 2026-10-02",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "Iyotetsu's city tram and suburban lines, and JR's Yosan Line",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view once it exists (Phase 4 of
+        # docs/handoff_japan_batch_2026-10-02.md).
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
