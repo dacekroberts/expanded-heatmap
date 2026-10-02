@@ -140,7 +140,8 @@ carried over as they stand.
    - **Seattle (Regional) and Tbilisi: briefed 2026-10-02**; Seattle RELEASED
      to one session (worktree `seattle-tbilisi`, branch
      `seattle-tbilisi-build`, `docs/handoff_seattle_tbilisi_2026-10-02.md`),
-     Tbilisi queued behind it until the owner answers its three calls.
+     Tbilisi queued behind it, every call answered (its own "West Asia"
+     region).
      Pages 174 and 175.
    - **The Japan batch is the minor label tier** (owner, 2026-10-02): the
      recipe is in the `japan-city` skill's standing calls, the master list's

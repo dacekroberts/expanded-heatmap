@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**343 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**344 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -30,6 +30,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The map centered on city pages, and a check that every city page keeps the format (owner)](#2026-10-02---the-map-centered-on-city-pages-and-a-check-that-every-city-page-keeps-the-format-owner)
 - [The info pages lose their numbers; a session scaffolds into its reserved page block (owner)](#2026-10-02---the-info-pages-lose-their-numbers-a-session-scaffolds-into-its-reserved-page-block-owner)
 - [The country views go last in the macro map's region menu (owner)](#2026-10-02---the-country-views-go-last-in-the-macro-maps-region-menu-owner)
+- [Check D allows a notice-number gap that a parallel batch has claimed](#2026-10-02---check-d-allows-a-notice-number-gap-that-a-parallel-batch-has-claimed)
 
 **2026-10-01**
 
@@ -14188,3 +14189,25 @@ Recorded by the cleanup session from the Main Building Session's findings of
     and every caption accounts for 124 cities.
   - `check_all` passed 44 of 44.
   - A local render shows the radio and the city list in the new order.
+
+### 2026-10-02 - Check D allows a notice-number gap that a parallel batch has claimed
+
+- **The problem, found by the Japan batch:**
+  - Three sessions number notices at once: the UK six 84-96, Japan 97-108,
+    and Seattle from 109.
+  - Each branch holds only its own block.
+  - `check_provenance.py` D required numbers contiguous from 1, so every
+    branch but the first failed its own pre-push check through no defect of
+    its own.
+- **Chosen (cleanup):** D reads every range in `docs/session_roles.md`'s
+  "Notice numbers are claimed" sentence and lets a branch skip exactly those
+  numbers. Duplicates, numbers out of order and any other gap still fail.
+- **Rejected:** numbering on the branch and renumbering in the landing merge
+  (Den Haag's precedent). Every "notice N" citation would move with it, at
+  the busiest merge.
+- **Tested on simulated lists:**
+  - pass: master 1-83; UK 1-96; Japan 1-83 plus 97-108; Seattle 1-83 plus
+    109;
+  - fail: 1-83 plus 120; a duplicate; a hole inside 1-83.
+- **Housekeeping:** a batch deletes its range from that sentence once it
+  lands, so a stale claim cannot hide a real gap.
