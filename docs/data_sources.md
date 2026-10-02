@@ -2636,6 +2636,43 @@ into `render_site_notices()` with the UK six, 2026-10-02.)
   `outputs/sheffield/` republishes the derived locations (README's credits).
 - Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
 
+**93. Food Standards Agency (Nottingham) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the four
+  councils NET serves (the City of Nottingham, Broxtowe, Rushcliffe and
+  Ashfield) are on England's FHRS, under the **Open Government Licence v3**
+  with the FSA's conditions. The OGL statement linked; each council's extract
+  date (2026-10-01 to 2026-10-02); no rating, logo or imagery. The credit is
+  London's and Newcastle's, "Food Standards Agency, UK food hygiene rating
+  data", as a notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (1) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py nottingham`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Nottingham's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**94. Ordnance Survey (Nottingham) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 97 Nottingham food storefronts the FSA lists with a full
+  postcode and no point (2.6% of storefront rows); never a private address.
+  Units kept to the four council areas' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/nottingham/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

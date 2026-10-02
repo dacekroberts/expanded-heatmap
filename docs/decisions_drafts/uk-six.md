@@ -60,6 +60,99 @@ for them):
 
 ---
 
+### 2026-10-02 - Nottingham (Regional) built: NET's two lines from both directions' relations, gate 3 exact against NET and NaPTAN, halved rings, tram
+
+- **Scope (owner, 2026-10-01):** the four councils NET serves (Nottingham
+  City 899, Broxtowe 261, Rushcliffe 266, Ashfield 259); exactly four FSA
+  codes asserted. The boundary is the union of OSM relations 123292 (the
+  unitary city, admin_level 6), 154058, 77311 and 154043 (the districts,
+  admin_level 8), 673.7 km² in UTM 30N, gated at 640-700; never
+  Nottinghamshire (181040). Gedling (262) has no stop.
+- **OSM's four relations are one per line per DIRECTION, each end to end**,
+  not the brief's half-lines meeting in the centre: 170076 and 1984324 (Line
+  1), 1984359 and 1984325 (Line 2), all `#003828`. All four are kept.
+  - London's branch rule (300 m, 1,000 m) kept one direction per line and
+    left Hyson Green's northbound one-way street (Noel Street, Beaconsfield
+    Street, Shipstone Street) undrawn, Beaconsfield Street 232 m off its
+    line. Beyond 30 m of the first direction the second adds 742 m in 8
+    parts on each line, so `BRANCH_NEAR_M = 30`, `BRANCH_MIN_NEW_M = 500`
+    (Birmingham's lowering): 2 of 2 relations per line, 23.3 km and 16.4 km.
+- **Four OSM defects, handled in config (the shared fixes of e2452466):**
+  - two northbound stop members that are no stop, skipped
+    (`SKIP_MEMBERS`): 9243041864, a `railway=tram_crossing` about 30 m from
+    Wilkinson Street, and 6711112153, an untagged node about 60 m from
+    Bulwell; the southbound relations carry both real stops;
+  - Highbury Vale's two branch platforms, "Highbury Vale A" and "B" in OSM,
+    one stop to NET and NaPTAN (`STATION_RENAMES`, Newcastle's "St. James"
+    precedent); 4 positions, 104 m across;
+  - Bulwell Forest, on both Line 1 relations with an empty role, added by
+    both its nodes (`STATION_ADD`);
+  - David Lane, on no relation, which NET lists on both lines, added by both
+    its nodes once the widened fetch cached them (`STATION_ADD`, lines 1
+    and 2).
+- **Stations:** 88 stop positions collapse to 50 by name, all inside the
+  four council areas (City 35, Broxtowe 9, Rushcliffe 4, Ashfield 2). None
+  is thinned or excluded.
+- **Gate 3, exact on both sources:**
+  - NET's timetables page (`thetram.net/timetables`, read 2026-10-02)
+    lists 50 stops; each stop's direction headings give Line 1 36 and Line 2
+    30, against the build's 36 and 30.
+  - NaPTAN: 50 active MET records (prefix `9400ZZNO`, ATCO area 940) inside
+    the scope, 50 of 50 names matched; NaPTAN's "NTU" read as Nottingham
+    Trent University.
+  - Before David Lane was added, both gates failed on it (35 and 29), the
+    fault gate 3 exists to catch: OSM's relations skip a served stop.
+- **Rings: halved** (0.05 to 0.3 mi). The median gap in scope is 432 m,
+  under the spacing rule's 550 m; bounds 380-490.
+- **The light-rail test:** the kept track is 100% `railway=tram` (57.0 km of
+  route track, each way once), 5.5% in tunnel or on a bridge, a 432 m median
+  gap. Trams every 7-10 minutes Monday to Saturday (NET), so the Hucknall
+  and Clifton former-railway sections pass the frequency gate.
+  **Recommended `mode`: `tram`**; the owner approves it with the build.
+- **Colours:** OSM gives both lines one colour and NET's site shows none, so
+  two project hues (Dijon's rule: two lines with one colour are refused).
+  `scripts/line_colour_search.py nottingham`: Line 1 `#586818` (45.0 from the
+  pins), Line 2 `#D85028` (45.6), the pair 70.8 apart, the dark-mode labels
+  distinct.
+- **Businesses, step by step:**
+  - 5,755 register rows in 4 authorities, extracts of 2026-10-01 (City,
+    Rushcliffe, Ashfield) and 2026-10-02 (Broxtowe).
+  - 3,702 storefront rows, as the brief.
+  - 4 at a "Flat" address and 1 childminder never placed.
+  - 307 have no FSA point. Of those, 97 are placed at a Code-Point centroid
+    and 210 (5.7%) are not placed: Rushcliffe 14.2%, Ashfield 7.2%,
+    Broxtowe 5.9%, the City 2.8%. No row had an outward code only; 209 had
+    no usable postcode.
+  - **The sanity box was widened**: the scaffold's (lon_max -0.93, lat_max
+    53.16) cut 15 Rushcliffe premises inside the district, which runs to
+    -0.815 and 53.171. Now 52.74-53.22, -1.40 to -0.76. 2 fall outside it
+    (Ashfield points in Scotland) and 7 outside the four council areas.
+  - 7 trading-as names show the trade name.
+  - **3,478 storefronts placed** (Food service 2,252, Food shops 1,226):
+    97.2% at the FSA's point, 2.8% at a centroid.
+  - **Point shares on the full files fall a little under the brief's
+    samples**: Rushcliffe 79.6% (446 of 560) against 80.2%, the City 95.4%
+    against 96.2%, Broxtowe 91.3% against 91.4%; Ashfield 90.7% against
+    90.6%. Accepted by the lead (2026-10-02), with Rushcliffe's unplaced
+    share disclosed in the city's What Is Excluded section.
+  - 1,210 (34.8%) sit within a ring: Food service 828, Food shops 382.
+  - Canteens by name are at least 4.3% of Restaurant/Cafe/Canteen, not
+    separated (London's lower bound).
+- **Personal exposure (`check_personal_exposure.py nottingham`):**
+  - 1,210 pins and 1,108 distinct names. No fallback name exists.
+  - 0 emails, phone numbers or c/o markers.
+  - 0 surname-first names and 2 "person's name (trade name)" shapes.
+  - The heuristic reads 299 (24.7%) as person-like, mostly cafés, shops and
+    takeaways named for people.
+  - **Verdict: publish**, London's, Newcastle's and Manchester's: the same
+    register, the same structural guards.
+- **CRS:** UTM 30N (EPSG:32630), as the built UK cities.
+- **Notices:** 93 (FSA, Nottingham) and 94 (Ordnance Survey, Nottingham),
+  Newcastle's 62 and 63 with the city and date changed; NaPTAN is notice 86.
+- **Page:** `app/pages/160_Nottingham_Heatmap.py` (page 160). Newcastle's FSA
+  bullets plus the tram template's bullets under **The trams**; two
+  proposals are listed in the drafts file's proposals section.
+
 ### 2026-10-02 - Sheffield built: Supertram's three routes, the Tram-Train left out, gate 3 against NaPTAN only
 
 - **Scope (owner, 2026-10-01):** the City of Sheffield, FSA authority 425

@@ -3509,6 +3509,51 @@ page.
   city.
 - Buses and national rail trains are not drawn.
 
+### Nottingham (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the four councils NET serves (the City of Nottingham, Broxtowe,
+Rushcliffe and Ashfield) inspect for food hygiene; no open register of other
+shops or of personal services covers them, so clothes shops, hairdressers and
+the like are missing rather than excluded. Food shops (grocers,
+off-licenses, bakers, butchers, newsagents selling food, supermarkets) are a
+category of their own.
+
+**Excluded by type** - other catering premises (750), where home caterers
+and event kitchens sit; mobile caterers (267); hospitals, childcare and care
+homes (439); schools, colleges and universities (336); hotels and guest
+houses (47); manufacturers and packers (115); distributors and transporters
+(46); importers and exporters (6); farmers and growers (47).
+
+**Not placed: flats and childminders** - 4 food storefronts registered at a
+flat address, where home businesses register, and 1 named as a childminder
+(the flat and childminder rules, owner 2026-09-28).
+
+**Placed at their postcode's center** - 97 food storefronts the register gives
+no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 210 food storefronts (5.7%) with neither a location nor a
+usable full postcode. **Rushcliffe's share is the highest: 79 of its food
+storefronts (14.2%) are not placed**, and the register gives a location for
+only 80% of them, so Rushcliffe is thinner on the map than the city. Ashfield
+follows (7.2%). A business run from a private address is published without a
+location or a full postcode and is never placed.
+
+**Shown under its trade name** - 7 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the area** - 9 whose register location
+lies outside the four council areas.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 4.3% of that type read as one by name.
+
+**Stations.** All 50 NET stops, on Lines 1 and 2, every one inside the four
+council areas; none is listed on Nottingham (Regional)'s page as left out.
+Gedling and the rest of Nottinghamshire have no NET stop and are not on the
+map.
+- Buses and national rail trains are not drawn.
+
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
 **One council, one survey year.** The City of Sydney's Floor Space and
