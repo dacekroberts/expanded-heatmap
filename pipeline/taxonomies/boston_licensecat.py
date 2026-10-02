@@ -143,7 +143,7 @@ CANNABIS_BUCKETS = {
     "Delivery (operator)": None,                                          #  1
 }
 
-FIELD_LABEL = "Licence category"
+FIELD_LABEL = "License category"
 VALUE_COLUMN = "business_category"
 EXTRA_COLUMNS = ("source",)
 

@@ -1,10 +1,10 @@
 {
-  "bucket_food_service": 14444,
+  "bucket_food_service": 14440,
   "bucket_personal_services": 4297,
   "bucket_retail": 870,
-  "geocoded_rows": 18218,
+  "geocoded_rows": 18215,
   "platforms": 234,
   "stations_collapsed": 110,
   "stations_in_city": 108,
-  "storefront_rows": 19418
+  "storefront_rows": 19414
 }

@@ -7,7 +7,7 @@
  "san_francisco": {
   "in_ring": 11720,
   "all": 16394,
-  "map_blob": "eb909628e2fee2cd53aab9a6c5883183d9ef2d3b"
+  "map_blob": "10f5dbb528411f3a9ec1880f62e48bb489c30ffa"
  },
  "los_angeles": {
   "in_ring": 13892,
@@ -65,8 +65,8 @@
   "map_blob": "453b3e121fb48d3bc2d338c1b3d5cea3dedbe885"
  },
  "toronto": {
-  "in_ring": 8752,
-  "all": 18218,
+  "in_ring": 8749,
+  "all": 18215,
   "map_blob": "24aff90a851f19dd8a2e63772c14bf635d42d349"
  },
  "mexico_city": {

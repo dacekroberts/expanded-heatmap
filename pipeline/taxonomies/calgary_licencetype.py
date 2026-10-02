@@ -69,7 +69,7 @@ FIVE JUDGMENT CALLS, EACH MET BEFORE IN THIS PROJECT
 Measured 2026-09-21 on all 23,203 rows.
 """
 
-FIELD_LABEL = "Licence type"
+FIELD_LABEL = "License type"
 VALUE_COLUMN = "licencetype"
 
 # A premises holding several categories - 9,136 of 23,203 rows - resolves to

@@ -140,7 +140,7 @@ sampled instead, and the sample overrode the rule twice.
 Counts are the 2026-09-21 pull, `licencetype == 'Commercial'`, split on `";"`.
 """
 
-FIELD_LABEL = "Licence category"
+FIELD_LABEL = "License category"
 VALUE_COLUMN = "business_licence_category"
 
 # A premises holding several categories gets ONE pin, and this decides its

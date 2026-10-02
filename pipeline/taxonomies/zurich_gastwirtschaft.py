@@ -36,7 +36,7 @@ THE CALLS, each with its precedent (docs/category_rules.md):
     (Stockholm's was, on 13% of its register).
 """
 
-FIELD_LABEL = "Licence type"
+FIELD_LABEL = "License type"
 VALUE_COLUMN = "betriebsart"
 
 R, F, OUT = "Retail", "Food service", None

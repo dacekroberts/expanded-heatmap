@@ -244,7 +244,7 @@ if _overlap:
 # was written". The second is worth a look; the first is not.
 SEEN = frozenset(_BUCKETS) | frozenset(EXCLUDED)
 
-FIELD_LABEL = "D.C. licence category"
+FIELD_LABEL = "D.C. license category"
 VALUE_COLUMN = "business_category"
 
 # When one licensee holds several kept licence types at one address, which

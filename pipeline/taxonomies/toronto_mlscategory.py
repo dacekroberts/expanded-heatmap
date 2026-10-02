@@ -83,7 +83,7 @@ Counts are the 2026-09-21 pull of CKAN resource
 `169e90ba-3ae0-43dd-8b2f-919e87002f50`, 159,872 rows.
 """
 
-FIELD_LABEL = "Licence category"
+FIELD_LABEL = "License category"
 VALUE_COLUMN = "mls_category"
 
 # Toronto's Category is single-valued, so this never resolves a multi-category
