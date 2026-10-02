@@ -5,6 +5,49 @@ should land in `DECISIONS.md`. Cleanup folds them in when the owner hands
 them off.
 
 
+
+### 2026-10-02 - Kumamoto built, Hiroshima's two-source shape with personal services
+
+- **Kumamoto built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 10,117 storefronts (Food service 6,801, Retail 649, Personal
+  services 2,667), 61 stations, 5 lines; 5,492 pins within a ring (54%).**
+  Page 164, notice 99, `mode: tram`, minor tier.
+- **The business leg, the brief's:** the city's restaurant list ("food"),
+  MHLW's file ("mhlw": `OWN_POINT_FALLBACK`, `ADDRESS_BY_CONSENT`; its permits
+  and notifications the partial food retail), `SUPERSEDES {"mhlw":
+  ("food",)}` (13 rows), and the three registers. No row dropped on
+  期限満了日 (the earthquake extension). `OFFICIAL_SHARES = True` with
+  `MUNICIPALITY_CODES = {"熊本市": "43100"}`, so the page's "about three in
+  four" is measured every build: 7,053 of 9,229, 76.4%
+  (`outputs/kumamoto/official_shares.json`).
+- **The join:** block 96.4%, town-chōme 2.2%, MHLW's point 0.8%, unplaced 0.6%
+  (画図町 and 田井島 大字 addresses); the city list's block share 97.0%, as
+  briefed. MHLW's coordinates sit a median 40 m from the block point, 97.4%
+  within 250 m (881 rows). 736 MHLW filings without an address (40
+  restaurants: about one in 180).
+- **Rail:** N02-25, 61 stations, 10 excluded. The tram's five sections drawn as
+  one line (Matsuyama's precedent; routes A and B share 19 stops). Gate 3: 35
+  = 35 against the Transportation Bureau's route map (stops 1-26 and B1-B9).
+  光の森's address is 熊本市北区武蔵ケ丘九丁目, part of its grounds in 菊陽町: the
+  cut is right. Median gap 362 m: halved rings. 3 aliases, 12 overrides (OSM
+  translated five stops and misspelled two).
+- **Census control: 2.35 Food service pins per census 飲食店 (2.23 to 2.58 by
+  ward) against an official / census ratio of 3.19: explained by the lists'
+  76% of the official count (3.19 x 0.76 is about 2.43).**
+- **Privacy verdict: publish.** The Japan pass prints 0; 3 pins show their
+  permit type (raw: food 1, laundry 2, the brief's).
+- **The 菓子 / そうざい factory share:** 5 of 17 (MHLW's rows only).
+- **Proposals for review time:** the notice's `をもとに作成` with "Processed by
+  this project" (the catalogue's form names a processor); the page's "...in
+  force on 31 March 2026, except those whose operators asked not to be
+  listed"; "Together the two lists hold about three in four of the restaurants
+  licensed in the city; food trucks and event stalls, which the official count
+  includes, are not in them." (Osaka's and Tokyo's precedent for stating a
+  share); "The barbers, beauty salons and laundries come from the city's
+  registers as of 31 March 2026."; "The city's list holds restaurants only, so
+  the Food shops layer comes from the ministry's list alone..."; the tram
+  one-line sentence.
+
 ### 2026-10-02 - Toyama built, the city's own lists with MHLW's points where the block join misses
 
 - **Toyama built on the shared Japanese steps (the city-lists agent, applied

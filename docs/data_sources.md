@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -2506,6 +2506,28 @@ at review time).
 - **MUST DO:** `check_personal_exposure.py toyama` with its Japan pass, run
   2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
   ("Toyama built", 2026-10-02).<!-- /internal -->
+
+**99. Kumamoto City, MHLW and MLIT (Kumamoto) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The restaurant list is
+  **PDL 1.0** under the city's catalogue terms; the barber, beauty and laundry
+  lists are **CC BY 4.0** on their pages and PDL 1.0 on BODIK. MHLW's open data
+  is **PDL 1.0**, as in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the catalogue's form,
+  `「熊本市_食品衛生法に基づく飲食店営業許可施設一覧」（熊本市オープンデータカタログサイト）をもとに作成`, and
+  likewise the three lists, with who processed them and the CC BY 4.0 link;
+  MHLW's source and processed-by credit, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kumamoto` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Kumamoto built", 2026-10-02).<!-- /internal -->
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

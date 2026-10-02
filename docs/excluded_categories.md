@@ -3161,6 +3161,45 @@ line.
 - JR Central's part of the Takayama Line is not drawn: its only station in the
   city, Inotani, is a station of JR West's line.
 
+### Kumamoto - the city's restaurant list, the national online filings and the city's barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Food shops, except where the national online filings include them: the
+  city's list holds restaurants only.
+- Restaurants whose operators asked not to be listed, and the city's vehicle,
+  temporary and event permits: together the two lists hold 76% of the official
+  restaurant count.
+- 736 national filings whose filers did not publish an address.
+- 16 rows with no fixed place.
+- 91 rows of food manufacturing and other permit types that are not a counter,
+  74 vending machines, 37 school, hospital and staff canteens, 31 premises
+  inside hotels and inns, 20 mail-order businesses, 16 temporary or mobile, 10
+  caterers (仕出し), 4 hostess bars and 2 entertainment venues.
+- 13 closed premises, which the national filings keep, marked.
+
+**Counted** - every restaurant permit applied for at a city counter and in
+force on 31 March 2026 (none dropped on its printed expiry: the city extended
+those terms after the 2026 earthquake), the national online filings as
+downloaded on 2 October 2026, and the city's barbers, beauty salons and
+laundries on 31 March 2026. 5 of the 17 bakery, confectioner and deli rows
+have a trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 243 repeat permits are shown once, and 13 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 62 rows (0.6%), mostly rural 大字 and 字 addresses (画図町,
+田迎町田井島). Another 229 sit at their town's center, and 84 at the ministry's
+own coordinates.
+
+**Names not shown** - 3 pins whose trade name is the operator's own name show
+their permit type. The national filings do not name their operators.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 10 stations beyond it: 7 in Koshi and 1 each in Uto, Gyokuto and
+  Kikuyo.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
