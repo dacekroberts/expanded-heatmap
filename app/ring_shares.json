@@ -623,5 +623,60 @@
   "in_ring": 5136,
   "all": 9285,
   "map_blob": "d175a41aeff224e1020a246bce7d35397e77f547"
+ },
+ "toyama": {
+  "in_ring": 3054,
+  "all": 6590,
+  "map_blob": "87150f7cbc72227d3f54fb172fe8963da2827306"
+ },
+ "kumamoto": {
+  "in_ring": 5492,
+  "all": 10117,
+  "map_blob": "cba8f7b02dead87760e87f6001f517205d6fdd8f"
+ },
+ "fukui": {
+  "in_ring": 2982,
+  "all": 4932,
+  "map_blob": "ec1053fa71ffcf1a50b724c60ff24fa027a05750"
+ },
+ "nagasaki": {
+  "in_ring": 4211,
+  "all": 7317,
+  "map_blob": "be4ca190540af91101b1daa654399ccd8bf8f0a6"
+ },
+ "utsunomiya": {
+  "in_ring": 3789,
+  "all": 8048,
+  "map_blob": "10a1c4cf5348145d8fd41894cc1c06bbff48ce56"
+ },
+ "kitakyushu": {
+  "in_ring": 10587,
+  "all": 14883,
+  "map_blob": "f8145b2d78a468211233c36003fd149c7a8c4481"
+ },
+ "sakai": {
+  "in_ring": 6046,
+  "all": 8023,
+  "map_blob": "3a319edc3398992430b6b3c28014cafb2928a248"
+ },
+ "hakodate": {
+  "in_ring": 331,
+  "all": 1077,
+  "map_blob": "50be7833dbaa46d8be1a3adaed23e6329661c800"
+ },
+ "kagoshima": {
+  "in_ring": 3980,
+  "all": 6591,
+  "map_blob": "83e7177c77a7b04ef0841d74838b409520292a38"
+ },
+ "okayama": {
+  "in_ring": 4174,
+  "all": 6590,
+  "map_blob": "ada076b5d2bed31cacc5310225dac8dc40873a4d"
+ },
+ "kochi": {
+  "in_ring": 677,
+  "all": 1406,
+  "map_blob": "b439738f82e2da4e77dc1cffac236111f8a20d9c"
  }
 }

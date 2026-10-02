@@ -32,7 +32,7 @@ Mapped so far:
 - **Latvia:** Riga, Liepāja, Daugavpils
 - **South Korea:** Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
-- **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama
+- **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi
 - **Germany:** Berlin
 - **United Kingdom:** London, Glasgow, Newcastle (Regional)
 - **Argentina:** Buenos Aires
