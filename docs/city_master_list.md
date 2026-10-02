@@ -32,9 +32,9 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **124** across 24 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **45** — A 7 · B 11 · C 4 · D 1 · R 22 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser)* |
+> | **Candidates** | **45** — A 7 · B 12 · C 3 · D 1 · R 22 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser)* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
-> | **Discarded** | **119**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, staging's recommendations for the owner to confirm)* |
+> | **Discarded** | **119**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day)* |
 >
 > *Counts are checked by `scripts/check_master_list_counts.py`; the
 > discard rows' evidence by `scripts/check_discard_evidence.py`.*
@@ -77,8 +77,8 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | Band | What these cities ARE | Cities |
 |---|---|---|
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **7** |
-| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **11** |
-| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **4** |
+| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **12** |
+| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **3** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **1** |
 | ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **22** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
@@ -101,12 +101,12 @@ apply to each.
 | **Matsuyama** 🇯🇵 | Food: old-law and new-law CSVs (7,110 new-law rows with 緯度/経度), 2026-03-31, a standing list updated yearly; 理容/美容/クリーニング 全施設一覧, 2026-03-31. In force 5,924 | CC BY 4.0 on each metadata page; the site default gives way to it | Iyotetsu city tram (6 lines, about 27 stops); Iyotetsu suburban lines; JR Yosan | 申請者個人名 on about half the rows |
 | **Toyama** 🇯🇵 | Food: `syokuhin.xlsx` on the city CKAN, 5,616 rows in force, quarterly; 理容/美容/クリーニング, 2026-03. In force 4,292 | CC BY 4.0 (catalogue badge and terms) | Chitetsu city tram (25 stops, the Port line included); Chitetsu lines; JR Takayama; Ainokaze | — |
 | **Kumamoto** 🇯🇵 | Food: 6,793 restaurant rows, 2026-03-31, standing (74% of 9,229 in force; online filings in MHLW's file, Hiroshima's two-source shape); 理容/美容/クリーニング standing, 2026-03-31 | PDL 1.0 (page badge and BODIK); the personal lists read CC BY 4.0 on the page and PDL 1.0 on BODIK, both open | Kumamoto City Tram, A and B, 35 stops (operator); Kumamoto Electric Railway; JR | Food retail only from MHLW's slice; the cleaning list carries 開設者住所 |
-| **Fukui** 🇯🇵 | Food: about 4,333 rows in force at 2026-08-31, plus a monthly closures file; 理容/美容/クリーニング standing, 2026-08-31. In force 3,508 | The site default is **CC BY-SA**; the open-data park's food copy (2026-02-28, fixed stores) is CC BY 2.1 JP | Fukui Railway Fukubu Line (18 of 25 stations in the city, 2.8 km on the street); Echizen Railway; Hapi-line Fukui | **Owner's call: share-alike, or the older CC BY copy** |
+| **Fukui** 🇯🇵 | Food: about 4,333 rows in force at 2026-08-31, plus a monthly closures file; 理容/美容/クリーニング standing, 2026-08-31. In force 3,508 | The site default is **CC BY-SA**; the open-data park's food copy (2026-02-28, fixed stores) is CC BY 2.1 JP | Fukui Railway Fukubu Line (18 of 25 stations in the city, 2.8 km on the street); Echizen Railway; Hapi-line Fukui | **Owner (2026-10-01): the current CC BY-SA list, if a licence read clears share-alike for the map**; otherwise the older CC BY copy |
 | **Nagasaki** 🇯🇵 | Food: BODIK `food_all`, 6,138 rows with 緯度/経度, loaded 2025-03-27 (a snapshot inside the five-year ceiling); 理容 380 / 美容 999 / クリーニング 262 (2025-03). In force 4,777 | CC BY 4.0 on BODIK. The city's current files (6,412 rows, 2026-06) need its permission | Nagasaki Electric Tramway (routes 1, 3, 5; about 41 stops); JR Nagasaki Main | The page states the 2025-03 date. A request for the current files is outreach, the owner's |
 | **Utsunomiya** 🇯🇵 | Food: **MHLW's file, 4,901 open restaurant permits (85% of 5,761 in force), 99% with an address**, permits 2021-06 to 2026-08, plus the city's old-law list (1,120 rows); 理容/美容/クリーニング monthly standing lists. Measured 2026-10-01 | MHLW: PDL 1.0 (read for Fukuoka); the city: CC BY / PDL 1.0 | Utsunomiya Light Rail (19 stops; the eastern end in Haga); JR Utsunomiya and Nikkō; Tobu Utsunomiya | Fukuoka's two-source shape; MHLW publishes an address only by consent |
 | **Kitakyushu** 🇯🇵 | Food: **MHLW's file, 10,760 open restaurant permits (85% of 12,733), 86% with an address**, plus the old-law list (3,383, CC BY); 理容 817 and 美容 2,282 (CC BY, 2026-08-31). Measured 2026-10-01 | MHLW: PDL 1.0; the city's lists: CC BY | Kitakyushu Monorail (13 stations); JR Kagoshima, Nippō, Chikuhō and Hitahikosan; Chikuho Electric Railroad | **No laundry list**: personal services without laundries, disclosed (Berlin's gap) |
 
-## 🔵 Band B — narrower pages (11 cities)
+## 🔵 Band B — narrower pages (12 cities)
 
 **The UK six** stand on the Food Standards Agency's food hygiene register
 (FHIS in Scotland), the source London, Glasgow and Newcastle are built on:
@@ -129,14 +129,14 @@ track share come at Step 0.
 | **Kagoshima** 🇯🇵 | Food only | **MHLW's file: 5,914 open restaurant permits (87% of 6,823), 76% with an address**, plus the city's old-law list (1,376; the open-data terms are CC BY 4.0). Measured 2026-10-01 | The city tram (about 35 stops); JR | The personal-services lists are a new-openings stream only |
 | **Okayama** 🇯🇵 | Food only | **MHLW's file: 7,582 open restaurant permits (90% of 8,409), 74% with an address**; the city's own lists stopped in 2021 and point to MHLW. Measured 2026-10-01 | Okaden (2 lines, about 16 stops); JR | The personal-services lists are PDFs under a Sendai-style default (the city's permission) |
 | **Kōchi** 🇯🇵 | Personal services only | **理容/美容 1,074** (CC BY 4.0, 2026-03-31); no laundry list | Tosaden (4 lines); JR Dosan | **Food fails placement**: MHLW holds 4,564 open restaurant permits (91% of 4,999) but only **54% with an address**, under the bar's 70% |
+| **Tbilisi** 🇬🇪 | All three buckets, a business register (chains undercounted, disclosed) | Geostat's Business Register: **63,511 active units with a factual address in Tbilisi, 91% with coordinates**; NACE Rev.2: retail 14,493, food 1,628, personal services 1,374; terms allow "any purpose, including commercial", with attribution | Tbilisi Metro, 2 lines, about 23 stations | **Approved (owner, 2026-10-01): accepted with the undercount disclosed** (enterprises, not premises: a chain appears once); **individual entrepreneurs shown as unnamed dots, category only** (Taichung's precedent); personal ID columns dropped at fetch. Then a licence read of Geostat's terms and `add-country` for Georgia |
 
-## 🟣 Band C — closer to a page (4 cities)
+## 🟣 Band C — closer to a page (3 cities)
 
 | City | What there is | What stands between it and a band |
 |---|---|---|
-| **Seattle (Regional)** 🇺🇸 | **Held by the owner for a regional build with multiple city registers (2026-10-01).** Link's 1 and 2 Lines: 37 stations in 11 cities. Seattle's register and Bellevue's ("Business Licenses (All)", NAICS, daily) cover all three buckets; King County's food inspections (12,296 businesses, current to 2026-09-29, parcel-joinable) cover food in every King County city | Licence reads: Seattle's (unresolved), King County food (a Public Domain field against a no-redistribution notice), Bellevue's ("commercial use … prohibited"). Lynnwood and Mountlake Terrace food (the owner's call). Retail and personal services outside Seattle and Bellevue are unpublished (records requests are outreach). In full: `docs/build_briefs/seattle.md` |
+| **Seattle (Regional)** 🇺🇸 | **Held by the owner for a regional build with multiple city registers (2026-10-01).** Link's 1 and 2 Lines: 37 stations in 11 cities. Seattle's register and Bellevue's ("Business Licenses (All)", NAICS, daily) cover all three buckets; King County's food inspections (12,296 businesses, current to 2026-09-29, parcel-joinable) cover food in every King County city | Licence reads: Seattle's (unresolved), King County food (a Public Domain field against a no-redistribution notice), Bellevue's ("commercial use … prohibited"). Lynnwood and Mountlake Terrace food (the owner's call). Retail and personal services outside Seattle and Bellevue are unpublished (records requests are outreach). In full: `docs/build_briefs/seattle.md`. **Owner (2026-10-01):** retail and personal services outside Seattle and Bellevue are accepted as unpublished and disclosed per city IF further probing finds no further bucket; Bellevue's never-expiring licences get an issue-date cutoff measured at build and brought to the owner |
 | **Takaoka** 🇯🇵 | Toyama Prefecture's food CSV (3,128 Takaoka rows, monthly, no operator-name column); personal lists yearly (2025-03-31) | The per-dataset licence: the prefecture's new catalogue answers 403 to this machine and its site default is Sendai's. Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR |
-| **Tbilisi** 🇬🇪 | Geostat's Business Register: 63,511 active units with a factual address in Tbilisi, 91% with coordinates; NACE Rev.2: retail 14,493, food 1,628, personal services 1,374; terms allow "any purpose, including commercial", with attribution | **Owner's calls**: it lists enterprises, not premises (a chain appears once: the bar's rule 3); individual entrepreneurs (about half, 43% of food) as unnamed dots or dropped; personal ID columns dropped at fetch. Then a licence read and `add-country` for Georgia. Rail: Tbilisi Metro, 2 lines, about 23 stations |
 | **Brisbane** 🇦🇺 | Brisbane City Council's Food Safety Permits: 8,050 current, CC BY 4.0, refreshed daily (2026-09-30); name, address, rating, no coordinates | Found in passing (2026-10-01); Step 0 not run. The rail is Queensland Rail's suburban network, so the commuter-rail test decides it (`docs/commuter_rail_list.md`); then an address join |
 
 ## 🔴 Band D — blocked, but the owner can act alone (1 city)
@@ -222,7 +222,7 @@ not counted here.
 
 ## DISCARDED — 119 cities, each naming its evidence
 
-▼ **2026-10-01 — nineteen rows from the post-review screens** (staging; recommended, for the owner to confirm), in their own table below: Toyohashi (Japan), Dresden, Leipzig, Graz, Luxembourg City, Wrocław, Adelaide, the Gold Coast and Canberra (the cities a country pattern had left unscreened), Belgrade, Sarajevo, Santo Domingo, Casablanca, Rabat–Salé, Tunis, Lagos and Addis Ababa (the countries once ruled out on "no urban rail", each failing on its business data), and Cagliari and Alcobendas (wave 2's not-reached rows, now read in a browser).
+▼ **2026-10-01 — nineteen rows from the post-review screens** (staging's recommendations, confirmed by the owner the same day), in their own table below: Toyohashi (Japan), Dresden, Leipzig, Graz, Luxembourg City, Wrocław, Adelaide, the Gold Coast and Canberra (the cities a country pattern had left unscreened), Belgrade, Sarajevo, Santo Domingo, Casablanca, Rabat–Salé, Tunis, Lagos and Addis Ababa (the countries once ruled out on "no urban rail", each failing on its business data), and Cagliari and Alcobendas (wave 2's not-reached rows, now read in a browser).
 
 ▼ **2026-09-30 — Santa Cruz–La Laguna, Rijswijk and Delft, from the tram list's T2** (owner's call, closing the tier): Santa Cruz–La Laguna's address join places 57.7%, under the reduced-bucket bar's 70%; Rijswijk and Delft have no food source, and the regional Den Haag scope they were kept for is no longer needed.
 
@@ -475,7 +475,7 @@ dataset title**.
 ---
 
 
-**Added 2026-10-01** (the post-review screens; staging's recommendations).
+**Added 2026-10-01** (the post-review screens; confirmed by the owner the same day).
 
 | City | Kind | Methods | City host asked? | Why |
 |---|---|---|---|---|
@@ -549,7 +549,7 @@ dataset title**.
 | 🇦🇹 Austria | — | — | — | Vienna and Graz discarded (GISA strips addresses; no city register) |
 | 🇪🇬 Egypt | — | — | — | Cairo discarded (no register at any level) |
 | 🇨🇱 Chile | — | — | — | Santiago discarded (coverage fails downtown) |
-| 🇬🇪 Georgia | — | **1** — Tbilisi | C | Geostat's Business Register (factual address, coordinates, NACE): owner's calls on enterprise rows and individual entrepreneurs |
+| 🇬🇪 Georgia | — | **1** — Tbilisi | B | Geostat's Business Register (factual address, coordinates, NACE): owner's calls on enterprise rows and individual entrepreneurs |
 | 🇱🇺 Luxembourg | — | — | — | Luxembourg City discarded 2026-10-01 (no premises register) |
 | 🇷🇸 Serbia | — | — | — | Belgrade discarded 2026-10-01 |
 | 🇧🇦 Bosnia and Herzegovina | — | — | — | Sarajevo discarded 2026-10-01 |
@@ -558,7 +558,7 @@ dataset title**.
 | 🇹🇳 Tunisia | — | — | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | — | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | — | — | Addis Ababa discarded 2026-10-01 |
-| **Total** | **124** | **45** |  | A 7 · B 11 · C 4 · D 1 · R 22. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **124** | **45** |  | A 7 · B 12 · C 3 · D 1 · R 22. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 

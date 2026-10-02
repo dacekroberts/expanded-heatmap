@@ -4,6 +4,39 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - The owner's calls on the fresh list: discards confirmed, Tbilisi to B, Fukui and Seattle conditional (owner)
+
+- **1. The 19 new discards are confirmed** (owner: "confirm all"). The
+  master list's notes now read "confirmed by the owner the same day".
+- **2. Fukui uses the current CC BY-SA list, if a licence read clears
+  share-alike for the map.** Otherwise it uses the older CC BY 2.1 JP copy.
+  The `licence-read` agent was started the same day.
+- **3. Tbilisi moves from C to B.**
+  - The owner accepts Geostat's business register as the source, with the
+    undercount disclosed: it lists enterprises, not premises, so a chain
+    appears once.
+  - Individual entrepreneurs are shown as **unnamed dots, category only**,
+    on Taichung's precedent.
+  - Personal ID columns are dropped at fetch.
+  - The next steps are a licence read of Geostat's terms and `add-country`
+    for Georgia.
+- **4b. Seattle's retail and personal services outside Seattle and
+  Bellevue** are accepted as unpublished and disclosed per city, **if
+  further probing finds no further bucket**.
+- **4c. Bellevue's never-expiring licences** get an issue-date cutoff,
+  measured at build and brought to the owner.
+- **4a is still open.** The owner asked whether the 2025 Snohomish layer is
+  acceptable with its currency disclosed. Staging's answer: yes, under the
+  rule "a frozen part may sit beside a current whole, its date on the page"
+  (Tokyo's precedent), provided two things measure true at build:
+  - it is a complete snapshot, checked against the county's published
+    count of permitted establishments;
+  - its date comes from more than the catalogue's "(2025)" label.
+
+  The owner's yes is pending.
+- **The list now holds A 7 · B 12 · C 3 · D 1 · R 22 = 45, with 119
+  discards.** The count, discard and provenance checks pass.
+
 ### 2026-10-01 - The UK six briefed, with a prose hold; builds held (owner)
 
 - **The owner (2026-10-01)**: "no, I want to wait on builds. generate the
