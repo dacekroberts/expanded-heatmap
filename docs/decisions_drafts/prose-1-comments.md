@@ -66,4 +66,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
     and usage lines in docstrings the code prints.
 - **Checks**: `check_all.py` 36 of 36 (with `check_no_em_dashes.py`);
   `check_deploy_imports.py --ref HEAD` clean; `drift_check.py --render-only
-  --jobs 2` through the memory gate: see the report.
+  --jobs 1` through the memory gate: zero drift, all 124 maps identical after
+  Folium-id normalization. No render-only peak was on record, so the owner
+  set the declaration at 3 GB rather than the unknown-peak 8 GB; **measured
+  peak 1.61 GB**, now in the gate's history.
