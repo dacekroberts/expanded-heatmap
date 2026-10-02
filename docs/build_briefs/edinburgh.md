@@ -78,6 +78,8 @@ from the operator, which is a name and not prose. Record it in config.
 
 **Gate 3:** 23 stops, per the operator's timetable page.
 
+**NaPTAN approved as gate 3's source in all six (owner, 2026-10-01)**: the Department for Transport's national stop register (OGL), downloaded for the build's area. It needs a licence row in `docs/data_sources.md` and its notice: a second independent source beside the operator's page.
+
 ## Scope, CRS, region
 
 - **Page name "Edinburgh"**, the city only (owner).

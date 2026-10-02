@@ -115,6 +115,8 @@ Every line gets its public name as a label and a legend entry. Take the
 names from TfGM's network map, not from the service refs.
 
 **Gate 3 (independent of OSM):**
+
+**NaPTAN approved as gate 3's source in all six (owner, 2026-10-01)**: the Department for Transport's national stop register (OGL), downloaded for the build's area. It needs a licence row in `docs/data_sources.md` and its notice: a second independent source beside the operator's page.
 - TfGM's stop list, `https://tfgm.com/public-transport/tram/stops` (it
   answers scripts), names all 99 stops.
 - The per-line counts go in config before step 1. A mismatch stops the

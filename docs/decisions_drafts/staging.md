@@ -4,6 +4,223 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - Tempe to the discards: its licence list has no address (owner)
+
+- **The owner: "save evidence, delete root, discard".**
+- **The evidence is saved** at
+  `data/tempe/raw/Tempe_General_Business_License_List_2026-09-03.pdf`
+  (gitignored, so local and never committed). It is byte-identical to the
+  owner's browser download.
+- **The owner's root copy is deleted** (`expanded-heatmap/tempe.pdf`, at
+  the main checkout's root).
+- **Tempe moves from Band D to the discards**, a `measured` row. The list
+  carries licence number, business name, business activity and website,
+  and no address, so nothing can be placed. The City's ArcGIS app covers
+  short-term rentals and tobacco only. It would reopen with a list that has
+  premises addresses.
+- **Band D is empty.** The list now holds **A 7 · B 12 · C 3 · D 0 · R 23 =
+  45 candidates, with 120 discards.** The count, discard-evidence and
+  self-test checks pass.
+
+### 2026-10-01 - Fukui takes the CC BY-SA 4.0 offer (owner); Tempe's licence list has no address
+
+- **Fukui (owner: "use the SA 4.0").** The current lists are used: food,
+  2026-08, with closures; and 理容/美容/クリーニング. The site default is
+  CC BY-SA.
+- **What the Fukui build owes:**
+  - **The share-alike offer itself:** a line in `LICENSE` and in the
+    data-sources entry, offering `outputs/fukui/` (the map and any derived
+    Fukui data) under CC BY-SA 4.0. It is the project's first share-alike
+    licence on its own output.
+  - **The credit:** 福井市, the list titles and page URLs, CC BY-SA (with no
+    version claimed for the city's licence), and a statement that the data
+    was processed.
+  - **What never appears:** no endorsement, no claim of accuracy on the
+    city's authority.
+  - **The site policy's open-ended prohibited acts (§4) are accepted
+    knowingly**, Taoyuan's pattern.
+  - **Privacy:** `check_personal_exposure.py` covers the policy's privacy
+    clause (6).
+- **Tempe's General Business License List was read.**
+  - The owner fetched it in their browser (`tempe.pdf`, at the main
+    checkout's root). Staging copied it to its scratchpad.
+  - It is a 33-page PDF, as of 2026-09-03, with four columns: licence
+    number, business name, business activity and website. **There is no
+    address**, so nothing can be placed (Denver's original failure).
+  - The City's ArcGIS app covers short-term rentals and tobacco only.
+  - **Staging recommends the discards on a measured negative**, the owner
+    to confirm. The row stays in Band D until then.
+
+### 2026-10-01 - Seattle regional: the Liquor Board's off-premise licences become a partial retail layer (owner)
+
+- **The owner said "yes"** to staging's recommendation.
+- **The layer:** the active off-premise rows (grocery stores, spirits
+  retailers, beer/wine and wine shops) become a partial retail layer in
+  every city outside Seattle and Bellevue. They are disclosed as shops
+  licensed to sell alcohol only (Zurich's precedent).
+- **On premise** is a check on the Snohomish food layer, not a layer.
+- **Recorded in `docs/build_briefs/seattle.md`**, "What the build has to
+  pull", items 4–7.
+
+### 2026-10-01 - Seattle regional: the 2025 Snohomish layer approved for Lynnwood and Mountlake Terrace food (owner, 4a); the Liquor Board lists screened (4b)
+
+- **4a approved (owner: "use").** Lynnwood's and Mountlake Terrace's food
+  comes from Snohomish County's "Food Service Establishments (2025)" layer
+  (598 and 92 points), under the currency rule's "a frozen part may sit
+  beside a current whole, its date on the page" (Tokyo's precedent).
+  Conditional on two build-time checks:
+  - **It is a complete snapshot.** Check it against the county's published
+    count of permitted establishments, and against the Liquor Board's
+    on-premise rows (Lynnwood 113, Mountlake Terrace 24).
+  - **Its date comes from more than the catalogue's "(2025)" label.**
+
+  If it proves partial, those stations are drawn hollow.
+- **4b probing (owner: "ok to fetch and screen")**: the Washington Liquor
+  and Cannabis Board's Off Premise and On Premise lists, dated 2026-09-29,
+  1.5 and 1.9 MB, kept in the staging scratchpad.
+  - **Off premise:** 8,793 rows statewide (7,791 active), mostly grocery
+    stores (beer/wine), spirits retailers, beer/wine specialty shops and
+    wine resellers.
+  - **On premise:** 9,993 rows (9,511 active), mostly restaurants, lounges,
+    taverns and nightclubs.
+  - **Both** carry status, expiry, a premises address and city (no
+    coordinates), plus `Licensee`, phone and mailing columns that are never
+    published.
+  - **Terms:** the page says records "may not be used for commercial
+    purposes" (RCW 42.56.070(8)), which the owner's non-commercial
+    confirmation meets. A formal licence read is owed at build.
+- **The finding: a partial retail layer exists in every suburb**: shops
+  licensed to sell alcohol, in both counties (Lynnwood 133, Kent 134,
+  Federal Way 106, Shoreline 66, Redmond 64, Tukwila 48, SeaTac 40,
+  Mountlake Terrace 25, Des Moines 24, Mercer Island 16, all statuses).
+  That is Zurich's precedent: alcohol-licensed shops as a partial layer
+  beside a full food register, disclosed.
+- **Staging recommends** adding the active off-premise rows as that partial
+  layer, and using on-premise only as a check on the Snohomish layer.
+  **The owner's call is pending.**
+- **Personal services remain unpublished outside Seattle and Bellevue**,
+  disclosed per city (4b).
+
+### 2026-10-01 - Five licence reads: Seattle and Geostat permitted; Bellevue and King County ambiguous and read as permitted (owner, option 1); Fukui's share-alike to the owner
+
+- **Seattle's business register: PERMITTED WITH CONDITIONS.**
+  - The layer is federated on data.seattle.gov (`wmtg-dzy4`). Its Open Data
+    Terms of Use ("by using data made available through this site the user
+    agrees…") and Open Data Policy V1.0 support reuse.
+  - No attribution is required, and nothing is owed.
+  - The condition: data configurable as "a list of individuals" may not be
+    used "for a commercial purpose". The owner confirmed the project is
+    non-commercial ("no commercial, nothing sold", 2026-10-01), and it must
+    stay so.
+- **Bellevue's licences (all): ambiguous.**
+  - The data's licence field bars only commercial use or sale without
+    written authorization.
+  - The portal's linked Terms of Use allow only "own personal,
+    non-commercial use", with all other rights reserved.
+- **King County food inspections: ambiguous.**
+  - The Socrata dataset is declared Public Domain. The portal's own data
+    terms granted reuse, but they are now a 404 (last archived 2023).
+  - The live site-wide terms forbid publishing without written permission.
+- **The owner chose option 1 for both, "defensible": read as permitted.**
+  - The data's own declarations govern.
+  - King County: display "Public Health – Seattle & King County" and the
+    legend "Data provided by permission of King County"; no marks, no
+    implied endorsement; no USPS-derived fields (`CTYNAME`,
+    `POSTALCTYNAME`, ZIP+4) from the address points.
+  - Bellevue: credit the City of Bellevue.
+  - The removal rule is the safety net for both.
+  - The owner also noted a **separate Seattle-only build already exists**.
+- **Geostat's Business Register: PERMITTED WITH CONDITIONS.**
+  - The terms allow any use "without prior permission". The condition is
+    to name Geostat as the source, which the statistics law also requires
+    (Art. 43(6)). No logo.
+  - Two points stand, neither a prohibition:
+    - statistical confidentiality: public-registry data is exempt under
+      Art. 34(4);
+    - Georgia's personal-data law: processing public data is lawful, and a
+      restriction request is honoured, as the removal rule already does.
+  - Tbilisi needs `add-country` for Georgia next.
+- **Fukui's site-default CC BY-SA: PERMITTED WITH CONDITIONS.**
+  - Share-alike would oblige offering `outputs/fukui/` under CC BY-SA 4.0
+    (in `LICENSE`), the project's first share-alike licence on its own
+    output.
+  - The personal-services lists exist only under BY-SA, so only a food-only
+    page on the older CC BY copy avoids it.
+  - **The owner's call.**
+- **Recorded in `docs/build_briefs/seattle.md`** ("What the build has to
+  pull") and on the master list's Seattle, Tbilisi and Fukui rows.
+
+### 2026-10-01 - The owner's calls 5-10: downloads approved, NaPTAN for the UK six, Dudley pre-approved, Atlanta's note filed, Richmond to R (owner)
+
+- **5. Downloads approved:**
+  - **Tempe's business licence list**: staging fetches and screens it.
+  - **Burnaby's licence layer and Arlington's licence list**: for main's
+    Vancouver (Regional) and D.C. + Arlington add-on builds. Recorded in the
+    master list's add-ons note.
+- **6. NaPTAN** (the Department for Transport's stop register, OGL) is gate
+  3's independent source in all six UK briefs. It is the only one for
+  Sheffield and Blackpool, whose operators refuse scripts. It needs a
+  licence row and its notice at build.
+- **7. Birmingham:** if West Midlands Metro's Line 2 is in passenger service
+  at build, **Dudley (FSA 409) joins as a fourth authority**, pre-approved.
+  It is written into the brief and the handoff.
+- **8. Atlanta:** a note telling the City its 2024 licence layer exposes
+  reported revenue is **drafted and filed, not to be sent**
+  (`docs/notifications/atlanta-revenue-exposure.md`). The owner: "unlikely
+  to send". It quotes no revenue value.
+- **9. Dublin's vacant premises and the three undatable sources** (NYS food
+  stores, Milan, Surrey): "disclose the lack of info where we need".
+  - That is page text, so under the prose hold it goes to the prose pass,
+    not to staging.
+  - Cleanup was told the same day.
+- **10. Richmond (BC) is in Band R, request only** (owner: "is request
+  required? if so put into R").
+  - It is: the City's business directory carries no open-data licence, and
+    its copyright notice allows "research purposes and private use only",
+    with written permission required.
+  - The request (`buslic@richmond.ca`) is the owner's to send. Nothing is
+    drafted.
+  - **The list now holds A 7 · B 12 · C 3 · D 1 · R 23 = 46.**
+- **Approved to run, and started the same day:**
+  - licence reads of Seattle's register, King County's food inspections,
+    Bellevue's licences and Geostat's register (plus Fukui's, from call 2);
+  - the four UK brief re-runs that printed RETRY;
+  - Brisbane's commuter-rail test;
+  - a re-check of Takaoka's licence page.
+
+### 2026-10-01 - The owner's calls on the fresh list: discards confirmed, Tbilisi to B, Fukui and Seattle conditional (owner)
+
+- **1. The 19 new discards are confirmed** (owner: "confirm all"). The
+  master list's notes now read "confirmed by the owner the same day".
+- **2. Fukui uses the current CC BY-SA list, if a licence read clears
+  share-alike for the map.** Otherwise it uses the older CC BY 2.1 JP copy.
+  The `licence-read` agent was started the same day.
+- **3. Tbilisi moves from C to B.**
+  - The owner accepts Geostat's business register as the source, with the
+    undercount disclosed: it lists enterprises, not premises, so a chain
+    appears once.
+  - Individual entrepreneurs are shown as **unnamed dots, category only**,
+    on Taichung's precedent.
+  - Personal ID columns are dropped at fetch.
+  - The next steps are a licence read of Geostat's terms and `add-country`
+    for Georgia.
+- **4b. Seattle's retail and personal services outside Seattle and
+  Bellevue** are accepted as unpublished and disclosed per city, **if
+  further probing finds no further bucket**.
+- **4c. Bellevue's never-expiring licences** get an issue-date cutoff,
+  measured at build and brought to the owner.
+- **4a is still open.** The owner asked whether the 2025 Snohomish layer is
+  acceptable with its currency disclosed. Staging's answer: yes, under the
+  rule "a frozen part may sit beside a current whole, its date on the page"
+  (Tokyo's precedent), provided two things measure true at build:
+  - it is a complete snapshot, checked against the county's published
+    count of permitted establishments;
+  - its date comes from more than the catalogue's "(2025)" label.
+
+  The owner's yes is pending.
+- **The list now holds A 7 · B 12 · C 3 · D 1 · R 22 = 45, with 119
+  discards.** The count, discard and provenance checks pass.
+
 ### 2026-10-01 - The UK six briefed, with a prose hold; builds held (owner)
 
 - **The owner (2026-10-01)**: "no, I want to wait on builds. generate the

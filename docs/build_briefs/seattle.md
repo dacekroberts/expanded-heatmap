@@ -235,29 +235,90 @@ against King County's city polygons:
 
 ### What the build has to pull
 
-1. **Seattle's register**: its licence read is still owed.
-2. **Bellevue's register**:
-   - It carries a "commercial use … prohibited" disclaimer, so it needs a
-     licence read.
-   - Licences never expire, so closed businesses linger (2,938 in-city
-     active rows were issued before 2015).
-   - 1,174 sole proprietorships, and 4,185 rows in residential zones.
-     `check_personal_exposure.py` is essential.
+1. **Seattle's register: PERMITTED WITH CONDITIONS** (`licence-read`,
+   2026-10-01).
+   - **Why it is permitted.** The layer is federated on data.seattle.gov
+     (`wmtg-dzy4`), whose Open Data Terms of Use and Open Data Policy V1.0
+     support reuse. No attribution is required, though crediting "City of
+     Seattle" is recommended, and nothing is owed.
+   - **The condition.** Data that can be "configured as a list of
+     individuals … is not to be used for a commercial purpose". The owner
+     confirmed the project is non-commercial ("no commercial, nothing sold",
+     2026-10-01), and it must stay so: no ads, no paid tier, no client use.
+   - **What is never published:** contact names, phones, mailing addresses,
+     and person-named trade names.
+2. **Bellevue's register: read as permitted (owner, 2026-10-01, option 1:
+   "defensible").**
+   - **The licence read found it ambiguous.** The data's licence field bars
+     only "commercial use or sale … without express written authorization".
+     The portal's linked Terms of Use allow only "own personal,
+     non-commercial use", with all other rights reserved.
+   - **The owner's reading.** The data's own licence field governs the
+     data, and a free, non-commercial map falls outside its one
+     prohibition. Credit the City of Bellevue.
+   - **The safety net** is the removal rule: if Bellevue objects, the layer
+     comes down first.
+   - **Data quality.** Licences never expire, so closed businesses linger
+     (2,938 in-city active rows were issued before 2015). An issue-date
+     cutoff is measured at build and brought to the owner (4c).
+   - **Privacy.** 1,174 sole proprietorships, and 4,185 rows in residential
+     zones. `check_personal_exposure.py` is essential.
 3. **King County food inspections**, joined to the parcels: food for every
-   King County city and the unincorporated rings. Licence read first.
-4. **Lynnwood and Mountlake Terrace food**: the owner's call. One of:
-   - the LCB list (a download and a terms read);
-   - the 2025 Snohomish layer with its date on the page (it fails part 1 of
-     the currency rule);
-   - leave both cities' stations hollow, Tokyo's precedent.
-5. **Retail and personal services outside Seattle and Bellevue**: none
-   published.
-   - The routes are public-records requests: Shoreline, Kent and Des Moines
-     to the city; the BLS cities through DOR, which needs a non-commercial
-     declaration.
-   - That is outreach, the owner's last resort.
-   - Without it, those cities are food-only beside two full cities, and the
-     page states each city's coverage (the Tokyo and Band B precedents).
-6. **Rings that cross a city line** take the neighbour's data or are stated
-   as unmapped: Des Moines and unincorporated King County have King County
-   food only.
+   King County city and the unincorporated rings. **Read as permitted
+   (owner, 2026-10-01, option 1).**
+   - **The licence read found it ambiguous.** The Socrata dataset is
+     declared Public Domain, and the portal's linked data terms (the Open
+     Data T&C, now a 404, last archived 2023) granted reuse. The live
+     site-wide kingcounty.gov Terms forbid publishing without written
+     permission.
+   - **The owner's reading.** The dataset's declaration and the data terms
+     govern.
+   - **Display** the publisher's attribution, "Public Health – Seattle &
+     King County". Display the Open Data T&C's required legend, "Data
+     provided by permission of King County", since the permissive reading
+     rests on those terms.
+   - **Do not** use King County's logo or marks, and do not imply
+     endorsement.
+   - **From the address points, take only the geometry and the County's
+     own fields (PIN, address).** `CTYNAME`, `POSTALCTYNAME` and the ZIP
+     fields come from the USPS ZIP+4 product. Scope cities by
+     point-in-boundary.
+   - **The safety net** is the removal rule.
+4. **Lynnwood and Mountlake Terrace food: the 2025 Snohomish layer
+   (owner, 2026-10-01, 4a)**, "Food Service Establishments (2025)": 598 and
+   92 points.
+   - **The rule:** a frozen part beside a current whole, its date on the
+     page (Tokyo's precedent).
+   - **Two checks at build, or the stations go hollow:**
+     - **It is a complete snapshot.** Compare it with the county's
+       published count of permitted establishments, and with the Liquor
+       Board's on-premise rows (Lynnwood 113, Mountlake Terrace 24).
+     - **Its date comes from more than the catalogue's "(2025)" label.**
+   - **Licence:** its `licenseInfo` is empty. A licence read is owed at
+     build.
+5. **A partial retail layer in every city outside Seattle and Bellevue:
+   the Liquor Board's off-premise licences (owner, 2026-10-01).**
+   - **What it is:** "Off Premise" list, `lcb.wa.gov/records/frequently-requested-lists`,
+     dated 2026-09-29.
+   - **Active rows only.** These are grocery stores (beer/wine), spirits
+     retailers, beer/wine specialty shops and wine resellers.
+   - **Disclosed as "shops licensed to sell alcohol only"**, Zurich's
+     precedent for a partial retail layer.
+   - **Location:** premises addresses, joined to the county address points.
+     There are no coordinates.
+   - **Never published:** `Licensee`, phone and mailing columns. Trade name
+     only.
+   - **Terms:** RCW 42.56.070(8), "not for commercial purposes", met by the
+     owner's non-commercial confirmation. A formal licence read is owed at
+     build.
+   - **Counts (all statuses):** Lynnwood 133, Kent 134, Federal Way 106,
+     Shoreline 66, Redmond 64, Tukwila 48, SeaTac 40, Mountlake Terrace 25,
+     Des Moines 24, Mercer Island 16.
+   - **On premise (9,993 rows)** is a check on the Snohomish layer, not a
+     layer.
+6. **Personal services outside Seattle and Bellevue: none published,
+   disclosed per city** (owner, 4b). The only routes are public-records
+   requests, which are outreach and not taken.
+7. **Rings that cross a city line** take the neighbour's data or are stated
+   as unmapped. Des Moines and unincorporated King County have King County
+   food and the off-premise layer only.

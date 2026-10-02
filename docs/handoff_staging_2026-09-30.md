@@ -90,28 +90,60 @@ carried over as they stand.
      Sheffield and Nottingham.
    - **Open with the owner:** NaPTAN for gate 3 in Sheffield and Blackpool;
      Birmingham's Line 2 status.
-2. **Other calls the fresh list raises:**
-   - Fukui: share-alike or the older CC BY copy.
-   - Tbilisi: enterprise rows and individual entrepreneurs.
-   - Seattle: licence reads for Seattle, King County food and Bellevue;
-     Lynnwood and Mountlake Terrace food.
-   - Downloads for Tempe, Burnaby and Arlington.
-   - Confirming the 19 new discards.
-   - Brisbane's commuter-rail test.
-3. **Cleanup was re-rendering 11 cities in the shared `data/`** on
+2. **The fresh list's calls, as of 2026-10-01 late.** Every call below is in
+   `docs/decisions_drafts/staging.md`, newest first. The list holds
+   A 7 · B 12 · C 3 · D 0 · R 23 = 45 candidates, with 120 discards.
+   - **Decided:**
+     - the 19 discards confirmed;
+     - Tbilisi to B (undercount accepted, individual entrepreneurs as
+       unnamed dots; Geostat permitted with attribution; `add-country` for
+       Georgia next);
+     - Fukui takes the CC BY-SA 4.0 offer;
+     - Seattle (Regional): Seattle's register permitted (non-commercial);
+       Bellevue and King County read as permitted (option 1); the 2025
+       Snohomish food layer for Lynnwood and Mountlake Terrace (two checks
+       at build); the Liquor Board's off-premise list as a partial retail
+       layer; personal services disclosed as unpublished. A Seattle-only
+       build exists;
+     - Tempe discarded (no address; evidence in `data/tempe/raw/`);
+     - Richmond (BC) to R;
+     - downloads approved (Burnaby, Arlington);
+     - NaPTAN for gate 3 in the UK six;
+     - Dudley pre-approved if Line 2 is open;
+     - Atlanta's note filed, not sent
+       (`docs/notifications/atlanta-revenue-exposure.md`);
+     - "disclose the lack of info" passed to Cleanup's prose pass.
+   - **OPEN: Brisbane (Band C).**
+     - Spacing passes: 83 stations, median gap 1,012 m.
+     - Frequency fails: 30 minutes off-peak on every line (a strike-reduced
+       timetable now); at best 15 minutes on five trunk sections in the
+       normal timetable; only the core, Roma Street to Bowen Hills, runs
+       about every 4 minutes.
+     - The owner asked whether Buffalo's precedent saves it. **It does
+       not**: the frequency gate applies on railway track (Aarhus L1, the
+       Sheffield Tram-Train), and commuter rail must run at metro frequency
+       too.
+     - Staging recommends the discards on rail, with Cross River Rail
+       (2029) as the reopen trigger. The alternative is a Japan-style
+       exception, to B food-only.
+     - **The owner's answer is pending.**
+   - **Running at the hand-off:** Takaoka's licence re-check (an agent).
+     **To re-run:** Edinburgh's brief check, whose OSM claim got RETRY
+     twice (Overpass busy).
+3. **Cleanup was re-rendering cities in the shared `data/`** on
    2026-10-01. If `check_macro_facts` or `check_ring_shares` blocks a push,
-   tell Cleanup; never write those cities' facts from staging.
+   tell Cleanup (`Cleanup session`). Never write those cities' facts from
+   staging.
 
 ## Open with the owner (carried over)
 
-- Atlanta: whether to tell the City its 2024 layer exposes reported revenue.
-- Dublin's vacant premises and the three undatable sources (NYS food stores,
-  Milan, Surrey): how each page states it.
-- Richmond (BC): written permission (buslic@richmond.ca), only if the owner
-  asks.
 - The Czech kit's own calls (its drafts file on `czech-build`): gate 3's PDFs
   file by file, Ostrava's "left out with a stub line" category, its diversion
-  timetable.
+  timetable. These may have been settled at review time.
+- **Settled 2026-10-01:**
+  - **Atlanta:** filed, not sent.
+  - **Dublin and the undatable sources:** disclose, via the prose pass.
+  - **Richmond (BC):** to Band R.
 
 ## Standing rules
 

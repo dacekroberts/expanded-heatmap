@@ -79,8 +79,10 @@ Step 0, read the operator's page for whether Line 2 is in passenger
 service.**
 - **If it is not:** draw Line 1 only, and leave Line 2 out of the OSM
   query.
-- **If it is:** the owner's call returns, since Dudley (FSA 409, about
-  1,799 storefronts) would join the scope. Do not add it without the owner.
+- **If it is: add Dudley as a fourth authority (owner, pre-approved
+  2026-10-01).** That is FSA 409 (about 1,799 storefronts) and its OSM
+  boundary, so the open line is not drawn as a stub. Record the date the
+  line was confirmed open.
 
 **Not this network:** two `light_rail` relations in the box are the
 Stourbridge Town branch shuttle (West Midlands Trains, national rail). Leave
@@ -88,6 +90,8 @@ them out. OSM's stop names include a near-duplicate ("Dudley Street Guns
 Village" and "Dudley Street, Guns Village"). Alias it.
 
 **Gate 3:** the operator's 35 stops, per line in config, before step 1.
+
+**NaPTAN approved as gate 3's source in all six (owner, 2026-10-01)**: the Department for Transport's national stop register (OGL), downloaded for the build's area. It needs a licence row in `docs/data_sources.md` and its notice: a second independent source beside the operator's page.
 
 **The light-rail test:**
 - **Frequency:** 8–12 minutes by day (the operator's FAQ; its 2025
@@ -106,7 +110,7 @@ Village" and "Dudley Street, Guns Village"). Alias it.
 
 ## Still unknown
 
-- 🚨 **Line 2's status** (above).
+- ⚠️ **Line 2's status** (above): if open, Dudley joins (pre-approved).
 - ⚠️ **Track share and spacing**, at Step 0.
 - ⚠️ **Personal exposure**, and a row in `docs/privacy_verdicts.md`.
 - **Watch item:** the Dudley branch, about late 2026. It belongs in PLAN with

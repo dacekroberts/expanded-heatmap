@@ -81,6 +81,8 @@ county.** Code-Point keeps exactly these four GSS codes.
   settles the count: per line, from the operator's timetables page
   `https://www.thetram.net/timetables`, which answers scripts.
 - **Every 7–10 minutes**, Monday to Saturday, both lines (operator).
+
+**NaPTAN approved as gate 3's source in all six (owner, 2026-10-01)**: the Department for Transport's national stop register (OGL), downloaded for the build's area. It needs a licence row in `docs/data_sources.md` and its notice: a second independent source beside the operator's page.
 - **Short former-railway sections:** the Hucknall line beside the Robin
   Hood line, and the old Great Central formation at Clifton. Both pass the
   frequency gate.

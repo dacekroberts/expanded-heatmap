@@ -94,9 +94,7 @@ and Dijon were, and record the change.
 - **Proposed: the national stop register NaPTAN** (Department for
   Transport, OGL), whose tram stops carry stop type TMU or PLT for the
   South Yorkshire area.
-- **NaPTAN is a new source, so it needs the owner's OK** before the build
-  downloads it, plus its licence row.
-- Without it, the gap is recorded in config (the `tram-city` rule).
+- **NaPTAN approved as gate 3's source in all six (owner, 2026-10-01)**: the Department for Transport's national stop register (OGL), downloaded for the build's area. It needs a licence row in `docs/data_sources.md` and its notice.** The build downloads it without asking.
 
 ## Scope, CRS, region
 
@@ -107,7 +105,7 @@ and Dijon were, and record the change.
 
 ## Still unknown
 
-- 🚨 **Gate 3's source** (above): NaPTAN, the owner's OK.
+- ✅ **Gate 3's source**: NaPTAN, approved (owner, 2026-10-01).
 - ⚠️ **Track share and spacing** (the light-rail test), at Step 0.
 - ⚠️ **Personal exposure**, and a row in `docs/privacy_verdicts.md`.
 - 🛑 **All prose** (the hold).
