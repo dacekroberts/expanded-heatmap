@@ -4,6 +4,46 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - Brisbane to the discards on rail; a commuter-rail revisit group of twelve (owner)
+
+- **The owner: "stays in discard, create commuter rail discard group to
+  revisit (considering they are fully buildable)".**
+- **Brisbane's only rail is Citytrain.**
+  - **Spacing passes:** 83 stations in the city, median gap 1,012 m.
+  - **Frequency fails:** 30 minutes off-peak on every line under the 2026
+    reduced timetable. The normal one is at best 15 minutes, on five trunk
+    sections, weekdays 7am–7pm.
+- **The owner asked whether Buffalo's precedent applies. It does not.**
+  - Buffalo's slower timetable was disclosed because its track is
+    purpose-built.
+  - On railway track the frequency gate holds: Aarhus L1, and Sheffield's
+    Tram-Train the same week.
+  - Commuter rail must also run at metro frequency to be drawn.
+- **Brisbane's discard row:** kind `rail`, reopening when Cross River Rail
+  opens (2029). The Council's food permits (8,050, CC BY 4.0) are recorded
+  on it.
+- **New section, "Commuter-rail revisit group"**, after the discard table
+  (a view, not a band). It holds twelve discards whose only blocker is
+  commuter or suburban rail and whose business leg is buildable:
+  - Brisbane;
+  - Tainan and Hsinchu (TRA locals);
+  - Austin (the Red Line) and Fort Worth (TEXRail), both on the
+    Comptroller file;
+  - Cork (Luas Cork pending);
+  - Teresina, Maceió, João Pessoa and Natal (CBTU suburban);
+  - Sobral and Juazeiro do Norte / Crato (diesel VLTs on railway).
+- **Left out of the group, because their blocker is not commuter rail:**
+  - Cincinnati (a streetcar, food only);
+  - Brampton and Bologna (lines not yet open);
+  - the guided buses (Clermont-Ferrand, Padua, Venice-Mestre);
+  - the one-to-three-station cases (Longueuil, Brossard, Vaughan,
+    Berkeley, Saint-Louis);
+  - Trondheim and Aubagne (reach and size);
+  - Bogotá (BRT);
+  - Jaén (no register).
+- **The list now holds A 7 · B 12 · C 2 · D 0 · R 23 = 44 candidates, with
+  121 discards.** The count, evidence, self-test and provenance checks pass.
+
 ### 2026-10-01 - Tempe to the discards: its licence list has no address (owner)
 
 - **The owner: "save evidence, delete root, discard".**

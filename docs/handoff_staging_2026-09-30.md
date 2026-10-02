@@ -85,14 +85,13 @@ carried over as they stand.
    - **Briefs:** in `docs/build_briefs/`. The kit is
      `docs/handoff_uk_six_2026-10-01.md`, with its **prose hold**: no page
      text until the owner's prose rework lands.
-   - **To re-run:** four brief checks printed RETRY on their OSM claim
-     (Overpass overloaded). Re-run them for Manchester, Edinburgh,
-     Sheffield and Nottingham.
-   - **Open with the owner:** NaPTAN for gate 3 in Sheffield and Blackpool;
-     Birmingham's Line 2 status.
+   - **All six briefs pass every claim** (the last RETRY, Edinburgh's,
+     re-run 2026-10-02).
+   - **Settled with the owner:** NaPTAN for gate 3 in all six; Dudley joins
+     Birmingham if Line 2 is open at build.
 2. **The fresh list's calls, as of 2026-10-01 late.** Every call below is in
    `docs/decisions_drafts/staging.md`, newest first. The list holds
-   A 7 · B 12 · C 3 · D 0 · R 23 = 45 candidates, with 120 discards.
+   A 7 · B 12 · C 2 · D 0 · R 23 = 44 candidates, with 121 discards.
    - **Decided:**
      - the 19 discards confirmed;
      - Tbilisi to B (undercount accepted, individual entrepreneurs as
@@ -113,7 +112,7 @@ carried over as they stand.
      - Atlanta's note filed, not sent
        (`docs/notifications/atlanta-revenue-exposure.md`);
      - "disclose the lack of info" passed to Cleanup's prose pass.
-   - **OPEN: Brisbane (Band C).**
+   - **DECIDED 2026-10-01: Brisbane to the discards on rail; the commuter-rail revisit group created (twelve cities). Detail below is history.**
      - Spacing passes: 83 stations, median gap 1,012 m.
      - Frequency fails: 30 minutes off-peak on every line (a strike-reduced
        timetable now); at best 15 minutes on five trunk sections in the
@@ -123,13 +122,13 @@ carried over as they stand.
        not**: the frequency gate applies on railway track (Aarhus L1, the
        Sheffield Tram-Train), and commuter rail must run at metro frequency
        too.
-     - Staging recommends the discards on rail, with Cross River Rail
-       (2029) as the reopen trigger. The alternative is a Japan-style
-       exception, to B food-only.
-     - **The owner's answer is pending.**
-   - **Running at the hand-off:** Takaoka's licence re-check (an agent).
-     **To re-run:** Edinburgh's brief check, whose OSM claim got RETRY
-     twice (Overpass busy).
+     - **Owner: discard**, with Cross River Rail (2029) as the reopen
+       trigger, and a commuter-rail revisit group of twelve after the
+       discard table.
+   - **Pushed 2026-10-02** (b9a06c8e), after Cleanup landed Toronto's and
+     San Francisco's new facts with its prose pass (d85b47a7).
+   - **Takaoka's licence re-check** (an agent) was still running on
+     2026-10-02.
 3. **Cleanup was re-rendering cities in the shared `data/`** on
    2026-10-01. If `check_macro_facts` or `check_ring_shares` blocks a push,
    tell Cleanup (`Cleanup session`). Never write those cities' facts from
