@@ -19,7 +19,8 @@
 // WHY IT EXISTS (review lesson 4, docs/review_lanes_2026-09-30.md): each lane
 // of the mega-review wrote its own click scripts, and one sweep drove three
 // browsers at once and measured 7.43 GB against 3 GB declared. This drives ONE
-// Edge, sequentially: declare --peak-gb 1.5 to scripts/heavy_job.py. Give each
+// Edge, sequentially: declare --peak-gb 2.5 to scripts/heavy_job.py (a full city
+// capture measured 2.5 GB, prose agent 4, 2026-10-01). Give each
 // lane its own --cdp port (docs/review_lane_kit.md): two captures on one port
 // fight over the same browser.
 //
@@ -27,7 +28,7 @@
 // prefers-color-scheme rather than clicking the theme button (which would
 // persist in the profile). Each capture loads fresh: a resized page measures a
 // stale layout (scripts/check_map_view.js's rule).
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -74,8 +75,21 @@ function pageList(spec) {
 const pages = pageList(arg('pages', 'Overview'));
 mkdirSync(out, { recursive: true });
 
+// On Windows edge.kill() stops only Edge's launcher: the browser tree survives
+// holding the profile open (1-2 GB the heavy-job gate never counts), and the
+// next run on the same port fails at rmSync with EPERM (prose agent 5,
+// 2026-10-01). So the whole tree is stopped, and the profile removal retries
+// while a stopped browser lets go of it.
+function stopEdge(proc) {
+  if (process.platform === 'win32') {
+    spawnSync('taskkill', ['/T', '/F', '/PID', String(proc.pid)], { stdio: 'ignore' });
+  } else {
+    proc.kill();
+  }
+}
+
 const profileDir = join(tmpdir(), `heatmap-capture-${PORT}`);
-rmSync(profileDir, { recursive: true, force: true });
+rmSync(profileDir, { recursive: true, force: true, maxRetries: 10, retryDelay: 500 });
 mkdirSync(profileDir, { recursive: true });
 const edge = spawn(EDGE, ['--headless=new', `--remote-debugging-port=${PORT}`,
   `--user-data-dir=${profileDir}`, '--window-size=1200,900', '--no-first-run',
@@ -86,7 +100,7 @@ for (let i = 0; i < 50; i++) {
   try { targets = await (await fetch(`http://127.0.0.1:${PORT}/json`)).json(); break; }
   catch (e) { await sleep(200); }
 }
-if (!targets) { console.error(`no browser on CDP port ${PORT}`); edge.kill(); process.exit(1); }
+if (!targets) { console.error(`no browser on CDP port ${PORT}`); stopEdge(edge); process.exit(1); }
 const target = targets.find(t => t.type === 'page');
 const ws = new WebSocket(target.webSocketDebuggerUrl);
 await new Promise(r => ws.addEventListener('open', r));
@@ -169,5 +183,5 @@ for (const p of pages) {
 writeFileSync(join(out, 'errors.json'), JSON.stringify(report, null, 1));
 const bad = Object.entries(report).filter(([, e]) => e.length);
 console.log(`\n${Object.keys(report).length} capture(s) in ${out}; ${bad.length} with console errors (errors.json)`);
-ws.close(); edge.kill();
+ws.close(); stopEdge(edge);
 process.exit(0);

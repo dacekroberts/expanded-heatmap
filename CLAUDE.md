@@ -260,7 +260,7 @@ node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page
 python scripts/decisions_index.py [--check]
 python scripts/rendered_surfaces.py [--write|--check]   # every surface the app renders -> docs/rendered_surfaces.md
 python scripts/review_lanes.py create --sha <commit> --lanes <n> | list | remove   # review-lane worktrees
-node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name,Name] [--widths ...] [--themes light,dark] [--cdp N]   # one browser; --peak-gb 1.5
+node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name,Name] [--widths ...] [--themes light,dark] [--cdp N]   # one browser; --peak-gb 2.5
 python scripts/prose_proposals.py collate | apply --ids <id,id> | --selftest   # lanes' prose proposals -> the owner's list
 python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
 python scripts/heavy_job.py run --label <job> --peak-gb <N> --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory

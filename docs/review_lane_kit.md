@@ -71,7 +71,7 @@ true, clear and consistent in tone, and whether the layout works.
 ## 5. Capture pages with one browser
 
 ```bash
-python scripts/heavy_job.py run --label lane-N-capture --peak-gb 1.5 --session <lane> -- node scripts/capture_pages.mjs --base http://localhost:88N1 --pages cities --widths 375,768,1200 --themes light,dark --cdp 93N1 --out data/_review/lane-N/captures
+python scripts/heavy_job.py run --label lane-N-capture --peak-gb 2.5 --session <lane> -- node scripts/capture_pages.mjs --base http://localhost:88N1 --pages cities --widths 375,768,1200 --themes light,dark --cdp 93N1 --out data/_review/lane-N/captures
 ```
 
 For each page x width x theme it saves a screenshot, the page's text with
