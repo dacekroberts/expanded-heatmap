@@ -1,0 +1,128 @@
+{
+  "city_barber": {
+    "as_of": "2026-03-31",
+    "bytes": 210432,
+    "dataset_page": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/riyoushozensisetu.html",
+    "file": "riyou.zen.xls",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:00+00:00",
+    "rows": 485,
+    "sha256": "078e4ab03712dd34db462e3a0d645a90bc8c018cb0e4e381c99305a755d6bb7c",
+    "url": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/riyoushozensisetu.files/riyou.zen.xls"
+  },
+  "city_beauty": {
+    "as_of": "2026-03-31",
+    "bytes": 450048,
+    "dataset_page": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/biyoushozensisetu.html",
+    "file": "biyou.zen.xls",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:05+00:00",
+    "rows": 1364,
+    "sha256": "93376e77ff957f7e91554b2dd87f3902ef0b50f8452b8582bc6ef78d3f88e943",
+    "url": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/biyoushozensisetu.files/biyou.zen.xls"
+  },
+  "city_food_new": {
+    "as_of": "2026-03-31",
+    "bytes": 1944965,
+    "dataset_page": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/shokuhin.html",
+    "file": "382019_food_business_all_2026032.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:40+00:00",
+    "rows": 7110,
+    "sha256": "d4b97ff4dc81f84244b6886cd89d80f34f98c246be84d06510f550082d347b4d",
+    "url": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/shokuhin.files/382019_food_business_all_2026032.csv"
+  },
+  "city_food_old": {
+    "as_of": "2026-03-31",
+    "bytes": 187839,
+    "dataset_page": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/shokuhin.html",
+    "file": "382019_food_business_all_2026031.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:39+00:00",
+    "rows": 577,
+    "sha256": "d1c623faaa6450b45a31873a3344cee7e569f4a5478d7a293029327e832c61fe",
+    "url": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/shokuhin.files/382019_food_business_all_2026031.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-03-31",
+    "bytes": 150016,
+    "dataset_page": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/cleaningzensisetu.html",
+    "file": "clean.zen.xls",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:24:07+00:00",
+    "rows": 245,
+    "sha256": "b7426e5a306e76823e24889b304c6249418a3892b45361907460e16bfeed80ae",
+    "url": "https://www.city.matsuyama.ehime.jp/shisei/opendata/metadata/cleaningzensisetu.files/clean.zen.xls"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 3770926,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "38201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:58+00:00",
+    "rows": 11575,
+    "sha256": "5fc30e4bbec7a2d70ed7f68d2e9c45b3ff44ef427a2b456a548c8f3ed68c2c14",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=38201_food_business_all.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_38201_block": {
+    "bytes": 287763,
+    "file": "38201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:02+00:00",
+    "sha256": "5618d9c185e00d26259c335aaf0b2b99717e4fa77c77b7c402aa1f4c13afd795",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/38201-24.0a.zip"
+  },
+  "isj_38201_chome": {
+    "bytes": 15291,
+    "file": "38201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:05+00:00",
+    "sha256": "adb1748d0ef60d3257dd20d0f305e979bcfe956f2f4aaf4c0d51d02c079080e0",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/38201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 10957406,
+    "file": "data/japan/raw/N03-20250101_38_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:31:52+00:00",
+    "sha256": "1d29a8bb4661c9028df9193f3f9bd451f2f1bac69c4156adf1e88a315967d8db",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_38_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 28061,
+    "elements": 61,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T20:48:02Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](33.67,132.48,34.09,132.94);way[\"railway\"=\"station\"](33.67,132.48,34.09,132.94););out tags center;",
+    "retrieved": "2026-10-02T20:49:03+00:00",
+    "sha256": "24ead2d903e3873c31142937e2febed649b642efbde80a0ccc1b8981deaec202"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 19199,
+    "elements": 53,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T20:48:02Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](33.67,132.48,34.09,132.94);out body;",
+    "retrieved": "2026-10-02T20:49:06+00:00",
+    "sha256": "bf69cb93423b6ac1338cfad87d39c379858be7c01008c02aa148dac00c540c43"
+  }
+}

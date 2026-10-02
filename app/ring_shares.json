@@ -618,5 +618,10 @@
   "in_ring": 664,
   "all": 1025,
   "map_blob": "525408951d114fdca732119e4c0d512e42a826ea"
+ },
+ "matsuyama": {
+  "in_ring": 5136,
+  "all": 9285,
+  "map_blob": "d175a41aeff224e1020a246bce7d35397e77f547"
  }
 }
