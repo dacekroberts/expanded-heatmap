@@ -68,6 +68,8 @@ st.markdown(
   *insegna* - the sign over the door - on only some rows, and three of the six registers have no
   name field at all.
 - No register carries an owner's name, so nothing here can be a person.
+- **The Comune's lists carry no dates of their own.** The publisher gives them as current to
+  2025-06-30 (re-published 2026-08-31), and the map cannot be dated more closely than that.
 
 **Reading the map**
 

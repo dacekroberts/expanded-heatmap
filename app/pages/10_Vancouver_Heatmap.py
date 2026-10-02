@@ -70,6 +70,8 @@ st.markdown(
   name.
 - This project publishes public commercial information, not personal information, so those
   labels are replaced rather than the pins removed.
+- **Surrey's annual business table carries no dates,** so its rows cannot be dated more
+  closely than the year the table covers.
 
 **Reading the map**
 

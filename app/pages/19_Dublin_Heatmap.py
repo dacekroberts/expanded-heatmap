@@ -63,6 +63,9 @@ st.markdown(
 - Categories are the register's own recorded uses, grouped into three. Where a premises carries
   more than one use (a shop with offices above it, a salon behind a shopfront), the more specific
   trading use is shown.
+- **The valuation list keeps vacant commercial premises on it, filed under their last use,
+  so some pins may be empty units.** Only the 117 or so marked vacant are left out, and the
+  list does not say which of the others are open.
 
 **Reading the map**
 

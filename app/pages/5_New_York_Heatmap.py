@@ -78,6 +78,9 @@ st.markdown(
   streets.
 - Where one business appears in two registries it is counted once, matched on address and name; a
   spelling difference between two registries can leave it counted twice.
+- **One of the four registers, New York State's retail food store licenses, carries no
+  dates,** so how current those rows are cannot be stated; the state last refreshed the list
+  on 2025-09-30.
 """
 )
 
