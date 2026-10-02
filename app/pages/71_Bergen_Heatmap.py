@@ -94,9 +94,9 @@ st.markdown(
 **The businesses**
 
 - Businesses come from Norway's **Central Coordinating Register for Legal Entities**
-  (Enhetsregisteret), kept by the Brønnøysund Register Centre, and specifically from its register
-  of business premises, each recorded at the address where it operates rather than where its
-  company is registered.
+  (Enhetsregisteret), kept by the Brønnøysund Register Centre. They are taken from its register of
+  business premises, each recorded at the address where it operates rather than where its company
+  is registered.
 - Each premises is placed using Kartverket's official address register.
 - **Where a business belongs to a sole trader, the map shows its address instead of its name**,
   because a sole trader's business is usually registered under the owner's own name.

@@ -79,8 +79,8 @@ st.markdown(
   stop inside the city are always drawn.
 - Trams 4, 6 and 8 are drawn on their usual routes: until 22 November they are shortened for
   works, and temporary trams 14 and 18, which fill the gap, are not drawn.
-- Tram 12, which runs only on match and event days, ferries and national-rail (NS) trains are not
-  drawn either.
+- Tram 12 (match and event days only), ferries and national-rail (NS) trains are not drawn
+  either.
 - The map covers the **municipality of Rotterdam**, Hoek van Holland and the port included. The 52
   stops outside it, in Schiedam, Vlaardingen, Maassluis, Capelle aan den IJssel, Spijkenisse,
   Barendrecht and Albrandswaard and along metro E to The Hague, are left out: the lines that run

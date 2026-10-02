@@ -413,7 +413,7 @@ requires.
 > {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
 > and in the legend, redrawn from {OpenStreetMap's route geometry}{, in
 > colours this project chose, since the source records none}. {City} has no
-> metro: its trams are its rapid transit, as Riga's are, so every tram stop
+> metro, so its trams are its rapid transit, as in Riga. Every tram stop here
 > gets rings. {Trams run about every {n} minutes by day{; less often in the
 > evenings}.} {Buses{ and suburban trains} are not drawn{: why}.}
 >

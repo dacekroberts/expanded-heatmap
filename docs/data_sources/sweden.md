@@ -25,10 +25,10 @@ Resolved 2026-09-22 and recorded in the brief; the build re-read nothing new.
 | The publisher's own Hub DCAT feed, `https://open-data-sthlm-miljo.hub.arcgis.com/api/feed/dcat-us/1.1.json` | `accessLevel: public` on all 109 datasets; `license` CC0 on 8, not this one |
 
 A contradiction between a catalogue and its publisher is decided for the
-publisher (`read-licence` step 5). The blank licence is a silence, not a
-refusal, because the publisher demonstrably uses the licence field elsewhere.
-`brief_check.py stockholm` re-reads the feed. The notice credits the publisher
-and states the changes without claiming a licence (owner, 2026-09-29).
+publisher. The blank licence is a silence, not a refusal, because the
+publisher demonstrably uses the licence field elsewhere. The brief's checks
+re-read the feed. The notice credits the publisher and states the changes
+without claiming a licence (owner, 2026-09-29).
 
 ### Göteborg's licence: CC0, on the distribution
 
@@ -36,8 +36,7 @@ and states the changes without claiming a licence (owner, 2026-09-29).
 CSV DISTRIBUTION's node (`store/6/metadata/57479`), not the dataset's
 (`store/6/resource/35`, fourteen properties and no licence, rights or access
 statement of any kind): a reader of the dataset node alone would record SILENT
-(the brief). Re-read by `fetch_sources.py` on every run and by
-`brief_check.py goteborg`. CC0 asks for nothing, so no notice; the page caption
+(the brief). Re-read on every download and by the brief's checks. CC0 asks for nothing, so no notice; the page caption
 credits Göteborgs Stad as a courtesy.
 
 ## Transit feeds

@@ -80,9 +80,8 @@ st.markdown(
 - Four Tisséo lines are drawn — **Métro A and B, Tramway T1, and Téléo** — each labelled on the
   map and in the legend, redrawn from the operator's own published geometry.
 - **Téléo is a cable car**, and it is the first thing on this site that is not a train. It is
-  drawn because Tisséo runs and tickets it exactly as it does the métro, because it crosses the
-  Garonne where no other line does, and because one of its three stations is a Métro B
-  interchange. It is an ordinary part of this network rather than a curiosity attached to it.
+  drawn because Tisséo runs and tickets it as it does the métro, it crosses the Garonne where no
+  other line does, and one of its three stations is a Métro B interchange.
 - The map covers the **commune of Toulouse**, and here that costs something real. Métro A loses
   one station and Métro B one; **Tramway T1 loses twelve of its twenty-five** — the whole branch
   out through Blagnac and Beauzelle, the Airbus works and the exhibition centre with it. All
@@ -95,11 +94,11 @@ st.markdown(
 
 - Businesses come from **SIRENE**, France's national register of établissements, joined to
   INSEE's separate geolocation file — the same two sources Paris and Marseille use.
-- **Toulouse withholds more than either of them.** INSEE marks roughly one active establishment in
-  five here as non-diffusible and strips the name, the address and the coordinates together, so
-  those never reach this map at all.
-- Where a street looks thin, it may be a quiet street or it may be a private one, and nothing in
-  the data distinguishes them.
+- **More is withheld here than in either of them.** INSEE marks roughly one active establishment
+  in five here as non-diffusible and withholds its name, address and coordinates together, so
+  those never reach this map.
+- So a street that looks thin may be a quiet one, or one whose businesses are withheld; nothing in
+  the data tells the two apart.
 - **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
   instead** — about half the dots on this map.
 
@@ -108,8 +107,8 @@ st.markdown(
 - **Read the density as a register, not a street survey.** SIRENE records where a business is
   *registered*, and some registered establishments have no customer-facing shopfront — nothing in
   the data says which.
-- Against OpenStreetMap's mapped restaurants in the same commune, where the two schemes mean
-  nearly the same thing, this map carries about **1.3 times** as many points, closer than Paris's
+- Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the same way, this
+  map has about **1.3 times** as many in the commune as OpenStreetMap does, closer than Paris's
   1.8× or Marseille's 1.7×; part of the difference here is simply the masking above.
 - **About two storefronts in three sit within a station ring.** The category toggles show every
   storefront; the rings show the share the four lines actually reach.

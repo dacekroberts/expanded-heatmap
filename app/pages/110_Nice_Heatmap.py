@@ -81,21 +81,21 @@ st.markdown(
 **The trams**
 
 - Four Lignes d'Azur tram lines are drawn, **Tram 1, Tram 2, Tram 3 and Tram B**, each labelled on the map and in the legend, from the operator's own published timetable feed.
-- Nice has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
+- Nice has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 410 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Nice**.
 
 **The businesses**
 
-- Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as Paris, Marseille, Toulouse, Lille and Rennes.
-- About 16% of active establishments here are marked non-diffusible by INSEE, which withholds their name, address and coordinates together, so they never reach this map.
+- Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as the other French maps.
+- INSEE withholds the name, address and coordinates of about 16% of active establishments here (those it marks non-diffusible), so they never reach this map.
 - Where SIRENE records no shop sign or trading name, the dot shows the address instead.
 - **About 80% of storefronts sit within a ring.**
 
 **Reading the density**
 
 - **Read the density as a register, not a street survey.** SIRENE records where a business is *registered*, and some registered establishments have no customer-facing shopfront; nothing in the data says which.
-- Against OpenStreetMap's mapped restaurants in the commune of Nice, where the two schemes mean nearly the same thing, this map carries about **2.3 times** as many points.
+- Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the same way, this map has about **2.3 times** as many in the commune of Nice as OpenStreetMap does.
 """
 )
 

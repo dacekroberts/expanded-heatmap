@@ -53,9 +53,8 @@ st.markdown(
   rings stay readable; the excluded stations are listed below.
 - **BART and Caltrain are not on this map.** Both are regional rail crossing county lines, and
   commuter rail is left out here as on most maps on this site.
-- Where BART and Muni Metro share a station, the station is here as the Muni one it also is:
-  Embarcadero, Montgomery, Powell and Civic Center are all mapped, as are the Balboa Park and Glen
-  Park interchanges.
+- Stations BART shares with Muni Metro are mapped as Muni stations: Embarcadero, Montgomery,
+  Powell and Civic Center, and the Balboa Park and Glen Park interchanges.
 - The cable cars are out, as a different mode.
 - The F Market & Wharves streetcar is drawn, because it runs along the Embarcadero to Fisherman's
   Wharf, which no Muni Metro line reaches. Where it stops directly above a Muni Metro station, the
@@ -64,11 +63,11 @@ st.markdown(
 **The businesses**
 
 - Where a business is registered under a person's name alone at an apartment or other dwelling
-  unit, its dot shows the street address instead.
+  unit, the map shows its street address instead of a name.
 """
 )
 
-render_map_help('NAICS-geocoded storefronts')
+render_map_help('three business categories (Retail, Food service and Personal services)')
 render_excluded_stations("San Francisco")
 render_country_links('San Francisco')
 

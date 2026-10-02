@@ -67,8 +67,8 @@ st.markdown(
   redrawn from the Prague Integrated Transport system's (PID) own route geometry in the
   operator's colours. Line A is shown a shade lighter so it stays distinct from the green of the
   personal-services dots.
-- **Flora station on line A is closed for reconstruction** until about December 2026, so it is not
-  drawn while closed, as the timetable runs; it returns when it reopens.
+- **Flora station on line A is closed for reconstruction** until about December 2026. Like the
+  timetable, the map leaves it out until it reopens.
 - Trams, the Petřín funicular, ferries and suburban trains are not drawn.
 - The map covers the **City of Prague**, and every metro station lies inside it, so none is left
   out.
@@ -76,8 +76,8 @@ st.markdown(
 **The businesses**
 
 - Businesses come from the Czech **register of active business establishments** (ROS02), which
-  records each place where a business operates at that place's own address, placed using the
-  national address register (RÚIAN).
+  records each place a business operates at that place's own address. The national address
+  register (RÚIAN) puts each one on the map.
 - What each establishment does comes from the Czech Statistical Office's business register (RES).
   RES records one main activity per business, so every establishment inherits its owner's, and a
   chain's office or warehouse counts as the chain's trade.

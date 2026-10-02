@@ -79,9 +79,9 @@ st.markdown(
 
 **Reading the map**
 
-- **Known limitation.** The map is scoped to the agglomeration, which includes 15 related
-  municipalities alongside the 19 boroughs, but only about a tenth of surveyed units fall in
-  those municipalities and two of them are not in the survey at all.
+- **Known limitation.** The map covers the whole agglomeration: the city's 19 boroughs and
+  15 related municipalities. Only about a tenth of surveyed units fall in those
+  municipalities, and two of them are not in the survey at all.
 - The Métro does not reach them, but the REM does: five of its stations are in Mont-Royal,
   Pointe-Claire, Kirkland and Sainte-Anne-de-Bellevue, so read the rings there as thinner in
   the data, not necessarily on the ground. Neither unsurveyed municipality has a station.

@@ -72,8 +72,8 @@ st.markdown(
   evenings and at weekends. Buses are not drawn.
 - The map covers the **City of Tucson**, as the US Census Bureau draws its limits. Every streetcar
   stop is inside it.
-- **Tram stops sit closer together than metro stations**, a median of 265 m here, so the rings are
-  drawn at half the usual size (0.05 to 0.3 mi).
+- **Streetcar stops sit closer together than metro stations**, a median of 265 m here, so the rings
+  are drawn at half the usual size (0.05 to 0.3 mi).
 
 **The businesses**
 

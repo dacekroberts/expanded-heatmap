@@ -1,11 +1,10 @@
 # Data sources — Japan
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Japan rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+The Japan part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country on 2026-09-27.
+The numbered notices this project must display, the removal-request
+commitment and the deploy gate apply to every country and are kept in
+that record.
 
 ## Business registries
 
@@ -66,12 +65,11 @@ point, not here.
 
 ### 🇯🇵 Japan — terms read 2026-09-21 to 2026-09-30
 
-**Consolidated here on 2026-09-24.** Until then these reads were recorded only
-in each city's build brief (`docs/build_briefs/<city>.md`), which keeps the
-full quotes and the draft notices. The consolidation found five sources whose
-terms had never been read. N03 was read the same day, and turned up the Survey
-Act condition below. The four Tokyo wards were read the same day, each on its
-own terms rather than borrowed from the Tokyo catalogue's.
+**Gathered here on 2026-09-24** from each city's build brief, which keeps the
+full quotes and the draft notices. Gathering them found five sources whose
+terms had never been read. N03 was read the same day and turned up the Survey
+Act condition below; so were the four Tokyo wards, each on its own terms
+rather than the Tokyo catalogue's.
 
 | Source | Verdict | What it requires |
 |---|---|---|
@@ -96,7 +94,7 @@ own terms rather than borrowed from the Tokyo catalogue's.
 | **Kobe City**: food permits and 生活衛生 registers | **PERMITTED WITH CONDITIONS — CC BY 2.1 JP**, from the badge on each CSV. The site's 政府標準利用規約 2.0 also plausibly applies, without conflict. Read 2026-09-24 | **MUST DISPLAY** `出典：「生活衛生関係許可施設等の情報提供」（神戸市）（https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html）`, that it was processed, the CC BY 2.1 JP link, and © City of Kobe intact. **MUST NOT**: look as if the city made it; use logos; claim the pins are open now (the page warns closed ones remain). Remove the credit if asked. The licence's bar on sublicensing is met by the repository's `LICENSE` |
 | **Sapporo City**: food permits and 環境衛生 premises | **PERMITTED WITH CONDITIONS — CC-BY-4.0** (`package_show`), through the city platform's terms (`data.pf-sapporo.jp/tos/` 第2条2). Read 2026-09-24 | **MUST DISPLAY**: 札幌市, the two dataset titles and URLs, the licence link, and that the data was processed. **MUST NOT**: imply endorsement; use logos (第4条); call the pins operating businesses. **Fetch from `ckan.pf-sapporo.jp` only.** Cost: 第9条3. ✅ **ACCEPTED by the owner 2026-09-24** |
 | **Fukuoka City**: the city's lists on BODIK (food before 2021-06, barber, beauty, laundry) | **PERMITTED WITH CONDITIONS — CC BY 4.0**, through the city's own terms (`https://odcs.bodik.jp/401307/tos/` 第１条). The city does not adopt 政府標準利用規約. Read 2026-09-24 from a harvest and web-archive copies, because BODIK timed out. Re-run `package_show` when it answers | **MUST DISPLAY (第７条)**: each dataset's 作成者 as recorded, the resource name (it carries the as-of date), the resource URL, CC BY 4.0 linked, and that the data was modified. **MUST NOT**: claim completeness, accuracy or currency (第４条); imply endorsement; use logos (第３条). Cost: 第４条, the fault-based class. ✅ **ACCEPTED** with every Japanese source (see below) |
-| **Hiroshima City**: the food list, counter applications (built 2026-09-30) | **PERMITTED WITH CONDITIONS — PDL 1.0**, from the city's open-data list (DataEye resource 12464). The website terms give way to it (「…特別な規定がある場合は、この取り扱いに優先する」). Read 2026-09-24. Whether that dataset-level licence covers the full-list file, which has no entry of its own, was the one open point: ✅ **the owner accepted the permitting reading, 2026-09-24** (`docs/decisions/2026-09-20.md`, the Japan re-banding entry) | **MUST DISPLAY** DataEye's pattern: `出典：「食品営業許可一覧」（広島広域都市圏・広島県オープンデータポータルサイト）（https://hiroshima-opendata.dataeye.jp/datasets/5672）を加工して作成`, plus who processed it. **MUST NOT** present it as the city's own, or use logos. Cost: 利用規約 第3条, the same class. ✅ **ACCEPTED** with every Japanese source |
+| **Hiroshima City**: the food list, counter applications (built 2026-09-30) | **PERMITTED WITH CONDITIONS — PDL 1.0**, from the city's open-data list (DataEye resource 12464). The website terms give way to it (「…特別な規定がある場合は、この取り扱いに優先する」). Read 2026-09-24. Whether that dataset-level licence covers the full-list file, which has no entry of its own, was the one open point: ✅ **the owner accepted the permitting reading, 2026-09-24** | **MUST DISPLAY** DataEye's pattern: `出典：「食品営業許可一覧」（広島広域都市圏・広島県オープンデータポータルサイト）（https://hiroshima-opendata.dataeye.jp/datasets/5672）を加工して作成`, plus who processed it. **MUST NOT** present it as the city's own, or use logos. Cost: 利用規約 第3条, the same class. ✅ **ACCEPTED** with every Japanese source |
 | **Kyoto City**: 00414 and 00541 (food) and 00530 (barber, beauty, laundry) on `data.city.kyoto.lg.jp` | **PERMITTED WITH CONDITIONS — CC BY 4.0**, applied by the portal's 京都市オープンデータ利用規約 (第3版) clause 1. All 340 resource pages declare it. No click-through, and 政府標準利用規約 is not adopted. Read 2026-09-24 | **MUST DISPLAY**: 京都市; the name **京都市オープンデータ** (the portal's request, binding through CC §3(a)(1)(A)(i)); the dataset names and URLs; CC BY 4.0 linked; that the data was processed. **MUST NOT**: imply endorsement; use the emblem; call the pins currently operating. **Fetch from the portal only**: older copies on `www.city.kyoto.lg.jp` fall under that site's no-copying page. Nothing is owed to the City |
 | **Yokohama City**: the barber, beauty and laundry registers (環境衛生関係施設一覧) | **PERMITTED WITH CONDITIONS — CC BY 4.0**, declared on the dataset page (`https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/seikatsu/kaiteki/kankyodata.html`) and through the city's open-data terms (`https://www.city.yokohama.lg.jp/city-info/seisaku/torikumi/data/opendata/opendata.html`; the site policy `https://www.city.yokohama.lg.jp/aboutweb/sitepolicy.html` gives way to them). Read 2026-09-30 by the `licence-read` agent | **MUST DISPLAY** the city's form for a modified work: `この地図は、以下の著作物を改変して利用しています。環境衛生関係施設一覧（理容所・美容所・クリーニング所施設一覧、令和８年４月１日現在）、神奈川県横浜市、クリエイティブ・コモンズ・ライセンス 表示4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）`, with an English gloss and the dataset page linked. As rendered, the dataset page's URL sits in brackets after 神奈川県横浜市, inside the prescribed sentence; accepted as displayed by the owner 2026-09-30 (call B5). **MUST NOT**: present the map as the city's work; imply its endorsement. Contact for removals: ir-seikatsueisei@city.yokohama.lg.jp |
 | **Sendai City** (Band D): food permits and 生活衛生 lists | 🚫 **NOT PERMITTED without permission.** The city's copyright page is the default (「…無断で複製・転用することはできません」), and neither list page overrides it. Neither is in the city's open-data catalogue. The reading that facts are not 著作物 is **not relied on**. Read 2026-09-24 | A formal request is drafted (`docs/notifications/sendai-permission-request.md`, `docs/gated_access.md` item 21). Nothing is sent yet; that is the owner's act |

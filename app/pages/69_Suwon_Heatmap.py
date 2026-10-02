@@ -44,7 +44,8 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _ed = (_prov.get("semas") or {}).get("edition")
         if _ed:
-            st.caption(f"Snapshot: SEMAS's storefront register, edition of **{_ed}**.")
+            st.caption(f"Snapshot: the Small Enterprise and Market Service's storefront "
+                       f"register, edition of **{_ed}**.")
     except (ValueError, OSError, AttributeError, TypeError):
         # A malformed provenance file must not take the page down.
         pass
@@ -69,10 +70,10 @@ st.markdown(
   position for every one: restaurants, cafés and bars; shops of every kind, from convenience
   stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care
   salons, laundries, bathhouses and massage.
-- The register is compiled nationally, and it is a different kind of record from the city
-  licence data behind Seoul's, Daegu's and Busan's maps, which count only licensed trades: so
-  **Suwon's Retail category is complete where those cities' is thin**, and density is not
-  directly comparable between them.
+- This national register is a different kind of record from the city licence data behind
+  Seoul's, Daegu's and Busan's maps, which count only licensed trades. So **Suwon's Retail
+  category is complete where those cities' is thin**, and density is not directly comparable
+  between them.
 - Each dot carries the storefront's name, in Korean, with its branch where it has one, and its
   kind in English. Where a registered name is a bare personal name at what reads as a home
   address, the name is withheld.

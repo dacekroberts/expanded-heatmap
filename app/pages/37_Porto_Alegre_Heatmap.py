@@ -81,12 +81,13 @@ st.markdown(
   the map and in the legend, in the colour OpenStreetMap records.
 - The airport people mover is not drawn.
 - The map covers the **six municípios the line runs through**: Porto Alegre, Canoas,
-  Esteio, Sapucaia do Sul, São Leopoldo and Novo Hamburgo, because Porto Alegre holds under
-  a third of its own stations.
+  Esteio, Sapucaia do Sul, São Leopoldo and Novo Hamburgo, because under a third of the line's
+  stations are in Porto Alegre itself.
 
 **The businesses**
 
-- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
   Census enumerators walking every street recorded each establishment, what it was, and a
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of

@@ -65,14 +65,13 @@ st.markdown(
 - **The survey is from 2022, and this map says so deliberately.** The city publishes one file per
   survey year rather than revisions of a single file.
 - The 2024 file covers the centre but barely half of several outer districts. A map built on it
-  would show the periphery as commercially dead, which is roughly what a reader half expects, so
-  nothing would look wrong.
-- The 2022 survey is complete, and it is four years old. That is the trade, and naming the year is
-  part of making it.
+  would show the periphery as commercially dead, and since a reader half expects that, nothing
+  would look wrong.
+- So this map uses the 2022 survey: complete, but four years old.
 - **One ground-floor unit in nine is empty.** A tenth of the premises surveyed are recorded as
   having no economic activity - vacant, for sale or to let - and they are excluded here.
-- Retail, food service and personal services, as the census's own four-level activity
-  classification defines them. **Hotels, hostals and pensions are excluded** - they are
+- The map counts retail, food service and personal services as the census's own four-level
+  activity classification defines them. **Hotels, hostals and pensions are excluded**, as
   accommodation rather than food service.
 - Premises *inside* shopping centres, galleries and municipal markets **are** counted.
 

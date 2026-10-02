@@ -74,8 +74,8 @@ st.markdown(
 - Trams stop every few hundred metres, so on each tram line's outer stretches only about
   one stop per half mile is drawn as a station; metro stations, interchanges and each line's last
   stop inside the city are always drawn.
-- Tram 3, which runs no service in this timetable period, the museum tram, ferries and
-  national-rail (NS) trains are not drawn.
+- Tram 3 (no service in this timetable period), the museum tram, ferries and national-rail (NS)
+  trains are not drawn.
 - The map covers the **municipality of Amsterdam**, Weesp included. The 22 stops outside it, in
   Amstelveen, Diemen, Ouder-Amstel and Uithoorn, are left out: the lines that run on into those
   places are drawn whole but counted only inside the city, and tram 6 keeps five of its sixteen
@@ -91,7 +91,7 @@ st.markdown(
 - **Shops and services** comes from the national buildings register (BAG): every unit whose
   registered use is a shop and which is in use. The BAG records what a unit is for, not who is in
   it, so these dots show an address rather than a name, and a hairdresser looks the same as a
-  clothes shop — the split between retail and personal services that other cities show is not
+  clothes shop. The split between retail and personal services that other cities show is not
   available here.
 - A shop unit that is also registered as a home is left off. Where a permit and a shop unit share
   an address, the permit is kept, because it names the business.

@@ -71,8 +71,8 @@ st.markdown(
 - Streetcars run about every 10 minutes by day, seven days a week. Buses are not drawn.
 - The map covers the **City of Kansas City, Missouri**, as the US Census Bureau draws its limits.
   Every streetcar stop is inside it.
-- **Tram stops sit closer together than metro stations**, a median of 384 m here, so the rings are
-  drawn at half the usual size (0.05 to 0.3 mi).
+- **Streetcar stops sit closer together than metro stations**, a median of 384 m here, so the rings
+  are drawn at half the usual size (0.05 to 0.3 mi).
 
 **The businesses**
 

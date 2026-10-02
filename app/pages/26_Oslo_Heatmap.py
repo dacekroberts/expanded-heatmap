@@ -80,7 +80,7 @@ st.markdown(
   19**, each labelled on the map and in the legend, redrawn from Ruter's published route geometry.
 - The map uses the per-line colours from Ruter's own network maps; two are shown a shade lighter
   so they stay distinct from each other and from the business dots.
-- Tram 15 runs most of line 12's route while the Briskeby line is closed for rebuilding and has no
+- Tram 15 runs most of line 12's route while the Briskeby line is closed for rebuilding. It has no
   published colour of its own, so the map gives it one.
 - Ferries are not drawn.
 - The map covers the **municipality of Oslo**. The T-bane's western branches run on into Bærum,
@@ -92,9 +92,9 @@ st.markdown(
 **The businesses**
 
 - Businesses come from Norway's **Central Coordinating Register for Legal Entities**
-  (Enhetsregisteret), kept by the Brønnøysund Register Centre, and specifically from its register
-  of business premises, each recorded at the address where it operates rather than where its
-  company is registered.
+  (Enhetsregisteret), kept by the Brønnøysund Register Centre. They are taken from its register of
+  business premises, each recorded at the address where it operates rather than where its company
+  is registered.
 - Each premises is placed using Kartverket's official address register.
 - **Where a business belongs to a sole trader, the map shows its address instead of its name**,
   because a sole trader's business is usually registered under the owner's own name.

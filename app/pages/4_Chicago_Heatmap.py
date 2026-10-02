@@ -62,7 +62,7 @@ st.markdown(
 """
 )
 
-render_map_help("license-classified storefronts")
+render_map_help("three business categories (Retail, Food service and Personal services)")
 render_excluded_stations("Chicago")
 render_country_links("Chicago")
 

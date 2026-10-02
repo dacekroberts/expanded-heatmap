@@ -3,17 +3,16 @@
 This project maps **storefront** commercial density around rapid-transit
 stations: the kind of business you might walk into on your way from a station.
 
-That sentence holds two separate scoping decisions, and this page is both of
-them — **which stations** a map is drawn around, and **which businesses** are
-counted near them. Each one leaves things out on purpose. Neither is visible
-from the map itself, which is why they are written down here.
+That sentence holds two separate scoping decisions, and this page sets out
+both: **which stations** a map is drawn around, and **which businesses** are
+counted near them. Each one leaves things out on purpose, and neither is
+visible from the map itself, which is why they are written down here.
 
-It is written to be published as-is alongside the maps. Business counts were
-recorded when each city was built or last rebuilt; station counts are computed from the repository's
-own `outputs/<city>/excluded_stations.csv` files each time this page is
-rendered, so they cannot drift. The reasoning behind each decision, with sample
-sizes, is in `DECISIONS.md`. Where each city's data comes from is in
-`data_sources.md`.
+Business counts were recorded when each city was built or last rebuilt.
+Station counts are computed from each city's `excluded_stations.csv` every time
+this page is shown, so they cannot drift. The reasoning behind each decision,
+with sample sizes, is in the project's decision log (`DECISIONS.md`); where each
+city's data comes from is on the "Where this data comes from" page.
 
 Two principles run through the business half:
 
@@ -79,9 +78,9 @@ and Broad Street Lines are on the Philadelphia map and Regional Rail is not,
 and the same agency runs both. Dublin's DART is that judgment reached the other
 way: a national-railway service on national-railway track, kept because its
 city-centre stations sit about a kilometre apart, which is metro spacing. Both
-are recorded in `DECISIONS.md` as decisions with a rejected alternative, rather
-than as applications of a rule — because by the letter of the rule DART would
-have been dropped.
+are recorded in the project's decision log as choices made against a rejected
+alternative, not as applications of a rule: by the letter of the rule, DART
+would have been dropped.
 Copenhagen's S-tog is the second such case: a suburban network on its own
 tracks, drawn because inside the city its stations sit about a kilometre and
 a quarter apart, every line runs every ten minutes, and most of its stations
@@ -93,9 +92,9 @@ station within walking distance.
 
 ### Stations left out of a network that IS mapped
 
-Three things remove a station from a network this project maps. All are recorded
-station by station in `outputs/<city>/excluded_stations.csv`, committed to the
-repository, and every one of them is counted in the table on this page.
+Three things remove a station from a network this project maps. Every such
+station is listed by name in its city's `excluded_stations.csv`, published with
+the project, and counted in the table on this page.
 
 - **It is outside the city.** Rail networks do not stop at municipal
   boundaries, and business registers do: one city's register cannot say what is
@@ -250,8 +249,8 @@ are listed in `outputs/sacramento/excluded_stations.csv`.
 ### Houston — non-store sellers by code, homes, and a person's permit shown by address
 
 **Left out of the Comptroller's permits**, counted on its 79,097 Houston
-outlets flagged inside city limits, by NAICS code (the shared carve-outs,
-`pipeline/taxonomies/naics.py`):
+outlets flagged inside city limits, by NAICS code (the carve-outs shared with
+the other NAICS cities):
 - non-store retailers (454): 6,491, of them online shops 4,704, direct
   sellers 1,396 and vending-machine operators 362;
 - food service contractors (507), caterers (357) and mobile food (1,512);
@@ -276,8 +275,8 @@ Central Station's Capitol / Rusk pair as one. None is left out.
 ### Dallas — Houston's register and rules: non-store sellers by code, homes, and a person's permit shown by address
 
 **Left out of the Comptroller's permits**, counted on its 44,760 Dallas
-outlets flagged inside city limits, by NAICS code (the shared carve-outs,
-`pipeline/taxonomies/naics.py`):
+outlets flagged inside city limits, by NAICS code (the carve-outs shared with
+the other NAICS cities):
 - non-store retailers (454): 4,350, of them online shops 3,123, direct
   sellers 958 and vending-machine operators 255;
 - food service contractors (233), caterers (321) and mobile food (487);
@@ -379,19 +378,20 @@ layer. Each facility (2,916) is shown as it stood at its latest inspection;
 **Excluded by type** - 791 facilities the register files as something other
 than a restaurant or a shop: institutions (445: schools, childcare, care
 homes), food trucks (133), board and lodging (92), food shelves (41),
-caterers (35, R1), limited mobile units (33), food carts (4), wholesale (2),
+caterers (35, no counter of their own), limited mobile units (33), food carts (4), wholesale (2),
 vendors and a market vendor (3), and 3 with no category at all (a park board
 and two restaurants by name, left out rather than guessed).
 
 **Excluded by name** - 161 facilities inside the kept types that are not
-storefronts (`pipeline/taxonomies/minneapolis_inspection.py`; each is listed
-in `outputs/minneapolis/excluded_premises.csv`): institutional kitchens (57:
+storefronts (each is listed in `outputs/minneapolis/excluded_premises.csv`):
+institutional kitchens (57:
 contract caterers' workplace cafés - Sodexo, Aramark, Compass and Eurest -
 hospital, school, church and campus dining, event caterers with no counter,
 shared commissary kitchens), hotels (43), recreation venues and clubs (33:
 theatre, cinema, arena and bowling concessions, event centres, museums, the
 private city and country clubs), vending routes (21), pharmacies (5, a food
-register's) and two venues the register names as cabarets (R3). A caterer
+register's) and two venues the register names as cabarets (adult venues, left off
+every map). A caterer
 whose name also names a restaurant, café or bakery stays; so does the
 Nicollet Diner, whose name includes Roxy's Cabaret.
 
@@ -426,12 +426,12 @@ other than a restaurant or a food-selling shop: institutional kitchens (326:
 childcare, adult day, university, hospital, religious and community
 kitchens, food banks), mobile vendors (184), school kitchens (117),
 processors and warehouses (103), boarding, personal-care and nursing homes
-(97), commissaries (79), caterers (60, R1), social clubs (45, members' bars),
+(97), commissaries (79), caterers (60, no counter of their own), social clubs (45, members' bars),
 banquet halls (25), temporary events (19) and a pool snack bar.
 
 **Excluded by name** - 393 facilities inside the kept types that are not
-storefronts (`pipeline/taxonomies/pittsburgh_inspection.py`; each is listed
-in `outputs/pittsburgh/excluded_premises.csv`): 254 stands and outlets of
+storefronts (each is listed in `outputs/pittsburgh/excluded_premises.csv`):
+254 stands and outlets of
 venues (Acrisure Stadium, PNC Park, PPG Paints Arena, Highmark Stadium, the
 Petersen Events Center, the convention centre, Stage AE, Rivers Casino, the
 zoo, aviary, museums and science centre, theatres, cinemas, bowling, golf and
@@ -440,7 +440,8 @@ workplace micro-markets, contract caterers, hospital and campus outlets,
 church cafés, employee cafeterias, commissaries, caterers with no counter),
 25 pharmacies (a food register's), 14 hotel back-of-house licences (a
 hotel's own named bar or restaurant stays), 2 delivery-only stores and 2
-venues the name calls a cabaret or a gentlemen's club (R3).
+venues the name calls a cabaret or a gentlemen's club (adult venues, left off every
+map).
 
 **Not placed** - 22 with no point in the list and 3 whose point falls outside
 the city's polygon.
@@ -532,9 +533,8 @@ appears as a restaurant rather than twice.
 ### Miami — offices, wholesale, and one very large service catch-all
 
 Miami-Dade's Local Business Tax receipt is issued to every business of any
-kind, so most of the file is not storefront trade. All 150 of its `CATGRYNAME`
-values carry an explicit verdict in `pipeline/taxonomies/miami_catgryname.py`;
-these are the ones worth naming.
+kind, so most of the file is not storefront trade. Each of its 150 categories
+has a written verdict; these are the ones worth naming.
 
 **`SERVICE BUSINESS` (28,010 active rows) is excluded, and it is the largest
 single judgment call in this city.** Sampling it found paralegals, management
@@ -542,10 +542,10 @@ consultancies, media and tech agencies, tour guides and dispatch services —
 offices, not shops — alongside some genuine trade repair, and a number of
 COTTAGE FOOD operators working from apartments. It fills the same role as Los
 Angeles' NAICS 812990 and D.C.'s "General Business". Excluding it certainly
-discards some real storefront repair shops; the honest alternative is
-classifying 28,010 rows of free-text `OCCDESC`, which is a project of its own.
-Said plainly because the direction of the error is knowable: this map
-undercounts small repair and service premises in Miami.
+discards some real storefront repair shops; the alternative is sorting 28,010
+rows by their free-text occupation description (`OCCDESC`), a project of its
+own. So the error runs one way: this map undercounts small repair and service
+premises in Miami.
 
 Also excluded: **professional practice** (`PROFESSIONAL`, `ATTORNEY`,
 `P.A./CORP/PARTNERSHIP/FIRM`, `CONSULTANT` — about 50,000 rows between them);
@@ -569,16 +569,16 @@ infrastructure, not shops: Crown Castle and Pinnacle Towers cell sites, with
 Mobile and itinerant trade is out as everywhere else — `LUNCH WAGON / TRUCK`,
 `ICE CREAM VENDOR`, `PEDDLER`, carnivals, and the machine licences (`A T M /
 POINT OF SALE`, `VENDING MACHINE`). Fitness centres, cinemas and other
-recreation venues (NAICS 713/711) are out because no bucket covers them in any
-city here. `CATERING BUSINESS` (276) and `FUNERAL HOME` (62) are out too.
+recreation venues (NAICS 713/711) are out because none of the three categories
+covers them in any city here. `CATERING BUSINESS` (276) and `FUNERAL HOME` (62) are out too.
 `NIGHT CLUB` and `DANCING OR ENTERTAINMENT` are kept as food service.
 
 One category is kept on a cross-project consistency argument rather than a
 local one, and is flagged so the choice is visible: **`AUTO / TRUCK / VAN
 SALES`** (car dealers). A car lot is not a storefront in the walkable sense
 this map is about, but NAICS 441 sits inside the 44/45 range every NAICS city
-here counts as Retail, so excluding it in Miami alone would make the buckets
-mean different things in different cities.
+here counts as Retail, so excluding it in Miami alone would make the
+categories mean different things in different cities.
 
 ### Boston — everything that is not food, drink or a package store
 
@@ -599,8 +599,8 @@ that is 79% of Philadelphia's register; **204 lodging and members' clubs**
 (`Inn. All Alc.`, `Innholder No Liquor`, `Clb. All Alc.` and variants); and
 about 90 recreation and production licences (`Billiards/Sippio` 38, `Bowling
 Alley` 10, seven Farmer Brewery/Winery/Distillery pouring licences, and five
-`Fortune Teller`), which are NAICS 713/312 territory that no bucket covers in
-any city here.
+`Fortune Teller`): NAICS 713/312, which none of the three categories covers
+in any city here.
 
 Also left out: 17 **General On Premise** all-alcohol licences. Ten of those
 venues are on the map already, through their Inspectional Services food permit;
@@ -616,8 +616,8 @@ is out for the same reason — neither has a shopfront.
 D.C.'s single register covers all three categories on its own, so the
 exclusions here are about separating businesses from everything else a
 "business licence" happens to cover in the District. Every one of the 95
-licence categories present has a written verdict in
-`pipeline/taxonomies/dc_businessactivity.py`; nothing is excluded by omission.
+licence categories present has a written verdict; nothing is excluded by
+omission.
 
 **61% of the active in-District register is residential rentals**, and they are
 dropped before anything is downloaded: One Family Rental 25,557, Apartment
@@ -660,7 +660,7 @@ stating plainly because each is a real business:
 
 **`Health Spa` (22) is gyms, not personal care.** The sampled rows are VIDA
 Fitness, Equinox, Gold's Gym, Solidcore, CrossFit and New York Sports Club, so
-it is NAICS 713940 and outside every bucket — the same verdict Boston's
+it is NAICS 713940, outside all three categories: the same verdict Boston's
 Billiards and Bowling Alley licences got. `Health Spa Sales` (22), which is
 selling gym memberships, goes with it, as do `Swimming Pool` (165+32), the
 theatres and the one bowling alley.
@@ -671,8 +671,8 @@ House 19 — NAICS 721, as in Boston); **construction** (General
 Contractor/Construction Manager 991, Home Improvement Salesperson 320, Home
 Improvement Contractor 152 — NAICS 23); **vehicular services** (Parking
 Facility 263 and its attendants, excluded project-wide; Consumer Goods (Auto
-Repair) 78 and Auto Wash 17, because NAICS 811 is repair and only 812 is a
-tracked bucket — the same reason Miami's `SERVICE BUSINESS` went);
+Repair) 78 and Auto Wash 17, because NAICS 811 is repair and only 812,
+personal services, is counted: the same reason Miami's `SERVICE BUSINESS` went);
 **charitable and membership bodies** (Charitable Solicitation 1,683, Charitable
 Exempt 440, Cooperative Association 176); **wholesale** (NAICS 42); and
 **individual rather than premises licences** (Motor Vehicle Salesperson 263,
@@ -695,24 +695,20 @@ kept as Retail for that reason: `Cigarette Sales (Retail)` (848),
 `Patent Medicine` (610, D.C.'s term for over-the-counter drug sales) and
 `Food Products` (656). The sampled Patent Medicine rows included CVS, Whole
 Foods and Safeway; a sampled Food Products row was a hardware shop. Holding one
-means selling goods over a counter, so Retail is right — but they are why the
-premises dedup matters here: 121 licensees hold exactly those first and third
-plus Patent Medicine, which is one corner shop and not three businesses.
+means selling goods over a counter, so Retail is right. But they are why each
+premises is counted once here: 121 licensees hold exactly these three, which is
+one corner shop and not three businesses.
 
 ### Vancouver and Surrey - mobile trade, a regional catch-all, and two cities of offices
 
 The first regional pair here, and the first non-US entry. Vancouver's register
 carries **89** business types that reach the map; Surrey's carries **210**
-categories, newline-separated, several per licence. Every one of the 299 has an
-explicit verdict in `pipeline/taxonomies/vancouver.py`, which **raises** on an
-unknown value rather than defaulting to None. Buckets were anchored on
-`naics.py` (Retail 44-45 less 454, Food service 722, Personal services 812 less
-81293) so this city stays comparable with every city whose buckets are
-anchored on `naics.py` instead of drawing its own line. **The anchor is named
-rather than counted** - this sentence said "the five NAICS cities" until
-2026-09-22, when there were four (San Diego, San Francisco, Los Angeles and
-Montreal). What matters is that the boundaries come from the same module, not
-how many cities currently use it.
+categories, several per licence. Every one of the 299 has a written verdict,
+and a value never seen before stops the build rather than being silently left
+out. The categories follow NAICS (Retail 44-45 less 454, Food service 722,
+Personal services 812 less 81293), from the same code every NAICS city here
+uses, so these two cities stay comparable with them rather than drawing their
+own line.
 
 **Mobile trade is not a storefront.** Vancouver's `Street Vendor` (116 mappable
 rows) and Surrey's `Portable Food Vendor` (9), `Catering/Coffee Truck` (3),
@@ -742,7 +738,7 @@ Vancouver publishes no equivalent flag, and its parcel-based substitute removes
 nothing (see "Honest limits").
 
 **Repair is excluded; personal care is not.** NAICS puts repair in 811 and
-personal care in 812, and only 812 is a bucket here, so **a hairdresser counts
+personal care in 812, and only 812 is counted here, so **a hairdresser counts
 and a shoe repairer does not**. Out: Surrey's `Tailor`, `Dressmaker`,
 `Upholstery`, `Locksmith`, `Sharpening Service`, `Repair Service`,
 `Automotive Repair Service`, `Auto Body/Painting`,
@@ -829,9 +825,8 @@ distinction most cities here have to infer: `- PREMISES` against `- NO
 PREMISES`, plus `(MOBILE)`, `(HOME BASED)`, `(MAIL ORDER)` and `(DIRECT
 SALES)`. So `RETAIL DEALER - PREMISES` (7,516 rows) and `RETAIL DEALER - NO
 PREMISES` (7) are the same trade, split by the City into the thing this project
-maps and the thing it does not. Every value's verdict is in
-`pipeline/taxonomies/calgary_licencetype.py`, which raises on an unknown
-category rather than defaulting to None.
+maps and the thing it does not. Every category has a written verdict, and one
+never seen before stops the build rather than being silently left out.
 
 **Endorsements are excluded, and they are the biggest group.** `ALCOHOL
 BEVERAGE SALES (RESTAURANT)` (1,527), `OUTDOOR PATIO` (937), `ALCOHOL BEVERAGE
@@ -876,13 +871,12 @@ alongside the tattooists that this map does count. They are left off anyway,
 on the same reasoning that excluded Vancouver's `Adult Services`: mapping
 adult-services premises adds exposure for the people working there without
 adding anything to the question this project asks, which is where storefront
-commerce clusters around transit. **This is a judgment call, not a data
-limitation** - the categories are mapped to None in the taxonomy rather than
-deleted, so it is one line to reverse, and the owner confirmed it on
-2026-09-21.
+limitation** - the categories are set aside rather than deleted, so reversing
+it is one line, and the owner confirmed it on 2026-09-21.
 
 **One thing Calgary CANNOT tell us**, recorded here because its absence is
-easy to mistake for a decision: `homeoccind` reads `N` on all 23,203 rows.
+easy to mistake for a decision: the register's home-occupation flag
+(`homeoccind`) reads `N` on all 23,203 rows.
 It is constant, not merely unreliable, so unlike Surrey (`Home Occupation`,
 14,015 rows) and Edmonton (`licencetype`, 14,114) the City asserts nothing
 about home occupation, and no inference is attempted - Vancouver's parcel
@@ -901,9 +895,9 @@ and it does a different part of it.** Calgary names *premises*; Edmonton names
 filter removes 43% of the file before any category is read - no residence
 inference, no name heuristic, no parcel join. `Non-Resident` is mobile trade;
 the last two are licences held by a **person** rather than a premises, the New
-York `Individual` distinction. Every one of the 60 remaining categories has an
-explicit verdict in `pipeline/taxonomies/edmonton_licencecategory.py`, which
-raises on an unknown rather than defaulting to None.
+York `Individual` distinction. Every one of the 60 remaining categories has a
+written verdict, and one never seen before stops the build rather than being
+silently left out.
 
 **FOUR of the judgment calls were settled by SAMPLING NAMES, and the sample
 overrode the rule twice.** This project's merged-category rule - when one
@@ -967,8 +961,8 @@ health care rather than a personal-services storefront**. The city page says
 so. This is the one call on this page a reader might reasonably make the other
 way, and reversing it is one line in the taxonomy.
 
-**`Food Processing / Catering Service` (583) stays excluded**, which was the
-open question Edmonton's build brief flagged as worth the most rows. It merges
+**`Food Processing / Catering Service` (583) stays excluded**, the open
+question with the most rows riding on it. It merges
 NAICS 311 food manufacturing with 7223 catering, leads with processing, and has
 no second field to split on - the treatment Vancouver's `Printing Imaging and
 Photo Services` got. Reversing it is one line.
@@ -994,8 +988,8 @@ list, so an endorsement is a second string on the same row and the pin exists
 once either way. That is why `Alcohol Sales (Consumption On-Premises / *)`
 (1,420 across both variants) is mapped to Food service here and to None in
 Calgary: 1,159 of the larger variant's 1,165 rows also carry another category,
-1,034 of them `Restaurant or Food Service`, which `BUCKET_PRIORITY` resolves to
-Food service regardless - and the 6 rows standing alone are real drinking
+1,034 of them `Restaurant or Food Service`, which makes the pin Food service
+regardless - and the 6 rows standing alone are real drinking
 places (NAICS 7224) that mapping the category keeps on the map. `Tobacco and
 Vaping Product Sales` (742) and `Oleoresin Capsicum (OC) Spray Sales` (53) are
 adjuncts treated the same way; the OC spray licence **never** stands alone, so
@@ -1009,7 +1003,7 @@ rows**, on top of the 763 `Adult Services` licences already removed by
 beside the tattooists this map does count. The reasoning is the one the owner
 confirmed for Calgary on 2026-09-21: mapping adult-services premises adds
 exposure for the people working there without answering the question this
-project asks. Mapped to None rather than deleted, so it is one line to reverse.
+project asks. Set aside rather than deleted, so reversing it is one line.
 
 **Also excluded, without controversy:** offices and professional services
 (2,701), construction and labour (2,635), residential rental long- and
@@ -1055,7 +1049,7 @@ rule in `outputs/kitchener_waterloo/excluded_premises.csv`:
   retirement, group and long-term-care homes, hospitals, mobile preparation
   premises, street carts and catering vehicles, food plants.
 - 223 of "Food, General"'s types that are not storefronts: caterers and
-  commissaries (51, R1), community kitchens (41), church kitchens (26), school
+  commissaries (51, no counter of their own), community kitchens (41), church kitchens (26), school
   cafeterias (22), serving kitchens (20), banquet halls (18), food warehouses
   (14), workplace cafeterias (14), food banks (13), vending (2) and
   transient or low-use kitchens (2).
@@ -1071,7 +1065,8 @@ rule in `outputs/kitchener_waterloo/excluded_premises.csv`:
   lawn-bowling clubs, bowling lanes, cinemas, theatres, the museum, escape
   rooms, trampoline and play venues, gyms and yoga, the ballyard, Bingeman
   Park, and members' and ethnic clubs.
-- 46 of the Kitchener Market's Saturday farmers'-market stalls (R1); its
+- 46 of the Kitchener Market's Saturday farmers'-market stalls, which have no
+  counter of their own; its
   upper-level food hall's counters, named as such, stay.
 - 23 pharmacies (Shoppers Drug Mart, Rexall), which the register files as
   convenience stores.
@@ -1086,9 +1081,8 @@ person's own name shows its type instead (18). Food names are shown as
 registered.
 
 **Stations.** ION, Grand River Transit route 301, all 19 stops, every one
-inside the two cities: `outputs/kitchener_waterloo/excluded_stations.csv` is
-written empty. GO Transit's Kitchener line (suburban rail) and ION's bus
-extension to Cambridge are not drawn.
+inside the two cities, so none is left out. GO Transit's Kitchener line
+(suburban rail) and ION's bus extension to Cambridge are not drawn.
 
 ### Toronto - endorsements, person-held licences, and a register that is mostly history
 
@@ -1097,14 +1091,14 @@ substance**, because most of what its register contains is not premises at all.
 Of 159,872 licence rows, **122,301 are already cancelled** - this is a term
 history reaching back to 2005 rather than a snapshot - leaving 37,571 current
 licences, of which 19,575 are storefronts. Every one of the 92 categories has
-an explicit verdict in `pipeline/taxonomies/toronto_mlscategory.py`, which
-raises on an unknown rather than defaulting to None.
+a written verdict, and one never seen before stops the build rather than being
+silently left out.
 
 **One row per licence, and `Category` is single-valued** - which is Calgary's
 double-counting problem without Calgary's delimiter to resolve it. A restaurant
-with a patio holds two licences and appears as two rows, so endorsements have
-to be dropped by category and step 2 then deduplicates on address plus
-normalised name.
+with a patio holds two licences and appears as two rows, so endorsements are
+dropped by category, and premises sharing an address and a name are then
+counted once.
 
 **Endorsements are excluded, and `NOISE EXEMPTION` is the largest single one.**
 `NOISE EXEMPTION` (4,960), `SIDEWALK CAFE` (2,473), `CURB LANE CAFE` (694),
@@ -1163,8 +1157,8 @@ the service.
 `BODY RUB PARLOUR` (110), `ADULT ENTERTAINMENT CLUB` (51) and `BATH HOUSE`
 (14), **175 rows**. The reasoning is Calgary's and Edmonton's, confirmed by the
 owner on 2026-09-21: mapping adult-services premises adds exposure for the
-people working there without answering the question this project asks. Mapped
-to None rather than deleted, so it is one line to reverse.
+people working there without answering the question this project asks. Set
+aside rather than deleted, so reversing it is one line.
 
 **Also excluded, without controversy:** entertainment and recreation
 (`ENTERTAINMENT PLACE OF ASSEMBLY` 445, `AMUSEMENT ESTABLISHMENT` 437,
@@ -1215,7 +1209,7 @@ either. Both are the same precision the NAICS cities use; a two-digit prefix
 would have been the obvious-looking mistake.
 
 **What is NOT excluded, and is worth stating because the number looks
-alarming:** `scripts/check_personal_exposure.py` reports that 32.2% of Mexico
+alarming:** this project's personal-name check reports that 32.2% of Mexico
 City's pins "look like a person". A hand-sample of 26 found **none** that were
 a person presented as a person — every one was a shop sign in the Spanish
 convention of trade type plus a given name or brand (`ABARROTES LIZ`,
@@ -1256,7 +1250,7 @@ missing line is the most consequential kind of omission a map like this can
 have, and this one was avoided rather than accepted.
 
 **The person-like reading is an artefact here too.** 30.7% of pins trip
-`scripts/check_personal_exposure.py`'s heuristic, against Mexico City's 32.2%,
+the personal-name check's heuristic, against Mexico City's 32.2%,
 and for the same reason: it is tuned for English "SMITH JOHN" forms and the
 Spanish shop-sign convention pairs a trade type with a given name. Nothing is
 filtered on that number.
@@ -1400,7 +1394,7 @@ non-food shop layer through the shop register, and they stay.
 ### Paris - four trades with no premises, and two catch-alls the publisher's own hierarchy settled
 
 **The source is SIRENE, France's national register of établissements**, so the
-exclusions below are French rather than Parisian and apply to Marseille too.
+exclusions below are French rather than Parisian and apply to every French city here.
 INSEE strips records it marks *non-diffusible* at source - name, address and
 coordinates together - so that privacy work was done before the data arrived
 rather than by a filter here.
@@ -1452,9 +1446,8 @@ numbers agreed would be fitting to a number rather than measuring one.
 **Everything excluded in Paris is excluded here, from the same national
 register and for the same reasons** - the four no-premises trades, the wholesale
 laundry, funeral services, and the same two catch-alls `96.09Z` and `56.29B`.
-The catch-all verdict was re-measured rather than inherited: the two cities'
-compositions differ, which is why the shares were counted for Marseille instead
-of Paris's being assumed.
+The catch-all verdict was measured again for Marseille rather than inherited,
+because the two cities' businesses differ in make-up.
 
 **The gap against OpenStreetMap is wider here - about 2.6 times as many points -
 and most of that is not the register.** OpenStreetMap covers Marseille far
@@ -1474,10 +1467,10 @@ revisiting, not as an automatic application of a rule.
 **Everything excluded in Paris is excluded here, from the same national
 register and for the same reasons** - the four no-premises trades, the
 wholesale laundry, funeral services, and the same two catch-alls `96.09Z` and
-`56.29B`. The verdict was measured a third time rather than inherited, and this
-is the city that shows why that is not ceremony: `96.09Z` is **13.9%** of
-Toulouse's bucket rows against roughly 9.7% in both Paris and Marseille. The
-national argument transfers; the shares plainly do not.
+`56.29B`. The verdict was measured a third time rather than inherited, and
+Toulouse shows why: `96.09Z` is **13.9%** of its rows in the three categories,
+against roughly 9.7% in both Paris and Marseille. The national argument
+transfers; the shares do not.
 
 **A fifth of this city's active establishments are withheld by INSEE, not by
 this project.** `statutDiffusion` masks the name, the address **and** the
@@ -1505,7 +1498,7 @@ site. It is included rather than excluded because Tisséo runs and tickets it
 exactly as it does the métro, because it crosses the Garonne where no other line
 does, and because one of its three stations is a Métro B interchange. The
 reasoning, including the fact that the precedent originally cited for it turned
-out not to exist, is recorded in `DECISIONS.md`.
+out not to exist, is recorded in the project's decision log.
 
 ### Lille (Regional) - the same register, eleven communes, and no station lost to a boundary
 
@@ -2043,7 +2036,7 @@ stalls, as in São Paulo.
 
 **Shown, but not named** - at an address that is also a home (69% of dots), the dot
 shows its category, never the enumerator's description. Brasília's addresses name a block rather than a door, so
-this is judged by the block's lot.
+whether an address is also a home is judged by the block's lot.
 
 **One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
 
@@ -2263,7 +2256,7 @@ filter to about one per half mile. Not drawn: buses, trolleybuses and Vivi's sub
 
 ### Liepāja - Riga's two layers, food placed on the national address register
 
-**Riga's rules, unchanged** (the section above), through the same shared step: food service is
+**Riga's rules, unchanged** (the section above): food service is
 the premises licensed to sell alcohol or tobacco whose place type is food service, one per
 address and kind, so that layer is a lower bound; shops and services is every trade premises
 in the cadastre whose name reads as a shop, a service or a fuel station, an upper bound.
@@ -2282,7 +2275,7 @@ because OpenStreetMap's route relations miss them. Not drawn: buses and suburban
 
 ### Daugavpils - Riga's two layers, and every stop of all five tram routes
 
-**Riga's rules, unchanged**, through the same shared step as Liepāja: food service from the
+**Riga's rules, unchanged**, as in Liepāja: food service from the
 excise register, a lower bound; shops and services from the cadastre, an upper bound. **Left
 out of the cadastre** as in Riga: 231 of 956 trade premise groups (ancillary rooms, food
 service, wholesale and storage, gambling, repair, offices and generic names). No list of
@@ -2302,7 +2295,7 @@ route's wait. Not drawn: buses and suburban trains.
 **Left out of KCMO's Business License Holders** (15,895 rows, frozen 2026-01-15): 1,978
 licences valid for 2024 only, lapsed by the freeze (owner); 1,095 current licences whose
 industry is only a fee code ("Misc Rate 129", "Flat Rate 42"), which cannot be classified
-(owner). Then, by NAICS code (the shared carve-outs, `pipeline/taxonomies/naics.py`):
+(owner). Then, by NAICS code, the exclusions every NAICS city shares:
 - vending-machine operators (23) and fuel dealers (1) - NAICS 2022 has no "nonstore" code,
   so online sellers are NOT left out: they sit under the goods they sell;
 - food service contractors (9), caterers (17) and mobile food (23);
@@ -2326,13 +2319,13 @@ GIVEN-NAME INITIAL") and 26 companies named only as a person (a person's full na
 
 **Left out of BUSLIC** (24,191 active licences that are not home occupations; the 10,573
 active home occupations are never downloaded): 1,020 with no industry code, then, by NAICS
-code (the shared carve-outs, `pipeline/taxonomies/naics.py`):
-- non-store retailers (454): 526, of them direct sellers 432, online shops 31 and
+code, the exclusions every NAICS city shares:
+- non-store retailers (NAICS 454), 526, among them direct sellers 432, online shops 31 and
   vending-machine operators 26;
 - food service contractors (26), caterers (31) and mobile food (175);
 - parking (5), funeral services and cemeteries (20) and "all other personal services" (270).
 
-**Also left out**: 19 at an apartment or trailer, read from the `APT` field, as homes; 23
+**Also left out**: 19 whose address gives an apartment or trailer unit, as homes; 23
 points outside the city limits.
 
 **Not placed**: 539 storefront licences the City did not geocode (7.6%).
@@ -2342,7 +2335,7 @@ a tobacco licence, a liquor licence): 6,539 licences to 5,243 premises.
 
 **Shown, but not named**: 748 storefronts show their street address instead of a name - 692
 whose ownership type is a person's (Sole Proprietorship 525, Individual 151, Married 16;
-owner), 45 whose account name is only a person's (`config.PERSON_NAMED`, read by eye) and
+owner), 45 whose account name is only a person's (read by eye) and
 11 with no account name.
 
 **Stations.** All 21 Sun Link stops are inside the city. Not drawn: buses.
@@ -2350,53 +2343,53 @@ owner), 45 whose account name is only a person's (`config.PERSON_NAMED`, read by
 ### New Orleans - the City's own business types, and every stop of five streetcar lines
 
 **Left out of the Active Occupational Licenses** (16,521 active licences), by the City's own
-type (`pipeline/taxonomies/nola_businesstype.py`, every one of its 486 values with a home):
+type (each of its 486 types is either placed in a category or left out):
 - one-off vendors: "Special Events-Other (Vendor)" 1,264, Jazz Fest 88, Essence Fest 30,
-  Mardi Gras 13; "Home Based-Office Use Only" 357 (the brief);
+  Mardi Gras 13; "Home Based-Office Use Only" 357;
 - **flea-market stalls** (344, most at the French Market) and **street artists** (281): a
-  market's stalls and stands are not shops (category_rules R1; mobile units out);
+  market's stalls and stands are not shops, and mobile units are left out;
 - video-poker devices (261), hotels (294), bed and breakfasts (111), short-term rentals;
-- by the NAICS code each type's title names (the shared carve-outs): caterers (116), food
-  service contractors (88), mobile food (68), parking (203), funeral services and cemeteries
-  (26), online, direct and vending sellers (106) and "Personal Services, Other" (249), the
-  R2 catch-all.
+- by the NAICS code each type's title names (the exclusions every NAICS city shares):
+  caterers (116), food service contractors (88), mobile food (68), parking (203), funeral
+  services and cemeteries (26), online, direct and vending sellers (106) and "Personal
+  Services, Other" (249), a catch-all.
 
 **Not placed**: 219 storefront licences the register writes at 0,0 (4.4%); 1 point outside
 the parish.
 
-**Shown, but not named**: the owner (`ownername`) is never downloaded. 808 storefronts show
+**Shown, but not named**: the owner's name is never downloaded. 808 storefronts show
 their street address - 783 with no business name and 25 whose name is only a person's
-(`config.PERSON_NAMED`, read by eye).
+(read by eye).
 
-**Stations.** Every stop of the five lines RTA runs (owner, 2026-09-30, re-taken at build):
-110 stations, all inside the city, none thinned (owner, call 13), matching RTA's own stop list
-for each line (2026-10-01): 47 and 48 run down Canal Street to the ferry terminal, and 47 does
-not run Loyola Avenue, which 46 does. OSM's two ref-2 relations,
-the Riverfront's old routing via Canal Street, are not drawn: RTA runs the Riverfront as 49,
-French Market to Julia Street, since Summer 2025. Not drawn: buses and ferries.
+**Stations.** Every stop of the five lines RTA runs (owner, 2026-09-30): 110 stations, all
+inside the city, none thinned (owner), matching RTA's own stop list for each line
+(2026-10-01). Lines 47 and 48 run down Canal Street to the ferry terminal, and 47 does not
+run Loyola Avenue, which 46 does. OpenStreetMap's two route-2 entries, the Riverfront's old
+routing via Canal Street, are not drawn: RTA has run the Riverfront as 49, French Market to
+Julia Street, since Summer 2025. Not drawn: buses and ferries.
 
 ### Florence - the Comune's four layers by type, and T1's Scandicci stops
 
-**Left out of the Comune's four layers** (12,641 rows; `pipeline/taxonomies/florence_attivita.py`):
+**Left out of the Comune's four layers** (12,641 rows):
 private clubs and associations (186); internal shops (128); online, mail-order, door-to-door
 and vending sellers (123); farmers selling their own produce (49); wholesale (2); catering
 (24) and home restaurants (7); temporary service at events (6); bars in the Comune's sports
 grounds (33) and restaurants in hotels (12); rows with no type in the shop and food layers
 (19). **Kept**: the 639 food-service premises the regional law exempts from the Comune's
-requirements (owner, call 16, Milan's *fuori piano* precedent) - some are not open to the
+requirements (owner, following Milan's *fuori piano* precedent) - some are not open to the
 public, and the type does not say which; the page says so.
 
 **Not named**: no layer carries a name or an address; a dot shows its type.
 
 **Stations.** T1 and T2, every stop in the comune (39). T1 runs on into Scandicci: its four
 stops there (Villa Costanza, De André, Resistenza, Aldo Moro) are drawn with the line but
-not ringed (owner, call 17), listed in `outputs/florence/excluded_stations.csv`. Not drawn:
+not ringed (owner), listed in `outputs/florence/excluded_stations.csv`. Not drawn:
 T3 and T4, under construction (T3.2.1 due about January 2027); buses; trains.
 
 ### Den Haag - the city's permit layer and BAG shop units, and every HTM tram stop
 
-**Left out of the Gemeente's permit layer** (2,701 permits, last edited 23 May 2025;
-`pipeline/taxonomies/den_haag_source.py`): 158 applications not yet decided (owner, call 24);
+**Left out of the Gemeente's permit layer** (2,701 permits, last edited 23 May 2025):
+158 applications not yet decided (owner);
 331 by type - sports-club and staff canteens and club houses, community and youth centres,
 theatre and cinema foyers, museum cafés, event sites, party centres, hall hire and cooking
 studios, members' clubs, hotels and the restaurants and bars inside hotels and hostels, care-home
@@ -2407,7 +2400,7 @@ named by their own description as one of these); 28 whose own description record
 with a newer one, counted once. **Kept**: coffeeshops (32 on the map) and beach pavilions (70).
 
 **Excluded because it is probably a home** - 1,928 shop units also registered as a dwelling
-(Amsterdam's owner call), nearly three in ten of Den Haag's shop units.
+(as in Amsterdam), nearly three in ten of Den Haag's shop units.
 
 **Removed as duplicates** - 561 shop units at the address of a kept permit; the permit is kept.
 
@@ -2423,20 +2416,19 @@ number and legal form are never downloaded. Shop units show their address.
 **Stations.** HTM's trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17 and 19 and RandstadRail 3, 4 and
 34, every stop in the gemeente (166; Leidschenveen and Leidschenveen Centrum, 10 m apart, merged as one interchange). Ten lines run on into neighbouring gemeenten: their 64
 stops there (Rijswijk 17, Zoetermeer 17, Leidschendam-Voorburg 15, Delft 12, Westland,
-Lansingerland and Pijnacker-Nootdorp 1 each) are drawn with the line but not ringed (owner,
-call 26, for tram 1), listed in `outputs/den_haag/excluded_stations.csv`. Not drawn:
-RandstadRail E, RET's metro line, a stub with 4 of its 23 stops in the city (owner, call 22);
+Lansingerland and Pijnacker-Nootdorp 1 each) are drawn with the line but not ringed
+(owner), listed in `outputs/den_haag/excluded_stations.csv`. Not drawn:
+RandstadRail E, RET's metro line, a stub with 4 of its 23 stops in the city (owner);
 the 9S short working; buses; NS trains.
 
 ### Zurich - the city's food-and-drink licences, and its shops licensed to sell alcohol
 
-**Left out of the Stadt Zürich's Gastwirtschaftsbetriebe** (3,487 rows, every one open;
-`pipeline/taxonomies/zurich_gastwirtschaft.py`): food stands, caterers and food trucks
-(Ausgabestelle, 56); staff and institutional canteens (Kantine / Mensa, 31); premises
-exempt from the licence (Patentbefreit, 25: staff restaurants, care-home and school
-kitchens, a guest house, a beauty studio); cabarets (6); rooms hired for events (6).
-**Kept**: clubs and discos (10), as Food service (nightclubs not named as adult,
-docs/category_rules.md).
+**Left out of the Stadt Zürich's Gastwirtschaftsbetriebe** (3,487 rows, every one open):
+food stands, caterers and food trucks (Ausgabestelle, 56); staff and institutional canteens
+(Kantine / Mensa, 31); premises exempt from the licence (Patentbefreit, 25: staff
+restaurants, care-home and school kitchens, a guest house, a beauty studio); cabarets (6);
+rooms hired for events (6). **Kept**: clubs and discos (10), as Food service (nightclubs
+not named as adult venues).
 
 **Missing, not excluded**: the register licenses food and drink, and the sale of
 alcohol, so the shops on this map are only those licensed to sell alcohol (1,028:
@@ -2446,15 +2438,15 @@ in care homes, staff restaurants, hospitals and clubhouses, licensed as ordinary
 restaurants; they remain, and the page says so.
 
 **Shown, but not named**: 12 storefronts show their street address instead of a trade
-name that is a person's own name (`config.PERSON_NAMED`, read by eye).
+name that is a person's own name (read by eye).
 
 **Stations.** Every stop of VBZ trams 2–11, 13–15, 17, 50 and 51 in the Stadt (180).
 Trams 2, 4, 10 and 50 run on into Schlieren, Zollikon, Opfikon, Kloten and Rümlang: their
 15 stops there are drawn with the lines but not ringed, listed in
 `outputs/zurich/excluded_stations.csv`. Not drawn: trams 12 (Glattalbahn, 1 of 18 stops in
-the city) and 20 (Limmattalbahn, 4 of 26), as stubs (owner, calls 19 and 25) - two of
+the city) and 20 (Limmattalbahn, 4 of 26), as stubs (owner) - two of
 tram 20's city stops, Bahnhof Altstetten and Seidelhof, are on no drawn line; the
-Forchbahn S18 (owner, call 18), whose four city stops are all tram stops; the S-Bahn;
+Forchbahn S18 (owner), whose four city stops are all tram stops; the S-Bahn;
 buses. Trams 50 and 51 run only until 12 December 2026, while the Bahnhofquai stop is
 rebuilt.
 
@@ -2583,7 +2575,7 @@ drawn: Taiwan Railway and high-speed rail.
 **Left out** - online shopping; funeral services (288); street and market stalls (553) and
 caterers, banquet cooks and school-lunch contractors (182); the "other personal services"
 catch-all, fortune-telling and marriage introduction (388); bottled-gas and kerosene retail
-(204) and shoe-shining (1); industries outside the three buckets; 1,177 office-like company
+(204) and shoe-shining (1); industries outside retail, food service and personal services; 1,177 office-like company
 head-office rows (owner's rule).
 
 Pawnshops (134) are kept as retail, and nightclubs and dance halls without hostess service (10)
@@ -2607,7 +2599,7 @@ centre, so most storefronts lie outside the rings.
 **Left out** - online shopping; funeral services (634); street and market stalls (2,669) and
 caterers, banquet cooks and school-lunch contractors (272); the "other personal services"
 catch-all, fortune-telling and marriage introduction (811); bottled-gas and kerosene retail
-(298) and shoe-shining (9); industries outside the three buckets; 10,138 office-like company
+(298) and shoe-shining (9); industries outside retail, food service and personal services; 10,138 office-like company
 head-office rows (6,232 in Taipei, 3,906 in New Taipei; owner's rule).
 
 Pawnshops (523) are kept as retail, and nightclubs and dance halls without hostess service (8)
@@ -2682,7 +2674,7 @@ the premises.
 
 **The list against national statistics** - Osaka City's published list holds
 about 70% of the restaurant permits Osaka reports to national statistics; the
-page gives the owner-approved explanation.
+city's page explains why.
 
 **Closed premises** - the list may keep premises that have closed; a dot is a
 permit on file, not a business open today.
@@ -2814,7 +2806,7 @@ line.
   Mukō and Nagaokakyō, and 2 each in Yawata and Ōyamazaki.
 - The Sagano Scenic Railway and the Eizan and Kurama cable cars are not drawn
   (owner, 2026-09-28).
-- The Shinkansen does not count.
+- The Shinkansen is not drawn.
 
 ### Tokyo - eight wards' own food lists, national filings for four, and four wards' registers, joined to MLIT's address blocks
 
@@ -2868,7 +2860,7 @@ ward line.
 - The Narita Sky Access and the Saitama Railway are not drawn (one station each
   in the wards, served by other lines); the Tokaido and Shonan-Shinjuku lines
   are not drawn on their own.
-- The Shinkansen does not count.
+- The Shinkansen is not drawn.
 
 ### Yokohama - the city's barber, beauty and laundry registers only, joined to MLIT's address blocks
 
@@ -2937,7 +2929,7 @@ its permit type. Only the city's list names its operators.
 line.
 - Left out: 13 stations beyond it: 7 in Hatsukaichi, 3 in Saka, and 1 each in
   Fuchu, Kaita and Higashihiroshima.
-- The Shinkansen does not count.
+- The Shinkansen is not drawn.
 
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
@@ -3071,11 +3063,11 @@ Govern de les Illes Balears's catalogue. No open register of other shops or
 of personal services covers Palma, so clothes shops, hairdressers and the like
 are missing rather than excluded. Nightclubs, party halls and dance halls are
 kept, as food service (R5). A premises is shown when the register lists it as
-active in Palma (4,372 of 4,375; 3 are temporarily closed).
+kept, as food service. A premises is shown when the register lists it as
 
 **Excluded by type and by name**, each listed with its rule in
 `outputs/palma/excluded_premises.csv`:
-- 9 caterers, the register's own "Catering" type (R1: no counter of their own).
+- 9 caterers, the register's own "Catering" type (no counter of their own).
 - 35 recreation venues, clubs and gaming: sports, tennis, padel, riding, golf
   and nautical clubs (their restaurants included), a sports centre and a pool
   bar, cinemas, bingo halls, and "casinos" (in Spain a members' club as often
@@ -3083,7 +3075,7 @@ active in Palma (4,372 of 4,375; 3 are temporarily closed).
 - 8 institutional canteens: parish and school bars, clinics' cafeterias, a
   community centre's canteen.
 - 4 bare hotel names (a hotel's own named café or restaurant stays).
-- 4 adult venues, where the name says so ("whiskería", table dance; R3).
+- 4 adult venues, where the name says so ("whiskería", table dance).
 
 A name rule is imperfect: a few such premises may remain under a name that
 says nothing.
@@ -3100,7 +3092,7 @@ The join was checked against the register's own coordinates: a median 1.1 m
 apart, 92% within 100 m.
 
 **Stations.** Metro de Palma M1, all 10 stations, every one inside the
-municipality: `outputs/palma/excluded_stations.csv` is written empty. M2, which
+municipality, so none is left out. M2, which
 OpenStreetMap still carries, is no longer a metro service (the operator's
 timetable site lists M1 only); SFM's trains T1-T3 are suburban rail and not
 drawn, nor are buses. M1 runs about every 20 minutes in term time and every 30
@@ -3195,7 +3187,7 @@ establishment and nothing else: a dot is titled by its ANZSIC class. Points are
 per building, so the shops of a shopping centre share one point (5,054 distinct
 points for the storefronts, the largest holding 140).
 
-**Excluded by class** (ANZSIC 2006, `pipeline/taxonomies/anzsic_fes.py`):
+**Excluded by class** (ANZSIC 2006, the Australian and New Zealand industry classification):
 - Not storefronts: parking (72), non-store retail (14) and commission-based
   retail (1), as the NAICS cities exclude them.
 - Organisations, not services sold over a counter: religious services (144),
@@ -3205,7 +3197,7 @@ points for the storefronts, the largest holding 140).
   sign-in), brothels (27), catering firms (21, the work happens at the event),
   funeral, crematorium and cemetery services (7).
 
-**Excluded, a catch-all** - other personal services n.e.c. (254): kept at
+**Excluded, a catch-all** - other personal services not elsewhere classified (n.e.c., 254): kept at
 first because the survey's rows have no names to sample, then excluded the same
 day (owner, 2026-09-28) when Melbourne's census, which names them, showed the
 class holds mostly consultancies in office suites.
@@ -3222,7 +3214,7 @@ cut at the council boundary: 16 stations inside it.
   `outputs/sydney/excluded_stations.csv`.
 - **Light rail (L1, L2, L3; 22 stops in the area) is not drawn** (owner,
   2026-09-28); with it, about nine storefronts in ten would sit within a ring
-  (93.0%, the brief's measure), against 83.4% without it.
+  (93.0%, measured before the build), against 83.4% without it.
 - NSW TrainLink services and ferries are not drawn.
 
 ### Melbourne - the City of Melbourne's land-use census, all three buckets
@@ -3237,8 +3229,7 @@ shopping centre or an arcade is one point (1,840 distinct points for the
 storefronts, the largest holding 219). Upper-floor and suite tenancies are
 kept (434, 8.8%): the census does not say which face the street.
 
-**Excluded by class** (ANZSIC 2006, the classes Sydney's decisions set,
-`pipeline/taxonomies/anzsic_fes.py`):
+**Excluded by class** (ANZSIC 2006, the classes set for Sydney):
 - Other personal services n.e.c. (279; owner, 2026-09-28): 214 are upper-floor
   suites, mostly migration and education consultancies, with a few tattoo
   studios.
@@ -3259,8 +3250,8 @@ stations inside it.
   platforms' centre lies just outside, on Punt Road), listed in
   `outputs/melbourne/excluded_stations.csv`.
 - **Trams (22 routes, 155 stops in the area) are not drawn** (owner,
-  2026-09-28); with them, 99.1% of storefronts would sit within a ring (the
-  brief's measure), against 96.0% without them.
+  2026-09-28); with them, 99.1% of storefronts would sit within a ring
+  (measured before the build), against 96.0% without them.
 - The event-day Flemington Racecourse line (with Showgrounds and Flemington
   Racecourse stations), the City Circle special service and V/Line are not
   drawn.
@@ -3312,8 +3303,8 @@ boundary: 82 stations inside it.
 - Left out: 18 stations in Solna, Sundbyberg, Danderyd, Huddinge and Botkyrka,
   listed with their kommun in `outputs/stockholm/excluded_stations.csv`.
 - Pendeltåg, Roslagsbanan, Saltsjöbanan and the trams are not drawn (owner,
-  2026-09-28); with pendeltåg and the local railways, the brief measured 92.3%
-  of storefronts in a ring against 88.7% without.
+  2026-09-28); with pendeltåg and the local railways, 92.3% of storefronts
+  would be in a ring, against 88.7% without (measured before the build).
 - The Yellow line (Gul linje), under construction, is not drawn.
 
 ### Ottawa - the public health inspection data, food only, restaurants and food shops together
@@ -3353,7 +3344,7 @@ of shelters and similar as "RESTRICTED"), and 8 whose position lies outside
 the City.
 
 **Stations.** OC Transpo's O-Train Lines 1, 2 and 4, all 25 stations, every
-one inside the City: `outputs/ottawa/excluded_stations.csv` is written empty.
+one inside the City, so none is left out.
 Buses, including the Transitway, are not drawn.
 
 ### Göteborg - the city's food register by its own types, and the Mölndal stops
@@ -3397,7 +3388,7 @@ the name.
 **Stations.** Trams 1-13, every stop in Göteborgs Stad (127). Trams 4 and 12
 run on into Mölndal: their five stops there (Krokslätts Fabriker, Krokslätts
 torg, Lackarebäck, Mölndals Innerstad, Mölndals sjukhus) are drawn with the
-lines but not ringed (owner, call 21), listed in
+lines but not ringed (owner), listed in
 `outputs/goteborg/excluded_stations.csv`. Not drawn: Lisebergslinjen, the
 heritage line; buses, ferries and commuter trains.
 
@@ -3409,8 +3400,8 @@ services, so clothes shops, hairdressers and the like are missing rather than
 excluded. Food shops (butchers, fishmongers, bakeries, confectioners, food
 shops, supermarkets) are a category of their own.
 
-**Cancelled registrations** - 10,316 rows below the files' ANULATE rows are
-never read; 23,113 active rows are.
+**Cancelled registrations** - 10,316 rows below each file's ANULATE (cancelled)
+heading are never read; 23,113 active rows are.
 
 **Never fetched, by the owner's call (2026-09-28)** - canteens (file 21),
 pastry labs (22), catering (31), local producers, internet-only sales, mobile
@@ -3437,8 +3428,9 @@ form.
 position, and each is placed by matching its street and number to
 OpenStreetMap's address points in its own sector. Left off rather than guessed:
 the street not found (1,855), the street without that number (1,726), the
-number in two or more places (1,288), no number given (365). Even across the
-sectors (73-76% placed); lowest for fishmongers (50%), many inside markets.
+number in two or more places (1,288), no number given (365). Placement is even
+across the sectors (73-76% placed) and lowest for fishmongers (50%), many of them
+inside markets.
 
 **Stations.** Metrorex M1-M5, 64 stations, every one inside the municipality.
 - Suburban trains and trams are not drawn.
@@ -3448,9 +3440,8 @@ sectors (73-76% placed); lowest for fishmongers (50%), many inside markets.
 **One national register, every storefront with a point.** The Small Enterprise
 and Market Service's 상가(상권)정보 (edition 2026-06-30) lists trading
 storefronts across Korea with SEMAS's own three-level classification; the map
-keys on its finest level (소분류), each of the 247 categories given a home
-(`pipeline/taxonomies/korea_sbiz.py`, the owner's calls 2026-09-29, aligned with
-`docs/category_rules.md`).
+keys on its finest level (소분류), each of its 247 categories placed by the
+owner's calls of 2026-09-29, in line with the site's category rules.
 
 **Out by category** (Incheon's 136,995 rows):
 - Not storefronts in this project's sense, whole groups: professional and
@@ -3479,8 +3470,7 @@ name at an address that reads residential (Seoul's rule).
 ### Goyang, Seongnam and Yongin - SEMAS's national storefront register, all three buckets
 
 **Incheon's source and rules** (the section above): SEMAS's 상가(상권)정보,
-edition 2026-06-30, every storefront on its own point, classified by
-`pipeline/taxonomies/korea_sbiz.py` and aligned with `docs/category_rules.md`.
+edition 2026-06-30, every storefront on its own point, classified as in Incheon.
 
 **Out by name**, per city (Goyang / Seongnam / Yongin): hostess bars (110 /
 273 / 188), dance halls (8 / 21 / 4), staff canteens (48 / 138 / 161),
@@ -3554,7 +3544,7 @@ name at an address that reads residential.
 **Stations**, cut at Namyangju's boundary (the lines drawn to their ends;
 stations outside in `outputs/namyangju/excluded_stations.csv`): Line 4, Line 8,
 the Gyeongui-Jungang and Gyeongchun Lines, 17 stations. GTX-A and Seoul's Lines
-2, 5, 6 and 9, which reach the query box, have no station in Namyangju and are
+2, 5, 6 and 9, which pass near the city, have no station in Namyangju and are
 not drawn.
 
 ### Ansan - SEMAS's national storefront register, all three buckets
@@ -3574,7 +3564,7 @@ name at an address that reads residential.
 stations outside in `outputs/ansan/excluded_stations.csv`): Line 4, the
 Suin-Bundang and Seohae Lines, 13 stations. The Seohae Line is drawn (owner,
 Bucheon's precedent): in Ansan it has its own track and stations. Line 1,
-Incheon Line 1 and GTX-A, which reach the query box, have no station in Ansan
+Incheon Line 1 and GTX-A, which pass near the city, have no station in Ansan
 and are not drawn. Daebudo has no rail.
 
 ### Uijeongbu - SEMAS's national storefront register, all three buckets
@@ -3592,7 +3582,7 @@ name at an address that reads residential.
 
 **Stations**, cut at Uijeongbu's boundary (the lines drawn to their ends;
 stations outside in `outputs/uijeongbu/excluded_stations.csv`): the U Line,
-Line 1 and Line 7, 20 stations. Line 4 and GTX-A, which reach the query box,
+Line 1 and Line 7, 20 stations. Line 4 and GTX-A, which pass near the city,
 have no station in Uijeongbu and are not drawn; the U Line's two depot-shuttle
 trips are part of the drawn line.
 
@@ -3611,8 +3601,9 @@ name at an address that reads residential.
 
 **Stations**, cut at Anyang's boundary (the lines drawn to their ends;
 stations outside in `outputs/anyang/excluded_stations.csv`): Line 1 and Line 4,
-7 stations. Anyang was built on its ring share below the satellites' station
-test (owner, 2026-09-29). No other line has a station in the city.
+7 stations. Anyang has fewer stations than the other satellite cities had to
+have, and was built for the share of its storefronts within a ring instead
+(owner, 2026-09-29). No other line has a station in the city.
 
 ## Kept, and why
 
@@ -3637,7 +3628,7 @@ separating from everything above. Every exclusion so far was a choice. In **New
 York**, **Philadelphia** and **Boston**, some of what is missing was never
 available to choose.
 
-Because the city has no general business licence, a shop is only in this map if
+Because New York has no general business licence, a shop is only in this map if
 some regulator happens to license it. Restaurants are inspected, so they are
 close to completely covered. Grocers, bodegas and delis hold state food store
 licences, so they are covered. Salons and barbers hold state licences, so they
@@ -3659,8 +3650,7 @@ have a real street address and no coordinates**, and they are simply absent.
 There is no Canadian equivalent of the US Census bulk geocoder, which is what
 recovers those rows in Los Angeles and Washington D.C. Vancouver does publish a
 `property-addresses` layer that could serve the same purpose, but it has never
-been match-tested, so the loss is recorded rather than quietly closed. A row
-missing coordinates is not automatically a row needing geocoding.
+been match-tested, so the loss is recorded rather than quietly closed.
 
 **Surrey's four stations reach much less of their city than Vancouver's twenty
 do**, and that is geography rather than data. 15% of Surrey's storefronts fall
@@ -3676,7 +3666,7 @@ in the city's register, and Pennsylvania publishes its cosmetology licensees
 only as **county totals with no addresses**, while the State Board's
 verification system answers one licence at a time with no bulk export. Every
 alternative was checked live and each failed for a different reason; they are
-listed in `data_sources.md` so the search is not repeated from scratch.
+listed under the United States on *Where this data comes from*.
 
 So **Philadelphia's map has two categories, not three, and Personal services is
 absent entirely.** Its Retail is narrow for New York's reason as well: what the
@@ -3694,12 +3684,12 @@ trade, so its map has two categories rather than three and Personal services
 is absent entirely. The cause is identical: Massachusetts licenses cosmetology
 and barbering at **state** level, through the Board of Registration of
 Cosmetology and Barbering, whose register is a per-licence ePLACE/MADOL lookup
-with no bulk export and no addresses. That was verified three independent ways
-rather than assumed - Socrata's cross-domain discovery API returns no
+with no bulk export and no addresses. That was checked three independent ways
+rather than assumed: Socrata's search across every portal it hosts finds no
 Massachusetts source for cosmetology, barber, salon, hair, nail salon, body art
-or tattoo; `data.mass.gov` is not a data portal at all, answering HTML 404 from
-both the Socrata and CKAN entry points; and `opendata.mass.gov` does not
-resolve.
+or tattoo; `data.mass.gov` is not a data portal at all (both the Socrata and
+CKAN entry points answer "not found"); and `opendata.mass.gov` has no site at
+all.
 
 Boston's Retail is narrower still than Philadelphia's. What exists is retail
 **food** (groceries, convenience stores, bodegas), package stores and cannabis
@@ -3710,15 +3700,15 @@ density, and its city page leads with that rather than burying it.
 
 One source could have changed this and was deliberately not used. Boston's
 `Business Inventory` is a summer-2025 field survey carrying exactly this
-project's three buckets - 243 beauty services among them, plus clothing,
+project's three categories - 243 beauty services among them, plus clothing,
 jewellery and tailoring. Its own notes give the reason it cannot be used: it
 covers "every storefront in downtown Boston, as well as comprehensive data on
 3 major commercial corridors in Mattapan, Jamaica Plain, and Allston", which is
 37 grid cells of a city. A density surface built on a partial survey shows
 where surveyors walked rather than where commerce is, and mixing it in would
-have made four neighbourhoods read as three-bucket and the rest as two. It is
-recorded in `data_sources.md` as available and unused, with the trigger for
-revisiting it: a city-wide survey.
+have made four neighbourhoods read as three-category and the rest as two. It is
+listed under the United States on *Where this data comes from* as available and
+unused, with the trigger for revisiting it: a city-wide survey.
 
 
 **Toronto's general retail is ABSENT**, and that was not a choice.
@@ -3726,7 +3716,7 @@ revisiting it: a city-wide survey.
 Toronto licenses food and trades, and not general retail. There is no licence
 category for a grocer, a clothing shop, a pharmacy, a hardware store or general
 merchandise, so none of them exists in any register to map. What the Retail
-bucket holds instead is the **regulated slice alone** - the trades a city
+category holds instead is the **regulated slice alone** - the trades a city
 licenses because it wants to watch them: `VAPOUR PRODUCT RETAILER` (351),
 `SECOND HAND SHOP` (219), `PRECIOUS METAL SHOP` (85), `PAWN SHOP` (41),
 `SMOKE SHOP` (28), `PET SHOP` (20), `SECOND HAND SALVAGE SHOP` (10) and
@@ -3737,9 +3727,9 @@ against 13,385 food service and 4,042 personal services. So
 **read Toronto's Retail layer as a narrow regulated slice of what is actually
 on the street, and the balance between its three categories as a fact about
 Toronto's licensing rather than about its high streets.** This is
-`multi-source-city`'s "Retail - regulated slice" archetype, and unlike New York -
-whose four registries at least covered all three buckets thinly - there is no
-second source at any level of government that would fill Toronto's gap.
+Toronto's licensing rather than about its high streets.** Unlike New York,
+whose four registries at least covered all three categories thinly, Toronto has
+no second source at any level of government that would fill the gap.
 
 **The Retail category is drawn rather than omitted**, decided by the owner on
 2026-09-21. The rejected alternative was leaving Retail out and drawing two
@@ -3788,7 +3778,7 @@ of 5.7 points.
 - **Vancouver's unit designators cannot indicate a residence at all**, so the
   usual APT/UNIT proxy must not be read there. The city uses "Unit" generically
   for commercial suites: 12,803 of 29,660 mappable rows say `Unit` against
-  **two** that say `Apt`. `scripts/check_personal_exposure.py` therefore
+  **two** that say `Apt`. The project's privacy check therefore
   reports a 6.73% "person-like name at a residential unit" figure for Vancouver
   that is an artifact of the city's conventions - San Diego's measurement gap
   inverted, a false high rather than a false low. The zoning measure above is
@@ -3839,8 +3829,8 @@ request, not as a question to be debated first.
 
 The same commitment is made to the agencies whose data this project uses: if a
 publisher asks for its data to stop being displayed, it stops. That is written
-out in full in `data_sources.md`, under "Commitment: removal requests are
-honoured, not argued".
+out in full on *Where this data comes from*, under "Commitment: removal requests
+are honoured, not argued".
 
 **And a city can come off for a reason nobody raised.** One city's terms
 are unresolved, and it is Philadelphia. The dataset page there binds a reader
@@ -3855,11 +3845,9 @@ prohibition, under an Open Data Program meant for public reuse - it would.
 confirms the restrictive reading, Philadelphia is removed without waiting for
 a request.** The same statement appears in the footer of every page.
 
-Two sibling questions were investigated at the same time and closed, which is
-worth recording because both had been assumed to be the same shape:
-**SEPTA** expressly licenses its datasets for use, reproduction and
-redistribution, and claims only its Logo as a trademark - not line names, not
-route colours. **Miami-Dade County** does publish a Terms of Use for its Open
-Data Hub, contrary to an earlier note here that no document existed; it
+Two related questions were checked at the same time and closed. **SEPTA**
+expressly licenses its datasets for use, reproduction and redistribution, and
+claims only its Logo as a trademark - not line names, not route colours.
+**Miami-Dade County** does publish a Terms of Use for its Open Data Hub; it
 contains an accuracy disclaimer and nothing about reuse, as do the dataset's
 own licence field and the county-wide user agreement.

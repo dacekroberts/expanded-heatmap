@@ -45,9 +45,8 @@ st.markdown(
 
 - Three lines are drawn: the **Luas Red Line**, the **Luas Green Line** and the **DART**, each
   labelled on the map and in the legend.
-- Commuter and InterCity services are not: Iarnrod Eireann runs them over the same tracks, but
-  they are not urban rail, and they are left out here as commuter rail is on most maps on this
-  site.
+- Commuter and InterCity trains are not drawn. Iarnrod Eireann runs them over the same tracks,
+  but they are not urban rail, and most maps on this site leave commuter rail out.
 - The map covers **four local authorities** - Dublin City, Fingal, South Dublin and Dun
   Laoghaire-Rathdown - rather than the city alone, because the Luas and the DART run through all
   four.
@@ -59,11 +58,11 @@ st.markdown(
 - **The pins carry addresses, not business names.** Ireland's rateable valuation register,
   published by Tailte Eireann, records *premises* rather than occupiers - it has no trade-name
   column, no occupier column and no owner column.
-- Each pin therefore shows the address a valuation is filed against, and the use recorded against
-  it. That is the whole of what the source knows, and it is why this map names no businesses.
-- Categories are the register's own recorded uses, grouped into three. A premises can carry more
-  than one use - a shop with offices above it, a salon behind a shopfront - in which case the more
-  specific trading use is the one shown.
+- Each pin therefore shows the address a valuation is filed against and the use recorded against
+  it, which is all the source knows.
+- Categories are the register's own recorded uses, grouped into three. Where a premises carries
+  more than one use (a shop with offices above it, a salon behind a shopfront), the more specific
+  trading use is shown.
 
 **Reading the map**
 

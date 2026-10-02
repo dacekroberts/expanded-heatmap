@@ -52,9 +52,9 @@ st.markdown(
   where Edmonton Transit Service's published line ends; its weekend trips on to Century Park
   are not drawn.
 - **Three of this system's apparent stations are not stations.** Every train stops at two
-  garage access points and a tail track, and at none of the three can a passenger get on or
-  off. In the schedule data they are indistinguishable from real stations, and counting them
-  is why this project's own earlier reading of Edmonton came out too low per station.
+  garage access points and a tail track, but no passenger can get on or off at any of them.
+  The schedule data lists them like real stations; they are left off this map, and counting
+  them is why this project's own earlier reading of Edmonton came out too low per station.
 - Every remaining station is inside the city, so nothing was dropped for lying in another
   municipality.
 
@@ -75,8 +75,8 @@ st.markdown(
 - **Retail is the largest category here**, which is the reverse of Calgary's balance and is
   again a fact about licensing rather than about streets.
 - Edmonton licenses general retail in several size bands plus a convenience-store class, so
-  ordinary shops are well covered — where a number of large US cities license no general
-  retail at all, and their maps show almost none of it.
+  ordinary shops are well covered, unlike several large US cities that license no general
+  retail at all and whose maps show almost none of it.
 - **Personal services is overstated, by a knowable amount.** Edmonton's accredited "Health
   Enhancement Centre" licence covers massage and spa premises, which belong in this
   category, but also physiotherapy and chiropractic clinics, which are regulated health care

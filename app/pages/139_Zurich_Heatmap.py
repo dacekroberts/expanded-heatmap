@@ -78,16 +78,16 @@ st.markdown(
 - They are in VBZ's colours as OpenStreetMap records them, except where two lines share one: trams
   9, 11, 15, 50 and 51 take a shade of their own, and tram 10's magenta is darkened so it stays
   distinct from the Food service dots.
-- Zurich has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+- Zurich has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets
   rings.
 - **Tram stops sit closer together than metro stations**, a median of 282 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
 - Trams 50 and 51 run only while the Bahnhofquai stop is rebuilt, until December 2026.
 - Buses, the S-Bahn and the Forchbahn (S18) are not drawn: the Forchbahn is a suburban railway,
   and its four stops in the city are all tram stops too.
-- Trams 12 and 20, the Glattalbahn's airport line and the Limmattalbahn, run almost entirely
-  outside the city and are not drawn, so two of tram 20's stops in the city, Bahnhof Altstetten
-  and Seidelhof, are on no drawn line and get no ring.
+- Trams 12 and 20 (the Glattalbahn's airport line and the Limmattalbahn) run almost entirely
+  outside the city and are not drawn. Two of tram 20's stops in the city, Bahnhof Altstetten and
+  Seidelhof, are on no drawn line, so they get no ring.
 - The map covers the **Stadt Zürich**, the city itself. Trams 2, 4, 10 and 50 run on into
   Schlieren, Zollikon, Opfikon, Kloten and Rümlang, so their 15 stops there are left out.
 - The lines are still drawn to their ends, but those stops get no ring and their businesses are

@@ -108,8 +108,8 @@ st.markdown(
 - **Read the density as a register, not a street survey.** SIRENE records where a business is
   *registered*, and some registered establishments have no customer-facing shopfront; nothing in
   the data says which.
-- Against OpenStreetMap's mapped restaurants in the same commune, where the two schemes mean
-  nearly the same thing, this map carries about **1.3 times** as many points, level with Toulouse
+- Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the same way, this
+  map has about **1.3 times** as many in the commune as OpenStreetMap does: level with Toulouse,
   and closer to OpenStreetMap's count than Paris, Marseille or Lille.
 - **About two storefronts in three sit within a station ring.** The category toggles show every
   storefront; the rings show the share the two lines actually reach.

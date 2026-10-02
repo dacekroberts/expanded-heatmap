@@ -1,18 +1,17 @@
 # Data sources — Latvia
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Latvia rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+The Latvia part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country on 2026-09-27.
+The numbered notices this project must display, the removal-request
+commitment and the deploy gate apply to every country and are kept in
+that record.
 
 ## Business registries
 
 | City | Source | Provides | Endpoint | Filter at download | Retrieved |
 |---|---|---|---|---|---|
 | Riga | **VID excise-licence register** (`pdb_akclicences_odata.csv`, State Revenue Service, via data.gov.lv, daily) - premises licensed to sell alcohol or tobacco, with a place type; current licences at a still-open place, food-service types only, one per address and kind (the holder is never read), placed by joining the address to Riga's own address points | Food service: **1,469** placed (763 cafés, 412 bars, 298 restaurants...), 48 unplaced; the kind and street address shown, the unit number dropped (owner) | `https://data.gov.lv/dati/dataset/a1adb6dd-a4a1-41c9-9177-c1cd942e012e/resource/f88cd5ea-61b0-42e8-a0a8-25504dfbcdc9/download/pdb_akclicences_odata.csv` | none server-side; `Statuss` Spēkā and an empty (two-space) place-ended date in step 2; columns selected by exact name - never `Nodoklu_maksatajs` or `NMR_kods` | 2026-09-25 |
-| Riga | **VZD cadastre premise groups** (`premisegroup.zip`, part 6 of the Cadastre Information System open text data) of use class 1230 whose name reads as a shop or a service, placed at the building footprint in the Riga cadastral map (`0001000_kk_shp.zip`) by building cadastre number | Shops and services: **5,261** (5,707 named, 5,673 placed, 412 in degrading buildings dropped) | `https://data.gov.lv/dati/dataset/be841486-4af9-4d38-aa14-6502a2ddb517/resource/5d8b1cfa-1e67-4b77-a6ac-b4e37eba0d7e/download/premisegroup.zip`; `https://data.gov.lv/dati/dataset/b28f0eed-73b0-4e44-94e7-b04b11bf0b69/resource/bf88b763-98b8-445d-a51f-b76f45c362c5/download/0001000_kk_shp.zip` | ATVK 0001000; use kind 1230; the staging session's name rules (first match wins) | 2026-09-25 |
+| Riga | **VZD cadastre premise groups** (`premisegroup.zip`, part 6 of the Cadastre Information System open text data) of use class 1230 whose name reads as a shop or a service, placed at the building footprint in the Riga cadastral map (`0001000_kk_shp.zip`) by building cadastre number | Shops and services: **5,261** (5,707 named, 5,673 placed, 412 in degrading buildings dropped) | `https://data.gov.lv/dati/dataset/be841486-4af9-4d38-aa14-6502a2ddb517/resource/5d8b1cfa-1e67-4b77-a6ac-b4e37eba0d7e/download/premisegroup.zip`; `https://data.gov.lv/dati/dataset/b28f0eed-73b0-4e44-94e7-b04b11bf0b69/resource/bf88b763-98b8-445d-a51f-b76f45c362c5/download/0001000_kk_shp.zip` | ATVK 0001000; use kind 1230; this project's name rules (first match wins) | 2026-09-25 |
 | Liepāja | **VID excise-licence register**, Riga's national file (`data/riga/raw/`, last_modified 2026-09-24), through `pipeline/countries/latvia_register.py` - Riga's rules unchanged; placed on **VZD's national address file** (next table, Geocoding) instead of Riga's own points | Food service: **131** premises (62 cafés, 45 bars, 21 restaurants, 3 pizzerias), **123** placed (93.9%: 110 exact, 13 with the unit dropped), 8 unplaced | Riga's row | Riga's, plus the address tail `, Liepāja` | 2026-09-25 (Riga's cache) |
 | Liepāja | **VZD cadastre premise groups**, Riga's national `premisegroup.zip` (last_modified 2026-09-20), ATVK **0005000**, Riga's name rules; placed on Liepāja's cadastral map `0005000_kk_shp.zip` (fetched 2026-09-30, last_modified 2026-09-26) | Shops and services: **579** (771 premise groups of class 1230; 579 named as shops, services or fuel; all placed). Liepāja publishes no degrading-buildings list | `0005000_kk_shp.zip` resolved by name in dataset `b28f0eed-73b0-4e44-94e7-b04b11bf0b69` through CKAN | ATVK 0005000; use kind 1230 | 2026-09-30 |
 | Daugavpils | **VID excise-licence register**, Riga's national file, through `latvia_register.py` - Riga's rules; placed on VZD's national address file | Food service: **98** premises (52 cafés, 30 bars, 13 restaurants...), **94** placed (95.9%: 84 exact, 10 with the unit dropped), 4 unplaced | Riga's row | Riga's, plus the address tail `, Daugavpils` | 2026-09-25 (Riga's cache) |

@@ -84,7 +84,7 @@ st.markdown(
 
 **The businesses**
 
-- From the **Food and Environmental Hygiene Department's licence registers**, which cover
+- From the **Food and Environmental Hygiene Department's licence registers** (FEHD), which cover
   restaurants and food shops but not general retail: a clothes shop, an electronics shop or a
   hair salon needs no licence from FEHD.
 - So **this map is mostly restaurants**, and its other two categories are narrower than
@@ -96,10 +96,10 @@ st.markdown(
 
 **Reading the map**
 
-- The registers give an address but no location. FEHD publishes the same registers with a
-  location for each licence on the Government's spatial data portal (CSDI), and this map uses
-  FEHD's own points, matched to the day's register by licence number; the few licences that have
-  no point there yet are left off.
+- The registers give an address but no location. FEHD also publishes them on the Government's
+  spatial data portal (CSDI), with a location for each licence.
+- This map uses those points, matched to the day's register by licence number; the few licences
+  with no point there yet are left off.
 - Premises on different floors of one building share one point, so a tower of restaurants shows
   as a stack of dots in one place.
 """

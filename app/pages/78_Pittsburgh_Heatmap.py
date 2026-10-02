@@ -76,8 +76,7 @@ st.markdown(
   discount stores that sell food).
 - No open register of other shops or of personal services covers the city, so clothes shops,
   hairdressers and the like are not on this map, except where they also sell food.
-- A facility is shown when the department lists it as active; this list was last updated on
-  2025-08-27.
+- A facility is shown when the department lists it as active.
 - The list files some other kitchens with the restaurants and shops, so these are left out by name.
   A name rule is imperfect, and a few such kitchens may remain.
 - Inspection results are not shown.

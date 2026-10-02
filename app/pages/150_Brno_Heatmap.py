@@ -75,7 +75,8 @@ st.markdown(
   in the operator's colours; their routes are drawn from OpenStreetMap, because the timetable data
   carries none.
 - Buses, trolleybuses and trains are not drawn, nor the heritage tram H4 or the event shuttle P1.
-- Brno has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets rings.
+- Brno has no metro, so its trams are its rapid transit, as in Riga. Every tram stop
+  here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 336 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
 - The map covers the **city of Brno**. Line 2's last two stops, in Modřice beyond the city
@@ -84,8 +85,8 @@ st.markdown(
 **The businesses**
 
 - Businesses come from the Czech **register of active business establishments** (ROS02), which
-  records each place where a business operates at that place's own address, placed using the
-  national address register (RÚIAN), the same sources as Prague's map.
+  records each place a business operates at that place's own address. The national address
+  register (RÚIAN) puts each one on the map; Prague's map uses the same two sources.
 - What each establishment does comes from the Czech Statistical Office's business register (RES).
   RES records one main activity per business, so every establishment inherits its owner's, and a
   chain's office or warehouse counts as the chain's trade.

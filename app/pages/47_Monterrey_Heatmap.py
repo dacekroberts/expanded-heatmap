@@ -72,8 +72,8 @@ st.markdown(
 
 - **The businesses are a census, not a licence register, and that changes what the map
   means.** Most cities here are built from business licences: a record of who registered.
-  Monterrey, like Mexico City and Guadalajara, is built from INEGI's DENUE, compiled by
-  surveying premises and recording the name on the shopfront.
+  Monterrey, like Mexico City and Guadalajara, is built from DENUE, the national business register of INEGI (Mexico's
+  statistics agency), compiled by surveying premises and recording the name on the shopfront.
 - It is far more complete than a licence register, so the density shown here is **not
   comparable** with the licence-register cities' — read it as a fact about how the data was
   collected as much as about Monterrey's streets.

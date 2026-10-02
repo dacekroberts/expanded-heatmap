@@ -53,28 +53,26 @@ st.markdown(
     """
 **The businesses**
 
-- **All three categories come from one register here**, which is unusual in this project.
-  Washington's Basic Business License register licenses restaurants, shops and salons alike, so
-  unlike Boston and Philadelphia, where a whole category had no source at all, this map shows
-  retail, food service and personal services from a single file.
+- **All three categories come from one register here**, which is unusual in this project:
+  Washington's Basic Business License register licenses restaurants, shops and salons alike. In
+  Boston and Philadelphia, by contrast, a whole category has no source at all.
 - **Most of that register is not a business.** Of the 61,329 active licences inside the District,
   37,195 are residential rentals, and a further 11,074 are "General Business", Washington's default
   category for offices. Both are excluded, leaving about 6,500 licences at roughly 5,200 premises.
   A raw licence count for this city would describe its housing stock, not its high streets.
-- **One licence category is genuinely ambiguous, and it is a large one.** Washington issues a
-  "Delicatessen" licence to sandwich shops and cafés, and also to corner shops and convenience
-  stores. It is counted as food service, which fits most of them, but about 180 premises here hold
-  it with no other descriptive licence and could honestly read either way. That is a fact about
-  Washington's licence categories, not about its shops.
+- **One large licence category is ambiguous.** Washington issues a "Delicatessen" licence to
+  sandwich shops and cafés, and also to corner shops and convenience stores. It is counted as food
+  service, which fits most of them, but about 180 premises here hold it with no other descriptive
+  licence and could read either way.
 - **Some pins were placed from their address rather than the register.** The published latitude
   and longitude are unusable (literally 39 and -77 on every row), and the register's real
   coordinates are missing on about 7% of these premises.
 - Those were located from their street addresses with the Census Bureau's geocoder: 387 premises,
   each checked to fall inside the District's boundary. 64 could not be placed and are absent.
-- **One limitation of the privacy screening, stated rather than glossed.** This project checks
-  whether a published name could be a person's name at their own home. Washington's addresses carry
-  almost no apartment or suite designators, so that check has little to read and reports zero, a
-  gap in the measurement, not a proven result.
+- **A limit of the privacy check.** This project checks whether a published name could be a
+  person's name at their own home. Washington's addresses carry almost no apartment or suite
+  numbers, so the check has little to read: its zero is a gap in the measurement, not a proven
+  result.
 - What this city has instead is the register's own record of legal form: 14 pins, 0.36% of the
   map, are a sole proprietorship displaying what reads as a person's name, and each holds a licence
   that requires commercial premises.
@@ -87,15 +85,15 @@ st.markdown(
   it (32 in Virginia, 26 in Maryland), each listed with its state below.
 - A station in Arlington or Silver Spring would need Virginia's or Maryland's own business data,
   sourced separately.
-- All six lines keep a substantial presence inside the District, so none drops out of the map, and
-  every in-District station is kept: Metrorail is grade-separated throughout with its stations a
-  median 962 m apart, so nothing here needs the thinning Boston's Green Line takes.
+- All six lines keep a substantial presence inside the District, so none drops out of the map.
+  Every in-District station is kept: Metrorail is grade-separated throughout, with stations a
+  median 962 m apart, so none needs the thinning Boston's Green Line takes.
 
 Rail alignment data from WMATA's Metrorail GTFS feed.
 """
 )
 
-render_map_help('business categories')
+render_map_help('three business categories (Retail, Food service and Personal services)')
 render_excluded_stations("Washington D.C.")
 render_country_links('Washington D.C.')
 

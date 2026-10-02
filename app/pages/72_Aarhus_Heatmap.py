@@ -90,7 +90,7 @@ st.markdown(
   whose registered name marks it as one person's), the map shows its address instead of its
   name**, because such businesses are usually registered under the owners' own names. So does a
   supermarket registered under its franchisee's own name.
-- One catch-all category, *other personal services*, is left out, because most of it is people
+- One broad category, *other personal services*, is left out, because most of it is people
   working from their own premises; it also holds the city's tattoo studios, which are therefore
   missing from the map.
 - **About one storefront in four sits within a ring.**

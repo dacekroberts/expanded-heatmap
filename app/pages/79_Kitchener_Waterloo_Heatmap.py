@@ -78,7 +78,7 @@ st.markdown(
   like are not on this map.
 - A premises is shown when Public Health inspected it in the two years before the data's
   date; the data records no closings, so an inspection is the only sign that a place still
-  trades. A few premises opened since then and have no type yet; they are shown as
+  trades. A few premises opened after the data's date and have no type yet; they are shown as
   restaurants, or as personal services.
 - Kitchens in schools, daycares, care homes, churches, community centres and workplaces are
   left out by type, and so are caterers without a shop, banquet halls and food warehouses.

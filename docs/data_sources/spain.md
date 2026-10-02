@@ -1,11 +1,10 @@
 # Data sources — Spain
 
 Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Spain rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+record, split by country on 2026-09-27: this file holds the Spain rows
+of its tables and the sections about this country's sources. The numbered
+notices this project must display, the removal-request commitment and the
+deploy gate are in the main file, not here.
 
 ## Business registries
 
@@ -19,17 +18,12 @@ point, not here.
 ### Madrid — endpoints and findings, verified 2026-09-22
 
 **The first Spanish city, and the first anywhere in this project whose rail
-comes from an operator's ArcGIS feature services rather than a feed.** Country
-profile: `docs/spain_step0_endpoints.md`. Step 0 evidence and its checks:
-`docs/build_briefs/madrid.md` (13/13).
+comes from an operator's ArcGIS feature services rather than a feed.**
 
-**Businesses** — Ayuntamiento de Madrid, *Censo de locales, sus actividades y
-terrazas de hostelería y restauración*. `datos.madrid.es` is **CKAN 2.9.11 at
-the bare host** (an earlier screen recorded it unreachable on the path
-`/egob` — a fact about the guess). Package `200085-0-censo-locales`, resource
-**`200085-5-censo-locales`**, the locales × actividades join: 225,660 rows ×
-47 columns, **UTF-8 with BOM, semicolon-delimited**, coordinates in
-**EPSG:25830**.
+**Businesses**: Ayuntamiento de Madrid, *Censo de locales, sus actividades y
+terrazas de hostelería y restauración* (package and resource in the row
+above): 225,660 rows × 47 columns, **UTF-8 with BOM, semicolon-delimited**,
+coordinates in **EPSG:25830**.
 
 > **THE DOWNLOAD URL ROTS.** It embeds a build timestamp
 > (`200085_20260922_053829.csv`) that changes on every refresh, so the
@@ -74,13 +68,10 @@ layer **0 `M4_Estaciones`** (293 station-per-line points) and layer
 the premises data, so the build never reprojects for geometry.
 
 > **NOT the GTFS, and that is a LICENCE consequence rather than a preference.**
-> CRTM publishes the same network twice: a GTFS feed it stopped refreshing in
-> **2025-05-30**, and feature services it still edits (**2026-06-05**). Its
-> licence obliges a reuser to keep displayed information *"siempre
-> actualizada"*, which a feed abandoned sixteen months ago cannot satisfy.
-> `scripts/brief_check.py` watches the feature layers' `editingInfo.lastEditDate`
-> with the `arcgis_layer` check kind, because the pre-existing tripwire watched
-> the FEED and would have kept passing while the decision it guarded went stale.
+> CRTM stopped refreshing its GTFS on **2025-05-30** but still edits these
+> layers (**2026-06-05**), and its licence asks a reuser to keep displayed
+> information *"siempre actualizada"*. The Madrid row under Transit feeds below
+> gives the detail, including the check that watches the layers' edit date.
 
 **Boundary** — *Término municipal de Madrid*,
 `geoportal.madrid.es/fsdescargas/IDEAM_WBGEOPORTAL/LIMITES_ADMINISTRATIVOS/Termino_Municipal/Termino_Municipal.zip`
@@ -157,8 +148,7 @@ licences**, which is Spain's country-level pattern.
 > comment promises.
 >
 > This is a reasoned position on a clause that is clear once read in context,
-> not a generous reading of an ambiguous one — the distinction `read-licence`
-> step 8 draws. The full text is stored at
+> not a generous reading of an ambiguous one. The full text is stored at
 > `docs/licenses/crtm-licencia-de-uso.txt` so the reading can be checked against
 > the document rather than against this summary.
 
@@ -355,13 +345,10 @@ change that is made shall take effect as soon as it is published."*
 
 ### ✅ DECIDED 2026-09-22 — Barcelona is published on a DISCLOSED POSITION
 
-This section previously said a human should confirm the live page before
-publishing. That was attempted on 2026-09-22 and **the page returned
-hCaptcha** — *"PLEASE PROVE THAT YOU ARE HUMAN"* — which this project does not
-defeat. The owner's decision was to publish anyway, on a disclosed position,
-rather than hold the city. Recorded here because **a precondition that is
-knowingly not met has to say so**, rather than sit in the file reading like a
-plan somebody will get to.
+A human was to confirm the live terms page before publishing. That was
+attempted on 2026-09-22 and **the page returned hCaptcha** (*"PLEASE PROVE
+THAT YOU ARE HUMAN"*), which this project does not defeat. The owner decided to
+publish anyway, on a disclosed position, rather than hold the city.
 
 **What IS verified, live, today.** The *declared licence* needs no CAPTCHA:
 `package_show` on the CKAN API returns `license_id: CC-BY-4.0`, `license_title:

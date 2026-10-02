@@ -83,12 +83,13 @@ st.markdown(
   branch — are not drawn: suburban railways are left out of these maps unless they run like
   a metro, and these run every 30 to 60 minutes.
 - The map covers **Fortaleza with Caucaia, Maracanaú and Pacatuba**, the municípios the
-  network serves; Caucaia has no drawn station now that Linha Oeste is not drawn, and is
+  network serves; Caucaia has no drawn station, since Linha Oeste is not drawn, and is
   counted for its businesses only.
 
 **The businesses**
 
-- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
   Census enumerators walking every street recorded each establishment, what it was, and a
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of

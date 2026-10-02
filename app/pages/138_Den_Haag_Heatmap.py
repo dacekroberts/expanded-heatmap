@@ -72,13 +72,13 @@ st.markdown(
 - Fourteen HTM tram lines are drawn, **trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17 and 19, and
   RandstadRail 3, 4 and 34**, each labelled on the map and in the legend, redrawn from
   OpenStreetMap's route geometry, in OpenStreetMap's own colours.
-- Trams 10 and 34, for which it records none, are in colours this project chose, and trams 1 and
-  19, which share one colour, and 4 and 16, which nearly do, are shown a shade apart.
+- OpenStreetMap records no colour for trams 10 and 34, so they are in colours this project chose.
+  Trams 1 and 19, which share one colour, and 4 and 16, which nearly do, are shown a shade apart.
 - RandstadRail E, Rotterdam's metro line, has 4 of its 23 stops in the city, all served by
   RandstadRail 3 and 4 as well, and is not drawn. Buses, the short 9S tram working and
   national-rail (NS) trains are not drawn.
-- Den Haag has no metro of its own: its trams are its rapid transit, as Riga's are, so every tram
-  stop gets rings.
+- Den Haag has no metro of its own, so its trams are its rapid transit, as in Riga. Every tram
+  stop here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 326 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
 - The map covers the **Gemeente Den Haag**. Ten of the lines run on into Delft, Rijswijk,

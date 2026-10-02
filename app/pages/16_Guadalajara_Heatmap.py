@@ -57,19 +57,19 @@ st.markdown(
   short.
 - Stations across Guadalajara, Zapopan, San Pedro Tlaquepaque and Tlajomulco de Zúñiga are
   included. Tonalá is not included: no line reaches it.
-- **The line geometry comes from OpenStreetMap, not from a transit feed.** A GTFS feed for
-  Guadalajara does exist, but it contains three lines: building from it would have produced
-  a map missing an operating line, eight stations and twenty-one kilometres, while looking
+- **The line geometry comes from OpenStreetMap, not from a transit feed.** A transit feed
+  (GTFS) for Guadalajara does exist, but it has only three lines: a map built from it would
+  have lacked an operating line, eight stations and twenty-one kilometres while looking
   complete. OpenStreetMap has all four.
-- Where SITEUR publishes a station count, this map matches it: ten for Línea 2 and eight for
-  Línea 4.
+- Where SITEUR, the operator, publishes a station count, this map matches it: ten for
+  Línea 2 and eight for Línea 4.
 
 **The businesses**
 
 - **The businesses are a census, not a licence register, and that changes what the map
   means.** Most cities here are built from business licences: a record of who registered.
-  Guadalajara, like Mexico City, is built from INEGI's DENUE, compiled by surveying premises
-  and recording the name on the shopfront.
+  Guadalajara, like Mexico City, is built from DENUE, the national business register of INEGI (Mexico's
+  statistics agency), compiled by surveying premises and recording the name on the shopfront.
 - It is far more complete than a licence register, so the density shown here is **not
   comparable** with the licence-register cities' — read it as a fact about how the data was
   collected as much as about Guadalajara's streets.

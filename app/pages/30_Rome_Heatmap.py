@@ -79,8 +79,8 @@ st.markdown(
   Piazzale Flaminio to Montebello, **and Tram 8** — each labelled on the map and in the legend.
 - The metro is in ATAC's colours, with the B1 branch a shade lighter than line B so the two stay
   distinct.
-- The lines and stations are OpenStreetMap's, because the data Rome's transport agency publishes
-  comes with a condition that it be used for travel information.
+- The lines and stations come from OpenStreetMap, because Rome's transport agency publishes its
+  data on condition that it be used for travel information.
 - Suburban railways are left out of these maps unless, inside the city, they run like a metro. The
   Roma–Viterbo urban service does: its stations are under a kilometre apart, a train comes every
   10 to 15 minutes, and it serves the districts north of Flaminio that no metro line reaches.
@@ -112,8 +112,8 @@ st.markdown(
 
 - **Read the food-and-drink layer as an upper bound.** The register records no closing date, and
   it lists about 2.7 times as many restaurants, bars and cafés as OpenStreetMap maps in the city.
-- The difference is not concentrated in old registrations — the oldest premises are the likeliest
-  to match a mapped place — so part of it is OpenStreetMap under-mapping Rome's bars and part is
+- The difference is not concentrated in old registrations: the oldest premises are the likeliest
+  to match a mapped place. So part of it is OpenStreetMap under-mapping Rome's bars, and part is
   recently registered premises that may not have opened.
 - The newest register file is from **July 2025**.
 - **About three storefronts in five sit within a station ring**, because Rome's rail, dense in the

@@ -80,8 +80,8 @@ st.markdown(
 - Trams run about every 10 to 15 minutes by day on route 1 and every 20 to 30 minutes on routes 3
   and 5; routes 2 and 4 run about once an hour.
 - Buses and suburban trains are not drawn.
-- Daugavpils has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
-  rings.
+- Daugavpils has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here
+  gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 287 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
 - The map covers the **city of Daugavpils**.

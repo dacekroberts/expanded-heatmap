@@ -83,12 +83,13 @@ st.markdown(
 - The two diesel VLT lines, to Curado and to Cabo, are not drawn: suburban railways are left
   out of these maps unless they run like a metro, and their stations are 3 to 4 km apart.
 - The map covers **Recife with Jaboatão dos Guararapes, Cabo de Santo Agostinho and
-  Camaragibe**; Cabo has no drawn station now that its VLT is not drawn, and is counted for
+  Camaragibe**; Cabo has no drawn station, since its VLT is not drawn, and is counted for
   its businesses only.
 
 **The businesses**
 
-- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
   Census enumerators walking every street recorded each establishment, what it was, and a
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of

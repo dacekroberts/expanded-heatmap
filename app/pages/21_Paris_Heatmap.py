@@ -84,7 +84,7 @@ st.markdown(
 - Trams T3a and T3b are drawn too. They circle the city along the boulevards des Maréchaux and
   reach the edge districts between the Métro's radial ends.
 - Île-de-France Mobilités gives T3a and T3b the same colours as Lignes 5 and 12, so this map draws
-  them in lighter shades of its own. Those two colours are this project's, not RATP's.
+  them in two lighter shades of its own, not RATP's.
 - The map covers the **commune of Paris**. Métro stations outside it are not drawn, and every one
   is listed below.
 - RER and Transilien are absent by a rule this project applies everywhere: they are commuter rail.

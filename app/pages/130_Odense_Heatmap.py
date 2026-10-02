@@ -70,7 +70,7 @@ st.markdown(
 - One tram line is drawn, **Odense Letbane**, labelled on the map and in the legend, redrawn from
   OpenStreetMap's route geometry, in a colour this project chose, since the source records none.
 - Buses and regional trains are not drawn.
-- Odense has no metro: its tram is its rapid transit, as Riga's trams are, so every tram stop gets
+- Odense has no metro, so its tram is its rapid transit, as in Riga. Every tram stop here gets
   rings.
 - **Tram stops sit closer together than metro stations**, a median of 430 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
@@ -87,7 +87,7 @@ st.markdown(
   whose registered name marks it as one person's), the map shows its address instead of its
   name**, because such businesses are usually registered under the owners' own names. So does a
   supermarket registered under its franchisee's own name.
-- One catch-all category, *other personal services*, is left out, because most of it is people
+- One broad category, *other personal services*, is left out, because most of it is people
   working from their own premises; it also holds the city's tattoo studios, which are therefore
   missing from the map.
 - **About two storefronts in five sit within a ring.**

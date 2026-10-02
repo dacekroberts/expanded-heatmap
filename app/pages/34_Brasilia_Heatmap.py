@@ -80,12 +80,13 @@ st.markdown(
 - Two lines are drawn — **Metrô-DF's Linha Verde and Linha Laranja** — each labelled on the
   map and in the legend, in the colours OpenStreetMap records.
 - The lines and stations are OpenStreetMap's.
-- 104 Sul and Onoyama, still being built, are not drawn.
+- Two stations still being built, 104 Sul and Onoyama, are not drawn.
 - The map covers the whole **Federal District**, which is a single município.
 
 **The businesses**
 
-- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
   Census enumerators walking every street recorded each establishment, what it was, and a
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of

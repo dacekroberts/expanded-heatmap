@@ -95,7 +95,8 @@ st.markdown(
 
 **The businesses**
 
-- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
   Census enumerators walking every street recorded each establishment, what it was, and a
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of

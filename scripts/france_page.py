@@ -32,7 +32,8 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 SCREEN = ROOT / "data" / "_staging_scratch_2026-09-27" / "second_cities" / "france"
-NUMBERS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six"}
+NUMBERS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven",
+           8: "Eight", 9: "Nine"}
 EPCI_NAMES = {
     "bordeaux": "Bordeaux Métropole", "nantes": "Nantes Métropole",
     "grenoble": "Grenoble-Alpes Métropole", "rouen": "the Métropole Rouen Normandie",
@@ -122,7 +123,8 @@ def scope_bullets(cfg, name, m):
     if cfg.SCOPE == "regional":
         n = len(cfg.EXPECTED_SERVED_COMMUNES)
         verb = "the métro serves" if slug == "rouen" else "the trams serve"
-        return [f"The map covers the **{n} communes of {EPCI_NAMES[slug]}** that {verb}."]
+        return [f"The map covers the **{NUMBERS.get(n, str(n)).lower()} communes of "
+                f"{EPCI_NAMES[slug]}** that {verb}."]
     text = f"The map covers the **commune of {name}**."
     if not m["excluded"]:
         return [text]
@@ -181,8 +183,8 @@ def first_bullets(cfg, name, operator):
                 f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}.",
                 "Rouen's métro is a light rail running mostly on the street, so every stop "
                 "gets rings."]
-    rapid = (f"{name} has no metro: its trams are its rapid transit, as Riga's are, so "
-             f"every tram stop gets rings.")
+    rapid = (f"{name} has no metro, so its trams are its rapid transit, as in Riga. Every "
+             f"tram stop here gets rings.")
     if slug == "brest":   # approved departure, owner 2026-09-30
         trams = [cfg.LINE_NAMES[k] for k in cfg.LINE_KEYS if k != "C"]
         return [f"Two {operator} tram lines and the cable car are drawn, "
@@ -214,11 +216,9 @@ def prose(cfg, name, operator, m):
         ]),
         bullets("The businesses", [
             "Businesses come from **SIRENE**, France's national register of établissements, "
-            "joined to INSEE's geolocation file, the same sources as Paris, Marseille, "
-            "Toulouse, Lille and Rennes.",
-            f"About {share}% of active establishments here are marked non-diffusible by "
-            "INSEE, which withholds their name, address and coordinates together, so they "
-            "never reach this map.",
+            "joined to INSEE's geolocation file, the same sources as the other French maps.",
+            f"INSEE withholds the name, address and coordinates of about {share}% of active "
+            "establishments here (those it marks non-diffusible), so they never reach this map.",
             "Where SIRENE records no shop sign or trading name, the dot shows the address "
             "instead.",
             f"**About {round(m['in_ring'] * 100)}% of storefronts sit within a ring.**",
@@ -227,9 +227,9 @@ def prose(cfg, name, operator, m):
             "**Read the density as a register, not a street survey.** SIRENE records where a "
             "business is *registered*, and some registered establishments have no "
             "customer-facing shopfront; nothing in the data says which.",
-            f"Against OpenStreetMap's mapped restaurants in the commune of {name}, where the "
-            f"two schemes mean nearly the same thing, this map carries about "
-            f"**{m['osm_ratio']:.1f} times** as many points.",
+            f"Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the "
+            f"same way, this map has about **{m['osm_ratio']:.1f} times** as many in the "
+            f"commune of {name} as OpenStreetMap does.",
         ]),
     ])
 

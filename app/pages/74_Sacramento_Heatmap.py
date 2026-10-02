@@ -78,9 +78,9 @@ st.markdown(
   operating in the city. A licence is counted only if it is active and has not passed its expiry
   date.
 - The register gives an address but no location, so each storefront is placed by the US Census
-  Bureau's geocoder and kept only if the point falls inside the city, because a Sacramento postal
-  address also covers parts of the unincorporated county. About one address in fifty could not be
-  placed.
+  Bureau's geocoder. It is kept only if the point falls inside the city, because a Sacramento
+  postal address also covers parts of the unincorporated county. About one address in fifty could
+  not be placed.
 - Businesses whose address the City withholds ("on file") cannot be placed at all; most are run
   from home.
 - **Where a business name reads as a person's, the map shows the kind of business instead** (for

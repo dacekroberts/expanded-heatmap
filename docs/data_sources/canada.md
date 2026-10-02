@@ -1,11 +1,10 @@
 # Data sources — Canada
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Canada rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+The Canada part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country on 2026-09-27.
+The numbered notices this project must display, the removal-request
+commitment and the deploy gate apply to every country and are kept in
+that record.
 
 ## Business registries
 
@@ -26,8 +25,7 @@ point, not here.
 **Edmonton's register publishes NO name column but the business's**, as
 Madrid's does. No registrant, owner, licensee or contact field exists, so its
 privacy position is structural rather than measured: no pin *can* be a person's
-name. `pipeline/edmonton/fetch_sources.py` asserts this at download rather than
-assuming it. Its `licencetype` field separates commercial premises from
+name. The download checks this rather than assuming it. Its `licencetype` field separates commercial premises from
 `Home Based` (14,114), `Non-Resident` (2,108) and two individual-held types, so
 Edmonton needs no residence inference at all — and the City replaces the
 address with `<REDACTED FOR PRIVACY>` on 4,074 rows, **taking the coordinates
@@ -43,12 +41,12 @@ units), which takes the match from 48.1% to **93.8%** of storefront rows.
 
 **Its `MUNICIPALITY_NAME` is NOT a city filter**, despite looking like one: it
 holds the six pre-1998 municipalities that amalgamated into Toronto, so matching
-"Toronto" keeps 30% of the city. Los Angeles' `CITY_KEEP` trap. The boundary
-polygon (`regional-municipal-boundary`, 641.4 km²) is the check.
+"Toronto" keeps 30% of the city, the same trap as Los Angeles' city names. The
+boundary polygon (`regional-municipal-boundary`, 641.4 km²) is the check.
 
 **Toronto also publishes THREE personal columns** — `Client Name`, `Business
-Phone`, `Business Phone Ext.` — and step 2 excludes them at `usecols`, so they
-never enter the process. The Canada profile recorded one of the three.
+Phone`, `Business Phone Ext.` — and the build never reads them. The Canada
+profile recorded one of the three.
 
 Vancouver, Surrey, Montréal and Calgary were built with their endpoints recorded
 in `docs/canada_step0_endpoints.md` and their notices below, but not in these

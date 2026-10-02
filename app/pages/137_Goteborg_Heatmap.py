@@ -72,11 +72,11 @@ st.markdown(
 **The trams**
 
 - Thirteen Göteborgs Spårvägar tram lines are drawn, **Tram 1 to Tram 13**, each labelled on the
-  map and in the legend, redrawn from OpenStreetMap's route geometry, in OpenStreetMap's own
-  colours, line 4's made a little lighter so it stands apart from the dots.
+  map and in the legend, redrawn from OpenStreetMap's route geometry. They are in OpenStreetMap's
+  own colours, with line 4's made a little lighter so it stands apart from the dots.
 - Buses, ferries and commuter trains are not drawn, and neither is Lisebergslinjen, the heritage
   tram line.
-- Göteborg has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+- Göteborg has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets
   rings.
 - **Tram stops sit closer together than metro stations**, a median of 390 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
@@ -95,8 +95,7 @@ st.markdown(
 - **This map shows food only, not three categories.** The register lists every premises the city's food
   control has registered: restaurants, cafés and bars, and food shops from kiosks to
   supermarkets, shown as Food service and Food shops.
-- It holds food premises only, so **clothes shops, hairdressers and the like are not on this
-  map**.
+- So **clothes shops, hairdressers and the like are not on this map**.
 - Where the register gives a premises no type, it is shown only if its name identifies a
   restaurant or a food shop, and its pin is marked "classified from its name".
 - **About three storefronts in four sit within a ring.**

@@ -59,12 +59,11 @@ st.markdown(
 - Each of the eleven (the numbered Manhattan trunks, the lettered Brooklyn and Queens lines, the
   three shuttles and the Staten Island Railway) is labelled directly on the map and in the legend,
   and a trunk's branches are drawn wherever its services diverge.
-- **The station rings are smaller here.** Stations sit a median 480 m apart, so the 0.6-mile rings
-  most cities here use would reach past the next two stations in every direction and merge into one
-  wash over Manhattan. These rings run to 0.3 mi instead.
-- Like every city on this site the rings start switched off, and they read most clearly around the
-  outer-borough and Staten Island stations. Turn them on from the layer control at the top left,
-  along with the three business categories.
+- **The station rings are smaller here, reaching 0.3 mi instead of the usual 0.6.** Stations sit a
+  median 480 m apart, so 0.6-mile rings would reach past the next two stations in every direction
+  and merge into one wash over Manhattan.
+- The rings start switched off, as on every city on this site, and read most clearly around the
+  outer-borough and Staten Island stations.
 
 **The businesses**
 
@@ -72,10 +71,9 @@ st.markdown(
   the Health Department's restaurant permits, grocery and bodega retail from the State's retail food
   store licences, salons and barbers from the State's appearance-enhancement licences, and a narrow
   slice of regulated retail from the city's own Consumer and Worker Protection licences.
-- That has a consequence worth stating plainly: **the Retail category here covers less of the trade
-  than it does in most cities on this site.** A clothing shop or a bookshop needs no licence
-  from any of these four registries, so it is simply absent, while restaurants appear because the
-  city inspects them.
+- So **the Retail category here covers less of the trade than in most cities on this site.** A
+  clothing shop or a bookshop needs no licence from any of these four registries, so it is simply
+  absent, while restaurants appear because the city inspects them.
 - Read the balance between categories as a fact about New York's licensing, not about its high
   streets.
 - Where one business appears in two registries it is counted once, matched on address and name; a
@@ -83,7 +81,7 @@ st.markdown(
 """
 )
 
-render_map_help()
+render_map_help('three business categories (Retail, Food service and Personal services)')
 render_excluded_stations("New York")
 render_country_links('New York')
 

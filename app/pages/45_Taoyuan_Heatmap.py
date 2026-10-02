@@ -81,8 +81,8 @@ st.markdown(
 **The businesses**
 
 - From Taiwan's **national business tax register** (Fiscal Information Agency), which lists every
-  trading location — a company's branches as their own rows — with an address and an industry
-  code. Shops, food service and personal services are read from the code.
+  trading location, each branch of a company separately, with an address and an industry code.
+  Shops, food service and personal services are read from the code.
 - Brands trading inside a department store are generally not registered at its address, so a
   department store tends to appear as a single point.
 

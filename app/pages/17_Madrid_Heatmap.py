@@ -64,9 +64,9 @@ st.markdown(
   is close to Montréal's for that reason.
 - It is **not comparable** with the licence-register cities, where what is counted is a
   registration rather than a shopfront.
-- Retail, food service and personal services, as the register's own activity classification
-  defines them. Hotels and tourist flats are excluded - they are accommodation rather than food
-  service.
+- The map counts retail, food service and personal services as the register's own activity
+  classification defines them. Hotels and tourist flats are excluded, as accommodation rather than
+  food service.
 
 **Reading the map**
 

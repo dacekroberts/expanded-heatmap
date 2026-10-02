@@ -1,11 +1,10 @@
 # Data sources — United States
 
 Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-United States rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+record, split by country on 2026-09-27: this file holds the United States rows
+of its tables and the sections about this country's sources. The numbered
+notices this project must display, the removal-request commitment and the
+deploy gate are in the main file, not here.
 
 ## Business registries
 
@@ -51,22 +50,20 @@ point, not here.
 | New Orleans | City of New Orleans **Active Occupational Licenses** (Socrata `iqay-p646`, data.nola.gov, 16,521 licences, updated daily; a point on every row, 0,0 where ungeocoded) | All three buckets, by `businesstype` - the City's own text taxonomy, 486 values, each mapped to the NAICS code its title names (`pipeline/taxonomies/nola_businesstype.py`) | `https://data.nola.gov/resource/iqay-p646.json`, explicit `$select`; `https://data.nola.gov/api/views/iqay-p646.json` read first (fetch stops if the licence is no longer CC0) | every row; ⚠️ `ownername` and `businessphone` are never requested, and fetch and step 2 both assert it. 4,970 in the buckets -> 4,751 placed -> 4,750 inside the city (TIGER) -> **4,689 premises**; 808 show the address (no business name, or a person's) | 2026-09-30 |
 
 The Philadelphia parcel join exists to answer one privacy question the address
-text cannot: **is this "business" someone's home?** Only two derived values are
-selected — the City's own `category_code_description` land-use category, and a
-boolean for whether a homestead exemption is claimed (Philadelphia grants that
-only on an owner's primary residence). The exemption *amount* is not
-downloaded, and no mailing address is downloaded at all. Neither value is ever
-published: the rendered map emits only name, category, station and ring. Same
-"City of Philadelphia License" as the licence data, already recorded below.
+text cannot: **is this "business" someone's home?** It selects only the two
+derived values in the row above (Philadelphia grants a homestead exemption only
+on an owner's primary residence), and neither is ever published: the rendered
+map emits only name, category, station and ring. Same "City of Philadelphia
+License" as the licence data, recorded below.
 
-New York needs four because it has **no general business licence** — see
-`pipeline/taxonomies/new_york.py`. Most cities here need one.
+New York needs four sources because it has **no general business licence**.
+Most cities here need one.
 
 Philadelphia is the opposite lesson: a **multi-source hunt that came back
-empty**, which is why it maps two buckets from one registry rather than three
-from several. Each archetype in the `multi-source-city` skill was checked live
-on 2026-09-21 and failed, and each is recorded here so it is not re-checked
-from scratch:
+empty**, which is why it maps two of the three business categories from one
+registry rather than all three from several. Each kind of second source was
+checked live on 2026-09-21 and failed, and each is recorded here so it is not
+checked again from scratch:
 
 | Candidate for Philadelphia's missing buckets | Why it is unusable |
 |---|---|
@@ -75,10 +72,10 @@ from scratch:
 | Philadelphia Commercial Activity Licenses (Carto `com_act_licenses`) | The general licence every city business needs, and unusable on three counts: **0 of 528,413 active rows have geometry**, there is no business address at all (only the owner's *mailing* address), and `licensetype` is the single value "Activity" with no classification. It also carries `legalfirstname`/`legallastname` |
 | Carto `li_business_licenses` | A **stale copy** of the registry above — 360,192 rows vs 435,143, "Towing" where the current table says "Tow Truck", and missing `unit_type`. Not a second source |
 
-An `ILIKE` sweep for hair / barber / salon / nail / cosmet / massage / tattoo /
+A text search for hair / barber / salon / nail / cosmet / massage / tattoo /
 laundry across both Carto licence tables returns nothing, so **Personal
-services has no source in Philadelphia at all**. That is recorded in
-`docs/excluded_categories.md` under what is *missing* rather than *excluded*.
+services has no source in Philadelphia at all**. The What Is Excluded page
+records that as *missing* rather than *excluded*.
 
 ### Boston — Step 0 findings, 2026-09-21
 
@@ -184,16 +181,16 @@ null geometry; `qqq8-j68g` is the usable one.
 New York note: `tqmj-j8zm`, the borough-boundary ID still in wide circulation,
 now returns 404.
 Boston note: **MassGIS's multi-town layer is used rather than Boston's own outline**, because naming the other towns is the bigger job here — the network is regional and 43 of 100 stations are in another municipality, a scale of exclusion that has to be citable as it is for San Diego's 16 and Los Angeles' 54. One layer then does both jobs.
-This also settled a question Step 0 had left open. Boston's own water-excluded outline put four stations marginally outside the city (Boston College 6.7 m, Central Avenue 29.7 m, Longwood 51.8 m, Saint Mary's Street 58.4 m) and the Step 0 note asserted that **Boston College was "really a Boston station"** and so a distance tolerance could not separate them. That assertion was wrong: MassGIS places Boston College in **NEWTON**, 6.6 m outside Boston — two independent boundary layers agreeing on the same ~6.6 m. Four of the 43 out-of-town stations sit within 100 m of Boston, but every one is unambiguously *named*, so no tolerance is needed at all. Naming beat measuring.
+This also settled a question the first survey of Boston's sources had left open. Boston's own water-excluded outline put four stations marginally outside the city (Boston College 6.7 m, Central Avenue 29.7 m, Longwood 51.8 m, Saint Mary's Street 58.4 m), and that survey called **Boston College "really a Boston station"**, so that no distance tolerance could separate them. That was wrong: MassGIS places Boston College in **NEWTON**, 6.6 m outside Boston, two independent boundary layers agreeing on the same ~6.6 m. Four of the 43 out-of-town stations sit within 100 m of Boston, but each is named, so no tolerance is needed. Naming beat measuring.
 Washington D.C. note: **the boundary needed no multi-jurisdiction layer to disambiguate, which is the contrast with Boston.** Only one station is even arguably marginal — Southern Av, 40.1 m outside — and the next two are Capitol Heights at 111.2 m and Arlington Cemetery at 130.0 m, both unambiguous. Boston needed MassGIS because four of its stations sat within 60 m of the line and a tolerance could not separate them. Here the states layer is for NAMING only; the District's own single polygon does the filtering.
 San Francisco note: **use the host `data.sf.gov`, never `data.sfgov.org`.**
-This row said `data.sfgov.org` until 2026-09-21, when re-running the recorded
-command showed the old host **301-redirects** and the documented `curl -sG`
-carries no `-L` — so it silently wrote a 654-byte HTML redirect stub into
-`sf_county_boundary.geojson` and exited 0, with the failure surfacing later
-inside geopandas. That is the same host rule the assessor roll already needed
-for a different symptom (403 on `/resource/`), so treat it as one rule for this
-city. Unfiltered, the same request returns 989,873 bytes of all nine counties.
+This row recorded the old host until 2026-09-21, when a re-run showed that it
+**301-redirects** and that the recorded `curl -sG` command does not follow
+redirects: it silently saved a 654-byte HTML redirect page as
+`sf_county_boundary.geojson`, exited 0, and failed only later when the file
+was read. The assessor roll needs the same host for a different symptom (403
+on `/resource/`), so it is one rule for this city. Unfiltered, the same
+request returns 989,873 bytes of all nine counties.
 
 `wamw-vt4s` is a **nine-county** Bay Area layer, so the
 `county` filter is not optional — unfiltered it would scope the city to the
@@ -249,8 +246,9 @@ credit would breach the terms rather than satisfy them.** Every other source
 here is the other way round, which is exactly why this one is worth stating:
 the absence of a SanGIS notice is a deliberate compliance position, not an
 oversight, and a future reviewer tidying up "missing" attributions must not
-add one. It is also the reason `check_provenance.py` checks that notices and
-`_NOTICES` correspond, rather than that every source has a notice.
+add one. It is also why the project's provenance check compares the notices recorded
+here with the notices the site displays, rather than requiring a notice for
+every source.
 
 Two further clauses, neither of which this project triggers. **"UNDER NO
 CIRCUMSTANCES SHALL THE END USER MODIFY OR ALTER THE SANGIS SOURCE DATA IN ANY
@@ -266,13 +264,11 @@ were ever published.
 
 **Not established, and flagged rather than assumed:** San Diego's municipal
 **boundary** layer sits on the same `geo.sandag.org` host but is a different
-service (`rest/directories/downloads/Municipal_Boundaries.geojson`) and its own
-terms have not been read. **It is now its own row under “Still not
-established” below**, rather than a caveat inside this entry — a caveat is
-not a work item, and this one contradicted that table's own claim to list
-every unread source for half a day. Its row predates this review. Do not extend the
-parcel agreement to it by proximity — that is the Philadelphia mistake, where a
-licence on one page turned out not to govern the dataset beside it.
+service (`rest/directories/downloads/Municipal_Boundaries.geojson`), and its own
+terms have not been read. It has its own row under “Still not established”
+below. Do not extend the parcel agreement to it by proximity: that is the
+Philadelphia mistake, where a licence on one page turned out not to govern the
+dataset beside it.
 
 
 PDDL and CC0 are both public-domain dedications, so neither compels
@@ -298,10 +294,10 @@ user indemnifies the city for claims arising from their use of it.
 
 | Source | Status |
 |---|---|
-| **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority. **It was described here as "the only item left unread" until 2026-09-22**, which stopped being true the moment the row below was added — a count kept by hand in one row about the contents of its own table. |
+| **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority. |
 | **Boston "Business Inventory" (`47bd8208`)** | The one dataset on `data.boston.gov` whose `license_id` is `notspecified` rather than `odc-pddl`. Not established, and not pursued, because the source is deliberately unused (its coverage is downtown plus three corridors). **If it is ever used, the governing terms must be established first** — the portal's own "Open and Protected Data Policy" and the 2014 open-data executive order are the documents to read, not the boston.gov site footer. That is the NYC lesson: the parent site's notice covers the website, not the datasets. |
-| **San Diego municipal boundaries** (`geo.sandag.org/server/rest/directories/downloads/Municipal_Boundaries.geojson`) | Terms not read. It sits on the same host as the SanGIS tax parcels, whose End User Use Agreement WAS read on 2026-09-22, but it is a **different service** and the agreement is deliberately not extended to it by proximity — that is the Philadelphia mistake, where a licence on one page turned out not to govern the dataset beside it. Its row in the boundary table predates the licence review entirely: it is this project's very first city, and the layer has been in use since 2026-09-18. **Higher priority than the Census geocoder**, because this one scopes a published map rather than deriving a coordinate. Raised 2026-09-22 by the SanGIS reading, and listed here so it is an open item rather than a sentence buried in another source's entry. |
-| **Miami-Dade Local Business Tax, its municipal boundary layer, and Miami-Dade Transit's GTFS** | All three carry a disclaimer and no grant. The ArcGIS items' `licenseInfo` is purely about ACCURACY — “Miami-Dade County provides this data for use 'as is'… not accurate to surveying or engineering standards… assumes no responsibility for errors or omissions” — and says nothing whatever about reuse, redistribution, modification or attribution. The GTFS has no `feed_info.txt`, and no separate MDT developer terms were located. **ESTABLISHED 2026-09-21, by reading rather than asking — and this row's earlier claim that no document existed was wrong.** One does: the Open Data Hub's own designated Terms of Use at `https://opendata.miamidade.gov/pages/terms-of-use`. Its entire substance is the accuracy disclaimer quoted above. The county-wide "Liability Disclaimer and User Agreement" at `miamidade.gov/global/disclaimer/disclaimer.page` was read too, and is liability terms only — no copyright claim, no reuse restriction. So three County documents now say nothing whatever about reuse, redistribution, modification or attribution, which is a **definitive absence of restriction from the County's own authoritative pages** rather than an unexamined gap. No enquiry to the County is needed. The affirmative signals stand: all three sources are published by the County's own ITD Geospatial group on its public open-data portal, in formats meant for reuse. |
+| **San Diego municipal boundaries** (`geo.sandag.org/server/rest/directories/downloads/Municipal_Boundaries.geojson`) | Terms not read. It sits on the same host as the SanGIS tax parcels, whose End User Use Agreement WAS read on 2026-09-22, but it is a **different service**, and the agreement is deliberately not extended to it by proximity (the Philadelphia mistake, where a licence on one page turned out not to govern the dataset beside it). The layer has scoped San Diego, this project's first city, since 2026-09-18, before any licence review. **Higher priority than the Census geocoder**, because this one scopes a published map rather than deriving a coordinate. Raised 2026-09-22 by the SanGIS reading. |
+| **Miami-Dade Local Business Tax, its municipal boundary layer, and Miami-Dade Transit's GTFS** | All three carry a disclaimer and no grant. The ArcGIS items' `licenseInfo` is purely about ACCURACY — “Miami-Dade County provides this data for use 'as is'… not accurate to surveying or engineering standards… assumes no responsibility for errors or omissions” — and says nothing whatever about reuse, redistribution, modification or attribution. The GTFS has no `feed_info.txt`, and no separate MDT developer terms were located. **Established 2026-09-21 by reading, not by asking.** The Open Data Hub's own designated Terms of Use, at `https://opendata.miamidade.gov/pages/terms-of-use`, consist of the accuracy disclaimer quoted above, and the county-wide "Liability Disclaimer and User Agreement" at `miamidade.gov/global/disclaimer/disclaimer.page` is liability terms only, with no copyright claim and no reuse restriction. So three County documents say nothing whatever about reuse, redistribution, modification or attribution: a **definitive absence of restriction from the County's own authoritative pages**, not an unexamined gap. No enquiry to the County is needed. The affirmative signals stand: all three sources are published by the County's own ITD Geospatial group on its public open-data portal, in formats meant for reuse. |
 
 Note the shape of this. **The business registries are mostly permissive and the
 transit feeds are mostly not** — and the two are inverted within Los Angeles,
@@ -310,21 +306,17 @@ anything here. Canada inverts it again: there the registries almost all
 prescribe their own sentence and the feeds mostly ride on the same municipal
 licence.
 
-**The sentence that used to end this paragraph is gone, and it is the third
-hand-kept count in this file to turn out wrong.** It read "New York contributes
-four of the eight registries and is the only source whose reuse position could
-not be established at all" — and by 2026-09-22 there were **37** rows in the
-business table rather than eight, while New York's position *is* established:
-Local Law 11 of 2012 forbids the City attaching a licence at all, which is why
-it sits under *Permissive on reading the terms themselves* two tables up. An
-established absence is not an unestablished position, and conflating the two is
-how a source gets re-investigated every time somebody reads this section.
+**New York's position is established, not open.** Local Law 11 of 2012 forbids
+the City attaching a licence at all, which is why it sits under *Permissive on
+reading the terms themselves* two tables up. An established absence is not an
+unestablished position, and conflating the two is how a source gets
+re-investigated every time somebody reads this section.
 
-The durable point the count was reaching for: **an unread source and a source
-read to silence look identical in a summary and are completely different in
-kind.** This table is only for the first. Anything read and found to impose no
-restriction belongs above, named, with the pages that were read — Miami-Dade is
-the worked example, and it moved up here after the reading rather than before.
+The durable point: **an unread source and a source read to silence look
+identical in a summary and are completely different in kind.** This table is
+only for the first. Anything read and found to impose no restriction belongs
+above, named, with the pages that were read. Miami-Dade is the worked example,
+and it moved up here after the reading rather than before.
 
 ### Transit feeds (GTFS) — checked 2026-09-21
 
@@ -373,9 +365,7 @@ owner's identity. It is a stronger position than storing a live key carefully.
    limited… license to download, use, reproduce, and **redistribute** WMATA's
    Transit Data **within your Application**". If that has terminated, the
    question is not whether a rendered map counts as stored Transit Data — it is
-   that **the right to publish the page has lapsed.** An earlier version of
-   this note anchored on (iv) and the derived-work grey area, which was the
-   less important half.
+   that **the right to publish the page has lapsed.**
 
    **The resolution is simple and the owner's stated plan already does it:
    re-register.** A new account creates a new agreement with a fresh grant, and
@@ -437,9 +427,7 @@ the position is a stated one rather than an assumption:
   **Fixed:** `shapes.txt` vertices are now emitted unrounded, so the alignment
   is the feed's own geometry as stated. Station points stay rounded on purpose
   — most cities derive them by averaging a parent station's platform stops, so
-  they are this project's own computed values rather than Metro's data. See the
-  note in `load_line_shapes()` in `pipeline/map_common.py`, and `DECISIONS.md`
-  for the full measurement. The same check clears MTA's "you will not modify or
+  they are this project's own computed values rather than Metro's data. The same check clears MTA's "you will not modify or
   delete any of the data": its feed is already 6 dp throughout, so that clause
   was never engaged.
 - **CTA**'s licence is granted for assisting riders or promoting public
@@ -539,10 +527,9 @@ silence mean?**
   it.**
   **DECIDED 2026-09-21 (the owner):** ask the City for written permission - its
   terms name that as the route - and keep the map live under the reasoned
-  position meanwhile, with the footer disclosing the question. The drafted
-  request is at `docs/notifications/philadelphia-permission-request.md`,
-  addressed to
-  `maps@phila.gov` copying `LIGISTEAM@phila.gov`, and was **SENT 2026-09-21**.
+  position meanwhile, with the footer disclosing the question. The request,
+  addressed to `maps@phila.gov` copying `LIGISTEAM@phila.gov`, was **SENT
+  2026-09-21**.
   No reply as of the one-week follow-up on 2026-09-28. Silence will not be
   treated as consent - the interim position rests on the reasoned reading and
   the disclosure, not on the City having failed to object.
@@ -608,7 +595,7 @@ a palette swap.
 **Decided by the owner on 2026-09-21: keep the official colours and record this
 as an open question**, rather than pre-emptively substituting a palette. It
 blocks nothing now. What makes it cheap to reverse on the colour side is that
-each city's values live in one dict (`LINE_NAMES`, or the `LINE_SPECS` in its
-map step) and nothing in the rendering depends on them being the agency's.
+each city's colours sit in one setting in
+its own code, and nothing in the rendering depends on them being the agency's.
 Nothing in the project reproduces a logo, wordmark or route-bullet artwork from
 any agency, which is the part every one of these clauses most clearly covers.

@@ -1,11 +1,10 @@
 # Data sources — South Korea
 
 Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-South Korea rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+record, split by country on 2026-09-27: this file holds the South Korea rows
+of its tables and the sections about this country's sources. The numbered
+notices this project must display, the removal-request commitment and the
+deploy gate are in the main file, not here.
 
 ## Business registries
 
@@ -75,8 +74,7 @@ point, not here.
 
 Recorded when the licence was read; **Seoul was built 2026-09-25, so these are
 active obligations - notice 18, Seoul Metropolitan Government.** Source: `data.seoul.go.kr`,
-downloaded via the SHEET CSV export (`ssUserId=SAMPLE_VIEW`, no account — see
-`docs/global_country_shortlist.md`).
+downloaded through the SHEET CSV export (`ssUserId=SAMPLE_VIEW`, no account).
 
 | `infId` | Dataset | Bucket | Active premises |
 |---|---|---|---|
@@ -163,8 +161,7 @@ address; the registry row above).
 different declared terms depending on who republishes it.** Seoul attaches KOGL
 Type 1; Daegu and Busan attach no KOGL type at all; data.go.kr now declares
 **이용허락범위 제한 없음** for the national listings (15096283, 15045016,
-15006730, and the successor API 15154916). `global_country_shortlist.md`
-records 15096283 as KOGL Type 1, which is no longer what data.go.kr shows.
+15006730, and the successor API 15154916). An earlier screening recorded 15096283 as KOGL Type 1, which is no longer what data.go.kr shows.
 So **Seoul's three KOGL duties do not carry over by licence**, but the standing
 non-affiliation line is kept on both pages anyway.
 

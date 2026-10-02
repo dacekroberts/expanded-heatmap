@@ -48,17 +48,16 @@ st.markdown(
     """
 **The lines**
 
-- **This was the site's first regional map, and deliberately so.** Metrorail leaves the City of
-  Miami: its stations reach Hialeah, Medley, Coral Gables, South Miami and unincorporated
-  Miami-Dade.
+- **This is a regional map, the site's first.** Metrorail leaves the City of Miami: its stations
+  reach Hialeah, Medley, Coral Gables, South Miami and unincorporated Miami-Dade.
 - Miami-Dade County licenses business tax receipts for all 34 of its municipalities in a single
   file, so covering the whole line cost nothing extra. Six municipalities hold stations, and every
   station is on the map.
 - **Three lines are drawn**, each labelled directly on the map and in the legend: Metrorail, and the
   Metromover's Inner and Omni/Brickell loops.
 - Metrorail appears once even though Miami-Dade Transit signs it as two lines, Green and Orange:
-  its GTFS publishes a single route for both, and inventing a split the feed does not contain would
-  be worse than using the name every station sign carries.
+  its timetable feed publishes a single route for both, so the map uses the name every station
+  sign carries rather than invent a split the feed does not contain.
 - The MIA Airport People Mover is left out because it runs terminal to rental-car centre with no
   surrounding commerce to measure, and Tri-Rail is commuter rail, left out here as on most maps on
   this site.
@@ -67,15 +66,16 @@ st.markdown(
 
 **The businesses**
 
-- **The classification is the county's own, because its NAICS column is empty.**
-- The single largest category in the file, `SERVICE BUSINESS`, is 28,010 rows of mostly offices,
-  consultancies and agencies, and it is excluded; it does also contain some genuine trade repair,
-  so **this map undercounts small repair and service premises in Miami.** The full list and the
-  reasoning are on the What is counted page.
+- **Businesses are sorted by the county's own categories, because its industry-code (NAICS) column
+  is empty.**
+- The largest category in the file, "SERVICE BUSINESS" (28,010 rows, mostly offices,
+  consultancies and agencies), is excluded. It also holds some genuine trade repair, so **this map
+  undercounts small repair and service premises in Miami.** The full list and the reasoning are on
+  the "What is counted, and what is not" page.
 - One premises can hold several licences at once (a restaurant with an entertainment permit and a
-  retail licence is three rows in the raw file), so rows are collapsed to one per premises on name
-  and address, and the more specific category wins over general retail. Roughly two thousand
-  premises needed that.
+  retail licence is three rows in the raw file), so each premises is counted once, matched on name
+  and address, with the more specific category winning over general retail. Roughly two thousand
+  premises were merged this way.
 
 **Reading the map**
 

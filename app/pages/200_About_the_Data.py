@@ -102,18 +102,17 @@ st.title("Where this data comes from")
 INTRO = (
     """
 Every dataset behind these maps is public, and this page is the
-project's own provenance record: the exact endpoint each one was fetched from,
-the filter applied at download, the date it was retrieved, and the licence or
-terms it carries. It is reproduced here exactly as it is kept in the
-repository.
+project's own provenance record: the exact web address each one was downloaded
+from, the filter applied at download, the date it was retrieved, and the
+licence or terms it carries. It is shown here exactly as the project keeps it.
 
-It is long, and deliberately so. Three things in it are worth knowing before
-reading any map: **a government open-data portal is not evidence of permissive
-terms** (Los Angeles' business registry is CC0 while its transit feed forbids
-modifying the data); **several sources say nothing at all about reuse**, which
-is recorded as unresolved rather than read generously; and **every retrieval
-date is a statement about staleness**, because a register only ever describes
-the day it was pulled.
+It is long on purpose. Three things in it are worth knowing before reading
+any map: **a government open-data portal does not guarantee open terms** (Los
+Angeles' business registry is CC0, public domain, while its transit feed
+forbids modifying the data); **several sources say nothing at all about
+reuse**, and those are recorded as unresolved rather than read generously; and
+**every retrieval date is a warning about staleness**, because a register only
+ever describes the day it was downloaded.
 """
 )
 

@@ -83,8 +83,8 @@ st.markdown(
   publishes its members' business premises as points, each with its economic activity.
 - It publishes no names, so each dot is labelled with its kind of business.
 - **Craft businesses belong to a different chamber and are not in it**: hairdressers, laundries
-  and dry cleaners are almost entirely missing, and bakers and butchers are thin, so Personal
-  services shows only part of what is on the street — beauty and nail salons, spas, saunas and
+  and dry cleaners are almost entirely missing, and bakers and butchers are thin. So Personal
+  services shows only part of what is on the street: beauty and nail salons, spas, saunas and
   massage.
 
 **Reading the map**

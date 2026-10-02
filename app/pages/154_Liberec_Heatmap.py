@@ -71,8 +71,8 @@ st.markdown(
 - The lines and stops are drawn from OpenStreetMap, and the colours are this project's, because
   none are published for reuse.
 - Buses, trolleybuses and trains are not drawn.
-- Liberec has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
-  rings.
+- Liberec has no metro, so its trams are its rapid transit, as in Riga. Every tram stop
+  here gets rings.
 - **Tram stops sit closer together than metro stations**, a median of 355 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
 - The map covers the **cities of Liberec and Jablonec nad Nisou, which tram line 11 joins**.
@@ -80,8 +80,8 @@ st.markdown(
 **The businesses**
 
 - Businesses come from the Czech **register of active business establishments** (ROS02), which
-  records each place where a business operates at that place's own address, placed using the
-  national address register (RÚIAN), the same sources as Prague's map.
+  records each place a business operates at that place's own address. The national address
+  register (RÚIAN) puts each one on the map; Prague's map uses the same two sources.
 - What each establishment does comes from the Czech Statistical Office's business register (RES).
   RES records one main activity per business, so every establishment inherits its owner's, and a
   chain's office or warehouse counts as the chain's trade.
@@ -98,7 +98,7 @@ st.markdown(
   registered and may not have opened yet.
 - Czechia's classification files a web shop under the goods it sells, so some dots are businesses
   with no shop a passer-by could walk into.
-- Against OpenStreetMap's mapped restaurants, cafés and takeaways in the two towns, the register carries
+- Against OpenStreetMap's mapped restaurants, cafés and takeaways in the two cities, the register carries
   about **2.5 times** as many. OpenStreetMap maps fewer restaurants here than in Prague, so the
   ratio says as much about OpenStreetMap's gaps as about the register.
 """

@@ -50,9 +50,9 @@ st.markdown(
 - The map covers the **Comune di Milano** and draws the five metro lines - **M1 (linea rossa)**,
   **M2 (linea verde)**, **M3 (linea gialla)**, **M4 (linea blu)** and **M5 (linea lilla)** - each
   labelled on the map and in the legend, in ATM's own colours.
-- Milan's 17 tram routes are **not** drawn: they are a dense street-running network whose stops
-  sit a block or two apart, which needs different treatment from a metro, and the agency publishes
-  no colour for any of them.
+- Milan's 17 tram routes are **not** drawn. They form a dense street-running network with stops
+  a block or two apart, which needs different treatment from a metro, and the agency publishes no
+  colour for any of them.
 - Twenty-one metro stations lie outside the comune - the ends of M1 at Rho and Sesto, M2 at
   Gessate and Cologno, M4 at Linate - and are listed below.
 
@@ -62,9 +62,8 @@ st.markdown(
   neighbourhood shops, bakers, artisan food makers, bars and restaurants (in and out of the
   commercial plan) and personal services each in its own register.
 - A single Milan address routinely holds many separate premises, so merging the registers on
-  address would delete real businesses. Where one business holds two licences it is counted twice;
-  that is the deliberate direction to err in, and it is why the counts read slightly high rather
-  than slightly low.
+  address would delete real businesses. Where one business holds two licences it is counted twice:
+  the counts deliberately err slightly high rather than slightly low.
 - **About one pin in seven carries a shop sign; the rest carry an address.** Milan records an
   *insegna* - the sign over the door - on only some rows, and three of the six registers have no
   name field at all.

@@ -1,11 +1,10 @@
 # Data sources — Ireland
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Ireland rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+The Ireland part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country on 2026-09-27.
+The numbered notices this project must display, the removal-request
+commitment and the deploy gate apply to every country and are kept in
+that record.
 
 ## Business registries
 
@@ -166,7 +165,7 @@ stations is why a second opinion is kept.
 
 | City | System / operator | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
-| Dublin | **National Transport Authority national GTFS** — 3 drawn routes: `10000 GREEN g a` (Luas Green, `route_type 0`), `10000 RED g a` (Luas Red, `0`) and `BRAY-HOWTH-I` (DART, `2`) | `https://www.transportforireland.ie/transitData/Data/GTFS_All.zip` | 2026-09-22 | **The brief said "OpenStreetMap, not a feed" and was WRONG — corrected during the build.** Neither agency route had been probed, which is Madrid's failure in its general form. Both pass: this feed declares `feed_end_date` **20270922** (a year out) and carries **Woodbrook, a station that opened in 2025**, so it is maintained rather than a re-uploaded archive; the NTA also publishes a **Feature Service already in EPSG:2157** (14,079 stops, 6,507 route polylines) at `services-eu1.arcgis.com/p0UmGrpumWZYhF0p/`. **The feed is 158 MB and its `shapes.txt` 372 MB over 8.0M rows**, so `fetch_sources.py` trims it once to the three routes (→ 1.9 MB) and no step or drift check ever parses the national file. **`route_color` is EMPTY for all three routes**, so the palette is chosen against `map_common`'s CIE76 check rather than inherited. **OSM is retained as the CROSS-CHECK** and runs every build (GTFS 98 station names, OSM 100, 88 shared; differences are spelling) — ⚠️ it tags all four DART relations `network=Commuter`, so a network filter drops the city's principal line, and the whitelist is on `ref`. ODbL 1.0 for the cross-check — notice **1** |
+| Dublin | **National Transport Authority national GTFS** — 3 drawn routes: `10000 GREEN g a` (Luas Green, `route_type 0`), `10000 RED g a` (Luas Red, `0`) and `BRAY-HOWTH-I` (DART, `2`) | `https://www.transportforireland.ie/transitData/Data/GTFS_All.zip` | 2026-09-22 | **The brief said "OpenStreetMap, not a feed" and was WRONG — corrected during the build** (Madrid's failure in its general form). Why the feed is trusted, its size and trim, its empty `route_color` and the OSM cross-check are in "Dublin — endpoints and findings" above; OSM tags all four DART relations `network=Commuter`, so the whitelist is on `ref`. ODbL 1.0 for the cross-check — notice **1** |
 
 ## Boundary layers
 

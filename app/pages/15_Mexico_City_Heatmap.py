@@ -54,9 +54,9 @@ st.markdown(
 - Only stations inside Ciudad de México are mapped. Líneas A and B run north and east into
   the State of Mexico, and those stations are left out because this map has no business data
   for them — their rings would sit over blank ground. They are listed below.
-- **The line geometry here comes from OpenStreetMap, not from the operator.** Every public
-  host for the Mexico City government, for STC Metro and for the STE is unreachable from
-  where this was built, and the Metro's transit feed is refused at its download location.
+- **The line geometry here comes from OpenStreetMap, not from the operator.** None of the
+  public servers of the Mexico City government, STC Metro or the STE could be reached from
+  where this was built, and the Metro's transit feed refused the download.
 - So the alignments are OpenStreetMap contributors' mapping of the network rather than the
   agency's own file. For the same reason, the station count has not been checked against
   what STC Metro publishes.
@@ -65,8 +65,8 @@ st.markdown(
 
 - **The businesses are a census, not a licence register, and that changes what the map
   means.** Most cities here are built from business licences: a record of who registered.
-  Mexico City is built from INEGI's DENUE, compiled by surveying premises and recording the
-  name on the shopfront.
+  Mexico City is built from DENUE, the national business register of INEGI (Mexico's
+  statistics agency), compiled by surveying premises and recording the name on the shopfront.
 - It is far more complete than a licence register, so the density shown here is **not
   comparable** with the licence-register cities' — read it as a fact about how the data was
   collected as much as about Mexico City's streets.

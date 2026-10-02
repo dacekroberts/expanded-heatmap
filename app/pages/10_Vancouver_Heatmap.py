@@ -47,12 +47,13 @@ st.markdown(
     """
 **The lines**
 
-- **This map covers two cities, and that is the first thing to know.** SkyTrain is regional
-  and Surrey has no rail of its own, so a Vancouver-only map would cut the network at a line
-  no rider recognises.
+- **This map covers two cities, Vancouver and Surrey.** SkyTrain is regional and Surrey has
+  no rail of its own, so a Vancouver-only map would cut the network at a line no rider
+  recognises.
 - Of 54 stations, 20 are in Vancouver and 4 in Surrey. The other 30 are in Burnaby,
-  Richmond, New Westminster, Coquitlam and Port Moody, whose own business registers would
-  each have to be sourced and verified separately; every station left out is listed below.
+  Richmond, New Westminster, Coquitlam and Port Moody. They are left out because each of those
+  cities' business registers would have to be sourced and verified separately; all 30 are
+  listed below.
 - **Three lines are drawn** from TransLink's own route geometry, each labelled directly on
   the map and in the legend: the Expo Line, the Millennium Line and the Canada Line, in
   TransLink's own colours.
@@ -65,8 +66,8 @@ st.markdown(
   is about half of the register.
 - **Where a licence carries no trade name, the pin shows the business type instead of a
   name.** Vancouver leaves the trade name blank on about half of its mappable licences and
-  falls back to the legal name, which for a sole proprietor is a person's own name - the
-  City marks those by wrapping them in parentheses.
+  shows the legal name instead, in parentheses; for a sole proprietor that is a person's own
+  name.
 - This project publishes public commercial information, not personal information, so those
   labels are replaced rather than the pins removed.
 
@@ -77,8 +78,8 @@ st.markdown(
 - Surrey's four stations reach a far smaller share of its own commerce than Vancouver's
   twenty do, because Surrey's shops sit along arterial roads the SkyTrain does not follow.
 - **Known limitation.** Roughly half of Vancouver's current-year licences carry no
-  coordinates at all and cannot be placed. They are overwhelmingly categories this map
-  excludes anyway, but a small remainder have a real street address and are simply absent.
+  coordinates at all and cannot be placed. Nearly all are in categories this map excludes
+  anyway, but a few have a real street address and are missing.
 """
 )
 

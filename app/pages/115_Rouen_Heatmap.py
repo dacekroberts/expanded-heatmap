@@ -83,19 +83,19 @@ st.markdown(
 - One Astuce line is drawn, **Métro**, labelled on the map and in the legend, its stops from the Normandie region's published timetable feed and its track from OpenStreetMap.
 - Rouen's métro is a light rail running mostly on the street, so every stop gets rings.
 - **Stops sit closer together than metro stations**, a median of 380 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
-- The map covers the **5 communes of the Métropole Rouen Normandie** that the métro serves.
+- The map covers the **five communes of the Métropole Rouen Normandie** that the métro serves.
 
 **The businesses**
 
-- Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as Paris, Marseille, Toulouse, Lille and Rennes.
-- About 17% of active establishments here are marked non-diffusible by INSEE, which withholds their name, address and coordinates together, so they never reach this map.
+- Businesses come from **SIRENE**, France's national register of établissements, joined to INSEE's geolocation file, the same sources as the other French maps.
+- INSEE withholds the name, address and coordinates of about 17% of active establishments here (those it marks non-diffusible), so they never reach this map.
 - Where SIRENE records no shop sign or trading name, the dot shows the address instead.
 - **About 62% of storefronts sit within a ring.**
 
 **Reading the density**
 
 - **Read the density as a register, not a street survey.** SIRENE records where a business is *registered*, and some registered establishments have no customer-facing shopfront; nothing in the data says which.
-- Against OpenStreetMap's mapped restaurants in the commune of Rouen, where the two schemes mean nearly the same thing, this map carries about **1.8 times** as many points.
+- Counting restaurants alone, which SIRENE and OpenStreetMap define in nearly the same way, this map has about **1.8 times** as many in the commune of Rouen as OpenStreetMap does.
 """
 )
 

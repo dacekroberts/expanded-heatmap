@@ -79,13 +79,14 @@ st.markdown(
 
 - Two lines are drawn — **the VLT da Baixada Santista's Linha 1 and Linha 2** — each
   labelled on the map and in the legend, in the colours OpenStreetMap records.
-- **Linha 2 opened on 1 December 2025 and runs from 9 to 15h for now.**
+- **Linha 2 opened on 1 December 2025 and runs from 09:00 to 15:00 for now.**
 - The heritage tourist tram is not drawn.
 - The map covers **Santos and São Vicente**, which the lines join.
 
 **The businesses**
 
-- Businesses come from **IBGE's national address register for the 2022 census** (CNEFE).
+- Businesses come from **the national address register of the 2022 census** (CNEFE), kept
+  by IBGE, Brazil's statistics agency.
   Census enumerators walking every street recorded each establishment, what it was, and a
   map point for it. **Read it as a 2022 picture, not today's.**
 - IBGE did not classify the establishments: each dot's category is this project's reading of

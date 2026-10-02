@@ -1881,7 +1881,8 @@ def render_site_notices(show_links: bool = True):
     # displayed. So they render inline, always, in small type.
     st.caption(
         "**Required source notices.** Reproduced as each source's terms "
-        "require. Full provenance, with endpoints and retrieval dates, is on "
+        "require. Each source's full record, with the web address it was downloaded "
+        "from and the date, is on "
         "the \u201cWhere this data comes from\u201d page."
     )
     for heading, text, verbatim in _NOTICES:
@@ -1962,18 +1963,17 @@ def render_map_help(layers="business categories"):
     business categories (Retail, Food service and Personal services)")."""
     st.markdown(
         "**Using the map**\n\n"
-        f"- Concentric ring boundaries and the {layers} are "
-        f"toggleable via the layer control {_LAYERS_ICON} in the top left.\n"
-        "- When enabled, business density will display as numbered circles "
-        "summing areas when zoomed out. Zooming in will show individual dots; "
-        "hover over those to see further details.\n"
+        f"- The layer control {_LAYERS_ICON} in the top left turns the rings "
+        f"around each station and the {layers} on and off.\n"
+        "- Zoomed out, a business layer shows numbered circles, each counting "
+        "the businesses in its area. Zoom in to see individual dots, and hover "
+        "over a dot for its details.\n"
         "- Top right: a **Cities** menu and a **Global View** button for "
         "moving between maps, and a light/dark switch. The map opens in "
         "whichever mode the page is using; once you pick one, it carries "
         "across the other city maps.\n"
-        "- The heat layer is illustrative. Leaflet applies a visual blur "
-        "rather than a statistical density estimate, so read the colour as "
-        "“roughly where things cluster.”",
+        "- The heat layer is illustrative: a visual blur, not a statistical "
+        "density estimate. Read its colour as “roughly where things cluster.”",
         unsafe_allow_html=True,   # the icon's <img>
     )
 

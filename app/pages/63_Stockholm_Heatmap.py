@@ -60,7 +60,8 @@ st.markdown(
   is labelled once, and the legend names its routes.
 - Pendeltåg commuter trains, Roslagsbanan, Saltsjöbanan and the trams are not drawn.
 - The map covers **Stockholms kommun**, the City of Stockholm. The lines' outer stations in Solna,
-  Sundbyberg, Danderyd, Huddinge and Botkyrka lie outside it and are not drawn.
+  Sundbyberg, Danderyd, Huddinge and Botkyrka lie outside it and are not drawn. They are listed
+  below.
 
 **The businesses**
 
@@ -78,8 +79,8 @@ st.markdown(
 - **The register stopped updating in October 2025.** Its latest inspection is dated 21 October
   2025 and nothing has been added since, so a business that opened or closed after then is not
   reflected. Each premises is shown as it stood at its latest inspection.
-- The register began recording a premises' type in 2024. Premises last inspected in 2022 or 2023
-  carry no type, and those whose name identifies a restaurant or a food shop are shown, their pins
+- The register began recording a premises' type in 2024, so premises last inspected in 2022 or
+  2023 carry none. Those whose name identifies a restaurant or a food shop are shown, their pins
   marked "classified from its name".
 """
 )

@@ -57,10 +57,9 @@ st.markdown(
 
 **The businesses**
 
-- **Toronto licenses food and trades, but not general retail — and that is the one thing to
-  know before reading this map.** There is no grocer, clothing shop, pharmacy or hardware
-  store here, because the City requires no licence for any of them, so none appears in any
-  register to map.
+- **Toronto licenses food and trades, but not general retail.** There is no grocer, clothing
+  shop, pharmacy or hardware store here, because the City requires no licence for any of
+  them, so none appears in any register to map.
 - What the Retail category holds instead is the *regulated* slice: second-hand shops, pawn
   shops, precious-metal buyers, smoke and vape shops, pet shops and fireworks vendors — the
   trades a city licenses because it wants to watch them.
@@ -73,10 +72,10 @@ st.markdown(
 - **Read the balance between the three categories as a fact about Toronto's licensing, not
   about its high streets.** Food service is close to fully covered; Retail is a narrow slice
   of what is actually on the street.
-- **This register has no coordinates at all — not one row.** Toronto was the first city on
-  this site whose addresses had to be matched against a separate address-point layer to be
-  placed on a map, because Canada has no national geocoding service the way the United
-  States does.
+- **This register has no coordinates at all.** Its addresses had to be matched against a
+  separate list of address points to be placed on the map, the first city on this site to
+  need that, because Canada has no national service for turning addresses into map points the
+  way the United States does.
 - The City's own One Address Repository supplied the coordinates, and about one storefront
   in sixteen could not be matched — mostly plazas and malls the repository does not carry as
   a single address, so a few shopping centres are under-counted rather than any district

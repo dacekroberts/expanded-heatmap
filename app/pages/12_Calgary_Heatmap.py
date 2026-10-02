@@ -77,8 +77,8 @@ st.markdown(
   for both retail and food this map counts it as food. A convenience store with a hot
   counter lands in Food service.
 - **Known limitation.** Calgary publishes no usable home-business flag: the register's
-  `homeoccind` field reads `N` on every single row, so unlike Surrey or Edmonton the City
-  does not tell us which licences are home-based, and no inference is attempted. The
+  home-business field reads `N` (no) on every single row. So, unlike Surrey or Edmonton, the
+  City does not tell us which licences are home-based, and no inference is attempted. The
   `(HOME BASED)` and `(MOBILE)` category suffixes catch the cases the City does mark.
 """
 )

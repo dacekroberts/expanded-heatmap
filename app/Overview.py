@@ -65,10 +65,10 @@ _FOLLOW_UP = (
 )
 st.markdown(
     f"""
-This project maps commercial/business density around rapid-transit station
-areas, one city at a time. Each city has its own independently scoped detail
-map - its own map instance, its own data, its own viewport bounds - rather
-than one shared map instance loading every city's business points at once.
+This project maps how densely shops, restaurants and personal services
+cluster around rapid-transit stations, one city at a time. Each city has its
+own detail map, with its own data and its own extent, rather than one shared
+map loading every city's businesses at once.
 **Click a city on the map to open its detail map**; {_FOLLOW_UP}
 """
 )

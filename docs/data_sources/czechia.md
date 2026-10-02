@@ -1,11 +1,10 @@
 # Data sources — Czechia
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, which was split by country on 2026-09-27. This file holds the
-Czechia rows of the tables there and the source sections about its cities,
-moved verbatim under the same headings. The numbered notices this project must
-display, the removal-request commitment and the deploy gate are in the entry
-point, not here.
+The Czechia part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country on 2026-09-27.
+The numbered notices this project must display, the removal-request
+commitment and the deploy gate apply to every country and are kept in
+that record.
 
 ## Business registries
 
@@ -37,7 +36,7 @@ point, not here.
 | City | What | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
 | Brno | **OpenStreetMap route=tram relations** of "Dopravní podnik města Brna", all 11 drawn refs (26 relations) | The Overpass mirrors in `pipeline/osm.py`, one query per city over (49.10, 16.43, 49.30, 16.73), fetched fresh by `fetch_sources.py` | 2026-09-30 | **Geometry only** - the feed has no shapes. One alignment per line, the relation with the most geometry, matched to the feed by `ref`. Its stop names per line are gate 3: 9 of 11 lines agree; lines 1 and 10 carry only their main routes in OSM. ODbL 1.0 — notice 1 and the "OpenStreetMap (rail geometry)" notice |
-| Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) | **OpenStreetMap route=tram relations**, lines AND stops (the transit-feed rows above) | As Brno's | 2026-09-30 | Step 1 on the shared `pipeline/osm_tram.py` (the tram kit's, its Aarhus control passing on `czech-build`); each line drawn from its kept relation with the most track. ODbL 1.0 — notice 1 and the "OpenStreetMap (rail geometry)" notice |
+| Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) | **OpenStreetMap route=tram relations**, lines AND stops (the transit-feed rows above) | As Brno's | 2026-09-30 | Stations and lines from the shared tram code (`pipeline/osm_tram.py`), its Aarhus control passing; each line drawn from its kept relation with the most track. ODbL 1.0 — notice 1 and the "OpenStreetMap (rail geometry)" notice |
 | Prague | **PID, via ROPID** — metro A, B and C (`route_type 1`, route_ids `L991`/`L992`/`L993`) | `https://data.pid.cz/PID_GTFS.zip` (51,039,590 bytes), keyless | 2026-09-24 | **The brief first checked only Golemio's keyed API and chose OSM - corrected before the build**: PID publishes its own GTFS, and osm-rail's order puts agency GTFS ahead of OSM. `feed_info.txt` self-attests a TWO-WEEK window (20260924-20261007 at fetch), so `fetch_sources.py` refuses an expired copy. Stations are the platforms' own `parent_station`, 58 of them (A 17, B 24, C 20), gate 3 exact against English Wikipedia (secondary). **Flora (A) is closed for reconstruction** and no trip serves it; it is added from `stops.txt` (parent `U118S1`) by the owner's call, and step 1 STOPS the build once the feed serves it again. OSM's route relations, kept as the cross-check, give 16 / 24 / 20 and omit Flora too. Line A's `route_color` `00A562` is lightened to `#00b96e` against the colour floor. Licence **CC BY 4.0**, credit ROPID and state the changes; the PID/ROPID/IDSK logos need ROPID's consent and are not used — notice **34** |
 
 ## Boundary layers

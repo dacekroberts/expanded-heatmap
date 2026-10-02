@@ -81,9 +81,9 @@ st.markdown(
   every station on all five lines falls inside the boundary.
 - What the boundary does exclude is a *sixth* rail line in the same feed — the tram at Aubagne, a
   separate town with its own network — and those seven stations are listed below.
-- Two other modes are absent by rules this project applies everywhere: the TER regional services
-  are commuter rail, and ferries are not rail, though Marseille's harbour shuttles are closer to
-  urban transit than that rule usually implies.
+- Two other modes are absent by rules this project applies everywhere: TER regional trains are
+  commuter rail, and ferries are not rail. Marseille's harbour shuttles are closer to urban
+  transit than that rule usually implies.
 
 **The businesses**
 

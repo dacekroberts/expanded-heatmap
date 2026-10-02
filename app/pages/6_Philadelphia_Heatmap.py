@@ -60,15 +60,14 @@ st.markdown(
 - Each is labelled directly on the map and in the legend, and the trolleys' five branches are drawn
   wherever they diverge.
 - **11th St on the Market–Frankford Line is not drawn**: SEPTA closed it on 5 September 2026 to
-  rebuild it with elevators and expects it back on 30 August 2027. It is closed for works until
-  then, and L trains run through it without stopping.
-- **The two kinds of line are treated differently, because they are different kinds of line.**
-  Market–Frankford and Broad Street stations sit a median 700 m apart, so every one inside the city
-  is kept.
-- The trolleys stop every 130 m or so — closer together than the innermost ring this map draws — so
-  they are thinned to roughly one stop per half-mile measured along the track, keeping each branch's
-  terminals, the Center City tunnel stations all five share, and every point where a trolley meets
-  a subway line.
+  rebuild it with elevators and expects it back on 30 August 2027. Until then L trains run through
+  it without stopping.
+- **The two kinds of line are treated differently.** Market–Frankford and Broad Street stations sit
+  a median 700 m apart, so every one inside the city is kept.
+- The trolleys stop every 130 m or so, closer together than the innermost ring this map draws.
+  So they are thinned to roughly one stop per half-mile measured along the track, keeping each
+  branch's terminals, the Center City tunnel stations all five share, and every point where a
+  trolley meets a subway line.
 - Every stop cut this way is listed below, along with the six stations that
   lie outside the city in Upper Darby, Yeadon and Darby.
 - Two SEPTA Metro lines are absent because they never enter Philadelphia: the Norristown High Speed
@@ -78,10 +77,9 @@ st.markdown(
 
 **The businesses**
 
-- **Two categories here, not three, and the missing one is missing from the data rather than from
-  the map.** Philadelphia licenses activities, not businesses, and there is no salon, barber or nail
-  licence of any kind. So **Personal services is absent entirely**: as in Boston, a whole category
-  here has no source to draw on.
+- **Two categories here, not three: Personal services is missing from the data, not just from the
+  map.** Philadelphia licenses activities, not businesses, and has no salon, barber or nail licence
+  of any kind, so, as in Boston, this category has no source to draw on.
 - Retail is narrow for a related reason. What the city licenses is food retail, so Retail here
   means bodegas, mini-markets and beer distributors, plus the big-box tier (Target, CVS, Dollar
   Tree, Ross), which appears only because those stores also sell packaged food.
@@ -95,7 +93,7 @@ st.markdown(
 """
 )
 
-render_map_help('both business categories')
+render_map_help('two business categories (Retail and Food service)')
 render_excluded_stations("Philadelphia")
 render_country_links('Philadelphia')
 

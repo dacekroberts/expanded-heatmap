@@ -77,7 +77,7 @@ st.markdown(
 - One tram line is drawn, **tram 1**, labelled on the map and in the legend, redrawn from
   OpenStreetMap's route geometry, in a colour this project chose, since the source records none.
 - Trams run about every 7 minutes by day. Buses and suburban trains are not drawn.
-- Liepāja has no metro: its trams are its rapid transit, as Riga's are, so every tram stop gets
+- Liepāja has no metro, so its trams are its rapid transit, as in Riga. Every tram stop here gets
   rings.
 - **Tram stops sit closer together than metro stations**, a median of 313 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).

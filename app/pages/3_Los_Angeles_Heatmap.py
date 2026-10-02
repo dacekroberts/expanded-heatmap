@@ -52,13 +52,14 @@ st.markdown(
 **The businesses**
 
 - Some businesses in the city's registry carry corrupt coordinates, mostly recent registrations;
-  these were placed by geocoding their street address instead of being dropped.
+  these were placed from their street address instead of being dropped.
 - Where a business is registered under a person's name alone, with no trade name, or a person's
-  name sits at an apartment or other dwelling unit, its dot shows the street address instead.
+  name sits at an apartment or other dwelling unit, the map shows its street address instead of a
+  name.
 """
 )
 
-render_map_help('NAICS-coded storefronts')
+render_map_help('three business categories (Retail, Food service and Personal services)')
 render_excluded_stations("Los Angeles")
 render_country_links('Los Angeles')
 

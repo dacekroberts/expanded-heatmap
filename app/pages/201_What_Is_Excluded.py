@@ -92,22 +92,21 @@ few hundred metres of a rapid-transit station - and they answer it by leaving
 two different things out.
 
 **Which stations.** Each map covers one rapid-transit network, the one named
-on that city's page. Commuter rail is left out except where, inside the
-city, it runs like a metro (*Why the maps differ* says where), stations in
-neighbouring municipalities are dropped because no register covers them, and
-where a light-rail line stops every other block its surface stops are thinned
-so the rings stay readable.
+on that city's page. Commuter rail is left out, except where it runs like a metro inside the city
+(*Why the maps differ* says where). Stations in neighbouring municipalities
+are dropped, because no register covers them. Where a light-rail line stops
+every other block, its surface stops are thinned so the rings stay readable.
 
 **Which businesses.** The legends are broader than the maps. "Retail" does not
 mean every retailer; "Food service" does not mean every kitchen. Some things
-are **excluded** - a choice made here, and reversible: vending machines and
-mail-order sellers are not storefronts, parking garages sit outside this
-project's question, and a few catch-all licence codes were dropped because
-sampling showed they were mostly home-based sole traders rather than shops.
-Other things are **missing**, which is not a choice at all: Philadelphia and
-Boston license no personal-service trade that publishes addresses, so those
-cities have two categories rather than three, and no filter here could add a
-hairdresser that no register records.
+are **excluded**, by a choice made here that can be reversed. Vending machines
+and mail-order sellers are not storefronts. Parking garages sit outside this
+project's question. And a few licence codes that cover any kind of business
+were dropped, because sampling showed they were mostly home-based sole traders
+rather than shops. Other things are **missing**, which is not a choice at all.
+Philadelphia and Boston license no personal-service trade that publishes
+addresses, so those cities have two categories rather than three. No filter
+here could add a hairdresser that no register records.
 
 If you believe a specific listing should not be on these maps, the last section
 says how that is handled. The short version: it comes down, and it is not
@@ -169,8 +168,8 @@ if DOC.exists():
         [r for r in rows if COUNTRY_OF[r["name"]] == country], totals)
     scroll_table(header, body, right=header[2:])
     st.caption(
-        "A dash is a city with no excluded-stations file: every station of "
-        "its network is on its map."
+        "A dash means nothing is left out: every station of that city's "
+        "network is on its map."
     )
     st.markdown(country_text(parts, country, {PER_CITY_SECTION: per_city}))
 
@@ -182,12 +181,12 @@ if DOC.exists():
 
     st.markdown(
         f"""
-**{outside + thinned + other + closed + infrequent:,} stations are left out across these maps** -
-{outside:,} for standing outside the city whose register the map is built from,
-{thinned:,} thinned out of street-running stretches where the stops are
-closer together than the rings, {infrequent:,} on light-rail stretches that run
-less often than every 15 minutes, and {closed:,} closed for works. Every one of
-them is named in its city's `excluded_stations.csv`.
+**{outside + thinned + other + closed + infrequent:,} stations are left out across these maps.**
+{outside:,} stand outside the city whose register the map is built from;
+{thinned:,} were thinned out of street-running stretches where the stops are
+closer together than the rings; {infrequent:,} are on light-rail stretches that
+run less often than every 15 minutes; and {closed:,} are closed for works. Every
+one of them is listed under "Stations left out" on its city's page.
 """
     )
 

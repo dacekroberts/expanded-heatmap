@@ -439,8 +439,8 @@ owner calls, never edits.**
 > operator's colours; their routes are drawn from OpenStreetMap, because the
 > timetable data carries none. *[The other five:]* The lines and stops are
 > drawn from OpenStreetMap, and the colours are this project's, because none
-> are published for reuse. {City} has no metro: its trams are its rapid
-> transit, as Riga's are, so every tram stop gets rings. Buses, trolleybuses
+> are published for reuse. {City} has no metro, so its trams are its rapid
+> transit, as in Riga. Every tram stop here gets rings. Buses, trolleybuses
 > and trains are not drawn{Brno: ", nor the heritage tram H4 or the event
 > shuttle P1"}.
 >

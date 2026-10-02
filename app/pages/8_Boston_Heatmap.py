@@ -48,9 +48,8 @@ st.markdown(
     """
 **Reading the map**
 
-- **Read this map as food-and-drink density, not general commercial density.** That is the most
-  important thing to know about it, and it is a fact about Boston's licensing rather than about
-  Boston's high streets.
+- **Read this map as food-and-drink density, not general commercial density.** That is a fact
+  about Boston's licensing rather than about Boston's high streets.
 - The city licenses food and alcohol and essentially no other trade, so those are the businesses
   that can be mapped here.
 
@@ -62,14 +61,14 @@ st.markdown(
   package stores and cannabis dispensaries. A clothes shop, a bookshop or a hardware store needs no
   licence from any of the three registries behind this map, so it is simply absent. Read the
   balance between the two categories accordingly.
-- **Three lines of data, assembled.** Food service and retail food come from Inspectional Services'
+- **Three sources, combined.** Food service and retail food come from Inspectional Services'
   food-establishment records; package stores come from the Licensing Board; cannabis dispensaries
   from its cannabis register.
 - A premises holding licences from more than one of them is counted once.
-- **One limitation of the privacy screening, stated rather than glossed.** This project checks
-  whether a published name could be a person's name at their own home. Boston's addresses carry no
-  apartment or suite designators at all, so that check has nothing to read here and reports a
-  clean zero, which is a gap in the measurement, not a proven result.
+- **A limit of the privacy check.** This project checks whether a published name could be a
+  person's name at their own home. Boston's addresses carry no apartment or suite numbers at all,
+  so the check has nothing to read here: its zero is a gap in the measurement, not a proven
+  result.
 - What actually limits the exposure is the sources: a food-service licence and a package-store
   licence both require commercial premises, so a home cannot hold one.
 
@@ -84,7 +83,7 @@ st.markdown(
   network is regional, reaching Newton, Brookline, Cambridge, Somerville, Milton, Quincy, Medford,
   Revere, Malden and Braintree), and 25 Green Line surface stops were thinned out.
 - The Green Line is a central subway plus four street-running branches whose stops sit a block or
-  two apart, so keeping all of them would have merged the rings into one wash; the central subway
+  two apart; keeping them all would have merged the rings into one wash. The central subway
   stations, each branch's terminals and every interchange are always kept.
 - The Red, Orange and Blue Lines and the Mattapan Trolley keep every in-city station.
 
@@ -92,7 +91,7 @@ Rail alignment data provided by MassDOT/MBTA.
 """
 )
 
-render_map_help('business categories')
+render_map_help('two business categories (Retail and Food service)')
 render_excluded_stations("Boston")
 render_country_links('Boston')
 
