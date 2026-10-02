@@ -4,6 +4,17 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-01 - Seattle regional: the Liquor Board's off-premise licences become a partial retail layer (owner)
+
+- **The owner said "yes"** to staging's recommendation.
+- **The layer:** the active off-premise rows (grocery stores, spirits
+  retailers, beer/wine and wine shops) become a partial retail layer in
+  every city outside Seattle and Bellevue. They are disclosed as shops
+  licensed to sell alcohol only (Zurich's precedent).
+- **On premise** is a check on the Snohomish food layer, not a layer.
+- **Recorded in `docs/build_briefs/seattle.md`**, "What the build has to
+  pull", items 4–7.
+
 ### 2026-10-01 - Seattle regional: the 2025 Snohomish layer approved for Lynnwood and Mountlake Terrace food (owner, 4a); the Liquor Board lists screened (4b)
 
 - **4a approved (owner: "use").** Lynnwood's and Mountlake Terrace's food

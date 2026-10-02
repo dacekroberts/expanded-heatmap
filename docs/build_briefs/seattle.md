@@ -284,19 +284,41 @@ against King County's city polygons:
      fields come from the USPS ZIP+4 product. Scope cities by
      point-in-boundary.
    - **The safety net** is the removal rule.
-4. **Lynnwood and Mountlake Terrace food**: the owner's call. One of:
-   - the LCB list (a download and a terms read);
-   - the 2025 Snohomish layer with its date on the page (it fails part 1 of
-     the currency rule);
-   - leave both cities' stations hollow, Tokyo's precedent.
-5. **Retail and personal services outside Seattle and Bellevue**: none
-   published.
-   - The routes are public-records requests: Shoreline, Kent and Des Moines
-     to the city; the BLS cities through DOR, which needs a non-commercial
-     declaration.
-   - That is outreach, the owner's last resort.
-   - Without it, those cities are food-only beside two full cities, and the
-     page states each city's coverage (the Tokyo and Band B precedents).
-6. **Rings that cross a city line** take the neighbour's data or are stated
-   as unmapped: Des Moines and unincorporated King County have King County
-   food only.
+4. **Lynnwood and Mountlake Terrace food: the 2025 Snohomish layer
+   (owner, 2026-10-01, 4a)**, "Food Service Establishments (2025)": 598 and
+   92 points.
+   - **The rule:** a frozen part beside a current whole, its date on the
+     page (Tokyo's precedent).
+   - **Two checks at build, or the stations go hollow:**
+     - **It is a complete snapshot.** Compare it with the county's
+       published count of permitted establishments, and with the Liquor
+       Board's on-premise rows (Lynnwood 113, Mountlake Terrace 24).
+     - **Its date comes from more than the catalogue's "(2025)" label.**
+   - **Licence:** its `licenseInfo` is empty. A licence read is owed at
+     build.
+5. **A partial retail layer in every city outside Seattle and Bellevue:
+   the Liquor Board's off-premise licences (owner, 2026-10-01).**
+   - **What it is:** "Off Premise" list, `lcb.wa.gov/records/frequently-requested-lists`,
+     dated 2026-09-29.
+   - **Active rows only.** These are grocery stores (beer/wine), spirits
+     retailers, beer/wine specialty shops and wine resellers.
+   - **Disclosed as "shops licensed to sell alcohol only"**, Zurich's
+     precedent for a partial retail layer.
+   - **Location:** premises addresses, joined to the county address points.
+     There are no coordinates.
+   - **Never published:** `Licensee`, phone and mailing columns. Trade name
+     only.
+   - **Terms:** RCW 42.56.070(8), "not for commercial purposes", met by the
+     owner's non-commercial confirmation. A formal licence read is owed at
+     build.
+   - **Counts (all statuses):** Lynnwood 133, Kent 134, Federal Way 106,
+     Shoreline 66, Redmond 64, Tukwila 48, SeaTac 40, Mountlake Terrace 25,
+     Des Moines 24, Mercer Island 16.
+   - **On premise (9,993 rows)** is a check on the Snohomish layer, not a
+     layer.
+6. **Personal services outside Seattle and Bellevue: none published,
+   disclosed per city** (owner, 4b). The only routes are public-records
+   requests, which are outreach and not taken.
+7. **Rings that cross a city line** take the neighbour's data or are stated
+   as unmapped. Des Moines and unincorporated King County have King County
+   food and the off-premise layer only.
