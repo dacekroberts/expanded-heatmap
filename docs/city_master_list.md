@@ -96,7 +96,8 @@ permits in force (FY2024). Screened 2026-10-01; every list read carries
 operator names, so the owner's name rule and `check_personal_exposure.py`
 apply to each. **Briefed 2026-10-02**, with Band B's five Japanese cities:
 `docs/build_briefs/<slug>.md`, each brief's checks passing. The corrections
-below are from the briefs.
+below are from the briefs. **Released 2026-10-02 to one build session with agents**, all twelve
+(`docs/handoff_japan_batch_2026-10-02.md`).
 
 | City | Business lists | Licence | Rail | Open at build |
 |---|---|---|---|---|

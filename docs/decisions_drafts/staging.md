@@ -4,6 +4,33 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - The Japan batch released to one build session with agents; page numbers pre-assigned (owner)
+
+- **The owner: "yes, write the kit, worktree and prompt"**, after staging's
+  call: one Japan session with agents, beside the UK session.
+  - All twelve go through `japan_register` and `japan_eigyo`, so a second
+    Japan session would edit the same module.
+  - The UK and Japan batches share almost no code, and each session gets
+    its own Overpass slot.
+- **The shape:**
+  - Phase 0 is setup.
+  - Phase 1: every brief's shared-code item in one pass, proven on the
+    Minato control and the eight built cities.
+  - Phase 2: Matsuyama as the pilot.
+  - Phase 3: three agents by shape (MHLW-led four; city lists with personal
+    services, four; one-bucket pages, three). They own only their cities'
+    files and never query Overpass, commit or edit shared code.
+  - Phase 4: integration, then the Japan sub-region and the minor-tier
+    pass.
+- **Page numbers are pre-assigned** so the two batches cannot take the same
+  "next free" number: UK 156–161, Japan 162–173. Recorded in
+  `docs/session_roles.md` and both kits.
+- **Set up:**
+  - `.claude/worktrees/japan-batch` on `japan-batch-build`, with the
+    `data/` and `.venv-lean` junctions and no upstream;
+  - the kit `docs/handoff_japan_batch_2026-10-02.md`;
+  - the prompt, given in chat.
+
 ### 2026-10-02 - Twelve Japanese briefs written; the owner's calls on Matsuyama, Okayama, Sakai, Hakodate and Nagasaki (owner)
 
 - **The owner: "start the japan briefs, 12 as one batch okay".** There are

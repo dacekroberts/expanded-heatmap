@@ -93,6 +93,7 @@ step instead of an implicit race.
 | France kit, then the France builds (2026-09-29 kit; builds approved 2026-09-30) | `.claude/worktrees/france-kit` | `worktree-france-kit` for docs, skills and scripts; `france-build` for the builds, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
 | Czech kit (2026-09-30: `docs/handoff_czech_batch_2026-09-30.md`) | `.claude/worktrees/czech-kit` | `worktree-czech-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
 | UK six builds (released 2026-10-02: `docs/handoff_uk_six_2026-10-01.md`; one lead session with agents) | `.claude/worktrees/uk-six` | `uk-six-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
+| Japan batch builds, twelve cities (released 2026-10-02: `docs/handoff_japan_batch_2026-10-02.md`; one lead session with agents) | `.claude/worktrees/japan-batch` | `japan-batch-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
 | Tram kit, the ten other T1 cities (2026-09-30: `docs/handoff_tram_kit_2026-09-30.md`; holding before builds) | `.claude/worktrees/tram-kit` | `worktree-tram-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build` - the name every build since Dublin has actually used, rather than the `worktree-<role>` form above. Delete the branch when the worktree goes: merged build branches have tended to outlive their worktrees |
 
@@ -191,6 +192,11 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
    open keeps its launch folder locked**: the contents go and an empty
    folder stays until that session is closed. Leave it, and remove the empty
    folder afterwards.
+
+**Page numbers pre-assigned (staging, 2026-10-02)**, so two batches building
+at once never take the same "next free" number: the UK six **156–161**
+(build order), the Japan batch **162–173** (its kit's table order). Notice
+numbers are claimed here, by the session, before one is written.
 
 ## The shared files everyone appends to
 

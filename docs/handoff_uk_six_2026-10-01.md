@@ -253,5 +253,7 @@ Newcastle's precedent is two notices per city: the FSA's and Ordnance
 Survey's (Code-Point Open). **Their wording follows Newcastle's converted
 notices and `read-licence` step 9.**
 Record each notice's number and licensor attribution string. Claim notice
-and page numbers early in `docs/session_roles.md`, so parallel work does
-not collide (the tram kit's lesson 5).
+numbers early in `docs/session_roles.md`, so parallel work does not
+collide (the tram kit's lesson 5). **Pages are pre-assigned: 156–161 in
+build order** (Manchester 156 … Blackpool 161); the Japan batch, building
+at the same time, has 162–173 (staging, 2026-10-02).
