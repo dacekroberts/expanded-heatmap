@@ -772,7 +772,9 @@ docstring; what a new country needs from them:
      becomes a selector group of its own, under the region's name;
    - **a sub-view of an existing group** (as France North and South,
      Czechia and the Seoul Capital Area are) needs a `REGION_GROUP` line
-     mapping it to that group, or it shows as a group of its own.
+     mapping it to that group, or it shows as a group of its own. On the
+     macro map it also joins `cities.COUNTRY_VIEWS`, so the region menu lists
+     it after every larger view (owner, 2026-10-02).
 
    The country's place within its group follows `REGION_ORDER` and build
    order; there is nothing to set.

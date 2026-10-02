@@ -168,6 +168,9 @@ two slices):
 - **`REGION_LABELS_ALSO["East Asia"]` gains the Japan region,** beside the
   Seoul Capital Area, so East Asia still names the eight. East Asia's frame
   will re-centre; measure, then re-place a label if needed.
+- **Add the Japan region (or both halves) to `cities.COUNTRY_VIEWS`** as well
+  as `REGION_ORDER` (owner, 2026-10-02): the country views go last in the
+  region menu, after every larger view.
 - **It lands with the twelve, at review time.** The region move changes
   `app/`.
 
@@ -175,7 +178,10 @@ two slices):
 
 - **Page numbers are pre-assigned to avoid a collision:** UK six **156–161**,
   Japan batch **162–173**, in table order (Matsuyama 162 … Kōchi 173).
-  Recorded in `docs/session_roles.md`.
+  Recorded in `docs/session_roles.md`. **Pass it to the scaffold:**
+  `scaffold_city.py ... --page-number 162` (and so on). Without it the script
+  takes one past the highest page on this branch, which is 156, the UK six's
+  first.
 - **Notice numbers:** claim them in `docs/session_roles.md` before writing
   one, and re-read the table first. The UK session claims there too.
 - **`app/cities.py`'s `REGION_ORDER`:**

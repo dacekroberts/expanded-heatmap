@@ -4,6 +4,125 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Seattle (Regional) released to its own session, Tbilisi queued behind it (owner)
+
+- **The owner: "should we pass the seattle regional brief to a new session?
+  and queue Tbilisi after?"**, then "yes" to staging's plan.
+- **One lead, with agents only for clean splits.** Seattle (Regional) is one
+  page from five sources across 11 cities, meeting in one step 2, so it does
+  not split by city the way the UK and Japan batches do. The Liquor Board
+  layer and the Snohomish filter are the agent-able legs.
+- **Tbilisi waits on three conditions:**
+  - Seattle is green;
+  - the owner answers its three calls (placeholder coordinates, division
+    45, region);
+  - the UK session's region pass has landed, since that pass changes
+    Europe's frame and Tbilisi's label is measured there.
+- **Numbers:** pages 174 (Seattle) and 175 (Tbilisi); notices from 109.
+- **Set up:**
+  - `.claude/worktrees/seattle-tbilisi` on `seattle-tbilisi-build`, with
+    the junctions and no upstream;
+  - the kit `docs/handoff_seattle_tbilisi_2026-10-02.md`;
+  - the prompt, given in chat.
+
+### 2026-10-02 - Georgia profiled, Tbilisi briefed; Geostat's terms stored
+
+- **`add-country` for Georgia** (`docs/georgia_step0_endpoints.md`). There
+  is no disqualifier: one national register, Geostat's Statistical Business
+  Register, on a keyless API with a factual address separate from the legal
+  one. Its traps:
+  - `X` is latitude and `Y` is longitude.
+  - The API has no column selection, so personal columns are dropped in
+    memory.
+  - It allows about 50 requests a window (HTTP 429 with `retryAfter`). A
+    brief re-run straight after another one fails on 429; that is a RETRY,
+    not a brief to correct.
+  - Names return in Georgian script whatever the language, so
+    `check_personal_exposure.py` needs a Georgian pass.
+  - `Activity_2_Code` is NACE Rev.2; `Activity_Code` is the old scheme.
+- **Tbilisi's brief** (`docs/build_briefs/tbilisi.md`):
+  - 14,806 storefronts after the standing exclusions: Retail 12,194, Food
+    1,343, Personal 1,269. The catch-all share is 9.6%.
+  - 64.4% are individual entrepreneurs, shown as unnamed dots (owner,
+    2026-10-01).
+  - **Real coordinates 81.3%, not the screen's 91%:** 1,295 rows sit on ten
+    district-centroid placeholders.
+  - Metro: 2 lines and 23 stations (OSM 16 + 7), matching the operator's
+    "23 stations on two lines".
+  - Geostat's terms are PERMITTED WITH CONDITIONS (credit Geostat, no
+    logo), stored unaltered in `docs/licenses/` with SHA-256.
+- **Open for the owner:**
+  - the placeholder coordinates;
+  - division 45 (motor vehicles);
+  - the region.
+
+### 2026-10-02 - Seattle (Regional): rail from OSM, Snohomish read permissively, HQ rows with the head-office rule, lapsed food cross-referenced to King County, Bellevue food from King County (owner)
+
+- **Sound Transit's GTFS is not used** (owner: "we can use openstreetmap
+  here"). Its Transit Data Terms add a "No Changes" clause, a duty to pass
+  the terms on, an open indemnity, an email registration and usage metrics.
+  Rail comes from OSM. Gate 3's count comes from Sound Transit's station
+  pages.
+- **Snohomish County's food layer: "permissive read".**
+  - The layer's own terms are SILENT. Item
+    `75bf161b46ba484a97e6d7f1c63f21a4` was published by Public Works Solid
+    Waste and is not in the open-data catalogue.
+  - The county's GIS data disclaimer is read as governing, with its
+    hold-harmless for errors in the data.
+  - Credit "Snohomish County, Food Service Establishments (2025)", never the
+    health department. The removal rule is the safety net.
+- **Snohomish permit types: "keep only those points"**, Restaurant and
+  Grocery. That is R1 (2026-09-29): school kitchens, donated-food
+  distributors, food trucks, caterers, vending and concessions are out.
+  Lynnwood keeps 310 facilities and Mountlake Terrace 56.
+- **Seattle's lapsed licences: the alternative** (owner: "we can try the
+  alternative for 4", replacing "drop 2023-2024" the same day).
+  - Staging had reported the year-drop's loss as not small. By trade name,
+    35 to 38% of the 2023 and 2024 food rows match a currently inspected
+    business, against 65% for 2026.
+  - **Every licence year stays.** A lapsed food row (licence year 2025 or
+    earlier) stays only if it matches a business King County inspected in
+    2025 or 2026, by name or street address.
+  - Lapsed retail and personal-service rows stay, disclosed as possibly
+    closed.
+- **Bellevue confirmed** (owner: "king county food cross reference for 2
+  sounds good").
+- **Seattle's `HEADER QUARTER` rows: "keep, use head-office rule".** Both
+  location types are kept, and Taipei's and Taichung's head-office rule
+  applies to headquarters rows. It flags 9 rows.
+- **Bellevue: King County food plus the cutoff.** The owner's reply
+  ("makes more sense now check") was read back. The owner chose Bellevue's
+  food from King County's inspections, current by construction, and the
+  2010 issue-date cutoff for Bellevue's retail and personal services only.
+  Before 2010, only 42% of Bellevue's food rows had a currently inspected
+  business at their address.
+
+### 2026-10-02 - Seattle (Regional): the Liquor Board's lists PERMITTED WITH CONDITIONS; non-commercial holds for a portfolio project (owner)
+
+- **The `licence-read` verdict (2026-10-02): PERMITTED WITH CONDITIONS.**
+  - The Washington State Liquor and Cannabis Board publishes no licence and
+    no terms of use, and the list file (`Off Premise09292026.xlsx`, 8,795
+    rows) carries none.
+  - The only rule on reuse is the lists page's note: "Per RCW 42.56.070(8),
+    records received through the Public Records Act may not be used for
+    commercial purposes." The statute itself restricts the agency's
+    disclosure of "lists of individuals".
+  - The published layer drops `Licensee`, phone and mailing columns, so it
+    shows trade names at premises.
+  - No wording is prescribed and nothing is owed. The removal contact is
+    publicrecords@lcb.wa.gov.
+- **The owner's calls:**
+  1. **"yes non-commercial"**: a free map in a personal portfolio, with
+     nothing sold, no ads, no paid tier and no client use, meets the
+     condition. The agent's lean was the same: MRSC's summary of SEIU 925
+     treats publicizing one's work as too remote to be commercial. The same
+     condition covers Seattle's own register.
+  2. **"yes"**: the city page discloses the Board's notice that its list
+     reports "contain possible errors due to a known data transfer issue",
+     if it is still on the lists page at build. The page also states the
+     list's date and never calls it complete, accurate or current (the
+     privacy policy's accuracy disclaimer).
+
 ### 2026-10-02 - UK six briefs corrected from the UK lead's report
 
 - **The UK lead's report, after Manchester's build on page 156:**

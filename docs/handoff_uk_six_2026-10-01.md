@@ -109,6 +109,9 @@ slices):
   names London, Glasgow and Newcastle (Seoul's case in East Asia). Europe's
   re-centred frame may need a label re-placed (Stockholm's case in the Czech
   move). Measure; do not tune by eye.
+- **Add the UK region (or both halves) to `cities.COUNTRY_VIEWS`** as well as
+  `REGION_ORDER` (owner, 2026-10-02): the country views go last in the region
+  menu, after every larger view.
 - **It lands with the six, at review time.** The region move changes `app/`.
 
 **The Japan batch takes the same rule when it is built.** It is recorded in
@@ -133,7 +136,10 @@ keeps the hold. A build writes its page text to these:
    - `publish-city`, whose gate step 5a checks the page against the format;
    - `premises-taxonomy` step 8, for labels;
    - `read-licence` step 9, for rows and notices.
-3. **`scripts/scaffold_city.py`'s page template is the new format.** Run it
+3. **Scaffold with the reserved page number**, `--page-number 156` to `161`
+   in build order (`docs/session_roles.md`): it is what keeps the Japan
+   batch's 162-173 from colliding with these.
+4. **`scripts/scaffold_city.py`'s page template is the new format.** Run it
    for real, not as a dry run.
 
 **Rules for this round (Cleanup, 2026-10-02):**

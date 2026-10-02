@@ -41,10 +41,16 @@ def url_path(page):
     return "/" + re.sub(r"^\d+_", "", page.stem)
 
 
+def page_order(p):
+    """Streamlit's order: numbered pages by number, then unnumbered ones (the
+    three info pages since 2026-10-02) by name."""
+    m = re.match(r"\d+", p.name)
+    return (0, int(m.group()), p.name) if m else (1, 0, p.name)
+
+
 def pages(root=ROOT):
     out = []
-    for p in sorted((root / "app" / "pages").glob("*.py"),
-                    key=lambda p: (int(re.match(r"\d+", p.name).group()), p.name)):
+    for p in sorted((root / "app" / "pages").glob("*.py"), key=page_order):
         text = p.read_text(encoding="utf-8")
         slug = SLUG_RE.search(text)
         nav = NAV_RE.search(text)

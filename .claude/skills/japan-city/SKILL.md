@@ -107,6 +107,9 @@ the owner reminded Kobe's build that it exists for the cities after it.
     with Czechia.
   - `REGION_LABELS_ALSO["East Asia"]` adds the Japan region, so East Asia
     still names Tokyo, Osaka and the other anchors, as it names Seoul.
+  - The Japan region joins `cities.COUNTRY_VIEWS` as well as `REGION_ORDER`,
+    so it sits after every larger view in the region menu (owner,
+    2026-10-02).
   - The first city of the batch makes this change, and it lands at review
     time with that city's `app/` diff.
 

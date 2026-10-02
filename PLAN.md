@@ -895,6 +895,26 @@ every key, account and letter:
   - What Is Excluded still points to `excluded_premises.csv` for Minneapolis,
     Pittsburgh, Kitchener-Waterloo, Palma and Ottawa. No page shows those
     rows, so the sentence needs another wording, not "listed on the page".
+- [ ] ⏸ **Review time (owner, 2026-10-02): two fixes the UK six session found.**
+  - **Legend rows that repeat their label.** `build_legend` writes the
+    on-map label, then `LEGEND_NAMES`' full name, a shape meant for line
+    codes. Fix in `pipeline/map_common.py`: drop the label when the full name
+    already starts with it. That re-renders four maps:
+    - Newcastle: "Green line Green line (Tyne and Wear Metro)" becomes
+      "Green line (Tyne and Wear Metro)";
+    - London: "Bakerloo Bakerloo line" becomes "Bakerloo line";
+    - Sydney: "T1 T1 North Shore & Western Line" becomes "T1 North Shore &
+      Western Line";
+    - Melbourne: "Burnley Burnley group: ..." becomes "Burnley group: ...".
+
+    Glasgow ("Subway Glasgow Subway") is not caught by that rule and needs its
+    own wording, if any. Bucharest and Stockholm are unaffected.
+  - **"centre" in six notices' own sentences.** The US-spelling pass skipped
+    `components._NOTICES` whole. Change "centre" to "center" in our
+    explanatory sentence only; the Crown copyright and Royal Mail statements
+    stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
+    and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
+    is an `app/` change, so a reboot follows.
 - [ ] ⏸ **D.C.'s "Beauty Booth" (6 pins), kept as Personal services**: a chair
   rented inside a salon, which the person-license rule (2026-10-02,
   `docs/category_rules.md`) takes out. Pending for the owner in

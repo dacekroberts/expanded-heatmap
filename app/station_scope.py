@@ -1,6 +1,6 @@
 """Reads the committed excluded_stations.csv files and says why each is there.
 
-Shared DELIBERATELY between app/pages/201_What_Is_Excluded.py, which renders
+Shared DELIBERATELY between app/pages/What_Is_Excluded.py, which renders
 these counts for readers, and scripts/check_scope_disclosure.py, which fails
 when a new city arrives in a shape neither understands. Two copies of this
 vocabulary would drift, and the drift would be invisible: the page would

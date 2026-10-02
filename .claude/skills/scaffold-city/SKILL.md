@@ -32,12 +32,16 @@ python scripts/scaffold_city.py --slug dallas --name Dallas --system-name DART \
 - `--lat/--lon` the macro-map marker; the projected CRS (UTM zone) is derived
   from the longitude and its derivation written into the config.
 - `--map-step 4` if you will insert a geocoding step (Los Angeles); default 3.
+- `--page-number N` when another session is building at the same time: the
+  number from the block `docs/session_roles.md` reserves for this session.
+  Without it the page takes one past the highest on this branch, and two
+  parallel branches take the same one. A taken number is refused.
 - `--dry-run` shows what would be written; existing files are skipped, never
   overwritten (`--force` to override). Re-running for a listed city is safe.
 
 **What it writes:** `pipeline/<slug>/__init__.py`, `config.py`,
 `step<N>_map.py`; `data/<slug>/{raw,processed}` and `outputs/<slug>/`;
-`app/pages/<n>_<Slug>_Heatmap.py` (next free number); and the `app/cities.py`
+`app/pages/<n>_<Slug>_Heatmap.py` (`--page-number`, or the next free number); and the `app/cities.py`
 entry. Every value only the city's data can supply is a `TODO`.
 
 **The page is born in the city-page format** (`docs/city_page_format.md`,
