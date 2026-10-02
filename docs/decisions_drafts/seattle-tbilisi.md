@@ -4,6 +4,36 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Seattle (Regional) green: every gate run, baseline recorded, held for review time
+
+- **Gates, in Band B's order:** personal exposure (publish; row in
+  `docs/privacy_verdicts.md`); `check_provenance.py` names Seattle (Regional)
+  OK (slug `seattle`); `check_scope_disclosure.py` OK; the four
+  inconsistency rows and the themes it joins (several registers, Personal
+  services thin, regional, type for a personal name); the master list
+  (Band C to Built, 125 built, 43 candidates); `check_macro_facts.py` OK and
+  the macro label measured (Space Grotesk 600, 120.5 px, controls exact) and
+  placed west of the dot, PROBLEMS 0 over 15 regions and three widths, out
+  of the default frame like Vancouver and Buffalo; the drift check zero
+  drift, 40-figure baseline; ring share 5,589 of 14,498 (39%);
+  `check_deploy_imports.py` PROBLEMS 0; `check_all.py` 44 of 44 after
+  merging master; pushed as `seattle-tbilisi-build`, 0 behind.
+- **Only Seattle's entries were added to `app/ring_shares.json` and
+  `app/macro_facts.json`.** A full `--write` from this checkout also
+  re-hashed twelve other cities' committed maps (line endings in the working
+  copies); those entries were left as committed, and `check_ring_shares.py`
+  passes on them.
+- **Mode `light_rail`, coverage `narrowed` ("Personal services thin"),
+  `rail_extra` "Trams" (light rail, the field's rule)** for the owner's
+  approval with the build.
+- **One quick browser render each** (the day rule): the map (both lines and
+  labels, legend, clusters, OSM credit, no console errors) and the page in
+  the lean app, in the page format's order. `deploy-verify` waits for review
+  time (scope `city-added`).
+- **A gap in a shared check, flagged as its own task:**
+  `check_no_fetch_in_steps.py` does not follow a step's imports into its own
+  city package (`pipeline/seattle/lcb_offpremise.py`, `sno_food.py`).
+
 ### 2026-10-02 - Seattle (Regional) privacy verdict: publish
 
 - **Seattle (Regional) privacy verdict: publish.** `check_personal_exposure.py
