@@ -7,6 +7,47 @@ them off.
 
 
 
+
+### 2026-10-02 - Nagasaki built, a 2023 snapshot beside MHLW's current filings (owner: shape b)
+
+- **Nagasaki built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 7,317 storefronts (Food service 3,919, Retail 1,772, Personal
+  services 1,626), 43 stations, 2 lines; 4,211 pins within a ring (58%).**
+  Page 166, notice 101, `mode: tram`, minor tier.
+- **The business leg, the owner's shape (b):** the city's BODIK lists (food
+  permits in force on 2023-06-30; barbers, beauty salons and laundries to
+  2023-03-31; not filtered by `in_term`, the page states the dates) plus
+  MHLW's current file (`OWN_POINT_FALLBACK`, `ADDRESS_BY_CONSENT`),
+  `SUPERSEDES {"mhlw": ("food",)}`: 1,497 snapshot rows give way to MHLW's.
+  3,623 MHLW filings publish no address (2,090 restaurants, about one in
+  four). The city's own 2026 list (`city_64426.xlsx`) never read.
+- **The join:** block 89.2%, town-chōme 6.9%, MHLW's point 3.8%, unplaced 0.1%;
+  BODIK food 88.6% and personal 90.1% block, as briefed. MHLW's coordinates sit
+  a median 36 m from the block point, 94.2% within 250 m (2,787 rows).
+- **Rail:** N02-25, 43 stations, 6 excluded. The tram's five sections drawn as
+  one line (Matsuyama's precedent; routes 1, 3 and 5 run, 4 suspended). Gate
+  3: 38 = 38: the operator's stop table does list 38, writing
+  スタジアムシティノース / サウス in half-width katakana, which the brief's search
+  missed. Median gap 219 m, the closest-set network in Japan so far: halved
+  rings. 6 aliases, 八千代町 from the operator's table, 13 overrides
+  romanising the stops OSM gives in translation (Peace Park, City Hall...).
+- **Census control: 2.09 against an official / census ratio of 2.55:
+  explained** (one restaurant permit in four publishes no address, and the
+  snapshot is frozen).
+- **Privacy verdict: publish.** The Japan pass prints 0; the name rule cannot
+  run (no individual operator column), Tokyo's and Fukuoka's precedent.
+- **The 菓子 / そうざい factory share:** 21 of 643 (3.3%), kept.
+- **Proposals for review time:** "Nagasaki City's own list is a snapshot of the
+  food-business permits in force on 30 June 2023, the newest it publishes under
+  an open license."; "...(downloaded 2 October 2026) and carries the permits
+  granted since."; "The barbers, beauty salons and laundries come from the
+  city's registers as of 31 March 2023; premises opened since then are not on
+  this map."; "None of the lists says who a business's operator is, so where a
+  trade name is its operator's own name, this cannot be checked here."; "More
+  than half of storefronts sit within a ring."; the tram one-line sentence; the
+  notice's dataset links (the four BODIK dataset pages, chosen by the lead over
+  the agent's unverified organization link).
+
 ### 2026-10-02 - Fukui built, the project's first CC BY-SA output
 
 - **Fukui built on the shared Japanese steps (the city-lists agent, applied

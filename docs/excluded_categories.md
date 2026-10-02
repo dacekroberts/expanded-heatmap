@@ -3232,6 +3232,45 @@ line.
 - Left out: 14 stations beyond it: 5 in Sabae, 4 in Sakai, 3 in Eiheiji and 2
   in Ono.
 
+### Nagasaki - the city's 2023 lists and the national online filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 3,623 national filings whose filers did not publish an address.
+- 341 food trucks, festival stalls and other rows with no fixed place.
+- 750 snack bars and other hostess venues (業態 スナック), 650 rows of food
+  manufacturing other than bakeries and confectioners (菓子) and delis (そうざい)
+  and other permit types that are not a counter, 408 school, hospital and
+  staff canteens, 188 vending machines, 148 more marked temporary or mobile,
+  113 premises inside hotels and inns, 33 caterers (仕出し), 5 mail-order
+  businesses and 4 entertainment venues.
+- 12 closed premises, which the national filings keep, marked.
+
+**Counted** - the city's snapshot of food permits in force on 30 June 2023
+and its barbers, beauty salons and laundries to 31 March 2023, the newest it
+publishes under an open license, and the national online filings as
+downloaded on 2 October 2026, which carry the permits granted since. 21 of the
+643 bakery, confectioner and deli rows (3.3%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**What is missing** - barbers, beauty salons and laundries opened since March
+2023; rows of the 2023 snapshot whose premises have since closed remain.
+
+**One pin per premises** - 440 repeat permits are shown once, and 1,497 rows
+of the city's 2023 list for a premises in the national filings.
+
+**Not placed** - 5 rows (0.1%) on 神ノ島町 and 新小ケ倉. Another 642 sit at
+their town's center, and 351 at the ministry's own coordinates.
+
+**Names not shown** - none: no list names an individual operator, so a trade
+name that is an operator's own name cannot be found.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 6 stations beyond it: 4 in Nagayo and 2 in Isahaya.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

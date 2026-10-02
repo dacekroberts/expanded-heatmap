@@ -1644,6 +1644,27 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Fukui City and MLIT did not make and do not endorse this map.",
      False),
+    # Nagasaki (notice 101): the city's four BODIK lists, CC BY 4.0 with its own
+    # attribution (no prescribed form); MHLW as in Hiroshima's; MLIT as in
+    # Kobe's, N02 in its 2025 edition.
+    ("Nagasaki City, MHLW and MLIT (Nagasaki)",
+     "Nagasaki's businesses: 長崎市「食品等営業許可・届出一覧（全許可・届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_food_business_all](https://data.bodik.jp/dataset/422011_food_business_all)）、「理容所一覧（全届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_riyosho_all](https://data.bodik.jp/dataset/422011_riyosho_all)）、「美容所一覧（全届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_biyosho_all](https://data.bodik.jp/dataset/422011_biyosho_all)）、「クリーニング業（洗い・取次店）一覧（全届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_cleners_all](https://data.bodik.jp/dataset/422011_cleners_all)）、"
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)、を加工して作成. "
+     "(This map modifies the City of Nagasaki's lists of food permits as of 30 June 2023 and of barbers, "
+     "beauty salons and laundries as of 31 March 2023, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, showed a premises in both lists once, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "The ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Nagasaki City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
