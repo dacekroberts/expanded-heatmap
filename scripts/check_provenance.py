@@ -345,6 +345,25 @@ def resolved_urls(slug):
     return urls, None
 
 
+CLAIM_RE = re.compile(r"(\d+)\s*[–-]\s*(\d+)")
+
+
+def claimed_notice_numbers():
+    """Notice numbers another session has claimed in docs/session_roles.md
+    ("the UK six hold 84–96 and the Japan batch 97–108"): every range in the
+    sentence that says notice numbers are claimed there. A claim may leave a gap on this branch; check D allows
+    exactly those gaps and no others. Delete a claim once its batch lands."""
+    path = ROOT / "docs" / "session_roles.md"
+    if not path.exists():
+        return set()
+    text = path.read_text(encoding="utf-8")
+    i = text.find("Notice numbers are claimed")
+    if i < 0:
+        return set()
+    sentence = text[i:text.find(".", i)]
+    return {n for a, b in CLAIM_RE.findall(sentence) for n in range(int(a), int(b) + 1)}
+
+
 def notice_headings(doc):
     """(number, heading) for each numbered notice in data_sources.md."""
     sec = doc[doc.index("## Notices this project MUST display when published"):]
@@ -1054,11 +1073,18 @@ def main():
             "parsed NO entries from app/components.py's _NOTICES - its format "
             "changed, so check D examined nothing"]))
 
-    if nums != list(range(1, len(nums) + 1)):
+    # A gap is allowed only where docs/session_roles.md records another
+    # session's claimed block (parallel batches number their notices on their
+    # own branches; owner, 2026-10-02). Every other gap, and any duplicate or
+    # out-of-order number, still fails.
+    missing = set(range(1, max(nums, default=0) + 1)) - set(nums)
+    if nums != sorted(set(nums)) or missing - claimed_notice_numbers():
         dupes = sorted({n for n in nums if nums.count(n) > 1})
         failures.append(("notices", [
             f"numbers are not unique and contiguous from 1: {nums}"
-            + (f" (duplicates: {dupes})" if dupes else "")]))
+            + (f" (duplicates: {dupes})" if dupes else "")
+            + (f" (missing and unclaimed: {sorted(missing - claimed_notice_numbers())})"
+               if missing - claimed_notice_numbers() else "")]))
 
     for h in shown:
         candidate = NOTICE_ALIASES.get(h, h)

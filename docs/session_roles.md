@@ -200,6 +200,9 @@ at once never take the same "next free" number: the UK six **156–161**
 Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
 here, by the session, before one is written: the UK six hold 84–96 and the
 Japan batch 97–108 on their branches, so the Seattle session starts at 109.
+Check D of `check_provenance.py` reads every range in that sentence and lets
+a branch skip exactly those numbers; any other gap still fails. Keep the
+ranges in that one sentence, and delete a batch's range once it lands.
 **Scaffold with the reserved number:** `scaffold_city.py ... --page-number
 <N>`. Without it the script takes one past the highest page on the session's
 own branch, which is the collision. It refuses a number already taken. The
