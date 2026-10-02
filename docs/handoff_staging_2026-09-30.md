@@ -127,8 +127,15 @@ carried over as they stand.
        discard table.
    - **Pushed 2026-10-02** (b9a06c8e), after Cleanup landed Toronto's and
      San Francisco's new facts with its prose pass (d85b47a7).
-   - **Takaoka's licence re-check** (an agent) was still running on
-     2026-10-02.
+   - **Takaoka's licence re-check: TO DO.** The agent stalled for over two
+     hours, likely on a browser permission in the shared pane, and was
+     stopped on 2026-10-02 with no verdict. Redo it directly: the
+     governing licence of Toyama Prefecture's food list (on
+     toyama-pref.box.com, monthly) and its personal-services lists, with
+     who the new data platform's 403 is for. The verdict is A (an open
+     licence confirmed) or R (permission needed, Sendai's case).
+   - **The app was rebooted by the owner after Cleanup's prose-pass
+     landing** (2026-10-02).
 3. **Cleanup was re-rendering cities in the shared `data/`** on
    2026-10-01. If `check_macro_facts` or `check_ring_shares` blocks a push,
    tell Cleanup (`Cleanup session`). Never write those cities' facts from
