@@ -200,6 +200,9 @@ at once never take the same "next free" number: the UK six **156–161**
 Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
 here, by the session, before one is written: the UK six hold 84–96 and the
 Japan batch 97–108 on their branches, so the Seattle session starts at 109.
+The Seattle and Tbilisi session holds **109–116** on its branch (claimed
+2026-10-02): 109–113 for Seattle (Regional)'s five publishers, 114–116 for
+Tbilisi.
 **Scaffold with the reserved number:** `scaffold_city.py ... --page-number
 <N>`. Without it the script takes one past the highest page on the session's
 own branch, which is the collision. It refuses a number already taken. The
