@@ -618,5 +618,10 @@
   "in_ring": 664,
   "all": 1025,
   "map_blob": "525408951d114fdca732119e4c0d512e42a826ea"
+ },
+ "seattle": {
+  "in_ring": 5589,
+  "all": 14498,
+  "map_blob": "0668c9b56d2cce020d3cd165f8545521c943805a"
  }
 }

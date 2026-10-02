@@ -459,7 +459,13 @@ Desktop is unaffected — the label is fully visible there.
   owner, not a data one. Privacy flags: `ownername` and `businessphone`
   columns, and the name fields are inverted on some rows (blank `businessname`
   with the trade name sitting in `ownername`) - Boston's trap again.
-- [ ] **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
+- [x] **Seattle (Regional) BUILT 2026-10-02** on `seattle-tbilisi-build`
+  (`pages/174_Seattle_Heatmap.py`; 14,500 storefronts, 39 stations in 11
+  cities, five publishers), held for the owner's review time. Two owner
+  questions open in `docs/decisions_drafts/seattle-tbilisi.md` (street-only
+  matches for lapsed Seattle food; Snohomish rows with a blank jurisdiction).
+  The history below is kept.
+- **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
   first MULTI-MUNICIPALITY city.** Do not re-probe the Seattle registry itself;
   the findings are in `docs/build_briefs/seattle.md`, with checks
   (`python scripts/brief_check.py seattle`). On that evidence Seattle's own
