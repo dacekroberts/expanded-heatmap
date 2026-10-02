@@ -4,6 +4,69 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - The UK six built on their branch; brief corrections received; numbers ledger
+
+- **The UK lead reports all six built on `uk-six-build`,** pushed and held
+  for review time. Its brief corrections, each in its city's entry in
+  `docs/decisions_drafts/uk-six.md`:
+  - **Placement on the full files, below the briefs' samples:** Edinburgh
+    95.4% placed (93.9% at a point) against the brief's 96.6%; Sheffield
+    95.3% against 96.4%; Wyre 83.2% against 84.5% (its private addresses
+    arrive with an EMPTY postcode); Rushcliffe 79.6% against 80.2%.
+  - **Nottingham:** each OSM relation is one direction end to end; NET lists
+    50 stops, not about 51; Rushcliffe holds 4.
+  - **Edinburgh:** the Newhaven stops are under NaPTAN's 9400ZZTW prefix.
+    "23 stops" is the timetables page's map; its table lists 13.
+  - **Birmingham:** every 4 to 11 minutes by day, not 8 to 12. Line 2 is
+    still not open (due about 1 November), so Dudley stays out.
+  - **Sheffield:** OSM's 52 names are 51 stops, one spelled two ways. NaPTAN
+    renamed Shalesmoor "Kelham Island" in 2025.
+  - **Blackpool:** 26 stops in Blackpool and 14 in Wyre.
+- **The master list's Band B rows are left as they are on master.** The UK
+  branch's own master-list step (gate 5) moves the six to Built at landing.
+  Editing the same rows here would only make that merge conflict. The
+  corrected figures land with them.
+- **The lead's open items for the owner:** Edinburgh's centroid tier, and
+  Sheffield's stop name (Shalesmoor or Kelham Island).
+- **The numbers ledger (2026-10-02):**
+
+  | Session | Pages | Notices |
+  |---|---|---|
+  | UK six | 156–161 | 84–96 |
+  | Japan batch | 162–173 | 97–108 |
+  | Seattle (Regional) | 174 | 109–113 |
+  | Tbilisi | 175 | 114–116 |
+
+  Each block is claimed on its own branch's `docs/session_roles.md`.
+  Seattle's brief passes 16 of 16, and Seattle (Regional) is scaffolded at
+  page 174.
+
+### 2026-10-02 - Tbilisi's three calls, all as recommended (owner)
+
+- **The owner: "approve all three tbilisi recommendations".**
+  1. **Placeholder coordinates: drop and disclose** (Madrid's zero
+     coordinates). 1,295 kept rows sit on ten district-centroid points, 805
+     of them on four metro stations, which would have inflated Isani,
+     Didube, Samgori and Liberty Square by 164 to 255 dots each.
+  2. **Division 45: the precedent (R4).** Keep 45.11.2 vehicle retail
+     (435), 45.19.0 (21) and 45.32.0 parts retail (1,060). Leave out
+     45.11.1 "wholesale and retail" (117) and all repair.
+  3. **Region `Europe`, measured, approved and then REOPENED the same day.**
+     The owner: "actually tbilisi is quite far away from other cities".
+     Dublin to Tbilisi is about 3,700 km, past the 3,300 km at which Canada
+     was split. Fitted into Europe, Europe's centre would move about 9
+     degrees east.
+     - **Settled: a new leaf region, "West Asia".** The owner: "west asia
+       could work too", "if georgia is officially in asia … we don't need to
+       modify europe".
+     - The UN M49 geoscheme puts Georgia in Western Asia. The name pairs with
+       East Asia and is named for the area, so a later Baku, Yerevan or
+       Ankara joins it. Europe is not modified.
+     - The owner first floated Europe West and East regions, with a look by
+       Cleanup. The message to Cleanup failed to send. Once Georgia's
+       classification settled Tbilisi, it was no longer needed.
+- **Tbilisi now waits only on Seattle being green** (`docs/handoff_seattle_tbilisi_2026-10-02.md`).
+
 ### 2026-10-02 - Seattle (Regional) released to its own session, Tbilisi queued behind it (owner)
 
 - **The owner: "should we pass the seattle regional brief to a new session?

@@ -10,14 +10,16 @@ queue Tbilisi after?", then "yes").
 `data/` and `.venv-lean` are junctions to the main checkout's. The branch
 has no upstream, so a plain `git push` can never reach master.
 
-**🛑 Tbilisi is QUEUED, not released.** Start it only when:
+**Tbilisi is QUEUED behind Seattle; every call is answered.** Start it
+when:
 1. Seattle is green and committed;
-2. the owner has answered Tbilisi's three 🚨 items in its brief (placeholder
-   coordinates, division 45, region) — check the brief and the staging
-   drafts file; staging records the answers there;
-3. the UK six session's UK-region pass has landed or been reported done,
-   because Tbilisi's macro label is measured in a Europe that pass changes.
-   Tbilisi's data steps do not wait on it, only its macro label.
+2. ✅ the owner has answered Tbilisi's three calls (2026-10-02, "approve all
+   three"): drop and disclose the placeholder coordinates; division 45 by the
+   precedent (vehicle and parts retail kept, 45.11.1 and repair out); and a
+   new leaf region **"West Asia"** (UN M49 puts Georgia in Western Asia;
+   Europe is not modified);
+3. ~~the UK six session's region pass~~: no longer a condition. Tbilisi
+   has its own region, so nothing it does touches Europe's frame.
 
 **Two other build sessions run at the same time**: the UK six
 (`uk-six-build`) and the Japan batch (`japan-batch-build`). Each edits
@@ -110,8 +112,11 @@ is part of this build, not a tidy-up.
   column selection; about 50 requests a window (HTTP 429 with
   `retryAfter`: back off, never loop); names come in Georgian script, so
   `check_personal_exposure.py` needs a Georgian pass; use `Activity_2_Code`.
-- **Open for the owner** (🚨 in the brief): placeholder coordinates,
-  division 45, region. Do not start before they are answered.
+- **Decided 2026-10-02 (owner):** placeholder coordinates dropped and
+  disclosed; division 45 by the precedent; **a new leaf region "West Asia"**
+  (UN M49 Western Asia), Europe untouched. `scaffold_city.py` needs
+  `--new-region`. Its comment in `REGION_ORDER` gives the reason: about
+  3,700 km from Dublin, past Canada's 3,300.
 - **Mode `metro`.** Tbilisi Metro, 2 lines, 23 stations (OSM 16 + 7, the
   operator's own count).
 
