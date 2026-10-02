@@ -3429,6 +3429,44 @@ line.
 - Left out: 4 stations beyond it: 3 in Hokuto and 1 in Nanae.
 - The South Hokkaido Railway keeps one station inside the city, Goryokaku.
 
+### Kagoshima - the city's old-law food list and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes only its new
+  barbers and salons, and no laundry list, so this map shows food businesses
+  only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 2,664 national filings whose filers did not publish an address (1,397
+  restaurants, one in four).
+- 8 temporary or mobile permits and 623 rows with no fixed place.
+- 613 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 176 school, hospital and staff canteens, 259 vending machines, 6 mail-order
+  businesses, 9 entertainment venues, 3 premises inside hotels, 1 caterer and
+  13 snack bars and cabarets.
+- 20 closed premises, which the national filings keep, marked.
+
+**Counted** - the city's old-law permits still held on 30 June 2026 and the
+national filings as downloaded on 2 October 2026. 42 of the 687 bakery,
+confectioner and deli rows (6.1%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 351 repeat permits are shown once, and 166 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 5 rows (0.1%). Another 70 sit at their town's center, and 291
+national filings at their own coordinates.
+
+**Names not shown** - none: the city's list names its operators, and no trade
+name matched. The national filings do not name theirs.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 3 stations beyond it: 1 each in Aira, Ibusuki and Hioki.
+- The Shinkansen is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

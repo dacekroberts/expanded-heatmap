@@ -12,6 +12,36 @@ them off.
 
 
 
+
+### 2026-10-02 - Kagoshima built, food only
+
+- **Kagoshima built on the shared Japanese steps (the MHLW-led agent, applied
+  by the lead): 6,591 storefronts (Food service 4,838, Retail 1,753), 55
+  stations, 4 lines; 3,980 pins within a ring (60%).** Page 171, notice 106,
+  `mode: tram`, minor tier. Food only (Band B).
+- **The business leg:** MHLW plus the city's old-law list (2026-06-30);
+  `SUPERSEDES` dropped 166 rows; 1,397 of 5,914 open restaurant permits publish
+  no address (one in four).
+- **The join:** block 94.9%, MHLW's point 4.1%, town-chōme 1.0%, 5 unplaced;
+  MHLW permits 95.4%, old-law 94.3% (brief 93.7). **MHLW's own coordinates are
+  wrong in places, not the join:** 113 block-joined MHLW rows sit over 1 km
+  from MHLW's point, 60-odd in 東谷山1-7丁目 5-8 km off, where MLIT's block
+  points agree with its town-chōme centroids; the block placement is kept.
+- **Rail:** N02-25 (N02-24 lacks 仙巌園), 55 stations, 3 excluded. The tram's
+  four legal sections drawn as one line, "Kagoshima City Tram" (Matsuyama's
+  and Sapporo's precedent). Gate 3: 35 = 35 against the transport bureau's
+  2022 stop table (37 rows: 高見馬場 once per route, 郡元 and 郡元(南側) apart).
+  Tram / JR 郡元 and 谷山 shown as "Korimoto (City Tram)" / "Korimoto (JR)".
+  Median gap 272 m: halved rings, 200 m floor. 13 overrides.
+- **Census control: 1.85, inside the built cities' 1.56-1.92** (official /
+  census 2.61).
+- **Privacy verdict: publish.** Japan pass 0 (0 flagged of 1,376).
+- **The 菓子 / そうざい factory share:** 42 of 687 (6.1%), kept.
+- **Proposals for review time:** "Kagoshima City publishes only its new barbers
+  and beauty salons, a year at a time, and no list of laundries, so personal
+  services are not on this map."; "The city tram's two routes are drawn as one
+  line."; the in-ring percentage form; the notice's English gloss.
+
 ### 2026-10-02 - Hakodate built, personal services only
 
 - **Hakodate built on the shared Japanese steps (the one-bucket agent, applied

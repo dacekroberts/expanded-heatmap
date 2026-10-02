@@ -1749,6 +1749,23 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Hakodate and MLIT did not make "
      "and do not endorse this map.",
      False),
+    # Kagoshima (notice 106): the city's old-law list, CC BY 4.0 in its prescribed credit for a
+    # processed work; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    ("Kagoshima City, MHLW and MLIT (Kagoshima)",
+     "Kagoshima's businesses: この地図は以下の著作物を改変して利用しています。「食品営業許可全施設一覧」、鹿児島市、CCBY4.0（[https://creativecommons."
+     "org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）（[https://www.city"
+     ".kagoshima.lg.jp/kenkofukushi/hokenjo/seiei-shoku/kenko/ese/sekatsu/shoku/shokuopendata.html](https:"
+     "//www.city.kagoshima.lg.jp/kenkofukushi/hokenjo/seiei-shoku/kenko/ese/sekatsu/shoku/shokuopendata.ht"
+     "ml)）. (This map modifies the City of Kagoshima's list of food permits as of 30 June 2026, used under"
+     " CC BY 4.0.) And 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品"
+     "等営業許可・届出一覧」を加工して作成. Processed by this project, which selected the storefront types, showed a premise"
+     "s in both lists once, placed each by its address or the ministry's own coordinates, and counted them"
+     " around stations. The ministry's list holds only filings whose applicants agreed to publish them and"
+     " is not complete. Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https:"
+     "//nlftp.mlit.go.jp/isj/)）を加工して作成. Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen "
+     "with 国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. Kagosh"
+     "ima City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

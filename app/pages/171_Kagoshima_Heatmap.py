@@ -43,25 +43,60 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Kagoshima")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Hiroshima's and Fukuoka's pages
+# (approved wording, pre-approved for this build, 2026-09-30); the sentences
+# it does not cover are proposals in the batch's drafts file. The as-of date is
+# the city list's own (config.SOURCE_AS_OF); MHLW's file states none, so it is
+# dated by download. One restaurant in four withholds its address in MHLW's
+# file (1,397 of 5,914 open permits, 2026-10-02). The stops' median, 272 m,
+# and the ring share, 60.4%, are steps 1 and 3's (2026-10-02).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Four lines are drawn, each labeled on the map and in the legend: the Kagoshima City Tram; and JR
+  Kyushu's Ibusuki Makurazaki, Kagoshima Main and Nippo Main lines.
+- The city tram's two routes are drawn as one line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Kagoshima City get rings, because the business data covers the city alone:
+  JR lines running on to Hioki, Aira and Ibusuki are cut at the city line.
+- The Shinkansen is not drawn (Kagoshima-Chuo appears as a JR station).
+- **Tram stops sit closer together than metro stations**, a median of 272 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Kagoshima City publishes only its new barbers and beauty salons, a year at a time, and no list of
+  laundries, so personal services are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear either.
+- The food businesses come from two lists. Kagoshima City's own list holds food-business permits
+  granted before June 2021 and still held (as of 30 June 2026).
+- Permits since then are filed through the Ministry of Health, Labour and Welfare's system, whose
+  open data is the second list (downloaded 2 October 2026). A premises in both lists appears once.
+- The Food shops layer is food retail only, and it is partial: shops that only notify rather than
+  hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
+  chose to publish in the ministry's list.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- About one restaurant in four in Kagoshima chose not to publish its address in the national
+  filing system and is not on this map. Where they are is not known.
+- The rest are matched to MLIT's address reference data, which places most at their street block;
+  where that fails for a ministry filing, the dot sits at the ministry's own coordinates.
+- In the city's own list, where a trade name is its operator's own name, the dot shows its permit
+  type instead; the ministry's list does not say who the operator is, so this cannot be checked
+  there.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 60% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Kagoshima")
 render_country_links("Kagoshima")
 
