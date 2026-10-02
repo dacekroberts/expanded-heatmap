@@ -618,5 +618,10 @@
   "in_ring": 664,
   "all": 1025,
   "map_blob": "525408951d114fdca732119e4c0d512e42a826ea"
+ },
+ "manchester": {
+  "in_ring": 6202,
+  "all": 11963,
+  "map_blob": "7ed0e86936eb5ac2a28984771dd2794c5353c34d"
  }
 }
