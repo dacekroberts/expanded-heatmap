@@ -329,6 +329,11 @@ goes whole, although the city's own licences show it also holds 139 stadium
 and convention-centre concession stands, 21 bars on San Francisco Bay ferries
 and a few restaurants.
 
+Also left out: individual practitioner licences (53 tattoo and body-piercing
+practitioners, and 9 massage practitioners): each is one person's own licence
+to work, not a premises, and most of the tattoo artists work in a studio that
+already has its own pin.
+
 ### New York — licences held by a person, and non-storefront trades
 
 New York is a different case from the others. It has no general business

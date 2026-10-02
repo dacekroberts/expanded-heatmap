@@ -5,14 +5,14 @@
   "map_blob": "aae28c0b17558d9b4c690e25256c17b8baa5eadf"
  },
  "san_francisco": {
-  "in_ring": 11762,
-  "all": 16456,
+  "in_ring": 11720,
+  "all": 16394,
   "map_blob": "eb909628e2fee2cd53aab9a6c5883183d9ef2d3b"
  },
  "los_angeles": {
   "in_ring": 13892,
   "all": 57494,
-  "map_blob": "f5c490af36ca0b8d0ed4d08c7256bab41f8a667c"
+  "map_blob": "4c2a222c5faee1b00a11f68f8b3a70c08e7be021"
  },
  "chicago": {
   "in_ring": 11685,

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**330 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**331 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-01**
 
@@ -36,6 +36,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The master list's history written: `docs/city_master_list_history.md`, published as an artifact (owner)](#2026-10-01---the-master-lists-history-written-docscity_master_list_historymd-published-as-an-artifact-owner)
 - [Registrants' own names taken out of the docs: the What Is Excluded hotfix, then the internal files](#2026-10-01---registrants-own-names-taken-out-of-the-docs-the-what-is-excluded-hotfix-then-the-internal-files)
 - [Withheld names are kept as keys: seven cities' PERSON_NAMED lists hashed](#2026-10-01---withheld-names-are-kept-as-keys-seven-cities-person_named-lists-hashed)
+- [San Francisco leaves out individual practitioner licences (owner)](#2026-10-01---san-francisco-leaves-out-individual-practitioner-licences-owner)
 
 **2026-09-30**
 
@@ -13593,3 +13594,34 @@ Recorded by the cleanup session from the Main Building Session's findings of
     and add that no doc quotes a registrant's own name as an example.
 - **Kansas City's step 2 docstring** cited `config.PERSON_NAMED_TRADE`, which
   does not exist; it now cites `config.PERSON_NAMED`.
+
+### 2026-10-01 - San Francisco leaves out individual practitioner licences (owner)
+
+- **Found by prose agent 5** while checking a pin that showed a person's own
+  name. In San Francisco's data, each "TATTOO, BODY PIERCING, PRACTITIONER"
+  licence is one artist's personal registration, usually at a studio that
+  already has its own pin from its facility licence. The owner said to drop
+  them. GENERAL MASSAGE PRACTITIONER is the same kind of licence, and the
+  owner dropped it too. These are the only practitioner licence types in the
+  data.
+- **The rule** (`config.PRACTITIONER_ONLY_LICENCES`, step 2): a row goes when
+  every licence in `lic_code_descriptions_list` is a practitioner's and at
+  least one is. A row that also holds a facility or establishment licence is
+  the shop, and stays. OUTCALL MASSAGE SERVICE goes only with a practitioner
+  licence: an outcall licence alone stays (3 rows), since the owner was not
+  asked about those.
+- **Precedent:** New York, Calgary and Edmonton leave out chair renters, a
+  person working inside someone else's shop.
+- **Measured exactly** (step 2 run twice in-process, rule off and on, compared
+  by `uniqueid`): 62 pins go, 53 tattoo, 7 massage, and 2 massage with an
+  outcall licence. 42 of the 62 share an address with a pin that remains.
+  Storefronts go from 16,456 to 16,394, and in-ring pins from 11,762 to 11,720.
+  - Retail 5,039 -> 5,038; Personal services 2,132 -> 2,091; Food unchanged.
+  - The drift check shows only the map and the storefront figure moving; the
+    baseline is updated.
+- **Privacy:** `check_personal_exposure.py san_francisco` finds 0 person-like
+  names at a residential unit among 11,720 pins. The verdict stays publish;
+  `docs/privacy_verdicts.md` now cites this entry.
+- **Disclosed** in `excluded_categories.md`, San Francisco's section, in the
+  owner-approved sentence. `map_inconsistencies.md` tables B and C,
+  `app/macro_facts.json` and `app/ring_shares.json` are updated to match.

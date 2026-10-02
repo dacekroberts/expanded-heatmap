@@ -656,7 +656,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 |---|---|---|---|---|---|
 | **United States** | | | | | |
 | San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 551 / 598 | Undercount: neighbourhoods registered under own name (PLAN) |
-| San Francisco | Licence register | Registered Business Locations | NAICS | 5,065 / 4,591 / 2,132 | Floor: about 37% of rows have NAICS (DEC) |
+| San Francisco | Licence register | Registered Business Locations | NAICS | 5,038 / 4,591 / 2,091 | Floor: about 37% of rows have NAICS (DEC) |
 | Los Angeles | Tax register | Listing of Active Businesses | NAICS | 8,069 / 3,817 / 2,014 | Floor: about 9% of rows lack NAICS (DEC) |
 | Chicago | Licence register | Business Licenses | Own licence types | 5,476 / 4,196 / 2,049 | — |
 | New York | 4 activity registers | DOHMH, NYS food stores, NYS salons, DCWP | Per-source dispatch | 14,822 / 22,060 / 7,478 | Retail thin |
@@ -809,7 +809,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 |---|---|---|---|
 | **United States** | | | |
 | San Diego | Source coordinates (98.4% populated) | None on page | Nonstore 454, parking (project-wide) |
-| San Francisco | Source point | Surface stops thinned | 812990 "solo massage" |
+| San Francisco | Source point | Surface stops thinned | 812990 "solo massage"; individual practitioner licences (tattoo, massage), 2026-10-01 |
 | Los Angeles | Source + Census geocoder for corrupt points (98.7% recovered) | Corrupt coordinates geocoded | 812990 catch-all (30.7% of storefronts) |
 | Chicago | Source coordinates | Licences without coordinates left off | Home-based, peddlers, endorsements, Limited Business |
 | New York | Source + Census geocoder (582 of 1,449 recovered; 1.4% lost) | Retail thin; possible double counts | Person-held licences, contractors, chair renters |

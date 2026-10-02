@@ -40,6 +40,7 @@ from pipeline.san_francisco.config import (  # noqa: E402
     PARCEL_TOLERANCE_M,
     SAN_FRANCISCO_BBOX,
     NAICS_EXCLUDE_CODES,
+    PRACTITIONER_ONLY_LICENCES,
     TAXONOMY_SYSTEM,
     RAW_CLASSIFICATION_COLUMN,
     SOURCE_ENCODING,
@@ -135,6 +136,17 @@ def main():
         df = df[~df[value_column].astype(str).isin(NAICS_EXCLUDE_CODES)]
         print(f"Excluded catch-all codes {sorted(NAICS_EXCLUDE_CODES)}: "
               f"{before:,} -> {len(df):,} rows")
+
+    # --- Individual practitioner licences (see config.py) ----------------
+    licences = df["lic_code_descriptions_list"].fillna("").str.split("; ")
+    # At least one practitioner licence: a home-visit (outcall) licence alone
+    # is not this rule's call.
+    practitioner = licences.map(
+        lambda ls: ls != [""] and all(x in PRACTITIONER_ONLY_LICENCES for x in ls)
+        and any(x.endswith("PRACTITIONER") for x in ls))
+    before = len(df)
+    df = df[~practitioner]
+    print(f"Individual practitioner licences only: {before:,} -> {len(df):,} rows")
 
     # --- Parse coordinates, drop rows without usable ones -------------------
     before = len(df)
