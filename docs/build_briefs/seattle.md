@@ -673,10 +673,19 @@ owner the same day.**
    Taichung's rule would flag 9 rows here. If a check is wanted,
    hand-sample 40 of the 378 headquarters rows whose business also has
    branches at build, and bring the result back.
-3. ✅ **DECIDED (owner, 2026-10-02, "drop 2023-2024"): keep licence years
-   2025 and 2026, and drop 2023 and 2024** (986 bucket rows, 9.8%). Taken
-   knowing the trade-off below: about half of the dropped rows may be open
-   businesses that never renewed.
+3. ✅ **DECIDED (owner, 2026-10-02, "we can try the alternative"; it
+   replaces an earlier "drop 2023-2024" the same day): keep every licence
+   year, and cross-reference the lapsed FOOD rows.**
+   - **Food:** a row whose licence year is 2025 or earlier stays only if it
+     matches a business King County inspected in 2025 or 2026, by trade name
+     or by street address (the control below: 75 to 79% of the 2023 and 2024
+     food rows match either way, 78% of 2025's). Every 2026 row stays.
+   - **Retail and personal services:** lapsed rows stay, since nothing
+     current exists to check them against. The page says some may have
+     closed without renewing.
+   - **Measure at build:** the rows the food cross-reference drops, by
+     licence year, and a hand sample of 20 address-only matches. An
+     address match can be a different business at the same address.
    - Seattle's licences all fall due on 31 December, so a 2025 licence is
      nine months late, not necessarily closed: its food rows still match a
      current inspected business by name at 48%, against 65% for 2026.

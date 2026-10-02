@@ -4,7 +4,38 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
-### 2026-10-02 - Seattle (Regional): rail from OSM, Snohomish read permissively, HQ rows with the head-office rule, 2023-2024 licences dropped, Bellevue food from King County (owner)
+### 2026-10-02 - Georgia profiled, Tbilisi briefed; Geostat's terms stored
+
+- **`add-country` for Georgia** (`docs/georgia_step0_endpoints.md`). There
+  is no disqualifier: one national register, Geostat's Statistical Business
+  Register, on a keyless API with a factual address separate from the legal
+  one. Its traps:
+  - `X` is latitude and `Y` is longitude.
+  - The API has no column selection, so personal columns are dropped in
+    memory.
+  - It allows about 50 requests a window (HTTP 429 with `retryAfter`). A
+    brief re-run straight after another one fails on 429; that is a RETRY,
+    not a brief to correct.
+  - Names return in Georgian script whatever the language, so
+    `check_personal_exposure.py` needs a Georgian pass.
+  - `Activity_2_Code` is NACE Rev.2; `Activity_Code` is the old scheme.
+- **Tbilisi's brief** (`docs/build_briefs/tbilisi.md`):
+  - 14,806 storefronts after the standing exclusions: Retail 12,194, Food
+    1,343, Personal 1,269. The catch-all share is 9.6%.
+  - 64.4% are individual entrepreneurs, shown as unnamed dots (owner,
+    2026-10-01).
+  - **Real coordinates 81.3%, not the screen's 91%:** 1,295 rows sit on ten
+    district-centroid placeholders.
+  - Metro: 2 lines and 23 stations (OSM 16 + 7), matching the operator's
+    "23 stations on two lines".
+  - Geostat's terms are PERMITTED WITH CONDITIONS (credit Geostat, no
+    logo), stored unaltered in `docs/licenses/` with SHA-256.
+- **Open for the owner:**
+  - the placeholder coordinates;
+  - division 45 (motor vehicles);
+  - the region.
+
+### 2026-10-02 - Seattle (Regional): rail from OSM, Snohomish read permissively, HQ rows with the head-office rule, lapsed food cross-referenced to King County, Bellevue food from King County (owner)
 
 - **Sound Transit's GTFS is not used** (owner: "we can use openstreetmap
   here"). Its Transit Data Terms add a "No Changes" clause, a duty to pass
@@ -23,10 +54,18 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   Grocery. That is R1 (2026-09-29): school kitchens, donated-food
   distributors, food trucks, caterers, vending and concessions are out.
   Lynnwood keeps 310 facilities and Mountlake Terrace 56.
-- **Seattle's lapsed licences: "drop 2023-2024"** (986 bucket rows, 9.8%).
-  Staging had reported the loss as not small: by trade name, 35 to 38% of
-  those food rows match a currently inspected business, against 65% for
-  2026, so about half may still be open.
+- **Seattle's lapsed licences: the alternative** (owner: "we can try the
+  alternative for 4", replacing "drop 2023-2024" the same day).
+  - Staging had reported the year-drop's loss as not small. By trade name,
+    35 to 38% of the 2023 and 2024 food rows match a currently inspected
+    business, against 65% for 2026.
+  - **Every licence year stays.** A lapsed food row (licence year 2025 or
+    earlier) stays only if it matches a business King County inspected in
+    2025 or 2026, by name or street address.
+  - Lapsed retail and personal-service rows stay, disclosed as possibly
+    closed.
+- **Bellevue confirmed** (owner: "king county food cross reference for 2
+  sounds good").
 - **Seattle's `HEADER QUARTER` rows: "keep, use head-office rule".** Both
   location types are kept, and Taipei's and Taichung's head-office rule
   applies to headquarters rows. It flags 9 rows.

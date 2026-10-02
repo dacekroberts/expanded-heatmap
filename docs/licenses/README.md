@@ -97,6 +97,13 @@ changes is the **scope of an attribution the project already carries** - see
 | `mhlw-food-sanitation-system-terms-amendment-2026.pdf` | **Ministry of Health, Labour and Welfare** — 健生食監発0331第2号 (2026-03-31), the partial amendment of the notice above, made to add reporting of health damage from so-called 健康食品. **It amends 別添2 (the handling of personal information) only.** 別添1 - the 利用規約 - is not in its comparison table, and 第3条, 第7条, 改変 and 頒布 appear nowhere in it (read from its extracted text), so the MHLW open-data verdict's basis is unchanged for every city that uses that data. 3 pages | `https://www.mhlw.go.jp/content/001683424.pdf` — fetched with `curl` (HTTP 200, `application/pdf`, 705,401 bytes) | 2026-09-24 |
 | `taito-opendata-guideline.pdf` | **Taitō City (Tokyo)**: 台東区オープンデータ推進指針, the ward's open data promotion guideline, in force 2017-04-01 and revised 2020-04-01. Chapter 2, "オープンデータのルール", marks the ward's open data with a Creative Commons licence, CC BY (attribution, commercial use included). This is the document behind the **Tokyo: Taitō** row in `data_sources/japan.md` (PERMITTED WITH CONDITIONS, CC BY 4.0); the ward's licence page restates CC BY 4.0 International (checked 2026-09-27). Found unfiled as `opd.pdf` at the main checkout's root and identified 2026-09-27 (267,819 bytes, Word 2016) | `https://www.city.taito.lg.jp/kusei/online/opendata/about/opd.files/opd.pdf`, linked from `…/opendata/about/opd.html` as "台東区オープンデータ推進指針（PDF：261KB）" | 2026-09-25 (the file's timestamp) |
 
+### Georgia — profiled 2026-10-02, Tbilisi briefed, none built yet
+
+| File | Source | Source URL | Retrieved |
+|---|---|---|---|
+| `geostat-terms-of-use.html` | **National Statistics Office of Georgia (Geostat)**: Terms of Data Usage, linked from the Statistical Business Register app's footer. Grants use "for any purpose, including commercial and non-commercial use, without restriction ... without prior permission", excludes third parties' copyrighted material, logos and trademarks, and asks that "Users should indicate Geostat as a source of information". The page's sidebar carries dated news, so the whole-page hash changes with each post while the terms do not (`docs/georgia_step0_endpoints.md`) | `https://www.geostat.ge/en/page/monacemta-gamoyenebis-pirobebi` | 2026-10-02 |
+| `geostat-terms-of-use-ka.html` | The same terms, Georgian original | `https://www.geostat.ge/ka/page/monacemta-gamoyenebis-pirobebi` | 2026-10-02 |
+
 ## SHA-256, as retrieved
 
 **Recompute these from the COMMITTED file, never from the file you just
@@ -141,6 +148,8 @@ c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs
 e1836a9aad4c134d86df8bd92680d2bf53359a95037171066238ffce79a6062d  mhlw-food-sanitation-system-terms-2020.pdf
 1483b30fb7d7d501a6e3e9ff0056b7fb8fb5d71da7c3493f842948e1292e4836  mhlw-food-sanitation-system-terms-amendment-2026.pdf
 5a39c855c4cbe835b36c15fbbe0b5833be034aa68a10b9429be7a91aa716eb79  taito-opendata-guideline.pdf
+963e957a5b8d5e56100f9c18f114e3d0076bf762ab8c73b61ee7fdd8b9e2ab82  geostat-terms-of-use.html
+45ced04e0e3b1b04f59ca9fb87b6eff1e41c7f2c1a7bbac7fc183e8507954f27  geostat-terms-of-use-ka.html
 ```
 
 ## Two files here are NOT licences
