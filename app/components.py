@@ -1665,6 +1665,28 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Nagasaki City, MHLW and MLIT did not make and do not endorse this map.",
      False),
+    # Utsunomiya (notice 102): the city's five lists, CC BY (no version) and PDL 1.0, in the
+    # portal's pattern; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    ("Utsunomiya City, MHLW and MLIT (Utsunomiya)",
+     "Utsunomiya's businesses: 出典：「食品営業許可施設一覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/s"
+     "yokuhinneigyoukyoka](https://catalog.city.utsunomiya.tochigi.jp/dataset/syokuhinneigyoukyoka)）、「理容所一"
+     "覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/riyoujoichiran](https://catalog.city.ut"
+     "sunomiya.tochigi.jp/dataset/riyoujoichiran)）、「美容所一覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi."
+     "jp/dataset/ubiyouzyo](https://catalog.city.utsunomiya.tochigi.jp/dataset/ubiyouzyo)）、「クリ－ニング(取次)一覧」（"
+     "宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/kuriiningutoritsugiichiran](https://catalo"
+     "g.city.utsunomiya.tochigi.jp/dataset/kuriiningutoritsugiichiran)）、「クリ－ニング(一般)一覧」（宇都宮市）（[https://cata"
+     "log.city.utsunomiya.tochigi.jp/dataset/kuriininguippanichiran](https://catalog.city.utsunomiya.tochi"
+     "gi.jp/dataset/kuriininguippanichiran)）を加工して作成（クリエイティブ・コモンズ 表示）. (This map modifies the City of Utsun"
+     "omiya's lists of food permits, barbers, beauty salons and laundries as of July 2026, used under CC B"
+     "Y.) And 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一"
+     "覧」を加工して作成. Processed by this project, which selected the storefront types, showed a premises in both"
+     " lists once, placed each by its address or the ministry's own coordinates, and counted them around s"
+     "tations. The ministry's list holds only filings whose applicants agreed to publish them and is not c"
+     "omplete. Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.m"
+     "lit.go.jp/isj/)）を加工して作成. Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値"
+     "情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. Utsunomiya City"
+     ", MHLW and MLIT did not make and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

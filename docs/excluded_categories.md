@@ -3271,6 +3271,46 @@ name that is an operator's own name cannot be found.
 line.
 - Left out: 6 stations beyond it: 4 in Nagayo and 2 in Isahaya.
 
+### Utsunomiya - the city's old-law food list, its barber, beauty and laundry registers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 426 national filings whose filers did not publish an address (37
+  restaurants, about one in 130).
+- 537 food trucks, street and festival stalls and other temporary or mobile
+  permits, and 12 rows with no fixed place.
+- 556 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 339 school, hospital and staff canteens, 224 vending machines, 17 mail-order
+  businesses, 77 entertainment venues, 99 premises inside hotels and inns, 79
+  caterers (仕出し) and 443 snack bars and cabarets.
+- 28 closed premises, which the national filings keep, marked.
+
+**Counted** - the old-law permits in the city's July 2026 list (all still in
+term at the end of July 2026), the city's full barber, beauty and laundry
+(pick-up and general) lists of that month, and the national filings as
+downloaded on 2 October 2026. 44 of the 627 bakery, confectioner and deli rows
+(7.0%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 543 repeat permits are shown once, and 73 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 17 rows (0.2%), mostly 新里町 addresses with 丙 / 丁 lot numbers,
+which restart in each part of the town. Another 120 sit at their town's
+center, and 230 national filings at their own coordinates.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type. Only the city's lists name their operators.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 11 stations beyond it: 4 in Haga, 2 each in Sakura and Mibu, and 1
+  each in Nikko, Takanezawa and Kanuma.
+- The Shinkansen is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

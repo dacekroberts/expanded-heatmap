@@ -8,6 +8,41 @@ them off.
 
 
 
+
+### 2026-10-02 - Utsunomiya built, Fukuoka's two-source shape with personal services
+
+- **Utsunomiya built on the shared Japanese steps (the MHLW-led agent, applied
+  by the lead): 8,048 storefronts (Food service 4,125, Retail 1,939, Personal
+  services 1,984), 23 stations, 4 lines; 3,789 pins within a ring (47%).**
+  Page 167, notice 102, `mode: light_rail`, minor tier.
+- **The business leg, Fukuoka's shape:** MHLW's file (every permit since
+  2021-06; `OWN_POINT_FALLBACK`, `ADDRESS_BY_CONSENT`), the city's old-law
+  list (`in_term` on 満了年月日3 against 2026-07-31 keeps all 1,120: the first
+  expiry is 2026-08-31; `package_show` shows no newer edition), the four
+  registers, `SUPERSEDES` (73 old-law rows). 37 of 4,901 restaurants publish
+  no address (about one in 130). The laundry files were last modified
+  2026-04-27 under their July titles.
+- **The join:** block 95.8%, MHLW's point 2.6%, town-chōme 1.4%, 17 unplaced
+  (新里町丙 / 丁 lot numbers); per source MHLW permits 96.6% (brief 95.1),
+  old-law 93.9% (93.2), registers 93.2-96.6% (93.5). MHLW's point sits a median
+  44 m from the block point, 96.4% within 250 m.
+- **Rail:** N02-25, 23 stations, 11 excluded. The light rail named "Utsunomiya
+  Light Rail" (the operator signs it LIGHTLINE: renamable); JR's 東北線 drawn as
+  the "JR Utsunomiya Line", its signed name. Gate 3: 19 stops on the
+  operator's list, the last 4 in Haga, so 15 = 15. Median gap 662 m: standard
+  rings. OSM had translated ten light-rail stops: 11 overrides, 1 alias
+  (江曾島 / 江曽島).
+- **Census control: 2.04 against an official / census ratio of 2.85:
+  explained** (the pins are 72% of the official 5,761; the rest are hostess
+  venues, vehicles and canteens by 業態).
+- **Privacy verdict: publish.** The Japan pass prints 0; 1 pin shows its permit
+  type (raw 3 food + 1 laundry, the brief's; +2 rows by premises).
+- **The 菓子 / そうざい factory share:** 44 of 627 (7.0%), kept.
+- **Proposals for review time:** "Permits since then are filed through the
+  Ministry..." ("online" dropped: the city enters every permit there);
+  "Barbers, beauty salons and laundries come from the city's registers as of
+  July 2026."; the in-ring bullet; the notice's English gloss.
+
 ### 2026-10-02 - Nagasaki built, a 2023 snapshot beside MHLW's current filings (owner: shape b)
 
 - **Nagasaki built on the shared Japanese steps (the city-lists agent, applied
