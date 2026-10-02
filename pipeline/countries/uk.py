@@ -86,14 +86,77 @@ def boundary(config):
 
 
 def elements(config):
+    """The cached elements, with three per-city corrections applied in memory,
+    each of which stops the step once OSM no longer needs it:
+
+    REF_BY_RELATION {relation id: ref}: a relation with no `ref` (Edinburgh).
+    SKIP_MEMBERS {node id: reason}: a route's stop member that is no stop at
+      all (Nottingham: a `railway=tram_crossing` and an untagged node, each
+      beside a real stop the other direction's relation carries), dropped from
+      every relation. osm_tram would otherwise stop on it, rightly.
+    STATION_RENAMES {OSM name: station name}: one station OSM names per
+      platform (Nottingham's "Highbury Vale A" and "B", one stop to NET and
+      NaPTAN). osm_tram's aliases need both spellings present, so this renames
+      the nodes before it reads them.
+    ROLELESS_STOP_RELATIONS {relation id: reason}: a relation that lists its
+      stops with an EMPTY role (Birmingham's four Wolverhampton - Edgbaston
+      Village relations, 118 memberships). Its named stop-tagged members with
+      no role are read as role "stop"; osm_tram reads only `stop*` roles. The
+      step stops once a listed relation has no such member left.
+    """
     els = osm_tram.read_elements(config.OSM_JSON, "OSM routes, ways and stops", fetch_hint(config))
+    nodes = {e["id"]: e for e in els if e["type"] == "node"}
+    skip = getattr(config, "SKIP_MEMBERS", {})
+    skipped = set()
+    roleless = getattr(config, "ROLELESS_STOP_RELATIONS", {})
     for e in els:
-        rid = getattr(config, "REF_BY_RELATION", {}).get(e.get("id")) if e["type"] == "relation" else None
+        if e["type"] != "relation":
+            continue
+        if e["id"] in roleless:
+            n_set = 0
+            for m in e.get("members", []):
+                t = nodes.get(m["ref"], {}).get("tags", {}) if m.get("type") == "node" else {}
+                if m.get("type") == "node" and not m.get("role") and t.get("name") and osm_tram._is_stop(t):
+                    m["role"] = "stop"
+                    n_set += 1
+            if not n_set:
+                sys.exit(f"ROLELESS_STOP_RELATIONS names relation {e['id']}, whose stops now "
+                         f"carry roles - remove the entry")
+            print(f"  relation {e['id']}: {n_set} role-less stop member(s) read as stops "
+                  f"({roleless[e['id']]})")
+        rid = getattr(config, "REF_BY_RELATION", {}).get(e.get("id"))
         if rid is not None:
             if "ref" in e.get("tags", {}):
                 sys.exit(f"REF_BY_RELATION names relation {e['id']}, which now has ref "
                          f"{e['tags']['ref']!r} in OSM - use it and remove the entry")
             e["tags"]["ref"] = rid
+        if skip and e.get("tags", {}).get("type") == "route":
+            keep = []
+            for m in e.get("members", []):
+                if (m.get("type") == "node" and m["ref"] in skip
+                        and m.get("role", "").startswith("stop")):
+                    skipped.add(m["ref"])
+                    continue
+                keep.append(m)
+            e["members"] = keep
+    for nid, why in skip.items():
+        t = nodes.get(nid, {}).get("tags", {})
+        if nid not in skipped:
+            sys.exit(f"SKIP_MEMBERS names node {nid}, no longer a stop member of any route - "
+                     f"remove the entry")
+        if t.get("name") and osm_tram._is_stop(t):
+            sys.exit(f"SKIP_MEMBERS node {nid} is now a named stop ({t['name']!r}) - remove the entry")
+        print(f"  skipped stop member {nid}: {why}")
+    renames = getattr(config, "STATION_RENAMES", {})
+    seen = set()
+    for n in nodes.values():
+        name = n.get("tags", {}).get("name")
+        if name in renames:
+            n["tags"]["name"] = renames[name]
+            seen.add(name)
+    stale = sorted(set(renames) - seen)
+    if stale:
+        sys.exit(f"STATION_RENAMES names {stale}, no longer in OSM - re-read it")
     return els
 
 
@@ -148,11 +211,16 @@ def merged_lines(config, kept):
             ways = [LineString([(p["lon"], p["lat"]) for p in m["geometry"]]) for m in _track(r)]
             geoms[r["id"]] = gpd.GeoSeries([unary_union(ways)], crs="EPSG:4326").to_crs(
                 config.CRS_PROJECTED).iloc[0]
+        # A city with short real branches lowers both (Birmingham's Eastside
+        # branch adds about 415 m beyond 30 m of the main line, its St Georges
+        # stub 72 m); the defaults are London's and Newcastle's.
+        near = getattr(config, "BRANCH_NEAR_M", BRANCH_NEAR_M)
+        min_new = getattr(config, "BRANCH_MIN_NEW_M", BRANCH_MIN_NEW_M)
         chosen, covered = [], None
         for rid in sorted(geoms, key=lambda i: -geoms[i].length):
             g = geoms[rid]
-            new = g if covered is None else g.difference(covered.buffer(BRANCH_NEAR_M))
-            if new.length >= BRANCH_MIN_NEW_M:
+            new = g if covered is None else g.difference(covered.buffer(near))
+            if new.length >= min_new:
                 chosen.append(rid)
                 covered = g if covered is None else covered.union(new)
         merged = linemerge(covered) if covered.geom_type == "MultiLineString" else covered
@@ -437,8 +505,16 @@ def step2(config, tax_module):
     unknown = sorted(set(df["BusinessType"]) - TAX.KNOWN_TYPES)
     if unknown:
         sys.exit(f"  business type(s) the taxonomy does not know: {unknown}")
+    # A file can list one premises twice, identical on every field read
+    # (Sandwell's 423.xml, FHRSID 372079, 2026-10-02): kept once. An FHRSID
+    # whose rows DIFFER is two records under one key, and stops the step.
+    exact = df.duplicated()
+    if exact.any():
+        print(f"  {int(exact.sum())} row(s) listed twice, identical on every field read, kept once")
+        df = df[~exact]
+        emit("duplicate_rows_dropped", int(exact.sum()))
     if df["FHRSID"].duplicated().any():
-        sys.exit(f"  {df['FHRSID'].duplicated().sum()} duplicate FHRSIDs")
+        sys.exit(f"  {df['FHRSID'].duplicated().sum()} FHRSIDs with differing rows")
 
     df = filter_to_storefront(df, config.TAXONOMY_SYSTEM)
     print(f"  {len(df):,} storefront rows after filter_to_storefront()")

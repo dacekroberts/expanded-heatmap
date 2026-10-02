@@ -51,12 +51,18 @@ def osm_query(config):
     ids = ",".join(str(i) for i in config.BOUNDARY_OSM_RELATIONS)
     routes = "".join(f'rel["type"="route"]["route"="{r}"]({s},{w},{n},{e});'
                      for r in config.OSM_ROUTES)
+    # Beside the routes' own member nodes, every tram stop in the box and any
+    # STATION_ADD node: a stop the relations skip (Nottingham's David Lane)
+    # can then be added by id from the cache, Kansas City's query shape.
+    add = ",".join(str(i) for i in getattr(config, "STATION_ADD", {}) or {})
     return ("[out:json][timeout:180];"
             f"({routes})->.r;"
             f"rel(id:{ids})->.b;"
             "(.r;.b;);out geom;"
             "way(r.r);out tags;"
-            "node(r.r);out body;")
+            f'(node(r.r);node["railway"="tram_stop"]({s},{w},{n},{e});'
+            f'node["public_transport"="stop_position"]["tram"="yes"]({s},{w},{n},{e});'
+            + (f"node(id:{add});" if add else "") + ");out body;")
 
 
 def fetch_fsa(config, force):
