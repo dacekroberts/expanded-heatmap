@@ -138,9 +138,21 @@ An average hides which tier the map is standing on.
   statement load-bearing).
 - Privacy: a publisher's "no personal data" declaration does not settle sole
   traders; apply the name rule (trade names only) and `check_personal_exposure.py`.
+- **The address file is a source the reader sees.** It gets its own row in
+  `docs/data_sources/<country>.md`, with its license and any notice, written as
+  `read-licence` step 9 says (no process notes in the rendered text).
+- **The unplaced rows are a gap the reader is told about.** The tiers and the
+  classes the misses fall into (Taipei's market stalls; a bias toward richer
+  districts) go in the city's own section of `docs/excluded_categories.md`, under
+  a heading that names the city, never in the shared "What is missing rather
+  than excluded" or "Honest limits" sections. The page carries one short bullet
+  under **The businesses** at most. Format: `docs/city_page_format.md`
+  sections 1 and 2.
 
 ## Record it where the next session will look
 
 A dated evidence section in `docs/global_country_shortlist.md`, the city's row in
-`docs/city_master_list.md`, a `DECISIONS.md` entry, and the brief in
-`docs/build_briefs/<city>.md` with a `brief-checks` block that can fail.
+`docs/city_master_list.md`, a decisions entry in the session's drafts file
+(`docs/decisions_drafts/<session-or-branch>.md`, folded into `DECISIONS.md` by
+the cleanup session), and the brief in `docs/build_briefs/<city>.md` with a
+`brief-checks` block that can fail.

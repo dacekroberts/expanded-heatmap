@@ -179,7 +179,7 @@ def first_bullets(cfg, name, operator):
     slug = cfg.OUTPUTS.name
     names = [cfg.LINE_NAMES[k] for k in cfg.LINE_KEYS]
     if slug == "rouen":   # approved departure, owner 2026-09-30
-        return [f"One {operator} line is drawn, **{names[0]}**, labelled on the map and in "
+        return [f"One {operator} line is drawn, **{names[0]}**, labeled on the map and in "
                 f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}.",
                 "Rouen's métro is a light rail running mostly on the street, so every stop "
                 "gets rings."]
@@ -188,11 +188,11 @@ def first_bullets(cfg, name, operator):
     if slug == "brest":   # approved departure, owner 2026-09-30
         trams = [cfg.LINE_NAMES[k] for k in cfg.LINE_KEYS if k != "C"]
         return [f"Two {operator} tram lines and the cable car are drawn, "
-                f"**{joined(trams + [cfg.LINE_NAMES['C']])}**, each labelled on the map and in "
+                f"**{joined(trams + [cfg.LINE_NAMES['C']])}**, each labeled on the map and in "
                 f"the legend, {source_clause(cfg, len(cfg.LINE_KEYS))}.", rapid]
     n = len(names)
     return [f"{NUMBERS[n]} {operator} tram line{'s are' if n != 1 else ' is'} drawn, "
-            f"**{joined(names)}**, {'each ' if n != 1 else ''}labelled on the map and in the "
+            f"**{joined(names)}**, {'each ' if n != 1 else ''}labeled on the map and in the "
             f"legend, {source_clause(cfg, len(cfg.LINE_KEYS))}.", rapid]
 
 

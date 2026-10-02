@@ -131,6 +131,32 @@ the landing. Cleanup fixes on its own branch; the lane that found a defect
 re-checks only that defect, at the narrow scope. Owner only: the iPhone check,
 the reboot, and the calls the lanes surface.
 
+## 7b. The deploy check, in parallel
+
+A `scope: full` deploy-verify of 124 cities ran about 75 minutes as one agent
+in this project's history; split across agents on one commit it took the
+longest lane's time (2026-10-02, the prose pass: 44 to 80 minutes per lane of
+about 41 cities). What made it work, and what went wrong first:
+
+- **Its own server pair per agent.** Add `streamlit-app-lean-dvN` and
+  `heatmap-static-dvN` (ports 8891-8893 and 8894-8896) to the worktree's local
+  `.claude/launch.json`, and tell each agent to use only its pair. The browser
+  tool allows **at most 5 servers per worktree**, so with three Streamlit
+  servers running a lane runs its standalone maps from the page's own
+  `srcdoc` rather than a sixth server.
+- **Override the agent's steps 1 and 8 in the prompt:** never stop another
+  server, never clear `__pycache__` (the caller clears it once, before
+  launching), and pass its own `tabId` to every browser call.
+- **The hidden browser pane gives every tab a 0x0 viewport.** Tell the agents
+  up front to load each page or map in an `<iframe>` of the exact size inside
+  their own tab (a new frame per size is a fresh load), run the check scripts
+  against that frame's document, and reload the tab every ten maps or so. A
+  lane that was not told spent an hour on its maps and was replaced by two.
+- **Ask a slow lane for a one-line status** with SendMessage before replacing
+  it; replace it by splitting its share, not by restarting the same list.
+- **Live after the reboot:** the same frame method works on the live app at
+  `/~/+/<Page>`; run `check_map_view.js`'s logic against the frame's document.
+
 ## 8. Tear down
 
 ```bash

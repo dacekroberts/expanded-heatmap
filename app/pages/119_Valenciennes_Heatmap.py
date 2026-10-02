@@ -59,7 +59,7 @@ if PROVENANCE_JSON.exists():
         _start = _iso(_fi.get("feed_start_date") or _nap.get("start_date"))
         _end = _iso(_fi.get("feed_end_date") or _nap.get("end_date"))
         if _taken:
-            _line = "Transit data © SI de mobilité et d'organization urbaine du Valenciennois (Transvilles), via transport.data.gouv.fr"
+            _line = "Transit data © SI de mobilité et d'organisation urbaine du Valenciennois (Transvilles), via transport.data.gouv.fr"
             if _start and _end:
                 _line += f", from the feed published for **{_start}** to **{_end}**"
             st.caption(_line + f"; snapshot taken **{_taken}**.")

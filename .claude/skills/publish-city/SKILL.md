@@ -5,7 +5,7 @@ description: Take finished city work from a branch to the live site - the gate o
 
 # Publishing a city
 
-The deploy path is now nine steps long and **two of them are invisible**:
+The deploy path is long and **two of its steps are invisible**:
 landing `app/` on master *is* deploying, because Streamlit Cloud pulls master
 automatically; and an "Updated app!" does **not** reload imported modules. Both
 have cost real outages.
@@ -26,7 +26,7 @@ one quick browser render. The whole process is in
 
 **Renderer changes batch the same way.** This covers `map_common.py`,
 `theme.py`, `linecolour.py` and the shared blocks. Iterate on 3-5 sample maps
-and re-render all 46 once, at review time, as part of that one push. Until
+and re-render every city once, at review time, as part of that one push. Until
 then `check_render_current.py` fails, so the pre-push hook holds the branch
 back. Comment-only edits do not count. Of 14 full re-renders from 09-23 to
 09-27, 12 would have fitted into three (finding 4).
@@ -44,6 +44,7 @@ Run these in order. Each catches a class nothing else does.
 | 3 | `python scripts/check_personal_exposure.py <city>`; record the verdict in DECISIONS and its row in `docs/privacy_verdicts.md` | a person's name at their address; a city published with no verdict (`check_privacy_verdicts.py`) |
 | 4 | `python scripts/check_provenance.py`, `python scripts/check_inconsistency_list.py` and `python scripts/check_ring_shares.py` | a city whose sources were never recorded; notices vs `_NOTICES`; a city with no row in `docs/map_inconsistencies.md` (the internal evidence for the "Why the maps differ" page), or without its three summary fields in `app/cities.py` (`rail_extra`, `record_kind`, `categories`) or its in-ring share in `app/ring_shares.json` (`--write` after the final render), which that page's table is built from |
 | 5 | `python scripts/brief_check.py <city>` | a brief's claims that stopped being true |
+| 5a | **read the page and the city's doc sections against `docs/city_page_format.md`** (below) | a page in the old layout, a path or script name in page text, a city's gap filed under a shared heading; no script checks the order or the wording |
 | 6 | **merge to your branch, commit** | — |
 | 7 | `python scripts/check_deploy_imports.py` | an import that works locally and not on a clean clone under the lean venv |
 | 8 | `deploy-verify` (scope below) | what the rendered page actually looks like |
@@ -62,6 +63,55 @@ Run these in order. Each catches a class nothing else does.
   leaves files modified. On Windows the regenerated files come back CRLF and
   Folium assigns fresh element ids every render, so committing that churn
   rewrites files the deployed app reads for no change at all.
+
+---
+
+## Step 5a: the page against the format
+
+Every city page is published in one format (owner, 2026-10-01;
+`docs/city_page_format.md` is the spec). Open the city's page file and read
+it top to bottom:
+
+- [ ] `render_city_nav("<Name>")`, then `render_city_title("<Name>")`: the
+  name alone, as in `app/cities.py`, over the shared subtitle. No `st.title`
+  of the page's own, no "<City> Heatmap" heading.
+- [ ] **The map directly after the title**, nothing between:
+  `st.iframe(HEATMAP_HTML, width=1000, height=650)`.
+- [ ] The captions directly under the map: the data dates
+  (`render_data_age`, or the city's provenance caption) and any credit its
+  sources prescribe word for word.
+- [ ] Short bullets under bold headings (**The lines**, **The businesses**,
+  a third only where needed); no intro paragraph above the map, no prose
+  paragraphs, no controls paragraph of the city's own, no TODO left.
+- [ ] Stations left out are "listed below", never a file path. No
+  repository path or file name, script, check or skill name, decision log or
+  build brief anywhere in page text.
+- [ ] Then, in order: `render_map_help(...)`, `render_excluded_stations(...)`,
+  `render_country_links(...)`, and `render_site_notices()` last, inline,
+  never behind an expander.
+- [ ] Reader-facing text in US spelling, except the notices, license titles,
+  quotes, a register's own category names and official names (spec section 4).
+- [ ] In `docs/excluded_categories.md` and `docs/data_sources/<country>.md`,
+  every heading for the city names it; its gaps and limits sit in its own
+  section, not the shared "What is missing rather than excluded" or "Honest
+  limits"; process notes are absent or between `<!-- internal -->` markers.
+- [ ] Any sentence no approved template covers is flagged as a proposal in
+  the drafts file, for the owner at review time.
+
+**The checks that read page text, and what each one sees:**
+
+| Check | Reads | Fails (or reports) |
+|---|---|---|
+| `check_deploy_imports.py` | every `app/pages/*_Heatmap.py` | no `render_site_notices()`; no `render_city_nav`, or its name not the `cities.py` name; a `page_title` not starting with the city's name |
+| `check_scope_disclosure.py` (property F) | the city's page and `docs/excluded_categories.md` | a city whose stations are thinned by spacing and which says so in neither ("thinned", "one stop per half mile") |
+| `check_provenance.py` J | page prose and the docs | an `outputs/...` file named there that is not committed (the format names none on a page) |
+| `check_provenance.py` M | the pages of a country whose licence prescribes its credit | the credit missing as a literal in an `st.*` call, or only inside an `if`/`try` (« Source : Insee » on French pages) |
+| `check_stray_bullets.py` | the docs the app renders | a wrapped spaced dash the app would draw as a bullet |
+| `check_stale_claims.py --only E` | `app/Overview.py`, `app/pages/*.py` and the rendered docs | reports "the only", "no other", "every other" claims; never fails |
+| `rendered_surfaces.py --check` | every page under `app/` | `docs/rendered_surfaces.md` stale: run `--write` after adding a page |
+
+None of them checks the order of the parts, the bullets, the spelling or the
+process notes: that is the read-through above.
 
 ---
 
@@ -122,7 +172,10 @@ process that never restarted.
 - The region switcher and macro map still land where they should, and the
   new city's dot shows the colour of its `mode` and the fill of its
   `coverage` that the owner approved (the two-key legend, 2026-09-30).
-- The new city's page renders its map, its labels and its licence notices.
+- The new city's page renders in the page format's order: title and
+  subtitle, the map, its captions, the bullets, "Using the map", the stations
+  left out, the two country links, and the site notices last. Its map draws
+  its labels and the OSM credit.
 - **One city you did not touch.** This is the highest-value minute in the whole
   process: on 2026-09-22 the new city rendered wrong at a narrow viewport and so
   did **Chicago**, untouched for weeks, which is what proved the fault was a
@@ -144,6 +197,8 @@ process that never restarted.
 ## Checklist
 
 - [ ] Steps 1–5 green, with `git checkout -- outputs/` after the drift check
+- [ ] Step 5a: the page and the city's doc sections read against
+  `docs/city_page_format.md`
 - [ ] `check_deploy_imports` run **on the commit being pushed**
 - [ ] `deploy-verify` scope chosen deliberately and stated
 - [ ] Reboot question computed from **the whole push's `app/` diff**

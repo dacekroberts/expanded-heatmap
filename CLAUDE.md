@@ -29,6 +29,9 @@ a rule, not before obeying one.
 - Classification is not NAICS -> `premises-taxonomy`. Measure the catch-all
   share at each level with `brief_check.py`'s `taxonomy_catchall` kind first;
   there is no default level. [#premises-taxonomy]
+- Writing a city's page, or its sections of What Is Excluded and About the
+  Data -> `docs/city_page_format.md`: the page order, bullets, sections that
+  name the city, process notes kept off rendered docs, American spelling.
 - Keeping or dropping any category, in any city -> `docs/category_rules.md`
   first; recommend the precedent, and bring a departure to the owner with the
   precedent it breaks.
@@ -244,6 +247,7 @@ python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
 python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
+python scripts/check_internal_markers.py [--selftest]   # every <!-- internal --> span closed, contained, clean
 python pipeline/name_keys.py "NAME" ["NAME" ...]        # the key to list for a name read as a person's own
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
 python scripts/check_city_registry.py                   # after merging

@@ -2,7 +2,7 @@
 
 Five agent sessions, each in its own worktree on its own branch, all made from
 `origin/master` at 88315b12 (the Global label competition). The cleanup session
-(**Cleanup session [f2d0ed]** in `ListAgents`; the id changes on restart)
+(**Cleanup session [8e67d1]** in `ListAgents` when it landed; the id changes on restart)
 merges and lands. Kit: `docs/review_lane_kit.md`. The UK builds are held until
 this pass is deployed; afterwards the city-building and page skills are
 reworked to the new formats.

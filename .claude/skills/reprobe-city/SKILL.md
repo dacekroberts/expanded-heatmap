@@ -1,6 +1,6 @@
 ---
 name: reprobe-city
-description: Re-probe a city that screening left thin - ask the city's OWN host, enumerate its whole catalogue, read who a 403 is for, and look for a second layer in a different shape (a building register's use class) - then measure the new shape's defect, control each layer, read licences in parallel and record. Use for every row in the master list's open screening gap, and for the one-bucket cities in Band C (Stockholm, Göteborg, Zurich, Singapore, Bucharest) to find out whether a second source exists. Not for a city screened for the first time - that is add-city Step 0.
+description: Re-probe a city that screening left thin - ask the city's OWN host, enumerate its whole catalogue, read who a 403 is for, and look for a second layer in a different shape (a building register's use class) - then measure the new shape's defect, control each layer, read licences in parallel and record. Use for every row in the master list's open screening gap, and for the built one-bucket cities (Stockholm, Göteborg, Zurich, Bucharest) to find out whether a second source exists. Not for a city screened for the first time - that is add-city Step 0.
 ---
 
 # Re-probing a city: its own host, its whole catalogue, a second layer
@@ -98,8 +98,11 @@ it is **vacancy** — an empty shop still has the shop class.
 2. **If none is open, find the RATE.** City statistics often republish a
    commercial survey: Amsterdam's `bbga` carries Locatus's vacant sales points
    — **660 of 14,314, 4.6%**, per district and per neighbourhood.
-3. **Put the number to the owner**: disclosable (Amsterdam — *"about 5% of
-   shop units are empty (Locatus, 2026)"* on the page) or not.
+3. **Put the number to the owner**: disclosable or not. Amsterdam's was,
+   and its page now carries it as a bullet under a third heading, **Reading
+   the map**: *"Read the shop layer as space set aside for shops, not as open
+   shops. About one Amsterdam shop unit in twenty stood empty at the start of
+   2026, by the city's own statistics, and no open source says which."*
 4. **Check overlap between layers**: a takeaway can hold a food permit AND sit
    in a shop-class unit — de-duplicate by address at build.
 
@@ -132,6 +135,37 @@ mandatory from an unset date, is a form the owner fills in.
 - **A band move is the owner's**; recommend with the tradeoff.
 - **A brief** with a `brief-checks` block: the live endpoints, the filter, the
   licence pages (`present` / `absent`), the gated scope. Amsterdam's reads 8/8.
-- The shortlist evidence section, a `DECISIONS.md` entry, and **the master
-  list's counts in all four places** — the summary box, the band table, the
-  band heading and the country table.
+- The shortlist evidence section, a decisions entry in the session's drafts
+  file (`docs/decisions_drafts/`, folded into `DECISIONS.md` later), and
+  **the master list's counts in all four places** — the summary box, the band
+  table, the band heading and the country table.
+
+## Step 9 — When a built city's text changes, it changes into the current format
+
+A re-probe of a built city (Stockholm, Göteborg, Zurich and Bucharest are) ends,
+if the owner takes the new layer, in a changed page and changed reference
+sections. Write each in the format of `docs/city_page_format.md`, not the
+format of the text being replaced:
+
+- **The page** (section 1): title, the map directly after it, captions under
+  the map, then bullets under bold headings. The new layer is a bullet under
+  **The businesses**; its measured defect, if the owner chose to disclose it,
+  may need a third heading, as Amsterdam's **Reading the map** does.
+  `render_map_help(...)` names the page's layers, so a second layer changes
+  its argument (Amsterdam's: `'two business categories (Shops and services,
+  and Food service)'`). Stations left out are "listed below"; no repository
+  path, script, check or skill name in page text.
+- **What Is Excluded** (section 2): the city's `### <City> - ...` heading
+  still names the city, and its subtitle changes when the sources do (Zurich's
+  names its two layers: "the city's food-and-drink licenses, and its shops
+  licensed to sell alcohol"). The new layer's gaps and limits go in that
+  section, never in the shared "What is missing rather than excluded" or
+  "Honest limits".
+- **About the Data** (sections 2 and 3): the new source's rows and notice in
+  `docs/data_sources/<country>.md` under the city's name; how it was found
+  stays in the brief and the drafts file, or between `<!-- internal -->`
+  markers.
+- **American spelling** in all three (section 4), except notices, licence
+  titles, quotes and the register's own names.
+- **Approval** (section 6): a sentence from a template needs no read-back;
+  a new one is a proposal, flagged in the drafts file and at review time.

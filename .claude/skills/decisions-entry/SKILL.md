@@ -67,6 +67,14 @@ voice mid-file.
   These double as the row-count baseline `pipeline-drift-check` compares to,
   so include the per-step counts for every city.
 - Renames and scope changes that change what a reader of the site sees.
+- In a build's drafts file: each sentence written to a page or a reference doc
+  that no approved template covers, flagged as a proposal for review time
+  (`docs/city_page_format.md` section 6). A sentence from a template needs no
+  entry.
+
+**Never quote a registrant's own name**, not even as the example of a privacy
+rule: use a placeholder ("SURNAME GIVEN-NAME INITIAL"), or the key from
+`python pipeline/name_keys.py "NAME"` (`docs/city_page_format.md` section 5).
 
 ## What doesn't
 

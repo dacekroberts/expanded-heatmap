@@ -626,7 +626,9 @@ multi-licence premises needs a dispatch rule - Boston's `FT+RF` question again.
   invariant already makes the single owner of tooltip and legend text. Decide
   there whether to translate; prefer English bucket labels with the source
   value in the tooltip, so cross-city comparison survives without hiding the
-  source.
+  source. An English label is reader text, so it is American English
+  ("License type", "Liquor store"); the source value stays as written
+  (`docs/city_page_format.md`, section 4; `premises-taxonomy` Step 8).
 - **Business names stay in their own language, always.**
 - **NORMALISE FOR JOIN KEYS, NEVER FOR DISPLAY.** The stdlib does all of this;
   no package is needed, which matters because `requirements.txt` has to stay
@@ -715,6 +717,16 @@ So when the FIRST city in a profiled country is committed:
    to a different endpoint than recorded, a category count that was an artefact
    of splitting on the wrong delimiter, and a "this feed has no `feed_info.txt`"
    that was true of the mirror and false of the agency.
+
+   **The new file renders on About the Data, so write it for the reader**
+   (`docs/city_page_format.md`, sections 2 to 5): rows and notices per city,
+   each city's own gaps and limits in its own rows or section, American
+   spelling outside notices, licence titles and quotes, and no process notes
+   (check scripts, `DECISIONS.md`, `PLAN.md`, skill or agent names, briefs,
+   the step-0 file itself) except between `<!-- internal -->` and
+   `<!-- /internal -->`. An existing country file's opening paragraph shows
+   the pattern (`docs/data_sources/latvia.md`). How the file is named and
+   filed is the next section.
 3. **Relabel the country file as the evidence trail**, with an explicit
    precedence line ("where this file and `data_sources/<country>.md`
    disagree, `data_sources/<country>.md` wins") and the corrections named. Do the same for any
@@ -727,6 +739,55 @@ So when the FIRST city in a profiled country is committed:
    went in after Mexico's without renumbering and produced two item 8s and two
    item 15s in the list that gates the public deploy. `check_provenance.py`
    fails on this now.
+
+## The new country on the reference pages: its name, file, region and headings
+
+What Is Excluded and About the Data show one country at a time, chosen in a
+two-row selector (a region, then that region's countries), and every city
+page links to both opened on its country (`render_country_links`). The first
+city in a new country is what puts the country there. The rules are in
+`docs/city_page_format.md`, section 2, and `app/country_sections.py`'s
+docstring; what a new country needs from them:
+
+1. **One `country` string, spelled once.** `scaffold_city.py --country`
+   writes it into the city's entry in `app/cities.py`. The selector, the
+   `?country=` deep link and the Cities menu all derive from it
+   (`cities.COUNTRY_ORDER`, built from `CITIES`; there is no list to edit), so
+   every later city in the country uses the identical string.
+2. **The country file, named from that string.**
+   `docs/data_sources/<slug>.md`, where the slug is
+   `country_sections.country_slug()`: lowercase, spaces to hyphens ("South
+   Korea" -> `south-korea.md`). A misnamed file still renders, but at the
+   foot of About the Data under every country, while the country's own view
+   warns that its file is missing. Add the country's row to the index table
+   "Where each country's sources live" in `docs/data_sources.md`.
+3. **A region, which decides its selector group.** The group is the city's
+   macro-map `"region"`, folded through `REGION_GROUP` in
+   `app/country_sections.py`:
+   - **an existing region** (every European country is `Europe`, per
+     `add-city`; an Australian or New Zealand city `Oceania`; another South
+     American country `South America`) joins that group with no edit;
+   - **a region new to the project** (`scaffold_city.py --new-region`, which
+     appends it to `REGION_ORDER`; a macro-map view, so the owner's call)
+     becomes a selector group of its own, under the region's name;
+   - **a sub-view of an existing group** (as France North and South,
+     Czechia and the Seoul Capital Area are) needs a `REGION_GROUP` line
+     mapping it to that group, or it shows as a group of its own.
+
+   The country's place within its group follows `REGION_ORDER` and build
+   order; there is nothing to set.
+4. **Headings that name the city.** A section is filed under a country when
+   its heading names exactly one country's city (as `app/cities.py` names
+   it, less any " (Regional)") or the country itself; a heading naming
+   neither inherits its parent's. A heading or notice title that names only a
+   publisher ("TransLink", "Tailte Éireann") would show under every country,
+   which is why those two are in `ALIASES` in `app/country_sections.py`.
+   Numbered notices in `docs/data_sources.md` are filed by their title (the
+   text before the first dash) the same way. Name the city in the heading;
+   add an alias only where a title has to name its publisher.
+
+`REGION_GROUP` and `ALIASES` live in `app/`, so an edit to either lands with
+the city's publish (`publish-city`).
 
 ## Profile by SOURCE KIND, not by city — there are more than three
 
@@ -754,7 +815,8 @@ prescribed their own.
 
 1. **`docs/<country>_step0_endpoints.md`** - every endpoint fetched, per leg
    (business, transit, boundary), with the traps. Merge into
-   `docs/data_sources/<country>.md` only when a city is actually built.
+   `docs/data_sources/<country>.md` only when a city is actually built, as
+   the two sections above describe.
 2. **Licence texts in `docs/licenses/`**, one per publisher, with source URL,
    retrieval date and SHA-256 in that directory's README.
 3. **A privacy note** working through each jurisdiction's definition.

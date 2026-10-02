@@ -199,6 +199,12 @@ RULES = {
     "health_food_nonstore": Rule(
         OUT, "Health-food sellers", "e-commerce, door-to-door and multilevel sellers out",
         required=False, sub=True),
+    "person_licence": Rule(
+        OUT, "A person's own license", "San Francisco's practitioner licenses (owner, 2026-10-01); "
+        "New York's, Calgary's and Edmonton's chair renters and practitioners",
+        r"(tattoo|piercing|massage|enhancement)\W+practitioner|chair.?rent|booth.?rent|chair operator|"
+        r"area renter|beauty booth|working in another's shop",
+        required=False),
     "mobile_unit": Rule(
         OUT, "Mobile units", "Bucharest, Seoul (food trucks), Glasgow (mobile caterers)",
         r"mobile|food truck|truck|cart\b|peddl|pedlar|hawker|vendor|ambulant|푸드트럭|屋台|攤販"),
@@ -408,6 +414,9 @@ COLUMNS["phl_licensetype"] = {
 }
 
 COLUMNS["new_york"] = {
+    "person_licence": [outside("pipeline/new_york/step2_clean_businesses.py",
+                               "NYS_SALON_EXCLUDE_LICENSE_TYPES",
+                               "area and barber chair renters dropped in step 2 by license type")],
     "funeral": absent("none of the four registries licenses funeral services"),
     "no_counter_food": absent("DOHMH membership is Food service whatever the cuisine; no caterer or "
                               "canteen type separates them"),
@@ -505,6 +514,7 @@ COLUMNS["vancouver"] = {
 }
 
 COLUMNS["calgary_licencetype"] = {
+    "person_licence": [loc("PERSONAL SERVICE (INDEPENDENT CHAIR OPERATOR)", "independent chair operator")],
     "funeral": absent("no funeral, crematorium or cemetery type among its licence types"),
     "no_counter_food": [loc("MARKET", "market of stalls"),
                         loc("FOOD SERVICE - NO PREMISES", "food service with no premises")],
@@ -539,6 +549,9 @@ COLUMNS["calgary_licencetype"] = {
 }
 
 COLUMNS["edmonton_licencecategory"] = {
+    "person_licence": [loc("Health Enhancement Practitioner (Accredited)", "accredited practitioner (a person)"),
+                       outside("pipeline/edmonton/config.py", "LICENCE_TYPE_KEEP",
+                               "'Massage Practitioner' licences (a person) dropped before classify()")],
     "funeral": [loc("Funeral, Cremation, and Cemetery Service", "funeral, cremation and cemetery")],
     "no_counter_food": [loc("Food Processing / Catering Service", "catering (merged with processing)"),
                         loc("Public Market Vendor", "market stall vendor"),
@@ -607,6 +620,9 @@ COLUMNS["toronto_mlscategory"] = {
 
 
 COLUMNS["dc_businessactivity"] = {
+    "person_licence": [pending("Beauty Booth", "a chair rented inside a salon (6)", "Personal services",
+                               "2026-10-02", "kept as Personal services; the rule takes a renter's "
+                               "own license out (San Francisco, New York, Calgary, Edmonton)")],
     "funeral": [loc("Funeral Establishment", "funeral establishment")],
     "no_counter_food": [loc("Caterers", "caterers"), loc("School Cafeteria", "school cafeteria"),
                         loc("Farmer's Market Manager License", "farmers' market")],
@@ -764,6 +780,8 @@ COLUMNS["buffalo"] = {
 
 # Sacramento: the City's Business_Description, 148 values (read 2026-09-29).
 COLUMNS["sacramento"] = {
+    "person_licence": [loc("BEAUTY - INDEPENDENT STYLIST", "independent stylist in another's shop"),
+                       loc("MASSAGE - TECHNICIAN", "massage technician (a person)")],
     "funeral": [loc("FUNERAL HOME & CREMATORY", "funeral home"),
                 loc("PET CREMATION SERVICES", "pet cremation")],
     "no_counter_food": [loc("CATERING", "caterer"), loc("COTTAGE FOOD OPERATION", "home kitchen"),
@@ -1947,7 +1965,8 @@ COLUMNS["zurich_gastwirtschaft"] = {
 # Empty since 2026-09-30: the owner ruled on the last four (Boston's GOP
 # licences, Buffalo's fuel devices and dance halls, Sacramento's ENTERTAINMENT)
 # after they were counted - each is now an exception() with its reason.
-AWAITING_OWNER = {}
+# D.C.'s Beauty Booth: found when the person_licence rule was added (2026-10-02).
+AWAITING_OWNER = {("dc_businessactivity", "person_licence")}
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "

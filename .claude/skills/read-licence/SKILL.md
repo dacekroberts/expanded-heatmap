@@ -13,7 +13,9 @@ one failure mode, turned into a procedure.
 Record the outcome in the source's country file, `docs/data_sources/<country>.md`
 (the index at the top of `docs/data_sources.md` names it; notices go in that
 entry point's numbered gate), as you go, per `add-city` Step 0.4.
-Terms are not established until they are written there with the date.
+Terms are not established until they are written there with the date. Both
+files render on the public About the Data page, so write the record for a
+reader: step 9 below, and `docs/city_page_format.md` sections 2 to 4.
 
 ## The three corrections this exists to prevent
 
@@ -304,6 +306,41 @@ Never leave a position implied. Write one of:
   written request outstanding, and comes down if the publisher confirms the
   restrictive reading.
 
+### 9. Write the row and the notice for the reader
+
+The source's row in `docs/data_sources/<country>.md` and its numbered notice in
+`docs/data_sources.md` are rendered on About the Data, one country at a time
+(`app/country_sections.py`). The format is `docs/city_page_format.md`
+sections 2 to 4; in short:
+
+- **The city is named** in the row's city column and in every heading or
+  notice title about its sources ("**60. Gobierno de la Ciudad de Buenos
+  Aires (Buenos Aires)**"), so the section files under the right country.
+- **The record states the data, its terms, its notices and what is counted.**
+  The verdict, the quoted terms, the required wording, the license link and
+  method detail (endpoint, filter, `pipeline/...` module) are never hidden.
+- **Process notes stay out, or go between `<!-- internal -->` and
+  `<!-- /internal -->`:** who read it (`licence-read`, this skill), check
+  scripts (`check_personal_exposure.py`, `check_provenance.py`),
+  `DECISIONS.md`, `PLAN.md`, build briefs, internal docs. Wrap the smallest
+  unit that leaves good prose, a phrase first (notice 60 is the model), a
+  whole bullet only when all of it is process (its "MUST DO:
+  `check_personal_exposure.py`" bullet):
+
+  ```
+  - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-09-28 for the survey and
+    Parcelas; <!-- /internal -->the SBASE dataset page read 2026-09-28 declares the same
+  ```
+
+  A marker never holds a `|` and never crosses a blank line; re-read the
+  text with the spans deleted (no dangling "and", no empty parentheses).
+- **License titles, required notices and quotes stay exactly as published**
+  ("Open Government Licence – Vancouver", "Licence Ouverte", "Creative Commons
+  Attribution 2.5 Argentina"). The record's own words are US English:
+  "license", "honored", "color".
+- **No registrant's own name**, even to illustrate a privacy rule; use a
+  placeholder (`docs/city_page_format.md` section 5).
+
 ## Two standing rules this skill does not get to weaken
 
 - **A government open-data portal is a reason to expect permissive terms, not
@@ -311,5 +348,5 @@ Never leave a position implied. Write one of:
   forbids modifying the data — both from the same city.
 - **A removal request is honoured, not argued.** Finding that something is
   permitted is never a reason to insist on publishing it. See
-  `docs/data_sources.md`, "Commitment: removal requests are honoured, not
+  `docs/data_sources.md`, "Commitment: removal requests are honored, not
   argued".

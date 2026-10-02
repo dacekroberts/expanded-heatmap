@@ -55,6 +55,7 @@ DECISIONS entry that a build session does not read before recommending.
 | Recreation (NAICS 71): gyms, karaoke rooms, PC rooms, sports venues | **Out** | the NAICS cities | naics.py |
 | Pharmacies, opticians | **Kept**, Retail (NAICS 44-45) where the register covers general retail. A food-only register's pharmacies are out (not food shops), except the FSA cities', which are kept. Melbourne's opticians are out: ANZSIC files them in health (owner, confirmed 2026-09-29) | the NAICS cities; Stockholm (food-only) | naics.py; DECISIONS 2026-09-29 Stockholm |
 | Health-food sellers | **In-store only**; e-commerce, door-to-door and multilevel sellers out, and never at an apartment unit | Seoul, Daegu, Busan, Incheon | korea_localdata.py |
+| A person's own license to work inside someone else's premises: practitioner licenses, chair and booth renters | **Out**. The shop's own license keeps the shop on the map | San Francisco's tattoo and massage practitioners (62 pins); New York's area and barber chair renters; Calgary's independent chair operators (160); Edmonton's Massage Practitioner licenses (1,582) | DECISIONS 2026-10-01 "San Francisco leaves out individual practitioner licences" |
 | Mobile units, kiosk carts, vending machines | **Out** | Bucharest, Seoul (food trucks), Glasgow (mobile caterers) | romania_dsvsa.py, korea_localdata.py |
 
 ## Station scope

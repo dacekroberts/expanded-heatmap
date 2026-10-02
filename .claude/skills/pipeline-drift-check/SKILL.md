@@ -78,7 +78,9 @@ baseline itself is stale.
 
 Catch pages that silently depend on pipeline intermediates instead of
 `outputs/` (a real class of bug for an app that deploys without its
-pipeline data, surfacing as a production `FileNotFoundError`): temporarily rename `data/`
-aside, run the `deploy-verify` agent (or reload every page against
-`.venv-lean`), confirm nothing errors, then rename `data/` back. Never
-delete it - rename and restore.
+pipeline data, surfacing as a production `FileNotFoundError`):
+`python scripts/check_deploy_imports.py --ref HEAD` runs the app's imports
+from a clean clone of the commit, which has no `data/`. **Never rename or move
+`data/`**: every worktree's `data/` is one shared folder, and other sessions
+are reading it. A pipeline-only change needs no `deploy-verify`; the pages are
+verified once per batch, at review time (`CLAUDE.md`).

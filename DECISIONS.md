@@ -20,7 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**337 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-02**
+
+- [The prose and UI pass landed and live after the owner's reboot; the deploy check run in parallel lanes](#2026-10-02---the-prose-and-ui-pass-landed-and-live-after-the-owners-reboot-the-deploy-check-run-in-parallel-lanes)
+- [The city-building skills rewritten to the new page format; one French name restored (owner)](#2026-10-02---the-city-building-skills-rewritten-to-the-new-page-format-one-french-name-restored-owner)
+- [The skills rework's five follow-ups: stations "listed on the city's page", a person-license rule, a marker check (owner)](#2026-10-02---the-skills-reworks-five-follow-ups-stations-listed-on-the-citys-page-a-person-license-rule-a-marker-check-owner)
 
 **2026-10-01**
 
@@ -13939,3 +13945,145 @@ Recorded by the cleanup session from the Main Building Session's findings of
   changed files that the staging session's pre-push check reads. San
   Francisco's was restored until the landing; Toronto's could not be,
   because master's code produces the new figure too.
+
+### 2026-10-02 - The prose and UI pass landed and live after the owner's reboot; the deploy check run in parallel lanes
+
+- **Landed:** d85b47a7 on master, pushed by the cleanup session with all 40
+  pre-push checks passing. The owner rebooted.
+- **Live, checked through same-size frames on `/~/+/`:**
+  - About the Data serves the new intro and the region-then-country selector,
+    with no hidden material and no markers.
+  - `check_map_view`'s logic finds every view right, with 0 corrections:
+    Edmonton at 1200 and at 375 (a 333 px frame), Paris, Lille.
+  - The city pages carry the new subtitle.
+  - San Francisco's map shows Retail 5,038 and Personal services 2,091.
+- **The deploy check ran in parallel lanes** (`scope: full`, owner):
+  - Lane 1 covered the Overview, the reference pages and 41 cities; lane 3
+    covered 41 cities.
+  - Lane 2 stalled on its maps and was replaced by two agents of 21 cities
+    each.
+  - Every page and map passed, except for findings already on master, which
+    are now in PLAN: label crowding in Pittsburgh, Yokohama and Osaka, and
+    San Diego's thin page.
+  - The lanes' new findings were fixed before the push:
+    - 109 process notes hidden by three agents in parallel;
+    - the tab title, "the United States", "Gas station" and "license";
+    - 12 maps re-rendered, byte-identical apart from the renames.
+- **The method is written up** in `docs/review_lane_kit.md` §7b.
+- **Torn down:** the five prose worktrees, each checked with
+  `check_worktree_data.py` and with its junctions unlinked first. Their
+  branches were deleted once each was confirmed in origin/master.
+
+### 2026-10-02 - The city-building skills rewritten to the new page format; one French name restored (owner)
+
+- **The owner's standing instruction (2026-10-01):** once the prose and UI pass
+  was deployed, rework the city-building and page skills to the new formats,
+  and hold the UK builds until then.
+- **One spec, which the skills point to:** `docs/city_page_format.md`. It covers
+  - the page order;
+  - bullets under bold headings;
+  - the city's headings in the two reference docs naming the city, with its
+    own gaps and limits in its own section;
+  - process notes kept off the rendered docs, or between internal markers;
+  - American spelling and what stays as written;
+  - no registrant's name in any doc;
+  - who approves the words.
+
+  `CLAUDE.md`'s "Where to start" points to it.
+- **Five agents in parallel, each with its own files:**
+  - the core build skills;
+  - the three tram skills;
+  - Japan, Tokyo wards, Taiwan, Brazil and CJK text;
+  - country, multi-source, taxonomy and re-probe;
+  - the support skills and the three agent definitions.
+
+  Each skill's template sentences now match the pages as they stand. They
+  were compared against the generator (`france_page.py`) or against two to ten
+  built pages per family. No data, category, station or privacy rule changed.
+- **Fixed on the way:**
+  - **`france_page.py` still wrote "labelled".** Re-running it would have
+    reverted the US spelling on 21 pages, so it now writes "labeled". With
+    that change, re-running it reproduces 20 of the 21 pages byte for byte.
+  - **The 21st, Valenciennes, was a defect of the US-spelling pass.** The pass
+    had respelled the operator's French name, "SI de mobilité et
+    d'organisation urbaine du Valenciennois", as "d'organization". The
+    generator restored the official name. A scan of the spelling commit's
+    changed lines for non-English context found no other case.
+  - **`pipeline-drift-check` told a session to rename `data/` aside.** That
+    folder is shared by every worktree, so the step now uses
+    `check_deploy_imports.py`'s clean clone.
+  - Stale facts:
+    - `tram-city` had Kansas City and New Orleans as `full`; they are
+      `narrowed`.
+    - `reprobe-city` listed Singapore, now discarded, among the one-bucket
+      cities.
+    - `deploy-verify`'s cost figure now carries the 75 minutes measured at
+      124 cities.
+- **Left for the owner (listed in the report):**
+  - What Is Excluded still points readers to `outputs/<city>/excluded_stations.csv`
+    in about a dozen city sections, and `france_excluded_section.py` writes the
+    same.
+  - Small wording splits between pages of one family. The tram pages place
+    the in-ring share in two different places, and Den Haag's third heading
+    differs. The Japanese pages split 3-3 on dashes versus parentheses.
+  - Whether to add a `category_rules.md` row for a person's own license
+    inside someone else's shop. Adding it fails the continuity check until
+    every taxonomy answers it.
+  - Whether the internal markers and the spelling should get checks of their
+    own.
+
+### 2026-10-02 - The skills rework's five follow-ups: stations "listed on the city's page", a person-license rule, a marker check (owner)
+
+- **What Is Excluded no longer sends readers to a repository file** (owner:
+  "can change to listed on city page").
+  - The 26 pointers to `excluded_stations.csv` in
+    `docs/excluded_categories.md` now say the stations are listed on the
+    city's page. That includes the two general lines, on how the counts are
+    made and where the names are.
+  - `scripts/france_excluded_section.py` writes the same wording, and its
+    output for the 21 French cities equals the doc byte for byte.
+  - Left for the later wording batch (PLAN):
+    - 20 cells of About the Data's tables that point to the same files;
+    - five pointers to `excluded_premises.csv`, which no page shows.
+- **Each page family made consistent with itself in a later wording batch**,
+  presented as a Markdown list (owner). The splits the skills rework found
+  are listed in PLAN.
+- **A category rule for a person's own license** (owner: "add the row unless
+  the check failure is difficult to resolve").
+  - It was not difficult. The rule is optional with keywords, the mechanism
+    the Korean karaoke-bar rule uses, so only the 5 of 48 taxonomies whose
+    own vocabulary names such a license had to answer:
+    - Calgary's independent chair operators;
+    - Sacramento's independent stylists and massage technicians;
+    - Edmonton's accredited practitioners, plus its Massage Practitioner
+      licenses dropped before classify();
+    - New York's area and barber chair renters, dropped in step 2;
+    - D.C.'s "Beauty Booth".
+  - "Practitioner" alone matched medical and professional offices, which are
+    out anyway, so the keywords name the trades: tattoo, piercing, massage and
+    enhancement practitioners, and chair or booth renters.
+  - **One departure found:** D.C. keeps "Beauty Booth" (6 pins, a chair
+    rented inside a salon) as Personal services. It is pending for the owner
+    in the check and in PLAN, not changed.
+  - San Francisco's rule sits in its config. The shared NAICS module names no
+    such license, so no cell was needed for it.
+- **`scripts/check_internal_markers.py`, in `check_all`** (owner: "cheap
+  check"). It reads `country_sections.py`'s own pattern, so the two cannot
+  drift. In the rendered docs it fails on:
+  - a misspelled marker;
+  - an unclosed or nested one;
+  - a span holding a `|`;
+  - a span crossing a blank line, unless it hides a whole block;
+  - a broken seam: empty parentheses, a space before punctuation, a dangling
+    dash, an empty bullet.
+
+  13 selftest cases. Its first run found six spans:
+  - two whole process sections hidden as blocks, now allowed;
+  - four double spaces, which Markdown collapses, so that rule was dropped.
+
+  All 164 spans pass.
+- **The Hong Kong examples in `cjk-text`** ("KWOK YIN", "INANIWA YOSUKE") are
+  trade names, but they read like people's names, and that was the point of
+  quoting them. They are replaced with descriptions of their shape. No other
+  tracked file names them except the Hong Kong map, which shows them as shop
+  signs.

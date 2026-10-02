@@ -28,6 +28,18 @@ with the precedent it breaks and the count. Korea's first SEMAS mapping
 proposed dropping massage on a hunch, which would have made Korea the only
 country without it (2026-09-29).
 
+**One precedent to look for by name in any licence-type list: a person's own
+licence to work inside someone else's shop is left out.** San Francisco's
+tattoo and body-piercing practitioner and massage practitioner licences went
+on the owner's call (`DECISIONS.md`, 2026-10-01, "San Francisco leaves out
+individual practitioner licences"): a row goes only when every licence it
+holds is a practitioner's, so a studio holding its facility licence as well
+stays (`config.PRACTITIONER_ONLY_LICENCES`). New York's, Calgary's and
+Edmonton's chair renters are the earlier cases. Words that mark the type:
+practitioner, renter, chair, booth, independent operator. Such a type is a
+person rather than a premises, and keeping it double-counts the shop and puts
+a person on the map (`docs/city_page_format.md`, section 5).
+
 **A new taxonomy module needs its column in the continuity table in the same
 change.** Registering it in `pipeline/taxonomies/__init__.py` without a column in
 `scripts/category_continuity_table.py` fails `check_category_continuity.py`, and
@@ -129,6 +141,11 @@ contains retail" is not evidence about a premises** — and that sector explicit
 mixes in wholesale. Dropping 458 rows you cannot classify is honest; assigning
 them to the biggest bucket is a guess wearing a number's clothes.
 
+"Say why" means for the reader, in the city's own section of
+`docs/excluded_categories.md`, whose heading names the city: Barcelona's is
+"Barcelona - empty shopfronts, accommodation filed under restaurants, and 458
+rows that could not be classified" (`docs/city_page_format.md`, section 2).
+
 ## Step 5 — Check for accommodation hiding inside food service. It is a pattern
 
 **Three countries, three times.** Assume it is there:
@@ -214,9 +231,32 @@ measure the new words on the sample they came from.**
 - The same rule holds for any threshold or pattern tuned on data: **the rows
   used to choose it cannot also be the rows that test it.**
 
-## Step 8 — Record what the choice was, not just what it was
+## Step 8 — The words the reader sees: field label and category labels
 
-In `DECISIONS.md`: the level chosen, **the catch-all share at each level that
+The module owns the tooltip's field name and every English label it writes
+(the invariant: `render_heatmap()` never names a taxonomy). Both render on the
+map, so both follow `docs/city_page_format.md`, section 4:
+
+- **`FIELD_LABEL` in American English** where it is English: "License
+  category" (Toronto, Edmonton, Boston) and "License type" (Calgary, Hong
+  Kong, Zurich, Philadelphia), even where the module's own name keeps the
+  register's spelling (`edmonton_licencecategory`, `calgary_licencetype`; code
+  identifiers stay as written). A field name in the register's language,
+  with its scheme named, stays as written ("Activité (NAF)", "Actividad
+  (epígrafe)"). A dispatcher over several sources uses a generic one
+  ("Category", `multi-source-city`).
+- **English category labels in American English**, as Korea's carry them:
+  "Gas station", "Liquor store", "Tires", "Watches and jewelry", "Shopping
+  center" (`korea_sbiz.py`, `korea_localdata.py`). Before writing a label for
+  a trade, grep `pipeline/taxonomies/` for that trade's existing label.
+- **The register's own value stays as written**, accents, language and
+  spelling included: the tooltip shows it, and it is what a reader checking
+  the map searches for (Step 7's display rule).
+
+## Step 9 — Record what the choice was, not just what it was
+
+In the session's drafts file (`docs/decisions_drafts/`, folded into
+`DECISIONS.md` later): the level chosen, **the catch-all share at each level that
 decided it**, the catch-all's parent breakdown, and any rows dropped with the
 count. The numbers are the reasoning — "we keyed on the finest level" is not
 checkable and "35% versus 2.6%" is.
@@ -232,5 +272,8 @@ checkable and "35% versus 2.6%" is.
 - [ ] Every surviving distinct value has an explicit home; `classify()` raises otherwise
 - [ ] Import-time assertions for the expensive findings
 - [ ] Free-text schemes: every new rule's yield measured on a FRESH sample, never the one it was chosen from
+- [ ] Person-held licence types (practitioners, chair renters) looked for by name and left out
+- [ ] Dropped rows disclosed in the city's own section of `docs/excluded_categories.md`
+- [ ] `FIELD_LABEL` and English labels in American English; register values as written
 - [ ] The check declared in the city's brief so the decision re-runs
-- [ ] `DECISIONS.md` carries the shares that decided the level
+- [ ] The drafts file carries the shares that decided the level

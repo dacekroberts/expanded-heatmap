@@ -40,7 +40,12 @@ at review time only (`docs/review_time.md`).
    before writing step 1, and put them in config, or record why none exist.
    The brief's station count is not one: it is usually OSM's.
 7. Write `fetch_sources.py`, which **always downloads the feed** (section 4),
-   then step 1, step 2 and the render. Then run "Before publishing".
+   then step 1, step 2 and the render.
+8. Fill the page `scaffold_city.py` wrote (it is already in the city-page
+   format) from section 6, and write the city's sections of
+   `docs/excluded_categories.md` and `docs/data_sources/<country>.md`. The
+   format for all three is `docs/city_page_format.md`; never start a page by
+   copying an older one. Then run "Before publishing".
 
 ## The owner's standing calls - do not re-ask
 
@@ -389,83 +394,131 @@ city, and that is the owner's call per city (`ONE_BUCKET_BY_OWNER`).
 |---|---|---|---|
 | Odense | All three | `full` | CVR, as Aarhus |
 | Daugavpils, Liepāja | Merged | `narrowed` | Riga's two layers (shops and services merged; food thin by construction) |
-| Kansas City, New Orleans, Tucson | All three | `full` | City licence registers with all three |
+| Tucson | All three | `full` | City licence register with all three |
+| Kansas City, New Orleans | All three, one thin | `narrowed` | City licence registers; Kansas City's food service and New Orleans's personal services are thin (`categories` "Food service thin", "Personal services thin"; DECISIONS 2026-09-30, A2) |
 | Florence | All three | `full` | The Comune's four layers |
 | Zurich | Two | `narrowed` | Food plus partial retail (alcohol-licensed shops, kiosks, petrol stations); no personal services. Boston's precedent: retail that is not only food shops makes two |
 | Göteborg | Food premises only | `one_bucket` | Food service plus food shops, which count as food |
 | Den Haag | Merged | `narrowed` | **Rotterdam's shape** (BAG winkelfunctie plus the horeca layer), which is `narrowed`, "Merged". Approved `narrowed` over the tram list's "full" (owner, call 23) |
 
-**A narrowed or one-bucket page says what is missing in its own paragraph**
+**A narrowed or one-bucket page says what is missing in its own bullets**
 (section 6), and `check_scope_disclosure.py` holds it to
-`docs/excluded_categories.md`. The layer control names only the categories
-the map has (Riga's "Shops and services, and Food service").
+`docs/excluded_categories.md`, where the gap goes in the city's own section,
+never the shared "What is missing rather than excluded" one
+(`docs/city_page_format.md`, section 2). The layer control and
+`render_map_help` name only the categories the map has (Riga's and Liepāja's
+"two business categories (Shops and services, and Food service)").
 
 ## 6. Page text - approved by the owner, word for word (2026-09-30)
 
-Braces are per-city facts, filled from this city's own measurements (step 1,
-step 2 and the rendered map), never from the brief's screen figures. A
-paragraph in braces appears only where it applies. The controls paragraph and
-the heat-layer caveat stay exactly as on the built pages (Aarhus's and Riga's),
-with the category names this map has. The transit caption comes from
-`provenance.json`, with the operator's credit and any notice its licence
-requires.
+The page `scaffold_city.py` writes is already in the city-page format
+(`docs/city_page_format.md`, section 1): `render_city_title`, the map, the
+captions, the bullets below under bold headings, then `render_map_help`,
+`render_excluded_stations`, `render_country_links` and `render_site_notices`
+last. The wording is the template as the ten built pages carry it after the
+2026-10-01 prose pass (`app/pages/130_Odense_Heatmap.py` to
+`139_Zurich_Heatmap.py`). Braces are per-city facts, filled from this city's
+own measurements (step 1, step 2 and the rendered map), never from the
+brief's screen figures. A bullet in braces appears only where it applies. A
+sentence from this template needs no read-back; one it does not cover is a
+proposal, flagged in the session's drafts file
+(`docs/city_page_format.md`, section 6).
 
-> {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
-> and in the legend, redrawn from {OpenStreetMap's route geometry}{, in
-> colours this project chose, since the source records none}. {City} has no
-> metro, so its trams are its rapid transit, as in Riga. Every tram stop here
-> gets rings. {Trams run about every {n} minutes by day{; less often in the
-> evenings}.} {Buses{ and suburban trains} are not drawn{: why}.}
+**The captions**, directly under the map, from `provenance.json`: the
+business source with its own date, then the rail's fetch date, for example
+(Florence's and Göteborg's shape; a second source adds its own clause, as
+Den Haag's BAG units do):
+
+> {Premises data} from {publisher}{ (license)}, {last updated / fetched}
+> **{date}**; the tram lines and their stops from OpenStreetMap, fetched
+> **{date}**.
+
+**The prose**, as bullets under three bold headings. The first heading is
+**The trams**, **The tram** for one line, **The streetcar(s)** for a US
+streetcar.
+
+> **The trams**
 >
-> The map covers the **{city unit}**. {Where a line runs past it: "{Line}
-> runs on into {place}, so its {k} stops there are left out. The line is
-> still drawn to its end, but those stops get no ring and their businesses
-> are not counted. They are listed in `outputs/{slug}/excluded_stations.csv`."}
+> - {N} {operator} tram lines are drawn, **{lines}**, each labeled on the map
+>   and in the legend, redrawn from OpenStreetMap's route geometry{, in colors
+>   this project chose, since the source records none / , in OpenStreetMap's
+>   own colors}.
+> - {Trams run about every {n} minutes by day{; less often in the
+>   evenings}.}
+> - {Buses{ and suburban trains} are not drawn{: why}.}
+> - {City} has no metro, so its trams are its rapid transit, as in Riga.
+>   Every tram stop here gets rings.
+> - **Tram stops sit closer together than metro stations**, a median of
+>   {spacing} m here, so the rings are drawn at half the usual size (0.05 to
+>   0.3 mi).
+> - The map covers the **{city unit}**. {Where a line runs past it: "{Line}
+>   runs on into {place}, so its {k} stops there are left out."}
+> - {Where a line runs past it: "The line is still drawn to its end, but those
+>   stops get no ring and their businesses are not counted. They are listed
+>   below."}
 >
-> {The business source, in the template city's wording: which register, how
-> the dots are placed, and whether a dot shows a name, a type or an address.}
+> **The businesses**
 >
-> {Narrowed or one-bucket only: "**This map has {one category / two
-> categories}, not three.** {What the source holds, and what is missing.}"}
+> - {The business source, in the template city's wording: which register, how
+>   the dots are placed, and whether a dot shows a name, a type or an address,
+>   one claim to a bullet.}
+> - {Narrowed: "**This map has two categories, not three.** {What the source
+>   holds, and what is missing.}" One bucket (Göteborg): "**This map shows
+>   food only, not three categories.** {What the source holds.}"}
+> - {Kansas City: "**The license data dates from 15 January 2026**, and holds
+>   licenses valid for 2025 and 2026. Businesses that opened since then are
+>   missing, and any that closed may still be shown."}
+> - **About {two storefronts in five} sit within a ring.**
 >
-> {Kansas City: "**The licence data dates from 15 January 2026**, and holds
-> licences valid for 2025 and 2026. Businesses that opened or closed since
-> then are not shown." Göteborg: "**The register carries no dates.** It lists
-> the food businesses active on the day it was fetched ({date}), and says
-> nothing about when each opened." Den Haag (owner, call 27): "**The permit
-> data runs to 2025.** The city last edited its permit layer on 23 May 2025,
-> so premises that opened or closed since then may be missing or still
-> shown."}
+> **Reading the density**
 >
-> **Read the density as a register, not a street survey.** {The source's own
-> caveat.} No ratio to OpenStreetMap: that comparison is the French pages',
-> where SIRENE counts registered establishments; no tram-kit page carries one
-> (owner, call C2, 2026-10-01).
->
-> **Tram stops sit closer together than metro stations**, a median of
-> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
-> 0.3 mi). **About {share} of storefronts sit within a ring.** {New Orleans:
-> "Streetcar stops here stand a block or two apart, so the rings join into a
-> band along each line. Read them as distance from the line."}
->
-> {The controls paragraph and heat-layer caveat, word for word as on the
-> built pages, with this map's category names.}
+> - {Göteborg: "**The register carries no dates.** It lists the food
+>   businesses active on the day it was fetched ({date}), and says nothing
+>   about when each opened." Den Haag (owner, call 27): "**The permit data
+>   runs to 2025.** The city last edited its permit layer on 23 May 2025, so
+>   premises that opened or closed since then may be missing or still
+>   shown."}
+> - **Read the density as a register, not a street survey.** {The source's
+>   own caveat.}
+> - {New Orleans: "Streetcar stops here stand a block or two apart, so the
+>   rings join into a band along each line. Read them as distance from the
+>   line."}
+
+Notes on the template:
+- **The in-ring share is said in words**, as on all ten pages: "About two
+  storefronts in five sit within a ring", "About one storefront in eight
+  sits within a ring". Five pages put it last under **The businesses**, five
+  last under **Reading the density** (New Orleans's leads its band bullet).
+- **A US streetcar** says it the way Kansas City's, Tucson's and New Orleans's
+  pages do: "{City} has no metro: its streetcar is its rapid transit, as
+  Riga's trams are, so every stop gets rings", and "**Streetcar stops sit
+  closer together than metro stations** ...". Their scope bullet adds ", as
+  the US Census Bureau draws its limits. Every streetcar stop is inside it."
+- **The stops left out are "listed below"**: `render_excluded_stations` lists
+  them on the page. Never a repository path, script or check name in page
+  text.
+- **No ratio to OpenStreetMap**: that comparison is the French pages', where
+  SIRENE counts registered establishments; no tram-kit page carries one
+  (owner, call C2, 2026-10-01).
+- **No controls paragraph or heat caveat of the city's own**:
+  `render_map_help("{three business categories (Retail, Food service and
+  Personal services) / two business categories (Shops and services, and Food
+  service) / ...}")` renders them, with the categories this map has.
 
 A city whose median stop gap is over about 550 m keeps the standard rings
-and drops the last paragraph's first sentence. Where the rail comes from a
-feed rather than OpenStreetMap, the first sentence names the feed ("from
-{operator}'s own published timetable feed"), as France's template does.
+and drops the ring bullet. Where the rail comes from a feed rather than
+OpenStreetMap, the first bullet names the feed ("from {operator}'s own
+published timetable feed"), as France's template does.
 
 **Departures are owner calls, never edits.** Anything that does not fit the
 template goes to the owner as a proposed sentence.
 
 ## 7. The macro map and the app entry
 
-- **Two keys** (owner, 2026-09-30; `add-city` on `origin/macro-legend`, or on
-  master once it lands): colour = `mode`, fill = `coverage`, as sections 1
-  and 5. `scaffold_city.py --mode` arrives with that branch. Until it lands,
-  set `mode` by hand in the `cities.py` entry. `cities.py` raises at import
-  without it.
+- **Two keys** (owner, 2026-09-30, landed with the macro-legend branch):
+  colour = `mode`, fill = `coverage`, as sections 1 and 5.
+  `scaffold_city.py --mode` is required and writes `mode` into the
+  `cities.py` entry; `cities.py` raises at import without it.
 - Region: `"Europe"` for the seven European cities. `"United States West"`
   for Tucson; `"United States East"` for Kansas City and New Orleans, since
   Houston (−95.4°) is East. `--country` is spelled as `app/cities.py` spells
@@ -476,7 +529,8 @@ template goes to the owner as a proposed sentence.
 
 ## Before publishing (each city)
 
-`python scripts/check_personal_exposure.py <slug>` (verdict in `DECISIONS.md`;
+`python scripts/check_personal_exposure.py <slug>` (verdict in the session's
+drafts file and `docs/privacy_verdicts.md`;
 **the suspects are Kansas City's `dba_name`, New Orleans's `ownername`,
 Tucson's `ACC_NAME` on personal ownership types, Florence's beauty and
 laundry points (no names, but sole traders' premises) and Den Haag's
@@ -484,9 +538,15 @@ laundry points (no names, but sole traders' premises) and Den Haag's
 gate 3 ran against the operator's per-line counts with no unexplained
 mismatch, or `OPERATOR_COUNTS_GAP` records why it could not (section 2);
 `check_provenance.py` names the city OK; `check_scope_disclosure.py` passes;
-a `docs/data_sources.md` row for every new source, the join and address layers
-included (VZD's `aw_eka.csv`); `drift_check.py <slug>`; no `TODO` left in
-`pipeline/<slug>` or `app/`; a `DECISIONS.md` entry. Then `publish-city`.
+a row in `docs/data_sources/<country>.md` for every new source, the join and
+address layers included (VZD's `aw_eka.csv`); the page and the city's
+reference-doc sections read as `docs/city_page_format.md` sets out (headings
+that name the city, its gaps in its own section, process notes out or inside
+`<!-- internal -->` markers, no repository path on the page);
+`drift_check.py <slug>`; no `TODO` left in `pipeline/<slug>` or `app/`; a
+decisions entry in the session's drafts file
+(`docs/decisions_drafts/<session-or-branch>.md`, `decisions-entry`). Then
+`publish-city`.
 
 **Heavy jobs** (announce to every live session first, `docs/session_roles.md`):
 Odense's step 2 reads the national CVR cache, and the Latvian step 2 reads
