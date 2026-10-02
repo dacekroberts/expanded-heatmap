@@ -4,6 +4,57 @@ Entries in the `decisions-entry` format, newest first, each exactly as it
 should land in `DECISIONS.md`. Cleanup folds them in when the owner hands
 them off.
 
+### 2026-10-02 - The Japan batch landed on its branch: twelve cities, what the agents did, and what waits for review time
+
+- **All twelve built and committed on `japan-batch-build`, one commit per city
+  in the kit's table order** (Matsuyama by the lead; Toyama, Kumamoto, Fukui
+  and Nagasaki by the city-lists agent; Utsunomiya, Kitakyushu, Okayama and
+  Kagoshima by the MHLW-led agent; Sakai, Hakodate and Kōchi by the one-bucket
+  agent; every shared-file entry applied by the lead). Every brief's checks
+  pass at the end; every city's Japan privacy pass prints 0; pages 162-173,
+  notices 97-108. 136 cities in `app/cities.py`; the master list's built
+  table now has a Japan row of 20 beside East Asia's 6.
+- **The lead ran every Overpass query, one at a time** (two runs of the batch
+  fetch: the first stopped at the 30-minute background limit, no process left;
+  the second resumed with the cache kept). Fukui's and Kitakyushu's tram-stop
+  queries came back empty from every mirror, twice each; neither city needs
+  one (OSM tags those stops as stations). **One breach, by an agent:** the
+  MHLW-led agent ran Okayama's `fetch_sources.py osm` before the lead's file
+  existed (one query, no retry); it may have overlapped the lead's own Okayama
+  query. Okayama's output is unaffected (its entry).
+- **Two generated-record notes:** ring shares, macro facts, README and
+  rendered surfaces read every city in `app/cities.py`, so they ran once,
+  after the last city (each check passes for all 136). Per-city drift
+  baselines were recorded as each city landed (Hakodate's after another
+  session's drift check freed the machine's one slot).
+- **Fixed in shared tooling:** `scripts/screen_japan_join.py`'s GSI check
+  prefixed 北海道函館市 to addresses already starting with 函館市, so GSI answered
+  a generic point (median 7,186 m); it now adds only the prefecture there
+  (the one-bucket agent's finding; 51 m on the same sample).
+- **For the owner at review time, not changed:**
+  - **MHLW's default points.** MHLW parks some filings it cannot place on a
+    default coordinate (Kagoshima's and Utsunomiya's city halls; one point
+    shared by 13 towns in Okayama), and `own_point_fallback` uses it: up to 15
+    pins in Kagoshima, 19 in Okayama, 8 in Utsunomiya, 9 in Kitakyushu sit on
+    such a point. Recommended: a shared guard refusing a publisher point shared
+    by 3 or more towns, so those rows keep their town-chōme centroid; it would
+    move a few rows in the built Fukuoka, Hiroshima and Tokyo too, so it is
+    measured before it lands, with its own drift check.
+  - **`japan_fetch.fetch_city` counts a file's rows with `city_rows(dest)`**,
+    not the config's reader: Fukui's provenance records all twelve sheets'
+    rows (food 52,021), Toyama's reads without `merged_header`. The pins are
+    right; the recorded row counts are not. A small shared fix (count through
+    `config.source_rows` where a city defines it).
+  - **The page and notice sentences flagged as proposals** in each city's
+    entry; the Japan West phone-width trade-off (the views' entry); Fukui's CC
+    BY-SA notice and `LICENSE` section; Kitakyushu's companies-only operator
+    names (on Toyama's and Fukui's accepted position).
+  - **Fukuoka's and Tokyo's re-render** from the Phase 1 fixes, which this
+    branch deliberately does not commit (the Phase 1 entry).
+  - **The map-view check** for the batch (`check_map_view.js`): Hakodate's
+    and Matsuyama's wide N03 extents (islands, merged towns) frame from the
+    stations' box, not checked in a browser yet.
+
 
 
 

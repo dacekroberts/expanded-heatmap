@@ -206,10 +206,13 @@ def run_city(key, show_misses=False):
     return ps
 
 
-def gsi_check(permits, n, prefix=""):
+def gsi_check(permits, n, prefix="", city=""):
     """Second method: GSI's keyless AddressSearch on a random sample of block
     hits, at 1 request per second. Distance from ISJ's block point. prefix
-    restores the prefecture and city where a list's addresses start at the ward."""
+    restores the prefecture and city where a list's addresses start at the ward;
+    where an address already starts with the city (Hakodate's 函館市…), only the
+    prefecture is added (2026-10-02: with both, GSI answered a generic point,
+    a median 7,186 m off; with the prefecture alone, 51 m)."""
     import truststore
     truststore.inject_into_ssl()
     sample = random.Random(20260924).sample([p for p in permits if p["tier"] == "block"], n)
@@ -217,7 +220,7 @@ def gsi_check(permits, n, prefix=""):
     for p in sample:
         q = unicodedata.normalize("NFKC", p["addr"]).split(" ")[0]
         if prefix and not q.startswith(prefix):
-            q = prefix + q
+            q = (prefix[:-len(city)] if city and prefix.endswith(city) and q.startswith(city) else prefix) + q
         url = "https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + urllib.parse.quote(q)
         try:
             with urllib.request.urlopen(urllib.request.Request(
@@ -246,7 +249,7 @@ def main():
         if "--gsi" in sys.argv:
             pref, city = CITIES[key][:2]
             gsi_check([p for p in ps if not p["mobile"]], int(sys.argv[sys.argv.index("--gsi") + 1]),
-                      prefix=pref + city)
+                      prefix=pref + city, city=city)
         return
     code, muni, permit_csv, bz, cz = MUNICIPALITIES[key]
     blocks, chome = load_isj(DATA / bz, DATA / cz)
