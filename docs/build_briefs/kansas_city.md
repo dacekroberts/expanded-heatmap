@@ -55,7 +55,7 @@ decisions, `docs/handoff_tram_batch_2026-09-29.md`).
   - The fee codes cannot be classified: drop them and state the count.
 - **Keep `valid_license_for` 2025 and 2026 only**, the licences current at the
   freeze.
-- **Privacy:** `dba_name` is often a person ("HARRIS GREGORY J" form). Show
+- **Privacy:** `dba_name` is often a person ("SURNAME GIVEN-NAME INITIAL" form). Show
   `dba_name` only where it is not a personal name, else withhold it (Houston's
   sole-owner rule). Run `check_personal_exposure.py`.
 - **Placement:** `location` points on the rows.

@@ -134,7 +134,7 @@ gap. So these in-ring shares are not comparable with a metro city's.
   makes, not the claims it should have made. Canada named this same flaw.
   - Kansas City's brief swapped the name columns. `dba_name` is the holder,
     so following the brief would have published people's names
-    ("HARRIS GREGORY J") as pins.
+    ("SURNAME GIVEN-NAME INITIAL") as pins.
   - New Orleans's brief drew a routing RTA no longer runs.
   - Zurich's brief put dance halls out, against category rule R5. Its CRS
     claim was the UTM zone where the build uses LV95, and it said tram 12

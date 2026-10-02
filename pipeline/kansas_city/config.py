@@ -37,7 +37,7 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # dataset declares). rowsUpdatedAt 1768519845 = 2026-01-15: frozen, so the
 # page states the data date (owner, 2026-09-29, Stockholm's precedent).
 # THE COLUMN NAMES MISLEAD: `dba_name` is filled on every row and holds the
-# LICENCE HOLDER - "HARRIS GREGORY J" for a person, "MANREET INC" for a
+# LICENCE HOLDER - "SURNAME GIVEN-NAME INITIAL" for a person, "MANREET INC" for a
 # company - while `business_name`, filled on 5,835 of 15,895, is the trade name
 # ("7 ELEVEN STORE NO 18711C" over MANREET INC; "BLOOMING WATERS" over a
 # person). Measured 2026-09-30. Step 2 reads the holder only to decide whether
@@ -145,8 +145,8 @@ FEE_CODE = r"^(?:Misc|Flat) Rate \d+[A-Z]?$"
 
 # A COMPANY NAMED ONLY AS A PERSON shows the address too: Bucharest's owner
 # call ("Caranica Mihai SRL") and Denmark's (a name that marks the business as
-# one person's). Compared with the legal form stripped ("ALYSSA BULLIS LLC" ->
-# "ALYSSA BULLIS"). Read by eye on 2026-09-30 from every shown name that
+# one person's). Compared with the legal form stripped ("GIVEN-NAME SURNAME LLC" ->
+# "GIVEN-NAME SURNAME"). Read by eye on 2026-09-30 from every shown name that
 # residence.py's shape test reads as a person's - 271 trade names and 316 holder
 # companies; all but these are shop names ("CROWS COFFEE", "SMOOTHIE KING") or
 # chains named for a founder ("JOHNNY WAS", "KENDRA SCOTT", "EILEEN FISHER"),
