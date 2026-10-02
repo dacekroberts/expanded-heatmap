@@ -323,10 +323,24 @@ Then the multi-municipality work in `PLAN.md`, which is most of the cost.
       It requires non-commercial use of lists of individuals, the usual
       accuracy caveats, and a hold-harmless for errors in the data.
     - The website's footer reads "All rights reserved".
-    - **The owner decides** between the permissive reading (King County's
-      shape, with the removal rule as the safety net) and treating the layer
-      as unlicensed, which would mean asking gis@snoco.org.
-      🚨 OPEN.
+    - ✅ **Owner (2026-10-02): "permissive read"**, King County's shape.
+      The county's GIS data disclaimer is read as its governing position,
+      with its hold-harmless for errors in the data, and the website's "All
+      rights reserved" as a web-page footer. The removal rule is the safety
+      net.
+    - **Credit "Snohomish County, Food Service Establishments (2025)"**,
+      never the health department, whose authorship is unconfirmed. The
+      page never calls the layer current, complete or official.
+  - **Sound Transit's GTFS: NOT USED (owner, 2026-10-02, "we can use
+    openstreetmap here").**
+    - The Transit Data Terms grant broad use, but they add a "No Changes"
+      clause, a duty to pass the terms on, an open indemnity, an email
+      address to register and usage metrics on request.
+    - **Rail comes from OpenStreetMap** (the `osm-rail` skill; ODbL, notice
+      1). Gate 3's independent count comes from Sound Transit's own station
+      pages, not the feed.
+    - The copy in `data/seattle/raw/st_gtfs_40.zip` measured the 39
+      stations only, and is not a source.
 - **The Snohomish layer's real date.** Nothing in it is dated finer than
   "on or before 2025-11-19" (see item 4 below).
 - **Bellevue's issue-date cutoff and Seattle's licence-year filter**: the
@@ -625,11 +639,14 @@ against King County's city polygons:
 
 ## Open for the owner (2026-10-02)
 
-Recommendations from the 2026-10-02 measurements. None is decided.
+Recommendations from the 2026-10-02 measurements. **All four were decided by the
+owner the same day.**
 
-1. **Bellevue's issue-date cutoff (4c). Recommend 2010-01-01**, with every
-   row that has no trade name shown by its category, never by its legal
-   name.
+1. ✅ **DECIDED (owner, 2026-10-02): Bellevue's FOOD comes from King County's
+   inspections**, as in every other King County city. **The 2010-01-01
+   issue-date cutoff applies to Bellevue's retail and personal-services rows
+   only.** A row with no trade name shows its category, never a legal name.
+   The recommendation and measurements that led there follow.
    - **Why 2010:** it is where the food control breaks. Before 2010 only 42%
      of active food rows have a currently inspected food business at their
      address; from 2010-14 it is 77%, level with the 81-93% of later years.
@@ -646,22 +663,28 @@ Recommendations from the 2026-10-02 measurements. None is decided.
      register for retail and personal services only. Food would then be
      current by construction, at the cost of a source split inside one
      city.
-2. **Seattle's headquarters rows. Recommend keeping both `HEADER QUARTER`
-   and `BRANCH`, with no head-office rule.** `HEADER QUARTER` is a
+2. ✅ **DECIDED (owner, 2026-10-02, "keep, use head-office rule"): keep both
+   `HEADER QUARTER` and `BRANCH`, AND apply the head-office rule** to the
+   `HEADER QUARTER` rows. A company head office on the third floor or
+   higher, or in a room, is dropped unless its building holds 20+ storefront
+   rows (Taipei and Taichung, `docs/decisions/2026-09-20.md`). Measured, it
+   flags 9 rows. The recommendation had been no rule. `HEADER QUARTER` is a
    business's primary location (91% of the storefront rows), not an office.
    Taichung's rule would flag 9 rows here. If a check is wanted,
    hand-sample 40 of the 378 headquarters rows whose business also has
    branches at build, and bring the result back.
-3. **Seattle's lapsed licences (new). Recommend keeping licence years 2025
-   and 2026 and dropping 2023 and 2024** (986 bucket rows, 9.8%).
+3. ✅ **DECIDED (owner, 2026-10-02, "drop 2023-2024"): keep licence years
+   2025 and 2026, and drop 2023 and 2024** (986 bucket rows, 9.8%). Taken
+   knowing the trade-off below: about half of the dropped rows may be open
+   businesses that never renewed.
    - Seattle's licences all fall due on 31 December, so a 2025 licence is
      nine months late, not necessarily closed: its food rows still match a
      current inspected business by name at 48%, against 65% for 2026.
    - **The trade-off:** the 2023 and 2024 rows still match by name at 35 to
      38%, so roughly half of the dropped rows may be open businesses that
      never renewed. The stricter option (2026 only) drops 2,044 rows (20%).
-4. **Snohomish layer: what to keep.** Recommend the Restaurant and Grocery
-   points only, which follows the owner's rule on canteens, caterers and
+4. ✅ **DECIDED (owner, 2026-10-02, "keep only those points"): the Snohomish
+   layer's Restaurant and Grocery points only, which follows the owner's rule on canteens, caterers and
    mobile food (R1, 2026-09-29): school kitchens, donated-food
    distributors, food trucks, catering, vending and concessions are out.
    In the City of Lynnwood that leaves 310 facilities, in Mountlake Terrace
@@ -669,4 +692,4 @@ Recommendations from the 2026-10-02 measurements. None is decided.
 5. **Following precedent, not for a call:** scope Seattle's register to the
    city polygon (drops 1,012 rows, 168 in the buckets); draw Pinehurst,
    which the current feed serves; read Sound Transit's Open Transit Data
-   terms before the build.
+   terms before the build. **Superseded: rail from OSM (owner, 2026-10-02).**
