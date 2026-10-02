@@ -1,5 +1,9 @@
 # Handoff — the UK six (2026-10-01)
 
+> **LANDED 2026-10-02** (owner: ahead of the other batches). Kept rather than
+> deleted, because the six briefs, the master list and `session_roles.md`
+> cite it. The record of the build is in `DECISIONS.md`.
+
 For the build session that builds the six UK tram and light-rail cities.
 Written by staging, and approved by the owner the same day.
 
