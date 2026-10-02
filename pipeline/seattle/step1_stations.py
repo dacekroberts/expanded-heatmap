@@ -185,9 +185,9 @@ def main():
     by_name.rename(columns={"stop_name": "station", "city": "municipality"})[
         ["station", "lines", "municipality", "latitude", "longitude"]].sort_values(
         ["municipality", "station"]).to_csv(config.STATION_CITIES_CSV, index=False,
-                                            encoding="utf-8")
+                                            encoding="utf-8", lineterminator="\n")
     pd.DataFrame(columns=["station", "lines", "reason", "latitude", "longitude"]).to_csv(
-        config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
+        config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
 
     nn = pts.to_crs(config.CRS_PROJECTED).geometry
     d = pd.Series([nn.drop(i).distance(p).min() for i, p in nn.items()])
@@ -226,7 +226,7 @@ def main():
 
     out = by_name.rename(columns={"stop_name": "station"})[
         ["station", "lines", "latitude", "longitude"]].sort_values("station")
-    out.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")
+    out.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
     print(f"  {len(out)} stations -> {config.STATIONS_CSV.relative_to(config.ROOT)}")
 
     # --- The lines: per line, the relation with the most track, track only --

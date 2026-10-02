@@ -172,7 +172,8 @@ def main():
                          for k, v in config.SOURCES.items()}}
     if host:
         prov["osm_host"] = host
-    config.PROVENANCE_JSON.write_text(json.dumps(prov, indent=2), encoding="utf-8")
+    # Bytes, so Windows' text mode never writes CRLF into a committed file.
+    config.PROVENANCE_JSON.write_bytes((json.dumps(prov, indent=2) + "\n").encode("utf-8"))
     print(f"\nprovenance -> {config.PROVENANCE_JSON.name}. The steps read these "
           f"files and never fetch.")
 
