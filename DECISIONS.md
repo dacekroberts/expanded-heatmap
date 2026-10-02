@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**344 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**345 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -31,6 +31,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The info pages lose their numbers; a session scaffolds into its reserved page block (owner)](#2026-10-02---the-info-pages-lose-their-numbers-a-session-scaffolds-into-its-reserved-page-block-owner)
 - [The country views go last in the macro map's region menu (owner)](#2026-10-02---the-country-views-go-last-in-the-macro-maps-region-menu-owner)
 - [Check D allows a notice-number gap that a parallel batch has claimed](#2026-10-02---check-d-allows-a-notice-number-gap-that-a-parallel-batch-has-claimed)
+- [Europe is not split into halves: measured, and the owner declined](#2026-10-02---europe-is-not-split-into-halves-measured-and-the-owner-declined)
 
 **2026-10-01**
 
@@ -14211,3 +14212,31 @@ Recorded by the cleanup session from the Main Building Session's findings of
   - fail: 1-83 plus 120; a duplicate; a hole inside 1-83.
 - **Housekeeping:** a batch deletes its range from that sentence once it
   lands, so a stale claim cannot hide a real gap.
+
+### 2026-10-02 - Europe is not split into halves: measured, and the owner declined
+
+- **The question** came from staging, raised by Tbilisi, which goes to a new
+  West Asia region (owner). Should Europe become a composite over two halves,
+  as the United States is, whatever happens with Tbilisi?
+- **Measured** with `check_macro_labels.py`'s `fit_view` and
+  `label_competition.compete`. Every member was eligible, every city on the
+  map was an obstacle, and the controls were avoided at 375, 768 and 1200.
+
+  | Layout | Cities | Zoom | Labeled |
+  |---|---|---|---|
+  | Europe today | 26 | 2.81 | 26 |
+  | Europe without the UK's cities | 23 | 2.81 | 23 |
+  | West | 11 | 2.91 | 11 |
+  | North and East | 12 | 2.76 | 12 |
+  | South | 8 | 2.24 | 6 |
+  | North | 15 | 2.10 | 9 |
+
+  - No layout puts a dot off the canvas.
+  - Each half of a west/east cut still spans about 30 degrees of longitude,
+    so the zoom barely moves. A north/south cut makes two wide strips, and
+    labels are lost.
+  - Dublin and Madrid set Europe's edges whether or not the UK leaves.
+- **The owner's call:** do not split.
+- **The one real crowding stays as it is:** Den Haag, Rotterdam and Amsterdam,
+  3-8 px apart. It is on the stacked-dots review list. A Netherlands country
+  view, like the Seoul Capital Area, is the precedent if it is ever wanted.
