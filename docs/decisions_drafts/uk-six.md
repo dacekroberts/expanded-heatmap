@@ -6,6 +6,11 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 
 ## For the owner at review time
 
+**Answered early by the owner, 2026-10-02 (in chat):** "1. light rail, 2.
+accepted and note this 3. display 4. accepted" - calls 1 to 3 below as
+recommended, and the prose proposals below accepted. The entry "The owner's
+first four UK six calls" records them.
+
 **Calls to approve with the builds** (each is a recommendation, with the
 precedent it follows):
 
@@ -54,6 +59,27 @@ for them):
   session's.
 
 ---
+
+### 2026-10-02 - The owner's first four UK six calls: Manchester is light rail, its lines are TfGM's routed over OSM's track, NaPTAN's notice is displayed, the proposals accepted (owner)
+
+- **The owner, answering ahead of review time:** "1. light rail, 2.
+  accepted and note this 3. display 4. accepted".
+- **1. Manchester (Regional)'s `mode` is `light_rail`**, on the light-rail
+  test (100% `railway=light_rail`, 10.2% tunnel or bridge, a 703 m median
+  gap; San Diego's precedent).
+- **2. A city's lines may be the operator's own, routed over OSM's track**
+  through the operator's stop sequences, where OSM's service relations no
+  longer match the operator's lines (Manchester: five of TfGM's nine lines
+  have no relation since 14 September 2026). "Note this": the rule goes
+  where the next OSM city passes through it, in `pipeline/countries/uk.py`
+  (`LINE_STOPS`, `routed_lines`) and the `osm-rail` skill.
+- **3. Notice 86 (NaPTAN, United Kingdom) is displayed**, the OGL's default
+  statement with the licence linked, on the cautious reading that a count
+  checked against the data is use of it.
+- **4. The prose proposals are accepted:** Manchester's two sentences ("Each
+  line follows OpenStreetMap's track through its stops as TfGM lists them";
+  "Trams run about every 15 minutes on each line by day") and notice 86's
+  wording.
 
 ### 2026-10-02 - Manchester (Regional) built, the pilot of the UK six: TfGM's nine lines routed over OSM's track, gate 3 against TfGM and NaPTAN
 
