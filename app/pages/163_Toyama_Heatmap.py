@@ -43,25 +43,56 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Toyama")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Matsuyama's and Hiroshima's pages
+# (approved wording, pre-approved for this build, 2026-09-30); the sentences
+# it does not cover are proposals in the Japan batch's drafts file. The as-of
+# dates are the lists' own (config.SOURCE_AS_OF). The median, 443 m, is step
+# 1's (2026-10-02).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Eight lines are drawn, each labeled on the map and in the legend: Chitetsu's city tram and its
+  Toyamako Line (Portram), its Main, Fujikoshi, Kamidaki and Tateyama lines, the Ainokaze Toyama
+  Railway and JR West's Takayama Line.
+- The city tram's routes share most of their track, so the tram is drawn as one line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap and the tram operator's own line map. Line colors are this
+  project's own, not the operators'.
+- Only stations inside Toyama City get rings, because the business data covers the city alone:
+  lines running on to Imizu, Funahashi, Namerikawa, Kamiichi and Tateyama are cut at the city
+  line.
+- JR Central's part of the Takayama Line, whose only station in the city is Inotani, a station of
+  JR West's line, is not drawn.
+- The Shinkansen is not drawn (Toyama appears as a station of the lines above).
+- **Tram stops sit closer together than metro stations**, a median of 443 m here, so the rings are
+  drawn at half the usual size (0.05 to 0.3 mi).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Toyama City's list of food-business permits (as of 30 June 2026) and its registers of
+  barbers, beauty salons and laundries (as of March 2026).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Food businesses that only notify the city rather than hold a permit, such as many convenience
+  stores and greengrocers, are not in the list.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails, the dot sits at the ministry's
+  own coordinates for the same premises, or else at its district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead; the city's
+  lists name an operator only where it is a company, so this cannot be checked for the rest.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About half of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Toyama")
 render_country_links("Toyama")
 

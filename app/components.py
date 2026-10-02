@@ -1586,6 +1586,27 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Matsuyama City, MHLW and MLIT did not make and do not endorse this map.",
      False),
+    # Toyama (notice 98): the city's four lists are CC BY 4.0 under its CKAN's
+    # terms, in their form for edited content; MHLW's file is used for its points
+    # only; MLIT as in Kobe's, N02 in its 2025 edition. From Matsuyama's notice.
+    ("Toyama City, MHLW and MLIT (Toyama)",
+     "Toyama's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設、理容営業許可施設、美容営業許可施設、クリーニング営業許可施設、富山市、"
+     "クリエイティブ・コモンズ・ライセンス 表示4.0国際"
+     "（[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)）"
+     "（[https://opdt.city.toyama.lg.jp/](https://opdt.city.toyama.lg.jp/)）. "
+     "(This map modifies the City of Toyama's list of food permits as of 30 June 2026 and its lists of "
+     "barbers, beauty salons and laundries as of March 2026, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成, "
+     "used only to place a premises the city's list also holds. "
+     "Processed by this project, which selected the storefront types, placed each by its address or the "
+     "ministry's own coordinates for the same premises, and counted them around stations. The ministry's "
+     "list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Toyama City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

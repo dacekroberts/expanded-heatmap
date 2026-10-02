@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -2486,6 +2486,26 @@ at review time).
   run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
   ("Matsuyama built", 2026-10-02).<!-- /internal -->
 
+
+**98. Toyama City, MHLW and MLIT (Toyama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's four lists are
+  **CC BY 4.0** through its CKAN's terms (第１条１). MHLW's open data is
+  **PDL 1.0**, as in Fukuoka's (54), and is used for its points only. MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03
+  (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the portal's form for edited content,
+  `この地図は以下の著作物を改変して利用しています。食品営業許可施設、理容営業許可施設、美容営業許可施設、クリーニング営業許可施設、富山市、クリエイティブ・コモンズ・ライセンス 表示4.0国際（https://creativecommons.org/licenses/by/4.0/）`;
+  MHLW's source and processed-by credit, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos (第３条); claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py toyama` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Toyama built", 2026-10-02).<!-- /internal -->
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

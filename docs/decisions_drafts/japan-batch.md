@@ -4,6 +4,55 @@ Entries in the `decisions-entry` format, newest first, each exactly as it
 should land in `DECISIONS.md`. Cleanup folds them in when the owner hands
 them off.
 
+
+### 2026-10-02 - Toyama built, the city's own lists with MHLW's points where the block join misses
+
+- **Toyama built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 6,590 storefronts (Food service 4,113, Retail 929, Personal
+  services 1,548), 74 stations, 8 lines; 3,054 pins within a ring (46%).**
+  Page 163, notice 98, `mode: tram`, minor tier.
+- **The business leg, the brief's (owner, 2026-10-02):** the city's food
+  workbook (sheet 6月末, read with `merged_header`; 営業者住所 never selected)
+  and its three registers (2026-03). MHLW's file is not a source but a point
+  donor (`POINT_DONORS = {"food": "mhlw_points"}`). `in_term` is not applied:
+  every 許可満了日 is 2026-07-22 or later.
+- **The join:** block 85.5%, MHLW's point 7.6%, town-chōme 5.4%, unplaced 1.4%.
+  On the brief's base the donor places 569 of 733 off-block rows against the
+  brief's 614: the brief matched a trade name anywhere in the city, the shared
+  rule needs the same town and a single point (24 town mismatches, 21 with
+  several points), as Matsuyama's 699 against 797.
+- **Rail:** N02-25, 74 stations by group code, 22 excluded. N02 files the
+  tram's 本線 (class 21) and Chitetsu's railway 本線 (class 12) under one
+  (operator, line) pair; their track is two disconnected pieces (3,609 m and
+  53,132 m), so a `BRANCHES` walk with `draw_as` splits the tram's out, no
+  shared code. The city tram's six sections are one line (Matsuyama's
+  precedent); Portram (富山港線, both classes) is its own; both take the
+  富山駅南北接続線 section. JR Central's 高山線 left out (Fukuoka's Hakata-Minami
+  precedent); 立山線's two stations stay as cut. Gate 3: tram 25 = 25 and
+  Portram 15 = 15 against Chitetsu's own stop numbering (C01-C39) in its
+  timetables. Median gap 443 m: halved rings, 200 m floor. OSM has no
+  `name:en` for 22 of 39 tram stops: 23 English names from Chitetsu's English
+  line map (`OSM_NAME_EN_MISSING`), sponsor brackets dropped; 8 overrides. The
+  富山駅 tram stop (Toyama-eki) and JR 富山 (Toyama), 20 m apart, kept apart as
+  N02 groups them.
+- **Census control: 2.43 Food service pins per census 飲食店 against an
+  official / census ratio of 2.53, the list 99.9% of the official count:
+  explained** (the benchmark of Matsuyama's entry).
+- **Privacy verdict: publish.** The Japan pass prints 0; 5 pins show their
+  permit type (13 raw food rows, the brief's count); the city names operators
+  only where they are companies (owner accepted, 2026-10-02).
+- **The 菓子 / そうざい factory share:** 26 of 674 (3.9%), kept.
+- **Proposals for review time:** "...station names in English are from
+  OpenStreetMap and the tram operator's own line map"; "JR Central's part of
+  the Takayama Line, whose only station in the city is Inotani, a station of JR
+  West's line, is not drawn."; the companies-only name-rule bullet ("the city's
+  lists name an operator only where it is a company, so this cannot be checked
+  for the rest"); Matsuyama's tram one-line and donor sentences; the notice's
+  English gloss. Known in shared code, not fixed: `japan_fetch.fetch_city`
+  counts a file's rows with `city_rows(dest)`, not the config's reader, so
+  Toyama's recorded counts read without `merged_header` (the rows themselves
+  are right).
+
 ### 2026-10-02 - The Japan views: Japan West and Japan East, every Japanese city moved, the batch minor (owner's tier call)
 
 - **Japan is two views, Japan West and Japan East, split at 136° E, decided by

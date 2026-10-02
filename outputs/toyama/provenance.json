@@ -1,0 +1,117 @@
+{
+  "city_barber": {
+    "as_of": "2026-03-31",
+    "bytes": 41212,
+    "dataset_page": "https://opdt.city.toyama.lg.jp/dataset/seikatsu-eisei02",
+    "file": "riyosyo202603.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:03+00:00",
+    "rows": 372,
+    "sha256": "1af903253f0e866f8fb5851aaa9058411cb82528047dbe343ef1220bb56ab7a0",
+    "url": "https://opdt.city.toyama.lg.jp/dataset/afafefa1-ec7c-4c1e-97c9-ab91ccf9b55f/resource/e6b559f9-d951-4e09-a6b6-15292cb9a96c/download/riyosyo202603.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2026-03-31",
+    "bytes": 164787,
+    "dataset_page": "https://opdt.city.toyama.lg.jp/dataset/seikatsu-eisei03",
+    "file": "biyosyo202603.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:06+00:00",
+    "rows": 1052,
+    "sha256": "df1e5985c50f85157c1c8478bedc47c4ef2ed95f22eefb76898ecfd3a6170d48",
+    "url": "https://opdt.city.toyama.lg.jp/dataset/9d0ead57-7589-40bf-be73-0d550360e389/resource/8848e4a0-e719-4708-b33d-908a856714f3/download/biyosyo202603.xlsx"
+  },
+  "city_food": {
+    "as_of": "2026-06-30",
+    "bytes": 791048,
+    "dataset_page": "https://opdt.city.toyama.lg.jp/dataset/seikatsu-eisei01",
+    "file": "syokuhin.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:01+00:00",
+    "rows": 5616,
+    "sha256": "ccb5a3c450137acec55499b2c1197b0b88cc027b22f225a6c23735f5a52dcd8a",
+    "url": "https://opdt.city.toyama.lg.jp/dataset/fb1198c6-3ac2-42fc-ae99-81ea5ba09a2d/resource/fa38003f-accd-4690-b71b-96b1d78e1c45/download/syokuhin.xlsx"
+  },
+  "city_laundry": {
+    "as_of": "2026-03-31",
+    "bytes": 31574,
+    "dataset_page": "https://opdt.city.toyama.lg.jp/dataset/seikatsu-eisei06",
+    "file": "cleaning202603.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:08+00:00",
+    "rows": 235,
+    "sha256": "5c1b7782ceddb7082cabfc3b1bb1b5d3c095c3d73e775fbb9e98431d026d42bf",
+    "url": "https://opdt.city.toyama.lg.jp/dataset/8a268965-69f8-4a49-a8eb-bd00696950a1/resource/b2ab3395-a04d-43f1-be83-0ef860776524/download/cleaning202603.xlsx"
+  },
+  "city_mhlw_points": {
+    "as_of": null,
+    "bytes": 2810448,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "16201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:11+00:00",
+    "rows": 8168,
+    "sha256": "7eb1076484860f4d20715b76071a8bc1a0fac0f91db338ce230464e670f277ea",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=16201_food_business_all.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_16201_block": {
+    "bytes": 555530,
+    "file": "16201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:13+00:00",
+    "sha256": "88f0758599841e426745062aa23df330bfb159be655b486e75f570b07c187c36",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/16201-24.0a.zip"
+  },
+  "isj_16201_chome": {
+    "bytes": 25024,
+    "file": "16201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:16+00:00",
+    "sha256": "1f82fd2bccfdc788ca55cef7ecc0ebb7e1bd1760222787ec94ca633e24cfcbe4",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/16201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 1774716,
+    "file": "data/japan/raw/N03-20250101_16_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:23:21+00:00",
+    "sha256": "0a5fd7cf0f39adf3224a42dfa5094738faf7a0a4a3930758370add1811ef97a1",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_16_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 40389,
+    "elements": 109,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T21:12:17Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](36.35,137.01,36.78,137.72);way[\"railway\"=\"station\"](36.35,137.01,36.78,137.72););out tags center;",
+    "retrieved": "2026-10-02T21:13:18+00:00",
+    "sha256": "6da9651adb3203d775c9f18dae23c8a41fe605035f785669561c85df0d9ac091"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 25645,
+    "elements": 75,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T21:16:21Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](36.35,137.01,36.78,137.72);out body;",
+    "retrieved": "2026-10-02T21:17:32+00:00",
+    "sha256": "b810a18b7df8273c504b992903a6c92ed07516cd534aea3c36de694b72f8c63f"
+  }
+}
