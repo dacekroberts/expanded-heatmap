@@ -893,7 +893,7 @@ every key, account and letter:
   - What Is Excluded still points to `excluded_premises.csv` for Minneapolis,
     Pittsburgh, Kitchener-Waterloo, Palma and Ottawa. No page shows those
     rows, so the sentence needs another wording, not "listed on the page".
-- [ ] ⏸ **Review time (owner, 2026-10-02): two fixes the UK six session found.**
+- [x] **DONE 2026-10-02, bundled with the UK six landing** (b52d67e1): **Review time (owner, 2026-10-02): two fixes the UK six session found.**
   - **Legend rows that repeat their label.** `build_legend` writes the
     on-map label, then `LEGEND_NAMES`' full name, a shape meant for line
     codes. Fix in `pipeline/map_common.py`: drop the label when the full name
