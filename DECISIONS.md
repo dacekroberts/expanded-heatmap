@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**337 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**338 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-02**
+
+- [The prose and UI pass landed and live after the owner's reboot; the deploy check run in parallel lanes](#2026-10-02---the-prose-and-ui-pass-landed-and-live-after-the-owners-reboot-the-deploy-check-run-in-parallel-lanes)
 
 **2026-10-01**
 
@@ -13939,3 +13943,31 @@ Recorded by the cleanup session from the Main Building Session's findings of
   changed files that the staging session's pre-push check reads. San
   Francisco's was restored until the landing; Toronto's could not be,
   because master's code produces the new figure too.
+
+### 2026-10-02 - The prose and UI pass landed and live after the owner's reboot; the deploy check run in parallel lanes
+
+- **Landed:** d85b47a7 on master, pushed by the cleanup session with all 40
+  pre-push checks passing. The owner rebooted.
+- **Live, checked through same-size frames on `/~/+/`:**
+  - About the Data serves the new intro and the region-then-country selector,
+    with no hidden material and no markers.
+  - `check_map_view`'s logic finds every view right, with 0 corrections:
+    Edmonton at 1200 and at 375 (a 333 px frame), Paris, Lille.
+  - The city pages carry the new subtitle.
+  - San Francisco's map shows Retail 5,038 and Personal services 2,091.
+- **The deploy check ran in parallel lanes** (`scope: full`, owner):
+  - Lane 1 covered the Overview, the reference pages and 41 cities; lane 3
+    covered 41 cities.
+  - Lane 2 stalled on its maps and was replaced by two agents of 21 cities
+    each.
+  - Every page and map passed, except for findings already on master, which
+    are now in PLAN: label crowding in Pittsburgh, Yokohama and Osaka, and
+    San Diego's thin page.
+  - The lanes' new findings were fixed before the push:
+    - 109 process notes hidden by three agents in parallel;
+    - the tab title, "the United States", "Gas station" and "license";
+    - 12 maps re-rendered, byte-identical apart from the renames.
+- **The method is written up** in `docs/review_lane_kit.md` §7b.
+- **Torn down:** the five prose worktrees, each checked with
+  `check_worktree_data.py` and with its junctions unlinked first. Their
+  branches were deleted once each was confirmed in origin/master.
