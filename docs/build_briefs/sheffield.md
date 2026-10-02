@@ -7,15 +7,20 @@ later. Build order 4 of the UK six. Builds are HELD (owner).** Run
 `python scripts/brief_check.py sheffield` before writing any code. The
 handoff is `docs/handoff_uk_six_2026-10-01.md`.
 
-> 🛑 **PROSE HOLD (owner, 2026-10-01).** The owner is reworking the site's
-> prose. **Draft no page text**: no description, no scope sentence, no What
-> Is Excluded wording, no notice wording beyond a licensor's required
-> attribution, and no README or Overview copy. **Do not copy London's,
-> Glasgow's or Newcastle's page text**: that is the prose being replaced.
-> Build the data steps and the map. Leave every prose slot as a
-> `TODO(prose-hold)` marker, and list each one in the drafts file. The
-> approved-template pre-permission (CLAUDE.md, 2026-09-30) does not apply
-> to this round.
+> ✅ **Prose hold lifted (2026-10-02).** The prose pass and the skills
+> rework have landed, which Cleanup confirmed. **Builds stay HELD** until the
+> owner releases them.
+>
+> - Write page text to `docs/city_page_format.md` and the reworked skills,
+>   starting with `add-city` step 8.
+> - `scaffold_city.py`'s template is the new format. Run it for real.
+> - London's, Glasgow's and Newcastle's converted bullets are the approved
+>   FSA and FHIS wording, and may be reused.
+> - A sentence specific to this city is a proposal, flagged in the drafts
+>   file. It does not stop the build.
+> - The approved-template pre-permission (CLAUDE.md, 2026-09-30) applies.
+>
+> The kit's "Page text" section has the rest.
 
 ⚠️ **One-bucket city on the shared `pipeline/fsa.py`.** Read Manchester's
 brief, the pilot, first.
@@ -108,7 +113,7 @@ and Dijon were, and record the change.
 - ✅ **Gate 3's source**: NaPTAN, approved (owner, 2026-10-01).
 - ⚠️ **Track share and spacing** (the light-rail test), at Step 0.
 - ⚠️ **Personal exposure**, and a row in `docs/privacy_verdicts.md`.
-- 🛑 **All prose** (the hold).
+- **Page text:** to `docs/city_page_format.md` (the banner above).
 
 ```brief-checks
 [
