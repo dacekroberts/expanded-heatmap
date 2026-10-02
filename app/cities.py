@@ -67,8 +67,8 @@ widens the longitude span, which lowers the zoom, which pulls the cluster
 TIGHTER - an east pad of 0.30 would take the New York/Philadelphia dots from
 6.0 px apart to 4.7 px. Move the label, not the box.
 
-Every offset here is verified collision-free at 854 and 1200 px wide, with the
-phone-width clipping above as the known exception (the canvas height is always
+Every offset here is verified collision-free by scripts/check_macro_labels.py
+at 375, 768 and 1200 px wide, with the phone-width clipping above as the known exception (the canvas height is always
 460 and `fit_view`'s zoom never varies with width, so width is the only
 variable). Re-check all three widths after changing any of them, or after
 adding a city whose name is long.
@@ -1620,8 +1620,8 @@ CITIES = [
         "country": "Australia",
         "in_default_view": False,
         # Above the dot, SCORED (width 51.4 px): check_macro_labels.py passes
-        # every region at 375, 768 and 1200 with PROBLEMS 0. Alone in Oceania
-        # until Melbourne arrives.
+        # every region at 375, 768 and 1200 with PROBLEMS 0. Shares Oceania
+        # with Melbourne.
         "label_offset": ("middle", 0, -22),
     },
     {

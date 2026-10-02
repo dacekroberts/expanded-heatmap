@@ -811,8 +811,10 @@ is not comparable with the registry cities on either side of it.
 **The map is scoped to the agglomeration** - 15 related municipalities
 alongside the 19 boroughs - and about a tenth of surveyed units fall in those
 municipalities, two of which are not in the survey at all. The Métro does not
-reach them, so almost none of this is drawn; read the island's edges as thinner
-in the data, not necessarily on the ground.
+reach them, but the REM does: five of its stations are in Mont-Royal,
+Pointe-Claire, Kirkland and Sainte-Anne-de-Bellevue, so read the rings there as
+thinner in the data, not necessarily on the ground. Neither unsurveyed
+municipality has a station.
 
 **Caterers are kept here (107), unlike in every other NAICS city.** The survey
 records premises a surveyor walked past, and they are traiteur shops with a
@@ -1205,12 +1207,12 @@ financial services, but a pawnshop is a shop people walk into to buy and sell
 goods. It counts wherever a register can separate it: 381 here.
 
 **Not excluded but absent by construction: 811 repair and 813 associations.**
-Personal services is anchored on **812**, not the whole of 81, so auto repair
-(27,216 units in Jalisco, the largest block inside 81) and civic, religious and
-professional associations never enter. Food service is anchored on **722**, not
-72, so 721 accommodation — hotels — never enters either. Both are the same
-precision the NAICS cities use; a two-digit prefix would have been the
-obvious-looking mistake.
+Personal services is anchored on **812**, not the whole of 81, so repair (811:
+27,216 units in Jalisco, Guadalajara's state, the largest block inside 81) and
+civic, religious and professional associations never enter. Food service is
+anchored on **722**, not 72, so 721 accommodation (hotels) never enters
+either. Both are the same precision the NAICS cities use; a two-digit prefix
+would have been the obvious-looking mistake.
 
 **What is NOT excluded, and is worth stating because the number looks
 alarming:** `scripts/check_personal_exposure.py` reports that 32.2% of Mexico
@@ -1219,8 +1221,7 @@ a person presented as a person — every one was a shop sign in the Spanish
 convention of trade type plus a given name or brand (`ABARROTES LIZ`,
 `ESTETICA MARIFER`, `ZAPATERIA SOFI`), and `COCINA ECONOMICA` — two common
 nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
-and does not transfer; Mexico City is this project's first non-English city.
-Nothing is filtered on that number.
+and does not transfer to Spanish ones. Nothing is filtered on that number.
 
 ### Guadalajara (Regional) - a municipio with no station, and the same Spanish-name artefact
 
@@ -2777,8 +2778,8 @@ say who the operator is, so the rule cannot run on its rows (owner,
 line.
 - Left out: 22 stations beyond it, in Kasuya, Ōnojō, Sue, Shingū, Kasuga,
   Itoshima, Koga, Umi and Sasaguri.
-- The JR Hakata-Minami line (only Hakata is inside the city).
-- The Shinkansen does not count.
+- The JR Hakata-Minami line is not drawn (only Hakata is inside the city).
+- The Shinkansen is not drawn.
 
 ### Kyoto - a food register rebuilt from the city's monthly lists, and its registers, joined to MLIT's address blocks
 
@@ -2958,8 +2959,8 @@ Funeral services are excluded too, as everywhere: 44 premises.
 Heating-oil and bottled-gas dealers (`477893`, 36) are excluded as nonstore,
 and pawnbrokers (`64922`, 35) count as retail.
 
-**Missing rather than excluded** - craft businesses belong to the Handwerks-
-kammer, not the chamber of commerce, so hairdressers, laundries and dry
+**Missing rather than excluded** - craft businesses belong to the
+Handwerkskammer, not the chamber of commerce, so hairdressers, laundries and dry
 cleaners are almost entirely absent and bakers and butchers are thin.
 Personal services on this map is beauty and nail salons, spas, saunas and
 massage. Liberal professions are not members either.
@@ -3720,8 +3721,7 @@ recorded in `data_sources.md` as available and unused, with the trigger for
 revisiting it: a city-wide survey.
 
 
-**Toronto's general retail is ABSENT, and it is the most severe coverage gap
-on the site.** Everything else on this page was a choice; this was not.
+**Toronto's general retail is ABSENT**, and that was not a choice.
 
 Toronto licenses food and trades, and not general retail. There is no licence
 category for a grocer, a clothing shop, a pharmacy, a hardware store or general
@@ -3741,9 +3741,9 @@ Toronto's licensing rather than about its high streets.** This is
 whose four registries at least covered all three buckets thinly - there is no
 second source at any level of government that would fill Toronto's gap.
 
-**The bucket is drawn rather than omitted**, decided by the owner on
+**The Retail category is drawn rather than omitted**, decided by the owner on
 2026-09-21. The rejected alternative was leaving Retail out and drawing two
-buckets: it reads as a stronger statement but discards 870 real storefronts and
+categories: it reads as a stronger statement but discards 759 real storefronts and
 would have made Toronto's legend the odd one out among the fourteen cities
 built by then. New York's page is the model for the disclosure.
 
@@ -3821,12 +3821,13 @@ of 5.7 points.
   their own name with no trading name recorded is still shown as they
   registered.
 - These decisions concern what is *appropriate* to publish. What each dataset's
-  licence *permits* is a separate question and is still open.
+  licence *permits* is a separate question; only Philadelphia's is still open
+  (see the next section).
 
 ## If you believe a listing should not be here
 
-Every business shown is drawn from a public municipal registry and is displayed
-with its registered name and address location only. If you are the owner of a
+Every business shown is drawn from a public register and is displayed with, at
+most, its registered name and address location. If you are the owner of a
 listing and would like it removed, that is a reasonable request and it will be
 honoured.
 

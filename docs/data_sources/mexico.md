@@ -15,31 +15,29 @@ point, not here.
 | Guadalajara | **INEGI DENUE**, entidad federativa **14 (Jalisco)** — the same national register, licence, encoding, taxonomy and forbidden columns as Mexico City, which is why Guadalajara became the first city here to need **no new notice at all** | All three buckets, via **SCIAN**, transferred from Mexico City unchanged. 401,813 units statewide; **196,907 in the four municipios this build keeps** → 193,139 `Fijo` → 117,698 storefront | `https://www.inegi.org.mx/contenidos/masiva/denue/denue_14_csv.zip` — 39,432,220 bytes, magic-bytes checked; member `conjunto_de_datos/denue_inegi_14_.csv`; **latin-1** | **None server-side.** **Unlike Mexico City the entidad is NOT the city** — Jalisco holds 125 municipios including Puerto Vallarta 300 km away — so step 2 scopes on DENUE's own `municipio` spelling to Guadalajara (97,134), Zapopan (53,311), **San Pedro Tlaquepaque** (26,832) and Tlajomulco de Zúñiga (19,630). **The spelling IS the join interface: "San Pedro Tlaquepaque", not the "Tlaquepaque" SITEUR's own prose uses** — matching the operator's wording keeps ZERO rows, which is Los Angeles' `CITY_KEEP` trap and Toronto's "former Toronto" trap in one. **Tonalá is deliberately excluded** although DENUE holds 19,897 units there: no line reaches it, and a municipio with no station contributes businesses no ring can ever contain. `Fijo` only — 97.94% here against Mexico City's 95.55%, so street commerce is a smaller share of this city | 2026-09-22 |
 | Monterrey | **INEGI DENUE**, entidad federativa **19 (Nuevo León)**, edition **DENUE 05_2026** (the same edition as the other two Mexican cities' files) — the same register, licence, encoding, taxonomy and forbidden columns, so **no new notice**: notice 8's sentence gains the city | All three buckets, via **SCIAN**, unchanged. 211,349 units statewide; **117,276 in the four municipios** → 114,007 `Fijo` → **58,587 storefront** (Retail 37,869 · Food service 12,639 · Personal services 8,079) → **58,565** inside the four municipios' own boundaries | `https://www.inegi.org.mx/contenidos/masiva/denue/denue_19_csv.zip` — 21,475,515 bytes, Last-Modified 2026-05-20, magic-bytes checked; member `conjunto_de_datos/denue_inegi_19_.csv`; **latin-1** | **None server-side.** Step 2 scopes by **INEGI's municipio CODE** (`cve_mun` 039 Monterrey, 046 San Nicolás de los Garza, 026 Guadalupe, 021 General Escobedo) — the first Mexican city to key on the code rather than the name, because OSM's `INEGI:MUNID` is the same key (`cve_ent` + `cve_mun`), so register and boundaries join without a spelling between them; each code's DENUE name is still asserted. `Fijo` only (97.2%). **The location test is the four municipios' polygons, not a bounding box**: the screen's OSM query box stops at 25.55 N while Monterrey municipio runs to 25.48, so a box dropped 121 storefronts, almost all real rows in southern Monterrey; the polygon test drops 22 genuinely misplaced ones (some at 20.6 N) | 2026-09-27 |
 
-**The two Mexican cities are one source, not two**, and that is why each takes a
-single row where Vancouver/Surrey takes two. DENUE is national, so
-`pipeline/countries/mexico.py` holds the URL shape, the member path, the
-encoding, the column names, the `Fijo` filter and the licence, and a city
-config contributes **only its two-digit entidad code**. Guadalajara spans four
-municipios and still takes one row, because all four arrive in one ZIP from one
-publisher under one set of terms — the opposite of Vancouver/Surrey, which
-needs two rows because it is genuinely two registries, two portals and two
-licences.
+**The three Mexican cities are one source, not three**, and that is why each
+takes a single row where Vancouver/Surrey takes two. DENUE is national, so one
+national module holds the URL shape, the member path, the encoding, the column
+names, the `Fijo` filter and the licence, and a city contributes **only its
+two-digit entidad code**. Guadalajara spans four municipios and still takes one
+row, because all four arrive in one ZIP from one publisher under one set of
+terms — the opposite of Vancouver/Surrey, which needs two rows because it is
+genuinely two registries, two portals and two licences.
 
-**Neither Mexican city loads a personal column, and the claim is structural
-rather than measured.** `FORBIDDEN_COLUMNS` — `telefono` (35.6% populated in
-CDMX), `correoelec` (22.6%), `www` (10.6%) and `raz_social` (25.9%) — are
-absent from `USECOLS`, and each city's step 2 asserts they never arrive, which
-is New York's pattern. INEGI already omits `raz_social` where the owner is a
-*persona física*, and says so in its own data dictionary; it is still not
-loaded, because `nom_estab` is DENUE's name for the sign *"visible y escrito en
-rótulos, fachadas o anuncios luminosos"* — the shopfront — and is populated on
-99.95% of rows, so there is no blank-name fallback of the kind that published
-~4,000 individuals' names in Los Angeles. `numero_int`, the structured
-interior/unit number, **is** loaded so its rate can be reported (13.4% in CDMX,
-7.1% in the Guadalajara region) and is deliberately never written to
-`businesses_clean.csv`: publishing a unit number in order to check for unit
-numbers would defeat the purpose. `scripts/check_personal_exposure.py`
-therefore records both cities' residence check as a **GAP**, as San Diego's and
+**No Mexican city loads a personal column, and the claim is structural rather
+than measured.** `telefono` (35.6% populated in CDMX), `correoelec` (22.6%),
+`www` (10.6%) and `raz_social` (25.9%) are never read, and each city's build
+checks they never arrive, which is New York's pattern. INEGI already omits
+`raz_social` where the owner is a *persona física*, and says so in its own data
+dictionary; it is still not loaded, because `nom_estab` is DENUE's name for the
+sign *"visible y escrito en rótulos, fachadas o anuncios luminosos"* — the
+shopfront — and is populated on 99.95% of rows, so there is no blank-name
+fallback of the kind that published ~4,000 individuals' names in Los Angeles.
+`numero_int`, the structured interior/unit number, **is** loaded so its rate can
+be reported (13.4% in CDMX, 7.1% in the Guadalajara region) and is deliberately
+never written to the cleaned business file: publishing a unit number in order to check
+for unit numbers would defeat the purpose. The privacy check therefore records
+the residence check for all three cities as a **GAP**, as San Diego's and
 Boston's are, rather than as a pass.
 
 ## Transit feeds

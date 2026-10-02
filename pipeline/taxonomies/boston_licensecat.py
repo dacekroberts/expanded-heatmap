@@ -24,7 +24,7 @@ discovery API returns no Massachusetts source for cosmetology, barber, salon,
 hair, nail salon, body art or tattoo; data.mass.gov is not a data portal (HTML
 404 from both the Socrata and CKAN entry points); and opendata.mass.gov does
 not resolve. Same structural cause as
-Philadelphia, which is the only other two-bucket city here. Recorded in
+Philadelphia, also a two-bucket city. Recorded in
 docs/excluded_categories.md under what is MISSING rather than excluded,
 because everything else there was a choice and this was not.
 

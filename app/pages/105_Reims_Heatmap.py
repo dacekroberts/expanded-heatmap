@@ -85,7 +85,7 @@ st.markdown(
 - **Tram stops sit closer together than metro stations**, a median of 370 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Reims**. **Tram T1 and Tram T2 run past it**, so three stops beyond the boundary are left out: Gare de Champagne-Ardenne TGV and Polyclinique in Bezannes; Neufchatel in Bétheny.
 - The lines are still drawn to their ends, but those stops get no ring and their businesses are not counted; they are listed below.
-- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
+- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as most of the French maps do.
 
 **The businesses**
 

@@ -100,8 +100,8 @@ st.markdown(
 - **Where SIRENE records no shop sign or trading name, the dot shows the establishment's address
   instead** — about three dots in five on this map.
 - Categories that describe no shopfront are excluded. Car dealers are not counted here, unlike on
-  other cities' maps: most are one-person traders registered at home. The What is counted page
-  lists them.
+  other cities' maps: most are one-person traders, probably registered at home. The What is
+  counted page lists them.
 
 **Reading the density**
 

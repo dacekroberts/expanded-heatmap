@@ -519,10 +519,9 @@ LEGEND_AUTOFIT_SCRIPT = """
 #
 # What this does NOT fix: label PLACEMENT. `_layout_labels` chooses label
 # positions server-side against a _MAP_W x _MAP_H canvas, so at phone width they
-# can overlap each other and the cluster badges. Going from "one label visible"
-# to "most labels visible but some crowded" is the improvement; laying them out
-# correctly for a phone would need a second render at phone dimensions. See
-# PLAN.md.
+# can overlap each other and the cluster badges. LABEL_CLAMP_SCRIPT (below)
+# re-places a label that collides with another label or a control; it does not
+# avoid cluster badges (PLAN.md, "Optional label follow-ups").
 PHONE_FIT_SCRIPT = """
 <script>
 (function () {
@@ -1588,7 +1587,8 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
             # the project) on a fifth of its vertices, and this exemption is
             # what makes the recorded verdict ("the rail alignment is the
             # feed's own geometry, displayed as that line") literally true.
-            # MTA's feed is already 6 dp; MTS and CTA restrict nothing.
+            # MTA's feed is already 6 dp. MTS and CTA were being rounded too,
+            # and neither restricts modification.
             #
             # Keep this exemption if COORD_DP is ever lowered to 5 dp (a
             # PLAN.md proposal, to shrink New York's map): at 5 dp, rounding

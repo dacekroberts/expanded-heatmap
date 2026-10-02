@@ -101,7 +101,7 @@ st.title("Where this data comes from")
 # arriving from a city page lands on that country with no scrolling.
 INTRO = (
     """
-Every dataset behind these maps is a public register, and this page is the
+Every dataset behind these maps is public, and this page is the
 project's own provenance record: the exact endpoint each one was fetched from,
 the filter applied at download, the date it was retrieved, and the licence or
 terms it carries. It is reproduced here exactly as it is kept in the

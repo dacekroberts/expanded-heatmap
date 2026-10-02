@@ -16,7 +16,7 @@ carry two real uses; in `ValuationReport`, "STORE, YARD" resolves to floors
 STORE and YARD, so these are genuine mixed-use premises, not a formatting
 artefact.
 
-BUCKET BOUNDARIES ARE NAICS', NOT THIS MODULE'S. The twelve NAICS and
+BUCKET BOUNDARIES ARE NAICS', NOT THIS MODULE'S. The NAICS and
 NAICS-like cities use Retail = 44/45, Food service = 722, Personal services =
 812, so Dublin follows the same lines rather than inventing its own. Every
 judgment call where the Irish vocabulary does not map cleanly is named below,

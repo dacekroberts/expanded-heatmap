@@ -34,7 +34,7 @@ avoid:
      any other figure in this project means.
 
 Montreal needs no category map: its `SCIAN` IS NAICS, so `naics.py` applies
-unchanged. That is also why it is the cheapest of the four still unbuilt.
+unchanged. That is also why it is the cheapest of the four then unbuilt.
 
 Toronto is NOT recomputed. Its 41 was already storefront-filtered, so it is
 the one figure that was on the right basis - though read it as a FLOOR rather

@@ -15,13 +15,13 @@ point, not here.
 
 ### Dublin — endpoints and findings, verified 2026-09-22
 
-**Not yet built.** Step 0 only, recorded as verified per `add-city` Step 0's
-instruction to write endpoints down while they are in front of you. Full
-evidence and its checks: `docs/build_briefs/dublin.md` (6/6).
+Recorded before the build, while the endpoints were being verified; Dublin
+has since been built (the tables below). The full evidence and its six checks,
+all passing, are in Dublin's build brief (`docs/build_briefs/dublin.md`).
 
-**The first Irish city, and Ireland yields only this one**, so the
-`add-country` national questions are answered inside the city brief rather
-than in a separate country file.
+**The first Irish city, and Ireland yields only this one**, so the national
+questions are answered inside the city brief rather than in a separate country
+profile.
 
 **Businesses** — Tailte Éireann, the Irish rateable valuation register, through
 a keyless JSON API:

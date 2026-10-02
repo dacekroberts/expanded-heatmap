@@ -92,7 +92,7 @@ few hundred metres of a rapid-transit station - and they answer it by leaving
 two different things out.
 
 **Which stations.** Each map covers one rapid-transit network, the one named
-in that city's page title. Commuter rail is left out except where, inside the
+on that city's page. Commuter rail is left out except where, inside the
 city, it runs like a metro (*Why the maps differ* says where), stations in
 neighbouring municipalities are dropped because no register covers them, and
 where a light-rail line stops every other block its surface stops are thinned

@@ -1,11 +1,11 @@
 # Data sources — Australia
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, split by country. This file holds the Australia rows of the tables
-there. The numbered notices this project must display, the removal-request
-commitment and the deploy gate are in the entry point, not here. Sydney's brief
-is [`build_briefs/sydney.md`](../build_briefs/sydney.md); Melbourne's is
-[`build_briefs/melbourne.md`](../build_briefs/melbourne.md).
+The Australia part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country. The numbered
+notices this project must display, the removal-request commitment and the
+deploy gate apply to every country and are kept in that record. Sydney's and
+Melbourne's build briefs are in the project's repository
+(`docs/build_briefs/sydney.md`, `docs/build_briefs/melbourne.md`).
 
 ## Business registries
 

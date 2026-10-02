@@ -85,7 +85,7 @@ st.markdown(
 - **Tram stops sit closer together than metro stations**, a median of 380 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Tours**. **Tram A runs past it**, so 7 stops beyond the boundary are left out: Bulle D'o, Joué H. de Ville, Lycée J. Monnet, Pont Volant, Rabière, Rotière and République in Joué-lès-Tours.
 - The line is still drawn to its ends, but those stops get no ring and their businesses are not counted; they are listed below.
-- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
+- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as most of the French maps do.
 
 **The businesses**
 

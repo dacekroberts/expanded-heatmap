@@ -37,8 +37,8 @@ CATEGORY_BUCKETS = [
 ]
 
 # Registered lazily (import the taxonomy module by name via this dict) so
-# adding a new taxonomy - a new US city's own license field, or a future
-# non-US system like NACE - never requires touching this file's imports.
+# adding a new taxonomy - a new US city's own license field, or a non-US
+# system like NACE (czech_nace2025) - never requires touching this file's imports.
 # Each module must expose:
 #   classify(row: dict) -> str | None
 #       a bucket name from CATEGORY_BUCKETS, or None if the row doesn't map
@@ -102,8 +102,8 @@ TAXONOMY_MODULES = {
     "ba_usos_suelo": "pipeline.taxonomies.ba_usos_suelo",
     "milan_source": "pipeline.taxonomies.milan_source",
     # NAF rev. 2 - the FIRST taxonomy here that is NATIONAL rather than a
-    # city's own. SIRENE is one register for the whole country, so five French
-    # cities (france.py's BUILD_SEQUENCE) share this module and a correction
+    # city's own. SIRENE is one register for the whole country, so every French
+    # city shares this module and a correction
     # reaches all of them. Keyed at the sous-classe, Barcelona's shape: the
     # groupe level puts 49.4% of Paris in "other" against 19.3% at level 5.
     "france_naf": "pipeline.taxonomies.france_naf",
@@ -150,7 +150,6 @@ TAXONOMY_MODULES = {
     # Haag's own module, if Rotterdam's does not fit its horeca layer.
     "zurich_gastwirtschaft": "pipeline.taxonomies.zurich_gastwirtschaft",
     "den_haag_source": "pipeline.taxonomies.den_haag_source",
-    # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 
 

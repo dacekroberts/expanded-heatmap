@@ -25,7 +25,7 @@ So this module makes the unlabelled form unavailable rather than discouraged.
 
 Use it for any share that reaches a print, a page, a brief or a commit message.
 Where a figure genuinely has two defensible denominators, print BOTH with
-`pct_both()`, as Toronto's 71.4%/92.8% needed.
+`pct_both()`, as Toronto's 73.1%/92.8% needed.
 """
 
 

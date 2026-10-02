@@ -11,8 +11,11 @@ three reasons: a reader cannot check the work, a dead endpoint is invisible
 until a rebuild fails, and the licence question below cannot be answered
 source by source if the sources are not listed.
 
-**Every source is a public government dataset.** Nothing here is scraped,
-purchased, or behind a login.
+**Every source is public.** Nearly all are government datasets; the main
+exception is OpenStreetMap, the volunteer-built map behind the basemap and
+many cities' rail lines. Nothing here is scraped or purchased. A few sources
+need an account: WMATA's feed (Washington D.C.) an API key, and Denmark's
+Datafordeler (Copenhagen) a registration.
 
 ## How to keep this current
 
@@ -41,15 +44,16 @@ purchased, or behind a login.
 - Raw downloads are **not** committed (`data/<city>/raw/` is gitignored). Only
   the rendered `outputs/` are. So these endpoints plus the recorded filters are
   the only way to reproduce a build.
-- **Declare the source encoding.** Every city's `config.py` sets
-  `SOURCE_ENCODING` and every raw read passes it, rather than relying on the
+- **Declare the source encoding.** Set `SOURCE_ENCODING` in the city's
+  `config.py` and pass it to every raw read, rather than relying on the
   default. pandas defaults to UTF-8 and *raises* on anything else, which is
   safe — but the failure lands on whoever adds the next city, and the tempting
   fix (reach for `latin-1` to make the `UnicodeDecodeError` go away) corrupts
   accented characters **without failing**, so nothing catches it downstream.
-  Declaring it makes the choice reviewable and part of the provenance. Every
-  built city so far is `utf-8`; this bites on non-US cities, where Quebec data
-  in particular is still often published in `latin-1`. Note that mojibake
+  Declaring it makes the choice reviewable and part of the provenance. Most
+  declared encodings are UTF-8, but the Japanese permit lists also use `cp932`
+  and `utf-16`, and Quebec data in particular is still often published in
+  `latin-1`. Note that mojibake
   in a *terminal* is usually the Windows console codepage, not the file — check
   the bytes before changing the declaration.
 - **Read a new city's whole catalogue, do not grep it.** Listing every package
@@ -87,19 +91,19 @@ together, so a row in either counts and a row in neither still fails.
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
-| France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
+| France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes, Le Mans, Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice, Montpellier, Strasbourg, Le Havre, Caen, Rouen (Regional), Bordeaux (Regional), Nantes (Regional), Grenoble (Regional), Valenciennes (Regional), Angers |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm, Göteborg |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus, Odense |
-| Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague |
+| Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -133,11 +137,11 @@ columns. Same section, its own subsection, its own columns.
 
 **Two different reasons land here, and they are not the same case.**
 
-- **Mexico City and Guadalajara come from OpenStreetMap via Overpass**, because
-  no usable feed exists. An OSM source also has no agency holding the licence:
-  both are **ODbL 1.0**, covered by **notice 1**, which since these builds
-  covers *data* and not only basemap tiles. See `.claude/skills/osm-rail/`
-  before adding another.
+- **Mexico City and Guadalajara were the first to come from OpenStreetMap via
+  Overpass**, because no usable feed exists; many cities have followed, each
+  listed in its country's file. An OSM source also has no agency holding the
+  licence: all are **ODbL 1.0**, covered by **notice 1**, which since these
+  builds covers *data* and not only basemap tiles.
 - **Madrid comes from CRTM's own ArcGIS feature services**, and there the
   operator's feed exists and downloads cleanly — it is rejected because CRTM's
   licence obliges a reuser to keep displayed information *“siempre
@@ -146,16 +150,18 @@ columns. Same section, its own subsection, its own columns.
   not OpenStreetMap's. **Madrid sat under the OpenStreetMap heading for part of
   2026-09-22**, which was wrong in the way this subsection exists to prevent.
 
-**Why three Overpass mirrors, and how one is chosen.** They are tried **in the
-configured order**, and the first host returning HTTP 200 with a **non-empty
-`elements` list** wins; every other outcome — a non-200, an exception, or a 200
-with an empty body — sleeps briefly and advances to the next. Three, because
-across these two builds each of the three failed at least once and none failed
-consistently: `overpass-api.de` returned 504 several times and 429 once,
-`overpass.kumi.systems` 504 several times, and `overpass.osm.ch` **answered 200
-with an empty body** — all at different times, for the same query. A failure is
-a fact about that host at that moment and not about the city, so one mirror
-would make the build's success a coin flip.
+**Why more than one Overpass mirror, and how one is chosen.** They are tried
+**in the configured order**, and the first host returning HTTP 200 with a
+**non-empty `elements` list** wins; any other outcome (a non-200, an
+exception, or a 200 with an empty body) moves on to the next. More than one,
+because across the two Mexico builds each of the three mirrors then in use
+failed at least once and none failed consistently: `overpass-api.de` returned
+504 several times and 429 once, `overpass.kumi.systems` 504 several times, and
+`overpass.osm.ch` **answered 200 with an empty body**, all at different times,
+for the same query. A failure is a fact about that host at that moment and
+not about the city, so one mirror would make the build's success a coin flip.
+Two global mirrors remain: `overpass.osm.ch` was dropped on 2026-09-27 because
+it holds only a Swiss extract and answers 200 with nothing anywhere else.
 
 **A 200 with no elements is treated as a host FAILURE and is never cached**,
 which is the half that is not obvious. `overpass.osm.ch` once returned 272
@@ -164,9 +170,11 @@ and the caller then reported *"every ref has exactly 2 direction relations"* —
 **a vacuous truth over an empty set**. Both cities' step 1 now assert
 non-emptiness before any check that could pass vacuously. Responses that do
 succeed are cached to the gitignored `data/<city>/raw/osm_*.json`, so a re-run
-or a drift check never depends on which mirror answered. Guadalajara makes
-**two passes** over the host list before giving up where Mexico City makes one,
-and sleeps 3 s between hosts where Mexico City sleeps 2.
+or a drift check never depends on which mirror answered. Mexico City makes one
+pass over the host list, sleeping 2 s between hosts. Guadalajara now fetches
+through the shared OpenStreetMap module, which makes **two passes** before
+giving up, pausing 5 s between them, or at least 60 s after a 504, a 429 or a
+timeout.
 
 ## Boundary layers
 
@@ -186,8 +194,8 @@ Hong Kong (the Address Lookup Service cross-check).
 ## Basemap tiles
 
 Rendered maps use Folium's default OpenStreetMap tiles. Attribution is in the
-rendered HTML. Choosing a tile provider deliberately is still open in
-`PLAN.md`.
+rendered HTML. Choosing a tile provider deliberately is still an open
+decision (see "Basemap tiles" under the licences below).
 
 ## Licences and terms of use
 
@@ -219,11 +227,11 @@ one.
 The table's rows are in [`united-states.md`](data_sources/united-states.md)
 and [`canada.md`](data_sources/canada.md).
 
-**The agreements quoted above are stored locally**, in
-[`licenses/`](licenses/) — source URL, retrieval date and SHA-256 for each are
-in that directory's `README.md`, **which is the list**; a count kept here said
-“six”, then “seven”, while the directory grew past twenty. Every one of them is revocable and amendable
-without notice, so the clauses quoted above are checkable against the text that
+**The agreements quoted in that table are stored locally**, in
+[`licenses/`](licenses/). That directory's `README.md` is the list, with each
+one's source URL, retrieval date and SHA-256; a count kept here went stale as
+the directory grew past twenty. Every one of them is revocable and amendable
+without notice, so the clauses quoted can be checked against the text that
 was actually agreed to rather than against a URL that may have moved on.
 
 ### Basemap tiles — one active compliance item
@@ -244,9 +252,9 @@ The maps render **OpenStreetMap** tiles, fetched directly from
   user is actively viewing", requires HTTPS (this project uses HTTPS) and a
   caching-respectful client. A portfolio site drawing tiles only for what a
   visitor is looking at is ordinary interactive use, not bulk use — but the
-  policy is explicit that there is no guarantee behind it. This is the same
-  decision already open in `PLAN.md` as "tile provider"; it should be settled
-  deliberately before launch rather than by default.
+  policy is explicit that there is no guarantee behind it. It is the same
+  open decision as choosing a tile provider, and it should be settled
+  deliberately rather than by default.
 
 ## Commitment: removal requests are honoured, not argued
 
@@ -331,12 +339,12 @@ miss: the grant is the headline and the obligation is a subordinate clause.
 |---|---|---|
 | **An act owed to the publisher** | **Barcelona** 🇪🇸 | *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* A message a person sends. Drafted at `docs/notifications/barcelona-city-council.md`, **not yet sent** |
 | **A live account that must STAY live** | **WMATA** (Washington D.C.) 🇺🇸 | The terms are an API agreement, so §9(i) ends the grant when the account ends — and what lapses is the right to **publish the page**. Gate item 10 |
-| ✅ **A liability ACCEPTED** | **Hong Kong** 🇭🇰 *(candidate)* | **ACCEPTED BY THE OWNER 2026-09-22.** *"you shall **indemnify** the Government and the Relevant Organisations against any allegations or claims of infringement of the rights of any person and all costs, losses, damages and liabilities incurred … which in any case arise **directly or indirectly** in relation to your use, reproduction and/or distribution of the Data"*. See the section below for what the earlier record omitted |
-| 🔧 **AN ACCESS A PERSON MUST OBTAIN** | **Copenhagen / Denmark** 🇩🇰 *(candidate)* | **Added 2026-09-23 at the owner's request.** CVR's premises data needs a **Datafordeler account the owner creates by hand**, and the terms pages sit behind a **Cloudflare interactive challenge** this project does not defeat — so both the registration and the reading are **human-only work**. ⚠️ **This is NOT WMATA's class, and the difference matters.** WMATA's terms are an **API agreement**, so §9(i) ends the grant when the account ends. Copenhagen's licence is **CC BY 4.0, which attaches to the DATA and is irrevocable** — so the owner's standing practice (*register, take the data, terminate, revoke*) is **safe here and unsafe there**. ✅ **Close the account freely; the right to publish survives.** The similarity is the registration effort, not the obligation |
+| ✅ **A liability ACCEPTED** | **Hong Kong** 🇭🇰 | **ACCEPTED BY THE OWNER 2026-09-22.** *"you shall **indemnify** the Government and the Relevant Organisations against any allegations or claims of infringement of the rights of any person and all costs, losses, damages and liabilities incurred … which in any case arise **directly or indirectly** in relation to your use, reproduction and/or distribution of the Data"*. See the section below for what the earlier record omitted |
+| 🔧 **AN ACCESS A PERSON MUST OBTAIN** | **Copenhagen / Denmark** 🇩🇰 | **Added 2026-09-23 at the owner's request.** CVR's premises data needs a **Datafordeler account the owner creates by hand**, and the terms pages sit behind a **Cloudflare interactive challenge** this project does not defeat — so both the registration and the reading are **human-only work**. ⚠️ **This is NOT WMATA's class, and the difference matters.** WMATA's terms are an **API agreement**, so §9(i) ends the grant when the account ends. Copenhagen's licence is **CC BY 4.0, which attaches to the DATA and is irrevocable** — so the owner's standing practice (*register, take the data, terminate, revoke*) is **safe here and unsafe there**. ✅ **Close the account freely; the right to publish survives.** The similarity is the registration effort, not the obligation |
 
 **Copenhagen and WMATA look alike at the signup form and diverge immediately after it.** Both made the owner register; only one made the account load-bearing. **The test is what the terms ARE** — an API agreement licenses *you*, so it can be withdrawn from you, while a public licence licenses *the data*, and nothing you do to your account reaches it. Recording the two in one row would have told a later reader to keep a Danish account alive forever, and implied that closing it revokes the right to publish Copenhagen. **Neither is true.**
 
-**Hong Kong's is the one to weigh before building, not after.** Everything
+**Hong Kong's was weighed before building, not after.** Everything
 else in `data.gov.hk`'s Terms of Use v1.2 (26 May 2025) is generous — download,
 distribution and reproduction are permitted for **commercial and
 non-commercial purposes, free of charge**, subject only to identifying the
@@ -344,14 +352,15 @@ source, acknowledging Government ownership of the IP, and proper attribution.
 
 **The indemnity is not a notice, not a credit, and not a step in a build.** It
 is an open-ended undertaking to cover the Government's costs if a third party
-alleges the data infringed their rights. No other source in this project asks
-for one. **It is an owner decision, and the right moment to take it is before
-35,808 premises are wired into a page**, not once the city is live.
+alleges the data infringed their rights. Hong Kong was the first source in
+this project to ask for one; others have since, among them Sacramento, Palma
+and Dallas (below). **It was an owner decision, taken before the register's
+35,808 premises were wired into a page**, not once the city was live.
 
 ### Hong Kong's indemnity — ACCEPTED 2026-09-22, and what the first record omitted
 
 **The owner accepted this on 2026-09-22, in chat, after the live clause was
-re-read.** It is the only uncapped liability in this project. Recorded here
+re-read.** It was the first uncapped liability in this project. Recorded here
 with its reasoning so it is a decision rather than a drift.
 
 **Two things the first record's quote left out**, both found by reading
@@ -392,9 +401,8 @@ mis-priced, so it was priced deliberately.
    attribution to the Government, the Relevant Organisations and
    DATA.GOV.HK**. These are the same paragraph as the indemnity, and
    **unattributed use is the most likely way to draw a complaint in the first
-   place.** They become numbered notices when Hong Kong is committed, not
-   before.
-2. **Run `python scripts/check_personal_exposure.py hong-kong` and exclude
+   place.** They are notice 41 (Hong Kong).
+2. **Run `python scripts/check_personal_exposure.py hong_kong` and exclude
    catch-all categories** — the Los Angeles NAICS 812990 precedent. The
    realistic complainant is an individual whose name sits at what looks like a
    home, so the privacy filter is the risk control, not a formality.
@@ -415,7 +423,7 @@ accept Lyon's — Lyon carries two further gates (an account this project does
 not create, and a trademark clause that collides with an invariant), so it
 stays deferred on those grounds regardless.
 
-#### Sacramento's indemnity — ACCEPTED 2026-09-29 (candidate city)
+#### Sacramento's indemnity — ACCEPTED 2026-09-29
 
 The City of Sacramento's **Open Data Terms of Use** (the same text as its Open
 Data Policy, pp. 13–18; read 2026-09-29 by the licence-read agent) govern the
@@ -432,7 +440,7 @@ on the same dataset was settled the same day: Esri's label for an
 empty licence field, not a term, since the City's Terms grant use (owner, 2026-09-29;
 `docs/build_briefs/sacramento.md`). Built on 2026-09-29.
 
-#### Palma's indemnity — ACCEPTED 2026-09-29 (candidate city)
+#### Palma's indemnity — ACCEPTED 2026-09-29
 
 GOIB's *Política i termes d'ús*, which govern the Consell de Mallorca's
 restaurant register on the Balearic open-data catalogue (read 2026-09-29 by
@@ -445,7 +453,7 @@ one source.** On the same day the owner extended Barcelona's reading of the
 took the permissive reading of Catastro's INSPIRE terms for the address join
 (`docs/build_briefs/palma.md`).
 
-#### Dallas's indemnity — ACCEPTED 2026-09-30 (candidate city)
+#### Dallas's indemnity — ACCEPTED 2026-09-30
 
 The City of Dallas's **Standard GIS Data Disclaimer of Liability** (2015-12-04; the
 linked PDF is dead, and the current copy is ArcGIS item `115c0fe8ed4b4a12a669f5e48dc56d52`)
@@ -746,15 +754,15 @@ should not imply it is only about tiles.
     the standing list of items like this is `docs/gated_access.md`.
 
 **Where this leaves the project:** nothing found anywhere forbids what this
-project does, and the count of **mandatory notices to display is five**.
-Neither Philadelphia nor Miami added one, because SEPTA, the City of
-Philadelphia License and Miami-Dade all require no attribution at all. The
-fifth is **MassDOT's acknowledgement, active since Boston was built on
-2026-09-21**. This paragraph also predicted a sixth from WMATA once D.C. was
-built: **that was wrong, and D.C. is now built.** WMATA's terms require no
-attribution and no acknowledgement — its constraints are on what may be SAID
-(§6 accuracy, §9 deletion on termination, the trademark clause), not on what
-must be shown.
+project does. The first US cities needed **five mandatory notices**; the
+numbered list has grown with every country since. Neither Philadelphia nor
+Miami added one, because SEPTA, the City of Philadelphia License and
+Miami-Dade all require no attribution at all. The fifth was **MassDOT's
+acknowledgement, active since Boston was built on 2026-09-21**. WMATA added
+none either, although this paragraph once predicted a sixth from it: its terms
+require no attribution and no acknowledgement. Its constraints are on what may
+be SAID (§6 accuracy, §9 deletion on termination, the trademark clause), not
+on what must be shown.
 
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
@@ -1293,19 +1301,16 @@ statement makes it unwise.
 
 **24. Île-de-France Mobilités — required, and DISPLAYED.**
 
-Recorded at scaffold time so the obligation existed before the city did, then
-**missed anyway**: the map rendered, the gate was run, and the notice was still
-absent from every page. A verification pass on 2026-09-23 found
-`verbatimIDFMNotice: false` on `/Paris_Heatmap` with 21 sources in the notices
-block and not one of them French. Added to `app/components.py`'s `_NOTICES` the
-same day.
+Recorded when the city's build began, so the obligation existed before the
+city did, then **missed anyway**: the map rendered, the gate was run, and the
+notice was still absent from every page. A verification pass on 2026-09-23
+found it missing from the Paris page, whose notices block listed 21 sources
+and not one of them French. It was added to the site's notices the same day.
 
-⚠️ **Nothing automated caught it, and that is the more useful finding.**
-`check_provenance.py` checks these notices in bijection with `_NOTICES` and
-prints `notices: 24 numbered, 21 displayed` — as a line of output, passing
-regardless. A required notice that is documented, numbered, called a deploy
-blocker in this very entry, and simply not rendered is exactly the gap this
-file's own reasoning says a script should close rather than a paragraph.
+⚠️ **Nothing automated caught it.** At the time, `check_provenance.py` only
+printed `notices: 24 numbered, 21 displayed` as a line of output and passed
+regardless. It now fails unless every numbered notice here is displayed and
+every displayed notice is numbered.
 
 **This is the first notice here whose licence is not a standard public one.**
 `mobility-licence` covers exactly **2 of 799** NAP datasets, there is no
@@ -1732,22 +1737,22 @@ owner 2026-09-27. **MUST DO:** `check_personal_exposure.py kobe` with its Japan 
 operator's own name is never shown as a trade name), run 2026-09-27; the verdict is in
 `DECISIONS.md`.
 
-**51. Réseau express métropolitain (Montréal) — required, and DISPLAYED with the
-tram batch** (written into `render_site_notices()` 2026-09-27, wording approved
-by the owner; displayed once the batch lands, as the REM maps are).
+**51. Réseau express métropolitain (Montréal) — required, and DISPLAYED** (written
+into `render_site_notices()` 2026-09-27, wording approved by the owner; displayed
+since the tram batch landed, as the REM maps are).
 Added 2026-09-27 with the tram rescope, which draws the REM from its own GTFS.
 **PERMITTED WITH CONDITIONS** (CC BY 4.0, from the licence file bundled in the feed;
 the reasoning is in `docs/data_sources/canada.md`): credit **Réseau express
 métropolitain (REM)**, state that the data was modified, link the CC BY 4.0 licence; no
 wording prescribed. **MUST NOT:** imply endorsement or official status (§2(a)(6)); use the
-REM logo (§2(b)(2)). Remove the credit if the REM asks (§3(a)(3)). The credit names
-the REM, links CC BY 4.0, states the three modifications (services drawn as one line,
-stations outside the agglomeration removed, two merged with same-named Métro
-stations) and disclaims endorsement. The STM credit beside it (13) still reads "Métro
+REM logo (§2(b)(2)). Remove the credit if the REM asks (§3(a)(3)). The displayed credit
+does all three, naming the three modifications (services drawn as one line, stations
+outside the agglomeration removed, two merged with same-named Métro stations), and
+disclaims endorsement. The STM credit beside it (13) still reads "Métro
 route geometry", which stays true.
 
 **52. Osaka City and MLIT (Osaka) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once Osaka lands, after Kobe).
+`render_site_notices()`; displayed since Osaka landed, after Kobe).
 
 - **PERMITTED WITH CONDITIONS** (read 2026-09-24; the Japan rows in
   [`data_sources/japan.md`](data_sources/japan.md)).
@@ -1769,7 +1774,7 @@ route geometry", which stays true.
   `DECISIONS.md`.
 
 **53. Sapporo City and MLIT (Sapporo) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once Sapporo lands).
+`render_site_notices()`; displayed since Sapporo landed).
 
 - **PERMITTED WITH CONDITIONS** (read 2026-09-24; the registers' package re-read
   2026-09-28; the Japan rows in [`data_sources/japan.md`](data_sources/japan.md)).
@@ -1790,7 +1795,7 @@ route geometry", which stays true.
   `DECISIONS.md`.
 
 **54. Fukuoka City, MHLW and MLIT (Fukuoka) — required, and DISPLAYED** (written
-into `render_site_notices()`; displayed once Fukuoka lands).
+into `render_site_notices()`; displayed since Fukuoka landed).
 
 - **PERMITTED WITH CONDITIONS**, two licences (read 2026-09-24; BODIK's
   `package_show` re-read 2026-09-28; the Japan rows in
@@ -1821,7 +1826,7 @@ into `render_site_notices()`; displayed once Fukuoka lands).
   `DECISIONS.md`.
 
 **55. Kyoto City and MLIT (Kyoto) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once Kyoto lands).
+`render_site_notices()`; displayed since Kyoto landed).
 
 - **PERMITTED WITH CONDITIONS** (read 2026-09-24; the Japan rows in
   [`data_sources/japan.md`](data_sources/japan.md)).
@@ -1846,7 +1851,7 @@ into `render_site_notices()`; displayed once Fukuoka lands).
 
 **56. Tokyo's wards, MHLW and MLIT (Tokyo) — required, and DISPLAYED** (written
 into `render_site_notices()`, its businesses part BUILT from
-`pipeline/tokyo/credits.py`; displayed once Tokyo lands).
+`pipeline/tokyo/credits.py`; displayed since Tokyo landed).
 
 - **PERMITTED WITH CONDITIONS** (read 2026-09-24; the Tokyo rows in
   [`data_sources/japan.md`](data_sources/japan.md)). Eight wards, each its own
@@ -1888,7 +1893,7 @@ into `render_site_notices()`, its businesses part BUILT from
   2026-09-28, disclosed on the page). The verdict is in `DECISIONS.md`.
 
 **57. VBB Verkehrsverbund Berlin-Brandenburg (Berlin) — required, and DISPLAYED**
-(written into `render_site_notices()`; displayed once Berlin lands).
+(written into `render_site_notices()`; displayed since Berlin landed).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Berlin rows in
   [`data_sources/germany.md`](data_sources/germany.md)). VBB's GTFS is CC BY
@@ -1913,7 +1918,7 @@ into `render_site_notices()`, its businesses part BUILT from
   `DECISIONS.md`.
 
 **58. Food Standards Agency (London) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once London lands).
+`render_site_notices()`; displayed since London landed).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the London rows in
   [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md)). The FSA's
@@ -1940,8 +1945,7 @@ into `render_site_notices()`, its businesses part BUILT from
   covers its stations and track too.
 
 **59. Ordnance Survey (London) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once London lands; Berlin's branch shifts
-this to 59 if it lands first).
+`render_site_notices()`; displayed since London landed).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28): OS Code-Point Open
   under the **Open Government Licence v3**; the licence file shipped in the zip
@@ -1963,8 +1967,8 @@ this to 59 if it lands first).
 - Wording approved by the owner 2026-09-28.
 
 **60. Gobierno de la Ciudad de Buenos Aires (Buenos Aires) — required, and
-DISPLAYED** (written into `render_site_notices()`; displayed once Buenos Aires
-lands).
+DISPLAYED** (written into `render_site_notices()`; displayed since Buenos Aires
+landed).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28 for the survey and
   Parcelas; the SBASE dataset page read 2026-09-28 declares the same
@@ -1988,8 +1992,7 @@ lands).
 - Wording approved by the owner 2026-09-28.
 
 **61. Food Standards Scotland (Glasgow) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once Glasgow lands; 60 is Buenos Aires's, on
-its own branch - recheck both at merge).
+`render_site_notices()`; displayed since Glasgow landed).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Glasgow rows in
   [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md)). Glasgow
@@ -2024,8 +2027,7 @@ adds "premises at a flat address left out" - London's map applies the flat rule
 (98 storefronts).
 
 **62. Food Standards Agency (Newcastle) — required, and DISPLAYED** (written
-into `render_site_notices()`; displayed once Newcastle lands; 60 is Buenos
-Aires's and 61 Glasgow's, each on its own branch - recheck at merge).
+into `render_site_notices()`; displayed since Newcastle landed).
 
 - **PERMITTED WITH CONDITIONS**, London's reading (notice 58, the
   `licence-read` of 2026-09-28): the five Tyne and Wear councils are on
@@ -2046,7 +2048,7 @@ Aires's and 61 Glasgow's, each on its own branch - recheck at merge).
 - **Newcastle's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **63. Ordnance Survey (Newcastle) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once Newcastle lands).
+`render_site_notices()`; displayed since Newcastle landed).
 
 - **PERMITTED WITH CONDITIONS**, London's `licence-read` (notice 59): the same
   Code-Point Open file and edition (2026-08), copied from London's cache, not
@@ -2060,8 +2062,7 @@ Aires's and 61 Glasgow's, each on its own branch - recheck at merge).
 - Wording approved by the owner 2026-09-28.
 
 **64. City of Sydney (Sydney) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once Sydney lands; 60 to 63 are Buenos
-Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
+`render_site_notices()`; displayed since Sydney landed).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Sydney rows in
   [`data_sources/australia.md`](data_sources/australia.md)): the FES item's
@@ -2085,7 +2086,7 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
 - **Sydney's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **65. City of Melbourne (Melbourne) — required, and DISPLAYED** (written into
-`render_site_notices()`; displayed once Melbourne lands).
+`render_site_notices()`; displayed since Melbourne landed).
 
 - **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Melbourne rows
   in [`data_sources/australia.md`](data_sources/australia.md)): the portal's
@@ -2106,7 +2107,7 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
 - **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
 
 **66. Stockholms stad (Stockholm) — displayed by choice, not required**
-(written into `render_site_notices()`; displayed once Stockholm lands).
+(written into `render_site_notices()`; displayed since Stockholm landed).
 
 - **SILENT, with the pages named** (resolved 2026-09-22; the Stockholm rows in
   [`data_sources/sweden.md`](data_sources/sweden.md)): the ArcGIS item's
@@ -2130,7 +2131,7 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   notice 1).
 
 **67. DSVSA București (Bucharest) — displayed by choice, not required**
-(written into `render_site_notices()`; displayed once Bucharest lands).
+(written into `render_site_notices()`; displayed since Bucharest landed).
 
 - **SILENT, with the pages named** (read in the browser 2026-09-23; the
   Bucharest rows in [`data_sources/romania.md`](data_sources/romania.md)):
@@ -2410,11 +2411,12 @@ as Norway's and Denmark's do. Their text is unchanged.
   `pnm4-68wg` both declare Public Domain - the City's choice, not a portal
   default (142 of the portal's 202 datasets carry no licence).
 - **MUST DISPLAY**: the portal's Data Terms of Use (`data.kcmo.org/terms`,
-  undated) prescribe the paragraph above "at the site where the software
+  undated) prescribe a disclaimer paragraph "at the site where the software
   application ... can be accessed" - Chicago's wording on the same portal
-  template, so site-wide as Chicago's. Reproduced word for word, including
-  `www.data.kcmo.gov`, a host that does not resolve (the portal is
-  data.kcmo.org). Displayed whichever document controls: it costs nothing.
+  template, so it is displayed site-wide, as Chicago's is. Reproduced word for
+  word, including `www.data.kcmo.gov`, a host that does not resolve (the
+  portal is data.kcmo.org). Displayed whichever document controls: it costs
+  nothing.
 - **The indemnity - DECIDED by the owner (2026-09-30): the ordinance
   controls.** The same terms say any user "shall indemnify and hold harmless the
   City from any claim ... that arises directly or indirectly ... from that

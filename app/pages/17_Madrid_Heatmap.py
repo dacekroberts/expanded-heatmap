@@ -51,8 +51,9 @@ st.markdown(
   before running on into Pozuelo and Boadilla. Line 4 is Parla's own tram.
 - **Stations outside the city are not mapped.** Forty-nine of the 249 stations on the lines drawn
   here lie in Alcorcón, Getafe, Arganda del Rey and fifteen other municipalities.
-- Lines 10 and 12 run well past the city and are drawn in full, but mapping their stations would
-  need each municipality's own business register. They are listed below.
+- Line 10 runs well past the city, and line 12 (MetroSur) lies wholly outside it. Both are drawn
+  in full, but mapping their stations outside the city would need each municipality's own business
+  register. Those stations are listed below.
 
 **The businesses**
 

@@ -82,8 +82,8 @@ services has no source in Philadelphia at all**. That is recorded in
 
 ### Boston — Step 0 findings, 2026-09-21
 
-Probed but **not built**; the verdict on whether to build it is open in
-`PLAN.md`. Four things here are worth not rediscovering.
+Probed before Boston was built (it has since been built from the sources
+above). Four things here are worth not rediscovering.
 
 **Boston licenses food, and almost nothing else.** Inspectional Services
 licenses food; the Licensing Board licenses alcohol, lodging, billiards and
@@ -166,7 +166,7 @@ portal.
 | Boston | **MassGIS Massachusetts Municipalities**, layer 1 ("Areas") — 351 town polygons statewide, with a `TOWN` field | `https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Municipalities/FeatureServer/1/query` (`outFields=TOWN`, `outSR=4326`, `f=geojson`) | a spatial **envelope** around the rapid-transit network rather than all 351 towns → 61 polygons. Used both to filter to `TOWN='BOSTON'` and to NAME the 43 out-of-town stations |
 | Boston — **considered, not used** | "City of Boston Outline Boundary (Water Excluded)" | `https://data.boston.gov/dataset/a70595d2-fd38-4bcb-8a81-6f7807621d38/resource/dade0744-a486-44c7-be7d-07240a89dca4/download/city_of_boston_outline_boundary_water_excluded.geojson` | whole city, one polygon. Would filter but could not NAME the other towns, which is the bigger job here — see the note below |
 | Washington D.C. | **DC Boundary**, layer 10 of the District's administrative-boundaries service — a single clean polygon | `https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer/10/query` (`where=1=1`, `outFields=*`, `outSR=4326`, `f=geojson`) | whole District, one polygon. Used to filter: 40 of 98 Metrorail stations are inside it |
-| Washington D.C. — **naming layer** | **Census TIGERweb states** — three polygons, so an excluded station can be NAMED and not merely counted | `https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query` (`NAME IN ('Maryland','Virginia','District of Columbia')`, `outSR=4326`, `f=geojson`) | the three jurisdictions Metrorail runs through. 58 stations are outside the District — 32 Virginia, 26 Maryland — the second-largest station exclusion here after San Diego's, which is why it has to be citable. Census TIGER products are US federal works and carry no copyright |
+| Washington D.C. — **naming layer** | **Census TIGERweb states** — three polygons, so an excluded station can be NAMED and not merely counted | `https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query` (`NAME IN ('Maryland','Virginia','District of Columbia')`, `outSR=4326`, `f=geojson`) | the three jurisdictions Metrorail runs through. 58 stations are outside the District — 32 Virginia, 26 Maryland — more than Los Angeles' 54 or San Diego's 16, which is why it has to be citable. Census TIGER products are US federal works and carry no copyright |
 | Miami | Miami-Dade County **municipal boundaries** (same publisher as its business data) | `https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/Municipalitypoly_gdb/FeatureServer/0/query` (`outFields=MUNICID,NAME`, `outSR=4326`, `f=geojson`) | **not filtered — used to NAME, not to exclude.** 77 polygons across 34 municipalities; `MUNICID` joins to the business file's `MUNBUSLOC` prefix |
 | Buffalo | **Census TIGERweb place polygon**, current Incorporated Places, GEOID 3611000 ("Buffalo city") | `https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query?where=GEOID='3611000'` | the city: 135.9 km², of which 31.3 km² is Lake Erie and Niagara River water, gated at 130-142. Scopes the two State files and checks the stations. A US federal government work, public domain (Washington D.C.'s TIGERweb row) |
 | Buffalo - **recorded, deliberately NOT used** | Open Data Buffalo "City Boundary" (Socrata `p4ak-r4fg`), labelled "U.S. Census Bureau", "Public Domain U.S. Government" | `https://data.buffalony.gov/resource/p4ak-r4fg.geojson` | **Not a Census product** (licence read 2026-09-29): its vertices sit on Erie County's municipal-boundary layer (median 0.0 m), it carries Erie's schema, and the City's GIS server hosts it as "Managed/Owned by Erie County". The City's public-domain dedication may not reach a County work and the County states no terms, so the owner took TIGER's clean title instead (2026-09-29) |
@@ -207,7 +207,7 @@ original source and not a lookalike.
 
 | Service | Used by | Endpoint | Note |
 |---|---|---|---|
-| US Census Bureau bulk geocoder | Los Angeles, New York, Washington D.C., Houston, Dallas | `https://geocoding.geo.census.gov/geocoder/locations/addressbatch` | Free, no API key, US addresses only. Benchmark `Public_AR_Current`. Responses cached by batch content hash, so re-runs and drift checks stay offline and deterministic. D.C.'s use is different in kind from Los Angeles': LA's flagged rows had CORRUPT coordinates, D.C.'s have none at all, and Step 0's expectation that `MAR_ID` would recover them was wrong — the same 452 rows lack both. 387 of 451 were matched and every one fell inside the District polygon |
+| US Census Bureau bulk geocoder | Los Angeles, New York, Washington D.C., Sacramento, Houston, Dallas | `https://geocoding.geo.census.gov/geocoder/locations/addressbatch` | Free, no API key, US addresses only. Benchmark `Public_AR_Current`. Responses cached by batch content hash, so re-runs and drift checks stay offline and deterministic. D.C.'s use is different in kind from Los Angeles': LA's flagged rows had CORRUPT coordinates, D.C.'s have none at all, and Step 0's expectation that `MAR_ID` would recover them was wrong — the same 452 rows lack both. 387 of 451 were matched and every one fell inside the District polygon |
 
 ## Licences and terms of use
 
@@ -459,8 +459,7 @@ Metro's clause, the tightest in the project, and it means redrawing
 acknowledgement notice, and no MBTA logos or trademarks. Since this project
 draws its own line geometry and labels lines with their real public names while
 reproducing no roundel or T mark, the trademark clause is satisfied by
-construction rather than by interpretation — unlike SEPTA's, which remains
-open.
+construction rather than by interpretation.
 
 **Three permission questions are OPEN as of 2026-09-21** — two from
 Philadelphia and one from Miami. All are recorded unresolved rather than read

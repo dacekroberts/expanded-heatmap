@@ -62,9 +62,9 @@ point, not here.
 
 | Source | Licence | Attribution declared |
 |---|---|---|
-| **Japan** — the candidate cities' permit lists, MHLW's open data, MLIT's address, rail and boundary layers (**candidates, not built**) | Mostly **PERMITTED WITH CONDITIONS** (CC BY 4.0, CC BY 2.1 JP, PDL 1.0). Sendai's lists need permission. N03's boundaries may never be drawn (Survey Act). One source per row in the Japan section below | Per source, below |
+| **Japan** — the cities' permit lists, MHLW's open data, MLIT's address, rail and boundary layers (**eight cities built: Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama and Hiroshima; Sendai not**) | Mostly **PERMITTED WITH CONDITIONS** (CC BY 4.0, CC BY 2.1 JP, PDL 1.0). Sendai's lists need permission. N03's boundaries may never be drawn (Survey Act). One source per row in the Japan section below | Per source, below |
 
-### 🇯🇵 Japan (candidates, not built) — read 2026-09-21 to 2026-09-24 by the `licence-read` agent
+### 🇯🇵 Japan — terms read 2026-09-21 to 2026-09-30
 
 **Consolidated here on 2026-09-24.** Until then these reads were recorded only
 in each city's build brief (`docs/build_briefs/<city>.md`), which keeps the
@@ -120,6 +120,7 @@ listed premises may have closed, so no Japanese page says "currently
 operating". Fukuoka's 第４条 and MHLW's disclaimer also bar completeness and
 accuracy claims.
 
-**No notice numbers yet.** Each city's notice joins "Notices this project MUST
-display when published" when that city is published. Until then the drafts are
-in its brief.
+**Notice numbers.** Each city's notice is in "Notices this project MUST display
+when published": notice 50 (Kobe), notice 52 (Osaka), notice 53 (Sapporo),
+notice 54 (Fukuoka), notice 55 (Kyoto), notice 56 (Tokyo), notice 75 (Yokohama)
+and notice 76 (Hiroshima).

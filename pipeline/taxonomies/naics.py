@@ -1,5 +1,6 @@
 """NAICS taxonomy - the mapping used by every city whose open-data export
-carries a NAICS field (San Diego, San Francisco and Los Angeles so far;
+carries a NAICS field (San Diego, San Francisco, Los Angeles, Houston, Dallas, Kansas City and
+Tucson;
 Chicago uses its own licence taxonomy instead).
 
 What is national and reusable: NAICS_GROUPS below - which broad NAICS

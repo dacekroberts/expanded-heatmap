@@ -50,18 +50,16 @@ polygon (`regional-municipal-boundary`, 641.4 km²) is the check.
 Phone`, `Business Phone Ext.` — and step 2 excludes them at `usecols`, so they
 never enter the process. The Canada profile recorded one of the three.
 
-These rows, with the transit and boundary rows below, close a gap a NOTE
-here recorded from 2026-09-21 to 2026-09-22: Vancouver, Surrey, Montréal and Calgary were built with their
-endpoints in [`canada_step0_endpoints.md`](../canada_step0_endpoints.md) and their
-notices below, but never in these three tables.
-**Where the two files disagree, these tables win** — they were written from
-each city's own `config.py` after the build, and three Step 0 findings did not
-survive it. Surrey's declared-4326-but-actually-26910 CRS trap belongs to the
-Hub's **file export**, not to the service the build reads. Calgary's real
-category count is 96, not 173. TransLink's feed does carry `feed_info.txt`; it
-is the mirror that does not. `canada_step0_endpoints.md` stays as the evidence
-trail for how each source was found and what was tried; every city it covers
-is now built.
+Vancouver, Surrey, Montréal and Calgary were built with their endpoints recorded
+in `docs/canada_step0_endpoints.md` and their notices below, but not in these
+three tables until 2026-09-22 (a gap noted here from 2026-09-21). **Where the
+two files disagree, these tables win**: they were written from each city's own
+configuration after the build, and three early findings did not survive it.
+Surrey's declared-4326-but-actually-26910 CRS trap belongs to the Hub's **file
+export**, not to the service the build reads. Calgary's real category count is
+96, not 173. TransLink's feed does carry `feed_info.txt`; it is the mirror that
+does not. The earlier file stays in the repository as the record of how each
+source was found and what was tried; every city it covers is now built.
 
 Montréal's survey has one consequence no licence register has: it **records
 VACANT units**, `USAGE1 == 'VACANT'` on 3,500 of 28,621 rows (12.2%), and they

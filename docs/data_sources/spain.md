@@ -32,10 +32,10 @@ the bare host** (an earlier screen recorded it unreachable on the path
 **EPSG:25830**.
 
 > **THE DOWNLOAD URL ROTS.** It embeds a build timestamp
-> (`200085_20260922_053829.csv`) that changes on every refresh, so
-> `step2_clean_businesses.py` resolves it from `package_show` by **resource
-> id** at fetch time. This is the first source in the project whose URL is not
-> durable, and a hardcoded one 404s silently within days.
+> (`200085_20260922_053829.csv`) that changes on every refresh, so the
+> download script resolves it from `package_show` by **resource id** each
+> time. A hardcoded URL 404s silently within days; this is the first source in
+> the project whose URL is not durable.
 
 A **premises field survey**, not a licence register — the Montréal and
 Barcelona shape — so the "79% of this register is landlords" correction that
@@ -169,9 +169,10 @@ Metro Ligero ML1's 9, that is 302 — a residual of **one**, consistent with
 Pinar de Chamartín being counted by the operator in both networks. Two of the
 operator's own conventions have to be applied first: it counts a station **once
 per line** (which is why 303 sits against 242 distinct names) and it **includes
-ML1**, which it operates. **303 must never reach the page**: this project maps
-**193 distinct stations inside the término municipal**, a different quantity in
-three ways at once.
+ML1**, which it operates. **The map does not use 303**: it maps **200 distinct
+stations inside the término municipal** (the Metro's 193, plus ML1's nine less
+the two it shares with the Metro), a different quantity (distinct stations,
+and only those inside the city).
 
 ## Transit feeds
 
@@ -315,8 +316,8 @@ anyway, since station positions do not expire" as a defensible third option.
 **It is no longer defensible on these terms** — not because station geometry
 goes stale, but because the licence obliges the reuser to keep what is shown
 up to date, and this project cannot honour that with a feed CRTM has stopped
-refreshing. Madrid's rail leg must come from a current CRTM item or from
-OpenStreetMap.
+refreshing. Madrid's rail therefore comes from CRTM's maintained feature
+services instead (the Madrid rows under Transit feeds above).
 
 **Obligations, all of them conditions rather than courtesies:**
 
@@ -431,12 +432,11 @@ incorporate expressly:
 - **the source must be cited**
 - ⚠️ **"the most up-to-date data are referred to"**
 
-**That last one bears directly on the census-year decision.** The build brief
-recommends the **2022** resource because the 2024 one is geographically
-incomplete (down 69–83% in four districts). Article 8 pulls the other way.
-The two are reconcilable — using the most recent *complete* survey, and saying
-so on the page — but it must be a stated decision, not a silent one, and the
-page must name the census year either way.
+**That last one bears directly on the census-year decision.** The build uses
+the **2022** resource because the 2024 one is geographically incomplete (down
+69–83% in four districts), and Article 8 pulls the other way. The two are
+reconciled by using the most recent *complete* survey and saying so: the
+Barcelona page names the 2022 census year and why.
 
 **Not claimed:** the *"Open Data BCN"* denomination and logo are registered
 trademarks (M 3713011, M 3746181) and are excluded from reuse, as are images

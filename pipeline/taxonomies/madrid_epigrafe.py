@@ -16,7 +16,7 @@ default instead of silently vanishing, which is what a 98-value enumeration
 would do.
 
 **The cross-standard equivalences, which are what make Madrid comparable to the
-other sixteen cities.** Retail is NAICS 44-45 and SCIAN 46; food service is
+other cities.** Retail is NAICS 44-45 and SCIAN 46; food service is
 NAICS 722 and SCIAN 722; personal services is NAICS 812 and SCIAN 812. In
 NACE terms that is 47, 56 and 96. Three of those alignments are not obvious and
 each is asserted at import:

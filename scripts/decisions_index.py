@@ -14,8 +14,8 @@ heading found in two files - live and archived, or two archives - fails
 WHY
 ---
 `DECISIONS.md` is append-only and must stay that way: it is the reasoning
-trail, and an edited entry is a lost one. It reached **5,421 lines and 57,609
-words across 100 dated sections**, and `pipeline/drift_check.py` ends every
+trail, and an edited entry is a lost one. It had reached **5,421 lines and 57,609
+words across 100 dated sections** by 2026-09-21, and `pipeline/drift_check.py` ends every
 run with "compare the step row counts above against the latest baseline entry
 in DECISIONS.md". The index replaces finding that entry by eye.
 

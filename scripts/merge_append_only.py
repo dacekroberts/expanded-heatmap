@@ -1,7 +1,7 @@
 """Resolve a conflicted APPEND-ONLY file without losing an entry.
 
 `DECISIONS.md` is append-only and two sessions append to the top of it at once,
-so every master<->staging merge conflicts there. The conflict is never a real
+so a merge of two branches that both appended to it conflicts there. The conflict is never a real
 disagreement (both sides only added), so the resolution is mechanical, and
 this script does it rather than leaving it to hand-editing.
 

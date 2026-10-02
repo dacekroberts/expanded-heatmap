@@ -154,7 +154,7 @@ def scope_bullets(cfg, name, m):
         + " businesses are in the same national register this map reads, so leaving "
         + ("it" if one else "them")
         + " out is a choice rather than a limit of the data: the map keeps to the "
-          "commune, as the other French maps do.",
+          "commune, as most of the French maps do.",
     ]
 
 

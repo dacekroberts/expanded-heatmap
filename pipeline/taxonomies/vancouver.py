@@ -17,7 +17,7 @@ tooltip shows Vancouver's "Limited Service Food Establishment" or Surrey's
 HOW THE BUCKETS WERE DECIDED
 ----------------------------
 Not invented here. Anchored on `naics.py`, so this city stays comparable with
-the five NAICS cities rather than drawing its own line:
+the NAICS cities rather than drawing its own line:
 
     Retail             NAICS 44-45, LESS 454 "nonstore retailers"
     Food service       NAICS 722

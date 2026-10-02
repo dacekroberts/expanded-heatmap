@@ -326,10 +326,10 @@ def country_without_a_city(rel):
     and a report people learn to skip is worse than no report.
 
     The distinction is exact and cheap: does any city config import this
-    profile? Mexico's does, from two cities, so its three unread
-    constants ARE findings. France's does not, from none, so its
-    forty-six are deferred until Paris lands - at which point they become
-    findings automatically, with no edit here.
+    profile? Mexico's and France's do (3 and 26 cities), so their unread
+    constants ARE findings. A profile no city imports yet is deferred until
+    its first city lands - at which point its constants become findings
+    automatically, with no edit here.
     """
     if not rel.startswith("pipeline/countries/"):
         return False

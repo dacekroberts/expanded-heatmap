@@ -85,7 +85,7 @@ st.markdown(
 - **Tram stops sit closer together than metro stations**, a median of 330 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Caen**. **Tram T1, Tram T2 and Tram T3 run past it**, so 9 stops beyond the boundary are left out: College Hawking and Hauts de l'Orne in Fleury-sur-Orne; Café des Images, Château d'Eau, Citis, Place de l'Europe and Saint-Clair in Hérouville-Saint-Clair; Jean Vilar and Modigliani in Ifs.
 - The lines are still drawn to their ends, but those stops get no ring and their businesses are not counted; they are listed below.
-- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
+- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as most of the French maps do.
 
 **The businesses**
 

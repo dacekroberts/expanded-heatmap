@@ -91,10 +91,9 @@ downloaded via the SHEET CSV export (`ssUserId=SAMPLE_VIEW`, no account — see
 
 **Nine more, checked 2026-09-24** (the same fields on each page, read
 individually): all **공공누리 1유형**, `제3저작권자` 없음, 매일, 원본시스템
-지방행정 인허가정보. The pages also carry an empty `AI유형 -` tag. Buckets are
-as the owner decided on 2026-09-24 (`seoul.md`). The
-bucket column above was the 2026-09-22 guess; the brief recommends
-**excluding** 숙박업 and 동물병원.
+지방행정 인허가정보. The pages also carry an empty `AI유형 -` tag. Buckets are as the owner decided on 2026-09-24. The
+bucket column above was the 2026-09-22 guess: 숙박업 and 동물병원 are not mapped
+as businesses and lend building points only (the Seoul registry row above).
 
 | `infId` | Dataset | Recommended bucket | Active premises |
 |---|---|---|---|
@@ -149,14 +148,14 @@ name field is `사업장명`, the registered trade name, which this project's
 invariant explicitly permits. Same posture as France's *non-diffusible*,
 Edmonton's `<REDACTED FOR PRIVACY>` and Austria's GISA.
 
-**One privacy item left for build time, not resolved here.** Korean salon and
-restaurant trade names very often *contain* a personal name — `김은미장`
-("Kim Eun-mi salon") among 미용업, and ~30% of 사업장명 values are a bare 2–4
-hangul token. These are registered trade names, so the invariant allows them,
-but `scripts/check_personal_exposure.py` will need a Korean-aware pass rather
-than its current one, and Personal services is the bucket where a salon
-operating from a residential address is most plausible. **Flagged for
-`add-city` Step 0, not pre-judged.**
+**One privacy item, settled at build.** Korean salon and restaurant trade
+names very often *contain* a personal name (`김은미장`, "Kim Eun-mi salon",
+among 미용업), and ~30% of 사업장명 values are a bare 2–4 hangul token. These
+are registered trade names, so the invariant allows them, but Personal
+services is the bucket where a salon operating from a residential address is
+most plausible. The project's privacy check was given a Korean-aware pass for
+the build, and Seoul withholds 138 names (a personal name at a home-looking
+address; the registry row above).
 
 ### 🇰🇷 Daegu and Busan (both built 2026-09-27; notices 48 and 49) — read 2026-09-27 by the `licence-read` agent
 

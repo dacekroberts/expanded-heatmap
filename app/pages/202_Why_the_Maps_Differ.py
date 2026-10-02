@@ -197,8 +197,9 @@ scroll_table(cols,
                else r[c] for c in cols] for r in rows],
              right=("Storefronts near a station",), min_width=760)
 st.caption(
-    "\"Trams\" includes light rail. \"Retail thin\" or \"Personal services thin\" "
-    "means that layer holds only part of its trades, such as the ones the city "
+    "\"Trams\" includes light rail. \"Retail thin\", \"Food service thin\" or "
+    "\"Personal services thin\" means that layer holds only part of its trades, "
+    "such as the ones the city "
     "licenses. \"Storefronts near a station\" is the "
     "share of the map's storefronts inside its station rings."
 )

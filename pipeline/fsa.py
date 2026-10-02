@@ -1,5 +1,5 @@
 """The UK Food Standards Agency's open-data files, read the same way for every
-city on them (London, Glasgow; Newcastle next). Read-only: nothing here
+city on them (London, Glasgow and Newcastle). Read-only: nothing here
 fetches - each city's fetch_sources.py downloads.
 
 One file per local authority, England's FHRS and Scotland's FHIS alike (the

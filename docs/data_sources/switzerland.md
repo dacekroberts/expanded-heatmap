@@ -1,10 +1,10 @@
 # Data sources — Switzerland
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, split by country. This file holds the Switzerland rows of the tables
-there. The numbered notices this project must display, the removal-request
-commitment and the deploy gate are in the entry point, not here. Zurich's brief
-is [`build_briefs/zurich.md`](../build_briefs/zurich.md).
+The Switzerland part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country. The numbered
+notices this project must display, the removal-request commitment and the
+deploy gate apply to every country and are kept in that record. Zurich's
+build brief is in the project's repository (`docs/build_briefs/zurich.md`).
 
 ## The country, in brief (`add-country`, 2026-09-30)
 
@@ -14,7 +14,7 @@ cities: none has been probed.
 
 | Question | Answer for Switzerland | Evidence |
 |---|---|---|
-| Where commerce is recorded | **Municipally, by trade.** The Stadt Zürich publishes its own register of the food-and-drink and alcohol-retail premises it licenses (Stadtpolizei, Fachgruppe Bewilligung Gastro). No general-retail or personal-services register was found for the city, and the national business statistics (STATENT) are aggregate | the register, read 2026-09-30; the Zurich catalogue sweep in [`city_master_list_evidence.md`](../city_master_list_evidence.md) (control `zzqqxxnonsense` -> 0, 2026-09-23) |
+| Where commerce is recorded | **Municipally, by trade.** The Stadt Zürich publishes its own register of the food-and-drink and alcohol-retail premises it licenses (Stadtpolizei, Fachgruppe Bewilligung Gastro). No general-retail or personal-services register was found for the city, and the national business statistics (STATENT) are aggregate | the register, read 2026-09-30; the Zurich catalogue sweep in the project's master-list evidence (`docs/city_master_list_evidence.md`; control `zzqqxxnonsense` -> 0, 2026-09-23) |
 | Portal | **CKAN** at `data.stadt-zuerich.ch`. 🚨 **Its geodata download URLs return an Angular page, not data**: use the city's **WFS** (`ogd.stadt-zuerich.ch/wfs/geoportal/<Dataset>`), which serves GeoJSON with no key | the brief; re-checked 2026-09-30 |
 | Licence | **CC0** on the Stadt's open data, "with few exceptions"; the city recommends "Quelle: Stadt Zürich" but does not require it | the dataset's CKAN record and the city's legal notice (below) |
 | Personal information | **The register publishes the premises' trade name, never a holder column** (19 columns, none a person). Some trade names are a person's own name, so the project's name rule applies (Kansas City's and New Orleans's). The Swiss data-protection act itself was not read: the publisher's choice of columns did the first part of the work (`read-licence` step 6b) | the register's columns, 2026-09-30 |

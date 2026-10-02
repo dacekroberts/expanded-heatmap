@@ -45,7 +45,7 @@ _DIVISION_BUCKETS = {
 # "(no hairdressers or laundries)" made Berlin's legend 379 px at the 1000 px
 # frame and put 6 line labels under it. The page and
 # docs/excluded_categories.md say what is missing.
-# DRAFT, awaiting the owner's approval of the wording (2026-09-28).
+# Wording approved by the owner (2026-09-28; DECISIONS "Berlin's page, notice 57").
 _BUCKET_NOTES = {
     "Personal services": "partial",
 }

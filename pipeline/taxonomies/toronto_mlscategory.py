@@ -21,8 +21,8 @@ about Toronto's licensing regime rather than about its high streets.
 **The bucket is drawn anyway, and disclosed** - the New York treatment, decided
 by the owner on 2026-09-21. The rejected alternative was leaving Retail out
 entirely and drawing two buckets: it reads as a stronger statement but discards
-3,475 real storefronts and would make Toronto the only city whose legend
-differs from the other thirteen. The city page and
+3,475 real storefronts and would have made Toronto's legend
+differ from those of the thirteen cities built before it. The city page and
 `docs/excluded_categories.md` both say what the category does and does not
 contain, under *missing* rather than *excluded*.
 

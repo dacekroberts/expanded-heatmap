@@ -85,7 +85,7 @@ st.markdown(
 - **Tram stops sit closer together than metro stations**, a median of 380 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Mulhouse**. **Tram 3 runs past it**, so one stop beyond the boundary is left out: Lutterbach Gare in Lutterbach.
 - The line is still drawn to its ends, but that stop gets no ring and its businesses are not counted; it is listed below.
-- Its commune's businesses are in the same national register this map reads, so leaving it out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
+- Its commune's businesses are in the same national register this map reads, so leaving it out is a choice rather than a limit of the data: the map keeps to the commune, as most of the French maps do.
 
 **The businesses**
 

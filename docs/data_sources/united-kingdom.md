@@ -1,11 +1,12 @@
 # Data sources — United Kingdom
 
-Part of [`data_sources.md`](../data_sources.md), the project's provenance
-record, split by country. This file holds the United Kingdom rows of the tables
-there. The numbered notices this project must display, the removal-request
-commitment and the deploy gate are in the entry point, not here. London's brief
-is [`build_briefs/london.md`](../build_briefs/london.md); the United Kingdom's
-screen is its row in `docs/global_country_shortlist.md`, Tier 4.
+The United Kingdom part of the project's provenance record,
+[`data_sources.md`](../data_sources.md), split out by country. The numbered
+notices this project must display, the removal-request commitment and the
+deploy gate apply to every country and are kept in that record. London's
+build brief is in the project's repository (`docs/build_briefs/london.md`); the
+United Kingdom was screened as Tier 4 in the project's country shortlist
+(`docs/global_country_shortlist.md`).
 
 ## Business registries
 

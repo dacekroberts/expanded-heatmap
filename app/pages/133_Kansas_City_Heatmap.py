@@ -82,7 +82,7 @@ st.markdown(
   instead of a name**, and so it does where a company trades under a person's own name. Elsewhere
   the map shows the name the business trades under.
 - **The licence data dates from 15 January 2026**, and holds licences valid for 2025 and 2026.
-  Businesses that opened or closed since then are not shown.
+  Businesses that opened since then are missing, and any that closed may still be shown.
 
 **Reading the density**
 

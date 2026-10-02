@@ -85,7 +85,7 @@ st.markdown(
 - **Tram stops sit closer together than metro stations**, a median of 390 m here, so the rings are drawn at half the usual size (0.05 to 0.3 mi), as on the other French maps.
 - The map covers the **commune of Strasbourg**. **Tram A, Tram B, Tram D, Tram E and Tram F run past it**, so 29 stops beyond the boundary are left out: Bois Romain, Eckelse, Parc d'activités d'Eckbolsheim Zénith, Poteries and Wolfisheim Henri Rendu in Eckbolsheim; Général de Gaulle, Hoenheim Gare and Le Ried in Hœnheim; Baggersee, Campus d'Illkirch, Colonne, Cours de l'Illiade, Graffenstaden, Illkirch Lixenbuhl, Leclerc and Parc Malraux in Illkirch-Graffenstaden; Hochschule / Läger, Kehl Bahnhof and Kehl Rathaus in Kehl, Germany; Lingolsheim Alouettes and Lingolsheim Tiergaertel in Lingolsheim; Bohrie, Ostwald Hôtel de Ville and Wihrel in Ostwald; Futura Glacière, Le Marais, Lycée Marc Bloch, Pont Phario and Rives de l'Aar in Schiltigheim.
 - The lines are still drawn to their ends, but those stops get no ring and their businesses are not counted; they are listed below.
-- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as the other French maps do.
+- Their communes' businesses are in the same national register this map reads, so leaving them out is a choice rather than a limit of the data: the map keeps to the commune, as most of the French maps do.
 
 **The businesses**
 
