@@ -4,6 +4,32 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Tbilisi's three calls, all as recommended (owner)
+
+- **The owner: "approve all three tbilisi recommendations".**
+  1. **Placeholder coordinates: drop and disclose** (Madrid's zero
+     coordinates). 1,295 kept rows sit on ten district-centroid points, 805
+     of them on four metro stations, which would have inflated Isani,
+     Didube, Samgori and Liberty Square by 164 to 255 dots each.
+  2. **Division 45: the precedent (R4).** Keep 45.11.2 vehicle retail
+     (435), 45.19.0 (21) and 45.32.0 parts retail (1,060). Leave out
+     45.11.1 "wholesale and retail" (117) and all repair.
+  3. **Region `Europe`, measured, approved and then REOPENED the same day.**
+     The owner: "actually tbilisi is quite far away from other cities".
+     Dublin to Tbilisi is about 3,700 km, past the 3,300 km at which Canada
+     was split. Fitted into Europe, Europe's centre would move about 9
+     degrees east.
+     - **Settled: a new leaf region, "West Asia".** The owner: "west asia
+       could work too", "if georgia is officially in asia … we don't need to
+       modify europe".
+     - The UN M49 geoscheme puts Georgia in Western Asia. The name pairs with
+       East Asia and is named for the area, so a later Baku, Yerevan or
+       Ankara joins it. Europe is not modified.
+     - The owner first floated Europe West and East regions, with a look by
+       Cleanup. The message to Cleanup failed to send. Once Georgia's
+       classification settled Tbilisi, it was no longer needed.
+- **Tbilisi now waits only on Seattle being green** (`docs/handoff_seattle_tbilisi_2026-10-02.md`).
+
 ### 2026-10-02 - Seattle (Regional) released to its own session, Tbilisi queued behind it (owner)
 
 - **The owner: "should we pass the seattle regional brief to a new session?
