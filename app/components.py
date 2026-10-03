@@ -355,6 +355,40 @@ def scroll_table(columns, rows, right=(), min_width=None):
     )
 
 
+# The header's two links, on every page because every page calls
+# set_base_font() (owner, 2026-10-03; both URLs confirmed by the owner). The
+# GitHub one also links the public repository from the page header, which IDFM's
+# Licence Mobilités Art. 5.8 and ODbL s.4.6 lean on (the footer link stays).
+# Inline SVG, no icon font or CDN: GitHub's mark is Octicons' mark-github (MIT),
+# LinkedIn's the Simple Icons glyph (CC0). One line, so Markdown wraps no part
+# of it in a paragraph.
+_GITHUB_URL = "https://github.com/dacekroberts/expanded-heatmap"
+_LINKEDIN_URL = "https://www.linkedin.com/in/dace-roberts-57381b279/"
+_HEADER_LINKS_HTML = (
+    '<div class="site-header-links">'
+    f'<a href="{_GITHUB_URL}" target="_blank" rel="noopener noreferrer" '
+    'aria-label="Code on GitHub (opens in a new tab)" title="Code on GitHub">'
+    '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 '
+    '0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49'
+    '-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 '
+    '1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64'
+    '-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32'
+    '-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56'
+    '.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 '
+    '2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>'
+    f'<a href="{_LINKEDIN_URL}" target="_blank" rel="noopener noreferrer" '
+    'aria-label="LinkedIn profile (opens in a new tab)" title="LinkedIn">'
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 '
+    '20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 '
+    '2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 '
+    '2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92'
+    '-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 '
+    '13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 '
+    '24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>'
+    '</svg></a></div>'
+)
+
+
 def set_base_font():
     """Swaps Streamlit's default typeface for Space Grotesk on base page
     text only.
@@ -412,6 +446,35 @@ def set_base_font():
             max-width: 100%;
         }
 
+        /* The GitHub and LinkedIn links (_HEADER_LINKS_HTML), in the left end
+        of Streamlit's own header strip. The right end holds Streamlit's
+        toolbar (and, run locally, its Deploy button, which overlapped them
+        there); the left end is empty while cities.MAP_ONLY_NAV hides the
+        sidebar's expand control, and turning that off puts the control back
+        in this corner, so move the links then. The element container itself
+        is fixed, so it leaves the page's flow: it adds no gap above a city's
+        title and pushes neither the title nor the map down. Above the header
+        (z-index 999990). Icons take the theme's text color through
+        currentColor, so they follow the light and dark themes. */
+        [data-testid="stElementContainer"]:has(.site-header-links) {
+            position: fixed !important;
+            top: 0.85rem;
+            left: 0.75rem;
+            width: auto !important;
+            z-index: 999991;
+            margin: 0 !important;
+        }
+        .site-header-links { display: flex; gap: 0.15rem; align-items: center; }
+        .site-header-links a {
+            display: inline-flex; padding: 0.35rem; border-radius: 6px;
+            color: inherit !important; opacity: 0.7; line-height: 0;
+        }
+        .site-header-links a:hover { opacity: 1; }
+        .site-header-links a:focus-visible {
+            opacity: 1; outline: 2px solid currentColor; outline-offset: 1px;
+        }
+        .site-header-links svg { width: 20px; height: 20px; fill: currentColor; }
+
         /* A city page's subtitle (render_city_title), set close under the
         city's name and quieter than it. */
         .st-key-city-title h1 { padding-bottom: 0.1rem; }
@@ -428,6 +491,9 @@ def set_base_font():
         # A separate call, not appended to the block above: that block is indented,
         # so text added after it is rendered as a Markdown code block.
         st.markdown(f"<style>{_MAP_ONLY_CSS}</style>", unsafe_allow_html=True)
+    # Its own element and no <style> in it: render_city_title hides every
+    # element container holding a <style>, which would hide the links too.
+    st.markdown(_HEADER_LINKS_HTML, unsafe_allow_html=True)
 
 
 # --- Site identity and the notices that publishing requires ----------------
@@ -479,6 +545,12 @@ _BRAZIL = ("São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
                 "Namyangju", "Ansan", "Uijeongbu", "Anyang")
+_FRANCE = ("Paris", "Marseille", "Toulouse", "Lille (Regional)", "Rennes",
+           "Le Mans", "Besançon", "Avignon", "Tours", "Dijon", "Reims", "Orléans",
+           "Mulhouse", "Brest", "Saint-Étienne", "Nice", "Montpellier",
+           "Strasbourg", "Le Havre", "Caen", "Rouen (Regional)",
+           "Bordeaux (Regional)", "Nantes (Regional)", "Grenoble (Regional)",
+           "Valenciennes (Regional)", "Angers")
 # The UK tram and light-rail cities whose gate 3 reads NaPTAN (notice 86).
 _UK_SIX = ("Manchester (Regional)", "Birmingham (Regional)", "Edinburgh",
            "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)")
@@ -494,7 +566,21 @@ _OSM_RAIL = (
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
-    "Buenos Aires", "Seattle (Regional)",
+    "Buenos Aires", "Seattle (Regional)", "London", "Glasgow",
+    "Newcastle (Regional)", "Manchester (Regional)", "Birmingham (Regional)",
+    "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
+    "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
+    "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
+)
+# The cities whose rail is not OpenStreetMap's but whose English station names
+# are (the twenty Japanese cities: MLIT N02 lines, OSM `name:en`). Kept apart
+# from _OSM_RAIL so only rail-geometry cities get the rail wording; notice 1's
+# sentence names these in a clause of their own, in this order.
+_OSM_STATION_NAMES = (
+    "Kobe", "Osaka", "Sapporo", "Fukuoka", "Kyoto", "Tokyo", "Yokohama",
+    "Hiroshima", "Matsuyama", "Toyama", "Kumamoto", "Fukui", "Nagasaki",
+    "Utsunomiya", "Kitakyushu", "Sakai", "Hakodate", "Kagoshima", "Okayama",
+    "Kōchi",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -543,16 +629,55 @@ _NOTICES = [
      "to change at any time. It is understood that the data provided at this "
      "site is being used at one's own risk.",
      True, ("Chicago",), every_page=True),
+    # SFMTA (notice 3), re-read 2026-10-03 against sfmta.com/reports/
+    # gtfs-transit-data (updated 2024-10-01) and the stored copy in
+    # docs/licenses/. Clause 12's notice is BOTH paragraphs after "shall bear
+    # the following notice:", the "as is" paragraph included; until
+    # 2026-10-03 only the first was shown. Clause 4 asks for its liability
+    # disclaimer to be displayed "or" included in a use agreement; the site
+    # has no use agreement, and on the cautious reading the disclaimer is
+    # displayed instead. All three quoted parts are verbatim; the lead-in to
+    # the third is this project's.
     Notice(3, "San Francisco Municipal Transportation Agency",
      "Reproduced with permission granted by the City and County of San "
      "Francisco. The information has been provided by means of a "
      "nonexclusive, limited, and revocable license granted by the City and "
-     "County of San Francisco.",
+     "County of San Francisco. The City and County of San Francisco does not "
+     "guarantee the accuracy, adequacy, completeness or usefulness of any "
+     "information. The City and County of San Francisco provides this "
+     "information \"as is,\" without warranty of any kind, express or implied, "
+     "including but not limited to warranties of merchantability or fitness "
+     "for a particular purpose, and assumes no responsibility for anyone's use "
+     "of the information. SFMTA's license, under which this site is the "
+     "Licensee, also asks for this disclaimer to be displayed: “The "
+     "Licensee agrees that the SFMTA and its employees, officers, directors and "
+     "agents shall not be liable for damages of any kind arising from the use "
+     "of Data or any application that uses the Data including but not limited "
+     "to direct, indirect, incidental, punitive and consequential, and or "
+     "special damages.”",
      True, ("San Francisco",)),
     Notice(4, "LA Metro",
      "Rail alignment data for Los Angeles provided by LA Metro. This project "
      "claims no ownership of that data.",
      False, ("Los Angeles",), every_page=True),
+    # New York City (notice 5): Local Law 11 forbids a licence, but the Open
+    # Data Technical Standards Manual reserves DoITT's right to require the
+    # SOURCE, VERSION and MODIFICATIONS of a republished data set. Until
+    # 2026-10-03 the reference pages were read as meeting it and nothing
+    # displayed it; check C now holds every numbered notice to a display, so
+    # the three are stated here, on the city's page. Not verbatim: the manual
+    # prescribes the content, not a sentence.
+    Notice(5, "New York City",
+     "Source: NYC Open Data, the Department of Health and Mental Hygiene's "
+     "Restaurant Inspection Results (43nn-pn8j), the Department of Consumer "
+     "and Worker Protection's Issued Licenses (w7w3-xahh) and the Borough "
+     "Boundaries (gthc-hcne). Version: as downloaded on September 21, 2026. "
+     "Modifications: the inspection history is reduced to one row per "
+     "restaurant and the licenses to active premises licenses; the businesses "
+     "are filtered to storefront categories, grouped into three categories of "
+     "this project's own and measured by distance from subway stations, and a "
+     "business found in two registers is counted once.",
+     False, ("New York",)),
     Notice(7, "MassDOT / MBTA",
      "Rail alignment data for Boston provided by MassDOT/MBTA.",
      False, ("Boston",)),
@@ -906,12 +1031,26 @@ _NOTICES = [
      "Anyang, and those cities' boundaries, the train and metro routes of Sydney and "
      "Melbourne and their City boundaries, Buenos Aires's Subte and Premetro routes and "
      "its boundary, Seattle's Link 1 and 2 Lines, "
-     "the routes of Taichung's Green Line and Taoyuan's Airport MRT, and the "
+     "the lines and stations of London's Underground, DLR, Elizabeth line and "
+     "Overground, the Glasgow Subway, the Tyne and Wear Metro, Manchester "
+     "Metrolink, West Midlands Metro, Edinburgh Trams, Sheffield Supertram, "
+     "Nottingham Express Transit and the Blackpool Tramway, and the boundaries "
+     "used to select them, Stockholm's Tunnelbana lines and stations and its "
+     "kommun boundaries, Bucharest's metro lines and stations and its city and "
+     "sector boundaries, the Tbilisi Metro's lines and stations and the city's "
+     "boundary, the tram and métro line geometry of Montpellier, Strasbourg, "
+     "Le Havre, Caen and Rouen, the location of Philadelphia's 11th Street "
+     "station, which is closed for works and not drawn, "
+     "the routes of Taichung's Green Line and Taoyuan's Airport MRT, the "
+     "English station names, though not the lines or boundaries, of Kobe, "
+     "Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, "
+     "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
+     "Hakodate, Kagoshima, Okayama and Kōchi, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
-     False, _OSM_RAIL),
+     False, (*_OSM_RAIL, *_OSM_STATION_NAMES)),
     # Barcelona's terms prescribe the source wording AND require modifications
     # to be identified at distribution - the disclosure-of-transformation
     # family for the fourth time, after Montreal, INEGI and Madrid. A credit
@@ -2326,6 +2465,66 @@ _NOTICES = [
      "Business Register, retrieved 2026-10-02; processed by this project. Not "
      "endorsed by Geostat.",
      False, ("Tbilisi",)),
+    # Notices 137-140, from staging's licence reads of 2026-10-02
+    # (docs/licence_positions.md, its update section). D.C.'s two ArcGIS items
+    # carry CC BY 4.0 over the District's CC0 default: credit, licence link,
+    # a link to the material, and the changes (s.3(a)). The boundary is
+    # reprojected and used to select, never drawn.
+    Notice(137, "DLCP and OCTO (Washington D.C.)",
+     "Business locations for Washington D.C. are from the Department of "
+     "Licensing and Consumer Protection's [Basic Business Licenses]"
+     "(https://www.arcgis.com/home/item.html?id=85bf98d3915f412c8a4de706f2d13513), "
+     "and the District's boundary from the Office of the Chief Technology "
+     "Officer (DC GIS), [Washington DC Administrative Boundary]"
+     "(https://www.arcgis.com/home/item.html?id=7241f6d500b44288ad983f0942b39663), "
+     "both used under the [Creative Commons Attribution 4.0 International "
+     "license](https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: the licenses are filtered to storefront categories, grouped into "
+     "three categories of this project's own and measured by distance from "
+     "Metrorail stations, and the boundary is reprojected and used to select "
+     "them, not drawn. Neither office endorses this project.",
+     False, ("Washington D.C.",)),
+    # Dublin's rail: the NTA's national GTFS, CC BY 4.0 with a prescribed
+    # sentence (first, VERBATIM). The developer portal's Fair Usage Policy,
+    # with its uncapped indemnity, is NOT accepted (owner, 2026-10-02: "plain
+    # CC BY for dublin"); this credit still meets that Policy's s.7. Linked to
+    # data.gov.ie, not nationaltransport.ie (that site's terms, clause 5, on
+    # linking).
+    Notice(138, "National Transport Authority (Dublin)",
+     "This data is licensed under CC BY 4.0 and is attributed to the National "
+     "Transport Authority. Luas and DART lines and stations for Dublin are from "
+     "the NTA's [national GTFS feed](https://data.gov.ie/dataset/nta-gtfs), used "
+     "under the [Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: three routes (Luas Red, Luas Green and DART) are extracted and "
+     "redrawn, and the line colors are this map's own. It is provided “as "
+     "is”. The National Transport Authority does not endorse this project.",
+     False, ("Dublin",)),
+    # geo.api.gouv.fr declares no licence; its source dataset ("Contours
+    # administratifs", data.gouv 683424e996857155175d4f68) says ODbL, and IGN's
+    # ADMIN EXPRESS, which it is built from, says Licence Ouverte. Owner,
+    # 2026-10-02: show both, the ODbL s.4.3 notice and the Licence Ouverte
+    # source-and-date line. ODbL s.4.6 rests on the repository link. The
+    # dataset's last update is from its data.gouv record (read 2026-10-03).
+    Notice(139, "geo.api.gouv.fr, Contours administratifs and IGN (France)",
+     "Commune boundaries for the French cities on this site are from "
+     "geo.api.gouv.fr. Contains information from Contours administratifs "
+     "(data.gouv.fr), which is made available here under the [Open Database "
+     "License (ODbL)](https://opendatacommons.org/licenses/odbl/1-0/). Source: "
+     "IGN, ADMIN EXPRESS, under the [Licence Ouverte]"
+     "(https://www.etalab.gouv.fr/licence-ouverte-open-licence/), as published "
+     "in Contours administratifs, last updated May 5, 2025. The boundaries are "
+     "used to select each city's stations and businesses and to name the "
+     "commune of a station left out; they are not drawn.",
+     False, _FRANCE),
+    # MassGIS: public records, "can be used by anyone for any purpose"; a
+    # credit is requested, not required, and is shown in the words MassGIS's
+    # FAQ gives (read 2026-10-03), the office name as published.
+    Notice(140, "MassGIS (Boston)",
+     "Boston's boundary, and the town each station outside the city lies in, "
+     "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
+     "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
+     False, ("Boston",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

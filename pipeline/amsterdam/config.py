@@ -107,8 +107,11 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # OWNER'S CALL 2026-09-24: METRO AND TRAM. GVB's metro 50-54 and its 16 tram
 # lines. The standing test leaves out trams that run over a metro (Milan,
 # Prague), but Amsterdam's metro barely enters the canal ring, and Oslo's
-# trams were kept on the same ground. Tram 3 is on GVB's 31 August map but
-# runs no trip in the feed's window (to 2026-12-12), so it is not drawn. The
+# trams were kept on the same ground. Tram 3 runs no trip in the feed's window
+# (to 2026-12-12) and is not drawn: GVB discontinued it on 29 March 2026, with
+# 12 and 25 replacing it (mobiliteit.nl, 2026-03-26, read 2026-10-03; GVB's
+# own pages answer 403). The build read it as a pause from GVB's 31 August
+# map, which was not re-checked. The
 # heritage museum tram (EMA, OSM's "20") is not GVB's. NS trains are commuter
 # rail, out as everywhere; ferries are out.
 ROUTE_TYPES_RAIL = ("0", "1")        # basic GTFS: tram, metro

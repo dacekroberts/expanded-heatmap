@@ -96,6 +96,17 @@ def main():
     q["station_id"] = parent.where(parent.notna() & (parent != ""),
                                    pd.Series(q.index, index=q.index))
 
+    # Closed for works (config.CLOSED_FOR_WORKS_STOP_PLACES): stop once the
+    # feed serves any of them again, so the closure is a re-run, not a surprise.
+    reopened = sorted(set(q["station_id"]) & set(config.CLOSED_FOR_WORKS_STOP_PLACES))
+    if reopened:
+        names = [config.CLOSED_FOR_WORKS_STOP_PLACES[s] for s in reopened]
+        sys.exit(f"the feed serves {names} again - tram 13 west of Thune was closed "
+                 f"for works. Take them out of config.CLOSED_FOR_WORKS_STOP_PLACES, "
+                 f"re-run, and update the page's tram 13 sentence.")
+    print(f"\n  closed for works, not served by the feed: "
+          f"{', '.join(config.CLOSED_FOR_WORKS_STOP_PLACES.values())} (tram 13)")
+
     link = (st.merge(q.reset_index()[["stop_id", "station_id", "stop_name"]], on="stop_id")
               .merge(trips, on="trip_id"))
     link["line"] = link["route_id"].map(short_of)

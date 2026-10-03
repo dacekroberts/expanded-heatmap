@@ -407,7 +407,7 @@ vendors and a market vendor (3), and 3 with no category at all (a park board
 and two restaurants by name, left out rather than guessed).
 
 **Excluded by name** - 161 facilities inside the kept types that are not
-storefronts (each is listed in `outputs/minneapolis/excluded_premises.csv`):
+storefronts:
 institutional kitchens (57:
 contract caterers' workplace cafés - Sodexo, Aramark, Compass and Eurest -
 hospital, school, church and campus dining, event caterers with no counter,
@@ -454,7 +454,7 @@ processors and warehouses (103), boarding, personal-care and nursing homes
 banquet halls (25), temporary events (19) and a pool snack bar.
 
 **Excluded by name** - 393 facilities inside the kept types that are not
-storefronts (each is listed in `outputs/pittsburgh/excluded_premises.csv`):
+storefronts:
 254 stands and outlets of
 venues (Acrisure Stadium, PNC Park, PPG Paints Arena, Highmark Stadium, the
 Petersen Events Center, the convention center, Stage AE, Rivers Casino, the
@@ -818,6 +818,10 @@ Exempt 440, Cooperative Association 176); **wholesale** (NAICS 42); and
 **individual rather than premises licenses** (Motor Vehicle Salesperson 263,
 Auctioneer 15, Tour Guide 3 — a license attached to a person, not a shopfront).
 `Funeral Establishment` (29) is excluded, as funeral services are everywhere.
+`Beauty Booth` (6), a chair rented inside a salon, is excluded too: it is a
+license for the person who works there, not for the premises, the same call
+made on chair renters' and practitioners' own licenses in New York, Calgary,
+Edmonton and San Francisco.
 Pawnbrokers count as retail (4).
 
 **One category is kept despite being ambiguous, and it is a large one.**
@@ -1220,8 +1224,7 @@ services). **61 premises are newer than the tables** and have no type yet;
 they stay on the map as restaurants and bars (47) or personal services (14),
 by the owner's call (2026-09-30).
 
-**Excluded by category and type** (the register's own), each listed with its
-rule in `outputs/kitchener_waterloo/excluded_premises.csv`:
+**Excluded by category and type** (the register's own):
 - 297 in the Institutional, Mobile Vendor and Processing Plant categories:
   childcare, before- and after-school programs, nourishment programs,
   retirement, group and long-term-care homes, hospitals, mobile preparation
@@ -1851,7 +1854,9 @@ withheld.
 
 **Twelve T-bane stations are excluded for being in Bærum**, on the western
 branches of lines 2, 3 and 5, and are listed with their municipality on Oslo's
-page. **Ferries are not drawn**, as in
+page. **Tram 13 west of Thune is closed for rebuilding**, replaced by buses
+since June 10, 2026, until about February 2027, so its stops from Hoff to
+Lilleaker are not drawn. **Ferries are not drawn**, as in
 Marseille.
 
 ### Aarhus - Copenhagen's register and rules, and a city tramway without its railways
@@ -2105,8 +2110,8 @@ be identified or removed.
 **Stations.** GVB's metro lines 50 to 54 and sixteen tram lines are drawn. 22
 stops outside the municipality are left out - 12 in Amstelveen, 5 in Diemen, 3
 in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
-half mile. Tram 3, which is not running, the museum tram, ferries and NS trains
-are not drawn.
+half mile. Tram 3, which GVB discontinued on March 29, 2026, the museum tram,
+ferries and NS trains are not drawn.
 
 ### Rome - a register of premises with no names and no closing dates
 
@@ -3553,8 +3558,10 @@ rows (6.9%) have a trade name that reads as a factory; they are kept (owner,
 
 **One pin per premises** - 401 repeat permits are shown once.
 
-**Not placed** - 16 rows (0.2%). Another 2 sit at their town's center, and 597 at the
-ministry's own coordinates.
+**Not placed** - 16 rows (0.2%), 13 of them national filings that carry only
+the ministry's stand-in point, one point given to filings in 13 different
+towns. Another 2 sit at their town's center, and 597 at the ministry's own
+coordinates.
 
 **Names not shown** - none: the national filings do not say who the operator
 is, so the name rule cannot run here (owner, 2026-10-02).
@@ -3722,11 +3729,10 @@ restaurants, music bars and nightclubs - and publishes the register on the
 Govern de les Illes Balears's catalog. No open register of other shops or
 of personal services covers Palma, so clothes shops, hairdressers and the like
 are missing rather than excluded. Nightclubs, party halls and dance halls are
-kept, as food service (R5). A premises is shown when the register lists it as
 kept, as food service. A premises is shown when the register lists it as
+active in Palma (4,372 of 4,375; 3 are temporarily closed).
 
-**Excluded by type and by name**, each listed with its rule in
-`outputs/palma/excluded_premises.csv`:
+**Excluded by type and by name**:
 - 9 caterers, the register's own "Catering" type (no counter of their own).
 - 35 recreation venues, clubs and gaming: sports, tennis, padel, riding, golf
   and nautical clubs (their restaurants included), a sports center and a pool
@@ -4244,8 +4250,7 @@ when it was inspected in the two years before the data's date (2026-09-29):
 5,747 of 12,961 premises. The rest were last inspected earlier, most of them
 presumably closed.
 
-**Excluded by name** (owner, 2026-09-29), 829 premises, each listed with its
-rule in `outputs/ottawa/excluded_premises.csv`:
+**Excluded by name** (owner, 2026-09-29), 829 premises:
 - 597 institutional kitchens: schools and écoles, daycares and garderies,
   hospital patient kitchens and cafeterias, retirement and long-term-care
   homes, churches and parishes, community centers, workplace cafeterias and
@@ -4560,15 +4565,17 @@ since each business carries one main activity.
 address, so a chain with several shops appears once.
 
 **Left off because they could not be placed** - 1,620 storefronts with no
-coordinate, and 1,481 on eleven points that are the center of a district or
+coordinate, and 1,522 on thirteen points that are the center of a district or
 settlement rather than an address (a point shared by 50 or more businesses
-whose commonest address is a bare district or settlement name, or blank).
+whose commonest address, given by at least five of them, is a bare district
+or settlement name, or blank; and one in Krtsanisi where the businesses give
+many different addresses).
 Four of those points sit within 115 m of a metro station (Didube, Isani,
 Samgori and Liberty Square), where they would have inflated the innermost
 rings. 3 more have a coordinate outside the city.
 
 **Shown, but not named** - a business registered to a person (an individual
-entrepreneur, 8,328 of the storefronts shown) shows its category instead of a
+entrepreneur, 8,301 of the storefronts shown) shows its category instead of a
 name.
 
 **All 23 metro stations are inside the city**; nothing is drawn beyond the

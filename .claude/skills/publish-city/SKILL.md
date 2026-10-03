@@ -214,4 +214,7 @@ process that never restarted.
 - [ ] Reboot question computed from **the whole push's `app/` diff**
 - [ ] Pushed to master; owner told plainly whether a reboot is required
 - [ ] Live URL verified, **including one city not touched**
+- [ ] `python scripts/downstream_changes.py <old master> <pushed>` run, and its
+  output sent to the Visuals and Analytics sessions unless it says "nothing
+  downstream" (`docs/session_roles.md`, "Downstream sessions")
 - [ ] `DECISIONS.md` and `PLAN.md` updated; publisher obligations carried forward

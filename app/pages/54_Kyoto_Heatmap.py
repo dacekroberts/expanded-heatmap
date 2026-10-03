@@ -51,8 +51,9 @@ st.markdown(
   Line; the Randen's Arashiyama and Kitano lines; and Eiden's Eizan and Kurama lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
-- Only stations inside Kyoto City get rings, because the business data covers the city alone:
-  lines running on to Ōtsu, Uji, Mukō, Nagaokakyō and Yawata are cut at the city line.
+- Only stations inside Kyoto City get rings, because the business data covers the city alone: lines
+  running on to Ōtsu, Uji, Mukō, Nagaokakyō and Yawata are cut at the city line. The stations left
+  out are listed below.
 - The Sagano Scenic Railway and the Eizan and Kurama cable cars, which are sightseeing lines, are
   not drawn.
 

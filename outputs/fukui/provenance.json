@@ -6,7 +6,7 @@
     "file": "01riyou_202608.xlsx",
     "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
     "retrieved": "2026-10-02T19:23:30+00:00",
-    "rows": 3257,
+    "rows": 268,
     "sha256": "4d804758fde95a45dec1d6b71e4fc9ef56c2a88ae7fffa8f79dd3aa50aaf9ca1",
     "url": "https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518_d/fil/01riyou_202608.xlsx"
   },
@@ -17,7 +17,7 @@
     "file": "02biyou_202608.xlsx",
     "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
     "retrieved": "2026-10-02T19:23:33+00:00",
-    "rows": 9432,
+    "rows": 788,
     "sha256": "8ea956172e2a05f570aece8adbb292223ae7b878129d73e930776e823e520730",
     "url": "https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518_d/fil/02biyou_202608.xlsx"
   },
@@ -28,7 +28,7 @@
     "file": "11syokuhin_202608.xlsx",
     "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
     "retrieved": "2026-10-02T19:23:25+00:00",
-    "rows": 52021,
+    "rows": 4333,
     "sha256": "b40ecdd2ca85709d1ddd1a1fd2b1f62508d31b04a2f590b2456d495d0df42fdd",
     "url": "https://www.city.fukui.lg.jp/fukusi/eisei/syokuhin/p070519_d/fil/11syokuhin_202608.xlsx"
   },
@@ -39,7 +39,7 @@
     "file": "03cleaning_202608.xlsx",
     "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
     "retrieved": "2026-10-02T19:23:35+00:00",
-    "rows": 3058,
+    "rows": 253,
     "sha256": "a1a54e5f477083c9e1fe769c4c1317f9c474b1730ddb6bb5c879090f770d2164",
     "url": "https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518_d/fil/03cleaning_202608.xlsx"
   },

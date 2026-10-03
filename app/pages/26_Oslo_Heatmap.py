@@ -82,6 +82,8 @@ st.markdown(
   so they stay distinct from each other and from the business dots.
 - Tram 15 runs most of line 12's route while the Briskeby line is closed for rebuilding. It has no
   published color of its own, so the map gives it one.
+- **Tram 13 west of Thune is closed for rebuilding** until about February 2027, so its stops to
+  Lilleaker are not drawn.
 - Ferries are not drawn.
 - The map covers the **municipality of Oslo**. The T-bane's western branches run on into Bærum,
   so twelve of their stations, out to Kolsås and Østerås, are drawn on the line but get no ring,

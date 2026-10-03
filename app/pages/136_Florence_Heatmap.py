@@ -83,13 +83,13 @@ st.markdown(
 - Several premises often share one building, and each is counted.
 - Private clubs, staff shops, online and vending sellers, caterers and restaurants inside hotels
   are left out.
+- **About three storefronts in eight sit within a ring.**
 
 **Reading the density**
 
 - **Read the density as a register, not a street survey.** The food register includes premises
   the regional law exempts from the Comune's requirements, and some of them are not open to the
   public; the register does not say which, so they remain.
-- **About three storefronts in eight sit within a ring.**
 """
 )
 
