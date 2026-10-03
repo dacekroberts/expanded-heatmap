@@ -67,6 +67,31 @@ commits, queries Overpass or edits a shared file.
    the extension's, then re-record the baseline, as the built-city rescopes
    did.
 
+## Visuals and analytics: what a build owes them (staging, 2026-10-02)
+
+The visuals session is drafting presentation pieces on `visual-handoff`, not
+yet on master: city cards, a title card, explainers. They are generated from
+published files, so a city feeds them with nothing extra, as long as the
+build keeps three things true:
+1. **Native-script names stay in config.** The cards read each city's own
+   name from its config: `MUNICIPALITY` (Japan), `BOUNDARY_NAME` (Korea),
+   `CITY_NAME_ZH` (Taiwan). Keep the field the city's country uses; do not
+   drop it as unused.
+2. **Ring shares and bucket counts come from the gates.** Every card checks
+   its pins against `app/ring_shares.json` and its layer counts against the
+   bucket counts, so gate 9's ring shares must be recorded for the city.
+3. **Every notice is registered where the page lists it.** Card credits are
+   built from the per-page notice plan (`city_notices()`, on Cleanup's
+   prose-pass branch, landing at review time). Register each new notice the
+   same way as the city's other notices, so the card picks it up once both
+   land.
+
+**No analysis on any page.** AI-driven deep analysis is now permitted, but
+it is private to the owner and always carries an AI-generated
+acknowledgement. The rule is on `visual-handoff`, coming to `CLAUDE.md`. It
+never goes on a city page, `outputs/` or any deployed file, so a build writes
+none.
+
 ## Numbers
 
 - **Pages:** none new. The four keep their pages.

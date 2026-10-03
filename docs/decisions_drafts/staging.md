@@ -4,6 +4,22 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Both new kits gain a "Visuals and analytics" section (owner)
+
+- **The owner asked whether the briefs reflected the analytics and visuals
+  work.** Neither is on master:
+  - analytics has no commits of its own;
+  - the visuals drafts and the new private-analysis rule sit on
+    `visual-handoff`.
+- **What a build owes them** is now added to the Japan wave 2 and extensions
+  kits (owner: "yes, add it to both kits"):
+  - native-script name fields kept in config;
+  - ring shares recorded by gate 9;
+  - every notice registered in the per-page plan (`city_notices()`) so card
+    credits pick it up;
+  - no analysis on any page.
+- The two sessions merge master at setup, so they read it before building.
+
 ### 2026-10-02 - Band R stays a band but leaves the candidate count (owner)
 
 - **The owner: "Band R doesn't exactly qualify as candidacy. I think we
