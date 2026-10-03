@@ -4,6 +4,29 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Arlington left out of Washington D.C., to Band R as Richmond was (owner)
+
+- **The licence read (2026-10-02): not permitted as it stands.**
+  - Arlington County's "Active Business Licenses" (data.arlingtonva.us
+    dataset 30) carry no licence.
+  - The only terms the portal links, the County website's Terms &
+    Conditions, allow "non commercial, personal use only" and forbid
+    reposting or derivative works "without the written permission in each
+    instance".
+  - The 2016 Open Data Public Use Notice granted share-and-adapt for any
+    purpose. It has redirected to the A-Z index since the 2023 relaunch,
+    while the portal's guide still cites it.
+  - The GIS hub's address points are SILENT on reuse and assert copyright.
+- **The owner: "leave arlington out for now, like richmond".** Richmond (BC)
+  went to R on 2026-10-01 on site terms of "research and private use only".
+  Arlington joins Band R as D.C.'s add-on.
+  - Its way through is a written question to the County, which is the
+    owner's to send; nothing is drafted.
+  - Candidates are now R 25.
+- **The extensions now ready to build together:** Rio + Duque de Caxias,
+  Belo Horizonte + Contagem and Los Angeles + Long Beach. Vancouver
+  (Regional) waits on the Burnaby probe.
+
 ### 2026-10-02 - The UK six built on their branch; brief corrections received; numbers ledger
 
 - **The UK lead reports all six built on `uk-six-build`,** pushed and held
