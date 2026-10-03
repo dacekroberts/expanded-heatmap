@@ -44,7 +44,11 @@ width, and re-fits when they differ.
   background tab, or an embed below the fold, is covered too.
 - **It stops for good at the first pointer, wheel, touch or key event** inside
   the map. A guard that restored the view under a reader's hand would be a new
-  bug. Never weaken this.
+  bug. Never weaken this. The one exception (owner, 2026-10-02) is a touch
+  that cannot move the map: on a touch screen one-finger dragging is off
+  (`TOUCH_GESTURE_SCRIPT`), so a single finger only scrolls the page and
+  `steering()` lets the guard keep running; two fingers, or a tap (which
+  sends mousedown and click), still stop it.
 - **`PAD` is shared by `apply()` and the guard.** If the two paddings drifted
   apart, the guard would "correct" a right view on every tick.
 - It exposes `window.__HEATMAP_VIEW` - the inputs (home view, bounds, padding,

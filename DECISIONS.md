@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**393 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**394 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -80,6 +80,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Touch gestures: one finger scrolls the page, two move the map](#2026-10-02---touch-gestures-one-finger-scrolls-the-page-two-move-the-map)
 - [The Overview's CARTO basemap sends the project's key on every request; its credit now links CARTO's attribution page, with OpenMapTiles](#2026-10-02---the-overviews-carto-basemap-sends-the-projects-key-on-every-request-its-credit-now-links-cartos-attribution-page-with-openmaptiles)
 - [The site notices credit OpenMapTiles and say what CARTO receives (owner approved)](#2026-10-02---the-site-notices-credit-openmaptiles-and-say-what-carto-receives-owner-approved)
+- [The map-view guard keeps running through a one-finger touch that only scrolls (owner)](#2026-10-02---the-map-view-guard-keeps-running-through-a-one-finger-touch-that-only-scrolls-owner)
 
 **2026-10-01**
 
@@ -16474,3 +16475,31 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **Landing.** Merged from `claude/nervous-elgamal-a9b70e` (87e52be1) onto the
   restructured notices: the sentence moved from `render_site_notices` into
   notice 1's `Notice(...)` in `app/components.py`.
+
+### 2026-10-02 - The map-view guard keeps running through a one-finger touch that only scrolls (owner)
+
+- **The map-view guard no longer stops for a one-finger touch that only
+  scrolls the page (owner, 2026-10-02).** With one-finger dragging off on a
+  touch screen, a single finger cannot move the map, yet PHONE_FIT_SCRIPT
+  still counted its touchstart and pointerdown as the reader steering, so a
+  reader who scrolled past a map in its first seconds switched off the
+  repair of a wrong first view. `steering()` now reads `map.dragging`: with
+  dragging off, a one-finger touchstart or a touch pointerdown leaves the
+  guard running; a second finger, and a tap (which goes on to send
+  mousedown and click, which a scroll does not, so `click` joined the
+  listened events), still stop it; with dragging on, every touch counts as
+  before. This narrows the skill's "never weaken this" rule only for a
+  touch that cannot move the map; `.claude/skills/map-view/SKILL.md` says
+  so. Measured on Edmonton, Paris and Tokyo (375 x 812, real CDP touch,
+  embedded): the guard's `touched` stayed false after a one-finger vertical
+  and a sideways swipe, and turned true after a two-finger pan, after a
+  single tap on a fresh load, and after a desktop mouse drag; after a swipe,
+  a forced zoom of 8.25 was put back to the expected zoom (11.5, 11, 9.75)
+  within 1.5 s, `corrections` 1 each. Every map re-rendered again (measured
+  peak 1.61 GB; Bucheon's write hit a transient Windows `OSError 22` between
+  Folium's save and the `lang` rewrite and was re-rendered alone), and all
+  144 differ from the previous commit only by PHONE_FIT_SCRIPT's new text
+  once ids and whitespace-only lines are normalized; 37 CJK maps converted
+  CRLF to LF again. `check_map_view.js` and `check_map_attribution.js` on the
+  same six maps, four viewports, two themes: 0 problems, 0 corrections in
+  48 loads, and the forced-on hint covered nothing in all 48.

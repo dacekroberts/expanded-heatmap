@@ -556,7 +556,8 @@ PHONE_FIT_SCRIPT = """
     // TOUCHED ends it for good. Any pointer, wheel, touch or key event inside
     // the map means the reader is steering, and a guard that restored the
     // view under them would be a new bug. Captured on the container, so the
-    // zoom buttons, the pins and the in-map controls all count.
+    // zoom buttons, the pins and the in-map controls all count. The one
+    // exception is a touch that cannot move the map: see steering() below.
     //
     // __HEATMAP_VIEW is read by scripts/check_map_view.js. It exposes the
     // INPUTS (home, bounds, padding) as well as the guard's own bookkeeping, so
@@ -591,11 +592,24 @@ PHONE_FIT_SCRIPT = """
         VIEW.actual = m.getZoom();
     }
 
+    // A touch that cannot move the map is not steering. With one-finger
+    // dragging off (TOUCH_GESTURE_SCRIPT, on a touch screen) a single finger
+    // only scrolls the page, so its touchstart and pointerdown leave the guard
+    // running; two fingers, or a tap (which goes on to send mousedown and
+    // click, a scroll sends neither), still end it. With dragging on, every
+    // touch counts, as before.
+    function steering(m, e) {
+        if (e.type === "touchstart") return e.touches.length > 1 || m.dragging.enabled();
+        if (e.type === "pointerdown" && e.pointerType === "touch") return m.dragging.enabled();
+        return true;
+    }
+
     function armGuard(m) {
         var el = m.getContainer();
-        ["pointerdown", "mousedown", "touchstart", "wheel", "keydown"].forEach(
+        ["pointerdown", "mousedown", "click", "touchstart", "wheel", "keydown"].forEach(
             function (ev) {
-                el.addEventListener(ev, function () {
+                el.addEventListener(ev, function (e) {
+                    if (!steering(m, e)) return;
                     TOUCHED = true;
                     VIEW.touched = true;
                 }, {capture: true, passive: true});
@@ -1522,9 +1536,10 @@ LINE_HIGHLIGHT_SCRIPT = """
 # the frame barely changes. The text is set on each showing, into a polite
 # live region, and cleared once it has faded.
 #
-# PHONE_FIT_SCRIPT's guard still ends on a touch's pointerdown, including a
-# swipe that only scrolls the page; the load race it repairs resolves within
-# the first seconds (see its notes).
+# PHONE_FIT_SCRIPT's guard reads map.dragging to tell a scroll from steering:
+# a one-finger swipe that only scrolls the page leaves it running, so a
+# reader who scrolls past a map early does not switch off the repair of a
+# wrong first view (see steering() there).
 _TOUCH_GESTURE_TEMPLATE = """
 <style>
 .hm-touch-hint { position: absolute; left: 50%; top: 50%; z-index: 900;
