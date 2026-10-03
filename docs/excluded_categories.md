@@ -518,8 +518,8 @@ those cities publishes them.
 
 **Left out of Seattle's register**: 988 licenses whose location lies outside
 the city although the address reads Seattle, most in unincorporated King County
-and Burien; a restaurant license not renewed for 2026 (174) unless King County
-inspected a matching business in 2025 or 2026; one headquarters on an upper
+and Burien; a restaurant license not renewed for 2026 (331) unless King County
+inspected a business of the same name in 2025 or 2026; one headquarters on an upper
 floor, as an office. Licenses for shops and services not renewed for 2026 are
 kept (992 retail, 435 personal services), so some shown may have closed.
 
@@ -532,7 +532,7 @@ before 2025; mobile food units, school kitchens, caterers, nonprofit
 institutions, commissary kitchens and donated-food distributors, which have no
 counter of their own; bed and breakfasts. Left out by name: staff cafeterias at
 workplaces (Microsoft, Amazon, Google, Meta, Boeing and others) and contract
-caterers (499), hotel kitchens (145), vending routes (62), members' clubs,
+caterers (499), hotel kitchens (146), vending routes (62), members' clubs,
 theaters and airline lounges (36), and pharmacies (9). 107 businesses whose
 parcel has no address point are not placed.
 
