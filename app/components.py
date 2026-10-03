@@ -494,7 +494,11 @@ _OSM_RAIL = (
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
-    "Buenos Aires", "Seattle (Regional)",
+    "Buenos Aires", "Seattle (Regional)", "London", "Glasgow",
+    "Newcastle (Regional)", "Manchester (Regional)", "Birmingham (Regional)",
+    "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
+    "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
+    "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -924,6 +928,16 @@ _NOTICES = [
      "Anyang, and those cities' boundaries, the train and metro routes of Sydney and "
      "Melbourne and their City boundaries, Buenos Aires's Subte and Premetro routes and "
      "its boundary, Seattle's Link 1 and 2 Lines, "
+     "the lines and stations of London's Underground, DLR, Elizabeth line and "
+     "Overground, the Glasgow Subway, the Tyne and Wear Metro, Manchester "
+     "Metrolink, West Midlands Metro, Edinburgh Trams, Sheffield Supertram, "
+     "Nottingham Express Transit and the Blackpool Tramway, and the boundaries "
+     "used to select them, Stockholm's Tunnelbana lines and stations and its "
+     "kommun boundaries, Bucharest's metro lines and stations and its city and "
+     "sector boundaries, the Tbilisi Metro's lines and stations and the city's "
+     "boundary, the tram and métro line geometry of Montpellier, Strasbourg, "
+     "Le Havre, Caen and Rouen, the location of Philadelphia's 11th Street "
+     "station, which is closed for works and not drawn, "
      "the routes of Taichung's Green Line and Taoyuan's Airport MRT, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
