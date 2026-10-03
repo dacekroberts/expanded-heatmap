@@ -4653,7 +4653,7 @@ are honored, not argued".
 grant nor forbid reuse, and this site reads them in its favor: Philadelphia,
 whose data carries a City license that grants nothing and website terms that
 forbid republication (the City was asked for its position on 21 September 2026
-and has not replied); Miami, Tucson, Dallas, Seattle (King County, Bellevue
+and has not replied); Los Angeles, Miami, Tucson, Dallas, Seattle (King County, Bellevue
 and Snohomish County), Amsterdam, Den Haag, Stockholm, Bucharest and Daegu,
 whose sources carry no license, or terms written for a website rather than its
 data; and Brazil's census addresses, which rest on federal law rather than a

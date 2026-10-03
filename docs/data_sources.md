@@ -267,7 +267,7 @@ publisher *asks* for its data to stop being displayed; this one covers the
 sources that neither grant nor forbid reuse, which this project reads in its
 favor: Philadelphia, whose data carries a City license that grants nothing and
 website terms that forbid republication (the City was asked for its position
-on 21 September 2026 and has not replied); Miami, Tucson, Dallas, Seattle
+on 21 September 2026 and has not replied); Los Angeles, Miami, Tucson, Dallas, Seattle
 (King County, Bellevue and Snohomish County), Amsterdam, Den Haag, Stockholm,
 Bucharest and Daegu, whose sources carry no license, or terms written for a
 website rather than its data; and Brazil's census addresses, which rest on
@@ -528,6 +528,21 @@ derivative works to include:
 provider of the transit information and must not claim ownership of it. No
 exact wording is prescribed; "Rail alignment data provided by LA Metro" would
 meet the stated requirement.
+
+- **Where it must appear is unknown** (read 2026-10-02). §2.1(h) requires the
+  acknowledgement "as set forth in the Web Services Developer Guidelines",
+  which the terms incorporate by reference but no version links. The only URL
+  ever given (2009, `www.metro.net/developer/docs/`) was never archived. So
+  this notice stays on every page.
+- **metro.net's own site terms reach the developer subdomain by name**
+  (`www.metro.net/about/copyright/`, modified 2026-05-12): "Any other use,
+  including reproduction, modification, distribution, transmission,
+  republication or display is strictly prohibited", covering "database or
+  application content". The developer terms expressly allow displaying the
+  feeds, and the feed itself is served from gitlab.com, not a metro.net host.
+  Both apply on their face, the shape of Philadelphia's question, so Los
+  Angeles is named in the footer's list of permissive readings (owner,
+  2026-10-02).
 
 **These three were marked NOT YET DISPLAYED until 2026-09-22, and all three
 were displayed.** `app/components.py`'s `_NOTICES` carries Chicago, SFMTA and
