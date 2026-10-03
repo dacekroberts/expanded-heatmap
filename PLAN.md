@@ -460,10 +460,10 @@ Desktop is unaffected — the label is fully visible there.
   columns, and the name fields are inverted on some rows (blank `businessname`
   with the trade name sitting in `ownername`) - Boston's trap again.
 - [x] **Seattle (Regional) BUILT 2026-10-02** on `seattle-tbilisi-build`
-  (`pages/174_Seattle_Heatmap.py`; 14,500 storefronts, 39 stations in 11
-  cities, five publishers), held for the owner's review time. Two owner
-  questions open in `docs/decisions_drafts/seattle-tbilisi.md` (street-only
-  matches for lapsed Seattle food; Snohomish rows with a blank jurisdiction).
+  (`pages/174_Seattle_Heatmap.py`; 14,431 storefronts, 39 stations in 11
+  cities, five publishers), held for the owner's review time. The two owner
+  questions answered 2026-10-02 (lapsed Seattle food on a trade-name match
+  only; Snohomish rows with a blank jurisdiction placed by their point).
   The history below is kept.
 - [x] **Tbilisi BUILT 2026-10-02** on `seattle-tbilisi-build`
   (`pages/175_Tbilisi_Heatmap.py`; 13,252 storefronts, 23 stations; Georgia's

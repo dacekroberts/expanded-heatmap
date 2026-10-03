@@ -89,7 +89,7 @@ st.markdown(
   streets.
 - Seattle licenses fall due each December 31, and a license not yet renewed is kept, so some
   shops shown may have closed. A lapsed restaurant license is kept only if King County
-  inspected a matching business in 2025 or 2026.
+  inspected a business of the same name in 2025 or 2026.
 - Bellevue's licenses never expire, so its shops and services are shown only from licenses
   issued since 2010. Bellevue's restaurants come from King County's inspections.
 - Snohomish County's list dates from 2025 and may not be current.

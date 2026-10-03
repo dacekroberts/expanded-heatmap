@@ -4,6 +4,36 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Seattle (Regional): the owner's two calls applied, 14,431 storefronts; both builds' wording and modes approved
+
+- **The owner's calls on Seattle (2026-10-02, relayed by the Cleanup
+  session), both as recommended:**
+  1. **Lapsed Seattle food is kept only on a TRADE-NAME match** with a King
+     County business inspected in 2025 or 2026, never on a street match
+     alone. Lapsed food dropped: 331 (2023 60, 2024 102, 2025 169), of them
+     the 157 a street match alone had kept.
+  2. **The 32 Snohomish facilities with a blank `User_Fld` are placed by the
+     place their point falls in**, the rule every other source here follows
+     (`sno_food.load(include_blank=True)`). Lynnwood 310 -> 329 and
+     Mountlake Terrace 57 -> 70 facilities by point-in-place.
+- **Measured, steps 2 and 3 re-run**: storefronts 14,500 -> 14,431 (map
+  14,430 after the contact-detail scrub). The Seattle register 9,349 ->
+  9,198; King County food 3,193 -> 3,245, because 59 more inspected
+  businesses in Seattle are no longer held back by a register row at their
+  address that has now dropped out (the current inspected business replaces
+  the lapsed licence); Snohomish food 352 -> 382. Food service 5,956 ->
+  5,880, Retail 6,010 -> 6,017, Personal services unchanged. In a ring:
+  5,589 -> 5,548 (38%); 2,122 / 2,545 / 881. Names shown as the category:
+  426, unchanged. Drift check run and the baseline re-recorded; ring share,
+  macro facts, the inconsistency rows, the master list, PLAN, About the Data
+  and What Is Excluded updated. The page bullet on lapsed food now reads "a
+  business of the same name" for "a matching business", to state the rule.
+- **Approved by the owner (2026-10-02, relayed by the Cleanup session)**:
+  Seattle (Regional)'s mode `light_rail`, coverage `narrowed`, notices 109
+  to 113 and the page bullets; Tbilisi's notice 114, page caption and
+  bullets, and its What Is Excluded and About the Data sections. The
+  proposals flagged above are settled.
+
 ### 2026-10-02 - Tbilisi privacy verdict: publish
 
 - **`check_personal_exposure.py tbilisi` gained a Georgian pass**

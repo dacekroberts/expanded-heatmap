@@ -18,7 +18,7 @@ What a reader should know before trusting the counts printed below:
     and King County food's `city` is the postal city.
   * **Seattle: every licence year kept** (owner, 2026-10-02). A lapsed FOOD
     row (licence year 2025 or earlier) stays only if King County inspected a
-    matching business in 2025 or 2026, by trade name or street address.
+    matching business in 2025 or 2026, by trade name only (owner, 2026-10-02).
     Lapsed retail and personal rows stay, disclosed as possibly closed.
   * **Seattle: HEADER QUARTER and BRANCH both kept, and the head-office rule
     applied** to HEADER QUARTER rows (owner, 2026-10-02; Taipei's rule).
@@ -246,7 +246,7 @@ def load_seattle(places, kc_current):
     f = f[~drop]
 
     # Lapsed food: kept only where King County inspected a matching business in
-    # 2025 or 2026 inside Seattle, by trade name or street address.
+    # 2025 or 2026 inside Seattle, by trade name.
     kc = kc_current[kc_current["municipality"] == SEATTLE]
     kc_names = set(kc["business_name"].map(norm_name)) - {""}
     kc_streets = set(kc["address"].map(base_key)) - {""}
@@ -260,15 +260,18 @@ def load_seattle(places, kc_current):
         n = int(m.sum())
         print(f"    {int(y)}  {n:>5}  {int((m & by_name).sum()):>5}  "
               f"{int((m & by_street).sum()):>5}  {int((m & (by_name | by_street)).sum()):>5}")
-    drop = food & lapsed & ~(by_name | by_street)
+    # A TRADE-NAME match only (owner, 2026-10-02): a street match alone mostly
+    # kept a closed predecessor (a 20-row hand sample: about 7 a different
+    # business at the address, about 5 the same one). The street column above
+    # stays, so the change is visible.
+    drop = food & lapsed & ~by_name
     for y in sorted(f.loc[drop, "_year"].unique()):
         n = int((drop & (f["_year"] == y)).sum())
-        print(f"    lapsed {int(y)} food rows with no inspected match, dropped: {n}")
+        print(f"    lapsed {int(y)} food rows with no inspected name match, dropped: {n}")
         emit(f"seattle_lapsed_food_dropped_{int(y)}", n)
-    f["_street_only"] = food & lapsed & by_street & ~by_name
-    print(f"  kept on a street match alone: {int(f['_street_only'].sum())} (hand-sampled "
-          f"2026-10-02, the drafts file)")
-    emit("seattle_lapsed_food_street_only", int(f["_street_only"].sum()))
+    street_only = int((food & lapsed & by_street & ~by_name).sum())
+    print(f"  of them, matched by street alone (kept before the owner's call): {street_only}")
+    emit("seattle_lapsed_food_street_only_dropped", street_only)
     f = f[~drop]
     for b in ("Retail", "Personal services"):
         n = int(((f["_bucket"] == b) & (f["_year"] <= 2025)).sum())
@@ -360,7 +363,9 @@ def main():
 
     print("\n=== sno_food ===")
     from pipeline.seattle import sno_food
-    sno = sno_food.load()
+    # Blank User_Fld facilities too, placed by the place their point falls in
+    # (owner, 2026-10-02): the rule every other source here follows.
+    sno = sno_food.load(include_blank=True)
     print(f"  {len(sno):,} facilities from the module")
 
     print("\n=== lcb_retail ===")

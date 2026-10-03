@@ -680,7 +680,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Washington D.C. | License register | Basic Business License | Own BUSINESSACTIVITY | 899 / 2,603 / 345 | "Delicatessen" (1,065) ambiguous, counted as Food |
 | Buffalo | 3 activity registers | City Business Licenses, NYS food stores, NYS salons | Per-source dispatch | 113 / 188 / 75 | Retail thin |
 | Sacramento | Tax register | Business Operation Tax Information | Own Business_Description | 625 / 510 / 243 | — |
-| Seattle (Regional) | 5 registers | Seattle and Bellevue licenses, King County food inspections, Snohomish County food (2025), Liquor Board off-premise list | Per-source dispatch (NAICS for the two city registers) | 2,120 / 2,585 / 881 | Personal services thin: Seattle and Bellevue only; Retail outside them is food and liquor shops |
+| Seattle (Regional) | 5 registers | Seattle and Bellevue licenses, King County food inspections, Snohomish County food (2025), Liquor Board off-premise list | Per-source dispatch (NAICS for the two city registers) | 2,122 / 2,545 / 881 | Personal services thin: Seattle and Bellevue only; Retail outside them is food and liquor shops |
 | Houston | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 1,077 / 1,052 / 94 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | Minneapolis | Food hygiene register | City of Minneapolis Food Inspections, one row per violation | Its own FacilityCategory, plus a name test | 115 / 526 / — | No Personal services; Retail = food shops only ("Grocery and food shops") |
 | Pittsburgh | Food hygiene register | Allegheny County Health Department's Geocoded Food Facilities (as of 2025), one row per facility | Its own category_cd, plus a name test | 48 / 268 / — | No Personal services; Retail = food shops only ("Food-selling shops") |
@@ -987,7 +987,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Washington D.C. | Active licences (2026-09-21) | — | 0.6 mi | Yes | 74% | Name |
 | Buffalo | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 24% | Trade name; licence type for person-named salons |
 | Sacramento | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 41% | Name; description for names that read as a person's |
-| Seattle (Regional) | Seattle licenses of every year, Bellevue's issued since 2010, food inspected 2025-2026, Snohomish food 2025, liquor list 2026-09-29 (2026-10-02) | B | 0.6 mi | Yes | 39% | Trade name; category for person-named licenses |
+| Seattle (Regional) | Seattle licenses of every year, Bellevue's issued since 2010, food inspected 2025-2026, Snohomish food 2025, liquor list 2026-09-29 (2026-10-02) | B | 0.6 mi | Yes | 38% | Trade name; category for person-named licenses |
 | Houston | Active permits (2026-09-29) | B | 0.6 mi | Yes | 7% | Name; address for a person's permit |
 | Minneapolis | Inspected within two years of 2026-09-30 (2026-09-30) | B | 0.6 mi | Yes | 36% | Trade name |
 | Pittsburgh | Active on the County's list of 2025-08-27 (2026-09-30) | B | 0.3 mi | Yes | 18% | Trade name |

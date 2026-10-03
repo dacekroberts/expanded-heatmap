@@ -28,7 +28,8 @@ What a reader should know before trusting the rows `load()` returns:
     Restaurant/Grocery facilities with a blank value lie inside the
     Lynnwood and Mountlake Terrace polygons). Left out unless
     `include_blank=True`: the owner's rule reads the field, and a blank
-    gives it nothing to read. Whether to take them is the lead's call.
+    gives it nothing to read. Step 2 takes them (owner, 2026-10-02), placed by
+    the place their point falls in, as every other source is.
   * **The name shown is `USER_Name`**, the facility's trade name.
     `USER_Program_Identifier` is a permit's department label, not a place
     name: blank on 2,524 of 3,699 permits, and 1,056 of the 1,175 filled
