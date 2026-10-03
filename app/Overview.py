@@ -38,6 +38,7 @@ from cities import (
     SWITCHER_ORDER,
 )
 from label_competition import compete
+from basemap import SECRET_NAME as BASEMAP_SECRET, carto_positron_style
 from components import (
     SITE_NAME,
     render_macro_map_theme,
@@ -548,9 +549,14 @@ if _frame_region != DEFAULT_FRAME:
         zoom=view.zoom,
     )
 
-# Carto basemap: pydeck's own default style needs a Mapbox token; Carto's
-# public styles don't. (Tile provider is still an open decision before
-# deploying - see PLAN.md.)
+# CARTO Positron basemap, with the project's CARTO key on every request
+# (app/basemap.py says why it is a data: URL). No key, no basemap: keyless
+# CARTO is outside its terms, so a checkout without the secret shows the
+# warning and the dots on a blank ground rather than falling back.
+_basemap_style = carto_positron_style()
+if _basemap_style is None:
+    st.warning(f"No basemap: the `{BASEMAP_SECRET}` secret is not set, and CARTO's "
+               "terms allow its basemap only with a key.")
 # GLOBAL'S LABELS ARE WON, NOT LISTED (owner, 2026-10-01): the cities compete
 # for space at this view's zoom - trams and minor cities out, the rest ranked
 # by mode, size and coverage, each trying its own offset and then four others -
@@ -606,8 +612,10 @@ deck = pdk.Deck(
     # with controller=True, so nothing else changes. Zoomed far out a city can
     # appear twice, once per copy, both clickable - accepted by the owner.
     views=[pdk.View(type="MapView", controller=True, repeat=True)],
-    map_provider="carto",
-    map_style="light",
+    # map_provider=None draws no basemap at all; Streamlit substitutes keyless
+    # CARTO only when a style is missing and the provider is still set.
+    map_provider="carto" if _basemap_style else None,
+    **({"map_style": _basemap_style} if _basemap_style else {}),
     # Unlike the layers above this tooltip is an HTML overlay, so CSS CAN reach
     # it: the values here are the light-mode look, and components.py overrides
     # them under `body.dark-base` so it matches the city maps' tooltips instead
