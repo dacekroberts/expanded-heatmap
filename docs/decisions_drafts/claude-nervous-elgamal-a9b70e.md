@@ -74,9 +74,10 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - on a credit missing any of the three links;
   - on `app/Overview.py` naming a CARTO style itself.
 - **Landing:** an `app/` change plus a new imported module (`app/basemap.py`),
-  so the deployed app needs a REBOOT, not "Updated app!". The public key must
-  already be in the app's Secrets as `CARTO_BASEMAP_KEY`. Without it the live
-  map shows the warning and no basemap, which is safe but visible.
+  so the deployed app needs a REBOOT, not "Updated app!". The public key is
+  in the app's Secrets as `CARTO_BASEMAP_KEY` (owner, 2026-10-02: "yes, the
+  public key is in Secrets"). Without it the live map would show the warning
+  and no basemap, which is safe but visible.
 - **For the owner (proposals, not written anywhere rendered):**
   - Privacy line (§10 makes the site the controller): "The overview map's
     basemap loads from CARTO, so your browser sends CARTO your IP address and
