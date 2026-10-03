@@ -4,6 +4,49 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Shimonoseki built, food only, from the national filings
+
+- **Shimonoseki built (page 189, notice 128): 2,972 storefronts (Food
+  service 2,030, Food shops 942) around 14 stations on 2 lines, 42.8% in a
+  ring (1,272).** MHLW's open data alone (5,039 rows; Okayama's shape),
+  joined through the shared 大字 rule: of 3,194 storefront rows, 2,814 at the
+  block (88.1%, the brief's figure), 347 at MHLW's own point
+  (`OWN_POINT_FALLBACK`; a default point refused for 29), 30 at a town
+  centroid, 3 unplaced. Out: closed 21, no address 290 (29 of 2,416 fixed
+  restaurant permits, 1.2%), not a premises 351, by rule 1,183 (129 hostess
+  venues and 58 canteens by 業態). 219 repeats shown once. Factory share 18 of
+  279 (6.5%), kept.
+- **Held calls, counts touched:** 複合型そうざい製造業 8 rows stay out; no row
+  is a deli by its 業態 alone.
+- **Privacy verdict: publish.** The Japan pass prints 0; MHLW names no
+  individual operator (Okayama's position).
+- **Economic Census control: 1.92** (2,030 / 1,056), at the top of the built
+  cities' 1.56-1.92 (the brief's estimate 1.88 on 1,986).
+- **Rail:** N02-25. JR West's 山陽線 and JR Kyushu's 山陽線 stub (下関 to 門司,
+  1 of 2) drawn as one JR Sanyo Line, one label and legend entry. The San'in
+  Line beyond 小串 left out (owner, 2026-10-02) through a `BRANCHES` walk
+  from 長門粟野 to 小串 (17 sections, 36,624 m; draw_as None); its 7 in-city
+  stations go to excluded_stations.csv with the reason "left out: the San'in
+  Line beyond Kogushi runs 11 trains a day each way on weekdays, far below
+  the 15-minute test (owner, 2026-10-02)" (7b220d40's `excluded_reason`), so
+  What Is Excluded counts them as too infrequent; 伊上 (Nagato) on the same
+  stretch is listed in the branch and written nowhere. JR West's station
+  timetables (revised 2026-10-03, JR時刻表 October 2026): beyond 小串, 11
+  trains each way on weekdays (小串 toward 長門市 11, one only to 滝部; 滝部
+  11 each way; 阿川 11 each way), 12 at weekends with the ○○のはなし rapid;
+  gaps up to 2 h 16 min. 14 stations ringed (Sanyo 5, San'in 10); 2 beyond
+  the city line (門司 through `N03_NEIGHBOR_PREFS ("40",)`, 埴生). Median gap
+  2,464 m: standard rings. 4 name overrides. Colours: Sanyo #007890
+  (Okayama's), San'in #E80010.
+- **Prose proposals for review time:** on the page, "The Sanyo Line includes
+  JR Kyushu's short stretch from Shimonoseki under the strait."; "The San'in
+  Line is drawn only as far as Kogushi. Beyond it, its 7 stations in the city
+  see 11 trains a day each way on weekdays, far below the 15-minute test, so
+  they are left out (listed below)." (the lead's instruction); "Shimonoseki
+  City publishes no list of barbers, beauty salons or laundries, so personal
+  services are not on this map."; in What Is Excluded, the "Left out as too
+  infrequent" and JR Kyushu bullets.
+
 ### 2026-10-03 - Sasebo built, MHLW's filings and the old-law list, food only
 
 - **Sasebo built (page 188, notice 127), Kitakyushu's food shape: 2,448

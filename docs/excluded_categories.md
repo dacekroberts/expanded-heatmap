@@ -4062,6 +4062,51 @@ line; the Matsuura Railway leaves the city through Saza and comes back.
 - Left out: 14 stations beyond it: 4 each in Saza and Arita (Saga), 3 in
   Hirado, 2 in Kawatana and 1 in Matsuura.
 
+### Shimonoseki - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Permits granted before June 2021 and still in force, which the national
+  filings do not hold (about 6% of the restaurants in force).
+- 290 national filings whose filers did not publish an address (29 of them
+  restaurants, one in eighty).
+- 351 food trucks, stalls, peddlers and rows licensed for the whole city
+  (市内一円), and 17 more marked temporary or mobile.
+- 659 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 208 school, hospital and staff canteens, 129 snack bars and cabarets, 96
+  vending machines, 30 premises inside hotels and inns, 27 entertainment
+  venues, 11 mail-order businesses and 6 caterers (仕出し).
+- 21 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on 2 October 2026. 18 of the
+279 bakery, confectioner and deli rows (6.5%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 219 repeat permits are shown once.
+
+**Not placed** - 3 rows (0.1%). Another 27 sit at their town's center, and 310
+at the ministry's own coordinates.
+
+**Names not shown** - none: the national filings do not say who the operator
+is, so the name rule cannot run here (owner, 2026-10-02).
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 2 stations beyond it: 1 in San-yo-Onoda and 1 in Kitakyushu
+  (Moji Ward).
+- Left out as too infrequent: the San'in Line beyond Kogushi runs 11 trains a
+  day each way on weekdays, far below the 15-minute test, so it is drawn only
+  to Kogushi and its 7 stations beyond, inside the city, are left out (owner,
+  2026-10-02).
+- JR Kyushu's Sanyo Line, under the strait to Moji, keeps one station inside
+  the city, Shimonoseki, and is drawn as part of the Sanyo Line.
+- The Shinkansen is not drawn (Shin-Shimonoseki appears as a JR station).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
