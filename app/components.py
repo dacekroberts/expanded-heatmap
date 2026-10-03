@@ -355,6 +355,40 @@ def scroll_table(columns, rows, right=(), min_width=None):
     )
 
 
+# The header's two links, on every page because every page calls
+# set_base_font() (owner, 2026-10-03; both URLs confirmed by the owner). The
+# GitHub one also links the public repository from the page header, which IDFM's
+# Licence Mobilités Art. 5.8 and ODbL s.4.6 lean on (the footer link stays).
+# Inline SVG, no icon font or CDN: GitHub's mark is Octicons' mark-github (MIT),
+# LinkedIn's the Simple Icons glyph (CC0). One line, so Markdown wraps no part
+# of it in a paragraph.
+_GITHUB_URL = "https://github.com/dacekroberts/expanded-heatmap"
+_LINKEDIN_URL = "https://www.linkedin.com/in/dace-roberts-57381b279/"
+_HEADER_LINKS_HTML = (
+    '<div class="site-header-links">'
+    f'<a href="{_GITHUB_URL}" target="_blank" rel="noopener noreferrer" '
+    'aria-label="Code on GitHub (opens in a new tab)" title="Code on GitHub">'
+    '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 '
+    '0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49'
+    '-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 '
+    '1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64'
+    '-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32'
+    '-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56'
+    '.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 '
+    '2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>'
+    f'<a href="{_LINKEDIN_URL}" target="_blank" rel="noopener noreferrer" '
+    'aria-label="LinkedIn profile (opens in a new tab)" title="LinkedIn">'
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 '
+    '20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 '
+    '2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 '
+    '2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92'
+    '-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 '
+    '13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 '
+    '24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>'
+    '</svg></a></div>'
+)
+
+
 def set_base_font():
     """Swaps Streamlit's default typeface for Space Grotesk on base page
     text only.
@@ -412,6 +446,35 @@ def set_base_font():
             max-width: 100%;
         }
 
+        /* The GitHub and LinkedIn links (_HEADER_LINKS_HTML), in the left end
+        of Streamlit's own header strip. The right end holds Streamlit's
+        toolbar (and, run locally, its Deploy button, which overlapped them
+        there); the left end is empty while cities.MAP_ONLY_NAV hides the
+        sidebar's expand control, and turning that off puts the control back
+        in this corner, so move the links then. The element container itself
+        is fixed, so it leaves the page's flow: it adds no gap above a city's
+        title and pushes neither the title nor the map down. Above the header
+        (z-index 999990). Icons take the theme's text color through
+        currentColor, so they follow the light and dark themes. */
+        [data-testid="stElementContainer"]:has(.site-header-links) {
+            position: fixed !important;
+            top: 0.85rem;
+            left: 0.75rem;
+            width: auto !important;
+            z-index: 999991;
+            margin: 0 !important;
+        }
+        .site-header-links { display: flex; gap: 0.15rem; align-items: center; }
+        .site-header-links a {
+            display: inline-flex; padding: 0.35rem; border-radius: 6px;
+            color: inherit !important; opacity: 0.7; line-height: 0;
+        }
+        .site-header-links a:hover { opacity: 1; }
+        .site-header-links a:focus-visible {
+            opacity: 1; outline: 2px solid currentColor; outline-offset: 1px;
+        }
+        .site-header-links svg { width: 20px; height: 20px; fill: currentColor; }
+
         /* A city page's subtitle (render_city_title), set close under the
         city's name and quieter than it. */
         .st-key-city-title h1 { padding-bottom: 0.1rem; }
@@ -428,6 +491,9 @@ def set_base_font():
         # A separate call, not appended to the block above: that block is indented,
         # so text added after it is rendered as a Markdown code block.
         st.markdown(f"<style>{_MAP_ONLY_CSS}</style>", unsafe_allow_html=True)
+    # Its own element and no <style> in it: render_city_title hides every
+    # element container holding a <style>, which would hide the links too.
+    st.markdown(_HEADER_LINKS_HTML, unsafe_allow_html=True)
 
 
 # --- Site identity and the notices that publishing requires ----------------

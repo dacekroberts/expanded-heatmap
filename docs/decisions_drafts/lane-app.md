@@ -4,6 +4,29 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - GitHub and LinkedIn icons in the page header, on every page (owner)
+
+- **The owner approved both links** (2026-10-03): the repository,
+  github.com/dacekroberts/expanded-heatmap, and the LinkedIn profile staging
+  relayed. The GitHub one also puts the repository link in the header, which
+  IDFM Art. 5.8 and ODbL §4.6 lean on; the footer link stays.
+- **Built in `set_base_font()`,** which every page calls, so no page file
+  changed: one Markdown element of inline SVG (Octicons' mark-github, MIT;
+  Simple Icons' LinkedIn glyph, CC0), no icon font, no CDN. Each link opens a
+  new tab (`rel="noopener noreferrer"`) and carries an `aria-label` saying so;
+  the SVGs are `aria-hidden`.
+- **Placed in the left end of Streamlit's header strip,** fixed, not the
+  right: run locally, Streamlit's Deploy button sits left of its menu and the
+  icons overlapped it there. The left end is empty while `MAP_ONLY_NAV` hides
+  the sidebar's expand control; turning that off brings the control back to
+  that corner (noted in the CSS).
+- **Measured in the lean venv, one local server:** at 375 and 1200 the city
+  title and the map start at the same y with and without the icons (the
+  fixed container leaves the flow), no sideways scroll at 375, and the icons
+  take the theme's text color in light (rgb 28,43,42 on white) and dark
+  (rgb 230,237,247 on rgb 11,18,32). `check_city_page_format.py` passes:
+  `set_base_font` is already in its silent set.
+
 ### 2026-10-03 - Staging's eight licence reads written in: notices 115-118 and seven licence rows (owner-approved batch)
 
 - **Notices, each on its own city's pages and the Required notices page:**
