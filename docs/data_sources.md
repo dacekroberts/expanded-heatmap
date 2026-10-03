@@ -577,11 +577,30 @@ verbatim, "at the site where the software application … can be accessed":
 > risk."
 
 **3. SFMTA — required, and DISPLAYED.** Its transit-data licence requires
-derivative works to include:
+derivative works to include (clause 12, "shall bear the following notice:"):
 
 > "Reproduced with permission granted by the City and County of San Francisco.
 > The information has been provided by means of a nonexclusive, limited, and
-> revocable license granted by the City and County of San Francisco."
+> revocable license granted by the City and County of San Francisco.
+>
+> The City and County of San Francisco does not guarantee the accuracy,
+> adequacy, completeness or usefulness of any information. The City and County
+> of San Francisco provides this information "as is," without warranty of any
+> kind, express or implied, including but not limited to warranties of
+> merchantability or fitness for a particular purpose, and assumes no
+> responsibility for anyone's use of the information."
+
+**Four sentences, not two (re-read 2026-10-03** on `sfmta.com/reports/gtfs-transit-data`,
+updated 2024-10-01, matching `docs/licenses/sfmta-transit-data-license-agreement.html`).
+The second paragraph sits between clause 12's colon and clause 13, so on the
+cautious reading it is part of the notice; until 2026-10-03 only the first
+paragraph was displayed. **Clause 4 adds a liability disclaimer:** "The
+Licensee shall display or include this disclaimer in any use agreement for any
+application of the Data created or provided by Licensee." The site has no use
+agreement, so one reading leaves nothing to do; the cautious reading takes
+"display" on its own, and clause 4's first sentence is displayed too, verbatim,
+after a lead-in of this project's own. Both are on San Francisco's page and the
+Required notices page.
 
 **4. LA Metro — required, and DISPLAYED.** Must acknowledge Metro as the
 provider of the transit information and must not claim ownership of it. No

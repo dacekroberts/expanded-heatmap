@@ -547,11 +547,32 @@ _NOTICES = [
      "to change at any time. It is understood that the data provided at this "
      "site is being used at one's own risk.",
      True, ("Chicago",), every_page=True),
+    # SFMTA (notice 3), re-read 2026-10-03 against sfmta.com/reports/
+    # gtfs-transit-data (updated 2024-10-01) and the stored copy in
+    # docs/licenses/. Clause 12's notice is BOTH paragraphs after "shall bear
+    # the following notice:", the "as is" paragraph included; until
+    # 2026-10-03 only the first was shown. Clause 4 asks for its liability
+    # disclaimer to be displayed "or" included in a use agreement; the site
+    # has no use agreement, and on the cautious reading the disclaimer is
+    # displayed instead. All three quoted parts are verbatim; the lead-in to
+    # the third is this project's.
     Notice(3, "San Francisco Municipal Transportation Agency",
      "Reproduced with permission granted by the City and County of San "
      "Francisco. The information has been provided by means of a "
      "nonexclusive, limited, and revocable license granted by the City and "
-     "County of San Francisco.",
+     "County of San Francisco. The City and County of San Francisco does not "
+     "guarantee the accuracy, adequacy, completeness or usefulness of any "
+     "information. The City and County of San Francisco provides this "
+     "information \"as is,\" without warranty of any kind, express or implied, "
+     "including but not limited to warranties of merchantability or fitness "
+     "for a particular purpose, and assumes no responsibility for anyone's use "
+     "of the information. SFMTA's license, under which this site is the "
+     "Licensee, also asks for this disclaimer to be displayed: “The "
+     "Licensee agrees that the SFMTA and its employees, officers, directors and "
+     "agents shall not be liable for damages of any kind arising from the use "
+     "of Data or any application that uses the Data including but not limited "
+     "to direct, indirect, incidental, punitive and consequential, and or "
+     "special damages.”",
      True, ("San Francisco",)),
     Notice(4, "LA Metro",
      "Rail alignment data for Los Angeles provided by LA Metro. This project "
