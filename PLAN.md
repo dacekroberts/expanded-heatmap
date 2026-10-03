@@ -935,8 +935,10 @@ every key, account and letter:
   1. **No public repository link anywhere in the app.** IDFM Licence
      Mobilités Art. 5.8 (Paris) and ODbL §4.6 rely on a public repository
      linked from the site; github.com/dacekroberts/expanded-heatmap is public.
-     A GitHub icon in the header or site chrome would discharge both. The
-     owner asked about LinkedIn too: that needs the owner's profile URL.
+     A GitHub icon in the header or site chrome would discharge both. A
+     LinkedIn icon beside it: staging relayed the owner's profile URL
+     (https://www.linkedin.com/in/dace-roberts-57381b279/). Confirm both
+     with the owner directly before building; it lands at review time.
   2. **Credits missing on pages:** Dublin's NTA GTFS (staging reading); Milan's
      ATM rail ("cc-by" never read to standard); SFMTA's required disclaimer;
      STM's modification sentence; MLIT's credit incomplete for the 20
