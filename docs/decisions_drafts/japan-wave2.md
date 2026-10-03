@@ -4,6 +4,73 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Japan wave 2 for the city cards: where each notice may sit, no open terms question, and the downstream inputs this branch moves
+
+- **For the Visuals session's cards (the downstream-sessions rule, Cleanup
+  2026-10-03): every wave-2 notice may sit in the caption, but three cities
+  carry a condition.** The placement follows each licence's own words on
+  where a credit must appear; the notice texts are notices 115-128 and the
+  rows in `docs/data_sources/japan.md`.
+
+  | City (notice) | Licence of the city's own data | Card face or caption |
+  |---|---|---|
+  | Kawasaki (115) | CC BY 2.1 (the 規約 §2) and CC BY 4.0 (the pages' badge) | Caption, **on CC BY 2.1's condition** below |
+  | Yokosuka (116) | CC BY 4.0 | Caption |
+  | Himeji (117) | CC BY 4.0 | Caption |
+  | Nishinomiya (118) | PDL 1.0 | Caption |
+  | Takamatsu (119) | CC BY 4.0; PDL 1.0 (MHLW) | Caption |
+  | Toyota (120) | CC BY 4.0, the city's 3(2) form | Caption |
+  | Yokkaichi (121) | CC BY 4.0 | Caption |
+  | Ōtsu (122) | CC BY 4.0, the city's ４(2) form | Caption |
+  | Nara (123) | CC BY 2.1 JP; PDL 1.0 (MHLW) | Caption, **on CC BY 2.1's condition** below |
+  | Hamamatsu (124) | CC BY 2.1 JP | Caption, **on CC BY 2.1's condition** below |
+  | Higashiōsaka (125) | CC BY 4.0, the city's ２ form | Caption |
+  | Kurume (126) | PDL 1.0 (MHLW) | Caption |
+  | Sasebo (127) | CC BY 4.0, the city's 第3条(2)(イ) form; PDL 1.0 (MHLW) | Caption |
+  | Shimonoseki (128) | PDL 1.0 (MHLW) | Caption |
+
+  - **CC BY 4.0** lets the credit be given 「in any reasonable manner based
+    on the medium, means, and context」 (§3(a)(2)). The cities' own forms
+    (Toyota, Ōtsu, Higashiōsaka, Sasebo, and Kawasaki's 規約) fix the
+    wording, opening この地図は..., and say nothing on position; a card
+    replaces 地図 with what the card is.
+  - **PDL 1.0** (Nishinomiya; MHLW for Takamatsu, Nara, Kurume, Sasebo and Shimonoseki; MLIT's
+    位置参照情報 and N02 for all fourteen) asks for the source and the fact
+    of processing (1.1), with no position.
+  - **CC BY 2.1 JP** (Kawasaki, Nara, Hamamatsu) says where a derivative
+    work's credit goes: 第5条 requires it 「少なくとも他の同様の著作者のクレジットが表示される箇所で」,
+    at least as prominent as those credits (legal code read 2026-10-03). So
+    the caption serves only while no other data source is credited on the
+    card face. If any source's credit sits on the face, these three cities'
+    credits sit there too, at equal prominence.
+  - **Shared with every Japanese city, unchanged:** N03 (CC BY 4.0) is
+    credited in the caption and its geometry is never drawn on a card
+    either (the Survey Act condition); OpenStreetMap's credit follows the
+    cards' existing rule.
+- **No open terms question keeps a wave-2 city off public pieces.** Toyota's
+  register title and Ōtsu's food list were read as permitted by the owner on
+  2026-10-02 (recorded in each row). MHLW's minor open point (免責 2) ウ, a
+  commercial reading) is the one already recorded for every Japanese city,
+  not a new hold. Two support sources had no terms read and carry no notice,
+  because only facts were taken from them: five Nagao Line station names
+  Takamatsu romanised from Kotoden's station index, and Shimonoseki's train
+  counts (the San'in Line scope call) from JR West's station timetables.
+  Hamamatsu's e-Stat counts are a measurement and never shown. These are
+  listed for the owner, not proposed as holds.
+- **Downstream inputs this branch changes**, for the lander to check against
+  `scripts/downstream_changes.py`:
+  - fourteen cities added (`outputs/<slug>/` for each);
+  - the registry (`app/cities.py`): fourteen entries; Kobe, Osaka, Kyoto and
+    Sakai's macro label offsets in the Japan views; and Osaka's in East Asia;
+  - notices 115-128 (`app/components.py`, `docs/data_sources.md`);
+  - macro facts and ring shares: fourteen rows each;
+  - the Japanese taxonomy (`pipeline/taxonomies/japan_eigyo.py`): built
+    cities' outputs unchanged (zero drift across thirty Japanese cities;
+    Tokyo, Osaka, Kyoto and Sapporo still to run);
+  - licence rows in `docs/data_sources/japan.md`.
+
+  The shared map code and theme and the category rules are untouched.
+
 ### 2026-10-03 - Japan wave 2's label pass: PROBLEMS 0, and Kawasaki's dot moved off Tokyo's and Yokohama's
 
 - **The fourteen go into the first batch's split** (Japan East from Fukui
