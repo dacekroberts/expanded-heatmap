@@ -38,7 +38,7 @@ from pipeline.los_angeles.config import (  # noqa: E402
     LA_METRO_LINE_NAMES,
     GTFS_NAME_ALIASES,
     CITY_BOUNDARY_FIELD,
-    CITY_BOUNDARY_NAME,
+    SCOPE_CITY_NAMES,
     CRS_GEOGRAPHIC,
     OPERATOR_STATION_COUNTS,
     OPERATOR_COUNTS_SOURCE,
@@ -122,10 +122,10 @@ def main():
     located["city"] = located[CITY_BOUNDARY_FIELD].fillna("(unincorporated area)")
     located = located.drop(columns=[CITY_BOUNDARY_FIELD])
 
-    in_city = located[located["city"] == CITY_BOUNDARY_NAME].drop(columns=["city"])
-    excluded = located[located["city"] != CITY_BOUNDARY_NAME].sort_values(["city", "station"])
+    in_city = located[located["city"].isin(SCOPE_CITY_NAMES)].drop(columns=["city"])
+    excluded = located[~located["city"].isin(SCOPE_CITY_NAMES)].sort_values(["city", "station"])
 
-    print(f"{len(in_city)} of {len(stations)} stations fall within {CITY_BOUNDARY_NAME.title()}.")
+    print(f"{len(in_city)} of {len(stations)} stations fall within {' and '.join(n.title() for n in SCOPE_CITY_NAMES)}.")
     print("Excluded, by the city they are in:")
     print(excluded["city"].value_counts().to_string())
 

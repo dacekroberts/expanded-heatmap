@@ -220,6 +220,10 @@ def main():
     # check's (looks_personal), not Kansas City's holder_is_person, which reads
     # Los Angeles names such as "HERCULES FURNITURE" as people.
     registrant = (out["dba_name"].fillna("").str.strip() == "") & names.map(looks_personal)
+    # Long Beach (regional): FULLNAME is never loaded, so a licence with no
+    # trade name has no name at all; it shows the street address the same way.
+    if "source" in out.columns:
+        registrant = registrant | (out["source"].eq("long_beach") & names.eq(""))
     out["name_is_address"] = out["name_is_address"] | registrant
     flagged = out["name_is_address"]
     out.loc[flagged, "business_name"] = out.loc[flagged, "street_address"].map(street_only)

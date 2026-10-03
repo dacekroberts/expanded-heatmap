@@ -513,6 +513,65 @@ COLUMNS["vancouver"] = {
                     loc({"source": "surrey", "category": "Pedlar"}, "Surrey pedlar")],
 }
 
+# Los Angeles (Regional), 2026-10-03: the City of LA's rows go through NAICS
+# (naics.naics_group on `naics`), Long Beach's through LONG_BEACH_BUCKETS.
+def _lb(category):
+    return {"source": "long_beach", "category": category}
+
+
+def _la(code):
+    return {"source": "los_angeles", "naics": code}
+
+
+COLUMNS["los_angeles"] = {
+    "funeral": [loc(_lb("Mortuary"), "Long Beach mortuary"), loc(_la("812210"), "LA funeral homes")],
+    "no_counter_food": [loc(_lb("Catering/Party Consulting"), "Long Beach caterers"),
+                        loc(_lb("Farmers Market"), "Long Beach farmers' market"),
+                        loc(_lb("Sidewalk Vending - Food"), "Long Beach sidewalk food stall"),
+                        loc(_la("722310"), "LA food service contractors")],
+    "personal_catchall": [loc(_lb("General Services \u2013 Other"), "Long Beach services catch-all"),
+                          loc(_la("812990"), "LA all other personal services")],
+    "tattoo": [loc(_lb("Tattoos/Body Piercing"), "Long Beach tattoo")],
+    "adult_hostess": [loc(_la("812193"), "NAICS 812193 (San Diego's massage parlors)")],
+    "sex_shop": [loc(_la("459999"), "LA all other miscellaneous retailers (sex shops file here)")],
+    "massage_commercial": [loc(_lb("Massage/Body Wrap Estab"), "Long Beach massage establishment"),
+                           loc(_la("812199"), "LA other personal care (massage)")],
+    "massage_regulated": [loc(_la("621399"), "LA offices of other health practitioners")],
+    "car_dealer": [loc(_lb("Auto/Boat Sales"), "Long Beach auto and boat sales"),
+                   loc(_lb("Motorcycle/Jet Ski Sales"), "Long Beach motorcycle sales")],
+    "petrol_station": [loc(_lb("Gas Station"), "Long Beach gas station")],
+    "vehicle_repair": [loc(_lb("Auto Repair - Minor, Tune-Up, Smog Test"), "Long Beach auto repair"),
+                       loc(_lb("Car Wash"), "Long Beach car wash"),
+                       loc(_lb("Motorcycle/Jet Ski Repair"), "Long Beach motorcycle repair")],
+    "gambling": [loc(_lb("Bingo"), "Long Beach bingo")],
+    "pawnbroker": [loc(_lb("Pawn Shop"), "Long Beach pawn shop")],
+    "nightclub": [loc(_lb("Bar, Tavern, Lounge"), "Long Beach bar, tavern, lounge (nightclubs file here)"),
+                  loc(_la("722410"), "LA drinking places")],
+    "vet": [loc(_lb("Veterinarian"), "Long Beach veterinarian"),
+            loc(_lb("Veterinary Clinic without Boarding"), "Long Beach vet clinic")],
+    "nonstore": [loc(_lb("Mail Order"), "Long Beach mail order"),
+                 loc(_lb("Internet Sales/Service"), "Long Beach internet sales"),
+                 loc(_lb("Soliciting"), "Long Beach door-to-door"),
+                 loc(_lb("Vending Machines"), "Long Beach vending machines"),
+                 loc(_la("454110"), "LA electronic shopping")],
+    "parking": [loc(_lb("Parking Service Lot"), "Long Beach parking lot")],
+    "repair": [loc(_lb("Shoe Repair"), "Long Beach shoe repair"), loc(_lb("Tailoring"), "Long Beach tailoring"),
+               loc(_lb("Watch Repair"), "Long Beach watch repair")],
+    "lodging": [loc(_lb("Hotel"), "Long Beach hotel"), loc(_lb("Motel"), "Long Beach motel")],
+    "recreation": [loc(_lb("Fitness Center/Health Club"), "Long Beach fitness"),
+                   loc(_lb("Movie / Live Theater"), "Long Beach theater"),
+                   loc(_lb("Amusement Machines"), "Long Beach amusement machines")],
+    "pharmacy": [loc(_lb("Pharmacy"), "Long Beach pharmacy")],
+    "optician": [loc(_lb("Optician"), "Long Beach optician")],
+    "person_licence": [loc(_lb("Barber/Beauty (booth )"), "Long Beach barber and beauty booth renter"),
+                       loc(_lb("Nails/Manicure -Booth"), "Long Beach nail booth renter"),
+                       loc(_lb("Massage/Body Wrap Tech"), "Long Beach massage technician")],
+    "mobile_unit": [loc(_lb("Mobile Food Vending"), "Long Beach mobile food"),
+                    loc(_lb("Food Vending Carts"), "Long Beach food carts"),
+                    loc(_lb("Itinerant Vendor"), "Long Beach itinerant vendor"),
+                    loc(_lb("Sidewalk Vending - Merchandise"), "Long Beach sidewalk merchandise")],
+}
+
 COLUMNS["calgary_licencetype"] = {
     "person_licence": [loc("PERSONAL SERVICE (INDEPENDENT CHAIR OPERATOR)", "independent chair operator")],
     "funeral": absent("no funeral, crematorium or cemetery type among its licence types"),
