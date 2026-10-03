@@ -99,7 +99,7 @@ every brief's checks pass (staging re-ran all 15, 2026-10-02). The shared Japan
 code the first batch landed covers most of them; each brief lists its new
 column spellings and rules. All are the minor label tier, in the Japan regions.
 `mode` follows the owner's rule (JR the largest network, or a subway, is
-`metro`). 🚨 items are open with the owner. **Every 🚨 settled 2026-10-02 (owner: "approve all recommendations"). Builds are HELD.**
+`metro`). 🚨 items are open with the owner. **Every 🚨 settled 2026-10-02 (owner: "approve all recommendations"). RELEASED 2026-10-02 to one build session (`docs/handoff_japan_wave2_2026-10-02.md`; pages 176–189).**
 
 | City | Business lists | Licence | Rail | Open at build |
 |---|---|---|---|---|
