@@ -252,7 +252,12 @@ reader had already found and immediately found five more.
   scripts/check_no_fetch_in_steps.py` decides this, **including through a
   shared `pipeline/*.py` module**, which is how three `step3_geocode.py` files
   turned out to fetch via `census_geocoder.py` without importing an HTTP
-  client themselves.
+  client themselves. Until 2026-10-02 it read only `pipeline/*.py`, one level
+  deep; the Seattle (Regional) build found that a helper in a city's own
+  folder (`pipeline/seattle/lcb_offpremise.py`) went unread, so it now follows
+  a step's imports transitively into every module under `pipeline/`, and the
+  one exception is an HTTP import fenced inside a module-level `fetch()` that
+  nothing a step reaches calls.
 
 <a id="offline-guard"></a>
 ### A drift check may never fetch
@@ -558,7 +563,7 @@ python scripts/brief_check.py [city_slug]               # re-run a brief's claim
                                                        # (16 kinds; taxonomy_catchall picks a taxonomy's level)
 python scripts/check_provenance.py [--strict]           # every built city's sources actually recorded; run after adding a city
 python scripts/check_no_fetch_in_steps.py [--list]      # no pipeline step may reach the network
-python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 6 ways; touches nothing
+python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 12 ways; touches nothing
 python scripts/check_scope_disclosure.py                # every city's rail AND business scope reaches the published page
 python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
 python scripts/check_inconsistency_list.py              # every city has a row in each table of docs/map_inconsistencies.md; run when a city lands

@@ -3,12 +3,13 @@ a `step*.py` is allowed to import.
 
 WHY A SEPARATE MODULE FROM `osm.py`
 -----------------------------------
-`scripts/check_no_fetch_in_steps.py` asks what a step's imports can reach, one
-level deep, and a module is either UNGUARDED (a step importing it fails) or
-GUARDED (a step importing it passes, because the module refuses to request
-while a drift check is running). `pipeline/osm.py` contains `fetch()` and
-therefore `urllib.request`, so a step that only reads a cache (Barcelona's
-step 1) failed the check on an import it never calls.
+`scripts/check_no_fetch_in_steps.py` asks what a step's imports can reach,
+through every module under `pipeline/`, and a module is either UNGUARDED (a
+step importing it fails) or GUARDED (a step importing it passes, because the
+module refuses to request while a drift check is running). `pipeline/osm.py`
+contains `fetch()` and imports `urllib.request` at module level, so a step
+that only reads a cache (Barcelona's step 1) failed the check on an import it
+never calls.
 
 Marking `osm.py` GUARDED would say "this step may fetch, but not during a
 drift check" when it cannot fetch at all, and would let any future step fetch

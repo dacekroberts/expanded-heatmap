@@ -1,4 +1,4 @@
-"""Watch scripts/check_no_fetch_in_steps.py fail, six ways.
+"""Watch scripts/check_no_fetch_in_steps.py fail, twelve ways.
 
     python scripts/check_no_fetch_in_steps_selftest.py
 
@@ -11,10 +11,11 @@ parsed 0 of 16 longitudes while printing green, because negative numbers are
 either: the next person to edit the check inherits the claim, not the
 evidence.
 
-NOTHING IN THE REPOSITORY IS MODIFIED. Every case copies the files the check
-reads into a temporary tree, breaks the copy, and runs the check there with
-`--root`. Mutating the working tree and restoring it in a `finally` is one
-Ctrl-C away from a broken repository. Reading bytes and patching "...\\n"
+NOTHING IN THE REPOSITORY IS MODIFIED. The files the check reads are copied
+once into a temporary tree; each case breaks the copy, runs the check there
+with `--root`, and puts the copy back. Mutating the working tree and
+restoring it in a `finally` is one Ctrl-C away from a broken repository; the
+same in a throwaway tree costs nothing. Reading bytes and patching "...\\n"
 patterns against a CRLF working-tree file matches nothing and reports a
 working check as broken; hence `read_text`, which normalises newlines,
 everywhere below.
@@ -31,16 +32,14 @@ CHECK = ROOT / "scripts" / "check_no_fetch_in_steps.py"
 
 
 def build_tree(dest):
-    """The subset the check actually reads: shared pipeline modules and every
-    city's step files. Copied rather than symlinked so a case can break one."""
+    """The subset the check actually reads: every .py under pipeline/, since
+    it follows a step's imports into any of them. Copied rather than
+    symlinked so a case can break one."""
     (dest / "scripts").mkdir(parents=True)
     shutil.copy2(CHECK, dest / "scripts" / CHECK.name)
-    for src in sorted((ROOT / "pipeline").glob("*.py")):
-        out = dest / "pipeline" / src.name
-        out.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, out)
-    for src in sorted((ROOT / "pipeline").glob("*/step*.py")):
-        out = dest / "pipeline" / src.parent.name / src.name
+    src_root = ROOT / "pipeline"
+    for src in sorted(src_root.rglob("*.py")):
+        out = dest / "pipeline" / src.relative_to(src_root)
         out.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, out)
     return dest
@@ -53,17 +52,26 @@ def run(root):
     return r.returncode, (r.stdout or "") + (r.stderr or "")
 
 
-def case(label, rel, mutate, expect_in, expect_code=1):
-    with tempfile.TemporaryDirectory() as d:
-        root = build_tree(Path(d))
-        p = root / rel
-        text = p.read_text(encoding="utf-8")     # normalises CRLF - see above
-        changed = mutate(text)
-        if changed == text:
-            print(f"BROKEN TEST  {label}\n      the mutation matched nothing, "
-                  f"so this case proves nothing about the check")
-            return False
-        p.write_text(changed, encoding="utf-8")
+def case(root, label, rel, mutate, expect_in, expect_code=1):
+    """`rel` and `mutate` are one path and one function, or two tuples of
+    the same length when a case needs to break more than one file. `root` is
+    the shared throwaway copy; every file broken here is put back before the
+    next case."""
+    if isinstance(rel, str):
+        rel, mutate = (rel,), (mutate,)
+    originals = {}
+    try:
+        for r, m in zip(rel, mutate):
+            p = root / r
+            originals[p] = p.read_bytes()
+            text = p.read_text(encoding="utf-8")  # normalises CRLF - see above
+            changed = m(text)
+            if changed == text:
+                print(f"BROKEN TEST  {label}\n      the mutation of {r} "
+                      f"matched nothing, so this case proves nothing about "
+                      f"the check")
+                return False
+            p.write_text(changed, encoding="utf-8")
         code, out = run(root)
         hit = [ln for ln in out.splitlines() if expect_in in ln]
         ok = code == expect_code and hit
@@ -73,6 +81,9 @@ def case(label, rel, mutate, expect_in, expect_code=1):
         print(f"      exit {code} (wanted {expect_code}); "
               f"{hit[0].strip() if hit else 'expected text not found'}")
         return bool(ok)
+    finally:
+        for p, data in originals.items():
+            p.write_bytes(data)
 
 
 CASES = [
@@ -104,6 +115,56 @@ CASES = [
      lambda t: t.replace('offline.NO_NETWORK_ENV: "1"', '"UNUSED": "1"', 1),
      "not armed", 1),
 
+    # A helper inside the step's own city folder, which the check did not
+    # read before 2026-10-02 (the Seattle (Regional) build's finding).
+    ("a city helper a step imports fetches at import",
+     "pipeline/seattle/sno_food.py",
+     lambda t: t.replace("import pandas as pd\n",
+                         "import pandas as pd\nimport requests\n", 1),
+     "reaches via pipeline.seattle.sno_food", 1),
+
+    # The same helper reached by a bare sibling import, which works because a
+    # step run as a script has its own folder first on sys.path.
+    ("a city helper imported by bare name fetches",
+     ("pipeline/seattle/sno_food.py",
+      "pipeline/seattle/step2_clean_businesses.py"),
+     (lambda t: t.replace("import pandas as pd\n",
+                          "import pandas as pd\nimport urllib.request\n", 1),
+      lambda t: t.replace("    from pipeline.seattle import sno_food\n",
+                          "    import sno_food\n", 1)),
+     "reaches via pipeline.seattle.sno_food", 1),
+
+    # The fence is the HTTP import inside `def fetch`; hoisted out of it, the
+    # helper fetches at import.
+    ("a fenced helper's HTTP import hoisted to module level",
+     "pipeline/seattle/lcb_offpremise.py",
+     lambda t: t.replace("    import requests\n", "", 1).replace(
+         "import numpy as np\n", "import numpy as np\nimport requests\n", 1),
+     "reaches via pipeline.seattle.lcb_offpremise", 1),
+
+    # ... and the fence holds only while no step calls it.
+    ("a step calls a helper's fetch()",
+     "pipeline/seattle/step2_clean_businesses.py",
+     lambda t: t.replace("    lcb = lcb_offpremise.load()\n",
+                         "    lcb_offpremise.fetch()\n"
+                         "    lcb = lcb_offpremise.load()\n", 1),
+     "calls pipeline.seattle.lcb_offpremise.fetch()", 1),
+
+    # ... nor the helper itself, from what a step does call.
+    ("a fenced helper's load() calls its own fetch()",
+     "pipeline/seattle/lcb_offpremise.py",
+     lambda t: t.replace("    out = place(premises(verbose), verbose)\n",
+                         "    fetch()\n"
+                         "    out = place(premises(verbose), verbose)\n", 1),
+     "calls pipeline.seattle.lcb_offpremise.fetch()", 1),
+
+    # A taxonomy module is loaded by name through importlib, which no import
+    # statement shows; reaching pipeline.taxonomies reaches all of them.
+    ("a taxonomy module fetches",
+     "pipeline/taxonomies/naics.py",
+     lambda t: "import requests\n" + t,
+     "pipeline.taxonomies.naics", 1),
+
     # A KNOWN_GAPS list that cannot expire becomes a place defects go to be
     # forgotten. The case writes into an EMPTY table, the state the list
     # should normally be in; aimed at a real entry, it stops matching the day
@@ -129,10 +190,13 @@ CASES = [
 
 def main():
     print(f"Self-test for {CHECK.relative_to(ROOT).as_posix()}\n")
-    results = [case(*c) for c in CASES]
-
+    # One copy for every case: the whole pipeline tree copied per case cost
+    # a minute. The unmodified run comes last, so it also proves each case
+    # put back what it broke.
     with tempfile.TemporaryDirectory() as d:
-        code, _ = run(build_tree(Path(d)))
+        root = build_tree(Path(d))
+        results = [case(root, *c) for c in CASES]
+        code, _ = run(root)
     clean = code == 0
     print(f"\n{'PASS' if clean else 'FAIL'}  an unmodified copy passes "
           f"(exit {code})")
