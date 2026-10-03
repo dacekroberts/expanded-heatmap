@@ -4,6 +4,15 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - City card layout approved; Tbilisi's card carries თბილისი (owner)
+
+- **The card layout and its new wording were approved** (owner): the
+  eyebrow, "X% of N mapped", "Set A rings" / "Set B rings", "Full credits:",
+  and the "NOT FOR PUBLIC USE · OPEN TERMS QUESTION" chip.
+- **Tbilisi's card shows თბილისი** (owner), set in Noto Sans Georgian with
+  `lang="ka"`, since Space Grotesk has no Georgian glyphs. Rejected: the
+  Latin name alone.
+
 ### 2026-10-02 - Phase 4 city cards: credit placement, OpenStreetMap rule, site address (owner); spot-check set built
 
 - **Phase 3 approved** (owner).
