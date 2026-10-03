@@ -72,16 +72,20 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended; set as bullets 2026-10-01.
+# calls applied as recommended; set as bullets 2026-10-01. Linha 17 drawn
+# 2026-10-03 (owner); its two bullets are new that day.
 st.markdown(
     """
 **The lines**
 
-- Seven lines are drawn — **Metrô Linhas 1-Azul, 2-Verde, 3-Vermelha, 4-Amarela, 5-Lilás
-  and 15-Prata, and CPTM's Linha 9-Esmeralda** — each labeled on the map and in the legend,
-  in the colors OpenStreetMap records for them. Linha 15 is a monorail.
+- Eight lines are drawn — **Metrô Linhas 1-Azul, 2-Verde, 3-Vermelha, 4-Amarela, 5-Lilás,
+  15-Prata and 17-Ouro, and CPTM's Linha 9-Esmeralda** — each labeled on the map and in the
+  legend, in the colors OpenStreetMap records for them. Linhas 15 and 17 are monorails.
 - The lines and stations are OpenStreetMap's.
-- Linhas 6-Laranja and 17-Ouro are still being built and are not drawn.
+- Linha 17-Ouro has carried passengers since March 2026, still fare-free; all eight of its
+  stations are drawn.
+- Linha 6-Laranja is not drawn: it is still being built, and its first six stations have
+  run only a free trial service on weekday middays since July 2026.
 - Suburban railways are left out of these maps unless, inside the city, they run like a
   metro. CPTM's Linha 9 does: a train comes every 4 to 7 minutes along the Pinheiros river,
   and most of its stations have no metro nearby, though they are about 1.8 km apart.
