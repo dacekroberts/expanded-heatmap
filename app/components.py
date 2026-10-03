@@ -553,6 +553,24 @@ _NOTICES = [
      "Rail alignment data for Los Angeles provided by LA Metro. This project "
      "claims no ownership of that data.",
      False, ("Los Angeles",), every_page=True),
+    # New York City (notice 5): Local Law 11 forbids a licence, but the Open
+    # Data Technical Standards Manual reserves DoITT's right to require the
+    # SOURCE, VERSION and MODIFICATIONS of a republished data set. Until
+    # 2026-10-03 the reference pages were read as meeting it and nothing
+    # displayed it; check C now holds every numbered notice to a display, so
+    # the three are stated here, on the city's page. Not verbatim: the manual
+    # prescribes the content, not a sentence.
+    Notice(5, "New York City",
+     "Source: NYC Open Data, the Department of Health and Mental Hygiene's "
+     "Restaurant Inspection Results (43nn-pn8j), the Department of Consumer "
+     "and Worker Protection's Issued Licenses (w7w3-xahh) and the Borough "
+     "Boundaries (gthc-hcne). Version: as downloaded on September 21, 2026. "
+     "Modifications: the inspection history is reduced to one row per "
+     "restaurant and the licenses to active premises licenses; the businesses "
+     "are filtered to storefront categories, grouped into three categories of "
+     "this project's own and measured by distance from subway stations, and a "
+     "business found in two registers is counted once.",
+     False, ("New York",)),
     Notice(7, "MassDOT / MBTA",
      "Rail alignment data for Boston provided by MassDOT/MBTA.",
      False, ("Boston",)),

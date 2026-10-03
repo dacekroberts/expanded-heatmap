@@ -628,6 +628,13 @@ surfacing both documents rather than only one:
 - **modifications** — `excluded_categories.md`, which is precisely a
   statement of what was removed and why.
 
+**DISPLAYED since 2026-10-03** on New York's page and the Required notices
+page: the three named in one notice of this project's own wording (the manual
+prescribes the content, not a sentence). Until then this item was exempt from
+the provenance check as met by the reference pages, and a numbered notice the
+site did not display passed; the exemption is gone, so every numbered notice
+here is one the site displays.
+
 **6. CTA — encouraged, not required.** If credited, use one of CTA's own
 forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
 or "Powered by CTA data".
