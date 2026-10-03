@@ -53,7 +53,19 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   in part" disclosure removed, the check now complete), What Is Excluded
   (the rule's wording), the master list, PLAN and `app/cities.py`'s
   placement figure. Drift check run and the baseline re-recorded.
-- **The shared cache**: the register file in `data/tbilisi/raw/` now carries
-  the address key. Master's step 2 (before this branch lands) reads it with
-  the full rule and no minimum, so a Tbilisi drift check on master exits
-  naming 14 points until this branch lands.
+- **The shared cache, and a mistake corrected the same day.** The `--force`
+  re-pull replaced the raw file master reads (`.build.csv`), and the run on
+  this branch wrote `data/tbilisi/processed`, which every checkout shares:
+  master's `check_macro_facts` then read 13,211 against its 13,252 and
+  blocked every session's push (Cleanup, 2026-10-02). Restored: the keyed
+  pull is kept as `.keyed.csv`, which this branch now reads; master's
+  `.build.csv` was rewritten from it with master's `factual_address_bare`
+  column (the same derivation the build's pull used; the same register, same
+  day, 63,511 rows); master's own step 2, run from a checkout of
+  `origin/master`, reproduced 13,252, and `check_macro_facts` and
+  `check_ring_shares` passed there. **This branch's drift baseline is not
+  recorded**: recording it writes the shared processed folder, so it waits
+  for the branch to land (then: `drift_check.py tbilisi --update-baseline`).
+  Lesson: a branch whose step writes `data/<city>/processed` must not run it
+  before it lands, even for its own city; and a re-pull goes under a new
+  file name, never over the one master reads.

@@ -49,7 +49,10 @@ GEOSTAT_PAGE_SIZE = 2000
 GEOSTAT_TOTAL_RANGE = (60000, 67000)
 GEOSTAT_PAGE_PAUSE_S = 3
 GEOSTAT_TERMS_URL = "https://www.geostat.ge/en/page/monacemta-gamoyenebis-pirobebi"
-BUSINESSES_RAW_CSV = DATA_RAW / f"geostat_br_tbilisi_active_{AS_OF_DATE}.build.csv"
+# `.keyed.csv`: the pull with each company's address hash. The build's pull
+# (`.build.csv`, no hash) stays beside it for the code it was built with;
+# data/ is shared by every checkout, so the two never share a name.
+BUSINESSES_RAW_CSV = DATA_RAW / f"geostat_br_tbilisi_active_{AS_OF_DATE}.keyed.csv"
 
 # The only columns written to disk. The API has no column selection, so
 # every other key (personal numbers, heads, partners, phone, e-mail, web,
