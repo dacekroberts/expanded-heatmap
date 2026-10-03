@@ -723,5 +723,10 @@
   "in_ring": 9928,
   "all": 11894,
   "map_blob": "e9c15435fc406391e6b0b3c6de23d468df282387"
+ },
+ "yokosuka": {
+  "in_ring": 3535,
+  "all": 4544,
+  "map_blob": "682dee237df54ec8f7a5164407054fe589dba5d8"
  }
 }

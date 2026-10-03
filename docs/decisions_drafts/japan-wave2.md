@@ -4,6 +4,60 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Yokosuka built, the city's food list and four registers
+
+- **Yokosuka built (page 177, notice 116): 4,544 storefronts (Food service
+  2,919, Food shops 497, Personal services 1,128) around 21 stations on 3
+  lines, 77.8% of them in a ring.** The city's CC BY 4.0 lists on BODIK as of
+  2026-08-31 (food 4,172 rows, barbers 251, beauty 745, laundries 49 general
+  and 95 pick-up), each fetched through its CKAN resource's current URL
+  (`SOURCE_RESOURCES`), joined to MLIT's address blocks for the one
+  municipality: 4,516 rows at the block (97.0%), 132 at a town centre, 6
+  unplaced; food fixed in a bucket 96.5 / 3.4 / 0.1, the brief's figures.
+  104 repeat permits shown once. Out by rule (詳細業種 read as the form,
+  `form_cols`): 129 canteens (給食), 57 snack bars and cabarets, 44 caterers
+  (仕出し屋), 35 inside inns, 20 vending, 133 manufacturing and other
+  non-counter types ("no rule"). Not a premises: 240 (103 vehicles, 89
+  屋台型臨時営業 stalls, 48 with no address or a citywide one). Restaurants
+  against the official count: 3,448 飲食店営業 rows against e-Stat's FY2024
+  3,461 in force, 99.6% (the brief's).
+- **Held calls, counts touched:** 詳細業種 総菜屋 (29 restaurant permits) stays
+  Food service and 複合型そうざい製造業 (5 rows, 1 a 食肉処理 form) stays out,
+  at the built cities' reading pending the owner's cross-city call. The one
+  クラブ又はナイトクラブ is Food service: the hostess rule (スナック 55,
+  キャバレー 2) does not take it, and nightclubs are kept (category_rules R5).
+  The 菓子 / そうざい factory share: 12 of 367 (3.3%), kept (owner,
+  2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py yokosuka`: the
+  Japan pass prints 0; 1 pin shows its permit type (a beauty salon); the
+  brief's second, a laundry pick-up shop, is run by a cooperative under its
+  own name and shows it (a cooperative (組合) is no person for the name rule, 13b2c280). The food list names company
+  operators only (申請者氏名 beside 申請者法人名称; Toyama's accepted position);
+  the registers name every operator (営業者氏名・法人名称).
+- **Rail:** N02-25, Keikyu's 本線 (11 of 50 inside) and 久里浜線 (7 of 9) and
+  JR's 横須賀線 (4 of 9), cut at the city line; no Shinkansen, no stub. 堀ノ内
+  is one N02 group for both Keikyu lines; 京急久里浜 and JR's 久里浜 (224 m, the
+  closest pair) stay apart. Gate 3: Keikyu's station list gives the Main
+  Line's 追浜-浦賀 11 and the Kurihama Line's 堀ノ内-津久井浜 7 inside the
+  city, exact. 5 stations excluded: 2 in Yokohama's Kanazawa Ward, 2 in Miura,
+  1 in Zushi. English names: OSM's 21 as they stand (signage style, no
+  macron, no override; OSM's own hyphenation, as Yokohama's and Kawasaki's
+  Keikyu names). Colours from `line_colour_search.py` (closest pair 18.1,
+  Keikyu's two lines at 堀ノ内). Median station gap 840 m: standard rings.
+- **Economic Census control: 2.13** Food service pins per 2021 census 飲食店
+  establishment (2,919 against 1,373), above the built cities' 1.56-1.92,
+  **explained by Matsuyama's benchmark** (official / census): e-Stat's 3,461
+  permits in force against the census's 1,373 is 2.52, and the list is 99.6%
+  of the official count; the map's 2,919 pins (fixed, placed, one per
+  premises) are 84% of it, so the map ratio sits below official / census, as
+  in every complete list. The ratio is the permit structure, not the join.
+- **Prose proposals for review time** (no approved template covers them): on
+  the page, "Where a trade name is its operator's own name, the dot shows its
+  permit type instead; the food list names an operator only where it is a
+  company, so this cannot be checked for the rest." (Kawasaki's proposal,
+  reused); in What Is Excluded, "The one nightclub (クラブ又はナイトクラブ) is
+  Food service, as nightclubs are elsewhere."
+
 ### 2026-10-03 - The name rule treats a cooperative as no person (opt-in); love and capsule hotels are accommodation
 
 - **A cooperative or union operator (組合) is not a person for the name

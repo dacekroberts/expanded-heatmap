@@ -3803,6 +3803,285 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Yokosuka",
+        "lat": 35.2784,
+        "lon": 139.6703,
+        "page": "pages/177_Yokosuka_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (97.0%)",
+        "data_age": "Permits and registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "Keikyu's Main and Kurihama lines and JR East's Yokosuka Line",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Himeji",
+        "lat": 34.8267,
+        "lon": 134.6906,
+        "page": "pages/178_Himeji_Heatmap.py",
+        "blurb": "Himeji rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Nishinomiya",
+        "lat": 34.7377,
+        "lon": 135.3418,
+        "page": "pages/179_Nishinomiya_Heatmap.py",
+        "blurb": "Nishinomiya rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Takamatsu",
+        "lat": 34.3428,
+        "lon": 134.0466,
+        "page": "pages/180_Takamatsu_Heatmap.py",
+        "blurb": "Takamatsu rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Toyota",
+        "lat": 35.0826,
+        "lon": 137.1564,
+        "page": "pages/181_Toyota_Heatmap.py",
+        "blurb": "Toyota rail (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yokkaichi",
+        "lat": 34.9665,
+        "lon": 136.6189,
+        "page": "pages/182_Yokkaichi_Heatmap.py",
+        "blurb": "Yokkaichi rail (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ōtsu",
+        "lat": 35.0045,
+        "lon": 135.8686,
+        "page": "pages/183_Otsu_Heatmap.py",
+        "blurb": "Ōtsu rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "light_rail",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Nara",
+        "lat": 34.6851,
+        "lon": 135.805,
+        "page": "pages/184_Nara_Heatmap.py",
+        "blurb": "Nara rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Hamamatsu",
+        "lat": 34.7038,
+        "lon": 137.7349,
+        "page": "pages/185_Hamamatsu_Heatmap.py",
+        "blurb": "Hamamatsu rail (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Higashiōsaka",
+        "lat": 34.6795,
+        "lon": 135.6008,
+        "page": "pages/186_Higashiosaka_Heatmap.py",
+        "blurb": "Higashiōsaka rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kurume",
+        "lat": 33.3127,
+        "lon": 130.5214,
+        "page": "pages/187_Kurume_Heatmap.py",
+        "blurb": "Kurume rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Sasebo",
+        "lat": 33.1659,
+        "lon": 129.7238,
+        "page": "pages/188_Sasebo_Heatmap.py",
+        "blurb": "Sasebo rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Shimonoseki",
+        "lat": 33.9494,
+        "lon": 130.9214,
+        "page": "pages/189_Shimonoseki_Heatmap.py",
+        "blurb": "Shimonoseki rail (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

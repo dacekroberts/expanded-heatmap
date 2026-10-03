@@ -3632,6 +3632,41 @@ line.
   Meguro).
 - The Shinkansen is not drawn; it crosses the city without a station.
 
+### Yokosuka - the city's food list and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 240 rows with no fixed premises: 103 food trucks, 89 temporary stalls
+  (屋台型臨時営業) and 48 rows with no address or a citywide one.
+- 133 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 129 school, hospital and staff canteens, 57 snack bars and cabarets, 44
+  caterers (仕出し), 35 restaurants inside inns and 20 vending machines.
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry (general and pick-up shops) on the city's lists of
+August 2026. The one nightclub (クラブ又はナイトクラブ) is Food service, as
+nightclubs are elsewhere. 12 of the 367 bakery, confectioner and deli rows
+(3.3%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 104 repeat permits are shown once.
+
+**Not placed** - 6 rows. Another 132 sit at their town's center.
+
+**Names not shown** - 1 beauty salon whose trade name is its operator's own
+name shows its permit type instead. The
+food list names an operator only where it is a company, so a sole trader's own
+name cannot be checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it: 2 in Yokohama (Kanazawa Ward), 2 in Miura
+  and 1 in Zushi.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

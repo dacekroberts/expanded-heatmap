@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3132,6 +3132,24 @@ review time).
 - **MUST DO:** `check_personal_exposure.py kawasaki` with its Japan pass,
   run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
   ("Kawasaki built", 2026-10-03).<!-- /internal -->
+
+**116. Yokosuka City and MLIT (Yokosuka) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-03; lands with Japan wave 2 at
+review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two BODIK
+  datasets are **CC BY 4.0** under the catalogue's terms 第１条 (both record
+  `cc-by-40-intl`); fetched from data.bodik.jp only, since the city's page
+  limits the licence to the catalogue's copies. MLIT's 位置参照情報 and N02 (the
+  2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY** (CC BY 4.0's attribution, no form prescribed): 「【横須賀市】食品営業許可施設公開情報 （食品営業許可を取得している全施設）」（営業許可を取得している全施設　2026年8月末現在）、横須賀市、クリエイティブ・コモンズ・ライセンス 表示4.0国際 …を加工して作成, and likewise the four lists of 「【横須賀市】環境衛生関係営業施設公開情報」, the licence linked; MLIT's credit lines.
+- **MUST NOT**: use the city's logo or symbol (第３条); claim the lists are
+  accurate or complete (第４条1).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py yokosuka` with its Japan pass,
+  run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
+  ("Yokosuka built", 2026-10-03).<!-- /internal -->
 
 ## Gaps
 
