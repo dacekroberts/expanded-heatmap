@@ -465,12 +465,10 @@ draws its own line geometry and labels lines with their real public names while
 reproducing no roundel or T mark, the trademark clause is satisfied by
 construction rather than by interpretation.
 
-**Three permission questions are OPEN as of 2026-09-21** — two from
-Philadelphia and one from Miami. All are recorded unresolved rather than read
-generously<!-- internal -->, per the `multi-source-city` skill's Step 3<!-- /internal -->. None blocks building
-its city; all three should be settled before the public deploy, alongside the
-required notices. They are the same question in three forms: **what does
-silence mean?**
+**Three permission questions were raised on 2026-09-21** — two from
+Philadelphia and one from Miami. SEPTA's and Miami-Dade's were settled the same
+day (below); **Philadelphia's is still open**, and the footer of every page says
+so. They are the same question in three forms: **what does silence mean?**
 
 - **SEPTA's trademark clause — ANSWERED 2026-09-21 by reading the notice it
   points to, and it is not a question any more.** The clause is "Licensee may

@@ -261,21 +261,23 @@ content; LA Metro says that on termination you "shall immediately remove the
 Transport Information and all references to it". The remedy contemplated
 throughout is a request to stop.
 
-**A second trigger, added 2026-09-21: an unresolved license position is
-enough.** Points 1-5 below fire when a publisher *asks*; this one fires when
-this project *finds out*. **It has exactly one live subject, Philadelphia.**
-Three questions prompted it, and on 2026-09-21 two closed: SEPTA expressly
-grants the right to use, reproduce and redistribute its datasets and claims
-only its Logo as a trademark, and Miami-Dade's own Open Data Hub Terms of Use
-turn out to exist and to contain nothing but an accuracy disclaimer.
-Philadelphia is different in kind: its dataset page incorporates the City's
-Terms of Use, which prohibit republication and modification without written
-permission. So **if the City of Philadelphia confirms that those terms govern
-its datasets, Philadelphia comes off the site without waiting to be asked.**
-The same wording is in the footer of every page, beside the required
-attributions, so a reader learns it at the same moment they learn where the
-data came from. That footer, this paragraph and the *What is counted, and
-what is not* page are one promise and are kept consistent.
+**A second trigger, added 2026-09-21 and widened 2026-10-02: a publisher
+saying this use is not permitted is enough.** Points 1-5 below fire when a
+publisher *asks* for its data to stop being displayed; this one covers the
+sources that neither grant nor forbid reuse, which this project reads in its
+favor: Philadelphia, whose data carries a City license that grants nothing and
+website terms that forbid republication (the City was asked for its position
+on 21 September 2026 and has not replied); Miami, Tucson, Dallas, Seattle
+(King County, Bellevue and Snohomish County), Amsterdam, Den Haag, Stockholm,
+Bucharest and Daegu, whose sources carry no license, or terms written for a
+website rather than its data; and Brazil's census addresses, which rest on
+federal law rather than a license. **If any of those publishers says this use
+is not permitted, its city comes off the site without being asked twice, and
+silence is never treated as permission.** Each reading is recorded with its
+source below. The same wording is in the footer of every page, beside the
+required attributions, so a reader learns it at the same moment they learn
+where the data came from. That footer, this paragraph and the *What is
+counted, and what is not* page are one promise and are kept consistent.
 
 **A third trigger, added 2026-09-22: a license that ENDS BY ITS OWN TERMS.**
 The first two fire on a publisher asking and on this project finding out.

@@ -2292,14 +2292,25 @@ def render_site_notices(show_links: bool = True):
         "from and the date, is on "
         "the \u201cWhere this data comes from\u201d page."
     )
-    for heading, text, verbatim in _NOTICES:
-        st.caption(f"**{heading}** \u2014 {text}")
-    st.caption(
-        "**OpenStreetMap** \u2014 basemap \u00a9 OpenStreetMap contributors, "
-        "available under the Open Database License. The attribution also "
-        "appears in the corner of every map, where its license requires it to "
-        "stay visible. The overview map's basemap is \u00a9 CARTO."
-    )
+    # ONE block, not one element per notice (owner, 2026-10-02: condense the
+    # scroll without hiding anything). Each st.caption was its own element with
+    # a 16 px gap, and the list ran to about 90% of a city page at 375 px. All
+    # text stays inline and in the DOM; only spacing, size and, from 900 px,
+    # two columns change.
+    st.markdown(
+        "<style>.st-key-site-notices p { margin: 0 0 0.4rem; font-size: 0.8rem;"
+        " line-height: 1.35; break-inside: avoid; }"
+        "@media (min-width: 900px) { .st-key-site-notices"
+        " [data-testid='stCaptionContainer'] { column-count: 2;"
+        " column-gap: 2rem; } }</style>",
+        unsafe_allow_html=True)
+    with st.container(key="site-notices"):
+        st.caption("\n\n".join(
+            [f"**{heading}** \u2014 {text}" for heading, text, _verbatim in _NOTICES]
+            + ["**OpenStreetMap** \u2014 basemap \u00a9 OpenStreetMap contributors, "
+               "available under the Open Database License. The attribution also "
+               "appears in the corner of every map, where its license requires "
+               "it to stay visible. The overview map's basemap is \u00a9 CARTO."]))
     st.caption(_UNSETTLED_TERMS)
 
 

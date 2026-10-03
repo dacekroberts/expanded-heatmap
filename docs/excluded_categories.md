@@ -4628,8 +4628,8 @@ own section above describes it.
   it applies to every city including ones added later. Three rows in New York
   were removed this way on 2026-09-21, and one in Monterrey on 2026-09-27.
 - These decisions concern what is *appropriate* to publish. What each dataset's
-  license *permits* is a separate question; only Philadelphia's is still open
-  (see the next section).
+  license *permits* is a separate question; a few sources are read in this
+  project's favor where their terms are silent (see the next section).
 
 ## If you believe a listing should not be here
 
@@ -4649,18 +4649,17 @@ publisher asks for its data to stop being displayed, it stops. That is written
 out in full on *Where this data comes from*, under "Commitment: removal requests
 are honored, not argued".
 
-**And a city can come off for a reason nobody raised.** One city's terms
-are unresolved, and it is Philadelphia. The dataset page there binds a reader
-to the City's separate Terms of Use, which let residents print single pages of
-the City's website and otherwise prohibit "distribution or republication in
-any other form or for any other purpose ... and any modification whatsoever"
-without the City's written permission. Applied to a dataset, that would not
-permit this map, which filters and redraws what it publishes; read as terms
-written for web pages - sitting beside a dataset license containing no such
-prohibition, under an Open Data Program meant for public reuse - it would.
-**That has not been resolved in this project's favor, and if the City
-confirms the restrictive reading, Philadelphia is removed without waiting for
-a request.** The same statement appears in the footer of every page.
+**And a city can come off for a reason nobody raised.** Some sources neither
+grant nor forbid reuse, and this site reads them in its favor: Philadelphia,
+whose data carries a City license that grants nothing and website terms that
+forbid republication (the City was asked for its position on 21 September 2026
+and has not replied); Miami, Tucson, Dallas, Seattle (King County, Bellevue
+and Snohomish County), Amsterdam, Den Haag, Stockholm, Bucharest and Daegu,
+whose sources carry no license, or terms written for a website rather than its
+data; and Brazil's census addresses, which rest on federal law rather than a
+license. **If any of those publishers says this use is not permitted, that
+city is removed without waiting for a request, and silence is never treated as
+permission.** The same statement appears in the footer of every page.
 
 Two related questions were checked at the same time and closed. **SEPTA**
 expressly licenses its datasets for use, reproduction and redistribution, and

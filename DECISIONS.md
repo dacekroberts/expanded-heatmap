@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**382 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**383 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -69,6 +69,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Tbilisi privacy verdict: publish](#2026-10-02---tbilisi-privacy-verdict-publish)
 - [Seattle (Regional): the owner's two calls applied, 14,431 storefronts; both builds' wording and modes approved](#2026-10-02---seattle-regional-the-owners-two-calls-applied-14431-storefronts-both-builds-wording-and-modes-approved)
 - [check_no_fetch_in_steps.py follows every module a step imports](#2026-10-02---check_no_fetch_in_stepspy-follows-every-module-a-step-imports)
+- [The footer's unsettled-terms paragraph names every permissive reading; the notices drawn as one block (owner)](#2026-10-02---the-footers-unsettled-terms-paragraph-names-every-permissive-reading-the-notices-drawn-as-one-block-owner)
 
 **2026-10-01**
 
@@ -16022,3 +16023,43 @@ Recorded by the cleanup session from the Main Building Session's findings of
   `pipeline/osm_cache.py`'s docstring ("one level deep"). CLAUDE.md's
   "including through shared `pipeline/*.py` modules" is still true and was
   left for the owner.
+
+### 2026-10-02 - The footer's unsettled-terms paragraph names every permissive reading; the notices drawn as one block (owner)
+
+- **The disclosure** (owner: "long and probably outdated, let's concatenate
+  and update with other 'permissive' cities"; the wording approved in chat).
+  - Before, the paragraph covered Philadelphia alone and quoted its terms at
+    length.
+  - It now names every built city resting on a reading of silent or unclear
+    terms: Philadelphia (asked 2026-09-21, no reply), Miami, Tucson, Dallas,
+    Seattle (King County, Bellevue, Snohomish County), Amsterdam, Den Haag,
+    Stockholm, Bucharest, Daegu, and Brazil's census addresses on federal
+    law.
+  - It keeps both commitments: a city comes off on its publisher's word, and
+    silence is never permission. Each source's full reading stays on About
+    the Data.
+  - `docs/data_sources.md` (the second trigger, widened) and What Is
+    Excluded carry the same wording.
+  - The US section's "three permission questions are OPEN" now says SEPTA's
+    and Miami-Dade's closed on 2026-09-21.
+- **The compile behind it:** a read-only agent, from the licence verdicts.
+  - It excluded every source with an explicit grant, conditions included.
+  - Route colors and names stay under the non-affiliation statement; the owner
+    kept them on 2026-09-21.
+- **The notices drawn as one block** (owner's option 3, part 1: condense
+  without hiding). The 114 required notices were each their own element, with
+  a 16 px gap. They are now one caption block, at 0.8 rem with tight paragraph
+  spacing, in two columns from 900 px. Every notice stays inline and in the
+  DOM; none is behind a toggle.
+  - Edmonton's page, measured locally: footer 39,213 to 27,216 px at 375
+    (page 43,440 to 31,443), and 14,561 to 9,775 px at 1200.
+  - All 114 paragraphs render, with no math spans from the join.
+- **Option 3, part 2: each page showing only its own notices.** The agent
+  classed all 114 notices from the recorded terms: SITE 2 (Chicago, Kansas
+  City), PROMINENT 3 (OSM, TransLink, CRTM), WORK 11, ANY 89 and UNCLEAR 9.
+  - The UNCLEAR nine are LA Metro, which defers to developer guidelines never
+    read, and the eight Ordnance Survey notices, whose style guide was never
+    read.
+  - The Overview's figures derive from every city's data, which may reach the
+    WORK-class terms.
+  - That is the owner's next call. The table is with the cleanup session.
