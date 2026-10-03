@@ -184,9 +184,12 @@ def admit(label, peak_gb, session, pid, available_gb=None):
 def remove(pid, measured_gb=None):
     ledger, lock, history = paths()
     with Lock(lock):
-        jobs = live(_read(ledger, []))
-        mine = [j for j in jobs if j["pid"] == pid]
-        _write(ledger, [j for j in jobs if j["pid"] != pid])
+        # Found BEFORE the dead-pid filter: the job's own child has exited by
+        # now, so live() would drop its entry and no peak was ever recorded
+        # (the history file never existed until 2026-10-03).
+        recorded = _read(ledger, [])
+        mine = [j for j in recorded if j["pid"] == pid]
+        _write(ledger, [j for j in live(recorded) if j["pid"] != pid])
         if mine and measured_gb is not None:
             hist = _read(history, [])
             hist.append({**mine[0], "measured_gb": round(measured_gb, 2),
@@ -260,6 +263,15 @@ def selftest():
             hist = _read(paths()[2], [])
             case("remove empties the ledger and records the measured peak",
                  _read(paths()[0], []) == [] and bool(hist) and hist[0]["measured_gb"] == 0.05)
+            # The real case: the child has already exited when remove() runs.
+            gone = subprocess.Popen([sys.executable, "-c", "pass"])
+            gone.wait()
+            _write(paths()[0], [job(gone.pid, 0.2)])
+            remove(gone.pid, 0.07)
+            hist = _read(paths()[2], [])
+            case("a job whose child has exited still records its measured peak",
+                 _read(paths()[0], []) == []
+                 and hist[-1]["measured_gb"] == 0.07)
             lock = paths()[1]
             lock.write_text("")
             os.utime(lock, (time.time() - 120, time.time() - 120))
