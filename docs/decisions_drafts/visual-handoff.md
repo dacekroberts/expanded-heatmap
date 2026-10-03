@@ -4,6 +4,25 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Phase 3 project-level pieces drafted on a private design canvas
+
+- **Nine artboards, generated from the sampler's data** (built from
+  published files at `f3409f4b`, Set A 86 cities and Set B 58 asserted):
+  - the title card at 1280x640, the README banner at 1280x320 and a video
+    thumbnail at 1280x720;
+  - the method explainer and a two-ring-sets slide;
+  - "Why the city maps differ" (nine tiles from
+    `docs/map_inconsistencies.md`) and the taxonomy explainer (50
+    classifications);
+  - the coverage overview, with no basemap and Europe and East Asia
+    insets;
+  - the cut-down data funnel.
+- **The funnel uses San Diego, Toronto and Paris; Tokyo waits** for the
+  cleanup session's reading of whether its credit may sit in a caption.
+- **Nothing on the canvas draws OpenStreetMap data**, so no OSM credit
+  appears. The coverage overview shows only city positions and tiers from
+  `app/cities.py`.
+
 ### 2026-10-02 - Phase 2 sampler approved: no basemap for now, a cut-down funnel, every city labeled (owner)
 
 - **The sampler and all its new wording were approved as written**, and
