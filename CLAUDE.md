@@ -206,12 +206,16 @@ a rule, not before obeying one.
 - **Python is capped at 8 GB a process, 12 GB with its children**
   (`scripts/python_memcap.py`, installed as `usercustomize.py`). **At most two
   heavy jobs on the machine, each admitted by the gate against the memory
-  actually available: `python scripts/heavy_job.py run --label <job> --peak-gb
-  <N> --session <you> -- <command>`** (owner, 2026-09-30;
+  actually available: `python scripts/heavy_job.py run --label <job>
+  --session <you> -- <command>`** (owner, 2026-09-30;
   `docs/session_roles.md`). A refused job waits (`--wait <minutes>`) and says
-  so to the others; `heavy_job.py status` names what is holding the memory. An
-  unknown peak counts as 8 GB. Drift checks run `--jobs 2` at most, one per
-  machine. A `MemoryError` is a script to fix,
+  so to the others; `heavy_job.py status` names what is holding the memory.
+  **Measured figures are the norm** (owner, 2026-10-03): with `--peak-gb`
+  omitted the gate declares the label's last measured peak; a job never
+  measured declares an estimate scaled from measured ones (`--peak-gb N
+  --estimate "scaled from ..."`); in a series of like jobs the first measures
+  for the rest. Only a job with neither counts as 8 GB. Drift checks run
+  `--jobs 2` at most, one per machine. A `MemoryError` is a script to fix,
   never a cap to raise. Never hand-write a PDF or font decoder: `pdftotext`
   or `pypdf`, one page first. [#memory]
 - **Resolve a conflicted append-only file with
@@ -282,7 +286,7 @@ node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name
 python scripts/prose_proposals.py collate | apply --ids <id,id> | --selftest   # lanes' prose proposals -> the owner's list
 python scripts/proposals_page.py --out <html> --commit <sha> [--sets json]   # the owner's review page for a long proposals list
 python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
-python scripts/heavy_job.py run --label <job> --peak-gb <N> --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory
+python scripts/heavy_job.py run --label <job> [--peak-gb <N> --estimate <basis>] --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory
 python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # archived entries count as present
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country> --mode <metro|light_rail|tram>   # add --dry-run first

@@ -9,7 +9,8 @@ budget ("two jobs under 12 GB") was wrong too: measured 2026-09-30, the apps
 alone (eight Claude sessions, a browser) hold about 8 GB, and one orphaned
 grep held 4.7 GB more. So admission reads available memory, now.
 
-    python scripts/heavy_job.py run --label "oslo step 2" --peak-gb 5.4 --session cleanup -- python pipeline/oslo/step2_clean_businesses.py
+    python scripts/heavy_job.py run --label "oslo step 2" --session cleanup -- python pipeline/oslo/step2_clean_businesses.py
+    python scripts/heavy_job.py run --label "osaka step 2" --peak-gb 1.0 --estimate "scaled from Kyoto 0.33 GB by raw size" --session S -- ...
     python scripts/heavy_job.py status
     python scripts/heavy_job.py start --label L --peak-gb N --session S --pid P   # a job that cannot be wrapped
     python scripts/heavy_job.py end --pid P
@@ -26,8 +27,17 @@ ADMISSION: fewer than MAX_JOBS live entries, and
 where `reserved` is each live job's declared peak minus what it already
 holds: a job that has just started has not reached its peak, and without the
 reservation two jobs started seconds apart would both be admitted and collide.
-An unknown peak is DEFAULT_PEAK_GB, the per-process cap. Refused: exit 3,
-with the status printed so the refused session can see the culprit.
+MEASURED FIGURES ARE THE NORM (owner, 2026-10-03). The declared peak is,
+in order: the label's last MEASURED peak (`--peak-gb` omitted or
+`measured`); else an ESTIMATE scaled from measured jobs, which says so
+(`--peak-gb N --estimate "scaled from ..."`); else DEFAULT_PEAK_GB, the
+per-process cap. In a series of like jobs the first is the measurement and
+the rest declare from it, so labels stay stable ("<city> step 2", "drift
+<city>"). Each ENDED line prints the measured peak; `status` lists the
+latest per label. Until 2026-10-03 no peak was ever recorded: remove() read
+the ledger through the dead-pid filter after the job's child had exited.
+Refused: exit 3, with the status printed so the refused session can see the
+culprit.
 
 THE LEDGER is data/_heavy_jobs.json. data/ is one junction shared by every
 worktree, so every session reads the same file; it is gitignored. An entry
@@ -139,7 +149,7 @@ def status_text(jobs):
     lines = [f"available {vm.available / GB:.1f} GB of {vm.total / GB:.1f} GB"]
     for j in jobs:
         lines.append(f"  RUNNING pid {j['pid']}: {j['label']} ({j['session']}), declared "
-                     f"{j['peak_gb']:.1f} GB, holds {tree_rss(j['pid']) / GB:.1f} GB, since {j['started']}")
+                     f"{j['peak_gb']:.1f} GB ({j.get('basis', 'stated')}), holds {tree_rss(j['pid']) / GB:.1f} GB, since {j['started']}")
     if not jobs:
         lines.append("  no heavy job running")
     big = []
@@ -163,7 +173,34 @@ def status_text(jobs):
     return "\n".join(lines)
 
 
-def admit(label, peak_gb, session, pid, available_gb=None):
+def latest_measured(label, hist):
+    """The most recent history entry for `label` with a measured peak, or None."""
+    found = [h for h in hist if h.get("label") == label and h.get("measured_gb") is not None]
+    return found[-1] if found else None
+
+
+def resolve_peak(label, given, estimate, hist):
+    """The figure a job declares, and what it rests on (owner, 2026-10-03:
+    measured figures are the norm). A measured peak is the threshold; a job
+    with none declares an estimate scaled from measured ones and says so; only
+    a job with neither falls back to DEFAULT_PEAK_GB."""
+    last = latest_measured(label, hist)
+    if given is None or str(given).lower() == "measured":
+        if last:
+            return float(last["measured_gb"]), f"measured {last['ended']}"
+        if given is not None:
+            raise ValueError(f"no measured peak recorded for label {label!r}: declare an "
+                             "estimate with --peak-gb N --estimate 'scaled from ...'")
+        return DEFAULT_PEAK_GB, "unknown: the per-process cap"
+    peak = float(given)
+    if estimate:
+        return peak, f"estimate, {estimate}"
+    if last:
+        return peak, f"stated; last measured {last['measured_gb']:.2f} GB"
+    return peak, "stated, never measured: give --estimate with its basis"
+
+
+def admit(label, peak_gb, session, pid, available_gb=None, basis=None):
     """`available_gb` is for the selftest only: the live figure otherwise. A
     selftest that asks the real machine fails whenever other jobs hold its
     memory (2026-09-30)."""
@@ -176,6 +213,7 @@ def admit(label, peak_gb, session, pid, available_gb=None):
         ok, why, _ = decide(jobs, peak_gb, available_gb, held)
         if ok:
             jobs.append({"pid": pid, "label": label, "peak_gb": peak_gb, "session": session,
+                         "basis": basis or "stated",
                          "started": time.strftime("%Y-%m-%d %H:%M:%S")})
         _write(ledger, jobs)
     return ok, why, jobs
@@ -203,7 +241,7 @@ def cmd_run(args, command):
     wait_until = time.time() + args.wait * 60
     while True:
         # Admit under a placeholder pid (this process), then hand the entry to the child.
-        ok, why, jobs = admit(args.label, args.peak_gb, args.session, os.getpid())
+        ok, why, jobs = admit(args.label, args.peak_gb, args.session, os.getpid(), basis=args.basis)
         if ok:
             break
         if time.time() >= wait_until:
@@ -231,6 +269,14 @@ def cmd_run(args, command):
     return code
 
 
+def _raises(fn):
+    try:
+        fn()
+    except ValueError:
+        return True
+    return False
+
+
 def selftest():
     """Touches nothing: a temporary ledger, fake pids, fake memory figures."""
     results = []
@@ -252,6 +298,18 @@ def selftest():
     ok, why, _ = decide([job(1, 0.5), job(2, 0.5)], 0.5, 12.0, {})
     case("a third job is refused however much is free", not ok and "at most" in why)
     case("a dead pid is dropped on read", live([job(1, 1), job(2, 1)], alive=lambda p: p == 2) == [job(2, 1)])
+
+    hist = [{"label": "kyoto step 2", "measured_gb": 0.30, "ended": "d1"},
+            {"label": "kyoto step 2", "measured_gb": 0.33, "ended": "d2"}]
+    case("an omitted peak takes the label's LATEST measured figure",
+         resolve_peak("kyoto step 2", None, None, hist) == (0.33, "measured d2"))
+    case("'measured' with no record refuses, asking for an estimate",
+         _raises(lambda: resolve_peak("osaka step 2", "measured", None, hist)))
+    case("an omitted peak with no record falls back to the cap",
+         resolve_peak("osaka step 2", None, None, hist)[0] == DEFAULT_PEAK_GB)
+    case("an estimate is declared as one, with its basis",
+         resolve_peak("osaka step 2", "1.0", "scaled from Kyoto by raw size", hist)
+         == (1.0, "estimate, scaled from Kyoto by raw size"))
 
     old = os.environ.get("HEAVY_JOB_DIR")
     with tempfile.TemporaryDirectory() as d:
@@ -300,8 +358,11 @@ def main():
     for name in ("run", "start"):
         s = sub.add_parser(name)
         s.add_argument("--label", required=True)
-        s.add_argument("--peak-gb", type=float, default=DEFAULT_PEAK_GB,
-                       help=f"expected peak; unknown counts as {DEFAULT_PEAK_GB} GB")
+        s.add_argument("--peak-gb", default=None,
+                       help="a number, or 'measured'; omitted means the label's last measured "
+                            f"peak, else {DEFAULT_PEAK_GB} GB")
+        s.add_argument("--estimate", default=None, metavar="BASIS",
+                       help="marks --peak-gb as an estimate and says what it was scaled from")
         s.add_argument("--session", required=True)
         if name == "run":
             s.add_argument("--wait", type=float, default=0, help="minutes to keep retrying if refused")
@@ -311,11 +372,18 @@ def main():
     e.add_argument("--pid", type=int, required=True)
     sub.add_parser("status")
     args = ap.parse_args(argv)
+    if args.cmd in ("run", "start"):
+        try:
+            args.peak_gb, args.basis = resolve_peak(
+                args.label, args.peak_gb, args.estimate, _read(paths()[2], []))
+        except ValueError as exc:
+            raise SystemExit(f"heavy_job: {exc}")
+        print(f"DECLARED: {args.label}: {args.peak_gb:.2f} GB ({args.basis})", flush=True)
 
     if args.cmd == "run":
         return cmd_run(args, command)
     if args.cmd == "start":
-        ok, why, jobs = admit(args.label, args.peak_gb, args.session, args.pid)
+        ok, why, jobs = admit(args.label, args.peak_gb, args.session, args.pid, basis=args.basis)
         print(("ADMITTED: " if ok else "REFUSED: ") + f"{args.label}: {why}")
         if not ok:
             print(status_text(jobs))

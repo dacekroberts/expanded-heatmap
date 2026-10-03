@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**425 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**426 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -36,6 +36,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The family wording batch: each page family made consistent with itself (owner-approved batch)](#2026-10-03---the-family-wording-batch-each-page-family-made-consistent-with-itself-owner-approved-batch)
 - [Washington D.C. drops "Beauty Booth" under the person-licence rule (owner: "drop and note")](#2026-10-03---washington-dc-drops-beauty-booth-under-the-person-licence-rule-owner-drop-and-note)
 - [Japan leftovers: the fetch's row counts, Okayama's stand-in point, the default-point threshold (owner)](#2026-10-03---japan-leftovers-the-fetchs-row-counts-okayamas-stand-in-point-the-default-point-threshold-owner)
+- [Measured memory figures become the norm for every heavy job (owner)](#2026-10-03---measured-memory-figures-become-the-norm-for-every-heavy-job-owner)
 
 **2026-10-02**
 
@@ -17352,3 +17353,24 @@ Recorded by the cleanup session from the Main Building Session's findings of
   Lesson: a branch whose step writes `data/<city>/processed` must not run it
   before it lands, even for its own city; and a re-pull goes under a new
   file name, never over the one master reads.
+
+### 2026-10-03 - Measured memory figures become the norm for every heavy job (owner)
+
+- **The rule.** A job declares its label's last measured peak; one never
+  measured declares an estimate scaled from measured jobs and says so; in a
+  series of like jobs the first measures for the rest; jobs run side by side
+  where the measured figures fit. Only a job with neither counts as 8 GB.
+  Relayed by the Japan wave 2 session and confirmed by the owner in
+  cleanup's chat ("Yes").
+- **Evidence.** Sapporo's step measured 0.24 GB and Kyoto's 0.33 GB against a
+  2.8 GB estimate; two Japanese drift runs of 20 and 30 cities measured 4.54
+  and 4.71 GB, above any single city, so a batch has its own label.
+- **The gate never recorded a peak.** `remove()` read the ledger through the
+  dead-pid filter after the job's child had exited, so its entry was gone
+  and `data/_heavy_jobs_history.json` was never written. Fixed, with a
+  selftest case that fails without the fix. `heavy_job.py` now looks up the
+  label's last measured peak when `--peak-gb` is omitted or `measured`,
+  refuses `measured` with no record, marks `--estimate` figures with their
+  basis, and prints a DECLARED line with what the figure rests on.
+- **Where.** `scripts/heavy_job.py`, CLAUDE.md's memory rule and command
+  line, `docs/session_roles.md` ("At most two heavy jobs").
