@@ -4,6 +4,25 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Phase 6 deck, social and print pieces drafted
+
+- **Phase 5 was approved**, with its wording and the public set's
+  exclusions (owner).
+- **An 11-slide deck** on the Slides type, with the approved design system
+  installed. Its "why the maps differ", share and "what it can't say" slides
+  quote the live `app/pages/Why_the_Maps_Differ.py` and `app/Overview.py`
+  word for word, including the site's own share range ("about 6% to 100%",
+  computed the way that page computes it).
+- **A six-frame LinkedIn carousel, a single post and a US Letter one-page
+  sheet** were added to the project-pieces canvas. The GitHub preview and
+  README banner are the Phase 3 boards.
+- **Every piece that shows a city's figures carries that city's card-face
+  credits** and a pointer to each city's page for the full credits:
+  frame 4 and the deck's three-cities slide (San Diego, Toronto, Tokyo).
+- **The QR leave-behind and the poster are not built.** The QR card needs a
+  QR library, which is not installed and is a download for the owner to
+  approve; the poster is optional in the handoff.
+
 ### 2026-10-02 - Phase 5 multi-city views drafted, with country views for countries of three or more cities (owner)
 
 - **Phase 4 and Fukui's card line were approved** (owner).
