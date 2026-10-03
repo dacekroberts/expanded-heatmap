@@ -956,7 +956,9 @@ every key, account and letter:
   - **Today:** CARTO's Basemap Terms (2026-09-29) grant free use only with
     "a CARTO-issued API key" (§3.b); the map loads keyless, so that use is
     not permitted. The owner keeps it live until the OpenFreeMap build lands.
-  - **In progress:** a session builds OpenFreeMap's positron style, keyless
+  - **TABLED 2026-10-02 (owner) while the owner investigates a CARTO key;**
+    the OpenFreeMap build below has not started. Was: a session builds
+    OpenFreeMap's positron style, keyless
     and permitted with conditions, as a self-hosted trimmed copy to keep
     today's quiet look. It adds the "© OpenMapTiles" credit beside the OSM
     one, the Positron design credit on About the Data, and a one-line note
