@@ -3751,6 +3751,9 @@ CITIES = [
         # covered Calgary's marker; east or below it overlapped Minneapolis's
         # pill (below, Sacramento's and Chicago's too) in the United States view.
         "label_offset": ("end", -12, 0),
+        # Its own view puts the pill right of the dot, inside the canvas at
+        # 375 px; left of it, only "(Regional)" showed (2026-10-02).
+        "label_offset_by_region": {"United States West": ("start", 12, 0)},
     },
     {
         "name": "Tbilisi",
