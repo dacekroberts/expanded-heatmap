@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # (streamlit + pandas only) - the same rule the city pages' config imports
 # follow. It is the single source for every chrome colour, shared with the city
 # maps' own CSS so a reskin cannot leave the macro map on the old palette.
-from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, rgba  # noqa: E402
+from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, STREAMLIT_DARK, rgba  # noqa: E402
 from pipeline.tokyo import credits as tokyo_credits  # noqa: E402 - pure data, no imports
 
 OVERVIEW_PAGE = "Overview.py"
@@ -56,9 +56,35 @@ def render_city_nav(current: str):
 
 MACRO_THEME_KEY = "expanded-heatmap-theme"   # the same key the city maps use
 
+# The teal frame around every map, the city maps' embeds and the macro map
+# alike (owner, 2026-10-02: a 3 px muted teal ring, a faint teal halo and
+# glow, 8 px corners). Box-shadows only, so the map keeps its exact size: a
+# city map's 650 px height is what keeps the OSM credit on screen
+# (scripts/check_map_attribution.js), and a shadow adds no scrollable width
+# at 375 px. The ring is each theme's teal mixed 45% into its page color; the
+# halo and glow are the same teal at low alpha.
+#
+# light-dark() follows the PAGE's Streamlit theme, so the shadow goes on an
+# element that inherits the page's color-scheme: Streamlit sets
+# `color-scheme: normal` on the st.iframe element itself, where light-dark()
+# always resolved to the light value (measured 2026-10-02). The first
+# declaration is the fallback for a browser without light-dark() or
+# color-mix(), which drops the second whole.
+_FRAME_TEAL_DARK = STREAMLIT_DARK["primaryColor"]   # the page accent, not the maps'
+MAP_FRAME_CSS = (
+    f"box-shadow: 0 0 0 3px {rgba(LIGHT['accent'], 0.5)};"
+    "box-shadow: 0 0 0 3px light-dark("
+    f"color-mix(in srgb, {LIGHT['accent']} 45%, {LIGHT['page']}), "
+    f"color-mix(in srgb, {_FRAME_TEAL_DARK} 45%, {DARK['page']})), "
+    f"0 0 0 7px light-dark({rgba(LIGHT['accent'], 0.10)}, {rgba(_FRAME_TEAL_DARK, 0.10)}), "
+    f"0 12px 32px -8px light-dark({rgba(LIGHT['accent'], 0.30)}, {rgba(_FRAME_TEAL_DARK, 0.18)});"
+    "border-radius: 8px;"
+)
+
 _MACRO_THEME_CSS = """
 <style>
-[data-testid="stDeckGlJsonChart"] { position: relative; }
+/* The teal map frame (MAP_FRAME_CSS); overflow clips the map to its corners. */
+[data-testid="stDeckGlJsonChart"] { position: relative; overflow: hidden; @@FRAME@@ }
 #macro-theme-toggle {
     position: absolute; top: 10px; right: 52px; z-index: 20;
     font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
@@ -253,6 +279,7 @@ def render_macro_map_theme():
     the city maps (see _MACRO_THEME_JS). Call once on the Overview page."""
     css = (
         _MACRO_THEME_CSS.replace("@@CONTROLS@@", _MACRO_CONTROLS_CSS)
+        .replace("@@FRAME@@", MAP_FRAME_CSS)
         .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
         .replace("@@LIGHT_TEXT@@", LIGHT["text"])
         .replace("@@LIGHT_BORDER@@", LIGHT["border"])
@@ -2348,13 +2375,18 @@ def render_city_title(name):
     The map is centered under the title (owner, 2026-10-02). Its embed is
     1000 px wide, so this moves it only where the column is wider (1230 px at
     a 1400 px window); at 1000 px and below it already fills the column and
-    auto margins resolve to 0."""
+    auto margins resolve to 0.
+
+    The map's teal frame (MAP_FRAME_CSS) goes on the same container, which is
+    exactly the map's size at every width; the iframe only rounds its own
+    corners to match."""
     st.markdown("<style>[data-testid='stMainBlockContainer'] "
                 "{ padding-top: 3.5rem !important; }"
                 "[data-testid='stElementContainer']:has(style),"
                 "div:has(> .st-key-map-only-nav) { display: none; }"
                 "[data-testid='stElementContainer']:has(> iframe[data-testid='stIFrame']) "
-                "{ margin-left: auto; margin-right: auto; }</style>",
+                f"{{ margin-left: auto; margin-right: auto; {MAP_FRAME_CSS} }}"
+                "iframe[data-testid='stIFrame'] { border-radius: 8px; }</style>",
                 unsafe_allow_html=True)
     with st.container(key="city-title"):
         st.title(name, anchor=False, text_alignment="center")
