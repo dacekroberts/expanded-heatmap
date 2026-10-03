@@ -92,15 +92,9 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 
 ## 🟢 Band A — ready to build (0 ready + 0 ✅ BUILT)
 
-**Japan wave 2, briefed 2026-10-02 (owner: "brief now, hold on builds").** The
-first Japan batch landed on 2026-10-02. These are the next Japanese cities, from
-a scope of 114 uncovered municipalities (designated, core, 200k+, or with a tram,
-monorail, AGT or subway). Each has a brief in `docs/build_briefs/<slug>.md`, and
-every brief's checks pass (staging re-ran all 15, 2026-10-02). The shared Japan
-code the first batch landed covers most of them; each brief lists its new
-column spellings and rules. All are the minor label tier, in the Japan regions.
-`mode` follows the owner's rule (JR the largest network, or a subway, is
-`metro`). 🚨 items are open with the owner. **Every 🚨 settled 2026-10-02 (owner: "approve all recommendations"). RELEASED 2026-10-02 to one build session (`docs/handoff_japan_wave2_2026-10-02.md`; pages 176–189).**
+**Empty since 2026-10-03: Japan wave 2's nine Band-A cities were built** (one
+build session, `japan-wave2-build`, pages 176-184; they land at the owner's
+review time). Each city's build line is in the Built table above.
 
 | City | Business lists | Licence | Rail | Open at build |
 |---|---|---|---|---|
@@ -108,8 +102,9 @@ column spellings and rules. All are the minor label tier, in the Japan regions.
 ## 🔵 Band B — narrower pages (0 cities)
 
 The UK six and the Japan batch's five band-B cities moved to Built on
-2026-10-02 (owner: landed together). **Japan wave 2's six one-bucket cities
-(briefed 2026-10-02, builds held; Chiba to R the same day):**
+2026-10-02 (owner: landed together), and Japan wave 2's five one-bucket
+cities on 2026-10-03 (pages 185-189, landing at review time; Chiba went to R
+on 2026-10-02).
 
 | City | The page | Source | Rail | Owner calls |
 |---|---|---|---|---|
