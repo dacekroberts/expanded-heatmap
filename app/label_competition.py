@@ -198,6 +198,13 @@ TEXT_WIDTH = {
     "Sacramento": 81.3,
     # Houston, 2026-09-29, the same run as Sacramento.
     "Houston": 56.9,
+    # Seattle (Regional), 2026-10-02, the built-in browser with Space Grotesk
+    # 600 loaded from Google Fonts; controls Vancouver (Regional) 144.4, Miami
+    # (Regional) 112.6, Buffalo 48.8 and Boston 48.4 reproduced exactly.
+    "Seattle (Regional)": 120.5,
+    # Tbilisi, 2026-10-02, the same method; controls Seattle (Regional),
+    # Vancouver (Regional), Buffalo and Boston reproduced exactly.
+    "Tbilisi": 39.1,
     # Ottawa, 2026-09-29, the font from Google Fonts as the app loads it;
     # controls Prague, Tokyo, Houston, Toronto.
     "Ottawa": 47.5,
@@ -214,6 +221,13 @@ TEXT_WIDTH = {
     "Yokohama": 68.8,
     # Hiroshima, 2026-09-30; the same controls as Ottawa.
     "Hiroshima": 66.3,
+    # The Japan batch, 2026-10-02, as Odense in a browser tab with Google
+    # Fonts' Space Grotesk loaded (canvas measureText after
+    # document.fonts.load); controls Houston, Odense, Kansas City, Hiroshima,
+    # Yokohama, Daugavpils, Ottawa and Toronto, each reproduced to 0.1 px.
+    "Matsuyama": 79.0, "Toyama": 52.2, "Kumamoto": 72.2, "Fukui": 36.2, "Nagasaki": 61.1,
+    "Utsunomiya": 81.3, "Kitakyushu": 76.3, "Sakai": 36.0, "Hakodate": 64.1, "Kagoshima": 73.8,
+    "Okayama": 61.7, "Kōchi": 37.6,
     # Dallas, 2026-09-30; controls Prague, Tokyo, Houston, Toronto, Yokohama.
     "Dallas": 40.1,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
@@ -251,6 +265,10 @@ TEXT_WIDTH = {
     # Milan.
     "Brno": 31.9, "Plzeň": 36.0, "Olomouc": 59.1, "Ostrava": 51.6,
     "Liberec (Regional)": 122.9, "Most (Regional)": 107.5,
+    # The UK six, 2026-10-02, after the Google Fonts face loaded in the
+    # browser pane; controls Newcastle (Regional) 143.1, London, Glasgow.
+    "Manchester (Regional)": 153.9, "Birmingham (Regional)": 153.2, "Edinburgh": 69.3,
+    "Sheffield": 59.7, "Nottingham (Regional)": 151.7, "Blackpool (Regional)": 139.7,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

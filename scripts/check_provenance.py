@@ -189,9 +189,15 @@ SLUG_OVERRIDES = {
     "Miami (Regional)": "miami",
     "Lille (Regional)": "lille",
     "Newcastle (Regional)": "newcastle",
+    "Birmingham (Regional)": "birmingham",
+    "Manchester (Regional)": "manchester",
+    "Blackpool (Regional)": "blackpool",
+    "Nottingham (Regional)": "nottingham",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",
+    # Japan batch (2026-10-02): the macron dropped from the package name.
+    "Kōchi": "kochi",
     # Brazil: accents dropped from the package name, and the regional pages'
     # suffix, as for Lille.
     "São Paulo": "sao_paulo",
@@ -226,6 +232,8 @@ SLUG_OVERRIDES = {
     # Tram kit (2026-09-30): accents dropped from the package name, as Brazil's.
     "Liepāja": "liepaja",
     "Göteborg": "goteborg",
+    # Seattle (Regional): eleven cities on one page (2026-10-02).
+    "Seattle (Regional)": "seattle",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are

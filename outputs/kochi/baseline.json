@@ -1,0 +1,19 @@
+{
+  "join_block": 1353,
+  "join_chome": 59,
+  "line_station_rows": 92,
+  "name_rule_spread_rows": 0,
+  "names_withheld": 0,
+  "not_a_premises": 3,
+  "not_storefront": 0,
+  "repeat_permits_dropped": 6,
+  "rows_barber": 323,
+  "rows_beauty": 1092,
+  "stations_collapsed": 86,
+  "stations_excluded": 19,
+  "stations_in_scope": 67,
+  "storefronts": 1406,
+  "storefronts_personal_services": 1406,
+  "sweets_deli_factory_like": 0,
+  "sweets_deli_rows": 0
+}

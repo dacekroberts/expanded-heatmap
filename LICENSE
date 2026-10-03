@@ -59,6 +59,17 @@ Nothing in the MIT grant above should be read as permission to redistribute
 any third party's data. For this project's code, take it and use it freely.
 For the data, go to the source.
 
+ONE EXCEPTION, OFFERED RATHER THAN WITHHELD: `outputs/fukui/` IS OFFERED UNDER
+CC BY-SA 4.0. Fukui City licenses the lists the Fukui map is built from under
+CC BY-SA (its site policy's default, no version named), and share-alike means
+an adaptation is offered on the same terms. So this project offers everything
+under `outputs/fukui/` - the Fukui map and the Fukui data derived from those
+lists - under the Creative Commons Attribution-ShareAlike 4.0 International
+licence (https://creativecommons.org/licenses/by-sa/4.0/), with the credits in
+`docs/data_sources.md` (notice 100). This covers this project's own
+contribution; the other material in the map (MLIT's layers, OpenStreetMap's
+names, the basemap) keeps its own terms.
+
 ================================================================================
 
 REMOVAL REQUESTS

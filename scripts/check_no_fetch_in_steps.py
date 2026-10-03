@@ -32,7 +32,22 @@ WHAT THIS CHECKS THAT A GREP WOULD NOT
 Transitive reach. `pipeline/census_geocoder.py` imports `requests` and is
 imported by three cities' `step3_geocode.py`, so those steps fetch without any
 HTTP client appearing in them: the same defect one import deeper, and the
-reason this walks the shared `pipeline/*.py` modules too.
+reason this follows a step's imports. It follows ALL of them, transitively,
+into every module under `pipeline/` (shared ones, `pipeline/countries/`,
+`pipeline/taxonomies/`, another city's step, and helpers inside the step's
+own city folder, whether imported as `pipeline.<city>.x`, as a bare sibling
+name or relatively). Until 2026-10-02 it read only `pipeline/*.py`, one level
+deep, so `pipeline/seattle/lcb_offpremise.py` could have fetched at import
+unseen (Seattle (Regional) build, docs/decisions_drafts/seattle-tbilisi.md).
+
+FENCED IS THE ONE EXCEPTION. A helper may keep its own download beside its
+reader if the HTTP import sits inside a module-level function named exactly
+`fetch`, which only `fetch_sources.py` calls. Importing such a module runs no
+request; calling `fetch` would. So the check fails a step if anything in its
+reach references that `fetch` (`m.fetch`, `from m import fetch`, or the
+module calling its own `fetch` outside its `__main__` block). An HTTP import
+anywhere else in the module, a `fetch` inside a class, or any HTTP import in a
+step file itself is not fenced.
 
 GUARDED IS A THIRD ANSWER, NOT A PASS IN DISGUISE. The geocoder cannot move to
 a fetch script: its input is a batch of addresses the step computes, so there
@@ -83,35 +98,189 @@ KNOWN_GAPS = {}
 # that a drift check cannot follow them there.
 GUARD_CALL = "refuse_if_offline"
 
+# The one function name an HTTP import may hide in. See FENCED in the
+# docstring: allowed only while nothing a step reaches references it.
+FENCE = "fetch"
 
-def imported_modules(path):
-    """Every module name this file imports, dotted and fully qualified."""
-    names = set()
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for a in node.names:
-                names.add(a.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.level:            # a relative import, never an HTTP client
-                continue
-            if node.module:
-                names.add(node.module)
+# Packages that import their members by name at run time, which no import
+# statement shows. `pipeline/taxonomies/__init__.py`'s load_taxonomy_module()
+# calls importlib on a TAXONOMY_MODULES entry, so reaching the package counts
+# as reaching every module in it: an over-approximation, and the safe side.
+DYNAMIC_FANOUT = ("pipeline.taxonomies",)
+
+
+def module_index():
+    """Every module under pipeline/, dotted name -> file. A package's name
+    maps to its `__init__.py`."""
+    index = {}
+    for p in sorted(PIPELINE.rglob("*.py")):
+        parts = list(p.relative_to(ROOT).with_suffix("").parts)
+        if parts[-1] == "__init__":
+            parts = parts[:-1]
+        index[".".join(parts)] = p
+    return index
+
+
+def _dotted(node):
+    """`a.b.c` for a Name/Attribute chain, else None."""
+    parts = []
+    while isinstance(node, ast.Attribute):
+        parts.append(node.attr)
+        node = node.value
+    if not isinstance(node, ast.Name):
+        return None
+    parts.append(node.id)
+    return ".".join(reversed(parts))
+
+
+def _is_main_block(stmt):
+    """True for `if __name__ == "__main__":`, which an import never runs."""
+    t = getattr(stmt, "test", None)
+    return (isinstance(stmt, ast.If) and isinstance(t, ast.Compare)
+            and isinstance(t.left, ast.Name) and t.left.id == "__name__"
+            and len(t.comparators) == 1
+            and isinstance(t.comparators[0], ast.Constant)
+            and t.comparators[0].value == "__main__")
+
+
+class Module:
+    """What one file imports, which HTTP clients it holds and where, whether
+    it calls the offline guard, and whose `fetch` it references."""
+
+    def __init__(self, name, path, index):
+        self.name, self.path = name, path
+        rel = path.relative_to(ROOT)
+        # The package a relative import starts from, and the one a bare
+        # sibling import resolves in (a step run as a script has its own
+        # folder first on sys.path, so `import lcb_offpremise` works there).
+        self.package = ".".join(rel.parent.parts)
+        self._index = index
+        self.unfenced = set()      # HTTP clients imported outside the fence
+        self.fenced = set()        # HTTP clients imported inside `def fetch`
+        self.guarded = False
+        self.imports = set()       # pipeline modules this one runs on import
+        self.aliases = {}          # local name -> dotted module
+        self.fetch_refs = set()    # modules whose fetch is referenced
+        self.fetch_refs_main = set()   # the same, from the __main__ block
+        self._raw_refs = []        # (dotted or None for bare, in __main__)
+
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for stmt in tree.body:
+            if (isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef))
+                    and stmt.name == FENCE):
+                self._scan(stmt, fenced=True, main=False)
+            else:
+                self._scan(stmt, fenced=False, main=_is_main_block(stmt))
+        self._resolve_refs()
+
+    def _canonical(self, dotted):
+        """A name as written -> the dotted module it means. A bare name that
+        is a sibling file resolves into this module's own package. Exact for
+        a step and its city's helpers; a shared module's bare import really
+        resolves against the running step's folder, which this does not
+        model."""
+        first = dotted.split(".")[0]
+        if self.package and f"{self.package}.{first}" in self._index:
+            return f"{self.package}.{dotted}"
+        return dotted
+
+    def _relative_base(self, level, module):
+        parts = self.package.split(".") if self.package else []
+        if level > 1:
+            parts = parts[: len(parts) - (level - 1)]
+        base = ".".join(parts)
+        if module:
+            base = f"{base}.{module}" if base else module
+        return base
+
+    def _reach(self, dotted):
+        """Every indexed module importing `dotted` runs: the module itself
+        and each parent package's __init__."""
+        parts = dotted.split(".")
+        for i in range(1, len(parts) + 1):
+            prefix = ".".join(parts[:i])
+            if prefix in self._index:
+                self.imports.add(prefix)
+
+    def _scan(self, root, fenced, main):
+        http = self.fenced if fenced else self.unfenced
+        for node in ast.walk(root):
+            if isinstance(node, ast.Import):
                 for a in node.names:
-                    names.add(f"{node.module}.{a.name}")
-    return names
+                    http |= http_clients({a.name})
+                    if fenced:
+                        continue
+                    full = self._canonical(a.name)
+                    self._reach(full)
+                    if a.asname:
+                        self.aliases[a.asname] = full
+                    else:
+                        head = a.name.split(".")[0]
+                        self.aliases[head] = self._canonical(head)
+            elif isinstance(node, ast.ImportFrom):
+                if node.level:
+                    base = self._relative_base(node.level, node.module)
+                else:
+                    base = node.module or ""
+                    http |= http_clients(
+                        {base} | {f"{base}.{a.name}" for a in node.names})
+                    base = self._canonical(base)
+                if fenced:
+                    continue
+                self._reach(base)
+                for a in node.names:
+                    self._reach(f"{base}.{a.name}")
+                    self.aliases[a.asname or a.name] = f"{base}.{a.name}"
+                    if a.name == FENCE:
+                        (self.fetch_refs_main if main
+                         else self.fetch_refs).add(base)
+            elif fenced:
+                continue
+            elif isinstance(node, ast.Call):
+                f = node.func
+                if (getattr(f, "id", None) or getattr(f, "attr", None)) \
+                        == GUARD_CALL:
+                    self.guarded = True
+            if fenced:
+                continue
+            if isinstance(node, ast.Attribute) and node.attr == FENCE:
+                d = _dotted(node.value)
+                if d:
+                    self._raw_refs.append((d, main))
+            elif (isinstance(node, ast.Name) and node.id == FENCE
+                  and isinstance(node.ctx, ast.Load)):
+                self._raw_refs.append((None, main))
+
+    def _resolve_refs(self):
+        """After every alias is known, so source order cannot matter."""
+        for d, main in self._raw_refs:
+            refs = self.fetch_refs_main if main else self.fetch_refs
+            if d is None:
+                # A bare `fetch`: this module's own, unless imported.
+                if FENCE not in self.aliases:
+                    refs.add(self.name)
+                continue
+            head, _, rest = d.partition(".")
+            if head in self.aliases:
+                full = self.aliases[head] + ("." + rest if rest else "")
+                if full in self._index:
+                    refs.add(full)
 
 
-def calls_guard(path):
-    """Return True if this module calls refuse_if_offline() anywhere."""
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Call):
-            f = node.func
-            name = getattr(f, "id", None) or getattr(f, "attr", None)
-            if name == GUARD_CALL:
-                return True
-    return False
+def closure(start, index, cache):
+    """Every pipeline module importing `start` runs, `start` included."""
+    seen, todo = set(), [start]
+    while todo:
+        name = todo.pop()
+        if name in seen or name not in index:
+            continue
+        seen.add(name)
+        if name not in cache:
+            cache[name] = Module(name, index[name], index)
+        todo.extend(cache[name].imports - seen)
+        if name in DYNAMIC_FANOUT:
+            todo.extend(n for n in index if n.startswith(name + "."))
+    return seen
 
 
 def drift_check_arms_the_guard():
@@ -158,45 +327,66 @@ def main():
         _use_root(args.root)
         print(f"(checking {ROOT})\n")
 
-    # Shared pipeline modules first: a step that imports one of these inherits
-    # whatever it reaches.
-    shared = {}
-    for p in sorted(PIPELINE.glob("*.py")):
-        hits = http_clients(imported_modules(p))
-        if hits:
-            shared[f"pipeline.{p.stem}"] = (p, hits, calls_guard(p))
-    if shared:
-        print("Shared pipeline modules that reach the network:")
-        for mod, (p, hits, guarded) in sorted(shared.items()):
-            state = "GUARDED" if guarded else "UNGUARDED"
-            print(f"  {state:9s} {p.relative_to(ROOT).as_posix()}  ->  "
-                  f"{', '.join(sorted(hits))}")
-        print()
-
     steps = sorted(PIPELINE.glob("*/step*.py"))
     if not steps:
         raise SystemExit("Found no pipeline/*/step*.py at all - this check "
                          "would pass vacuously, which is worse than failing.")
 
-    violations = {}                       # rel path -> (kind, detail)
+    index = module_index()
+    cache = {}
+    violations = {}                       # rel path -> [(kind, detail)]
     guarded = {}                          # reaches the network, but not
                                           # from inside a drift check
+    reached_http = set()                  # non-step modules worth listing
     for p in steps:
         rel = p.relative_to(ROOT).as_posix()
-        names = imported_modules(p)
-        direct = http_clients(names)
+        me = ".".join(p.relative_to(ROOT).with_suffix("").parts)
+        reach = closure(me, index, cache)
+        step = cache[me]
+        # A step file gets no fence: its own `fetch` would still be a step
+        # downloading its input.
+        direct = step.unfenced | step.fenced
         if direct:
-            violations[rel] = ("imports", ", ".join(sorted(direct)))
+            violations[rel] = [("imports", ", ".join(sorted(direct)))]
             continue
-        via = sorted(m for m in names if m in shared)
+        others = reach - {me}
+        via = sorted(m for m in others if cache[m].unfenced)
+        reached_http.update(m for m in others
+                            if cache[m].unfenced or cache[m].fenced)
+        # Whose `fetch` the step's reach refers to. The step's own __main__
+        # block runs; a helper's never does on import.
+        refs = step.fetch_refs | step.fetch_refs_main
+        for m in others:
+            refs |= cache[m].fetch_refs
+        called = sorted(m for m in refs
+                        if m in cache and m in reach and cache[m].fenced)
+        found = []
         if via:
-            reached = sorted(set().union(*(shared[m][1] for m in via)))
-            if all(shared[m][2] for m in via):
-                guarded[rel] = ("reaches via " + ", ".join(via),
-                                ", ".join(reached))
-            else:
-                violations[rel] = ("reaches via " + ", ".join(via),
-                                   ", ".join(reached))
+            reached = sorted(set().union(*(cache[m].unfenced for m in via)))
+            found.append(("reaches via " + ", ".join(via), ", ".join(reached)))
+        if called:
+            fenced = sorted(set().union(*(cache[m].fenced for m in called)))
+            found.append(("calls " + ", ".join(f"{m}.{FENCE}()"
+                                               for m in called),
+                          ", ".join(fenced)))
+        if called or any(not cache[m].guarded for m in via):
+            violations[rel] = found
+        elif via:
+            guarded[rel] = found[0]
+
+    # What a step can reach: a step that imports one of these inherits it.
+    if reached_http:
+        print("Pipeline modules a step reaches that hold an HTTP client:")
+        for m in sorted(reached_http):
+            mod = cache[m]
+            state = ("UNGUARDED" if mod.unfenced and not mod.guarded
+                     else "GUARDED" if mod.unfenced
+                     else "FENCED")
+            hits = mod.unfenced or mod.fenced
+            where = "" if mod.unfenced else f" (inside {FENCE}() only)"
+            print(f"  {state:9s} {mod.path.relative_to(ROOT).as_posix()}  ->  "
+                  f"{', '.join(sorted(hits))}{where}")
+        print()
 
     if args.list:
         for p in steps:
@@ -218,12 +408,13 @@ def main():
         if arming:
             failures.append(f"the offline guard is not armed\n    {arming}")
 
-    for rel, (kind, detail) in sorted(violations.items()):
+    for rel, found in sorted(violations.items()):
         if rel in KNOWN_GAPS:
-            print(f"KNOWN GAP  {rel}\n           {kind}: {detail}\n"
-                  f"           {KNOWN_GAPS[rel]}")
+            lines = "".join(f"\n           {k}: {d}" for k, d in found)
+            print(f"KNOWN GAP  {rel}{lines}\n           {KNOWN_GAPS[rel]}")
         else:
-            failures.append(f"{rel}\n    {kind}: {detail}")
+            lines = "".join(f"\n    {k}: {d}" for k, d in found)
+            failures.append(f"{rel}{lines}")
 
     # A gap that has been fixed must be deleted from the list, or the list
     # becomes a place where a defect goes to be forgotten.

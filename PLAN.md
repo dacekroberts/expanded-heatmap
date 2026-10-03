@@ -21,6 +21,23 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **The UK six's watch items** (built 2026-10-02 on `uk-six-build`):
+  - **Birmingham (Regional): West Midlands Metro Line 2 (Wednesbury - Dudley)**,
+    due about 1 November 2026 (Dudley Council's leader; the 28 August date was
+    missed). Once in passenger service, take relation 17248967 out of
+    `NOT_DRAWN`, add Dudley (FSA 409) as a fourth authority (pre-approved by
+    the owner, 2026-10-01), and drop Line 2's five Sandwell stops from
+    `NAPTAN_EXPLAINED`.
+  - **Birmingham: the Eastside stops beyond Millennium Point** (Curzon Street,
+    Meriden Street, Digbeth High Street), active in NaPTAN, not on the
+    operator's maps page on 2026-10-02. Add them when they open.
+  - **Sheffield's Shalesmoor stop**: NaPTAN renamed it "Kelham Island" in 2025;
+    the map keeps Shalesmoor (owner, 2026-10-02). Re-read the operator's own
+    name if its site ever answers a script.
+  - **Sheffield's business-rates list**, a later second bucket (owner,
+    2026-10-01): a licence read, an address join and a call on "Shop And
+    Premises".
+
 - [ ] Owner: `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB, superseded by
   `gtfs-openov-nl.zip`) and `data/rome/raw/rome_static_gtfs.zip` (46.8 MB,
   downloaded, then not used) may be deleted from the main checkout.
@@ -459,7 +476,23 @@ Desktop is unaffected — the label is fully visible there.
   owner, not a data one. Privacy flags: `ownername` and `businessphone`
   columns, and the name fields are inverted on some rows (blank `businessname`
   with the trade name sitting in `ownername`) - Boston's trap again.
-- [ ] **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
+- [x] **Seattle (Regional) BUILT 2026-10-02** on `seattle-tbilisi-build`
+  (`pages/174_Seattle_Heatmap.py`; 14,431 storefronts, 39 stations in 11
+  cities, five publishers), held for the owner's review time. The two owner
+  questions answered 2026-10-02 (lapsed Seattle food on a trade-name match
+  only; Snohomish rows with a blank jurisdiction placed by their point).
+  The history below is kept.
+- [x] **Tbilisi BUILT 2026-10-02** on `seattle-tbilisi-build`
+  (`pages/175_Tbilisi_Heatmap.py`; 13,252 storefronts, 23 stations; Georgia's
+  first city, the West Asia region), held for the owner's review time.
+- [ ] **Tbilisi: run the full placeholder check before the next review**
+  (owner, 2026-10-02). The build's register pull could not take "commonest
+  address" in full, so step 2 ran a bounded check (33 points of 50+ rows
+  unsettled). Re-pull with `python pipeline/tbilisi/fetch_sources.py --only
+  register --force` (about 70 minutes at Geostat's 2026-10-02 pace, through
+  `heavy_job.py`), then step 2: it exits if the eleven listed points differ
+  from what the rule finds. `docs/decisions_drafts/seattle-tbilisi.md`.
+- **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
   first MULTI-MUNICIPALITY city.** Do not re-probe the Seattle registry itself;
   the findings are in `docs/build_briefs/seattle.md`, with checks
   (`python scripts/brief_check.py seattle`). On that evidence Seattle's own
@@ -876,7 +909,7 @@ every key, account and letter:
   - What Is Excluded still points to `excluded_premises.csv` for Minneapolis,
     Pittsburgh, Kitchener-Waterloo, Palma and Ottawa. No page shows those
     rows, so the sentence needs another wording, not "listed on the page".
-- [ ] ⏸ **Review time (owner, 2026-10-02): two fixes the UK six session found.**
+- [x] **DONE 2026-10-02, bundled with the UK six landing** (b52d67e1): **Review time (owner, 2026-10-02): two fixes the UK six session found.**
   - **Legend rows that repeat their label.** `build_legend` writes the
     on-map label, then `LEGEND_NAMES`' full name, a shape meant for line
     codes. Fix in `pipeline/map_common.py`: drop the label when the full name
@@ -896,6 +929,37 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
+- [ ] **Left by the Japan batch (landed 2026-10-02), for the owner:**
+  - **`japan_fetch.fetch_city` counts a file's rows with `city_rows(dest)`**,
+    not the city config's own reader, so Fukui's and Toyama's recorded
+    provenance row counts are wrong; their pins are right. A small shared
+    fix, recommended by the Japan lead.
+  - **A prose proposal for Okayama's page:** a sentence saying 13 of its 16
+    unplaced rows carry the ministry's stand-in point.
+  - **The default-point guard refuses a point only when 3 or more towns
+    share it.** Kitakyushu's 9 pins on points shared by fewer towns stay.
+  - **Found by the landing's deploy check:**
+    - No Japanese page, built or new, says the stations left out are
+      "listed below" (`docs/city_page_format.md` item 6). For the
+      family-consistency wording batch.
+    - East Asia names the Japanese anchors through `REGION_LABELS_ALSO`, but
+      Sapporo's dot sits off the top of East Asia's frame at every width, and
+      at 375 Tokyo and Osaka do too. Not blocking: Japan East and West show
+      them. Re-place the labels, or leave Sapporo out of East Asia's anchors.
+- [ ] **Found at the UK six landing (2026-10-02), none blocking:**
+  - **The "OpenStreetMap (rail geometry)" notice** lists the cities whose
+    rail data comes from OSM, but it names none of the nine UK cities, and
+    other later cities are missing too. The basemap's "© OpenStreetMap
+    contributors" credit meets ODbL either way. Bring it up to date, or reword
+    it as a general statement, at the next `app/` batch.
+  - **Glasgow's Europe label is about 65% clipped at 375 px**, at the frame's
+    left edge, since the UK's cities left Europe. Every other placement
+    collides: above hits Newcastle's pill, below hits Dublin's, and to the
+    right covers Edinburgh's dot. The clipping is reported, not failed; the
+    pill stays clickable and the list under the map names Glasgow.
+  - **`scaffold_city.py` has only the GTFS map template.** An OSM-rail city
+    that drops `GTFS_ZIP` from its config fails at import until its map step
+    is replaced. A `--rail-source osm` template would save that step.
 - [ ] ⏸ **D.C.'s "Beauty Booth" (6 pins), kept as Personal services**: a chair
   rented inside a salon, which the person-license rule (2026-10-02,
   `docs/category_rules.md`) takes out. Pending for the owner in

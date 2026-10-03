@@ -1366,6 +1366,49 @@ COLUMNS["czech_nace2025"]["personal_catchall"] = [
             "96990 and the bare 969 group (21 rows, the ragged register) dropped in step 2 "
             "[the 969 row fixed, approved 2026-09-29]")]
 
+# Georgia: NACE Rev. 2 with a national fifth digit (Geostat), keyed at the
+# leaf. Codes outside the four tracked divisions are out by construction.
+COLUMNS["georgia_nace"] = {
+    "funeral": [loc("96.03.0", "funeral and related activities")],
+    "no_counter_food": [loc("56.29.0", "other food service (contract catering, canteens)"),
+                        loc("56.21.0", "event catering"),
+                        loc("47.81.0", "stalls and markets, food"),
+                        loc("47.89.0", "stalls and markets, other goods")],
+    "personal_catchall": [loc("96.09.9", "other personal care n.e.c."),
+                          loc("96.09", "other personal service activities n.e.c. (group only)")],
+    "tattoo": absent("no code of its own: 96.09.4 is pet grooming and pet tattooing, and "
+                     "tattooists sit in the 96.09 catch-all",
+                     ignore=("pet grooming and tattooing (R2 catch-all)",)),
+    "adult_hostess": absent("the classification names nothing as adult"),
+    "sex_shop": absent("no code of its own; filed by product, as Retail"),
+    "massage_commercial": [loc("96.04.0", "physical well-being activities")],
+    "massage_regulated": [loc("86.90.0", "other human health activities")],
+    "car_dealer": [loc("45.11.2", "retail sale of new and used vehicles"),
+                   loc("45.19.0", "sale of other motor vehicles"),
+                   loc("45.32.0", "retail trade of motor vehicle parts"),
+                   loc("45.40.0", "motorcycle sale with repair, one code: R4's merged type goes whole")],
+    "petrol_station": [loc("47.30.1", "retail sale of petrol"),
+                       loc("47.30.3", "retail sale of gaseous automotive fuel")],
+    "vehicle_repair": [loc("45.20.0", "maintenance and repair of motor vehicles"),
+                       loc("45.31.0", "wholesale of motor vehicle parts")],
+    "gambling": [loc("92.00.0", "gambling and betting activities")],
+    "pawnbroker": absent(PAWN_MIXED),
+    "nightclub": [loc("56.30.0", "beverage serving activities")],
+    "vet": [loc("75.00.1", "veterinary establishments")],
+    "nonstore": [loc("47.91.1", "mail order or internet"), loc("47.91.2", "internet auctions"),
+                 loc("47.99.0", "other retail not in stores, stalls or markets")],
+    "parking": [loc("52.21.0", "service activities incidental to land transportation")],
+    "repair": [loc("95.12.0", "repair of communication equipment"),
+               loc("95.23.0", "repair of footwear and leather goods"),
+               loc("95.29.0", "repair of other personal and household goods")],
+    "lodging": [loc("55.10.1", "hotels with restaurants"), loc("55.20.0", "short-stay accommodation")],
+    "recreation": [loc("93.13.0", "fitness facilities"), loc("59.14.0", "motion picture projection")],
+    "pharmacy": [loc("47.73.9", "retail sale of other pharmaceutical goods")],
+    "optician": absent("no code of its own: optical goods sit in 47.78.0, other new goods, as Retail"),
+    "health_food": absent("no code of its own"),
+    "mobile_unit": [loc("47.99.0", "other retail not in stores, stalls or markets")],
+}
+
 BERLIN_CFG = "pipeline/berlin/config.py"
 BERLIN_969 = '"nace_id": ("969",)'
 
@@ -1853,6 +1896,65 @@ COLUMNS["ottawa_inspection"] = {
 }
 
 
+def _sea(naics_code, source="seattle"):
+    return {"source": source, "naics": naics_code}
+
+
+def _kc(category, source="kc_food"):
+    return {"source": source, "business_category": category}
+
+
+# Seattle (Regional): Seattle's and Bellevue's registers on NAICS 2022 (codes
+# read from Seattle's layer 2026-10-02), King County food by classification
+# and name kind, the Liquor Board's off-premise privileges.
+COLUMNS["seattle"] = {
+    "funeral": [loc(_sea("812210"), "funeral homes"), loc(_sea("812220"), "cemeteries")],
+    "funeral_goods": [loc(_sea("459999"), "all other miscellaneous retailers (monument dealers)")],
+    "no_counter_food": [loc(_sea("722310"), "food service contractors"),
+                        loc(_sea("722320"), "caterers"),
+                        loc(_kc("Catering Operation"), "King County catering operations"),
+                        loc(_kc("School Lunch Program"), "school kitchens"),
+                        loc(_kc("Institutional kitchen"), "workplace cafeterias, contract caterers, "
+                                                          "hospital and campus dining, by name")],
+    "personal_catchall": [loc(_sea("812990"), "all other personal services")],
+    "tattoo": [loc(_sea("812199"), "other personal care services (tattoo parlours)")],
+    "adult_hostess": [loc(_kc("Adult venue"), "a food premises the register's name calls a cabaret")],
+    "korean_karaoke_bar": absent("no such trade in these registers"),
+    "sex_shop": [loc(_sea("459999"), "all other miscellaneous retailers (sex shops file here)")],
+    "massage_commercial": [loc(_sea("812199"), "other personal care services (massage)")],
+    "massage_regulated": [loc(_sea("621399"), "offices of all other health practitioners")],
+    "car_dealer": [loc(_sea("441110"), "new car dealers"), loc(_sea("441120"), "used car dealers")],
+    "petrol_station": [loc(_sea("457110"), "gasoline stations with convenience stores"),
+                       loc(_kc("GROCERY STORE - BEER/WINE", "lcb_retail"),
+                           "a forecourt shop holding the Liquor Board's grocery privilege")],
+    "vehicle_repair": [loc(_sea("811111"), "general automotive repair")],
+    "gambling": [loc(_sea("713290"), "other gambling industries")],
+    "pawnbroker": absent("no code of its own: NAICS files pawnshops under 522299 with every other "
+                         "non-bank lender, as in every NAICS city"),
+    "nightclub": [loc(_sea("722410"), "drinking places (nightclubs file here)")],
+    "vet": [loc(_sea("541940"), "veterinary services")],
+    "nonstore": [loc(_sea("445132"), "vending machine operators (NAICS 2022)"),
+                 loc(_sea("457210"), "fuel dealers (NAICS 2022)"),
+                 loc(_kc("Vending"), "vending routes and workplace micro-markets, by name")],
+    "parking": [loc(_sea("812930"), "parking lots and garages")],
+    "repair": [loc(_sea("811210"), "electronic equipment repair")],
+    "lodging": [loc(_sea("721110"), "hotels and motels"),
+                loc(_kc("Hotel"), "hotels' kitchens, by name"),
+                loc(_kc("Bed and Breakfast Operation"), "King County bed and breakfasts")],
+    "recreation": [loc(_sea("713940"), "fitness centres"),
+                   loc(_kc("Recreation venue or club"), "theatres, cinemas, members' clubs and "
+                                                        "airline lounges, by name")],
+    "pharmacy": [loc(_sea("456110"), "pharmacies and drug retailers")],
+    "pharmacy_food_register": [loc(_kc("Pharmacy"), "pharmacies holding a food permit, by name")],
+    "optician": [loc(_sea("456130"), "optical goods retailers")],
+    "health_food": [loc(_sea("456191"), "food (health) supplement retailers")],
+    "person_licence": absent("no person-held licence type: Seattle and Bellevue license "
+                             "businesses, and no personal-services register is used elsewhere"),
+    "mobile_unit": [loc(_sea("722330"), "mobile food services"),
+                    loc(_kc("Mobile Food Unit"), "King County mobile food units")],
+}
+
+
 COLUMNS["minneapolis_inspection"] = {
     **{rid: absent("a food-inspection register: food facilities only") for rid in (
         "funeral", "personal_catchall", "sex_shop", "massage_commercial", "massage_regulated",
@@ -1994,6 +2096,7 @@ ROW_KEY = {
     "taiwan_fia": "industry_code",
     "hong_kong_fehd": "licence_code",
     "anzsic_fes": "ClassificationCode",
+    "georgia_nace": "activity_code",
 }
 
 # Brazil's step 2 classifies the free-text description; classify() reads back the stored bucket.

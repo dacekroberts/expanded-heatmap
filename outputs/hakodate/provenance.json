@@ -1,0 +1,113 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 24680,
+    "dataset_page": "https://www.city.hakodate.hokkaido.jp/docs/2019072900024/",
+    "file": "202608riyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:26:05+00:00",
+    "rows": 283,
+    "sha256": "f552a2b88e19ccb9404fb62624adf65d95aad930daec7fc90ef0b3c6af01bb77",
+    "url": "https://www.city.hakodate.hokkaido.jp/docs/2019072900024/file_contents/202608riyo.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 62308,
+    "dataset_page": "https://www.city.hakodate.hokkaido.jp/docs/2019072900024/",
+    "file": "202608biyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:26:06+00:00",
+    "rows": 677,
+    "sha256": "b824c6109702458272f4fb9198dde8290b14e258ba0bf2e35d7fd6da1a56ab89",
+    "url": "https://www.city.hakodate.hokkaido.jp/docs/2019072900024/file_contents/202608biyo.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-08-31",
+    "bytes": 16526,
+    "dataset_page": "https://www.city.hakodate.hokkaido.jp/docs/2019072900024/",
+    "file": "R80831cleaning.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:26:08+00:00",
+    "rows": 143,
+    "sha256": "0e5176a80ed55e4c4dff3008f0a4291c118fc1165b1b284cfaefd44879f26c93",
+    "url": "https://www.city.hakodate.hokkaido.jp/docs/2019072900024/file_contents/R80831cleaning.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "estat_cleaning": {
+    "bytes": 7514,
+    "file": "estat_eisei_r6_cleaning_by_city.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:48:16+00:00",
+    "sha256": "472ab791d479b58de68cc69ec5f2ff9fd609a0b3ad44a77e9da2b27ee34fb268",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040359179&fileKind=1",
+    "use": "measurement only (the official count), never drawn"
+  },
+  "estat_riyo_biyo": {
+    "bytes": 8126,
+    "file": "estat_eisei_r6_riyo_biyo_by_city.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:48:14+00:00",
+    "sha256": "9c2c7022558a53179f60c0a409817fdcbf28abd91953a51983887816d7802b95",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040359178&fileKind=1",
+    "use": "measurement only (the official count), never drawn"
+  },
+  "isj_01202_block": {
+    "bytes": 155582,
+    "file": "01202-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:28:57+00:00",
+    "sha256": "f9e715e89dcaa84c92c20022c3f9486101af5b80e6e70eadd4d2ba038d7acef2",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/01202-24.0a.zip"
+  },
+  "isj_01202_chome": {
+    "bytes": 8072,
+    "file": "01202-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:28:59+00:00",
+    "sha256": "e668dfcc42affd6f4d2ce65f3b54b033ea8f418f358a3625db5ebaa9aea2cc6c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/01202-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 57371491,
+    "file": "data/japan/raw/N03-20250101_01_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:13+00:00",
+    "sha256": "9d490ca57edbb215c1b7df5f36fa63e32933919f7f6b94ce56c0d4d9ae928330",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_01_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 4721,
+    "elements": 7,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T22:04:05Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](41.69,140.68,42.02,141.2);way[\"railway\"=\"station\"](41.69,140.68,42.02,141.2););out tags center;",
+    "retrieved": "2026-10-02T22:05:31+00:00",
+    "sha256": "bb3ca46187a245f665e0b99928ad1f757b8c64541fe1e8a0d70d2a1068c7a62e"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 40561,
+    "elements": 48,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T22:04:05Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](41.69,140.68,42.02,141.2);out body;",
+    "retrieved": "2026-10-02T22:05:34+00:00",
+    "sha256": "db1098007e3a38c61059652e62fe621009861d48c92385592459e7c03f7f96b2"
+  }
+}

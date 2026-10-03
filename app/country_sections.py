@@ -223,6 +223,7 @@ REGION_GROUP = {
     "France North": "Europe",
     "France South": "Europe",
     "Czechia": "Europe",
+    "United Kingdom": "Europe",
     "Seoul Capital Area": "East Asia",
 }
 

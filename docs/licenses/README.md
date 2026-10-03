@@ -97,7 +97,7 @@ changes is the **scope of an attribution the project already carries** - see
 | `mhlw-food-sanitation-system-terms-amendment-2026.pdf` | **Ministry of Health, Labour and Welfare** — 健生食監発0331第2号 (2026-03-31), the partial amendment of the notice above, made to add reporting of health damage from so-called 健康食品. **It amends 別添2 (the handling of personal information) only.** 別添1 - the 利用規約 - is not in its comparison table, and 第3条, 第7条, 改変 and 頒布 appear nowhere in it (read from its extracted text), so the MHLW open-data verdict's basis is unchanged for every city that uses that data. 3 pages | `https://www.mhlw.go.jp/content/001683424.pdf` — fetched with `curl` (HTTP 200, `application/pdf`, 705,401 bytes) | 2026-09-24 |
 | `taito-opendata-guideline.pdf` | **Taitō City (Tokyo)**: 台東区オープンデータ推進指針, the ward's open data promotion guideline, in force 2017-04-01 and revised 2020-04-01. Chapter 2, "オープンデータのルール", marks the ward's open data with a Creative Commons licence, CC BY (attribution, commercial use included). This is the document behind the **Tokyo: Taitō** row in `data_sources/japan.md` (PERMITTED WITH CONDITIONS, CC BY 4.0); the ward's licence page restates CC BY 4.0 International (checked 2026-09-27). Found unfiled as `opd.pdf` at the main checkout's root and identified 2026-09-27 (267,819 bytes, Word 2016) | `https://www.city.taito.lg.jp/kusei/online/opendata/about/opd.files/opd.pdf`, linked from `…/opendata/about/opd.html` as "台東区オープンデータ推進指針（PDF：261KB）" | 2026-09-25 (the file's timestamp) |
 
-### Georgia — profiled 2026-10-02, Tbilisi briefed, none built yet
+### Georgia — profiled 2026-10-02; Tbilisi built the same day (`data_sources/georgia.md`)
 
 | File | Source | Source URL | Retrieved |
 |---|---|---|---|

@@ -1564,6 +1564,238 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Hiroshima City, MHLW and MLIT did not make and do not endorse this map.",
      False),
+    # Matsuyama (notice 97): the city's five lists are CC BY 4.0 under its
+    # open-data site's terms, in their prescribed form for a modified work;
+    # MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    # Written from Hiroshima's and Yokohama's approved wording under the owner's
+    # pre-approval of template prose (2026-09-30).
+    ("Matsuyama City, MHLW and MLIT (Matsuyama)",
+     "Matsuyama's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可全施設一覧、理容所全施設一覧、美容所全施設一覧、クリーニング所全施設一覧、松山市、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0"
+     "（[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)）"
+     "（[https://www.city.matsuyama.ehime.jp/shisei/opendata/top.html](https://www.city.matsuyama.ehime.jp/shisei/opendata/top.html)）. "
+     "(This map modifies the City of Matsuyama's lists of food permits, barbers, beauty salons and "
+     "laundries as of 31 March 2026, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, placed each by its address or "
+     "the ministry's own coordinates, and counted them around stations. The ministry's list holds only "
+     "filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Matsuyama City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Toyama (notice 98): the city's four lists are CC BY 4.0 under its CKAN's
+    # terms, in their form for edited content; MHLW's file is used for its points
+    # only; MLIT as in Kobe's, N02 in its 2025 edition. From Matsuyama's notice.
+    ("Toyama City, MHLW and MLIT (Toyama)",
+     "Toyama's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設、理容営業許可施設、美容営業許可施設、クリーニング営業許可施設、富山市、"
+     "クリエイティブ・コモンズ・ライセンス 表示4.0国際"
+     "（[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)）"
+     "（[https://opdt.city.toyama.lg.jp/](https://opdt.city.toyama.lg.jp/)）. "
+     "(This map modifies the City of Toyama's list of food permits as of 30 June 2026 and its lists of "
+     "barbers, beauty salons and laundries as of March 2026, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成, "
+     "used only to place a premises the city's list also holds. "
+     "Processed by this project, which selected the storefront types, placed each by its address or the "
+     "ministry's own coordinates for the same premises, and counted them around stations. The ministry's "
+     "list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Toyama City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Kumamoto (notice 99): the restaurant list PDL 1.0 in its catalogue's form,
+    # the three lists CC BY 4.0 (and PDL 1.0 on BODIK), one credit for both; MHLW
+    # as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    ("Kumamoto City, MHLW and MLIT (Kumamoto)",
+     "Kumamoto's businesses: 「熊本市_食品衛生法に基づく飲食店営業許可施設一覧」「熊本市_理容所一覧」「熊本市_美容所一覧」"
+     "「熊本市_クリーニング所一覧」（熊本市オープンデータカタログサイト）"
+     "（[https://odcs.bodik.jp/431001/](https://odcs.bodik.jp/431001/)）をもとに作成 "
+     "(PDL 1.0; the barber, beauty and laundry lists also "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)), as of 31 March 2026; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, showed a premises in both lists once, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "The ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Kumamoto City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Fukui (notice 100): the city's lists are CC BY-SA (the site policy's
+    # default), so the Fukui outputs are offered under CC BY-SA 4.0 (owner,
+    # 2026-10-01; LICENSE); MLIT as in Kobe's, N02 in its 2025 edition. The
+    # wording is a proposal for review time (the drafts file).
+    ("Fukui City and MLIT (Fukui)",
+     "Fukui's businesses: 出典：福井市「食品衛生法に基づく営業許可施設一覧」"
+     "（[https://www.city.fukui.lg.jp/fukusi/eisei/syokuhin/p070519.html](https://www.city.fukui.lg.jp/fukusi/eisei/syokuhin/p070519.html)）、"
+     "「環境衛生関係施設一覧」（[https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518.html](https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518.html)）"
+     "を加工して作成（CC BY-SA）. (This map modifies the City of Fukui's lists of food permits and of barbers, "
+     "beauty salons and laundries as of 31 August 2026, used under CC BY-SA.) This project offers the Fukui "
+     "map, and the Fukui data it derived from these lists, under "
+     "[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). "
+     "Processed by this project, which selected the storefront types, placed each by its address and "
+     "counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Fukui City and MLIT did not make and do not endorse this map.",
+     False),
+    # Nagasaki (notice 101): the city's four BODIK lists, CC BY 4.0 with its own
+    # attribution (no prescribed form); MHLW as in Hiroshima's; MLIT as in
+    # Kobe's, N02 in its 2025 edition.
+    ("Nagasaki City, MHLW and MLIT (Nagasaki)",
+     "Nagasaki's businesses: 長崎市「食品等営業許可・届出一覧（全許可・届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_food_business_all](https://data.bodik.jp/dataset/422011_food_business_all)）、「理容所一覧（全届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_riyosho_all](https://data.bodik.jp/dataset/422011_riyosho_all)）、「美容所一覧（全届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_biyosho_all](https://data.bodik.jp/dataset/422011_biyosho_all)）、「クリーニング業（洗い・取次店）一覧（全届出一覧）（長崎市）」"
+     "（[https://data.bodik.jp/dataset/422011_cleners_all](https://data.bodik.jp/dataset/422011_cleners_all)）、"
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)、を加工して作成. "
+     "(This map modifies the City of Nagasaki's lists of food permits as of 30 June 2023 and of barbers, "
+     "beauty salons and laundries as of 31 March 2023, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, showed a premises in both lists once, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "The ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Nagasaki City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Utsunomiya (notice 102): the city's five lists, CC BY (no version) and PDL 1.0, in the
+    # portal's pattern; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    ("Utsunomiya City, MHLW and MLIT (Utsunomiya)",
+     "Utsunomiya's businesses: 出典：「食品営業許可施設一覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/s"
+     "yokuhinneigyoukyoka](https://catalog.city.utsunomiya.tochigi.jp/dataset/syokuhinneigyoukyoka)）、「理容所一"
+     "覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/riyoujoichiran](https://catalog.city.ut"
+     "sunomiya.tochigi.jp/dataset/riyoujoichiran)）、「美容所一覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi."
+     "jp/dataset/ubiyouzyo](https://catalog.city.utsunomiya.tochigi.jp/dataset/ubiyouzyo)）、「クリ－ニング(取次)一覧」（"
+     "宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/kuriiningutoritsugiichiran](https://catalo"
+     "g.city.utsunomiya.tochigi.jp/dataset/kuriiningutoritsugiichiran)）、「クリ－ニング(一般)一覧」（宇都宮市）（[https://cata"
+     "log.city.utsunomiya.tochigi.jp/dataset/kuriininguippanichiran](https://catalog.city.utsunomiya.tochi"
+     "gi.jp/dataset/kuriininguippanichiran)）を加工して作成（クリエイティブ・コモンズ 表示）. (This map modifies the City of Utsun"
+     "omiya's lists of food permits, barbers, beauty salons and laundries as of July 2026, used under CC B"
+     "Y.) And 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一"
+     "覧」を加工して作成. Processed by this project, which selected the storefront types, showed a premises in both"
+     " lists once, placed each by its address or the ministry's own coordinates, and counted them around s"
+     "tations. The ministry's list holds only filings whose applicants agreed to publish them and is not c"
+     "omplete. Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.m"
+     "lit.go.jp/isj/)）を加工して作成. Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値"
+     "情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. Utsunomiya City"
+     ", MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Kitakyushu (notice 103): the city's three BODIK lists, CC BY 4.0 with the 第6条 credit per
+    # resource; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    ("Kitakyushu City, MHLW and MLIT (Kitakyushu)",
+     "Kitakyushu's businesses: 北九州市保健福祉局 保健衛生課「食品衛生法等許可施設一覧（2026(令和8)年3月中）」（[https://data.bodik.jp/dataset"
+     "/822fb681-346a-444e-b482-33c67b50cac3/resource/afce5cb5-8582-4295-8a98-494db2e25466](https://data.bo"
+     "dik.jp/dataset/822fb681-346a-444e-b482-33c67b50cac3/resource/afce5cb5-8582-4295-8a98-494db2e25466)）,"
+     " 北九州市保健福祉局 東部・西部生活衛生課「理容所施設一覧（2026(令和8)年8月31日時点）」（[https://data.bodik.jp/dataset/8be510bd-5f67-4570-"
+     "a250-b34ffdac8d37/resource/c0503e76-86d9-4f14-a052-f17ac06951d0](https://data.bodik.jp/dataset/8be51"
+     "0bd-5f67-4570-a250-b34ffdac8d37/resource/c0503e76-86d9-4f14-a052-f17ac06951d0)）「美容所施設一覧（2026(令和8)年8月"
+     "31日時点）」（[https://data.bodik.jp/dataset/c8266fc8-5d1f-4d3b-93aa-44486f5187ea/resource/e958d9fd-6e3d-4"
+     "7bf-b557-96af0c3a44ca](https://data.bodik.jp/dataset/c8266fc8-5d1f-4d3b-93aa-44486f5187ea/resource/e"
+     "958d9fd-6e3d-47bf-b557-96af0c3a44ca)）（[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）を加工し"
+     "て作成; and 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出"
+     "一覧」を加工して作成. Processed by this project, which selected the storefront types, kept the city's old perm"
+     "its still in term at the end of August 2026, showed a premises in both lists once, placed each by it"
+     "s address or the ministry's own coordinates, and counted them around stations. The ministry's list h"
+     "olds only filings whose applicants agreed to publish them and is not complete. Their locations: 出典：位"
+     "置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. Lines"
+     " and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値情報（行政区域データ） (CC BY 4.0; not dr"
+     "awn). The lists may include premises that have closed. Kitakyushu City, MHLW and MLIT did not make a"
+     "nd do not endorse this map.",
+     False),
+    # Sakai (notice 104): the city's list and monthly files are CC BY 4.0 under
+    # the 堺市オープンデータ利用規約 (3-2), in its prescribed form for a modified
+    # work (3-3); MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Matsuyama's approved wording under the owner's
+    # pre-approval of template prose (2026-09-30).
+    ("Sakai City, MHLW and MLIT (Sakai)",
+     "Sakai's businesses: この地図は以下の著作物を改変して利用しています。"
+     "堺市 食品営業許可施設一覧（令和8年4月1日現在、令和8年4月分から8月分の許可施設及び廃業施設）、堺市、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://www.city.sakai.lg.jp/kenko/shokuhineisei/anzenjoho/kyokashisetsuichiran/R8kyokaichiran.html](https://www.city.sakai.lg.jp/kenko/shokuhineisei/anzenjoho/kyokashisetsuichiran/R8kyokaichiran.html)）. "
+     "(This map modifies the City of Sakai's list of food permits as of 1 April 2026 and its monthly "
+     "lists of new permits and closures to August 2026, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which rebuilt the city's list to 31 August 2026, selected the "
+     "storefront types, placed each by its address or the ministry's own coordinates, and counted them "
+     "around stations. The ministry's list holds only filings whose applicants agreed to publish them "
+     "and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Sakai City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Hakodate (notice 105): the city's registers are CC BY 2.1 JP (the list
+    # page), credited in Kobe's 出典 form with © and the licence link; MLIT as in
+    # Kobe's, N02 in its 2025 edition. Written from Kobe's and Yokohama's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30).
+    ("Hakodate City and MLIT (Hakodate)",
+     "Hakodate's businesses: 出典：「環境衛生関係施設等の情報」（函館市）"
+     "（[https://www.city.hakodate.hokkaido.jp/docs/2019072900024/](https://www.city.hakodate.hokkaido.jp/docs/2019072900024/)）を加工して作成 "
+     "(© Hakodate City; [CC BY 2.1 JP](https://creativecommons.org/licenses/by/2.1/jp/)). "
+     "(This map modifies the City of Hakodate's lists of barbers, beauty salons and laundries as of "
+     "31 August 2026: this project selected the premises with a fixed place, placed each by its "
+     "address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Hakodate and MLIT did not make "
+     "and do not endorse this map.",
+     False),
+    # Kagoshima (notice 106): the city's old-law list, CC BY 4.0 in its prescribed credit for a
+    # processed work; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
+    ("Kagoshima City, MHLW and MLIT (Kagoshima)",
+     "Kagoshima's businesses: この地図は以下の著作物を改変して利用しています。「食品営業許可全施設一覧」、鹿児島市、CCBY4.0（[https://creativecommons."
+     "org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）（[https://www.city"
+     ".kagoshima.lg.jp/kenkofukushi/hokenjo/seiei-shoku/kenko/ese/sekatsu/shoku/shokuopendata.html](https:"
+     "//www.city.kagoshima.lg.jp/kenkofukushi/hokenjo/seiei-shoku/kenko/ese/sekatsu/shoku/shokuopendata.ht"
+     "ml)）. (This map modifies the City of Kagoshima's list of food permits as of 30 June 2026, used under"
+     " CC BY 4.0.) And 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品"
+     "等営業許可・届出一覧」を加工して作成. Processed by this project, which selected the storefront types, showed a premise"
+     "s in both lists once, placed each by its address or the ministry's own coordinates, and counted them"
+     " around stations. The ministry's list holds only filings whose applicants agreed to publish them and"
+     " is not complete. Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https:"
+     "//nlftp.mlit.go.jp/isj/)）を加工して作成. Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen "
+     "with 国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. Kagosh"
+     "ima City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Okayama (notice 107): MHLW's open data alone, PDL 1.0 as in Hiroshima's; MLIT as in Kobe's,
+    # N02 in its 2025 edition. The city's own pages are not used.
+    ("MHLW and MLIT (Okayama)",
+     "Okayama's businesses: 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)"
+     "）の「食品等営業許可・届出一覧」を加工して作成. Processed by this project, which selected the storefront types, placed each"
+     " by its address or the ministry's own coordinates, and counted them around stations. The ministry's "
+     "list holds only filings whose applicants agreed to publish them and is not complete. Their locations"
+     ": 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成."
+     " Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値情報（行政区域データ） (CC BY 4.0; "
+     "not drawn). The list may include premises that have closed. MHLW and MLIT did not make and do not en"
+     "dorse this map.",
+     False),
+    # Kōchi (notice 108): the city's lists are CC BY 4.0 (the page's open-data
+    # rule and the 高知市オープンデータ利用規約), in its prescribed processed form
+    # (第1); no city symbols or logos (第3). MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Matsuyama's and Yokohama's approved wording under
+    # the owner's pre-approval of template prose (2026-09-30).
+    ("Kōchi City and MLIT (Kōchi)",
+     "Kōchi's businesses: 出典：「理容所一覧」「美容所一覧」（高知市）"
+     "（[https://www.city.kochi.kochi.jp/soshiki/36/opendata.html](https://www.city.kochi.kochi.jp/soshiki/36/opendata.html)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Kōchi's lists of barbers and beauty salons as of 31 March 2026 "
+     "and its monthly lists of new premises to August 2026: this project selected the premises with a "
+     "fixed place, placed each by its address, and counted them around stations.) The lists may "
+     "include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Kōchi and MLIT did not make "
+     "and do not endorse this map.",
+     False),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
@@ -1586,7 +1818,7 @@ _NOTICES = [
      "licensed under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
      "this project: storefront types selected, premises at a flat address left out, premises "
-     "without a location placed at their postcode's centre, or left out where they have no "
+     "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade "
      "names shown where a business is registered under another name. No hygiene rating is "
      "shown. The Food Standards Agency does not endorse this map.",
@@ -1598,7 +1830,7 @@ _NOTICES = [
     # (trademarks are outside the OGL). Wording approved by the owner 2026-09-28.
     ("Ordnance Survey (London)",
      "Where the Food Standards Agency lists a London food business without a map point, it is "
-     "placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
@@ -1619,7 +1851,7 @@ _NOTICES = [
      "(Subterráneos de Buenos Aires, SBASE), all published by the Gobierno de la Ciudad de "
      "Buenos Aires on BA Data under the [Creative Commons Attribution 2.5 Argentina licence]"
      "(http://creativecommons.org/licenses/by/2.5/ar/). Modified by this project: filtered to "
-     "storefronts, grouped into three categories, and placed at the centre of each parcel, or "
+     "storefronts, grouped into three categories, and placed at the center of each parcel, or "
      "of its block where the parcel is not listed; station names follow OpenStreetMap's "
      "spelling. The Gobierno de la Ciudad de Buenos Aires does not endorse this map.",
      False),
@@ -1646,7 +1878,7 @@ _NOTICES = [
      "licensed under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
      "this project: storefront types selected, premises at a flat address left out, premises "
-     "without a location placed at their postcode's centre, or left out where they have no "
+     "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
      False),
@@ -1654,7 +1886,7 @@ _NOTICES = [
     # same file and edition. Wording approved by the owner 2026-09-28.
     ("Ordnance Survey (Newcastle)",
      "Where the Food Standards Agency lists a Newcastle food business without a map point, it "
-     "is placed at the centre point of its postcode, from Ordnance Survey's postcode data, used "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
@@ -1794,6 +2026,193 @@ _NOTICES = [
      "category, matched to the national buildings register by address, and "
      "mapped by distance to tram stops. Not produced or endorsed by the "
      "Gemeente Den Haag.",
+     False),
+    # Manchester (notice 84): the FSA's FHRS data for the seven Metrolink
+    # districts, Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Manchester)",
+     "Manchester's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Manchester's postcode centroids (notice 85): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Manchester)",
+     "Where the Food Standards Agency lists a Manchester food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # NaPTAN (notice 86): gate 3's second source for the UK tram and
+    # light-rail cities, counted only. The OGL's default statement, since the
+    # Department prescribes none (licence-read 2026-10-02). Wording approved
+    # by the owner 2026-10-02.
+    ("Department for Transport, NaPTAN (United Kingdom)",
+     "Stop counts on the UK's tram and light-rail maps are checked against NaPTAN, the "
+     "National Public Transport Access Nodes dataset published by the Department for "
+     "Transport. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The "
+     "Department for Transport does not endorse this map.",
+     False),
+    # Birmingham (notice 87): the FSA's FHRS data for the three West Midlands
+    # Metro districts, Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Birmingham)",
+     "Birmingham's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Birmingham's postcode centroids (notice 88): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Birmingham)",
+     "Where the Food Standards Agency lists a Birmingham food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Edinburgh (notice 89): Scotland's FHIS data for the City of Edinburgh, Glasgow's
+    # notice 61 with the city and date changed and Manchester's centroid clause added.
+    ("Food Standards Scotland (Edinburgh)",
+     "Edinburgh's food businesses are from Food Standards Scotland, Food Hygiene Information "
+     "Scheme data, via the Food Standards Agency, extracted on 2026-10-02. Contains public "
+     "sector information licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected; premises at a flat address or registered as a "
+     "childminder left out; premises without a location placed at their postcode's center, or "
+     "left out where they have no full postcode; trade names shown where a business is "
+     "registered under another name. No inspection result is shown. Neither Food Standards "
+     "Scotland nor the Food Standards Agency endorses this map.",
+     False),
+    # Edinburgh's postcode centroids (notice 90): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Edinburgh)",
+     "Where the Food Standards Agency lists an Edinburgh food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Sheffield (notice 91): the FSA's FHRS data for the City of Sheffield,
+    # Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Sheffield)",
+     "Sheffield's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Sheffield's postcode centroids (notice 92): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Sheffield)",
+     "Where the Food Standards Agency lists a Sheffield food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Nottingham (notice 93): the FSA's FHRS data for the four NET council
+    # areas, Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Nottingham)",
+     "Nottingham's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted between 2026-10-01 and 2026-10-02. Contains public sector information "
+     "licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Nottingham's postcode centroids (notice 94): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Nottingham)",
+     "Where the Food Standards Agency lists a Nottingham food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Blackpool (notice 95): the FSA's FHRS data for Blackpool and Wyre,
+    # Newcastle's notice 62 with the city and date changed.
+    ("Food Standards Agency (Blackpool)",
+     "Blackpool's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False),
+    # Blackpool's postcode centroids (notice 96): Newcastle's notice 63, the
+    # same file and edition.
+    ("Ordnance Survey (Blackpool)",
+     "Where the Food Standards Agency lists a Blackpool food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False),
+    # Seattle (Regional) (notices 109-113, the session's claimed block):
+    # King County's two required texts (owner, 2026-10-01: the permissive
+    # reading rests on the Open Data terms' legend); the Liquor Board's list
+    # date and its own data-transfer note while the lists page carries it
+    # (owner, 2026-10-02); Snohomish County's credit in the owner's words;
+    # Bellevue's credit (the condition of the owner's reading); Seattle's
+    # credit, recommended and displayed by choice.
+    ("Public Health – Seattle & King County (Seattle (Regional))",
+     "Food inspection data: Public Health – Seattle & King County. Data provided "
+     "by permission of King County. Not endorsed by King County.",
+     False),
+    ("Washington State Liquor and Cannabis Board (Seattle (Regional))",
+     "Shops licensed to sell alcohol outside Seattle and Bellevue: the Washington "
+     "State Liquor and Cannabis Board's off-premise licensee list of September 29, "
+     "2026, not a complete or current list of shops. The Board notes that its list "
+     "reports \"contain possible errors due to a known data transfer issue\".",
+     False),
+    ("Snohomish County (Seattle (Regional))",
+     "Lynnwood and Mountlake Terrace food establishments: Snohomish County, Food "
+     "Service Establishments (2025). The list dates from 2025 and is not a current, "
+     "complete or official record.",
+     False),
+    ("City of Bellevue (Seattle (Regional))",
+     "Business license data: City of Bellevue.",
+     False),
+    ("City of Seattle (Seattle (Regional))",
+     "Business license data: City of Seattle.",
+     False),
+    # Tbilisi (notice 114): Geostat's Terms of Use require naming Geostat as
+    # the source (also Art. 43(6) of Georgia's statistics law); no logo, no
+    # implied endorsement. Wording proposed by the brief, flagged for review.
+    ("Geostat (Tbilisi)",
+     "Business data: National Statistics Office of Georgia (Geostat), Statistical "
+     "Business Register, retrieved 2026-10-02; processed by this project. Not "
+     "endorsed by Geostat.",
      False),
 ]
 

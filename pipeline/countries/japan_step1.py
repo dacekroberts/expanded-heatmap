@@ -32,7 +32,8 @@ copy for every Japanese city. A city's step 1 calls run(config).
 Config needs: SLUG, NAME, CITY_BBOX, CRS_*, STATION_OSM_JSON, OSM_NAME_MATCH_M,
 COLLAPSE_MAX_SPREAD_M, LEFT_OUT_LINES, LINES, LINE_ORDER, LINE_NAMES, BRANCHES,
 GATE3, STATIONS_CSV, EXCLUDED_STATIONS_CSV, LINES_GEOJSON, DATA_PROCESSED,
-OUTPUTS. Reads the cache and NEVER fetches.
+OUTPUTS. Optional: CLOSED_STATIONS (a station closed after the N02 edition).
+Reads the cache and NEVER fetches.
 """
 import collections
 import json
@@ -470,6 +471,17 @@ def run(config):
 
     st = japan.stations(slug=config.SLUG)
     st = st[st.geometry.within(near)].copy()
+    # A station N02 still has but the operator has closed
+    # (config.CLOSED_STATIONS = {(operator, line, name): why}; Kitakyushu's
+    # 西黒崎 on the Chikuho line, closed 2026-07-31, after N02-25). Dropped
+    # before the collapse and written nowhere: it is not a station cut by the
+    # city line. One naming no N02 row stops the step.
+    for (op, line, name), why in getattr(config, "CLOSED_STATIONS", {}).items():
+        m = (st["N02_004"] == op) & (st["N02_003"] == line) & (st["N02_005"] == name)
+        if not m.any():
+            sys.exit(f"CLOSED_STATIONS: no {name} on {op} {line}")
+        print(f"  closed, dropped: {name} ({line}): {why}")
+        st = st[~m].copy()
     check_routes(config, st)
     join_groups(config, st)
     all_near = st.copy()

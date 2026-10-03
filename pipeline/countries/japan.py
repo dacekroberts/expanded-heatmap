@@ -101,6 +101,35 @@ CITIES = {
     # Band B 2026-09-29 (owner): food only, the 8 wards
     "hiroshima": {"name": "広島市", "pref": "34", "epsg": 32653, "n02": "25",
                   "wards": [f"341{n:02d}" for n in range(1, 9)]},
+    # The 2026-10-01 batch (owner released 2026-10-02), each on N02-25 as its
+    # brief measured (Kagoshima's 仙巌園 and Fukui's Hapi-line are not in
+    # N02-24; Sakai's Semboku line is under Nankai only in N02-25). "wardless":
+    # one municipality, so an address is never split at a 区 (Toyama's 太田北区)
+    # and MLIT keys every town under an empty ward.
+    "matsuyama": {"name": "松山市", "pref": "38", "epsg": 32653, "n02": "25", "wardless": True,
+                  "wards": ["38201"]},
+    "toyama": {"name": "富山市", "pref": "16", "epsg": 32653, "n02": "25", "wardless": True,
+               "wards": ["16201"]},
+    "kumamoto": {"name": "熊本市", "pref": "43", "epsg": 32652, "n02": "25",
+                 "wards": [f"4310{n}" for n in range(1, 6)]},
+    "fukui": {"name": "福井市", "pref": "18", "epsg": 32653, "n02": "25", "wardless": True,
+              "wards": ["18201"]},
+    "nagasaki": {"name": "長崎市", "pref": "42", "epsg": 32652, "n02": "25", "wardless": True,
+                 "wards": ["42201"]},
+    "utsunomiya": {"name": "宇都宮市", "pref": "09", "epsg": 32654, "n02": "25", "wardless": True,
+                   "wards": ["09201"]},
+    "kitakyushu": {"name": "北九州市", "pref": "40", "epsg": 32652, "n02": "25",
+                   "wards": ["40101", "40103", "40105", "40106", "40107", "40108", "40109"]},
+    "sakai": {"name": "堺市", "pref": "27", "epsg": 32653, "n02": "25",
+              "wards": [f"2714{n}" for n in range(1, 8)]},
+    "hakodate": {"name": "函館市", "pref": "01", "epsg": 32654, "n02": "25", "wardless": True,
+                 "wards": ["01202"]},
+    "kagoshima": {"name": "鹿児島市", "pref": "46", "epsg": 32652, "n02": "25", "wardless": True,
+                  "wards": ["46201"]},
+    "okayama": {"name": "岡山市", "pref": "33", "epsg": 32653, "n02": "25",
+                "wards": [f"3310{n}" for n in range(1, 5)]},
+    "kochi": {"name": "高知市", "pref": "39", "epsg": 32653, "n02": "25", "wardless": True,
+              "wards": ["39201"]},
 }
 
 

@@ -1,0 +1,121 @@
+{
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 4390195,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "33100_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:50+00:00",
+    "rows": 12335,
+    "sha256": "7fa207c96e43a7ccb2402e628f03d97e1d52ff95df86f0690dd8be1c65526af2",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=33100_food_business_all.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_33101_block": {
+    "bytes": 230442,
+    "file": "33101-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:16+00:00",
+    "sha256": "e46ec1d236d230399f7fe1e1f112e5566e637db1017f0f27fa94fb191d970d28",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/33101-24.0a.zip"
+  },
+  "isj_33101_chome": {
+    "bytes": 11401,
+    "file": "33101-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:19+00:00",
+    "sha256": "c89024c592222060dd8aab3ef5393106165ba2219718056d235e6f145b1b6a8e",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/33101-19.0b.zip"
+  },
+  "isj_33102_block": {
+    "bytes": 108514,
+    "file": "33102-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:22+00:00",
+    "sha256": "010e840bc8e6e9065fa75c0f761060fb8e45aae86d1dd66a527fb00d59ede369",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/33102-24.0a.zip"
+  },
+  "isj_33102_chome": {
+    "bytes": 6748,
+    "file": "33102-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:25+00:00",
+    "sha256": "2ee61904710e91b95ff94bfb0e2b0a8fb1f07fa1f3d81b13be8c5a16a19cb53d",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/33102-19.0b.zip"
+  },
+  "isj_33103_block": {
+    "bytes": 151040,
+    "file": "33103-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:28+00:00",
+    "sha256": "b0d0566969cd94e0b4f588737081f1039cc13ff84ab1f2bf2cc54c7a7f4a3094",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/33103-24.0a.zip"
+  },
+  "isj_33103_chome": {
+    "bytes": 6999,
+    "file": "33103-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:32+00:00",
+    "sha256": "2bec4fa1c24909e489b3cb1de76c3fea9a958863aa8c2db2369355358ad8e45c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/33103-19.0b.zip"
+  },
+  "isj_33104_block": {
+    "bytes": 179488,
+    "file": "33104-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:35+00:00",
+    "sha256": "15d2aad88ba2b7b72f6a266373daf50b1ca0cd8f16b41a08ebfd7dba6511864f",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/33104-24.0a.zip"
+  },
+  "isj_33104_chome": {
+    "bytes": 6465,
+    "file": "33104-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:25:39+00:00",
+    "sha256": "d734f20344fba8e7206ec2c4f1eb1171b2cc7a4bf35b00cba51a1305dfc86a5d",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/33104-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 4629609,
+    "file": "data/japan/raw/N03-20250101_33_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:32:02+00:00",
+    "sha256": "7f05f521a159e28814ecc52def90d02eaa4a52fbefd5aecaeb24402a5ba71791",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_33_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 43818,
+    "elements": 70,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-02T22:05:06Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.5,133.72,34.96,134.14);way[\"railway\"=\"station\"](34.5,133.72,34.96,134.14););out tags center;",
+    "retrieved": "2026-10-02T22:06:04+00:00",
+    "sha256": "b1549bf6a68bf85ca51b3528282cbaa68a1f35839346963fdc02d482a4991e68"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 9922,
+    "elements": 33,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-06-01T08:52:28Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](34.5,133.72,34.96,134.14);out body;",
+    "retrieved": "2026-10-02T22:09:13+00:00",
+    "sha256": "cc1ad851ec2358b33f49bf763340bd41e71ea94d8ae563c9abcec60375965fe8"
+  }
+}

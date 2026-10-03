@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
@@ -100,12 +100,13 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
+| Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
 ## Business registries
 
@@ -2464,6 +2465,577 @@ renumbered 83 in landing order; displayed, landed 2026-09-30.)
   edit, 23 May 2025); imply the city's endorsement.
 - **MUST DO**: never download `AANVRAGER`, `KVKNUMMER` or `RECHTSVORM` -
   `fetch_sources.py` names its fields and stops if one arrives.
+
+**84. Food Standards Agency (Manchester) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the seven
+  Metrolink districts' councils are on England's FHRS, under the **Open
+  Government Licence v3** with the FSA's conditions. The OGL statement linked;
+  each council's extract date (2026-10-02); no rating, logo or imagery. The
+  credit is London's and Newcastle's, "Food Standards Agency, UK food hygiene
+  rating data", as a notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (10) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py manchester`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Manchester's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**85. Ordnance Survey (Manchester) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 673 Manchester food storefronts the FSA lists with a full
+  postcode and no point (5.4% of storefront rows); never a private address.
+  Units kept to the seven districts' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/manchester/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
+**86. Department for Transport, NaPTAN (United Kingdom) — required, and
+DISPLAYED** (written into `render_site_notices()` with the UK six,
+2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read`, 2026-10-02)<!-- /internal -->: NaPTAN, the
+  National Public Transport Access Nodes dataset, is published under the
+  **Open Government Licence v3.0** (the publisher's own terms page,
+  `beta-naptan.dft.gov.uk/terms-conditions`; data.gov.uk's record says the
+  same). No separate terms on the API (`naptan.api.dft.gov.uk`), and no
+  attribution of the Department's own, so the OGL's default applies.
+- **Used for** gate 3 of the UK tram and light-rail cities: each map's stops
+  are matched name by name against NaPTAN's active stop areas (stop type MET,
+  ATCO area 940) inside its scope. Nothing from NaPTAN is drawn on a map.
+- **MUST DISPLAY**: "Contains public sector information licensed under the
+  Open Government Licence v3.0.", with the licence linked. Whether a count
+  checked against the data needs the credit at all is arguable; displaying it
+  is the cautious reading.
+- **MUST NOT**: imply the Department's endorsement (OGL); use a DfT logo or
+  the Royal Arms; present NaPTAN as complete.
+- Wording approved by the owner 2026-10-02.
+
+**87. Food Standards Agency (Birmingham) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the three
+  councils West Midlands Metro serves are on England's FHRS, under the **Open
+  Government Licence v3** with the FSA's conditions. The OGL statement linked;
+  each council's extract date (2026-10-02); no rating, logo or imagery. The
+  credit is London's and Newcastle's, "Food Standards Agency, UK food hygiene
+  rating data", as a notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (53) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py birmingham`, run 2026-10-02: no
+  fallback name exists, 0 emails or phone numbers; the verdict is in the
+  session's drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Birmingham's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**88. Ordnance Survey (Birmingham) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 433 Birmingham food storefronts the FSA lists with a full
+  postcode and no point (4.4% of storefront rows); never a private address.
+  Units kept to the three districts' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/birmingham/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
+**89. Food Standards Scotland (Edinburgh) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, Glasgow's reading (notice 61): the City of
+  Edinburgh Council runs Scotland's **Food Hygiene Information Scheme** (FHIS),
+  not England's FHRS. The FSA's terms put the whole open-data file, FHIS records
+  included, under the **Open Government Licence**, and Food Standards Scotland
+  publishes the same council's data itself under "Open Government Licence
+  (v3)". The OGL statement with a link to the licence; the date the information
+  was updated (the file's extract date, 2026-10-02). No result ("Pass",
+  "Improvement Required"), logo or imagery is shown.
+- **Credit wording**: Glasgow's, "Food Standards Scotland, Food Hygiene
+  Information Scheme data, via the Food Standards Agency". **Never "FHRS"** for
+  Scotland.
+- **Personal data**: Glasgow's rules: home and mobile caterers out by type, a
+  private address never placed, a storefront at a "Flat" address (0) or named
+  as a childminder (0) never placed, the trade name shown after "trading as".
+- **MUST NOT**: imply official status or endorsement by FSS or the FSA (OGL);
+  use either body's logo; display a result.
+- Wording: Glasgow's Food Standards Scotland notice 61, with the city and date
+  changed and the centroid clause of Manchester's Food Standards Agency
+  notice 84 added.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py edinburgh`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Edinburgh's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**90. Ordnance Survey (Edinburgh) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 57 Edinburgh food storefronts the FSA lists with a full
+  postcode and no point (1.4% of storefront rows); never a private address.
+  Units kept to the City of Edinburgh's GSS code (S12000036).
+- **The repository carries the credit too**, as for London: committed
+  `outputs/edinburgh/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.<!-- internal -->
+- **Kept by the owner (2026-10-02):** Edinburgh keeps the centroid tier, the
+  kit's rule, over Glasgow's precedent of none.<!-- /internal -->
+
+**91. Food Standards Agency (Sheffield) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): Sheffield City
+  Council is on England's FHRS, under the **Open Government Licence v3** with
+  the FSA's conditions. The OGL statement linked; the council's extract date
+  (2026-10-02); no rating, logo or imagery. The credit is London's and
+  Newcastle's, "Food Standards Agency, UK food hygiene rating data", as a
+  notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py sheffield`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Sheffield's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**92. Ordnance Survey (Sheffield) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 70 Sheffield food storefronts the FSA lists with a full
+  postcode and no point (2.0% of storefront rows); never a private address.
+  Units kept to the city's GSS code (E08000039).
+- **The repository carries the credit too**, as for London: committed
+  `outputs/sheffield/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
+**93. Food Standards Agency (Nottingham) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the four
+  councils NET serves (the City of Nottingham, Broxtowe, Rushcliffe and
+  Ashfield) are on England's FHRS, under the **Open Government Licence v3**
+  with the FSA's conditions. The OGL statement linked; each council's extract
+  date (2026-10-01 to 2026-10-02); no rating, logo or imagery. The credit is
+  London's and Newcastle's, "Food Standards Agency, UK food hygiene rating
+  data", as a notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (1) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py nottingham`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Nottingham's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**94. Ordnance Survey (Nottingham) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 97 Nottingham food storefronts the FSA lists with a full
+  postcode and no point (2.6% of storefront rows); never a private address.
+  Units kept to the four council areas' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/nottingham/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
+**95. Food Standards Agency (Blackpool) — required, and DISPLAYED** (written
+into `render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): Blackpool's
+  and Wyre's councils are on England's FHRS, under the **Open Government
+  Licence v3** with the FSA's conditions. The OGL statement linked; each
+  council's extract date (2026-10-02); no rating, logo or imagery. The credit
+  is London's and Newcastle's, "Food Standards Agency, UK food hygiene rating
+  data", as a notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62, with the city and
+  date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py blackpool`, run 2026-10-02: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/uk-six.md`.<!-- /internal -->
+- **Blackpool's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**96. Ordnance Survey (Blackpool) — required, and DISPLAYED** (written into
+`render_site_notices()` with the UK six, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 67 Blackpool and Wyre food storefronts the FSA lists with a
+  full postcode and no point (3.8% of storefront rows); never a private
+  address. Units kept to the two councils' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/blackpool/` republishes the derived locations (README's credits).
+- Wording: Newcastle's Ordnance Survey notice 63, with the city changed.
+
+**97. Matsuyama City, MHLW and MLIT (Matsuyama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's five lists are
+  **CC BY 4.0** through its open-data site's terms (第2条). MHLW's open data is
+  **PDL 1.0**, as in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the city's form for a modified work,
+  `この地図は以下の著作物を改変して利用しています。食品営業許可全施設一覧、理容所全施設一覧、美容所全施設一覧、クリーニング所全施設一覧、松山市、クリエイティブ・コモンズ・ライセンス 表示 4.0（https://creativecommons.org/licenses/by/4.0/）`
+  (the city's open-data logo may not stand in for it); MHLW's source and
+  processed-by credit, linking its top page only; MLIT's credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate; uses against
+  public order or national security (the city's 第4条).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py matsuyama` with its Japan pass,
+  run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Matsuyama built", 2026-10-02).<!-- /internal -->
+
+
+**98. Toyama City, MHLW and MLIT (Toyama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's four lists are
+  **CC BY 4.0** through its CKAN's terms (第１条１). MHLW's open data is
+  **PDL 1.0**, as in Fukuoka's (54), and is used for its points only. MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03
+  (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the portal's form for edited content,
+  `この地図は以下の著作物を改変して利用しています。食品営業許可施設、理容営業許可施設、美容営業許可施設、クリーニング営業許可施設、富山市、クリエイティブ・コモンズ・ライセンス 表示4.0国際（https://creativecommons.org/licenses/by/4.0/）`;
+  MHLW's source and processed-by credit, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos (第３条); claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py toyama` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Toyama built", 2026-10-02).<!-- /internal -->
+
+**99. Kumamoto City, MHLW and MLIT (Kumamoto) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The restaurant list is
+  **PDL 1.0** under the city's catalogue terms; the barber, beauty and laundry
+  lists are **CC BY 4.0** on their pages and PDL 1.0 on BODIK. MHLW's open data
+  is **PDL 1.0**, as in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the catalogue's form,
+  `「熊本市_食品衛生法に基づく飲食店営業許可施設一覧」（熊本市オープンデータカタログサイト）をもとに作成`, and
+  likewise the three lists, with who processed them and the CC BY 4.0 link;
+  MHLW's source and processed-by credit, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kumamoto` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Kumamoto built", 2026-10-02).<!-- /internal -->
+
+**100. Fukui City and MLIT (Fukui) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-01 and 2026-10-02; the Japan rows
+  in [`data_sources/japan.md`](data_sources/japan.md)). The city's lists are
+  **CC BY-SA** (the site policy's default, no version named). **Share-alike
+  accepted (owner, 2026-10-01): `outputs/fukui/` is offered under CC BY-SA 4.0**
+  (`LICENSE`). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as
+  in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn**.
+  No MHLW credit: its file is not used.
+- **MUST DISPLAY**: 福井市, both list titles with their page URLs, CC BY-SA,
+  and that the data was processed; the offer of the Fukui outputs under CC
+  BY-SA 4.0; MLIT's credit lines.
+- **MUST NOT**: imply the city's endorsement; claim accuracy on the city's
+  authority.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fukui` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Fukui built", 2026-10-02).<!-- /internal -->
+
+**101. Nagasaki City, MHLW and MLIT (Nagasaki) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's four BODIK
+  lists are **CC BY 4.0** under its catalogue terms. MHLW's open data is
+  **PDL 1.0**, as in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: CC BY 4.0's attribution for the four lists (each title,
+  長崎市, the licence link, the URL, processed); MHLW's source and
+  processed-by credit, linking its top page only; MLIT's credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use the
+  city's logo alone; claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py nagasaki` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Nagasaki built", 2026-10-02).<!-- /internal -->
+
+**102. Utsunomiya City, MHLW and MLIT (Utsunomiya) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's five lists are
+  **CC BY** (no version) on the catalogue and **PDL 1.0** under the portal's
+  terms, either of which permits this use. MHLW's open data is **PDL 1.0**, as
+  in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL
+  1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never
+  drawn** (the Survey Act).
+- **MUST DISPLAY**: the portal's pattern for each list,
+  `「食品営業許可施設一覧」（宇都宮市）（<dataset URL>）を加工して作成`, likewise
+  理容所一覧, 美容所一覧, クリ－ニング(取次)一覧 and クリ－ニング(一般)一覧, with who
+  processed them; MHLW's source and processed-by credit, linking its top page
+  only; MLIT's credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py utsunomiya` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Utsunomiya built", 2026-10-02).<!-- /internal -->
+
+**103. Kitakyushu City, MHLW and MLIT (Kitakyushu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's three BODIK
+  lists are **CC BY 4.0** under its catalogue terms (第1条). MHLW's open data is
+  **PDL 1.0**, as in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY** (第6条): each list's organisation, its resource name and URL,
+  the licence link, and that it was processed; MHLW's source and processed-by
+  credit, linking its top page only; MLIT's credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kitakyushu` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Kitakyushu built", 2026-10-02).<!-- /internal -->
+
+**104. Sakai City, MHLW and MLIT (Sakai) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food-permit
+  list and its monthly files are **CC BY 4.0** through the 堺市オープンデータ利用規約
+  (3-2). MHLW's open data is **PDL 1.0**, as in Fukuoka's (54). MLIT's 位置参照情報
+  and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0)
+  only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the city's form for a modified work (3-3),
+  `この地図は以下の著作物を改変して利用しています。堺市 食品営業許可施設一覧（令和8年4月1日現在、令和8年4月分から8月分の許可施設及び廃業施設）、堺市、クリエイティブ・コモンズ・ライセンス 表示 4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）`;
+  MHLW's source and processed-by credit, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py sakai` with its Japan pass,
+  run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Sakai built", 2026-10-02).<!-- /internal -->
+
+**105. Hakodate City and MLIT (Hakodate) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's registers are
+  **CC BY 2.1 JP**, declared on the list page. MLIT's 位置参照情報 and N02 (the
+  2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act). e-Stat's 衛生行政報告例 was
+  used as a measurement only and is not drawn.
+- **MUST DISPLAY**: `出典：「環境衛生関係施設等の情報」（函館市）（https://www.city.hakodate.hokkaido.jp/docs/2019072900024/）を加工して作成`,
+  © Hakodate City and the CC BY 2.1 JP link; MLIT's credit lines.
+- **MUST NOT**: present the map as the city's work; imply its endorsement; say
+  the pins are businesses open now. **If the city asks, remove its credit**
+  (CC BY 2.1 JP art. 5).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py hakodate` with its Japan pass,
+  run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Hakodate built", 2026-10-02).<!-- /internal -->
+
+**106. Kagoshima City, MHLW and MLIT (Kagoshima) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's old-law list is
+  **CC BY 4.0** under its open-data terms. MHLW's open data is **PDL 1.0**, as
+  in Fukuoka's (54). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL
+  1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never
+  drawn** (the Survey Act).
+- **MUST DISPLAY**: the city's prescribed credit for a processed work,
+  `この地図は以下の著作物を改変して利用しています。「食品営業許可全施設一覧」、鹿児島市、CCBY4.0（https://creativecommons.org/licenses/by/4.0/deed.ja）`;
+  MHLW's source and processed-by credit, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present processed data as the city's or MHLW's own; use city or
+  ministry logos; claim MHLW's list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kagoshima` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Kagoshima built", 2026-10-02).<!-- /internal -->
+
+**107. MHLW and MLIT (Okayama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Okayama's businesses come
+  from MHLW's open data alone, **PDL 1.0**, as in Fukuoka's (54). MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+  The city's own pages are not used (their default reserves reuse).
+- **MUST DISPLAY**: MHLW's source and processed-by credit, linking its top
+  page only; MLIT's credit lines.
+- **MUST NOT**: present processed data as MHLW's own; use the ministry's logo;
+  claim its list is complete or accurate (its fields are opt-in).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py okayama` with its Japan pass, run
+  2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Okayama built", 2026-10-02).<!-- /internal -->
+
+**108. Kōchi City and MLIT (Kōchi) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-02; lands with the Japan batch
+at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's lists are **CC BY
+  4.0** through the page's open-data rule and the 高知市オープンデータ利用規約.
+  MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's
+  (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey
+  Act).
+- **MUST DISPLAY**: `出典：「理容所一覧」「美容所一覧」（高知市）（https://www.city.kochi.kochi.jp/soshiki/36/opendata.html）を加工して作成`,
+  with who processed it and the CC BY 4.0 link; MLIT's credit lines.
+- **MUST NOT**: present processed data as if the city made it; use the city's
+  symbols, logos or characters; say the pins are businesses open now (closures
+  since March are not published).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kochi` with its Japan pass,
+  run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
+  ("Kōchi built", 2026-10-02).<!-- /internal -->
+**109. Public Health – Seattle & King County (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02; the
+session's claimed block, 109–116.)
+
+- **Read as permitted by the owner (2026-10-01, option 1)**: the inspection
+  dataset (`r878-4sxa`) is declared Public Domain and the portal's Open Data
+  terms (archived 2023) granted reuse; the live site-wide kingcounty.gov terms
+  forbid publishing without written permission. Rows in
+  [`data_sources/united-states.md`](data_sources/united-states.md).
+- **MUST DISPLAY**: the publisher's attribution "Public Health – Seattle & King
+  County", and the Open Data terms' legend "Data provided by permission of King
+  County", since the permissive reading rests on those terms.
+- **MUST NOT**: use King County's logo or marks, or imply endorsement; take
+  `CTYNAME`, `POSTALCTYNAME` or the ZIP fields from the County's address points
+  (they come from the USPS ZIP+4 product).
+- **MUST DO**: nothing further. The removal rule is the safety net.
+
+**110. Washington State Liquor and Cannabis Board (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**: no license and no terms of use exist; the
+  lists page notes that records received through the Public Records Act "may
+  not be used for commercial purposes" (RCW 42.56.070(8)). This project is
+  non-commercial (owner, 2026-10-02).
+- **MUST DISPLAY**: the list's date, and, while it stands on the Board's lists
+  page, the Board's notice that its list reports "contain possible errors due
+  to a known data transfer issue" (owner, 2026-10-02: "yes").
+- **MUST NOT**: call the list complete or current; publish `Licensee`, phone or
+  mailing columns.
+- **MUST DO**: at each refresh, check whether the data-transfer notice is still
+  on the lists page, and drop it from the notice when the Board removes it.
+  Removal contact: publicrecords@lcb.wa.gov.
+
+**111. Snohomish County (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **SILENT, read permissively by the owner (2026-10-02)**: the "Food Service
+  Establishments (2025)" item states no license; the County's GIS Terms of Use
+  and Data Disclaimer are read as its governing position.
+- **MUST DISPLAY**: the credit "Snohomish County, Food Service Establishments
+  (2025)" (the owner's wording), never the health department, whose authorship
+  is unconfirmed.
+- **MUST NOT**: call the layer current, complete or official; its data are no
+  newer than 2025-11-19.
+- **MUST DO**: nothing. The removal rule is the safety net.
+
+**112. City of Bellevue (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **Read as permitted by the owner (2026-10-01, option 1)**: the data's own
+  license field bars only commercial use or sale without written
+  authorization; the portal's site terms are narrower.
+- **MUST DISPLAY**: credit the City of Bellevue (the condition of the owner's
+  reading; no wording prescribed, so this is the project's own).
+- **MUST NOT**: use the data commercially; publish a registrant's legal name
+  (never downloaded).
+- **MUST DO**: take the layer down first if Bellevue objects.
+
+**113. City of Seattle (Seattle (Regional)) — displayed by choice, not required**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**: the City's Open Data Terms of Use and Open
+  Data Policy V1.0; no attribution is required, and crediting "City of Seattle"
+  is recommended, so it is displayed.
+- **MUST NOT**: use the data for a commercial purpose (data configurable as "a
+  list of individuals"); publish contact names, phones, mailing addresses or
+  person-named trade names.
+- **MUST DO**: nothing.
+
+**114. Geostat (Tbilisi) — required, and DISPLAYED**
+(written into `render_site_notices()` with Tbilisi, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**: Geostat's Terms of Use
+  (`https://www.geostat.ge/en/page/monacemta-gamoyenebis-pirobebi`, linked
+  from the register's own footer as "Terms of Data Usage") allow any use,
+  "including commercial and non-commercial use, without restriction ...
+  without prior permission". Third-party copyright and Geostat's logos and
+  trademarks are outside the grant. Rows in
+  [`data_sources/georgia.md`](data_sources/georgia.md).
+- **MUST DISPLAY**: Geostat as the source: "Users should indicate Geostat as a
+  source of information when using data of GEOSTAT" (also Article 43(6) of
+  Georgia's Law on Official Statistics).
+- **MUST NOT**: use Geostat's logo; imply Geostat's endorsement.
+- **MUST DO**: nothing further. Individual entrepreneurs' names and personal
+  numbers are never written to disk; the removal rule is the safety net.
+
 
 ## Gaps
 

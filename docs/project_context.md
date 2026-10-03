@@ -286,6 +286,38 @@ Cities built and running end to end (pipeline, map, app page):
   (owner). The lowest in-ring share on the map, stated on the page (owner).
   Rail from OSM: METRO's data agreement is kept out of the build.
 
+- **Seattle (Regional)** - Link light rail's 1 and 2 Lines, every station, in
+  eleven cities across King and Snohomish Counties; held for the batch review.
+  **The first page built from five publishers, each used only in the places it
+  covers**: Seattle's and Bellevue's own license registers (NAICS, through the
+  shared module), King County's food inspections placed by parcel through the
+  County's address points, Snohomish County's 2025 food list for Lynnwood and
+  Mountlake Terrace, and the state Liquor Board's off-premise list as a
+  partial retail layer outside the two register cities. Personal services
+  exist only where the two cities publish them, disclosed per city; a ring
+  that crosses a city line takes the neighbor's data. Rail from OpenStreetMap
+  (Sound Transit's feed terms), with a station opened after the relations
+  were last edited placed from the operator's own page. Two structural
+  privacy signals replace the shape test: Seattle's server is asked which
+  trade names equal the legal name (ids only, no names downloaded), and
+  Bellevue marks sole proprietorships. The food registers' workplace
+  cafeterias, vending, hotel kitchens and clubs are left out by name, as in
+  Minneapolis.
+- **Tbilisi** - the Tbilisi Metro's two lines, every station; held for the
+  batch review. **Georgia's first city and the first in the West Asia
+  region**, a view of its own (Europe's frame was not stretched east).
+  Businesses from one national source, Geostat's Statistical Business
+  Register, filtered to the FACTUAL address in the city: one row per entity,
+  not per premises, so chains are undercounted (owner, disclosed). The API
+  has no column selection, so personal numbers and individual entrepreneurs'
+  names are dropped in memory before anything is saved, and an individual
+  entrepreneur's pin shows its category (Taichung's precedent). The
+  register's coordinates include district and settlement centroids shared by
+  dozens of businesses, four of them on metro stations; those points are
+  found by a stated rule, listed, and left off. NACE Rev. 2 at the national
+  leaf (`georgia_nace.py`, modelled on France's NAF module), with vehicle
+  sales kept (the precedent, not France's exception). Rail and the city
+  boundary from one OpenStreetMap query.
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first
   built from two municipalities' own registries.** Distinctive in five ways.
@@ -1000,6 +1032,23 @@ Cities built and running end to end (pipeline, map, app page):
   missing from OSM's route data are added from its station records (retired
   automatically once OSM carries them), and the Elizabeth line and most of the
   Overground are selected by name because OSM tags them `network=National Rail`.
+- **Manchester (Regional)** - Metrolink across the seven districts it serves;
+  the pilot of the UK six (built 2026-10-02 on `pipeline/countries/uk.py` and
+  `uk_fetch.py`, which the other five take as config). Food only on the FSA
+  register, London's method. **The lines are TfGM's nine, routed over OSM's
+  track** through TfGM's own stop lists, because OSM's service relations
+  predate TfGM's September 2026 change. Gate 3 runs against the operator and,
+  name by name, against NaPTAN, the DfT's national stop register (ATCO area
+  940 holds every tram stop). Light rail on the light-rail test.
+- **The rest of the UK six** (built 2026-10-02 on Manchester's shared steps, as
+  config): **Birmingham (Regional)** (West Midlands Metro, Line 2 to Dudley not
+  yet open), **Edinburgh** (one tram line, on Scotland's FHIS as Glasgow),
+  **Sheffield** (Supertram without the Tram-Train; gate 3 on NaPTAN alone, as
+  its operator's site refuses scripts), **Nottingham (Regional)** (NET's two
+  lines) and **Blackpool (Regional)** (the tramway with its North Station spur;
+  NaPTAN alone). All food only, all trams. Every UK city sits in a **United
+  Kingdom** region of its own, the six on the minor label tier; Europe still
+  labels London, Glasgow and Newcastle.
 - **Buenos Aires** - the Subte's six lines (A-E and H) inside the Ciudad
   Autónoma; Argentina's first city. The businesses are **a street survey**, the
   city's Relevamiento Usos del Suelo 2022-2024: uses, not businesses, so no

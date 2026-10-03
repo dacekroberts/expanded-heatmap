@@ -150,6 +150,8 @@ TAXONOMY_MODULES = {
     # Haag's own module, if Rotterdam's does not fit its horeca layer.
     "zurich_gastwirtschaft": "pipeline.taxonomies.zurich_gastwirtschaft",
     "den_haag_source": "pipeline.taxonomies.den_haag_source",
+    "seattle": "pipeline.taxonomies.seattle",
+    "georgia_nace": "pipeline.taxonomies.georgia_nace",
 }
 
 

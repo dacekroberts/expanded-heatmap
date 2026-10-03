@@ -1132,6 +1132,11 @@ CITIES = [
         # and -13 Amsterdam's (1-2 px), so the next European city near here
         # re-scores this one first.
         "label_offset": ("end", -9, -12),
+        # Right of the dot and low in Europe since the UK moved out (2026-10-02):
+        # Europe's re-centred frame put its pill over Birmingham's and
+        # Nottingham's markers.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"Europe": ("start", 10, 26)},
     },
     {
         "name": "Hong Kong",
@@ -1349,13 +1354,16 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Kobe's subway, the Port and Rokkō Liners, and JR and private railways",
-        "region": "East Asia",
+        "region": "Japan West",
         "country": "Japan",
         "in_default_view": False,
         # Above its dot, the default: alone at the east edge of East Asia.
         # Scored clear by check_macro_labels.py at 375, 768 and 1200 (width
         # 34.2 px, measured 2026-09-27 in the app's own document).
-        "label_offset": ("middle", 0, -22),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('end', -10, -14),
+        "label_offset_by_region": {'Japan West': ('end', -10, -14)},
     },
     {
         "name": "Osaka",
@@ -1370,7 +1378,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Osaka Metro and the New Tram, JR, and the private railways and Hankai tram",
-        "region": "East Asia",
+        "region": "Japan West",
         "country": "Japan",
         "in_default_view": False,
         # RIGHT of its dot since 2026-09-28: Sapporo widened the East Asia
@@ -1379,7 +1387,10 @@ CITIES = [
         # 44 x 18 px at every width: Kobe sits ~28 km west at the same
         # latitude and keeps its label above. Width 40.6 px, measured
         # 2026-09-27.
-        "label_offset": ("start", 12, 8),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('start', 12, 8),
+        "label_offset_by_region": {'Japan West': ('start', 10, 14)},
     },
     {
         "name": "Sapporo",
@@ -1396,13 +1407,16 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Sapporo Municipal Subway, the streetcar, and JR Hokkaido's lines",
-        "region": "East Asia",
+        "region": "Japan East",
         "country": "Japan",
         "in_default_view": False,
         # ABOVE its dot, alone in the north of the region. Scored clear by
         # check_macro_labels.py at 375, 768 and 1200 (width 56.9 px,
         # measured 2026-09-28 in the app's own document).
-        "label_offset": ("middle", 0, -22),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+        "label_offset_by_region": {'Japan East': ('end', -10, 0)},
     },
     {
         "name": "Fukuoka",
@@ -1419,7 +1433,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Fukuoka City Subway, and JR Kyushu's and Nishitetsu's lines",
-        "region": "East Asia",
+        "region": "Japan West",
         "country": "Japan",
         "in_default_view": False,
         # BELOW its dot, over the sea south of Kyushu (width 56.8 px,
@@ -1427,7 +1441,9 @@ CITIES = [
         # met Busan's, Daegu's and Kobe's; Busan's label moved lower left to
         # clear Fukuoka's marker. Scored clear by check_macro_labels.py at
         # 375, 768 and 1200.
-        "label_offset": ("middle", 0, 22),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('start', 10, 14),
     },
     {
         "name": "Kyoto",
@@ -1444,7 +1460,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Kyoto City Subway, JR West, Keihan, Hankyu, Kintetsu, the Randen and Eiden",
-        "region": "East Asia",
+        "region": "Japan West",
         "country": "Japan",
         "in_default_view": False,
         # FAR ABOVE its dot (width 40.2 px, measured 2026-09-28): at the
@@ -1453,7 +1469,10 @@ CITIES = [
         # Of 35 Kyoto / Kobe placements scored, 40 px up is the nearest clean
         # one that moves no existing label. check_macro_labels.py: clear at
         # 375, 768 and 1200.
-        "label_offset": ("middle", 0, -40),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -40),
+        "label_offset_by_region": {'Japan West': ('start', 8, 20)},
     },
     {
         "name": "Tokyo",
@@ -1471,7 +1490,7 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "JR East, Tokyo Metro, Toei, Tokyu, Keio, Odakyu, Seibu, Tobu, Keisei, Keikyu and five more; "
                  "business data for 8 of the 23 wards",
-        "region": "East Asia",
+        "region": "Japan East",
         "country": "Japan",
         "in_default_view": False,
         # RIGHT of its dot, a little up (width 40.5 px, measured 2026-09-28):
@@ -1480,7 +1499,9 @@ CITIES = [
         # Kyoto's. Of nine placements scored, this and 40 px below were clean,
         # and this sits nearer its dot. check_macro_labels.py: clear at 375,
         # 768 and 1200.
-        "label_offset": ("start", 12, -14),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('start', 12, -14),
     },
     {
         "name": "Berlin",
@@ -1522,7 +1543,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Underground, DLR, Elizabeth line and 6 Overground lines",
-        "region": "Europe",
+        "region": "United Kingdom",
         "country": "United Kingdom",
         "in_default_view": False,
         # Left of the dot, SCORED (width 50.9 px). Above met Amsterdam and
@@ -1567,7 +1588,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Glasgow Subway, one 15-station loop",
-        "region": "Europe",
+        "region": "United Kingdom",
         "country": "United Kingdom",
         "in_default_view": False,
         # Beside its dot, not above: see Newcastle (Regional)'s note. RIGHT of
@@ -1575,6 +1596,10 @@ CITIES = [
         # name to "sgow" at 375 px (41% clipped). Right of it: PROBLEMS 0 and
         # nothing clipped. Width 56.8 px.
         "label_offset": ("start", 12, -4),
+        # BELOW the dot in the United Kingdom and WEST of it in Europe (2026-10-02,
+        # the UK region pass): Glasgow's pill covered Edinburgh's marker in both.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"United Kingdom": ("middle", 0, 22), "Europe": ("end", -10, 0)},
     },
     {
         "name": "Newcastle (Regional)",
@@ -1592,7 +1617,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Tyne and Wear Metro, Green and Yellow lines",
-        "region": "Europe",
+        "region": "United Kingdom",
         "country": "United Kingdom",
         "in_default_view": False,
         # 48 px ABOVE the dot (owner, 2026-09-28; width 143.1 px). At the usual
@@ -2806,7 +2831,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Personal services only",
         "blurb": "Yokohama's subway, the Minatomirai and Seaside lines, and JR and private railways",
-        "region": "East Asia",
+        "region": "Japan East",
         "country": "Japan",
         "in_default_view": False,
         # RIGHT OF THE DOT AND ABOVE TOKYO'S PILL: Yokohama's dot sits 2 px from
@@ -2814,7 +2839,10 @@ CITIES = [
         # above-left and Osaka's below. check_macro_labels.py (python -B) passes start
         # 12 at dy -34 to -56 (-64 covers Sapporo's marker), PROBLEMS 0 at 375, 768
         # and 1200 on the combined tree (width 68.8 px, measured 2026-09-30).
-        "label_offset": ("start", 12, -42),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('start', 12, -42),
+        "label_offset_by_region": {'Japan East': ('middle', 0, 22)},
     },
     {
         "name": "Hiroshima",
@@ -2829,7 +2857,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Food premises only",
         "blurb": "The Astram Line, JR, and Hiroden's streetcars",
-        "region": "East Asia",
+        "region": "Japan West",
         "country": "Japan",
         "in_default_view": False,
         # BELOW THE DOT, UNDER FUKUOKA'S PILL: Kobe's and Kyoto's pills sit above
@@ -2837,7 +2865,10 @@ CITIES = [
         # left. check_macro_labels.py (python -B) passes middle 0 at dy 48 to 62 (46
         # meets Fukuoka's pill, 68 Taipei's), PROBLEMS 0 at 375, 768 and 1200 on the
         # combined tree with Yokohama (width 66.3 px, measured 2026-09-30).
-        "label_offset": ("middle", 0, 54),
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, 54),
+        "label_offset_by_region": {'Japan West': ('middle', 0, -22)},
     },
     {
         "name": "Namyangju",
@@ -3153,6 +3184,598 @@ CITIES = [
         # 768 and 1200; 2026-09-30).
         "label_offset": ("end", -10, 0),
     },
+    {
+        "name": "Manchester (Regional)",
+        "lat": 53.4808,
+        "lon": -2.2426,
+        "page": "pages/156_Manchester_Heatmap.py",
+        # The UK six (2026-10-02), Newcastle's values. `mode` light_rail on the
+        # light-rail test: OSM maps 100% of the kept track railway=light_rail,
+        # 10.2% in tunnel or on a bridge, a 703 m median gap (San Diego's
+        # precedent; owner, 2026-10-02). rail_extra "Trams" as Calgary's
+        # (light rail counts).
+        "coverage": "one_bucket",
+        "mode": "light_rail",
+        "placement": "Register coordinates (94%) and postcode centers (6%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Manchester Metrolink, TfGM's nine lines",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in its own region.
+        "label_tier": "minor",
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # WEST of the dot in the United Kingdom (2026-10-02): above it, the pill
+        # covered Blackpool's marker and overlapped Sheffield's.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"United Kingdom": ("end", -10, 0)},
+    },
+    {
+        "name": "Birmingham (Regional)",
+        "lat": 52.4862,
+        "lon": -1.8904,
+        "page": "pages/157_Birmingham_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: OSM maps 100% of the kept track railway=tram, 7.1% in
+        # tunnel or on a bridge, a 442 m median gap (Riga's tram control; the lead
+        # accepted it 2026-10-02). rail_extra "Trams" as Manchester's. The blurb
+        # names one line: Line 2 (Wednesbury - Dudley) is not yet in passenger
+        # service.
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (95%) and postcode centers (5%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "West Midlands Metro, one line",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
+    {
+        "name": "Edinburgh",
+        "lat": 55.9533,
+        "lon": -3.1883,
+        "page": "pages/158_Edinburgh_Heatmap.py",
+        # The UK six (2026-10-02), Glasgow's values on Scotland's scheme with the
+        # kit's centroid tier. `mode` tram on the light-rail test: OSM maps 100% of the
+        # kept track railway=tram, 4.6% in tunnel or on a bridge, a 614 m median gap
+        # (Dublin's Luas and Riga's precedent). placement 98.5% / 1.5% of the 3,750
+        # placed; data_age the council file's one ExtractDate; rail_extra "Trams" as
+        # Odense's and Göteborg's (the trams are the whole network).
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (98%) and postcode centers (2%)",
+        "data_age": "Extract of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Edinburgh Trams, one tram line",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
+    {
+        "name": "Sheffield",
+        "lat": 53.3811,
+        "lon": -1.4701,
+        "page": "pages/159_Sheffield_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: OSM maps 100% of the kept track railway=tram, 4.3% in
+        # tunnel or on a bridge, a 444 m median gap (Odense's precedent); the owner
+        # approves it with the build. rail_extra "Trams" as Odense's. data_age in
+        # Glasgow's singular form: one council's extract.
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (98%) and postcode centers (2%)",
+        "data_age": "Extract of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Sheffield Supertram, the Blue, Yellow and Purple routes",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
+    {
+        "name": "Nottingham (Regional)",
+        "lat": 52.9548,
+        "lon": -1.1505,
+        "page": "pages/160_Nottingham_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: OSM maps 100% of the kept track railway=tram, 5.5% in
+        # tunnel or on a bridge, a 432 m median gap (the tram list's default;
+        # owner, 2026-10-02). rail_extra "Trams" as Calgary's and
+        # Manchester's. placement: 3,383 FSA points, 95 Code-Point centroids;
+        # data_age: each council's ExtractDate (provenance.json).
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (97%) and postcode centers (3%)",
+        "data_age": "Extracts of 2026-10-01 to 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Nottingham Express Transit, Lines 1 and 2",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+        # Right of the dot and a little high in the United Kingdom (2026-10-02):
+        # above it, the pill covered Sheffield's marker.
+        # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
+        "label_offset_by_region": {"United Kingdom": ("start", 8, -14)},
+    },
+    {
+        "name": "Blackpool (Regional)",
+        "lat": 53.8175,
+        "lon": -3.0503,
+        "page": "pages/161_Blackpool_Heatmap.py",
+        # The UK six (2026-10-02), Manchester's values. `mode` tram on the
+        # light-rail test: 100% railway=tram, 0.0% in tunnel or on a bridge, a 357 m
+        # median gap; street and promenade track (the tram kit's trams). rail_extra
+        # "Trams" as every tram city. placement: 95.9% at the FSA's point, 4.1% at a
+        # postcode centroid, of 1,648.
+        "coverage": "one_bucket",
+        "mode": "tram",
+        "placement": "Register coordinates (96%) and postcode centers (4%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Blackpool Tramway, one tram line",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # Scored in the United Kingdom view, where a minor city's pill shows:
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200 (2026-10-02,
+        # the UK region pass; the width measured in the browser pane).
+        "label_offset": ("middle", 0, -22),
+        # MINOR (owner, 2026-10-02, the UK sub-region rule on France's line:
+        # tram and light rail against metro): a dot and tooltip in every
+        # view, its pill only in the United Kingdom.
+        "label_tier": "minor",
+    },
+    {
+        "name": "Matsuyama",
+        "lat": 33.8392,
+        "lon": 132.7657,
+        "page": "pages/162_Matsuyama_Heatmap.py",
+        "coverage": "narrowed",
+        "mode": "tram",
+        "placement": "Joined to address blocks (80.8%); ministry coordinates where missed",
+        "data_age": "Permits and registers as of 2026-03-31; ministry notifications fetched 2026-10-02",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "Iyotetsu's city tram and suburban lines, and JR's Yosan Line",
+        "region": "Japan West",
+        "country": "Japan",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view once it exists (Phase 4 of
+        # docs/handoff_japan_batch_2026-10-02.md).
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Toyama",
+        "lat": 36.6953,
+        "lon": 137.2113,
+        "page": "pages/163_Toyama_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (85.5%); ministry coordinates where missed",
+        "data_age": "Food permits as of 2026-06-30; registers as of 2026-03",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "Chitetsu's city tram and Portram, its railway lines, the Ainokaze line and JR's Takayama Line",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "tram",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Kumamoto",
+        "lat": 32.8031,
+        "lon": 130.7079,
+        "page": "pages/164_Kumamoto_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (96.4%); ministry coordinates where missed",
+        "data_age": "City lists as of 2026-03-31; ministry filings fetched 2026-10-02",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The city tram, Kumaden's Kikuchi and Fujisaki lines, and JR's Kagoshima and Hohi lines",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "tram",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Fukui",
+        "lat": 36.0641,
+        "lon": 136.2196,
+        "page": "pages/165_Fukui_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (87.9%)",
+        "data_age": "Permits and registers as of 2026-08-31",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "Fukui Railway's Fukubu Line, Echizen Railway's two lines, the Hapi-line and JR's Etsumi-Hoku Line",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "tram",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Nagasaki",
+        "lat": 32.7503,
+        "lon": 129.8777,
+        "page": "pages/166_Nagasaki_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (89.2%); ministry coordinates where missed",
+        "data_age": "City food list as of 2023-06-30 and registers as of 2023-03-31; ministry filings fetched 2026-10-02",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "Nagasaki Electric Tramway and JR's Nagasaki Main Line",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "tram",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, 22),
+    },
+    {
+        "name": "Utsunomiya",
+        "lat": 36.5551,
+        "lon": 139.8828,
+        "page": "pages/167_Utsunomiya_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (95.8%); ministry coordinates where missed",
+        "data_age": "City lists as of July 2026; ministry filings fetched 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Utsunomiya Light Rail, Tobu's Utsunomiya Line and JR East's lines",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "light_rail",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Kitakyushu",
+        "lat": 33.8834,
+        "lon": 130.8752,
+        "page": "pages/168_Kitakyushu_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.5%); ministry coordinates where missed",
+        "data_age": "Old-law permits as of 2026-03-31 (in term on 2026-08-31), registers 2026-08-31; ministry filings fetched 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Kitakyushu Monorail, the Chikuho Electric Railroad and JR Kyushu's lines",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Sakai",
+        "lat": 34.5733,
+        "lon": 135.483,
+        "page": "pages/169_Sakai_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.2%); ministry coordinates where missed",
+        "data_age": "Permits rebuilt to 2026-08-31; ministry notifications fetched 2026-10-02",
+        "rail_extra": "Both",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Hankai tram, Osaka Metro's Midōsuji Line, Nankai and JR's Hanwa Line",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, 22),
+    },
+    {
+        "name": "Hakodate",
+        "lat": 41.7687,
+        "lon": 140.7288,
+        "page": "pages/170_Hakodate_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (94.0%)",
+        "data_age": "Registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Hakodate City Tram, JR's Hakodate Line and the South Hokkaido Railway",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "tram",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Kagoshima",
+        "lat": 31.5966,
+        "lon": 130.5571,
+        "page": "pages/171_Kagoshima_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (94.9%); ministry coordinates where missed",
+        "data_age": "Old-law permits as of 2026-06-30; ministry filings fetched 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Kagoshima City Tram and JR Kyushu's lines",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "tram",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Okayama",
+        "lat": 34.6551,
+        "lon": 133.9195,
+        "page": "pages/172_Okayama_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (91.2%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "Okaden's two tram lines and JR West's lines",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, 22),
+    },
+    {
+        "name": "Kōchi",
+        "lat": 33.5597,
+        "lon": 133.5311,
+        "page": "pages/173_Kochi_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.8%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Tosaden's four tram lines and JR's Dosan Line",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "tram",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, as France and
+        # Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
+        # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Seattle (Regional)",
+        "lat": 47.6062,
+        "lon": -122.3321,
+        "page": "pages/174_Seattle_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Register coordinates; food placed by parcel (99.1%)",
+        "data_age": "Seattle, Bellevue and King County fetched 2026-10-02; Snohomish food 2025",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        # Personal services are published by Seattle and Bellevue only: the
+        # other nine station cities have none (the brief, 4b).
+        "categories": "Personal services thin",
+        "blurb": "Link light rail (1 and 2 Lines, 39 stations across 11 cities)",
+        "region": "United States West",
+        "country": "United States",
+        "mode": "light_rail",
+        # NOT IN THE DEFAULT FRAME although a US city: at 47.61 N Seattle is
+        # north of every framed US city, and joining IN_DEFAULT_VIEW would
+        # re-fit the pinned 1.4525 zoom every label offset here was measured
+        # at (Vancouver's and Buffalo's reason).
+        "in_default_view": False,
+        # WEST of its dot, scored by check_macro_labels.py 2026-10-02 (width
+        # 120.5 measured): 15 regions x 3 widths, PROBLEMS 0. Above, the pill
+        # covered Calgary's marker; east or below it overlapped Minneapolis's
+        # pill (below, Sacramento's and Chicago's too) in the United States view.
+        "label_offset": ("end", -12, 0),
+        # Its own view puts the pill right of the dot, inside the canvas at
+        # 375 px; left of it, only "(Regional)" showed (2026-10-02).
+        "label_offset_by_region": {"United States West": ("start", 12, 0)},
+    },
+    {
+        "name": "Tbilisi",
+        "lat": 41.72,
+        "lon": 44.79,
+        "page": "pages/175_Tbilisi_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates (81.0%)",
+        "data_age": "Register of 2026-10-02",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Tbilisi Metro (Akhmeteli-Varketili and Saburtalo Lines, 23 stations)",
+        "region": "West Asia",
+        "country": "Georgia",
+        "mode": "metro",
+        "in_default_view": False,
+        # ABOVE its dot, scored by check_macro_labels.py 2026-10-02 (width
+        # 39.1 measured): 16 regions x 3 widths, PROBLEMS 0. Alone in West
+        # Asia; off the canvas in Global, as Europe's eastern dots are.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -3300,6 +3923,13 @@ REGION_ORDER = [
     # re-centred frame then needed Stockholm's label below its dot. Fitted
     # zoom, no override; PROBLEMS 0 at every width.
     "Czechia",
+    # THE UNITED KINGDOM (owner, 2026-10-02: "implement the high-density cluster
+    # rule to UK, like Japan, France, Czechia"), on Czechia's mechanism: every UK
+    # city, London, Glasgow and Newcastle (Regional) included, in a view of its
+    # own; the six tram and light-rail cities are minor (their pills only here),
+    # and Europe still labels the three metro cities (REGION_LABELS_ALSO).
+    # One region or a split is decided by check_macro_labels.py.
+    "United Kingdom",
     # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
     # further country on the continent joins this view rather than adding one.
     # Brazil alone spans Porto Alegre to Fortaleza, about 3,200 km: the width
@@ -3314,6 +3944,15 @@ REGION_ORDER = [
     # Seoul is about 2,100 km and to Sapporo about 3,400, past the 3,300 at which
     # Canada was split, so re-score it when Japan lands rather than assume.
     "East Asia",
+    # JAPAN WEST AND JAPAN EAST (owner, 2026-10-02): the 2026-10-01 batch is the
+    # minor label tier, as France and Czechia are, so Japan has views of its own
+    # and every Japanese city moves into them, the eight built ones included, as
+    # Prague moved with Czechia. East Asia still names the eight anchors
+    # (REGION_LABELS_ALSO). Split at 136 E by check_macro_labels.py: one Japan
+    # view failed at every width (46 problems each, Osaka's and Sakai's dots
+    # 2.6 px apart); two place every label, Japan West at REGION_ZOOM 6.0.
+    "Japan West",
+    "Japan East",
     # SEOUL CAPITAL AREA (owner, 2026-09-29): Seoul, Incheon and the Gyeonggi
     # satellites (Goyang, Seongnam, Yongin), five cities within about 40 km,
     # moved out of East Asia. At East Asia's zoom they sit 20-30 px apart and
@@ -3326,6 +3965,13 @@ REGION_ORDER = [
     # Zealand city joins it; Perth is about 3,300 km from Sydney, past the
     # distance at which Canada was split, so re-score it if it ever arrives.
     "Oceania",
+    # WEST ASIA (owner, 2026-10-02): Tbilisi first. Dublin to Tbilisi is about
+    # 3,700 km, past the 3,300 at which Canada was split, and the UN M49
+    # geoscheme files Georgia in Western Asia, so Europe's frame is left as it
+    # was rather than stretched east. Named for the area, as East Asia and
+    # Oceania are, so a later Baku, Yerevan or Ankara joins it. A view of its
+    # own, NOT a sub-view, so it is not in COUNTRY_VIEWS.
+    "West Asia",
 ]
 
 # THE COUNTRY VIEWS GO LAST IN THE REGION MENU (owner, 2026-10-02): the small
@@ -3335,7 +3981,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Seoul Capital Area")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "United Kingdom", "Seoul Capital Area", "Japan West", "Japan East")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
@@ -3383,7 +4029,10 @@ REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", 
 # leaving a fragment of its pill at the edge at 375 px), and the list beneath
 # the map always has them. Overview.py and check_macro_labels.py both apply
 # it; the centre is still each region's own.
-REGION_ZOOM = {"France North": 5.0, "France South": 5.0}
+# Japan West at 6.0 (2026-10-02): fitted, Osaka's and Sakai's dots sit 5.0 px
+# apart, inside one marker radius; at 6.0 they are 6.7 px apart and every label
+# places (check_macro_labels.py, PROBLEMS 0 at 375, 768 and 1200).
+REGION_ZOOM = {"France North": 5.0, "France South": 5.0, "Japan West": 6.0}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
@@ -3462,7 +4111,7 @@ _bad_rof = [c["name"] for c in CITIES if "label_offset_by_region" in c and not (
 if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
-REGION_LABELS_ALSO = {"East Asia": ("Seoul Capital Area",)}
+REGION_LABELS_ALSO = {"East Asia": ("Seoul Capital Area", "Japan West", "Japan East"), "Europe": ("United Kingdom",)}
 if _bad_tier:
     raise ValueError(f"cities.py: {_bad_tier} have a label_tier not in {LABEL_TIERS}")
 _unmoded = [c["name"] for c in CITIES if c.get("mode") not in MODES]

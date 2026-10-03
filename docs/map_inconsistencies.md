@@ -32,6 +32,8 @@ dense-looking city may simply have more complete records.
   Chicago, Philadelphia, Miami, Washington D.C., Sacramento, Houston (state sales-tax permits), Vancouver/Surrey, Calgary, Edmonton,
   Toronto, Milan (six premises registers), Rome (SUAP authorisations).
 - **Assembled from several activity-specific registers:** New York (4), Boston (3), Buffalo (3),
+  Seattle (Regional) (5: two city license registers, two county food records and the
+  state's liquor-store list, each in the places it covers),
   and the Korean permit registers: Seoul (17 types), Daegu (14), Busan (14). The
   Japanese cities too: Kobe, Osaka, Sapporo, Fukuoka and Kyoto each join the city's
   food-permit list to its barber, beauty-salon and laundry registers (4; Sapporo 5,
@@ -51,13 +53,15 @@ dense-looking city may simply have more complete records.
   Yongin, Suwon and Bucheon (SEMAS's national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo and Bergen (Enhetsregisteret sub-units),
   Copenhagen and Aarhus (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
-  and Taipei (the national business tax register, FIA).
+  and Taipei (the national business tax register, FIA); Tbilisi (Geostat's Statistical
+  Business Register, one row per business rather than per shop).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
-- **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
+- **A food hygiene register:** London, Newcastle (Regional), Manchester (Regional),
+  Birmingham (Regional), Sheffield, Nottingham (Regional) and Blackpool (Regional) (the Food Standards
   Agency's FHRS), every food premises a borough or council inspects, and nothing
-  else; Glasgow the same on Scotland's scheme (Food Standards Scotland's FHIS),
-  every premises the council inspects. Stockholm's is the city's own food
+  else; Glasgow and Edinburgh the same on Scotland's scheme (Food Standards Scotland's FHIS),
+  every premises the council inspects (Edinburgh's register is short against Glasgow's). Stockholm's is the city's own food
   inspection register (Livsmedelstillsyn), one row per inspection reduced to one
   per premises, and frozen since October 2025. Bucharest's is the sanitary-veterinary
   directorate's register of food units (DSVSA București), active registrations only.
@@ -74,18 +78,19 @@ dense-looking city may simply have more complete records.
   Mexico City, Guadalajara, Monterrey, Madrid and Barcelona already say their density
   is "not comparable" with licence-register cities; Montréal's makes the point without
   those words (checked 2026-09-28). Buenos Aires's page says to read its
-  density "as a survey, not a register"; London's, Glasgow's and Newcastle
-  (Regional)'s "as a register, not a street survey" (checked 2026-09-29).
+  density "as a survey, not a register"; London's, Glasgow's, Newcastle
+  (Regional)'s, and the UK six's, "as a register, not a street survey" (checked 2026-09-29).
 
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
-- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Stockholm, Bucharest.
+- **No Personal services at all:** Philadelphia, Boston, London, Glasgow, Newcastle (Regional), Manchester (Regional),
+  Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Stockholm, Bucharest.
 - **No Retail or Personal services at all:** Hong Kong. Its three categories are
   Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis),
-  London, Glasgow and Newcastle (Regional) (grocers, off-licences, bakers,
+  London, Glasgow, Newcastle (Regional) and the UK six (grocers, off-licences, bakers,
   butchers, newsagents with food and supermarkets, named "Food shops" as in the
   Japanese cities); Stockholm the same, kiosks to supermarkets;
   Bucharest the same, butchers and bakeries to supermarkets.
@@ -106,7 +111,8 @@ services. A few cannot, because the local records never cover that trade.
   Fukuoka: 5,185 against 14,764 (without its caterers and snack bars), with the
   food shops that only notify present where they published in MHLW's opt-in list. On all six Japanese maps the layer is named
   "Food shops", not "Retail".
-- **Personal services thin:** Berlin. Hairdressers and laundries are crafts,
+- **Personal services thin:** Seattle (Regional): only Seattle and Bellevue publish
+  personal services; the other nine station cities show none. Berlin. Hairdressers and laundries are crafts,
   members of the Handwerkskammer rather than the chamber of commerce whose register
   the map uses, so the layer is beauty and nail salons, spas, saunas and massage
   (3,121 pins inside the rings against 30,800 Retail and 15,472 Food service;
@@ -162,7 +168,11 @@ run on top of a metro network.
   ML1), Paris (T3a and T3b); these last four from 2026-09-27. Osaka (the Hankai
   tram, Hankai and Uemachi lines), Sapporo (the streetcar loop), Kyoto (the
   Randen's two lines and the Keihan Keishin Line, tramways in MLIT's data), Tokyo
-  (the Tokyo Sakura Tram and the Tokyu Setagaya Line).
+  (the Tokyo Sakura Tram and the Tokyu Setagaya Line). The UK six, each its city's whole
+  network: Manchester (Regional) (Metrolink, light rail), Birmingham (Regional) (West
+  Midlands Metro), Edinburgh (Edinburgh Trams), Sheffield (Supertram; the Tram-Train to
+  Rotherham not drawn), Nottingham (Regional) (NET) and Blackpool (Regional) (the
+  Blackpool Tramway).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Copenhagen (the Letbane has no stop in
@@ -195,7 +205,11 @@ register covers them all, or because the rail network only makes sense that way.
 - **Labelled "(Regional)":** Miami (Miami-Dade County), Vancouver (with Surrey),
   Guadalajara (4 municipios), Monterrey (4 municipios), Lille (11 communes), Fortaleza (4), Porto Alegre (6),
   Recife (4), Santos (with São Vicente), Taipei (with New Taipei), Newcastle
-  (Regional) (the five Tyne and Wear districts).
+  (Regional) (the five Tyne and Wear districts), Manchester (Regional) (the seven
+  Metrolink districts), Birmingham (Regional) (Birmingham, Sandwell and Wolverhampton),
+  Nottingham (Regional) (the city, Broxtowe, Rushcliffe and Ashfield), Blackpool (Regional)
+  (Blackpool and Wyre), Seattle (Regional) (11 cities, five
+  publishers, each in the places it covers).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -215,12 +229,13 @@ register covers them all, or because the rail network only makes sense that way.
   empty. The French cities keep to the commune so that they stay comparable with one
   another, although SIRENE covers the neighbouring communes too.
 
-### 6. The rings are half the size in seven cities, so ring counts do not compare
+### 6. The rings are half the size in some cities, so ring counts do not compare
 **Reader sentence:** In cities where stations are very close together, the rings are
 drawn at half size, so the pin counts in the layer menu cover a smaller area than in
 other cities.
 - **Rings 0.05 / 0.1 / 0.2 / 0.3 mi:** New York, Paris, Marseille, Toulouse, Lille,
-  Rennes, Oslo.
+  Rennes, Oslo; Birmingham (Regional), Sheffield, Nottingham (Regional) and Blackpool
+  (Regional) (2026-10-02).
 - **Rings 0.1 / 0.2 / 0.3 / 0.6 mi:** every other city.
 - **Reason:** where stations are a median 340–540 m apart, a 0.6 mi ring reaches past
   the next stations (city configs, `RING_EDGES_MILES`).
@@ -233,7 +248,7 @@ how far the network reaches, not on the data.
   (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
 - **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte
   18%, Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
-  Recife 23%, Los Angeles 24%, San Diego 24%.
+  Recife 23%, Los Angeles 24%, San Diego 24%, Birmingham (Regional) 17%.
 - **Reason:** network extent against the area in scope. Share = in-ring heat points ÷
   all-storefront heat points in each committed map.
 
@@ -254,7 +269,9 @@ name at their home.
   owners and partnerships of individuals, by the permit's organisation type).
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
-- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Buffalo (42 salons licensed under a person's own name show the licence type). Sacramento (525 businesses whose name reads as a person's show their description). Kobe (10 pins: a
+- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Seattle (Regional) (166
+  licenses under a person's own name, and 260 Bellevue licenses with no trade name, show
+  their category). Buffalo (42 salons licensed under a person's own name show the licence type). Sacramento (525 businesses whose name reads as a person's show their description). Kobe (10 pins: a
   trade name that is the operator's own name shows its permit type). Osaka (9 pins,
   the same rule, applied to every permit at the premises), Sapporo (7), Kyoto (8),
   Fukuoka (5, on the city's lists only: MHLW publishes no operator column to test),
@@ -263,7 +280,8 @@ name at their home.
 - **"Name withheld" in place of a personal name:** Seoul (138 pins), Daegu (113),
   Busan (114).
 - **Line of business in place of an unmarked sole proprietor's name:** Taichung
-  (11,907 pins), Taoyuan (7,230), Taipei (17,890).
+  (11,907 pins), Taoyuan (7,230), Taipei (17,890). Tbilisi (8,328 businesses registered
+  to a person show their category).
 - **"No shop sign":** Hong Kong (308 pins, where the licence records none).
 - **Reason:** the source has no name column, or a privacy rule.
 
@@ -289,7 +307,10 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   Busan, Taichung, Taoyuan, Taipei, the six Japanese cities, Berlin (the register's monthly
   date, 2026-09-01), London (each borough's extract date, 2026-09-09
   to 2026-09-16), Glasgow (the council's extract date, 2026-09-14), Newcastle
-  (Regional) (each council's, 2026-09-09 to 2026-09-16), Buenos Aires (the
+  (Regional) (each council's, 2026-09-09 to 2026-09-16), Manchester (Regional)
+  (each council's, 2026-10-02), Birmingham (Regional), Edinburgh, Sheffield and Blackpool
+  (Regional) (each council's, 2026-10-02), Nottingham (Regional) (each council's,
+  2026-10-01 to 2026-10-02), Buenos Aires (the
   survey years, in the prose), Sydney (the survey year) and Melbourne (the
   census year), Stockholm (the register's last edit, 2025-10-22) and
   Bucharest (the registers' date, 2026-08-25).
@@ -324,9 +345,17 @@ really shopfronts. Several pages say which way their map leans.
   twenty has no location and no full postcode and is not placed, a quarter in
   Redbridge and a fifth in Havering); Glasgow (about one food storefront in a
   hundred has no map point and is not placed); Newcastle (Regional) (about one
-  in fourteen unplaced, most in North Tyneside and Sunderland); Buenos Aires
+  in fourteen unplaced, most in North Tyneside and Sunderland); Manchester
+  (Regional) (about one in twenty-six unplaced, most in Bury and Tameside); Birmingham
+  (Regional) (about one in twenty-seven, most in Sandwell and Birmingham); Edinburgh (about
+  one in twenty-two, and a register short against Glasgow's); Sheffield (about one in
+  thirty-seven); Nottingham (Regional) (about one in eighteen, most in Rushcliffe, 14.2%);
+  Blackpool (Regional) (about one in nineteen, almost all in Wyre); Buenos Aires
   (shopfronts whose use the surveyors could not identify, 7.2% and 32% in Villa
-  Riachuelo, are dropped, and shops inside malls and arcades are not itemised).
+  Riachuelo, are dropped, and shops inside malls and arcades are not itemised);
+  Tbilisi (one row per business, so a chain appears once; about one storefront in
+  five has no location, or only a district center's, and is not placed; a new
+  business appears once Geostat counts it as active).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
@@ -339,8 +368,9 @@ really shopfronts. Several pages say which way their map leans.
   mark closures, and those are left out); Berlin (closures and moves reach the
   register late; registered premises may have no shopfront, including web shops and
   business centres; about 1.2 to 1.5 times OpenStreetMap's restaurants, cafés and
-  bars at four station areas); London, Glasgow and Newcastle (Regional) (a
-  premises stays listed until the council removes it, as each page says).
+  bars at four station areas); London, Glasgow, Newcastle (Regional) and
+  Manchester (Regional) and the rest of the UK six (a premises stays listed until the council
+  removes it, as each page says).
 - **Undisclosed on the city page:** San Francisco (only about 37% of rows carry a
   NAICS code) and Los Angeles (about 9% carry none), so both are floors. San Diego
   undercounts neighbourhoods registered under their own name. All three are open
@@ -395,7 +425,7 @@ classifies or licenses them.
   concession stands, Bay ferry bars and a few restaurants. **Brazil:** food
   trucks, trailers, kiosks and stalls cannot be told from fixed premises in the
   census's descriptions and count as whatever the rest of the description names.
-  **London, Glasgow, Newcastle (Regional):** a workplace canteen registered as a
+  **London, Glasgow, Newcastle (Regional) and the UK six:** a workplace canteen registered as a
   restaurant or café cannot be told apart; not measured.
 - **Street and market stalls:** excluded in Mexico City, Guadalajara and Monterrey;
   by code in France (47.8x) and Taiwan (street and market stalls, e.g. 2,669 in
@@ -510,6 +540,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Washington D.C. | Metrorail, 6 lines | DC Streetcar no longer operating (ended 2026-03-31); MARC/VRE are separate systems | WMATA GTFS (API key); gate 3 exact | District | 58 / 0 |
 | Buffalo | NFTA Metro Rail (light rail, one line) | NFTA's GTFS not used (OSM) | OpenStreetMap route relations; gate 3 exact on 14 | City | 0 / 0 |
 | Sacramento | SacRT light rail, Blue and Gold | Green Line (suspended; its one station closed for works) | OpenStreetMap route relations (+ Wikidata for Dos Rios); gate 3 exact on SacRT's timetables | City | 15 / 0 |
+| Seattle (Regional) | Link light rail, 1 and 2 Lines | Seattle Streetcar; T Line (Tacoma); Sounder; SEA Underground | OpenStreetMap route relations (Sound Transit's GTFS not used, its terms); Pinehurst placed from Sound Transit's station page; gate 3 exact (27 / 26) | 11 cities, rings across a city line take the neighbor's data | 0 / 0 |
 | Houston | METRORail light rail, Red, Green and Purple | — | OpenStreetMap route relations (METRO's data agreement kept out); gate 3 exact | City (TIGER) | 0 / 0 |
 | Minneapolis | METRO Blue and Green light rail | Northstar commuter rail; the Como-Harriet heritage streetcar (a museum ride) | OpenStreetMap route relations (Metro Transit's GTFS licence unread); gate 3 exact on 19 and 23 | City (TIGER) | 22 / 0 |
 | Pittsburgh | PRT light rail (the T), Red, Blue and Silver, with the downtown subway | Buses, the inclines | OpenStreetMap route relations (PRT's GTFS licence unread); gate 3 exact on 31, 24 and 31 | City (TIGER); halved rings | 31 / 0 |
@@ -633,12 +664,30 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Tokyo | JR East (Yamanote, Keihin-Tohoku, Chuo Rapid, Chuo-Sobu, Yokosuka / Sobu Rapid, Keiyo, Joban, Saikyo, Utsunomiya / Takasaki), Tokyo Metro (Ginza, Marunouchi, Hibiya, Tozai, Chiyoda, Yurakucho, Hanzomon, Namboku, Fukutoshin), Toei (Asakusa, Mita, Shinjuku, Oedo, Sakura Tram, Nippori-Toneri Liner), Tokyu (7), Keio (2), Odakyu, Seibu (4), Tobu (4), Keisei (3), Keikyu (2), Hokuso, Tsukuba Express, Rinkai, Yurikamome, Tokyo Monorail (52 lines, labelled on the map by line code) | The Shinkansen; the Narita Sky Access and the Saitama Railway (one station each in the wards, served by other lines); the Tokaido and Shonan-Shinjuku lines not drawn on their own | MLIT N02 railway data, collapsed on its station-group code; JR East drawn as nine services over its legal lines; English names from OSM in the operators' signage style (gate 3 exact on fifteen lines) | The 23 wards (lines cut at the ward line); 293 stations in the 15 wards without data drawn hollow | 55 / 0 |
 | Yokohama | Subway (Blue, Green), JR East (Keihin-Tohoku / Negishi, Tokaido, Yokosuka, Sotetsu-JR Link, Yokohama, Nambu, Tsurumi), Keikyu (Main, Zushi), Tokyu (Toyoko, Den-en-toshi, Kodomonokuni, Shin-yokohama), Minatomirai, Sotetsu (Main, Izumino, Shin-yokohama), Kanazawa Seaside Line (20 lines) | The Shinkansen | MLIT N02 railway data, collapsed on its station-group code; JR East's 東海道線 drawn as four services over its legal lines; English names from OSM in the operators' signage style (gate 3 exact on seven lines) | City (JR and private railways cut at the city line) | 41 / 0 |
 | Hiroshima | Astram Line, JR Sanyo / Kabe / Geibi / Kure, Hiroden streetcars (Main, Ujina, Eba, Yokogawa, Hakushima, Minami) and the Hiroden Miyajima Line (12 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition (the 2024 one predates Hiroden's 2025 route into Hiroshima Station), collapsed on its station-group code; English names from OSM in the operators' signage style (gate 3 exact on Astram and the Kabe Line) | City (JR and the Miyajima Line cut at the city line) | 13 / 0 |
+| Matsuyama | Iyotetsu's city tram (one line over six legal sections), its Takahama, Yokogawara and Gunchu lines, and JR's Yosan Line (5 lines) | — (no Shinkansen runs here) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the Takahama Line) | City (the Yokogawara and Gunchu lines and JR cut at the city line) | 11 / 0 |
+| Toyama | Chitetsu's city tram (one line over six legal sections) and Toyamako Line (Portram), its Main, Fujikoshi, Kamidaki and Tateyama lines, the Ainokaze Toyama Railway and JR West's Takayama Line (8 lines) | The Shinkansen; JR Central's Takayama Line (only Inotani inside) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM and the tram operator's English line map in Hiroshima's style (gate 3 exact: tram 25, Portram 15) | City (Chitetsu's Main, Kamidaki and Tateyama lines and Ainokaze cut at the city line) | 22 / 0 |
+| Kumamoto | The city tram (one line over five legal sections), Kumamoto Electric's Kikuchi and Fujisaki lines, JR Kyushu's Kagoshima Main and Hohi lines (5 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the tram, 35) | City (Kumaden's Kikuchi Line and JR cut at the city line) | 10 / 0 |
+| Fukui | Fukui Railway's Fukubu Line (street and railway, one line), Echizen Railway's Mikuni Awara and Katsuyama Eiheiji lines, the Hapi-line Fukui and JR's Etsumi-Hoku Line (5 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (no line wholly inside: gate 3 has no in-city count) | City (every line cut at the city line) | 14 / 0 |
+| Nagasaki | Nagasaki Electric Tramway (one line over five legal sections) and JR Kyushu's Nagasaki Main Line (2 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the tram, 38) | City (JR cut at the city line) | 6 / 0 |
+| Utsunomiya | Utsunomiya Light Rail, Tobu Utsunomiya Line, JR Utsunomiya and Nikko lines (4 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the light rail's 15 in-city stops) | City (the light rail, Tobu and JR cut at the city line) | 11 / 0 |
+| Kitakyushu | Kitakyushu Monorail, Chikuho Electric Railroad, JR Kagoshima Main / Nippo Main / Hitahikosan / Wakamatsu / Fukuhoku Yutaka / Sanyo (8 lines) | The Shinkansen; the Sarakurayama cable car and the Mojiko Retro sightseeing train; Nishi-Kurosaki (closed 2026-07-31) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the Monorail) | City (JR and the Chikuho line cut at the city line) | 19 / 0 |
+| Sakai | The Hankai tram, Osaka Metro's Midōsuji Line, Nankai (Main, Kōya, Semboku) and JR Hanwa (6 lines) | — (no Shinkansen runs here) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the Hankai tram and the Midōsuji) | City (every line cut at the city line; the Midōsuji keeps 3 stations and the Hankai tram 15 of 31 stops, Osaka's map drawing the rest) | 31 / 0 |
+| Hakodate | The Hakodate City Tram (one line over four legal sections), JR's Hakodate Line and the South Hokkaido Railway (3 lines) | — (no Shinkansen station in the city) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the city tram) | City (JR and the South Hokkaido Railway cut at the city line, the latter to one station) | 4 / 0 |
+| Kagoshima | The Kagoshima City Tram (one line over four legal sections), JR Ibusuki Makurazaki / Kagoshima Main / Nippo Main (4 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition (the 2024 one lacks Sengan-en), collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the tram, 35) | City (JR cut at the city line) | 3 / 0 |
+| Okayama | Okaden Higashiyama / Seikibashi, JR Sanyo / Ako / Momotaro / Tsuyama / Uno Minato / Seto-Ohashi (8 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on both Okaden lines, from its timetables) | City (JR cut at the city line) | 14 / 0 |
+| Kōchi | Tosaden's Ino, Gomen, Sanbashi and Ekimae tram lines and JR's Dosan Line (5 lines) | — (no Shinkansen runs here) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the Sanbashi and Ekimae lines) | City (the Ino and Gomen lines and JR cut at the city line) | 19 / 0 |
 | **Germany** | | | | | |
 | Berlin | U-Bahn U1–U9 and the S-Bahn's 16 lines (the Ring S41/S42 among them) | Trams, regional trains, ferries; the U6's Tegel branch (closed for works until about August 2027) | VBB GTFS (gate 3 exact: U-Bahn 170 = 175 less 5 closed, S-Bahn 168) | Land of Berlin (lines cut at the Land boundary) | 41 / 0 (36 in Brandenburg, 5 closed for works) |
 | **United Kingdom** | | | | | |
 | London | Underground (11 lines), DLR, Elizabeth line and the six London Overground lines (19 lines, short names on the map, full names in the legend) | Tramlink, National Rail, river buses | OpenStreetMap route relations (TfL publishes no GTFS; its API's line strings are straight lines between stations); 8 stations OSM's relations omit added from its station nodes; gate 3 exact on 14 counts | Greater London (lines cut at the boundary) | 32 / 0 |
 | Glasgow | Glasgow Subway (one 15-station loop, its two tunnels drawn as one line) | Suburban and national rail (the Argyle and North Clyde lines and the rest) | OpenStreetMap route relations (SPT publishes no GTFS for the Subway); gate 3 exact on 15 | Glasgow City (the loop lies wholly inside) | 0 / 0 |
 | Newcastle (Regional) | Tyne and Wear Metro, Green and Yellow lines (the Sunderland branch included) | Northern's national rail trains | OpenStreetMap route relations; gate 3 exact on 60 | The five Tyne and Wear districts | 0 / 0 |
+| Manchester (Regional) | Manchester Metrolink (light rail), TfGM's nine lines (Green, Purple, Yellow, Burgundy, Blue, Pink, Anthracite, Red, Navy), routed over OpenStreetMap's track through TfGM's stop lists | Buses and national rail trains | OpenStreetMap route relations; gate 3 exact on 99 (TfGM) and name by name against NaPTAN | The seven Metrolink districts | 0 / 0 |
+| Birmingham (Regional) | West Midlands Metro (tram), one line, Wolverhampton - Edgbaston Village with its Wolverhampton St Georges and Millennium Point branches | Line 2 (Wednesbury - Dudley, not yet open), buses and national rail trains | OpenStreetMap route relations; gate 3 exact on 35 (the operator) and name by name against NaPTAN | The three Metro districts | 0 / 0 |
+| Edinburgh | Edinburgh Trams (one tram line, Edinburgh Airport to Newhaven) | Buses and national rail trains | OpenStreetMap route relations (the "Tram Extension to Newhaven" relation, a duplicate of the track, not drawn); gate 3 exact on 23 (Edinburgh Trams) and name by name against NaPTAN | The City of Edinburgh (every stop inside) | 0 / 0 |
+| Sheffield | Sheffield Supertram, the Blue, Yellow and Purple routes (tram) | The Tram-Train to Rotherham (every 30 minutes, national rail track beyond Tinsley); buses and national rail trains | OpenStreetMap route relations; gate 3 against NaPTAN only, name by name on 48 (the operator's site refuses scripts) | The City of Sheffield | 0 / 0 |
+| Nottingham (Regional) | Nottingham Express Transit (tram), Line 1 and Line 2, each line's two directions merged | Buses and national rail trains | OpenStreetMap route relations (Bulwell Forest and David Lane added by node); gate 3 exact on 36 and 30 (NET) and name by name against NaPTAN's 50 | The four NET council areas | 0 / 0 |
+| Blackpool (Regional) | Blackpool Tramway (tram), one line, Starr Gate to Fleetwood Ferry with the North Station spur | Buses and national rail trains | OpenStreetMap route relations; gate 3 name by name against NaPTAN's 40 (the operator's site refuses scripts) | Blackpool and Wyre | 0 / 0 |
 | **Argentina** | | | | | |
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
 | **Australia** | | | | | |
@@ -646,6 +695,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
 | **Switzerland** | | | | | |
 | Zurich | VBZ trams 2–11, 13–15, 17 and the 2026 construction lines 50 and 51 | S-Bahn; Forchbahn S18; trams 12 (Glattalbahn) and 20 (Limmattalbahn), stubs | OpenStreetMap route relations; gate 3 exact (ZVV) | City (Stadt Zürich) | 15 / 0 |
+| **Georgia** | | | | | |
+| Tbilisi | Tbilisi Metro, Akhmeteli-Varketili and Saburtalo Lines | — | OpenStreetMap route relations (no GTFS found); gate 3 exact (23, the operator's count) | City | 0 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -666,6 +717,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Washington D.C. | License register | Basic Business License | Own BUSINESSACTIVITY | 899 / 2,603 / 345 | "Delicatessen" (1,065) ambiguous, counted as Food |
 | Buffalo | 3 activity registers | City Business Licenses, NYS food stores, NYS salons | Per-source dispatch | 113 / 188 / 75 | Retail thin |
 | Sacramento | Tax register | Business Operation Tax Information | Own Business_Description | 625 / 510 / 243 | — |
+| Seattle (Regional) | 5 registers | Seattle and Bellevue licenses, King County food inspections, Snohomish County food (2025), Liquor Board off-premise list | Per-source dispatch (NAICS for the two city registers) | 2,122 / 2,545 / 881 | Personal services thin: Seattle and Bellevue only; Retail outside them is food and liquor shops |
 | Houston | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 1,077 / 1,052 / 94 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | Minneapolis | Food hygiene register | City of Minneapolis Food Inspections, one row per violation | Its own FacilityCategory, plus a name test | 115 / 526 / — | No Personal services; Retail = food shops only ("Grocery and food shops") |
 | Pittsburgh | Food hygiene register | Allegheny County Health Department's Geocoded Food Facilities (as of 2025), one row per facility | Its own category_cd, plus a name test | 48 / 268 / — | No Personal services; Retail = food shops only ("Food-selling shops") |
@@ -789,12 +841,30 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Tokyo | Permit lists, per ward (8 of 23) | Eight wards' own food lists + MHLW's filings for four; the barber, beauty and laundry registers of four | Permit type (業種) | 11,952 / 39,380 / 8,557 | Business data for 8 of 23 wards only (15 hollow); the lists run 9% to 101% of the official count; Retail = food only |
 | Yokohama | Permit registers (personal services) | City barber, beauty and laundry registers | Register (理容所 / 美容所 / クリーニング所) | — / — / 6,540 | No food or retail list published: Personal services only |
 | Hiroshima | Permit register | City food-permit list (counter applications) + MHLW's online filings | Permit type (営業の種類), read with the form of business (業態, 許可条件) | 1,889 / 7,245 / — | No Personal services (the city publishes new openings only); Retail = food retail, and partial: notification-only food shops appear only where they published in MHLW's opt-in list; about one restaurant in seven withheld its address (disclosed) |
+| Matsuyama | Permit register | City food-permit lists (old and new law) and barber, beauty and laundry lists + MHLW's notifications | Permit type (営業の種類), read with the form of business (業態) | 674 / 3,595 / 867 | Retail = food retail, and partial: notification-only food shops appear only where they published in MHLW's opt-in list |
+| Toyama | Permit register | City food-permit list and barber, beauty and laundry registers (MHLW's file a point source only) | Permit type (営業の種類) | 329 / 2,212 / 509 | Retail = food retail permits only; notification-only food shops absent |
+| Kumamoto | Permit register | City restaurant list (counter applications) + MHLW's online filings + city barber, beauty and laundry lists | Permit type (業種 / 営業の種類), read with the form of business (業態) | 218 / 4,289 / 983 | Retail = MHLW's opt-in food retail only; about 76% of restaurants in force are in the two lists |
+| Fukui | Permit register | City month-end food-permit list (fixed premises) and barber, beauty and laundry lists | Permit type (業種) | 373 / 1,916 / 693 | Retail = food retail permits only; notification-only food shops absent; food trucks and stalls not in the list |
+| Nagasaki | Permit register | City BODIK lists (a 2023 snapshot: food, barber, beauty, laundry) + MHLW's current online filings | Permit type (営業の種類), read with the form of business (業態) | 776 / 2,731 / 704 | Retail = food retail, and partial (MHLW's opt-in notifications); personal services frozen at 2023-03-31 |
+| Utsunomiya | Permit register | City old-law food list and barber, beauty and laundry lists + MHLW's filings | Permit type (業種名 / 営業の種類), read with the form of business (業態) | 695 / 2,424 / 670 | Retail = food retail, and partial: notification-only food shops appear only where they published in MHLW's opt-in list; about one restaurant in 130 withheld its address |
+| Kitakyushu | Permit register | City old-law food list (in term on 2026-08-31) and barber and beauty registers + MHLW's filings | Permit type (営業の種類), read with the form of business (業態) | 2,297 / 6,264 / 2,026 | No laundries (no list); Retail = food retail, and partial; about one restaurant in seven withheld its address (disclosed) |
+| Sakai | Permit register | City food-permit list, rebuilt to 2026-08-31 from its monthly new permits and closures + MHLW's notifications | Permit type (営業の種類), read with the form of business (業態) | 1,591 / 4,455 / — | No Personal services (the city's lists are PDFs); Retail = food retail, and partial: notification-only food shops appear only where they published in MHLW's opt-in list |
+| Hakodate | Permit registers (personal services) | City barber, beauty and laundry registers | Register (理容所 / 美容所 / クリーニング所) | — / — / 331 | No food register published (new permits only): Personal services only |
+| Kagoshima | Permit register | City old-law food list + MHLW's filings | Permit type (営業の種類), read with the form of business (業態) | 695 / 3,280 / — | No Personal services (new openings only); Retail = food retail, and partial; about one restaurant in four withheld its address (disclosed) |
+| Okayama | Permit register | MHLW's filings only | Permit type (営業の種類), read with the form of business (業態) | 972 / 3,202 / — | No Personal services (PDF lists, not reusable); Retail = food retail, and partial; about one restaurant in four withheld its address (disclosed); permits from before 2021-06 absent |
+| Kōchi | Permit registers (personal services) | City barber and beauty-salon lists + monthly additions | Register (理容所 / 美容所) | — / — / 677 | No food (MHLW's list publishes about half the restaurants' addresses) and no laundry list: barbers and beauty salons only |
 | **Germany** | | | | | |
 | Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,121 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
 | **United Kingdom** | | | | | |
 | London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,360 / 29,214 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Glasgow | Food hygiene register | Glasgow City Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 405 / 1,588 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Newcastle (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 5 councils | FSA business type | 989 / 2,369 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Manchester (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 7 councils | FSA business type | 1,843 / 4,359 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Birmingham (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 3 councils | FSA business type | 480 / 1,162 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Edinburgh | Food hygiene register | The City of Edinburgh Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 372 / 1,854 / — | No Personal services; Retail = food shops only ("Food shops"); a short register (5,144 premises, four non-storefront types absent) |
+| Sheffield | Food hygiene register | The Food Standards Agency's FHRS file, 1 council | FSA business type | 293 / 869 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Nottingham (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 4 councils | FSA business type | 382 / 828 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Blackpool (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 2 councils | FSA business type | 227 / 593 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,612 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 | **Australia** | | | | | |
@@ -802,6 +872,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 | **Switzerland** | | | | | |
 | Zurich | License register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
+| **Georgia** | | | | | |
+| Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,728 / 702 / 654 | A business, not a shop: a chain appears once |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -819,6 +891,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Washington D.C. | Register X/Y + Census geocoder (387 of 451, 85.8%; 64 lost) | Delicatessen ambiguity | Residential rentals (61%), General Business, school cafeterias, caterers |
 | Buffalo | Register coordinates (14 rows without a point lost) | Retail thin; possible double counts | Expired licences, caterers, sidewalk cafés, chair renters, salons at an apartment; person-named salons shown by type |
 | Sacramento | Census geocoder (98.0% of addresses matched; 125 outside the city by postal address) | "ON FILE" addresses withheld and unplaceable | Expired licences, two catch-alls, online, mobile and cottage food, individual stylists and massage technicians, repairs, apartments; person-like names shown by type |
+| Seattle (Regional) | Register coordinates; food placed by parcel (99.1%); liquor stores by street address (76.7%) | Personal services and most retail absent outside Seattle and Bellevue; lapsed Seattle licenses kept; Snohomish food list from 2025 | Seattle licenses outside the city, lapsed food with no 2025-26 inspection, Bellevue licenses issued before 2010, R1 classes, staff cafeterias, hotel kitchens, vending, clubs and food-register pharmacies by name; person-named licenses shown by category |
 | Houston | Address join to the City's Site Addresses (83.9%) + Census geocoder (12.4%); 3.7% unplaced, 608 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments, trailers and a person's permit at a Residential point; address shown for a person's permit |
 | Minneapolis | Register coordinates (97.8%); 42 not placed | Food only; 3 uncategorised facilities left out | Institutions, caterers, mobile units, stalls, food shelves and wholesale by type; contract and institutional kitchens, vending, hotels, venues, pharmacies and named cabarets by name; a grocer's second licence for one counter folded |
 | Pittsburgh | Register coordinates (98.7%); 22 not placed, 3 outside the city | Food only; a list dated 2025-08-27 | Institutional, mobile, school, processing, boarding, commissary, caterer, social-club and banquet types; venue stands, workplace micro-markets, hospital and campus outlets, hotel back of house, pharmacies, dark stores and named adult venues by name |
@@ -934,12 +1007,30 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Tokyo | Address join to MLIT's address blocks (99.7% block, 158 at the town centre, 35 at MHLW's own point; 33 unplaced) | Fifteen wards without data (hollow stations); partial lists, each ward's share on the page; MHLW's filings by consent (8,973 without an address) | Food trucks, stalls and temporary permits; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type, where a list names its operators |
 | Yokohama | Address join to MLIT's address blocks (98.0% block, 156 at the town centre; 4 unplaced) | Personal services only; closed premises may remain listed | Salons in vehicles and laundries with no fixed place (市内一円, 無店舗); a trade name that is the operator's own name shown by register type (none) |
 | Hiroshima | Address join to MLIT's address blocks, MHLW's own point where the block join misses (96.4% block, 1.7% MHLW's point, 0.9% town-chōme centre; 150 unplaced) | 4,584 MHLW filings published without an address (1,779 restaurants) unplaced; closed premises may remain listed in the city's list | Food trucks, street and festival stalls (許可条件 露店, vehicle registrations); school, hospital and staff kitchens; hotel restaurants; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (city list only) |
+| Matsuyama | Address join to MLIT's address blocks, MHLW's own point for the same premises where the block join misses (80.8% block, 10.2% MHLW's point, 8.2% town-chōme centre; 84 unplaced) | 2,209 MHLW notifications published without an address unplaced; closed premises may remain listed in the city's lists | Food trucks and stalls (保健所管内); school, hospital and staff kitchens (事業場食堂); hotel restaurants; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (city lists only) |
+| Toyama | Address join to MLIT's address blocks, MHLW's own point for the same premises where the block join misses (85.5% block, 7.2% MHLW's point, 5.7% town-chōme centre; 104 unplaced) | The list names operators only where they are companies; closed premises may remain listed | Food trucks and stalls (市内一円); storeless laundry pick-ups; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (where an operator is named) |
+| Kumamoto | Address join to MLIT's address blocks, MHLW's own point where the block join misses (96.4% block, 0.8% MHLW's point, 2.2% town-chōme centre; 62 unplaced) | 736 MHLW filings published without an address (40 restaurants) unplaced; the city list's opt-outs; closed premises may remain listed | Vehicles and event permits (by the city); stalls and vehicles (業態); school, hospital and staff kitchens; hotel restaurants; hostess bars; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (city lists only) |
+| Fukui | Address join to MLIT's address blocks (87.9% block, 10.7% town-chōme centre; 75 unplaced) | The list names operators only where they are companies; closed premises removed monthly by the city | Food trucks and stalls (not listed); manufacturing except 菓子 / そうざい; a trade name that is the operator's own name shown by permit type (where an operator is named) |
+| Nagasaki | Address join to MLIT's address blocks, MHLW's own point where the block join misses (89.2% block, 3.8% MHLW's point, 6.9% town-chōme centre; 5 unplaced) | 3,623 MHLW filings published without an address (2,090 restaurants) unplaced; the 2023 snapshot keeps premises closed since | Vehicles and stalls (業態); snack bars; school, hospital and staff kitchens; hotel restaurants; manufacturing except 菓子 / そうざい; vending; the name rule cannot run (no operator column) |
+| Utsunomiya | Address join to MLIT's address blocks, MHLW's own point where the block join misses (95.8% block, 2.6% MHLW's point, 1.4% town-chōme centre; 17 unplaced) | 426 MHLW filings published without an address (37 restaurants) unplaced; closed premises may remain listed | Food trucks and stalls (業態); school, hospital and staff kitchens; hotel restaurants; snack bars; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (city lists only) |
+| Kitakyushu | Address join to MLIT's address blocks, MHLW's own point where the block join misses (98.5% block, 1.3% MHLW's point, 0.2% town-chōme centre; 2 unplaced) | 4,719 MHLW filings published without an address (1,484 restaurants) unplaced; closed premises may remain listed | Food trucks and stalls; school, hospital and staff kitchens; hotel restaurants; snack bars; manufacturing except 菓子 / そうざい; vending; yatai counted; the name rule finds no sole trader (the city names company operators only) |
+| Sakai | Address join to MLIT's address blocks, MHLW's own point where the block join misses (95.2% block, 1.1% MHLW's point, 3.6% town-chōme centre; 2 unplaced) | 1,825 MHLW notifications published without an address unplaced; a closed premises stays listed until a closure is filed or its permit expires | Food trucks, street and festival stalls (市内一円, 自動車, 露店); school, hospital and staff kitchens; hotel restaurants; snack bars and cabarets; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (city list only) |
+| Hakodate | Address join to MLIT's address blocks (94.0% block, 66 at the town centre; none unplaced) | Personal services only; closed premises may remain listed | Laundry pick-ups with no shop (無店舗); a trade name that is the operator's own name shown by register type (1) |
+| Kagoshima | Address join to MLIT's address blocks, MHLW's own point where the block join misses (94.9% block, 4.0% MHLW's point, 1.0% town-chōme centre; 8 unplaced) | 2,664 MHLW filings published without an address (1,397 restaurants) unplaced; closed premises may remain listed | Food trucks and stalls; school, hospital and staff kitchens; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (city list only) |
+| Okayama | Address join to MLIT's address blocks, MHLW's own point where the block join misses (91.2% block, 8.5% MHLW's point, 2 at the town-chōme centre; 16 unplaced) | 3,379 MHLW filings published without an address (1,976 restaurants) unplaced; closed premises may remain listed | Food trucks and stalls (一円); school, hospital and staff kitchens; hotel restaurants; snack bars; manufacturing except 菓子 / そうざい; vending; yatai counted; the name rule cannot run (no operator column) |
+| Kōchi | Address join to MLIT's address blocks (95.8% block, 59 at the town centre; none unplaced) | Barbers and beauty salons only (no laundry list); closures since 2026-03-31 unpublished (an upper bound) | Salons registered anywhere in the city (一円); a trade name that is the operator's own name shown by register type (none) |
 | **Germany** | | | |
 | Berlin | Register coordinates (60,313 of 60,314 inside the Land) | Crafts missing; web shops cannot be excluded; registered offices stack at arcade and business-centre addresses | Catering, intermediation, mobile food, household services; "other personal services" (96.99) and general non-food retail (IHK 47122) as catch-alls; employee band and business type read, never shown |
 | **United Kingdom** | | | |
 | London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,000 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | Glasgow | Register coordinates (99%); 55 not placed | Food only; about one storefront in a hundred unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a flat address or a childminder never placed; the name after "trading as" shown |
 | Newcastle (Regional) | Register coordinates (90%) and postcode centres (10%, OS postcode centroids for a full postcode with no register point); 489 not placed | Food only; about one storefront in fourteen unplaced, most in North Tyneside and Sunderland; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Manchester (Regional) | Register coordinates (94%) and postcode centers (6%, OS postcode centroids for a full postcode with no register point); 478 not placed | Food only; about one storefront in twenty-six unplaced, most in Bury and Tameside; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Birmingham (Regional) | Register coordinates (95%) and postcode centers (5%, OS postcode centroids for a full postcode with no register point); 369 not placed | Food only; about one storefront in twenty-seven unplaced, most in Sandwell and Birmingham; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Edinburgh | Register coordinates (98%) and postcode centers (2%, OS postcode centroids for a full postcode with no register point); 182 not placed | Food only; about one storefront in twenty-two unplaced; canteens not separated; the register is short against Glasgow's | Home caterers, institutional kitchens, hotels and manufacturers by type (the file holds no mobile caterers or distributors); a private address, a flat address or a childminder never placed; the name after "trading as" shown |
+| Sheffield | Register coordinates (98%) and postcode centers (2%, OS postcode centroids for a full postcode with no register point); 93 not placed | Food only; about one storefront in thirty-seven unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Nottingham (Regional) | Register coordinates (97%) and postcode centers (3%, OS postcode centroids for a full postcode with no register point); 210 not placed | Food only; about one storefront in eighteen unplaced, most in Rushcliffe (14.2%) and Ashfield; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address, a flat address or a childminder never placed; the name after "trading as" shown |
+| Blackpool (Regional) | Register coordinates (96%) and postcode centers (4%, OS postcode centroids for a full postcode with no register point); 90 not placed | Food only; about one storefront in nineteen unplaced, almost all in Wyre; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
 | **Australia** | | | |
@@ -947,6 +1038,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | **Switzerland** | | | |
 | Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
+| **Georgia** | | | |
+| Tbilisi | Register coordinates (81.0%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -967,6 +1060,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Washington D.C. | Active licences (2026-09-21) | — | 0.6 mi | Yes | 74% | Name |
 | Buffalo | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 24% | Trade name; licence type for person-named salons |
 | Sacramento | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 41% | Name; description for names that read as a person's |
+| Seattle (Regional) | Seattle licenses of every year, Bellevue's issued since 2010, food inspected 2025-2026, Snohomish food 2025, liquor list 2026-09-29 (2026-10-02) | B | 0.6 mi | Yes | 38% | Trade name; category for person-named licenses |
 | Houston | Active permits (2026-09-29) | B | 0.6 mi | Yes | 7% | Name; address for a person's permit |
 | Minneapolis | Inspected within two years of 2026-09-30 (2026-09-30) | B | 0.6 mi | Yes | 36% | Trade name |
 | Pittsburgh | Active on the County's list of 2025-08-27 (2026-09-30) | B | 0.3 mi | Yes | 18% | Trade name |
@@ -1090,12 +1184,30 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Tokyo | Ward lists dated 2022-11-30 to 2026-09-02, registers undated or 2026-03-31 (fetched 2026-09-24) | B (in the prose) | 0.6 mi | Yes | 98% | Trade name in Japanese, or the permit type (2) |
 | Yokohama | Registers as of 2026-04-01 (fetched 2026-09-24, unchanged 2026-09-30) | B (in the prose) | 0.6 mi | Yes | 83% | Trade name in Japanese |
 | Hiroshima | City food list as of 2026-03-31 (permits in force); MHLW's filings downloaded 2026-09-30 (fetched 2026-09-24 to 09-30) | B (in the prose) | 0.3 mi | Yes | 67% | Trade name in Japanese, or the permit type (1) |
+| Matsuyama | City lists as of 2026-03-31 (permits in force; full registers); MHLW's notifications downloaded 2026-10-02 | B (in the prose) | 0.3 mi | Yes | 55% | Trade name in Japanese, or the permit type (3) |
+| Toyama | City food list as of 2026-06-30 (permits in force); registers 2026-03 (fetched 2026-10-02) | B (in the prose) | 0.3 mi | Yes | 46% | Trade name in Japanese, or the permit type (5) |
+| Kumamoto | City lists as of 2026-03-31; MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.3 mi | Yes | 54% | Trade name in Japanese, or the permit type (3) |
+| Fukui | City lists as of 2026-08-31 (the newest month-end sheet; fetched 2026-10-02) | B (in the prose) | 0.6 mi | Yes | 60% | Trade name in Japanese, or the permit type (6) |
+| Nagasaki | City food list as of 2023-06-30, registers 2023-03-31; MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.3 mi | Yes | 58% | Trade name in Japanese |
+| Utsunomiya | City lists as of July 2026 (old-law permits in term; full registers); MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.6 mi | Yes | 47% | Trade name in Japanese, or the permit type (1) |
+| Kitakyushu | Old-law list as of 2026-03-31 (in term on 2026-08-31), registers 2026-08-31; MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.6 mi | Yes | 71% | Trade name in Japanese |
+| Sakai | City list rebuilt to 2026-08-31 (the 2026-04-01 list plus monthly new permits and closures); MHLW's notifications downloaded 2026-10-02 | B (in the prose) | 0.6 mi | Yes | 75% | Trade name in Japanese, or the permit type (1) |
+| Hakodate | Registers as of 2026-08-31 (fetched 2026-10-02) | B (in the prose) | 0.3 mi | Yes | 31% | Trade name in Japanese, or the register type (1) |
+| Kagoshima | City list as of 2026-06-30; MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.3 mi | Yes | 60% | Trade name in Japanese |
+| Okayama | MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.6 mi | Yes | 63% | Trade name in Japanese |
+| Kōchi | Lists as of 2026-03-31 plus monthly additions to 2026-08-31 (fetched 2026-10-02) | B (in the prose) | 0.3 mi | Yes | 48% | Trade name in Japanese |
 | **Germany** | | | | | | |
 | Berlin | 2026-09-01, monthly (IHK's own commit date; fetched 2026-09-28) | B | 0.6 mi | Yes | 82% | Kind of business (the register has no names) |
 | **United Kingdom** | | | | | | |
 | London | Extracts of 2026-09-09 to 2026-09-16, per borough (fetched 2026-09-28) | B | 0.6 mi | Yes | 74% | Registered name; the trade name where registered "trading as" |
 | Glasgow | Extract of 2026-09-14 (fetched 2026-09-28) | B | 0.6 mi | Yes | 42% | Registered name; the trade name where registered "trading as" |
 | Newcastle (Regional) | Extracts of 2026-09-09 to 2026-09-16, per council (fetched 2026-09-28) | B | 0.6 mi | Yes | 54% | Registered name; the trade name where registered "trading as" |
+| Manchester (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.6 mi | Yes | 52% | Registered name; the trade name where registered "trading as" |
+| Birmingham (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 17% | Registered name; the trade name where registered "trading as" |
+| Edinburgh | Extract of 2026-10-02 (fetched 2026-10-02) | B | 0.6 mi | Yes | 59% | Registered name; the trade name where registered "trading as" |
+| Sheffield | Extract of 2026-10-02 (fetched 2026-10-02) | B | 0.3 mi | Yes | 35% | Registered name; the trade name where registered "trading as" |
+| Nottingham (Regional) | Extracts of 2026-10-01 to 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 35% | Registered name; the trade name where registered "trading as" |
+| Blackpool (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 50% | Registered name; the trade name where registered "trading as" |
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
 | **Australia** | | | | | | |
@@ -1103,6 +1215,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
 | **Switzerland** | | | | | | |
 | Zurich | Open licences, kept current; last updated 2026-09-28 (fetched 2026-09-30) | B | 0.3 mi | Yes | 92% | Trade name and licence type; address for a person-named trade name |
+| **Georgia** | | | | | | |
+| Tbilisi | Live register (fetched 2026-10-02) | Yes (caption) | 0.6 mi | Yes | 61% | Company name in Georgian, or the category for a business registered to a person (8,328) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

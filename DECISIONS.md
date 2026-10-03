@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**345 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**382 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -32,6 +32,43 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The country views go last in the macro map's region menu (owner)](#2026-10-02---the-country-views-go-last-in-the-macro-maps-region-menu-owner)
 - [Check D allows a notice-number gap that a parallel batch has claimed](#2026-10-02---check-d-allows-a-notice-number-gap-that-a-parallel-batch-has-claimed)
 - [Europe is not split into halves: measured, and the owner declined](#2026-10-02---europe-is-not-split-into-halves-measured-and-the-owner-declined)
+- [Manchester (Regional) built, the pilot of the UK six: TfGM's nine lines routed over OSM's track, gate 3 against TfGM and NaPTAN](#2026-10-02---manchester-regional-built-the-pilot-of-the-uk-six-tfgms-nine-lines-routed-over-osms-track-gate-3-against-tfgm-and-naptan)
+- [The owner's first four UK six calls: Manchester is light rail, its lines are TfGM's routed over OSM's track, NaPTAN's notice is displayed, the proposals accepted (owner)](#2026-10-02---the-owners-first-four-uk-six-calls-manchester-is-light-rail-its-lines-are-tfgms-routed-over-osms-track-naptans-notice-is-displayed-the-proposals-accepted-owner)
+- [Birmingham (Regional) built: West Midlands Metro's one line, gate 3 exact against the operator and NaPTAN, Line 2 not yet open](#2026-10-02---birmingham-regional-built-west-midlands-metros-one-line-gate-3-exact-against-the-operator-and-naptan-line-2-not-yet-open)
+- [Edinburgh built, third of the UK six: one tram line on OSM's two through relations, gate 3 exact against Edinburgh Trams and NaPTAN, the short register disclosed](#2026-10-02---edinburgh-built-third-of-the-uk-six-one-tram-line-on-osms-two-through-relations-gate-3-exact-against-edinburgh-trams-and-naptan-the-short-register-disclosed)
+- [Sheffield built: Supertram's three routes, the Tram-Train left out, gate 3 against NaPTAN only](#2026-10-02---sheffield-built-supertrams-three-routes-the-tram-train-left-out-gate-3-against-naptan-only)
+- [Nottingham (Regional) built: NET's two lines from both directions' relations, gate 3 exact against NET and NaPTAN, halved rings, tram](#2026-10-02---nottingham-regional-built-nets-two-lines-from-both-directions-relations-gate-3-exact-against-net-and-naptan-halved-rings-tram)
+- [Blackpool (Regional) built, the last of the UK six: one tramway with the North Station spur, gate 3 on NaPTAN alone, halved rings](#2026-10-02---blackpool-regional-built-the-last-of-the-uk-six-one-tramway-with-the-north-station-spur-gate-3-on-naptan-alone-halved-rings)
+- [The United Kingdom becomes a region of its own; the UK six take the minor label tier (owner)](#2026-10-02---the-united-kingdom-becomes-a-region-of-its-own-the-uk-six-take-the-minor-label-tier-owner)
+- [The owner's calls on the five builds after Manchester: all tram, Edinburgh keeps its centroids, Sheffield keeps Shalesmoor, the proposals accepted (owner)](#2026-10-02---the-owners-calls-on-the-five-builds-after-manchester-all-tram-edinburgh-keeps-its-centroids-sheffield-keeps-shalesmoor-the-proposals-accepted-owner)
+- [The UK six landed ahead of the other batches, with two queued fixes bundled into the same reboot (owner)](#2026-10-02---the-uk-six-landed-ahead-of-the-other-batches-with-two-queued-fixes-bundled-into-the-same-reboot-owner)
+- [Japan batch: session registered, briefs re-checked, numbers claimed](#2026-10-02---japan-batch-session-registered-briefs-re-checked-numbers-claimed)
+- [Japan batch: the shared code in one pass, proven on Minato and the eight built cities](#2026-10-02---japan-batch-the-shared-code-in-one-pass-proven-on-minato-and-the-eight-built-cities)
+- [The name rule reads a register's 法人名 column where it holds a sole trader's own name (Matsuyama)](#2026-10-02---the-name-rule-reads-a-registers-法人名-column-where-it-holds-a-sole-traders-own-name-matsuyama)
+- [Matsuyama built, the pilot of the Japan batch](#2026-10-02---matsuyama-built-the-pilot-of-the-japan-batch)
+- [The Japan views: Japan West and Japan East, every Japanese city moved, the batch minor (owner's tier call)](#2026-10-02---the-japan-views-japan-west-and-japan-east-every-japanese-city-moved-the-batch-minor-owners-tier-call)
+- [Toyama built, the city's own lists with MHLW's points where the block join misses](#2026-10-02---toyama-built-the-citys-own-lists-with-mhlws-points-where-the-block-join-misses)
+- [Kumamoto built, Hiroshima's two-source shape with personal services](#2026-10-02---kumamoto-built-hiroshimas-two-source-shape-with-personal-services)
+- [Fukui built, the project's first CC BY-SA output](#2026-10-02---fukui-built-the-projects-first-cc-by-sa-output)
+- [Nagasaki built, a 2023 snapshot beside MHLW's current filings (owner: shape b)](#2026-10-02---nagasaki-built-a-2023-snapshot-beside-mhlws-current-filings-owner-shape-b)
+- [Utsunomiya built, Fukuoka's two-source shape with personal services](#2026-10-02---utsunomiya-built-fukuokas-two-source-shape-with-personal-services)
+- [Kitakyushu built, two food lists and no laundries](#2026-10-02---kitakyushu-built-two-food-lists-and-no-laundries)
+- [Sakai built, food only, on a register rebuilt to August 2026](#2026-10-02---sakai-built-food-only-on-a-register-rebuilt-to-august-2026)
+- [Hakodate built, personal services only](#2026-10-02---hakodate-built-personal-services-only)
+- [Kagoshima built, food only](#2026-10-02---kagoshima-built-food-only)
+- [Okayama built, MHLW's filings alone](#2026-10-02---okayama-built-mhlws-filings-alone)
+- [Kōchi built, barbers and beauty salons only](#2026-10-02---kōchi-built-barbers-and-beauty-salons-only)
+- [The Japan batch landed on its branch: twelve cities, what the agents did, and what waits for review time](#2026-10-02---the-japan-batch-landed-on-its-branch-twelve-cities-what-the-agents-did-and-what-waits-for-review-time)
+- [The owner's four calls on the Japan batch, and MHLW's default points refused](#2026-10-02---the-owners-four-calls-on-the-japan-batch-and-mhlws-default-points-refused)
+- [Seattle (Regional): rail from OpenStreetMap, 39 stations in 11 cities, Pinehurst placed from Sound Transit](#2026-10-02---seattle-regional-rail-from-openstreetmap-39-stations-in-11-cities-pinehurst-placed-from-sound-transit)
+- [Seattle (Regional): five sources in one step 2, 14,500 storefronts; the name rule on structural signals; two owner questions](#2026-10-02---seattle-regional-five-sources-in-one-step-2-14500-storefronts-the-name-rule-on-structural-signals-two-owner-questions)
+- [Seattle (Regional) privacy verdict: publish](#2026-10-02---seattle-regional-privacy-verdict-publish)
+- [Seattle (Regional) green: every gate run, baseline recorded, held for review time](#2026-10-02---seattle-regional-green-every-gate-run-baseline-recorded-held-for-review-time)
+- [Tbilisi: the metro from OpenStreetMap, 23 stations, gate 3 exact; a new West Asia region](#2026-10-02---tbilisi-the-metro-from-openstreetmap-23-stations-gate-3-exact-a-new-west-asia-region)
+- [Tbilisi: Geostat's register at the factual address, 13,252 storefronts; district-center placeholders left off by the owner's rule](#2026-10-02---tbilisi-geostats-register-at-the-factual-address-13252-storefronts-district-center-placeholders-left-off-by-the-owners-rule)
+- [Tbilisi privacy verdict: publish](#2026-10-02---tbilisi-privacy-verdict-publish)
+- [Seattle (Regional): the owner's two calls applied, 14,431 storefronts; both builds' wording and modes approved](#2026-10-02---seattle-regional-the-owners-two-calls-applied-14431-storefronts-both-builds-wording-and-modes-approved)
+- [check_no_fetch_in_steps.py follows every module a step imports](#2026-10-02---check_no_fetch_in_stepspy-follows-every-module-a-step-imports)
 
 **2026-10-01**
 
@@ -14240,3 +14277,1748 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **The one real crowding stays as it is:** Den Haag, Rotterdam and Amsterdam,
   3-8 px apart. It is on the stacked-dots review list. A Netherlands country
   view, like the Seoul Capital Area, is the precedent if it is ever wanted.
+
+### 2026-10-02 - Manchester (Regional) built, the pilot of the UK six: TfGM's nine lines routed over OSM's track, gate 3 against TfGM and NaPTAN
+
+- **Scope (owner, 2026-10-01):** the seven districts Metrolink serves
+  (Bury 405, Manchester 415, Oldham 418, Rochdale 419, Salford 422, Tameside
+  430, Trafford 431). Exactly seven FSA codes are asserted. The boundary is
+  the union of OSM relations 146656, 146657, 146675, 146925, 146926, 146927
+  and 146655, 822.0 km² in UTM 30N, gated at 790-850.
+- **Shared code, written here for the five after it:**
+  `pipeline/countries/uk.py` holds the steps and `uk_fetch.py` the
+  downloads, split as Czechia's are so a step imports nothing that fetches.
+  - The fetch makes ONE Overpass query per city: routes and boundaries with
+    geometry, the member ways' tags and the member nodes.
+  - Step 1 runs on `osm_tram` and gate 3 runs twice.
+  - Step 2 is Newcastle's, unchanged in method.
+  - No existing shared module was edited. London's and Newcastle's drift
+    checks are the control (recorded below once run).
+- **The lines are TfGM's, not OSM's.** OSM's 23 relations carry 11 service
+  refs from before TfGM's 14 September 2026 change. TfGM's network map
+  (`tfgm.com/public-transport/tram/network-map`, read 2026-10-02) names nine
+  lines by colour, each with its stops in order.
+  - Four match an OSM service: Green, Pink, Anthracite and Navy.
+  - Five run where no OSM relation does: Purple (Altrincham - Etihad
+    Campus), Yellow (Eccles - Piccadilly), Burgundy (MediaCityUK -
+    Piccadilly), Blue (Ashton-under-Lyne - Bury) and Red (The Trafford
+    Centre - Crumpsall).
+  - Each line is routed over the kept relations' track, stop to stop, by
+    the shortest track path. Double track is one way per direction, so each
+    stop anchors on every track vertex within 40 m of its nearest one.
+  - Drawn lengths run from Burgundy's 5.4 km to Pink's 35.8 km.
+  - Rejected: drawing OSM's services under their own refs (no longer the
+    operator's lines), and drawing them under TfGM's names (the geometry
+    would contradict the names).
+- **TfGM's two slips, handled in config.** Its Red line lists "Abramham
+  Moss", aliased to Abraham Moss. It also skips St Peter's Square between
+  Deansgate-Castlefield and Exchange Square, where the only track runs
+  through it.
+- **The ECL relation (16749012) is not drawn.** It has ref "ECL", network
+  "Metrolink" and operator "TfGM", and no stop members. 99.4% of its 6.8 km
+  lies within 30 m of the Ashton-under-Lyne - Eccles via MediaCityUK track,
+  so it duplicates the Eccles line. It sits in `NOT_DRAWN` with that reason.
+- **Stations:** 192 stop positions collapse to 99 by name (the widest,
+  Robinswood Road, 174 m across). All 99 are inside the seven districts, and
+  none is thinned. The median gap is 703 m, so the rings are standard.
+- **Gate 3, exact on both sources:**
+  - TfGM's stop list (`tfgm.com/public-transport/tram/stops`) holds 99 stops,
+    a whole-network count. A per-line count would be circular, since the
+    lines are TfGM's own sequences.
+  - NaPTAN holds 99 active MET records (prefix `9400ZZMA`, ATCO area 940)
+    inside the scope, matched name by name. The one spelling difference,
+    "Besses o'th'Barn", falls away under the punctuation-blind match.
+  - NaPTAN files every tram stop under ATCO area 940, the national tram and
+    metro area; Greater Manchester's area 180 holds none.
+- **The light-rail test:** the kept track is 100% `railway=light_rail`
+  (195.7 km of route track, each way once), 10.2% in tunnel or on a bridge,
+  with a 703 m median gap. Frequency is 15 minutes per line since 14
+  September 2026 (TfGM), which meets the converted-railway gate on the Bury,
+  Altrincham and Oldham-Rochdale branches. **Recommended `mode`:
+  `light_rail`** (the owner approves it with the build).
+- **Colours:** `scripts/line_colour_search.py manchester` gives each TfGM
+  hue's nearest feasible colour, every one 45.1 or more from the pins. The
+  closest pair within 500 m is 18.1 (Burgundy and Purple), and the nine
+  dark-mode labels are distinct. The legend row reads "<Colour> line (<ends>)".
+- **Businesses, step by step:**
+  - 17,642 register rows in 7 authorities, with extracts all of 2026-10-02.
+  - 12,461 storefront rows (the brief's API count was 12,451 a day earlier).
+  - 10 at a "Flat" address are never placed; no childminders.
+  - 1,151 have no FSA point. Of those, 673 are placed at a Code-Point
+    centroid and 478 (3.8%) are not placed: Bury 7.2%, Tameside 6.2%. No row
+    had an outward code only, and 350 had no usable postcode.
+  - 4 fall outside the sanity box and 6 outside the districts.
+  - 51 trading-as names show the trade name.
+  - **11,963 storefronts placed** (Food service 8,085, Food shops 3,878):
+    94.4% at the FSA's point, 5.6% at a centroid. Tameside's low sample
+    share (78.9%) did not hold on the full file.
+  - 6,202 (51.8%) sit within a ring: Food service 4,359, Food shops 1,843.
+  - Canteens by name are at least 2.5% of Restaurant/Cafe/Canteen, not
+    separated (London's lower bound).
+- **Personal exposure (`check_personal_exposure.py manchester`):**
+  - 6,202 pins and 5,319 distinct names. No fallback name exists, since step
+    2 never loads an owner column.
+  - 0 emails, phone numbers or c/o markers.
+  - 1 surname-first name and 12 "person's name (trade name)" shapes.
+  - The heuristic reads 1,600 (25.8%) as person-like, which on the FSA
+    register is mostly pubs and cafés named for people.
+  - **Verdict: publish**, London's and Newcastle's: the same register, the
+    same structural guards (the FSA's private-address rule, the flat,
+    childminder and trading-as rules).
+- **CRS:** UTM 30N (EPSG:32630), as London, Glasgow and Newcastle. The
+  brief's British National Grid is Code-Point's source CRS only.
+- **Notices:** 84 (FSA, Manchester) and 85 (Ordnance Survey, Manchester) are
+  Newcastle's 62 and 63 with the city and date changed. 86 (NaPTAN, United
+  Kingdom) is new, from the `licence-read` of 2026-10-02: OGL v3.0, no
+  attribution of the Department's own, no API terms. Display the OGL's
+  default statement with the licence linked; never imply DfT's endorsement
+  or use its logo.
+- **Page:** `app/pages/156_Manchester_Heatmap.py` (page 156, staging's pre-assignment in
+  `docs/session_roles.md`). Newcastle's FSA bullets plus the tram template's
+  line bullets; two proposals are listed above.
+
+### 2026-10-02 - The owner's first four UK six calls: Manchester is light rail, its lines are TfGM's routed over OSM's track, NaPTAN's notice is displayed, the proposals accepted (owner)
+
+- **The owner, answering ahead of review time:** "1. light rail, 2.
+  accepted and note this 3. display 4. accepted".
+- **1. Manchester (Regional)'s `mode` is `light_rail`**, on the light-rail
+  test (100% `railway=light_rail`, 10.2% tunnel or bridge, a 703 m median
+  gap; San Diego's precedent).
+- **2. A city's lines may be the operator's own, routed over OSM's track**
+  through the operator's stop sequences, where OSM's service relations no
+  longer match the operator's lines (Manchester: five of TfGM's nine lines
+  have no relation since 14 September 2026). "Note this": the rule goes
+  where the next OSM city passes through it, in `pipeline/countries/uk.py`
+  (`LINE_STOPS`, `routed_lines`) and the `osm-rail` skill.
+- **3. Notice 86 (NaPTAN, United Kingdom) is displayed**, the OGL's default
+  statement with the licence linked, on the cautious reading that a count
+  checked against the data is use of it.
+- **4. The prose proposals are accepted:** Manchester's two sentences ("Each
+  line follows OpenStreetMap's track through its stops as TfGM lists them";
+  "Trams run about every 15 minutes on each line by day") and notice 86's
+  wording.
+
+### 2026-10-02 - Birmingham (Regional) built: West Midlands Metro's one line, gate 3 exact against the operator and NaPTAN, Line 2 not yet open
+
+- **Scope (owner, 2026-10-01):** the three districts West Midlands Metro
+  serves (Birmingham 402, Sandwell 423, Wolverhampton 436). Exactly three FSA
+  codes are asserted. The boundary is the union of OSM relations 162378,
+  162485 and 173722, 422.8 km², gated at 400-445.
+- **Line 2 and Dudley are not on the map (the lead, 2026-10-02).** The
+  operator's maps page (`westmidlandsmetro.com/maps/`, read 2026-10-02) lists
+  35 stops, none on Line 2. The opening missed its 28 August 2026 date, and
+  Dudley Council's leader gives 1 November 2026. Relation 17248967 sits in
+  `NOT_DRAWN`, and the brief's pre-approved Dudley branch does not apply.
+  Watch item for PLAN: Line 2 with Dudley (FSA 409), about 1 November 2026.
+- **One drawn line, West Midlands Metro.** OSM's 6 ref-1 relations are
+  service patterns of one line: Wolverhampton Station or Wolverhampton St
+  Georges to Edgbaston Village each way, and the Millennium Point branch each
+  way. The operator's page names no line ("the Metro"), so the label is the
+  system's name, as the one-line precedents (Odense Letbane, Sun Link, KC
+  Streetcar). The legend adds "(Wolverhampton - Edgbaston Village)".
+- **The branch rule takes Birmingham's thresholds** (`BRANCH_NEAR_M` 30,
+  `BRANCH_MIN_NEW_M` 50; shared change e2452466). The Eastside branch adds
+  about 415 m of track beyond 30 m of the main relation, and the St Georges
+  stub adds 72 m. Under London's defaults (300 m, 1,000 m), Millennium Point
+  sat 397 m, Albert Street 220 m and Wolverhampton St Georges 100 m off the
+  drawn line. At 30 m and 50 m, 3 of the 6 relations are drawn (23.8 km), and
+  every station is within 4 m of the line.
+- **Role-less stop members** (shared change e2452466). The four Wolverhampton
+  - Edgbaston Village relations list their stops with an empty role, 118
+  memberships. `ROLELESS_STOP_RELATIONS` reads them as stops, and the step
+  stops once OSM gives them roles. Rejected: 49 `STATION_ADD` entries by node,
+  the build's first draft.
+- **Stations:** 67 stop positions collapse to 35 by name (the widest, Bilston
+  Central, 46 m across). "Dudley Street, Guns Village" is aliased to "Dudley
+  Street Guns Village". All 35 are inside the three districts, and none is
+  thinned. The closest pair is Pipers Row and Wolverhampton St Georges, 173 m
+  apart, two stops the operator lists.
+- **Gate 3, exact on both sources:**
+  - The operator's maps page lists 35 stops (its stop links and zone list),
+    all on Line 1, Albert Street and Millennium Point included. The build has
+    35.
+  - NaPTAN holds 43 active MET records (prefix `9400ZZWM`, ATCO area 940)
+    inside the scope, and 35 match name by name. NaPTAN's "Centenary Square"
+    is Library (6 m), and its "Wednesbury Central" is Wednesbury, Great
+    Western Street (98 m; the next stop is 537 m away).
+  - Eight records are explained: Line 2's five in Sandwell (Birmingham New
+    Road, Dudley Port, Great Bridge, Horseley Road, Sedgley Road), and three
+    Eastside stops beyond Millennium Point that the operator does not list yet
+    (Curzon Street, Digbeth High Street, Meriden Street). Watch item for PLAN:
+    the Eastside stops, when they open.
+- **Rings: halved.** The median gap in scope is 442 m, under the spacing
+  rule's 550 m, so the rings are 0.05 to 0.3 mi, with bounds of 390-500 m.
+- **The light-rail test:** the kept track is 100% `railway=tram` (47.6 km of
+  route track, each way once), 7.1% in tunnel or on a bridge, with a 442 m
+  median gap. Frequency is every 4-11 minutes by day (the operator's maps
+  page), which meets the converted-railway gate on the former Great Western
+  trackbed from Snow Hill to Priestfield. **`mode`: `tram`**, on Riga's tram
+  control (2%, 0/98%, 360 m) and Santa Cruz-La Laguna's tram verdict (the
+  lead accepted it, 2026-10-02).
+- **Colour:** `scripts/line_colour_search.py birmingham` gives `#F000B8`, the
+  nearest feasible colour to OSM's `#ec008c`: 45.2 from every pin, 4.81:1 and
+  3.89:1 on the two pages.
+- **A duplicated register row** (shared change e2452466). Sandwell's file
+  lists FHRSID 372079 twice, identical on every field read. It is kept once,
+  and an FHRSID whose rows differ still stops the step.
+- **Businesses, step by step:**
+  - 15,215 register rows in 3 authorities, with extracts all of 2026-10-02;
+    1 duplicate row kept once.
+  - 9,816 storefront rows (the brief's API count was 9,827 a day earlier).
+  - 53 at a "Flat" address are never placed; no childminders.
+  - 802 have no FSA point. Of those, 433 are placed at a Code-Point centroid
+    and 369 (3.8%) are not placed: Sandwell 4.2%, Birmingham 4.1%,
+    Wolverhampton 1.9%. No row had an outward code only, 331 had no usable
+    postcode, and 38 had a full postcode that is not in Code-Point.
+  - 2 fall outside the sanity box and 8 outside the districts.
+  - 45 trading-as names show the trade name.
+  - **9,384 storefronts placed** (Food service 5,796, Food shops 3,588):
+    95.4% at the FSA's point, 4.6% at a centroid. The FSA-point share is
+    96.4% in Birmingham, 91.2% in Sandwell and 96.0% in Wolverhampton, each
+    above the brief's sample.
+  - The render's contact-detail scrub drops 1 more (9,383). 1,642 (17.5%)
+    sit within a ring: Food service 1,162, Food shops 480.
+  - Canteens by name are at least 1.9% of Restaurant/Cafe/Canteen, not
+    separated (London's lower bound).
+- **Personal exposure (`check_personal_exposure.py birmingham`):**
+  - 1,642 pins and 1,512 distinct names. No fallback name exists.
+  - 0 emails or phone numbers. 1 "c/o" marker, a contract caterer at a
+    company site.
+  - 1 surname-first name and 8 "person's name (trade name)" shapes.
+  - The heuristic reads 370 (22.5%) as person-like, mostly cafés and shops
+    named for people.
+  - **Verdict: publish**, London's, Newcastle's and Manchester's: the same
+    register and the same structural guards.
+- **CRS:** UTM 30N (EPSG:32630), as the built UK cities.
+- **Notices:** 87 (FSA, Birmingham) and 88 (Ordnance Survey, Birmingham) are
+  Manchester's 84 and 85 with the city and figures changed. NaPTAN is notice 86.
+- **Page:** `app/pages/157_Birmingham_Heatmap.py`. Newcastle's FSA bullets
+  plus the tram template's line bullets; the proposals are listed in the
+  owner's section.
+
+### 2026-10-02 - Edinburgh built, third of the UK six: one tram line on OSM's two through relations, gate 3 exact against Edinburgh Trams and NaPTAN, the short register disclosed
+
+- **Scope (owner, 2026-10-01):** the City of Edinburgh, FSA code 773 on Food
+  Standards Scotland's FHIS (SchemeType 2); exactly one code asserted. The
+  boundary is OSM relation 1920901 (admin_level 6, GSS S12000036), 272.9 km² in
+  UTM 30N, gated at 240-300.
+- **Config on Manchester's contract.** No shared module was edited.
+- **The line is one, from OSM's two through relations.** The three tram
+  relations carry no ref, network or operator tag.
+  - Newhaven => Airport (2632877, 23 stops) and Airport => Newhaven (4116776,
+    22, ending at Ocean Terminal) take the ref "Tram" through
+    `REF_BY_RELATION` and are merged by London's branch rule (one direction
+    drawn, 18.4 km).
+  - The label is the operator's name, "Edinburgh Trams"; the legend adds
+    "(Airport - Newhaven)", as the timetables page writes the ends.
+  - No colour in OSM or from the operator, so the project's own hue
+    `#b8860b` (Odense's and Kansas City's); `line_colour_search.py` gives
+    `#B88810`, 73.6 from every pin, 5.86:1 dark and 3.20:1 light.
+- **"Tram Extension to Newhaven" (11819309) is not drawn.** No stop members,
+  `start_date` 2023-06-07, the council's extension page as its website, and
+  100% of its 9.3 km within 15 m of both through relations' track: a leftover
+  of the extension's construction mapping. It sits in `NOT_DRAWN` with that
+  reason.
+- **Stations:** 45 stop positions collapse to 23 by name (the widest, Port of
+  Leith, 50 m across). All 23 are inside the city; none is thinned.
+- **Gate 3, exact on both sources:**
+  - Edinburgh Trams: the route map on `edinburghtrams.com/timetables` names
+    23 stops (read 2026-10-02), a whole-network count for the one line. The
+    page's timetable table lists only 13 timing points.
+  - NaPTAN: 23 active MET records in area 940 inside the city, matched name by
+    name. The eight Newhaven-extension stops (Picardy Place to Newhaven) are
+    filed under the Tyne and Wear prefix `9400ZZTW`, the other 15 under
+    `9400ZZED`. NaPTAN's "West End - Princes Street" is aliased to West End
+    (`NAPTAN_NAME_ALIASES`), the name OSM and the operator use. Inactive York
+    Place and the depot fall out on status.
+- **Rings: standard.** The median gap in scope is 614 m (min 338, mean 645, max
+  1,199), over the spacing rule's 550 m and clear of the 540-570 m owner band;
+  `MEDIAN_GAP_BOUNDS_M` 570-700.
+- **The light-rail test:** the kept track is 100% `railway=tram` (36.8 km of
+  route track, each way once), 4.6% in tunnel or on a bridge, with a 614 m
+  median gap. Trams run every 7 minutes by day, every 10 early and in the
+  evenings, on purpose-built track. **`mode` is `tram`** (lead, 2026-10-02):
+  Dublin's Luas, a street tram that clears the spacing at 575 m, and Riga's
+  control (2%, 98% tram).
+- **The placement share, against the brief's 96.6%.** The brief's figure was
+  a first-page API sample, whose default order leans to 5-rated premises
+  (Manchester's Tameside sample read off the same way). The full file gives
+  93.9% at the FSA's point and 95.4% placed (4.6% unplaced), within the built
+  cities' range (London 5.0%, Manchester 3.8%); settled by the lead
+  2026-10-02 and disclosed on the page in Newcastle's words ("about one food
+  storefront in twenty-two").
+- **The centroid tier is kept (the kit), an open item for the owner.** It
+  places 57 storefronts (1.5% of those placed): unplaced is 4.6% with it, 6.1%
+  without. Glasgow's precedent is no centroids, at 1.2% without a point, where
+  its 22 full postcodes would have added about 0.5%. Notice 90 stays while the
+  tier does.
+- **The register is short, disclosed rather than padded.** 5,144 premises
+  against Glasgow's 6,632. It matches the FSA's published `EstablishmentCount`
+  (5,144, last published 2026-10-02) and the file's ItemCount; FSS publishes no
+  count, and its own copy of the council file is listed at 4.6 MB, in line with
+  the FSA's 4,797,465 bytes. Four types are absent: Mobile caterer,
+  Distributors/Transporters, Importers/Exporters and Farmers/growers (Glasgow
+  425, 84, 23, 1), none a storefront type. Retailers - other (628 against
+  1,150) and Takeaway/sandwich shop (680 against 1,109) are low against
+  Glasgow's. Stated in Edinburgh's section of What Is Excluded as a limit.
+- **Businesses, step by step:**
+  - 5,144 register rows, extract 2026-10-02; 3,933 storefront rows.
+  - 0 at a "Flat" address, 0 childminders.
+  - 239 have no FSA point: 57 placed at a Code-Point centroid, 182 (4.6%) not
+    placed (151 with no usable postcode, 149 of them blank; 31 with a full
+    postcode Code-Point does not hold); no outward-code-only rows.
+  - 0 outside the sanity box, 1 outside the city.
+  - 5 trading-as names show the trade name.
+  - **3,750 storefronts placed** (Food service 2,995, Food shops 755): 98.5%
+    at the FSA's point, 1.5% at a centroid.
+  - 2,226 (59.4%) sit within a ring: Food service 1,854, Food shops 372.
+  - Canteens by name are at least 1.4% of Restaurant/Cafe/Canteen (26 of
+    1,818), not separated (London's lower bound).
+- **Personal exposure (`check_personal_exposure.py edinburgh`):**
+  - 2,226 pins and 2,010 distinct names. No fallback name exists, since step
+    2 never loads an owner column.
+  - 0 emails, phone numbers or c/o markers; 0 surname-first names.
+  - 6 (0.3%) "person's name (trade name)" shapes.
+  - The heuristic reads 554 (24.9%) as person-like, which on this register is
+    mostly cafés, takeaways and pubs named for people.
+  - **Verdict: publish**, Glasgow's, London's, Newcastle's and Manchester's:
+    the same register, the same structural guards.
+- **CRS:** UTM 30N (EPSG:32630), as London, Glasgow and Newcastle.
+- **Notices:** 89 (Food Standards Scotland, Edinburgh) is Glasgow's 61 with the
+  city and date changed and Manchester's centroid clause added; 90 (Ordnance
+  Survey, Edinburgh) is Newcastle's 63 with the city changed; NaPTAN is notice
+  86, as for every UK city.
+- **Page:** `app/pages/158_Edinburgh_Heatmap.py` (page 158). Glasgow's FHIS
+  bullets, Newcastle's placement bullets and the tram template's line bullets
+  under "The tram"; the proposals are listed above.
+
+### 2026-10-02 - Sheffield built: Supertram's three routes, the Tram-Train left out, gate 3 against NaPTAN only
+
+- **Scope (owner, 2026-10-01):** the City of Sheffield, FSA authority 425
+  only; Rotherham (420) is out with the Tram-Train. The boundary is OSM
+  relation 106956 (admin_level 8, GSS E08000039), 368.0 km², gated at
+  350-385. On the UK six's shared steps (`pipeline/countries/uk.py`), config
+  only; no shared file edited. Re-run on e2452466 with no change: none of its
+  new options is needed, and step 2's exact-duplicate rule removes no row.
+- **The lines are OSM's three Supertram routes,** each a directional pair
+  merged by London's branch rule (`LINE_OSM_REFS`): Blue (165857, 9701743)
+  19.3 km, Yellow (165852, 9701823) 13.6 km, Purple (165858, 9701599)
+  8.0 km. OSM's relations match the operator's routes one for one, so no
+  routing (`LINE_STOPS`) is needed. Labels "Blue route", "Yellow route",
+  "Purple route", with the ends in the legend (OSM's from/to tags). The
+  operator's own naming could not be read (its site refuses scripts); the
+  route names are the brief's.
+- **The Tram-Train (ref TT, relations 9701871 and 9701872) is not drawn**
+  (owner, 2026-10-01): every 30 minutes on Network Rail track beyond
+  Tinsley, which fails the converted-railway frequency gate (Aarhus L1's
+  precedent). Its stops in Sheffield are all on the Yellow route; its three
+  in Rotherham go with it.
+- **Purple is drawn at about hourly** (Buffalo's rule: purpose-built track,
+  so disclosed, not disqualifying; owner, 2026-10-01). It alone serves 2 of
+  the 48 stops (Herdings Park, Herdings / Leighton Road). The page states
+  the wait.
+- **Stations:** 91 stop positions collapse to 48 by name (the widest,
+  Granville Road / The Sheffield College, 141 m across). OSM spells one stop
+  two ways across Yellow's directions ("Carbrook/Ikea", "Carbrook/IKEA"),
+  merged by `STATION_NAME_ALIASES`. All 48 are inside the city; none thinned,
+  none excluded.
+- **Gate 3, NaPTAN only.** supertram.com serves a Radware CAPTCHA to scripts
+  and Stagecoach's page returns 403 (2026-10-02); neither was passed, so
+  `OPERATOR_STATION_COUNTS = None` with `OPERATOR_COUNTS_GAP` (owner,
+  2026-10-01: NaPTAN is the only independent source). NaPTAN holds 51 active
+  MET records for `9400ZZSY`, 48 inside the city, matched name by name: 48 of
+  48. Six NaPTAN names differ from OSM's and are paired by position in
+  `NAPTAN_NAME_ALIASES` (1 to 72 m). One is a rename: NaPTAN's "Kelham
+  Island" carries Shalesmoor's ATCO code (9400ZZSYSHL), stands 3 m from OSM's
+  Shalesmoor, and was revised 2025-05-08. The map keeps OSM's name; showing
+  "Kelham Island" goes to the owner.
+- **The light-rail test:** the kept track is 100% `railway=tram` (56.7 km of
+  route track, each way once), 4.3% in tunnel or on a bridge, with a 444 m
+  median gap. **Recommended `mode`: `tram`** (Odense's precedent; Manchester's
+  100% light_rail and 703 m is the contrast). The owner approves it with the
+  build.
+- **Rings: halved** (0.05 / 0.1 / 0.2 / 0.3 mi; Aarhus's). The median gap in
+  scope is 444 m (min 145, Castle Square to Fitzalan Square / Ponds Forge,
+  both in NaPTAN), under the spacing rule's 550 m; step 1 stops outside
+  390-500.
+- **Colours:** `scripts/line_colour_search.py sheffield` gives Blue #8018F8
+  (OSM's #0000FF reads about 2.2:1 on the dark page), Yellow #989800 (OSM's
+  #FFFF00 fails 3:1 on the light page; darkened as Tours and Dijon were) and
+  Purple #A030A0. Every one is 45.4 or more from the pins; the closest pair
+  is 55.1 (Blue, Purple); the dark-mode labels are distinct.
+- **Businesses, step by step:**
+  - 4,859 register rows in 1 authority, extract 2026-10-02.
+  - 3,447 storefront rows (the brief's 3,447).
+  - 4 at a "Flat" address are never placed; no childminders.
+  - 163 have no FSA point. Of those, 70 are placed at a Code-Point centroid
+    and 93 (2.7%) are not placed: 13 with a full postcode not in the edition,
+    80 with no usable postcode, none with an outward code only.
+  - 2 fall outside the sanity box (bad FSA points, one on the south coast,
+    one north-east of the city) and 0 outside the city.
+  - 8 trading-as names show the trade name.
+  - **3,348 storefronts placed** (Food service 2,365, Food shops 983):
+    97.9% at the FSA's point, 2.1% at a centroid. The FSA point share of
+    storefront rows on the full file is 95.3%, under the brief's sample
+    figure of 96.4%; 97.3% of storefront rows are placed, which the lead
+    accepted (2026-10-02): the full file against the brief's sample.
+  - 1,162 (34.7%) sit within a ring: Food service 869, Food shops 293.
+  - Canteens by name are at least 1.5% of Restaurant/Cafe/Canteen, not
+    separated (London's lower bound).
+  - Excluded by type: other catering 529, hospitals/childcare/caring 336,
+    schools 261, mobile caterers 142, manufacturers 68, distributors 37,
+    hotels 29, farmers 7, importers 3.
+- **Personal exposure (`check_personal_exposure.py sheffield`):** 1,162
+  pins, 1,061 distinct names; no fallback name exists; 0 emails, phone
+  numbers or c/o markers; 0 surname-first names and 1 "person's name (trade
+  name)" shape; the heuristic reads 299 (25.7%) as person-like, mostly cafés
+  and takeaways named for people. **Verdict: publish**, London's,
+  Newcastle's and Manchester's on the same register and guards.
+- **CRS:** UTM 30N (EPSG:32630), as the built UK cities.
+- **Notices:** 91 (FSA, Sheffield) and 92 (Ordnance Survey, Sheffield),
+  Newcastle's 62 and 63 with the city and date changed; NaPTAN's 86 covers
+  gate 3.
+- **Page:** `app/pages/159_Sheffield_Heatmap.py`, under the headings "The
+  trams", "The businesses" and "Reading the map": Newcastle's FSA bullets
+  with Sheffield's figures (one in thirty-seven unplaced; one in three in a
+  ring) and the tram template's line bullets. Five proposals are listed for
+  the owner.
+
+### 2026-10-02 - Nottingham (Regional) built: NET's two lines from both directions' relations, gate 3 exact against NET and NaPTAN, halved rings, tram
+
+- **Scope (owner, 2026-10-01):** the four councils NET serves (Nottingham
+  City 899, Broxtowe 261, Rushcliffe 266, Ashfield 259); exactly four FSA
+  codes asserted. The boundary is the union of OSM relations 123292 (the
+  unitary city, admin_level 6), 154058, 77311 and 154043 (the districts,
+  admin_level 8), 673.7 km² in UTM 30N, gated at 640-700; never
+  Nottinghamshire (181040). Gedling (262) has no stop.
+- **OSM's four relations are one per line per DIRECTION, each end to end**,
+  not the brief's half-lines meeting in the centre: 170076 and 1984324 (Line
+  1), 1984359 and 1984325 (Line 2), all `#003828`. All four are kept.
+  - London's branch rule (300 m, 1,000 m) kept one direction per line and
+    left Hyson Green's northbound one-way street (Noel Street, Beaconsfield
+    Street, Shipstone Street) undrawn, Beaconsfield Street 232 m off its
+    line. Beyond 30 m of the first direction the second adds 742 m in 8
+    parts on each line, so `BRANCH_NEAR_M = 30`, `BRANCH_MIN_NEW_M = 500`
+    (Birmingham's lowering): 2 of 2 relations per line, 23.3 km and 16.4 km.
+- **Four OSM defects, handled in config (the shared fixes of e2452466):**
+  - two northbound stop members that are no stop, skipped
+    (`SKIP_MEMBERS`): 9243041864, a `railway=tram_crossing` about 30 m from
+    Wilkinson Street, and 6711112153, an untagged node about 60 m from
+    Bulwell; the southbound relations carry both real stops;
+  - Highbury Vale's two branch platforms, "Highbury Vale A" and "B" in OSM,
+    one stop to NET and NaPTAN (`STATION_RENAMES`, Newcastle's "St. James"
+    precedent); 4 positions, 104 m across;
+  - Bulwell Forest, on both Line 1 relations with an empty role, added by
+    both its nodes (`STATION_ADD`);
+  - David Lane, on no relation, which NET lists on both lines, added by both
+    its nodes once the widened fetch cached them (`STATION_ADD`, lines 1
+    and 2).
+- **Stations:** 88 stop positions collapse to 50 by name, all inside the
+  four council areas (City 35, Broxtowe 9, Rushcliffe 4, Ashfield 2). None
+  is thinned or excluded.
+- **Gate 3, exact on both sources:**
+  - NET's timetables page (`thetram.net/timetables`, read 2026-10-02)
+    lists 50 stops; each stop's direction headings give Line 1 36 and Line 2
+    30, against the build's 36 and 30.
+  - NaPTAN: 50 active MET records (prefix `9400ZZNO`, ATCO area 940) inside
+    the scope, 50 of 50 names matched; NaPTAN's "NTU" read as Nottingham
+    Trent University.
+  - Before David Lane was added, both gates failed on it (35 and 29), the
+    fault gate 3 exists to catch: OSM's relations skip a served stop.
+- **Rings: halved** (0.05 to 0.3 mi). The median gap in scope is 432 m,
+  under the spacing rule's 550 m; bounds 380-490.
+- **The light-rail test:** the kept track is 100% `railway=tram` (57.0 km of
+  route track, each way once), 5.5% in tunnel or on a bridge, a 432 m median
+  gap. Trams every 7-10 minutes Monday to Saturday (NET), so the Hucknall
+  and Clifton former-railway sections pass the frequency gate.
+  **Recommended `mode`: `tram`**; the owner approves it with the build.
+- **Colours:** OSM gives both lines one colour and NET's site shows none, so
+  two project hues (Dijon's rule: two lines with one colour are refused).
+  `scripts/line_colour_search.py nottingham`: Line 1 `#586818` (45.0 from the
+  pins), Line 2 `#D85028` (45.6), the pair 70.8 apart, the dark-mode labels
+  distinct.
+- **Businesses, step by step:**
+  - 5,755 register rows in 4 authorities, extracts of 2026-10-01 (City,
+    Rushcliffe, Ashfield) and 2026-10-02 (Broxtowe).
+  - 3,702 storefront rows, as the brief.
+  - 4 at a "Flat" address and 1 childminder never placed.
+  - 307 have no FSA point. Of those, 97 are placed at a Code-Point centroid
+    and 210 (5.7%) are not placed: Rushcliffe 14.2%, Ashfield 7.2%,
+    Broxtowe 5.9%, the City 2.8%. No row had an outward code only; 209 had
+    no usable postcode.
+  - **The sanity box was widened**: the scaffold's (lon_max -0.93, lat_max
+    53.16) cut 15 Rushcliffe premises inside the district, which runs to
+    -0.815 and 53.171. Now 52.74-53.22, -1.40 to -0.76. 2 fall outside it
+    (Ashfield points in Scotland) and 7 outside the four council areas.
+  - 7 trading-as names show the trade name.
+  - **3,478 storefronts placed** (Food service 2,252, Food shops 1,226):
+    97.2% at the FSA's point, 2.8% at a centroid.
+  - **Point shares on the full files fall a little under the brief's
+    samples**: Rushcliffe 79.6% (446 of 560) against 80.2%, the City 95.4%
+    against 96.2%, Broxtowe 91.3% against 91.4%; Ashfield 90.7% against
+    90.6%. Accepted by the lead (2026-10-02), with Rushcliffe's unplaced
+    share disclosed in the city's What Is Excluded section.
+  - 1,210 (34.8%) sit within a ring: Food service 828, Food shops 382.
+  - Canteens by name are at least 4.3% of Restaurant/Cafe/Canteen, not
+    separated (London's lower bound).
+- **Personal exposure (`check_personal_exposure.py nottingham`):**
+  - 1,210 pins and 1,108 distinct names. No fallback name exists.
+  - 0 emails, phone numbers or c/o markers.
+  - 0 surname-first names and 2 "person's name (trade name)" shapes.
+  - The heuristic reads 299 (24.7%) as person-like, mostly cafés, shops and
+    takeaways named for people.
+  - **Verdict: publish**, London's, Newcastle's and Manchester's: the same
+    register, the same structural guards.
+- **CRS:** UTM 30N (EPSG:32630), as the built UK cities.
+- **Notices:** 93 (FSA, Nottingham) and 94 (Ordnance Survey, Nottingham),
+  Newcastle's 62 and 63 with the city and date changed; NaPTAN is notice 86.
+- **Page:** `app/pages/160_Nottingham_Heatmap.py` (page 160). Newcastle's FSA
+  bullets plus the tram template's bullets under **The trams**; two
+  proposals are listed in the drafts file's proposals section.
+
+### 2026-10-02 - Blackpool (Regional) built, the last of the UK six: one tramway with the North Station spur, gate 3 on NaPTAN alone, halved rings
+
+- **Scope (owner, 2026-10-01):** Blackpool (898) and Wyre (207). Exactly two
+  FSA codes are asserted, never Wyre Forest (153). The boundary is the union
+  of OSM relations 148603 (Blackpool, admin_level 6) and 148604 (Wyre,
+  admin_level 8): 372.1 km² in UTM 30N. The fetch's first gate of 290-350
+  stopped it, because OSM draws both coastal boundaries to low water
+  (Blackpool 43.1, Wyre 329.0 km²). The lead re-gated it to 355-390.
+- **Rail:** OSM's 2 tram relations, both ref T1 (7119569 Southbound,
+  10841330 Northbound), with no network, operator or colour tags. Both run
+  "via North Station", and **both carry the Blackpool North spur** (opened
+  2024) with North Station as a stop member. London's branch rule draws the
+  longer relation (18.8 km). Its track passes 4.9 m from North Station, so
+  the spur survives the default thresholds. Nothing is in `NOT_DRAWN`.
+- **Stations:** 78 stop positions collapse to 40 by name. North Pier's two
+  positions are 216 m apart, either side of the Talbot Square junction stop,
+  so the collapse limit is 250 m (Den Haag's), not 200. All 40 are inside
+  the scope (26 in Blackpool, 14 in Wyre; Anchorsholme Lane is the first
+  Blackpool stop) and none is thinned.
+- **Gate 3, NaPTAN only.** `blackpooltransport.com` returns 403 to a script
+  request (2026-10-01 and 2026-10-02) and is not passed, so
+  `OPERATOR_STATION_COUNTS = None`, with `OPERATOR_COUNTS_GAP` saying why
+  (the tram-city rule: never a silent skip).
+  - NaPTAN holds 41 active MET records under `9400ZZBP` (ATCO area 940). One
+    is a London station (Battersea Power Station) that the scope polygon
+    keeps out, leaving 40.
+  - All 40 match name by name. Three are aliased by position, each 3-4 m
+    from the OSM stop: Anchorsholme -> Anchorsholme Lane, St Chad's -> St
+    Chad's Road, and Talbot Road -> Talbot Square (NaPTAN's record created
+    2024-05-29, with the spur). The map keeps OSM's names.
+- **Rings: halved.** The median gap in scope is 357 m (min 105, max 690),
+  under the spacing rule's 550 m, and the step gates it at 315-400. The
+  station floor is Kansas City's 150 m (the platform median is 14 m), since
+  Manchester's 350 sits too close to this median.
+- **The light-rail test:** 100% `railway=tram` (36.7 km of route track), 0.0%
+  in tunnel or on a bridge, a 357 m median gap, and about every 10 minutes by
+  day (the brief). **`mode` is `tram`**: a street and promenade tramway, the
+  tram kit's precedent.
+- **Colour:** OSM records none and the operator's site refuses scripts, so
+  the hue is the project's own (#6A2C91; the tram kit's call 3).
+  `line_colour_search.py blackpool` draws it as #9840A8, 45.1 from the pins
+  and 3:1 on both pages. The label is "Blackpool Tramway" and the legend
+  adds "(Starr Gate - Fleetwood Ferry)".
+- **Businesses, step by step:**
+  - 2,720 register rows in 2 authorities, both extracted 2026-10-02, with 0
+    exact duplicates.
+  - 1,744 storefront rows, the brief's count exactly.
+  - 4 at a "Flat" address are never placed; there are no childminders.
+  - 157 have no FSA point. Of those, 67 are placed at a Code-Point centroid
+    and 90 (5.2%) are not: Wyre 86 (12.0%), Blackpool 4 (0.4%). 0 had an
+    outward code only, 87 had no usable postcode, and 3 had a full postcode
+    not in Code-Point.
+  - 0 fall outside the sanity box and 2 outside the scope.
+  - 1 trading-as name shows the trade name.
+  - **1,648 storefronts placed** (Food service 1,143, Food shops 505): 95.9%
+    at the FSA's point, 4.1% at a centroid.
+  - **Wyre's point share on the full file is 83.2%**, under the brief's sample
+    figure of 84.5% (Blackpool 96.4% against 95.8%); accepted by the lead
+    (2026-10-02): the full file against a sample. Its private addresses
+    arrive with an empty postcode, not an outward code, so they show as "no
+    usable postcode" and are never placed.
+  - 820 (49.8%) sit within a ring: Food service 593, Food shops 227.
+  - Canteens by name are at least 1.9% of Restaurant/Cafe/Canteen, and are
+    not separated.
+- **Personal exposure (`check_personal_exposure.py blackpool`):**
+  - 820 pins and 785 distinct names. No fallback name exists.
+  - 0 emails, phone numbers or c/o markers; 0 surname-first names; 5
+    "person's name (trade name)" shapes.
+  - The heuristic reads 218 (26.6%) as person-like, mostly cafés, takeaways
+    and shops named for people.
+  - **Verdict: publish**, on London's, Newcastle's and Manchester's
+    precedent.
+- **CRS:** UTM 30N (EPSG:32630).
+- **Notices:** 95 (FSA, Blackpool) and 96 (Ordnance Survey, Blackpool) are
+  Manchester's 84 and 85 with the city and figures changed. Notice 86
+  (NaPTAN) covers gate 3.
+- **Page:** `app/pages/161_Blackpool_Heatmap.py` (page 161). Its bullets are
+  Newcastle's FSA bullets and the tram template's line bullets under "The
+  tram". The proposals are listed in the owner's section.
+
+### 2026-10-02 - The United Kingdom becomes a region of its own; the UK six take the minor label tier (owner)
+
+- **The owner:** "implement the high-density cluster rule to UK, like Japan,
+  France, Czechia" (2026-10-02, the kit). On Czechia's mechanism:
+  - every UK city, London, Glasgow and Newcastle (Regional) included, moves
+    from Europe into a region named **United Kingdom** (`REGION_ORDER`, after
+    Czechia; `country_sections.REGION_GROUP` files it under Europe);
+  - the six tram and light-rail cities carry `label_tier: "minor"`, France's
+    line between metro and the rest: a dot and tooltip in every view, a pill
+    only in the United Kingdom;
+  - `REGION_LABELS_ALSO["Europe"]` gains the United Kingdom, so Europe still
+    labels London, Glasgow and Newcastle.
+- **One region, no split**, decided by `check_macro_labels.py`: PROBLEMS 0 in
+  all 16 regions at 375, 768 and 1200 once five labels were placed, each
+  searched with the check's own geometry (`label_offset_by_region`):
+  - United Kingdom: Glasgow below its dot (above it, its pill covered
+    Edinburgh's marker), Manchester west of its dot (it covered Blackpool's
+    and overlapped Sheffield's), Nottingham right and a little high (it
+    covered Sheffield's);
+  - Europe: Glasgow west of its dot (Edinburgh's marker again), and Rotterdam
+    right and low, since Europe's re-centred frame put its pill over
+    Birmingham's and Nottingham's dots (Stockholm's case in the Czech move).
+- **The label widths** were measured in the browser pane with Space Grotesk
+  loaded: Manchester (Regional) 153.9, Birmingham (Regional) 153.2, Edinburgh
+  69.3, Sheffield 59.7, Nottingham (Regional) 151.7, Blackpool (Regional)
+  139.7. The control, Newcastle (Regional), read its recorded 143.1.
+- **Dublin stays in Europe**: the measurement needed no move.
+- **The master list's Built table** gives the United Kingdom its own row (9),
+  as `check_provenance.py` E counts built cities per region.
+
+### 2026-10-02 - The owner's calls on the five builds after Manchester: all tram, Edinburgh keeps its centroids, Sheffield keeps Shalesmoor, the proposals accepted (owner)
+
+- **The owner, ahead of review time:** "1. tram 2. keep centroids 3. keep
+  Shalesmoor 4. accepted".
+- **1. `mode` is `tram`** for Birmingham (Regional), Edinburgh, Sheffield,
+  Nottingham (Regional) and Blackpool (Regional), on the light-rail test (100%
+  `railway=tram` in each, 0.0-7.1% in tunnel or on a bridge; the tram list's
+  default). Manchester (Regional) stays `light_rail`.
+- **2. Edinburgh keeps the Code-Point centroid tier**, the kit's rule for all
+  six (57 storefronts, 1.5%; unplaced 4.6% with it, 6.1% without), over
+  Glasgow's precedent of none. Notice 90 (Ordnance Survey (Edinburgh)) stays.
+- **3. Sheffield's map keeps OSM's "Shalesmoor"** for the stop NaPTAN renamed
+  "Kelham Island" (2025-05-08, the same ATCO code); the operator's own name
+  could not be read (its site serves a CAPTCHA). A PLAN watch item re-reads it.
+- **4. The 22 prose proposals on the five pages are accepted**, with
+  Edinburgh's notice 89 and its "A short register." paragraph.
+
+### 2026-10-02 - The UK six landed ahead of the other batches, with two queued fixes bundled into the same reboot (owner)
+
+- **The owner's call:** "pre-empt UK for deploying" while the Japan batch and
+  Seattle/Tbilisi keep building. It is review time for this one batch.
+  - `uk-six-build` (8c59d945) merged with no conflict, and its nine draft
+    entries were folded in above.
+  - Its 84-96 notice claim was released from `session_roles.md`.
+  - The handoff was kept with a "landed" banner rather than deleted: the six
+    briefs, the master list and `session_roles.md` cite it.
+- **The gate:**
+  - `check_all` passed 44 of 44. `check_deploy_imports`, `check_render_current`
+    and `check_city_registry` (130 to 130) are clean.
+  - The full drift run was not needed: `pipeline/countries/uk.py` and
+    `uk_fetch.py` are imported by the six new cities only. The UK lead's
+    zero-drift run covers the nine UK cities.
+- **The deploy check ran as two parallel `deploy-verify` lanes** (scope
+  city-added; `docs/review_lane_kit.md` section 7b). Both passed:
+  - all six cities' pages and maps, at three widths and more;
+  - the United Kingdom and Europe region views;
+  - London, Glasgow and Newcastle after their region move;
+  - the UK sections of both reference pages.
+
+  Three non-blocking findings went to PLAN: Glasgow's Europe label clipped
+  65% at 375 px, the OSM rail-geometry notice's city list, and the
+  scaffold's GTFS-only map template.
+- **Bundled, owner's two review-time items, so one reboot covers them:**
+  - **Legend rows.** `build_legend` drops the on-map label when the full name
+    already starts with it, so "Green line Green line (Tyne and Wear Metro)"
+    reads "Green line (Tyne and Wear Metro)". London, Sydney and Melbourne
+    change the same way.
+    - Four maps were re-rendered (render-only, peak 0.68 GB). After Folium-id
+      normalization they differ from HEAD only in the legend rows: 2, 19, 7
+      and 6.
+    - Glasgow, Bucharest and Stockholm are unchanged: their full names do not
+      start with the label.
+  - **"centre" becomes "center"** in five notice sentences of our own:
+    London's and Newcastle's FSA and Ordnance Survey notices, and Buenos
+    Aires's. The Crown copyright and Royal Mail statements are unchanged.
+    `check_provenance` passes.
+
+### 2026-10-02 - Japan batch: session registered, briefs re-checked, numbers claimed
+
+- **The Japan batch's build session registered in `docs/session_roles.md`,
+  with pages 162-173 as pre-assigned and notice numbers 97-108 claimed, one
+  per city in the kit's table order** (Matsuyama 97 ... Kōchi 108), after
+  re-reading the table: the UK six hold 84-96.
+- **All twelve briefs re-checked: 122 of 122 claims pass** on 2026-10-02
+  (Matsuyama 10, Toyama 12, Kumamoto 12, Fukui 11, Nagasaki 12, Utsunomiya
+  14, Kitakyushu 11, Sakai 9, Hakodate 10, Kagoshima 9, Okayama 5, Kōchi 7).
+  Master merged at 5310fe44.
+
+### 2026-10-02 - Japan batch: the shared code in one pass, proven on Minato and the eight built cities
+
+- **Every brief's shared-code item was made in one pass by the lead, each
+  change naming the city that taught it, before any agent started**
+  (`docs/handoff_japan_batch_2026-10-02.md`, Phase 1).
+  - **Columns.** `ADDR_COLS` += 所在地＿連結表記 (full-width low line), 施設所在地１,
+    営業所所在地1, 営業所の所在地, 施設住所名称, 所在地, 施設住所, 営業所 (after every
+    older spelling, so a built city's choice of column cannot change).
+    `NAME_COLS` += 施設名称1, 施設名称１, 施設名, 営業所名称, 屋号名称, 営業所の名称,
+    営業所の名称、屋号又は商号. `OPERATOR_COLS` += 申請者個人名, 開設者氏名,
+    代表者氏名（法人のみ）, 申請者名(法人名), 申請者名（法人名）, 法人代表者名, 開設者,
+    代表者, 代表者氏名.
+  - **Readers.** `city_rows` reads an old `.xls` through `workbook_tables`
+    (Matsuyama), finds a CSV's header by its address column below title rows
+    or an empty first line (Hakodate, Matsuyama), and strips header cells
+    (Utsunomiya's padded 名称); `xlsx_rows` takes `sheet=` (Fukui's twelve
+    month-end sheets, the newest first) and an opt-in `merged_header=` that
+    joins a merged header's unnamed columns into it (Toyama: 施設住所 over four
+    columns). Opt-in because a built city's unnamed column is not a merge.
+  - **Addresses.** A `wardless` flag in `japan.CITIES` (eight of the twelve):
+    an address is never split at a 区 (Toyama's 太田北区, Fukui's
+    土地区画整理事業). `norm_town`: a town ENDING in N丁 reads N丁目 (Sakai's 780
+    town-chōme, which MLIT writes 翁橋町一丁; end-anchored, so 八丁堀, 六丁の目 and
+    三丁町 are untouched); katakana ニ before 丁目 / 番町 reads 二 (Matsuyama,
+    Okayama); a hyphen between katakana reads ー (Utsunomiya's インタ-パ-ク).
+    Kōchi's 高埇 (outside JIS X 0208) and MHLW's 高そね both read MLIT's 高埆. A
+    line break inside an address is dropped (Utsunomiya). 保健所管内 /
+    保健所管轄内 is not a premises (Matsuyama's 277 vehicles and stalls).
+    `in_term()` drops an old-law row past its expiry against a pinned as-of
+    (Kitakyushu, Utsunomiya).
+  - **Step 2.** `POINT_DONORS` (Toyama's brief, recommended on measured
+    grounds): where the block join misses a row and another publisher (MHLW)
+    lists the same premises (ward, town, trade name) at one point, that point
+    places it, tier "own". The donor is read for its points only, never drawn.
+  - **Taxonomy.** `japan_eigyo` reads Fukui's old-law short types 飲食店 and
+    喫茶店 (93 restaurants), with import-time asserts.
+  - **Rail.** The twelve `japan.CITIES` entries, each on N02-25.
+  - **Not made:** Utsunomiya's 新里町甲 / 丙 地番 (about 24 rows). The 地番
+    restart in each sub-area and MLIT keys only 新里町, so a join would guess;
+    they stay unplaced.
+- **Minato's control reproduces exactly (block 98.0 / chōme 0.2 / none 1.8,
+  byte-identical output), and 23 of the 24 older screens are byte-identical.**
+  `fukuoka-mhlw` moved 4 rows from unplaced to block (桜坂ニ丁目, 立花寺ニ丁目,
+  竹丘町ニ丁目, 博多駅前三丁).
+- **The twelve screens reproduce their briefs:** Matsuyama 82.0 / 17.2 / 0.8
+  (brief 81.9 / 17.2 / 0.9: the ニ番町 rows), Toyama 86.6 / 12.1 / 1.3 and its
+  registers 80.6 / 14.6 / 4.8 (the merged-header reader), Kumamoto 97.0 and
+  96.8, Fukui 87.5 and 87.3, Nagasaki 88.6 and 90.1, Utsunomiya 93.2, 95.1 and
+  registers 96.2 (brief 93.5: the line-break and katakana rules), Sakai 96.0
+  (brief 95.8 by its bucket count), Hakodate 94.0, Kagoshima 93.7, Kōchi 95.8 /
+  4.2 / 0.0 (brief 95.4 / 4.2 / 0.4: the 高埇 rows now place).
+- **The eight built cities' step 2, re-run in memory against their processed
+  output: Hiroshima, Yokohama, Kobe, Sapporo, Kyoto and Osaka identical,
+  every baseline count unmoved (peaks 0.17-0.62 GB). Fukuoka and Tokyo move,
+  by fixes only, accepted on Kobe's precedent (a shared fix that moves a built
+  city is recorded with its diff).** Fukuoka's 4 MHLW rows above now join at
+  the block instead of MHLW's own point, and one of those points was about 12
+  km off (立花寺ニ丁目's konbini sat at 130.342 E; the block is at 130.467 E).
+  Tokyo: the same for 2 rows (佐賀二丁, 新橋ニ丁目), and 2 Kōtō shop pins that
+  duplicated Kōtō's own rows in MHLW's file (有明ニ丁目, 豊洲ニ丁目) now collapse
+  under `SUPERSEDES`: storefronts 61,377 to 61,375.
+- **Drift checks:** Hiroshima, Yokohama, Kobe, Sapporo, Kyoto and Osaka zero
+  drift (`heavy_job.py`, measured peak 0.64 GB). Fukuoka and Tokyo with
+  `--update-baseline`: their maps drift by exactly the rows above (`join_block`
+  +4, `join_own` -4, Tokyo `storefronts` -2; measured peak 1.46 GB).
+- **A mistake, corrected within the hour:** that drift check rewrote Tokyo's
+  and Fukuoka's `data/*/processed/` in the shared folder with this branch's
+  code, so master's `check_macro_facts` failed for every session (Tokyo
+  61,375 against master's 61,377; Cleanup caught it). Both were re-run from a
+  temporary `origin/master` checkout and master's check passes again. **So
+  this branch does NOT commit Fukuoka's and Tokyo's new outputs, baselines or
+  `app/macro_facts.json`: at landing, after the merge to master, re-run their
+  steps 2-3 (`drift_check.py fukuoka tokyo --update-baseline`) and
+  `check_macro_facts.py --write`, and commit those with the batch.** A built
+  city's step is never re-run from this branch without restoring it.
+
+### 2026-10-02 - The name rule reads a register's 法人名 column where it holds a sole trader's own name (Matsuyama)
+
+- **`japan_register.OPERATOR_COLS` gained 開設者法人名 and 営業者法人名.** In
+  Matsuyama's barber, beauty and laundry lists the 法人名 column is filled on
+  every row and carries no company marker on 443 of 485 barbers: it holds a
+  sole trader's own name, and 開設者氏名 / 営業者氏名 holds only a company's
+  representative (44 of 485 filled). Without it the rule found 0 laundry rows;
+  with it, 1, the brief's count. Company names never count (`KYOTO_CORP`'s
+  markers), so a company whose trade name is its own name is still shown.
+  Measured in memory, counts only. The eight built cities' step 2 re-run in
+  memory: no withheld-name count moved (none of their files has the column).
+- **`事業場食堂` (a workplace canteen) joined the institutional-catering form
+  rule** in `japan_eigyo.FORM_RULES` beside 社員食堂: Matsuyama's old-law 業態
+  (22 rows); no built city's files carry it.
+
+### 2026-10-02 - Matsuyama built, the pilot of the Japan batch
+
+- **Matsuyama built on the shared Japanese steps: 9,285 storefronts (Food
+  service 5,572, Retail 1,707, Personal services 2,006), 60 stations, 5
+  lines; 5,136 pins within a ring (55%).** Page 162, notice 97, `mode: tram`,
+  `label_tier: "minor"` (owner, 2026-10-02), East Asia until the Japan
+  region pass. Files: `pipeline/matsuyama/`, `outputs/matsuyama/`,
+  `app/pages/162_Matsuyama_Heatmap.py`, its `app/cities.py` entry, notice 97
+  in `app/components.py` and `docs/data_sources.md`, its rows in
+  `docs/data_sources/japan.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md` and `docs/privacy_verdicts.md`.
+- **The business leg is the brief's, as the owner decided it ("approve all
+  recommendations", 2026-10-02).** The city's two food lists (577 old-law and
+  7,110 new-law permits, every permit in force on 2026-03-31) and its full
+  barber, beauty and laundry lists (old `.xls`, 2026-03-31). MHLW's file adds
+  only its 4,205 notifications (届出, the partial food-retail bucket, as
+  Fukuoka and Hiroshima) through `config.source_rows`, and, as a point
+  DONOR (`POINT_DONORS`), its own point for 699 city rows the block join
+  missed (the brief estimated 797 by trade name alone; the donor also
+  requires the same town). MHLW's permits are not added: the city's list
+  holds 103% of the official count. 136 city rows that duplicate an MHLW
+  notification row in the same bucket give way to it (`SUPERSEDES`).
+- **The join:** block 80.8%, MHLW's point 10.2% (363 notifications on their
+  own point, 699 city rows on the donor's), town-chōme 8.2%, unplaced 84
+  (0.8%: 甲 / 乙 地番 and rural 大字). Against MHLW's own coordinates the block
+  hits sit a median 40 m away, 96.9% within 250 m (1,029 rows).
+- **Rail:** N02-25, 60 stations by group code, 11 excluded (6 in Tōon, 5 in
+  Masaki). The city tram's six legal sections (城北線, 城南線, 大手町線, 本町線,
+  花園線, 連絡線) are drawn as ONE line, "Iyotetsu City Tram", on Sapporo's
+  precedent for its streetcar: the operator's routes 1 to 6 share nearly all
+  their track, so drawing each would stack five lines on one street. Gate 3:
+  the Takahama Line, 10 = 10 against Iyotetsu's station index; the operator
+  publishes no tram stop count (the brief found the same), so the tram's 28
+  stops are N02's, as Hiroden's are. Median station gap 374 m: halved rings
+  and gate 1's 200 m floor, Hiroshima's precedent (357 m). English names:
+  OSM with 9 aliases and 20 cited overrides in Hiroshima's style; OSM had
+  TRANSLATED six stops ("Police Station", "Red Cross Hospital", "Matsuyama
+  City Hall", "Ehime Pref. Office", "Dogo Park", "Ishitegawa Park") and gave
+  the railway's 松山市 and the tram's 松山市駅 the same name. Line colors from
+  `line_colour_search.py` (closest pair 18.4).
+- **Economic Census join control: 2.73 Food service pins per 2021 census
+  飲食店 establishment, above the built cities' 1.56-1.92, EXPLAINED.** The
+  official permits in force per census establishment (e-Stat FY2024 against
+  the 2021 census) run 2.24 (Fukui) to 3.96 (Osaka) across the built and
+  batch cities, Matsuyama 2.91, beside Fukuoka 2.96 and Kyoto 3.10. The built
+  cities map fewer pins than the official count (lists that leave out
+  vehicles, counter-only lists, de-duplication), so their map ratio sits
+  lower; Matsuyama's list is complete and its 5,572 pins are 94% of the
+  official 5,924. The ratio is the permit structure, not the join. The batch's
+  benchmark for this control is therefore official / census, not the built
+  cities' map ratios.
+- **Privacy verdict: publish.** `check_personal_exposure.py matsuyama`: the
+  Japan pass prints 0 operator's own names shown as a trade name (5 in the
+  raw files, the brief's 4 food rows and 1 laundry row; 3 pins show their
+  permit type). That laundry row needed `開設者法人名` / `営業者法人名` read by the
+  name rule (next entry). No pin at a residential unit.
+- **The 菓子 / そうざい factory share** (owner, 2026-09-24): 33 of 729 rows
+  (4.5%), kept.
+- **Page prose: proposals for review time** (sentences no template covers):
+  "The city tram's routes share most of their track, so the tram is drawn as
+  one line."; the Reading the map bullet's ending "where that fails, the dot
+  sits at the ministry's own coordinates for the same premises, or else at its
+  district's center" (Hiroshima's bullet extended to the donor); the notice's
+  English gloss "(This map modifies the City of Matsuyama's lists of food
+  permits, barbers, beauty salons and laundries as of 31 March 2026, used under
+  CC BY 4.0.)" (Yokohama's form).
+
+### 2026-10-02 - The Japan views: Japan West and Japan East, every Japanese city moved, the batch minor (owner's tier call)
+
+- **Japan is two views, Japan West and Japan East, split at 136° E, decided by
+  `check_macro_labels.py` as the owner's recipe asks (France and Czechia's
+  mechanism, DECISIONS 2026-09-30).** One Japan view failed at every width:
+  at its fitted zoom 46 problems per width, Osaka's and Sakai's dots 2.6 px
+  apart. Japan West (13: Kyushu, Shikoku, Chūgoku and Kansai) and Japan East
+  (7: Fukui, Toyama, Tokyo, Yokohama, Utsunomiya, Hakodate, Sapporo).
+- **Japan West's zoom is pinned at 6.0 (`REGION_ZOOM`, France's precedent).**
+  Fitted, Osaka's and Sakai's dots sit 5.0 px apart, inside one marker radius
+  (the check's rule for dots in their own region); at 6.0 they are 6.7 px apart.
+  No phone-fitted frame clears it: Sakai's city hall is 10 km from Osaka's.
+- **All twenty Japanese cities moved** from East Asia (the eight built ones
+  too, as Prague moved with Czechia); the twelve of the batch carry
+  `label_tier: "minor"`; `REGION_LABELS_ALSO["East Asia"]` gains both views,
+  so East Asia still names the eight anchors; both views join `COUNTRY_VIEWS`
+  (owner, 2026-10-02, via Cleanup: country views last in the menu).
+- **Offsets from a search** with the check's own scorer (in memory, then
+  written): Kobe, Osaka, Kyoto, Sapporo, Yokohama and Hiroshima carry a
+  `label_offset_by_region` for their Japan view; Kobe's default offset moved
+  to the end of its dot (its pill covered Fukui's marker in East Asia).
+  **PROBLEMS 0, 17 regions x 375, 768 and 1200**, every caption accounting for
+  all 136 cities. The twelve pill widths measured in a browser with Space
+  Grotesk loaded, eight controls reproduced to 0.1 px (`label_competition.py`).
+- **For the owner at review time (reported by the check, not failed):** on a
+  phone (375 px) Japan West's pinned zoom leaves 9 of its 13 dots a pan away,
+  more than France's four; and East Asia, re-centred on Hong Kong, Taiwan and
+  Korea once Japan left it, leaves the Japanese anchors off a phone's canvas
+  (at 768 only Sapporo). The alternative is the fitted zoom with Osaka x Sakai
+  listed in `check_macro_labels.KNOWN_STACKED` (Cleanup's check; Kobe x Osaka
+  is listed there today), which shows every Japan West dot on a phone with
+  those two stacked. Recommendation: keep the pinned 6.0, France's precedent,
+  since the list beneath the map reaches every city.
+
+### 2026-10-02 - Toyama built, the city's own lists with MHLW's points where the block join misses
+
+- **Toyama built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 6,590 storefronts (Food service 4,113, Retail 929, Personal
+  services 1,548), 74 stations, 8 lines; 3,054 pins within a ring (46%).**
+  Page 163, notice 98, `mode: tram`, minor tier.
+- **The business leg, the brief's (owner, 2026-10-02):** the city's food
+  workbook (sheet 6月末, read with `merged_header`; 営業者住所 never selected)
+  and its three registers (2026-03). MHLW's file is not a source but a point
+  donor (`POINT_DONORS = {"food": "mhlw_points"}`). `in_term` is not applied:
+  every 許可満了日 is 2026-07-22 or later.
+- **The join:** block 85.5%, MHLW's point 7.6%, town-chōme 5.4%, unplaced 1.4%.
+  On the brief's base the donor places 569 of 733 off-block rows against the
+  brief's 614: the brief matched a trade name anywhere in the city, the shared
+  rule needs the same town and a single point (24 town mismatches, 21 with
+  several points), as Matsuyama's 699 against 797.
+- **Rail:** N02-25, 74 stations by group code, 22 excluded. N02 files the
+  tram's 本線 (class 21) and Chitetsu's railway 本線 (class 12) under one
+  (operator, line) pair; their track is two disconnected pieces (3,609 m and
+  53,132 m), so a `BRANCHES` walk with `draw_as` splits the tram's out, no
+  shared code. The city tram's six sections are one line (Matsuyama's
+  precedent); Portram (富山港線, both classes) is its own; both take the
+  富山駅南北接続線 section. JR Central's 高山線 left out (Fukuoka's Hakata-Minami
+  precedent); 立山線's two stations stay as cut. Gate 3: tram 25 = 25 and
+  Portram 15 = 15 against Chitetsu's own stop numbering (C01-C39) in its
+  timetables. Median gap 443 m: halved rings, 200 m floor. OSM has no
+  `name:en` for 22 of 39 tram stops: 23 English names from Chitetsu's English
+  line map (`OSM_NAME_EN_MISSING`), sponsor brackets dropped; 8 overrides. The
+  富山駅 tram stop (Toyama-eki) and JR 富山 (Toyama), 20 m apart, kept apart as
+  N02 groups them.
+- **Census control: 2.43 Food service pins per census 飲食店 against an
+  official / census ratio of 2.53, the list 99.9% of the official count:
+  explained** (the benchmark of Matsuyama's entry).
+- **Privacy verdict: publish.** The Japan pass prints 0; 5 pins show their
+  permit type (13 raw food rows, the brief's count); the city names operators
+  only where they are companies (owner accepted, 2026-10-02).
+- **The 菓子 / そうざい factory share:** 26 of 674 (3.9%), kept.
+- **Proposals for review time:** "...station names in English are from
+  OpenStreetMap and the tram operator's own line map"; "JR Central's part of
+  the Takayama Line, whose only station in the city is Inotani, a station of JR
+  West's line, is not drawn."; the companies-only name-rule bullet ("the city's
+  lists name an operator only where it is a company, so this cannot be checked
+  for the rest"); Matsuyama's tram one-line and donor sentences; the notice's
+  English gloss. Known in shared code, not fixed: `japan_fetch.fetch_city`
+  counts a file's rows with `city_rows(dest)`, not the config's reader, so
+  Toyama's recorded counts read without `merged_header` (the rows themselves
+  are right).
+
+### 2026-10-02 - Kumamoto built, Hiroshima's two-source shape with personal services
+
+- **Kumamoto built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 10,117 storefronts (Food service 6,801, Retail 649, Personal
+  services 2,667), 61 stations, 5 lines; 5,492 pins within a ring (54%).**
+  Page 164, notice 99, `mode: tram`, minor tier.
+- **The business leg, the brief's:** the city's restaurant list ("food"),
+  MHLW's file ("mhlw": `OWN_POINT_FALLBACK`, `ADDRESS_BY_CONSENT`; its permits
+  and notifications the partial food retail), `SUPERSEDES {"mhlw":
+  ("food",)}` (13 rows), and the three registers. No row dropped on
+  期限満了日 (the earthquake extension). `OFFICIAL_SHARES = True` with
+  `MUNICIPALITY_CODES = {"熊本市": "43100"}`, so the page's "about three in
+  four" is measured every build: 7,053 of 9,229, 76.4%
+  (`outputs/kumamoto/official_shares.json`).
+- **The join:** block 96.4%, town-chōme 2.2%, MHLW's point 0.8%, unplaced 0.6%
+  (画図町 and 田井島 大字 addresses); the city list's block share 97.0%, as
+  briefed. MHLW's coordinates sit a median 40 m from the block point, 97.4%
+  within 250 m (881 rows). 736 MHLW filings without an address (40
+  restaurants: about one in 180).
+- **Rail:** N02-25, 61 stations, 10 excluded. The tram's five sections drawn as
+  one line (Matsuyama's precedent; routes A and B share 19 stops). Gate 3: 35
+  = 35 against the Transportation Bureau's route map (stops 1-26 and B1-B9).
+  光の森's address is 熊本市北区武蔵ケ丘九丁目, part of its grounds in 菊陽町: the
+  cut is right. Median gap 362 m: halved rings. 3 aliases, 12 overrides (OSM
+  translated five stops and misspelled two).
+- **Census control: 2.35 Food service pins per census 飲食店 (2.23 to 2.58 by
+  ward) against an official / census ratio of 3.19: explained by the lists'
+  76% of the official count (3.19 x 0.76 is about 2.43).**
+- **Privacy verdict: publish.** The Japan pass prints 0; 3 pins show their
+  permit type (raw: food 1, laundry 2, the brief's).
+- **The 菓子 / そうざい factory share:** 5 of 17 (MHLW's rows only).
+- **Proposals for review time:** the notice's `をもとに作成` with "Processed by
+  this project" (the catalogue's form names a processor); the page's "...in
+  force on 31 March 2026, except those whose operators asked not to be
+  listed"; "Together the two lists hold about three in four of the restaurants
+  licensed in the city; food trucks and event stalls, which the official count
+  includes, are not in them." (Osaka's and Tokyo's precedent for stating a
+  share); "The barbers, beauty salons and laundries come from the city's
+  registers as of 31 March 2026."; "The city's list holds restaurants only, so
+  the Food shops layer comes from the ministry's list alone..."; the tram
+  one-line sentence.
+
+### 2026-10-02 - Fukui built, the project's first CC BY-SA output
+
+- **Fukui built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 4,932 storefronts (Food service 2,908, Retail 751, Personal
+  services 1,273), 45 stations, 5 lines; 2,982 pins within a ring (60%).**
+  Page 165, notice 100, `mode: tram`, minor tier.
+- **The business leg:** the newest month-end sheet of each workbook, sheet 0
+  confirmed as `R8.8月末`, read with `city_rows(sheet=0)` in `source_rows`,
+  which stops if the first sheet changes. 飲食店 and 喫茶店 read (2,984
+  restaurants, 85% of the official 3,508). MHLW kept out of `SOURCE_FILES`
+  entirely (a count control); the closure workbooks not read (closures are
+  already out of each month's sheet). Join: block 87.9%, town-chōme 10.7%,
+  unplaced 1.4% (land readjustments MLIT does not key), as briefed.
+- **The share-alike items (owner, 2026-10-01):** a section in `LICENSE`
+  offering `outputs/fukui/` under CC BY-SA 4.0, the licence row and notice
+  100. Their wording is a proposal for review time.
+- **Rail:** N02-25, 45 stations, 14 excluded. The Fukubu Line's two classes as
+  one line. No tram-stop query: OSM tags the six street stops as stations
+  (the lead's tram-stop query returned empty from every mirror, twice). 清明
+  has no English anywhere: "Seimei" (Hepburn). OSM named the Fukubu terminus
+  福井駅 "Fukui", colliding with JR 福井 142 m away: "Fukui-eki". Gate 3 cannot
+  run (no line wholly inside); by hand, Fukui Railway's station guide names the
+  same 25 Fukubu Line stations as N02. Median gap 793 m: standard rings.
+- **Census control: 1.85, inside the built cities' 1.56-1.92** (official /
+  census 2.24).
+- **Privacy verdict: publish.** The Japan pass prints 0; 6 pins show their
+  permit type (20 raw food rows, the brief's); companies-only naming accepted
+  (owner, 2026-10-02).
+- **The 菓子 / そうざい factory share:** 28 of 599 (4.7%), kept.
+- **Proposals for review time:** the notice and the `LICENSE` section; "The
+  food list holds fixed premises only, so food trucks and stalls are not on
+  this map."; the companies-only name-rule bullet (as Toyama's); "More than
+  half of storefronts sit within a ring." Known in shared code, not fixed:
+  `japan_fetch.fetch_city` counts rows with `city_rows(dest)`, so Fukui's
+  provenance records all twelve sheets' rows (food 52,021); step 2 reads the
+  newest sheet only.
+
+### 2026-10-02 - Nagasaki built, a 2023 snapshot beside MHLW's current filings (owner: shape b)
+
+- **Nagasaki built on the shared Japanese steps (the city-lists agent, applied
+  by the lead): 7,317 storefronts (Food service 3,919, Retail 1,772, Personal
+  services 1,626), 43 stations, 2 lines; 4,211 pins within a ring (58%).**
+  Page 166, notice 101, `mode: tram`, minor tier.
+- **The business leg, the owner's shape (b):** the city's BODIK lists (food
+  permits in force on 2023-06-30; barbers, beauty salons and laundries to
+  2023-03-31; not filtered by `in_term`, the page states the dates) plus
+  MHLW's current file (`OWN_POINT_FALLBACK`, `ADDRESS_BY_CONSENT`),
+  `SUPERSEDES {"mhlw": ("food",)}`: 1,497 snapshot rows give way to MHLW's.
+  3,623 MHLW filings publish no address (2,090 restaurants, about one in
+  four). The city's own 2026 list (`city_64426.xlsx`) never read.
+- **The join:** block 89.2%, town-chōme 6.9%, MHLW's point 3.8%, unplaced 0.1%;
+  BODIK food 88.6% and personal 90.1% block, as briefed. MHLW's coordinates sit
+  a median 36 m from the block point, 94.2% within 250 m (2,787 rows).
+- **Rail:** N02-25, 43 stations, 6 excluded. The tram's five sections drawn as
+  one line (Matsuyama's precedent; routes 1, 3 and 5 run, 4 suspended). Gate
+  3: 38 = 38: the operator's stop table does list 38, writing
+  スタジアムシティノース / サウス in half-width katakana, which the brief's search
+  missed. Median gap 219 m, the closest-set network in Japan so far: halved
+  rings. 6 aliases, 八千代町 from the operator's table, 13 overrides
+  romanising the stops OSM gives in translation (Peace Park, City Hall...).
+- **Census control: 2.09 against an official / census ratio of 2.55:
+  explained** (one restaurant permit in four publishes no address, and the
+  snapshot is frozen).
+- **Privacy verdict: publish.** The Japan pass prints 0; the name rule cannot
+  run (no individual operator column), Tokyo's and Fukuoka's precedent.
+- **The 菓子 / そうざい factory share:** 21 of 643 (3.3%), kept.
+- **Proposals for review time:** "Nagasaki City's own list is a snapshot of the
+  food-business permits in force on 30 June 2023, the newest it publishes under
+  an open license."; "...(downloaded 2 October 2026) and carries the permits
+  granted since."; "The barbers, beauty salons and laundries come from the
+  city's registers as of 31 March 2023; premises opened since then are not on
+  this map."; "None of the lists says who a business's operator is, so where a
+  trade name is its operator's own name, this cannot be checked here."; "More
+  than half of storefronts sit within a ring."; the tram one-line sentence; the
+  notice's dataset links (the four BODIK dataset pages, chosen by the lead over
+  the agent's unverified organization link).
+
+### 2026-10-02 - Utsunomiya built, Fukuoka's two-source shape with personal services
+
+- **Utsunomiya built on the shared Japanese steps (the MHLW-led agent, applied
+  by the lead): 8,048 storefronts (Food service 4,125, Retail 1,939, Personal
+  services 1,984), 23 stations, 4 lines; 3,789 pins within a ring (47%).**
+  Page 167, notice 102, `mode: light_rail`, minor tier.
+- **The business leg, Fukuoka's shape:** MHLW's file (every permit since
+  2021-06; `OWN_POINT_FALLBACK`, `ADDRESS_BY_CONSENT`), the city's old-law
+  list (`in_term` on 満了年月日3 against 2026-07-31 keeps all 1,120: the first
+  expiry is 2026-08-31; `package_show` shows no newer edition), the four
+  registers, `SUPERSEDES` (73 old-law rows). 37 of 4,901 restaurants publish
+  no address (about one in 130). The laundry files were last modified
+  2026-04-27 under their July titles.
+- **The join:** block 95.8%, MHLW's point 2.6%, town-chōme 1.4%, 17 unplaced
+  (新里町丙 / 丁 lot numbers); per source MHLW permits 96.6% (brief 95.1),
+  old-law 93.9% (93.2), registers 93.2-96.6% (93.5). MHLW's point sits a median
+  44 m from the block point, 96.4% within 250 m.
+- **Rail:** N02-25, 23 stations, 11 excluded. The light rail named "Utsunomiya
+  Light Rail" (the operator signs it LIGHTLINE: renamable); JR's 東北線 drawn as
+  the "JR Utsunomiya Line", its signed name. Gate 3: 19 stops on the
+  operator's list, the last 4 in Haga, so 15 = 15. Median gap 662 m: standard
+  rings. OSM had translated ten light-rail stops: 11 overrides, 1 alias
+  (江曾島 / 江曽島).
+- **Census control: 2.04 against an official / census ratio of 2.85:
+  explained** (the pins are 72% of the official 5,761; the rest are hostess
+  venues, vehicles and canteens by 業態).
+- **Privacy verdict: publish.** The Japan pass prints 0; 1 pin shows its permit
+  type (raw 3 food + 1 laundry, the brief's; +2 rows by premises).
+- **The 菓子 / そうざい factory share:** 44 of 627 (7.0%), kept.
+- **Proposals for review time:** "Permits since then are filed through the
+  Ministry..." ("online" dropped: the city enters every permit there);
+  "Barbers, beauty salons and laundries come from the city's registers as of
+  July 2026."; the in-ring bullet; the notice's English gloss.
+
+### 2026-10-02 - Kitakyushu built, two food lists and no laundries
+
+- **Kitakyushu built on the shared Japanese steps (the MHLW-led agent, applied
+  by the lead): 14,883 storefronts (Food service 8,071, Retail 3,745, Personal
+  services 3,067), 53 stations, 8 lines; 10,587 pins within a ring (71%).**
+  Page 168, notice 103, `mode: metro`, minor tier.
+- **The business leg:** MHLW's file; the city's old-law list with `in_term` on
+  許可終了日 against 2026-08-31, MHLW's date (2,417 of 3,383 kept); barbers and
+  beauty salons; no laundry list, disclosed (Berlin's gap). `SUPERSEDES`
+  dropped 223 old-law rows. 1,484 of 10,760 open restaurant permits publish no
+  address (one in seven). 2 yatai counted.
+- **The join:** block 98.5%, MHLW's point 1.3%, town-chōme 0.2%, 2 unplaced;
+  MHLW permits 98.6% (the brief's), old-law 99.0%. MHLW's point sits a median
+  33 m from the block point, 96.8% within 250 m.
+- **The name rule cannot reach a sole trader here:** the city fills 営業者氏名
+  / 代表者氏名 only for companies (food in term 1,191 of 2,417, 1,168 with a
+  company marker; barbers 57 of 817; beauty 470 of 2,282). 0 flagged in term.
+  Accepted on Toyama's and Fukui's position (owner, 2026-10-02: a list that
+  names companies only); the page says so.
+- **Rail:** N02-25, 53 stations, 19 excluded. 西黒崎 dropped through the new
+  `CLOSED_STATIONS`. The funicular and the retro line left out (Kobe's and
+  Kyoto's precedents). N02's 筑豊線 split by `BRANCHES`: 若松-折尾 (10,683 m of
+  track) is the Wakamatsu Line; the rest is the Fukuhoku Yutaka Line, a
+  one-station stub (折尾) kept as cut, under Fukuoka's naming, so the Wakamatsu
+  label does not run onto Fukuhoku Yutaka track. JR Sanyo's 門司 stub kept as
+  cut (gray: JR Kyushu gives that line no colour). Gate 3: Monorail 13 = 13.
+  No tram-stop file: the station query names Chikuho's stops (the lead's
+  tram-stop query returned empty from every mirror). 16 overrides; JR and
+  Monorail 城野 and 志井 are separate groups, "Jono (JR)" / "Jono (Monorail)".
+  Median gap 780 m: standard rings.
+- **Census control: 1.95 against an official / census ratio of 3.08:
+  explained** (one restaurant in seven without an address; the old list in
+  term only).
+- **Privacy verdict: publish.**
+- **The 菓子 / そうざい factory share:** 44 of 1,108 (4.0%), kept.
+- **Proposals for review time:** "Nishi-Kurosaki on the Chikuho line closed on
+  31 July 2026 and is not shown."; "The city publishes no list of laundries, so
+  laundries are not on this map."; the old-law bullet "(as of 31 March 2026),
+  shown where still in term at the end of August 2026"; the name bullet "The
+  city's lists name an operator only where it is a company, and the ministry's
+  list does not say who the operator is, so a trade name that is a sole
+  trader's own name cannot be checked here."; the in-ring percentage form; the
+  notice's processed-by clause on the old permits.
+
+### 2026-10-02 - Sakai built, food only, on a register rebuilt to August 2026
+
+- **Sakai built on the shared Japanese steps (the one-bucket agent, applied by
+  the lead): 8,023 storefronts (Food service 5,720, Retail 2,303), 42
+  stations, 6 lines; 6,046 pins within a ring (75%).** Page 169, notice 104,
+  `mode: metro`, minor tier. Food only (Band B, Hiroshima's page): the barber,
+  beauty and laundry lists are PDFs.
+- **The register is REBUILT in `config.source_rows` (Kyoto's shape):** the
+  2026-04-01 list (10,123) plus the April-August new-permit files (777), less
+  the closures matched by 許可番号 (430 of 432 numbers), then
+  `japan_register.in_term` on 許可満了日 against AS_OF 2026-08-31, pinned: 383
+  dropped, 10,087 in term (the brief's figures exactly). Only the premises and
+  name-rule columns leave the reader; 営業者住所 / 営業者方書 never do. MHLW adds
+  its notifications only.
+- **The join:** block 95.2%, MHLW's own point 1.1% (99 notifications), chōme
+  3.6%, 2 unplaced; the city's rows 96.1% block: the brief's 95.8% held through
+  the shared 1丁 rule. MHLW's own coordinates: median 49 m, 95.1% within 250 m.
+- **One premises in both lists: MHLW's notification row stays, the city's row
+  goes (`SUPERSEDES = {"mhlw": ("food",)}`), 389 rows**, mostly konbini and
+  supermarkets holding a city counter permit and filing a notification for the
+  shop: Matsuyama's direction; the name rule is applied per premises before
+  this step, so a flagged city row still withholds the kept MHLW row.
+- **Rail:** N02-25, 42 stations, standard rings (median 611 m). The Midōsuji
+  drawn cut to 北花田, 新金岡 and 中百舌鳥 (owner); the Hankai tram 15 of 31
+  stops. **The Hagoromo branch is NOT split** from 阪和線: inside the city it has
+  no station of its own (鳳 is the Hanwa Line's), and split off it would be a
+  second labeled line about 1 km long with nothing to ring. Line names as
+  Osaka's map spells the same lines (Midōsuji, Nankai Kōya). Gate 3: Hankai 15
+  = 15, Midōsuji 3 = 3. 5 cited overrides (OSM misreads 寺地町 and 高須神社), 2
+  aliases, 2 names OSM lacks.
+- **Census control: 2.18 against an official / census ratio of 3.13:
+  explained** (the list holds 101% of the official count; stalls, vehicles,
+  konbini permits moved to Retail, canteens and snack bars are not Food service
+  pins). The list page's warning that some names are overwritten 廃業連絡 /
+  廃業確認 was checked: 0 in this edition.
+- **Privacy verdict: publish.** Japan pass 0; 1 pin shows its permit type.
+- **The 菓子 / そうざい factory share:** 24 of 782 (3.1%), kept.
+- **Proposals for review time:** "Sakai City publishes its lists of barbers,
+  beauty salons and laundries only as PDF documents, outside its open data, so
+  personal services are not on this map."; the rebuild bullet (Kyoto's adapted
+  to a register with closures); the Reading-the-map ending for ministry filings;
+  the notice's English gloss.
+
+### 2026-10-02 - Hakodate built, personal services only
+
+- **Hakodate built on the shared Japanese steps (the one-bucket agent, applied
+  by the lead): 1,077 storefronts (barbers 281, beauty salons 656, laundries
+  140), 29 stations, 3 lines; 331 pins within a ring (31%).** Page 170,
+  notice 105, `mode: tram`, minor tier. Personal services only (Band B,
+  Yokohama's page); the city publishes no food register.
+- **The registers as of 2026-08-31, read below their title rows by the shared
+  reader.** The 3 無店舗 laundry rows are not premises; 23 repeats shown once.
+  The official count (e-Stat FY2024 第10表 / 第11表, a measurement, not drawn,
+  recorded by a city-local `fetch_sources.py estat` part): 1,100 of 1,122
+  (98.0%).
+- **The join:** block 94.0%, chōme 6.0%, none 0 (the brief exactly). GSI's
+  address search on 100 block hits: median 51 m, 99 within 250 m, measured
+  with a scratch variant: the shared `screen_japan_join.py --gsi` adds
+  北海道函館市 to addresses that already start with 函館市, so GSI answered a
+  generic point (median 7,186 m). Suggested fix for that script (Cleanup's):
+  add only the prefecture when the address starts with the city.
+- **Rail:** N02-25, 29 stations, halved rings (median 363 m), gate 1's 200 m
+  floor. The tram's four legal sections drawn as ONE line, "Hakodate City
+  Tram" (Sapporo's and Matsuyama's precedent; routes 2 and 5 share the track
+  from 湯の川 to 十字街). The South Hokkaido Railway's one station (五稜郭) stays
+  as cut. Gate 3: 26 = 26. The naming-rights stop 函館アリーナ前 is
+  "Hakodate-arena-mae", following the Japanese beside it and leaving out the
+  sponsor's name. 24 cited overrides.
+- **Privacy verdict: publish.** Japan pass 0; 1 pin shows its register type.
+- **No Economic Census control** (no food); the GSI sample is the coordinate
+  check.
+- **Proposals for review time:** "Hakodate City publishes its registers of
+  these premises, but no register of food businesses or of other shops, so
+  restaurants, cafés and shops are not on this map." (Yokohama's sentence with
+  "register"); the tram one-line sentence; the notice's English gloss. The
+  opening view (a wide N03 extent) is for review time's map-view check.
+
+### 2026-10-02 - Kagoshima built, food only
+
+- **Kagoshima built on the shared Japanese steps (the MHLW-led agent, applied
+  by the lead): 6,591 storefronts (Food service 4,838, Retail 1,753), 55
+  stations, 4 lines; 3,980 pins within a ring (60%).** Page 171, notice 106,
+  `mode: tram`, minor tier. Food only (Band B).
+- **The business leg:** MHLW plus the city's old-law list (2026-06-30);
+  `SUPERSEDES` dropped 166 rows; 1,397 of 5,914 open restaurant permits publish
+  no address (one in four).
+- **The join:** block 94.9%, MHLW's point 4.1%, town-chōme 1.0%, 5 unplaced;
+  MHLW permits 95.4%, old-law 94.3% (brief 93.7). **MHLW's own coordinates are
+  wrong in places, not the join:** 113 block-joined MHLW rows sit over 1 km
+  from MHLW's point, 60-odd in 東谷山1-7丁目 5-8 km off, where MLIT's block
+  points agree with its town-chōme centroids; the block placement is kept.
+- **Rail:** N02-25 (N02-24 lacks 仙巌園), 55 stations, 3 excluded. The tram's
+  four legal sections drawn as one line, "Kagoshima City Tram" (Matsuyama's
+  and Sapporo's precedent). Gate 3: 35 = 35 against the transport bureau's
+  2022 stop table (37 rows: 高見馬場 once per route, 郡元 and 郡元(南側) apart).
+  Tram / JR 郡元 and 谷山 shown as "Korimoto (City Tram)" / "Korimoto (JR)".
+  Median gap 272 m: halved rings, 200 m floor. 13 overrides.
+- **Census control: 1.85, inside the built cities' 1.56-1.92** (official /
+  census 2.61).
+- **Privacy verdict: publish.** Japan pass 0 (0 flagged of 1,376).
+- **The 菓子 / そうざい factory share:** 42 of 687 (6.1%), kept.
+- **Proposals for review time:** "Kagoshima City publishes only its new barbers
+  and beauty salons, a year at a time, and no list of laundries, so personal
+  services are not on this map."; "The city tram's two routes are drawn as one
+  line."; the in-ring percentage form; the notice's English gloss.
+
+### 2026-10-02 - Okayama built, MHLW's filings alone
+
+- **Okayama built on the shared Japanese steps (the MHLW-led agent, applied by
+  the lead): 6,590 storefronts (Food service 4,627, Retail 1,963), 49
+  stations, 8 lines; 4,174 pins within a ring (63%).** Page 172, notice 107,
+  `mode: metro`, minor tier. Food only (Band B).
+- **The business leg:** MHLW alone. Block 91.2% (Food service 93.3%, brief
+  93.1), MHLW's point 8.7%, 3 unplaced. 1,976 of 7,582 open restaurant permits
+  publish no address (one in four). The name rule runs nowhere (owner,
+  2026-10-02). 2 yatai counted. MHLW's point sits a median 39 m from the block
+  point, 97.2% within 250 m.
+- **Rail:** N02-25, 49 stations, 14 excluded. Okaden drawn by line; gate 3
+  exact (Higashiyama 10, Seikibashi 7) from its own 2025-12-01 timetables.
+  JR West's lines under their signed names (吉備線 Momotaro, 宇野線 Uno Minato,
+  本四備讃線 Seto-Ohashi, the last a one-station stub, 植松, kept as cut). The
+  long Okaden names read "Saidaijicho (Harenowa)" and "Higashiyama (Okaden
+  Museum)". Median gap 1,467 m: standard rings. 16 overrides, 2 aliases.
+- **Census control: 1.53 against an official / census ratio of 2.79:
+  explained** (one restaurant in four withholds its address, and permits from
+  before 2021-06 are not in the file). 1 food pin, an own point at the city's
+  edge, falls outside every N03 ward.
+- **Privacy verdict: publish.**
+- **The 菓子 / そうざい factory share:** 39 of 566 (6.9%), kept.
+- **Process note:** the MHLW-led agent ran Okayama's `fetch_sources.py osm`
+  once before the lead's file existed, sending one tram-stop query to
+  overpass-api.de (33 elements, no 504 or 429, no retry), against the
+  one-query-per-session rule; it may have overlapped the lead's own Okayama
+  query. The lead's file then replaced it before step 1 ran; stations.csv is
+  byte-identical either way.
+- **Proposals for review time:** "Okayama City publishes its lists of barbers,
+  beauty salons and laundries only as PDFs, under terms that do not allow
+  reuse, so personal services are not on this map."; the source bullet
+  ("...the permits and notifications Okayama City has recorded since June 2021
+  ... Permits granted before then and still in force are not in it."); the
+  whole-page name bullet (Hiroshima's MHLW wording); the in-ring percentage.
+
+### 2026-10-02 - Kōchi built, barbers and beauty salons only
+
+- **Kōchi built on the shared Japanese steps (the one-bucket agent, applied by
+  the lead): 1,406 storefronts (barbers 323, beauty salons 1,083), 67
+  stations, 5 lines; 677 pins within a ring (48%).** Page 173, notice 108,
+  `mode: tram`, minor tier. Personal services only, with NO laundry list
+  (disclosed, as Kitakyushu).
+- **The register: the full lists of 2026-03-31 and the seven monthly
+  additions, in `config.source_rows`, pinned at 2026-08-31 and disclosed as an
+  upper bound** (openings added, closures not; Kyoto's call). Only the premises
+  and name-rule columns leave the reader. The full lists are complete against
+  e-Stat FY2024 第10表 (327 barbers and 1,061 salons a year earlier, against
+  321 and 1,074), read from Hakodate's cached table, no new download.
+- **The join:** block 95.8%, chōme 4.2%, none 0 (the 高埇 rows now place). GSI's
+  address search on 100 block hits: median 21 m, all within 250 m.
+- **Rail:** N02-25, 67 stations, halved rings (median 271 m), gate 1's 200 m
+  floor. Tosaden's four lines drawn BY LINE, as Hiroden's: the operator signs
+  each by name, and its two services each join two of them at はりまや橋 rather
+  than share track. Gate 3 from Tosaden's route map (one timetable per stop, 76
+  stops = N02's 34 + 33 + 8 + 4 less the shared はりまや橋): Sanbashi 8 = 8,
+  Ekimae 4 = 4; the brief's third-party "Ino 32" was wrong. 39 cited overrides,
+  1 alias (文珠通 / OSM's 文殊通), 1 name OSM lacks (田辺島通).
+- **Privacy verdict: publish.** Japan pass 0.
+- **No Economic Census control:** the shared control measures 飲食店, which this
+  page does not carry; the official count and the GSI sample stand in.
+- **Proposals for review time:** "**This map shows personal services only:
+  barbers and beauty salons.**" (the brief's flag); "Kōchi City publishes no
+  list of laundries, so they are not on this map."; "Restaurants, cafés and
+  shops are not on this map either: the national list of food businesses gives
+  an address for only about half of Kōchi's restaurants."; the sources
+  bullet (Kyoto's without laundries); the upper-bound bullet (Kyoto's
+  adapted); the notice's English gloss.
+
+### 2026-10-02 - The Japan batch landed on its branch: twelve cities, what the agents did, and what waits for review time
+
+- **All twelve built and committed on `japan-batch-build`, one commit per city
+  in the kit's table order** (Matsuyama by the lead; Toyama, Kumamoto, Fukui
+  and Nagasaki by the city-lists agent; Utsunomiya, Kitakyushu, Okayama and
+  Kagoshima by the MHLW-led agent; Sakai, Hakodate and Kōchi by the one-bucket
+  agent; every shared-file entry applied by the lead). Every brief's checks
+  pass at the end; every city's Japan privacy pass prints 0; pages 162-173,
+  notices 97-108. 136 cities in `app/cities.py`; the master list's built
+  table now has a Japan row of 20 beside East Asia's 6.
+- **The lead ran every Overpass query, one at a time** (two runs of the batch
+  fetch: the first stopped at the 30-minute background limit, no process left;
+  the second resumed with the cache kept). Fukui's and Kitakyushu's tram-stop
+  queries came back empty from every mirror, twice each; neither city needs
+  one (OSM tags those stops as stations). **One breach, by an agent:** the
+  MHLW-led agent ran Okayama's `fetch_sources.py osm` before the lead's file
+  existed (one query, no retry); it may have overlapped the lead's own Okayama
+  query. Okayama's output is unaffected (its entry).
+- **Two generated-record notes:** ring shares, macro facts, README and
+  rendered surfaces read every city in `app/cities.py`, so they ran once,
+  after the last city (each check passes for all 136). Per-city drift
+  baselines were recorded as each city landed (Hakodate's after another
+  session's drift check freed the machine's one slot).
+- **Fixed in shared tooling:** `scripts/screen_japan_join.py`'s GSI check
+  prefixed 北海道函館市 to addresses already starting with 函館市, so GSI answered
+  a generic point (median 7,186 m); it now adds only the prefecture there
+  (the one-bucket agent's finding; 51 m on the same sample).
+- **For the owner at review time, not changed:**
+  - **MHLW's default points.** MHLW parks some filings it cannot place on a
+    default coordinate (Kagoshima's and Utsunomiya's city halls; one point
+    shared by 13 towns in Okayama), and `own_point_fallback` uses it: up to 15
+    pins in Kagoshima, 19 in Okayama, 8 in Utsunomiya, 9 in Kitakyushu sit on
+    such a point. Recommended: a shared guard refusing a publisher point shared
+    by 3 or more towns, so those rows keep their town-chōme centroid; it would
+    move a few rows in the built Fukuoka, Hiroshima and Tokyo too, so it is
+    measured before it lands, with its own drift check.
+  - **`japan_fetch.fetch_city` counts a file's rows with `city_rows(dest)`**,
+    not the config's reader: Fukui's provenance records all twelve sheets'
+    rows (food 52,021), Toyama's reads without `merged_header`. The pins are
+    right; the recorded row counts are not. A small shared fix (count through
+    `config.source_rows` where a city defines it).
+  - **The page and notice sentences flagged as proposals** in each city's
+    entry; the Japan West phone-width trade-off (the views' entry); Fukui's CC
+    BY-SA notice and `LICENSE` section; Kitakyushu's companies-only operator
+    names (on Toyama's and Fukui's accepted position).
+  - **Fukuoka's and Tokyo's re-render** from the Phase 1 fixes, which this
+    branch deliberately does not commit (the Phase 1 entry).
+  - **The map-view check** for the batch (`check_map_view.js`): Hakodate's
+    and Matsuyama's wide N03 extents (islands, merged towns) frame from the
+    stations' box, not checked in a browser yet.
+
+### 2026-10-02 - The owner's four calls on the Japan batch, and MHLW's default points refused
+
+- **The owner's calls (2026-10-02, in chat), on the batch entry's list:**
+  (1) Japan West stays pinned at zoom 6.0, accepting the phone-width
+  trade-off; (2) the shared default-point guard, built here; (3) the page and
+  notice sentences flagged as proposals are accepted as written, with Fukui's
+  CC BY-SA notice and `LICENSE` section and Kitakyushu's companies-only
+  operator names; (4) the landing steps as listed (the re-render of the built
+  cities below after the merge, `check_map_view.js`, one `deploy-verify`, the
+  reboot), at review time.
+- **The guard (`pipeline/countries/japan_step2.py`):** a publisher point, to
+  4 decimal places (about 10 m), given to rows in 3 or more distinct (ward,
+  town) is a default point, not a premises (`shared_points`,
+  `SHARED_POINT_TOWNS = 3`). `own_point_fallback` never places a row on one,
+  so the row keeps its town-chōme centroid or stays unplaced, and
+  `point_donors` never lends one. Each city emits
+  `own_point_default_refused`. **Rejected:** a list of known default points
+  per city (city halls), since a new edition can move them and the shape test
+  needs no upkeep.
+- **Measured on the batch (re-run, baselines updated):** Utsunomiya 3 rows on
+  2 default points (storefronts unchanged at 8,048; its own points' median
+  distance from their town-chōme centroid falls from 170,314 m to 79 m);
+  Kagoshima 6 rows on 1 point (6,591 to 6,588 storefronts); Okayama 13 rows
+  on 1 point (6,590 to 6,577; unplaced 3 to 16); Toyama's MHLW donor points
+  28 fewer (6,590 to 6,584). Matsuyama, Kumamoto, Nagasaki, Kitakyushu and
+  Sakai unchanged (0 refused): the 9 Kitakyushu pins the batch entry counted
+  sit on points shared by fewer than 3 towns, so the guard leaves them.
+- **Measured on the built cities in memory only (the shared `data/` folder
+  untouched):** Fukuoka 20 rows refused, Hiroshima 4 (13,567 to 13,565
+  storefronts), Tokyo 0. **Hiroshima joins Fukuoka and Tokyo in the landing
+  re-render**; this branch commits none of the three.
+- **Fixed in passing:** `official_shares()` wrote its JSON even when step 2
+  ran with `write=False` (a measurement), and in text mode (CRLF on
+  Windows). It now writes only when the step writes, as bytes.
+- **A proposal, not written:** Okayama's What Is Excluded section could say
+  that 13 of its 16 unplaced rows carry the ministry's stand-in point. The
+  page format has no template sentence for it, so it waits for review time.
+
+### 2026-10-02 - Seattle (Regional): rail from OpenStreetMap, 39 stations in 11 cities, Pinehurst placed from Sound Transit
+
+- **The brief's claims held: `brief_check.py seattle` passed 16 of 16** on
+  2026-10-02 before any code was written.
+- **Rail from OSM route-relation membership, one Overpass query for the
+  corridor box** (47.28 to 47.84 N, -122.42 to -122.08), answered by
+  overpass.kumi.systems after a 504 from overpass-api.de. Twelve relations
+  came back: Link's four (1 Line 3494092 and 5517060, 2 Line 17499739 and
+  17499740; network `Link`, refs `1 Line` and `2 Line`), the Seattle
+  Streetcar's four and the airport's SEA Underground four. The streetcar and
+  the people mover are named in `NOT_DRAWN`: the owner's scope is Link's 1
+  and 2 Lines.
+- **OSM carried 38 stations; Pinehurst, opened 2026-09-30, was the 39th.**
+  It was placed from Sound Transit's own Pinehurst Station page (13110 5th
+  Ave NE), at King County's address point for that address, and step 1
+  refuses the addition once OSM's relations carry the station (Taoyuan's
+  rule, `osm-rail`). Sound Transit's GTFS was not used for it, per the
+  owner's call on its terms.
+- **Gate 3 from Sound Transit's own line pages** (read 2026-10-02): the 1
+  Line serves 27 stations and the 2 Line 26, 39 distinct, 14 on both. The
+  brief's "39 stations in 11 cities" agrees.
+- **Notices 109 to 116 claimed** in `docs/session_roles.md` (109 to 113 for
+  Seattle (Regional)'s publishers, 114 to 116 for Tbilisi); staging told.
+
+### 2026-10-02 - Seattle (Regional): five sources in one step 2, 14,500 storefronts; the name rule on structural signals; two owner questions
+
+- **Step 2 built on the owner's settled calls; 14,500 storefronts** in 13
+  places (Seattle 10,298, Bellevue 2,029, Kent 469, Lynnwood 344, Federal Way
+  339, Redmond 295, Tukwila 245, SeaTac 176, Shoreline 164, Mountlake
+  Terrace 66, Mercer Island 53, Des Moines 19, the unincorporated slivers 3):
+  Retail 6,010, Food service 5,956, Personal services 2,534. 5,589 lie inside
+  a ring. (Sources: Seattle 9,349, King County food 3,193, Bellevue 1,415,
+  Snohomish food 352, the Liquor Board 191.)
+- **Seattle's register:** 54,689 rows; 1,246 exact duplicate rows (an export
+  artifact) dropped, then one row per location at its latest licence
+  (53,281); 988 outside the city by point-in-polygon dropped
+  (unincorporated 816, Burien 139); 9,597 in the buckets. The head-office
+  rule, coded as Taipei's (a HEADER QUARTER row on floor 3 or higher, or in
+  a room, unless its building holds 20 storefront rows), dropped 1 row; the
+  brief's 9 counted `#` suites, which are not floors.
+- **Lapsed Seattle food, cross-referenced to King County's 2025-26
+  inspections inside Seattle:** by licence year (rows / either match), 2023
+  88 / 58, 2024 139 / 94, 2025 281 / 182, 2026 2,474 / 2,019; 30, 45 and 99
+  lapsed rows dropped. Lapsed rows kept and disclosed: Retail 992, Personal
+  services 435. **The hand sample of 20 lapsed food rows kept on a street
+  match alone (157 such rows):** about 5 are the same business under a
+  variant name, about 7 are a DIFFERENT food business now at the address
+  (a closed predecessor kept by its successor's inspection), and 8 could not
+  be read without printing a person-shaped name. Brought to the owner
+  (below).
+- **King County food is a source in Seattle too**, as the brief's table has
+  it ("own register + King County food"): 1,572 of the 5,182 inspected
+  businesses in Seattle match no register row by trade name or street
+  address, and join as King County rows; 949 are storefronts in the scope after the name layer.
+  The first build had read King County as a cross-reference only in Seattle,
+  which left a quarter of the city's inspected food premises off the map.
+- **King County food placed by parcel** through the County's address points:
+  9,372 on the parcel at the business's own address, 2,455 at the parcel's
+  primary point, 196 by an address that names one place only, 107 unplaced
+  (of 12,130 inspected in 2025 or 2026). R1 classes out (mobile 648, school
+  lunch 467, catering 307, nonprofit institution 258, commissary 29,
+  donated-food 21, bed and breakfast 4). Grocery stores, meat and fish
+  markets and bakeries are Retail (a food register's shops are shops).
+- **Bellevue:** 24,566 rows not cancelled; 12,593 inside the city; 1,819
+  Retail and Personal services; 322 issued before 2010 dropped (the owner's
+  cutoff); 5 with no issue date kept.
+- **The name rule rests on each register's structural signal, not on the
+  shape test alone.** `looks_personal` by itself read 2,079 of Seattle's
+  9,349 rows as people ("BLUE MOON" is two words). Instead:
+  - Seattle: the trade name IS the legal name, asked of the server as a
+    column comparison (`BUSLIC_TRADE_NAME = BUSLIC_LEGAL_NAME`, 20,519
+    location ids, no names downloaded), AND person-shaped AND no
+    organisation word: 90 rows show their category.
+  - Bellevue: a sole proprietorship whose trade name is person-shaped: 50;
+    no trade name: 260 (the owner's rule).
+  - Any source: a person-shaped name at a residential unit: 26.
+  - The food registers and the Liquor Board name premises, left to
+    `check_personal_exposure.py`.
+- **Line colours** moved just past the Delta-E 45 floor: the 1 Line
+  #3DAE2B (37.8 against Personal services) to #46C831 (46.2), the 2 Line
+  #00A0DF (28.6 against Retail) to #00B6DF (45.3).
+- **Unincorporated Snohomish County:** 0.34 km2 of Lynnwood City Center's
+  ring lies outside the city. By rule 7 it takes the neighbour's data, which
+  is the same Snohomish layer (`User_Fld` UNINCORPORATED) and the Liquor
+  Board's list: 2 storefronts.
+- **Snohomish layer (agent leg):** 310 and 56 facilities reproduced. A
+  facility holding Restaurant and Grocery permits (250 county-wide) is a
+  Grocery: 249 of the 250 hold a GROCERY permit, and their Restaurant
+  permits are the store's deli, meat, bakery and coffee counters. One
+  UNINCORPORATED facility lies inside Mountlake Terrace's polygon, so the
+  city's count includes it.
+- **The Liquor Board's off-premise list (agent leg), dated 2026-09-29:**
+  8,793 privilege rows; King and Snohomish 3,151; licence ACTIVE (ISSUED)
+  2,010 licences; a current (approved, not terminated) privilege 1,861;
+  retail privileges 1,839 licences at 1,837 premises. WINE RETAILER RESELLER
+  (an add-on letting a shop sell wine to restaurants; every holder keeps a
+  retail privilege) and BEER/WINE GIFT DELIVERY (22 delivery-only licences)
+  are not storefronts. A premises is labelled by its grocery licence first,
+  then spirits, then specialty. Placed by joining the fixed-width premises
+  address (cut at 30 characters, the rest spilling into the room field) to
+  the county address points: 1,409 of 1,837 (King 1,312 of 1,367, 96.0%);
+  the 336 Snohomish misses lie outside the Lynnwood and Mountlake Terrace
+  box, by design. The same matcher reproduces King County food's own parcel
+  for 96.6% of rows (within 50 m). Never geocoded, never fuzzy; three
+  Mountlake Terrace shops at one spread address and four airport concourse
+  shops are left off. 191 premises reach the map, outside Seattle and
+  Bellevue. The Board's data-transfer notice is still on its lists page and
+  is repeated on the page.
+- **Snohomish County's Building Address Points (the Liquor Board join
+  target in Lynnwood and Mountlake Terrace) read SILENT, with the food
+  layer's conditions** (`licence-read`, 2026-10-02): the item is in the
+  County's open-data catalogue and its own `licenseInfo` carries the
+  County's disclaimer (no warranty, hold-harmless, no commercial use of lists
+  of individuals); nothing to display or do. The owner's permissive reading
+  of the sibling food layer extends to it on firmer ground. Its description
+  adds "Any other use of these data are not directly supported by Snohomish
+  County", read as "no support", not a prohibition.
+- **King County food and Snohomish food: a name layer** (Minneapolis's and
+  Pittsburgh's precedent, `docs/category_rules.md`): a workplace cafeteria or
+  contract caterer (499; Microsoft's campus files its cafes as "BUILDING nn",
+  27 in Redmond), a hotel kitchen (152), a vending route or micro-market
+  (64), a members' club, theater or airline lounge (36), a pharmacy (11) is
+  left out by name. Minneapolis's patterns were adapted, not imported: its
+  CHURCH pattern took CHURCH'S CHICKEN and its CAFETERIA pattern a public cafe;
+  BOEING FIELD CHEVRON is kept. The total fell from 14,854 to 14,500.
+- **Proposals for the owner's review (sentences no template covers):** the
+  page's bullets on the five publishers, the lapsed-license sentence, the
+  Bellevue cutoff, the Snohomish date, and the name rule; the caption of
+  credits under the map; and the five notices' displayed text (109 to 113),
+  King County's two prescribed texts word for word, Snohomish's in the
+  owner's words, the rest the project's own.
+- **For the owner, with recommendations (the build follows the settled
+  calls until answered):**
+  1. **Street-only matches for lapsed Seattle food.** Recommend keeping a
+     lapsed food row only on a trade-name match (drop the 157 kept on a
+     street match alone): the sample shows the street match mostly keeps a
+     closed predecessor. Precedent: the owner's own warning in the brief
+     ("an address match can be a different business at the same address").
+  2. **Snohomish rows with a blank `User_Fld` inside the two cities** (32:
+     Lynnwood 19, Mountlake Terrace 13). Recommend taking them by
+     point-in-place, the rule every other source here follows: the field
+     was chosen over the postal city, and a blank is evidence of neither.
+     It would move Lynnwood from 310 to 329 facilities and Mountlake
+     Terrace from 56 to 69.
+
+### 2026-10-02 - Seattle (Regional) privacy verdict: publish
+
+- **Seattle (Regional) privacy verdict: publish.** `check_personal_exposure.py
+  seattle` on the rendered map (5,589 pins inside the rings): no registrant
+  fallback can exist, because no source's legal-name, contact, phone or
+  mailing column is ever downloaded (step 2 asserts it); 0 emails, 0 phone
+  numbers, 0 surname-first names; **0 person-like names at a residential
+  unit**. The heuristic's 1,117 person-shaped names (20.0%) are shape
+  matches on premises names, led by General Food Services (280) and
+  restaurants (248); 52 of them sit at a commercial unit (STE, BLDG, FL, RM).
+- **What makes it structural rather than lucky:** a Seattle trade name that
+  IS the legal name (the server's own column comparison; ids only) and reads
+  as a person's (90), a Bellevue sole proprietor's trade name that reads as
+  a person's (50), a Bellevue row with no trade name (260), and any
+  person-shaped name at a residential unit (26) show the category. The first
+  render had shown 13 person-shaped names at a residential unit; the last
+  rule took them off.
+- **Re-run after any change to step 2 or the taxonomy** (`CLAUDE.md`).
+
+### 2026-10-02 - Seattle (Regional) green: every gate run, baseline recorded, held for review time
+
+- **Gates, in Band B's order:** personal exposure (publish; row in
+  `docs/privacy_verdicts.md`); `check_provenance.py` names Seattle (Regional)
+  OK (slug `seattle`); `check_scope_disclosure.py` OK; the four
+  inconsistency rows and the themes it joins (several registers, Personal
+  services thin, regional, type for a personal name); the master list
+  (Band C to Built, 125 built, 43 candidates); `check_macro_facts.py` OK and
+  the macro label measured (Space Grotesk 600, 120.5 px, controls exact) and
+  placed west of the dot, PROBLEMS 0 over 15 regions and three widths, out
+  of the default frame like Vancouver and Buffalo; the drift check zero
+  drift, 40-figure baseline; ring share 5,589 of 14,498 (39%);
+  `check_deploy_imports.py` PROBLEMS 0; `check_all.py` 44 of 44 after
+  merging master; pushed as `seattle-tbilisi-build`, 0 behind.
+- **Only Seattle's entries were added to `app/ring_shares.json` and
+  `app/macro_facts.json`.** A full `--write` from this checkout also
+  re-hashed twelve other cities' committed maps (line endings in the working
+  copies); those entries were left as committed, and `check_ring_shares.py`
+  passes on them.
+- **Mode `light_rail`, coverage `narrowed` ("Personal services thin"),
+  `rail_extra` "Trams" (light rail, the field's rule)** for the owner's
+  approval with the build.
+- **One quick browser render each** (the day rule): the map (both lines and
+  labels, legend, clusters, OSM credit, no console errors) and the page in
+  the lean app, in the page format's order. `deploy-verify` waits for review
+  time (scope `city-added`).
+- **A gap in a shared check, flagged as its own task:**
+  `check_no_fetch_in_steps.py` does not follow a step's imports into its own
+  city package (`pipeline/seattle/lcb_offpremise.py`, `sno_food.py`).
+
+### 2026-10-02 - Tbilisi: the metro from OpenStreetMap, 23 stations, gate 3 exact; a new West Asia region
+
+- **Started after Seattle (Regional) was green and committed** (the kit's
+  conditions: the owner had answered the brief's three calls the same day,
+  and the move to a West Asia region of its own lifted the wait on the UK
+  pass). `brief_check.py tbilisi` passed 12 of 12 before any code.
+- **One Overpass query for the city** (overpass-api.de, first attempt, 94
+  elements): the subway route relations, their route_masters, member nodes,
+  track ways, every `station=subway` node, and the city's administrative
+  relation (1996871, admin_level 4). The brief's Step 0 cache lacked the
+  boundary, so the build issued this one query instead of reusing it. Four
+  relations, two per line, all kept by `ref`; any other subway relation
+  exits.
+- **23 stations: 16 on the Akhmeteli-Varketili Line, 7 on the Saburtalo
+  Line**, the 46 stop positions collapsed by name (widest 20 m) and matched
+  one-for-one to the 23 `station=subway` nodes. Gate 3 against Tbilisi
+  Transport Company's Stakeholder Engagement Plan (October 2024): "27.3 km
+  with 23 stations on two lines"; the drawn track measures 19.6 + 7.9 km.
+  Spacing: min 115 m (Station Square-1 and -2, both drawn under their real
+  names, as both are in the operator's count), median 1,039 m, max 1,538 m:
+  the standard rings. Every station is inside the city (504 km2).
+- **"Nadzaledevi" in OSM is labeled Nadzaladevi**, the operator's and the
+  register's spelling (`STATION_NAME_FIXES`; step 1 exits once OSM is
+  corrected, so the fix cannot outlive the error).
+- **Line colors from OSM**: line 1 `#FF0000`; line 2 `colour=green`, a CSS
+  keyword, mapped to its CSS value `#008000`.
+- **Region "West Asia"** (owner, 2026-10-02), appended to `REGION_ORDER` by
+  `scaffold_city.py --new-region` with the reasoning in its comment; a view
+  of its own, not in `COUNTRY_VIEWS`. Europe is unchanged.
+- **Page 175; notice 114 (Geostat)** from the session's claimed block
+  (115 and 116 unused).
+
+### 2026-10-02 - Tbilisi: Geostat's register at the factual address, 13,252 storefronts; district-center placeholders left off by the owner's rule
+
+- **The pull**: 63,511 active entities with a factual address in region 11.
+  The API has no column selection, so each page is reduced in memory to the
+  kept columns plus three derived ones (a company's name; a placement key per
+  factual address; a legal-equals-factual flag) before anything is written.
+  On 2026-10-02 a 10,000-row page outlasted the API's gateway (HTTP 502)
+  though Step 0 had pulled such pages that morning; 2,000-row pages took
+  2-3 minutes each, about 70 minutes for the register.
+- **The placeholder rule, re-derived at build** (owner, 2026-10-02): a point
+  carrying 50 or more active rows whose commonest company factual address is
+  a bare district or settlement name, or blank. The first pull reduced every
+  numbered address to one marker, so "commonest" could not be taken (it found
+  one point); measured, a share-of-bare-addresses proxy did not separate the
+  ten known points from small named places, so the register was pulled again
+  with each company's numbered address kept only as a 12-hex hash (no street
+  address stored). The re-pull was stopped at page 7 of 32: **the owner chose to skip it for this build and run it before the next review** (2026-10-02). So step 2 runs a BOUNDED check on the build's pull: every point the pull proves qualifies must be listed, and every listed point must still carry 50+ rows. It proved one point Step 0 did not list, **Mtatsminda (41.695863, 44.792928: 27 of its 28 companies give the bare district name; 51 rows, 19 storefronts), added**. **33 other points of 50+ rows could not be settled** (1,629 storefronts): at nearly all, the commonest bare name appears 1 to 4 times against dozens of street addresses, the largest being the Lilo market (486 storefronts, a real address), so the full check is expected to confirm the eleven. The fetch already keeps the per-address hash, so the next pull runs the full check and step 2 exits if the set differs.
+- **Taxonomy `georgia_nace`**, NACE Rev. 2 at the national leaf, modelled on
+  France's NAF module, with a closed list: every code in divisions 45, 47, 56
+  and 96 is named as kept or left out, and step 2 exits on one that is
+  neither. Left out on the standing rules: market stalls (R1), nonstore
+  retail, event and contract catering (R1), funeral, the 96.09 catch-all
+  (R2; its leaves include pet grooming, training and boarding). Division 45
+  on the precedent (owner, 2026-10-02): 45.11.2, 45.19.0 and 45.32.0 kept,
+  1,516 rows; 45.11.1 (the wholesale half decides it), 45.11.3 (brokerage),
+  45.20.0 (repair) and 45.31.0 (wholesale) out. **45.40.0, motorcycle sale
+  WITH maintenance and repair in one code (34 rows), which the brief did not
+  name, is kept**: R4's "a type that merges fuel with repair or a car wash
+  goes whole" (Edmonton, Philadelphia). 45.11.3, also unnamed, is a
+  broker, not a dealer, and stays out.
+  47.73.1 is a veterinary pharmacy (kept, Retail); 56.10.0 merges restaurants
+  with mobile food and is kept whole. Category continuity: a column for
+  `georgia_nace`, every rule answered.
+- **Counts**: 16,356 storefronts by the taxonomy (Retail 13,744 with division 45's 1,550, Food service 1,343, Personal services 1,269); 1,620 with no coordinate, 1,481 on the eleven placeholder points and 3 outside the city boundary are not shown; **13,252 placed (81.0%)**: Retail 11,114, Food service 1,074, Personal services 1,064. 8,084 (61%) within 0.6 mi of a station: 6,728 / 702 / 654. Company names 4,924; category only 8,328 (individual entrepreneurs).
+- **Names**: a company shows its registered name in Georgian (with its legal
+  form); an individual entrepreneur shows the category (owner). Fonts: the
+  map declares no language; Segoe UI carries Georgian on Windows and the
+  browser falls back elsewhere.
+- **"Active"**: Geostat's own definition, "an enterprise which is engaged in
+  economic activity" (Business Demography metadata, 0519); the
+  turnover-or-staff criterion stays a secondary source's (IEM journal), so
+  the page says only that a new business may not be shown yet.
+- **Line 2's color**: OSM's `green` is a CSS keyword; its value #008000
+  measured CIE76 37.2 against the Personal services pins, under the
+  preferred 45, so #30A800, the nearest green that clears it (45.5), as
+  Seattle's colors were moved.
+- **Proposals for review** (no template covers them): the page's credit
+  caption and notice 114's wording (the brief's proposed text, plus "Not
+  endorsed by Geostat."); the page bullets on the register's limits; the
+  What Is Excluded and About the Data sections.
+
+### 2026-10-02 - Tbilisi privacy verdict: publish
+
+- **`check_personal_exposure.py tbilisi` gained a Georgian pass**
+  (`pipeline/georgian_names.py`): the Latin heuristic cannot read Mkhedruli,
+  so its zero was not a finding (the brief's warning).
+- **The rule, tested on the processed file**: an individual entrepreneur
+  (legal form 30) shown by name: **0** of 8,328 (owner, 2026-10-01: category
+  only, Taichung's precedent). Their names and personal numbers never reach
+  the disk: the fetch drops them in memory and step 2 asserts it.
+- **Company names that read as a person's full name** (the heuristic: two
+  Georgian words after the legal form, the second with a surname ending):
+  148 of 4,924 company names shown, 147 of them beginning with their
+  legal form (`შპს`, an LLC). Kept, on Seattle (Regional)'s precedent: a
+  person-like name carrying an organisational marker is a company's
+  registered name, public commercial information. Every company name shown
+  but 30 begins with its legal form.
+- **No residence signal**: the register states none; legal address equal to
+  factual on 3.5% of kept individual-entrepreneur rows (Step 0), and those
+  pins carry no name. No address is published for any pin.
+- **Verdict: publish.** Row in `docs/privacy_verdicts.md`.
+
+### 2026-10-02 - Seattle (Regional): the owner's two calls applied, 14,431 storefronts; both builds' wording and modes approved
+
+- **The owner's calls on Seattle (2026-10-02, relayed by the Cleanup
+  session), both as recommended:**
+  1. **Lapsed Seattle food is kept only on a TRADE-NAME match** with a King
+     County business inspected in 2025 or 2026, never on a street match
+     alone. Lapsed food dropped: 331 (2023 60, 2024 102, 2025 169), of them
+     the 157 a street match alone had kept.
+  2. **The 32 Snohomish facilities with a blank `User_Fld` are placed by the
+     place their point falls in**, the rule every other source here follows
+     (`sno_food.load(include_blank=True)`). Lynnwood 310 -> 329 and
+     Mountlake Terrace 57 -> 70 facilities by point-in-place.
+- **Measured, steps 2 and 3 re-run**: storefronts 14,500 -> 14,431 (map
+  14,430 after the contact-detail scrub). The Seattle register 9,349 ->
+  9,198; King County food 3,193 -> 3,245, because 59 more inspected
+  businesses in Seattle are no longer held back by a register row at their
+  address that has now dropped out (the current inspected business replaces
+  the lapsed licence); Snohomish food 352 -> 382. Food service 5,956 ->
+  5,880, Retail 6,010 -> 6,017, Personal services unchanged. In a ring:
+  5,589 -> 5,548 (38%); 2,122 / 2,545 / 881. Names shown as the category:
+  426, unchanged. Drift check run and the baseline re-recorded; ring share,
+  macro facts, the inconsistency rows, the master list, PLAN, About the Data
+  and What Is Excluded updated. The page bullet on lapsed food now reads "a
+  business of the same name" for "a matching business", to state the rule.
+- **Approved by the owner (2026-10-02, relayed by the Cleanup session)**:
+  Seattle (Regional)'s mode `light_rail`, coverage `narrowed`, notices 109
+  to 113 and the page bullets; Tbilisi's notice 114, page caption and
+  bullets, and its What Is Excluded and About the Data sections. The
+  proposals flagged above are settled.
+
+### 2026-10-02 - check_no_fetch_in_steps.py follows every module a step imports
+
+- **`scripts/check_no_fetch_in_steps.py` now follows a step's imports
+  transitively into every module under `pipeline/`, not only
+  `pipeline/*.py` one level deep.** The Seattle (Regional) build's gap
+  ("A gap in a shared check", `docs/decisions_drafts/seattle-tbilisi.md`):
+  `pipeline/seattle/lcb_offpremise.py` and `sno_food.py`, imported by Seattle's
+  step 2, were never read, and neither were `pipeline/countries/`,
+  `pipeline/taxonomies/` or another city's step a step imports. The walk
+  resolves `pipeline.<city>.x`, bare sibling imports (a step run as a script
+  has its own folder first on `sys.path`) and relative imports, and counts
+  each parent package's `__init__.py`. Reaching `pipeline.taxonomies` counts
+  as reaching every taxonomy module, because `load_taxonomy_module()` imports
+  them through importlib. A step's reach is 4 to 65 modules (Seattle's step 2:
+  63). The verdict on the tree did not change: 382 steps, 0 unguarded, the
+  same 6 guarded through `census_geocoder.py`.
+- **The one exception is an HTTP import FENCED inside a module-level function
+  named exactly `fetch`, and it holds only while nothing a step reaches
+  references that `fetch`** (`m.fetch`, `from m import fetch`, or the module
+  calling its own `fetch` outside its `__main__` block); a step file gets no
+  fence. That is the shape `lcb_offpremise.py` already has (`import requests`
+  inside `fetch()`, called by `fetch_sources.py` only), now listed as FENCED.
+  Rejected: failing any module that holds an HTTP client anywhere, which
+  would force the Liquor Board download out of the helper that reads it; and
+  exempting by convention or comment, which no check can hold.
+- **`check_no_fetch_in_steps_selftest.py` grew from 6 cases to 12**: a city
+  helper fetching at import, the same reached by a bare sibling import, the
+  fence's HTTP import hoisted to module level, a step calling the helper's
+  `fetch()`, the helper's own `load()` calling it, and a taxonomy module
+  fetching; all 13 runs (12 cases and the unmodified copy) behave. The tree is
+  now copied once per run and each case restores what it broke (the
+  unmodified run comes last and proves it), since copying the whole pipeline
+  tree (about 900 files) per case took 65 s; one copy takes 25 s.
+- Prose that described the old reach was brought up to date:
+  `docs/rule_history.md` (no-fetch, and the selftest's count),
+  `.claude/skills/consistency-sweep/SKILL.md`'s check table, and
+  `pipeline/osm_cache.py`'s docstring ("one level deep"). CLAUDE.md's
+  "including through shared `pipeline/*.py` modules" is still true and was
+  left for the owner.
