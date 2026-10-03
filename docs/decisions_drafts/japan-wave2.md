@@ -4,6 +4,27 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Two more shared-code items from the agents: old-law （旧） types, and a left-out branch's stations counted
+
+- **`japan_eigyo.normalise()` drops a leading （旧）**, Higashiosaka's spelling
+  of an old-law permit (（旧）菓子製造業): the anchored Retail rules missed it,
+  and 108 rows in term (菓子 59, 食肉販売 19, 魚介類販売 15, そうざい 15) fell
+  to "no rule" though （旧）飲食店営業 was already read as a restaurant.
+  Agent C found it; the brief's "Food retail 691" missed them too.
+- **`japan_step1` writes a left-out branch's in-city stations to
+  `excluded_stations.csv`** where the branch carries `excluded_reason` (and
+  `excluded_lines`): Shimonoseki's San'in Line beyond 小串, left out by the
+  owner on 2026-10-02 for frequency (JR West's timetable, revised
+  2026-10-03: 11 trains a day each way on weekdays, 12 at weekends, gaps up
+  to 2 h 16 min). The reason names the 15-minute test, so What Is Excluded
+  counts them as too infrequent, as Aarhus's; whether a JR stretch left out
+  for frequency becomes a row of `docs/category_rules.md`'s station scope is
+  for the owner (staging's recommendation was made for Shimonoseki alone).
+  Sightseeing lines left out whole are still not written there.
+- **Proven:** a step-2 snapshot of the 20 built Japanese cities is
+  byte-identical, baselines included; the step-1 change is opt-in (no built
+  branch carries `excluded_reason`).
+
 ### 2026-10-03 - Kawasaki built, the city's food list and three registers
 
 - **Kawasaki built as wave 2's pilot (page 176, notice 115): 11,894

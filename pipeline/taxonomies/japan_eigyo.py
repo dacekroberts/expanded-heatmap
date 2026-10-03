@@ -142,9 +142,12 @@ _FORM_COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in FORM_
 
 
 def normalise(value):
-    """NFKC (full-width, circled numbers), no spaces, no leading number."""
+    """NFKC (full-width, circled numbers), no spaces, no leading number, and no
+    leading （旧） (Higashiosaka's national-schema list marks an old-law permit
+    so, （旧）菓子製造業: without it the anchored Retail rules dropped 108 rows in
+    term, 2026-10-03)."""
     s = unicodedata.normalize("NFKC", str(value or "")).replace(" ", "").replace("　", "")
-    return re.sub(r"^\d+", "", s)
+    return re.sub(r"^\(旧\)", "", re.sub(r"^\d+", "", s))
 
 
 def explain(value, source="food", form=""):
@@ -216,6 +219,7 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
                   ("一般食堂・仕出し屋", None), ("そうざい屋", "Retail"), ("そうざい屋・弁当屋", "Retail"),
                   ("軽飲食・そうざい屋", "Food service"), ("旅館・一般食堂", None), ("簡易菓子製造業", "Retail"),
                   ("第１種自動車飲食店営業", None), ("簡易飲食店営業（自動販売機）", None), ("スナック", None),
+                  ("（旧）菓子製造業", "Retail"), ("（旧）飲食店営業", "Food service"), ("（旧）飲食店営業（自動車）", None),
                   ("⑫ 自動販売機による販売業（…）", None), ("コップ式自動販売機", None), ("食肉処理業", None),
                   ("喫茶店営業（自動販売機）", None), ("他食販自販", None), ("乳販自販", None),
                   ("飲食店", "Food service"), ("喫茶店", "Food service"), ("飲食店（自動車）", None)):

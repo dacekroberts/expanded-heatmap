@@ -502,6 +502,25 @@ def run(config):
                  f"{sorted(set(zip(unnamed['N02_004'], unnamed['N02_003'])))}")
     gone = st[left & st["inside"]]
     print(f"  left out inside the city: {len(gone)} station rows of {sorted(set(gone['N02_003']))}")
+    # A left-out BRANCH of a drawn line whose config gives `excluded_reason`
+    # (Shimonoseki's San'in Line beyond 小串, about 11 trains a day, left out by
+    # the owner 2026-10-02): its in-city stations are stations of a mapped
+    # network that the reader must see counted, so they go to
+    # excluded_stations.csv with that reason, under `excluded_lines`. A
+    # sightseeing line left out whole is still not written there.
+    left_branch_rows = []
+    for k, b in config.BRANCHES.items():
+        if draw_key(k, b) is not None or not b.get("excluded_reason"):
+            continue
+        m = gone[(gone["N02_004"] == b["line"][0]) & (gone["N02_003"] == b["line"][1])
+                 & gone["N02_005"].isin(b["stations"])]
+        for name, g in m.to_crs(config.CRS_PROJECTED).groupby("N02_005"):
+            pt = gpd.GeoSeries([unary_union(list(g.geometry)).centroid], crs=config.CRS_PROJECTED)
+            pt = pt.to_crs(config.CRS_GEOGRAPHIC).iloc[0]
+            left_branch_rows.append({"station": name, "lines": b["excluded_lines"], "reason": b["excluded_reason"],
+                                     "latitude": pt.y, "longitude": pt.x})
+        print(f"  {len(m.drop_duplicates('N02_005'))} stations of a left-out branch -> excluded_stations.csv: "
+              f"{b['excluded_reason']}")
     st = st[st["keys"].map(len) > 0].copy()
 
     # --- collapse on the station-group code ------------------------------------
@@ -567,10 +586,12 @@ def run(config):
     # cut from a network that IS mapped (app/station_scope.py reads only
     # boundary and spacing reasons), as Taipei's undrawn Maokong Gondola is not
     # in its file. The page and docs/excluded_categories.md disclose the line.
+    excluded += left_branch_rows
     ex = pd.DataFrame(excluded, columns=["station", "lines", "reason", "latitude", "longitude"])
     ex = ex.drop_duplicates(["station", "lines"]).sort_values(["reason", "station"])
     ex.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
     where = ex["reason"].str.extract(r"^in (\S+), outside")[0].value_counts()
+    emit_left = len(left_branch_rows)
     print(f"\n  scope: {len(keep)} stations inside the city; {len(ex)} excluded -> "
           f"{config.EXCLUDED_STATIONS_CSV.name}\n    beyond the line: "
           + ", ".join(f"{m} {n}" for m, n in where.items()))
@@ -620,4 +641,6 @@ def run(config):
     emit("stations_collapsed", len(groups))
     emit("stations_in_scope", len(keep))
     emit("stations_excluded", len(ex))
+    if emit_left:
+        emit("stations_left_out_branch", emit_left)
     return keep
