@@ -45,6 +45,16 @@ they disagree.**
 | SanGIS municipal boundaries (San Diego) | 1.24 | **2** | SanGIS End User Agreement: credit PROHIBITED at this scale, an uncapped indemnity and a general release (Civil Code §1542 waiver), **accepted by the owner 2026-10-02 for both SanGIS layers** (the boundaries and the parcels, 2.32; `data_sources.md`). SANDAG, which only hosts it, adds "should not be redistributed", read as deferring to SanGIS's terms. |
 | CARTO basemap (Overview macro map only) | 1.23 | **1, weaker** | The Terms (2026-09-29) grant free use only with the project's own API key; the macro map loads keyless vector tiles (keyless raster is already watermarked). A key brings an uncapped indemnity, New York law and revocation at will. **Open with the owner**: request a key, switch the macro map to OpenStreetMap tiles (staging's recommendation), or drop its basemap. City maps use OpenStreetMap's own tiles and are unaffected. |
 
+**Rows and credits landed 2026-10-03 (lane-app):** D.C.'s register and
+boundary, notice 115; Dublin's NTA GTFS, notice 116, the Fair Usage Policy's
+indemnity recorded as not accepted; geo.api.gouv.fr, notice 117, both credits,
+on all 26 French pages; MassGIS, notice 118, the credit in its FAQ's words.
+LA County's and SanGIS's boundaries have licence rows and no credit (SanGIS
+forbids one at this scale). Each licence row is in its country file under
+`docs/data_sources/`; `united-states.md` now names SanGIS, not SANDAG, as the
+boundaries' and parcels' publisher. SFMTA's 2.16 was settled the same day
+(below).
+
 **Counts after the update:** tier 1 **24**, tier 2 **50**, tier 3 **47**,
 tier 4 **23** (144 entries; the 1.24 boundary group split into its four
 sources).

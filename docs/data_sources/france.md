@@ -164,3 +164,9 @@ that record.<!-- /internal -->
 | Valenciennes (Regional) | **Every commune of the EPCI**, with contours | `https://geo.api.gouv.fr/epcis/245901160/communes?fields=nom,code&geometry=contour&format=geojson` | **the scope**: the 13 communes holding a station (owner, 2026-09-30), asserted in `EXPECTED_SERVED_COMMUNES` |
 | Angers | **`geo.api.gouv.fr` commune contour**, code INSEE **`49007`** | `https://geo.api.gouv.fr/communes/49007?geometry=contour&format=geojson` | the commune alone: **commune-only scope** (owner, 2026-09-30), asserted per line in `EXPECTED_INSIDE_PER_LINE` |
 | Angers | **Every commune of the EPCI**, with contours | `https://geo.api.gouv.fr/epcis/244900015/communes?fields=nom,code&geometry=contour&format=geojson` | not a scope: it names the commune each excluded station lies in |
+
+## Licenses and terms of use
+
+| Source | License | Attribution declared |
+|---|---|---|
+| **`geo.api.gouv.fr` commune contours** - the scope and naming layers of all 26 French cities | **PERMITTED WITH CONDITIONS, the licence unclear** (licence read 2026-10-02, staging). The API declares no licence. The dataset it serves, "Contours administratifs" (data.gouv `683424e996857155175d4f68`, licence `odc-odbl`, last updated 2025-05-05), says ODbL; IGN's ADMIN EXPRESS, which that dataset is built from, says Licence Ouverte. A question to the publisher sent 2025-10-15 is unanswered. **The owner: show both credits (2026-10-02).** ODbL §4.6 rests on the public repository, linked from every page. Used to select stations and businesses and to name the commune of an excluded station; never drawn | **Required, both**: the ODbL §4.3 notice naming Contours administratifs, and the Licence Ouverte source-and-date line for IGN's ADMIN EXPRESS - notice 117 |

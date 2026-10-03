@@ -479,6 +479,12 @@ _BRAZIL = ("São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
                 "Namyangju", "Ansan", "Uijeongbu", "Anyang")
+_FRANCE = ("Paris", "Marseille", "Toulouse", "Lille (Regional)", "Rennes",
+           "Le Mans", "Besançon", "Avignon", "Tours", "Dijon", "Reims", "Orléans",
+           "Mulhouse", "Brest", "Saint-Étienne", "Nice", "Montpellier",
+           "Strasbourg", "Le Havre", "Caen", "Rouen (Regional)",
+           "Bordeaux (Regional)", "Nantes (Regional)", "Grenoble (Regional)",
+           "Valenciennes (Regional)", "Angers")
 # The UK tram and light-rail cities whose gate 3 reads NaPTAN (notice 86).
 _UK_SIX = ("Manchester (Regional)", "Birmingham (Regional)", "Edinburgh",
            "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)")
@@ -2379,6 +2385,66 @@ _NOTICES = [
      "Business Register, retrieved 2026-10-02; processed by this project. Not "
      "endorsed by Geostat.",
      False, ("Tbilisi",)),
+    # Notices 115-118, from staging's licence reads of 2026-10-02
+    # (docs/licence_positions.md, its update section). D.C.'s two ArcGIS items
+    # carry CC BY 4.0 over the District's CC0 default: credit, licence link,
+    # a link to the material, and the changes (s.3(a)). The boundary is
+    # reprojected and used to select, never drawn.
+    Notice(115, "DLCP and OCTO (Washington D.C.)",
+     "Business locations for Washington D.C. are from the Department of "
+     "Licensing and Consumer Protection's [Basic Business Licenses]"
+     "(https://www.arcgis.com/home/item.html?id=85bf98d3915f412c8a4de706f2d13513), "
+     "and the District's boundary from the Office of the Chief Technology "
+     "Officer (DC GIS), [Washington DC Administrative Boundary]"
+     "(https://www.arcgis.com/home/item.html?id=7241f6d500b44288ad983f0942b39663), "
+     "both used under the [Creative Commons Attribution 4.0 International "
+     "license](https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: the licenses are filtered to storefront categories, grouped into "
+     "three categories of this project's own and measured by distance from "
+     "Metrorail stations, and the boundary is reprojected and used to select "
+     "them, not drawn. Neither office endorses this project.",
+     False, ("Washington D.C.",)),
+    # Dublin's rail: the NTA's national GTFS, CC BY 4.0 with a prescribed
+    # sentence (first, VERBATIM). The developer portal's Fair Usage Policy,
+    # with its uncapped indemnity, is NOT accepted (owner, 2026-10-02: "plain
+    # CC BY for dublin"); this credit still meets that Policy's s.7. Linked to
+    # data.gov.ie, not nationaltransport.ie (that site's terms, clause 5, on
+    # linking).
+    Notice(116, "National Transport Authority (Dublin)",
+     "This data is licensed under CC BY 4.0 and is attributed to the National "
+     "Transport Authority. Luas and DART lines and stations for Dublin are from "
+     "the NTA's [national GTFS feed](https://data.gov.ie/dataset/nta-gtfs), used "
+     "under the [Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: three routes (Luas Red, Luas Green and DART) are extracted and "
+     "redrawn, and the line colors are this map's own. It is provided “as "
+     "is”. The National Transport Authority does not endorse this project.",
+     False, ("Dublin",)),
+    # geo.api.gouv.fr declares no licence; its source dataset ("Contours
+    # administratifs", data.gouv 683424e996857155175d4f68) says ODbL, and IGN's
+    # ADMIN EXPRESS, which it is built from, says Licence Ouverte. Owner,
+    # 2026-10-02: show both, the ODbL s.4.3 notice and the Licence Ouverte
+    # source-and-date line. ODbL s.4.6 rests on the repository link. The
+    # dataset's last update is from its data.gouv record (read 2026-10-03).
+    Notice(117, "geo.api.gouv.fr, Contours administratifs and IGN (France)",
+     "Commune boundaries for the French cities on this site are from "
+     "geo.api.gouv.fr. Contains information from Contours administratifs "
+     "(data.gouv.fr), which is made available here under the [Open Database "
+     "License (ODbL)](https://opendatacommons.org/licenses/odbl/1-0/). Source: "
+     "IGN, ADMIN EXPRESS, under the [Licence Ouverte]"
+     "(https://www.etalab.gouv.fr/licence-ouverte-open-licence/), as published "
+     "in Contours administratifs, last updated May 5, 2025. The boundaries are "
+     "used to select each city's stations and businesses and to name the "
+     "commune of a station left out; they are not drawn.",
+     False, _FRANCE),
+    # MassGIS: public records, "can be used by anyone for any purpose"; a
+    # credit is requested, not required, and is shown in the words MassGIS's
+    # FAQ gives (read 2026-10-03), the office name as published.
+    Notice(118, "MassGIS (Boston)",
+     "Boston's boundary, and the town each station outside the city lies in, "
+     "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
+     "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
+     False, ("Boston",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
