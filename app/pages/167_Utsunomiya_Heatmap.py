@@ -59,7 +59,7 @@ st.markdown(
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Utsunomiya City get rings, because the business data covers the city alone:
   lines running on to Haga, Takanezawa, Sakura, Shimotsuke, Mibu, Kanuma and Nikko are cut at the
-  city line.
+  city line. The stations left out are listed below.
 - The Shinkansen is not drawn (Utsunomiya appears as a JR station).
 
 **The businesses**

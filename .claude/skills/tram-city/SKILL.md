@@ -487,8 +487,9 @@ streetcar.
 Notes on the template:
 - **The in-ring share is said in words**, as on all ten pages: "About two
   storefronts in five sit within a ring", "About one storefront in eight
-  sits within a ring". Five pages put it last under **The businesses**, five
-  last under **Reading the density** (New Orleans's leads its band bullet).
+  sits within a ring". All ten put it last under **The businesses**, and
+  all ten name the third heading **Reading the density** (the family wording
+  batch, 2026-10-03).
 - **A US streetcar** says it the way Kansas City's, Tucson's and New Orleans's
   pages do: "{City} has no metro: its streetcar is its rapid transit, as
   Riga's trams are, so every stop gets rings", and "**Streetcar stops sit

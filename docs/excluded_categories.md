@@ -407,7 +407,7 @@ vendors and a market vendor (3), and 3 with no category at all (a park board
 and two restaurants by name, left out rather than guessed).
 
 **Excluded by name** - 161 facilities inside the kept types that are not
-storefronts (each is listed in `outputs/minneapolis/excluded_premises.csv`):
+storefronts:
 institutional kitchens (57:
 contract caterers' workplace cafés - Sodexo, Aramark, Compass and Eurest -
 hospital, school, church and campus dining, event caterers with no counter,
@@ -454,7 +454,7 @@ processors and warehouses (103), boarding, personal-care and nursing homes
 banquet halls (25), temporary events (19) and a pool snack bar.
 
 **Excluded by name** - 393 facilities inside the kept types that are not
-storefronts (each is listed in `outputs/pittsburgh/excluded_premises.csv`):
+storefronts:
 254 stands and outlets of
 venues (Acrisure Stadium, PNC Park, PPG Paints Arena, Highmark Stadium, the
 Petersen Events Center, the convention center, Stage AE, Rivers Casino, the
@@ -1220,8 +1220,7 @@ services). **61 premises are newer than the tables** and have no type yet;
 they stay on the map as restaurants and bars (47) or personal services (14),
 by the owner's call (2026-09-30).
 
-**Excluded by category and type** (the register's own), each listed with its
-rule in `outputs/kitchener_waterloo/excluded_premises.csv`:
+**Excluded by category and type** (the register's own):
 - 297 in the Institutional, Mobile Vendor and Processing Plant categories:
   childcare, before- and after-school programs, nourishment programs,
   retirement, group and long-term-care homes, hospitals, mobile preparation
@@ -1851,7 +1850,9 @@ withheld.
 
 **Twelve T-bane stations are excluded for being in Bærum**, on the western
 branches of lines 2, 3 and 5, and are listed with their municipality on Oslo's
-page. **Ferries are not drawn**, as in
+page. **Tram 13 west of Thune is closed for rebuilding**, replaced by buses
+since 10 June 2026 until about February 2027, so its stops from Hoff to
+Lilleaker are not drawn. **Ferries are not drawn**, as in
 Marseille.
 
 ### Aarhus - Copenhagen's register and rules, and a city tramway without its railways
@@ -2105,8 +2106,8 @@ be identified or removed.
 **Stations.** GVB's metro lines 50 to 54 and sixteen tram lines are drawn. 22
 stops outside the municipality are left out - 12 in Amstelveen, 5 in Diemen, 3
 in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
-half mile. Tram 3, which is not running, the museum tram, ferries and NS trains
-are not drawn.
+half mile. Tram 3, which GVB discontinued on 29 March 2026, the museum tram,
+ferries and NS trains are not drawn.
 
 ### Rome - a register of premises with no names and no closing dates
 
@@ -3722,11 +3723,10 @@ restaurants, music bars and nightclubs - and publishes the register on the
 Govern de les Illes Balears's catalog. No open register of other shops or
 of personal services covers Palma, so clothes shops, hairdressers and the like
 are missing rather than excluded. Nightclubs, party halls and dance halls are
-kept, as food service (R5). A premises is shown when the register lists it as
 kept, as food service. A premises is shown when the register lists it as
+active in Palma (4,372 of 4,375; 3 are temporarily closed).
 
-**Excluded by type and by name**, each listed with its rule in
-`outputs/palma/excluded_premises.csv`:
+**Excluded by type and by name**:
 - 9 caterers, the register's own "Catering" type (no counter of their own).
 - 35 recreation venues, clubs and gaming: sports, tennis, padel, riding, golf
   and nautical clubs (their restaurants included), a sports center and a pool
@@ -4244,8 +4244,7 @@ when it was inspected in the two years before the data's date (2026-09-29):
 5,747 of 12,961 premises. The rest were last inspected earlier, most of them
 presumably closed.
 
-**Excluded by name** (owner, 2026-09-29), 829 premises, each listed with its
-rule in `outputs/ottawa/excluded_premises.csv`:
+**Excluded by name** (owner, 2026-09-29), 829 premises:
 - 597 institutional kitchens: schools and écoles, daycares and garderies,
   hospital patient kitchens and cafeterias, retirement and long-term-care
   homes, churches and parishes, community centers, workplace cafeterias and

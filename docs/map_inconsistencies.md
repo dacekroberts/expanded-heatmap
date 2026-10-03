@@ -568,7 +568,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS; gate 3 exact | 4 local authorities | 2 / 0 |
 | **Italy** | | | | | |
 | Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
-| Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 3, 5, 14, 19 bus-replaced); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
+| Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 5, 14, 19 bus-replaced; 3 running again from 2026-09-07 but not in the cached feed); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
 | Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap; gate 3 exact | Comune | 4 / 0 |
 | **France** | | | | | |
 | Paris | Métro, 16 lines + Trams T3a, T3b | RER, Transilien, other trams (T2 and T9 stubs) | IDFM GTFS | Commune | 76 / 0 |
@@ -598,7 +598,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Valenciennes (Regional) | Tram T1, Tram T2 | — | Transvilles GTFS | 13 communes served | 0 / 0 |
 | Angers | Tram A, Tram B, Tram C | — | Angers Loire Métropole GTFS | Commune | 6 / 0 |
 | **Norway** | | | | | |
-| Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
+| Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries; tram 13 west of Thune (closed for works until about February 2027) | Ruter via Entur GTFS | Kommune | 12 / 0 |
 | Bergen | Bybanen 1 and 2 (light rail) | Ferries | Skyss via Entur GTFS | Kommune | 0 / 0 |
 | **Romania** | | | | | |
 | Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
