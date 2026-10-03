@@ -16,7 +16,16 @@ Santa Cruz are borderline and out pending the owner (the rail comment below).
 from pathlib import Path
 
 SLUG = "rio_de_janeiro"
-NAME = "Rio de Janeiro"
+
+# Rio de Janeiro (Regional): Duque de Caxias added for SuperVia Saracuruna's
+# Duque de Caxias, Corte Oito and Gramacho (owner, 2026-09-27; released
+# 2026-10-02, docs/handoff_extensions_2026-10-02.md). Beyond Gramacho the
+# Gramacho-Saracuruna shuttle fails the rail test (PLAN.md "Wave-2 follow-ups"
+# (5), 2026-09-30), so it is drawn to its end and its three stations are not
+# ringed (SHUTTLE_* below). False reproduces the city-alone build byte for
+# byte, which is how the extension was proved before it was switched on.
+REGIONAL = False
+NAME = "Rio de Janeiro (Regional)" if REGIONAL else "Rio de Janeiro"
 
 ROOT = Path(__file__).parent.parent.parent
 DATA_RAW = ROOT / "data" / SLUG / "raw"
@@ -36,14 +45,22 @@ OSM_RAIL_JSON = DATA_RAW / "osm_rail.json"
 TAXONOMY_SYSTEM = "brazil_cnefe"
 
 # --- Scope -------------------------------------------------------------------------
-# One zip per município (IBGE code prefix). Rio de Janeiro alone; the brief measured every metro and VLT station inside it.
+# One zip per município (IBGE code prefix). The city alone: the brief measured every metro and VLT station inside it. Regional: Duque de Caxias too.
 CNEFE_FILES = [('33_RJ', '3304557_RIO_DE_JANEIRO.zip')]
-CNEFE_ZIPS = tuple(DATA_RAW / name for _, name in CNEFE_FILES)
 SCOPE_CODES = ('3304557',)
+SCOPE_AREA_KM2 = (1150, 1270)   # gate on the union's area; Rio de Janeiro 1,202.1 km2
+if REGIONAL:
+    CNEFE_FILES += [('33_RJ', '3301702_DUQUE_DE_CAXIAS.zip')]
+    SCOPE_CODES += ('3301702',)
+    SCOPE_AREA_KM2 = (1580, 1760)   # Rio 1,202.1 + Duque de Caxias 466.8 = 1,668.9 km2 (OSM, UTM 23S)
+CNEFE_ZIPS = tuple(DATA_RAW / name for _, name in CNEFE_FILES)
 IBGE_MUNICIPIO = SCOPE_CODES[0]
-SCOPE_AREA_KM2 = (1150, 1270)   # gate on the union's area
 BBOX = (-23.08, -43.8, -22.75, -43.1)   # s, w, n, e - the fetch's OSM box
-SANITY_BBOX = {"lat_min": BBOX[0], "lat_max": BBOX[2], "lon_min": BBOX[1], "lon_max": BBOX[3]}
+# The CNEFE sanity box. Duque de Caxias reaches -22.476, north of the fetch box,
+# so the regional box widens to -22.45; the fetch box stays, since OSM returns
+# the whole município outline and the shuttle relations' whole geometry.
+_SANITY = (BBOX[0], BBOX[1], -22.45, BBOX[3]) if REGIONAL else BBOX
+SANITY_BBOX = {"lat_min": _SANITY[0], "lat_max": _SANITY[2], "lon_min": _SANITY[1], "lon_max": _SANITY[3]}
 
 # --- Coordinate reference systems -----------------------------------------
 CRS_GEOGRAPHIC = "EPSG:4326"
@@ -106,5 +123,18 @@ METRO_GATE3 = {"lines": {"1": 20, "2": 26, "4": 6}, "network": 41,
                          "pt.wikipedia 'Metrô do Rio de Janeiro', read 2026-09-24: 41 stations"}
 # Step 1 writes both systems' geometry here for step 3 (feature property `line`).
 LINES_GEOJSON = DATA_PROCESSED / "rail_lines.geojson"
+# The Gramacho-Saracuruna shuttle (regional only). Its geometry is appended to
+# SuperVia Saracuruna's line, so the line is drawn to its end; its stops beyond
+# Gramacho go to excluded_stations.csv with SHUTTLE_REASON and are not ringed.
+# The relations stay in LEFT_OUT, so step 1's station reader never takes them.
+SHUTTLE_LINE = "SS"
+SHUTTLE_RELATIONS = (6018221, 9963666) if REGIONAL else ()
+SHUTTLE_REASON = ("beyond Gramacho, on the Gramacho-Saracuruna shuttle: fails the rail test "
+                  "(SuperVia's notices give its trains a 50-minute average); the line is drawn, "
+                  "the station not ringed")
+if REGIONAL:
+    for _rid in SHUTTLE_RELATIONS:
+        LEFT_OUT[_rid] = ("SuperVia Saracuruna, Gramacho-Saracuruna shuttle - drawn to its end, "
+                          "its stops beyond Gramacho not ringed: fails the rail test")
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400

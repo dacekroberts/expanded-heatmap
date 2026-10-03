@@ -70,6 +70,37 @@ def vlt_rows():
     return q
 
 
+def _best_parts(rels, ids):
+    """The way geometry of the direction relation with the most of it, as
+    load_osm_line_shapes chooses."""
+    best = max((rels[i] for i in ids),
+               key=lambda r: sum(len(m.get("geometry") or []) for m in r["members"] if m["type"] == "way"))
+    return [[[pt["lon"], pt["lat"]] for pt in m["geometry"]]
+            for m in best["members"] if m["type"] == "way" and m.get("geometry")]
+
+
+def shuttle_rows(taken):
+    """The shuttle's stops not already stations (Gramacho is), collapsed by name,
+    as excluded_stations.csv rows: drawn on the line, never ringed."""
+    if not config.SHUTTLE_RELATIONS:
+        return []
+    els = json.loads(config.OSM_RAIL_JSON.read_text(encoding="utf-8"))["elements"]
+    nodes = {e["id"]: e for e in els if e["type"] == "node"}
+    rels = {e["id"]: e for e in els if e["type"] == "relation"}
+    pts = {}
+    for rid in config.SHUTTLE_RELATIONS:
+        for m in rels[rid]["members"]:
+            if m["type"] == "node" and m.get("role", "").startswith("stop"):
+                n = nodes.get(m["ref"])
+                name = (n or {}).get("tags", {}).get("name")
+                if not name:
+                    sys.exit(f"shuttle stop {m['ref']} has no name in the cache")
+                pts.setdefault(name, []).append((n["lat"], n["lon"]))
+    return [{"station": nm, "lines": config.SHUTTLE_LINE, "reason": config.SHUTTLE_REASON,
+             "latitude": sum(p[0] for p in ps) / len(ps), "longitude": sum(p[1] for p in ps) / len(ps)}
+            for nm, ps in sorted(pts.items()) if nm not in taken]
+
+
 def write_lines():
     feats = []
     for f in _features(config.METRO_LINES_JSON):
@@ -80,10 +111,10 @@ def write_lines():
             if e["type"] == "relation"}
     for ln, ids in config.LINE_RELATIONS.items():
         # The direction relation with the most way geometry, as load_osm_line_shapes chooses.
-        best = max((rels[i] for i in ids),
-                   key=lambda r: sum(len(m.get("geometry") or []) for m in r["members"] if m["type"] == "way"))
-        parts = [[[pt["lon"], pt["lat"]] for pt in m["geometry"]]
-                 for m in best["members"] if m["type"] == "way" and m.get("geometry")]
+        parts = _best_parts(rels, ids)
+        if ln == config.SHUTTLE_LINE and config.SHUTTLE_RELATIONS:
+            # Regional: the shuttle drawn on as the same public line, to Saracuruna.
+            parts += _best_parts(rels, config.SHUTTLE_RELATIONS)
         feats.append({"type": "Feature", "properties": {"line": ln},
                       "geometry": {"type": "MultiLineString", "coordinates": parts}})
     missing = set(config.LINE_ORDER) - {f["properties"]["line"] for f in feats}
@@ -149,9 +180,12 @@ def main():
                          "reason": f"in {hit.iloc[0]['name']} ({hit.iloc[0]['ibge']}), outside "
                                    f"município {config.IBGE_MUNICIPIO}",
                          "latitude": r["latitude"], "longitude": r["longitude"]})
+    unringed = shuttle_rows(set(st["stop_name"]))
+    excluded += unringed
     pd.DataFrame(excluded, columns=["station", "lines", "reason", "latitude", "longitude"]).to_csv(
         config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
-    print(f"\n  scope: {len(st)} stations -> {int(inside.sum())} inside, {len(excluded)} excluded")
+    print(f"\n  scope: {len(st)} stations -> {int(inside.sum())} inside, {len(excluded)} excluded"
+          + (f" ({len(unringed)} on the shuttle, drawn and not ringed)" if unringed else ""))
     keep = (st[inside].rename(columns={"stop_name": "station"})
             [["station", "lines", "latitude", "longitude"]].sort_values("station"))
     keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")
