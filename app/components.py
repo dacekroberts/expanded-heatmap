@@ -2323,7 +2323,13 @@ def render_site_notices(show_links: bool = True):
             + ["**OpenStreetMap** \u2014 basemap \u00a9 OpenStreetMap contributors, "
                "available under the Open Database License. The attribution also "
                "appears in the corner of every map, where its license requires "
-               "it to stay visible. The overview map's basemap is \u00a9 CARTO."]))
+               "it to stay visible. The overview map's basemap is \u00a9 CARTO and "
+               "\u00a9 OpenMapTiles, from OpenStreetMap data. "
+               # Approved by the owner, 2026-10-02: CARTO's terms (s10) make
+               # the site the controller of the request data CARTO receives.
+               "The overview map's basemap loads from CARTO, so your browser sends "
+               "CARTO your IP address and browser details with each map request; "
+               "CARTO processes them for this site."]))
     st.caption(_UNSETTLED_TERMS)
 
 

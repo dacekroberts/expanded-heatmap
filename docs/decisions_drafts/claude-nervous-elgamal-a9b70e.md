@@ -78,15 +78,17 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   in the app's Secrets as `CARTO_BASEMAP_KEY` (owner, 2026-10-02: "yes, the
   public key is in Secrets"). Without it the live map would show the warning
   and no basemap, which is safe but visible.
-- **For the owner (proposals, not written anywhere rendered):**
-  - Privacy line (§10 makes the site the controller): "The overview map's
+- **Two sentences, APPROVED by the owner (2026-10-02, "Drafts approved"),**
+  now in the site notices' OpenStreetMap entry (`render_site_notices`, every
+  page). The site had no privacy section, and both are about the overview
+  basemap, so they sit with it:
+  - "The overview map's basemap is © CARTO and © OpenMapTiles, from
+    OpenStreetMap data." This replaces "The overview map's basemap is
+    © CARTO."
+  - The privacy line (§10 makes the site the controller): "The overview map's
     basemap loads from CARTO, so your browser sends CARTO your IP address and
     browser details with each map request; CARTO processes them for this
     site."
-  - The site-notice sentence "The overview map's basemap is © CARTO." could
-    become "The overview map's basemap is © CARTO and © OpenMapTiles, from
-    OpenStreetMap data." It is optional, since the on-map credit already
-    carries all three.
 - **For cleanup:** `docs/licence_positions.md` row 1.23 ("keyless, outside
   its terms") and PLAN's "Overview's basemap" item describe the keyless state,
   and both change when this lands. `docs/data_sources.md` gained the CARTO
