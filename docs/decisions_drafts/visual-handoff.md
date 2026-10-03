@@ -4,6 +4,48 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - City cards generated: 129 cities, 15 off the cards, card-face credits per the cleanup session's reading (owner)
+
+- **129 cards were generated, one per city on the card list.** The owner's
+  calls reached this session through the cleanup session and were
+  confirmed here.
+  - **Off the cards:** Paris (Licence Mobilités Art. 5.4: a static image
+    can neither link nor hold the licence text); Los Angeles; Washington
+    D.C.; Daegu, Busan and the ten SEMAS cities (checked against notice 68's
+    city tags).
+  - Paris stays allowed in other public pieces.
+  - The nine Brazilian cities came off the public hold-out list for
+    everything.
+- **Every card carries** "Figures derived by this project; not official
+  statistics. Data as of <date>." (owner). The date is the data_age's own
+  date, its date range, or the period it names.
+- **The OpenStreetMap line also goes on 16 cities missing from the branch's
+  `_OSM_RAIL`:** the ten SEMAS cities, Daegu, Busan, Sydney, Melbourne,
+  Buenos Aires and Seattle (Regional). Their rail is OSM per
+  `docs/data_sources/`. The site's own list is fixed at the next landing.
+- **Card-face credits, verbatim from the branch's `_NOTICES` where the
+  notice is verbatim:**
+  - San Francisco: SFMTA's clause-12 notice plus its second paragraph, on the
+    cautious reading. The second paragraph is from the license text and is
+    not yet on the site.
+  - Vancouver (Regional): TransLink's legend and the Vancouver, Surrey and BC
+    OGL sentences. BC is kept on the cautious reading, since its layer scopes
+    the regional stations.
+  - Calgary, Toronto, Ottawa: their OGL sentences.
+  - The three Mexican cities: the INEGI line.
+  - Madrid: the CRTM line.
+  - The six French ODbL cities: the notice's first sentence, the dataset
+    URI and the ODbL URL. Angers stays mark-free.
+  - Oslo and Bergen: Entur.
+  - The three Taiwanese cities: the OGDL provider lines with each file's
+    edition, and the statement. Taipei Metro is off the card (owner).
+  - Hong Kong: its line. Buenos Aires: its line, at the OSM line's size.
+  - Tokyo: Taitō's line. Fukui: "This card is offered under CC BY-SA 4.0".
+- **In the caption only:** everything else, including the eight Ordnance
+  Survey cities (owner) and Kyoto's 京都市オープンデータ. Chicago's and Kansas
+  City's full paragraphs sit in their captions, and those two cards are
+  flagged as unfit for platforms with short captions.
+
 ### 2026-10-02 - City card layout approved; Tbilisi's card carries თბილისი (owner)
 
 - **The card layout and its new wording were approved** (owner): the
