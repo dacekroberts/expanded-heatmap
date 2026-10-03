@@ -364,3 +364,28 @@ Before merging, the owning session pulls the other's work in first
 (`git merge master` into the branch), resolves on its own ground, and only then
 merges back. Conflicts are cheaper to handle in a worktree than in the tree
 someone is mid-build in.
+
+## Downstream sessions: Visuals and Analytics are told when their inputs move
+
+Two sessions build FROM what master holds, without landing anything the site
+renders: **Visuals** (`.claude/worktrees/visual`, city cards, decks, print)
+and **Analytics** (`.claude/worktrees/analytics`, private analysis in
+`data/_analysis/`). Neither sees master move, so the session that pushes
+tells them (owner, 2026-10-03).
+
+- **After every push to master**, the pushing session runs
+  `python scripts/downstream_changes.py <master before the push> <the pushed commit>`.
+  If it prints anything but "nothing downstream", it sends that output,
+  unchanged, to both sessions ("Expanded Heatmap Visuals" and "Expanded
+  Heatmap Analytics", found with ListAgents), with one line on WHY the
+  inputs changed (the DECISIONS heading is enough).
+- **What counts** is listed in the script's docstring: a city added or
+  removed, any `outputs/<city>/` change, the city registry, the notices and
+  credits, the macro facts, category rules and taxonomies, licence rows, and
+  the shared map code and theme.
+- **A new city always counts**, and so does a removal request carried out:
+  a city or layer taken down must leave the cards and analyses too.
+- **The message informs; it never instructs.** Each session decides what to
+  regenerate, on its own branch, and lands through cleanup as usual.
+- **A build session's branch** says in its drafts file which downstream
+  inputs it changes, so the lander can check the script's output against it.

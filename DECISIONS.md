@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**413 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**414 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
 - [Ridership becomes a hard line in CLAUDE.md](#2026-10-03---ridership-becomes-a-hard-line-in-claudemd)
+- [The Visuals and Analytics sessions are told whenever their inputs move (owner)](#2026-10-03---the-visuals-and-analytics-sessions-are-told-whenever-their-inputs-move-owner)
 
 **2026-10-02**
 
@@ -16957,3 +16958,21 @@ Recorded by the cleanup session from the Main Building Session's findings of
   additions rather than building them" sentence was kept, since it is a
   general rule and not part of the ridership line.
 - `docs/project_context.md`'s Scope line was rewritten to match.
+
+### 2026-10-03 - The Visuals and Analytics sessions are told whenever their inputs move (owner)
+
+- **What.** After every push to master, the pushing session runs
+  `scripts/downstream_changes.py <old master> <pushed>` and sends its output to
+  the Visuals and Analytics sessions unless it says "nothing downstream". The
+  script groups the push's changes by what those sessions build from: cities
+  added or removed (read from `app/cities.py` by ast), `outputs/<city>/`, the
+  registry, notices and credits, macro facts, category rules and taxonomies,
+  licence rows, and the shared map code and theme.
+- **Why.** The owner (2026-10-03): make rules so both sessions are updated
+  whenever information relating to their data or visualizations changes, or
+  new cities land. Neither sees master move; on 2026-10-02 both were told
+  about the notices landing by hand.
+- **Where.** `docs/session_roles.md` ("Downstream sessions"), a CLAUDE.md
+  working rule and command line, `publish-city`'s checklist, and the
+  script's selftest in `check_all.py`. The message informs and never
+  instructs: each session decides what to regenerate on its own branch.
