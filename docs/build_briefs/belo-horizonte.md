@@ -126,6 +126,14 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "lon": -43.94,
     "north": false,
     "expect": "EPSG:32723"
+  },
+  {
+    "id": "contagem-cnefe-file-live",
+    "claim": "Belo Horizonte (Regional) adds Contagem (extensions build, 2026-10-03): its CNEFE 2022 file is keyless and live, from the same state folder",
+    "kind": "http_ok",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3118601_CONTAGEM.zip",
+    "min_bytes": 1000000,
+    "content_type_contains": "zip"
   }
 ]
 ```

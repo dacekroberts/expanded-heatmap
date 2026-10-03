@@ -39,7 +39,7 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 |---|---|---|---|
 | `/San_Diego_Heatmap` | San Diego | `san_diego` | ✓ |
 | `/San_Francisco_Heatmap` | San Francisco | `san_francisco` | ✓ |
-| `/Los_Angeles_Heatmap` | Los Angeles | `los_angeles` | ✓ |
+| `/Los_Angeles_Heatmap` | Los Angeles (Regional) | `los_angeles` | ✓ |
 | `/Chicago_Heatmap` | Chicago | `chicago` | ✓ |
 | `/New_York_Heatmap` | New York | `new_york` | ✓ |
 | `/Philadelphia_Heatmap` | Philadelphia | `philadelphia` | ✓ |
@@ -68,8 +68,8 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Amsterdam_Heatmap` | Amsterdam | `amsterdam` | ✓ |
 | `/Rome_Heatmap` | Rome | `rome` | ✓ |
 | `/Sao_Paulo_Heatmap` | São Paulo | `sao_paulo` | ✓ |
-| `/Rio_de_Janeiro_Heatmap` | Rio de Janeiro | `rio_de_janeiro` | ✓ |
-| `/Belo_Horizonte_Heatmap` | Belo Horizonte | `belo_horizonte` | ✓ |
+| `/Rio_de_Janeiro_Heatmap` | Rio de Janeiro (Regional) | `rio_de_janeiro` | ✓ |
+| `/Belo_Horizonte_Heatmap` | Belo Horizonte (Regional) | `belo_horizonte` | ✓ |
 | `/Brasilia_Heatmap` | Brasília | `brasilia` | ✓ |
 | `/Salvador_Heatmap` | Salvador | `salvador` | ✓ |
 | `/Fortaleza_Heatmap` | Fortaleza (Regional) | `fortaleza` | ✓ |

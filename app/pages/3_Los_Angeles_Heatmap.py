@@ -23,11 +23,11 @@ from components import (  # noqa: E402
     set_base_font,
 )
 
-st.set_page_config(page_title="Los Angeles Heatmap", page_icon="\U0001f5fa️", layout="wide")
+st.set_page_config(page_title="Los Angeles (Regional) Heatmap", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
-render_city_nav("Los Angeles")
-render_city_title('Los Angeles')
+render_city_nav("Los Angeles (Regional)")
+render_city_title('Los Angeles (Regional)')
 
 # Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
@@ -37,7 +37,7 @@ if HEATMAP_HTML.exists():
 else:
     st.info("No map yet. Run `python pipeline/los_angeles/step4_map.py` to generate it.")
 
-render_data_age('Los Angeles')
+render_data_age('Los Angeles (Regional)')
 
 st.markdown(
     """
@@ -45,14 +45,19 @@ st.markdown(
 
 - Stations are represented by blue dots along LA Metro Rail: the A, B, C, D, E and K Lines, each
   labeled directly on the map and in the legend, in Metro's own line colors.
-- Only stations inside the City of Los Angeles are shown. The lines also serve Long Beach, Pasadena,
-  Santa Monica and many other cities, whose businesses come from separate city registries.
+- Only stations inside the City of Los Angeles and the City of Long Beach are shown. The lines
+  also serve Pasadena, Santa Monica and many other cities, whose businesses come from separate city
+  registries.
 - The stations left out are listed below.
 
 **The businesses**
 
-- Some businesses in the city's registry carry corrupt coordinates, mostly recent registrations;
-  these were placed from their street address instead of being dropped.
+- Businesses in the City of Los Angeles come from its Office of Finance's list of active
+  businesses; those in Long Beach come from the City of Long Beach's business licenses, sorted
+  into the same three categories from each license's type.
+- Some businesses in the Los Angeles registry carry corrupt coordinates, mostly recent
+  registrations; these were placed from their street address instead of being dropped.
+- In Long Beach, a license that gives no trade name shows its street address.
 - Where a business is registered under a person's name alone, with no trade name, or a person's
   name sits at an apartment or other dwelling unit, the map shows its street address instead of a
   name.
@@ -60,10 +65,10 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
-render_excluded_stations("Los Angeles")
-render_country_links('Los Angeles')
+render_excluded_stations("Los Angeles (Regional)")
+render_country_links('Los Angeles (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
 # be accessed". See components._NOTICES.
-render_site_notices("Los Angeles")
+render_site_notices("Los Angeles (Regional)")

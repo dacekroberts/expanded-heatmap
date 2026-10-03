@@ -83,7 +83,7 @@ TEXT_WIDTH = {
     "Rome": 37.5,
     # The nine Brazilian cities, 2026-09-24, local app; controls Rome,
     # Amsterdam and Rome's nine.
-    "São Paulo": 65.6, "Rio de Janeiro": 95.6, "Belo Horizonte": 98.5,
+    "São Paulo": 65.6,
     "Brasília": 49.0, "Salvador": 58.6, "Fortaleza (Regional)": 135.9,
     "Porto Alegre (Regional)": 156.6, "Recife (Regional)": 115.9,
     "Santos (Regional)": 120.1,
@@ -236,7 +236,7 @@ TEXT_WIDTH = {
     "Higashiōsaka": 89.1, "Kurume": 51.3, "Sasebo": 49.5, "Shimonoseki": 85.5,
     # Dallas, 2026-09-30; controls Prague, Tokyo, Houston, Toronto, Yokohama.
     "Dallas": 40.1,
-    "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
+    "Guadalajara (Regional)": 152.7, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
     "Philadelphia": 82.3, "San Diego": 67.4, "San Francisco": 94.3,
@@ -275,6 +275,18 @@ TEXT_WIDTH = {
     # browser pane; controls Newcastle (Regional) 143.1, London, Glasgow.
     "Manchester (Regional)": 153.9, "Birmingham (Regional)": 153.2, "Edinburgh": 69.3,
     "Sheffield": 59.7, "Nottingham (Regional)": 151.7, "Blackpool (Regional)": 139.7,
+    # Belo Horizonte renamed (Regional) by its Contagem extension, 2026-10-03,
+    # local app (lean venv), canvas measureText after document.fonts.load;
+    # controls Belo Horizonte 98.5, Rio de Janeiro, Fortaleza (Regional), Lille
+    # (Regional), Santos (Regional), Recife (Regional).
+    "Belo Horizonte (Regional)": 171.5,
+    # Rio de Janeiro renamed (Regional) by its Duque de Caxias extension; the same
+    # 2026-10-03 run and controls as Belo Horizonte (Regional), control Rio de
+    # Janeiro 95.6 reproduced.
+    "Rio de Janeiro (Regional)": 168.6,
+    # Los Angeles renamed (Regional) by its Long Beach extension; the same
+    # 2026-10-03 run and controls.
+    "Los Angeles (Regional)": 153.8,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

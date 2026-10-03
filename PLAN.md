@@ -439,17 +439,35 @@ Desktop is unaffected — the label is fully visible there.
         Brescia, Catania, Cagliari, Alicante, Alcobendas.
     - [ ] **Regional add-ons to built cities (owner, 2026-09-27)**, main's
       work on a branch held for review time:
-      - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded
+      - [x] **Rio + Duque de Caxias** (**built 2026-10-03 on
+        `extensions-build`**: 98 stations, 125,440 storefronts, the shuttle
+        drawn and its three stations unringed; held for review time, its
+        regional processed files in `data/rio_de_janeiro/processed/regional/`
+        until it lands): SuperVia Saracuruna's three excluded
         stations (Duque de Caxias, Corte Oito, Gramacho); CNEFE 18,698
         storefronts. **First a rail test for the Gramacho–Saracuruna shuttle**,
         which the scope would bring in. **Run 2026-09-30**: up to Gramacho
         passes; Campos Elíseos, Jardim Primavera and Saracuruna, beyond it,
         fail (search-level: SuperVia's notices; no timetable feed found), so
         the line is drawn to its end and only those three are left unringed.
-      - **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
+      - [x] **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
         Eldorado; CNEFE 13,011. Belo Horizonte becomes "(Regional)".
+        **Built 2026-10-03 on `extensions-build`** (22 stations, 58,552
+        storefronts), held for the owner's review time; its regional
+        processed files sit in `data/belo_horizonte/processed/regional/`
+        until it lands, then fold back to `processed/`.
+      - [x] **Los Angeles + Long Beach** (Wave-2 follow-ups (6)): **built
+        2026-10-03 on `extensions-build`** (64 stations, 60,740 storefronts,
+        3,246 of them Long Beach's; `FULLNAME` never fetched), held for review
+        time; its regional processed files in
+        `data/los_angeles/processed/regional/` until it lands.
       - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
         and `data/duque_de_caxias/raw/` (and the staging worktree's).
+    - [x] **Built 2026-10-03 on `extensions-build`, without Richmond and
+      Port Moody**: 44 stations, 15,436 storefronts (Burnaby 2,115, Coquitlam
+      1,016, New Westminster 780 placed by address join), held for review
+      time; regional processed files in `data/vancouver/processed/regional/`
+      until it lands. The history below is kept.
     - [ ] **Vancouver (Regional) + Burnaby, New Westminster, Coquitlam,
       Richmond (owner: a PLAN item, probes first)** - 28 SkyTrain stations
       now excluded. Measured: Coquitlam (licences with lat/long, OGL-BC 2.0,

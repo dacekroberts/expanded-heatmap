@@ -60,9 +60,12 @@ pipeline first. None of the three cities has a licence row yet in
 
 - **Source:** `services3.arcgis.com/A7O8YnTNtzRPIn7T/.../BUSINESS_LICENSES_(RESIDENTS)/FeatureServer/0`,
   a table of 2,736 rows, last edited 2026-09-27.
-- **Buckets:** 907 resident licences (2026-09-30): retail 379, food 303,
-  personal services 225. Approved 2025–2026, classified by NAICS. Drop
-  `RESIDENT_STATUS` = NON-RESIDENT.
+- **Buckets:** 856 resident licences under today's rules (built
+  2026-10-03): retail 379, food 294, personal services 183; 853 placed by
+  the join. The probe's 907 (2026-09-30) predates `naics.py`'s 2026-09-29
+  exclusions as applied: 9 caterers (72232) and 42 catch-all or funeral
+  rows (81299, 8122); the layer is unchanged since 2026-09-27. Approved
+  2025–2026, classified by NAICS. Drop `RESIDENT_STATUS` = NON-RESIDENT.
 - **Placement:** join `CIVIC_ADDRESS` to the City's `Address_Point` layer;
   99.8% joined of 42,690 points.
 - **Never fetch** `LICENCEE_NAME` or `MAILING_ADDRESS`.
@@ -74,10 +77,16 @@ pipeline first. None of the three cities has a licence row yet in
 - **Source:** `services2.arcgis.com/Q6Lq3evZUGfPrN7o/.../Business_Licenses/FeatureServer/0`,
   12,008 rows, each licence listed twice. Last edited 2026-09-04; at most
   1,000 rows per query.
-- **Classify** on `U_SUBCODEDESC`. Estimated, with rows halved: retail about
-  455, food 339, personal services about 243.
-- **Status:** Issued, plus Renewal. Confirm Renewal as current at build.
-- **Location:** lat/long on each row (OGL-BC 2.0).
+- **Classify** on `U_SUBCODEDESC`. Built 2026-10-03: 1,026 kept (retail
+  454, food 332, personal services 240) of 6,002 licences, after collapsing
+  the double listing; 10 mall kiosks out (9 by subtype, 1 by a "Kiosk"
+  unit).
+- **Status:** Issued, plus Renewal. Renewal confirmed current at build: the
+  coming year's renewal folder, most businesses' only record.
+- **Location:** `LAT`/`LONG` on each row hold **Web Mercator meters**
+  (EPSG:3857), not degrees. One name field only, `COLBUSINESSNAME`.
+  Licence: Open Government Licence – Coquitlam v1.0 (OGL-BC 2.0 with the
+  City named).
 - **Never fetch** `COL_BUSINESSPHONE` or `EMAILADDRESS`.
 - **Required statement:** "Contains information licensed under the Open
   Government Licence – Coquitlam."
@@ -95,3 +104,38 @@ pipeline first. None of the three cities has a licence row yet in
 Run `check_personal_exposure.py` and record the privacy verdict. Add the
 three licence rows and their notices. The page becomes "Vancouver
 (Regional)" if it is not already.
+
+## Checks (added by the extensions build, 2026-10-03)
+
+```brief-checks
+[
+  {
+    "id": "burnaby-licence-layer",
+    "claim": "Burnaby's Business Licences layer (MapServer 17) still publishes the fields step 2 reads, and ACCOUNT_NAME, which is never requested",
+    "kind": "http_contains",
+    "url": "https://gis.burnaby.ca/arcgis/rest/services/OpenData/OpenData1/MapServer/17?f=json",
+    "present": ["TRADE_NAME", "LICENCE_TYPE_NAME", "LICENCE_NUMBER", "ACCOUNT_NAME"]
+  },
+  {
+    "id": "coquitlam-licence-layer",
+    "claim": "Coquitlam's Business_Licenses layer still publishes the subtype, status and Web Mercator LAT/LONG fields the loader reads",
+    "kind": "http_contains",
+    "url": "https://services2.arcgis.com/Q6Lq3evZUGfPrN7o/arcgis/rest/services/Business_Licenses/FeatureServer/0?f=json",
+    "present": ["U_SUBCODEDESC", "U_STATUSCODEDESC", "COL_FOLDER", "COLBUSINESSNAME"]
+  },
+  {
+    "id": "new-westminster-licence-table",
+    "claim": "New Westminster's resident licence table still carries NAICS codes and a civic address to join",
+    "kind": "http_contains",
+    "url": "https://services3.arcgis.com/A7O8YnTNtzRPIn7T/ArcGIS/rest/services/BUSINESS_LICENSES_(RESIDENTS)/FeatureServer/0?f=json",
+    "present": ["NAICS_CODE", "CIVIC_ADDRESS", "BUSINESS_NAME", "RESIDENT_STATUS"]
+  },
+  {
+    "id": "new-westminster-address-points",
+    "claim": "New Westminster's Address_Point layer, the join's address file, still carries ADDRESS, HOUSE and STREET",
+    "kind": "http_contains",
+    "url": "https://services3.arcgis.com/A7O8YnTNtzRPIn7T/ArcGIS/rest/services/Address_Point/FeatureServer/0?f=json",
+    "present": ["ADDRESS", "HOUSE", "STREET"]
+  }
+]
+```

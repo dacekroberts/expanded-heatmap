@@ -540,7 +540,7 @@ _NORWAY = ("Oslo", "Bergen")
 _DENMARK = ("Copenhagen", "Aarhus", "Odense")
 _CZECHIA = ("Prague", "Brno", "Plzeň", "Olomouc", "Ostrava",
             "Liberec (Regional)", "Most (Regional)")
-_BRAZIL = ("São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília",
+_BRAZIL = ("São Paulo", "Rio de Janeiro (Regional)", "Belo Horizonte (Regional)", "Brasília",
            "Salvador", "Fortaleza (Regional)", "Porto Alegre (Regional)",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
@@ -662,7 +662,7 @@ _NOTICES = [
     Notice(4, "LA Metro",
      "Rail alignment data for Los Angeles provided by LA Metro. This project "
      "claims no ownership of that data.",
-     False, ("Los Angeles",), every_page=True),
+     False, ("Los Angeles (Regional)",), every_page=True),
     # New York City (notice 5): Local Law 11 forbids a licence, but the Open
     # Data Technical Standards Manual reserves DoITT's right to require the
     # SOURCE, VERSION and MODIFICATIONS of a republished data set. Until
@@ -1486,7 +1486,7 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Reprojected, "
      "filtered and redrawn by this project; station rings and density figures "
      "are this project's own analysis.",
-     False, ("Rio de Janeiro",)),
+     False, ("Rio de Janeiro (Regional)",)),
     # CBS - the shop-vacancy share Rotterdam's page quotes. CC BY 4.0
     # (cbs.nl copyright page, read 2026-09-24): credit CBS, link the licence,
     # say when a figure is recalculated; no endorsement implied, no logo.
@@ -2740,6 +2740,40 @@ _NOTICES = [
      "Business Register, retrieved 2026-10-02; processed by this project. Not "
      "endorsed by Geostat.",
      False, ("Tbilisi",)),
+    # Long Beach (notice 129, the extensions' block 129-136): the MapsLB Terms
+    # of Use require nothing displayed; they bar any use that "suggests City's
+    # endorsement". Displayed by choice, as Seattle's 113, with a
+    # no-endorsement sentence. Wording from the licence read of 2026-10-03,
+    # flagged for the owner at review time.
+    Notice(129, "City of Long Beach (Los Angeles (Regional))",
+     "Long Beach business licenses: City of Long Beach, Business Licenses Public "
+     "View ([MapsLB](https://maps.longbeach.gov/datasets/LongBeachCA::business-"
+     "licenses-public-view/about)), used under the City's [MapsLB Terms of Use]"
+     "(https://maps.longbeach.gov/pages/termsofuse). This map selects, categorizes "
+     "and aggregates the City's records; it is not a City of Long Beach product, "
+     "and the City does not endorse it.",
+     False, ("Los Angeles (Regional)",)),
+    # Vancouver (Regional)'s extension (notices 130-132, 2026-10-03). Each
+    # municipal OGL prescribes its own statement, VERBATIM and not
+    # interchangeable: Burnaby prints the BC default ("Licence – British
+    # Columbia", en dash; credited "City of Burnaby" with a link, owner
+    # 2026-10-02), New Westminster "licenced" with a hyphen, Coquitlam
+    # "Licence – Coquitlam" with an en dash. All terminate on breach.
+    Notice(130, "City of Burnaby (Vancouver (Regional))",
+     "City of Burnaby: Contains information licensed under the Open Government "
+     "Licence – British Columbia. [Open Government Licence – City of Burnaby]"
+     "(https://data.burnaby.ca/pages/open-government-licence)",
+     True, ("Vancouver (Regional)",)),
+    Notice(131, "City of New Westminster (Vancouver (Regional))",
+     "Contains information licenced under the Open Government Licence - City of "
+     "New Westminster. [Open Government Licence - City of New Westminster]"
+     "(https://opendata.newwestcity.ca/pages/terms-of-use)",
+     True, ("Vancouver (Regional)",)),
+    Notice(132, "City of Coquitlam (Vancouver (Regional))",
+     "Contains information licensed under the Open Government Licence – Coquitlam. "
+     "Business license data © City of Coquitlam. [Open Government Licence – "
+     "Coquitlam](https://www.coquitlam.ca/894/Open-Government-Licence)",
+     True, ("Vancouver (Regional)",)),
     # Notices 137-140, from staging's licence reads of 2026-10-02
     # (docs/licence_positions.md, its update section). D.C.'s two ArcGIS items
     # carry CC BY 4.0 over the District's CC0 default: credit, licence link,

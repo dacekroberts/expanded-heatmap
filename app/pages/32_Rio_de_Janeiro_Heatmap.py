@@ -26,11 +26,11 @@ from components import (  # noqa: E402
     set_base_font,
 )
 
-st.set_page_config(page_title="Rio de Janeiro Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
+st.set_page_config(page_title="Rio de Janeiro (Regional) Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
 
-render_city_nav("Rio de Janeiro")
-render_city_title('Rio de Janeiro')
+render_city_nav("Rio de Janeiro (Regional)")
+render_city_title('Rio de Janeiro (Regional)')
 
 # Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
@@ -74,7 +74,9 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended; set as bullets 2026-10-01.
+# calls applied as recommended; set as bullets 2026-10-01. The shuttle and
+# scope bullets name Duque de Caxias since the regional extension (2026-10-03,
+# proposals for the owner's review in docs/decisions_drafts/extensions.md).
 st.markdown(
     """
 **The lines**
@@ -90,8 +92,11 @@ st.markdown(
 - SuperVia's Japeri, Santa Cruz and Belford Roxo lines, with stations further apart or
   trains less often, are not drawn, and neither are the Santa Teresa tram, the Corcovado
   railway or the Complexo do Alemão cable car, closed since 2016.
-- The map covers the **município of Rio de Janeiro**; the Saracuruna line's stations in
-  Duque de Caxias are not counted.
+- Beyond Gramacho the Saracuruna line runs on to Saracuruna as a shuttle, a train about
+  every 50 minutes: it is drawn to its end, but its three stations there are not counted
+  (listed below).
+- The map covers **Rio de Janeiro and Duque de Caxias**, where the Saracuruna line runs on
+  to Gramacho.
 
 **The businesses**
 
@@ -117,8 +122,8 @@ st.markdown(
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
-render_excluded_stations("Rio de Janeiro")
-render_country_links('Rio de Janeiro')
+render_excluded_stations("Rio de Janeiro (Regional)")
+render_country_links('Rio de Janeiro (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
@@ -126,4 +131,4 @@ render_country_links('Rio de Janeiro')
 # BREACH, not a cosmetic gap: four city pages shipped without it because
 # this template did, and on those pages the five mandatory notices were
 # absent rather than collapsed.
-render_site_notices("Rio de Janeiro")
+render_site_notices("Rio de Janeiro (Regional)")

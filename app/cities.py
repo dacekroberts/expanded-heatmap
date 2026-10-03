@@ -132,7 +132,7 @@ CITIES = [
         "label_offset": ("end", -11, 0),
     },
     {
-        "name": "Los Angeles",
+        "name": "Los Angeles (Regional)",
         "region": "United States West",
         "country": "United States",
         "lat": 34.05,
@@ -141,7 +141,7 @@ CITIES = [
         "coverage": "full",
         "mode": "metro",
         "placement": "Register coordinates; corrupt ones geocoded (98.7%)",
-        "data_age": "Fetched 2026-09-19 (no source date)",
+        "data_age": "Fetched 2026-09-19 (no source date); Long Beach 2026-10-03",
         "rail_extra": "Trams",
         "record_kind": "Tax register",
         "categories": "All three",
@@ -149,7 +149,10 @@ CITIES = [
         # WEST OF THE DOT, level, since 2026-09-30, when United States West
         # took Tucson back into its zoom fit and the zoom dropped (the label sat
         # below the dot before that). Re-placed for that zoom;
-        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200.
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200. "(Regional)"
+        # (153.8 px, 2026-10-03) clips it 43% at 375 px in Global and United
+        # States; every other side covers or grazes San Diego, Tucson or San
+        # Francisco. Kept west, the clip flagged for the owner at review time.
         "label_offset": ("end", -11, 0),
     },
     {
@@ -310,12 +313,12 @@ CITIES = [
         "page": "pages/10_Vancouver_Heatmap.py",
         "coverage": "full",
         "mode": "metro",
-        "placement": "Register coordinates",
-        "data_age": "Current-year licenses, fetched 2026-09-21",
+        "placement": "Register coordinates; New Westminster by address join (99.8%)",
+        "data_age": "Current-year licenses, fetched 2026-09-21 to 2026-10-03",
         "rail_extra": "—",
         "record_kind": "License register",
         "categories": "All three",
-        "blurb": "SkyTrain (24 stations across Vancouver and Surrey)",
+        "blurb": "SkyTrain (44 stations across five cities)",
         # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
         # flag exists. See IN_DEFAULT_VIEW below.
         "in_default_view": False,
@@ -941,7 +944,7 @@ CITIES = [
         "label_offset": ("end", -11, 0),
     },
     {
-        "name": "Rio de Janeiro",
+        "name": "Rio de Janeiro (Regional)",
         "lat": -22.9068,
         "lon": -43.1729,
         "page": "pages/32_Rio_de_Janeiro_Heatmap.py",
@@ -958,11 +961,13 @@ CITIES = [
         "in_default_view": False,
         # RIGHT of the dot, clear of São Paulo's name 40 px west. Scored:
         # check_macro_labels.py passes every region at 375, 768 and 1200 with
-        # PROBLEMS 0.
+        # PROBLEMS 0. Re-scored for "(Regional)" (168.6 px, 2026-10-03): still
+        # the only clean side - above covers Belo Horizonte's dot, below and
+        # left meet São Paulo and Santos - at the cost of a 24% clip at 375 px.
         "label_offset": ("start", 11, 0),
     },
     {
-        "name": "Belo Horizonte",
+        "name": "Belo Horizonte (Regional)",
         "lat": -19.9167,
         "lon": -43.9345,
         "page": "pages/33_Belo_Horizonte_Heatmap.py",
@@ -977,9 +982,11 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, SCORED rather than assumed: check_macro_labels.py
-        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
-        "label_offset": ('middle', 0, -22),
+        # LEFT of the dot (2026-10-03). "(Regional)" widened the pill to
+        # 171.5 px: above the dot it grazed Brasília's marker, below it
+        # covered Rio's, right of it was clipped 21% at 375 px. Left scores
+        # PROBLEMS 0 at 375, 768 and 1200 with no graze and no clip.
+        "label_offset": ("end", -12, 0),
     },
     {
         "name": "Brasília",

@@ -35,8 +35,8 @@ standard rings.
 | **Over 95%** (5) | Barcelona 99.9, Osaka 98.2, Tokyo 97.6, Melbourne 96.0, Amsterdam 95.5 |
 | **80–95%** (13) | Madrid 94.8, Copenhagen 94.5, Seoul 93.7, Rotterdam 92.8, Hong Kong 91.2, Stockholm 89.4, Milan 87.3, Kobe 87.3, Kyoto 86.5, Sydney 83.4, Fukuoka 82.3, Berlin 82.0, Sapporo 80.2 |
 | **60–80%** (16) | Riga 77.9, Taipei (Regional) 77.8, Boston 76.2, Seongnam 76.1, Washington D.C. 73.9, Busan 73.9, London 73.6, Bucharest 72.1, San Francisco 71.5, Daegu 71.0, Prague 69.9, Incheon 68.3, Goyang 66.6, Buenos Aires 66.5, Rome 61.4, Montréal 60.5 |
-| **40–60%** (11) | Philadelphia 58.4, Dublin 57.8, Chicago 57.0, Yongin 55.4, Newcastle (Regional) 54.4, Toronto 48.0, Mexico City 47.0, Santos (Regional) 45.6, Glasgow 42.3, Calgary 40.8, Vancouver (Regional) 40.1 |
-| **Under 40%** (16) | Guadalajara (Regional) 31.4, Rio de Janeiro 28.4, Monterrey (Regional) 25.1, San Diego 24.4, Los Angeles 24.2, Recife (Regional) 23.4, São Paulo 22.6, Edmonton 22.2, Porto Alegre (Regional) 20.3, Taichung 19.1, Salvador 19.0, Belo Horizonte 18.4, Brasília 13.8, Fortaleza (Regional) 13.5, Miami (Regional) 12.6, Taoyuan 11.7 |
+| **40–60%** (11) | Philadelphia 58.4, Dublin 57.8, Chicago 57.0, Yongin 55.4, Newcastle (Regional) 54.4, Toronto 48.0, Mexico City 47.0, Santos (Regional) 45.6, Vancouver (Regional) 45.4, Glasgow 42.3, Calgary 40.8 |
+| **Under 40%** (16) | Guadalajara (Regional) 31.4, Rio de Janeiro (Regional) 26.3, Monterrey (Regional) 25.1, San Diego 24.4, Los Angeles (Regional) 24.1, Recife (Regional) 23.4, São Paulo 22.6, Edmonton 22.2, Porto Alegre (Regional) 20.3, Taichung 19.1, Salvador 19.0, Belo Horizonte (Regional) 16.0, Brasília 13.8, Fortaleza (Regional) 13.5, Miami (Regional) 12.6, Taoyuan 11.7 |
 
 ## Every city
 
@@ -93,19 +93,19 @@ standard rings.
 | Santos (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,385 | 11,809 | 45.6% |
 | Glasgow | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,993 | 4,708 | 42.3% |
 | Calgary | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,156 | 15,072 | 40.8% |
-| Vancouver (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,618 | 11,525 | 40.1% |
+| Vancouver (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,010 | 15,436 | 45.4% |
 | Guadalajara (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 36,662 | 116,657 | 31.4% |
-| Rio de Janeiro | 0.1 / 0.2 / 0.3 / 0.6 mi | 30,233 | 106,576 | 28.4% |
+| Rio de Janeiro (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 33,029 | 125,440 | 26.3% |
 | Monterrey (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 14,564 | 58,049 | 25.1% |
 | San Diego | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,228 | 9,124 | 24.4% |
-| Los Angeles | 0.1 / 0.2 / 0.3 / 0.6 mi | 13,900 | 57,527 | 24.2% |
+| Los Angeles (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 14,642 | 60,740 | 24.1% |
 | Recife (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,358 | 44,302 | 23.4% |
 | São Paulo | 0.1 / 0.2 / 0.3 / 0.6 mi | 49,555 | 219,421 | 22.6% |
 | Edmonton | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,374 | 10,702 | 22.2% |
 | Porto Alegre (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,400 | 36,391 | 20.3% |
 | Taichung | 0.1 / 0.2 / 0.3 / 0.6 mi | 12,185 | 63,692 | 19.1% |
 | Salvador | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,056 | 52,938 | 19.0% |
-| Belo Horizonte | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,393 | 45,533 | 18.4% |
+| Belo Horizonte (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 9,346 | 58,552 | 16.0% |
 | Brasília | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,063 | 36,633 | 13.8% |
 | Fortaleza (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,514 | 62,882 | 13.5% |
 | Miami (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,733 | 29,549 | 12.6% |

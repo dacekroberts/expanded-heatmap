@@ -10,8 +10,8 @@
   "map_blob": "48d6a434640c0d0809af604b324ad3df6f147107"
  },
  "los_angeles": {
-  "in_ring": 13892,
-  "all": 57494,
+  "in_ring": 14642,
+  "all": 60740,
   "map_blob": "4fc59d366780040483163c8c033784fd27c4783c"
  },
  "chicago": {
@@ -45,8 +45,8 @@
   "map_blob": "09b3695af5ccabffda00f75ef351a0c33ea7e8c1"
  },
  "vancouver": {
-  "in_ring": 4618,
-  "all": 11525,
+  "in_ring": 7010,
+  "all": 15436,
   "map_blob": "c92496c30b14a2bf29d7c4ddba3297b62d764fac"
  },
  "montreal": {
@@ -155,13 +155,13 @@
   "map_blob": "19ff772e93099acdfc74dbb85c01abba13b1ac6d"
  },
  "rio_de_janeiro": {
-  "in_ring": 30293,
-  "all": 106723,
+  "in_ring": 33029,
+  "all": 125440,
   "map_blob": "42f5fa0a56374c92f3cab8e56fd5261ab8bcce69"
  },
  "belo_horizonte": {
-  "in_ring": 8404,
-  "all": 45597,
+  "in_ring": 9346,
+  "all": 58552,
   "map_blob": "8c860bf53ce1103176b0f2525b6b977e06c38d65"
  },
  "brasilia": {

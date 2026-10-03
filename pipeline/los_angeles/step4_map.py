@@ -26,7 +26,8 @@ from pipeline.los_angeles.config import (  # noqa: E402
     BUSINESSES_GEOCODED_CSV,
     CITIES_BOUNDARY_GEOJSON,
     CITY_BOUNDARY_FIELD,
-    CITY_BOUNDARY_NAME,
+    NAME,
+    SCOPE_CITY_NAMES,
     GTFS_ZIP,
     HEATMAP_HTML,
     CRS_GEOGRAPHIC,
@@ -69,12 +70,12 @@ def main():
 
     cities = gpd.read_file(CITIES_BOUNDARY_GEOJSON)
     cities = cities.set_crs(CRS_GEOGRAPHIC) if cities.crs is None else cities.to_crs(CRS_GEOGRAPHIC)
-    city_geometry = cities[cities[CITY_BOUNDARY_FIELD] == CITY_BOUNDARY_NAME].geometry.union_all()
+    city_geometry = cities[cities[CITY_BOUNDARY_FIELD].isin(SCOPE_CITY_NAMES)].geometry.union_all()
 
     render_heatmap(
         output_path=HEATMAP_HTML,
         map_title="Los Angeles Metro Rail Business Density Heatmap",
-        city_name="Los Angeles",
+        city_name=NAME,
         system_name="Metro Rail",
         stations=pd.read_csv(STATIONS_CSV),
         businesses=pd.read_csv(BUSINESSES_GEOCODED_CSV, dtype={"naics": str}),

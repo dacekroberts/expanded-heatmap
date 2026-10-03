@@ -30,5 +30,13 @@
     "file": "osm_rail.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T15:58:45+00:00 (cache file time)"
+  },
+  "cnefe:3301702_DUQUE_DE_CAXIAS.zip": {
+    "file": "3301702_DUQUE_DE_CAXIAS.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/33_RJ/3301702_DUQUE_DE_CAXIAS.zip",
+    "bytes": 10850283,
+    "sha256": "a623c397f2ea1da70a901117d2abedb360e08ff31ec1690e346a69ba7949c14c",
+    "retrieved": "2026-09-28T05:27:32+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:53:37 GMT"
   }
 }

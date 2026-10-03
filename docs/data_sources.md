@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
@@ -96,7 +96,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
-| Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
+| Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro (Regional), Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
@@ -173,8 +173,8 @@ timeout.<!-- /internal -->
 ## Boundary layers
 
 Used to scope stations and businesses to the city. Not optional: San Diego's
-Trolley serves six other cities, and 54 of Los Angeles' 110 rail stations lie
-in 23 other municipalities.
+Trolley serves six other cities, and 46 of Los Angeles (Regional)'s 110 rail stations lie
+in 21 other municipalities and unincorporated county land.
 
 The rows, and the notes on individual cities' layers, are in each country's
 file.
@@ -3394,6 +3394,76 @@ review time).
 - **MUST DO:** `check_personal_exposure.py shimonoseki` with its Japan pass,
   run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
   ("Shimonoseki built", 2026-10-03).<!-- /internal -->
+
+**129. City of Long Beach (Los Angeles (Regional)) — displayed by choice, not required**
+(written into `render_site_notices()` with Los Angeles (Regional), 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the MapsLB Terms of Use
+  (`https://maps.longbeach.gov/pages/termsofuse`), which the layer's
+  `licenseInfo` incorporates: "you are granted a license to copy, publish,
+  distribute and/or transmit the Data, to adapt the Data and to exploit the
+  Data for commercial and/or personal use". The indemnity is triggered only
+  by a breach of the terms, and was accepted by the owner (2026-09-30). Rows
+  in [`data_sources/united-states.md`](data_sources/united-states.md).
+- **MUST DISPLAY**: nothing. The City is credited, with a link to its terms
+  and a sentence saying it does not endorse the map, because the terms bar
+  "any way that suggests City's endorsement of your use".
+- **MUST NOT**: suggest the City's endorsement (no "official", no City seal or
+  logo); call the data current or complete.
+- **MUST DO**: nothing. The licence holder's name (`FULLNAME`) is never
+  fetched; the removal rule is the safety net.
+
+**130. City of Burnaby (Vancouver (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Vancouver (Regional)'s extension, 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Open Government Licence – City of Burnaby
+  (`https://data.burnaby.ca/pages/open-government-licence`), the BC licence
+  v2.0. Rows in [`data_sources/canada.md`](data_sources/canada.md).
+- **MUST DISPLAY**: the statement the City prints, verbatim:
+
+  > `Contains information licensed under the Open Government Licence – British Columbia.`
+
+  with a link to the licence where possible, credited "City of Burnaby".
+  Note the British "Licence" and the EN DASH.
+- **MUST NOT**: suggest official status or the City's endorsement; use its
+  names, crests or logos; use Personal Information (FOIPPA Schedule 1).
+- **MUST DO**: nothing further. The licence terminates automatically on
+  breach. `ACCOUNT_NAME` is never fetched.
+
+**131. City of New Westminster (Vancouver (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Vancouver (Regional)'s extension, 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Open Government Licence - City of New
+  Westminster v1.0 (`https://opendata.newwestcity.ca/pages/terms-of-use`),
+  covering both the licence table and the address points.
+- **MUST DISPLAY**, verbatim, the City's spelling and hyphen kept:
+
+  > `Contains information licenced under the Open Government Licence - City of New Westminster.`
+
+  with a link to the licence.
+- **MUST NOT**: suggest official status or endorsement; use the City's
+  official symbols; use Personal Information.
+- **MUST DO**: nothing. `LICENCEE_NAME` and `MAILING_ADDRESS` are never
+  fetched; a licence issued under a person's own name shows its business
+  type.
+
+**132. City of Coquitlam (Vancouver (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Vancouver (Regional)'s extension, 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Open Government Licence – Coquitlam v1.0
+  (`https://www.coquitlam.ca/894/Open-Government-Licence`), OGL-BC 2.0 with
+  the Province replaced by the City.
+- **MUST DISPLAY**, verbatim:
+
+  > `Contains information licensed under the Open Government Licence – Coquitlam.`
+
+  with a link to the licence; the item's own credit, "© City of Coquitlam",
+  is shown beside it.
+- **MUST NOT**: suggest official status or endorsement; use the City's
+  names, crests or logos; use Personal Information.
+- **MUST DO**: nothing. `COL_BUSINESSPHONE` and `EMAILADDRESS` are never
+  fetched.
+
 **137. DLCP and OCTO (Washington D.C.) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-03, from staging's licence reads
 of 2026-10-02.)

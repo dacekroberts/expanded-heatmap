@@ -47,13 +47,13 @@ st.markdown(
     """
 **The lines**
 
-- **This map covers two cities, Vancouver and Surrey.** SkyTrain is regional and Surrey has
-  no rail of its own, so a Vancouver-only map would cut the network at a line no rider
-  recognizes.
-- Of 54 stations, 20 are in Vancouver and 4 in Surrey. The other 30 are in Burnaby,
-  Richmond, New Westminster, Coquitlam and Port Moody. They are left out because each of those
-  cities' business registers would have to be sourced and verified separately; all 30 are
-  listed below.
+- **This map covers five cities: Vancouver, Surrey, Burnaby, New Westminster and
+  Coquitlam.** SkyTrain is regional, so a Vancouver-only map would cut the network at a line
+  no rider recognizes.
+- Of 54 stations, 44 are in those five cities: 20 in Vancouver, 11 in Burnaby, 5 in New
+  Westminster, 4 in Coquitlam and 4 in Surrey. The other 10, in Richmond and Port Moody, are
+  left out: Richmond's business directory may be used only for research and private use,
+  and Port Moody's license list carries no addresses. All 10 are listed below.
 - **Three lines are drawn** from TransLink's own route geometry, each labeled directly on
   the map and in the legend: the Expo Line, the Millennium Line and the Canada Line, in
   TransLink's own colors.
@@ -62,6 +62,8 @@ st.markdown(
 
 **The businesses**
 
+- Each city's businesses come from its own license register. New Westminster's licenses carry
+  no map point, so each is placed at its address from the City's own address points.
 - Home occupations are excluded - a home business is not a storefront - and in Surrey that
   is about half of the register.
 - **Where a license carries no trade name, the pin shows the business type instead of a
@@ -75,8 +77,8 @@ st.markdown(
 
 **Reading the map**
 
-- **The two cities are licensed by different authorities, so read them as two measurements
-  that share a map rather than one continuous surface.**
+- **The five cities are licensed by five different authorities, so read them as five
+  measurements that share a map rather than one continuous surface.**
 - Surrey's four stations reach a far smaller share of its own commerce than Vancouver's
   twenty do, because Surrey's shops sit along arterial roads the SkyTrain does not follow.
 - **Known limitation.** Roughly half of Vancouver's current-year licenses carry no

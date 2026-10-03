@@ -103,7 +103,7 @@ page.
   Metrorail reaches Maryland and Virginia, Toronto's Line 1 ends past the city
   limit at Highway 407, and Mexico City's Línea B crosses into the State of
   México. **Several maps are deliberately regional instead** — among them
-  Miami with its county, Vancouver with Surrey, Guadalajara with three
+  Miami with its county, Vancouver with four neighbors, Guadalajara with three
   neighboring municipios, and Lille across eleven communes — because there one
   registry covers the whole area. Guadalajara
   goes one step further and leaves out a municipio it could have included:
@@ -190,7 +190,7 @@ Diego.
 Registries differ, so some judgments are local. Each was sampled against that
 city's own data.
 
-### Los Angeles — All other personal services (NAICS 812990)
+### Los Angeles (Regional) — All other personal services (NAICS 812990)
 
 Since 2026-09-29 this catch-all is left out in every city.
 
@@ -209,6 +209,26 @@ mobile food (348), caterers (147) and food-service contractors (60). **Kept
 because it cannot be split:** `722300` "special food services" (3,145 pins),
 which this registry uses for caterers, concession stands and food trucks alike,
 but also for taquerias and cafés; all of it counts as food service.
+
+### Los Angeles (Regional) — Long Beach's licenses, and licenses to work in someone else's shop
+
+**Left out of the City of Long Beach's licenses**, counted on its active, in-city
+licenses that are not home-based (20,204 on 2026-10-03): a person's own license to
+work inside someone else's shop — barber and beauty booths (232), nail booths (9)
+and massage technicians (25) — since the shop's own license keeps the shop on the
+map; event caterers (97); mobile food (33), sidewalk vendors (45), food carts (4)
+and farmers' markets (7); the register's services catch-all, "General Services –
+Other" (314); and every license type that is not a shop, café or salon, such as
+apartment houses (6,612), commercial space for rent (2,782) and offices.
+
+**Missing rather than excluded** - licenses the City marks as home-based or as
+outside the city, and any license that is not active, are not read at all. A
+business needing no license of its own does not appear.
+
+**Shown, but not named** - a Long Beach license with no trade name (520 dots)
+shows its street address; the license holder's name is never read.
+
+**Stations.** The A Line's eight stations in Long Beach are drawn and ringed.
 
 ### Sacramento — expired licenses, withheld addresses, and names that read as a person's
 
@@ -971,6 +991,49 @@ reports a 6.73% "person-like name at a residential unit" figure for Vancouver
 that is an artifact of the city's conventions - San Diego's measurement gap
 inverted, a false high rather than a false low. The zoning measure above is
 the one its verdict rests on.
+
+### Vancouver (Regional) - Burnaby, New Westminster and Coquitlam, three more registers
+
+Since 2026-10-03 the map adds Burnaby, New Westminster and Coquitlam, each from
+its own license register, with every license type given a written verdict on
+the same rules as Vancouver's and Surrey's.
+
+**Burnaby** (20,054 approved licenses, 2026-10-02): out are home-based
+businesses (2,946) and house, apartment and short-term rentals; the
+inter-municipal license (1,183) and the register's miscellaneous catch-all
+(116); contractors, most of them recorded at one placeholder point rather than a
+premises; offices, clinics and registered therapists (1,039); auto repair, car
+washes, tailors and shoe repairers; gyms and other recreation; mobile
+businesses, food peddlers and mall carts; and its optometrist and optician type
+(39), filed under health services, as Surrey's optometrists are. A
+license listed more than once at one point is one dot.
+
+**Coquitlam** (6,002 licenses, each listed twice by the City, 2026-09-04): out
+are its home occupations, residential day cares and bed and breakfasts; its two
+fee-level catch-alls, "Level 1" and "Level 2" (211); contract caterers (7) and
+a mobile hairdresser; mall kiosks (10); one massage parlor licensed as a
+high-impact business; offices, schools, recreation, vehicle rentals and
+vending. A license under renewal for the coming year counts as current.
+
+**New Westminster** (2,736 resident licenses, 2026-09-27): sorted by NAICS
+code, the same lines as the NAICS cities; the inter-municipal licenses (218)
+fall outside the categories.
+
+**Missing rather than excluded** - New Westminster's licenses carry no point:
+853 of 856 are placed by joining the address to the City's own address points
+(846 exactly, 8 at the building when the unit is missing from the address
+file); 2 cannot be placed and are not drawn. Licenses issued to businesses
+based outside each city are not in these registers.
+
+**Shown, but not named** - where a New Westminster or Coquitlam license is
+issued under a person's own name, printed surname first, the dot shows the
+business type instead (8 dots). The three cities' licenses exclude personal
+information from what they grant, and this map reads that cautiously.
+
+**Stations.** Burnaby's 11 SkyTrain stations, New Westminster's 5 and
+Coquitlam's 4 are drawn and ringed. Richmond's 8 and Port Moody's 2 are still
+left out: Richmond's business directory may be used only for research and
+private use, and Port Moody's license list carries no address.
 
 ### Montréal - vacant units, which a survey can see and a register cannot
 
@@ -2187,14 +2250,14 @@ drawn with all eight of its stations. Not drawn: CPTM Linhas 7, 8 and 10 to 13, 
 stations inside the city are 2 to 3.5 km apart; Linha 6, under construction, whose
 first six stations run only a free weekday trial service; buses and bus corridors.
 
-### Rio de Janeiro - the same census, and rail from two sources
+### Rio de Janeiro (Regional) - the same census, and rail from two sources
 
-**Excluded by what the enumerator wrote** - vacant premises (22,954), parking and storage (18,528), vehicle and repair workshops (15,287), offices and professional premises (14,664), industry and trades (9,798), public, civic and education premises (7,970), places of worship (6,690), events venues (2,526), accommodation (1,929) and other non-premises (1,657); and 4,155 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (28,116), parking and storage (22,221), vehicle and repair workshops (18,142), offices and professional premises (16,462), industry and trades (12,047), public, civic and education premises (9,107), places of worship (8,256), events venues (2,930), accommodation (2,198) and other non-premises (1,951); and 5,198 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
 
-**Missing rather than excluded** - 51,532 establishments whose description no rule can
+**Missing rather than excluded** - 61,362 establishments whose description no rule can
 read, mostly bare brand or trade names: about a third of those that might be storefronts, a little more near the stations - about 35 in a hundred.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
@@ -2203,25 +2266,27 @@ during its fieldwork.
 **Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
 stalls, as in São Paulo.
 
-**Shown, but not named** - at an address that is also a home (55% of dots), the dot
+**Shown, but not named** - at an address that is also a home (57% of dots), the dot
 shows its category, never the enumerator's description.
 
 **One dot for many** - a shopping center or gallery recorded as one entry is one dot.
 
 **Stations.** MetrôRio Linhas 1, 2 and 4, the VLT Carioca's four lines and SuperVia's
-Deodoro and Saracuruna lines are drawn; the Saracuruna line's three stations in Duque de
-Caxias are left out. Not drawn: SuperVia's Japeri, Santa Cruz and Belford Roxo lines,
+Deodoro and Saracuruna lines are drawn, the map covering Duque de Caxias with Rio, so the
+Saracuruna line's stations there up to Gramacho are counted. Beyond Gramacho the line runs
+on as a shuttle, a train about every 50 minutes: it is drawn to Saracuruna, but its three
+stations there (Campos Elíseos, Jardim Primavera and Saracuruna) are left out. Not drawn: SuperVia's Japeri, Santa Cruz and Belford Roxo lines,
 with stations further apart or trains less often; the Santa Teresa tram; the Corcovado
 railway; and the Complexo do Alemão cable car, closed since 2016.
 
-### Belo Horizonte - the same census, and a line opened in July 2026
+### Belo Horizonte (Regional) - the same census, and a line opened in July 2026
 
-**Excluded by what the enumerator wrote** - vacant premises (12,939), vehicle and repair workshops (8,629), offices and professional premises (8,369), parking and storage (7,514), industry and trades (6,001), public, civic and education premises (3,698), places of worship (1,915), events venues (580), accommodation (246) and other non-premises (557); and 1,203 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (17,000), vehicle and repair workshops (11,367), parking and storage (10,463), offices and professional premises (10,437), industry and trades (8,475), public, civic and education premises (4,606), places of worship (2,437), events venues (754), accommodation (325) and other non-premises (776); and 1,694 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
 
-**Missing rather than excluded** - 27,675 establishments whose description no rule can
+**Missing rather than excluded** - 36,922 establishments whose description no rule can
 read, mostly bare brand or trade names: about four in ten of those that might be storefronts, slightly more near the stations.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
@@ -2230,13 +2295,13 @@ during its fieldwork.
 **Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
 stalls, as in São Paulo.
 
-**Shown, but not named** - at an address that is also a home (36% of dots), the dot
+**Shown, but not named** - at an address that is also a home (40% of dots), the dot
 shows its category, never the enumerator's description.
 
 **One dot for many** - a shopping center or gallery recorded as one entry is one dot.
 
 **Stations.** Metrô BH Linhas 1 and 2 are drawn, Linha 2 running at weekday peak hours
-only since it opened on 3 July 2026; Linha 1's two stations in Contagem are left out.
+only since it opened on 3 July 2026; the map covers Contagem with Belo Horizonte, so Linha 1's two western stations, Eldorado and Novo Eldorado, are counted.
 
 ### Brasília - the same census, where an address names a block
 
@@ -5132,7 +5197,7 @@ own section above describes it.
   because each catches people the other misses: the parentheses find 63
   storefront rows the pattern misses, mostly three-part and non-Anglo names,
   and the pattern finds about 10 registrants who did not use parentheses.
-  **88 pins across Vancouver and Surrey display their business type instead of
+  **92 pins across Vancouver (Regional) display their business type instead of
   a name.** No pin shows a name the pipeline substituted for a missing trade
   name.
 - A residential address is inferred from indicators like "APT" or a space

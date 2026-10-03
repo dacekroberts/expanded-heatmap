@@ -224,7 +224,7 @@ register covers them all, or because the rail network only makes sense that way.
 - **Lose the most stations to the boundary:** Seoul (227), Melbourne (199),
   Sydney (157; both keep to one council's area), Paris (76), Osaka (76),
   Copenhagen (59), Washington
-  D.C. (58), Tokyo (55), Los Angeles (54), Rotterdam (52), Barcelona (50), Madrid (49), Boston (43).
+  D.C. (58), Tokyo (55), Rotterdam (52), Barcelona (50), Madrid (49), Los Angeles (Regional) (46), Boston (43).
 - **Reason:** a register covers one jurisdiction, so rings outside it would read as
   empty. The French cities keep to the commune so that they stay comparable with one
   another, although SIRENE covers the neighbouring communes too.
@@ -246,9 +246,9 @@ others most of the city is beyond walking distance of the network. That depends 
 how far the network reaches, not on the data.
 - **90% or more inside the rings:** Barcelona 100%, Paris 98%, Osaka 98%, Tokyo 98%
   (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
-- **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte
-  18%, Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
-  Recife 23%, Los Angeles 24%, San Diego 24%, Birmingham (Regional) 17%.
+- **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte (Regional) 16%,
+  Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
+  Recife 23%, Los Angeles (Regional) 24%, San Diego 24%, Birmingham (Regional) 17%.
 - **Reason:** network extent against the area in scope. Share = in-ring heat points ÷
   all-storefront heat points in each committed map.
 
@@ -269,7 +269,7 @@ name at their home.
   owners and partnerships of individuals, by the permit's organisation type).
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
-- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Seattle (Regional) (166
+- **Type in place of a personal name:** Vancouver (Regional) (92 pins). Seattle (Regional) (166
   licenses under a person's own name, and 260 Bellevue licenses with no trade name, show
   their category). Buffalo (42 salons licensed under a person's own name show the licence type). Sacramento (525 businesses whose name reads as a person's show their description). Kobe (10 pins: a
   trade name that is the operator's own name shows its permit type). Osaka (9 pins,
@@ -531,7 +531,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **United States** | | | | | |
 | San Diego | Trolley (light rail), 5 lines | Coaster, Sprinter | MTS GTFS; gate 3 exact | City | 16 / 0 |
 | San Francisco | Muni Metro J K L M N T + F Market & Wharves | BART, Caltrain, cable cars | SFMTA GTFS (mirror); gate 3 exact | City and County | 0 / 85 |
-| Los Angeles | Metro Rail A B C D E K (heavy + light) | Metrolink | LA Metro rail GTFS; gate 3 exact | City | 54 / 0 |
+| Los Angeles (Regional) | Metro Rail A B C D E K (heavy + light) | Metrolink | LA Metro rail GTFS; gate 3 exact | City of LA + Long Beach | 46 / 0 |
 | Chicago | 'L', 7 lines | Metra; Yellow Line | CTA GTFS; gate 3 exact, less State/Lake (closed) | City | 18 / 0 |
 | New York | Subway (11 trunk groups) + Staten Island Rwy | LIRR | MTA GTFS; gate 3 against the MTA's station register | Five boroughs | 0 / 0 |
 | Philadelphia | MFL, BSL + subway-surface and Girard trolleys | Regional Rail; NHSL, Media–Sharon Hill (outside city) | SEPTA GTFS; gate 3 exact on the L, B, G and the tunnel; T branches not gated | City | 7 / 162 |
@@ -549,7 +549,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Tucson | Sun Link streetcar, one line | Buses | OpenStreetMap route relations; gate 3 exact | City (TIGER) | 0 / 0 |
 | New Orleans | RTA streetcars 12, 46, 47, 48, 49 | Buses, ferries; OSM's stale ref 2 | OpenStreetMap route relations; 46 and 49 stops by node; gate 3 exact (RTA) | City (TIGER; Orleans Parish) | 0 / 0 |
 | **Canada** | | | | | |
-| Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS; gate 3 exact | Vancouver + Surrey | 30 / 0 |
+| Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS; gate 3 exact | Vancouver, Surrey, Burnaby, New Westminster, Coquitlam | 10 / 0 |
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS; gate 3 exact | Agglomeration (island) | 11 / 0 |
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
 | Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS; gate 3 exact | City | 0 / 0 |
@@ -623,8 +623,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Den Haag | HTM trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17, 19 and RandstadRail 3, 4, 34 (14 lines) | RandstadRail E (RET metro, a stub: 4 of 23 stops inside), the 9S short working, buses, NS | OpenStreetMap route relations; gate 3 exact (HTM) | Gemeente | 64 / 0 |
 | **Brazil** | | | | | |
 | São Paulo | Metrô L1–5, L15 (monorail) + CPTM L9 | CPTM 7, 8, 10–13; L6, L17 (building) | OpenStreetMap (GeoSampa for status) | Município | 2 / 0 |
-| Rio de Janeiro | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | Município | 3 / 0 |
-| Belo Horizonte | Metrô L1, L2 | Vitória-Minas (intercity) | OpenStreetMap | Município | 2 / 0 |
+| Rio de Janeiro (Regional) | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna (drawn to its end; 3 shuttle stations not ringed) | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | 2 municípios | 3 / 0 |
+| Belo Horizonte (Regional) | Metrô L1, L2 | Vitória-Minas (intercity) | OpenStreetMap | 2 municípios | 0 / 0 |
 | Brasília | Metrô Verde, Laranja | 2 stations under construction | OpenStreetMap (IPEDF for status) | Federal District | 0 / 0 |
 | Salvador | Metrô L1, L2 | — | OpenStreetMap | Município | 1 / 0 |
 | Fortaleza (Regional) | Metrofor Linha Sul | 3 diesel lines | OpenStreetMap | 4 municípios | 0 / 0 |
@@ -722,7 +722,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **United States** | | | | | |
 | San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 551 / 598 | Undercount: neighbourhoods registered under own name (PLAN) |
 | San Francisco | License register | Registered Business Locations | NAICS | 5,038 / 4,591 / 2,091 | Floor: about 37% of rows have NAICS (DEC) |
-| Los Angeles | Tax register | Listing of Active Businesses | NAICS | 8,069 / 3,817 / 2,014 | Floor: about 9% of rows lack NAICS (DEC) |
+| Los Angeles (Regional) | Tax register; Long Beach's license register | Listing of Active Businesses; Long Beach Business Licenses Public View | NAICS; Long Beach's license types | 8,360 / 4,094 / 2,188 | Floor: about 9% of LA's rows lack NAICS (DEC) |
 | Chicago | License register | Business Licenses | Own licence types | 5,476 / 4,196 / 2,049 | — |
 | New York | 4 activity registers | DOHMH, NYS food stores, NYS salons, DCWP | Per-source dispatch | 14,822 / 22,060 / 7,478 | Retail thin |
 | Philadelphia | License register (activities) | L&I Business Licenses | Own licence types | 770 / 4,081 / — | No Personal services; Retail = food retail |
@@ -740,7 +740,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Tucson | License register | City of Tucson BUSLIC (active licences, rebuilt daily) | NAICS | 125 / 149 / 66 | Not a complete listing, in the City's own words |
 | New Orleans | License register | City of New Orleans Active Occupational Licenses (daily, CC0) | Own text taxonomy, mapped to NAICS codes | 935 / 978 / 218 | Personal services thin |
 | **Canada** | | | | | |
-| Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
+| Vancouver (Regional) | 5 licence registers | Vancouver licences; Surrey directory; Burnaby, Coquitlam and New Westminster licences | Own types; NAICS (New Westminster) | 2,967 / 2,617 / 1,426 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
 | Calgary | License register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
 | Edmonton | License register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
@@ -814,8 +814,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Den Haag | Permit layer + building register | The Gemeente's Horecavergunningen layer; BAG shop units | Per-source (2 buckets) | Shops & services 3,813 / Food 1,968 | Retail and Personal merged |
 | **Brazil** (all nine) | Census of addresses (2022) | IBGE CNEFE | Free-text keyword rules | see below | A third to a half of plausible storefronts unreadable |
 | São Paulo | | | | 25,968 / 15,331 / 8,256 | about 1/3 unreadable |
-| Rio de Janeiro | | | | 15,085 / 10,364 / 4,784 | about 1/3 |
-| Belo Horizonte | | | | 4,634 / 2,355 / 1,404 | about 4 in 10 |
+| Rio de Janeiro (Regional) | | | | 16,482 / 11,216 / 5,331 | about 1/3 |
+| Belo Horizonte (Regional) | | | | 5,105 / 2,616 / 1,625 | about 4 in 10 |
 | Brasília | | | | 2,808 / 1,246 / 1,009 | about 4 in 10 |
 | Salvador | | | | 5,131 / 3,312 / 1,613 | about 1/3 |
 | Fortaleza (Regional) | | | | 5,255 / 1,964 / 1,295 | about 4 in 10 |
@@ -910,7 +910,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **United States** | | | |
 | San Diego | Source coordinates (98.4% populated) | None on page | Nonstore 454, parking (project-wide) |
 | San Francisco | Source point | Surface stops thinned | 812990 "solo massage"; individual practitioner licences (tattoo, massage), 2026-10-01 |
-| Los Angeles | Source + Census geocoder for corrupt points (98.7% recovered) | Corrupt coordinates geocoded | 812990 catch-all (30.7% of storefronts) |
+| Los Angeles (Regional) | Source + Census geocoder for corrupt points (98.7% recovered); Long Beach's register points | Corrupt coordinates geocoded | 812990 catch-all (30.7% of storefronts); Long Beach's booth and practitioner licenses |
 | Chicago | Source coordinates | Licences without coordinates left off | Home-based, peddlers, endorsements, Limited Business |
 | New York | Source + Census geocoder (582 of 1,449 recovered; 1.4% lost) | Retail thin; possible double counts | Person-held licences, contractors, chair renters |
 | Philadelphia | Source geometry | Newsstands mostly absent | Rental (79% of register), short-let hosts |
@@ -928,7 +928,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Tucson | Register coordinates (92.4%); 539 not geocoded, 23 outside the city | The City calls its list not complete | Home occupations; non-store sellers, caterers, mobile food, parking; apartments (19); address shown for a person's licence or a business named only as a person |
 | New Orleans | Register coordinates (95.6%); 219 at the register's 0,0, 1 outside the city | A licence is not a shopfront | Event and festival vendors, home offices, flea-market stalls, street artists, video poker; caterers, mobile food, parking; address shown where no business name or a person's |
 | **Canada** | | | |
-| Vancouver (Regional) | Source coordinates | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage |
+| Vancouver (Regional) | Source coordinates; New Westminster by address join (99.8%) | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage; Burnaby's and Coquitlam's catch-alls, Coquitlam's mall kiosks; own-name licences shown by type (OGL personal-information exemption, read cautiously, owner 2026-10-03) |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
 | Calgary | Source point | No home-business flag | Endorsements; body rub / escort (sensitivity) |
 | Edmonton | Source coordinates | Personal services overstated | Non-commercial licence types (43%); adult services (sensitivity) |
@@ -1093,7 +1093,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **United States** | | | | | | |
 | San Diego | UNKNOWN (2026-09-18) | — | 0.6 mi | Yes | 24% | Trade name |
 | San Francisco | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 72% | Name |
-| Los Angeles | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 24% | Trade name, else registrant |
+| Los Angeles (Regional) | UNKNOWN (≈2026-09-19); Long Beach's layer, edited nightly, fetched 2026-10-03 | — | 0.6 mi | Yes | 24% | Trade name, else registrant (Long Beach: else street address) |
 | Chicago | Active licences (2026-09-20) | — | 0.6 mi | Yes | 57% | Name |
 | New York | UNKNOWN (2026-09-21) | — | 0.3 mi | Yes | 71% | Name |
 | Philadelphia | Active licences (2026-09-21) | — | 0.6 mi | Yes | 58% | Trade name (from "LEGAL (TRADE)") |
@@ -1111,7 +1111,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Tucson | Active licences (2026-09-30) | B | 0.3 mi | Yes | 6% | Account name; address for a person's licence |
 | New Orleans | Active licences, daily (2026-09-30) | B | 0.3 mi | Yes | 45% | Business name, never the owner's; address where none |
 | **Canada** | | | | | | |
-| Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
+| Vancouver (Regional) | Current-year licences (fetched 2026-09-21 to 2026-10-03) | — | 0.6 mi | Yes | 45% | Name; type on 92 pins |
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |
 | Calgary | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 41% | Trade name |
 | Edmonton | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 22% | Business name |
@@ -1185,8 +1185,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Den Haag | Permit layer edited 2025-05-23 (2026-10-01) | B | 0.3 mi | Yes | 93% | Permit trade name (food); address (shops) |
 | **Brazil** | | | | | | |
 | São Paulo | 2022 census (file 2024-05-20) | B | 0.6 mi | Yes | 23% | Enumerator's description; category only at homes (37%) |
-| Rio de Janeiro | same | B | 0.6 mi | Yes | 28% | same (55%) |
-| Belo Horizonte | same | B | 0.6 mi | Yes | 18% | same (36%) |
+| Rio de Janeiro (Regional) | same | B | 0.6 mi | Yes | 26% | same (57%) |
+| Belo Horizonte (Regional) | same | B | 0.6 mi | Yes | 16% | same (40%) |
 | Brasília | same | B | 0.6 mi | Yes | 14% | same (69%) |
 | Salvador | same | B | 0.6 mi | Yes | 19% | same (56%) |
 | Fortaleza (Regional) | same | B | 0.6 mi | Yes | 14% | same (54%) |
