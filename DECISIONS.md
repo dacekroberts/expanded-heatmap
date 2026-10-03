@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**384 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**385 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -71,6 +71,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [check_no_fetch_in_steps.py follows every module a step imports](#2026-10-02---check_no_fetch_in_stepspy-follows-every-module-a-step-imports)
 - [The footer's unsettled-terms paragraph names every permissive reading; the notices drawn as one block (owner)](#2026-10-02---the-footers-unsettled-terms-paragraph-names-every-permissive-reading-the-notices-drawn-as-one-block-owner)
 - [SanGIS's indemnity and general release accepted for San Diego's boundaries and parcels (owner)](#2026-10-02---sangiss-indemnity-and-general-release-accepted-for-san-diegos-boundaries-and-parcels-owner)
+- [The public repository linked from every page, for Paris's Licence Mobilités and six ODbL sources](#2026-10-02---the-public-repository-linked-from-every-page-for-pariss-licence-mobilités-and-six-odbl-sources)
 
 **2026-10-01**
 
@@ -16079,3 +16080,27 @@ Recorded by the cleanup session from the Main Building Session's findings of
     should say SanGIS.
   - The row records the acceptance. It lands with the follow-up that adds
     staging's eight licence rows (PLAN).
+
+### 2026-10-02 - The public repository linked from every page, for Paris's Licence Mobilités and six ODbL sources
+
+- **The gap.** Staging's licence ranking found it, and the visuals session
+  raised it for Paris. Licence Mobilités Art. 5.8 (Paris) and ODbL 4.6
+  (Tisseo, STAR, TaM, TAG, LiA, Angers) are each met by a public repository
+  carrying the pipeline and the derived data, "PROVIDED it stays linked from
+  the site" (`app/components.py`'s own note; `docs/data_sources.md`). Nothing
+  in `app/` linked it. Licence Mobilités ends "de plein droit, sans préavis"
+  on breach (Art. 11.1).
+- **Fixed now rather than at review time.** `render_site_notices()` carries
+  "Code, pipeline and derived data (GitHub)", linked to
+  github.com/dacekroberts/expanded-heatmap. The link sits outside
+  `show_links`, so the three reference pages carry it too.
+  - The repository answers publicly: HTTP 200 without logging in.
+  - Checked in a local render on Paris, About the Data and the Overview: one
+    link each, opening in a new tab.
+- **The owner's question:** whether the licence already lapsed in the period
+  without the link. If it ended on breach, Paris may need a fresh acceptance,
+  which is taken by continuing to use the data under the published licence.
+  Recorded for the owner, not decided here. The visuals session keeps Paris
+  out of public visuals meanwhile.
+- **Header icons, still for review time:** GitHub, and LinkedIn at the URL
+  staging relayed. The owner is to confirm the LinkedIn link directly.

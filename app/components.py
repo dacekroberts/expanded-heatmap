@@ -411,6 +411,7 @@ SITE_NAME = "Storefronts Near Transit"
 ABOUT_DATA_PAGE = "pages/About_the_Data.py"
 EXCLUSIONS_PAGE = "pages/What_Is_Excluded.py"
 DIFFERENCES_PAGE = "pages/Why_the_Maps_Differ.py"
+REPO_URL = "https://github.com/dacekroberts/expanded-heatmap"
 
 # Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
 # and the sources are recorded in docs/data_sources.md, "Notices this project
@@ -2276,6 +2277,12 @@ def render_site_notices(show_links: bool = True):
             st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
             st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
             st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
+    # The public repository, linked from every page. IDFM's Licence Mobilités
+    # Art. 5.8 (Paris) and ODbL 4.6 (Tisseo, TaM, TAG, LiA, Angers, STAR) are
+    # each met by a public repository carrying the pipeline and the derived
+    # data PROVIDED it is linked from the site; nothing linked it before
+    # 2026-10-02. Outside `show_links`, so the reference pages carry it too.
+    st.page_link(REPO_URL, label="Code, pipeline and derived data (GitHub)")
     st.caption(_AS_RECORDED)
     st.caption(_NON_AFFILIATION)
 
