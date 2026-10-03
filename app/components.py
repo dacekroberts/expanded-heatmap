@@ -137,16 +137,22 @@ _MACRO_THEME_JS = """
     apply(choice === 'dark' || choice === 'light'
           ? choice === 'dark'
           : ambientPrefersDark());
-    // CLAUDE.md: the OSM credit links to the OSM COPYRIGHT page. CARTO's style
-    // ships it pointing at /about/; the credit is Mapbox's own element, built
-    // from the style, so it is corrected here, on every re-render, rather than
-    // replaced. Only the href changes - the text and the credit stay Mapbox's.
+    // CLAUDE.md: the OSM credit links to the OSM COPYRIGHT page, and CARTO's
+    // terms send its credit to carto.com/attribution/. app/basemap.py writes
+    // both into the style's own credit; CARTO's TileJSON carries /about/ and
+    // /about-carto/ instead, so this guard corrects either href on every
+    // re-render should that credit ever reach the map. Only the href changes -
+    // the text and the credit stay Mapbox's.
     var OSM_COPYRIGHT = 'https://www.openstreetmap.org/copyright';
+    var CARTO_ATTRIBUTION = 'https://carto.com/attribution/';
     function fixCredit() {
         var links = doc.querySelectorAll('[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a');
         for (var i = 0; i < links.length; i++) {
             if (/openstreetmap[.]org/.test(links[i].href) && links[i].href !== OSM_COPYRIGHT) {
                 links[i].href = OSM_COPYRIGHT;
+            }
+            if (/(^|[/.])carto[.]com/.test(links[i].href) && links[i].href !== CARTO_ATTRIBUTION) {
+                links[i].href = CARTO_ATTRIBUTION;
             }
         }
     }

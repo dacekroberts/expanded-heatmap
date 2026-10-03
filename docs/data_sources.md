@@ -189,7 +189,9 @@ Hong Kong (the Address Lookup Service cross-check).
 
 Rendered maps use Folium's default OpenStreetMap tiles. Attribution is in the
 rendered HTML. Choosing a tile provider deliberately is still an open
-decision (see "Basemap tiles" under the licenses below).
+decision (see "Basemap tiles" under the licenses below). The Overview page's
+map is the exception: it uses CARTO's Positron basemap, with a CARTO key (see
+"The Overview's basemap" below).
 
 ## Licenses and terms of use
 
@@ -250,6 +252,29 @@ The maps render **OpenStreetMap** tiles, fetched directly from
   policy is explicit that there is no guarantee behind it. It is the same
   open decision as choosing a tile provider, and it should be settled
   deliberately rather than by default.
+
+### The Overview's basemap: CARTO Positron, with a CARTO key
+
+The Overview page's map draws CARTO's **Positron** basemap: vector tiles of
+OpenStreetMap data in the OpenMapTiles schema. The city maps do not use it.
+
+- **Terms: CARTO's Basemap Terms, version of 2026-09-29.** Free use is granted
+  only to a customer "who requests and uses a CARTO-issued API key" (§3.b).
+  This project holds a free, non-commercial key, locked to the site's address,
+  and every request the map makes to CARTO (the tile index, the tiles, the
+  sprites and the fonts) carries it. Without the key the map draws no basemap
+  at all; it never loads CARTO without one.
+- **The tiles go straight from CARTO to the visitor's browser.** This project
+  does not proxy, cache or bulk-download them (§9).
+- **Conditions accepted by the owner (2026-10-02):** an uncapped indemnity
+  (§17) and New York law and venue (§22). CARTO may suspend or end free access
+  at any time, without notice (§3.c); a lapsed key means a blank basemap.
+- **The style is CARTO's own open-source Positron** (BSD 3-Clause code, CC BY
+  4.0 design), embedded in the page with the key filled in.
+- **Required credit, displayed in the map's corner:** "© OpenStreetMap
+  contributors, © CARTO, © OpenMapTiles", linked to the OpenStreetMap
+  copyright page, CARTO's attribution page and openmaptiles.org, as CARTO's
+  attribution page and the style's license ask.
 
 ## Commitment: removal requests are honored, not argued
 

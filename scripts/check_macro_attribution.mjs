@@ -172,16 +172,28 @@ for (const [w, theme] of runs) {
   for (const l of osm) {
     if (!/openstreetmap[.]org[/]copyright[/]?$/.test(l.href)) problems.push(`${tag}: the OSM link goes to ${l.href}, not the copyright page`);
   }
+  // CARTO's attribution page prescribes its credit's link, and the
+  // basemap-styles licence asks for OpenMapTiles beside it (app/basemap.py).
+  const carto = seen.links.filter(l => /carto[.]com/.test(l.href));
+  if (!carto.length) problems.push(`${tag}: the credit has no CARTO link`);
+  for (const l of carto) {
+    if (!/^https:[/][/]carto[.]com[/]attribution[/]?$/.test(l.href)) problems.push(`${tag}: the CARTO link goes to ${l.href}, not carto.com/attribution/`);
+  }
+  if (!seen.links.some(l => /openmaptiles[.]org/.test(l.href))) problems.push(`${tag}: the credit has no OpenMapTiles link`);
   rect = await evalJs(`(() => { const r = document.querySelector('[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib').getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; })()`);
-  const pts = [0.1, 0.3, 0.5, 0.7, 0.9].map(f =>
-    [Math.round(rect.x + rect.w * f), Math.round(rect.y + rect.h / 2)]);
+  // The three-part credit wraps to two lines at phone width (40 px tall at
+  // 375, 2026-10-02), so a strip taller than one line is sampled on each.
+  const rows = rect.h > 24 ? [0.3, 0.7] : [0.5];
+  const pts = rows.flatMap(r => [0.1, 0.3, 0.5, 0.7, 0.9].map(f =>
+    [Math.round(rect.x + rect.w * f), Math.round(rect.y + rect.h * r)]));
   const above = await evalJs(STACK(pts));
   const covered = above.filter(a => a.length);
   const what = [...new Set(covered.flat())];
   console.log(`${tag.padEnd(11)} ` +
-              (covered.length ? `painted over at ${covered.length} of 5 points by ${what.join(', ')}` : 'on top at all 5 points') +
-              `; contrast ${legible.join(', ')}; OSM -> ${osm.map(l => l.href).join(' ') || 'none'}`);
-  if (covered.length) problems.push(`${tag}: ${covered.length} of 5 points along the credit have ${what.join(', ')} able to paint over it`);
+              (covered.length ? `painted over at ${covered.length} of ${pts.length} points by ${what.join(', ')}` : `on top at all ${pts.length} points`) +
+              `; contrast ${legible.join(', ')}; OSM -> ${osm.map(l => l.href).join(' ') || 'none'}` +
+              `; CARTO -> ${carto.map(l => l.href).join(' ') || 'none'}`);
+  if (covered.length) problems.push(`${tag}: ${covered.length} of ${pts.length} points along the credit have ${what.join(', ')} able to paint over it`);
 }
 ws.close(); edge.kill();
 
@@ -191,4 +203,5 @@ if (problems.length) {
   process.exit(1);
 }
 console.log(`\nPROBLEMS 0 - the macro map's basemap credit is on top, opaque, legible at 4.5:1 and ` +
-            `linked to the OSM copyright page, in both themes at ${widths.join(', ')} px`);
+            `linked to the OSM copyright page and CARTO's attribution page with OpenMapTiles, ` +
+            `in both themes at ${widths.join(', ')} px`);
