@@ -763,5 +763,10 @@
   "in_ring": 3305,
   "all": 4813,
   "map_blob": "96bae842f59a46d0c48b216aa3353cf67bd58f2c"
+ },
+ "hamamatsu": {
+  "in_ring": 1080,
+  "all": 3187,
+  "map_blob": "2cdb9dca646ade6cc39aa3a36dd2d7dd5ecd2955"
  }
 }

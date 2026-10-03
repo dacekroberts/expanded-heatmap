@@ -2098,6 +2098,24 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Nara City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Nara",)),
+    # Hamamatsu (notice 124): the city's four registers are CC BY 2.1 JP (the
+    # portal's top and the 浜松市オープンデータ利用規約), in the terms' form for a
+    # modified work; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Kawasaki's and Hakodate's approved wording under the owner's pre-approval
+    # of template prose (2026-09-30).
+    Notice(124, "Hamamatsu City and MLIT (Hamamatsu)",
+     "Hamamatsu's businesses: この地図は以下の著作物を改変して利用しています。"
+     "理容所台帳、美容所台帳、クリーニング所(取次)台帳、クリーニング所(一般)台帳、浜松市、クリエイティブ・コモンズ・ライセンス 表示2.1"
+     "（[http://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）. "
+     "(This map modifies the City of Hamamatsu's registers of barbers, beauty salons, laundry pick-up "
+     "counters and general laundries, published 18 August 2026: this project placed each by its address "
+     "or the city's own coordinates, and counted them around stations.) The registers may include premises "
+     "that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Hamamatsu and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Hamamatsu",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

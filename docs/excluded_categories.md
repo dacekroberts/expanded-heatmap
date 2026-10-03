@@ -3914,6 +3914,34 @@ line.
 - Left out: 10 stations beyond it: 3 in Yamatokoriyama, 2 each in Kizugawa and
   Ikoma, and 1 each in Tenri, Kasagi and Seika.
 
+### Hamamatsu - the city's barber, beauty and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the city publishes only its new food
+  permits, not a register, and the national filing system holds only
+  notifications for Hamamatsu, so this map shows personal services only
+  (owner, 2026-10-02).
+
+**Counted** - every barber, beauty salon, laundry pick-up counter and general
+laundry on the city's four registers published 18 August 2026: 3,212 premises
+against the official 3,164 of March 2025. No closures are recorded beside
+them, so some may have closed since.
+
+**One pin per premises** - 25 repeat registrations are shown once (21 premises
+on both the barber and beauty registers, 4 beauty salons registered twice).
+
+**Not placed** - none. 165 premises whose address the address file finds only
+at its town sit at the city's own coordinates for them.
+
+**Names not shown** - none. The registers do not name the operator, so a trade
+name that is its operator's own name cannot be checked.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 3 in Kosai, 3 in Iwata, 2 in Toei (Aichi)
+  and 1 in Tenryu (Nagano).
+- The Shinkansen is not drawn (Hamamatsu appears as a JR station).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

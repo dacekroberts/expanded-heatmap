@@ -4,6 +4,52 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Hamamatsu built, personal services only
+
+- **Hamamatsu built (page 185, notice 124): 3,187 storefronts, all Personal
+  services (barbers 718, beauty salons 2,082, laundries 387), around 54
+  stations on 4 lines, 33.9% of them in a ring (1,080).** The city's four CC
+  BY 2.1 JP registers published 2026-08-18 (barbers 718, beauty 2,107, laundry
+  pick-up counters 239, general laundries 148: 3,212 against e-Stat FY2024's
+  3,164, 101.5%), joined to MLIT's address blocks for the 3 wards of 2024
+  (22138-22140): 3,047 at the block (94.9%); the 165 the block join placed
+  only at a town-chōme or 大字 centroid take the city's own 緯度 / 経度
+  (`OWN_POINT_FALLBACK` on all four registers, the brief's grounds: block-tier
+  points a median 40 m off, the centroids a median 741 m); 0 unplaced, 0
+  default points refused, datum_guard passed. 25 repeat registrations shown
+  once (21 barber-and-beauty premises, 4 beauty duplicates). MHLW's 6,033
+  notifications not added (owner, 2026-10-02).
+- **Privacy verdict: publish.** `check_personal_exposure.py hamamatsu`: the
+  Japan pass prints 0; the registers have no operator column, so the name
+  rule cannot run (Okayama's precedent) and the page takes the MHLW-style
+  bullet. The Latin heuristic flags 14 in-ring pins (9 美容所, 5 理容所), not a
+  finding for Japanese names.
+- **Rail:** N02-25, 4 lines: the Enshu Railway (18 of 18, gate 3 exact
+  against entetsu.co.jp/tetsudou/), Tenhama (19 of 39), JR Tokaido (5 of 89)
+  and JR Iida (13 of 94, its mountain stretch, drawn by the standing call).
+  9 stations excluded (湖西市 3, 磐田市 3, 東栄町 2, 天龍村 1; Aichi and
+  Nagano through `N03_NEIGHBOR_PREFS`). Median station gap 1,158 m, standard
+  rings. English names: 12 cited overrides (Hiroshima's style), and 浜北 /
+  天竜二俣, which have no OSM name:en (天竜二俣 carries only a wrong
+  name:ja_rm), from the operators' station pages. Colours from
+  `line_colour_search.py` (closest pair 31.4, Enshu / Tokaido).
+- **Opening view:** BOUNDS 34.686-35.217 N, 137.526-137.871 E bake zoom 10.0
+  (the stations from the coast to 大嵐); `check_map_view.js` to run at review.
+- **No Economic Census control** (no food leg); the e-Stat table and the
+  city's own points are the checks.
+- **Prose proposals for review time:** on the page, "The city reaches from
+  the coast far into the mountains: 32 of its 54 stations are on the Tenryu
+  Hamanako Line and on the Iida Line's mountain stretch through Tenryu Ward.";
+  "The registers were published on 18 August 2026 and record no closures, so
+  a dot is a premises on the register then, not necessarily one open today."
+  (Hakodate's sentence, its date as the registers' publication date); "where
+  only the district can be found, the dot sits at the city's own coordinates
+  for the premises." (Okayama's ministry-coordinates clause for a city
+  source); "The registers do not say who the operator is, so a trade name
+  that is its operator's own name cannot be checked here." (Okayama's, for
+  registers); in What Is Excluded, the Not placed and Names not shown
+  sentences above.
+
 ### 2026-10-03 - Nara built, MHLW's filings, the old-law list and three registers
 
 - **Nara built (page 184, notice 123): 4,813 storefronts (Food service
