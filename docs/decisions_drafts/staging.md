@@ -4,6 +4,27 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Extensions build: measured corrections to the Vancouver brief and the kit
+
+- **The extensions build session reported build figures** that differ from
+  the probe's. No brief check failed. The figures:
+  - **New Westminster:** 856 in the buckets (retail 379, food 294, personal
+    services 183), not 907. The layer is unchanged since 2026-09-27; the gap
+    is the 2026-09-29 exclusions in `naics.py` (9 caterers, 72232; 42
+    catch-all or funeral rows, 81299 and 8122). 853 of 856 placed by the
+    address join.
+  - **Coquitlam:** LAT/LONG hold Web Mercator metres, not degrees, and the
+    only name field is `COLBUSINESSNAME`. 1,026 kept (454 / 332 / 240); 10
+    mall kiosks out, not about 9.
+  - **Burnaby** reproduces exactly (964 / 746 / 433).
+  - **Long Beach:** 20,204 rows match the filter at build (20,264 at the
+    probe); 3,246 kept (Retail 1,327, Food 1,160, Personal 759).
+- **Staging corrected the kit's figures on master.** The brief
+  (`docs/build_briefs/vancouver_regional.md`) is corrected on
+  `extensions-build` by the build session, which already added a checks
+  block to it there; a second edit on master would conflict when the branch
+  lands.
+
 ### 2026-10-02 - Vancouver (Regional)'s three extension calls approved (owner)
 
 - **The owner: "approve the three vancouver calls"**, all as staging
