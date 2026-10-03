@@ -748,5 +748,10 @@
   "in_ring": 2165,
   "all": 4203,
   "map_blob": "158f3269a11487ffc9f12a57b24dc24dc31eaf2b"
+ },
+ "yokkaichi": {
+  "in_ring": 3185,
+  "all": 4308,
+  "map_blob": "4d3966d161af902dbe308803083392ea18b8be4c"
  }
 }

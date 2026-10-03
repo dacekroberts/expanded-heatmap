@@ -4,6 +4,71 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Yokkaichi built, the city's five lists
+
+- **Yokkaichi built (page 182, notice 121): 4,308 storefronts (Food service
+  1,995, Food shops 1,298, Personal services 1,015) around 35 stations on 7
+  lines, 73.9% of them in a ring (3,185).** The city's five CC BY 4.0 BODIK
+  lists as of 2026-08-31 (food permits 3,725 rows, food notifications 1,247,
+  barbers 216, beauty 737, laundries 106), joined to MLIT's address blocks for
+  24202: of 4,687 storefront rows, 4,170 at the block (89.0%), 407 at a town
+  centre (8.7%), 110 unplaced (2.3%; the brief's screen 88.8 / 8.9 / 2.4).
+  269 repeat permits shown once. Out by rule: 548 バー、キャバレー by 業態
+  (Tokyo's R3 precedent, the national form list's one class), 392
+  manufacturing and other non-counter types (199 permit, 193 notification),
+  261 canteens (157 集団給食施設 notifications, 104 委託給食 by 業態), 88
+  caterers (仕出屋、弁当屋 by 業態), 41 inside hotels and inns, 3 mail order, 1
+  行商. Not a premises: 10 (5 無店舗取次店 read from the laundry list's 区分; 5
+  一円 rows: 1 notification, 1 barber, 3 beauty).
+- **The notification list counts as Food shops** (japan_eigyo's rule: a list
+  that publishes its notifications; it is the city's complete list): 892 rows,
+  so the template's standing "notify" bullet is replaced on the page (a
+  proposal, below). The laundry 区分 工場 (31) kept as laundries (Hakodate's
+  一般, Toyota's 洗場).
+- **Held items touched (owner call pending, read at the built cities'
+  reading):** 82 restaurant permits whose 業態 is 飲食店営業（惣菜店） (75, and
+  7 old-law) stay Food service; 3 複合型そうざい製造業 stay out. The
+  shared-code entry's list of touched wave-2 rows does not name Yokkaichi's 82.
+- The 菓子 / そうざい factory share: 26 of 400 (6.5%), kept (owner,
+  2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py yokkaichi`: the
+  Japan pass prints 0; 3 pins show their permit type. 5 rows in the raw files
+  are flagged by the name rule (3 permit, 2 notification; the check counts 4
+  trade names); the registers flag none. Without the `coop` rule (commit
+  13b2c280) it was 10 rows and 5 pins:
+  5 rows are a cooperative's own name. The food lists name sole traders as
+  well as companies.
+- **Rail:** N02-25; 35 stations (Kintetsu 15 by line-membership: Nagoya 10,
+  Yunoyama 6, 近鉄四日市 shared; Asunarou 9; Sangi 7; JR 5; Ise Railway 1). The
+  Sangi Line's 近鉄連絡線 drawn with 三岐線 as one public line; the Ise Railway's
+  one station (河原田, shared with JR) kept as cut (standing call: a regional
+  third-sector line, not urban). Kintetsu-Yokkaichi and Asunarou Yokkaichi are
+  separate N02 groups 33 m apart, kept apart (Kobe's Tarumi case). Median
+  nearest-station gap 1,133 m: standard rings. 12 excluded: 菰野町 4, 鈴鹿市 3,
+  いなべ市 2, 朝日町 2, 川越町 1. Gate 3: the Asunarou Railway's own route map
+  (yar.co.jp/route/, read 2026-10-03) gives the Utsube Line 8 and the
+  Hachioji Line 2, exact. English names: OSM's 61 objects, 7 cited overrides
+  in Hiroshima's style (macrons, Shinshyo -> Shinsho, Kintetsu-Tomida's
+  hyphen, -mae / -koenguchi). Colours from `line_colour_search.py` (closest
+  pair 18.2, Asunarou's two lines; the Ise Railway purple, as no blue clears
+  Retail's pin).
+- **Independent check (GSI address search, 100 block hits, 1 req/s):** median
+  32 m from the block point, 83 within 100 m, 91 within 250 m, 99 within 500
+  m, max 1,025 m.
+- **Economic Census control:** 1,995 Food service pins against 1,074 飲食店
+  establishments, 1.86, inside the built cities' 1.56-1.92.
+- **Prose proposals for review time** (no approved template covers them): on
+  the page, "Food shops that only notify the city rather than hold a permit,
+  such as convenience stores, supermarkets and greengrocers, are included: the
+  city publishes its list of notifications too." (replaces the template's
+  notify bullet), "From Yokkaichi City's lists of food-business permits and
+  food-business notifications ..." (the template's source bullet with the
+  notification list added), and the template's Food shops bullet shortened
+  to "the Food shops layer is food retail only." (its bracketed list no longer
+  covers what the layer holds); in What Is Excluded, "548 restaurant permits
+  filed as bars and cabarets (バー、キャバレー): the national form list puts both
+  in one class." and the Counted paragraph's notification and 工場 sentences.
+
 ### 2026-10-03 - Toyota built, the city's food list and three registers
 
 - **Toyota built (page 181, notice 120): 4,203 storefronts (Food service

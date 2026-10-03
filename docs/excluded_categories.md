@@ -3806,6 +3806,42 @@ line.
 - Left out: 11 stations beyond it: 3 in Okazaki, 3 in Chiryu, 2 in Miyoshi,
   2 in Nagakute and 1 in Seto.
 
+### Yokkaichi - the city's food-permit and food-notification lists and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- 548 restaurant permits filed as bars and cabarets (バー、キャバレー): the
+  national form list puts both in one class.
+- 392 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit and notification types that are not a
+  counter.
+- 261 school, hospital and staff canteens, 88 caterers (仕出し), 41 premises
+  inside hotels and inns, 3 mail-order businesses and 1 peddler.
+- 5 laundry pick-up services with no shop (無店舗取次店), and 5 rows licensed
+  for anywhere in the city (一円).
+
+**Counted** - every food permit in force and every food notification on file
+on 31 August 2026, and every barber, beauty salon and laundry on the city's
+lists of the same date. The 892 food shops that notify the city rather than
+hold a permit (convenience stores, supermarkets, greengrocers, dairies and
+other food sellers) are Food shops, from the city's complete list. 31 laundry
+works (工場) are counted as laundries. 26 of the 400 bakery, confectioner and
+deli rows (6.5%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 269 repeat permits are shown once.
+
+**Not placed** - 110 rows (2.3%), mostly addresses that name a sub-district
+(小字) MLIT's file does not list. Another 407 sit at their town's center.
+
+**Names not shown** - 3 pins show their permit type: the trade name is the
+operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 12 stations beyond it: 4 in Komono, 3 in Suzuka, 2 each in Inabe
+  and Asahi, and 1 in Kawagoe.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

@@ -2035,6 +2035,23 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Toyota and MLIT did not make "
      "and do not endorse this map.",
      False, ("Toyota",)),
+    # Yokkaichi (notice 121): the city's five BODIK lists, CC BY 4.0 under the
+    # 四日市市オープンデータ利用規約 (第1条), no form prescribed, so CC BY 4.0's
+    # elements; no city logo (第3条). MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Kōchi's and Kawasaki's approved wording under the
+    # owner's pre-approval of template prose (2026-09-30).
+    Notice(121, "Yokkaichi City and MLIT (Yokkaichi)",
+     "Yokkaichi's businesses: 出典：「食品営業許可施設一覧」「食品営業届出施設一覧」「理容所一覧」「美容所一覧」「クリーニング所一覧」"
+     "（四日市市、2026-08-31、[https://odcs.bodik.jp/242021/](https://odcs.bodik.jp/242021/)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Yokkaichi's lists of food-business permits and notifications and of "
+     "barbers, beauty salons and laundries as of 31 August 2026: this project selected the storefront types, "
+     "placed each by its address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Yokkaichi and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Yokkaichi",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
