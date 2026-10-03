@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**387 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**388 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -74,6 +74,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The public repository linked from every page, for Paris's Licence Mobilités and six ODbL sources](#2026-10-02---the-public-repository-linked-from-every-page-for-pariss-licence-mobilités-and-six-odbl-sources)
 - [Paris stays published after the repository-link gap (owner)](#2026-10-02---paris-stays-published-after-the-repository-link-gap-owner)
 - [A CARTO basemap key requested; CARTO's indemnity and New York law accepted (owner)](#2026-10-02---a-carto-basemap-key-requested-cartos-indemnity-and-new-york-law-accepted-owner)
+- [Credits on the visuals session's city cards: what goes on the card face, and which cities stay off (owner)](#2026-10-02---credits-on-the-visuals-sessions-city-cards-what-goes-on-the-card-face-and-which-cities-stay-off-owner)
 
 **2026-10-01**
 
@@ -16150,3 +16151,41 @@ Recorded by the cleanup session from the Main Building Session's findings of
   - Possibly a privacy line (§10).
 
   The OpenFreeMap swap stays tabled as the fallback.
+
+### 2026-10-02 - Credits on the visuals session's city cards: what goes on the card face, and which cities stay off (owner)
+
+- **The artifact.** The visuals session's per-city presentation cards: static
+  images with figures and badges but no map, and a "Full credits:" page URL.
+  The full notices travel in a caption file beside each card.
+- **The read.** Four agents, by region and Japan, read each notice's terms
+  for placement on a card (2026-10-02). Their tables are in the cleanup
+  session's scratchpad (cards/).
+- **The owner's eight calls, all as recommended:**
+  1. Paris is off the cards. Licence Mobilités Art. 5.4 wants the notice
+     built into the work, with links or the full licence text, and the
+     licence ends on breach.
+  2. Los Angeles is off: LA Metro bars use "as part of any advertisement".
+  3. Washington D.C. is off: WMATA licenses use "within your Application".
+  4. Daegu, Busan and the ten SEMAS cities are off. Their positions rest on
+     taking a page down, which a posted image cannot do.
+  5. The nine Brazilian cities stay on; the 2026-09-23 decision covers posts.
+  6. The eight Ordnance Survey cities: the caption is enough (OGL
+     "including or linking to").
+  7. Every card carries "Figures derived by this project; not official
+     statistics. Data as of <date>."
+  8. Taipei Metro, used only for a station-count check, is off the card face.
+- **On the card face for:**
+  - Vancouver (Regional), San Francisco, Calgary, Toronto, Ottawa, Mexico
+    City, Guadalajara, Monterrey, Madrid, the six French ODbL cities, Oslo,
+    Bergen, the three Taiwanese cities, Hong Kong, Buenos Aires and Tokyo
+    (Taitō);
+  - the OSM line wherever the rail is OSM.
+
+  The caption is enough for the rest. Chicago's and Kansas City's full
+  paragraphs must sit in the caption itself.
+- **Found on the way, for the site:**
+  - `_OSM_RAIL` and notice 1's rail list miss 16 cities whose rail is OSM:
+    the twelve SEMAS-area Korean cities, Sydney, Melbourne, Buenos Aires and
+    Seattle (Regional). Fixed at the next landing.
+  - SFMTA's required notice may include a second, "as is" paragraph that the
+    site does not show (PLAN).
