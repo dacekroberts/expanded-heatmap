@@ -36,8 +36,18 @@ from pathlib import Path
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
+
+# Vancouver (Regional) extended: Burnaby (11 stations), New Westminster (5) and
+# Coquitlam (4), each on its own licence register (owner, released 2026-10-02;
+# docs/build_briefs/vancouver_regional.md). Richmond (Band R) and Port Moody
+# (no addresses) stay out. False reproduces the Vancouver + Surrey build byte
+# for byte, which is how the extension was proved before it was switched on.
+REGIONAL = False
 DATA_RAW = ROOT / "data" / "vancouver" / "raw"
-DATA_PROCESSED = ROOT / "data" / "vancouver" / "processed"
+# data/ is one junction shared by every worktree, and master's checks read
+# processed/: the extended build writes processed/regional/ (ignored) until it
+# lands (docs/session_roles.md; Cleanup, 2026-10-03). Fold back on landing.
+DATA_PROCESSED = ROOT / "data" / "vancouver" / "processed" / ("regional" if REGIONAL else "")
 OUTPUTS = ROOT / "outputs" / "vancouver"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
@@ -343,6 +353,12 @@ SURREY_BOUNDARY_NAME_KEEP = "SURREY"
 MUNICIPALITIES_NAME_FIELD = "ADMIN_AREA_NAME"
 # BOTH cities' stations are kept, so these are the two names that are in scope.
 MUNICIPALITIES_KEEP = ("City of Vancouver", "City of Surrey")
+# The extension's cities, named and SCOPED by this layer (they have no
+# boundary file of their own here): ABMS name -> the name the map uses. Step 1
+# keeps their stations; step 2 checks each source's points against its own.
+EXTENSION_MUNICIPALITIES = ({"City of Burnaby": "Burnaby",
+                             "City of New Westminster": "New Westminster",
+                             "City of Coquitlam": "Coquitlam"} if REGIONAL else {})
 
 # --- Classification ---------------------------------------------------------
 
@@ -442,4 +458,73 @@ VANCOUVER_BBOX = {
     "lat_max": 49.35,
     "lon_min": -123.30,
     "lon_max": -122.62,
+}
+if REGIONAL:
+    # Coquitlam reaches 49.47 N with its northern watershed and -122.60 at its
+    # eastern edge (its loader's own box), so the regional box widens to it.
+    VANCOUVER_BBOX = {**VANCOUVER_BBOX, "lat_max": 49.48, "lon_max": -122.58}
+
+# --- The extension's registers (regional only) -----------------------------
+# Three more publishers, each paged from its own ArcGIS layer by
+# fetch_sources.py with an EXPLICIT field list: the forbidden columns are never
+# requested, and the fetch and the loaders both raise if one arrives. The
+# loaders are pipeline/vancouver/burnaby.py, coquitlam.py and
+# new_westminster.py (built 2026-10-03; their docstrings carry the measured
+# counts). `municipality` is the ABMS name step 2 checks each point against.
+_EXT_RAW = ROOT / "data"
+EXTENSION_SOURCES = {
+    "burnaby": {
+        "layer": "https://gis.burnaby.ca/arcgis/rest/services/OpenData/OpenData1/MapServer/17",
+        "where": "1=1",
+        # ACCOUNT_NAME (the licence holder's own name) is never requested.
+        "fields": ("OBJECTID", "UNIT", "PROPERTY_NUMBER", "LICENCE_NUMBER", "TRADE_NAME",
+                   "LICENCE_TYPE_NAME", "COVERS_FROM", "COVERS_TO", "HOUSE", "STREET",
+                   "LEGACY_LICENCE_NUMBER", "LEGAL_TYPE", "LICENCE_STATUS",
+                   "LGLLOT_PROPNUM", "GEO_ID", "PARENT_PROPNUM"),
+        "forbidden": ("ACCOUNT_NAME",),
+        "geometry": True, "page": 2000,
+        "file": _EXT_RAW / "burnaby" / "raw" / "burnaby_business_licences.csv",
+        "municipality": "City of Burnaby",
+        "licence": "Open Government Licence – British Columbia (City of Burnaby)",
+    },
+    "coquitlam": {
+        "layer": "https://services2.arcgis.com/Q6Lq3evZUGfPrN7o/arcgis/rest/services/Business_Licenses/FeatureServer/0",
+        # Issued, plus Renewal: the renewal folder for the coming licence year,
+        # the only record for most of those businesses (measured 2026-10-03).
+        "where": "U_STATUSCODEDESC IN ('Issued','Renewal')",
+        # COL_BUSINESSPHONE and EMAILADDRESS are never requested. LAT and LONG
+        # are Web Mercator metres, converted by the loader.
+        "fields": ("OBJECTID", "COL_FOLDER", "COLBUSINESSNAME", "COL_BUSINESSADDR",
+                   "U_FOLDERTYPEDESC", "U_SUBCODEDESC", "U_STATUSCODEDESC", "INDATE",
+                   "ISSUEDATE", "LAT", "LONG"),
+        "forbidden": ("COL_BUSINESSPHONE", "EMAILADDRESS"),
+        "geometry": False, "page": 1000,
+        "file": _EXT_RAW / "coquitlam" / "raw" / "coquitlam_business_licences.csv",
+        "municipality": "City of Coquitlam",
+        "licence": "Open Government Licence – Coquitlam",
+    },
+    "new_westminster": {
+        "layer": "https://services3.arcgis.com/A7O8YnTNtzRPIn7T/ArcGIS/rest/services/BUSINESS_LICENSES_(RESIDENTS)/FeatureServer/0",
+        "where": "1=1",
+        # LICENCEE_NAME and MAILING_ADDRESS are never requested.
+        "fields": ("ObjectId", "LICENCE", "BUSINESS_NAME", "CIVIC_ADDRESS",
+                   "APPLICATION_DATE", "APPROVED_DATE", "LICENCE_STATE",
+                   "RESIDENT_STATUS", "IMBL", "YEAR_OPENED", "NAICS_CODE",
+                   "NAICS_DESCRIPTION"),
+        "forbidden": ("LICENCEE_NAME", "MAILING_ADDRESS"),
+        "geometry": False, "page": 1000,
+        "file": _EXT_RAW / "new_westminster" / "raw" / "new_westminster_business_licences.csv",
+        "municipality": "City of New Westminster",
+        "licence": "Open Government Licence - City of New Westminster",
+    },
+}
+# New Westminster's licences carry no point: they are placed by joining
+# CIVIC_ADDRESS to the City's own address points (a support source).
+NEW_WESTMINSTER_POINTS = {
+    "layer": "https://services3.arcgis.com/A7O8YnTNtzRPIn7T/ArcGIS/rest/services/Address_Point/FeatureServer/0",
+    "where": "1=1",
+    "fields": ("OBJECTID", "ADDRESS", "HOUSE", "STREET", "UNIT", "FEATURETYPE", "POSTAL_CODE"),
+    "forbidden": (),
+    "geometry": True, "page": 2000,
+    "file": _EXT_RAW / "new_westminster" / "raw" / "new_westminster_address_points.csv",
 }

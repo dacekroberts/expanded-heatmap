@@ -66,11 +66,16 @@ from pipeline.vancouver.config import (  # noqa: E402
     CITY_BOUNDARY_GEOJSON,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
+    EXTENSION_SOURCES,
     FORBIDDEN_COLUMNS,
     MIXED_USE_ZONING_CLASSES,
+    MUNICIPALITIES_GEOJSON,
+    MUNICIPALITIES_NAME_FIELD,
+    NEW_WESTMINSTER_POINTS,
     PARCEL_KEY,
     PARCELS_GEOJSON,
     RAW_CLASSIFICATION_COLUMN,
+    REGIONAL,
     RESIDENTIAL_ZONING_CLASSES,
     SOURCE_ENCODING,
     SOURCES,
@@ -220,6 +225,34 @@ def load_surrey():
     return df[SHARED + ["_used_fallback"]]
 
 
+def load_extension():
+    """Burnaby, Coquitlam and New Westminster (regional only), each from its
+    own loader, in the shared columns. Every forbidden column is checked by
+    the fetch and again here."""
+    from pipeline.taxonomies import naics
+    from pipeline.vancouver.burnaby import load_burnaby
+    from pipeline.vancouver.coquitlam import load_coquitlam
+    from pipeline.vancouver.new_westminster import load_new_westminster
+
+    for key, spec in EXTENSION_SOURCES.items():
+        if not spec["file"].exists():
+            sys.exit(f"Missing {spec['file'].name}. Run pipeline/vancouver/fetch_sources.py first.")
+        with open(spec["file"], encoding="utf-8") as fh:
+            header = set(fh.readline().strip().split(","))
+        if header & set(spec["forbidden"]):
+            sys.exit(f"{key}: {sorted(header & set(spec['forbidden']))} is in the cache - never load it")
+    if not NEW_WESTMINSTER_POINTS["file"].exists():
+        sys.exit(f"Missing {NEW_WESTMINSTER_POINTS['file'].name}. Run pipeline/vancouver/fetch_sources.py first.")
+    out = [
+        load_burnaby(EXTENSION_SOURCES["burnaby"]["file"],
+                     lambda c: MODULE.classify({RAW_CLASSIFICATION_COLUMN: c, "source": "burnaby"})),
+        load_coquitlam(EXTENSION_SOURCES["coquitlam"]["file"], MODULE.classify),
+        load_new_westminster(EXTENSION_SOURCES["new_westminster"]["file"],
+                             NEW_WESTMINSTER_POINTS["file"], naics.naics_group),
+    ]
+    return [part[SHARED + ["_used_fallback"]] for part in out]
+
+
 def read_boundary(path, label, name_field=None, name_keep=None):
     g = gpd.read_file(path)
     g = g.set_crs(CRS_GEOGRAPHIC) if g.crs is None else g.to_crs(CRS_GEOGRAPHIC)
@@ -243,7 +276,10 @@ def main():
             sys.exit(f"Missing {path.name}. Run "
                      f"pipeline/vancouver/fetch_sources.py first.")
 
-    df = pd.concat([load_vancouver(), load_surrey()], ignore_index=True)
+    parts = [load_vancouver(), load_surrey()]
+    if REGIONAL:
+        parts += load_extension()
+    df = pd.concat(parts, ignore_index=True)
     print(f"\nCombined: {len(df):,} rows "
           f"({dict(df['source'].value_counts())})")
 
@@ -279,6 +315,16 @@ def main():
     # 118.8 km2 area check passes regardless, because the park is 4 km2 against
     # a ~3 km2 tolerance and the layer also reaches into water.
     expected = {"vancouver": van_geom, "surrey": sur_geom}
+    if REGIONAL:
+        # The extension's cities, from the BC municipalities layer.
+        munis = gpd.read_file(MUNICIPALITIES_GEOJSON)
+        munis = (munis.set_crs(CRS_GEOGRAPHIC) if munis.crs is None
+                 else munis.to_crs(CRS_GEOGRAPHIC)).to_crs(CRS_PROJECTED)
+        for key, spec in EXTENSION_SOURCES.items():
+            hit = munis[munis[MUNICIPALITIES_NAME_FIELD] == spec["municipality"]]
+            if len(hit) != 1:
+                sys.exit(f"{key}: {spec['municipality']!r} matched {len(hit)} municipalities")
+            expected[key] = hit.geometry.iloc[0]
     inside = pd.Series(
         [expected[s].contains(p) for s, p in zip(gdf["source"], gdf.geometry)],
         index=gdf.index)

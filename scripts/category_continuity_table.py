@@ -463,7 +463,11 @@ COLUMNS["vancouver"] = {
                               "Surrey party and wedding consultant"),
                           loc({"source": "surrey", "category": "Miscellaneous"}, "Surrey catch-all")],
     "tattoo": [loc({"source": "surrey", "category": "Tattoo Parlour"}, "Surrey tattoo parlour")],
-    "adult_hostess": [loc({"source": "vancouver", "category": "Adult Services"}, "Vancouver adult services")],
+    "adult_hostess": [loc({"source": "vancouver", "category": "Adult Services"}, "Vancouver adult services"),
+                      loc({"source": "burnaby", "category": "ADULT SERVICES - BODY RUB PREMISES"},
+                          "Burnaby body-rub premises"),
+                      loc({"source": "coquitlam", "category": "Massage (non-registered) Parlours"},
+                          "Coquitlam high-impact massage parlour")],
     "sex_shop": [loc({"source": "surrey", "category": "Adult Entertainment Store"}, "Surrey sex shop")],
     "massage_commercial": [
         loc({"source": "vancouver", "category": "Health Enhancement Services"}, "Vancouver body care"),
@@ -505,7 +509,11 @@ COLUMNS["vancouver"] = {
                    loc({"source": "vancouver", "category": "Theatre"}, "Vancouver theatre"),
                    loc({"source": "surrey", "category": "Bowling Alley"}, "Surrey bowling")],
     "pharmacy": [loc({"source": "vancouver", "category": "Pharmacy"}, "Vancouver pharmacy")],
-    "optician": absent("neither source has an optical-shop type; Surrey's Optometrist is a practitioner"),
+    "optician": [pending({"source": "burnaby", "category": "HEALTH SERVICES - OPTOMETRIST/OPTICIAN"},
+                         "Burnaby's optometrists and opticians, one type under HEALTH SERVICES (39)",
+                         None, "2026-10-03",
+                         "out, as Surrey's Optometrist and Melbourne's opticians (filed in health); "
+                         "about 6 of the 39 read as optical shops; the rule keeps opticians Retail")],
     "mobile_unit": [loc({"source": "vancouver", "category": "Street Vendor"}, "Vancouver street vendor"),
                     loc({"source": "surrey", "category": "Portable Food Vendor"}, "Surrey food vendor"),
                     loc({"source": "surrey", "category": "Catering/Coffee Truck"}, "Surrey coffee truck"),
@@ -2127,7 +2135,9 @@ COLUMNS["zurich_gastwirtschaft"] = {
 # licences, Buffalo's fuel devices and dance halls, Sacramento's ENTERTAINMENT)
 # after they were counted - each is now an exception() with its reason.
 # D.C.'s Beauty Booth: found when the person_licence rule was added (2026-10-02).
-AWAITING_OWNER = {("dc_businessactivity", "person_licence")}
+# Burnaby's optometrist/optician type: found with Vancouver (Regional)'s
+# extension (2026-10-03).
+AWAITING_OWNER = {("dc_businessactivity", "person_licence"), ("vancouver", "optician")}
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "

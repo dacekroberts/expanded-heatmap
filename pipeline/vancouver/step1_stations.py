@@ -58,6 +58,7 @@ from pipeline.vancouver.config import (  # noqa: E402
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
     EXCLUDED_STATIONS_CSV,
+    EXTENSION_MUNICIPALITIES,
     GTFS_ZIP,
     LINE_NAMES,
     MUNICIPALITIES_GEOJSON,
@@ -236,6 +237,15 @@ def main():
                         predicate="within", how="left")
     located = located[~located.index.duplicated()]
     gdf["located_in"] = located[MUNICIPALITIES_NAME_FIELD].fillna("(unmatched)")
+    # The extension's cities are scoped by this same layer (regional only).
+    if EXTENSION_MUNICIPALITIES:
+        ext = gdf["located_in"].isin(list(EXTENSION_MUNICIPALITIES)) & ~inside
+        gdf.loc[ext, "municipality"] = gdf.loc[ext, "located_in"].map(EXTENSION_MUNICIPALITIES)
+        gdf.loc[ext, "distance_outside_m"] = 0.0
+        inside = inside | ext
+        print(f"\nExtension: {int(ext.sum())} more stations in "
+              + ", ".join(f"{v} {int((gdf.loc[ext, 'municipality'] == v).sum())}"
+                          for v in EXTENSION_MUNICIPALITIES.values()))
     unmatched_muni = gdf[~inside & (gdf["located_in"] == "(unmatched)")]
     if len(unmatched_muni):
         print(f"  WARNING: {len(unmatched_muni)} excluded station(s) could not "
