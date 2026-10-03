@@ -16,7 +16,7 @@ named below as kept (`KEPT`) or left out (`OUT`, with the rule). Step 2 exits
 on a code in those divisions that is in neither, so a refresh that brings a
 new leaf is seen rather than silently dropped. Measured on 63,511 active
 Tbilisi rows, 2026-10-02: 47 kept codes in division 47 (two of them
-group-only, `47.2` and `47.79`), 2 in 56, 3 in 96, and 3 in 45.
+group-only, `47.2` and `47.79`), 2 in 56, 3 in 96, and 4 in 45.
 
 **THE LABELS ARE GEOSTAT'S**, from each row's `Activity_2_Name` (English,
 British spelling and the source's typos kept verbatim, as France keeps
@@ -45,6 +45,9 @@ KEPT = {
     "45.11.2",  # Retail and retail sale of new and used vehicles (sic)
     "45.19.0",  # Sale of other motor vehicles
     "45.32.0",  # Retail trade of motor vehicle parts and accessories (NAICS 441310)
+    # Motorcycle sale WITH maintenance and repair, one code: R4's merged type
+    # "goes whole" (Edmonton's and Philadelphia's fuel-with-repair types).
+    "45.40.0",
     # --- Division 47: Retail ---------------------------------------------
     "47.11.0", "47.19.0", "47.2", "47.21.0", "47.22.0", "47.23.0", "47.24.0",
     "47.25.0", "47.26.0", "47.29.0",
@@ -74,7 +77,6 @@ OUT = {
     "45.11.3": "intermediation in vehicle trade - an agent, not a dealer (R4)",
     "45.20.0": "vehicle maintenance and repair (repairs are out)",
     "45.31.0": "wholesale of vehicle parts (R4)",
-    "45.40.0": "motorcycle sale WITH maintenance and repair, one code (R4, repair)",
     # Market stalls (R1: a pitch, not a storefront).
     "47.81.0": "stalls and markets, food (R1)",
     "47.82.0": "stalls and markets, textiles and clothing (R1)",
@@ -139,4 +141,4 @@ _counts = {}
 for _c in KEPT:
     _counts[_c[:2]] = _counts.get(_c[:2], 0) + 1
 # Measured 2026-10-02 on the active Tbilisi rows.
-assert _counts == {"45": 3, "47": 47, "56": 2, "96": 3}, f"kept-code counts drifted: {_counts}"
+assert _counts == {"45": 4, "47": 47, "56": 2, "96": 3}, f"kept-code counts drifted: {_counts}"

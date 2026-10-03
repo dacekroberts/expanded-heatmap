@@ -40,6 +40,7 @@ Mapped so far:
 - **Sweden:** Stockholm, Göteborg
 - **Romania:** Bucharest
 - **Switzerland:** Zurich
+- **Georgia:** Tbilisi
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.

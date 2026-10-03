@@ -3181,6 +3181,27 @@ CITIES = [
         # pill (below, Sacramento's and Chicago's too) in the United States view.
         "label_offset": ("end", -12, 0),
     },
+    {
+        "name": "Tbilisi",
+        "lat": 41.72,
+        "lon": 44.79,
+        "page": "pages/175_Tbilisi_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates (81.0%)",
+        "data_age": "Register of 2026-10-02",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Tbilisi Metro (Akhmeteli-Varketili and Saburtalo Lines, 23 stations)",
+        "region": "West Asia",
+        "country": "Georgia",
+        "mode": "metro",
+        "in_default_view": False,
+        # ABOVE its dot, scored by check_macro_labels.py 2026-10-02 (width
+        # 39.1 measured): 16 regions x 3 widths, PROBLEMS 0. Alone in West
+        # Asia; off the canvas in Global, as Europe's eastern dots are.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -3354,6 +3375,13 @@ REGION_ORDER = [
     # Zealand city joins it; Perth is about 3,300 km from Sydney, past the
     # distance at which Canada was split, so re-score it if it ever arrives.
     "Oceania",
+    # WEST ASIA (owner, 2026-10-02): Tbilisi first. Dublin to Tbilisi is about
+    # 3,700 km, past the 3,300 at which Canada was split, and the UN M49
+    # geoscheme files Georgia in Western Asia, so Europe's frame is left as it
+    # was rather than stretched east. Named for the area, as East Asia and
+    # Oceania are, so a later Baku, Yerevan or Ankara joins it. A view of its
+    # own, NOT a sub-view, so it is not in COUNTRY_VIEWS.
+    "West Asia",
 ]
 
 # THE COUNTRY VIEWS GO LAST IN THE REGION MENU (owner, 2026-10-02): the small

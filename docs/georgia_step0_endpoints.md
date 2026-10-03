@@ -1,7 +1,18 @@
 # Georgia - Step 0 endpoints and country profile
 
-**Profiled 2026-10-02 (`add-country`), for one city: Tbilisi.** Nothing is
-built. Every endpoint below was fetched that day unless marked ASSERTED. When
+**THE EVIDENCE TRAIL, NOT THE RECORD.** Tbilisi was built on 2026-10-02 and
+its rows were re-derived from `pipeline/tbilisi/config.py` into
+[`data_sources/georgia.md`](data_sources/georgia.md). **Where this file and
+`data_sources/georgia.md` disagree, `data_sources/georgia.md` wins.**
+Corrected at build: a 10,000-row page now outlasts the API's gateway (HTTP
+502), so the build pulls 2,000-row pages; the build's one Overpass query also
+fetched the city boundary (relation 1996871), which §1 left unfetched;
+Geostat's own definition of "active" was found ("an enterprise which is
+engaged in economic activity", Business Demography metadata), so §2 trap 4's
+turnover-and-staff criterion stays a secondary source's.
+
+**Profiled 2026-10-02 (`add-country`), for one city: Tbilisi.** Nothing was
+built when this profile was written. Every endpoint below was fetched that day unless marked ASSERTED. When
 Tbilisi is built, these rows are re-derived from its `config.py` into
 `docs/data_sources/georgia.md` (the "PROVISIONAL" section of `add-country`),
 and this file becomes the evidence trail. The city brief is
@@ -276,7 +287,7 @@ control.
   redistributed, so no TTC licence row is needed unless the build uses its
   data.
 
-## Required notices (to promote when Tbilisi is committed, not before)
+## Required notices (promoted with Tbilisi, 2026-10-02: notice 114 in `data_sources.md`)
 
 1. **Geostat**: name Geostat as the source, for example "Business data:
    National Statistics Office of Georgia (Geostat), Statistical Business

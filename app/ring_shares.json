@@ -623,5 +623,10 @@
   "in_ring": 5589,
   "all": 14498,
   "map_blob": "0668c9b56d2cce020d3cd165f8545521c943805a"
+ },
+ "tbilisi": {
+  "in_ring": 8084,
+  "all": 13252,
+  "map_blob": "da36efbaedcc295c9b0f53998101ba632d7fd24b"
  }
 }

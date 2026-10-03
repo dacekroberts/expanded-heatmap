@@ -465,6 +465,16 @@ Desktop is unaffected — the label is fully visible there.
   questions open in `docs/decisions_drafts/seattle-tbilisi.md` (street-only
   matches for lapsed Seattle food; Snohomish rows with a blank jurisdiction).
   The history below is kept.
+- [x] **Tbilisi BUILT 2026-10-02** on `seattle-tbilisi-build`
+  (`pages/175_Tbilisi_Heatmap.py`; 13,252 storefronts, 23 stations; Georgia's
+  first city, the West Asia region), held for the owner's review time.
+- [ ] **Tbilisi: run the full placeholder check before the next review**
+  (owner, 2026-10-02). The build's register pull could not take "commonest
+  address" in full, so step 2 ran a bounded check (33 points of 50+ rows
+  unsettled). Re-pull with `python pipeline/tbilisi/fetch_sources.py --only
+  register --force` (about 70 minutes at Geostat's 2026-10-02 pace, through
+  `heavy_job.py`), then step 2: it exits if the eleven listed points differ
+  from what the rule finds. `docs/decisions_drafts/seattle-tbilisi.md`.
 - **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
   first MULTI-MUNICIPALITY city.** Do not re-probe the Seattle registry itself;
   the findings are in `docs/build_briefs/seattle.md`, with checks

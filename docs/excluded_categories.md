@@ -3817,6 +3817,54 @@ stations outside are listed on Anyang's page): Line 1 and Line 4,
 have, and was built for the share of its storefronts within a ring instead
 (owner, 2026-09-29). No other line has a station in the city.
 
+### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
+
+**The source** is the National Statistics Office of Georgia's Statistical
+Business Register: every business it counts as active whose factual address
+(where it operates) is in the city of Tbilisi, 63,511 in all. Each is
+classified by one main activity in NACE Rev. 2, at Georgia's national fifth
+digit.
+
+**Excluded by the classification** (each a leaf code; the counts are active
+Tbilisi businesses, 2026-10-02):
+
+- **Market stalls**: food, clothing and other goods sold from stalls and
+  markets (47.81, 47.82, 47.89), 1,833. The traders on fixed pitches at the
+  Lilo and Eliava markets who are filed as clothing or parts shops are kept.
+- **No premises**: mail-order and internet retail, internet auctions and
+  other retail outside shops (47.91, 47.99), 466.
+- **Food with no counter of its own**: event catering, contract catering
+  and canteens (56.21, 56.29 and the bare group 56.2), 285.
+- **Funeral services** (96.03), 25.
+- **The "other personal services" catch-all** (96.09 and its leaves, among
+  them pet grooming, training and boarding), 80, as in every city.
+- **Vehicle repair and wholesale** (45.20, 45.31), and the two vehicle codes
+  that mix selling with wholesale or brokerage (45.11.1, 45.11.3). Vehicle
+  and parts sales are kept, as Retail, and so is the one code for motorcycle
+  sale and repair together (45.40).
+
+**Missing rather than excluded** - a business whose main activity is
+something else (a wholesaler with a shop, a hotel's restaurant) is not shown,
+since each business carries one main activity.
+
+**A business, not a shop** - the register lists each business once, at one
+address, so a chain with several shops appears once.
+
+**Left off because they could not be placed** - 1,620 storefronts with no
+coordinate, and 1,481 on eleven points that are the center of a district or
+settlement rather than an address (a point shared by 50 or more businesses
+whose commonest address is a bare district or settlement name, or blank).
+Four of those points sit within 115 m of a metro station (Didube, Isani,
+Samgori and Liberty Square), where they would have inflated the innermost
+rings. 3 more have a coordinate outside the city.
+
+**Shown, but not named** - a business registered to a person (an individual
+entrepreneur, 8,328 of the storefronts shown) shows its category instead of a
+name.
+
+**All 23 metro stations are inside the city**; nothing is drawn beyond the
+two metro lines.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

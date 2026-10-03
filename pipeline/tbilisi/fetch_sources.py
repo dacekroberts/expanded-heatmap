@@ -93,11 +93,16 @@ def reduce_rows(rows):
         factual = (row.get("Address2") or "").strip()
         legal = (row.get("Address") or "").strip()
         if not factual:
-            keep["factual_address_bare"] = ""
-        elif person or has_digit(factual):
-            keep["factual_address_bare"] = "#"
+            keep["factual_address_key"] = ""
+        elif person:
+            keep["factual_address_key"] = "#"
+        elif has_digit(factual):
+            # A street address is kept only as a short hash, so step 2 can
+            # find the commonest address at a point without storing any.
+            norm = " ".join(factual.split()).casefold()
+            keep["factual_address_key"] = "#" + hashlib.sha1(norm.encode("utf-8")).hexdigest()[:12]
         else:
-            keep["factual_address_bare"] = factual
+            keep["factual_address_key"] = factual
         keep["legal_eq_factual"] = bool(factual) and factual == legal
         out.append(keep)
     return out

@@ -4,6 +4,110 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Tbilisi privacy verdict: publish
+
+- **`check_personal_exposure.py tbilisi` gained a Georgian pass**
+  (`pipeline/georgian_names.py`): the Latin heuristic cannot read Mkhedruli,
+  so its zero was not a finding (the brief's warning).
+- **The rule, tested on the processed file**: an individual entrepreneur
+  (legal form 30) shown by name: **0** of 8,328 (owner, 2026-10-01: category
+  only, Taichung's precedent). Their names and personal numbers never reach
+  the disk: the fetch drops them in memory and step 2 asserts it.
+- **Company names that read as a person's full name** (the heuristic: two
+  Georgian words after the legal form, the second with a surname ending):
+  148 of 4,924 company names shown, 147 of them beginning with their
+  legal form (`შპს`, an LLC). Kept, on Seattle (Regional)'s precedent: a
+  person-like name carrying an organisational marker is a company's
+  registered name, public commercial information. Every company name shown
+  but 30 begins with its legal form.
+- **No residence signal**: the register states none; legal address equal to
+  factual on 3.5% of kept individual-entrepreneur rows (Step 0), and those
+  pins carry no name. No address is published for any pin.
+- **Verdict: publish.** Row in `docs/privacy_verdicts.md`.
+
+### 2026-10-02 - Tbilisi: Geostat's register at the factual address, 13,252 storefronts; district-center placeholders left off by the owner's rule
+
+- **The pull**: 63,511 active entities with a factual address in region 11.
+  The API has no column selection, so each page is reduced in memory to the
+  kept columns plus three derived ones (a company's name; a placement key per
+  factual address; a legal-equals-factual flag) before anything is written.
+  On 2026-10-02 a 10,000-row page outlasted the API's gateway (HTTP 502)
+  though Step 0 had pulled such pages that morning; 2,000-row pages took
+  2-3 minutes each, about 70 minutes for the register.
+- **The placeholder rule, re-derived at build** (owner, 2026-10-02): a point
+  carrying 50 or more active rows whose commonest company factual address is
+  a bare district or settlement name, or blank. The first pull reduced every
+  numbered address to one marker, so "commonest" could not be taken (it found
+  one point); measured, a share-of-bare-addresses proxy did not separate the
+  ten known points from small named places, so the register was pulled again
+  with each company's numbered address kept only as a 12-hex hash (no street
+  address stored). The re-pull was stopped at page 7 of 32: **the owner chose to skip it for this build and run it before the next review** (2026-10-02). So step 2 runs a BOUNDED check on the build's pull: every point the pull proves qualifies must be listed, and every listed point must still carry 50+ rows. It proved one point Step 0 did not list, **Mtatsminda (41.695863, 44.792928: 27 of its 28 companies give the bare district name; 51 rows, 19 storefronts), added**. **33 other points of 50+ rows could not be settled** (1,629 storefronts): at nearly all, the commonest bare name appears 1 to 4 times against dozens of street addresses, the largest being the Lilo market (486 storefronts, a real address), so the full check is expected to confirm the eleven. The fetch already keeps the per-address hash, so the next pull runs the full check and step 2 exits if the set differs.
+- **Taxonomy `georgia_nace`**, NACE Rev. 2 at the national leaf, modelled on
+  France's NAF module, with a closed list: every code in divisions 45, 47, 56
+  and 96 is named as kept or left out, and step 2 exits on one that is
+  neither. Left out on the standing rules: market stalls (R1), nonstore
+  retail, event and contract catering (R1), funeral, the 96.09 catch-all
+  (R2; its leaves include pet grooming, training and boarding). Division 45
+  on the precedent (owner, 2026-10-02): 45.11.2, 45.19.0 and 45.32.0 kept,
+  1,516 rows; 45.11.1 (the wholesale half decides it), 45.11.3 (brokerage),
+  45.20.0 (repair) and 45.31.0 (wholesale) out. **45.40.0, motorcycle sale
+  WITH maintenance and repair in one code (34 rows), which the brief did not
+  name, is kept**: R4's "a type that merges fuel with repair or a car wash
+  goes whole" (Edmonton, Philadelphia). 45.11.3, also unnamed, is a
+  broker, not a dealer, and stays out.
+  47.73.1 is a veterinary pharmacy (kept, Retail); 56.10.0 merges restaurants
+  with mobile food and is kept whole. Category continuity: a column for
+  `georgia_nace`, every rule answered.
+- **Counts**: 16,356 storefronts by the taxonomy (Retail 13,744 with division 45's 1,550, Food service 1,343, Personal services 1,269); 1,620 with no coordinate, 1,481 on the eleven placeholder points and 3 outside the city boundary are not shown; **13,252 placed (81.0%)**: Retail 11,114, Food service 1,074, Personal services 1,064. 8,084 (61%) within 0.6 mi of a station: 6,728 / 702 / 654. Company names 4,924; category only 8,328 (individual entrepreneurs).
+- **Names**: a company shows its registered name in Georgian (with its legal
+  form); an individual entrepreneur shows the category (owner). Fonts: the
+  map declares no language; Segoe UI carries Georgian on Windows and the
+  browser falls back elsewhere.
+- **"Active"**: Geostat's own definition, "an enterprise which is engaged in
+  economic activity" (Business Demography metadata, 0519); the
+  turnover-or-staff criterion stays a secondary source's (IEM journal), so
+  the page says only that a new business may not be shown yet.
+- **Line 2's color**: OSM's `green` is a CSS keyword; its value #008000
+  measured CIE76 37.2 against the Personal services pins, under the
+  preferred 45, so #30A800, the nearest green that clears it (45.5), as
+  Seattle's colors were moved.
+- **Proposals for review** (no template covers them): the page's credit
+  caption and notice 114's wording (the brief's proposed text, plus "Not
+  endorsed by Geostat."); the page bullets on the register's limits; the
+  What Is Excluded and About the Data sections.
+
+### 2026-10-02 - Tbilisi: the metro from OpenStreetMap, 23 stations, gate 3 exact; a new West Asia region
+
+- **Started after Seattle (Regional) was green and committed** (the kit's
+  conditions: the owner had answered the brief's three calls the same day,
+  and the move to a West Asia region of its own lifted the wait on the UK
+  pass). `brief_check.py tbilisi` passed 12 of 12 before any code.
+- **One Overpass query for the city** (overpass-api.de, first attempt, 94
+  elements): the subway route relations, their route_masters, member nodes,
+  track ways, every `station=subway` node, and the city's administrative
+  relation (1996871, admin_level 4). The brief's Step 0 cache lacked the
+  boundary, so the build issued this one query instead of reusing it. Four
+  relations, two per line, all kept by `ref`; any other subway relation
+  exits.
+- **23 stations: 16 on the Akhmeteli-Varketili Line, 7 on the Saburtalo
+  Line**, the 46 stop positions collapsed by name (widest 20 m) and matched
+  one-for-one to the 23 `station=subway` nodes. Gate 3 against Tbilisi
+  Transport Company's Stakeholder Engagement Plan (October 2024): "27.3 km
+  with 23 stations on two lines"; the drawn track measures 19.6 + 7.9 km.
+  Spacing: min 115 m (Station Square-1 and -2, both drawn under their real
+  names, as both are in the operator's count), median 1,039 m, max 1,538 m:
+  the standard rings. Every station is inside the city (504 km2).
+- **"Nadzaledevi" in OSM is labeled Nadzaladevi**, the operator's and the
+  register's spelling (`STATION_NAME_FIXES`; step 1 exits once OSM is
+  corrected, so the fix cannot outlive the error).
+- **Line colors from OSM**: line 1 `#FF0000`; line 2 `colour=green`, a CSS
+  keyword, mapped to its CSS value `#008000`.
+- **Region "West Asia"** (owner, 2026-10-02), appended to `REGION_ORDER` by
+  `scaffold_city.py --new-region` with the reasoning in its comment; a view
+  of its own, not in `COUNTRY_VIEWS`. Europe is unchanged.
+- **Page 175; notice 114 (Geostat)** from the session's claimed block
+  (115 and 116 unused).
+
 ### 2026-10-02 - Seattle (Regional) green: every gate run, baseline recorded, held for review time
 
 - **Gates, in Band B's order:** personal exposure (publish; row in

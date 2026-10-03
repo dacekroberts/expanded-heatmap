@@ -303,6 +303,21 @@ Cities built and running end to end (pipeline, map, app page):
   Bellevue marks sole proprietorships. The food registers' workplace
   cafeterias, vending, hotel kitchens and clubs are left out by name, as in
   Minneapolis.
+- **Tbilisi** - the Tbilisi Metro's two lines, every station; held for the
+  batch review. **Georgia's first city and the first in the West Asia
+  region**, a view of its own (Europe's frame was not stretched east).
+  Businesses from one national source, Geostat's Statistical Business
+  Register, filtered to the FACTUAL address in the city: one row per entity,
+  not per premises, so chains are undercounted (owner, disclosed). The API
+  has no column selection, so personal numbers and individual entrepreneurs'
+  names are dropped in memory before anything is saved, and an individual
+  entrepreneur's pin shows its category (Taichung's precedent). The
+  register's coordinates include district and settlement centroids shared by
+  dozens of businesses, four of them on metro stations; those points are
+  found by a stated rule, listed, and left off. NACE Rev. 2 at the national
+  leaf (`georgia_nace.py`, modelled on France's NAF module), with vehicle
+  sales kept (the precedent, not France's exception). Rail and the city
+  boundary from one OpenStreetMap query.
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first
   built from two municipalities' own registries.** Distinctive in five ways.

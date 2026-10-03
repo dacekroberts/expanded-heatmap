@@ -432,6 +432,13 @@ REGISTRIES = {
     # The food registers and the Liquor Board name premises; measured here.
     "seattle": dict(raw=None, trade=None, owner=None,
                     processed="businesses_clean.csv", address=("address",)),
+    # Tbilisi: Geostat's national register. An individual entrepreneur's name
+    # and personal number are never written to disk (fetch_sources drops them
+    # in memory; step 2 asserts); their pins show the category. Names are
+    # Georgian script, which the Latin heuristic cannot read: `georgia` runs
+    # the Georgian pass (pipeline/georgian_names.py). No address is published.
+    "tbilisi": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None, georgia=True),
     # Sacramento: the City's Business Operation Tax register. The owner's name,
     # phone and mailing columns are never downloaded (fetch_sources names its
     # columns; step 2 asserts), so no fallback exists; Business_Name is shown,
@@ -1097,6 +1104,30 @@ def check(slug):
               f"{int((sole & shown).sum()):,}, industry shown on {int((sole & ~shown).sum()):,}")
         print(f"    SOLE PROPRIETOR NAME SHOWN WITHOUT A BUSINESS MARKER: {sum(breach):,} "
               f"(should be 0)  [Taiwan rule]")
+
+    # THE GEORGIA PASS. The rule (owner, 2026-10-01): an individual
+    # entrepreneur's pin shows its category, never a name - tested on the
+    # processed file, should be ZERO. Then a heuristic count of company names
+    # that read as a person's full name; each carries its legal form, the
+    # organisational marker (pipeline/georgian_names.py). Counts only.
+    if spec.get("georgia") and proc.exists():
+        sys.path.insert(0, str(ROOT))
+        from pipeline.georgian_names import has_legal_form, reads_as_full_name
+        d = pd.read_csv(proc, dtype=str, low_memory=False).fillna("")
+        person = d.legal_form.str.startswith("Individual")
+        named = d.business_name != d.activity_label
+        print(f"  individual entrepreneurs: {int(person.sum()):,} of {len(d):,} rows; "
+              f"category shown on {int((person & ~named).sum()):,}")
+        print(f"    INDIVIDUAL ENTREPRENEUR SHOWN BY NAME: {int((person & named).sum()):,} "
+              f"(should be 0)  [Georgia rule]")
+        companies = d.business_name[~person & named]
+        marked = companies.map(has_legal_form)
+        full = companies.map(reads_as_full_name)
+        print(f"  company names shown: {len(companies):,}; beginning with a legal form: "
+              f"{int(marked.sum()):,}")
+        print(f"  company names reading as a person's full name: {int(full.sum()):,} "
+              f"({100 * full.mean() if len(full) else 0:.1f}%), with a legal form: "
+              f"{int((full & marked).sum()):,}  [Georgian heuristic]")
 
     # THE JAPAN PASS. Japan's permit lists carry the operator's name (営業者名 /
     # 開設者名) beside the trade name (屋号 / 施設名称), and the Latin heuristic

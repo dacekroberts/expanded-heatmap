@@ -202,6 +202,9 @@ TEXT_WIDTH = {
     # 600 loaded from Google Fonts; controls Vancouver (Regional) 144.4, Miami
     # (Regional) 112.6, Buffalo 48.8 and Boston 48.4 reproduced exactly.
     "Seattle (Regional)": 120.5,
+    # Tbilisi, 2026-10-02, the same method; controls Seattle (Regional),
+    # Vancouver (Regional), Buffalo and Boston reproduced exactly.
+    "Tbilisi": 39.1,
     # Ottawa, 2026-09-29, the font from Google Fonts as the app loads it;
     # controls Prague, Tokyo, Houston, Toronto.
     "Ottawa": 47.5,

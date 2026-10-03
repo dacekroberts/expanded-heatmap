@@ -71,12 +71,15 @@ PERSONAL_COLUMNS = [
 # 2026-10-01; Taichung's precedent).
 INDIVIDUAL_ENTREPRENEUR_FORM = "30"
 # Columns derived in memory from the dropped address strings, holding no
-# address: `factual_address_bare` is a legal entity's factual address when it
-# carries no digit (a bare district or settlement name, the placeholder
-# test below), "" when blank, and "#" otherwise; `legal_eq_factual` is the
-# only residence proxy the register offers (3.5% of kept individual
-# entrepreneurs, measured 2026-10-02: too weak to act on, recorded).
-DERIVED_COLUMNS = ["Full_Name", "factual_address_bare", "legal_eq_factual"]
+# street address: `factual_address_key` is, for a legal entity, its factual
+# address when that carries no digit (a bare district or settlement name, the
+# placeholder test below), "" when blank, and otherwise "#" plus a 12-hex
+# hash of the normalised address, so the commonest address at a point can be
+# found without storing one; an individual entrepreneur's is "#" or "".
+# `legal_eq_factual` is the only residence proxy the register offers (3.5% of
+# kept individual entrepreneurs, measured 2026-10-02: too weak to act on,
+# recorded).
+DERIVED_COLUMNS = ["Full_Name", "factual_address_key", "legal_eq_factual"]
 
 # X is LATITUDE and Y is LONGITUDE (the register app reads `lat: X, lng: Y`).
 LAT_COLUMN = "X"
@@ -90,8 +93,17 @@ LON_COLUMN = "Y"
 # entity factual address is a bare district or settlement name, or blank, is
 # a placeholder; its rows are dropped and disclosed. Step 2 re-derives the
 # set and exits if it differs from this list, so a refresh that moves a
-# centroid is seen, not absorbed. Measured 2026-10-02: ten points, 1,295
+# centroid is seen, not absorbed. Measured at Step 0, 2026-10-02: ten points, 1,295
 # kept rows, 805 of them on four metro stations.
+#
+# ⚠ THE BUILD'S PULL CANNOT TAKE "COMMONEST" IN FULL. It kept every numbered
+# address as one marker, so step 2 runs a BOUNDED check on it: every point
+# the pull proves qualifies must be listed (it proved one more, Mtatsminda,
+# added), and every listed point must still carry 50+ rows. 33 points could
+# not be settled that way (1,629 storefronts; at nearly all, the commonest
+# bare name appears 1-4 times against dozens of street addresses). The full
+# check runs on the next pull, whose fetch keeps a hash per address (owner,
+# 2026-10-02: skip the re-pull for this build, run it before the next review).
 PLACEHOLDER_MIN_ROWS = 50
 PLACEHOLDER_POINTS = {
     (41.68655, 44.840891): "Isani district (77 m from Isani station)",
@@ -104,6 +116,9 @@ PLACEHOLDER_POINTS = {
     (41.72151, 44.762499): "Digomi village centroid",
     (41.695, 44.789167): "three-decimal point, city center",
     (41.613415, 44.908357): "Krtsanisi, blank addresses",
+    # Proved by the build's pull: 27 of the point's 28 companies give the bare
+    # district name, against one street address.
+    (41.695863, 44.792928): "Mtatsminda district, bare addresses",
 }
 # Coordinates are compared at this many decimals (the register carries 6-7
 # or 12-15; two geocoding generations).
@@ -121,9 +136,12 @@ OSM_JSON = DATA_RAW / "osm_tbilisi.json"
 OSM_BOUNDARY_NAME_EN = "Tbilisi"
 
 LINE_REFS = {"1": "Akhmeteli-Varketili Line", "2": "Saburtalo Line"}
-# OSM's own colours: line 1 `#FF0000`; line 2 `green`, a CSS keyword, mapped
-# to its CSS value. Checked against the bucket colours at render.
-LINE_COLOURS = {"1": "#FF0000", "2": "#008000"}
+# OSM's colours: line 1 `#FF0000`; line 2 `green`, a CSS keyword rather than
+# an operator hex. Its CSS value, #008000, measured CIE76 37.2 against the
+# Personal services pins, under the preferred 45 (pipeline/linecolour.py);
+# #30A800 is the nearest green that clears it (45.5), as Seattle's line
+# colours were moved (DECISIONS drafts, seattle-tbilisi).
+LINE_COLOURS = {"1": "#FF0000", "2": "#30A800"}
 # Gate 3: "27.3 km with 23 stations on two lines" (Tbilisi Transport Company,
 # Stakeholder Engagement Plan, October 2024). Per line, 16 + 7, as OSM's
 # relations carry them; the operator states the total.

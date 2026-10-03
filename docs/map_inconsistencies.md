@@ -53,7 +53,8 @@ dense-looking city may simply have more complete records.
   Yongin, Suwon and Bucheon (SEMAS's national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo and Bergen (Enhetsregisteret sub-units),
   Copenhagen and Aarhus (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
-  and Taipei (the national business tax register, FIA).
+  and Taipei (the national business tax register, FIA); Tbilisi (Geostat's Statistical
+  Business Register, one row per business rather than per shop).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
 - **A food hygiene register:** London and Newcastle (Regional) (the Food Standards
@@ -269,7 +270,8 @@ name at their home.
 - **"Name withheld" in place of a personal name:** Seoul (138 pins), Daegu (113),
   Busan (114).
 - **Line of business in place of an unmarked sole proprietor's name:** Taichung
-  (11,907 pins), Taoyuan (7,230), Taipei (17,890).
+  (11,907 pins), Taoyuan (7,230), Taipei (17,890). Tbilisi (8,328 businesses registered
+  to a person show their category).
 - **"No shop sign":** Hong Kong (308 pins, where the licence records none).
 - **Reason:** the source has no name column, or a privacy rule.
 
@@ -332,7 +334,10 @@ really shopfronts. Several pages say which way their map leans.
   hundred has no map point and is not placed); Newcastle (Regional) (about one
   in fourteen unplaced, most in North Tyneside and Sunderland); Buenos Aires
   (shopfronts whose use the surveyors could not identify, 7.2% and 32% in Villa
-  Riachuelo, are dropped, and shops inside malls and arcades are not itemised).
+  Riachuelo, are dropped, and shops inside malls and arcades are not itemised);
+  Tbilisi (one row per business, so a chain appears once; about one storefront in
+  five has no location, or only a district center's, and is not placed; a new
+  business appears once Geostat counts it as active).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
@@ -653,6 +658,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
 | **Switzerland** | | | | | |
 | Zurich | VBZ trams 2–11, 13–15, 17 and the 2026 construction lines 50 and 51 | S-Bahn; Forchbahn S18; trams 12 (Glattalbahn) and 20 (Limmattalbahn), stubs | OpenStreetMap route relations; gate 3 exact (ZVV) | City (Stadt Zürich) | 15 / 0 |
+| **Georgia** | | | | | |
+| Tbilisi | Tbilisi Metro, Akhmeteli-Varketili and Saburtalo Lines | — | OpenStreetMap route relations (no GTFS found); gate 3 exact (23, the operator's count) | City | 0 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -810,6 +817,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 | **Switzerland** | | | | | |
 | Zurich | License register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
+| **Georgia** | | | | | |
+| Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,728 / 702 / 654 | A business, not a shop: a chain appears once |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -956,6 +965,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | **Switzerland** | | | |
 | Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
+| **Georgia** | | | |
+| Tbilisi | Register coordinates (81.0%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -1113,6 +1124,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
 | **Switzerland** | | | | | | |
 | Zurich | Open licences, kept current; last updated 2026-09-28 (fetched 2026-09-30) | B | 0.3 mi | Yes | 92% | Trade name and licence type; address for a person-named trade name |
+| **Georgia** | | | | | | |
+| Tbilisi | Live register (fetched 2026-10-02) | Yes (caption) | 0.6 mi | Yes | 61% | Company name in Georgian, or the category for a business registered to a person (8,328) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

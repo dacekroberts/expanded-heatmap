@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
@@ -106,6 +106,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
+| Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
 ## Business registries
 
@@ -2533,6 +2534,23 @@ session's claimed block, 109–116.)
   list of individuals"); publish contact names, phones, mailing addresses or
   person-named trade names.
 - **MUST DO**: nothing.
+
+**114. Geostat (Tbilisi) — required, and DISPLAYED**
+(written into `render_site_notices()` with Tbilisi, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**: Geostat's Terms of Use
+  (`https://www.geostat.ge/en/page/monacemta-gamoyenebis-pirobebi`, linked
+  from the register's own footer as "Terms of Data Usage") allow any use,
+  "including commercial and non-commercial use, without restriction ...
+  without prior permission". Third-party copyright and Geostat's logos and
+  trademarks are outside the grant. Rows in
+  [`data_sources/georgia.md`](data_sources/georgia.md).
+- **MUST DISPLAY**: Geostat as the source: "Users should indicate Geostat as a
+  source of information when using data of GEOSTAT" (also Article 43(6) of
+  Georgia's Law on Official Statistics).
+- **MUST NOT**: use Geostat's logo; imply Geostat's endorsement.
+- **MUST DO**: nothing further. Individual entrepreneurs' names and personal
+  numbers are never written to disk; the removal rule is the safety net.
 
 ## Gaps
 

@@ -1,0 +1,44 @@
+{
+  "osm": {
+    "file": "osm_tbilisi.json",
+    "url": "overpass (overpass-api.de)",
+    "bytes": 232608,
+    "sha256": "3cd0737c98d62b65fbbf614f73c739dd5bab48f7a4b03199d2cee6defe738d0f",
+    "retrieved": "2026-10-02T23:27:07+00:00",
+    "licence": "ODbL 1.0"
+  },
+  "geostat_register": {
+    "file": "geostat_br_tbilisi_active_2026-10-02.build.csv",
+    "url": "https://br-api.geostat.ge/api/documents",
+    "query": {
+      "factualAddressRegion": "11",
+      "isActive": "true",
+      "lang": "en"
+    },
+    "rows": 63511,
+    "bytes": 16468672,
+    "sha256": "f89ec3fc1ab640e99ad27bb3b9ac015985797e60d003323b79f137b3e5fe7b05",
+    "retrieved": "2026-10-02T23:55:05+00:00",
+    "columns_written": [
+      "Stat_ID",
+      "Legal_Form_ID",
+      "Legal_Form",
+      "Ownership_Type",
+      "Region_Code2",
+      "City_Code2",
+      "City_name2",
+      "Activity_2_Code",
+      "Activity_2_Name",
+      "ISActive",
+      "Zoma",
+      "X",
+      "Y",
+      "Init_Reg_date",
+      "Reg_Date",
+      "Full_Name",
+      "factual_address_bare",
+      "legal_eq_factual"
+    ],
+    "terms": "https://www.geostat.ge/en/page/monacemta-gamoyenebis-pirobebi"
+  }
+}

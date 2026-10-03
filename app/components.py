@@ -1823,6 +1823,14 @@ _NOTICES = [
     ("City of Seattle (Seattle (Regional))",
      "Business license data: City of Seattle.",
      False),
+    # Tbilisi (notice 114): Geostat's Terms of Use require naming Geostat as
+    # the source (also Art. 43(6) of Georgia's statistics law); no logo, no
+    # implied endorsement. Wording proposed by the brief, flagged for review.
+    ("Geostat (Tbilisi)",
+     "Business data: National Statistics Office of Georgia (Geostat), Statistical "
+     "Business Register, retrieved 2026-10-02; processed by this project. Not "
+     "endorsed by Geostat.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
