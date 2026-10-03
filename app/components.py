@@ -1950,6 +1950,27 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Yokosuka and MLIT did not make "
      "and do not endorse this map.",
      False, ("Yokosuka",)),
+    # Himeji (notice 117): the city's four CKAN datasets, CC BY 4.0 (each
+    # record's license_id; the catalogue's terms 1.4(1)), in the terms' 1.1
+    # form per dataset; not presented as the city's own (1.1 ２). MLIT as in
+    # Kobe's, N02 in its 2025 edition. Written from Kōchi's and Kawasaki's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30).
+    Notice(117, "Himeji City and MLIT (Himeji)",
+     "Himeji's businesses: 出典：「食品営業許可施設一覧」（姫路市）"
+     "（[https://city.himeji.gkan.jp/gkan/dataset/shokuhinn](https://city.himeji.gkan.jp/gkan/dataset/shokuhinn)）を加工して作成、"
+     "「理容所一覧」（姫路市）（[https://city.himeji.gkan.jp/gkan/dataset/riyousyo](https://city.himeji.gkan.jp/gkan/dataset/riyousyo)）を加工して作成、"
+     "「美容所一覧」（姫路市）（[https://city.himeji.gkan.jp/gkan/dataset/biyousyo](https://city.himeji.gkan.jp/gkan/dataset/biyousyo)）を加工して作成、"
+     "「クリーニング所一覧」（姫路市）（[https://city.himeji.gkan.jp/gkan/dataset/kuriininngu](https://city.himeji.gkan.jp/gkan/dataset/kuriininngu)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Himeji's lists of food-business permits and of barbers, beauty "
+     "salons and laundries as of 10 September 2026: this project selected the storefront types, placed each "
+     "by its address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Himeji and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Himeji",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

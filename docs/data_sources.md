@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3150,6 +3150,23 @@ review time).
 - **MUST DO:** `check_personal_exposure.py yokosuka` with its Japan pass,
   run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
   ("Yokosuka built", 2026-10-03).<!-- /internal -->
+
+**117. Himeji City and MLIT (Himeji) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-03; lands with Japan wave 2 at
+review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's four
+  datasets are **CC BY 4.0** (each record's `license_id`; the catalogue's
+  terms give way to the marking, 1.4(1)). MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY** (the terms' 1.1, per dataset): 出典：「食品営業許可施設一覧」（姫路市）（…/gkan/dataset/shokuhinn）を加工して作成, and likewise 「理容所一覧」, 「美容所一覧」, 「クリーニング所一覧」, with the CC BY 4.0 link; MLIT's credit lines.
+- **MUST NOT**: present edited data as if the city made it (1.1 ２); imply
+  endorsement.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py himeji` with its Japan pass,
+  run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
+  ("Himeji built", 2026-10-03).<!-- /internal -->
 
 ## Gaps
 

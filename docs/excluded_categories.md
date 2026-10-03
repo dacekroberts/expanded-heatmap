@@ -3667,6 +3667,39 @@ line.
 - Left out: 5 stations beyond it: 2 in Yokohama (Kanazawa Ward), 2 in Miura
   and 1 in Zushi.
 
+### Himeji - the city's food list and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 1,164 food trucks and stalls licensed for the whole city with no fixed
+  address (773 stalls, 391 vehicles), and 22 stalls listed at an address.
+- 298 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+
+**Counted** - every food permit on the city's list of 10 September 2026, and
+every barber, beauty salon and laundry on its registers of the same date,
+among them 186 salons confirmed without a hair-washing basin because they do
+no hair work. 26 of the 684 bakery, confectioner and deli rows (3.8%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 268 repeat permits are shown once.
+
+**Not placed** - 18 rows. Another 1,583 sit at their town's center: the
+central district's towns are a few blocks each, and rural 大字 have no block
+data.
+
+**Names not shown** - 3 trade names that are their operator's own name show
+their permit type instead.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 10 stations beyond it: 4 in Takasago, 3 in Tatsuno, 2 in
+  Kamikawa and 1 in Fukusaki.
+- The Shinkansen is not drawn (Himeji appears as a JR station).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

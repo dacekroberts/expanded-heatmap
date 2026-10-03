@@ -4,6 +4,68 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Himeji built, the city's food list and three registers
+
+- **Himeji built (page 178, notice 117): 8,482 storefronts (Food service
+  5,601, Food shops 1,008, Personal services 1,873) around 31 stations on 6
+  lines, 67.2% of them in a ring.** The city's CC BY 4.0 lists on its CKAN
+  as of 2026-09-10 (food 8,347 rows, barbers 380, beauty 1,336, laundries
+  189), joined to MLIT's address blocks for the one municipality: 7,167 rows
+  at the block (81.7%), 1,583 at a town centre (18.1%), 18 unplaced; food
+  fixed in a bucket 81.6 / 18.3 / 0.2, the shared-code pass's figure with
+  the 甲乙丙 rule (`kou_bare`; the brief's 79.4 / 17.9 / 2.7 before it). 268
+  repeat permits shown once. Not a premises: 1,164 (市内一円: 773 露店
+  stalls, 388 restaurant vehicles, 3 fish vans); out by rule: 298
+  manufacturing and other non-counter types ("no rule"), 22 露店 stalls at a
+  listed address (temporary / mobile). 飲食店営業（住宅宿泊事業） (1) reads
+  Food service, as the brief says. Restaurants against the official count:
+  6,893 restaurant rows against e-Stat's FY2024 6,706, 103% (the brief's).
+- **「市条例第３条第２項該当」 (4 barbers, 182 beauty salons) counted as ordinary
+  shops.** The ordinance's text is behind g-reiki, which refuses this machine,
+  WebFetch and the browser pane (403). The city's own facility standards
+  (美容所の開設手続きについて, R7.4.24) carry one exception: a hot-water
+  hair-washing basin is not required where a premises does no hair work and
+  there is no hygiene obstacle. The flagged salons' trade names fit it
+  (keyword counts: 49 eyelash, 9 makeup, 7 nail and 23 hair words among
+  182, against 10, 21, 1 and 624 among the 1,154 unflagged). Each is a
+  美容所 / 理容所 inspected and confirmed at a fixed address.
+- **Held calls, counts touched:** 複合型そうざい製造業 (3 rows) stays out
+  ("no rule"), and 複合型冷凍食品製造業 (2) with it. No deli recognised only by
+  its form: the list has no 業態 column. The 菓子 / そうざい factory share: 26
+  of 684 (3.8%), kept (owner, 2026-09-24). クリーニング所 一般 / 取次所
+  指定洗たく物取扱施設 (17 and 7, laundries also cleared for designated items
+  such as bedding) counted as laundries.
+- **Privacy verdict: publish.** `check_personal_exposure.py himeji`: the
+  Japan pass prints 0; 3 pins show their permit type (11 raw food rows; 7
+  of the brief's 18 are cooperatives' own names, shown, a cooperative (組合) is no person for the name rule, 13b2c280; the rest
+  stalls, vehicles or repeats). 氏名, every row's
+  operator, read in memory by the name rule only.
+- **Rail:** N02-25, cut at the city line: JR West's 山陽線 drawn as two
+  routes meeting at 姫路, the JR Kobe Line (東姫路, 御着, ひめじ別所, to 曽根 in
+  Takasago) and the Sanyo Line (英賀保, はりま勝原, 網干), as JR West signs
+  them; the Sanyo Line's route ends at 網干 because the next station, 竜野, is
+  beyond the 3 km step 1 draws past the city line (`DRAW_BEYOND_M`); the
+  播但線 (7 of 18 inside) and 姫新線 (4 of 36); Sanyo Electric's 本線 (9 of 43)
+  and 網干線 (7 of 7, wholly inside). The Shinkansen's 姫路 dropped. 飾磨 one N02
+  group for both Sanyo lines; JR 姫路 and 山陽姫路 apart (separate groups).
+  Gate 3: Sanyo Electric Railway's station index names all 15 in-city
+  stations, Main Line 9 and Aboshi Line 7, exact. 10 stations excluded: 4 in
+  Takasago, 3 in Tatsuno, 2 in Kamikawa, 1 in Fukusaki. English names in
+  Hiroshima's style: 5 cited overrides (京口, 香呂, 太市, 大塩 without OSM's
+  macrons; 山陽姫路 hyphenated as OSM writes 山陽網干 and 山陽天満); the other 26
+  as OSM has them. Colours from `line_colour_search.py` (closest pair 18.9,
+  Sanyo's two lines at 飾磨). Median gap 1,377 m: standard rings.
+- **Economic Census control: 2.44** Food service pins per 2021 census 飲食店
+  establishment (5,601 against 2,297), above the built cities' 1.56-1.92 and
+  explained as the brief explains it (2.41 there): a complete list, inside
+  the complete lists' band (Kobe 2.38), and below official / census (6,706
+  against 2,297, 2.92), Matsuyama's benchmark.
+- **Prose proposals for review time:** none on the page (every sentence is
+  the skill's template or Kitakyushu's Shinkansen form). In What Is Excluded:
+  "among them 186 salons confirmed without a hair-washing basin because they
+  do no hair work"; "the central district's towns are a few blocks each, and
+  rural 大字 have no block data."
+
 ### 2026-10-03 - Yokosuka built, the city's food list and four registers
 
 - **Yokosuka built (page 177, notice 116): 4,544 storefronts (Food service

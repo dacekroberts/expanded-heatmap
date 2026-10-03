@@ -728,5 +728,10 @@
   "in_ring": 3535,
   "all": 4544,
   "map_blob": "682dee237df54ec8f7a5164407054fe589dba5d8"
+ },
+ "himeji": {
+  "in_ring": 5697,
+  "all": 8482,
+  "map_blob": "0280379b2e1b751ebdc1e03eeb36433142cd35f2"
  }
 }
