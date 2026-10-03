@@ -4023,6 +4023,45 @@ line.
   each in Ukiha, Chikugo and Tosu in Saga.
 - The Shinkansen is not drawn.
 
+### Sasebo - the city's old-law food list and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no lists of them, so
+  this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 1,225 national filings whose filers did not publish an address (530 of them
+  restaurants, about one restaurant in five).
+- 155 rows of the city's old-law list whose permit had ended by 31 August 2026.
+- 7 temporary or mobile permits and 216 rows with no fixed place (licensed for
+  the whole city, 市内一円).
+- 308 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 189 school, hospital and staff canteens, 90 vending machines, 1 mail-order
+  business, 78 premises inside hotels and inns and 170 caterers (仕出し).
+- 7 closed premises, which the national filings keep, marked.
+
+**Counted** - the city's old-law food permits (its list as of 30 April 2026)
+still in term on 31 August 2026, and the national filings as downloaded on 2
+October 2026. 12 of the 274 bakery, confectioner and deli rows (4.4%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 131 repeat permits are shown once, and 42 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 1 row. Another 38 sit at their town's center, and 255
+national filings at their own coordinates.
+
+**Names not shown** - none. The city's list names an operator only where it
+is a company, and the national filings name none, so a sole trader's own name
+cannot be checked.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line; the Matsuura Railway leaves the city through Saza and comes back.
+- Left out: 14 stations beyond it: 4 each in Saza and Arita (Saga), 3 in
+  Hirado, 2 in Kawatana and 1 in Matsuura.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

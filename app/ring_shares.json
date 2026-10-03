@@ -778,5 +778,10 @@
   "in_ring": 1961,
   "all": 3101,
   "map_blob": "11d6841cbc9d02e0a877dd17afeab73c965a7ca9"
+ },
+ "sasebo": {
+  "in_ring": 1696,
+  "all": 2448,
+  "map_blob": "d594757db01e0ea794e8dbe9c9958d3ffcf16bff"
  }
 }

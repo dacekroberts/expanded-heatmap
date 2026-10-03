@@ -4,6 +4,61 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Sasebo built, MHLW's filings and the old-law list, food only
+
+- **Sasebo built (page 188, notice 127), Kitakyushu's food shape: 2,448
+  storefronts (Food service 1,675, Food shops 773) around 28 stations on 3
+  lines, 69.3% of them in a ring (1,696).** MHLW's filings (4,461 rows) and
+  the city's old-law list as of 2026-04-30 (607 rows; 452 in term on
+  2026-08-31 by 終了年月日 through `in_term`, the `R 8. 5.31` dates now read;
+  155 dropped), joined to MLIT's address blocks for 42202: of 2,622 storefront
+  rows, 2,328 at the block (88.8%), 255 at MHLW's own point (9.7%; 247 from
+  chōme, 8 from none), 38 at a town centre, 1 unplaced. By source: MHLW 88.5%
+  block (11.5% own point), old-law list 90.5 / 9.5 / 0.0 - the lead's screen
+  exactly. MHLW's point against the block point: median 41 m, 90.6% within
+  250 m (1,966 rows); a default point refused for 1 row. 42 old-law rows
+  dropped for their MHLW row (`SUPERSEDES`; the brief's 20 counted
+  restaurants only), 131 repeat permits shown once. Closed 7; no address
+  published 1,225 (530 open restaurant permits of 2,332, 22.7%: "one in
+  five"); not a premises 216 (一円). Out by rule: 308 manufacturing and other
+  non-counter types, 189 canteens, 170 caterers (163 by MHLW's 業態, 7 by the
+  old list's 種目 仕出し屋), 90 vending (17 by 種目 自動販売機), 78 inside hotels
+  and inns (13 by 種目 旅館), 7 temporary, 1 mail order.
+- **種目 read as the form** (`form_cols`): 旅館 13, 自動販売機 17, 仕出し屋 7 out
+  in term. **Held (owner call pending):** 飲食店惣菜 4 in term (5 in the whole
+  list) stays Food service. Observation: 種目 カフェー (4 in term) stays Food
+  service; no rule reads it.
+- The 菓子 / そうざい factory share: 12 of 274 (4.4%), kept (owner,
+  2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py sasebo`: the
+  Japan pass prints 0; no pin withheld. The old-law list's 2 rows the name
+  rule flagged before the `coop` rule (commit 13b2c280) are a cooperative's
+  own name and now show it; the city removes a sole trader's name from its
+  list, and MHLW names no individual.
+- **Rail:** N02-25; 28 stations (Matsuura Railway 22, 佐世保 shared with JR;
+  JR Sasebo 5 and Omura 3, 早岐 shared). The Matsuura line leaves the city
+  through 佐々町 and comes back at 吉井: both in-city pieces drawn, with the
+  track through Saza between them; Saza's 4 stations excluded. Median
+  nearest-station gap 851 m: standard rings. 14 excluded: 佐々町 4, 有田町 4
+  (Saga, named through `N03_NEIGHBOR_PREFS` = 41), 平戸市 3, 川棚町 2, 松浦市
+  1. Gate 3: the Matsuura Railway's own route map read against the city line
+  gives 22, exact. English names: OSM's 66 objects, 6 cited overrides (Daito,
+  Emukae-Shikamachi, Inotsuki, Sasebo-chuo, Senpukuji, Senryugataki). Colours
+  from `line_colour_search.py` (the Matsuura blue goes teal; closest pair
+  92.3).
+- **Opening view:** the fit frames the mainland stations (33.04-33.36 N,
+  129.58-129.91 E); 35 storefronts on 宇久島 and 19 more west of the frame lie
+  outside every ring.
+- **Economic Census control:** 1,674 Food service pins inside the city
+  against 1,003 establishments, 1.67, inside the built cities' 1.56-1.92.
+- **Prose proposals for review time**: on the page, "The Matsuura Railway
+  leaves the city through Saza and comes back into it; its four stations in
+  Saza have no rings and are listed below." and "Sasebo City publishes no
+  lists of barbers, beauty salons or laundries, so personal services are not
+  on this map." (Okayama's bullet with Sasebo's reason), and "From two food
+  lists." (Kitakyushu's opener, without registers); in What Is Excluded, the
+  first Left-out bullet's reason and the Stations line's Matsuura clause.
+
 ### 2026-10-03 - Kurume built, MHLW's filings alone, food only
 
 - **Kurume built (page 187, notice 126), Okayama's shape: 3,101 storefronts
