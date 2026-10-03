@@ -148,7 +148,43 @@ carried over as they stand.
      "Before building" and the drafts.
    - **The app was rebooted by the owner after Cleanup's prose-pass
      landing** (2026-10-02).
-3. **Cleanup was re-rendering cities in the shared `data/`** on
+3. **After Bands A–C: four scopes (owner asked 2026-10-02, "1.2.4.5 … let's
+   scope all"; the owner's choices pending).**
+   - **Japan wave 2.** 114 uncovered municipalities: designated, core,
+     200k+, or with a tram, monorail, AGT or subway.
+     - **Likely A (9):** Kawasaki, Chiba, Takamatsu, Ōtsu, Himeji, Kurume,
+       Yokosuka, Nishinomiya, Nara.
+     - **Likely B (about 6):** Sasebo, Shimonoseki, Hamamatsu, plus
+       BODIK-list cities (Toyota, Yokkaichi, Wakayama, Higashiōsaka).
+     - **Likely fail:** most Tokyo, Saitama and Osaka satellites (rail
+       thin); Matsumoto, Funabashi and Miyazaki (addresses); Saitama and
+       Niigata (no city list).
+     - **Cost:** briefs about 1.5× the 2026-10-02 batch; the build about the
+       size of the batch, on its Phase 1 shared code. The scope is in the
+       staging scratchpad, `japan_wave2/SCOPE.md`. Thirty N03 prefecture
+       zips are now cached in `data/japan/raw/`.
+   - **Extensions to built cities** (PLAN; off the queue since 2026-09-28):
+     - Rio + Duque de Caxias and Belo Horizonte + Contagem: fully measured,
+       CNEFE cached.
+     - Vancouver (Regional): New Westminster and Coquitlam measured; Burnaby
+       needs the owner's browser fetch.
+     - D.C. + Arlington: approved download, an address join and a licence
+       read.
+     - Los Angeles + Long Beach: licence settled.
+   - **The commuter-rail group (12).** A rule question, not a probe. Most
+     fail any reasonable frequency bar; 30 minutes would admit about
+     Brisbane and Fort Worth only. Staging's lean: keep the rule.
+   - **Watch items** (checked 2026-10-02; scratchpad `watch_items/STATUS.md`).
+     Nothing is buildable now. Re-checks:
+     - Tainan, 18 Oct;
+     - Salvador and Teresina, after 25 Oct;
+     - Birmingham Line 2 / Dudley, about 1 Nov;
+     - Zurich, 13 Dec and 10 May 2027;
+     - Jaén, Q4.
+
+     Corrections: Jaén's tram is not open; the Hazel McCallion Line's
+     "early 2028" is construction's end, not opening.
+4. **Cleanup was re-rendering cities in the shared `data/`** on
    2026-10-01. If `check_macro_facts` or `check_ring_shares` blocks a push,
    tell Cleanup (`Cleanup session`). Never write those cities' facts from
    staging.
