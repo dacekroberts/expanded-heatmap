@@ -37,40 +37,26 @@ def point_key(lat, lon):
 
 
 def placeholder_points(df):
-    """Points carrying PLACEHOLDER_MIN_ROWS+ active rows whose commonest
-    legal-entity factual address is a bare place name or blank.
-
-    Returns (sure, undecided): with a per-address key (`factual_address_key`)
-    every point is settled and `undecided` is empty. A pull that kept every
-    numbered address as one marker (`factual_address_bare`, the build's of
-    2026-10-02) settles a point only when its commonest bare name or blank
-    outnumbers ALL its numbered company addresses together (sure) or when it
-    has no bare or blank company address (not a placeholder); the rest are
-    undecided (config.py, the bounded check)."""
+    """Candidate placeholders: points carrying PLACEHOLDER_MIN_ROWS+ active
+    rows whose commonest legal-entity factual address is not a street
+    address (a bare name, or blank) and is shared by at least
+    PLACEHOLDER_MIN_COMPANIES companies. Whether a bare name is a district or
+    settlement is read by a person (config: PLACEHOLDER_POINTS or
+    NOT_PLACEHOLDERS). Returns {point: (rows, companies sharing, name)}."""
     located = df[df["_key"].notna()]
     sizes = located.groupby("_key").size()
     big = sizes[sizes >= config.PLACEHOLDER_MIN_ROWS].index
     companies = located[(located["_key"].isin(big)) & ~located["_person"]]
-    full = "factual_address_key" in df.columns
-    col = "factual_address_key" if full else "factual_address_bare"
-    sure, undecided = {}, {}
+    found = {}
     for key, grp in companies.groupby("_key"):
-        values = grp[col].fillna("")
-        # A value starting "#" is a street address (hashed, or the marker);
-        # anything else is a bare place name or blank.
-        if full:
-            top = values.value_counts()
-            if not top.empty and not top.index[0].startswith("#"):
-                sure[key] = (int(sizes[key]), top.index[0] or "(blank)")
+        top = grp["factual_address_key"].fillna("").value_counts()
+        if top.empty:
             continue
-        bare = values[values != "#"].value_counts()
-        if bare.empty:
-            continue
-        if bare.iloc[0] > int((values == "#").sum()):
-            sure[key] = (int(sizes[key]), bare.index[0] or "(blank)")
-        else:
-            undecided[key] = int(sizes[key])
-    return sure, undecided
+        # A value starting "#" is a street address, kept only as a hash.
+        name, n = top.index[0], int(top.iloc[0])
+        if not name.startswith("#") and n >= config.PLACEHOLDER_MIN_COMPANIES:
+            found[key] = (int(sizes[key]), n, name or "(blank)")
+    return found
 
 
 def main():
@@ -109,30 +95,24 @@ def main():
     df["latitude"], df["longitude"] = lat, lon
     has = lat.notna() & lon.notna() & (lat != 0) & (lon != 0)
     df["_key"] = [point_key(a, b) if h else None for a, b, h in zip(lat, lon, has)]
-    found, undecided = placeholder_points(df)
-    print(f"\n  placeholder points by the rule ({config.PLACEHOLDER_MIN_ROWS}+ rows, commonest "
-          f"company factual address bare or blank):")
-    for key, (n, addr) in sorted(found.items(), key=lambda kv: -kv[1][0]):
-        print(f"    {key[0]:.6f}, {key[1]:.6f}  {n:>5} rows  {addr}")
+    if "factual_address_key" not in df.columns:
+        sys.exit("the register cache has no factual_address_key: re-pull with "
+                 "python pipeline/tbilisi/fetch_sources.py --only register --force")
+    found = placeholder_points(df)
+    print(f"\n  placeholder candidates ({config.PLACEHOLDER_MIN_ROWS}+ rows; commonest company "
+          f"address a bare name or blank, shared by {config.PLACEHOLDER_MIN_COMPANIES}+ companies):")
+    for key, (n, shared, name) in sorted(found.items(), key=lambda kv: -kv[1][0]):
+        print(f"    {key[0]:.6f}, {key[1]:.6f}  {n:>5} rows  {shared:>4} companies  {name}")
     expected = {point_key(*k) for k in config.PLACEHOLDER_POINTS}
-    if not undecided and "factual_address_key" in df.columns:
-        if set(found) != expected:
-            sys.exit(f"the rule finds {len(found)} points, config lists {len(expected)}: "
-                     f"new {sorted(set(found) - expected)}, gone {sorted(expected - set(found))}. "
-                     f"Read each new point's addresses before listing it")
-    else:
-        # The bounded check (config.py): what the pull proves must be listed,
-        # and every listed point must still carry 50+ rows.
-        sizes = df[df["_key"].notna()].groupby("_key").size()
-        missing = sorted(set(found) - expected)
-        shrunk = sorted(k for k in expected if sizes.get(k, 0) < config.PLACEHOLDER_MIN_ROWS)
-        if missing or shrunk:
-            sys.exit(f"bounded placeholder check: proved but unlisted {missing}; listed but "
-                     f"under {config.PLACEHOLDER_MIN_ROWS} rows {shrunk}")
-        print(f"  BOUNDED CHECK (this pull has no per-address key): {len(set(undecided) - expected)} unlisted points of "
-              f"{config.PLACEHOLDER_MIN_ROWS}+ rows unsettled; the {len(expected)} listed points "
-              f"are kept off. Re-pull with fetch_sources.py --force for the full check.")
-        emit("placeholder_points_unsettled", len(set(undecided) - expected))
+    rejected = {point_key(*k) for k in config.NOT_PLACEHOLDERS}
+    unread = sorted(set(found) - expected - rejected)
+    by_reading = {point_key(*k) for k in config.PLACEHOLDERS_BY_READING}
+    gone = sorted(expected - set(found) - by_reading)
+    if unread or gone:
+        sys.exit(f"placeholder candidates not yet read: {unread}; listed points no longer "
+                 f"candidates: {gone}. Read each name: a district or settlement goes in "
+                 f"config.PLACEHOLDER_POINTS, a street or real place in NOT_PLACEHOLDERS")
+    emit("placeholder_points", len(expected))
 
     kept = filter_to_storefront(df, config.TAXONOMY_SYSTEM).copy()
     kept["bucket"] = [taxonomy.classify({"activity_code": c}) for c in kept["activity_code"]]

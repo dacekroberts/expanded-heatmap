@@ -3761,7 +3761,7 @@ CITIES = [
         "lon": 44.79,
         "page": "pages/175_Tbilisi_Heatmap.py",
         "coverage": "full",
-        "placement": "Register coordinates (81.0%)",
+        "placement": "Register coordinates (80.8%)",
         "data_age": "Register of 2026-10-02",
         "rail_extra": "—",
         "record_kind": "National register",

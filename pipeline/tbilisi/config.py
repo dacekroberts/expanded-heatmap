@@ -88,38 +88,53 @@ LON_COLUMN = "Y"
 # --- Placeholder coordinates ----------------------------------------------
 # 91% of rows carry a coordinate, but some coordinates are district or
 # settlement centroids that dozens of businesses share. Rule (owner,
-# 2026-10-02, "approve all three"): a point carrying PLACEHOLDER_MIN_ROWS or
-# more rows (all active rows, not only storefronts) whose commonest legal-
-# entity factual address is a bare district or settlement name, or blank, is
-# a placeholder; its rows are dropped and disclosed. Step 2 re-derives the
-# set and exits if it differs from this list, so a refresh that moves a
-# centroid is seen, not absorbed. Measured at Step 0, 2026-10-02: ten points, 1,295
-# kept rows, 805 of them on four metro stations.
+# 2026-10-02, "approve all three"; the minimum added the same day): a point
+# carrying PLACEHOLDER_MIN_ROWS or more rows (all active rows, not only
+# storefronts) whose commonest legal-entity factual address is a bare
+# district or settlement name, or blank, AND is shared by at least
+# PLACEHOLDER_MIN_COMPANIES companies, is a placeholder; its rows are dropped
+# and disclosed.
 #
-# ⚠ THE BUILD'S PULL CANNOT TAKE "COMMONEST" IN FULL. It kept every numbered
-# address as one marker, so step 2 runs a BOUNDED check on it: every point
-# the pull proves qualifies must be listed (it proved one more, Mtatsminda,
-# added), and every listed point must still carry 50+ rows. 33 points could
-# not be settled that way (1,629 storefronts; at nearly all, the commonest
-# bare name appears 1-4 times against dozens of street addresses). The full
-# check runs on the next pull, whose fetch keeps a hash per address (owner,
-# 2026-10-02: skip the re-pull for this build, run it before the next review).
+# The minimum: where every company at a point writes a different address,
+# "commonest" is a tie among one-offs and says nothing. On the full pull of
+# 2026-10-02 the unqualified rule found 14 points beyond the eleven then
+# listed, twelve of them such ties or a street written without a number;
+# with the minimum it finds 13, the eleven plus Samgori and a blank point by
+# Liberty Square. The fetch keeps a street address only as a hash, so a
+# candidate's name is read by a person: a district or settlement goes in
+# PLACEHOLDER_POINTS, a street, market or other real place in
+# NOT_PLACEHOLDERS. Step 2 exits on a candidate in neither, and on a listed
+# point that is no longer a candidate.
 PLACEHOLDER_MIN_ROWS = 50
+PLACEHOLDER_MIN_COMPANIES = 5
 PLACEHOLDER_POINTS = {
     (41.68655, 44.840891): "Isani district (77 m from Isani station)",
     (41.749448, 44.779977): "blank addresses (1 m from Didube station)",
     (41.725938, 44.750388): "Saburtalo district centroid",
     (41.685844, 44.853535): "blank addresses (87 m from Samgori station)",
-    (41.693803, 44.801517): "seven districts on one point (113 m from Liberty Square)",
+    (41.693803, 44.801517): "Lilo settlement, rows from seven districts (113 m from Liberty Square)",
     (41.789026, 44.810777): "Nadzaladevi, blank addresses",
     (41.709599, 44.756885): "Vake district centroid",
     (41.72151, 44.762499): "Digomi village centroid",
     (41.695, 44.789167): "three-decimal point, city center",
-    (41.613415, 44.908357): "Krtsanisi, blank addresses",
-    # Proved by the build's pull: 27 of the point's 28 companies give the bare
-    # district name, against one street address.
+    (41.613415, 44.908357): "Krtsanisi, Ponichala village written seven ways (read; see below)",
+    # Added 2026-10-02 from the build's pulls (27 of 28 companies give the
+    # bare district name).
     (41.695863, 44.792928): "Mtatsminda district, bare addresses",
+    # Added with the minimum, from the full pull of 2026-10-02.
+    (41.6813, 44.859586): "Samgori district, bare addresses (5 of 22 companies)",
+    (41.695453, 44.796282): "blank addresses (13 of 41 companies; 373 m from Liberty Square)",
 }
+# Listed points read by hand that the minimum does not reach, so step 2
+# does not require them to be candidates. Krtsanisi (Step 0, approved with
+# the ten): 50 of its 66 companies give 50 DIFFERENT street addresses on one
+# point, and the rest write the village name Ponichala seven ways, so no
+# single name reaches the minimum; a centroid all the same. 9.2 km from the
+# nearest station, so no ring is affected (measured 2026-10-02).
+PLACEHOLDERS_BY_READING = {(41.613415, 44.908357)}
+# Candidates read and found to be a real place (a street, a market): kept
+# on the map. None yet reaches the minimum.
+NOT_PLACEHOLDERS = {}
 # Coordinates are compared at this many decimals (the register carries 6-7
 # or 12-15; two geocoding generations).
 PLACEHOLDER_DECIMALS = 6

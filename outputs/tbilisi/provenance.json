@@ -16,9 +16,9 @@
       "lang": "en"
     },
     "rows": 63511,
-    "bytes": 16468672,
-    "sha256": "f89ec3fc1ab640e99ad27bb3b9ac015985797e60d003323b79f137b3e5fe7b05",
-    "retrieved": "2026-10-02T23:55:05+00:00",
+    "bytes": 16817127,
+    "sha256": "33df28e3348cfd5634cf20e83e13d252dcbf756cb64bb4e88dccd8f52a939fe8",
+    "retrieved": "2026-10-03T00:49:09+00:00",
     "columns_written": [
       "Stat_ID",
       "Legal_Form_ID",
@@ -36,7 +36,7 @@
       "Init_Reg_date",
       "Reg_Date",
       "Full_Name",
-      "factual_address_bare",
+      "factual_address_key",
       "legal_eq_factual"
     ],
     "terms": "https://www.geostat.ge/en/page/monacemta-gamoyenebis-pirobebi"
