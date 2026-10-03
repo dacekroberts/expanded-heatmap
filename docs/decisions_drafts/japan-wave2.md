@@ -4,6 +4,65 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Toyota built, the city's food list and three registers
+
+- **Toyota built (page 181, notice 120): 4,203 storefronts (Food service
+  2,729, Food shops 466, Personal services 1,008) around 25 stations on 4
+  lines, 51.5% of them in a ring.** The city's CC BY 4.0 lists on BODIK as of
+  2026-08-31 (food 3,667 rows; barbers 282, beauty 634, laundries 144 over
+  the workbook's two sheets), each fetched through its CKAN resource's
+  current URL (`SOURCE_RESOURCES`; every register resource is named
+  `_20268.xlsx`), joined to MLIT's address blocks for the one municipality:
+  3,667 rows at the block (80.2%, the brief's), 676 at a town or 大字 centre,
+  232 unplaced (5.1%, the brief's 7.0% before `chome_missing` put 浄水町's
+  丁目 at the 大字 centroid; 84 pins in 浄水町 sit there now). Per bucket the
+  block share is the brief's: Food service 80.3%, Food shops 69.7%, Personal
+  services 85.6%. 140 repeat permits shown once. Out by rule: 151
+  manufacturing and other non-counter types ("no rule"). Not a premises: 1
+  beauty salon registered 一円 (citywide). The list holds 2,921 restaurant
+  permits against e-Stat's FY2024 3,898 (74.9%): the city leaves temporary and
+  stall permits out (its catalogue record says so), which every Japanese map
+  drops anyway. Laundries 144 of 170 (84.7%).
+- **Held calls, counts touched:** none (no 複合型そうざい製造業 row; no 業態
+  column). The 菓子 / そうざい factory share: 14 of 355 (3.9%), kept (owner,
+  2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py toyota`: the
+  Japan pass prints 0; 1 pin shows its permit type (4 raw rows; 10 of the
+  brief's 14 are a cooperative's own name, shown, a cooperative (組合) is no person for the name rule, 13b2c280). The
+  food list names every operator; the registers name company operators only
+  (Toyama's accepted position, the page's bullet).
+- **Rail:** N02-25: the Aichi Loop Line (12 of 23) and Meitetsu's Mikawa Line
+  (10 of 23) cut at the city line; the Meitetsu Toyota Line (3 of 8) and
+  Linimo (2 of 9) drawn as cut (owner, 2026-10-02). 八草 (Aichi Loop and
+  Linimo, 191 m) and 梅坪 (Mikawa and Toyota lines) are one group each;
+  新豊田 / 豊田市 (255 m, the closest pair) and 新上挙母 / 上挙母 stay apart.
+  Gate 3: the Aichi Loop Railway's station index lists 23 stations in order,
+  三河上郷 to 八草 (12) inside the city, exact. 11 stations excluded: 3 in
+  Okazaki, 3 in Chiryu, 2 in Miyoshi, 2 in Nagakute, 1 in Seto. English names
+  in Hiroshima's style: 7 cited overrides (浄水, 三河上郷, 四郷, 陶磁資料館南
+  without OSM's macrons; 上豊田, 三河八橋 hyphenated and 上挙母 as one word, as
+  the Aichi Loop signs 新上挙母 Shin-Uwagoromo); the other 18 as OSM has them.
+  Colours from `line_colour_search.py` (closest pair 18.1, Meitetsu's two
+  lines at 梅坪). Median gap 966 m: standard rings. The opening view frames
+  the stations and track (S 35.011 to N 35.179), not the mountain towns.
+- **GSI sample (the brief's independent check):** `screen_japan_join.py
+  toyota --gsi 50`: 50 answered, median 0 m from the block point, all 50
+  within 100 m (max 1 m).
+- **Economic Census control: 2.00** Food service pins per 2021 census 飲食店
+  establishment (2,729 against 1,364), above the built cities' 1.56-1.92,
+  **explained** by Matsuyama's benchmark with Kumamoto's adjustment: official
+  / census is 2.86 (3,898 against 1,364), and the list holds 74.9% of the
+  official count (2.86 x 0.749 is about 2.14); the placed, de-duplicated pins
+  sit below that.
+- **Prose proposals for review time:** on the page, "Where a trade name is
+  its operator's own name, the dot shows its permit type instead; the barber,
+  beauty and laundry registers name an operator only where it is a company,
+  so this cannot be checked for the rest." (Kawasaki's sentence with the
+  registers in place of the food list); in What Is Excluded, "Temporary and
+  stall permits: the city leaves them out of its list, which is why it holds
+  about three in four of the restaurant permits the city reports." and "mostly
+  rural addresses that name a sub-district without its marker".
+
 ### 2026-10-03 - Takamatsu built, the city's food list and three registers with MHLW's notifications
 
 - **Takamatsu built (page 180, notice 119): 7,820 storefronts (Food service

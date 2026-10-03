@@ -3772,6 +3772,40 @@ line.
   in Sakaide.
 - The Yakuri cable car, a sightseeing line, is not drawn.
 
+### Toyota - the city's food list and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- Temporary and stall permits: the city leaves them out of its list, which is
+  why it holds about three in four of the restaurant permits the city reports.
+- 151 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 beauty salon registered for the whole city with no fixed premises.
+
+**Counted** - every food permit on the city's list of 31 August 2026, and
+every barber, beauty salon and laundry (washing and pick-up shops) on its
+registers of the same date. 14 of the 355 bakery, confectioner and deli rows
+(3.9%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 140 repeat permits are shown once.
+
+**Not placed** - 232 rows, mostly rural addresses that name a sub-district
+without its marker. Another 676 sit at their town's or district's center.
+
+**Names not shown** - 1 trade name that is its operator's own name shows its
+permit type instead. The barber, beauty and laundry registers name an
+operator only where it is a company, so a sole trader's own name cannot be
+checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 11 stations beyond it: 3 in Okazaki, 3 in Chiryu, 2 in Miyoshi,
+  2 in Nagakute and 1 in Seto.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

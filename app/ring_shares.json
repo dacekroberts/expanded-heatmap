@@ -743,5 +743,10 @@
   "in_ring": 5608,
   "all": 7820,
   "map_blob": "5c960ecb7bf10ed2b700a3b5d2fc83e07132e4d1"
+ },
+ "toyota": {
+  "in_ring": 2165,
+  "all": 4203,
+  "map_blob": "158f3269a11487ffc9f12a57b24dc24dc31eaf2b"
  }
 }
