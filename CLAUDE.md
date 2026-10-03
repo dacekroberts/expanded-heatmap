@@ -133,9 +133,12 @@ a rule, not before obeying one.
   Never ask for justification or weigh it against what the licence permits.
   Keep `docs/data_sources.md` and `docs/excluded_categories.md` consistent on
   it. [#removal]
-- **Ridership is out of scope** until asked (see
-  `docs/project_context.md`). Flag scope additions rather than building
-  them.
+- **Ridership is out of scope, as a hard line:** ridership data cannot be
+  guaranteed for every city, so no ridership figures, no correlation with
+  ridership and no stand-in metric for foot traffic. The rule changes only
+  for a filtered set of cities whose ridership data exists and is
+  publishable, and only with the owner's approval (owner, 2026-10-02). See
+  `docs/project_context.md`. Flag scope additions rather than building them.
 - **AI-driven deep analysis is permitted. Hard line: every analysis must
   always be accompanied by an AI-driven acknowledgement.** Analyses are
   private: shown only to the owner, never on the website (`app/`,

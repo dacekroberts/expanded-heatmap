@@ -4,6 +4,21 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Ridership becomes a hard line in CLAUDE.md
+
+- **The CLAUDE.md ridership invariant now reads as a hard line**, in the
+  wording the owner approved on 2026-10-02 (proposed by the analytics
+  session, confirmed by the owner in this session's chat). Ridership data
+  cannot be guaranteed for every city, so there are no ridership figures, no
+  correlation with ridership and no stand-in metric for foot traffic. The
+  rule changes only for a filtered set of cities whose ridership data exists
+  and is publishable, and only with the owner's approval.
+- This supersedes the "Ridership is out of scope until asked" wording that
+  the 2026-10-02 landing (`b31a65df`) kept. The trailing "Flag scope
+  additions rather than building them" sentence was kept, since it is a
+  general rule and not part of the ridership line.
+- `docs/project_context.md`'s Scope line was rewritten to match.
+
 ### 2026-10-02 - Chain storefronts by ring: a private page for the four pilots
 
 - **The owner-approved chain method (analysis E, verdict H2) was charted as

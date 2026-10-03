@@ -37,8 +37,11 @@ are stated here.
 
 Each has its rationale in `DECISIONS.md`.
 
-- **Scope:** commercial density only. No ridership, no Findings/Methodology
-  pages, until asked. AI-driven deep analysis is permitted but private, each
+- **Scope:** commercial density only. Ridership is out as a hard line: no
+  ridership figures, no correlation with ridership and no stand-in metric
+  for foot traffic, unless the owner approves it for a filtered set of
+  cities whose ridership data exists and is publishable (owner, 2026-10-02).
+  No Findings/Methodology pages until asked. AI-driven deep analysis is permitted but private, each
   analysis with an AI-driven acknowledgement (see `CLAUDE.md`). Flag scope
   additions rather than building them.
 - **Architecture:** hybrid - an area-selector macro page, then independent
