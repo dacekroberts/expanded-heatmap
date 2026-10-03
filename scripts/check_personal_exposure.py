@@ -1183,11 +1183,12 @@ def check(slug):
         from pipeline.countries import japan_register as jr
         cfg = importlib.import_module(f"pipeline.{slug}.config")
         own = set()
-        from pipeline.countries import japan_step2
+        from pipeline.countries import japan, japan_step2
+        rules = frozenset(japan.CITIES.get(slug, {}).get("rules", ()))
         for key in cfg.SOURCES:
             # a rebuilt register (Kyoto's) is read as step 2 reads it
             for r in japan_step2.source_rows(cfg, key):
-                if jr.name_is_operator(r):
+                if jr.name_is_operator(r, rules):
                     own.add(jr._name_key(next((r[c] for c in jr.NAME_COLS if (r.get(c) or "").strip()), "")))
         d = pd.read_csv(proc, dtype=str, low_memory=False).fillna("")
         shown = d.business_name.map(jr._name_key).isin(own)

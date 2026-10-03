@@ -4,6 +4,29 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - The name rule treats a cooperative as no person (opt-in); love and capsule hotels are accommodation
+
+- **A cooperative or union operator (組合) is not a person for the name
+  rule, on the wave-2 cities (`WAVE2_RULES` gains "coop").** Takamatsu's
+  privacy check printed 1: a 協同組合 runs two food vehicles under its own
+  name, the rule read the cooperative as an individual (KYOTO_CORP lists
+  companies only), and its trade name, on an MHLW notification elsewhere,
+  counted as an operator's own name shown. Measured on the built cities, the
+  same gap withholds co-op shops' real trade names as if they were people's:
+  Kobe 7 (生活協同組合 6, 漁業協同組合 3, one more), Kyoto 5, Fukui 5, Toyama
+  4, Sapporo 3, Fukuoka 3, Osaka 1, Hiroshima 1. Withholding a business name
+  is the safe direction, and changing it moves eight built maps, so it is
+  opt-in like the join rules: an option for the owner at review time.
+  `same_person` reads `NOT_A_PERSON` (KYOTO_CORP plus 組合) only with "coop",
+  so Kyoto's de-duplication key never moves; `check_personal_exposure.py`
+  reads the city's rules too. Takamatsu: names withheld 12 -> 1, the check
+  prints 0.
+- **`japan_eigyo`'s "inside accommodation" reads ラブホ and カプセル** (love
+  and capsule hotels), as type and as 業態: Takamatsu's 業態 「ラブホ・カプセル」
+  (5 restaurant permits) had read as Food service. No built city moved.
+- **Proven:** the 20 built Japanese cities' step 2 byte-identical, baselines
+  included.
+
 ### 2026-10-03 - Two more shared-code items from the agents: old-law （旧） types, and a left-out branch's stations counted
 
 - **`japan_eigyo.normalise()` drops a leading （旧）**, Higashiosaka's spelling

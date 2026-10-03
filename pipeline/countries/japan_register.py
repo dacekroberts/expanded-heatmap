@@ -114,7 +114,11 @@ def kanji_number(s):
 #   "machi"          a town spelled with or without its 町 (join_city)
 #   "citywide"       an address of only "<city>内" is not a premises
 #   "form_cols"      業態 read from FORM_COLS, not 業態 alone
-WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "machi", "citywide", "form_cols"})
+#   "coop"           a cooperative or union operator (組合) is not a person for
+#                    the name rule (same_person); on the built cities it would
+#                    show co-op shops now withheld (Kobe 7, Toyama 4, Fukui 5)
+WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "machi", "citywide", "form_cols",
+                         "coop"})
 
 
 def norm_town(s, rules=()):
@@ -652,7 +656,7 @@ def in_term(rows, end_cols, as_of):
             yield r
 
 
-def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日"):
+def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日", rules=()):
     """A register rebuilt from a complete list and the months since, Kyoto's
     method for any list (Higashiōsaka, 2026-10-03: its 全許可 list of
     2026-04-01 plus each month's new permits to 2026-08-31). `paths` oldest
@@ -683,7 +687,7 @@ def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許�
                                     end_col: end.isoformat() if end else "",
                                     granted_col: granted.isoformat() if granted else "",
                                     "廃業年月日": r.get("廃業年月日") or "", "申請区分": r.get("申請区分") or "",
-                                    "name_is_operator": name_is_operator(r)})
+                                    "name_is_operator": name_is_operator(r, rules)})
     return [rec for (e, _), rec in best.values() if e >= as_of]
 
 
@@ -906,7 +910,7 @@ def _name_key(s):
     return re.sub(r"[\s・]", "", unicodedata.normalize("NFKC", s or ""))
 
 
-def name_is_operator(row):
+def name_is_operator(row, rules=()):
     """True when the row's trade name IS its operator's own name - an
     individual's name published as a shop sign. Compared in memory; the
     operator's name is not returned (owner 2026-09-27, see the docstring).
@@ -915,16 +919,25 @@ def name_is_operator(row):
     if "name_is_operator" in row:
         return bool(row["name_is_operator"])
     name = next((row[c] for c in NAME_COLS if (row.get(c) or "").strip()), "")
-    return same_person(name, (row.get(c) for c in OPERATOR_COLS))
+    return same_person(name, (row.get(c) for c in OPERATOR_COLS), "coop" in rules)
 
 
-def same_person(trade_name, operators):
+# Not a person, for the name rule where a city opts into "coop": KYOTO_CORP's
+# companies and, apart from it so Kyoto's de-duplication key never moves,
+# cooperatives and unions (組合: 協同組合, 企業組合). Takamatsu (2026-10-03): a
+# 協同組合 operating two food vehicles under its own name read as an individual.
+NOT_A_PERSON = re.compile(KYOTO_CORP.pattern + r"|組合")
+
+
+def same_person(trade_name, operators, coop=False):
     """The name rule's comparison: the trade name equals an individual
-    operator's name (a company's never counts)."""
+    operator's name (a company's never counts, nor with `coop` a
+    cooperative's)."""
     name = _name_key(trade_name)
+    corp = NOT_A_PERSON if coop else KYOTO_CORP
     for o in operators:
         op = _name_key(o)
-        if op and not KYOTO_CORP.search(op) and name == op:
+        if op and not corp.search(op) and name == op:
             return True
     return False
 

@@ -52,7 +52,8 @@ RULES = [
     # Kawasaki's 飲食店（短期営業）
     ("temporary / mobile", None, r"行商|露店|仮設|臨時|期間申請|屋形船|自動車|営業とみなされない|短期営業"),
     ("mail order", None, r"通信販売|訪問販売|通信訪問"),
-    ("inside accommodation", None, r"旅館|ホテル"),
+    # Takamatsu's 業態 ラブホ・カプセル (2026-10-03): love and capsule hotels
+    ("inside accommodation", None, r"旅館|ホテル|ラブホ|カプセル"),
     # Kawasaki's 飲食店（まあじゃん屋等）: the kana spelling of 麻雀
     ("entertainment venue", None, r"カラオケ|麻雀|まあじゃん|遊技場|ネットカフェ|漫画喫茶"),
     # Adult and hostess venues off every map (owner, 2026-09-29): Tokyo's
@@ -125,7 +126,7 @@ FORM_RULES = [
     # (22 rows, 2026-10-02), as 社員食堂 elsewhere
     ("institutional catering", None, r"給食|社員食堂|職員食堂|会社食堂|学生食堂|学校食堂|寮食堂|老人ホーム|福祉施設|"
                                      r"栄養管理室|病院|保育園|幼稚園|小学校|事業場食堂|事業所食堂"),
-    ("inside accommodation", None, r"旅館|ホテル"),
+    ("inside accommodation", None, r"旅館|ホテル|ラブホ|カプセル"),
     ("entertainment venue", None, r"カラオケ|麻雀|遊技場|ネットカフェ|漫画喫茶"),
     # (owner, 2026-09-29) the same two rules as RULES, in the filer's words:
     # Tokyo's バー・キャバレー / 一般・スナック, Fukuoka's スナック、バー.

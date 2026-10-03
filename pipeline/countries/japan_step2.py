@@ -328,7 +328,7 @@ def run(config, write=True):
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]
         if missing:
             sys.exit(f"{key}: header lacks {missing}")
-        flags = [jr.name_is_operator(r) for r in rows]
+        flags = [jr.name_is_operator(r, japan_rules(config)) for r in rows]
         ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key), japan_wardless(config),
                                   japan_rules(config))
         for p, f in zip(ps, flags):
