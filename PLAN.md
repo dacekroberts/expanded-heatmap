@@ -995,7 +995,7 @@ every key, account and letter:
       site is the controller.
     - The full reads are in the cleanup session's scratchpad
       (`openfreemap/`, `ofm/`) and DECISIONS.
-- [ ] **Licence gaps from staging's ranking** (2026-10-03: item 1 DONE, the footer link and the header icons; item 2's Dublin and SFMTA DONE; Milan's ATM, STM and MLIT still open) (`docs/licence_positions.md`,
+- [ ] **Licence gaps from staging's ranking** (2026-10-03: item 1 DONE, the footer link and the header icons; the second item's Dublin and SFMTA credits DONE; Milan's ATM, STM and MLIT still open) (`docs/licence_positions.md`,
   5813011a; its notice numbers were stripped as unreliable, so verify each
   item against the code first). The first two are the most visible:
   1. **No public repository link anywhere in the app.** IDFM Licence

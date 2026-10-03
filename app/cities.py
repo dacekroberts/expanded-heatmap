@@ -284,7 +284,7 @@ CITIES = [
         "page": "pages/9_Washington_DC_Heatmap.py",
         "coverage": "full",
         "mode": "metro",
-        "placement": "Register coordinates, some geocoded (85.8%)",
+        "placement": "Register coordinates, some geocoded (86.1%)",
         "data_age": "Active licenses, fetched 2026-09-21",
         "rail_extra": "—",
         "record_kind": "License register",
