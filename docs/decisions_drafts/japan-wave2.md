@@ -4,6 +4,55 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Higashiōsaka built, food only, on a register rebuilt to August 2026
+
+- **Higashiōsaka built (page 186, notice 125): 5,775 storefronts (Food
+  service 5,085, Food shops 690) around 26 stations on 6 lines, 90.4% in a
+  ring (5,218).** The city's BODIK food list (CC BY 4.0) of 2026-04-01 plus
+  the monthly new permits to 2026-08-31, rebuilt through `config.source_rows`
+  (`japan_register.rebuilt_register`: 7,067 read, 358 de-duplicated across
+  the lists, 6,709 kept, 188 past their expiry, 6,521 in term), joined to
+  MLIT's block file for 27227: 5,864 of 5,885 storefront rows at the block
+  (99.6%), 21 at a town centroid, 0 unplaced. Out: 419 stalls and vehicles,
+  165 manufacturing and other types, 52 vending. 110 repeat permits shown
+  once. The old-law retail types (（旧）菓子 59, 食肉 19, 魚介 15, そうざい 15)
+  count since the shared fix of 7b220d40. Factory share 21 of 455 (4.6%),
+  kept. No `OWN_POINT_FALLBACK`: the list's points are in the old Tokyo Datum
+  (the brief: 448 m, 37 m shifted) and the 21 chōme rows do not need them.
+- **Held calls, counts touched:** 複合型そうざい製造業 3 rows (and 1
+  複合型冷凍食品製造業) stay out; 業態 is empty in this list, so the
+  deli-by-業態 call touches none.
+- **Privacy verdict: publish.** The Japan pass prints 0; no individual
+  operator column (法人名 only), so the whole page runs without the name rule
+  (Okayama's call, owner 2026-10-02).
+- **Economic Census control: 2.66** (5,085 / 1,910), above 1.56-1.92, the
+  brief's expected about 2.7. The list is complete (5,505 restaurant permits
+  in term against 5,534 official, 99.5%), so it is permits per census
+  establishment. With no 業態 column nothing leaves Food service by form
+  (trade-name keywords: 360 bar / snack / lounge names, about 130
+  institutional ones); 1,271 Food service pins share an exact address with
+  another; closures since April are invisible. The rebuilt registers built
+  before run high the same way: Kyoto 2.62, Sakai 2.18 (Matsuyama 2.73).
+- **Rail:** N02-25, Kintetsu Nara (11), Osaka (4) and Keihanna (4, its
+  class-21 section, drawn under its own name though it runs through onto the
+  Chuo Line), Osaka Metro's Chuo Line (2, drawn cut, owner 2026-10-02), JR
+  Osaka Higashi (5) and Gakkentoshi (片町線, 2). 17 stations excluded (Osaka
+  City 9, Yao 5, Daito 2, Ikoma 1 through `N03_NEIGHBOR_PREFS`). 高井田中央 /
+  高井田, JR河内永和 / 河内永和 and JR俊徳道 / 俊徳道 (39-79 m) are separate
+  groups of different names, kept apart. No line wholly inside, so no gate 3.
+  2 name overrides. Colours: Osaka's four shared lines started from Osaka's
+  colours and came back within one grid step; closest pair 20.7. Median
+  station gap 767 m: standard rings.
+- **Prose proposals for review time:** on the page, "Higashiōsaka City
+  publishes no list of barbers, beauty salons or laundries, so personal
+  services are not on this map." and "The list names an operator only where
+  it is a company, so a trade name that is its operator's own name cannot be
+  checked here." (Kawasaki's clause, for the whole list); in What Is Excluded,
+  "The list records no form of business, so snack bars, staff canteens and
+  shop counters that hold a restaurant permit stay in Food service.", the
+  de-duplication sentence, the Names not shown sentence, and the Chuo Line
+  station bullet.
+
 ### 2026-10-03 - Hamamatsu built, personal services only
 
 - **Hamamatsu built (page 185, notice 124): 3,187 storefronts, all Personal

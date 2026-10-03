@@ -2116,6 +2116,25 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Hamamatsu and MLIT did not make "
      "and do not endorse this map.",
      False, ("Hamamatsu",)),
+    # Higashiōsaka (notice 125): the city's BODIK dataset is CC BY 4.0 (its
+    # license_id and the 東大阪市オープンデータ利用規約 2), in the terms' form for an
+    # edited work; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Kawasaki's and Sakai's approved wording under the owner's pre-approval of
+    # template prose (2026-09-30).
+    Notice(125, "Higashiōsaka City and MLIT (Higashiōsaka)",
+     "Higashiōsaka's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品等営業許可一覧、東大阪市、クリエイティブ・コモンズ・ライセンス 表示 4.0"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://data.bodik.jp/dataset/b5eeed4c-cec0-4eef-8513-b4882d6a18ec](https://data.bodik.jp/dataset/b5eeed4c-cec0-4eef-8513-b4882d6a18ec)）. "
+     "(This map modifies the City of Higashiōsaka's list of food-business permits as of 1 April 2026 and "
+     "its monthly lists of new permits to 31 August 2026: this project rebuilt them into one list of the "
+     "permits in term on 31 August 2026, selected the storefront types, placed each by its address, and "
+     "counted them around stations.) The list may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Higashiōsaka and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Higashiōsaka",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

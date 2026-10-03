@@ -768,5 +768,10 @@
   "in_ring": 1080,
   "all": 3187,
   "map_blob": "2cdb9dca646ade6cc39aa3a36dd2d7dd5ecd2955"
+ },
+ "higashiosaka": {
+  "in_ring": 5218,
+  "all": 5775,
+  "map_blob": "c352837e638287f557b63747efd5b43332f6e3f3"
  }
 }

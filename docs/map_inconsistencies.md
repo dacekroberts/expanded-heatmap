@@ -686,6 +686,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Ōtsu | Keihan Ishiyama-Sakamoto / Keishin, JR Kosei / Biwako (4 lines) | The Shinkansen (no station in the city); the Sakamoto Cable (sightseeing funicular) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the Ishiyama-Sakamoto Line, 21) | City (the Keishin Line and JR cut at the city line) | 5 / 0 |
 | Nara | Kintetsu Nara / Kyoto / Kashihara, JR Yamatoji / Man-yo Mahoroba (5 lines) | — (no Shinkansen runs here) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on Kintetsu's three lines, their in-city stops from its station index) | City (every line cut at the city line; 14 stations, built despite thin rail, owner) | 10 / 0 |
 | Hamamatsu | The Enshu Railway Line, the Tenryu Hamanako Line and JR Central's Tokaido and Iida lines (4 lines) | The Shinkansen | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (gate 3 exact on the Enshu Railway, 18) | City (Tenhama and JR cut at the city line; 32 of 54 stations on Tenhama and the Iida Line's mountain stretch) | 9 / 0 |
+| Higashiōsaka | Kintetsu Nara / Osaka / Keihanna, Osaka Metro Chuo, JR Osaka Higashi / Gakkentoshi (6 lines) | — (no Shinkansen runs here) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (no line wholly inside, so no gate 3) | City (every line cut at the city line; the Chuo Line keeps 2 stations) | 17 / 0 |
 | **Germany** | | | | | |
 | Berlin | U-Bahn U1–U9 and the S-Bahn's 16 lines (the Ring S41/S42 among them) | Trams, regional trains, ferries; the U6's Tegel branch (closed for works until about August 2027) | VBB GTFS (gate 3 exact: U-Bahn 170 = 175 less 5 closed, S-Bahn 168) | Land of Berlin (lines cut at the Land boundary) | 41 / 0 (36 in Brandenburg, 5 closed for works) |
 | **United Kingdom** | | | | | |
@@ -873,6 +874,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Ōtsu | Permit register | City food list and barber, beauty and laundry lists | Permit type (業種) | 569 / 2,028 / 770 | Retail = food retail |
 | Nara | Permit register | City old-law food list and barber, beauty and laundry registers + MHLW's filings | Permit type (業種 / 営業の種類), read with the form of business (業態) | 690 / 1,794 / 821 | Retail = food retail, and partial; about one restaurant in five withheld its address (disclosed) |
 | Hamamatsu | Permit registers (personal services) | City barber, beauty and two laundry registers | Register (理容所 / 美容所 / クリーニング所) | — / — / 1,080 | No food register published (new permits only): Personal services only |
+| Higashiōsaka | Permit register, REBUILT | City food list of 2026-04-01 + monthly new permits, in term on 2026-08-31 | Permit type (営業の種類) | 602 / 4,615 / — | No Personal services (no list published); an upper bound (closures unpublished); Retail = food retail |
 | **Germany** | | | | | |
 | Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,121 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
 | **United Kingdom** | | | | | |
@@ -1049,6 +1051,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Ōtsu | Address join to MLIT's address blocks (95.3% block, 220 at the town centre; 1 unplaced) | Closed premises may remain listed | Food trucks and stalls (市内一円); manufacturing except 菓子 / そうざい; cooking vending machines; a trade name that is the operator's own name shown by permit type |
 | Nara | Address join to MLIT's address blocks, MHLW's own point where the block join misses (89.6% block, 6.6% MHLW's point, 3.2% town-chōme centre; 34 unplaced) | 1,978 MHLW filings published without an address (896 restaurants) unplaced; closed premises may remain listed | Food trucks and stalls; school, hospital and staff kitchens; hotel restaurants; snack bars; caterers; manufacturing except 菓子 / そうざい; vending; a trade name that is the operator's own name shown by permit type (city lists only; none) |
 | Hamamatsu | Address join to MLIT's address blocks, the city's own coordinates where the join finds only a town (94.9% block, 5.1% the city's point; none unplaced) | Personal services only; closed premises may remain listed | Nothing out by rule; the name rule cannot run (no operator column) |
+| Higashiōsaka | Address join to MLIT's address blocks (99.6% block, 19 at the town centre; none unplaced) | Closures invisible (an upper bound, disclosed); no form of business recorded | Street stalls and food trucks; manufacturing except 菓子 / そうざい; vending; the name rule cannot run (no individual operator column) |
 | **Germany** | | | |
 | Berlin | Register coordinates (60,313 of 60,314 inside the Land) | Crafts missing; web shops cannot be excluded; registered offices stack at arcade and business-centre addresses | Catering, intermediation, mobile food, household services; "other personal services" (96.99) and general non-food retail (IHK 47122) as catch-alls; employee band and business type read, never shown |
 | **United Kingdom** | | | |
@@ -1236,6 +1239,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Ōtsu | Food list and registers as of 2026-08-31 (fetched 2026-10-02) | B (in the prose) | 0.6 mi | Yes | 75% | Trade name in Japanese |
 | Nara | Old-law list as of 2025-11-01 (in term on 2026-08-31), registers 2026-04-01; MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.6 mi | Yes | 69% | Trade name in Japanese |
 | Hamamatsu | Registers published 2026-08-18 (fetched 2026-10-02) | B (in the prose) | 0.6 mi | Yes | 34% | Trade name in Japanese |
+| Higashiōsaka | City list rebuilt to 2026-08-31 (the 2026-04-01 list plus monthly new permits; fetched 2026-10-02) | B (in the prose) | 0.6 mi | Yes | 90% | Trade name in Japanese |
 | **Germany** | | | | | | |
 | Berlin | 2026-09-01, monthly (IHK's own commit date; fetched 2026-09-28) | B | 0.6 mi | Yes | 82% | Kind of business (the register has no names) |
 | **United Kingdom** | | | | | | |
