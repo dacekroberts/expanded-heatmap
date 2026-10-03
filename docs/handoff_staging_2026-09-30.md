@@ -75,8 +75,9 @@ the pointers. **Delete a section when its item is done.**
     Angeles have their baselines re-recorded on purpose. Vancouver had none
     (its steps emitted no figures; its gate was zero drift against the
     commit); the session added emit() figures to steps 1 and 2 on
-    2026-10-03 and records a first baseline on `extensions-build` once the
-    drift slot frees. Also on the branch: the OGL personal-information
+    2026-10-03 and recorded a first baseline on purpose (`extensions-build`
+    676b8247, 12 figures, outputs identical). All four extensions now have
+    one. Also on the branch: the OGL personal-information
     exemption read cautiously for the three BC cities (owner, 2026-10-03),
     and proposal 15 approved by the owner. Its drafts are in
     `docs/decisions_drafts/extensions.md` there.
