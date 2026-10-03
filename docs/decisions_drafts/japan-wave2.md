@@ -4,6 +4,52 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Kurume built, MHLW's filings alone, food only
+
+- **Kurume built (page 187, notice 126), Okayama's shape: 3,101 storefronts
+  (Food service 1,870, Food shops 1,231) around 25 stations on 4 lines, 63.2%
+  of them in a ring (1,961).** MHLW's filings for 40203 (7,491 rows), joined
+  to MLIT's address blocks: of 3,423 storefront rows, 2,994 at the block
+  (87.5%; the lead's screen 87.5), 407 at MHLW's own point (11.9%; 388 from
+  chōme, 19 from none), 16 at a town centre, 6 unplaced. A default point
+  (4 points given to 3+ towns) refused for 13 rows. MHLW's point against the
+  block point: median 48 m, 93.8% within 250 m (2,994 rows). 316 repeat
+  permits shown once. Closed 15; no address published 2,098 (867 open
+  restaurant permits of 3,900, 22.2%: "one in five"); not a premises 1,022
+  (1,021 「久留米市内」, now caught by the `citywide` rule, and 1 一円). Out by
+  rule: 394 manufacturing and other non-counter types, 187 snack bars and
+  cabarets, 171 canteens, 66 vending, 33 entertainment venues, 32 temporary,
+  25 caterers, 17 inside hotels, 8 mail order.
+- **Held items touched (owner call pending):** 78 MHLW restaurant rows whose
+  業態 names a deli (飲食そうざい 39, そうざい 39) stay Food service.
+- The 菓子 / そうざい factory share: 12 of 393 (3.1%), kept (owner,
+  2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py kurume`: the
+  Japan pass prints 0; MHLW names no individual operator, so the name rule
+  cannot run (Okayama's precedent).
+- **Rail:** N02-25; 25 stations (Nishitetsu 16: Tenjin Omuta 10, Amagi 7,
+  宮の陣 shared; JR 9: Kyudai Main 8, Kagoshima Main 2, 久留米 shared; the
+  Kyushu Shinkansen's 久留米 stays a JR station). Median nearest-station gap
+  1,418 m: standard rings. 9 excluded: 大刀洗町 2, 大木町 2, 小郡市 2, うきは市 1,
+  筑後市 1, 鳥栖市 1 (Saga, named through `N03_NEIGHBOR_PREFS` = 41). Gate 3:
+  Nishitetsu's own station lists (jik.nishitetsu.jp) read against the city
+  line give Tenjin Omuta 10 and Amagi 7, exact. English names: OSM's 39
+  objects; 聖マリア病院前 matched through an alias (OSM writes its 駅); 8
+  cited overrides, two of them names OSM translated (St. Mary Hospital
+  Station -> Sei-Maria-byoin-mae, Elementary School -> Gakko-mae). Colours from
+  `line_colour_search.py` (closest pair 18.1, the two reds).
+- **Economic Census control: 1.37** (1,869 Food service pins inside the city
+  against 1,368 establishments), below the built cities' 1.56-1.92 for the
+  brief's reason: 89% of permits in the file and a fifth of fixed addresses
+  withheld.
+- **Prose proposals for review time**: on the page, "Kurume City publishes only
+  monthly lists of newly opened barbers and beauty salons, not a full
+  register, and no list of laundries, so personal services are not on this
+  map." (Okayama's bullet with Kurume's reason); the same reason in What Is
+  Excluded's first bullet, and "(about one restaurant permit in nine)" for
+  the old-law permits the file lacks (MHLW 3,861 open restaurant permits of
+  4,343 in force, the brief's count).
+
 ### 2026-10-03 - Higashiōsaka built, food only, on a register rebuilt to August 2026
 
 - **Higashiōsaka built (page 186, notice 125): 5,775 storefronts (Food

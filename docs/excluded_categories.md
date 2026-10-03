@@ -3983,6 +3983,46 @@ line.
 - Osaka Metro's Chuo Line keeps two stations inside the city, Takaida and
   Nagata (owner, 2026-10-02).
 
+### Kurume - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes only monthly lists
+  of new barbers and beauty salons, not a register, and no list of laundries,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Permits granted before June 2021 and still in force, which the national
+  filings do not hold (about one restaurant permit in nine).
+- 2,098 national filings whose filers did not publish an address (867 of them
+  restaurants, about one restaurant in five).
+- 32 temporary or mobile permits and 1,022 rows with no fixed place (1,021
+  addressed only 「久留米市内」, licensed for the whole city, and 1 一円).
+- 394 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 171 school, hospital and staff canteens, 66 vending machines, 8 mail-order
+  businesses, 33 entertainment venues, 17 premises inside hotels and inns, 25
+  caterers (仕出し) and 187 snack bars and cabarets.
+- 15 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on 2 October 2026. 12 of the
+393 bakery, confectioner and deli rows (3.1%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 316 repeat permits are shown once.
+
+**Not placed** - 6 rows (0.2%). Another 16 sit at their town's center, and 407
+at the ministry's own coordinates.
+
+**Names not shown** - none: the national filings do not say who the operator
+is, so the name rule cannot run here (Okayama's precedent, owner, 2026-10-02).
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 2 each in Tachiarai, Oki and Ogori, and 1
+  each in Ukiha, Chikugo and Tosu in Saga.
+- The Shinkansen is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
