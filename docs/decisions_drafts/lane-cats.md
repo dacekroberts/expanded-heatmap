@@ -4,6 +4,52 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Japan leftovers: the fetch's row counts, Okayama's stand-in point, the default-point threshold (owner)
+
+- **The owner approved the shared fix for the recorded row counts.**
+  `japan_fetch.fetch_city` counted every file with `city_rows(dest)`'s
+  default reading. The Japan lead's suggestion was to count through
+  `config.source_rows` wherever a city defines one. **Measured on every
+  Japanese city first, that would have changed five other cities' counts**,
+  because their `source_rows` rebuilds or filters a register rather than
+  reading one file:
+  - Kitakyushu food 3,383 to 2,417 and Matsuyama's MHLW file 11,575 to 4,205
+    (filtered);
+  - Sakai's standing list 10,123 to 10,087 (the rebuilt register) and its ten
+    monthly files to 0;
+  - Kochi's and Tokyo's per-file keys are not `source_rows` keys at all
+    (KeyError).
+  - **Built instead:** an opt-in hook, `config.file_rows(key)`, "a file's
+    rows as the city reads that file". `fetch_city` uses it for the count and
+    the REQUIRED_COLUMNS check where a city defines it. Fukui and Toyama alias
+    it to their `source_rows`, which each read one file as it stands. No
+    other city defines it, so no other city's count can change.
+- **Fukui's counts corrected without a download.** `fetch_sources.py city`
+  keeps a file already on disk and re-records it, so it was re-run with
+  `HEATMAP_NO_NETWORK=1`:
+  - food 52,021 to 4,333, barber 3,257 to 268, beauty 9,432 to 788, laundry
+    3,058 to 253: the newest sheet's rows, not all twelve sheets';
+  - bytes, sha256, `how` and `retrieved` unchanged.
+- **Toyama's recorded counts were already right.** Reading with and without
+  `merged_header` gives the same row counts (5,616, 372, 1,052, 235, and
+  MHLW's 8,168), so its provenance is unchanged. Only its header check now
+  reads the way step 2 does.
+- **Every other Japanese city checked:** the recorded count equals the
+  default reading for all of them. Kyoto records through its portal path,
+  Yokohama through its own `fetch_city`, and Sapporo's provenance holds no
+  city files. None changes.
+- **Fixed in passing:** `record()` wrote `provenance.json` in text mode (CRLF
+  on Windows); it now writes bytes.
+- **Okayama's sentence (owner: approved),** verified first in memory against
+  the cached data (`japan_step2.run(write=False)`): 16 rows unplaced, 13 of
+  them on the one point MHLW gives to filings in 13 different towns
+  (34.6671, 133.9471 to 4 places), 0 of the 2 town-center rows. Added to the
+  "Not placed" line of Okayama's What Is Excluded section, the section the
+  proposal named; the page itself carries no unplaced count.
+- **The default-point guard stays at 3 or more towns (owner: "OK as is").**
+  Kitakyushu's 9 pins on points shared by fewer than 3 towns stay on the map.
+  No code change.
+
 ### 2026-10-03 - Washington D.C. drops "Beauty Booth" under the person-licence rule (owner: "drop and note")
 
 - **The owner ruled on the one pending departure the person-licence rule

@@ -3557,8 +3557,10 @@ rows (6.9%) have a trade name that reads as a factory; they are kept (owner,
 
 **One pin per premises** - 401 repeat permits are shown once.
 
-**Not placed** - 16 rows (0.2%). Another 2 sit at their town's center, and 597 at the
-ministry's own coordinates.
+**Not placed** - 16 rows (0.2%), 13 of them national filings that carry only
+the ministry's stand-in point, one point given to filings in 13 different
+towns. Another 2 sit at their town's center, and 597 at the ministry's own
+coordinates.
 
 **Names not shown** - none: the national filings do not say who the operator
 is, so the name rule cannot run here (owner, 2026-10-02).
