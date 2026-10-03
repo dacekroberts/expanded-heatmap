@@ -36,3 +36,8 @@ data/_heavy_jobs*
 # rather than relying on nobody running `git add .` - a broad add once swept
 # an unreviewed file into a public commit.
 *.local.md
+
+# Streamlit secrets (API keys such as CARTO_BASEMAP_KEY): never committed. The
+# deployed app reads them from Streamlit Cloud; locally, prefer the global
+# file in the home folder, outside every checkout.
+.streamlit/secrets.toml
