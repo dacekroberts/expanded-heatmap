@@ -4,6 +4,28 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Chain storefronts by ring: a private page for the four pilots
+
+- **The owner-approved chain method (analysis E, verdict H2) was charted as
+  one private page for Toronto, Tokyo, San Diego and Paris**, wording
+  approved by the owner the same day. The page carries the AI-driven
+  acknowledgement once at the top and once at the bottom. Chain share by ring
+  for each city is drawn on one shared 0-40% scale, with ±1 standard error,
+  plus each city's verdict and analytics' own reason line.
+  - Toronto: Supported, 34.8% -> 20.9%.
+  - Tokyo: Supported, 17.5% -> 10.4%.
+  - San Diego: Not computed. Its bars are dimmed and it has no density row,
+    since ring 1 holds only 6 chain locations.
+  - Paris: Not computed (62.5% of its pins are unnamed), so the page shows
+    its unnamed share by ring and no chart.
+- **Brand names never reach the page.** `chains_extract.py` replaces
+  `top_chains` and `held_out` with their counts before the generator reads
+  the data, and `gen_chains.py` refuses any brand field that survives.
+  Rejected: charting the top brands, which the owner's rule never to show
+  business names rules out.
+- Files: `visuals/generators/gen_chains.py`, `visuals/data/chains_pilots.json`,
+  `visuals/private/chains.html` (local, not committed).
+
 ### 2026-10-02 - Owner rulings on the visuals' open items; SFMTA disclaimer off the San Francisco card
 
 - **The SFMTA "as is" paragraph was dropped from the San Francisco card
