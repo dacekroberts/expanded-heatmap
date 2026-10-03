@@ -4,6 +4,37 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - A re-check calendar for every built city; Vancouver's extension probed; Arlington measured
+
+- **`docs/recheck_calendar.md`** (owner: "let's update this calendar across
+  all currently-built cities").
+  - Four research agents covered the 144 built cities by region. Staging
+    merged them, with an action list for the next 120 days and the doc
+    corrections found, which go to Cleanup.
+  - **Owner calls it raises:** São Paulo's Linha 17, in passenger service
+    since 2026-03-31, and Linha 6's assisted operation; Rome's returning
+    trams; Taoyuan's Green Line.
+  - **Build fixes it raises:** Osaka's missing Yumeshima (N02-25);
+    Hiroshima's Hiroden loop; Sacramento's Green Line reopening.
+  - **High priority:** SIRENE switches to NAF 2025 on 2027-01-05/06, so a
+    French re-run on a new file would empty every French map without a
+    mapping.
+  - **Stated gaps:** rail news was not searched for 14 American cities;
+    Tbilisi is in no share.
+- **Vancouver (Regional) probed and ready** (`docs/build_briefs/vancouver_regional.md`).
+  - Burnaby now answers scripted REST queries: 20,054 approved licences,
+    every row a point, 2,143 in the buckets.
+  - New Westminster and Coquitlam were already measured.
+  - 20 stations come in. Richmond (R) and Port Moody (no addresses) stay
+    out.
+  - Three small owner items, each with a recommendation.
+- **Arlington measured before it went to R**: 2,399 bucket premises, 94.3%
+  joined exactly to the County's address points. Recorded on its R row.
+- **The extensions are now probed:**
+  - ready together: Rio + Duque de Caxias, Belo Horizonte + Contagem, Los
+    Angeles + Long Beach, Vancouver (Regional);
+  - out: Washington D.C. + Arlington (R).
+
 ### 2026-10-02 - Arlington left out of Washington D.C., to Band R as Richmond was (owner)
 
 - **The licence read (2026-10-02): not permitted as it stands.**
