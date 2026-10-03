@@ -1,0 +1,14 @@
+{
+  "bucket_food_service": 5513,
+  "bucket_personal_services": 3323,
+  "bucket_retail": 6600,
+  "name_suppressed": 84,
+  "stations_excluded": 10,
+  "stations_in_scope": 44,
+  "storefronts": 15436,
+  "storefronts_burnaby": 2115,
+  "storefronts_coquitlam": 1016,
+  "storefronts_new_westminster": 780,
+  "storefronts_surrey": 3534,
+  "storefronts_vancouver": 7991
+}

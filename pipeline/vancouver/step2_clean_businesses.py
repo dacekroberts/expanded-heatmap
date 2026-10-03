@@ -59,6 +59,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.residence import looks_organisational, looks_personal  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 from pipeline.vancouver.config import (  # noqa: E402
@@ -419,6 +420,14 @@ def main():
     out.sort_values(["source", "business_name"]).to_csv(
         BUSINESSES_CLEAN_CSV, index=False)
     print(f"Wrote {BUSINESSES_CLEAN_CSV}")
+    # The drift baseline (added 2026-10-03, with the regional extension): the
+    # storefronts per source and per category, and the labels replaced by a type.
+    emit("storefronts", len(out))
+    for source, n in sorted(out["source"].value_counts().items()):
+        emit(f"storefronts_{source}", int(n))
+    for bucket, n in sorted(out["bucket"].value_counts().items()):
+        emit(f"bucket_{bucket.lower().replace(' ', '_')}", int(n))
+    emit("name_suppressed", int(out["name_suppressed"].sum()))
 
 
 def apply_residence_filter(gdf):

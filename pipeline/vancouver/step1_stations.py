@@ -75,6 +75,7 @@ from pipeline.vancouver.config import (  # noqa: E402
     SURREY_BOUNDARY_NAME_KEEP,
     THINNED_GROUPS,
 )
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.stations import check_operator_counts  # noqa: E402
 
 SUFFIX = re.compile(STATION_SUFFIX_PATTERN, re.I)
@@ -318,6 +319,9 @@ def main():
     print(f"Wrote {STATION_MUNICIPALITIES_CSV} (the regional scoping record)")
     print(f"Wrote {EXCLUDED_STATIONS_CSV} ({len(excluded)} stations out of "
           f"scope, each named with its municipality)")
+    # The drift baseline (added 2026-10-03, with the regional extension).
+    emit("stations_in_scope", len(kept))
+    emit("stations_excluded", len(excluded))
 
 
 if __name__ == "__main__":

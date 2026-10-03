@@ -41,8 +41,13 @@ the owner at review time.
 - **Fourth of the four extensions**, on the owner's three approved calls
   (2026-10-02). The name stays "Vancouver (Regional)"; Richmond (Band R)
   and Port Moody (no addresses) stay out.
-- **Proved off first** (de1528d2): zero drift (Vancouver emits no baseline
-  figures, so the files are the whole check), peak 0.31 GB.
+- **Proved off first** (de1528d2): zero drift (Vancouver emitted no baseline
+  figures then, so the files were the whole check), peak 0.31 GB.
+- **A first baseline, recorded on purpose** (asked by Staging): steps 1 and
+  2 now emit 12 figures (stations in scope 44 and excluded 10; storefronts
+  15,436 and per source; per category 6,600 / 5,513 / 3,323; 84 Vancouver
+  legal names shown as a type, the extension's 8 being relabelled in their
+  loaders). Recorded with `--update-baseline`; the outputs stayed identical.
 - **Built in three legs by agents** (no commits, no repository edits),
   then integrated: `pipeline/vancouver/burnaby.py`, `coquitlam.py`,
   `new_westminster.py`; Burnaby's 142 and Coquitlam's 64 values mapped in
