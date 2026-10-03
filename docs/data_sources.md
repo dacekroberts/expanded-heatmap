@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3026,6 +3026,7 @@ at review time).
 - **MUST DO:** `check_personal_exposure.py kochi` with its Japan pass,
   run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
   ("Kōchi built", 2026-10-02).<!-- /internal -->
+
 **109. Public Health – Seattle & King County (Seattle (Regional)) — required, and DISPLAYED**
 (written into `render_site_notices()` with Seattle (Regional), 2026-10-02; the
 session's claimed block, 109–116.)
@@ -3112,6 +3113,25 @@ session's claimed block, 109–116.)
 - **MUST DO**: nothing further. Individual entrepreneurs' names and personal
   numbers are never written to disk; the removal rule is the safety net.
 
+**115. Kawasaki City and MLIT (Kawasaki) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-03; lands with Japan wave 2 at
+review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two datasets
+  are **CC BY** under its 川崎市オープンデータ利用規約 §2 (表示 2.1 JP), and
+  their pages' badge links CC BY 4.0; the credit names both (owner,
+  2026-10-02). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**,
+  as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never
+  drawn** (the Survey Act).
+- **MUST DISPLAY** (the 規約's form for modified use): 「この地図は以下の著作物を改変して利用しています。食品営業許可施設一覧、川崎市、クリエイティブ・コモンズ・ライセンス 表示 2.1」
+  and likewise 環境衛生関係営業に関する情報, each licence linked; MLIT's credit
+  lines.
+- **MUST NOT**: imply endorsement; claim the lists are accurate or complete
+  (§3①).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kawasaki` with its Japan pass,
+  run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
+  ("Kawasaki built", 2026-10-03).<!-- /internal -->
 
 ## Gaps
 

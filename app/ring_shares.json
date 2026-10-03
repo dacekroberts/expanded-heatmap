@@ -718,5 +718,10 @@
   "in_ring": 8084,
   "all": 13252,
   "map_blob": "da36efbaedcc295c9b0f53998101ba632d7fd24b"
+ },
+ "kawasaki": {
+  "in_ring": 9928,
+  "all": 11894,
+  "map_blob": "e9c15435fc406391e6b0b3c6de23d468df282387"
  }
 }

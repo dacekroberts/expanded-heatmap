@@ -3591,6 +3591,47 @@ written with 甲 / 乙 lot numbers.
 line.
 - Left out: 19 stations beyond it: 10 in Ino and 9 in Nankoku.
 
+### Kawasaki - the city's food list and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 944 permits whose holders chose not to have their address published (625 of
+  them restaurants, one in fourteen).
+- 2,455 food trucks and temporary stalls, licensed for all of Kanagawa with no
+  address.
+- 256 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 621 school, hospital and staff canteens, 155 caterers (仕出し), 53 premises
+  inside hotels and inns, 44 vending machines, 15 mahjong parlors and 10 other
+  temporary permits.
+- 9 linen suppliers (リネンサプライ), which are industrial laundries.
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry on the city's lists of the same date. The 301 delis
+that hold a restaurant permit (飲食店（そうざい店）) are Food shops. 45 of the
+975 bakery, confectioner and deli rows (4.6%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 418 repeat permits are shown once.
+
+**Not placed** - 2 rows. Another 152 sit at their town's center.
+
+**Names not shown** - none. The barber, beauty and laundry lists name every
+operator and no trade name is an operator's own name; the food list names an
+operator only where it is a company, so a sole trader's own name cannot be
+checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 49 stations beyond it: 22 in Yokohama (13 in Tsurumi Ward, 6 in
+  Aoba Ward and 3 in Kohoku Ward) and 27 in Tokyo (7 in Ota, 5 in Setagaya, 4
+  each in Tama and Inagi, 2 each in Komae, Machida and Chofu, and 1 in
+  Meguro).
+- The Shinkansen is not drawn; it crosses the city without a station.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

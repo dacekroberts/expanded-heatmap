@@ -4,6 +4,61 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Kawasaki built, the city's food list and three registers
+
+- **Kawasaki built as wave 2's pilot (page 176, notice 115): 11,894
+  storefronts (Food service 7,811, Food shops 1,252, Personal services 2,831)
+  around 52 stations on 16 lines, 83.5% of them in a ring.** The city's
+  monthly CC BY lists as of 2026-08-31 (food 14,022 rows, barbers 558, beauty
+  1,763, laundries 533), joined to MLIT's address blocks for the 7 wards:
+  12,160 rows at the block (98.7%), 152 at a town centre, 2 unplaced. 418
+  repeat permits shown once. Out by rule: 621 canteens, 256 manufacturing and
+  other non-counter types, 155 caterers, 53 inside hotels, 44 vending, 15
+  mahjong parlors, 10 temporary, 9 linen suppliers. Not a premises: 2,455
+  trucks and temporary stalls (licensed for all of Kanagawa, no address) and
+  944 permits whose holders had their address withheld (625 fixed
+  restaurants of 8,516, 7.3%, "one in fourteen" on the page; the brief's 798
+  of 9,812 counted every restaurant-type row).
+- **The 301 delis on a restaurant permit (飲食店（そうざい店）) are Food shops**,
+  the kit's call on the そう菜店 precedent; 弁当屋 (528) stays Food service.
+  The 菓子 / そうざい factory share: 45 of 975 (4.6%), kept (owner,
+  2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py kawasaki`: the
+  Japan pass prints 0, no pin shows its permit type; 5 rows in the raw files
+  have a trade name that is the operator's own name and none reaches a pin.
+  The food list names company operators only (Toyama's accepted position);
+  the registers name every operator.
+- **Rail:** N02-25 with JR East's 東海道線 drawn as Yokohama's four services
+  (Keihin-Tohoku, Tokaido, Yokosuka, Sotetsu-JR Link; each a route, its next
+  station outside the city as an end), and Tokyu's Meguro and Oimachi Lines
+  as routes over 東横線 and 田園都市線 (Tokyo draws both; here their trains
+  run on their own pairs of tracks beside the Toyoko and Den-en-toshi
+  lines), the brief's alternative being one page bullet. The Nambu Branch
+  (尻手-浜川崎) split off 南武線 by a branch walk (5,028 m); the Tsurumi Line's
+  大川 branch drawn with its line, as Yokohama draws the Tsurumi Line whole.
+  武蔵小杉's Yokosuka Line platform joined to its station (`GROUP_JOIN`; the
+  group spreads 397 m, `COLLAPSE_MAX_SPREAD_M` 450). 尻手's platform lies
+  inside the city line, so it is ringed. Keikyu Main (2 of 50) and Keio
+  Sagamihara (2 of 12) drawn as cut (owner, 2026-10-02). Gate 3: Keikyu's
+  list gives the Daishi Line 7, exact. 49 stations excluded: 22 in Yokohama,
+  27 in Tokyo (named through `N03_NEIGHBOR_PREFS`). Mizonokuchi (Tokyu) and
+  Musashi-Mizonokuchi (JR) are 132 m apart and separate N02 groups of
+  different names: kept apart. English names: OSM's 52 as they stand,
+  signage style with no macron, so no override. Colours from
+  `line_colour_search.py` (closest pair within 500 m 18.1).
+- **Economic Census control:** 7,811 Food service pins against 4,212 飲食店
+  establishments, 1.85 (川崎区 2.22, 麻生区 1.55), inside the built cities'
+  1.56-1.92.
+- **Prose proposals for review time** (no approved template covers them):
+  on the page, "Where two services share one route (...), each is drawn
+  along it."; "About one restaurant in fourteen in Kawasaki chose not to
+  have its address published in the city's list and is not on this map.
+  Where they are is not known." (the MHLW template's sentence, reworded for
+  a city list); "The Shinkansen is not drawn; it crosses the city without a
+  station."; in What Is Excluded, "The 301 delis that hold a restaurant
+  permit (飲食店（そうざい店）) are Food shops." and the same Shinkansen
+  sentence.
+
 ### 2026-10-03 - Japan wave 2: the shared-code pass, gated so no built city moves
 
 - **Every wave-2 brief's shared-code item landed in one pass, and the new

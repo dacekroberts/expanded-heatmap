@@ -3776,6 +3776,33 @@ CITIES = [
         # Asia; off the canvas in Global, as Europe's eastern dots are.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Kawasaki",
+        "lat": 35.5313,
+        "lon": 139.6969,
+        "page": "pages/176_Kawasaki_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.7%)",
+        "data_age": "Permits and registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "JR East's lines and the Keikyu, Tokyu, Odakyu and Keio railways",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): Japan wave 2 takes the Japan batch's tier,
+        # as France and Czechia; labelled only in the Japan view.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
