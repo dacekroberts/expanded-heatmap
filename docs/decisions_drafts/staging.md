@@ -4,6 +4,29 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Japan wave 2 and the four extensions released, in separate worktrees (owner)
+
+- **The owner: "write the kit, worktree and prompt for wave 2", "also do the
+  same for the four extensions", "separate worktrees".** Read back: two
+  worktrees, one for wave 2 and one for all four extensions, since Rio and
+  Belo Horizonte share Brazil's code.
+- **Japan wave 2** (`docs/handoff_japan_wave2_2026-10-02.md`): fourteen
+  cities, pages 176–189, notices 115–128, worktree `japan-wave2` on
+  `japan-wave2-build`. Wave 1's layout:
+  - one shared-code pass (each brief's new spellings, `wareki_date`, the
+    `norm_town` rules, "<city>内" as not premises);
+  - Kawasaki as the pilot;
+  - three agents by shape;
+  - the Japan West / East label pass.
+- **The four extensions** (`docs/handoff_extensions_2026-10-02.md`): Rio +
+  Duque de Caxias, Belo Horizonte + Contagem, Los Angeles + Long Beach, and
+  Vancouver (Regional) + Burnaby, New Westminster and Coquitlam.
+  - Notices 129–136, no new pages; worktree `extensions` on
+    `extensions-build`.
+  - One lead, sequential, Brazil first. Each extension proves zero drift
+    with its scope off, then updates the baseline deliberately.
+  - Vancouver's three small calls go to the owner before its step 2.
+
 ### 2026-10-02 - SanGIS's indemnity accepted for San Diego's two SanGIS layers; CARTO being handled (owner)
 
 - **The owner: "Carto being handled now. Sangis indemnity okay add to the
