@@ -280,7 +280,7 @@ name at their home.
 - **"Name withheld" in place of a personal name:** Seoul (138 pins), Daegu (113),
   Busan (114).
 - **Line of business in place of an unmarked sole proprietor's name:** Taichung
-  (11,907 pins), Taoyuan (7,230), Taipei (17,890). Tbilisi (8,328 businesses registered
+  (11,907 pins), Taoyuan (7,230), Taipei (17,890). Tbilisi (8,301 businesses registered
   to a person show their category).
 - **"No shop sign":** Hong Kong (308 pins, where the licence records none).
 - **Reason:** the source has no name column, or a privacy rule.
@@ -873,7 +873,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Switzerland** | | | | | |
 | Zurich | License register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
 | **Georgia** | | | | | |
-| Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,728 / 702 / 654 | A business, not a shop: a chain appears once |
+| Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,699 / 692 / 652 | A business, not a shop: a chain appears once |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -1039,7 +1039,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Switzerland** | | | |
 | Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
 | **Georgia** | | | |
-| Tbilisi | Register coordinates (81.0%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
+| Tbilisi | Register coordinates (80.8%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 

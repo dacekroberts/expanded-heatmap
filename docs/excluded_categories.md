@@ -4565,15 +4565,17 @@ since each business carries one main activity.
 address, so a chain with several shops appears once.
 
 **Left off because they could not be placed** - 1,620 storefronts with no
-coordinate, and 1,481 on eleven points that are the center of a district or
+coordinate, and 1,522 on thirteen points that are the center of a district or
 settlement rather than an address (a point shared by 50 or more businesses
-whose commonest address is a bare district or settlement name, or blank).
+whose commonest address, given by at least five of them, is a bare district
+or settlement name, or blank; and one in Krtsanisi where the businesses give
+many different addresses).
 Four of those points sit within 115 m of a metro station (Didube, Isani,
 Samgori and Liberty Square), where they would have inflated the innermost
 rings. 3 more have a coordinate outside the city.
 
 **Shown, but not named** - a business registered to a person (an individual
-entrepreneur, 8,328 of the storefronts shown) shows its category instead of a
+entrepreneur, 8,301 of the storefronts shown) shows its category instead of a
 name.
 
 **All 23 metro stations are inside the city**; nothing is drawn beyond the
