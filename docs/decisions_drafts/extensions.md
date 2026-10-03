@@ -243,6 +243,39 @@ the owner at review time.
   `app/ring_shares.json` (only this city's entry; master's other blob ids
   are stale but pass), `scripts/check_provenance.py`'s slug override.
 
+## For the Visuals session's city cards (Cleanup's rule, "Downstream sessions")
+
+**Notice placement, by each licence's own words on where it must appear.**
+
+| Source added | City | Notice | Card face or caption | The licence's words |
+|---|---|---|---|---|
+| IBGE CNEFE 2022 (Contagem, Duque de Caxias) | Belo Horizonte (Regional), Rio de Janeiro (Regional) | the existing "IBGE (Brazil)" notice | unchanged: as the city's existing IBGE notice | no new source or notice: the same national file the city already uses |
+| City of Long Beach, Business Licenses Public View | Los Angeles (Regional) | 129, displayed by choice | **caption only** | nothing must be displayed; the bar is "any way that suggests City's endorsement of your use", so nothing on the card face may read as the City's (no seal, no "official") |
+| City of Burnaby, Business Licences | Vancouver (Regional) | 130 | **caption, travelling with the card** | "where you do any of the above [copy, publish, adapt, distribute]: Acknowledge the source of the Information by including any attribution statement ... and, where possible, provide a link to this licence": a statement must accompany every use, the card included, but no place is named, so the caption suffices; the link where the medium allows |
+| City of New Westminster, Business Licenses (Residents) and Address Points | Vancouver (Regional) | 131 | **caption, travelling with the card** | the same OGL clause, word for word; the statement keeps "licenced" and the hyphen |
+| City of Coquitlam, Business_Licenses | Vancouver (Regional) | 132 | **caption, travelling with the card** | the same OGL clause; the statement keeps the en dash, with "© City of Coquitlam" beside it |
+
+None of the four new licences names the face of a derived product, so none
+requires the card face; each OGL statement must not be dropped from a card
+that is shown or shared without the site around it.
+
+**Open terms questions (each keeps its city or extension off public pieces
+until the owner rules):**
+
+- **Vancouver (Regional)'s extension (Burnaby, New Westminster, Coquitlam):
+  open.** All three OGL variants exempt "Personal Information" (FOIPPA
+  Schedule 1: information about an identifiable individual other than
+  business contact information). A licence issued under a sole proprietor's
+  own name, or a business at a home address, can be read either way; the
+  build takes the cautious side (8 such names show the business type), but
+  the reading is the owner's. Until then, keep the extension's cities off
+  public pieces; Vancouver and Surrey are not affected.
+- **Los Angeles (Regional)'s Long Beach: no open question** (the breach-only
+  indemnity was accepted by the owner, 2026-09-30). Los Angeles is already
+  held off public visuals for its own terms ruling.
+- **Belo Horizonte (Regional) and Rio de Janeiro (Regional): no new
+  question** (no new source).
+
 ## Proposals for the owner (sentences no template covers)
 
 1. Belo Horizonte (Regional), page, The lines: "The map covers **Belo
