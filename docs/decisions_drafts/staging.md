@@ -4,6 +4,135 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - SanGIS's indemnity accepted for San Diego's two SanGIS layers; CARTO being handled (owner)
+
+- **The owner: "Carto being handled now. Sangis indemnity okay add to the
+  list that we have for those".**
+- **SanGIS:** its End User Use Agreement carries an uncapped indemnity and a
+  general release (a Civil Code §1542 waiver). It is accepted for the tax
+  parcels and the municipal boundaries, and recorded beside Hong Kong,
+  Sacramento, Palma and Dallas in `docs/data_sources.md`'s accepted
+  indemnities.
+  - The no-credit-at-map-scale position is unchanged.
+  - `docs/licence_positions.md`: SanGIS moves from "2, held" to 2 and leaves
+    the 15 weakest; Kitchener–Waterloo takes 15th.
+- **CARTO:** the owner is handling it ("being handled now"). Staging takes no
+  action on it.
+
+### 2026-10-02 - Licence reads for the zero-reading sources: D.C. register and boundary, geo.api.gouv.fr, Dublin's NTA GTFS (owner)
+
+- **D.C. Basic Business License: PERMITTED WITH CONDITIONS (CC BY 4.0).**
+  - ArcGIS item `85bf98d3915f412c8a4de706f2d13513`. Its `licenseInfo` and
+    metadata `useLimit` say CC BY 4.0.
+  - The District's data terms and Mayor's Order 2017-115 §X say CC0
+    "unless otherwise noted". The item does note otherwise, so comply with
+    CC BY 4.0, which satisfies both.
+  - Credit the Department of Licensing and Consumer Protection, link the
+    licence, and say the data was modified. Nothing is owed. No owner call.
+- **DC Boundary: PERMITTED WITH CONDITIONS (CC BY 4.0).** Item
+  `7241f6d500b44288ad983f0942b39663` has the same CC0 note. Credit the Office
+  of the Chief Technology Officer (DC GIS), link the licence and say
+  "reprojected". It is not drawn. No owner call.
+- **geo.api.gouv.fr (26 French cities): PERMITTED WITH CONDITIONS, the
+  licence unclear.**
+  - The API declares none. The dataset it is built from ("Contours
+    administratifs", data.gouv `683424e996857155175d4f68`) says ODbL; IGN's
+    ADMIN EXPRESS says Licence Ouverte.
+  - A 2025-10-15 question to the publisher is unanswered.
+  - **Owner: show both credits:** an ODbL §4.3 notice naming "Contours
+    administratifs", and the Licence Ouverte source-and-date line. The
+    repository link discharges ODbL §4.6.
+- **Dublin's NTA GTFS: PERMITTED WITH CONDITIONS (CC BY 4.0).**
+  - The download page and data.gov.ie (`nta-gtfs`) say CC BY 4.0 and
+    prescribe: "This data is licensed under CC BY 4.0 and is attributed to
+    the National Transport Authority."
+  - The developer portal's Fair Usage Policy also claims GTFS data, with an
+    uncapped indemnity for any claim resulting from use. The download page
+    never links it.
+  - **Owner: "plain CC BY for dublin"**: the indemnity is not accepted. The
+    credit still meets the Policy's §7 as well:
+    - the NTA's sentence;
+    - the licence link;
+    - "three routes extracted and redrawn, colours this map's own";
+    - "as is";
+    - no endorsement.
+  - Link data.gov.ie rather than nationaltransport.ie (its website terms'
+    clause 5 on linking).
+- **Still running:** the CARTO basemap, and the LA County, MassGIS and
+  SANDAG boundaries. Cleanup gets every verdict's row and credit together.
+
+### 2026-10-02 - Japan wave 2's calls settled; Chiba to R; zero-reading licences sent for reads; gaps to Cleanup (owner)
+
+- **The owner: "approve all recommendations, for 4 mark chiba to R, run the
+  licence reads and send gaps to cleanup".**
+- **Wave 2's calls**, recorded in each brief's header block:
+  - **Drawn as cut:** the urban lines cut to stubs in Kawasaki, Nishinomiya,
+    Toyota and Higashiōsaka (Sakai's precedent).
+  - **Shimonoseki:** the 7 San'in stations beyond 小串 are LEFT OUT, which
+    was staging's recommendation (the agent's had been to draw them), so 14
+    stations get rings.
+  - **Nara** is built despite thin rail. **Hamamatsu** gets no MHLW
+    notifications layer.
+  - **Accepted:** Kawasaki's two CC BY versions (both named), Toyota's
+    register scope, Ōtsu's city-site food file.
+  - **Modes and laundry:** Yokosuka `metro`, Ōtsu `light_rail`;
+    Nishinomiya's laundry at 62% kept and disclosed.
+- **Chiba to Band R:** its complete city lists sit under all-rights-reserved.
+  The way through is the owner's permission request; the MHLW-only food page
+  is not built. Candidates: A 9 · B 5 · R 26 = 40.
+- **Licence reads started for the zero-reading entries** in
+  `docs/licence_positions.md`: Dublin's NTA GTFS, D.C.'s Basic Business
+  License, the DC Boundary, the CARTO basemap, geo.api.gouv.fr, and the LA
+  County, MassGIS and SANDAG boundaries.
+- **The repository link.** The owner asked whether LinkedIn or GitHub icons
+  were already in the page headers. They are not, on master or on any
+  branch. The repository (github.com/dacekroberts/expanded-heatmap) is public
+  to a logged-out visitor, so a GitHub link in the header would discharge
+  IDFM Art. 5.8 and ODbL §4.6. A LinkedIn link needs the owner's profile URL.
+  Passed to Cleanup with the other gaps.
+
+### 2026-10-02 - Japan wave 2: 15 briefed, Wakayama discarded; licence positions ranked
+
+- **The owner: "brief now, hold on builds".** Five agents briefed the scope's
+  16 cities by region. Staging re-ran every brief: 15 pass all their checks.
+  - **Band A (9):** Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu,
+    Toyota, Yokkaichi, Ōtsu, Nara.
+  - **Band B (6):** Chiba (food, MHLW alone), Hamamatsu (personal services),
+    Higashiōsaka (food), Kurume, Sasebo and Shimonoseki (food, MHLW).
+  - **Wakayama is discarded on coverage.** Its only list is opt-in, 51% of
+    the restaurants in force, with no personal-services list.
+  - Candidates are now A 9 · B 6 · R 25 = 40, with 122 discards. Builds are
+    held.
+- **Open with the owner (🚨 in the briefs):**
+  - urban lines cut to stubs, recommended drawn as cut (Sakai's
+    precedent): Kawasaki, Nishinomiya, Toyota, Higashiōsaka;
+  - Shimonoseki's seven San'in stations beyond 小串, at about 8–10 trains
+    a day. The agent says draw them; staging leans to leaving them out
+    (Brazil's frequency discards);
+  - Nara's thin rail (14 groups; recommended build);
+  - Chiba's all-rights-reserved city lists (a permission request would
+    open three buckets);
+  - Hamamatsu's MHLW notifications as partial food (recommended no);
+  - Kawasaki's two CC BY versions; Toyota's register title; Ōtsu's food
+    file on the city's site only (all recommended accept);
+  - modes for Yokosuka (metro) and Ōtsu (light_rail);
+  - Nishinomiya's laundry list at 62% (keep, disclose).
+- **New shared code** (each brief lists it): more column spellings; a
+  `wareki_date` form; `norm_town` rules for 大字 and 字甲/乙/丙; addresses of
+  only "<city>内" treated as not premises; Nara's old-law restaurant types;
+  month-renamed fetches.
+- **Licence positions ranked** (owner: "list our weakest to strongest notice
+  positions"): `docs/licence_positions.md`.
+  - **142 grouped entries:** tier 1 (weakest) 28, tier 2 (conditional) 48,
+    tier 3 (open licence) 44, tier 4 (public domain) 22.
+  - **The weakest:** Philadelphia (an unanswered permission request), King
+    County food, Dublin's NTA GTFS (no reading), D.C.'s register (no
+    reading), Snohomish, Bellevue, Daegu, Den Haag, Bucharest, CNEFE.
+  - **Flags:** missing licence rows (D.C., NTA, CARTO, several boundaries,
+    geo.api.gouv.fr); no public-repository link in the app (IDFM Art. 5.8,
+    ODbL §4.6); missing credits (NTA, Milan rail, SFMTA's disclaimer,
+    STM's modification sentence, MLIT for all 20 Japanese cities).
+
 ### 2026-10-02 - A re-check calendar for every built city; Vancouver's extension probed; Arlington measured
 
 - **`docs/recheck_calendar.md`** (owner: "let's update this calendar across
