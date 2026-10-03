@@ -4,6 +4,17 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Visual exports moved to a dedicated visuals/ folder (owner)
+
+- **The exports moved from `data/_handoff/visual/exports/` to `visuals/` at
+  the main checkout's root**, at the owner's request for a folder holding
+  only these visuals.
+- **`/visuals/` was added to `.git/info/exclude`**, the clone-local ignore
+  list that every worktree shares, so no tracked `.gitignore` changed.
+  `scripts/check_stray_downloads.py` does not report it.
+- The index and the folder's README now name the new location.
+- Supersedes the export location in the entry below.
+
 ### 2026-10-02 - Phase 6 approved; QR card, poster and Phase 7 index and exports (owner)
 
 - **Phase 6, its new wording and the LinkedIn post text were approved**
