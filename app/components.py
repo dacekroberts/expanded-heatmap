@@ -493,7 +493,8 @@ _OSM_RAIL = (
     "Göteborg", "Zurich", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
-    "Taipei (Regional)",
+    "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
+    "Buenos Aires", "Seattle (Regional)",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -894,7 +895,12 @@ _NOTICES = [
      "Santos, and those cities' município boundaries, and "
      "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, Hong Kong's MTR and "
      "Light Rail lines and stations, and its boundary, Seoul's subway lines and stations and "
-     "its boundary, the routes of Taichung's Green Line and Taoyuan's Airport MRT, and the "
+     "its boundary, the subway, light-rail and Korail lines and stations of Daegu, Busan, "
+     "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu and "
+     "Anyang, and those cities' boundaries, the train and metro routes of Sydney and "
+     "Melbourne and their City boundaries, Buenos Aires's Subte and Premetro routes and "
+     "its boundary, Seattle's Link 1 and 2 Lines, "
+     "the routes of Taichung's Green Line and Taoyuan's Airport MRT, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
