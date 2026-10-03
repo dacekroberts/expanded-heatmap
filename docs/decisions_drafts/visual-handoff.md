@@ -4,6 +4,31 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Phase 5 multi-city views drafted, with country views for countries of three or more cities (owner)
+
+- **Phase 4 and Fukui's card line were approved** (owner).
+- **The multi-city views show within-city shapes only.** One panel per city
+  of band shares, adding to 100%, grouped by ring set and then by record
+  kind, each panel badged with mode, coverage and categories. The share of
+  storefronts near a station is a labeled dot plot, alphabetical within each
+  ring set, never ranked. Both views carry the approved "How to read these"
+  card.
+- **A public set of 122 cities and a private all-cities view.** Left out of
+  the public set:
+  - the eight cities with open terms questions (Philadelphia, Seattle
+    (Regional), Barcelona, Dublin, Den Haag, Bucharest, Milan, Miami
+    (Regional));
+  - the 14 cities the owner took off the cards, all except Paris.
+
+  Rejected: treating the off-card cities as fine for multi-city pieces. The
+  reasons that took them off the cards (LA Metro's advertisement clause,
+  WMATA's application scope, the Korean permission scope for posts) reach
+  any shared image.
+- **Country views were added at the owner's suggestion**: every country with
+  three or more cities in the set shown (11 countries in the public set,
+  15 in all). Each shows its cities as dots with no basemap, its record
+  kinds, and its band-share panels grouped by ring set.
+
 ### 2026-10-02 - City cards generated: 129 cities, 15 off the cards, card-face credits per the cleanup session's reading (owner)
 
 - **129 cards were generated, one per city on the card list.** The owner's
