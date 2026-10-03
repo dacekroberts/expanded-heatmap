@@ -12,7 +12,7 @@ station,lines,reason,latitude,longitude
 八尾南,T,"in 八尾市, outside 大阪市 (the permit list covers the city only)",34.5972180310674,135.58282770423617
 志紀,JQ,"in 八尾市, outside 大阪市 (the permit list covers the city only)",34.60033000106197,135.61590999999999
 近鉄八尾,KO,"in 八尾市, outside 大阪市 (the permit list covers the city only)",34.62983000050685,135.603545
-南吹田,OH,"in 吹田市, outside 大阪市 (the permit list covers the city only)",34.749431439064374,135.5112923215195
+南吹田,OH,"in 吹田市, outside 大阪市 (the permit list covers the city only)",34.74943144001318,135.5112923240274
 吹田,JY,"in 吹田市, outside 大阪市 (the permit list covers the city only)",34.76322000359112,135.523765
 吹田,HS,"in 吹田市, outside 大阪市 (the permit list covers the city only)",34.759605001145935,135.517295
 岸辺,JY,"in 吹田市, outside 大阪市 (the permit list covers the city only)",34.776935001310314,135.541325
@@ -54,11 +54,11 @@ JR長瀬,OH,"in 東大阪市, outside 大阪市 (the permit list covers the city
 布施,KO,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.66408500000376,135.56357
 弥刀,KO,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.641400001331895,135.58339
 徳庵,JG,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.69249000163345,135.58142
-衣摺加美北,OH,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.63843161197598,135.5671237919555
+衣摺加美北,OH,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.63843161256159,135.56712378999995
 長瀬,KO,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.64985500080352,135.57760999999996
 長田,C,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.678755000000145,135.59196499999996
 高井田,C,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.678488014651954,135.57249699704045
-高井田中央,OH,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.67882688478216,135.57239506556942
+高井田中央,OH,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.6788268851191,135.57239506499997
 鴻池新田,JG,"in 東大阪市, outside 大阪市 (the permit list covers the city only)",34.69886000007311,135.597645
 布忍,KA,"in 松原市, outside 大阪市 (the permit list covers the city only)",34.577845002201684,135.539415
 河内天美,KA,"in 松原市, outside 大阪市 (the permit list covers the city only)",34.58578462817275,135.53556376397225

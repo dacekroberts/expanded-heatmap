@@ -5,16 +5,19 @@ São Paulo-specific.
 
 Input:  data/sao_paulo/processed/stations.csv
         data/sao_paulo/processed/businesses_clean.csv
-        data/sao_paulo/raw/osm_rail.json
+        data/sao_paulo/raw/osm_rail.json, osm_train.json, osm_l17_branch.json
         data/sao_paulo/raw/osm_boundary.json             (label anchoring)
 Output: outputs/sao_paulo/heatmap.html
 
 Run:  python pipeline/sao_paulo/step3_map.py
 
 Lines from OpenStreetMap through load_osm_line_shapes (the owner's
-2026-09-23 decision), keyed on `ref`: 1-5 are route=subway, 15 is
-route=monorail, and no other relation carries those refs.
+2026-09-23 decision), keyed on `ref`: 1-5 are route=subway, 15 and 17 are
+route=monorail, and no other relation carries those refs. Linha 17's
+Washington Luís branch is in neither of its relations, so its one way is
+added by id (config.L17_BRANCH).
 """
+import json
 import sys
 from pathlib import Path
 
@@ -30,7 +33,9 @@ from pipeline.sao_paulo.config import (  # noqa: E402
     HEATMAP_HTML,
     LINE_COLOURS,
     LINE_NAMES,
+    L17_BRANCH,
     LINE_ORDER,
+    OSM_L17_BRANCH_JSON,
     OSM_RAIL_JSON,
     OSM_TRAIN_JSON,
     RING_EDGES_METERS,
@@ -43,6 +48,17 @@ SYSTEM = "Metrô and CPTM"
 LINE_LABEL_ENDS = {}
 # CPTM's Line 9 lives in the train cache; the metro and monorail in the rail one.
 TRAIN_REFS = ("9",)
+
+
+def l17_branch_segment():
+    """The Washington Luís branch way, as (lat, lon) pairs."""
+    if not OSM_L17_BRANCH_JSON.exists():
+        sys.exit(f"Missing {OSM_L17_BRANCH_JSON}. Run: python pipeline/sao_paulo/fetch_sources.py")
+    els = json.loads(OSM_L17_BRANCH_JSON.read_text(encoding="utf-8"))["elements"]
+    way = next((e for e in els if e["type"] == "way" and e["id"] == L17_BRANCH["way"]), None)
+    if way is None or not way.get("geometry"):
+        sys.exit(f"way {L17_BRANCH['way']} has no geometry in {OSM_L17_BRANCH_JSON.name}")
+    return [(p["lat"], p["lon"]) for p in way["geometry"]]
 
 
 def main():
@@ -58,6 +74,7 @@ def main():
     missing = [ln for ln in LINE_ORDER if ln not in lines]
     if missing:
         sys.exit(f"no geometry for {missing}")
+    lines["17"][0].append(l17_branch_segment())
     render_heatmap(
         output_path=HEATMAP_HTML,
         map_title="São Paulo Metrô and CPTM Business Density Heatmap",

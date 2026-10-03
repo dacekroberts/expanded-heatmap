@@ -135,6 +135,15 @@ drawn only if GeoSampa's operating layer lists them** — the check below fails
 the day either appears there. **Cross-check the derived station count against
 GeoSampa's 85 distinct stations** (gate 3's per-line comparison).
 
+**2026-10-03 (owner, "investigate and then draw"): ref 17 is drawn** although
+GeoSampa's operating layer still lacks it. Metrô's Linha 17-Ouro page lists
+eight stations carrying passengers (Morumbi to Aeroporto de Congonhas since
+2026-03-31, Washington Luís since 2026-06-30), fare-free in transitional
+operation; gate 3 takes those eight (`config.GATE3_ADDED`). OSM's two Linha 17
+relations omit the Washington Luís branch, so its stop and track are added by
+id (`config.L17_BRANCH`). Ref 6 stays out: its first six stations have run a
+free trial service on weekdays 10:00-15:00 since 2026-07-03.
+
 **GeoSampa's layers, for status and the count cross-check only:**
 
 | Layer | Features | |
@@ -227,7 +236,7 @@ if more countries follow. **Owner call at build**, measured with
   },
   {
     "id": "geosampa-lines-6-and-17-not-operating",
-    "claim": "Linha 6-Laranja and Linha 17-Ouro are NOT in the operating station layer, though OSM carries both as routes. When this FAILS, one has opened: add it deliberately",
+    "claim": "Linha 6-Laranja and Linha 17-Ouro are NOT in the operating station layer, though OSM carries both as routes. Linha 17 is drawn regardless since 2026-10-03 (Metro's own list): when OURO appears, retire config.GATE3_ADDED's Linha 17 entry. When LARANJA appears, Linha 6 has opened: add it deliberately",
     "kind": "http_contains",
     "url": "https://wfs.geosampa.prefeitura.sp.gov.br/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geoportal:estacao_metro&outputFormat=application/json&propertyName=nm_linha_metro_trem",
     "present": ["PRATA", "LILAS", "AZUL"],
@@ -235,7 +244,7 @@ if more countries follow. **Owner call at build**, measured with
   },
   {
     "id": "sp-osm-lines-are-the-geometry-source",
-    "claim": "OSM carries Metro de Sao Paulo subway refs 1-6 and monorail refs 15 and 17 - the geometry source by the owner's 2026-09-23 decision. Refs 6 and 17 are drawn ONLY if GeoSampa's operating layer lists them",
+    "claim": "OSM carries Metro de Sao Paulo subway refs 1-6 and monorail refs 15 and 17 - the geometry source by the owner's 2026-09-23 decision. Ref 17 is drawn since 2026-10-03 (owner) on Metro's own station list; ref 6 is drawn ONLY if GeoSampa's operating layer lists it",
     "kind": "osm_route_refs",
     "bbox": [-23.80, -46.83, -23.36, -46.36],
     "routes": ["subway", "monorail"],
