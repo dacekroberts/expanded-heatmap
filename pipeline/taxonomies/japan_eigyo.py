@@ -45,12 +45,16 @@ _CATERING = r"仕出"
 # (rule name, bucket or None, pattern) - searched in the NORMALISED value.
 RULES = [
     # --- not a premises, or not a storefront: above everything they overlap
-    ("institutional catering", None, r"集団給食|^給食|飲食給食"),
+    # Kawasaki's 飲食店（給食施設） and 飲食店（学校給食炊飯） (Japan wave 2,
+    # 2026-10-03): ^給食 misses them inside the bracket
+    ("institutional catering", None, r"集団給食|^給食|飲食給食|給食施設|給食炊飯"),
     ("vending machine", None, r"自動販売機|自販|コップ式|全自動調理機"),
-    ("temporary / mobile", None, r"行商|露店|仮設|臨時|期間申請|屋形船|自動車|営業とみなされない"),
+    # Kawasaki's 飲食店（短期営業）
+    ("temporary / mobile", None, r"行商|露店|仮設|臨時|期間申請|屋形船|自動車|営業とみなされない|短期営業"),
     ("mail order", None, r"通信販売|訪問販売|通信訪問"),
     ("inside accommodation", None, r"旅館|ホテル"),
-    ("entertainment venue", None, r"カラオケ|麻雀|遊技場|ネットカフェ|漫画喫茶"),
+    # Kawasaki's 飲食店（まあじゃん屋等）: the kana spelling of 麻雀
+    ("entertainment venue", None, r"カラオケ|麻雀|まあじゃん|遊技場|ネットカフェ|漫画喫茶"),
     # Adult and hostess venues off every map (owner, 2026-09-29): Tokyo's
     # permit sub-type バー・キャバレー (bars filed with cabarets, one sub-type)
     # and the snack bar, a hostess-staffed bar. Plain バー stays: it names
@@ -63,8 +67,15 @@ RULES = [
     # --- Retail, food only (the owner's two manufacturing types come first,
     #     because they would otherwise fall to the manufacturing exclusion)
     ("konbini holding a restaurant permit", "Retail", r"コンビニ"),
-    ("deli (owner: そうざい counts)", "Retail", r"^(そうざい製造|惣菜製造|飲食惣菜)|そう菜店"),
-    ("confectioner / bakery (owner: 菓子 counts)", "Retail", r"^菓子"),
+    # Japan wave 2 (2026-10-03): a deli on a restaurant permit, Kawasaki's
+    # 飲食店（そうざい店） (301) as the そう菜店 already here, and Nara's old-law
+    # そうざい屋 where it leads the sub-types (そうざい屋・弁当屋; 軽飲食・そうざい屋
+    # is a restaurant). 複合型そうざい製造業 stays out, as every built city reads
+    # it: counting it moves eight built cities (about 55 pins), a cross-city
+    # change for review time (docs/decisions_drafts/japan-wave2.md).
+    ("deli (owner: そうざい counts)", "Retail", r"^(そうざい製造|惣菜製造|飲食惣菜|そうざい屋)|そう菜店|そうざい店"),
+    # Nara's old-law 簡易菓子製造業
+    ("confectioner / bakery (owner: 菓子 counts)", "Retail", r"^(簡易)?菓子"),
     ("butcher", "Retail", r"^(食肉販売|肉販)"),
     ("fishmonger", "Retail", r"^(魚介類販売|魚販)"),
     ("dairy", "Retail", r"^(乳類販売|乳販)"),
@@ -76,7 +87,14 @@ RULES = [
     # --- Food service
     # Fukui's old-law permits spell the type short, 飲食店 and 喫茶店 (93
     # restaurants, 2026-10-02): without the whole-value forms they fell to "no rule"
-    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶)|^飲食店$"),
+    # Japan wave 2 (2026-10-03): Kawasaki's 飲食店（sub-type） (飲食店（一般食堂）
+    # 3,577, 飲食店（大衆酒場）989: none bucketed without it), its carve-outs
+    # above; Nara's old-law list files a restaurant by its sub-type alone
+    # (軽飲食, 一般食堂, 居酒屋 ... 455 restaurants in term), the first listed
+    # deciding a combination
+    ("restaurant", "Food service", r"飲食店営業|^飲食(一般|バー|すし|そば|弁当|簡易|喫茶)|^飲食店$|^飲食店\(|"
+                                   r"^(軽飲食|一般食堂|居酒屋|めん類食堂|弁当屋|レストラン|お好焼屋|焼肉屋|すし屋|"
+                                   r"中華料理店|たこ焼屋|スタンド|調理パン)"),
     ("café", "Food service", r"喫茶店営業|^喫茶店舗|^喫茶店$"),
 ]
 _COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in RULES]
@@ -187,7 +205,17 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
                   ("飲食店営業（集団給食）", None), ("飲食店営業（一般・コンビニ）", "Retail"),
                   ("飲食店営業（一般・カラオケ）", None), ("飲食給食", None), ("飲食一般", "Food service"),
                   ("菓子製造業", "Retail"), ("菓子製造業（期間申請）", None), ("⑪ 菓子製造業", "Retail"),
-                  ("そうざい製造業", "Retail"), ("複合型そうざい製造業", None), ("⑬ その他の食料・飲料販売業", "Retail"),
+                  ("そうざい製造業", "Retail"), ("複合型そうざい製造業", None), ("複合型冷凍食品製造業", None),
+                  ("⑬ その他の食料・飲料販売業", "Retail"),
+                  # Japan wave 2: Kawasaki's 飲食店（sub-type） and its carve-outs; Nara's old-law sub-types
+                  ("飲食店（一般食堂）", "Food service"), ("飲食店（バー）", "Food service"),
+                  ("飲食店（給食施設）", None), ("飲食店（学校給食炊飯）", None), ("飲食店（まあじゃん屋等）", None),
+                  ("飲食店（短期営業）", None), ("飲食店（屋台型臨時営業）", None), ("飲食店（仕出し屋）", None),
+                  ("飲食店（自動車（タンク容量80リットル））", None), ("飲食店（そうざい店）", "Retail"),
+                  ("飲食店（弁当屋）", "Food service"), ("軽飲食", "Food service"), ("一般食堂・弁当屋", "Food service"),
+                  ("一般食堂・仕出し屋", None), ("そうざい屋", "Retail"), ("そうざい屋・弁当屋", "Retail"),
+                  ("軽飲食・そうざい屋", "Food service"), ("旅館・一般食堂", None), ("簡易菓子製造業", "Retail"),
+                  ("第１種自動車飲食店営業", None), ("簡易飲食店営業（自動販売機）", None), ("スナック", None),
                   ("⑫ 自動販売機による販売業（…）", None), ("コップ式自動販売機", None), ("食肉処理業", None),
                   ("喫茶店営業（自動販売機）", None), ("他食販自販", None), ("乳販自販", None),
                   ("飲食店", "Food service"), ("喫茶店", "Food service"), ("飲食店（自動車）", None)):
@@ -222,5 +250,9 @@ for _v, _f, _want in (("飲食店営業（バー・キャバレー）", "", None
                       ("菓子製造業", "スナック菓子", "Retail"), ("菓子製造業（スナック菓子）", "", "Retail"),
                       # (owner, 2026-09-29) a 露店 form is a street stall; Fukuoka's ろ店 yatai stay
                       ("① 飲食店営業", "露店", None), ("① 飲食店営業", "ろ店", "Food service"),
-                      ("① 飲食店営業", "定置屋台", "Food service")):
+                      ("① 飲食店営業", "定置屋台", "Food service"),
+                      # Japan wave 2: Yokosuka's 詳細業種 and Sasebo's 種目 read as the form
+                      ("飲食店営業", "総菜屋", "Food service"), ("飲食店営業", "旅館の経営を兼ねる飲食店営業", None), ("飲食店営業", "屋台型臨時営業", None),
+                      ("飲食店営業", "自動車による営業(タンク容量80リットル)", None), ("喫茶店営業", "自動販売機", None),
+                      ("飲食店営業", "飲食店（客席を設ける営業）", "Food service"), ("飲食店営業", "露店：定置", None)):
     assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))

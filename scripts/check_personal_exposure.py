@@ -493,6 +493,14 @@ REGISTRIES = {
                   address=("address",), japan=True)
        for slug in ("toyama", "kumamoto", "fukui", "nagasaki", "utsunomiya", "kitakyushu", "sakai",
                     "hakodate", "kagoshima", "okayama", "kochi")},
+    # Japan wave 2 (2026-10-03), on the same shared steps and the same rule:
+    # each list's operator column is read only by the name rule, in memory;
+    # MHLW's rows, Hamamatsu's registers and Higashiosaka's national-schema
+    # list name no individual operator. The Japan pass tests what reached the map.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("kawasaki", "yokosuka", "himeji", "nishinomiya", "takamatsu", "toyota", "yokkaichi",
+                    "otsu", "nara", "hamamatsu", "higashiosaka", "kurume", "sasebo", "shimonoseki")},
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no

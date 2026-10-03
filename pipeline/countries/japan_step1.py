@@ -230,9 +230,15 @@ def route_sections(config, key, sec, pair, st):
 
 
 def n03_municipalities(config):
-    pref = japan.CITIES[config.SLUG]["pref"]
-    z = japan.SHARED_RAW / japan.N03_ZIP_TEMPLATE.format(pref=pref)
-    n03 = japan._read_geojson(z, z.name.replace("_GML.zip", ".geojson")).to_crs(config.CRS_GEOGRAPHIC)
+    """The municipalities that name an excluded station: the city's prefecture,
+    plus config.N03_NEIGHBOR_PREFS where its lines run on into another
+    (Kawasaki, 2026-10-03: 27 stations across the Tama River in Tokyo, which
+    the city's own prefecture alone names only "another prefecture")."""
+    frames = []
+    for pref in [japan.CITIES[config.SLUG]["pref"], *getattr(config, "N03_NEIGHBOR_PREFS", ())]:
+        z = japan.SHARED_RAW / japan.N03_ZIP_TEMPLATE.format(pref=pref)
+        frames.append(japan._read_geojson(z, z.name.replace("_GML.zip", ".geojson")).to_crs(config.CRS_GEOGRAPHIC))
+    n03 = pd.concat(frames, ignore_index=True) if len(frames) > 1 else frames[0]
     n03["muni"] = n03["N03_004"].fillna("") + n03["N03_005"].fillna("")
     return n03.dissolve("muni").reset_index()[["muni", "geometry"]]
 
