@@ -56,7 +56,7 @@ st.markdown(
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Yokohama City get rings, because the business data covers the city alone:
   lines running on to Tokyo, Kawasaki, Machida, Yamato, Fujisawa, Kamakura, Zushi and Yokosuka are
-  cut at the city line.
+  cut at the city line. The stations left out are listed below.
 - Where JR services share track they are drawn over one another.
 - The Shinkansen is not drawn (Shin-Yokohama appears as a station of the lines above).
 

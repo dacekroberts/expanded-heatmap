@@ -67,8 +67,8 @@ st.markdown(
   redrawn from the Prague Integrated Transport system's (PID) own route geometry in the
   operator's colors. Line A is shown a shade lighter so it stays distinct from the green of the
   personal-services dots.
-- **Flora station on line A is closed for reconstruction** until about December 2026. Like the
-  timetable, the map leaves it out until it reopens.
+- **Flora station on line A is closed for reconstruction** until about the end of February 2027. Like
+  the timetable, the map leaves it out until it reopens.
 - Trams, the Petřín funicular, ferries and suburban trains are not drawn.
 - The map covers the **City of Prague**, and every metro station lies inside it, so none is left
   out.

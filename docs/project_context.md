@@ -802,7 +802,7 @@ Cities built and running end to end (pipeline, map, app page):
   although suburban rail is left out elsewhere, on the spacing-and-frequency
   test Dublin's DART passed. **The coordinates come from the national address
   register through the same account as the businesses**, because the keyless
-  address service the brief relied on closes on 1 October 2026. And **the
+  address service the brief relied on closed on 1 October 2026. And **the
   privacy guard is the parent's legal form**, extended past Oslo's to
   partnerships, with Denmark's "v/" sole-trader marker as a second guard. Rail
   is from OpenStreetMap: the national journey planner's GTFS is open but asks
@@ -831,9 +831,9 @@ Cities built and running end to end (pipeline, map, app page):
   classification is stored at ragged depth**, so the taxonomy matches on code
   PREFIXES rather than at a level - the first here to. **A sole trader's
   premises at their own registered address is left off the map**, not just
-  unnamed - the first city where that could be detected. And **Flora station
-  is drawn while closed for reconstruction**, with a guard that stops the build
-  once the feed serves it again.
+  unnamed - the first city where that could be detected. And **Flora station,
+  closed for reconstruction, is counted but not drawn** (owner, 2026-09-29),
+  with a guard that stops the build once the feed serves it again.
 
 - **Amsterdam** - GVB's metro lines 50-54 and sixteen tram lines, inside the
   municipality. The Netherlands' first city, and the first built from two

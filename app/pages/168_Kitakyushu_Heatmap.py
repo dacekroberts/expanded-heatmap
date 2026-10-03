@@ -60,7 +60,7 @@ st.markdown(
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Kitakyushu City get rings, because the business data covers the city alone:
   JR and Chikuho lines running on to Nakama, Nogata, Mizumaki, Onga, Kurate, Kanda, Kawara and
-  Shimonoseki are cut at the city line.
+  Shimonoseki are cut at the city line. The stations left out are listed below.
 - The Shinkansen is not drawn (Kokura appears as a JR and Monorail station).
 - The Sarakurayama cable car and the Mojiko Retro sightseeing train, which are sightseeing lines,
   are not drawn.

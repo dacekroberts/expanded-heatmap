@@ -203,7 +203,8 @@ Kyoto, Yokohama, Hiroshima; approved wording, so no read-back - fill the
     project's own, not the operators'."
   - "Only stations inside <City> City get rings, because the business data
     covers the city alone: lines running on to <neighbors> are cut at the
-    city line."
+    city line. The stations left out are listed below." (the last sentence
+    added to every built page by the family wording batch, 2026-10-03)
   - "The Shinkansen is not drawn." (with "(<station> appears as a <...>
     station)" where it shares one), and any sightseeing line left out: "The
     <...> cable cars, which are sightseeing lines, are not drawn."

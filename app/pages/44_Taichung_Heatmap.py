@@ -69,7 +69,7 @@ st.markdown(
 - Its stations and their names come from Taichung Metro's own station table, and its route from
   OpenStreetMap, because the station table carries no route.
 - Neither source gives the line a color, so it is drawn in a green of this project's choosing.
-- Every station is inside the city. Taiwan Railway and high-speed rail services are not drawn.
+- Every station is inside the city. Taiwan Railway and high-speed rail are not drawn.
 
 **The businesses**
 

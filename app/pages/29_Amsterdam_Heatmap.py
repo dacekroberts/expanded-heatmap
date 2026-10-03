@@ -74,8 +74,8 @@ st.markdown(
 - Trams stop every few hundred meters, so on each tram line's outer stretches only about
   one stop per half mile is drawn as a station; metro stations, interchanges and each line's last
   stop inside the city are always drawn.
-- Tram 3 (no service in this timetable period), the museum tram, ferries and national-rail (NS)
-  trains are not drawn.
+- Tram 3, which GVB discontinued on 29 March 2026, the museum tram, ferries and national-rail
+  (NS) trains are not drawn.
 - The map covers the **municipality of Amsterdam**, Weesp included. The 22 stops outside it, in
   Amstelveen, Diemen, Ouder-Amstel and Uithoorn, are left out: the lines that run on into those
   places are drawn whole but counted only inside the city, and tram 6 keeps five of its sixteen
