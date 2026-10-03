@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**388 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**392 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -75,6 +75,10 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Paris stays published after the repository-link gap (owner)](#2026-10-02---paris-stays-published-after-the-repository-link-gap-owner)
 - [A CARTO basemap key requested; CARTO's indemnity and New York law accepted (owner)](#2026-10-02---a-carto-basemap-key-requested-cartos-indemnity-and-new-york-law-accepted-owner)
 - [Credits on the visuals session's city cards: what goes on the card face, and which cities stay off (owner)](#2026-10-02---credits-on-the-visuals-sessions-city-cards-what-goes-on-the-card-face-and-which-cities-stay-off-owner)
+- [A teal frame around every map (owner's pick, T3)](#2026-10-02---a-teal-frame-around-every-map-owners-pick-t3)
+- [Required notices: each city's own on its page, six on every page, all on a new page (owner)](#2026-10-02---required-notices-each-citys-own-on-its-page-six-on-every-page-all-on-a-new-page-owner)
+- [Touch gestures: one finger scrolls the page, two move the map](#2026-10-02---touch-gestures-one-finger-scrolls-the-page-two-move-the-map)
+- [The Overview's CARTO basemap sends the project's key on every request; its credit now links CARTO's attribution page, with OpenMapTiles](#2026-10-02---the-overviews-carto-basemap-sends-the-projects-key-on-every-request-its-credit-now-links-cartos-attribution-page-with-openmaptiles)
 
 **2026-10-01**
 
@@ -16189,3 +16193,267 @@ Recorded by the cleanup session from the Main Building Session's findings of
     Seattle (Regional). Fixed at the next landing.
   - SFMTA's required notice may include a second, "as is" paragraph that the
     site does not show (PLAN).
+
+### 2026-10-02 - A teal frame around every map (owner's pick, T3)
+
+- **Every city map's embed and the Overview's macro map now sit in a 3 px
+  muted teal ring with a faint teal halo and glow, and 8 px corners** (owner,
+  2026-10-02: "add a nice border to all maps that aligns with our midnight
+  slate theme"). CSS only, in `app/components.py`: `MAP_FRAME_CSS`, applied
+  by `render_city_title()` to the map's element container on city pages and
+  by `render_macro_map_theme()` to `stDeckGlJsonChart` on the Overview.
+  `pipeline/map_common.py` and the 144 committed maps are untouched.
+- **How it got there.** Three slate variants went to the owner first (a 1 px
+  hairline; hairline and soft shadow; both with 8 px corners). The owner asked
+  for teal, the site's own accent, then for a thicker ring, and picked the
+  muted ring with a halo (T3) over the full-strength accent (T1) and the
+  muted ring alone (T2). The ring is each theme's teal mixed 45% into its
+  page color: `#0d9488` into `#ffffff` in light, the dark page accent
+  `#2dd4bf` into `#0B1220` in dark. Mixing them in CSS (`color-mix()`) keeps
+  the colors derived from `pipeline/theme.py` rather than typed in as new
+  literals. The dark theme's own border token, `#23304A`, was rejected early
+  because it was nearly invisible against the dark basemap.
+- **Box-shadows only, so the map keeps its exact size.** Measured in the
+  preview: the map stays 1000x650 at a 1200 px page and 333x650 at 375 px,
+  the macro map stays 1030x460 and 333x460, and the main column's
+  scrollWidth equals its clientWidth at 375 px (no horizontal scroll).
+- **The shadow is on the container, not the iframe.** Streamlit sets
+  `color-scheme: normal` on the `st.iframe` element, so `light-dark()` there
+  always resolved to the light color, and the first dark mockups showed
+  light-mode rings. The element container is exactly the map's size at every
+  width and inherits the page's scheme. The iframe only rounds its own
+  corners. A browser without `light-dark()` or `color-mix()` gets a plain
+  half-alpha teal ring instead (the first declaration).
+- **The OSM credit is not clipped by the rounded corner.** A parent-level
+  `elementFromPoint` test at the corners and center of the credit's text box
+  (Le Mans, light and dark, 1200 and 375 px) returned the map every time, and
+  the frame's own corner pixel returned the page, so the test does tell the
+  two apart. On the macro map (`overflow: hidden` now clips it to the
+  corners) the credit hit-tests as itself at 1200 and 375 px in both themes,
+  its text ending 5 px from the right and 2 px from the bottom at 1200 px,
+  inside the 8 px curve. The theme button stays inside the frame.
+  `check_map_attribution.js`'s logic run on the standalone Le Mans, Seattle
+  and Kyoto maps at 1000x650, 1000x768 and 375x812: 0 covered, clamp in
+  force, no problems.
+- The owner's mockups were taken in the browser pane, not with
+  `capture_pages.mjs`. The heavy-job gate refused the headless capture (3.3 GB
+  available against the 4.5 GB it needed), and the gate was not overridden.
+
+### 2026-10-02 - Required notices: each city's own on its page, six on every page, all on a new page (owner)
+
+- **The call (owner, 2026-10-02):** stop rendering every required notice on
+  every page.
+  - **Each city page** shows its own notices first, in full and inline, at
+    body size rather than caption size. That keeps TransLink's legend (11)
+    prominent on Vancouver (Regional), CRTM's (20) on Madrid, and the three
+    Ordnance Survey statements legible on each of the eight UK pages that
+    carry them.
+  - **Every page** keeps OpenStreetMap's basemap line (1), Chicago (2), LA
+    Metro (4), INEGI (8), Barcelona (21) and Kansas City (80), plus
+    `_AS_RECORDED`, `_NON_AFFILIATION`, `_UNSETTLED_TERMS` (unchanged) and a
+    link, "All required source notices".
+  - **A new page, Required notices** (`app/pages/Required_Notices.py`,
+    `components.NOTICES_PAGE`), lists every notice verbatim in
+    `data_sources.md`'s number order, under the footer's existing intro.
+- **Why these six stay on every page.** Cleanup's read of 2026-10-02 sorted
+  the 114 notices by where their terms put them. Each class's deciding words
+  were checked against the record.
+
+  | Class | Notices | Where | Deciding words |
+  |---|---|---|---|
+  | SITE | 2 Chicago, 80 Kansas City | every page | "at the site where the software application ... can be accessed" (`data_sources.md`, items 2 and 80) |
+  | UNCLEAR | 4 LA Metro | every page | acknowledgement "as set forth in the Web Services Developer Guidelines", which could not be read |
+  | WORK, reaching the Overview | 8 INEGI, 21 Barcelona | every page | INEGI §1(g), notify "al usuario final de cualquier análisis o transformación"; Barcelona, changes "identified as such at the time of their distribution" |
+  | PROMINENT | 1 OSM, 11 TransLink, 20 CRTM | OSM on every page and every map; 11 and 20 at body size on their pages | ODbL "not beneath UI, behind toggles, or off-screen"; TransLink "prominently displayed"; CRTM "Debe quedar claramente la indicación" |
+  | WORK, one city | 3, 15, 24, 25, 26, 69, 70, 71, 77 | their pages | a notice carried with the derived work, which is the city's page |
+  | ANY | 89 others | their pages | a credit with no place prescribed |
+  | Ordnance Survey | 59, 63, 85, 88, 90, 92, 94, 96 | their pages, in full | the OGL's "including or linking to": all three statements on each UK page, and every page links to the full list |
+
+  - New York (5) stays undisplayed, as before. It is a conditional duty met by
+    About the Data and What Is Excluded, and is now named in
+    `check_provenance.py`'s `NOT_DISPLAYED`.
+- **The structure.** Each `_NOTICES` entry is a `Notice(number, heading,
+  text, verbatim, cities, every_page)`. Notices that cover several cities name
+  them through module-level groups: `_MEXICO`, `_NORWAY`, `_DENMARK`,
+  `_CZECHIA`, `_BRAZIL`, `_KOREA_SEMAS`, `_UK_SIX` and `_OSM_RAIL` (the 52
+  cities the rail-geometry sentence names). No verbatim string changed. The
+  basemap line, hard-coded in the renderer until now, is a `Notice(1, ...)`
+  of its own with the same text.
+- **The checks.**
+  - `check_provenance.py` C now matches each entry by number, not heading
+    alone, and runs in reverse: a numbered notice displayed nowhere fails.
+  - New check N fails four things: a city name not in `app/cities.py`; a
+    city page that does not pass its own name to `render_site_notices()`; an
+    every-page set other than {1, 2, 4, 8, 21, 80}; and any notice whose text
+    is missing from the notices page or from a city it names. The last is
+    checked by rendering against a stand-in for streamlit. Negative-tested on
+    a bad city name, an empty notices page and a dropped Ordnance Survey line.
+  - `check_deploy_imports.py` now wants `render_site_notices("<name>")` on
+    each city page.
+  - `rendered_surfaces.py` lists the new page.
+- **Pages.** All 144 city pages changed one line, the call. The scaffold and
+  France templates match it. The 21 French pages were regenerated with
+  `france_page.py --write` and differ from the template by that line only.
+- **Measured** (local lean server, pages in exact-size iframes):
+  - **Edmonton at 375 px: 31,466 px before** (the brief's 31,443 by a
+    slightly different measure) **and 6,408 px after.**
+  - Other pages at 375 px: the Overview is 5,066; Chicago 4,900; Vancouver
+    (Regional) 6,075; Madrid 6,397; London 6,294; Manchester (Regional)
+    6,643; Mexico City 7,637; Seattle (Regional) 6,777; Montpellier 6,259.
+  - The Required notices page is 51,508 px at 375 and 18,371 at 1200.
+  - No page overflowed sideways at 375 or 1200. A city's own notices render
+    at 16 px, the every-page set at 12.8 px.
+- **For review time:** the new page's browser title, "Required notices",
+  and heading, "Required source notices", reuse the footer's existing
+  wording. No other reader-facing sentence was written.
+
+### 2026-10-02 - Touch gestures: one finger scrolls the page, two move the map
+
+- **On a touch screen a one-finger swipe on a city map now scrolls the page;
+  two fingers pan and pinch-zoom the map (owner, 2026-10-02).** At 375 px a
+  city page's map frame is 333 x 650, nearly a whole phone screen, and
+  Leaflet took every one-finger drag as a pan, so a swipe that landed on the
+  map could not scroll past it and the 21 px side margins were too narrow to
+  hit reliably. `TOUCH_GESTURE_SCRIPT` in `pipeline/map_common.py` disables
+  `map.dragging` when the primary pointer is coarse (`matchMedia("(pointer:
+  coarse)")`, re-applied on change). Leaflet then drops `leaflet-touch-drag`
+  and the container's CSS falls back to `touch-action: pan-x pan-y`, so the
+  browser scrolls the swipe and hands it to the page around the frame;
+  `touchZoom` stays on, and Leaflet's pinch handler moves the map with the
+  two fingers' midpoint, so a two-finger drag pans without dragging ever
+  being re-enabled. Rejected: enabling dragging while two touches are down,
+  as first proposed, because Leaflet's Draggable ignores a second finger and
+  the pinch handler already pans. Mouse, trackpad and a touch laptop whose
+  primary pointer is a mouse are unchanged.
+  A one-finger drag that starts on the map (not on a Leaflet control) shows
+  "Use two fingers to move the map" in a polite live region, centered, for
+  1.5 s after the last move. It sits in the map container at z-index 900,
+  under Leaflet's control corners (1000: zoom, layers, the OSM credit) and
+  under the body-fixed legend and button row, so it can never cover a
+  control or the credit; it takes the button colors in both themes.
+  Movement is read in screen coordinates, because while the page scrolls the
+  frame travels with the finger. Every committed map re-rendered with
+  `drift_check.py --render-only` (measured peak 1.94 GB): all 144 drifted,
+  and all 144 match HEAD exactly once the new block, Folium's 32-hex ids
+  and one whitespace-only line are set aside. 37 CJK maps came out CRLF
+  (the post-save `lang` rewrite) and were converted to LF before staging.
+  Measured with real CDP touch input in headless Edge, each map embedded as
+  the app embeds it (srcdoc frame 333 x 650 at 375 x 812, touch emulated),
+  on Edmonton, Paris, Tokyo and Angers: a one-finger 300 px swipe on the
+  map scrolled the page 362 to 367 px with the map unmoved, and showed the
+  hint, gone and cleared 2.7 s later; a one-finger sideways swipe moved
+  nothing; a two-finger drag panned the map with the zoom unchanged and the
+  page unscrolled; a pinch zoomed in 1.25 levels; one-finger taps on +, the
+  layer control, the theme toggle (twice) and a business cluster all
+  responded; a tap on a dot opened its tooltip on Edmonton and Paris (no
+  uncovered dot in view on the other two). At 1200 px without touch,
+  dragging stayed on, `touch-action` stayed `none` and a mouse drag panned
+  as before. No console errors. `check_map_view.js` and
+  `check_map_attribution.js` on Edmonton, Paris, Tokyo, Amsterdam, New
+  York and Angers at 375 x 650, 375 x 812, 1200 x 650 and 1200 x 900, light
+  and dark: 0 problems, 0 corrections, in all 48 loads. With the hint forced
+  on, hit-testing the zoom buttons, layer toggle, theme and Global View
+  buttons, legend header and OSM credit found none covered (Edmonton,
+  Amsterdam, Tokyo; 24 loads); its text is rgb(28,43,42) on white in light
+  and rgb(230,237,247) on rgb(19,28,46) in dark.
+- **The Overview's macro map was left as it is: deck.gl cannot give the same
+  behavior through Streamlit.** Streamlit 1.64's `DeckGlJsonChart` builds its
+  `<DeckGL>` with a fixed prop list (viewState, layers, getTooltip,
+  parameters, views, controller, onClick), so deck's `touchAction` (default
+  `none`) and `eventRecognizerOptions` cannot be set from pydeck, and with
+  `touch-action: none` on the canvas the browser never scrolls the page
+  through it. A view controller of `{dragPan: false}` does reach deck, but
+  alone it would make a one-finger swipe do nothing at all, and it would
+  disable mouse dragging on the desktop too, because the server cannot tell
+  a phone from a desktop. Reaching into deck's event manager from the
+  parent page's script was rejected as forcing it. The macro map is 460 px
+  tall, full width, so the page stays scrollable above and below it.
+
+### 2026-10-02 - The Overview's CARTO basemap sends the project's key on every request; its credit now links CARTO's attribution page, with OpenMapTiles
+
+- **Why.** CARTO's Basemap Terms (2026-09-29, §3.b) allow free use only with
+  a CARTO-issued key. The owner holds two (DECISIONS, 2026-10-02): one
+  Referer-locked to localhost and 127.0.0.1, one to
+  expanded-heatmap-daceroberts.streamlit.app. Both are read only as
+  `st.secrets["CARTO_BASEMAP_KEY"]`.
+- **The key travels as `?key=`** on every address under basemaps.cartocdn.com
+  (carto.com/basemaps/apikey/: "on every tile, style, glyph and sprite URL").
+- **The style is a committed copy of CARTO's open-source Positron**
+  (`app/assets/carto_positron/style.json`, from CartoDB/basemap-styles
+  `mapboxgl/positron.json`, last changed upstream 2019-06-11 at 6f8f933).
+  - Its 93 layers equal the served
+    basemaps.cartocdn.com/gl/positron-gl-style/style.json, layer for layer
+    (compared 2026-10-02). The only upstream difference is CARTO's own
+    `{api_key}` placeholder on the source address, which is the key-free
+    template.
+  - BSD 3-Clause code and CC BY 4.0 design. The upstream LICENSE.md sits
+    beside it, as the BSD notice requires.
+- **The keyed style reaches the browser as a data: URL, built in memory**
+  (`app/basemap.py`). Static serving was the alternative and was not chosen:
+  - the key is never written to disk, so no gitignored file can be committed
+    by mistake and none outlives a checkout;
+  - `.streamlit/config.toml` stays unchanged, with no site-wide static route;
+  - no path question on Streamlit Cloud, which serves the app under `/~/+/`.
+  - Cost: about 100 KB of base64 in the deck's JSON on each rerun. mapbox-gl
+    reloads the style only when the string changes, which it does not.
+  - A style dict was not possible: pydeck takes one only with
+    `map_provider="mapbox"`, and Streamlit's frontend passes only a string,
+    or an array's first item, to the map.
+- **CARTO's TileJSON hands back KEYLESS tile URLs** (measured 2026-10-02, with
+  the key on the request). So the style's source also lists the four tile
+  URLs itself, keyed. mapbox-gl merges a source's own `tiles` and
+  `attribution` over the TileJSON's, and still fetches the TileJSON, keyed,
+  for its zoom range (0-14) and bounds.
+- **No key, no basemap.** A checkout without the secret gets an `st.warning`
+  and the dots on a blank ground. `map_provider=None` stops Streamlit from
+  substituting keyless CARTO. Verified on a server started with
+  `--secrets.files` pointed at a missing file: the warning shows, and there
+  are zero requests to CARTO.
+- **The credit**, set in the style's source:
+  - "© OpenStreetMap contributors, © CARTO, © OpenMapTiles";
+  - linked to openstreetmap.org/copyright, carto.com/attribution/ and
+    openmaptiles.org (carto.com/attribution/, and the basemap-styles
+    licence's OpenMapTiles clause);
+  - `fixCredit()` in `app/components.py` also corrects a CARTO href, as a
+    guard.
+  - The credit wraps to two lines at 375 px (40 px tall).
+- **Verified locally**, on the `streamlit-app-lean` preview in exact-size
+  frames. Global, Europe and Japan West, at 1200 and 375, light and dark:
+  - every CARTO request carried `?key=<key>` and returned 200: TileJSON 1,
+    sprite 2, glyphs 1-4, tiles 2-14 per load;
+  - no keyless request, and no style request to CARTO (the style is inline);
+  - tiles and glyphs inside mapbox-gl's worker were counted by wrapping the
+    frame's `Worker`, with the key redacted in the browser.
+  - "Looks as today" rests on the identical layers. A keyless before-render
+    would itself be outside the terms, so none was made.
+  - `check_macro_attribution.mjs`: PROBLEMS 0 at 375, 768 and 1200, light
+    and dark. It now also requires the CARTO link to carto.com/attribution/
+    and an OpenMapTiles link, and samples both lines of a wrapped credit.
+  - The dark theme's filter applies to `.mapboxgl-canvas` only, never to the
+    credit.
+  - `check_macro_labels.py` PROBLEMS 0; `check_all.py` 45 of 45.
+- **New check:** `scripts/check_basemap_key.py`, in `check_all.py`. Offline,
+  with a stand-in key and no secret read, it fails:
+  - on any cartocdn address without the key;
+  - on a source with no keyed tiles of its own;
+  - on a credit missing any of the three links;
+  - on `app/Overview.py` naming a CARTO style itself.
+- **Landing:** an `app/` change plus a new imported module (`app/basemap.py`),
+  so the deployed app needs a REBOOT, not "Updated app!". The public key is
+  in the app's Secrets as `CARTO_BASEMAP_KEY` (owner, 2026-10-02: "yes, the
+  public key is in Secrets"). Without it the live map would show the warning
+  and no basemap, which is safe but visible.
+- **For the owner (proposals, not written anywhere rendered):**
+  - Privacy line (§10 makes the site the controller): "The overview map's
+    basemap loads from CARTO, so your browser sends CARTO your IP address and
+    browser details with each map request; CARTO processes them for this
+    site."
+  - The site-notice sentence "The overview map's basemap is © CARTO." could
+    become "The overview map's basemap is © CARTO and © OpenMapTiles, from
+    OpenStreetMap data." It is optional, since the on-map credit already
+    carries all three.
+- **For cleanup:** `docs/licence_positions.md` row 1.23 ("keyless, outside
+  its terms") and PLAN's "Overview's basemap" item describe the keyless state,
+  and both change when this lands. `docs/data_sources.md` gained the CARTO
+  section the record lacked; it renders on About the Data, so its prose is
+  for review time.
