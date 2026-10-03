@@ -1,0 +1,19 @@
+{
+  "category_only": 8328,
+  "division_45_kept": 1550,
+  "dropped_no_coordinate": 1620,
+  "dropped_outside_city": 3,
+  "dropped_placeholder": 1481,
+  "individual_entrepreneurs": 8328,
+  "named_companies": 4924,
+  "placeholder_points_unsettled": 33,
+  "register_rows": 63511,
+  "stations_akhmeteli_varketili_line": 16,
+  "stations_in_scope": 23,
+  "stations_saburtalo_line": 7,
+  "stop_positions": 46,
+  "storefronts_food_service": 1343,
+  "storefronts_personal_services": 1269,
+  "storefronts_placed": 13252,
+  "storefronts_retail": 13744
+}
