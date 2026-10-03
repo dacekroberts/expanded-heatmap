@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**466 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**467 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -40,6 +40,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [São Paulo: Linha 17-Ouro drawn; Linha 6 left out for the owner (owner: "investigate and then draw")](#2026-10-03---são-paulo-linha-17-ouro-drawn-linha-6-left-out-for-the-owner-owner-investigate-and-then-draw)
 - [Osaka moves to MLIT N02-25: Yumeshima drawn (owner)](#2026-10-03---osaka-moves-to-mlit-n02-25-yumeshima-drawn-owner)
 - [Extensions build: measured corrections to the Vancouver brief and the kit](#2026-10-03---extensions-build-measured-corrections-to-the-vancouver-brief-and-the-kit)
+- [Visuals regenerated from master f25850f1: 39 card faces changed, SFMTA's full notice back on San Francisco's card](#2026-10-03---visuals-regenerated-from-master-f25850f1-39-card-faces-changed-sfmtas-full-notice-back-on-san-franciscos-card)
 
 **2026-10-02**
 
@@ -18607,3 +18608,36 @@ Recorded by the cleanup session from the Main Building Session's findings of
   `extensions-build` by the build session, which already added a checks
   block to it there; a second edit on master would conflict when the branch
   lands.
+
+### 2026-10-03 - Visuals regenerated from master f25850f1: 39 card faces changed, SFMTA's full notice back on San Francisco's card
+
+- **The visuals were regenerated from master at `f25850f1`** (cleanup's lanes
+  batch). Only Tbilisi and Washington D.C. changed in the figures: Tbilisi
+  8,084 / 13,252 -> 8,043 / 13,211 storefronts near a station / mapped,
+  D.C. 3,849 / 5,207 -> 3,845 / 5,203. Both re-counts reconcile with
+  `app/ring_shares.json`. The other 144 changes in that file are map ids.
+- **San Francisco's card carries notice 3 in full again.** The 2026-10-02
+  entry that took the "as is" paragraph off the card read it as clause 4's
+  disclaimer. It is in fact the second paragraph of clause 12, which every
+  derivative version must bear (DECISIONS 2026-10-03, "SFMTA's notice 3 is
+  four sentences plus clause 4's disclaimer"). So that drop was wrong. The
+  card now shows the site's notice 3 verbatim: both clause 12 paragraphs, the
+  lead-in and clause 4's sentence.
+- **The 25 French cities on cards gain notice 139's required lines on the
+  face**: the ODbL 4.3 sentence naming Contours administratifs and the
+  Licence Ouverte source-and-date line for IGN's ADMIN EXPRESS, quoted from
+  the notice, plus the ODbL link. This follows the card precedent for ODbL
+  data (OpenStreetMap). Notice 140 (MassGIS, Boston) is displayed by choice,
+  not required, so it goes in Boston's caption only. Notices 137 (D.C.) and
+  138 (Dublin) belong to cities that are not in the public set.
+- **The OpenStreetMap line now appears on 16 more cards**, because
+  `_OSM_RAIL` grew from 68 to 86 cities: Birmingham, Blackpool, Caen,
+  Edinburgh, Glasgow, Le Havre, London, Manchester, Montpellier, Newcastle,
+  Nottingham, Rouen, Sheffield, Stockholm, Strasbourg and Tbilisi. Bucharest
+  and Philadelphia also gain it, but neither is in the public set.
+- 39 faces changed in all, each re-rendered and checked for fit. All 129
+  captions were refreshed. New York and the French cities now have notices
+  in their captions where they had none before.
+- The sampler and the multi-city views carry the new Tbilisi and D.C.
+  figures and were republished. The canvas boards, print pieces and deck are
+  unchanged apart from a commit stamp, so they were not republished.
