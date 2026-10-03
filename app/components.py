@@ -474,7 +474,7 @@ _NORWAY = ("Oslo", "Bergen")
 _DENMARK = ("Copenhagen", "Aarhus", "Odense")
 _CZECHIA = ("Prague", "Brno", "Plzeň", "Olomouc", "Ostrava",
             "Liberec (Regional)", "Most (Regional)")
-_BRAZIL = ("São Paulo", "Rio de Janeiro", "Belo Horizonte (Regional)", "Brasília",
+_BRAZIL = ("São Paulo", "Rio de Janeiro (Regional)", "Belo Horizonte (Regional)", "Brasília",
            "Salvador", "Fortaleza (Regional)", "Porto Alegre (Regional)",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
@@ -1344,7 +1344,7 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Reprojected, "
      "filtered and redrawn by this project; station rings and density figures "
      "are this project's own analysis.",
-     False, ("Rio de Janeiro",)),
+     False, ("Rio de Janeiro (Regional)",)),
     # CBS - the shop-vacancy share Rotterdam's page quotes. CC BY 4.0
     # (cbs.nl copyright page, read 2026-09-24): credit CBS, link the licence,
     # say when a figure is recalculated; no endorsement implied, no logo.

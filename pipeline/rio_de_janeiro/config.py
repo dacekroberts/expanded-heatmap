@@ -24,7 +24,7 @@ SLUG = "rio_de_janeiro"
 # (5), 2026-09-30), so it is drawn to its end and its three stations are not
 # ringed (SHUTTLE_* below). False reproduces the city-alone build byte for
 # byte, which is how the extension was proved before it was switched on.
-REGIONAL = False
+REGIONAL = True
 NAME = "Rio de Janeiro (Regional)" if REGIONAL else "Rio de Janeiro"
 
 ROOT = Path(__file__).parent.parent.parent

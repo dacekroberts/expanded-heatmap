@@ -941,7 +941,7 @@ CITIES = [
         "label_offset": ("end", -11, 0),
     },
     {
-        "name": "Rio de Janeiro",
+        "name": "Rio de Janeiro (Regional)",
         "lat": -22.9068,
         "lon": -43.1729,
         "page": "pages/32_Rio_de_Janeiro_Heatmap.py",
@@ -958,7 +958,9 @@ CITIES = [
         "in_default_view": False,
         # RIGHT of the dot, clear of São Paulo's name 40 px west. Scored:
         # check_macro_labels.py passes every region at 375, 768 and 1200 with
-        # PROBLEMS 0.
+        # PROBLEMS 0. Re-scored for "(Regional)" (168.6 px, 2026-10-03): still
+        # the only clean side - above covers Belo Horizonte's dot, below and
+        # left meet São Paulo and Santos - at the cost of a 24% clip at 375 px.
         "label_offset": ("start", 11, 0),
     },
     {

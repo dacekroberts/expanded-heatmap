@@ -83,7 +83,7 @@ TEXT_WIDTH = {
     "Rome": 37.5,
     # The nine Brazilian cities, 2026-09-24, local app; controls Rome,
     # Amsterdam and Rome's nine.
-    "São Paulo": 65.6, "Rio de Janeiro": 95.6,
+    "São Paulo": 65.6,
     "Brasília": 49.0, "Salvador": 58.6, "Fortaleza (Regional)": 135.9,
     "Porto Alegre (Regional)": 156.6, "Recife (Regional)": 115.9,
     "Santos (Regional)": 120.1,
@@ -274,6 +274,10 @@ TEXT_WIDTH = {
     # controls Belo Horizonte 98.5, Rio de Janeiro, Fortaleza (Regional), Lille
     # (Regional), Santos (Regional), Recife (Regional).
     "Belo Horizonte (Regional)": 171.5,
+    # Rio de Janeiro renamed (Regional) by its Duque de Caxias extension; the same
+    # 2026-10-03 run and controls as Belo Horizonte (Regional), control Rio de
+    # Janeiro 95.6 reproduced.
+    "Rio de Janeiro (Regional)": 168.6,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

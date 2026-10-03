@@ -186,8 +186,8 @@ if DOC.exists():
 **{outside + thinned + other + closed + infrequent:,} stations are left out across these maps.**
 {outside:,} stand outside the city whose register the map is built from;
 {thinned:,} were thinned out of street-running stretches where the stops are
-closer together than the rings; {infrequent:,} are on light-rail stretches that
-run less often than every 15 minutes; and {closed:,} are closed for works. Every
+closer together than the rings; {infrequent:,} are on light-rail or suburban
+stretches that run less often than every 15 minutes; and {closed:,} are closed for works. Every
 one of them is listed under "Stations left out" on its city's page.
 """
     )

@@ -623,7 +623,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Den Haag | HTM trams 1, 2, 6, 9, 10, 11, 12, 15, 16, 17, 19 and RandstadRail 3, 4, 34 (14 lines) | RandstadRail E (RET metro, a stub: 4 of 23 stops inside), the 9S short working, buses, NS | OpenStreetMap route relations; gate 3 exact (HTM) | Gemeente | 64 / 0 |
 | **Brazil** | | | | | |
 | São Paulo | Metrô L1–5, L15 (monorail) + CPTM L9 | CPTM 7, 8, 10–13; L6, L17 (building) | OpenStreetMap (GeoSampa for status) | Município | 2 / 0 |
-| Rio de Janeiro | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | Município | 3 / 0 |
+| Rio de Janeiro (Regional) | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna (drawn to its end; 3 shuttle stations not ringed) | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | 2 municípios | 3 / 0 |
 | Belo Horizonte (Regional) | Metrô L1, L2 | Vitória-Minas (intercity) | OpenStreetMap | 2 municípios | 0 / 0 |
 | Brasília | Metrô Verde, Laranja | 2 stations under construction | OpenStreetMap (IPEDF for status) | Federal District | 0 / 0 |
 | Salvador | Metrô L1, L2 | — | OpenStreetMap | Município | 1 / 0 |
@@ -800,7 +800,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Den Haag | Permit layer + building register | The Gemeente's Horecavergunningen layer; BAG shop units | Per-source (2 buckets) | Shops & services 3,813 / Food 1,968 | Retail and Personal merged |
 | **Brazil** (all nine) | Census of addresses (2022) | IBGE CNEFE | Free-text keyword rules | see below | A third to a half of plausible storefronts unreadable |
 | São Paulo | | | | 25,968 / 15,331 / 8,256 | about 1/3 unreadable |
-| Rio de Janeiro | | | | 15,085 / 10,364 / 4,784 | about 1/3 |
+| Rio de Janeiro (Regional) | | | | 16,482 / 11,216 / 5,331 | about 1/3 |
 | Belo Horizonte (Regional) | | | | 5,105 / 2,616 / 1,625 | about 4 in 10 |
 | Brasília | | | | 2,808 / 1,246 / 1,009 | about 4 in 10 |
 | Salvador | | | | 5,131 / 3,312 / 1,613 | about 1/3 |
@@ -1143,7 +1143,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Den Haag | Permit layer edited 2025-05-23 (2026-10-01) | B | 0.3 mi | Yes | 93% | Permit trade name (food); address (shops) |
 | **Brazil** | | | | | | |
 | São Paulo | 2022 census (file 2024-05-20) | B | 0.6 mi | Yes | 23% | Enumerator's description; category only at homes (37%) |
-| Rio de Janeiro | same | B | 0.6 mi | Yes | 28% | same (55%) |
+| Rio de Janeiro (Regional) | same | B | 0.6 mi | Yes | 26% | same (57%) |
 | Belo Horizonte (Regional) | same | B | 0.6 mi | Yes | 16% | same (40%) |
 | Brasília | same | B | 0.6 mi | Yes | 14% | same (69%) |
 | Salvador | same | B | 0.6 mi | Yes | 19% | same (56%) |

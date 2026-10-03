@@ -417,7 +417,11 @@ Desktop is unaffected — the label is fully visible there.
         Brescia, Catania, Cagliari, Alicante, Alcobendas.
     - [ ] **Regional add-ons to built cities (owner, 2026-09-27)**, main's
       work on a branch held for review time:
-      - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded
+      - [x] **Rio + Duque de Caxias** (**built 2026-10-03 on
+        `extensions-build`**: 98 stations, 125,440 storefronts, the shuttle
+        drawn and its three stations unringed; held for review time, its
+        regional processed files in `data/rio_de_janeiro/processed/regional/`
+        until it lands): SuperVia Saracuruna's three excluded
         stations (Duque de Caxias, Corte Oito, Gramacho); CNEFE 18,698
         storefronts. **First a rail test for the Gramacho–Saracuruna shuttle**,
         which the scope would bring in. **Run 2026-09-30**: up to Gramacho

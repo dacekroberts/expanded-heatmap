@@ -60,8 +60,11 @@ def classify(reason, city):
     if "spacing" in text:
         return "thinned"
     # `infrequent`: a stop on a light-rail stretch that runs less often than
-    # the 15-minute test (Aarhus's converted railways, 2026-09-29, owner).
-    if "15-minute" in text:
+    # the 15-minute test (Aarhus's converted railways, 2026-09-29, owner), or
+    # on a suburban line drawn through a stretch that fails a country's rail
+    # test on frequency (Rio's Gramacho-Saracuruna shuttle, about every 50
+    # minutes, drawn and not ringed on the owner's call of 2026-09-30).
+    if "15-minute" in text or "fails the rail test" in text:
         return "infrequent"
     if "closed for works" in text:
         return "closed"

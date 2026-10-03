@@ -2181,14 +2181,14 @@ stations in Osasco are left out. Not drawn: CPTM Linhas 7, 8 and 10 to 13, whose
 stations inside the city are 2 to 3.5 km apart; Linhas 6 and 17, under construction;
 buses and bus corridors.
 
-### Rio de Janeiro - the same census, and rail from two sources
+### Rio de Janeiro (Regional) - the same census, and rail from two sources
 
-**Excluded by what the enumerator wrote** - vacant premises (22,954), parking and storage (18,528), vehicle and repair workshops (15,287), offices and professional premises (14,664), industry and trades (9,798), public, civic and education premises (7,970), places of worship (6,690), events venues (2,526), accommodation (1,929) and other non-premises (1,657); and 4,155 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (28,116), parking and storage (22,221), vehicle and repair workshops (18,142), offices and professional premises (16,462), industry and trades (12,047), public, civic and education premises (9,107), places of worship (8,256), events venues (2,930), accommodation (2,198) and other non-premises (1,951); and 5,198 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
 
-**Missing rather than excluded** - 51,532 establishments whose description no rule can
+**Missing rather than excluded** - 61,362 establishments whose description no rule can
 read, mostly bare brand or trade names: about a third of those that might be storefronts, a little more near the stations - about 35 in a hundred.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
@@ -2197,14 +2197,16 @@ during its fieldwork.
 **Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
 stalls, as in São Paulo.
 
-**Shown, but not named** - at an address that is also a home (55% of dots), the dot
+**Shown, but not named** - at an address that is also a home (57% of dots), the dot
 shows its category, never the enumerator's description.
 
 **One dot for many** - a shopping center or gallery recorded as one entry is one dot.
 
 **Stations.** MetrôRio Linhas 1, 2 and 4, the VLT Carioca's four lines and SuperVia's
-Deodoro and Saracuruna lines are drawn; the Saracuruna line's three stations in Duque de
-Caxias are left out. Not drawn: SuperVia's Japeri, Santa Cruz and Belford Roxo lines,
+Deodoro and Saracuruna lines are drawn, the map covering Duque de Caxias with Rio, so the
+Saracuruna line's stations there up to Gramacho are counted. Beyond Gramacho the line runs
+on as a shuttle, a train about every 50 minutes: it is drawn to Saracuruna, but its three
+stations there (Campos Elíseos, Jardim Primavera and Saracuruna) are left out. Not drawn: SuperVia's Japeri, Santa Cruz and Belford Roxo lines,
 with stations further apart or trains less often; the Santa Teresa tram; the Corcovado
 railway; and the Complexo do Alemão cable car, closed since 2016.
 
