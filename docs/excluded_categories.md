@@ -818,6 +818,10 @@ Exempt 440, Cooperative Association 176); **wholesale** (NAICS 42); and
 **individual rather than premises licenses** (Motor Vehicle Salesperson 263,
 Auctioneer 15, Tour Guide 3 — a license attached to a person, not a shopfront).
 `Funeral Establishment` (29) is excluded, as funeral services are everywhere.
+`Beauty Booth` (6), a chair rented inside a salon, is excluded too: it is a
+license for the person who works there, not for the premises, the same call
+made on chair renters' and practitioners' own licenses in New York, Calgary,
+Edmonton and San Francisco.
 Pawnbrokers count as retail (4).
 
 **One category is kept despite being ambiguous, and it is a large one.**
@@ -3554,8 +3558,10 @@ rows (6.9%) have a trade name that reads as a factory; they are kept (owner,
 
 **One pin per premises** - 401 repeat permits are shown once.
 
-**Not placed** - 16 rows (0.2%). Another 2 sit at their town's center, and 597 at the
-ministry's own coordinates.
+**Not placed** - 16 rows (0.2%), 13 of them national filings that carry only
+the ministry's stand-in point, one point given to filings in 13 different
+towns. Another 2 sit at their town's center, and 597 at the ministry's own
+coordinates.
 
 **Names not shown** - none: the national filings do not say who the operator
 is, so the name rule cannot run here (owner, 2026-10-02).
