@@ -127,6 +127,33 @@ def summarize(paths, old_cities, new_cities):
     return lines
 
 
+def new_city_lines(added, new_ref):
+    """Per new city: its slug, its own notices and whether its rail or
+    station names come from OpenStreetMap. Read by importing the app's own
+    modules, so only when the checkout IS the new commit; otherwise a line
+    says so and the sender fills it in by hand."""
+    head = git("rev-parse", "HEAD").strip()
+    if head != git("rev-parse", new_ref).strip():
+        return ["New-city details: run this from a checkout of the new commit "
+                "to list each city's notices."]
+    sys.path.insert(0, str(ROOT / "app"))
+    import cities
+    import components
+    from station_scope import slug
+    pages = {c["name"]: c["page"] for c in cities.CITIES}
+    out = ["New cities, for the cards (card face or caption, and any open terms "
+           "question, come from the build's drafts file; the sender adds them):"]
+    for name in added:
+        own = components.city_notices(name)
+        notes = "; ".join(f"{n.number} {n.heading}" for n in own) or "none of its own"
+        osm = ("rail from OpenStreetMap" if name in components._OSM_RAIL
+               else "station names from OpenStreetMap"
+               if name in getattr(components, "_OSM_STATION_NAMES", ()) else
+               "rail not from OpenStreetMap")
+        out.append(f"  - {slug(pages[name])} ({name}): notices {notes}; {osm}")
+    return out
+
+
 def selftest():
     cases = [
         ("nothing downstream", ["README.md", "scripts/x.py"], set(), set(), 0),
@@ -172,6 +199,10 @@ def main():
     old_sha = git("rev-parse", "--short", args.old).strip()
     print(f"Master moved {old_sha} -> {new_sha}. Changes your work builds from:")
     print("\n".join(lines))
+    added = sorted(city_names(show(args.new, "app/cities.py"))
+                   - city_names(show(args.old, "app/cities.py")))
+    if added:
+        print("\n".join(new_city_lines(added, args.new)))
     print("Merge master before regenerating anything. The landing's reasoning is "
           "in DECISIONS.md.")
     return 0
