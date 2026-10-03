@@ -38,8 +38,9 @@ are stated here.
 Each has its rationale in `DECISIONS.md`.
 
 - **Scope:** commercial density only. No ridership, no Findings/Methodology
-  pages, no deep interpretive analysis, until asked. Flag scope additions
-  rather than building them.
+  pages, until asked. AI-driven deep analysis is permitted but private, each
+  analysis with an AI-driven acknowledgement (see `CLAUDE.md`). Flag scope
+  additions rather than building them.
 - **Architecture:** hybrid - an area-selector macro page, then independent
   per-city detail maps. No map instance ever holds more than one city's
   business points.
