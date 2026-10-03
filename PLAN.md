@@ -929,6 +929,31 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
+- [ ] **Licence gaps from staging's ranking** (`docs/licence_positions.md`,
+  5813011a; its notice numbers were stripped as unreliable, so verify each
+  item against the code first). The first two are the most visible:
+  1. **No public repository link anywhere in the app.** IDFM Licence
+     Mobilités Art. 5.8 (Paris) and ODbL §4.6 rely on a public repository
+     linked from the site; github.com/dacekroberts/expanded-heatmap is public.
+     A GitHub icon in the header or site chrome would discharge both. The
+     owner asked about LinkedIn too: that needs the owner's profile URL.
+  2. **Credits missing on pages:** Dublin's NTA GTFS (staging reading); Milan's
+     ATM rail ("cc-by" never read to standard); SFMTA's required disclaimer;
+     STM's modification sentence; MLIT's credit incomplete for the 20
+     Japanese cities; French operator credits render only if provenance.json
+     parses.
+  3. brazil.md:177 claims an ODbL notice on station CSVs; no committed station
+     CSV carries one.
+  4. (Done 2026-10-02: the footer now names every permissive reading.)
+  5. **Missing licence rows:** Tokyo statistical yearbook, e-Stat,
+     bbga/Locatus, Chitetsu and MTR figures and names; nine municipal
+     boundaries (listed in the ranking). Staging is reading eight more: NTA
+     GTFS, D.C.'s Basic Business License, the DC Boundary, the CARTO basemap,
+     geo.api.gouv.fr, and the LA County, MassGIS and SANDAG boundaries.
+     Verdicts come to cleanup.
+  6. **Pending positions with no recorded acceptance:** Barcelona's
+     notification was never sent; SIRENE's opt-out refresh cadence; MHLW's
+     open clause; four indemnities (named in the ranking).
 - [ ] **Doc corrections from staging's re-check calendar** (2026-10-02;
   `docs/recheck_calendar.md`, "Corrections to project docs", each with its
   source):
