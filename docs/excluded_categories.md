@@ -1855,7 +1855,7 @@ withheld.
 **Twelve T-bane stations are excluded for being in Bærum**, on the western
 branches of lines 2, 3 and 5, and are listed with their municipality on Oslo's
 page. **Tram 13 west of Thune is closed for rebuilding**, replaced by buses
-since 10 June 2026 until about February 2027, so its stops from Hoff to
+since June 10, 2026, until about February 2027, so its stops from Hoff to
 Lilleaker are not drawn. **Ferries are not drawn**, as in
 Marseille.
 
@@ -2110,7 +2110,7 @@ be identified or removed.
 **Stations.** GVB's metro lines 50 to 54 and sixteen tram lines are drawn. 22
 stops outside the municipality are left out - 12 in Amstelveen, 5 in Diemen, 3
 in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
-half mile. Tram 3, which GVB discontinued on 29 March 2026, the museum tram,
+half mile. Tram 3, which GVB discontinued on March 29, 2026, the museum tram,
 ferries and NS trains are not drawn.
 
 ### Rome - a register of premises with no names and no closing dates
