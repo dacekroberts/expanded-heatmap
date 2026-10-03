@@ -32,7 +32,7 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **144** across 25 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **24** — A 0 · B 0 · C 0 · D 0 · R 24 *(rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
+> | **Candidates** | **25** — A 0 · B 0 · C 0 · D 0 · R 25 *(Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
 > | **Discarded** | **121**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
 >
@@ -72,7 +72,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 24
+## Candidates — 25
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
@@ -83,9 +83,9 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **0** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **0** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
-| ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **24** |
+| ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **25** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **24** |
+| | **Candidates** | **25** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
 | *Discarded* | Measured negative, evidence named | *121* |
 
@@ -122,7 +122,7 @@ The UK six and the Japan batch's five band-B cities moved to Built on
 
 *Empty since 2026-10-01: Tempe, its only row, went to the discards once the owner fetched its list (a 33-page PDF with no addresses).*
 
-## ⚫ Band R — restricted or request only (24 cities; created 2026-09-28)
+## ⚫ Band R — restricted or request only (25 cities; created 2026-09-28)
 
 **Carried over unchanged from the 2026-09-30 list (owner, 2026-10-01)**, with four rows added the same day: Kraków from the pattern screen, and Brescia, Catania and Alicante, whose portals refused the built-in browser as well as scripts.
 
@@ -157,6 +157,7 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Catania** 🇮🇹 | ⚠️ **NOT screened behind the block (wave 2; re-read 2026-10-01).** No Comune di Catania organisation on `dati.gov.it` | 🚧 `opendata.comune.catania.it` times out; `etnaopen.comune.catania.it` shows a firewall "Access Denied" page to the browser pane (2026-10-01) | As Brescia |
 | **Alicante** 🇪🇸 | ⚠️ **NOT screened behind the block (wave 2; re-read 2026-10-01).** Only the IAE tax files for 2017 and 2020 found, which are stale and leave out most small traders | 🚧 `datosabiertos.alicante.es` times out to scripts and the browser pane (2026-10-01); `www.alicante.es` answers | As Brescia |
 | **Richmond (BC)** 🇨🇦 | ✅ **Screened (2026-09-30), Vancouver (Regional)'s add-on**: the City's business directory, 11,517 current licences, **4,012 in the buckets**, addresses only (an address join); Canada Line stations inside the city | 🚫 **Request only**: no open-data licence; the site's copyright notice allows "research purposes and private use only", with written permission required for anything else | **A written request to the City** (`buslic@richmond.ca`), the owner's to send; nothing drafted or sent. Moved to R by the owner 2026-10-01 |
+| **Arlington (VA)** 🇺🇸 | ✅ **Screened (2026-10-02), Washington D.C.'s add-on**: Arlington County's "Active Business Licenses" (Commissioner of Revenue, weekly, 12,212 records at 2026-09-25; addresses and section codes, no coordinates; in-home businesses excluded by the publisher), around 11 of D.C.'s 32 excluded Virginia Metrorail stations | 🚫 **Not permitted as it stands** (`licence-read`, 2026-10-02): the dataset has no licence; the only terms the portal links, the County website's Terms & Conditions, allow downloads for "non commercial, personal use only" and forbid reposting or derivative works "without the written permission". The 2016 Open Data Public Use Notice ("free to share and adapt our data for any purpose") was withdrawn in the 2023 site relaunch; the portal's guide still links its dead URL. The County GIS hub's address points assert copyright, "not considered in the Public Domain", with no grant | **A written question to the County** (its Open Data Feedback form) on whether the Public Use Notice still governs portal data and the GIS address layer: the owner's to send; nothing drafted or sent. **Left out by the owner 2026-10-02, Richmond's precedent** |
 | **Takaoka** 🇯🇵 | ✅ **Licence settled 2026-10-02: CC BY 4.0** (the old prefecture portal's dataset page, archived 2026-05-21, and its terms; the new platform's front page says the same of all its data). Screened 2026-09-30: Toyama Prefecture's food CSV, 3,128 Takaoka rows, no operator-name column, last updated 2026-03-02 though labelled monthly; personal lists yearly (2025-03-31), also `cc-by`. Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR | 🚧 **The list can no longer be reached (2026-10-02).** The old portal (`opendata.pref.toyama.jp`) no longer resolves and the CSV on `toyama-pref.box.com` answers 404. The new data platform's catalogue (`ckan.tdcp.pref.toyama.jp`) answers 403 to scripts and the browser pane while its front page answers 200; most likely a block on access from outside Japan. **Not routed around.** No other public copy found | A read of the platform's catalogue from an allowed network, or a public link from the prefecture. Moved to R by the owner 2026-10-02, from Band C |
 
 ## 🟤 Band T — retired (0 cities; retired 2026-10-01, trams-only maps approved 2026-09-29)
@@ -179,7 +180,7 @@ not counted here.
     Hub export, or paged queries of layer 17.
   - New Westminster joins at 99.8%.
   - Richmond is NOT PERMITTED as it stands: Band R since 2026-10-01 (owner).
-- **Washington D.C. + Arlington**: Arlington's current business licence
+- **Washington D.C. + Arlington: OUT, to Band R (owner, 2026-10-02, "like richmond")**; the licence read found the County's only live terms restrictive. Arlington's current business licence
   list (12,212 records, weekly, 2026-09-25) has addresses and section codes
   but no coordinates. It needs an address join and a licence read. **The
   379 KB download was approved by the owner on 2026-10-01.**
@@ -511,7 +512,7 @@ it, not a band.
 
 | Country | Built | Candidates | Bands | What stands between it and the next city |
 |---|---|---|---|---|
-| 🇺🇸 United States | **19** | **0** | — | **Seattle (Regional) built 2026-10-02** (Link's 11 cities, five publishers); Tempe's list needs one download approved. Built: 19 |
+| 🇺🇸 United States | **19** | **1** — Arlington (VA) | R | **Seattle (Regional) built 2026-10-02** (Link's 11 cities, five publishers). Arlington (VA), D.C.'s add-on, to R 2026-10-02 (its County terms; owner, Richmond's precedent). Tempe discarded 2026-10-01. Built: 19 |
 | 🇨🇦 Canada | **7** | **1** — Richmond (BC) | R | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's four SkyTrain suburbs are a rescope in PLAN, probes first. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
 | 🇲🇽 Mexico | **3** | **0** | — | Complete on the current screen: Monterrey (Regional) built 2026-09-27 and published with Daegu and Busan |
 | 🇪🇸 Spain | **3** | **1** — Alicante | R | Alicante's portal refuses the browser too (2026-10-01); Alcobendas discarded |
@@ -564,7 +565,7 @@ it, not a band.
 | 🇹🇳 Tunisia | — | — | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | — | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | — | — | Addis Ababa discarded 2026-10-01 |
-| **Total** | **144** | **24** |  | A 0 · B 0 · C 0 · D 0 · R 24. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **144** | **25** |  | A 0 · B 0 · C 0 · D 0 · R 25. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 
