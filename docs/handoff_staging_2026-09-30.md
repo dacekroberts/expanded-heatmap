@@ -72,8 +72,11 @@ the pointers. **Delete a section when its item is done.**
   - **Extensions** (`extensions-build`, worktree `extensions`, kit
     `docs/handoff_extensions_2026-10-02.md`): all four built in the kit's
     order, each proved off with zero drift first. Belo Horizonte, Rio and Los
-    Angeles have their baselines re-recorded on purpose; confirm Vancouver's
-    with the session. Also on the branch: the OGL personal-information
+    Angeles have their baselines re-recorded on purpose. Vancouver had none
+    (its steps emitted no figures; its gate was zero drift against the
+    commit); the session added emit() figures to steps 1 and 2 on
+    2026-10-03 and records a first baseline on `extensions-build` once the
+    drift slot frees. Also on the branch: the OGL personal-information
     exemption read cautiously for the three BC cities (owner, 2026-10-03),
     and proposal 15 approved by the owner. Its drafts are in
     `docs/decisions_drafts/extensions.md` there.
