@@ -117,6 +117,11 @@ def source_rows(key):
     yield from jr.city_rows(path, sheet=0)
 
 
+# fetch_sources.py counts each file through the same reader, so the recorded
+# row count is the newest sheet's, not all twelve sheets' (japan_fetch).
+file_rows = source_rows
+
+
 # MLIT 位置参照情報, block (24.0a) and town-chōme (19.0b), for 18201.
 ISJ_DIR = DATA_RAW / "isj"
 
