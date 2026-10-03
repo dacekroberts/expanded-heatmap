@@ -348,8 +348,8 @@ source, acknowledging Government ownership of the IP, and proper attribution.
 **The indemnity is not a notice, not a credit, and not a step in a build.** It
 is an open-ended undertaking to cover the Government's costs if a third party
 alleges the data infringed their rights. Hong Kong was the first source in
-this project to ask for one; others have since, among them Sacramento, Palma
-and Dallas (below). **It was an owner decision, taken before the register's
+this project to ask for one; others have since, among them Sacramento, Palma,
+Dallas and San Diego's SanGIS layers (below). **It was an owner decision, taken before the register's
 35,808 premises were wired into a page**, not once the city was live.
 
 ### Hong Kong's indemnity — ACCEPTED 2026-09-22, and what the first record omitted
@@ -468,6 +468,39 @@ read on 2026-09-30 by the license-read agent.<!-- /internal -->
   with Hong Kong, it is not a notice or a build step.
 - **Prose rule:** never call Dallas's pin locations surveyed or exact.
 - **Optional credit:** "City of Dallas Development Services GIS".
+
+#### San Diego's SanGIS indemnity — ACCEPTED 2026-10-02
+
+The **SanGIS GIS Data End User Use Agreement and Disclaimer for Data Released
+to the Public** (2015-04-02) governs both SanGIS layers the San Diego build
+uses. It sits in each item's own `licenseInfo`.<!-- internal --> It was read on 2026-10-02 by the
+license-read agent for the boundaries, confirming the parcels row's
+agreement.<!-- /internal -->
+- **The layers:**
+  - the **countywide tax parcels** (the residence-filter join);
+  - the **municipal boundaries**, item `c034e931bd83403892eea61fdae5a6ae` on
+    `geo.sandag.org`. SANDAG only hosts them; the owner is SanGIS.
+
+- **The shape:** the same again, plus a release. The user agrees "to
+  indemnify, defend, and hold harmless and release SanGIS for any and all
+  liability of any nature arising out of or resulting from the lack of
+  accuracy or correctness of the data, or the use of the data". The user also
+  "expressly waives all rights under Section 1542 of the Civil Code of the
+  State of California".
+- **How it binds and where:** "Use of the data specifically acknowledges the
+  end user's acceptance". There is no cap, and venue is the County of San
+  Diego.
+- **The owner accepted it on 2026-10-02, for these two SanGIS layers** ("Sangis
+  indemnity okay"). It was not recorded as accepted when the parcels were
+  first wired in. As with Hong Kong, it is not a notice or a build step.
+- **Unchanged by the acceptance:**
+  - **SanGIS is still never credited at map scale** (finer than 1:24,000,
+    the agreement's attribution prohibition).
+  - The layers are never presented as an original SanGIS product.
+  - They are never called legal or surveyed boundaries.
+- **SANDAG's own Data Terms of Use** ("should not be redistributed", plus a
+  SANDAG indemnity) defer to a third party's terms where the source is not
+  SANDAG. The SanGIS agreement is the one read as governing.
 
 ## Notices this project MUST display when published
 

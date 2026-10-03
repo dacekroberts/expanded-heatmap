@@ -42,7 +42,7 @@ they disagree.**
 | geo.api.gouv.fr (26 French cities) | 1.25 | **3** | ODbL on the source dataset, Licence Ouverte on IGN's ADMIN EXPRESS; unanswered since 2025-10-15. **Owner: show both credits.** |
 | MassGIS municipalities (Boston) | 1.24 | **4** | "may be freely redistributed"; public records. Credit requested, not required. |
 | LA County Planning boundaries (Los Angeles) | 1.24 | **2** | eGIS Terms of Use grant copy and publish; breach-only indemnity; auto-termination on breach; no endorsement. |
-| SanGIS municipal boundaries (San Diego) | 1.24 | **2, held** | SanGIS End User Agreement: credit PROHIBITED at this scale, an uncapped indemnity and a general release (Civil Code §1542 waiver), never recorded as accepted (nor for the SanGIS parcels, 2.32). SANDAG, which only hosts it, adds "should not be redistributed". **Open with the owner.** |
+| SanGIS municipal boundaries (San Diego) | 1.24 | **2** | SanGIS End User Agreement: credit PROHIBITED at this scale, an uncapped indemnity and a general release (Civil Code §1542 waiver), **accepted by the owner 2026-10-02 for both SanGIS layers** (the boundaries and the parcels, 2.32; `data_sources.md`). SANDAG, which only hosts it, adds "should not be redistributed", read as deferring to SanGIS's terms. |
 | CARTO basemap (Overview macro map only) | 1.23 | **1, weaker** | The Terms (2026-09-29) grant free use only with the project's own API key; the macro map loads keyless vector tiles (keyless raster is already watermarked). A key brings an uncapped indemnity, New York law and revocation at will. **Open with the owner**: request a key, switch the macro map to OpenStreetMap tiles (staging's recommendation), or drop its basemap. City maps use OpenStreetMap's own tiles and are unaffected. |
 
 **Counts after the update:** tier 1 **24**, tier 2 **50**, tier 3 **47**,
@@ -52,9 +52,8 @@ sources).
 **The 15 weakest after the update:** 1 Philadelphia · 2 King County food ·
 3 **CARTO** (keyless, outside its terms) · 4 Snohomish food · 5 Bellevue ·
 6 Daegu · 7 Den Haag · 8 Bucharest · 9 CNEFE · 10 Milan ATM · 11 Paris IDFM
-(2a, elevated) · 12 Miami-Dade · 13 Tucson · 14 Stockholm · 15 **SanGIS**
-(boundaries and parcels: an unaccepted indemnity and release). D.C. and NTA
-leave the list.
+(2a, elevated) · 12 Miami-Dade · 13 Tucson · 14 Stockholm · 15 Kitchener–Waterloo ("No License Provided"). D.C., NTA and
+SanGIS (its indemnity accepted 2026-10-02) leave the list.
 
 ---
 

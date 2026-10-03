@@ -4,6 +4,21 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - SanGIS's indemnity accepted for San Diego's two SanGIS layers; CARTO being handled (owner)
+
+- **The owner: "Carto being handled now. Sangis indemnity okay add to the
+  list that we have for those".**
+- **SanGIS:** its End User Use Agreement carries an uncapped indemnity and a
+  general release (a Civil Code §1542 waiver). It is accepted for the tax
+  parcels and the municipal boundaries, and recorded beside Hong Kong,
+  Sacramento, Palma and Dallas in `docs/data_sources.md`'s accepted
+  indemnities.
+  - The no-credit-at-map-scale position is unchanged.
+  - `docs/licence_positions.md`: SanGIS moves from "2, held" to 2 and leaves
+    the 15 weakest; Kitchener–Waterloo takes 15th.
+- **CARTO:** the owner is handling it ("being handled now"). Staging takes no
+  action on it.
+
 ### 2026-10-02 - Licence reads for the zero-reading sources: D.C. register and boundary, geo.api.gouv.fr, Dublin's NTA GTFS (owner)
 
 - **D.C. Basic Business License: PERMITTED WITH CONDITIONS (CC BY 4.0).**
