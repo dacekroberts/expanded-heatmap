@@ -104,13 +104,27 @@ def row_for(tbl, name, country=None):
     return tbl.get(f"ALL:{country}") if country else None
 
 
+def processed_dir(city_slug):
+    """The folder the city's own config reads (`DATA_PROCESSED`), else
+    data/<slug>/processed. A branch that builds a variant into a subfolder
+    (a regional switch writing processed/regional/, 2026-10-03) is then
+    checked against its own output, while master's shared folder stays
+    master's (docs/session_roles.md, the shared data/ junction)."""
+    import importlib
+    try:
+        config = importlib.import_module(f"pipeline.{city_slug}.config")
+        return Path(config.DATA_PROCESSED)
+    except Exception:
+        return ROOT / "data" / city_slug / "processed"
+
+
 def storefronts(city_slug):
     """render_heatmap's "available" count, or None when the file is absent."""
     import pandas as pd
     from pipeline.map_common import drop_contact_details
     # The file the city's map step reads: a city with a geocoding step
     # (Toronto, Los Angeles) maps businesses_geocoded.csv, not the clean file.
-    processed = ROOT / "data" / city_slug / "processed"
+    processed = processed_dir(city_slug)
     path = next((p for p in (processed / "businesses_geocoded.csv", processed / "businesses_clean.csv")
                  if p.exists()), None)
     if path is None:

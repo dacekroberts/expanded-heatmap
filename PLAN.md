@@ -21,6 +21,17 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **Left by the 2026-10-03 lanes batch, each needing a fresh pull:**
+  - **Rome's tram 3 is back in service** (ATAC, 2026-09-07), but the cached
+    GTFS has no trips on route 3 and no tram 3 relation is cached. Drawing it
+    needs a feed and an Overpass re-pull (one query), steps 1-3, drift check.
+  - **Oslo's tram 13 stops west of Thune** are not yet listed as left out:
+    Sollerud is missing from the cached `stops.txt`, and Lilleaker's tram
+    quays cannot be told from its bus quays. A fresh Ruter feed settles both.
+  - **SFMTA's clause 4**: notice 3 displays its disclaimer on the cautious
+    reading (the duty may apply only to a use agreement, which the site has
+    none of). Owner's call to keep or drop; kept until then.
+
 - [ ] **The UK six's watch items** (built 2026-10-02 on `uk-six-build`):
   - **Birmingham (Regional): West Midlands Metro Line 2 (Wednesbury - Dudley)**,
     due about 1 November 2026 (Dudley Council's leader; the 28 August date was
@@ -501,15 +512,14 @@ Desktop is unaffected — the label is fully visible there.
   only; Snohomish rows with a blank jurisdiction placed by their point).
   The history below is kept.
 - [x] **Tbilisi BUILT 2026-10-02** on `seattle-tbilisi-build`
-  (`pages/175_Tbilisi_Heatmap.py`; 13,252 storefronts, 23 stations; Georgia's
+  (`pages/175_Tbilisi_Heatmap.py`; 13,211 storefronts, 23 stations; Georgia's
   first city, the West Asia region), held for the owner's review time.
-- [ ] **Tbilisi: run the full placeholder check before the next review**
-  (owner, 2026-10-02). The build's register pull could not take "commonest
-  address" in full, so step 2 ran a bounded check (33 points of 50+ rows
-  unsettled). Re-pull with `python pipeline/tbilisi/fetch_sources.py --only
-  register --force` (about 70 minutes at Geostat's 2026-10-02 pace, through
-  `heavy_job.py`), then step 2: it exits if the eleven listed points differ
-  from what the rule finds. `docs/decisions_drafts/seattle-tbilisi.md`.
+- [x] **Tbilisi: the full placeholder check run 2026-10-02** on
+  `tbilisi-placeholder-check`: the rule with a 5-company minimum (owner),
+  thirteen points, 13,211 storefronts placed. `docs/decisions_drafts/tbilisi-placeholder-check.md`.
+- [ ] **Tbilisi: record the drift baseline when `tbilisi-placeholder-check`
+  lands** (`python pipeline/drift_check.py tbilisi --update-baseline`): its
+  run writes the shared processed folder, so it cannot run before.
 - **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
   first MULTI-MUNICIPALITY city.** Do not re-probe the Seattle registry itself;
   the findings are in `docs/build_briefs/seattle.md`, with checks
@@ -906,7 +916,7 @@ every key, account and letter:
     register publishes future-dated cancellations, so a re-run days later
     moves the baseline (2026-10-02: 18,218 -> 18,215). Measure against the
     fetch date instead, or record it (the date fixes item (f) above).
-- [ ] ⏸ **A wording batch: each page family made consistent with itself**
+- [x] **DONE 2026-10-03 (lanes batch; DECISIONS):** **A wording batch: each page family made consistent with itself**
   (owner, 2026-10-02: a later batch, presented as a Markdown list rather than
   a review page). Found by the skills rework; the skills follow the majority
   wording until then:
@@ -947,12 +957,12 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
-- [ ] **SFMTA's required notice may be four sentences, not two** (found by the
+- [x] **DONE 2026-10-03 (lanes batch; DECISIONS):** **SFMTA's required notice may be four sentences, not two** (found by the
   card-credit read, 2026-10-02): clause 12 is followed by an unnumbered "does
   not guarantee ... 'as is'" paragraph before clause 13. Notice 3 and
   docs/data_sources.md carry only the first paragraph. Re-read the terms
   and, on the cautious reading, add the disclaimer to notice 3.
-- [ ] **Staging's eight licence reads (2026-10-02, master 6be4f460;
+- [x] **DONE 2026-10-03 (lanes batch; DECISIONS):** notices 137-140 and rows. **Staging's eight licence reads (2026-10-02, master 6be4f460;
   `docs/licence_positions.md`'s update section): rows and credits to add
   AFTER the per-city notices branch lands** (the credits belong in its
   structure):
@@ -974,7 +984,7 @@ every key, account and letter:
     indemnity and general release for these and for the SanGIS parcels
     (2026-10-02). united-states.md wrongly names SANDAG as the publisher.
   - CARTO basemap (Overview): see the basemap item below.
-- [ ] **The Overview's basemap: CARTO live for now, OpenFreeMap being built,
+- [x] **DONE 2026-10-02: the CARTO key landed** (`app/basemap.py`); OpenFreeMap below stays the documented fallback if the key is revoked. **The Overview's basemap: CARTO live for now, OpenFreeMap being built,
   the CARTO-key route BACKLOGGED, not dropped** (owner, 2026-10-02).
   - **Today:** CARTO's Basemap Terms (2026-09-29) grant free use only with
     "a CARTO-issued API key" (§3.b); the map loads keyless, so that use is
@@ -1003,7 +1013,7 @@ every key, account and letter:
       site is the controller.
     - The full reads are in the cleanup session's scratchpad
       (`openfreemap/`, `ofm/`) and DECISIONS.
-- [ ] **Licence gaps from staging's ranking** (`docs/licence_positions.md`,
+- [ ] **Licence gaps from staging's ranking** (2026-10-03: item 1 DONE, the footer link and the header icons; the second item's Dublin and SFMTA credits DONE; Milan's ATM, STM and MLIT still open) (`docs/licence_positions.md`,
   5813011a; its notice numbers were stripped as unreliable, so verify each
   item against the code first). The first two are the most visible:
   1. **No public repository link anywhere in the app.** IDFM Licence
@@ -1030,7 +1040,7 @@ every key, account and letter:
   6. **Pending positions with no recorded acceptance:** Barcelona's
      notification was never sent; SIRENE's opt-out refresh cadence; MHLW's
      open clause; four indemnities (named in the ranking).
-- [ ] **Doc corrections from staging's re-check calendar** (2026-10-02;
+- [x] **DONE 2026-10-03 (lanes batch; DECISIONS):** all but Rome's tram 3 and Oslo's listing (the new item above). **Doc corrections from staging's re-check calendar** (2026-10-02;
   `docs/recheck_calendar.md`, "Corrections to project docs", each with its
   source):
   - Prague's Flora reopens about the end of February 2027, not December 2026
@@ -1053,7 +1063,7 @@ every key, account and letter:
   - Also found: `check_provenance.py` check C never checks the reverse
     direction, so a numbered notice that is not displayed (New York, 5)
     passes.
-- [ ] **Left by the Japan batch (landed 2026-10-02), for the owner:**
+- [x] **DONE 2026-10-03 (lanes batch; DECISIONS):** (a) fixed for Fukui (Toyama was right), (b) Okayama's sentence on What Is Excluded, (c) the guard stays at 3 towns, (d) East Asia left as it is (owner). **Left by the Japan batch (landed 2026-10-02), for the owner:**
   - **`japan_fetch.fetch_city` counts a file's rows with `city_rows(dest)`**,
     not the city config's own reader, so Fukui's and Toyama's recorded
     provenance row counts are wrong; their pins are right. A small shared
@@ -1070,7 +1080,7 @@ every key, account and letter:
       Sapporo's dot sits off the top of East Asia's frame at every width, and
       at 375 Tokyo and Osaka do too. Not blocking: Japan East and West show
       them. Re-place the labels, or leave Sapporo out of East Asia's anchors.
-- [ ] **Found at the UK six landing (2026-10-02), none blocking:**
+- [ ] **Found at the UK six landing (2026-10-02), none blocking:** (2026-10-03: the OpenStreetMap notice DONE, with the UK nine and nine more; Glasgow's clipping accepted; the scaffold template still open)
   - **The "OpenStreetMap (rail geometry)" notice** lists the cities whose
     rail data comes from OSM, but it names none of the nine UK cities, and
     other later cities are missing too. The basemap's "© OpenStreetMap
@@ -1084,11 +1094,11 @@ every key, account and letter:
   - **`scaffold_city.py` has only the GTFS map template.** An OSM-rail city
     that drops `GTFS_ZIP` from its config fails at import until its map step
     is replaced. A `--rail-source osm` template would save that step.
-- [ ] ⏸ **D.C.'s "Beauty Booth" (6 pins), kept as Personal services**: a chair
+- [x] **DONE 2026-10-03 (lanes batch; DECISIONS):** dropped and noted on What Is Excluded (owner). **D.C.'s "Beauty Booth" (6 pins), kept as Personal services**: a chair
   rented inside a salon, which the person-license rule (2026-10-02,
   `docs/category_rules.md`) takes out. Pending for the owner in
   `check_category_continuity.py`; drop it, or record it as an exception.
-- [ ] ⏸ **After the prose and UI pass lands (owner, 2026-10-01):**
+- [ ] ⏸ **After the prose and UI pass lands (owner, 2026-10-01):** (the notices footer DONE 2026-10-02: per-city notices and the Required notices page)
   - **The site notices footer**: every city page lists all of the site's
     numbered notices (82) at its foot, inline for now. The owner wants a later
     look at how it is presented (a collapsed list, or only the city's own

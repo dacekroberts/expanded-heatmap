@@ -103,7 +103,7 @@ st.markdown(
   the split other cities show is not available here.
 - **About nine storefronts in ten sit within a ring.**
 
-**Reading the map**
+**Reading the density**
 
 - **The permit data runs to 2025.** The city last edited its permit layer on 23 May 2025, so
   premises that opened or closed since then may be missing or still shown.

@@ -27,14 +27,10 @@ OpenStreetMap.
   opened in the last year or two may not appear yet.
 - **Placement**: the register's own coordinate (`X` is the latitude, `Y` the
   longitude). 1,620 kept storefronts have no coordinate and are not shown.
-  1,481 more sit on one of eleven points that are district or settlement centers
+  1,522 more sit on one of thirteen points that are district or settlement centers
   shared by dozens of businesses with no street address (four of them within
   115 m of a metro station), and are not shown either. 3 have a coordinate
   outside the city.
-- **Checked in part**: 33 other points shared by 50 or more businesses (1,629
-  storefronts) could not be fully tested against that rule in this edition.
-  At nearly all of them the businesses give street addresses, so they are
-  shown; the largest is the Lilo market.
 - **Classification**: divisions 47 (retail), 56 (food service) and 96
   (personal services), plus vehicle and parts sales in division 45, at the
   national leaf; the leaves left out are listed on What Is Excluded.

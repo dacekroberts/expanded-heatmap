@@ -85,13 +85,13 @@ st.markdown(
 - About one license in thirteen has no point and cannot be placed.
 - **Where the license holder is a person rather than a company, the map shows the street address
   instead of a name**, and so it does where a business is named only as a person.
+- **About one storefront in fifteen sits within a ring.**
 
 **Reading the density**
 
 - **Read the density as a register, not a street survey.** The City says its list should not be
   considered a complete listing of all active businesses in Tucson, and a license is issued to a
   business at an address whether or not a passer-by could walk in.
-- **About one storefront in fifteen sits within a ring.**
 """
 )
 

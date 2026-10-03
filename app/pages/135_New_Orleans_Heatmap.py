@@ -80,13 +80,14 @@ st.markdown(
 - Personal services are thin on this map: 219 of the pins near stations are salons, barbers and the
   like, against 941 shops and 980 food businesses. The City's catch-all "Personal Services, Other"
   (249 licenses) is left out because it does not say what a business does.
+- **About nine storefronts in twenty sit within a ring.**
 
 **Reading the density**
 
 - **Read the density as a register, not a street survey.** A license is issued to a business at an
   address, and the list does not say whether the address has a shop a passer-by could walk into.
-- **About nine storefronts in twenty sit within a ring.** Streetcar stops here stand a block or two
-  apart, so the rings join into a band along each line. Read them as distance from the line.
+- Streetcar stops here stand a block or two apart, so the rings join into a band along each line.
+  Read them as distance from the line.
 """
 )
 

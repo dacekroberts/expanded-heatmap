@@ -130,6 +130,11 @@ def source_rows(key):
     yield from jr.city_rows(path, merged_header=True)
 
 
+# fetch_sources.py counts and header-checks each file through the same reader
+# (japan_fetch); the counts equal the default reading's (measured 2026-10-03).
+file_rows = source_rows
+
+
 # MLIT 位置参照情報, block (24.0a) and town-chōme (19.0b), for 16201.
 ISJ_DIR = DATA_RAW / "isj"
 

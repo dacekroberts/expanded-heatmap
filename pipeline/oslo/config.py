@@ -120,6 +120,23 @@ RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 ROUTE_TYPES_RAIL = ("401", "902")
 ROUTE_IDS = [f"RUT:Line:{n}" for n in (1, 2, 3, 4, 5, 12, 13, 15, 17, 18, 19)]
 
+# TRAM 13 WEST OF THUNE IS CLOSED FOR WORKS, drawn as the timetable runs
+# (docs/category_rules.md, "Station scope"): Sporveien's Lilleakerbanen
+# rebuild closed Thune - Lilleaker from 10 June 2026, overhead-line work due
+# to finish in February 2027 (sporveien.no/prosjekter-og-arbeid/lilleakerbanen,
+# read 2026-10-03). The 2026-09-24 feed runs 13 Ljabru - Thune only, and
+# replacement buses 13B/13E serve the tram stops. Step 1 STOPS once a rail trip
+# calls at one of these tram-only stop places again, so the closure cannot
+# outlast the map. NOT YET listed in excluded_stations.csv as the precedent
+# asks: Sollerud is not in the cached stops.txt at all, and Lilleaker's tram
+# quays cannot be told from its bus quays there (lane-docs, 2026-10-03).
+CLOSED_FOR_WORKS_STOP_PLACES = {
+    "NSR:StopPlace:61067": "Hoff",
+    "NSR:StopPlace:61068": "Abbediengen",
+    "NSR:StopPlace:61070": "Ullern",
+    "NSR:StopPlace:61072": "Furulund",
+}
+
 # ✅ OSLO KOMMUNE ONLY, owner's call 2026-09-24, on the rule the French cities
 # settled: the deciding measure is the WORST line's station survival.
 #

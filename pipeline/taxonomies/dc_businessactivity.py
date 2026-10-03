@@ -87,7 +87,7 @@ RETAIL = {
 }
 
 # --- Personal services ---------------------------------------------------
-# 575 rows, the thinnest of the three buckets here but genuinely present -
+# 569 rows (575 before Beauty Booth's 6 left, 2026-10-03), the thinnest of the three buckets here but genuinely present -
 # which is what makes D.C. different from Philadelphia and Boston, where the
 # category has no source at all.
 PERSONAL_SERVICES = {
@@ -99,7 +99,6 @@ PERSONAL_SERVICES = {
     "Dry Cleaner",                   # 21 - NAICS 812320
     "Power Laundry",                 # 10 - NAICS 812320/812331
     "Beauty Shop (Braiding)",        # 9
-    "Beauty Booth",                  # 6  - a chair rented inside a salon
     "Beauty Shop (Electrology)",     # 2
 }
 
@@ -224,6 +223,12 @@ EXCLUDED = {
     "Tour Guide": "individual licence, NAICS 5615 (3)",
     "Employment Counseling": "NAICS 5613 (2)",
     "Special Event": "one-off event permit (1)",
+
+    # A person's own licence to work inside someone else's premises: out by
+    # the person-licence rule in docs/category_rules.md (owner, 2026-10-03,
+    # "drop and note"). Measured 2026-10-03: 1 of its 5 sites keeps another
+    # salon or barber pin; the rest leave the map with it.
+    "Beauty Booth": "a chair rented inside a salon, the renter's own licence (6)",
 
     # Death care - NAICS 8122, carved out of 812 as naics.py does.
     "Funeral Establishment": "funeral services off every map (owner, "

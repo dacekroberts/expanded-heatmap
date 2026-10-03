@@ -51,15 +51,16 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Sapporo City get rings, because the business data covers the city alone: JR
-  lines running on to Otaru, Ebetsu, Tōbetsu and the airport are cut at the city line.
+  lines running on to Otaru, Ebetsu, Tōbetsu and the airport are cut at the city line. The stations
+  left out are listed below.
 
 **The businesses**
 
 - From Sapporo City's list of food-business permits (as of 31 March 2026) and its registers of
   barbers, beauty salons, laundries and coin laundries (as of 31 July 2026).
-- Japan has no general business license, so shops other than food shops — clothing, electronics,
-  pharmacies — do not appear: the Food shops layer is food retail only (bakeries and
-  confectioners, delis, butchers and fishmongers).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
 - Food businesses that only notify the city rather than hold a permit are not in the list.
 - The list may include premises that have closed, so a dot means a permit on file, not a business
   open today.

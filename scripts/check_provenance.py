@@ -1,6 +1,7 @@
 """Fail when a built city's provenance is not recorded.
 
     python scripts/check_provenance.py [--strict]
+    python scripts/check_provenance.py --selftest   # check C's cases; touches nothing
 
 WHY A SCRIPT RATHER THAN A RULE
 -------------------------------
@@ -27,8 +28,9 @@ WHAT IT CHECKS
   C. `app/components.py`'s `_NOTICES` and `data_sources.md`'s numbered notices
      are in bijection. A required string displayed but unexplained, or
      explained but not displayed, fails; so does an entry whose number names
-     a different notice. NOT_DISPLAYED lists the one numbered item with no
-     text of its own, and why.
+     a different notice. No numbered notice is exempt (New York's 5 was,
+     until 2026-10-03). Its cases run first on every run (`--selftest` runs
+     them alone).
   N. Each notice reaches the pages its terms need (owner, 2026-10-02). Every
      city a notice names is a city in `app/cities.py`; every city page passes
      its own name to `render_site_notices()`; the every-page set is the one
@@ -518,12 +520,56 @@ def displayed_notices():
     return out
 
 
-# Numbered items with no text of their own to display, and why. Anything else
-# numbered and displayed nowhere fails check C.
-NOT_DISPLAYED = {
-    5: "New York City: a conditional duty to identify source, version and "
-       "modifications, met by the About the Data and What Is Excluded pages",
-}
+def check_notice_bijection(numbered, shown):
+    """C: `numbered` is data_sources.md's (number, heading) list, `shown` the
+    (number, heading, cities, every_page) entries of _NOTICES. Both directions
+    fail: a notice displayed under a number data_sources.md does not give it
+    (or gives another publisher), and a numbered notice that no _NOTICES entry
+    carries. The second had an exemption list until 2026-10-03, which held New
+    York's notice 5 off every page; there is no exemption now, so a numbered
+    notice is a notice the site displays."""
+    problems = []
+    by_number = dict(numbered)
+    for num, h, _cities, _every in shown:
+        candidate = NOTICE_ALIASES.get(h, h)
+        dh = by_number.get(num)
+        if dh is None:
+            problems.append(f"'{h}' is DISPLAYED in app/components.py as notice "
+                            f"{num}, which data_sources.md does not number")
+        elif not (candidate in dh or dh in candidate):
+            problems.append(f"'{h}' is DISPLAYED in app/components.py as notice "
+                            f"{num}, but data_sources.md's notice {num} is '{dh}'")
+    shown_nums = {num for num, *_rest in shown}
+    for num, dh in numbered:
+        if num not in shown_nums:
+            problems.append(f"notice {num} ({dh}) is numbered in data_sources.md "
+                            f"but displayed nowhere: no _NOTICES entry carries "
+                            f"its number")
+    return problems
+
+
+def selftest_notice_bijection():
+    """Cases for check C, run before every check: a selftest that only runs on
+    request is one nobody runs. Returns the cases that went wrong."""
+    numbered = [(1, "OpenStreetMap"), (2, "City of Chicago"), (5, "New York City")]
+    full = [(1, "OpenStreetMap", (), True), (2, "City of Chicago", ("Chicago",), True),
+            (5, "New York City", ("New York",), False)]
+    cases = [
+        ("every numbered notice displayed", full, 0),
+        # The reverse direction: numbered 5, displayed nowhere (New York until
+        # 2026-10-03).
+        ("a numbered notice displayed nowhere", full[:2], 1),
+        ("a displayed notice data_sources.md does not number",
+         full + [(6, "Chicago Transit Authority", ("Chicago",), False)], 1),
+        ("a displayed notice under another publisher's number",
+         [full[0], (2, "LA Metro", ("Los Angeles",), True), full[2]], 1),
+    ]
+    wrong = []
+    for label, shown, expected in cases:
+        got = len(check_notice_bijection(numbered, shown))
+        if got != expected:
+            wrong.append(f"selftest '{label}': {got} problems, expected {expected}")
+    return wrong
 
 # N: the notices on every page, approved by the owner 2026-10-02: the
 # OpenStreetMap basemap line (1), Chicago (2) and Kansas City (80), whose terms
@@ -1163,7 +1209,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--strict", action="store_true",
                     help="ignore KNOWN_GAPS and fail on every finding")
+    ap.add_argument("--selftest", action="store_true",
+                    help="run check C's cases only; touches nothing")
     args = ap.parse_args()
+    if args.selftest:
+        wrong = selftest_notice_bijection()
+        print("\n".join(wrong) or "check_provenance selftest: check C's cases pass")
+        return 1 if wrong else 0
 
     doc = read(DATA_SOURCES)            # the entry point: notices, gate
     files = provenance_files()
@@ -1255,31 +1307,15 @@ def main():
             + (f" (missing and unclaimed: {sorted(missing - claimed_notice_numbers())})"
                if missing - claimed_notice_numbers() else "")]))
 
-    by_number = dict(numbered)
-    for num, h, _cities, _every in shown:
-        candidate = NOTICE_ALIASES.get(h, h)
-        dh = by_number.get(num)
-        if dh is None:
-            failures.append(("notices", [
-                f"'{h}' is DISPLAYED in app/components.py as notice {num}, "
-                f"which data_sources.md does not number"]))
-        elif not (candidate in dh or dh in candidate):
-            failures.append(("notices", [
-                f"'{h}' is DISPLAYED in app/components.py as notice {num}, "
-                f"but data_sources.md's notice {num} is '{dh}'"]))
-    # The reverse direction: a numbered notice displayed nowhere.
-    shown_nums = {num for num, *_rest in shown}
-    for num, dh in numbered:
-        if num not in shown_nums and num not in NOT_DISPLAYED:
-            failures.append(("notices", [
-                f"notice {num} ({dh}) is numbered in data_sources.md but "
-                f"displayed nowhere: no _NOTICES entry carries its number"]))
-    for num in sorted(set(NOT_DISPLAYED) & shown_nums):
-        failures.append(("notices", [
-            f"notice {num} is in NOT_DISPLAYED and is displayed - delete the "
-            f"exemption"]))
+    st_wrong = selftest_notice_bijection()
+    if st_wrong:
+        failures.append(("check C selftest", st_wrong))
+    bij = check_notice_bijection(numbered, shown)
+    if bij:
+        failures.append(("notices", bij))
 
-    print(f"\n  notices: {len(numbered)} numbered, {len(shown)} displayed")
+    print(f"\n  notices: {len(numbered)} numbered, {len(shown)} displayed; "
+          f"each numbered notice displayed, each displayed notice numbered")
 
     # --- N, each notice on the pages its terms need ---------------------------
     np_ = check_notice_placement(shown) if shown else []

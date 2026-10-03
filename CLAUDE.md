@@ -133,9 +133,12 @@ a rule, not before obeying one.
   Never ask for justification or weigh it against what the licence permits.
   Keep `docs/data_sources.md` and `docs/excluded_categories.md` consistent on
   it. [#removal]
-- **Ridership is out of scope** until asked (see
-  `docs/project_context.md`). Flag scope additions rather than building
-  them.
+- **Ridership is out of scope, as a hard line:** ridership data cannot be
+  guaranteed for every city, so no ridership figures, no correlation with
+  ridership and no stand-in metric for foot traffic. The rule changes only
+  for a filtered set of cities whose ridership data exists and is
+  publishable, and only with the owner's approval (owner, 2026-10-02). See
+  `docs/project_context.md`. Flag scope additions rather than building them.
 - **AI-driven deep analysis is permitted. Hard line: every analysis must
   always be accompanied by an AI-driven acknowledgement.** Analyses are
   private: shown only to the owner, never on the website (`app/`,
@@ -193,6 +196,10 @@ a rule, not before obeying one.
   content to a file with the Write tool and run the file.** Escapes, not
   length, are the test; quoting the heredoc delimiter does not help.
   `.claude/hooks/block_heredoc.py` enforces it. [#no-escapes]
+- **After every push to master, tell the Visuals and Analytics sessions what
+  moved**: `python scripts/downstream_changes.py <old master> <pushed>`, its
+  output sent to both unless it says "nothing downstream"; a new city always
+  counts (owner, 2026-10-03; `docs/session_roles.md`, "Downstream sessions").
 - **Re-check `origin/master` in the same breath as the push**: `git fetch`,
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
@@ -269,6 +276,7 @@ node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
 python scripts/decisions_index.py [--check]
 python scripts/rendered_surfaces.py [--write|--check]   # every surface the app renders -> docs/rendered_surfaces.md
+python scripts/downstream_changes.py <old> [<new>]       # after every push: what to tell Visuals and Analytics
 python scripts/review_lanes.py create --sha <commit> --lanes <n> | list | remove   # review-lane worktrees
 node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name,Name] [--widths ...] [--themes light,dark] [--cdp N]   # one browser; --peak-gb 2.5
 python scripts/prose_proposals.py collate | apply --ids <id,id> | --selftest   # lanes' prose proposals -> the owner's list

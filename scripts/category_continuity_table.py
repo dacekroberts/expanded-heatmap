@@ -687,9 +687,9 @@ COLUMNS["toronto_mlscategory"] = {
 
 
 COLUMNS["dc_businessactivity"] = {
-    "person_licence": [pending("Beauty Booth", "a chair rented inside a salon (6)", "Personal services",
-                               "2026-10-02", "kept as Personal services; the rule takes a renter's "
-                               "own license out (San Francisco, New York, Calgary, Edmonton)")],
+    "person_licence": [fixed("Beauty Booth", "a chair rented inside a salon (6)", "Personal services",
+                             "2026-10-03", "was kept as Personal services; the owner ruled 'drop "
+                             "and note' (2026-10-03), excluded_categories.md says so")],
     "funeral": [loc("Funeral Establishment", "funeral establishment")],
     "no_counter_food": [loc("Caterers", "caterers"), loc("School Cafeteria", "school cafeteria"),
                         loc("Farmer's Market Manager License", "farmers' market")],
@@ -2134,10 +2134,11 @@ COLUMNS["zurich_gastwirtschaft"] = {
 # Empty since 2026-09-30: the owner ruled on the last four (Boston's GOP
 # licences, Buffalo's fuel devices and dance halls, Sacramento's ENTERTAINMENT)
 # after they were counted - each is now an exception() with its reason.
-# D.C.'s Beauty Booth: found when the person_licence rule was added (2026-10-02).
+# D.C.'s Beauty Booth, found when the person_licence rule was added
+# (2026-10-02), was ruled on 2026-10-03 ("drop and note") and is now fixed().
 # Burnaby's optometrist/optician type: found with Vancouver (Regional)'s
 # extension (2026-10-03).
-AWAITING_OWNER = {("dc_businessactivity", "person_licence"), ("vancouver", "optician")}
+AWAITING_OWNER = {("vancouver", "optician")}
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "

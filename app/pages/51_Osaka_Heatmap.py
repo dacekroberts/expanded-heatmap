@@ -57,9 +57,9 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'; with
   this many lines, a few labels stand a little off their line.
-- Only stations inside Osaka City get rings, because the business data covers the city alone:
-  lines running on to Sakai, Higashiōsaka, Suita, Yao, Moriguchi and beyond are cut at the city
-  line.
+- Only stations inside Osaka City get rings, because the business data covers the city alone: lines
+  running on to Sakai, Higashiōsaka, Suita, Yao, Moriguchi and beyond are cut at the city line. The
+  stations left out are listed below.
 - The Shinkansen is not drawn (Shin-Osaka appears as a JR and Metro station), nor is the track
   from Osaka Station's Umekita platforms to Fukushima, which only limited expresses use.
 
@@ -67,9 +67,9 @@ st.markdown(
 
 - From Osaka City's list of food-business permits (as of 30 June 2026) and its registers of
   barbers, beauty salons and laundries (as of 31 March 2026).
-- Japan has no general business license, so shops other than food shops — clothing, electronics,
-  pharmacies — do not appear: the Food shops layer is food retail only (bakeries and
-  confectioners, delis, butchers and fishmongers).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
 - Food businesses that only notify the city rather than hold a permit, such as many convenience
   stores and greengrocers, are not in the list.
 - The list may include premises that have closed, so a dot means a permit on file, not a business
