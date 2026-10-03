@@ -21,6 +21,19 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **Overview at phone width (found at the 2026-10-03 review landing):**
+  - **Split Japan West in two (owner, 2026-10-03: approved).** Its zoom is
+    pinned at 6.0 (REGION_ZOOM; fitted, Osaka's and Sakai's dots stack), so at
+    375 px 16 of its 22 dots fall off the canvas (9 before wave 2). The map's
+    zoom is set server-side and cannot follow the screen width, so the fix is
+    two views, Kansai and Chugoku-Shikoku-Kyushu, each placed and scored at
+    375, 768 and 1200 (check_macro_labels.py), the menu order updated.
+  - **check_macro_labels.py assumes a 343 px canvas at 375** (`CANVAS =
+    {375: 343}`); deploy-verify measured 333 (the map frame inside the page's
+    padding). Re-measure, correct, and re-score every region.
+  - **"Los Angeles (Regional)" is about 43% clipped at 375** in Global and
+    United States (no clean position), reported like Glasgow's.
+
 - [ ] **Heavy-job gate follow-ups (2026-10-03, measured-figures norm):**
   - **What makes a multi-city Japanese drift run measure 4.5-4.7 GB?** Run
     each Japanese city's drift alone through the gate (label `drift <city>`)
