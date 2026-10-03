@@ -4,6 +4,39 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Phase 4 city cards: credit placement, OpenStreetMap rule, site address (owner); spot-check set built
+
+- **Phase 3 approved** (owner).
+- **Card credits split between the card face and a caption** (cleanup
+  session's reading of the terms, 2026-10-02; owner's calls):
+  - **On the face:**
+    - "© OpenStreetMap contributors · openstreetmap.org/copyright" for every
+      city whose rail comes from OpenStreetMap: the 52 cities in `_OSM_RAIL`
+      on branch `claude/nice-boyd-51dea8`. The station counts and distance
+      bands are computed from OSM's stations, so the credit applies though
+      no map is drawn.
+    - Taitō ward's own short form on Tokyo's card (owner, through cleanup).
+    - Entur's logo and line on Oslo and Bergen.
+    - "Full credits:" and the city page's address on the site, which the
+      owner allowed to be printed.
+  - **In the caption:** every other notice, in full, from that branch's
+    `city_notices()` (the approved per-page plan, landing at review time),
+    plus the page's own source lines (SIRENE's "Source : Insee").
+  - Rejected: the OSM credit on every card. The owner's rule is "only where
+    its data is drawn", and a card for a GTFS city draws nothing from OSM.
+- **Native-script names** come from each city's config: `MUNICIPALITY`
+  (Japan), `BOUNDARY_NAME` (Korea), `CITY_NAME_ZH` and the address
+  prefixes (Taiwan). Hong Kong's 香港 is not in its config; it was supplied
+  as the city's own name.
+- **A spot-check set of 49 cards was built.** It holds every East Asian
+  city plus San Diego, Philadelphia, Toronto, Paris, Berlin, Birmingham,
+  Oslo, Glasgow, Pittsburgh, Amsterdam and the three smallest networks. In
+  every card, pins equal `ring_shares.json` and the layer counts equal the
+  bucket counts.
+  - Cities with an open terms question carry a "not for public use" chip.
+  - Generation of all 144 waits for cleanup's per-notice placement table
+    for the non-Japanese cities.
+
 ### 2026-10-02 - Phase 3 project-level pieces drafted on a private design canvas
 
 - **Nine artboards, generated from the sampler's data** (built from
