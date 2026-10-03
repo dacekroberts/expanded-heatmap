@@ -313,12 +313,12 @@ CITIES = [
         "page": "pages/10_Vancouver_Heatmap.py",
         "coverage": "full",
         "mode": "metro",
-        "placement": "Register coordinates",
-        "data_age": "Current-year licenses, fetched 2026-09-21",
+        "placement": "Register coordinates; New Westminster by address join (99.8%)",
+        "data_age": "Current-year licenses, fetched 2026-09-21 to 2026-10-03",
         "rail_extra": "—",
         "record_kind": "License register",
         "categories": "All three",
-        "blurb": "SkyTrain (24 stations across Vancouver and Surrey)",
+        "blurb": "SkyTrain (44 stations across five cities)",
         # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
         # flag exists. See IN_DEFAULT_VIEW below.
         "in_default_view": False,

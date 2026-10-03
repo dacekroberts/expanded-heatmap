@@ -34,6 +34,8 @@ import numpy as np
 import pandas as pd
 from pyproj import Transformer
 
+from pipeline.residence import looks_organisational
+
 SOURCE = "new_westminster"
 FORBIDDEN = {"LICENCEE_NAME", "MAILING_ADDRESS"}
 # Units of one building share a coordinate; 5 m allows for rounding only.
@@ -44,6 +46,8 @@ SAME_LICENCE_SPREAD_M = 30.0
 CRS_PROJECTED = "EPSG:32610"   # UTM 10N, the Vancouver build's projected CRS
 APPROVED_YEARS = {"2025", "2026"}
 
+# The shape of a person's own name as this register prints one.
+SURNAME_FIRST = re.compile(r"^[A-Za-z][A-Za-z'.-]*(?: [A-Za-z][A-Za-z'.-]*)?, [A-Za-z]")
 UNIT_RX = re.compile(r"^(?:(?P<unit>.+)-)?(?P<house>\d+)\s+(?P<street>.+)$")
 OUT = ["source", "key", "business_name", "address", "category",
        "category_label", "latitude", "longitude", "_used_fallback"]
@@ -185,6 +189,17 @@ def load_new_westminster(licences_csv, points_csv, classify):
           f"{int((both & (a == b)).sum())} agree, "
           f"{int((both & (a != b)).sum())} conflict, "
           f"{int((~both).sum())} with a postal code missing on one side")
+
+    # A sole proprietor with no trade name is licensed under their own name,
+    # published SURNAME, GIVEN (7 of 853 placed rows on 2026-10-03). The pin
+    # shows its NAICS description instead, Vancouver's rule for a legal name
+    # standing in for a missing trade name (DECISIONS 2026-09-21, "A blank
+    # trade name yields a neutral label, never a person's name").
+    names = lic.BUSINESS_NAME.str.strip()
+    own = (names.str.match(SURNAME_FIRST) & ~names.str.contains("[&0-9]")
+           & ~names.map(looks_organisational))
+    lic.loc[own, "BUSINESS_NAME"] = lic.loc[own, "NAICS_DESCRIPTION"].str.strip()
+    print(f"  a person's own name (SURNAME, GIVEN) shows the business type: {int(own.sum())}")
 
     out = pd.DataFrame({
         "source": SOURCE,

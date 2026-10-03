@@ -103,7 +103,7 @@ page.
   Metrorail reaches Maryland and Virginia, Toronto's Line 1 ends past the city
   limit at Highway 407, and Mexico City's Línea B crosses into the State of
   México. **Several maps are deliberately regional instead** — among them
-  Miami with its county, Vancouver with Surrey, Guadalajara with three
+  Miami with its county, Vancouver with four neighbors, Guadalajara with three
   neighboring municipios, and Lille across eleven communes — because there one
   registry covers the whole area. Guadalajara
   goes one step further and leaves out a municipio it could have included:
@@ -987,6 +987,48 @@ reports a 6.73% "person-like name at a residential unit" figure for Vancouver
 that is an artifact of the city's conventions - San Diego's measurement gap
 inverted, a false high rather than a false low. The zoning measure above is
 the one its verdict rests on.
+
+### Vancouver (Regional) - Burnaby, New Westminster and Coquitlam, three more registers
+
+Since 2026-10-03 the map adds Burnaby, New Westminster and Coquitlam, each from
+its own license register, with every license type given a written verdict on
+the same rules as Vancouver's and Surrey's.
+
+**Burnaby** (20,054 approved licenses, 2026-10-02): out are home-based
+businesses (2,946) and house, apartment and short-term rentals; the
+inter-municipal license (1,183) and the register's miscellaneous catch-all
+(116); contractors, most of them recorded at one placeholder point rather than a
+premises; offices, clinics and registered therapists (1,039); auto repair, car
+washes, tailors and shoe repairers; gyms and other recreation; mobile
+businesses, food peddlers and mall carts; and its optometrist and optician type
+(39), filed under health services, as Surrey's optometrists are. A
+license listed more than once at one point is one dot.
+
+**Coquitlam** (6,002 licenses, each listed twice by the City, 2026-09-04): out
+are its home occupations, residential day cares and bed and breakfasts; its two
+fee-level catch-alls, "Level 1" and "Level 2" (211); contract caterers (7) and
+a mobile hairdresser; mall kiosks (10); one massage parlor licensed as a
+high-impact business; offices, schools, recreation, vehicle rentals and
+vending. A license under renewal for the coming year counts as current.
+
+**New Westminster** (2,736 resident licenses, 2026-09-27): sorted by NAICS
+code, the same lines as the NAICS cities; the inter-municipal licenses (218)
+fall outside the categories.
+
+**Missing rather than excluded** - New Westminster's licenses carry no point:
+853 of 856 are placed by joining the address to the City's own address points
+(846 exactly, 8 at the building when the unit is missing from the address
+file); 2 cannot be placed and are not drawn. Licenses issued to businesses
+based outside each city are not in these registers.
+
+**Shown, but not named** - where a New Westminster or Coquitlam license is
+issued under a person's own name, printed surname first, the dot shows the
+business type instead (8 dots).
+
+**Stations.** Burnaby's 11 SkyTrain stations, New Westminster's 5 and
+Coquitlam's 4 are drawn and ringed. Richmond's 8 and Port Moody's 2 are still
+left out: Richmond's business directory may be used only for research and
+private use, and Port Moody's license list carries no address.
 
 ### Montréal - vacant units, which a survey can see and a register cannot
 
@@ -4630,7 +4672,7 @@ own section above describes it.
   because each catches people the other misses: the parentheses find 63
   storefront rows the pattern misses, mostly three-part and non-Anglo names,
   and the pattern finds about 10 registrants who did not use parentheses.
-  **88 pins across Vancouver and Surrey display their business type instead of
+  **92 pins across Vancouver (Regional) display their business type instead of
   a name.** No pin shows a name the pipeline substituted for a missing trade
   name.
 - A residential address is inferred from indicators like "APT" or a space

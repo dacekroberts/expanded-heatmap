@@ -3130,6 +3130,57 @@ session's claimed block, 109–116.)
 - **MUST DO**: nothing. The licence holder's name (`FULLNAME`) is never
   fetched; the removal rule is the safety net.
 
+**130. City of Burnaby (Vancouver (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Vancouver (Regional)'s extension, 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Open Government Licence – City of Burnaby
+  (`https://data.burnaby.ca/pages/open-government-licence`), the BC licence
+  v2.0. Rows in [`data_sources/canada.md`](data_sources/canada.md).
+- **MUST DISPLAY**: the statement the City prints, verbatim:
+
+  > `Contains information licensed under the Open Government Licence – British Columbia.`
+
+  with a link to the licence where possible, credited "City of Burnaby".
+  Note the British "Licence" and the EN DASH.
+- **MUST NOT**: suggest official status or the City's endorsement; use its
+  names, crests or logos; use Personal Information (FOIPPA Schedule 1).
+- **MUST DO**: nothing further. The licence terminates automatically on
+  breach. `ACCOUNT_NAME` is never fetched.
+
+**131. City of New Westminster (Vancouver (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Vancouver (Regional)'s extension, 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Open Government Licence - City of New
+  Westminster v1.0 (`https://opendata.newwestcity.ca/pages/terms-of-use`),
+  covering both the licence table and the address points.
+- **MUST DISPLAY**, verbatim, the City's spelling and hyphen kept:
+
+  > `Contains information licenced under the Open Government Licence - City of New Westminster.`
+
+  with a link to the licence.
+- **MUST NOT**: suggest official status or endorsement; use the City's
+  official symbols; use Personal Information.
+- **MUST DO**: nothing. `LICENCEE_NAME` and `MAILING_ADDRESS` are never
+  fetched; a licence issued under a person's own name shows its business
+  type.
+
+**132. City of Coquitlam (Vancouver (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Vancouver (Regional)'s extension, 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Open Government Licence – Coquitlam v1.0
+  (`https://www.coquitlam.ca/894/Open-Government-Licence`), OGL-BC 2.0 with
+  the Province replaced by the City.
+- **MUST DISPLAY**, verbatim:
+
+  > `Contains information licensed under the Open Government Licence – Coquitlam.`
+
+  with a link to the licence; the item's own credit, "© City of Coquitlam",
+  is shown beside it.
+- **MUST NOT**: suggest official status or endorsement; use the City's
+  names, crests or logos; use Personal Information.
+- **MUST DO**: nothing. `COL_BUSINESSPHONE` and `EMAILADDRESS` are never
+  fetched.
+
 
 ## Gaps
 

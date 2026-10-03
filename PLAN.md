@@ -441,6 +441,11 @@ Desktop is unaffected — the label is fully visible there.
         `data/los_angeles/processed/regional/` until it lands.
       - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
         and `data/duque_de_caxias/raw/` (and the staging worktree's).
+    - [x] **Built 2026-10-03 on `extensions-build`, without Richmond and
+      Port Moody**: 44 stations, 15,436 storefronts (Burnaby 2,115, Coquitlam
+      1,016, New Westminster 780 placed by address join), held for review
+      time; regional processed files in `data/vancouver/processed/regional/`
+      until it lands. The history below is kept.
     - [ ] **Vancouver (Regional) + Burnaby, New Westminster, Coquitlam,
       Richmond (owner: a PLAN item, probes first)** - 28 SkyTrain stations
       now excluded. Measured: Coquitlam (licences with lat/long, OGL-BC 2.0,

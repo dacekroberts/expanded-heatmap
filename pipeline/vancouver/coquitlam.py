@@ -29,7 +29,7 @@ import sys
 import pandas as pd
 from pyproj import Transformer
 
-from pipeline.residence import looks_personal
+from pipeline.residence import looks_organisational, looks_personal
 
 COLUMNS = ["source", "key", "business_name", "address", "category",
            "latitude", "longitude", "_used_fallback"]
@@ -58,6 +58,8 @@ CARVE_OUTS = [
 # here; a name containing "kiosk" with a normal unit is only reported.
 KIOSK = re.compile(r"\bkiosk\b", re.I)
 KIOSK_UNIT = re.compile(r"^\s*kiosk\b", re.I)
+# The shape of a person's own name printed Surname, Given.
+SURNAME_FIRST = re.compile(r"^[A-Za-z][A-Za-z'.-]*(?: [A-Za-z][A-Za-z'.-]*)?, [A-Za-z]")
 
 # Sanity box, generous around the City of Coquitlam (including its northern
 # watershed). A point outside it is printed and dropped.
@@ -120,6 +122,16 @@ def load_coquitlam(csv_path, classify):
     df["address"] = df["COL_BUSINESSADDR"].str.strip()
     df["category"] = df["U_SUBCODEDESC"].str.strip()
     df["_used_fallback"] = False
+    # A person's own name printed Surname, Given (1 kept licence on
+    # 2026-10-03) shows the subtype instead, Vancouver's rule for a legal name
+    # standing in for a trade name (DECISIONS 2026-09-21, "A blank trade name
+    # yields a neutral label, never a person's name").
+    own = (df["business_name"].str.match(SURNAME_FIRST)
+           & ~df["business_name"].str.contains("[&0-9]")
+           & ~df["business_name"].map(looks_organisational))
+    df.loc[own, "business_name"] = df.loc[own, "category"]
+    print(f"  a person's own name (Surname, Given) shows the subtype: {int(own.sum())} "
+          f"(of every licence, before the bucket filter)")
     x = pd.to_numeric(df["LONG"], errors="coerce")
     y = pd.to_numeric(df["LAT"], errors="coerce")
     lon, lat = _TO_WGS84.transform(x.to_numpy(), y.to_numpy())

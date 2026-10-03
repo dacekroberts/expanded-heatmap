@@ -7,6 +7,68 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 Proposals (sentences no approved template covers) are listed at the end, for
 the owner at review time.
 
+### 2026-10-03 - Vancouver (Regional) extended: Burnaby, New Westminster and Coquitlam on their own registers
+
+- **Fourth of the four extensions**, on the owner's three approved calls
+  (2026-10-02). The name stays "Vancouver (Regional)"; Richmond (Band R)
+  and Port Moody (no addresses) stay out.
+- **Proved off first** (de1528d2): zero drift (Vancouver emits no baseline
+  figures, so the files are the whole check), peak 0.31 GB.
+- **Built in three legs by agents** (no commits, no repository edits),
+  then integrated: `pipeline/vancouver/burnaby.py`, `coquitlam.py`,
+  `new_westminster.py`; Burnaby's 142 and Coquitlam's 64 values mapped in
+  `pipeline/taxonomies/vancouver.py` with a reason each; New Westminster
+  through `naics.naics_group`, shown as "NAICS <code>". One generic paged
+  ArcGIS fetch in `fetch_sources.py` with explicit field lists:
+  **ACCOUNT_NAME, LICENCEE_NAME, MAILING_ADDRESS, COL_BUSINESSPHONE and
+  EMAILADDRESS are never requested**, and fetch and step 2 raise if one
+  arrives. Stations are scoped and named by the BC ABMS layer already in
+  the build.
+- **Burnaby** reproduces staging exactly: 2,143 (964 / 746 / 433) after
+  one-licence-one-point dedup; the placeholder point (2,179 contractor and
+  mobile rows) holds no bucketed row, asserted. RETAIL SALE, RENTAL &
+  REPAIR is Retail (owner). **Pending for the owner:** `HEALTH SERVICES -
+  OPTOMETRIST/OPTICIAN` (39) is out, as Surrey's optometrists and
+  Melbourne's opticians (filed in health), against the rule that keeps
+  opticians Retail; about 6 of the 39 read as optical shops. A `pending()`
+  row in the continuity table.
+- **Coquitlam**: the layer lists every licence twice (and holds Web
+  Mercator metres in LAT/LONG); 6,002 licences, 1,026 kept (454 / 332 /
+  240). Mall kiosks out (owner): 9 by subtype and 1 with a "Kiosk" unit,
+  10 in all. Renewal folders read as current (the coming year's renewal,
+  most businesses' only record). By precedent, not owner calls: the
+  fee-level catch-alls "Level 1" and "Level 2" (211) out (R2, Surrey's
+  Miscellaneous); one "Massage (non-registered) Parlour" licensed as a
+  high-impact business out (R3, San Diego's massage parlors); 7 contract
+  caterers (R1) and a mobile hairdresser out. **Left for the owner:**
+  grooming licences sharing a full address under different names (possible
+  chair renters the register does not flag) and about 31 grooming licences
+  alone at an address with no unit (possible home salons) are kept as
+  published; telling either apart would be a new rule.
+- **New Westminster**: 2,736 resident licences, 856 in the buckets (not
+  staging's 907: the 2026-09-29 caterer and catch-all exclusions), placed
+  by joining CIVIC_ADDRESS to the City's Address_Point layer: 846 exact, 8
+  at the building with the unit missing, 2 unmatched; postal-code control
+  826 agree, 0 conflict. 853 placed.
+- **Names**: 7 New Westminster licences and 1 Coquitlam licence issued
+  under a person's own name, printed surname first, show the business type
+  (Vancouver's rule of 2026-09-21); a trade name with "&" or a digit never
+  counts. Burnaby's and Coquitlam's other names are the licence's business
+  name and are left as published (San Diego's and Surrey's precedent).
+- **What moved** (drift check, every change the extension's): stations 24
+  → 44 (Burnaby 11, New Westminster 5, Coquitlam 4; 10 left out);
+  storefronts 11,525 → 15,436 (Burnaby 2,115, Coquitlam 1,016, New
+  Westminster 780 after the per-source name-and-address dedup; Vancouver's
+  and Surrey's unchanged); in-ring 4,618 → 7,010, the share 40.1% →
+  45.4%; every extension point inside its own city (100%). The sanity box
+  widens to Coquitlam (49.48 N, -122.58).
+- **Privacy: publish.** The shared check's residential-unit figure is
+  Vancouver's own "Unit" artifact (the 2026-09-21 verdict; it read master's
+  processed file); measured directly on the three new registers: 0
+  person-like names at a residential-unit token, 0 emails or phone numbers.
+- **Brief**: a checks block added (4 claims, all passing); its figures
+  corrected to Staging by message.
+
 ### 2026-10-03 - Los Angeles (Regional): Long Beach added on its own licence layer, its holder names never loaded
 
 - **Third of the four extensions.** Los Angeles becomes "Los Angeles
@@ -230,3 +292,20 @@ the owner at review time.
     paragraphs, all counts from the 2026-10-03 file).
 11. The macro label clip: Los Angeles (Regional) clipped 43% at 375 px in
     Global and United States (no clean side exists).
+12. Vancouver (Regional), page, The lines: "This map covers five cities:
+    Vancouver, Surrey, Burnaby, New Westminster and Coquitlam. SkyTrain is
+    regional, so a Vancouver-only map would cut the network at a line no rider
+    recognizes." and "Of 54 stations, 44 are in those five cities: ... The
+    other 10, in Richmond and Port Moody, are left out: Richmond's business
+    directory may be used only for research and private use, and Port Moody's
+    license list carries no addresses. All 10 are listed below."
+13. Vancouver (Regional), page, The businesses (new): "Each city's businesses
+    come from its own license register. New Westminster's licenses carry no
+    map point, so each is placed at its address from the City's own address
+    points."; Reading the map: "The five cities are licensed by five
+    different authorities, so read them as five measurements that share a
+    map rather than one continuous surface."
+14. What Is Excluded, the new section "Vancouver (Regional) - Burnaby, New
+    Westminster and Coquitlam, three more registers" (all counts from the
+    build), and two shared sentences: "Vancouver with four neighbors" and
+    "92 pins across Vancouver (Regional) display their business type".

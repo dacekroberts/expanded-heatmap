@@ -42,7 +42,7 @@ ROOT = Path(__file__).parent.parent.parent
 # docs/build_briefs/vancouver_regional.md). Richmond (Band R) and Port Moody
 # (no addresses) stay out. False reproduces the Vancouver + Surrey build byte
 # for byte, which is how the extension was proved before it was switched on.
-REGIONAL = False
+REGIONAL = True
 DATA_RAW = ROOT / "data" / "vancouver" / "raw"
 # data/ is one junction shared by every worktree, and master's checks read
 # processed/: the extended build writes processed/regional/ (ignored) until it

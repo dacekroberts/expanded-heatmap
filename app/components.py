@@ -2339,6 +2339,27 @@ _NOTICES = [
      "and aggregates the City's records; it is not a City of Long Beach product, "
      "and the City does not endorse it.",
      False, ("Los Angeles (Regional)",)),
+    # Vancouver (Regional)'s extension (notices 130-132, 2026-10-03). Each
+    # municipal OGL prescribes its own statement, VERBATIM and not
+    # interchangeable: Burnaby prints the BC default ("Licence – British
+    # Columbia", en dash; credited "City of Burnaby" with a link, owner
+    # 2026-10-02), New Westminster "licenced" with a hyphen, Coquitlam
+    # "Licence – Coquitlam" with an en dash. All terminate on breach.
+    Notice(130, "City of Burnaby (Vancouver (Regional))",
+     "City of Burnaby: Contains information licensed under the Open Government "
+     "Licence – British Columbia. [Open Government Licence – City of Burnaby]"
+     "(https://data.burnaby.ca/pages/open-government-licence)",
+     True, ("Vancouver (Regional)",)),
+    Notice(131, "City of New Westminster (Vancouver (Regional))",
+     "Contains information licenced under the Open Government Licence - City of "
+     "New Westminster. [Open Government Licence - City of New Westminster]"
+     "(https://opendata.newwestcity.ca/pages/terms-of-use)",
+     True, ("Vancouver (Regional)",)),
+    Notice(132, "City of Coquitlam (Vancouver (Regional))",
+     "Contains information licensed under the Open Government Licence – Coquitlam. "
+     "Business license data © City of Coquitlam. [Open Government Licence – "
+     "Coquitlam](https://www.coquitlam.ca/894/Open-Government-Licence)",
+     True, ("Vancouver (Regional)",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

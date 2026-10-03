@@ -269,7 +269,7 @@ name at their home.
   owners and partnerships of individuals, by the permit's organisation type).
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
-- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Seattle (Regional) (166
+- **Type in place of a personal name:** Vancouver (Regional) (92 pins). Seattle (Regional) (166
   licenses under a person's own name, and 260 Bellevue licenses with no trade name, show
   their category). Buffalo (42 salons licensed under a person's own name show the licence type). Sacramento (525 businesses whose name reads as a person's show their description). Kobe (10 pins: a
   trade name that is the operator's own name shows its permit type). Osaka (9 pins,
@@ -549,7 +549,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Tucson | Sun Link streetcar, one line | Buses | OpenStreetMap route relations; gate 3 exact | City (TIGER) | 0 / 0 |
 | New Orleans | RTA streetcars 12, 46, 47, 48, 49 | Buses, ferries; OSM's stale ref 2 | OpenStreetMap route relations; 46 and 49 stops by node; gate 3 exact (RTA) | City (TIGER; Orleans Parish) | 0 / 0 |
 | **Canada** | | | | | |
-| Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS; gate 3 exact | Vancouver + Surrey | 30 / 0 |
+| Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS; gate 3 exact | Vancouver, Surrey, Burnaby, New Westminster, Coquitlam | 10 / 0 |
 | Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS; gate 3 exact | Agglomeration (island) | 11 / 0 |
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
 | Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS; gate 3 exact | City | 0 / 0 |
@@ -726,7 +726,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Tucson | License register | City of Tucson BUSLIC (active licences, rebuilt daily) | NAICS | 125 / 149 / 66 | Not a complete listing, in the City's own words |
 | New Orleans | License register | City of New Orleans Active Occupational Licenses (daily, CC0) | Own text taxonomy, mapped to NAICS codes | 935 / 978 / 218 | Personal services thin |
 | **Canada** | | | | | |
-| Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,818 / 953 | — |
+| Vancouver (Regional) | 5 licence registers | Vancouver licences; Surrey directory; Burnaby, Coquitlam and New Westminster licences | Own types; NAICS (New Westminster) | 2,967 / 2,617 / 1,426 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,464 | Edge municipalities thinner in the survey |
 | Calgary | License register | Business Licences | Own licencetypes | 1,962 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
 | Edmonton | License register | Business Licences | Own licence categories | 1,038 / 925 / 411 | Personal services overstated (clinics) |
@@ -900,7 +900,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Tucson | Register coordinates (92.4%); 539 not geocoded, 23 outside the city | The City calls its list not complete | Home occupations; non-store sellers, caterers, mobile food, parking; apartments (19); address shown for a person's licence or a business named only as a person |
 | New Orleans | Register coordinates (95.6%); 219 at the register's 0,0, 1 outside the city | A licence is not a shopfront | Event and festival vendors, home offices, flea-market stalls, street artists, video poker; caterers, mobile food, parking; address shown where no business name or a person's |
 | **Canada** | | | |
-| Vancouver (Regional) | Source coordinates | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage |
+| Vancouver (Regional) | Source coordinates; New Westminster by address join (99.8%) | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage; Burnaby's and Coquitlam's catch-alls, Coquitlam's mall kiosks |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
 | Calgary | Source point | No home-business flag | Endorsements; body rub / escort (sensitivity) |
 | Edmonton | Source coordinates | Personal services overstated | Non-commercial licence types (43%); adult services (sensitivity) |
@@ -1069,7 +1069,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Tucson | Active licences (2026-09-30) | B | 0.3 mi | Yes | 6% | Account name; address for a person's licence |
 | New Orleans | Active licences, daily (2026-09-30) | B | 0.3 mi | Yes | 45% | Business name, never the owner's; address where none |
 | **Canada** | | | | | | |
-| Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
+| Vancouver (Regional) | Current-year licences (fetched 2026-09-21 to 2026-10-03) | — | 0.6 mi | Yes | 45% | Name; type on 92 pins |
 | Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |
 | Calgary | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 41% | Trade name |
 | Edmonton | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 22% | Business name |
