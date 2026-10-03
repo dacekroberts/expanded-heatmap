@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3184,6 +3184,23 @@ review time).
 - **MUST DO:** `check_personal_exposure.py nishinomiya` with its Japan pass,
   run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
   ("Nishinomiya built", 2026-10-03).<!-- /internal -->
+
+**119. Takamatsu City, MHLW and MLIT (Takamatsu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-03; lands with Japan wave 2 at
+review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-02; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's four lists
+  are **CC BY 4.0** (高松市オープンデータ利用規約 第１条). MHLW's open data
+  (its notifications) is **PDL 1.0**, as in Matsuyama's (97). MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: 出典：「食品等営業許可施設一覧」「理容所新規開設一覧」「美容所新規開設一覧」「クリーニング所新規開設一覧」（高松市）（…/odp/）を加工して作成 with the CC BY 4.0 link; MHLW's 出典 line and who processed it; MLIT's credit lines.
+- **MUST NOT**: claim the lists are accurate or complete (第４条(1); PDL);
+  use MHLW's logo.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py takamatsu` with its Japan pass,
+  run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
+  ("Takamatsu built", 2026-10-03).<!-- /internal -->
 
 ## Gaps
 

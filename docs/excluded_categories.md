@@ -3732,6 +3732,46 @@ line.
 - Left out: 17 stations beyond it: 6 in Takarazuka, 4 in Amagasaki, 4 in
   Ashiya and 3 in Kobe (2 in Higashinada Ward, 1 in Kita Ward).
 
+### Takamatsu - the city's food list and its barber, beauty and laundry registers, with the ministry's notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Food shops that only notify rather than hold a permit appear only where
+  they chose to publish in the ministry's open data: 2,262 of its
+  notifications carry no address and cannot be placed.
+- 620 food trucks and temporary stalls with no fixed premises (338 vehicles,
+  279 temporary stalls, 3 handcarts), and 62 stalls listed at a fixed spot,
+  57 of them 露店：定置.
+- 422 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 258 school, hospital and staff canteens, 108 restaurants inside hotels,
+  inns, love hotels and capsule hotels, 56 cooking vending machines and 23 caterers (仕出し).
+- From the ministry's notifications, likewise: canteens, vending machines,
+  manufacturing, mail order and peddlers.
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry on the city's registers of August 2026; from the
+ministry's notifications, supermarkets, convenience stores and other food
+retail. 28 of the 820 bakery, confectioner and deli rows (3.4%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 459 repeat permits are shown once, and 35 premises
+in both lists once.
+
+**Not placed** - 19 rows. Another 908 sit at their town's center (much of the
+city outside the center has no block addresses), and 125 ministry filings at
+the ministry's own point.
+
+**Names not shown** - 1 trade name that is its operator's own name shows its
+permit type instead. The ministry's list does not say who the operator
+is, so this cannot be checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 13 stations beyond it: 4 in Miki, 4 in Ayagawa, 3 in Sanuki and 2
+  in Sakaide.
+- The Yakuri cable car, a sightseeing line, is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

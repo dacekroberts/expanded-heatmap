@@ -1992,6 +1992,27 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Nishinomiya and MLIT did not make "
      "and do not endorse this map.",
      False, ("Nishinomiya",)),
+    # Takamatsu (notice 119): the city's four lists, CC BY 4.0 under its
+    # open-data terms 第１条, in the brief's attribution (no form prescribed);
+    # MHLW's notifications (PDL 1.0) as in Matsuyama's; MLIT as in Kobe's, N02
+    # in its 2025 edition. Written from Matsuyama's approved wording under the
+    # owner's pre-approval of template prose (2026-09-30).
+    Notice(119, "Takamatsu City, MHLW and MLIT (Takamatsu)",
+     "Takamatsu's businesses: 出典：「食品等営業許可施設一覧」「理容所新規開設一覧」「美容所新規開設一覧」"
+     "「クリーニング所新規開設一覧」（高松市）"
+     "（[https://opendata.smartcity-takamatsu.jp/odp/](https://opendata.smartcity-takamatsu.jp/odp/)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Takamatsu's list of food-business permits and its registers of barbers, "
+     "beauty salons and laundries as of 31 August 2026, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, showed a premises in both lists once, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "The ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Takamatsu City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Takamatsu",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

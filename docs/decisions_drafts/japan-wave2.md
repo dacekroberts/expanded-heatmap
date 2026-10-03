@@ -4,6 +4,81 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Takamatsu built, the city's food list and three registers with MHLW's notifications
+
+- **Takamatsu built (page 180, notice 119): 7,820 storefronts (Food service
+  4,371, Food shops 1,582, Personal services 1,867) around 46 stations on 5
+  lines, 71.7% of them in a ring.** Matsuyama's shape: the city's CC BY 4.0
+  lists on オープンデータたかまつ as of 2026-08-31 (food 7,372 rows, barbers
+  371, beauty 1,188, laundries 332; the registers titled 新規開設 but
+  standing), plus MHLW's open data for its 3,349 notifications only (its
+  permits add nothing to a city list at 102% of the official count), joined to
+  MLIT's address blocks: 7,281 rows at the block (87.4%), 908 at a town
+  centre, 125 at MHLW's own point (116 from the chōme tier, 9 from none; one
+  default point refused), 19 unplaced; the city's food list fixed in a bucket
+  88.7 / 11.1 / 0.2 with the 字甲 rule (`aza_letter`), the brief's figure.
+  MHLW's points against the block point: median 46 m, 91.4% within 250 m
+  (490 rows), the brief's. 459 repeat permits shown once; 35 city food rows
+  dropped for the MHLW notification of the same premises (`SUPERSEDES`).
+  MHLW: 2 closed, 2,262 without an address (not placeable), 65 not a
+  premises; 532 notification pins (Food shops: konbini, drugstores,
+  supermarkets...). City food: 620 not a premises (車 338, 露店：仮設 279,
+  露店：引車 3); out by rule 924 (manufacturing 422, 給食 258, 旅館・ホテル
+  103 and ラブホ・カプセル 5 (love and capsule hotels, 13b2c280), 露店 62 of which 露店：定置 57 by the written temporary rule (owner,
+  2026-09-29), cooking vending 56, 仕出し 23). Kept by 業態 (MHLW's rows): 65
+  konbini and 21 supermarkets, to Retail.
+- **Held calls, counts touched:** 業態 おかず (181 restaurant permits, 134
+  pins) is a deli recognised only by its form and stays Food service;
+  複合型そうざい製造業 (1) and 複合型冷凍食品製造業 (4) stay out. The 菓子 /
+  そうざい factory share: 28 of 820 (3.4%), kept (owner, 2026-09-24).
+- **Two items the build stopped on, resolved in shared code (13b2c280):**
+  the privacy check printed 1, the trade name of a cooperative (協同組合)
+  that runs two food vehicles under its own name, which the name rule read
+  as a person; and 業態 ラブホ・カプセル (5 restaurant permits in love and
+  capsule hotels) escaped the inside-accommodation rule. Re-run by the lead:
+  the check prints 0, Food service 4,376 -> 4,371.
+- **Privacy verdict: publish.** The Japan pass prints 0; 1 pin shows its
+  permit type (2 raw rows); 25 raw rows whose trade name is a cooperative's
+  own name show it (13b2c280).
+- **Rail:** N02-25: Kotoden's 琴平線 (12 of 23), 長尾線 (8 of 16 legally; drawn
+  through to 高松築港 over 琴平線's track by a `route` (高松築港, 片原町, 瓦町),
+  as its trains run and Kotoden numbers K00/N00 and K01/N01, so 10 in the
+  city) and 志度線 (15 of 16), JR Shikoku's 予讃線 (5 of 95) and 高徳線 (9 of 29),
+  cut at the city line; no stub. The Yakuri Cable (四国ケーブル 八栗ケーブル, 2
+  stations) left out by the funicular rule, a bullet under The lines, not in
+  `excluded_stations.csv`. 瓦町's three platforms collapse within 130 m;
+  Kotoden's 八栗新道 and JR's 讃岐牟礼, 61 m apart, are separate N02 groups of
+  different names and stay apart. Gate 3: Kotoden's station index, in line
+  order, gives the Kotohira Line 12, the Nagao Line 10 and the Shido Line 15
+  inside the city, exact (53 stations in all, N02's 23 / 16 / 16). 13 stations
+  excluded: 4 in Miki, 4 in Ayagawa, 3 in Sanuki, 2 in Sakaide. English
+  names: OSM has no object for five Nagao Line stations (花園, 林道, 木太東口,
+  西前田, 高田), romanised from the readings in Kotoden's index
+  (`OSM_NAME_EN_MISSING`); 5 cited overrides (松島二丁目 to Matsushima-2-Chome,
+  the 丁目 rule; 栗林公園 and 栗林公園北口 to -koen; 香西 without the macron;
+  琴電屋島 hyphenated as OSM writes 琴電志度). Colours from
+  `line_colour_search.py` (closest pair 39.6). Median gap 703 m: standard
+  rings.
+- **GSI sample (the brief's independent check):** `screen_japan_join.py
+  takamatsu --gsi 50`: 50 answered, median 1 m from the block point, 47 within
+  100 m, 48 within 500 m, max 1,439 m.
+- **Economic Census control: 2.11** Food service pins per 2021 census 飲食店
+  establishment (4,371 against 2,071), above the built cities' 1.56-1.92,
+  **explained** by Matsuyama's benchmark: the list is 102% of the official
+  5,439 permits, official / census 2.63, and the map ratio sits below it. The
+  業態 the brief asked to read: 飲み屋 (875 rows, 871 pins) and その他 (412
+  rows, 398 pins) are ordinary 飲食店営業 permits at fixed premises (bars and
+  unclassified restaurants), counted; repeat permits at one premises are
+  already shown once, so neither inflates the map with duplicates.
+- **Prose proposals for review time:** on the page, "The Nagao Line's trains
+  run on to Takamatsu-Chikko over the Kotohira Line's track, and it is drawn
+  along it."; "...station names in English are from OpenStreetMap and the
+  railway's own station list." (Toyama's form); "...where that fails for a
+  ministry filing, the dot sits at the ministry's own coordinates, and
+  otherwise at its district's center." (Kitakyushu's and the template's
+  joined). In What Is Excluded, "(much of the city outside the center has no
+  block addresses)".
+
 ### 2026-10-03 - Nishinomiya built, the city's food list and three registers
 
 - **Nishinomiya built (page 179, notice 118): 5,527 storefronts (Food service
