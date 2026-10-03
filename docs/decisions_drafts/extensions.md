@@ -370,4 +370,10 @@ until the owner rules):**
     "92 pins across Vancouver (Regional) display their business type".
 15. Vancouver (Regional), What Is Excluded, "Shown, but not named" (added to
     the paragraph): "The three cities' licenses exclude personal information
-    from what they grant, and this map reads that cautiously."
+    from what they grant, and this map reads that cautiously." **Reported
+    approved** by Cleanup, relaying the owner (2026-10-03, verbatim):
+    "Sentence approved, likely for regional declarations" - to confirm at
+    review time. If confirmed, it is the template for the same declaration
+    on a regional page whose licence exempts personal information; none of
+    the other three extensions has one (Long Beach's terms and CNEFE carry no
+    such exemption), so no sentence was written from it.
