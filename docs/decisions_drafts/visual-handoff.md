@@ -4,6 +4,22 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Phase 2 sampler approved: no basemap for now, a cut-down funnel, every city labeled (owner)
+
+- **The sampler and all its new wording were approved as written**, and
+  Phase 3 (project-level pieces) started.
+- **The coverage overview stays without a basemap** until the owner decides
+  which map is final. Rejected for now: the CARTO basemap of the site's
+  overview, which would add the CARTO and OpenStreetMap credits.
+- **The data funnel ships cut down**: storefronts mapped, then near a
+  station, with register rows reading "not published". It is replaced
+  when raw register counts are published for every city.
+- **The distribution view is two scrolling alphabetical columns**, one per
+  ring set, every city labeled, never ranked.
+- **Tokyo's card credit (a short form on the card, the full notice in a
+  caption) went to the cleanup session as a license question** at the
+  owner's request. Cards are not generated at scale until it is answered.
+
 ### 2026-10-02 - Paris back in public visuals; Phase 2 sampler built; Set A is 86 cities (owner)
 
 - **Paris may appear in public presentation pieces** (owner, in the visuals
