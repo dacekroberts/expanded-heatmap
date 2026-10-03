@@ -4,6 +4,48 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Licence reads for the zero-reading sources: D.C. register and boundary, geo.api.gouv.fr, Dublin's NTA GTFS (owner)
+
+- **D.C. Basic Business License: PERMITTED WITH CONDITIONS (CC BY 4.0).**
+  - ArcGIS item `85bf98d3915f412c8a4de706f2d13513`. Its `licenseInfo` and
+    metadata `useLimit` say CC BY 4.0.
+  - The District's data terms and Mayor's Order 2017-115 §X say CC0
+    "unless otherwise noted". The item does note otherwise, so comply with
+    CC BY 4.0, which satisfies both.
+  - Credit the Department of Licensing and Consumer Protection, link the
+    licence, and say the data was modified. Nothing is owed. No owner call.
+- **DC Boundary: PERMITTED WITH CONDITIONS (CC BY 4.0).** Item
+  `7241f6d500b44288ad983f0942b39663` has the same CC0 note. Credit the Office
+  of the Chief Technology Officer (DC GIS), link the licence and say
+  "reprojected". It is not drawn. No owner call.
+- **geo.api.gouv.fr (26 French cities): PERMITTED WITH CONDITIONS, the
+  licence unclear.**
+  - The API declares none. The dataset it is built from ("Contours
+    administratifs", data.gouv `683424e996857155175d4f68`) says ODbL; IGN's
+    ADMIN EXPRESS says Licence Ouverte.
+  - A 2025-10-15 question to the publisher is unanswered.
+  - **Owner: show both credits:** an ODbL §4.3 notice naming "Contours
+    administratifs", and the Licence Ouverte source-and-date line. The
+    repository link discharges ODbL §4.6.
+- **Dublin's NTA GTFS: PERMITTED WITH CONDITIONS (CC BY 4.0).**
+  - The download page and data.gov.ie (`nta-gtfs`) say CC BY 4.0 and
+    prescribe: "This data is licensed under CC BY 4.0 and is attributed to
+    the National Transport Authority."
+  - The developer portal's Fair Usage Policy also claims GTFS data, with an
+    uncapped indemnity for any claim resulting from use. The download page
+    never links it.
+  - **Owner: "plain CC BY for dublin"**: the indemnity is not accepted. The
+    credit still meets the Policy's §7 as well:
+    - the NTA's sentence;
+    - the licence link;
+    - "three routes extracted and redrawn, colours this map's own";
+    - "as is";
+    - no endorsement.
+  - Link data.gov.ie rather than nationaltransport.ie (its website terms'
+    clause 5 on linking).
+- **Still running:** the CARTO basemap, and the LA County, MassGIS and
+  SANDAG boundaries. Cleanup gets every verdict's row and credit together.
+
 ### 2026-10-02 - Japan wave 2's calls settled; Chiba to R; zero-reading licences sent for reads; gaps to Cleanup (owner)
 
 - **The owner: "approve all recommendations, for 4 mark chiba to R, run the
