@@ -4,6 +4,40 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Presentation visuals: Phase 0 survey approved; public hold-outs, Entur's logo, the sampler cities (owner)
+
+- **The Phase 0 survey was approved.** Read-only, at `766abf81`, from a parse
+  of every committed map (scratch scripts, nothing in `outputs/` or `app/`).
+  - 144 cities. In every map parsed, pins equalled the first heat layer and
+    `app/ring_shares.json` `in_ring`. The second heat layer equalled
+    `ring_shares.json` `all` and `app/macro_facts.json`.
+  - Ring sets: 84 cities on [0, 0.1, 0.2, 0.3, 0.6] mi, 58 on
+    [0, 0.05, 0.1, 0.2, 0.3] mi. `docs/map_inconsistencies.md` section 6 lists
+    11, and `pipeline/new_york/config.py` still calls New York the only one.
+    Both reported, not changed.
+  - The pin row decoded as [lat, lon, name, classification index, nearest
+    station index, ring band index] (`pipeline/map_common.py`
+    `add_pin_layer`). The analytics session read it the same way.
+- **Public presentation pieces leave out every city with an open terms
+  question:** Philadelphia, Seattle (Regional), Paris, Barcelona, Dublin,
+  Washington D.C., Daegu, Den Haag, Bucharest, the nine Brazilian cities,
+  Milan and Miami (Regional). Source: `docs/licence_positions.md` and the
+  notices in `app/components.py`. Private pieces may show them. Rejected:
+  featuring them with a caveat, which would publish data whose terms are not
+  settled.
+- **Paris stays out until the site links its public repository.** Licence
+  Mobilités Art. 5.8 is discharged by that link, and Art. 11.1 ends the
+  licence on breach. Raised with the cleanup session at the owner's request;
+  staging had already passed the link to cleanup (`5813011a`).
+- **Oslo and Bergen visuals that draw Entur's data may carry Entur's logo**, an
+  exception to the no-agency-logo rule. Entur specifies its credit as "Data
+  made available by Entur" plus the logo (`docs/data_sources.md` notice 29).
+  Its conditions apply: Entur's own unaltered file
+  (`app/assets/entur/Enturlogo_Blue_RGB.svg`), on a white chip, at least
+  20 px, beside the credit text, and nothing implying endorsement (NLOD §6).
+- **The sampler uses San Diego, Toronto and Tokyo** (owner). These are three
+  of the analytics session's four pilots; Paris, the fourth, stays private.
+
 ### 2026-10-02 - Presentation visuals: OpenStreetMap credit where its data is drawn, walking minutes at 3 mph (owner)
 
 - **A presentation visual carries the OpenStreetMap credit only where
