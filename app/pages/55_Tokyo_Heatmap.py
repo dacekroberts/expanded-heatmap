@@ -61,8 +61,9 @@ st.markdown(
   and are not drawn separately.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
-- Only stations inside the 23 special wards count, because the business data covers the wards
-  alone: lines running on into Saitama, Chiba, Kanagawa and the Tama area are cut at the ward line.
+- Only stations inside the 23 special wards count, because the business data covers the wards alone:
+  lines running on into Saitama, Chiba, Kanagawa and the Tama area are cut at the ward line. The
+  stations left out are listed below.
 - The Shinkansen is not drawn, nor are the Narita Sky Access and the Saitama Railway, each with a
   single station in the wards that other lines serve.
 

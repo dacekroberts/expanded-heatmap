@@ -280,7 +280,7 @@ name at their home.
 - **"Name withheld" in place of a personal name:** Seoul (138 pins), Daegu (113),
   Busan (114).
 - **Line of business in place of an unmarked sole proprietor's name:** Taichung
-  (11,907 pins), Taoyuan (7,230), Taipei (17,890). Tbilisi (8,328 businesses registered
+  (11,907 pins), Taoyuan (7,230), Taipei (17,890). Tbilisi (8,301 businesses registered
   to a person show their category).
 - **"No shop sign":** Hong Kong (308 pins, where the licence records none).
 - **Reason:** the source has no name column, or a privacy rule.
@@ -568,7 +568,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS; gate 3 exact | 4 local authorities | 2 / 0 |
 | **Italy** | | | | | |
 | Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
-| Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 3, 5, 14, 19 bus-replaced); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
+| Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 5, 14, 19 bus-replaced; 3 running again from 2026-09-07 but not in the cached feed); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
 | Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap; gate 3 exact | Comune | 4 / 0 |
 | **France** | | | | | |
 | Paris | Métro, 16 lines + Trams T3a, T3b | RER, Transilien, other trams (T2 and T9 stubs) | IDFM GTFS | Commune | 76 / 0 |
@@ -598,7 +598,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Valenciennes (Regional) | Tram T1, Tram T2 | — | Transvilles GTFS | 13 communes served | 0 / 0 |
 | Angers | Tram A, Tram B, Tram C | — | Angers Loire Métropole GTFS | Commune | 6 / 0 |
 | **Norway** | | | | | |
-| Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries | Ruter via Entur GTFS | Kommune | 12 / 0 |
+| Oslo | T-bane 1–5 + trams 12, 13, 15, 17, 18, 19 | Ferries; tram 13 west of Thune (closed for works until about February 2027) | Ruter via Entur GTFS | Kommune | 12 / 0 |
 | Bergen | Bybanen 1 and 2 (light rail) | Ferries | Skyss via Entur GTFS | Kommune | 0 / 0 |
 | **Romania** | | | | | |
 | Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
@@ -901,7 +901,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Switzerland** | | | | | |
 | Zurich | License register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
 | **Georgia** | | | | | |
-| Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,728 / 702 / 654 | A business, not a shop: a chain appears once |
+| Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,699 / 692 / 652 | A business, not a shop: a chain appears once |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -916,7 +916,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Philadelphia | Source geometry | Newsstands mostly absent | Rental (79% of register), short-let hosts |
 | Miami (Regional) | Source coordinates | Repair/service undercount | SERVICE BUSINESS, professional, apartments, LAUNDRY MACHINE |
 | Boston | Source coordinates (state plane) | Residence check reads zero by construction | Dormitories, lodging, Common Victualler (counted via food data) |
-| Washington D.C. | Register X/Y + Census geocoder (387 of 451, 85.8%; 64 lost) | Delicatessen ambiguity | Residential rentals (61%), General Business, school cafeterias, caterers |
+| Washington D.C. | Register X/Y + Census geocoder (385 of 447, 86.1%; 62 lost) | Delicatessen ambiguity | Residential rentals (61%), General Business, school cafeterias, caterers |
 | Buffalo | Register coordinates (14 rows without a point lost) | Retail thin; possible double counts | Expired licences, caterers, sidewalk cafés, chair renters, salons at an apartment; person-named salons shown by type |
 | Sacramento | Census geocoder (98.0% of addresses matched; 125 outside the city by postal address) | "ON FILE" addresses withheld and unplaceable | Expired licences, two catch-alls, online, mobile and cottage food, individual stylists and massage technicians, repairs, apartments; person-like names shown by type |
 | Seattle (Regional) | Register coordinates; food placed by parcel (99.1%); liquor stores by street address (76.7%) | Personal services and most retail absent outside Seattle and Bellevue; lapsed Seattle licenses kept; Snohomish food list from 2025 | Seattle licenses outside the city, lapsed food with no 2025-26 inspection, Bellevue licenses issued before 2010, R1 classes, staff cafeterias, hotel kitchens, vending, clubs and food-register pharmacies by name; person-named licenses shown by category |
@@ -1081,7 +1081,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Switzerland** | | | |
 | Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
 | **Georgia** | | | |
-| Tbilisi | Register coordinates (81.0%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
+| Tbilisi | Register coordinates (80.8%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 

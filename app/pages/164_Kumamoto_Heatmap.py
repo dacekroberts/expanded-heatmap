@@ -63,7 +63,8 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Kumamoto City get rings, because the business data covers the city alone:
-  lines running on to Koshi, Kikuyo, Gyokuto and Uto are cut at the city line.
+  lines running on to Koshi, Kikuyo, Gyokuto and Uto are cut at the city line. The stations left out
+  are listed below.
 - The Shinkansen is not drawn (Kumamoto appears as a station of the lines above).
 - **Tram stops sit closer together than metro stations**, a median of 362 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).

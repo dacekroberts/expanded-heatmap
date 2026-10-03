@@ -57,8 +57,8 @@ st.markdown(
   and Ekimae tram lines, and JR Shikoku's Dosan Line.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
-- Only stations inside Kōchi City get rings, because the business data covers the city alone:
-  lines running on to Ino and Nankoku are cut at the city line.
+- Only stations inside Kōchi City get rings, because the business data covers the city alone: lines
+  running on to Ino and Nankoku are cut at the city line. The stations left out are listed below.
 - **Tram stops sit closer together than metro stations**, a median of 271 m here, so the
   rings are drawn at half the usual size (0.05 to 0.3 mi).
 

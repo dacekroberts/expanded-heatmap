@@ -577,11 +577,30 @@ verbatim, "at the site where the software application … can be accessed":
 > risk."
 
 **3. SFMTA — required, and DISPLAYED.** Its transit-data licence requires
-derivative works to include:
+derivative works to include (clause 12, "shall bear the following notice:"):
 
 > "Reproduced with permission granted by the City and County of San Francisco.
 > The information has been provided by means of a nonexclusive, limited, and
-> revocable license granted by the City and County of San Francisco."
+> revocable license granted by the City and County of San Francisco.
+>
+> The City and County of San Francisco does not guarantee the accuracy,
+> adequacy, completeness or usefulness of any information. The City and County
+> of San Francisco provides this information "as is," without warranty of any
+> kind, express or implied, including but not limited to warranties of
+> merchantability or fitness for a particular purpose, and assumes no
+> responsibility for anyone's use of the information."
+
+**Four sentences, not two (re-read 2026-10-03** on `sfmta.com/reports/gtfs-transit-data`,
+updated 2024-10-01, matching `docs/licenses/sfmta-transit-data-license-agreement.html`).
+The second paragraph sits between clause 12's colon and clause 13, so on the
+cautious reading it is part of the notice; until 2026-10-03 only the first
+paragraph was displayed. **Clause 4 adds a liability disclaimer:** "The
+Licensee shall display or include this disclaimer in any use agreement for any
+application of the Data created or provided by Licensee." The site has no use
+agreement, so one reading leaves nothing to do; the cautious reading takes
+"display" on its own, and clause 4's first sentence is displayed too, verbatim,
+after a lead-in of this project's own. Both are on San Francisco's page and the
+Required notices page.
 
 **4. LA Metro — required, and DISPLAYED.** Must acknowledge Metro as the
 provider of the transit information and must not claim ownership of it. No
@@ -627,6 +646,13 @@ surfacing both documents rather than only one:
   snapshot-based feeds;
 - **modifications** — `excluded_categories.md`, which is precisely a
   statement of what was removed and why.
+
+**DISPLAYED since 2026-10-03** on New York's page and the Required notices
+page: the three named in one notice of this project's own wording (the manual
+prescribes the content, not a sentence). Until then this item was exempt from
+the provenance check as met by the reference pages, and a numbered notice the
+site did not display passed; the exemption is gone, so every numbered notice
+here is one the site displays.
 
 **6. CTA — encouraged, not required.** If credited, use one of CTA's own
 forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
@@ -3368,6 +3394,70 @@ review time).
 - **MUST DO:** `check_personal_exposure.py shimonoseki` with its Japan pass,
   run 2026-10-03; the verdict is in `docs/decisions_drafts/japan-wave2.md`
   ("Shimonoseki built", 2026-10-03).<!-- /internal -->
+**137. DLCP and OCTO (Washington D.C.) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-03, from staging's licence reads
+of 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: both ArcGIS items, Basic Business
+  Licenses (`85bf98d3915f412c8a4de706f2d13513`, credits "Department of
+  Licensing and Consumer Protection") and Washington DC Administrative
+  Boundary (`7241f6d500b44288ad983f0942b39663`, credits "Office of the Chief
+  Technology Officer"), say "This work is licensed under a Creative Commons
+  Attribution 4.0 International License." The District's CC0 default (Mayor's
+  Order 2017-115) applies "unless otherwise noted", and these items note
+  otherwise. Rows in [`data_sources/united-states.md`](data_sources/united-states.md).
+- **MUST DISPLAY**: credit both offices, link the licence and each item, and
+  say the data was modified (the boundary: reprojected; it is not drawn).
+- **MUST NOT**: imply either office's endorsement.
+- **MUST DO**: nothing further.
+
+**138. National Transport Authority (Dublin) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-03, from staging's licence read
+of 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the feed's download page and
+  data.gov.ie (`nta-gtfs`) give CC BY 4.0 and prescribe a sentence. Rows in
+  [`data_sources/ireland.md`](data_sources/ireland.md).
+- **MUST DISPLAY**, verbatim: "This data is licensed under CC BY 4.0 and is
+  attributed to the National Transport Authority." With it: the licence link,
+  the changes (three routes extracted and redrawn; line colors this map's
+  own), "as is", and no endorsement; linked to data.gov.ie rather than
+  nationaltransport.ie, whose website terms (clause 5) govern linking.
+- **NOT ACCEPTED (owner, 2026-10-02, "plain CC BY for dublin")**: the
+  developer portal's Fair Usage Policy, which also claims GTFS data and
+  carries an uncapped indemnity. The download page never links it. The
+  displayed credit meets the Policy's §7 as well.
+
+**139. geo.api.gouv.fr, Contours administratifs and IGN (France) — required,
+and DISPLAYED** (written into `render_site_notices()` 2026-10-03, from
+staging's licence read of 2026-10-02; all 26 French cities.)
+
+- **PERMITTED WITH CONDITIONS, the licence unclear**: the API declares none;
+  the dataset it serves ("Contours administratifs", data.gouv
+  `683424e996857155175d4f68`, last updated 2025-05-05) says ODbL, and IGN's
+  ADMIN EXPRESS, which that dataset is built from, says Licence Ouverte. A
+  question to the publisher (2025-10-15) is unanswered. Rows in
+  [`data_sources/france.md`](data_sources/france.md).
+- **MUST DISPLAY (owner, 2026-10-02: both)**: the ODbL §4.3 notice naming
+  Contours administratifs, and the Licence Ouverte source-and-date line for
+  IGN's ADMIN EXPRESS.
+- **MUST DO**: ODbL §4.6 rests on the public repository, linked from every
+  page (the footer and the page header).
+
+**140. MassGIS (Boston) — displayed by choice, not required**
+(written into `render_site_notices()` 2026-10-03, from staging's licence read
+of 2026-10-02.)
+
+- **PERMITTED**: the layer's use constraints say "These data are public
+  records", and MassGIS's FAQ (read 2026-10-03) says they "can be used by
+  anyone for any purpose". Rows in
+  [`data_sources/united-states.md`](data_sources/united-states.md).
+- **DISPLAYED**: the credit the FAQ asks for on maps and applications,
+  verbatim: "MassGIS (Bureau of Geographic Information), Commonwealth of
+  Massachusetts EOTSS".
+- **MUST NOT**: present the outline as an authoritative boundary location
+  ("can only be provided by a licensed land surveyor").
+
 
 ## Gaps
 

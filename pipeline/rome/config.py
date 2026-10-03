@@ -131,7 +131,13 @@ LEFT_OUT_RELATIONS = {208013: "Metromare", 1721156: "Metromare",
                       5376334: "8 prolungato (7% of route 8's trips)",
                       5376335: "8 prolungato (7% of route 8's trips)"}
 # Trams 2, 3, 5, 14 and 19 are NOT fetched: 0 trips in the GTFS (19 is not in
-# it at all), bus-replaced during works (spec, 2026-09-27).
+# it at all), bus-replaced during works (spec, 2026-09-27). Tram 3 is the
+# exception on the street: ATAC reactivated it on 7 September 2026, Trastevere
+# to Porta Maggiore, buses still covering Porta Maggiore - Valle Giulia (ATAC's
+# tram status page, read 2026-10-03). The cached GTFS (built 2026-09-24,
+# calendar 2026-09-17 to 2026-12-06) still has 0 trips on route 3, and no tram
+# 3 relation is cached, so drawing it waits on a fresh fetch and the owner's
+# call (docs/recheck_calendar.md: the whole network is due back by 23 Nov).
 
 # OSM's colours, ATAC's brand colours (A orange, B blue, C green). B and B1
 # share one blue, and this project's check refuses two lines under Delta-E

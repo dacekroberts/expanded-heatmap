@@ -20,7 +20,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**409 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**425 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-03**
+
+- [Ridership becomes a hard line in CLAUDE.md](#2026-10-03---ridership-becomes-a-hard-line-in-claudemd)
+- [The Visuals and Analytics sessions are told whenever their inputs move (owner)](#2026-10-03---the-visuals-and-analytics-sessions-are-told-whenever-their-inputs-move-owner)
+- [Check C checks both directions with no exemption; New York's notice 5 displayed (owner-approved batch)](#2026-10-03---check-c-checks-both-directions-with-no-exemption-new-yorks-notice-5-displayed-owner-approved-batch)
+- [Notice 1's rail list gains the UK nine and nine more cities found by a scan (owner-approved batch)](#2026-10-03---notice-1s-rail-list-gains-the-uk-nine-and-nine-more-cities-found-by-a-scan-owner-approved-batch)
+- [SFMTA's notice 3 is four sentences plus clause 4's disclaimer, on the cautious reading (owner-approved batch)](#2026-10-03---sfmtas-notice-3-is-four-sentences-plus-clause-4s-disclaimer-on-the-cautious-reading-owner-approved-batch)
+- [Staging's eight licence reads written in: notices 137-140 and seven licence rows (owner-approved batch)](#2026-10-03---stagings-eight-licence-reads-written-in-notices-137-140-and-seven-licence-rows-owner-approved-batch)
+- [GitHub and LinkedIn icons in the page header, on every page (owner)](#2026-10-03---github-and-linkedin-icons-in-the-page-header-on-every-page-owner)
+- [Notice 1 names the Japanese cities' English station names; San Diego's comments name SanGIS (cleanup)](#2026-10-03---notice-1-names-the-japanese-cities-english-station-names-san-diegos-comments-name-sangis-cleanup)
+- [Staging's re-check corrections, each checked against its source (owner-approved batch)](#2026-10-03---stagings-re-check-corrections-each-checked-against-its-source-owner-approved-batch)
+- [The family wording batch: each page family made consistent with itself (owner-approved batch)](#2026-10-03---the-family-wording-batch-each-page-family-made-consistent-with-itself-owner-approved-batch)
+- [Washington D.C. drops "Beauty Booth" under the person-licence rule (owner: "drop and note")](#2026-10-03---washington-dc-drops-beauty-booth-under-the-person-licence-rule-owner-drop-and-note)
+- [Japan leftovers: the fetch's row counts, Okayama's stand-in point, the default-point threshold (owner)](#2026-10-03---japan-leftovers-the-fetchs-row-counts-okayamas-stand-in-point-the-default-point-threshold-owner)
 
 **2026-10-02**
 
@@ -96,6 +111,10 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Phase 6 deck, social and print pieces drafted](#2026-10-02---phase-6-deck-social-and-print-pieces-drafted)
 - [Phase 6 approved; QR card, poster and Phase 7 index and exports (owner)](#2026-10-02---phase-6-approved-qr-card-poster-and-phase-7-index-and-exports-owner)
 - [Visual exports moved to a dedicated visuals/ folder (owner)](#2026-10-02---visual-exports-moved-to-a-dedicated-visuals-folder-owner)
+- [City card captions regenerated from the landed notices; no card face changed](#2026-10-02---city-card-captions-regenerated-from-the-landed-notices-no-card-face-changed)
+- [Owner rulings on the visuals' open items; SFMTA disclaimer off the San Francisco card](#2026-10-02---owner-rulings-on-the-visuals-open-items-sfmta-disclaimer-off-the-san-francisco-card)
+- [Chain storefronts by ring: a private page for the four pilots](#2026-10-02---chain-storefronts-by-ring-a-private-page-for-the-four-pilots)
+- [Tbilisi: the full placeholder check run; the rule gains a five-company minimum (owner); thirteen points, 13,211 storefronts](#2026-10-02---tbilisi-the-full-placeholder-check-run-the-rule-gains-a-five-company-minimum-owner-thirteen-points-13211-storefronts)
 
 **2026-10-01**
 
@@ -16869,3 +16888,467 @@ Recorded by the cleanup session from the Main Building Session's findings of
   `scripts/check_stray_downloads.py` does not report it.
 - The index and the folder's README now name the new location.
 - Supersedes the export location in the entry below.
+
+### 2026-10-02 - City card captions regenerated from the landed notices; no card face changed
+
+- **The 129 city cards and their captions were regenerated from master at
+  `b31a65df`**, after `claude/nice-boyd-51dea8` landed. City notices now come
+  from the landed `app/components.py` `city_notices()`, not a copy from the
+  branch.
+- **Only notice 1 changed for any city**: the OpenStreetMap rail-geometry
+  text, in 68 cities' captions. It now names the 16 cities `be7d026b` added
+  to `_OSM_RAIL`. The card generator added those 16 by hand before; it now
+  only asserts they are in the landed list.
+- **No card face changed.** All 129 faces were compared before and after, so
+  the card images in `visuals/cards/` stand. Captions, the cards artifact
+  and `visuals/captions/` were refreshed.
+- **The maps on master were all re-rendered (map chrome only).** Their pin
+  data was spot-checked unchanged on San Diego, and `app/ring_shares.json`,
+  `app/macro_facts.json` and `app/cities.py` are unchanged since `13dceb1d`.
+  So every figure on every visual stands.
+- The CARTO credit and privacy line now ending the site-wide basemap notice
+  cover the overview map's basemap only. No visual draws a CARTO basemap, so
+  no caption carries it.
+
+### 2026-10-02 - Owner rulings on the visuals' open items; SFMTA disclaimer off the San Francisco card
+
+- **The SFMTA "as is" paragraph was dropped from the San Francisco card
+  face** (owner, 2026-10-02: "drop if unneeded"). Clause 4 of the stored
+  licence (`docs/licenses/sfmta-transit-data-license-agreement.html`) reads
+  "The Licensee shall display or include this disclaimer in any use agreement
+  for any application of the Data". A card is not a use agreement, so the
+  card carries notice 3 (the permission sentence) alone, the same text the
+  site shows. One card face changed (`san_francisco`); its PNG was
+  re-rendered and the cards artifact republished. Whether the site itself
+  owes the disclaimer stays with `docs/licence_positions.md` row 2.16.
+- **The Vancouver (Regional) card keeps the cautious reading** (owner
+  confirmed): notices 11, 9, 10 and 17 stay on its face.
+- **The held cities stay off the cards and public visuals until each one's
+  question is ruled on** (owner: "save these"): Seattle (Regional), Barcelona,
+  Los Angeles, Washington D.C., Daegu, Busan and the ten SEMAS-area cities.
+- **The two stale docs (`map_inconsistencies` section 6, the New York config
+  comment) stay with cleanup** (owner: "sounds good").
+- **The sampler was rebuilt from analytics' corrected Paris and Toronto
+  results.** A floating-point comparison had counted exact ring 1 and ring 2
+  density ties as "against": Paris follows 143 -> 146, against 137 -> 134;
+  Toronto follows 62 -> 63, against 46 -> 45. San Diego and Tokyo unchanged.
+
+### 2026-10-02 - Chain storefronts by ring: a private page for the four pilots
+
+- **The owner-approved chain method (analysis E, verdict H2) was charted as
+  one private page for Toronto, Tokyo, San Diego and Paris**, wording
+  approved by the owner the same day. The page carries the AI-driven
+  acknowledgement once at the top and once at the bottom. Chain share by ring
+  for each city is drawn on one shared 0-40% scale, with ±1 standard error,
+  plus each city's verdict and analytics' own reason line.
+  - Toronto: Supported, 34.8% -> 20.9%.
+  - Tokyo: Supported, 17.5% -> 10.4%.
+  - San Diego: Not computed. Its bars are dimmed and it has no density row,
+    since ring 1 holds only 6 chain locations.
+  - Paris: Not computed (62.5% of its pins are unnamed), so the page shows
+    its unnamed share by ring and no chart.
+- **Brand names never reach the page.** `chains_extract.py` replaces
+  `top_chains` and `held_out` with their counts before the generator reads
+  the data, and `gen_chains.py` refuses any brand field that survives.
+  Rejected: charting the top brands, which the owner's rule never to show
+  business names rules out.
+- Files: `visuals/generators/gen_chains.py`, `visuals/data/chains_pilots.json`,
+  `visuals/private/chains.html` (local, not committed).
+
+### 2026-10-03 - Ridership becomes a hard line in CLAUDE.md
+
+- **The CLAUDE.md ridership invariant now reads as a hard line**, in the
+  wording the owner approved on 2026-10-02 (proposed by the analytics
+  session, confirmed by the owner in this session's chat). Ridership data
+  cannot be guaranteed for every city, so there are no ridership figures, no
+  correlation with ridership and no stand-in metric for foot traffic. The
+  rule changes only for a filtered set of cities whose ridership data exists
+  and is publishable, and only with the owner's approval.
+- This supersedes the "Ridership is out of scope until asked" wording that
+  the 2026-10-02 landing (`b31a65df`) kept. The trailing "Flag scope
+  additions rather than building them" sentence was kept, since it is a
+  general rule and not part of the ridership line.
+- `docs/project_context.md`'s Scope line was rewritten to match.
+
+### 2026-10-03 - The Visuals and Analytics sessions are told whenever their inputs move (owner)
+
+- **What.** After every push to master, the pushing session runs
+  `scripts/downstream_changes.py <old master> <pushed>` and sends its output to
+  the Visuals and Analytics sessions unless it says "nothing downstream". The
+  script groups the push's changes by what those sessions build from: cities
+  added or removed (read from `app/cities.py` by ast), `outputs/<city>/`, the
+  registry, notices and credits, macro facts, category rules and taxonomies,
+  licence rows, and the shared map code and theme.
+- **Why.** The owner (2026-10-03): make rules so both sessions are updated
+  whenever information relating to their data or visualizations changes, or
+  new cities land. Neither sees master move; on 2026-10-02 both were told
+  about the notices landing by hand.
+- **Where.** `docs/session_roles.md` ("Downstream sessions"), a CLAUDE.md
+  working rule and command line, `publish-city`'s checklist, and the
+  script's selftest in `check_all.py`. The message informs and never
+  instructs: each session decides what to regenerate on its own branch.
+
+### 2026-10-03 - Check C checks both directions with no exemption; New York's notice 5 displayed (owner-approved batch)
+
+- **The gap:** check C already failed a numbered notice no `_NOTICES` entry
+  carried, but `NOT_DISPLAYED` exempted New York's 5 as "met by the About the
+  Data and What Is Excluded pages", so a numbered notice the site did not
+  display passed.
+- **The fix:** `check_notice_bijection()` holds both directions with no
+  exemption list. Its four cases (complete, a numbered notice displayed
+  nowhere, a displayed notice not numbered, a displayed notice under another
+  publisher's number) run before every check and alone with `--selftest`.
+  `check_all.py` is not this lane's file, so the cases ride on the run it
+  already makes.
+- **Notice 5 displayed** on New York's page and the Required notices page, in
+  this project's own words: the Technical Standards Manual reserves the
+  right to require source, version and modifications, and prescribes no
+  sentence. Version is the fetch date the city entry records (2026-09-21).
+
+### 2026-10-03 - Notice 1's rail list gains the UK nine and nine more cities found by a scan (owner-approved batch)
+
+- **The UK nine**, whose rail and boundaries are all OpenStreetMap
+  (`docs/data_sources/united-kingdom.md`), added to `_OSM_RAIL` and to notice
+  1's sentence as be7d026b added sixteen.
+- **A scan of every `docs/data_sources/*.md` table row** naming OpenStreetMap
+  or Overpass, against `_OSM_RAIL`, found nine more whose rail or boundary
+  comes from OSM: Stockholm (Tunnelbana, kommun boundaries), Bucharest
+  (metro, city and sector boundaries), Tbilisi (metro, city boundary), the
+  five French cities whose feeds carry no shapes (Montpellier, Strasbourg,
+  Le Havre, Caen, Rouen (Regional)), and Philadelphia (one station node,
+  11th Street, closed for works; it places a row of the excluded-stations
+  file and is not drawn).
+- **Left out on reading:** the French GTFS cities whose rows name OSM only as
+  gate 3's cross-check; Berlin, Milan, Dublin, Riga and Paris, where OSM is a
+  cross-check or explicitly not used; and the twenty Japanese cities, whose
+  rail is MLIT N02 and which take only English station names from OSM
+  (recorded as "credited by the map's OSM notice"). The Japanese names are an
+  open question for the owner: rail data in the loose sense, not geometry or
+  a boundary.
+
+### 2026-10-03 - SFMTA's notice 3 is four sentences plus clause 4's disclaimer, on the cautious reading (owner-approved batch)
+
+- **Re-read** on SFMTA's own page (`sfmta.com/reports/gtfs-transit-data`,
+  "updated" 2024-10-01), which matches the stored copy in `docs/licenses/`
+  word for word.
+- **Clause 12:** "All Data derivative versions prepared by the Licensee shall
+  bear the following notice:" is followed by TWO paragraphs before clause 13,
+  the second the "does not guarantee ... 'as is'" disclaimer. Nothing marks
+  where the notice ends, so on the cautious reading it ends at clause 13, and
+  both paragraphs are displayed verbatim. Only the first was shown before.
+- **Clause 4:** "The Licensee shall display or include this disclaimer in any
+  use agreement for any application of the Data created or provided by
+  Licensee." The Visuals session's reading: the duty attaches to a use
+  agreement, and the site has none, so licence_positions row 2.16 may have
+  overstated it. The sentence parses both ways: "display or include [it] in
+  any use agreement", or "display [it], or include it in any use agreement".
+  The second is the cautious reading, and costs one sentence; it is taken.
+  "This disclaimer" is read as clause 4's own first sentence (clause 3's
+  warranty disclaimer is covered in substance by clause 12's second
+  paragraph).
+- **What the site displays,** on San Francisco's page and the Required notices
+  page: clause 12's two paragraphs, then a lead-in of this project's own
+  ("SFMTA's license, under which this site is the Licensee, also asks for
+  this disclaimer to be displayed:") and clause 4's first sentence in quotes.
+- **Rows updated:** data_sources.md item 3, united-states.md's GTFS table,
+  licence_positions 2.16 and Appendix A's US-SFMTA entry, and the two flags
+  that named the gap.
+
+### 2026-10-03 - Staging's eight licence reads written in: notices 137-140 and seven licence rows (owner-approved batch)
+
+- **Notices, each on its own city's pages and the Required notices page:**
+  - **137, DLCP and OCTO (Washington D.C.):** CC BY 4.0 on both ArcGIS items
+    (their titles and credits re-read 2026-10-03); both offices credited, the
+    licence and each item linked, the changes said, the boundary "reprojected
+    ... not drawn".
+  - **138, National Transport Authority (Dublin):** the NTA's sentence
+    verbatim, the licence link, data.gov.ie linked (its `nta-gtfs` page
+    re-read 2026-10-03), the changes, "as is", no endorsement. The developer
+    portal's indemnity is recorded as NOT accepted (owner).
+  - **139, geo.api.gouv.fr, Contours administratifs and IGN (France),** on
+    all 26 French pages: the ODbL §4.3 notice and the Licence Ouverte
+    source-and-date line (owner: both). The date is the Contours
+    administratifs record's last update, 2025-05-05, read on data.gouv.fr
+    2026-10-03.
+  - **140, MassGIS (Boston):** requested, not required; the credit in
+    MassGIS's own FAQ words, read 2026-10-03 on mass.gov through the browser
+    pane (its server refuses plain fetches): "MassGIS (Bureau of Geographic
+    Information), Commonwealth of Massachusetts EOTSS".
+- **No credit, by the reads:** LA County Planning's boundaries (none
+  required; the row says never to call the outline a legal boundary) and
+  SanGIS's boundaries (a credit is prohibited at this scale).
+- **Rows:** united-states.md gains five licence rows (D.C.'s two, MassGIS, LA
+  County, SanGIS boundaries) and drops the SanGIS boundaries' "Terms not read"
+  row; it now names SanGIS as publisher of the boundaries and the parcels,
+  SANDAG as host. ireland.md and france.md gain a licences section each.
+  The `pipeline/san_diego/` comments that named SANDAG as publisher were
+  corrected the same day (the entry above).
+- **Numbering:** first written as 115-118, then renumbered 137-140 (cleanup,
+  2026-10-03): Japan wave 2 holds 115-128 and the four extensions 129-136,
+  both building. The claim is recorded in docs/session_roles.md's claims
+  sentence, which now carries those two pre-assignments as well: check D read
+  only that sentence, and the pre-assignments sat in the next one, so the
+  unbuilt 115-136 gap would have failed it. The check is unchanged.
+
+### 2026-10-03 - GitHub and LinkedIn icons in the page header, on every page (owner)
+
+- **The owner approved both links** (2026-10-03): the repository,
+  github.com/dacekroberts/expanded-heatmap, and the LinkedIn profile staging
+  relayed. The GitHub one also puts the repository link in the header, which
+  IDFM Art. 5.8 and ODbL §4.6 lean on; the footer link stays.
+- **Built in `set_base_font()`,** which every page calls, so no page file
+  changed: one Markdown element of inline SVG (Octicons' mark-github, MIT;
+  Simple Icons' LinkedIn glyph, CC0), no icon font, no CDN. Each link opens a
+  new tab (`rel="noopener noreferrer"`) and carries an `aria-label` saying so;
+  the SVGs are `aria-hidden`.
+- **Placed in the left end of Streamlit's header strip,** fixed, not the
+  right: run locally, Streamlit's Deploy button sits left of its menu and the
+  icons overlapped it there. The left end is empty while `MAP_ONLY_NAV` hides
+  the sidebar's expand control; turning that off brings the control back to
+  that corner (noted in the CSS).
+- **Measured in the lean venv, one local server:** at 375 and 1200 the city
+  title and the map start at the same y with and without the icons (the
+  fixed container leaves the flow), no sideways scroll at 375, and the icons
+  take the theme's text color in light (rgb 28,43,42 on white) and dark
+  (rgb 230,237,247 on rgb 11,18,32). `check_city_page_format.py` passes:
+  `set_base_font` is already in its silent set.
+
+### 2026-10-03 - Notice 1 names the Japanese cities' English station names; San Diego's comments name SanGIS (cleanup)
+
+- **Japan:** the twenty Japanese cities take their lines from MLIT N02 and
+  only their English station names from OpenStreetMap (`name:en`; every
+  Japanese row in `docs/data_sources/japan.md` says so). Notice 1's sentence
+  gains a clause for them, "the English station names, though not the lines
+  or boundaries, of Kobe, ... and Kōchi", and they sit in a list of their own,
+  `_OSM_STATION_NAMES`, beside `_OSM_RAIL`, so the rail wording stays with
+  the rail-geometry cities; notice 1's rail entry shows on both lists' pages.
+- **San Diego:** two comments in `pipeline/san_diego/config.py` and the
+  step 1 docstring named SANDAG as the boundary file's (and the parcels')
+  publisher; they now say SanGIS publishes and SANDAG hosts. Comments only,
+  so no step was re-run and no drift check was run.
+
+### 2026-10-03 - Staging's re-check corrections, each checked against its source (owner-approved batch)
+
+- **Prague's Flora: about the end of February 2027**, not December 2026
+  (expats.cz quoting DPP, 2026-08-23, read 2026-10-03). Page sentence,
+  `config.FLORA_REASON` (so the excluded-stations row the page lists), the
+  config comment, and `docs/project_context.md`, which still said Flora was
+  drawn. Prague's step 1 re-run from the cached feed for the new reason.
+  PLAN.md's date is cleanup's.
+- **Amsterdam's tram 3 was discontinued on 29 March 2026**, not paused
+  (mobiliteit.nl, 2026-03-26, read 2026-10-03: GVB "Zo vervalt tram 3
+  volledig"; GVB's own pages answer 403). Page, What Is Excluded, About the
+  Data and config reworded. No map change: it was never drawn.
+- **Oslo's tram 13 west of Thune is closed for works**: Sporveien closed
+  Thune - Lilleaker from 10 June 2026, overhead-line work to February 2027
+  (sporveien.no, read 2026-10-03). The 2026-09-24 feed already runs 13
+  Ljabru - Thune, so the map was drawn as the timetable runs and does not
+  change. Added: the page sentence, What Is Excluded, the map-inconsistencies
+  row, and a step-1 guard that STOPS once a rail trip calls at Hoff,
+  Abbediengen, Ullern or Furulund again. **Not done, as the precedent asks:
+  listing the closed stops in `excluded_stations.csv`.** Sollerud (on
+  Lilleakerbanen per no.wikipedia) is not in the cached stops.txt at all, and
+  Lilleaker's tram quays cannot be told from its bus quays there; a fresh
+  feed or OSM read is needed, which this lane may not fetch.
+- **Rome's tram 3: reactivated 7 September 2026**, Trastevere - Porta
+  Maggiore (ATAC's tram status page, read 2026-10-03; 2, 5, 14 and 19 still
+  bus-replaced). **No map change**: the cached Roma Mobilità GTFS (built
+  2026-09-24, calendar 2026-09-17 to 2026-12-06) still has 0 trips on route
+  3, and no tram 3 relation is cached. Config comment and the
+  map-inconsistencies row corrected; drawing it waits on a fetch and the
+  owner's call (recheck calendar: the whole network back by 23 November).
+- **Denmark: DAWA closed on 1 October 2026**; it answered 410 Gone on
+  2026-10-02 and 2026-10-03. Tense fixed in `docs/data_sources/denmark.md`
+  (two places) and `docs/project_context.md`.
+- **`docs/gated_access.md` item 12**: "Follow-up due 2026-09-28" becomes
+  "Followed up 2026-09-28", no reply, next step the owner's (PLAN.md's record).
+- **Not done here, by ownership:** D.C.'s config sentence (lane-cats owns
+  `pipeline/washington_dc/`); Seoul's Wirye note, which lives only in PLAN.md
+  (cleanup's).
+
+### 2026-10-03 - The family wording batch: each page family made consistent with itself (owner-approved batch)
+
+- **Tram pages (ten):** the in-ring share split 5-5 (last under The
+  businesses on Odense, Daugavpils, Liepāja, Göteborg and Den Haag; last
+  under Reading the density on Kansas City, New Orleans, Tucson, Florence and
+  Zurich). **No majority, so the tram-city skill's template decides**: last
+  under The businesses, on all ten. New Orleans's share led its band bullet;
+  the share moves and the band sentence stays under Reading the density. Den
+  Haag's third heading "Reading the map" becomes "Reading the density", as on
+  the other nine. The skill's template note now says all ten match.
+- **Japanese pages:** the no-general-license sentence is in parentheses on 17
+  of 20 pages; Kobe, Osaka and Sapporo move from dashes to the majority form.
+  **Kobe's "The city notes that premises which have closed may still be
+  listed" stays**: it is Kobe's own statement (「既に廃業している施設が含まれる
+  場合があります。」, the dataset page, read 2026-10-03), which the build
+  brief's MUST NOT already relies on.
+- **"Listed below" on the Japanese pages** (`docs/city_page_format.md` item
+  6): every Japanese city has stations left out for lying outside it, and no
+  page pointed to the list. The cut-at-the-city-line bullet gains "The
+  stations left out are listed below." on 17 pages. **Fukui, Toyama and
+  Okayama are lane-cats' files and were not touched**; cleanup applies the
+  same sentence there after the merge. The japan-city skill's template
+  carries it.
+- **Taichung**: "Taiwan Railway and high-speed rail services are not drawn"
+  becomes "... high-speed rail are not drawn", as Taoyuan's.
+- **About the Data, 20 cells**: `outputs/<city>/excluded_stations.csv`
+  becomes "listed on the city's page", to match What Is Excluded (owner,
+  2026-10-02). Prague's cell, which said its file "is written EMPTY", was
+  wrong since Flora was listed (2026-09-29) and now says none is left out for
+  its location and Flora is listed on the city's page. Calgary, Ottawa,
+  Kitchener-Waterloo and Palma still say "`excluded_stations.csv` is written
+  empty"; not in the batch, left for the owner.
+- **What Is Excluded, five `excluded_premises.csv` pointers** (Minneapolis,
+  Pittsburgh, Kitchener-Waterloo, Palma, Ottawa): no page shows those rows,
+  so the pointer is dropped rather than reworded; each list's lead now ends
+  at its count or heading.
+- **Palma's food sentence, broken by the prose pass** (18e4ecc7 left the old
+  "(R5)" line beside the new one and dropped the end): restored to the
+  approved "A premises is shown when the register lists it as active in Palma
+  (4,372 of 4,375; 3 are temporarily closed)."
+
+### 2026-10-03 - Washington D.C. drops "Beauty Booth" under the person-licence rule (owner: "drop and note")
+
+- **The owner ruled on the one pending departure the person-licence rule
+  found** (2026-10-02, "A category rule for a person's own license"): D.C.'s
+  "Beauty Booth" (6 licence rows, a chair rented inside a salon) leaves
+  Personal services.
+  - `pipeline/taxonomies/dc_businessactivity.py`: moved from
+    `PERSONAL_SERVICES` to `EXCLUDED`, with the rule as its reason.
+  - `scripts/category_continuity_table.py`: the pending cell is now
+    `fixed(...)`, so the check enforces "out"; `AWAITING_OWNER` is empty.
+- **"Note":** one sentence in D.C.'s section of
+  `docs/excluded_categories.md`. The city page names only General Business
+  and the residential rentals among its exclusions, so it gains no sentence.
+- **Measured on the re-run (steps 2 to 4):** 5,269 to 5,265 premises after
+  dedup; 5,207 to 5,203 pins (Personal services 501 to 497); 3,845 within a
+  ring. The 6 rows sit at 5 sites, and **only 1 of the 5 keeps another salon
+  or barber pin**; the other 4 leave the map with the licence.
+- **The geocoder cache was re-keyed, not re-fetched.** Step 2 renumbers
+  `record_id` after dedup, so dropping one un-geocoded booth row changed the
+  Census batch's payload and so its cache key. Each response line answers one
+  input address, so the cached response for the old payload (448 rows,
+  `batch_000_9bd4f1b831.csv`) was re-keyed to the new ids by identical input
+  address: 447 of 447 matched, and the one old row with no new row is the
+  dropped booth (450 L'Enfant Plz SW). Written as `batch_000_422667ddd6.csv`;
+  step 3 then ran offline (`HEATMAP_NO_NETWORK=1`). Census matched 385 of
+  447; 62 unplaced.
+- **The page's geocoder sentence corrected to 385 and 62**: it still said
+  387 and 64, the 2026-09-21 build's figures (of 451), already stale before
+  this change.
+- **Privacy check re-run (`check_personal_exposure.py washington_dc`):
+  unchanged.** 0 emails, phones or care-of markers; 14 sole-proprietor
+  person-like pins of 3,845 (0.36%); 0 at a residential unit. The verdict row
+  in `docs/privacy_verdicts.md` needs no change.
+
+### 2026-10-03 - Japan leftovers: the fetch's row counts, Okayama's stand-in point, the default-point threshold (owner)
+
+- **The owner approved the shared fix for the recorded row counts.**
+  `japan_fetch.fetch_city` counted every file with `city_rows(dest)`'s
+  default reading. The Japan lead's suggestion was to count through
+  `config.source_rows` wherever a city defines one. **Measured on every
+  Japanese city first, that would have changed five other cities' counts**,
+  because their `source_rows` rebuilds or filters a register rather than
+  reading one file:
+  - Kitakyushu food 3,383 to 2,417 and Matsuyama's MHLW file 11,575 to 4,205
+    (filtered);
+  - Sakai's standing list 10,123 to 10,087 (the rebuilt register) and its ten
+    monthly files to 0;
+  - Kochi's and Tokyo's per-file keys are not `source_rows` keys at all
+    (KeyError).
+  - **Built instead:** an opt-in hook, `config.file_rows(key)`, "a file's
+    rows as the city reads that file". `fetch_city` uses it for the count and
+    the REQUIRED_COLUMNS check where a city defines it. Fukui and Toyama alias
+    it to their `source_rows`, which each read one file as it stands. No
+    other city defines it, so no other city's count can change.
+- **Fukui's counts corrected without a download.** `fetch_sources.py city`
+  keeps a file already on disk and re-records it, so it was re-run with
+  `HEATMAP_NO_NETWORK=1`:
+  - food 52,021 to 4,333, barber 3,257 to 268, beauty 9,432 to 788, laundry
+    3,058 to 253: the newest sheet's rows, not all twelve sheets';
+  - bytes, sha256, `how` and `retrieved` unchanged.
+- **Toyama's recorded counts were already right.** Reading with and without
+  `merged_header` gives the same row counts (5,616, 372, 1,052, 235, and
+  MHLW's 8,168), so its provenance is unchanged. Only its header check now
+  reads the way step 2 does.
+- **Every other Japanese city checked:** the recorded count equals the
+  default reading for all of them. Kyoto records through its portal path,
+  Yokohama through its own `fetch_city`, and Sapporo's provenance holds no
+  city files. None changes.
+- **Fixed in passing:** `record()` wrote `provenance.json` in text mode (CRLF
+  on Windows); it now writes bytes.
+- **Okayama's sentence (owner: approved),** verified first in memory against
+  the cached data (`japan_step2.run(write=False)`): 16 rows unplaced, 13 of
+  them on the one point MHLW gives to filings in 13 different towns
+  (34.6671, 133.9471 to 4 places), 0 of the 2 town-center rows. Added to the
+  "Not placed" line of Okayama's What Is Excluded section, the section the
+  proposal named; the page itself carries no unplaced count.
+- **The default-point guard stays at 3 or more towns (owner: "OK as is").**
+  Kitakyushu's 9 pins on points shared by fewer than 3 towns stay on the map.
+  No code change.
+
+### 2026-10-02 - Tbilisi: the full placeholder check run; the rule gains a five-company minimum (owner); thirteen points, 13,211 storefronts
+
+- **The full register pull ran** (owner, 2026-10-02, after the landing at
+  `e4af1c4d`): 63,511 active rows in 32 pages of 2,000, about 70 minutes,
+  peak 0.18 GB, each company's numbered factual address kept only as a
+  12-hex hash. The build had skipped it and run a bounded check (the
+  previous drafts, folded at the landing).
+- **The rule as approved found 25 points**, the eleven listed plus 14 new.
+  Read and measured, twelve of the 14 were not placeholders: a tie among
+  one-off addresses (the "commonest" bare name held by 1 to 3 companies),
+  a street written without a house number (Kazbegi Avenue, Chavchavadze,
+  Javakhishvili, Khosharauli, Tsinamdzghvrishvili), the Eliava market (4
+  companies) or the airport (4). The test reads "no digit" as "bare", which
+  a street name without a number passes.
+- **The owner's call (2026-10-02, recommended)**: the commonest bare
+  district or settlement name, or blank, must be shared by **at least five
+  of the point's companies**, and a person reads the name (a district or
+  settlement goes in `PLACEHOLDER_POINTS`, a street, market or other real
+  place in `NOT_PLACEHOLDERS`; step 2 exits on a candidate in neither and on
+  a listed point no longer a candidate). Tbilisi is the only city with this
+  problem, so no precedent applies.
+- **With the minimum, 12 candidates**: ten of the listed eleven plus
+  **Samgori** (41.6813, 44.859586: "სამგორი", 5 of 22 companies, 17
+  storefronts, 631 m from Samgori station) and **a blank point**
+  (41.695453, 44.796282: 13 of 41 companies, 24 storefronts, 373 m from
+  Liberty Square), both added.
+- **Krtsanisi (41.613415, 44.908357), listed at Step 0 and approved with the
+  ten, does not reach the minimum** and is kept by reading
+  (`PLACEHOLDERS_BY_READING`): 50 of its 66 companies give 50 DIFFERENT
+  street addresses on the one point, and the rest write the village name
+  Ponichala seven ways, so no single name reaches five; a centroid all the
+  same. 9.2 km from the nearest station, so no ring is affected. The lead's
+  claim to the owner that the minimum "leaves exactly 13" had checked only
+  the new points; it holds with this one point kept by reading.
+- **Counts**: thirteen points, 1,522 storefronts left off (was 1,481 on
+  eleven); **13,211 placed (80.8%)** (was 13,252): Retail 11,085, Food
+  service 1,064, Personal services 1,062. 8,043 (61%) within 0.6 mi of a
+  station: 6,699 / 692 / 652. Category only (individual entrepreneurs)
+  8,301; company names 4,910.
+- **Privacy re-checked** (`check_personal_exposure.py tbilisi`): 0
+  individual entrepreneurs shown by name of 8,301; 148 company names read as
+  a person's full name, 147 with their legal form. The verdict stands:
+  publish.
+- **Updated**: the config's rule and lists, step 2 (the full check only; a
+  cache without the address key exits naming the fetch), the map, ring
+  share, macro facts, the inconsistency rows, About the Data (the "checked
+  in part" disclosure removed, the check now complete), What Is Excluded
+  (the rule's wording), the master list, PLAN and `app/cities.py`'s
+  placement figure. Drift check run and the baseline re-recorded.
+- **The shared cache, and a mistake corrected the same day.** The `--force`
+  re-pull replaced the raw file master reads (`.build.csv`), and the run on
+  this branch wrote `data/tbilisi/processed`, which every checkout shares:
+  master's `check_macro_facts` then read 13,211 against its 13,252 and
+  blocked every session's push (Cleanup, 2026-10-02). Restored: the keyed
+  pull is kept as `.keyed.csv`, which this branch now reads; master's
+  `.build.csv` was rewritten from it with master's `factual_address_bare`
+  column (the same derivation the build's pull used; the same register, same
+  day, 63,511 rows); master's own step 2, run from a checkout of
+  `origin/master`, reproduced 13,252, and `check_macro_facts` and
+  `check_ring_shares` passed there. **This branch's drift baseline is not
+  recorded**: recording it writes the shared processed folder, so it waits
+  for the branch to land (then: `drift_check.py tbilisi --update-baseline`).
+  Lesson: a branch whose step writes `data/<city>/processed` must not run it
+  before it lands, even for its own city; and a re-pull goes under a new
+  file name, never over the one master reads.

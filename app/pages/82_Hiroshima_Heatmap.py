@@ -56,8 +56,8 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Hiroshima City get rings, because the business data covers the city alone:
-  lines running on to Hatsukaichi, Fuchu, Kaita, Saka and Higashihiroshima are cut at the city
-  line.
+  lines running on to Hatsukaichi, Fuchu, Kaita, Saka and Higashihiroshima are cut at the city line.
+  The stations left out are listed below.
 - The Shinkansen is not drawn.
 - **Tram stops sit closer together than metro stations**, a median of 357 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).

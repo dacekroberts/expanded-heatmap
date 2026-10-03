@@ -83,6 +83,7 @@ st.markdown(
   the map shows the name the business trades under.
 - **The license data dates from 15 January 2026**, and holds licenses valid for 2025 and 2026.
   Businesses that opened since then are missing, and any that closed may still be shown.
+- **About one storefront in eight sits within a ring.**
 
 **Reading the density**
 
@@ -92,7 +93,6 @@ st.markdown(
   with no shop at all, and nothing in the data says which.
 - **It holds few restaurants and bars**, about 175 across the whole city, so food service is far
   thinner here than on most maps.
-- **About one storefront in eight sits within a ring.**
 """
 )
 

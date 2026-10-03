@@ -106,6 +106,7 @@ st.markdown(
 - A clothes shop, a bookshop or a bakery that sells no alcohol needs no such license and is
   absent, so read the Licensed shops layer as a slice of the city's retail, not all of it.
 - The register holds no hairdressers, beauty salons or other personal services.
+- **About nine storefronts in ten sit within a ring.**
 
 **Reading the density**
 
@@ -114,7 +115,6 @@ st.markdown(
   clubhouses; about one food license in thirty is of this kind, and they remain.
 - Likewise, a few shop licenses belong to offices and online sellers with no shop.
 - Several premises often share one address, and each is counted.
-- **About nine storefronts in ten sit within a ring.**
 """
 )
 

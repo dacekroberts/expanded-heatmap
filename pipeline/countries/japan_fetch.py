@@ -14,7 +14,15 @@ its config:
   * ISJ_DIR, STATION_OSM_JSON, OSM_BBOX, OUTPUTS, PROVENANCE_JSON;
   * TRAM_OSM_JSON only if N02 draws a tram there: OSM tags its stops
     railway=tram_stop, which the station query does not take (Osaka's Hankai
-    line, Sapporo's streetcar, Tokyo's Arakawa Line).
+    line, Sapporo's streetcar, Tokyo's Arakawa Line);
+  * file_rows(key) where city_rows' default reading of a file is not the
+    city's: the rows that file's recorded count and REQUIRED_COLUMNS check
+    use. Fukui reads only the newest of twelve month-end sheets (the default
+    counted all twelve: food 52,021 for 4,333) and Toyama reads with
+    merged_header. Only a reader of ONE file as it stands qualifies: a
+    source_rows that rebuilds or filters a register (Sakai, Kochi, Tokyo,
+    Kitakyushu, Matsuyama) would record the register's count, not the
+    file's, so it is never aliased here (DECISIONS 2026-10-03, lane-cats).
 
 A file already on disk is kept and recorded, dated by its modification time;
 --force re-downloads. Each file goes into outputs/<slug>/provenance.json
@@ -44,8 +52,9 @@ def record(config, key, **fields):
     if config.PROVENANCE_JSON.exists():
         prov = json.loads(config.PROVENANCE_JSON.read_text(encoding="utf-8"))
     prov[key] = fields
-    config.PROVENANCE_JSON.write_text(json.dumps(prov, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
-                                      encoding="utf-8")
+    # Bytes, so the committed file stays LF on Windows (text mode wrote CRLF).
+    config.PROVENANCE_JSON.write_bytes(
+        (json.dumps(prov, indent=2, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"))
 
 
 def sha256(path):
@@ -169,12 +178,15 @@ def current_url(config, key, url, page):
 def fetch_city(config, force):
     if hasattr(config, "PORTAL_RESOURCES"):
         return fetch_portal(config, force)
+    # A file's rows as the city reads that file (config.file_rows, see the
+    # docstring), else city_rows' default reading.
+    file_rows = getattr(config, "file_rows", None)
     for key, (name, url, page) in config.SOURCE_FILES.items():
         dest = config.source_csv(key)
         if force or not dest.exists():
             url = current_url(config, key, url, page)
         how = get(url, dest, force)
-        rows = list(japan_register.city_rows(dest))
+        rows = list(file_rows(key) if file_rows else japan_register.city_rows(dest))
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]
         if missing:
             sys.exit(f"{dest.name}: header lacks {missing} - not the file the brief read")

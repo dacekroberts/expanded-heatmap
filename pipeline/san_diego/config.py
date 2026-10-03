@@ -95,8 +95,9 @@ OPERATOR_COUNTS_SOURCE = (
     "MTS's own line pages (sdmts.com) give termini, not station lists."
 )
 
-# City boundary name to filter Municipal_Boundaries.geojson (SANDAG
-# regional layer, covers all San Diego County municipalities) down to.
+# City boundary name to filter Municipal_Boundaries.geojson (SanGIS's
+# municipal boundaries, hosted by SANDAG; covers all San Diego County
+# municipalities) down to.
 CITY_BOUNDARY_NAME = "SAN DIEGO"
 
 # --- Business filtering ------------------------------------------------
@@ -165,7 +166,7 @@ SAN_DIEGO_BBOX = {
 # result. Step 0 on 2026-09-21 found it is in fact the best-equipped of the
 # three cities that needed this.
 #
-# SANDAG/SanGIS publish ONE countywide parcel layer (1,089,758 polygons), so
+# SanGIS publishes ONE countywide parcel layer, hosted by SANDAG (1,089,758 polygons), so
 # the geographically split Parcels_South/_North/_East siblings are not needed.
 PARCEL_SERVICE_URL = (
     "https://geo.sandag.org/server/rest/services/Hosted/Parcels/"

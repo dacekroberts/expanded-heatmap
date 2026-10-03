@@ -2,8 +2,8 @@
 actually within San Diego city limits.
 
 Input:  data/san_diego/raw/gtfs.zip                  (MTS GTFS feed)
-        data/san_diego/raw/municipal_boundaries.geojson  (SANDAG regional
-                                                           municipal boundaries)
+        data/san_diego/raw/municipal_boundaries.geojson  (SanGIS municipal
+                                                           boundaries, hosted by SANDAG)
 Output: data/san_diego/processed/stations.csv
         outputs/san_diego/excluded_stations.csv   (audit record)
 

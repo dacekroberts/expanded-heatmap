@@ -67,8 +67,8 @@ st.markdown(
 - **Some pins were placed from their address rather than the register.** The published latitude
   and longitude are unusable (literally 39 and -77 on every row), and the register's real
   coordinates are missing on about 7% of these premises.
-- Those were located from their street addresses with the Census Bureau's geocoder: 387 premises,
-  each checked to fall inside the District's boundary. 64 could not be placed and are absent.
+- Those were located from their street addresses with the Census Bureau's geocoder: 385 premises,
+  each checked to fall inside the District's boundary. 62 could not be placed and are absent.
 - **A limit of the privacy check.** This project checks whether a published name could be a
   person's name at their own home. Washington's addresses carry almost no apartment or suite
   numbers, so the check has little to read: its zero is a gap in the measurement, not a proven

@@ -52,7 +52,8 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Kobe City get rings, because the business data covers the city alone: lines
-  running on to Ashiya, Akashi, Sanda and Miki are cut at the city line.
+  running on to Ashiya, Akashi, Sanda and Miki are cut at the city line. The stations left out are
+  listed below.
 - The Shinkansen is not drawn (Shin-Kobe appears as a subway station), nor are the Maya and Rokkō
   cable cars, sightseeing lines up the mountain.
 
@@ -60,9 +61,9 @@ st.markdown(
 
 - From Kobe City's list of food-business permits (all permits in force at the end of March 2026)
   and its registers of barbers, beauty salons and laundries.
-- Japan has no general business license, so shops other than food shops — clothing, electronics,
-  pharmacies — do not appear: the Food shops layer is food retail only (bakeries and
-  confectioners, delis, butchers and fishmongers).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
 - Food businesses that only notify the city rather than hold a permit, such as many convenience
   stores and greengrocers, are not in the list.
 - The city notes that premises which have closed may still be listed, so a dot means a permit on

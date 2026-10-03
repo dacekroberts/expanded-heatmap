@@ -55,6 +55,7 @@ st.markdown(
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Fukuoka City get rings, because the business data covers the city alone: JR
   and Nishitetsu lines running on to Itoshima, Kasuya, Kasuga and Ōnojō are cut at the city line.
+  The stations left out are listed below.
 - The Hakata-Minami line, whose only station in the city is Hakata, is not drawn.
 
 **The businesses**

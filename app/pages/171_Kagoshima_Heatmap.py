@@ -59,8 +59,9 @@ st.markdown(
 - The city tram's two routes are drawn as one line.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
-- Only stations inside Kagoshima City get rings, because the business data covers the city alone:
-  JR lines running on to Hioki, Aira and Ibusuki are cut at the city line.
+- Only stations inside Kagoshima City get rings, because the business data covers the city alone: JR
+  lines running on to Hioki, Aira and Ibusuki are cut at the city line. The stations left out are
+  listed below.
 - The Shinkansen is not drawn (Kagoshima-Chuo appears as a JR station).
 - **Tram stops sit closer together than metro stations**, a median of 272 m here, so the rings are
   drawn at half the usual size (0.05 to 0.3 mi).
