@@ -228,6 +228,12 @@ TEXT_WIDTH = {
     "Matsuyama": 79.0, "Toyama": 52.2, "Kumamoto": 72.2, "Fukui": 36.2, "Nagasaki": 61.1,
     "Utsunomiya": 81.3, "Kitakyushu": 76.3, "Sakai": 36.0, "Hakodate": 64.1, "Kagoshima": 73.8,
     "Okayama": 61.7, "Kōchi": 37.6,
+    # Japan wave 2, 2026-10-03, the same method; controls Houston, Odense,
+    # Kansas City, Hiroshima, Yokohama, Ottawa, Toronto and Kōchi, each
+    # reproduced to 0.1 px.
+    "Kawasaki": 62.6, "Yokosuka": 63.7, "Himeji": 40.3, "Nishinomiya": 82.1, "Takamatsu": 72.8,
+    "Toyota": 46.9, "Yokkaichi": 63.8, "Ōtsu": 31.8, "Nara": 30.8, "Hamamatsu": 79.2,
+    "Higashiōsaka": 89.1, "Kurume": 51.3, "Sasebo": 49.5, "Shimonoseki": 85.5,
     # Dallas, 2026-09-30; controls Prague, Tokyo, Houston, Toronto, Yokohama.
     "Dallas": 40.1,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,

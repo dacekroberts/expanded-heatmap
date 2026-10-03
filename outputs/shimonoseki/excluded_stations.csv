@@ -1,0 +1,10 @@
+station,lines,reason,latitude,longitude
+門司,JS,"in 北九州市門司区, outside 下関市 (the permit list covers the city only)",33.90435546949552,130.9324142618388
+埴生,JS,"in 山陽小野田市, outside 下関市 (the permit list covers the city only)",34.04932000000235,131.08647
+宇賀本郷,JN,"left out: the San'in Line beyond Kogushi runs 11 trains a day each way on weekdays, far below the 15-minute test (owner, 2026-10-02)",34.22733000053431,130.92756500000002
+湯玉,JN,"left out: the San'in Line beyond Kogushi runs 11 trains a day each way on weekdays, far below the 15-minute test (owner, 2026-10-02)",34.209035287983106,130.9327133001023
+滝部,JN,"left out: the San'in Line beyond Kogushi runs 11 trains a day each way on weekdays, far below the 15-minute test (owner, 2026-10-02)",34.283945002106215,130.946615
+特牛,JN,"left out: the San'in Line beyond Kogushi runs 11 trains a day each way on weekdays, far below the 15-minute test (owner, 2026-10-02)",34.30583000148856,130.91893
+長門二見,JN,"left out: the San'in Line beyond Kogushi runs 11 trains a day each way on weekdays, far below the 15-minute test (owner, 2026-10-02)",34.25161732144122,130.91479411896483
+長門粟野,JN,"left out: the San'in Line beyond Kogushi runs 11 trains a day each way on weekdays, far below the 15-minute test (owner, 2026-10-02)",34.357385001582244,130.97008500000004
+阿川,JN,"left out: the San'in Line beyond Kogushi runs 11 trains a day each way on weekdays, far below the 15-minute test (owner, 2026-10-02)",34.33596218557096,130.92597689981807

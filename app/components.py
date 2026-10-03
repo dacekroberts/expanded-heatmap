@@ -581,6 +581,9 @@ _OSM_STATION_NAMES = (
     "Hiroshima", "Matsuyama", "Toyama", "Kumamoto", "Fukui", "Nagasaki",
     "Utsunomiya", "Kitakyushu", "Sakai", "Hakodate", "Kagoshima", "Okayama",
     "Kōchi",
+    # Japan wave 2 (2026-10-03)
+    "Kawasaki", "Yokosuka", "Himeji", "Nishinomiya", "Takamatsu", "Toyota", "Yokkaichi", "Ōtsu", "Nara",
+    "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -2047,6 +2050,278 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Kōchi and MLIT did not make "
      "and do not endorse this map.",
      False, ("Kōchi",)),
+    # Kawasaki (notice 115): the city's two datasets under its 利用規約 §2 (CC BY
+    # 2.1 JP) and the pages' CC BY 4.0 badge, in the 規約's form for a modified
+    # work, naming both versions (owner, 2026-10-02); MLIT as in Kobe's, N02 in
+    # its 2025 edition. Written from Sakai's and Kōchi's approved wording under
+    # the owner's pre-approval of template prose (2026-09-30).
+    Notice(115, "Kawasaki City and MLIT (Kawasaki)",
+     "Kawasaki's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設一覧、川崎市、クリエイティブ・コモンズ・ライセンス 表示 "
+     "[2.1](https://creativecommons.org/licenses/by/2.1/jp/) / [4.0](https://creativecommons.org/licenses/by/4.0/)"
+     "（[https://www.city.kawasaki.jp/350/page/0000093741.html](https://www.city.kawasaki.jp/350/page/0000093741.html)）; "
+     "環境衛生関係営業に関する情報、川崎市、クリエイティブ・コモンズ・ライセンス 表示 "
+     "[2.1](https://creativecommons.org/licenses/by/2.1/jp/) / [4.0](https://creativecommons.org/licenses/by/4.0/)"
+     "（[https://www.city.kawasaki.jp/350/page/0000120745.html](https://www.city.kawasaki.jp/350/page/0000120745.html)）. "
+     "(This map modifies the City of Kawasaki's lists of food-business permits and of barbers, beauty "
+     "salons and laundries as of 31 August 2026: this project selected the storefront types, placed each "
+     "by its address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Kawasaki and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Kawasaki",)),
+    # Yokosuka (notice 116): the city's BODIK datasets, CC BY 4.0 under the
+    # catalogue's terms 第１条, in the brief's attribution (no form prescribed);
+    # no logo (第３条), no completeness claim (第４条1). MLIT as in Kobe's, N02 in
+    # its 2025 edition. Written from Kawasaki's and Kōchi's approved wording under
+    # the owner's pre-approval of template prose (2026-09-30).
+    Notice(116, "Yokosuka City and MLIT (Yokosuka)",
+     "Yokosuka's businesses: 「【横須賀市】食品営業許可施設公開情報 （食品営業許可を取得している全施設）」"
+     "（営業許可を取得している全施設　2026年8月末現在）"
+     "（[https://data.bodik.jp/dataset/142018_00_18_syokuhin_all](https://data.bodik.jp/dataset/142018_00_18_syokuhin_all)）、"
+     "「【横須賀市】環境衛生関係営業施設公開情報」の理容所一覧、美容所一覧、クリーニング所（一般店）一覧、クリーニング所（取次店）一覧"
+     "（[https://data.bodik.jp/dataset/142018_00_19_environmental_sanitation_facilities](https://data.bodik.jp/dataset/142018_00_19_environmental_sanitation_facilities)）、"
+     "横須賀市、クリエイティブ・コモンズ・ライセンス 表示4.0国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）を加工して作成. "
+     "(This map modifies the City of Yokosuka's lists of food-business permits and of barbers, beauty "
+     "salons and laundries as of 31 August 2026: this project selected the storefront types, placed each "
+     "by its address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Yokosuka and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Yokosuka",)),
+    # Himeji (notice 117): the city's four CKAN datasets, CC BY 4.0 (each
+    # record's license_id; the catalogue's terms 1.4(1)), in the terms' 1.1
+    # form per dataset; not presented as the city's own (1.1 ２). MLIT as in
+    # Kobe's, N02 in its 2025 edition. Written from Kōchi's and Kawasaki's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30).
+    Notice(117, "Himeji City and MLIT (Himeji)",
+     "Himeji's businesses: 出典：「食品営業許可施設一覧」（姫路市）"
+     "（[https://city.himeji.gkan.jp/gkan/dataset/shokuhinn](https://city.himeji.gkan.jp/gkan/dataset/shokuhinn)）を加工して作成、"
+     "「理容所一覧」（姫路市）（[https://city.himeji.gkan.jp/gkan/dataset/riyousyo](https://city.himeji.gkan.jp/gkan/dataset/riyousyo)）を加工して作成、"
+     "「美容所一覧」（姫路市）（[https://city.himeji.gkan.jp/gkan/dataset/biyousyo](https://city.himeji.gkan.jp/gkan/dataset/biyousyo)）を加工して作成、"
+     "「クリーニング所一覧」（姫路市）（[https://city.himeji.gkan.jp/gkan/dataset/kuriininngu](https://city.himeji.gkan.jp/gkan/dataset/kuriininngu)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Himeji's lists of food-business permits and of barbers, beauty "
+     "salons and laundries as of 10 September 2026: this project selected the storefront types, placed each "
+     "by its address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Himeji and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Himeji",)),
+    # Nishinomiya (notice 118): the city's five portal datasets under PDL 1.0
+    # (the portal's terms 第1), in PDL's 1.1 form per dataset naming the
+    # processor; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Kōchi's and Toyama's approved wording under the owner's pre-approval of
+    # template prose (2026-09-30).
+    Notice(118, "Nishinomiya City and MLIT (Nishinomiya)",
+     "Nishinomiya's businesses: 出典：「食品営業許可施設」（西宮市）"
+     "（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=9](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=9)）、"
+     "「理容所情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=49](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=49)）、"
+     "「美容所情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=50](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=50)）、"
+     "「クリーニング所（一般）情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=67](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=67)）、"
+     "「クリーニング所（取次）情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=68](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=68)）を加工して作成. "
+     "Processed by this project, which selected the storefront types from the City of Nishinomiya's list of "
+     "food-business permits as of 31 August 2026 and its registers of barbers, beauty salons and laundries "
+     "of September 2026, placed each by its address, and counted them around stations. The lists may "
+     "include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Nishinomiya and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Nishinomiya",)),
+    # Takamatsu (notice 119): the city's four lists, CC BY 4.0 under its
+    # open-data terms 第１条, in the brief's attribution (no form prescribed);
+    # MHLW's notifications (PDL 1.0) as in Matsuyama's; MLIT as in Kobe's, N02
+    # in its 2025 edition. Written from Matsuyama's approved wording under the
+    # owner's pre-approval of template prose (2026-09-30).
+    Notice(119, "Takamatsu City, MHLW and MLIT (Takamatsu)",
+     "Takamatsu's businesses: 出典：「食品等営業許可施設一覧」「理容所新規開設一覧」「美容所新規開設一覧」"
+     "「クリーニング所新規開設一覧」（高松市）"
+     "（[https://opendata.smartcity-takamatsu.jp/odp/](https://opendata.smartcity-takamatsu.jp/odp/)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Takamatsu's list of food-business permits and its registers of barbers, "
+     "beauty salons and laundries as of 31 August 2026, used under CC BY 4.0.) And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, showed a premises in both lists once, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "The ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Takamatsu City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Takamatsu",)),
+    # Toyota (notice 120): the city's two BODIK datasets, CC BY 4.0 under its
+    # catalogue terms, in their 3(2) form for a modified work (the food title
+    # carries its edition's date); not presented as the city's own (3(1)).
+    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Kawasaki's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30).
+    Notice(120, "Toyota City and MLIT (Toyota)",
+     "Toyota's businesses: この地図は、以下の著作物を改変して利用しています。 "
+     "オープンデータ　食品営業許可施設一覧（2026年8月31日現在）"
+     "（[https://data.bodik.jp/dataset/232114_permit_food_facility](https://data.bodik.jp/dataset/232114_permit_food_facility)）、"
+     "環境衛生営業施設一覧"
+     "（[https://data.bodik.jp/dataset/232114_environmental_health_service_facility](https://data.bodik.jp/dataset/232114_environmental_health_service_facility)）、"
+     "豊田市、[クリエイティブ・コモンズ・ライセンス 表示4.0国際](https://creativecommons.org/licenses/by/4.0/deed.ja). "
+     "(This map modifies the City of Toyota's list of food-business permits and its registers of barbers, "
+     "beauty salons and laundries as of 31 August 2026: this project selected the storefront types, placed "
+     "each by its address, and counted them around stations.) The lists may include premises that have "
+     "closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Toyota and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Toyota",)),
+    # Yokkaichi (notice 121): the city's five BODIK lists, CC BY 4.0 under the
+    # 四日市市オープンデータ利用規約 (第1条), no form prescribed, so CC BY 4.0's
+    # elements; no city logo (第3条). MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Kōchi's and Kawasaki's approved wording under the
+    # owner's pre-approval of template prose (2026-09-30).
+    Notice(121, "Yokkaichi City and MLIT (Yokkaichi)",
+     "Yokkaichi's businesses: 出典：「食品営業許可施設一覧」「食品営業届出施設一覧」「理容所一覧」「美容所一覧」「クリーニング所一覧」"
+     "（四日市市、2026-08-31、[https://odcs.bodik.jp/242021/](https://odcs.bodik.jp/242021/)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
+     "(This map modifies the City of Yokkaichi's lists of food-business permits and notifications and of "
+     "barbers, beauty salons and laundries as of 31 August 2026: this project selected the storefront types, "
+     "placed each by its address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Yokkaichi and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Yokkaichi",)),
+    # Ōtsu (notice 122): the city's food list (catalogued cc-by on its BODIK
+    # portal, accepted as CC BY 4.0, owner 2026-10-02) and three BODIK registers,
+    # in the 大津市オープンデータ利用規約's form for edited content (４(2)); no
+    # city logo (５). MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Kawasaki's approved wording under the owner's pre-approval of template
+    # prose (2026-09-30).
+    Notice(122, "Ōtsu City and MLIT (Ōtsu)",
+     "Ōtsu's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設一覧、大津市、クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)）"
+     "（[https://www.city.otsu.lg.jp/soshiki/021/1441/od/02594.html](https://www.city.otsu.lg.jp/soshiki/021/1441/od/02594.html)）; "
+     "理容所一覧、美容所施設一覧、クリーニング所一覧、大津市、クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)）"
+     "（[https://odcs.bodik.jp/252018/](https://odcs.bodik.jp/252018/)）. "
+     "(This map modifies the City of Ōtsu's lists of food-business permits and of barbers, beauty "
+     "salons and laundries as of 31 August 2026: this project selected the storefront types, placed each "
+     "by its address, and counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Ōtsu and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Ōtsu",)),
+    # Nara (notice 123): the city's four lists under CC BY 2.1 JP (each page's
+    # statement and the 奈良市オープンデータカタログ利用規約), in the terms' form
+    # for an edited work (３); MHLW as in Hiroshima's and Kitakyushu's; MLIT as
+    # in Kobe's, N02 in its 2025 edition. Written from Kitakyushu's and
+    # Kawasaki's approved wording under the owner's pre-approval of template
+    # prose (2026-09-30).
+    Notice(123, "Nara City, MHLW and MLIT (Nara)",
+     "Nara's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設オープンデータ、奈良市、クリエイティブ・コモンズ・ライセンス 表示 2.1"
+     "（[https://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）"
+     "（[https://www.city.nara.lg.jp/soshiki/97/10411.html](https://www.city.nara.lg.jp/soshiki/97/10411.html)）; "
+     "理容所検査確認施設一覧、美容所検査確認施設一覧、クリーニング所検査確認施設一覧、奈良市、クリエイティブ・コモンズ・ライセンス 表示 2.1"
+     "（[https://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）"
+     "（[https://www.city.nara.lg.jp/soshiki/97/9688.html](https://www.city.nara.lg.jp/soshiki/97/9688.html)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, kept the city's old permits still in "
+     "term at the end of August 2026, showed a premises in both lists once, placed each by its address or "
+     "the ministry's own coordinates, and counted them around stations. The ministry's list holds only "
+     "filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Nara City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Nara",)),
+    # Hamamatsu (notice 124): the city's four registers are CC BY 2.1 JP (the
+    # portal's top and the 浜松市オープンデータ利用規約), in the terms' form for a
+    # modified work; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Kawasaki's and Hakodate's approved wording under the owner's pre-approval
+    # of template prose (2026-09-30).
+    Notice(124, "Hamamatsu City and MLIT (Hamamatsu)",
+     "Hamamatsu's businesses: この地図は以下の著作物を改変して利用しています。"
+     "理容所台帳、美容所台帳、クリーニング所(取次)台帳、クリーニング所(一般)台帳、浜松市、クリエイティブ・コモンズ・ライセンス 表示2.1"
+     "（[http://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）. "
+     "(This map modifies the City of Hamamatsu's registers of barbers, beauty salons, laundry pick-up "
+     "counters and general laundries, published 18 August 2026: this project placed each by its address "
+     "or the city's own coordinates, and counted them around stations.) The registers may include premises "
+     "that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Hamamatsu and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Hamamatsu",)),
+    # Higashiōsaka (notice 125): the city's BODIK dataset is CC BY 4.0 (its
+    # license_id and the 東大阪市オープンデータ利用規約 2), in the terms' form for an
+    # edited work; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Kawasaki's and Sakai's approved wording under the owner's pre-approval of
+    # template prose (2026-09-30).
+    Notice(125, "Higashiōsaka City and MLIT (Higashiōsaka)",
+     "Higashiōsaka's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品等営業許可一覧、東大阪市、クリエイティブ・コモンズ・ライセンス 表示 4.0"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://data.bodik.jp/dataset/b5eeed4c-cec0-4eef-8513-b4882d6a18ec](https://data.bodik.jp/dataset/b5eeed4c-cec0-4eef-8513-b4882d6a18ec)）. "
+     "(This map modifies the City of Higashiōsaka's list of food-business permits as of 1 April 2026 and "
+     "its monthly lists of new permits to 31 August 2026: this project rebuilt them into one list of the "
+     "permits in term on 31 August 2026, selected the storefront types, placed each by its address, and "
+     "counted them around stations.) The list may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Higashiōsaka and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Higashiōsaka",)),
+    # Kurume (notice 126): MHLW's open data alone, as in Okayama's (107); MLIT as
+    # in Kobe's, N02 in its 2025 edition. Written from Okayama's approved
+    # wording under the owner's pre-approval of template prose (2026-09-30).
+    Notice(126, "MHLW and MLIT (Kurume)",
+     "Kurume's businesses: 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, placed each by its address or the "
+     "ministry's own coordinates, and counted them around stations. The ministry's list holds only filings "
+     "whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The list may include premises that have closed. "
+     "MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Kurume",)),
+    # Sasebo (notice 127): the city's old-law list on BODIK, CC BY 4.0 in the
+    # 佐世保市オープンデータ利用規約's edited-use form (第3条(2)(イ)); MHLW as in
+    # Hiroshima's and Kitakyushu's; MLIT as in Kobe's, N02 in its 2025 edition.
+    # Written from Kitakyushu's and Kagoshima's approved wording under the
+    # owner's pre-approval of template prose (2026-09-30).
+    Notice(127, "Sasebo City, MHLW and MLIT (Sasebo)",
+     "Sasebo's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "(令和8年4月末時点)法改正前食品営業許可施設一覧、佐世保市、CCライセンス"
+     "（[http://creativecommons.org/licenses/by/4.0/deed.ja](http://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://data.bodik.jp/dataset/422029_syokuhineigyoukyoka](https://data.bodik.jp/dataset/422029_syokuhineigyoukyoka)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, kept the city's old permits still in "
+     "term at the end of August 2026, showed a premises in both lists once, placed each by its address or "
+     "the ministry's own coordinates, and counted them around stations. The ministry's list holds only "
+     "filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Sasebo City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Sasebo",)),
+    # Shimonoseki (notice 128): MHLW's open data alone, PDL 1.0 as in Okayama's;
+    # MLIT as in Kobe's, N02 in its 2025 edition. No city source is used.
+    Notice(128, "MHLW and MLIT (Shimonoseki)",
+     "Shimonoseki's businesses: 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)"
+     "）の「食品等営業許可・届出一覧」を加工して作成. Processed by this project, which selected the storefront types, placed each"
+     " by its address or the ministry's own coordinates, and counted them around stations. The ministry's "
+     "list holds only filings whose applicants agreed to publish them and is not complete. Their locations"
+     ": 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成."
+     " Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値情報（行政区域データ） (CC BY 4.0; "
+     "not drawn). The list may include premises that have closed. MHLW and MLIT did not make and do not en"
+     "dorse this map.",
+     False, ("Shimonoseki",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

@@ -1,0 +1,50 @@
+station,lines,reason,latitude,longitude
+二子玉川,DT OM,"in 世田谷区, outside 川崎市 (the permit list covers the city only)",35.61136003651811,139.62634828026083
+喜多見,OH,"in 世田谷区, outside 川崎市 (the permit list covers the city only)",35.63649826146945,139.58677854439185
+成城学園前,OH,"in 世田谷区, outside 川崎市 (the permit list covers the city only)",35.64013500066088,139.59907999999996
+用賀,DT,"in 世田谷区, outside 川崎市 (the permit list covers the city only)",35.62659605960068,139.63421510379308
+祖師ヶ谷大蔵,OH,"in 世田谷区, outside 川崎市 (the permit list covers the city only)",35.643265000375614,139.609795
+京王多摩センター,KO,"in 多摩市, outside 川崎市 (the permit list covers the city only)",35.62522500078808,139.424165
+京王永山,KO,"in 多摩市, outside 川崎市 (the permit list covers the city only)",35.63024059397594,139.44821023617712
+小田急多摩センター,OT,"in 多摩市, outside 川崎市 (the permit list covers the city only)",35.624930000722884,139.424375
+小田急永山,OT,"in 多摩市, outside 川崎市 (the permit list covers the city only)",35.6299196174791,139.44806214215023
+京急蒲田,KK,"in 大田区, outside 川崎市 (the permit list covers the city only)",35.56169343505297,139.724329321368
+六郷土手,KK,"in 大田区, outside 川崎市 (the permit list covers the city only)",35.540530000488744,139.707565
+多摩川,TY MG,"in 大田区, outside 川崎市 (the permit list covers the city only)",35.589645237308204,139.66869762668634
+梅屋敷,KK,"in 大田区, outside 川崎市 (the permit list covers the city only)",35.56678500050684,139.72817
+田園調布,TY,"in 大田区, outside 川崎市 (the permit list covers the city only)",35.597290002721216,139.667285
+蒲田,JK,"in 大田区, outside 川崎市 (the permit list covers the city only)",35.56248500466818,139.71603
+雑色,KK,"in 大田区, outside 川崎市 (the permit list covers the city only)",35.549775000506536,139.715035
+大倉山,TY,"in 横浜市港北区, outside 川崎市 (the permit list covers the city only)",35.52242033921437,139.6298227186195
+日吉,TY MG,"in 横浜市港北区, outside 川崎市 (the permit list covers the city only)",35.553990008537916,139.64703
+綱島,TY,"in 横浜市港北区, outside 川崎市 (the permit list covers the city only)",35.53681500078552,139.634795
+あざみ野,DT,"in 横浜市青葉区, outside 川崎市 (the permit list covers the city only)",35.568774874127165,139.55354593295425
+たまプラーザ,DT,"in 横浜市青葉区, outside 川崎市 (the permit list covers the city only)",35.57741506252652,139.55865059180493
+市が尾,DT,"in 横浜市青葉区, outside 川崎市 (the permit list covers the city only)",35.55126500129111,139.54126
+江田,DT,"in 横浜市青葉区, outside 川崎市 (the permit list covers the city only)",35.558535000786165,139.55141
+藤が丘,DT,"in 横浜市青葉区, outside 川崎市 (the permit list covers the city only)",35.543400000030545,139.52757999999997
+青葉台,DT,"in 横浜市青葉区, outside 川崎市 (the permit list covers the city only)",35.54285500000764,139.51729999999998
+京急鶴見,KK,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.50665685300018,139.67757356527744
+国道,JI,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.50077000024898,139.67571
+安善,JI,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.499840000122,139.701245
+弁天橋,JI,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.49579500009723,139.689485
+新芝浦,JI,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.491915001071725,139.70012499999999
+浅野,JI,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.497605000068624,139.695675
+海芝浦,JI,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.486130000159264,139.700675
+生麦,KK,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.49560000080656,139.66733499999998
+矢向,JN,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.53935907628615,139.6804216431745
+花月総持寺,KK,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.50032500057907,139.67286
+鶴見,JI JK,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.50821484893534,139.67601855412025
+鶴見小野,JI,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.497020000598106,139.681275
+鶴見市場,KK,"in 横浜市鶴見区, outside 川崎市 (the permit list covers the city only)",35.51759000109874,139.68648999999996
+和泉多摩川,OH,"in 狛江市, outside 川崎市 (the permit list covers the city only)",35.6274150023654,139.57372
+狛江,OH,"in 狛江市, outside 川崎市 (the permit list covers the city only)",35.63223879975579,139.57736199163273
+玉川学園前,OH,"in 町田市, outside 川崎市 (the permit list covers the city only)",35.563510003699264,139.46344
+鶴川,OH,"in 町田市, outside 川崎市 (the permit list covers the city only)",35.58311000027535,139.48182499999996
+自由が丘,TY,"in 目黒区, outside 川崎市 (the permit list covers the city only)",35.60727063586415,139.66869815026098
+京王よみうりランド,KO,"in 稲城市, outside 川崎市 (the permit list covers the city only)",35.63296676602646,139.51729048268137
+矢野口,JN,"in 稲城市, outside 川崎市 (the permit list covers the city only)",35.64173500070221,139.520435
+稲城,KO,"in 稲城市, outside 川崎市 (the permit list covers the city only)",35.63613752133452,139.50015203895086
+稲城長沼,JN,"in 稲城市, outside 川崎市 (the permit list covers the city only)",35.644275000702294,139.50260999999998
+京王多摩川,KO,"in 調布市, outside 川崎市 (the permit list covers the city only)",35.64411707446614,139.53631347501258
+調布,KO,"in 調布市, outside 川崎市 (the permit list covers the city only)",35.65177000072361,139.54473500000003

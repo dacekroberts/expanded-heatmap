@@ -3599,6 +3599,522 @@ written with 甲 / 乙 lot numbers.
 line.
 - Left out: 19 stations beyond it: 10 in Ino and 9 in Nankoku.
 
+### Kawasaki - the city's food list and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 944 permits whose holders chose not to have their address published (625 of
+  them restaurants, one in fourteen).
+- 2,455 food trucks and temporary stalls, licensed for all of Kanagawa with no
+  address.
+- 256 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 621 school, hospital and staff canteens, 155 caterers (仕出し), 53 premises
+  inside hotels and inns, 44 vending machines, 15 mahjong parlors and 10 other
+  temporary permits.
+- 9 linen suppliers (リネンサプライ), which are industrial laundries.
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry on the city's lists of the same date. The 301 delis
+that hold a restaurant permit (飲食店（そうざい店）) are Food shops. 45 of the
+975 bakery, confectioner and deli rows (4.6%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 418 repeat permits are shown once.
+
+**Not placed** - 2 rows. Another 152 sit at their town's center.
+
+**Names not shown** - none. The barber, beauty and laundry lists name every
+operator and no trade name is an operator's own name; the food list names an
+operator only where it is a company, so a sole trader's own name cannot be
+checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 49 stations beyond it: 22 in Yokohama (13 in Tsurumi Ward, 6 in
+  Aoba Ward and 3 in Kohoku Ward) and 27 in Tokyo (7 in Ota, 5 in Setagaya, 4
+  each in Tama and Inagi, 2 each in Komae, Machida and Chofu, and 1 in
+  Meguro).
+- The Shinkansen is not drawn; it crosses the city without a station.
+
+### Yokosuka - the city's food list and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 240 rows with no fixed premises: 103 food trucks, 89 temporary stalls
+  (屋台型臨時営業) and 48 rows with no address or a citywide one.
+- 133 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 129 school, hospital and staff canteens, 57 snack bars and cabarets, 44
+  caterers (仕出し), 35 restaurants inside inns and 20 vending machines.
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry (general and pick-up shops) on the city's lists of
+August 2026. The one nightclub (クラブ又はナイトクラブ) is Food service, as
+nightclubs are elsewhere. 12 of the 367 bakery, confectioner and deli rows
+(3.3%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 104 repeat permits are shown once.
+
+**Not placed** - 6 rows. Another 132 sit at their town's center.
+
+**Names not shown** - 1 beauty salon whose trade name is its operator's own
+name shows its permit type instead. The
+food list names an operator only where it is a company, so a sole trader's own
+name cannot be checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it: 2 in Yokohama (Kanazawa Ward), 2 in Miura
+  and 1 in Zushi.
+
+### Himeji - the city's food list and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 1,164 food trucks and stalls licensed for the whole city with no fixed
+  address (773 stalls, 391 vehicles), and 22 stalls listed at an address.
+- 298 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+
+**Counted** - every food permit on the city's list of 10 September 2026, and
+every barber, beauty salon and laundry on its registers of the same date,
+among them 186 salons confirmed without a hair-washing basin because they do
+no hair work. 26 of the 684 bakery, confectioner and deli rows (3.8%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 268 repeat permits are shown once.
+
+**Not placed** - 18 rows. Another 1,583 sit at their town's center: the
+central district's towns are a few blocks each, and rural 大字 have no block
+data.
+
+**Names not shown** - 3 trade names that are their operator's own name show
+their permit type instead.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 10 stations beyond it: 4 in Takasago, 3 in Tatsuno, 2 in
+  Kamikawa and 1 in Fukusaki.
+- The Shinkansen is not drawn (Himeji appears as a JR station).
+
+### Nishinomiya - the city's food list and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 977 food permits with no fixed premises: 901 vehicles and stalls licensed
+  for the whole city and 76 rows with no address.
+- 166 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter, and 34
+  cooking vending machines.
+
+**Counted** - every food permit on the city's list of 31 August 2026, and
+every barber, beauty salon and laundry on its registers of September 2026.
+The laundry register holds 147 of the 237 laundries the city reported for
+2025 (62%), so laundries are undercounted. 22 of the 495 bakery, confectioner
+and deli rows (4.4%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 169 repeat permits are shown once.
+
+**Not placed** - 1 row. Another 49 sit at their town's center.
+
+**Names not shown** - 1 trade name that is its operator's own name shows its
+permit type instead.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 17 stations beyond it: 6 in Takarazuka, 4 in Amagasaki, 4 in
+  Ashiya and 3 in Kobe (2 in Higashinada Ward, 1 in Kita Ward).
+
+### Takamatsu - the city's food list and its barber, beauty and laundry registers, with the ministry's notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Food shops that only notify rather than hold a permit appear only where
+  they chose to publish in the ministry's open data: 2,262 of its
+  notifications carry no address and cannot be placed.
+- 620 food trucks and temporary stalls with no fixed premises (338 vehicles,
+  279 temporary stalls, 3 handcarts), and 62 stalls listed at a fixed spot,
+  57 of them 露店：定置.
+- 422 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 258 school, hospital and staff canteens, 108 restaurants inside hotels,
+  inns, love hotels and capsule hotels, 56 cooking vending machines and 23 caterers (仕出し).
+- From the ministry's notifications, likewise: canteens, vending machines,
+  manufacturing, mail order and peddlers.
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry on the city's registers of August 2026; from the
+ministry's notifications, supermarkets, convenience stores and other food
+retail. 28 of the 820 bakery, confectioner and deli rows (3.4%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 459 repeat permits are shown once, and 35 premises
+in both lists once.
+
+**Not placed** - 19 rows. Another 908 sit at their town's center (much of the
+city outside the center has no block addresses), and 125 ministry filings at
+the ministry's own point.
+
+**Names not shown** - 1 trade name that is its operator's own name shows its
+permit type instead. The ministry's list does not say who the operator
+is, so this cannot be checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 13 stations beyond it: 4 in Miki, 4 in Ayagawa, 3 in Sanuki and 2
+  in Sakaide.
+- The Yakuri cable car, a sightseeing line, is not drawn.
+
+### Toyota - the city's food list and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- Temporary and stall permits: the city leaves them out of its list, which is
+  why it holds about three in four of the restaurant permits the city reports.
+- 151 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 beauty salon registered for the whole city with no fixed premises.
+
+**Counted** - every food permit on the city's list of 31 August 2026, and
+every barber, beauty salon and laundry (washing and pick-up shops) on its
+registers of the same date. 14 of the 355 bakery, confectioner and deli rows
+(3.9%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 140 repeat permits are shown once.
+
+**Not placed** - 232 rows, mostly rural addresses that name a sub-district
+without its marker. Another 676 sit at their town's or district's center.
+
+**Names not shown** - 1 trade name that is its operator's own name shows its
+permit type instead. The barber, beauty and laundry registers name an
+operator only where it is a company, so a sole trader's own name cannot be
+checked there.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 11 stations beyond it: 3 in Okazaki, 3 in Chiryu, 2 in Miyoshi,
+  2 in Nagakute and 1 in Seto.
+
+### Yokkaichi - the city's food-permit and food-notification lists and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- 548 restaurant permits filed as bars and cabarets (バー、キャバレー): the
+  national form list puts both in one class.
+- 392 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit and notification types that are not a
+  counter.
+- 261 school, hospital and staff canteens, 88 caterers (仕出し), 41 premises
+  inside hotels and inns, 3 mail-order businesses and 1 peddler.
+- 5 laundry pick-up services with no shop (無店舗取次店), and 5 rows licensed
+  for anywhere in the city (一円).
+
+**Counted** - every food permit in force and every food notification on file
+on 31 August 2026, and every barber, beauty salon and laundry on the city's
+lists of the same date. The 892 food shops that notify the city rather than
+hold a permit (convenience stores, supermarkets, greengrocers, dairies and
+other food sellers) are Food shops, from the city's complete list. 31 laundry
+works (工場) are counted as laundries. 26 of the 400 bakery, confectioner and
+deli rows (6.5%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 269 repeat permits are shown once.
+
+**Not placed** - 110 rows (2.3%), mostly addresses that name a sub-district
+(小字) MLIT's file does not list. Another 407 sit at their town's center.
+
+**Names not shown** - 3 pins show their permit type: the trade name is the
+operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 12 stations beyond it: 4 in Komono, 3 in Suzuka, 2 each in Inabe
+  and Asahi, and 1 in Kawagoe.
+
+### Ōtsu - the city's food list and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 646 food trucks and stalls, licensed for anywhere in the city (市内一円) with
+  no fixed place.
+- 176 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 26 vending machines that cook (調理の機能を有する自動販売機).
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry on the city's lists of the same date. 15 of the 605
+bakery, confectioner and deli rows (2.5%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 149 repeat permits are shown once.
+
+**Not placed** - 1 row. Another 220 sit at their town's center.
+
+**Names not shown** - 3 pins show their permit type: the trade name is the
+operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it: 4 in Kyoto's Yamashina Ward and 1 in
+  Kusatsu.
+- The Shinkansen is not drawn; it crosses the city without a station. The
+  Sakamoto cable car, which is a sightseeing line, is not drawn.
+
+### Nara - the city's old-law food list, its barber, beauty and laundry registers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 1,978 national filings whose filers did not publish an address (896 of them
+  restaurants, about one restaurant in five).
+- 521 rows of the city's old-law list whose permit had ended by 31 August 2026.
+- 19 temporary or mobile permits and 788 rows with no fixed place (licensed for
+  the whole city, 市内一円).
+- 421 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 246 school, hospital and staff canteens, 139 vending machines, 11 mail-order
+  businesses, 36 entertainment venues, 93 premises inside hotels and inns, 100
+  caterers (仕出し) and 119 snack bars and cabarets.
+- 22 closed premises, which the national filings keep, marked.
+
+**Counted** - the city's old-law food permits (its list as of 1 November 2025)
+still in term on 31 August 2026, its barber, beauty and laundry registers as of
+1 April 2026, and the national filings as downloaded on 2 October 2026. The
+city's old-law delis filed as そうざい屋 are Food shops. 6 of the 535 bakery,
+confectioner and deli rows (1.1%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 331 repeat permits are shown once, and 90 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 34 rows (0.6%), mostly register addresses whose town MLIT's
+file spells differently. Another 169 sit at their town's center, and 347
+national filings at their own coordinates.
+
+**Names not shown** - none: no trade name in the city's lists is its operator's
+own name, and the national filings do not say who the operator is.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 10 stations beyond it: 3 in Yamatokoriyama, 2 each in Kizugawa and
+  Ikoma, and 1 each in Tenri, Kasagi and Seika.
+
+### Hamamatsu - the city's barber, beauty and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the city publishes only its new food
+  permits, not a register, and the national filing system holds only
+  notifications for Hamamatsu, so this map shows personal services only
+  (owner, 2026-10-02).
+
+**Counted** - every barber, beauty salon, laundry pick-up counter and general
+laundry on the city's four registers published 18 August 2026: 3,212 premises
+against the official 3,164 of March 2025. No closures are recorded beside
+them, so some may have closed since.
+
+**One pin per premises** - 25 repeat registrations are shown once (21 premises
+on both the barber and beauty registers, 4 beauty salons registered twice).
+
+**Not placed** - none. 165 premises whose address the address file finds only
+at its town sit at the city's own coordinates for them.
+
+**Names not shown** - none. The registers do not name the operator, so a trade
+name that is its operator's own name cannot be checked.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 3 in Kosai, 3 in Iwata, 2 in Toei (Aichi)
+  and 1 in Tenryu (Nagano).
+- The Shinkansen is not drawn (Hamamatsu appears as a JR station).
+
+### Higashiōsaka - the city's food list, rebuilt to August 2026, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them, so
+  this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food: they notify the city rather than hold a
+  permit, and the list holds permits only.
+- 419 street stalls (露店) and food trucks (自動車).
+- 165 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 52 vending machines.
+- 188 permits past their expiry date on 31 August 2026.
+
+**Counted** - every food permit in force on 1 April 2026, old-law permits
+included, plus the permits granted each month to August 2026, kept while
+within their term on 31 August 2026. Closures are not published, so a
+business that closed before its permit ran out is still counted: the map is
+an upper bound. The list records no form of business, so snack bars, staff
+canteens and shop counters that hold a restaurant permit stay in Food
+service. 21 of the 455 bakery, confectioner and deli rows (4.6%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 358 rows de-duplicated across the lists (the same
+address, trade name and permit type listed more than once; the permit ending
+latest kept), and 110 repeat permits shown once.
+
+**Not placed** - none. 19 sit at their town's center.
+
+**Names not shown** - none: the list names an operator only where it is a
+company, so a trade name that is its operator's own name cannot be checked
+(owner, 2026-10-02).
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 17 stations beyond it: 9 in Osaka City (2 each in Higashinari and
+  Ikuno Wards, 1 each in Chuo, Joto, Hirano, Miyakojima and Tsurumi Wards), 5
+  in Yao, 2 in Daito and 1 in Ikoma.
+- Osaka Metro's Chuo Line keeps two stations inside the city, Takaida and
+  Nagata (owner, 2026-10-02).
+
+### Kurume - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes only monthly lists
+  of new barbers and beauty salons, not a register, and no list of laundries,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Permits granted before June 2021 and still in force, which the national
+  filings do not hold (about one restaurant permit in nine).
+- 2,098 national filings whose filers did not publish an address (867 of them
+  restaurants, about one restaurant in five).
+- 32 temporary or mobile permits and 1,022 rows with no fixed place (1,021
+  addressed only 「久留米市内」, licensed for the whole city, and 1 一円).
+- 394 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 171 school, hospital and staff canteens, 66 vending machines, 8 mail-order
+  businesses, 33 entertainment venues, 17 premises inside hotels and inns, 25
+  caterers (仕出し) and 187 snack bars and cabarets.
+- 15 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on 2 October 2026. 12 of the
+393 bakery, confectioner and deli rows (3.1%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 316 repeat permits are shown once.
+
+**Not placed** - 6 rows (0.2%). Another 16 sit at their town's center, and 407
+at the ministry's own coordinates.
+
+**Names not shown** - none: the national filings do not say who the operator
+is, so the name rule cannot run here (Okayama's precedent, owner, 2026-10-02).
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 2 each in Tachiarai, Oki and Ogori, and 1
+  each in Ukiha, Chikugo and Tosu in Saga.
+- The Shinkansen is not drawn.
+
+### Sasebo - the city's old-law food list and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no lists of them, so
+  this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 1,225 national filings whose filers did not publish an address (530 of them
+  restaurants, about one restaurant in five).
+- 155 rows of the city's old-law list whose permit had ended by 31 August 2026.
+- 7 temporary or mobile permits and 216 rows with no fixed place (licensed for
+  the whole city, 市内一円).
+- 308 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 189 school, hospital and staff canteens, 90 vending machines, 1 mail-order
+  business, 78 premises inside hotels and inns and 170 caterers (仕出し).
+- 7 closed premises, which the national filings keep, marked.
+
+**Counted** - the city's old-law food permits (its list as of 30 April 2026)
+still in term on 31 August 2026, and the national filings as downloaded on 2
+October 2026. 12 of the 274 bakery, confectioner and deli rows (4.4%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 131 repeat permits are shown once, and 42 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 1 row. Another 38 sit at their town's center, and 255
+national filings at their own coordinates.
+
+**Names not shown** - none. The city's list names an operator only where it
+is a company, and the national filings name none, so a sole trader's own name
+cannot be checked.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line; the Matsuura Railway leaves the city through Saza and comes back.
+- Left out: 14 stations beyond it: 4 each in Saza and Arita (Saga), 3 in
+  Hirado, 2 in Kawatana and 1 in Matsuura.
+
+### Shimonoseki - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Permits granted before June 2021 and still in force, which the national
+  filings do not hold (about 6% of the restaurants in force).
+- 290 national filings whose filers did not publish an address (29 of them
+  restaurants, one in eighty).
+- 351 food trucks, stalls, peddlers and rows licensed for the whole city
+  (市内一円), and 17 more marked temporary or mobile.
+- 659 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 208 school, hospital and staff canteens, 129 snack bars and cabarets, 96
+  vending machines, 30 premises inside hotels and inns, 27 entertainment
+  venues, 11 mail-order businesses and 6 caterers (仕出し).
+- 21 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on 2 October 2026. 18 of the
+279 bakery, confectioner and deli rows (6.5%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 219 repeat permits are shown once.
+
+**Not placed** - 3 rows (0.1%). Another 27 sit at their town's center, and 310
+at the ministry's own coordinates.
+
+**Names not shown** - none: the national filings do not say who the operator
+is, so the name rule cannot run here (owner, 2026-10-02).
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 2 stations beyond it: 1 in San-yo-Onoda and 1 in Kitakyushu
+  (Moji Ward).
+- Left out as too infrequent: the San'in Line beyond Kogushi runs 11 trains a
+  day each way on weekdays, far below the 15-minute test, so it is drawn only
+  to Kogushi and its 7 stations beyond, inside the city, are left out (owner,
+  2026-10-02).
+- JR Kyushu's Sanyo Line, under the strait to Moji, keeps one station inside
+  the city, Shimonoseki, and is drawn as part of the Sanyo Line.
+- The Shinkansen is not drawn (Shin-Shimonoseki appears as a JR station).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

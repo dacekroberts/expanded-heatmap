@@ -493,6 +493,14 @@ REGISTRIES = {
                   address=("address",), japan=True)
        for slug in ("toyama", "kumamoto", "fukui", "nagasaki", "utsunomiya", "kitakyushu", "sakai",
                     "hakodate", "kagoshima", "okayama", "kochi")},
+    # Japan wave 2 (2026-10-03), on the same shared steps and the same rule:
+    # each list's operator column is read only by the name rule, in memory;
+    # MHLW's rows, Hamamatsu's registers and Higashiosaka's national-schema
+    # list name no individual operator. The Japan pass tests what reached the map.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("kawasaki", "yokosuka", "himeji", "nishinomiya", "takamatsu", "toyota", "yokkaichi",
+                    "otsu", "nara", "hamamatsu", "higashiosaka", "kurume", "sasebo", "shimonoseki")},
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no
@@ -1175,11 +1183,12 @@ def check(slug):
         from pipeline.countries import japan_register as jr
         cfg = importlib.import_module(f"pipeline.{slug}.config")
         own = set()
-        from pipeline.countries import japan_step2
+        from pipeline.countries import japan, japan_step2
+        rules = frozenset(japan.CITIES.get(slug, {}).get("rules", ()))
         for key in cfg.SOURCES:
             # a rebuilt register (Kyoto's) is read as step 2 reads it
             for r in japan_step2.source_rows(cfg, key):
-                if jr.name_is_operator(r):
+                if jr.name_is_operator(r, rules):
                     own.add(jr._name_key(next((r[c] for c in jr.NAME_COLS if (r.get(c) or "").strip()), "")))
         d = pd.read_csv(proc, dtype=str, low_memory=False).fillna("")
         shown = d.business_name.map(jr._name_key).isin(own)

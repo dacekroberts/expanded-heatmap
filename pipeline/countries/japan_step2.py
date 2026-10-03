@@ -185,6 +185,34 @@ def shared_points(rows):
     return {pt for pt, ts in towns.items() if len(ts) >= SHARED_POINT_TOWNS}
 
 
+# A publisher's points that sit this far from the block point, as a median over
+# its block-tier rows, are not in the block file's datum. Higashiōsaka's
+# (2026-10-03) sit a median 448 m off in one consistent direction: the old
+# Tokyo Datum (EPSG:4301), 37 m once shifted to JGD2000. The built cities'
+# publishers measure 32-51 m.
+DATUM_OFFSET_M = 200
+
+
+def datum_guard(config, rows):
+    """Stop before a publisher's points place any row if they are offset as a
+    datum shift would offset them (rows: one source's joined rows). Measured in
+    the city's projected CRS, never in degrees."""
+    has = rows[(rows["tier"] == "block") & rows["pub"].map(lambda p: p is not None and p == p)]
+    if len(has) < 20:
+        return
+    import geopandas as gpd
+
+    def proj(pts):
+        return gpd.GeoSeries(gpd.points_from_xy([p[1] for p in pts], [p[0] for p in pts]),
+                             crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED)
+
+    d = proj(list(has["pt"])).distance(proj(list(has["pub"])), align=False)
+    if d.median() > DATUM_OFFSET_M:
+        sys.exit(f"the publisher's own points sit a median {d.median():.0f} m from the block point "
+                 f"({len(has):,} block rows): another datum (the old Tokyo Datum, as Higashiosaka's)? "
+                 f"Shift them before OWN_POINT_FALLBACK uses them.")
+
+
 def own_point_fallback(config, joined):
     """Where the block join misses a row from a source that publishes its own
     coordinates (config.OWN_POINT_FALLBACK, e.g. {"mhlw"}), the publisher's point
@@ -198,6 +226,7 @@ def own_point_fallback(config, joined):
         return
     bb = config.CITY_BBOX
     mine = joined["source"].isin(sources)
+    datum_guard(config, joined[mine])
     default = shared_points(zip(joined.loc[mine, "ward"], joined.loc[mine, "town"], joined.loc[mine, "pub"]))
     inb = joined["pub"].map(lambda p: p is not None and p == p and bb["lat_min"] <= p[0] <= bb["lat_max"]
                             and bb["lon_min"] <= p[1] <= bb["lon_max"] and _pt4(p) not in default)
@@ -232,7 +261,7 @@ def point_donors(config, joined):
     wardless = japan_wardless(config)
     for recipient, donor in donors.items():
         ps = jr.permits_from_rows(source_rows(config, donor), config.PREFECTURE, municipality(config, donor),
-                                  wardless)
+                                  wardless, japan_rules(config))
         default = shared_points((p["ward"], p["town"], p["pub"]) for p in ps)
         pts = collections.defaultdict(set)
         for p in ps:
@@ -256,6 +285,13 @@ def japan_wardless(config):
     split at a 区 (japan_register.permits_from_rows)."""
     from pipeline.countries import japan
     return bool(japan.CITIES.get(config.SLUG, {}).get("wardless"))
+
+
+def japan_rules(config):
+    """The join rules a city opts into (japan.CITIES' "rules";
+    japan_register.WAVE2_RULES), the same set on the MLIT side and the list's."""
+    from pipeline.countries import japan
+    return frozenset(japan.CITIES.get(config.SLUG, {}).get("rules", ()))
 
 
 def drop_superseded(config, df):
@@ -283,7 +319,7 @@ def drop_superseded(config, df):
 def run(config, write=True):
     sys.stdout.reconfigure(encoding="utf-8")
     need(config.ISJ_DIR, config.SLUG)
-    blocks, chome = jr.load_city_isj(config.ISJ_DIR)
+    blocks, chome = jr.load_city_isj(config.ISJ_DIR, japan_rules(config))
     print(f"  MLIT 位置参照情報: {len(blocks):,} block keys, {len(chome):,} town-chōme keys")
 
     permits = []
@@ -292,8 +328,9 @@ def run(config, write=True):
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]
         if missing:
             sys.exit(f"{key}: header lacks {missing}")
-        flags = [jr.name_is_operator(r) for r in rows]
-        ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key), japan_wardless(config))
+        flags = [jr.name_is_operator(r, japan_rules(config)) for r in rows]
+        ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key), japan_wardless(config),
+                                  japan_rules(config))
         for p, f in zip(ps, flags):
             p["source"], p["name_is_operator"], p["muni"] = key, f, municipality(config, key)
             p["kind"] = kind(config, key)
@@ -353,7 +390,7 @@ def run(config, write=True):
         print(f"    kept by 業態: {n:>5,}  {bucket:<12} {rule}")
 
     # --- the join --------------------------------------------------------------
-    joined = pd.DataFrame(jr.join_city(df.to_dict("records"), blocks, chome))
+    joined = pd.DataFrame(jr.join_city(df.to_dict("records"), blocks, chome, japan_rules(config)))
     own_point_fallback(config, joined)
     point_donors(config, joined)
     tab = pd.crosstab(joined["bucket"], joined["tier"], margins=True)
