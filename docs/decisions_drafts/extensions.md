@@ -7,6 +7,35 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 Proposals (sentences no approved template covers) are listed at the end, for
 the owner at review time.
 
+### 2026-10-03 - Burnaby, New Westminster and Coquitlam: the OGL personal-information exemption read cautiously (owner)
+
+- **The owner, relayed by Cleanup and confirmed in this session's chat
+  (2026-10-03):** "Accept cautious reading and note as such with our notice
+  and privacy related tools", then "Tables/logs". Asked in this session
+  whether that meant removing pins, the owner chose "Keep, record as
+  cautious": no pin is removed.
+- **The question.** All three municipal OGL variants grant no right to use
+  "Personal Information" (FOIPPA Schedule 1: information about an
+  identifiable individual other than business contact information). A
+  licence issued under a sole proprietor's own name, or a business at a
+  home, can be read either way (the licence-read agents, 2026-10-03).
+- **The treatment, now the recorded reading:** a licence issued under a
+  person's own name (printed surname first) shows only its business type
+  (8 dots: New Westminster 7, Coquitlam 1); no holder-name, mailing,
+  phone or email column is ever fetched (ACCOUNT_NAME, LICENCEE_NAME,
+  MAILING_ADDRESS, COL_BUSINESSPHONE, EMAILADDRESS). Home-based licences
+  are out wherever the register says so (Burnaby's and Coquitlam's own
+  home-occupation types); New Westminster's register carries no home flag.
+- **Recorded in:** `docs/privacy_verdicts.md` (Vancouver (Regional)'s
+  row), `docs/data_sources/canada.md` (the three licence rows),
+  `docs/licence_positions.md` (2.37a-c), `docs/map_inconsistencies.md`
+  (table C, Vancouver (Regional)'s exclusions), What Is Excluded (one
+  sentence, proposal 15). `check_personal_exposure.py` is unchanged: the
+  rule is a name shape applied in the loaders, not a list of keys, so there
+  is no key list to add.
+- **Consequence:** the open terms question below is closed; the three
+  cities are no longer held off the Visuals cards.
+
 ### 2026-10-03 - Vancouver (Regional) extended: Burnaby, New Westminster and Coquitlam on their own registers
 
 - **Fourth of the four extensions**, on the owner's three approved calls
@@ -263,13 +292,10 @@ that is shown or shared without the site around it.
 until the owner rules):**
 
 - **Vancouver (Regional)'s extension (Burnaby, New Westminster, Coquitlam):
-  open.** All three OGL variants exempt "Personal Information" (FOIPPA
-  Schedule 1: information about an identifiable individual other than
-  business contact information). A licence issued under a sole proprietor's
-  own name, or a business at a home address, can be read either way; the
-  build takes the cautious side (8 such names show the business type), but
-  the reading is the owner's. Until then, keep the extension's cities off
-  public pieces; Vancouver and Surrey are not affected.
+  CLOSED (owner, 2026-10-03).** The OGL personal-information exemption is
+  read cautiously, which is the build's treatment (8 own-name licences show
+  the business type); see the entry above. The three cities may go on
+  public pieces.
 - **Los Angeles (Regional)'s Long Beach: no open question** (the breach-only
   indemnity was accepted by the owner, 2026-09-30). Los Angeles is already
   held off public visuals for its own terms ruling.
@@ -342,3 +368,6 @@ until the owner rules):**
     Westminster and Coquitlam, three more registers" (all counts from the
     build), and two shared sentences: "Vancouver with four neighbors" and
     "92 pins across Vancouver (Regional) display their business type".
+15. Vancouver (Regional), What Is Excluded, "Shown, but not named" (added to
+    the paragraph): "The three cities' licenses exclude personal information
+    from what they grant, and this map reads that cautiously."

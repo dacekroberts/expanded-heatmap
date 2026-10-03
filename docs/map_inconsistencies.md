@@ -900,7 +900,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Tucson | Register coordinates (92.4%); 539 not geocoded, 23 outside the city | The City calls its list not complete | Home occupations; non-store sellers, caterers, mobile food, parking; apartments (19); address shown for a person's licence or a business named only as a person |
 | New Orleans | Register coordinates (95.6%); 219 at the register's 0,0, 1 outside the city | A licence is not a shopfront | Event and festival vendors, home offices, flea-market stalls, street artists, video poker; caterers, mobile food, parking; address shown where no business name or a person's |
 | **Canada** | | | |
-| Vancouver (Regional) | Source coordinates; New Westminster by address join (99.8%) | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage; Burnaby's and Coquitlam's catch-alls, Coquitlam's mall kiosks |
+| Vancouver (Regional) | Source coordinates; New Westminster by address join (99.8%) | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage; Burnaby's and Coquitlam's catch-alls, Coquitlam's mall kiosks; own-name licences shown by type (OGL personal-information exemption, read cautiously, owner 2026-10-03) |
 | Montréal | Source LAT/LONG (100%) | Two municipalities not surveyed | Vacant units (about 3,500) |
 | Calgary | Source point | No home-business flag | Endorsements; body rub / escort (sensitivity) |
 | Edmonton | Source coordinates | Personal services overstated | Non-commercial licence types (43%); adult services (sensitivity) |

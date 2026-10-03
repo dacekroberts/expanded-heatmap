@@ -1027,7 +1027,8 @@ based outside each city are not in these registers.
 
 **Shown, but not named** - where a New Westminster or Coquitlam license is
 issued under a person's own name, printed surname first, the dot shows the
-business type instead (8 dots).
+business type instead (8 dots). The three cities' licenses exclude personal
+information from what they grant, and this map reads that cautiously.
 
 **Stations.** Burnaby's 11 SkyTrain stations, New Westminster's 5 and
 Coquitlam's 4 are drawn and ringed. Richmond's 8 and Port Moody's 2 are still
