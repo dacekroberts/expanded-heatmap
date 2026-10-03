@@ -45,6 +45,16 @@ they disagree.**
 | SanGIS municipal boundaries (San Diego) | 1.24 | **2** | SanGIS End User Agreement: credit PROHIBITED at this scale, an uncapped indemnity and a general release (Civil Code §1542 waiver), **accepted by the owner 2026-10-02 for both SanGIS layers** (the boundaries and the parcels, 2.32; `data_sources.md`). SANDAG, which only hosts it, adds "should not be redistributed", read as deferring to SanGIS's terms. |
 | CARTO basemap (Overview macro map only) | 1.23 | **1, weaker** | The Terms (2026-09-29) grant free use only with the project's own API key; the macro map loads keyless vector tiles (keyless raster is already watermarked). A key brings an uncapped indemnity, New York law and revocation at will. **Open with the owner**: request a key, switch the macro map to OpenStreetMap tiles (staging's recommendation), or drop its basemap. City maps use OpenStreetMap's own tiles and are unaffected. |
 
+**Rows and credits landed 2026-10-03 (lane-app):** D.C.'s register and
+boundary, notice 137; Dublin's NTA GTFS, notice 138, the Fair Usage Policy's
+indemnity recorded as not accepted; geo.api.gouv.fr, notice 139, both credits,
+on all 26 French pages; MassGIS, notice 140, the credit in its FAQ's words.
+LA County's and SanGIS's boundaries have licence rows and no credit (SanGIS
+forbids one at this scale). Each licence row is in its country file under
+`docs/data_sources/`; `united-states.md` now names SanGIS, not SANDAG, as the
+boundaries' and parcels' publisher. SFMTA's 2.16 was settled the same day
+(below).
+
 **Counts after the update:** tier 1 **24**, tier 2 **50**, tier 3 **47**,
 tier 4 **23** (144 entries; the 1.24 boundary group split into its four
 sources).
@@ -158,7 +168,7 @@ The 142 entries are grouped: one entry per shared source (for example, MHLW acro
 | 2.13 | Sacramento Business Operation Tax | Sacramento | an uncapped indemnity, "even if ... groundless" (DS:420-435) | owner 2026-09-29 | a claim the City passes on | owner, phone and mail fields never fetched | none |
 | 2.14 | WPRDC Allegheny food facilities | Pittsburgh | CC0, but the Data Use Agreement adds an indemnity and a duty to report Non-Public Information (united-states.md:229) | owner 2026-09-30 (DEC:4374) | WPRDC | no person column | none |
 | 2.15 | MTA NYCT subway and SIR GTFS | New York | "will not modify"; no accuracy claims (united-states.md:345-448) | build 2026-09-21; the row still says "open decision" | MTA | `_AS_RECORDED` | close the stale row |
-| 2.16 | SFMTA Muni GTFS | San Francisco | a revocable licence; a §5 indemnity and a "liability disclaimers" duty (united-states.md:342) | licence check 2026-09-21 | SFMTA | notice, verbatim (COMP:439) | add the disclaimer, or record why it does not apply |
+| 2.16 | SFMTA Muni GTFS | San Francisco | a revocable licence; a §5 indemnity; clause 4's disclaimer goes in "any use agreement" (the site has none) or is displayed (united-states.md, the GTFS table) | licence check 2026-09-21; re-read 2026-10-03 | SFMTA | notice 3, verbatim: clause 12's two paragraphs and clause 4's disclaimer, displayed on the cautious reading (2026-10-03) | none needed |
 | 2.17 | MTS Trolley GTFS | San Diego | marks "may not be used in association with GTFS Data", yet the official colours and names are used (united-states.md:611-617) | owner 2026-09-21 | MTS | `_NON_AFFILIATION` | the project's own palette for San Diego |
 | 2.18 | OpenStreetMap: rail, boundaries, names, address points; OSM tiles on every city map | about 80 cities, all maps | ODbL §4.3 credit shown; §4.6 "provided the repo is LINKED from the site" (ARCH:8101-8105); the Tile Usage Policy is best-effort | owner and builds, from 2026-09-20 | OSMF, on share-alike for the committed station CSVs, or a tile block | map-corner credit; footer line (COMP:2310-2314); notice (COMP:750) | link the repository; add an ODbL notice to the station CSVs (brazil.md:177-179 says one exists; **none was found in `outputs/`**) |
 | 2.19 | Chicago Business Licenses and boundary | Chicago | "terminate any and all display ... for any reason"; indemnity not recorded as accepted (united-states.md:297) | 2026-09-21 | the City | notice, verbatim (COMP:430) | record the indemnity acceptance |
@@ -308,7 +318,7 @@ These come from a read-only search of `app/components.py` `_NOTICES` and `app/pa
 3. **NTA (Dublin)** has no credit at all.
 4. **Milan's rail** is not credited. Notice names only the registers (COMP:896).
 5. **STM (notice, COMP:586)** lacks the statement of modifications or interpretations that the portal requires: "a bare credit does not satisfy it" (`canada.md:118`).
-6. **SFMTA "Must also display liability disclaimers"** (`united-states.md:342`) is not rendered. The stored clause ties it to a "use agreement", so it may not apply, but the record says it is required.
+6. **SFMTA "Must also display liability disclaimers"** (`united-states.md:342`) is not rendered. The stored clause ties it to a "use agreement", so it may not apply, but the record says it is required. **Closed 2026-10-03:** displayed on the cautious reading, verbatim, in notice 3 with clause 12's second paragraph.
 7. **MLIT, all 20 Japanese cities:**
    - The 位置参照情報 notice omits the level names 街区レベル and 大字・町丁目レベル that `japan.md:125` requires.
    - The N03 credit has no URL and no CC BY link (`japan.md:127`).
@@ -566,9 +576,9 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Tier: 2 (2b) - "revocable license"; required verbatim credit displayed; stored copy also carries a §5 indemnity and §10 "only Licensor shall have the right to alter ... the Data" not recorded in the row
 - Rests on: "Reproduced with permission granted by the City and County of San Francisco ..." (DS:518-523)
 - Decided by / when: licence check (2026-09-21)
-- What would flag it: SFMTA revoking; the liability-disclaimer requirement (US:342) not visibly met
-- Safety net: notice verbatim (COMP:439-444); own palette, no Muni branding (US:595-596)
-- Strengthen: add SFMTA's disclaimer, or record why "use agreement" does not apply
+- What would flag it: SFMTA revoking
+- Safety net: notice 3 verbatim, with clause 12's "as is" paragraph and clause 4's disclaimer since 2026-10-03; own palette, no Muni branding (US:595-596)
+- Strengthen: none needed. Clause 4 reads "display or include this disclaimer in any use agreement"; the site has no use agreement, so the disclaimer is displayed (the cautious reading, 2026-10-03)
 
 #### US-MTS - MTS Trolley GTFS (San Diego MTS)
 - Cities: San Diego
@@ -823,7 +833,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 4. **MassGIS Massachusetts Municipalities** (US:171): Boston's actual boundary and naming layer has no licence row; the PDDL row at US:237 covers "city boundary" on data.boston.gov, which is the outline recorded as NOT used (US:172).
 
 #### B. Notices required by the docs that could not be found rendered
-1. **SFMTA liability disclaimers**: US:342 records "Must also display liability disclaimers". _NOTICES carries only the permission sentence (COMP:439-444); nothing in app/pages/2_San_Francisco_Heatmap.py. Searched COMP and the SF page for "disclaim", "as is", "SFMTA". The stored clause (docs/licenses/sfmta-transit-data-license-agreement.html) says "display or include this disclaimer in any use agreement", so it may not bite, but the record says it is required.
+1. **SFMTA liability disclaimers**: US:342 records "Must also display liability disclaimers". _NOTICES carries only the permission sentence (COMP:439-444); nothing in app/pages/2_San_Francisco_Heatmap.py. Searched COMP and the SF page for "disclaim", "as is", "SFMTA". The stored clause (docs/licenses/sfmta-transit-data-license-agreement.html) says "display or include this disclaimer in any use agreement", so it may not bite, but the record says it is required. **Closed 2026-10-03:** displayed on the cautious reading, verbatim, in notice 3 with clause 12's second paragraph.
 2. Nothing else missing: Chicago (COMP:430), KCMO (COMP:1989), Tucson (COMP:2001), King County incl. "Data provided by permission of King County" (COMP:2188), LCB date and note (COMP:2192), Snohomish (COMP:2198), Bellevue (COMP:2203), LA Metro (COMP:445), MassDOT (COMP:449) all render.
 
 #### C. Positions recorded as pending / unresolved that a landed city relies on
