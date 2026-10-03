@@ -2181,10 +2181,11 @@ shows its category, never the enumerator's description.
 
 **One dot for many** - a shopping center or gallery recorded as one entry is one dot.
 
-**Stations.** Metrô Linhas 1–5 and 15 and CPTM Linha 9 are drawn; Linha 9's two
-stations in Osasco are left out. Not drawn: CPTM Linhas 7, 8 and 10 to 13, whose
-stations inside the city are 2 to 3.5 km apart; Linhas 6 and 17, under construction;
-buses and bus corridors.
+**Stations.** Metrô Linhas 1–5, 15 and 17 and CPTM Linha 9 are drawn; Linha 9's two
+stations in Osasco are left out. Linha 17, carrying passengers since March 2026, is
+drawn with all eight of its stations. Not drawn: CPTM Linhas 7, 8 and 10 to 13, whose
+stations inside the city are 2 to 3.5 km apart; Linha 6, under construction, whose
+first six stations run only a free weekday trial service; buses and bus corridors.
 
 ### Rio de Janeiro - the same census, and rail from two sources
 

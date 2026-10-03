@@ -88,6 +88,12 @@ def fetch_osm(force):
     els, host = osm.fetch(train, config.OSM_TRAIN_JSON, force=force)
     print(f"  {'osm_train':30s} {sum(1 for x in els if x['type'] == 'relation')} "
           f"route relations via {host}")
+    # Linha 17's Washington Luís branch, by id: OSM's route relations leave it
+    # out (config.L17_BRANCH).
+    br = config.L17_BRANCH
+    q = (f'[out:json][timeout:60];(node({br["stop_node"]});way({br["way"]}););out geom;')
+    els, host = osm.fetch(q, config.OSM_L17_BRANCH_JSON, force=force)
+    print(f"  {'osm_l17_branch':30s} {len(els)} elements via {host}")
     # Every município in the bbox, only to NAME a station outside São Paulo.
     mun = ('[out:json][timeout:180];rel["boundary"="administrative"]["admin_level"="8"]'
            f'["IBGE:GEOCODIGO"]({s},{w},{n},{e});out geom;')
