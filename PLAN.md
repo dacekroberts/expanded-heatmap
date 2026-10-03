@@ -950,10 +950,34 @@ every key, account and letter:
     terms prohibit one at this scale). The owner ACCEPTED the uncapped
     indemnity and general release for these and for the SanGIS parcels
     (2026-10-02). united-states.md wrongly names SANDAG as the publisher.
-  - CARTO basemap (Overview): a licence-read on keyless use is running (owner:
-    "make sure we can use the map at all"; replacing it would be a big
-    change). The on-map link should go to carto.com/attribution/, and an
-    OpenMapTiles credit may be owed.
+  - CARTO basemap (Overview): see the basemap item below.
+- [ ] **The Overview's basemap: CARTO live for now, OpenFreeMap being built,
+  the CARTO-key route BACKLOGGED, not dropped** (owner, 2026-10-02).
+  - **Today:** CARTO's Basemap Terms (2026-09-29) grant free use only with
+    "a CARTO-issued API key" (§3.b); the map loads keyless, so that use is
+    not permitted. The owner keeps it live until the OpenFreeMap build lands.
+  - **In progress:** a session builds OpenFreeMap's positron style, keyless
+    and permitted with conditions, as a self-hosted trimmed copy to keep
+    today's quiet look. It adds the "© OpenMapTiles" credit beside the OSM
+    one, the Positron design credit on About the Data, and a one-line note
+    that tiles load through Cloudflare. Test scripts must never script tile
+    downloads (its ToS bars automated collection).
+  - **Backlog, the CARTO-key route,** in case a key is obtained:
+    - The owner requests a free non-commercial key at
+      carto.com/basemaps/apikey/: email only, no card, 5M tile requests a
+      month, lockable to the site's host.
+    - Conditions: an uncapped indemnity (§17) and New York law, for the owner
+      to accept. A key is revocable at any time; the terms changed four times
+      in a year; a lapsed key means blank tiles.
+    - Streamlit does not send its own `cartoKey`, so the key likely needs a
+      self-hosted Positron style carrying `?key=` on every URL. Test it with a
+      real key.
+    - Fix the on-map CARTO link to carto.com/attribution/; an OpenMapTiles
+      credit is probably owed.
+    - Possibly a privacy line: CARTO processes visitors' request data, and the
+      site is the controller.
+    - The full reads are in the cleanup session's scratchpad
+      (`openfreemap/`, `ofm/`) and DECISIONS.
 - [ ] **Licence gaps from staging's ranking** (`docs/licence_positions.md`,
   5813011a; its notice numbers were stripped as unreliable, so verify each
   item against the code first). The first two are the most visible:
