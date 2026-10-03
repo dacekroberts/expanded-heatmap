@@ -262,7 +262,7 @@
  "fukuoka": {
   "in_ring": 24615,
   "all": 29917,
-  "map_blob": "fa769ffe22f513183f284080ebf3b4a2d5e74685"
+  "map_blob": "6c0c89f0c534bbbbb6a2f53c99174e991ec38c51"
  },
  "kyoto": {
   "in_ring": 27980,
@@ -272,7 +272,7 @@
  "tokyo": {
   "in_ring": 59887,
   "all": 61375,
-  "map_blob": "6655cea6f494171d36dabce1a527c1f153b3bd2d"
+  "map_blob": "04993daa0d0e4d7f3afcdcb18b087400d51513ec"
  },
  "berlin": {
   "in_ring": 49394,
@@ -557,7 +557,7 @@
  "hiroshima": {
   "in_ring": 9132,
   "all": 13565,
-  "map_blob": "b00ea50f1e7b086eaee4a039bc197cdc7066ee0a"
+  "map_blob": "e3553091daabdaf3e50f421c5103a7e1a74c290d"
  },
  "namyangju": {
   "in_ring": 10067,
@@ -708,5 +708,15 @@
   "in_ring": 677,
   "all": 1406,
   "map_blob": "b439738f82e2da4e77dc1cffac236111f8a20d9c"
+ },
+ "seattle": {
+  "in_ring": 5589,
+  "all": 14498,
+  "map_blob": "0668c9b56d2cce020d3cd165f8545521c943805a"
+ },
+ "tbilisi": {
+  "in_ring": 8084,
+  "all": 13252,
+  "map_blob": "da36efbaedcc295c9b0f53998101ba632d7fd24b"
  }
 }

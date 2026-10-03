@@ -506,6 +506,63 @@ State food store are merged into the State's row.
 
 **Stations**: all fourteen NFTA Metro Rail stations, every one inside the city.
 
+### Seattle (Regional) — five publishers, and what each one leaves out
+
+**Missing, not excluded: personal services outside Seattle and Bellevue, and
+most retail.** Only Seattle and Bellevue publish business licenses. In the
+other nine station cities (Redmond, Shoreline, SeaTac, Kent, Tukwila, Federal
+Way, Mercer Island, Lynnwood and Mountlake Terrace), food comes from King
+County's and Snohomish County's food records, Retail holds only food shops and
+shops licensed to sell alcohol, and no personal services are shown: none of
+those cities publishes them.
+
+**Left out of Seattle's register**: 988 licenses whose location lies outside
+the city although the address reads Seattle, most in unincorporated King County
+and Burien; a restaurant license not renewed for 2026 (174) unless King County
+inspected a matching business in 2025 or 2026; one headquarters on an upper
+floor, as an office. Licenses for shops and services not renewed for 2026 are
+kept (992 retail, 435 personal services), so some shown may have closed.
+
+**Left out of Bellevue's register**: canceled licenses, and licenses issued
+before 2010 (322), because Bellevue's licenses never expire. Bellevue's
+restaurants come from King County's inspections instead.
+
+**Left out of King County's food inspections**: businesses last inspected
+before 2025; mobile food units, school kitchens, caterers, nonprofit
+institutions, commissary kitchens and donated-food distributors, which have no
+counter of their own; bed and breakfasts. Left out by name: staff cafeterias at
+workplaces (Microsoft, Amazon, Google, Meta, Boeing and others) and contract
+caterers (499), hotel kitchens (145), vending routes (62), members' clubs,
+theaters and airline lounges (36), and pharmacies (9). 107 businesses whose
+parcel has no address point are not placed.
+
+**Left out of Snohomish County's list**: school kitchens, donated-food
+distributors, food trucks, catering, vending and concessions, and the same
+kinds of names as King County's. The list dates from 2025, no newer than
+November 19, 2025.
+
+**Left out of the Liquor Board's list**: licenses that are not active,
+wine-reseller and gift-delivery privileges, and 428 premises whose address
+could not be matched to a county address point (most lie outside the two
+Snohomish station cities; three Mountlake Terrace shops at one address and four
+shops inside the airport are among them).
+
+**Names**: a business licensed under a person's own name shows its category
+instead (Seattle 90, Bellevue 50, and 26 more at a residential unit), and so
+does a Bellevue license with no trade name (260).
+
+**Counted once**: a business in two sources is counted once, matched on address
+and name; a grocer in a food record and in the Liquor Board's list or
+Bellevue's register at the same address is counted once (55).
+
+**Stations**: all 39 Link stations, in 11 cities; Pinehurst, opened September
+30, 2026, is placed from Sound Transit's station page. Where a ring crosses a
+city line, the part beyond it takes the neighbor's data: King County's food
+inspections and the Liquor Board's list in Des Moines and unincorporated King
+County, Snohomish County's list in unincorporated Snohomish County. The Seattle
+Streetcar, the T Line in Tacoma, Sounder trains and the airport's SEA
+Underground are not drawn.
+
 ### Chicago — non-storefront license types
 
 Chicago classifies by license type rather than NAICS, so its exclusions are
@@ -4468,6 +4525,54 @@ stations outside are listed on Anyang's page): Line 1 and Line 4,
 7 stations. Anyang has fewer stations than the other satellite cities had to
 have, and was built for the share of its storefronts within a ring instead
 (owner, 2026-09-29). No other line has a station in the city.
+
+### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
+
+**The source** is the National Statistics Office of Georgia's Statistical
+Business Register: every business it counts as active whose factual address
+(where it operates) is in the city of Tbilisi, 63,511 in all. Each is
+classified by one main activity in NACE Rev. 2, at Georgia's national fifth
+digit.
+
+**Excluded by the classification** (each a leaf code; the counts are active
+Tbilisi businesses, 2026-10-02):
+
+- **Market stalls**: food, clothing and other goods sold from stalls and
+  markets (47.81, 47.82, 47.89), 1,833. The traders on fixed pitches at the
+  Lilo and Eliava markets who are filed as clothing or parts shops are kept.
+- **No premises**: mail-order and internet retail, internet auctions and
+  other retail outside shops (47.91, 47.99), 466.
+- **Food with no counter of its own**: event catering, contract catering
+  and canteens (56.21, 56.29 and the bare group 56.2), 285.
+- **Funeral services** (96.03), 25.
+- **The "other personal services" catch-all** (96.09 and its leaves, among
+  them pet grooming, training and boarding), 80, as in every city.
+- **Vehicle repair and wholesale** (45.20, 45.31), and the two vehicle codes
+  that mix selling with wholesale or brokerage (45.11.1, 45.11.3). Vehicle
+  and parts sales are kept, as Retail, and so is the one code for motorcycle
+  sale and repair together (45.40).
+
+**Missing rather than excluded** - a business whose main activity is
+something else (a wholesaler with a shop, a hotel's restaurant) is not shown,
+since each business carries one main activity.
+
+**A business, not a shop** - the register lists each business once, at one
+address, so a chain with several shops appears once.
+
+**Left off because they could not be placed** - 1,620 storefronts with no
+coordinate, and 1,481 on eleven points that are the center of a district or
+settlement rather than an address (a point shared by 50 or more businesses
+whose commonest address is a bare district or settlement name, or blank).
+Four of those points sit within 115 m of a metro station (Didube, Isani,
+Samgori and Liberty Square), where they would have inflated the innermost
+rings. 3 more have a coordinate outside the city.
+
+**Shown, but not named** - a business registered to a person (an individual
+entrepreneur, 8,328 of the storefronts shown) shows its category instead of a
+name.
+
+**All 23 metro stations are inside the city**; nothing is drawn beyond the
+two metro lines.
 
 ## Kept, and why
 

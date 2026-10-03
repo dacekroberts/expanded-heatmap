@@ -1,0 +1,40 @@
+station,lines,municipality,latitude,longitude
+BelRed,2,Bellevue,47.62445445,-122.16583800000001
+Bellevue Downtown,2,Bellevue,47.61523535,-122.19196105
+East Main,2,Bellevue,47.60805965,-122.19116635
+South Bellevue,2,Bellevue,47.58647285,-122.1903527
+Spring District,2,Bellevue,47.623773150000005,-122.1786147
+Wilburton,2,Bellevue,47.618073800000005,-122.1837979
+Federal Way Downtown,1,Federal Way,47.3158776,-122.3038748
+Kent Des Moines,1,Kent,47.38952260000001,-122.29442975
+Star Lake,1,Kent,47.3594521,-122.29731355
+Lynnwood City Center,1;2,Lynnwood,47.81557135,-122.29487515
+Mercer Island,2,Mercer Island,47.588171700000004,-122.2331552
+Mountlake Terrace,1;2,Mountlake Terrace,47.7850344,-122.3147995
+Downtown Redmond,2,Redmond,47.6717284,-122.11883165
+Marymoor Village,2,Redmond,47.667287900000005,-122.10957300000001
+Overlake Village,2,Redmond,47.63638815,-122.1388301
+Redmond Technology,2,Redmond,47.644815,-122.13363855
+Angle Lake,1,SeaTac,47.4224222,-122.29779535
+SeaTac/Airport,1,SeaTac,47.445347749999996,-122.2969083
+Beacon Hill,1,Seattle,47.579264949999995,-122.3117738
+Capitol Hill,1;2,Seattle,47.619076,-122.32020455
+Columbia City,1,Seattle,47.55973495,-122.29270695
+International District Chinatown,1;2,Seattle,47.598280900000006,-122.32800525
+Judkins Park,2,Seattle,47.5902971,-122.30432289999999
+Mount Baker,1,Seattle,47.576564000000005,-122.29769809999999
+Northgate,1;2,Seattle,47.70302735,-122.3282955
+Othello,1,Seattle,47.5379955,-122.28158635
+Pinehurst,1;2,Seattle,47.72401944507772,-122.32328366944444
+Pioneer Square,1;2,Seattle,47.60269235,-122.33134885
+Rainier Beach,1,Seattle,47.522434849999996,-122.27939535
+Roosevelt,1;2,Seattle,47.676646,-122.3159835
+SODO,1,Seattle,47.581261600000005,-122.327405
+Stadium,1,Seattle,47.5911105,-122.32718704999999
+Symphony,1;2,Seattle,47.6077455,-122.3359625
+U District,1;2,Seattle,47.6604917,-122.314133
+University of Washington,1;2,Seattle,47.64985355,-122.30377250000001
+Westlake,1;2,Seattle,47.61171675,-122.33638925
+Shoreline North/185th,1;2,Shoreline,47.76406455,-122.3229102
+Shoreline South/148th,1;2,Shoreline,47.73608985,-122.3252456
+Tukwila International Boulevard,1,Tukwila,47.46400025,-122.28791795000001

@@ -198,9 +198,9 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 at once never take the same "next free" number: the UK six **156–161**
 (build order), the Japan batch **162–173** (its kit's table order),
 Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
-here, by the session, before one is written: the Japan batch holds 97–108 on
-its branch, so the Seattle session starts at 109 (the UK six's 84–96 landed
-2026-10-02).
+here, by the session, before one is written. None is open: every claimed
+block landed 2026-10-02 (the last notice is 114; Tbilisi's unused 115–116
+released), so the next claim starts at 115.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the
 ranges in that one sentence, and delete a batch's range once it lands.

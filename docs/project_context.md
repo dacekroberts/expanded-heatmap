@@ -286,6 +286,38 @@ Cities built and running end to end (pipeline, map, app page):
   (owner). The lowest in-ring share on the map, stated on the page (owner).
   Rail from OSM: METRO's data agreement is kept out of the build.
 
+- **Seattle (Regional)** - Link light rail's 1 and 2 Lines, every station, in
+  eleven cities across King and Snohomish Counties; held for the batch review.
+  **The first page built from five publishers, each used only in the places it
+  covers**: Seattle's and Bellevue's own license registers (NAICS, through the
+  shared module), King County's food inspections placed by parcel through the
+  County's address points, Snohomish County's 2025 food list for Lynnwood and
+  Mountlake Terrace, and the state Liquor Board's off-premise list as a
+  partial retail layer outside the two register cities. Personal services
+  exist only where the two cities publish them, disclosed per city; a ring
+  that crosses a city line takes the neighbor's data. Rail from OpenStreetMap
+  (Sound Transit's feed terms), with a station opened after the relations
+  were last edited placed from the operator's own page. Two structural
+  privacy signals replace the shape test: Seattle's server is asked which
+  trade names equal the legal name (ids only, no names downloaded), and
+  Bellevue marks sole proprietorships. The food registers' workplace
+  cafeterias, vending, hotel kitchens and clubs are left out by name, as in
+  Minneapolis.
+- **Tbilisi** - the Tbilisi Metro's two lines, every station; held for the
+  batch review. **Georgia's first city and the first in the West Asia
+  region**, a view of its own (Europe's frame was not stretched east).
+  Businesses from one national source, Geostat's Statistical Business
+  Register, filtered to the FACTUAL address in the city: one row per entity,
+  not per premises, so chains are undercounted (owner, disclosed). The API
+  has no column selection, so personal numbers and individual entrepreneurs'
+  names are dropped in memory before anything is saved, and an individual
+  entrepreneur's pin shows its category (Taichung's precedent). The
+  register's coordinates include district and settlement centroids shared by
+  dozens of businesses, four of them on metro stations; those points are
+  found by a stated rule, listed, and left off. NACE Rev. 2 at the national
+  leaf (`georgia_nace.py`, modelled on France's NAF module), with vehicle
+  sales kept (the precedent, not France's exception). Rail and the city
+  boundary from one OpenStreetMap query.
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first
   built from two municipalities' own registries.** Distinctive in five ways.

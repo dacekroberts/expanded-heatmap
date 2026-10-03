@@ -3724,6 +3724,55 @@ CITIES = [
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
         "label_offset": ('middle', 0, -22),
     },
+    {
+        "name": "Seattle (Regional)",
+        "lat": 47.6062,
+        "lon": -122.3321,
+        "page": "pages/174_Seattle_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Register coordinates; food placed by parcel (99.1%)",
+        "data_age": "Seattle, Bellevue and King County fetched 2026-10-02; Snohomish food 2025",
+        "rail_extra": "Trams",
+        "record_kind": "Permit registers",
+        # Personal services are published by Seattle and Bellevue only: the
+        # other nine station cities have none (the brief, 4b).
+        "categories": "Personal services thin",
+        "blurb": "Link light rail (1 and 2 Lines, 39 stations across 11 cities)",
+        "region": "United States West",
+        "country": "United States",
+        "mode": "light_rail",
+        # NOT IN THE DEFAULT FRAME although a US city: at 47.61 N Seattle is
+        # north of every framed US city, and joining IN_DEFAULT_VIEW would
+        # re-fit the pinned 1.4525 zoom every label offset here was measured
+        # at (Vancouver's and Buffalo's reason).
+        "in_default_view": False,
+        # WEST of its dot, scored by check_macro_labels.py 2026-10-02 (width
+        # 120.5 measured): 15 regions x 3 widths, PROBLEMS 0. Above, the pill
+        # covered Calgary's marker; east or below it overlapped Minneapolis's
+        # pill (below, Sacramento's and Chicago's too) in the United States view.
+        "label_offset": ("end", -12, 0),
+    },
+    {
+        "name": "Tbilisi",
+        "lat": 41.72,
+        "lon": 44.79,
+        "page": "pages/175_Tbilisi_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates (81.0%)",
+        "data_age": "Register of 2026-10-02",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Tbilisi Metro (Akhmeteli-Varketili and Saburtalo Lines, 23 stations)",
+        "region": "West Asia",
+        "country": "Georgia",
+        "mode": "metro",
+        "in_default_view": False,
+        # ABOVE its dot, scored by check_macro_labels.py 2026-10-02 (width
+        # 39.1 measured): 16 regions x 3 widths, PROBLEMS 0. Alone in West
+        # Asia; off the canvas in Global, as Europe's eastern dots are.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -3913,6 +3962,13 @@ REGION_ORDER = [
     # Zealand city joins it; Perth is about 3,300 km from Sydney, past the
     # distance at which Canada was split, so re-score it if it ever arrives.
     "Oceania",
+    # WEST ASIA (owner, 2026-10-02): Tbilisi first. Dublin to Tbilisi is about
+    # 3,700 km, past the 3,300 at which Canada was split, and the UN M49
+    # geoscheme files Georgia in Western Asia, so Europe's frame is left as it
+    # was rather than stretched east. Named for the area, as East Asia and
+    # Oceania are, so a later Baku, Yerevan or Ankara joins it. A view of its
+    # own, NOT a sub-view, so it is not in COUNTRY_VIEWS.
+    "West Asia",
 ]
 
 # THE COUNTRY VIEWS GO LAST IN THE REGION MENU (owner, 2026-10-02): the small

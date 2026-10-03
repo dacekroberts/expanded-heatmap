@@ -2178,6 +2178,42 @@ _NOTICES = [
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
      False),
+    # Seattle (Regional) (notices 109-113, the session's claimed block):
+    # King County's two required texts (owner, 2026-10-01: the permissive
+    # reading rests on the Open Data terms' legend); the Liquor Board's list
+    # date and its own data-transfer note while the lists page carries it
+    # (owner, 2026-10-02); Snohomish County's credit in the owner's words;
+    # Bellevue's credit (the condition of the owner's reading); Seattle's
+    # credit, recommended and displayed by choice.
+    ("Public Health – Seattle & King County (Seattle (Regional))",
+     "Food inspection data: Public Health – Seattle & King County. Data provided "
+     "by permission of King County. Not endorsed by King County.",
+     False),
+    ("Washington State Liquor and Cannabis Board (Seattle (Regional))",
+     "Shops licensed to sell alcohol outside Seattle and Bellevue: the Washington "
+     "State Liquor and Cannabis Board's off-premise licensee list of September 29, "
+     "2026, not a complete or current list of shops. The Board notes that its list "
+     "reports \"contain possible errors due to a known data transfer issue\".",
+     False),
+    ("Snohomish County (Seattle (Regional))",
+     "Lynnwood and Mountlake Terrace food establishments: Snohomish County, Food "
+     "Service Establishments (2025). The list dates from 2025 and is not a current, "
+     "complete or official record.",
+     False),
+    ("City of Bellevue (Seattle (Regional))",
+     "Business license data: City of Bellevue.",
+     False),
+    ("City of Seattle (Seattle (Regional))",
+     "Business license data: City of Seattle.",
+     False),
+    # Tbilisi (notice 114): Geostat's Terms of Use require naming Geostat as
+    # the source (also Art. 43(6) of Georgia's statistics law); no logo, no
+    # implied endorsement. Wording proposed by the brief, flagged for review.
+    ("Geostat (Tbilisi)",
+     "Business data: National Statistics Office of Georgia (Geostat), Statistical "
+     "Business Register, retrieved 2026-10-02; processed by this project. Not "
+     "endorsed by Geostat.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

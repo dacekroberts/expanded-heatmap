@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
@@ -106,6 +106,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
+| Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
 ## Business registries
 
@@ -2949,6 +2950,92 @@ at review time).
 - **MUST DO:** `check_personal_exposure.py kochi` with its Japan pass,
   run 2026-10-02; the verdict is in `docs/decisions_drafts/japan-batch.md`
   ("Kōchi built", 2026-10-02).<!-- /internal -->
+**109. Public Health – Seattle & King County (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02; the
+session's claimed block, 109–116.)
+
+- **Read as permitted by the owner (2026-10-01, option 1)**: the inspection
+  dataset (`r878-4sxa`) is declared Public Domain and the portal's Open Data
+  terms (archived 2023) granted reuse; the live site-wide kingcounty.gov terms
+  forbid publishing without written permission. Rows in
+  [`data_sources/united-states.md`](data_sources/united-states.md).
+- **MUST DISPLAY**: the publisher's attribution "Public Health – Seattle & King
+  County", and the Open Data terms' legend "Data provided by permission of King
+  County", since the permissive reading rests on those terms.
+- **MUST NOT**: use King County's logo or marks, or imply endorsement; take
+  `CTYNAME`, `POSTALCTYNAME` or the ZIP fields from the County's address points
+  (they come from the USPS ZIP+4 product).
+- **MUST DO**: nothing further. The removal rule is the safety net.
+
+**110. Washington State Liquor and Cannabis Board (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**: no license and no terms of use exist; the
+  lists page notes that records received through the Public Records Act "may
+  not be used for commercial purposes" (RCW 42.56.070(8)). This project is
+  non-commercial (owner, 2026-10-02).
+- **MUST DISPLAY**: the list's date, and, while it stands on the Board's lists
+  page, the Board's notice that its list reports "contain possible errors due
+  to a known data transfer issue" (owner, 2026-10-02: "yes").
+- **MUST NOT**: call the list complete or current; publish `Licensee`, phone or
+  mailing columns.
+- **MUST DO**: at each refresh, check whether the data-transfer notice is still
+  on the lists page, and drop it from the notice when the Board removes it.
+  Removal contact: publicrecords@lcb.wa.gov.
+
+**111. Snohomish County (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **SILENT, read permissively by the owner (2026-10-02)**: the "Food Service
+  Establishments (2025)" item states no license; the County's GIS Terms of Use
+  and Data Disclaimer are read as its governing position.
+- **MUST DISPLAY**: the credit "Snohomish County, Food Service Establishments
+  (2025)" (the owner's wording), never the health department, whose authorship
+  is unconfirmed.
+- **MUST NOT**: call the layer current, complete or official; its data are no
+  newer than 2025-11-19.
+- **MUST DO**: nothing. The removal rule is the safety net.
+
+**112. City of Bellevue (Seattle (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **Read as permitted by the owner (2026-10-01, option 1)**: the data's own
+  license field bars only commercial use or sale without written
+  authorization; the portal's site terms are narrower.
+- **MUST DISPLAY**: credit the City of Bellevue (the condition of the owner's
+  reading; no wording prescribed, so this is the project's own).
+- **MUST NOT**: use the data commercially; publish a registrant's legal name
+  (never downloaded).
+- **MUST DO**: take the layer down first if Bellevue objects.
+
+**113. City of Seattle (Seattle (Regional)) — displayed by choice, not required**
+(written into `render_site_notices()` with Seattle (Regional), 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**: the City's Open Data Terms of Use and Open
+  Data Policy V1.0; no attribution is required, and crediting "City of Seattle"
+  is recommended, so it is displayed.
+- **MUST NOT**: use the data for a commercial purpose (data configurable as "a
+  list of individuals"); publish contact names, phones, mailing addresses or
+  person-named trade names.
+- **MUST DO**: nothing.
+
+**114. Geostat (Tbilisi) — required, and DISPLAYED**
+(written into `render_site_notices()` with Tbilisi, 2026-10-02.)
+
+- **PERMITTED WITH CONDITIONS**: Geostat's Terms of Use
+  (`https://www.geostat.ge/en/page/monacemta-gamoyenebis-pirobebi`, linked
+  from the register's own footer as "Terms of Data Usage") allow any use,
+  "including commercial and non-commercial use, without restriction ...
+  without prior permission". Third-party copyright and Geostat's logos and
+  trademarks are outside the grant. Rows in
+  [`data_sources/georgia.md`](data_sources/georgia.md).
+- **MUST DISPLAY**: Geostat as the source: "Users should indicate Geostat as a
+  source of information when using data of GEOSTAT" (also Article 43(6) of
+  Georgia's Law on Official Statistics).
+- **MUST NOT**: use Geostat's logo; imply Geostat's endorsement.
+- **MUST DO**: nothing further. Individual entrepreneurs' names and personal
+  numbers are never written to disk; the removal rule is the safety net.
+
 
 ## Gaps
 

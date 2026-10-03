@@ -32,6 +32,8 @@ dense-looking city may simply have more complete records.
   Chicago, Philadelphia, Miami, Washington D.C., Sacramento, Houston (state sales-tax permits), Vancouver/Surrey, Calgary, Edmonton,
   Toronto, Milan (six premises registers), Rome (SUAP authorisations).
 - **Assembled from several activity-specific registers:** New York (4), Boston (3), Buffalo (3),
+  Seattle (Regional) (5: two city license registers, two county food records and the
+  state's liquor-store list, each in the places it covers),
   and the Korean permit registers: Seoul (17 types), Daegu (14), Busan (14). The
   Japanese cities too: Kobe, Osaka, Sapporo, Fukuoka and Kyoto each join the city's
   food-permit list to its barber, beauty-salon and laundry registers (4; Sapporo 5,
@@ -51,7 +53,8 @@ dense-looking city may simply have more complete records.
   Yongin, Suwon and Bucheon (SEMAS's national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo and Bergen (Enhetsregisteret sub-units),
   Copenhagen and Aarhus (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
-  and Taipei (the national business tax register, FIA).
+  and Taipei (the national business tax register, FIA); Tbilisi (Geostat's Statistical
+  Business Register, one row per business rather than per shop).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
 - **A food hygiene register:** London, Newcastle (Regional), Manchester (Regional),
@@ -108,7 +111,8 @@ services. A few cannot, because the local records never cover that trade.
   Fukuoka: 5,185 against 14,764 (without its caterers and snack bars), with the
   food shops that only notify present where they published in MHLW's opt-in list. On all six Japanese maps the layer is named
   "Food shops", not "Retail".
-- **Personal services thin:** Berlin. Hairdressers and laundries are crafts,
+- **Personal services thin:** Seattle (Regional): only Seattle and Bellevue publish
+  personal services; the other nine station cities show none. Berlin. Hairdressers and laundries are crafts,
   members of the Handwerkskammer rather than the chamber of commerce whose register
   the map uses, so the layer is beauty and nail salons, spas, saunas and massage
   (3,121 pins inside the rings against 30,800 Retail and 15,472 Food service;
@@ -204,7 +208,8 @@ register covers them all, or because the rail network only makes sense that way.
   (Regional) (the five Tyne and Wear districts), Manchester (Regional) (the seven
   Metrolink districts), Birmingham (Regional) (Birmingham, Sandwell and Wolverhampton),
   Nottingham (Regional) (the city, Broxtowe, Rushcliffe and Ashfield), Blackpool (Regional)
-  (Blackpool and Wyre).
+  (Blackpool and Wyre), Seattle (Regional) (11 cities, five
+  publishers, each in the places it covers).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -264,7 +269,9 @@ name at their home.
   owners and partnerships of individuals, by the permit's organisation type).
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
-- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Buffalo (42 salons licensed under a person's own name show the licence type). Sacramento (525 businesses whose name reads as a person's show their description). Kobe (10 pins: a
+- **Type in place of a personal name:** Vancouver/Surrey (88 pins). Seattle (Regional) (166
+  licenses under a person's own name, and 260 Bellevue licenses with no trade name, show
+  their category). Buffalo (42 salons licensed under a person's own name show the licence type). Sacramento (525 businesses whose name reads as a person's show their description). Kobe (10 pins: a
   trade name that is the operator's own name shows its permit type). Osaka (9 pins,
   the same rule, applied to every permit at the premises), Sapporo (7), Kyoto (8),
   Fukuoka (5, on the city's lists only: MHLW publishes no operator column to test),
@@ -273,7 +280,8 @@ name at their home.
 - **"Name withheld" in place of a personal name:** Seoul (138 pins), Daegu (113),
   Busan (114).
 - **Line of business in place of an unmarked sole proprietor's name:** Taichung
-  (11,907 pins), Taoyuan (7,230), Taipei (17,890).
+  (11,907 pins), Taoyuan (7,230), Taipei (17,890). Tbilisi (8,328 businesses registered
+  to a person show their category).
 - **"No shop sign":** Hong Kong (308 pins, where the licence records none).
 - **Reason:** the source has no name column, or a privacy rule.
 
@@ -344,7 +352,10 @@ really shopfronts. Several pages say which way their map leans.
   thirty-seven); Nottingham (Regional) (about one in eighteen, most in Rushcliffe, 14.2%);
   Blackpool (Regional) (about one in nineteen, almost all in Wyre); Buenos Aires
   (shopfronts whose use the surveyors could not identify, 7.2% and 32% in Villa
-  Riachuelo, are dropped, and shops inside malls and arcades are not itemised).
+  Riachuelo, are dropped, and shops inside malls and arcades are not itemised);
+  Tbilisi (one row per business, so a chain appears once; about one storefront in
+  five has no location, or only a district center's, and is not placed; a new
+  business appears once Geostat counts it as active).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
@@ -529,6 +540,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Washington D.C. | Metrorail, 6 lines | DC Streetcar no longer operating (ended 2026-03-31); MARC/VRE are separate systems | WMATA GTFS (API key); gate 3 exact | District | 58 / 0 |
 | Buffalo | NFTA Metro Rail (light rail, one line) | NFTA's GTFS not used (OSM) | OpenStreetMap route relations; gate 3 exact on 14 | City | 0 / 0 |
 | Sacramento | SacRT light rail, Blue and Gold | Green Line (suspended; its one station closed for works) | OpenStreetMap route relations (+ Wikidata for Dos Rios); gate 3 exact on SacRT's timetables | City | 15 / 0 |
+| Seattle (Regional) | Link light rail, 1 and 2 Lines | Seattle Streetcar; T Line (Tacoma); Sounder; SEA Underground | OpenStreetMap route relations (Sound Transit's GTFS not used, its terms); Pinehurst placed from Sound Transit's station page; gate 3 exact (27 / 26) | 11 cities, rings across a city line take the neighbor's data | 0 / 0 |
 | Houston | METRORail light rail, Red, Green and Purple | — | OpenStreetMap route relations (METRO's data agreement kept out); gate 3 exact | City (TIGER) | 0 / 0 |
 | Minneapolis | METRO Blue and Green light rail | Northstar commuter rail; the Como-Harriet heritage streetcar (a museum ride) | OpenStreetMap route relations (Metro Transit's GTFS licence unread); gate 3 exact on 19 and 23 | City (TIGER) | 22 / 0 |
 | Pittsburgh | PRT light rail (the T), Red, Blue and Silver, with the downtown subway | Buses, the inclines | OpenStreetMap route relations (PRT's GTFS licence unread); gate 3 exact on 31, 24 and 31 | City (TIGER); halved rings | 31 / 0 |
@@ -683,6 +695,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
 | **Switzerland** | | | | | |
 | Zurich | VBZ trams 2–11, 13–15, 17 and the 2026 construction lines 50 and 51 | S-Bahn; Forchbahn S18; trams 12 (Glattalbahn) and 20 (Limmattalbahn), stubs | OpenStreetMap route relations; gate 3 exact (ZVV) | City (Stadt Zürich) | 15 / 0 |
+| **Georgia** | | | | | |
+| Tbilisi | Tbilisi Metro, Akhmeteli-Varketili and Saburtalo Lines | — | OpenStreetMap route relations (no GTFS found); gate 3 exact (23, the operator's count) | City | 0 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -703,6 +717,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Washington D.C. | License register | Basic Business License | Own BUSINESSACTIVITY | 899 / 2,603 / 345 | "Delicatessen" (1,065) ambiguous, counted as Food |
 | Buffalo | 3 activity registers | City Business Licenses, NYS food stores, NYS salons | Per-source dispatch | 113 / 188 / 75 | Retail thin |
 | Sacramento | Tax register | Business Operation Tax Information | Own Business_Description | 625 / 510 / 243 | — |
+| Seattle (Regional) | 5 registers | Seattle and Bellevue licenses, King County food inspections, Snohomish County food (2025), Liquor Board off-premise list | Per-source dispatch (NAICS for the two city registers) | 2,120 / 2,585 / 881 | Personal services thin: Seattle and Bellevue only; Retail outside them is food and liquor shops |
 | Houston | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 1,077 / 1,052 / 94 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | Minneapolis | Food hygiene register | City of Minneapolis Food Inspections, one row per violation | Its own FacilityCategory, plus a name test | 115 / 526 / — | No Personal services; Retail = food shops only ("Grocery and food shops") |
 | Pittsburgh | Food hygiene register | Allegheny County Health Department's Geocoded Food Facilities (as of 2025), one row per facility | Its own category_cd, plus a name test | 48 / 268 / — | No Personal services; Retail = food shops only ("Food-selling shops") |
@@ -857,6 +872,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 | **Switzerland** | | | | | |
 | Zurich | License register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
+| **Georgia** | | | | | |
+| Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,728 / 702 / 654 | A business, not a shop: a chain appears once |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -874,6 +891,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Washington D.C. | Register X/Y + Census geocoder (387 of 451, 85.8%; 64 lost) | Delicatessen ambiguity | Residential rentals (61%), General Business, school cafeterias, caterers |
 | Buffalo | Register coordinates (14 rows without a point lost) | Retail thin; possible double counts | Expired licences, caterers, sidewalk cafés, chair renters, salons at an apartment; person-named salons shown by type |
 | Sacramento | Census geocoder (98.0% of addresses matched; 125 outside the city by postal address) | "ON FILE" addresses withheld and unplaceable | Expired licences, two catch-alls, online, mobile and cottage food, individual stylists and massage technicians, repairs, apartments; person-like names shown by type |
+| Seattle (Regional) | Register coordinates; food placed by parcel (99.1%); liquor stores by street address (76.7%) | Personal services and most retail absent outside Seattle and Bellevue; lapsed Seattle licenses kept; Snohomish food list from 2025 | Seattle licenses outside the city, lapsed food with no 2025-26 inspection, Bellevue licenses issued before 2010, R1 classes, staff cafeterias, hotel kitchens, vending, clubs and food-register pharmacies by name; person-named licenses shown by category |
 | Houston | Address join to the City's Site Addresses (83.9%) + Census geocoder (12.4%); 3.7% unplaced, 608 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments, trailers and a person's permit at a Residential point; address shown for a person's permit |
 | Minneapolis | Register coordinates (97.8%); 42 not placed | Food only; 3 uncategorised facilities left out | Institutions, caterers, mobile units, stalls, food shelves and wholesale by type; contract and institutional kitchens, vending, hotels, venues, pharmacies and named cabarets by name; a grocer's second licence for one counter folded |
 | Pittsburgh | Register coordinates (98.7%); 22 not placed, 3 outside the city | Food only; a list dated 2025-08-27 | Institutional, mobile, school, processing, boarding, commissary, caterer, social-club and banquet types; venue stands, workplace micro-markets, hospital and campus outlets, hotel back of house, pharmacies, dark stores and named adult venues by name |
@@ -1020,6 +1038,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | **Switzerland** | | | |
 | Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
+| **Georgia** | | | |
+| Tbilisi | Register coordinates (81.0%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -1040,6 +1060,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Washington D.C. | Active licences (2026-09-21) | — | 0.6 mi | Yes | 74% | Name |
 | Buffalo | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 24% | Trade name; licence type for person-named salons |
 | Sacramento | Licences unexpired on 2026-09-29 (2026-09-29) | B | 0.6 mi | Yes | 41% | Name; description for names that read as a person's |
+| Seattle (Regional) | Seattle licenses of every year, Bellevue's issued since 2010, food inspected 2025-2026, Snohomish food 2025, liquor list 2026-09-29 (2026-10-02) | B | 0.6 mi | Yes | 39% | Trade name; category for person-named licenses |
 | Houston | Active permits (2026-09-29) | B | 0.6 mi | Yes | 7% | Name; address for a person's permit |
 | Minneapolis | Inspected within two years of 2026-09-30 (2026-09-30) | B | 0.6 mi | Yes | 36% | Trade name |
 | Pittsburgh | Active on the County's list of 2025-08-27 (2026-09-30) | B | 0.3 mi | Yes | 18% | Trade name |
@@ -1194,6 +1215,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
 | **Switzerland** | | | | | | |
 | Zurich | Open licences, kept current; last updated 2026-09-28 (fetched 2026-09-30) | B | 0.3 mi | Yes | 92% | Trade name and licence type; address for a person-named trade name |
+| **Georgia** | | | | | | |
+| Tbilisi | Live register (fetched 2026-10-02) | Yes (caption) | 0.6 mi | Yes | 61% | Company name in Georgian, or the category for a business registered to a person (8,328) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide
