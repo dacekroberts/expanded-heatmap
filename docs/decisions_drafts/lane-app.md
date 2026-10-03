@@ -4,6 +4,20 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Notice 1 names the Japanese cities' English station names; San Diego's comments name SanGIS (cleanup)
+
+- **Japan:** the twenty Japanese cities take their lines from MLIT N02 and
+  only their English station names from OpenStreetMap (`name:en`; every
+  Japanese row in `docs/data_sources/japan.md` says so). Notice 1's sentence
+  gains a clause for them, "the English station names, though not the lines
+  or boundaries, of Kobe, ... and Kōchi", and they sit in a list of their own,
+  `_OSM_STATION_NAMES`, beside `_OSM_RAIL`, so the rail wording stays with
+  the rail-geometry cities; notice 1's rail entry shows on both lists' pages.
+- **San Diego:** two comments in `pipeline/san_diego/config.py` and the
+  step 1 docstring named SANDAG as the boundary file's (and the parcels')
+  publisher; they now say SanGIS publishes and SANDAG hosts. Comments only,
+  so no step was re-run and no drift check was run.
+
 ### 2026-10-03 - GitHub and LinkedIn icons in the page header, on every page (owner)
 
 - **The owner approved both links** (2026-10-03): the repository,
@@ -54,8 +68,8 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   County, SanGIS boundaries) and drops the SanGIS boundaries' "Terms not read"
   row; it now names SanGIS as publisher of the boundaries and the parcels,
   SANDAG as host. ireland.md and france.md gain a licences section each.
-  `pipeline/san_diego/` comments still say "SANDAG" for the boundary file;
-  not this lane's files.
+  The `pipeline/san_diego/` comments that named SANDAG as publisher were
+  corrected the same day (the entry above).
 - **Numbering:** first written as 115-118, then renumbered 137-140 (cleanup,
   2026-10-03): Japan wave 2 holds 115-128 and the four extensions 129-136,
   both building. The claim is recorded in docs/session_roles.md's claims

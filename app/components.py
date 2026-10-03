@@ -572,6 +572,16 @@ _OSM_RAIL = (
     "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
     "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
 )
+# The cities whose rail is not OpenStreetMap's but whose English station names
+# are (the twenty Japanese cities: MLIT N02 lines, OSM `name:en`). Kept apart
+# from _OSM_RAIL so only rail-geometry cities get the rail wording; notice 1's
+# sentence names these in a clause of their own, in this order.
+_OSM_STATION_NAMES = (
+    "Kobe", "Osaka", "Sapporo", "Fukuoka", "Kyoto", "Tokyo", "Yokohama",
+    "Hiroshima", "Matsuyama", "Toyama", "Kumamoto", "Fukui", "Nagasaki",
+    "Utsunomiya", "Kitakyushu", "Sakai", "Hakodate", "Kagoshima", "Okayama",
+    "Kōchi",
+)
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
 # are recorded in docs/data_sources.md, "Notices this project MUST display
@@ -1031,12 +1041,16 @@ _NOTICES = [
      "boundary, the tram and métro line geometry of Montpellier, Strasbourg, "
      "Le Havre, Caen and Rouen, the location of Philadelphia's 11th Street "
      "station, which is closed for works and not drawn, "
-     "the routes of Taichung's Green Line and Taoyuan's Airport MRT, and the "
+     "the routes of Taichung's Green Line and Taoyuan's Airport MRT, the "
+     "English station names, though not the lines or boundaries, of Kobe, "
+     "Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, "
+     "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
+     "Hakodate, Kagoshima, Okayama and Kōchi, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
-     False, _OSM_RAIL),
+     False, (*_OSM_RAIL, *_OSM_STATION_NAMES)),
     # Barcelona's terms prescribe the source wording AND require modifications
     # to be identified at distribution - the disclosure-of-transformation
     # family for the fourth time, after Montreal, INEGI and Madrid. A credit
