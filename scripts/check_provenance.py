@@ -26,7 +26,15 @@ WHAT IT CHECKS
      join, a geocoder).
   C. `app/components.py`'s `_NOTICES` and `data_sources.md`'s numbered notices
      are in bijection. A required string displayed but unexplained, or
-     explained but not displayed, fails.
+     explained but not displayed, fails; so does an entry whose number names
+     a different notice. NOT_DISPLAYED lists the one numbered item with no
+     text of its own, and why.
+  N. Each notice reaches the pages its terms need (owner, 2026-10-02). Every
+     city a notice names is a city in `app/cities.py`; every city page passes
+     its own name to `render_site_notices()`; the every-page set is the one
+     the owner approved; and, rendered against a stand-in for streamlit,
+     every notice's text is on the Required notices page and on the page of
+     each city it names, and the every-page set on the Overview.
   D. Notice numbers are unique and contiguous from 1. Appending a country's
      block without renumbering once left two item 8s and two item 15s.
   L. A notice BUILT from config credits every file the city reads. Tokyo's
@@ -462,12 +470,163 @@ def check_prescribed_credits():
     return problems
 
 
+def _module_value(node, names):
+    """A tuple, string, number or name of one, from source; None otherwise."""
+    if isinstance(node, ast.Constant):
+        return node.value
+    if isinstance(node, ast.Name):
+        return names.get(node.id)
+    if isinstance(node, ast.Tuple):
+        out = []
+        for e in node.elts:
+            if isinstance(e, ast.Starred):
+                out.extend(_module_value(e.value, names) or ())
+            else:
+                out.append(_module_value(e, names))
+        return tuple(out)
+    return None
+
+
 def displayed_notices():
-    """Headings in app/components.py's _NOTICES, read as source, not imported."""
-    src = read(COMPONENTS_PY)
-    start = src.index("_NOTICES")
-    end = src.index("def ", start)
-    return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
+    """(number, heading, cities, every_page) for each Notice in
+    app/components.py's _NOTICES, read as source, not imported. A city group
+    named by a module-level tuple (_BRAZIL) is resolved from the same file."""
+    tree = ast.parse(read(COMPONENTS_PY))
+    names, out = {}, []
+    for node in tree.body:
+        if not (isinstance(node, ast.Assign) and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)):
+            continue
+        target = node.targets[0].id
+        if target != "_NOTICES":
+            names[target] = _module_value(node.value, names)
+            continue
+        for e in node.value.elts:
+            if not (isinstance(e, ast.Call) and getattr(e.func, "id", None) == "Notice"):
+                continue
+            args = [_module_value(a, names) for a in e.args]
+            kw = {k.arg: _module_value(k.value, names) for k in e.keywords}
+            out.append((args[0], args[1],
+                        args[4] if len(args) > 4 else kw.get("cities"),
+                        bool(args[5] if len(args) > 5 else kw.get("every_page"))))
+    return out
+
+
+# Numbered items with no text of their own to display, and why. Anything else
+# numbered and displayed nowhere fails check C.
+NOT_DISPLAYED = {
+    5: "New York City: a conditional duty to identify source, version and "
+       "modifications, met by the About the Data and What Is Excluded pages",
+}
+
+# N: the notices on every page, approved by the owner 2026-10-02: the
+# OpenStreetMap basemap line (1), Chicago (2) and Kansas City (80), whose terms
+# name the site; LA Metro (4), whose placement could not be read; INEGI (8) and
+# Barcelona (21), whose disclosure duties may reach the Overview's figures.
+# Changing this set is a decision for the owner, not an edit.
+EVERY_PAGE_APPROVED = {1, 2, 4, 8, 21, 80}
+NOTICES_PAGE_FILE = ROOT / "app" / "pages" / "Required_Notices.py"
+
+
+def _rendered_text(components, call, *args, **kwargs):
+    """Every string `call` passes to streamlit, with streamlit replaced by a
+    recorder. Captions, markdown and links all count; layout calls return the
+    recorder, so `with st.container(...)` works."""
+    seen = []
+
+    class Recorder:
+        def __getattr__(self, _name):
+            return self
+
+        def __call__(self, *a, **k):
+            seen.extend(x for x in [*a, *k.values()] if isinstance(x, str))
+            return self
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+    real = components.st
+    components.st = Recorder()
+    try:
+        getattr(components, call)(*args, **kwargs)
+    finally:
+        components.st = real
+    return "\n".join(seen)
+
+
+def check_notice_placement(shown):
+    """N: see the module docstring."""
+    problems = []
+    city_set = set(city_names())
+    for num, heading, cities, every in shown:
+        if not isinstance(cities, tuple):
+            problems.append(f"notice {num} ({heading}): its cities could not be "
+                            f"read from source")
+            continue
+        for c in cities:
+            if c not in city_set:
+                problems.append(f"notice {num} ({heading}) names {c!r}, which is "
+                                f"not a city in app/cities.py")
+        if not cities and not every:
+            problems.append(f"notice {num} ({heading}) names no city and is not "
+                            f"on every page, so only the notices page shows it")
+    every = {num for num, _h, _c, e in shown if e}
+    if every != EVERY_PAGE_APPROVED:
+        problems.append(f"every-page notices are {sorted(every)}, the owner "
+                        f"approved {sorted(EVERY_PAGE_APPROVED)}")
+
+    # Each city page passes its own name, so its notices render on it.
+    by_page = {}
+    for node in ast.parse(read(CITIES_PY)).body:
+        if isinstance(node, ast.Assign) and any(
+                getattr(t_, "id", None) == "CITIES" for t_ in node.targets):
+            for d in node.value.elts:
+                pairs = {getattr(k, "value", None): getattr(v, "value", None)
+                         for k, v in zip(d.keys, d.values)}
+                by_page[pairs.get("page")] = pairs.get("name")
+    for page, name in sorted(by_page.items(), key=lambda kv: str(kv[0])):
+        path = ROOT / "app" / (page or "")
+        if not path.is_file():
+            continue            # check_deploy_imports reports a missing page
+        calls = re.findall(r'^render_site_notices\((.*)\)[ \t]*$', read(path), re.M)
+        if calls != [f'"{name}"']:
+            problems.append(f"{page}: calls render_site_notices({', '.join(calls)}), "
+                            f"not render_site_notices(\"{name}\"), so its own "
+                            f"notices do not render")
+    if not NOTICES_PAGE_FILE.is_file():
+        problems.append(f"{NOTICES_PAGE_FILE.relative_to(ROOT).as_posix()} is missing")
+    elif "render_all_notices()" not in read(NOTICES_PAGE_FILE):
+        problems.append("the Required notices page never calls render_all_notices()")
+
+    # Rendered: import the real module with streamlit stood in for, and look
+    # for each notice's text where it must appear.
+    try:
+        sys.path.insert(0, str(ROOT / "app"))
+        import components
+    except Exception as exc:   # noqa: BLE001 - reported, not swallowed
+        return problems + [f"app/components.py did not import: {exc!r}"]
+    everywhere = _rendered_text(components, "render_site_notices")
+    all_page = _rendered_text(components, "render_all_notices")
+    per_city = {}
+    for n in components._NOTICES:
+        if n.text not in all_page:
+            problems.append(f"notice {n.number} ({n.heading}) is not on the "
+                            f"Required notices page")
+        if n.every_page and n.text not in everywhere:
+            problems.append(f"notice {n.number} ({n.heading}) is every-page but "
+                            f"not in the Overview's footer")
+        for c in n.cities:
+            if c not in per_city:
+                per_city[c] = _rendered_text(components, "render_site_notices", c)
+            if n.text not in per_city[c]:
+                problems.append(f"notice {n.number} ({n.heading}) is not on "
+                                f"{c}'s page")
+    if components.NOTICES_PAGE not in everywhere:
+        problems.append("the footer does not link to the Required notices page")
+    return problems
 
 
 # 326xx WGS84 UTM north, 258xx ETRS89 UTM, 269xx NAD83 UTM, 327xx WGS84 south.
@@ -1090,14 +1249,39 @@ def main():
             + (f" (missing and unclaimed: {sorted(missing - claimed_notice_numbers())})"
                if missing - claimed_notice_numbers() else "")]))
 
-    for h in shown:
+    by_number = dict(numbered)
+    for num, h, _cities, _every in shown:
         candidate = NOTICE_ALIASES.get(h, h)
-        if not any(candidate in dh or dh in candidate for dh in doc_headings):
+        dh = by_number.get(num)
+        if dh is None:
             failures.append(("notices", [
-                f"'{h}' is DISPLAYED in app/components.py but has no numbered "
-                f"item in data_sources.md"]))
+                f"'{h}' is DISPLAYED in app/components.py as notice {num}, "
+                f"which data_sources.md does not number"]))
+        elif not (candidate in dh or dh in candidate):
+            failures.append(("notices", [
+                f"'{h}' is DISPLAYED in app/components.py as notice {num}, "
+                f"but data_sources.md's notice {num} is '{dh}'"]))
+    # The reverse direction: a numbered notice displayed nowhere.
+    shown_nums = {num for num, *_rest in shown}
+    for num, dh in numbered:
+        if num not in shown_nums and num not in NOT_DISPLAYED:
+            failures.append(("notices", [
+                f"notice {num} ({dh}) is numbered in data_sources.md but "
+                f"displayed nowhere: no _NOTICES entry carries its number"]))
+    for num in sorted(set(NOT_DISPLAYED) & shown_nums):
+        failures.append(("notices", [
+            f"notice {num} is in NOT_DISPLAYED and is displayed - delete the "
+            f"exemption"]))
 
     print(f"\n  notices: {len(numbered)} numbered, {len(shown)} displayed")
+
+    # --- N, each notice on the pages its terms need ---------------------------
+    np_ = check_notice_placement(shown) if shown else []
+    if np_:
+        failures.append(("notice placement", np_))
+    elif shown:
+        print(f"  notice placement: every notice on the Required notices page "
+              f"and its cities' pages; {len(EVERY_PAGE_APPROVED)} on every page")
 
     # --- L, a notice BUILT from config credits every source it reads ----------
     lc = check_built_credits()

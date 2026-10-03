@@ -8,6 +8,7 @@ rather than duplicated per page.
 
 import sys
 from pathlib import Path
+from typing import NamedTuple
 
 import streamlit as st
 
@@ -411,10 +412,59 @@ SITE_NAME = "Storefronts Near Transit"
 ABOUT_DATA_PAGE = "pages/About_the_Data.py"
 EXCLUSIONS_PAGE = "pages/What_Is_Excluded.py"
 DIFFERENCES_PAGE = "pages/Why_the_Maps_Differ.py"
+NOTICES_PAGE = "pages/Required_Notices.py"
 
-# Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
-# and the sources are recorded in docs/data_sources.md, "Notices this project
-# MUST display when published" - read that before editing any of these.
+
+class Notice(NamedTuple):
+    """One required source notice.
+
+    number: its item in docs/data_sources.md's numbered list (two entries may
+        share one: OpenStreetMap's basemap line and its rail-geometry line).
+    cities: the city pages it is shown on, spelled exactly as app/cities.py
+        spells them; scripts/check_provenance.py check N holds each to a real
+        city.
+    every_page: shown on every page as well, for a reason recorded beside the
+        entry; check N pins that set to the owner's approval.
+    """
+    number: int
+    heading: str
+    text: str
+    verbatim: bool
+    cities: tuple
+    every_page: bool = False
+
+
+# Groups of cities one notice covers, spelled as app/cities.py spells them.
+_MEXICO = ("Mexico City", "Guadalajara (Regional)", "Monterrey (Regional)")
+_NORWAY = ("Oslo", "Bergen")
+_DENMARK = ("Copenhagen", "Aarhus", "Odense")
+_CZECHIA = ("Prague", "Brno", "Plzeň", "Olomouc", "Ostrava",
+            "Liberec (Regional)", "Most (Regional)")
+_BRAZIL = ("São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília",
+           "Salvador", "Fortaleza (Regional)", "Porto Alegre (Regional)",
+           "Recife (Regional)", "Santos (Regional)")
+_KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
+                "Namyangju", "Ansan", "Uijeongbu", "Anyang")
+# The UK tram and light-rail cities whose gate 3 reads NaPTAN (notice 86).
+_UK_SIX = ("Manchester (Regional)", "Birmingham (Regional)", "Edinburgh",
+           "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)")
+# Every city the OpenStreetMap rail-geometry entry names, in its order. Adding
+# a city to that sentence means adding it here, or its page omits the line.
+_OSM_RAIL = (
+    "Mexico City", "Guadalajara (Regional)", "Monterrey (Regional)",
+    "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen", "Aarhus",
+    "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
+    "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
+    "Dallas", "Kansas City", "Tucson", "New Orleans", "Florence", "Den Haag",
+    "Göteborg", "Zurich", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
+    "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
+    "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
+    "Taipei (Regional)",
+)
+
+# Verbatim where verbatim is required. Each entry is a Notice, and the sources
+# are recorded in docs/data_sources.md, "Notices this project MUST display
+# when published" - read that before editing any of these.
 #
 # THESE ARE OBLIGATIONS, NOT CREDITS. Chicago's terms require its paragraph
 # "at the site where the software application ... can be accessed", and
@@ -423,11 +473,27 @@ DIFFERENCES_PAGE = "pages/Why_the_Maps_Differ.py"
 # LA Metro's and MassDOT's prescribe no wording, only that they be
 # acknowledged as the provider, so those two are this project's own phrasing.
 #
-# A notice on one city's page is NOT enough: the requirement is site-level,
-# which is why render_site_notices() is called from every page including the
-# Overview.
+# WHERE EACH ONE SHOWS (owner, 2026-10-02). Every notice is on its own
+# city's page, inline and in full, and every notice is on the Required notices
+# page (NOTICES_PAGE) in number order; every page links there. Five are on
+# every page as well (every_page=True), for the reason given beside each:
+# Chicago (2) and Kansas City (80), whose terms name the SITE; LA Metro (4),
+# whose placement is set by guidelines that could not be read; INEGI (8) and
+# Barcelona (21), whose disclosure duties may reach the Overview's derived
+# figures. Ordnance Survey's notices moved off the other pages on the OGL's
+# "including or linking to": each UK page shows its three statements in full
+# and every page links to the full list. The per-notice evidence is in this
+# branch's decisions draft, docs/decisions_drafts/nice-boyd-51dea8.md.
 _NOTICES = [
-    ("City of Chicago",
+    # The basemap credit, on every page: ODbL 1.0 wants it visible, and the
+    # Overview's and every city's map carry it in their corners as well.
+    Notice(1, "OpenStreetMap",
+           "basemap © OpenStreetMap contributors, available under the "
+           "Open Database License. The attribution also appears in the corner "
+           "of every map, where its license requires it to stay visible. The "
+           "overview map's basemap is © CARTO.",
+           False, (), every_page=True),
+    Notice(2, "City of Chicago",
      "This site provides applications using data that has been modified for "
      "use from its original source, www.cityofchicago.org, the official "
      "website of the City of Chicago. The City of Chicago makes no claims as "
@@ -435,23 +501,23 @@ _NOTICES = [
      "data provided at this site. The data provided at this site is subject "
      "to change at any time. It is understood that the data provided at this "
      "site is being used at one's own risk.",
-     True),
-    ("San Francisco Municipal Transportation Agency",
+     True, ("Chicago",), every_page=True),
+    Notice(3, "San Francisco Municipal Transportation Agency",
      "Reproduced with permission granted by the City and County of San "
      "Francisco. The information has been provided by means of a "
      "nonexclusive, limited, and revocable license granted by the City and "
      "County of San Francisco.",
-     True),
-    ("LA Metro",
+     True, ("San Francisco",)),
+    Notice(4, "LA Metro",
      "Rail alignment data for Los Angeles provided by LA Metro. This project "
      "claims no ownership of that data.",
-     False),
-    ("MassDOT / MBTA",
+     False, ("Los Angeles",), every_page=True),
+    Notice(7, "MassDOT / MBTA",
      "Rail alignment data for Boston provided by MassDOT/MBTA.",
-     False),
-    ("Chicago Transit Authority",
+     False, ("Boston",)),
+    Notice(6, "Chicago Transit Authority",
      "Data provided by Chicago Transit Authority.",
-     False),
+     False, ("Chicago",)),
     # Canada, added with Vancouver (2026-09-21). All three are VERBATIM.
     #
     # The two municipal notices use each city's OWN wording and are not
@@ -460,14 +526,14 @@ _NOTICES = [
     # ("if you fail to comply with any of them, the rights granted to you
     # under this licence... will end automatically"), so these are not
     # cosmetic.
-    ("City of Vancouver",
+    Notice(9, "City of Vancouver",
      "Contains information licensed under the Open Government "
      "Licence – Vancouver.",
-     True),
-    ("City of Surrey",
+     True, ("Vancouver (Regional)",)),
+    Notice(10, "City of Surrey",
      "Contains information licensed under the Open Government License - "
      "City of Surrey.",
-     True),
+     True, ("Vancouver (Regional)",)),
     # TransLink's Legend, required "prominently displayed" in exactly this
     # wording. THE TRAP: TransLink mandates TWO different legends and this is
     # the GTFS STATIC one. Its Open API terms mandate a different text
@@ -494,7 +560,7 @@ _NOTICES = [
     # Marked VERBATIM because the attribution form is prescribed; the
     # transformation sentence around it is this project's own wording, the way
     # INEGI's is.
-    ("Ayuntamiento de Madrid",
+    Notice(19, "Ayuntamiento de Madrid",
      "Origen de los datos: Ayuntamiento de Madrid. Business locations for "
      "Madrid are from the Censo de locales, sus actividades y terrazas de "
      "hosteleria y restauracion, as published on datos.madrid.es and "
@@ -505,7 +571,7 @@ _NOTICES = [
      "categories of this project's own, and measured by distance from Metro "
      "stations. The Ayuntamiento de Madrid does not endorse this project or "
      "its use of the data.",
-     True),
+     True, ("Madrid",)),
     # CRTM's licence prescribes the WORDING "Powered by CRTM" and requires a
     # link to its site, which is why this is marked verbatim and why the phrase
     # is in English inside an otherwise Spanish credit - the licence says so.
@@ -516,7 +582,7 @@ _NOTICES = [
     # interpretations en ont ete tirees" and INEGI's 1(g). This project draws
     # and relabels the network, so the answer is "explotados" and a bare credit
     # would not satisfy it.
-    ("CRTM (Consorcio Regional de Transportes de Madrid)",
+    Notice(20, "CRTM (Consorcio Regional de Transportes de Madrid)",
      # Amended 2026-09-27 for Metro Ligero ML1 (the tram rescope), from the
      # M10_Red layers: same licence, same 5 June 2026 edit date. Wording
      # approved by the owner 2026-09-27; "Powered by CRTM" stays verbatim.
@@ -529,12 +595,12 @@ _NOTICES = [
      "eighteen published codes collapsed to its thirteen real lines, and of "
      "Metro Ligero only line ML1 drawn. CRTM does not participate in, "
      "sponsor or support this project.",
-     True),
-    ("TransLink",
+     True, ("Madrid",)),
+    Notice(11, "TransLink",
      "Route and arrival data used in this product or service is provided by "
      "permission of TransLink. TransLink assumes no responsibility for the "
      "accuracy or currency of the Data used in this product or service.",
-     True),
+     True, ("Vancouver (Regional)",)),
     # Province of British Columbia, added 2026-09-22, and it is the first
     # PROVINCIAL / STATE-level publisher in the project. Neither Vancouver's
     # nor Surrey's municipal OGL reaches it: the BC ABMS municipalities layer
@@ -552,10 +618,10 @@ _NOTICES = [
     # this list: Vancouver's, Calgary's and now the Province's. Surrey's is the
     # odd one with a hyphen and "License". They are not interchangeable.
     # Terminates automatically on breach, like the four municipal OGLs.
-    ("Province of British Columbia",
+    Notice(17, "Province of British Columbia",
      "Contains information licensed under the Open Government "
      "Licence – British Columbia.",
-     True),
+     True, ("Vancouver (Regional)",)),
     # Montréal, added 2026-09-21. TWO credits for one city, because the
     # business data and the transit data have different OWNERS - the STM's
     # datasets are hosted on the City's portal but are STM's property, and its
@@ -575,19 +641,19 @@ _NOTICES = [
     # Montréal" would NOT comply. The wording below states the transformation
     # explicitly. Not marked verbatim because the City prescribes the
     # OBLIGATION rather than a sentence; the disclosure is what is required.
-    ("Ville de Montréal",
+    Notice(12, "Ville de Montréal",
      "Contains data from the Ville de Montréal, used under the Creative "
      "Commons Attribution 4.0 International licence. The data has been "
      "modified and interpretations have been drawn from it: it is filtered to "
      "storefront categories, grouped into three categories of this project's "
      "own, and measured by distance from transit stations. The Ville de "
      "Montréal does not endorse this project or its use of the data.",
-     False),
-    ("Société de transport de Montréal",
+     False, ("Montréal",)),
+    Notice(13, "Société de transport de Montréal",
      "Métro route geometry and station locations for Montréal are the "
      "property of the Société de transport de Montréal, used under the "
      "Creative Commons Attribution 4.0 International licence.",
-     False),
+     False, ("Montréal",)),
     # The REM, added 2026-09-27 with the tram rescope (notice 51). CC BY 4.0
     # from the licence file bundled in the feed, which names no licensor, so
     # the credit goes to the creator feed_info/agency.txt identify - not
@@ -595,7 +661,7 @@ _NOTICES = [
     # requires the credit, a statement of modification and a licence link, and
     # forbids implying endorsement (s.2(a)(6)) or using the logo (s.2(b)(2)).
     # Wording approved by the owner 2026-09-27.
-    ("Réseau express métropolitain",
+    Notice(51, "Réseau express métropolitain",
      "REM route geometry and station locations for Montréal are from the "
      "Réseau express métropolitain (REM) GTFS feed, used under the "
      "[Creative Commons Attribution 4.0 International licence]"
@@ -604,7 +670,7 @@ _NOTICES = [
      "the agglomeration are removed, and two stations are merged with the "
      "Métro stations of the same name. The Réseau express métropolitain does "
      "not endorse this project or its use of the data.",
-     False),
+     False, ("Montréal",)),
     # Calgary, added 2026-09-21. ONE notice covers BOTH the business register
     # and Calgary Transit's GTFS - the only Canadian city where a single
     # licence does both, so this city adds one line where Vancouver added
@@ -614,10 +680,10 @@ _NOTICES = [
     # sibling notice uses a hyphen and "License", and they are not
     # interchangeable. Like Toronto's, Vancouver's and Surrey's, this licence
     # TERMINATES AUTOMATICALLY on breach.
-    ("City of Calgary",
+    Notice(14, "City of Calgary",
      "Contains information licensed under the Open Government "
      "Licence – City of Calgary.",
-     True),
+     True, ("Calgary",)),
     # Edmonton, added 2026-09-21. ONE notice covers BOTH the business register
     # and ETS's GTFS, as Calgary's does - the feed is published through the same
     # Open Data Catalogue and governed by the same Terms of Use.
@@ -650,11 +716,11 @@ _NOTICES = [
     # under the same licence, so this city adds one line where Vancouver added
     # three. VERBATIM, en dash, British "Licence". Like Vancouver's, Surrey's
     # and Calgary's, this licence TERMINATES AUTOMATICALLY on breach.
-    ("City of Toronto",
+    Notice(16, "City of Toronto",
      "Contains information licensed under the Open Government "
      "Licence – Toronto.",
-     True),
-    ("City of Edmonton",
+     True, ("Toronto",)),
+    Notice(15, "City of Edmonton",
      "Contains datasets made publicly available by the City of Edmonton under "
      "its Open Data Terms of Use, at "
      "https://www.edmonton.ca/sites/default/files/public-files/documents/"
@@ -664,7 +730,7 @@ _NOTICES = [
      "categories, grouped into three categories of this project's own, and "
      "measured by distance from transit stations. The City of Edmonton does "
      "not endorse this project or its use of the data.",
-     False),
+     False, ("Edmonton",)),
     # Kitchener–Waterloo: Region of Waterloo Public Health's food and personal
     # services inspection layers and bulk tables, and the Region's Cities and
     # Towns layer, under the Region of Waterloo Open Data Licence (read
@@ -677,7 +743,7 @@ _NOTICES = [
     # source; the layers' descriptions add that no endorsement of any premises
     # is implied. Written under the owner's pre-approval of this build's prose
     # (2026-09-30).
-    ("Region of Waterloo (Kitchener–Waterloo)",
+    Notice(73, "Region of Waterloo (Kitchener–Waterloo)",
      "Contains information provided by the Regional Municipality of Waterloo under licence "
      "([Region of Waterloo Open Data Licence](https://www.regionofwaterloo.ca/"
      "government-and-council/transparency-and-accountability/open-data/)). Food premises "
@@ -689,7 +755,7 @@ _NOTICES = [
      "by name; and the rest are mapped by distance to ION stops. Inspection results are not "
      "shown, and a pin is not a rating or an endorsement of the premises. This is not an "
      "official Region of Waterloo product, and it is not endorsed by the Region.",
-     False),
+     False, ("Kitchener–Waterloo (Regional)",)),
     # Mexico City, added 2026-09-22. TWO OBLIGATIONS IN ONE NOTICE, and the
     # second is the one a source credit does not discharge.
     #
@@ -728,7 +794,7 @@ _NOTICES = [
     # ADD EACH NEW MEXICAN CITY TO THIS SENTENCE. It is the one notice here
     # that has to grow with the country, because DENUE is one register serving
     # many cities - every other source in this list serves exactly one.
-    ("INEGI",
+    Notice(8, "INEGI",
      "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas "
      "(DENUE). Business locations for Mexico City, Guadalajara and Monterrey "
      "are from "
@@ -740,14 +806,14 @@ _NOTICES = [
      "categories of this project's own, and measured by distance from transit "
      "stations. INEGI does not endorse this project or its use of the data, "
      "and nothing here represents an official INEGI position.",
-     False),
+     False, _MEXICO, every_page=True),
     # Mexico City's RAIL geometry is OpenStreetMap rather than the operator's
     # feed, because every *.cdmx.gob.mx host is unreachable (see
     # pipeline/mexico_city/config.py). ODbL 1.0 attribution was already
     # satisfied for the basemap by every rendered map's "© OpenStreetMap
     # contributors"; this line exists so the credit visibly covers the LINE
     # GEOMETRY too, which is data rather than tiles.
-    ("OpenStreetMap (rail geometry)",
+    Notice(1, "OpenStreetMap (rail geometry)",
      "Rail route geometry and station locations for Mexico City (Metro CDMX "
      "and Tren Ligero), Guadalajara (Tren Ligero), Monterrey (Metrorrey, with "
      "the boundaries of its four municipios) and Barcelona (Metro de "
@@ -799,7 +865,7 @@ _NOTICES = [
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
-     False),
+     False, _OSM_RAIL),
     # Barcelona's terms prescribe the source wording AND require modifications
     # to be identified at distribution - the disclosure-of-transformation
     # family for the fourth time, after Montreal, INEGI and Madrid. A credit
@@ -819,7 +885,7 @@ _NOTICES = [
     # answered in 2.4s from the same /24. The attempt log lives in
     # docs/notifications/barcelona-city-council.md; when it is sent, update
     # this sentence and that file together.
-    ("Ajuntament de Barcelona",
+    Notice(21, "Ajuntament de Barcelona",
      "Source of the data: Barcelona City Council. The premises shown for "
      "Barcelona are from the Cens de locals en planta baixa amb activitat "
      "economica, 2022 survey, used under CC BY 4.0. The data has been "
@@ -832,7 +898,7 @@ _NOTICES = [
      "delivered: on 22 September 2026 the portal's own contact form stalled, "
      "and the enquiry channel the terms themselves name did not respond. It "
      "will be sent when that service is reachable again.",
-     False),
+     False, ("Barcelona",), every_page=True),
     # Palma: the Consell de Mallorca's restaurant register, on the GOIB
     # catalogue (dataset licence "cc-by"; GOIB's terms link CC BY 3.0 ES), and
     # Catastro's INSPIRE addresses (CC BY 4.0 DG Catastro), both read
@@ -843,7 +909,7 @@ _NOTICES = [
     # del Catastro be named as author and owner, the licence, a statement of
     # the join and the access date. Written under the owner's pre-approval of
     # this build's prose (2026-09-30).
-    ("Govern de les Illes Balears and Dirección General del Catastro (Palma)",
+    Notice(74, "Govern de les Illes Balears and Dirección General del Catastro (Palma)",
      "Font de les dades: Govern de les Illes Balears. Bars, cafés and restaurants for Palma "
      "are from the Registre d'Establiments de Restauració i Entreteniment de Mallorca "
      "(author: Consell de Mallorca, Direcció Insular de Transició i Ordenació Turística), "
@@ -857,7 +923,7 @@ _NOTICES = [
      "to active premises in Palma, caterers, clubs, venues and hotels are left out, "
      "addresses are joined to Catastro's points, and the rest are mapped by distance to "
      "Metro stations. Neither the Govern, the Consell nor Catastro endorses this map.",
-     False),
+     False, ("Palma",)),
     # TAILTE EIREANN - Dublin. CC BY 4.0, confirmed from data.gov.ie's
     # package_show. NO wording is prescribed, so the string is this project's
     # own; what is NOT optional is the second sentence, because CC BY 4.0
@@ -873,7 +939,7 @@ _NOTICES = [
     # The accuracy sentence is required in substance: Tailte disclaims
     # accuracy, completeness and currency, and tailte.ie/home/api/ states the
     # API "is not guaranteed to be complete".
-    ("Tailte Éireann",
+    Notice(22, "Tailte Éireann",
      "Contains Irish Public Sector Information licensed under a Creative "
      "Commons Attribution 4.0 International (CC BY 4.0) licence. The premises "
      "shown for Dublin are from Tailte Éireann's rateable valuation register, "
@@ -882,7 +948,7 @@ _NOTICES = [
      "this project's own interpretation and are not produced or endorsed by "
      "Tailte Eireann. The data is published “as is”; Tailte Eireann "
      "gives no warranty as to its accuracy, completeness or currency.",
-     False),
+     False, ("Dublin",)),
     # COMUNE DI MILANO - Milan. CC BY 4.0, and the version is the point: CKAN
     # reports `license_id: cc-by` with NO version, and only the portal's
     # DCAT-AP_IT serialisation carries owl:versionInfo "4.0". Milan's brief
@@ -893,7 +959,7 @@ _NOTICES = [
     # time - and it is the weaker form: 4.0 requires disclosing MODIFICATION
     # and says nothing about interpretation, where Montreal's licence names
     # both. Nothing is owed as an act.
-    ("Comune di Milano",
+    Notice(23, "Comune di Milano",
      "Contains data from the Comune di Milano, licensed under a Creative "
      "Commons Attribution 4.0 International (CC BY 4.0) licence. The premises "
      "shown for Milan are from six of the Comune's own registers of shops, "
@@ -901,7 +967,7 @@ _NOTICES = [
      "services. This map filters, re-categorises and aggregates that data "
      "into density measures; the filtering, categories and densities are this "
      "project's own and are not produced or endorsed by the Comune di Milano.",
-     False),
+     False, ("Milan",)),
     # ILE-DE-FRANCE MOBILITES - Paris. THE ONLY NOTICE HERE THAT PRESCRIBES
     # MARKUP, not just words.
     #
@@ -923,14 +989,14 @@ _NOTICES = [
     # That half is Paris-specific and lives on the city page, which reads
     # outputs/paris/provenance.json - it cannot live here, because this block
     # renders on every page and the date belongs to one city's snapshot.
-    ("Île-de-France Mobilités",
+    Notice(24, "Île-de-France Mobilités",
      "Contient des informations de "
      "[Réseaux urbains et interurbains d'Île-de-France Mobilités (IDFM)]"
      "(https://transport.data.gouv.fr/datasets/"
      "reseau-urbain-et-interurbain-dile-de-france-mobilites), présentement "
      "mises à disposition aux conditions de la "
      "[« Licence Mobilités »](https://cloud.fabmob.io/s/CJCEzKosfqqNBEx)",
-     True),
+     True, ("Paris",)),
     # TISSEO - Toulouse. ODbL 1.0 via the National Access Point, and the
     # FIRST sentence here is ODbL 4.3's own notice template with the database
     # named, so it is verbatim rather than this project's wording.
@@ -950,14 +1016,14 @@ _NOTICES = [
     # publiées sur le DOMAINE » expressly excluded - so naming Tisséo on the
     # map is not barred. That was the specific risk, since Grand Lyon's
     # equivalent clause is why Lyon is deferred.
-    ("Tisséo (Toulouse)",
+    Notice(25, "Tisséo (Toulouse)",
      "Contains information from Réseau urbain Tisséo, which is made available "
      "here under the Open Database License (ODbL). Métro, tramway and Téléo "
      "station locations and line geometry for Toulouse are redrawn from that "
      "feed; the stations kept, the rings, the categories and the densities "
      "are this project's own work and are not produced or endorsed by Tisséo "
      "or Toulouse Métropole.",
-     True),
+     True, ("Toulouse",)),
     # STAR - Rennes. ODbL 1.0, the same licence and the same reading as Tisséo
     # above (docs/licenses/odbl-toulouse-rennes.md), and the first sentence is
     # again ODbL 4.3's own template with the database named.
@@ -969,14 +1035,14 @@ _NOTICES = [
     # The portal's CGU is the same Opendatasoft template as Toulouse
     # Métropole's, read 2026-09-23: no indemnity, marks clause Opendatasoft's
     # own with the published data excluded - so naming STAR is not barred.
-    ("STAR (Rennes)",
+    Notice(26, "STAR (Rennes)",
      "Contains information from Réseau urbain STAR, which is made available "
      "here under the Open Database License (ODbL). Métro station locations and "
      "line geometry for Rennes are redrawn from that feed; the stations kept, "
      "the rings, the categories and the densities are this project's own work "
      "and are not produced or endorsed by STAR, Keolis Rennes or Rennes "
      "Métropole.",
-     True),
+     True, ("Rennes",)),
     # THE FRANCE TRAM BATCH'S THREE ODbL FEEDS (licence reads 2026-09-29): each
     # its own §4.3 notice naming its own database, as Tisséo's and STAR's are,
     # under the NAP's Conditions Particulières - the station tables are pure
@@ -984,34 +1050,34 @@ _NOTICES = [
     # (neither feed publishes shapes), which the OpenStreetMap notice covers, so
     # those two name only the stations; Grenoble's geometry is its feed's own.
     # No TaM logo, and LiA's colours are the project's own.
-    ("TaM (Montpellier)",
+    Notice(69, "TaM (Montpellier)",
      "Contains information from Réseau urbain TaM, which is made available here "
      "under the Open Database License (ODbL). Tram station locations for "
      "Montpellier are drawn from that feed; the stations kept, the rings, the "
      "categories and the densities are this project's own work and are not "
      "produced or endorsed by TaM or Montpellier Méditerranée Métropole.",
-     True),
-    ("M réso (Grenoble)",
+     True, ("Montpellier",)),
+    Notice(70, "M réso (Grenoble)",
      "Contains information from Réseau urbain TAG, which is made available here "
      "under the Open Database License (ODbL). Tram station locations and line "
      "geometry for Grenoble are redrawn from that feed; the stations kept, the "
      "rings, the categories and the densities are this project's own work and "
      "are not produced or endorsed by the SMMAG (M) or Grenoble-Alpes "
      "Métropole.",
-     True),
-    ("LiA (Le Havre)",
+     True, ("Grenoble (Regional)",)),
+    Notice(71, "LiA (Le Havre)",
      "Contains information from Réseau urbain LiA, which is made available here "
      "under the Open Database License (ODbL). Tram station locations for Le "
      "Havre are drawn from that feed; the stations kept, the rings, the "
      "categories, the line colours and the densities are this project's own "
      "work and are not produced or endorsed by LiA or Le Havre Seine Métropole.",
-     True),
+     True, ("Le Havre",)),
     # ANGERS, MARK-FREE (owner, 2026-09-30): the Métropole's terms bar its
     # network brand and "any other mark" from anything built from the data
     # without consent, and the NAP dataset's title carries that brand. So the
     # database is named by its producer and its NAP id, which §4.3 allows: the
     # notice need only make a reader aware the content came from it.
-    ("Angers Loire Métropole (Angers)",
+    Notice(77, "Angers Loire Métropole (Angers)",
      "Contains information from Angers Loire Métropole's public transport "
      "timetable database ([transport.data.gouv.fr dataset "
      "6178cee254e3b3f0744a1318](https://transport.data.gouv.fr/datasets/6178cee254e3b3f0744a1318)), "
@@ -1020,21 +1086,21 @@ _NOTICES = [
      "feed; the stations kept, the rings, the categories and the densities "
      "are this project's own work and are not produced or endorsed by Angers "
      "Loire Métropole.",
-     True),
+     True, ("Angers",)),
     # BRØNNØYSUNDREGISTRENE - Oslo's business register. NLOD 2.0: section 5
     # says to attribute "as specified by the licensor", and Brønnøysund's API
     # documentation specifies nothing beyond "License: NLOD" (read
     # 2026-09-24) - so this is section 5's own default sentence, VERBATIM,
     # with the licence linked. Section 5 also requires changes to be
     # indicated clearly, which the second sentence does.
-    ("Brønnøysundregistrene (Oslo, Bergen)",
+    Notice(27, "Brønnøysundregistrene (Oslo, Bergen)",
      "Contains data under the Norwegian licence for Open Government data "
      "(NLOD) distributed by Brønnøysundregistrene "
      "([NLOD 2.0](https://data.norge.no/nlod/en/2.0)). Oslo's and Bergen's "
      "business premises are selected, classified and placed by this project, and a "
      "sole trader's premises is shown by its address rather than its name; "
      "the categories and densities are this project's own work.",
-     True),
+     True, _NORWAY),
     # KARTVERKET - two datasets, one licensor, one licence (CC BY 4.0), so one
     # line: the address register (the coordinate join) and the kommune
     # boundaries (station scope and the naming of excluded stations).
@@ -1042,7 +1108,7 @@ _NOTICES = [
     # 3(a) adds the licence link and a statement of modification. The
     # boundaries' municipality names come from SSR, whose rule asks for
     # "SSR ©Kartverket" - cheap, so included rather than argued.
-    ("Kartverket (Oslo, Bergen)",
+    Notice(28, "Kartverket (Oslo, Bergen)",
      "© [Kartverket](https://www.kartverket.no). Oslo's and Bergen's address "
      "registers (Matrikkelen – Adresse) and the municipal boundaries of Oslo, "
      "Bærum and Bergen "
@@ -1051,7 +1117,7 @@ _NOTICES = [
      "names from SSR ©Kartverket. This project joins the addresses to the "
      "business register to place each premises, and uses the boundaries to "
      "select and label stations.",
-     True),
+     True, _NORWAY),
     # ENTUR - Ruter's GTFS. NLOD, and Entur SPECIFIES its credit: "Data made
     # available by Entur + (logo)" (developer.entur.org, read 2026-09-24).
     # The LOGO is shown on the Oslo page beside this data (owner's call
@@ -1059,7 +1125,7 @@ _NOTICES = [
     # treated as owed) - Entur's own unaltered file,
     # app/assets/entur/Enturlogo_Blue_RGB.svg. NLOD section 6 bars using the
     # licensor's or other contributors' names to endorse, which reaches Ruter.
-    ("Entur (Oslo, Bergen)",
+    Notice(29, "Entur (Oslo, Bergen)",
      "Data made available by Entur, under the Norwegian licence for Open "
      "Government data ([NLOD 2.0](https://data.norge.no/nlod/en/2.0)); source: "
      "Ruter's and Skyss's timetable data via [Entur](https://developer.entur.org). "
@@ -1067,7 +1133,7 @@ _NOTICES = [
      "Oslo and Bergen kommunes and redrawn by this project, and the line colours "
      "are not from this data. Not produced or endorsed by Entur, Ruter, "
      "Sporveien or Skyss.",
-     True),
+     True, _NORWAY),
     # CVR - Copenhagen's business register, via Datafordeler. CC BY 4.0:
     # "Du skal kreditere Det Centrale Virksomhedsregister (CVR) på et
     # passende sted" (datafordeler.dk, read 2026-09-23). The name is
@@ -1077,14 +1143,14 @@ _NOTICES = [
     # Aarhus added 2026-09-29, owner-approved: the same register and cache.
     # Odense added 2026-09-30 (tram kit), the same again; approved by the
     # owner 2026-09-30 (call C1).
-    ("Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense)",
+    Notice(30, "Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense)",
      "Contains data from Det Centrale Virksomhedsregister (CVR), distributed by "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
      "Copenhagen's, Aarhus's and Odense's business premises are selected, classified and placed by this "
      "project, and a personally owned business is shown by its address rather "
      "than its name; the categories and densities are this project's own work "
      "and are not produced or endorsed by Erhvervsstyrelsen.",
-     False),
+     False, _DENMARK),
     # DAR - the coordinate join. CC BY 4.0 crediting Klimadatastyrelsen, which
     # lets the reuser choose the form of credit (read 2026-09-24 by the
     # licence-read agent). Named with the register as well, since Datafordeler's
@@ -1094,13 +1160,13 @@ _NOTICES = [
     # Husnummer, and takes the point from OSM's copy (osak:identifier).
     # Odense added 2026-09-30 (tram kit), Aarhus's placement; approved by the
     # owner 2026-09-30 (call C1).
-    ("Klimadatastyrelsen (Copenhagen, Aarhus, Odense)",
+    Notice(31, "Klimadatastyrelsen (Copenhagen, Aarhus, Odense)",
      "Contains data from Klimadatastyrelsen, Danmarks Adresseregister (DAR), via "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
      "This project joins the register's addresses and address points to the "
      "business register to place each premises; in Aarhus and Odense the points are "
      "OpenStreetMap's copies of them.",
-     False),
+     False, _DENMARK),
     # ČSÚ - Prague's activity, form and name data (RES). CC BY 4.0 for the web
     # pages, and the DATA paragraph ("Další podmínky použití dat ČSÚ") adds two
     # duties this notice discharges: state the licence conditions, preferably
@@ -1110,7 +1176,7 @@ _NOTICES = [
     # The title lists every Czech city, as Norway's and Denmark's do (owner,
     # 2026-09-30): the text names none. ⚠ At landing, list only the Czech cities
     # that land - czech-build carries all six.
-    ("Czech Statistical Office (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most)",
+    Notice(32, "Czech Statistical Office (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most)",
      "Contains data from the Czech Statistical Office's business register "
      "(Registr ekonomických subjektů, RES), used under the [ČSÚ conditions of use]"
      "(https://csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu) "
@@ -1118,35 +1184,35 @@ _NOTICES = [
      "this project — joined to establishment locations, filtered to storefront "
      "categories and grouped into this project's own categories — and are not "
      "official statistics of the Czech Statistical Office.",
-     False),
+     False, _CZECHIA),
     # ČÚZK - RUIAN addresses. The Czech conditions page PRESCRIBES the credit
     # format "ČÚZK, [rok]" (the file's year), a link to the conditions, and a
     # description of the modification. Wording approved by the owner 2026-09-24.
-    ("ČÚZK (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most)",
+    Notice(33, "ČÚZK (Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec, Most)",
      "ČÚZK, 2026. Address points from the Registry of Territorial Identification, "
      "Addresses and Real Estate (RÚIAN), under the [ČÚZK conditions]"
      "(https://www.cuzk.gov.cz/Predpisy/Podminky-poskytovani-prostor-dat-a-sitovych-sluzeb/Podminky-poskytovani-prostorovych-dat-CUZK.aspx) "
      "(CC BY 4.0). This project joins the addresses to the business register and "
      "converts their coordinates to place each establishment.",
-     False),
+     False, _CZECHIA),
     # ROPID / PID - Prague's metro. CC BY: name the author and any changes
     # (pid.cz/o-systemu/opendata/, read 2026-09-24). The PID, ROPID and IDSK
     # LOGOS need ROPID's consent and are not used. Wording approved by the
     # owner 2026-09-24.
-    ("ROPID (Prague)",
+    Notice(34, "ROPID (Prague)",
      "Metro lines and stations for Prague are redrawn from PID open data published "
      "by ROPID ([pid.cz/o-systemu/opendata](https://pid.cz/o-systemu/opendata/)), "
      "under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the "
      "three metro lines are selected and redrawn, stations are reduced to one point "
      "each, and line A's colour is lightened. Not "
      "produced or endorsed by ROPID or DPP.",
-     False),
+     False, ("Prague",)),
     # KORDIS JMK - Brno's tram stops. CC BY 4.0 under KORDIS's own grant
     # (idsjmk.cz/a/kontakty.html, read 2026-09-30); the feed's agency.txt
     # credits "IDS JMK (Data from: KORDIS JMK, DPMB)", which CC BY 3(a)(1)(A)
     # says to retain; data.brno.cz distributes it. No IDS JMK, KORDIS or DPMB
     # logos. Notice 78. Wording approved by the owner 2026-09-30, word for word.
-    ("KORDIS JMK (Brno)",
+    Notice(78, "KORDIS JMK (Brno)",
      "Tram stops for Brno come from the IDS JMK timetable data (GTFS) published by "
      "KORDIS JMK, a.s., with data from KORDIS JMK and DPMB, and distributed by the "
      "Statutory City of Brno at data.brno.cz, under "
@@ -1155,26 +1221,26 @@ _NOTICES = [
      "lines are selected, each stop is reduced to one point, and distance rings are "
      "computed around it. Not produced or endorsed by KORDIS JMK, DPMB or the City "
      "of Brno.",
-     False),
+     False, ("Brno",)),
     # PMDP - Plzeň's gate 3 only (its per-line stop counts); nothing from it is
     # drawn. Read 2026-09-30, PERMITTED; the record contradicts itself (CC BY in
     # the description, no-rights terms on the distribution), so it is credited
     # on the stricter CC BY reading. The credit sentence is the brief's (owner,
     # 2026-09-30); the framing around it is flagged for review. Never the city's
     # arms or PMDP's logo. Notice 79.
-    ("PMDP (Plzeň)",
+    Notice(79, "PMDP (Plzeň)",
      "Plzeň's tram stops are checked against Plzeňské městské dopravní podniky, a.s. "
      "(PMDP), GTFS published by the Statutory City of Plzeň at opendata.plzen.eu, "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), modified by this "
      "project: only its stop counts per line are used, and nothing from it is drawn. "
      "Not produced or endorsed by PMDP or the City of Plzeň.",
-     False),
+     False, ("Plzeň",)),
     # Gemeente Amsterdam - hospitality permits. The register's own licence is
     # SILENT (`Licentie: -`; a retired 2022 catalogue said CC BY), so CC BY 4.0
     # is displayed on the owner's choice of 2026-09-24, which satisfies both
     # readings. The BAG (Public Domain Mark) and GVB's data (CC0) need nothing.
     # Wording approved by the owner 2026-09-24.
-    ("Gemeente Amsterdam (Amsterdam)",
+    Notice(35, "Gemeente Amsterdam (Amsterdam)",
      "Hospitality permits for Amsterdam are from the Gemeente Amsterdam's register "
      "of hospitality operating permits (horeca exploitatievergunningen, "
      "[api.data.amsterdam.nl](https://api.data.amsterdam.nl/v1/)), used under "
@@ -1184,33 +1250,33 @@ _NOTICES = [
      "address, and mapped by distance to metro and tram stops. This is not the "
      "official permit record, and it is not produced or endorsed by the Gemeente "
      "Amsterdam.",
-     False),
+     False, ("Amsterdam",)),
     # Roma Capitale - the SUAP premises register. CC BY 4.0 on the dataset page
     # (read 2026-09-24): credit, link the licence, state the changes. Wording
     # approved by the owner 2026-09-24.
-    ("Roma Capitale (Rome)",
+    Notice(36, "Roma Capitale (Rome)",
      "Premises data for Rome is from Roma Capitale's register of productive "
      "activities (SUAP, [dati.comune.roma.it](https://dati.comune.roma.it/)), used "
      "under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the "
      "register is filtered to shops, food and drink, and personal services, sorted "
      "into three categories, placed at house-number level and mapped by distance "
      "to metro stations. Not produced or endorsed by Roma Capitale.",
-     False),
+     False, ("Rome",)),
     # ANNCSU - the national house-number archive that places SUAP's premises.
     # CC BY 4.0 (read 2026-09-24). Wording approved by the owner 2026-09-24.
-    ("ANNCSU (Rome)",
+    Notice(37, "ANNCSU (Rome)",
      "House-number coordinates for Rome are from ANNCSU, the national archive of "
      "street numbers kept by the Agenzia delle Entrate and ISTAT "
      "([anncsu.open.agenziaentrate.gov.it](https://anncsu.open.agenziaentrate.gov.it/)), "
      "used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). They are "
      "used here to place another register's premises on the map.",
-     False),
+     False, ("Rome",)),
     # IBGE - CNEFE 2022, the establishment register behind all nine Brazilian
     # cities. Free use by federal law (Decree 8.777/2016 art. 4, Lei
     # 14.129/2021 art. 29), crediting the source; no wording is prescribed, so
     # the Fonte line is IBGE's own citation form. Wording approved by the owner
     # 2026-09-24 with São Paulo's page.
-    ("IBGE (Brazil)",
+    Notice(38, "IBGE (Brazil)",
      "Establishment data for Brazilian cities is from IBGE's Cadastro Nacional "
      "de Endereços para Fins Estatísticos (CNEFE). Fonte: IBGE, Cadastro "
      "Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico "
@@ -1219,12 +1285,12 @@ _NOTICES = [
      "shows only the category at addresses that are also homes, and maps the "
      "rest by distance to stations. The categories are this project's "
      "reading, not IBGE's, and IBGE did not produce or endorse this map.",
-     False),
+     False, _BRAZIL),
     # IPP / DATA.RIO - Rio's metro stations and lines (layers 19 and 18). CC BY
     # 4.0 at service level (read 2026-09-23): the creator, the licence, a link,
     # and a statement that the data was modified - CC BY 4.0 s3(a)(1)(B), not
     # optional. Wording approved by the owner 2026-09-24.
-    ("IPP / DATA.RIO (Rio)",
+    Notice(39, "IPP / DATA.RIO (Rio)",
      "Metro stations and lines for Rio de Janeiro: Prefeitura da Cidade do Rio "
      "de Janeiro / Instituto Pereira Passos (IPP), via DATA.RIO "
      "([pgeo3.rio.rj.gov.br](https://pgeo3.rio.rj.gov.br/arcgis/rest/services/"
@@ -1232,18 +1298,18 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Reprojected, "
      "filtered and redrawn by this project; station rings and density figures "
      "are this project's own analysis.",
-     False),
+     False, ("Rio de Janeiro",)),
     # CBS - the shop-vacancy share Rotterdam's page quotes. CC BY 4.0
     # (cbs.nl copyright page, read 2026-09-24): credit CBS, link the licence,
     # say when a figure is recalculated; no endorsement implied, no logo.
     # Wording approved by the owner 2026-09-24.
-    ("CBS (Rotterdam, Den Haag)",
+    Notice(40, "CBS (Rotterdam, Den Haag)",
      "The shop-vacancy figures for Rotterdam and Den Haag are from CBS (Statistics "
      "Netherlands), Landelijke Monitor Leegstand 2025, table 1, 1 January 2025, used under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) "
      "([cbs.nl](https://www.cbs.nl/)); the shares are rounded from CBS's counts. "
      "CBS did not produce or endorse this map.",
-     False),
+     False, ("Rotterdam", "Den Haag")),
     # FEHD's licence registers, via DATA.GOV.HK (Terms of Use v1.2, read
     # 2026-09-22), and FEHD's point for each licence from the same registers on
     # the CSDI Portal (its own terms, read 2026-09-24, add "identify clearly the
@@ -1252,7 +1318,7 @@ _NOTICES = [
     # acknowledge the Government's and FEHD's IP, and attribute the Government,
     # FEHD, DATA.GOV.HK and the CSDI Portal - in one paragraph. Wording
     # approved by the owner 2026-09-24.
-    ("FEHD / DATA.GOV.HK / CSDI (Hong Kong)",
+    Notice(41, "FEHD / DATA.GOV.HK / CSDI (Hong Kong)",
      "Hong Kong's restaurants, food shops and bathhouses are from the Food and Environmental "
      "Hygiene Department's licence registers for restaurants, other food premises and non-food "
      "premises, obtained from DATA.GOV.HK ([data.gov.hk](https://data.gov.hk)), with each "
@@ -1263,14 +1329,14 @@ _NOTICES = [
      "and the Food and Environmental Hygiene Department, via DATA.GOV.HK and the CSDI Portal. "
      "Filtered and redrawn by this project; station rings and density figures are this "
      "project's own analysis.",
-     False),
+     False, ("Hong Kong",)),
     # VZD cadastre open data (CC BY 4.0, adopted by VZD's own data-use rules,
     # read 2026-09-24): credit, licence link, a DESCRIPTION of the changes, and
     # no implied VZD approval. Wording approved by the owner 2026-09-24.
     # Liepāja and Daugavpils added 2026-09-30 (tram kit), approved by the owner
     # 2026-09-30 (call C1): its cadastre, and VZD's address register (aw_eka.csv, CC BY 4.0,
     # read 2026-09-30) - VZD's own source wording, the year, and the changes.
-    ("VZD (Riga, Liepāja, Daugavpils)",
+    Notice(42, "VZD (Riga, Liepāja, Daugavpils)",
      "Riga's, Liepāja's and Daugavpils's shops and services are from the State Land Service of Latvia's "
      "(Valsts zemes dienests) Cadastre Information System open data — premise groups and "
      "each city's cadastral map — via data.gov.lv, licensed under "
@@ -1285,11 +1351,11 @@ _NOTICES = [
      "the register's addresses were matched to the licences' addresses and their points used "
      "to place each premises; the address file itself is not shown. VZD has not approved these "
      "changes or this map.",
-     False),
+     False, ("Riga", "Liepāja", "Daugavpils")),
     # Riga municipality's GEO RĪGA layers (CC BY 4.0, read 2026-09-24). The
     # neighbourhoods "have no administrative-boundary status", so the merged
     # outline is never called the city's boundary. Approved by the owner 2026-09-24.
-    ("Riga municipality (Riga)",
+    Notice(43, "Riga municipality (Riga)",
      "Riga's address points, neighbourhood boundaries and list of degrading buildings are from "
      "Rīgas valstspilsētas pašvaldība (Riga State City Municipality), GEO RĪGA, via data.gov.lv, "
      "licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by "
@@ -1297,14 +1363,14 @@ _NOTICES = [
      "neighbourhoods are merged into one outline used to select stations, which is not Riga's "
      "administrative boundary; the degrading-buildings list is used only to leave out shops in "
      "those buildings. None of the three is shown. The municipality does not endorse this map.",
-     False),
+     False, ("Riga",)),
     # Seoul's permit registers, all Korea Open Government License Type 1 (read
     # 2026-09-22 and 2026-09-24): KOGL's attribution form names the institution,
     # year, licence type and dataset titles, with a link where one is possible;
     # no implied sponsorship; and, under its moral-rights clause, the counts are
     # said to be this project's derivation. Wording approved by the owner
     # 2026-09-25. 유흥주점영업 is read and excluded, so it is not credited.
-    ("Seoul Metropolitan Government",
+    Notice(18, "Seoul Metropolitan Government",
      "Seoul's storefronts are from permit registers published by the Seoul Metropolitan "
      "Government (서울특별시) in 2026 on Seoul Open Data Plaza "
      "([data.seoul.go.kr](https://data.seoul.go.kr)) under the Korea Open Government License "
@@ -1316,14 +1382,14 @@ _NOTICES = [
      "location at the same address where a permit has none) and counted around subway "
      "stations. The categories and counts are this project's own, not figures published by the "
      "Seoul Metropolitan Government, which does not sponsor or endorse this map.",
-     False),
+     False, ("Seoul",)),
     # Daegu: D-데이터허브's files declare no licence; the permission rests on the
     # portal's own policy and the Public Data Act, a reasoned position disclosed
     # and accepted by the owner (docs/data_sources.md, "Daegu and Busan"). The
     # credit is the suggested one, with Seoul's describe-the-changes and
     # non-endorsement lines kept. The edition's rows end 2025-09-02, and the
     # notice says so. Wording approved by the owner 2026-09-27.
-    ("Daegu Metropolitan City",
+    Notice(48, "Daegu Metropolitan City",
      "Daegu's storefronts are from the permit data (인허가데이터) published by Daegu "
      "Metropolitan City (대구광역시) on D-데이터허브 ([data.daegu.go.kr](https://data.daegu.go.kr)), "
      "originally from 한국지역정보개발원: 일반음식점, 휴게음식점, 단란주점영업, 미용업, 이용업, 세탁업, "
@@ -1334,13 +1400,13 @@ _NOTICES = [
      "the same address where a permit has none) and counted around subway stations. The "
      "categories and counts are this project's own, not figures published by Daegu Metropolitan "
      "City, which does not sponsor or endorse this map.",
-     False),
+     False, ("Daegu",)),
     # Busan: PERMITTED WITH CONDITIONS - a reasonable source credit (the portal's
     # policy; 저작권법 제37조), no wording prescribed. The licence read's credit:
     # Big-데이터웨이브 (linked) as the channel, the Ministry's local-government
     # licence data as the source, and the snapshot date. Wording approved by the
     # owner 2026-09-27.
-    ("Busan Metropolitan City",
+    Notice(49, "Busan Metropolitan City",
      "Busan's storefronts are from the local-government licensing data (지방행정 인허가데이터) of "
      "the Ministry of the Interior and Safety (행정안전부), served by Busan Metropolitan City's "
      "Big-데이터웨이브 ([data.busan.go.kr](https://data.busan.go.kr)) through its 구군 인허가포털 "
@@ -1351,7 +1417,7 @@ _NOTICES = [
      "permit's location at the same address where a permit has none) and counted around subway "
      "stations. The categories and counts are this project's own, not figures published by Busan "
      "Metropolitan City or the Ministry, neither of which sponsors or endorses this map.",
-     False),
+     False, ("Busan",)),
     # Taiwan: every source is OGDL v1 (read 2026-09-23 and 2026-09-25), whose
     # attribution statement is LOAD-BEARING - without it the grant is deemed never
     # made (§三(二)) - in the annex's prescribed form. The FIA's own declaration
@@ -1359,7 +1425,7 @@ _NOTICES = [
     # points as the register. The FIA notice is NATIONAL: each Taiwanese city
     # adds its name to it and a notice of its own sources. Approved by the owner
     # 2026-09-25.
-    ("Fiscal Information Agency (Taiwan)",
+    Notice(44, "Fiscal Information Agency (Taiwan)",
      "Taichung's, Taoyuan's, Taipei's and New Taipei's storefronts are from 財政部財政資訊中心 2026 "
      "全國營業(稅籍)登記資料集 — Taiwan's "
      "national business tax register, published by the Fiscal Information Agency, Ministry of "
@@ -1370,20 +1436,20 @@ _NOTICES = [
      "head-office rows, placed each location by matching its address to the city's door plates, "
      "showed a sole proprietor's name only where it is clearly a trade name, and counted the "
      "results around stations. The Fiscal Information Agency does not endorse this map.",
-     False),
-    ("Taichung City Government and Taichung MRT (Taichung)",
+     False, ("Taichung", "Taoyuan", "Taipei (Regional)")),
+    Notice(45, "Taichung City Government and Taichung MRT (Taichung)",
      "提供機關／臺中市政府數位發展局 2026 臺中市115年1月至各月份GIS門牌資料 (the monthly file named in "
      "the page's snapshot caption), used to place Taichung's storefronts by address; and "
      "提供機關／臺中捷運股份有限公司 2026 臺中捷運綠線車站資訊, the Green Line's stations and their "
      "names. 此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守"
      "本條款各項規定之前提下，得利用之。 [data.gov.tw/license](https://data.gov.tw/license). The door "
      "plates themselves are not shown. Neither body endorses this map.",
-     False),
+     False, ("Taichung",)),
     # Taoyuan: three OGDL v1 sources (read 2026-09-25), one statement each. The
     # metro provider is named as the publisher's own portal names it (owner). The
     # portal's FAQ adds that reuse must not mislead the public or jeopardise the
     # City Government's interests - recorded and accepted (owner, 2026-09-25).
-    ("Taoyuan City Government, NLSC and Taoyuan Metro (Taoyuan)",
+    Notice(46, "Taoyuan City Government, NLSC and Taoyuan Metro (Taoyuan)",
      "提供機關／桃園市政府民政局 2026 桃園市門牌位置坐標資料 (the monthly file named in the page's "
      "snapshot caption), used to place Taoyuan's storefronts by address; 提供機關／內政部國土測繪中心 "
      "2026 捷運車站, the Airport MRT's station locations; and 提供機關／桃園捷運公司 2026 "
@@ -1391,12 +1457,12 @@ _NOTICES = [
      "(Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。 "
      "[data.gov.tw/license](https://data.gov.tw/license). The door plates themselves are not "
      "shown. None of these bodies endorses this map.",
-     False),
+     False, ("Taoyuan",)),
     # Taipei (Regional): three OGDL v1 sources (read 2026-09-23 and 2026-09-25),
     # one statement each. Taipei Metro's own open-data declaration adds: cite the
     # source, no logo or marks, no implied endorsement of a derivative, and
     # liability for malicious alteration - accepted by the owner 2026-09-25.
-    ("Taipei and New Taipei City Governments and Taipei Metro (Taipei (Regional))",
+    Notice(47, "Taipei and New Taipei City Governments and Taipei Metro (Taipei (Regional))",
      "提供機關／臺北市政府民政局 2026 臺北市門牌位置數值資料 and 提供機關／新北市政府民政局 2026 "
      "新北市門牌位置數值資料 (the editions named in the page's snapshot caption), used to place the "
      "two cities' storefronts by address; and 提供機關／臺北大眾捷運股份有限公司 2026 "
@@ -1404,14 +1470,14 @@ _NOTICES = [
      "此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項"
      "規定之前提下，得利用之。 [data.gov.tw/license](https://data.gov.tw/license). The door plates "
      "themselves are not shown. None of these bodies endorses or approves this map.",
-     False),
+     False, ("Taipei (Regional)",)),
     # Kobe: the city's lists are CC BY 2.1 JP (the badge on each CSV; read
     # 2026-09-24), whose 出典 line and 「…を加工して作成」 are prescribed; MLIT's
     # 位置参照情報 and N02 are PDL 1.0 with their own credit lines; N03 (CC BY 4.0)
     # only picks stations and is never drawn (the Survey Act). The city's page
     # warns closed premises may remain, so nothing here says "open". Wording
     # approved by the owner 2026-09-27.
-    ("City of Kobe and MLIT (Kobe)",
+    Notice(50, "City of Kobe and MLIT (Kobe)",
      "Kobe's businesses: 出典：「生活衛生関係許可施設等の情報提供」（神戸市）"
      "（[https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html](https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html)）を加工して作成 "
      "(© City of Kobe; [CC BY 2.1 JP](https://creativecommons.org/licenses/by/2.1/jp/)). Their "
@@ -1421,13 +1487,13 @@ _NOTICES = [
      "selected the storefront permit types, placed each premises by its address, and counted them "
      "around stations. The list may include premises that have closed. The City of Kobe and MLIT "
      "did not make and do not endorse this map.",
-     False),
+     False, ("Kobe",)),
     # Osaka (notice 52): the city's three lists are CC BY 4.0 (each source page:
     # 「CC-BY4.0で提供いたします。」, read 2026-09-24 and again 2026-09-27), in
     # the city's prescribed 「…」（大阪市）（URL）を加工して作成 form, one title per
     # page; MLIT as in Kobe's. The map must not look like the city's own.
     # Wording approved by the owner 2026-09-28.
-    ("Osaka City and MLIT (Osaka)",
+    Notice(52, "Osaka City and MLIT (Osaka)",
      "Osaka's businesses: 「食品営業許可施設一覧」（大阪市）"
      "（[https://www.city.osaka.lg.jp/kenko/page/0000575579.html](https://www.city.osaka.lg.jp/kenko/page/0000575579.html)）、「理容所及び美容所の開設施設一覧」"
      "（大阪市）（[https://www.city.osaka.lg.jp/kenko/page/0000431136.html](https://www.city.osaka.lg.jp/kenko/page/0000431136.html)）、「クリーニング所の開設施設一覧」"
@@ -1438,7 +1504,7 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). This project selected the storefront permit "
      "types, placed each premises by its address, and counted them around stations. The lists may "
      "include premises that have closed. Osaka City and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Osaka",)),
     # Sapporo (notice 53): both datasets CC BY 4.0 on the city's own CKAN
     # (read 2026-09-24; the registers' package re-read 2026-09-28). No wording is
     # prescribed: credit 札幌市, both dataset titles and URLs, the licence link and
@@ -1446,7 +1512,7 @@ _NOTICES = [
     # logos, never "operating". MLIT as in Kobe's and Osaka's. URLs are explicit
     # markdown links: bare ones ran on into the Japanese (fixed 2026-09-28).
     # Wording approved by the owner 2026-09-28.
-    ("Sapporo City and MLIT (Sapporo)",
+    Notice(53, "Sapporo City and MLIT (Sapporo)",
      "Sapporo's businesses: 札幌市『札幌市内の食品営業許可施設一覧』（[https://ckan.pf-sapporo.jp/dataset/sapporo_food_business_licences](https://ckan.pf-sapporo.jp/dataset/sapporo_food_business_licences)）"
      "『札幌市内の環境衛生営業施設一覧』（[https://ckan.pf-sapporo.jp/dataset/sapporo_environmental_hygiene_services](https://ckan.pf-sapporo.jp/dataset/sapporo_environmental_hygiene_services)）"
      "（札幌市ICT活用プラットフォーム、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）を加工して作成. "
@@ -1455,7 +1521,7 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). This project selected the storefront permit "
      "types, placed each premises by its address, and counted them around stations. The lists may "
      "include premises that have closed. Sapporo City and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Sapporo",)),
     # Fukuoka (notice 54): the city's four lists on BODIK are CC BY 4.0 through
     # the city's own terms (odcs.bodik.jp/401307/tos/ 第７条: each dataset's 作成者,
     # the resource name with its date, the resource URL, that it was modified);
@@ -1463,7 +1529,7 @@ _NOTICES = [
     # whom; its top page only; no completeness claim). MLIT as in Kobe's.
     # Every URL an explicit markdown link. Wording approved by the owner
     # 2026-09-28.
-    ("Fukuoka City, MHLW and MLIT (Fukuoka)",
+    Notice(54, "Fukuoka City, MHLW and MLIT (Fukuoka)",
      "Fukuoka's businesses: 福岡市保健医療局 食品安全推進課「福岡市内飲食店営業等営業許可施設一覧（令和8年8月31日現在）」"
      "（[https://data.bodik.jp/dataset/5925a9fb-3326-4499-9acd-7b18c03d5e32/resource/70d22acf-2353-4bc1-b45d-f12d45da5216](https://data.bodik.jp/dataset/5925a9fb-3326-4499-9acd-7b18c03d5e32/resource/70d22acf-2353-4bc1-b45d-f12d45da5216)）, "
      "福岡市保健福祉局「福岡市内理容所検査確認済施設一覧（令和８年８月31日現在）」"
@@ -1482,14 +1548,14 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Fukuoka City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Fukuoka",)),
     # Kyoto (notice 55): the portal's three datasets are CC BY 4.0 with 京都市 as
     # 著作権者 (read 2026-09-24). MUST DISPLAY 京都市 as creator, the name
     # 京都市オープンデータ (the portal's terms ask for it), the dataset names and
     # URLs, the licence link and that the data was processed; never "operating"
     # (closures are invisible in a rebuilt register). MLIT as in Kobe's. Every
     # URL an explicit markdown link. Wording approved by the owner 2026-09-28.
-    ("Kyoto City and MLIT (Kyoto)",
+    Notice(55, "Kyoto City and MLIT (Kyoto)",
      "Kyoto's businesses: 出典：京都市オープンデータ「食品営業許可施設一覧について」"
      "（[https://data.city.kyoto.lg.jp/dataset/00414/](https://data.city.kyoto.lg.jp/dataset/00414/)）"
      "「食品営業許可施設一覧について（令和3年6月以降）」"
@@ -1505,13 +1571,13 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kyoto City and MLIT did not make and do not "
      "endorse this map.",
-     False),
+     False, ("Kyoto",)),
     # Tokyo (notice 56): eight wards, each its own publisher, each credited in
     # the form its own terms prescribe - BUILT from pipeline/tokyo/credits.py,
     # which check_provenance.py holds to the roster (every file the build reads
     # has a credit). MHLW as in Fukuoka's; MLIT as in Kobe's. Wording approved
     # by the owner 2026-09-28.
-    ("Tokyo's wards, MHLW and MLIT (Tokyo)",
+    Notice(56, "Tokyo's wards, MHLW and MLIT (Tokyo)",
      "Tokyo's businesses: " + tokyo_credits.notice() + ". "
      "Processed by this project, which selected the storefront types, showed a premises in both a ward's "
      "list and the national filings once, placed each by its address, and counted them around stations. "
@@ -1521,7 +1587,7 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
      "this map.",
-     False),
+     False, ("Tokyo",)),
     # Yokohama (notice 75): the city's registers are CC BY 4.0 (the dataset
     # page and the city's open-data terms, read 2026-09-30), and the city
     # prescribes the credit for a modified work: 「この地図は、以下の著作物を改変
@@ -1529,7 +1595,7 @@ _NOTICES = [
     # with its link. MUST NOT: present the map as the city's work, or imply its
     # endorsement. MLIT as in Kobe's. Written under the owner's pre-approval of
     # this build's prose (2026-09-30).
-    ("Yokohama City and MLIT (Yokohama)",
+    Notice(75, "Yokohama City and MLIT (Yokohama)",
      "Yokohama's businesses: この地図は、以下の著作物を改変して利用しています。"
      "環境衛生関係施設一覧（理容所・美容所・クリーニング所施設一覧、令和８年４月１日現在）、神奈川県横浜市"
      "（[https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/seikatsu/kaiteki/kankyodata.html](https://www.city.yokohama.lg.jp/kurashi/sumai-kurashi/seikatsu/kaiteki/kankyodata.html)）、"
@@ -1543,14 +1609,14 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Yokohama and MLIT did not make "
      "and do not endorse this map.",
-     False),
+     False, ("Yokohama",)),
     # Hiroshima (notice 76): the city's full list is PDL 1.0 through DataEye
     # (dataset 5672; the owner accepted the reading for the full-list file,
     # 2026-09-24), with DataEye's prescribed 出典 pattern and who processed it;
     # MHLW as in Fukuoka's; MLIT as in Kobe's, N02 in its 2025 edition. Written
     # under the owner's pre-approval of this build's prose (2026-09-30), from
     # Fukuoka's approved wording.
-    ("Hiroshima City, MHLW and MLIT (Hiroshima)",
+    Notice(76, "Hiroshima City, MHLW and MLIT (Hiroshima)",
      "Hiroshima's businesses: 出典：「食品営業許可一覧」（広島広域都市圏・広島県オープンデータポータルサイト）"
      "（[https://hiroshima-opendata.dataeye.jp/datasets/5672](https://hiroshima-opendata.dataeye.jp/datasets/5672)）を加工して作成"
      "（「食品営業許可施設一覧（令和8年3月末時点）」, Hiroshima City); and "
@@ -1563,13 +1629,13 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Hiroshima City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Hiroshima",)),
     # Matsuyama (notice 97): the city's five lists are CC BY 4.0 under its
     # open-data site's terms, in their prescribed form for a modified work;
     # MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
     # Written from Hiroshima's and Yokohama's approved wording under the owner's
     # pre-approval of template prose (2026-09-30).
-    ("Matsuyama City, MHLW and MLIT (Matsuyama)",
+    Notice(97, "Matsuyama City, MHLW and MLIT (Matsuyama)",
      "Matsuyama's businesses: この地図は以下の著作物を改変して利用しています。"
      "食品営業許可全施設一覧、理容所全施設一覧、美容所全施設一覧、クリーニング所全施設一覧、松山市、"
      "クリエイティブ・コモンズ・ライセンス 表示 4.0"
@@ -1585,11 +1651,11 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Matsuyama City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Matsuyama",)),
     # Toyama (notice 98): the city's four lists are CC BY 4.0 under its CKAN's
     # terms, in their form for edited content; MHLW's file is used for its points
     # only; MLIT as in Kobe's, N02 in its 2025 edition. From Matsuyama's notice.
-    ("Toyama City, MHLW and MLIT (Toyama)",
+    Notice(98, "Toyama City, MHLW and MLIT (Toyama)",
      "Toyama's businesses: この地図は以下の著作物を改変して利用しています。"
      "食品営業許可施設、理容営業許可施設、美容営業許可施設、クリーニング営業許可施設、富山市、"
      "クリエイティブ・コモンズ・ライセンス 表示4.0国際"
@@ -1606,11 +1672,11 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Toyama City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Toyama",)),
     # Kumamoto (notice 99): the restaurant list PDL 1.0 in its catalogue's form,
     # the three lists CC BY 4.0 (and PDL 1.0 on BODIK), one credit for both; MHLW
     # as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
-    ("Kumamoto City, MHLW and MLIT (Kumamoto)",
+    Notice(99, "Kumamoto City, MHLW and MLIT (Kumamoto)",
      "Kumamoto's businesses: 「熊本市_食品衛生法に基づく飲食店営業許可施設一覧」「熊本市_理容所一覧」「熊本市_美容所一覧」"
      "「熊本市_クリーニング所一覧」（熊本市オープンデータカタログサイト）"
      "（[https://odcs.bodik.jp/431001/](https://odcs.bodik.jp/431001/)）をもとに作成 "
@@ -1624,12 +1690,12 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Kumamoto City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Kumamoto",)),
     # Fukui (notice 100): the city's lists are CC BY-SA (the site policy's
     # default), so the Fukui outputs are offered under CC BY-SA 4.0 (owner,
     # 2026-10-01; LICENSE); MLIT as in Kobe's, N02 in its 2025 edition. The
     # wording is a proposal for review time (the drafts file).
-    ("Fukui City and MLIT (Fukui)",
+    Notice(100, "Fukui City and MLIT (Fukui)",
      "Fukui's businesses: 出典：福井市「食品衛生法に基づく営業許可施設一覧」"
      "（[https://www.city.fukui.lg.jp/fukusi/eisei/syokuhin/p070519.html](https://www.city.fukui.lg.jp/fukusi/eisei/syokuhin/p070519.html)）、"
      "「環境衛生関係施設一覧」（[https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518.html](https://www.city.fukui.lg.jp/fukusi/eisei/kankyo/p070518.html)）"
@@ -1643,11 +1709,11 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Fukui City and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Fukui",)),
     # Nagasaki (notice 101): the city's four BODIK lists, CC BY 4.0 with its own
     # attribution (no prescribed form); MHLW as in Hiroshima's; MLIT as in
     # Kobe's, N02 in its 2025 edition.
-    ("Nagasaki City, MHLW and MLIT (Nagasaki)",
+    Notice(101, "Nagasaki City, MHLW and MLIT (Nagasaki)",
      "Nagasaki's businesses: 長崎市「食品等営業許可・届出一覧（全許可・届出一覧）（長崎市）」"
      "（[https://data.bodik.jp/dataset/422011_food_business_all](https://data.bodik.jp/dataset/422011_food_business_all)）、「理容所一覧（全届出一覧）（長崎市）」"
      "（[https://data.bodik.jp/dataset/422011_riyosho_all](https://data.bodik.jp/dataset/422011_riyosho_all)）、「美容所一覧（全届出一覧）（長崎市）」"
@@ -1664,10 +1730,10 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Nagasaki City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Nagasaki",)),
     # Utsunomiya (notice 102): the city's five lists, CC BY (no version) and PDL 1.0, in the
     # portal's pattern; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
-    ("Utsunomiya City, MHLW and MLIT (Utsunomiya)",
+    Notice(102, "Utsunomiya City, MHLW and MLIT (Utsunomiya)",
      "Utsunomiya's businesses: 出典：「食品営業許可施設一覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/s"
      "yokuhinneigyoukyoka](https://catalog.city.utsunomiya.tochigi.jp/dataset/syokuhinneigyoukyoka)）、「理容所一"
      "覧」（宇都宮市）（[https://catalog.city.utsunomiya.tochigi.jp/dataset/riyoujoichiran](https://catalog.city.ut"
@@ -1686,10 +1752,10 @@ _NOTICES = [
      "lit.go.jp/isj/)）を加工して作成. Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値"
      "情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. Utsunomiya City"
      ", MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Utsunomiya",)),
     # Kitakyushu (notice 103): the city's three BODIK lists, CC BY 4.0 with the 第6条 credit per
     # resource; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
-    ("Kitakyushu City, MHLW and MLIT (Kitakyushu)",
+    Notice(103, "Kitakyushu City, MHLW and MLIT (Kitakyushu)",
      "Kitakyushu's businesses: 北九州市保健福祉局 保健衛生課「食品衛生法等許可施設一覧（2026(令和8)年3月中）」（[https://data.bodik.jp/dataset"
      "/822fb681-346a-444e-b482-33c67b50cac3/resource/afce5cb5-8582-4295-8a98-494db2e25466](https://data.bo"
      "dik.jp/dataset/822fb681-346a-444e-b482-33c67b50cac3/resource/afce5cb5-8582-4295-8a98-494db2e25466)）,"
@@ -1708,13 +1774,13 @@ _NOTICES = [
      " and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値情報（行政区域データ） (CC BY 4.0; not dr"
      "awn). The lists may include premises that have closed. Kitakyushu City, MHLW and MLIT did not make a"
      "nd do not endorse this map.",
-     False),
+     False, ("Kitakyushu",)),
     # Sakai (notice 104): the city's list and monthly files are CC BY 4.0 under
     # the 堺市オープンデータ利用規約 (3-2), in its prescribed form for a modified
     # work (3-3); MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025
     # edition. Written from Matsuyama's approved wording under the owner's
     # pre-approval of template prose (2026-09-30).
-    ("Sakai City, MHLW and MLIT (Sakai)",
+    Notice(104, "Sakai City, MHLW and MLIT (Sakai)",
      "Sakai's businesses: この地図は以下の著作物を改変して利用しています。"
      "堺市 食品営業許可施設一覧（令和8年4月1日現在、令和8年4月分から8月分の許可施設及び廃業施設）、堺市、"
      "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
@@ -1731,13 +1797,13 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Sakai City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Sakai",)),
     # Hakodate (notice 105): the city's registers are CC BY 2.1 JP (the list
     # page), credited in Kobe's 出典 form with © and the licence link; MLIT as in
     # Kobe's, N02 in its 2025 edition. Written from Kobe's and Yokohama's
     # approved wording under the owner's pre-approval of template prose
     # (2026-09-30).
-    ("Hakodate City and MLIT (Hakodate)",
+    Notice(105, "Hakodate City and MLIT (Hakodate)",
      "Hakodate's businesses: 出典：「環境衛生関係施設等の情報」（函館市）"
      "（[https://www.city.hakodate.hokkaido.jp/docs/2019072900024/](https://www.city.hakodate.hokkaido.jp/docs/2019072900024/)）を加工して作成 "
      "(© Hakodate City; [CC BY 2.1 JP](https://creativecommons.org/licenses/by/2.1/jp/)). "
@@ -1748,10 +1814,10 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Hakodate and MLIT did not make "
      "and do not endorse this map.",
-     False),
+     False, ("Hakodate",)),
     # Kagoshima (notice 106): the city's old-law list, CC BY 4.0 in its prescribed credit for a
     # processed work; MHLW as in Hiroshima's; MLIT as in Kobe's, N02 in its 2025 edition.
-    ("Kagoshima City, MHLW and MLIT (Kagoshima)",
+    Notice(106, "Kagoshima City, MHLW and MLIT (Kagoshima)",
      "Kagoshima's businesses: この地図は以下の著作物を改変して利用しています。「食品営業許可全施設一覧」、鹿児島市、CCBY4.0（[https://creativecommons."
      "org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）（[https://www.city"
      ".kagoshima.lg.jp/kenkofukushi/hokenjo/seiei-shoku/kenko/ese/sekatsu/shoku/shokuopendata.html](https:"
@@ -1765,10 +1831,10 @@ _NOTICES = [
      "//nlftp.mlit.go.jp/isj/)）を加工して作成. Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen "
      "with 国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. Kagosh"
      "ima City, MHLW and MLIT did not make and do not endorse this map.",
-     False),
+     False, ("Kagoshima",)),
     # Okayama (notice 107): MHLW's open data alone, PDL 1.0 as in Hiroshima's; MLIT as in Kobe's,
     # N02 in its 2025 edition. The city's own pages are not used.
-    ("MHLW and MLIT (Okayama)",
+    Notice(107, "MHLW and MLIT (Okayama)",
      "Okayama's businesses: 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)"
      "）の「食品等営業許可・届出一覧」を加工して作成. Processed by this project, which selected the storefront types, placed each"
      " by its address or the ministry's own coordinates, and counted them around stations. The ministry's "
@@ -1777,13 +1843,13 @@ _NOTICES = [
      " Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with 国土数値情報（行政区域データ） (CC BY 4.0; "
      "not drawn). The list may include premises that have closed. MHLW and MLIT did not make and do not en"
      "dorse this map.",
-     False),
+     False, ("Okayama",)),
     # Kōchi (notice 108): the city's lists are CC BY 4.0 (the page's open-data
     # rule and the 高知市オープンデータ利用規約), in its prescribed processed form
     # (第1); no city symbols or logos (第3). MLIT as in Kobe's, N02 in its 2025
     # edition. Written from Matsuyama's and Yokohama's approved wording under
     # the owner's pre-approval of template prose (2026-09-30).
-    ("Kōchi City and MLIT (Kōchi)",
+    Notice(108, "Kōchi City and MLIT (Kōchi)",
      "Kōchi's businesses: 出典：「理容所一覧」「美容所一覧」（高知市）"
      "（[https://www.city.kochi.kochi.jp/soshiki/36/opendata.html](https://www.city.kochi.kochi.jp/soshiki/36/opendata.html)）を加工して作成 "
      "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). "
@@ -1795,24 +1861,24 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Kōchi and MLIT did not make "
      "and do not endorse this map.",
-     False),
+     False, ("Kōchi",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
     # notice (its courtesy credit is on the Berlin page). Wording approved by
     # the owner 2026-09-28.
-    ("VBB Verkehrsverbund Berlin-Brandenburg (Berlin)",
+    Notice(57, "VBB Verkehrsverbund Berlin-Brandenburg (Berlin)",
      "Station locations and line geometry for Berlin are from VBB Verkehrsverbund "
      "Berlin-Brandenburg GmbH's timetable data (GTFS), used under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
      "U-Bahn and S-Bahn stations were selected and those outside the Land of Berlin removed, "
      "one timetable shape was chosen per line, and the lines are drawn in this project's "
      "colours. VBB provides the data without warranty and does not endorse this map.",
-     False),
+     False, ("Berlin",)),
     # London (notice 58): the FSA's FHRS data under OGL v3 - the OGL statement linked, the
     # data date, what was modified, no endorsement. The credit avoids "the FHRS
     # name" (the FSA's imagery terms). Wording approved by the owner 2026-09-28.
-    ("Food Standards Agency (London)",
+    Notice(58, "Food Standards Agency (London)",
      "London's food businesses are from the Food Standards Agency, UK food hygiene rating "
      "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
      "licensed under the [Open Government Licence v3.0]"
@@ -1822,13 +1888,13 @@ _NOTICES = [
      "full postcode, and trade "
      "names shown where a business is registered under another name. No hygiene rating is "
      "shown. The Food Standards Agency does not endorse this map.",
-     False),
+     False, ("London",)),
     # London's postcode centroids (notice 59): Ordnance Survey's OGL v3 data -
     # the three statements verbatim from the licence file OS ships with it
     # (Doc/licence.txt, which OS's own terms name as the authority), the
     # licence link, no endorsement. The product's registered name is not used
     # (trademarks are outside the OGL). Wording approved by the owner 2026-09-28.
-    ("Ordnance Survey (London)",
+    Notice(59, "Ordnance Survey (London)",
      "Where the Food Standards Agency lists a London food business without a map point, it is "
      "placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -1836,12 +1902,12 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("London",)),
     # Buenos Aires (notice 60): BA Data's three datasets under CC BY 2.5 AR -
     # author units, dataset titles and URIs, the licence URI, how the data was
     # changed, no endorsement, no GCBA or BA Data logo. Written to satisfy 2.5 AR
     # and 4.0 both (Parcelas' resources say 4.0). Approved by the owner 2026-09-28.
-    ("Gobierno de la Ciudad de Buenos Aires (Buenos Aires)",
+    Notice(60, "Gobierno de la Ciudad de Buenos Aires (Buenos Aires)",
      "Buenos Aires' storefronts are from the [Relevamiento Usos del Suelo 2022-2024]"
      "(https://data.buenosaires.gob.ar/dataset/relevamiento-usos-suelo) (Dirección General de "
      "Antropología Urbana, Subsecretaría de Planeamiento), placed using "
@@ -1854,12 +1920,12 @@ _NOTICES = [
      "storefronts, grouped into three categories, and placed at the center of each parcel, or "
      "of its block where the parcel is not listed; station names follow OpenStreetMap's "
      "spelling. The Gobierno de la Ciudad de Buenos Aires does not endorse this map.",
-     False),
+     False, ("Buenos Aires",)),
     # Glasgow (notice 61): Scotland's FHIS data, run by Food Standards Scotland and
     # published in the FSA's open-data files, under OGL v3 (FSS states v3 itself) - the
     # OGL statement linked, the extract date, what was modified, no endorsement by either
     # body. Never "FHRS": FHIS is a separate scheme. Wording approved by the owner 2026-09-28.
-    ("Food Standards Scotland (Glasgow)",
+    Notice(61, "Food Standards Scotland (Glasgow)",
      "Glasgow's food businesses are from Food Standards Scotland, Food Hygiene Information "
      "Scheme data, via the Food Standards Agency, extracted on 2026-09-14. Contains public "
      "sector information licensed under the [Open Government Licence v3.0]"
@@ -1868,11 +1934,11 @@ _NOTICES = [
      "or registered as a childminder left out; trade names shown where a business is "
      "registered under another name. No inspection result is shown. Neither Food Standards "
      "Scotland nor the Food Standards Agency endorses this map.",
-     False),
+     False, ("Glasgow",)),
     # Newcastle (notice 62): the FSA's FHRS data for the five Tyne and Wear councils,
     # London's credit and conditions (England, FHRS). Wording approved by the owner
     # 2026-09-28.
-    ("Food Standards Agency (Newcastle)",
+    Notice(62, "Food Standards Agency (Newcastle)",
      "Newcastle's food businesses are from the Food Standards Agency, UK food hygiene rating "
      "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
      "licensed under the [Open Government Licence v3.0]"
@@ -1881,10 +1947,10 @@ _NOTICES = [
      "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
-     False),
+     False, ("Newcastle (Regional)",)),
     # Newcastle's postcode centroids (notice 63): London's Ordnance Survey notice, the
     # same file and edition. Wording approved by the owner 2026-09-28.
-    ("Ordnance Survey (Newcastle)",
+    Notice(63, "Ordnance Survey (Newcastle)",
      "Where the Food Standards Agency lists a Newcastle food business without a map point, it "
      "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -1892,36 +1958,36 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("Newcastle (Regional)",)),
     # Sydney (notice 64): the City of Sydney's FES under CC BY 4.0 - creator and
     # copyright holder, the licence and the dataset linked, modification noted, the
     # warranty disclaimer, no endorsement (licence-read 2026-09-28; no wording is
     # prescribed). Wording approved by the owner 2026-09-28.
-    ("City of Sydney (Sydney)",
+    Notice(64, "City of Sydney (Sydney)",
      "Business establishment locations: City of Sydney, Floor Space and Employment Survey 2022 "
      "([FES Industry of occupation](https://www.arcgis.com/home/item.html?id="
      "77ac8aa96bd34bacb881cfe8e5358ba0)), © City of Sydney, licensed under "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project "
      "(filtered and grouped by category); provided as is, without warranty. The City of Sydney "
      "does not endorse this map.",
-     False),
+     False, ("Sydney",)),
     # Melbourne (notice 65): the City of Melbourne's CLUE under CC BY 4.0 - the credit,
     # the licence and the dataset linked, the modification noted, no endorsement
     # (licence-read 2026-09-28; no wording is prescribed). Wording approved by the
     # owner 2026-09-28.
-    ("City of Melbourne (Melbourne)",
+    Notice(65, "City of Melbourne (Melbourne)",
      "Business establishments: City of Melbourne, Census of Land Use and Employment (CLUE) 2024 "
      "([dataset](https://data.melbourne.vic.gov.au/explore/dataset/"
      "business-establishments-with-address-and-industry-classification/)), "
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Filtered, categorised and "
      "aggregated by this project. The City of Melbourne does not endorse this map.",
-     False),
+     False, ("Melbourne",)),
     # Stockholm (notice 66): Stockholms stad's Livsmedelstillsyn register. Its licence
     # is SILENT (no licence on the item; the publisher's own Hub feed says public, with
     # CC0 on 8 of 109 datasets but not this one), so the notice credits the publisher
     # and states the changes without claiming a licence. Wording approved by the
     # owner 2026-09-29.
-    ("Stockholms stad (Stockholm)",
+    Notice(66, "Stockholms stad (Stockholm)",
      "Food premises for Stockholm are from the City of Stockholm's food inspection "
      "register (Livsmedelstillsyn, Stockholms stad, miljöförvaltningen, "
      "[open-data-sthlm-miljo.hub.arcgis.com](https://open-data-sthlm-miljo.hub.arcgis.com/)), "
@@ -1930,12 +1996,12 @@ _NOTICES = [
      "bars and food shops, grouped into two categories, and mapped by distance to "
      "Tunnelbana stations. This is not the official register, and it is not produced or "
      "endorsed by Stockholms stad.",
-     False),
+     False, ("Stockholm",)),
     # Bucharest (notice 67): DSVSA București's registers. Licence SILENT (no terms page; the ANSVSA
     # footer's "all rights reserved" covers the website), so the notice credits the
     # publisher and states the changes without claiming a licence. Wording approved
     # by the owner 2026-09-29.
-    ("DSVSA București (Bucharest)",
+    Notice(67, "DSVSA București (Bucharest)",
      "Food premises for Bucharest are from the registers of the Sanitary-Veterinary and "
      "Food Safety Directorate of Bucharest (DSVSA București, "
      "[bucuresti.dsvsa.ro](https://bucuresti.dsvsa.ro/)), which it publishes with no stated "
@@ -1945,14 +2011,14 @@ _NOTICES = [
      "OpenStreetMap's address points, and mapped by distance to metro stations. Company "
      "names are shown without their legal form, and sole traders by category only. This is "
      "not the official register, and it is not produced or endorsed by DSVSA or ANSVSA.",
-     False),
+     False, ("Bucharest",)),
     # SEMAS's 상가(상권)정보 (notice 68): data.go.kr 15083033, 이용허락범위 제한 없음. licence-read
     # 2026-09-29: PERMITTED WITH CONDITIONS - a source credit, no distortion of the
     # facts (so the categories are stated as this project's), SEMAS's website copyright
     # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
     # under the owner's pre-approval of this build's prose. Covers every Korean city on
     # the register (Incheon; the Gyeonggi satellites add their names).
-    ("Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang)",
+    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang)",
      "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu and Anyang are from the Small "
      "Enterprise and "
      "Market Service's "
@@ -1961,7 +2027,7 @@ _NOTICES = [
      "이용허락범위 제한 없음. Changes: filtered to shops, food and drink and personal services, "
      "grouped into three categories, and mapped by distance to stations; the categories and "
      "counts are this project's, not SEMAS's. Not produced or endorsed by SEMAS.",
-     False),
+     False, _KOREA_SEMAS),
     # Ottawa: Ottawa Public Health's food-safety inspection feed and the City's
     # 2022-2026 wards, both under the Open Government Licence - City of Ottawa
     # v2.0 (the items' licenseInfo, read 2026-09-29). Its attribution sentence is
@@ -1970,7 +2036,7 @@ _NOTICES = [
     # licence bars implying official status or endorsement and using the City's
     # or OPH's names as marks. Written under the owner's pre-approval of this
     # build's prose (2026-09-29).
-    ("City of Ottawa (Ottawa)",
+    Notice(72, "City of Ottawa (Ottawa)",
      "Contains information licensed under the [Open Government Licence – City of "
      "Ottawa](https://ottawa.ca/en/city-hall/get-know-your-city/open-data#open-data-licence-version-2-0). "
      "Food premises for Ottawa are from Ottawa Public Health / City of Ottawa's public health "
@@ -1980,13 +2046,13 @@ _NOTICES = [
      "rest are mapped by distance to O-Train stations; inspection results are not shown. This "
      "is not an official City of Ottawa or Ottawa Public Health product, and it is not "
      "endorsed by either.",
-     False),
+     False, ("Ottawa",)),
     # Kansas City (notice 80): the Data Terms of Use of Open Data KC
     # (data.kcmo.org/terms) prescribe this paragraph "at the site where the
     # software application ... can be accessed" - Chicago's wording on the same
     # portal template, so displayed site-wide as Chicago's is. Word for word,
     # the City's dead host www.data.kcmo.gov included (licence-read 2026-09-30).
-    ("City of Kansas City, Missouri (Kansas City)",
+    Notice(80, "City of Kansas City, Missouri (Kansas City)",
      "This site provides applications using data that has been modified for "
      "use from its original source, www.data.kcmo.gov, the official open data "
      "website of the City of Kansas City. The City of Kansas City makes no "
@@ -1994,19 +2060,19 @@ _NOTICES = [
      "of the data provided at this site. The data provided at this site is "
      "subject to change at any time. It is understood that the data provided "
      "at this site is being used at one’s own risk.",
-     True),
+     True, ("Kansas City",), every_page=True),
     # Tucson (notice 81): the BUSLIC layer's licence is silent, and the owner
     # took the permissive reading (2026-09-30) on condition that the City is
     # credited and the pins are never called complete. The owner's wording.
-    ("City of Tucson (Tucson)",
+    Notice(81, "City of Tucson (Tucson)",
      "Business licence data: City of Tucson.",
-     False),
+     False, ("Tucson",)),
     # Florence (notice 82): the Comune di Firenze's four activity layers, CC BY
     # 4.0 (its Note legali and every dataset; licence read 2026-09-30, the
     # brief). Credit the Comune, link the licence, state the changes - Milan's
     # notice, the same licence; no wording prescribed, so this is the project's
     # own. Never the Comune's logo or the giglio.
-    ("Comune di Firenze (Florence)",
+    Notice(82, "Comune di Firenze (Florence)",
      "Contains data from the Comune di Firenze (Direzione Attività Economiche e "
      "Turismo), licensed under a [Creative Commons Attribution 4.0 International "
      "(CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) licence: its "
@@ -2014,22 +2080,22 @@ _NOTICES = [
      "This map filters, re-categorises and aggregates that data into density "
      "measures; the filtering, categories and densities are this project's own "
      "and are not produced or endorsed by the Comune di Firenze.",
-     False),
+     False, ("Florence",)),
     # Den Haag (notice 83): the Gemeente's Horecavergunningen layer. Its licence
     # is silent; the owner proceeds on Amsterdam's precedent (2026-09-30) on
     # condition that the Gemeente is credited and the layer is never called
     # current or complete. Wording approved by the owner 2026-09-30 (call C1).
-    ("Gemeente Den Haag (Den Haag)",
+    Notice(83, "Gemeente Den Haag (Den Haag)",
      "Hospitality permit data: Gemeente Den Haag. The permit layer was last "
      "edited on 23 May 2025 and is not a complete or current record. Changes: "
      "the permits are filtered to food and drink premises, grouped into one "
      "category, matched to the national buildings register by address, and "
      "mapped by distance to tram stops. Not produced or endorsed by the "
      "Gemeente Den Haag.",
-     False),
+     False, ("Den Haag",)),
     # Manchester (notice 84): the FSA's FHRS data for the seven Metrolink
     # districts, Newcastle's notice 62 with the city and date changed.
-    ("Food Standards Agency (Manchester)",
+    Notice(84, "Food Standards Agency (Manchester)",
      "Manchester's food businesses are from the Food Standards Agency, UK food hygiene rating "
      "data, extracted on 2026-10-02. Contains public sector information licensed under the "
      "[Open Government Licence v3.0]"
@@ -2038,10 +2104,10 @@ _NOTICES = [
      "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
-     False),
+     False, ("Manchester (Regional)",)),
     # Manchester's postcode centroids (notice 85): Newcastle's notice 63, the
     # same file and edition.
-    ("Ordnance Survey (Manchester)",
+    Notice(85, "Ordnance Survey (Manchester)",
      "Where the Food Standards Agency lists a Manchester food business without a map point, it "
      "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -2049,22 +2115,22 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("Manchester (Regional)",)),
     # NaPTAN (notice 86): gate 3's second source for the UK tram and
     # light-rail cities, counted only. The OGL's default statement, since the
     # Department prescribes none (licence-read 2026-10-02). Wording approved
     # by the owner 2026-10-02.
-    ("Department for Transport, NaPTAN (United Kingdom)",
+    Notice(86, "Department for Transport, NaPTAN (United Kingdom)",
      "Stop counts on the UK's tram and light-rail maps are checked against NaPTAN, the "
      "National Public Transport Access Nodes dataset published by the Department for "
      "Transport. Contains public sector information licensed under the "
      "[Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The "
      "Department for Transport does not endorse this map.",
-     False),
+     False, _UK_SIX),
     # Birmingham (notice 87): the FSA's FHRS data for the three West Midlands
     # Metro districts, Newcastle's notice 62 with the city and date changed.
-    ("Food Standards Agency (Birmingham)",
+    Notice(87, "Food Standards Agency (Birmingham)",
      "Birmingham's food businesses are from the Food Standards Agency, UK food hygiene rating "
      "data, extracted on 2026-10-02. Contains public sector information licensed under the "
      "[Open Government Licence v3.0]"
@@ -2073,10 +2139,10 @@ _NOTICES = [
      "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
-     False),
+     False, ("Birmingham (Regional)",)),
     # Birmingham's postcode centroids (notice 88): Newcastle's notice 63, the
     # same file and edition.
-    ("Ordnance Survey (Birmingham)",
+    Notice(88, "Ordnance Survey (Birmingham)",
      "Where the Food Standards Agency lists a Birmingham food business without a map point, it "
      "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -2084,10 +2150,10 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("Birmingham (Regional)",)),
     # Edinburgh (notice 89): Scotland's FHIS data for the City of Edinburgh, Glasgow's
     # notice 61 with the city and date changed and Manchester's centroid clause added.
-    ("Food Standards Scotland (Edinburgh)",
+    Notice(89, "Food Standards Scotland (Edinburgh)",
      "Edinburgh's food businesses are from Food Standards Scotland, Food Hygiene Information "
      "Scheme data, via the Food Standards Agency, extracted on 2026-10-02. Contains public "
      "sector information licensed under the [Open Government Licence v3.0]"
@@ -2097,10 +2163,10 @@ _NOTICES = [
      "left out where they have no full postcode; trade names shown where a business is "
      "registered under another name. No inspection result is shown. Neither Food Standards "
      "Scotland nor the Food Standards Agency endorses this map.",
-     False),
+     False, ("Edinburgh",)),
     # Edinburgh's postcode centroids (notice 90): Newcastle's notice 63, the
     # same file and edition.
-    ("Ordnance Survey (Edinburgh)",
+    Notice(90, "Ordnance Survey (Edinburgh)",
      "Where the Food Standards Agency lists an Edinburgh food business without a map point, it "
      "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -2108,10 +2174,10 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("Edinburgh",)),
     # Sheffield (notice 91): the FSA's FHRS data for the City of Sheffield,
     # Newcastle's notice 62 with the city and date changed.
-    ("Food Standards Agency (Sheffield)",
+    Notice(91, "Food Standards Agency (Sheffield)",
      "Sheffield's food businesses are from the Food Standards Agency, UK food hygiene rating "
      "data, extracted on 2026-10-02. Contains public sector information licensed under the "
      "[Open Government Licence v3.0]"
@@ -2120,10 +2186,10 @@ _NOTICES = [
      "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
-     False),
+     False, ("Sheffield",)),
     # Sheffield's postcode centroids (notice 92): Newcastle's notice 63, the
     # same file and edition.
-    ("Ordnance Survey (Sheffield)",
+    Notice(92, "Ordnance Survey (Sheffield)",
      "Where the Food Standards Agency lists a Sheffield food business without a map point, it "
      "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -2131,10 +2197,10 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("Sheffield",)),
     # Nottingham (notice 93): the FSA's FHRS data for the four NET council
     # areas, Newcastle's notice 62 with the city and date changed.
-    ("Food Standards Agency (Nottingham)",
+    Notice(93, "Food Standards Agency (Nottingham)",
      "Nottingham's food businesses are from the Food Standards Agency, UK food hygiene rating "
      "data, extracted between 2026-10-01 and 2026-10-02. Contains public sector information "
      "licensed under the [Open Government Licence v3.0]"
@@ -2143,10 +2209,10 @@ _NOTICES = [
      "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
-     False),
+     False, ("Nottingham (Regional)",)),
     # Nottingham's postcode centroids (notice 94): Newcastle's notice 63, the
     # same file and edition.
-    ("Ordnance Survey (Nottingham)",
+    Notice(94, "Ordnance Survey (Nottingham)",
      "Where the Food Standards Agency lists a Nottingham food business without a map point, it "
      "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -2154,10 +2220,10 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("Nottingham (Regional)",)),
     # Blackpool (notice 95): the FSA's FHRS data for Blackpool and Wyre,
     # Newcastle's notice 62 with the city and date changed.
-    ("Food Standards Agency (Blackpool)",
+    Notice(95, "Food Standards Agency (Blackpool)",
      "Blackpool's food businesses are from the Food Standards Agency, UK food hygiene rating "
      "data, extracted on 2026-10-02. Contains public sector information licensed under the "
      "[Open Government Licence v3.0]"
@@ -2166,10 +2232,10 @@ _NOTICES = [
      "without a location placed at their postcode's center, or left out where they have no "
      "full postcode, and trade names shown where a business is registered under another name. "
      "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
-     False),
+     False, ("Blackpool (Regional)",)),
     # Blackpool's postcode centroids (notice 96): Newcastle's notice 63, the
     # same file and edition.
-    ("Ordnance Survey (Blackpool)",
+    Notice(96, "Ordnance Survey (Blackpool)",
      "Where the Food Standards Agency lists a Blackpool food business without a map point, it "
      "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
      "under the [Open Government Licence v3.0]"
@@ -2177,7 +2243,7 @@ _NOTICES = [
      "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
-     False),
+     False, ("Blackpool (Regional)",)),
     # Seattle (Regional) (notices 109-113, the session's claimed block):
     # King County's two required texts (owner, 2026-10-01: the permissive
     # reading rests on the Open Data terms' legend); the Liquor Board's list
@@ -2185,35 +2251,35 @@ _NOTICES = [
     # (owner, 2026-10-02); Snohomish County's credit in the owner's words;
     # Bellevue's credit (the condition of the owner's reading); Seattle's
     # credit, recommended and displayed by choice.
-    ("Public Health – Seattle & King County (Seattle (Regional))",
+    Notice(109, "Public Health – Seattle & King County (Seattle (Regional))",
      "Food inspection data: Public Health – Seattle & King County. Data provided "
      "by permission of King County. Not endorsed by King County.",
-     False),
-    ("Washington State Liquor and Cannabis Board (Seattle (Regional))",
+     False, ("Seattle (Regional)",)),
+    Notice(110, "Washington State Liquor and Cannabis Board (Seattle (Regional))",
      "Shops licensed to sell alcohol outside Seattle and Bellevue: the Washington "
      "State Liquor and Cannabis Board's off-premise licensee list of September 29, "
      "2026, not a complete or current list of shops. The Board notes that its list "
      "reports \"contain possible errors due to a known data transfer issue\".",
-     False),
-    ("Snohomish County (Seattle (Regional))",
+     False, ("Seattle (Regional)",)),
+    Notice(111, "Snohomish County (Seattle (Regional))",
      "Lynnwood and Mountlake Terrace food establishments: Snohomish County, Food "
      "Service Establishments (2025). The list dates from 2025 and is not a current, "
      "complete or official record.",
-     False),
-    ("City of Bellevue (Seattle (Regional))",
+     False, ("Seattle (Regional)",)),
+    Notice(112, "City of Bellevue (Seattle (Regional))",
      "Business license data: City of Bellevue.",
-     False),
-    ("City of Seattle (Seattle (Regional))",
+     False, ("Seattle (Regional)",)),
+    Notice(113, "City of Seattle (Seattle (Regional))",
      "Business license data: City of Seattle.",
-     False),
+     False, ("Seattle (Regional)",)),
     # Tbilisi (notice 114): Geostat's Terms of Use require naming Geostat as
     # the source (also Art. 43(6) of Georgia's statistics law); no logo, no
     # implied endorsement. Wording proposed by the brief, flagged for review.
-    ("Geostat (Tbilisi)",
+    Notice(114, "Geostat (Tbilisi)",
      "Business data: National Statistics Office of Georgia (Geostat), Statistical "
      "Business Register, retrieved 2026-10-02; processed by this project. Not "
      "endorsed by Geostat.",
-     False),
+     False, ("Tbilisi",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
@@ -2262,12 +2328,55 @@ _AS_RECORDED = (
 )
 
 
-def render_site_notices(show_links: bool = True):
-    """The site-level footer: the three reference pages, then every notice that
-    publishing these maps requires.
+def notices_in_order():
+    """Every notice, in docs/data_sources.md's number order."""
+    return sorted(_NOTICES, key=lambda n: n.number)
 
-    Called from EVERY page. See _NOTICES above for why a single city page
-    carrying its own credit does not discharge these.
+
+def city_notices(city):
+    """The notices a city's page shows as its own, in number order."""
+    return [n for n in notices_in_order() if city in n.cities]
+
+
+def every_page_notices():
+    """The notices shown on every page, in number order."""
+    return [n for n in notices_in_order() if n.every_page]
+
+
+def _notice_text(notices):
+    return "\n\n".join(f"**{n.heading}** \u2014 {n.text}" for n in notices)
+
+
+_NOTICES_INTRO = (
+    "**Required source notices.** Reproduced as each source's terms "
+    "require. Each source's full record, with the web address it was downloaded "
+    "from and the date, is on "
+    "the \u201cWhere this data comes from\u201d page."
+)
+
+# Long unbroken URLs (the Japanese credits carry several) would otherwise
+# widen a 375 px page; wrapping them anywhere keeps the text inline and whole.
+_NOTICE_STYLE = (
+    "<style>.st-key-site-notices p { margin: 0 0 0.4rem; font-size: 0.8rem;"
+    " line-height: 1.35; break-inside: avoid; }"
+    ".st-key-site-notices p, .st-key-city-notices p, .st-key-all-notices p"
+    " { overflow-wrap: anywhere; }"
+    "@media (min-width: 900px) { .st-key-site-notices"
+    " [data-testid='stCaptionContainer'] { column-count: 2;"
+    " column-gap: 2rem; } }</style>"
+)
+
+
+def render_site_notices(city=None, show_links: bool = True,
+                        lists_all: bool = False):
+    """The footer every page ends with: the three reference pages, the city's
+    own notices in full (with `city`, a name as app/cities.py spells it), then
+    the notices every page carries and a link to the page that lists all of
+    them.
+
+    Called from EVERY page. `lists_all` is for the Required notices page alone,
+    which has just shown every notice and so skips the every-page set and the
+    link to itself.
     """
     st.divider()
     if show_links:
@@ -2276,8 +2385,7 @@ def render_site_notices(show_links: bool = True):
             st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
             st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
             st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
-    st.caption(_AS_RECORDED)
-    st.caption(_NON_AFFILIATION)
+    st.markdown(_NOTICE_STYLE, unsafe_allow_html=True)
 
     # NOT in an st.expander, and that was a real mistake worth naming: these
     # were briefly collapsed behind one, which kept them out of the DOM until
@@ -2285,33 +2393,40 @@ def render_site_notices(show_links: bool = True):
     # where the software application ... can be accessed", and this project's
     # own rule for the OSM attribution is that it must not sit "beneath UI,
     # behind toggles, or off-screen". A required notice behind a toggle is not
-    # displayed. So they render inline, always, in small type.
-    st.caption(
-        "**Required source notices.** Reproduced as each source's terms "
-        "require. Each source's full record, with the web address it was downloaded "
-        "from and the date, is on "
-        "the \u201cWhere this data comes from\u201d page."
-    )
-    # ONE block, not one element per notice (owner, 2026-10-02: condense the
-    # scroll without hiding anything). Each st.caption was its own element with
-    # a 16 px gap, and the list ran to about 90% of a city page at 375 px. All
-    # text stays inline and in the DOM; only spacing, size and, from 900 px,
-    # two columns change.
-    st.markdown(
-        "<style>.st-key-site-notices p { margin: 0 0 0.4rem; font-size: 0.8rem;"
-        " line-height: 1.35; break-inside: avoid; }"
-        "@media (min-width: 900px) { .st-key-site-notices"
-        " [data-testid='stCaptionContainer'] { column-count: 2;"
-        " column-gap: 2rem; } }</style>",
-        unsafe_allow_html=True)
-    with st.container(key="site-notices"):
-        st.caption("\n\n".join(
-            [f"**{heading}** \u2014 {text}" for heading, text, _verbatim in _NOTICES]
-            + ["**OpenStreetMap** \u2014 basemap \u00a9 OpenStreetMap contributors, "
-               "available under the Open Database License. The attribution also "
-               "appears in the corner of every map, where its license requires "
-               "it to stay visible. The overview map's basemap is \u00a9 CARTO."]))
+    # displayed. So they render inline, always.
+    #
+    # A city's own notices come first and at body size, not caption size:
+    # TransLink's (11) and CRTM's (20) must be prominent, and the Ordnance
+    # Survey statements legible, on their pages (owner, 2026-10-02).
+    own = city_notices(city) if city else []
+    if own:
+        with st.container(key="city-notices"):
+            st.markdown(_NOTICES_INTRO)
+            st.markdown(_notice_text(own))
+    st.caption(_AS_RECORDED)
+    st.caption(_NON_AFFILIATION)
+
+    if not lists_all:
+        if not own:
+            st.caption(_NOTICES_INTRO)
+        # ONE block, not one element per notice (owner, 2026-10-02: condense
+        # the scroll without hiding anything). Each st.caption was its own
+        # element with a 16 px gap. All text stays inline and in the DOM; only
+        # spacing, size and, from 900 px, two columns change.
+        with st.container(key="site-notices"):
+            st.caption(_notice_text(
+                [n for n in every_page_notices() if n not in own]))
+        st.page_link(NOTICES_PAGE, label="All required source notices")
     st.caption(_UNSETTLED_TERMS)
+
+
+def render_all_notices():
+    """The Required notices page's body: every notice, verbatim, in number
+    order, at body size."""
+    st.markdown(_NOTICE_STYLE, unsafe_allow_html=True)
+    st.markdown(_NOTICES_INTRO)
+    with st.container(key="all-notices"):
+        st.markdown(_notice_text(notices_in_order()))
 
 
 # --- The city page's own pieces (format set by the owner, 2026-10-01) -------

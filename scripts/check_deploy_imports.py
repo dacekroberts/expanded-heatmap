@@ -172,10 +172,13 @@ try:
             continue
         # Chicago's terms require its disclaimer wherever the app is accessed.
         # Four pages shipped without this because the scaffold template omitted
-        # it; on those pages the notices were ABSENT, not collapsed.
-        if "render_site_notices()" not in src:
-            problems.append(f"{f.name}: never calls render_site_notices() - "
-                            "the five mandatory notices would be absent")
+        # it; on those pages the notices were ABSENT, not collapsed. Since
+        # 2026-10-02 the call names the city, whose own notices render only
+        # then (check_provenance.py check N).
+        if f'render_site_notices("{city["name"]}")' not in src:
+            problems.append(f"{f.name}: never calls render_site_notices("
+                            f"\"{city['name']}\") - its own notices and the "
+                            "every-page ones would be absent")
         m = _re.search(r'render_city_nav\("([^"]+)"\)', src)
         if not m:
             problems.append(f"{f.name}: never calls render_city_nav()")

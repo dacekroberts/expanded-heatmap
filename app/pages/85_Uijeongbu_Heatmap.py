@@ -91,4 +91,4 @@ render_country_links('Uijeongbu')
 # Chicago's terms say "at the site where the software application ... can
 # be accessed". See components._NOTICES. OMITTING THIS IS A LICENCE
 # BREACH, not a cosmetic gap.
-render_site_notices()
+render_site_notices("Uijeongbu")

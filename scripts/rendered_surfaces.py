@@ -62,6 +62,7 @@ def pages(root=ROOT):
             "docs": sorted(set(DOCS_RE.findall(text))),
             "json": sorted(set(JSON_RE.findall(text))),
             "notices": "render_site_notices" in text,
+            "all_notices": "render_all_notices" in text,
             "scope_rows": "scope_rows" in text,
         })
     return out
@@ -109,6 +110,8 @@ def render(root=ROOT):
         what += [f"`app/{j}`" for j in p["json"] if (root / "app" / j).exists()]
         if p["scope_rows"]:
             what.append("every city's `outputs/<slug>/excluded_stations.csv` (`app/station_scope.py`)")
+        if p["all_notices"]:
+            what.append("every required notice (`components._NOTICES`)")
         if p["notices"]:
             what.append("site notices")
         lines.append(f"| `{p['url']}` | `{p['file']}` | {', '.join(what) or 'its own text'} |")
@@ -122,7 +125,8 @@ def render(root=ROOT):
         "",
         "Each shows its own text, its caption (dates from",
         "`outputs/<slug>/provenance.json`), its map `outputs/<slug>/heatmap.html`,",
-        "the city switcher, and the site notices (`components.render_site_notices`).",
+        "the city switcher, and the site notices with its own notices first",
+        "(`components.render_site_notices`).",
         "Its station scope (`outputs/<slug>/excluded_stations.csv`) is shown on What",
         "Is Excluded, and its in-ring share on Why the Maps Differ.",
         "",

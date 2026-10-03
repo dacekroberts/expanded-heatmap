@@ -95,4 +95,4 @@ render_country_links('Edmonton')
 # Chicago's terms say "at the site where the software application ... can
 # be accessed". See components._NOTICES. This page did not call it until
 # 2026-09-22; the scaffold template omitted it.
-render_site_notices()
+render_site_notices("Edmonton")
