@@ -929,6 +929,29 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
+- [ ] **Doc corrections from staging's re-check calendar** (2026-10-02;
+  `docs/recheck_calendar.md`, "Corrections to project docs", each with its
+  source):
+  - Prague's Flora reopens about the end of February 2027, not December 2026
+    (PLAN, and the rendered Prague page).
+  - Amsterdam's tram 3 was discontinued on 2026-03-29, not paused
+    (excluded_categories, config).
+  - Oslo's tram 13, Thune to Lilleaker, has been bus-replaced since
+    2026-06-10, to about February 2027. No doc mentions it.
+  - Rome's tram 3 was reactivated on 2026-09-07; the config still says
+    bus-replaced.
+  - denmark.md says DAWA closes on 1 October 2026; it already answers 410.
+  - São Paulo's Linha 17 has carried passengers since 2026-03-31. Whether
+    to draw it is an owner call, raised by staging.
+  - Osaka's Yumeshima (N02-25) is missing, against What Is Excluded's
+    claim. A re-run, raised by staging.
+  - D.C.'s config says the other feeds "can sit for months", but five end
+    within eight weeks.
+  - gated_access.md item 12's 2026-09-28 follow-up was done.
+  - Seoul's Wirye note counts only Seoul; both ends are in Seongnam.
+  - Also found: `check_provenance.py` check C never checks the reverse
+    direction, so a numbered notice that is not displayed (New York, 5)
+    passes.
 - [ ] **Left by the Japan batch (landed 2026-10-02), for the owner:**
   - **`japan_fetch.fetch_city` counts a file's rows with `city_rows(dest)`**,
     not the city config's own reader, so Fukui's and Toyama's recorded
