@@ -42,6 +42,7 @@ OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
 OSM_RAIL_JSON = DATA_RAW / "osm_rail.json"
 OSM_TRAIN_JSON = DATA_RAW / "osm_train.json"          # CPTM, for Line 9
 OSM_MUNICIPIOS_JSON = DATA_RAW / "osm_municipios.json"  # names an excluded station
+OSM_L17_BRANCH_JSON = DATA_RAW / "osm_l17_branch.json"  # Washington Luís, by id
 GEOSAMPA_STATIONS_JSON = DATA_RAW / "geosampa_estacao_metro.json"
 GEOSAMPA_TRAIN_STATIONS_JSON = DATA_RAW / "geosampa_estacao_trem.json"
 
@@ -84,10 +85,21 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 #
 # Geometry and stations from OpenStreetMap by route-relation membership
 # (osm-rail); GeoSampa only for which lines OPERATE and the station count.
-# Draw subway refs 1-5 and monorail ref 15. Refs 6 (Laranja) and 17 (Ouro)
-# are in OSM but only in GeoSampa's PLANNED layer - Tel Aviv's trap - and
-# step 1 STOPS the day either appears in the operating layer, so it is added
+# Draw subway refs 1-5 and monorail refs 15 and 17. Ref 6 (Laranja) is in
+# OSM but only in GeoSampa's PLANNED layer - Tel Aviv's trap - and step 1
+# STOPS the day it appears in the operating layer, so it is added
 # deliberately.
+#
+# LINHA 17-OURO DRAWN (owner, 2026-10-03: "investigate and then draw"). The
+# monorail has carried passengers since 2026-03-31, Morumbi to Aeroporto de
+# Congonhas, with Washington Luís added on 2026-06-30; from 2026-09-30 it runs
+# 06:00-22:00 Monday to Saturday, still fare-free in "operação transitória",
+# run by Metrô (metro.sp.gov.br's Linha 17-Ouro page lists eight stations,
+# read 2026-10-03). GeoSampa's operating layer still lacks it (re-read
+# 2026-10-03, unchanged since 2026-09-24), so gate 3 takes Metrô's eight
+# (GATE3_ADDED below). Linha 6's first six stations have been in free
+# assisted operation on weekdays 10:00-15:00 since 2026-07-03; they stay out
+# pending the owner's call (docs/decisions_drafts/lane-rail.md, 2026-10-03).
 #
 # CPTM - LINE 9 DRAWN, THE REST NOT: the owner's call of 2026-09-24, on the
 # DART / S-tog test (spacing and frequency inside the city, and districts the
@@ -100,30 +112,52 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # 10, 11 and 12 fail on spacing (medians 2.1-3.4 km in the city); 13 and the
 # Expresso Aeroporto have one to three stops here. Line 9's two stations in
 # Osasco are recorded as excluded, like any station outside the município.
-DRAW_REFS = {"subway": ("1", "2", "3", "4", "5"), "monorail": ("15",), "train": ("9",)}
-NOT_YET_OPEN_REFS = ("6", "17")
+DRAW_REFS = {"subway": ("1", "2", "3", "4", "5"), "monorail": ("15", "17"), "train": ("9",)}
+NOT_YET_OPEN_REFS = ("6",)
 # CPTM lines measured and left out - step 1 stops on any OTHER train relation.
 CPTM_NOT_DRAWN = ("7", "8", "10", "11", "12", "13", None)   # None: Expresso Aeroporto
-LINE_ORDER = ("1", "2", "3", "4", "5", "15", "9")
+LINE_ORDER = ("1", "2", "3", "4", "5", "15", "17", "9")
 LINE_NAMES = {"1": "Linha 1-Azul", "2": "Linha 2-Verde", "3": "Linha 3-Vermelha",
               "4": "Linha 4-Amarela", "5": "Linha 5-Lilás", "15": "Linha 15-Prata",
-              "9": "Linha 9-Esmeralda"}
+              "17": "Linha 17-Ouro", "9": "Linha 9-Esmeralda"}
 # OSM's colours (GeoSampa carries none), measured 2026-09-24 against the pins:
 # all clear the floor unchanged; Linha 1 is 13.7 from Retail and recorded, as
 # agency colours below the preferred 45 are. Linha 3's two direction relations
 # disagree (#ef3f32 / #D9001C, 10.5 apart); the first relation's is taken.
 # Line 9 is OSM's #00A88E, unchanged: 15.4 from the Personal services pins and
 # 15.5 from Linha 2, both clear of the floor (measured 2026-09-24).
+# Linha 17 is OSM's #DE7C00 on both direction relations, unchanged: 72.1 from
+# the Food service pins (the nearest), 40.4 from Linha 3 across the city and
+# 46.1 from Linha 4; 3.0:1 on the light page (measured 2026-10-03).
 LINE_COLOURS = {"1": "#1266af", "2": "#008162", "3": "#ef3f32", "4": "#FFD700",
-                "5": "#9200C3", "15": "#7b9192", "9": "#00A88E"}
+                "5": "#9200C3", "15": "#7b9192", "17": "#DE7C00", "9": "#00A88E"}
 # Gate 3: GeoSampa's operating layer, 85 distinct stations (brief, 2026-09-23);
 # re-counted from the cached layer at every run - with ONE recorded correction.
 # The layer lacks Jardim Colonial, Linha 15's terminus, which OSM carries and
 # which opened on 2021-12-29 (en.wikipedia "Line 15 (São Paulo Metro)": "11
 # operational", read 2026-09-24): the agency layer is stale by one station,
-# the case the brief anticipated for Lines 6 and 17.
-GATE3_ADDED = {"15": ("JARDIM COLONIAL",)}
+# the case the brief anticipated for Lines 6 and 17. Linha 17 is absent from
+# the layer altogether: its eight are Metrô's own list (the Linha 17-Ouro page,
+# read 2026-10-03), and step 1 stops once GeoSampa lists any of them.
+GATE3_ADDED = {"15": ("JARDIM COLONIAL",),
+               "17": ("MORUMBI", "CHUCRI ZAIDAN", "VILA CORDEIRO", "CAMPO BELO",
+                      "VEREADOR JOSE DINIZ", "BROOKLIN PAULISTA", "AEROPORTO DE CONGONHAS",
+                      "WASHINGTON LUIS")}
+# WASHINGTON LUÍS, LINHA 17's BRANCH STATION (open since 2026-06-30), is in
+# neither of OSM's Linha 17 route relations (re-fetched 2026-10-03): its stop
+# nodes still carry construction=station and its track is not a member. It is
+# added BY ID from OSM itself (Sacramento's ADDED_STATIONS rule, with OSM
+# rather than Wikidata because OSM has the objects): the stop position, and
+# the branch way from the junction east of Brooklin Paulista. Step 1 STOPS
+# once a Linha 17 relation carries a stop of this name, so the entry retires
+# itself.
+L17_BRANCH = {"station": "Washington Luís", "stop_node": 12343720433, "way": 671909900}
 # One station under two spellings in OSM - an en dash and a hyphen - 6 m apart.
-STATION_NAME_ALIASES = {"São Paulo – Morumbi": "São Paulo-Morumbi"}
+# Linha 17's Morumbi is the interchange with CPTM's "Morumbi - Claro" (Metrô
+# lists it as integrated with Linha 9), 171 m apart: one station, under the
+# name the map already showed, as Santo Amaro (257 m) and Pinheiros (194 m)
+# are one each.
+STATION_NAME_ALIASES = {"São Paulo – Morumbi": "São Paulo-Morumbi",
+                        "Morumbi": "Morumbi - Claro"}
 SPACING_MIN_M = 400.0
 COLLAPSE_MAX_SPREAD_M = 400

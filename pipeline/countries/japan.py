@@ -82,7 +82,9 @@ from pipeline.tokyo import wards as tokyo_wards  # noqa: E402 - dependency-free,
 CITIES = {
     "tokyo": {"name": "東京都区部", "pref": "13", "epsg": 32654,
               "wards": tokyo_wards.ACTIVE_CODES},
-    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653,
+    # N02-25 since 2026-10-03 (owner): N02-24 lacks the Chūō Line's
+    # Yumeshima, opened 2025-01-19.
+    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653, "n02": "25",
               "wards": ["27102", "27103", "27104", "27106", "27107", "27108", "27109", "27111", "27113",
                         "27114", "27115", "27116", "27117", "27118", "27119", "27120", "27121", "27122",
                         "27123", "27124", "27125", "27126", "27127", "27128"]},

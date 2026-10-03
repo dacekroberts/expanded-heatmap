@@ -428,12 +428,12 @@
     "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/27128-19.0b.zip"
   },
   "n02": {
-    "bytes": 12718026,
-    "file": "data/japan/raw/N02-24_GML.zip",
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
     "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
-    "retrieved": "2026-09-27T19:52:06+00:00",
-    "sha256": "504eefd4411cd0fd3ad9a50f35da2f5da07949d5144ded7630df0972f8deaac7",
-    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip"
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
   },
   "n03": {
     "bytes": 2163158,
