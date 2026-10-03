@@ -733,5 +733,10 @@
   "in_ring": 5697,
   "all": 8482,
   "map_blob": "0280379b2e1b751ebdc1e03eeb36433142cd35f2"
+ },
+ "nishinomiya": {
+  "in_ring": 4935,
+  "all": 5527,
+  "map_blob": "e51764f9670fc90697d599a2db1efbb0ed6d36a9"
  }
 }

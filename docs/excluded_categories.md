@@ -3700,6 +3700,38 @@ line.
   Kamikawa and 1 in Fukusaki.
 - The Shinkansen is not drawn (Himeji appears as a JR station).
 
+### Nishinomiya - the city's food list and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 977 food permits with no fixed premises: 901 vehicles and stalls licensed
+  for the whole city and 76 rows with no address.
+- 166 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter, and 34
+  cooking vending machines.
+
+**Counted** - every food permit on the city's list of 31 August 2026, and
+every barber, beauty salon and laundry on its registers of September 2026.
+The laundry register holds 147 of the 237 laundries the city reported for
+2025 (62%), so laundries are undercounted. 22 of the 495 bakery, confectioner
+and deli rows (4.4%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 169 repeat permits are shown once.
+
+**Not placed** - 1 row. Another 49 sit at their town's center.
+
+**Names not shown** - 1 trade name that is its operator's own name shows its
+permit type instead.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 17 stations beyond it: 6 in Takarazuka, 4 in Amagasaki, 4 in
+  Ashiya and 3 in Kobe (2 in Higashinada Ward, 1 in Kita Ward).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

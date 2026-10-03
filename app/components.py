@@ -1971,6 +1971,27 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Himeji and MLIT did not make "
      "and do not endorse this map.",
      False, ("Himeji",)),
+    # Nishinomiya (notice 118): the city's five portal datasets under PDL 1.0
+    # (the portal's terms 第1), in PDL's 1.1 form per dataset naming the
+    # processor; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Kōchi's and Toyama's approved wording under the owner's pre-approval of
+    # template prose (2026-09-30).
+    Notice(118, "Nishinomiya City and MLIT (Nishinomiya)",
+     "Nishinomiya's businesses: 出典：「食品営業許可施設」（西宮市）"
+     "（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=9](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=9)）、"
+     "「理容所情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=49](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=49)）、"
+     "「美容所情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=50](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=50)）、"
+     "「クリーニング所（一般）情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=67](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=67)）、"
+     "「クリーニング所（取次）情報」（西宮市）（[https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=68](https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=68)）を加工して作成. "
+     "Processed by this project, which selected the storefront types from the City of Nishinomiya's list of "
+     "food-business permits as of 31 August 2026 and its registers of barbers, beauty salons and laundries "
+     "of September 2026, placed each by its address, and counted them around stations. The lists may "
+     "include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Nishinomiya and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Nishinomiya",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

@@ -1,0 +1,107 @@
+{
+  "city_barber": {
+    "as_of": "2026-09-30",
+    "bytes": 140626,
+    "dataset_page": "https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=49",
+    "file": "riyo_2026.9.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:01+00:00",
+    "rows": 1079,
+    "sha256": "765375e67272c8c1ae99ff7be2550f36eb3391610314493397c49df0e2e632db",
+    "url": "https://opendata.nishi.or.jp/opendata/files/49/2026.9.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2026-09-30",
+    "bytes": 140621,
+    "dataset_page": "https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=50",
+    "file": "biyo_2026.9.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:03+00:00",
+    "rows": 1079,
+    "sha256": "79846e46ae926b2e37b4de14183e4c5bc6d96904075cce331f9cd5a936eac5b5",
+    "url": "https://opendata.nishi.or.jp/opendata/files/50/2026.9.xlsx"
+  },
+  "city_food": {
+    "as_of": "2026-08-31",
+    "bytes": 465220,
+    "dataset_page": "https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=9",
+    "file": "R8.8ichiran_syokuhin.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:00+00:00",
+    "rows": 5648,
+    "sha256": "644b6967281015dcd09e96fe9edf0f852d0deb9fb28c498fa6ba24d46d1fe6eb",
+    "url": "https://opendata.nishi.or.jp/opendata/files/9/R8.8ichiran_syokuhin.xlsx"
+  },
+  "city_laundry_general": {
+    "as_of": "2026-09-30",
+    "bytes": 35412,
+    "dataset_page": "https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=67",
+    "file": "cleaning_ippan_2026.9.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:03+00:00",
+    "rows": 147,
+    "sha256": "cbc6f1c1c8ae330518ece743e893968ff8b70dbc8f1d1d7747d3e3e088a37016",
+    "url": "https://opendata.nishi.or.jp/opendata/files/67/2026.9cleaning.xlsx"
+  },
+  "city_laundry_pickup": {
+    "as_of": "2026-09-30",
+    "bytes": 35397,
+    "dataset_page": "https://opendata.nishi.or.jp/opendata/ResultDetail.php?id=68",
+    "file": "cleaning_toritsugi_2026.9.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:05+00:00",
+    "rows": 147,
+    "sha256": "04d82682a6d06ef9a1eef2a74d1c6ea382fe36ffcfe18370ebf3cef2362eef32",
+    "url": "https://opendata.nishi.or.jp/opendata/files/68/2026.9cleaning.xlsx"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_28204_block": {
+    "bytes": 154130,
+    "file": "28204-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:38+00:00",
+    "sha256": "d09ac69667e273ce91efa9d5c46655da3b7193309141c8753a0935d02a722974",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/28204-24.0a.zip"
+  },
+  "isj_28204_chome": {
+    "bytes": 11801,
+    "file": "28204-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:39+00:00",
+    "sha256": "26f21e9f8d680666bc00678f9960fbb0a1526c2d77d6e4518af768d07750d2a1",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/28204-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 8361345,
+    "file": "data/japan/raw/N03-20250101_28_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:10+00:00",
+    "sha256": "3ff660682980d4b9f8b938341a6bc7e159c2636a0f1212f14b7c1767fbaf4c72",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_28_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 60759,
+    "elements": 89,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-03T17:55:02Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.66,135.21,34.88,135.4);way[\"railway\"=\"station\"](34.66,135.21,34.88,135.4););out tags center;",
+    "retrieved": "2026-10-03T17:56:18+00:00",
+    "sha256": "b2e452fb6b568d5a61dd3e02aaf831b8a2433de39e46722642e8dbe4154a850a"
+  }
+}

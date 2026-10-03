@@ -4,6 +4,55 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Nishinomiya built, the city's food list and three registers
+
+- **Nishinomiya built (page 179, notice 118): 5,527 storefronts (Food service
+  3,645, Food shops 664, Personal services 1,218) around 22 stations on 7
+  lines, 89.3% of them in a ring.** The city's PDL 1.0 lists on its portal
+  (food 5,648 rows as of 2026-08-31; barbers 204, beauty 875, laundries 40
+  general and 107 pick-up as of 2026-09, each register read from its sheet of
+  the shared workbook through `config.source_rows`), joined to MLIT's address
+  blocks for the one municipality: 5,647 rows at the block (99.1%), 49 at a
+  town centre, 1 unplaced; food fixed in a bucket 99.0 / 1.0 / 0.0, the
+  shared-code pass's figure. 169 repeat permits shown once. Not a premises:
+  977 (901 西宮市内一円 vehicles and stalls, whose addresses carry plates and
+  never reach the map; 76 with no address). Out by rule: 166 manufacturing and
+  other non-counter types, 34 cooking vending machines. Restaurants against
+  the official count: 4,677 rows against e-Stat's FY2024 4,505, 104% (the
+  brief's).
+- **Laundries kept and disclosed (owner, 2026-10-02):** 147 of the official
+  237 (62%), the page's bullet the brief's sentence.
+- **Held calls, counts touched:** 複合型そうざい製造業 (3 rows) stays out. No
+  deli by its form alone (the food list has no 業態 column). The 菓子 /
+  そうざい factory share: 22 of 495 (4.4%), kept (owner, 2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py nishinomiya`: the
+  Japan pass prints 0; 1 pin shows its permit type (2 raw food rows, the
+  brief's). 開設者住所 and 開設者電話番号 never selected.
+- **Rail:** N02-25: Hanshin's 本線 (7 of 33) and 武庫川線 (4 of 4), Hankyu's
+  神戸線 (2 of 17), 今津線 (5 stations; its two services, 宝塚-西宮北口 and
+  西宮北口-今津, drawn as the one public line as N02 files it) and 甲陽線 (3 of
+  3), JR's 東海道線 (the JR Kobe Line, 3 of 59) and 福知山線 (the JR Takarazuka
+  Line, 2 of 30), cut at the city line; the three short urban stretches drawn
+  as cut (owner, 2026-10-02). Interchanges collapsed: 武庫川 140 m, 今津 117 m,
+  西宮北口 76 m, 夙川 45 m. JR's and Hanshin's 西宮 are separate stations, so
+  step 1 appends their operators. Gate 3: Hanshin's station index gives the
+  Mukogawa Line 4, Hankyu's the Koyo Line 3, exact. 17 stations excluded: 6
+  in Takarazuka, 4 in Amagasaki, 4 in Ashiya, 2 in Kobe's Higashinada Ward, 1
+  in its Kita Ward. English names in Hiroshima's style: 5 cited overrides
+  (阪神国道, 甲子園口, 甲東園 without OSM's macrons; 武庫川団地前 and
+  鳴尾・武庫川女子大前 with -mae); the other 17 as OSM has them. Colours from
+  `line_colour_search.py` (closest pair within 500 m 19.0, Hanshin Main / JR
+  Kobe; anywhere 15.6). Median gap 684 m: standard rings.
+- **Economic Census control: 2.33** Food service pins per 2021 census 飲食店
+  establishment (3,645 against 1,567), above the built cities' 1.56-1.92 and
+  explained as the brief explains it (2.32 there): a complete list, inside the
+  complete lists' band (Kobe 2.38), below official / census (4,505 against
+  1,567, 2.87).
+- **Prose proposals for review time:** none beyond the brief's laundry
+  sentence, which the owner's call approved with it. The notice's
+  "Processed by this project, which selected ..." follows Toyama's approved
+  notice form (PDL's "by whom").
+
 ### 2026-10-03 - Himeji built, the city's food list and three registers
 
 - **Himeji built (page 178, notice 117): 8,482 storefronts (Food service
