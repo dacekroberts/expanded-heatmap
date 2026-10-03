@@ -26,7 +26,39 @@ This is a reading of the project's own documents, not legal advice.
 
 ---
 
-## The 15 weakest
+## Update, 2026-10-02 (evening): eight licence reads move nine sources
+
+The owner asked for the zero-reading entries to be read ("run the licence
+reads"). One `licence-read` agent per source read them the same day; the
+verdicts and the owner's calls are in `docs/decisions_drafts/staging.md`.
+**This section supersedes the tier tables and the 15 weakest below wherever
+they disagree.**
+
+| Source | Was | Now | Verdict, and the owner's call |
+|---|---|---|---|
+| D.C. Basic Business License (DLCP) | 1.4 | **3** | CC BY 4.0 on the item (`85bf98d3…`); the District's CC0 default yields to it. Credit DLCP, link the licence, say modified. |
+| DC Boundary (OCTO) | 1.4 / 1.24 | **3** | CC BY 4.0 on the item (`7241f6d5…`). Credit OCTO (DC GIS), say reprojected. |
+| NTA national GTFS (Dublin) | 1.3 | **3** | CC BY 4.0 with the NTA's prescribed sentence. **Owner: "plain CC BY"**: the developer portal's Fair Usage Policy (an uncapped indemnity) is not accepted; the credit still meets its §7. |
+| geo.api.gouv.fr (26 French cities) | 1.25 | **3** | ODbL on the source dataset, Licence Ouverte on IGN's ADMIN EXPRESS; unanswered since 2025-10-15. **Owner: show both credits.** |
+| MassGIS municipalities (Boston) | 1.24 | **4** | "may be freely redistributed"; public records. Credit requested, not required. |
+| LA County Planning boundaries (Los Angeles) | 1.24 | **2** | eGIS Terms of Use grant copy and publish; breach-only indemnity; auto-termination on breach; no endorsement. |
+| SanGIS municipal boundaries (San Diego) | 1.24 | **2, held** | SanGIS End User Agreement: credit PROHIBITED at this scale, an uncapped indemnity and a general release (Civil Code §1542 waiver), never recorded as accepted (nor for the SanGIS parcels, 2.32). SANDAG, which only hosts it, adds "should not be redistributed". **Open with the owner.** |
+| CARTO basemap (Overview macro map only) | 1.23 | **1, weaker** | The Terms (2026-09-29) grant free use only with the project's own API key; the macro map loads keyless vector tiles (keyless raster is already watermarked). A key brings an uncapped indemnity, New York law and revocation at will. **Open with the owner**: request a key, switch the macro map to OpenStreetMap tiles (staging's recommendation), or drop its basemap. City maps use OpenStreetMap's own tiles and are unaffected. |
+
+**Counts after the update:** tier 1 **24**, tier 2 **50**, tier 3 **47**,
+tier 4 **23** (144 entries; the 1.24 boundary group split into its four
+sources).
+
+**The 15 weakest after the update:** 1 Philadelphia · 2 King County food ·
+3 **CARTO** (keyless, outside its terms) · 4 Snohomish food · 5 Bellevue ·
+6 Daegu · 7 Den Haag · 8 Bucharest · 9 CNEFE · 10 Milan ATM · 11 Paris IDFM
+(2a, elevated) · 12 Miami-Dade · 13 Tucson · 14 Stockholm · 15 **SanGIS**
+(boundaries and parcels: an unaccepted indemnity and release). D.C. and NTA
+leave the list.
+
+---
+
+## The 15 weakest (as first ranked; superseded by the update above)
 
 | # | Source (publisher) | Cities | Tier | Why it is weak |
 |---|---|---|---|---|
