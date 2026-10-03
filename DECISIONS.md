@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**385 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**386 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -72,6 +72,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The footer's unsettled-terms paragraph names every permissive reading; the notices drawn as one block (owner)](#2026-10-02---the-footers-unsettled-terms-paragraph-names-every-permissive-reading-the-notices-drawn-as-one-block-owner)
 - [SanGIS's indemnity and general release accepted for San Diego's boundaries and parcels (owner)](#2026-10-02---sangiss-indemnity-and-general-release-accepted-for-san-diegos-boundaries-and-parcels-owner)
 - [The public repository linked from every page, for Paris's Licence Mobilités and six ODbL sources](#2026-10-02---the-public-repository-linked-from-every-page-for-pariss-licence-mobilités-and-six-odbl-sources)
+- [Paris stays published after the repository-link gap (owner)](#2026-10-02---paris-stays-published-after-the-repository-link-gap-owner)
 
 **2026-10-01**
 
@@ -16104,3 +16105,15 @@ Recorded by the cleanup session from the Main Building Session's findings of
   out of public visuals meanwhile.
 - **Header icons, still for review time:** GitHub, and LinkedIn at the URL
   staging relayed. The owner is to confirm the LinkedIn link directly.
+
+### 2026-10-02 - Paris stays published after the repository-link gap (owner)
+
+- **The question,** from the entry above: Licence Mobilités Art. 11.1 ends
+  the licence "de plein droit, sans préavis" on breach, and Art. 5.8's
+  repository link was missing until bd23a18e.
+- **The owner's call:** Paris stays published, including in the visuals
+  session's work ("we didn't knowingly make that mistake").
+- **Recorded without softening:** the clause's wording does not depend on
+  knowledge or intent. From bd23a18e the term is met going forward: the
+  public repository is linked from every page. If IDFM raises the gap, the
+  standing removal commitment applies and Paris comes off first.
