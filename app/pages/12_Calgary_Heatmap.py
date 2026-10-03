@@ -87,4 +87,4 @@ render_map_help('three business categories (Retail, Food service and Personal se
 render_excluded_stations("Calgary")
 render_country_links('Calgary')
 
-render_site_notices()
+render_site_notices("Calgary")

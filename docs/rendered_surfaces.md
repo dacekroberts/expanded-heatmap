@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**144 city pages, 3 fixed pages and the Overview; 27 rendered docs; 2 app data files.**
+**144 city pages, 4 fixed pages and the Overview; 27 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -20,6 +20,7 @@ Data: `app/macro_facts.json`.
 | URL | File | Renders |
 |---|---|---|
 | `/About_the_Data` | `app/pages/About_the_Data.py` | `docs/data_sources.md`, every `docs/data_sources/*.md` (25), site notices |
+| `/Required_Notices` | `app/pages/Required_Notices.py` | every required notice (`components._NOTICES`), site notices |
 | `/What_Is_Excluded` | `app/pages/What_Is_Excluded.py` | `docs/excluded_categories.md`, every city's `outputs/<slug>/excluded_stations.csv` (`app/station_scope.py`), site notices |
 | `/Why_the_Maps_Differ` | `app/pages/Why_the_Maps_Differ.py` | `app/ring_shares.json`, site notices |
 
@@ -29,7 +30,8 @@ Rendered docs, all of them reader-facing: `docs/data_sources.md`, `docs/excluded
 
 Each shows its own text, its caption (dates from
 `outputs/<slug>/provenance.json`), its map `outputs/<slug>/heatmap.html`,
-the city switcher, and the site notices (`components.render_site_notices`).
+the city switcher, and the site notices with its own notices first
+(`components.render_site_notices`).
 Its station scope (`outputs/<slug>/excluded_stations.csv`) is shown on What
 Is Excluded, and its in-ring share on Why the Maps Differ.
 

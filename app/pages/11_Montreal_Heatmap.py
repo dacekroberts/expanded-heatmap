@@ -92,4 +92,4 @@ render_map_help('three business categories (Retail, Food service and Personal se
 render_excluded_stations("Montréal")
 render_country_links('Montréal')
 
-render_site_notices()
+render_site_notices("Montréal")

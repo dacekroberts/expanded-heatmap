@@ -126,4 +126,4 @@ render_country_links('Rio de Janeiro')
 # BREACH, not a cosmetic gap: four city pages shipped without it because
 # this template did, and on those pages the five mandatory notices were
 # absent rather than collapsed.
-render_site_notices()
+render_site_notices("Rio de Janeiro")

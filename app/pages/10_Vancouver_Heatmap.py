@@ -89,4 +89,4 @@ render_map_help('three business categories (Retail, Food service and Personal se
 render_excluded_stations("Vancouver (Regional)")
 render_country_links('Vancouver (Regional)')
 
-render_site_notices()
+render_site_notices("Vancouver (Regional)")

@@ -96,4 +96,4 @@ render_country_links('Miami (Regional)')
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
 # be accessed". See components._NOTICES.
-render_site_notices()
+render_site_notices("Miami (Regional)")

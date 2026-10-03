@@ -113,7 +113,7 @@ st.markdown("""**The lines**
 render_map_help("business layer")
 render_excluded_stations("X")
 render_country_links("X")
-render_site_notices()
+render_site_notices("X")
 '''
 
 
@@ -123,7 +123,7 @@ def selftest():
         ("intro above the map", GOOD.replace('if HEATMAP_HTML', 'st.markdown("An intro.")\nif HEATMAP_HTML'), 1),
         ("no title", GOOD.replace('render_city_title("X")\n', ""), 1),
         ("notices not last", GOOD + 'st.markdown("A footnote.")\n', 1),
-        ("notices missing", GOOD.replace("render_site_notices()\n", ""), 1),
+        ("notices missing", GOOD.replace('render_site_notices("X")\n', ""), 1),
         ("no map help", GOOD.replace('render_map_help("business layer")\n', ""), 1),
         ("repository path", GOOD.replace("are listed below", "are in outputs/x/excluded_stations.csv"), 1),
         ("decision log", GOOD.replace("One line.", "One line (see DECISIONS.md)."), 1),
