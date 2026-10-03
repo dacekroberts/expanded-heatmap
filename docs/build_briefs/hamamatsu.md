@@ -1,5 +1,8 @@
 # Hamamatsu — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** MHLW's 6,033 notifications are **NOT** added as a partial food-shops layer (Hakodate's shape).
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live; the downloads are the city's open-data files, MHLW's file and MLIT's
 ISJ zips, each from its publisher). **Run `python scripts/brief_check.py
@@ -217,7 +220,7 @@ Asia"`. `"country": "Japan"`. Project to **UTM 53N (EPSG:32653)**.
 
 ## Open items
 
-- 🚨 **MHLW's 6,033 notifications as a partial Food-shops layer: recommend
+- ✅ **MHLW's 6,033 notifications as a partial Food-shops layer: recommend
   LEAVE OUT.** Matsuyama, Fukuoka and Okayama show notifications as partial
   retail BESIDE a permit source. Here they would be the only food data: 4,350
   addressed rows of milk sellers, cup vending machines, packaged meat and fish,

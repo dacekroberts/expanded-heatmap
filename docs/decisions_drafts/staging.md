@@ -4,6 +4,36 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Japan wave 2's calls settled; Chiba to R; zero-reading licences sent for reads; gaps to Cleanup (owner)
+
+- **The owner: "approve all recommendations, for 4 mark chiba to R, run the
+  licence reads and send gaps to cleanup".**
+- **Wave 2's calls**, recorded in each brief's header block:
+  - **Drawn as cut:** the urban lines cut to stubs in Kawasaki, Nishinomiya,
+    Toyota and Higashiōsaka (Sakai's precedent).
+  - **Shimonoseki:** the 7 San'in stations beyond 小串 are LEFT OUT, which
+    was staging's recommendation (the agent's had been to draw them), so 14
+    stations get rings.
+  - **Nara** is built despite thin rail. **Hamamatsu** gets no MHLW
+    notifications layer.
+  - **Accepted:** Kawasaki's two CC BY versions (both named), Toyota's
+    register scope, Ōtsu's city-site food file.
+  - **Modes and laundry:** Yokosuka `metro`, Ōtsu `light_rail`;
+    Nishinomiya's laundry at 62% kept and disclosed.
+- **Chiba to Band R:** its complete city lists sit under all-rights-reserved.
+  The way through is the owner's permission request; the MHLW-only food page
+  is not built. Candidates: A 9 · B 5 · R 26 = 40.
+- **Licence reads started for the zero-reading entries** in
+  `docs/licence_positions.md`: Dublin's NTA GTFS, D.C.'s Basic Business
+  License, the DC Boundary, the CARTO basemap, geo.api.gouv.fr, and the LA
+  County, MassGIS and SANDAG boundaries.
+- **The repository link.** The owner asked whether LinkedIn or GitHub icons
+  were already in the page headers. They are not, on master or on any
+  branch. The repository (github.com/dacekroberts/expanded-heatmap) is public
+  to a logged-out visitor, so a GitHub link in the header would discharge
+  IDFM Art. 5.8 and ODbL §4.6. A LinkedIn link needs the owner's profile URL.
+  Passed to Cleanup with the other gaps.
+
 ### 2026-10-02 - Japan wave 2: 15 briefed, Wakayama discarded; licence positions ranked
 
 - **The owner: "brief now, hold on builds".** Five agents briefed the scope's

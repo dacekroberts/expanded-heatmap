@@ -1,5 +1,8 @@
 # Higashiōsaka — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** The Osaka Metro Chūō Line (2 stations) is **drawn as cut**.
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live; the downloads are the city's BODIK files, MHLW's file and MLIT's ISJ
 zips). **Run `python scripts/brief_check.py higashiosaka` before writing any
@@ -148,7 +151,7 @@ extent W 135.5570, S 34.6322, E 135.6787, N 34.7044. No Shinkansen.
   each one group over two lines). Median nearest-group gap **767 m** (min
   39 m): **standard rings**.
 - **Stub test**: no line is cut to one station. **The Chūō Line, an URBAN
-  subway, keeps 2 of 12** (🚨 below; Sakai's Midōsuji kept 3 and was drawn
+  subway, keeps 2 of 12** (✅ below; Sakai's Midōsuji kept 3 and was drawn
   cut). The Gakkentoshi Line keeps 2 of 24.
 - ⚠️ **The Keihanna Line runs through onto the Chūō Line at 長田**; N02 files
   it in two legal sections (the class-21 part here). Draw each under its
@@ -193,7 +196,7 @@ The Japan sub-region (minor tier, above); `"country": "Japan"`. Project to
 
 ## Open items
 
-- 🚨 **The Chūō Line cut to 2 stations** (高井田, 長田). Recommendation: **draw
+- ✅ **The Chūō Line cut to 2 stations** (高井田, 長田). Recommendation: **draw
   it as cut**, on Sakai's precedent (the Midōsuji Line, 3 stations, drawn cut;
   owner, 2026-10-02): both stations are real interchanges (長田 with the
   Keihanna Line, 高井田 beside JR's 高井田中央), and the line goes on into

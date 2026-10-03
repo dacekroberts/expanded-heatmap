@@ -1,5 +1,8 @@
 # Yokosuka — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** `mode` **`metro`** for a private-heavy-railway backbone.
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live). Run `python scripts/brief_check.py yokosuka` before writing any code.
 Coordinates: the `address-join` skill, measured with `japan_register.py`'s own
@@ -20,7 +23,7 @@ clauses are accepted for all of Japan (2026-09-24).
 Yokosuka carries `label_tier: "minor"` and joins the Japan sub-region the
 2026-10-01 batch creates.
 
-**`mode`: `metro` recommended (🚨 below).** No subway, tram or light rail:
+**`mode`: `metro` recommended (✅ below).** No subway, tram or light rail:
 the backbone is Keikyū, a private heavy commuter railway (17 station groups
 against JR's 4).
 
@@ -184,7 +187,7 @@ The Japan sub-region (minor tier, above); `"country": "Japan"`. Project to
 
 ## Open items
 
-- 🚨 **`mode` for a city whose backbone is a private heavy railway.** The
+- ✅ **`mode` for a city whose backbone is a private heavy railway.** The
   owner's rule (2026-10-02) names JR, trams and subways; Yokosuka has Keikyū
   (17 groups) and JR (4), no subway, tram or light rail. **Recommendation:
   `metro`**, the rule's own reading carried over: "substantial JR reads as

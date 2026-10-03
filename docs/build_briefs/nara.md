@@ -1,5 +1,8 @@
 # Nara — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** **Built despite thin rail** (14 station groups), Band A.
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live; the downloads are the city's own files, MHLW's file and MLIT's ISJ
 zips). **Run `python scripts/brief_check.py nara` before writing any code.**
@@ -43,7 +46,7 @@ restaurants).** Personal services from three city registers (barbers 213,
 beauty salons 837, laundries 213, as of 2026-04-01; 96-103% of the official
 counts). Block join 89.6% (MHLW), 89.2% (old list), 83-92% (registers).
 **Rail is thin: 14 station groups** (Kintetsu 10, JR 4), median gap 1,108 m;
-no line is cut to a stub. 🚨 below.
+no line is cut to a stub. ✅ below.
 
 ---
 
@@ -209,7 +212,7 @@ The Japan sub-region (minor tier, above); `"country": "Japan"`. Project to
 
 ## Open items
 
-- 🚨 **Thin rail: 14 station groups.** Recommendation: **build it, Band A.**
+- ✅ **Thin rail: 14 station groups.** Recommendation: **build it, Band A.**
   The 14 cover the city's built-up west (Kintetsu Nara, JR Nara, Saidaiji,
   Gakuenmae, Takanohara) on five lines of two operators, no line is a stub,
   and all three buckets are full (about 3,000 placed restaurants). The

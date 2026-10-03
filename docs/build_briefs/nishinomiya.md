@@ -1,5 +1,8 @@
 # Nishinomiya — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** The Hankyu Kobe, JR Kobe and JR Takarazuka lines are **drawn as cut**; the laundry register (62% of the official count) is **kept and disclosed** in one bullet.
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live). Run `python scripts/brief_check.py nishinomiya` before writing any
 code. Then the `japan-city` skill. Coordinates: the `address-join` skill,
@@ -44,7 +47,7 @@ a full food-permit list (5,648 rows as of 2026-08-31; 4,677 restaurant rows,
 registers as of 2026-09-30.** The block join places **98.8%** of fixed food
 premises and **99.7%** of the registers at the block; nothing material is
 unplaced. Rail: Hanshin, Hankyu and JR West, 22 station groups, **three urban
-lines cut to two or three stations** (🚨 below). ⚠️ The laundry register holds
+lines cut to two or three stations** (✅ below). ⚠️ The laundry register holds
 62% of the official count. **Band A recommended.**
 
 ---
@@ -172,7 +175,7 @@ records inside, 22 N02_005g groups** (widest 140 m). No Shinkansen.
 - ⚠️ **OSM `name:en`** for every station at build (one Overpass query, the
   session's single slot; none was run for this brief).
 
-### 🚨 Three urban lines cut to two or three stations
+### ✅ Three urban lines cut to two or three stations
 
 Nishinomiya is a narrow strip between Amagasaki and Ashiya, so the city line
 cuts the three east-west main lines and the JR Takarazuka Line short: **Hankyu
@@ -231,10 +234,10 @@ The Japan sub-region (minor tier, above); `"country": "Japan"`. Project to
 
 ## Open items
 
-- 🚨 **The Hankyu Kobe Line (2 of 17), JR Kobe Line (3 of 59) and JR
+- ✅ **The Hankyu Kobe Line (2 of 17), JR Kobe Line (3 of 59) and JR
   Takarazuka Line (2 of 30) cut short by the city line.** Recommendation: draw
   them as cut, on Sakai's Midōsuji precedent (above).
-- 🚨 **The laundry register holds 147 of the official 237 (62%; FY2024 year
+- ✅ **The laundry register holds 147 of the official 237 (62%; FY2024 year
   end against 2026-09), where barbers and beauty hold 91% and 92%.** The
   portal published these registers for the first time on 2026-10-01.
   Recommendation: keep laundries in Personal services and say so on the page

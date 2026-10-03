@@ -1,5 +1,8 @@
 # Chiba — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** **Chiba moves to Band R** (owner: "for 4 mark chiba to R"). The city's complete lists in all three buckets sit under its all-rights-reserved default, so the way through is a permission request to the city, the owner's to send. The food-only MHLW page is NOT built meanwhile.
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live). Run `python scripts/brief_check.py chiba` before writing any code.
 Coordinates: the `address-join` skill, measured with `japan_register.py`'s own
@@ -36,7 +39,7 @@ which 6,105 (73.6%) publish an address; on fixed premises 74.6%.** Placed at
 the block 98.9%. **Band B, food only** (Okayama's page). The city publishes
 complete monthly Excel lists of food permits, barbers, beauty salons and
 laundries, but **on a page with no open-data grant, under the site's
-all-rights-reserved default: not used** (🚨 below). Rail: 47 station groups,
+all-rights-reserved default: not used** (✅ below). Rail: 47 station groups,
 the Chiba Urban Monorail wholly inside, JR East and Keisei cut at the line.
 
 ---
@@ -191,7 +194,7 @@ The Japan sub-region (minor tier, above); `"country": "Japan"`. Project to
 
 ## Open items
 
-- 🚨 **The city's own lists are complete and unusable.** Its monthly Excel
+- ✅ **The city's own lists are complete and unusable.** Its monthly Excel
   lists (food 2026-08-31: 9,453 new-law and 1,724 old-law rows, every one with
   a split address; barbers 589, beauty 1,766 and laundries 424 at 2026-06-30)
   would make Chiba a three-bucket Band A city, but they sit under the site's

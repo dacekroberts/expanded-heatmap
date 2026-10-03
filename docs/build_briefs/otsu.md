@@ -1,5 +1,8 @@
 # Ōtsu — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** The food list on the city's site is **accepted as CC BY 4.0**; `mode` **`light_rail`**.
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live; the downloads are the city's own files, MHLW's file and MLIT's ISJ
 zips). **Run `python scripts/brief_check.py otsu` before writing any code.**
@@ -28,7 +31,7 @@ own region, in the Japan sub-region the 2026-10-02 batch creates (wave 2 only
 joins it; `check_macro_labels.py` PROBLEMS 0 at 375, 768 and 1200 after it
 lands).
 
-**`mode`: `light_rail` recommended, 🚨 below.** JR has 16 station groups
+**`mode`: `light_rail` recommended, ✅ below.** JR has 16 station groups
 inside the city line against Keihan's 24, so JR is not the largest network and
 the Dublin precedent applies; no subway. The backbone is Keihan's
 Ishiyama-Sakamoto Line: legally a 軌道 (N02 class 21) but two-car trains on
@@ -162,7 +165,7 @@ Keihan to Kyoto (Yamashina); cut at the line.
   - **Cost** (６, ８): claims from our own breach at our own cost; the
     fault-based class, accepted for all of Japan (2026-09-24). Japanese law,
     大津地方裁判所 (９).
-- **The food list on the city's site — 🚨 PERMITTED WITH CONDITIONS (CC BY
+- **The food list on the city's site — ✅ PERMITTED WITH CONDITIONS (CC BY
   4.0) on a reading the owner should confirm.** The city's copyright page
   (`https://www.city.otsu.lg.jp/shisei/koho/hp/5184.html`) reserves the site
   「法律で認められている場合を除き、無断で複製、転用することはできません」, then
@@ -192,14 +195,14 @@ The Japan sub-region (minor tier, above); `"country": "Japan"`. Project to
 
 ## Open items
 
-- 🚨 **The food list's licence.** Recommendation: **accept it as CC BY 4.0**
+- ✅ **The food list's licence.** Recommendation: **accept it as CC BY 4.0**
   on the catalogue record, which licenses the dataset and names the city page
   as its source; the city publishes the page under 「衛生課 オープンデータ」 beside
   the three registers it also uploads to BODIK, and its copyright page exempts
   the portal it catalogues them in. The alternative is the registers alone
   (Band B, personal services only, Yokohama's precedent) until the city
   uploads the file to BODIK. Outreach is the last resort and not recommended.
-- 🚨 **`mode`.** Recommendation: **`light_rail`** (Utsunomiya's), by the
+- ✅ **`mode`.** Recommendation: **`light_rail`** (Utsunomiya's), by the
   backbone: Keihan's Ishiyama-Sakamoto Line runs two-car trains on its own
   right of way at about 700 m spacing, with street running only near
   びわ湖浜大津 (Keishin). The alternative is `tram`, on its 軌道 legal class

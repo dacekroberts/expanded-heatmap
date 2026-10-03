@@ -1,5 +1,8 @@
 # Kawasaki — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** Keikyū Main and Keiō Sagamihara are **drawn as cut** (Sakai's Midōsuji); the credit **names both CC BY versions** (the terms' 2.1 JP and the files' 4.0).
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live). Run `python scripts/brief_check.py kawasaki` before writing any code.
 Coordinates: the `address-join` skill, measured with `japan_register.py`'s own
@@ -173,7 +176,7 @@ Median gap to the nearest station group **683 m**.
 - **Groups by operator**: JR East 25, Odakyū 11, Tōkyū 10, Keikyū 8, Keiō 2.
 - **A line a radial cut**: the city is a strip along the Tama River, so every
   private line crosses it briefly. **Keikyū Main (2 of 50) and Keiō
-  Sagamihara (2 of 12)** are urban lines cut to two stations (see 🚨 below).
+  Sagamihara (2 of 12)** are urban lines cut to two stations (see ✅ below).
   No line is cut to one station.
 - ⚠️ **武蔵小杉 is two N02 groups 377 m apart**: JR Nambu with Tōkyū (104 m
   wide), and JR's 東海道線 (Yokosuka Line) platform. One station by name and
@@ -208,7 +211,7 @@ municipality at build. Yokohama is built: its rings stop at its own line.
   open-data catalogue (`dataset20250930.csv`: 食品営業許可施設一覧 and
   環境衛生関係営業に関する情報). The file pages' badge links CC BY **4.0**; the
   規約 and the policy page (`/170/page/0000057493.html`) say **2.1 JP**. Both
-  are CC BY, so reuse is permitted either way (the version question is 🚨
+  are CC BY, so reuse is permitted either way (the version question is ✅
   below).
   - **MUST DISPLAY** (the 規約's form for modified use):
     `この地図は以下の著作物を改変して利用しています。食品営業許可施設一覧、川崎市、クリエイティブ・コモンズ・ライセンス 表示 2.1（http://creativecommons.org/licenses/by/2.1/jp/）`
@@ -243,13 +246,13 @@ The Japan sub-region (minor tier, above); `"country": "Japan"`. Project to
 
 ## Open items
 
-- 🚨 **Two urban lines cut to two stations: Keikyū Main (京急川崎, 八丁畷) and
+- ✅ **Two urban lines cut to two stations: Keikyū Main (京急川崎, 八丁畷) and
   Keiō Sagamihara (京王稲田堤, 若葉台)**, with Tōkyū Tōyoko and JR's 東海道線 at
   three. **Recommendation: draw all as cut**, on Sakai's precedent (the
   Midōsuji, 3 of 20, drawn as cut, owner 2026-10-02): the business data stops
   at the city line, and both stations are busy interchanges (京急川崎 with JR
   川崎).
-- 🚨 **Which CC BY version the credit names**: the 規約 says 表示 2.1 (JP), the
+- ✅ **Which CC BY version the credit names**: the 規約 says 表示 2.1 (JP), the
   files' badge links 4.0. **Recommendation: name both** ("表示 2.1 / 4.0", each
   linked): it meets either reading at no cost. The alternative is one question
   to 40syoku@ / 40seiei@city.kawasaki.jp.

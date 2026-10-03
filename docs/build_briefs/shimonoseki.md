@@ -1,5 +1,8 @@
 # Shimonoseki — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** The San'in Line's 7 stations beyond 小串 are **LEFT OUT**, staging's recommendation, not this brief's (about 8 to 10 trains a day is rarer than the Brazilian commuter lines discarded at 24 to 28 trips a day; Japan's "JR counts" call was made for urban lines). The San'in Line is drawn to 小串, so 14 stations get rings.
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live; downloads are MHLW's file and MLIT's ISJ zips). **Run
 `python scripts/brief_check.py shimonoseki` before writing any code.** Then
@@ -38,7 +41,7 @@ which 98.9% publish an address (98.8% of fixed premises).** Block join 79.8%
 today, **88.1% with one new shared rule (大字)**, and 98.6% placed with MHLW's
 own point. **No personal-services register.** **21 stations, all JR, spread
 over 716 km² (median gap 2.7 km); 7 of them are on the San'in Line beyond
-小串, a rural stretch at very low frequency (🚨 below).** **Band B, food
+小串, a rural stretch at very low frequency (✅ below).** **Band B, food
 only.**
 
 ---
@@ -157,7 +160,7 @@ East Asia today, the Japan sub-region with the batch. Project to **UTM 52N
 
 ## Still open
 
-- 🚨 **The San'in Line beyond 小串 (7 of the city's 21 stations, about 8-10
+- ✅ **The San'in Line beyond 小串 (7 of the city's 21 stations, about 8-10
   trains a day).** The standing calls draw JR and set no frequency floor, and
   no built city has left a JR stretch out for frequency (Kitakyushu's
   日田彦山線 and Hakodate's JR are drawn whole to the city line). **Recommend:

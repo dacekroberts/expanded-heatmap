@@ -1,5 +1,8 @@
 # Toyota — build brief
 
+> ✅ **Owner's calls (owner, 2026-10-02: "approve all recommendations"):** The Meitetsu Toyota Line (3 of 8) and Linimo (2 of 9) are **drawn as cut**; the registers' licence scope is **accepted** as permitting (Hiroshima's precedent).
+
+
 **Step 0 measured 2026-10-02** (Japan wave 2; the scope's figures re-verified
 live; the downloads are the city's BODIK files, MHLW's file and MLIT's ISJ
 zips, each from its publisher). **Run `python scripts/brief_check.py toyota`
@@ -153,8 +156,8 @@ the mountains of 足助 and 稲武). **27 station records, 25 N02_005g groups.**
 |---|---|---|---|
 | 愛知環状鉄道線 (愛知環状鉄道) | Aichi Loop Line | **12 / 23** | cut at the line (on to 岡崎 and 瀬戸); operator's station index lists **23** (gate 3 exact) |
 | 三河線 (名古屋鉄道) | Meitetsu Mikawa Line | **10 / 23** | cut at the line (on to 知立 and 碧南) |
-| 豊田線 (名古屋鉄道) | Meitetsu Toyota Line | **3 / 8** (梅坪, 上豊田, 浄水) | 🚨 an urban line (through trains to the Nagoya subway's Tsurumai Line) cut to 3 stations |
-| 東部丘陵線 (愛知高速交通) | Linimo | **2 / 9** (八草, 陶磁資料館南) | 🚨 an urban line cut to 2 stations; 八草 is also the Aichi Loop's |
+| 豊田線 (名古屋鉄道) | Meitetsu Toyota Line | **3 / 8** (梅坪, 上豊田, 浄水) | ✅ an urban line (through trains to the Nagoya subway's Tsurumai Line) cut to 3 stations |
+| 東部丘陵線 (愛知高速交通) | Linimo | **2 / 9** (八草, 陶磁資料館南) | ✅ an urban line cut to 2 stations; 八草 is also the Aichi Loop's |
 
 - **Interchanges** (one group each): 梅坪 (Mikawa and Toyota lines, 191 m
   apart in N02), 八草 (Aichi Loop and Linimo). **Close pairs kept apart**:
@@ -191,7 +194,7 @@ neighbor (岡崎, 瀬戸, 長久手, 日進, みよし, 知立); cut at the line
     is Matsuyama's 第5条 (弁償), breach-triggered: ✅ the fault-based class,
     accepted for every Japanese source (2026-09-24). Japanese law; Nagoya
     District Court (7).
-- **The registers — the same terms, one reading to confirm (🚨 below).** Their
+- **The registers — the same terms, one reading to confirm (✅ below).** Their
   dataset, 「環境衛生営業施設一覧」, also records `cc-by-40-intl` in the city's
   own catalogue, but its title does not contain オープンデータ, which is how the
   terms define their scope.
@@ -213,13 +216,13 @@ Asia"`. `"country": "Japan"`. Project to **UTM 53N (EPSG:32653)**.
 
 ## Open items
 
-- 🚨 **Two urban lines cut to stubs: recommend DRAW THEM AS CUT**, Sakai's
+- ✅ **Two urban lines cut to stubs: recommend DRAW THEM AS CUT**, Sakai's
   Midōsuji precedent (owner, 2026-10-02: 3 of 20 stations drawn cut). The
   Meitetsu Toyota Line keeps 3 of 8 (梅坪, 上豊田, 浄水; the rest are in みよし
   and 日進) and Linimo 2 of 9 (八草, an Aichi Loop interchange, and
   陶磁資料館南). Leaving them out would drop 3 rings (梅坪 and 八草 stay on
   other lines).
-- 🚨 **The registers' licence scope: recommend ACCEPT the permitting
+- ✅ **The registers' licence scope: recommend ACCEPT the permitting
   reading.** The dataset declares CC BY 4.0 in the city's own catalogue, and
   its sheets are titled 「オープンデータ_理容所」 and so on; only its dataset
   title lacks the word the terms use to define their scope. Hiroshima's
