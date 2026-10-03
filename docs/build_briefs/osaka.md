@@ -150,6 +150,11 @@ JR West, and the private railways (Hankyu, Hanshin, Keihan, Kintetsu, Nankai)
 are all in it. ⚠️ Stations are LineStrings — centroid them. ✅ The Shinkansen is
 out (owner, 2026-09-24; see the top). See `docs/commuter_rail_list.md`.
 
+**2026-10-03 (owner): Osaka reads N02-25**
+(`https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip`), because
+N02-24 lacks the Chūō Line's Yumeshima (C09, opened 2025-01-19). The Chūō Line
+keeps 13 stations in the city (C09-C21), not the 12 measured below.
+
 **✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** Osaka Metro keeps 80–100% of each line's stations (Midōsuji 16 of 20, Tanimachi 23 of 26, Chūō 12 of 14; Sakaisuji, Yotsubashi, Sennichimae and the New Tram 100%). The Hankai tram keeps 17 of 32 (it runs into Sakai): half a line, not a stub. JR and the private railways are cut at the line, as the owner's scope intends (Hankyu Kōbe 5 of 17, Keihan 8 of 41, the Loop Line 19 of 19).
 
 ## Scope

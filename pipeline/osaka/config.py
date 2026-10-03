@@ -12,7 +12,8 @@ by a JOIN to MLIT's 位置参照情報 for the 24 wards. The list's own coordina
 (its 経度 / 緯度 columns, swapped) are an independent check on the join, never
 the map's source.
 
-Rail: MLIT N02 (not GTFS, not OSM), the Shinkansen left out, stations kept only
+Rail: MLIT N02 (the N02-25 edition since 2026-10-03; not GTFS, not OSM), the
+Shinkansen left out, stations kept only
 inside the city line (N03). English station names from OpenStreetMap's name:en,
 because N02 carries Japanese names only (owner, 2026-09-27).
 """
@@ -271,7 +272,8 @@ BRANCHES = {
 # Gate 3: the operators' own station counts for the in-city part of each Osaka
 # Metro line, from Osaka Metro's station numbering (Midōsuji M12 Higashi-Mikuni
 # to M27 Abiko; Tanimachi T13 Taishibashi-Imaichi to T35 Nagahara; Yotsubashi
-# Y11-Y21; Chūō C10 Cosmosquare to C21 Fukaebashi; Sennichimae S11-S24; Sakaisuji
+# Y11-Y21; Chūō C09 Yumeshima to C21 Fukaebashi (C09 opened 2025-01-19 and is
+# in N02-25, not N02-24: Osaka moved editions 2026-10-03); Sennichimae S11-S24; Sakaisuji
 # K11-K20; Nagahori Tsurumi-ryokuchi N11 Taishō to N26 Yokozutsumi; Imazatosuji
 # I11 Itakano to I21 Imazato; New Tram P09-P18) and JR West's Loop Line
 # numbering (O01-O19). 太子橋今市 (T13 / I14) straddles the city line and counts
@@ -279,7 +281,7 @@ BRANCHES = {
 # lines the city line cuts elsewhere have no published in-city count; step 1
 # lists them.
 GATE3 = {"source": "operators' station numbering (Osaka Metro M/T/Y/C/S/K/N/I/P; JR West O01-O19)",
-         "lines": {"M": 16, "T": 23, "Y": 11, "C": 12, "S": 14, "K": 10, "N": 16, "I": 11, "P": 10, "JO": 19}}
+         "lines": {"M": 16, "T": 23, "Y": 11, "C": 13, "S": 14, "K": 10, "N": 16, "I": 11, "P": 10, "JO": 19}}
 
 # --- Business filtering ------------------------------------------------
 
