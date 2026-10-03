@@ -32,7 +32,8 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **144** across 25 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **40** — A 9 · B 5 · C 0 · D 0 · R 26 *(Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded, Chiba to R (owner); Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
+> | **Candidates** | **14** — A 9 · B 5 · C 0 · D 0 *(Band R counted apart from 2026-10-02 (owner); Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded, Chiba to R (owner); Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
+> | **Restricted (Band R)** | **26** *(a band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
 > | **Discarded** | **122**, each naming its evidence *(Wakayama 2026-10-02, opt-in coverage; 100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
 >
@@ -72,7 +73,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 40
+## Candidates — 14
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
@@ -83,9 +84,9 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **5** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **0** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
-| ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **26** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **40** |
+| | **Candidates** | **14** |
+| ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **26** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
 | *Discarded* | Measured negative, evidence named | *122* |
 
@@ -526,62 +527,62 @@ it, not a band.
 
 **A view of the bands, rebuilt with the list on 2026-10-01.** When they disagree, the bands win and this table is stale.
 
-| Country | Built | Candidates | Bands | What stands between it and the next city |
-|---|---|---|---|---|
-| 🇺🇸 United States | **19** | **1** — Arlington (VA) | R | **Seattle (Regional) built 2026-10-02** (Link's 11 cities, five publishers). Arlington (VA), D.C.'s add-on, to R 2026-10-02 (its County terms; owner, Richmond's precedent). Tempe discarded 2026-10-01. Built: 19 |
-| 🇨🇦 Canada | **7** | **1** — Richmond (BC) | R | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's four SkyTrain suburbs are a rescope in PLAN, probes first. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
-| 🇲🇽 Mexico | **3** | **0** | — | Complete on the current screen: Monterrey (Regional) built 2026-09-27 and published with Daegu and Busan |
-| 🇪🇸 Spain | **3** | **1** — Alicante | R | Alicante's portal refuses the browser too (2026-10-01); Alcobendas discarded |
-| 🇮🇪 Ireland | **1** | — | — | Complete: wave 2 (2026-09-27) found no second city. Dublin's map already covers all four Dublin councils; Cork, Limerick, Galway and Waterford have no urban rail. Re-screen Cork when Luas Cork opens |
-| 🇮🇹 Italy | **3** | **2** — Brescia, Catania | R | Both portals refuse the browser as well as scripts (2026-10-01); Cagliari discarded |
-| 🇫🇷 France | **26** | — | — | **The tram batch's 21 built 2026-09-30** (Angers mark-free, owner), on the france-tram-city skill. Lyon discarded |
-| 🇨🇿 Czechia | **7** | — | — | **The Czech batch's six built 2026-09-30** on Prague's chain (the czech-tram-city skill); `czechia_register.ruian()`'s coordinate control is per city |
-| 🇩🇰 Denmark | **3** | — | — | **Odense built 2026-09-30** (the tram kit). **Aarhus built 2026-09-29** on Copenhagen's modules (to A the same day, light rail, owner), placed through OSM's DAR address points; Odense's tram on the tram list |
-| 🇳🇴 Norway | **2** | — | — | **Bergen built 2026-09-29** on Oslo's modules (to A the same day, light rail, owner) |
-| 🇱🇻 Latvia | **3** | — | — | **Daugavpils and Liepāja built 2026-09-30** (the tram kit), on Riga's two layers |
-| 🇳🇱 Netherlands | **3** | **1** — Utrecht | R | **Den Haag built 2026-09-30** (the tram kit). **T2's verdicts 2026-09-30 (owner)**: Den Haag to T1 on the city's own horeca permit layer (2,352 food premises) and the BAG, Rotterdam's shape; Utrecht to R (its portal answers 403 to this machine and a browser); Rijswijk and Delft to the discards (no food source) |
-| 🇭🇰 Hong Kong | **1** | — | — | Built; the East Asia region |
-| 🇰🇷 South Korea | **13** | **3** — Daejeon, Gwangju, Gimhae | R | **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
-| 🇹🇼 Taiwan | **3** | **1** — Kaohsiung | R | Its door-plate file is geo-blocked to Taiwan |
-| 🇯🇵 Japan | **20** | **17** — Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Chiba, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Takaoka, Sendai | A, B, R | **Wave 2 briefed 2026-10-02** (15 pass, Wakayama discarded; builds held). The first batch's twelve built 2026-10-02. Toyohashi and Wakayama discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
-| 🇧🇷 Brazil | **9** | — | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons (owner; PLAN). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
-| 🇸🇪 Sweden | **2** | — | — | **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
-| 🇨🇭 Switzerland | **1** | — | — | **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
-| 🇷🇴 Romania | **1** | — | — | **Bucharest built 2026-09-29**: DSVSA's food registers, fetched by the owner in their browser, placed by an OSM address join (74.9%) |
-| 🇦🇷 Argentina | **1** | — | — | Buenos Aires built 2026-09-28: the city's land-use survey joined to its parcels (99.8%), CC BY 2.5 AR |
-| 🇦🇺 Australia | **2** | — | — | Brisbane's food permits found 2026-10-01 (the commuter-rail test first); Adelaide, the Gold Coast and Canberra discarded |
-| 🇹🇷 Türkiye | — | — | — | Pharmacies and opticians only on İBB's portal (2026-09-28, owner); the districts, which license shops and restaurants, publish no lists |
-| 🇹🇭 Thailand | — | **1** — Bangkok | R | The BMA's portal and GIS refuse this machine; national hosts too (2026-09-28, owner) |
-| 🇸🇦 Saudi Arabia | — | **1** — Riyadh | R | The national open-data portal times out from here (2026-09-28, owner) |
-| 🇶🇦 Qatar | — | — | — | Doha discarded 2026-09-28 (the commerce register is counts only) |
-| 🇺🇿 Uzbekistan | — | **1** — Tashkent | R | Every host refuses this machine or needs a login or CAPTCHA (2026-09-28, owner) |
-| 🇻🇳 Vietnam | — | **1** — Hanoi | R | Hanoi's hosts time out; HCMC's catalogue is CAPTCHA-walled (2026-09-28, owner) |
-| 🇦🇿 Azerbaijan | — | — | — | Baku discarded 2026-09-28 (counts only; the food register is CAPTCHA-gated) |
-| 🇵🇦 Panama | — | — | — | Panama City discarded 2026-09-28 (the municipality publishes aggregates only) |
-| 🇻🇪 Venezuela | — | — | — | Caracas discarded 2026-09-28 (no open-data portal) |
-| 🇦🇪 United Arab Emirates | — | **1** — Dubai | R | Every host of the licence register refuses this machine (2026-09-28); a read from inside the UAE first |
-| 🇵🇭 Philippines | — | — | — | Manila discarded 2026-09-28 (no business list at any level) |
-| 🇬🇧 United Kingdom | **9** | **0** | — | Complete on the current screen: the six tram and light-rail cities built 2026-10-02 on the FSA register, food only (owner's scopes, 2026-10-01). Sheffield's business-rates list is a later second bucket (owner) |
-| 🇸🇬 Singapore | — | — | — | Its food register is a 2016 snapshot; the owner's verdict is no page (2026-09-27) |
-| 🇵🇱 Poland | — | **2** — Warsaw, Kraków | R | Warsaw geo-blocked; Kraków's portal times out (2026-10-01); Wrocław discarded (alcohol layers only) |
-| 🇮🇳 India | — | **3** — Hyderabad, Delhi, Bengaluru | R | Hyderabad geo-blocked before measurement; Delhi's current register behind a CAPTCHA and its state hosts blocked (2026-09-28). Mumbai discarded 2026-09-28; Kochi discarded; Bengaluru's BBMP hosts time out (2026-09-28). Kolkata and Chennai discarded 2026-09-28 (per-licence lookups only) |
-| 🇵🇹 Portugal | — | **1** — Lisbon | R | DGAE's register is public on its map (three buckets, address, coordinates), but bulk access is for institutions only; the request is drafted, not sent (2026-09-28). Porto would follow |
-| 🇫🇮 Finland | — | **1** — Helsinki | R | Geo-blocked; a read from inside Europe |
-| 🇪🇪 Estonia | — | **1** — Tallinn | R | Food register geo-blocked; the EHR order |
-| 🇩🇪 Germany | **1** | — | — | Berlin built. Dresden and Leipzig discarded 2026-10-01: no premises register beside Munich, Frankfurt, Cologne and Hamburg |
-| 🇦🇹 Austria | — | — | — | Vienna and Graz discarded (GISA strips addresses; no city register) |
-| 🇪🇬 Egypt | — | — | — | Cairo discarded (no register at any level) |
-| 🇨🇱 Chile | — | — | — | Santiago discarded (coverage fails downtown) |
-| 🇬🇪 Georgia | **1** | — | — | **Tbilisi built 2026-10-02** (Geostat's Business Register; the West Asia region). No other Georgian city has metro, light rail or tram |
-| 🇱🇺 Luxembourg | — | — | — | Luxembourg City discarded 2026-10-01 (no premises register) |
-| 🇷🇸 Serbia | — | — | — | Belgrade discarded 2026-10-01 |
-| 🇧🇦 Bosnia and Herzegovina | — | — | — | Sarajevo discarded 2026-10-01 |
-| 🇩🇴 Dominican Republic | — | — | — | Santo Domingo discarded 2026-10-01 |
-| 🇲🇦 Morocco | — | — | — | Casablanca and Rabat–Salé discarded 2026-10-01 |
-| 🇹🇳 Tunisia | — | — | — | Tunis discarded 2026-10-01 |
-| 🇳🇬 Nigeria | — | — | — | Lagos discarded 2026-10-01 |
-| 🇪🇹 Ethiopia | — | — | — | Addis Ababa discarded 2026-10-01 |
-| **Total** | **144** | **40** |  | A 9 · B 5 · C 0 · D 0 · R 26. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| Country | Built | Candidates | Restricted (R) | Bands | What stands between it and the next city |
+| ---|---|---|---|--- | --- |
+| 🇺🇸 United States | **19** | **0** | **1** — Arlington (VA) | R | **Seattle (Regional) built 2026-10-02** (Link's 11 cities, five publishers). Arlington (VA), D.C.'s add-on, to R 2026-10-02 (its County terms; owner, Richmond's precedent). Tempe discarded 2026-10-01. Built: 19 |
+| 🇨🇦 Canada | **7** | **0** | **1** — Richmond (BC) | R | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's four SkyTrain suburbs are a rescope in PLAN, probes first. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
+| 🇲🇽 Mexico | **3** | **0** | **0** | — | Complete on the current screen: Monterrey (Regional) built 2026-09-27 and published with Daegu and Busan |
+| 🇪🇸 Spain | **3** | **0** | **1** — Alicante | R | Alicante's portal refuses the browser too (2026-10-01); Alcobendas discarded |
+| 🇮🇪 Ireland | **1** | **0** | **0** | — | Complete: wave 2 (2026-09-27) found no second city. Dublin's map already covers all four Dublin councils; Cork, Limerick, Galway and Waterford have no urban rail. Re-screen Cork when Luas Cork opens |
+| 🇮🇹 Italy | **3** | **0** | **2** — Brescia, Catania | R | Both portals refuse the browser as well as scripts (2026-10-01); Cagliari discarded |
+| 🇫🇷 France | **26** | **0** | **0** | — | **The tram batch's 21 built 2026-09-30** (Angers mark-free, owner), on the france-tram-city skill. Lyon discarded |
+| 🇨🇿 Czechia | **7** | **0** | **0** | — | **The Czech batch's six built 2026-09-30** on Prague's chain (the czech-tram-city skill); `czechia_register.ruian()`'s coordinate control is per city |
+| 🇩🇰 Denmark | **3** | **0** | **0** | — | **Odense built 2026-09-30** (the tram kit). **Aarhus built 2026-09-29** on Copenhagen's modules (to A the same day, light rail, owner), placed through OSM's DAR address points; Odense's tram on the tram list |
+| 🇳🇴 Norway | **2** | **0** | **0** | — | **Bergen built 2026-09-29** on Oslo's modules (to A the same day, light rail, owner) |
+| 🇱🇻 Latvia | **3** | **0** | **0** | — | **Daugavpils and Liepāja built 2026-09-30** (the tram kit), on Riga's two layers |
+| 🇳🇱 Netherlands | **3** | **0** | **1** — Utrecht | R | **Den Haag built 2026-09-30** (the tram kit). **T2's verdicts 2026-09-30 (owner)**: Den Haag to T1 on the city's own horeca permit layer (2,352 food premises) and the BAG, Rotterdam's shape; Utrecht to R (its portal answers 403 to this machine and a browser); Rijswijk and Delft to the discards (no food source) |
+| 🇭🇰 Hong Kong | **1** | **0** | **0** | — | Built; the East Asia region |
+| 🇰🇷 South Korea | **13** | **0** | **3** — Daejeon, Gwangju, Gimhae | R | **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
+| 🇹🇼 Taiwan | **3** | **0** | **1** — Kaohsiung | R | Its door-plate file is geo-blocked to Taiwan |
+| 🇯🇵 Japan | **20** | **14** — Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki | **3** — Chiba, Takaoka, Sendai | A, B, R | **Wave 2 briefed 2026-10-02** (15 pass, Wakayama discarded; builds held). The first batch's twelve built 2026-10-02. Toyohashi and Wakayama discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
+| 🇧🇷 Brazil | **9** | **0** | **0** | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons (owner; PLAN). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
+| 🇸🇪 Sweden | **2** | **0** | **0** | — | **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
+| 🇨🇭 Switzerland | **1** | **0** | **0** | — | **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
+| 🇷🇴 Romania | **1** | **0** | **0** | — | **Bucharest built 2026-09-29**: DSVSA's food registers, fetched by the owner in their browser, placed by an OSM address join (74.9%) |
+| 🇦🇷 Argentina | **1** | **0** | **0** | — | Buenos Aires built 2026-09-28: the city's land-use survey joined to its parcels (99.8%), CC BY 2.5 AR |
+| 🇦🇺 Australia | **2** | **0** | **0** | — | Brisbane's food permits found 2026-10-01 (the commuter-rail test first); Adelaide, the Gold Coast and Canberra discarded |
+| 🇹🇷 Türkiye | — | **0** | **0** | — | Pharmacies and opticians only on İBB's portal (2026-09-28, owner); the districts, which license shops and restaurants, publish no lists |
+| 🇹🇭 Thailand | — | **0** | **1** — Bangkok | R | The BMA's portal and GIS refuse this machine; national hosts too (2026-09-28, owner) |
+| 🇸🇦 Saudi Arabia | — | **0** | **1** — Riyadh | R | The national open-data portal times out from here (2026-09-28, owner) |
+| 🇶🇦 Qatar | — | **0** | **0** | — | Doha discarded 2026-09-28 (the commerce register is counts only) |
+| 🇺🇿 Uzbekistan | — | **0** | **1** — Tashkent | R | Every host refuses this machine or needs a login or CAPTCHA (2026-09-28, owner) |
+| 🇻🇳 Vietnam | — | **0** | **1** — Hanoi | R | Hanoi's hosts time out; HCMC's catalogue is CAPTCHA-walled (2026-09-28, owner) |
+| 🇦🇿 Azerbaijan | — | **0** | **0** | — | Baku discarded 2026-09-28 (counts only; the food register is CAPTCHA-gated) |
+| 🇵🇦 Panama | — | **0** | **0** | — | Panama City discarded 2026-09-28 (the municipality publishes aggregates only) |
+| 🇻🇪 Venezuela | — | **0** | **0** | — | Caracas discarded 2026-09-28 (no open-data portal) |
+| 🇦🇪 United Arab Emirates | — | **0** | **1** — Dubai | R | Every host of the licence register refuses this machine (2026-09-28); a read from inside the UAE first |
+| 🇵🇭 Philippines | — | **0** | **0** | — | Manila discarded 2026-09-28 (no business list at any level) |
+| 🇬🇧 United Kingdom | **9** | **0** | **0** | — | Complete on the current screen: the six tram and light-rail cities built 2026-10-02 on the FSA register, food only (owner's scopes, 2026-10-01). Sheffield's business-rates list is a later second bucket (owner) |
+| 🇸🇬 Singapore | — | **0** | **0** | — | Its food register is a 2016 snapshot; the owner's verdict is no page (2026-09-27) |
+| 🇵🇱 Poland | — | **0** | **2** — Warsaw, Kraków | R | Warsaw geo-blocked; Kraków's portal times out (2026-10-01); Wrocław discarded (alcohol layers only) |
+| 🇮🇳 India | — | **0** | **3** — Hyderabad, Delhi, Bengaluru | R | Hyderabad geo-blocked before measurement; Delhi's current register behind a CAPTCHA and its state hosts blocked (2026-09-28). Mumbai discarded 2026-09-28; Kochi discarded; Bengaluru's BBMP hosts time out (2026-09-28). Kolkata and Chennai discarded 2026-09-28 (per-licence lookups only) |
+| 🇵🇹 Portugal | — | **0** | **1** — Lisbon | R | DGAE's register is public on its map (three buckets, address, coordinates), but bulk access is for institutions only; the request is drafted, not sent (2026-09-28). Porto would follow |
+| 🇫🇮 Finland | — | **0** | **1** — Helsinki | R | Geo-blocked; a read from inside Europe |
+| 🇪🇪 Estonia | — | **0** | **1** — Tallinn | R | Food register geo-blocked; the EHR order |
+| 🇩🇪 Germany | **1** | **0** | **0** | — | Berlin built. Dresden and Leipzig discarded 2026-10-01: no premises register beside Munich, Frankfurt, Cologne and Hamburg |
+| 🇦🇹 Austria | — | **0** | **0** | — | Vienna and Graz discarded (GISA strips addresses; no city register) |
+| 🇪🇬 Egypt | — | **0** | **0** | — | Cairo discarded (no register at any level) |
+| 🇨🇱 Chile | — | **0** | **0** | — | Santiago discarded (coverage fails downtown) |
+| 🇬🇪 Georgia | **1** | **0** | **0** | — | **Tbilisi built 2026-10-02** (Geostat's Business Register; the West Asia region). No other Georgian city has metro, light rail or tram |
+| 🇱🇺 Luxembourg | — | **0** | **0** | — | Luxembourg City discarded 2026-10-01 (no premises register) |
+| 🇷🇸 Serbia | — | **0** | **0** | — | Belgrade discarded 2026-10-01 |
+| 🇧🇦 Bosnia and Herzegovina | — | **0** | **0** | — | Sarajevo discarded 2026-10-01 |
+| 🇩🇴 Dominican Republic | — | **0** | **0** | — | Santo Domingo discarded 2026-10-01 |
+| 🇲🇦 Morocco | — | **0** | **0** | — | Casablanca and Rabat–Salé discarded 2026-10-01 |
+| 🇹🇳 Tunisia | — | **0** | **0** | — | Tunis discarded 2026-10-01 |
+| 🇳🇬 Nigeria | — | **0** | **0** | — | Lagos discarded 2026-10-01 |
+| 🇪🇹 Ethiopia | — | **0** | **0** | — | Addis Ababa discarded 2026-10-01 |
+| **Total** | **144** | **14** | **26** |  | A 9 · B 5 · C 0 · D 0 · R 26. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 

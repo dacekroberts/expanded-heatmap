@@ -223,16 +223,18 @@ def row_left_in_band_t(text):
 
 
 def wrong_band(text):
-    """A by-country row naming its cities, whose Bands column holds one letter,
-    changed to a letter none of them is in."""
+    """A by-country row naming its candidates, its Bands column changed to a
+    letter none of them is in. Any naming row qualifies, not only a
+    one-letter one: since Band R left the candidates (2026-10-02) the only
+    rows naming candidates may list several bands."""
     lines = text.split("\n")
     col, rows = _by_country(lines)
     if col is None:
         return None
     for i, row in rows:
         letters = re.findall(rf"\b[{M.LETTERS}]\b", row[col])
-        if len(letters) == 1 and re.match(r"\*\*\d+\*\*\s*—\s*\S", row[2]):
-            return _set_cell(lines, i, col, "C" if letters[0] != "C" else "T")
+        if letters and re.match(r"\*\*\d+\*\*\s*—\s*\S", row[2]):
+            return _set_cell(lines, i, col, "T" if "T" not in letters else "D")
     return None
 
 
@@ -295,6 +297,14 @@ CASES = [
 
     ("by country: the Total row's band figure drifted",
      bump(r"^\| \*\*Total\*\*.*· D (\d+) ·", "the Total row says D {new}"), None),
+
+    # Band R is a band, not a candidate (owner, 2026-10-02): its count lives
+    # in the summary's Restricted row and the by-country Restricted column.
+    ("summary: the Restricted (Band R) count drifted",
+     bump(r"^> \| \*\*Restricted \(Band R\)\*\* \| \*\*(\d+)\*\*", "summary says restricted {new}"), None),
+
+    ("by country: the Restricted column's total drifted",
+     bump(r"^\| \*\*Total\*\* \| \*\*\d+\*\* \| \*\*\d+\*\* \| \*\*(\d+)\*\*", "restricted, Band R holds {old}"), None),
 
     ("by country: a named city is not in the band its row lists",
      wrong_band, "its Bands column says"),
