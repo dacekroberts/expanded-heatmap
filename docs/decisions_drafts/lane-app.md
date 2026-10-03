@@ -27,23 +27,23 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   (rgb 230,237,247 on rgb 11,18,32). `check_city_page_format.py` passes:
   `set_base_font` is already in its silent set.
 
-### 2026-10-03 - Staging's eight licence reads written in: notices 115-118 and seven licence rows (owner-approved batch)
+### 2026-10-03 - Staging's eight licence reads written in: notices 137-140 and seven licence rows (owner-approved batch)
 
 - **Notices, each on its own city's pages and the Required notices page:**
-  - **115, DLCP and OCTO (Washington D.C.):** CC BY 4.0 on both ArcGIS items
+  - **137, DLCP and OCTO (Washington D.C.):** CC BY 4.0 on both ArcGIS items
     (their titles and credits re-read 2026-10-03); both offices credited, the
     licence and each item linked, the changes said, the boundary "reprojected
     ... not drawn".
-  - **116, National Transport Authority (Dublin):** the NTA's sentence
+  - **138, National Transport Authority (Dublin):** the NTA's sentence
     verbatim, the licence link, data.gov.ie linked (its `nta-gtfs` page
     re-read 2026-10-03), the changes, "as is", no endorsement. The developer
     portal's indemnity is recorded as NOT accepted (owner).
-  - **117, geo.api.gouv.fr, Contours administratifs and IGN (France),** on
+  - **139, geo.api.gouv.fr, Contours administratifs and IGN (France),** on
     all 26 French pages: the ODbL §4.3 notice and the Licence Ouverte
     source-and-date line (owner: both). The date is the Contours
     administratifs record's last update, 2025-05-05, read on data.gouv.fr
     2026-10-03.
-  - **118, MassGIS (Boston):** requested, not required; the credit in
+  - **140, MassGIS (Boston):** requested, not required; the credit in
     MassGIS's own FAQ words, read 2026-10-03 on mass.gov through the browser
     pane (its server refuses plain fetches): "MassGIS (Bureau of Geographic
     Information), Commonwealth of Massachusetts EOTSS".
@@ -56,9 +56,12 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   SANDAG as host. ireland.md and france.md gain a licences section each.
   `pipeline/san_diego/` comments still say "SANDAG" for the boundary file;
   not this lane's files.
-- **Numbering:** 115-118, as cleanup directed. docs/session_roles.md
-  pre-assigns 115-128 to Japan wave 2, so the two collide if wave 2 numbers
-  from 115; for cleanup to settle at the merge.
+- **Numbering:** first written as 115-118, then renumbered 137-140 (cleanup,
+  2026-10-03): Japan wave 2 holds 115-128 and the four extensions 129-136,
+  both building. The claim is recorded in docs/session_roles.md's claims
+  sentence, which now carries those two pre-assignments as well: check D read
+  only that sentence, and the pre-assignments sat in the next one, so the
+  unbuilt 115-136 gap would have failed it. The check is unchanged.
 
 ### 2026-10-03 - SFMTA's notice 3 is four sentences plus clause 4's disclaimer, on the cautious reading (owner-approved batch)
 

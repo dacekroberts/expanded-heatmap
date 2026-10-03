@@ -3138,7 +3138,7 @@ session's claimed block, 109–116.)
 - **MUST DO**: nothing further. Individual entrepreneurs' names and personal
   numbers are never written to disk; the removal rule is the safety net.
 
-**115. DLCP and OCTO (Washington D.C.) — required, and DISPLAYED**
+**137. DLCP and OCTO (Washington D.C.) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-03, from staging's licence reads
 of 2026-10-02.)
 
@@ -3155,7 +3155,7 @@ of 2026-10-02.)
 - **MUST NOT**: imply either office's endorsement.
 - **MUST DO**: nothing further.
 
-**116. National Transport Authority (Dublin) — required, and DISPLAYED**
+**138. National Transport Authority (Dublin) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-03, from staging's licence read
 of 2026-10-02.)
 
@@ -3172,7 +3172,7 @@ of 2026-10-02.)
   carries an uncapped indemnity. The download page never links it. The
   displayed credit meets the Policy's §7 as well.
 
-**117. geo.api.gouv.fr, Contours administratifs and IGN (France) — required,
+**139. geo.api.gouv.fr, Contours administratifs and IGN (France) — required,
 and DISPLAYED** (written into `render_site_notices()` 2026-10-03, from
 staging's licence read of 2026-10-02; all 26 French cities.)
 
@@ -3188,7 +3188,7 @@ staging's licence read of 2026-10-02; all 26 French cities.)
 - **MUST DO**: ODbL §4.6 rests on the public repository, linked from every
   page (the footer and the page header).
 
-**118. MassGIS (Boston) — displayed by choice, not required**
+**140. MassGIS (Boston) — displayed by choice, not required**
 (written into `render_site_notices()` 2026-10-03, from staging's licence read
 of 2026-10-02.)
 

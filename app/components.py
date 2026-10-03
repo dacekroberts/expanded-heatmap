@@ -2451,12 +2451,12 @@ _NOTICES = [
      "Business Register, retrieved 2026-10-02; processed by this project. Not "
      "endorsed by Geostat.",
      False, ("Tbilisi",)),
-    # Notices 115-118, from staging's licence reads of 2026-10-02
+    # Notices 137-140, from staging's licence reads of 2026-10-02
     # (docs/licence_positions.md, its update section). D.C.'s two ArcGIS items
     # carry CC BY 4.0 over the District's CC0 default: credit, licence link,
     # a link to the material, and the changes (s.3(a)). The boundary is
     # reprojected and used to select, never drawn.
-    Notice(115, "DLCP and OCTO (Washington D.C.)",
+    Notice(137, "DLCP and OCTO (Washington D.C.)",
      "Business locations for Washington D.C. are from the Department of "
      "Licensing and Consumer Protection's [Basic Business Licenses]"
      "(https://www.arcgis.com/home/item.html?id=85bf98d3915f412c8a4de706f2d13513), "
@@ -2476,7 +2476,7 @@ _NOTICES = [
     # CC BY for dublin"); this credit still meets that Policy's s.7. Linked to
     # data.gov.ie, not nationaltransport.ie (that site's terms, clause 5, on
     # linking).
-    Notice(116, "National Transport Authority (Dublin)",
+    Notice(138, "National Transport Authority (Dublin)",
      "This data is licensed under CC BY 4.0 and is attributed to the National "
      "Transport Authority. Luas and DART lines and stations for Dublin are from "
      "the NTA's [national GTFS feed](https://data.gov.ie/dataset/nta-gtfs), used "
@@ -2492,7 +2492,7 @@ _NOTICES = [
     # 2026-10-02: show both, the ODbL s.4.3 notice and the Licence Ouverte
     # source-and-date line. ODbL s.4.6 rests on the repository link. The
     # dataset's last update is from its data.gouv record (read 2026-10-03).
-    Notice(117, "geo.api.gouv.fr, Contours administratifs and IGN (France)",
+    Notice(139, "geo.api.gouv.fr, Contours administratifs and IGN (France)",
      "Commune boundaries for the French cities on this site are from "
      "geo.api.gouv.fr. Contains information from Contours administratifs "
      "(data.gouv.fr), which is made available here under the [Open Database "
@@ -2506,7 +2506,7 @@ _NOTICES = [
     # MassGIS: public records, "can be used by anyone for any purpose"; a
     # credit is requested, not required, and is shown in the words MassGIS's
     # FAQ gives (read 2026-10-03), the office name as published.
-    Notice(118, "MassGIS (Boston)",
+    Notice(140, "MassGIS (Boston)",
      "Boston's boundary, and the town each station outside the city lies in, "
      "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
      "of Geographic Information), Commonwealth of Massachusetts EOTSS.",

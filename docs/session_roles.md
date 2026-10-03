@@ -200,9 +200,13 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 at once never take the same "next free" number: the UK six **156–161**
 (build order), the Japan batch **162–173** (its kit's table order),
 Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
-here, by the session, before one is written. None is open: every claimed
-block landed 2026-10-02 (the last notice is 114; Tbilisi's unused 115–116
-released), so the next claim starts at 115. Pre-assigned 2026-10-02: Japan wave 2 pages 176–189 and notices 115–128; the four extensions notices 129–136 (no new pages).
+here, by the session, before one is written, and the claims open are Japan
+wave 2's notices 115–128 and the four extensions' notices 129–136 (both
+pre-assigned 2026-10-02), and lane-app (cleanup batch, 2026-10-03): notices
+137-140; the next claim starts at 141. Every block before those landed
+2026-10-02 (the last notice landed then is 114; Tbilisi's unused 115–116 were
+released and pre-assigned to Japan wave 2). Pages pre-assigned 2026-10-02:
+Japan wave 2 176–189; the four extensions take no new pages.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the
 ranges in that one sentence, and delete a batch's range once it lands.
