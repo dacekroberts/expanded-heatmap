@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**386 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**387 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -73,6 +73,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [SanGIS's indemnity and general release accepted for San Diego's boundaries and parcels (owner)](#2026-10-02---sangiss-indemnity-and-general-release-accepted-for-san-diegos-boundaries-and-parcels-owner)
 - [The public repository linked from every page, for Paris's Licence Mobilités and six ODbL sources](#2026-10-02---the-public-repository-linked-from-every-page-for-pariss-licence-mobilités-and-six-odbl-sources)
 - [Paris stays published after the repository-link gap (owner)](#2026-10-02---paris-stays-published-after-the-repository-link-gap-owner)
+- [A CARTO basemap key requested; CARTO's indemnity and New York law accepted (owner)](#2026-10-02---a-carto-basemap-key-requested-cartos-indemnity-and-new-york-law-accepted-owner)
 
 **2026-10-01**
 
@@ -16117,3 +16118,35 @@ Recorded by the cleanup session from the Main Building Session's findings of
   knowledge or intent. From bd23a18e the term is met going forward: the
   public repository is linked from every page. If IDFM raises the gap, the
   standing removal commitment applies and Paris comes off first.
+
+### 2026-10-02 - A CARTO basemap key requested; CARTO's indemnity and New York law accepted (owner)
+
+- **Why.** CARTO's Basemap Terms (2026-09-29, §3.b) grant free use only to a
+  customer "who requests and uses a CARTO-issued API key". The Overview's
+  macro map loads CARTO Positron keyless, so that use was not covered.
+- **The owner requested a free non-commercial key** (2026-10-02) at
+  carto.com/basemaps/apikey/. The description given: a free, non-commercial
+  portfolio project, CARTO Positron under its one overview map, the key
+  locked to expanded-heatmap-daceroberts.streamlit.app.
+  - A second key for local development is locked by Referer to localhost and
+    127.0.0.1: CARTO does not allow one key to list both localhost and a
+    public site.
+  - Neither key is handled by any session. They go into the app's Streamlit
+    secrets, and a local secrets file, as `CARTO_BASEMAP_KEY`.
+- **The owner accepted** §17's uncapped indemnity and §22's New York law and
+  venue (2026-10-02, "4. i confirm").
+- **Known risks, recorded as accepted:**
+  - §3.c: CARTO may suspend or end free access at any time, without notice.
+    A lapsed key means blank tiles.
+  - The terms changed four times in about a year.
+  - CartoDB/basemap-styles LICENSE.md still says tile access is for
+    enterprise customers only.
+  - Key holders get material changes by email, so that address is watched.
+- **Still to build, landing at review time:**
+  - Passing the key on every basemap request. Streamlit does not apply its
+    own `cartoKey`, so the likely route is a style copy with the key in each
+    address, written at app start from secrets.
+  - The CARTO credit link: to carto.com/attribution/, with OpenMapTiles.
+  - Possibly a privacy line (§10).
+
+  The OpenFreeMap swap stays tabled as the fallback.
