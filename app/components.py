@@ -526,7 +526,13 @@ _NOTICES = [
            "basemap © OpenStreetMap contributors, available under the "
            "Open Database License. The attribution also appears in the corner "
            "of every map, where its license requires it to stay visible. The "
-           "overview map's basemap is © CARTO.",
+           "overview map's basemap is © CARTO and © OpenMapTiles, from "
+           "OpenStreetMap data. "
+           # Approved by the owner, 2026-10-02: CARTO's terms (s10) make the
+           # site the controller of the request data CARTO receives.
+           "The overview map's basemap loads from CARTO, so your browser sends "
+           "CARTO your IP address and browser details with each map request; "
+           "CARTO processes them for this site.",
            False, (), every_page=True),
     Notice(2, "City of Chicago",
      "This site provides applications using data that has been modified for "

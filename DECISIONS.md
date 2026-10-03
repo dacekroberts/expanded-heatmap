@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**392 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**393 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -79,6 +79,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Required notices: each city's own on its page, six on every page, all on a new page (owner)](#2026-10-02---required-notices-each-citys-own-on-its-page-six-on-every-page-all-on-a-new-page-owner)
 - [Touch gestures: one finger scrolls the page, two move the map](#2026-10-02---touch-gestures-one-finger-scrolls-the-page-two-move-the-map)
 - [The Overview's CARTO basemap sends the project's key on every request; its credit now links CARTO's attribution page, with OpenMapTiles](#2026-10-02---the-overviews-carto-basemap-sends-the-projects-key-on-every-request-its-credit-now-links-cartos-attribution-page-with-openmaptiles)
+- [The site notices credit OpenMapTiles and say what CARTO receives (owner approved)](#2026-10-02---the-site-notices-credit-openmaptiles-and-say-what-carto-receives-owner-approved)
 
 **2026-10-01**
 
@@ -16457,3 +16458,19 @@ Recorded by the cleanup session from the Main Building Session's findings of
   and both change when this lands. `docs/data_sources.md` gained the CARTO
   section the record lacked; it renders on About the Data, so its prose is
   for review time.
+
+### 2026-10-02 - The site notices credit OpenMapTiles and say what CARTO receives (owner approved)
+
+- **What.** Notice 1 (OpenStreetMap, on every page) now ends: "The overview
+  map's basemap is © CARTO and © OpenMapTiles, from OpenStreetMap data. The
+  overview map's basemap loads from CARTO, so your browser sends CARTO your
+  IP address and browser details with each map request; CARTO processes them
+  for this site." The first sentence replaces "The overview map's basemap is
+  © CARTO."
+- **Why.** These were the two proposals in the previous entry's "For the
+  owner" list; the owner approved both ("Drafts approved"). CARTO's terms
+  (§10) make the site the controller of the request data CARTO receives, and
+  the site had no privacy section, so the line sits with the basemap credit.
+- **Landing.** Merged from `claude/nervous-elgamal-a9b70e` (87e52be1) onto the
+  restructured notices: the sentence moved from `render_site_notices` into
+  notice 1's `Notice(...)` in `app/components.py`.
