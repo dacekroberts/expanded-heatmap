@@ -32,9 +32,9 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **144** across 25 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **25** — A 0 · B 0 · C 0 · D 0 · R 25 *(Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
+> | **Candidates** | **40** — A 9 · B 6 · C 0 · D 0 · R 25 *(Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded; Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
-> | **Discarded** | **121**, each naming its evidence *(100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
+> | **Discarded** | **122**, each naming its evidence *(Wakayama 2026-10-02, opt-in coverage; 100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
 >
 > *Counts are checked by `scripts/check_master_list_counts.py`; the
 > discard rows' evidence by `scripts/check_discard_evidence.py`.*
@@ -72,46 +72,61 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 25
+## Candidates — 40
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **0** |
-| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **0** |
+| 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **9** |
+| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **6** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **0** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
 | ⚫ **R** | **Restricted or request only.** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **25** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **25** |
+| | **Candidates** | **40** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
-| *Discarded* | Measured negative, evidence named | *121* |
+| *Discarded* | Measured negative, evidence named | *122* |
 
-## 🟢 Band A — ready to build (0 ready + 0 ✅ BUILT)
+## 🟢 Band A — ready to build (9 ready + 0 ✅ BUILT)
 
-All seven are Japanese, on the shared Japanese modules (`japan-city`): the
-city's food-permit list and 生活衛生 lists joined to MLIT's address blocks,
-N02 rail with the JR and private lines inside the city line drawn (Japan's
-standing rule). None is trams-only. "In force" is MHLW's count of 飲食店営業
-permits in force (FY2024). Screened 2026-10-01; every list read carries
-operator names, so the owner's name rule and `check_personal_exposure.py`
-apply to each. **Briefed 2026-10-02**, with Band B's five Japanese cities:
-`docs/build_briefs/<slug>.md`, each brief's checks passing. The corrections
-below are from the briefs. **Released 2026-10-02 to one build session with agents**, all twelve
-(`docs/handoff_japan_batch_2026-10-02.md`).
+**Japan wave 2, briefed 2026-10-02 (owner: "brief now, hold on builds").** The
+first Japan batch landed on 2026-10-02. These are the next Japanese cities, from
+a scope of 114 uncovered municipalities (designated, core, 200k+, or with a tram,
+monorail, AGT or subway). Each has a brief in `docs/build_briefs/<slug>.md`, and
+every brief's checks pass (staging re-ran all 15, 2026-10-02). The shared Japan
+code the first batch landed covers most of them; each brief lists its new
+column spellings and rules. All are the minor label tier, in the Japan regions.
+`mode` follows the owner's rule (JR the largest network, or a subway, is
+`metro`). 🚨 items are open with the owner. **Builds are HELD.**
 
 | City | Business lists | Licence | Rail | Open at build |
 |---|---|---|---|---|
+| **Kawasaki** 🇯🇵 | The city's monthly lists: **12,266 restaurants (101.6% of in force)**, barber, beauty and laundry 2,854; **98.7% at block** | CC BY (terms 2.1 JP, badges 4.0) | 53 groups (JR 25, private 31) · `metro` | 🚨 Keikyū Main and Keiō Sagamihara cut to 2 stations each (draw cut); 🚨 name both CC BY versions |
+| **Yokosuka** 🇯🇵 | BODIK lists: **3,448 restaurants (99.6%)**, barber, beauty and two laundry lists 1,140; **96.5% at block** | CC BY 4.0 | 21 groups (Keikyū 17, JR 4) · `metro` | 🚨 mode for a private-railway backbone (recommend `metro`); census ratio 2.13 high |
+| **Himeji** 🇯🇵 | City CKAN: **6,893 restaurants (103%)**, barber 380, beauty 1,336, laundry 189; 79.8% block, 17.6% chōme | CC BY 4.0 | 31 groups (JR 16, Sanyō 15) · `metro` | — |
+| **Nishinomiya** 🇯🇵 | City portal: **4,677 restaurants (104%)**, barber 204, beauty 875, laundry 147 (62%); **98.8–100% at block** | PDL 1.0 | 22 groups (Hanshin 10, Hankyu 8, JR 5) · `metro` | 🚨 Hankyu Kobe 2/17, JR Kobe 3/59, JR Takarazuka 2/30 (draw cut); 🚨 laundry at 62% (keep, disclose) |
+| **Takamatsu** 🇯🇵 | City lists: **5,558 restaurants (102%)**, barber 371, beauty 1,188, laundry 332; **87.1% at block** | CC BY 4.0 | 46 groups (Kotoden 33, JR 13; funicular out) · `metro` | — |
+| **Toyota** 🇯🇵 | BODIK lists: food 3,667 rows (**74.9% of in force**: temporary and stall permits left out), barber 282, beauty 634, laundry 144; 80.2% block | CC BY 4.0 | 25 groups (no JR) · `metro` | 🚨 Meitetsu Toyota 3/8, Linimo 2/9 (draw cut); 🚨 registers' title lacks 「オープンデータ」 (accept, Hiroshima's precedent) |
+| **Yokkaichi** 🇯🇵 | BODIK: permits 3,725, notifications 1,247, barber 216, beauty 737, laundry 106; 86.8% block | CC BY 4.0 | 35 groups · `metro` | — |
+| **Ōtsu** 🇯🇵 | The city's monthly food list: **3,300 restaurants** (official 3,115); barber 187, beauty 618, laundry 202; **94.7% at block** | CC BY 4.0 | 40 groups (Keihan 24, JR 16; cable out) · `light_rail` 🚨 | 🚨 the food file is on the city's site only (accept as CC BY 4.0); census ratio 2.6 high |
+| **Nara** 🇯🇵 | MHLW 4,074 open restaurant permits (79.6% of fixed with an address) plus the pre-2021 list (820 in term); barber 213, beauty 837, laundry 213; about 89% block | PDL 1.0; CC BY 2.1 JP | **14 groups, thin** · `metro` | 🚨 build despite thin rail (recommend yes) |
 
-## 🔵 Band B — narrower pages (0 cities)
+## 🔵 Band B — narrower pages (6 cities)
 
 The UK six and the Japan batch's five band-B cities moved to Built on
-2026-10-02 (owner: landed together).
+2026-10-02 (owner: landed together). **Japan wave 2's six one-bucket cities
+(briefed 2026-10-02, builds held):**
 
 | City | The page | Source | Rail | Owner calls |
 |---|---|---|---|---|
+| **Chiba** 🇯🇵 | Food only (Okayama's shape) | MHLW alone: **8,290 restaurant permits (89.3%)**, 74.6% of fixed with an address, 98.9% of those at block | 47 groups (JR 19, monorail 18, Keisei 13) · `metro` | 🚨 the city publishes all three buckets under all-rights-reserved: a permission request would reopen them (the owner's) |
+| **Hamamatsu** 🇯🇵 | Personal services only (Hakodate's shape) | Registers, CC BY 2.1 JP: **3,212 premises, 101.5% of e-Stat**; 94.9% block | 54 groups · `metro` | 🚨 MHLW's 6,033 notifications as partial food shops (recommend no) |
+| **Higashiōsaka** 🇯🇵 | Food only | BODIK full list plus monthly permits, rebuilt: **5,505 restaurants** (official 5,534), **99.6% at block** | 26 groups · `metro` | 🚨 the Chūō Line keeps 2 stations (draw cut); census ratio 2.7 high |
+| **Kurume** 🇯🇵 | Food only | MHLW: **3,861 permits (89%)**, 79.6% of fixed with a real address (670 read only 久留米市内), 87.4% block | 25 groups (Nishitetsu 16, JR 9) · `metro` | — |
+| **Sasebo** 🇯🇵 | Food only | MHLW 2,316 plus the old-law list (346), about 105% of in force; 79.1% of fixed with an address | 28 groups (Matsuura 22, JR 7) · `metro` | — |
+| **Shimonoseki** 🇯🇵 | Food only | MHLW: **2,632 permits (94%)**, 98.8% with an address | 21 groups, all JR · `metro` | 🚨 7 San'in Line stations beyond 小串 at about 8–10 trains a day (agent: draw; staging: leave out) |
 
 ## 🟣 Band C — closer to a page (0 cities)
 
@@ -200,7 +215,7 @@ not counted here.
 | ION Stage 2 | In planning |
 | Zurich's rebuild | After 12 December 2026 (PLAN) |
 
-## DISCARDED — 121 cities, each naming its evidence
+## DISCARDED — 122 cities, each naming its evidence
 
 ▼ **2026-10-01 — nineteen rows from the post-review screens** (staging's recommendations, confirmed by the owner the same day), in their own table below: Toyohashi (Japan), Dresden, Leipzig, Graz, Luxembourg City, Wrocław, Adelaide, the Gold Coast and Canberra (the cities a country pattern had left unscreened), Belgrade, Sarajevo, Santo Domingo, Casablanca, Rabat–Salé, Tunis, Lagos and Addis Ababa (the countries once ruled out on "no urban rail", each failing on its business data), and Cagliari and Alcobendas (wave 2's not-reached rows, now read in a browser).
 
@@ -460,6 +475,7 @@ dataset title**.
 | City | Kind | Methods | City host asked? | Why |
 |---|---|---|---|---|
 | **Toyohashi** 🇯🇵 | absence | read the city's food and personal-services pages (13766, 33270, 42298) · enumerated the East Mikawa DKAN (272 datasets) and the city's open-data list (38) · read Aichi's 食品営業者台帳, which excludes 豊橋市 | yes — `city.toyohashi.lg.jp` | **No standing list (2026-10-01).** Food is 12 rolling months of new permits plus renewal files, which cannot rebuild a register (Nagoya's precedent); 美容 and 理容 are new-openings streams; the site terms require notifying the city before reuse |
+| **Wakayama** 🇯🇵 | coverage | enumerated BODIK org 302015 (45 datasets; the only business one is `302015_food_business`, no 理容/美容/クリーニング) · read the dataset's notes (consenting applicants only, since 2021-06-01) · measured the 2026-09-01 CSV (3,240 rows; 2,566 restaurant rows, **51%** of e-Stat's 5,048 in force, 43% as fixed premises; about 54% of new-law permits) · measured MHLW's file | yes — BODIK and the city's pages | **An opt-in list, about half the city (2026-10-02, Japan wave 2).** A standing list, not a stream, but only permit holders who agreed to publication; no personal-services list, so neither a food page nor a one-bucket page clears the ~70% bar. **Reopens** with a full register or a personal-services list. Note: `scratchpad/japan_wave2/kansai_b/wakayama_discard.md` (staging) |
 | **Dresden** 🇩🇪 | absence | enumerated GovData's 994 "Stadt Dresden" datasets (the city portal's harvest; nonsense 0) · enumerated the Freistaat Sachsen catalogue (3,952) · measured Handelsatlas 2022 (a WMS picture service: no geometry, no name) · read `kommisdd.dresden.de`'s guide layers (curated) | yes — `opendata.dresden.de` and `kommisdd.dresden.de` | **No premises register (2026-10-01).** IHK Dresden publishes district aggregates only. DVB trams, 12 lines |
 | **Leipzig** 🇩🇪 | absence | enumerated `opendata.leipzig.de` (411 datasets; nonsense 0) · enumerated `geodienste.leipzig.de`'s OpenData WFS (83 layers) · measured `gebaeude_alkis` (140,521 buildings, whole-building function) | yes — both city hosts | **No premises register (2026-10-01).** Retail figures are statistics aggregates; the tourism feed is curated. LVB trams, 13 lines |
 | **Graz** 🇦🇹 | absence | enumerated `data.gv.at`'s Stadt Graz catalogue (211; nonsense 0), WK Steiermark's (2) and Land Steiermark's (8) · enumerated `geodaten.graz.at`'s OGD folder (9 services, 47 civic layers) · measured `Nutzungseinheiten_Informationen` (counts per census tract) | yes — `data.graz.gv.at` and `geodaten.graz.at` | **No premises register (2026-10-01); Vienna's national reading holds** (GISA strips addresses). Graz Linien, 8 tram lines |
@@ -527,7 +543,7 @@ it, not a band.
 | 🇭🇰 Hong Kong | **1** | — | — | Built; the East Asia region |
 | 🇰🇷 South Korea | **13** | **3** — Daejeon, Gwangju, Gimhae | R | **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
 | 🇹🇼 Taiwan | **3** | **1** — Kaohsiung | R | Its door-plate file is geo-blocked to Taiwan |
-| 🇯🇵 Japan | **20** | **2** — Takaoka, Sendai | A, B, R | The tram and designated cities screened 2026-10-01; MHLW's file counted the same day settled five (Utsunomiya and Kitakyushu to A; Kagoshima, Okayama and Kōchi to B). Toyohashi discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
+| 🇯🇵 Japan | **20** | **17** — Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Chiba, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Takaoka, Sendai | A, B, R | **Wave 2 briefed 2026-10-02** (15 pass, Wakayama discarded; builds held). The first batch's twelve built 2026-10-02. Toyohashi and Wakayama discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
 | 🇧🇷 Brazil | **9** | — | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons (owner; PLAN). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
 | 🇸🇪 Sweden | **2** | — | — | **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
 | 🇨🇭 Switzerland | **1** | — | — | **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
@@ -565,7 +581,7 @@ it, not a band.
 | 🇹🇳 Tunisia | — | — | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | — | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | — | — | Addis Ababa discarded 2026-10-01 |
-| **Total** | **144** | **25** |  | A 0 · B 0 · C 0 · D 0 · R 25. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **144** | **40** |  | A 9 · B 6 · C 0 · D 0 · R 25. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 

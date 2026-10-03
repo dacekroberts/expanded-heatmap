@@ -4,6 +4,48 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Japan wave 2: 15 briefed, Wakayama discarded; licence positions ranked
+
+- **The owner: "brief now, hold on builds".** Five agents briefed the scope's
+  16 cities by region. Staging re-ran every brief: 15 pass all their checks.
+  - **Band A (9):** Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu,
+    Toyota, Yokkaichi, Ōtsu, Nara.
+  - **Band B (6):** Chiba (food, MHLW alone), Hamamatsu (personal services),
+    Higashiōsaka (food), Kurume, Sasebo and Shimonoseki (food, MHLW).
+  - **Wakayama is discarded on coverage.** Its only list is opt-in, 51% of
+    the restaurants in force, with no personal-services list.
+  - Candidates are now A 9 · B 6 · R 25 = 40, with 122 discards. Builds are
+    held.
+- **Open with the owner (🚨 in the briefs):**
+  - urban lines cut to stubs, recommended drawn as cut (Sakai's
+    precedent): Kawasaki, Nishinomiya, Toyota, Higashiōsaka;
+  - Shimonoseki's seven San'in stations beyond 小串, at about 8–10 trains
+    a day. The agent says draw them; staging leans to leaving them out
+    (Brazil's frequency discards);
+  - Nara's thin rail (14 groups; recommended build);
+  - Chiba's all-rights-reserved city lists (a permission request would
+    open three buckets);
+  - Hamamatsu's MHLW notifications as partial food (recommended no);
+  - Kawasaki's two CC BY versions; Toyota's register title; Ōtsu's food
+    file on the city's site only (all recommended accept);
+  - modes for Yokosuka (metro) and Ōtsu (light_rail);
+  - Nishinomiya's laundry list at 62% (keep, disclose).
+- **New shared code** (each brief lists it): more column spellings; a
+  `wareki_date` form; `norm_town` rules for 大字 and 字甲/乙/丙; addresses of
+  only "<city>内" treated as not premises; Nara's old-law restaurant types;
+  month-renamed fetches.
+- **Licence positions ranked** (owner: "list our weakest to strongest notice
+  positions"): `docs/licence_positions.md`.
+  - **142 grouped entries:** tier 1 (weakest) 28, tier 2 (conditional) 48,
+    tier 3 (open licence) 44, tier 4 (public domain) 22.
+  - **The weakest:** Philadelphia (an unanswered permission request), King
+    County food, Dublin's NTA GTFS (no reading), D.C.'s register (no
+    reading), Snohomish, Bellevue, Daegu, Den Haag, Bucharest, CNEFE.
+  - **Flags:** missing licence rows (D.C., NTA, CARTO, several boundaries,
+    geo.api.gouv.fr); no public-repository link in the app (IDFM Art. 5.8,
+    ODbL §4.6); missing credits (NTA, Milan rail, SFMTA's disclaimer,
+    STM's modification sentence, MLIT for all 20 Japanese cities).
+
 ### 2026-10-02 - A re-check calendar for every built city; Vancouver's extension probed; Arlington measured
 
 - **`docs/recheck_calendar.md`** (owner: "let's update this calendar across
