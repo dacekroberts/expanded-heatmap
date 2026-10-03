@@ -280,6 +280,18 @@ admitted by `scripts/heavy_job.py`** against the memory actually available.
 - Light work needs no gate: greps, git, `check_all.py`, one small city's
   steps.
 
+
+**Measured figures are the norm (owner, 2026-10-03).** A measured peak is the
+threshold: a job declares its label's last measured peak, which the gate
+looks up itself when `--peak-gb` is omitted. A job never measured declares an
+estimate scaled from measured ones and says so (`--estimate "scaled from
+Kyoto 0.33 GB by raw size"`). In a series of like jobs, run the first alone:
+it is the measurement the rest declare from. Run jobs side by side wherever
+the measured figures fit; for drift that is one run with `--jobs 2`. Keep
+labels stable (`<city> step 2`, `drift <city>`, `drift japan --jobs 2`) so the
+lookup finds them. A multi-city run is its own label: on 2026-10-03 two
+Japanese drift runs of 20 and 30 cities measured 4.54 and 4.71 GB, far above
+any single city's step, so a batch is never declared from one city's figure.
 ## Subagents are not sessions, and the split is not the same one
 
 A **session** is a long-lived role with owned paths, its own worktree and its
@@ -389,6 +401,14 @@ tells them (owner, 2026-10-03).
   the shared map code and theme.
 - **A new city always counts**, and so does a removal request carried out:
   a city or layer taken down must leave the cards and analyses too.
+- **For each new city** (Visuals' request, 2026-10-03) the note carries its
+  slug, its own notices and whether its rail or station names come from
+  OpenStreetMap (the script prints these when run from the pushed commit),
+  plus two things the sender adds from the build's drafts file: for each
+  notice, **card face or caption only** (the licence's own words on where
+  the notice must appear decide it), and **any open terms question**, which
+  keeps that city off the cards and public pieces until the owner rules. A
+  build session records both in its drafts file for every source it adds.
 - **The message informs; it never instructs.** Each session decides what to
   regenerate, on its own branch, and lands through cleanup as usual.
 - **A build session's branch** says in its drafts file which downstream

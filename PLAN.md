@@ -21,6 +21,17 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **Heavy-job gate follow-ups (2026-10-03, measured-figures norm):**
+  - **What makes a multi-city Japanese drift run measure 4.5-4.7 GB?** Run
+    each Japanese city's drift alone through the gate (label `drift <city>`)
+    once the machine is quiet, and compare against `drift japan --jobs 2`.
+    The history now records every run, so this also seeds the lookups.
+  - **Orphans from a stopped background shell.** Stopping a shell that wraps
+    a chain of `heavy_job.py run` calls can leave a child running and still
+    in the ledger (Japan wave 2: a step started as the shell died and failed
+    with 0xC0000142). Options: the gate notices its parent's death and ends
+    its child, or `status` flags entries whose wrapping gate process is gone.
+
 - [ ] **Left by the 2026-10-03 lanes batch, each needing a fresh pull:**
   - **Rome's tram 3 is back in service** (ATAC, 2026-09-07), but the cached
     GTFS has no trips on route 3 and no tram 3 relation is cached. Drawing it
