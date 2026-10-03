@@ -4,6 +4,18 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Vancouver (Regional)'s three extension calls approved (owner)
+
+- **The owner: "approve the three vancouver calls"**, all as staging
+  recommended:
+  1. Burnaby's credit shows the BC wording as printed ("Contains information
+     licensed under the Open Government Licence – British Columbia."),
+     credits "City of Burnaby" and links its licence page.
+  2. `RETAIL SALE, RENTAL & REPAIR` (32 rows) goes to Retail, kept whole.
+  3. Coquitlam's mall kiosks (about 9) are left out.
+- **Recorded** in `docs/build_briefs/vancouver_regional.md` and the
+  extensions kit, so Vancouver's step 2 no longer waits.
+
 ### 2026-10-02 - Both new kits gain a "Visuals and analytics" section (owner)
 
 - **The owner asked whether the briefs reflected the analytics and visuals

@@ -27,9 +27,8 @@ Japan wave 2 session runs beside this one and touches no code these do.
 | **Los Angeles** | Los Angeles (Regional) | **Long Beach**: 8 A Line stations | "Business Licenses Public View", 20,264 active, in-city, not home-based. **PERMITTED WITH CONDITIONS**; the breach-only indemnity was accepted by the owner (2026-09-30). Never imply endorsement. Withhold `FULLNAME` where there is no `DBANAME` (12,854). Drop the Pacific placeholder points. | PLAN.md "Wave-2 follow-ups" (6); `docs/data_sources/united-states.md` |
 | **Vancouver (Regional)** | (unchanged name) | **Burnaby (11), New Westminster (5), Coquitlam (4)**: 20 SkyTrain stations | Burnaby: 20,054 approved licences, every row a point, 2,143 in the buckets (probed 2026-10-02). New Westminster: 907, 99.8% joined to its Address Points. Coquitlam: about 1,037 (rows listed twice). All under OGL variants. Richmond (R) and Port Moody (no addresses) stay out. | `docs/build_briefs/vancouver_regional.md` |
 
-**Vancouver's three small calls** are in its brief, each with staging's
-recommendation. They come from the owner before Vancouver's step 2. Staging
-has asked; the answers go into the brief and staging's drafts.
+**Vancouver's three small calls: APPROVED by the owner (2026-10-02, "approve
+the three vancouver calls"), as recommended:**
 1. Burnaby's credit: the BC wording as printed, "City of Burnaby", with a
    link.
 2. `RETAIL SALE, RENTAL & REPAIR` (32 rows) goes to Retail.
@@ -45,7 +44,7 @@ each extension is a careful edit of a live city. **Order:**
 2. **Rio + Duque de Caxias**, which reuses the regional scoping Belo
    Horizonte just set up.
 3. **Los Angeles + Long Beach.**
-4. **Vancouver (Regional)**, after the owner's three calls.
+4. **Vancouver (Regional)**; its three calls are approved.
 
 An agent may take a self-contained leg, such as Burnaby's step 2 filter or
 Long Beach's withhold-and-drop. It returns the file and its counts, and never

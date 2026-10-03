@@ -82,13 +82,13 @@ pipeline first. None of the three cities has a licence row yet in
 - **Required statement:** "Contains information licensed under the Open
   Government Licence – Coquitlam."
 
-## Open for the owner (staging's recommendations)
+## The owner's calls (2026-10-02: "approve the three vancouver calls")
 
-1. **Burnaby's credit:** show the BC wording as printed, credit "City of
+1. ✅ **Burnaby's credit:** show the BC wording as printed, credit "City of
    Burnaby" and link its licence page.
-2. **`RETAIL SALE, RENTAL & REPAIR`** (32 rows): Retail, keeping the mixed
+2. ✅ **`RETAIL SALE, RENTAL & REPAIR`** (32 rows): Retail, keeping the mixed
    type whole.
-3. **Coquitlam's mall kiosks** (about 9): leave them out.
+3. ✅ **Coquitlam's mall kiosks** (about 9): leave them out.
 
 ## Before publishing
 
