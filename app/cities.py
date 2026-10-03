@@ -1362,8 +1362,10 @@ CITIES = [
         # 34.2 px, measured 2026-09-27 in the app's own document).
         # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('end', -8, 0)},
         "label_offset": ('end', -10, -14),
-        "label_offset_by_region": {'Japan West': ('end', -10, -14)},
     },
     {
         "name": "Osaka",
@@ -1389,8 +1391,10 @@ CITIES = [
         # 2026-09-27.
         # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('start', 8, 14), 'East Asia': ('start', 8, 14)},
         "label_offset": ('start', 12, 8),
-        "label_offset_by_region": {'Japan West': ('start', 10, 14)},
     },
     {
         "name": "Sapporo",
@@ -1471,8 +1475,10 @@ CITIES = [
         # 375, 768 and 1200.
         # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('middle', 0, -54)},
         "label_offset": ('middle', 0, -40),
-        "label_offset_by_region": {'Japan West': ('start', 8, 20)},
     },
     {
         "name": "Tokyo",
@@ -3606,6 +3612,9 @@ CITIES = [
         # it refuses a guessed one.
         # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('middle', 0, 38)},
         "label_offset": ('middle', 0, 22),
     },
     {
@@ -3778,8 +3787,8 @@ CITIES = [
     },
     {
         "name": "Kawasaki",
-        "lat": 35.5313,
-        "lon": 139.6969,
+        "lat": 35.6038,
+        "lon": 139.5078,
         "page": "pages/176_Kawasaki_Heatmap.py",
         "coverage": "narrowed",
         "placement": "Joined to address blocks (98.7%)",
@@ -3801,6 +3810,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan East': ('start', 10, 7)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3828,6 +3840,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan East': ('start', 8, 38)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3855,6 +3870,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('end', -10, 22)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3882,6 +3900,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('middle', 0, 38)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3909,6 +3930,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('middle', 0, 22)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3936,6 +3960,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan East': ('end', -10, -7)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3963,6 +3990,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan East': ('middle', 0, -30)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -3990,6 +4020,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('middle', 0, -54)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4017,6 +4050,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('end', -22, -22)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4044,6 +4080,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan East': ('middle', 0, 22)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4071,6 +4110,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('start', 38, 38)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4098,6 +4140,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('start', 10, 7)},
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4152,6 +4197,9 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
+        # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
+        # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {'Japan West': ('middle', 0, 22)},
         "label_offset": ("middle", 0, -22),
     },
 ]

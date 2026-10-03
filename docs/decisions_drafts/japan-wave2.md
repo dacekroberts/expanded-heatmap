@@ -4,6 +4,30 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Japan wave 2's label pass: PROBLEMS 0, and Kawasaki's dot moved off Tokyo's and Yokohama's
+
+- **The fourteen go into the first batch's split** (Japan East from Fukui
+  eastward: Kawasaki, Yokosuka, Toyota, Yokkaichi, Hamamatsu; the rest Japan
+  West), all `label_tier: "minor"`. Their pill widths were measured in the
+  built-in browser with Space Grotesk 600 from Google Fonts, controls
+  Houston, Odense, Kansas City, Hiroshima, Yokohama, Ottawa, Toronto and
+  Kōchi reproduced to 0.1 px (`app/label_competition.py`).
+- **`check_macro_labels.py` went from PROBLEMS 119 to 0 at 375, 768 and
+  1200** by a search with its own scorer (greedy per label, then a joint
+  search over the two pairs no single move freed: Yokohama / Yokosuka and
+  Osaka / Higashiōsaka). Beside the fourteen's own Japan-region offsets, it
+  re-placed four built labels in the Japan views: Kobe (end, -8, 0), Osaka
+  (start, 8, 14), Kyoto (middle, 0, -54), Sakai (middle, 0, 38), and Osaka's
+  pill in East Asia (start, 8, 14), which had covered Hamamatsu's dot.
+- **Kawasaki's macro dot sits at Shin-Yurigaoka (35.6038, 139.5078), inside
+  the city's west, not at Kawasaki Station.** At the station its dot was 3.7
+  px from Yokohama's and 5.9 px from Tokyo's in Japan East, under one marker
+  radius: a new stacked pair, which the check fails by design (the known
+  pairs wait on the owner's UI calls A3, A6, A7 and B6). The alternative was
+  a KNOWN_STACKED entry, a departure for the owner; moving the dot inside the
+  city settles it on measured grounds.
+
+
 ### 2026-10-03 - Shimonoseki built, food only, from the national filings
 
 - **Shimonoseki built (page 189, notice 128): 2,972 storefronts (Food
