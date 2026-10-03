@@ -4,6 +4,29 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Paris back in public visuals; Phase 2 sampler built; Set A is 86 cities (owner)
+
+- **Paris may appear in public presentation pieces** (owner, in the visuals
+  chat, after the cleanup session recorded the owner's ruling on master,
+  `9c8ea3ab`, "Paris stays published after the repository-link gap"). The
+  repository link landed in `bd23a18e`.
+  - A Paris figure carries Île-de-France Mobilités' notice with its two links
+    (notice 24, verbatim) and the snapshot line from
+    `outputs/paris/provenance.json`.
+  - It also carries the INSEE line the Paris page shows.
+  - Supersedes the hold-out of Paris in this file's Phase 0 entry. The other
+    held-out cities are unchanged.
+- **Ring-set counts corrected: Set A is 86 cities, Set B 58.** The Phase 0
+  figure of 84 left out Seoul and Mexico City, the two maps the survey parse
+  did not reach behind the memory gate. Both are Set A, read from their
+  configs. Corrected in the design system's brand book and RingSchematic.
+- **The Phase 2 sampler was built as a private artifact** from published
+  files at `f3409f4b`: `app/cities.py`, `app/ring_shares.json`, the city
+  configs, the committed maps' pin counts, and the site's notices. The
+  analytics session's pilot results were read from `data/_analysis/results/`
+  at `13dceb1d`, and every panel built from them carries the acknowledgement.
+  Its new wording waits for the owner's review.
+
 ### 2026-10-02 - Presentation design system approved (Phase 1): dark-first, every ring figure in Set B's proportions (owner)
 
 - **Every ring figure is drawn in Set B's proportions**, rings at 1/6, 1/3,
