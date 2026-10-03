@@ -818,6 +818,10 @@ Exempt 440, Cooperative Association 176); **wholesale** (NAICS 42); and
 **individual rather than premises licenses** (Motor Vehicle Salesperson 263,
 Auctioneer 15, Tour Guide 3 — a license attached to a person, not a shopfront).
 `Funeral Establishment` (29) is excluded, as funeral services are everywhere.
+`Beauty Booth` (6), a chair rented inside a salon, is excluded too: it is a
+license for the person who works there, not for the premises, the same call
+made on chair renters' and practitioners' own licenses in New York, Calgary,
+Edmonton and San Francisco.
 Pawnbrokers count as retail (4).
 
 **One category is kept despite being ambiguous, and it is a large one.**
