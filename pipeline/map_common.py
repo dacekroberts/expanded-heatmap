@@ -1494,6 +1494,137 @@ LINE_HIGHLIGHT_SCRIPT = """
 })();
 </script>
 """
+# ONE FINGER SCROLLS THE PAGE, TWO MOVE THE MAP, on a touch screen (owner,
+# 2026-10-02, the cooperative gestures Google Maps uses on websites). A city
+# page embeds its map at 1000x650; at 375 px the frame is 333 px wide and
+# nearly a whole phone screen tall, and Leaflet took every one-finger drag as
+# a pan, so a reader whose swipe landed on the map could not scroll past it.
+#
+# On a device whose primary pointer is coarse, map.dragging is disabled.
+# Leaflet then drops `leaflet-touch-drag` from the container, whose CSS falls
+# back to `.leaflet-touch-zoom`'s `touch-action: pan-x pan-y`: the browser
+# scrolls a one-finger swipe, and the map document (no taller than its frame)
+# hands the scroll to the page around it. touchZoom stays on, and Leaflet's
+# pinch handler moves the map with the midpoint of the two fingers, so a
+# two-finger drag pans and a pinch zooms; dragging never has to come back
+# for it (Leaflet's Draggable ignores a second finger anyway). Taps are not
+# drags: dots, tooltips, line picking and every control are unchanged.
+# Mouse, trackpad and a touch laptop with a mouse as its primary pointer keep
+# one-finger (one-button) dragging; a change of primary pointer re-applies.
+#
+# A one-finger drag that starts on the map shows a hint for HINT_MS. It sits
+# in the map container at z-index 900: above the panes and popups (700),
+# under Leaflet's control corners (1000), which hold the zoom buttons, the
+# layer control and the OSM credit, and under the legend and the button row,
+# which are fixed in the body. So it can sit over a control's area without
+# ever covering one. Movement is read in SCREEN coordinates: while the page
+# scrolls, the frame travels with the finger and the finger's position inside
+# the frame barely changes. The text is set on each showing, into a polite
+# live region, and cleared once it has faded.
+#
+# PHONE_FIT_SCRIPT's guard still ends on a touch's pointerdown, including a
+# swipe that only scrolls the page; the load race it repairs resolves within
+# the first seconds (see its notes).
+_TOUCH_GESTURE_TEMPLATE = """
+<style>
+.hm-touch-hint { position: absolute; left: 50%; top: 50%; z-index: 900;
+    transform: translate(-50%, -50%); pointer-events: none; opacity: 0;
+    transition: opacity 0.25s; max-width: calc(100% - 48px); box-sizing: border-box;
+    padding: 8px 14px; border-radius: 4px; text-align: center;
+    font: 600 14px @@FONT_STACK@@;
+    background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@; border: 1px solid @@LIGHT_BORDER@@;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.hm-touch-hint:empty { display: none; }
+.hm-touch-hint.hm-shown { opacity: 1; }
+.dark-base .hm-touch-hint { background: var(--dm-surface); color: var(--dm-text);
+    border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    var TEXT = "Use two fingers to move the map";
+    var HINT_MS = 1500;     // shown this long after the last one-finger move
+    var FADE_MS = 300;      // a little over the CSS transition
+    var MOVE_PX = 10;       // a tap's jitter stays under this
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.dragging || !m.getContainer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var el = m.getContainer();
+        var mq = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var coop = false, disabledHere = false;
+
+        function apply() {
+            coop = !!(mq && mq.matches);
+            if (coop && m.dragging.enabled()) { m.dragging.disable(); disabledHere = true; }
+            else if (!coop && disabledHere) { m.dragging.enable(); disabledHere = false; }
+            window.__HEATMAP_TOUCH = {cooperative: coop, dragging: m.dragging.enabled()};
+        }
+        apply();
+        if (mq) {
+            if (mq.addEventListener) mq.addEventListener("change", apply);
+            else if (mq.addListener) mq.addListener(apply);
+        }
+
+        var hint = document.createElement("div");
+        hint.className = "hm-touch-hint";
+        hint.setAttribute("role", "status");
+        hint.setAttribute("aria-live", "polite");
+        el.appendChild(hint);
+        var hideTimer = null, clearTimer = null;
+        function hide() {
+            clearTimeout(hideTimer);
+            hint.classList.remove("hm-shown");
+            clearTimeout(clearTimer);
+            clearTimer = setTimeout(function () { hint.textContent = ""; }, FADE_MS);
+        }
+        function show() {
+            clearTimeout(clearTimer);
+            if (hint.textContent !== TEXT) hint.textContent = TEXT;
+            hint.classList.add("hm-shown");
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hide, HINT_MS);
+        }
+
+        function pos(t) {
+            return t.screenX || t.screenY ? [t.screenX, t.screenY] : [t.clientX, t.clientY];
+        }
+        var from = null;
+        el.addEventListener("touchstart", function (e) {
+            from = null;
+            if (!coop) return;
+            if (e.touches.length !== 1) { hide(); return; }
+            var t = e.target;
+            if (t && t.closest && t.closest(".leaflet-control")) return;
+            from = pos(e.touches[0]);
+        }, {passive: true});
+        el.addEventListener("touchmove", function (e) {
+            if (!from) return;
+            if (e.touches.length !== 1) { from = null; hide(); return; }
+            var p = pos(e.touches[0]);
+            if (Math.abs(p[0] - from[0]) + Math.abs(p[1] - from[1]) >= MOVE_PX) show();
+        }, {passive: true});
+        el.addEventListener("touchend", function (e) {
+            if (!e.touches.length) from = null;
+        }, {passive: true});
+        el.addEventListener("touchcancel", function () { from = null; }, {passive: true});
+    }
+    start();
+})();
+</script>
+"""
+TOUCH_GESTURE_SCRIPT = (
+    _TOUCH_GESTURE_TEMPLATE
+    .replace("@@FONT_STACK@@", FONT_VAR)
+    .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
+    .replace("@@LIGHT_TEXT@@", LIGHT["text"])
+    .replace("@@LIGHT_BORDER@@", LIGHT["border"])
+)
+assert "@@" not in TOUCH_GESTURE_SCRIPT, "unresolved placeholder in TOUCH_GESTURE_SCRIPT"
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -2772,6 +2903,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See LINE_HIGHLIGHT_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         LINE_HIGHLIGHT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # On a touch screen one finger scrolls the page and two move the map.
+    # See TOUCH_GESTURE_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        TOUCH_GESTURE_SCRIPT.replace("__MAP_NAME__", m.get_name())))
 
     # A declared language: its font order on --hm-font, which every shared
     # block reads through theme.FONT_VAR, so the shared blocks stay identical.
