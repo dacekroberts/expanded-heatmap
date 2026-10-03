@@ -4,6 +4,33 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Presentation design system drafted (Phase 1): colour by meaning, the overview map's mode colours corrected
+
+- **The visuals design system was drafted as a private Design System
+  artifact** for the owner's Phase 1 review. Values come from
+  `pipeline/theme.py`, `.streamlit/config.toml`, `pipeline/taxonomies`
+  (CATEGORY_BUCKETS), `pipeline/map_common.py` (HEAT_GRADIENT) and
+  `app/Overview.py` (MODES, FILLS). Type sizes were measured on the running
+  lean app: h1 44px, h2 36px, h3 28px, h4 24px, body 16px, caption 14px,
+  notices 12.8px.
+- **The overview map's three colours mean MODE, not coverage.** Metro
+  `#0d9488`, light rail `#9333EA`, tram `#C2410C` (`app/Overview.py` MODES).
+  Coverage is the dot's FILL: solid, the lower half, or a hollow ring. The
+  visuals handoff's section 3 had the three colours as coverage tiers, and the
+  first drill sheet repeated it; the drill sheet was corrected.
+- **Two presentation-only additions, everything else from the site:**
+  - a distance-band ramp, `band-1` to `band-4` (slate, light
+    `#2c3e50`/`#4a6680`/`#6d87a3`/`#98adc3`, dark
+    `#e2eaf5`/`#b4c4dc`/`#8499b9`/`#5b6f91`). It passed the dataviz
+    skill's ordinal checks in both themes. Rejected: reusing the heat
+    gradient, which already means density.
+  - Space Mono for measurements. It is the companion face Space Grotesk was
+    drawn from; the site itself has no monospace face.
+- **One source value is kept although it misses 4.5:1:** the light teal
+  `#0d9488` measures 3.7:1 on white. It stays the site's own colour; the
+  design system limits it to marks, focus rings, large text and underlined
+  links.
+
 ### 2026-10-02 - Presentation visuals: Phase 0 survey approved; public hold-outs, Entur's logo, the sampler cities (owner)
 
 - **The Phase 0 survey was approved.** Read-only, at `766abf81`, from a parse
