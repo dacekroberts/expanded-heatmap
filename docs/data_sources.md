@@ -96,7 +96,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
-| Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
+| Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |

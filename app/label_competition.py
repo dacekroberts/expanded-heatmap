@@ -83,7 +83,7 @@ TEXT_WIDTH = {
     "Rome": 37.5,
     # The nine Brazilian cities, 2026-09-24, local app; controls Rome,
     # Amsterdam and Rome's nine.
-    "São Paulo": 65.6, "Rio de Janeiro": 95.6, "Belo Horizonte": 98.5,
+    "São Paulo": 65.6, "Rio de Janeiro": 95.6,
     "Brasília": 49.0, "Salvador": 58.6, "Fortaleza (Regional)": 135.9,
     "Porto Alegre (Regional)": 156.6, "Recife (Regional)": 115.9,
     "Santos (Regional)": 120.1,
@@ -269,6 +269,11 @@ TEXT_WIDTH = {
     # browser pane; controls Newcastle (Regional) 143.1, London, Glasgow.
     "Manchester (Regional)": 153.9, "Birmingham (Regional)": 153.2, "Edinburgh": 69.3,
     "Sheffield": 59.7, "Nottingham (Regional)": 151.7, "Blackpool (Regional)": 139.7,
+    # Belo Horizonte renamed (Regional) by its Contagem extension, 2026-10-03,
+    # local app (lean venv), canvas measureText after document.fonts.load;
+    # controls Belo Horizonte 98.5, Rio de Janeiro, Fortaleza (Regional), Lille
+    # (Regional), Santos (Regional), Recife (Regional).
+    "Belo Horizonte (Regional)": 171.5,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

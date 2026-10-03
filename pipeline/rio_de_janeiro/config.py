@@ -29,7 +29,10 @@ NAME = "Rio de Janeiro (Regional)" if REGIONAL else "Rio de Janeiro"
 
 ROOT = Path(__file__).parent.parent.parent
 DATA_RAW = ROOT / "data" / SLUG / "raw"
-DATA_PROCESSED = ROOT / "data" / SLUG / "processed"
+# data/ is one junction shared by every worktree, and master's checks read
+# processed/: the regional build writes processed/regional/ (ignored) until it lands
+# (docs/session_roles.md; Cleanup, 2026-10-03). Fold back to processed/ on landing.
+DATA_PROCESSED = ROOT / "data" / SLUG / "processed" / ("regional" if REGIONAL else "")
 OUTPUTS = ROOT / "outputs" / SLUG
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"

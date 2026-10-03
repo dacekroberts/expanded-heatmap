@@ -2208,14 +2208,14 @@ Caxias are left out. Not drawn: SuperVia's Japeri, Santa Cruz and Belford Roxo l
 with stations further apart or trains less often; the Santa Teresa tram; the Corcovado
 railway; and the Complexo do Alemão cable car, closed since 2016.
 
-### Belo Horizonte - the same census, and a line opened in July 2026
+### Belo Horizonte (Regional) - the same census, and a line opened in July 2026
 
-**Excluded by what the enumerator wrote** - vacant premises (12,939), vehicle and repair workshops (8,629), offices and professional premises (8,369), parking and storage (7,514), industry and trades (6,001), public, civic and education premises (3,698), places of worship (1,915), events venues (580), accommodation (246) and other non-premises (557); and 1,203 rows with no
+**Excluded by what the enumerator wrote** - vacant premises (17,000), vehicle and repair workshops (11,367), parking and storage (10,463), offices and professional premises (10,437), industry and trades (8,475), public, civic and education premises (4,606), places of worship (2,437), events venues (754), accommodation (325) and other non-premises (776); and 1,694 rows with no
 usable description.
 
 **Funeral homes, wakes, crematoria and cemeteries are excluded**, as in São Paulo.
 
-**Missing rather than excluded** - 27,675 establishments whose description no rule can
+**Missing rather than excluded** - 36,922 establishments whose description no rule can
 read, mostly bare brand or trade names: about four in ten of those that might be storefronts, slightly more near the stations.
 
 **What cannot be excluded: change since 2022.** The census recorded what was trading
@@ -2224,13 +2224,13 @@ during its fieldwork.
 **Not excluded, because the census cannot say it:** food trucks, trailers, kiosks and
 stalls, as in São Paulo.
 
-**Shown, but not named** - at an address that is also a home (36% of dots), the dot
+**Shown, but not named** - at an address that is also a home (40% of dots), the dot
 shows its category, never the enumerator's description.
 
 **One dot for many** - a shopping center or gallery recorded as one entry is one dot.
 
 **Stations.** Metrô BH Linhas 1 and 2 are drawn, Linha 2 running at weekday peak hours
-only since it opened on 3 July 2026; Linha 1's two stations in Contagem are left out.
+only since it opened on 3 July 2026; the map covers Contagem with Belo Horizonte, so Linha 1's two western stations, Eldorado and Novo Eldorado, are counted.
 
 ### Brasília - the same census, where an address names a block
 

@@ -69,7 +69,7 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Rome_Heatmap` | Rome | `rome` | ✓ |
 | `/Sao_Paulo_Heatmap` | São Paulo | `sao_paulo` | ✓ |
 | `/Rio_de_Janeiro_Heatmap` | Rio de Janeiro | `rio_de_janeiro` | ✓ |
-| `/Belo_Horizonte_Heatmap` | Belo Horizonte | `belo_horizonte` | ✓ |
+| `/Belo_Horizonte_Heatmap` | Belo Horizonte (Regional) | `belo_horizonte` | ✓ |
 | `/Brasilia_Heatmap` | Brasília | `brasilia` | ✓ |
 | `/Salvador_Heatmap` | Salvador | `salvador` | ✓ |
 | `/Fortaleza_Heatmap` | Fortaleza (Regional) | `fortaleza` | ✓ |

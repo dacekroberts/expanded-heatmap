@@ -214,6 +214,8 @@ SLUG_OVERRIDES = {
     "Porto Alegre (Regional)": "porto_alegre",
     "Recife (Regional)": "recife",
     "Santos (Regional)": "santos",
+    # Belo Horizonte extended to Contagem (2026-10-03).
+    "Belo Horizonte (Regional)": "belo_horizonte",
     # Taiwan: Taipei + New Taipei as one regional page (2026-09-25).
     "Taipei (Regional)": "taipei",
     # Mexico: four municipios as one regional page (2026-09-27).

@@ -962,7 +962,7 @@ CITIES = [
         "label_offset": ("start", 11, 0),
     },
     {
-        "name": "Belo Horizonte",
+        "name": "Belo Horizonte (Regional)",
         "lat": -19.9167,
         "lon": -43.9345,
         "page": "pages/33_Belo_Horizonte_Heatmap.py",
@@ -977,9 +977,11 @@ CITIES = [
         "region": "South America",
         "country": "Brazil",
         "in_default_view": False,
-        # Above the dot, SCORED rather than assumed: check_macro_labels.py
-        # passes every region at 375, 768 and 1200 with PROBLEMS 0.
-        "label_offset": ('middle', 0, -22),
+        # LEFT of the dot (2026-10-03). "(Regional)" widened the pill to
+        # 171.5 px: above the dot it grazed Brasília's marker, below it
+        # covered Rio's, right of it was clipped 21% at 375 px. Left scores
+        # PROBLEMS 0 at 375, 768 and 1200 with no graze and no clip.
+        "label_offset": ("end", -12, 0),
     },
     {
         "name": "Brasília",

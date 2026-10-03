@@ -474,7 +474,7 @@ _NORWAY = ("Oslo", "Bergen")
 _DENMARK = ("Copenhagen", "Aarhus", "Odense")
 _CZECHIA = ("Prague", "Brno", "Plzeň", "Olomouc", "Ostrava",
             "Liberec (Regional)", "Most (Regional)")
-_BRAZIL = ("São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília",
+_BRAZIL = ("São Paulo", "Rio de Janeiro", "Belo Horizonte (Regional)", "Brasília",
            "Salvador", "Fortaleza (Regional)", "Porto Alegre (Regional)",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",

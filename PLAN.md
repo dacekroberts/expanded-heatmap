@@ -424,8 +424,12 @@ Desktop is unaffected — the label is fully visible there.
         passes; Campos Elíseos, Jardim Primavera and Saracuruna, beyond it,
         fail (search-level: SuperVia's notices; no timetable feed found), so
         the line is drawn to its end and only those three are left unringed.
-      - **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
+      - [x] **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
         Eldorado; CNEFE 13,011. Belo Horizonte becomes "(Regional)".
+        **Built 2026-10-03 on `extensions-build`** (22 stations, 58,552
+        storefronts), held for the owner's review time; its regional
+        processed files sit in `data/belo_horizonte/processed/regional/`
+        until it lands, then fold back to `processed/`.
       - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
         and `data/duque_de_caxias/raw/` (and the staging worktree's).
     - [ ] **Vancouver (Regional) + Burnaby, New Westminster, Coquitlam,

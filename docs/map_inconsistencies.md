@@ -246,8 +246,8 @@ others most of the city is beyond walking distance of the network. That depends 
 how far the network reaches, not on the data.
 - **90% or more inside the rings:** Barcelona 100%, Paris 98%, Osaka 98%, Tokyo 98%
   (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
-- **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte
-  18%, Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
+- **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte (Regional) 16%,
+  Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
   Recife 23%, Los Angeles 24%, San Diego 24%, Birmingham (Regional) 17%.
 - **Reason:** network extent against the area in scope. Share = in-ring heat points ÷
   all-storefront heat points in each committed map.
@@ -624,7 +624,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Brazil** | | | | | |
 | São Paulo | Metrô L1–5, L15 (monorail) + CPTM L9 | CPTM 7, 8, 10–13; L6, L17 (building) | OpenStreetMap (GeoSampa for status) | Município | 2 / 0 |
 | Rio de Janeiro | MetrôRio 1, 2, 4 + VLT (4) + SuperVia Deodoro, Saracuruna | Other SuperVia lines; Santa Teresa tram; Corcovado | DATA.RIO (metro) + OpenStreetMap | Município | 3 / 0 |
-| Belo Horizonte | Metrô L1, L2 | Vitória-Minas (intercity) | OpenStreetMap | Município | 2 / 0 |
+| Belo Horizonte (Regional) | Metrô L1, L2 | Vitória-Minas (intercity) | OpenStreetMap | 2 municípios | 0 / 0 |
 | Brasília | Metrô Verde, Laranja | 2 stations under construction | OpenStreetMap (IPEDF for status) | Federal District | 0 / 0 |
 | Salvador | Metrô L1, L2 | — | OpenStreetMap | Município | 1 / 0 |
 | Fortaleza (Regional) | Metrofor Linha Sul | 3 diesel lines | OpenStreetMap | 4 municípios | 0 / 0 |
@@ -801,7 +801,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Brazil** (all nine) | Census of addresses (2022) | IBGE CNEFE | Free-text keyword rules | see below | A third to a half of plausible storefronts unreadable |
 | São Paulo | | | | 25,968 / 15,331 / 8,256 | about 1/3 unreadable |
 | Rio de Janeiro | | | | 15,085 / 10,364 / 4,784 | about 1/3 |
-| Belo Horizonte | | | | 4,634 / 2,355 / 1,404 | about 4 in 10 |
+| Belo Horizonte (Regional) | | | | 5,105 / 2,616 / 1,625 | about 4 in 10 |
 | Brasília | | | | 2,808 / 1,246 / 1,009 | about 4 in 10 |
 | Salvador | | | | 5,131 / 3,312 / 1,613 | about 1/3 |
 | Fortaleza (Regional) | | | | 5,255 / 1,964 / 1,295 | about 4 in 10 |
@@ -1144,7 +1144,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Brazil** | | | | | | |
 | São Paulo | 2022 census (file 2024-05-20) | B | 0.6 mi | Yes | 23% | Enumerator's description; category only at homes (37%) |
 | Rio de Janeiro | same | B | 0.6 mi | Yes | 28% | same (55%) |
-| Belo Horizonte | same | B | 0.6 mi | Yes | 18% | same (36%) |
+| Belo Horizonte (Regional) | same | B | 0.6 mi | Yes | 16% | same (40%) |
 | Brasília | same | B | 0.6 mi | Yes | 14% | same (69%) |
 | Salvador | same | B | 0.6 mi | Yes | 19% | same (56%) |
 | Fortaleza (Regional) | same | B | 0.6 mi | Yes | 14% | same (54%) |

@@ -27,7 +27,7 @@ Mapped so far:
 - **Denmark:** Copenhagen, Aarhus, Odense
 - **Czechia:** Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional)
 - **Netherlands:** Amsterdam, Rotterdam, Den Haag
-- **Brazil:** São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional)
+- **Brazil:** São Paulo, Rio de Janeiro, Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional)
 - **Hong Kong:** Hong Kong
 - **Latvia:** Riga, Liepāja, Daugavpils
 - **South Korea:** Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang

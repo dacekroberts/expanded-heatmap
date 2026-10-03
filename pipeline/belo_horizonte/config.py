@@ -14,12 +14,15 @@ SLUG = "belo_horizonte"
 # and Novo Eldorado (owner, 2026-09-27; released 2026-10-02,
 # docs/handoff_extensions_2026-10-02.md). False reproduces the city-alone build
 # byte for byte, which is how the extension was proved before it was switched on.
-REGIONAL = False
+REGIONAL = True
 NAME = "Belo Horizonte (Regional)" if REGIONAL else "Belo Horizonte"
 
 ROOT = Path(__file__).parent.parent.parent
 DATA_RAW = ROOT / "data" / SLUG / "raw"
-DATA_PROCESSED = ROOT / "data" / SLUG / "processed"
+# data/ is one junction shared by every worktree, and master's checks read
+# processed/: the regional build writes processed/regional/ (ignored) until it lands
+# (docs/session_roles.md; Cleanup, 2026-10-03). Fold back to processed/ on landing.
+DATA_PROCESSED = ROOT / "data" / SLUG / "processed" / ("regional" if REGIONAL else "")
 OUTPUTS = ROOT / "outputs" / SLUG
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
