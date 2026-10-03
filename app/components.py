@@ -2229,37 +2229,25 @@ _NON_AFFILIATION = (
     "riders know it. No agency logo, wordmark or route symbol is reproduced."
 )
 
-# Two cities' sources neither grant nor forbid reuse, and this says so on the
-# page rather than waiting on third parties to answer. The owner's decision
-# (2026-09-21): disclose the gap alongside the attributions, and commit in
-# advance to removing a city if its publisher's position turns out not to
-# permit this use.
-#
-# That last part is BROADER than the standing removal commitment in
-# docs/data_sources.md, which triggers on a publisher *asking*. This one
-# triggers on finding out - no request needed. Keep the wording here
-# consistent with that document and with docs/excluded_categories.md; all
-# three are meant to say the same thing.
+# The sources that neither grant nor forbid reuse, read in this project's
+# favor, named in one paragraph (owner, 2026-10-02; first written 2026-09-21
+# for Philadelphia alone). The commitment is broader than the standing removal
+# commitment in docs/data_sources.md, which triggers on a publisher asking:
+# here a publisher saying the use is not permitted is enough. Keep the wording
+# consistent with docs/data_sources.md and docs/excluded_categories.md; all
+# three say the same thing. Each source's full reading is on About the Data.
 _UNSETTLED_TERMS = (
-    "**One city rests on terms that are unresolved, and that is stated rather "
-    "than glossed.** Philadelphia's business licenses and city limits carry "
-    "the “City of Philadelphia License”, which reserves the City's "
-    "rights without granting any — and the dataset page also binds a "
-    "reader to the City's separate Terms of Use, which permit residents to "
-    "print single pages of the City's website and otherwise state that "
-    "“distribution or republication in any other form or for any other "
-    "purpose … and any modification whatsoever, are strictly prohibited "
-    "without the prior written permission of the City”. Read literally "
-    "and applied to a dataset, that would not permit this map, which filters "
-    "and redraws what it publishes. Read as what it appears to be — terms "
-    "written for web pages, sitting beside a dataset license that contains no "
-    "such prohibition, under an Open Data Program whose purpose is public "
-    "reuse — it would. **That question is open, it has not been resolved "
-    "in this project's favor, and if the City confirms the restrictive "
-    "reading Philadelphia comes off this site** — the same way a request "
-    "about a single listing is honored rather than argued. A written request "
-    "for the City's position was sent on 21 September 2026. Whatever comes "
-    "back, silence will not be treated as permission."
+    "**Some sources neither grant nor forbid reuse, and this site reads them "
+    "in its favor.** Philadelphia's data carries a City license that grants "
+    "nothing and website terms that forbid republication; the City was asked "
+    "for its position on 21 September 2026 and has not replied. Sources for "
+    "Miami, Tucson, Dallas, Seattle (King County, Bellevue and Snohomish "
+    "County), Amsterdam, Den Haag, Stockholm, Bucharest and Daegu carry no "
+    "license, or terms written for a website rather than its data, and "
+    "Brazil's census addresses rest on federal law rather than a license. If "
+    "any publisher says this use is not permitted, that city comes off the "
+    "site without being asked twice, and silence is never treated as "
+    "permission."
 )
 
 # MTA's terms and WMATA's §6 both forbid stating or implying that the data an
