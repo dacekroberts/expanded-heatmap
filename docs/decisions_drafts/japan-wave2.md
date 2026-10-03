@@ -4,6 +4,50 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Ōtsu built, the city's food list and three registers
+
+- **Ōtsu built (page 183, notice 122): 4,508 storefronts (Food service
+  2,645, Food shops 868, Personal services 995) around 40 stations on 4
+  lines, 74.7% of them in a ring (3,367).** The city's monthly food list as
+  of 2026-08-31 (`od_2608.csv`, 4,499 rows, read from its page's current link)
+  and its BODIK barber, beauty and laundry lists of the same date (187, 618,
+  202), joined to MLIT's address blocks for 25201: of 4,658 storefront rows,
+  4,437 at the block (95.3%), 220 at a town centre (4.7%), 1 unplaced (the
+  brief's screen 94.7 / 5.3 / 0.0). 149 repeat permits shown once. Out by
+  rule: 176 manufacturing and other non-counter types (1 of them
+  複合型そうざい製造業, held out), 26 cooking vending machines. Not a premises:
+  646 市内一円 food rows (641 restaurants).
+- The 菓子 / そうざい factory share: 15 of 605 (2.5%), kept (owner,
+  2026-09-24). No 業態 column, so no deli-by-form row is touched.
+- **Privacy verdict: publish.** `check_personal_exposure.py otsu`: the Japan
+  pass prints 0; 3 pins show their permit type (3 flagged rows: food 1, barber
+  1, beauty 1; the check counts 2 trade names). Without the `coop` rule it was
+  5 rows and 5 pins: 2 food rows are a cooperative's own name.
+- **Rail:** N02-25; 40 stations (Keihan 24 by line: Ishiyama-Sakamoto 21,
+  Keishin 4, びわ湖浜大津 shared; JR 16: Kosei 12, Biwako 4). The Sakamoto
+  Cable left out (Kobe's funicular rule), not in `excluded_stations.csv`.
+  **Median nearest-station gap on the 40 drawn stations: 577 m**, as the brief
+  measured, outside the 540-570 m band: standard rings. Keihan-zeze / Zeze (54
+  m) and Keihan-ishiyama / Ishiyama (95 m) are separate N02 groups of
+  different names, kept apart. 5 excluded: 京都市山科区 4 (named through
+  `N03_NEIGHBOR_PREFS` = Kyoto, 26), 草津市 1. Gate 3: Keihan's station index
+  gives the Ishiyama-Sakamoto Line 21, exact. English names: OSM's 70 objects
+  name every Keihan stop as railway=station, so no tram-stop file is declared;
+  4 cited overrides (Horai, Omi-Maiko, Otsu: macrons; Ogoto-onsen). Colours
+  from `line_colour_search.py` (closest pair 26.7; the Keishin and Biwako
+  lines come out as Kyoto's own colours for them).
+- **Independent check (GSI address search, 100 block hits):** median 39 m
+  from the block point, 91 within 100 m, 99 within 250 m, max 797 m.
+- **Economic Census control: 2.59** (2,645 Food service pins against 1,021
+  飲食店 establishments), above the built cities' 1.56-1.92, as the brief
+  predicted (2.6). The official FY2024 in-force count (3,115) is itself 3.05
+  per census establishment; the pins are 85% of it. Built on the brief's
+  reading.
+- **Prose proposals for review time**: on the page, "The Shinkansen is not
+  drawn; it crosses the city without a station." (Kawasaki's proposal again);
+  "The Sakamoto cable car, which is a sightseeing line, is not drawn." (the
+  template's sentence in the singular); the same two in What Is Excluded.
+
 ### 2026-10-03 - Yokkaichi built, the city's five lists
 
 - **Yokkaichi built (page 182, notice 121): 4,308 storefronts (Food service

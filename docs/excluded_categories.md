@@ -3842,6 +3842,38 @@ line.
 - Left out: 12 stations beyond it: 4 in Komono, 3 in Suzuka, 2 each in Inabe
   and Asahi, and 1 in Kawagoe.
 
+### Ōtsu - the city's food list and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, such as convenience stores and
+  greengrocers: they notify the city rather than hold a permit, and the list
+  holds permits only.
+- 646 food trucks and stalls, licensed for anywhere in the city (市内一円) with
+  no fixed place.
+- 176 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 26 vending machines that cook (調理の機能を有する自動販売機).
+
+**Counted** - every food permit in force on 31 August 2026, and every barber,
+beauty salon and laundry on the city's lists of the same date. 15 of the 605
+bakery, confectioner and deli rows (2.5%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 149 repeat permits are shown once.
+
+**Not placed** - 1 row. Another 220 sit at their town's center.
+
+**Names not shown** - 3 pins show their permit type: the trade name is the
+operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it: 4 in Kyoto's Yamashina Ward and 1 in
+  Kusatsu.
+- The Shinkansen is not drawn; it crosses the city without a station. The
+  Sakamoto cable car, which is a sightseeing line, is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

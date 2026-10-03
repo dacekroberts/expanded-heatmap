@@ -753,5 +753,10 @@
   "in_ring": 3185,
   "all": 4308,
   "map_blob": "4d3966d161af902dbe308803083392ea18b8be4c"
+ },
+ "otsu": {
+  "in_ring": 3367,
+  "all": 4508,
+  "map_blob": "35597538042a3c58270c19a1b4fc6cccdc61fbd0"
  }
 }
