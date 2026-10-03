@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**383 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**384 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-02**
 
@@ -70,6 +70,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Seattle (Regional): the owner's two calls applied, 14,431 storefronts; both builds' wording and modes approved](#2026-10-02---seattle-regional-the-owners-two-calls-applied-14431-storefronts-both-builds-wording-and-modes-approved)
 - [check_no_fetch_in_steps.py follows every module a step imports](#2026-10-02---check_no_fetch_in_stepspy-follows-every-module-a-step-imports)
 - [The footer's unsettled-terms paragraph names every permissive reading; the notices drawn as one block (owner)](#2026-10-02---the-footers-unsettled-terms-paragraph-names-every-permissive-reading-the-notices-drawn-as-one-block-owner)
+- [SanGIS's indemnity and general release accepted for San Diego's boundaries and parcels (owner)](#2026-10-02---sangiss-indemnity-and-general-release-accepted-for-san-diegos-boundaries-and-parcels-owner)
 
 **2026-10-01**
 
@@ -16063,3 +16064,18 @@ Recorded by the cleanup session from the Main Building Session's findings of
   - The Overview's figures derive from every city's data, which may reach the
     WORK-class terms.
   - That is the owner's next call. The table is with the cleanup session.
+
+### 2026-10-02 - SanGIS's indemnity and general release accepted for San Diego's boundaries and parcels (owner)
+
+- **The finding**, from staging's licence read (`docs/licence_positions.md`,
+  2026-10-02): San Diego's municipal boundaries and parcels come from SanGIS
+  (SANDAG only hosts them). Their terms carry an uncapped indemnity and a
+  general release, and neither had been recorded as accepted.
+- **The owner accepted both** for the boundaries and the parcels
+  (2026-10-02, "1 accept").
+- **No credit:** the terms prohibit one at this scale.
+- **Still to do:**
+  - `docs/data_sources/united-states.md` names the publisher as SANDAG; it
+    should say SanGIS.
+  - The row records the acceptance. It lands with the follow-up that adds
+    staging's eight licence rows (PLAN).

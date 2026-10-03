@@ -929,6 +929,31 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
+- [ ] **Staging's eight licence reads (2026-10-02, master 6be4f460;
+  `docs/licence_positions.md`'s update section): rows and credits to add
+  AFTER the per-city notices branch lands** (the credits belong in its
+  structure):
+  - D.C. Basic Business License: CC BY 4.0. Credit DLCP, link the licence and
+    the dataset, and say the data was modified.
+  - DC Boundary: CC BY 4.0. Credit OCTO (DC GIS); reprojected, not drawn.
+  - Dublin NTA GTFS: CC BY 4.0. Its sentence verbatim, the licence link,
+    "three routes extracted and redrawn; line colors are this map's own", "as
+    is", no endorsement, linked to data.gov.ie. The developer portal's
+    indemnity is NOT accepted (owner).
+  - geo.api.gouv.fr (26 French cities): both the ODbL §4.3 line and the
+    Licence Ouverte line (owner). ODbL §4.6 rests on the repository link (the
+    header-icon item).
+  - MassGIS (Boston): its credit verbatim, the office name as published.
+  - LA County Planning boundaries: permitted, no credit required; never call
+    the outline a legal boundary.
+  - SanGIS municipal boundaries (San Diego, hosted by SANDAG): no credit (the
+    terms prohibit one at this scale). The owner ACCEPTED the uncapped
+    indemnity and general release for these and for the SanGIS parcels
+    (2026-10-02). united-states.md wrongly names SANDAG as the publisher.
+  - CARTO basemap (Overview): a licence-read on keyless use is running (owner:
+    "make sure we can use the map at all"; replacing it would be a big
+    change). The on-map link should go to carto.com/attribution/, and an
+    OpenMapTiles credit may be owed.
 - [ ] **Licence gaps from staging's ranking** (`docs/licence_positions.md`,
   5813011a; its notice numbers were stripped as unreliable, so verify each
   item against the code first). The first two are the most visible:
