@@ -133,9 +133,14 @@ a rule, not before obeying one.
   Never ask for justification or weigh it against what the licence permits.
   Keep `docs/data_sources.md` and `docs/excluded_categories.md` consistent on
   it. [#removal]
-- **Ridership and deep analysis are out of scope** until asked (see
+- **Ridership is out of scope** until asked (see
   `docs/project_context.md`). Flag scope additions rather than building
   them.
+- **AI-driven deep analysis is permitted. Hard line: every analysis must
+  always be accompanied by an AI-driven acknowledgement.** Analyses are
+  private: shown only to the owner, never on the website (`app/`,
+  `outputs/` or any deployed page) and never in public-facing material
+  unless the owner says otherwise for a specific piece (owner, 2026-10-02).
 
 ## Working rules
 

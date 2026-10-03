@@ -1,0 +1,356 @@
+# DECISIONS drafts - visuals (`visual-handoff`)
+
+Entries for `DECISIONS.md`, newest first, each written exactly as it should
+land (the `decisions-entry` format). Cleanup folds them in when the owner
+hands the drafts off, then deletes this file (owner, 2026-09-30).
+
+### 2026-10-02 - Visual exports moved to a dedicated visuals/ folder (owner)
+
+- **The exports moved from `data/_handoff/visual/exports/` to `visuals/` at
+  the main checkout's root**, at the owner's request for a folder holding
+  only these visuals.
+- **`/visuals/` was added to `.git/info/exclude`**, the clone-local ignore
+  list that every worktree shares, so no tracked `.gitignore` changed.
+  `scripts/check_stray_downloads.py` does not report it.
+- The index and the folder's README now name the new location.
+- Supersedes the export location in the entry below.
+
+### 2026-10-02 - Phase 6 approved; QR card, poster and Phase 7 index and exports (owner)
+
+- **Phase 6, its new wording and the LinkedIn post text were approved**
+  (owner).
+- **The QR leave-behind (3.5 x 2 in) and the poster (24 x 36 in) were
+  built.** `segno` was installed for the QR code with the owner's OK. It is
+  used in scratch only and is not in either requirements file. The QR
+  encodes the site's address, dark on a white chip. Neither piece shows a
+  city's figures, so neither owes a city credit.
+- **The AI-driven acknowledgement appears once at the top and once at the
+  bottom of a private page**, not on every chart (owner, for the analytics
+  session's pages, applied here). The sampler's private section was
+  changed to match.
+- **Phase 7: the visuals index is a private Claude Docs document.** It holds
+  every piece with its link, size, use and status; the rules; the metrics;
+  every source with its location; the exports; and the open items.
+- **Exports go to `data/_handoff/visual/exports/`** in the main checkout:
+  board and card PNGs, print PDFs, caption files, data snapshots, and the
+  generators with a README. The existing `data/_*/` rule keeps it out of
+  git, so no ignore rule was added (the handoff asked the owner first
+  before adding one). Rejected: a new `visuals/` folder, which would have
+  needed that rule. The owner is asked to confirm the location in the index.
+
+### 2026-10-02 - Phase 6 deck, social and print pieces drafted
+
+- **Phase 5 was approved**, with its wording and the public set's
+  exclusions (owner).
+- **An 11-slide deck** on the Slides type, with the approved design system
+  installed. Its "why the maps differ", share and "what it can't say" slides
+  quote the live `app/pages/Why_the_Maps_Differ.py` and `app/Overview.py`
+  word for word, including the site's own share range ("about 6% to 100%",
+  computed the way that page computes it).
+- **A six-frame LinkedIn carousel, a single post and a US Letter one-page
+  sheet** were added to the project-pieces canvas. The GitHub preview and
+  README banner are the Phase 3 boards.
+- **Every piece that shows a city's figures carries that city's card-face
+  credits** and a pointer to each city's page for the full credits:
+  frame 4 and the deck's three-cities slide (San Diego, Toronto, Tokyo).
+- **The QR leave-behind and the poster are not built.** The QR card needs a
+  QR library, which is not installed and is a download for the owner to
+  approve; the poster is optional in the handoff.
+
+### 2026-10-02 - Phase 5 multi-city views drafted, with country views for countries of three or more cities (owner)
+
+- **Phase 4 and Fukui's card line were approved** (owner).
+- **The multi-city views show within-city shapes only.** One panel per city
+  of band shares, adding to 100%, grouped by ring set and then by record
+  kind, each panel badged with mode, coverage and categories. The share of
+  storefronts near a station is a labeled dot plot, alphabetical within each
+  ring set, never ranked. Both views carry the approved "How to read these"
+  card.
+- **A public set of 122 cities and a private all-cities view.** Left out of
+  the public set:
+  - the eight cities with open terms questions (Philadelphia, Seattle
+    (Regional), Barcelona, Dublin, Den Haag, Bucharest, Milan, Miami
+    (Regional));
+  - the 14 cities the owner took off the cards, all except Paris.
+
+  Rejected: treating the off-card cities as fine for multi-city pieces. The
+  reasons that took them off the cards (LA Metro's advertisement clause,
+  WMATA's application scope, the Korean permission scope for posts) reach
+  any shared image.
+- **Country views were added at the owner's suggestion**: every country with
+  three or more cities in the set shown (11 countries in the public set,
+  15 in all). Each shows its cities as dots with no basemap, its record
+  kinds, and its band-share panels grouped by ring set.
+
+### 2026-10-02 - City cards generated: 129 cities, 15 off the cards, card-face credits per the cleanup session's reading (owner)
+
+- **129 cards were generated, one per city on the card list.** The owner's
+  calls reached this session through the cleanup session and were
+  confirmed here.
+  - **Off the cards:** Paris (Licence Mobilités Art. 5.4: a static image
+    can neither link nor hold the licence text); Los Angeles; Washington
+    D.C.; Daegu, Busan and the ten SEMAS cities (checked against notice 68's
+    city tags).
+  - Paris stays allowed in other public pieces.
+  - The nine Brazilian cities came off the public hold-out list for
+    everything.
+- **Every card carries** "Figures derived by this project; not official
+  statistics. Data as of <date>." (owner). The date is the data_age's own
+  date, its date range, or the period it names.
+- **The OpenStreetMap line also goes on 16 cities missing from the branch's
+  `_OSM_RAIL`:** the ten SEMAS cities, Daegu, Busan, Sydney, Melbourne,
+  Buenos Aires and Seattle (Regional). Their rail is OSM per
+  `docs/data_sources/`. The site's own list is fixed at the next landing.
+- **Card-face credits, verbatim from the branch's `_NOTICES` where the
+  notice is verbatim:**
+  - San Francisco: SFMTA's clause-12 notice plus its second paragraph, on the
+    cautious reading. The second paragraph is from the license text and is
+    not yet on the site.
+  - Vancouver (Regional): TransLink's legend and the Vancouver, Surrey and BC
+    OGL sentences. BC is kept on the cautious reading, since its layer scopes
+    the regional stations.
+  - Calgary, Toronto, Ottawa: their OGL sentences.
+  - The three Mexican cities: the INEGI line.
+  - Madrid: the CRTM line.
+  - The six French ODbL cities: the notice's first sentence, the dataset
+    URI and the ODbL URL. Angers stays mark-free.
+  - Oslo and Bergen: Entur.
+  - The three Taiwanese cities: the OGDL provider lines with each file's
+    edition, and the statement. Taipei Metro is off the card (owner).
+  - Hong Kong: its line. Buenos Aires: its line, at the OSM line's size.
+  - Tokyo: Taitō's line. Fukui: "This card is offered under CC BY-SA 4.0".
+- **In the caption only:** everything else, including the eight Ordnance
+  Survey cities (owner) and Kyoto's 京都市オープンデータ. Chicago's and Kansas
+  City's full paragraphs sit in their captions, and those two cards are
+  flagged as unfit for platforms with short captions.
+
+### 2026-10-02 - City card layout approved; Tbilisi's card carries თბილისი (owner)
+
+- **The card layout and its new wording were approved** (owner): the
+  eyebrow, "X% of N mapped", "Set A rings" / "Set B rings", "Full credits:",
+  and the "NOT FOR PUBLIC USE · OPEN TERMS QUESTION" chip.
+- **Tbilisi's card shows თბილისი** (owner), set in Noto Sans Georgian with
+  `lang="ka"`, since Space Grotesk has no Georgian glyphs. Rejected: the
+  Latin name alone.
+
+### 2026-10-02 - Phase 4 city cards: credit placement, OpenStreetMap rule, site address (owner); spot-check set built
+
+- **Phase 3 approved** (owner).
+- **Card credits split between the card face and a caption** (cleanup
+  session's reading of the terms, 2026-10-02; owner's calls):
+  - **On the face:**
+    - "© OpenStreetMap contributors · openstreetmap.org/copyright" for every
+      city whose rail comes from OpenStreetMap: the 52 cities in `_OSM_RAIL`
+      on branch `claude/nice-boyd-51dea8`. The station counts and distance
+      bands are computed from OSM's stations, so the credit applies though
+      no map is drawn.
+    - Taitō ward's own short form on Tokyo's card (owner, through cleanup).
+    - Entur's logo and line on Oslo and Bergen.
+    - "Full credits:" and the city page's address on the site, which the
+      owner allowed to be printed.
+  - **In the caption:** every other notice, in full, from that branch's
+    `city_notices()` (the approved per-page plan, landing at review time),
+    plus the page's own source lines (SIRENE's "Source : Insee").
+  - Rejected: the OSM credit on every card. The owner's rule is "only where
+    its data is drawn", and a card for a GTFS city draws nothing from OSM.
+- **Native-script names** come from each city's config: `MUNICIPALITY`
+  (Japan), `BOUNDARY_NAME` (Korea), `CITY_NAME_ZH` and the address
+  prefixes (Taiwan). Hong Kong's 香港 is not in its config; it was supplied
+  as the city's own name.
+- **A spot-check set of 49 cards was built.** It holds every East Asian
+  city plus San Diego, Philadelphia, Toronto, Paris, Berlin, Birmingham,
+  Oslo, Glasgow, Pittsburgh, Amsterdam and the three smallest networks. In
+  every card, pins equal `ring_shares.json` and the layer counts equal the
+  bucket counts.
+  - Cities with an open terms question carry a "not for public use" chip.
+  - Generation of all 144 waits for cleanup's per-notice placement table
+    for the non-Japanese cities.
+
+### 2026-10-02 - Phase 3 project-level pieces drafted on a private design canvas
+
+- **Nine artboards, generated from the sampler's data** (built from
+  published files at `f3409f4b`, Set A 86 cities and Set B 58 asserted):
+  - the title card at 1280x640, the README banner at 1280x320 and a video
+    thumbnail at 1280x720;
+  - the method explainer and a two-ring-sets slide;
+  - "Why the city maps differ" (nine tiles from
+    `docs/map_inconsistencies.md`) and the taxonomy explainer (50
+    classifications);
+  - the coverage overview, with no basemap and Europe and East Asia
+    insets;
+  - the cut-down data funnel.
+- **The funnel uses San Diego, Toronto and Paris; Tokyo waits** for the
+  cleanup session's reading of whether its credit may sit in a caption.
+- **Nothing on the canvas draws OpenStreetMap data**, so no OSM credit
+  appears. The coverage overview shows only city positions and tiers from
+  `app/cities.py`.
+
+### 2026-10-02 - Phase 2 sampler approved: no basemap for now, a cut-down funnel, every city labeled (owner)
+
+- **The sampler and all its new wording were approved as written**, and
+  Phase 3 (project-level pieces) started.
+- **The coverage overview stays without a basemap** until the owner decides
+  which map is final. Rejected for now: the CARTO basemap of the site's
+  overview, which would add the CARTO and OpenStreetMap credits.
+- **The data funnel ships cut down**: storefronts mapped, then near a
+  station, with register rows reading "not published". It is replaced
+  when raw register counts are published for every city.
+- **The distribution view is two scrolling alphabetical columns**, one per
+  ring set, every city labeled, never ranked.
+- **Tokyo's card credit (a short form on the card, the full notice in a
+  caption) went to the cleanup session as a license question** at the
+  owner's request. Cards are not generated at scale until it is answered.
+
+### 2026-10-02 - Paris back in public visuals; Phase 2 sampler built; Set A is 86 cities (owner)
+
+- **Paris may appear in public presentation pieces** (owner, in the visuals
+  chat, after the cleanup session recorded the owner's ruling on master,
+  `9c8ea3ab`, "Paris stays published after the repository-link gap"). The
+  repository link landed in `bd23a18e`.
+  - A Paris figure carries Île-de-France Mobilités' notice with its two links
+    (notice 24, verbatim) and the snapshot line from
+    `outputs/paris/provenance.json`.
+  - It also carries the INSEE line the Paris page shows.
+  - Supersedes the hold-out of Paris in this file's Phase 0 entry. The other
+    held-out cities are unchanged.
+- **Ring-set counts corrected: Set A is 86 cities, Set B 58.** The Phase 0
+  figure of 84 left out Seoul and Mexico City, the two maps the survey parse
+  did not reach behind the memory gate. Both are Set A, read from their
+  configs. Corrected in the design system's brand book and RingSchematic.
+- **The Phase 2 sampler was built as a private artifact** from published
+  files at `f3409f4b`: `app/cities.py`, `app/ring_shares.json`, the city
+  configs, the committed maps' pin counts, and the site's notices. The
+  analytics session's pilot results were read from `data/_analysis/results/`
+  at `13dceb1d`, and every panel built from them carries the acknowledgement.
+  Its new wording waits for the owner's review.
+
+### 2026-10-02 - Presentation design system approved (Phase 1): dark-first, every ring figure in Set B's proportions (owner)
+
+- **Every ring figure is drawn in Set B's proportions**, rings at 1/6, 1/3,
+  2/3 and 1 of the outer radius, whatever the city's ring set (owner, choosing
+  among three readings of "drop type A for the more visually favorable B").
+  - Set B (0.05/0.1/0.2/0.3 mi) is then to scale. A Set A figure keeps its
+    real labels (0.1/0.2/0.3/0.6 mi) and says "not to scale".
+  - Replaces the drafted Set A scale break. Set A at its true 1:2:3:6
+    proportions let the outer ring dominate.
+  - Rejected: showing only Set B diagrams, and featuring only the 58 Set B
+    cities, which would change which cities appear rather than how rings are
+    drawn.
+  - All 144 cities keep their real edges and counts.
+- **Presentation pieces are dark-first, on the midnight slate base.** `dark`
+  is the design system's first theme; light remains.
+- **The brand book was approved, in American spelling.** The comparability
+  callout reuses `docs/map_inconsistencies.md` section 1's reader sentence
+  with "license".
+- **Space Mono and the slate band ramp were approved** as presentation-only
+  additions.
+- **The analysis acknowledgement was confirmed here, word for word:** "AI-driven analysis. Generated by an AI system (Claude) from this project's published map data, with the same method and rules for every city. It describes associations, not causes. Private: not part of the published site."
+
+### 2026-10-02 - Presentation design system drafted (Phase 1): colour by meaning, the overview map's mode colours corrected
+
+- **The visuals design system was drafted as a private Design System
+  artifact** for the owner's Phase 1 review. Values come from
+  `pipeline/theme.py`, `.streamlit/config.toml`, `pipeline/taxonomies`
+  (CATEGORY_BUCKETS), `pipeline/map_common.py` (HEAT_GRADIENT) and
+  `app/Overview.py` (MODES, FILLS). Type sizes were measured on the running
+  lean app: h1 44px, h2 36px, h3 28px, h4 24px, body 16px, caption 14px,
+  notices 12.8px.
+- **The overview map's three colours mean MODE, not coverage.** Metro
+  `#0d9488`, light rail `#9333EA`, tram `#C2410C` (`app/Overview.py` MODES).
+  Coverage is the dot's FILL: solid, the lower half, or a hollow ring. The
+  visuals handoff's section 3 had the three colours as coverage tiers, and the
+  first drill sheet repeated it; the drill sheet was corrected.
+- **Two presentation-only additions, everything else from the site:**
+  - a distance-band ramp, `band-1` to `band-4` (slate, light
+    `#2c3e50`/`#4a6680`/`#6d87a3`/`#98adc3`, dark
+    `#e2eaf5`/`#b4c4dc`/`#8499b9`/`#5b6f91`). It passed the dataviz
+    skill's ordinal checks in both themes. Rejected: reusing the heat
+    gradient, which already means density.
+  - Space Mono for measurements. It is the companion face Space Grotesk was
+    drawn from; the site itself has no monospace face.
+- **One source value is kept although it misses 4.5:1:** the light teal
+  `#0d9488` measures 3.7:1 on white. It stays the site's own colour; the
+  design system limits it to marks, focus rings, large text and underlined
+  links.
+
+### 2026-10-02 - Presentation visuals: Phase 0 survey approved; public hold-outs, Entur's logo, the sampler cities (owner)
+
+- **The Phase 0 survey was approved.** Read-only, at `766abf81`, from a parse
+  of every committed map (scratch scripts, nothing in `outputs/` or `app/`).
+  - 144 cities. In every map parsed, pins equalled the first heat layer and
+    `app/ring_shares.json` `in_ring`. The second heat layer equalled
+    `ring_shares.json` `all` and `app/macro_facts.json`.
+  - Ring sets: 84 cities on [0, 0.1, 0.2, 0.3, 0.6] mi, 58 on
+    [0, 0.05, 0.1, 0.2, 0.3] mi. `docs/map_inconsistencies.md` section 6 lists
+    11, and `pipeline/new_york/config.py` still calls New York the only one.
+    Both reported, not changed.
+  - The pin row decoded as [lat, lon, name, classification index, nearest
+    station index, ring band index] (`pipeline/map_common.py`
+    `add_pin_layer`). The analytics session read it the same way.
+- **Public presentation pieces leave out every city with an open terms
+  question:** Philadelphia, Seattle (Regional), Paris, Barcelona, Dublin,
+  Washington D.C., Daegu, Den Haag, Bucharest, the nine Brazilian cities,
+  Milan and Miami (Regional). Source: `docs/licence_positions.md` and the
+  notices in `app/components.py`. Private pieces may show them. Rejected:
+  featuring them with a caveat, which would publish data whose terms are not
+  settled.
+- **Paris stays out until the site links its public repository.** Licence
+  Mobilités Art. 5.8 is discharged by that link, and Art. 11.1 ends the
+  licence on breach. Raised with the cleanup session at the owner's request;
+  staging had already passed the link to cleanup (`5813011a`).
+- **Oslo and Bergen visuals that draw Entur's data may carry Entur's logo**, an
+  exception to the no-agency-logo rule. Entur specifies its credit as "Data
+  made available by Entur" plus the logo (`docs/data_sources.md` notice 29).
+  Its conditions apply: Entur's own unaltered file
+  (`app/assets/entur/Enturlogo_Blue_RGB.svg`), on a white chip, at least
+  20 px, beside the credit text, and nothing implying endorsement (NLOD §6).
+- **The sampler uses San Diego, Toronto and Tokyo** (owner). These are three
+  of the analytics session's four pilots; Paris, the fourth, stays private.
+
+### 2026-10-02 - Presentation visuals: OpenStreetMap credit where its data is drawn, walking minutes at 3 mph (owner)
+
+- **A presentation visual carries the OpenStreetMap credit only where
+  OpenStreetMap data is drawn** (a basemap, or rail or stations built from
+  OSM). The owner's call, on a station schematic with no basemap whose lines
+  and stations come from San Diego's MTS GTFS. Rejected: the credit on every
+  map regardless, which would credit OSM for data it did not supply. Every
+  source that IS drawn keeps its own credit. Live maps are unchanged:
+  `pipeline/map_common.py` still emits the credit on every committed map.
+- **Walking minutes may accompany ring distances, at 3 mph (20 minutes per
+  mile), with the metric and its rationale listed beside the visuals.**
+  - 3 mph matches the transit-planning convention that a quarter mile is a
+    five-minute walk.
+  - Rings are straight-line distance, so minutes understate a walk along
+    streets.
+  - Miles stay the unit; minutes are a reading aid. Set A's edges read 2 / 4 /
+    6 / 12 min, Set B's 1 / 2 / 4 / 6 min.
+  - The owner asked for every visual metric to be listed with its rationale;
+    the list lives on the drill sheet for now and moves to the visuals index
+    (handoff Phase 7).
+- **The visuals handoff moved from the main checkout's root to its inbox,
+  `data/_handoff/visual/`** (owner's OK), so `check_stray_downloads.py` stops
+  flagging it.
+
+### 2026-10-02 - AI-driven deep analysis permitted, private, with an acknowledgement on every analysis (owner)
+
+- **The invariant "Ridership and deep analysis are out of scope until asked"
+  was split: ridership stays out of scope; AI-driven deep analysis is
+  permitted.** The owner approved the replacement text in chat, as written,
+  in the visuals session (handoff from the owner's other project, section
+  0a).
+  - The hard line, in the owner's words: "every analysis must always be
+    accompanied by an AI-driven acknowledgement."
+  - Analyses are private: shown only to the owner, never in `app/`,
+    `outputs/` or any deployed page, and never in public-facing material
+    unless the owner says otherwise for a specific piece.
+  - Analysis stays correlational, and cross-city comparisons keep the
+    comparability limits (ring sets, record kinds, vintages) disclosed.
+  - Supersedes the inbox README's broader note (`data/_handoff/README.md`,
+    2026-10-02) that set the invariant aside for the analytics and visual
+    handoffs without the acknowledgement or privacy conditions.
+  - Rejected: dropping the rule outright (ridership was not asked about),
+    and leaving `docs/project_context.md`'s scope line unchanged (it would
+    have contradicted `CLAUDE.md`).
+  - Files: `CLAUDE.md` (Invariants), `docs/project_context.md` (Scope).
+  - The acknowledgement's wording is still to be drafted in chat and
+    approved once, then used unchanged on every analytic output.
