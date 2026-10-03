@@ -17,7 +17,7 @@ ROOT = Path(__file__).parent.parent.parent
 # docs/handoff_extensions_2026-10-02.md), on Long Beach's own licence layer
 # (LONG_BEACH_* below). False reproduces the city-alone build byte for byte,
 # which is how the extension was proved before it was switched on.
-REGIONAL = False
+REGIONAL = True
 NAME = "Los Angeles (Regional)" if REGIONAL else "Los Angeles"
 DATA_RAW = ROOT / "data" / "los_angeles" / "raw"
 # data/ is one junction shared by every worktree, and master's checks read

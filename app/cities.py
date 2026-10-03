@@ -132,7 +132,7 @@ CITIES = [
         "label_offset": ("end", -11, 0),
     },
     {
-        "name": "Los Angeles",
+        "name": "Los Angeles (Regional)",
         "region": "United States West",
         "country": "United States",
         "lat": 34.05,
@@ -141,7 +141,7 @@ CITIES = [
         "coverage": "full",
         "mode": "metro",
         "placement": "Register coordinates; corrupt ones geocoded (98.7%)",
-        "data_age": "Fetched 2026-09-19 (no source date)",
+        "data_age": "Fetched 2026-09-19 (no source date); Long Beach 2026-10-03",
         "rail_extra": "Trams",
         "record_kind": "Tax register",
         "categories": "All three",
@@ -149,7 +149,10 @@ CITIES = [
         # WEST OF THE DOT, level, since 2026-09-30, when United States West
         # took Tucson back into its zoom fit and the zoom dropped (the label sat
         # below the dot before that). Re-placed for that zoom;
-        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200.
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200. "(Regional)"
+        # (153.8 px, 2026-10-03) clips it 43% at 375 px in Global and United
+        # States; every other side covers or grazes San Diego, Tucson or San
+        # Francisco. Kept west, the clip flagged for the owner at review time.
         "label_offset": ("end", -11, 0),
     },
     {

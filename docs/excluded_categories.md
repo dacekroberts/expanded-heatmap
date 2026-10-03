@@ -190,7 +190,7 @@ Diego.
 Registries differ, so some judgments are local. Each was sampled against that
 city's own data.
 
-### Los Angeles — All other personal services (NAICS 812990)
+### Los Angeles (Regional) — All other personal services (NAICS 812990)
 
 Since 2026-09-29 this catch-all is left out in every city.
 
@@ -209,6 +209,26 @@ mobile food (348), caterers (147) and food-service contractors (60). **Kept
 because it cannot be split:** `722300` "special food services" (3,145 pins),
 which this registry uses for caterers, concession stands and food trucks alike,
 but also for taquerias and cafés; all of it counts as food service.
+
+### Los Angeles (Regional) — Long Beach's licenses, and licenses to work in someone else's shop
+
+**Left out of the City of Long Beach's licenses**, counted on its active, in-city
+licenses that are not home-based (20,204 on 2026-10-03): a person's own license to
+work inside someone else's shop — barber and beauty booths (232), nail booths (9)
+and massage technicians (25) — since the shop's own license keeps the shop on the
+map; event caterers (97); mobile food (33), sidewalk vendors (45), food carts (4)
+and farmers' markets (7); the register's services catch-all, "General Services –
+Other" (314); and every license type that is not a shop, café or salon, such as
+apartment houses (6,612), commercial space for rent (2,782) and offices.
+
+**Missing rather than excluded** - licenses the City marks as home-based or as
+outside the city, and any license that is not active, are not read at all. A
+business needing no license of its own does not appear.
+
+**Shown, but not named** - a Long Beach license with no trade name (520 dots)
+shows its street address; the license holder's name is never read.
+
+**Stations.** The A Line's eight stations in Long Beach are drawn and ringed.
 
 ### Sacramento — expired licenses, withheld addresses, and names that read as a person's
 

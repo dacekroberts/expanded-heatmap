@@ -434,6 +434,11 @@ Desktop is unaffected — the label is fully visible there.
         storefronts), held for the owner's review time; its regional
         processed files sit in `data/belo_horizonte/processed/regional/`
         until it lands, then fold back to `processed/`.
+      - [x] **Los Angeles + Long Beach** (Wave-2 follow-ups (6)): **built
+        2026-10-03 on `extensions-build`** (64 stations, 60,740 storefronts,
+        3,246 of them Long Beach's; `FULLNAME` never fetched), held for review
+        time; its regional processed files in
+        `data/los_angeles/processed/regional/` until it lands.
       - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
         and `data/duque_de_caxias/raw/` (and the staging worktree's).
     - [ ] **Vancouver (Regional) + Burnaby, New Westminster, Coquitlam,

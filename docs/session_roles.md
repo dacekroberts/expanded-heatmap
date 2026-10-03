@@ -200,7 +200,8 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 at once never take the same "next free" number: the UK six **156–161**
 (build order), the Japan batch **162–173** (its kit's table order),
 Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
-here, by the session, before one is written. None is open: every claimed
+here, by the session, before one is written; held now: Japan wave 2 115–128 and
+the four extensions 129–136 (pre-assigned 2026-10-02). Before them every claimed
 block landed 2026-10-02 (the last notice is 114; Tbilisi's unused 115–116
 released), so the next claim starts at 115. Pre-assigned 2026-10-02: Japan wave 2 pages 176–189 and notices 115–128; the four extensions notices 129–136 (no new pages).
 Check D of `check_provenance.py` reads every range in that sentence and lets

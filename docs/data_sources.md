@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
@@ -173,8 +173,8 @@ timeout.<!-- /internal -->
 ## Boundary layers
 
 Used to scope stations and businesses to the city. Not optional: San Diego's
-Trolley serves six other cities, and 54 of Los Angeles' 110 rail stations lie
-in 23 other municipalities.
+Trolley serves six other cities, and 46 of Los Angeles (Regional)'s 110 rail stations lie
+in 21 other municipalities and unincorporated county land.
 
 The rows, and the notes on individual cities' layers, are in each country's
 file.
@@ -3111,6 +3111,24 @@ session's claimed block, 109–116.)
 - **MUST NOT**: use Geostat's logo; imply Geostat's endorsement.
 - **MUST DO**: nothing further. Individual entrepreneurs' names and personal
   numbers are never written to disk; the removal rule is the safety net.
+
+**129. City of Long Beach (Los Angeles (Regional)) — displayed by choice, not required**
+(written into `render_site_notices()` with Los Angeles (Regional), 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the MapsLB Terms of Use
+  (`https://maps.longbeach.gov/pages/termsofuse`), which the layer's
+  `licenseInfo` incorporates: "you are granted a license to copy, publish,
+  distribute and/or transmit the Data, to adapt the Data and to exploit the
+  Data for commercial and/or personal use". The indemnity is triggered only
+  by a breach of the terms, and was accepted by the owner (2026-09-30). Rows
+  in [`data_sources/united-states.md`](data_sources/united-states.md).
+- **MUST DISPLAY**: nothing. The City is credited, with a link to its terms
+  and a sentence saying it does not endorse the map, because the terms bar
+  "any way that suggests City's endorsement of your use".
+- **MUST NOT**: suggest the City's endorsement (no "official", no City seal or
+  logo); call the data current or complete.
+- **MUST DO**: nothing. The licence holder's name (`FULLNAME`) is never
+  fetched; the removal rule is the safety net.
 
 
 ## Gaps

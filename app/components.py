@@ -552,7 +552,7 @@ _NOTICES = [
     Notice(4, "LA Metro",
      "Rail alignment data for Los Angeles provided by LA Metro. This project "
      "claims no ownership of that data.",
-     False, ("Los Angeles",), every_page=True),
+     False, ("Los Angeles (Regional)",), every_page=True),
     Notice(7, "MassDOT / MBTA",
      "Rail alignment data for Boston provided by MassDOT/MBTA.",
      False, ("Boston",)),
@@ -2326,6 +2326,19 @@ _NOTICES = [
      "Business Register, retrieved 2026-10-02; processed by this project. Not "
      "endorsed by Geostat.",
      False, ("Tbilisi",)),
+    # Long Beach (notice 129, the extensions' block 129-136): the MapsLB Terms
+    # of Use require nothing displayed; they bar any use that "suggests City's
+    # endorsement". Displayed by choice, as Seattle's 113, with a
+    # no-endorsement sentence. Wording from the licence read of 2026-10-03,
+    # flagged for the owner at review time.
+    Notice(129, "City of Long Beach (Los Angeles (Regional))",
+     "Long Beach business licenses: City of Long Beach, Business Licenses Public "
+     "View ([MapsLB](https://maps.longbeach.gov/datasets/LongBeachCA::business-"
+     "licenses-public-view/about)), used under the City's [MapsLB Terms of Use]"
+     "(https://maps.longbeach.gov/pages/termsofuse). This map selects, categorizes "
+     "and aggregates the City's records; it is not a City of Long Beach product, "
+     "and the City does not endorse it.",
+     False, ("Los Angeles (Regional)",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

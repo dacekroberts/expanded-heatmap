@@ -224,7 +224,7 @@ register covers them all, or because the rail network only makes sense that way.
 - **Lose the most stations to the boundary:** Seoul (227), Melbourne (199),
   Sydney (157; both keep to one council's area), Paris (76), Osaka (76),
   Copenhagen (59), Washington
-  D.C. (58), Tokyo (55), Los Angeles (54), Rotterdam (52), Barcelona (50), Madrid (49), Boston (43).
+  D.C. (58), Tokyo (55), Rotterdam (52), Barcelona (50), Madrid (49), Los Angeles (Regional) (46), Boston (43).
 - **Reason:** a register covers one jurisdiction, so rings outside it would read as
   empty. The French cities keep to the commune so that they stay comparable with one
   another, although SIRENE covers the neighbouring communes too.
@@ -248,7 +248,7 @@ how far the network reaches, not on the data.
   (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
 - **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte (Regional) 16%,
   Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
-  Recife 23%, Los Angeles 24%, San Diego 24%, Birmingham (Regional) 17%.
+  Recife 23%, Los Angeles (Regional) 24%, San Diego 24%, Birmingham (Regional) 17%.
 - **Reason:** network extent against the area in scope. Share = in-ring heat points ÷
   all-storefront heat points in each committed map.
 
@@ -531,7 +531,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **United States** | | | | | |
 | San Diego | Trolley (light rail), 5 lines | Coaster, Sprinter | MTS GTFS; gate 3 exact | City | 16 / 0 |
 | San Francisco | Muni Metro J K L M N T + F Market & Wharves | BART, Caltrain, cable cars | SFMTA GTFS (mirror); gate 3 exact | City and County | 0 / 85 |
-| Los Angeles | Metro Rail A B C D E K (heavy + light) | Metrolink | LA Metro rail GTFS; gate 3 exact | City | 54 / 0 |
+| Los Angeles (Regional) | Metro Rail A B C D E K (heavy + light) | Metrolink | LA Metro rail GTFS; gate 3 exact | City of LA + Long Beach | 46 / 0 |
 | Chicago | 'L', 7 lines | Metra; Yellow Line | CTA GTFS; gate 3 exact, less State/Lake (closed) | City | 18 / 0 |
 | New York | Subway (11 trunk groups) + Staten Island Rwy | LIRR | MTA GTFS; gate 3 against the MTA's station register | Five boroughs | 0 / 0 |
 | Philadelphia | MFL, BSL + subway-surface and Girard trolleys | Regional Rail; NHSL, Media–Sharon Hill (outside city) | SEPTA GTFS; gate 3 exact on the L, B, G and the tunnel; T branches not gated | City | 7 / 162 |
@@ -708,7 +708,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **United States** | | | | | |
 | San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 551 / 598 | Undercount: neighbourhoods registered under own name (PLAN) |
 | San Francisco | License register | Registered Business Locations | NAICS | 5,038 / 4,591 / 2,091 | Floor: about 37% of rows have NAICS (DEC) |
-| Los Angeles | Tax register | Listing of Active Businesses | NAICS | 8,069 / 3,817 / 2,014 | Floor: about 9% of rows lack NAICS (DEC) |
+| Los Angeles (Regional) | Tax register; Long Beach's license register | Listing of Active Businesses; Long Beach Business Licenses Public View | NAICS; Long Beach's license types | 8,360 / 4,094 / 2,188 | Floor: about 9% of LA's rows lack NAICS (DEC) |
 | Chicago | License register | Business Licenses | Own licence types | 5,476 / 4,196 / 2,049 | — |
 | New York | 4 activity registers | DOHMH, NYS food stores, NYS salons, DCWP | Per-source dispatch | 14,822 / 22,060 / 7,478 | Retail thin |
 | Philadelphia | License register (activities) | L&I Business Licenses | Own licence types | 770 / 4,081 / — | No Personal services; Retail = food retail |
@@ -882,7 +882,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **United States** | | | |
 | San Diego | Source coordinates (98.4% populated) | None on page | Nonstore 454, parking (project-wide) |
 | San Francisco | Source point | Surface stops thinned | 812990 "solo massage"; individual practitioner licences (tattoo, massage), 2026-10-01 |
-| Los Angeles | Source + Census geocoder for corrupt points (98.7% recovered) | Corrupt coordinates geocoded | 812990 catch-all (30.7% of storefronts) |
+| Los Angeles (Regional) | Source + Census geocoder for corrupt points (98.7% recovered); Long Beach's register points | Corrupt coordinates geocoded | 812990 catch-all (30.7% of storefronts); Long Beach's booth and practitioner licenses |
 | Chicago | Source coordinates | Licences without coordinates left off | Home-based, peddlers, endorsements, Limited Business |
 | New York | Source + Census geocoder (582 of 1,449 recovered; 1.4% lost) | Retail thin; possible double counts | Person-held licences, contractors, chair renters |
 | Philadelphia | Source geometry | Newsstands mostly absent | Rental (79% of register), short-let hosts |
@@ -1051,7 +1051,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **United States** | | | | | | |
 | San Diego | UNKNOWN (2026-09-18) | — | 0.6 mi | Yes | 24% | Trade name |
 | San Francisco | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 72% | Name |
-| Los Angeles | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 24% | Trade name, else registrant |
+| Los Angeles (Regional) | UNKNOWN (≈2026-09-19); Long Beach's layer, edited nightly, fetched 2026-10-03 | — | 0.6 mi | Yes | 24% | Trade name, else registrant (Long Beach: else street address) |
 | Chicago | Active licences (2026-09-20) | — | 0.6 mi | Yes | 57% | Name |
 | New York | UNKNOWN (2026-09-21) | — | 0.3 mi | Yes | 71% | Name |
 | Philadelphia | Active licences (2026-09-21) | — | 0.6 mi | Yes | 58% | Trade name (from "LEGAL (TRADE)") |

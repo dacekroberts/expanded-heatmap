@@ -230,7 +230,7 @@ TEXT_WIDTH = {
     "Okayama": 61.7, "Kōchi": 37.6,
     # Dallas, 2026-09-30; controls Prague, Tokyo, Houston, Toronto, Yokohama.
     "Dallas": 40.1,
-    "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
+    "Guadalajara (Regional)": 152.7, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
     "Philadelphia": 82.3, "San Diego": 67.4, "San Francisco": 94.3,
@@ -278,6 +278,9 @@ TEXT_WIDTH = {
     # 2026-10-03 run and controls as Belo Horizonte (Regional), control Rio de
     # Janeiro 95.6 reproduced.
     "Rio de Janeiro (Regional)": 168.6,
+    # Los Angeles renamed (Regional) by its Long Beach extension; the same
+    # 2026-10-03 run and controls.
+    "Los Angeles (Regional)": 153.8,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

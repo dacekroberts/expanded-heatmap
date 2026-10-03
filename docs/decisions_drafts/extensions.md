@@ -7,6 +7,67 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 Proposals (sentences no approved template covers) are listed at the end, for
 the owner at review time.
 
+### 2026-10-03 - Los Angeles (Regional): Long Beach added on its own licence layer, its holder names never loaded
+
+- **Third of the four extensions.** Los Angeles becomes "Los Angeles
+  (Regional)"; page file and slug stay. LA becomes a two-publisher city, the
+  Vancouver + Surrey shape: a dispatching taxonomy, no cross-source dedup
+  (the two registries cover disjoint cities).
+- **Proved off first** (b27d6ad7): zero drift, baseline 2 figures
+  unchanged, peak 0.44 GB.
+- **Source:** the City of Long Beach's "Business Licenses Public View"
+  (MapsLB), fetched by `pipeline/los_angeles/fetch_long_beach.py` (not a
+  step) with the server-side filter LICSTATUS 'Active', OUTSIDECITY 'No',
+  HOMEBASED 'No': 20,204 rows, the same as the server's own count. Only the
+  listed columns are requested; **`FULLNAME` is never fetched**, and both the
+  fetch and step 2 raise if it arrives.
+- **Licence: PERMITTED WITH CONDITIONS, nothing required to display**
+  (licence-read agent, 2026-10-03, matching staging's read of 2026-09-30):
+  the MapsLB Terms of Use grant copying, publishing, adapting and
+  redistributing; the bar is any use that "suggests City's endorsement";
+  the indemnity is breach-only and was accepted by the owner (2026-09-30).
+  The terms page carries no revision date. Recorded in
+  `docs/data_sources/united-states.md` (registry row and licence row) and
+  as **notice 129**, displayed by choice with a no-endorsement sentence, as
+  Seattle's 113 is.
+- **Classification:** `pipeline/taxonomies/los_angeles.py` dispatches on
+  `source`. LA's rows go through `naics.naics_group()` exactly as before
+  (the tooltip now reads "Category: NAICS <code>", the legend plain bucket
+  names); Long Beach's 232 `LICCATDESC` values are mapped by a NAICS anchor
+  and `docs/category_rules.md`, each with its reason: booth and practitioner
+  licences out (232 + 9 + 25, the person-licence rule); cannabis
+  dispensaries Retail (Boston, Calgary, Edmonton); estheticians and
+  boarding kennels Personal services (Vancouver, Calgary, Edmonton);
+  caterers, carts, stands, sidewalk vendors and farmers' markets out (R1,
+  mobile units); "General Services - Other" out as the catch-all (R2); a
+  dry-cleaning plant Personal services on its NAICS code (no precedent).
+  Registered, with its column in `scripts/category_continuity_table.py`
+  (51 taxonomies, check OK).
+- **What moved** (drift check, every change the extension's): stations
+  56 → 64 (the A Line's eight in Long Beach; 46 left out, in 21 other
+  cities and unincorporated land); storefronts 57,494 → 60,740 (+3,246,
+  all Long Beach: 4,078 in the buckets → 3,264 one per licence → 3,246
+  inside the City, 18 placeholder points in the Pacific dropped; Retail
+  1,327, Food service 1,160, Personal services 759); in-ring 13,892 →
+  14,642 (750 of them Long Beach's), the share 24.2% → 24.1%; LA's own
+  rows unchanged.
+- **Names:** a Long Beach licence with no trade name (520) shows its street
+  address, unit removed, the rule this page already applies to LA's
+  registrant-name rows (owner, 2026-10-01). LA's parcel home filter does
+  not reach Long Beach's rows; the City's own HOMEBASED flag, applied at
+  download, does that job.
+- **Privacy: publish.** `check_personal_exposure.py los_angeles`: 0
+  person-like names at a residential unit of 14,642 pins; person-like pins
+  1,572 (10.7%), all chosen trade names.
+- **Macro label** 153.8 px. West of the dot is still the only side with
+  PROBLEMS 0 (east, above and below cover or graze San Diego, Tucson or San
+  Francisco), but the wider pill is now clipped 43% at 375 px in Global and
+  United States: **flagged for the owner at review time**.
+- **`data_age`** now names Long Beach's fetch date; table D carries it.
+  `record_kind` stays "Tax register" (LA's, 95% of the pins).
+- **Regional processed files** in `data/los_angeles/processed/regional/`
+  from the start.
+
 ### 2026-10-03 - Rio de Janeiro (Regional): Duque de Caxias added, the Saracuruna line drawn to its end
 
 - **Second of the four extensions.** Rio becomes "Rio de Janeiro
@@ -149,3 +210,23 @@ the owner at review time.
    too infrequent: app/station_scope.py now reads "fails the rail test" as
    that category, beside "15-minute". If the owner prefers, they can be a
    category of their own instead.
+7. Los Angeles (Regional), page, The lines: "Only stations inside the City
+   of Los Angeles and the City of Long Beach are shown. The lines also serve
+   Pasadena, Santa Monica and many other cities, whose businesses come from
+   separate city registries."
+8. Los Angeles (Regional), page, The businesses (new): "Businesses in the
+   City of Los Angeles come from its Office of Finance's list of active
+   businesses; those in Long Beach come from the City of Long Beach's
+   business licenses, sorted into the same three categories from each
+   license's type." and "In Long Beach, a license that gives no trade name
+   shows its street address."
+9. Notice 129 (City of Long Beach), displayed by choice: "Long Beach business
+   licenses: City of Long Beach, Business Licenses Public View (MapsLB), used
+   under the City's MapsLB Terms of Use. This map selects, categorizes and
+   aggregates the City's records; it is not a City of Long Beach product, and
+   the City does not endorse it."
+10. What Is Excluded, the new section "Los Angeles (Regional) — Long Beach's
+    licenses, and licenses to work in someone else's shop" (its four
+    paragraphs, all counts from the 2026-10-03 file).
+11. The macro label clip: Los Angeles (Regional) clipped 43% at 375 px in
+    Global and United States (no clean side exists).
