@@ -103,9 +103,10 @@ LINE_COLOURS = {"A": "#00b96e", "B": "#F8B322", "C": "#CF003D"}
 # FLORA IS COUNTED, NOT DRAWN - owner, 2026-09-29, superseding the call of
 # 2026-09-24 that drew it: stations closed for works are drawn as the
 # timetable runs, in every city (docs/category_rules.md, "Station scope").
-# Line A's Flora is CLOSED FOR RECONSTRUCTION (DPP: from 1 February 2026 for
-# about ten months, reopening at the turn of November/December 2026), so no
-# metro trip calls there and a trip-based station list has A at 16 where the
+# Line A's Flora is CLOSED FOR RECONSTRUCTION (DPP: from 1 February 2026; first
+# due back in early December 2026, now about the end of February 2027, since
+# more of the platform ceiling needs replacing - expats.cz quoting DPP,
+# 2026-08-23, read 2026-10-03), so no metro trip calls there and a trip-based station list has A at 16 where the
 # operator has 17. Step 1 locates it from PID's own stops.txt (parent station
 # U118S1) so the gates match the operator, then lists it in
 # excluded_stations.csv as closed for works; it STOPS the build once the feed
@@ -114,7 +115,7 @@ FLORA_PARENT = "U118S1"
 FLORA_NAME = "Flora"
 FLORA_LINE = "A"
 FLORA_REASON = ("line A, closed for works (reconstruction since 1 February 2026), "
-                "reopening around December 2026 (DPP)")
+                "reopening about the end of February 2027 (DPP)")
 
 # WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1. Measured
 # 2026-09-24 against OSM relation 435514 (495.9 km²): every station of all
