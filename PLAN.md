@@ -929,6 +929,11 @@ every key, account and letter:
     stay verbatim. The six are FSA London and Newcastle, Ordnance Survey London
     and Newcastle (notice 63), Buenos Aires, and one more found by grep. This
     is an `app/` change, so a reboot follows.
+- [ ] **SFMTA's required notice may be four sentences, not two** (found by the
+  card-credit read, 2026-10-02): clause 12 is followed by an unnumbered "does
+  not guarantee ... 'as is'" paragraph before clause 13. Notice 3 and
+  docs/data_sources.md carry only the first paragraph. Re-read the terms
+  and, on the cautious reading, add the disclaimer to notice 3.
 - [ ] **Staging's eight licence reads (2026-10-02, master 6be4f460;
   `docs/licence_positions.md`'s update section): rows and credits to add
   AFTER the per-city notices branch lands** (the credits belong in its
