@@ -6,6 +6,12 @@ This document ranks the legal position on which each source is republished. It c
 
 **How it was made.** Everything here comes from the project's own record: `docs/data_sources.md`, `docs/data_sources/*.md`, `docs/licenses/`, `docs/privacy_verdicts.md`, `DECISIONS.md` with `docs/decisions/` and `docs/decisions_drafts/`, the build briefs, and `app/components.py` with `app/pages/` for what actually renders. No publisher's page was re-read on the web (0 of the 10 permitted spot checks were used), nothing was downloaded, and no tracked file was edited. Four extraction passes, split by country group, are kept in full as Appendices A to D; each entry there carries the full field set (quote with doc:line, who and when, what would flag it, safety net, strengthen). The tables below are the merged ranking.
 
+**Notice numbers removed (staging, 2026-10-02).** The research cited the
+numbered notices of `docs/data_sources.md`, and `check_provenance.py` found 87
+of those citations pointing at the wrong publisher. The numbers are stripped
+rather than guessed; the authoritative list is data_sources.md's "Notices
+this project MUST display when published".
+
 This is a reading of the project's own documents, not legal advice.
 
 **Tiers**
@@ -74,25 +80,25 @@ The 142 entries are grouped: one entry per shared source (for example, MHLW acro
 | # | Source | Cities | Rests on (doc:line) | Decided | What would flag it | Safety net | Strengthen |
 |---|---|---|---|---|---|---|---|
 | 1.1 | Philadelphia L&I licences, OPA parcels (internal), City Limits | Philadelphia | ToU "strictly prohibited without the prior written permission"; reasoned web-page reading (united-states.md:511-525) | owner 2026-09-21 (ARCH:17108) | the City, on its own incorporated terms | `_UNSETTLED_TERMS` footer (COMP:2243-2262) commits to coming down on a restrictive answer; no registrant-name columns | chase the 2026-09-21 request, or get the City's written permission |
-| 1.2 | King County food r878-4sxa, Address Points, city polygons | Seattle (Regional) | "the live site-wide kingcounty.gov terms forbid publishing without written permission" (DS:2957-2961; united-states.md:304, :182) | owner 2026-10-01, option 1 (DRAFT:630-641) | King County, under its live terms; the notice's words "by permission" | notice 109 (COMP:2188); no USPS ZIP fields | King County's written confirmation; until then, consider rewording "by permission" |
+| 1.2 | King County food r878-4sxa, Address Points, city polygons | Seattle (Regional) | "the live site-wide kingcounty.gov terms forbid publishing without written permission" (DS:2957-2961; united-states.md:304, :182) | owner 2026-10-01, option 1 (DRAFT:630-641) | King County, under its live terms; the notice's words "by permission" | notice (COMP:2188); no USPS ZIP fields | King County's written confirmation; until then, consider rewording "by permission" |
 | 1.3 | NTA national GTFS (Luas, DART) | Dublin | nothing recorded (ireland.md:110-122) | build 2026-09-22; never read | NTA, on attribution or modification terms | none specific; the map-corner OSM credit does not cover NTA | licence-read now and add a notice, or fall back to the cached OSM geometry |
 | 1.4 | D.C. Basic Business License (DLCP) and DC Boundary | Washington D.C. | nothing recorded (united-states.md:20, :173) | build 2026-09-21; never read | the District, on any terms the portal carries | removal; `_NON_AFFILIATION` | licence-read; add rows and any notice |
-| 1.5 | Snohomish County Food Service Establishments (2025) | Seattle (Regional) | "SILENT, read permissively"; "All rights reserved" read as a footer (DS:2989-2992; DRAFT:186-200) | owner 2026-10-02 | Snohomish County, under its site-wide reservation | notice 111 (COMP:2198) says the list is not current, complete or official | written confirmation, or a catalogued copy with a stated licence |
-| 1.6 | Bellevue Business Licenses (All) | Seattle (Regional) | the portal allows "own personal, non-commercial use"; the owner reads the data field as governing (united-states.md:303) | owner 2026-10-01, option 1 | Bellevue, under its portal terms; any commercial turn | notice 112 (COMP:2203); legal name and UBI never fetched | Bellevue's written confirmation |
+| 1.5 | Snohomish County Food Service Establishments (2025) | Seattle (Regional) | "SILENT, read permissively"; "All rights reserved" read as a footer (DS:2989-2992; DRAFT:186-200) | owner 2026-10-02 | Snohomish County, under its site-wide reservation | notice (COMP:2198) says the list is not current, complete or official | written confirmation, or a catalogued copy with a stated licence |
+| 1.6 | Bellevue Business Licenses (All) | Seattle (Regional) | the portal allows "own personal, non-commercial use"; the owner reads the data field as governing (united-states.md:303) | owner 2026-10-01, option 1 | Bellevue, under its portal terms; any commercial turn | notice (COMP:2203); legal name and UBI never fetched | Bellevue's written confirmation |
 | 1.7 | Daegu 인허가데이터 (D-데이터허브) | Daegu | every licence null; the guide's 사전에 협의 (south-korea.md:198-221) | owner 2026-09-27 (DEC:12396) | Daegu City's copyright officer | notice (COMP:1326); "If Daegu objects, the page comes down" | the phone consultation (an owner act), or a switch to SEMAS |
-| 1.8 | Den Haag Horecavergunningen | Den Haag | "SILENT and ambiguous"; database rights on the site (DS:2457-2461) | owner 2026-09-30, call C1 | the Gemeente, on its database right; an internal account | notice 83 (COMP:2022); applicant fields refused at fetch | written confirmation, or Rotterdam's Gemeenteblad method |
-| 1.9 | DSVSA București food units | Bucharest | "a website footer ... not the data" (DS:2118-2123; romania.md:13) | owner 2026-09-28/29 | DSVSA or ANSVSA, under the footer; the hand-fetch behind a bot wall | notice 67 (COMP:1938) says no licence is stated; sole traders shown by category only | written permission from DSVSA, or a data.gov.ro listing |
-| 1.10 | IBGE CNEFE 2022 | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife, Santos | Decree 8.777 art. 4; four readings unresolved (brazil.md:72-104) | owner 2026-09-23, "the Philadelphia shape" (ARCH:6469) | IBGE's dissemination policy; LGPD | notice 38 (COMP:1213); dwelling rule | written confirmation from IBGE |
-| 1.11 | Milan ATM rail layers and gtfs.zip | Milan | "recorded as CC-BY but has NOT been read" (build_briefs/milan.md:382-394) | build 2026-09-22; the read was never done | ATM or the Comune; no rail credit | notice 23 credits the registers only (COMP:896) | licence-read, then add the rail to notice 23 |
+| 1.8 | Den Haag Horecavergunningen | Den Haag | "SILENT and ambiguous"; database rights on the site (DS:2457-2461) | owner 2026-09-30, call C1 | the Gemeente, on its database right; an internal account | notice (COMP:2022); applicant fields refused at fetch | written confirmation, or Rotterdam's Gemeenteblad method |
+| 1.9 | DSVSA București food units | Bucharest | "a website footer ... not the data" (DS:2118-2123; romania.md:13) | owner 2026-09-28/29 | DSVSA or ANSVSA, under the footer; the hand-fetch behind a bot wall | notice (COMP:1938) says no licence is stated; sole traders shown by category only | written permission from DSVSA, or a data.gov.ro listing |
+| 1.10 | IBGE CNEFE 2022 | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife, Santos | Decree 8.777 art. 4; four readings unresolved (brazil.md:72-104) | owner 2026-09-23, "the Philadelphia shape" (ARCH:6469) | IBGE's dissemination policy; LGPD | notice (COMP:1213); dwelling rule | written confirmation from IBGE |
+| 1.11 | Milan ATM rail layers and gtfs.zip | Milan | "recorded as CC-BY but has NOT been read" (build_briefs/milan.md:382-394) | build 2026-09-22; the read was never done | ATM or the Comune; no rail credit | notice credits the registers only (COMP:896) | licence-read, then add the rail to notice |
 | 1.12 | Miami-Dade LBT, boundaries, GTFS | Miami (Regional) | "nothing grants and nothing forbids" (united-states.md:316) | build 2026-09-21 (ARCH:17184) | the County, on the absence of a grant | removal; OWNERNAME and MAIL* never fetched | one written line from the County; fix the "open" / "closed" contradiction |
-| 1.13 | Tucson BUSLIC | Tucson | SILENT, read as permitted, over the "personal use" disclaimers (united-states.md:232; DS:2422-2433) | owner 2026-09-30 (DEC:1446) | the City, citing its sibling disclaimers | notice 81 (COMP:2001) | written confirmation |
-| 1.14 | Stockholm Livsmedelstillsyn | Stockholm | "The blank license is a silence, not a refusal" (sweden.md:27-31) | build 2026-09-22; owner wording 2026-09-29 | the City; dataportal.se's "Begränsad" | notice 66 (COMP:1924) | read the walled record via the Internet Archive, or ask the City |
-| 1.15 | Kitchener–Waterloo Inspections.zip and Inspections_PS.zip | Kitchener–Waterloo (Regional) | "No License Provided"; the portal's sentence read as covering them (DS:2237-2244) | owner 2026-09-30 (DEC:3960) | the Region, on Esri's "request permission" label | notice 73 (COMP:680) | the Region's written confirmation |
-| 1.16 | SEMAS 상가(상권)정보 | Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang | 제한 없음, with the site policy read as homepage-only; 소상공인365 notices unread (DS:2141-2151) | owner 2026-09-29 (DEC:6853) | SEMAS | notice 68 (COMP:1955) | read the notices from a Korean vantage point, or get SEMAS's OK |
-| 1.17 | Busan LocalDataService | Busan | 제14조 read as covering platform-authored works only (south-korea.md:171-193) | owner 2026-09-27 | Busan's portal, under 제14조② | notice 49 (COMP:1343) | written OK, or a host that declares 제한 없음 |
-| 1.18 | Hiroshima full permit list (DataEye 5672) | Hiroshima | owner reads the dataset's PDL as covering a file with no entry of its own (japan.md:146) | owner 2026-09-24 | Hiroshima City, under its website's default terms | notice 76 (COMP:1553) | ask DataEye to list the file |
-| 1.19 | Amsterdam Horeca exploitatievergunningen | Amsterdam | live "Licentie: -"; a retired 2022 catalogue said CC BY (DS:1546-1549) | owner 2026-09-24 | the Gemeente | notice 35 (COMP:1177), displayed as CC BY | written confirmation |
-| 1.20 | Catastro INSPIRE addresses | Palma | CC BY 4.0 declared over a still-linked 2016 licence that restricts (build_briefs/palma.md:97-104) | owner 2026-09-29, call C | Catastro, reading the 2016 PDF | notice 74 (COMP:846) | Catastro's confirmation that CC BY supersedes |
+| 1.13 | Tucson BUSLIC | Tucson | SILENT, read as permitted, over the "personal use" disclaimers (united-states.md:232; DS:2422-2433) | owner 2026-09-30 (DEC:1446) | the City, citing its sibling disclaimers | notice (COMP:2001) | written confirmation |
+| 1.14 | Stockholm Livsmedelstillsyn | Stockholm | "The blank license is a silence, not a refusal" (sweden.md:27-31) | build 2026-09-22; owner wording 2026-09-29 | the City; dataportal.se's "Begränsad" | notice (COMP:1924) | read the walled record via the Internet Archive, or ask the City |
+| 1.15 | Kitchener–Waterloo Inspections.zip and Inspections_PS.zip | Kitchener–Waterloo (Regional) | "No License Provided"; the portal's sentence read as covering them (DS:2237-2244) | owner 2026-09-30 (DEC:3960) | the Region, on Esri's "request permission" label | notice (COMP:680) | the Region's written confirmation |
+| 1.16 | SEMAS 상가(상권)정보 | Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang | 제한 없음, with the site policy read as homepage-only; 소상공인365 notices unread (DS:2141-2151) | owner 2026-09-29 (DEC:6853) | SEMAS | notice (COMP:1955) | read the notices from a Korean vantage point, or get SEMAS's OK |
+| 1.17 | Busan LocalDataService | Busan | 제14조 read as covering platform-authored works only (south-korea.md:171-193) | owner 2026-09-27 | Busan's portal, under 제14조② | notice (COMP:1343) | written OK, or a host that declares 제한 없음 |
+| 1.18 | Hiroshima full permit list (DataEye 5672) | Hiroshima | owner reads the dataset's PDL as covering a file with no entry of its own (japan.md:146) | owner 2026-09-24 | Hiroshima City, under its website's default terms | notice (COMP:1553) | ask DataEye to list the file |
+| 1.19 | Amsterdam Horeca exploitatievergunningen | Amsterdam | live "Licentie: -"; a retired 2022 catalogue said CC BY (DS:1546-1549) | owner 2026-09-24 | the Gemeente | notice (COMP:1177), displayed as CC BY | written confirmation |
+| 1.20 | Catastro INSPIRE addresses | Palma | CC BY 4.0 declared over a still-linked 2016 licence that restricts (build_briefs/palma.md:97-104) | owner 2026-09-29, call C | Catastro, reading the 2016 PDF | notice (COMP:846) | Catastro's confirmation that CC BY supersedes |
 | 1.21 | Dallas Address Points | Dallas | "nothing grants it and nothing forbids it", plus an uncapped indemnity (DS:458-467) | owner 2026-09-30 | the City, under the indemnity | prose rule "never surveyed or exact"; the optional credit is not shown | Census geocoder instead, or add the optional credit |
 | 1.22 | Snohomish Building Address Points | Seattle (Regional) | the food layer's permissive reading extended "on firmer ground" (DEC:15766-15774) | owner 2026-10-02 | Snohomish County (unlikely; nothing displayed) | removal | none beyond 1.5 |
 | 1.23 | CARTO keyless basemap (Overview macro map) | Overview page | **no row in DS.** The keyless CDN "that policy no longer documents" (ARCH:17474-17486) | owner accepted the residual 2026-09-20 | CARTO, on fair use or keyless access; withdrawal leaves the basemap blank | "© CARTO" caption (COMP:2313) | the free CARTO key (PLAN.md:852) and a DS row |
@@ -106,103 +112,103 @@ The 142 entries are grouped: one entry per shared source (for example, MHLW acro
 
 | # | Source | Cities | The condition (doc:line) | Decided | What would flag it | Safety net | Strengthen |
 |---|---|---|---|---|---|---|---|
-| 2.1 | IDFM GTFS, Licence Mobilités | Paris | ends without notice on breach; Art. 5.4, 5.7 and 5.8 duties (DS:288-297, 1299-1352) | owner 2026-09-22 | IDFM, or an automatic lapse; the L.1115-5 declaration is unresolved | notice 24 (COMP:926); the snapshot date on the page; archive-not-delete | **link the repository from the site**; the NAP community upload |
-| 2.2 | Cens de locals 2022 (Ajuntament de Barcelona) | Barcelona | "may not be altered" read narrowly; a notification owed and **never sent** (DS:333, 1142-1162) | owner 2026-09-22 | the Ajuntament | notice 21 (COMP:822) | deliver the notification and record it |
-| 2.3 | WMATA rail GTFS | Washington D.C. | the API agreement ends with the account (§9(i)); an accuracy clause (united-states.md:369-407) | owner 2026-09-21/22 | WMATA revoking the key; the public repo read as "sharing" | gate item 10; `_AS_RECORDED` | WMATA's written OK on the public outputs |
-| 2.4 | FEHD via DATA.GOV.HK, and the CSDI points | Hong Kong | an uncapped, one-way indemnity, "directly or indirectly" (DS:335, 353-410) | owner 2026-09-22 and 09-24 | any third-party infringement claim | notice 41 (COMP:1255); three conditions | none short of dropping the source |
-| 2.5 | GOIB / Consell de Mallorca restaurant register | Palma | an uncapped indemnity, plus Barcelona's no-alteration reading (DS:437-448) | owner 2026-09-29 | GOIB or the Consell | notice 74 (COMP:846) | send GOIB the courtesy note it urges |
+| 2.1 | IDFM GTFS, Licence Mobilités | Paris | ends without notice on breach; Art. 5.4, 5.7 and 5.8 duties (DS:288-297, 1299-1352) | owner 2026-09-22 | IDFM, or an automatic lapse; the L.1115-5 declaration is unresolved | notice (COMP:926); the snapshot date on the page; archive-not-delete | **link the repository from the site**; the NAP community upload |
+| 2.2 | Cens de locals 2022 (Ajuntament de Barcelona) | Barcelona | "may not be altered" read narrowly; a notification owed and **never sent** (DS:333, 1142-1162) | owner 2026-09-22 | the Ajuntament | notice (COMP:822) | deliver the notification and record it |
+| 2.3 | WMATA rail GTFS | Washington D.C. | the API agreement ends with the account (§9(i)); an accuracy clause (united-states.md:369-407) | owner 2026-09-21/22 | WMATA revoking the key; the public repo read as "sharing" | gate item; `_AS_RECORDED` | WMATA's written OK on the public outputs |
+| 2.4 | FEHD via DATA.GOV.HK, and the CSDI points | Hong Kong | an uncapped, one-way indemnity, "directly or indirectly" (DS:335, 353-410) | owner 2026-09-22 and 09-24 | any third-party infringement claim | notice (COMP:1255); three conditions | none short of dropping the source |
+| 2.5 | GOIB / Consell de Mallorca restaurant register | Palma | an uncapped indemnity, plus Barcelona's no-alteration reading (DS:437-448) | owner 2026-09-29 | GOIB or the Consell | notice (COMP:846) | send GOIB the courtesy note it urges |
 | 2.6 | LA Metro rail GTFS | Los Angeles | no modification; terminable "for any reason" (united-states.md:343, 426-448) | owner 2026-09-21 | LA Metro, on modification or marks | notice (COMP:445) | Metro's clarification, or OSM rail |
-| 2.7 | City of Seattle Business Locations | Seattle (Regional) | no commercial use (united-states.md:302) | owner 2026-10-01 | the City, on any monetization | notice 113 (COMP:2206) | none while the site stays non-commercial |
-| 2.8 | WA Liquor and Cannabis Board Off Premise list | Seattle (Regional) | RCW 42.56.070(8), non-commercial; the Board's accuracy note (DS:2971-2984) | owner 2026-10-02 | the Board | notice 110 (COMP:2192) | re-check the Board's note at each refresh |
-| 2.9 | Fukui City lists, CC BY-SA | Fukui | share-alike on the outputs; §4's open-ended prohibitions (japan.md:150) | owner 2026-10-01/02 | Fukui City; a reuser | notice 100 (COMP:1632); LICENSE:62-71 | keep the LICENSE section and the notice together |
+| 2.7 | City of Seattle Business Locations | Seattle (Regional) | no commercial use (united-states.md:302) | owner 2026-10-01 | the City, on any monetization | notice (COMP:2206) | none while the site stays non-commercial |
+| 2.8 | WA Liquor and Cannabis Board Off Premise list | Seattle (Regional) | RCW 42.56.070(8), non-commercial; the Board's accuracy note (DS:2971-2984) | owner 2026-10-02 | the Board | notice (COMP:2192) | re-check the Board's note at each refresh |
+| 2.9 | Fukui City lists, CC BY-SA | Fukui | share-alike on the outputs; §4's open-ended prohibitions (japan.md:150) | owner 2026-10-01/02 | Fukui City; a reuser | notice (COMP:1632); LICENSE:62-71 | keep the LICENSE section and the notice together |
 | 2.10 | MHLW 食品衛生申請等システム | Fukuoka, Tokyo (4 wards), Hiroshima, Matsuyama, Toyama, Kumamoto, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Kagoshima, Okayama | 免責 2) ウ OPEN; fine only while non-commercial (japan.md:128) | owner 2026-09-24 and 10-01 | MHLW, if the site turned commercial | "not complete" in each notice | MHLW's written answer |
 | 2.11 | MLIT N03 行政区域 | all 20 Japanese cities | permitted only while never drawn, under the Survey Act (japan.md:127) | 2026-09-24 | GSI or MLIT, if an outline were drawn | the rule in `pipeline/countries/japan.py` | render the 出典 with its URL and licence link |
-| 2.12 | Matsuyama and Sakai lists (弁償 clauses) | Matsuyama, Sakai | breach-triggered repayment of the city's costs; Sakai's monthly files rest on the owner's reading (japan.md:147, 154) | owner 2026-09-24 and 10-02 | either city, after a breach | notices 97 and 104 | ask Sakai to catalogue its monthly files |
+| 2.12 | Matsuyama and Sakai lists (弁償 clauses) | Matsuyama, Sakai | breach-triggered repayment of the city's costs; Sakai's monthly files rest on the owner's reading (japan.md:147, 154) | owner 2026-09-24 and 10-02 | either city, after a breach | notices | ask Sakai to catalogue its monthly files |
 | 2.13 | Sacramento Business Operation Tax | Sacramento | an uncapped indemnity, "even if ... groundless" (DS:420-435) | owner 2026-09-29 | a claim the City passes on | owner, phone and mail fields never fetched | none |
 | 2.14 | WPRDC Allegheny food facilities | Pittsburgh | CC0, but the Data Use Agreement adds an indemnity and a duty to report Non-Public Information (united-states.md:229) | owner 2026-09-30 (DEC:4374) | WPRDC | no person column | none |
 | 2.15 | MTA NYCT subway and SIR GTFS | New York | "will not modify"; no accuracy claims (united-states.md:345-448) | build 2026-09-21; the row still says "open decision" | MTA | `_AS_RECORDED` | close the stale row |
-| 2.16 | SFMTA Muni GTFS | San Francisco | a revocable licence; a §5 indemnity and a "liability disclaimers" duty (united-states.md:342) | licence check 2026-09-21 | SFMTA | notice 3, verbatim (COMP:439) | add the disclaimer, or record why it does not apply |
+| 2.16 | SFMTA Muni GTFS | San Francisco | a revocable licence; a §5 indemnity and a "liability disclaimers" duty (united-states.md:342) | licence check 2026-09-21 | SFMTA | notice, verbatim (COMP:439) | add the disclaimer, or record why it does not apply |
 | 2.17 | MTS Trolley GTFS | San Diego | marks "may not be used in association with GTFS Data", yet the official colours and names are used (united-states.md:611-617) | owner 2026-09-21 | MTS | `_NON_AFFILIATION` | the project's own palette for San Diego |
 | 2.18 | OpenStreetMap: rail, boundaries, names, address points; OSM tiles on every city map | about 80 cities, all maps | ODbL §4.3 credit shown; §4.6 "provided the repo is LINKED from the site" (ARCH:8101-8105); the Tile Usage Policy is best-effort | owner and builds, from 2026-09-20 | OSMF, on share-alike for the committed station CSVs, or a tile block | map-corner credit; footer line (COMP:2310-2314); notice (COMP:750) | link the repository; add an ODbL notice to the station CSVs (brazil.md:177-179 says one exists; **none was found in `outputs/`**) |
-| 2.19 | Chicago Business Licenses and boundary | Chicago | "terminate any and all display ... for any reason"; indemnity not recorded as accepted (united-states.md:297) | 2026-09-21 | the City | notice 2, verbatim (COMP:430) | record the indemnity acceptance |
-| 2.20 | Tisséo GTFS (ODbL) | Toulouse | §4.4 open on the station CSV; §4.6 needs the repository link (DS:1361-1401) | 2026-09-23 / 09-29 | Tisséo, or an ODbL enforcer | notice 25 (COMP:953) | an ODbL notice on the CSV; the repository link; the PLAN.md:159 check |
-| 2.21 | STAR GTFS (ODbL) | Rennes | as 2.20 (DS:1403-1429) | 2026-09-23 | STAR | notice 26 (COMP:972) | as 2.20 |
-| 2.22 | Angers Loire Métropole GTFS (ODbL plus a marks bar) | Angers | held only while the page carries no mark (DS:2325-2347) | owner 2026-09-30 | the Métropole, on any brand surface | notice 77 (COMP:1014) | the Métropole's consent; the repository link |
-| 2.23 | CRTM M4/M10 layers | Madrid | "siempre actualizada": the date must be shown, re-render on edit (spain.md:115-153) | owner 2026-09-22 and 09-27 | CRTM, after an edit to the layers | notice 20, verbatim (COMP:519); max_age check | keep the max_age check green |
-| 2.24 | STM métro geometry (CC BY 4.0) | Montréal | the portal requires a statement of modifications; **the notice omits it** (canada.md:118) | build 2026-09-21 | STM or the Ville | notice 13 (COMP:586), incomplete | add the changes sentence and the licence link |
-| 2.25 | TransLink SkyTrain GTFS | Vancouver (Regional) | "limited, revocable"; a duty to identify the user on request (canada.md:117) | 2026-09-21 | TransLink | notice 11, verbatim Legend (COMP:533) | none |
-| 2.26 | Edmonton licences, ETS GTFS, boundary | Edmonton | cancellable "at any time"; a pass-through duty with no further restrictions (DS:879-897) | 2026-09-21 | the City | notice 15 (COMP:657); LICENSE excludes outputs/ | none |
-| 2.27 | KCMO Business License Holders | Kansas City | Public Domain by ordinance, but the portal's indemnity was read as binding nothing (DS:2403-2415) | owner 2026-09-30 | the City | notice 80 (COMP:1989) | check for Finance-department terms before each republish |
+| 2.19 | Chicago Business Licenses and boundary | Chicago | "terminate any and all display ... for any reason"; indemnity not recorded as accepted (united-states.md:297) | 2026-09-21 | the City | notice, verbatim (COMP:430) | record the indemnity acceptance |
+| 2.20 | Tisséo GTFS (ODbL) | Toulouse | §4.4 open on the station CSV; §4.6 needs the repository link (DS:1361-1401) | 2026-09-23 / 09-29 | Tisséo, or an ODbL enforcer | notice (COMP:953) | an ODbL notice on the CSV; the repository link; the PLAN.md:159 check |
+| 2.21 | STAR GTFS (ODbL) | Rennes | as 2.20 (DS:1403-1429) | 2026-09-23 | STAR | notice (COMP:972) | as 2.20 |
+| 2.22 | Angers Loire Métropole GTFS (ODbL plus a marks bar) | Angers | held only while the page carries no mark (DS:2325-2347) | owner 2026-09-30 | the Métropole, on any brand surface | notice (COMP:1014) | the Métropole's consent; the repository link |
+| 2.23 | CRTM M4/M10 layers | Madrid | "siempre actualizada": the date must be shown, re-render on edit (spain.md:115-153) | owner 2026-09-22 and 09-27 | CRTM, after an edit to the layers | notice, verbatim (COMP:519); max_age check | keep the max_age check green |
+| 2.24 | STM métro geometry (CC BY 4.0) | Montréal | the portal requires a statement of modifications; **the notice omits it** (canada.md:118) | build 2026-09-21 | STM or the Ville | notice (COMP:586), incomplete | add the changes sentence and the licence link |
+| 2.25 | TransLink SkyTrain GTFS | Vancouver (Regional) | "limited, revocable"; a duty to identify the user on request (canada.md:117) | 2026-09-21 | TransLink | notice, verbatim Legend (COMP:533) | none |
+| 2.26 | Edmonton licences, ETS GTFS, boundary | Edmonton | cancellable "at any time"; a pass-through duty with no further restrictions (DS:879-897) | 2026-09-21 | the City | notice (COMP:657); LICENSE excludes outputs/ | none |
+| 2.27 | KCMO Business License Holders | Kansas City | Public Domain by ordinance, but the portal's indemnity was read as binding nothing (DS:2403-2415) | owner 2026-09-30 | the City | notice (COMP:1989) | check for Finance-department terms before each republish |
 | 2.28 | CTA GTFS | Chicago | purpose-limited grant (united-states.md:449-454) | owner 2026-09-21 | CTA | optional credit (COMP:452) | none |
-| 2.29 | MBTA GTFS | Boston | revocable "at any time without notice" (united-states.md:346) | 2026-09-21 | MassDOT | notice 7 (COMP:449) | none |
+| 2.29 | MBTA GTFS | Boston | revocable "at any time without notice" (united-states.md:346) | 2026-09-21 | MassDOT | notice (COMP:449) | none |
 | 2.30 | SEPTA GTFS | Philadelphia | revocable; a fee is possible; indemnity not recorded as accepted (united-states.md:347) | 2026-09-21 | SEPTA | `_NON_AFFILIATION` | record the indemnity |
 | 2.31 | San Diego Business Tax Certificates | San Diego | derivative work permitted; indemnity not recorded as accepted (united-states.md:236, 287-290) | 2026-09-21 | a claim passed on | privacy verdict | record the indemnity |
 | 2.32 | SanGIS tax parcels (internal) | San Diego | no redistribution; a credit is PROHIBITED at this scale (united-states.md:245-270) | 2026-09-22 | a reviewer who **adds** a credit | nothing reaches outputs/ | none |
 | 2.33 | LA County Assessor parcels (internal) | Los Angeles | voided automatically on violation (united-states.md:239) | 2026-09-22 | the County | three fields only | none |
-| 2.34 | TaM, M réso / SMMAG, LiA GTFS (ODbL) | Montpellier, Grenoble, Le Havre | pure-extract station tables; §4.6 via the repository (DEC:6306-6370) | owner 2026-09-29 | each authority, on share-alike | notices 69-71 (COMP:987-1002) | the repository link |
+| 2.34 | TaM, M réso / SMMAG, LiA GTFS (ODbL) | Montpellier, Grenoble, Le Havre | pure-extract station tables; §4.6 via the repository (DEC:6306-6370) | owner 2026-09-29 | each authority, on share-alike | notices (COMP:987-1002) | the repository link |
 | 2.35 | SIRENE plus geolocation (INSEE, Licence Ouverte 2.0) | all 26 French cities | perpetual licence, with a **standing duty to honour the latest opt-out**; no refresh cadence (licenses/france-licence-ouverte-2.0.md:93-104) | 2026-09-23 | a person who opted out; INSEE | "Source : Insee" on every page (check M) | set a refresh cadence (needs the NAF 2025 mapping) |
-| 2.36 | OGL - Vancouver: licences, parcels, tax report, local areas | Vancouver (Regional) | terminates automatically on breach (DS:766-776) | 2026-09-21 | the City, on the notice's wording | notice 9, verbatim (COMP:463) | keep the en dash and "Licence" |
-| 2.37 | OGL - Surrey: directory, boundaries | Vancouver (Regional) | as 2.36 (DS:778-785) | 2026-09-21 | Surrey | notice 10 (COMP:467) | none |
-| 2.38 | OGL - Calgary: licences, CTrain GTFS, boundary | Calgary | as 2.36 (DS:859-869) | 2026-09-21 | the City | notice 14 (COMP:617) | none |
-| 2.39 | OGL - Toronto: MLS, TTC GTFS, address repository, boundary | Toronto | datasets say "License not specified"; site OGL applies; auto-termination (canada.md:122) | 2026-09-21 | the City | notice 16 (COMP:653) | none |
-| 2.40 | OGL - British Columbia: ABMS naming layer | Vancouver (Regional) | auto-termination; API terms changeable (canada.md:110) | 2026-09-22 | the Province | notice 17 (COMP:555) | none |
-| 2.41 | FIA 營業(稅籍)登記 (OGDL v1) | Taichung, Taoyuan, Taipei (Regional) | without the 顯名聲明, "視為自始未取得" (never licensed) (taiwan.md:41-57) | owner 2026-09-23 | the FIA; a sole proprietor under the PDPA | notice 44 (COMP:1362) | keep the statement exact |
-| 2.42 | Door-plate files (four bureaus) | Taichung, Taoyuan, Taipei (Regional) | OGDL attribution reaches derivatives; Taoyuan's undefined "interests" FAQ (DS:1666-1671) | owner 2026-09-25 | any bureau, if the statement lapses; Taoyuan | notices 45-47 | none, short of a written OK from Taoyuan |
-| 2.43 | Taiwan MRT station tables | Taichung, Taoyuan, Taipei (Regional) | OGDL v1; Taipei Metro's liability declaration (DS:1679-1682) | owner 2026-09-25 | an operator | notices 45-47 | none |
-| 2.44 | Rio IPP / DATA.RIO MetrôRio layers | Rio de Janeiro | CC BY 4.0, plus SIURB's fault-based damages clause (brazil.md:125-145) | owner 2026-09-23 | IPP | notice 39 (COMP:1227) | re-check for "sem alteração" before each republish |
-| 2.45 | Tokyo catalogue wards (Chūō, Minato, Shinjuku, Kōtō, Taitō, Shibuya registers) | Tokyo | CC BY with a fault-based cost clause and a date-of-use element (japan.md:129) | owner 2026-09-24 | a ward or the Metropolitan Government | notice 56 (COMP:1514) | none |
-| 2.46 | Wards on their own terms (Taitō, Setagaya, Meguro) | Tokyo | cost clauses; Taitō's site policy bars copying, but its licence page names the list (japan.md:131-133) | owner 2026-09-24 | Taitō | notice 56 | none |
-| 2.47 | Shibuya food list | Tokyo | terms "may change without notice ... re-read them before each republish" (japan.md:130) | 2026-09-24 | Shibuya | notice 56 | make the re-read a gate item |
-| 2.48 | City lists, CC BY with a fault-based cost clause | Sapporo, Fukuoka, Toyama, Kumamoto, Nagasaki, Kitakyushu, Kagoshima | the country-wide acceptance (japan.md:144-175) | owner 2026-09-24 | a city, after a lapse or a currency claim | notices 53, 54, 98, 99, 101, 103, 106 | none |
+| 2.36 | OGL - Vancouver: licences, parcels, tax report, local areas | Vancouver (Regional) | terminates automatically on breach (DS:766-776) | 2026-09-21 | the City, on the notice's wording | notice, verbatim (COMP:463) | keep the en dash and "Licence" |
+| 2.37 | OGL - Surrey: directory, boundaries | Vancouver (Regional) | as 2.36 (DS:778-785) | 2026-09-21 | Surrey | notice (COMP:467) | none |
+| 2.38 | OGL - Calgary: licences, CTrain GTFS, boundary | Calgary | as 2.36 (DS:859-869) | 2026-09-21 | the City | notice (COMP:617) | none |
+| 2.39 | OGL - Toronto: MLS, TTC GTFS, address repository, boundary | Toronto | datasets say "License not specified"; site OGL applies; auto-termination (canada.md:122) | 2026-09-21 | the City | notice (COMP:653) | none |
+| 2.40 | OGL - British Columbia: ABMS naming layer | Vancouver (Regional) | auto-termination; API terms changeable (canada.md:110) | 2026-09-22 | the Province | notice (COMP:555) | none |
+| 2.41 | FIA 營業(稅籍)登記 (OGDL v1) | Taichung, Taoyuan, Taipei (Regional) | without the 顯名聲明, "視為自始未取得" (never licensed) (taiwan.md:41-57) | owner 2026-09-23 | the FIA; a sole proprietor under the PDPA | notice (COMP:1362) | keep the statement exact |
+| 2.42 | Door-plate files (four bureaus) | Taichung, Taoyuan, Taipei (Regional) | OGDL attribution reaches derivatives; Taoyuan's undefined "interests" FAQ (DS:1666-1671) | owner 2026-09-25 | any bureau, if the statement lapses; Taoyuan | notices | none, short of a written OK from Taoyuan |
+| 2.43 | Taiwan MRT station tables | Taichung, Taoyuan, Taipei (Regional) | OGDL v1; Taipei Metro's liability declaration (DS:1679-1682) | owner 2026-09-25 | an operator | notices | none |
+| 2.44 | Rio IPP / DATA.RIO MetrôRio layers | Rio de Janeiro | CC BY 4.0, plus SIURB's fault-based damages clause (brazil.md:125-145) | owner 2026-09-23 | IPP | notice (COMP:1227) | re-check for "sem alteração" before each republish |
+| 2.45 | Tokyo catalogue wards (Chūō, Minato, Shinjuku, Kōtō, Taitō, Shibuya registers) | Tokyo | CC BY with a fault-based cost clause and a date-of-use element (japan.md:129) | owner 2026-09-24 | a ward or the Metropolitan Government | notice (COMP:1514) | none |
+| 2.46 | Wards on their own terms (Taitō, Setagaya, Meguro) | Tokyo | cost clauses; Taitō's site policy bars copying, but its licence page names the list (japan.md:131-133) | owner 2026-09-24 | Taitō | notice | none |
+| 2.47 | Shibuya food list | Tokyo | terms "may change without notice ... re-read them before each republish" (japan.md:130) | 2026-09-24 | Shibuya | notice | make the re-read a gate item |
+| 2.48 | City lists, CC BY with a fault-based cost clause | Sapporo, Fukuoka, Toyama, Kumamoto, Nagasaki, Kitakyushu, Kagoshima | the country-wide acceptance (japan.md:144-175) | owner 2026-09-24 | a city, after a lapse or a currency claim | notices | none |
 
 ### Tier 3 - explicit open licence, read, notice displayed
 
 | # | Source | Cities | Licence (doc:line) | Decided | Residual | Safety net |
 |---|---|---|---|---|---|---|
-| 3.1 | Ville de Montréal locaux-commerciaux and boundary | Montréal | CC BY 4.0; site "tous droits réservés" read as web-only (DS:812-857) | 2026-09-21 | no licence link | notice 12 (COMP:578) |
-| 3.2 | City of Sydney FES 2022 | Sydney | CC BY 4.0; website terms read as not incorporated (DS:2061-2064) | 2026-09-28 | the City's website terms | notice 64 (COMP:1900) |
-| 3.3 | Geostat Statistical Business Register | Tbilisi | "without restriction ... without prior permission" (georgia.md:60) | 2026-10-01/02 | Georgia's personal-data law is unread | notice 114 (COMP:2212) |
-| 3.4 | Tailte Éireann valuation register | Dublin | CC BY 4.0; three attribution strings, one chosen (DS:1186-1224) | 2026-09-22 | no licence link | notice 22 (COMP:876) |
-| 3.5 | Ayuntamiento de Madrid Censo de locales | Madrid | CC BY 4.0, plus conditions binding by use (spain.md:220-261) | 2026-09-22 | the update date must be kept current | notice 19 (COMP:497) |
-| 3.6 | INEGI DENUE | Mexico City, Guadalajara, Monterrey | Términos de Libre Uso §1(f)-(h) (DS:574-604) | 2026-09-22 | the notice must grow with each city | notice 8 (COMP:731) |
-| 3.7 | Comune di Milano six registers | Milan | CC BY 4.0 (DS:1240-1247) | 2026-09-22 | no licence link | notice 23 (COMP:896) |
-| 3.8 | Waterloo inspection layers and boundaries | Kitchener–Waterloo (Regional) | the Region's OGL (canada.md:109) | 2026-09-30 | the cited URL returns 404 | notice 73 |
-| 3.9 | Ottawa OPH feed and wards | Ottawa | OGL - Ottawa (canada.md:111) | 2026-09-29 | the feed is due to retire | notice 72 (COMP:1973) |
+| 3.1 | Ville de Montréal locaux-commerciaux and boundary | Montréal | CC BY 4.0; site "tous droits réservés" read as web-only (DS:812-857) | 2026-09-21 | no licence link | notice (COMP:578) |
+| 3.2 | City of Sydney FES 2022 | Sydney | CC BY 4.0; website terms read as not incorporated (DS:2061-2064) | 2026-09-28 | the City's website terms | notice (COMP:1900) |
+| 3.3 | Geostat Statistical Business Register | Tbilisi | "without restriction ... without prior permission" (georgia.md:60) | 2026-10-01/02 | Georgia's personal-data law is unread | notice (COMP:2212) |
+| 3.4 | Tailte Éireann valuation register | Dublin | CC BY 4.0; three attribution strings, one chosen (DS:1186-1224) | 2026-09-22 | no licence link | notice (COMP:876) |
+| 3.5 | Ayuntamiento de Madrid Censo de locales | Madrid | CC BY 4.0, plus conditions binding by use (spain.md:220-261) | 2026-09-22 | the update date must be kept current | notice (COMP:497) |
+| 3.6 | INEGI DENUE | Mexico City, Guadalajara, Monterrey | Términos de Libre Uso §1(f)-(h) (DS:574-604) | 2026-09-22 | the notice must grow with each city | notice (COMP:731) |
+| 3.7 | Comune di Milano six registers | Milan | CC BY 4.0 (DS:1240-1247) | 2026-09-22 | no licence link | notice (COMP:896) |
+| 3.8 | Waterloo inspection layers and boundaries | Kitchener–Waterloo (Regional) | the Region's OGL (canada.md:109) | 2026-09-30 | the cited URL returns 404 | notice |
+| 3.9 | Ottawa OPH feed and wards | Ottawa | OGL - Ottawa (canada.md:111) | 2026-09-29 | the feed is due to retire | notice (COMP:1973) |
 | 3.10 | REM GTFS | Montréal | CC BY 4.0, bundled (canada.md:119) | 2026-09-27 | none | notice (COMP:598) |
-| 3.11 | VBB GTFS | Berlin | CC BY 4.0 (DS:1882-1893) | 2026-09-28 | none | notice 57 (COMP:1804) |
-| 3.12 | Roma Capitale SUAP; ANNCSU | Rome | CC BY 4.0 (DS:1558-1574) | 2026-09-24 | none | notices 36-37 (COMP:1191-1201) |
-| 3.13 | Comune di Firenze layers | Florence | CC BY 4.0 (DS:2441-2451) | 2026-09-30 | none | notice 82 (COMP:2009) |
-| 3.14 | GCBA Usos del Suelo, Parcelas, Subte | Buenos Aires | CC BY 2.5 AR / 4.0 (DS:1957-1976) | 2026-09-28 | none | notice 60 (COMP:1844) |
-| 3.15 | City of Melbourne CLUE 2024 | Melbourne | CC BY 4.0 (DS:2073-2088) | 2026-09-28 | the page does not mention OSM | notice 65 (COMP:1912) |
+| 3.11 | VBB GTFS | Berlin | CC BY 4.0 (DS:1882-1893) | 2026-09-28 | none | notice (COMP:1804) |
+| 3.12 | Roma Capitale SUAP; ANNCSU | Rome | CC BY 4.0 (DS:1558-1574) | 2026-09-24 | none | notices (COMP:1191-1201) |
+| 3.13 | Comune di Firenze layers | Florence | CC BY 4.0 (DS:2441-2451) | 2026-09-30 | none | notice (COMP:2009) |
+| 3.14 | GCBA Usos del Suelo, Parcelas, Subte | Buenos Aires | CC BY 2.5 AR / 4.0 (DS:1957-1976) | 2026-09-28 | none | notice (COMP:1844) |
+| 3.15 | City of Melbourne CLUE 2024 | Melbourne | CC BY 4.0 (DS:2073-2088) | 2026-09-28 | the page does not mention OSM | notice (COMP:1912) |
 | 3.16 | FSA FHRS | London, Newcastle, Manchester, Birmingham, Sheffield, Nottingham, Blackpool | OGL v3; name and address treated as personal data (DS:1918-1922) | 2026-09-28; the UK six 2026-10-02 | sole traders | seven FSA notices |
-| 3.17 | FSS FHIS | Glasgow, Edinburgh | OGL v3 (DS:1995-1999) | 2026-09-28; 2026-10-02 | home bakers | notices 61, 89 |
+| 3.17 | FSS FHIS | Glasgow, Edinburgh | OGL v3 (DS:1995-1999) | 2026-09-28; 2026-10-02 | home bakers | notices |
 | 3.18 | OS Code-Point Open | eight UK cities | OGL v3; three statements (DS:1934-1951) | 2026-09-28 | the OS style guide was not read (owner: skip) | eight OS notices |
-| 3.19 | DfT NaPTAN (gate 3 only) | six UK cities | OGL v3 (DS:2509-2524) | 2026-10-02 | none | notice 86 (COMP:2057) |
+| 3.19 | DfT NaPTAN (gate 3 only) | six UK cities | OGL v3 (DS:2509-2524) | 2026-10-02 | none | notice (COMP:2057) |
 | 3.20 | French LO 2.0 tram feeds, taken from the NAP's declaration | Le Mans, Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice, Strasbourg, Nantes, Valenciennes | "not read one by one" (build_briefs/le_mans.md:66) | 2026-09-30 | operator mark or colour claims; the credit is inside the provenance guard | page credits |
 | 3.21 | Marseille Référentiel GTFS (Métropole AMP) | Marseille | LO 2.0 (licenses/france-licence-ouverte-2.0.md:162-167) | 2026-09-23 | the credit is inside the provenance guard | page credit |
 | 3.22 | MEL WFS layers | Lille (Regional) | LO 2.0; the retrieval date stands in for the update date | 2026-09-23 | the date element | page caption |
 | 3.23 | Atoumod Normandie aggregate | Caen, Rouen (Regional) | LO 2.0 (build_briefs/caen.md:76-99) | 2026-09-30 | the page shows the NAP window, not last_modified | page credits |
 | 3.24 | TBM GTFS (Bordeaux Métropole) | Bordeaux (Regional) | LO 1.0 (DEC:6327) | 2026-09-29 | none | page credit |
-| 3.25 | Entur GTFS (NLOD) | Oslo, Bergen | NLOD; Ruter's app agreement read as app-only (DS:1459-1477) | owner 2026-09-24 | Ruter | notice 29, with the logo |
-| 3.26 | KORDIS IDS JMK GTFS | Brno | CC BY 4.0; the web footer's BY-NC-SA read as web-only (DS:2352-2357) | owner 2026-09-30 | KORDIS | notice 78 |
-| 3.27 | PMDP GTFS (gate 3 only) | Plzeň | the record contradicts itself, and both readings permit (DS:2366-2379) | 2026-09-30 | notice framing still awaits owner review | notice 79 |
-| 3.28 | Brønnøysundregistrene | Oslo, Bergen | NLOD (DS:1431-1444) | 2026-09-24 | sole traders | notice 27 |
-| 3.29 | Kartverket addresses and boundaries | Oslo, Bergen | CC BY 4.0 (DS:1446-1457) | 2026-09-24 | none | notice 28 |
-| 3.30 | CVR via Datafordeler | Copenhagen, Aarhus, Odense | CC BY 4.0; closing the account is safe (DS:336-338, 1479-1490) | owner 2026-09-24 | none | notice 30 |
-| 3.31 | DAR (Klimadatastyrelsen) | Copenhagen, Aarhus, Odense | CC BY 4.0 (DS:1492-1503) | 2026-09-24 | none | notice 31 |
-| 3.32 | ČSÚ RES | seven Czech cities | CC BY 4.0 (DS:1505-1517) | 2026-09-24 | natural persons | notice 32 |
-| 3.33 | ČÚZK RÚIAN | seven Czech cities | CC BY 4.0, "ČÚZK, [rok]" (DS:1519-1530) | 2026-09-24 | none | notice 33 |
-| 3.34 | ROPID PID GTFS | Prague | CC BY (DS:1532-1542) | 2026-09-24 | none | notice 34 |
-| 3.35 | VZD cadastre and address register | Riga, Liepāja, Daugavpils | CC BY 4.0 (DS:1624-1630) | 2026-09-24 and 09-30 | none | notice 42 |
-| 3.36 | GEO RIGA layers | Riga | CC BY 4.0 (DS:1632-1639) | 2026-09-24 | the outline must not be called the city boundary | notice 43 |
-| 3.37 | CBS Monitor Leegstand | Rotterdam, Den Haag | CC BY 4.0 (DS:1601-1611) | 2026-09-24 and 09-30 | none | notice 40 |
+| 3.25 | Entur GTFS (NLOD) | Oslo, Bergen | NLOD; Ruter's app agreement read as app-only (DS:1459-1477) | owner 2026-09-24 | Ruter | notice, with the logo |
+| 3.26 | KORDIS IDS JMK GTFS | Brno | CC BY 4.0; the web footer's BY-NC-SA read as web-only (DS:2352-2357) | owner 2026-09-30 | KORDIS | notice |
+| 3.27 | PMDP GTFS (gate 3 only) | Plzeň | the record contradicts itself, and both readings permit (DS:2366-2379) | 2026-09-30 | notice framing still awaits owner review | notice |
+| 3.28 | Brønnøysundregistrene | Oslo, Bergen | NLOD (DS:1431-1444) | 2026-09-24 | sole traders | notice |
+| 3.29 | Kartverket addresses and boundaries | Oslo, Bergen | CC BY 4.0 (DS:1446-1457) | 2026-09-24 | none | notice |
+| 3.30 | CVR via Datafordeler | Copenhagen, Aarhus, Odense | CC BY 4.0; closing the account is safe (DS:336-338, 1479-1490) | owner 2026-09-24 | none | notice |
+| 3.31 | DAR (Klimadatastyrelsen) | Copenhagen, Aarhus, Odense | CC BY 4.0 (DS:1492-1503) | 2026-09-24 | none | notice |
+| 3.32 | ČSÚ RES | seven Czech cities | CC BY 4.0 (DS:1505-1517) | 2026-09-24 | natural persons | notice |
+| 3.33 | ČÚZK RÚIAN | seven Czech cities | CC BY 4.0, "ČÚZK, [rok]" (DS:1519-1530) | 2026-09-24 | none | notice |
+| 3.34 | ROPID PID GTFS | Prague | CC BY (DS:1532-1542) | 2026-09-24 | none | notice |
+| 3.35 | VZD cadastre and address register | Riga, Liepāja, Daugavpils | CC BY 4.0 (DS:1624-1630) | 2026-09-24 and 09-30 | none | notice |
+| 3.36 | GEO RIGA layers | Riga | CC BY 4.0 (DS:1632-1639) | 2026-09-24 | the outline must not be called the city boundary | notice |
+| 3.37 | CBS Monitor Leegstand | Rotterdam, Den Haag | CC BY 4.0 (DS:1601-1611) | 2026-09-24 and 09-30 | none | notice |
 | 3.38 | NYS Retail Food, Appearance Enhancement | New York, Buffalo | OPEN-NY: "you may use it as you wish" (united-states.md:296) | 2026-09-21 | a stop in writing on breach | name columns never selected |
 | 3.39 | NYC DOHMH, DCWP, boroughs | New York | Local Law 11 (united-states.md:299; DS:539-553) | 2026-09-21 | DoITT's source, version and modifications | About and Excluded pages |
 | 3.40 | MLIT 位置参照情報 | all 20 Japanese cities | PDL 1.0 (japan.md:125) | 2026-09-24 | **the level names are missing from the notice** | the 出典 line in each notice |
 | 3.41 | MLIT N02 鉄道 | all 20 Japanese cities | PDL 1.0 (japan.md:126-127) | 2026-09-21 | URL and processor "Check at build", never closed | the credit in each notice |
-| 3.42 | Seoul 인허가 (KOGL Type 1) | Seoul | KOGL 1 (south-korea.md:108-141) | 2026-09-22 to 09-25 | none | notice 18 (COMP:1307) |
-| 3.43 | City lists, CC BY with no cost clause | Osaka, Kyoto, Yokohama, Utsunomiya, Kōchi | japan.md:142-160 | 2026-09-24 to 10-02 | none | notices 52, 55, 75, 102, 108 |
-| 3.44 | City lists, CC BY 2.1 JP | Kobe, Hakodate | japan.md:143, 155 | 2026-09-24; 2026-10-02 | none | notices 50, 105 |
+| 3.42 | Seoul 인허가 (KOGL Type 1) | Seoul | KOGL 1 (south-korea.md:108-141) | 2026-09-22 to 09-25 | none | notice (COMP:1307) |
+| 3.43 | City lists, CC BY with no cost clause | Osaka, Kyoto, Yokohama, Utsunomiya, Kōchi | japan.md:142-160 | 2026-09-24 to 10-02 | none | notices |
+| 3.44 | City lists, CC BY 2.1 JP | Kobe, Hakodate | japan.md:143, 155 | 2026-09-24; 2026-10-02 | none | notices |
 
 ### Tier 4 - public domain or no copyright
 
@@ -269,8 +275,8 @@ These come from a read-only search of `app/components.py` `_NOTICES` and `app/pa
    The record makes the link a condition: "an unlinked repo is not an offer" (`docs/decisions/2026-09-20.md:8101-8105`; `DS:1329-1331, 1378-1381, 1417-1418`). Streamlit Community Cloud may show a GitHub icon in its toolbar for public apps, but this was not verified and the record does not claim it. **Verify on the live site, or add a link.**
 2. **No ODbL notice on any committed station CSV.** The record says "the committed station file carries an ODbL notice" (`brazil.md:177-179`). A search of `outputs/` finds ODbL text only in five `provenance.json` files: Angers, Grenoble, Le Havre, Montpellier and Tbilisi. It is not in any `excluded_stations.csv`, which leaves the Toulouse and Rennes §4.4 question open (`DS:1394-1401, 1427-1429`).
 3. **NTA (Dublin)** has no credit at all.
-4. **Milan's rail** is not credited. Notice 23 names only the registers (COMP:896).
-5. **STM (notice 13, COMP:586)** lacks the statement of modifications or interpretations that the portal requires: "a bare credit does not satisfy it" (`canada.md:118`).
+4. **Milan's rail** is not credited. Notice names only the registers (COMP:896).
+5. **STM (notice, COMP:586)** lacks the statement of modifications or interpretations that the portal requires: "a bare credit does not satisfy it" (`canada.md:118`).
 6. **SFMTA "Must also display liability disclaimers"** (`united-states.md:342`) is not rendered. The stored clause ties it to a "use agreement", so it may not apply, but the record says it is required.
 7. **MLIT, all 20 Japanese cities:**
    - The 位置参照情報 notice omits the level names 街区レベル and 大字・町丁目レベル that `japan.md:125` requires.
@@ -315,7 +321,7 @@ These come from a read-only search of `app/components.py` `_NOTICES` and `app/pa
     - Liquor Board: check its accuracy note at each refresh.
     - Shibuya: re-read the terms before each republish. No record of the latest re-read was found.
 13. **Pending owner reviews:** Plzeň's notice framing (`DS:2376-2377`). Geostat's wording is approved (`DEC:15982`), but a comment still says "flagged for review" (COMP:2211).
-14. **Stale pointers:** the twelve batch Japanese cities and the UK six cite `docs/decisions_drafts/japan-batch.md` and `uk-six.md`. Neither file is in the tree, and their entries are now in `DECISIONS.md`. Separately, the Japan batch notices 97-108 say they "land with the Japan batch at review time", so those twelve cities assume the notices ship with their pages.
+14. **Stale pointers:** the twelve batch Japanese cities and the UK six cite `docs/decisions_drafts/japan-batch.md` and `uk-six.md`. Neither file is in the tree, and their entries are now in `DECISIONS.md`. Separately, the Japan batch notices say they "land with the Japan batch at review time", so those twelve cities assume the notices ship with their pages.
 
 ---
 
@@ -366,7 +372,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "the live site-wide kingcounty.gov terms forbid publishing without written permission. The owner reads the dataset's declaration and the data terms as governing" (US:304); polygons "read as permitted with the food inspections" (US:182)
 - Decided by / when: owner (2026-10-01, "option 1", "defensible") (DRAFT:630-641; DS:2957)
 - What would flag it: King County, on its live terms; note the displayed legend "Data provided by permission of King County" rests on archived terms, so a reader could call it a claim of permission never given
-- Safety net: notice 109 (COMP:2188-2191, adds "Not endorsed by King County"); page credit (app/pages/174_Seattle_Heatmap.py:48-50); no USPS-derived address fields (US:49); removal rule; privacy verdict publish (docs/privacy_verdicts.md:165)
+- Safety net: notice (COMP:2188-2191, adds "Not endorsed by King County"); page credit (app/pages/174_Seattle_Heatmap.py:48-50); no USPS-derived address fields (US:49); removal rule; privacy verdict publish (docs/privacy_verdicts.md:165)
 - Strengthen: written confirmation from King County, or a live copy of the Open Data terms
 
 #### US-PHL-OPA - OPA Property Assessments (City of Philadelphia, Carto)
@@ -386,7 +392,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "The owner reads the data's own field as governing it: a free, non-commercial map falls outside its one prohibition" (US:303)
 - Decided by / when: owner (2026-10-01, option 1) (DRAFT:625-641; DS:3002)
 - What would flag it: City of Bellevue on the portal terms; any move to commercial use breaks even the narrow reading
-- Safety net: notice 112 (COMP:2203-2205); page credit (174_Seattle:54); legal name, UBI, mailing never requested (US:47); removal "takes the layer down first" (DS:3009)
+- Safety net: notice (COMP:2203-2205); page credit (174_Seattle:54); legal name, UBI, mailing never requested (US:47); removal "takes the layer down first" (DS:3009)
 - Strengthen: written confirmation from Bellevue
 
 #### US-SNOCO-FOOD - Food Service Establishments (2025) (Snohomish County)
@@ -396,7 +402,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "SILENT, read permissively ... website's 'All rights reserved' as a web-page footer" (US:305; DRAFT:193-200)
 - Decided by / when: owner (2026-10-02, "permissive read") (DRAFT:186-200; DS:2989)
 - What would flag it: Snohomish County on its site-wide reservation
-- Safety net: notice 111 with "not a current, complete or official record" (COMP:2198-2202); page credit (174_Seattle:50-51); removal rule
+- Safety net: notice with "not a current, complete or official record" (COMP:2198-2202); page credit (174_Seattle:50-51); removal rule
 - Strengthen: written confirmation, or a catalogue-listed copy with a stated licence
 
 #### US-PHL-LIMITS - City Limits boundary (City of Philadelphia, Planning and Development)
@@ -426,7 +432,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "SILENT, read as permitted by the owner ... over two sibling City disclaimers ... 'for your personal use'" (US:232; DS:2422-2427)
 - Decided by / when: owner (2026-09-30) (DEC:1446)
 - What would flag it: City of Tucson citing its sibling disclaimers; A.R.S. 39-121.03 if the project became commercial (DS:2433)
-- Safety net: notice 81 (COMP:2001-2003); page quotes "should not be considered a complete listing" (app/pages/134_Tucson_Heatmap.py:92); sole-proprietor names withheld (US:56); privacy verdict publish (docs/privacy_verdicts.md:102)
+- Safety net: notice (COMP:2001-2003); page quotes "should not be considered a complete listing" (app/pages/134_Tucson_Heatmap.py:92); sole-proprietor names withheld (US:56); privacy verdict publish (docs/privacy_verdicts.md:102)
 - Strengthen: written confirmation from the City
 
 #### US-DAL-AP - Address Points (City of Dallas Development Services GIS)
@@ -460,7 +466,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: §9(i) "all rights and licenses granted to you will terminate immediately" (US:369-375); account must stay live (US:401-407)
 - Decided by / when: owner (2026-09-21, account re-established; re-confirmed 2026-09-22) (ARCH:16075; docs/gated_access.md:24)
 - What would flag it: WMATA revoking the key, or reading committed outputs/ on a public GitHub repo as "sharing ... with any other person" (US:348)
-- Safety net: gate item 10 (DS:736-746); _AS_RECORDED for §6 (COMP:2265-2274); _NON_AFFILIATION (COMP:2225-2230); key never stored
+- Safety net: gate item (DS:736-746); _AS_RECORDED for §6 (COMP:2265-2274); _NON_AFFILIATION (COMP:2225-2230); key never stored
 - Strengthen: written WMATA confirmation that the public repo's outputs are "within your Application"
 
 #### US-LAMETRO - LA Metro Rail GTFS (LACMTA)
@@ -480,7 +486,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "data that can be 'configured as a list of individuals' may not be used 'for a commercial purpose'" (US:302)
 - Decided by / when: licence-read + owner "no commercial, nothing sold" (2026-10-01) (DRAFT:616-624)
 - What would flag it: City of Seattle if the project took ads, a paid tier or client use
-- Safety net: notice 113 (COMP:2206-2208); contact, phone, mailing, legal name never requested (US:46)
+- Safety net: notice (COMP:2206-2208); contact, phone, mailing, legal name never requested (US:46)
 - Strengthen: none needed while non-commercial
 
 #### US-LCB - Off Premise licensee list (Washington State Liquor and Cannabis Board)
@@ -490,7 +496,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "records received through the Public Records Act may not be used for commercial purposes" (US:307; DRAFT:229-251)
 - Decided by / when: licence-read + owner "yes non-commercial" (2026-10-02)
 - What would flag it: the Board, on commercial use or a claim of completeness
-- Safety net: notice 110 with date and the Board's note (COMP:2192-2197); page caption (174_Seattle:51-54); Licensee, ID, phone, mailing never read (US:52)
+- Safety net: notice with date and the Board's note (COMP:2192-2197); page caption (174_Seattle:51-54); Licensee, ID, phone, mailing never read (US:52)
 - Strengthen: none needed; re-check the note at each refresh (DS:2982)
 
 #### US-SAC-REG - Business Operation Tax Information (City of Sacramento)
@@ -530,7 +536,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "Reproduced with permission granted by the City and County of San Francisco ..." (DS:518-523)
 - Decided by / when: licence check (2026-09-21)
 - What would flag it: SFMTA revoking; the liability-disclaimer requirement (US:342) not visibly met
-- Safety net: notice 3 verbatim (COMP:439-444); own palette, no Muni branding (US:595-596)
+- Safety net: notice verbatim (COMP:439-444); own palette, no Muni branding (US:595-596)
 - Strengthen: add SFMTA's disclaimer, or record why "use agreement" does not apply
 
 #### US-MTS - MTS Trolley GTFS (San Diego MTS)
@@ -550,7 +556,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: "may require a user of this data to terminate any and all display ... for any reason" (US:297)
 - Decided by / when: licence check (2026-09-21)
 - What would flag it: the City terminating; indemnity not recorded as accepted
-- Safety net: notice 2 verbatim site-wide (COMP:430-438); privacy verdict publish (docs/privacy_verdicts.md:26)
+- Safety net: notice verbatim site-wide (COMP:430-438); privacy verdict publish (docs/privacy_verdicts.md:26)
 - Strengthen: record the indemnity acceptance
 
 #### US-KCMO - Business License Holders kkhs-93m4 (City of Kansas City, Missouri)
@@ -560,7 +566,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: KCMO Code s.2-2134(a) "no restrictions or requirements placed on use" overrides the undated terms (DS:2403-2411)
 - Decided by / when: owner (2026-09-30) (DEC:1566-1581)
 - What would flag it: the City invoking its terms page indemnity
-- Safety net: notice 80 verbatim (COMP:1984-1997); fetch stops if the licence leaves Public Domain (US:54); privacy verdict publish (docs/privacy_verdicts.md:101)
+- Safety net: notice verbatim (COMP:1984-1997); fetch stops if the licence leaves Public Domain (US:54); privacy verdict publish (docs/privacy_verdicts.md:101)
 - Strengthen: check Finance-department terms before a republish (DS:2415)
 
 #### US-CTA - CTA GTFS (Chicago Transit Authority)
@@ -580,7 +586,7 @@ Philadelphia's 11th St (US:27). Basemap: all 19.
 - Rests on: §3.1 "non-exclusive, limited, and revocable rights to use, reproduce, and redistribute" (US:346)
 - Decided by / when: licence check (2026-09-21)
 - What would flag it: MassDOT revoking
-- Safety net: notice 7 (COMP:449-451); page line (app/pages/8_Boston_Heatmap.py:90); local copy kept
+- Safety net: notice (COMP:449-451); page line (app/pages/8_Boston_Heatmap.py:90); local copy kept
 - Strengthen: none needed
 
 #### US-SEPTA - SEPTA Metro GTFS (SEPTA)
@@ -837,7 +843,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: nothing. The row names only endpoint, currency and trim (docs/data_sources/ireland.md:110-122, :168); a repo-wide grep for NTA/Transport for Ireland near licence/terms/CC BY/attribution finds no reading
 - Decided by / when: build session 2026-09-22 switched OSM to the NTA feed mid-build (docs/decisions/2026-09-20.md:10441-10451); licence never read
 - What would flag it: the NTA, if its terms require attribution or restrict modification; a reviewer finding drawn geometry with no source credit
-- Safety net: none specific; no notice in _NOTICES and no credit on app/pages/19_Dublin_Heatmap.py; OSM cross-check (notice 1) could replace it
+- Safety net: none specific; no notice in _NOTICES and no credit on app/pages/19_Dublin_Heatmap.py; OSM cross-check (notice) could replace it
 - Strengthen: run licence-read on the NTA GTFS terms now, add a notice; fallback is OSM geometry, already cached as the cross-check
 
 #### MIL-ATM - ATM metro layers ds535/ds539/ds533 and gtfs.zip (Comune di Milano portal / ATM)
@@ -847,8 +853,8 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "The rail sources' licence is recorded as CC-BY but has NOT been read ... a separate read-licence job before the deploy gate" (docs/build_briefs/milan.md:382-384, :392-394); docs/data_sources.md:1236-1238 still says only "declare"
 - Decided by / when: build session 2026-09-22; the promised read is not recorded as done
 - What would flag it: ATM or the Comune if the GTFS carries other terms (the portal mixes cc-by, other-at, cc-zero: docs/data_sources.md:1271-1273); missing CC BY attribution/modification statement for the rail
-- Safety net: notice 23 (app/components.py:896-904) says "Contains data from the Comune di Milano" but names only the six registers; the page says only "in ATM's own colors" (app/pages/20_Milan_Heatmap.py:52)
-- Strengthen: read the ds535/ds539/gtfs.zip terms (licence-read), then add the rail to notice 23 with a modification sentence
+- Safety net: notice (app/components.py:896-904) says "Contains data from the Comune di Milano" but names only the six registers; the page says only "in ATM's own colors" (app/pages/20_Milan_Heatmap.py:52)
+- Strengthen: read the ds535/ds539/gtfs.zip terms (licence-read), then add the rail to notice with a modification sentence
 
 #### KW-TABLES - Inspections.zip and Inspections_PS.zip bulk tables (Region of Waterloo Public Health)
 - Cities: Kitchener-Waterloo (Regional)
@@ -857,7 +863,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: Hub shows "No License Provided / Request permission to use"; owner: portal says "By downloading the data on the portal, you are agreeing to the Open Data License" (docs/data_sources.md:2237-2244; canada.md:109)
 - Decided by / when: owner, 2026-09-30 (DECISIONS.md:3960)
 - What would flag it: the Region, on the Esri "request permission" label
-- Safety net: notice 73 "Region of Waterloo (Kitchener-Waterloo)" (app/components.py:680-692) displayed by choice; "Any objection from the Region is honoured" (docs/data_sources.md:2243-2244); SiteTelephone never fetched; privacy verdict publish (docs/privacy_verdicts.md:131)
+- Safety net: notice "Region of Waterloo (Kitchener-Waterloo)" (app/components.py:680-692) displayed by choice; "Any objection from the Region is honoured" (docs/data_sources.md:2243-2244); SiteTelephone never fetched; privacy verdict publish (docs/privacy_verdicts.md:131)
 - Strengthen: written confirmation from the Region's open-data contact that the portal licence covers the zips
 
 #### CAT-PALMA - INSPIRE Addresses, Palma 07040 (Dirección General del Catastro)
@@ -867,7 +873,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: 2016 "Licencia de Acceso y Uso" "bars distributing 'información original' untransformed, and asks the reuser to bear third-party claims"; CC BY 4.0 is "the dated, current declaration" (docs/build_briefs/palma.md:97-104; spain.md:201-204)
 - Decided by / when: owner, 2026-09-29 (DECISIONS.md:5347-5349, call C)
 - What would flag it: Catastro, reading the 2016 PDF as still governing (each pin sits on Catastro's exact coordinate)
-- Safety net: notice 74 (app/components.py:846-860) names Catastro as author and owner, CC BY 4.0 linked, join and access date stated; the address layer is never published; privacy verdict publish (docs/privacy_verdicts.md:132)
+- Safety net: notice (app/components.py:846-860) names Catastro as author and owner, CC BY 4.0 linked, join and access date stated; the address layer is never published; privacy verdict publish (docs/privacy_verdicts.md:132)
 - Strengthen: ask Catastro to confirm CC BY 4.0 supersedes the 2016 PDF, or record that the HVD regulation makes it so
 
 ### Tier 2 - conditional on a state the project must keep
@@ -879,7 +885,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: Art. 8 "content ... may not be altered" read as barring misrepresentation, not analysis (docs/data_sources.md:1142-1162); notification "not yet sent" (docs/data_sources.md:333, :1094-1112; docs/notifications/barcelona-city-council.md:1, :58-63)
 - Decided by / when: owner, 2026-09-22 (publish on disclosed position); live terms read by the owner 2026-09-22 (docs/data_sources.md:1114-1117)
 - What would flag it: the Ajuntament, on alteration or on never having been informed
-- Safety net: notice 21 "Ajuntament de Barcelona" (app/components.py:822-835) prescribed credit, modifications itemised, notification status stated; Referencia_Cadastral never requested; "If the Council reads it the other way, Barcelona comes down" (docs/data_sources.md:1160-1162); privacy verdict publish (docs/privacy_verdicts.md:40)
+- Safety net: notice "Ajuntament de Barcelona" (app/components.py:822-835) prescribed credit, modifications itemised, notification status stated; Referencia_Cadastral never requested; "If the Council reads it the other way, Barcelona comes down" (docs/data_sources.md:1160-1162); privacy verdict publish (docs/privacy_verdicts.md:40)
 - Strengthen: retry the notification channel (atencioenlinia) and record delivery; no deadline, but every day undelivered is the exposure
 
 #### GOIB-PALMA - Registre d'Establiments de Restauració i Entreteniment de Mallorca (Consell de Mallorca on the GOIB catalogue)
@@ -889,7 +895,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: reuser "accepta indemnitzar ... pel mer ús, reproducció, modificació o distribució", no cap (docs/data_sources.md:437-448); call A extends Barcelona's reading (DECISIONS.md:5342-5343)
 - Decided by / when: owner, 2026-09-29 (DECISIONS.md:5341-5349)
 - What would flag it: GOIB or the Consell (alteration; any third-party claim triggers the indemnity)
-- Safety net: notice 74 (app/components.py:846-860) carries every GOIB element (credit, author, title, licence link, URI, update date, modified); Explotador/s never read; GOIB's "urged" courtesy notification not done (docs/data_sources.md:2274-2275)
+- Safety net: notice (app/components.py:846-860) carries every GOIB element (credit, author, title, licence link, URI, update date, modified); Explotador/s never read; GOIB's "urged" courtesy notification not done (docs/data_sources.md:2274-2275)
 - Strengthen: send GOIB the urged courtesy note; it costs nothing and narrows the alteration reading
 
 #### STM - Métro GTFS / geometry (Société de transport de Montréal, on the Ville's portal)
@@ -899,7 +905,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: portal condition "préciser si des modifications ont été effectuées ou si des interprétations en ont été tirées ... a bare credit does not satisfy it" (docs/data_sources/canada.md:118)
 - Decided by / when: build session 2026-09-21
 - What would flag it: STM or the Ville; CC BY 4.0 §3(a)(1)(B) and the portal's broader clause
-- Safety net: notice 13 (app/components.py:586-590) credits STM and names CC BY 4.0 (no link, no modification sentence)
+- Safety net: notice (app/components.py:586-590) credits STM and names CC BY 4.0 (no link, no modification sentence)
 - Strengthen: add one sentence of changes (lines redrawn, off-island stations removed) and the licence link, as the REM notice beside it does
 
 #### CRTM - M4_Red and M10_Red feature services (Consorcio Regional de Transportes de Madrid)
@@ -909,7 +915,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "garantizar que la información mostrada ... esté siempre actualizada" read as a misrepresentation rule, met by stating CRTM's 5 June 2026 date (docs/data_sources/spain.md:115-153, :298-329)
 - Decided by / when: owner decision 2026-09-22 (spain.md:115); ML1 amendment owner 2026-09-27
 - What would flag it: CRTM, if layers are edited after 5 June 2026 and the map still shows the old network; CRTM may block a reuser whose fetching degrades its systems
-- Safety net: notice 20 "Powered by CRTM - www.crtm.es" verbatim, datos explotados disclosed, date stated (app/components.py:519-532); brief_check arcgis_layer max_age_days watches edit dates (spain.md:146-148)
+- Safety net: notice "Powered by CRTM - www.crtm.es" verbatim, datos explotados disclosed, date stated (app/components.py:519-532); brief_check arcgis_layer max_age_days watches edit dates (spain.md:146-148)
 - Strengthen: none needed beyond keeping the max_age check green and re-rendering when CRTM edits
 
 #### TRANSLINK - SkyTrain static GTFS (TransLink)
@@ -919,7 +925,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "limited, revocable and non-exclusive license to use, reproduce, and redistribute"; "must provide TransLink sufficient information ... to identify you" read as a duty to answer, not a precondition (docs/data_sources/canada.md:117)
 - Decided by / when: build session, recorded as a stated position 2026-09-21 (docs/decisions/2026-09-20.md:17339)
 - What would flag it: TransLink revoking, or asking who uses the data and getting no answer
-- Safety net: notice 11 Legend verbatim (app/components.py:533-537); no TransLink marks; both term texts stored in docs/licenses/
+- Safety net: notice Legend verbatim (app/components.py:533-537); no TransLink marks; both term texts stored in docs/licenses/
 - Strengthen: none needed; keep a reply ready if TransLink asks
 
 #### EDMONTON - Business Licences, ETS GTFS, Corporate Boundary (City of Edmonton Open Data Terms of Use)
@@ -929,7 +935,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: distributing "in original or modified form" requires the Terms URL and binding recipients "without introducing any further restrictions" (docs/data_sources.md:879-897; canada.md:121)
 - Decided by / when: build session 2026-09-21 (corrected from "nothing owed" the same day)
 - What would flag it: the City, if the repo LICENSE ever restricted outputs/ or the URL were dropped
-- Safety net: notice 15 "City of Edmonton" with the URL, changes and no-endorsement (app/components.py:657-667); repo LICENSE disclaims MIT over outputs/; PDF stored (docs/licenses/edmonton-open-data-terms-of-use.pdf); privacy verdict publish (docs/privacy_verdicts.md:35)
+- Safety net: notice "City of Edmonton" with the URL, changes and no-endorsement (app/components.py:657-667); repo LICENSE disclaims MIT over outputs/; PDF stored (docs/licenses/edmonton-open-data-terms-of-use.pdf); privacy verdict publish (docs/privacy_verdicts.md:35)
 - Strengthen: none needed; keep outputs/ outside the MIT grant
 
 #### OGL-VANCOUVER - Business Licences, Property Parcel Polygons, Property Tax Report, local-area-boundary (City of Vancouver)
@@ -939,7 +945,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "if you fail to comply with any of them, the rights granted ... will end automatically" (docs/data_sources.md:766-776)
 - Decided by / when: build session 2026-09-21
 - What would flag it: the City, on a missing or altered verbatim notice
-- Safety net: notice 9 verbatim (app/components.py:463-466); no owner or mailing field downloaded (canada.md:19); privacy verdict publish (docs/privacy_verdicts.md:32)
+- Safety net: notice verbatim (app/components.py:463-466); no owner or mailing field downloaded (canada.md:19); privacy verdict publish (docs/privacy_verdicts.md:32)
 - Strengthen: none needed; keep the en dash and "Licence" exact
 
 #### OGL-SURREY - Surrey Business Directory and City Boundaries (City of Surrey)
@@ -949,7 +955,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "The same OGL template, with Surrey's own wording ... also terminates automatically on breach" (docs/data_sources.md:778-785)
 - Decided by / when: build session 2026-09-21
 - What would flag it: the City, on a wrong-template notice (hyphen and "License")
-- Safety net: notice 10 verbatim (app/components.py:467-470); Home Occupation dropped, PhoneNumber dropped and asserted absent (canada.md:20)
+- Safety net: notice verbatim (app/components.py:467-470); Home Occupation dropped, PhoneNumber dropped and asserted absent (canada.md:20)
 - Strengthen: none needed
 
 #### OGL-CALGARY - Business Licences, CTrain GTFS, City Boundary (City of Calgary)
@@ -959,7 +965,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "worldwide, royalty-free, perpetual ... including for commercial purposes"; "Terminates automatically on breach" (docs/data_sources/canada.md:120; docs/data_sources.md:859-869)
 - Decided by / when: build session 2026-09-21
 - What would flag it: the City, on notice wording
-- Safety net: notice 14 verbatim (app/components.py:617-620); licence stored docs/licenses/calgary-open-government-licence.txt; privacy verdict publish (docs/privacy_verdicts.md:34)
+- Safety net: notice verbatim (app/components.py:617-620); licence stored docs/licenses/calgary-open-government-licence.txt; privacy verdict publish (docs/privacy_verdicts.md:34)
 - Strengthen: none needed
 
 #### OGL-TORONTO - MLS register, TTC GTFS, One Address Repository, Regional Municipal Boundary (City of Toronto)
@@ -969,7 +975,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "Both declare 'License not specified' at dataset level ... captured from open.toronto.ca/open-data-licence/" (docs/data_sources/canada.md:122; data_sources.md:913-924); address repository "same license as the business data" (canada.md:17)
 - Decided by / when: build session 2026-09-21
 - What would flag it: the City, on notice wording; Client Name / phone columns never read (canada.md:47-48)
-- Safety net: notice 16 verbatim (app/components.py:653-656); privacy verdict publish (docs/privacy_verdicts.md:36)
+- Safety net: notice verbatim (app/components.py:653-656); privacy verdict publish (docs/privacy_verdicts.md:36)
 - Strengthen: none needed
 
 #### OGL-BC - ABMS municipalities WFS, naming layer (Province of British Columbia)
@@ -979,7 +985,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: OGL-BC v2.0 "Terminates automatically on breach"; API Terms add "no new notice"; two sibling layers are "Access Only" (docs/data_sources/canada.md:110; data_sources.md:953-1003)
 - Decided by / when: build session 2026-09-22
 - What would flag it: the Province, on wording, or if the build ever drifted to an Access Only sibling
-- Safety net: notice 17 verbatim (app/components.py:555-558); licence stored docs/licenses/bc-open-government-licence.txt
+- Safety net: notice verbatim (app/components.py:555-558); licence stored docs/licenses/bc-open-government-licence.txt
 - Strengthen: none needed
 
 ### Tier 3 - explicit open licence, read, notice displayed
@@ -991,8 +997,8 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: montreal.ca mentions-légales "written entirely in web-page language ... contains no data language at all" (docs/data_sources.md:846-857); interpretation clause (:812-831)
 - Decided by / when: build session 2026-09-21
 - What would flag it: the Ville, reading the site terms as reaching data; no licence URI in the notice
-- Safety net: notice 12 states modifications and interpretations, no endorsement (app/components.py:578-585); no registrant-name column; privacy verdict publish (docs/privacy_verdicts.md:33)
-- Strengthen: add the CC BY 4.0 link to notice 12
+- Safety net: notice states modifications and interpretations, no endorsement (app/components.py:578-585); no registrant-name column; privacy verdict publish (docs/privacy_verdicts.md:33)
+- Strengthen: add the CC BY 4.0 link to notice
 
 #### SYDNEY-FES - Floor Space and Employment Survey 2022 (City of Sydney)
 - Cities: Sydney
@@ -1001,7 +1007,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: website terms "bar republishing its content without written authorisation; the read judged them written for that site's pages" (docs/data_sources.md:2061-2064)
 - Decided by / when: licence-read 2026-09-28; owner "noted, not a blocker" 2026-09-28
 - What would flag it: the City, reading its website terms as covering the data hub
-- Safety net: notice 64 with licence, dataset link, modification, warranty disclaimer (app/components.py:1900-1907); no names or addresses; privacy publish-structural (docs/privacy_verdicts.md:83)
+- Safety net: notice with licence, dataset link, modification, warranty disclaimer (app/components.py:1900-1907); no names or addresses; privacy publish-structural (docs/privacy_verdicts.md:83)
 - Strengthen: none needed
 
 #### GEOSTAT - Statistical Business Register (National Statistics Office of Georgia)
@@ -1011,7 +1017,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "for any purpose, including commercial and non-commercial use, without restriction ... without prior permission" (docs/data_sources/georgia.md:60; data_sources.md:3025-3034); footer read as site-only (docs/georgia_step0_endpoints.md:174-176)
 - Decided by / when: licence-read 2026-10-01, re-read 2026-10-02; notice approved by owner 2026-10-02 (DECISIONS.md:15982)
 - What would flag it: an individual entrepreneur, or a company named for a person (148 shown); Georgian data-protection law is not recorded as read
-- Safety net: notice 114 (app/components.py:2212-2216) and page caption (app/pages/175_Tbilisi_Heatmap.py:46-49); personal numbers and IE names never written to disk; privacy verdict publish (docs/privacy_verdicts.md:166)
+- Safety net: notice (app/components.py:2212-2216) and page caption (app/pages/175_Tbilisi_Heatmap.py:46-49); personal numbers and IE names never written to disk; privacy verdict publish (docs/privacy_verdicts.md:166)
 - Strengthen: record a reading of Georgia's personal-data law for named companies
 
 #### FSA-FHRS - Food Hygiene Rating Scheme open data (Food Standards Agency, with the councils)
@@ -1021,7 +1027,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "the FSA's privacy notice treats a business's name and address as personal data and the OGL does not license it" (docs/data_sources.md:1918-1922)
 - Decided by / when: licence-read 2026-09-28; owner wording and personal-data rule 2026-09-28; UK six by notice precedent 2026-10-02
 - What would flag it: a sole trader shown by name; the FSA on "FHRS" name or ratings shown
-- Safety net: notices 58, 62, 84, 87, 91, 93, 95 (app/components.py:1815, 1875, 2032, 2067, 2114, 2137, 2160); flat and childminder rules, private addresses never placed, no ratings; verdicts publish (docs/privacy_verdicts.md:79, 82, 147-152)
+- Safety net: notices (app/components.py:1815, 1875, 2032, 2067, 2114, 2137, 2160); flat and childminder rules, private addresses never placed, no ratings; verdicts publish (docs/privacy_verdicts.md:79, 82, 147-152)
 - Strengthen: none needed
 
 #### FSS-FHIS - Food Hygiene Information Scheme (Food Standards Scotland, via the FSA files)
@@ -1031,7 +1037,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "FSS's FHIS privacy notice counts the operator's name and address as personal information" (docs/data_sources.md:1995-1999)
 - Decided by / when: licence-read 2026-09-28; owner 2026-09-28; Edinburgh 2026-10-02
 - What would flag it: home bakers at a flat (Glasgow's 185 now withheld); "FHRS" misnaming
-- Safety net: notices 61, 89 (app/components.py:1862, 2090); verdicts publish (docs/privacy_verdicts.md:81, 149)
+- Safety net: notices (app/components.py:1862, 2090); verdicts publish (docs/privacy_verdicts.md:81, 149)
 - Strengthen: none needed
 
 #### TAILTE - Rateable valuation register (Tailte Éireann)
@@ -1041,7 +1047,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "No document ranks them ... Recorded as a disclosed position" (docs/data_sources.md:1186-1193); Eircode dropped (:1209-1224)
 - Decided by / when: licence-read 2026-09-22; Eircode owner 2026-09-22
 - What would flag it: Tailte on wording; GeoDirectory if Eircodes ever returned
-- Safety net: notice 22 with modification and warranty sentences (app/components.py:876-885); no name column; publish-structural (docs/privacy_verdicts.md:41)
+- Safety net: notice with modification and warranty sentences (app/components.py:876-885); no name column; publish-structural (docs/privacy_verdicts.md:41)
 - Strengthen: add the CC BY 4.0 link
 
 #### MADRID-CENSO - Censo de locales (Ayuntamiento de Madrid)
@@ -1051,7 +1057,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: "obligan a cualquier persona y/o empresa que reutilice datos por el mero hecho de hacer uso" (docs/data_sources/spain.md:220-261)
 - Decided by / when: build session 2026-09-22
 - What would flag it: the Ayuntamiento under Ley 37/2007 art. 11 sanctions (re-identification, distortion)
-- Safety net: notice 19 with prescribed form and date (app/components.py:497-508); no registrant column; verdict publish (docs/privacy_verdicts.md:39)
+- Safety net: notice with prescribed form and date (app/components.py:497-508); no registrant column; verdict publish (docs/privacy_verdicts.md:39)
 - Strengthen: none needed
 
 #### INEGI-DENUE - DENUE, entidades 09, 14, 19 (INEGI)
@@ -1061,7 +1067,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: §1(g) "notificar al usuario final de cualquier análisis o transformación" (docs/data_sources.md:574-604)
 - Decided by / when: build session 2026-09-22 (terms stored docs/licenses/inegi-terminos-libre-uso-informacion.pdf)
 - What would flag it: INEGI if a city were not named in the notice (it must grow per city)
-- Safety net: notice 8 "INEGI" names all three cities (app/components.py:731-743); edition date in data_age; personal columns never read; verdicts publish (docs/privacy_verdicts.md:37, 38, 71)
+- Safety net: notice "INEGI" names all three cities (app/components.py:731-743); edition date in data_age; personal columns never read; verdicts publish (docs/privacy_verdicts.md:37, 38, 71)
 - Strengthen: none needed
 
 #### MILANO-REG - Six premises registers (Comune di Milano)
@@ -1071,7 +1077,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: CKAN "no version at all"; three sources give 4.0 (docs/data_sources.md:1240-1247)
 - Decided by / when: licence-read 2026-09-22
 - What would flag it: the Comune if the version changed (brief_check http_contains watches the .ttl)
-- Safety net: notice 23 (app/components.py:896-904); no name column; verdict publish (docs/privacy_verdicts.md:42)
+- Safety net: notice (app/components.py:896-904); no name column; verdict publish (docs/privacy_verdicts.md:42)
 - Strengthen: add the licence link
 
 #### WATERLOO-OGL - Inspection layers 17/18 and Cities and Towns (Region of Waterloo)
@@ -1081,7 +1087,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources/canada.md:109; data_sources.md:2227-2236
 - Decided by / when: licence-read 2026-09-30
 - What would flag it: the Region on misrepresentation (ratings); MFIPPA
-- Safety net: notice 73 verbatim credit (app/components.py:680-692); no results shown
+- Safety net: notice verbatim credit (app/components.py:680-692); no results shown
 - Strengthen: none needed
 
 #### OTTAWA-OGL - OPH food-safety feed and Wards 2022-2026 (City of Ottawa / Ottawa Public Health)
@@ -1091,7 +1097,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources/canada.md:111; data_sources.md:2209-2221
 - Decided by / when: read 2026-09-29 (staging brief); build DECISIONS.md:4798
 - What would flag it: the City on wording; feed retirement (cached)
-- Safety net: notice 72 verbatim and linked (app/components.py:1973-1983); phone never read; verdict publish (docs/privacy_verdicts.md:128)
+- Safety net: notice verbatim and linked (app/components.py:1973-1983); phone never read; verdict publish (docs/privacy_verdicts.md:128)
 - Strengthen: none needed
 
 #### REM - REM GTFS (Réseau express métropolitain)
@@ -1101,7 +1107,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources/canada.md:119
 - Decided by / when: licence-read 2026-09-27; wording owner 2026-09-27
 - What would flag it: REM on credit; licence changes in a later feed version
-- Safety net: notice 51 with link and modifications (app/components.py:598-607)
+- Safety net: notice with link and modifications (app/components.py:598-607)
 - Strengthen: none needed
 
 #### VBB - VBB GTFS (Verkehrsverbund Berlin-Brandenburg)
@@ -1111,7 +1117,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources.md:1882-1893
 - Decided by / when: licence-read 2026-09-28; owner wording 2026-09-28
 - What would flag it: VBB on logos or official status
-- Safety net: notice 57 (app/components.py:1804-1811)
+- Safety net: notice (app/components.py:1804-1811)
 - Strengthen: none needed
 
 #### ROMA-SUAP and ANNCSU - SUAP register (Roma Capitale); ANNCSU civic numbers (Agenzia delle Entrate, ISTAT)
@@ -1121,7 +1127,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources.md:1558-1574; italy.md:14-15
 - Decided by / when: licence-read 2026-09-24; owner wording 2026-09-24
 - What would flag it: none recorded
-- Safety net: notices 36, 37 (app/components.py:1191-1207); publish-structural (docs/privacy_verdicts.md:52)
+- Safety net: notices (app/components.py:1191-1207); publish-structural (docs/privacy_verdicts.md:52)
 - Strengthen: none needed
 
 #### FIRENZE - Four activity layers (Comune di Firenze)
@@ -1131,7 +1137,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources.md:2441-2451
 - Decided by / when: brief licence read 2026-09-30
 - What would flag it: none recorded
-- Safety net: notice 82 (app/components.py:2009-2017); page caption (app/pages/136_Florence_Heatmap.py:49); publish-structural (docs/privacy_verdicts.md:104)
+- Safety net: notice (app/components.py:2009-2017); page caption (app/pages/136_Florence_Heatmap.py:49); publish-structural (docs/privacy_verdicts.md:104)
 - Strengthen: none needed
 
 #### GCBA - Usos del Suelo survey, Parcelas, Subte: Estaciones (Gobierno de la Ciudad de Buenos Aires)
@@ -1141,7 +1147,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources.md:1957-1976
 - Decided by / when: licence-read 2026-09-28; owner 2026-09-28
 - What would flag it: none recorded
-- Safety net: notice 60 with titles, URIs, licence, changes (app/components.py:1844-1857); publish-structural (docs/privacy_verdicts.md:80)
+- Safety net: notice with titles, URIs, licence, changes (app/components.py:1844-1857); publish-structural (docs/privacy_verdicts.md:80)
 - Strengthen: none needed
 
 #### MELBOURNE-CLUE - CLUE 2024 (City of Melbourne)
@@ -1151,7 +1157,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources.md:2073-2088
 - Decided by / when: licence-read 2026-09-28
 - What would flag it: trading names that are a person's own
-- Safety net: notice 65 (app/components.py:1912-1918); verdict publish (docs/privacy_verdicts.md:84)
+- Safety net: notice (app/components.py:1912-1918); verdict publish (docs/privacy_verdicts.md:84)
 - Strengthen: none needed
 
 #### OS-CPO - Code-Point Open postcode centroids (Ordnance Survey, Royal Mail, ONS)
@@ -1161,7 +1167,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources.md:1934-1951
 - Decided by / when: licence-read 2026-09-28; owner 2026-09-28
 - What would flag it: OS on "Code-Point" mark use
-- Safety net: notices 59, 63, 85, 88, 90, 92, 94, 96 (app/components.py:1831, 1887, 2044, 2079, 2103, 2126, 2149, 2172); README credits
+- Safety net: notices (app/components.py:1831, 1887, 2044, 2079, 2103, 2126, 2149, 2172); README credits
 - Strengthen: none needed
 
 #### NAPTAN - NaPTAN access nodes, ATCO 940 (Department for Transport)
@@ -1171,7 +1177,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Rests on: docs/data_sources.md:2509-2524
 - Decided by / when: licence-read 2026-10-02; owner 2026-10-02
 - What would flag it: none realistic
-- Safety net: notice 86 (app/components.py:2057-2064)
+- Safety net: notice (app/components.py:2057-2064)
 - Strengthen: none needed
 
 ### Tier 4 - strongest
@@ -1209,8 +1215,8 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 
 #### B. Required notices not found rendered
 - **NTA**: no credit in _NOTICES or on app/pages/19_Dublin_Heatmap.py (searched "NTA", "National Transport", "Transport for Ireland").
-- **STM notice 13** (app/components.py:586-590) has no modification/interpretation sentence, though docs/data_sources/canada.md:118 says "a bare credit does not satisfy it".
-- **Milan rail**: docs/data_sources.md:1236-1238 counts the ATM layers under CC BY 4.0, but notice 23 (app/components.py:896-904) credits only "six of the Comune's own registers" and app/pages/20_Milan_Heatmap.py names no rail source.
+- **STM notice** (app/components.py:586-590) has no modification/interpretation sentence, though docs/data_sources/canada.md:118 says "a bare credit does not satisfy it".
+- **Milan rail**: docs/data_sources.md:1236-1238 counts the ATM layers under CC BY 4.0, but notice (app/components.py:896-904) credits only "six of the Comune's own registers" and app/pages/20_Milan_Heatmap.py names no rail source.
 - **CC BY 4.0 licence URI** (§3(a)(1)(C)) named but not linked in Ville de Montréal (578), STM (586), Tailte (876) and Milan (896); the later notices (Rome, Sydney, REM, Florence) link it. Lower confidence: the docs for 12, 22 and 23 do not say a link is required.
 
 #### C. Pending positions a landed city relies on
@@ -1252,7 +1258,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "SILENT and ambiguous; the owner proceeds on Amsterdam's precedent"; Databankenwet art. 8(2) vs "denhaag.nl's site terms name database rights" (docs/data_sources.md:2457-2461; docs/data_sources/netherlands.md:17)
 - Decided by / when: owner (2026-09-30, call C1)
 - What would flag it: Gemeente Den Haag, on its reserved database right; the layer sits on an internal ArcGIS account (GemeenteDenHaagIntern) and was last edited 2025-05-23
-- Safety net: notice 83 "Gemeente Den Haag" (app/components.py:2022), page states the 2025-05-23 edit and "not a complete or current record"; AANVRAGER/KVKNUMMER/RECHTSVORM never requested, fetch stops if one arrives; privacy PASS (docs/privacy_verdicts.md:106); removal rule
+- Safety net: notice "Gemeente Den Haag" (app/components.py:2022), page states the 2025-05-23 edit and "not a complete or current record"; AANVRAGER/KVKNUMMER/RECHTSVORM never requested, fetch stops if one arrives; privacy PASS (docs/privacy_verdicts.md:106); removal rule
 - Strengthen: written confirmation from the Gemeente, or swap to Rotterdam's Gemeenteblad-notice method (KOOP, Auteurswet art. 11)
 
 #### RO-DSVSA - Registered food units lists (DSVSA Bucuresti / ANSVSA)
@@ -1262,7 +1268,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Toate drepturile rezervate is a website footer, which governs site content, not the data (the New York situation)" (docs/data_sources.md:2118-2123; docs/data_sources/romania.md:13 "License SILENT")
 - Decided by / when: owner (2026-09-28/29; notice wording 2026-09-29)
 - What would flag it: DSVSA or ANSVSA, on the footer's reservation; both hosts serve a "Verifying your browser" challenge to scripts, and the owner fetched the 17 files by hand in a browser (romania.md:13)
-- Safety net: notice 67 (displayed by choice; app/components.py:1938) credits DSVSA, says no licence is stated, lists changes, disclaims endorsement; sole traders shown by category only; no address reaches the map; privacy publish (docs/privacy_verdicts.md:86); removal rule
+- Safety net: notice (displayed by choice; app/components.py:1938) credits DSVSA, says no licence is stated, lists changes, disclaims endorsement; sole traders shown by category only; no address reaches the map; privacy publish (docs/privacy_verdicts.md:86); removal rule
 - Strengthen: written permission from DSVSA Bucuresti, or a data.gov.ro listing if one appears
 
 #### SE-STO - Livsmedelstillsyn food-inspection register (Stockholms stad, miljoforvaltningen)
@@ -1272,7 +1278,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "A contradiction between a catalog and its publisher is decided for the publisher. The blank license is a silence, not a refusal" (docs/data_sources/sweden.md:27-31)
 - Decided by / when: build session reading 2026-09-22; owner notice wording 2026-09-29
 - What would flag it: Stockholms stad, or anyone reading dataportal.se's "Atkomstrattigheter: Begransad"; the layer is also frozen (inspections to 2025-10-21)
-- Safety net: notice 66 (by choice; app/components.py:1924) claims no licence, states changes, disclaims official status; inspection text never read; privacy publish (docs/privacy_verdicts.md:85); brief_check re-reads the Hub DCAT feed; removal rule
+- Safety net: notice (by choice; app/components.py:1924) claims no licence, states changes, disclaims official status; inspection text never read; privacy publish (docs/privacy_verdicts.md:85); brief_check re-reads the Hub DCAT feed; removal rule
 - Strengthen: read the walled dataportalen.stockholm.se record via the Internet Archive (docs/gated_access.md:75), or ask the miljoforvaltningen
 
 #### NL-AMS - Horeca exploitatievergunningen (Gemeente Amsterdam)
@@ -1282,7 +1288,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Displayed as CC BY 4.0 on the owner's choice of 2026-09-24, which satisfies both readings" (docs/data_sources.md:1546-1549; netherlands.md:13)
 - Decided by / when: owner (2026-09-24)
 - What would flag it: Gemeente Amsterdam; also the city API is to require a key on an unset date (registering is the owner's act)
-- Safety net: notice 35 (app/components.py:1177) credits, links CC BY 4.0, states changes, "not the official permit record"; privacy publish (docs/privacy_verdicts.md:51); removal rule
+- Safety net: notice (app/components.py:1177) credits, links CC BY 4.0, states changes, "not the official permit record"; privacy publish (docs/privacy_verdicts.md:51); removal rule
 - Strengthen: written confirmation of the licence from the Gemeente (data.amsterdam.nl)
 
 #### FR-GEO - Commune contours and EPCI commune layers (geo.api.gouv.fr)
@@ -1313,7 +1319,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Decided by / when: build session (2026-09-24)
 - What would flag it: Locatus (a commercial data vendor) or the Gemeente
 - Safety net: attributed in page text "by the city's own statistics" (app/pages/29_Amsterdam_Heatmap.py:103-105); removal rule
-- Strengthen: read bbga's terms, or replace with the CBS Landelijke Monitor Leegstand figure already licensed for Rotterdam and Den Haag (notice 40)
+- Strengthen: read bbga's terms, or replace with the CBS Landelijke Monitor Leegstand figure already licensed for Rotterdam and Den Haag (notice)
 
 ---
 
@@ -1326,7 +1332,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: Art. 3.1 grants "l'affichage public"; "ACCEPTED, and Paris is built on it ... if the grant lapses, Paris is archived" (docs/data_sources.md:288-297, 1299-1352)
 - Decided by / when: owner (2026-09-22); licence-read agent (2026-09-22)
 - What would flag it: IDFM (or automatic lapse) on Art. 5.4 linking, Art. 5.7 date/update interval, Art. 5.8 supply of modifications; the regulator on L.1115-5 annual declaration (unresolved)
-- Safety net: notice 24 verbatim with both prescribed hyperlinks (app/components.py:926); Art. 5.7 snapshot date and "feed valid to" on the page (app/pages/21_Paris_Heatmap.py:46-56); stricter reading adopted over IDFM's own "Licence Ouverte" page (data_sources.md:1354-1359); no IDFM plan used (CC BY-NC-ND); archive-not-delete posture
+- Safety net: notice verbatim with both prescribed hyperlinks (app/components.py:926); Art. 5.7 snapshot date and "feed valid to" on the page (app/pages/21_Paris_Heatmap.py:46-56); stricter reading adopted over IDFM's own "Licence Ouverte" page (data_sources.md:1354-1359); no IDFM plan used (CC BY-NC-ND); archive-not-delete posture
 - Strengthen: link the public repository from the site (Art. 5.8); upload the station table as a ressource communautaire (data_sources.md:1332-1339); ask the regulator about L.1115-5
 
 #### FR-TIS - Reseau urbain Tisseo GTFS, ODbL 1.0 (Tisseo / Toulouse Metropole)
@@ -1336,7 +1342,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Contains information from Reseau urbain Tisseo ... ODbL"; "OPEN - the station CSV under s4.4" (docs/data_sources.md:1361-1401; docs/licenses/odbl-toulouse-rennes.md)
 - Decided by / when: build session / licence read (2026-09-23); NAP Conditions Particulieres correction (2026-09-29, DECISIONS.md:6357-6370)
 - What would flag it: Tisseo / Toulouse Metropole or an ODbL enforcer, on share-alike of the station CSV (and the unverified mean-coordinate fallback, which the NAP files under "ajout de coordonnees")
-- Safety net: notice 25 verbatim s4.3 (app/components.py:953); page credit with dataset date (app/pages/23_Toulouse_Heatmap.py:54-57); CGU read clean (no indemnity, marks clause excludes data); removal rule
+- Safety net: notice verbatim s4.3 (app/components.py:953); page credit with dataset date (app/pages/23_Toulouse_Heatmap.py:54-57); CGU read clean (no indemnity, marks clause excludes data); removal rule
 - Strengthen: put the ODbL notice on outputs/toulouse station CSVs; resolve PLAN.md:159 (fallback check); link the repository from the site
 
 #### FR-STAR - Reseau urbain STAR GTFS, ODbL 1.0 (STAR / Keolis Rennes)
@@ -1346,7 +1352,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "OPEN - the station CSV under s4.4, exactly as for Tisseo" (docs/data_sources.md:1403-1429)
 - Decided by / when: build session / licence read (2026-09-23)
 - What would flag it: STAR / Rennes Metropole or an ODbL enforcer, as Tisseo
-- Safety net: notice 26 verbatim (app/components.py:972); page credit with feed window (app/pages/25_Rennes_Heatmap.py:59-61); automated re-read of STAR's CGU (star-cgu-still-clean); removal rule
+- Safety net: notice verbatim (app/components.py:972); page credit with feed window (app/pages/25_Rennes_Heatmap.py:59-61); automated re-read of STAR's CGU (star-cgu-still-clean); removal rule
 - Strengthen: as Tisseo (CSV notice, PLAN.md:159 fallback check, repository link)
 
 #### FR-ANG - Angers Loire Metropole network GTFS, ODbL 1.0 (Angers Loire Metropole)
@@ -1356,7 +1362,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Built MARK-FREE ... ODbL s2.3(c) leaves marks outside the licence"; the notice names the database by producer and NAP id (docs/data_sources.md:2325-2347; DECISIONS.md:6347-6356)
 - Decided by / when: owner (2026-09-30)
 - What would flag it: Angers Loire Metropole, if any surface (page, macro map, caption, notice, feed_publisher_name) shows the network brand, or if it reads "Tram A/B/C" labelling as use of a mark
-- Safety net: notice 77 (app/components.py:1014); page credit "Transit data (c) Angers Loire Metropole" (app/pages/120_Angers_Heatmap.py:62); pure-extract station table; "If the Metropole objects, the removal rule applies"
+- Safety net: notice (app/components.py:1014); page credit "Transit data (c) Angers Loire Metropole" (app/pages/120_Angers_Heatmap.py:62); pure-extract station table; "If the Metropole objects, the removal rule applies"
 - Strengthen: seek the Metropole's consent (reCAPTCHA form; outreach is the last resort); link the repository from the site
 
 #### FR-TAM / FR-MRESO / FR-LIA - Batch ODbL feeds (Montpellier Mediterranee Metropole/TaM; SMMAG "M"/TAG; Le Havre Seine Metropole/LiA)
@@ -1366,7 +1372,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Conditions Particulieres ... so the maps owe only the s4.3 notice"; "The pure-extract rule for every French ODbL feed (owner)" (DECISIONS.md:6306-6315, 6357-6370; docs/data_sources.md:2158-2204)
 - Decided by / when: licence-read agent (2026-09-29); owner (pure-extract rule 2026-09-29)
 - What would flag it: each Metropole/SMMAG on share-alike if a station is renamed, merged or re-coordinated; LiA's site terms claim its colour scheme (colours are the project's own)
-- Safety net: notices 69/70/71 verbatim s4.3 (app/components.py:987, :994, :1002); page credits (e.g. app/pages/111_Montpellier_Heatmap.py:62); no TaM logo; privacy PASS (docs/privacy_verdicts.md:119-126); removal rule
+- Safety net: notices/70/71 verbatim s4.3 (app/components.py:987, :994, :1002); page credits (e.g. app/pages/111_Montpellier_Heatmap.py:62); no TaM logo; privacy PASS (docs/privacy_verdicts.md:119-126); removal rule
 - Strengthen: link the repository from the site; optionally the ODbL notice on each station CSV
 
 #### FR-SIRENE - SIRENE StockEtablissement + INSEE geolocation file, Licence Ouverte 2.0 (INSEE)
@@ -1434,10 +1440,10 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Strengthen: none needed
 
 #### FR-NAPMETA - transport.data.gouv.fr NAP metadata API (DINUM/NAP)
-- Cities: Paris (load-bearing for notice 24's dates); the French tram batch's "NAP's reading" windows
+- Cities: Paris (load-bearing for notice's dates); the French tram batch's "NAP's reading" windows
 - Role: support (feed validity dates displayed on pages)
 - Tier: 3c - facts (dates) from the national portal; no licence recorded on its row
-- Rests on: "Not a feed, and it is here because notice 24 makes it load-bearing" (docs/data_sources/france.md:76)
+- Rests on: "Not a feed, and it is here because notice makes it load-bearing" (docs/data_sources/france.md:76)
 - Decided by / when: build session (2026-09-23)
 - What would flag it: unlikely; an audit for an unrecorded licence
 - Safety net: only dates are shown; removal rule
@@ -1450,7 +1456,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Entur should be credited as the source with the text: Data made available by Entur + (logo)"; Ruter's agreement "read as governing the app, and recorded rather than buried" (docs/data_sources.md:1459-1477; norway.md:22)
 - Decided by / when: owner (logo, 2026-09-24)
 - What would flag it: Ruter on its APP agreement; Entur if the logo or credit drifts from its rules
-- Safety net: notice 29 (app/components.py:1062); credit and unaltered logo on each page (app/pages/26_Oslo_Heatmap.py:62-70; app/pages/71_Bergen_Heatmap.py:66-74); no endorsement use; removal rule
+- Safety net: notice (app/components.py:1062); credit and unaltered logo on each page (app/pages/26_Oslo_Heatmap.py:62-70; app/pages/71_Bergen_Heatmap.py:66-74); no endorsement use; removal rule
 - Strengthen: none needed
 
 #### CZ-KOR - IDS JMK GTFS (KORDIS JMK, data from KORDIS JMK and DPMB)
@@ -1460,7 +1466,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "idsjmk.cz's BY-NC-SA footer covers only its web pages" (docs/data_sources.md:2352-2357; czechia.md:27)
 - Decided by / when: owner (fetch host and wording, 2026-09-30)
 - What would flag it: KORDIS or the City of Brno, if the NC-SA footer were read as reaching the feed
-- Safety net: notice 78, approved word for word (app/components.py:1149); no logos; privacy publish (docs/privacy_verdicts.md:141); removal rule
+- Safety net: notice, approved word for word (app/components.py:1149); no logos; privacy publish (docs/privacy_verdicts.md:141); removal rule
 - Strengthen: none needed
 
 #### CZ-PMDP - PMDP GTFS, gate 3 only (PMDP, via opendata.plzen.eu)
@@ -1470,7 +1476,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "PMDP's GTFS record contradicts itself ... and either permits use" (docs/data_sources.md:2366-2379; czechia.md:28)
 - Decided by / when: build session read (2026-09-30); framing sentence flagged for owner review
 - What would flag it: unlikely; PMDP or the City of Plzen
-- Safety net: notice 79 (app/components.py:1165); no arms or logo; removal rule
+- Safety net: notice (app/components.py:1165); no arms or logo; removal rule
 - Strengthen: owner reviews the notice's framing sentence
 
 #### NO-BRREG - Enhetsregisteret sub-units and units, NLOD 2.0 (Bronnoysundregistrene)
@@ -1480,7 +1486,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Contains data under the Norwegian licence for Open Government data (NLOD) distributed by Bronnoysundregistrene" (docs/data_sources.md:1431-1444)
 - Decided by / when: build session (2026-09-24)
 - What would flag it: a sole trader (ENK) whose premises appears; the CSV carries e-mail and phone, never loaded
-- Safety net: notice 27 (app/components.py:1030); ENK names replaced by address; contact columns asserted absent; privacy publish (docs/privacy_verdicts.md:48, :93); removal rule
+- Safety net: notice (app/components.py:1030); ENK names replaced by address; contact columns asserted absent; privacy publish (docs/privacy_verdicts.md:48, :93); removal rule
 - Strengthen: none needed
 
 #### NO-KV - Matrikkelen Adresse and kommune boundaries, CC BY 4.0 (Kartverket)
@@ -1490,7 +1496,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Kartverket's terms ... prescribe (c) Kartverket and a link"; stricter reading over the API's "no conditions apply" (docs/data_sources.md:1446-1457)
 - Decided by / when: build session (2026-09-24)
 - What would flag it: unlikely
-- Safety net: notice 28 (app/components.py:1045); address file never shown
+- Safety net: notice (app/components.py:1045); address file never shown
 - Strengthen: none needed
 
 #### DK-CVR - CVR production units via Datafordeler, CC BY 4.0 (Erhvervsstyrelsen)
@@ -1500,7 +1506,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "Du skal kreditere Det Centrale Virksomhedsregister (CVR) pa et passende sted" (docs/data_sources.md:1479-1490, :336-338)
 - Decided by / when: owner (wording 2026-09-24; widenings 2026-09-29, 2026-09-30)
 - What would flag it: a personally owned business owner (address shown instead of name); CVRPerson never requested; coNavn never loaded
-- Safety net: notice 30 (app/components.py:1080); privacy publish (docs/privacy_verdicts.md:49, :94, :98); removal rule
+- Safety net: notice (app/components.py:1080); privacy publish (docs/privacy_verdicts.md:49, :94, :98); removal rule
 - Strengthen: none needed
 
 #### DK-DAR - Danmarks Adresseregister via Datafordeler, CC BY 4.0 (Klimadatastyrelsen)
@@ -1510,7 +1516,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "free to fetch, share and adapt, with credit to Klimadatastyrelsen" (docs/data_sources.md:1492-1503)
 - Decided by / when: licence-read agent (2026-09-24); owner (wording, widenings)
 - What would flag it: unlikely
-- Safety net: notice 31 (app/components.py:1097), naming OSM's copies for Aarhus and Odense
+- Safety net: notice (app/components.py:1097), naming OSM's copies for Aarhus and Odense
 - Strengthen: none needed
 
 #### CZ-RES - Registr ekonomickych subjektu, CC BY 4.0 with CSU data conditions (Cesky statisticky urad)
@@ -1520,7 +1526,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "v pripade sireni dat CSU vznika povinnost uvest podminky teto licence" (docs/data_sources.md:1505-1517)
 - Decided by / when: owner (wording 2026-09-24; titles widened 2026-09-30)
 - What would flag it: a natural person (ÚOOÚ's 2019 fine concerned RŽP, not RES); natural persons at their own seat are excluded
-- Safety net: notice 32 (app/components.py:1113); FORMA guard; privacy publish (docs/privacy_verdicts.md:50, 141-146); removal rule
+- Safety net: notice (app/components.py:1113); FORMA guard; privacy publish (docs/privacy_verdicts.md:50, 141-146); removal rule
 - Strengthen: none needed
 
 #### CZ-RUIAN - RUIAN address exports via INSPIRE ATOM, CC BY 4.0 (CUZK)
@@ -1530,7 +1536,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "The credit FORMAT is prescribed: CUZK, [rok]" (docs/data_sources.md:1519-1530; docs/build_briefs/prague.md:378)
 - Decided by / when: owner (wording 2026-09-24)
 - What would flag it: unlikely
-- Safety net: notice 33 (app/components.py:1125)
+- Safety net: notice (app/components.py:1125)
 - Strengthen: none needed
 
 #### CZ-ROPID - PID GTFS (ROPID)
@@ -1540,7 +1546,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "je nutne uvest autora a pripadne provedene zmeny" (docs/data_sources.md:1532-1542)
 - Decided by / when: owner (wording 2026-09-24); Flora added while closed (owner)
 - What would flag it: unlikely
-- Safety net: notice 34 (app/components.py:1136)
+- Safety net: notice (app/components.py:1136)
 - Strengthen: none needed
 
 #### LV-VZD - Cadastre premise groups and cadastral maps; State Address Register aw_eka.csv, CC BY 4.0 (Valsts zemes dienests)
@@ -1550,7 +1556,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "credit the source, link the licence, and describe the changes made" (docs/data_sources.md:1624-1630; latvia.md:43)
 - Decided by / when: licence-read (2026-09-24, 2026-09-30); owner (wording)
 - What would flag it: unlikely
-- Safety net: notice 42 (app/components.py:1273); address file not shown; privacy (docs/privacy_verdicts.md:64, :99, :100)
+- Safety net: notice (app/components.py:1273); address file not shown; privacy (docs/privacy_verdicts.md:64, :99, :100)
 - Strengthen: none needed
 
 #### LV-GEORIGA - Address points, neighbourhoods, degrading buildings, CC BY 4.0 (Rigas valstspilsetas pasvaldiba, GEO RIGA)
@@ -1560,7 +1566,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "MUST NOT SAY that the merged neighbourhood outline is Riga's administrative boundary" (docs/data_sources.md:1632-1639; latvia.md:34, :42)
 - Decided by / when: owner (wording 2026-09-24)
 - What would flag it: unlikely
-- Safety net: notice 43 (app/components.py:1292)
+- Safety net: notice (app/components.py:1292)
 - Strengthen: none needed
 
 #### NL-CBS - Landelijke Monitor Leegstand 2025 table 1, CC BY 4.0 (CBS)
@@ -1570,7 +1576,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 - Rests on: "credit CBS, link the licence, and say when a figure is recalculated" (docs/data_sources.md:1601-1611)
 - Decided by / when: owner (2026-09-24; Den Haag 2026-09-30)
 - What would flag it: unlikely
-- Safety net: notice 40 (app/components.py:1240)
+- Safety net: notice (app/components.py:1240)
 - Strengthen: none needed
 
 ---
@@ -1662,7 +1668,7 @@ OpenStreetMap (central, no entries here): rail geometry for Lille (metro lines),
 1. **Public repository not linked from the site.** The record discharges ODbL s4.6 (Tisseo, STAR, TaM, M reso, LiA, Angers) and Licence Mobilites Art. 5.8 (IDFM) only "provided it stays linked from the site" (docs/data_sources.md:1330-1331, :1378-1381, :1417-1418; docs/decisions/2026-09-20.md:8101-8105: "an unlinked repo is not an offer"). Searched app/ for `github`, `gitlab`, `repositor`, `expanded-heatmap` and `git`: no link to the repository. For IDFM this is a condition of a grant that ends automatically on breach (Art. 11.1). The About page renders data_sources.md (the method in prose), but the record does not claim that as the discharge.
 2. **LO 2.0 "date of last update" for Caen and Rouen.** The brief requires the resource's `last_modified` date (docs/build_briefs/caen.md:76, :99). The pages show the NAP window and snapshot date instead (app/pages/114_Caen_Heatmap.py:59-65; 115_Rouen same template). The other no-feed_info lov2 cities (Avignon, Tours, Dijon, Mulhouse, Saint-Etienne, Strasbourg, Le Havre, Nantes, Grenoble, Valenciennes, Montpellier) use the same NAP-window substitute. Arguable, but not what the brief says.
 3. **Operator credits depend on provenance.json.** Every French transit credit, Paris's Art. 5.7 date (app/pages/21_Paris_Heatmap.py:46-56) and Lille's MEL credit (24_Lille:51-64) render only if provenance.json exists and parses. The Insee line was moved out of that guard for this reason (check M); the operator credits were not. Entur's credit is outside the guard, with its logo.
-4. **OpenStreetMap rail-geometry enumeration** (app/components.py:750-801) does not name Montpellier, Strasbourg, Le Havre, Caen or Rouen line geometry, Stockholm's Tunnelbana and boundaries, or Bucharest's metro, boundary, sectors and address points. The record relies on notice 1's map-corner credit for these (docs/data_sources.md:2112-2113, :2135-2136, :2169-2171). For the central OSM owner to decide.
+4. **OpenStreetMap rail-geometry enumeration** (app/components.py:750-801) does not name Montpellier, Strasbourg, Le Havre, Caen or Rouen line geometry, Stockholm's Tunnelbana and boundaries, or Bucharest's metro, boundary, sectors and address points. The record relies on notice's map-corner credit for these (docs/data_sources.md:2112-2113, :2135-2136, :2169-2171). For the central OSM owner to decide.
 
 #### C. Pending or unresolved positions a landed city relies on
 1. **Paris - L.1115-5 annual declaration:** "APPLICABILITY UNRESOLVED" (docs/gated_access.md:47; DECISIONS.md:6371-6375; Legifrance was CAPTCHA-walled, so the article was never read).
@@ -1719,7 +1725,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: Decree 8.777/2016 art. 4 "de livre utilização ... pela sociedade"; Lei 14.129 art. 29; readings A-D (2009 IBGE email, União-only waiver, Lei 5.534 secrecy, not on dados.gov.br) - docs/data_sources/brazil.md:72-104
 - Decided by / when: licence-read 2026-09-23 (working not kept in the repo, brazil.md:69-70); owner decided to proceed on the law, "the Philadelphia shape", 2026-09-23 (docs/decisions/2026-09-20.md:6469)
 - What would flag it: IBGE (dissemination policy not contemplating third-party sites; © IBGE on its PDFs); an individual under LGPD (art. 29's proviso makes privacy a licence condition).
-- Safety net: notice 38 "IBGE (Brazil)" app/components.py:1213 (IBGE's own Fonte form, changes, no endorsement); description text never shown at an address that is also a dwelling (brazil.md:112-119); privacy verdicts docs/privacy_verdicts.md:53-61; removal rule.
+- Safety net: notice "IBGE (Brazil)" app/components.py:1213 (IBGE's own Fonte form, changes, no endorsement); description text never shown at an address that is also a dwelling (brazil.md:112-119); privacy verdicts docs/privacy_verdicts.md:53-61; removal rule.
 - Strengthen: written confirmation from IBGE that third-party republication with citation is fine (the 2009 thread's second reply suggests it would be).
 
 #### KR-SEMAS - 상가(상권)정보, data.go.kr 15083033 (Small Enterprise and Market Service, 소상공인시장진흥공단)
@@ -1729,7 +1735,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "declares 이용허락범위 제한 없음 in the page, Schema.org and DCAT ... SEMAS's website copyright policy asks for a consultation ... read as covering the homepage's content" - docs/data_sources.md:2141-2151
 - Decided by / when: licence-read agent 2026-09-29; owner, "as for Daegu", 2026-09-29 (DECISIONS.md:6853-6858)
 - What would flag it: SEMAS, on its copyright policy or on terms in the unread 소상공인365 notices; data.go.kr FAQ 186's no-distortion rule if counts were presented as SEMAS's.
-- Safety net: notice 68 app/components.py:1955 (credit, licence label, counts stated as the project's, no endorsement); privacy verdicts docs/privacy_verdicts.md:87-92, 135-138; removal rule ("Any objection is honoured", data_sources.md:2150).
+- Safety net: notice app/components.py:1955 (credit, licence label, counts stated as the project's, no endorsement); privacy verdicts docs/privacy_verdicts.md:87-92, 135-138; removal rule ("Any objection is honoured", data_sources.md:2150).
 - Strengthen: read the 소상공인365 notices from a Korean vantage point, or a written OK from SEMAS.
 
 #### KR-BUSAN - LocalDataService Open API, 구군 인허가포털 (Busan Metropolitan City, Big-데이터웨이브; source 행정안전부)
@@ -1739,7 +1745,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "영리 목적의 이용을 포함한 자유로운 활용이 보장됩니다"; 제14조 "Read as covering only works the platform itself authored ... restrictive reading ... recorded, not adopted" - docs/data_sources/south-korea.md:171-193
 - Decided by / when: licence-read agent 2026-09-27; owner accepted the 제14조 reading 2026-09-27 (DECISIONS.md:12396)
 - What would flag it: Busan's platform, claiming the API output as its own IP under 제14조②; terms are silent on caching a frozen feed.
-- Safety net: notice 49 app/components.py:1343 (Ministry as source, Big-데이터웨이브 linked, frozen date, no endorsement); `sitetel` refused at load (data_sources.md:1706); privacy verdict docs/privacy_verdicts.md:70; "Any objection from Busan is honoured" (south-korea.md:193).
+- Safety net: notice app/components.py:1343 (Ministry as source, Big-데이터웨이브 linked, frozen date, no endorsement); `sitetel` refused at load (data_sources.md:1706); privacy verdict docs/privacy_verdicts.md:70; "Any objection from Busan is honoured" (south-korea.md:193).
 - Strengthen: a written OK from Busan's portal, or source the same Ministry records from a host declaring 제한 없음.
 
 #### JP-HIROSHIMA - 【窓口申請】食品営業許可施設一覧（市内全て） (Hiroshima City, via DataEye 5672)
@@ -1749,7 +1755,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "Whether that dataset-level license covers the full-list file, which has no entry of its own, was the one open point: the owner accepted the permitting reading" - docs/data_sources/japan.md:146
 - Decided by / when: owner 2026-09-24 (japan.md:146); fault-based 第3条 cost clause accepted country-wide 2026-09-24 (docs/decisions/2026-09-20.md:2366)
 - What would flag it: Hiroshima City, saying the full list is under its website's default terms, not the dataset's PDL.
-- Safety net: notice 76 app/components.py:1553 (DataEye's 出典 pattern, processed by this project, no endorsement); privacy verdict docs/privacy_verdicts.md:134; removal rule.
+- Safety net: notice app/components.py:1553 (DataEye's 出典 pattern, processed by this project, no endorsement); privacy verdict docs/privacy_verdicts.md:134; removal rule.
 - Strengthen: ask the city (or DataEye) to list the full-list file under dataset 5672, or a written note that PDL covers it.
 
 #### BR-GEOSAMPA - estacao_metro / estacao_trem WFS (Prefeitura de São Paulo, GeoSampa) - status only
@@ -1759,7 +1765,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "the question is AVOIDED, not answered ... GeoSampa is used only to decide WHICH lines operate - a fact read from it" - docs/data_sources/brazil.md:147-184
 - Decided by / when: licence-read agent 2026-09-23; owner 2026-09-23 (docs/decisions/2026-09-20.md:5922)
 - What would flag it: Metrô or the Prefeitura only if the project reproduced geometry; low exposure as used.
-- Safety net: geometry drawn from OSM (notice 1); no GeoSampa notice rendered, none claimed owed; removal rule.
+- Safety net: geometry drawn from OSM (notice); no GeoSampa notice rendered, none claimed owed; removal rule.
 - Strengthen: none needed while geometry stays OSM's; email geosampa@prefeitura.sp.gov.br first if the build ever wants its geometry (brazil.md:183-184).
 
 #### HK-FEHD - FEHD licence registers via DATA.GOV.HK, and FEHD's points on the CSDI Portal (HKSAR Government / FEHD)
@@ -1769,7 +1775,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "you shall indemnify the Government ... which in any case arise directly or indirectly in relation to your use" - docs/data_sources.md:335, 359-387; CSDI extension :404-410
 - Decided by / when: owner 2026-09-22 (DATA.GOV.HK, docs/decisions/2026-09-20.md:9454) and 2026-09-24 (CSDI, with the switch from ALS)
 - What would flag it: any third party alleging infringement of their rights against the Government over the republished data; the Government could pass costs on without telling the project.
-- Safety net: notice 41 app/components.py:1255 (source, IP acknowledgement, attribution to Government, FEHD, DATA.GOV.HK and CSDI); registers carry shop sign only, no licensee name; privacy verdict docs/privacy_verdicts.md:63; removal rule named as the escalation cut-off (data_sources.md:382-384).
+- Safety net: notice app/components.py:1255 (source, IP acknowledgement, attribution to Government, FEHD, DATA.GOV.HK and CSDI); registers carry shop sign only, no licensee name; privacy verdict docs/privacy_verdicts.md:63; removal rule named as the escalation cut-off (data_sources.md:382-384).
 - Strengthen: none available short of dropping the source; keep the three conditions (data_sources.md:389-402) exact.
 
 #### JP-N03 - 国土数値情報 行政区域 N03-2025 (MLIT; geometry derived from GSI's 数値地図)
@@ -1789,7 +1795,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: 「…基本ライセンスは…CC－BY－SA（表示－継承）とします。」; "§4's open-ended prohibited acts accepted knowingly (owner, 2026-10-01; Taoyuan's pattern)" - docs/build_briefs/fukui.md:182-200; docs/data_sources/japan.md:150
 - Decided by / when: licence-read agent 2026-10-01; owner took the BY-SA 4.0 offer 2026-10-01 (docs/decisions_drafts/staging.md:535); notice and LICENSE wording accepted at the owner's batch calls 2026-10-02 (DECISIONS.md:15620-15627)
 - What would flag it: Fukui City, under §4's undefined prohibited acts; a reuser if `outputs/fukui/` were not actually offered under BY-SA.
-- Safety net: notice 100 app/components.py:1632 (city, titles, URLs, CC BY-SA, processed, BY-SA 4.0 offer); LICENSE:62-71; privacy verdict docs/privacy_verdicts.md:156.
+- Safety net: notice app/components.py:1632 (city, titles, URLs, CC BY-SA, processed, BY-SA 4.0 offer); LICENSE:62-71; privacy verdict docs/privacy_verdicts.md:156.
 - Strengthen: keep the LICENSE section and notice together on every republish; none needed beyond that.
 
 #### JP-MHLW - 食品衛生申請等システム open data (Ministry of Health, Labour and Welfare)
@@ -1809,7 +1815,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: Matsuyama 第5条 "the furthest any Japanese source has gone, still breach-triggered" (docs/data_sources/japan.md:147); Sakai 5 and 8 "本市への弁償", monthly files "covered by that page's own open-data paragraph (owner, 2026-10-02)" (japan.md:154)
 - Decided by / when: read 2026-10-02 (staging/batch session); covered by the owner's 2026-09-24 country-wide fault-based acceptance; Sakai monthly-file reading owner 2026-10-02
 - What would flag it: either city after a breach of attribution or a prohibited use; Sakai on whether the un-catalogued monthly files are open data.
-- Safety net: notices 97 and 104 app/components.py:1572, 1717 in each city's prescribed modified-work form; privacy verdicts docs/privacy_verdicts.md:153, 160; 営業者住所 never selected (Sakai).
+- Safety net: notices app/components.py:1572, 1717 in each city's prescribed modified-work form; privacy verdicts docs/privacy_verdicts.md:153, 160; 営業者住所 never selected (Sakai).
 - Strengthen: none needed beyond exact notices; Sakai could be asked to catalogue its monthly files.
 
 #### TW-FIA - 全國營業(稅籍)登記資料集, data.gov.tw 9400 (財政部財政資訊中心 / Fiscal Information Agency)
@@ -1819,7 +1825,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: §三(二) "視為自始未取得開放資料之授權"; FIA §二(二) personal data under the PDPA; "Do not present the filtered, geolocated points as the register" - docs/data_sources/taiwan.md:41-42, 52-57
 - Decided by / when: licence-read agent 2026-09-23; owner accepted §六(三) for all Taiwan 2026-09-23 (taiwan.md:57); name rule owner 2026-09-23 (taiwan.md:67)
 - What would flag it: FIA, or a sole proprietor under PDPA 第51條 if an owner's name were shown (FIA itself refused to publish names, 2026-08-14).
-- Safety net: notice 44 app/components.py:1362 (prescribed 顯名聲明, licence link, "This map is not the register", no endorsement); names only when a trade name (taiwan.md:67-72); privacy verdicts docs/privacy_verdicts.md:66-68.
+- Safety net: notice app/components.py:1362 (prescribed 顯名聲明, licence link, "This map is not the register", no endorsement); names only when a trade name (taiwan.md:67-72); privacy verdicts docs/privacy_verdicts.md:66-68.
 - Strengthen: none needed; keep the 顯名聲明 exact (it is the licence).
 
 #### TW-DOOR - door-plate files (臺中市政府數位發展局; 桃園市政府民政局; 臺北市政府民政局; 新北市政府民政局)
@@ -1829,7 +1835,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "covers derivatives, so the published coordinates carry it though the door-plate table is never published" (docs/data_sources/taiwan.md:41); Taoyuan FAQ 有誤導社會大眾、有意或無意侵害本府利益之虞 (docs/data_sources.md:1666-1671)
 - Decided by / when: licence-read agent 2026-09-23 and 2026-09-25; Taoyuan FAQ accepted by owner 2026-09-25
 - What would flag it: any of the four bureaus if the 顯名聲明 lapsed (licence void ab initio); Taoyuan on its open-ended "interests" clause.
-- Safety net: notices 45, 46, 47 app/components.py:1374, 1386, 1399 (one statement per publisher, licence link, plates not shown, no endorsement); removal rule.
+- Safety net: notices app/components.py:1374, 1386, 1399 (one statement per publisher, licence link, plates not shown, no endorsement); removal rule.
 - Strengthen: none needed; for Taoyuan, nothing short of a written OK resolves the FAQ's undefined terms.
 
 #### TW-RAIL - station tables (臺中捷運股份有限公司 144164; 內政部國土測繪中心 捷運車站 73233; 桃園捷運公司 128390; 臺北大眾捷運股份有限公司 131326)
@@ -1839,7 +1845,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "OGDL v1 (license: "1")" rows docs/data_sources/taiwan.md:45, 47, 48, 50; Taipei Metro declaration docs/data_sources.md:1679-1682
 - Decided by / when: licence-read agent 2026-09-25; Taipei Metro declaration accepted by owner 2026-09-25
 - What would flag it: an operator if its 顯名聲明 were missing, or if the map implied endorsement or used its marks.
-- Safety net: notices 45-47 app/components.py:1374-1407; no operator colours or logos used (colours from OSM or the project).
+- Safety net: notices app/components.py:1374-1407; no operator colours or logos used (colours from OSM or the project).
 - Strengthen: none needed.
 
 #### BR-RIO-IPP - Transporte_publico MapServer layers 19 and 18, MetrôRio stations and lines (Prefeitura do Rio / Instituto Pereira Passos, DATA.RIO)
@@ -1849,7 +1855,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "This work is licensed under a Creative Commons Attribution 4.0"; SIURB §6 iv "todos e quaisquer danos, diretos ou indiretos", fault-based - docs/data_sources/brazil.md:125, 135-145
 - Decided by / when: licence-read agent 2026-09-23; owner accepted SIURB 2026-09-23 (docs/decisions/2026-09-20.md:5922)
 - What would flag it: IPP, for damage caused through use, or if the "sem alteração" clause were later attached to these items (it is item-by-item, brazil.md:128-133).
-- Safety net: notice 39 app/components.py:1227 (creator, licence link, data link, modified statement); VLT layer 9 not used.
+- Safety net: notice app/components.py:1227 (creator, licence link, data link, modified statement); VLT layer 9 not used.
 - Strengthen: none needed; re-check the four items for "sem alteração" before a republish.
 
 #### JP-TOKYO-CAT - ward files on the Tokyo Open Data catalogue (Chūō, Minato, Shinjuku, Kōtō food; Minato, Taitō, Shibuya 生活衛生 registers)
@@ -1859,7 +1865,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "Tokyo Open Data Terms §2 ... catalog declares CC-BY-4.0 on every package used ... One combined notice: ... date of use" - docs/data_sources/japan.md:129
 - Decided by / when: read 2026-09-24; cost clause accepted by owner 2026-09-24 (japan.md:129; docs/decisions/2026-09-20.md:2366)
 - What would flag it: a ward or the Tokyo Metropolitan Government if a credit or the date of use were missing (`check_provenance.py` refuses a roster file without a credit, data_sources.md:1860-1862).
-- Safety net: notice 56 app/components.py:1514 built from pipeline/tokyo/credits.py; privacy verdict docs/privacy_verdicts.md:77.
+- Safety net: notice app/components.py:1514 built from pipeline/tokyo/credits.py; privacy verdict docs/privacy_verdicts.md:77.
 - Strengthen: none needed.
 
 #### JP-TOKYO-OWN - wards on their own terms (Taitō food list; Setagaya food list; Meguro food lists and registers on BODIK)
@@ -1869,7 +1875,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: Taitō "the ward's license page ... puts everything on its オープンデータ一覧 under CC BY 4.0, and this list is on it"; Setagaya §2; Meguro odcs.bodik.jp/131105/tos/ - docs/data_sources/japan.md:131-133
 - Decided by / when: read 2026-09-24 (docs/decisions/2026-09-20.md:2331); cost clauses accepted by owner 2026-09-24
 - What would flag it: Taitō, reading its site-wide no-copying policy over its licence page; any ward on a missing element of its prescribed credit.
-- Safety net: notice 56 app/components.py:1514 via pipeline/tokyo/credits.py:95-101 (Taitō's four elements, Setagaya's §2 form, Meguro's catalogue link); wards mask individual operators at source.
+- Safety net: notice app/components.py:1514 via pipeline/tokyo/credits.py:95-101 (Taitō's four elements, Setagaya's §2 form, Meguro's catalogue link); wards mask individual operators at source.
 - Strengthen: none needed.
 
 #### JP-SHIBUYA - 131130_food_businesses_list.csv on the ward's ArcGIS site (Shibuya City)
@@ -1879,7 +1885,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "§1 grants copying, transmission and adaptation, commercial use included ... The terms may change without notice, so re-read them before each republish" - docs/data_sources/japan.md:130
 - Decided by / when: read 2026-09-24
 - What would flag it: Shibuya, if its terms changed and a republish went out unread.
-- Safety net: notice 56 (§2 pattern), app/components.py:1514; removal contact div-smartcity@shibuya.tokyo (japan.md:130).
+- Safety net: notice (§2 pattern), app/components.py:1514; removal contact div-smartcity@shibuya.tokyo (japan.md:130).
 - Strengthen: make the re-read a gate item for any Tokyo republish.
 
 #### JP-CCBY-COST - city lists, CC BY 4.0 (Kumamoto: PDL 1.0 / CC BY 4.0) with a fault-based cost clause (Sapporo, Fukuoka, Toyama, Kumamoto, Nagasaki, Kitakyushu, Kagoshima city governments)
@@ -1889,7 +1895,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: Sapporo 第9条3, Fukuoka 第４条, Toyama 第４条４, Kumamoto "the fault-based class", Nagasaki 第5条, Kitakyushu 第3条, Kagoshima 5(2)/5(3) - docs/data_sources/japan.md:144, 145, 148, 149, 151, 153, 156; acceptance japan.md:163-175
 - Decided by / when: Sapporo/Fukuoka read 2026-09-24 (Fukuoka from web-archive copies, re-read 2026-09-28, data_sources.md:1784-1786); the other five read 2026-10-02; owner's country-wide acceptance 2026-09-24 (docs/decisions/2026-09-20.md:2366)
 - What would flag it: a city after a credit lapse or a completeness/currency claim (Fukuoka 第４条); Nagasaki's lists are a 2023 snapshot, which the page must not present as current.
-- Safety net: notices 53, 54, 98, 99, 101, 103, 106 at app/components.py:1449, 1466, 1592, 1613, 1650, 1692, 1754; "may include premises that have closed"; privacy verdicts docs/privacy_verdicts.md:74-75, 154-155, 157, 159, 162; Sapporo fetched from ckan.pf-sapporo.jp only.
+- Safety net: notices at app/components.py:1449, 1466, 1592, 1613, 1650, 1692, 1754; "may include premises that have closed"; privacy verdicts docs/privacy_verdicts.md:74-75, 154-155, 157, 159, 162; Sapporo fetched from ckan.pf-sapporo.jp only.
 - Strengthen: none needed.
 
 #### MLIT-ISJ - 位置参照情報 block (24.0a) and town-chōme (19.0b) (MLIT)
@@ -1919,7 +1925,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: "공공누리 1유형 : 출처표시 (상업적 이용 및 변경 가능) ... 제3저작권자 = 없음" - docs/data_sources/south-korea.md:108-141
 - Decided by / when: read 2026-09-22 and 2026-09-24 (build sessions; docs/decisions/2026-09-20.md:15267); notice approved by owner 2026-09-25
 - What would flag it: Seoul, on KOGL's moral-rights clause if counts were presented as Seoul's figures.
-- Safety net: notice 18 app/components.py:1307; no 대표자/성명 column exists; 138 names withheld; privacy verdict docs/privacy_verdicts.md:65.
+- Safety net: notice app/components.py:1307; no 대표자/성명 column exists; 138 names withheld; privacy verdict docs/privacy_verdicts.md:65.
 - Strengthen: none needed.
 
 #### JP-CCBY-NOCOST - city lists, CC BY 4.0 (Utsunomiya: CC BY / PDL 1.0) with no cost clause (Osaka, Kyoto, Yokohama, Utsunomiya, Kōchi city governments)
@@ -1929,7 +1935,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: Osaka 「CC-BY4.0で提供いたします。」 (japan.md:142); Kyoto "Nothing is owed to the City" (:159); Yokohama dataset page + open-data terms (:160); Utsunomiya "Cost: none stated" (:152); Kōchi "Cost: none (第7 limits the city's own liability only)" (:158) - docs/data_sources/japan.md
 - Decided by / when: Osaka/Kyoto read 2026-09-24; Yokohama licence-read agent 2026-09-30 (rendered URL placement accepted by owner, call B5); Utsunomiya/Kōchi read 2026-10-02
 - What would flag it: a city if a pin were called "currently operating" or the map looked like the city's work; Kyoto if fetched from www.city.kyoto.lg.jp instead of the portal.
-- Safety net: notices 52, 55, 75, 102, 108 at app/components.py:1430, 1492, 1532, 1670, 1786; privacy verdicts docs/privacy_verdicts.md:73, 76, 133, 158, 164.
+- Safety net: notices at app/components.py:1430, 1492, 1532, 1670, 1786; privacy verdicts docs/privacy_verdicts.md:73, 76, 133, 158, 164.
 - Strengthen: none needed.
 
 #### JP-CCBY21 - city lists, CC BY 2.1 JP (City of Kobe; Hakodate City)
@@ -1939,7 +1945,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Rests on: Kobe "CC BY 2.1 JP, from the badge on each CSV" (japan.md:143); Hakodate 「このページの本文とデータは クリエイティブ・コモンズ 表示 2.1 日本ライセンス」 (japan.md:155) - docs/data_sources/japan.md
 - Decided by / when: Kobe read 2026-09-24, notice approved by owner 2026-09-27; Hakodate read 2026-10-02
 - What would flag it: either city on "currently operating" claims (Kobe's page warns closed premises remain).
-- Safety net: notices 50, 105 app/components.py:1414, 1740 (出典 form, © line, licence link); sublicensing bar met by LICENSE (japan.md:143); privacy verdicts docs/privacy_verdicts.md:72, 161.
+- Safety net: notices app/components.py:1414, 1740 (出典 form, © line, licence link); sublicensing bar met by LICENSE (japan.md:143); privacy verdicts docs/privacy_verdicts.md:72, 161.
 - Strengthen: none needed.
 
 #### BR-IPEDF - geonode:ESTACOES_METRO (IPEDF, Distrito Federal) - status only
@@ -1983,6 +1989,6 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 7. **Busan 제14조** and **Taoyuan FAQ**: restrictive / undefined readings "recorded, not adopted" (south-korea.md:191-193; docs/data_sources.md:1666-1671).
 8. **Shibuya**: "re-read them before each republish" (japan.md:130) - a recurring act; no record found of the latest re-read.
 9. **Stale pointer**: the twelve batch cities' privacy verdicts and MUST-DO lines cite `docs/decisions_drafts/japan-batch.md` (docs/privacy_verdicts.md:153-164; docs/data_sources.md:2732, 2753, 2775, 2795, 2814, 2836, 2855, 2875, 2894, 2914, 2932, 2951), which does not exist in this tree; the entries are already folded into DECISIONS.md:15048-15536.
-10. **Japan batch notices 97-108** say "lands with the Japan batch at review time" (docs/data_sources.md:2715 ff.); the owner's landing steps are queued for review time (DECISIONS.md:15620-15629), so the positions above for those twelve cities assume those notices ship in the same push.
+10. **Japan batch notices** say "lands with the Japan batch at review time" (docs/data_sources.md:2715 ff.); the owner's landing steps are queued for review time (DECISIONS.md:15620-15629), so the positions above for those twelve cities assume those notices ship in the same push.
 
 Side note (not licence): Daegu's notice says records run "to 2025-09-02" (app/components.py:1331; docs/data_sources.md:1692) while the registry row says rows end 2025-08-31 (docs/data_sources/south-korea.md:14; DECISIONS.md:12109).
