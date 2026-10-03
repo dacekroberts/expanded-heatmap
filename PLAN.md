@@ -33,6 +33,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     padding). Re-measure, correct, and re-score every region.
   - **"Los Angeles (Regional)" is about 43% clipped at 375** in Global and
     United States (no clean position), reported like Glasgow's.
+  - **"Rio de Janeiro (Regional)" is about 24% clipped at 375 in South America**
+    since the rename (was clean); "Los Angeles (Regional)" also 15% in United
+    States West. Re-place both when the scorer canvas is corrected.
 
 - [ ] **Heavy-job gate follow-ups (2026-10-03, measured-figures norm):**
   - **What makes a multi-city Japanese drift run measure 4.5-4.7 GB?** Run
