@@ -65,8 +65,8 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - notices 115-128 (`app/components.py`, `docs/data_sources.md`);
   - macro facts and ring shares: fourteen rows each;
   - the Japanese taxonomy (`pipeline/taxonomies/japan_eigyo.py`): built
-    cities' outputs unchanged (zero drift across thirty Japanese cities;
-    Tokyo, Osaka, Kyoto and Sapporo still to run);
+    cities' outputs unchanged (zero drift across all thirty-four Japanese
+    cities, 2026-10-03);
   - licence rows in `docs/data_sources/japan.md`.
 
   The shared map code and theme and the category rules are untouched.
