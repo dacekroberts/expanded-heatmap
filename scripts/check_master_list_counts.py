@@ -87,10 +87,16 @@ BOLD = re.compile(r"\*\*(.+?)\*\*")
 SEP = re.compile(r"^\|[\s:|-]+\|\s*$")
 BAND_HEAD = re.compile(r"^## .*\bBand ([A-Z])\b")
 TIER_HEAD = re.compile(r"^## .*?\b(T\d)\b")
-# Every band letter a candidate can sit in (owner, 2026-09-28): B (passed:
+# Every band letter a listed city can sit in (owner, 2026-09-28): B (passed:
 # narrower pages), C (closer to a page), D (blocked, the owner can act) and R
 # (restricted).
 LETTERS = "ABCDRT"
+# Band R is a band but NOT a candidate (owner, 2026-10-02: "Band R doesn't
+# exactly qualify as candidacy ... keep it as a Band but exclude it from the
+# candidate counts"). Its count is checked on its own: the summary box's
+# "Restricted" row, the band table's R row, and the by-country table's
+# Restricted column.
+CANDIDATE_LETTERS = "ABCDT"
 
 
 # --- reading the file -------------------------------------------------------
@@ -370,7 +376,7 @@ def check(text, tram_text=None):
         if m and int(m.group(1)) != len(discards):
             problems.append(f"heading '{t}' but the discard table holds {len(discards)}")
 
-    candidates = sum(actual[x] for x in LETTERS)
+    candidates = sum(actual[x] for x in CANDIDATE_LETTERS)
     m = find(lambda t: t.startswith("## Candidates"))
     if not m:
         problems.append("no '## Candidates - N' section")
@@ -440,10 +446,14 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
         return ["'Current by country' has no '| Country | Built | Candidates |' table"]
     head, rows = table[0]
     bands_col = next((j for j, x in enumerate(head) if x.lower() == "bands"), None)
+    restr_col = next((j for j, x in enumerate(head) if x.lower().startswith("restricted")), None)
+    if actual.get("R", 0) and restr_col is None:
+        problems.append("'Current by country' has no Restricted column (Band R is counted "
+                        "apart from the candidates, owner 2026-10-02)")
     band_of = {k: letter for letter, mem in ready.items() for k in mem}
     built_by_country = {key(c): (n, len(names)) for _, c, n, names, _ in built_rows}
 
-    sum_built = sum_cand = 0
+    sum_built = sum_cand = sum_restr = 0
     total = None
     for i, row in rows:
         country = cell_name(row[0])
@@ -460,6 +470,22 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
         if key(country) in built_by_country and built_by_country[key(country)][1] != b:
             problems.append(f"line {i + 1}: '{country}' says {b} built, the Built table "
                             f"lists {built_by_country[key(country)][1]}")
+        if restr_col is not None:
+            r = _count(row[restr_col])
+            if r is None:
+                problems.append(f"line {i + 1}: '{country}' has a Restricted cell with no "
+                                f"leading **N** or '—': {row[restr_col]!r}")
+            else:
+                sum_restr += r
+                rnamed = row[restr_col].split("—", 1)[1] if "—" in row[restr_col] else ""
+                rnames = [n for n in (clean(x) for x in re.split(r"[,;]", rnamed)) if n]
+                if rnames and len(rnames) != r:
+                    problems.append(f"line {i + 1}: '{country}' counts {r} restricted but "
+                                    f"names {len(rnames)}: {', '.join(rnames)}")
+                for n in rnames:
+                    if band_of.get(key(n)) != "R":
+                        problems.append(f"line {i + 1}: '{country}' lists {n} as restricted, "
+                                        f"but it is not in Band R")
         named = row[2].split("—", 1)[1] if "—" in row[2] else ""
         names = [n for n in (clean(x) for x in re.split(r"[,;]", named)) if n]
         if not names:
@@ -472,6 +498,9 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
             letter = band_of.get(key(n))
             if letter is None:
                 problems.append(f"line {i + 1}: '{country}' names {n}, which is in no band")
+            elif letter == "R":
+                problems.append(f"line {i + 1}: '{country}' names {n} as a candidate, but Band "
+                                "R is not a candidate (owner, 2026-10-02); list it as restricted")
             elif bands_col is not None and letter not in listed:
                 problems.append(f"line {i + 1}: '{country}' names {n} (Band {letter}), but "
                                 f"its Bands column says {row[bands_col]!r}")
@@ -482,10 +511,16 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
     if sum_cand != candidates:
         problems.append(f"'Current by country': the Candidates column sums to {sum_cand}, "
                         f"the bands hold {candidates} ({_sum(actual)})")
+    if restr_col is not None and sum_restr != actual.get("R", 0):
+        problems.append(f"'Current by country': the Restricted column sums to {sum_restr}, "
+                        f"Band R holds {actual.get('R', 0)}")
     if total is None:
         problems.append("'Current by country' has no Total row")
     else:
         i, row = total
+        if restr_col is not None and _count(row[restr_col]) != actual.get("R", 0):
+            problems.append(f"line {i + 1}: the Total row says {row[restr_col]} restricted, "
+                            f"Band R holds {actual.get('R', 0)}")
         if _count(row[1]) != n_built or _count(row[2]) != candidates:
             problems.append(f"line {i + 1}: the Total row says {row[1]} built / {row[2]} "
                             f"candidates, the file holds {n_built} / {candidates}")
@@ -497,7 +532,7 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
 
 
 def _sum(actual):
-    return " + ".join(f"{x} {actual[x]}" for x in LETTERS if actual[x] or x == "A")
+    return " + ".join(f"{x} {actual[x]}" for x in CANDIDATE_LETTERS if actual[x] or x == "A")
 
 
 def subgroups(lines, start, end, letter):
@@ -601,9 +636,22 @@ def summary(lines, built, countries, actual, candidates, gap, discards):
         if m and int(m.group(1)) != countries:
             problems.append(f"line {i + 1}: summary says built across {m.group(1)} countries, "
                             f"the Built table spans {countries}")
+    restricted = next((k for k in rows if k.startswith("restricted")), None)
+    if actual.get("R", 0) and restricted is None:
+        problems.append("the summary box has no 'Restricted' row (Band R is counted "
+                        "apart from the candidates, owner 2026-10-02)")
+    elif restricted is not None:
+        i, text = rows[restricted]
+        got = first_bold_int(text)
+        if got != actual.get("R", 0):
+            problems.append(f"line {i + 1}: summary says restricted {got}, Band R holds "
+                            f"{actual.get('R', 0)}")
     if "candidates" in rows:
         i, text = rows["candidates"]
         head = text.split("*(")[0]
+        if re.search(r"(?<!\w)R \d", head):
+            problems.append(f"line {i + 1}: the candidates row counts Band R, which is not a "
+                            "candidate (owner, 2026-10-02); give it the Restricted row")
         for x, n in re.findall(r"(?<!\w)([A-Z]) (\d+)(?![\d,])", head):
             if int(n) != actual.get(x, 0):
                 problems.append(f"line {i + 1}: summary says {x} {n}, Band {x} holds "

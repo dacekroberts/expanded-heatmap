@@ -4,6 +4,27 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Band R stays a band but leaves the candidate count (owner)
+
+- **The owner: "Band R doesn't exactly qualify as candidacy. I think we
+  should keep it as a Band but exclude it from the candidate counts."**
+- **`scripts/check_master_list_counts.py`:**
+  - `CANDIDATE_LETTERS` = A, B, C, D, T, so candidates no longer sum R.
+  - Band R's count is checked on its own: the summary box's new "Restricted
+    (Band R)" row, the band table's R row, and a new Restricted column in
+    the by-country table.
+  - A by-country row naming an R city as a candidate fails. So does a
+    candidates row that counts R.
+- **The selftest:** two new cases (the Restricted count drifting in the
+  summary and in the Total row). The `wrong_band` fixture was widened, since
+  the only rows naming candidates now list several bands. 26 of 26 cases
+  pass.
+- **`docs/city_master_list.md`:**
+  - Candidates **14** (A 9 · B 5), Restricted **26**.
+  - The R row moved below the Candidates total in the band table.
+  - Each country's R cities moved to the Restricted column.
+- The format memory gains the rule.
+
 ### 2026-10-02 - Japan wave 2 and the four extensions released, in separate worktrees (owner)
 
 - **The owner: "write the kit, worktree and prompt for wave 2", "also do the
