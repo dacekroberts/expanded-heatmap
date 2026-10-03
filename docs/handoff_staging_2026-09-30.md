@@ -25,7 +25,10 @@ the pointers. **Delete a section when its item is done.**
     `python scripts/downstream_changes.py <master before the push> <the
     pushed commit>`. If it prints anything but "nothing downstream", send the
     output to the Visuals and Analytics sessions. Staging's doc-only pushes
-    usually print "nothing downstream"; a new city always counts.
+    usually print "nothing downstream"; a new city always counts. A brief or
+    kit staging writes tells its build to record each notice's card face or
+    caption and any open terms question in its drafts (`docs/session_roles.md`,
+    "Downstream sessions").
   - **AI-driven deep analysis is permitted, private to the owner,** always
     with an AI-generated acknowledgement, never on a page or in `outputs/`.
     Ridership stays out of scope as a hard line (CLAUDE.md).
@@ -129,7 +132,9 @@ that session, not on master.
    - Salvador and Teresina, after 25 Oct;
    - SEMAS, 31 Oct;
    - Birmingham Line 2 / Dudley, about 1 Nov;
-   - Zurich, 13 Dec and 10 May 2027.
+   - Zurich, 13 Dec and 10 May 2027;
+   - two re-pulls left in PLAN from the calendar: Rome's tram 3 and Oslo's
+     tram 13 stops (Cleanup's to run; staging only watches).
 4. **Calls still the owner's, raised in the calendar:** São Paulo's Linha 17
    and Linha 6; Rome's returning trams; Taoyuan's Green Line; a NAF 2025
    mapping before any French refresh; Osaka's Yumeshima re-run.
