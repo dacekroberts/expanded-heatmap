@@ -4,6 +4,29 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-02 - Phase 6 approved; QR card, poster and Phase 7 index and exports (owner)
+
+- **Phase 6, its new wording and the LinkedIn post text were approved**
+  (owner).
+- **The QR leave-behind (3.5 x 2 in) and the poster (24 x 36 in) were
+  built.** `segno` was installed for the QR code with the owner's OK. It is
+  used in scratch only and is not in either requirements file. The QR
+  encodes the site's address, dark on a white chip. Neither piece shows a
+  city's figures, so neither owes a city credit.
+- **The AI-driven acknowledgement appears once at the top and once at the
+  bottom of a private page**, not on every chart (owner, for the analytics
+  session's pages, applied here). The sampler's private section was
+  changed to match.
+- **Phase 7: the visuals index is a private Claude Docs document.** It holds
+  every piece with its link, size, use and status; the rules; the metrics;
+  every source with its location; the exports; and the open items.
+- **Exports go to `data/_handoff/visual/exports/`** in the main checkout:
+  board and card PNGs, print PDFs, caption files, data snapshots, and the
+  generators with a README. The existing `data/_*/` rule keeps it out of
+  git, so no ignore rule was added (the handoff asked the owner first
+  before adding one). Rejected: a new `visuals/` folder, which would have
+  needed that rule. The owner is asked to confirm the location in the index.
+
 ### 2026-10-02 - Phase 6 deck, social and print pieces drafted
 
 - **Phase 5 was approved**, with its wording and the public set's
