@@ -102,8 +102,8 @@ st.markdown(
 - For Chuo, Minato, Shinjuku and Koto, the national online filing system's open data is added; it
   holds only filings whose applicants agreed to publish them, and adds 0.1 to 3.1 points. A
   premises in both lists is shown once.
-- The lists' dates differ: Shibuya's runs to 2 September 2026, Minato's to 31 July 2026, Meguro's
-  is as of 1 April 2026, Taito's and Setagaya's 31 March 2026, and Shinjuku's 1 January 2023;
+- The lists' dates differ: Shibuya's runs to September 2, 2026, Minato's to July 31, 2026, Meguro's
+  is as of April 1, 2026, Taito's and Setagaya's March 31, 2026, and Shinjuku's January 1, 2023;
   Chuo's and Koto's hold only permits of 2021 and 2022.
 - A dot means a permit on file, not a business open today.
 

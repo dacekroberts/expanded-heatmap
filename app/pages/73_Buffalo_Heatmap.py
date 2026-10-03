@@ -81,7 +81,7 @@ st.markdown(
   the State license is matched on its street address. A business listed differently in two
   registers can still be counted twice.
 - The State's food-store list carries no dates of its own and was last refreshed by the State on
-  30 September 2025.
+  September 30, 2025.
 - **A salon licensed under a person's own name shows its license type instead** (for example
   "Barber shop"), and a salon at an apartment address is left off, as a home.
 

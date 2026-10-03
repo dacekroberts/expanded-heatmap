@@ -105,7 +105,7 @@ st.markdown(
 
 **Reading the density**
 
-- **The permit data runs to 2025.** The city last edited its permit layer on 23 May 2025, so
+- **The permit data runs to 2025.** The city last edited its permit layer on May 23, 2025, so
   premises that opened or closed since then may be missing or still shown.
 - **Read the density as a register, not a street survey.** Cafés and restaurants inside hotels,
   sports clubs, theatres and care homes hold the same permit and are left out, and takeaways that

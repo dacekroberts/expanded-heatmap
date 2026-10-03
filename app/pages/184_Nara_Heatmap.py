@@ -65,11 +65,11 @@ st.markdown(
 **The businesses**
 
 - From two food lists and three registers. Nara City's own list holds food-business permits
-  granted before June 2021 (as of 1 November 2025), shown where still in term at the end of August
+  granted before June 2021 (as of November 1, 2025), shown where still in term at the end of August
   2026.
 - Permits since then are filed through the Ministry of Health, Labour and Welfare's system, whose
-  open data is the second list (downloaded 2 October 2026). A premises in both lists appears once.
-- Barbers, beauty salons and laundries come from the city's registers as of 1 April 2026.
+  open data is the second list (downloaded October 2, 2026). A premises in both lists appears once.
+- Barbers, beauty salons and laundries come from the city's registers as of April 1, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than

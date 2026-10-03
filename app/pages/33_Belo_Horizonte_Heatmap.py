@@ -81,7 +81,7 @@ st.markdown(
 
 - Two lines are drawn — **Metrô BH Linha 1 and Linha 2** — each labeled on the map and in
   the legend, in the colors OpenStreetMap records.
-- **Linha 2 opened on 3 July 2026 with two stations and runs only at weekday peak hours for
+- **Linha 2 opened on July 3, 2026 with two stations and runs only at weekday peak hours for
   now.**
 - The map covers **Belo Horizonte and Contagem**, where Linha 1's two western stations
   stand.

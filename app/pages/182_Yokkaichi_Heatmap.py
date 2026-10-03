@@ -64,7 +64,7 @@ st.markdown(
 **The businesses**
 
 - From Yokkaichi City's lists of food-business permits and food-business notifications and its
-  lists of barbers, beauty salons and laundries (all as of 31 August 2026).
+  lists of barbers, beauty salons and laundries (all as of August 31, 2026).
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only.
 - Food shops that only notify the city rather than hold a permit, such as convenience stores,

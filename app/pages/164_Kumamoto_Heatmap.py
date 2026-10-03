@@ -72,13 +72,13 @@ st.markdown(
 **The businesses**
 
 - The food businesses come from two lists. Kumamoto City's own list holds every restaurant permit
-  applied for at a city counter and in force on 31 March 2026, except those whose operators asked
+  applied for at a city counter and in force on March 31, 2026, except those whose operators asked
   not to be listed.
 - Permits filed online go through the Ministry of Health, Labour and Welfare's system, whose open
-  data is the second list (downloaded 2 October 2026). A premises in both lists appears once.
+  data is the second list (downloaded October 2, 2026). A premises in both lists appears once.
 - Together the two lists hold about three in four of the restaurants licensed in the city; food
   trucks and event stalls, which the official count includes, are not in them.
-- The barbers, beauty salons and laundries come from the city's registers as of 31 March 2026.
+- The barbers, beauty salons and laundries come from the city's registers as of March 31, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear either.
 - The city's list holds restaurants only, so the Food shops layer comes from the ministry's list

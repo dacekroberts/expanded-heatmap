@@ -56,8 +56,8 @@ st.markdown(
 
 **The businesses**
 
-- From Sapporo City's list of food-business permits (as of 31 March 2026) and its registers of
-  barbers, beauty salons, laundries and coin laundries (as of 31 July 2026).
+- From Sapporo City's list of food-business permits (as of March 31, 2026) and its registers of
+  barbers, beauty salons, laundries and coin laundries (as of July 31, 2026).
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
   delis, butchers and fishmongers).

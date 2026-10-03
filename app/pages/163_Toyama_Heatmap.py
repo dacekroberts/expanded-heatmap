@@ -70,7 +70,7 @@ st.markdown(
 
 **The businesses**
 
-- From Toyama City's list of food-business permits (as of 30 June 2026) and its registers of
+- From Toyama City's list of food-business permits (as of June 30, 2026) and its registers of
   barbers, beauty salons and laundries (as of March 2026).
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,

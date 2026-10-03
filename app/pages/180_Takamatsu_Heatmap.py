@@ -66,13 +66,13 @@ st.markdown(
 **The businesses**
 
 - From Takamatsu City's list of food-business permits and its registers of barbers, beauty
-  salons and laundries, all as of 31 August 2026.
+  salons and laundries, all as of August 31, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
   delis, butchers and fishmongers).
 - Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
   greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
-  Welfare's open data (downloaded 2 October 2026), so that part of the Food shops layer is partial.
+  Welfare's open data (downloaded October 2, 2026), so that part of the Food shops layer is partial.
 - The lists may include premises that have closed, so a dot means a permit on file, not a
   business open today.
 

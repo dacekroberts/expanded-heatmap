@@ -61,12 +61,12 @@ st.markdown(
 **The businesses**
 
 - From two food lists and three registers. Fukuoka City's own list holds food-business permits
-  granted before June 2021 and still held (as of 31 August 2026).
+  granted before June 2021 and still held (as of August 31, 2026).
 - Permits since then are filed online through the Ministry of Health, Labour and Welfare's system,
-  whose open data is the second list (downloaded 27 September 2026). A premises in both lists
+  whose open data is the second list (downloaded September 27, 2026). A premises in both lists
   appears once.
-- Barbers and beauty salons come from the city's registers as of 31 August 2026, laundries as of
-  31 March 2026.
+- Barbers and beauty salons come from the city's registers as of August 31, 2026, laundries as of
+  March 31, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than

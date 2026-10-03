@@ -76,7 +76,7 @@ st.markdown(
 
 **Reading the map**
 
-- **The register stopped updating in October 2025.** Its latest inspection is dated 21 October
+- **The register stopped updating in October 2025.** Its latest inspection is dated October 21,
   2025 and nothing has been added since, so a business that opened or closed after then is not
   reflected. Each premises is shown as it stood at its latest inspection.
 - The register began recording a premises' type in 2024, so premises last inspected in 2022 or

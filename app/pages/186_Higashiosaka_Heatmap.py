@@ -68,9 +68,9 @@ st.markdown(
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear either: the Food shops layer is food retail only (bakeries and
   confectioners, delis, butchers and fishmongers).
-- The food businesses are rebuilt from Higashiōsaka City's list of food-business permits as of 1
-  April 2026 and its monthly lists of new permits since, keeping each permit still within its term
-  on 31 August 2026, the last date the newest monthly list covers.
+- The food businesses are rebuilt from Higashiōsaka City's list of food-business permits as of April
+  1, 2026 and its monthly lists of new permits since, keeping each permit still within its term
+  on August 31, 2026, the last date the newest monthly list covers.
 - The city does not publish closures, so a business that closed before its permit ran out is still
   counted. The map shows an upper bound, and a dot means a permit on file, not a business open
   today.

@@ -79,7 +79,7 @@ st.markdown(
 
 - Two lines are drawn — **the VLT da Baixada Santista's Linha 1 and Linha 2** — each
   labeled on the map and in the legend, in the colors OpenStreetMap records.
-- **Linha 2 opened on 1 December 2025 and runs from 09:00 to 15:00 for now.**
+- **Linha 2 opened on December 1, 2025 and runs from 09:00 to 15:00 for now.**
 - The heritage tourist tram is not drawn.
 - The map covers **Santos and São Vicente**, which the lines join.
 

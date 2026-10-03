@@ -74,9 +74,9 @@ st.markdown(
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear either.
 - The food businesses come from two lists. Kagoshima City's own list holds food-business permits
-  granted before June 2021 and still held (as of 30 June 2026).
+  granted before June 2021 and still held (as of June 30, 2026).
 - Permits since then are filed through the Ministry of Health, Labour and Welfare's system, whose
-  open data is the second list (downloaded 2 October 2026). A premises in both lists appears once.
+  open data is the second list (downloaded October 2, 2026). A premises in both lists appears once.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than
   hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
   chose to publish in the ministry's list.

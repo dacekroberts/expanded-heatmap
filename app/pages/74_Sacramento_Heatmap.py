@@ -69,7 +69,7 @@ st.markdown(
   line but get no ring, and are listed below.
 - Downtown the lines run one way on 7th and 8th Streets, so three pairs of stops a block apart, at
   Capitol, County Center and K Street, are each shown as one station.
-- Dos Rios, which opened on 28 September 2026 and is not yet in OpenStreetMap, is placed from
+- Dos Rios, which opened on September 28, 2026 and is not yet in OpenStreetMap, is placed from
   Wikidata.
 
 **The businesses**

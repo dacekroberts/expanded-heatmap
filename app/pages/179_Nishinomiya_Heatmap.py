@@ -61,7 +61,7 @@ st.markdown(
 
 **The businesses**
 
-- From Nishinomiya City's list of food-business permits (as of 31 August 2026) and its registers
+- From Nishinomiya City's list of food-business permits (as of August 31, 2026) and its registers
   of barbers, beauty salons and laundries (as of September 2026).
 - The city's laundry list holds about six in ten of the laundries it reported in 2025.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,

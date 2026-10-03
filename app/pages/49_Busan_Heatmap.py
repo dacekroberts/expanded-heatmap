@@ -85,7 +85,7 @@ st.markdown(
   convenience stores**. Read the balance between categories as a fact about Korea's licensing,
   not about Busan's streets.
 - Convenience stores and confectioners that hold a café permit are counted as shops.
-- **The data is a snapshot.** The city's feed stopped updating on 15 April 2026, when the
+- **The data is a snapshot.** The city's feed stopped updating on April 15, 2026, when the
   national licensing data moved to a new service, so permits granted or closed after early April
   2026 are not shown. The snapshot line above gives the date.
 - A shop holding several permits is counted once per building.

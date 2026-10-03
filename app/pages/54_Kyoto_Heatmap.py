@@ -61,12 +61,12 @@ st.markdown(
 
 - Kyoto has published no complete list of food-business permits since 2021, only each month's new
   ones. The food businesses here are therefore rebuilt: the city's full list of March 2021 plus
-  every monthly list since, keeping each permit still within its term on 31 July 2026, the last
+  every monthly list since, keeping each permit still within its term on July 31, 2026, the last
   date the newest monthly list covers.
 - The city does not publish closures, so a business that closed before its permit ran out is still
   counted. The map shows an upper bound, and a dot means a permit on file, not a business open
   today.
-- Barbers, beauty salons and laundries come from the city's complete lists as of 31 March 2026 and
+- Barbers, beauty salons and laundries come from the city's complete lists as of March 31, 2026 and
   the new premises listed each month since.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear. The Food shops layer is food retail only, by permit type: bakeries

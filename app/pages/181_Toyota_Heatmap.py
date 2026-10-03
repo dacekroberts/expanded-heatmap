@@ -61,7 +61,7 @@ st.markdown(
 **The businesses**
 
 - From Toyota City's list of food-business permits and its registers of barbers, beauty salons
-  and laundries (all as of 31 August 2026).
+  and laundries (all as of August 31, 2026).
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
   delis, butchers and fishmongers).

@@ -67,12 +67,12 @@ st.markdown(
   outside its open data, so personal services are not on this map.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear either.
-- The food businesses are rebuilt from Sakai City's list of food-business permits as of 1 April
+- The food businesses are rebuilt from Sakai City's list of food-business permits as of April 1,
   2026 and its monthly lists of new permits and closures since, keeping each permit still within
-  its term on 31 August 2026, the last date the newest monthly lists cover.
+  its term on August 31, 2026, the last date the newest monthly lists cover.
 - Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
   greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
-  Welfare's open data (downloaded 2 October 2026), so that part of the Food shops layer is partial.
+  Welfare's open data (downloaded October 2, 2026), so that part of the Food shops layer is partial.
 - The lists may include premises that have closed, so a dot means a permit on file, not a
   business open today.
 
