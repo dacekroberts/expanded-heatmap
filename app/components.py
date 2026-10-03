@@ -2074,6 +2074,30 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Ōtsu and MLIT did not make "
      "and do not endorse this map.",
      False, ("Ōtsu",)),
+    # Nara (notice 123): the city's four lists under CC BY 2.1 JP (each page's
+    # statement and the 奈良市オープンデータカタログ利用規約), in the terms' form
+    # for an edited work (３); MHLW as in Hiroshima's and Kitakyushu's; MLIT as
+    # in Kobe's, N02 in its 2025 edition. Written from Kitakyushu's and
+    # Kawasaki's approved wording under the owner's pre-approval of template
+    # prose (2026-09-30).
+    Notice(123, "Nara City, MHLW and MLIT (Nara)",
+     "Nara's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設オープンデータ、奈良市、クリエイティブ・コモンズ・ライセンス 表示 2.1"
+     "（[https://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）"
+     "（[https://www.city.nara.lg.jp/soshiki/97/10411.html](https://www.city.nara.lg.jp/soshiki/97/10411.html)）; "
+     "理容所検査確認施設一覧、美容所検査確認施設一覧、クリーニング所検査確認施設一覧、奈良市、クリエイティブ・コモンズ・ライセンス 表示 2.1"
+     "（[https://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）"
+     "（[https://www.city.nara.lg.jp/soshiki/97/9688.html](https://www.city.nara.lg.jp/soshiki/97/9688.html)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, kept the city's old permits still in "
+     "term at the end of August 2026, showed a premises in both lists once, placed each by its address or "
+     "the ministry's own coordinates, and counted them around stations. The ministry's list holds only "
+     "filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Nara City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Nara",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

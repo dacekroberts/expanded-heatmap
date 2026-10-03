@@ -3874,6 +3874,46 @@ line.
 - The Shinkansen is not drawn; it crosses the city without a station. The
   Sakamoto cable car, which is a sightseeing line, is not drawn.
 
+### Nara - the city's old-law food list, its barber, beauty and laundry registers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 1,978 national filings whose filers did not publish an address (896 of them
+  restaurants, about one restaurant in five).
+- 521 rows of the city's old-law list whose permit had ended by 31 August 2026.
+- 19 temporary or mobile permits and 788 rows with no fixed place (licensed for
+  the whole city, 市内一円).
+- 421 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 246 school, hospital and staff canteens, 139 vending machines, 11 mail-order
+  businesses, 36 entertainment venues, 93 premises inside hotels and inns, 100
+  caterers (仕出し) and 119 snack bars and cabarets.
+- 22 closed premises, which the national filings keep, marked.
+
+**Counted** - the city's old-law food permits (its list as of 1 November 2025)
+still in term on 31 August 2026, its barber, beauty and laundry registers as of
+1 April 2026, and the national filings as downloaded on 2 October 2026. The
+city's old-law delis filed as そうざい屋 are Food shops. 6 of the 535 bakery,
+confectioner and deli rows (1.1%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 331 repeat permits are shown once, and 90 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 34 rows (0.6%), mostly register addresses whose town MLIT's
+file spells differently. Another 169 sit at their town's center, and 347
+national filings at their own coordinates.
+
+**Names not shown** - none: no trade name in the city's lists is its operator's
+own name, and the national filings do not say who the operator is.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 10 stations beyond it: 3 in Yamatokoriyama, 2 each in Kizugawa and
+  Ikoma, and 1 each in Tenri, Kasagi and Seika.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

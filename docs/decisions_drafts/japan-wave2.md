@@ -4,6 +4,58 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Nara built, MHLW's filings, the old-law list and three registers
+
+- **Nara built (page 184, notice 123): 4,813 storefronts (Food service
+  2,428, Food shops 1,169, Personal services 1,216) around 14 stations on 5
+  lines, 68.7% of them in a ring (3,305).** MHLW's filings (7,157 rows), the
+  city's old-law list as of 2025-11-01 (1,341 rows, 820 in term on 2026-08-31
+  by 許可有効期限 through `in_term`, 521 dropped) and its three registers as of
+  2026-04-01 (barbers 213, beauty 837, laundries 213; cp932), joined to MLIT's
+  address blocks for 29201: of 5,268 storefront rows, 4,718 at the block
+  (89.6%), 347 at MHLW's own point (6.6%; 345 from chōme, 2 from none), 169 at
+  a town centre (3.2%), 34 unplaced (0.6%). By source: MHLW 89.6% block
+  (10.3% own point), old-law list 89.2 / 10.8 / 0.0, registers 89.5 / 7.8 /
+  2.6 (barber 85.4, beauty 92.0, laundry 84.0 block) - the lead's screen
+  exactly. MHLW's own point against the block point: median 40 m, 95.1%
+  within 250 m (3,008 rows). 90 old-law rows dropped for their MHLW row
+  (`SUPERSEDES`); 331 repeat permits shown once. Closed 22; no address
+  published 1,978 (896 open restaurant permits of 4,074, 22.0%: "one in
+  five"); not a premises 788 (760 MHLW 一円, 28 old-law 一円). Out by rule:
+  421 manufacturing and other non-counter types, 246 canteens, 139 vending,
+  119 snack bars and cabarets, 100 caterers, 93 inside hotels and inns, 36
+  entertainment venues, 19 temporary, 11 mail order.
+- **そうざい屋 leading an old-law sub-type is Retail** (the そう菜店 precedent,
+  in the shared taxonomy): 27 in-term rows. The brief counted them as
+  restaurants (its 472 old-law Food service against the build's 439). One
+  in-term old-law row, ビアガーデン, falls to "no rule" (out).
+- **Held items touched (owner call pending):** 40 MHLW restaurant rows whose
+  業態 names a deli (そうざい屋 10, そうざい屋、弁当屋 5, そうざい 4, and 21
+  other spellings) stay Food service.
+- The 菓子 / そうざい factory share: 6 of 535 (1.1%), kept (owner,
+  2026-09-24).
+- **Privacy verdict: publish.** `check_personal_exposure.py nara`: the Japan
+  pass prints 0; 0 trade names that are an operator's own name in the raw
+  files, none withheld; MHLW names no individual (Fukuoka's precedent).
+- **Rail:** N02-25; 14 stations (Kintetsu 10: Nara 6, Kyoto 3, Kashihara 3,
+  大和西大寺 shared by all three; JR 4: Yamatoji 2, Man-yo Mahoroba 3, 奈良
+  shared). Thin rail, built anyway (owner, 2026-10-02). Median nearest-station
+  gap 1,108 m (min 879): standard rings. 10 excluded: 大和郡山市 3, 木津川市 2,
+  生駒市 2, 天理市 1, 笠置町 1, 精華町 1 (Kyoto's named through
+  `N03_NEIGHBOR_PREFS` = 26). Gate 3: Kintetsu's station index read against
+  the city line gives Nara 6, Kyoto 3, Kashihara 3, exact. English names:
+  OSM's 75 objects, 4 cited overrides (Gakuen-mae, Kintetsu-Nara, Kyobate,
+  Nishinokyo). Colours from `line_colour_search.py` (Kintetsu's three reds
+  part into red, coral and orange; closest pair 18.2).
+- **Economic Census control: 1.93** (2,428 Food service pins against 1,258),
+  0.01 above the built cities' 1.56-1.92, as the brief predicted ("about 2.0").
+- **Three dates on one page**: the old-law list 2025-11-01 (filtered to
+  2026-08-31), the registers 2026-04-01, MHLW downloaded 2026-10-02.
+- **Prose proposals for review time**: none on the page beyond the template
+  and Kitakyushu's approved sentences (the registers sentence reworded for
+  three registers); in What Is Excluded, "The city's old-law delis filed as
+  そうざい屋 are Food shops."
+
 ### 2026-10-03 - Ōtsu built, the city's food list and three registers
 
 - **Ōtsu built (page 183, notice 122): 4,508 storefronts (Food service
