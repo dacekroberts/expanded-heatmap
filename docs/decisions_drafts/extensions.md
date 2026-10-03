@@ -173,8 +173,8 @@ the owner at review time.
 - **Macro label** 168.6 px (the Belo Horizonte run). Right of the dot is
   still the only side with PROBLEMS 0 (above covers Belo Horizonte's dot;
   below and left meet São Paulo and Santos), clipped 24% at 375 px only.
-- **Brief check 7/8**; the eighth (OSM's MetrôRio and VLT refs, the colour
-  source) was not checked: every Overpass mirror refused. To retry.
+- **Brief check 8/8**: the OSM refs claim (the colour source) passed on the
+  third run, after two Overpass refusals.
 - **Regional processed files** in `data/rio_de_janeiro/processed/regional/`
   from the start.
 
