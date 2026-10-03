@@ -476,6 +476,7 @@ to the Public** (2015-04-02) governs both SanGIS layers the San Diego build
 uses. It sits in each item's own `licenseInfo`.<!-- internal --> It was read on 2026-10-02 by the
 license-read agent for the boundaries, confirming the parcels row's
 agreement.<!-- /internal -->
+
 - **The layers:**
   - the **countywide tax parcels** (the residence-filter join);
   - the **municipal boundaries**, item `c034e931bd83403892eea61fdae5a6ae` on
