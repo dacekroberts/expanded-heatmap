@@ -4,6 +4,42 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Central Europe, Germany north and Sagamihara banded (owner)
+
+- **The owner: "65-67 D, 68-72 approved, 73 yes".** Staging reads 65-67 as
+  its three recommendations (65 named discards, for which no owner act
+  exists), and said so in chat.
+- **Central Europe:** Linz, Innsbruck, Gmunden, Osijek and Košice discarded
+  (no premises register; Austria, Croatia and Slovakia have no national one
+  like Czechia's). Debrecen, Szeged and Miskolc to D: the owner's act is an
+  export from OKNYIR, Hungary's national shop register, in the owner's own
+  browser; Debrecen's scrambled IPARKER file is not unscrambled (the page's
+  own unscramble step is Palembang's lifted-token line), and Miskolc's paged
+  HTML register is Lausanne's shape. Pages would be food service and retail
+  (Hungary registers no personal services), placed by an OSM address join.
+  **Budapest leaves the discards for D**, the same export: its row said the
+  registers were "unpublished", but district notaries publish them and
+  OKNYIR now holds them nationally.
+- **Germany north:** Gelsenkirchen to C with a licence read (its retail and
+  centres survey, all three buckets from one publisher, the first German
+  city after Berlin; dl-zero-de/2.0 on open.nrw against "other-closed" on
+  opendata.ruhr); Bremen to C with its 172,889-byte 2022 retail survey
+  approved for download and measurement (retail only); Rostock discarded on
+  Dresden's precedent (curated POI layers, CC0); 19 absence discards; a
+  short Wuppertal screen (the Schwebebahn, a mode the brief did not name;
+  the mode is the owner's call once the facts are in).
+- **Sagamihara to A:** CC BY 4.0 by the city's open-data terms, a download
+  counting as acceptance; the fault-based cost clause (§5) and
+  self-settlement (§4) accepted on Sakai's precedent; no framing of the
+  catalogue; terms re-read before each refresh; the four datasets' metadata
+  declares no licence, covered by the site-wide terms by inference.
+- **Probe slip in the Sagamihara licence read:** the agent opened the terms
+  PDF in the shared built-in browser, which raised a save dialog on the
+  owner's screen. Later licence-read prompts say: no built-in browser.
+- **The push is held:** `check_macro_facts.py` fails on 30 built Japanese
+  cities whose shared processed data another session rewrote around 14:51;
+  staging does not rewrite their records and does not skip the hook.
+
 ### 2026-10-04 - Japan's third wave, Germany south and Poland banded (owner)
 
 - **Poland, "49 yes 50 yes 51 discard, 52 no download":** Wrocław's precedent
