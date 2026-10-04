@@ -70,8 +70,9 @@ the pointers. **Delete a section when its item is done.**
   export for four Hungarian cities, the Romanian DSVSA lists, Konya,
   Pune). Israel is held for wartime concerns (screens kept). The Mexico
   City station repair (with Guadalajara's duplicate) is done on
-  `fix/mexico-city-stations` (e63f5593) for review time; two Guadalajara
-  interchange pairs (91 m apart, different names) are the owner's call.
+  `fix/mexico-city-stations` (e63f5593) for review time; the two Guadalajara
+  interchange pairs (91 m apart, different names) were answered by the
+  owner in the Cleanup session.
 - **The country census artifact** (https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD,
   version 7, 2026-10-04, rebuilt by the scratchpad's `census_v3.py` from
   `country_census.py`'s counts): its "Hottest leads" section is every open A-D
