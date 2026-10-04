@@ -1288,7 +1288,9 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Daegu Metro Lines 1–3",
-        "region": "East Asia",
+        # In the South Korea view since 2026-10-04 (owner); East Asia still
+        # labels it (REGION_LABELS_ALSO), at the offset below.
+        "region": "South Korea",
         "country": "South Korea",
         "in_default_view": False,
         # Left of the dot (width 42.9 px, measured 2026-09-27): above it, the
@@ -1308,7 +1310,9 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Busan Metro Lines 1–4 and the Busan–Gimhae LRT",
-        "region": "East Asia",
+        # In the South Korea view since 2026-10-04 (owner); East Asia still
+        # labels it (REGION_LABELS_ALSO), at the offset below.
+        "region": "South Korea",
         "country": "South Korea",
         "in_default_view": False,
         # LOWER LEFT since 2026-09-28: below the dot, Busan's pill covered
@@ -4221,16 +4225,16 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Daejeon Metro Line 1",
-        "region": "East Asia",
+        "region": "South Korea",
         "country": "South Korea",
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the default, and SCORED: check_macro_labels.py (python
+        # -B) passes, PROBLEMS 0 at 375, 768 and 1200 (width 54.4 px, measured
+        # 2026-10-04).
+        # MINOR, in the South Korea view (owner, 2026-10-04): labelled only
+        # there; a dot and tooltip in East Asia, which labels Daegu and Busan.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4245,16 +4249,16 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Gwangju Metro Line 1",
-        "region": "East Asia",
+        "region": "South Korea",
         "country": "South Korea",
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the default, and SCORED: check_macro_labels.py (python
+        # -B) passes, PROBLEMS 0 at 375, 768 and 1200 (width 58.2 px, measured
+        # 2026-10-04).
+        # MINOR, in the South Korea view (owner, 2026-10-04): labelled only
+        # there; a dot and tooltip in East Asia, which labels Daegu and Busan.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4269,16 +4273,16 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "The Busan–Gimhae LRT",
-        "region": "East Asia",
+        "region": "South Korea",
         "country": "South Korea",
         "mode": "light_rail",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the default, and SCORED: check_macro_labels.py (python
+        # -B) passes, PROBLEMS 0 at 375, 768 and 1200 (width 49.5 px, measured
+        # 2026-10-04).
+        # MINOR, in the South Korea view (owner, 2026-10-04): labelled only
+        # there; a dot and tooltip in East Asia, which labels Daegu and Busan.
+        "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
 ]
@@ -4464,6 +4468,15 @@ REGION_ORDER = [
     # every pair of labels overlapped (check_macro_labels.py); a composite
     # would still label them all at that zoom. Each city keeps its own page.
     "Seoul Capital Area",
+    # SOUTH KOREA (owner, 2026-10-04): Daegu and Busan, with Daejeon, Gwangju
+    # and Gimhae, moved out of East Asia as Japan's cities were. At East Asia's
+    # zoom Busan's and Gimhae's dots sit 2.6 px apart and Daejeon's pill covers
+    # the Seoul Capital Area's dots (check_macro_labels.py, 54 problems); this
+    # view places every label at its default offset, PROBLEMS 0. The three new
+    # cities are minor; East Asia still labels Daegu and Busan
+    # (REGION_LABELS_ALSO). Named for the country though Seoul and its
+    # satellites keep their own view (owner).
+    "South Korea",
     # OCEANIA (owner, 2026-09-28): Sydney first, Melbourne next, about 710 km
     # apart - one readable view, far from every other region. Named for the
     # continent rather than the country, as Europe is, so an Australian or New
@@ -4486,7 +4499,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "United Kingdom", "Seoul Capital Area", "Japan West", "Japan East")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "United Kingdom", "Seoul Capital Area", "South Korea", "Japan West", "Japan East")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
@@ -4617,7 +4630,7 @@ if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
 # Each tuple's order is the order region_caption() names them in.
-REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area"), "Europe": ("United Kingdom",)}
+REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"), "Europe": ("United Kingdom",)}
 
 
 def region_caption(region):

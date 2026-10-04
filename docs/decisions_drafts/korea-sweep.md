@@ -4,6 +4,34 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - A South Korea view on the macro map: Daegu, Busan, Daejeon, Gwangju and Gimhae (owner)
+
+- **The problem, measured**: with the three new cities in East Asia,
+  `check_macro_labels.py` reported 54 problems at 375, 768 and 1200: Busan's
+  and Gimhae's dots 2.6 px apart, Daejeon's pill over every Seoul Capital Area
+  dot, Daegu's pill over Daejeon's dot, Gwangju's and Gimhae's pills
+  overlapping. No offset separates two dots 2.6 px apart.
+- **The recommendation**, on Japan's precedent (2026-10-02, Osaka's and
+  Sakai's dots 2.6 px apart in one view): a country view holding Daegu, Busan
+  and the three new cities, the three on the minor label tier, East Asia
+  still labelling Daegu and Busan through `REGION_LABELS_ALSO`. Scored in a
+  throwaway edit first: **PROBLEMS 0** in all 20 regions at the three widths,
+  every label at its default offset, no built label moved.
+- **The owner: "New view (Recommended)"**, named **"South Korea"** (chosen over
+  "Korea South" and "Southern Korea", knowing Seoul and its satellites keep
+  their own view). Built as recommended: `REGION_ORDER` after the Seoul
+  Capital Area, `COUNTRY_VIEWS`, `REGION_LABELS_ALSO["East Asia"]`,
+  `country_sections.REGION_GROUP` (grouped under East Asia), and Daegu's and
+  Busan's `region`. The master list's Built table gains a "South Korea view"
+  row.
+- **Label widths** (canvas `measureText` after `document.fonts.load`, 600 14px
+  Space Grotesk, 2026-10-04): Daejeon 54.4, Gwangju 58.2, Gimhae 49.5;
+  controls Goyang 52.1, Uijeongbu 68.6, Anyang 51.6, Busan 41.9 and Daegu 42.9
+  reproduced to 0.1 px.
+- **Downstream**: Daegu and Busan change region, which moves them in the
+  macro map's region menu and its city list; the Visuals session should hear
+  it with the landing.
+
 ### 2026-10-04 - Gimhae built: the Busan–Gimhae LRT on SEMAS's register, its own page
 
 **Built** on branch `korea-sweep-build`, page 192, region East Asia, from
