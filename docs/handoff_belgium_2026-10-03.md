@@ -24,6 +24,51 @@ countries are listed (the `add-country` skill's checklist).
 
 **Delete this file** once all six pages have landed.
 
+## SAVEPOINT 2026-10-04 (paused at the owner's 98% weekly-usage line)
+
+Branch `belgium-build`, merged with origin/master at 888bdbd9; nothing pushed.
+State, newest commits first in `git log`:
+
+- **Built and committed, pipeline and docs:** Brussels (196), Antwerp (197),
+  Ghent (198), Charleroi (199), Liège (200): steps 1-3, maps, pages, city
+  entries, notices 144-150, rows in `docs/data_sources/belgium.md`, What Is
+  Excluded sections, privacy rows (Brussels, Charleroi, Liège `pending` the
+  owner; Antwerp, Ghent `publish-structural`), OSM boundary lines (app/osm_notice.py),
+  macro label widths measured (app/label_competition.py). `check_provenance`
+  names all five OK; `check_scope_disclosure` passes.
+- **Brussels (Regional) (201):** step 1 committed (shared
+  `pipeline/countries/belgium_stib.py`; 145 stations, 45 underground, halved
+  rings). The KBO business leg was an agent's, stopped mid-work at the pause:
+  check `git status` for its uncommitted files (`pipeline/countries/belgium_kbo.py`,
+  `pipeline/taxonomies/belgium_kbo.py`, `pipeline/brussels_regional/`
+  config/fetch/step 2, the belgium_kbo column in
+  `scripts/category_continuity_table.py`) and re-run its control first. Still
+  to do for 201: step 2 to the brief, step 3 line specs, page, entry, notices
+  151 and 152, rows, What Is Excluded, privacy.
+- **Antwerp/Ghent follow-up, uncommitted if the agent got that far:** De
+  Lijn's pages (read 2026-10-04) mark De Merode (7, A3) not served through
+  2026-11-08 and Havenhuis and Cadix (24) through 2027-01-10, all three
+  currently ringed; measure the feed and apply the closed-for-works rule, or
+  bring the conflict to the owner. Partial gate 3 from those pages: 1 = 20,
+  2 = 27, 4 = 25, 6 = 25, A3 = 37, Ghent T1 = 21 (the rest showed Sunday's
+  diverted service). The left-bank closed stations (lines 3, 9, 15) are not
+  listed: they need OSM's tram relations (a second Antwerp Overpass query) or
+  De Lijn's notice: an owner call.
+- **Owner calls waiting** (recommendation first): Brussels' 46 cafeterias
+  kept (R1 pending in the continuity table); Brussels' signs all shown, no
+  by-eye read (none printed under the standing rule); Charleroi's 33 and
+  Liège's 39 signs withheld by a shape test, not read by eye; a "Belgium"
+  macro-map view on Czechia's mechanism (the six dots collide in Europe:
+  `check_macro_labels.py` fails until then); the Flemish agent's nine calls
+  and the Walloon agent's calls A-G (in this session's transcript, to go
+  into `docs/decisions_drafts/belgium.md`).
+- **Not yet done:** the drafts entries for Antwerp, Ghent, Charleroi and
+  Liège (Brussels' are in); map_inconsistencies rows, master list, project
+  context; drift check and ring shares; `check_all.py`; the downstream note
+  to Visuals (all notices caption-only; open terms question: hub.brussels's
+  "Google Maps" credit; OSM gives boundaries only, for Antwerp, Ghent,
+  Charleroi and Liège, never rail or station names).
+
 ---
 
 ## The five
