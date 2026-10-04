@@ -172,12 +172,12 @@ walk into. They had been included only because the filter matched the broad
 
 NAICS 2022 moved two of these trades out of 454: vending-machine operators to
 `445132` and fuel dealers to `457210`. Both stay excluded under their new codes
-(San Francisco 39, Los Angeles 36). Heating-oil and bottled-gas dealers are
+(San Francisco 34, Los Angeles 36). Heating-oil and bottled-gas dealers are
 excluded the same way where the register is not NAICS: France's `47.78B`,
 Berlin's `477893`, and Taiwan's bottled-gas and kerosene retail.
 
-Removed: 10.1% of Los Angeles's mapped businesses, 9.0% of San Diego's, 1.7% of
-San Francisco's. `454390` "Other direct selling establishments" was also the
+Removed: 10.1% of Los Angeles's mapped businesses, 9.0% of San Diego's, and
+248 open businesses in San Francisco. `454390` "Other direct selling establishments" was also the
 single largest group of mapped names that looked like an individual's at a
 residential address.
 
@@ -187,7 +187,7 @@ Parking is a planned trip with a destination in mind, not the incidental foot
 traffic near a station that this map is about. A parking structure next to a
 station tells you about commuting, not about the retail character of the area.
 
-Removed: 888 mapped businesses in Los Angeles, 637 in San Francisco, 104 in San
+Removed: 888 mapped businesses in Los Angeles, 341 in San Francisco, 104 in San
 Diego.
 
 ## Excluded in one city
@@ -327,16 +327,22 @@ at DFW Airport) are left out, the lines drawn to their ends. The Dallas
 Streetcar and the M-Line trolley are not drawn (owner, 2026-09-30); the Silver
 Line and the TRE are commuter rail.
 
-### San Diego - its own codes for massage parlours, cottage kitchens and kiosks
+### San Diego - its own codes for massage parlors, cottage kitchens, kiosks and booth rentals
 
-San Diego's registry extends NAICS with codes of its own, and four are left
-out: `812193` massage parlours (144; massage therapy, `812198`, stays), `72234`
+San Diego's registry extends NAICS with codes of its own, and six are left
+out: `812193` massage parlors (144; massage therapy, `812198`, stays), `72234`
 cottage-food operators (192, a licensed home kitchen), `81295`/`812959` kiosk
-businesses (26, ecoATM phone-recycling machines), and `8129` "other personal
+businesses (26, ecoATM phone-recycling machines), `8129` "other personal
 services" filed at group level (569; calibration labs, waste haulers,
-remodellers). With the `81299` catch-all (585), caterers, mobile food and food
-contractors (296) and funeral services (19), 1,831 pins leave the map. Pet care
-and photofinishing stay.
+remodelers), and `812114`/`812115` barber and beauty booth rentals (347). A
+booth rental is a chair rented inside someone else's shop, on the renter's own
+license; the shop's own license keeps the shop on the map. With the `81299`
+catch-all (585), caterers, mobile food and food contractors (296) and funeral
+services (19), 2,178 pins leave the map. Pet care and photofinishing stay.
+
+A business counts as in San Diego when its point falls inside the city limits,
+not when its address names the city, so businesses inside the city with a La
+Jolla, San Ysidro or Del Mar address are on the map.
 
 ### San Francisco - Solo massage establishments (NAICS 812990)
 
@@ -347,14 +353,21 @@ address with a residential indicator — the highest share of any category in th
 city. A sole practitioner working from home is a sensitive thing to place on a
 public map, and the category is a small part of the total, so it is excluded.
 
-Also left out: funeral services (21); food with no counter of its own
-(1,300) — food-service contractors (537), caterers (417) and mobile food (325);
-and the remaining catch-all rows filed as `81299` (21). The contractor code
+Closed locations are left out. The register keeps a business location after
+it closes and records the date it closed, often without marking the business
+itself closed; every location with a closing date on or before the date of the
+city's export is left out (4,668 that would otherwise have been mapped). A
+location whose closing date falls after the export date, a closure scheduled
+at the time, stays. The counts below are of open locations.
+
+Also left out: funeral services (17); food with no counter of its own
+(929) — food-service contractors (432), caterers (266) and mobile food (231);
+and the remaining catch-all rows filed as `81299` (15). The contractor code
 goes whole, although the city's own licenses show it also holds 139 stadium
 and convention-center concession stands, 21 bars on San Francisco Bay ferries
 and a few restaurants.
 
-Also left out: individual practitioner licenses (53 tattoo and body-piercing
+Also left out: individual practitioner licenses (49 tattoo and body-piercing
 practitioners, and 9 massage practitioners): each is one person's own license
 to work, not a premises, and most of the tattoo artists work in a studio that
 already has its own pin.

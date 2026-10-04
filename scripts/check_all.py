@@ -50,6 +50,7 @@ CHECKS = [
     ["scripts/check_html_lang.py"],
     ["scripts/check_html_lang.py", "--selftest"],
     ["scripts/check_word_budgets.py"],
+    ["scripts/fingerprint.py", "coverage"],
     ["scripts/check_inconsistency_list.py"],
     ["scripts/check_inline_arrays.py"],
     ["scripts/check_macro_facts.py"],

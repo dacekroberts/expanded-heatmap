@@ -22,30 +22,18 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **Desktop leftovers from the touch fix: options with the owner
-  (2026-10-04).** A: draw stations above lines (hover at a station's centre
-  shows the station; recommended). B-lite: a click on a spiderfied dot keeps
-  the group open (recommended); B-full: the phone's panel and ring on desktop
-  too. Either is a map_common change and a full re-render at review time.
-  DECISIONS 2026-10-03, "A tap on a phone selects the nearest dot".
+- [x] **Desktop leftovers fixed 2026-10-04** (A and B-lite; DECISIONS, "San
+  Diego, San Francisco and Los Angeles state or fix their lean").
 
 - [x] **Japan's carry-overs applied 2026-10-04** (DECISIONS, "Japan's
   carry-overs"): the deli count to be confirmed by the owner before the push.
 
-- [ ] **San Diego's names: measured 2026-10-04, recommendation with the
-  owner.** Drop the register's booth-rental codes 812114 and 812115 (65 pins;
-  D.C.'s "Beauty Booth" precedent); match an own name in any word order
-  (about 7 relabels); leave the 452 trade names. Owner call: one swap meet's
-  72-113 non-food stall pins (R1 covers food stalls only).
-
-- [ ] **The three unstated leans (owner, 2026-10-04: state them, then drop
-  the hedge).** Proposed, waiting for the owner: Los Angeles' bullet (8.8% of
-  City rows have no NAICS code and are dropped); San Francisco's closed
-  locations removed first (4,668 of 16,394 pins carry an end date), then its
-  bullet; San Diego's neighborhood names (724 storefronts, La Jolla 477)
-  fixed by a boundary test instead of disclosed. Then Why the Maps Differ's
-  "Where it is known, each city's page says which way its map leans" becomes
-  "Each city's page says which way its map leans."
+- [x] **San Diego, San Francisco and Los Angeles applied 2026-10-04 (owner;
+  DECISIONS).** Open from it: San Diego's swap-meet stalls (72-113 non-food
+  pins at one swap meet; R1 covers food stalls only), an owner call; and
+  re-running `pipeline/san_diego/fetch_parcels.py` so the 89 untested
+  person-like sole proprietorships can be home-tested and the real
+  businesses among them return (about 20 minutes against SANDAG).
 
 - [ ] **Move San Francisco's, Boston's and Philadelphia's thinning variants
   into `pipeline/stations.py` `thin()`** with Hong Kong's and Riga's (owner,
@@ -507,17 +495,6 @@ decisions inside a build are named in its brief.
   WZ 92), but `dublin_uses` counts BETTING SHOP as Retail. Decide one rule
   and sweep every taxonomy, with a drift measurement per city changed.
 
-- [ ] Los Angeles: ~9% of registry rows have no NAICS code; consider whether
-  the caveat needs to be visible on the city page.
-- [ ] San Diego: exact `address_city == "SAN DIEGO"` undercounts
-  neighbourhoods recorded under their own name (La Jolla foremost); decide
-  whether to include them.
-- [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
-  the caveat needs to be visible on the city page.
-- These three are the only maps whose lean the city page does not state
-  (`docs/map_inconsistencies.md` theme 10). Once all three pages carry their
-  caveat, page 92's "Where it is known, each city's page says which way its
-  map leans" can drop its hedge (published wording: owner's call).
 
 ## Later / maybe
 

@@ -102,13 +102,14 @@ CITY_BOUNDARY_NAME = "SAN DIEGO"
 
 # --- Business filtering ------------------------------------------------
 
-# Matches the raw export's own city field (address_city, uppercased).
-# Restricting to this exact match - not e.g. "SAN DIEGO COUNTY" or
-# suburb names like La Jolla that are technically SD neighborhoods but
-# recorded under their own name in this field. Known limitation: some real
-# San Diego neighborhoods (La Jolla foremost) are undercounted because
-# this export's address_city field doesn't normalize them to "San
-# Diego." Documented here rather than silently accepted.
+# Kept for the scaffold's templates; NOT the filter. Step 2 decides "in San
+# Diego" by testing each business point against the city's polygon in
+# MUNICIPAL_BOUNDARIES_GEOJSON (CITY_BOUNDARY_NAME), the file step 1 already
+# uses for stations (owner, 2026-10-04). The exact match on address_city that
+# this string drove dropped storefronts inside the city whose address names
+# the neighborhood instead: La Jolla 477, San Ysidro 194, Del Mar 43 and stray
+# spellings, 724 in all; it also kept 55 rows that lie outside the city
+# (both measured 2026-10-04, before the booth-rental codes left).
 CITY_KEEP = "SAN DIEGO"
 
 # Encoding of this city's RAW source files, declared rather than inferred.
@@ -138,7 +139,15 @@ RAW_CLASSIFICATION_COLUMN = "naics_code"
 #   81295 / 812959  "KIOSK/ATM BUSINESSES" / "OTHER KIOSK RELATED BUSINESS"
 #           (23 + 3): ecoATM phone-recycling machines and two carrier kiosks
 #           - a machine, not a storefront. ecoATM files under both codes.
-NAICS_EXCLUDE_CODES = {"8129", "72234", "81295", "812959"}
+#   812114 / 812115  "BARBER SHOPS - BOOTH RENTAL" / "BEAUTY SHOPS - BOOTH
+#           RENTAL" (owner, 2026-10-04): a chair rented inside someone else's
+#           shop, the renter's own licence, so out under docs/category_rules.md
+#           "A person's own license to work inside someone else's premises".
+#           The precedent is D.C.'s "Beauty Booth" (DECISIONS 2026-10-03,
+#           "Washington D.C. drops "Beauty Booth" under the person-licence
+#           rule"). The shop's own 812111/812112 licence keeps the shop on the
+#           map. Measured before the change: 67 pins (58 + 9), 347 rows.
+NAICS_EXCLUDE_CODES = {"8129", "72234", "81295", "812959", "812114", "812115"}
 
 # The near misses: exact matching must leave 81291 pet care and 81292
 # photofinishing classified and on the map.

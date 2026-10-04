@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 dacekroberts
+Copyright (c) 2026 Dace Roberts
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,18 @@ SOFTWARE.
 
 SCOPE OF THE ABOVE LICENCE -- WHAT IT COVERS, AND WHAT IT CANNOT
 
-The MIT licence above applies to this project's OWN work: the code in
-`pipeline/`, `app/` and `scripts/`, and the prose in `docs/`, `README.md`,
-`PLAN.md` and `DECISIONS.md`.
+The MIT licence above applies to this project's OWN CODE: the source code in
+`pipeline/`, `app/` and `scripts/`.
+
+THE PROJECT'S WRITING AND DESIGN ARE NOT UNDER THE MIT LICENCE.
+Copyright (c) 2026 Dace Roberts. All rights reserved. This covers the prose
+in `docs/`, `README.md`, `PLAN.md` and `DECISIONS.md`; the reader-facing text
+the app renders (its pages' wording, wherever it sits in the code); and the
+design of the site and its maps (layout, styling, legends, the overview map).
+They may be read and linked to; republishing them needs the author's
+permission. This reservation does not reach the third-party material
+described below, which keeps its own terms, nor the CC BY-SA offer for
+`outputs/fukui/`.
 
 IT DOES NOT APPLY TO THE DATA IN `outputs/`, AND IT COULD NOT.
 

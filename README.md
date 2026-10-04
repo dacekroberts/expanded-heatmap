@@ -122,8 +122,9 @@ Ridership and deeper analysis are out of scope.
 
 ## Licence
 
-**The code is MIT.** See `LICENSE`, which also states what that grant does
-not cover. (That added scope section is why GitHub does not name the licence
+**Built by Dace Roberts.** **The code is MIT; the writing and design are
+© 2026 Dace Roberts, all rights reserved.** See `LICENSE`, which also states
+what the MIT grant does not cover. (That added scope section is why GitHub does not name the licence
 as MIT; it is kept there deliberately, because one source's terms rely on it.)
 
 **The data is not, and could not be.** `outputs/<city>/` is committed so the

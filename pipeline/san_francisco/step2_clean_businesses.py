@@ -125,6 +125,38 @@ def main():
     df = df[df["administratively_closed"].isna()]
     print(f"Active-only filter: {before:,} -> {len(df):,} rows")
 
+    # --- Closed locations ---------------------------------------------------
+    # Owner, 2026-10-04 (PLAN item (a) of "Published-city date fixes";
+    # DECISIONS 2026-09-29 "Published cities' data dates checked"):
+    # administratively_closed is blank on most closed locations, so a row
+    # with a location_end_date or dba_end_date is a location that has
+    # closed and is left out. 4,668 of 16,394 pins carried one on the
+    # 2026-09-19 fetch; every dba_end_date in that mapped set also had a
+    # location_end_date, and 21 active rows table-wide carry only a
+    # dba_end_date. An end date AFTER the export's own data_as_of date is a
+    # scheduled closure at the time of the snapshot and stays; the cut is
+    # the snapshot date, not the run date, so the output does not move
+    # with the calendar. Re-measure the counts above on a new fetch.
+    as_of = pd.to_datetime(df["data_as_of"], errors="coerce").max()
+    if pd.isna(as_of):
+        sys.exit("no data_as_of date in the export; the closed-location "
+                 "filter needs the snapshot date")
+    ended = pd.Series(False, index=df.index)
+    scheduled = pd.Series(False, index=df.index)
+    for col in ("location_end_date", "dba_end_date"):
+        end = pd.to_datetime(df[col], errors="coerce")
+        unparsed = df[col].notna() & end.isna()
+        if unparsed.any():
+            sys.exit(f"{int(unparsed.sum()):,} {col} value(s) do not parse as dates")
+        ended |= end.notna() & (end <= as_of)
+        scheduled |= end > as_of
+    scheduled &= ~ended
+    before = len(df)
+    df = df[~ended]
+    print(f"Closed locations (an end date on or before the export's "
+          f"{as_of:%Y-%m-%d}): {before:,} -> {len(df):,} rows; "
+          f"{int(scheduled.sum()):,} with a later end date kept as scheduled")
+
     # --- Filter to storefront categories --------------------------------
     before = len(df)
     df = filter_to_storefront(df, TAXONOMY_SYSTEM)

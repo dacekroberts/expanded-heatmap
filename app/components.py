@@ -3036,6 +3036,14 @@ _NOTICES = [
 # SEPTA and WMATA all bar stating or implying affiliation, sponsorship or
 # endorsement, and WMATA's also names "confusingly similar variants". Nothing
 # here reproduces a logo, wordmark or route-bullet artwork.
+# Authorship (owner, 2026-10-04): the code is MIT, the writing and design
+# reserved, the data each source's own (LICENSE).
+_AUTHORSHIP = (
+    "Built by Dace Roberts. © 2026 Dace Roberts: writing and design, all "
+    "rights reserved. Code: MIT License. Data: each source's own terms "
+    "(“Where this data comes from”)."
+)
+
 _NON_AFFILIATION = (
     "This is an independent project. It is not affiliated with, sponsored by "
     "or endorsed by any transit agency or city government named here. Line "
@@ -3178,6 +3186,7 @@ def render_site_notices(city=None, show_links: bool = True,
             st.markdown(_notice_text(own))
     st.caption(_AS_RECORDED)
     st.caption(_NON_AFFILIATION)
+    st.caption(_AUTHORSHIP)
 
     if not lists_all:
         if not own:
@@ -3208,7 +3217,29 @@ def render_site_notices(city=None, show_links: bool = True,
                            f"this site ({len(folded)})</summary>\n\n"
                            f"{_notice_text(folded)}\n\n</details>",
                            unsafe_allow_html=True)
-    st.caption(_UNSETTLED_TERMS)
+    # The authorship mark rides in the last caption as a hidden span: no
+    # visible text, no element of its own (scripts/fingerprint.py; owner,
+    # 2026-10-04).
+    mark = fingerprint_mark(f"page/{city}" if city else "site")
+    st.caption(_UNSETTLED_TERMS + (f'<span hidden data-ehm="{mark}"></span>' if mark else ""),
+               unsafe_allow_html=bool(mark))
+
+
+_FINGERPRINT_TABLE = Path(__file__).resolve().parent.parent / "pipeline" / "fingerprint_marks.json"
+_fingerprint_cache = {}
+
+
+def fingerprint_mark(ident):
+    """`ehm:v1:<ident>:<check>` from pipeline/fingerprint_marks.json, or None;
+    a missing or unreadable table never takes a page down."""
+    if not _fingerprint_cache:
+        try:
+            import json
+            _fingerprint_cache.update(json.loads(_FINGERPRINT_TABLE.read_text(encoding="utf-8")))
+        except (OSError, ValueError):
+            return None
+    check = _fingerprint_cache.get(ident)
+    return f"ehm:v1:{ident}:{check}" if check else None
 
 
 # The every-page notices that stay inline rather than folded (render_site_notices).
