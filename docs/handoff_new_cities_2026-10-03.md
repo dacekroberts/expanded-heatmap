@@ -4,12 +4,13 @@ For the build session that builds the three non-Korean, non-Belgian cities
 the coverage sweep found. Written by staging; the owner set three build
 sessions on 2026-10-03 ("one korean, one belgium, one for the other cities").
 
-**NOT YET RELEASED.** The owner releases this kit to ONE build session,
-which works in its own worktree (suggested: `.claude/worktrees/new-cities`
-on branch `new-cities-build`, cut from origin/master; `data/` and
-`.venv-lean` are junctions to the main checkout's). The branch has no
-upstream, so a plain `git push` can never reach master. Everything lands at
-the owner's review time.
+**✅ RELEASED by the owner, 2026-10-03** ("if korean and other cities are
+ready, give me new worktrees and prompts with handoff files"), to ONE build
+session. It works in `.claude/worktrees/new-cities` on branch `new-cities-build`, cut
+from origin/master by staging. There, `data/` and `.venv-lean` are
+junctions to the main checkout's. The branch has no upstream, so a plain
+`git push` can never reach master. Everything lands at the owner's review
+time.
 
 **Two other build sessions may run beside this one:** Korea
 (`docs/handoff_korea_sweep_2026-10-03.md`) and Belgium (its kit follows the
