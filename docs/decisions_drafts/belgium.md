@@ -1,0 +1,105 @@
+# DECISIONS drafts - Belgium build (`belgium-build`)
+
+Entries for `DECISIONS.md`, newest first, each written exactly as it should
+land (the `decisions-entry` format). Cleanup folds them in when the owner
+hands the drafts off, then empties this file (owner, 2026-09-30).
+
+### 2026-10-04 - Brussels built: STIB's metro, premetro and thinned trams; hub.brussels's survey in three categories
+
+- **Built the City of Brussels (page 196) on hub.brussels's inventory and
+  STIB-MIVB's GTFS.** Step 1: STIB's feed (version 2_21_20261002_143730,
+  window 2026-09-28 to 2026-10-25, fetched 2026-10-04 under the portal terms
+  the owner accepted on 2026-10-03; the terms text's sha256 is pinned in
+  `pipeline/brussels/config.py` so a re-fetch after the terms change stops
+  and comes back to the owner) runs metro 1, 2, 5, 6 and 18 tram lines.
+  Fifteen trams enter the commune on their regular route and are drawn whole
+  (4, 7, 8, 9, 10, 19, 25, 35, 51, 55, 62, 81, 82, 92, 93); 18, 39 and 44
+  never enter it. 268 stop places on the drawn lines, 73 inside the
+  commune, 66 kept after thinning (7 tram stops cut by the half-mile rule,
+  all on trams 10, 51 and 62 in the north), 195 outside listed by commune.
+  Gate 3 exact on all four metro lines against fr.wikipedia's "Nb.
+  d'arrêts" (21, 19, 28, 26, a secondary source; STIB publishes none). The
+  corridor: all 25 underground stations of the City's entrances dataset.
+  Median gap among the 66 kept: 377 m, so halved rings (0.05 / 0.1 / 0.2 /
+  0.3 mi). Step 2: 6,880 units, one survey (2025-10-17), every unit inside
+  the commune polygon; 1,068 vacant out, 743 out by type; **5,069
+  storefronts: Food service 1,930, Retail 2,623, Personal services 516**
+  (the screen's rough map gave 1,908 / 2,459 / 508); 4,762 inside a ring.
+- **A line's regular route takes a trip-share floor as well as Amsterdam's
+  day rule.** Metro 1 runs 34 of its 3,932 trips through to Erasme (the
+  first and last runs, every day), which the day rule alone counted as nine
+  more metro 1 stations (30 against the published 21). A stop now needs at
+  least 10% of the line's trips too; metro 1 then reads 21. The alternative,
+  an alias list of Erasme-branch stops, would fail silently when the
+  timetable changes.
+- **The corridor counts as inside the commune by name.** Botanique, Madou,
+  Porte de Namur and Rogier lie under the Petite Ceinture, the commune's
+  boundary with Saint-Josse and Ixelles: the mean of their platforms falls
+  just outside the polygon, while the City's own entrances dataset files
+  their entrances in Bruxelles and the brief names all 25 as the commune's.
+  Without it the corridor read 21. Rogier being inside brings trams 25 and
+  55 in (their premetro terminus), so they are drawn.
+- **Elisabeth and Simonis stay two stations** (103 m apart, Koekelberg, both
+  outside the commune): STIB's feed and the secondary source's per-line
+  counts both count them apart; the source's network figure of 59 (dated
+  2011) is one under the feed's 60 for that reason and is not used for gate 3.
+- **Station names show French and Dutch** ("Gare Centrale / Centraal
+  Station") from the feed's translations.txt where the two differ, as STIB
+  signs them; one name where they agree. The feed's own names are upper case.
+- **Line colors: STIB's own**, with five trams shifted in HSL lightness only
+  to clear Delta-E 13 from every earlier line (Amsterdam's rule): 9, 35, 55,
+  92, 93 (STIB gives 19 and 92 one red, 51 and 55 one yellow). Below the
+  preferred 45 against a pin color and kept as STIB's: Tram 4 14.4 and Tram
+  25 17.3 from Food service, Metro 6 21.0 from Retail, Metro 1 28.1.
+- **The taxonomy, `brussels_hub`**: keyed on the single type (285 distinct
+  once `type_fr` is split outside parentheses; 1,786 units carry two or
+  more, against the screen's naive 1,817). Every type has a home; an unknown
+  type raises. A unit takes the highest kept bucket among its types, Food
+  service over Retail over Personal services (the screen's rule and the KBO
+  measurement's); 175 kept units span two or more buckets. Departures from
+  the screen's rough map, each by the category rules or the publisher's own
+  filing (premises-taxonomy Step 6): art galleries Retail (precedent);
+  "Tailleur - Costumes" Retail, filed by hub.brussels under personal
+  equipment rather than Services (the screen had put it with alterations);
+  the craft types hub.brussels files under home equipment (glass, mirror,
+  crystal, wood, cabinetmaker, framer) Retail; a shisha bar, a board-game bar
+  and an e-sport bar Food service as bars; "Comptoir-traiteur" Retail as a
+  deli counter (France's traiteurs kept); heating fuel out (nonstore rule);
+  photo studios, engravers, trophy shops and clothing rental out as services
+  that are not personal care.
+
+### 2026-10-04 - Brussels: calls for the owner (proposals, not yet decided)
+
+- **Cafeterias and food courts (46 units typed "Cantine - Cafétéria -
+  Food-court") kept as Food service, pending the owner.** R1 leaves staff and
+  institutional canteens out; hub.brussels's survey records ground-floor units
+  open to the street, so these read as public cafeterias and food courts.
+  Recorded as `pending` in `scripts/category_continuity_table.py`. The
+  alternative, out under R1, removes 46 Food-service dots.
+- **The privacy verdict, recommended: every shop sign shown, none withheld.**
+  `check_personal_exposure.py brussels`: no owner or registrant column
+  exists, so no pin can fall back to a person; 0 contact details; 1,427 of
+  4,762 pins (30.0%) match the person-name heuristic (restaurants, galleries
+  and hairdressers top the list, as trade names in a European city do); 0 at
+  an address with a unit marker. The source is a street survey of ground-floor
+  commercial units, so every name is the sign on a shopfront, public
+  commercial information by definition, and no unit is a home. The precedent
+  that reads names by eye and withholds the ones that are only a person's
+  (Göteborg's 13, Zurich's 12) was not run: the owner's standing rule for
+  this build is never to print a person's name, and a by-eye read prints
+  1,427 names. If the owner wants that read, it runs with the names kept off
+  screen in a reviewed file. `PERSON_NAMED` is empty meanwhile.
+
+### 2026-10-04 - Belgium: shared commune polygons from OpenStreetMap, one query per city
+
+- **Commune polygons outside the Brussels-Capital Region come from
+  OpenStreetMap**, one Overpass query per city (every `admin_level` 8
+  relation in the rail box, keyed on `ref:INS`), run one at a time by the
+  lead on 2026-10-04: Antwerp 208.0 km2 with Borsbeek (24 communes in the
+  box), Ghent 157.6 km2 (12), Charleroi 102.8 km2 (22), Liège 68.5 km2 (18).
+  The Brussels cities read the Region's own commune limits (PARADIGM, CC0,
+  19 communes; the City 33.1 km2). Reader in `pipeline/countries/belgium.py`,
+  fetch in `pipeline/countries/belgium_fetch.py`.
+- **The TEC name (relayed by staging, 2026-10-04):** the owner approved
+  staging's recommendation: notice 150 credits "LETEC", lines are labelled
+  M2, M3, M4 and T1, and no "TEC" appears in legends or prose.
