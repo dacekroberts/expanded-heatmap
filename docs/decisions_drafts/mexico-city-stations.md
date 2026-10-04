@@ -34,6 +34,12 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 - **Approved as drafted and written, the method sentence in
   `docs/data_sources/mexico.md`'s Mexico City rail row**, after the
   Lechería sentence. The Guadalajara row's count is now "53 stations".
+- **Verified: `python pipeline/drift_check.py guadalajara` reported zero
+  drift against commit 17d081b3** (outputs identical, the map after
+  Folium-id normalization; baseline's 8 figures unchanged; measured peak
+  1.23 GB). `check_provenance.py` names Guadalajara (Regional) and Mexico
+  City OK. Master's `data/guadalajara/processed/` was restored afterwards
+  (56 stations), and Mexico City's copy is still master's (163).
 
 ### 2026-10-04 - Guadalajara's Ávila Camacho collapsed to one station (owner, via Staging; branch, lands with Mexico City's repair)
 
