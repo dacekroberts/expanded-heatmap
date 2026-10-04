@@ -4,6 +4,49 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Belgium's build calls, and Brussels (Regional) from C to B (owner)
+
+- **The owner: "i say yes to all"**, twelve calls as staging recommended:
+  1. **The two fetched feeds ratified**: the owner accepts the Belgian
+     Mobility Company portal's terms for De Lijn's and TEC's feeds (the
+     same CC BY 4.0 terms approved for STIB); the cached copies stand.
+  2. **Rail from De Lijn's feed** (Antwerp, Ghent) **and TEC's** (Charleroi,
+     Liège), subject to their `licence-read` passes (running); OSM if either
+     comes back restrictive.
+  3. **Modes:** Antwerp `tram` (trams in tunnels, Den Haag's precedent),
+     Ghent `tram`, Charleroi `light_rail` (Edmonton's and Pittsburgh's
+     shape), Liège `tram`.
+  4. **No stop thinning in Antwerp** (the trams-only standing call).
+  5. **Platform names merged into one station** where the feed has no
+     parent station (Antwerp, Ghent) and Liège's one stop with two parent
+     ids.
+  6. **"Complementary retail" out** (FAVV PL29 with AC95: Antwerp 238,
+     Ghent 95 placed).
+  7. **Charleroi's M2 drawn to Anderlues**, 13 of 23 stops inside, the 10
+     outside listed (Den Haag's tram 1).
+  8. **Charleroi's lines in the project's own palette** (M2-M4 share one
+     color in TEC's feed; Dijon's precedent).
+  9. **Hotels inside LoGIC's HoReCa disclosed, not split.**
+  10. **Dot names in Charleroi and Liège: the shop sign** (`ENSEIGNE`), a
+      sign read as a person's own name withheld by the privacy check.
+  11. **Antwerp's scope includes Borsbeek** (merged 2025-01-01).
+  12. **Brussels (Regional) from Band C to B**: Retail and Food service
+      full, Personal services off. KBO companies' units in the 18 communes
+      outside the City, joined to BeST-Address Brussels (96.8% placed at a
+      number, 88.5% exact), filtered by four rules (catch-all-only MAIN
+      codes; addresses holding five or more units, fewer than half in a
+      bucket; a plain-number box; ten or more MAIN codes with one outside
+      the buckets). Against hub.brussels in the City: Retail 78.2%
+      precision / 76.1% recall, Food 84.4% / 84.0%, counts 1.09 and 1.22
+      times the survey's. After the filter: Retail 9,124 (8,754 placed),
+      Food 5,209 (5,007). The page says it uses a different method from the
+      City's (registered companies' units, filtered; sole traders excluded;
+      about four in five pins confirmed by the survey). It joins the Belgium
+      kit as page 201.
+- **Coverage inside the rings (Charleroi, Liège):** LoGIC's perimeters
+  cover 11% and 16% of the ring area, and 97-100% of the survey's points in
+  the rings fall inside them.
+
 ### 2026-10-03 - Probe slip in the Flemish and Walloon briefs: two feeds fetched from a portal whose terms count access as acceptance
 
 - **The briefs' agent ran `gtfs_*` checks against De Lijn's and TEC's
