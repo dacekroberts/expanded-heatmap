@@ -1,11 +1,21 @@
-"""Brussels (Regional)-specific settings, scoped to one city per this project's
-per-city folder architecture (see docs/project_context.md, "Architecture").
+"""Brussels (Regional)-specific settings: the 18 communes of the
+Brussels-Capital Region outside the City of Brussels.
 
-Scaffolded by scripts/scaffold_city.py. Every TODO is a value only this city's
-real data can supply (see the add-city skill); none should ship.
+Companies' establishment units from KBO/BCE Open Data (FPS Economy), placed by
+joining their addresses to BeST-Address Brussels (FPS BOSA) and filtered by
+four storefront rules: a different method from the City's page (hub.brussels's
+street survey), said on the page; the two are never merged. Rail is STIB-MIVB
+beyond the City, on the City's shared STIB module. Brief:
+docs/build_briefs/brussels_regional.md.
 """
 
 from pathlib import Path
+
+SLUG = "brussels_regional"
+# The brief's proposals, checked against app/cities.py by scripts/brief_check.py.
+MAP_MODE = "metro"
+MAP_COVERAGE = "narrowed"
+SCOPE = "regional"
 
 # --- Paths ---------------------------------------------------------------
 
@@ -18,18 +28,31 @@ HEATMAP_HTML = OUTPUTS / "heatmap.html"
 # Stations outside the city, with where each is (a citable scoping record, as
 # in the other cities).
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
+PROVENANCE_JSON = OUTPUTS / "provenance.json"
 
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
+# Step 2's cached KBO extract (parquet, rebuilt when the KBO zip changes) and
+# its measurements.
+KBO_EXTRACT_DIR = DATA_PROCESSED / "kbo_extract"
+STEP2_REPORT_JSON = DATA_PROCESSED / "step2_report.json"
 
-# Raw inputs. Record the exact download command for each (all public):
-# TODO: gtfs.zip - the agency's GTFS feed URL.
-# TODO: city_boundary.geojson - a real GIS boundary layer for the city.
-# TODO: the business file - endpoint, server-side filter, and snapshot date if
-#       the source is a term history (Chicago's AS_OF_DATE is the model).
+# Raw inputs. The business leg's two files are shared Belgian caches
+# (pipeline/countries/belgium.py: KBO_ZIP, BEST_BRUSSELS_ZIP), verified by
+# pipeline/brussels_regional/fetch_sources.py against their meta JSON. KBO is
+# placed by the owner (the portal needs the owner's login; a download at least
+# yearly, licence 10.5, due by KBO_DOWNLOAD_DUE); BeST may be re-fetched by
+# that script's --refresh-best, which means re-running the control.
+BEST_URL = "https://opendata.bosa.be/download/best/openaddress-bebru.zip"
+KBO_PORTAL = "https://kbopub.economie.fgov.be/kbo-open-data/login?lang=en"
+KBO_DOWNLOAD_DUE = "2027-10-02"
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
-BUSINESSES_RAW_CSV = DATA_RAW / "businesses.csv"  # TODO: real file name
+BUSINESSES_RAW_CSV = DATA_RAW / "businesses.csv"
 CITY_BOUNDARY_GEOJSON = DATA_RAW / "city_boundary.geojson"
+# The control's survey side: hub.brussels's inventory of the City (2025-10-17),
+# and the City page's stations for the near-a-City-station count.
+HUB_JSON = ROOT / "data" / "brussels" / "raw" / "hub_brussels_commerces.json"
+CITY_STATIONS_CSV = ROOT / "data" / "brussels" / "processed" / "stations.csv"
 
 # --- Coordinate reference systems -----------------------------------------
 
@@ -103,21 +126,66 @@ CORRIDOR_COUNT = 45
 # The 18 communes by NIS code: SCOPE_CODES, below with the business filters.
 CITY_COMMUNE_CODE = "21004"
 
+# --- Scope: the 18 communes, by NIS code, never by postcode ------------------
+
+# The City's Avenue Louise strip and European quarter carry 1050 and 1040,
+# Ixelles's and Etterbeek's postcodes, so a business's key is the matched BeST
+# point's municipality_id, checked against the commune polygons and KBO's own
+# municipality field (step 2 reports the disagreements).
+SCOPE_CODES = {
+    "21001": "Anderlecht", "21002": "Auderghem / Oudergem",
+    "21003": "Berchem-Sainte-Agathe / Sint-Agatha-Berchem", "21005": "Etterbeek",
+    "21006": "Evere", "21007": "Forest / Vorst", "21008": "Ganshoren",
+    "21009": "Ixelles / Elsene", "21010": "Jette", "21011": "Koekelberg",
+    "21012": "Molenbeek-Saint-Jean / Sint-Jans-Molenbeek", "21013": "Saint-Gilles / Sint-Gillis",
+    "21014": "Saint-Josse-ten-Noode / Sint-Joost-ten-Node", "21015": "Schaerbeek / Schaarbeek",
+    "21016": "Uccle / Ukkel", "21017": "Watermael-Boitsfort / Watermaal-Bosvoorde",
+    "21018": "Woluwe-Saint-Lambert / Sint-Lambrechts-Woluwe",
+    "21019": "Woluwe-Saint-Pierre / Sint-Pieters-Woluwe",
+}
+CITY_POSTCODES = ("1000", "1020", "1120", "1130")
+# The Region's postcodes (special ones such as 1099, 1105 and 1110 included):
+# the KBO extract keeps establishment addresses in this range.
+REGION_POSTCODE_RANGE = (1000, 1299)
+
 # --- Business filtering ------------------------------------------------
 
-# TODO: how in-city rows are identified: the dataset's own city field (check
-# what it really holds) or an authoritative district field.
-CITY_KEEP = "BRUSSELS (REGIONAL)"
-
+CITY_KEEP = "BRUSSELS (REGIONAL)"   # kept for the scaffold's templates; the scope is SCOPE_CODES
 TAXONOMY_SYSTEM = "belgium_kbo"
-# Already the taxonomy's VALUE_COLUMN, so step 2's rename is a no-op.
 RAW_CLASSIFICATION_COLUMN = "nace_code"
 
-# Sanity bounds for the supplied lat/lng. TODO: tighten to the city's real
-# extent once the boundary is known (this box is a wide starting guess).
-BRUSSELS_REGIONAL_BBOX = {
-    "lat_min": 50.44,
-    "lat_max": 51.24,
-    "lon_min": 3.87,
-    "lon_max": 4.87,
-}
+# Personal services is OFF on this page (owner, 2026-10-03, call 12):
+# companies only drops most salons (0.47 times the survey's count, 51% recall).
+# The bucket priority runs first, so only a personal-only unit leaves.
+BUCKETS_OFF = ("Personal services",)
+
+# The four storefront rules (the brief's definitions, exactly).
+RULE_B_MIN_UNITS = 5          # companies' units at one address (box ignored), any activity
+RULE_B_IN_BUCKET_SHARE = 0.5  # dropped when fewer than half of them are in a bucket
+RULE_D_MIN_CODES = 10         # distinct MAIN codes, at least one outside the buckets
+
+# The "other postcode or loose street name" join tier (0.8% in the screen):
+# kept only if it holds (step 2 reports the street keys that recur in more
+# than one postcode and the tier's agreement with the survey).
+KEEP_LOOSE_TIER = True
+
+# The agreement with hub.brussels inside the City (the control).
+SURVEY_DATE = "2025-10-17"
+MATCH_RADIUS_M = 15.0
+# The control must reproduce before any count is trusted (the brief, measured
+# 2026-10-03 on extract 501): the join on the City's four postcodes, and the
+# agreement after rules A-D (precision, recall) per bucket.
+CONTROL_JOIN = {"exact": 88.5, "placed": 97.2}
+CONTROL_AGREEMENT = {"Retail": (78.2, 76.1), "Food service": (84.4, 84.0)}
+CONTROL_TOLERANCE_PTS = 0.5
+
+# Placed units near a City station but no regional one: the ring's outer edge.
+NEAR_CITY_STATION_M = 0.3 * METERS_PER_MILE
+
+# Company or commercial names read as a person's own, withheld (the dot shows
+# its activity): KEYS from pipeline/name_keys.py, never the names
+# (scripts/check_name_keys.py). Filled after check_personal_exposure.py.
+PERSON_NAMED = frozenset()
+
+# The Region's extent (about 4.24-4.48 E, 50.76-50.92 N), padded.
+BRUSSELS_REGIONAL_BBOX = {"lat_min": 50.75, "lat_max": 50.93, "lon_min": 4.23, "lon_max": 4.49}

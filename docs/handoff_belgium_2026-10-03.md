@@ -45,13 +45,13 @@ State, newest commits first in `git log`:
   `scripts/category_continuity_table.py`) and re-run its control first. Still
   to do for 201: step 2 to the brief, step 3 line specs, page, entry, notices
   151 and 152, rows, What Is Excluded, privacy.
-- **Antwerp/Ghent follow-up, uncommitted if the agent got that far:** De
-  Lijn's pages (read 2026-10-04) mark De Merode (7, A3) not served through
-  2026-11-08 and Havenhuis and Cadix (24) through 2027-01-10, all three
-  currently ringed; measure the feed and apply the closed-for-works rule, or
-  bring the conflict to the owner. Partial gate 3 from those pages: 1 = 20,
-  2 = 27, 4 = 25, 6 = 25, A3 = 37, Ghent T1 = 21 (the rest showed Sunday's
-  diverted service). The left-bank closed stations (lines 3, 9, 15) are not
+- **Antwerp/Ghent follow-up, committed:** partial gate 3 from De Lijn's
+  pages matches (1 = 20, 2 = 27, 4 = 25, 6 = 25, A3 = 37, Ghent T1 = 21; the
+  rest showed Sunday's diverted service, recorded as a gap). **A conflict for
+  the owner:** De Lijn's pages mark De Merode not served through 2026-11-08
+  and Havenhuis and Cadix through 2027-01-10, but the feed serves all three
+  (and Ghent's Bijlokehof) in full from 2026-10-15; they stay ringed, as the
+  timetable runs, until the owner rules. The left-bank closed stations (lines 3, 9, 15) are not
   listed: they need OSM's tram relations (a second Antwerp Overpass query) or
   De Lijn's notice: an owner call.
 - **Owner calls waiting** (recommendation first): Brussels' 46 cafeterias
