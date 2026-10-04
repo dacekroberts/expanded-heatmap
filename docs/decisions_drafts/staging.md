@@ -4,6 +4,185 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gelsenkirchen to B; Wuppertal discarded, its mode left open (owner)
+
+- **The owner: "76 yes 77 yes 78 yes 79 yes 80 yes".**
+- **Gelsenkirchen to B** (three buckets, personal services a measured gap):
+  its five commercial layers (7.1 MB, cached) give food 346, retail 1,322
+  and personal services 104 under the category rules, every row placed;
+  82% of services lie in the designated centres against 53% of retail.
+  **Currency** dated from the 2024 labels on the earlier files, stated on
+  the page as an undated survey; the alternative was waiting for the city's
+  retail plan on a host that refuses curl. **The 188 uncategorised rows**
+  (54 food, 134 services) are left out and disclosed. The build never reads
+  Telefon, EMail, Internet or `DL_Vermarktung`.
+- **Wuppertal discarded** (absence): its data portal (122 datasets), the
+  state portal's harvest, its map service and the chamber hold no premises
+  register; the retail concept publishes polygons only. **The suspension
+  railway's mode is left open**: moot without a register, and the row
+  records that the Schwebebahn behaves like rapid transit (its own track,
+  every 3 to 5 minutes on weekdays). Monorails are counted everywhere they
+  appear; funiculars have gone both ways; cable cars are out.
+
+### 2026-10-04 - Probe slip in the Gelsenkirchen measurement: contact details printed from a free-text field
+
+- **What happened:** a first tally of the city's commercial layers printed
+  values from the free-text `DL_Vermarktung` field (vacancy marketing
+  notes), which hold a person's name and phone numbers. The agent deleted
+  them from its scratch output at once; none reached its report or notes.
+- **For the build:** `DL_Vermarktung` is never read; the brief names it as a
+  dropped field, beside Telefon, EMail and Internet, and the personal
+  exposure check runs on Name.
+
+### 2026-10-04 - Bremen to B, retail only; Gelsenkirchen's licence settled; Kurashiki measured (owner)
+
+- **Bremen, "75 approved":** the 2022 regional retail survey (fieldwork
+  2022-03 to 2022-09, CC BY as stated, 172,889 bytes, cached) holds 3,153
+  placed points in the City of Bremen, goods group and floor-area class
+  only, no name or address field, small shops kept. One full bucket, so B
+  as a retail-only page; a licence read before any build; the survey passes
+  the five-year rule until 2027. Trams: BSAG's 8 lines, about 165 stops.
+- **Gelsenkirchen's licence read: permitted, Datenlizenz Deutschland Zero
+  2.0** on every record in the city's own catalogue and the Ruhr portal; the
+  "other-closed" tag exists only on open.nrw's re-harvest, its default where
+  the Ruhr portal's DCAT export carries no licence. The city's website terms
+  restrict by default but defer to each dataset's metadata (they name the BY
+  2.0 version; a credit satisfies both readings; read from 2026 snapshots,
+  the live host refusing curl). The survey's date is unknown. **The owner:
+  "74. yes"**, fetch its five layers from the city's map service to measure
+  counts, fill, centre bias and any date; it stays in C until then.
+- **Kurashiki measured** (the approved 791,423-byte CSV, cached): 3,172
+  permits, all under the 2021 law, so old-law permits in force are missing;
+  飲食店営業 2,446 = 52.6% of the 4,653 in force; 89.0% addressed;
+  coordinate columns empty; no operator-name column. It stays in C on the
+  city's pre-2021 list.
+- **The summary rows are numbers only from tonight** (the efficiency
+  review's change 1, landed by Cleanup at 27b43122): staging's merge took
+  master's rows and ran `scripts/regen_generated.py`; the dated moves live
+  in these drafts and, once folded, in DECISIONS.
+- **The Guadalajara duplicate-station fix** went to the Mexico City
+  station-fix session (the owner: "send to mexico city"), building on its
+  branch so both re-renders land together at review time.
+
+### 2026-10-04 - Central Europe, Germany north and Sagamihara banded (owner)
+
+- **The owner: "65-67 D, 68-72 approved, 73 yes".** Staging reads 65-67 as
+  its three recommendations (65 named discards, for which no owner act
+  exists), and said so in chat.
+- **Central Europe:** Linz, Innsbruck, Gmunden, Osijek and Košice discarded
+  (no premises register; Austria, Croatia and Slovakia have no national one
+  like Czechia's). Debrecen, Szeged and Miskolc to D: the owner's act is an
+  export from OKNYIR, Hungary's national shop register, in the owner's own
+  browser; Debrecen's scrambled IPARKER file is not unscrambled (the page's
+  own unscramble step is Palembang's lifted-token line), and Miskolc's paged
+  HTML register is Lausanne's shape. Pages would be food service and retail
+  (Hungary registers no personal services), placed by an OSM address join.
+  **Budapest leaves the discards for D**, the same export: its row said the
+  registers were "unpublished", but district notaries publish them and
+  OKNYIR now holds them nationally.
+- **Germany north:** Gelsenkirchen to C with a licence read (its retail and
+  centres survey, all three buckets from one publisher, the first German
+  city after Berlin; dl-zero-de/2.0 on open.nrw against "other-closed" on
+  opendata.ruhr); Bremen to C with its 172,889-byte 2022 retail survey
+  approved for download and measurement (retail only); Rostock discarded on
+  Dresden's precedent (curated POI layers, CC0); 19 absence discards; a
+  short Wuppertal screen (the Schwebebahn, a mode the brief did not name;
+  the mode is the owner's call once the facts are in).
+- **Sagamihara to A:** CC BY 4.0 by the city's open-data terms, a download
+  counting as acceptance; the fault-based cost clause (§5) and
+  self-settlement (§4) accepted on Sakai's precedent; no framing of the
+  catalogue; terms re-read before each refresh; the four datasets' metadata
+  declares no licence, covered by the site-wide terms by inference.
+- **Probe slip in the Sagamihara licence read:** the agent opened the terms
+  PDF in the shared built-in browser, which raised a save dialog on the
+  owner's screen. Later licence-read prompts say: no built-in browser.
+- **The push is held:** `check_macro_facts.py` fails on 30 built Japanese
+  cities whose shared processed data another session rewrote around 14:51;
+  staging does not rewrite their records and does not skip the hook.
+
+### 2026-10-04 - Japan's third wave, Germany south and Poland banded (owner)
+
+- **Poland, "49 yes 50 yes 51 discard, 52 no download":** Wrocław's precedent
+  confirmed (alcohol-sale lists alone give two partial buckets and fail rule
+  1), so Gdańsk (1,713 points, CC BY, the cleanest list), Szczecin, the
+  Silesian network and Olsztyn are coverage discards; Łódź, Bydgoszcz, Toruń,
+  Częstochowa, Elbląg, Gorzów Wielkopolski and Grudziądz absence discards;
+  Gdynia/Sopot and Lublin rail discards (trolleybuses; checked by web search
+  before writing). Olsztyn was staging's recommendation over the probe's R:
+  even read in full, its known register would meet Wrocław's precedent.
+  Toruń's one alcohol PDF stays unread.
+- **Japan's third wave, "53 yes ... 60 yes, 51 yes"** (staging reads the
+  last as 61, Niigata, the only one of 53 to 61 not otherwise answered):
+  Maebashi and Fukuyama to A; Shizuoka, Funabashi, Matsudo and Ichikawa to
+  B, personal services only (Kōchi's shape); Kanazawa to B on its 2024 CC BY
+  food snapshot (84% of restaurants in force, under five years old);
+  Sagamihara to C with a licence read now (its terms say CC BY 4.0 and that a
+  download is acceptance); Kurashiki to C with its 791 KB food CSV approved
+  for a count; Naha to C (does a rebuild from monthly permits reach the stock,
+  Nagoya's trap); Takasaki, Hachiōji and Saitama to R (site terms forbid
+  reuse, or ledgers by request); Niigata discarded. The probe's ~100 quick
+  calls drew a 403 from `data.bodik.jp`, probably a rate block; not retried.
+- **Germany south, "62 yes 63 yes 64 yes":** 21 absence discards (Karlsruhe
+  on Dresden's precedent, its city-map food layer the reopen condition);
+  Ludwigshafen and Ulm to R (bot protection, 403 to both agents); Stuttgart
+  in the open gap (its catalogue answered 502 three times).
+
+### 2026-10-04 - Probe slips in the Poland screen: a form fetched, names printed to a console
+
+- **A 107 KB Word application form** was fetched from `bip.olsztyn.eu`. It
+  is a form, not data, but no brief named it; it was not found saved in the
+  scratchpad afterwards.
+- **One alcohol-list row (a company name) and some staff names from page
+  metadata** were printed to the agent's console. None reached the report
+  or any file. The rule (never print a person's name) stands in every
+  probe prompt; this one broke it in passing, as the 2026-10-03 slip did.
+- **Recorded, not a slip:** `elblag.eu` and `um.gorzow.pl` answer 403 to
+  curl's own agent and 200 to the project's identified agent, which the
+  owner's user-agent rule of the same day allows.
+
+### 2026-10-04 - The India and Switzerland/Norway/Sweden screens banded (owner)
+
+- **The owner: "42. keep in D, i will decide on R later 43-44 yes to both
+  45-47 yes to all 48 yes".**
+- **Pune to D:** the city portal's "Commercial Establishments" (#434, the
+  building department, 2025-12) sits behind a download form asking for a
+  purpose, a name, a mobile number, an email and a CAPTCHA, which only the
+  owner can fill; the file would show whether it lists private businesses
+  or the corporation's own shop units. The owner may move it to R later
+  (Delhi's CAPTCHA went to R). Pune city only: Pimpri-Chinchwad's host
+  times out.
+- **Nagpur to R** (its corporation's host refuses connections, Ahmedabad's
+  shape); **Noida and Greater Noida in the open gap** (both authorities'
+  hosts time out).
+- **Eleven Indian discards:** Navi Mumbai, Lucknow, Kanpur, Agra, Meerut,
+  Jaipur, Gurugram and Indore on no register (application and lookup
+  systems only); Bhopal (15 minutes at peak, 30 off-peak), Patna (5
+  stations at 20 minutes) and Surat (not confirmed open) on rail. **Staging
+  corrected one row before writing it:** the probe proposed Indore on rail
+  from memory, but Priority Corridor 2 opened in September 2026 (16
+  stations, every 15 minutes, 9:00 to 19:00), so Indore's row rests on its
+  business data instead; the outcome is the owner's approved discard.
+  Bhopal's, Patna's and Surat's rail facts were checked the same way by web
+  search before writing.
+- **Bern and Neuchâtel discarded** (no premises register on the city,
+  cantonal or national hosts); **Trondheim's rail discard stands** (line 9
+  still Ila to Lian, every 15 minutes at midday, 30 in the evening; the St.
+  Olavs gate section not back).
+- **Lund to R, request only** (no published register; a public-records
+  request, Norrköping's precedent).
+- **Lausanne to R, request only:** Vaud's Registre des licences is public
+  by law (LADB art. 8; 981 licences in the commune) but answers only
+  through a paged search (about 1,080 calls) in an app configured with a
+  CAPTCHA service, with holders' personal names and no coordinates; Perth's
+  licence search form counted as no register. A bulk extract would be a
+  request (outreach, the owner's call). The search answered 403 until the
+  session cookie the server sets was returned, as a browser does; recorded,
+  not a user-agent refusal.
+- **Not acted on, for the owner:** Pune's website backend lists its full
+  configuration publicly, user and login resources included (content pages
+  only were read). Not this project's to fix; telling the city would be
+  outreach.
+
 ### 2026-10-04 - Israel held at country level for wartime concerns, screens kept (owner)
 
 - **The owner, asked by staging about Petah Tikva:** "hold at country level
