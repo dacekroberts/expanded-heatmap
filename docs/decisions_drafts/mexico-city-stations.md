@@ -36,6 +36,15 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   station-count call for the owner.
 - **Count corrected in `docs/data_sources/mexico.md`:** "56 stations across
   four municipios" -> 55.
+- **Verified: `python pipeline/drift_check.py guadalajara mexico_city`
+  reported zero drift against commit d4b0b383**, both cities' outputs
+  identical (maps after Folium-id normalization), baselines unchanged
+  (Guadalajara 8 figures, Mexico City 7), measured peak 1.40 GB. Mexico City
+  was re-checked because `pipeline/stations.py` changed again.
+  `check_provenance.py` names Guadalajara (Regional) and Mexico City OK.
+  Master's `data/guadalajara/processed/` and `data/mexico_city/processed/`
+  were restored afterwards (56 and 163 stations); the lander re-runs both
+  cities' step 1 at merge, then the full drift sweep.
 
 ### 2026-10-04 - Mexico City's stations repaired: nine stop-only stations added, two interchanges collapsed, two shared checks that raise (branch, held for review time)
 
