@@ -292,7 +292,7 @@ def build(cfg, city, fetch_script):
     # records
     rows = excluded + [{k: v for k, v in c.items() if not k.startswith("_")} for c in closed]
     out = pd.DataFrame(rows, columns=["station", "lines", "reason", "latitude", "longitude"])
-    out.to_csv(cfg.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
+    out.to_csv(cfg.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
     print(f"\n  {len(out)} excluded -> {cfg.EXCLUDED_STATIONS_CSV.relative_to(cfg.ROOT)} "
           f"({len(excluded)} outside, {len(closed)} closed for works)")
     for r in excluded:
@@ -303,7 +303,7 @@ def build(cfg, city, fetch_script):
     if keep["station"].duplicated().any():
         sys.exit(f"two stations share a label: {sorted(keep.loc[keep['station'].duplicated(), 'station'])}")
     keep = keep[["stop_id", "station", "lines", "latitude", "longitude"]].sort_values("station")
-    keep.to_csv(cfg.STATIONS_CSV, index=False, encoding="utf-8")
+    keep.to_csv(cfg.STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
     print(f"\n  {len(keep)} stations -> {cfg.STATIONS_CSV.relative_to(cfg.ROOT)}")
     emit("stations_network", len(by))
     emit("stations_inside", len(keep))

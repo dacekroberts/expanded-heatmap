@@ -267,7 +267,7 @@ def run_step2(cfg, city, fetch_script):
         sys.exit(f"filter_to_storefront kept {len(kept_rows)} of {len(out)}: the module and the "
                  f"join disagree")
     out = out.sort_values(["favv_code", "latitude", "longitude"]).reset_index(drop=True)
-    out.to_csv(cfg.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")
+    out.to_csv(cfg.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8", lineterminator="\n")
     counts = out["favv_code"].map(tax.BUCKET).map(tax.legend_label).value_counts()
     print(f"\n  {len(out):,} food premises -> {cfg.BUSINESSES_CLEAN_CSV.relative_to(cfg.ROOT)} "
           f"(FAVV extract {extract})")
