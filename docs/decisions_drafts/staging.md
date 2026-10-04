@@ -4,6 +4,103 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - TEC's GTFS read: permitted with conditions; the "TEC" name raised
+
+- **`licence-read`, 2026-10-04: PERMITTED WITH CONDITIONS.** The Belgian
+  Mobility Company portal's CC BY 4.0 (art. 3, TEC the sole licensor);
+  TEC's own transportdata.be entry declares CC0 for the same BMC URL.
+  Complying with CC BY 4.0 and art. 4 satisfies either reading, so no
+  owner decision on the licence. letec.be answered every path with a
+  Cloudflare challenge and was not read past it; its website terms were
+  read in the Wayback copy of 2026-05-02.
+- **Display (notice 150):** "Source: LETEC – Open Data – [date of dataset
+  update]" (the update date, not the fetch date), the modified-data line,
+  the CC BY 4.0 title and link, the portal; no TEC logo; no implied
+  endorsement. The feed's `route_color` is licensed data (Charleroi uses
+  the project's palette anyway, owner).
+- **Raised with the owner:** TEC's website terms (art. 8, 8.1) claim the
+  "TEC" name and logo. They are scoped to letec.be and the app, and naming
+  the operator in a required credit is their stated exception; staging
+  recommends crediting "LETEC" and labelling lines by their public names
+  (M2, M3, M4, T1), with no "TEC" in legends or prose.
+
+### 2026-10-04 - De Lijn's GTFS read: permitted with conditions
+
+- **`licence-read`, 2026-10-04: PERMITTED WITH CONDITIONS.** On the Belgian
+  Mobility Company portal, CC BY 4.0 governs (art. 3, De Lijn the sole
+  licensor; nothing states otherwise on its card). De Lijn's own portal
+  (data.delijn.be) uses the Flemish Licentie Gratis Hergebruik (2024), and
+  transportdata.be lists ODC-BY on all eight De Lijn records: all three are
+  attribution-only, none restricts modifying, combining or displaying.
+- **Display (notice 149):** "Source: De Lijn – Open Data – [feed date]",
+  the modified-data line, the portal, the CC BY 4.0 title and link (which
+  also meets the Flemish licence's "bron: De Lijn"); no official status or
+  approval implied.
+- **delijn.be's website terms** allow private and personal use only and ask
+  for the webmaster's say before a link: no delijn.be link or content on a
+  page; its line pages may be consulted privately for gate 3.
+- **Rail from De Lijn's feed for Antwerp and Ghent stands** (the owner's
+  call 2 of the same night, subject to this read).
+
+### 2026-10-03 - Belgium's build calls, and Brussels (Regional) from C to B (owner)
+
+- **The owner: "i say yes to all"**, twelve calls as staging recommended:
+  1. **The two fetched feeds ratified**: the owner accepts the Belgian
+     Mobility Company portal's terms for De Lijn's and TEC's feeds (the
+     same CC BY 4.0 terms approved for STIB); the cached copies stand.
+  2. **Rail from De Lijn's feed** (Antwerp, Ghent) **and TEC's** (Charleroi,
+     Liège), subject to their `licence-read` passes (running); OSM if either
+     comes back restrictive.
+  3. **Modes:** Antwerp `tram` (trams in tunnels, Den Haag's precedent),
+     Ghent `tram`, Charleroi `light_rail` (Edmonton's and Pittsburgh's
+     shape), Liège `tram`.
+  4. **No stop thinning in Antwerp** (the trams-only standing call).
+  5. **Platform names merged into one station** where the feed has no
+     parent station (Antwerp, Ghent) and Liège's one stop with two parent
+     ids.
+  6. **"Complementary retail" out** (FAVV PL29 with AC95: Antwerp 238,
+     Ghent 95 placed).
+  7. **Charleroi's M2 drawn to Anderlues**, 13 of 23 stops inside, the 10
+     outside listed (Den Haag's tram 1).
+  8. **Charleroi's lines in the project's own palette** (M2-M4 share one
+     color in TEC's feed; Dijon's precedent).
+  9. **Hotels inside LoGIC's HoReCa disclosed, not split.**
+  10. **Dot names in Charleroi and Liège: the shop sign** (`ENSEIGNE`), a
+      sign read as a person's own name withheld by the privacy check.
+  11. **Antwerp's scope includes Borsbeek** (merged 2025-01-01).
+  12. **Brussels (Regional) from Band C to B**: Retail and Food service
+      full, Personal services off. KBO companies' units in the 18 communes
+      outside the City, joined to BeST-Address Brussels (96.8% placed at a
+      number, 88.5% exact), filtered by four rules (catch-all-only MAIN
+      codes; addresses holding five or more units, fewer than half in a
+      bucket; a plain-number box; ten or more MAIN codes with one outside
+      the buckets). Against hub.brussels in the City: Retail 78.2%
+      precision / 76.1% recall, Food 84.4% / 84.0%, counts 1.09 and 1.22
+      times the survey's. After the filter: Retail 9,124 (8,754 placed),
+      Food 5,209 (5,007). The page says it uses a different method from the
+      City's (registered companies' units, filtered; sole traders excluded;
+      about four in five pins confirmed by the survey). It joins the Belgium
+      kit as page 201.
+- **Coverage inside the rings (Charleroi, Liège):** LoGIC's perimeters
+  cover 11% and 16% of the ring area, and 97-100% of the survey's points in
+  the rings fall inside them.
+
+### 2026-10-03 - Probe slip in the Flemish and Walloon briefs: two feeds fetched from a portal whose terms count access as acceptance
+
+- **The briefs' agent ran `gtfs_*` checks against De Lijn's and TEC's
+  static GTFS** on the Belgian Mobility Company portal, which cached both
+  feeds (307 MB) in `data/_brief_check/raw/`. The portal's Terms of Use
+  (art. 2) make accessing the data an acceptance of those terms, and the
+  owner had approved acceptance for STIB's feed only, at the build's first
+  fetch. Nothing was registered and no consent box was ticked; the terms are
+  the same CC BY 4.0 portal terms the owner approved for STIB.
+- **Raised with the owner the same evening**, with the choice of ratifying
+  the acceptance or deleting the cached feeds. Two `licence-read` passes
+  (De Lijn, TEC) run on the operators' own terms meanwhile.
+- **The lesson:** a brief check that fetches from a click-through portal is
+  an acceptance; brief agents are told to skip fetching checks on any source
+  whose terms count access as acceptance until the owner approves it.
+
 ### 2026-10-03 - Brussels: STIB's GTFS with the owner's acceptance; the page named "Brussels" (owner)
 
 - **STIB-MIVB's static GTFS, `licence-read` 2026-10-03: PERMITTED WITH
