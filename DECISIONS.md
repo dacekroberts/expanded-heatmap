@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**29 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**30 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -53,6 +53,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [East Asia frames the anchors it labels, not only its own four cities (owner)](#2026-10-04---east-asia-frames-the-anchors-it-labels-not-only-its-own-four-cities-owner)
 - [Burnaby's optometrists and opticians stay out (owner)](#2026-10-04---burnabys-optometrists-and-opticians-stay-out-owner)
 - [The owner's calls of the evening: US dates on every caption, the site-wide notices folded, SFMTA's notice kept, Boston measured, communications filed](#2026-10-04---the-owners-calls-of-the-evening-us-dates-on-every-caption-the-site-wide-notices-folded-sfmtas-notice-kept-boston-measured-communications-filed)
+- [The efficiency review's three changes adopted, and the review itself a skill (owner)](#2026-10-04---the-efficiency-reviews-three-changes-adopted-and-the-review-itself-a-skill-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1056,4 +1057,43 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   `rome_static_gtfs.zip` (47 MB) deleted from `data/`; the CARTO-key backlog
   removed from PLAN (the key landed 2026-10-02). The tram rescope stays
   parked, to be raised when the owner asks what is next.
+
+### 2026-10-04 - The efficiency review's three changes adopted, and the review itself a skill (owner)
+
+- **The review** (`docs/efficiency_review_2026-10-04.md`, one agent): 176
+  of 337 merges since 2026-09-27 conflicted, re-merged with `git merge-tree`;
+  the generated and counted files led (master list 57, `cities.py` 33,
+  `ring_shares.json` 33, `macro_facts.json` 14); catch-up merges rose to 28 a
+  day; CLAUDE.md had regrown 66% and PLAN.md fourfold; downstream notes went
+  out on every push. **The owner: "go with all three and log the efficiency
+  review process as a skill if we can".**
+- **1. Regenerate, never merge, the generated files.** `.gitattributes` marks
+  `app/macro_facts.json`, `app/ring_shares.json`, `docs/ring_rules.md` and
+  `docs/rendered_surfaces.md` `merge=regenerate`; `python
+  scripts/regen_generated.py --install` set that driver (keep this side) in
+  the repository's config, shared by every worktree. `scripts/regen_generated.py`
+  rewrites every generated file from the merged sources (with README's city
+  list, the master list's counts and DECISIONS' index), and
+  `.githooks/post-merge` runs it after a merge that touched their sources.
+  The pre-push hook already fails any left stale. The master list's count
+  cells become generated (`check_master_list_counts.py --write`) and its
+  summary rows lose the running log of moves that conflicted on every build
+  merge; `cities.py` keeps ordinary merges (hand-written entries).
+- **2. The session count and the fan-out.** At most three build sessions at
+  once, besides Cleanup, Staging and the downstream sessions (the heavy-job
+  gate's three); a branch takes origin/master in only right before its own
+  push; Cleanup sends the downstream notes once per review time from the
+  last noted master (`docs/session_roles.md`), not after every push.
+- **3. Word budgets as a check.** `scripts/check_word_budgets.py`: CLAUDE.md
+  2,000 words, PLAN.md 5,000, `docs/session_roles.md` 3,000, in `check_all`;
+  raising one is the owner's call. CLAUDE.md went 2,808 -> 1,952: the command
+  list moved to `docs/commands.md`, and ten long rules were cut to the rule
+  and its pointer (their stories are in `docs/rule_history.md` and the
+  skills). PLAN's done items move to `docs/plan_done/<Sunday>.md` at each
+  weekly archive.
+- **The skill** `efficiency-review` records the method: one read-only agent,
+  `efficiency_metrics.py --baseline`, the new `merge_conflict_stats.py`
+  (exact conflicts by `git merge-tree`), load per session, re-renders,
+  DECISIONS volume, the gate and the hook; a ranked table with evidence,
+  saving and whose habit; the top three changes; what improved; Limits.
 

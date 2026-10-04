@@ -1,1 +1,9 @@
 * text=auto eol=lf
+
+# Generated files: keep one side at a merge, then run scripts/regen_generated.py,
+# which rewrites them from the merged sources (owner, 2026-10-04). The driver is
+# installed once per clone with: python scripts/regen_generated.py --install
+app/macro_facts.json merge=regenerate
+app/ring_shares.json merge=regenerate
+docs/ring_rules.md merge=regenerate
+docs/rendered_surfaces.md merge=regenerate

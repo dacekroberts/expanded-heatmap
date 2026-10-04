@@ -1,6 +1,12 @@
-"""Watch scripts/check_master_list_counts.py fail, twenty-six ways.
+"""Watch scripts/check_master_list_counts.py fail, twenty-six ways, and its
+--write repair every count it generates.
 
     python scripts/check_master_list_counts_selftest.py
+
+--WRITE (2026-10-04). Three more cases: a copy with every generated count
+pushed off by one must fail the plain check and come back from --write equal
+to the live file byte for byte; a second --write must rewrite nothing; and
+--write on an unmodified copy must leave it byte for byte as it was.
 
 WHY. The check reads a document that sessions rewrite every day, through
 heuristics about its shape (which tables are city tables, which headings are
@@ -37,9 +43,9 @@ sys.path.insert(0, str(CHECK.parent))
 import check_master_list_counts as M  # noqa: E402 - the check's own parsers
 
 
-def run(path):
+def run(path, *extra):
     env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
-    r = subprocess.run([sys.executable, str(CHECK), "--file", str(path)],
+    r = subprocess.run([sys.executable, str(CHECK), "--file", str(path), *extra],
                        cwd=ROOT, capture_output=True, env=env)
     out = ((r.stdout or b"") + (r.stderr or b"")).decode("utf-8", errors="replace")
     return r.returncode, out
@@ -385,6 +391,120 @@ CASES = [
 ]
 
 
+# --- --write (2026-10-04): the counts are generated ----------------------------
+# Every count --write claims to generate, each pushed off by one. A by-country
+# figure that names no cities is left out: --write cannot settle it, and the
+# column-sum case above covers it.
+
+def _b(pattern):
+    return bump(pattern, "")
+
+
+WRITE_MAIN = [
+    _b(r"^> \| \*\*Built\*\* \| \*\*(\d+)\*\*"),
+    _b(r"across (\d+) countries"),
+    _b(r"^> \| \*\*Candidates\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^> \| \*\*Candidates\*\*.*?— A (\d+)"),
+    _b(r"^> \| \*\*Candidates\*\*.*?· B (\d+)"),
+    _b(r"^> \| \*\*Candidates\*\*.*?· D (\d+)"),
+    _b(r"^> \| \*\*Restricted \(Band R\)\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^> \| \*\*Open screening gap\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^> \| \*\*Discarded\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^## Built — (\d+)"),
+    _b(r"^\| \*\*[^*|]+\*\* \((\d+)"),
+    _b(r"^## Candidates — (\d+)"),
+    _b(r"^## DISCARDED — (\d+)"),
+    _b(r"^\| 🟢 \*\*A\*\* \|.*\| \*\*(\d+)\*\*"),
+    _b(r"^\| 🟤 \*\*T\*\* \|.*\| \*\*(\d+)\*\*"),
+    _b(r"^\| ⚫ \*\*R\*\* \|.*\| \*\*(\d+)\*\*"),
+    _b(r"^\| \| \*\*Candidates\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^\| \*Open gap\* \|.*\| \*(\d+)\*"),
+    _b(r"^\| \*Discarded\* \|.*\| \*(\d+)\*"),
+    _b(r"^## 🟢 Band A —[^\n]*?\((\d+) ready"),
+    _b(r"ready \+ (\d+) ✅ BUILT"),
+    _b(r"^## 🔵 Band B —[^\n]*?\((\d+) cit"),     # "1 city" -> "2 city": the noun too
+    _b(r"^## 🟣 Band C —[^\n]*?\((\d+) cit"),
+    _b(r"^## 🔴 Band D —[^\n]*?\((\d+) cit"),
+    _b(r"^## ⚫ Band R —[^\n]*?\((\d+) cit"),
+    _b(r"^## 🟤 Band T —[^\n]*?\((\d+) cit"),
+    by_country_bump(1, ""),
+    multi_row_country_drop,
+    _b(r"^\|[^|\n]+\|[^|\n]+\| \*\*(\d+)\*\* — "),                 # a Candidates cell naming cities
+    _b(r"^\|[^|\n]+\|[^|\n]+\|[^|\n]+\| \*\*(\d+)\*\* — "),        # a Restricted cell naming cities
+    _b(r"^\| \*\*Total\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^\| \*\*Total\*\* \| \*\*\d+\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^\| \*\*Total\*\* \| \*\*\d+\*\* \| \*\*\d+\*\* \| \*\*(\d+)\*\*"),
+    _b(r"^\| \*\*Total\*\*.*?· D (\d+)"),
+    _b(r"^\| \*\*Total\*\*.*?· R (\d+)"),
+]
+WRITE_TRAM = [
+    _b(r"^# [^\n]*— (\d+) cities"),
+    _b(r"^## 🟤 T1 —[^\n]*?\((\d+) cit"),
+    _b(r"^\| 🟤 \*\*T2\*\* \|.*\| \*\*(\d+)\*\*"),
+    _b(r"^\| \*\*Total\*\* \| \| \*\*(\d+)\*\*"),
+]
+
+
+def write_cases(text, tram, tmp):
+    """--write repairs a copy with every count wrong to the live file byte for
+    byte, a second run rewrites nothing, and an already-correct copy is left
+    exactly as it was."""
+    path, tpath = Path(tmp) / "city_master_list.md", Path(tmp) / M.TRAM_NAME
+
+    def put(main, tr):
+        path.write_bytes(main.encode("utf-8"))
+        tpath.unlink(missing_ok=True)
+        if tr is not None:
+            tpath.write_bytes(tr.encode("utf-8"))
+
+    def same(main, tr):
+        return (path.read_bytes() == main.encode("utf-8")
+                and (tr is None or tpath.read_bytes() == tr.encode("utf-8")))
+
+    broken, missed = text, 0
+    for mutate in WRITE_MAIN:
+        out = mutate(broken)
+        missed += out is None
+        broken = out if out is not None else broken
+    broken_tram = tram
+    for mutate in (WRITE_TRAM if tram is not None else []):
+        out = mutate(broken_tram)
+        missed += out is None
+        broken_tram = out if out is not None else broken_tram
+    results = []
+    label = (f"--write: a copy with {len(WRITE_MAIN) + len(WRITE_TRAM) - missed} counts "
+             "wrong comes back byte for byte")
+    if missed:
+        print(f"BROKEN TEST  {label}\n      {missed} mutation(s) matched nothing in the live "
+              "file, so this case proves less than it says - re-aim them")
+        results.append(False)
+    else:
+        put(broken, broken_tram)
+        before, _ = run(path)
+        code, out = run(path, "--write")
+        ok = before == 1 and code == 0 and same(text, tram)
+        print(f"{'PASS' if ok else 'DID NOT FIX'}  {label}")
+        print(f"      plain check exit {before} (wanted 1); --write exit {code} (wanted 0); "
+              f"{'identical' if same(text, tram) else 'differs from the live file'}")
+        if not ok:
+            print("      " + " | ".join(out.strip().splitlines()[-4:]))
+        results.append(ok)
+
+        code, out = run(path, "--write")
+        ok = code == 0 and "nothing rewritten" in out and same(text, tram)
+        print(f"{'PASS' if ok else 'FAIL'}  --write is idempotent: a second run rewrites "
+              f"nothing (exit {code})")
+        results.append(ok)
+
+    put(text, tram)
+    code, out = run(path, "--write")
+    ok = code == 0 and "nothing rewritten" in out and same(text, tram)
+    print(f"{'PASS' if ok else 'FAIL'}  --write leaves an already-correct copy unchanged, "
+          f"byte for byte (exit {code})")
+    results.append(ok)
+    return results
+
+
 def case(label, mutate, expect_in, text, tram, tmp, which="main"):
     target = tram if which == "tram" else text
     if which == "tram" and tram is None:
@@ -429,6 +549,8 @@ def main():
         if tram is not None:
             (Path(tmp) / M.TRAM_NAME).write_text(tram, encoding="utf-8", newline="\n")
         code, out = run(path)
+        print()
+        results += write_cases(text, tram, tmp)
     clean = code == 0
     print(f"\n{'PASS' if clean else 'FAIL'}  an unmodified copy passes (exit {code})")
     if not clean:

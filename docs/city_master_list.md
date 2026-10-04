@@ -31,14 +31,19 @@ kept as the record of the T tiers and the light-rail test.
 >
 > | | |
 > |---|---|
-> | **Built** | **170** across 26 countries *(Belgium's six, the new-cities build's three and the Korea sweep's three (Daejeon, Gwangju and Gimhae) built 2026-10-04; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **13** — A 3 · B 1 · C 5 · D 4 *(Gaziantep from C to D 2026-10-04 (owner): its data's origin unresolved, a question to the publisher; Daejeon, Gwangju and Gimhae built 2026-10-04; Belgium's six to Built 2026-10-04; Liverpool (Regional) built 2026-10-04, from B, and Tacoma and Mendoza from A (the new-cities build); the paused wave's answers, 2026-10-04 (owner): Thessaloniki to B; Macau, Quito, Cuenca and Gaziantep to C; the probe wave, 2026-10-04 (owner): Gimpo, Siheung and Geneva to A, Yangsan and Gyeongsan to C, Timișoara, Iași and Cluj-Napoca to D; Brussels (Regional) from D to C, then B, 2026-10-03: the owner's KBO file and a measured storefront filter; the coverage sweep's first group, banded 2026-10-03 (owner): Daejeon, Gwangju and Gimhae from R, Mendoza, the City of Brussels and Tacoma to A; Liverpool (Regional), Antwerp, Ghent, Charleroi and Liège to B; Brussels (Regional) to D, then C, then B; Band R counted apart from 2026-10-02 (owner); Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded, Chiba to R (owner); Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
-> | **Restricted (Band R)** | **29** *(Jerusalem, Almaty, Astana, Ahmedabad and Lahore to R 2026-10-04; Norrköping to R 2026-10-04, request only; Daejeon, Gwangju and Gimhae to A 2026-10-03, on SEMAS's keyless file; a band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
+> | **Built** | **170** across 26 countries *(each city's build line is in the Built table below)* |
+> | **Candidates** | **13** — A 3 · B 1 · C 5 · D 4 |
+> | **Restricted (Band R)** | **29** *(A band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
-> | **Discarded** | **155**, each naming its evidence *(12 more 2026-10-04 from the paused wave; 21 added 2026-10-04 from the probe wave; Wakayama 2026-10-02, opt-in coverage; 100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
+> | **Discarded** | **155**, each naming its evidence |
 >
-> *Counts are checked by `scripts/check_master_list_counts.py`; the
-> discard rows' evidence by `scripts/check_discard_evidence.py`.*
+> *Counts are generated: `python scripts/check_master_list_counts.py --write`
+> rewrites every one from the rows it counts, so after a merge take either side
+> of a conflicted count and run it. These rows keep no log of dated moves: a
+> move goes to the session's decisions draft and `DECISIONS.md`, and the notes
+> the rows carried up to 2026-10-04 are in
+> [the evidence file](city_master_list_evidence.md#the-summary-boxs-dated-moves-to-2026-10-04). The discard
+> rows' evidence is checked by `scripts/check_discard_evidence.py`.*
 
 ## Built — 170
 
