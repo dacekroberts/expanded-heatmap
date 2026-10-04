@@ -1,0 +1,15 @@
+{
+  "bucket_food_service": 1930,
+  "bucket_personal_services": 516,
+  "bucket_retail": 2623,
+  "corridor_stations": 25,
+  "hub_rows": 6880,
+  "metro_stations_network": 60,
+  "names_withheld": 0,
+  "stations_inside": 73,
+  "stations_kept": 66,
+  "storefronts": 5069,
+  "units_multi_type": 1786,
+  "units_two_buckets": 175,
+  "vacant": 1068
+}
