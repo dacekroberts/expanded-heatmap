@@ -94,14 +94,13 @@ and archivable (the owner's call).
 
 ## Housekeeping left
 
-- `docs/handoff_japan_wave2_2026-10-02.md` and
-  `docs/handoff_extensions_2026-10-02.md` describe landed work; the
-  extensions' note asks to be deleted once all four landed. Configs'
-  comments (belo_horizonte, los_angeles, rio_de_janeiro) and
-  `docs/handoff_staging_2026-09-30.md` name them, so update those references
-  in the same commit.
-- `docs/session_roles.md`'s role rows for Japan wave 2 and the extensions
-  can be marked LANDED 2026-10-03.
+- DONE 2026-10-03 (next cleanup session): the two landed handoff notes
+  deleted with their references updated, the role rows marked LANDED, the
+  empty `japan-wave2` and `extensions` folders removed after the owner
+  archived those sessions. `origin/extensions-build` and
+  `origin/japan-wave2-build` remain on GitHub (deleting them is the owner's
+  call). The cleanup worktree is now on `worktree-cleanup`, not
+  `prose-pass` (owner, 2026-10-03).
 
 ## How this session worked (worth keeping)
 

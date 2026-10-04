@@ -12,7 +12,7 @@ SLUG = "belo_horizonte"
 
 # Belo Horizonte (Regional): Contagem added for Linha 1's western end, Eldorado
 # and Novo Eldorado (owner, 2026-09-27; released 2026-10-02,
-# docs/handoff_extensions_2026-10-02.md). False reproduces the city-alone build
+# landed 2026-10-03, DECISIONS.md). False reproduces the city-alone build
 # byte for byte, which is how the extension was proved before it was switched on.
 REGIONAL = True
 NAME = "Belo Horizonte (Regional)" if REGIONAL else "Belo Horizonte"

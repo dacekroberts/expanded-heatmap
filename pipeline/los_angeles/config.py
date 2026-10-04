@@ -14,7 +14,7 @@ ROOT = Path(__file__).parent.parent.parent
 
 # Los Angeles (Regional): Long Beach added for the A Line's eight stations
 # there (owner, 2026-09-27; released 2026-10-02,
-# docs/handoff_extensions_2026-10-02.md), on Long Beach's own licence layer
+# landed 2026-10-03, DECISIONS.md), on Long Beach's own licence layer
 # (LONG_BEACH_* below). False reproduces the city-alone build byte for byte,
 # which is how the extension was proved before it was switched on.
 REGIONAL = True
