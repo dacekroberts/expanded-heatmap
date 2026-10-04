@@ -202,6 +202,10 @@ TEXT_WIDTH = {
     # 600 loaded from Google Fonts; controls Vancouver (Regional) 144.4, Miami
     # (Regional) 112.6, Buffalo 48.8 and Boston 48.4 reproduced exactly.
     "Seattle (Regional)": 120.5,
+    # Belgium (2026-10-04, the built-in browser with Space Grotesk 600 loaded;
+    # Boston, Göteborg, Den Haag and Seattle (Regional) re-measured the same).
+    "Brussels": 57.2, "Antwerp": 57.2, "Ghent": 40.8, "Charleroi": 60.4,
+    "Liège": 36.5, "Brussels (Regional)": 130.2,
     # Tbilisi, 2026-10-02, the same method; controls Seattle (Regional),
     # Vancouver (Regional), Buffalo and Boston reproduced exactly.
     "Tbilisi": 39.1,

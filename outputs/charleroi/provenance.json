@@ -1,0 +1,41 @@
+{
+  "written_utc": "2026-10-04T07:41:27+00:00",
+  "tec_gtfs": {
+    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/tec/static",
+    "publisher": "LETEC (TEC), via the Belgian Mobility Company portal",
+    "fetched_utc": "2026-10-04T06:40:22+00:00",
+    "bytes": 84926285,
+    "sha256": "6fce0898d83a51c7e78c62ce16d76fd8130ee46190ff764450515927868e091b",
+    "feed_version": "20261002",
+    "feed_start_date": "20261002",
+    "feed_end_date": "20261225",
+    "zip_entries_dated": "2026-10-04 03:05",
+    "licence": "CC BY 4.0 (Belgian Mobility Company portal terms, art. 3)",
+    "approved": "owner, 2026-10-03 (Belgium build call 1: the cached feeds ratified)"
+  },
+  "logic": {
+    "url": "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/5f56d784-2fd7-47eb-a62a-991d4741a67d/LOGIC_2024_GEOPACKAGE_3812.zip",
+    "zip_sha256": "1b42f6ffd4607af6ba67b84968b1d3faa93251e81edb2d69fd6773f89d315ac2",
+    "zip_bytes": 3172940,
+    "gpkg_sha256": "0c5a469745f595ba33cc19cbedb8de3afe128e31ed722b8add097a06d51a1a31",
+    "files_dated": "2025-04-09",
+    "citation": "Source : Service public de Wallonie (SPW) - Offre commerciale en Wallonie (LoGIC 2024) (2025-04-09)",
+    "catalogue": "https://metawal.wallonie.be/geonetwork/srv/api/records/5f56d784-2fd7-47eb-a62a-991d4741a67d",
+    "licence": "CC BY 4.0 (Metawal record 5f56d784-2fd7-47eb-a62a-991d4741a67d)",
+    "ins": 52011,
+    "points": 2653,
+    "surveyed_from": "2024-08-08",
+    "surveyed_to": "2024-08-22"
+  },
+  "osm_communes": {
+    "host": "overpass-api.de",
+    "bbox": [
+      50.36,
+      4.22,
+      50.51,
+      4.56
+    ],
+    "nis": "52011",
+    "file_utc": "2026-10-04T07:25:15+00:00"
+  }
+}

@@ -236,6 +236,16 @@ REGISTRIES = {
     # person's name - Berlin's structural answer.
     "sydney": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Antwerp and Ghent: FAVV-AFSCA's operator list carries no name or street
+    # column, and VKBO is paged through its WFS asking for the number, unit
+    # type, NIS code, postcode and point only (the fetch refuses any other
+    # column), so `business_name` is the FAVV place type in English
+    # ("Restaurant", "Bakery") - Berlin's structural answer. Sole traders'
+    # premises are placed (owner, 2026-10-03); no address column is written.
+    "antwerp": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None),
+    "ghent": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv", address=None),
     # Melbourne: CLUE's `trading_name` is the only name column and is shown
     # as is (no owner fallback exists); its census covers non-residential
     # floor space, and the business address is never written out.
@@ -862,6 +872,18 @@ REGISTRIES.update({
                  "grenoble", "rouen", "saint_etienne", "dijon", "tours",
                  "le_havre", "mulhouse", "reims", "caen", "brest", "besancon",
                  "orleans", "le_mans", "avignon", "valenciennes", "angers")
+})
+
+# Charleroi and Liege (2026-10-04) read Wallonia's LoGIC 2024 survey through
+# pipeline/countries/belgium_logic.py: a field survey with no registrant column
+# of any kind, so no owner fallback exists. The dot shows the shop sign
+# (ENSEIGNE, owner 2026-10-03); a sign read as a person's own name, or a blank
+# one, shows the NATURE class (config.PERSON_NAMED, keys). The street and
+# number are never read, so the residence check has no address: a gap here.
+REGISTRIES.update({
+    slug: dict(raw=None, trade=None, owner=None,
+               processed="businesses_clean.csv", address=None)
+    for slug in ("charleroi", "liege")
 })
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.

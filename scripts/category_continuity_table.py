@@ -2126,6 +2126,26 @@ COLUMNS["zurich_gastwirtschaft"] = {
 }
 
 
+# Charleroi and Liege: LoGIC 2024's NATURE has four classes only (Commerce de
+# detail, HoReCa, Services, Cellule vide), so a trade is never a value of its own.
+LOGIC_LUMPED = ("a street survey with four classes only (shops, horeca, services, vacant): "
+                "the trade has no class of its own and is filed with the rest of its class")
+COLUMNS["wallonia_logic"] = {
+    **{rid: absent(LOGIC_LUMPED) for rid in (
+        "funeral", "no_counter_food", "adult_hostess", "sex_shop", "massage_commercial",
+        "massage_regulated", "car_dealer", "petrol_station", "vehicle_repair", "gambling",
+        "pawnbroker", "nightclub", "vet", "nonstore", "parking", "repair", "recreation",
+        "pharmacy", "optician", "mobile_unit")},
+    "personal_catchall": [loc("Services", "the services class: hairdressers with banks, insurers, "
+                                          "agencies and offices, no field to split it (R2)")],
+    "lodging": [exception("HoReCa", "hotels inside the horeca class", "Food service",
+                          "Belgium's build calls",
+                          "LoGIC's HoReCa does not separate lodging; hotels are kept and the page "
+                          "discloses them, not split by a keyword pass on the sign (owner, "
+                          "2026-10-03, Belgium build call 9)")],
+}
+
+
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
 # except the cells below, which still wait on the owner. A queued row turns stale
