@@ -1,94 +1,96 @@
 """Step 3 - Render Brussels's heatmap to a standalone HTML file.
 
 All rendering lives in pipeline/map_common.py; this file supplies only what is
-Brussels-specific. Scaffolded by scripts/scaffold_city.py.
+Brussels-specific.
 
 Input:  data/brussels/processed/stations.csv
         data/brussels/processed/businesses_clean.csv
-        data/brussels/raw/gtfs.zip                    (for the line overlay)
-        data/brussels/raw/city_boundary.geojson       (label anchoring)
+        data/brussels/processed/line_shapes.json   (step 1's choice of shapes)
+        data/brussels/raw/stib_gtfs.zip            (the shapes themselves)
+        data/brussels/raw/communes_region_bruxelles.geojson (label anchoring)
 Output: outputs/brussels/heatmap.html
 
 Run:  python pipeline/brussels/step3_map.py
-"""
 
+Each line is drawn from the shapes step 1 chose to cover its regular route,
+and drawn whole: most of the network lies in the other 18 communes, whose
+stations are drawn without rings and listed (the rings are what the map
+counts).
+"""
+import json
 import sys
 from pathlib import Path
 
-import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.brussels.config import (  # noqa: E402
-    STATIONS_CSV,
     BUSINESSES_CLEAN_CSV,
-    CITY_BOUNDARY_GEOJSON,
-    GTFS_ZIP,
-    HEATMAP_HTML,
+    COMMUNE_CODE,
+    COMMUNES_GEOJSON,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
+    GTFS_ZIP,
+    HEATMAP_HTML,
+    LINE_COLOURS,
+    LINE_NAMES,
+    LINE_ORDER,
+    LINE_SHAPES_JSON,
     RING_EDGES_METERS,
     RING_LABELS,
-    LINE_NAMES,
+    STATIONS_CSV,
     TAXONOMY_SYSTEM,
 )
+from pipeline.countries.belgium import brussels_region_communes  # noqa: E402
+from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 
-# TODO: route_id -> (shape_id, colour). shape_id is each line's single most-used
-# trip shape (count trips per shape for the route and take the mode; if that
-# shape lies outside the city, pick the one that reaches it and say why).
-# Colours: the agency's own where unambiguous, else your own palette, distinct
-# from the business-category colours.
-LINE_SHAPES = {}
-# Per-line label end override: "start" or "end" forces which end of a line its
-# label goes at; the default (automatic) picks the tail end farthest from the
-# other lines, on the stretch inside the city - override only if a rendered map
-# shows that landing badly.
+SYSTEM_NAME = "STIB-MIVB metro and tram"
+
+# Which end a line's label goes at, where the automatic tail choice lands
+# badly. Empty until a render shows a need.
 LINE_LABEL_ENDS = {}
-
-LINE_SPECS = {
-    key: (shape_id, color, LINE_NAMES[key], LINE_LABEL_ENDS.get(key))
-    for key, (shape_id, color) in LINE_SHAPES.items()
-}
-
-
-def city_geometry():
-    """The city's limits, so each line's label goes at the tail of the stretch
-    inside the city (lines that run on past it)."""
-    boundary = gpd.read_file(CITY_BOUNDARY_GEOJSON)
-    boundary = boundary.set_crs(CRS_GEOGRAPHIC) if boundary.crs is None else boundary.to_crs(CRS_GEOGRAPHIC)
-    # TODO: if the layer holds several cities, select this city's record first.
-    return boundary.geometry.union_all()
 
 
 def main():
-    if not LINE_SHAPES:
-        sys.exit("Fill in LINE_SHAPES (and LINE_NAMES in config.py) first: every drawn line needs a label and a legend entry.")
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV):
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, GTFS_ZIP, LINE_SHAPES_JSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first.")
+    chosen = json.loads(LINE_SHAPES_JSON.read_text(encoding="utf-8"))
+    missing = [ln for ln in LINE_ORDER if not chosen.get(ln)]
+    if missing:
+        sys.exit(f"no shape for {missing} - a line this project draws must come from "
+                 f"real geometry")
+    line_specs = {ln: (tuple(chosen[ln]), LINE_COLOURS[ln], LINE_NAMES[ln],
+                       LINE_LABEL_ENDS.get(ln))
+                  for ln in LINE_ORDER}
+    for ln in LINE_ORDER:
+        print(f"  {LINE_NAMES[ln]:<9} {LINE_COLOURS[ln]}  {len(chosen[ln])} shape(s)")
+
+    stations = pd.read_csv(STATIONS_CSV)
+    businesses = pd.read_csv(BUSINESSES_CLEAN_CSV)
+    print(f"\n  {len(stations):,} stations, {len(businesses):,} storefronts")
+    com = brussels_region_communes(COMMUNES_GEOJSON, "pipeline/brussels/fetch_sources.py")
+    city = com[com["nis"] == COMMUNE_CODE].geometry.union_all()
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Brussels STIB-MIVB Business Density Heatmap",
+        map_title="Brussels Metro and Tram Business Density Heatmap",
         city_name="Brussels",
-        system_name="STIB-MIVB",
-        stations=pd.read_csv(STATIONS_CSV),
-        businesses=pd.read_csv(BUSINESSES_CLEAN_CSV),
+        system_name=SYSTEM_NAME,
+        stations=stations,
+        businesses=businesses,
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, LINE_SPECS, "STIB-MIVB"),
+        lines=load_line_shapes(GTFS_ZIP, line_specs, SYSTEM_NAME),
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
-        label_focus=city_geometry(),
+        label_focus=city,
     )
 
 
 if __name__ == "__main__":
-    # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters. UTF-8 regardless.
-    for stream in (sys.stdout, sys.stderr):
-        if hasattr(stream, "reconfigure"):
-            stream.reconfigure(encoding="utf-8", errors="replace")
     main()

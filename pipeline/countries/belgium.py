@@ -83,6 +83,22 @@ def commune_polygons(cache_json, fetch_script, own_nis, area_km2, label, verbose
     return gdf
 
 
+def brussels_region_communes(geojson_path, fetch_script):
+    """The Brussels-Capital Region's 19 communes (PARADIGM's commune limits,
+    CC0 1.0, opendata.brussels.be): GeoDataFrame nis, name_fr, name_nl,
+    geometry in EPSG:4326. The City and Brussels (Regional) both read it."""
+    import geopandas as gpd
+
+    if not geojson_path.exists():
+        sys.exit(f"{geojson_path} missing: run python {fetch_script}")
+    gdf = gpd.read_file(geojson_path)
+    gdf = gdf.set_crs(CRS_GEOGRAPHIC) if gdf.crs is None else gdf.to_crs(CRS_GEOGRAPHIC)
+    gdf = gdf.rename(columns={"national_code": "nis"})[["nis", "name_fr", "name_nl", "geometry"]]
+    if len(gdf) != 19 or gdf["nis"].nunique() != 19:
+        sys.exit(f"{geojson_path.name}: {len(gdf)} features, expected the Region's 19 communes")
+    return gdf
+
+
 def commune_geometry(cache_json, fetch_script, own_nis, area_km2, label):
     """The city's own commune polygon (EPSG:4326): scope and label focus."""
     from shapely.ops import unary_union

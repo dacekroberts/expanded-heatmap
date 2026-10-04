@@ -75,6 +75,12 @@ REGISTRIES = {
     # remains among the placed storefronts.
     "goteborg": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv", address=("adress",)),
+    # Brussels (the City): hub.brussels's field survey names the SHOP SIGN
+    # (`name_fr`/`name_nl`/`name_en`); the inventory has no owner, registrant
+    # or contact column, so there is no fallback to a person. A sign read as a
+    # person's own name shows the unit's type (config.PERSON_NAMED, keys).
+    "brussels": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=("address",)),
     # Bucharest: DSVSA's registers name the registered UNIT, most often the
     # operating company. The owner's rule (2026-09-28): the company name
     # without its legal form, and the CATEGORY ONLY for a sole trader (II,
