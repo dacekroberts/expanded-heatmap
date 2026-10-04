@@ -21,6 +21,18 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **The Overview's region caption count disagrees with the labels it shows
+  (owner, 2026-10-03): East Asia's caption says 6, but the map labels more.**
+  Likely cause: `REGION_LABELS_ALSO` names the Seoul Capital Area's and
+  Japan's anchor cities in East Asia's view, while the caption counts only
+  the region's own members (`cities_in`, `elsewhere_counts`). Fix the caption
+  or the labels so they agree, and ADD A CHECK for every region at 375, 768
+  and 1200: the number the caption states equals the cities the view labels
+  (or the caption says which are shown from other views), in
+  `check_macro_labels.py` or its own script in `check_all.py`. The existing
+  check only asserts each region's caption accounts for all cities once
+  across the menu, not that a view's caption matches its own labels.
+
 - [ ] **Overview at phone width (found at the 2026-10-03 review landing):**
   - **Split Japan West in two (owner, 2026-10-03: approved).** Its zoom is
     pinned at 6.0 (REGION_ZOOM; fitted, Osaka's and Sakai's dots stack), so at
