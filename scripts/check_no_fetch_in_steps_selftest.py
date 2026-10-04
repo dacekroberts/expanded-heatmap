@@ -97,10 +97,12 @@ CASES = [
     # silently passed.
     ("a step importing a guarded shared module is classified, not failed",
      "pipeline/guadalajara/step1_stations.py",
+     # Anchored on the import's opening line: Guadalajara's step 1 imports
+     # several names from pipeline.stations since 2026-10-04.
      lambda t: t.replace(
-         "from pipeline.stations import verify_stations",
-         "from pipeline.stations import verify_stations\n"
-         "from pipeline.census_geocoder import geocode_addresses", 1),
+         "from pipeline.stations import (",
+         "from pipeline.census_geocoder import geocode_addresses\n"
+         "from pipeline.stations import (", 1),
      "reaches via pipeline.census_geocoder", 0),
 
     # ... and the same step fails the moment the guard goes.

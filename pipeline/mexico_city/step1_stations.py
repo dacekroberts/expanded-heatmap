@@ -12,8 +12,10 @@ true:
     is a fourth collapse mechanism after Edmonton's parent_station, Calgary's
     direction prefix and Toronto's three naming conventions.
   * NO stop_times, so pipeline/stations.py's BOARDABILITY gate cannot run. Its
-    analogue here is the railway=station whitelist below. The gate is not
-    allowed to pass silently on a source that cannot answer it.
+    analogue here is the railway=station whitelist below, plus the named stop
+    members of the drawn route relations, which carry nine stations the
+    whitelist cannot see (2026-10-04). The gate is not allowed to pass
+    silently on a source that cannot answer it.
   * The operator's published count - gate 3 - is UNAVAILABLE, because the
     operator is the unreachable host. config.STATION_COUNT_GATE_3 is None and
     says why. This is disclosed on the city page.
@@ -31,7 +33,13 @@ from shapely.ops import linemerge, polygonize, unary_union
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent.parent))
 
-from pipeline.stations import verify_stations
+from pipeline.stations import (
+    check_route_stops_covered,
+    route_stop_members,
+    station_name_key,
+    strip_line_designator,
+    verify_stations,
+)
 from pipeline.mexico_city.config import (
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
@@ -162,23 +170,73 @@ def main():
     for net, n in platforms["network"].value_counts().items():
         print(f"      network={net or '(none)':24s} {n:5d}")
 
-    # --- COLLAPSE BY NAME, the fourth mechanism this project has met -------
+    # --- ROUTE-RELATION MEMBERSHIP: the stations the whitelist cannot see ---
+    # Nine Metro stations exist only as `railway=stop` positions on their
+    # line's route relation (Talismán's station node has no mode tag), four
+    # termini among them; the whitelist alone dropped all nine until
+    # 2026-10-04 (DECISIONS.md). A named stop
+    # whose key matches no whitelisted node becomes a station here. Station
+    # nodes keep precedence wherever they exist, so no kept station moves.
+    rels = [e for e in rt_data["elements"] if e["type"] == "relation"]
+    nodes_by_id = {e["id"]: e for e in st_data["elements"] if e["type"] == "node"}
+    route_stops = route_stop_members(rels, nodes_by_id, refs=LINE_NAMES)
+    have = set(platforms["name"].map(station_name_key))
+    named = route_stops[route_stops["name"] != ""]
+    added = named[~named["name"].map(station_name_key).isin(have)]
+    print(f"\nRoute stop members: {len(route_stops):,} "
+          f"({len(named):,} named); stations only a stop member gives: "
+          f"{added['name'].nunique()}")
+    for name, g in added.groupby("name"):
+        print(f"      {name:28s} line(s) {', '.join(sorted(set(g['line'])))}")
+    platforms = pd.concat([
+        platforms,
+        added.drop_duplicates("node")
+             .assign(railway="stop")[["name", "railway", "network",
+                                      "latitude", "longitude"]],
+    ], ignore_index=True)
+
+    # --- COLLAPSE BY NAME KEY, the fourth mechanism this project has met ---
     # OSM has one node per line at an interchange. Averaging the coordinates of
     # same-named nodes is right here and would be wrong in a feed with
     # platform-level nodes spread down a street; these are the same station box
-    # entered from different lines, tens of metres apart at most.
-    grouped = (platforms.groupby("name", as_index=False)
-               .agg(latitude=("latitude", "mean"),
+    # entered from different lines. The key, not the raw name, because OSM
+    # also names an interchange per line: "Consulado" / "Consulado L4" (330 m)
+    # and "Candelaria L1" / "Candelaria L4" (180 m) were each kept twice
+    # until 2026-10-04. The shown name drops the line designator.
+    platforms["key"] = platforms["name"].map(station_name_key)
+
+    def shown_name(names):
+        counts = names.map(strip_line_designator).value_counts()
+        return sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+
+    grouped = (platforms.groupby("key", as_index=False)
+               .agg(name=("name", shown_name),
+                    latitude=("latitude", "mean"),
                     longitude=("longitude", "mean"),
                     nodes=("name", "size"),
                     networks=("network", lambda s: "; ".join(sorted(
-                        {x for x in s if x})))))
+                        {x for x in s if x}))))
+               .drop(columns="key"))
     print(f"\nCollapsed {len(platforms):,} nodes -> {len(grouped):,} stations "
-          f"by name")
+          f"by name key")
+    spelled = platforms.groupby("key")["name"].nunique()
+    for key in spelled[spelled > 1].index:
+        print(f"      one station, several names: "
+              f"{sorted(set(platforms.loc[platforms['key'] == key, 'name']))}")
     multi = grouped[grouped["nodes"] > 1]
     print(f"  names with more than one node (interchanges): {len(multi)}")
     for _, r in multi.sort_values("nodes", ascending=False).head(6).iterrows():
         print(f"      {r['name']:28s} {r['nodes']} nodes   {r['networks']}")
+
+    # Every stop of every drawn line has a station, in scope or not. Raises.
+    station_of = check_route_stops_covered(
+        city="Mexico City", route_stops=route_stops, stations=grouped,
+        crs_projected=CRS_PROJECTED, name_col="name")
+    per_line = {LINE_NAMES[ref]: n for ref, n in
+                station_of.groupby(route_stops["line"]).nunique().items()}
+    print("  stations per line, from route membership (not gate 3):")
+    for ref in LINE_NAMES:
+        print(f"      {LINE_NAMES[ref]:12s} {per_line.get(LINE_NAMES[ref], 0):4d}")
 
     # --- boundary filter --------------------------------------------------
     gdf = gpd.GeoDataFrame(
@@ -190,7 +248,7 @@ def main():
     kept = gdf[inside].drop(columns="geometry").copy()
     outside = gdf[~inside].copy()
     print(f"\nInside Ciudad de México: {len(kept):,}")
-    print(f"Outside (Estado de México - Lines A and B): {len(outside):,}")
+    print(f"Outside (Estado de México - Lines 2, A and B): {len(outside):,}")
 
     if len(outside):
         b_proj = gpd.GeoSeries([boundary], crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED).iloc[0]
@@ -211,8 +269,7 @@ def main():
 
     # --- the gates --------------------------------------------------------
     print("\n--- station verification ---")
-    rels = [e for e in rt_data["elements"] if e["type"] == "relation"]
-    refs = sorted({r["tags"].get("ref") for r in rels if r["tags"].get("ref")})
+    refs =sorted({r["tags"].get("ref") for r in rels if r["tags"].get("ref")})
     print(f"Route relations: {len(rels)} over {len(refs)} refs: {', '.join(refs)}")
     # EVERY CHECK BELOW IS VACUOUS ON AN EMPTY SET, so assert non-empty first.
     # An empty Overpass result once made this function print "every ref has
