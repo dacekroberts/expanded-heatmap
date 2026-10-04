@@ -4,6 +4,34 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Geneva (Regional)'s three build calls, and Thessaloniki's licence reading (owner)
+
+- **Geneva (Regional), "yes to geneva three"**, each on its precedent, for
+  the build of `docs/build_briefs/geneva.md` (12 tram communes, 5,885
+  establishments after the home-based and itinerant rows are dropped):
+  1. **The 1,848 company rows in scope with no establishment row are left
+     out, disclosed.** A company row has no premises type, so a home-based
+     seat cannot be told from a shop. Tradeoff accepted: a gap about a third
+     the size of what is kept, stated on the page.
+  2. **Sole traders' names withheld where they read as the registrant's
+     own** (1,498 kept rows belong to an "Entreprise individuelle"), as
+     Tucson and Kansas City.
+  3. **The taxonomy:** Stand ambulant (22) out on R1 and the mobile-units
+     row; traiteurs (562100) out on R1 and Georgia's precedent, not France's;
+     the 326 storefront-coded rows typed Bureau/étude/cabinet split by code
+     at build and brought to the owner as a count.
+- **Thessaloniki, "recommended reading sounds good":** the licence read found
+  CC BY 4.0 on the layer's own data.gov.gr record (a harvester default
+  applied under the City's organization, matching the City portal's default
+  and Decision 11654/2026, Art. 8(3)). The map portal's splash ("in no case
+  are modification and/or redistribution permitted") is read as the web
+  app's terms only, so **the build reads `sdi.thessaloniki.gr/geoserver/wfs`
+  only, never the MapServer copy.** Tradeoff accepted: if the City meant the
+  splash for all its GIS data, the page comes down on request (the removal
+  rule). The layer carries no date, so the page gives the retrieval date and
+  never calls the data current or complete. Thessaloniki stays B (food shops
+  a partial Retail layer); a brief is next.
+
 ### 2026-10-04 - Gaziantep's licence read: catalogued sets only, and one desk check of the data's origin (owner)
 
 - **The licence read** (the Gaziantep Açık Veri Lisansı, Turkish only, no
