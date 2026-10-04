@@ -21,11 +21,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **Audit the new version of the site (owner, 2026-10-03).** Running
-  after the review-time landings (master 37d9a374, rebooted): five live
-  lanes, the 158 city pages in four and the site pages in one, brief in
-  the cleanup session's scratchpad. Findings go here when they report.
-
 - [ ] **Desktop leftovers from the touch fix (for the owner, 2026-10-03):**
   on desktop, stations sit under lines, so hovering a station's centre
   shows the line (Paris and Tokyo 0 of 6); and a click on a spiderfied dot
