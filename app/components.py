@@ -2955,6 +2955,22 @@ _NOTICES = [
      "(https://creativecommons.org/licenses/by/4.0/). STIB-MIVB does not endorse "
      "this project.",
      False, ("Brussels", "Brussels (Regional)")),
+    Notice(151, "KBO/BCE Open Data, FPS Economy (Brussels (Regional))",
+     "Source: Crossroads Bank for Enterprises (KBO/BCE) Open Data, FPS Economy, "
+     "S.M.E.s, Self-employed and Energy, updated October 2, 2026 (extract 501). "
+     "Modified by this project: companies' establishment units only, filtered to "
+     "shops, restaurants and cafés, their addresses matched to BeST-Address "
+     "points, and grouped into categories. The map shows what the register "
+     "records, not a guarantee of any business's status. FPS Economy does not "
+     "endorse this project.",
+     False, ("Brussels (Regional)",)),
+    Notice(152, "FPS BOSA, BeST-Address Brussels (Brussels (Regional))",
+     "Addresses: BeST-Address Brussels, FPS BOSA, from the Brussels-Capital "
+     "Region's address register, under the [Creative Commons Attribution 4.0 "
+     "International license](https://creativecommons.org/licenses/by/4.0/). "
+     "Modified by this project: business addresses were matched to its address "
+     "points. FPS BOSA does not endorse this project.",
+     False, ("Brussels (Regional)",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

@@ -2208,6 +2208,41 @@ the other 18 communes and beyond the Region get no ring; 7 tram stops on trams
 which never enter the City, buses and SNCB trains are not drawn. The other 18
 communes are on the Brussels (Regional) page.
 
+### Brussels (Regional) - the business register, companies only, two categories
+
+**One register, two categories.** The map is KBO/BCE Open Data, the federal
+register of enterprises, snapshot of October 2, 2026: companies'
+establishment units with a shop or restaurant activity, placed by matching
+their address to BeST-Address Brussels. It is a different method from the City
+of Brussels page's street survey, and the page says so.
+
+**Excluded from the register** - across the Region, of 32,733 establishments
+with a Food service, Retail or Personal services activity (an establishment
+can fall under more than one rule): those filed only under catch-all
+activities (2,540); those at an address shared by five or more companies,
+fewer than half of them in these trades (4,160, at 2,702 addresses); those in
+a numbered box, a flat or an upper-floor office (3,336); and those listing ten
+or more activities (6,853), as likely offices rather than storefronts.
+Industrial laundries and heating-fuel dealers are not counted.
+
+**Off on this page** - Personal services (973 establishments in the 18
+communes): most salons are run by sole traders, so the companies in the
+register find about half of the personal services the City's street survey
+counts, too few to map them.
+
+**Counted once** - an establishment registered under several activities is
+shown as Food service if any of them is, else as Retail.
+
+**Missing rather than excluded** - every business run by a sole trader (the
+register's open data covers companies only), and the 3.2% of establishments
+whose address could not be matched to a house number.
+
+**Stations.** STIB's metro lines 1, 2, 5 and 6 and all eighteen tram lines are
+drawn. The map covers the Region's 18 communes outside the City of Brussels:
+73 stations in the City get no ring here (they are on the Brussels page) and
+13 beyond the Region get none; 72 tram stops are thinned to about one per half
+mile. Buses and SNCB trains are not drawn.
+
 ### Antwerp - FAVV-AFSCA's food list, food only, placed on the business register's points
 
 **One category, food.** The map is FAVV-AFSCA's list of registered food

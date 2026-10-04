@@ -3638,6 +3638,38 @@ of 2026-10-04.)
   name the portal and the feed use) and its lines by their public names M2,
   M3, M4 and T1 (owner, 2026-10-04). Nothing is taken from its website.
 
+**151. KBO/BCE Open Data, FPS Economy (Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: KBO Open Data's terms of reuse. Companies'
+  establishments only (natural persons are dropped as the file is read);
+  reuse within the purpose the owner declared at registration (2.3); no
+  direct marketing (2.2); the project is the GDPR controller (2.1); a
+  download at least yearly or the contract lapses (10.5; next by
+  2027-10-02, the owner's act). Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the source and the update date (2.8), re-dated at every
+  refresh; a statement of the modifications (filtered, joined, grouped); the
+  data presented as the register's, not as a guarantee of any business's
+  status.
+- **MUST NOT**: alter or distort the data (2.7); use it for direct marketing.
+
+**152. FPS BOSA, BeST-Address Brussels (Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: BOSA's catalogue, landing pages
+  and license PDF; BeST-in-a-Box defers to the region's license, CC0 for
+  Brussels, so CC BY 4.0 is the stricter and is met. data.gov.be's
+  request for research results read as not applying (owner). Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: FPS BOSA and the Brussels address register as the source,
+  the license title and link, and a statement that business addresses were
+  matched to its points.
+- **MUST NOT**: imply endorsement or accuracy; show Paradigm or
+  datastore.brussels marks.
+
 
 ## Gaps
 

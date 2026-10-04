@@ -4,6 +4,36 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then empties this file (owner, 2026-09-30).
 
+### 2026-10-04 - Brussels (Regional) built: KBO on BeST-Address, companies only, two categories; STIB's whole network
+
+- **Built Brussels (Regional) (page 201)**: the Brussels-Capital Region's 18
+  communes outside the City of Brussels. Step 1 on STIB's feed (the City
+  page's copy): metro 1, 2, 5, 6 and all 18 trams; 145 stations kept in the
+  18 communes, 73 in the City (on the Brussels page) and 13 beyond the
+  Region listed without rings, 72 tram stops thinned; the corridor is STIB's
+  parent stations, 45 of the network's 70 (the City's 25 are its page's);
+  median nearest-neighbour gap 437 m, so halved rings. Colors STIB's, with
+  18, 39 and 44 shifted as the City's five were. Step 2 as recorded above;
+  step 3: 10,006 of 13,680 storefronts in a ring (73%).
+- **The near-City-station count**: 995 storefronts sit within 0.3 mi of a
+  City station and of no station on this page, so neither page's rings count
+  them; the page says so.
+- **Sources**: KBO is never fetched by a script (the owner's login);
+  `pipeline/brussels_regional/fetch_sources.py` checks the owner-placed zip
+  against its sha256 and refuses otherwise, and re-fetches BeST only on
+  `--refetch-best`. KBO's yearly download is due by **2027-10-02** (the
+  license's 10.5, the owner's act). Notices 151 (KBO) and 152 (BeST) written.
+- **Proposals (sentences outside the page template, for review time)**: the
+  different-method bullet (after the brief's drafted paragraph), the
+  companies-only bullet, the near-City-station sentence, the several-
+  activities sentence, and the caption naming both dates.
+- **Downstream, card face or caption**: KBO (151) caption (2.8 asks for the
+  source and the update date, nothing on placement); BeST (152) caption (CC
+  BY 4.0, any reasonable manner); STIB (148) caption, as Brussels. **Open
+  terms question**: KBO's declared purpose (2.3) is the owner's
+  registration; if it names a narrower purpose than a public map and its
+  derived visuals, that becomes one.
+
 ### 2026-10-04 - Brussels (Regional): the privacy verdict, a call for the owner
 
 - **Recommended: publish, with one pin's name withheld by key.**
