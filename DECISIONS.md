@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**26 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**27 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -50,6 +50,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Daejeon built: Daejeon Metro Line 1 on SEMAS's register](#2026-10-04---daejeon-built-daejeon-metro-line-1-on-semass-register)
 - [korea_sbiz: a 시군구코드 filter beside the 시군구명 prefix, zero drift on the ten built SEMAS cities](#2026-10-04---korea_sbiz-a-시군구코드-filter-beside-the-시군구명-prefix-zero-drift-on-the-ten-built-semas-cities)
 - [Tacoma on the Visuals cards with its disclaimer in full; Liverpool (Regional) stays minor (owner)](#2026-10-04---tacoma-on-the-visuals-cards-with-its-disclaimer-in-full-liverpool-regional-stays-minor-owner)
+- [East Asia frames the anchors it labels, not only its own four cities (owner)](#2026-10-04---east-asia-frames-the-anchors-it-labels-not-only-its-own-four-cities-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -974,4 +975,31 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
 - The three build worktrees (belgium, korea-sweep, new-cities) retired on
   the owner's word after `check_worktree_data.py` passed each; their
   branches deleted locally and on origin. The owner archived the sessions.
+
+### 2026-10-04 - East Asia frames the anchors it labels, not only its own four cities (owner)
+
+- **Found by the live check after the review-time landing** (lane 3,
+  9f2c98d7): once Daegu and Busan moved to the South Korea view, East Asia
+  fitted Hong Kong and the three Taiwan cities alone and opened on southern
+  China and Taiwan. Its caption names the main cities of Japan West, Japan
+  East, the Seoul Capital Area and South Korea as labeled, and every one of
+  them was off the canvas. `check_macro_labels.py` reports an off-canvas
+  label rather than failing it, so it scored PROBLEMS 0.
+- **Two ways out were put to the owner**: frame the anchors too (a
+  whole-region view again, at a wider zoom), or keep the tight frame and
+  drop the anchors and the caption's clause. **The owner chose the first.**
+- `app/Overview.py` now fits and centres a region on its own cities plus
+  its `REGION_LABELS_ALSO` anchors (not minor ones), and
+  `check_macro_labels.py`'s `region_view` does the same. Only East Asia
+  changes: Europe's United Kingdom anchors already sat inside its frame
+  (Europe's lines unchanged).
+- At the wider zoom three East Asia pills met: Daegu's covered Gwangju's
+  marker, Kobe's covered Daegu's, and Osaka's and Fukuoka's overlapped
+  31.3 x 8.2 px (9 problems over three widths). A search with the
+  checker's own scorer set East Asia-only offsets (`label_offset_by_region`):
+  Daegu ("end", -20, 0), the one placement it clears, grazing the Seoul
+  Capital Area's dots; Kobe ("end", -8, -22); Fukuoka ("start", 8, 22).
+  PROBLEMS 0 at 375, 768 and 1200, 21 regions, 170 cities; one clip,
+  Yokohama 1.7 px at 375. A local render at 1200 showed all twelve labels
+  readable from Hong Kong to Sapporo.
 

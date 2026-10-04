@@ -486,6 +486,13 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
 # See DEFAULT_REGION in cities.py.
 _frame_region = DEFAULT_FRAME if region == DEFAULT_REGION else region
 _here = _region_cities[_frame_region]
+# THE FRAME TAKES EVERY CITY THE VIEW LABELS, another region's REGION_LABELS_ALSO
+# anchors included (owner, 2026-10-04). Once Daegu and Busan left for South
+# Korea, East Asia fitted Hong Kong and Taiwan alone and opened with every
+# anchor its caption names off the canvas.
+_frame_also = getattr(sys.modules.get("cities"), "REGION_LABELS_ALSO", {}).get(_frame_region, ())
+_here = _here + [c for c in CITIES if c.get("region") in _frame_also
+                 and c.get("label_tier") != "minor"]
 # The ZOOM may leave out a region's outlier (cities.REGION_ZOOM_WITHOUT); the
 # centre below still takes every city in the region.
 _skip = REGION_ZOOM_WITHOUT.get(_frame_region, ())
