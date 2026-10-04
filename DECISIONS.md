@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**491 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**499 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -65,6 +65,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Los Angeles (Regional): Long Beach added on its own licence layer, its holder names never loaded](#2026-10-03---los-angeles-regional-long-beach-added-on-its-own-licence-layer-its-holder-names-never-loaded)
 - [Vancouver (Regional) extended: Burnaby, New Westminster and Coquitlam on their own registers](#2026-10-03---vancouver-regional-extended-burnaby-new-westminster-and-coquitlam-on-their-own-registers)
 - [Burnaby, New Westminster and Coquitlam: the OGL personal-information exemption read cautiously (owner)](#2026-10-03---burnaby-new-westminster-and-coquitlam-the-ogl-personal-information-exemption-read-cautiously-owner)
+- [Overview: a region view's caption names the regions whose anchors it labels (owner)](#2026-10-03---overview-a-region-views-caption-names-the-regions-whose-anchors-it-labels-owner)
+- [The country selector folds Japan into East Asia; Why the Maps Differ's key moves above its table (owner)](#2026-10-03---the-country-selector-folds-japan-into-east-asia-why-the-maps-differs-key-moves-above-its-table-owner)
+- [A tap on a phone selects the nearest dot, station, cluster or line within 22 px; a dot's details go in a fixed panel (owner)](#2026-10-03---a-tap-on-a-phone-selects-the-nearest-dot-station-cluster-or-line-within-22-px-a-dots-details-go-in-a-fixed-panel-owner)
+- [Every map re-rendered for the touch tap fix; two Japanese maps first lost their lang attribute](#2026-10-03---every-map-re-rendered-for-the-touch-tap-fix-two-japanese-maps-first-lost-their-lang-attribute)
+- [São Paulo and Osaka cards refreshed from master 94eebc26 (owner)](#2026-10-03---são-paulo-and-osaka-cards-refreshed-from-master-94eebc26-owner)
+- [Visuals rebuilt for 158 cities at master 37eec480: 143 cards, every count updated](#2026-10-03---visuals-rebuilt-for-158-cities-at-master-37eec480-143-cards-every-count-updated)
+- [Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun](#2026-10-03---vancouvers-130-132-on-the-card-face-private-pages-moved-to-analytics-37eec480-rerun)
+- [Region captions read "in the United States" (owner)](#2026-10-03---region-captions-read-in-the-united-states-owner)
 
 **2026-10-02**
 
@@ -19992,3 +20000,289 @@ until the owner rules):**
   is no key list to add.
 - **Consequence:** the open terms question below is closed; the three
   cities are no longer held off the Visuals cards.
+
+### 2026-10-03 - Overview: a region view's caption names the regions whose anchors it labels (owner)
+
+- **The finding (owner, 2026-10-03):** East Asia's caption said "Showing 6
+  cities in East Asia." while the view labelled 15. Measured: East Asia
+  labels 9 anchors from Japan West, Japan East and the Seoul Capital Area,
+  Europe 3 from the United Kingdom (REGION_LABELS_ALSO, the owner's calls
+  of 2026-09-30 and 2026-10-02). Every other region labels only its own.
+- **Options put to the owner:** name the other regions in the caption
+  (recommended), drop the anchors, or count them (which would contradict
+  the menu's "(6)" and the list below). **The owner chose naming them**,
+  with the wording: "Showing 6 cities in East Asia, with the main cities of
+  Japan West, Japan East and the Seoul Capital Area labeled too." Europe:
+  "Showing 23 cities in Europe, with the main cities of the United Kingdom
+  labeled too."
+- **Built:** the sentence is `cities.region_caption()`, generated from
+  REGION_LABELS_ALSO (its tuple order is the order named), and Overview.py
+  renders it. `check_macro_labels.py` now reads that sentence at 375, 768
+  and 1200 and fails a view that labels a city its caption neither counts
+  nor names, or states a number other than the region's own. It failed
+  East Asia and Europe at all three widths before the change and passes
+  after.
+
+### 2026-10-03 - The country selector folds Japan into East Asia; Why the Maps Differ's key moves above its table (owner)
+
+- **Asked by the owner:** are all regions represented on the other
+  macro-info pages? All 158 cities and every country were. But the region
+  step on About the Data and What Is Excluded read "Japan West (34)": a
+  country's group was its first city's region, and REGION_GROUP in
+  `app/country_sections.py` had no rows for Japan's two halves.
+- **Options put to the owner:** fold Japan into East Asia (recommended, the
+  same fold as the Seoul Capital Area) or a group of its own. **The owner
+  chose East Asia**: East Asia (51) holds Hong Kong, South Korea, Taiwan
+  and Japan.
+- **Guard:** `_groups()` now raises when a country's cities fall in two
+  groups, which the old mapping would have done; a new split region needs
+  its REGION_GROUP rows before the app imports.
+- **Why the Maps Differ (owner):** the table's key ("Trams" includes light
+  rail; "... thin"; "Storefronts near a station") moves from under the
+  158-row table to between its heading and the table, for the table's
+  length. Wording unchanged.
+
+### 2026-10-03 - A tap on a phone selects the nearest dot, station, cluster or line within 22 px; a dot's details go in a fixed panel (owner)
+
+- **Approved by the owner, touch screens only (2026-10-03).** The owner
+  approved the change below as proposed, kept the panel and ring to touch
+  screens (desktop keeps its tooltips), and approved the close button's "×"
+  with the accessible name "Close". Every map was then re-rendered
+  (`drift_check.py --render-only --jobs 2`); the run is recorded in the next
+  entry.
+
+- **Measured why tapping dots and lines on a phone was hard, before changing
+  anything (owner's report, 2026-10-03).** Headless Edge over CDP at 375 x 812
+  with touch emulation (`pointer: coarse`, so `TOUCH_GESTURE_SCRIPT` had
+  dragging off, as on a phone), each map embedded in a 343 x 650 frame as the
+  app embeds it, on Edmonton, Paris, Tokyo and Odense. Targets were chosen
+  with at least 20 px of clear map around the tap point, and tapped at 0, 8,
+  15 and 22 px off centre. Two kinds of tap: Chromium's own touch events,
+  which go through its touch adjustment (it snaps a tap to a nearby
+  `cursor: pointer` element, as Android Chrome does), and a press and release
+  at the exact point, which models a browser that does no such snapping
+  (WebKit on the owner's iPhone). Rendered sizes: every dot an SVG circle of
+  radius 5 with a 1 px stroke (hit radius 5.5 px, an 11 px target), stations
+  radius 5 with a 3 px stroke (6.5 px), lines 4 px strokes, SVG renderer
+  throughout (no canvas, so no renderer tolerance applies).
+  Exact-point taps: a dot opened on 43 of 43 taps on its centre and 0 of 43
+  at 8, 15 or 22 px. A station opened on 2 of 22 taps on its centre: stations
+  are drawn before the lines, so a line covers every station's centre and the
+  tap picked the line instead (Tokyo 0 of 6, Edmonton 0 of 6, Odense 0 of 6).
+  A line was picked on 10 of 10 taps up to 15 px (`LINE_HIGHLIGHT_SCRIPT`
+  already matched lines by distance, 16 px on a touch screen) and 0 of 10 at
+  22 px (no Tokyo line point had 20 px of clear map around it). With Chromium's touch adjustment the dot figures were 38 of 43 at
+  8 px, 39 of 43 at 15 px and 0 of 43 at 22 px, so an Android phone fared
+  better than an iPhone but not at a 44 px target. The one-finger handling
+  swallowed nothing: centre taps succeeded on every dot with or without a
+  6 px finger slide, the hint overlay has `pointer-events: none`, and its
+  listeners are passive.
+
+- **Found why a spiderfied group closed under the second tap (owner's
+  addition, 2026-10-03).** Businesses that share one point spiderfy at any
+  zoom. In the same emulation, on 14 such groups of 3 to 12 (dense hubs in
+  all four cities), the second tap selected the dot on 0 of the 46 tries
+  where the first tap had opened the group, at every offset from 0 to 22 px,
+  with and without touch adjustment; the group collapsed every time. Cause,
+  traced on Paris: a Leaflet path's `bubblingMouseEvents` defaults to true, so
+  a click on a dot also fires the map's `click`, and Leaflet.markercluster
+  unspiderfies on any map click. A tap that missed the 11 px dot collapsed it
+  for the plainer reason that it was an empty-map click.
+
+- **Measured the tooltip clipping in the owner's Odense screenshot.** Of the
+  dots whose tooltip opened, 20 of 43 ran past the 343 px map's edges (Odense
+  10 of 12), although the test dots were all at least 30 px inside the frame.
+
+- **Proposed: `TAP_SELECT_SCRIPT` in `pipeline/map_common.py`, active only
+  when the primary pointer is coarse.** A capture listener on the map
+  container sees each tap's click before Leaflet and finds the nearest target
+  by geometry from where the finger lifted (the `touchend` point, since
+  Chromium's adjustment reports a moved click point): a dot or station within
+  22 px of its centre, a cluster within 22 px of its centre or anywhere on its
+  badge, a line within 22 px of its centreline. Nearest edge wins; within 2 px
+  a dot or station beats a cluster, which beats a line, so a station's centre
+  opens the station and the track beside it picks the line. A dot or station
+  is selected and the click stops there, so Leaflet sees no map click and a
+  spiderfied group stays open. A cluster gets the click re-sent to its own
+  badge, so it zooms or spiderfies as before. A line, or nothing in reach,
+  closes the panel and passes the click on unchanged; `LINE_HIGHLIGHT_SCRIPT`
+  now uses the same point and the same 22 px on a touch screen (was 16).
+  22 px from a centre is a 44 px target (WCAG 2.5.5, Apple's HIG).
+  Rejected: `L.canvas({tolerance})` (the dark theme recolours lines and
+  stations by matching SVG path attributes, and line picking reorders SVG
+  paths, so a canvas renderer would break both); invisible wider hit circles
+  under every dot (doubles the markers, on maps of up to 133,362 pins in
+  Mexico City).
+
+- **Proposed: the selected dot's details in a fixed panel, and a ring on the
+  dot (owner's addition, 2026-10-03).** On a touch screen the tooltip pane is
+  hidden (`@media (pointer: coarse)`) and the tooltip's own text goes into a
+  panel fixed bottom-left, 10 px from each side, 24 px above the map's bottom
+  edge (clear of the OSM credit, the legend's own clamp) and 8 px above the
+  legend; beside the legend when an open legend leaves under 200 px above it;
+  and at the top, under the zoom and layer controls and the button row, when
+  it would cover the dot it describes. It closes on its button, Escape, a tap
+  on empty map or a line, and moves on a new selection. The ring is a 26 px
+  white ring with a near-black outer ring and shadow, not interactive, so it
+  reads on light and dark tiles alike; it follows its dot when a spiderfied
+  group closes. Mouse and trackpad readers are unchanged: no panel, no ring,
+  the same tooltips. New visible text: the close button's accessible name
+  "Close" and its "×" glyph, flagged here as a proposal.
+
+- **Two refinements found by the after-measurement.** While a group is
+  spiderfied, its own dots within reach win outright: in Tokyo and Odense a
+  group sat beside a line, and taps 8 to 22 px out from its dots were nearer
+  the line, picked it and closed the group (8 of 42 taps at 8 to 22 px on
+  open groups, before the rule).
+  And at equal distance the later layer wins, because it is the one drawn on
+  top: each business category clusters separately, and in Tokyo three
+  categories' badges sat on one point, where the first-found (bottom) badge
+  had been opening instead of the one the reader sees.
+
+- **After, same emulation, same targets (prototype injected into copies of
+  the committed maps; nothing re-rendered).** Exact-point taps (the iPhone
+  case): a dot opened on 43 of 43 taps at 0, 8, 15 and 20 px (was 43, 0, 0,
+  and untested) and 29 of 43 at 22 px, the boundary (was 0); a station
+  centre on 22 of 22 (was 2); a line on 10 of 10 up to 20 px and 7 of 10 at
+  22 px (was 0 at 22 px). Off a station's centre, Edmonton and Odense
+  stations opened on 6 of 6 taps up to 15 px; in Paris and Tokyo a tap 8 px
+  or more off a station usually landed nearer the line through it and picked
+  the line, as the rule intends. With Chromium's touch adjustment (the
+  Android case): dots 43 of 43 up to 20 px and 39 of 43 at 22 px.
+  Spiderfied groups, exact-point taps: the second tap selected the dot on
+  60 of 60 tries where the first had opened the group, at every offset from
+  0 to 22 px, and no group closed (was 0 of 46, every one closed). The two
+  Edmonton groups the run counted as not opening each sat under another
+  category's badge at the same point: the tap opens the badge on top, and a
+  further tap on the same spot opens the one beneath. A details
+  panel ran past the map's edge on 0 of every selection (tooltips had on 20
+  of 43). Dark theme (Paris, Odense): the same figures as light. Desktop,
+  mouse at 1200 px on Edmonton, Paris and Tokyo, hover and click at 0, 4, 8
+  and 15 px off dots, stations and lines: identical before and after, row
+  for row.
+
+- **Checks on the prototypes.** `scripts/check_map_view.js` on Edmonton,
+  Paris and Tokyo, light and dark, embedded at 375 and standalone at 1200,
+  two fresh loads each: 24 of 24 at the expected zoom (11.75/11.5, 11/12.5,
+  10/11), 0 guard corrections. `scripts/check_map_attribution.js` at 375 x
+  650, 375 x 812, 1200 x 650 and 1200 x 900, light and dark: 0 points covered
+  in 24 runs; with a dot's panel open (Paris, 375 x 812) the panel sat at
+  y 491-581 above the collapsed legend and at x 10-144, y 426-626 beside the
+  open legend, and the credit (y 636-650) hit-tested 5 of 5 both times.
+  `check_map_markup.py` (pointed at the four prototypes): 0 problems.
+  `check_inline_arrays.py`: 0 arrays over the cap. No page exceptions.
+
+- **Not changed, for the owner.** On desktop a mouse over a station's centre
+  shows the line, not the station (Paris and Tokyo 0 of 6 before and after),
+  because lines are drawn over stations; and a click on a spiderfied dot
+  still closes the group there, though its tooltip opens on hover first.
+  Raising stations above lines, or the panel on desktop, would change the
+  desktop map, so both wait for the owner.
+
+### 2026-10-03 - Every map re-rendered for the touch tap fix; two Japanese maps first lost their lang attribute
+
+- **Re-rendered all 158 maps with `drift_check.py --render-only --jobs 2`
+  through `heavy_job.py` (declared 2.5 GB as an estimate scaled from the
+  2026-10-02 sweep's 1.94 GB; measured 1.50 GB).** 156 maps drifted as
+  intended and every other output file came back identical (445). Kawasaki
+  and Kyoto failed: `m.save()` wrote the map, then the second write that
+  adds `<html lang="ja">` (`render_heatmap`, after saving) raised
+  `OSError: [Errno 22] Invalid argument` on the same file, a transient
+  Windows refusal, so both were left complete but with a bare `<html>`.
+  Each was re-rendered alone (measured 0.15 and 0.19 GB) and now carries
+  `lang="ja"`. `check_render_current.py` passed the two broken files: it
+  checks the shared blocks, not the lang attribute, so a lost `lang` on a CJK
+  map is invisible to it. The `lang` rewrite also leaves CRLF in the working
+  copy (51 CJK maps); converted to LF at byte level before staging.
+
+- **Verified on the real renders.** `check_render_current.py` (158 current),
+  `check_map_markup.py` (158 maps, 930 labels, 0 problems),
+  `check_inline_arrays.py` (0 over the cap), `check_no_em_dashes.py`,
+  `check_provenance.py` and `check_all.py` (46 of 46) all passed; every map
+  carries the panel and the 22 px touch tolerance. The tap harness on the
+  rendered Edmonton, Paris, Tokyo and Odense maps (exact-point taps)
+  reproduced the prototype: dots 43 of 43 at 0 to 20 px, station centres 22
+  of 22, every opened spiderfied group kept its dot (0 collapsed), no panel
+  clipped. `check_map_view.js` and `check_map_attribution.js` on Edmonton,
+  Paris and Tokyo, light and dark, 375 and 1200: every view at its expected
+  zoom with 0 corrections, the credit covered 0 times. The credit with a
+  panel open was hit-tested on the prototype (identical script), not
+  re-run on the renders.
+
+### 2026-10-03 - São Paulo and Osaka cards refreshed from master 94eebc26 (owner)
+
+- **The owner asked for São Paulo and Osaka to be refreshed now** rather
+  than held for the single rebuild after the city batch and regional
+  extensions. Changes since `f25850f1`:
+  - São Paulo now draws Linha 17-Ouro: 49,663 -> 50,436 storefronts near a
+    station, of 219,667 mapped.
+  - Osaka moved to MLIT N02-25, which adds Yumeshima: 71,672 -> 71,679 near
+    a station, of 72,999.
+  - Both re-counts reconcile with `app/ring_shares.json`.
+- No notice changed, so the two card faces changed in their figures only;
+  every other caption changed only in its commit stamp. The cards, the
+  sampler and the multi-city views were republished. The boards, print and
+  deck changed only in their stamps and were not republished.
+
+### 2026-10-03 - Visuals rebuilt for 158 cities at master 37eec480: 143 cards, every count updated
+
+- **The single rebuild the owner chose ran once all three landings were in**:
+  São Paulo and Osaka, Japan wave 2 (14 cities), and the regional extensions.
+  - Belo Horizonte, Rio de Janeiro and Los Angeles are renamed "(Regional)"
+    and keep their slugs.
+  - Vancouver now covers five municipalities.
+  - The 18 new or changed maps were re-counted, and every count reconciles
+    with `app/ring_shares.json`.
+  - The site now has 158 cities: 100 on Set A rings and 58 on Set B.
+- **Cards: 143, up from 129.** 15 cities stay off the cards, the same set as
+  before.
+  - Los Angeles is held under its new name. `gen_cards.py` now refuses any
+    held or off-card name that `app/cities.py` does not spell, so a rename
+    cannot put a held city on a card.
+  - The 14 Japanese cards carry no source credit on the face, so their
+    notices sit in the caption. That satisfies CC BY 2.1 JP Article 5 for
+    Kawasaki, Nara and Hamamatsu: their credit sits with every other
+    source's, which is in the caption.
+  - Vancouver's new notices 130-132 sit in the caption, as the builds'
+    drafts placed them.
+  - 17 faces changed in all: 14 new, plus Vancouver, Rio and Belo Horizonte.
+- **Counts on the public pieces updated:**
+  - "144 cities" became "158" on the title card, carousel, post, one-pager,
+    poster, QR card and deck.
+  - Set A's count went from 86 to 100.
+  - The classification count went from 50 to 51, since Los Angeles now
+    dispatches two registers and so joins Vancouver's group.
+  - The approved LinkedIn post's numbers became "158 cities in 25
+    countries", the numbers only (owner, 2026-10-03).
+  - The public set is now 137 cities.
+- **Republished:** the cards, the multi-city views, the sampler, the canvas
+  (10 boards) and the deck (4 slides). All board PNGs and the print PDFs
+  were re-rendered into `visuals/`. The board renderer had still pointed at
+  the folder used before `visuals/`, which is fixed.
+
+### 2026-10-03 - Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun
+
+- **Notices 130, 131 and 132 (Burnaby, New Westminster, Coquitlam) are now
+  on Vancouver's card face** (owner, 2026-10-03). They sit beside the
+  Vancouver and Surrey OGL lines, on the same cautious reading the owner
+  confirmed on 2026-10-02. This supersedes the caption-only placement in the
+  entry below.
+  - A card cannot carry a link, so a notice's `[name](url)` prints as
+    "name (host/path)".
+  - Only Vancouver's face changed.
+- **The chain page and the sampler's private section now read analytics'
+  one-pass rerun at `37eec480`.** The four pilots' results are unchanged
+  apart from their commit, so only the stamp moved. Across all cities, the
+  only verdict that moved is Vancouver's H1 (Supported -> Loosely
+  supported), and Vancouver is not a pilot.
+
+### 2026-10-03 - Region captions read "in the United States" (owner)
+
+- **Found by the review-time deploy check:** "Showing 19 cities in United
+  States." and "Showing 9 cities in United Kingdom." had no article, while
+  Europe's caption named "the United Kingdom". Pre-existing on the live
+  site; the region name was used bare.
+- **The owner chose adding "the"**, by the rule the labeled-too list
+  already used (`_TAKES_THE` in `app/cities.py`): the United States, its
+  West and East halves, the United Kingdom and the Seoul Capital Area. The
+  menu labels are unchanged.

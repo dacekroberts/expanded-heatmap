@@ -21,17 +21,27 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **The Overview's region caption count disagrees with the labels it shows
-  (owner, 2026-10-03): East Asia's caption says 6, but the map labels more.**
-  Likely cause: `REGION_LABELS_ALSO` names the Seoul Capital Area's and
-  Japan's anchor cities in East Asia's view, while the caption counts only
-  the region's own members (`cities_in`, `elsewhere_counts`). Fix the caption
-  or the labels so they agree, and ADD A CHECK for every region at 375, 768
-  and 1200: the number the caption states equals the cities the view labels
-  (or the caption says which are shown from other views), in
-  `check_macro_labels.py` or its own script in `check_all.py`. The existing
-  check only asserts each region's caption accounts for all cities once
-  across the menu, not that a view's caption matches its own labels.
+- [ ] **Audit the new version of the site once the next deploy lands
+  (owner, 2026-10-03).** Expected to be the mobile-tap-targets landing at
+  review time; the audit follows the live check of its three asks.
+
+- [ ] **Land mobile-tap-targets at review time** (branch at b68903a5, ready
+  2026-10-03; owner approved, touch only). At landing: fold its drafts,
+  re-check the three asks at 375 (tap reach, the fixed panel and ring, a
+  spiderfied group surviving the second tap), deploy-verify `map-chrome`;
+  no app/ diff, so no reboot. Left for the owner by that session: on
+  desktop, stations sit under lines (hovering a station centre shows the
+  line), and a spiderfied group still closes on a desktop click.
+
+- [x] **The macro-info pages (owner, 2026-10-03):** Why the Maps Differ's
+  key above its table; Japan folded into East Asia in the country selector.
+  DECISIONS 2026-10-03, "The country selector folds Japan into East Asia".
+  Live once pushed and rebooted.
+
+- [x] **The Overview's region caption against its labels (owner,
+  2026-10-03).** DECISIONS 2026-10-03, "Overview: a region view's caption
+  names the regions whose anchors it labels"; `check_macro_labels.py`
+  holds it at 375, 768 and 1200. Live once pushed and rebooted.
 
 - [ ] **Overview at phone width (found at the 2026-10-03 review landing):**
   - **Split Japan West in two (owner, 2026-10-03: approved).** Its zoom is

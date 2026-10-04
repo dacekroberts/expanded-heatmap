@@ -19,7 +19,7 @@ SLUG = "rio_de_janeiro"
 
 # Rio de Janeiro (Regional): Duque de Caxias added for SuperVia Saracuruna's
 # Duque de Caxias, Corte Oito and Gramacho (owner, 2026-09-27; released
-# 2026-10-02, docs/handoff_extensions_2026-10-02.md). Beyond Gramacho the
+# 2026-10-02, landed 2026-10-03, DECISIONS.md). Beyond Gramacho the
 # Gramacho-Saracuruna shuttle fails the rail test (PLAN.md "Wave-2 follow-ups"
 # (5), 2026-09-30), so it is drawn to its end and its three stations are not
 # ringed (SHUTTLE_* below). False reproduces the city-alone build byte for

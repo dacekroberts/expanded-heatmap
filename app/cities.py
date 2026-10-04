@@ -4544,7 +4544,39 @@ _bad_rof = [c["name"] for c in CITIES if "label_offset_by_region" in c and not (
 if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
-REGION_LABELS_ALSO = {"East Asia": ("Seoul Capital Area", "Japan West", "Japan East"), "Europe": ("United Kingdom",)}
+# Each tuple's order is the order region_caption() names them in.
+REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area"), "Europe": ("United Kingdom",)}
+
+
+def region_caption(region):
+    """The caption under a region view of the macro map (not Global's).
+
+    One function so Overview.py renders it and check_macro_labels.py reads the
+    same sentence: the check asserts that every label the view draws is a city
+    the caption counts or names (PLAN, owner 2026-10-03), rather than
+    recomputing the caption and agreeing with it while both are wrong.
+    """
+    n = len(cities_in(region))
+    # East Asia (Hong Kong, 2026-09-24) was the first one-city region.
+    def named(r):
+        return f"the {r}" if r in _TAKES_THE else r
+
+    # "in the United States", as in running text (owner, 2026-10-03).
+    text = f"Showing {n} {'city' if n == 1 else 'cities'} in {named(region)}"
+    # A view that labels another region's anchors names those regions (owner,
+    # 2026-10-03), so the count stays the region's own, as the menu states it.
+    also = [named(r) for r in REGION_LABELS_ALSO.get(region, ())]
+    if not also:
+        return text + "."
+    named = also[0] if len(also) == 1 else ", ".join(also[:-1]) + " and " + also[-1]
+    return f"{text}, with the main cities of {named} labeled too."
+
+
+# Region names read with "the" in running text.
+_TAKES_THE = {"United States", "United States West", "United States East",
+              "United Kingdom", "Seoul Capital Area"}
+
+
 if _bad_tier:
     raise ValueError(f"cities.py: {_bad_tier} have a label_tier not in {LABEL_TIERS}")
 _unmoded = [c["name"] for c in CITIES if c.get("mode") not in MODES]

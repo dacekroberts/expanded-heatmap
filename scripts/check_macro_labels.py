@@ -41,6 +41,7 @@ guarantee.
 import argparse
 import math
 import pathlib
+import re
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):   # "Montréal" is unprintable under cp1252
@@ -58,6 +59,7 @@ from cities import (  # noqa: E402
     REGIONS,
     cities_in,
     elsewhere_counts,
+    region_caption,
 )
 
 # TEXT_WIDTH, the measured pill widths, lives in app/label_competition.py
@@ -294,6 +296,39 @@ def caption_arithmetic():
     return bad
 
 
+def caption_against_labels(region, vw, placed):
+    """A region view's caption must account for every label the view draws.
+
+    The owner's finding of 2026-10-03: East Asia's caption said "Showing 6
+    cities" while the view labelled 15, nine of them REGION_LABELS_ALSO
+    anchors from Japan and the Seoul Capital Area. Reads the sentence the app
+    renders (cities.region_caption) and asserts two properties at each width:
+    the number it states is the region's own member count, and every pill at
+    least partly on the canvas belongs to a member, or to a city or region the
+    caption names. A member left unlabelled (a minor-tier city in a composite)
+    is not a failure: its dot is still drawn. Global states the whole site's
+    count and is not judged here.
+    """
+    name = region["name"]
+    if name == DEFAULT_REGION:
+        return []
+    caption = region_caption(name)
+    members = {c["name"] for c in region["cities"]}
+    bad = []
+    stated = re.search(r"Showing (\d+) cit", caption)
+    if not stated or int(stated.group(1)) != len(members):
+        bad.append(f"{name:<20} {vw:>4}px  caption {caption!r} does not state "
+                   f"the region's {len(members)} cities")
+    unnamed = sorted(c["name"] for c, *_ in placed
+                     if c["name"] not in members and c["name"] not in caption
+                     and c.get("region") not in caption)
+    if unnamed:
+        bad.append(f"{name:<20} {vw:>4}px  caption {caption!r} neither counts "
+                   f"nor names {len(unnamed)} labelled cit"
+                   f"{'y' if len(unnamed) == 1 else 'ies'}: {', '.join(unnamed)}")
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--width", type=int, action="append",
@@ -356,6 +391,8 @@ def main():
                 if (box[2] < 0 or box[0] > cw or box[3] < 0 or box[1] > CANVAS_H):
                     continue
                 placed.append((city, x, y, box, on))
+
+            problems.extend(caption_against_labels(region, vw, placed))
 
             for city, x, y, box, marker_on in placed:
                 # A marker is ERASED when its CENTRE falls inside the pill: the
@@ -490,8 +527,9 @@ def main():
             print(f"  {line}")
         return 1
     print(f"PROBLEMS 0 - {len(REGIONS)} regions x {len(widths)} widths, "
-          f"every city scored in every region; and every region's caption "
-          f"accounts for all {len(CITIES)} cities exactly once")
+          f"every city scored in every region; every region's caption "
+          f"accounts for all {len(CITIES)} cities exactly once, and for every "
+          f"label its own view draws")
     return 0
 
 

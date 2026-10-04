@@ -62,15 +62,15 @@ the pointers. **Delete a section when its item is done.**
   6): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
 - **Both build sessions have built everything on their branches. Nothing is
   on master until the owner's review time.**
-  - **Japan wave 2** (`japan-wave2-build`, worktree `japan-wave2`, kit
-    `docs/handoff_japan_wave2_2026-10-02.md`): all fourteen built, pages
+  - **Japan wave 2** (`japan-wave2-build`, worktree `japan-wave2`, kit, deleted on landing:
+    `docs/handoff_japan_wave2_2026-10-02.md`): LANDED 2026-10-03; all fourteen built, pages
     176-189 and notices 115-128, one commit per city; the Japan West/East
     label pass at PROBLEMS 0; zero
     drift across all Japanese cities; master merged. Its master list empties
     Bands A and B: **when it lands, the list has 158 built and 0
     candidates.**
-  - **Extensions** (`extensions-build`, worktree `extensions`, kit
-    `docs/handoff_extensions_2026-10-02.md`): all four built in the kit's
+  - **Extensions** (`extensions-build`, worktree `extensions`, kit, deleted on landing:
+    `docs/handoff_extensions_2026-10-02.md`): LANDED 2026-10-03; all four built in the kit's
     order, each proved off with zero drift first. Belo Horizonte, Rio and Los
     Angeles have their baselines re-recorded on purpose. Vancouver had none
     (its steps emitted no figures; its gate was zero drift against the

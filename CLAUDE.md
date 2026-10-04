@@ -267,6 +267,7 @@ python scripts/check_internal_markers.py [--selftest]   # every <!-- internal --
 python scripts/check_city_page_format.py [--selftest]   # every city page: title, map, ..., notices last; no repo path in its text
 python pipeline/name_keys.py "NAME" ["NAME" ...]        # the key to list for a name read as a person's own
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
+python scripts/check_html_lang.py [--selftest]          # every map's <html lang> matches its map step; after any re-render
 python scripts/check_city_registry.py                   # after merging
 python scripts/check_conflict_markers.py [--file PATH]  # after merging; a marker git left in any tracked file
 python scripts/check_conflict_markers_selftest.py       # touches nothing
