@@ -4,6 +4,32 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Macau to R; the Israel screen's rows (owner)
+
+- **Macau, "33 macau to R okay":** one OSM address query (13,858 address
+  objects; 504 twice, 65 s waits, 200 on the third try) placed IAM's three
+  food lists at 15.1% on exact street and number, 66.9% counting a number
+  inside a mapped building's range and 70.1% ignoring letter suffixes, with
+  two of the three lists under 70%; only 8.3% of placed rows lie within
+  500 m of the 15 LRT stations, which serve Taipa and Cotai and reach the
+  peninsula only at Barra. The government GIS's points (about 97% placement)
+  reserve all rights, so R, request only: the bureau's permission.
+- **The Israel screen, "39-41 recommendations approved":** Ramat Gan
+  discarded (absence: its ArcGIS organization, its full sitemap and
+  data.gov.il's organizations enumerated); Bnei Brak and Bat Yam to R
+  (Cloudflare blocks, not routed around); Haifa discarded on rail (the
+  Carmelit funicular, the Metronit BRT, the light rail planned). Tel Aviv
+  (its own terms) and Jerusalem (R) were skipped.
+- **Petah Tikva, open:** the city's ArcGIS layer of licensed businesses
+  (2,835 points, edited 2026-09-16; food 1,229, barbers 145, beauty 123;
+  retail only where a licence is needed), 8 Red Line stations, no licence
+  stated anywhere. Staging recommended C with a licence read; the owner
+  asked whether to mark it a possible build tabled for wartime, as Russia,
+  Ukraine, Belarus and Iran were left out on 2026-09-28. Not written until
+  the owner answers.
+- A rate limit on data.gov.il (CloudFront 403 after about 90 quick API
+  calls) lifted in about 10 minutes and was waited out.
+
 ### 2026-10-04 - Mexico City (Regional) marked, after a station repair (owner)
 
 - **The probe** (staging, wave 4): 11 stations of the page's own lines lie in
