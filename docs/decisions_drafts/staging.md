@@ -4,6 +4,28 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The "TEC" name on the Charleroi and Liège pages; the never-probed countries' wave (owner)
+
+- **The owner: "recommendation for TEC approved".** Notice 150 credits the
+  operator as "LETEC" (the name the Belgian Mobility Company portal and the
+  feed's agency use): "Source: LETEC – Open Data – [date of dataset
+  update]". Lines are labelled by their public names (M2, M3, M4, T1); no
+  "TEC" in legends or prose, and no TEC logo. TEC's website terms (art. 8,
+  8.1) claim the name and logo, scoped to letec.be and the app; the
+  ruling keeps the pages clear of either reading. Passed to the Belgium
+  build session the same night.
+- **The never-probed countries (staging's list, 2026-10-04):** Ecuador and
+  Kazakhstan (screens running), Bolivia, Puerto Rico, Mauritius, Armenia,
+  Pakistan and Bangladesh; rail likely failing in Costa Rica, Kenya, South
+  Africa and Senegal; one-city countries with other rail cities never asked:
+  Chile, Venezuela, Egypt, Algeria, Türkiye, Israel, Qatar. Russia, Ukraine,
+  Belarus and Iran stay left out (owner, 2026-09-28).
+- **The owner: "we can run the wave after heavy jobs slow down too, i'm not
+  worried about hitting the cap"**: the wave started at once, the heavy-job
+  gate holding one 0.2 GB job: one `add-country` probe each for Bolivia with
+  Puerto Rico, Mauritius with Armenia, and Pakistan with Bangladesh, and one
+  reprobe of the one-city countries' other rail cities.
+
 ### 2026-10-04 - TEC's GTFS read: permitted with conditions; the "TEC" name raised
 
 - **`licence-read`, 2026-10-04: PERMITTED WITH CONDITIONS.** The Belgian
