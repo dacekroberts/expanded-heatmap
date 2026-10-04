@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**495 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**498 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -69,6 +69,9 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The country selector folds Japan into East Asia; Why the Maps Differ's key moves above its table (owner)](#2026-10-03---the-country-selector-folds-japan-into-east-asia-why-the-maps-differs-key-moves-above-its-table-owner)
 - [A tap on a phone selects the nearest dot, station, cluster or line within 22 px; a dot's details go in a fixed panel (owner)](#2026-10-03---a-tap-on-a-phone-selects-the-nearest-dot-station-cluster-or-line-within-22-px-a-dots-details-go-in-a-fixed-panel-owner)
 - [Every map re-rendered for the touch tap fix; two Japanese maps first lost their lang attribute](#2026-10-03---every-map-re-rendered-for-the-touch-tap-fix-two-japanese-maps-first-lost-their-lang-attribute)
+- [São Paulo and Osaka cards refreshed from master 94eebc26 (owner)](#2026-10-03---são-paulo-and-osaka-cards-refreshed-from-master-94eebc26-owner)
+- [Visuals rebuilt for 158 cities at master 37eec480: 143 cards, every count updated](#2026-10-03---visuals-rebuilt-for-158-cities-at-master-37eec480-143-cards-every-count-updated)
+- [Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun](#2026-10-03---vancouvers-130-132-on-the-card-face-private-pages-moved-to-analytics-37eec480-rerun)
 
 **2026-10-02**
 
@@ -20204,3 +20207,70 @@ until the owner rules):**
   zoom with 0 corrections, the credit covered 0 times. The credit with a
   panel open was hit-tested on the prototype (identical script), not
   re-run on the renders.
+
+### 2026-10-03 - São Paulo and Osaka cards refreshed from master 94eebc26 (owner)
+
+- **The owner asked for São Paulo and Osaka to be refreshed now** rather
+  than held for the single rebuild after the city batch and regional
+  extensions. Changes since `f25850f1`:
+  - São Paulo now draws Linha 17-Ouro: 49,663 -> 50,436 storefronts near a
+    station, of 219,667 mapped.
+  - Osaka moved to MLIT N02-25, which adds Yumeshima: 71,672 -> 71,679 near
+    a station, of 72,999.
+  - Both re-counts reconcile with `app/ring_shares.json`.
+- No notice changed, so the two card faces changed in their figures only;
+  every other caption changed only in its commit stamp. The cards, the
+  sampler and the multi-city views were republished. The boards, print and
+  deck changed only in their stamps and were not republished.
+
+### 2026-10-03 - Visuals rebuilt for 158 cities at master 37eec480: 143 cards, every count updated
+
+- **The single rebuild the owner chose ran once all three landings were in**:
+  São Paulo and Osaka, Japan wave 2 (14 cities), and the regional extensions.
+  - Belo Horizonte, Rio de Janeiro and Los Angeles are renamed "(Regional)"
+    and keep their slugs.
+  - Vancouver now covers five municipalities.
+  - The 18 new or changed maps were re-counted, and every count reconciles
+    with `app/ring_shares.json`.
+  - The site now has 158 cities: 100 on Set A rings and 58 on Set B.
+- **Cards: 143, up from 129.** 15 cities stay off the cards, the same set as
+  before.
+  - Los Angeles is held under its new name. `gen_cards.py` now refuses any
+    held or off-card name that `app/cities.py` does not spell, so a rename
+    cannot put a held city on a card.
+  - The 14 Japanese cards carry no source credit on the face, so their
+    notices sit in the caption. That satisfies CC BY 2.1 JP Article 5 for
+    Kawasaki, Nara and Hamamatsu: their credit sits with every other
+    source's, which is in the caption.
+  - Vancouver's new notices 130-132 sit in the caption, as the builds'
+    drafts placed them.
+  - 17 faces changed in all: 14 new, plus Vancouver, Rio and Belo Horizonte.
+- **Counts on the public pieces updated:**
+  - "144 cities" became "158" on the title card, carousel, post, one-pager,
+    poster, QR card and deck.
+  - Set A's count went from 86 to 100.
+  - The classification count went from 50 to 51, since Los Angeles now
+    dispatches two registers and so joins Vancouver's group.
+  - The approved LinkedIn post's numbers became "158 cities in 25
+    countries", the numbers only (owner, 2026-10-03).
+  - The public set is now 137 cities.
+- **Republished:** the cards, the multi-city views, the sampler, the canvas
+  (10 boards) and the deck (4 slides). All board PNGs and the print PDFs
+  were re-rendered into `visuals/`. The board renderer had still pointed at
+  the folder used before `visuals/`, which is fixed.
+
+### 2026-10-03 - Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun
+
+- **Notices 130, 131 and 132 (Burnaby, New Westminster, Coquitlam) are now
+  on Vancouver's card face** (owner, 2026-10-03). They sit beside the
+  Vancouver and Surrey OGL lines, on the same cautious reading the owner
+  confirmed on 2026-10-02. This supersedes the caption-only placement in the
+  entry below.
+  - A card cannot carry a link, so a notice's "[name](url)" prints as
+    "name (host/path)".
+  - Only Vancouver's face changed.
+- **The chain page and the sampler's private section now read analytics'
+  one-pass rerun at `37eec480`.** The four pilots' results are unchanged
+  apart from their commit, so only the stamp moved. Across all cities, the
+  only verdict that moved is Vancouver's H1 (Supported -> Loosely
+  supported), and Vancouver is not a pilot.
