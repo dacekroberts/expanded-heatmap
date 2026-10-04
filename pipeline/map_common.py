@@ -1652,7 +1652,7 @@ assert "@@" not in TOUCH_GESTURE_SCRIPT, "unresolved placeholder in TOUCH_GESTUR
 # 2026-10-03, from an iPhone). A business dot is drawn 5 px across plus a 1 px
 # stroke, so its SVG hit area is 11 px wide, a station's 13 px, and stations
 # sit UNDER their lines (drawn later), so a tap on a station's centre hit the
-# line. Measured before this script (docs/decisions_drafts/mobile-tap-targets.md,
+# line. Measured before this script (DECISIONS.md 2026-10-03, "A tap on a phone",
 # CDP touch emulation at 375 px on Edmonton, Paris, Tokyo and Odense): with no
 # touch adjustment (WebKit's case) 0 of 43 taps 8 px off a dot opened it, and
 # 0 of 6 taps on Tokyo's station centres opened the station. A spiderfied
