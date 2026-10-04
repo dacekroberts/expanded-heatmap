@@ -463,9 +463,12 @@ def check_prescribed_credits():
             shown = []          # (call, nested inside if/try?)
 
             def visit(node, nested):
+                # components.render_caption is st.caption with US dates
+                # (2026-10-04), so it displays as st.caption does.
                 if (isinstance(node, ast.Call)
-                        and isinstance(node.func, ast.Attribute)
-                        and getattr(node.func.value, "id", None) == "st"
+                        and ((isinstance(node.func, ast.Attribute)
+                              and getattr(node.func.value, "id", None) == "st")
+                             or getattr(node.func, "id", None) == "render_caption")
                         and any(isinstance(n, ast.Constant)
                                 and isinstance(n.value, str)
                                 and pattern.search(n.value)

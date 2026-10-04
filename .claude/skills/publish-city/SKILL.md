@@ -87,8 +87,9 @@ it top to bottom:
   repository path or file name, script, check or skill name, decision log or
   build brief anywhere in page text.
 - [ ] Then, in order: `render_map_help(...)`, `render_excluded_stations(...)`,
-  `render_country_links(...)`, and `render_site_notices()` last, inline,
-  never behind an expander.
+  `render_country_links(...)`, and `render_site_notices()` last: the city's
+  own notices inline, never behind an expander (the site-wide set folds
+  into a `<details>`, owner 2026-10-04).
 - [ ] Reader-facing text in US spelling, except the notices, license titles,
   quotes, a register's own category names and official names (spec section 4).
 - [ ] In `docs/excluded_categories.md` and `docs/data_sources/<country>.md`,

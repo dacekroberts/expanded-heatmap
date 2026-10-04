@@ -10,15 +10,12 @@ a rule, not before obeying one.
 
 ## Where to start
 
-- Picking the next city -> `docs/city_master_list.md` (read counts there, never
-  repeat them here; `check_master_list_counts.py` enforces them, and closed
-  bands live in `city_master_list_evidence.md`); its evidence trail,
-  `docs/global_country_shortlist.md`, wins when they disagree. [#master-list]
-- First city in a new country -> `add-country`, then
-  `docs/mexico_retrospective.md` (one national register) or
-  `docs/spain_retrospective.md` (bespoke per city; also read it before trusting
-  a country that looks familiar). Worked example:
-  `docs/canada_retrospective.md`. [#add-country]
+- Picking the next city -> `docs/city_master_list.md` (read counts there,
+  never repeat them); `docs/global_country_shortlist.md` wins when they
+  disagree. [#master-list]
+- First city in a new country -> `add-country`, then the Mexico (one
+  national register) or Spain (bespoke per city) retrospective in `docs/`.
+  [#add-country]
 - Adding a city -> `add-city`, then `scaffold-city` once Step 0 passes. Check
   `docs/build_briefs/<city>.md` first: a cache, never a prerequisite. [#add-city]
 - A brief exists -> **run `python scripts/brief_check.py <city>` before writing
@@ -42,10 +39,9 @@ a rule, not before obeying one.
 - Brazilian city -> `brazil-city`; Taiwanese city -> `taiwan-city`; Japanese
   city -> `japan-city`; French city -> `france-tram-city`; a trams-only
   city outside France and Czechia -> `tram-city`. [#country-skills]
-- **Overpass: one query in flight per session, one per city** (never parallel
-  or per-route), and after a 504 or 429 wait at least 60 s before a retry,
-  never in a tight loop (owner, 2026-09-30: both public mirrors were 504ing
-  under several sessions' load).
+- **Overpass: one query in flight per session, one per city**, never
+  parallel; after a 504 or 429 wait at least 60 s before a retry (owner,
+  2026-09-30).
 - Rail from OpenStreetMap, not GTFS -> `osm-rail`. Put a lesson where the next
   city must pass through it - a raising check in shared code, then a skill - not
   in a sibling city's comments. [#osm-rail]
@@ -55,8 +51,8 @@ a rule, not before obeying one.
 - Auditing rather than building -> `consistency-sweep`; prefer a check to a
   correction. [#consistency-sweep]
 - A review in lanes (several sessions, one pinned commit) ->
-  `docs/review_lane_kit.md`: lanes, ports, surfaces, captures, prose
-  proposals, teardown.
+  `docs/review_lane_kit.md`. Process or efficiency review ->
+  `efficiency-review`.
 
 ## Invariants
 
@@ -85,24 +81,21 @@ a rule, not before obeying one.
   `docs/sub_transit_line_filters.md`. [#rail-shape]
 - **The project is never named after a city.** A city name labels only that
   city's own page.
-- **Publish public commercial information, not personal information** - a
-  trade name, never a registrant's own name at what looks like their home,
-  even from a public registry. Run `python scripts/check_personal_exposure.py
-  <city>` before publishing a city and after any change to its step 2 or
-  taxonomy; record the verdict in `DECISIONS.md` and its row in
-  `docs/privacy_verdicts.md` (`check_privacy_verdicts.py` fails a city
-  without one). Suspect catch-all codes first. A list of names withheld as
-  a person's own holds KEYS, never the names (`pipeline/name_keys.py`;
-  `check_name_keys.py` fails a plain one), and no doc, brief or decisions
-  entry quotes a registrant's own name as an example. [#personal-info]
-- **Never remove the basemap attribution:** `© OpenStreetMap contributors`,
-  linked to the OSM copyright page, visible on the render (ODbL 1.0); a new
-  tile provider swaps in its own. Check K of `check_provenance.py` refuses an
-  unclamped legend; run `scripts/check_map_attribution.js` at more than one
-  viewport height. The credit also stays clear only because `app/pages/*.py`
-  embeds each map at the map's own height - change that height and re-run the
-  check. Other required notices: `docs/data_sources.md`, "Notices
-  this project MUST display when published" - obligations, not courtesies. [#attribution]
+- **Publish public commercial information, not personal information**: a
+  trade name, never a registrant's own name at what looks like a home, even
+  from a public registry. Run `scripts/check_personal_exposure.py <city>`
+  before publishing and after any step-2 or taxonomy change; record the
+  verdict in `DECISIONS.md` and `docs/privacy_verdicts.md`. Suspect catch-all
+  codes first. Withheld-name lists hold KEYS, never names
+  (`pipeline/name_keys.py`), and nothing quotes a registrant's own name.
+  [#personal-info]
+- **Never remove the basemap attribution** `© OpenStreetMap contributors`,
+  linked and visible on the render (ODbL 1.0); a new tile provider swaps in
+  its own. Check K of `check_provenance.py` refuses an unclamped legend; run
+  `scripts/check_map_attribution.js` at more than one viewport height, and
+  again if a page's embed height changes. Other required notices:
+  `docs/data_sources.md`, "Notices this project MUST display when
+  published". [#attribution]
 - **A pipeline step never fetches.** Downloads live in
   `pipeline/<city>/fetch_sources.py` - deliberately not named `step*.py`, so
   `drift_check.py` never runs it; a step
@@ -127,38 +120,31 @@ a rule, not before obeying one.
   `docs/data_sources/<country>.md`), using the **`read-licence` skill**. A government
   portal is a reason to expect permissive terms, not evidence; check what a
   dataset page incorporates by reference. [#licence]
-- **A removal request is honoured, not argued** - from a publisher, a business
-  owner, or anyone with a privacy concern about a pin. Take it down first (the
-  layer or the whole city), then record what and who asked in `DECISIONS.md`.
-  Never ask for justification or weigh it against what the licence permits.
-  Keep `docs/data_sources.md` and `docs/excluded_categories.md` consistent on
-  it. [#removal]
-- **Ridership is out of scope, as a hard line:** ridership data cannot be
-  guaranteed for every city, so no ridership figures, no correlation with
-  ridership and no stand-in metric for foot traffic. The rule changes only
-  for a filtered set of cities whose ridership data exists and is
-  publishable, and only with the owner's approval (owner, 2026-10-02). See
-  `docs/project_context.md`. Flag scope additions rather than building them.
-- **AI-driven deep analysis is permitted. Hard line: every analysis must
-  always be accompanied by an AI-driven acknowledgement.** Analyses are
-  private: shown only to the owner, never on the website (`app/`,
-  `outputs/` or any deployed page) and never in public-facing material
-  unless the owner says otherwise for a specific piece (owner, 2026-10-02).
+- **A removal request is honoured, not argued**, from a publisher, a
+  business owner or anyone with a privacy concern: take it down first (the
+  layer or the city), then record it in `DECISIONS.md`, keeping
+  `docs/data_sources.md` and `docs/excluded_categories.md` consistent. Never
+  ask for justification. [#removal]
+- **Ridership is out of scope, a hard line**: no ridership figures,
+  correlations or foot-traffic stand-ins, since the data cannot be had for
+  every city; it changes only for a publishable subset with the owner's
+  approval (2026-10-02). Flag scope additions rather than building them.
+- **AI-driven deep analysis is permitted; every analysis carries an
+  AI-driven acknowledgement (hard line).** Analyses are private to the owner:
+  never on the site (`app/`, `outputs/`) or in public material unless the
+  owner says so for a piece (2026-10-02).
 
 ## Working rules
 
 - **Commit after each green step.** The commit is the baseline
   `pipeline/drift_check.py` diffs against.
-- **Log every judgment call** as it's made (`decisions-entry` skill). **A build
-  session writes it to its own drafts file,
-  `docs/decisions_drafts/<session-or-branch>.md`, never to `DECISIONS.md`**;
-  the cleanup session folds every drafts file into `DECISIONS.md` in one pass
-  when the owner hands them off, and a check or gate cites the draft until
-  then (owner, 2026-09-30). Never edit an old entry; add a new one, then run
-  `python scripts/decisions_index.py` (`--check` fails if stale). Entries older
-  than the current week (Sunday to Saturday) live in `docs/decisions/<Sunday>.md`,
-  moved verbatim by `scripts/archive_decisions.py` at the start of each week.
-  Keep `docs/project_context.md` to current state, no counts. [#decisions]
+- **Log every judgment call** as it's made (`decisions-entry` skill): **a
+  build session in `docs/decisions_drafts/<branch>.md`, never in
+  `DECISIONS.md`**; Cleanup folds the drafts when the owner hands them off.
+  Never edit an old entry; add one and run `scripts/decisions_index.py`.
+  Older weeks move to `docs/decisions/<Sunday>.md` by
+  `scripts/archive_decisions.py` each Sunday. `docs/project_context.md` holds
+  current state, no counts. [#decisions]
 - **Run `python pipeline/drift_check.py` after any pipeline change** - then
   **`git checkout -- outputs/` if it leaves files modified but reported no
   drift** (CRLF and Folium's random ids). Never `git add -A`. [#drift-churn]
@@ -171,53 +157,43 @@ a rule, not before obeying one.
   deploying; compute the reboot question from the WHOLE push's `app/` diff. [#publish-city]
 - **Reading a source's terms? The `licence-read` agent** - one source per call,
   out of the main conversation. [#licence-read]
-- **Verify app changes with the `deploy-verify` agent - once per batch, at
-  review time** (`docs/review_time.md`); during the day a session checks its
-  own `app/` change with at most one quick browser render. **Always state a
-  scope**: `city-added`, `map-chrome`, `app-deps` or `full` (`full` for a large
-  batch). Approvals, `app/` landings and full re-renders also wait for review
-  time, which only the owner calls. Skip it for pipeline-only work and doc
-  edits: `drift_check.py`, a grep of `app/` for folium/geopandas/shapely/pyproj
-  imports, and one browser render cover those. [#deploy-verify]
+- **Verify app changes with the `deploy-verify` agent once per batch, at
+  review time** (`docs/review_time.md`), always with a scope (`city-added`,
+  `map-chrome`, `app-deps`, `full`); during the day, at most one quick browser
+  render of a session's own change. Approvals, `app/` landings and full
+  re-renders wait for review time, which only the owner calls. Pipeline-only
+  and doc work needs no deploy-verify. [#deploy-verify]
 - **Write probe and scratch output to the session scratchpad directory, never
   to the working directory or the home directory** - an explicit path, or a
   gitignored `data/<city>/raw/`. Never commit it; findings go in
   `docs/data_sources.md` and `docs/city_master_list.md`. [#scratch]
-- **Downloads and prose a build's brief and skill cover are pre-permitted**
-  (owner, 2026-09-30). A build fetches the sources its brief and skill name
-  (feeds, registers, boundaries, address files, OSM) from the publisher's own
-  host or the brief's portal without asking, still with their licence rows
-  and notices; a source NOT in the brief goes to the owner first. Page text
-  written from an approved template needs no read-back in chat; a sentence the
-  template does not cover is a proposal, flagged in your drafts file and at
-  review time, and does not stop the build. Other interpretive prose is still
-  drafted in chat before it is written to a file.
+- **What a build's brief and skill cover is pre-permitted** (owner,
+  2026-09-30): fetching the sources they name from the publisher's own host,
+  with their licence rows and notices, and page text from an approved
+  template. A source not in the brief goes to the owner first; a sentence no
+  template covers is a proposal in the drafts file, flagged at review time;
+  other interpretive prose is drafted in chat first.
 - **A backslash or a backtick never goes into a Bash command. Write the
   content to a file with the Write tool and run the file.** Escapes, not
   length, are the test; quoting the heredoc delimiter does not help.
   `.claude/hooks/block_heredoc.py` enforces it. [#no-escapes]
-- **After every push to master, tell the Visuals and Analytics sessions what
-  moved**: `python scripts/downstream_changes.py <old master> <pushed>`, its
-  output sent to both unless it says "nothing downstream"; a new city always
-  counts (owner, 2026-10-03; `docs/session_roles.md`, "Downstream sessions").
+- **Once per review time, Cleanup tells Visuals and Analytics what moved**
+  (`scripts/downstream_changes.py`; `docs/session_roles.md`). At most three
+  build sessions at once; a branch takes master in only before its own push
+  (owner, 2026-10-04).
 - **Re-check `origin/master` in the same breath as the push**: `git fetch`,
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
 - **Python is capped at 8 GB a process, 12 GB with its children**
-  (`scripts/python_memcap.py`, installed as `usercustomize.py`). **At most three
-  heavy jobs on the machine, each admitted by the gate against the memory
-  actually available: `python scripts/heavy_job.py run --label <job>
-  --session <you> -- <command>`** (owner, 2026-09-30; three since 2026-10-04;
-  `docs/session_roles.md`). A refused job waits (`--wait <minutes>`) and says
-  so to the others; `heavy_job.py status` names what is holding the memory.
-  **Measured figures are the norm** (owner, 2026-10-03): with `--peak-gb`
-  omitted the gate declares the label's last measured peak; a job never
-  measured declares an estimate scaled from measured ones (`--peak-gb N
-  --estimate "scaled from ..."`); in a series of like jobs the first measures
-  for the rest. Only a job with neither counts as 8 GB. Drift checks run
+  (`scripts/python_memcap.py`). **At most three heavy jobs, each admitted by
+  the gate: `python scripts/heavy_job.py run --label <job> --session <you> --
+  <command>`**; a refused job waits (`--wait <min>`), and `heavy_job.py status`
+  names what holds the memory. Declare the label's measured peak (the
+  default), else an estimate scaled from measured ones (`--peak-gb N
+  --estimate "..."`); the rest is in `docs/session_roles.md`. Drift checks
   `--jobs 2` at most, one per machine. A `MemoryError` is a script to fix,
-  never a cap to raise. Never hand-write a PDF or font decoder: `pdftotext`
-  or `pypdf`, one page first. [#memory]
+  never a cap to raise. PDFs: `pdftotext` or `pypdf`, never a hand-written
+  decoder. [#memory]
 - **Resolve a conflicted append-only file with
   `python scripts/merge_append_only.py DECISIONS.md`, never by rebuilding it
   from one side** - a conflict region is not everything the other side added.
@@ -240,60 +216,11 @@ rewording one means re-rendering). Enforced by
 
 ## Commands
 
-```bash
-python pipeline/<city_slug>/step1_stations.py
-python pipeline/<city_slug>/step2_clean_businesses.py
-python pipeline/<city_slug>/step3_map.py
-python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 2 at most, one run per machine
-python pipeline/drift_check.py --render-only [--jobs N] # map step only, against data/<city>/processed/ as it stands; never the pre-deploy gate
-python scripts/drift_check_selftest.py                  # touches nothing
-python scripts/brief_check.py [city_slug]               # re-run a brief's claims live
-python scripts/check_all.py [--list]                    # every pass/fail check, ~30s; the pre-push hook runs it
-git config core.hooksPath .githooks                     # once per clone: turns that hook on
-python scripts/check_provenance.py [--strict]           # after adding a city
-python scripts/check_no_fetch_in_steps.py [--list]
-python scripts/check_no_fetch_in_steps_selftest.py      # touches nothing
-python scripts/check_scope_disclosure.py
-python scripts/check_scope_disclosure_selftest.py       # touches nothing
-python scripts/check_inconsistency_list.py              # when a city lands
-python scripts/check_stray_downloads.py                 # untracked files at any checkout's root
-python scripts/check_overpass_hosts.py [--live|--selftest]   # every Overpass mirror is global
-python scripts/check_worktree_data.py <worktree> [--list]   # before removing a worktree
-python scripts/check_render_current.py                  # after merging
-python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
-python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
-python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
-python scripts/check_internal_markers.py [--selftest]   # every <!-- internal --> span closed, contained, clean
-python scripts/check_internal_prose.py [--counts|--surface S|--kind K]   # REPORTS only: note-like prose a reader can see
-python scripts/check_city_page_format.py [--selftest]   # every city page: title, map, ..., notices last; no repo path in its text
-python pipeline/name_keys.py "NAME" ["NAME" ...]        # the key to list for a name read as a person's own
-python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render
-python scripts/check_html_lang.py [--selftest]          # every map's <html lang> matches its map step; after any re-render
-python scripts/check_city_registry.py                   # after merging
-python scripts/check_conflict_markers.py [--file PATH]  # after merging; a marker git left in any tracked file
-python scripts/check_conflict_markers_selftest.py       # touches nothing
-python scripts/check_plan_done.py [--verbose]           # REPORTS only
-python scripts/check_stale_claims.py                    # REPORTS only
-python scripts/check_stale_claims.py --only E           # "only city" claims; when a city lands
-python scripts/check_discard_evidence.py [--selftest]   # when the discard table changes
-python scripts/measure_rail_backbone.py --osm <json> --relation <id> --municipios <json> --codes <ibge> --stations <csv> --crs <epsg>   # commuter-line rail test
-python scripts/check_deploy_imports.py [--ref REF]      # before ANY push touching app/
-node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
-node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
-python scripts/decisions_index.py [--check]
-python scripts/rendered_surfaces.py [--write|--check]   # every surface the app renders -> docs/rendered_surfaces.md
-python scripts/downstream_changes.py <old> [<new>]       # after every push: what to tell Visuals and Analytics
-python scripts/review_lanes.py create --sha <commit> --lanes <n> | list | remove   # review-lane worktrees
-node scripts/capture_pages.mjs --out <dir> [--base URL] [--pages all|cities|Name,Name] [--widths ...] [--themes light,dark] [--cdp N]   # one browser; --peak-gb 2.5
-python scripts/prose_proposals.py collate | apply --ids <id,id> | --selftest   # lanes' prose proposals -> the owner's list
-python scripts/proposals_page.py --out <html> --commit <sha> [--sets json]   # the owner's review page for a long proposals list
-python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
-python scripts/heavy_job.py run --label <job> [--peak-gb <N> --estimate <basis>] --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory
-python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/
-python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # archived entries count as present
-python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country> --mode <metro|light_rail|tram>   # add --dry-run first
-.venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
-```
+Every script's usage line is in `docs/commands.md`; the ones every session
+needs: `python scripts/check_all.py` (the pre-push hook; enable once per clone
+with `git config core.hooksPath .githooks`), `python pipeline/drift_check.py
+[city] [--jobs N]`, `python scripts/regen_generated.py` after any merge, and
+`.venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"`.
 
 Environments: the full pipeline environment (`requirements-pipeline.txt`)
 for `pipeline/`; `.venv-lean` (`requirements.txt` only, gitignored) for the

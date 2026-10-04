@@ -103,11 +103,11 @@ EXCLUDE_PATTERNS = ("passover_*.md", "*retrospective*.md", "*_addendum.md")
 # snapshot from the Canada build, not drift. `scripts/brief_check.py`
 # re-verifies their claims against live sources; this check cannot tell a
 # stale brief from an accurate record of a past probe.
-# docs/notifications holds letters this project owes a publisher. "NOT YET
+# docs/communications holds letters this project owes a publisher. "NOT YET
 # SENT" is their CORRECT state: the file tracks an act that has not happened.
 # A document whose subject is pendency cannot be audited for writing about
 # pendency.
-EXCLUDE_DIRS = ("docs/build_briefs", "docs/notifications")
+EXCLUDE_DIRS = ("docs/build_briefs", "docs/communications")
 
 # More exclusions, each for a reason established above.
 #

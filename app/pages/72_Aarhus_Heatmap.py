@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.aarhus.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -50,7 +51,7 @@ if PROVENANCE_JSON.exists():
         _points = (((_prov.get("osm") or {}).get("address_points") or {})
                    .get("file_utc") or "")[:10]
         if _times and _points:
-            st.caption(f"Business and address data from Datafordeler's weekly "
+            render_caption(f"Business and address data from Datafordeler's weekly "
                        f"extracts, generated **{_times[0][:10]}**; address points "
                        f"from OpenStreetMap, fetched **{_points}**.")
     except (ValueError, OSError, AttributeError):

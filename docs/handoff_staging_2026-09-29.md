@@ -137,7 +137,7 @@ check left is whether SacRT's Green Line still runs.
     and barber files, once the national files are checked.
   - Incheon's rail (Seoul's precedent recommended).
 - **Lisbon (Band R):** the DGAE request is drafted, NOT sent
-  (`docs/notifications/dgae-lisbon-porto-request.md`). Only the owner sends
+  (`docs/communications/dgae-lisbon-porto-request.md`). Only the owner sends
   it.
 
 ## Parked by the owner

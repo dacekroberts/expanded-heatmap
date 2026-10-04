@@ -44,6 +44,7 @@ from components import (
     render_macro_map_theme,
     render_site_notices,
     set_base_font,
+    us_dates,
 )
 # components.py has already put the repo root on sys.path; pipeline/theme.py
 # imports nothing, so it is safe under the lean deploy venv.
@@ -222,6 +223,9 @@ cities["storefronts_text"] = cities["name"].map(
     lambda n: f"{_counts[n]:,} storefronts" if n in _counts else "storefront count pending")
 for _col in ("placement", "data_age"):
     cities[_col] = cities[_col].fillna("not recorded") if _col in cities else "not recorded"
+# The tooltip and the city list write data_age's dates the US way, as the
+# city pages' "Data:" line does (components.us_dates; owner, 2026-10-04).
+cities["data_age"] = cities["data_age"].map(us_dates)
 
 # Where each name sits relative to its marker: an explicit (anchor, dx, dy) in
 # pixels from cities.py's `label_offset`. See that file's docstring for why this

@@ -16,6 +16,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.antwerp.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -49,7 +50,7 @@ if PROVENANCE_JSON.exists():
         _vkbo = ((_prov.get("vkbo") or {}).get("fetched_utc") or "")[:10]
         _feed = ((_prov.get("gtfs") or {}).get("fetched") or "")[:10]
         if _favv and _vkbo and _feed:
-            st.caption(f"Food premises from FAVV-AFSCA, extract of **{_favv}**, placed on VKBO's "
+            render_caption(f"Food premises from FAVV-AFSCA, extract of **{_favv}**, placed on VKBO's "
                        f"address points, extracted **{_vkbo}**; the tram lines and their stops "
                        f"from De Lijn's open data, fetched **{_feed}**.")
     except (ValueError, OSError, AttributeError):

@@ -1,6 +1,6 @@
 {
   "closed": 2,
-  "join_block": 7281,
+  "join_block": 7282,
   "join_chome": 908,
   "join_none": 19,
   "join_own": 125,
@@ -9,7 +9,7 @@
   "names_withheld": 1,
   "no_address": 2262,
   "not_a_premises": 685,
-  "not_storefront": 1330,
+  "not_storefront": 1329,
   "own_coords_block_median_m": 46,
   "own_coords_block_within_250m_pct": "91.4",
   "own_coords_chome_median_m": 144,
@@ -26,11 +26,11 @@
   "stations_collapsed": 59,
   "stations_excluded": 13,
   "stations_in_scope": 46,
-  "storefronts": 7820,
+  "storefronts": 7821,
   "storefronts_food_service": 4371,
   "storefronts_personal_services": 1867,
-  "storefronts_retail": 1582,
+  "storefronts_retail": 1583,
   "superseded_by_mhlw": 35,
-  "sweets_deli_factory_like": 28,
-  "sweets_deli_rows": 820
+  "sweets_deli_factory_like": 29,
+  "sweets_deli_rows": 821
 }

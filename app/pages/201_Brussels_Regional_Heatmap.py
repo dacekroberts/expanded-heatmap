@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.brussels.config import PROVENANCE_JSON as CITY_PROVENANCE_JSON  # noqa: E402
 from pipeline.brussels_regional.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -51,7 +52,7 @@ if CITY_PROVENANCE_JSON.exists():
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
         pass
-st.caption("Shops and restaurants from KBO/BCE Open Data, the federal register of enterprises, "
+render_caption("Shops and restaurants from KBO/BCE Open Data, the federal register of enterprises, "
            "snapshot of **2026-10-02**, their addresses matched to BeST-Address Brussels of "
            "**2026-09-30**" + (f"; the metro and tram lines and their stations from STIB-MIVB's "
                                f"open data, fetched **{_feed}**." if _feed else "."))

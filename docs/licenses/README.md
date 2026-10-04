@@ -7,7 +7,7 @@ clauses quoted in [`../data_sources.md`](../data_sources.md) are checkable
 against these files.
 
 **Letters this project SENDS are not stored here.** They live in
-[`../notifications/`](../notifications/) - Barcelona's notification and
+[`../communications/`](../communications/) - Barcelona's notification and
 Philadelphia's permission request. The distinction is not filing tidiness: the
 rule below is that every file in this directory stays **unaltered** and is
 checkable by SHA-256, and a letter this project wrote and will revise can

@@ -242,7 +242,7 @@ An act is **not** a numbered notice and must not be filed as one — a notices
 list is a list of things the page displays, and putting an act there makes it
 look discharged by deploying. Instead:
 
-- Draft the communication as its own file under `docs/notifications/`, with its
+- Draft the communication as its own file under `docs/communications/`, with its
   preconditions stated.
 - Record it in `docs/data_sources.md` beside that source's notice, explicitly
   flagged as **not discharged by this page**.

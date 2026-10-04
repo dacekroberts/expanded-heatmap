@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.pittsburgh.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -44,7 +45,7 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _reg, _date = _prov.get("register_date"), _prov.get("as_of_date")
         if _reg and _date:
-            st.caption(f"Snapshot: the Allegheny County Health Department's food facilities as "
+            render_caption(f"Snapshot: the Allegheny County Health Department's food facilities as "
                        f"updated on **{_reg}**, fetched on {_date}.")
     except (ValueError, OSError, AttributeError, TypeError):
         # A malformed provenance file must not take the page down.

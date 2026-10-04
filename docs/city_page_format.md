@@ -39,7 +39,9 @@ copying an older one. The order, with nothing added between the parts:
    "listed below".
 7. `render_country_links("<Name>")`: What Is Excluded and About the Data,
    opened on the city's country.
-8. `render_site_notices()` last, inline, never behind an expander. Omitting
+8. `render_site_notices()` last: the city's own notices inline, never behind
+   an expander; the site-wide set folds into a closed `<details>` whose text
+   stays in the page (owner, 2026-10-04), LA Metro's kept inline. Omitting
    it is a license breach, not a cosmetic gap.
 
 **Never on a page:** a repository path or file name (`outputs/...`,

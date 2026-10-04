@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.florence.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -46,7 +47,7 @@ if PROVENANCE_JSON.exists():
         _reg = (_files.get("pubblici_esercizi_od.json") or "")[:10]
         _rail = (_files.get("osm_rail.json") or "")[:10]
         if _reg and _rail:
-            st.caption(f"Premises data from the Comune di Firenze (CC BY 4.0), fetched "
+            render_caption(f"Premises data from the Comune di Firenze (CC BY 4.0), fetched "
                        f"**{_reg}**; the tram lines and their stops from OpenStreetMap, "
                        f"fetched **{_rail}**.")
     except (ValueError, OSError, AttributeError):

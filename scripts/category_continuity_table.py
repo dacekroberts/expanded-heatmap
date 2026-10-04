@@ -509,11 +509,11 @@ COLUMNS["vancouver"] = {
                    loc({"source": "vancouver", "category": "Theatre"}, "Vancouver theatre"),
                    loc({"source": "surrey", "category": "Bowling Alley"}, "Surrey bowling")],
     "pharmacy": [loc({"source": "vancouver", "category": "Pharmacy"}, "Vancouver pharmacy")],
-    "optician": [pending({"source": "burnaby", "category": "HEALTH SERVICES - OPTOMETRIST/OPTICIAN"},
-                         "Burnaby's optometrists and opticians, one type under HEALTH SERVICES (39)",
-                         None, "2026-10-03",
-                         "out, as Surrey's Optometrist and Melbourne's opticians (filed in health); "
-                         "about 6 of the 39 read as optical shops; the rule keeps opticians Retail")],
+    "optician": [exception({"source": "burnaby", "category": "HEALTH SERVICES - OPTOMETRIST/OPTICIAN"},
+                           "Burnaby's optometrists and opticians, one type under HEALTH SERVICES (39)",
+                           None, "Burnaby's optometrists and opticians stay out (owner)",
+                           "out, as Surrey's Optometrist and Melbourne's opticians (filed in health); "
+                           "about 6 of the 39 read as optical shops; left out (owner, 2026-10-04)")],
     "mobile_unit": [loc({"source": "vancouver", "category": "Street Vendor"}, "Vancouver street vendor"),
                     loc({"source": "surrey", "category": "Portable Food Vendor"}, "Surrey food vendor"),
                     loc({"source": "surrey", "category": "Catering/Coffee Truck"}, "Surrey coffee truck"),
@@ -2278,7 +2278,7 @@ COLUMNS["brussels_hub"] = {
                           "'automobile' is a garage", ignore=("Garage - Entretien automobile",)),
 }
 
-AWAITING_OWNER = {("vancouver", "optician")}
+AWAITING_OWNER = set()
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "

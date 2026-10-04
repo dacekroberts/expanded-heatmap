@@ -89,8 +89,10 @@ def page_surfaces():
         tree = ast.parse(p.read_text(encoding="utf-8"))
         texts = []
         for node in ast.walk(tree):
-            if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
-                    and node.func.attr in DISPLAY_CALLS):
+            # components.render_caption is st.caption with US dates (2026-10-04).
+            if not (isinstance(node, ast.Call)
+                    and ((isinstance(node.func, ast.Attribute) and node.func.attr in DISPLAY_CALLS)
+                         or getattr(node.func, "id", None) == "render_caption")):
                 continue
             for arg in node.args:
                 parts = ([arg] if isinstance(arg, ast.Constant) else

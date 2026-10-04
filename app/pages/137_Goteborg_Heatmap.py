@@ -15,6 +15,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.goteborg.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -52,7 +53,7 @@ if PROVENANCE_JSON.exists():
         pass
 
 if _reg and _rail:
-    st.caption(f"Food business data from Göteborgs Stad (CC0), fetched **{_reg}**; the tram "
+    render_caption(f"Food business data from Göteborgs Stad (CC0), fetched **{_reg}**; the tram "
                f"lines and their stops from OpenStreetMap, fetched **{_rail}**.")
 
 def _long(iso):

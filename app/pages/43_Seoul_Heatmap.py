@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.seoul.config import (  # noqa: E402
     HEATMAP_HTML, PROVENANCE_JSON, REGISTERS)
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -54,7 +55,7 @@ if PROVENANCE_JSON.exists():
         if _osm:
             _bits.append(f"subway lines and stations as mapped in OpenStreetMap on **{_osm}**")
         if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+            render_caption("Snapshot: " + "; ".join(_bits) + ".")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
         pass

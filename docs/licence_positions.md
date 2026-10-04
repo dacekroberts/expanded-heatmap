@@ -343,8 +343,8 @@ These come from a read-only search of `app/components.py` `_NOTICES` and `app/pa
 
 ### C. Positions recorded as pending or "owed" that a landed city now relies on
 
-1. **Philadelphia:** the request sent 2026-09-21 is unanswered, including after the 2026-09-28 follow-up. The next step is the owner's call (`docs/notifications/philadelphia-permission-request.md:3-6`).
-2. **Barcelona:** the notification owed under the terms is "draft, NOT YET SENT" (`docs/notifications/barcelona-city-council.md:1`; `DS:333`).
+1. **Philadelphia:** the request sent 2026-09-21 is unanswered, including after the 2026-09-28 follow-up. The next step is the owner's call (`docs/communications/philadelphia-permission-request.md:3-6`).
+2. **Barcelona:** the notification owed under the terms is "draft, NOT YET SENT" (`docs/communications/barcelona-city-council.md:1`; `DS:333`).
 3. **Milan:** the rail "read-licence job before the deploy gate" was never done (`build_briefs/milan.md:382-384`).
 4. **Paris:**
    - The L.1115-5 declaration is "APPLICABILITY UNRESOLVED" (`docs/gated_access.md:47`).
@@ -926,7 +926,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 - Cities: Barcelona
 - Role: register
 - Tier: 2 (2a) - act owed and undelivered, plus a "may not be altered" clause read against its letter; borderline tier 1
-- Rests on: Art. 8 "content ... may not be altered" read as barring misrepresentation, not analysis (docs/data_sources.md:1142-1162); notification "not yet sent" (docs/data_sources.md:333, :1094-1112; docs/notifications/barcelona-city-council.md:1, :58-63)
+- Rests on: Art. 8 "content ... may not be altered" read as barring misrepresentation, not analysis (docs/data_sources.md:1142-1162); notification "not yet sent" (docs/data_sources.md:333, :1094-1112; docs/communications/barcelona-city-council.md:1, :58-63)
 - Decided by / when: owner, 2026-09-22 (publish on disclosed position); live terms read by the owner 2026-09-22 (docs/data_sources.md:1114-1117)
 - What would flag it: the Ajuntament, on alteration or on never having been informed
 - Safety net: notice "Ajuntament de Barcelona" (app/components.py:822-835) prescribed credit, modifications itemised, notification status stated; Referencia_Cadastral never requested; "If the Council reads it the other way, Barcelona comes down" (docs/data_sources.md:1160-1162); privacy verdict publish (docs/privacy_verdicts.md:40)
@@ -1265,7 +1265,7 @@ OSM in page text, except Melbourne (app/pages/62_Melbourne_Heatmap.py has no OSM
 
 #### C. Pending positions a landed city relies on
 - **Milan rail licence**: the "separate read-licence job before the deploy gate" (docs/build_briefs/milan.md:382-384) was never recorded as done.
-- **Barcelona notification**: "not yet sent" since 2026-09-22 (docs/data_sources.md:333; docs/notifications/barcelona-city-council.md:58-63).
+- **Barcelona notification**: "not yet sent" since 2026-09-22 (docs/data_sources.md:333; docs/communications/barcelona-city-council.md:58-63).
 - **Monterrey**: nl.gob.mx's terms are unread (mexico.md:50); low stakes, since only a colour and a count are used.
 - **Zurich**: the Reglement über offene Verwaltungsdaten was "not read beyond the legal notice's summary" (switzerland.md:51-52).
 - **London and the UK six**: OS's third-party style guide not read, owner said skip (docs/data_sources.md:1949).

@@ -15,6 +15,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.bergen.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -50,7 +51,7 @@ if PROVENANCE_JSON.exists():
         _taken = (_files.get("rb_sky-aggregated-gtfs.zip") or "")[:10]
         _register = (_files.get("underenheter.csv.gz") or "")[:10]
         if _taken and _register:
-            st.caption(f"Transit data from Skyss via Entur, snapshot taken **{_taken}**; "
+            render_caption(f"Transit data from Skyss via Entur, snapshot taken **{_taken}**; "
                        f"business register downloaded **{_register}**.")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.

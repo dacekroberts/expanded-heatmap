@@ -1,11 +1,47 @@
 """Every count docs/city_master_list.md states agrees with the rows it counts,
-and no city sits in two lists.
+and no city sits in two lists. With --write, the counts are generated.
 
     python scripts/check_master_list_counts.py
+    python scripts/check_master_list_counts.py --write       # rewrite every count from the rows
     python scripts/check_master_list_counts.py --verbose     # print each list's members
     python scripts/check_master_list_counts.py --file X.md   # for controls (the self-test)
 
-Exits non-zero naming every disagreement. Read-only, standard library only.
+Exits non-zero naming every disagreement. Without --write it is read-only;
+standard library only.
+
+THE COUNTS ARE GENERATED (owner, 2026-10-04, the first change of
+docs/efficiency_review_2026-10-04.md: the master list conflicted on 57 merges
+in 8 days, more than any other file). Never type a count, and never resolve a
+conflict in one by hand: after a merge, take EITHER side of a conflicted count,
+then run `--write` (or `scripts/regen_generated.py`, which runs it). `--write`
+rewrites, in place, every count this check verifies from the rows it counts:
+
+  - the summary box: Built's N and its "across N countries", Candidates' N and
+    its "A n · B n · C n · D n", Restricted, Open screening gap, Discarded;
+  - the "## Built - N", "## Candidates - N" and "## DISCARDED - N" headings,
+    and each Built row's "(N)";
+  - each band heading's "(N ready + N ✅ BUILT)" or "(N cities)", the noun
+    following the number ("1 city", "2 cities");
+  - the band table's per-band figures, Band A's "+ N built", its Candidates,
+    open-gap and Discarded rows;
+  - the by-country table's Total row (Built, Candidates, Restricted and the
+    "A n · ... · R n" breakdown), each country's Built figure that the Built
+    table settles, and a Candidates or Restricted figure whose cell names its
+    cities (the figure becomes the count of names);
+  - a "**<flag> Country (N)**" sub-group line, and the tram list's title, tier
+    headings and tier table when Band T points to it.
+
+Everything else is left byte for byte, and a second run changes nothing. It
+prints every count it changes, old and new: a change nobody expected is a row
+written in a shape this check does not read (see WHAT COUNTS AS A MEMBER), so
+read that list before committing. What it cannot settle stays a PROBLEM and
+the exit is non-zero: a by-country figure that names no cities (the column sums
+still check it), a city in two lists, a missing section.
+
+The summary rows hold numbers and a fixed pointer only. Their running logs of
+dated moves, which two branches appended to on every build merge, moved to
+docs/city_master_list_evidence.md on 2026-10-04; a new move goes in the
+session's decisions draft, as any judgment call does, never back into a row.
 
 WHY. `CLAUDE.md` sends every session to this file to READ COUNTS OFF, and the
 counts were the part of it that kept going wrong: 79 of its last 149 edits
@@ -97,6 +133,76 @@ LETTERS = "ABCDRT"
 # "Restricted" row, the band table's R row, and the by-country table's
 # Restricted column.
 CANDIDATE_LETTERS = "ABCDT"
+
+
+# --- --write: a rewrite for each count the check verifies --------------------
+# The check records, beside each disagreement, a function that rewrites that one
+# line from the rows; --write applies them. A list of (line_index, rewrite,
+# description); None when only checking.
+
+def _fix(fixes, i, fn, what):
+    if fixes is not None:
+        fixes.append((i, fn, what))
+
+
+def _sub(pattern, value):
+    """Put `value` in group 1 of the first match of `pattern`. A group named
+    `w` holding "city" or "cities" is made to agree with the new number."""
+    rx = re.compile(pattern)
+
+    def fn(text):
+        m = rx.search(text)
+        if not m:
+            return text
+        out = text[:m.start(1)] + str(value) + text[m.end(1):]
+        if "w" in rx.groupindex and m.group("w"):
+            shift = len(str(value)) - (m.end(1) - m.start(1))
+            ws, we = m.start("w") + shift, m.end("w") + shift
+            out = out[:ws] + ("city" if value == 1 else "cities") + out[we:]
+        return out
+    return fn
+
+
+def _letters(pattern, want):
+    """Rewrite every `<letter> <n>` that `pattern` (two groups) finds, for the
+    letters in `want`."""
+    rx = re.compile(pattern)
+
+    def fn(text):
+        return rx.sub(lambda m: f"{m.group(1)} {want[m.group(1)]}" if m.group(1) in want
+                      else m.group(0), text)
+    return fn
+
+
+def _lead(value):
+    """A by-country cell's leading **N**; a cell holding only a dash takes one."""
+    def fn(cell):
+        if re.match(r"^\s*\*\*\d+\*\*", cell):
+            return _sub(r"^\s*\*\*(\d+)\*\*", value)(cell)
+        return f" **{value}** " if clean(cell) == "" else cell
+    return fn
+
+
+def _in_cell(col, fn, tail=False):
+    """Apply `fn` to table cell `col` of a line (every cell from `col` on with
+    `tail`). Cell `col` is the one `cells()` numbers `col`."""
+    def apply(line):
+        parts = line.split("|")
+        k = col + 1
+        if k >= len(parts):
+            return line
+        if tail:
+            return "|".join(parts[:k]) + "|" + fn("|".join(parts[k:]))
+        parts[k] = fn(parts[k])
+        return "|".join(parts)
+    return apply
+
+
+def apply_fixes(text, fixes):
+    lines = text.split("\n")
+    for i, fn, _ in fixes:
+        lines[i] = fn(lines[i])
+    return "\n".join(lines)
 
 
 # --- reading the file -------------------------------------------------------
@@ -209,11 +315,11 @@ def built_table(lines, start, end):
 
 # --- the check --------------------------------------------------------------
 
-def tram_list(text):
+def tram_list(text, fixes=None):
     """Band T's members from the tram list, and every count it states.
 
     Returns ({key: (name, line_index, False)}, problems, {tier: count})."""
-    lines = text.splitlines()
+    lines = text.split("\n")
     problems, found, tiers = [], {}, {}
     for t, s, e in sections(lines):
         m = TIER_HEAD.match(t)
@@ -228,7 +334,9 @@ def tram_list(text):
         elif int(h.group(1)) != len(mem):
             problems.append(f"tram list: heading '{t}' says {h.group(1)}, but {tier} holds "
                             f"{len(mem)}: {_names({k: v[0] for k, v in mem.items()})}")
-        problems += [f"tram list: {p}" for p in subgroups(lines, s, e, tier)]
+            _fix(fixes, s, _sub(r"\((\d+)\s+(?P<w>cit(?:y|ies))\b", len(mem)),
+                 f"tram list {tier} heading: {h.group(1)} -> {len(mem)}")
+        problems += [f"tram list: {p}" for p in subgroups(lines, s, e, tier, fixes)]
         for k, (name, i, _) in mem.items():
             if k in found:
                 problems.append(f"tram list: {name} is in {found[k][3]} AND {tier} - one tier "
@@ -239,12 +347,16 @@ def tram_list(text):
         problems.append("tram list: no '## ... T1 ... (N cities)' tier sections - the file "
                         "changed shape; update this check rather than let it pass vacuously")
     total = len(found)
-    title = next((l for l in lines if l.startswith("# ")), "")
+    title_i = next((i for i, l in enumerate(lines) if l.startswith("# ")), None)
+    title = lines[title_i] if title_i is not None else ""
     m = re.search(r"—\s*(\d+)\s+cities", title)
     if not m:
         problems.append(f"tram list: the title states no '— N cities': {title!r}")
     elif int(m.group(1)) != total:
         problems.append(f"tram list: title '{title}' but the tiers hold {total}")
+        # "cities" stays plural: the title's pattern above requires it.
+        _fix(fixes, title_i, _sub(r"—\s*(\d+)\s+cities", total),
+             f"tram list title: {m.group(1)} -> {total}")
     for head, rows in tables(lines, 0, len(lines)):
         if not head or head[0].lower() != "tier":
             continue
@@ -256,17 +368,24 @@ def tram_list(text):
             if tm and int(n.group(1)) != tiers.get(tm.group(1), 0):
                 problems.append(f"tram list line {i + 1}: tier table says {tm.group(1)} "
                                 f"{n.group(1)}, the tier holds {tiers.get(tm.group(1), 0)}")
+                _fix(fixes, i, _in_cell(len(row) - 1, _sub(r"(\d+)", tiers.get(tm.group(1), 0))),
+                     f"tram list tier table {tm.group(1)}: {n.group(1)} -> "
+                     f"{tiers.get(tm.group(1), 0)}")
             elif not tm and "total" in row[0].lower() and int(n.group(1)) != total:
                 problems.append(f"tram list line {i + 1}: tier table says total "
                                 f"{n.group(1)}, the tiers hold {total}")
+                _fix(fixes, i, _in_cell(len(row) - 1, _sub(r"(\d+)", total)),
+                     f"tram list tier table total: {n.group(1)} -> {total}")
     return {k: v[:3] for k, v in found.items()}, problems, tiers
 
 
-def check(text, tram_text=None):
+def check(text, tram_text=None, fixes=None, tram_fixes=None):
     """Return (report, problems). `report` is {list name: {key: name}}.
 
-    `tram_text` is docs/tram_city_list.md, read when Band T points to it."""
-    lines = text.splitlines()
+    `tram_text` is docs/tram_city_list.md, read when Band T points to it.
+    `fixes` and `tram_fixes`, when lists, collect a rewrite for each stated
+    count that disagrees, in the master list and the tram list (--write)."""
+    lines = text.split("\n")
     problems = []
     secs = sections(lines)
     tiers = {}
@@ -292,6 +411,8 @@ def check(text, tram_text=None):
         if stated is not None and stated != len(names):
             problems.append(f"line {i + 1}: Built row '{country} ({stated})' lists "
                             f"{len(names)} cities: {' · '.join(names)}")
+            _fix(fixes, i, _in_cell(0, _sub(r"\((\d+)", len(names))),
+                 f"Built row {country}: {stated} -> {len(names)}")
     # Distinct flags across the rows, plus one per flagless row: a country can
     # span two region rows (South Korea in East Asia and the Seoul Capital Area,
     # 2026-09-29) and is still one country.
@@ -301,6 +422,8 @@ def check(text, tram_text=None):
         problems.append(f"the Built heading states no count: {title!r}")
     elif int(m.group(1)) != len(built_names):
         problems.append(f"heading '{title}' but the Built table lists {len(built_names)}")
+        _fix(fixes, s, _sub(r"^## Built\s*—\s*(\d+)", len(built_names)),
+             f"Built heading: {m.group(1)} -> {len(built_names)}")
 
     # ---- bands
     bands = {}
@@ -321,7 +444,7 @@ def check(text, tram_text=None):
             problems.append(f"Band T points to {TRAM_NAME}, which was not found beside the "
                             f"master list")
         else:
-            mem, tram_problems, tiers = tram_list(tram_text)
+            mem, tram_problems, tiers = tram_list(tram_text, tram_fixes)
             problems += tram_problems
             bands["T"] = (t, s, e, mem)
     ready, built_in_a = {}, {}
@@ -347,9 +470,13 @@ def check(text, tram_text=None):
                 if int(m.group(1)) != actual["A"]:
                     problems.append(f"heading '{t}' says {m.group(1)} ready, but Band A "
                                     f"holds {actual['A']}: {_names(ready.get('A'))}")
+                    _fix(fixes, s, _sub(r"\((\d+)\s+ready", actual["A"]),
+                         f"Band A heading, ready: {m.group(1)} -> {actual['A']}")
                 if int(m.group(2)) != len(built_in_a):
                     problems.append(f"heading '{t}' says {m.group(2)} built, but Band A "
                                     f"keeps {len(built_in_a)} built rows")
+                    _fix(fixes, s, _sub(r"\(\d+\s+ready\s*\+\s*(\d+)", len(built_in_a)),
+                         f"Band A heading, built: {m.group(2)} -> {len(built_in_a)}")
         else:
             m = re.search(r"\((\d+)\s+cit", t)
             if not m:
@@ -357,7 +484,9 @@ def check(text, tram_text=None):
             elif int(m.group(1)) != actual[letter]:
                 problems.append(f"heading '{t}' says {m.group(1)}, but Band {letter} "
                                 f"holds {actual[letter]}: {_names(ready.get(letter))}")
-        problems += subgroups(lines, s, e, letter)
+                _fix(fixes, s, _sub(r"\((\d+)\s+(?P<w>cit(?:y|ies))\b", actual[letter]),
+                     f"Band {letter} heading: {m.group(1)} -> {actual[letter]}")
+        problems += subgroups(lines, s, e, letter, fixes)
 
     # ---- open gap and discards
     gap = {}
@@ -375,6 +504,8 @@ def check(text, tram_text=None):
         m = re.match(r"^## DISCARDED\s*—\s*(\d+)", t)
         if m and int(m.group(1)) != len(discards):
             problems.append(f"heading '{t}' but the discard table holds {len(discards)}")
+            _fix(fixes, s, _sub(r"^## DISCARDED\s*—\s*(\d+)", len(discards)),
+                 f"DISCARDED heading: {m.group(1)} -> {len(discards)}")
 
     candidates = sum(actual[x] for x in CANDIDATE_LETTERS)
     m = find(lambda t: t.startswith("## Candidates"))
@@ -386,13 +517,15 @@ def check(text, tram_text=None):
         if h and int(h.group(1)) != candidates:
             problems.append(f"heading '{t}' but the bands hold {candidates} "
                             f"({_sum(actual)})")
+            _fix(fixes, s, _sub(r"^## Candidates\s*—\s*(\d+)", candidates),
+                 f"Candidates heading: {h.group(1)} -> {candidates}")
         problems += band_table(lines, s, e, actual, candidates, len(gap),
-                               len(discards), len(built_in_a))
+                               len(discards), len(built_in_a), fixes)
 
     problems += summary(lines, len(built_names), countries, actual, candidates,
-                        len(gap), len(discards))
+                        len(gap), len(discards), fixes)
     problems += by_country(lines, secs, built_rows, ready, actual, candidates,
-                           len(built_names))
+                           len(built_names), fixes)
 
     # ---- one city, one place
     lists = {"Built": built, "the open gap": gap, "the discards": discards}
@@ -424,7 +557,7 @@ def _count(cell):
     return int(m.group(1)) if m else (0 if clean(cell) == "" else None)
 
 
-def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
+def by_country(lines, secs, built_rows, ready, actual, candidates, n_built, fixes=None):
     """Check the '## ✅ Current by country' table against the bands (added
     2026-09-27).
 
@@ -490,8 +623,11 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
         sum_built += b
         sum_cand += c
         if key(country) in built_by_country and built_by_country[key(country)][1] != b:
+            want = built_by_country[key(country)][1]
             problems.append(f"line {i + 1}: '{country}' says {b} built, the Built table "
-                            f"lists {built_by_country[key(country)][1]}")
+                            f"lists {want}")
+            _fix(fixes, i, _in_cell(1, _lead(want)),
+                 f"by country, {country} Built: {b} -> {want}")
         if restr_col is not None:
             r = _count(row[restr_col])
             if r is None:
@@ -504,6 +640,8 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
                 if rnames and len(rnames) != r:
                     problems.append(f"line {i + 1}: '{country}' counts {r} restricted but "
                                     f"names {len(rnames)}: {', '.join(rnames)}")
+                    _fix(fixes, i, _in_cell(restr_col, _lead(len(rnames))),
+                         f"by country, {country} Restricted: {r} -> {len(rnames)}")
                 for n in rnames:
                     if band_of.get(key(n)) != "R":
                         problems.append(f"line {i + 1}: '{country}' lists {n} as restricted, "
@@ -515,6 +653,8 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
         if len(names) != c:
             problems.append(f"line {i + 1}: '{country}' counts {c} candidates but names "
                             f"{len(names)}: {', '.join(names)}")
+            _fix(fixes, i, _in_cell(2, _lead(len(names))),
+                 f"by country, {country} Candidates: {c} -> {len(names)}")
         listed = set(re.findall(rf"\b[{LETTERS}]\b", row[bands_col])) if bands_col else set()
         for n in names:
             letter = band_of.get(key(n))
@@ -543,13 +683,25 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
         if restr_col is not None and _count(row[restr_col]) != actual.get("R", 0):
             problems.append(f"line {i + 1}: the Total row says {row[restr_col]} restricted, "
                             f"Band R holds {actual.get('R', 0)}")
+            _fix(fixes, i, _in_cell(restr_col, _lead(actual.get("R", 0))),
+                 f"Total row, Restricted: {clean(row[restr_col])} -> {actual.get('R', 0)}")
         if _count(row[1]) != n_built or _count(row[2]) != candidates:
             problems.append(f"line {i + 1}: the Total row says {row[1]} built / {row[2]} "
                             f"candidates, the file holds {n_built} / {candidates}")
-        for letter, n in re.findall(rf"\b([{LETTERS}]) (\d+)\b", " ".join(row[3:])):
+            for col, want in ((1, n_built), (2, candidates)):
+                if _count(row[col]) != want:
+                    _fix(fixes, i, _in_cell(col, _lead(want)),
+                         f"Total row, {head[col]}: {clean(row[col])} -> {want}")
+        letters_re = rf"\b([{LETTERS}]) (\d+)\b"
+        wrong = {}
+        for letter, n in re.findall(letters_re, " ".join(row[3:])):
             if int(n) != actual[letter]:
                 problems.append(f"line {i + 1}: the Total row says {letter} {n}, Band "
                                 f"{letter} holds {actual[letter]}")
+                wrong[letter] = actual[letter]
+        if wrong:
+            _fix(fixes, i, _in_cell(3, _letters(letters_re, wrong), tail=True),
+                 "Total row, bands: " + ", ".join(f"{x} -> {n}" for x, n in wrong.items()))
     return problems
 
 
@@ -557,8 +709,12 @@ def _sum(actual):
     return " + ".join(f"{x} {actual[x]}" for x in CANDIDATE_LETTERS if actual[x] or x == "A")
 
 
-def subgroups(lines, start, end, letter):
+def subgroups(lines, start, end, letter, fixes=None):
     """A `**<flag> Country (N)**` line counts the table that follows it."""
+
+    def fix(at, flag, name, want):
+        _fix(fixes, at, _sub(rf"{re.escape(flag)}\s*{re.escape(name)}\s*\((\d+)\)", want),
+             f"Band {letter} sub-group {name.strip()}: -> {want}")
     problems, pending = [], None
     for i in range(start, end):
         line = lines[i]
@@ -578,17 +734,19 @@ def subgroups(lines, start, end, letter):
                 if int(n) != len(rows):
                     problems.append(f"line {at + 1}: Band {letter} says '{name.strip()} ({n})', "
                                     f"the table below it has {len(rows)} rows")
+                    fix(at, flag, name, len(rows))
             else:
                 for flag, name, n in groups:
                     got = sum(1 for r in rows if flag in cells(r)[0])
                     if int(n) != got:
                         problems.append(f"line {at + 1}: Band {letter} says '{name.strip()} "
                                         f"({n})', the table below it has {got} {flag} rows")
+                        fix(at, flag, name, got)
             pending = None
     return problems
 
 
-def band_table(lines, start, end, actual, candidates, gap, discards, built_in_a):
+def band_table(lines, start, end, actual, candidates, gap, discards, built_in_a, fixes=None):
     """The '| Band | ... | Cities |' table in the Candidates section."""
     problems, seen = [], False
     for head, rows in tables(lines, start, end):
@@ -601,34 +759,45 @@ def band_table(lines, start, end, actual, candidates, gap, discards, built_in_a)
             if not n:
                 continue
             n = int(n.group(1))
+
+            def fix(want, what, pattern=r"(\d+)", i=i, row=row):
+                _fix(fixes, i, _in_cell(len(row) - 1, _sub(pattern, want)),
+                     f"band table, {what} -> {want}")
+
             letter = re.search(r"\*\*([A-Z])\*\*", first)
             if letter:
                 x = letter.group(1)
                 if n != actual.get(x, 0):
                     problems.append(f"line {i + 1}: band table says {x} {n}, the band holds "
                                     f"{actual.get(x, 0)}")
+                    fix(actual.get(x, 0), f"{x} {n}")
                 b = re.search(r"\+\s*(\d+)\s*built", last)
                 if x == "A" and b and int(b.group(1)) != built_in_a:
                     problems.append(f"line {i + 1}: band table says A '+ {b.group(1)} built', "
                                     f"Band A keeps {built_in_a} built rows")
+                    fix(built_in_a, f"A + {b.group(1)} built", r"\+\s*(\d+)\s*built")
             elif "Candidates" in " ".join(row[:2]):
                 if n != candidates:
                     problems.append(f"line {i + 1}: band table says {n} candidates, the bands "
                                     f"hold {candidates}")
+                    fix(candidates, f"Candidates {n}")
             elif "open gap" in first.lower():
                 if n != gap:
                     problems.append(f"line {i + 1}: band table says open gap {n}, it holds {gap}")
+                    fix(gap, f"open gap {n}")
             elif "discarded" in first.lower():
                 if n != discards:
                     problems.append(f"line {i + 1}: band table says {n} discarded, the table "
                                     f"holds {discards}")
+                    fix(discards, f"discarded {n}")
     if not seen:
         problems.append("the Candidates section has no '| Band | ... | Cities |' table")
     return problems
 
 
-def summary(lines, built, countries, actual, candidates, gap, discards):
-    """The '> | **Built** | ...' box at the top."""
+def summary(lines, built, countries, actual, candidates, gap, discards, fixes=None):
+    """The '> | **Built** | ...' box at the top. A row's first **N** is its count,
+    so the label cell (no digits) never takes the rewrite."""
     problems = []
     box = [(i, l) for i, l in enumerate(lines) if l.startswith("> |")]
     rows = {}
@@ -652,12 +821,17 @@ def summary(lines, built, countries, actual, candidates, gap, discards):
         got = first_bold_int(text)
         if got != want:
             problems.append(f"line {i + 1}: summary says {label} {got}, the file holds {want}")
+            if got is not None:
+                _fix(fixes, i, _sub(r"\*\*(\d+)\*\*", want),
+                     f"summary, {label}: {got} -> {want}")
     if "built" in rows:
         i, text = rows["built"]
         m = re.search(r"across\s+(\d+)\s+countries", text)
         if m and int(m.group(1)) != countries:
             problems.append(f"line {i + 1}: summary says built across {m.group(1)} countries, "
                             f"the Built table spans {countries}")
+            _fix(fixes, i, _sub(r"across\s+(\d+)\s+countries", countries),
+                 f"summary, countries: {m.group(1)} -> {countries}")
     restricted = next((k for k in rows if k.startswith("restricted")), None)
     if actual.get("R", 0) and restricted is None:
         problems.append("the summary box has no 'Restricted' row (Band R is counted "
@@ -668,27 +842,78 @@ def summary(lines, built, countries, actual, candidates, gap, discards):
         if got != actual.get("R", 0):
             problems.append(f"line {i + 1}: summary says restricted {got}, Band R holds "
                             f"{actual.get('R', 0)}")
+            if got is not None:
+                _fix(fixes, i, _sub(r"\*\*(\d+)\*\*", actual.get("R", 0)),
+                     f"summary, restricted: {got} -> {actual.get('R', 0)}")
     if "candidates" in rows:
         i, text = rows["candidates"]
         head = text.split("*(")[0]
         if re.search(r"(?<!\w)R \d", head):
             problems.append(f"line {i + 1}: the candidates row counts Band R, which is not a "
                             "candidate (owner, 2026-10-02); give it the Restricted row")
-        for x, n in re.findall(r"(?<!\w)([A-Z]) (\d+)(?![\d,])", head):
+        letters_re = r"(?<!\w)([A-Z]) (\d+)(?![\d,])"
+        wrong = {}
+        for x, n in re.findall(letters_re, head):
             if int(n) != actual.get(x, 0):
                 problems.append(f"line {i + 1}: summary says {x} {n}, Band {x} holds "
                                 f"{actual.get(x, 0)}")
+                if x != "R":
+                    wrong[x] = actual.get(x, 0)
+        if wrong:
+            def before_note(line, fn=_letters(letters_re, wrong)):
+                # Only the text before the row's "*(" note is the breakdown.
+                head, sep, rest = line.partition("*(")
+                return fn(head) + sep + rest
+            _fix(fixes, i, before_note,
+                 "summary, bands: " + ", ".join(f"{x} -> {n}" for x, n in wrong.items()))
     return problems
+
+
+def write(path, tram, read):
+    """Rewrite the master list's (and the tram list's) stated counts from their
+    rows; return a description of each count changed. Passes repeat until
+    nothing changes, so a run is a fixed point: a second run rewrites nothing."""
+    changed = []
+    for _ in range(5):
+        text, tram_text = read(path), read(tram)
+        fixes, tram_fixes = [], []
+        check(text, tram_text, fixes, tram_fixes)
+        new = apply_fixes(text, fixes)
+        new_tram = apply_fixes(tram_text, tram_fixes) if tram_text is not None else None
+        if new == text and new_tram == tram_text:
+            break
+        if new != text:
+            path.write_bytes(new.encode("utf-8"))
+        if new_tram != tram_text:
+            tram.write_bytes(new_tram.encode("utf-8"))
+        changed += [what for _, _, what in fixes + tram_fixes]
+    return changed
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--file", type=Path, default=LIST)
     ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--write", action="store_true",
+                    help="rewrite every stated count from the rows it counts, then check")
     args = ap.parse_args()
     tram = args.file.parent / TRAM_NAME
-    report, problems = check(args.file.read_text(encoding="utf-8"),
-                             tram.read_text(encoding="utf-8") if tram.exists() else None)
+
+    def read(path):
+        # Bytes, so --write keeps line endings and everything else exactly.
+        return path.read_bytes().decode("utf-8") if path.exists() else None
+
+    if args.write:
+        changed = write(args.file, tram, read)
+        if changed:
+            print(f"{len(changed)} count(s) rewritten:")
+            for what in changed:
+                print(f"  {what}")
+            print()
+        else:
+            print("Every count already agreed with its rows; nothing rewritten.\n")
+
+    report, problems = check(read(args.file), read(tram))
     tiers = report.pop("_tiers", {})
 
     if args.verbose:

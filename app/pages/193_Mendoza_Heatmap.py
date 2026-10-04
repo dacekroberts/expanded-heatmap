@@ -16,6 +16,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.mendoza.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -47,7 +48,7 @@ if PROVENANCE_JSON.exists():
         _reg = (_prov.get("register") or {}).get("data_date") or ""
         _rail = ((_prov.get("files_utc") or {}).get("osm.json") or "")[:10]
         if _reg and _rail:
-            st.caption(f"Commercial accounts from the Municipalidad de la Ciudad de Mendoza "
+            render_caption(f"Commercial accounts from the Municipalidad de la Ciudad de Mendoza "
                        f"(datos.ciudaddemendoza.gob.ar), open at **{_reg}**; the Metrotranvía "
                        f"and its stations from OpenStreetMap, fetched **{_rail}**.")
     except (ValueError, OSError, AttributeError):

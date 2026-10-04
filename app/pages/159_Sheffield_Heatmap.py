@@ -16,6 +16,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.sheffield.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -50,7 +51,7 @@ if PROVENANCE_JSON.exists():
         _osm = (_prov.get("osm_fetched_utc") or "")[:10]
         if _date:
             _rail = f"; the Supertram routes and stops from OpenStreetMap, fetched **{_osm}**" if _osm else ""
-            st.caption(f"Snapshot: food businesses as extracted by Sheffield City Council on "
+            render_caption(f"Snapshot: food businesses as extracted by Sheffield City Council on "
                        f"**{_date}** (Food Standards Agency){_rail}.")
     except (ValueError, OSError, AttributeError, TypeError):
         # A malformed provenance file must not take the page down.

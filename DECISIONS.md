@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**27 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**31 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -51,6 +51,10 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [korea_sbiz: a 시군구코드 filter beside the 시군구명 prefix, zero drift on the ten built SEMAS cities](#2026-10-04---korea_sbiz-a-시군구코드-filter-beside-the-시군구명-prefix-zero-drift-on-the-ten-built-semas-cities)
 - [Tacoma on the Visuals cards with its disclaimer in full; Liverpool (Regional) stays minor (owner)](#2026-10-04---tacoma-on-the-visuals-cards-with-its-disclaimer-in-full-liverpool-regional-stays-minor-owner)
 - [East Asia frames the anchors it labels, not only its own four cities (owner)](#2026-10-04---east-asia-frames-the-anchors-it-labels-not-only-its-own-four-cities-owner)
+- [Burnaby's optometrists and opticians stay out (owner)](#2026-10-04---burnabys-optometrists-and-opticians-stay-out-owner)
+- [The owner's calls of the evening: US dates on every caption, the site-wide notices folded, SFMTA's notice kept, Boston measured, communications filed](#2026-10-04---the-owners-calls-of-the-evening-us-dates-on-every-caption-the-site-wide-notices-folded-sfmtas-notice-kept-boston-measured-communications-filed)
+- [The efficiency review's three changes adopted, and the review itself a skill (owner)](#2026-10-04---the-efficiency-reviews-three-changes-adopted-and-the-review-itself-a-skill-owner)
+- [Japan's carry-overs: the 20 built cities take wave 2's rules, delis by form count as Food shops (owner)](#2026-10-04---japans-carry-overs-the-20-built-cities-take-wave-2s-rules-delis-by-form-count-as-food-shops-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1002,4 +1006,134 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   PROBLEMS 0 at 375, 768 and 1200, 21 regions, 170 cities; one clip,
   Yokohama 1.7 px at 375. A local render at 1200 showed all twelve labels
   readable from Hong Kong to Sapporo.
+
+### 2026-10-04 - Burnaby's optometrists and opticians stay out (owner)
+
+- **The owner: "drop the opticians if we can".** Burnaby files optometrists
+  and opticians as one type, HEALTH SERVICES - OPTOMETRIST/OPTICIAN (39 rows,
+  about 6 reading as optical shops). The taxonomy already sent the type out,
+  as Surrey's Optometrist and Melbourne's opticians (filed in health); the
+  continuity table held it as pending. It is now an exception on this
+  heading, and `AWAITING_OWNER` is empty. No map moves.
+
+### 2026-10-04 - The owner's calls of the evening: US dates on every caption, the site-wide notices folded, SFMTA's notice kept, Boston measured, communications filed
+
+- **Dates (owner: "change").** `components.us_dates` writes an ISO date the
+  US way (2026-08-31 -> August 31, 2026; 2026-03 -> March 2026) at display:
+  the "Data:" line (`render_data_age`, 58 pages), the Overview's tooltip and
+  city list, and every city page's own captions through `render_caption`
+  (115 pages, 142 calls: the provenance dates, "snapshot taken ..."). The
+  stored text stays ISO, so Visuals' copy and any sort are unchanged.
+  `check_provenance.py` (M), `check_city_page_format.py` (D) and
+  `check_internal_prose.py` read `render_caption` as a display call;
+  `scripts/france_page.py` writes it. The footer's "21 September 2026" now
+  reads "September 21, 2026".
+- **The site-wide notices fold (owner: "is collapsed list allowed? if so use
+  that").** A read of every every-page notice's recorded terms: the rule
+  "never behind an expander" was a build session's of 2026-09-21 (the
+  expander had kept the text out of the DOM), not a licence's. Chicago's,
+  Kansas City's and Tacoma's terms name a place ("at the site", "with any
+  application"), not prominence; OSM's licence is met by the credit on every
+  map. So the every-page notices other than a page's own sit in a closed
+  HTML `<details>`, "Required notices for data used across this site (N)",
+  whose text stays in the DOM. Kept inline: LA Metro (4), whose placement
+  guidelines were never found; and, on a page without a city (the Overview
+  and the reference pages, which show derived figures), INEGI (8) and
+  Barcelona (21). A city's own notices stay inline. Rendered locally (Le
+  Mans): closed, 6 inside with their links and bold, LA Metro outside.
+- **SFMTA's clause 4 (owner: "drop if we don't need").** Kept: the project
+  is the Licensee by use (clause 15), and "shall display or include this
+  disclaimer in any use agreement" reads two ways, one of which requires
+  display; clause 12's notice is required in full either way.
+- **Boston's General On Premise licences (owner: "measure then decide").**
+  27 active across 7 types (the 2026-09-30 call counted the 17 All Alc.);
+  11 already on the map through a food permit, 16 not (6 theaters, 5
+  museums and institutions, 3 event spaces, 2 bars, one maybe not yet
+  trading). Kept out as decided on 2026-09-30; the What Is Excluded count
+  corrected to 27, eleven already mapped.
+- **Communications (owner).** `docs/notifications/` is now
+  `docs/communications/`, with a README table for batch check-ins;
+  Philadelphia (sent 2026-09-21, no reply) is not chased.
+- **Housekeeping (owner).** The superseded `gtfs-nl.zip` (244 MB) and
+  `rome_static_gtfs.zip` (47 MB) deleted from `data/`; the CARTO-key backlog
+  removed from PLAN (the key landed 2026-10-02). The tram rescope stays
+  parked, to be raised when the owner asks what is next.
+
+### 2026-10-04 - The efficiency review's three changes adopted, and the review itself a skill (owner)
+
+- **The review** (`docs/efficiency_review_2026-10-04.md`, one agent): 176
+  of 337 merges since 2026-09-27 conflicted, re-merged with `git merge-tree`;
+  the generated and counted files led (master list 57, `cities.py` 33,
+  `ring_shares.json` 33, `macro_facts.json` 14); catch-up merges rose to 28 a
+  day; CLAUDE.md had regrown 66% and PLAN.md fourfold; downstream notes went
+  out on every push. **The owner: "go with all three and log the efficiency
+  review process as a skill if we can".**
+- **1. Regenerate, never merge, the generated files.** `.gitattributes` marks
+  `app/macro_facts.json`, `app/ring_shares.json`, `docs/ring_rules.md` and
+  `docs/rendered_surfaces.md` `merge=regenerate`; `python
+  scripts/regen_generated.py --install` set that driver (keep this side) in
+  the repository's config, shared by every worktree. `scripts/regen_generated.py`
+  rewrites every generated file from the merged sources (with README's city
+  list, the master list's counts and DECISIONS' index), and
+  `.githooks/post-merge` runs it after a merge that touched their sources.
+  The pre-push hook already fails any left stale. The master list's count
+  cells become generated (`check_master_list_counts.py --write`) and its
+  summary rows lose the running log of moves that conflicted on every build
+  merge; `cities.py` keeps ordinary merges (hand-written entries).
+- **2. The session count and the fan-out.** At most three build sessions at
+  once, besides Cleanup, Staging and the downstream sessions (the heavy-job
+  gate's three); a branch takes origin/master in only right before its own
+  push; Cleanup sends the downstream notes once per review time from the
+  last noted master (`docs/session_roles.md`), not after every push.
+- **3. Word budgets as a check.** `scripts/check_word_budgets.py`: CLAUDE.md
+  2,000 words, PLAN.md 5,000, `docs/session_roles.md` 3,000, in `check_all`;
+  raising one is the owner's call. CLAUDE.md went 2,808 -> 1,952: the command
+  list moved to `docs/commands.md`, and ten long rules were cut to the rule
+  and its pointer (their stories are in `docs/rule_history.md` and the
+  skills). PLAN's done items move to `docs/plan_done/<Sunday>.md` at each
+  weekly archive.
+- **The skill** `efficiency-review` records the method: one read-only agent,
+  `efficiency_metrics.py --baseline`, the new `merge_conflict_stats.py`
+  (exact conflicts by `git merge-tree`), load per session, re-renders,
+  DECISIONS volume, the gate and the hook; a ranked table with evidence,
+  saving and whose habit; the top three changes; what improved; Limits.
+
+### 2026-10-04 - Japan's carry-overs: the 20 built cities take wave 2's rules, delis by form count as Food shops (owner)
+
+- **The owner on the cleanup handoff's Japan calls: "1a-c yes, d food
+  service okay, e stay a note but flag if it comes up, f move only if
+  there's a better candidate for placement".**
+- **(a) and (b).** The twenty built Japanese cities opt into
+  `japan_register.WAVE2_RULES` like the fourteen of wave 2
+  (`pipeline/countries/japan.py`): the seven join rules (`oaza`,
+  `aza_letter`, `kou_bare`, `chome_missing`, `machi`, `citywide`,
+  `form_cols`) and `coop`. Unplaced rows fell as the wave-2 measurement said:
+  Fukuoka 92 -> 28, Hiroshima 152 -> 7, Kumamoto 62 -> 13, Matsuyama 84 ->
+  41, Utsunomiya 17 -> 6. Names withheld as a person's own fell where a
+  cooperative was read as a person: Kobe 10 -> 3, Sapporo 6 -> 3, Fukui
+  6 -> 1, Toyama 5 -> 1, Fukuoka 4 -> 1, Osaka 9 -> 8, Hiroshima 1 -> 0.
+  `check_personal_exposure.py` on those eight (Kyoto too): the Japan rule
+  prints 0, and 0 person-like names at a residential unit.
+- **(c).** `japan_eigyo`: 複合型そうざい製造業 counts as a deli (Food shops),
+  and a restaurant permit whose 業態 names a deli (総菜, 惣菜, そうざい,
+  そう菜) is a shop. **Larger than the 55 pins the wave-2 note measured,
+  because (a)'s `form_cols` now reads the built cities' form columns too**:
+  Nagasaki's 244 permits filed with the form そう菜, Tokyo's 118 そう菜店
+  (専門店 98, 併設店 20), Fukuoka's 46 そうざい, Yokkaichi's 72 飲食店営業(惣菜店).
+  Food service -> Food shops by city, the largest: Nagasaki 283 -> 231
+  (repeat permits at one premises then count once), Tokyo 161 -> 103,
+  Hiroshima, Kurume, Yokkaichi, Sakai, Kitakyushu, Fukuoka, Nara 28-70 each.
+  Read by eye, the matched forms are delis (a bento-and-deli or butcher-
+  and-deli form included); put to the owner with the counts before the push.
+- **(d)** Sasebo's 4 カフェー permits stay Food service (no rule reads them;
+  no change). **(e)** The JR-stretch exclusion stays Shimonoseki's note; a
+  second city meeting it is flagged to the owner. **(f)** Kawasaki's dot
+  stays at Shin-Yurigaoka: Musashi-Kosugi, Mizonokuchi and Kawasaki Station
+  each sit 3.7-5.9 px from Tokyo's or Yokohama's dot in Japan East, a
+  stacked pair `check_macro_labels.py` fails (PROBLEMS 6 each; the current
+  point 0).
+- **Proven:** the 34-city drift check through the gate (`--jobs 1`, measured
+  peak 4.74 GB) with `--update-baseline`; Toyota and Hamamatsu unchanged
+  beyond Folium's ids (restored); `regen_generated.py` rewrote the macro
+  facts, ring shares and ring rules; `check_all` 49 of 49.
 

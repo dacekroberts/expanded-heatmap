@@ -16,6 +16,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.brussels.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -47,7 +48,7 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _feed = ((_prov.get("gtfs") or {}).get("file_utc") or "")[:10]
         if _feed:
-            st.caption("Shops, restaurants and services from hub.brussels's survey for the City "
+            render_caption("Shops, restaurants and services from hub.brussels's survey for the City "
                        "of Brussels, dated **2025-10-17**; the metro and tram lines and their "
                        f"stations from STIB-MIVB's open data, fetched **{_feed}**.")
     except (ValueError, OSError, AttributeError):

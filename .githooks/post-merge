@@ -1,0 +1,12 @@
+#!/bin/sh
+# After a merge that brought in changes to what the generated files are built
+# from, rewrite them from the merged sources (owner, 2026-10-04; the efficiency
+# review's first change). scripts/regen_generated.py lists the generators; any
+# file it rewrites is left for the merging session to commit.
+cd "$(git rev-parse --show-toplevel)" || exit 0
+changed=$(git diff --name-only ORIG_HEAD HEAD 2>/dev/null | grep -E '^(app/|outputs/|pipeline/taxonomies/|docs/city_master_list|README\.md|DECISIONS\.md)' | head -n 1)
+if [ -n "$changed" ]; then
+    echo "post-merge: regenerating generated files (scripts/regen_generated.py)"
+    python scripts/regen_generated.py || echo "post-merge: a generator failed; run python scripts/regen_generated.py by hand"
+fi
+exit 0

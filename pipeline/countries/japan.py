@@ -81,64 +81,64 @@ from pipeline.tokyo import wards as tokyo_wards  # noqa: E402 - dependency-free,
 from pipeline.countries.japan_register import WAVE2_RULES  # noqa: E402 - no import back
 
 CITIES = {
-    "tokyo": {"name": "東京都区部", "pref": "13", "epsg": 32654,
+    "tokyo": {"name": "東京都区部", "pref": "13", "epsg": 32654, "rules": WAVE2_RULES,
               "wards": tokyo_wards.ACTIVE_CODES},
     # N02-25 since 2026-10-03 (owner): N02-24 lacks the Chūō Line's
     # Yumeshima, opened 2025-01-19.
-    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653, "n02": "25",
+    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
               "wards": ["27102", "27103", "27104", "27106", "27107", "27108", "27109", "27111", "27113",
                         "27114", "27115", "27116", "27117", "27118", "27119", "27120", "27121", "27122",
                         "27123", "27124", "27125", "27126", "27127", "27128"]},
-    "kobe": {"name": "神戸市", "pref": "28", "epsg": 32653,
+    "kobe": {"name": "神戸市", "pref": "28", "epsg": 32653, "rules": WAVE2_RULES,
              "wards": ["28101", "28102", "28105", "28106", "28107", "28108", "28109", "28110", "28111"]},
-    "sapporo": {"name": "札幌市", "pref": "01", "epsg": 32654,
+    "sapporo": {"name": "札幌市", "pref": "01", "epsg": 32654, "rules": WAVE2_RULES,
                 "wards": [f"011{n:02d}" for n in range(1, 11)]},
-    "fukuoka": {"name": "福岡市", "pref": "40", "epsg": 32652,
+    "fukuoka": {"name": "福岡市", "pref": "40", "epsg": 32652, "rules": WAVE2_RULES,
                 "wards": [f"4013{n}" for n in range(1, 8)]},
     # Band A 2026-09-24 (owner), on a register rebuilt from its permit stream
-    "kyoto": {"name": "京都市", "pref": "26", "epsg": 32653,
+    "kyoto": {"name": "京都市", "pref": "26", "epsg": 32653, "rules": WAVE2_RULES,
               "wards": [f"261{n:02d}" for n in range(1, 12)]},
     # Band B 2026-09-29 (owner): personal services only, the 18 wards
-    "yokohama": {"name": "横浜市", "pref": "14", "epsg": 32654,
+    "yokohama": {"name": "横浜市", "pref": "14", "epsg": 32654, "rules": WAVE2_RULES,
                  "wards": [f"141{n:02d}" for n in range(1, 19)]},
     # Band B 2026-09-29 (owner): food only, the 8 wards
-    "hiroshima": {"name": "広島市", "pref": "34", "epsg": 32653, "n02": "25",
+    "hiroshima": {"name": "広島市", "pref": "34", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
                   "wards": [f"341{n:02d}" for n in range(1, 9)]},
     # The 2026-10-01 batch (owner released 2026-10-02), each on N02-25 as its
     # brief measured (Kagoshima's 仙巌園 and Fukui's Hapi-line are not in
     # N02-24; Sakai's Semboku line is under Nankai only in N02-25). "wardless":
     # one municipality, so an address is never split at a 区 (Toyama's 太田北区)
     # and MLIT keys every town under an empty ward.
-    "matsuyama": {"name": "松山市", "pref": "38", "epsg": 32653, "n02": "25", "wardless": True,
+    "matsuyama": {"name": "松山市", "pref": "38", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                   "wards": ["38201"]},
-    "toyama": {"name": "富山市", "pref": "16", "epsg": 32653, "n02": "25", "wardless": True,
+    "toyama": {"name": "富山市", "pref": "16", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                "wards": ["16201"]},
-    "kumamoto": {"name": "熊本市", "pref": "43", "epsg": 32652, "n02": "25",
+    "kumamoto": {"name": "熊本市", "pref": "43", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES,
                  "wards": [f"4310{n}" for n in range(1, 6)]},
-    "fukui": {"name": "福井市", "pref": "18", "epsg": 32653, "n02": "25", "wardless": True,
+    "fukui": {"name": "福井市", "pref": "18", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
               "wards": ["18201"]},
-    "nagasaki": {"name": "長崎市", "pref": "42", "epsg": 32652, "n02": "25", "wardless": True,
+    "nagasaki": {"name": "長崎市", "pref": "42", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                  "wards": ["42201"]},
-    "utsunomiya": {"name": "宇都宮市", "pref": "09", "epsg": 32654, "n02": "25", "wardless": True,
+    "utsunomiya": {"name": "宇都宮市", "pref": "09", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                    "wards": ["09201"]},
-    "kitakyushu": {"name": "北九州市", "pref": "40", "epsg": 32652, "n02": "25",
+    "kitakyushu": {"name": "北九州市", "pref": "40", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES,
                    "wards": ["40101", "40103", "40105", "40106", "40107", "40108", "40109"]},
-    "sakai": {"name": "堺市", "pref": "27", "epsg": 32653, "n02": "25",
+    "sakai": {"name": "堺市", "pref": "27", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
               "wards": [f"2714{n}" for n in range(1, 8)]},
-    "hakodate": {"name": "函館市", "pref": "01", "epsg": 32654, "n02": "25", "wardless": True,
+    "hakodate": {"name": "函館市", "pref": "01", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                  "wards": ["01202"]},
-    "kagoshima": {"name": "鹿児島市", "pref": "46", "epsg": 32652, "n02": "25", "wardless": True,
+    "kagoshima": {"name": "鹿児島市", "pref": "46", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                   "wards": ["46201"]},
-    "okayama": {"name": "岡山市", "pref": "33", "epsg": 32653, "n02": "25",
+    "okayama": {"name": "岡山市", "pref": "33", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
                 "wards": [f"3310{n}" for n in range(1, 5)]},
-    "kochi": {"name": "高知市", "pref": "39", "epsg": 32653, "n02": "25", "wardless": True,
+    "kochi": {"name": "高知市", "pref": "39", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
               "wards": ["39201"]},
     # Japan wave 2 (owner released 2026-10-02), each on N02-25 as its brief
     # measured. Hamamatsu's three wards are the 2024-01-01 ones (中央区 22138,
     # 浜名区 22139, 天竜区 22140): MLIT's ISJ and N03 key them so, and the old
-    # seven codes answer 404. "rules": the join rules this wave added, which
-    # no built city reads until its own review re-renders it
-    # (japan_register.WAVE2_RULES).
+    # seven codes answer 404. "rules": the join rules this wave added
+    # (japan_register.WAVE2_RULES), opt-in at first; every Japanese city
+    # reads them since 2026-10-04 (owner), the twenty above included.
     "kawasaki": {"name": "川崎市", "pref": "14", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES,
                  "wards": [f"1413{n}" for n in range(1, 8)]},
     "yokosuka": {"name": "横須賀市", "pref": "14", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
