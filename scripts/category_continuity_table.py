@@ -2138,7 +2138,44 @@ COLUMNS["zurich_gastwirtschaft"] = {
 # (2026-10-02), was ruled on 2026-10-03 ("drop and note") and is now fixed().
 # Burnaby's optometrist/optician type: found with Vancouver (Regional)'s
 # extension (2026-10-03).
-AWAITING_OWNER = {("vancouver", "optician")}
+COLUMNS["brussels_hub"] = {
+    "funeral": [loc("Pompes funèbres", "funeral directors")],
+    "no_counter_food": [
+        pending("Cantine - Cafétéria - Food-court", "cafeterias and food courts in the street survey",
+                "Food service", "2026-10-04",
+                "R1 leaves staff and institutional canteens out; hub.brussels's ground-floor survey "
+                "records units open to the street, so its 46 are read as public cafeterias and food "
+                "courts and kept (the Belgium build's call for the owner)")],
+    "personal_catchall": [loc("Autre activité", "the survey's own catch-all")],
+    "tattoo": [loc("Tattoo", "tattoo studio")],
+    "adult_hostess": [loc("Cabaret", "cabaret"), loc("Peepshow", "peep show")],
+    "sex_shop": [loc("Love shop", "sex shop")],
+    "massage_commercial": [loc("Massage", "massage")],
+    "massage_regulated": absent("no therapist type: health care is outside the survey"),
+    "car_dealer": [loc("Voitures", "car dealer"), loc("Motos", "motorcycle dealer")],
+    "petrol_station": [loc("Station-service (essence, gaz,…)", "filling station")],
+    "vehicle_repair": [loc("Garage - Entretien automobile", "garage"), loc("Car-wash", "car wash")],
+    "gambling": [loc("Casino", "casino"), loc("Jeux de hasard", "betting and gaming")],
+    "pawnbroker": absent("no pawnbroker type"),
+    "nightclub": [loc("Night-club", "nightclub")],
+    "vet": absent("no veterinary type; pet grooming and pet shops have their own"),
+    "nonstore": [loc("Combustible (charbon, pellets…)", "heating-fuel dealer")],
+    "parking": absent("no parking type"),
+    "repair": [loc("Réparation de vêtements", "clothing repair"), loc("Cordonnier", "shoe repair"),
+               loc("Réparation matériel électrique ou multimédia", "electronics repair"),
+               loc("Clé-minute", "key cutting")],
+    "lodging": [loc("Hôtel -  3 étoiles", "hotel"), loc("Motel", "motel"),
+                loc("Auberge de jeunesse", "hostel"),
+                loc("Chambre d'hôtes - Bed & Breakfast", "guest house")],
+    "recreation": [loc("Salle de fitness - musculation", "gym"), loc("Cinéma", "cinema"),
+                   loc("Salle de bowling", "bowling"), loc("Salle de billard", "billiards")],
+    "pharmacy": [loc("Pharmacie", "pharmacy")],
+    "optician": [loc("Opticien", "optician")],
+    "mobile_unit": absent("a ground-floor shop survey: no mobile, market-stall or vending type; "
+                          "'automobile' is a garage", ignore=("Garage - Entretien automobile",)),
+}
+
+AWAITING_OWNER = {("vancouver", "optician"), ("brussels_hub", "no_counter_food")}
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "
