@@ -56,12 +56,12 @@ the pointers. **Delete a section when its item is done.**
 ## Where things stand (2026-10-03)
 
 - **On master, `docs/city_master_list.md`: 158 built across 25 countries;
-  0 candidates; 26 restricted (Band R, counted apart from candidates);
-  122 discards.** Japan wave 2 and the four extensions LANDED at review time
-  on 2026-10-03; both kits are deleted. Published artifact (version 7, with
-  the sweep's leads): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **New candidates come from the coverage sweep** (its section below): the
-  first group is screened, its band moves wait on the owner.
+  12 candidates (A 6 · B 5 · D 1); 23 restricted (Band R, counted apart
+  from candidates); 122 discards.** Japan wave 2 and the four extensions
+  LANDED at review time on 2026-10-03; both kits are deleted. Published
+  artifact (version 8): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- **The 12 candidates come from the coverage sweep** (its section below),
+  screened, licence-read and banded by the owner on 2026-10-03.
 - A build session may ask staging to correct a brief or re-run its checks:
   correct a brief when a check fails on a real claim (never relax the check),
   re-run on a RETRY or a 429, log each correction in the drafts file.
@@ -92,8 +92,10 @@ the pointers. **Delete a section when its item is done.**
 
 ## NEXT - pick up here
 
-1. **The coverage sweep's first group** (section below): band moves to the
-   owner, then licence reads, briefs and the master list.
+1. **Briefs for the eleven A and B cities** (`docs/build_briefs/`, each with
+   a checks block and its notices, the downstream card-face line), then a
+   kit when the owner releases a build. Every fact is in the screens and the
+   drafts file's licence-read entry.
 2. **Watch-item dates** from `docs/recheck_calendar.md`:
    - Tainan, 18 Oct;
    - Salvador and Teresina, after 25 Oct;
@@ -113,27 +115,27 @@ the pointers. **Delete a section when its item is done.**
    - Re-probes of Band C open gaps (`reprobe-city`) and the Band R cities
      whose blockers have a date.
 
-## Coverage sweep (2026-10-03): first group screened
+## Coverage sweep (2026-10-03): first group banded
 
 Sweep reports in the staging scratchpad,
 `...\54e23bab-5cd9-4850-8946-900a2a7b665b\scratchpad\sweep\`, screens in
-`...\scratchpad\screens\` (readable by path while the machine keeps them).
-Every owner call is in `docs/decisions_drafts/staging.md`. The owner approved
-the first group's screens, two Belgian downloads, Belgium off "Countries
-ruled out" once Brussels is confirmed, and Mendoza for a build.
+`...\scratchpad\screens\`, licence-read notes beside them (readable by path
+while the machine keeps them). Every owner call and every licence verdict is
+in `docs/decisions_drafts/staging.md`; the bands are in the master list.
+Cached: `data/belgium/raw/` (FAVV CSV, LoGIC GeoPackage),
+`data/mendoza/raw/comercios_limpio.json`, each with a meta JSON; SEMAS's ZIP
+was already cached. Tacoma's disclaimer text: `scratchpad\notice_utf8.txt`.
 
-| City | Screened | Proposed |
-|---|---|---|
-| Daejeon | 50,939 storefronts (SEMAS, cached), Line 1, 22 stations | R to A |
-| Gwangju | 47,214 (district codes 12210-12330 after the merger), Line 1, 20 | R to A |
-| Gimhae | 17,879, Busan-Gimhae LRT, 12 in the city | R to A; own page or Busan regional |
-| Liverpool (Regional) | FSA, about 7,400 storefronts in four councils, Merseyrail 59 stations | B, if Merseyrail is an exception (every 15 min by day) |
-| Mendoza | 8,309 businesses, 100% placed (JSON cached), 7 stations | **A (owner)** |
-| Tacoma | 11,812 licences in the city, NAICS, T Line 12 stops | C until a licence read |
-| Belgium | Screen running at the pause | - |
+- **A (6):** Daejeon, Gwangju, Gimhae (own page), Mendoza, City of Brussels,
+  Tacoma.
+- **B (5):** Liverpool (Regional), Antwerp, Ghent, Charleroi, Liège.
+- **D (1):** Brussels (Regional), the owner's free KBO account; companies only.
+- **Second group, unscreened:** Jerusalem, Macau, Almaty and Astana,
+  Thessaloniki, Ahmedabad, Timișoara, Iași, Cluj, Basel, Geneva, Norrköping,
+  Quito, Cuenca.
 
-Still open: delete the scratchpad's accidental Mendoza CSV (recommended).
 The owner asked that Cleanup and the map-dot session get memory priority.
+One browser-using agent at a time (the pane is shared).
 
 ## Japan: what wave 2's scoping left (2026-10-02)
 
