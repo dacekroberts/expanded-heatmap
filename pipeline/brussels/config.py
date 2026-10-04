@@ -12,6 +12,11 @@ Brussels (Regional), a separate page on a different source, never merged here.
 from pathlib import Path
 
 SLUG = "brussels"
+# The brief's proposals (docs/build_briefs/brussels.md), checked against
+# app/cities.py and the brief by scripts/brief_check.py.
+MAP_MODE = "metro"
+MAP_COVERAGE = "full"
+SCOPE = "city"
 
 # --- Paths ---------------------------------------------------------------
 
