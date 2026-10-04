@@ -204,10 +204,10 @@ a rule, not before obeying one.
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
 - **Python is capped at 8 GB a process, 12 GB with its children**
-  (`scripts/python_memcap.py`, installed as `usercustomize.py`). **At most two
+  (`scripts/python_memcap.py`, installed as `usercustomize.py`). **At most three
   heavy jobs on the machine, each admitted by the gate against the memory
   actually available: `python scripts/heavy_job.py run --label <job>
-  --session <you> -- <command>`** (owner, 2026-09-30;
+  --session <you> -- <command>`** (owner, 2026-09-30; three since 2026-10-04;
   `docs/session_roles.md`). A refused job waits (`--wait <minutes>`) and says
   so to the others; `heavy_job.py status` names what is holding the memory.
   **Measured figures are the norm** (owner, 2026-10-03): with `--peak-gb`

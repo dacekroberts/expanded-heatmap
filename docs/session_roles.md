@@ -243,14 +243,18 @@ One courtesy that avoids most of it: **do not edit a shared file that another
 session currently has modified and uncommitted.** `git status` in the main
 checkout shows this. Leave the line for them, or add it after they commit.
 
-## At most two heavy jobs, each admitted by the gate
+## At most three heavy jobs, each admitted by the gate
 
 Every session shares one 16 GB machine. On 2026-09-28 heavy jobs from several
 sessions overlapped, the machine ran out of memory, and Windows closed the
 Claude app twice, ending every session's turn (DECISIONS; `CLAUDE.md`
 `[#memory]`). The owner's rule of 2026-09-28 was one heavy job at a time,
-announced by message. **Since 2026-09-30 (owner) two may run at once, each
-admitted by `scripts/heavy_job.py`** against the memory actually available.
+announced by message. **Since 2026-09-30 (owner) two could run at once, and
+since 2026-10-04 three (owner, with no other heavy processes open on the
+machine), each admitted by `scripts/heavy_job.py`** against the memory
+actually available. The count is a ceiling, not a promise: with three build
+sessions running, the memory test is what usually refuses a job. If other
+heavy programs come back onto the machine, return `MAX_JOBS` to 2.
 
 - **A heavy job** is anything likely to pass 2 GB or run for minutes: a
   multi-city drift check, a full re-render, `deploy-verify`, a join or read
@@ -259,7 +263,7 @@ admitted by `scripts/heavy_job.py`** against the memory actually available.
   5.4 GB). A streamed read is not: France's SIRENE step 2 measured 0.37 GB.
 - **Run it through the gate:**
   `python scripts/heavy_job.py run --label "<city> <step>" --peak-gb <N> --session <you> -- <command>`.
-  It admits the job only if fewer than two are running and available memory,
+  It admits the job only if fewer than three are running and available memory,
   less what running jobs have yet to claim, covers the peak plus 2 GB. It
   removes the entry when the job ends and records the MEASURED peak, so state
   the last measured figure next time (`heavy_job.py status` lists them). An

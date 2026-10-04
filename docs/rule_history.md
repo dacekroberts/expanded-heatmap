@@ -547,6 +547,14 @@ reader had already found and immediately found five more.
   step 2 at 0.37 GB (estimated 1.5) and the Czech register control at
   0.37 GB (estimated 2.5), both streamed. A gate was chosen over a monitor
   because a monitor polls all day and reacts after the damage.
+- **Since 2026-10-04, three heavy jobs at most (owner: "allow three heavy
+  jobs since i have no other open processes").** Three build sessions had
+  started at once (Korea, new cities, Belgium). The count was raised, not
+  the margin: each job is still admitted against measured available memory
+  with 2 GB to spare, and the measured peaks of that week were mostly under
+  1.5 GB (a full render-only sweep 2.06 GB, a Japanese multi-city drift
+  4.7 GB). The condition is the owner's: no other heavy programs open. If
+  they return, `MAX_JOBS` goes back to 2.
 
 ## Commands
 

@@ -1,5 +1,6 @@
-"""The heavy-job gate: at most two heavy jobs on the machine, each admitted
-against the memory actually available (owner, 2026-09-30).
+"""The heavy-job gate: at most three heavy jobs on the machine, each admitted
+against the memory actually available (owner, 2026-09-30; three since
+2026-10-04, with no other heavy processes on the machine).
 
 WHY A GATE, NOT A MONITOR. Every session shares one 16 GB machine. On
 2026-09-28 overlapping jobs ran it out of memory and Windows closed the Claude
@@ -58,7 +59,9 @@ from pathlib import Path
 import psutil
 
 ROOT = Path(__file__).resolve().parents[1]
-MAX_JOBS = 2
+# Two from 2026-09-30; three from 2026-10-04 (owner: "allow three heavy jobs
+# since i have no other open processes"). Memory still decides each one.
+MAX_JOBS = 3
 MARGIN_GB = 2.0
 DEFAULT_PEAK_GB = 8.0
 BIG_PROCESS_GB = 1.5
@@ -295,8 +298,10 @@ def selftest():
     case("a just-started 5.4 GB job holding 1 GB reserves 4.4 GB", abs(reserved - 4.4) < 1e-9 and not ok)
     ok, _, _ = decide([job(1, 5.4)], 0.5, 7.0, {1: 5.0})
     case("the same job at 5 GB reserves 0.4, so a 0.5 GB job fits in 7 GB", ok)
-    ok, why, _ = decide([job(1, 0.5), job(2, 0.5)], 0.5, 12.0, {})
-    case("a third job is refused however much is free", not ok and "at most" in why)
+    ok, _, _ = decide([job(1, 0.5), job(2, 0.5)], 0.5, 12.0, {})
+    case("a third job is admitted when memory allows", ok)
+    ok, why, _ = decide([job(1, 0.5), job(2, 0.5), job(3, 0.5)], 0.5, 12.0, {})
+    case("a fourth job is refused however much is free", not ok and "at most" in why)
     case("a dead pid is dropped on read", live([job(1, 1), job(2, 1)], alive=lambda p: p == 2) == [job(2, 1)])
 
     hist = [{"label": "kyoto step 2", "measured_gb": 0.30, "ended": "d1"},
