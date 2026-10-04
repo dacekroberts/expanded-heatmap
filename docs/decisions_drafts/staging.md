@@ -4,6 +4,36 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Bremen to B, retail only; Gelsenkirchen's licence settled; Kurashiki measured (owner)
+
+- **Bremen, "75 approved":** the 2022 regional retail survey (fieldwork
+  2022-03 to 2022-09, CC BY as stated, 172,889 bytes, cached) holds 3,153
+  placed points in the City of Bremen, goods group and floor-area class
+  only, no name or address field, small shops kept. One full bucket, so B
+  as a retail-only page; a licence read before any build; the survey passes
+  the five-year rule until 2027. Trams: BSAG's 8 lines, about 165 stops.
+- **Gelsenkirchen's licence read: permitted, Datenlizenz Deutschland Zero
+  2.0** on every record in the city's own catalogue and the Ruhr portal; the
+  "other-closed" tag exists only on open.nrw's re-harvest, its default where
+  the Ruhr portal's DCAT export carries no licence. The city's website terms
+  restrict by default but defer to each dataset's metadata (they name the BY
+  2.0 version; a credit satisfies both readings; read from 2026 snapshots,
+  the live host refusing curl). The survey's date is unknown. **The owner:
+  "74. yes"**, fetch its five layers from the city's map service to measure
+  counts, fill, centre bias and any date; it stays in C until then.
+- **Kurashiki measured** (the approved 791,423-byte CSV, cached): 3,172
+  permits, all under the 2021 law, so old-law permits in force are missing;
+  飲食店営業 2,446 = 52.6% of the 4,653 in force; 89.0% addressed;
+  coordinate columns empty; no operator-name column. It stays in C on the
+  city's pre-2021 list.
+- **The summary rows are numbers only from tonight** (the efficiency
+  review's change 1, landed by Cleanup at 27b43122): staging's merge took
+  master's rows and ran `scripts/regen_generated.py`; the dated moves live
+  in these drafts and, once folded, in DECISIONS.
+- **The Guadalajara duplicate-station fix** went to the Mexico City
+  station-fix session (the owner: "send to mexico city"), building on its
+  branch so both re-renders land together at review time.
+
 ### 2026-10-04 - Central Europe, Germany north and Sagamihara banded (owner)
 
 - **The owner: "65-67 D, 68-72 approved, 73 yes".** Staging reads 65-67 as
