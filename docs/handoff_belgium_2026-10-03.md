@@ -66,8 +66,8 @@ Decisions in `docs/decisions_drafts/belgium.md`, newest first.
 4. **Antwerp's left bank**: the approved Overpass query (tram route
    relations 3, 9 and 15, `fetch_sources.py --left-bank-trams`) found no
    such relations on overpass-api.de (an empty answer, twice) and timed out
-   on kumi.systems; one retry after the minute is recorded in the drafts
-   when it lands. If OSM has none, the remaining source is De Lijn's notice,
+   on kumi.systems; the one retry after the minute did the same (drafts).
+   A broader query (every tram route in the box) is a new query: the owner.s call; else De Lijn.s notice,
    which the build cannot republish.
 
 **Still to do after those**: the drift check; merge origin/master and

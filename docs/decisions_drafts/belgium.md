@@ -4,6 +4,18 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then empties this file (owner, 2026-09-30).
 
+### 2026-10-04 - Antwerp's left-bank query (call 5): no tram route relations returned; the closed stations stay unlisted
+
+- **The approved query found nothing to list.** `fetch_sources.py
+  --left-bank-trams` (route=tram relations with ref 3, 9 or 15 in Antwerp's
+  rail box, their member nodes) was sent once and retried once after the
+  owner's minute: overpass-api.de answered with no elements both times
+  (`pipeline/osm.py` does not trust an empty 200), and overpass.kumi.systems
+  answered 504 and then timed out. Either OSM's relations are tagged
+  otherwise or were removed during the works; a second, broader query would
+  be a new query and is the owner's call. The left-bank stations stay
+  unlisted (config.CLOSED_FOR_WORKS_OPEN_QUESTION), as the page states.
+
 ### 2026-10-04 - Brussels (Regional) built: KBO on BeST-Address, companies only, two categories; STIB's whole network
 
 - **Built Brussels (Regional) (page 201)**: the Brussels-Capital Region's 18
