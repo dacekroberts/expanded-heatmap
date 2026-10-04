@@ -63,6 +63,7 @@ DOC = Path(__file__).parent.parent.parent / "docs" / "data_sources.md"
 # Both are the provenance record, so the page renders both - the entry point
 # alone would publish the notices and drop every endpoint.
 COUNTRY_DOCS = sorted((DOC.parent / "data_sources").glob("*.md"))
+NOTICES_LEDGER = "Notices this project MUST display when published"
 
 # The files link to each other as FILES (`data_sources/canada.md`,
 # `../data_sources.md`), which works on GitHub and opens a blank page here:
@@ -129,7 +130,11 @@ else:
     st.warning(f"docs/data_sources/{country_doc.name} is missing from this "
                "checkout.")
 if DOC.exists():
-    parts = parts_of(DOC)
+    # The notices ledger is the project's record of each obligation and when
+    # it was met; the notices themselves are on the Required notices page
+    # (owner, 2026-10-03: kept off this page). Its entries are split by
+    # country, so they are dropped here rather than skipped by title.
+    parts = [p for p in parts_of(DOC) if NOTICES_LEDGER not in (p["title"], p["top"])]
     st.markdown(in_page(country_text(parts, country)))
     st.divider()
     st.markdown(INTRO)

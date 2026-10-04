@@ -1314,6 +1314,31 @@ WHEEL_ZOOM_SCRIPT = """
 })();
 </script>
 """
+# LEAFLET'S OWN CREDIT OPENS IN A NEW TAB (owner, 2026-10-03), as the OSM credit
+# does (OSM_ATTRIBUTION): every map sits in an iframe, so a plain link replaced
+# the map with the linked site inside the frame. The prefix is Leaflet's own,
+# flag and all, with only a target added; setPrefix survives the control's
+# re-renders, where editing its links in the DOM would not.
+CREDIT_TAB_SCRIPT = """
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    function start() {
+        var m = window[NAME], ac = m && m.attributionControl;
+        if (!ac || typeof ac.options.prefix !== "string") return;
+        var p = ac.options.prefix;
+        if (p.indexOf("target=") === -1) {
+            ac.setPrefix(p.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '));
+        }
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+"""
 # PICK ONE LINE OUT (owner, 2026-09-30, from the live site on an iPhone).
 # Where lines share track, the one drawn last covers the rest completely:
 # Daugavpils' line 2 was never visible under the purple, Saint-Etienne's trams
@@ -2914,6 +2939,14 @@ def _require_lang_for_cjk(businesses, lang, city_name):
             f"and the cjk-text skill.")
 
 
+# The basemap credit ODbL requires, linked to OSM's copyright page and opened
+# in a new tab (see the TileLayer in render_heatmap).
+OSM_ATTRIBUTION = (
+    '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" '
+    'rel="noopener noreferrer">OpenStreetMap</a> contributors'
+)
+
+
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
@@ -3031,7 +3064,15 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # with no visible console error. The app pages embed the map at this
     # same fixed size; change them together.
     m = folium.Map(location=center, zoom_start=zoom, tiles=None, width=1000, height=650, zoomSnap=0.25)
-    folium.TileLayer(tiles="OpenStreetMap", name=map_title).add_to(m)
+    # The credit opens OSM's copyright page in a NEW TAB (owner, 2026-10-03):
+    # every map is embedded in an iframe, and openstreetmap.org sends
+    # X-Frame-Options: SAMEORIGIN, so a plain link loaded the page inside the
+    # map's frame and showed "refused to connect". check_provenance.py
+    # requires the target on every map.
+    folium.TileLayer(
+        tiles="OpenStreetMap", name=map_title,
+        attr=OSM_ATTRIBUTION,
+    ).add_to(m)
 
     # Two heat layers, same tuning, different universe: within-rings is the
     # default; the whole-city one is an opt-in for context.
@@ -3192,6 +3233,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See WHEEL_ZOOM_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         WHEEL_ZOOM_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # Leaflet's own credit opens in a new tab. See CREDIT_TAB_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        CREDIT_TAB_SCRIPT.replace("__MAP_NAME__", m.get_name())))
     # A line's legend row, or the line itself, picks it out above the others.
     # See LINE_HIGHLIGHT_SCRIPT.
     m.get_root().html.add_child(folium.Element(

@@ -18,7 +18,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.residence import flag_home_based, report  # noqa: E402
+from pipeline.residence import flag_home_based, looks_personal, report  # noqa: E402
 from pipeline.san_diego.config import (  # noqa: E402
     BUSINESSES_RAW_CSV,
     BUSINESSES_CLEAN_CSV,
@@ -170,6 +170,29 @@ def main():
         print(f"NOTE: no {PARCELS_CENTROIDS_CSV.name}, so the home-business "
               f"filter did NOT run. Build it with "
               f"pipeline/san_diego/fetch_parcels.py, then re-run.")
+
+    # --- A registrant's own name shows the street address --------------------
+    # Kansas City's rule as Los Angeles applies it (owner, 2026-10-01), widened
+    # to a trade name that IS the registrant's own name (owner, 2026-10-03;
+    # DECISIONS "San Diego and Los Angeles: a trade name that is the
+    # registrant's own name"): dba_name repeating business_owner_name verbatim
+    # gives no trade name, so where it reads as a person (the exposure check's
+    # looks_personal) the pin keeps its place and shows its street address,
+    # without the suite. Measured before the change: 128 of 423 person-like
+    # names on the map, 120 of them sole proprietorships. HERE, AFTER the home
+    # filter, which tests the displayed name.
+    names = df["business_name"].fillna("").astype(str).str.strip()
+    owner = df["business_owner_name"].fillna("").astype(str).str.strip()
+    own = (names != "") & (names.str.upper() == owner.str.upper()) & names.map(looks_personal)
+    street = (df[["address_no", "address_no_fraction", "address_pd", "address_road", "address_sfx"]]
+              .fillna("").astype(str).agg(" ".join, axis=1)
+              .str.split().str.join(" "))
+    if (own & ~street.str.contains(r"\d", regex=True)).any():
+        sys.exit("a registrant's own name has no street number to show in its place")
+    df["name_is_address"] = own
+    df.loc[own, "business_name"] = street[own]
+    print(f"A registrant's own name shows the street address instead (pins kept): "
+          f"{int(own.sum()):,}")
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(BUSINESSES_CLEAN_CSV, index=False)

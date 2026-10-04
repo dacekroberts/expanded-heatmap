@@ -264,6 +264,7 @@ python scripts/check_map_markup.py [--verbose]          # dark-mode label contra
 python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
 python scripts/check_internal_markers.py [--selftest]   # every <!-- internal --> span closed, contained, clean
+python scripts/check_internal_prose.py [--counts|--surface S|--kind K]   # REPORTS only: note-like prose a reader can see
 python scripts/check_city_page_format.py [--selftest]   # every city page: title, map, ..., notices last; no repo path in its text
 python pipeline/name_keys.py "NAME" ["NAME" ...]        # the key to list for a name read as a person's own
 python scripts/check_inline_arrays.py [--report|--selftest]   # no JS array an iPhone cannot compile; after any re-render

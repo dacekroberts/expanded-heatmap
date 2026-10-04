@@ -167,7 +167,27 @@ def public(text):
     An unclosed marker removes nothing, so a typo never swallows the rest of a
     page."""
     text = INTERNAL.sub("", text)
+    text = OWNER_TAG.sub(_owner_tag, text)
     return re.sub(r"\n{3,}", "\n\n", text)
+
+
+# THE DECISION LOG'S ATTRIBUTION TAGS STAY IN THE DOCS, NOT ON THE PAGE
+# (owner, 2026-10-03, from the live audit): "(owner, 2026-09-29)", "(owner)",
+# "(owner's rule)" and the like, about 300 across the rendered docs. A tag that
+# carries a fact after a colon or semicolon keeps the fact: "(owner; 331
+# dropped)" reads "(331 dropped)". One whose remainder is only a quoted reply
+# goes whole. "a sole owner" and other business owners are not in brackets of
+# this form, so they stay. scripts/check_internal_prose.py reads through this.
+OWNER_TAG = re.compile(r"[ \t]*\((?:the )?owner\b([^()]*)\)", re.I)
+
+
+def _owner_tag(match):
+    rest = re.split(r"[:;]", match.group(1), maxsplit=1)
+    fact = rest[1].strip() if len(rest) == 2 else ""
+    if not fact or fact[0] in "\"'“":
+        return ""
+    whole = match.group(0)
+    return whole[:len(whole) - len(whole.lstrip(" \t"))] + f"({fact})"
 
 
 def shared_text(parts, skip_titles=()):

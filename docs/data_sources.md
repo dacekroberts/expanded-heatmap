@@ -207,7 +207,7 @@ Each source's reading is in its country's file: the rows of the tables
 *Explicit and permissive — confirmed* and *Transit feeds (GTFS)*, the sections
 on Madrid, Seoul, Daegu and Busan, Brazil, Taiwan, Japan, CRTM and Barcelona,
 and the United States' own tables and open questions (*Permissive on reading
-the terms themselves*, *Still not established*, the API-account practice, the
+the terms themselves*, *Still not established*, <!-- internal -->the API-account practice, <!-- /internal -->the
 agency-branding question). What stays here is what applies to every city.
 
 ### Transit feeds (GTFS) — checked 2026-09-21
@@ -377,7 +377,7 @@ this project to ask for one; others have since, among them Sacramento, Palma,
 Dallas and San Diego's SanGIS layers (below). **It was an owner decision, taken before the register's
 35,808 premises were wired into a page**, not once the city was live.
 
-### Hong Kong's indemnity — ACCEPTED 2026-09-22, and what the first record omitted
+### Hong Kong's indemnity — accepted 2026-09-22, and what the first record omitted
 
 **The owner accepted this on 2026-09-22, in chat, after the live clause was
 re-read.** It was the first uncapped liability in this project. Recorded here
@@ -444,7 +444,7 @@ accept Lyon's — Lyon carries two further gates (an account this project does
 not create, and a trademark clause that collides with an invariant), so it
 stays deferred on those grounds regardless.
 
-#### Sacramento's indemnity — ACCEPTED 2026-09-29
+#### Sacramento's indemnity — accepted 2026-09-29
 
 The City of Sacramento's **Open Data Terms of Use** (the same text as its Open
 Data Policy, pp. 13–18<!-- internal -->; read 2026-09-29 by the license-read agent<!-- /internal -->) govern the
@@ -461,7 +461,7 @@ on the same dataset was settled the same day: Esri's label for an
 empty license field, not a term, since the City's Terms grant use (owner, 2026-09-29<!-- internal -->;
 `docs/build_briefs/sacramento.md`<!-- /internal -->). Built on 2026-09-29.
 
-#### Palma's indemnity — ACCEPTED 2026-09-29
+#### Palma's indemnity — accepted 2026-09-29
 
 GOIB's *Política i termes d'ús*, which govern the Consell de Mallorca's
 restaurant register on the Balearic open-data catalog<!-- internal --> (read 2026-09-29 by
@@ -474,7 +474,7 @@ one source.** On the same day the owner extended Barcelona's reading of the
 took the permissive reading of Catastro's INSPIRE terms for the address join<!-- internal -->
 (`docs/build_briefs/palma.md`)<!-- /internal -->.
 
-#### Dallas's indemnity — ACCEPTED 2026-09-30
+#### Dallas's indemnity — accepted 2026-09-30
 
 The City of Dallas's **Standard GIS Data Disclaimer of Liability** (2015-12-04; the
 linked PDF is dead, and the current copy is ArcGIS item `115c0fe8ed4b4a12a669f5e48dc56d52`)
@@ -494,7 +494,7 @@ read on 2026-09-30 by the license-read agent.<!-- /internal -->
 - **Prose rule:** never call Dallas's pin locations surveyed or exact.
 - **Optional credit:** "City of Dallas Development Services GIS".
 
-#### San Diego's SanGIS indemnity — ACCEPTED 2026-10-02
+#### San Diego's SanGIS indemnity — accepted 2026-10-02
 
 The **SanGIS GIS Data End User Use Agreement and Disclaimer for Data Released
 to the Public** (2015-04-02) governs both SanGIS layers the San Diego build

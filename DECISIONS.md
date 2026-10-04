@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**499 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**505 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -73,6 +73,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Visuals rebuilt for 158 cities at master 37eec480: 143 cards, every count updated](#2026-10-03---visuals-rebuilt-for-158-cities-at-master-37eec480-143-cards-every-count-updated)
 - [Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun](#2026-10-03---vancouvers-130-132-on-the-card-face-private-pages-moved-to-analytics-37eec480-rerun)
 - [Region captions read "in the United States" (owner)](#2026-10-03---region-captions-read-in-the-united-states-owner)
+- [San Diego and Los Angeles: a trade name that is the registrant's own name shows the street address (owner)](#2026-10-03---san-diego-and-los-angeles-a-trade-name-that-is-the-registrants-own-name-shows-the-street-address-owner)
+- [Every map's OpenStreetMap and Leaflet credits open in a new tab (owner)](#2026-10-03---every-maps-openstreetmap-and-leaflet-credits-open-in-a-new-tab-owner)
+- [The stations-left-out tables sort by line or reason (owner)](#2026-10-03---the-stations-left-out-tables-sort-by-line-or-reason-owner)
+- [The OpenStreetMap rail notice: each city page shows its own line, Required notices keeps the full list (owner)](#2026-10-03---the-openstreetmap-rail-notice-each-city-page-shows-its-own-line-required-notices-keeps-the-full-list-owner)
+- [The live audit after the review-time landings, and the internal prose it found (owner)](#2026-10-03---the-live-audit-after-the-review-time-landings-and-the-internal-prose-it-found-owner)
+- [Status headings on About the Data reworded (owner)](#2026-10-03---status-headings-on-about-the-data-reworded-owner)
 
 **2026-10-02**
 
@@ -20286,3 +20292,172 @@ until the owner rules):**
   already used (`_TAKES_THE` in `app/cities.py`): the United States, its
   West and East halves, the United Kingdom and the Seoul Capital Area. The
   menu labels are unchanged.
+
+### 2026-10-03 - San Diego and Los Angeles: a trade name that is the registrant's own name shows the street address (owner)
+
+- **Found by the review-time deploy check** (lane 3): a San Diego dot whose
+  name read as a person's own. San Diego's verdict of 2026-10-01 stood on 1
+  person-like name at a residential unit of 2,228 pins, but the exposure
+  check's broader heuristic counted 461 person-like names (20.7%), and the
+  owner's rule of 2026-10-03 is that a person's own name never goes on a pin.
+- **Measured (423 of the 461 matched back to the register):** 128 showed a
+  `dba_name` identical to `business_owner_name`, 120 of them sole
+  proprietorships: the registrant's own name typed into the trade-name
+  field, which is no trade name. 175 belong to corporations or LLCs, names a
+  business chose, kept as Los Angeles keeps its 1,470. 51 are sole
+  proprietors in personal services sharing a street address with other
+  accounts (the booth-renter shape, `docs/category_rules.md`), not acted on.
+  Los Angeles has the same case on about 10 pins: its own-name registrants
+  mostly leave the trade name blank, which Kansas City's rule already covers.
+- **Options put to the owner:** own-name to street address (recommended);
+  that plus a booth-renter exclusion for San Diego; or no change. **The
+  owner chose own-name to street address.**
+- **Built:** Kansas City's rule as Los Angeles applies it (2026-10-01),
+  widened: a trade name repeating the registrant's own name verbatim counts
+  as none given, and where it reads as a person (`residence.looks_personal`,
+  the exposure check's test) the pin keeps its place and shows its street
+  address. San Diego: in step 2, after the home filter, 539 rows city-wide.
+  Los Angeles: step 2 flags `own_name_dba` on City of LA rows only (Long
+  Beach fills both columns from DBANAME), step 3 reads it;
+  `name_as_address` 6,338 -> 6,422 (baseline re-recorded).
+- **Measured after, against the committed maps:** San Diego 140 names
+  changed, every one person-like to a street address, person-like pins 461
+  -> 321, at a residential unit 1 -> 0; Los Angeles 9 changed, the same way,
+  1,572 -> 1,563, at a residential unit 0. Every pin's position, category,
+  station and ring identical in both; storefronts unchanged (San Diego 2,228
+  in rings of 9,124, Los Angeles 14,642 of 60,740). Los Angeles steps 2-4
+  measured 0.46 GB.
+- **Privacy verdicts:** San Diego publish, Los Angeles (Regional) publish,
+  re-recorded on these numbers. San Diego's page gains "The businesses" with
+  Los Angeles's approved sentence, less its dwelling-unit clause: "Where a
+  business is registered under a person's name alone, with no trade name,
+  the map shows its street address instead of a name."
+- **Left open:** the 51 booth-renter-shaped pins, and San Diego's 62 sole
+  proprietors with person-like names under the 452 catch-all, for a later
+  look.
+
+### 2026-10-03 - Every map's OpenStreetMap and Leaflet credits open in a new tab (owner)
+
+- **The owner's report:** the "OpenStreetMap contributors" link is broken.
+  Cause: every map is embedded in an iframe, the credit link had no target,
+  and openstreetmap.org sends `X-Frame-Options: SAMEORIGIN`, so a click
+  loaded the copyright page inside the map's frame, which refused it.
+  Leaflet's own credit (leafletjs.com allows framing) replaced the map with
+  Leaflet's site inside the frame; **the owner asked for it to open in a new
+  tab as well.**
+- **Built in `pipeline/map_common.py`:** the tile layer takes
+  `OSM_ATTRIBUTION`, the same credit with `target="_blank"` and
+  `rel="noopener noreferrer"`; a new shared block, `CREDIT_TAB_SCRIPT`, adds
+  the same target to Leaflet's prefix through `setPrefix`, keeping its flag,
+  so it survives the control's re-renders (checked after a zoom).
+- **Check:** `check_provenance.py` now fails a map whose OSM credit link has
+  no new-tab target (158 failed before the re-render, 0 after);
+  `check_render_current.py` picks up the new block on its own (12 shared
+  blocks).
+- **All 158 maps re-rendered** (`drift_check.py --render-only --jobs 2`,
+  measured 2.06 GB). Against the committed maps, every one differs only by
+  the credit's attributes and the new block; `check_html_lang.py` passes.
+
+### 2026-10-03 - The stations-left-out tables sort by line or reason (owner)
+
+- **The owner asked** for the stations-left-out tables to be sortable by
+  reason or line. Options put to the owner: a "Sort by" button row above
+  the same styled table (recommended), or Streamlit's native sortable grid,
+  whose header cannot take the site's styling. **The owner chose the button
+  row.**
+- **Built in `components.render_excluded_stations`:** `st.segmented_control`
+  "Sort by" with "As listed" (the file's order, the default), "Line" (only
+  where the file records lines) and "Why"; the station name breaks ties.
+  Shown only for a table of two or more rows. Checked locally on San
+  Francisco's 85 rows: each order re-sorts the table and the expander stays
+  open.
+
+### 2026-10-03 - The OpenStreetMap rail notice: each city page shows its own line, Required notices keeps the full list (owner)
+
+- **The owner asked** whether the "OpenStreetMap (rail geometry)" notice
+  must list every city on every page. Measured: it showed on 120 city pages,
+  690 words each, naming all 120 cities. ODbL 1.0 (4.3) and OSM's
+  attribution guidelines ask for the credit, the licence and a link, not an
+  inventory of what was taken, so the list per page was this project's
+  choice, not a term.
+- **Options put to the owner:** each city's own line plus the full list on
+  Required notices (recommended); own line plus a one-sentence summary
+  there; or no change. **The owner chose the first**, with this form for
+  Ottawa: "From OpenStreetMap: Ottawa's O-Train Lines 1, 2 and 4 and their
+  stations. © OpenStreetMap contributors, available under the Open Database
+  License. The alignments drawn are OSM's own geometry; stations, rings and
+  categories are this project's work."
+- **Built:** `app/osm_notice.py` holds one fragment per city, each restating
+  the full list's words for that city, and whether its map draws OSM's own
+  line geometry: the closing sentence about alignments is left off where it
+  would be false (Oslo's and Bergen's colors, the Japanese cities' English
+  station names, Prague's, Amsterdam's and Rotterdam's boundaries,
+  Philadelphia's one station location). `Notice` gains `per_city`;
+  `city_notices()` swaps in the city's line, so the Visuals cards built
+  from it take the short form too. `components.py` raises if the
+  fragments' cities and the notice's differ. Per-city lines run 14 to 49
+  words.
+- **The full list gained Japan wave 2's 14 cities** (Kawasaki to
+  Shimonoseki), which its tuple covered but its text had never named, and
+  its two "colours" became "colors" (US spelling, owner 2026-10-01).
+- **Check:** `check_provenance.py` now looks for each city's own line on its
+  page and requires it to carry "© OpenStreetMap contributors" and the
+  licence. Rendered locally: Ottawa's page shows its line and not the list;
+  Required notices shows the full list with the wave 2 cities.
+
+### 2026-10-03 - The live audit after the review-time landings, and the internal prose it found (owner)
+
+- **The audit (owner: "audit our new version of the site"):** after the
+  reboot at master 37d9a374, five live lanes: the 158 city pages in four
+  (at 375 and 1200, light, a dark sample every tenth city) and the site
+  pages in one. **Every page passed**: no page errors, every map at its
+  expected zoom with 0 guard corrections, the OSM credit uncovered with both
+  credit links opening a new tab, the stations-left-out sort control right
+  where the table has two or more rows, no horizontal overflow at 375; the
+  Overview's 19 captions as approved; About the Data and What Is Excluded
+  with Japan under East Asia (51); Required notices with all 137 notices.
+  Harness note for the next audit: the lanes share the app origin's
+  localStorage, so one lane's dark sample can flip another's map theme.
+- **The one finding:** About the Data showed research notes, "Boston - Step
+  0 findings, 2026-09-21" and "The owner's API-account practice". **The owner
+  asked for a check for internal prose left on the pages.**
+  `scripts/check_internal_prose.py` (REPORTS only) reads what the two
+  reference pages render, through the app's own filter, and flags process
+  words, owner and log references, repository paths, dated research, status
+  capitals, status emoji and first person: 2,234 hits at first, most in the
+  source tables, which the page says it shows "as the project keeps it".
+- **Options put to the owner, all four chosen:**
+  - research-note sections hidden: Boston's Step 0 findings, Dublin's and
+    Madrid's "endpoints and findings", and the API-account practice (to the
+    end of its own text; the licence judgment calls after it stay), plus the
+    two cross-references that pointed at them;
+  - the notices ledger ("Notices this project MUST display when published")
+    kept off About the Data: its entries are split by country, so the page
+    drops every ledger part, not only the shared one; Required notices
+    shows the notices themselves;
+  - the decision log's "(owner, date)" tags stripped in
+    `country_sections.public()`: 311 across the pages, 0 after; a tag with a
+    fact after a colon or semicolon keeps the fact ("(owner; 331 dropped)"
+    reads "(331 dropped)"); "a sole owner" and other business owners stay;
+  - status headings ("DECIDED", "BUILT", "built ...") reworded, the new
+    wording to the owner first (pending).
+- **`check_internal_markers.py` rule C** no longer fails a BLOCK span that
+  holds a table: a span inside a cell breaks the table, a span hiding whole
+  lines cannot (new self-test case, 14 of 14).
+- **After:** the scanner reports 902 hits, nearly all inside the source
+  tables, left as provenance; rendered locally, the United States view
+  shows no Step 0 notes, no API-account section, no ledger and 0 owner tags,
+  and the licence judgment calls still show.
+
+### 2026-10-03 - Status headings on About the Data reworded (owner)
+
+- **Approved as proposed:** build status leaves the headings ("(BUILT ...)",
+  "(built ...)", "DECIDED ... -"), read and checked dates stay (they date the
+  terms), verdict capitals go to lowercase. Sixteen headings across brazil,
+  south-korea, spain, taiwan, sweden, switzerland and data_sources.md; for
+  example "✅ DECIDED 2026-09-22 — Barcelona is published on a DISCLOSED
+  POSITION" reads "Barcelona is published on a disclosed position", and
+  "Hong Kong's indemnity — ACCEPTED 2026-09-22, ..." reads "accepted". No
+  file, skill or doc outside the decision log quoted an old heading; the
+  rendered Spain, South Korea and Taiwan views show the new ones. Capitals
+  inside table cells ("**BUILT 2026-09-21**") were not part of the ruling.

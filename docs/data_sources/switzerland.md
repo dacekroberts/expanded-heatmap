@@ -36,7 +36,7 @@ cities: none has been probed.
 "Historisierte Bestände der Gastwirtschaftsbetriebe", is the same register's
 year-end counts since 2012 (one CSV, CC0, updated 19.02.2026). Not used.
 
-### Zurich's license: PERMITTED (CC0), read 2026-09-30
+### Zurich's license: permitted (CC0), read 2026-09-30
 
 | Document | Says |
 |---|---|

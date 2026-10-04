@@ -21,27 +21,37 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **Audit the new version of the site once the next deploy lands
-  (owner, 2026-10-03).** Expected to be the mobile-tap-targets landing at
-  review time; the audit follows the live check of its three asks.
+- [ ] **Desktop leftovers from the touch fix (for the owner, 2026-10-03):**
+  on desktop, stations sit under lines, so hovering a station's centre
+  shows the line (Paris and Tokyo 0 of 6); and a click on a spiderfied dot
+  still closes the group. Raising stations above lines, or the panel on
+  desktop, would change the desktop map. DECISIONS 2026-10-03, "A tap on a
+  phone selects the nearest dot".
 
-- [ ] **Land mobile-tap-targets at review time** (branch at b68903a5, ready
-  2026-10-03; owner approved, touch only). At landing: fold its drafts,
-  re-check the three asks at 375 (tap reach, the fixed panel and ring, a
-  spiderfied group surviving the second tap), deploy-verify `map-chrome`;
-  no app/ diff, so no reboot. Left for the owner by that session: on
-  desktop, stations sit under lines (hovering a station centre shows the
-  line), and a spiderfied group still closes on a desktop click.
+- [ ] **Waiting on the owner (from the 2026-10-03 cleanup handoff):**
+  - Japan, from wave 2's drafts (DECISIONS 2026-10-03, "Japan wave 2: the
+    shared-code pass" and "The name rule treats a cooperative..."): (a) the
+    seven opt-in address rules for the 20 earlier Japanese cities (unplaced
+    rows fall: Fukuoka 92 to 29, Hiroshima 152 to 7, Kumamoto 62 to 14,
+    Matsuyama 84 to 63; nine maps re-render); (b) the cooperative rule for
+    them (about 30 co-op trade names un-withheld across eight maps); (c)
+    deli-by-form permits as Food shops (about 55 pins across eight cities,
+    plus wave 2's); (d) Sasebo's 4 カフェー permits: Food service or adult
+    venue; (e) "a JR stretch left out for frequency" as a standing
+    station-scope row, or Shimonoseki alone; (f) Kawasaki's macro dot at
+    Shin-Yurigaoka. Cleanup recommends yes to (a) and (b), lean yes to (c).
+  - Each page's "Data:" line still prints ISO dates ("as of 2026-08-31")
+    while the prose uses "August 31, 2026". US style suggests changing the
+    line's formatter; ask first, it touches every page.
+  - São Paulo's Linha 6-Laranja stays out until full service (owner OK'd
+    the sentence); re-check when it leaves trial operation.
 
-- [x] **The macro-info pages (owner, 2026-10-03):** Why the Maps Differ's
-  key above its table; Japan folded into East Asia in the country selector.
-  DECISIONS 2026-10-03, "The country selector folds Japan into East Asia".
-  Live once pushed and rebooted.
-
-- [x] **The Overview's region caption against its labels (owner,
-  2026-10-03).** DECISIONS 2026-10-03, "Overview: a region view's caption
-  names the regions whose anchors it labels"; `check_macro_labels.py`
-  holds it at 375, 768 and 1200. Live once pushed and rebooted.
+- [ ] **San Diego's names, the rest (DECISIONS 2026-10-03, "San Diego and
+  Los Angeles: a trade name that is the registrant's own name"):** 51
+  sole-proprietor personal-services pins sharing an address with other
+  accounts (the booth-renter shape; measure with the suite field before
+  any exclusion), and 62 sole proprietors with person-like names under the
+  452 catch-all.
 
 - [ ] **Overview at phone width (found at the 2026-10-03 review landing):**
   - **Split Japan West in two (owner, 2026-10-03: approved).** Its zoom is

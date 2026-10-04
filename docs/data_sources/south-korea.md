@@ -70,7 +70,7 @@ deploy gate are in the main file, not here.<!-- /internal -->
 |---|---|---|
 | **Seoul** — the seventeen `인허가 정보` datasets below (**built 2026-09-25**, notice 18, Seoul Metropolitan Government; 8 read 2026-09-22, 9 checked 2026-09-24) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
 
-#### Seoul — eight `인허가 정보` datasets, read 2026-09-22 (BUILT 2026-09-25)
+#### Seoul — eight `인허가 정보` datasets, read 2026-09-22
 
 Recorded when the license was read; **Seoul was built 2026-09-25, so these are
 active obligations - notice 18, Seoul Metropolitan Government.** Source: `data.seoul.go.kr`,
@@ -155,7 +155,7 @@ most plausible. The project's privacy check was given a Korean-aware pass for
 the build, and Seoul withholds 138 names (a personal name at a home-looking
 address; the registry row above).
 
-### 🇰🇷 Daegu and Busan (both built 2026-09-27; notices 48 and 49)<!-- internal --> — read 2026-09-27 by the `licence-read` agent<!-- /internal -->
+### 🇰🇷 Daegu and Busan<!-- internal --> — read 2026-09-27 by the `licence-read` agent<!-- /internal -->
 
 **The same national register (LOCALDATA, 행정안전부 / 한국지역정보개발원) carries
 different declared terms depending on who republishes it.** Seoul attaches KOGL
