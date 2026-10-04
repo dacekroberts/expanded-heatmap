@@ -38,13 +38,21 @@ State, newest commits first in `git log`:
   names all five OK; `check_scope_disclosure` passes.
 - **Brussels (Regional) (201):** step 1 committed (shared
   `pipeline/countries/belgium_stib.py`; 145 stations, 45 underground, halved
-  rings). The KBO business leg was an agent's, stopped mid-work at the pause:
-  check `git status` for its uncommitted files (`pipeline/countries/belgium_kbo.py`,
-  `pipeline/taxonomies/belgium_kbo.py`, `pipeline/brussels_regional/`
-  config/fetch/step 2, the belgium_kbo column in
-  `scripts/category_continuity_table.py`) and re-run its control first. Still
-  to do for 201: step 2 to the brief, step 3 line specs, page, entry, notices
-  151 and 152, rows, What Is Excluded, privacy.
+  rings). The KBO business leg is committed as work in progress (aace0cd7:
+  the KBO reader, the BeST join, the taxonomy, step 2, `agreement.py`). Its
+  control: the join reproduces (88.2% exact against 88.5%, 97.2% placed
+  exactly); base and kept counts and rules A, C, D match exactly, B by 5.
+  **The agreement with hub.brussels misses the brief by under a point**
+  (Retail 78.2 / 75.4 against 78.2 / 76.1; Food 83.8 / 84.1 against
+  84.4 / 84.0), so step 2 stops and writes nothing. Suspected cause: this
+  build's `brussels_hub` types about 2,499 City units Retail where the screen
+  typed about 2,340; a diagnostic (`kbo/diag3.py` in this session's
+  scratchpad, not run) would confirm it, and re-basing the targets on
+  `brussels_hub` is an owner call. Not yet written: its `fetch_sources.py`
+  and provenance, the belgium_kbo continuity column (so
+  `check_category_continuity.py` fails), the privacy registry entry, the
+  near-City-station count; then step 3 line specs, page, entry, notices 151
+  and 152, rows, What Is Excluded, privacy.
 - **Antwerp/Ghent follow-up, committed:** partial gate 3 from De Lijn's
   pages matches (1 = 20, 2 = 27, 4 = 25, 6 = 25, A3 = 37, Ghent T1 = 21; the
   rest showed Sunday's diverted service, recorded as a gap). **A conflict for
