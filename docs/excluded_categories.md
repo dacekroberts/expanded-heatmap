@@ -2208,6 +2208,52 @@ the other 18 communes and beyond the Region get no ring; 7 tram stops on trams
 which never enter the City, buses and SNCB trains are not drawn. The other 18
 communes are on the Brussels (Regional) page.
 
+### Charleroi - a survey that sees every shop only in the commercial districts
+
+**Two categories.** The map is Wallonia's LoGIC 2024 survey, done on the
+ground in August 2024. It sorts each shop as retail, horeca (restaurants,
+cafés, bars and hotels), services or vacant.
+
+**Excluded** - the services class (454 units), which puts hairdressers in one
+class with banks, agencies and offices, so personal services cannot be shown;
+and 769 vacant units.
+
+**Missing rather than excluded** - the survey recorded every shop inside the
+city's 18 commercial districts but only shops over 200 m² outside them, so
+small shops away from those districts are not on the map. The districts cover
+about one ring area in nine around the stations, and nearly every surveyed
+shop near a station is inside one.
+
+**Not separated** - hotels are inside horeca.
+
+**Shown, but not named** - 33 shop signs that read as a person's own name show
+the shop's category instead.
+
+**Stations.** The light-metro lines M2, M3 and M4 are drawn. M2 runs on into
+Fontaine-l'Évêque and Anderlues, so its 10 stations there get no ring. M1,
+which the current timetable runs as a bus, M5, under construction, buses and
+SNCB trains are not drawn.
+
+### Liège - the same survey, and every stop of its one tram line
+
+**Two categories, as Charleroi.** Wallonia's LoGIC 2024 survey, done in July
+and August 2024 in Liège.
+
+**Excluded** - the services class (623 units) and 793 vacant units.
+
+**Missing rather than excluded** - every shop inside the city's 20 commercial
+districts, but only shops over 200 m² outside them. The districts cover about
+one ring area in six around the stops, and nearly every surveyed shop near a
+stop is inside one.
+
+**Not separated** - hotels are inside horeca.
+
+**Shown, but not named** - 39 shop signs that read as a person's own name show
+the shop's category instead.
+
+**Stations.** Tram T1, every one of its 23 stops, all in the city. Buses and
+SNCB trains are not drawn.
+
 ### Rome - a register of premises with no names and no closing dates
 
 **Excluded by the register's own types** - online shops (8,995), storage and

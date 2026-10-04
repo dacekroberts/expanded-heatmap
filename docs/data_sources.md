@@ -3546,6 +3546,21 @@ of 2026-10-03.)
   portal's terms, 3.1); imply endorsement. What the "Google Maps" contributor
   credit covers is not stated by the publisher; it is named as listed.
 
+**147. Service public de Wallonie, LoGIC 2024 (Charleroi and Liège) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)** for the downloaded GeoPackage
+  (the license is in the zip and on the Metawal record). Never the
+  MapServer: SPW's services terms (art. 5 §4) forbid altering the data it
+  serves. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**, verbatim, the SPW citation from the Metawal record:
+  "Source : Service public de Wallonie (SPW) - Offre commerciale en Wallonie
+  (LoGIC 2024) (2025-04-09) https://geodata.wallonie.be/id/5f56d784-2fd7-47eb-a62a-991d4741a67d";
+  that URI answers 404, so the working catalogue record is linked beside it;
+  the license link; and a statement of the changes.
+- **MUST NOT**: show an SPW or Wallonia logo, or imply endorsement.
+
 **148. STIB-MIVB (Brussels and Brussels (Regional)) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-04, from staging's licence read
 of 2026-10-03.)
@@ -3561,6 +3576,24 @@ of 2026-10-03.)
   the portal named (its FAQ).
 - **MUST NOT**: take anything from stib-mivb.be itself (its website terms are
   for private use): no logo, network map or brand material.
+
+**150. LETEC (Charleroi and Liège) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (art. 3), the operator the sole licensor; its own
+  national-access-point entry declares CC0 for the same file, and complying
+  with CC BY 4.0 satisfies either. Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: LETEC – Open Data – [date of dataset update]"
+  (art. 4), the date of the feed's own update (not the fetch date), re-dated
+  at every refresh; the modified-data line; the license title and link; the
+  portal.
+- **MUST NOT**: show the operator's logo or its short brand name in legends
+  or prose: its website terms claim both, so it is credited as "LETEC" (the
+  name the portal and the feed use) and its lines by their public names M2,
+  M3, M4 and T1 (owner, 2026-10-04). Nothing is taken from its website.
 
 
 ## Gaps

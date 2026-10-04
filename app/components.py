@@ -576,6 +576,8 @@ _OSM_RAIL = (
     "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
     "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
     "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
+    # Belgium (2026-10-04): commune boundaries only; the rail is the operators'.
+    "Antwerp", "Ghent", "Charleroi", "Liège",
 )
 # The cities whose rail is not OpenStreetMap's but whose English station names
 # are (the twenty Japanese cities: MLIT N02 lines, OSM `name:en`). Kept apart
@@ -1032,7 +1034,8 @@ _NOTICES = [
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
      "Santos, and those cities' município boundaries, and "
-     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, Hong Kong's MTR and "
+     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, the commune "
+     "boundaries of Antwerp, Ghent, Charleroi and Liège and of the first three's neighbors, Hong Kong's MTR and "
      "Light Rail lines and stations, and its boundary, Seoul's subway lines and stations and "
      "its boundary, the subway, light-rail and Korail lines and stations of Daegu, Busan, "
      "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu and "
@@ -2861,6 +2864,40 @@ _NOTICES = [
      "View link columns are removed. Neither the City of Brussels nor "
      "hub.brussels endorses this project.",
      False, ("Brussels",)),
+    # LoGIC 2024 (SPW), the downloaded GeoPackage only (never the MapServer,
+    # whose service terms forbid altering the data): CC BY 4.0 with the SPW
+    # citation VERBATIM from the Metawal record (its geodata.wallonie.be URI
+    # answers 404, so the catalogue record is linked beside it), and a
+    # statement of the changes. No SPW or Wallonia logo; no endorsement.
+    Notice(147, "Service public de Wallonie, LoGIC 2024 (Charleroi and Liège)",
+     "Shops and horeca premises in Charleroi and Liège: Source : Service public "
+     "de Wallonie (SPW) - Offre commerciale en Wallonie (LoGIC 2024) "
+     "(2025-04-09) https://geodata.wallonie.be/id/5f56d784-2fd7-47eb-a62a-991d4741a67d "
+     "(the [catalogue record](https://metawal.wallonie.be/geonetwork/srv/api/records/"
+     "5f56d784-2fd7-47eb-a62a-991d4741a67d)), used under the [Creative Commons "
+     "Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/). "
+     "Modified by this project: the services class and vacant units are left "
+     "out, the points are reprojected and cut to each city, and a shop sign "
+     "that reads as a person's own name is replaced by the shop's category. The "
+     "Service public de Wallonie does not endorse this project.",
+     False, ("Charleroi", "Liège")),
+    # LETEC's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 (TEC's
+    # national-access-point entry says CC0; complying with CC BY satisfies
+    # both). Art. 4's credit with the DATE OF THE DATASET UPDATE (feed_version
+    # 20261002; re-date at every refresh). The operator is credited as "LETEC"
+    # and the lines named M2, M3, M4 and T1, never with "TEC" (owner,
+    # 2026-10-04); no logo.
+    Notice(150, "LETEC (Charleroi and Liège)",
+     "Source: LETEC – Open Data – October 2, 2026. Contains data originally "
+     "published by LETEC, modified by this project: the light-metro lines M2, M3 "
+     "and M4 and the tram line T1 are extracted from LETEC's GTFS feed and "
+     "redrawn, stops are grouped into stations, and Charleroi's line colors are "
+     "this project's own. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). LETEC does not endorse "
+     "this project.",
+     False, ("Charleroi", "Liège")),
     # STIB-MIVB's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 under
     # the portal's Terms of Use, art. 4's credit with the DATE OF THE DATASET
     # UPDATE (feed_version 2_21_20261002_143730: 2026-10-02; re-date at every
