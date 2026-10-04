@@ -4337,8 +4337,13 @@ CITIES = [
     },
     {
         "name": "Brussels (Regional)",
-        "lat": 50.838,
-        "lon": 4.37,
+        # THE DOT SITS IN THE PAGE'S OWN COMMUNES (owner, 2026-10-04): at the
+        # Region's centre it was 2.4 px from Brussels' dot in the Belgium view.
+        # Forest's representative point, the candidate nearest the 18
+        # communes' centroid that check_macro_labels.py passes at 375, 768
+        # and 1200 px (the centroid itself does not), with the label below.
+        "lat": 50.814,
+        "lon": 4.3239,
         "page": "pages/201_Brussels_Regional_Heatmap.py",
         "blurb": "Metro 1, 2, 5 and 6 and 18 tram lines",
         "region": "Belgium",
@@ -4357,7 +4362,7 @@ CITIES = [
         # and which will first demand this city's label width be
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        "label_offset": ("middle", 0, 24),
     },
 ]
 
