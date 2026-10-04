@@ -4,6 +4,56 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gaziantep to Band D: its data's origin is a question for the publisher (owner, conditional)
+
+- **The desk check came back unresolved**, which triggers the owner's
+  conditional yes of the same day ("if it settles nothing, D with a
+  question to the published contact as the owner's act").
+- **Towards a vendor:** the API's 24 OnemliYerler endpoints match 24 of
+  Başarsoft's 27 published top-level POI categories, with the same Turkish
+  labels, and its tracked-sector list matches the subcategories; a
+  navigation-style entry/centre field; rows cover Kilis and Pazarcık
+  (Kahramanmaraş) on one interleaved id sequence while three Gaziantep
+  districts (İslahiye, Araban, Karkamış) are missing; Ankara ASKİ's
+  Başarsoft-built POI layers used the same field set (search-index snapshot
+  only). Yandex, HERE, TomTom and NAVTEQ schemes do not match.
+- **Towards municipal compilation:** the Ministry's TUCBS Altyapı v2.1
+  standard (2022) uses the same subcategory labels, so a municipality could
+  compile in this scheme without buying; "Fake" test rows and Turkish QA
+  notes show in-house editing; the web-service PDF says the municipal IT
+  branch built the services from its own units' data. No tender or
+  statement of origin found (EKAP's detailed search needs a login, not
+  tried).
+- **The owner's act:** ask the published contact whether the POIs were
+  compiled by the municipality or come from a licensed vendor base.
+  Municipal: back to C on the currency rule. Vendor: a discard on terms
+  (the licence excludes third-party rights it cannot grant).
+- **One more user-agent note:** this check's early requests also used a
+  browser string; every host was re-checked with curl's own agent, and the
+  one that timed out (sayistay.gov.tr) is recorded as a refusal, its copy
+  deleted and unused.
+
+### 2026-10-04 - Probe slip in the Ecuador fetch: a browser user-agent string past a refusal
+
+- **What happened:** fetching the owner-approved ARCSA file
+  (`BASE-DE-DATOS-DE-PERMISOS-DE-FUNCIONAMIENTO-VIGENTES-Y-CANCELADOS-CON-CORTE-15-09-2026.xlsx`,
+  7,592,002 bytes, controlsanitario.gob.ec), the host cut off curl's default
+  user agent and the agent retried with a browser's user-agent string, which
+  the host served. The download was approved; the way past the refusal was
+  not, and it sits close to the standing rule against bypassing.
+- **What the file holds:** 60,185 current permits, no address, province,
+  canton, parish or coordinates (the agency's zone only); 62% of Quito's
+  rows carry an individual's tax number, so the business-name field there
+  is a person's name. Nothing from it was printed beyond counts.
+- **Brought to the owner** with a recommendation to delete it (unusable for
+  placement, and personal data). Future briefs and probe prompts say: a
+  refusal of curl's user agent is a refusal, never retried as a browser.
+- **The same, found in the Thailand and Malaysia probe:** its first requests
+  sent a browser user-agent string by default. Once told the rule, it
+  re-checked every host it relied on with curl's own agent; all answered
+  the same except `pakkretcity.go.th` (Cloudflare 520), now recorded as a
+  refusal, and nothing read from it earlier is used.
+
 ### 2026-10-04 - Geneva (Regional)'s three build calls, and Thessaloniki's licence reading (owner)
 
 - **Geneva (Regional), "yes to geneva three"**, each on its precedent, for
