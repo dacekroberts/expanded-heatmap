@@ -97,18 +97,19 @@ the pointers. **Delete a section when its item is done.**
 
 ## NEXT - pick up here
 
-1. **The probe wave (2026-10-04), paused or finishing at the weekly limit.**
-   Reports land in the staging scratchpad's `probe2\` folder (readable by
-   path while the machine keeps it): `korea.md` and `group2_europe.md` are
-   banded on master; still out at the save: `group2_world.md` (Jerusalem,
-   Macau, Almaty, Astana, Ahmedabad, Thessaloniki, Quito, Cuenca),
-   `bolivia_puerto_rico.md`, `mauritius_armenia.md`,
-   `pakistan_bangladesh.md`, `one_city_countries.md` (Chile, Venezuela,
-   Egypt, Algeria, Türkiye, Qatar). Read each, bring proposed bands to the
-   owner, and re-run any probe whose report is missing or cut short. Then
-   briefs for Gimpo, Siheung and Geneva (its SITG licence read was running:
-   re-run it if no verdict is in the drafts), and kits when the owner
-   releases builds.
+1. **The probe wave (2026-10-04), PAUSED by the owner so the Belgium build
+   can finish.** Reports in the staging scratchpad's `probe2\` folder
+   (readable by path while the machine keeps it). Banded on master:
+   `korea.md`, `group2_europe.md`. Complete, owner calls pending (summarised
+   in `docs/decisions_drafts/staging.md`, 2026-10-04 entries):
+   `group2_world.md`, `pakistan_bangladesh.md`, `bolivia_puerto_rico.md`,
+   and Geneva's licence read (indemnity and ge.ch-terms calls). **Partial,
+   resume from each report's next steps:** `mauritius_armenia.md` (Armenia's
+   Yerevan permits, ArmStat, the tax service) and `one_city_countries.md`
+   (Gaziantep's shopping feed and licence; the unreached Algerian, Turkish,
+   Venezuelan, Egyptian and Qatari hosts, a Globalping check first). Then
+   briefs for Gimpo, Siheung and Geneva, and kits when the owner releases
+   builds.
 2. **Watch-item dates** from `docs/recheck_calendar.md`:
    - Tainan, 18 Oct;
    - Salvador and Teresina, after 25 Oct;

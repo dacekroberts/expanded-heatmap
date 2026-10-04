@@ -4,6 +4,60 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Four never-probed countries screened; the probe wave paused for the builds (owner calls pending)
+
+- **Pakistan:** Lahore's Orange Line passes (26 stations); every host that
+  could hold a register (the city corporation, the Punjab portal, the
+  business-registration system, the Punjab Food Authority) answers a probe
+  from inside Pakistan only and times out or returns 403 elsewhere: **R**,
+  Hyderabad's shape. Karachi and Islamabad: **discard on rail** (commuter
+  rail and BRT only).
+- **Bangladesh:** Dhaka's MRT Line 6 passes (16 stations); no list at any
+  level (trade licences behind login portals; data.gov.bd frozen in 2018;
+  the food authority's grading PDFs image-only): **discard on absence**,
+  Kolkata's shape. RAJUK's token-protected layers are a lead only by
+  request.
+- **Bolivia:** Cochabamba **discard** (Mi Tren every 15-30 minutes on a
+  converted railway; no list at any level); La Paz / El Alto **discard on
+  rail** (cable car); Santa Cruz de la Sierra a watch item (its
+  metropolitan train's first stage began 2026-09-02). The shortlist's "no
+  urban rail" filing gets a correction note, as Algeria's did.
+- **Puerto Rico:** San Juan **discard on absence** (Tren Urbano passes, 12
+  stations in the city, every 12 minutes off-peak; the only premises data is
+  2011-2015 use permits with no category), Honolulu's shape.
+- **A probe slip:** the Pakistan and Bangladesh probe downloaded two
+  Bangladesh Food Safety Authority PDFs (588 KB and 507 KB) without the
+  owner's OK; scratchpad only, no extractable text.
+- **The owner: "if we can pause those now at a point where we won't lose
+  anything do so, so belgium build can finish".** The two probes still out
+  (Mauritius with Armenia, the one-city countries) were told to write what
+  they had to their reports and stop; their partial reports sit in the
+  staging scratchpad's `probe2\` for a later run to resume.
+- **The paused probes' partial results** (both stopped cleanly, reports and
+  resume steps written):
+  - **Mauritius:** Metro Express passes (22 stations, purpose-built, median
+    788 m); licensing is municipal and none of the five councils publishes
+    its register (each document library read), the national portal's 856
+    datasets hold single-category lists only: **discard on absence**, or R
+    if the owner would ask the councils.
+  - **Armenia:** Yerevan Metro passes (10 stations, every 7.5 minutes at
+    midday); no national portal, the company and licence registers carry
+    no business type (pharmacies only). Unread: Yerevan's own alcohol,
+    tobacco and catering permit holders, ArmStat's business register, the
+    tax service. Pending.
+  - **One-city countries:** Valparaíso/Viña, Concepción, Valencia (VE),
+    Los Teques and Sidi Bel Abbès proposed **discards on absence**; İzmir a
+    discard after a district check; **Gaziantep Band C** (the city's open
+    API: 4,937 food and 15,413 commercial points with addresses, 2,562 hair
+    and barber; no date field, some rows outside the province; its own
+    licence to read; the currency rule is the owner's call). Not reached:
+    Maracaibo and Alexandria (hosts unreachable or 503), Oran, Constantine,
+    Sétif, Ouargla, Mostaganem, Bursa, Kocaeli, Antalya, Kayseri, Samsun,
+    Konya, Eskişehir, Lusail. Merval passes the 15-minute test (every 12
+    minutes all day on weekdays).
+- All bands and discards above wait on the owner's answer before they enter
+  the master list.
+
 ### 2026-10-04 - Geneva's REG read, and the second group outside Europe screened (owner calls pending)
 
 - **Geneva's Répertoire des entreprises (REG), `licence-read` 2026-10-04:
