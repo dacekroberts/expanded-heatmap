@@ -2841,6 +2841,42 @@ _NOTICES = [
      "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
      "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
      False, ("Boston",)),
+    # hub.brussels's inventory on the City's portal: CC BY 4.0, no wording
+    # prescribed. The licence read's conditions: the publisher and its listed
+    # contributors named (hub.brussels and "Google Maps", what that credit
+    # covers is the publisher's unstated point), the changes stated, the
+    # Google link columns dropped, no City logo or "BXL" mark (portal terms
+    # 3.1), no endorsement. The wording is the Belgium build's proposal.
+    Notice(144, "City of Brussels and hub.brussels (Brussels)",
+     "Shops, restaurants and services in Brussels are from “Commerces recensés "
+     "par hub.brussels situés sur le territoire de la Ville de Bruxelles”, "
+     "published by the City of Brussels (Ville de Bruxelles/Data Management) on "
+     "[opendata.brussels.be](https://opendata.brussels.be/explore/dataset/"
+     "commerces-recenses-par-hubbrussels-vbx/) from hub.brussels's survey, with "
+     "hub.brussels and Google Maps as its listed contributors, and used under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: empty units and the types this map leaves out are removed, the "
+     "rest are grouped into three categories, and the Google Maps and Street "
+     "View link columns are removed. Neither the City of Brussels nor "
+     "hub.brussels endorses this project.",
+     False, ("Brussels",)),
+    # STIB-MIVB's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 under
+    # the portal's Terms of Use, art. 4's credit with the DATE OF THE DATASET
+    # UPDATE (feed_version 2_21_20261002_143730: 2026-10-02; re-date at every
+    # refresh) and its recommended modified-data line; the portal named (its
+    # FAQ). Nothing from stib-mivb.be (private-use website terms).
+    Notice(148, "STIB-MIVB (Brussels and Brussels (Regional))",
+     "Source: STIB-MIVB – Open Data – October 2, 2026. Contains data originally "
+     "published by STIB-MIVB, modified by this project: the metro and tram "
+     "routes are extracted from STIB-MIVB's GTFS feed and redrawn, stops are "
+     "grouped into stations and some tram stops thinned, and some line colors "
+     "are adjusted. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). STIB-MIVB does not endorse "
+     "this project.",
+     False, ("Brussels", "Brussels (Regional)")),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

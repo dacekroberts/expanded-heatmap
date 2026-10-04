@@ -105,6 +105,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
+| Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
 | Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
@@ -3527,6 +3528,39 @@ of 2026-10-02.)
   Massachusetts EOTSS".
 - **MUST NOT**: present the outline as an authoritative boundary location
   ("can only be provided by a licensed land surveyor").
+
+**144. City of Brussels and hub.brussels (Brussels) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: opendata.brussels.be adopts the
+  producer's license; hub.brussels describes the inventory as its field
+  agents' own. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the credit to the publisher (Ville de Bruxelles/Data
+  Management) and hub.brussels, with the publisher's listed contributors
+  (hub.brussels and Google Maps), the dataset title and page, the license
+  link, and a statement of the changes. No wording is prescribed; this
+  project's own.
+- **MUST NOT**: link a dot to Google (the Google Maps and Street View link
+  columns are never downloaded); show the City's logo or "BXL" mark (the
+  portal's terms, 3.1); imply endorsement. What the "Google Maps" contributor
+  credit covers is not stated by the publisher; it is named as listed.
+
+**148. STIB-MIVB (Brussels and Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (December 2025, effective January 1, 2026), art. 3,
+  STIB-MIVB the sole licensor; downloading is accepting them (art. 2; the
+  owner accepted for this build, and a change of terms comes back to the
+  owner, art. 8). Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: STIB-MIVB – Open Data – [date of dataset
+  update]" (art. 4), the date of the feed's own update, re-dated at every
+  refresh; the modified-data line art. 4 recommends and CC BY 4.0 requires;
+  the portal named (its FAQ).
+- **MUST NOT**: take anything from stib-mivb.be itself (its website terms are
+  for private use): no logo, network map or brand material.
 
 
 ## Gaps
