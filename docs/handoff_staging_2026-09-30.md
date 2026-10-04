@@ -150,6 +150,24 @@ that session, not on master.
    - Re-probes of Band C open gaps (`reprobe-city`) and the Band R cities
      whose blockers have a date.
 
+## Coverage sweep (2026-10-03, owner's yes): results in, three calls pending
+
+Reports in the staging scratchpad,
+`...\54e23bab-5cd9-4850-8946-900a2a7b665b\scratchpad\sweep\` (europe,
+americas_oceania, asia_mideast_africa, belgium; readable by path while the
+machine keeps them). Calls put to the owner, unanswered at the pause:
+1. Screen Daejeon, Gwangju, Gimhae (Band R on a stale reason: the cached
+   SEMAS ZIP holds Daejeon 80,704 rows and Gimhae 26,700; Gwangju sits in
+   the merged member 전남광주통합특별시, its count not yet run; pass
+   `--peak-gb 0.1` to the gate, the scan measured 0.02 GB), Liverpool (never
+   recorded; Merseyrail's commuter-rail test), City of Brussels (hub.brussels
+   inventory, 6,880 points, CC BY 4.0, Google Maps credited), Mendoza and
+   Tacoma.
+2. Downloads: FAVV `inter_actieve_actoren_EN.csv` (87.9 MB) and Wallonia
+   `LOGIC_2024_GEOPACKAGE_3812.zip` (3.2 MB).
+3. Belgium off "Countries ruled out" once Brussels is confirmed.
+The owner asked to give Cleanup and the map-dot session memory priority.
+
 ## Japan: what wave 2's scoping left (2026-10-02)
 
 Wave 2 took the scope's top tier. What remains, from MHLW's FY2024 file and
