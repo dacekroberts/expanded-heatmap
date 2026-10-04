@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**158 city pages, 4 fixed pages and the Overview; 27 rendered docs; 2 app data files.**
+**159 city pages, 4 fixed pages and the Overview; 27 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -195,3 +195,4 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Kurume_Heatmap` | Kurume | `kurume` | ✓ |
 | `/Sasebo_Heatmap` | Sasebo | `sasebo` | ✓ |
 | `/Shimonoseki_Heatmap` | Shimonoseki | `shimonoseki` | ✓ |
+| `/Daejeon_Heatmap` | Daejeon | `daejeon` | ✓ |

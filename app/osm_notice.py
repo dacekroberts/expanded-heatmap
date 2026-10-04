@@ -118,6 +118,7 @@ OSM_RAIL_BY_CITY = {
     "Ansan": _korea("Ansan"),
     "Uijeongbu": _korea("Uijeongbu"),
     "Anyang": _korea("Anyang"),
+    "Daejeon": _korea("Daejeon"),
     "Sydney": ("the train and metro routes of Sydney and its City boundary", True),
     "Melbourne": ("the train and metro routes of Melbourne and its City boundary", True),
     "Buenos Aires": ("Buenos Aires's Subte and Premetro routes and its boundary", True),

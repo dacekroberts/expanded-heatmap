@@ -135,7 +135,7 @@ The 142 entries are grouped: one entry per shared source (for example, MHLW acro
 | 1.13 | Tucson BUSLIC | Tucson | SILENT, read as permitted, over the "personal use" disclaimers (united-states.md:232; DS:2422-2433) | owner 2026-09-30 (DEC:1446) | the City, citing its sibling disclaimers | notice (COMP:2001) | written confirmation |
 | 1.14 | Stockholm Livsmedelstillsyn | Stockholm | "The blank license is a silence, not a refusal" (sweden.md:27-31) | build 2026-09-22; owner wording 2026-09-29 | the City; dataportal.se's "Begränsad" | notice (COMP:1924) | read the walled record via the Internet Archive, or ask the City |
 | 1.15 | Kitchener–Waterloo Inspections.zip and Inspections_PS.zip | Kitchener–Waterloo (Regional) | "No License Provided"; the portal's sentence read as covering them (DS:2237-2244) | owner 2026-09-30 (DEC:3960) | the Region, on Esri's "request permission" label | notice (COMP:680) | the Region's written confirmation |
-| 1.16 | SEMAS 상가(상권)정보 | Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang | 제한 없음, with the site policy read as homepage-only; 소상공인365 notices unread (DS:2141-2151) | owner 2026-09-29 (DEC:6853) | SEMAS | notice (COMP:1955) | read the notices from a Korean vantage point, or get SEMAS's OK |
+| 1.16 | SEMAS 상가(상권)정보 | Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon | 제한 없음, with the site policy read as homepage-only; 소상공인365 notices unread (DS:2141-2151) | owner 2026-09-29 (DEC:6853) | SEMAS | notice (COMP:1955) | read the notices from a Korean vantage point, or get SEMAS's OK |
 | 1.17 | Busan LocalDataService | Busan | 제14조 read as covering platform-authored works only (south-korea.md:171-193) | owner 2026-09-27 | Busan's portal, under 제14조② | notice (COMP:1343) | written OK, or a host that declares 제한 없음 |
 | 1.18 | Hiroshima full permit list (DataEye 5672) | Hiroshima | owner reads the dataset's PDL as covering a file with no entry of its own (japan.md:146) | owner 2026-09-24 | Hiroshima City, under its website's default terms | notice (COMP:1553) | ask DataEye to list the file |
 | 1.19 | Amsterdam Horeca exploitatievergunningen | Amsterdam | live "Licentie: -"; a retired 2022 catalogue said CC BY (DS:1546-1549) | owner 2026-09-24 | the Gemeente | notice (COMP:1177), displayed as CC BY | written confirmation |
@@ -1773,7 +1773,7 @@ Japan CC BY 2.1 JP group · 4 IPEDF (status only)
 - Strengthen: written confirmation from IBGE that third-party republication with citation is fine (the 2009 thread's second reply suggests it would be).
 
 #### KR-SEMAS - 상가(상권)정보, data.go.kr 15083033 (Small Enterprise and Market Service, 소상공인시장진흥공단)
-- Cities: Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang
+- Cities: Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon
 - Role: register (with its own WGS84 point)
 - Tier: 1 (1c) - the dataset carries the publisher's own "이용허락범위 제한 없음", but SEMAS's site copyright policy (consult before using non-KOGL material) is read as homepage-only, and the 소상공인365 notices the listing cites are unread.
 - Rests on: "declares 이용허락범위 제한 없음 in the page, Schema.org and DCAT ... SEMAS's website copyright policy asks for a consultation ... read as covering the homepage's content" - docs/data_sources.md:2141-2151

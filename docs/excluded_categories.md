@@ -5113,6 +5113,23 @@ stations outside are listed on Anyang's page): Line 1 and Line 4,
 have, and was built for the share of its storefronts within a ring instead
 (owner, 2026-09-29). No other line has a station in the city.
 
+### Daejeon - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above).
+
+**Out by name**: hostess bars 266, dance halls 18, staff canteens 164,
+household fuel dealers 114; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 79 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**: Line 1 of the Daejeon Metro, 22 stations, every one inside the
+city. Line 2, a tram under construction, is not drawn, nor are Korail's
+intercity lines.
+
 ### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
 
 **The source** is the National Statistics Office of Georgia's Statistical
