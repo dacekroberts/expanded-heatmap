@@ -4,6 +4,30 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The paused wave's results banded; probes stay stopped (owner)
+
+- **The owner: "1. yes 2. all sound good 3. yes 4. yes 5. yes, do not
+  continue probes or other processes though. just republish the master
+  list, you can include an ongoing probes section".** Recorded in the master
+  list, each as staging recommended:
+  1. **Geneva:** the narrow indemnity (SITG CU 7.2) accepted; ge.ch's
+     website terms read as the website's only. Geneva stays A. The
+     indemnity joins `docs/data_sources.md`'s accepted indemnities at build.
+  2. **Thessaloniki to B** (a licence read first); **Macau, Quito and Cuenca
+     to C**, with Macau's API download and ARCSA's health-permit file
+     (7,592,002 bytes) approved but not fetched (probes stopped);
+     **Jerusalem, Almaty, Astana and Ahmedabad to R**.
+  3. **Lahore to R; Karachi, Islamabad and Dhaka discarded.**
+  4. **Cochabamba, La Paz / El Alto and San Juan discarded; Santa Cruz de la
+     Sierra a watch item.**
+  5. **Port Louis (Regional) discarded; Gaziantep to C**; Valparaíso / Viña
+     del Mar, Concepción, Valencia (Carabobo), Los Teques and Sidi Bel Abbès
+     discarded. İzmir waits on its district check.
+- **Counts after:** 158 built (the new-cities build's three sit on its
+  branch); 25 candidates (A 9 · B 7 · C 6 · D 3); 29 restricted; 155
+  discards. The probes stay stopped until the owner resumes them; every
+  partial report's resume steps are in the handoff.
+
 ### 2026-10-04 - Four never-probed countries screened; the probe wave paused for the builds (owner calls pending)
 
 - **Pakistan:** Lahore's Orange Line passes (26 stations); every host that
