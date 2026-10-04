@@ -175,8 +175,8 @@ shared pattern, logged in the drafts file, not an owner call.
 - **Scaffold:** `scaffold_city.py --slug gwangju --name Gwangju
   --system-name "Gwangju Metro" --taxonomy korea_sbiz --lat 35.160
   --lon 126.852 --region "East Asia" --country "South Korea" --mode metro
-  --page-number <the Korea kit's claim>` (`--dry-run` first). No new notice
-  number: notice 68 extends, and OSM is notice 1.
+  --page-number 191` (`--dry-run` first). No new notice
+  number: the Small Enterprise and Market Service's notice 68 extends.
 
 ## Owner calls
 
@@ -192,7 +192,7 @@ shared pattern, logged in the drafts file, not an owner call.
 
 The build records in its drafts file, for each notice, **card face or
 caption only**, and any open terms question:
-- **Notice 68 (SEMAS): caption.** The terms prescribe a source credit with
+- **Notice 68, the Small Enterprise and Market Service's (SEMAS): caption.** The terms prescribe a source credit with
   no wording and no place, and the categories stated as this project's.
 - **Notice 1 (OpenStreetMap): rail, boundary and station names are OSM**;
   recorded as for every OSM-railed city.

@@ -145,7 +145,7 @@ caveat that an active account does not mean a license for the current year.
 - **Grant**: Resolution 39378 (2016) and the City's open-data page: no
   restrictions on reuse.
 - **The City's disclaimer must be displayed, site-wide**, word for word, as
-  Chicago's (notice 2) and Kansas City's (notice 80) are in
+  Chicago's (notice 2) and Kansas City, Missouri's (notice 80) are in
   `render_site_notices()` (`every_page=True`). The exact text (115 words,
   from the City's disclaimer page, kept in the staging scratchpad as
   `notice_utf8.txt`):

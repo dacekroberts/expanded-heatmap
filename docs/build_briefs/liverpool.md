@@ -204,7 +204,7 @@ the six built UK cities' drift check must stay clean afterwards:
   timetable booklets) and **NaPTAN**. Merseyrail's stations are rail access
   nodes, **stop type RLY in ATCO area 910**, not MET in 940: `uk.py`'s
   `naptan_gate` filters `StopType == "MET"`, so the stop type becomes config.
-  NaPTAN's licence row (notice 86) covers the same dataset; its rendered text
+  The Department for Transport, NaPTAN licence row (notice 86) covers the same dataset; its rendered text
   says "the UK's tram and light-rail maps", so extending it to Liverpool is
   a wording proposal for the owner (or a notice of its own).
 - **The light-rail track print** (share tagged light_rail or tram) will read
@@ -281,7 +281,7 @@ Manufacturers/packers 27, Distributors/Transporters 25, Importers/Exporters 4.
   Ordnance Survey data © Crown copyright and database right 2026. Contains
   Royal Mail data © Royal Mail copyright and database right 2026. Contains
   National Statistics data © Crown copyright and database right 2026."
-- **NaPTAN:** notice 86 (OGL v3.0), the wording question above.
+- **NaPTAN:** the Department for Transport, NaPTAN notice 86 (OGL v3.0), the wording question above.
 - **OpenStreetMap:** the rail is OSM data (ODbL, notice 1).
 
 ### No second bucket

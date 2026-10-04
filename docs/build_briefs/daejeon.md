@@ -149,8 +149,8 @@ the same day (staging, counts only, peak 0.03 GB) found **the whole
 - **Scaffold:** `scaffold_city.py --slug daejeon --name Daejeon
   --system-name "Daejeon Metro" --taxonomy korea_sbiz --lat 36.351
   --lon 127.385 --region "East Asia" --country "South Korea" --mode metro
-  --page-number <the Korea kit's claim>` (`--dry-run` first). No new notice
-  number: notice 68 extends, and OSM is notice 1.
+  --page-number 190` (`--dry-run` first). No new notice
+  number: the Small Enterprise and Market Service's notice 68 extends.
 
 ## Owner calls
 
@@ -165,7 +165,7 @@ the same day (staging, counts only, peak 0.03 GB) found **the whole
 
 The build records in its drafts file, for each notice, **card face or
 caption only**, and any open terms question:
-- **Notice 68 (SEMAS): caption.** The terms prescribe a source credit with
+- **Notice 68, the Small Enterprise and Market Service's (SEMAS): caption.** The terms prescribe a source credit with
   no wording and no place, and the categories stated as this project's.
 - **Notice 1 (OpenStreetMap): rail, boundary and station names are OSM**;
   recorded as for every OSM-railed city.

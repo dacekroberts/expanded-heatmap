@@ -156,8 +156,8 @@ exactly the same 26,700 rows as the code.
 - **Scaffold:** `scaffold_city.py --slug gimhae --name Gimhae
   --system-name "Busan–Gimhae LRT" --taxonomy korea_sbiz --lat 35.228
   --lon 128.889 --region "East Asia" --country "South Korea"
-  --mode light_rail --page-number <the Korea kit's claim>` (`--dry-run`
-  first). No new notice number: notice 68 extends, and OSM is notice 1.
+  --mode light_rail --page-number 192` (`--dry-run`
+  first). No new notice number: the Small Enterprise and Market Service's notice 68 extends.
 
 ## Owner calls
 
@@ -175,7 +175,7 @@ exactly the same 26,700 rows as the code.
 
 The build records in its drafts file, for each notice, **card face or
 caption only**, and any open terms question:
-- **Notice 68 (SEMAS): caption.** The terms prescribe a source credit with
+- **Notice 68, the Small Enterprise and Market Service's (SEMAS): caption.** The terms prescribe a source credit with
   no wording and no place, and the categories stated as this project's.
 - **Notice 1 (OpenStreetMap): rail, boundary and station names are OSM**;
   recorded as for every OSM-railed city.
