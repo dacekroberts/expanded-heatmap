@@ -579,8 +579,11 @@ def selftest_notice_bijection():
 # OpenStreetMap basemap line (1), Chicago (2) and Kansas City (80), whose terms
 # name the site; LA Metro (4), whose placement could not be read; INEGI (8) and
 # Barcelona (21), whose disclosure duties may reach the Overview's figures.
-# Changing this set is a decision for the owner, not an edit.
-EVERY_PAGE_APPROVED = {1, 2, 4, 8, 21, 80}
+# Changing this set is a decision for the owner, not an edit. Tacoma (142)
+# joined 2026-10-04 on the owner's acceptance of its licence "on Chicago's
+# template" (2026-10-03; docs/handoff_new_cities_2026-10-03.md), whose terms
+# bind any application using the data, as Chicago's and Kansas City's do.
+EVERY_PAGE_APPROVED = {1, 2, 4, 8, 21, 80, 142}
 NOTICES_PAGE_FILE = ROOT / "app" / "pages" / "Required_Notices.py"
 
 

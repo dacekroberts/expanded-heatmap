@@ -64,6 +64,7 @@ OSM_RAIL_BY_CITY = {
                "stations", True),
     "Kansas City": ("Kansas City's KC Streetcar and its stops", True),
     "Tucson": ("Tucson's Sun Link and its stops", True),
+    "Tacoma": ("Tacoma's T Line and its stops", True),
     "New Orleans": ("New Orleans's five streetcar lines and their stops", True),
     "Florence": ("Florence's T1 and T2 tram lines and their stops and the comune boundaries "
                  "used to select them and its businesses", True),

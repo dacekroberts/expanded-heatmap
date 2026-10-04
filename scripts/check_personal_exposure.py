@@ -548,6 +548,14 @@ REGISTRIES = {
     "kansas_city": dict(raw="business_licenses.csv", trade="business_name",
                         owner="dba_name", processed="businesses_clean.csv",
                         address=("address",)),
+    # Tacoma (2026-10-04): `trade_name` is never blank but is the entity's own
+    # name (`business_name`) on some rows; where that entity has no legal form
+    # and reads as a person's, step 2 shows the NAICS description (Vancouver's
+    # rule). The site unit field joins the address; mailing fields are never
+    # fetched.
+    "tacoma": dict(raw="business_licenses.csv", trade="trade_name",
+                   owner="business_name", processed="businesses_clean.csv",
+                   address=("address",)),
     # Tucson: the City's BUSLIC layer has one name, `ACC_NAME`, the account
     # (trading) name; there is no separate owner column to fall back to. Step 2
     # shows the address for the personal OWN_TYPEs (Sole Proprietorship,

@@ -6,6 +6,87 @@ hands the drafts off, then deletes this file (owner, 2026-09-30). The build
 is Liverpool (Regional), Tacoma and Mendoza
 (`docs/handoff_new_cities_2026-10-03.md`).
 
+### 2026-10-04 - Tacoma built: the T Line from OpenStreetMap, gate 3 exact against Sound Transit, the City's active license accounts under its site-wide disclaimer
+
+- **Built on Kansas City's template** (`pipeline/tacoma/`, page 194): a US
+  register on the shared NAICS module, the shared OSM tram step 1, the TIGER
+  place polygon. Brief claims held (`brief_check.py tacoma`, 6 of 6). Mode
+  `tram` and coverage `full` as the brief proposes, for the owner with the
+  build.
+- **Rail, from the one Overpass query** (2026-10-04, overpass-api.de, 24
+  elements): two `route=tram` relations, ref "T Line", operator Sound
+  Transit, network Link, colour #F38B00 (5705256, 5705257), both kept, no
+  other tram or light rail in the box. 22 stop positions -> **12 stations**,
+  all inside the city.
+  - **Gate 3 exact**: Sound Transit's own T Line page lists 12 stations,
+    St Joseph to Tacoma Dome (read 2026-10-04). It writes "S 25th" where OSM
+    writes "S 25th St"; the map shows OSM's name.
+  - **Median gap 451 m** (min 349, max 755), so halved rings (0.05 / 0.1 /
+    0.2 / 0.3 mi), as the brief measured on the feed; MEDIAN_GAP_BOUNDS_M
+    (400, 500).
+  - OSM's orange kept: 77.9 from the nearest pin color (Food service), every
+    line label 4.5:1 in both themes (`check_map_markup.py`).
+  - Frequency from the same page: every 12 minutes weekdays 7:00-20:00 and
+    Saturdays, every 20 otherwise and on Sundays, stated as a fact.
+- **Businesses ("Business Licenses - Map (Tacoma)", the point layer, last
+  edited 2026-10-02), fetched with an explicit field list that leaves every
+  `mailing_*` field out:**
+  - 22,128 accounts; 11,812 in council districts 1-5; 2,931 in the buckets,
+    the brief's counts exactly (Retail 1,520, Food service 600, Personal
+    services 811); every one has a point and every one is inside the TIGER
+    polygon.
+  - 61 at an apartment, trailer or mobile-home space left off as homes
+    (Kansas City's set, APT and TRLR, with `residence.py`'s SPC/SPACE: 59 and
+    2); 19 duplicate accounts at one name and site address -> **2,851
+    premises**.
+  - 503 (18%) within a ring: Retail 183, Food service 135, Personal services
+    185.
+  - The catch-alls follow `naics.py` unchanged, as every NAICS city's do:
+    459999 (264) and 455219 (71) kept, 812990 (194) out.
+- **The name rule (Vancouver's, 2026-09-21, as the brief names it):** where
+  the trade name is only the account holder's own name (697 of the storefront
+  accounts), the holder carries no company form (164) and the name reads as a
+  person's by `residence.looks_personal` or Kansas City's surname-first test
+  (104), the pin shows the NAICS description. A trade name an owner chose is
+  shown as chosen, the San Diego and Vancouver precedent: 775 storefront trade
+  names are person-shaped by the same over-firing test, most of them shop
+  names. **Rejected, for the owner to reopen**: Kansas City's further rule, a
+  company trading only under a person's name shows its address, which there
+  rested on reading every person-shaped name by eye; this build prints no
+  name, so it is not applied.
+- **Personal exposure (`check_personal_exposure.py tacoma`):** 503 pins, 493
+  distinct names; 0 emails, phone numbers or c/o markers; 0 surname-first
+  names; 2 "person's name (trade name)" shapes; the heuristic reads 86 (17.1%)
+  as person-like, owner-chosen trade names; 1 person-shaped name at a UNIT,
+  which the home rule does not read as a dwelling. **Verdict: publish**, on
+  Vancouver's rule and the home rule.
+- **Notice 142, the City of Tacoma's disclaimer**, word for word from the
+  City's disclaimer item (115 words, its curly apostrophe kept), shown on
+  every page as Chicago's (2) and Kansas City's (80) are: the owner accepted
+  the licence "on Chicago's template" (2026-10-03). `check_provenance.py`'s
+  EVERY_PAGE_APPROVED gains 142 on that acceptance; **for the owner to
+  confirm** at review time, since that set is the owner's. The credit "City
+  of Tacoma, Tax & License (data.tacoma.gov)" sits in the page's caption, not
+  in a numbered notice; data.cityoftacoma.org is never cited.
+- **For Visuals:** 142 in the caption, in full (Chicago's and Kansas City's
+  full paragraphs must sit in the caption itself, owner 2026-10-02); about
+  115 words fits a card face only in small type. **Open terms question**:
+  the City may require any display or use to end, for any reason, and its
+  disclaimer binds "applications"; whether a city card counts as one is
+  Visuals' question to carry to the owner, so Tacoma stays off the cards until
+  the owner rules. The rail is OpenStreetMap's, so the OSM line goes on the
+  face.
+- **Macro map:** label width 51.8 px (measured in the browser pane); minor
+  tier, as the US tram cities are (Kansas City, Tucson, New Orleans): in the
+  United States composite every side of its dot met Seattle's, Sacramento's
+  or Minneapolis's pill. Below the dot in United States West, PROBLEMS 0 at
+  375, 768 and 1200. Out of the landing frame, as Seattle (Regional) is.
+- **Proposals for review time:** the page's Sounder clause ("Sounder's trains
+  to Tacoma run mostly at rush hour"), the name-rule bullet, the home bullet
+  and the account caveat under "Reading the density"; the word "tram" for a
+  line Sound Transit markets as light rail (the brief's heading, the
+  tram-city template); Tacoma's section of What Is Excluded.
+
 ### 2026-10-04 - Liverpool (Regional) built: Merseyrail's Northern and Wirral Lines as a commuter-rail exception, gate 3 exact against Merseytravel's booklets and NaPTAN's rail records, food only on the FSA register
 
 - **Built on the UK six's shared steps as config** (`pipeline/liverpool/`,

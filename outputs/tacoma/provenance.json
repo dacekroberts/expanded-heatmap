@@ -1,0 +1,49 @@
+{
+  "written_utc": "2026-10-04T07:29:48+00:00",
+  "register": {
+    "url": "https://services3.arcgis.com/SCwJH1pD8WSn5T5y/arcgis/rest/services/BusinessLicenses_Map/FeatureServer/0",
+    "item": "2fa3b14b4de44c16b44893fee2cadefd",
+    "fields": [
+      "objectid",
+      "license_number",
+      "business_name",
+      "trade_name",
+      "naics_code",
+      "naics_code_description",
+      "business_open_date",
+      "site_street",
+      "site_unit_number",
+      "site_city",
+      "site_state",
+      "site_zip_code",
+      "council_district",
+      "map_status",
+      "x",
+      "y"
+    ],
+    "name": "Tacoma Business Licenses",
+    "max_record_count": 1000,
+    "data_last_edit": "2026-10-02"
+  },
+  "boundary": {
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
+    "query": {
+      "where": "GEOID='5370000'",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "f": "geojson"
+    }
+  },
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    47.22,
+    -122.48,
+    47.28,
+    -122.41
+  ],
+  "files_utc": {
+    "business_licenses.csv": "2026-10-04T07:29:39+00:00",
+    "city_boundary_tiger.geojson": "2026-10-04T07:29:40+00:00",
+    "osm_rail.json": "2026-10-04T07:29:48+00:00"
+  }
+}

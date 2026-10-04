@@ -278,6 +278,9 @@ TEXT_WIDTH = {
     # Liverpool (Regional), 2026-10-04, the same way in the browser pane;
     # controls Blackpool (Regional) 139.7 and Nottingham (Regional) 151.7.
     "Liverpool (Regional)": 135.0,
+    # Tacoma and Mendoza, 2026-10-04, the same way; controls Seattle (Regional)
+    # 120.5 and Blackpool (Regional) 139.7.
+    "Tacoma": 51.8, "Mendoza": 61.8,
     # Belo Horizonte renamed (Regional) by its Contagem extension, 2026-10-03,
     # local app (lean venv), canvas measureText after document.fonts.load;
     # controls Belo Horizonte 98.5, Rio de Janeiro, Fortaleza (Regional), Lille

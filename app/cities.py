@@ -4246,6 +4246,38 @@ CITIES = [
         # Sheffield's pills.
         "label_offset": ("middle", 0, 22),
     },
+    {
+        "name": "Tacoma",
+        "lat": 47.2529,
+        "lon": -122.4443,
+        "page": "pages/194_Tacoma_Heatmap.py",
+        # Kansas City's values (2026-10-04). `mode` tram (the brief: street
+        # running on purpose-built track, a 451 m median gap; the owner approves
+        # it with the build). `coverage` full: all three buckets (Retail 1,520,
+        # Food service 600, Personal services 811 in the city).
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Active accounts, layer edited 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "License register",
+        "categories": "All three",
+        "blurb": "T Line, one tram line",
+        "region": "United States West",
+        "country": "United States",
+        # Out of the landing frame, as Seattle (Regional) is: framing it would
+        # re-fit the pinned zoom every label offset was measured at.
+        "in_default_view": False,
+        # MINOR, as the US tram cities are (Kansas City, Tucson, New Orleans):
+        # a dot and tooltip in every view, its pill only in United States West.
+        # In the United States composite every side of the dot met Seattle's,
+        # Sacramento's or Minneapolis's pill.
+        "label_tier": "minor",
+        # BELOW the dot, scored in United States West (2026-10-04; width 51.8
+        # measured in the browser pane): check_macro_labels.py PROBLEMS 0 at
+        # 375, 768 and 1200. Above, it overlapped Seattle (Regional)'s pill.
+        "label_offset": ("middle", 0, 22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

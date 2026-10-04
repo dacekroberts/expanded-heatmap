@@ -568,7 +568,7 @@ _OSM_RAIL = (
     "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen", "Aarhus",
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
-    "Dallas", "Kansas City", "Tucson", "New Orleans", "Florence", "Den Haag",
+    "Dallas", "Kansas City", "Tucson", "Tacoma", "New Orleans", "Florence", "Den Haag",
     "Göteborg", "Zurich", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
@@ -1014,7 +1014,7 @@ _NOTICES = [
      "Minneapolis's METRO Blue and Green Lines and their stations, "
      "Pittsburgh's PRT Red, Blue and Silver Lines and their stations, "
      "Dallas's DART Light Rail Red, Blue, Green and Orange Lines and their stations, "
-     "Kansas City's KC Streetcar, Tucson's Sun Link and New Orleans's five "
+     "Kansas City's KC Streetcar, Tucson's Sun Link, Tacoma's T Line and New Orleans's five "
      "streetcar lines and their stops, "
      "Florence's T1 and T2 tram lines and their stops and the comune boundaries "
      "used to select them and its businesses, "
@@ -2843,6 +2843,20 @@ _NOTICES = [
      "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
      "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
      False, ("Boston",)),
+    # Tacoma (notice 142): the City of Tacoma's open-data disclaimer, which its
+    # terms require of any application using the data - Chicago's and Kansas
+    # City's template, so displayed site-wide as theirs are. Word for word from
+    # the City's disclaimer page (read 2026-10-04), its curly apostrophe kept.
+    Notice(142, "City of Tacoma (Tacoma)",
+     "The information and data made available here has been modified for use from its "
+     "original source, which is the City of Tacoma. The City of Tacoma makes no claims as to "
+     "the completeness, accuracy, or timeliness of any information and data contained in this "
+     "application; makes no representation of any kind, including, but not limited to, "
+     "warranty of the accuracy or fitness for a particular use; nor are any such warranties to "
+     "be implied or inferred with respect to the information or data furnished herein. The "
+     "information and data is subject to change without notice. It is understood that the "
+     "information and data contained in the web site is being used at user’s own risk.",
+     True, ("Tacoma",), every_page=True),
     # Liverpool (notice 143): the FSA's FHRS data for the four Merseyrail
     # council areas, Newcastle's notice 62 as Manchester's 84, with the city
     # and date changed.

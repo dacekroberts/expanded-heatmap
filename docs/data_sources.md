@@ -3535,6 +3535,33 @@ of 2026-10-02.)
 - **MUST NOT**: present the outline as an authoritative boundary location
   ("can only be provided by a licensed land surveyor").
 
+**142. City of Tacoma (Tacoma) — required, and DISPLAYED on every page**
+(written into `render_site_notices()` with Tacoma, 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-03)<!-- /internal -->:
+  the City's Resolution 39378 (2016) and its open-data page place no
+  restriction on reuse; the rows are in
+  [`data_sources/united-states.md`](data_sources/united-states.md). Accepted
+  by the owner on Chicago's template (2026-10-03).
+- **MUST DISPLAY**: the City's disclaimer, which binds any application using
+  the data - Chicago's (notice 2) and the City of Kansas City, Missouri's (notice 80) shape, so it is
+  displayed site-wide, as theirs are. Reproduced word for word from the City's
+  disclaimer page, its curly apostrophe kept; it is exempt from the
+  American-spelling pass.
+- **REVOCABLE**: the City "reserves the right ... to require the termination of
+  any and all display, distribution or other uses of any or all of the
+  information or data for any reason". Honored through the removal rule: the
+  layer or the city comes down first, and the request is recorded after.
+- **MUST NOT**: present the pins as "currently licensed" businesses (the layer
+  lists active Tax & License accounts and "does not indicate whether a business
+  has a business license for the current year"); cite the dead host
+  data.cityoftacoma.org that the item's licence field still links (the City's
+  portal is data.tacoma.gov); use City marks.
+- **Credited on the page** as "City of Tacoma, Tax & License (data.tacoma.gov)",
+  in the caption under the map.
+- **Tacoma's rail is OpenStreetMap data** (ODbL, notice 1); Sound Transit's
+  GTFS is not used.
+
 **143. Food Standards Agency (Liverpool) — required, and DISPLAYED** (written
 into `render_site_notices()` with Liverpool (Regional), 2026-10-04.)
 

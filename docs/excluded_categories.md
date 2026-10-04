@@ -2629,6 +2629,34 @@ owner), 45 whose account name is only a person's (read by eye) and
 
 **Stations.** All 21 Sun Link stops are inside the city. Not drawn: buses.
 
+### Tacoma - the City's active license accounts, and every T Line stop
+
+**Left out of the City's business-license layer** (22,128 active Tax & License accounts,
+refreshed daily): 10,316 outside the city's five council districts ("Not Mapped", almost all
+out-of-town addresses, or no district at all). Then, of the 11,812 in the city, by NAICS code,
+the exclusions every NAICS city shares:
+- vending-machine operators (9) and fuel dealers (4) - NAICS 2022 has no "nonstore" code,
+  so online sellers are NOT left out: they sit under the goods they sell;
+- food service contractors (17), caterers (29) and mobile food (66);
+- parking (74), funeral services and cemeteries (12) and "all other personal services" (194);
+- hotels, motels and other lodging (396, among them short-term rentals in homes).
+
+**Also left out**: 61 whose address gives an apartment, trailer or mobile-home space, as
+homes. No storefront in a council district falls outside the city limits.
+
+**Counted once**: a business holding several accounts at one address and under one name: 2,870
+accounts to 2,851 premises.
+
+**Shown, but not named**: 104 storefronts show their type of business instead of a name: the
+account has no trade name of its own (the trade name is the account holder's name), the
+holder carries no company form, and the name reads as a person's.
+
+**Read with care**: an active account does not mean a license for the current year, in the
+City's own words.
+
+**Stations.** All 12 T Line stops are inside the city. Not drawn: Sounder commuter trains
+(Tacoma Dome and South Tacoma, mostly at rush hour) and buses.
+
 ### New Orleans - the City's own business types, and every stop of five streetcar lines
 
 **Left out of the Active Occupational Licenses** (16,521 active licenses), by the City's own
