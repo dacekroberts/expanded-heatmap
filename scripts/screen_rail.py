@@ -98,7 +98,9 @@ for _code in range(1300, 1308):
     OTHER[_code] = "aerial"
 for _code in range(1500, 1508):
     OTHER[_code] = "taxi"
-UA = "Mozilla/5.0 (compatible; transit-density-research/1.0)"
+# The project's identified agent, never a browser string: a host that refuses
+# it is recorded as a refusal (owner, 2026-10-04, docs/decisions_drafts/staging.md).
+UA = "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"
 
 
 class HttpFile(io.RawIOBase):

@@ -7,10 +7,13 @@ a drift check must be deterministic and offline.
 
 TWO THINGS HERE ARE UNLIKE THE OTHER CITIES.
 
-**The portal refuses a plain client.** `donnees.montreal.ca` answers
-`RBAC: access denied` unless the request carries a browser User-Agent. It is
-portal-wide, not dataset-specific, and it is the reason Montréal was nearly
-ruled out of the Canada screen.
+**The portal refuses an anonymous client.** `donnees.montreal.ca` answers
+curl's default agent with `RBAC: access denied` (portal-wide, not
+dataset-specific; it nearly ruled Montréal out of the Canada screen) and
+serves the project's identified agent, measured 2026-10-04. A browser
+User-Agent string is never sent to get past a refusal (owner, 2026-10-04,
+docs/decisions_drafts/staging.md); if the identified agent is refused, that
+is a refusal to record, not to work around.
 
 **The transit feed comes from STM, not the catalogue - and this city is the
 proof that matters.** Measured 2026-09-21: the agency feed was valid to
@@ -34,7 +37,6 @@ import requests
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from pipeline.montreal.config import (  # noqa: E402
-    BUSINESS_NEEDS_BROWSER_HEADERS,
     BUSINESS_PACKAGE,
     BUSINESS_URL,
     BUSINESSES_RAW_CSV,
@@ -52,28 +54,23 @@ from pipeline.montreal.config import (  # noqa: E402
 )
 
 HEADERS = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
-BROWSER_HEADERS = {
-    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                   "AppleWebKit/537.36 (KHTML, like Gecko) "
-                   "Chrome/124.0 Safari/537.36"),
-    "Accept": "text/csv,application/json,*/*",
-}
 
 
-def get(url, path: Path, *, force, label, browser=False, min_bytes=1024):
+def get(url, path: Path, *, force, label, min_bytes=1024):
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists() and not force:
         print(f"  {label}: have {path.name} "
               f"({path.stat().st_size:,} bytes) - skipping")
         return path
     print(f"  {label}: GET {url}")
-    r = requests.get(url, headers=BROWSER_HEADERS if browser else HEADERS,
-                     timeout=900)
+    r = requests.get(url, headers=HEADERS, timeout=900)
     if r.status_code != 200:
         extra = ""
-        if browser is False and "RBAC" in r.text[:200]:
-            extra = ("\n  This is the RBAC refusal - the request needs browser "
-                     "headers (config.BUSINESS_NEEDS_BROWSER_HEADERS).")
+        if "RBAC" in r.text[:200]:
+            extra = ("\n  This is the portal's RBAC refusal, now given to the "
+                     "project's identified agent as well. Record it as a "
+                     "refusal and bring it to the owner; never retry with a "
+                     "browser User-Agent string.")
         sys.exit(f"  {label}: HTTP {r.status_code}{extra}\n{r.text[:400]}")
     if len(r.content) < min_bytes:
         sys.exit(f"  {label}: only {len(r.content)} bytes - refusing to store "
@@ -142,14 +139,12 @@ def main():
 
     print(f"\nBusiness (CKAN package {BUSINESS_PACKAGE!r}):")
     path = get(BUSINESS_URL, BUSINESSES_RAW_CSV, force=args.force,
-               label="business", browser=BUSINESS_NEEDS_BROWSER_HEADERS,
-               min_bytes=1_000_000)
+               label="business", min_bytes=1_000_000)
     check_no_personal_columns(path)
 
     print("\nBoundary (the WGS 84 resource, not the NAD83/MTM one):")
     get(CITY_BOUNDARY_URL, CITY_BOUNDARY_GEOJSON, force=args.force,
-        label="agglomeration", browser=BUSINESS_NEEDS_BROWSER_HEADERS,
-        min_bytes=100_000)
+        label="agglomeration", min_bytes=100_000)
 
     print("\nDone. Next: python pipeline/montreal/step1_stations.py")
 
