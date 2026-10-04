@@ -55,9 +55,9 @@ the pointers. **Delete a section when its item is done.**
 
 ## Where things stand (2026-10-04, saved at the weekly limit)
 
-- **On master, `docs/city_master_list.md`: 158 built; 20 candidates (A 9 ·
-  B 6 · C 2 · D 3); 24 restricted; 143 discards.** The artifact is at
-  version 8 (12 candidates): republish it from the list.
+- **On master, `docs/city_master_list.md`: 158 built; 25 candidates (A 9 ·
+  B 7 · C 6 · D 3); 29 restricted; 155 discards.** The artifact is at
+  version 9 (https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn), with the paused probes listed.
 - **Three build sessions are out**, each landing at review time: "Korean
   build session" (Daejeon 190, Gwangju 191, Gimhae 192;
   `docs/handoff_korea_sweep_2026-10-03.md`), "Mendoza Tacoma Liverpool"
