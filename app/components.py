@@ -13,6 +13,7 @@ from typing import NamedTuple
 import streamlit as st
 
 from cities import CITIES, MAP_ONLY_NAV, SWITCHER_ORDER
+from osm_notice import OSM_RAIL_BY_CITY, osm_rail_text
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 # pipeline/theme.py imports nothing, so it is safe for the lean deploy venv
@@ -525,6 +526,9 @@ class Notice(NamedTuple):
         city.
     every_page: shown on every page as well, for a reason recorded beside the
         entry; check N pins that set to the owner's approval.
+    per_city: a function giving the text a city's OWN page shows in place of
+        `text`, which the Required notices page keeps whole (owner,
+        2026-10-03: OpenStreetMap's rail notice, app/osm_notice.py).
     """
     number: int
     heading: str
@@ -532,6 +536,7 @@ class Notice(NamedTuple):
     verbatim: bool
     cities: tuple
     every_page: bool = False
+    per_city: object = None
 
 
 # Groups of cities one notice covers, spelled as app/cities.py spells them.
@@ -987,8 +992,8 @@ _NOTICES = [
      "and Tren Ligero), Guadalajara (Tren Ligero), Monterrey (Metrorrey, with "
      "the boundaries of its four municipios) and Barcelona (Metro de "
      "Barcelona, including its FGC lines and both funiculars), and the route "
-     "geometry of Lille's two métro lines, the per-line colours of "
-     "Oslo's T-bane and tram lines, the colour of Bergen's Bybanen line 1, "
+     "geometry of Lille's two métro lines, the per-line colors of "
+     "Oslo's T-bane and tram lines, the color of Bergen's Bybanen line 1, "
      "and Copenhagen's Metro and S-tog lines "
      "and stations and the municipal boundaries used to select them, "
      "Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
@@ -1048,12 +1053,14 @@ _NOTICES = [
      "English station names, though not the lines or boundaries, of Kobe, "
      "Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, "
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
-     "Hakodate, Kagoshima, Okayama and Kōchi, and the "
+     "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
+     "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
+     "Higashiōsaka, Kurume, Sasebo and Shimonoseki, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
-     False, (*_OSM_RAIL, *_OSM_STATION_NAMES)),
+     False, (*_OSM_RAIL, *_OSM_STATION_NAMES), per_city=osm_rail_text),
     # Barcelona's terms prescribe the source wording AND require modifications
     # to be identified at distribution - the disclosure-of-transformation
     # family for the fourth time, after Montreal, INEGI and Madrid. A credit
@@ -2888,8 +2895,22 @@ def notices_in_order():
 
 
 def city_notices(city):
-    """The notices a city's page shows as its own, in number order."""
-    return [n for n in notices_in_order() if city in n.cities]
+    """The notices a city's page shows as its own, in number order. A notice
+    with `per_city` shows that city's own text (OpenStreetMap's rail notice);
+    the Required notices page keeps every notice whole."""
+    return [n._replace(text=n.per_city(city)) if n.per_city else n
+            for n in notices_in_order() if city in n.cities]
+
+
+# The per-city OpenStreetMap lines and the notice's cities must be one set:
+# a city in one and not the other would show the full list, or a line on a
+# page the notice does not reach.
+_osm_rail = next(n for n in _NOTICES if n.per_city is osm_rail_text)
+if set(_osm_rail.cities) != set(OSM_RAIL_BY_CITY):
+    raise ValueError(
+        "app/osm_notice.py and notice 1's cities differ: only in the notice "
+        f"{sorted(set(_osm_rail.cities) - set(OSM_RAIL_BY_CITY))}, only in "
+        f"osm_notice {sorted(set(OSM_RAIL_BY_CITY) - set(_osm_rail.cities))}")
 
 
 def every_page_notices():

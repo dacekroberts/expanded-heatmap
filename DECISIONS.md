@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**502 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**503 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -76,6 +76,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [San Diego and Los Angeles: a trade name that is the registrant's own name shows the street address (owner)](#2026-10-03---san-diego-and-los-angeles-a-trade-name-that-is-the-registrants-own-name-shows-the-street-address-owner)
 - [Every map's OpenStreetMap and Leaflet credits open in a new tab (owner)](#2026-10-03---every-maps-openstreetmap-and-leaflet-credits-open-in-a-new-tab-owner)
 - [The stations-left-out tables sort by line or reason (owner)](#2026-10-03---the-stations-left-out-tables-sort-by-line-or-reason-owner)
+- [The OpenStreetMap rail notice: each city page shows its own line, Required notices keeps the full list (owner)](#2026-10-03---the-openstreetmap-rail-notice-each-city-page-shows-its-own-line-required-notices-keeps-the-full-list-owner)
 
 **2026-10-02**
 
@@ -20368,3 +20369,36 @@ until the owner rules):**
   Shown only for a table of two or more rows. Checked locally on San
   Francisco's 85 rows: each order re-sorts the table and the expander stays
   open.
+
+### 2026-10-03 - The OpenStreetMap rail notice: each city page shows its own line, Required notices keeps the full list (owner)
+
+- **The owner asked** whether the "OpenStreetMap (rail geometry)" notice
+  must list every city on every page. Measured: it showed on 120 city pages,
+  690 words each, naming all 120 cities. ODbL 1.0 (4.3) and OSM's
+  attribution guidelines ask for the credit, the licence and a link, not an
+  inventory of what was taken, so the list per page was this project's
+  choice, not a term.
+- **Options put to the owner:** each city's own line plus the full list on
+  Required notices (recommended); own line plus a one-sentence summary
+  there; or no change. **The owner chose the first**, with this form for
+  Ottawa: "From OpenStreetMap: Ottawa's O-Train Lines 1, 2 and 4 and their
+  stations. © OpenStreetMap contributors, available under the Open Database
+  License. The alignments drawn are OSM's own geometry; stations, rings and
+  categories are this project's work."
+- **Built:** `app/osm_notice.py` holds one fragment per city, each restating
+  the full list's words for that city, and whether its map draws OSM's own
+  line geometry: the closing sentence about alignments is left off where it
+  would be false (Oslo's and Bergen's colors, the Japanese cities' English
+  station names, Prague's, Amsterdam's and Rotterdam's boundaries,
+  Philadelphia's one station location). `Notice` gains `per_city`;
+  `city_notices()` swaps in the city's line, so the Visuals cards built
+  from it take the short form too. `components.py` raises if the
+  fragments' cities and the notice's differ. Per-city lines run 14 to 49
+  words.
+- **The full list gained Japan wave 2's 14 cities** (Kawasaki to
+  Shimonoseki), which its tuple covered but its text had never named, and
+  its two "colours" became "colors" (US spelling, owner 2026-10-01).
+- **Check:** `check_provenance.py` now looks for each city's own line on its
+  page and requires it to carry "© OpenStreetMap contributors" and the
+  licence. Rendered locally: Ottawa's page shows its line and not the list;
+  Required notices shows the full list with the wave 2 cities.

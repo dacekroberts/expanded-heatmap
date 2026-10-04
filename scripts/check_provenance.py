@@ -676,9 +676,18 @@ def check_notice_placement(shown):
         for c in n.cities:
             if c not in per_city:
                 per_city[c] = _rendered_text(components, "render_site_notices", c)
-            if n.text not in per_city[c]:
+            # A notice with per_city shows that city's own line on its page
+            # (OpenStreetMap's rail notice, owner 2026-10-03); the line must
+            # still carry the credit and the licence.
+            want = n.per_city(c) if getattr(n, "per_city", None) else n.text
+            if want not in per_city[c]:
                 problems.append(f"notice {n.number} ({n.heading}) is not on "
                                 f"{c}'s page")
+            elif want is not n.text and not (
+                    "© OpenStreetMap contributors" in want
+                    and "Open Database License" in want):
+                problems.append(f"notice {n.number} ({n.heading}): {c}'s own "
+                                f"line lacks the OSM credit or the licence")
     if components.NOTICES_PAGE not in everywhere:
         problems.append("the footer does not link to the Required notices page")
     return problems
