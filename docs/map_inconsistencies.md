@@ -910,7 +910,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Belgium** | | | | | |
 | Brussels | Street survey | hub.brussels's survey of the City's ground-floor units (CC BY 4.0), dated 2025-10-17 | Its own unit types, mapped one by one; several types take the highest bucket | 2,468 / 1,818 / 476 | Upper floors not surveyed |
 | Antwerp | Food hygiene register | FAVV-AFSCA's list of operators (CC BY 4.0), placed on VKBO's points | Place and activity pairs | 1,369 / 2,604 / — | No Personal services; Retail = food shops only ("Food shops") |
-| Ghent | Food hygiene register | As Antwerp | As Antwerp | 486 / 1,110 / — | As Antwerp |
+| Ghent | Food hygiene register | As Antwerp | As Antwerp | 486 / 1,110 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Charleroi | Street survey | LoGIC 2024 (Service public de Wallonie, CC BY 4.0) | Four classes only (shops, horeca, services, vacant) | 659 / 330 / — | No Personal services; horeca 53% of FAVV's count (the survey is complete only in the commercial districts); hotels inside horeca |
 | Liège | Street survey | As Charleroi | As Charleroi | 769 / 567 / — | As Charleroi; horeca 68% of FAVV's count |
 | Brussels (Regional) | National register | KBO/BCE Open Data (companies' establishment units), placed on BeST-Address Brussels | NACE-BEL 2025 (any activity code in a bucket, Food over Retail) | 6,364 / 3,637 / — | Personal services off (about half the survey's count); no sole traders |
@@ -1295,7 +1295,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Belgium** | | | | | | |
 | Brussels | 2025-10-17 survey (fetched 2026-10-04) | B | 0.3 mi | Yes | 94% | Shop sign |
 | Antwerp | Extract of 2026-09-28 (fetched 2026-10-04) | B | 0.3 mi | Yes | 81% | Type of business (no names in the source) |
-| Ghent | As Antwerp | B | 0.3 mi | Yes | 58% | As Antwerp |
+| Ghent | Extract of 2026-09-28 (fetched 2026-10-04) | B | 0.3 mi | Yes | 58% | Type of business (no names in the source) |
 | Charleroi | August 2024 survey (file of 2025-04-09, fetched 2026-10-03) | B | 0.3 mi | Yes | 69% | Shop sign; the category for a sign read as a person's own name |
 | Liège | July and August 2024 survey (as Charleroi) | B | 0.3 mi | Yes | 57% | As Charleroi |
 | Brussels (Regional) | KBO snapshot 2026-10-02 (placed by the owner 2026-10-03) | B | 0.3 mi | Yes | 73% | Commercial name, else the company's |

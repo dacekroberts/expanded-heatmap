@@ -41,6 +41,7 @@ Mapped so far:
 - **Romania:** Bucharest
 - **Switzerland:** Zurich
 - **Georgia:** Tbilisi
+- **Belgium:** Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional)
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.
