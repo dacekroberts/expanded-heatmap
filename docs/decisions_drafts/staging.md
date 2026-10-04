@@ -4,6 +4,14 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Mendoza's Metrotranvía drawn to its end (owner)
+
+- **The owner: "yes draw mendoza line to end".** The whole line, Gutiérrez
+  (Maipú) to Avellaneda (Las Heras), is drawn; the 7 stations in the capital
+  are counted and the 18 outside it are listed on the page as out of scope
+  (Florence's T1, Göteborg's 4 and 12, and the Brazilian regional lines'
+  precedent). Recorded in `docs/build_briefs/mendoza.md`.
+
 ### 2026-10-03 - Three build sessions for the twelve candidates (owner)
 
 - **The owner: "eventual sessions: one korean, one belgium, one for the
