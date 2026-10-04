@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**25 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**26 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -49,6 +49,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Gwangju built: Gwangju Metro Line 1 on SEMAS's register, the merged member's codes and a five-district boundary](#2026-10-04---gwangju-built-gwangju-metro-line-1-on-semass-register-the-merged-members-codes-and-a-five-district-boundary)
 - [Daejeon built: Daejeon Metro Line 1 on SEMAS's register](#2026-10-04---daejeon-built-daejeon-metro-line-1-on-semass-register)
 - [korea_sbiz: a 시군구코드 filter beside the 시군구명 prefix, zero drift on the ten built SEMAS cities](#2026-10-04---korea_sbiz-a-시군구코드-filter-beside-the-시군구명-prefix-zero-drift-on-the-ten-built-semas-cities)
+- [Tacoma on the Visuals cards with its disclaimer in full; Liverpool (Regional) stays minor (owner)](#2026-10-04---tacoma-on-the-visuals-cards-with-its-disclaimer-in-full-liverpool-regional-stays-minor-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -953,3 +954,24 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
 - **Session setup, 2026-10-03:** branch 0 behind `origin/master` at
   `fafec401`; registered in `docs/session_roles.md`; `brief_check.py
   daejeon gwangju gimhae` 13/13 claims hold.
+
+### 2026-10-04 - Tacoma on the Visuals cards with its disclaimer in full; Liverpool (Regional) stays minor (owner)
+
+- **The owner asked whether Tacoma's "application" means a dynamic app or
+  an application of the data.** The disclaimer's own words settle it: the
+  data "contained in this application" and "in the web site", the software
+  that displays it, as in Chicago's terms ("the site where the software
+  application ... can be accessed"). The site is the application, hence
+  notice 142 on every page.
+- A card is not an app but does display the data, so the broad reading was
+  recommended: a card carries notice 142 word for word in its caption. The
+  City's right to end any display is honored as for Kansas City and
+  Chicago, already on cards: a removal request takes the card down wherever
+  the project posted it; copies elsewhere cannot be recalled.
+- **The owner: "tacoma goes on".** Visuals told.
+- **Liverpool (Regional)'s `label_tier` "minor", left as the owner's call
+  by its build: "liverpool minor sounds good".**
+- The three build worktrees (belgium, korea-sweep, new-cities) retired on
+  the owner's word after `check_worktree_data.py` passed each; their
+  branches deleted locally and on origin. The owner archived the sessions.
+
