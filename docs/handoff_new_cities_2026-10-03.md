@@ -37,9 +37,12 @@ commuter-rail exception on the "by day" reading.
 1. Liverpool (Regional)'s map mode is `metro`.
 2. The Department for Transport, NaPTAN notice 86 is reworded to cover
    Merseyrail; no new notice. Its current text reads "the UK's tram and
-   light-rail maps". **The new sentence waits on the owner's approval of
-   staging's draft**; write it into `app/components.py` and
-   `docs/data_sources.md` only once staging passes it on.
+   light-rail maps". **The owner approved the new first sentence
+   (2026-10-03):** "Stop and station counts on the UK's tram, light-rail and
+   Merseyrail maps are checked against NaPTAN, the National Public Transport
+   Access Nodes dataset published by the Department for Transport." The
+   licence sentence and the no-endorsement sentence stay. Write it in
+   `app/components.py` and `docs/data_sources.md` together.
 
 ## Per-city traps the briefs record
 

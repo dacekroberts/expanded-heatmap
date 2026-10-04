@@ -32,7 +32,7 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **158** across 25 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **12** — A 6 · B 5 · C 0 · D 1 *(the coverage sweep's first group, banded 2026-10-03 (owner): Daejeon, Gwangju and Gimhae from R, Mendoza, the City of Brussels and Tacoma to A; Liverpool (Regional), Antwerp, Ghent, Charleroi and Liège to B; Brussels (Regional) to D; Band R counted apart from 2026-10-02 (owner); Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded, Chiba to R (owner); Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
+> | **Candidates** | **12** — A 6 · B 5 · C 1 · D 0 *(Brussels (Regional) from D to C 2026-10-03, the owner holding the KBO file; the coverage sweep's first group, banded 2026-10-03 (owner): Daejeon, Gwangju and Gimhae from R, Mendoza, the City of Brussels and Tacoma to A; Liverpool (Regional), Antwerp, Ghent, Charleroi and Liège to B; Brussels (Regional) to D, then C; Band R counted apart from 2026-10-02 (owner); Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded, Chiba to R (owner); Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
 > | **Restricted (Band R)** | **23** *(Daejeon, Gwangju and Gimhae to A 2026-10-03, on SEMAS's keyless file; a band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
 > | **Discarded** | **122**, each naming its evidence *(Wakayama 2026-10-02, opt-in coverage; 100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
@@ -82,8 +82,8 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 |---|---|---|
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **6** |
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **5** |
-| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **0** |
-| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **1** |
+| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **1** |
+| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
 | | **Candidates** | **12** |
 | ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **23** |
@@ -119,18 +119,15 @@ five one-bucket cities were built and landed at review time the same day.
 | **Charleroi** 🇧🇪 | Retail and horeca, gap disclosed; no personal services | Wallonia's LoGIC 2024 survey (CC BY 4.0, the downloaded GeoPackage only): retail 980, horeca 450; horeca is **53%** of FAVV's count, the survey covering commercial perimeters only | Light metro M3/M4, every 10 minutes (15 on the Anderlues branch) | B with the gap disclosed (owner); measure coverage inside the rings first |
 | **Liège** 🇧🇪 | As Charleroi | LoGIC: retail 1,477, horeca 868 (**68%**) | Tram, 23 stops, every 5-15 minutes | As Charleroi |
 
-## 🟣 Band C — closer to a page (0 cities)
+## 🟣 Band C — closer to a page (1 city)
 
 | City | What there is | What stands between it and a band |
 |---|---|---|
+| **Brussels (Regional)** 🇧🇪 | The other 18 communes of the Brussels-Capital Region. **KBO/BCE's full Open Data file**, fetched by the owner under their own free account (extract 501, snapshot 2026-10-02): **20,992 retail, 9,252 food, 2,489 personal** companies' establishment units region-wide (sole traders excluded: KBO's licence makes their data personal data); 99.8% carry a full street address. KBO counts registered establishments, not storefronts: inside the City it holds 1.9 times hub.brussels's retail and 1.5 times its food. BeST-Address Brussels (17.9 MB, stated CC BY 4.0) cached for the join (owner, 2026-10-03) | **A storefront filter**, measured against hub.brussels inside the City as the ground truth, **and the address join's rate**; then a licence read of BeST-Address. Likely B (personal services thin without sole traders) |
 
-## 🔴 Band D — blocked, but the owner can act alone (1 city)
+## 🔴 Band D — blocked, but the owner can act alone (0 cities)
 
-| City | What there is | The owner's act |
-|---|---|---|
-| **Brussels (Regional)** 🇧🇪 | The other 18 communes of the Brussels-Capital Region: the regional catalogue (542 records) has no shop register, and hub.brussels's region-wide inventory is account-only. KBO/BCE's Open Data file holds every active establishment unit with its address and NACE code, daily, free; licence read 2026-10-03: permitted with conditions (declared purpose, credit with the update date, no direct marketing; the project is the GDPR controller) | **A free KBO Open Data account** (`kbopub.economie.fgov.be/kbo-open-data/signup?form`). Then companies' establishments only (sole traders' addresses are personal data), placed on the Brussels address register, and a download at least once a year so the contract does not lapse |
-
-*Tempe, the band's earlier row, went to the discards on 2026-10-01 once the owner fetched its list (a 33-page PDF with no addresses).*
+*Empty again on 2026-10-03: Brussels (Regional), its only row, moved to Band C once the owner held the KBO Open Data file. Tempe, the band's earlier row, went to the discards on 2026-10-01 once the owner fetched its list (a 33-page PDF with no addresses).*
 
 ## ⚫ Band R — restricted or request only (23 cities; created 2026-09-28)
 
@@ -576,8 +573,8 @@ it, not a band.
 | 🇹🇳 Tunisia | — | **0** | **0** | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | **0** | **0** | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | **0** | **0** | — | Addis Ababa discarded 2026-10-01 |
-| 🇧🇪 Belgium | — | **6** — City of Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) | **0** | A, B, D | **Off "Countries ruled out" 2026-10-03** (owner): the ruling rested on one national method. The City of Brussels to A (hub.brussels, CC BY 4.0); Antwerp and Ghent to B (FAVV food on VKBO points); Charleroi and Liège to B (LoGIC 2024, gap disclosed); the rest of the Region to D (a free KBO account) |
-| **Total** | **158** | **12** | **23** |  | A 6 · B 5 · C 0 · D 1 · R 23. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| 🇧🇪 Belgium | — | **6** — City of Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) | **0** | A, B, C | **Off "Countries ruled out" 2026-10-03** (owner): the ruling rested on one national method. The City of Brussels to A (hub.brussels, CC BY 4.0); Antwerp and Ghent to B (FAVV food on VKBO points); Charleroi and Liège to B (LoGIC 2024, gap disclosed); the rest of the Region to C (the owner's KBO file; a storefront filter and an address join to measure) |
+| **Total** | **158** | **12** | **23** |  | A 6 · B 5 · C 1 · D 0 · R 23. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 

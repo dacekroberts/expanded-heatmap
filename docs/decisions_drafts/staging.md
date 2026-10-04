@@ -4,6 +4,46 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - KBO measured: Belgian bands kept; Brussels (Regional) D to C; notice 86's sentence (owner)
+
+- **The KBO full file** (extract 501, snapshot 2026-10-02; fetched by the
+  owner under their own account, cached at `data/belgium/raw/`) was measured
+  for companies' establishment units in the buckets (`czech_nace2025` plus
+  `france_naf`'s laundry and heating-fuel exclusions; "any MAIN code in a
+  bucket", food over retail over personal, since 36% of establishments list
+  five or more unordered MAIN codes). Brussels-Capital Region 20,992 /
+  9,252 / 2,489; City of Brussels 4,477 / 2,765 / 443; Antwerp 8,510 /
+  3,596 / 861; Ghent 4,483 / 1,987 / 561; Charleroi 2,462 / 856 / 137; Liège
+  2,691 / 1,303 / 179. Sole traders, excluded, are 61-83% of personal
+  services. Antwerp and Ghent place 94-96% on VKBO points; elsewhere 99.8%
+  of rows carry a full street address.
+- **It counts registered establishments, not storefronts:** only 73-74% of
+  its food-service units appear on FAVV's list, and in the City of Brussels
+  it holds 1.9 times hub.brussels's retail and 1.5 times its food.
+- **The owner: "i accept all calls including the download"**, each as
+  staging recommended:
+  1. **The City of Brussels keeps hub.brussels** (A); KBO is a cross-check.
+  2. **Antwerp and Ghent stay B** (food, food shops as a partial); KBO's
+     retail and personal layers are not added.
+  3. **Charleroi and Liège stay B.**
+  4. **Brussels (Regional): D to C.** The account cleared D; what remains is
+     a storefront filter measured against hub.brussels inside the City (the
+     field survey as the ground truth) and an address join. **The download
+     was approved:** BeST-Address Brussels, `openaddress-bebru.zip`
+     (17,941,521 bytes, sha256 `f558a29d...df24d76`, dated 2026-09-30,
+     stated CC BY 4.0, FPS BOSA), cached at `data/belgium/raw/`; a licence
+     read follows.
+  5. **Sole traders: each source keeps its own rule.** KBO's licence makes
+     natural-person entity data personal data, so its layers take companies
+     only; FAVV's list carries no names and its points come from VKBO under
+     Flanders' licence, so the FAVV route places every food premises. The
+     pages say so.
+  6. **Notice 86's sentence approved** as staging drafted it: "Stop and
+     station counts on the UK's tram, light-rail and Merseyrail maps are
+     checked against NaPTAN, the National Public Transport Access Nodes
+     dataset published by the Department for Transport." The licence
+     sentence and the no-endorsement sentence are unchanged.
+
 ### 2026-10-03 - Liverpool (Regional) on the metro mode; notice 86 reworded for Merseyrail (owner)
 
 - **The owner: "1. metro 2. reword".** Liverpool (Regional)'s map mode is
