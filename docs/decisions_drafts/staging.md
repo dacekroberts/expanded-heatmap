@@ -4,6 +4,15 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Liverpool (Regional) on the metro mode; notice 86 reworded for Merseyrail (owner)
+
+- **The owner: "1. metro 2. reword".** Liverpool (Regional)'s map mode is
+  `metro`. The Department for Transport, NaPTAN notice 86 is reworded to
+  cover Merseyrail rather than a new notice added; its current text names
+  "the UK's tram and light-rail maps". The new sentence is drafted in chat
+  for the owner's approval before the build writes it (a rendered string,
+  in `app/components.py` and `docs/data_sources.md`).
+
 ### 2026-10-03 - Mendoza's Metrotranvía drawn to its end (owner)
 
 - **The owner: "yes draw mendoza line to end".** The whole line, Gutiérrez

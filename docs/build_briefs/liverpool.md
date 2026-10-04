@@ -73,7 +73,7 @@ map, and a page honest about evenings and Sundays.**
 - **CRS:** UTM 30N **EPSG:32630**, the UK six's `CRS_PROJECTED`; EPSG:27700
   is only Code-Point Open's source CRS.
 - **Region:** `"United Kingdom"`, `label_tier: "minor"`, as the UK six.
-- **Mode (an owner call with the build):** `scaffold_city.py` takes metro,
+- **Mode: `metro` (owner, 2026-10-03, "1. metro").** `scaffold_city.py` takes metro,
   light_rail or tram, and has no commuter-rail value. Copenhagen, whose
   S-tog is drawn beside a metro, is `metro`; Dublin, with DART drawn beside
   the Luas, is `tram`. Liverpool has only Merseyrail. Recommend `metro` (an
@@ -329,8 +329,8 @@ notices, a licence row, and, if `uk.py` changes, shared pipeline code.
 - ⚠️ **OSM tagging** of Merseyrail (network, refs, colours) in the one
   Overpass query; the GSS codes and boundary ids from the same query.
 - ⚠️ **Placement from the full files**, Sefton first.
-- ⚠️ **Mode** (`metro` recommended) and the NaPTAN notice's wording: owner
-  calls with the build.
+- ✅ **Mode** `metro` (owner); the NaPTAN notice is reworded (owner), its sentence
+  passed on by staging once approved.
 - ⚠️ **Page text:** to `docs/city_page_format.md`. The FSA bullets are
   approved (London's, Newcastle's, the UK six's); the exception's evening
   and Sunday sentence and the City Line sentence are proposals for the

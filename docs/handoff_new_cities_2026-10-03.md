@@ -33,11 +33,13 @@ Tacoma A, Liverpool (Regional) B); Mendoza the capital alone, its line drawn
 to its end; Tacoma's licence accepted on Chicago's template; Merseyrail as a
 commuter-rail exception on the "by day" reading.
 
-**Open for the owner, raised by the briefs (staging carries them):**
-1. Liverpool's map mode: `metro` (recommended).
-2. The UK station-data notice 86 (Department for Transport, NaPTAN) reads "the UK's tram and light-rail maps";
-   using it for Merseyrail needs a reworded sentence or a new notice. Ask
-   staging before writing either.
+**Settled by the owner later the same evening ("1. metro 2. reword"):**
+1. Liverpool (Regional)'s map mode is `metro`.
+2. The Department for Transport, NaPTAN notice 86 is reworded to cover
+   Merseyrail; no new notice. Its current text reads "the UK's tram and
+   light-rail maps". **The new sentence waits on the owner's approval of
+   staging's draft**; write it into `app/components.py` and
+   `docs/data_sources.md` only once staging passes it on.
 
 ## Per-city traps the briefs record
 
