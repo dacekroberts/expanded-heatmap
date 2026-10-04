@@ -76,8 +76,8 @@ map, and a page honest about evenings and Sundays.**
 - **Mode: `metro` (owner, 2026-10-03, "1. metro").** `scaffold_city.py` takes metro,
   light_rail or tram, and has no commuter-rail value. Copenhagen, whose
   S-tog is drawn beside a metro, is `metro`; Dublin, with DART drawn beside
-  the Luas, is `tram`. Liverpool has only Merseyrail. Recommend `metro` (an
-  underground city-centre loop, trunks every 2-6 minutes); the build asks.
+  the Luas, is `tram`. Liverpool has only Merseyrail. The owner chose `metro` (an
+  underground city-centre loop, trunks every 2-6 minutes); settled.
 
 ---
 
