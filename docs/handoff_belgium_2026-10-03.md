@@ -69,6 +69,16 @@ State, newest commits first in `git log`:
   (`publish`); a "Belgium" view (Czechia's mechanism) then
   `check_macro_labels.py`; one Overpass query for Antwerp's left-bank
   relations; the diagnostic, then re-basing the KBO targets on `brussels_hub`.
+- **The diagnostic ran (2026-10-04) and confirms only half.** Same KBO
+  units, the screen's typing in place of `brussels_hub`: Retail 78.1 / 76.0
+  (target 78.2 / 76.1), so typing explains Retail's recall gap; Food service
+  83.9 / 84.1 (target 84.4 / 84.0), so Food's 0.5-point precision gap is
+  not the typing. The two typings differ on 235 survey rows (161 Retail in
+  `brussels_hub` the screen leaves untyped). The approval was conditional on
+  confirmation, so re-basing waits for the owner. Recommendation: re-base
+  anyway on `brussels_hub` with a 1-point tolerance, recording the Food
+  residual (tradeoff: the control then accepts an unexplained half-point);
+  the alternative is hunting the Food residual in the join first.
 - **Owner calls (now approved)**: Brussels' 46 cafeterias
   kept (R1 pending in the continuity table); Brussels' signs all shown, no
   by-eye read (none printed under the standing rule); Charleroi's 33 and
