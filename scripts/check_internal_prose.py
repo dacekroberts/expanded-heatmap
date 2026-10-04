@@ -66,7 +66,8 @@ def doc_surfaces():
     every country's own sections."""
     from country_sections import COUNTRY_ORDER, country_text, parts_of, shared_text
     sources = ROOT / "docs" / "data_sources.md"
-    parts = parts_of(sources)
+    ledger = "Notices this project MUST display when published"
+    parts = [p for p in parts_of(sources) if ledger not in (p["title"], p["top"])]
     text = shared_text(parts, skip_titles=("How to keep this current",))
     text += "\n" + "\n".join(country_text(parts, c) for c in COUNTRY_ORDER)
     yield "docs/data_sources.md", public(text)

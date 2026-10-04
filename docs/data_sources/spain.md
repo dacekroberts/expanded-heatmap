@@ -15,6 +15,7 @@ deploy gate are in the main file, not here.<!-- /internal -->
 | Palma — **address points, not a business source** | The Dirección General del Catastro's **INSPIRE Addresses** for Palma (07040), from the province-07 ATOM feed (`https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/07/ES.SDGC.AD.atom_07.xml`): 55,609 points, 2,973 street names, EPSG:25831, dated 2026-08-21 | Places the register's premises that carry no coordinate, by street and number (pipeline/countries/spain_catastro.py): 59.3% exact, 7.1% at the nearest listed number on the same side within 6, 20.4% of kept premises unplaced. The control (512 rows with both a register coordinate and a joined point): median 1.1 m apart, 92.2% within 100 m | `https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/07/07040-PALMA/A.ES.SDGC.AD.07040.zip` | none (whole file). **Catastro's certificate chain fails with Python's bundled store**: `truststore` (the OS store), verification on. The GML declares the INSPIRE 3.0 URNs, not the 4.0 schema URLs | 2026-09-30 |
 | Barcelona | Ajuntament de Barcelona **Cens de locals en planta baixa amb activitat econòmica** (CKAN package `cens-locals-planta-baixa-act-economica`, resource `99764d55-b1be-4281-b822-4277442cc721`) | All three buckets, via the census's own four-level Catalan activity scheme — a **premises field survey**, not a license register, so the Montréal and Madrid shape rather than the license cities'. **THE YEAR IS A DECISION:** the **2022** survey holds 66,088 rows and is complete; the **2024** resource (`38babeec-5c47-43d3-84e7-b13a4b89004f`) holds 44,000 and is **geographically incomplete** — Sant Andreu −83%, Nou Barris −76%, Horta-Guinardó −69% against 2022, while Ciutat Vella is −5%, so a map built on it would show the periphery as commercially dead | `https://opendata-ajuntament.barcelona.cat/data/api/3/action` — `datastore_search`, paged at 10,000 | `fields=` restricted to **11 of the census's 50 columns**, and that list IS the privacy control. `Nom_Local` is a trade name and 100% populated, so there is **no registrant-name column to fall back to**; `Referencia_Cadastral` exists in the source and is deliberately never requested. **The vacancy filter is applied in step 2 and is mandatory**: `Nom_Principal_Activitat` is `Actiu` on 58,908 rows and `Sense activitat Econòmica` on 7,180 — empty units for sale or to let. License **CC BY 4.0** plus the Open Data BCN terms — notice **21**, and the outstanding duty to notify the Council | 2026-09-22 |
 
+<!-- internal -->
 ### Madrid — endpoints and findings, verified 2026-09-22
 
 **The first Spanish city, and the first anywhere in this project whose rail
@@ -142,10 +143,10 @@ licences**, which is Spain's country-level pattern.
 > rejected CRTM's own Metro GTFS — which downloads cleanly — precisely BECAUSE
 > CRTM stopped refreshing it in May 2025, and took the maintained feature
 > layers instead. The notice states CRTM's own last-update date (5 June 2026)
-> and that the map shows the network as recorded then.<!-- internal --> And
+> and that the map shows the network as recorded then. And
 > `scripts/brief_check.py`'s `arcgis_layer` check carries `max_age_days` on
 > both layers, so this is a commitment a check FAILS on rather than one a
-> comment promises.<!-- /internal -->
+> comment promises.
 >
 > This is a reasoned position on a clause that is clear once read in context,
 > not a generous reading of an ambiguous one. The full text is stored at
@@ -163,6 +164,7 @@ ML1**, which it operates. **The map does not use 303**: it maps **200 distinct
 stations inside the término municipal** (the Metro's 193, plus ML1's nine less
 the two it shares with the Metro), a different quantity (distinct stations,
 and only those inside the city).
+<!-- /internal -->
 
 ## Transit feeds
 

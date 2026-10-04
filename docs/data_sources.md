@@ -207,7 +207,7 @@ Each source's reading is in its country's file: the rows of the tables
 *Explicit and permissive — confirmed* and *Transit feeds (GTFS)*, the sections
 on Madrid, Seoul, Daegu and Busan, Brazil, Taiwan, Japan, CRTM and Barcelona,
 and the United States' own tables and open questions (*Permissive on reading
-the terms themselves*, *Still not established*, the API-account practice, the
+the terms themselves*, *Still not established*, <!-- internal -->the API-account practice, <!-- /internal -->the
 agency-branding question). What stays here is what applies to every city.
 
 ### Transit feeds (GTFS) — checked 2026-09-21

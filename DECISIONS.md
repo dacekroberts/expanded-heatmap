@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**503 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**504 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -77,6 +77,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Every map's OpenStreetMap and Leaflet credits open in a new tab (owner)](#2026-10-03---every-maps-openstreetmap-and-leaflet-credits-open-in-a-new-tab-owner)
 - [The stations-left-out tables sort by line or reason (owner)](#2026-10-03---the-stations-left-out-tables-sort-by-line-or-reason-owner)
 - [The OpenStreetMap rail notice: each city page shows its own line, Required notices keeps the full list (owner)](#2026-10-03---the-openstreetmap-rail-notice-each-city-page-shows-its-own-line-required-notices-keeps-the-full-list-owner)
+- [The live audit after the review-time landings, and the internal prose it found (owner)](#2026-10-03---the-live-audit-after-the-review-time-landings-and-the-internal-prose-it-found-owner)
 
 **2026-10-02**
 
@@ -20402,3 +20403,47 @@ until the owner rules):**
   page and requires it to carry "© OpenStreetMap contributors" and the
   licence. Rendered locally: Ottawa's page shows its line and not the list;
   Required notices shows the full list with the wave 2 cities.
+
+### 2026-10-03 - The live audit after the review-time landings, and the internal prose it found (owner)
+
+- **The audit (owner: "audit our new version of the site"):** after the
+  reboot at master 37d9a374, five live lanes: the 158 city pages in four
+  (at 375 and 1200, light, a dark sample every tenth city) and the site
+  pages in one. **Every page passed**: no page errors, every map at its
+  expected zoom with 0 guard corrections, the OSM credit uncovered with both
+  credit links opening a new tab, the stations-left-out sort control right
+  where the table has two or more rows, no horizontal overflow at 375; the
+  Overview's 19 captions as approved; About the Data and What Is Excluded
+  with Japan under East Asia (51); Required notices with all 137 notices.
+  Harness note for the next audit: the lanes share the app origin's
+  localStorage, so one lane's dark sample can flip another's map theme.
+- **The one finding:** About the Data showed research notes, "Boston - Step
+  0 findings, 2026-09-21" and "The owner's API-account practice". **The owner
+  asked for a check for internal prose left on the pages.**
+  `scripts/check_internal_prose.py` (REPORTS only) reads what the two
+  reference pages render, through the app's own filter, and flags process
+  words, owner and log references, repository paths, dated research, status
+  capitals, status emoji and first person: 2,234 hits at first, most in the
+  source tables, which the page says it shows "as the project keeps it".
+- **Options put to the owner, all four chosen:**
+  - research-note sections hidden: Boston's Step 0 findings, Dublin's and
+    Madrid's "endpoints and findings", and the API-account practice (to the
+    end of its own text; the licence judgment calls after it stay), plus the
+    two cross-references that pointed at them;
+  - the notices ledger ("Notices this project MUST display when published")
+    kept off About the Data: its entries are split by country, so the page
+    drops every ledger part, not only the shared one; Required notices
+    shows the notices themselves;
+  - the decision log's "(owner, date)" tags stripped in
+    `country_sections.public()`: 311 across the pages, 0 after; a tag with a
+    fact after a colon or semicolon keeps the fact ("(owner; 331 dropped)"
+    reads "(331 dropped)"); "a sole owner" and other business owners stay;
+  - status headings ("DECIDED", "BUILT", "built ...") reworded, the new
+    wording to the owner first (pending).
+- **`check_internal_markers.py` rule C** no longer fails a BLOCK span that
+  holds a table: a span inside a cell breaks the table, a span hiding whole
+  lines cannot (new self-test case, 14 of 14).
+- **After:** the scanner reports 902 hits, nearly all inside the source
+  tables, left as provenance; rendered locally, the United States view
+  shows no Step 0 notes, no API-account section, no ledger and 0 owner tags,
+  and the licence judgment calls still show.

@@ -85,6 +85,7 @@ laundry across both Carto license tables returns nothing, so **Personal
 services has no source in Philadelphia at all**. The What Is Excluded page
 records that as *missing* rather than *excluded*.
 
+<!-- internal -->
 ### Boston — Step 0 findings, 2026-09-21
 
 Probed before Boston was built (it has since been built from the sources
@@ -134,6 +135,7 @@ different municipality. A heat surface built on it would show where surveyors
 walked rather than where commerce is, so it is recorded as available and
 deliberately unused. Its license is also the only "not specified" one on the
 portal.
+<!-- /internal -->
 
 ## Transit feeds
 
@@ -354,6 +356,7 @@ and it moved up here after the reading rather than before.
 | **SEPTA** (Philadelphia) | Permitted: a "non-exclusive, non-assignable, non-transferable, limited and **revocable** right to use, reproduce and redistribute the datasets" | **Not required** — no attribution or notice clause anywhere in the agreement | "Licensee may not use SEPTA's trademarks and copyrighted materials for any commercial or profit-making use and may not alter them in any way." SEPTA "maintains title, ownership, rights and interest in and to the datasets", may revoke or modify the agreement at any time, and "reserves the right to institute a license fee at any time". As-is, no warranty, indemnification required; governed by Pennsylvania law, venue Philadelphia County. At `https://wwww.septa.org/license-agreement/` — the four-w host is **SEPTA's real domain, not the repo-README typo this row previously called it**: `www.septa.org` and `wwww.septa.org` each return 200 independently, with no redirect between them (checked 2026-09-21). Local copy: `docs/licenses/septa-license-agreement.html` |
 | **WMATA** (Washington D.C. — **BUILT 2026-09-21**) | Permitted within your own app: "a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application". **Third-party redistribution is prohibited** — "sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly...to any other person", unless authorised in writing and "inseparably commingled with or supplemented by additional data that you have provided" | **Not required** — no attribution or notice clause | **No modification clause at all**, which makes it more permissive than LA Metro's on the point that matters most. Access is gated: `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401** without a registered key from `developer.wmata.com/signup`; keys "remain WMATA's property and may be revoked or otherwise limited at any time", cannot be sold, transferred or sublicensed, and "enable WMATA to associate your API activity with your Application". Trademarks: "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement", and must not "state or imply affiliation, sponsorship or endorsement". **§6 additionally forbids stating or implying that the data your Application provides "is accurate, complete, or timely"** — the identical clause MTA carries, making this the **second** feed to constrain city-page prose that way, so it is a cross-city sweep rather than a D.C. footnote. **§9 termination is the sharpest in the project:** on termination "you must permanently delete all Transit Data or other data which you stored pursuant to your use of the API or GTFS", and "WMATA may request that you certify in writing your compliance with this section" — LA Metro requires removal, but only WMATA asks for written certification. Read 2026-09-21 from `https://developer.wmata.com/license`; local copy at `docs/licenses/wmata-transit-data-terms-of-use.html` |
 
+<!-- internal -->
 ### The owner's API-account practice, and what it interacts with
 
 **Stated 2026-09-21: the owner registers an API account, takes the data, and
@@ -425,6 +428,7 @@ The registered key is the compliant route. Because GTFS fetching lives in
 non-`step*.py` scripts, that key is a local environment variable for an
 occasional manual refresh — it never reaches the deployed app, which reads only
 `outputs/`.
+<!-- /internal -->
 
 **Two of these needed a judgment call rather than just a notice. Both were
 decided by the project owner on 2026-09-21**, and the reasoning is recorded so

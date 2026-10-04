@@ -86,7 +86,10 @@ def problems(text, pattern):
         block = (m.start() == 0 or text[m.start() - 1] == "\n") and text[m.end():m.end() + 1] in ("", "\n")
         if BLANK.search(span) and not block:
             out.append(f"{where}: C the span crosses a blank line and is not a block")
-        if "|" in span:
+        # A span inside a table cell breaks the table; a BLOCK span hides whole
+        # lines, a table's included, and cannot (owner, 2026-10-03: whole
+        # research-note sections hidden, tables and all).
+        if "|" in span and not block:
             out.append(f"{where}: C the span holds a '|' (a table cell boundary)")
         left, right = text[:m.start()], text[m.end():]
         l1, r1 = left[-1:], right[:1]
@@ -119,6 +122,7 @@ def selftest():
         ("block", f"Kept.\n\n{OPEN}**A process section.**\n\nTwo paragraphs.{CLOSE}\n\nKept.", 0),
         ("double space", f"Kept. {OPEN}A note.{CLOSE} Kept.", 0),
         ("table cell", f"| a{OPEN} b | c{CLOSE} |", 1),
+        ("block holding a table", f"Kept.\n\n{OPEN}\n### Notes\n\n| a | b |\n|---|---|\n| 1 | 2 |\n{CLOSE}\n\nKept.", 0),
         ("empty parens", f"Verdict ({OPEN}read 2026-09-24{CLOSE}).", 1),
         ("space before period", f"The verdict is open {OPEN}see PLAN{CLOSE}.", 1),
         ("dangling dash", f"An open decision —{OPEN} see PLAN{CLOSE}.", 1),
