@@ -20,11 +20,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**1 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**25 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
 - [Three heavy jobs at once (owner)](#2026-10-04---three-heavy-jobs-at-once-owner)
+- [Namyangju's Gyeongchun Line stays drawn, its wait stated; Goyang's Gyeongui-Jungang is no defect (owner)](#2026-10-04---namyangjus-gyeongchun-line-stays-drawn-its-wait-stated-goyangs-gyeongui-jungang-is-no-defect-owner)
+- [Belgium: four more owner calls (privacy, the Brussels dots, Rotterdam's label, the broad query)](#2026-10-04---belgium-four-more-owner-calls-privacy-the-brussels-dots-rotterdams-label-the-broad-query)
+- [Antwerp's left-bank query (call 5): no tram route relations returned; the closed stations stay unlisted](#2026-10-04---antwerps-left-bank-query-call-5-no-tram-route-relations-returned-the-closed-stations-stay-unlisted)
+- [Brussels (Regional) built: KBO on BeST-Address, companies only, two categories; STIB's whole network](#2026-10-04---brussels-regional-built-kbo-on-best-address-companies-only-two-categories-stibs-whole-network)
+- [Brussels (Regional): the privacy verdict, a call for the owner](#2026-10-04---brussels-regional-the-privacy-verdict-a-call-for-the-owner)
+- [Brussels (Regional): KBO control re-based on brussels_hub, 1-point tolerance (owner)](#2026-10-04---brussels-regional-kbo-control-re-based-on-brussels_hub-1-point-tolerance-owner)
+- [Antwerp and Ghent built on FAVV-AFSCA and VKBO](#2026-10-04---antwerp-and-ghent-built-on-favv-afsca-and-vkbo)
+- [Six Belgian calls approved (owner)](#2026-10-04---six-belgian-calls-approved-owner)
+- [Brussels built: STIB's metro, premetro and thinned trams; hub.brussels's survey in three categories](#2026-10-04---brussels-built-stibs-metro-premetro-and-thinned-trams-hubbrusselss-survey-in-three-categories)
+- [Brussels: calls for the owner (proposals, not yet decided)](#2026-10-04---brussels-calls-for-the-owner-proposals-not-yet-decided)
+- [Belgium: shared commune polygons from OpenStreetMap, one query per city](#2026-10-04---belgium-shared-commune-polygons-from-openstreetmap-one-query-per-city)
+- [Mendoza's lens workshop (T.OPTICA) stays off the map (owner)](#2026-10-04---mendozas-lens-workshop-toptica-stays-off-the-map-owner)
+- [Review time: the new cities' page proposals approved shortened; Mendoza out of South America's phone zoom (owner)](#2026-10-04---review-time-the-new-cities-page-proposals-approved-shortened-mendoza-out-of-south-americas-phone-zoom-owner)
+- [Mendoza built: the Metrotranvía from OpenStreetMap drawn to both ends, the capital's open commercial accounts, one business type each](#2026-10-04---mendoza-built-the-metrotranvía-from-openstreetmap-drawn-to-both-ends-the-capitals-open-commercial-accounts-one-business-type-each)
+- [Mendoza's taxonomy: the RAM level, one bucket per business, confiterias as Food service (owner)](#2026-10-04---mendozas-taxonomy-the-ram-level-one-bucket-per-business-confiterias-as-food-service-owner)
+- [Tacoma built: the T Line from OpenStreetMap, gate 3 exact against Sound Transit, the City's active license accounts under its site-wide disclaimer](#2026-10-04---tacoma-built-the-t-line-from-openstreetmap-gate-3-exact-against-sound-transit-the-citys-active-license-accounts-under-its-site-wide-disclaimer)
+- [Liverpool (Regional) built: Merseyrail's Northern and Wirral Lines as a commuter-rail exception, gate 3 exact against Merseytravel's booklets and NaPTAN's rail records, food only on the FSA register](#2026-10-04---liverpool-regional-built-merseyrails-northern-and-wirral-lines-as-a-commuter-rail-exception-gate-3-exact-against-merseytravels-booklets-and-naptans-rail-records-food-only-on-the-fsa-register)
+- [The UK steps take heavy rail: a configurable NaPTAN stop type, a route filter and boundaries by GSS code; zero drift on the UK six](#2026-10-04---the-uk-steps-take-heavy-rail-a-configurable-naptan-stop-type-a-route-filter-and-boundaries-by-gss-code-zero-drift-on-the-uk-six)
+- [Review time: the Korea sweep's page proposals and Gimhae's light-rail mode approved as written (owner)](#2026-10-04---review-time-the-korea-sweeps-page-proposals-and-gimhaes-light-rail-mode-approved-as-written-owner)
+- [A South Korea view on the macro map: Daegu, Busan, Daejeon, Gwangju and Gimhae (owner)](#2026-10-04---a-south-korea-view-on-the-macro-map-daegu-busan-daejeon-gwangju-and-gimhae-owner)
+- [Gimhae built: the Busan–Gimhae LRT on SEMAS's register, its own page](#2026-10-04---gimhae-built-the-busangimhae-lrt-on-semass-register-its-own-page)
+- [Gwangju built: Gwangju Metro Line 1 on SEMAS's register, the merged member's codes and a five-district boundary](#2026-10-04---gwangju-built-gwangju-metro-line-1-on-semass-register-the-merged-members-codes-and-a-five-district-boundary)
+- [Daejeon built: Daejeon Metro Line 1 on SEMAS's register](#2026-10-04---daejeon-built-daejeon-metro-line-1-on-semass-register)
+- [korea_sbiz: a 시군구코드 filter beside the 시군구명 prefix, zero drift on the ten built SEMAS cities](#2026-10-04---korea_sbiz-a-시군구코드-filter-beside-the-시군구명-prefix-zero-drift-on-the-ten-built-semas-cities)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -50,3 +74,882 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   heavy programs return to the machine, `MAX_JOBS` goes back to 2.
 - Unchanged: one drift check per machine, `--jobs 2` at most; the Python cap
   of 8 GB a process and 12 GB with children.
+
+### 2026-10-04 - Namyangju's Gyeongchun Line stays drawn, its wait stated; Goyang's Gyeongui-Jungang is no defect (owner)
+
+- **Raised by Staging** from the Korea probe (Seoul Metro's timetables of
+  2026-09-01): Namyangju draws the Gyeongchun Line, every 22-24 minutes at
+  midday, the frequency that discarded Chuncheon; Goyang draws the
+  Gyeongui-Jungang Line, whose 2.0 km spacing discarded Paju.
+- **Both were recorded calls**: the Gyeonggi brief's "Rail - Seoul's
+  precedent" draws the Korail metro lines (경의·중앙, 수인·분당, 경춘) as
+  Seoul does, and Namyangju's build entry lists Gyeongchun's 7 stations.
+- **Goyang: no defect.** Gyeongui-Jungang runs every 12-13 minutes, inside
+  the 15-minute test; spacing is a screening test for a city, not a station
+  rule for a line in a network already mapped.
+- **Namyangju: put to the owner** under the Daugavpils ruling of 2026-09-30
+  (the floor drops only an outlier route; where an outlier ends is the
+  owner's). Gyeongchun is the city's one slow line but serves 7 of its 17
+  stations (41%). **The owner chose to keep it and state the wait**, as
+  Daugavpils and Buffalo do: Namyangju's page adds "The Gyeongchun Line
+  runs about every 22 to 24 minutes by day, less often than the city's
+  other lines." Seoul's Gyeongchun stations stay as drawn. Lands at review
+  time with the next app/ batch.
+
+### 2026-10-04 - Belgium: four more owner calls (privacy, the Brussels dots, Rotterdam's label, the broad query)
+
+- **The owner: "1 yes 2 are these separate builds or can we combine 3 yes
+  one placement pass 4 broad query okay".**
+  1. **Brussels (Regional) publishes with one name withheld by key**: the
+     name `check_personal_exposure.py` read as a person's at a residential
+     unit, found and keyed by the check's own logic and never printed
+     (`config.PERSON_NAMED`). Two units carry it; both show their activity.
+     Re-run: 0 person-like names at a residential unit. Privacy row `publish`.
+  2. **The two Brussels dots**: asked whether the pages could combine. The
+     answer given: they are separate builds by the owner's earlier call (a
+     street survey against the company register, two methods whose counts do
+     not compare); the recommendation stays to move Brussels (Regional)'s dot
+     inside its own communes. Awaiting the owner's yes.
+  3. **One placement pass for Den Haag and Rotterdam** in the Europe view.
+  4. **A broader Overpass query for Antwerp** (every tram route in the box),
+     after the narrow one returned nothing.
+- **Done, call 2 (owner: "Yes to own communes", "Yes move dot")**: the
+  pages stay separate; Brussels (Regional)'s macro dot moves into its own
+  communes. Candidates: the 18 communes' centroid and each commune's
+  representative point, kept if inside the 18 and outside the City, each
+  scored by `check_macro_labels.py` with four label sides for the pair. The
+  centroid fails; the nearest passing point is Forest's (50.814, 4.3239),
+  3.5 km from the centroid and 2.5 km outside the City, with Brussels' label
+  above its dot as before and Brussels (Regional)'s below. PROBLEMS 0 in
+  every region at every width. The master list's Built table gives Belgium
+  its own row (Europe back to 23), as the view requires.
+- **Done, call 3**: of 144 offset pairs for Den Haag and Rotterdam in the
+  Europe view scored by `check_macro_labels.py`, one has no problem at 375,
+  768 and 1200 px: Rotterdam above-right ("start", 10, -12), Den Haag
+  below-right ("start", 10, 12). Their labels cross (the dots are 3.0 px
+  apart, a known stacked pair). Europe now scores 0; the Belgium view's
+  Brussels pair (call 2) is the check's last 6 problems.
+- **Done, call 4**: the broad query (`fetch_sources.py --all-tram-routes`,
+  one query, overpass-api.de) returned 25 tram route relations: lines 1, 2,
+  4, 6, 7, 8, 10, 11, 12, 24, A3 and A9, the feed's lines exactly, with
+  notes for the works ("temporarily shortened" on 2, 4 and 12). No relation
+  for 3, 9 or 15 under any ref: OpenStreetMap already mirrors the works
+  service, so it cannot name the left-bank tram stops either. They stay
+  unlisted, and the page and What Is Excluded already say no tram serves
+  the left bank during the works. Only De Lijn's own notice could list
+  them, and its terms bar republishing it.
+
+### 2026-10-04 - Antwerp's left-bank query (call 5): no tram route relations returned; the closed stations stay unlisted
+
+- **The approved query found nothing to list.** `fetch_sources.py
+  --left-bank-trams` (route=tram relations with ref 3, 9 or 15 in Antwerp's
+  rail box, their member nodes) was sent once and retried once after the
+  owner's minute: overpass-api.de answered with no elements both times
+  (`pipeline/osm.py` does not trust an empty 200), and overpass.kumi.systems
+  answered 504 and then timed out. Either OSM's relations are tagged
+  otherwise or were removed during the works; a second, broader query would
+  be a new query and is the owner's call. The left-bank stations stay
+  unlisted (config.CLOSED_FOR_WORKS_OPEN_QUESTION), as the page states.
+
+### 2026-10-04 - Brussels (Regional) built: KBO on BeST-Address, companies only, two categories; STIB's whole network
+
+- **Built Brussels (Regional) (page 201)**: the Brussels-Capital Region's 18
+  communes outside the City of Brussels. Step 1 on STIB's feed (the City
+  page's copy): metro 1, 2, 5, 6 and all 18 trams; 145 stations kept in the
+  18 communes, 73 in the City (on the Brussels page) and 13 beyond the
+  Region listed without rings, 72 tram stops thinned; the corridor is STIB's
+  parent stations, 45 of the network's 70 (the City's 25 are its page's);
+  median nearest-neighbour gap 437 m, so halved rings. Colors STIB's, with
+  18, 39 and 44 shifted as the City's five were. Step 2 as recorded above;
+  step 3: 10,006 of 13,680 storefronts in a ring (73%).
+- **The near-City-station count**: 995 storefronts sit within 0.3 mi of a
+  City station and of no station on this page, so neither page's rings count
+  them; the page says so.
+- **Sources**: KBO is never fetched by a script (the owner's login);
+  `pipeline/brussels_regional/fetch_sources.py` checks the owner-placed zip
+  against its sha256 and refuses otherwise, and re-fetches BeST only on
+  `--refetch-best`. KBO's yearly download is due by **2027-10-02** (the
+  license's 10.5, the owner's act). Notices 151 (KBO) and 152 (BeST) written.
+- **Proposals (sentences outside the page template, for review time)**: the
+  different-method bullet (after the brief's drafted paragraph), the
+  companies-only bullet, the near-City-station sentence, the several-
+  activities sentence, and the caption naming both dates.
+- **Downstream, card face or caption**: KBO (151) caption (2.8 asks for the
+  source and the update date, nothing on placement); BeST (152) caption (CC
+  BY 4.0, any reasonable manner); STIB (148) caption, as Brussels. **Open
+  terms question**: KBO's declared purpose (2.3) is the owner's
+  registration; if it names a narrower purpose than a public map and its
+  derived visuals, that becomes one.
+
+### 2026-10-04 - Brussels (Regional): the privacy verdict, a call for the owner
+
+- **Recommended: publish, with one pin's name withheld by key.**
+  `check_personal_exposure.py brussels_regional` on the rendered map: 10,006
+  in-ring pins, 9,424 distinct names. Step 2 keeps KBO's establishment units
+  of companies (legal persons) only and never opens `contact.csv`, so no pin
+  can fall back to a natural person; the dot's name is the unit's
+  commercial name (10,981 of 13,680) or the company's (2,699). 3,010 pins
+  (30.1%) match the person-name heuristic, the same share as the City's
+  street survey (30.0%), as company and trade names in a European city do.
+  1 pin carries a person-like name at an address the check reads as a
+  residential unit; the recommendation withholds that name by key
+  (`config.PERSON_NAMED`, the pin then shows its type) without reading it by
+  eye, under the standing rule that no person's name is printed. The
+  alternative, publishing all, rests on every name being a legal person's.
+  `PERSON_NAMED` stays empty until the owner answers.
+
+### 2026-10-04 - Brussels (Regional): KBO control re-based on brussels_hub, 1-point tolerance (owner)
+
+- **The diagnostic confirmed half of call 6, and the owner approved the
+  re-base anyway** ("1 point tolerance sounds acceptable"). On the same KBO
+  units, the screen's survey typing gives Retail 78.1 / 76.0 (brief 78.2 /
+  76.1) and Food service 83.9 / 84.1 (brief 84.4 / 84.0): the typing
+  explains Retail's recall gap; Food's 0.5-point precision gap is not the
+  typing. The join already reproduces (88.2% exact against 88.5, 97.2%
+  placed against 97.2), so the address match was not expected to recover
+  it. Targets are now this build's: Retail 78.2 / 75.4, Food service
+  83.8 / 84.1, tolerance 1.0 point (was 0.5), in
+  `pipeline/brussels_regional/config.py`.
+- **Step 2 then ran to completion**: 13,680 storefronts in the 18 communes
+  (Food service 4,972, Retail 8,708; Personal services' 973 off on this
+  page); 0 dots without a name, 0 withheld as a person's own; 995 placed
+  units within 482.8 m of a City station and of no regional one.
+
+### 2026-10-04 - Antwerp and Ghent built on FAVV-AFSCA and VKBO
+
+- **Built Antwerp (page 197) and Ghent (page 198) on FAVV-AFSCA's operator
+  list, placed on Flanders' VKBO unit points, with De Lijn's GTFS for the
+  trams.** FAVV's list carries no name or street column; VKBO is asked
+  through its WFS for the unit number, type, NIS code, postcode and point
+  only, and a page carrying any other property stops the fetch before
+  anything is written. Every pin shows its type, so the privacy verdict is
+  publish-structural.
+- **Antwerp: 4,881 food premises placed**: food service 3,097 of 3,232
+  (95.8%), food shops 1,784 as a Retail partial, Borsbeek's 44 included
+  (the brief's 3,100 of 3,231 and 1,764 were a screen, before Borsbeek's
+  postcode joined). 163 stations, 147 inside the scope; median gap 274 m,
+  so halved rings; no thinning (owner).
+- **Ghent: 2,730 placed** (food service 1,792, food shops 938); 50 stations,
+  49 inside; median gap 273 m, halved rings.
+- **A deviation from the brief's field list: UIDN and OIDN are asked for
+  explicitly.** Both are mandatory in VKBO's feature type (minOccurs 1), so
+  the server returns them whatever `propertyName` says; OIDN pages the fetch
+  (sorted, so pages never overlap) and neither is stored.
+- **Gate 3 is partial**, against De Lijn's line pages consulted privately
+  (delijn.be's terms bar republishing them). De Merode, Havenhuis, Cadix and
+  Bijlokehof, which those pages mark unserved but the feed serves from
+  2026-10-15, keep their rings as the timetable runs (owner, the six calls
+  below, item 4).
+
+### 2026-10-04 - Six Belgian calls approved (owner)
+
+- **The owner: "1-6 recommendations sound good"**, each as recommended:
+  1. **Brussels' 46 cafeterias and food courts stay Food service**: the
+     survey records street-level units, not staff canteens. The `pending`
+     cell in `scripts/category_continuity_table.py` becomes an exception
+     citing this entry.
+  2. **Shop signs:** Brussels publishes every sign, with no by-eye read (verdict
+     publish). Charleroi's 33 and Liège's 39 signs stay withheld by the
+     name-shape test (keys only, brands at two or more points exempt), with
+     no by-eye read, since this build prints no name.
+  3. **Belgium gets a macro-map view of its own, on Czechia's mechanism**,
+     holding all six Belgian cities, because their dots collide in Europe's view.
+  4. **Antwerp's and Ghent's disputed stops stay as the timetable runs**:
+     De Merode, Havenhuis, Cadix and Bijlokehof, which De Lijn's pages mark
+     unserved but the feed serves from 2026-10-15, keep their rings.
+  5. **One more Overpass query for Antwerp** (its tram route relations for
+     lines 3, 9 and 15) to list the left-bank stations closed for works.
+  6. **Brussels (Regional)'s agreement targets are re-based on
+     `brussels_hub`** once the diagnostic confirms that the survey's typing
+     explains the sub-point miss.
+
+### 2026-10-04 - Brussels built: STIB's metro, premetro and thinned trams; hub.brussels's survey in three categories
+
+- **Built the City of Brussels (page 196) on hub.brussels's inventory and
+  STIB-MIVB's GTFS.** Step 1: STIB's feed (version 2_21_20261002_143730,
+  window 2026-09-28 to 2026-10-25, fetched 2026-10-04 under the portal terms
+  the owner accepted on 2026-10-03; the terms text's sha256 is pinned in
+  `pipeline/brussels/config.py` so a re-fetch after the terms change stops
+  and comes back to the owner) runs metro 1, 2, 5, 6 and 18 tram lines.
+  Fifteen trams enter the commune on their regular route and are drawn whole
+  (4, 7, 8, 9, 10, 19, 25, 35, 51, 55, 62, 81, 82, 92, 93); 18, 39 and 44
+  never enter it. 268 stop places on the drawn lines, 73 inside the
+  commune, 66 kept after thinning (7 tram stops cut by the half-mile rule,
+  all on trams 10, 51 and 62 in the north), 195 outside listed by commune.
+  Gate 3 exact on all four metro lines against fr.wikipedia's "Nb.
+  d'arrêts" (21, 19, 28, 26, a secondary source; STIB publishes none). The
+  corridor: all 25 underground stations of the City's entrances dataset.
+  Median gap among the 66 kept: 377 m, so halved rings (0.05 / 0.1 / 0.2 /
+  0.3 mi). Step 2: 6,880 units, one survey (2025-10-17), every unit inside
+  the commune polygon; 1,068 vacant out, 743 out by type; **5,069
+  storefronts: Food service 1,930, Retail 2,623, Personal services 516**
+  (the screen's rough map gave 1,908 / 2,459 / 508); 4,762 inside a ring.
+- **A line's regular route takes a trip-share floor as well as Amsterdam's
+  day rule.** Metro 1 runs 34 of its 3,932 trips through to Erasme (the
+  first and last runs, every day), which the day rule alone counted as nine
+  more metro 1 stations (30 against the published 21). A stop now needs at
+  least 10% of the line's trips too; metro 1 then reads 21. The alternative,
+  an alias list of Erasme-branch stops, would fail silently when the
+  timetable changes.
+- **The corridor counts as inside the commune by name.** Botanique, Madou,
+  Porte de Namur and Rogier lie under the Petite Ceinture, the commune's
+  boundary with Saint-Josse and Ixelles: the mean of their platforms falls
+  just outside the polygon, while the City's own entrances dataset files
+  their entrances in Bruxelles and the brief names all 25 as the commune's.
+  Without it the corridor read 21. Rogier being inside brings trams 25 and
+  55 in (their premetro terminus), so they are drawn.
+- **Elisabeth and Simonis stay two stations** (103 m apart, Koekelberg, both
+  outside the commune): STIB's feed and the secondary source's per-line
+  counts both count them apart; the source's network figure of 59 (dated
+  2011) is one under the feed's 60 for that reason and is not used for gate 3.
+- **Station names show French and Dutch** ("Gare Centrale / Centraal
+  Station") from the feed's translations.txt where the two differ, as STIB
+  signs them; one name where they agree. The feed's own names are upper case.
+- **Line colors: STIB's own**, with five trams shifted in HSL lightness only
+  to clear Delta-E 13 from every earlier line (Amsterdam's rule): 9, 35, 55,
+  92, 93 (STIB gives 19 and 92 one red, 51 and 55 one yellow). Below the
+  preferred 45 against a pin color and kept as STIB's: Tram 4 14.4 and Tram
+  25 17.3 from Food service, Metro 6 21.0 from Retail, Metro 1 28.1.
+- **The taxonomy, `brussels_hub`**: keyed on the single type (285 distinct
+  once `type_fr` is split outside parentheses; 1,786 units carry two or
+  more, against the screen's naive 1,817). Every type has a home; an unknown
+  type raises. A unit takes the highest kept bucket among its types, Food
+  service over Retail over Personal services (the screen's rule and the KBO
+  measurement's); 175 kept units span two or more buckets. Departures from
+  the screen's rough map, each by the category rules or the publisher's own
+  filing (premises-taxonomy Step 6): art galleries Retail (precedent);
+  "Tailleur - Costumes" Retail, filed by hub.brussels under personal
+  equipment rather than Services (the screen had put it with alterations);
+  the craft types hub.brussels files under home equipment (glass, mirror,
+  crystal, wood, cabinetmaker, framer) Retail; a shisha bar, a board-game bar
+  and an e-sport bar Food service as bars; "Comptoir-traiteur" Retail as a
+  deli counter (France's traiteurs kept); heating fuel out (nonstore rule);
+  photo studios, engravers, trophy shops and clothing rental out as services
+  that are not personal care.
+
+### 2026-10-04 - Brussels: calls for the owner (proposals, not yet decided)
+
+- **Cafeterias and food courts (46 units typed "Cantine - Cafétéria -
+  Food-court") kept as Food service, pending the owner.** R1 leaves staff and
+  institutional canteens out; hub.brussels's survey records ground-floor units
+  open to the street, so these read as public cafeterias and food courts.
+  Recorded as `pending` in `scripts/category_continuity_table.py`. The
+  alternative, out under R1, removes 46 Food-service dots.
+- **The privacy verdict, recommended: every shop sign shown, none withheld.**
+  `check_personal_exposure.py brussels`: no owner or registrant column
+  exists, so no pin can fall back to a person; 0 contact details; 1,427 of
+  4,762 pins (30.0%) match the person-name heuristic (restaurants, galleries
+  and hairdressers top the list, as trade names in a European city do); 0 at
+  an address with a unit marker. The source is a street survey of ground-floor
+  commercial units, so every name is the sign on a shopfront, public
+  commercial information by definition, and no unit is a home. The precedent
+  that reads names by eye and withholds the ones that are only a person's
+  (Göteborg's 13, Zurich's 12) was not run: the owner's standing rule for
+  this build is never to print a person's name, and a by-eye read prints
+  1,427 names. If the owner wants that read, it runs with the names kept off
+  screen in a reviewed file. `PERSON_NAMED` is empty meanwhile.
+
+### 2026-10-04 - Belgium: shared commune polygons from OpenStreetMap, one query per city
+
+- **Commune polygons outside the Brussels-Capital Region come from
+  OpenStreetMap**, one Overpass query per city (every `admin_level` 8
+  relation in the rail box, keyed on `ref:INS`), run one at a time by the
+  lead on 2026-10-04: Antwerp 208.0 km2 with Borsbeek (24 communes in the
+  box), Ghent 157.6 km2 (12), Charleroi 102.8 km2 (22), Liège 68.5 km2 (18).
+  The Brussels cities read the Region's own commune limits (PARADIGM, CC0,
+  19 communes; the City 33.1 km2). Reader in `pipeline/countries/belgium.py`,
+  fetch in `pipeline/countries/belgium_fetch.py`.
+- **The TEC name (relayed by staging, 2026-10-04):** the owner approved
+  staging's recommendation: notice 150 credits "LETEC", lines are labelled
+  M2, M3, M4 and T1, and no "TEC" appears in legends or prose.
+
+### 2026-10-04 - Mendoza's lens workshop (T.OPTICA) stays off the map (owner)
+
+- **The owner: "t optica can be left off".** The one business under
+  T.OPTICA, a lens workshop (T. is taller, a workshop), stays out as the
+  build drafted it, rather than going to Retail with the 103 under OPTICA,
+  which `docs/category_rules.md` keeps as opticians.
+- The continuity table's Mendoza column records it as an exception, no
+  longer pending; Vancouver's opticians remain the one call awaiting the
+  owner.
+
+### 2026-10-04 - Review time: the new cities' page proposals approved shortened; Mendoza out of South America's phone zoom (owner)
+
+- **The owner: "wording proposals OK if they follow our new conventions
+  (shorter)".** The proposals listed in the three build entries below were
+  cut to one claim a bullet (`docs/city_page_format.md`) before landing:
+  - Mendoza: the frequency bullet split from "Buses are not drawn."; the
+    several-types bullet and the confiterías bullet each cut to one
+    sentence.
+  - Tacoma: the name rule cut to its first sentence; the account caveat
+    keeps the City's point (an active account need not hold this year's
+    license) in fewer words. The Sounder clause stood as written.
+  - Liverpool (Regional): the Merseyrail bullet and the City Line bullet
+    shortened; the evening bullet stood as written.
+  - Notice 141's wording, the build's draft, stood as written.
+- **The owner on Mendoza's label: "mendoza label clips on south american
+  view? then ok".** It does: at 375 px Mendoza's pill clipped Rio's by
+  87 px, so `REGION_ZOOM_WITHOUT` leaves Mendoza out of South America's
+  zoom (Riga's mechanism). After merging Belgium and the new cities,
+  `check_macro_labels.py` scored PROBLEMS 0 across 20 regions at three
+  widths, 167 cities.
+- Liverpool (Regional)'s `label_tier` "minor", which its build left as the
+  owner's call, landed as built; the owner can still change it.
+- Still with the owner: whether a Visuals card counts as an "application"
+  under Tacoma's disclaimer (Tacoma stays off the cards until then).
+
+### 2026-10-04 - Mendoza built: the Metrotranvía from OpenStreetMap drawn to both ends, the capital's open commercial accounts, one business type each
+
+- **Argentina's second city, sharing no code or source with Buenos Aires**
+  (`pipeline/mendoza/`, page 193): the capital alone (owner, 2026-10-03).
+  Brief claims held (`brief_check.py mendoza`, 5 of 5). Mode `light_rail`
+  (the brief's proposal; a converted railway) and coverage `full` (owner,
+  2026-10-04: Personal services, 296, small but complete).
+- **Rail, from the one Overpass query** (2026-10-04, overpass-api.de, 58
+  elements): two `route=light_rail` relations, ref MTM, operator Sociedad de
+  Transporte Mendoza (2119332 line 101, 3413331 line 100), each with all 25
+  stops; 50 stop positions -> **25 stations**.
+  - **Gate 3 against es.wikipedia's infobox, 25, the brief's named secondary
+    fallback (owner, 2026-10-04).** The operator's own page says "dos
+    Estaciones Principales, además de 21 paradores" (23), which no list
+    reconciles, and its timetables carry 11 timing points only.
+  - **Scope: OSM's Departamento Capital (relation 2204157), the owner's call
+    over the portal's seccionales (2026-10-04)**: no new source, already in
+    the one query, and it places exactly the 7 stations the city's own stop
+    list files under the Ciudad de Mendoza (Pedro Molina inside; 25 de Mayo
+    and José María Godoy outside, the brief's three border stops). 106.0 km²,
+    gated at 95-115. The 18 stations outside are listed with their
+    departments: Godoy Cruz 8, Las Heras 5, Maipú 5.
+  - **The line drawn to both ends** (owner, 2026-10-03), its outside stations
+    without rings (Florence's shape).
+  - **Halved rings on the spacing rule**: the capital's 7 stations sit a
+    median 412 m apart (min 336, max 731), under 550 m; the whole line's
+    median is 556 m. MEDIAN_GAP_BOUNDS_M (360, 470).
+  - **Color #CB2910**: OSM's "red" (#C62828 as drawn) sits 33.2 from the Food
+    service pins; the nearest red clearing 45 from every pin and 3:1 on both
+    page backgrounds, 45.4.
+  - Frequency from STM's winter 2026 weekday timetable (its operator's own
+    PDF): every 10 minutes at peak, 13 at midday.
+- **Businesses ("Listado Comercios por Actividad 2025", the cached JSON,
+  sha256 as approved):** 41,179 activity rows for 8,309 businesses; 151 with
+  no business type out; by the taxonomy (the entry below) Retail 3,397, Food
+  service 713, Personal services 296, out 3,752; every point present, read as
+  EPSG:5344 and reprojected, and every one inside the capital: **4,406
+  storefronts**. 641 (15%) within a ring: Retail 413, Food service 173,
+  Personal services 55.
+- **The name rule (Vancouver's, as the brief names it):** a trade name in
+  the register's sole-trader form, surname first with a comma, no "&" or
+  digit and no company or trade word, shows the business type: 144 of all
+  8,309 names carry the form, 92 of them storefronts. The shown type is the
+  register's own rama label.
+- **Personal exposure (`check_personal_exposure.py mendoza`):** 641 pins,
+  619 distinct names; one name column, no fallback; 0 emails, phone numbers
+  or c/o markers; 0 surname-first names left; 1 "person's name (trade name)"
+  shape; the heuristic reads 207 (32.3%) as person-like, within the built
+  Spanish-language registers' range (Madrid 26.1%, Barcelona 27.6%,
+  Guadalajara 30.7%, Mexico City 32.3%), where it reads shop names. No row
+  was printed at any stage. **Verdict: publish.**
+- **Notice 141, the Municipalidad's CC BY 4.0 credit**: the dataset's title
+  linked to its page, the licence linked, the modifications stated and no
+  endorsement. **A proposal**: no wording is prescribed and no template
+  covers it.
+- **For Visuals:** 141 on the card face or in the caption, as CC BY 4.0
+  allows either ("in any reasonable manner based on the medium"; a caption
+  linked from the card satisfies it); the rail and boundaries are
+  OpenStreetMap's, so the OSM line goes on the face. No open terms question.
+- **Macro map:** label width 61.8 px (browser pane); above its dot. **South
+  America's zoom now leaves Mendoza out** (`REGION_ZOOM_WITHOUT`, Riga's
+  mechanism): fitted to it, the zoom dropped and the Brazilian coast's labels
+  collided (12 problems at every width, whatever Mendoza's own offset). Its
+  centre still counts, so on a phone (375 px) Rio de Janeiro's pill clips 87
+  px (42.5 before), Recife's 36, Porto Alegre's 8 and Mendoza's 9; PROBLEMS 0
+  at 375, 768 and 1200. **For the owner at review time**: the phone clipping
+  is the cost.
+- **Proposals for review time:** the page's frequency, business, name-rule,
+  data-date and confitería bullets; the "Mendoza" section of What Is
+  Excluded; notice 141's wording.
+
+### 2026-10-04 - Mendoza's taxonomy: the RAM level, one bucket per business, confiterias as Food service (owner)
+
+- **`pipeline/taxonomies/mendoza_rama.py` keys on the register's RAM level**
+  (the business type, `desc_full`), measured with the `premises-taxonomy`
+  skill on the cached file (an agent's leg, counts only, no row printed):
+  418 RAM values, all enumerated (179 Retail, 18 Food service, 7 Personal
+  services, 214 out), an unknown one raises. At RAM 528 of 8,274 rows (6.4%)
+  name no trade; SUB is not a finer level (fee lines for signage, scales and
+  motors share it, and 14.6% of businesses have no SUB row naming a trade),
+  so the RAM catch-alls (offices by their own SUB items) are dropped and
+  disclosed rather than dispatched.
+- **One bucket per business, by priority over every RAM row** (Food service,
+  then Retail, then Personal services): Food service 713, Retail 3,397,
+  Personal services 296, out 3,752, no RAM row 151 (out). The alternative,
+  the first RAM row in file order, differs on 6 businesses and rests on an
+  order nothing documents. 7 businesses carry ramas in two in-scope buckets,
+  all Food service with Retail.
+- **CONFITERIA (137) is Food service, a measured departure from Buenos Aires
+  (owner, 2026-10-04, "Food service, a measured departure").** Buenos Aires
+  files confiterias as Retail because its survey keeps cafe-tearooms under
+  CAFE, leaving CONFITERIA as the pastry shop (owner, 2026-09-28). Mendoza's
+  register does the opposite: its pastry and bread shops are PANADERIA (98%
+  carry a pastry or bread item), while its confiterias carry sidewalk-table
+  permits (69%) and alcohol service (45%) as CAFE BAR (77%, 77%) and
+  RESTAURANT (64%, 91%) do, and the City's own fee and alcohol items group
+  them with cafes ("CONFIT.CAFES,LECHE,CHOCOLATERIA" on 128 of 137,
+  "ALCOHOL CONFITERIA, CAFE BAR" on 55). Matched by what the premises is,
+  per `docs/category_rules.md`. Rejected: Retail, one reading of the word
+  across both Argentine cities, which would draw about 137 seated cafes as
+  shops.
+- **The rest as drafted (owner, 2026-10-04, "Accept as drafted"):** street
+  stands on the public way out (38 sidewalk newsstands, ESCAPARATE; 27 feria
+  franca produce stands; 16 flower kiosks; 1 other), R1's food-stall rule
+  carried to non-food stands; VETERINARIA (29) out by the vet rule, though
+  some also sell pet food; GALERIA (10) and CENTRO COMERCIAL (2) out as an
+  arcade's or mall's own row; INSTITUTO (111, mostly teaching and medical)
+  out; the unclear abbreviations at their best reading, among them BAR
+  AMERIC. (2) kept as Food service, since both businesses' other items are a
+  restaurant's, a cafe's and sidewalk tables (an exception to R3 in
+  `scripts/category_continuity_table.py`), MERCADO PERSA (9) and FOTOGRAFIA
+  (9) Retail, LAVADERO (12) out as mostly car washes.
+- **Pending for the owner:** T.OPTICA (1), a lens workshop, drafted out as a
+  workshop rather than an optician's shop; listed as pending in the
+  continuity table.
+
+### 2026-10-04 - Tacoma built: the T Line from OpenStreetMap, gate 3 exact against Sound Transit, the City's active license accounts under its site-wide disclaimer
+
+- **Built on Kansas City's template** (`pipeline/tacoma/`, page 194): a US
+  register on the shared NAICS module, the shared OSM tram step 1, the TIGER
+  place polygon. Brief claims held (`brief_check.py tacoma`, 6 of 6). Mode
+  `tram` and coverage `full` as the brief proposes, for the owner with the
+  build.
+- **Rail, from the one Overpass query** (2026-10-04, overpass-api.de, 24
+  elements): two `route=tram` relations, ref "T Line", operator Sound
+  Transit, network Link, colour #F38B00 (5705256, 5705257), both kept, no
+  other tram or light rail in the box. 22 stop positions -> **12 stations**,
+  all inside the city.
+  - **Gate 3 exact**: Sound Transit's own T Line page lists 12 stations,
+    St Joseph to Tacoma Dome (read 2026-10-04). It writes "S 25th" where OSM
+    writes "S 25th St"; the map shows OSM's name.
+  - **Median gap 451 m** (min 349, max 755), so halved rings (0.05 / 0.1 /
+    0.2 / 0.3 mi), as the brief measured on the feed; MEDIAN_GAP_BOUNDS_M
+    (400, 500).
+  - OSM's orange kept: 77.9 from the nearest pin color (Food service), every
+    line label 4.5:1 in both themes (`check_map_markup.py`).
+  - Frequency from the same page: every 12 minutes weekdays 7:00-20:00 and
+    Saturdays, every 20 otherwise and on Sundays, stated as a fact.
+- **Businesses ("Business Licenses - Map (Tacoma)", the point layer, last
+  edited 2026-10-02), fetched with an explicit field list that leaves every
+  `mailing_*` field out:**
+  - 22,128 accounts; 11,812 in council districts 1-5; 2,931 in the buckets,
+    the brief's counts exactly (Retail 1,520, Food service 600, Personal
+    services 811); every one has a point and every one is inside the TIGER
+    polygon.
+  - 61 at an apartment, trailer or mobile-home space left off as homes
+    (Kansas City's set, APT and TRLR, with `residence.py`'s SPC/SPACE: 59 and
+    2); 19 duplicate accounts at one name and site address -> **2,851
+    premises**.
+  - 503 (18%) within a ring: Retail 183, Food service 135, Personal services
+    185.
+  - The catch-alls follow `naics.py` unchanged, as every NAICS city's do:
+    459999 (264) and 455219 (71) kept, 812990 (194) out.
+- **The name rule (Vancouver's, 2026-09-21, as the brief names it):** where
+  the trade name is only the account holder's own name (697 of the storefront
+  accounts), the holder carries no company form (164) and the name reads as a
+  person's by `residence.looks_personal` or Kansas City's surname-first test
+  (104), the pin shows the NAICS description. A trade name an owner chose is
+  shown as chosen, the San Diego and Vancouver precedent: 775 storefront trade
+  names are person-shaped by the same over-firing test, most of them shop
+  names. **Rejected, for the owner to reopen**: Kansas City's further rule, a
+  company trading only under a person's name shows its address, which there
+  rested on reading every person-shaped name by eye; this build prints no
+  name, so it is not applied.
+- **Personal exposure (`check_personal_exposure.py tacoma`):** 503 pins, 493
+  distinct names; 0 emails, phone numbers or c/o markers; 0 surname-first
+  names; 2 "person's name (trade name)" shapes; the heuristic reads 86 (17.1%)
+  as person-like, owner-chosen trade names; 1 person-shaped name at a UNIT,
+  which the home rule does not read as a dwelling. **Verdict: publish**, on
+  Vancouver's rule and the home rule.
+- **Notice 142, the City of Tacoma's disclaimer**, word for word from the
+  City's disclaimer item (115 words, its curly apostrophe kept), shown on
+  every page as Chicago's (2) and Kansas City's (80) are: the owner accepted
+  the licence "on Chicago's template" (2026-10-03). `check_provenance.py`'s
+  EVERY_PAGE_APPROVED gains 142 on that acceptance; **for the owner to
+  confirm** at review time, since that set is the owner's. The credit "City
+  of Tacoma, Tax & License (data.tacoma.gov)" sits in the page's caption, not
+  in a numbered notice; data.cityoftacoma.org is never cited.
+- **For Visuals:** 142 in the caption, in full (Chicago's and Kansas City's
+  full paragraphs must sit in the caption itself, owner 2026-10-02); about
+  115 words fits a card face only in small type. **Open terms question**:
+  the City may require any display or use to end, for any reason, and its
+  disclaimer binds "applications"; whether a city card counts as one is
+  Visuals' question to carry to the owner, so Tacoma stays off the cards until
+  the owner rules. The rail is OpenStreetMap's, so the OSM line goes on the
+  face.
+- **Macro map:** label width 51.8 px (measured in the browser pane); minor
+  tier, as the US tram cities are (Kansas City, Tucson, New Orleans): in the
+  United States composite every side of its dot met Seattle's, Sacramento's
+  or Minneapolis's pill. Below the dot in United States West, PROBLEMS 0 at
+  375, 768 and 1200. Out of the landing frame, as Seattle (Regional) is.
+- **Proposals for review time:** the page's Sounder clause ("Sounder's trains
+  to Tacoma run mostly at rush hour"), the name-rule bullet, the home bullet
+  and the account caveat under "Reading the density"; the word "tram" for a
+  line Sound Transit markets as light rail (the brief's heading, the
+  tram-city template); Tacoma's section of What Is Excluded.
+
+### 2026-10-04 - Liverpool (Regional) built: Merseyrail's Northern and Wirral Lines as a commuter-rail exception, gate 3 exact against Merseytravel's booklets and NaPTAN's rail records, food only on the FSA register
+
+- **Built on the UK six's shared steps as config** (`pipeline/liverpool/`,
+  page 195), the first UK map on heavy rail: Merseyrail drawn as a
+  commuter-rail exception (owner, 2026-10-03), map mode `metro` (owner,
+  2026-10-03, "1. metro"), the scope Liverpool, Sefton, Knowsley and Wirral
+  (owner, 2026-10-03). Brief claims held (`brief_check.py liverpool`, 5 of 5).
+- **Rail, from the one Overpass query** (2026-10-04, overpass-api.de, 1,088
+  elements; train routes of Merseyrail's network or operator only, and the
+  four councils' boundaries by GSS code):
+  - 13 relations: the Northern Line's 6 and the Wirral Line's 4 kept (ref,
+    operator Merseyrail); the City Line's 3 (289382-289384, tagged
+    `network=Merseyrail` but run by Northern Trains, one still tagged London
+    Midland) named in NOT_DRAWN with the 15-minute reason.
+  - 135 stop positions -> 69 stations by name (widest spread 182 m, Seaforth
+    & Litherland's two platforms).
+  - **Gate 3, the operator: exact.** Merseytravel's timetable booklets, the
+    brief's named sources, read for the line diagram on each cover: the
+    Northern Line (valid from 17 May 2026) 37 stations, the Wirral Line (from
+    20 September 2026) 34 Merseyrail stations, the Bidston - Wrexham line's
+    Upton and Heswall (Transport for Wales) not counted. The build: 37 and 34.
+    Merseyrail's own site sits behind a bot challenge and was not tried.
+  - **Gate 3, NaPTAN: 59 of 59 names match** against the active RLY records
+    (ATCO area 910, prefix 9100) inside the four councils, three under
+    NaPTAN's other names (NAPTAN_NAME_ALIASES: Birkenhead Hamilton Square;
+    Liverpool Central's loop platforms and Lime Street's low-level station,
+    each a record of its own). 13 NaPTAN-only stations are explained in
+    NAPTAN_EXPLAINED as on lines not drawn: ten on the City Line (Broad Green,
+    Edge Hill, Halewood, Huyton, Mossley Hill, Prescot, Roby, Wavertree
+    Technology Park, West Allerton, Whiston), Upton and Heswall on TfW's
+    Bidston - Wrexham line, Meols Cop on Northern's Southport - Wigan line.
+  - The light-rail test's track print reads railway=rail 100%, 12.5% in tunnel
+    or on a bridge: heavy rail, expected, drawn on the commuter-rail exception
+    rather than on that test.
+  - **Scope: 59 inside, 10 outside** (Ormskirk, Aughton Park, Town Green;
+    Hooton, Capenhurst, Bache, Chester, Little Sutton, Overpool, Ellesmere
+    Port), as the brief counted. Northern 34 and Wirral 27 in scope.
+  - **Spacing: median 1,182 m in scope** (min 210, mean 1,149, max 3,100), so
+    the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), well over the spacing
+    rule's 550 m; MEDIAN_GAP_BOUNDS_M (1,000, 1,400).
+  - Lines merged by London's branch rule: Northern 3 of 6 relations, 64.6 km;
+    Wirral 4 of 4, 100.3 km, the one-way loop drawn once within the merge.
+  - **Colors adjusted, on measurement:** OSM's #036ebc and #00a654 (the
+    operator's blue and green) moved to #08A0C0 and #28A800 by
+    `line_colour_search.py liverpool` (45.1 and 45.6 from the pins, 3:1 on
+    both pages, the pair 94.8 apart).
+- **The brief's two frequency checks, from the same booklets:** every
+  Kirkby-branch train runs to Headbolt Lane (Fazakerley, Kirkby and Headbolt
+  Lane share every column); and Bebington's autumn pattern (from 21 September
+  2026, Chester and Ellesmere Port lines only) is minutes 19, 27, 34, 49, 57,
+  04 towards Chester, gaps of 8, 7 and 15, so every Wirral station short of
+  Hooton keeps 15 minutes or better by day.
+- **Businesses (the FSA's four files, every extract 2026-10-02):**
+  - 10,179 register rows; 7,400 storefront rows, the brief's figure exactly.
+  - 4 at a "Flat" address never placed; no childminders.
+  - 622 without the FSA's point: 399 placed at a Code-Point centroid, 223
+    (3.0%) not placed (Sefton 3.8%, Wirral 3.7%, Knowsley 2.5%, Liverpool
+    2.4%); no outward-only postcodes. **Sefton's full file places 94.1% at the
+    FSA's own point**, so the brief's 75.3% all-type sample did not hold.
+  - 1 outside the sanity box and 2 outside the councils; 11 trading-as names
+    show the trade name.
+  - **7,170 storefronts placed** (Food service 4,797, Food shops 2,373): 94.4%
+    at the FSA's point, 5.6% at a centroid. 3,732 (52%) within a ring: Food
+    service 2,625, Food shops 1,107.
+  - Canteens by name are at least 1.9% of Restaurant/Cafe/Canteen (names
+    with canteen, cafeteria, staff restaurant, a contract caterer's name or
+    hospital), not separated (London's precedent).
+- **Personal exposure (`check_personal_exposure.py liverpool`):** 3,732 pins,
+  3,303 distinct names; no fallback name exists, since step 2 never loads an
+  owner column; 0 emails, phone numbers or c/o markers; 0 surname-first
+  names and 22 "person's name (trade name)" shapes (Manchester had 12); the
+  heuristic reads 899 (24.1%) as person-like, which on the FSA register is
+  mostly pubs and cafés named for people. **Verdict: publish**, London's,
+  Newcastle's and the UK six's on the same register.
+- **Notices (Staging's numbers):** 143 Food Standards Agency (Liverpool),
+  Newcastle's notice 62 as Manchester's 84 with the city and date changed;
+  **153** Ordnance Survey (Liverpool), Manchester's 85 with the city changed.
+  The kit had reserved only 141-143; the centroid tier needs an Ordnance
+  Survey notice of its own, so Staging assigned 153 (2026-10-04) after
+  Belgium's 144-152. The Department for Transport, NaPTAN notice 86 takes the
+  owner's reworded first sentence (2026-10-03) and Liverpool's page; notice
+  1's rail sentence and `app/osm_notice.py` name Merseyrail.
+- **For Visuals:** 143 and 153 in the caption only (the OGL's "including or
+  linking to", as the eight Ordnance Survey cities and London's FSA notice);
+  notice 86's new first sentence changes UK captions, not faces; the rail and
+  boundaries are OpenStreetMap's, so the OSM line goes on the card face. No
+  open terms question.
+- **Macro map:** label width 135.0 px, measured in the browser pane with the
+  Google Fonts face loaded (controls Blackpool (Regional) 139.7 and
+  Nottingham (Regional) 151.7 reproduced). Liverpool's pill below its dot;
+  **Manchester (Regional)'s United Kingdom pill raised 14 px** (("end", -10,
+  0) to ("end", -10, -14)), because level with its dot it covered
+  Liverpool's marker. A search over 64 pairs of offsets with
+  `check_macro_labels.py`'s geometry found two with PROBLEMS 0 at all three
+  widths, both needing Manchester's pill raised; the simpler was taken.
+- **Proposals for review time (no template covers them):** on the page, the
+  bullets "Merseyrail is suburban rail that runs as a metro ...", "In the
+  evening and on Sundays most stations have a train every 30 minutes." and
+  the City Line bullet; in What Is Excluded, the Merseyrail sentences in
+  "Which stations these maps are drawn around" and Liverpool's Stations
+  paragraph; the new row in `docs/commuter_rail_list.md`. The brief flagged
+  the evening sentence and the City Line sentence as proposals too.
+- **For the owner, one call:** `label_tier`. The UK rule is "tram and light
+  rail against metro", which would make a metro city major, while the brief
+  carries "minor, as the UK six". Set to minor (a pill only in the United
+  Kingdom view) pending the owner; major would put a fourth UK pill in the
+  Europe view beside London, Glasgow and Newcastle and needs that view
+  re-scored.
+
+### 2026-10-04 - The UK steps take heavy rail: a configurable NaPTAN stop type, a route filter and boundaries by GSS code; zero drift on the UK six
+
+- **`pipeline/countries/uk.py`'s NaPTAN gate reads `config.NAPTAN_STOP_TYPE`,
+  MET when unset; Liverpool (Regional) sets RLY.** Merseyrail's stations are
+  rail access nodes (StopType RLY, ATCO area 910, prefix 9100), never the
+  tram stops' MET in area 940, so the gate's hard-coded `"MET"` would have
+  counted zero. The default keeps the six built UK cities on MET without a
+  config edit. `norm_name` also drops NaPTAN's rail suffix "Rail Station" and
+  a county qualifier left trailing once it is gone ("Walton (Merseyside) Rail
+  Station"): area 910 names 95 of its 98 records in a Merseyside box that way
+  (read 2026-10-04 from a scratch probe of the area file). The alternative, a
+  per-city alias for every station, would have been 59 entries restating one
+  suffix rule.
+- **`pipeline/countries/uk_fetch.py` gains `config.OSM_ROUTE_FILTERS` and
+  `config.BOUNDARY_GSS`, both fetch-only.** The first narrows a route mode to
+  one network (tag filters, each its own selector, unioned), because every
+  `route=train` in a Merseyside box would otherwise come back (the osm-rail
+  skill's rule against box-wide train queries). The second selects the scope's
+  admin relations by `ref:gss` when their relation ids are not yet known, so
+  the city's one Overpass query also reads the ids, which the config then
+  records; each code must match exactly one relation. `fetch_osm` now counts
+  route relations by `type=route` rather than by not being a boundary id,
+  the same set for every built city.
+- **Proved at zero drift on the six built UK cities, twice**:
+  `drift_check.py manchester birmingham edinburgh sheffield nottingham
+  blackpool`, once after the stop-type change and once after `norm_name`'s,
+  both "RESULT: zero drift", every baseline figure unchanged and every
+  NaPTAN name match as before (Manchester 99, Birmingham 35, Edinburgh 23,
+  Sheffield 48, Nottingham 50, Blackpool 40); measured peak 0.48 GB through
+  `heavy_job.py`. The fetch change cannot be drift-checked (no step runs
+  it), so the six cities' Overpass query strings were generated from git
+  HEAD's `uk_fetch.py` and from the new one and compared: identical for all
+  six. Cleanup confirmed the shape of the change before it landed
+  (2026-10-03).
+
+### 2026-10-04 - Review time: the Korea sweep's page proposals and Gimhae's light-rail mode approved as written (owner)
+
+- **Put to the owner before landing**, with the sentences quoted: the
+  three "Not drawn" bullets (Daejeon: Line 2, a tram still under
+  construction, and Korail's intercity lines; Gwangju: Line 2, still under
+  construction, and Korail's intercity lines; Gimhae: Korail's intercity
+  line, no other rail line with a station in the city); Gwangju's "Most
+  trains turn back at Sotae, one stop short of Nokdong."; Gwangju's five
+  districts "since 2026 within the merged" 전남광주통합특별시; and Gimhae's
+  mode `light_rail`, as Busan, Uijeongbu and Yongin.
+- **The owner: "yes"**. All landed as written. Each is already one claim a
+  bullet, so none was shortened.
+- For the record, not a call: Nokdong's frequency was not measured (the
+  operator's per-station timetables load only through its route finder);
+  the stop is kept, as the brief says.
+
+### 2026-10-04 - A South Korea view on the macro map: Daegu, Busan, Daejeon, Gwangju and Gimhae (owner)
+
+- **The problem, measured**: with the three new cities in East Asia,
+  `check_macro_labels.py` reported 54 problems at 375, 768 and 1200: Busan's
+  and Gimhae's dots 2.6 px apart, Daejeon's pill over every Seoul Capital Area
+  dot, Daegu's pill over Daejeon's dot, Gwangju's and Gimhae's pills
+  overlapping. No offset separates two dots 2.6 px apart.
+- **The recommendation**, on Japan's precedent (2026-10-02, Osaka's and
+  Sakai's dots 2.6 px apart in one view): a country view holding Daegu, Busan
+  and the three new cities, the three on the minor label tier, East Asia
+  still labelling Daegu and Busan through `REGION_LABELS_ALSO`. Scored in a
+  throwaway edit first: **PROBLEMS 0** in all 20 regions at the three widths,
+  every label at its default offset, no built label moved.
+- **The owner: "New view (Recommended)"**, named **"South Korea"** (chosen over
+  "Korea South" and "Southern Korea", knowing Seoul and its satellites keep
+  their own view). Built as recommended: `REGION_ORDER` after the Seoul
+  Capital Area, `COUNTRY_VIEWS`, `REGION_LABELS_ALSO["East Asia"]`,
+  `country_sections.REGION_GROUP` (grouped under East Asia), and Daegu's and
+  Busan's `region`. The master list's Built table gains a "South Korea view"
+  row.
+- **Label widths** (canvas `measureText` after `document.fonts.load`, 600 14px
+  Space Grotesk, 2026-10-04): Daejeon 54.4, Gwangju 58.2, Gimhae 49.5;
+  controls Goyang 52.1, Uijeongbu 68.6, Anyang 51.6, Busan 41.9 and Daegu 42.9
+  reproduced to 0.1 px.
+- **Downstream**: Daegu and Busan change region, which moves them in the
+  macro map's region menu and its city list; the Visuals session should hear
+  it with the landing.
+
+### 2026-10-04 - Gimhae built: the Busan–Gimhae LRT on SEMAS's register, its own page
+
+**Built** on branch `korea-sweep-build`, page 192, region East Asia, from
+Daejeon's files (Incheon's module); its own page, not a Busan regional map
+(owner, 2026-10-03). Downloads and page prose under the owner's pre-approval
+(2026-09-30); the page is Bucheon's and Incheon's approved text with Gimhae's
+line. **17,879 storefronts** (food service 8,558, retail 6,662, personal
+services 2,659), exactly the brief's, from 26,700 SEMAS rows under 48250;
+**6,736 within the rings (37.7%)**. **12 stations** inside Gimhae, a 729 m
+median gap (minimum 596 m, Gimhae City Hall / Buwon), the brief's figure:
+standard rings. `mode` light_rail (the brief's, for the owner's approval with
+the build), `rail_extra` "—" (a grade-separated driverless light metro, as
+Busan, Uijeongbu and Yongin record theirs), `coverage` full, `categories`
+"All three".
+
+- **The LRT drawn as Busan draws it**: `ref=BGL`, light_rail, #8652A1,
+  "Busan–Gimhae LRT", to both ends; Gimhae's own Overpass query (one, first
+  try), Busan's cache never read. Busan Lines 2 and 3 reach the box with no
+  station in Gimhae: placed as not drawn.
+- **Gate 3 exact** on the whole line (21, the operator's station list and
+  Busan's `LINE_STATION_COUNTS`). The 12 inside Gimhae are **the same 12
+  names** Busan's committed `excluded_stations.csv` lists as outside Busan;
+  Gimhae's lists Busan's 9 as outside Gimhae.
+- **The light-rail test passes**, re-measured: 729 m median spacing, every
+  5-6 minutes all day (the operator's 부원 timetable, the brief).
+- **Boundary**: OSM relation 7224485 (김해시, admin_level 6), **460 km²**,
+  gated at 450-470.
+- **Line color**: #8652A1, Delta-E 33.8 from Retail, kept as Busan's.
+- **Personal exposure: PASS.** 0 of 17,879 rows show a Korean personal name
+  at a residential address; 12 withheld by step 2 (5 of them in-ring pins).
+- **Licence**: notice 68 and notice 1 gain Gimhae; no new notice.
+- **Page prose proposal**: "Not drawn: Korail's intercity line. No other rail
+  line has a station in the city." (Uijeongbu's "No other rail line" sentence
+  with Korail named.)
+- **Downstream**: notice 68 a caption, notice 1 rail, boundary and names;
+  the known SEMAS card hold applies (notice 68 only).
+- **Master list**: Gimhae's Band A row marked built; South Korea has no
+  candidate left.
+
+### 2026-10-04 - Gwangju built: Gwangju Metro Line 1 on SEMAS's register, the merged member's codes and a five-district boundary
+
+**Built** on branch `korea-sweep-build`, page 191, region East Asia, from
+Daejeon's files (Incheon's module). Downloads and page prose under the owner's
+pre-approval (2026-09-30); the page is Bucheon's approved text with Gwangju's
+line, and three proposal sentences (below). **47,214 storefronts** (food
+service 20,701, retail 18,706, personal services 7,807), exactly the brief's,
+from 75,324 rows in the five codes of the member 전남광주통합특별시;
+**14,077 within the rings (29.8%)**. **20 stations** on Line 1, every one
+inside the city, a 770 m median gap (minimum 535 m, Geumnamno 4-ga / 5-ga):
+standard rings. `coverage` full, `categories` "All three", `mode` metro.
+
+- **Step 2 keys on 시군구코드** 12210, 12240, 12270, 12300 and 12330 inside
+  the member 전남광주통합특별시 (owner, 2026-10-03: codes, never names).
+- **Boundary: the union of the five 구 relations** (4162635 동구, 7348759 서구,
+  7348741 남구, 7348583 북구, 7348758 광산구; admin_level 6), each taken by
+  id, checked by name and required to lie inside the city's query box:
+  **500 km²**, gated at 490-510 (the brief expected about 501). The one
+  query asked for any relation named 광주광역시 at any level and returned
+  none: after the 2026 merger OSM no longer holds the city's own relation.
+  This is the brief's prescribed fallback, not a new call.
+- **Rail: one Overpass query**, answered first try. Line 1's two direction
+  relations (`ref=1`, subway, #009088); **Line 2's two circle relations**
+  (`ref=2`, light_rail, 36 planned stops each) **placed as not drawn**, under
+  construction (phase 1 reported for 2028-12). Gate 3 exact: 20 against the
+  operator's 운행현황 (역수 20개역), a primary source. 광주송정 is the Line 1
+  stop (route membership).
+- **One English name overridden**: OSM's "Geumnamro 5-ga" for 금남로5가 to
+  "Geumnamno 5-ga", matching OSM's own 금남로4가 ("Geumnamno 4(sa)-ga") and the
+  operator's English station list (Geumnamno5-ga); the operator's English
+  timetable page itself writes "Geumnamro 5 Ga", so the operator is
+  inconsistent. Ansan's override mechanism, copied into Gwangju's step 1.
+- **녹동 (Nokdong) kept** as a station of the drawn metro line (the brief's
+  recommendation; the 15-minute test is light rail's). The operator's
+  녹동행 page gives first and last trains only (녹동 06:14-22:17 toward 평동,
+  the same span as 소태), and its 운행현황 page gives 소태-평동 33 minutes and
+  녹동-평동 38 minutes with separate 소태행 and 녹동행 tables; the per-station
+  timetables load only through the site's route finder, so 녹동's daily count
+  was **not read**. Recorded as unmeasured, not as a pass.
+- **Line color**: #009088, Delta-E 28.6 from Personal services, kept as
+  Daejeon's.
+- **Personal exposure: PASS.** 0 of 47,214 rows show a Korean personal name
+  at a residential address; 82 withheld by step 2 (8 of them in-ring pins).
+- **Licence**: notice 68 and notice 1 gain Gwangju; no new notice.
+- **Page prose proposals** (not covered by the template): "Most trains turn
+  back at Sotae, one stop short of Nokdong."; "Not drawn: Line 2, still under
+  construction, and Korail's intercity lines."; "The whole city is included:
+  its five districts, which since 2026 sit within the merged
+  전남광주통합특별시."
+- **Downstream**: notice 68 a caption, notice 1 rail, boundary and names;
+  the known SEMAS card hold applies (notice 68 only).
+
+### 2026-10-04 - Daejeon built: Daejeon Metro Line 1 on SEMAS's register
+
+**Built** on branch `korea-sweep-build` (cut from `origin/master` at
+`fafec401`), page 190, region East Asia, from Incheon's files
+(`docs/handoff_korea_sweep_2026-10-03.md`; Band A, owner 2026-10-03).
+Downloads and page prose under the owner's pre-approval (2026-09-30); the page
+is Bucheon's approved text with Daejeon's line. **50,939 storefronts** (food
+service 23,402, retail 20,100, personal services 7,437), exactly the brief's,
+from 80,704 SEMAS rows in the five 시군구코드 (the whole 대전광역시 member);
+**21,252 within the rings (41.7%)**. **22 stations** on Line 1, every one
+inside the city, an 846 m median gap (minimum 626 m, City Hall / Tanbang):
+standard rings. `coverage` full, `categories` "All three", `mode` metro,
+`rail_extra` "—", as the built SEMAS cities.
+
+- **Step 2 keys on 시군구코드** (30110, 30140, 30170, 30200, 30230) through the
+  new `sigungu_codes` argument; on this edition the codes select the whole
+  member, so a sixth district or a merger stops the step instead of widening
+  the page.
+- **Rail: one Overpass query for the city** (routes, station names and
+  boundary together, split by `fetch_sources.py` into Incheon's three files;
+  osm-rail's one-query rule), answered first try by overpass-api.de. Line 1's
+  two direction relations (`ref=1`, route=subway); **Line 2's relation**
+  (`ref=2`, route=tram, no stop members) **placed as not drawn**, under
+  construction. Korail and KTX are never queried (route=train is not asked
+  for), as everywhere in Korea.
+- **Gate 3 exact**: 22 stations against the operator's own count (Daejeon
+  Transportation Corporation, 시설현황; brief check
+  `daejeon-line1-operator-facts`), a primary source where Incheon's and the
+  satellites' gates read Wikipedia. English names from the station objects'
+  `name:en` on all 22. 대전역 is the Line 1 stop (route membership), not
+  Korail's node.
+- **Boundary**: OSM relation 2349984 (대전광역시, admin_level 4, KR-30),
+  resolved by name and admin level, **536 km²**, gated at 525-545. The drawn
+  line is 20.7 km station to station (the operator's 22.6 km runs 판암동 to
+  외삼동, track beyond the end stations).
+- **Line color**: the operator's green as OSM tags it (#007448), **Delta-E 23.1
+  from Personal services**: above the floor of 10, below the preferred 45,
+  kept on the owner's real-route-colors decision (2026-09-21) as Seoul's
+  Line 8 (18.0) and Goyang's Gyeongui-Jungang Line (27.6) were.
+- **Personal exposure: PASS.** `check_personal_exposure.py daejeon` (the
+  Korean pass): a Korean personal name at a residential address still shown on
+  0 of 50,939 rows; 79 withheld by step 2 (44 of them in-ring pins).
+- **Licence**: notice 68 (SEMAS) gains Daejeon in its heading and text; notice
+  1 and `app/osm_notice.py` name Daejeon's lines, stations and boundary as
+  OSM's. No new notice.
+- **Page prose proposal** (not covered by the template): the bullet "Not
+  drawn: Line 2, a tram still under construction, and Korail's intercity
+  lines."
+- **Downstream**: notice 68 is a **caption** (a source credit, no wording
+  prescribed; the categories and counts stated as this project's); notice 1
+  covers rail, boundary and station names. **Open terms question, known**:
+  the Visuals registry holds every notice-68 city off the cards while whether
+  SEMAS's permission reaches social posts is open; Daejeon carries notice 68
+  only, so it inherits the hold (the Visuals session confirmed the rule by message).
+- **Master list**: Daejeon's Band A row marked built; the Built table, the
+  East Asia row and South Korea's country row count it.
+
+### 2026-10-04 - korea_sbiz: a 시군구코드 filter beside the 시군구명 prefix, zero drift on the ten built SEMAS cities
+
+- **The change** (`docs/handoff_korea_sweep_2026-10-03.md`, Phase 1):
+  `pipeline/countries/korea_sbiz.py` now reads `시군구코드` and
+  `storefronts()` takes `sigungu_codes`. Given codes, they decide the rows;
+  given prefixes as well, the two must pick identical rows or the step
+  exits. An unknown code exits rather than silently matching nothing. The
+  built cities pass prefixes only and are read exactly as before; the output
+  columns are unchanged (the code is read, never written).
+- **Why:** 시군구명 is not unique within a SEMAS member. Gwangju's 동구,
+  서구, 남구 and 북구 recur in other metropolitan cities, and 경기도 광주시
+  is another city; the 2026 merger put Gwangju in the member
+  전남광주통합특별시 with all of South Jeolla. A code is unambiguous.
+- **Verified:** `python pipeline/drift_check.py` over the ten built SEMAS
+  cities (Incheon, Goyang, Suwon, Yongin, Seongnam, Bucheon, Ansan, Anyang,
+  Namyangju, Uijeongbu), under `heavy_job.py`: **zero drift** in every
+  output, and the four cities with a `baseline.json` (Ansan, Anyang,
+  Namyangju, Uijeongbu) report 10 figures unchanged. Measured peaks: Goyang
+  alone 0.38 GB, the other nine two at a time 0.75 GB.
+- **Session setup, 2026-10-03:** branch 0 behind `origin/master` at
+  `fafec401`; registered in `docs/session_roles.md`; `brief_check.py
+  daejeon gwangju gimhae` 13/13 claims hold.

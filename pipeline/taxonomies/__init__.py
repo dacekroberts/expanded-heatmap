@@ -101,6 +101,9 @@ TAXONOMY_MODULES = {
     "dublin_uses": "pipeline.taxonomies.dublin_uses",
     # Buenos Aires' land-use survey subtypes (TIPO2), enumerated in full.
     "ba_usos_suelo": "pipeline.taxonomies.ba_usos_suelo",
+    # Mendoza's activity register, keyed on the RAM level (desc_full), one
+    # bucket per business by BUCKET_PRIORITY.
+    "mendoza_rama": "pipeline.taxonomies.mendoza_rama",
     "milan_source": "pipeline.taxonomies.milan_source",
     # NAF rev. 2 - the FIRST taxonomy here that is NATIONAL rather than a
     # city's own. SIRENE is one register for the whole country, so every French
@@ -153,6 +156,10 @@ TAXONOMY_MODULES = {
     "den_haag_source": "pipeline.taxonomies.den_haag_source",
     "seattle": "pipeline.taxonomies.seattle",
     "georgia_nace": "pipeline.taxonomies.georgia_nace",
+    "brussels_hub": "pipeline.taxonomies.brussels_hub",
+    "belgium_favv": "pipeline.taxonomies.belgium_favv",
+    "wallonia_logic": "pipeline.taxonomies.wallonia_logic",
+    "belgium_kbo": "pipeline.taxonomies.belgium_kbo",
 }
 
 

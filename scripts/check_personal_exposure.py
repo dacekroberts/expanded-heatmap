@@ -75,6 +75,12 @@ REGISTRIES = {
     # remains among the placed storefronts.
     "goteborg": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv", address=("adress",)),
+    # Brussels (the City): hub.brussels's field survey names the SHOP SIGN
+    # (`name_fr`/`name_nl`/`name_en`); the inventory has no owner, registrant
+    # or contact column, so there is no fallback to a person. A sign read as a
+    # person's own name shows the unit's type (config.PERSON_NAMED, keys).
+    "brussels": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=("address",)),
     # Bucharest: DSVSA's registers name the registered UNIT, most often the
     # operating company. The owner's rule (2026-09-28): the company name
     # without its legal form, and the CATEGORY ONLY for a sole trader (II,
@@ -107,6 +113,13 @@ REGISTRIES = {
     "uijeongbu": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                       address=("address",), korean=True, withheld="Name withheld"),
     "anyang": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                   address=("address",), korean=True, withheld="Name withheld"),
+    # The Korea sweep: the same register, module and pass, outside the capital area.
+    "daejeon": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                    address=("address",), korean=True, withheld="Name withheld"),
+    "gwangju": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                    address=("address",), korean=True, withheld="Name withheld"),
+    "gimhae": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                    address=("address",), korean=True, withheld="Name withheld"),
     # Milan is a HYBRID: ~20% of pins carry a real trade name (`insegna`) and
     # the rest carry the street address, because `insegna` is 17.6% populated
@@ -230,6 +243,16 @@ REGISTRIES = {
     # person's name - Berlin's structural answer.
     "sydney": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Antwerp and Ghent: FAVV-AFSCA's operator list carries no name or street
+    # column, and VKBO is paged through its WFS asking for the number, unit
+    # type, NIS code, postcode and point only (the fetch refuses any other
+    # column), so `business_name` is the FAVV place type in English
+    # ("Restaurant", "Bakery") - Berlin's structural answer. Sole traders'
+    # premises are placed (owner, 2026-10-03); no address column is written.
+    "antwerp": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None),
+    "ghent": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv", address=None),
     # Melbourne: CLUE's `trading_name` is the only name column and is shown
     # as is (no owner fallback exists); its census covers non-residential
     # floor space, and the business address is never written out.
@@ -253,6 +276,12 @@ REGISTRIES = {
     "buenos_aires": dict(raw=None, trade=None, owner=None, name_is_address=True,
                          processed="businesses_clean.csv",
                          address=("business_name",)),
+    # Mendoza (2026-10-04): one name column, `nombre_fantasia`, filled on
+    # every business and never falling back to another. A sole trader writes
+    # it as their own name, surname first with a comma; step 2 shows the
+    # business type for those (Vancouver's rule). No address column is kept.
+    "mendoza": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None),
     # Glasgow reads the same FSA file format through pipeline/fsa.py: no
     # fallback name, and the flat rule (a storefront at a "Flat" address is
     # never placed, 185 rows) is the structural guard this check cannot see.
@@ -548,6 +577,14 @@ REGISTRIES = {
     "kansas_city": dict(raw="business_licenses.csv", trade="business_name",
                         owner="dba_name", processed="businesses_clean.csv",
                         address=("address",)),
+    # Tacoma (2026-10-04): `trade_name` is never blank but is the entity's own
+    # name (`business_name`) on some rows; where that entity has no legal form
+    # and reads as a person's, step 2 shows the NAICS description (Vancouver's
+    # rule). The site unit field joins the address; mailing fields are never
+    # fetched.
+    "tacoma": dict(raw="business_licenses.csv", trade="trade_name",
+                   owner="business_name", processed="businesses_clean.csv",
+                   address=("address",)),
     # Tucson: the City's BUSLIC layer has one name, `ACC_NAME`, the account
     # (trading) name; there is no separate owner column to fall back to. Step 2
     # shows the address for the personal OWN_TYPEs (Sole Proprietorship,
@@ -842,6 +879,9 @@ REGISTRIES = {
                        processed="businesses_clean.csv", address=None),
     "blackpool": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Liverpool (Regional) (2026-10-04) on the same shared step 2.
+    "liverpool": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
 }
 
 # The France tram batch (2026-09-30): twenty-one cities on the same shared French
@@ -857,6 +897,25 @@ REGISTRIES.update({
                  "le_havre", "mulhouse", "reims", "caen", "brest", "besancon",
                  "orleans", "le_mans", "avignon", "valenciennes", "angers")
 })
+
+# Charleroi and Liege (2026-10-04) read Wallonia's LoGIC 2024 survey through
+# pipeline/countries/belgium_logic.py: a field survey with no registrant column
+# of any kind, so no owner fallback exists. The dot shows the shop sign
+# (ENSEIGNE, owner 2026-10-03); a sign read as a person's own name, or a blank
+# one, shows the NATURE class (config.PERSON_NAMED, keys). The street and
+# number are never read, so the residence check has no address: a gap here.
+REGISTRIES.update({
+    slug: dict(raw=None, trade=None, owner=None,
+               processed="businesses_clean.csv", address=None)
+    for slug in ("charleroi", "liege")
+})
+# Brussels (Regional): KBO's establishment units of companies (legal persons)
+# only; the dot's name is the unit's commercial name, else the company's.
+# `contact.csv` is never opened and no natural person's denomination is read
+# (`pipeline/countries/belgium_kbo.py`). A company name read as a person's own
+# shows the unit's type (config.PERSON_NAMED, keys).
+REGISTRIES["brussels_regional"] = dict(raw=None, trade=None, owner=None,
+                                       processed="businesses_clean.csv", address=("address",))
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
 # Splitting these is why Los Angeles' jewellery district stopped reading as 42%

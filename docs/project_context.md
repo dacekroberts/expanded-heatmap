@@ -322,6 +322,22 @@ Cities built and running end to end (pipeline, map, app page):
   leaf (`georgia_nace.py`, modelled on France's NAF module), with vehicle
   sales kept (the precedent, not France's exception). Rail and the city
   boundary from one OpenStreetMap query.
+- **Belgium: Brussels, Antwerp, Ghent, Charleroi, Liège and Brussels
+  (Regional)** - built together, landed 2026-10-04;
+  **Belgium's first cities**, in a macro-map view of their own
+  (Czechia's mechanism). No national method fits all six, so each region
+  has its own: Brussels on hub.brussels's street survey (all three
+  categories); Antwerp and Ghent on FAVV-AFSCA's food-operator list placed
+  on Flanders' VKBO points (food only, no names); Charleroi and Liège on
+  Wallonia's LoGIC 2024 survey (two categories, complete only in the
+  commercial districts, disclosed); Brussels (Regional), the other 18
+  communes, on the KBO company register joined to BeST-Address (companies
+  only, two categories, a different method from the City's, said on the
+  page). Rail from the operators' feeds on the Belgian Mobility Company
+  portal, whose terms the owner accepted (a terms change goes back to the
+  owner); OSM supplies commune boundaries only. KBO is never read for a
+  natural person, and its download is the owner's act, at least yearly.
+  Decisions in `DECISIONS.md`.
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first
   built from two municipalities' own registries.** Distinctive in five ways.

@@ -1,0 +1,21 @@
+{
+  "written_utc": "2026-10-04T07:48:14+00:00",
+  "register": {
+    "page": "https://datos.ciudaddemendoza.gob.ar/dataset/listado-comercios-por-actividad-2025",
+    "url": "https://datos.ciudaddemendoza.gob.ar/dataset/df39f71e-0d7e-40e5-a475-c31f098fab93/resource/94e44b27-951e-4f38-a5c4-17eec535a3fe/download/comercios_limpio.json",
+    "sha256": "ca6af57c5625eb9868a77d6d5bd7e112b9408a33c74de7da00cb9986b707fd17",
+    "data_date": "June 2025",
+    "license": "CC BY 4.0"
+  },
+  "osm_host": "overpass-api.de",
+  "osm_bbox": [
+    -33.0,
+    -68.9,
+    -32.8,
+    -68.76
+  ],
+  "files_utc": {
+    "comercios_limpio.json": "2026-10-04T04:00:09+00:00",
+    "osm.json": "2026-10-04T07:48:14+00:00"
+  }
+}

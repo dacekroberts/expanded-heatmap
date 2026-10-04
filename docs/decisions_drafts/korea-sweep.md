@@ -1,0 +1,5 @@
+# DECISIONS drafts - Korea sweep (`korea-sweep-build`)
+
+Entries for `DECISIONS.md`, newest first, each written exactly as it should
+land (the `decisions-entry` format). Cleanup folds them in when the owner
+hands the drafts off, then deletes this file (owner, 2026-09-30).

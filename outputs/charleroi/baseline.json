@@ -1,0 +1,19 @@
+{
+  "food_service": 450,
+  "hotel_signs": 2,
+  "logic_points": 2653,
+  "median_gap_m": 385,
+  "outside_polygon": 0,
+  "platforms": 89,
+  "retail": 980,
+  "ring_share_in_perimeters_pct": "11.2",
+  "signs_blank": 18,
+  "signs_withheld": 33,
+  "stations_M2": 23,
+  "stations_M3": 26,
+  "stations_M4": 9,
+  "stations_collapsed": 48,
+  "stations_excluded": 10,
+  "stations_in_scope": 38,
+  "storefronts": 1430
+}

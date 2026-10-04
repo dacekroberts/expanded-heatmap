@@ -8,8 +8,9 @@ code. The trail, in `docs/decisions_drafts/staging.md`, 2026-10-03:
 measured: Belgian bands kept; Brussels (Regional) D to C", "BeST-Address
 Brussels read", "Brussels: STIB's GTFS with the owner's acceptance" and
 "Belgium's build calls, and Brussels (Regional) from C to B". Master list:
-`docs/city_master_list.md`, Band B, "Brussels (Regional)". Kit:
-`docs/handoff_belgium_2026-10-03.md` (page **201**; notices **151** KBO,
+`docs/city_master_list.md`, Band B, "Brussels (Regional)". Kit: the
+Belgium handoff, deleted when the build landed (2026-10-04; its calls are in
+`DECISIONS.md`) (page **201**; notices **151** KBO,
 **152** BeST-Address, **148** STIB shared with Brussels).
 
 **Build it last, after Brussels** (`docs/build_briefs/brussels.md`): the

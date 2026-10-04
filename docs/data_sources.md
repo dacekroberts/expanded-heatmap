@@ -98,13 +98,14 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro (Regional), Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
+| Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
 | Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
@@ -2237,7 +2238,7 @@ into `render_site_notices()`; displayed since Newcastle landed).
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
 
-**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang) — required, and DISPLAYED**
+**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed since Incheon landed).
 
 - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-09-29; <!-- /internal -->the rows in
@@ -2616,14 +2617,21 @@ DISPLAYED** (written into `render_site_notices()` with the UK six,
   attribution of the Department's own, so the OGL's default applies.
 - **Used for** gate 3 of the UK tram and light-rail cities: each map's stops
   are matched name by name against NaPTAN's active stop areas (stop type MET,
-  ATCO area 940) inside its scope. Nothing from NaPTAN is drawn on a map.
+  ATCO area 940) inside its scope. Since 2026-10-04 also Liverpool
+  (Regional)'s Merseyrail stations, against NaPTAN's rail station records
+  (stop type RLY, ATCO area 910). Nothing from NaPTAN is drawn on a map.
 - **MUST DISPLAY**: "Contains public sector information licensed under the
   Open Government Licence v3.0.", with the licence linked. Whether a count
   checked against the data needs the credit at all is arguable; displaying it
   is the cautious reading.
 - **MUST NOT**: imply the Department's endorsement (OGL); use a DfT logo or
   the Royal Arms; present NaPTAN as complete.
-- Wording approved by the owner 2026-10-02.
+- Wording approved by the owner 2026-10-02. The first sentence reworded to
+  cover Merseyrail, no new notice (owner, 2026-10-03): "Stop and station
+  counts on the UK's tram, light-rail and Merseyrail maps are checked against
+  NaPTAN, the National Public Transport Access Nodes dataset published by the
+  Department for Transport." The licence and no-endorsement sentences are
+  unchanged.
 
 **87. Food Standards Agency (Birmingham) — required, and DISPLAYED** (written
 into `render_site_notices()` with the UK six, 2026-10-02.)
@@ -3527,6 +3535,233 @@ of 2026-10-02.)
   Massachusetts EOTSS".
 - **MUST NOT**: present the outline as an authoritative boundary location
   ("can only be provided by a licensed land surveyor").
+
+**141. Municipalidad de la Ciudad de Mendoza (Mendoza) — required, and
+DISPLAYED** (written into `render_site_notices()` with Mendoza, 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-03)<!-- /internal -->:
+  CC BY 4.0 at every level - the dataset's `license_id` CC-BY-4.0, the
+  portal and the resources agree. Rows in
+  [`data_sources/argentina.md`](data_sources/argentina.md).
+- **MUST DISPLAY** (CC BY 4.0 section 3(a)): credit to the Municipalidad de la
+  Ciudad de Mendoza with the dataset's title, "Listado Comercios por Actividad
+  2025", linked to its page; the licence linked; and a statement of the
+  modifications (filtered to storefront businesses, grouped into three
+  categories, reprojected from the Gauss-Krüger grid, names that read as a
+  person's own replaced by the business type). No wording is prescribed; the
+  notice is this project's.
+- **MUST NOT**: suggest endorsement by the Municipalidad; use the city's logo.
+- **Personal data**: Argentina's Ley 25.326 is outside the licence. The name
+  rule (a trade name written as a person's own, surname first, shows the
+  business type) and `check_personal_exposure.py` carry it; no address is
+  shown.
+- **Mendoza's rail and the department boundaries are OpenStreetMap data**
+  (ODbL, notice 1).
+
+**142. City of Tacoma (Tacoma) — required, and DISPLAYED on every page**
+(written into `render_site_notices()` with Tacoma, 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-03)<!-- /internal -->:
+  the City's Resolution 39378 (2016) and its open-data page place no
+  restriction on reuse; the rows are in
+  [`data_sources/united-states.md`](data_sources/united-states.md). Accepted
+  by the owner on Chicago's template (2026-10-03).
+- **MUST DISPLAY**: the City's disclaimer, which binds any application using
+  the data - Chicago's (notice 2) and the City of Kansas City, Missouri's (notice 80) shape, so it is
+  displayed site-wide, as theirs are. Reproduced word for word from the City's
+  disclaimer page, its curly apostrophe kept; it is exempt from the
+  American-spelling pass.
+- **REVOCABLE**: the City "reserves the right ... to require the termination of
+  any and all display, distribution or other uses of any or all of the
+  information or data for any reason". Honored through the removal rule: the
+  layer or the city comes down first, and the request is recorded after.
+- **MUST NOT**: present the pins as "currently licensed" businesses (the layer
+  lists active Tax & License accounts and "does not indicate whether a business
+  has a business license for the current year"); cite the dead host
+  data.cityoftacoma.org that the item's licence field still links (the City's
+  portal is data.tacoma.gov); use City marks.
+- **Credited on the page** as "City of Tacoma, Tax & License (data.tacoma.gov)",
+  in the caption under the map.
+- **Tacoma's rail is OpenStreetMap data** (ODbL, notice 1); Sound Transit's
+  GTFS is not used.
+
+**143. Food Standards Agency (Liverpool) — required, and DISPLAYED** (written
+into `render_site_notices()` with Liverpool (Regional), 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the four
+  councils Merseyrail serves (Liverpool, Sefton, Knowsley, Wirral) are on
+  England's FHRS, under the **Open Government Licence v3** with the FSA's
+  conditions. The OGL statement linked; each council's extract date
+  (2026-10-02); no rating, logo or imagery. The credit is London's and
+  Newcastle's, "Food Standards Agency, UK food hygiene rating data", as a
+  notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62 as Manchester's notice
+  84, with the city and date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py liverpool`, run 2026-10-04: no
+  fallback name exists, 0 contact details; the verdict is in
+  `DECISIONS.md`.<!-- /internal -->
+- **Liverpool's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**144. City of Brussels and hub.brussels (Brussels) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: opendata.brussels.be adopts the
+  producer's license; hub.brussels describes the inventory as its field
+  agents' own. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the credit to the publisher (Ville de Bruxelles/Data
+  Management) and hub.brussels, with the publisher's listed contributors
+  (hub.brussels and Google Maps), the dataset title and page, the license
+  link, and a statement of the changes. No wording is prescribed; this
+  project's own.
+- **MUST NOT**: link a dot to Google (the Google Maps and Street View link
+  columns are never downloaded); show the City's logo or "BXL" mark (the
+  portal's terms, 3.1); imply endorsement. What the "Google Maps" contributor
+  credit covers is not stated by the publisher; it is named as listed.
+
+**145. FAVV-AFSCA (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the agency's open-data page
+  ("Creative Commons Naamsvermelding 4.0 Internationaal"). The list carries no
+  name or street column. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the credit with the extract date, the license link, a
+  statement of the changes, no implied endorsement, nothing misleading.
+- **MUST NOT**: deep-link the agency's site (its terms ask the webmaster's
+  say first): the credit links its home page only. The site terms' prior
+  approval for downloadable documents is read, as the Dutch text limits it,
+  as covering brochures and the like (owner, 2026-10-03).
+
+**146. Digitaal Vlaanderen, VKBO (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Modellicentie voor gratis hergebruik
+  v1.0. KBO's purpose limit binds its registrants, not VKBO's reusers. Rows
+  in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**, verbatim, the prescribed credit: "publieke KBO gegevens,
+  verrijkt met adressen uit het Vlaamse Adressenregister." with the extract
+  date (which also meets KBO's art. 2.8, should the federal terms ever reach
+  the KBO-derived fields).
+
+**147. Service public de Wallonie, LoGIC 2024 (Charleroi and Liège) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)** for the downloaded GeoPackage
+  (the license is in the zip and on the Metawal record). Never the
+  MapServer: SPW's services terms (art. 5 §4) forbid altering the data it
+  serves. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**, verbatim, the SPW citation from the Metawal record:
+  "Source : Service public de Wallonie (SPW) - Offre commerciale en Wallonie
+  (LoGIC 2024) (2025-04-09) https://geodata.wallonie.be/id/5f56d784-2fd7-47eb-a62a-991d4741a67d";
+  that URI answers 404, so the working catalogue record is linked beside it;
+  the license link; and a statement of the changes.
+- **MUST NOT**: show an SPW or Wallonia logo, or imply endorsement.
+
+**148. STIB-MIVB (Brussels and Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (December 2025, effective January 1, 2026), art. 3,
+  STIB-MIVB the sole licensor; downloading is accepting them (art. 2; the
+  owner accepted for this build, and a change of terms comes back to the
+  owner, art. 8). Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: STIB-MIVB – Open Data – [date of dataset
+  update]" (art. 4), the date of the feed's own update, re-dated at every
+  refresh; the modified-data line art. 4 recommends and CC BY 4.0 requires;
+  the portal named (its FAQ).
+- **MUST NOT**: take anything from stib-mivb.be itself (its website terms are
+  for private use): no logo, network map or brand material.
+
+**149. De Lijn (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (art. 3), De Lijn the sole licensor; De Lijn's own
+  portal's Flemish license and the national access point's ODC-BY are
+  attribution-only too. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: De Lijn – Open Data – [date of dataset update]"
+  (art. 4), re-dated at every refresh; the modified-data line; the license
+  title and link (which also meets the Flemish license's "bron: De Lijn");
+  the portal.
+- **MUST NOT**: link delijn.be or take its content (its website terms allow
+  private use only and ask the webmaster's say before a link); imply official
+  status or approval. Its line pages are read privately for station counts
+  only.
+
+**150. LETEC (Charleroi and Liège) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (art. 3), the operator the sole licensor; its own
+  national-access-point entry declares CC0 for the same file, and complying
+  with CC BY 4.0 satisfies either. Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: LETEC – Open Data – [date of dataset update]"
+  (art. 4), the date of the feed's own update (not the fetch date), re-dated
+  at every refresh; the modified-data line; the license title and link; the
+  portal.
+- **MUST NOT**: show the operator's logo or its short brand name in legends
+  or prose: its website terms claim both, so it is credited as "LETEC" (the
+  name the portal and the feed use) and its lines by their public names M2,
+  M3, M4 and T1 (owner, 2026-10-04). Nothing is taken from its website.
+
+**151. KBO/BCE Open Data, FPS Economy (Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: KBO Open Data's terms of reuse. Companies'
+  establishments only (natural persons are dropped as the file is read);
+  reuse within the purpose the owner declared at registration (2.3); no
+  direct marketing (2.2); the project is the GDPR controller (2.1); a
+  download at least yearly or the contract lapses (10.5; next by
+  2027-10-02, the owner's act). Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the source and the update date (2.8), re-dated at every
+  refresh; a statement of the modifications (filtered, joined, grouped); the
+  data presented as the register's, not as a guarantee of any business's
+  status.
+- **MUST NOT**: alter or distort the data (2.7); use it for direct marketing.
+
+**152. FPS BOSA, BeST-Address Brussels (Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: BOSA's catalogue, landing pages
+  and license PDF; BeST-in-a-Box defers to the region's license, CC0 for
+  Brussels, so CC BY 4.0 is the stricter and is met. data.gov.be's
+  request for research results read as not applying (owner). Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: FPS BOSA and the Brussels address register as the source,
+  the license title and link, and a statement that business addresses were
+  matched to its points.
+- **MUST NOT**: imply endorsement or accuracy; show Paradigm or
+  datastore.brussels marks.
+
+**153. Ordnance Survey (Liverpool) — required, and DISPLAYED** (written into
+`render_site_notices()` with Liverpool (Regional), 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 399 Liverpool, Sefton, Knowsley and Wirral food storefronts the
+  FSA lists with a full postcode and no point (5.4% of storefront rows);
+  never a private address. Units kept to the four councils' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/liverpool/` republishes the derived locations (README's credits).
+- Wording: Manchester's Ordnance Survey notice 85, with the city changed.
 
 
 ## Gaps

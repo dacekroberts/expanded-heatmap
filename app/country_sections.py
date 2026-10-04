@@ -243,12 +243,15 @@ REGION_GROUP = {
     "France North": "Europe",
     "France South": "Europe",
     "Czechia": "Europe",
+    "Belgium": "Europe",
     "United Kingdom": "Europe",
     "Seoul Capital Area": "East Asia",
     # Japan's two halves (owner, 2026-10-03). Unfolded, all 34 Japanese cities
     # showed as "Japan West (34)", named after the first city's half.
     "Japan West": "East Asia",
     "Japan East": "East Asia",
+    # South Korea outside the capital area (owner, 2026-10-04).
+    "South Korea": "East Asia",
 }
 
 

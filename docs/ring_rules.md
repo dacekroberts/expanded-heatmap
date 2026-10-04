@@ -6,7 +6,7 @@ Edges come from each city's `pipeline/<slug>/config.py`, shares from
 map carries, read from the committed maps). Regenerate after any city lands
 or re-renders.
 
-**68 built cities: 61 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 7 on smaller ones.**
+**170 built cities: 104 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 66 on smaller ones.**
 
 **The rule for smaller rings is station spacing, not coverage**: where the
 median gap between stations is about 550 m or less, a 0.6 mi outer ring
@@ -21,92 +21,253 @@ standard rings.
 | City | Rings | In-ring share | Why (the city's config) |
 |---|---|---|---|
 | Paris | 0.05 / 0.1 / 0.2 / 0.3 mi | 98.1% | 399 m median station gap |
+| Brussels | 0.05 / 0.1 / 0.2 / 0.3 mi | 93.9% | reason not recorded here: read its config |
+| Den Haag | 0.05 / 0.1 / 0.2 / 0.3 mi | 93.0% | reason not recorded here: read its config |
+| Zurich | 0.05 / 0.1 / 0.2 / 0.3 mi | 92.1% | reason not recorded here: read its config |
+| Montpellier | 0.05 / 0.1 / 0.2 / 0.3 mi | 86.7% | reason not recorded here: read its config |
+| Strasbourg | 0.05 / 0.1 / 0.2 / 0.3 mi | 85.1% | reason not recorded here: read its config |
+| Orléans | 0.05 / 0.1 / 0.2 / 0.3 mi | 84.7% | reason not recorded here: read its config |
+| Brno | 0.05 / 0.1 / 0.2 / 0.3 mi | 82.4% | reason not recorded here: read its config |
+| Antwerp | 0.05 / 0.1 / 0.2 / 0.3 mi | 81.4% | reason not recorded here: read its config |
+| Nice | 0.05 / 0.1 / 0.2 / 0.3 mi | 80.4% | reason not recorded here: read its config |
+| Daugavpils | 0.05 / 0.1 / 0.2 / 0.3 mi | 80.1% | reason not recorded here: read its config |
+| Mulhouse | 0.05 / 0.1 / 0.2 / 0.3 mi | 79.1% | reason not recorded here: read its config |
+| Grenoble (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 78.4% | reason not recorded here: read its config |
+| Olomouc | 0.05 / 0.1 / 0.2 / 0.3 mi | 77.9% | reason not recorded here: read its config |
+| Brest | 0.05 / 0.1 / 0.2 / 0.3 mi | 76.6% | reason not recorded here: read its config |
+| Saint-Étienne | 0.05 / 0.1 / 0.2 / 0.3 mi | 75.9% | reason not recorded here: read its config |
 | Oslo | 0.05 / 0.1 / 0.2 / 0.3 mi | 75.7% | 465 m median station gap |
+| Göteborg | 0.05 / 0.1 / 0.2 / 0.3 mi | 75.5% | reason not recorded here: read its config |
+| Angers | 0.05 / 0.1 / 0.2 / 0.3 mi | 75.4% | reason not recorded here: read its config |
+| Ostrava | 0.05 / 0.1 / 0.2 / 0.3 mi | 74.3% | reason not recorded here: read its config |
+| Le Mans | 0.05 / 0.1 / 0.2 / 0.3 mi | 73.4% | reason not recorded here: read its config |
+| Brussels (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 73.1% | reason not recorded here: read its config |
+| Plzeň | 0.05 / 0.1 / 0.2 / 0.3 mi | 71.5% | reason not recorded here: read its config |
 | New York | 0.05 / 0.1 / 0.2 / 0.3 mi | 71.0% | about 0.3 mi between Manhattan stations |
+| Caen | 0.05 / 0.1 / 0.2 / 0.3 mi | 70.8% | reason not recorded here: read its config |
+| Liepāja | 0.05 / 0.1 / 0.2 / 0.3 mi | 69.7% | reason not recorded here: read its config |
+| Charleroi | 0.05 / 0.1 / 0.2 / 0.3 mi | 69.2% | reason not recorded here: read its config |
+| Valenciennes (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 69.1% | reason not recorded here: read its config |
 | Rennes | 0.05 / 0.1 / 0.2 / 0.3 mi | 68.3% | 541 m median station gap |
+| Hiroshima | 0.05 / 0.1 / 0.2 / 0.3 mi | 67.3% | reason not recorded here: read its config |
+| Dijon | 0.05 / 0.1 / 0.2 / 0.3 mi | 66.6% | reason not recorded here: read its config |
+| Tours | 0.05 / 0.1 / 0.2 / 0.3 mi | 65.6% | reason not recorded here: read its config |
+| Bordeaux (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 65.4% | reason not recorded here: read its config |
+| Most (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 64.8% | reason not recorded here: read its config |
 | Toulouse | 0.05 / 0.1 / 0.2 / 0.3 mi | 64.4% | 525 m median station gap |
+| Besançon | 0.05 / 0.1 / 0.2 / 0.3 mi | 63.7% | reason not recorded here: read its config |
+| Nantes (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 63.1% | reason not recorded here: read its config |
+| Rouen (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 62.0% | reason not recorded here: read its config |
 | Lille (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 61.0% | 501 m median station gap |
+| Kagoshima | 0.05 / 0.1 / 0.2 / 0.3 mi | 60.3% | reason not recorded here: read its config |
+| Le Havre | 0.05 / 0.1 / 0.2 / 0.3 mi | 60.0% | reason not recorded here: read its config |
+| Ghent | 0.05 / 0.1 / 0.2 / 0.3 mi | 58.5% | reason not recorded here: read its config |
+| Nagasaki | 0.05 / 0.1 / 0.2 / 0.3 mi | 57.6% | reason not recorded here: read its config |
+| Liège | 0.05 / 0.1 / 0.2 / 0.3 mi | 57.0% | reason not recorded here: read its config |
+| Liberec (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 56.5% | reason not recorded here: read its config |
+| Matsuyama | 0.05 / 0.1 / 0.2 / 0.3 mi | 55.3% | reason not recorded here: read its config |
 | Marseille | 0.05 / 0.1 / 0.2 / 0.3 mi | 55.2% | 341 m median station gap |
+| Reims | 0.05 / 0.1 / 0.2 / 0.3 mi | 54.7% | reason not recorded here: read its config |
+| Kumamoto | 0.05 / 0.1 / 0.2 / 0.3 mi | 54.3% | reason not recorded here: read its config |
+| Blackpool (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 49.8% | reason not recorded here: read its config |
+| Kōchi | 0.05 / 0.1 / 0.2 / 0.3 mi | 48.2% | reason not recorded here: read its config |
+| Toyama | 0.05 / 0.1 / 0.2 / 0.3 mi | 46.4% | reason not recorded here: read its config |
+| New Orleans | 0.05 / 0.1 / 0.2 / 0.3 mi | 45.6% | reason not recorded here: read its config |
+| Odense | 0.05 / 0.1 / 0.2 / 0.3 mi | 40.7% | reason not recorded here: read its config |
+| Florence | 0.05 / 0.1 / 0.2 / 0.3 mi | 36.8% | reason not recorded here: read its config |
+| Nottingham (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 34.8% | reason not recorded here: read its config |
+| Sheffield | 0.05 / 0.1 / 0.2 / 0.3 mi | 34.7% | reason not recorded here: read its config |
+| Hakodate | 0.05 / 0.1 / 0.2 / 0.3 mi | 30.7% | reason not recorded here: read its config |
+| Avignon | 0.05 / 0.1 / 0.2 / 0.3 mi | 25.7% | reason not recorded here: read its config |
+| Aarhus | 0.05 / 0.1 / 0.2 / 0.3 mi | 25.5% | reason not recorded here: read its config |
+| Pittsburgh | 0.05 / 0.1 / 0.2 / 0.3 mi | 18.3% | reason not recorded here: read its config |
+| Tacoma | 0.05 / 0.1 / 0.2 / 0.3 mi | 17.6% | reason not recorded here: read its config |
+| Birmingham (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 17.5% | reason not recorded here: read its config |
+| Mendoza | 0.05 / 0.1 / 0.2 / 0.3 mi | 14.5% | reason not recorded here: read its config |
+| Kansas City | 0.05 / 0.1 / 0.2 / 0.3 mi | 12.7% | reason not recorded here: read its config |
+| Tucson | 0.05 / 0.1 / 0.2 / 0.3 mi | 6.5% | reason not recorded here: read its config |
 
 ## Cities on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), by in-ring share
 
 | In-ring share | Cities |
 |---|---|
 | **Over 95%** (5) | Barcelona 99.9, Osaka 98.2, Tokyo 97.6, Melbourne 96.0, Amsterdam 95.5 |
-| **80–95%** (13) | Madrid 94.8, Copenhagen 94.5, Seoul 93.7, Rotterdam 92.8, Hong Kong 91.2, Stockholm 89.4, Milan 87.3, Kobe 87.3, Kyoto 86.5, Sydney 83.4, Fukuoka 82.3, Berlin 82.0, Sapporo 80.2 |
-| **60–80%** (16) | Riga 77.9, Taipei (Regional) 77.8, Boston 76.2, Seongnam 76.1, Washington D.C. 73.9, Busan 73.9, London 73.6, Bucharest 72.1, San Francisco 71.5, Daegu 71.0, Prague 69.9, Incheon 68.3, Goyang 66.6, Buenos Aires 66.5, Rome 61.4, Montréal 60.5 |
-| **40–60%** (11) | Philadelphia 58.4, Dublin 57.8, Chicago 57.0, Yongin 55.4, Newcastle (Regional) 54.4, Toronto 48.0, Mexico City 47.0, Santos (Regional) 45.6, Vancouver (Regional) 45.4, Glasgow 42.3, Calgary 40.8 |
-| **Under 40%** (16) | Guadalajara (Regional) 31.4, Rio de Janeiro (Regional) 26.3, Monterrey (Regional) 25.1, San Diego 24.4, Los Angeles (Regional) 24.1, Recife (Regional) 23.4, São Paulo 22.6, Edmonton 22.2, Porto Alegre (Regional) 20.3, Taichung 19.1, Salvador 19.0, Belo Horizonte (Regional) 16.0, Brasília 13.8, Fortaleza (Regional) 13.5, Miami (Regional) 12.6, Taoyuan 11.7 |
+| **80–95%** (19) | Madrid 94.8, Copenhagen 94.5, Seoul 93.7, Rotterdam 92.8, Hong Kong 91.2, Higashiōsaka 90.4, Stockholm 89.4, Nishinomiya 89.3, Milan 87.3, Kobe 87.3, Kyoto 86.5, Uijeongbu 85.3, Kawasaki 83.5, Sydney 83.4, Yokohama 83.4, Fukuoka 82.3, Berlin 82.0, Bucheon 80.4, Sapporo 80.2 |
+| **60–80%** (31) | Taipei (Regional) 77.8, Yokosuka 77.8, Riga 77.5, Boston 76.2, Seongnam 76.1, Sakai 75.4, Ōtsu 74.7, Yokkaichi 73.9, Washington D.C. 73.9, Busan 73.9, London 73.6, Bucharest 72.1, Takamatsu 71.7, San Francisco 71.5, Kitakyushu 71.1, Daegu 71.0, Prague 69.6, Sasebo 69.3, Nara 68.7, Incheon 68.3, Himeji 67.2, Goyang 66.6, Buenos Aires 66.3, Anyang 64.2, Ansan 63.8, Okayama 63.5, Kurume 63.2, Rome 61.4, Tbilisi 60.9, Montréal 60.5, Fukui 60.5 |
+| **40–60%** (23) | Edinburgh 59.4, Bergen 58.5, Philadelphia 58.4, Dublin 57.7, Chicago 57.0, Yongin 55.4, Namyangju 54.9, Newcastle (Regional) 54.4, Liverpool (Regional) 52.1, Manchester (Regional) 51.8, Toyota 51.5, Toronto 48.0, Suwon 47.6, Utsunomiya 47.1, Mexico City 47.0, Santos (Regional) 45.6, Vancouver (Regional) 45.4, Shimonoseki 42.8, Glasgow 42.3, Daejeon 41.7, Kitchener–Waterloo (Regional) 41.5, Sacramento 41.3, Calgary 40.8 |
+| **Under 40%** (26) | Seattle (Regional) 38.4, Gimhae 37.7, Minneapolis 35.8, Palma 34.6, Hamamatsu 33.9, Ottawa 32.4, Guadalajara (Regional) 31.4, Gwangju 29.8, Dallas 26.4, Rio de Janeiro (Regional) 26.3, Monterrey (Regional) 25.1, San Diego 24.4, Los Angeles (Regional) 24.1, Buffalo 24.0, Recife (Regional) 23.4, São Paulo 23.0, Edmonton 22.2, Porto Alegre (Regional) 20.4, Taichung 19.2, Salvador 19.0, Belo Horizonte (Regional) 16.0, Brasília 13.8, Fortaleza (Regional) 13.5, Miami (Regional) 12.6, Taoyuan 11.7, Houston 7.4 |
 
 ## Every city
 
 | City | Rings | In ring | All | Share |
 |---|---|---|---|---|
-| Barcelona | 0.1 / 0.2 / 0.3 / 0.6 mi | 35,936 | 35,958 | 99.9% |
-| Osaka | 0.1 / 0.2 / 0.3 / 0.6 mi | 71,672 | 72,999 | 98.2% |
-| Paris | 0.05 / 0.1 / 0.2 / 0.3 mi | 85,247 | 86,903 | 98.1% |
-| Tokyo | 0.1 / 0.2 / 0.3 / 0.6 mi | 59,889 | 61,377 | 97.6% |
+| Barcelona | 0.1 / 0.2 / 0.3 / 0.6 mi | 35,287 | 35,309 | 99.9% |
+| Osaka | 0.1 / 0.2 / 0.3 / 0.6 mi | 71,679 | 72,999 | 98.2% |
+| Paris | 0.05 / 0.1 / 0.2 / 0.3 mi | 85,228 | 86,884 | 98.1% |
+| Tokyo | 0.1 / 0.2 / 0.3 / 0.6 mi | 59,887 | 61,375 | 97.6% |
 | Melbourne | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,760 | 4,959 | 96.0% |
 | Amsterdam | 0.1 / 0.2 / 0.3 / 0.6 mi | 12,648 | 13,238 | 95.5% |
-| Madrid | 0.1 / 0.2 / 0.3 / 0.6 mi | 49,400 | 52,102 | 94.8% |
+| Madrid | 0.1 / 0.2 / 0.3 / 0.6 mi | 49,537 | 52,240 | 94.8% |
 | Copenhagen | 0.1 / 0.2 / 0.3 / 0.6 mi | 14,102 | 14,922 | 94.5% |
+| Brussels | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,762 | 5,069 | 93.9% |
 | Seoul | 0.1 / 0.2 / 0.3 / 0.6 mi | 224,381 | 239,410 | 93.7% |
+| Den Haag | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,781 | 6,213 | 93.0% |
 | Rotterdam | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,982 | 7,520 | 92.8% |
+| Zurich | 0.05 / 0.1 / 0.2 / 0.3 mi | 3,099 | 3,363 | 92.1% |
 | Hong Kong | 0.1 / 0.2 / 0.3 / 0.6 mi | 19,275 | 21,135 | 91.2% |
-| Stockholm | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,702 | 5,262 | 89.4% |
+| Higashiōsaka | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,218 | 5,775 | 90.4% |
+| Stockholm | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,666 | 5,218 | 89.4% |
+| Nishinomiya | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,935 | 5,527 | 89.3% |
 | Milan | 0.1 / 0.2 / 0.3 / 0.6 mi | 41,510 | 47,540 | 87.3% |
 | Kobe | 0.1 / 0.2 / 0.3 / 0.6 mi | 23,785 | 27,251 | 87.3% |
+| Montpellier | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,443 | 6,276 | 86.7% |
 | Kyoto | 0.1 / 0.2 / 0.3 / 0.6 mi | 27,980 | 32,355 | 86.5% |
+| Uijeongbu | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,178 | 13,103 | 85.3% |
+| Strasbourg | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,779 | 5,614 | 85.1% |
+| Orléans | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,568 | 1,852 | 84.7% |
+| Kawasaki | 0.1 / 0.2 / 0.3 / 0.6 mi | 9,928 | 11,894 | 83.5% |
 | Sydney | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,901 | 7,074 | 83.4% |
-| Fukuoka | 0.1 / 0.2 / 0.3 / 0.6 mi | 24,619 | 29,921 | 82.3% |
-| Berlin | 0.1 / 0.2 / 0.3 / 0.6 mi | 49,393 | 60,269 | 82.0% |
+| Yokohama | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,540 | 7,843 | 83.4% |
+| Brno | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,932 | 7,200 | 82.4% |
+| Fukuoka | 0.1 / 0.2 / 0.3 / 0.6 mi | 24,615 | 29,917 | 82.3% |
+| Berlin | 0.1 / 0.2 / 0.3 / 0.6 mi | 49,394 | 60,268 | 82.0% |
+| Antwerp | 0.05 / 0.1 / 0.2 / 0.3 mi | 3,973 | 4,881 | 81.4% |
+| Bucheon | 0.1 / 0.2 / 0.3 / 0.6 mi | 18,093 | 22,512 | 80.4% |
+| Nice | 0.05 / 0.1 / 0.2 / 0.3 mi | 8,086 | 10,063 | 80.4% |
 | Sapporo | 0.1 / 0.2 / 0.3 / 0.6 mi | 23,001 | 28,674 | 80.2% |
-| Riga | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,241 | 6,730 | 77.9% |
-| Taipei (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 100,239 | 128,878 | 77.8% |
+| Daugavpils | 0.05 / 0.1 / 0.2 / 0.3 mi | 656 | 819 | 80.1% |
+| Mulhouse | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,704 | 2,155 | 79.1% |
+| Grenoble (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,534 | 5,781 | 78.4% |
+| Olomouc | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,742 | 2,235 | 77.9% |
+| Taipei (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 100,505 | 129,102 | 77.8% |
+| Yokosuka | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,535 | 4,544 | 77.8% |
+| Riga | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,213 | 6,725 | 77.5% |
+| Brest | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,517 | 1,980 | 76.6% |
 | Boston | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,410 | 3,164 | 76.2% |
 | Seongnam | 0.1 / 0.2 / 0.3 / 0.6 mi | 19,418 | 25,529 | 76.1% |
+| Saint-Étienne | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,276 | 2,998 | 75.9% |
 | Oslo | 0.05 / 0.1 / 0.2 / 0.3 mi | 8,080 | 10,678 | 75.7% |
-| Washington D.C. | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,847 | 5,203 | 73.9% |
+| Göteborg | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,256 | 2,989 | 75.5% |
+| Angers | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,907 | 2,530 | 75.4% |
+| Sakai | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,046 | 8,023 | 75.4% |
+| Ōtsu | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,367 | 4,508 | 74.7% |
+| Ostrava | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,941 | 3,960 | 74.3% |
+| Yokkaichi | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,185 | 4,308 | 73.9% |
+| Washington D.C. | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,845 | 5,203 | 73.9% |
 | Busan | 0.1 / 0.2 / 0.3 / 0.6 mi | 66,348 | 89,798 | 73.9% |
 | London | 0.1 / 0.2 / 0.3 / 0.6 mi | 41,574 | 56,491 | 73.6% |
-| Bucharest | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,244 | 15,593 | 72.1% |
-| San Francisco | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,788 | 16,495 | 71.5% |
+| Le Mans | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,462 | 1,991 | 73.4% |
+| Brussels (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 10,006 | 13,680 | 73.1% |
+| Bucharest | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,242 | 15,589 | 72.1% |
+| Takamatsu | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,608 | 7,820 | 71.7% |
+| Plzeň | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,508 | 3,508 | 71.5% |
+| San Francisco | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,720 | 16,394 | 71.5% |
+| Kitakyushu | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,587 | 14,883 | 71.1% |
 | New York | 0.05 / 0.1 / 0.2 / 0.3 mi | 44,360 | 62,441 | 71.0% |
 | Daegu | 0.1 / 0.2 / 0.3 / 0.6 mi | 47,724 | 67,212 | 71.0% |
-| Prague | 0.1 / 0.2 / 0.3 / 0.6 mi | 17,613 | 25,206 | 69.9% |
-| Rennes | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,354 | 3,448 | 68.3% |
+| Caen | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,567 | 2,214 | 70.8% |
+| Liepāja | 0.05 / 0.1 / 0.2 / 0.3 mi | 489 | 702 | 69.7% |
+| Prague | 0.1 / 0.2 / 0.3 / 0.6 mi | 17,528 | 25,185 | 69.6% |
+| Sasebo | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,696 | 2,448 | 69.3% |
+| Charleroi | 0.05 / 0.1 / 0.2 / 0.3 mi | 989 | 1,430 | 69.2% |
+| Valenciennes (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,609 | 2,330 | 69.1% |
+| Nara | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,305 | 4,813 | 68.7% |
+| Rennes | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,353 | 3,445 | 68.3% |
 | Incheon | 0.1 / 0.2 / 0.3 / 0.6 mi | 56,426 | 82,671 | 68.3% |
+| Hiroshima | 0.05 / 0.1 / 0.2 / 0.3 mi | 9,132 | 13,565 | 67.3% |
+| Himeji | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,697 | 8,482 | 67.2% |
+| Dijon | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,777 | 2,668 | 66.6% |
 | Goyang | 0.1 / 0.2 / 0.3 / 0.6 mi | 18,519 | 27,808 | 66.6% |
-| Buenos Aires | 0.1 / 0.2 / 0.3 / 0.6 mi | 42,185 | 63,443 | 66.5% |
-| Toulouse | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,533 | 8,596 | 64.4% |
+| Buenos Aires | 0.1 / 0.2 / 0.3 / 0.6 mi | 41,633 | 62,765 | 66.3% |
+| Tours | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,741 | 2,652 | 65.6% |
+| Bordeaux (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 8,381 | 12,807 | 65.4% |
+| Most (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 664 | 1,025 | 64.8% |
+| Toulouse | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,532 | 8,592 | 64.4% |
+| Anyang | 0.1 / 0.2 / 0.3 / 0.6 mi | 9,747 | 15,177 | 64.2% |
+| Ansan | 0.1 / 0.2 / 0.3 / 0.6 mi | 12,575 | 19,711 | 63.8% |
+| Besançon | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,300 | 2,042 | 63.7% |
+| Okayama | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,174 | 6,577 | 63.5% |
+| Kurume | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,961 | 3,101 | 63.2% |
+| Nantes (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,146 | 6,570 | 63.1% |
+| Rouen (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,584 | 4,167 | 62.0% |
 | Rome | 0.1 / 0.2 / 0.3 / 0.6 mi | 60,739 | 98,897 | 61.4% |
-| Lille (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 7,165 | 11,739 | 61.0% |
+| Lille (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 7,162 | 11,733 | 61.0% |
+| Tbilisi | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,043 | 13,211 | 60.9% |
 | Montréal | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,386 | 17,162 | 60.5% |
+| Fukui | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,982 | 4,932 | 60.5% |
+| Kagoshima | 0.05 / 0.1 / 0.2 / 0.3 mi | 3,975 | 6,588 | 60.3% |
+| Le Havre | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,461 | 2,433 | 60.0% |
+| Edinburgh | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,226 | 3,750 | 59.4% |
+| Bergen | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,106 | 3,597 | 58.5% |
+| Ghent | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,596 | 2,730 | 58.5% |
 | Philadelphia | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,851 | 8,301 | 58.4% |
-| Dublin | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,460 | 12,904 | 57.8% |
-| Chicago | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,721 | 20,553 | 57.0% |
+| Dublin | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,411 | 12,844 | 57.7% |
+| Nagasaki | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,211 | 7,317 | 57.6% |
+| Chicago | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,685 | 20,492 | 57.0% |
+| Liège | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,336 | 2,345 | 57.0% |
+| Liberec (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,405 | 2,488 | 56.5% |
 | Yongin | 0.1 / 0.2 / 0.3 / 0.6 mi | 13,003 | 23,481 | 55.4% |
-| Marseille | 0.05 / 0.1 / 0.2 / 0.3 mi | 9,947 | 18,029 | 55.2% |
+| Matsuyama | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,136 | 9,285 | 55.3% |
+| Marseille | 0.05 / 0.1 / 0.2 / 0.3 mi | 9,946 | 18,026 | 55.2% |
+| Namyangju | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,067 | 18,344 | 54.9% |
+| Reims | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,457 | 2,662 | 54.7% |
 | Newcastle (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,358 | 6,171 | 54.4% |
-| Toronto | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,752 | 18,218 | 48.0% |
-| Mexico City | 0.1 / 0.2 / 0.3 / 0.6 mi | 131,458 | 279,804 | 47.0% |
-| Santos (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,385 | 11,809 | 45.6% |
-| Glasgow | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,993 | 4,708 | 42.3% |
-| Calgary | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,156 | 15,072 | 40.8% |
+| Kumamoto | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,492 | 10,117 | 54.3% |
+| Liverpool (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,732 | 7,170 | 52.1% |
+| Manchester (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,202 | 11,963 | 51.8% |
+| Toyota | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,165 | 4,203 | 51.5% |
+| Blackpool (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 820 | 1,648 | 49.8% |
+| Kōchi | 0.05 / 0.1 / 0.2 / 0.3 mi | 677 | 1,406 | 48.2% |
+| Toronto | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,749 | 18,215 | 48.0% |
+| Suwon | 0.1 / 0.2 / 0.3 / 0.6 mi | 15,928 | 33,433 | 47.6% |
+| Utsunomiya | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,789 | 8,048 | 47.1% |
+| Mexico City | 0.1 / 0.2 / 0.3 / 0.6 mi | 131,667 | 280,185 | 47.0% |
+| Toyama | 0.05 / 0.1 / 0.2 / 0.3 mi | 3,052 | 6,584 | 46.4% |
+| New Orleans | 0.05 / 0.1 / 0.2 / 0.3 mi | 2,140 | 4,689 | 45.6% |
+| Santos (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,391 | 11,822 | 45.6% |
 | Vancouver (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,010 | 15,436 | 45.4% |
-| Guadalajara (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 36,662 | 116,657 | 31.4% |
+| Shimonoseki | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,272 | 2,972 | 42.8% |
+| Glasgow | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,993 | 4,708 | 42.3% |
+| Daejeon | 0.1 / 0.2 / 0.3 / 0.6 mi | 21,252 | 50,939 | 41.7% |
+| Kitchener–Waterloo (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 865 | 2,086 | 41.5% |
+| Sacramento | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,378 | 3,335 | 41.3% |
+| Calgary | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,156 | 15,072 | 40.8% |
+| Odense | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,154 | 2,834 | 40.7% |
+| Seattle (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,548 | 14,430 | 38.4% |
+| Gimhae | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,736 | 17,879 | 37.7% |
+| Florence | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,435 | 12,052 | 36.8% |
+| Minneapolis | 0.1 / 0.2 / 0.3 / 0.6 mi | 641 | 1,793 | 35.8% |
+| Nottingham (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,210 | 3,478 | 34.8% |
+| Sheffield | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,162 | 3,348 | 34.7% |
+| Palma | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,187 | 3,432 | 34.6% |
+| Hamamatsu | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,080 | 3,187 | 33.9% |
+| Ottawa | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,586 | 4,896 | 32.4% |
+| Guadalajara (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 36,752 | 116,945 | 31.4% |
+| Hakodate | 0.05 / 0.1 / 0.2 / 0.3 mi | 331 | 1,077 | 30.7% |
+| Gwangju | 0.1 / 0.2 / 0.3 / 0.6 mi | 14,077 | 47,214 | 29.8% |
+| Dallas | 0.1 / 0.2 / 0.3 / 0.6 mi | 4,197 | 15,884 | 26.4% |
 | Rio de Janeiro (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 33,029 | 125,440 | 26.3% |
-| Monterrey (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 14,564 | 58,049 | 25.1% |
+| Avignon | 0.05 / 0.1 / 0.2 / 0.3 mi | 622 | 2,416 | 25.7% |
+| Aarhus | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,300 | 5,102 | 25.5% |
+| Monterrey (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 14,630 | 58,329 | 25.1% |
 | San Diego | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,228 | 9,124 | 24.4% |
 | Los Angeles (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 14,642 | 60,740 | 24.1% |
-| Recife (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,358 | 44,302 | 23.4% |
-| São Paulo | 0.1 / 0.2 / 0.3 / 0.6 mi | 49,555 | 219,421 | 22.6% |
+| Buffalo | 0.1 / 0.2 / 0.3 / 0.6 mi | 376 | 1,564 | 24.0% |
+| Recife (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,365 | 44,332 | 23.4% |
+| São Paulo | 0.1 / 0.2 / 0.3 / 0.6 mi | 50,436 | 219,667 | 23.0% |
 | Edmonton | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,374 | 10,702 | 22.2% |
-| Porto Alegre (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,400 | 36,391 | 20.3% |
-| Taichung | 0.1 / 0.2 / 0.3 / 0.6 mi | 12,185 | 63,692 | 19.1% |
-| Salvador | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,056 | 52,938 | 19.0% |
+| Porto Alegre (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,425 | 36,454 | 20.4% |
+| Taichung | 0.1 / 0.2 / 0.3 / 0.6 mi | 12,250 | 63,780 | 19.2% |
+| Salvador | 0.1 / 0.2 / 0.3 / 0.6 mi | 10,070 | 52,986 | 19.0% |
+| Pittsburgh | 0.05 / 0.1 / 0.2 / 0.3 mi | 316 | 1,730 | 18.3% |
+| Tacoma | 0.05 / 0.1 / 0.2 / 0.3 mi | 503 | 2,851 | 17.6% |
+| Birmingham (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,642 | 9,383 | 17.5% |
 | Belo Horizonte (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 9,346 | 58,552 | 16.0% |
-| Brasília | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,063 | 36,633 | 13.8% |
-| Fortaleza (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,514 | 62,882 | 13.5% |
+| Mendoza | 0.05 / 0.1 / 0.2 / 0.3 mi | 641 | 4,406 | 14.5% |
+| Brasília | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,072 | 36,700 | 13.8% |
+| Fortaleza (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,537 | 63,036 | 13.5% |
+| Kansas City | 0.05 / 0.1 / 0.2 / 0.3 mi | 451 | 3,561 | 12.7% |
 | Miami (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,733 | 29,549 | 12.6% |
-| Taoyuan | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,089 | 43,592 | 11.7% |
+| Taoyuan | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,104 | 43,532 | 11.7% |
+| Houston | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,224 | 29,912 | 7.4% |
+| Tucson | 0.05 / 0.1 / 0.2 / 0.3 mi | 340 | 5,243 | 6.5% |

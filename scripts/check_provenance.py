@@ -202,6 +202,7 @@ SLUG_OVERRIDES = {
     "Birmingham (Regional)": "birmingham",
     "Manchester (Regional)": "manchester",
     "Blackpool (Regional)": "blackpool",
+    "Liverpool (Regional)": "liverpool",
     "Nottingham (Regional)": "nottingham",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
@@ -253,6 +254,10 @@ SLUG_OVERRIDES = {
     "Göteborg": "goteborg",
     # Seattle (Regional): eleven cities on one page (2026-10-02).
     "Seattle (Regional)": "seattle",
+    # Belgium (2026-10-04): an accent dropped; the Region's 18 communes beyond
+    # the City of Brussels as their own page beside the City's "Brussels".
+    "Liège": "liege",
+    "Brussels (Regional)": "brussels_regional",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are
@@ -578,8 +583,11 @@ def selftest_notice_bijection():
 # OpenStreetMap basemap line (1), Chicago (2) and Kansas City (80), whose terms
 # name the site; LA Metro (4), whose placement could not be read; INEGI (8) and
 # Barcelona (21), whose disclosure duties may reach the Overview's figures.
-# Changing this set is a decision for the owner, not an edit.
-EVERY_PAGE_APPROVED = {1, 2, 4, 8, 21, 80}
+# Changing this set is a decision for the owner, not an edit. Tacoma (142)
+# joined 2026-10-04 on the owner's acceptance of its licence "on Chicago's
+# template" (2026-10-03; DECISIONS.md, Tacoma built), whose terms
+# bind any application using the data, as Chicago's and Kansas City's do.
+EVERY_PAGE_APPROVED = {1, 2, 4, 8, 21, 80, 142}
 NOTICES_PAGE_FILE = ROOT / "app" / "pages" / "Required_Notices.py"
 
 

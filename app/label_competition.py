@@ -202,6 +202,10 @@ TEXT_WIDTH = {
     # 600 loaded from Google Fonts; controls Vancouver (Regional) 144.4, Miami
     # (Regional) 112.6, Buffalo 48.8 and Boston 48.4 reproduced exactly.
     "Seattle (Regional)": 120.5,
+    # Belgium (2026-10-04, the built-in browser with Space Grotesk 600 loaded;
+    # Boston, Göteborg, Den Haag and Seattle (Regional) re-measured the same).
+    "Brussels": 57.2, "Antwerp": 57.2, "Ghent": 40.8, "Charleroi": 60.4,
+    "Liège": 36.5, "Brussels (Regional)": 130.2,
     # Tbilisi, 2026-10-02, the same method; controls Seattle (Regional),
     # Vancouver (Regional), Buffalo and Boston reproduced exactly.
     "Tbilisi": 39.1,
@@ -234,6 +238,9 @@ TEXT_WIDTH = {
     "Kawasaki": 62.6, "Yokosuka": 63.7, "Himeji": 40.3, "Nishinomiya": 82.1, "Takamatsu": 72.8,
     "Toyota": 46.9, "Yokkaichi": 63.8, "Ōtsu": 31.8, "Nara": 30.8, "Hamamatsu": 79.2,
     "Higashiōsaka": 89.1, "Kurume": 51.3, "Sasebo": 49.5, "Shimonoseki": 85.5,
+    # The Korea sweep, 2026-10-04, the same method; controls Goyang, Uijeongbu,
+    # Anyang, Busan and Daegu, each reproduced to 0.1 px.
+    "Daejeon": 54.4, "Gwangju": 58.2, "Gimhae": 49.5,
     # Dallas, 2026-09-30; controls Prague, Tokyo, Houston, Toronto, Yokohama.
     "Dallas": 40.1,
     "Guadalajara (Regional)": 152.7, "Madrid": 47.2,
@@ -275,6 +282,12 @@ TEXT_WIDTH = {
     # browser pane; controls Newcastle (Regional) 143.1, London, Glasgow.
     "Manchester (Regional)": 153.9, "Birmingham (Regional)": 153.2, "Edinburgh": 69.3,
     "Sheffield": 59.7, "Nottingham (Regional)": 151.7, "Blackpool (Regional)": 139.7,
+    # Liverpool (Regional), 2026-10-04, the same way in the browser pane;
+    # controls Blackpool (Regional) 139.7 and Nottingham (Regional) 151.7.
+    "Liverpool (Regional)": 135.0,
+    # Tacoma and Mendoza, 2026-10-04, the same way; controls Seattle (Regional)
+    # 120.5 and Blackpool (Regional) 139.7.
+    "Tacoma": 51.8, "Mendoza": 61.8,
     # Belo Horizonte renamed (Regional) by its Contagem extension, 2026-10-03,
     # local app (lean venv), canvas measureText after document.fonts.load;
     # controls Belo Horizonte 98.5, Rio de Janeiro, Fortaleza (Regional), Lille

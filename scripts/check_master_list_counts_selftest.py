@@ -1,4 +1,4 @@
-"""Watch scripts/check_master_list_counts.py fail, twenty-three ways.
+"""Watch scripts/check_master_list_counts.py fail, twenty-six ways.
 
     python scripts/check_master_list_counts_selftest.py
 
@@ -271,6 +271,28 @@ def by_country_bump(col, expect):
     return apply
 
 
+def multi_row_country_drop(text):
+    """-1 on the Built figure of a by-country row whose one flag marks entries
+    in two or more Built rows (South Korea since 2026-10-04: the Seoul Capital
+    Area's 11 and the South Korea view's 5). The check counts such a country
+    by its flagged entries, so the unmodified copy passing proves 11 + 5 reads
+    as 16, and this case proves 15 fails against it."""
+    lines = text.split("\n")
+    rows_with = {}
+    for _, _, _, _, flags in _built(lines):
+        for fl in flags:
+            rows_with[fl] = rows_with.get(fl, 0) + 1
+    _, rows = _by_country(lines)
+    for i, row in rows:
+        flags = M.FLAG_RE.findall(row[0])
+        m = re.match(r"\*\*(\d+)\*\*", row[1])
+        if m and len(flags) == 1 and rows_with.get(flags[0], 0) > 1:
+            old = int(m.group(1))
+            multi_row_country_drop.expect = f"says {old - 1} built, the Built table lists {old}"
+            return _set_cell(lines, i, 1, f"**{old - 1}**" + row[1][m.end():])
+    return None
+
+
 CASES = [
     # Re-aimed from Band C to Band B 2026-09-28, when C closed (owner).
     ("a band heading's count drifted (Band B, +1)",
@@ -310,6 +332,10 @@ CASES = [
 
     ("by country: a row's Built figure disagrees with the Built table",
      by_country_bump(1, "says {new} built, the Built table lists {old}"), None),
+
+    # A country across two Built rows, counted by its flag (2026-10-04).
+    ("by country: a multi-row country's Built figure drifted (-1)",
+     multi_row_country_drop, None),
 
     ("by country: the Total row's band figure drifted",
      bump(r"^\| \*\*Total\*\*.*· D (\d+) ·", "the Total row says D {new}"), None),

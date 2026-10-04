@@ -1143,7 +1143,7 @@ CITIES = [
         # Europe's re-centred frame put its pill over Birmingham's and
         # Nottingham's markers.
         # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
-        "label_offset_by_region": {"Europe": ("start", 10, 26)},
+        "label_offset_by_region": {"Europe": ("start", 10, -12)},
     },
     {
         "name": "Hong Kong",
@@ -1288,7 +1288,9 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Daegu Metro Lines 1–3",
-        "region": "East Asia",
+        # In the South Korea view since 2026-10-04 (owner); East Asia still
+        # labels it (REGION_LABELS_ALSO), at the offset below.
+        "region": "South Korea",
         "country": "South Korea",
         "in_default_view": False,
         # Left of the dot (width 42.9 px, measured 2026-09-27): above it, the
@@ -1308,7 +1310,9 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "Busan Metro Lines 1–4 and the Busan–Gimhae LRT",
-        "region": "East Asia",
+        # In the South Korea view since 2026-10-04 (owner); East Asia still
+        # labels it (REGION_LABELS_ALSO), at the offset below.
+        "region": "South Korea",
         "country": "South Korea",
         "in_default_view": False,
         # LOWER LEFT since 2026-09-28: below the dot, Busan's pill covered
@@ -2238,6 +2242,12 @@ CITIES = [
         # PROBLEMS 0 at 375, 768 and 1200. Right of the dot, the provisional
         # value, unmoved.
         "label_offset": ("start", 11, 0),
+        # EUROPE: below-right, with Rotterdam above-right (owner, 2026-10-04: one
+        # placement pass for the pair). The Belgian dots put Liege under
+        # Rotterdam's old pill; of 144 offset pairs scored by
+        # check_macro_labels.py this is the only one with no problem at
+        # 375, 768 and 1200 px. The labels cross (the dots are 3.0 px apart).
+        "label_offset_by_region": {"Europe": ("start", 10, 12)},
     },
     {
         "name": "Zurich",
@@ -3229,7 +3239,10 @@ CITIES = [
         # WEST of the dot in the United Kingdom (2026-10-02): above it, the pill
         # covered Blackpool's marker and overlapped Sheffield's.
         # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
-        "label_offset_by_region": {"United Kingdom": ("end", -10, 0)},
+        # RAISED 14 px when Liverpool (Regional) joined (2026-10-04): level with
+        # the dot, the pill covered Liverpool's marker. Searched again with
+        # Liverpool's pill below its own dot: PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"United Kingdom": ("end", -10, -14)},
     },
     {
         "name": "Birmingham (Regional)",
@@ -4209,6 +4222,319 @@ CITIES = [
         "label_offset_by_region": {'Japan West': ('middle', 0, 22)},
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Brussels",
+        "lat": 50.846,
+        "lon": 4.352,
+        "page": "pages/196_Brussels_Heatmap.py",
+        "blurb": "Metro 1, 2, 5 and 6 and 15 tram lines",
+        "region": "Belgium",
+        "country": "Belgium",
+        "mode": "metro",
+        "coverage": "full",
+        "placement": "Survey coordinates (100%)",
+        "data_age": "2025 survey",
+        "rail_extra": "Trams",
+        "record_kind": "Street survey or census",
+        "categories": "All three",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Antwerp",
+        "lat": 51.2194,
+        "lon": 4.4025,
+        "page": "pages/197_Antwerp_Heatmap.py",
+        "blurb": "Trams 1, 2, 4, 6, 7, 8, 10, 11, 12, 24, A3, A9",
+        "region": "Belgium",
+        "country": "Belgium",
+        "mode": "tram",
+        "coverage": "one_bucket",
+        "placement": "Joined to register points (95.8%)",
+        "data_age": "Weekly register, extract of 2026-09-28",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ghent",
+        "lat": 51.0543,
+        "lon": 3.7174,
+        "page": "pages/198_Ghent_Heatmap.py",
+        "blurb": "Trams T1, T2, T4",
+        "region": "Belgium",
+        "country": "Belgium",
+        "mode": "tram",
+        "coverage": "one_bucket",
+        "placement": "Joined to register points (95.0%)",
+        "data_age": "Weekly register, extract of 2026-09-28",
+        "rail_extra": "Trams",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Charleroi",
+        "lat": 50.4108,
+        "lon": 4.4446,
+        "page": "pages/199_Charleroi_Heatmap.py",
+        "blurb": "Light metro M2, M3 and M4",
+        "region": "Belgium",
+        "country": "Belgium",
+        "mode": "light_rail",
+        "coverage": "narrowed",
+        "placement": "Survey coordinates (100%)",
+        "data_age": "2024 survey",
+        "rail_extra": "Trams",
+        "record_kind": "Street survey or census",
+        "categories": "Two",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Liège",
+        "lat": 50.6326,
+        "lon": 5.5797,
+        "page": "pages/200_Liege_Heatmap.py",
+        "blurb": "Tram T1",
+        "region": "Belgium",
+        "country": "Belgium",
+        "mode": "tram",
+        "coverage": "narrowed",
+        "placement": "Survey coordinates (100%)",
+        "data_age": "2024 survey",
+        "rail_extra": "Trams",
+        "record_kind": "Street survey or census",
+        "categories": "Two",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Brussels (Regional)",
+        # THE DOT SITS IN THE PAGE'S OWN COMMUNES (owner, 2026-10-04): at the
+        # Region's centre it was 2.4 px from Brussels' dot in the Belgium view.
+        # Forest's representative point, the candidate nearest the 18
+        # communes' centroid that check_macro_labels.py passes at 375, 768
+        # and 1200 px (the centroid itself does not), with the label below.
+        "lat": 50.814,
+        "lon": 4.3239,
+        "page": "pages/201_Brussels_Regional_Heatmap.py",
+        "blurb": "Metro 1, 2, 5 and 6 and 18 tram lines",
+        "region": "Belgium",
+        "country": "Belgium",
+        "mode": "metro",
+        "coverage": "narrowed",
+        "placement": "Joined by address (96.8%)",
+        "data_age": "KBO snapshot of 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "Two",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, 24),
+    },
+    {
+        "name": "Liverpool (Regional)",
+        "lat": 53.4084,
+        "lon": -2.9916,
+        "page": "pages/195_Liverpool_Heatmap.py",
+        # The UK six's values on Merseyrail (2026-10-04). `mode` metro (owner,
+        # 2026-10-03, "1. metro": the underground city-centre loop, trunks every
+        # 2-6 minutes); rail_extra "Suburban rail" as London's and Sydney's, the
+        # whole network being suburban rail drawn as a commuter-rail exception
+        # (owner, 2026-10-03). placement 6,771 FSA points and 399 Code-Point
+        # centroids of the 7,170 placed.
+        "coverage": "one_bucket",
+        "mode": "metro",
+        "placement": "Register coordinates (94%) and postcode centers (6%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Merseyrail, the Northern and Wirral Lines",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # MINOR, as the brief has it for the UK six's region (a dot and tooltip
+        # in every view, its pill only in the United Kingdom). The UK rule reads
+        # tram and light rail against metro, so a metro city's tier is the
+        # owner's call (DECISIONS.md).
+        "label_tier": "minor",
+        # BELOW the dot, scored in the United Kingdom view, where a minor
+        # city's pill shows (2026-10-04; the width measured in the browser
+        # pane): with Manchester's pill raised, check_macro_labels.py PROBLEMS 0
+        # at 375, 768 and 1200. West and level, it overlapped Manchester's and
+        # Sheffield's pills.
+        "label_offset": ("middle", 0, 22),
+    },
+    {
+        "name": "Tacoma",
+        "lat": 47.2529,
+        "lon": -122.4443,
+        "page": "pages/194_Tacoma_Heatmap.py",
+        # Kansas City's values (2026-10-04). `mode` tram (the brief: street
+        # running on purpose-built track, a 451 m median gap; the owner approves
+        # it with the build). `coverage` full: all three buckets (Retail 1,520,
+        # Food service 600, Personal services 811 in the city).
+        "coverage": "full",
+        "mode": "tram",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Active accounts, layer edited 2026-10-02",
+        "rail_extra": "Trams",
+        "record_kind": "License register",
+        "categories": "All three",
+        "blurb": "T Line, one tram line",
+        "region": "United States West",
+        "country": "United States",
+        # Out of the landing frame, as Seattle (Regional) is: framing it would
+        # re-fit the pinned zoom every label offset was measured at.
+        "in_default_view": False,
+        # MINOR, as the US tram cities are (Kansas City, Tucson, New Orleans):
+        # a dot and tooltip in every view, its pill only in United States West.
+        # In the United States composite every side of the dot met Seattle's,
+        # Sacramento's or Minneapolis's pill.
+        "label_tier": "minor",
+        # BELOW the dot, scored in United States West (2026-10-04; width 51.8
+        # measured in the browser pane): check_macro_labels.py PROBLEMS 0 at
+        # 375, 768 and 1200. Above, it overlapped Seattle (Regional)'s pill.
+        "label_offset": ("middle", 0, 22),
+    },
+    {
+        "name": "Mendoza",
+        "lat": -32.8895,
+        "lon": -68.8458,
+        "page": "pages/193_Mendoza_Heatmap.py",
+        # 2026-10-04. `mode` light_rail on the light-rail test (a converted
+        # railway, every 10 minutes at peak and 13 at midday on STM's winter
+        # 2026 weekday timetable); `coverage` full (owner, 2026-10-04): all
+        # three buckets from one register, Personal services small but complete.
+        # rail_extra "Trams" as Manchester's (light rail counts).
+        "coverage": "full",
+        "mode": "light_rail",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Open accounts, June 2025",
+        "rail_extra": "Trams",
+        "record_kind": "License register",
+        "categories": "All three",
+        "blurb": "Metrotranvía, one light-rail line",
+        "region": "South America",
+        "country": "Argentina",
+        "in_default_view": False,
+        # Above the dot, the default, scored (width 61.8 px measured in the
+        # browser pane, 2026-10-04): with South America's zoom leaving Mendoza
+        # out (REGION_ZOOM_WITHOUT, below), PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Daejeon",
+        "lat": 36.351,
+        "lon": 127.385,
+        "page": "pages/190_Daejeon_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Daejeon Metro Line 1",
+        "region": "South Korea",
+        "country": "South Korea",
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the default, and SCORED: check_macro_labels.py (python
+        # -B) passes, PROBLEMS 0 at 375, 768 and 1200 (width 54.4 px, measured
+        # 2026-10-04).
+        # MINOR, in the South Korea view (owner, 2026-10-04): labelled only
+        # there; a dot and tooltip in East Asia, which labels Daegu and Busan.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Gwangju",
+        "lat": 35.16,
+        "lon": 126.852,
+        "page": "pages/191_Gwangju_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Gwangju Metro Line 1",
+        "region": "South Korea",
+        "country": "South Korea",
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the default, and SCORED: check_macro_labels.py (python
+        # -B) passes, PROBLEMS 0 at 375, 768 and 1200 (width 58.2 px, measured
+        # 2026-10-04).
+        # MINOR, in the South Korea view (owner, 2026-10-04): labelled only
+        # there; a dot and tooltip in East Asia, which labels Daegu and Busan.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Gimhae",
+        "lat": 35.228,
+        "lon": 128.889,
+        "page": "pages/192_Gimhae_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "The Busan–Gimhae LRT",
+        "region": "South Korea",
+        "country": "South Korea",
+        "mode": "light_rail",
+        "in_default_view": False,
+        # Above the dot, the default, and SCORED: check_macro_labels.py (python
+        # -B) passes, PROBLEMS 0 at 375, 768 and 1200 (width 49.5 px, measured
+        # 2026-10-04).
+        # MINOR, in the South Korea view (owner, 2026-10-04): labelled only
+        # there; a dot and tooltip in East Asia, which labels Daegu and Busan.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -4356,6 +4682,12 @@ REGION_ORDER = [
     # re-centred frame then needed Stockholm's label below its dot. Fitted
     # zoom, no override; PROBLEMS 0 at every width.
     "Czechia",
+    # BELGIUM (owner, 2026-10-04, Belgian build call 3: "a macro-map view of its
+    # own, on Czechia's mechanism"): Brussels, Antwerp, Ghent, Charleroi, Liège
+    # and Brussels (Regional). In Europe's view their six pills overlapped every
+    # pair at every width (check_macro_labels.py); here every Belgian city is
+    # labelled and Europe shows the dots unlabelled, as it does Czechia's.
+    "Belgium",
     # THE UNITED KINGDOM (owner, 2026-10-02: "implement the high-density cluster
     # rule to UK, like Japan, France, Czechia"), on Czechia's mechanism: every UK
     # city, London, Glasgow and Newcastle (Regional) included, in a view of its
@@ -4392,6 +4724,15 @@ REGION_ORDER = [
     # every pair of labels overlapped (check_macro_labels.py); a composite
     # would still label them all at that zoom. Each city keeps its own page.
     "Seoul Capital Area",
+    # SOUTH KOREA (owner, 2026-10-04): Daegu and Busan, with Daejeon, Gwangju
+    # and Gimhae, moved out of East Asia as Japan's cities were. At East Asia's
+    # zoom Busan's and Gimhae's dots sit 2.6 px apart and Daejeon's pill covers
+    # the Seoul Capital Area's dots (check_macro_labels.py, 54 problems); this
+    # view places every label at its default offset, PROBLEMS 0. The three new
+    # cities are minor; East Asia still labels Daegu and Busan
+    # (REGION_LABELS_ALSO). Named for the country though Seoul and its
+    # satellites keep their own view (owner).
+    "South Korea",
     # OCEANIA (owner, 2026-09-28): Sydney first, Melbourne next, about 710 km
     # apart - one readable view, far from every other region. Named for the
     # continent rather than the country, as Europe is, so an Australian or New
@@ -4414,7 +4755,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "United Kingdom", "Seoul Capital Area", "Japan West", "Japan East")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Belgium", "United Kingdom", "Seoul Capital Area", "South Korea", "Japan West", "Japan East")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
@@ -4452,7 +4793,14 @@ if set(COUNTRY_VIEWS) - set(REGION_ORDER):
 # clipping only for a dot on the canvas). In the fit the zoom drops and all
 # five fit, with San Francisco's and Sacramento's labels re-placed to suit
 # (PROBLEMS 0 in the region at 375, 768 and 1200).
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils")}
+# Mendoza (2026-10-04), 10 degrees west of Buenos Aires, joins South America's
+# list on Riga's measurement: fitted to it, the zoom dropped and the Brazilian
+# coast's labels collided (12 problems at every width, whatever Mendoza's own
+# offset). Its centre still counts, so the frame sits further west: on a phone
+# (375 px) Rio de Janeiro's pill clips 87 px (42.5 before), Recife's 36,
+# Porto Alegre's 8 and Mendoza's 9; PROBLEMS 0.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils"),
+                       "South America": ("Mendoza",)}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would
@@ -4545,7 +4893,7 @@ if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
 # Each tuple's order is the order region_caption() names them in.
-REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area"), "Europe": ("United Kingdom",)}
+REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"), "Europe": ("United Kingdom",)}
 
 
 def region_caption(region):

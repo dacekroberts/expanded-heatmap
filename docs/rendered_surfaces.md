@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**158 city pages, 4 fixed pages and the Overview; 27 rendered docs; 2 app data files.**
+**170 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -19,12 +19,12 @@ Data: `app/macro_facts.json`.
 
 | URL | File | Renders |
 |---|---|---|
-| `/About_the_Data` | `app/pages/About_the_Data.py` | `docs/data_sources.md`, every `docs/data_sources/*.md` (25), site notices |
+| `/About_the_Data` | `app/pages/About_the_Data.py` | `docs/data_sources.md`, every `docs/data_sources/*.md` (26), site notices |
 | `/Required_Notices` | `app/pages/Required_Notices.py` | every required notice (`components._NOTICES`), site notices |
 | `/What_Is_Excluded` | `app/pages/What_Is_Excluded.py` | `docs/excluded_categories.md`, every city's `outputs/<slug>/excluded_stations.csv` (`app/station_scope.py`), site notices |
 | `/Why_the_Maps_Differ` | `app/pages/Why_the_Maps_Differ.py` | `app/ring_shares.json`, site notices |
 
-Rendered docs, all of them reader-facing: `docs/data_sources.md`, `docs/excluded_categories.md`; `docs/data_sources/argentina.md`, `docs/data_sources/australia.md`, `docs/data_sources/brazil.md`, `docs/data_sources/canada.md`, `docs/data_sources/czechia.md`, `docs/data_sources/denmark.md`, `docs/data_sources/france.md`, `docs/data_sources/georgia.md`, `docs/data_sources/germany.md`, `docs/data_sources/hong-kong.md`, `docs/data_sources/ireland.md`, `docs/data_sources/italy.md`, `docs/data_sources/japan.md`, `docs/data_sources/latvia.md`, `docs/data_sources/mexico.md`, `docs/data_sources/netherlands.md`, `docs/data_sources/norway.md`, `docs/data_sources/romania.md`, `docs/data_sources/south-korea.md`, `docs/data_sources/spain.md`, `docs/data_sources/sweden.md`, `docs/data_sources/switzerland.md`, `docs/data_sources/taiwan.md`, `docs/data_sources/united-kingdom.md`, `docs/data_sources/united-states.md`.
+Rendered docs, all of them reader-facing: `docs/data_sources.md`, `docs/excluded_categories.md`; `docs/data_sources/argentina.md`, `docs/data_sources/australia.md`, `docs/data_sources/belgium.md`, `docs/data_sources/brazil.md`, `docs/data_sources/canada.md`, `docs/data_sources/czechia.md`, `docs/data_sources/denmark.md`, `docs/data_sources/france.md`, `docs/data_sources/georgia.md`, `docs/data_sources/germany.md`, `docs/data_sources/hong-kong.md`, `docs/data_sources/ireland.md`, `docs/data_sources/italy.md`, `docs/data_sources/japan.md`, `docs/data_sources/latvia.md`, `docs/data_sources/mexico.md`, `docs/data_sources/netherlands.md`, `docs/data_sources/norway.md`, `docs/data_sources/romania.md`, `docs/data_sources/south-korea.md`, `docs/data_sources/spain.md`, `docs/data_sources/sweden.md`, `docs/data_sources/switzerland.md`, `docs/data_sources/taiwan.md`, `docs/data_sources/united-kingdom.md`, `docs/data_sources/united-states.md`.
 
 ## City pages
 
@@ -195,3 +195,15 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Kurume_Heatmap` | Kurume | `kurume` | ✓ |
 | `/Sasebo_Heatmap` | Sasebo | `sasebo` | ✓ |
 | `/Shimonoseki_Heatmap` | Shimonoseki | `shimonoseki` | ✓ |
+| `/Daejeon_Heatmap` | Daejeon | `daejeon` | ✓ |
+| `/Gwangju_Heatmap` | Gwangju | `gwangju` | ✓ |
+| `/Gimhae_Heatmap` | Gimhae | `gimhae` | ✓ |
+| `/Mendoza_Heatmap` | Mendoza | `mendoza` | ✓ |
+| `/Tacoma_Heatmap` | Tacoma | `tacoma` | ✓ |
+| `/Liverpool_Heatmap` | Liverpool (Regional) | `liverpool` | ✓ |
+| `/Brussels_Heatmap` | Brussels | `brussels` | ✓ |
+| `/Antwerp_Heatmap` | Antwerp | `antwerp` | ✓ |
+| `/Ghent_Heatmap` | Ghent | `ghent` | ✓ |
+| `/Charleroi_Heatmap` | Charleroi | `charleroi` | ✓ |
+| `/Liege_Heatmap` | Liège | `liege` | ✓ |
+| `/Brussels_Regional_Heatmap` | Brussels (Regional) | `brussels` | ✓ |

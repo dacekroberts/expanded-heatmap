@@ -89,6 +89,10 @@ Rome's Roma–Viterbo urban service, São Paulo's CPTM Linha 9 and Rio's SuperVi
 Deodoro and Saracuruna lines were decided the same way, and Brazil made the
 third part of the test explicit: how many of a line's stations have no drawn
 station within walking distance.
+Liverpool's Merseyrail is drawn on the same test: inside the four council
+areas its stations sit a median of about 1.2 km apart, every one has a train
+at least every 15 minutes by day, and it is the only urban rail there is.
+Northern's City Line from Lime Street, at three trains an hour, is not drawn.
 
 ### Stations left out of a network that IS mapped
 
@@ -122,7 +126,8 @@ page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam and Riga, Rome's tram 8, and Hong Kong's Light Rail.<!-- internal --> The reasoning is in
+  Rotterdam and Riga, Rome's tram 8, Hong Kong's Light Rail, and the Brussels
+  trams 10, 51 and 62.<!-- internal --> The reasoning is in
   `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
   it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
@@ -2176,6 +2181,159 @@ in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
 half mile. Tram 3, which GVB discontinued on March 29, 2026, the museum tram,
 ferries and NS trains are not drawn.
 
+### Brussels - empty shop units, which a survey can see, and the City's other 18 neighbors
+
+**One survey, three categories.** The map is hub.brussels's survey of the City
+of Brussels's ground-floor commercial units, dated October 17, 2025. A survey
+records what is on the street, so it sees empty units, and it names each
+business by its sign.
+
+**Excluded from the survey** - 1,068 empty units; and 743 units whose every
+type is one this map leaves out: hotels, hostels and guest houses, hall hire,
+offices, banks, insurers, agencies and money transfer, post offices, call
+shops and telecom providers' shops, printers and photo studios, rentals,
+repairs (garages, car washes, shoe and clothing repair, key cutting), gyms,
+pools, cinemas, theatres, museums and other venues, casinos and betting,
+cabarets and peep shows, members' clubs, funeral directors, and a
+heating-fuel dealer.
+
+**Counted once** - a unit recorded under several types (175 span two
+categories) is shown in the first of Food service, Retail and Personal
+services among its types.
+
+**Missing rather than excluded** - shops that opened after the survey, and
+anything above the ground floor.
+
+**Stations.** STIB's metro lines 1, 2, 5 and 6 and the fifteen tram lines that
+enter the City are drawn. The map covers the City of Brussels alone, one of
+the Brussels-Capital Region's 19 communes, so 195 stations on those lines in
+the other 18 communes and beyond the Region get no ring; 7 tram stops on trams
+10, 51 and 62 are thinned to about one per half mile. Trams 18, 39 and 44,
+which never enter the City, buses and SNCB trains are not drawn. The other 18
+communes are on the Brussels (Regional) page.
+
+### Brussels (Regional) - the business register, companies only, two categories
+
+**One register, two categories.** The map is KBO/BCE Open Data, the federal
+register of enterprises, snapshot of October 2, 2026: companies'
+establishment units with a shop or restaurant activity, placed by matching
+their address to BeST-Address Brussels. It is a different method from the City
+of Brussels page's street survey, and the page says so.
+
+**Excluded from the register** - across the Region, of 32,733 establishments
+with a Food service, Retail or Personal services activity (an establishment
+can fall under more than one rule): those filed only under catch-all
+activities (2,540); those at an address shared by five or more companies,
+fewer than half of them in these trades (4,160, at 2,702 addresses); those in
+a numbered box, a flat or an upper-floor office (3,336); and those listing ten
+or more activities (6,853), as likely offices rather than storefronts.
+Industrial laundries and heating-fuel dealers are not counted.
+
+**Off on this page** - Personal services (973 establishments in the 18
+communes): most salons are run by sole traders, so the companies in the
+register find about half of the personal services the City's street survey
+counts, too few to map them.
+
+**Counted once** - an establishment registered under several activities is
+shown as Food service if any of them is, else as Retail.
+
+**Missing rather than excluded** - every business run by a sole trader (the
+register's open data covers companies only), and the 3.2% of establishments
+whose address could not be matched to a house number.
+
+**Stations.** STIB's metro lines 1, 2, 5 and 6 and all eighteen tram lines are
+drawn. The map covers the Region's 18 communes outside the City of Brussels:
+73 stations in the City get no ring here (they are on the Brussels page) and
+13 beyond the Region get none; 72 tram stops are thinned to about one per half
+mile. Buses and SNCB trains are not drawn.
+
+### Antwerp - FAVV-AFSCA's food list, food only, placed on the business register's points
+
+**One category, food.** The map is FAVV-AFSCA's list of registered food
+businesses, placed by each establishment's KBO number on Flanders' copy of the
+business register (VKBO). Food shops are counted as food, as in Göteborg.
+
+**Excluded from the list** - caterers (340), food sold beside a non-food main
+trade (201), school, crèche, care-home and other collective kitchens (655),
+market and mobile sales (250), vending (57), B&Bs (53), pharmacies (137), and
+wholesale, manufacturing, transport and farms.
+
+**Missing rather than excluded** - every shop that is not a food business,
+and personal services: the list registers food only. About 4 in 100
+food-service businesses could not be placed: their KBO number has no point in
+VKBO (most are on its placeholder for an unmatched address).
+
+**Shown, but not named** - the list carries no names, so a dot shows the type
+of business only.
+
+**Stations.** De Lijn's tram lines 1, 2, 4, 6, 7, 8, 10, 11, 12, 24, A3 and A9
+are drawn. Lines 3, 5, 9 and 15 are not in the current timetable and no tram
+serves the left bank (Linkeroever) during works. Hoboken Jan Van de Wouwer is
+closed for works. 16 stops in Mortsel, Wijnegem, Wommelgem and Boechout get no
+ring. No stop is thinned. Buses and NMBS trains are not drawn.
+
+### Ghent - FAVV-AFSCA's food list, as Antwerp
+
+**One category, food**, by Antwerp's rules.
+
+**Excluded from the list** - caterers (175), food sold beside another trade
+(96), collective kitchens (391), B&Bs (75), and the other trades Antwerp
+leaves out.
+
+**Missing rather than excluded** - everything that is not a food business,
+and about 5 in 100 food-service businesses that could not be placed.
+
+**Shown, but not named** - a dot shows the type of business only.
+
+**Stations.** De Lijn's trams T1, T2 and T4 are drawn. T2's stop in Melle
+gets no ring. No stop is thinned. Buses and NMBS trains are not drawn.
+
+### Charleroi - a survey that sees every shop only in the commercial districts
+
+**Two categories.** The map is Wallonia's LoGIC 2024 survey, done on the
+ground in August 2024. It sorts each shop as retail, horeca (restaurants,
+cafés, bars and hotels), services or vacant.
+
+**Excluded** - the services class (454 units), which puts hairdressers in one
+class with banks, agencies and offices, so personal services cannot be shown;
+and 769 vacant units.
+
+**Missing rather than excluded** - the survey recorded every shop inside the
+city's 18 commercial districts but only shops over 200 m² outside them, so
+small shops away from those districts are not on the map. The districts cover
+about one ring area in nine around the stations, and nearly every surveyed
+shop near a station is inside one.
+
+**Not separated** - hotels are inside horeca.
+
+**Shown, but not named** - 33 shop signs that read as a person's own name show
+the shop's category instead.
+
+**Stations.** The light-metro lines M2, M3 and M4 are drawn. M2 runs on into
+Fontaine-l'Évêque and Anderlues, so its 10 stations there get no ring. M1,
+which the current timetable runs as a bus, M5, under construction, buses and
+SNCB trains are not drawn.
+
+### Liège - the same survey, and every stop of its one tram line
+
+**Two categories, as Charleroi.** Wallonia's LoGIC 2024 survey, done in July
+and August 2024 in Liège.
+
+**Excluded** - the services class (623 units) and 793 vacant units.
+
+**Missing rather than excluded** - every shop inside the city's 20 commercial
+districts, but only shops over 200 m² outside them. The districts cover about
+one ring area in six around the stops, and nearly every surveyed shop near a
+stop is inside one.
+
+**Not separated** - hotels are inside horeca.
+
+**Shown, but not named** - 39 shop signs that read as a person's own name show
+the shop's category instead.
+
+**Stations.** Tram T1, every one of its 23 stops, all in the city. Buses and
+SNCB trains are not drawn.
+
 ### Rome - a register of premises with no names and no closing dates
 
 **Excluded by the register's own types** - online shops (8,995), storage and
@@ -2624,6 +2782,34 @@ owner), 45 whose account name is only a person's (read by eye) and
 11 with no account name.
 
 **Stations.** All 21 Sun Link stops are inside the city. Not drawn: buses.
+
+### Tacoma - the City's active license accounts, and every T Line stop
+
+**Left out of the City's business-license layer** (22,128 active Tax & License accounts,
+refreshed daily): 10,316 outside the city's five council districts ("Not Mapped", almost all
+out-of-town addresses, or no district at all). Then, of the 11,812 in the city, by NAICS code,
+the exclusions every NAICS city shares:
+- vending-machine operators (9) and fuel dealers (4) - NAICS 2022 has no "nonstore" code,
+  so online sellers are NOT left out: they sit under the goods they sell;
+- food service contractors (17), caterers (29) and mobile food (66);
+- parking (74), funeral services and cemeteries (12) and "all other personal services" (194);
+- hotels, motels and other lodging (396, among them short-term rentals in homes).
+
+**Also left out**: 61 whose address gives an apartment, trailer or mobile-home space, as
+homes. No storefront in a council district falls outside the city limits.
+
+**Counted once**: a business holding several accounts at one address and under one name: 2,870
+accounts to 2,851 premises.
+
+**Shown, but not named**: 104 storefronts show their type of business instead of a name: the
+account has no trade name of its own (the trade name is the account holder's name), the
+holder carries no company form, and the name reads as a person's.
+
+**Read with care**: an active account does not mean a license for the current year, in the
+City's own words.
+
+**Stations.** All 12 T Line stops are inside the city. Not drawn: Sounder commuter trains
+(Tacoma Dome and South Tacoma, mostly at rush hour) and buses.
 
 ### New Orleans - the City's own business types, and every stop of five streetcar lines
 
@@ -4303,6 +4489,44 @@ street address.
   storefronts, 1.2%, in Villa Lugano, Villa Soldati and Villa Riachuelo), the
   heritage tramway, and the commuter railways.
 
+### Mendoza - the capital's commercial accounts, one category per business
+
+**One category per business.** The Municipalidad lists each open commercial
+account with every activity it is taxed for; the business type (its rama)
+decides the category, and a business with a storefront rama beside others
+(a restaurant that also sells wine) is on the map once, in the first of Food
+service, Retail and Personal services it qualifies for. Of 8,309 open
+accounts at June 2025, 4,406 are storefronts.
+
+**Excluded by business type** (3,752) - among them doctors' and other health
+practices (503 consulting rooms, 58 laboratories, 35 clinics), offices and
+administration with no trade named (189 offices, 168 administrations and
+others), rental flats, hotels, hostels and guest houses (476 in all), parking
+(261), travel agencies (134), institutes, academies and schools (mostly
+teaching and medical), gyms (73), printers and copy shops, insurers, banks
+and estate agents, car workshops and car washes, locksmiths and other repair
+workshops, veterinary clinics (28), and lottery and quiniela agencies.
+
+**Street stands are out** - 38 sidewalk newsstands, 26 produce stands at the
+feria franca and the flower kiosks on the public way, as food stalls are
+everywhere on this site. Arcades' and shopping centers' own accounts are out
+too: the shops inside them are listed one by one.
+
+**No business type at all** - 151 accounts carry no rama and are left out.
+
+**Shown, but not named** - 92 storefronts whose name is written as a
+person's own, surname first, show their type of business instead.
+
+**Cafés, not shops** - the register's confiterías (137) count as food
+service: here they hold sidewalk-table permits and serve alcohol as cafés
+do, while pastry and bread shops have their own type.
+
+**Stations.** The Metrotranvía is drawn to both its ends, Gutiérrez in Maipú
+to Avellaneda in Las Heras; 7 of its 25 stations are in the Ciudad de Mendoza
+and get rings. The 18 in Godoy Cruz, Las Heras and Maipú are listed on
+Mendoza's page as left out: those departments publish no business register.
+- Not drawn: buses.
+
 ### Palma - the island's restaurant register, food only, placed by address
 
 **Only food is on this map.** The Consell de Mallorca registers every
@@ -4685,6 +4909,57 @@ with the North Station spur, every one inside Blackpool and Wyre; none is
 listed on Blackpool (Regional)'s page as left out. Fylde, to the south, has
 no tram stop and is not on the map.
 - Buses and national rail trains are not drawn.
+
+### Liverpool (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the four councils Merseyrail serves (Liverpool, Sefton, Knowsley and
+Wirral) inspect for food hygiene; no open register of other shops or of
+personal services covers them, so clothes shops, hairdressers and the like
+are missing rather than excluded. Food shops (grocers, off-licenses, bakers,
+butchers, newsagents selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (1,008), where home caterers
+and event kitchens sit; mobile caterers (291); hospitals, childcare and care
+homes (697); schools, colleges and universities (540); hotels and guest
+houses (144); manufacturers and packers (46); distributors and transporters
+(40); importers and exporters (8); farmers and growers (5).
+
+**Not placed: flats** - 4 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 399 food storefronts the register
+gives no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 223 food storefronts (3.0%) with neither a location nor a
+usable full postcode, most in Sefton (64, 3.8%) and Wirral (64, 3.7%). A
+business run from a private address is published without a location or a
+full postcode and is never placed.
+
+**Shown under its trade name** - 11 businesses registered "trading as"
+another name show the name on the shop.
+
+**Left off because they are outside the area** - 3 whose register location
+lies outside the four council areas.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.9% of that type read as one by name.
+
+**Stations.** Merseyrail's Northern and Wirral Lines, drawn as suburban rail
+that runs as a metro: by day every station inside the four council areas has
+a train at least every 15 minutes, and most have one every 30 minutes in the
+evening and on Sundays. 59 of Merseyrail's 69 stations are inside the four;
+the 10 beyond them are listed on Liverpool (Regional)'s page as left out:
+Ormskirk, Aughton Park and Town Green in West Lancashire, and Hooton,
+Capenhurst, Bache, Chester, Little Sutton, Overpool and Ellesmere Port in
+Cheshire West and Chester. St Helens and Halton have no Merseyrail station and
+are not on the map.
+- Not drawn: the City Line, Northern's trains from Lime Street to Wigan,
+  Warrington and beyond, at three trains an hour (its stations from Edge Hill,
+  Wavertree Technology Park, Broad Green, Mossley Hill and West Allerton to
+  Roby, Huyton, Prescot, Whiston and Halewood); Transport for Wales's Bidston -
+  Wrexham line (Upton and Heswall); Northern's Southport - Wigan line (Meols
+  Cop); other national rail services; buses; and the Mersey Ferries.
 
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 
@@ -5112,6 +5387,61 @@ stations outside are listed on Anyang's page): Line 1 and Line 4,
 7 stations. Anyang has fewer stations than the other satellite cities had to
 have, and was built for the share of its storefronts within a ring instead
 (owner, 2026-09-29). No other line has a station in the city.
+
+### Daejeon - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above).
+
+**Out by name**: hostess bars 266, dance halls 18, staff canteens 164,
+household fuel dealers 114; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 79 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**: Line 1 of the Daejeon Metro, 22 stations, every one inside the
+city. Line 2, a tram under construction, is not drawn, nor are Korail's
+intercity lines.
+
+### Gwangju - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above). Since 2026 Gwangju's five districts sit in the merged
+전남광주통합특별시 with all of South Jeolla; the map keeps only the five.
+
+**Out by name**: hostess bars 571, dance halls 38, staff canteens 173,
+household fuel dealers 70; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 82 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**: Line 1 of the Gwangju Metro, 20 stations, every one inside the
+city. Line 2, under construction, is not drawn, nor are Korail's intercity
+lines.
+
+### Gimhae - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above). Busan's map counts businesses from a different record, so
+the two pages never add up.
+
+**Out by name**: hostess bars 503, dance halls 9, staff canteens 155,
+household fuel dealers 89; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 12 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Gimhae's boundary (the line drawn to its end; stations
+outside are listed on Gimhae's page): the Busan–Gimhae LRT, 12 stations in
+Gimhae; its other 9 are in Busan and on Busan's map. Busan Lines 2 and 3,
+which pass near the city, have no station in Gimhae and are not drawn, nor is
+Korail's intercity line.
 
 ### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
 

@@ -549,16 +549,18 @@ _BRAZIL = ("São Paulo", "Rio de Janeiro (Regional)", "Belo Horizonte (Regional)
            "Salvador", "Fortaleza (Regional)", "Porto Alegre (Regional)",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
-                "Namyangju", "Ansan", "Uijeongbu", "Anyang")
+                "Namyangju", "Ansan", "Uijeongbu", "Anyang", "Daejeon", "Gwangju", "Gimhae")
 _FRANCE = ("Paris", "Marseille", "Toulouse", "Lille (Regional)", "Rennes",
            "Le Mans", "Besançon", "Avignon", "Tours", "Dijon", "Reims", "Orléans",
            "Mulhouse", "Brest", "Saint-Étienne", "Nice", "Montpellier",
            "Strasbourg", "Le Havre", "Caen", "Rouen (Regional)",
            "Bordeaux (Regional)", "Nantes (Regional)", "Grenoble (Regional)",
            "Valenciennes (Regional)", "Angers")
-# The UK tram and light-rail cities whose gate 3 reads NaPTAN (notice 86).
+# The UK tram and light-rail cities whose gate 3 reads NaPTAN (notice 86),
+# and Merseyrail's, whose gate 3 reads NaPTAN's rail records.
 _UK_SIX = ("Manchester (Regional)", "Birmingham (Regional)", "Edinburgh",
            "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)")
+_UK_NAPTAN = (*_UK_SIX, "Liverpool (Regional)")
 # Every city the OpenStreetMap rail-geometry entry names, in its order. Adding
 # a city to that sentence means adding it here, or its page omits the line.
 _OSM_RAIL = (
@@ -566,16 +568,18 @@ _OSM_RAIL = (
     "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen", "Aarhus",
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
-    "Dallas", "Kansas City", "Tucson", "New Orleans", "Florence", "Den Haag",
+    "Dallas", "Kansas City", "Tucson", "Tacoma", "New Orleans", "Florence", "Den Haag",
     "Göteborg", "Zurich", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
-    "Buenos Aires", "Seattle (Regional)", "London", "Glasgow",
+    "Buenos Aires", "Mendoza", "Seattle (Regional)", "London", "Glasgow",
     "Newcastle (Regional)", "Manchester (Regional)", "Birmingham (Regional)",
     "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
-    "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
+    "Liverpool (Regional)", "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
     "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
+    # Belgium (2026-10-04): commune boundaries only; the rail is the operators'.
+    "Antwerp", "Ghent", "Charleroi", "Liège",
 )
 # The cities whose rail is not OpenStreetMap's but whose English station names
 # are (the twenty Japanese cities: MLIT N02 lines, OSM `name:en`). Kept apart
@@ -1012,7 +1016,7 @@ _NOTICES = [
      "Minneapolis's METRO Blue and Green Lines and their stations, "
      "Pittsburgh's PRT Red, Blue and Silver Lines and their stations, "
      "Dallas's DART Light Rail Red, Blue, Green and Orange Lines and their stations, "
-     "Kansas City's KC Streetcar, Tucson's Sun Link and New Orleans's five "
+     "Kansas City's KC Streetcar, Tucson's Sun Link, Tacoma's T Line and New Orleans's five "
      "streetcar lines and their stops, "
      "Florence's T1 and T2 tram lines and their stops and the comune boundaries "
      "used to select them and its businesses, "
@@ -1032,17 +1036,19 @@ _NOTICES = [
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
      "Santos, and those cities' município boundaries, and "
-     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, Hong Kong's MTR and "
+     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, the commune "
+     "boundaries of Antwerp, Ghent, Charleroi and Liège and of the first three's neighbors, Hong Kong's MTR and "
      "Light Rail lines and stations, and its boundary, Seoul's subway lines and stations and "
      "its boundary, the subway, light-rail and Korail lines and stations of Daegu, Busan, "
-     "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu and "
-     "Anyang, and those cities' boundaries, the train and metro routes of Sydney and "
+     "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, "
+     "Anyang, Daejeon, Gwangju and Gimhae, and those cities' boundaries, the train and metro routes of Sydney and "
      "Melbourne and their City boundaries, Buenos Aires's Subte and Premetro routes and "
-     "its boundary, Seattle's Link 1 and 2 Lines, "
+     "its boundary, Mendoza's Metrotranvía and its stations and the department boundaries "
+     "used to select them, Seattle's Link 1 and 2 Lines, "
      "the lines and stations of London's Underground, DLR, Elizabeth line and "
      "Overground, the Glasgow Subway, the Tyne and Wear Metro, Manchester "
      "Metrolink, West Midlands Metro, Edinburgh Trams, Sheffield Supertram, "
-     "Nottingham Express Transit and the Blackpool Tramway, and the boundaries "
+     "Nottingham Express Transit, the Blackpool Tramway and Merseyrail, and the boundaries "
      "used to select them, Stockholm's Tunnelbana lines and stations and its "
      "kommun boundaries, Bucharest's metro lines and stations and its city and "
      "sector boundaries, the Tbilisi Metro's lines and stations and the city's "
@@ -2485,8 +2491,8 @@ _NOTICES = [
     # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
     # under the owner's pre-approval of this build's prose. Covers every Korean city on
     # the register (Incheon; the Gyeonggi satellites add their names).
-    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang)",
-     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu and Anyang are from the Small "
+    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae)",
+     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju and Gimhae are from the Small "
      "Enterprise and "
      "Market Service's "
      "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "
@@ -2588,13 +2594,13 @@ _NOTICES = [
     # Department prescribes none (licence-read 2026-10-02). Wording approved
     # by the owner 2026-10-02.
     Notice(86, "Department for Transport, NaPTAN (United Kingdom)",
-     "Stop counts on the UK's tram and light-rail maps are checked against NaPTAN, the "
-     "National Public Transport Access Nodes dataset published by the Department for "
-     "Transport. Contains public sector information licensed under the "
+     "Stop and station counts on the UK's tram, light-rail and Merseyrail maps are checked "
+     "against NaPTAN, the National Public Transport Access Nodes dataset published by the "
+     "Department for Transport. Contains public sector information licensed under the "
      "[Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The "
      "Department for Transport does not endorse this map.",
-     False, _UK_SIX),
+     False, _UK_NAPTAN),
     # Birmingham (notice 87): the FSA's FHRS data for the three West Midlands
     # Metro districts, Newcastle's notice 62 with the city and date changed.
     Notice(87, "Food Standards Agency (Birmingham)",
@@ -2841,6 +2847,186 @@ _NOTICES = [
      "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
      "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
      False, ("Boston",)),
+    # hub.brussels's inventory on the City's portal: CC BY 4.0, no wording
+    # prescribed. The licence read's conditions: the publisher and its listed
+    # contributors named (hub.brussels and "Google Maps", what that credit
+    # covers is the publisher's unstated point), the changes stated, the
+    # Google link columns dropped, no City logo or "BXL" mark (portal terms
+    # 3.1), no endorsement. The wording is the Belgium build's proposal.
+    Notice(144, "City of Brussels and hub.brussels (Brussels)",
+     "Shops, restaurants and services in Brussels are from “Commerces recensés "
+     "par hub.brussels situés sur le territoire de la Ville de Bruxelles”, "
+     "published by the City of Brussels (Ville de Bruxelles/Data Management) on "
+     "[opendata.brussels.be](https://opendata.brussels.be/explore/dataset/"
+     "commerces-recenses-par-hubbrussels-vbx/) from hub.brussels's survey, with "
+     "hub.brussels and Google Maps as its listed contributors, and used under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: empty units and the types this map leaves out are removed, the "
+     "rest are grouped into three categories, and the Google Maps and Street "
+     "View link columns are removed. Neither the City of Brussels nor "
+     "hub.brussels endorses this project.",
+     False, ("Brussels",)),
+    # FAVV-AFSCA's operator list: CC BY 4.0. Credit with the extract date, no
+    # implied endorsement; linked to the agency's HOME PAGE only (its site
+    # terms ask the webmaster's say before a deep link). The wording is the
+    # Belgium build's, from the Antwerp brief's proposal.
+    Notice(145, "FAVV-AFSCA (Antwerp and Ghent)",
+     "Antwerp's and Ghent's food businesses are from the list of operators of "
+     "the Federal Agency for the Safety of the Food Chain "
+     "([FAVV-AFSCA](https://favv-afsca.be/)), extracted on September 28, 2026, "
+     "and used under the [Creative Commons Attribution 4.0 International "
+     "license](https://creativecommons.org/licenses/by/4.0/). Modified by this "
+     "project: food-service and food-shop activities are selected and placed on "
+     "VKBO's address points. FAVV-AFSCA does not endorse this map.",
+     False, ("Antwerp", "Ghent")),
+    # VKBO (Digitaal Vlaanderen): the Modellicentie voor gratis hergebruik
+    # v1.0 and its PRESCRIBED Dutch credit line, verbatim, with the extract
+    # date (which also meets KBO's art. 2.8 should the federal terms reach the
+    # KBO-derived fields). Only the unit number, type, NIS code, postcode and
+    # point are read.
+    Notice(146, "Digitaal Vlaanderen, VKBO (Antwerp and Ghent)",
+     "The points that place Antwerp's and Ghent's food businesses: “publieke KBO "
+     "gegevens, verrijkt met adressen uit het Vlaamse Adressenregister.” "
+     "(VKBO, Digitaal Vlaanderen), extracted on October 4, 2026, under the "
+     "[Modellicentie voor gratis hergebruik v1.0](https://data.vlaanderen.be/id/"
+     "licentie/modellicentie-gratis-hergebruik/v1.0).",
+     False, ("Antwerp", "Ghent")),
+    # LoGIC 2024 (SPW), the downloaded GeoPackage only (never the MapServer,
+    # whose service terms forbid altering the data): CC BY 4.0 with the SPW
+    # citation VERBATIM from the Metawal record (its geodata.wallonie.be URI
+    # answers 404, so the catalogue record is linked beside it), and a
+    # statement of the changes. No SPW or Wallonia logo; no endorsement.
+    Notice(147, "Service public de Wallonie, LoGIC 2024 (Charleroi and Liège)",
+     "Shops and horeca premises in Charleroi and Liège: Source : Service public "
+     "de Wallonie (SPW) - Offre commerciale en Wallonie (LoGIC 2024) "
+     "(2025-04-09) https://geodata.wallonie.be/id/5f56d784-2fd7-47eb-a62a-991d4741a67d "
+     "(the [catalogue record](https://metawal.wallonie.be/geonetwork/srv/api/records/"
+     "5f56d784-2fd7-47eb-a62a-991d4741a67d)), used under the [Creative Commons "
+     "Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/). "
+     "Modified by this project: the services class and vacant units are left "
+     "out, the points are reprojected and cut to each city, and a shop sign "
+     "that reads as a person's own name is replaced by the shop's category. The "
+     "Service public de Wallonie does not endorse this project.",
+     False, ("Charleroi", "Liège")),
+    # De Lijn's GTFS on the Belgian Mobility Company's portal: CC BY 4.0, De
+    # Lijn the sole licensor (art. 3); art. 4's credit with the DATE OF THE
+    # DATASET UPDATE (feed_version 20261003_20261130_003000: 2026-10-03;
+    # re-date at every refresh). No delijn.be link or content (its website
+    # terms are private use only); no logo.
+    Notice(149, "De Lijn (Antwerp and Ghent)",
+     "Source: De Lijn – Open Data – October 3, 2026. Contains data originally "
+     "published by De Lijn, modified by this project: Antwerp's and Ghent's tram "
+     "lines are extracted from De Lijn's GTFS feed and redrawn, platforms are "
+     "grouped into stations, and two line colors are darkened to read on the "
+     "map. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). De Lijn does not endorse "
+     "this project.",
+     False, ("Antwerp", "Ghent")),
+    # LETEC's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 (TEC's
+    # national-access-point entry says CC0; complying with CC BY satisfies
+    # both). Art. 4's credit with the DATE OF THE DATASET UPDATE (feed_version
+    # 20261002; re-date at every refresh). The operator is credited as "LETEC"
+    # and the lines named M2, M3, M4 and T1, never with "TEC" (owner,
+    # 2026-10-04); no logo.
+    Notice(150, "LETEC (Charleroi and Liège)",
+     "Source: LETEC – Open Data – October 2, 2026. Contains data originally "
+     "published by LETEC, modified by this project: the light-metro lines M2, M3 "
+     "and M4 and the tram line T1 are extracted from LETEC's GTFS feed and "
+     "redrawn, stops are grouped into stations, and Charleroi's line colors are "
+     "this project's own. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). LETEC does not endorse "
+     "this project.",
+     False, ("Charleroi", "Liège")),
+    # STIB-MIVB's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 under
+    # the portal's Terms of Use, art. 4's credit with the DATE OF THE DATASET
+    # UPDATE (feed_version 2_21_20261002_143730: 2026-10-02; re-date at every
+    # refresh) and its recommended modified-data line; the portal named (its
+    # FAQ). Nothing from stib-mivb.be (private-use website terms).
+    Notice(148, "STIB-MIVB (Brussels and Brussels (Regional))",
+     "Source: STIB-MIVB – Open Data – October 2, 2026. Contains data originally "
+     "published by STIB-MIVB, modified by this project: the metro and tram "
+     "routes are extracted from STIB-MIVB's GTFS feed and redrawn, stops are "
+     "grouped into stations and some tram stops thinned, and some line colors "
+     "are adjusted. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). STIB-MIVB does not endorse "
+     "this project.",
+     False, ("Brussels", "Brussels (Regional)")),
+    Notice(151, "KBO/BCE Open Data, FPS Economy (Brussels (Regional))",
+     "Source: Crossroads Bank for Enterprises (KBO/BCE) Open Data, FPS Economy, "
+     "S.M.E.s, Self-employed and Energy, updated October 2, 2026 (extract 501). "
+     "Modified by this project: companies' establishment units only, filtered to "
+     "shops, restaurants and cafés, their addresses matched to BeST-Address "
+     "points, and grouped into categories. The map shows what the register "
+     "records, not a guarantee of any business's status. FPS Economy does not "
+     "endorse this project.",
+     False, ("Brussels (Regional)",)),
+    Notice(152, "FPS BOSA, BeST-Address Brussels (Brussels (Regional))",
+     "Addresses: BeST-Address Brussels, FPS BOSA, from the Brussels-Capital "
+     "Region's address register, under the [Creative Commons Attribution 4.0 "
+     "International license](https://creativecommons.org/licenses/by/4.0/). "
+     "Modified by this project: business addresses were matched to its address "
+     "points. FPS BOSA does not endorse this project.",
+     False, ("Brussels (Regional)",)),
+    # Mendoza (notice 141): the Municipalidad's commercial accounts list, CC BY
+    # 4.0 (licence-read 2026-10-03): the credit with the dataset's title and
+    # page, the licence linked, a statement of the modifications and no
+    # suggestion of endorsement (section 3(a)). No wording is prescribed; this
+    # is the build's draft, approved (owner, 2026-10-04; DECISIONS.md).
+    Notice(141, "Municipalidad de la Ciudad de Mendoza (Mendoza)",
+     "Mendoza's businesses are from the Municipalidad de la Ciudad de Mendoza, "
+     "[Listado Comercios por Actividad 2025]"
+     "(https://datos.ciudaddemendoza.gob.ar/dataset/listado-comercios-por-actividad-2025), "
+     "licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by "
+     "this project: filtered to storefront businesses, grouped into three categories, "
+     "reprojected from the Gauss-Krüger grid, and names that read as a person's own replaced "
+     "by the business type. The Municipalidad de la Ciudad de Mendoza does not endorse this map.",
+     False, ("Mendoza",)),
+    # Tacoma (notice 142): the City of Tacoma's open-data disclaimer, which its
+    # terms require of any application using the data - Chicago's and Kansas
+    # City's template, so displayed site-wide as theirs are. Word for word from
+    # the City's disclaimer page (read 2026-10-04), its curly apostrophe kept.
+    Notice(142, "City of Tacoma (Tacoma)",
+     "The information and data made available here has been modified for use from its "
+     "original source, which is the City of Tacoma. The City of Tacoma makes no claims as to "
+     "the completeness, accuracy, or timeliness of any information and data contained in this "
+     "application; makes no representation of any kind, including, but not limited to, "
+     "warranty of the accuracy or fitness for a particular use; nor are any such warranties to "
+     "be implied or inferred with respect to the information or data furnished herein. The "
+     "information and data is subject to change without notice. It is understood that the "
+     "information and data contained in the web site is being used at user’s own risk.",
+     True, ("Tacoma",), every_page=True),
+    # Liverpool (notice 143): the FSA's FHRS data for the four Merseyrail
+    # council areas, Newcastle's notice 62 as Manchester's 84, with the city
+    # and date changed.
+    Notice(143, "Food Standards Agency (Liverpool)",
+     "Liverpool's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False, ("Liverpool (Regional)",)),
+    # Liverpool's postcode centroids (notice 153, staging's number,
+    # 2026-10-04): Manchester's notice 85 with the city changed, the same file
+    # and edition.
+    Notice(153, "Ordnance Survey (Liverpool)",
+     "Where the Food Standards Agency lists a Liverpool food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False, ("Liverpool (Regional)",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
