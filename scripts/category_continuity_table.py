@@ -2190,11 +2190,10 @@ COLUMNS["belgium_favv"] = {
 COLUMNS["brussels_hub"] = {
     "funeral": [loc("Pompes funèbres", "funeral directors")],
     "no_counter_food": [
-        pending("Cantine - Cafétéria - Food-court", "cafeterias and food courts in the street survey",
-                "Food service", "2026-10-04",
-                "R1 leaves staff and institutional canteens out; hub.brussels's ground-floor survey "
-                "records units open to the street, so its 46 are read as public cafeterias and food "
-                "courts and kept (the Belgium build's call for the owner)")],
+        exception("Cantine - Cafétéria - Food-court", "cafeterias and food courts in the street survey",
+                  "Food service", "Six Belgian calls approved (owner)",
+                  "hub.brussels's ground-floor survey records units open to the street, so its 46 "
+                  "are public cafeterias and food courts, not R1's staff canteens")],
     "personal_catchall": [loc("Autre activité", "the survey's own catch-all")],
     "tattoo": [loc("Tattoo", "tattoo studio")],
     "adult_hostess": [loc("Cabaret", "cabaret"), loc("Peepshow", "peep show")],
@@ -2224,7 +2223,7 @@ COLUMNS["brussels_hub"] = {
                           "'automobile' is a garage", ignore=("Garage - Entretien automobile",)),
 }
 
-AWAITING_OWNER = {("vancouver", "optician"), ("brussels_hub", "no_counter_food")}
+AWAITING_OWNER = {("vancouver", "optician")}
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
     ("sweden_livsmedel", "no_counter_food"): "the torghandel stall: a name rule, now that "
