@@ -4,6 +4,31 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Mendoza's placement measured: every business has a point; Band A
+
+- **The owner approved the download** ("1 yes"): `comercios_limpio.json`,
+  12,239,392 bytes, sha256 `ca6af57c...707fd17`, cached at
+  `data/mendoza/raw/comercios_limpio.json` (gitignored).
+- **Measured (gate peak 0.01 GB):** 41,179 activity rows, 8,309 distinct
+  `comercio_id` (the CSV's count; at most 30 activity rows per business).
+  Fields: `comercio_id`, `nombre_fantasia`, `calle`, `numero`,
+  `tipo_actividad`, `desc_full`, `fecha_inicio`, `x`, `y`. **Every business
+  has a nonzero x/y (8,309, 100%)**; read as Gauss-Krüger zone 2 (EPSG:5344
+  and 22182 agree within 0.0001 degrees), the median falls at the city
+  centre and all 8,309 sit inside a rough box around the capital. The build
+  checks against the department's own boundary.
+- **Mendoza to Band A** on the owner's call of the same evening (the capital
+  alone, seven stations). The JSON is the build's source: it carries the
+  points and the activity rows together.
+- **Privacy flag for the brief:** `nombre_fantasia` holds a sole trader's own
+  name in the surname-comma-forename form on some rows, so the build's
+  privacy check and a name rule (Vancouver's, 2026-09-21) apply.
+- **Probe slip:** reading the file's first 200 bytes to confirm its shape
+  printed one row to the console, and that row's trade name is a person's
+  name. Nothing was written to a file or a doc. The rule (never print a row
+  from a register that names people) holds; the next read of a new file
+  prints field names only.
+
 ### 2026-10-03 - Mendoza approved for a build: the capital alone, seven stations (owner)
 
 - **The owner: "mendoza can be built"**, answering whether a seven-station
