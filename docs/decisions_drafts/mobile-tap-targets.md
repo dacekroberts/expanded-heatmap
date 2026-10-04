@@ -3,7 +3,44 @@
 Drafts from the `mobile-tap-targets` branch, newest first, for the cleanup
 session to fold into `DECISIONS.md`.
 
-### 2026-10-03 - A tap on a phone selects the nearest dot, station, cluster or line within 22 px; a dot's details go in a fixed panel (PROPOSED, awaiting the owner)
+### 2026-10-03 - Every map re-rendered for the touch tap fix; two Japanese maps first lost their lang attribute
+
+- **Re-rendered all 158 maps with `drift_check.py --render-only --jobs 2`
+  through `heavy_job.py` (declared 2.5 GB as an estimate scaled from the
+  2026-10-02 sweep's 1.94 GB; measured 1.50 GB).** 156 maps drifted as
+  intended and every other output file came back identical (445). Kawasaki
+  and Kyoto failed: `m.save()` wrote the map, then the second write that
+  adds `<html lang="ja">` (`render_heatmap`, after saving) raised
+  `OSError: [Errno 22] Invalid argument` on the same file, a transient
+  Windows refusal, so both were left complete but with a bare `<html>`.
+  Each was re-rendered alone (measured 0.15 and 0.19 GB) and now carries
+  `lang="ja"`. `check_render_current.py` passed the two broken files: it
+  checks the shared blocks, not the lang attribute, so a lost `lang` on a CJK
+  map is invisible to it. The `lang` rewrite also leaves CRLF in the working
+  copy (51 CJK maps); converted to LF at byte level before staging.
+
+- **Verified on the real renders.** `check_render_current.py` (158 current),
+  `check_map_markup.py` (158 maps, 930 labels, 0 problems),
+  `check_inline_arrays.py` (0 over the cap), `check_no_em_dashes.py`,
+  `check_provenance.py` and `check_all.py` (46 of 46) all passed; every map
+  carries the panel and the 22 px touch tolerance. The tap harness on the
+  rendered Edmonton, Paris, Tokyo and Odense maps (exact-point taps)
+  reproduced the prototype: dots 43 of 43 at 0 to 20 px, station centres 22
+  of 22, every opened spiderfied group kept its dot (0 collapsed), no panel
+  clipped. `check_map_view.js` and `check_map_attribution.js` on Edmonton,
+  Paris and Tokyo, light and dark, 375 and 1200: every view at its expected
+  zoom with 0 corrections, the credit covered 0 times. The credit with a
+  panel open was hit-tested on the prototype (identical script), not
+  re-run on the renders.
+
+### 2026-10-03 - A tap on a phone selects the nearest dot, station, cluster or line within 22 px; a dot's details go in a fixed panel (owner)
+
+- **Approved by the owner, touch screens only (2026-10-03).** The owner
+  approved the change below as proposed, kept the panel and ring to touch
+  screens (desktop keeps its tooltips), and approved the close button's "×"
+  with the accessible name "Close". Every map was then re-rendered
+  (`drift_check.py --render-only --jobs 2`); the run is recorded in the next
+  entry.
 
 - **Measured why tapping dots and lines on a phone was hard, before changing
   anything (owner's report, 2026-10-03).** Headless Edge over CDP at 375 x 812
