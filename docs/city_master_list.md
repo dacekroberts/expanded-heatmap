@@ -297,6 +297,71 @@ Band R row.
 | **Noida / Greater Noida** 🇮🇳 | The NMRC Aqua Line, 21 stations (the operator's page), plus Delhi Metro stations. No municipal corporation: the Noida Authority's host times out on reading and the Greater Noida Authority's on connecting, so the city's own host never answered | A read of either authority's site, or a public copy of a trade or shop register |
 | **Stuttgart** 🇩🇪 | Stadtbahn and U-Bahn (ASSERTED; stations not counted). `opendata.stuttgart.de` answered 502 on its API and its HTML, three tries, so the city's own catalogue never answered; GovData's harvest of 394 Stuttgart datasets shows statistics only; IHK Region Stuttgart read (lookup databases, no premises list) | A read of `opendata.stuttgart.de` once it answers (owner, 2026-10-04) |
 
+## Pre-verdicts — precedent, not probed (not counted; owner, 2026-10-04)
+
+**Approved by the owner on 2026-10-04** with the remainder count: the rail
+cities the 2026-10-03 coverage sweep found with no verdict, re-matched
+against this list on 2026-10-04. **These rows are pointers, not verdicts.** A
+discard needs its own host asked and two evidence methods (rule 5), and none
+of these has that yet; a batch probe turns them into discard or Band R rows
+when builds resume. Until then they count in no band and in no discard total.
+
+**Follow a sibling into Band R (12 cities).** The sibling's block applies to
+the same host or the same national register.
+
+| Cities | Sibling and its block |
+|---|---|
+| Espoo, Vantaa, Tampere 🇫🇮 | Helsinki: geo-blocked |
+| Almada, Seixal, Vila Nova de Gaia, Matosinhos, Maia 🇵🇹 | Lisbon: DGAE's bulk access is for institutions only |
+| Pavlodar, Oskemen, Temirtau 🇰🇿 | Almaty and Astana: the national business register sits behind a sign-in |
+| Samarkand 🇺🇿 | Tashkent: every host refuses this machine or needs a login or CAPTCHA |
+
+**Pre-discards on a sibling's measured negative (27 cities).**
+
+| Cities | Precedent on this list |
+|---|---|
+| Dessau-Roßlau, Halberstadt, Strausberg, Woltersdorf, Schöneiche, Herne, Neuss, Kehl, Weil am Rhein 🇩🇪 | About 40 German discards on absence (Bochum and Düsseldorf among them); IHK Berlin is the only chamber publishing premises data |
+| Baden bei Wien 🇦🇹 | Vienna, Graz, Linz, Innsbruck and Gmunden: GISA strips addresses, no city register |
+| Amstelveen, Zoetermeer, Nieuwegein 🇳🇱 | Rijswijk and Delft: no municipal food source |
+| Bello, Itagüí, Envigado, Sabaneta, La Estrella 🇨🇴 | Medellín: RUES has no location column, the chamber publishes crosstabs, the city's hub is credential-walled |
+| Santo Domingo Este, Santo Domingo Norte 🇩🇴 | Santo Domingo: the national portal and MICM's list enumerated, no premises list |
+| San Miguelito 🇵🇦 | Panama City: the national portal enumerated, MICI and MINSA hold no datasets |
+| Faridabad 🇮🇳 | Gurugram: Haryana's municipal portal read, no licence list |
+| Howrah, Bidhannagar 🇮🇳 | Kolkata: West Bengal's per-licence lookups only |
+| Giza, New Cairo 🇪🇬 | Cairo (no register at any level) and Alexandria |
+| Abuja 🇳🇬 | Lagos: the national portal refuses connections; CAC is a company register |
+
+**Pre-discards on rail (16 cities).** The frequency rows rest on Cincinnati's
+precedent (every 20 to 25 minutes fails) and need one timetable check each
+before a discard: the Indore lesson, never a frequency from memory.
+
+| Cities | Reason |
+|---|---|
+| Little Rock, North Little Rock 🇺🇸 | Frequency (Metro Streetcar) |
+| Trenton 🇺🇸 | Frequency (River Line; Camden screened with no row) |
+| Oceanside, Escondido 🇺🇸 | Frequency (Sprinter; already named as excluded from San Diego) |
+| Vicente López, San Isidro, Tigre 🇦🇷 | Frequency (Tren de la Costa); Buenos Aires's survey covers the Ciudad only |
+| Cádiz, Chiclana, San Fernando 🇪🇸 | Frequency (Trambahía) |
+| Reșița, Botoșani 🇷🇴 | Frequency (single-line trams) |
+| Oranjestad 🇦🇼 | Out of mode: a tourist streetcar |
+| Mecca 🇸🇦 | Out of mode: the metro runs only during the Hajj |
+| Dakar 🇸🇳 | Out of mode: the TER is commuter rail |
+
+**Pre-discards in Japan (14 cities).** Tottori, Yamagata, Morioka, Yao, Kure,
+Mito, Takatsuki, Kōfu and Chigasaki (too few stations) and Matsumoto (35.4%
+placed) and Miyazaki (36.8%), all from staging's Japan scoping of 2026-10-02;
+Wakō, Hiratsuka and Atsugi with one or two station groups (Uiwang's and
+Hwaseong's precedent). Station-group counts alone are no precedent:
+Takarazuka was built on 11.
+
+**Unscreened, ranked (about 93 cities).** Screen in this order when builds resume:
+1. **The Greater Copenhagen Light Rail** (about 10 municipalities, Lyngby-Taarbæk to Ishøj): Copenhagen's and Aarhus's national CVR and DAR modules; frequency and the page's shape are the questions.
+2. **Riding an act the owner already owes** (7): Arad, Brăila, Craiova, Galați, Oradea and Ploiești on Timișoara's DSVSA route; Hódmezővásárhely on Szeged's OKNYIR export. A frequency check first.
+3. **A Japan wave 4** (66), by N02 station groups. 15 or more: Tsu, Fukushima, Ichihara, Ichinomiya, Toyokawa, Aomori, Ōita, Fuji, Akashi, Fujisawa, Asahikawa, Matsue, Okazaki, Kamakura, Suita. 8 to 14: Iwaki, Nagaoka, Fuchū, Hachinohe, Tachikawa, Uji, Gifu, Hirakata, Akita, Amagasaki, Kawagoe, Kōriyama, Kasugai, Toyonaka, Sakura, Ino, Nankoku, Hino, Ibaraki, Imizu, Tokorozawa, Tokushima, Chōfu, Machida, Ōta, Kawaguchi, Higashimurayama, Koshigaya, Kakogawa, Yamato, Kasukabe. 3 to 7: Tama, Urayasu, Yachiyo, Itami, Moriguchi, Nagakute, Minoh, Kadoma, Ina, Nishitōkyō, Isesaki, Higashiyamato, Settsu, Ageo, Neyagawa, Saga, Sōka, Tsukuba, Nisshin, Urasoe (Naha's add-on). Chiba Prefecture's cities (Ichihara, Urayasu, Sakura, Yachiyo) top out at personal services, Matsudo's and Kashiwa's precedent.
+4. **Low odds** (10): Adana; Perugia (a cable-hauled people mover: mode first); Johannesburg, Tshwane and Ekurhuleni (Gautrain against the commuter-rail rule); Thane, Mira-Bhayandar and Navi Mumbai (Mumbai discarded, but Pune shows a Maharashtra corporation can publish); Ghaziabad (with Noida's open-gap re-check); Memphis (a watch until its trolley returns).
+
+Toluca, Metepec, Lerma and Zinacantepec (El Insurgente) wait on the owner's call.
+
 ## DISCARDED — 261 cities, each naming its evidence
 
 ▼ **2026-10-04 (late) — twenty-five rows from the Central Europe and Germany north screens** (owner's calls the same day): Linz, Innsbruck and Gmunden (its tram frequency doubtful too), Osijek and Košice on absence, each on its own host and its national catalogue; Rostock on Dresden's precedent (its geodata office's curated CC0 POI layers count as no register); and nineteen tram and Stadtbahn cities of Germany's north on absence, each on its own host, open.nrw, opendata.ruhr or its state's catalogue, and its chamber: Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Mülheim an der Ruhr, Oberhausen, Krefeld, Bonn, Bielefeld, Hannover, Braunschweig, Magdeburg, Halle (Saale), Schwerin (the thinnest: a page read and searches), Potsdam, Cottbus, Frankfurt an der Oder and Brandenburg an der Havel (its 20-minute trams doubtful too). Gelsenkirchen and Bremen went to Band C instead. Budapest left this table the same day for Band D (the note above its table).
