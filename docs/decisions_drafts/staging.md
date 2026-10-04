@@ -4,6 +4,19 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Probe slip in the Mendoza screen: a whole file arrived from a 4 KB request
+
+- **The screen asked Mendoza's open-data host for the first 4 KB** of the
+  capital's "Listado Comercios por Actividad 2025" CSV, to read its header.
+  The server ignored the Range header and sent the whole file (7.9 MB). No
+  download beyond the two Belgian files had been approved.
+- **Where it sits:** the staging scratchpad only, never `data/` or the
+  repository. The screen's Mendoza counts (8,309 businesses, all active as
+  of June 2025) come from it. Raised with the owner the same evening.
+- **The lesson:** a Range request is not a header read; a server may ignore
+  it. Read the schema from the catalogue's metadata or a records API, or
+  stop the transfer by byte count in the script.
+
 ### 2026-10-03 - The sweep's first group screened, two Belgian downloads, Belgium off the ruled-out list (owner)
 
 - **The owner: "all three approved"**, the three calls staging put after the
