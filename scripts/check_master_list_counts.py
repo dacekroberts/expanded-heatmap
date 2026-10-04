@@ -454,8 +454,9 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
     built_by_country = {key(c): (n, len(names)) for _, c, n, names, _ in built_rows}
     # A country whose flag marks entries in more than one Built row is counted
     # by those entries, not by a row that happens to share its name: the
-    # South Korea view (owner, 2026-10-04) is a row named "South Korea view"
-    # holding 5 of South Korea's cities, the Seoul Capital Area row the rest.
+    # South Korea view (owner, 2026-10-04) is a Built row written "**South
+    # Korea** (5; ...)" holding 5 of the country's 16 cities, the Seoul Capital
+    # Area row the other 11.
     flag_rows, flag_names = {}, {}
     for t, bs, be in secs:
         if not re.match(r"^##\s+Built\b", t):
