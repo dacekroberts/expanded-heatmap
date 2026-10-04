@@ -63,6 +63,8 @@ st.markdown(
   their ends.
 - Byeollae is served by Line 8 and the Gyeongchun Line. No other rail line has a station in the
   city.
+- The Gyeongchun Line runs about every 22 to 24 minutes by day, less often than the city's other
+  lines.
 - Namyangju is large and its stations are far apart, so much of the city lies beyond walking
   distance of any of them.
 

@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**1 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**2 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
 - [Three heavy jobs at once (owner)](#2026-10-04---three-heavy-jobs-at-once-owner)
+- [Namyangju's Gyeongchun Line stays drawn, its wait stated; Goyang's Gyeongui-Jungang is no defect (owner)](#2026-10-04---namyangjus-gyeongchun-line-stays-drawn-its-wait-stated-goyangs-gyeongui-jungang-is-no-defect-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -50,3 +51,24 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   heavy programs return to the machine, `MAX_JOBS` goes back to 2.
 - Unchanged: one drift check per machine, `--jobs 2` at most; the Python cap
   of 8 GB a process and 12 GB with children.
+
+### 2026-10-04 - Namyangju's Gyeongchun Line stays drawn, its wait stated; Goyang's Gyeongui-Jungang is no defect (owner)
+
+- **Raised by Staging** from the Korea probe (Seoul Metro's timetables of
+  2026-09-01): Namyangju draws the Gyeongchun Line, every 22-24 minutes at
+  midday, the frequency that discarded Chuncheon; Goyang draws the
+  Gyeongui-Jungang Line, whose 2.0 km spacing discarded Paju.
+- **Both were recorded calls**: the Gyeonggi brief's "Rail - Seoul's
+  precedent" draws the Korail metro lines (경의·중앙, 수인·분당, 경춘) as
+  Seoul does, and Namyangju's build entry lists Gyeongchun's 7 stations.
+- **Goyang: no defect.** Gyeongui-Jungang runs every 12-13 minutes, inside
+  the 15-minute test; spacing is a screening test for a city, not a station
+  rule for a line in a network already mapped.
+- **Namyangju: put to the owner** under the Daugavpils ruling of 2026-09-30
+  (the floor drops only an outlier route; where an outlier ends is the
+  owner's). Gyeongchun is the city's one slow line but serves 7 of its 17
+  stations (41%). **The owner chose to keep it and state the wait**, as
+  Daugavpils and Buffalo do: Namyangju's page adds "The Gyeongchun Line
+  runs about every 22 to 24 minutes by day, less often than the city's
+  other lines." Seoul's Gyeongchun stations stay as drawn. Lands at review
+  time with the next app/ batch.
