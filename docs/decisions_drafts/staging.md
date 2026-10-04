@@ -4,6 +4,55 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - The sweep's first group banded: eleven cities on the owner's approval
+
+- **The owner: "i approve"**, every move as staging recommended:
+  - **Daejeon, Gwangju, Gimhae: Band R to A.** SEMAS's cached national file
+    (2026-06-30 edition, the built Korean cities' terms): Daejeon 50,939
+    storefronts (food 23,402, retail 20,100, personal 7,437), Gwangju 47,214
+    (20,701 / 18,706 / 7,807; district codes 12210, 12240, 12270, 12300,
+    12330 after the 2026 merger into 전남광주통합특별시, so the build keys on
+    codes, never names), Gimhae 17,879 (8,558 / 6,662 / 2,659); every row
+    placed. Rail: Daejeon Line 1, 22 stations, every 10 minutes at midday;
+    Gwangju Line 1, 20 stations, every 10 off-peak (Line 2 not open, phase 1
+    reported for 2028-12); Busan-Gimhae LRT, 12 stations in Gimhae, every
+    5-6 minutes all day, elevated track, median spacing 729 m. **Gimhae is
+    its own page** (the Gyeonggi satellites' precedent; a Busan regional map
+    would change a live page).
+  - **Liverpool (Regional): Band B, food only** (the UK six's scope),
+    Liverpool, Sefton, Knowsley and Wirral: FSA storefronts 3,451 / 1,682 /
+    517 / 1,750; Merseyrail 59 stations. **Merseyrail is a commuter-rail
+    exception**: every branch every 15 minutes by day Monday to Saturday,
+    the trunks every 2-6, against the written "by day" test; evenings and
+    Sundays every 30 minutes. The City Line (3 trains an hour, uneven) is
+    named on the page as not drawn.
+  - **City of Brussels: Band A once its licence read passes.** hub.brussels's
+    inventory: 6,880 rows, all placed in the commune, dated 2025-10-17; food
+    1,908, retail 2,459, personal 508; 1,068 vacant dropped. Its metadata
+    credits Google Maps: the licence read decides whether the points stand;
+    the fallback, an address join to the Brussels address register, is a new
+    source for the owner. 25 metro and premetro stations; trams drawn and
+    thinned (Amsterdam's and Oslo's precedent).
+  - **Antwerp and Ghent: Band B**, food service from FAVV's operator list
+    joined to Flanders' VKBO points: Antwerp 3,100 of 3,231 placed (95.9%),
+    Ghent 1,810 of 1,905 (95.0%); food shops as a Retail partial
+    (Göteborg's precedent), 1,764 and 932. Caterers out by the category
+    rules (Coquitlam's precedent).
+  - **Charleroi and Liège: Band B with the gap disclosed.** Wallonia's LoGIC
+    2024 survey has four classes only, so no personal services: Charleroi
+    retail 980 and horeca 450, Liège 1,477 and 868. Its horeca is 53% and
+    68% of FAVV's registered food service by postcode, because the survey
+    covers commercial perimeters only; unlike Wakayama's opt-in list (51%,
+    discarded) the gap is structural. The build measures coverage inside the
+    station rings first.
+  - **Tacoma: Band C** until its licence read.
+  - **Mendoza: Band A** (the owner's earlier call).
+- **Belgium leaves "Countries ruled out"**: the Brussels inventory confirms
+  the condition the owner set. The Brussels-Capital Region beyond the City
+  is Band D: KBO's free Open Data account, the owner's act. The owner asked
+  for the sign-up link the same evening; staging runs a licence read of
+  KBO's terms alongside the other new sources.
+
 ### 2026-10-03 - Mendoza's placement measured: every business has a point; Band A
 
 - **The owner approved the download** ("1 yes"): `comercios_limpio.json`,
