@@ -4215,7 +4215,7 @@ CITIES = [
         "lon": 4.352,
         "page": "pages/196_Brussels_Heatmap.py",
         "blurb": "Metro 1, 2, 5 and 6 and 15 tram lines",
-        "region": "Europe",
+        "region": "Belgium",
         "country": "Belgium",
         "mode": "metro",
         "coverage": "full",
@@ -4239,7 +4239,7 @@ CITIES = [
         "lon": 4.4025,
         "page": "pages/197_Antwerp_Heatmap.py",
         "blurb": "Trams 1, 2, 4, 6, 7, 8, 10, 11, 12, 24, A3, A9",
-        "region": "Europe",
+        "region": "Belgium",
         "country": "Belgium",
         "mode": "tram",
         "coverage": "one_bucket",
@@ -4263,7 +4263,7 @@ CITIES = [
         "lon": 3.7174,
         "page": "pages/198_Ghent_Heatmap.py",
         "blurb": "Trams T1, T2, T4",
-        "region": "Europe",
+        "region": "Belgium",
         "country": "Belgium",
         "mode": "tram",
         "coverage": "one_bucket",
@@ -4287,7 +4287,7 @@ CITIES = [
         "lon": 4.4446,
         "page": "pages/199_Charleroi_Heatmap.py",
         "blurb": "Light metro M2, M3 and M4",
-        "region": "Europe",
+        "region": "Belgium",
         "country": "Belgium",
         "mode": "light_rail",
         "coverage": "narrowed",
@@ -4311,7 +4311,7 @@ CITIES = [
         "lon": 5.5797,
         "page": "pages/200_Liege_Heatmap.py",
         "blurb": "Tram T1",
-        "region": "Europe",
+        "region": "Belgium",
         "country": "Belgium",
         "mode": "tram",
         "coverage": "narrowed",
@@ -4335,7 +4335,7 @@ CITIES = [
         "lon": 4.37,
         "page": "pages/201_Brussels_Regional_Heatmap.py",
         "blurb": "Metro 1, 2, 5 and 6 and 18 tram lines",
-        "region": "Europe",
+        "region": "Belgium",
         "country": "Belgium",
         "mode": "metro",
         "coverage": "narrowed",
@@ -4500,6 +4500,12 @@ REGION_ORDER = [
     # re-centred frame then needed Stockholm's label below its dot. Fitted
     # zoom, no override; PROBLEMS 0 at every width.
     "Czechia",
+    # BELGIUM (owner, 2026-10-04, Belgian build call 3: "a macro-map view of its
+    # own, on Czechia's mechanism"): Brussels, Antwerp, Ghent, Charleroi, Liège
+    # and Brussels (Regional). In Europe's view their six pills overlapped every
+    # pair at every width (check_macro_labels.py); here every Belgian city is
+    # labelled and Europe shows the dots unlabelled, as it does Czechia's.
+    "Belgium",
     # THE UNITED KINGDOM (owner, 2026-10-02: "implement the high-density cluster
     # rule to UK, like Japan, France, Czechia"), on Czechia's mechanism: every UK
     # city, London, Glasgow and Newcastle (Regional) included, in a view of its
@@ -4558,7 +4564,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "United Kingdom", "Seoul Capital Area", "Japan West", "Japan East")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Belgium", "United Kingdom", "Seoul Capital Area", "Japan West", "Japan East")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
