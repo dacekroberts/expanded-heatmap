@@ -4,6 +4,24 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then empties this file (owner, 2026-09-30).
 
+### 2026-10-04 - Belgium: four more owner calls (privacy, the Brussels dots, Rotterdam's label, the broad query)
+
+- **The owner: "1 yes 2 are these separate builds or can we combine 3 yes
+  one placement pass 4 broad query okay".**
+  1. **Brussels (Regional) publishes with one name withheld by key**: the
+     name `check_personal_exposure.py` read as a person's at a residential
+     unit, found and keyed by the check's own logic and never printed
+     (`config.PERSON_NAMED`). Two units carry it; both show their activity.
+     Re-run: 0 person-like names at a residential unit. Privacy row `publish`.
+  2. **The two Brussels dots**: asked whether the pages could combine. The
+     answer given: they are separate builds by the owner's earlier call (a
+     street survey against the company register, two methods whose counts do
+     not compare); the recommendation stays to move Brussels (Regional)'s dot
+     inside its own communes. Awaiting the owner's yes.
+  3. **One placement pass for Den Haag and Rotterdam** in the Europe view.
+  4. **A broader Overpass query for Antwerp** (every tram route in the box),
+     after the narrow one returned nothing.
+
 ### 2026-10-04 - Antwerp's left-bank query (call 5): no tram route relations returned; the closed stations stay unlisted
 
 - **The approved query found nothing to list.** `fetch_sources.py

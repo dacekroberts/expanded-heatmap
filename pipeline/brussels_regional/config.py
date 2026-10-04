@@ -190,8 +190,10 @@ NEAR_CITY_STATION_M = 0.3 * METERS_PER_MILE
 
 # Company or commercial names read as a person's own, withheld (the dot shows
 # its activity): KEYS from pipeline/name_keys.py, never the names
-# (scripts/check_name_keys.py). Filled after check_personal_exposure.py.
-PERSON_NAMED = frozenset()
+# (scripts/check_name_keys.py). The one name check_personal_exposure.py
+# found person-like at an address it reads as a residential unit, by key,
+# never read by eye (owner, 2026-10-04: "1 yes").
+PERSON_NAMED = frozenset({"696bc4d0b2c984f0"})
 
 # The Region's extent (about 4.24-4.48 E, 50.76-50.92 N), padded.
 BRUSSELS_REGIONAL_BBOX = {"lat_min": 50.75, "lat_max": 50.93, "lon_min": 4.23, "lon_max": 4.49}
