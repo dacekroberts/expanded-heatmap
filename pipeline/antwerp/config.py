@@ -154,10 +154,13 @@ OSM_WORKS_TRAMS_JSON = DATA_RAW / "osm_tram_routes_3_9_15.json"
 # It returned no relation (sent once, retried once), so the broad one:
 # `fetch_sources.py --all-tram-routes`, every tram route in the box.
 OSM_ALL_TRAMS_JSON = DATA_RAW / "osm_tram_routes_all.json"
+# Both returned no relation for 3, 9 or 15 (2026-10-04): OSM's 25 tram routes
+# in the box are the feed's lines exactly, so OSM mirrors the works service and
+# cannot name the left-bank stops either (docs/decisions_drafts/belgium.md).
 CLOSED_FOR_WORKS_OPEN_QUESTION = (
-    "the left-bank tram stations closed for works (lines 3, 9 and 15) are not listed: the feed "
-    "cannot name them. An OSM query for the tram route relations (or De Lijn's notice) is "
-    "needed, then each goes in config.CLOSED_FOR_WORKS")
+    "the left-bank tram stations closed for works (lines 3, 9 and 15) are not listed: neither "
+    "the feed nor OpenStreetMap (queried 2026-10-04) names them; only De Lijn's notice does, "
+    "and its terms bar republishing it")
 
 # GATE 3, PARTIAL: De Lijn's own per-line stop counts, the whole line before
 # the city split, where the line page shows the regular route. Hoboken Jan Van
