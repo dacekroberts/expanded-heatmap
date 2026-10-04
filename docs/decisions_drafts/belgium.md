@@ -4,6 +4,23 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then empties this file (owner, 2026-09-30).
 
+### 2026-10-04 - Brussels (Regional): KBO control re-based on brussels_hub, 1-point tolerance (owner)
+
+- **The diagnostic confirmed half of call 6, and the owner approved the
+  re-base anyway** ("1 point tolerance sounds acceptable"). On the same KBO
+  units, the screen's survey typing gives Retail 78.1 / 76.0 (brief 78.2 /
+  76.1) and Food service 83.9 / 84.1 (brief 84.4 / 84.0): the typing
+  explains Retail's recall gap; Food's 0.5-point precision gap is not the
+  typing. The join already reproduces (88.2% exact against 88.5, 97.2%
+  placed against 97.2), so the address match was not expected to recover
+  it. Targets are now this build's: Retail 78.2 / 75.4, Food service
+  83.8 / 84.1, tolerance 1.0 point (was 0.5), in
+  `pipeline/brussels_regional/config.py`.
+- **Step 2 then ran to completion**: 13,680 storefronts in the 18 communes
+  (Food service 4,972, Retail 8,708; Personal services' 973 off on this
+  page); 0 dots without a name, 0 withheld as a person's own; 995 placed
+  units within 482.8 m of a City station and of no regional one.
+
 ### 2026-10-04 - Antwerp and Ghent built on FAVV-AFSCA and VKBO
 
 - **Built Antwerp (page 197) and Ghent (page 198) on FAVV-AFSCA's operator
