@@ -4,6 +4,40 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Toluca to the pre-verdicts; the commuter-rail group widened into its own tier, not candidates (owner)
+
+- **The owner asked what the El Insurgente ruling was.** Call 37 of the
+  Mexico City extension ("keep out") settled only which lines the Mexico City
+  (Regional) page draws: the Tren Suburbano and El Insurgente out for
+  commuter spacing, Mexicable as a cable car. It never screened Toluca,
+  whose only rail is El Insurgente, unmeasured against the commuter-rail
+  exception (stations about a kilometre apart, every 15 minutes or better by
+  day).
+- **The owner: "move toluca to the pre-verdicts"**: Toluca, Metepec, Lerma
+  and Zinacantepec join the rail pre-discards (20), with a spacing and
+  timetable check when the batch probe runs.
+- **The owner: "carve out a section for commuter rail discards that are
+  viable builds otherwise (or open-ended)... the last remaining group of
+  possible builds, likely implemented with their own macro color as the
+  lowest tier below trams", then "that would probably come with a commuter
+  rail overhaul to many cities though so definitely just mark as its own
+  thing, not real candidates at this time".**
+  - The 2026-10-01 commuter-rail revisit group is widened in place, its
+    heading kept: still a view of the discard table, counted nowhere.
+  - **Data buildable (27):** the twelve of 2026-10-01, Brampton (GO only;
+    the city's directory, 6,059 rows) and fourteen Korean cities on Korail
+    lines or GTX-A (SEMAS covers them).
+  - **Data still open (4):** Auckland, Karachi, Depok, Gdynia / Sopot.
+  - **Would land here when probed:** the rail pre-verdicts on commuter or
+    railway-track service (Toluca's four, Oceanside, Escondido, Trenton,
+    Tren de la Costa's three, Cádiz's three, Dakar).
+  - **Left out:** Wellington and Bogor (their own hosts hold no premises
+    list), and trams, light rail and metros failing on frequency or station
+    count (Cincinnati, Palembang, Bhopal, Patna, Uiwang), which reopen on
+    their own lines' service.
+- **Not decided:** the overhaul itself (which commuter lines a page draws,
+  and the colour tier), raised only when the owner reopens it.
+
 ### 2026-10-04 - The screen's remainder counted; a pre-verdict section on the master list (owner)
 
 - **The owner asked how far the global screen has come**, with new builds
