@@ -4,6 +4,144 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Israel held at country level for wartime concerns, screens kept (owner)
+
+- **The owner, asked by staging about Petah Tikva:** "hold at country level
+  without deleting the screens, and keep the petah tikva findings".
+- **Why country level:** the 2026-09-28 leave-outs (Russia, Ukraine,
+  Belarus, Iran) were whole countries; holding one Israeli city while three
+  sat in Band R would be inconsistent (staging's recommendation on the
+  form; whether to hold was the owner's call).
+- **What differs from those four:** Israel was screened before the hold, so
+  nothing is deleted. Jerusalem, Bnei Brak and Bat Yam stay in Band R, each
+  noting the hold; Tel Aviv, Ramat Gan and Haifa stay discarded (evidence,
+  not access); Petah Tikva's findings (2,835 licensed-business points, 8
+  Red Line stations, no licence stated) sit on the watch-item list as a
+  possible build when the hold lifts, a licence read first. No licence read
+  now. Israel is listed under "Countries ruled out" as held, and in
+  `docs/global_country_shortlist.md` beside Iran and Belarus.
+
+### 2026-10-04 - Macau to R; the Israel screen's rows (owner)
+
+- **Macau, "33 macau to R okay":** one OSM address query (13,858 address
+  objects; 504 twice, 65 s waits, 200 on the third try) placed IAM's three
+  food lists at 15.1% on exact street and number, 66.9% counting a number
+  inside a mapped building's range and 70.1% ignoring letter suffixes, with
+  two of the three lists under 70%; only 8.3% of placed rows lie within
+  500 m of the 15 LRT stations, which serve Taipa and Cotai and reach the
+  peninsula only at Barra. The government GIS's points (about 97% placement)
+  reserve all rights, so R, request only: the bureau's permission.
+- **The Israel screen, "39-41 recommendations approved":** Ramat Gan
+  discarded (absence: its ArcGIS organization, its full sitemap and
+  data.gov.il's organizations enumerated); Bnei Brak and Bat Yam to R
+  (Cloudflare blocks, not routed around); Haifa discarded on rail (the
+  Carmelit funicular, the Metronit BRT, the light rail planned). Tel Aviv
+  (its own terms) and Jerusalem (R) were skipped.
+- **Petah Tikva, open:** the city's ArcGIS layer of licensed businesses
+  (2,835 points, edited 2026-09-16; food 1,229, barbers 145, beauty 123;
+  retail only where a licence is needed), 8 Red Line stations, no licence
+  stated anywhere. Staging recommended C with a licence read; the owner
+  asked whether to mark it a possible build tabled for wartime, as Russia,
+  Ukraine, Belarus and Iran were left out on 2026-09-28. Not written until
+  the owner answers.
+- A rate limit on data.gov.il (CloudFront 403 after about 90 quick API
+  calls) lifted in about 10 minutes and was waited out.
+
+### 2026-10-04 - Mexico City (Regional) marked, after a station repair (owner)
+
+- **The probe** (staging, wave 4): 11 stations of the page's own lines lie in
+  the State of México: Ecatepec 5 and Nezahualcóyotl 3 (Línea B), La Paz 2
+  (Línea A), Naucalpan 1 (Línea 2's Cuatro Caminos); all of Tren Ligero is
+  inside the city. DENUE covers the four municipios in the national layout;
+  entidad 15 ships as two ZIPs (80.8 MB together, 2026-05-20, headers read
+  only).
+- **It found a defect in the built page:** step 1 keeps only
+  `railway=station`, dropping eight Metro stations OSM carries as
+  `railway=stop` (Observatorio, Indios Verdes, Potrero, Juárez, Talismán,
+  Mixcoac, Tepalcates, Buenavista); Consulado is kept twice, about 330 m
+  apart; Cuatro Caminos is in neither the kept list nor the excluded list.
+  No gate caught it because gate 3 (operator counts) is still unreadable.
+- **The owner: "34. yes 35. yes all four 36. defer until brief 37. keep
+  out".**
+  1. The repair comes first and lands at review time (a separate session,
+     started by the owner from staging's task chip); the city alone proves
+     zero drift before any extension.
+  2. The add-on is marked, not scheduled, with all four municipios.
+     Naucalpan's single station follows Anyang + Uiwang; Ecatepec's stations
+     sit on its western edge, so its share in a ring will be low.
+  3. The entidad 15 download waits until a brief names it.
+  4. The Tren Suburbano and El Insurgente (commuter spacing) and Mexicable (a
+     cable car) stay out.
+
+### 2026-10-04 - The reset wave's calls: a user-agent rule, 31 discards, 11 to R, Konya to D, five open-gap rows, New Zealand back on the map (owner)
+
+- **The owner said yes to each of staging's recommendations**, listed by
+  number in chat. Eskişehir's discard could not pass the discard check (its
+  portal refuses every visitor, so the city's own host never answered);
+  **the owner: "open gap"**, Antalya's shape. The calls:
+- **A user-agent rule (all probes and builds):** a host that refuses curl's
+  own user agent is a refusal, recorded as one; a browser user-agent string
+  is never used to get past it. The project's own identified user agent
+  (`brief_check.py`'s, which names the project) is honest and allowed. Five
+  repository files send a browser string (`scripts/probe_geodata.py`,
+  `scripts/screen_rail.py`, `scripts/rank_canada_storefront_density.py`,
+  `pipeline/montreal/fetch_sources.py`, `pipeline/dublin/fetch_sources.py`):
+  handed to Cleanup to check whether any of their hosts refuse curl.
+- **A token the site's own script sends every visitor** (Palembang's API) is
+  not used as evidence: the 637-dataset figure is dropped, and the discard
+  rests on the city's two other catalogues.
+- **Deleted:** the ARCSA file (7,592,002 bytes, no location below the
+  agency's zone, 62% of Quito's rows an individual's name, fetched past a
+  curl refusal) and both scratchpad copies of Gaziantep's shopping feed
+  (AlisverisNoktalari, 4,957,363 bytes, fetched by the probe and the licence
+  read without a brief naming it; ruled out the same day).
+- **Gaziantep's question, catalogued and NOT sent (owner: "no emails being
+  sent"):** to the published contact, should the owner ever send it: "We
+  would like to reuse the 'Ticari Yerler' and 'Yemek Yerleri' datasets from
+  the Gaziantep Open Data Platform under the Gaziantep Açık Veri Lisansı.
+  Could you tell us whether these points of interest were compiled by the
+  Municipality, or come from a third-party (commercial) POI database? The
+  licence excludes third-party rights, so we want to be sure the licence
+  covers them. Could you also tell us when these datasets were last
+  updated?" Gaziantep stays in D.
+- **Macau:** one Overpass query of OSM addresses approved, to test placing
+  IAM's three food lists (the government GIS points are "All rights
+  reserved"). Over 70% placed: C, then B as a food-only page; under it, R.
+- **Bands:** Quito from C to R (the city's portals refuse this machine).
+  To R: Nonthaburi, Samut Prakan, Shah Alam, Khu Khot (sources inside
+  Thailand or Malaysia only), Parañaque and Caloocan (scripts refused
+  everywhere), Quezon City (open data behind a sign-in, Almaty's
+  precedent), Bursa, Kocaeli, Kayseri (portals geo-blocked to Türkiye).
+  Konya to D (a Cloudflare check from outside Türkiye; one visit in the
+  owner's browser). Open screening gap: Constantine, Sétif, Ouargla (own
+  hosts never answered, no probe inside Algeria; staging's reason: the
+  2026-09-24 audit reversed national-pattern rulings), Antalya (portal
+  down everywhere) and Eskişehir (portal answers 403 to everyone).
+- **Discards:** Parramatta and Newcastle, New South Wales (no register);
+  Auckland (rail: suburban lines, 1.4 km median spacing, 15 to 30 minutes
+  off-peak; a watch item for the City Rail Link) and Wellington (rail);
+  Cuenca (the national file cannot place it); Petaling Jaya, Subang Jaya,
+  Kajang, Klang, Ampang Jaya (no council register); Pathum Thani and
+  Putrajaya (rail); Oran, Mostaganem, Maracaibo, Alexandria, Lusail (no
+  reachable register); Palembang, Bekasi, Bogor, Makati, Pasay,
+  Mandaluyong, San Juan (Metro Manila), Antipolo, Marikina, Pasig (no
+  register, or rail); Depok (rail, one station); Yerevan (its permit system
+  is applications and payments, no holder list); İzmir and Samsun.
+- **New Zealand leaves "Countries ruled out":** its ruling ("licensing is not
+  municipal") was wrong; food businesses register with their council or
+  MPI under the Food Act 2014. Its cities now stand on their own results.
+- **Thessaloniki's eight build calls, all as recommended:** canteens out
+  (R1); ψιλικά convenience shops kept as food shops (convenience stores are
+  food retail everywhere else; bends Antwerp's complementary-retail rule);
+  patisseries and bakery coffee food shops; the operator's own line name,
+  the Kalamaria branch cut at the city line; gate 3 from Elliniko Metro;
+  the OSM city boundary from the build's one Overpass query; headway read
+  at build or the gap recorded; the operator's site may be read with the
+  project's identified user agent.
+- **Not acted on, for the owner:** a public layer in Makati's ArcGIS
+  organization carries person-name and birthday fields (field names read
+  only). Not this project's data; telling the city would be outreach.
+
 ### 2026-10-04 - Gaziantep to Band D: its data's origin is a question for the publisher (owner, conditional)
 
 - **The desk check came back unresolved**, which triggers the owner's
@@ -53,6 +191,14 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   re-checked every host it relied on with curl's own agent; all answered
   the same except `pakkretcity.go.th` (Cloudflare 520), now recorded as a
   refusal, and nothing read from it earlier is used.
+- **And in the Algeria, Maracaibo, Alexandria and Lusail resume:** some early
+  reads used a browser string; `nfsa.gov.eg` and `wilayasetif.dz` refuse
+  curl's own agent and are recorded as refusals, nothing read from them
+  that way counted as evidence. One retry on `apc-constantine.dz` with
+  browser headers was refused anyway.
+- **And in the Indonesia and Philippines probe:** browser strings until the
+  rule arrived; every source was re-read with plain curl and all answered
+  the same.
 
 ### 2026-10-04 - Geneva (Regional)'s three build calls, and Thessaloniki's licence reading (owner)
 

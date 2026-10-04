@@ -136,14 +136,10 @@ EDMONTON_BUCKETS = {
 # The last two are licences held by a person rather than a premises.
 EDMONTON_LICENCE_TYPE_KEEP = "Commercial"
 
+# donnees.montreal.ca refuses curl's default agent (`RBAC: access denied`) and
+# serves this one, measured 2026-10-04. Never a browser string (owner,
+# 2026-10-04, docs/decisions_drafts/staging.md).
 HEADERS = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
-# donnees.montreal.ca answers a plain client with `RBAC: access denied`.
-BROWSER_HEADERS = {
-    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                   "AppleWebKit/537.36 (KHTML, like Gecko) "
-                   "Chrome/124.0 Safari/537.36"),
-    "Accept": "text/csv,*/*",
-}
 
 SOURCES = {
     "montreal": ("https://donnees.montreal.ca/dataset/"
@@ -155,12 +151,11 @@ SOURCES = {
 }
 
 
-def fetch(url, path: Path, browser=False):
+def fetch(url, path: Path):
     if path.exists():
         return path
     path.parent.mkdir(parents=True, exist_ok=True)
-    r = requests.get(url, headers=BROWSER_HEADERS if browser else HEADERS,
-                     timeout=900)
+    r = requests.get(url, headers=HEADERS, timeout=900)
     if r.status_code != 200:
         sys.exit(f"{path.name}: HTTP {r.status_code}\n{r.text[:300]}")
     path.write_bytes(r.content)
@@ -236,8 +231,8 @@ def split_bucket(value, table, delim):
 
 def montreal(cache: Path):
     print("\n=== Montreal - SCIAN is NAICS, so naics.py applies unchanged ===")
-    df = pd.read_csv(fetch(SOURCES["montreal"], cache / "montreal.csv",
-                           browser=True), dtype=str, low_memory=False)
+    df = pd.read_csv(fetch(SOURCES["montreal"], cache / "montreal.csv"),
+                     dtype=str, low_memory=False)
     print(f"  survey rows: {len(df):,}")
     vac = df["USAGE1"].eq("VACANT")
     print(f"  VACANT units excluded: {int(vac.sum()):,} "

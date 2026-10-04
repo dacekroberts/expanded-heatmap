@@ -91,8 +91,9 @@ SECTEUR_PME, ENFANT, MULTIUSAGE, MULTIOCCUPANT, COORDY, COORDX, LAT, LONG`.
 **Three traps, all MEASURED:**
 
 - **`donnees.montreal.ca` answers a plain client with `RBAC: access denied`.**
-  A browser `User-Agent` is required. This is a portal-wide behaviour, not a
-  dataset one.
+  This is a portal-wide behaviour, not a dataset one. The project's
+  identified `User-Agent` is served (measured 2026-10-04); a browser string
+  is never used (owner, 2026-10-04).
 - **3,500 rows are `USAGE1 = 'VACANT'`** — an empty shopfront, not a business.
   **The original profile did not record this at all.** They must be excluded
   before anything is counted, and they are 12.2% of the file. `VACANT_A_LOUER`

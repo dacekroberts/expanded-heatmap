@@ -33,7 +33,11 @@ precedent for a food-shops layer from a food register.
 | **Projected CRS** | **EPSG:32634** (WGS 84 / UTM 34N, derived from 22.94° E) | The layer serves EPSG:2100 (GGRS87 / Greek Grid), but `check_provenance.py`'s CRS invariant accepts only UTM zones and its listed national grids, and 2100 is not listed. Reproject from 2100 on read (Antwerp's Lambert 72 handling); both grids are metric and their scale error here is under 0.03% |
 | **Region** | `"Europe"`, country `"Greece"` (new) | A new `docs/data_sources/greece.md` |
 
-**Calls for the owner at build** (each with its precedent and count):
+**Calls for the owner at build** (each with its precedent and count).
+**All eight answered as recommended (owner, 2026-10-04,
+`docs/decisions_drafts/staging.md`)**: for call 4, the operator's own line
+name and the cut at the city line; for call 8, the project's identified
+user agent may read the operator's pages.
 1. **Κυλικείο (canteen), 246 rows: out on R1** (recommended). The Greek
    licence type names a canteen inside another premises (offices, hospitals,
    sports grounds, parks), the R1 row's institutional and staff canteens
