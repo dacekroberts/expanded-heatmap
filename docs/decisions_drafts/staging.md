@@ -4,6 +4,168 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The paused wave's results banded; probes stay stopped (owner)
+
+- **The owner: "1. yes 2. all sound good 3. yes 4. yes 5. yes, do not
+  continue probes or other processes though. just republish the master
+  list, you can include an ongoing probes section".** Recorded in the master
+  list, each as staging recommended:
+  1. **Geneva:** the narrow indemnity (SITG CU 7.2) accepted; ge.ch's
+     website terms read as the website's only. Geneva stays A. The
+     indemnity joins `docs/data_sources.md`'s accepted indemnities at build.
+  2. **Thessaloniki to B** (a licence read first); **Macau, Quito and Cuenca
+     to C**, with Macau's API download and ARCSA's health-permit file
+     (7,592,002 bytes) approved but not fetched (probes stopped);
+     **Jerusalem, Almaty, Astana and Ahmedabad to R**.
+  3. **Lahore to R; Karachi, Islamabad and Dhaka discarded.**
+  4. **Cochabamba, La Paz / El Alto and San Juan discarded; Santa Cruz de la
+     Sierra a watch item.**
+  5. **Port Louis (Regional) discarded; Gaziantep to C**; Valparaíso / Viña
+     del Mar, Concepción, Valencia (Carabobo), Los Teques and Sidi Bel Abbès
+     discarded. İzmir waits on its district check.
+- **Counts after:** 158 built (the new-cities build's three sit on its
+  branch); 25 candidates (A 9 · B 7 · C 6 · D 3); 29 restricted; 155
+  discards. The probes stay stopped until the owner resumes them; every
+  partial report's resume steps are in the handoff.
+
+### 2026-10-04 - Four never-probed countries screened; the probe wave paused for the builds (owner calls pending)
+
+- **Pakistan:** Lahore's Orange Line passes (26 stations); every host that
+  could hold a register (the city corporation, the Punjab portal, the
+  business-registration system, the Punjab Food Authority) answers a probe
+  from inside Pakistan only and times out or returns 403 elsewhere: **R**,
+  Hyderabad's shape. Karachi and Islamabad: **discard on rail** (commuter
+  rail and BRT only).
+- **Bangladesh:** Dhaka's MRT Line 6 passes (16 stations); no list at any
+  level (trade licences behind login portals; data.gov.bd frozen in 2018;
+  the food authority's grading PDFs image-only): **discard on absence**,
+  Kolkata's shape. RAJUK's token-protected layers are a lead only by
+  request.
+- **Bolivia:** Cochabamba **discard** (Mi Tren every 15-30 minutes on a
+  converted railway; no list at any level); La Paz / El Alto **discard on
+  rail** (cable car); Santa Cruz de la Sierra a watch item (its
+  metropolitan train's first stage began 2026-09-02). The shortlist's "no
+  urban rail" filing gets a correction note, as Algeria's did.
+- **Puerto Rico:** San Juan **discard on absence** (Tren Urbano passes, 12
+  stations in the city, every 12 minutes off-peak; the only premises data is
+  2011-2015 use permits with no category), Honolulu's shape.
+- **A probe slip:** the Pakistan and Bangladesh probe downloaded two
+  Bangladesh Food Safety Authority PDFs (588 KB and 507 KB) without the
+  owner's OK; scratchpad only, no extractable text.
+- **The owner: "if we can pause those now at a point where we won't lose
+  anything do so, so belgium build can finish".** The two probes still out
+  (Mauritius with Armenia, the one-city countries) were told to write what
+  they had to their reports and stop; their partial reports sit in the
+  staging scratchpad's `probe2\` for a later run to resume.
+- **The paused probes' partial results** (both stopped cleanly, reports and
+  resume steps written):
+  - **Mauritius:** Metro Express passes (22 stations, purpose-built, median
+    788 m); licensing is municipal and none of the five councils publishes
+    its register (each document library read), the national portal's 856
+    datasets hold single-category lists only: **discard on absence**, or R
+    if the owner would ask the councils.
+  - **Armenia:** Yerevan Metro passes (10 stations, every 7.5 minutes at
+    midday); no national portal, the company and licence registers carry
+    no business type (pharmacies only). Unread: Yerevan's own alcohol,
+    tobacco and catering permit holders, ArmStat's business register, the
+    tax service. Pending.
+  - **One-city countries:** Valparaíso/Viña, Concepción, Valencia (VE),
+    Los Teques and Sidi Bel Abbès proposed **discards on absence**; İzmir a
+    discard after a district check; **Gaziantep Band C** (the city's open
+    API: 4,937 food and 15,413 commercial points with addresses, 2,562 hair
+    and barber; no date field, some rows outside the province; its own
+    licence to read; the currency rule is the owner's call). Not reached:
+    Maracaibo and Alexandria (hosts unreachable or 503), Oran, Constantine,
+    Sétif, Ouargla, Mostaganem, Bursa, Kocaeli, Antalya, Kayseri, Samsun,
+    Konya, Eskişehir, Lusail. Merval passes the 15-minute test (every 12
+    minutes all day on weekdays).
+- All bands and discards above wait on the owner's answer before they enter
+  the master list.
+
+### 2026-10-04 - Geneva's REG read, and the second group outside Europe screened (owner calls pending)
+
+- **Geneva's Répertoire des entreprises (REG), `licence-read` 2026-10-04:
+  PERMITTED WITH CONDITIONS.** Level A ("Accès libre") under SITG's
+  "Conditions d'utilisation des données du Portail SITG" (19 May 2026; the
+  copy inside the zip is byte-identical): reproduce, publish, adapt,
+  combine, commercially too. Display: "Source : Portail des données SITG
+  (État de Genève), téléchargé et/ou extrait en date du […]." verbatim
+  (CU 5.3.1), a derived-use statement (5.3.2), a sentence linking the CU
+  (5.5); no re-identification (5.4.2); data-protection law applies; no
+  resale (RIRT art. 62). **For the owner:** an indemnity (CU 7.2) limited to
+  the user's own infringements, personality and data-protection rights
+  named (narrower than Hong Kong's accepted one); and ge.ch's website terms,
+  applied by SITG's footer to its subdomains, which a strict reading would
+  stretch to the download (the read finds the permissive reading much
+  stronger). The register is not pre-filtered: 23,164 sole traders among
+  63,224 company rows; 2,082 home-based and 3,655 itinerant establishments.
+- **The second group outside Europe (probe, 2026-10-04):** Thessaloniki B
+  (the city's active-shop-licence layer, 8,103 points, no names; a licence
+  read first); Macau C (IAM's licensed food-and-drink list, addresses only;
+  one API download for the owner); Quito and Cuenca D on ARCSA's national
+  health-permit file (7,592,002 bytes, the owner's download), else Quito R
+  and Cuenca a discard; Jerusalem, Almaty, Astana and Ahmedabad R (hosts
+  refusing scripts, or the national register behind a sign-in). Pending the
+  owner's answer.
+
+### 2026-10-04 - The probe wave's first results: Korea and Europe banded; Korean regional expansions marked (owner)
+
+- **The owner: "approve all"** on staging's recommendations, then "mark the
+  potential korean regional expansions":
+  - **Korea (SEMAS, cached; gate peak 0.18 GB):** **Gimpo** (Goldline, 9
+    stations, every 6 minutes; 13,398 storefronts) and **Siheung** (9
+    stations; 15,206) to **A**. Gimpo returns from the owner's earlier
+    Gyeonggi scope ("the smaller 시군") on this call. **Yangsan** (Busan
+    Line 2, 5 stations) and **Gyeongsan** (Daegu Lines 1 and 2, 5) to **C**:
+    a page of its own or a Busan or Daegu regional page. **Gunpo, Hanam,
+    Guri, Gwacheon and Gwangmyeong stay out** on the Gyeonggi scope.
+  - **Discards (21):** fifteen Korean cities on rail (Pyeongtaek, Osan,
+    Yangju, Dongducheon, Cheonan, Asan, Paju, Chuncheon, Gyeonggi-Gwangju,
+    Icheon, Yeoju, Ulsan, Gumi, Uiwang, Hwaseong), five with no urban rail
+    open (Changwon, Sejong, Cheongju, Pohang, Jeju), and Basel on absence
+    (the canton's 364 datasets; its commercial register has no activity
+    code).
+  - **Geneva to A**: the canton's business register (REG, 100,588 active
+    rows, NOGA codes, LV95 points, daily), regional scope leaning, the
+    download approved and cached (`data/geneva/raw/`, 11,344,581 bytes,
+    sha256 `45aff219...fa3d616`); a licence read of SITG's terms runs.
+  - **Timișoara, Iași and Cluj-Napoca to D**: each county's DSVSA site
+    answers scripts with a browser check, so the owner saves the
+    "Unități înregistrate" lists in their own browser (Bucharest's route).
+  - **Norrköping to R** (request only: a public-records request; outreach
+    the last resort).
+- **Potential Korean regional expansions marked** in the master list's
+  add-ons: Busan (Regional) + Yangsan; Daegu (Regional) + Gyeongsan; Seoul
+  (Regional) + Gwacheon, Gwangmyeong, Hanam and Guri; Anyang (Regional) +
+  Gunpo and Uiwang. Seoul, Busan and Daegu read LOCALDATA, so theirs join
+  two sources (`multi-source-city`); Anyang's is a district-code list on
+  `korea_sbiz` once the Korea build's code filter lands.
+- **Raised with Cleanup:** Namyangju's Gyeongchun line (every 22-24 minutes
+  at midday) and Goyang's Gyeongui-Jungang line (2.0 km spacing) fail the
+  tests the probe applied to Chuncheon and Paju; recorded calls or defects.
+
+### 2026-10-04 - The "TEC" name on the Charleroi and Liège pages; the never-probed countries' wave (owner)
+
+- **The owner: "recommendation for TEC approved".** Notice 150 credits the
+  operator as "LETEC" (the name the Belgian Mobility Company portal and the
+  feed's agency use): "Source: LETEC – Open Data – [date of dataset
+  update]". Lines are labelled by their public names (M2, M3, M4, T1); no
+  "TEC" in legends or prose, and no TEC logo. TEC's website terms (art. 8,
+  8.1) claim the name and logo, scoped to letec.be and the app; the
+  ruling keeps the pages clear of either reading. Passed to the Belgium
+  build session the same night.
+- **The never-probed countries (staging's list, 2026-10-04):** Ecuador and
+  Kazakhstan (screens running), Bolivia, Puerto Rico, Mauritius, Armenia,
+  Pakistan and Bangladesh; rail likely failing in Costa Rica, Kenya, South
+  Africa and Senegal; one-city countries with other rail cities never asked:
+  Chile, Venezuela, Egypt, Algeria, Türkiye, Israel, Qatar. Russia, Ukraine,
+  Belarus and Iran stay left out (owner, 2026-09-28).
+- **The owner: "we can run the wave after heavy jobs slow down too, i'm not
+  worried about hitting the cap"**: the wave started at once, the heavy-job
+  gate holding one 0.2 GB job: one `add-country` probe each for Bolivia with
+  Puerto Rico, Mauritius with Armenia, and Pakistan with Bangladesh, and one
+  reprobe of the one-city countries' other rail cities.
+
 ### 2026-10-04 - TEC's GTFS read: permitted with conditions; the "TEC" name raised
 
 - **`licence-read`, 2026-10-04: PERMITTED WITH CONDITIONS.** The Belgian
