@@ -10,9 +10,8 @@ as ready"), to ONE build session. It works in `.claude/worktrees/belgium`
 on branch `belgium-build`, cut from origin/master by staging. There,
 `data/` and `.venv-lean` are junctions to the main checkout's. The branch
 has no upstream, so a plain `git push` can never reach master. Everything
-lands at the owner's review time. **One call is open at release:** how
-pages use the "TEC" name (below, Notices); ask staging before writing
-Charleroi's or Liège's page text.
+lands at the owner's review time. **The TEC-name call was ruled on
+2026-10-04** (below, Notices).
 
 **Two other build sessions run beside this one:** Korea
 (`docs/handoff_korea_sweep_2026-10-03.md`) and the other cities
@@ -23,6 +22,33 @@ sections. Belgium is a new country: it needs its own
 countries are listed (the `add-country` skill's checklist).
 
 **Delete this file** once all six pages have landed.
+
+## SAVEPOINT 2026-10-04, third (all six built, every owner call applied; ready for review time)
+
+Branch `belgium-build`, merged with origin/master at cd358bd2; nothing
+pushed. **`check_all.py`: 48 of 48 pass.** Decisions in
+`docs/decisions_drafts/belgium.md`, newest first.
+
+- **All six pages built**: Brussels (196), Antwerp (197), Ghent (198),
+  Charleroi (199), Liège (200), Brussels (Regional) (201), with notices
+  144-152, source rows, What Is Excluded sections, privacy rows (all
+  `publish` or `publish-structural`), map_inconsistencies rows, ring
+  shares, macro facts, the master list (Built 164, candidates 19 after the
+  probe wave's merge), README, rendered surfaces and project context.
+- **Drift check: zero drift for the six; baselines recorded.**
+- **Every owner call applied**: the six of the first round; then
+  Brussels (Regional)'s one name withheld by key; its macro dot moved into
+  its own communes (Forest's point); Den Haag and Rotterdam placed in the
+  Europe view (labels 0 problems everywhere); Antwerp's two OSM queries run
+  (OSM has no relation for lines 3, 9 or 15, so the left-bank stations stay
+  unlisted, as the page says).
+
+**At review time (the owner's call):** land `belgium-build` on master;
+`check_deploy_imports.py` and a reboot (app/ changes); `deploy-verify`
+with `scope: city-added`; then `downstream_changes.py` to Visuals and
+Analytics (six new cities; every notice caption-only; open terms questions:
+hub.brussels's "Google Maps" credit, KBO's declared purpose). Then this
+file is deleted.
 
 ---
 
@@ -85,7 +111,7 @@ countries are listed (the `add-country` skill's checklist).
 | **147** | SPW LoGIC 2024, CC BY 4.0 | The SPW citation verbatim, the working catalogue link beside its 404 URI, a modification statement |
 | **148** | STIB-MIVB GTFS (Belgian Mobility Company portal), CC BY 4.0 | "Source: STIB-MIVB – Open Data – [feed date]", the modified-data line, the portal |
 | **149** | De Lijn GTFS (Belgian Mobility Company portal); read 2026-10-04: permitted with conditions | "Source: De Lijn – Open Data – [feed date]", the modified-data line, the portal, the CC BY 4.0 title and link; no delijn.be link |
-| **150** | TEC GTFS (Belgian Mobility Company portal); read 2026-10-04: permitted with conditions (CC BY 4.0; TEC's national-access-point entry says CC0, and complying with CC BY satisfies both) | "Source: LETEC – Open Data – [date of dataset update]" (the update date, not the fetch date), the modified-data line, the CC BY 4.0 title and link, the portal; no TEC logo. **Open for the owner:** TEC's website terms claim the "TEC" name; staging recommends crediting "LETEC" (the name the portal and the feed's agency use) and labelling lines by their public names (M2, M3, M4, T1) without "TEC" in legends or prose |
+| **150** | TEC GTFS (Belgian Mobility Company portal); read 2026-10-04: permitted with conditions (CC BY 4.0; TEC's national-access-point entry says CC0, and complying with CC BY satisfies both) | "Source: LETEC – Open Data – [date of dataset update]" (the update date, not the fetch date), the modified-data line, the CC BY 4.0 title and link, the portal; no TEC logo. **Owner, 2026-10-04:** TEC's website terms claim the "TEC" name, so credit "LETEC" (the name the portal and the feed's agency use) and label lines by their public names (M2, M3, M4, T1), with no "TEC" in legends or prose |
 | **151** | KBO/BCE Open Data (FPS Economy), Brussels (Regional) only | Source and the update date, not presented as a guarantee; companies only |
 | **152** | BeST-Address Brussels (FPS BOSA), Brussels (Regional) only | CC BY 4.0, BOSA and the Brussels address register, a statement that business addresses were matched to the points |
 

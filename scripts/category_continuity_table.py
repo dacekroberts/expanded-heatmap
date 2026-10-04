@@ -1432,6 +1432,17 @@ COLUMNS["czech_nace2025"]["personal_catchall"] = [
     outside("pipeline/prague/config.py", 'CATCH_ALL_EXCLUDE = ("96990", "969")',
             "96990 and the bare 969 group (21 rows, the ragged register) dropped in step 2 "
             "[the 969 row fixed, approved 2026-09-29]")]
+# Brussels (Regional): KBO's NACE-BEL 2025, a thin module over czech_nace2025
+# (the same buckets and exclusions); 5-digit codes, the Belgian sub-code as
+# the fifth digit.
+COLUMNS["belgium_kbo"] = _rev21(lambda d: d.replace(".", "") + "0", "pipeline/taxonomies/belgium_kbo.py",
+                                '"96999",   # Autres services personnels', "Brussels (Regional)")
+COLUMNS["belgium_kbo"]["personal_catchall"] = [
+    outside("pipeline/taxonomies/belgium_kbo.py", '"96999",   # Autres services personnels',
+            "rule A in step 2: a unit whose every in-bucket code is a catch-all (96999 other personal "
+            "services, 47120, 47279, 47690, 47789) is dropped; Personal services is off on the page")]
+COLUMNS["belgium_kbo"]["nonstore"] = COLUMNS["belgium_kbo"]["nonstore"] + [
+    loc("47781", "heating-fuel dealers (france_naf 47.78B precedent)")]
 
 # Georgia: NACE Rev. 2 with a national fifth digit (Geostat), keyed at the
 # leaf. Codes outside the four tracked divisions are out by construction.
@@ -2126,6 +2137,55 @@ COLUMNS["zurich_gastwirtschaft"] = {
 }
 
 
+# Charleroi and Liege: LoGIC 2024's NATURE has four classes only (Commerce de
+# detail, HoReCa, Services, Cellule vide), so a trade is never a value of its own.
+LOGIC_LUMPED = ("a street survey with four classes only (shops, horeca, services, vacant): "
+                "the trade has no class of its own and is filed with the rest of its class")
+COLUMNS["wallonia_logic"] = {
+    **{rid: absent(LOGIC_LUMPED) for rid in (
+        "funeral", "no_counter_food", "adult_hostess", "sex_shop", "massage_commercial",
+        "massage_regulated", "car_dealer", "petrol_station", "vehicle_repair", "gambling",
+        "pawnbroker", "nightclub", "vet", "nonstore", "parking", "repair", "recreation",
+        "pharmacy", "optician", "mobile_unit")},
+    "personal_catchall": [loc("Services", "the services class: hairdressers with banks, insurers, "
+                                          "agencies and offices, no field to split it (R2)")],
+    "lodging": [exception("HoReCa", "hotels inside the horeca class", "Food service",
+                          "Belgium's build calls",
+                          "LoGIC's HoReCa does not separate lodging; hotels are kept and the page "
+                          "discloses them, not split by a keyword pass on the sign (owner, "
+                          "2026-10-03, Belgium build call 9)")],
+}
+
+
+# Antwerp and Ghent: FAVV-AFSCA's food operator list, classified per
+# establishment on its place/activity pairs (ROW_KEY: "PL92/AC66;PL83/AC66").
+FAVV_FOOD = "a food-safety register: food businesses only, no such place type"
+COLUMNS["belgium_favv"] = {
+    **{rid: absent(FAVV_FOOD) for rid in (
+        "funeral", "personal_catchall", "adult_hostess", "sex_shop", "massage_commercial",
+        "massage_regulated", "car_dealer", "petrol_station", "vehicle_repair", "gambling",
+        "pawnbroker", "vet", "parking", "repair", "recreation", "optician")},
+    "no_counter_food": [
+        loc("PL83/AC66", "caterers (traiteur; owner, 2026-10-03)"),
+        loc("PL6/AC66", "other collective kitchens"), loc("PL28/AC66", "central kitchens"),
+        loc("PL30/AC66;PL92/AC66", "a school's kitchen also typed restaurant (R1, provisional)"),
+        loc("PL58/AC66;PL12/AC66", "a rest home's cafe also typed bar (R1, provisional)")],
+    "nightclub": absent("no place type of its own: a club registers as a débit de boisson (a bar), "
+                        "which is kept"),
+    "nonstore": [loc("PL57/AC96", "vending-machine shop"),
+                 loc("PL39/AC30", "vending-machine operator")],
+    "lodging": [loc("PL23/AC66", "bed and breakfast"),
+                loc("PL23/AC66;PL92/AC66", "a bed and breakfast also typed restaurant (Den Haag's "
+                                           "hotel-restaurant; provisional)")],
+    "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register",
+                       ignore=("pharmacy (PL93",)),
+    "pharmacy_food_register": [loc("PL93/AC96;PL29/AC96", "a pharmacy also registered as a food "
+                                                          "retailer")],
+    "mobile_unit": [loc("PL88/AC94", "food vehicles"),
+                    loc("PL10/AC94", "a bakery's ambulant sales only")],
+}
+
+
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
 # except the cells below, which still wait on the owner. A queued row turns stale
@@ -2138,6 +2198,42 @@ COLUMNS["zurich_gastwirtschaft"] = {
 # (2026-10-02), was ruled on 2026-10-03 ("drop and note") and is now fixed().
 # Burnaby's optometrist/optician type: found with Vancouver (Regional)'s
 # extension (2026-10-03).
+COLUMNS["brussels_hub"] = {
+    "funeral": [loc("Pompes funèbres", "funeral directors")],
+    "no_counter_food": [
+        exception("Cantine - Cafétéria - Food-court", "cafeterias and food courts in the street survey",
+                  "Food service", "Six Belgian calls approved (owner)",
+                  "hub.brussels's ground-floor survey records units open to the street, so its 46 "
+                  "are public cafeterias and food courts, not R1's staff canteens")],
+    "personal_catchall": [loc("Autre activité", "the survey's own catch-all")],
+    "tattoo": [loc("Tattoo", "tattoo studio")],
+    "adult_hostess": [loc("Cabaret", "cabaret"), loc("Peepshow", "peep show")],
+    "sex_shop": [loc("Love shop", "sex shop")],
+    "massage_commercial": [loc("Massage", "massage")],
+    "massage_regulated": absent("no therapist type: health care is outside the survey"),
+    "car_dealer": [loc("Voitures", "car dealer"), loc("Motos", "motorcycle dealer")],
+    "petrol_station": [loc("Station-service (essence, gaz,…)", "filling station")],
+    "vehicle_repair": [loc("Garage - Entretien automobile", "garage"), loc("Car-wash", "car wash")],
+    "gambling": [loc("Casino", "casino"), loc("Jeux de hasard", "betting and gaming")],
+    "pawnbroker": absent("no pawnbroker type"),
+    "nightclub": [loc("Night-club", "nightclub")],
+    "vet": absent("no veterinary type; pet grooming and pet shops have their own"),
+    "nonstore": [loc("Combustible (charbon, pellets…)", "heating-fuel dealer")],
+    "parking": absent("no parking type"),
+    "repair": [loc("Réparation de vêtements", "clothing repair"), loc("Cordonnier", "shoe repair"),
+               loc("Réparation matériel électrique ou multimédia", "electronics repair"),
+               loc("Clé-minute", "key cutting")],
+    "lodging": [loc("Hôtel -  3 étoiles", "hotel"), loc("Motel", "motel"),
+                loc("Auberge de jeunesse", "hostel"),
+                loc("Chambre d'hôtes - Bed & Breakfast", "guest house")],
+    "recreation": [loc("Salle de fitness - musculation", "gym"), loc("Cinéma", "cinema"),
+                   loc("Salle de bowling", "bowling"), loc("Salle de billard", "billiards")],
+    "pharmacy": [loc("Pharmacie", "pharmacy")],
+    "optician": [loc("Opticien", "optician")],
+    "mobile_unit": absent("a ground-floor shop survey: no mobile, market-stall or vending type; "
+                          "'automobile' is a garage", ignore=("Garage - Entretien automobile",)),
+}
+
 AWAITING_OWNER = {("vancouver", "optician")}
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
@@ -2167,6 +2263,8 @@ ROW_KEY = {
     "hong_kong_fehd": "licence_code",
     "anzsic_fes": "ClassificationCode",
     "georgia_nace": "activity_code",
+    "belgium_favv": "favv_pairs",
+    "belgium_kbo": "nace_code",
 }
 
 # Brazil's step 2 classifies the free-text description; classify() reads back the stored bucket.

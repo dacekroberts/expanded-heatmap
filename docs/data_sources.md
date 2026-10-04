@@ -105,6 +105,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
+| Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
 | Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
@@ -3527,6 +3528,147 @@ of 2026-10-02.)
   Massachusetts EOTSS".
 - **MUST NOT**: present the outline as an authoritative boundary location
   ("can only be provided by a licensed land surveyor").
+
+**144. City of Brussels and hub.brussels (Brussels) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: opendata.brussels.be adopts the
+  producer's license; hub.brussels describes the inventory as its field
+  agents' own. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the credit to the publisher (Ville de Bruxelles/Data
+  Management) and hub.brussels, with the publisher's listed contributors
+  (hub.brussels and Google Maps), the dataset title and page, the license
+  link, and a statement of the changes. No wording is prescribed; this
+  project's own.
+- **MUST NOT**: link a dot to Google (the Google Maps and Street View link
+  columns are never downloaded); show the City's logo or "BXL" mark (the
+  portal's terms, 3.1); imply endorsement. What the "Google Maps" contributor
+  credit covers is not stated by the publisher; it is named as listed.
+
+**145. FAVV-AFSCA (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the agency's open-data page
+  ("Creative Commons Naamsvermelding 4.0 Internationaal"). The list carries no
+  name or street column. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the credit with the extract date, the license link, a
+  statement of the changes, no implied endorsement, nothing misleading.
+- **MUST NOT**: deep-link the agency's site (its terms ask the webmaster's
+  say first): the credit links its home page only. The site terms' prior
+  approval for downloadable documents is read, as the Dutch text limits it,
+  as covering brochures and the like (owner, 2026-10-03).
+
+**146. Digitaal Vlaanderen, VKBO (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Modellicentie voor gratis hergebruik
+  v1.0. KBO's purpose limit binds its registrants, not VKBO's reusers. Rows
+  in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**, verbatim, the prescribed credit: "publieke KBO gegevens,
+  verrijkt met adressen uit het Vlaamse Adressenregister." with the extract
+  date (which also meets KBO's art. 2.8, should the federal terms ever reach
+  the KBO-derived fields).
+
+**147. Service public de Wallonie, LoGIC 2024 (Charleroi and Liège) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)** for the downloaded GeoPackage
+  (the license is in the zip and on the Metawal record). Never the
+  MapServer: SPW's services terms (art. 5 §4) forbid altering the data it
+  serves. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**, verbatim, the SPW citation from the Metawal record:
+  "Source : Service public de Wallonie (SPW) - Offre commerciale en Wallonie
+  (LoGIC 2024) (2025-04-09) https://geodata.wallonie.be/id/5f56d784-2fd7-47eb-a62a-991d4741a67d";
+  that URI answers 404, so the working catalogue record is linked beside it;
+  the license link; and a statement of the changes.
+- **MUST NOT**: show an SPW or Wallonia logo, or imply endorsement.
+
+**148. STIB-MIVB (Brussels and Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (December 2025, effective January 1, 2026), art. 3,
+  STIB-MIVB the sole licensor; downloading is accepting them (art. 2; the
+  owner accepted for this build, and a change of terms comes back to the
+  owner, art. 8). Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: STIB-MIVB – Open Data – [date of dataset
+  update]" (art. 4), the date of the feed's own update, re-dated at every
+  refresh; the modified-data line art. 4 recommends and CC BY 4.0 requires;
+  the portal named (its FAQ).
+- **MUST NOT**: take anything from stib-mivb.be itself (its website terms are
+  for private use): no logo, network map or brand material.
+
+**149. De Lijn (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (art. 3), De Lijn the sole licensor; De Lijn's own
+  portal's Flemish license and the national access point's ODC-BY are
+  attribution-only too. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: De Lijn – Open Data – [date of dataset update]"
+  (art. 4), re-dated at every refresh; the modified-data line; the license
+  title and link (which also meets the Flemish license's "bron: De Lijn");
+  the portal.
+- **MUST NOT**: link delijn.be or take its content (its website terms allow
+  private use only and ask the webmaster's say before a link); imply official
+  status or approval. Its line pages are read privately for station counts
+  only.
+
+**150. LETEC (Charleroi and Liège) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (art. 3), the operator the sole licensor; its own
+  national-access-point entry declares CC0 for the same file, and complying
+  with CC BY 4.0 satisfies either. Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: LETEC – Open Data – [date of dataset update]"
+  (art. 4), the date of the feed's own update (not the fetch date), re-dated
+  at every refresh; the modified-data line; the license title and link; the
+  portal.
+- **MUST NOT**: show the operator's logo or its short brand name in legends
+  or prose: its website terms claim both, so it is credited as "LETEC" (the
+  name the portal and the feed use) and its lines by their public names M2,
+  M3, M4 and T1 (owner, 2026-10-04). Nothing is taken from its website.
+
+**151. KBO/BCE Open Data, FPS Economy (Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: KBO Open Data's terms of reuse. Companies'
+  establishments only (natural persons are dropped as the file is read);
+  reuse within the purpose the owner declared at registration (2.3); no
+  direct marketing (2.2); the project is the GDPR controller (2.1); a
+  download at least yearly or the contract lapses (10.5; next by
+  2027-10-02, the owner's act). Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the source and the update date (2.8), re-dated at every
+  refresh; a statement of the modifications (filtered, joined, grouped); the
+  data presented as the register's, not as a guarantee of any business's
+  status.
+- **MUST NOT**: alter or distort the data (2.7); use it for direct marketing.
+
+**152. FPS BOSA, BeST-Address Brussels (Brussels (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: BOSA's catalogue, landing pages
+  and license PDF; BeST-in-a-Box defers to the region's license, CC0 for
+  Brussels, so CC BY 4.0 is the stricter and is met. data.gov.be's
+  request for research results read as not applying (owner). Rows in
+  [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: FPS BOSA and the Brussels address register as the source,
+  the license title and link, and a statement that business addresses were
+  matched to its points.
+- **MUST NOT**: imply endorsement or accuracy; show Paradigm or
+  datastore.brussels marks.
 
 
 ## Gaps

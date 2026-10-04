@@ -243,6 +243,7 @@ REGION_GROUP = {
     "France North": "Europe",
     "France South": "Europe",
     "Czechia": "Europe",
+    "Belgium": "Europe",
     "United Kingdom": "Europe",
     "Seoul Capital Area": "East Asia",
     # Japan's two halves (owner, 2026-10-03). Unfolded, all 34 Japanese cities

@@ -122,7 +122,8 @@ page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam and Riga, Rome's tram 8, and Hong Kong's Light Rail.<!-- internal --> The reasoning is in
+  Rotterdam and Riga, Rome's tram 8, Hong Kong's Light Rail, and the Brussels
+  trams 10, 51 and 62.<!-- internal --> The reasoning is in
   `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
   it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
@@ -2175,6 +2176,159 @@ stops outside the municipality are left out - 12 in Amstelveen, 5 in Diemen, 3
 in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
 half mile. Tram 3, which GVB discontinued on March 29, 2026, the museum tram,
 ferries and NS trains are not drawn.
+
+### Brussels - empty shop units, which a survey can see, and the City's other 18 neighbors
+
+**One survey, three categories.** The map is hub.brussels's survey of the City
+of Brussels's ground-floor commercial units, dated October 17, 2025. A survey
+records what is on the street, so it sees empty units, and it names each
+business by its sign.
+
+**Excluded from the survey** - 1,068 empty units; and 743 units whose every
+type is one this map leaves out: hotels, hostels and guest houses, hall hire,
+offices, banks, insurers, agencies and money transfer, post offices, call
+shops and telecom providers' shops, printers and photo studios, rentals,
+repairs (garages, car washes, shoe and clothing repair, key cutting), gyms,
+pools, cinemas, theatres, museums and other venues, casinos and betting,
+cabarets and peep shows, members' clubs, funeral directors, and a
+heating-fuel dealer.
+
+**Counted once** - a unit recorded under several types (175 span two
+categories) is shown in the first of Food service, Retail and Personal
+services among its types.
+
+**Missing rather than excluded** - shops that opened after the survey, and
+anything above the ground floor.
+
+**Stations.** STIB's metro lines 1, 2, 5 and 6 and the fifteen tram lines that
+enter the City are drawn. The map covers the City of Brussels alone, one of
+the Brussels-Capital Region's 19 communes, so 195 stations on those lines in
+the other 18 communes and beyond the Region get no ring; 7 tram stops on trams
+10, 51 and 62 are thinned to about one per half mile. Trams 18, 39 and 44,
+which never enter the City, buses and SNCB trains are not drawn. The other 18
+communes are on the Brussels (Regional) page.
+
+### Brussels (Regional) - the business register, companies only, two categories
+
+**One register, two categories.** The map is KBO/BCE Open Data, the federal
+register of enterprises, snapshot of October 2, 2026: companies'
+establishment units with a shop or restaurant activity, placed by matching
+their address to BeST-Address Brussels. It is a different method from the City
+of Brussels page's street survey, and the page says so.
+
+**Excluded from the register** - across the Region, of 32,733 establishments
+with a Food service, Retail or Personal services activity (an establishment
+can fall under more than one rule): those filed only under catch-all
+activities (2,540); those at an address shared by five or more companies,
+fewer than half of them in these trades (4,160, at 2,702 addresses); those in
+a numbered box, a flat or an upper-floor office (3,336); and those listing ten
+or more activities (6,853), as likely offices rather than storefronts.
+Industrial laundries and heating-fuel dealers are not counted.
+
+**Off on this page** - Personal services (973 establishments in the 18
+communes): most salons are run by sole traders, so the companies in the
+register find about half of the personal services the City's street survey
+counts, too few to map them.
+
+**Counted once** - an establishment registered under several activities is
+shown as Food service if any of them is, else as Retail.
+
+**Missing rather than excluded** - every business run by a sole trader (the
+register's open data covers companies only), and the 3.2% of establishments
+whose address could not be matched to a house number.
+
+**Stations.** STIB's metro lines 1, 2, 5 and 6 and all eighteen tram lines are
+drawn. The map covers the Region's 18 communes outside the City of Brussels:
+73 stations in the City get no ring here (they are on the Brussels page) and
+13 beyond the Region get none; 72 tram stops are thinned to about one per half
+mile. Buses and SNCB trains are not drawn.
+
+### Antwerp - FAVV-AFSCA's food list, food only, placed on the business register's points
+
+**One category, food.** The map is FAVV-AFSCA's list of registered food
+businesses, placed by each establishment's KBO number on Flanders' copy of the
+business register (VKBO). Food shops are counted as food, as in Göteborg.
+
+**Excluded from the list** - caterers (340), food sold beside a non-food main
+trade (201), school, crèche, care-home and other collective kitchens (655),
+market and mobile sales (250), vending (57), B&Bs (53), pharmacies (137), and
+wholesale, manufacturing, transport and farms.
+
+**Missing rather than excluded** - every shop that is not a food business,
+and personal services: the list registers food only. About 4 in 100
+food-service businesses could not be placed: their KBO number has no point in
+VKBO (most are on its placeholder for an unmatched address).
+
+**Shown, but not named** - the list carries no names, so a dot shows the type
+of business only.
+
+**Stations.** De Lijn's tram lines 1, 2, 4, 6, 7, 8, 10, 11, 12, 24, A3 and A9
+are drawn. Lines 3, 5, 9 and 15 are not in the current timetable and no tram
+serves the left bank (Linkeroever) during works. Hoboken Jan Van de Wouwer is
+closed for works. 16 stops in Mortsel, Wijnegem, Wommelgem and Boechout get no
+ring. No stop is thinned. Buses and NMBS trains are not drawn.
+
+### Ghent - FAVV-AFSCA's food list, as Antwerp
+
+**One category, food**, by Antwerp's rules.
+
+**Excluded from the list** - caterers (175), food sold beside another trade
+(96), collective kitchens (391), B&Bs (75), and the other trades Antwerp
+leaves out.
+
+**Missing rather than excluded** - everything that is not a food business,
+and about 5 in 100 food-service businesses that could not be placed.
+
+**Shown, but not named** - a dot shows the type of business only.
+
+**Stations.** De Lijn's trams T1, T2 and T4 are drawn. T2's stop in Melle
+gets no ring. No stop is thinned. Buses and NMBS trains are not drawn.
+
+### Charleroi - a survey that sees every shop only in the commercial districts
+
+**Two categories.** The map is Wallonia's LoGIC 2024 survey, done on the
+ground in August 2024. It sorts each shop as retail, horeca (restaurants,
+cafés, bars and hotels), services or vacant.
+
+**Excluded** - the services class (454 units), which puts hairdressers in one
+class with banks, agencies and offices, so personal services cannot be shown;
+and 769 vacant units.
+
+**Missing rather than excluded** - the survey recorded every shop inside the
+city's 18 commercial districts but only shops over 200 m² outside them, so
+small shops away from those districts are not on the map. The districts cover
+about one ring area in nine around the stations, and nearly every surveyed
+shop near a station is inside one.
+
+**Not separated** - hotels are inside horeca.
+
+**Shown, but not named** - 33 shop signs that read as a person's own name show
+the shop's category instead.
+
+**Stations.** The light-metro lines M2, M3 and M4 are drawn. M2 runs on into
+Fontaine-l'Évêque and Anderlues, so its 10 stations there get no ring. M1,
+which the current timetable runs as a bus, M5, under construction, buses and
+SNCB trains are not drawn.
+
+### Liège - the same survey, and every stop of its one tram line
+
+**Two categories, as Charleroi.** Wallonia's LoGIC 2024 survey, done in July
+and August 2024 in Liège.
+
+**Excluded** - the services class (623 units) and 793 vacant units.
+
+**Missing rather than excluded** - every shop inside the city's 20 commercial
+districts, but only shops over 200 m² outside them. The districts cover about
+one ring area in six around the stops, and nearly every surveyed shop near a
+stop is inside one.
+
+**Not separated** - hotels are inside horeca.
+
+**Shown, but not named** - 39 shop signs that read as a person's own name show
+the shop's category instead.
+
+**Stations.** Tram T1, every one of its 23 stops, all in the city. Buses and
+SNCB trains are not drawn.
 
 ### Rome - a register of premises with no names and no closing dates
 

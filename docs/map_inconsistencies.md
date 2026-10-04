@@ -709,6 +709,13 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
 | **Switzerland** | | | | | |
 | Zurich | VBZ trams 2–11, 13–15, 17 and the 2026 construction lines 50 and 51 | S-Bahn; Forchbahn S18; trams 12 (Glattalbahn) and 20 (Limmattalbahn), stubs | OpenStreetMap route relations; gate 3 exact (ZVV) | City (Stadt Zürich) | 15 / 0 |
+| **Belgium** | | | | | |
+| Brussels | STIB Metro 1, 2, 5, 6 + 15 trams | Trams 18, 39 and 44 (never enter the City); buses; SNCB | STIB-MIVB GTFS (Belgian Mobility Company portal); gate 3 exact on the four metro lines (a secondary source) | City (the commune of Brussels) | 195 / 7 |
+| Antwerp | De Lijn trams 1, 2, 4, 6, 7, 8, 10, 11, 12, 24, A3, A9 (premetro included) | Lines 3, 5, 9 and 15 (not in the timetable during works); buses; NMBS | De Lijn GTFS (Belgian Mobility Company portal); gate 3 partial | City (with Borsbeek) | 16 / 0 |
+| Ghent | De Lijn trams T1, T2, T4 | Buses; NMBS | De Lijn GTFS; gate 3 partial | City | 1 / 0 |
+| Charleroi | LETEC light metro M2, M3, M4 (M2 drawn to Anderlues) | M1 (a bus in this timetable); buses; SNCB | LETEC GTFS (Belgian Mobility Company portal) | City (the commune) | 10 / 0 |
+| Liège | LETEC tram T1 | Buses; SNCB | LETEC GTFS; stop count checked against the City's own stations layer | City (the commune) | 0 / 0 |
+| Brussels (Regional) | STIB Metro 1, 2, 5, 6 + all 18 trams | Buses; SNCB | STIB-MIVB GTFS (the Brussels page's copy) | Region less the City (18 communes) | 86 / 72 |
 | **Georgia** | | | | | |
 | Tbilisi | Tbilisi Metro, Akhmeteli-Varketili and Saburtalo Lines | — | OpenStreetMap route relations (no GTFS found); gate 3 exact (23, the operator's count) | City | 0 / 0 |
 
@@ -900,6 +907,13 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 | **Switzerland** | | | | | |
 | Zurich | License register | Stadt Zürich's Gastwirtschaftsbetriebe (CC0), food-and-drink and alcohol-retail licences | Its own licence types (betriebsart) | 926 / 2,173 / — | No Personal services; Retail = shops licensed to sell alcohol only ("Licensed shops") |
+| **Belgium** | | | | | |
+| Brussels | Street survey | hub.brussels's survey of the City's ground-floor units (CC BY 4.0), dated 2025-10-17 | Its own unit types, mapped one by one; several types take the highest bucket | 2,468 / 1,818 / 476 | Upper floors not surveyed |
+| Antwerp | Food hygiene register | FAVV-AFSCA's list of operators (CC BY 4.0), placed on VKBO's points | Place and activity pairs | 1,369 / 2,604 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Ghent | Food hygiene register | As Antwerp | As Antwerp | 486 / 1,110 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Charleroi | Street survey | LoGIC 2024 (Service public de Wallonie, CC BY 4.0) | Four classes only (shops, horeca, services, vacant) | 659 / 330 / — | No Personal services; horeca 53% of FAVV's count (the survey is complete only in the commercial districts); hotels inside horeca |
+| Liège | Street survey | As Charleroi | As Charleroi | 769 / 567 / — | As Charleroi; horeca 68% of FAVV's count |
+| Brussels (Regional) | National register | KBO/BCE Open Data (companies' establishment units), placed on BeST-Address Brussels | NACE-BEL 2025 (any activity code in a bucket, Food over Retail) | 6,364 / 3,637 / — | Personal services off (about half the survey's count); no sole traders |
 | **Georgia** | | | | | |
 | Tbilisi | National register | Geostat's Statistical Business Register (factual address) | NACE Rev. 2 national leaf (45 sales, 47, 56, 96) | 6,699 / 692 / 652 | A business, not a shop: a chain appears once |
 
@@ -1080,6 +1094,13 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | **Switzerland** | | | |
 | Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
+| **Belgium** | | | |
+| Brussels | Survey coordinates (100%) | Upper floors; shops opened since the survey | Empty units; hotels, offices, banks, repairs, gyms and venues by type; every sign shown (owner) |
+| Antwerp | Joined to VKBO by business number (95.8% of food service) | Food only; about 4 in 100 food-service businesses unplaced | Caterers, collective kitchens, market and mobile sales, vending, B&Bs and pharmacies by place type; no names in the source |
+| Ghent | Joined to VKBO (95.0%) | As Antwerp; about 5 in 100 unplaced | As Antwerp |
+| Charleroi | Survey coordinates (100%) | Complete only inside the 18 commercial districts; outside, shops over 200 m2 only | Services and vacant units; 33 signs read as a person's own name show the category (shape test, keys) |
+| Liège | Survey coordinates (100%) | Complete only inside the 20 commercial districts; outside, shops over 200 m2 only | As Charleroi; 39 signs |
+| Brussels (Regional) | Joined by address to BeST-Address (96.8%) | Companies only; registrations, not open doors | Catch-all-only units, crowded addresses, numbered boxes, ten or more activities; Personal services off; privacy verdict pending the owner |
 | **Georgia** | | | |
 | Tbilisi | Register coordinates (80.8%; district-center points left off) | Chains once; new businesses appear late; about one storefront in five unplaced | Individual entrepreneurs shown by category; market stalls; district-center placeholder points |
 
@@ -1271,6 +1292,13 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
 | **Switzerland** | | | | | | |
 | Zurich | Open licences, kept current; last updated 2026-09-28 (fetched 2026-09-30) | B | 0.3 mi | Yes | 92% | Trade name and licence type; address for a person-named trade name |
+| **Belgium** | | | | | | |
+| Brussels | 2025-10-17 survey (fetched 2026-10-04) | B | 0.3 mi | Yes | 94% | Shop sign |
+| Antwerp | Extract of 2026-09-28 (fetched 2026-10-04) | B | 0.3 mi | Yes | 81% | Type of business (no names in the source) |
+| Ghent | Extract of 2026-09-28 (fetched 2026-10-04) | B | 0.3 mi | Yes | 58% | Type of business (no names in the source) |
+| Charleroi | August 2024 survey (file of 2025-04-09, fetched 2026-10-03) | B | 0.3 mi | Yes | 69% | Shop sign; the category for a sign read as a person's own name |
+| Liège | July and August 2024 survey (as Charleroi) | B | 0.3 mi | Yes | 57% | As Charleroi |
+| Brussels (Regional) | KBO snapshot 2026-10-02 (placed by the owner 2026-10-03) | B | 0.3 mi | Yes | 73% | Commercial name, else the company's |
 | **Georgia** | | | | | | |
 | Tbilisi | Live register (fetched 2026-10-02) | Yes (caption) | 0.6 mi | Yes | 61% | Company name in Georgian, or the category for a business registered to a person (8,328) |
 

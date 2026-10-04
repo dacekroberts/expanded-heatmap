@@ -576,6 +576,8 @@ _OSM_RAIL = (
     "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
     "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
     "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
+    # Belgium (2026-10-04): commune boundaries only; the rail is the operators'.
+    "Antwerp", "Ghent", "Charleroi", "Liège",
 )
 # The cities whose rail is not OpenStreetMap's but whose English station names
 # are (the twenty Japanese cities: MLIT N02 lines, OSM `name:en`). Kept apart
@@ -1032,7 +1034,8 @@ _NOTICES = [
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
      "Santos, and those cities' município boundaries, and "
-     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, Hong Kong's MTR and "
+     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, the commune "
+     "boundaries of Antwerp, Ghent, Charleroi and Liège and of the first three's neighbors, Hong Kong's MTR and "
      "Light Rail lines and stations, and its boundary, Seoul's subway lines and stations and "
      "its boundary, the subway, light-rail and Korail lines and stations of Daegu, Busan, "
      "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu and "
@@ -2841,6 +2844,133 @@ _NOTICES = [
      "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
      "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
      False, ("Boston",)),
+    # hub.brussels's inventory on the City's portal: CC BY 4.0, no wording
+    # prescribed. The licence read's conditions: the publisher and its listed
+    # contributors named (hub.brussels and "Google Maps", what that credit
+    # covers is the publisher's unstated point), the changes stated, the
+    # Google link columns dropped, no City logo or "BXL" mark (portal terms
+    # 3.1), no endorsement. The wording is the Belgium build's proposal.
+    Notice(144, "City of Brussels and hub.brussels (Brussels)",
+     "Shops, restaurants and services in Brussels are from “Commerces recensés "
+     "par hub.brussels situés sur le territoire de la Ville de Bruxelles”, "
+     "published by the City of Brussels (Ville de Bruxelles/Data Management) on "
+     "[opendata.brussels.be](https://opendata.brussels.be/explore/dataset/"
+     "commerces-recenses-par-hubbrussels-vbx/) from hub.brussels's survey, with "
+     "hub.brussels and Google Maps as its listed contributors, and used under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: empty units and the types this map leaves out are removed, the "
+     "rest are grouped into three categories, and the Google Maps and Street "
+     "View link columns are removed. Neither the City of Brussels nor "
+     "hub.brussels endorses this project.",
+     False, ("Brussels",)),
+    # FAVV-AFSCA's operator list: CC BY 4.0. Credit with the extract date, no
+    # implied endorsement; linked to the agency's HOME PAGE only (its site
+    # terms ask the webmaster's say before a deep link). The wording is the
+    # Belgium build's, from the Antwerp brief's proposal.
+    Notice(145, "FAVV-AFSCA (Antwerp and Ghent)",
+     "Antwerp's and Ghent's food businesses are from the list of operators of "
+     "the Federal Agency for the Safety of the Food Chain "
+     "([FAVV-AFSCA](https://favv-afsca.be/)), extracted on September 28, 2026, "
+     "and used under the [Creative Commons Attribution 4.0 International "
+     "license](https://creativecommons.org/licenses/by/4.0/). Modified by this "
+     "project: food-service and food-shop activities are selected and placed on "
+     "VKBO's address points. FAVV-AFSCA does not endorse this map.",
+     False, ("Antwerp", "Ghent")),
+    # VKBO (Digitaal Vlaanderen): the Modellicentie voor gratis hergebruik
+    # v1.0 and its PRESCRIBED Dutch credit line, verbatim, with the extract
+    # date (which also meets KBO's art. 2.8 should the federal terms reach the
+    # KBO-derived fields). Only the unit number, type, NIS code, postcode and
+    # point are read.
+    Notice(146, "Digitaal Vlaanderen, VKBO (Antwerp and Ghent)",
+     "The points that place Antwerp's and Ghent's food businesses: “publieke KBO "
+     "gegevens, verrijkt met adressen uit het Vlaamse Adressenregister.” "
+     "(VKBO, Digitaal Vlaanderen), extracted on October 4, 2026, under the "
+     "[Modellicentie voor gratis hergebruik v1.0](https://data.vlaanderen.be/id/"
+     "licentie/modellicentie-gratis-hergebruik/v1.0).",
+     False, ("Antwerp", "Ghent")),
+    # LoGIC 2024 (SPW), the downloaded GeoPackage only (never the MapServer,
+    # whose service terms forbid altering the data): CC BY 4.0 with the SPW
+    # citation VERBATIM from the Metawal record (its geodata.wallonie.be URI
+    # answers 404, so the catalogue record is linked beside it), and a
+    # statement of the changes. No SPW or Wallonia logo; no endorsement.
+    Notice(147, "Service public de Wallonie, LoGIC 2024 (Charleroi and Liège)",
+     "Shops and horeca premises in Charleroi and Liège: Source : Service public "
+     "de Wallonie (SPW) - Offre commerciale en Wallonie (LoGIC 2024) "
+     "(2025-04-09) https://geodata.wallonie.be/id/5f56d784-2fd7-47eb-a62a-991d4741a67d "
+     "(the [catalogue record](https://metawal.wallonie.be/geonetwork/srv/api/records/"
+     "5f56d784-2fd7-47eb-a62a-991d4741a67d)), used under the [Creative Commons "
+     "Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/). "
+     "Modified by this project: the services class and vacant units are left "
+     "out, the points are reprojected and cut to each city, and a shop sign "
+     "that reads as a person's own name is replaced by the shop's category. The "
+     "Service public de Wallonie does not endorse this project.",
+     False, ("Charleroi", "Liège")),
+    # De Lijn's GTFS on the Belgian Mobility Company's portal: CC BY 4.0, De
+    # Lijn the sole licensor (art. 3); art. 4's credit with the DATE OF THE
+    # DATASET UPDATE (feed_version 20261003_20261130_003000: 2026-10-03;
+    # re-date at every refresh). No delijn.be link or content (its website
+    # terms are private use only); no logo.
+    Notice(149, "De Lijn (Antwerp and Ghent)",
+     "Source: De Lijn – Open Data – October 3, 2026. Contains data originally "
+     "published by De Lijn, modified by this project: Antwerp's and Ghent's tram "
+     "lines are extracted from De Lijn's GTFS feed and redrawn, platforms are "
+     "grouped into stations, and two line colors are darkened to read on the "
+     "map. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). De Lijn does not endorse "
+     "this project.",
+     False, ("Antwerp", "Ghent")),
+    # LETEC's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 (TEC's
+    # national-access-point entry says CC0; complying with CC BY satisfies
+    # both). Art. 4's credit with the DATE OF THE DATASET UPDATE (feed_version
+    # 20261002; re-date at every refresh). The operator is credited as "LETEC"
+    # and the lines named M2, M3, M4 and T1, never with "TEC" (owner,
+    # 2026-10-04); no logo.
+    Notice(150, "LETEC (Charleroi and Liège)",
+     "Source: LETEC – Open Data – October 2, 2026. Contains data originally "
+     "published by LETEC, modified by this project: the light-metro lines M2, M3 "
+     "and M4 and the tram line T1 are extracted from LETEC's GTFS feed and "
+     "redrawn, stops are grouped into stations, and Charleroi's line colors are "
+     "this project's own. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). LETEC does not endorse "
+     "this project.",
+     False, ("Charleroi", "Liège")),
+    # STIB-MIVB's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 under
+    # the portal's Terms of Use, art. 4's credit with the DATE OF THE DATASET
+    # UPDATE (feed_version 2_21_20261002_143730: 2026-10-02; re-date at every
+    # refresh) and its recommended modified-data line; the portal named (its
+    # FAQ). Nothing from stib-mivb.be (private-use website terms).
+    Notice(148, "STIB-MIVB (Brussels and Brussels (Regional))",
+     "Source: STIB-MIVB – Open Data – October 2, 2026. Contains data originally "
+     "published by STIB-MIVB, modified by this project: the metro and tram "
+     "routes are extracted from STIB-MIVB's GTFS feed and redrawn, stops are "
+     "grouped into stations and some tram stops thinned, and some line colors "
+     "are adjusted. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). STIB-MIVB does not endorse "
+     "this project.",
+     False, ("Brussels", "Brussels (Regional)")),
+    Notice(151, "KBO/BCE Open Data, FPS Economy (Brussels (Regional))",
+     "Source: Crossroads Bank for Enterprises (KBO/BCE) Open Data, FPS Economy, "
+     "S.M.E.s, Self-employed and Energy, updated October 2, 2026 (extract 501). "
+     "Modified by this project: companies' establishment units only, filtered to "
+     "shops, restaurants and cafés, their addresses matched to BeST-Address "
+     "points, and grouped into categories. The map shows what the register "
+     "records, not a guarantee of any business's status. FPS Economy does not "
+     "endorse this project.",
+     False, ("Brussels (Regional)",)),
+    Notice(152, "FPS BOSA, BeST-Address Brussels (Brussels (Regional))",
+     "Addresses: BeST-Address Brussels, FPS BOSA, from the Brussels-Capital "
+     "Region's address register, under the [Creative Commons Attribution 4.0 "
+     "International license](https://creativecommons.org/licenses/by/4.0/). "
+     "Modified by this project: business addresses were matched to its address "
+     "points. FPS BOSA does not endorse this project.",
+     False, ("Brussels (Regional)",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

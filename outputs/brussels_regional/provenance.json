@@ -1,0 +1,18 @@
+{
+  "kbo": {
+    "file": "KboOpenData_0501_2026_10_03_Full.zip",
+    "bytes": 313432247,
+    "sha256": "3a5719a98c6396948f0dbc73caabec297bc873ccd3aad79a799b54ab2f705b97",
+    "source": "KBO/BCE Open Data, FPS Economy (kbopub.economie.fgov.be), full file of 2026-10-03, fetched by the owner under their own free account",
+    "retrieved": "moved from the main checkout root by staging, 2026-10-03"
+  },
+  "best": {
+    "file": "openaddress-bebru.zip",
+    "bytes": 17941521,
+    "sha256": "f558a29d0e26e38ee30305a6b3d442a4d85814f2703462df1d76e4a76df24d76",
+    "source": "https://opendata.bosa.be/download/best/openaddress-bebru.zip",
+    "retrieved": "2026-10-03"
+  },
+  "stib_gtfs_and_communes": "pipeline/brussels/fetch_sources.py (the Brussels page's)",
+  "checked_utc": "2026-10-04T08:38:48+00:00"
+}

@@ -100,6 +100,9 @@ OSM_RAIL_BY_CITY = {
     "Prague": ("Prague's city boundary", False),
     "Amsterdam": ("Amsterdam's city boundary", False),
     "Rotterdam": ("Rotterdam's city boundary", False),
+    **{c: (f"{c}'s commune boundary, and its neighbors', which name the stations "
+           "outside it", False) for c in ("Antwerp", "Ghent", "Charleroi")},
+    "Liège": ("Liège's commune boundary", False),
     "Hong Kong": ("Hong Kong's MTR and Light Rail lines and stations, and its boundary", True),
     "Seoul": ("Seoul's subway lines and stations and its boundary", True),
     "Taichung": ("the route of Taichung's Green Line", True),

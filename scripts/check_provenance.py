@@ -253,6 +253,10 @@ SLUG_OVERRIDES = {
     "Göteborg": "goteborg",
     # Seattle (Regional): eleven cities on one page (2026-10-02).
     "Seattle (Regional)": "seattle",
+    # Belgium (2026-10-04): an accent dropped; the Region's 18 communes beyond
+    # the City of Brussels as their own page beside the City's "Brussels".
+    "Liège": "liege",
+    "Brussels (Regional)": "brussels_regional",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are

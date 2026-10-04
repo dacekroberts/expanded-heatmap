@@ -1,0 +1,46 @@
+{
+  "written_utc": "2026-10-04T07:47:28+00:00",
+  "favv": {
+    "url": "https://www.static.favv.be/bo-documents/inter_actieve_actoren_EN.csv",
+    "extract_date": "2026-09-28",
+    "fetched": "2026-10-04T03:46:44Z",
+    "last_modified": "Mon, 28 Sep 2026 05:40:14 GMT",
+    "sha256": "0814582efcc0abd4ccd4d07e8920d62c16258e13c21e93cf21a16c021ac670fa"
+  },
+  "vkbo": {
+    "url": "https://geo.api.vlaanderen.be/VKBO/wfs",
+    "typeNames": "VKBO:Vkbo",
+    "propertyName": [
+      "Ondernemingsnr",
+      "Type_onderneming",
+      "KBO_NISCODE",
+      "AR_postcode",
+      "UIDN",
+      "OIDN",
+      "SHAPE"
+    ],
+    "fetched_utc": "2026-10-04T07:47:28+00:00",
+    "rows": 75117,
+    "rows_per_nis": {
+      "44021": 75117
+    },
+    "sha256": "a4ae4eb060563aca497ed846a811f9992d164ed74f5495df76b1ca948569d223"
+  },
+  "gtfs": {
+    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/delijn/static",
+    "fetched": "2026-10-03",
+    "feed_start_date": "20261003",
+    "feed_end_date": "20261130",
+    "feed_version": "20261003_20261130_003000",
+    "sha256": "4b43c28120063a6ceb7a9de8bd0f913cfb58ad2d6a6b03b0cfab34d4e2159921"
+  },
+  "osm_communes": {
+    "host": "overpass-api.de",
+    "bbox": [
+      50.97,
+      3.6,
+      51.13,
+      3.86
+    ]
+  }
+}

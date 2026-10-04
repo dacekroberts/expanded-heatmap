@@ -53,15 +53,20 @@ the pointers. **Delete a section when its item is done.**
 - After a background subagent reports, stop any process it left (an orphaned
   grep held 4.7 GB on 2026-09-30).
 
-## Where things stand (2026-10-03)
+## Where things stand (2026-10-04, saved at the weekly limit)
 
-- **On master, `docs/city_master_list.md`: 158 built across 25 countries;
-  12 candidates (A 6 · B 5 · D 1); 23 restricted (Band R, counted apart
-  from candidates); 122 discards.** Japan wave 2 and the four extensions
-  LANDED at review time on 2026-10-03; both kits are deleted. Published
-  artifact (version 8): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **The 12 candidates come from the coverage sweep** (its section below),
-  screened, licence-read and banded by the owner on 2026-10-03.
+- **On master, `docs/city_master_list.md`: 158 built; 25 candidates (A 9 ·
+  B 7 · C 6 · D 3); 29 restricted; 155 discards.** The artifact is at
+  version 9 (https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn), with the paused probes listed.
+- **Three build sessions are out**, each landing at review time: "Korean
+  build session" (Daejeon 190, Gwangju 191, Gimhae 192;
+  `docs/handoff_korea_sweep_2026-10-03.md`), "Mendoza Tacoma Liverpool"
+  (193-195, notices 141-143 and 153; `docs/handoff_new_cities_2026-10-03.md`)
+  and "Belgium build session" (196-201, notices 144-152;
+  `docs/handoff_belgium_2026-10-03.md`). Next free page 202, notice 154.
+  Every owner call for them is in `docs/decisions_drafts/staging.md`.
+- **Waiting on the owner:** the DSVSA browser fetches for Timișoara, Iași
+  and Cluj-Napoca (Band D, Bucharest's route).
 - A build session may ask staging to correct a brief or re-run its checks:
   correct a brief when a check fails on a real claim (never relax the check),
   re-run on a RETRY or a 429, log each correction in the drafts file.
@@ -92,10 +97,26 @@ the pointers. **Delete a section when its item is done.**
 
 ## NEXT - pick up here
 
-1. **Briefs for the eleven A and B cities** (`docs/build_briefs/`, each with
-   a checks block and its notices, the downstream card-face line), then a
-   kit when the owner releases a build. Every fact is in the screens and the
-   drafts file's licence-read entry.
+1. **The probe wave (2026-10-04), PAUSED by the owner so the Belgium build
+   can finish.** Reports in the staging scratchpad's `probe2\` folder
+   (readable by path while the machine keeps it). Banded on master:
+   `korea.md`, `group2_europe.md`. Complete, owner calls pending (summarised
+   in `docs/decisions_drafts/staging.md`, 2026-10-04 entries):
+   `group2_world.md`, `pakistan_bangladesh.md`, `bolivia_puerto_rico.md`,
+   and Geneva's licence read (indemnity and ge.ch-terms calls). **Partial,
+   resume from each report's next steps:** `mauritius_armenia.md` (Armenia's
+   Yerevan permits, ArmStat, the tax service) and `one_city_countries.md`
+   (Gaziantep's shopping feed and licence; the unreached Algerian, Turkish,
+   Venezuelan, Egyptian and Qatari hosts, a Globalping check first). Then
+   briefs for Gimpo, Siheung and Geneva, and kits when the owner releases
+   builds. **The owner set the resume for 12:01pm on 2026-10-04** (after the
+   weekly reset) and added two regions to it: **Southeast Asia** (Bangkok's
+   satellites, Selangor's cities, Palembang, Bekasi, Depok, Bogor, Metro
+   Manila's other cities; the capitals already have verdicts) and **greater
+   Oceania** (Parramatta, Newcastle NSW; New Zealand's unverified "licensing
+   is not municipal" ruling re-checked; any Pacific urban rail). Also fetch
+   the approved Macau and ARCSA downloads, and read Thessaloniki's and
+   Gaziantep's licences.
 2. **Watch-item dates** from `docs/recheck_calendar.md`:
    - Tainan, 18 Oct;
    - Salvador and Teresina, after 25 Oct;
@@ -115,7 +136,7 @@ the pointers. **Delete a section when its item is done.**
    - Re-probes of Band C open gaps (`reprobe-city`) and the Band R cities
      whose blockers have a date.
 
-## Coverage sweep (2026-10-03): first group banded
+## Coverage sweep (2026-10-03): first group banded (now building)
 
 Sweep reports in the staging scratchpad,
 `...\54e23bab-5cd9-4850-8946-900a2a7b665b\scratchpad\sweep\`, screens in
