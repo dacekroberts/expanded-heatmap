@@ -21,6 +21,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **Waiting for review time on worktree-cleanup:** Namyangju's page
+  states the Gyeongchun Line's wait (owner, 2026-10-04; commit 7aa2b6ae).
+
 - [ ] **Desktop leftovers from the touch fix (for the owner, 2026-10-03):**
   on desktop, stations sit under lines, so hovering a station's centre
   shows the line (Paris and Tokyo 0 of 6); and a click on a spiderfied dot
