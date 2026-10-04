@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**498 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**499 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -72,6 +72,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [São Paulo and Osaka cards refreshed from master 94eebc26 (owner)](#2026-10-03---são-paulo-and-osaka-cards-refreshed-from-master-94eebc26-owner)
 - [Visuals rebuilt for 158 cities at master 37eec480: 143 cards, every count updated](#2026-10-03---visuals-rebuilt-for-158-cities-at-master-37eec480-143-cards-every-count-updated)
 - [Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun](#2026-10-03---vancouvers-130-132-on-the-card-face-private-pages-moved-to-analytics-37eec480-rerun)
+- [Region captions read "in the United States" (owner)](#2026-10-03---region-captions-read-in-the-united-states-owner)
 
 **2026-10-02**
 
@@ -20274,3 +20275,14 @@ until the owner rules):**
   apart from their commit, so only the stamp moved. Across all cities, the
   only verdict that moved is Vancouver's H1 (Supported -> Loosely
   supported), and Vancouver is not a pilot.
+
+### 2026-10-03 - Region captions read "in the United States" (owner)
+
+- **Found by the review-time deploy check:** "Showing 19 cities in United
+  States." and "Showing 9 cities in United Kingdom." had no article, while
+  Europe's caption named "the United Kingdom". Pre-existing on the live
+  site; the region name was used bare.
+- **The owner chose adding "the"**, by the rule the labeled-too list
+  already used (`_TAKES_THE` in `app/cities.py`): the United States, its
+  West and East halves, the United Kingdom and the Seoul Capital Area. The
+  menu labels are unchanged.

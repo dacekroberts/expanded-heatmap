@@ -4558,10 +4558,14 @@ def region_caption(region):
     """
     n = len(cities_in(region))
     # East Asia (Hong Kong, 2026-09-24) was the first one-city region.
-    text = f"Showing {n} {'city' if n == 1 else 'cities'} in {region}"
+    def named(r):
+        return f"the {r}" if r in _TAKES_THE else r
+
+    # "in the United States", as in running text (owner, 2026-10-03).
+    text = f"Showing {n} {'city' if n == 1 else 'cities'} in {named(region)}"
     # A view that labels another region's anchors names those regions (owner,
     # 2026-10-03), so the count stays the region's own, as the menu states it.
-    also = [f"the {r}" if r in _TAKES_THE else r for r in REGION_LABELS_ALSO.get(region, ())]
+    also = [named(r) for r in REGION_LABELS_ALSO.get(region, ())]
     if not also:
         return text + "."
     named = also[0] if len(also) == 1 else ", ".join(also[:-1]) + " and " + also[-1]
