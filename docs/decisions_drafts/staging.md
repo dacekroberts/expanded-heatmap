@@ -55,7 +55,9 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   download beyond the two Belgian files had been approved.
 - **Where it sits:** the staging scratchpad only, never `data/` or the
   repository. The screen's Mendoza counts (8,309 businesses, all active as
-  of June 2025) come from it. Raised with the owner the same evening.
+  of June 2025) come from it. Raised with the owner the same evening, and
+  **deleted on the owner's yes** once the approved JSON had reproduced the
+  count (8,309 distinct `comercio_id`).
 - **The lesson:** a Range request is not a header read; a server may ignore
   it. Read the schema from the catalogue's metadata or a records API, or
   stop the transfer by byte count in the script.
