@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**504 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**505 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -78,6 +78,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The stations-left-out tables sort by line or reason (owner)](#2026-10-03---the-stations-left-out-tables-sort-by-line-or-reason-owner)
 - [The OpenStreetMap rail notice: each city page shows its own line, Required notices keeps the full list (owner)](#2026-10-03---the-openstreetmap-rail-notice-each-city-page-shows-its-own-line-required-notices-keeps-the-full-list-owner)
 - [The live audit after the review-time landings, and the internal prose it found (owner)](#2026-10-03---the-live-audit-after-the-review-time-landings-and-the-internal-prose-it-found-owner)
+- [Status headings on About the Data reworded (owner)](#2026-10-03---status-headings-on-about-the-data-reworded-owner)
 
 **2026-10-02**
 
@@ -20447,3 +20448,16 @@ until the owner rules):**
   tables, left as provenance; rendered locally, the United States view
   shows no Step 0 notes, no API-account section, no ledger and 0 owner tags,
   and the licence judgment calls still show.
+
+### 2026-10-03 - Status headings on About the Data reworded (owner)
+
+- **Approved as proposed:** build status leaves the headings ("(BUILT ...)",
+  "(built ...)", "DECIDED ... -"), read and checked dates stay (they date the
+  terms), verdict capitals go to lowercase. Sixteen headings across brazil,
+  south-korea, spain, taiwan, sweden, switzerland and data_sources.md; for
+  example "✅ DECIDED 2026-09-22 — Barcelona is published on a DISCLOSED
+  POSITION" reads "Barcelona is published on a disclosed position", and
+  "Hong Kong's indemnity — ACCEPTED 2026-09-22, ..." reads "accepted". No
+  file, skill or doc outside the decision log quoted an old heading; the
+  rendered Spain, South Korea and Taiwan views show the new ones. Capitals
+  inside table cells ("**BUILT 2026-09-21**") were not part of the ruling.

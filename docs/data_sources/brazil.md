@@ -58,7 +58,7 @@ that record.<!-- /internal -->
 |---|---|---|
 | **Brazil — IBGE CNEFE 2022** (**built 2026-09-24**: nine cities, one national module) | **Free use by federal law** — Decree 8.777/2016 art. 4 and Lei 14.129/2021 art. 29 — subject to LGPD principles. **No IBGE license document exists.** Read 2026-09-23; four restrictive readings recorded in the Brazil section below | **Required** (the decree's definition of open data: *"limitando-se a creditar a autoria ou a fonte"*). No wording prescribed; use `Fonte: IBGE, Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.` |
 
-### 🇧🇷 Brazil — IBGE's CNEFE 2022 (built 2026-09-24): the grant is a LAW, not a document
+### 🇧🇷 Brazil — IBGE's CNEFE 2022: the grant is a law, not a document
 
 **Source:** *Cadastro Nacional de Endereços para Fins Estatísticos*, Censo
 Demográfico 2022 — one CSV per município, keyless, at

@@ -189,7 +189,7 @@ and only those inside the city).
 
 ### Explicit and permissive — confirmed
 
-#### Palma — the GOIB catalogue's register and Catastro's addresses, read 2026-09-29 (**BUILT 2026-09-30**)
+#### Palma — the GOIB catalogue's register and Catastro's addresses, read 2026-09-29
 
 **PERMITTED WITH CONDITIONS, the owner's three calls** (DECISIONS 2026-09-29).
 The register's CKAN record declares `license_id = "cc-by"`; GOIB's *Política i
@@ -207,7 +207,7 @@ of the information"; the permissive reading of its 2016 PDF is the owner's (C).
 Both are displayed in notice **74 (Palma)**, with the join stated and
 Catastro's access date. The address layer itself is never published.
 
-#### Madrid — `censo de locales`, read 2026-09-22 (**BUILT 2026-09-22**)
+#### Madrid — `censo de locales`, read 2026-09-22
 
 **PERMITTED WITH CONDITIONS.** Two documents apply and both were read.
 
@@ -270,7 +270,7 @@ regime of **article 11 of Ley 37/2007** on public-sector information reuse.
 Edmonton sense: the census carries premises, not people. `rotulo` is a shop
 sign. Obligation 6 above makes the project's own residence check contractual.
 
-#### CRTM (Consorcio Regional de Transportes de Madrid) — read 2026-09-22 (**BUILT 2026-09-22**)
+#### CRTM (Consorcio Regional de Transportes de Madrid) — read 2026-09-22
 
 **Source:** `http://www.crtm.es/licencia-de-uso`, the *Licencia de datos
 estáticos del CRTM*, which `mdb-794` (Metro de Madrid GTFS) declares. Read in
@@ -330,7 +330,7 @@ raw. Both are in addition to the Ayuntamiento de Madrid wording already
 recorded above for the business leg — **Madrid owes two separate attributions
 from two separate licences.**
 
-#### Barcelona — Open Data BCN, read 2026-09-22 **from the Internet Archive** (**BUILT 2026-09-22**)
+#### Barcelona — Open Data BCN, read 2026-09-22 **from the Internet Archive**
 
 **How it was read, and the limit on that.** `opendata-ajuntament.barcelona.cat`
 serves **hCaptcha** on `/en/avis-legal`, `/ca/avis-legal` and
@@ -345,7 +345,7 @@ reserve the right to change: *"Barcelona City Council may at all times add to,
 remove or amend the data sets published as well as these Terms of use … any
 change that is made shall take effect as soon as it is published."*
 
-### ✅ DECIDED 2026-09-22 — Barcelona is published on a DISCLOSED POSITION
+### Barcelona is published on a disclosed position
 
 A human was to confirm the live terms page before publishing. That was
 attempted on 2026-09-22 and **the page returned hCaptcha** (*"PLEASE PROVE
