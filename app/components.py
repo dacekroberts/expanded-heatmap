@@ -2933,12 +2933,19 @@ def render_site_notices(city=None, show_links: bool = True,
     link to itself.
     """
     st.divider()
+    # The Required notices link sits in this row with the reference pages
+    # (owner, 2026-10-03), above the notices; on a page without the row it
+    # stands alone in the same place.
     if show_links:
         with st.container(horizontal=True, gap="medium",
                           vertical_alignment="center"):
             st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
             st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
             st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
+            if not lists_all:
+                st.page_link(NOTICES_PAGE, label="All required source notices")
+    elif not lists_all:
+        st.page_link(NOTICES_PAGE, label="All required source notices")
     # The public repository, linked from every page. IDFM's Licence Mobilités
     # Art. 5.8 (Paris) and ODbL 4.6 (Tisseo, TaM, TAG, LiA, Angers, STAR) are
     # each met by a public repository carrying the pipeline and the derived
@@ -2976,7 +2983,6 @@ def render_site_notices(city=None, show_links: bool = True,
         with st.container(key="site-notices"):
             st.caption(_notice_text(
                 [n for n in every_page_notices() if n not in own]))
-        st.page_link(NOTICES_PAGE, label="All required source notices")
     st.caption(_UNSETTLED_TERMS)
 
 
