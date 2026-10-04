@@ -291,6 +291,15 @@ labels stable (`<city> step 2`, `drift <city>`, `drift japan --jobs 2`) so the
 lookup finds them. A multi-city run is its own label: on 2026-10-03 two
 Japanese drift runs of 20 and 30 cities measured 4.54 and 4.71 GB, far above
 any single city's step, so a batch is never declared from one city's figure.
+
+**The machine's RAM speed changed on 2026-10-03 (owner):** D.O.C.P. enabled
+in the BIOS, so the memory runs at 3200 MT/s instead of 2100. Capacity is
+unchanged (15.9 GB), so every measured peak and the gate's arithmetic still
+hold. Speed is the change: a job may finish sooner than its last recorded
+duration. A crash with memory available, or a `MemoryError` or corrupted
+output with no cap reached, after this date is a reason to suspect the
+overclock before the script, and to tell the owner.
+
 ## Subagents are not sessions, and the split is not the same one
 
 A **session** is a long-lived role with owned paths, its own worktree and its
