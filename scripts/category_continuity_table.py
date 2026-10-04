@@ -2146,6 +2146,35 @@ COLUMNS["wallonia_logic"] = {
 }
 
 
+# Antwerp and Ghent: FAVV-AFSCA's food operator list, classified per
+# establishment on its place/activity pairs (ROW_KEY: "PL92/AC66;PL83/AC66").
+FAVV_FOOD = "a food-safety register: food businesses only, no such place type"
+COLUMNS["belgium_favv"] = {
+    **{rid: absent(FAVV_FOOD) for rid in (
+        "funeral", "personal_catchall", "adult_hostess", "sex_shop", "massage_commercial",
+        "massage_regulated", "car_dealer", "petrol_station", "vehicle_repair", "gambling",
+        "pawnbroker", "vet", "parking", "repair", "recreation", "optician")},
+    "no_counter_food": [
+        loc("PL83/AC66", "caterers (traiteur; owner, 2026-10-03)"),
+        loc("PL6/AC66", "other collective kitchens"), loc("PL28/AC66", "central kitchens"),
+        loc("PL30/AC66;PL92/AC66", "a school's kitchen also typed restaurant (R1, provisional)"),
+        loc("PL58/AC66;PL12/AC66", "a rest home's cafe also typed bar (R1, provisional)")],
+    "nightclub": absent("no place type of its own: a club registers as a débit de boisson (a bar), "
+                        "which is kept"),
+    "nonstore": [loc("PL57/AC96", "vending-machine shop"),
+                 loc("PL39/AC30", "vending-machine operator")],
+    "lodging": [loc("PL23/AC66", "bed and breakfast"),
+                loc("PL23/AC66;PL92/AC66", "a bed and breakfast also typed restaurant (Den Haag's "
+                                           "hotel-restaurant; provisional)")],
+    "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register",
+                       ignore=("pharmacy (PL93",)),
+    "pharmacy_food_register": [loc("PL93/AC96;PL29/AC96", "a pharmacy also registered as a food "
+                                                          "retailer")],
+    "mobile_unit": [loc("PL88/AC94", "food vehicles"),
+                    loc("PL10/AC94", "a bakery's ambulant sales only")],
+}
+
+
 # PENDING, BY STATE. The owner ruled on the 2026-09-29 list: every pending row
 # is an approved fix queued for one batch (docs/handoff_category_fixes_2026-09-29.md),
 # except the cells below, which still wait on the owner. A queued row turns stale
@@ -2224,6 +2253,7 @@ ROW_KEY = {
     "hong_kong_fehd": "licence_code",
     "anzsic_fes": "ClassificationCode",
     "georgia_nace": "activity_code",
+    "belgium_favv": "favv_pairs",
 }
 
 # Brazil's step 2 classifies the free-text description; classify() reads back the stored bucket.

@@ -1,11 +1,22 @@
 """Ghent-specific settings, scoped to one city per this project's
 per-city folder architecture (see docs/project_context.md, "Architecture").
 
-Scaffolded by scripts/scaffold_city.py. Every TODO is a value only this city's
-real data can supply (see the add-city skill); none should ship.
+Scaffolded by scripts/scaffold_city.py.
+
+GHENT, Antwerp's twin: FAVV-AFSCA's operator list placed on Flanders' VKBO
+points (`pipeline/countries/belgium_favv.py`) and De Lijn's own GTFS
+(`pipeline/countries/belgium_delijn.py`), on Göteborg's page template. The
+brief is `docs/build_briefs/ghent.md`.
 """
 
 from pathlib import Path
+
+SLUG = "ghent"
+
+# The macro map's two keys and the scope (the brief's checks compare these).
+MAP_MODE = "tram"
+MAP_COVERAGE = "one_bucket"
+SCOPE = "city"
 
 # --- Paths ---------------------------------------------------------------
 
@@ -15,21 +26,29 @@ DATA_PROCESSED = ROOT / "data" / "ghent" / "processed"
 OUTPUTS = ROOT / "outputs" / "ghent"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
-# Stations outside the city, with where each is (a citable scoping record, as
-# in the other cities).
+# Stops outside the city (drawn with their line, not ringed) with the commune
+# each lies in.
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
+PROVENANCE_JSON = OUTPUTS / "provenance.json"
 
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
+TRAM_STOP_TIMES_CSV = DATA_PROCESSED / "tram_stop_times.csv"
+LINE_SHAPES_ZIP = DATA_PROCESSED / "tram_shapes.zip"
+LINE_SHAPES_JSON = DATA_PROCESSED / "line_shapes.json"
 
-# Raw inputs. Record the exact download command for each (all public):
-# TODO: gtfs.zip - the agency's GTFS feed URL.
-# TODO: city_boundary.geojson - a real GIS boundary layer for the city.
-# TODO: the business file - endpoint, server-side filter, and snapshot date if
-#       the source is a term history (Chicago's AS_OF_DATE is the model).
-GTFS_ZIP = DATA_RAW / "gtfs.zip"
-BUSINESSES_RAW_CSV = DATA_RAW / "businesses.csv"  # TODO: real file name
-CITY_BOUNDARY_GEOJSON = DATA_RAW / "city_boundary.geojson"
+# --- Raw inputs (fetch_sources.py; no step fetches) ------------------------------
+
+# Ghent is NIS 44021, 157.6 km2 as OSM draws it; 12 communes in the box.
+COMMUNES_BBOX = (50.97, 3.60, 51.13, 3.86)       # south, west, north, east
+OSM_COMMUNES_JSON = DATA_RAW / "osm_communes.json"
+OWN_NIS = "44021"
+COMMUNE_AREA_KM2 = (150.0, 165.0)
+
+# VKBO, paged for NIS 44021 (no merger touched Ghent in 2025).
+VKBO_NIS = ("44021",)
+VKBO_CSV = DATA_RAW / "vkbo.csv"
+VKBO_META = DATA_RAW / "vkbo.csv.json"
 
 # --- Coordinate reference systems -----------------------------------------
 
@@ -40,37 +59,72 @@ CRS_GEOGRAPHIC = "EPSG:4326"
 CRS_PROJECTED = "EPSG:32631"
 
 # --- Ring geometry ---------------------------------------------------------
-# The same edges are used for every city (a category-definition choice, not
-# a city-specific measurement).
 METERS_PER_MILE = 1609.344
-RING_EDGES_MILES = [0.0, 0.1, 0.2, 0.3, 0.6]
+# HALVED, on the in-city stations' median nearest-neighbour gap (the owner's
+# spacing rule, docs/ring_rules.md). Step 1 stops outside MEDIAN_GAP_BOUNDS_M.
+RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
-RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
+RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
+MEDIAN_GAP_BOUNDS_M = (230.0, 320.0)
 
-# --- Station scope ----------------------------------------------------------
+# --- Station scope: De Lijn's Ghent trams, every stop in the city ----------------
 
-# TODO: which lines count and why (one agency's rail system per city; note what
-# is left out), the feed's own route_ids, and the real public line names.
-# Check the rail system's shape before assuming "keep every station" (see the
-# add-city skill, Step 4).
-ROUTE_IDS = []
-LINE_NAMES = {}  # route_id -> real public name, e.g. {"801": "A Line"}
+# T1, T2 and T4: there is no T3 tram in the feed (the brief).
+LINES = ("T1", "T2", "T4")
+ABSENT_LINES = ("T3",)
+# The feed's short names, as the brief's page text writes them ("T1, T2 and
+# T4"). Not checked against De Lijn's own line pages (their site is not used:
+# private use only).
+LINE_NAMES = {ln: ln for ln in LINES}
+STUB_MIN_SHARE = 0.5
+SPACING_MIN_M = 150.0
+
+# Platform names merged into one station (owner, 2026-10-03), as Antwerp.
+PLATFORM_MARKER = r"(?i)(\s+-)?\s+(metro\s+)?perron\s+\S+$|\s+metro$"
+PLATFORM_WORDS = r"(?i)\bperron\b|\bmetro\b"
+OWN_PREFIX = "Gent "
+
+NAME_ALIASES = {}
+CLOSED_FOR_WORKS = {}
+
+# GATE 3, as Antwerp: De Lijn's line pages are script-rendered.
+OPERATOR_STATION_COUNTS = None
+OPERATOR_COUNTS_GAP = (
+    "De Lijn's line pages (delijn.be) are script-rendered: their static HTML carries no "
+    "stop list (the Antwerp brief, 2026-10-03). The feed is De Lijn's own data but is "
+    "this build's input, so it is not an independent count. Not yet read in a browser "
+    "(2026-10-04); the lead reads them later, for the count only, never republished.")
+OPERATOR_COUNTS_SOURCE = None
+
+# De Lijn's route_color per line (routes.txt, 2026-10-04); step 1 stops if the
+# feed moves one. LINE_COLOURS is what is drawn (step 3).
+FEED_COLOURS = {"T1": "#FFCC00", "T2": "#15882E", "T4": "#E40521"}
+# ONE MOVED, on the brief's check (T1's yellow on the light theme, Lille's
+# darkening if it fails): #FFCC00 reads 1.51:1 on the light page. Darkened by
+# the smallest HSL lightness step that reads 3:1 there (Sheffield's measure):
+# #B28F00, light 3.08:1, dark 6.08:1; CIE76 30.7 from the feed's yellow, 70.5
+# from the nearest pin colour (Personal services, which the render measures;
+# 87.7 Food service), 58.9 from T2. T2 (#15882E: 25.9 from Personal services,
+# 110.8 from the two pin colours this map uses, 4.57:1 light, 4.10:1 dark) and
+# T4 (#E40521: 43.5 from Food service, 4.84:1, 3.87:1) keep De Lijn's colours. Antwerp's A3 is the same yellow and is NOT
+# moved (its brief names only line 11): an owner call, measured 2026-10-04.
+LINE_COLOURS = {**FEED_COLOURS, "T1": "#B28F00"}
+LINE_COLOUR_SHIFTS = {"T1": ("#FFCC00", "1.51:1 on the light page; darkened to 3:1, CIE76 30.7")}
 
 # --- Business filtering ------------------------------------------------
 
-# TODO: how in-city rows are identified: the dataset's own city field (check
-# what it really holds) or an authoritative district field.
-CITY_KEEP = "GHENT"
-
 TAXONOMY_SYSTEM = "belgium_favv"
-# Already the taxonomy's VALUE_COLUMN, so step 2's rename is a no-op.
-RAW_CLASSIFICATION_COLUMN = "PAP PLA code"
 
-# Sanity bounds for the supplied lat/lng. TODO: tighten to the city's real
-# extent once the boundary is known (this box is a wide starting guess).
+# FAVV is selected by postcode; every postcode's `GEM Nom` reads Ghent or one
+# of its sections (the brief).
+POSTCODES = ("9000", "9030", "9031", "9032", "9040", "9041", "9042", "9050", "9051", "9052")
+BORSBEEK_POSTCODE = None
+
+# Sanity bounds (VKBO's real points X 94,726-115,970, Y 186,462-208,371
+# Lambert 72) with a margin. The commune polygon does the filtering.
 GHENT_BBOX = {
-    "lat_min": 50.65,
-    "lat_max": 51.45,
-    "lon_min": 3.22,
-    "lon_max": 4.22,
+    "lat_min": 50.95,
+    "lat_max": 51.20,
+    "lon_min": 3.55,
+    "lon_max": 3.90,
 }
