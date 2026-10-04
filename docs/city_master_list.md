@@ -297,6 +297,72 @@ Band R row.
 | **Noida / Greater Noida** 🇮🇳 | The NMRC Aqua Line, 21 stations (the operator's page), plus Delhi Metro stations. No municipal corporation: the Noida Authority's host times out on reading and the Greater Noida Authority's on connecting, so the city's own host never answered | A read of either authority's site, or a public copy of a trade or shop register |
 | **Stuttgart** 🇩🇪 | Stadtbahn and U-Bahn (ASSERTED; stations not counted). `opendata.stuttgart.de` answered 502 on its API and its HTML, three tries, so the city's own catalogue never answered; GovData's harvest of 394 Stuttgart datasets shows statistics only; IHK Region Stuttgart read (lookup databases, no premises list) | A read of `opendata.stuttgart.de` once it answers (owner, 2026-10-04) |
 
+## Pre-verdicts — precedent, not probed (not counted; owner, 2026-10-04)
+
+**Approved by the owner on 2026-10-04** with the remainder count: the rail
+cities the 2026-10-03 coverage sweep found with no verdict, re-matched
+against this list on 2026-10-04. **These rows are pointers, not verdicts.** A
+discard needs its own host asked and two evidence methods (rule 5), and none
+of these has that yet; a batch probe turns them into discard or Band R rows
+when builds resume. Until then they count in no band and in no discard total.
+
+**Follow a sibling into Band R (12 cities).** The sibling's block applies to
+the same host or the same national register.
+
+| Cities | Sibling and its block |
+|---|---|
+| Espoo, Vantaa, Tampere 🇫🇮 | Helsinki: geo-blocked |
+| Almada, Seixal, Vila Nova de Gaia, Matosinhos, Maia 🇵🇹 | Lisbon: DGAE's bulk access is for institutions only |
+| Pavlodar, Oskemen, Temirtau 🇰🇿 | Almaty and Astana: the national business register sits behind a sign-in |
+| Samarkand 🇺🇿 | Tashkent: every host refuses this machine or needs a login or CAPTCHA |
+
+**Pre-discards on a sibling's measured negative (27 cities).**
+
+| Cities | Precedent on this list |
+|---|---|
+| Dessau-Roßlau, Halberstadt, Strausberg, Woltersdorf, Schöneiche, Herne, Neuss, Kehl, Weil am Rhein 🇩🇪 | About 40 German discards on absence (Bochum and Düsseldorf among them); IHK Berlin is the only chamber publishing premises data |
+| Baden bei Wien 🇦🇹 | Vienna, Graz, Linz, Innsbruck and Gmunden: GISA strips addresses, no city register |
+| Amstelveen, Zoetermeer, Nieuwegein 🇳🇱 | Rijswijk and Delft: no municipal food source |
+| Bello, Itagüí, Envigado, Sabaneta, La Estrella 🇨🇴 | Medellín: RUES has no location column, the chamber publishes crosstabs, the city's hub is credential-walled |
+| Santo Domingo Este, Santo Domingo Norte 🇩🇴 | Santo Domingo: the national portal and MICM's list enumerated, no premises list |
+| San Miguelito 🇵🇦 | Panama City: the national portal enumerated, MICI and MINSA hold no datasets |
+| Faridabad 🇮🇳 | Gurugram: Haryana's municipal portal read, no licence list |
+| Howrah, Bidhannagar 🇮🇳 | Kolkata: West Bengal's per-licence lookups only |
+| Giza, New Cairo 🇪🇬 | Cairo (no register at any level) and Alexandria |
+| Abuja 🇳🇬 | Lagos: the national portal refuses connections; CAC is a company register |
+
+**Pre-discards on rail (20 cities).** The frequency rows rest on Cincinnati's
+precedent (every 20 to 25 minutes fails) and need one timetable check each
+before a discard: the Indore lesson, never a frequency from memory.
+
+| Cities | Reason |
+|---|---|
+| Toluca, Metepec, Lerma, Zinacantepec 🇲🇽 | Commuter rail: El Insurgente, kept off Mexico City (Regional) for commuter spacing (owner, 2026-10-04); spacing and timetable to check. INEGI's DENUE would cover them |
+| Little Rock, North Little Rock 🇺🇸 | Frequency (Metro Streetcar) |
+| Trenton 🇺🇸 | Frequency (River Line; Camden screened with no row) |
+| Oceanside, Escondido 🇺🇸 | Frequency (Sprinter; already named as excluded from San Diego) |
+| Vicente López, San Isidro, Tigre 🇦🇷 | Frequency (Tren de la Costa); Buenos Aires's survey covers the Ciudad only |
+| Cádiz, Chiclana, San Fernando 🇪🇸 | Frequency (Trambahía) |
+| Reșița, Botoșani 🇷🇴 | Frequency (single-line trams) |
+| Oranjestad 🇦🇼 | Out of mode: a tourist streetcar |
+| Mecca 🇸🇦 | Out of mode: the metro runs only during the Hajj |
+| Dakar 🇸🇳 | Out of mode: the TER is commuter rail |
+
+**Pre-discards in Japan (14 cities).** Tottori, Yamagata, Morioka, Yao, Kure,
+Mito, Takatsuki, Kōfu and Chigasaki (too few stations) and Matsumoto (35.4%
+placed) and Miyazaki (36.8%), all from staging's Japan scoping of 2026-10-02;
+Wakō, Hiratsuka and Atsugi with one or two station groups (Uiwang's and
+Hwaseong's precedent). Station-group counts alone are no precedent:
+Takarazuka was built on 11.
+
+**Unscreened, ranked (about 93 cities).** Screen in this order when builds resume:
+1. **The Greater Copenhagen Light Rail** (about 10 municipalities, Lyngby-Taarbæk to Ishøj): Copenhagen's and Aarhus's national CVR and DAR modules; frequency and the page's shape are the questions.
+2. **Riding an act the owner already owes** (7): Arad, Brăila, Craiova, Galați, Oradea and Ploiești on Timișoara's DSVSA route; Hódmezővásárhely on Szeged's OKNYIR export. A frequency check first.
+3. **A Japan wave 4** (66), by N02 station groups. 15 or more: Tsu, Fukushima, Ichihara, Ichinomiya, Toyokawa, Aomori, Ōita, Fuji, Akashi, Fujisawa, Asahikawa, Matsue, Okazaki, Kamakura, Suita. 8 to 14: Iwaki, Nagaoka, Fuchū, Hachinohe, Tachikawa, Uji, Gifu, Hirakata, Akita, Amagasaki, Kawagoe, Kōriyama, Kasugai, Toyonaka, Sakura, Ino, Nankoku, Hino, Ibaraki, Imizu, Tokorozawa, Tokushima, Chōfu, Machida, Ōta, Kawaguchi, Higashimurayama, Koshigaya, Kakogawa, Yamato, Kasukabe. 3 to 7: Tama, Urayasu, Yachiyo, Itami, Moriguchi, Nagakute, Minoh, Kadoma, Ina, Nishitōkyō, Isesaki, Higashiyamato, Settsu, Ageo, Neyagawa, Saga, Sōka, Tsukuba, Nisshin, Urasoe (Naha's add-on). Chiba Prefecture's cities (Ichihara, Urayasu, Sakura, Yachiyo) top out at personal services, Matsudo's and Kashiwa's precedent.
+4. **Low odds** (10): Adana; Perugia (a cable-hauled people mover: mode first); Johannesburg, Tshwane and Ekurhuleni (Gautrain against the commuter-rail rule); Thane, Mira-Bhayandar and Navi Mumbai (Mumbai discarded, but Pune shows a Maharashtra corporation can publish); Ghaziabad (with Noida's open-gap re-check); Memphis (a watch until its trolley returns).
+
+The commuter-rail rows here (Toluca's four, Oceanside, Escondido, Trenton, Tren de la Costa's three, Cádiz's three, Dakar) would join the commuter-rail tier below the discard table when probed.
+
 ## DISCARDED — 261 cities, each naming its evidence
 
 ▼ **2026-10-04 (late) — twenty-five rows from the Central Europe and Germany north screens** (owner's calls the same day): Linz, Innsbruck and Gmunden (its tram frequency doubtful too), Osijek and Košice on absence, each on its own host and its national catalogue; Rostock on Dresden's precedent (its geodata office's curated CC0 POI layers count as no register); and nineteen tram and Stadtbahn cities of Germany's north on absence, each on its own host, open.nrw, opendata.ruhr or its state's catalogue, and its chamber: Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Mülheim an der Ruhr, Oberhausen, Krefeld, Bonn, Bielefeld, Hannover, Braunschweig, Magdeburg, Halle (Saale), Schwerin (the thinnest: a page read and searches), Potsdam, Cottbus, Frankfurt an der Oder and Brandenburg an der Havel (its 20-minute trams doubtful too). Gelsenkirchen and Bremen went to Band C instead. Budapest left this table the same day for Band D (the note above its table).
@@ -731,15 +797,22 @@ dataset title**.
 | **Brandenburg an der Havel** 🇩🇪 | absence | enumerated stadt-brandenburg.de's page sitemap (719 pages, no data section) · enumerated GovData's Open Data Brandenburg (no city datasets) · search IHK Potsdam (its site search, four terms) | yes — `stadt-brandenburg.de` | **No premises register (2026-10-04).** VBBr trams, 3 lines (ASSERTED); **its rail is doubtful too**, at 20-minute headways |
 | **Wuppertal** 🇩🇪 | absence | enumerated `offenedaten-wuppertal.de` (122 datasets, 4 under Wirtschaft und Arbeit) · enumerated open.nrw's Wuppertal harvest (122) and its full-text search (764) · enumerated the city's map service (51 layers, base maps) · read the retail-concept dataset (Zentrale Versorgungsbereiche 2020: polygons only; the 2019 survey's points unpublished) · read the POI layer's metadata (684 tourism and leisure points, 2021) · search the Bergische IHK | yes — the city's data portal (`www.wuppertal.de` serves a Cloudflare challenge, not routed around) | **No premises register (2026-10-04).** The Schwebebahn, 20 stations on its own suspended track, every 3 to 5 minutes on weekdays (WSW's timetable), behaves like rapid transit; whether the mode counts is left open (owner, 2026-10-04: moot without a register). Reopens with a published premises or retail survey with points |
 
-## Commuter-rail revisit group (discards, not candidates; owner, 2026-10-01)
+## Commuter-rail revisit group — its own tier, not candidates (owner, 2026-10-01; widened 2026-10-04)
 
-**Discarded on rail alone: each city's business data is buildable, and its
-only rail is commuter or suburban service that fails the commuter-rail
-exception** (metro spacing *and* frequency inside the city:
+**Discarded on rail alone: each city's business data is buildable or still
+open, and its only rail is commuter or suburban service that fails the
+commuter-rail exception** (metro spacing *and* frequency inside the city:
 `docs/commuter_rail_list.md`; the frequency gate applies on railway track).
-Kept together so that a rule change, or a timetable or line opening, sends
-someone to look. Each row stays in the discard table above; this is a view of
-it, not a band.
+Each row stays in the discard table above; this is a view of it, not a band,
+and **counts in no candidate total**.
+
+**Widened 2026-10-04 (owner)** as the last group of possible builds: "mark
+as its own thing, not real candidates at this time". Building any of them
+would come with a commuter-rail overhaul across many cities, likely drawn in
+their own colour as the lowest tier, below trams. Until that rule exists,
+nothing here is screened further or built.
+
+**Data buildable (27).**
 
 | Discarded city | Its rail | What fails | The business leg | Revisit when |
 |---|---|---|---|---|
@@ -755,6 +828,42 @@ it, not a band.
 | **Natal** 🇧🇷 | CBTU suburban, 24 trips a day | Frequency | CNEFE | A frequency change |
 | **Sobral** 🇧🇷 | Diesel VLT on railway, every ~48 min | Frequency (Fortaleza's VLT precedent) | CNEFE | A frequency change |
 | **Juazeiro do Norte / Crato** 🇧🇷 | Diesel VLT on railway, every 45–90 min | Frequency | CNEFE | A frequency change |
+| **Brampton** 🇨🇦 | GO Transit commuter rail only | Excluded everywhere (no urban rail reaches the city) | The city's business directory: 6,059 rows, X/Y on 100% | The Hurontario LRT gets an opening date |
+| **Pyeongtaek** 🇰🇷 | Line 1's outer stretch (Korail) | 3.4 km apart, every 18–20 min | SEMAS's national storefront file (the Korean modules) | A frequency change |
+| **Osan** 🇰🇷 | Line 1 (Korail) | 2.6 km apart | SEMAS | A frequency change |
+| **Yangju** 🇰🇷 | Line 1 (Korail) | 2.8 km apart, every 20 min | SEMAS | A frequency change |
+| **Dongducheon** 🇰🇷 | Line 1 (Korail) | Every 19–20 min; 소요산 hourly | SEMAS | A frequency change |
+| **Cheonan** 🇰🇷 | Line 1 (Korail) | 2.5–3.3 km apart; every 27.7 min | SEMAS | A frequency change |
+| **Asan** 🇰🇷 | Line 1 (Korail) | 3.1 km apart, every 27.7 min | SEMAS | A frequency change |
+| **Paju** 🇰🇷 | Gyeongui-Jungang | 2.0 km apart (spacing), every 12–13 min | SEMAS | Spacing, as a whole-city screen |
+| **Chuncheon** 🇰🇷 | Gyeongchun Line | 2.8 km apart, every 24 min | SEMAS | A frequency change |
+| **Gyeonggi-Gwangju** 🇰🇷 | Gyeonggang Line | 4.3–5.3 km apart, every 18–22 min | SEMAS | A frequency change |
+| **Icheon** 🇰🇷 | Gyeonggang Line | As Gyeonggi-Gwangju | SEMAS | A frequency change |
+| **Yeoju** 🇰🇷 | Gyeonggang Line | As Gyeonggi-Gwangju | SEMAS | A frequency change |
+| **Ulsan** 🇰🇷 | Donghae Line only | 3.3 km apart; Busan's precedent leaves it out | SEMAS | New urban rail |
+| **Gumi** 🇰🇷 | Daegyeong Line only | 4.1 km apart; Daegu's precedent leaves it out | SEMAS | New urban rail |
+| **Hwaseong** 🇰🇷 | GTX-A only (Dongtan), an express | No qualifying rail | SEMAS | New urban rail |
+
+**Data still open (4).** Discarded on commuter rail before the business leg
+was read, or with the city's host blocked.
+
+| Discarded city | Its rail | The business leg |
+|---|---|---|
+| **Auckland** 🇳🇿 | Suburban lines, median 1,409 m apart, 15 min off-peak on two lines | Not read; the City Rail Link is a watch item |
+| **Karachi** 🇵🇰 | The Karachi Circular Railway | Not read |
+| **Depok** 🇮🇩 | KRL commuter rail (the exception never measured) and one LRT station | `satudata.depok.go.id` blocked (F5) |
+| **Gdynia / Sopot** 🇵🇱 | SKM/PKM commuter rail | Not read |
+
+**Would land here when probed** (pre-verdicts, rail): Toluca, Metepec, Lerma
+and Zinacantepec (El Insurgente; INEGI's DENUE covers them); Oceanside and
+Escondido (Sprinter); Trenton (the River Line); Vicente López, San Isidro and
+Tigre (Tren de la Costa); Cádiz, Chiclana and San Fernando (Trambahía);
+Dakar (the TER).
+
+**Left out of this tier:** Wellington and Bogor (commuter rail, but their own
+hosts hold no premises list); trams, light rail and metros that fail on
+frequency or station count (Cincinnati, Palembang, Bhopal, Patna, Uiwang),
+which reopen on their own lines' service.
 
 ## ✅ Current by country — 2026-10-01
 

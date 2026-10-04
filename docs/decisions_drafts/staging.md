@@ -4,6 +4,70 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Toluca to the pre-verdicts; the commuter-rail group widened into its own tier, not candidates (owner)
+
+- **The owner asked what the El Insurgente ruling was.** Call 37 of the
+  Mexico City extension ("keep out") settled only which lines the Mexico City
+  (Regional) page draws: the Tren Suburbano and El Insurgente out for
+  commuter spacing, Mexicable as a cable car. It never screened Toluca,
+  whose only rail is El Insurgente, unmeasured against the commuter-rail
+  exception (stations about a kilometre apart, every 15 minutes or better by
+  day).
+- **The owner: "move toluca to the pre-verdicts"**: Toluca, Metepec, Lerma
+  and Zinacantepec join the rail pre-discards (20), with a spacing and
+  timetable check when the batch probe runs.
+- **The owner: "carve out a section for commuter rail discards that are
+  viable builds otherwise (or open-ended)... the last remaining group of
+  possible builds, likely implemented with their own macro color as the
+  lowest tier below trams", then "that would probably come with a commuter
+  rail overhaul to many cities though so definitely just mark as its own
+  thing, not real candidates at this time".**
+  - The 2026-10-01 commuter-rail revisit group is widened in place, its
+    heading kept: still a view of the discard table, counted nowhere.
+  - **Data buildable (27):** the twelve of 2026-10-01, Brampton (GO only;
+    the city's directory, 6,059 rows) and fourteen Korean cities on Korail
+    lines or GTX-A (SEMAS covers them).
+  - **Data still open (4):** Auckland, Karachi, Depok, Gdynia / Sopot.
+  - **Would land here when probed:** the rail pre-verdicts on commuter or
+    railway-track service (Toluca's four, Oceanside, Escondido, Trenton,
+    Tren de la Costa's three, Cádiz's three, Dakar).
+  - **Left out:** Wellington and Bogor (their own hosts hold no premises
+    list), and trams, light rail and metros failing on frequency or station
+    count (Cincinnati, Palembang, Bhopal, Patna, Uiwang), which reopen on
+    their own lines' service.
+- **Not decided:** the overhaul itself (which commuter lines a page draws,
+  and the colour tier), raised only when the owner reopens it.
+
+### 2026-10-04 - The screen's remainder counted; a pre-verdict section on the master list (owner)
+
+- **The owner asked how far the global screen has come**, with new builds
+  paused for the week. Staging re-matched the 2026-10-03 coverage sweep's
+  universe (Wikipedia's metro and tram and light-rail lists plus satellites)
+  against the master list, and added the Japanese cities served only by JR or
+  private rail, which Japan's builds count (Fukuyama and Maebashi reached A
+  with no metro or tram). **About 165 rail cities have no verdict; about 77%
+  of the reachable ones do**, every figure ±10% (Japan and mainland China
+  estimated, a coarse name match). A first figure of about 90 counted grouped
+  rows once and left Japan's JR-only cities out; corrected the same evening.
+- **The owner: "1. yes, 2 i approve of your recommendations".**
+  1. The census carries the corrected count and the ranked list.
+  2. **A "Pre-verdicts" section on the master list, counted nowhere**: 12
+     cities that follow a sibling into Band R, 27 pre-discards on a sibling's
+     measured negative, 16 on rail (frequency on Cincinnati's precedent, each
+     needing one timetable check; three out of mode) and 14 in Japan (the
+     2026-10-02 scoping's verdicts, plus three cities with one or two station
+     groups on Uiwang's and Hwaseong's precedent). The rest, about 93, is
+     ranked for screening: the Greater Copenhagen Light Rail first, then the
+     cities riding the owner's DSVSA and OKNYIR acts, a Japan wave 4 of 66,
+     then ten low-odds cities.
+- **Why pointers, not rows:** a discard needs its own host asked and two
+  evidence methods, and none of these has that. The alternative, one batch
+  desk probe now (about 1 to 2 agent-hours), waits until builds resume.
+- **Station-group counts are not a precedent in Japan:** Takarazuka was
+  built on 11 groups, so no threshold was used to pre-discard.
+- **Open:** Toluca, Metepec, Lerma and Zinacantepec, whether the owner's
+  El Insurgente exclusion for Mexico City (Regional) covers them.
+
 ### 2026-10-04 - Gelsenkirchen to B; Wuppertal discarded, its mode left open (owner)
 
 - **The owner: "76 yes 77 yes 78 yes 79 yes 80 yes".**
