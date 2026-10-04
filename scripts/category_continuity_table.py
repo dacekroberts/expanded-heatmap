@@ -1432,6 +1432,17 @@ COLUMNS["czech_nace2025"]["personal_catchall"] = [
     outside("pipeline/prague/config.py", 'CATCH_ALL_EXCLUDE = ("96990", "969")',
             "96990 and the bare 969 group (21 rows, the ragged register) dropped in step 2 "
             "[the 969 row fixed, approved 2026-09-29]")]
+# Brussels (Regional): KBO's NACE-BEL 2025, a thin module over czech_nace2025
+# (the same buckets and exclusions); 5-digit codes, the Belgian sub-code as
+# the fifth digit.
+COLUMNS["belgium_kbo"] = _rev21(lambda d: d.replace(".", "") + "0", "pipeline/taxonomies/belgium_kbo.py",
+                                '"96999",   # Autres services personnels', "Brussels (Regional)")
+COLUMNS["belgium_kbo"]["personal_catchall"] = [
+    outside("pipeline/taxonomies/belgium_kbo.py", '"96999",   # Autres services personnels',
+            "rule A in step 2: a unit whose every in-bucket code is a catch-all (96999 other personal "
+            "services, 47120, 47279, 47690, 47789) is dropped; Personal services is off on the page")]
+COLUMNS["belgium_kbo"]["nonstore"] = COLUMNS["belgium_kbo"]["nonstore"] + [
+    loc("47781", "heating-fuel dealers (france_naf 47.78B precedent)")]
 
 # Georgia: NACE Rev. 2 with a national fifth digit (Geostat), keyed at the
 # leaf. Codes outside the four tracked divisions are out by construction.
@@ -2253,6 +2264,7 @@ ROW_KEY = {
     "anzsic_fes": "ClassificationCode",
     "georgia_nace": "activity_code",
     "belgium_favv": "favv_pairs",
+    "belgium_kbo": "nace_code",
 }
 
 # Brazil's step 2 classifies the free-text description; classify() reads back the stored bucket.
