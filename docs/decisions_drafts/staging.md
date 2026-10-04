@@ -4,6 +4,24 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - De Lijn's GTFS read: permitted with conditions
+
+- **`licence-read`, 2026-10-04: PERMITTED WITH CONDITIONS.** On the Belgian
+  Mobility Company portal, CC BY 4.0 governs (art. 3, De Lijn the sole
+  licensor; nothing states otherwise on its card). De Lijn's own portal
+  (data.delijn.be) uses the Flemish Licentie Gratis Hergebruik (2024), and
+  transportdata.be lists ODC-BY on all eight De Lijn records: all three are
+  attribution-only, none restricts modifying, combining or displaying.
+- **Display (notice 149):** "Source: De Lijn – Open Data – [feed date]",
+  the modified-data line, the portal, the CC BY 4.0 title and link (which
+  also meets the Flemish licence's "bron: De Lijn"); no official status or
+  approval implied.
+- **delijn.be's website terms** allow private and personal use only and ask
+  for the webmaster's say before a link: no delijn.be link or content on a
+  page; its line pages may be consulted privately for gate 3.
+- **Rail from De Lijn's feed for Antwerp and Ghent stands** (the owner's
+  call 2 of the same night, subject to this read).
+
 ### 2026-10-03 - Belgium's build calls, and Brussels (Regional) from C to B (owner)
 
 - **The owner: "i say yes to all"**, twelve calls as staging recommended:

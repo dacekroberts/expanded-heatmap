@@ -203,12 +203,12 @@ Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
 here, by the session, before one is written; open claims (staging,
 2026-10-03, the coverage sweep's kits): the Korean three, pages 190, 191
 and 192 and no notices; the other cities (Mendoza, Tacoma, Liverpool
-(Regional)), pages 193, 194 and 195 and notices **141–143**; Belgium's range
-follows its kit; 133–136, released unused by the four extensions on
-2026-10-03, stay unassigned; the next free notice is 144. Every earlier block has landed:
+(Regional)), pages 193, 194 and 195 and notices **141–143**; Belgium, pages
+196 to 201 and notices **144–152**; 133–136, released unused by the four
+extensions on 2026-10-03, stay unassigned; the next free notice is 153. Every earlier block has landed:
 Japan wave 2's 115–128, the extensions' 129–132 and lane-app's 137–140 on
 2026-10-03, and everything up to 114 on 2026-10-02. Pages: Japan wave 2 took
-176–189; the extensions took none; the next free page is 196.
+176–189; the extensions took none; the next free page is 202.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the
 ranges in that one sentence, and delete a batch's range once it lands.
