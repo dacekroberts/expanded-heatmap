@@ -4,6 +4,32 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Mexico City (Regional) marked, after a station repair (owner)
+
+- **The probe** (staging, wave 4): 11 stations of the page's own lines lie in
+  the State of México: Ecatepec 5 and Nezahualcóyotl 3 (Línea B), La Paz 2
+  (Línea A), Naucalpan 1 (Línea 2's Cuatro Caminos); all of Tren Ligero is
+  inside the city. DENUE covers the four municipios in the national layout;
+  entidad 15 ships as two ZIPs (80.8 MB together, 2026-05-20, headers read
+  only).
+- **It found a defect in the built page:** step 1 keeps only
+  `railway=station`, dropping eight Metro stations OSM carries as
+  `railway=stop` (Observatorio, Indios Verdes, Potrero, Juárez, Talismán,
+  Mixcoac, Tepalcates, Buenavista); Consulado is kept twice, about 330 m
+  apart; Cuatro Caminos is in neither the kept list nor the excluded list.
+  No gate caught it because gate 3 (operator counts) is still unreadable.
+- **The owner: "34. yes 35. yes all four 36. defer until brief 37. keep
+  out".**
+  1. The repair comes first and lands at review time (a separate session,
+     started by the owner from staging's task chip); the city alone proves
+     zero drift before any extension.
+  2. The add-on is marked, not scheduled, with all four municipios.
+     Naucalpan's single station follows Anyang + Uiwang; Ecatepec's stations
+     sit on its western edge, so its share in a ring will be low.
+  3. The entidad 15 download waits until a brief names it.
+  4. The Tren Suburbano and El Insurgente (commuter spacing) and Mexicable (a
+     cable car) stay out.
+
 ### 2026-10-04 - The reset wave's calls: a user-agent rule, 31 discards, 11 to R, Konya to D, five open-gap rows, New Zealand back on the map (owner)
 
 - **The owner said yes to each of staging's recommendations**, listed by
