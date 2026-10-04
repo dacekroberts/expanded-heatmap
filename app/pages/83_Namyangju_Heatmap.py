@@ -60,7 +60,7 @@ st.markdown(
   **Line 4**, **Line 8**, the **Gyeongui–Jungang Line** and the **Gyeongchun Line**.
 - Routes and stations come from OpenStreetMap.
 - Businesses are counted around stations inside Namyangju only; the lines are still drawn to
-  their ends.
+  their ends, and the stations outside the city are listed below.
 - Byeollae is served by Line 8 and the Gyeongchun Line. No other rail line has a station in the
   city.
 - The Gyeongchun Line runs about every 22 to 24 minutes by day, less often than the city's other
