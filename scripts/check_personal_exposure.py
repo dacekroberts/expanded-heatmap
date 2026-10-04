@@ -842,6 +842,9 @@ REGISTRIES = {
                        processed="businesses_clean.csv", address=None),
     "blackpool": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Liverpool (Regional) (2026-10-04) on the same shared step 2.
+    "liverpool": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
 }
 
 # The France tram batch (2026-09-30): twenty-one cities on the same shared French

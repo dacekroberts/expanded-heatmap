@@ -3229,7 +3229,10 @@ CITIES = [
         # WEST of the dot in the United Kingdom (2026-10-02): above it, the pill
         # covered Blackpool's marker and overlapped Sheffield's.
         # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
-        "label_offset_by_region": {"United Kingdom": ("end", -10, 0)},
+        # RAISED 14 px when Liverpool (Regional) joined (2026-10-04): level with
+        # the dot, the pill covered Liverpool's marker. Searched again with
+        # Liverpool's pill below its own dot: PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"United Kingdom": ("end", -10, -14)},
     },
     {
         "name": "Birmingham (Regional)",
@@ -4208,6 +4211,40 @@ CITIES = [
         # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
         "label_offset_by_region": {'Japan West': ('middle', 0, 22)},
         "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Liverpool (Regional)",
+        "lat": 53.4084,
+        "lon": -2.9916,
+        "page": "pages/195_Liverpool_Heatmap.py",
+        # The UK six's values on Merseyrail (2026-10-04). `mode` metro (owner,
+        # 2026-10-03, "1. metro": the underground city-centre loop, trunks every
+        # 2-6 minutes); rail_extra "Suburban rail" as London's and Sydney's, the
+        # whole network being suburban rail drawn as a commuter-rail exception
+        # (owner, 2026-10-03). placement 6,771 FSA points and 399 Code-Point
+        # centroids of the 7,170 placed.
+        "coverage": "one_bucket",
+        "mode": "metro",
+        "placement": "Register coordinates (94%) and postcode centers (6%)",
+        "data_age": "Extracts of 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "Merseyrail, the Northern and Wirral Lines",
+        "region": "United Kingdom",
+        "country": "United Kingdom",
+        "in_default_view": False,
+        # MINOR, as the brief has it for the UK six's region (a dot and tooltip
+        # in every view, its pill only in the United Kingdom). The UK rule reads
+        # tram and light rail against metro, so a metro city's tier is the
+        # owner's call (docs/decisions_drafts/new-cities.md).
+        "label_tier": "minor",
+        # BELOW the dot, scored in the United Kingdom view, where a minor
+        # city's pill shows (2026-10-04; the width measured in the browser
+        # pane): with Manchester's pill raised, check_macro_labels.py PROBLEMS 0
+        # at 375, 768 and 1200. West and level, it overlapped Manchester's and
+        # Sheffield's pills.
+        "label_offset": ("middle", 0, 22),
     },
 ]
 

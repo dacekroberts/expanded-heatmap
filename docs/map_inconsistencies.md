@@ -137,9 +137,11 @@ and districts no metro reaches.
   skill, not the line-by-line test below), Berlin (the S-Bahn's 16 lines, the
   Ring among them, cut at the Land boundary), London (the Elizabeth line and the
   six London Overground lines, cut at Greater London), Sydney (Sydney Trains'
-  six lines through the City of Sydney, where they run as a metro) and
+  six lines through the City of Sydney, where they run as a metro),
   Melbourne (Metro Trains' six line groups through the City Loop and the Metro
-  Tunnel).
+  Tunnel) and
+  Liverpool (Regional) (Merseyrail's Northern and Wirral Lines, inside
+  Liverpool, Sefton, Knowsley and Wirral).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -147,7 +149,7 @@ and districts no metro reaches.
   three lines, Fortaleza's and Recife's diesel lines, Korail's Daegyeong Line (Daegu)
   and Donghae Line (Busan), National Rail in London, Glasgow's suburban lines
   (the Argyle and North Clyde lines and the rest), Northern's trains in Tyne and
-  Wear, Buenos Aires's commuter railways, NSW TrainLink (Sydney), and V/Line and
+  Wear, Northern's City Line in Liverpool, Buenos Aires's commuter railways, NSW TrainLink (Sydney), and V/Line and
   the event-day Flemington Racecourse line (Melbourne).
 - **Not mentioned either way:** Montréal (exo), Mexico City (Tren Suburbano).
   Montréal's REM is drawn from 2026-09-27 (the tram rescope).
@@ -702,6 +704,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Sheffield | Sheffield Supertram, the Blue, Yellow and Purple routes (tram) | The Tram-Train to Rotherham (every 30 minutes, national rail track beyond Tinsley); buses and national rail trains | OpenStreetMap route relations; gate 3 against NaPTAN only, name by name on 48 (the operator's site refuses scripts) | The City of Sheffield | 0 / 0 |
 | Nottingham (Regional) | Nottingham Express Transit (tram), Line 1 and Line 2, each line's two directions merged | Buses and national rail trains | OpenStreetMap route relations (Bulwell Forest and David Lane added by node); gate 3 exact on 36 and 30 (NET) and name by name against NaPTAN's 50 | The four NET council areas | 0 / 0 |
 | Blackpool (Regional) | Blackpool Tramway (tram), one line, Starr Gate to Fleetwood Ferry with the North Station spur | Buses and national rail trains | OpenStreetMap route relations; gate 3 name by name against NaPTAN's 40 (the operator's site refuses scripts) | Blackpool and Wyre | 0 / 0 |
+| Liverpool (Regional) | Merseyrail (suburban rail run as a metro), the Northern and Wirral Lines | The City Line, other national rail trains, buses and the Mersey Ferries | OpenStreetMap route relations; gate 3 exact on 37 and 34 (Merseytravel's timetable booklets) and name by name against NaPTAN's rail records | The four Merseyrail council areas (Liverpool, Sefton, Knowsley, Wirral) | 10 / 0 |
 | **Argentina** | | | | | |
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
 | **Australia** | | | | | |
@@ -893,6 +896,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Sheffield | Food hygiene register | The Food Standards Agency's FHRS file, 1 council | FSA business type | 293 / 869 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Nottingham (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 4 councils | FSA business type | 382 / 828 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Blackpool (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 2 councils | FSA business type | 227 / 593 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Liverpool (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 4 councils | FSA business type | 1,107 / 2,625 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,612 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 | **Australia** | | | | | |
@@ -1073,6 +1077,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Sheffield | Register coordinates (98%) and postcode centers (2%, OS postcode centroids for a full postcode with no register point); 93 not placed | Food only; about one storefront in thirty-seven unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | Nottingham (Regional) | Register coordinates (97%) and postcode centers (3%, OS postcode centroids for a full postcode with no register point); 210 not placed | Food only; about one storefront in eighteen unplaced, most in Rushcliffe (14.2%) and Ashfield; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address, a flat address or a childminder never placed; the name after "trading as" shown |
 | Blackpool (Regional) | Register coordinates (96%) and postcode centers (4%, OS postcode centroids for a full postcode with no register point); 90 not placed | Food only; about one storefront in nineteen unplaced, almost all in Wyre; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Liverpool (Regional) | Register coordinates (94%) and postcode centers (6%, OS postcode centroids for a full postcode with no register point); 223 not placed | Food only; about one storefront in thirty-three unplaced, most in Sefton and Wirral; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
 | **Australia** | | | |
@@ -1264,6 +1269,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Sheffield | Extract of 2026-10-02 (fetched 2026-10-02) | B | 0.3 mi | Yes | 35% | Registered name; the trade name where registered "trading as" |
 | Nottingham (Regional) | Extracts of 2026-10-01 to 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 35% | Registered name; the trade name where registered "trading as" |
 | Blackpool (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 50% | Registered name; the trade name where registered "trading as" |
+| Liverpool (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-04) | B | 0.6 mi | Yes | 52% | Registered name; the trade name where registered "trading as" |
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
 | **Australia** | | | | | | |

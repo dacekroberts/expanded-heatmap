@@ -2616,14 +2616,21 @@ DISPLAYED** (written into `render_site_notices()` with the UK six,
   attribution of the Department's own, so the OGL's default applies.
 - **Used for** gate 3 of the UK tram and light-rail cities: each map's stops
   are matched name by name against NaPTAN's active stop areas (stop type MET,
-  ATCO area 940) inside its scope. Nothing from NaPTAN is drawn on a map.
+  ATCO area 940) inside its scope. Since 2026-10-04 also Liverpool
+  (Regional)'s Merseyrail stations, against NaPTAN's rail station records
+  (stop type RLY, ATCO area 910). Nothing from NaPTAN is drawn on a map.
 - **MUST DISPLAY**: "Contains public sector information licensed under the
   Open Government Licence v3.0.", with the licence linked. Whether a count
   checked against the data needs the credit at all is arguable; displaying it
   is the cautious reading.
 - **MUST NOT**: imply the Department's endorsement (OGL); use a DfT logo or
   the Royal Arms; present NaPTAN as complete.
-- Wording approved by the owner 2026-10-02.
+- Wording approved by the owner 2026-10-02. The first sentence reworded to
+  cover Merseyrail, no new notice (owner, 2026-10-03): "Stop and station
+  counts on the UK's tram, light-rail and Merseyrail maps are checked against
+  NaPTAN, the National Public Transport Access Nodes dataset published by the
+  Department for Transport." The licence and no-endorsement sentences are
+  unchanged.
 
 **87. Food Standards Agency (Birmingham) — required, and DISPLAYED** (written
 into `render_site_notices()` with the UK six, 2026-10-02.)
@@ -3527,6 +3534,43 @@ of 2026-10-02.)
   Massachusetts EOTSS".
 - **MUST NOT**: present the outline as an authoritative boundary location
   ("can only be provided by a licensed land surveyor").
+
+**143. Food Standards Agency (Liverpool) — required, and DISPLAYED** (written
+into `render_site_notices()` with Liverpool (Regional), 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the four
+  councils Merseyrail serves (Liverpool, Sefton, Knowsley, Wirral) are on
+  England's FHRS, under the **Open Government Licence v3** with the FSA's
+  conditions. The OGL statement linked; each council's extract date
+  (2026-10-02); no rating, logo or imagery. The credit is London's and
+  Newcastle's, "Food Standards Agency, UK food hygiene rating data", as a
+  notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62 as Manchester's notice
+  84, with the city and date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py liverpool`, run 2026-10-04: no
+  fallback name exists, 0 contact details; the verdict is in the session's
+  drafts file, `docs/decisions_drafts/new-cities.md`.<!-- /internal -->
+- **Liverpool's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**153. Ordnance Survey (Liverpool) — required, and DISPLAYED** (written into
+`render_site_notices()` with Liverpool (Regional), 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 399 Liverpool, Sefton, Knowsley and Wirral food storefronts the
+  FSA lists with a full postcode and no point (5.4% of storefront rows);
+  never a private address. Units kept to the four councils' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/liverpool/` republishes the derived locations (README's credits).
+- Wording: Manchester's Ordnance Survey notice 85, with the city changed.
 
 
 ## Gaps

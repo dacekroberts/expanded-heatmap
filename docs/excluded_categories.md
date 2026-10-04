@@ -89,6 +89,10 @@ Rome's Roma–Viterbo urban service, São Paulo's CPTM Linha 9 and Rio's SuperVi
 Deodoro and Saracuruna lines were decided the same way, and Brazil made the
 third part of the test explicit: how many of a line's stations have no drawn
 station within walking distance.
+Liverpool's Merseyrail is drawn on the same test: inside the four council
+areas its stations sit a median of about 1.2 km apart, every one has a train
+at least every 15 minutes by day, and it is the only urban rail there is.
+Northern's City Line from Lime Street, at three trains an hour, is not drawn.
 
 ### Stations left out of a network that IS mapped
 
@@ -4685,6 +4689,57 @@ with the North Station spur, every one inside Blackpool and Wyre; none is
 listed on Blackpool (Regional)'s page as left out. Fylde, to the south, has
 no tram stop and is not on the map.
 - Buses and national rail trains are not drawn.
+
+### Liverpool (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the four councils Merseyrail serves (Liverpool, Sefton, Knowsley and
+Wirral) inspect for food hygiene; no open register of other shops or of
+personal services covers them, so clothes shops, hairdressers and the like
+are missing rather than excluded. Food shops (grocers, off-licenses, bakers,
+butchers, newsagents selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (1,008), where home caterers
+and event kitchens sit; mobile caterers (291); hospitals, childcare and care
+homes (697); schools, colleges and universities (540); hotels and guest
+houses (144); manufacturers and packers (46); distributors and transporters
+(40); importers and exporters (8); farmers and growers (5).
+
+**Not placed: flats** - 4 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 399 food storefronts the register
+gives no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 223 food storefronts (3.0%) with neither a location nor a
+usable full postcode, most in Sefton (64, 3.8%) and Wirral (64, 3.7%). A
+business run from a private address is published without a location or a
+full postcode and is never placed.
+
+**Shown under its trade name** - 11 businesses registered "trading as"
+another name show the name on the shop.
+
+**Left off because they are outside the area** - 3 whose register location
+lies outside the four council areas.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.9% of that type read as one by name.
+
+**Stations.** Merseyrail's Northern and Wirral Lines, drawn as suburban rail
+that runs as a metro: by day every station inside the four council areas has
+a train at least every 15 minutes, and most have one every 30 minutes in the
+evening and on Sundays. 59 of Merseyrail's 69 stations are inside the four;
+the 10 beyond them are listed on Liverpool (Regional)'s page as left out:
+Ormskirk, Aughton Park and Town Green in West Lancashire, and Hooton,
+Capenhurst, Bache, Chester, Little Sutton, Overpool and Ellesmere Port in
+Cheshire West and Chester. St Helens and Halton have no Merseyrail station and
+are not on the map.
+- Not drawn: the City Line, Northern's trains from Lime Street to Wigan,
+  Warrington and beyond, at three trains an hour (its stations from Edge Hill,
+  Wavertree Technology Park, Broad Green, Mossley Hill and West Allerton to
+  Roby, Huyton, Prescot, Whiston and Halewood); Transport for Wales's Bidston -
+  Wrexham line (Upton and Heswall); Northern's Southport - Wigan line (Meols
+  Cop); other national rail services; buses; and the Mersey Ferries.
 
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 

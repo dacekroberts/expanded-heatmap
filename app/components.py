@@ -556,9 +556,11 @@ _FRANCE = ("Paris", "Marseille", "Toulouse", "Lille (Regional)", "Rennes",
            "Strasbourg", "Le Havre", "Caen", "Rouen (Regional)",
            "Bordeaux (Regional)", "Nantes (Regional)", "Grenoble (Regional)",
            "Valenciennes (Regional)", "Angers")
-# The UK tram and light-rail cities whose gate 3 reads NaPTAN (notice 86).
+# The UK tram and light-rail cities whose gate 3 reads NaPTAN (notice 86),
+# and Merseyrail's, whose gate 3 reads NaPTAN's rail records.
 _UK_SIX = ("Manchester (Regional)", "Birmingham (Regional)", "Edinburgh",
            "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)")
+_UK_NAPTAN = (*_UK_SIX, "Liverpool (Regional)")
 # Every city the OpenStreetMap rail-geometry entry names, in its order. Adding
 # a city to that sentence means adding it here, or its page omits the line.
 _OSM_RAIL = (
@@ -574,7 +576,7 @@ _OSM_RAIL = (
     "Buenos Aires", "Seattle (Regional)", "London", "Glasgow",
     "Newcastle (Regional)", "Manchester (Regional)", "Birmingham (Regional)",
     "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
-    "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
+    "Liverpool (Regional)", "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
     "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
 )
 # The cities whose rail is not OpenStreetMap's but whose English station names
@@ -1042,7 +1044,7 @@ _NOTICES = [
      "the lines and stations of London's Underground, DLR, Elizabeth line and "
      "Overground, the Glasgow Subway, the Tyne and Wear Metro, Manchester "
      "Metrolink, West Midlands Metro, Edinburgh Trams, Sheffield Supertram, "
-     "Nottingham Express Transit and the Blackpool Tramway, and the boundaries "
+     "Nottingham Express Transit, the Blackpool Tramway and Merseyrail, and the boundaries "
      "used to select them, Stockholm's Tunnelbana lines and stations and its "
      "kommun boundaries, Bucharest's metro lines and stations and its city and "
      "sector boundaries, the Tbilisi Metro's lines and stations and the city's "
@@ -2588,13 +2590,13 @@ _NOTICES = [
     # Department prescribes none (licence-read 2026-10-02). Wording approved
     # by the owner 2026-10-02.
     Notice(86, "Department for Transport, NaPTAN (United Kingdom)",
-     "Stop counts on the UK's tram and light-rail maps are checked against NaPTAN, the "
-     "National Public Transport Access Nodes dataset published by the Department for "
-     "Transport. Contains public sector information licensed under the "
+     "Stop and station counts on the UK's tram, light-rail and Merseyrail maps are checked "
+     "against NaPTAN, the National Public Transport Access Nodes dataset published by the "
+     "Department for Transport. Contains public sector information licensed under the "
      "[Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). The "
      "Department for Transport does not endorse this map.",
-     False, _UK_SIX),
+     False, _UK_NAPTAN),
     # Birmingham (notice 87): the FSA's FHRS data for the three West Midlands
     # Metro districts, Newcastle's notice 62 with the city and date changed.
     Notice(87, "Food Standards Agency (Birmingham)",
@@ -2841,6 +2843,31 @@ _NOTICES = [
      "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
      "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
      False, ("Boston",)),
+    # Liverpool (notice 143): the FSA's FHRS data for the four Merseyrail
+    # council areas, Newcastle's notice 62 as Manchester's 84, with the city
+    # and date changed.
+    Notice(143, "Food Standards Agency (Liverpool)",
+     "Liverpool's food businesses are from the Food Standards Agency, UK food hygiene rating "
+     "data, extracted on 2026-10-02. Contains public sector information licensed under the "
+     "[Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's center, or left out where they have no "
+     "full postcode, and trade names shown where a business is registered under another name. "
+     "No hygiene rating is shown. The Food Standards Agency does not endorse this map.",
+     False, ("Liverpool (Regional)",)),
+    # Liverpool's postcode centroids (notice 153, staging's number,
+    # 2026-10-04): Manchester's notice 85 with the city changed, the same file
+    # and edition.
+    Notice(153, "Ordnance Survey (Liverpool)",
+     "Where the Food Standards Agency lists a Liverpool food business without a map point, it "
+     "is placed at the center point of its postcode, from Ordnance Survey's postcode data, used "
+     "under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Contains "
+     "Ordnance Survey data © Crown copyright and database right 2026. Contains Royal Mail data "
+     "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
+     "copyright and database right 2026. Ordnance Survey does not endorse this map.",
+     False, ("Liverpool (Regional)",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

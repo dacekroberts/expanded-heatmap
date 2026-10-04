@@ -140,6 +140,8 @@ OSM_RAIL_BY_CITY = {
                               "the boundaries used to select them", True),
     "Blackpool (Regional)": ("the line and stations of the Blackpool Tramway, and the "
                              "boundaries used to select them", True),
+    "Liverpool (Regional)": ("the lines and stations of Merseyrail, and the boundaries "
+                             "used to select them", True),
     "Stockholm": ("Stockholm's Tunnelbana lines and stations and its kommun boundaries", True),
     "Bucharest": ("Bucharest's metro lines and stations and its city and sector boundaries",
                   True),
