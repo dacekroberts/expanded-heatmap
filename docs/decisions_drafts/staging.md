@@ -4,6 +4,32 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Geneva's REG read, and the second group outside Europe screened (owner calls pending)
+
+- **Geneva's Répertoire des entreprises (REG), `licence-read` 2026-10-04:
+  PERMITTED WITH CONDITIONS.** Level A ("Accès libre") under SITG's
+  "Conditions d'utilisation des données du Portail SITG" (19 May 2026; the
+  copy inside the zip is byte-identical): reproduce, publish, adapt,
+  combine, commercially too. Display: "Source : Portail des données SITG
+  (État de Genève), téléchargé et/ou extrait en date du […]." verbatim
+  (CU 5.3.1), a derived-use statement (5.3.2), a sentence linking the CU
+  (5.5); no re-identification (5.4.2); data-protection law applies; no
+  resale (RIRT art. 62). **For the owner:** an indemnity (CU 7.2) limited to
+  the user's own infringements, personality and data-protection rights
+  named (narrower than Hong Kong's accepted one); and ge.ch's website terms,
+  applied by SITG's footer to its subdomains, which a strict reading would
+  stretch to the download (the read finds the permissive reading much
+  stronger). The register is not pre-filtered: 23,164 sole traders among
+  63,224 company rows; 2,082 home-based and 3,655 itinerant establishments.
+- **The second group outside Europe (probe, 2026-10-04):** Thessaloniki B
+  (the city's active-shop-licence layer, 8,103 points, no names; a licence
+  read first); Macau C (IAM's licensed food-and-drink list, addresses only;
+  one API download for the owner); Quito and Cuenca D on ARCSA's national
+  health-permit file (7,592,002 bytes, the owner's download), else Quito R
+  and Cuenca a discard; Jerusalem, Almaty, Astana and Ahmedabad R (hosts
+  refusing scripts, or the national register behind a sign-in). Pending the
+  owner's answer.
+
 ### 2026-10-04 - The probe wave's first results: Korea and Europe banded; Korean regional expansions marked (owner)
 
 - **The owner: "approve all"** on staging's recommendations, then "mark the
