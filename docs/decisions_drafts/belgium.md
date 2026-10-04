@@ -4,6 +4,32 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then empties this file (owner, 2026-09-30).
 
+### 2026-10-04 - Antwerp and Ghent built on FAVV-AFSCA and VKBO
+
+- **Built Antwerp (page 197) and Ghent (page 198) on FAVV-AFSCA's operator
+  list, placed on Flanders' VKBO unit points, with De Lijn's GTFS for the
+  trams.** FAVV's list carries no name or street column; VKBO is asked
+  through its WFS for the unit number, type, NIS code, postcode and point
+  only, and a page carrying any other property stops the fetch before
+  anything is written. Every pin shows its type, so the privacy verdict is
+  publish-structural.
+- **Antwerp: 4,881 food premises placed**: food service 3,097 of 3,232
+  (95.8%), food shops 1,784 as a Retail partial, Borsbeek's 44 included
+  (the brief's 3,100 of 3,231 and 1,764 were a screen, before Borsbeek's
+  postcode joined). 163 stations, 147 inside the scope; median gap 274 m,
+  so halved rings; no thinning (owner).
+- **Ghent: 2,730 placed** (food service 1,792, food shops 938); 50 stations,
+  49 inside; median gap 273 m, halved rings.
+- **A deviation from the brief's field list: UIDN and OIDN are asked for
+  explicitly.** Both are mandatory in VKBO's feature type (minOccurs 1), so
+  the server returns them whatever `propertyName` says; OIDN pages the fetch
+  (sorted, so pages never overlap) and neither is stored.
+- **Gate 3 is partial**, against De Lijn's line pages consulted privately
+  (delijn.be's terms bar republishing them). De Merode, Havenhuis, Cadix and
+  Bijlokehof, which those pages mark unserved but the feed serves from
+  2026-10-15, keep their rings as the timetable runs (owner, the six calls
+  below, item 4).
+
 ### 2026-10-04 - Six Belgian calls approved (owner)
 
 - **The owner: "1-6 recommendations sound good"**, each as recommended:
