@@ -4,6 +4,24 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Mendoza approved for a build: the capital alone, seven stations (owner)
+
+- **The owner: "mendoza can be built"**, answering whether a seven-station
+  map is worth building. The Metrotranvía has 25 stations; 7 are in the
+  Ciudad de Mendoza (capital department), about 8 in Godoy Cruz, 5 in Las
+  Heras and 5 in Maipú. Every 7 minutes at peak and 11-12 off-peak, on a
+  converted railway with stops about 700 m apart: it passes the light-rail
+  test, so it is not a tram question.
+- **Scope: the capital alone.** No neighbouring department publishes a
+  business register (Godoy Cruz publishes monthly totals only).
+- **The business leg:** "Listado Comercios por Actividad 2025", 8,309
+  businesses (41,179 activity rows), all active as of June 2025, CC BY 4.0.
+  First mapping at the business-type level: Retail 3,350, Food 721, Personal
+  services 331; catch-alls 601 (mostly offices); 3,155 out of scope.
+- **Open:** placement. The CSV has no coordinates; `comercios_limpio.json`
+  (12,239,392 bytes) carries x/y in Argentina's zone-2 grid (POSGAR), fill
+  rate unmeasured. Mendoza goes to Band A when placement measures.
+
 ### 2026-10-03 - Probe slip in the Mendoza screen: a whole file arrived from a 4 KB request
 
 - **The screen asked Mendoza's open-data host for the first 4 KB** of the
