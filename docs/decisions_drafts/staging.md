@@ -4,6 +4,60 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Seven licence reads for the sweep's first group; Brussels and Tacoma to A (owner)
+
+- **The owner: "license readings look good"**, on staging's four
+  recommendations, and "update the master list". One `licence-read` agent
+  per source, all 2026-10-03:
+  - **hub.brussels's inventory (City of Brussels): permitted with
+    conditions**, CC BY 4.0 (the portal adopts the producer's licence). The
+    "Google Maps" contributor credit sits on 79 portal datasets and matches
+    two link columns built from each record's own point; 21 of 24
+    comparable points lie within 0.03-0.35 m of UrbIS address points (CC0),
+    and hub.brussels describes the inventory as its field agents' own. The
+    publisher never states what the credit covers. **The City to Band A**:
+    the build drops `google_maps` and `google_street_view`, never links a pin
+    to Google, and names the publisher's listed contributors in the credit.
+    No City logo or "BXL" mark (portal terms 3.1).
+  - **Tacoma's business licences: permitted with conditions.** Resolution
+    39378 (2016) and the City's open-data page: no restrictions on reuse.
+    The disclaimer (115 words, text kept in the staging scratchpad) must be
+    displayed site-wide, and the City may require any use to end for any
+    reason: Chicago's template, without Chicago's indemnity or IP
+    reservation. **Tacoma from C to A.** The licenseInfo link's host
+    (data.cityoftacoma.org) is dead; cite data.tacoma.gov. The pins are
+    "active business license accounts", never "currently licensed".
+  - **FAVV's operator list: permitted with conditions**, CC BY 4.0, credit
+    with the extract date, no implied endorsement, nothing misleading. The
+    file has no name or street column. **FAVV is credited through its home
+    page** (a deep link asks for the webmaster's say first), and the site
+    terms' "prior approval for downloadable documents" is read as the Dutch
+    text limits it, to brochures and the like (owner). The site terms are
+    non-commercial only, no conflict for this project.
+  - **VKBO: permitted with conditions**, Flanders' Modellicentie gratis
+    hergebruik v1.0, its prescribed Dutch credit line; KBO's purpose limit
+    binds registrants only and does not carry over. The build adds the
+    extract date to the credit, which also meets KBO 2.8 if the federal
+    terms ever reached the KBO-derived fields.
+  - **LoGIC 2024: permitted with conditions** for the downloaded GeoPackage
+    (CC BY 4.0, the prescribed SPW citation verbatim, a statement of
+    modifications). The MapServer brings in SPW's services terms (art. 5 §4,
+    no altering): the build uses the download only. The citation's
+    geodata.wallonie.be URI answers 404; link the catalogue page beside it.
+  - **Mendoza: permitted with conditions**, CC BY 4.0 at every level; credit,
+    licence link, a modification statement, no endorsement. Ley 25.326 is
+    outside the licence: the name rule and the privacy check apply.
+  - **KBO/BCE Open Data: permitted with conditions** for companies'
+    establishment units; acts for the owner if registering: the declared
+    purpose (2.3), the registration e-mail watched for term changes (9.1,
+    15 days), a download at least yearly (10.5); the project is the GDPR
+    controller (2.1). **Companies' establishments only** if the owner
+    registers (sole traders' establishment addresses are personal data).
+- **A lesson from the run:** several agents shared the one built-in browser
+  pane and navigated it under each other, and two KBO PDFs and a catalogue
+  PDF were saved to the main checkout's root by browser downloads (moved to
+  the staging scratchpad). One browser-using agent at a time.
+
 ### 2026-10-03 - The sweep's first group banded: eleven cities on the owner's approval
 
 - **The owner: "i approve"**, every move as staging recommended:
