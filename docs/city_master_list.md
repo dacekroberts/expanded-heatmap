@@ -32,10 +32,10 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **170** across 26 countries *(each city's build line is in the Built table below)* |
-> | **Candidates** | **28** — A 6 · B 7 · C 5 · D 10 |
+> | **Candidates** | **28** — A 6 · B 8 · C 4 · D 10 |
 > | **Restricted (Band R)** | **51** *(A band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
 > | **Open screening gap** | **7** *(rows whose own city host never answered: neither a finding nor a proven block)* |
-> | **Discarded** | **260**, each naming its evidence |
+> | **Discarded** | **261**, each naming its evidence |
 >
 > *Counts are generated: `python scripts/check_master_list_counts.py --write`
 > rewrites every one from the rows it counts, so after a merge take either side
@@ -88,14 +88,14 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | Band | What these cities ARE | Cities |
 |---|---|---|
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **6** |
-| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **7** |
-| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **5** |
+| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **8** |
+| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **4** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **10** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
 | | **Candidates** | **28** |
 | ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **51** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *7* |
-| *Discarded* | Measured negative, evidence named | *260* |
+| *Discarded* | Measured negative, evidence named | *261* |
 
 ## 🟢 Band A — ready to build (6 ready + 3 ✅ BUILT)
 
@@ -116,7 +116,7 @@ and landed at review time on 2026-10-03. **Japan's third wave (2026-10-04):** Ma
 | **Fukuyama** 🇯🇵 | The city's full food list (`data.city.fukuyama.hiroshima.jp`, `licensed_food`, as of 2026-03-31, monthly new permits to 2026-08): **5,880 rows**, **4,355** 飲食店営業, **101%** of the in-force count; barber and beauty **1,634** and laundry **173** (`licensed_env`, as of 2026-08-31). MHLW holds 3,879 (90%, 67.0% addressed) | CC BY (the city's CKAN) | **18 N02 station groups** (JR Fukuen 12, Sanyō 5, Ibara 3), Shinkansen out; frequencies not read from the operators | The lists may still hold closed premises: check at build; the privacy check and the name rule. To A (owner, 2026-10-04) |
 | **Sagamihara** 🇯🇵 | The city's catalogue (`opendata.city.sagamihara.kanagawa.jp`, 生活衛生課): food permits (zip, 5.2 MB, FY-end 2026-03-31), barber, beauty and laundry zips (FY-end 2026-03-31), each with monthly updates. MHLW holds 379 (7%) | **Permitted with conditions** (licence read 2026-10-04): CC BY 4.0 by the city's open-data terms (相模原市オープンデータ利用規約 §3(2)), a download counting as acceptance; a fault-based cost clause (§5) and self-settlement of claims (§4), **accepted by the owner** on Sakai's precedent (2026-10-04); no framing of the catalogue (§2); the terms can change without notice, so re-read them before each refresh; the city prescribes a 改変 credit form for modified works (§3(3)). The four datasets' metadata declares no licence (the site-wide terms cover them; the inference is recorded). The quotes were transcribed from page images, to be checked against the PDF at build | **16 N02 station groups** (JR 14: Sagami 7, Yokohama 5, Chūō 2; Odakyū 4, Keiō 1); frequencies not read from the operators | The japan-city modules; the privacy check; the credit line (the city's 改変 form). To A (owner, 2026-10-04, late) |
 
-## 🔵 Band B — narrower pages (7 cities)
+## 🔵 Band B — narrower pages (8 cities)
 
 From the coverage sweep, banded by the owner on 2026-10-03. Japan wave 2's
 five one-bucket cities were built and landed at review time the same day.
@@ -130,8 +130,9 @@ five one-bucket cities were built and landed at review time the same day.
 | **Ichikawa** 🇯🇵 | Personal services only (Kōchi's shape) | As Matsudo: Chiba Prefecture's lists, PDL 1.0, filtered by address (MHLW's food file: 904 addressed rows here) | **15 N02 station groups** (JR 5, Keisei 5, Tōzai 3, Hokusō 2, Toei Shinjuku 1) | As Matsudo (owner, 2026-10-04) |
 | **Kanazawa** 🇯🇵 | Food from a dated snapshot: food service and food retail as of 2024-04, the date disclosed; no personal services | The city catalogue's `172014-syokuhineisei-kyokashisetsu` (CC BY, newest permit 2024-04, published 2024-07-16): **8,842 rows**, **5,412** restaurants, **84%** of today's 6,438 in force, with coordinates. Under five years old (the currency rule). The city site's current lists (food 2026-04-01; barber, beauty and laundry 2026-03-31) are all rights reserved and not used | **21 N02 station groups** (Hokutetsu 17, IR Ishikawa 4) | B, food from the snapshot (owner, 2026-10-04); **disclose the snapshot's date** |
 | **Bremen** 🇩🇪 | **Retail only**: one full bucket, the survey's date disclosed; no food service or personal services source | The 2022 regional retail survey (Kommunalverbund Niedersachsen/Bremen, fieldwork 2022-03 to 2022-09; `geoportal.bremen.de/resources/data/Einzelhandelsbestand_reduziert.zip`, 172,889 bytes, cached in `data/bremen/raw/`, CC BY as stated): **3,153 points in the City of Bremen** (5,573 in the region), every row placed (EPSG:25832), goods group and floor-area class only, no name, address or person field; food and drink shops 1,141, clothing 417, pharmacies and drugstores 209; small shops kept (2,127 under 100 m²) | Trams: BSAG's 8 lines (1, 2, 3, 4, 5, 6, 8, 10), about 165 stops from the 2026-08-17 timetable, a few outside the city | B (owner, 2026-10-04). **A licence read first** (CC BY as stated, not read in full). The survey passes the five-year rule until 2027; a new survey or a refresh is the condition after that |
+| **Gelsenkirchen** 🇩🇪 | All three buckets, **personal services a measured gap**: food service, retail and personal services; the survey's date stated as not given, earlier files labelled 2024 (owner, 2026-10-04) | The city's Infrastrukturdatenbank commercial layers (`maps.gelsenkirchen.de` OGC API, five layers, 7.1 MB, cached in `data/gelsenkirchen/raw/`), **Datenlizenz Deutschland Zero 2.0** (licence read 2026-10-04: every city record says so; open.nrw's "other-closed" is a harvester default). Every row placed. Under `docs/category_rules.md`: food **346** (3 hotels out), retail **1,322** (with 4 car dealers from the services layer), personal services **104** (hairdressers 88, beauty 4, dry cleaning 6, tattoo 6; betting, funeral, repairs, finance and health out); **188 uncategorised rows (54 food, 134 services) left out and disclosed** (owner). 82% of services lie in the designated centres against 53% of retail. Name 100% filled (the privacy check); Telefon, EMail, Internet and the free-text `DL_Vermarktung` are never read | Trams 301 (every 7-8 min) and 302 (7-8), line 107 (10) and U11 (10-15): about 60 stops in the city (BOGESTRA's timetables; the border stops' side ASSERTED) | B (owner, 2026-10-04): currency dated from the 2024 file labels, disclosed; the uncategorised rows out. Open at build: the privacy check on Name, the city boundary |
 
-## 🟣 Band C — closer to a page (5 cities)
+## 🟣 Band C — closer to a page (4 cities)
 
 | City | What there is | What stands between it and a band |
 |---|---|---|
@@ -139,7 +140,6 @@ five one-bucket cities were built and landed at review time the same day.
 | **Gyeongsan** 🇰🇷 | SEMAS: **8,943** (4,476 / 3,223 / 1,244), 100% placed; Daegu Lines 1 and 2, **5 stations** (Daegu's site answers a cookie challenge); 35% in a ring | **A page of its own, or Daegu (Regional)**, as Yangsan |
 | **Kurashiki** 🇯🇵 | The city's full food list (`kurashiki.dataeye.jp` 1446, as of 2026-03-31, CSV 791 KB, standard format, PDL 1.0) plus monthly new permits to 2026-08; no personal-services list found; **21 N02 station groups** (Mizushima 10, JR 8, Ibara 3); MHLW holds 149 (3%) | **Measured 2026-10-04 (cached in `data/kurashiki/raw/`): 3,172 permits, all issued under the 2021 law (2021-06 to 2026-03), so old-law permits still in force are missing**: 飲食店営業 2,446 = **52.6%** of the 4,653 in force (45% at fixed premises); food shops 544; 89.0% addressed to a street number, coordinate columns empty, no operator-name column. **What stands between it and a band:** the city's pre-2021 permit list (a two-source build, Fukuoka's shape), or a personal-services list (Kōchi's shape) |
 | **Naha** 🇯🇵 | Only the city's monthly NEW food permits since 2015-04 (the city's page and BODIK `shinki_syokuhin`, XLS/XLSX with an expiry column, CC BY 4.0); no full list; the Yui Rail monorail, **16 station groups** (every 8-12 minutes, ASSERTED); MHLW holds 97 (1%) | **One measurement**: whether a Kyoto-style rebuild from the monthlies reaches the **8,530** in force (Nagoya's renewal trap: its monthlies missed renewals). Personal-services lists unread: `data.bodik.jp` answered 403 after the probe's ~100 quick calls, probably a rate block, not routed around |
-| **Gelsenkirchen** 🇩🇪 | The city's retail and centres survey points (`maps.gelsenkirchen.de` OGC API, `infrastrukturdatenbank`, UTM 32N): food service **403**, retail **1,318** (main goods group, range, floor-area class), services **591** (hairdressers, cosmetics and the like) and **467** vacant units; services concentrated in the centres (103 of 591 outside them). Bogestra trams 301 and 302, Stadtbahn U11, tram 107 (ASSERTED) | **A licence read, then two measurements**: the licence is stated two ways, dl-zero-de/2.0 on open.nrw and "other-closed" on opendata.ruhr, and a read is running; then the rows' dates (the catalogue stamp, 2026-09-16, is not a row date) and each bucket's coverage against OSM. To C (owner, 2026-10-04, late) |
 
 *Sagamihara left the band for A on 2026-10-04, late (owner), on its licence read.*
 
@@ -297,7 +297,7 @@ Band R row.
 | **Noida / Greater Noida** 🇮🇳 | The NMRC Aqua Line, 21 stations (the operator's page), plus Delhi Metro stations. No municipal corporation: the Noida Authority's host times out on reading and the Greater Noida Authority's on connecting, so the city's own host never answered | A read of either authority's site, or a public copy of a trade or shop register |
 | **Stuttgart** 🇩🇪 | Stadtbahn and U-Bahn (ASSERTED; stations not counted). `opendata.stuttgart.de` answered 502 on its API and its HTML, three tries, so the city's own catalogue never answered; GovData's harvest of 394 Stuttgart datasets shows statistics only; IHK Region Stuttgart read (lookup databases, no premises list) | A read of `opendata.stuttgart.de` once it answers (owner, 2026-10-04) |
 
-## DISCARDED — 260 cities, each naming its evidence
+## DISCARDED — 261 cities, each naming its evidence
 
 ▼ **2026-10-04 (late) — twenty-five rows from the Central Europe and Germany north screens** (owner's calls the same day): Linz, Innsbruck and Gmunden (its tram frequency doubtful too), Osijek and Košice on absence, each on its own host and its national catalogue; Rostock on Dresden's precedent (its geodata office's curated CC0 POI layers count as no register); and nineteen tram and Stadtbahn cities of Germany's north on absence, each on its own host, open.nrw, opendata.ruhr or its state's catalogue, and its chamber: Düsseldorf, Dortmund, Essen, Duisburg, Bochum, Mülheim an der Ruhr, Oberhausen, Krefeld, Bonn, Bielefeld, Hannover, Braunschweig, Magdeburg, Halle (Saale), Schwerin (the thinnest: a page read and searches), Potsdam, Cottbus, Frankfurt an der Oder and Brandenburg an der Havel (its 20-minute trams doubtful too). Gelsenkirchen and Bremen went to Band C instead. Budapest left this table the same day for Band D (the note above its table).
 
@@ -729,6 +729,7 @@ dataset title**.
 | **Cottbus** 🇩🇪 | absence | enumerated `odp-cottbus.opendata.arcgis.com` (20 datasets) · enumerated GovData's Open Data Brandenburg · search IHK Cottbus (its site search, four terms) | yes — `odp-cottbus.opendata.arcgis.com` | **No premises register (2026-10-04).** Cottbusverkehr trams, 3-4 lines (ASSERTED) |
 | **Frankfurt an der Oder** 🇩🇪 | absence | enumerated the city's 108 geoportal records (Open Data Brandenburg's harvest) · read frankfurt-oder.de's Geoportal and Daten page · search IHK Ostbrandenburg (its site search, four terms) | yes — `frankfurt-oder.de` | **No premises register (2026-10-04).** SVF trams, 4-5 lines (ASSERTED) |
 | **Brandenburg an der Havel** 🇩🇪 | absence | enumerated stadt-brandenburg.de's page sitemap (719 pages, no data section) · enumerated GovData's Open Data Brandenburg (no city datasets) · search IHK Potsdam (its site search, four terms) | yes — `stadt-brandenburg.de` | **No premises register (2026-10-04).** VBBr trams, 3 lines (ASSERTED); **its rail is doubtful too**, at 20-minute headways |
+| **Wuppertal** 🇩🇪 | absence | enumerated `offenedaten-wuppertal.de` (122 datasets, 4 under Wirtschaft und Arbeit) · enumerated open.nrw's Wuppertal harvest (122) and its full-text search (764) · enumerated the city's map service (51 layers, base maps) · read the retail-concept dataset (Zentrale Versorgungsbereiche 2020: polygons only; the 2019 survey's points unpublished) · read the POI layer's metadata (684 tourism and leisure points, 2021) · search the Bergische IHK | yes — the city's data portal (`www.wuppertal.de` serves a Cloudflare challenge, not routed around) | **No premises register (2026-10-04).** The Schwebebahn, 20 stations on its own suspended track, every 3 to 5 minutes on weekdays (WSW's timetable), behaves like rapid transit; whether the mode counts is left open (owner, 2026-10-04: moot without a register). Reopens with a published premises or retail survey with points |
 
 ## Commuter-rail revisit group (discards, not candidates; owner, 2026-10-01)
 
@@ -803,7 +804,7 @@ it, not a band.
 | 🇵🇹 Portugal | — | **0** | **1** — Lisbon | R | DGAE's register is public on its map (three buckets, address, coordinates), but bulk access is for institutions only; the request is drafted, not sent (2026-09-28). Porto would follow |
 | 🇫🇮 Finland | — | **0** | **1** — Helsinki | R | Geo-blocked; a read from inside Europe |
 | 🇪🇪 Estonia | — | **0** | **1** — Tallinn | R | Food register geo-blocked; the EHR order |
-| 🇩🇪 Germany | **1** | **2** — Gelsenkirchen, Bremen | **2** — Ludwigshafen, Ulm | B, C, R | **Bremen to B 2026-10-04 (owner), retail only, a licence read first.** **The north screened 2026-10-04, late (owner)**: Gelsenkirchen (the city's retail and centres survey, three buckets; a licence read first) and Bremen (a 2022 retail survey, one bucket) to C; Rostock and nineteen tram and Stadtbahn cities discarded on absence. **The south and centre screened 2026-10-04 (owner)**: 21 tram, Stadtbahn and U-Bahn cities discarded on absence, Ludwigshafen and Ulm to R on host blocks, Stuttgart to the open gap; IHK Berlin remains the only chamber publishing premises data. Berlin built. Dresden and Leipzig discarded 2026-10-01: no premises register beside Munich, Frankfurt, Cologne and Hamburg |
+| 🇩🇪 Germany | **1** | **2** — Gelsenkirchen, Bremen | **2** — Ludwigshafen, Ulm | B, R | **Bremen (retail only) and Gelsenkirchen (three buckets, services a measured gap) to B 2026-10-04 (owner); Wuppertal discarded (no register; the Schwebebahn's mode left open).** **The north screened 2026-10-04, late (owner)**: Gelsenkirchen (the city's retail and centres survey, three buckets; a licence read first) and Bremen (a 2022 retail survey, one bucket) to C; Rostock and nineteen tram and Stadtbahn cities discarded on absence. **The south and centre screened 2026-10-04 (owner)**: 21 tram, Stadtbahn and U-Bahn cities discarded on absence, Ludwigshafen and Ulm to R on host blocks, Stuttgart to the open gap; IHK Berlin remains the only chamber publishing premises data. Berlin built. Dresden and Leipzig discarded 2026-10-01: no premises register beside Munich, Frankfurt, Cologne and Hamburg |
 | 🇦🇹 Austria | — | **0** | **0** | — | **Linz, Innsbruck and Gmunden discarded 2026-10-04, late (owner)** (no register; Gmunden's tram frequency doubtful too). Vienna and Graz discarded (GISA strips addresses; no city register) |
 | 🇪🇬 Egypt | — | **0** | **0** | — | Alexandria discarded 2026-10-04 (its host down from inside Egypt too). Cairo discarded (no register at any level) |
 | 🇨🇱 Chile | — | **0** | **0** | — | Valparaíso / Viña del Mar and Concepción discarded 2026-10-04. Santiago discarded (coverage fails downtown) |
@@ -832,7 +833,7 @@ it, not a band.
 | 🇭🇺 Hungary | — | **4** — Debrecen, Szeged, Miskolc, Budapest | **0** | D | **2026-10-04, late (owner)**: Debrecen, Szeged and Miskolc to D, and Budapest from the discards to D: municipal notaries publish the 210/2009 shop register (IPARKER, GovCenter) and OKNYIR holds it nationally; an OKNYIR export in the owner's own browser, then food service and retail only, placed by an OSM address join |
 | 🇭🇷 Croatia | — | **0** | **0** | — | **Osijek discarded 2026-10-04, late (owner)** (no register; the national crafts register refuses scripts). Zagreb discarded (a grant list only) |
 | 🇸🇰 Slovakia | — | **0** | **0** | — | **Košice discarded 2026-10-04, late (owner)** (no establishment register reachable: ŽRSR behind a robot check, RPO without establishments). Bratislava discarded |
-| **Total** | **170** | **28** | **51** |  | A 6 · B 7 · C 5 · D 10 · R 51. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **170** | **28** | **51** |  | A 6 · B 8 · C 4 · D 10 · R 51. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 

@@ -4,6 +4,36 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gelsenkirchen to B; Wuppertal discarded, its mode left open (owner)
+
+- **The owner: "76 yes 77 yes 78 yes 79 yes 80 yes".**
+- **Gelsenkirchen to B** (three buckets, personal services a measured gap):
+  its five commercial layers (7.1 MB, cached) give food 346, retail 1,322
+  and personal services 104 under the category rules, every row placed;
+  82% of services lie in the designated centres against 53% of retail.
+  **Currency** dated from the 2024 labels on the earlier files, stated on
+  the page as an undated survey; the alternative was waiting for the city's
+  retail plan on a host that refuses curl. **The 188 uncategorised rows**
+  (54 food, 134 services) are left out and disclosed. The build never reads
+  Telefon, EMail, Internet or `DL_Vermarktung`.
+- **Wuppertal discarded** (absence): its data portal (122 datasets), the
+  state portal's harvest, its map service and the chamber hold no premises
+  register; the retail concept publishes polygons only. **The suspension
+  railway's mode is left open**: moot without a register, and the row
+  records that the Schwebebahn behaves like rapid transit (its own track,
+  every 3 to 5 minutes on weekdays). Monorails are counted everywhere they
+  appear; funiculars have gone both ways; cable cars are out.
+
+### 2026-10-04 - Probe slip in the Gelsenkirchen measurement: contact details printed from a free-text field
+
+- **What happened:** a first tally of the city's commercial layers printed
+  values from the free-text `DL_Vermarktung` field (vacancy marketing
+  notes), which hold a person's name and phone numbers. The agent deleted
+  them from its scratch output at once; none reached its report or notes.
+- **For the build:** `DL_Vermarktung` is never read; the brief names it as a
+  dropped field, beside Telefon, EMail and Internet, and the personal
+  exposure check runs on Name.
+
 ### 2026-10-04 - Bremen to B, retail only; Gelsenkirchen's licence settled; Kurashiki measured (owner)
 
 - **Bremen, "75 approved":** the 2022 regional retail survey (fieldwork
