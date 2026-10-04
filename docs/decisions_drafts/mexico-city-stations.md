@@ -4,6 +4,37 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The owner's answers on the station repair: two Guadalajara interchanges merged, two Mexico City sentences approved (owner, via Cleanup)
+
+- **Merged Guadalajara's two interchanges named per line, by the owner's
+  call: 55 stations -> 53.** "Juárez" (Línea 1) and "Juárez II" (Línea 2)
+  are now one station, "Juárez"; "Guadalajara Centro" (Línea 3) and "Plaza
+  Universidad" (Línea 2) are one, shown as "Guadalajara Centro / Plaza
+  Universidad". Their four stops each lie at most 93 m and 95 m apart. These
+  are different names, not spellings, so `station_name_key` cannot merge
+  them. `pipeline/guadalajara/config.py`'s `INTERCHANGE_NAMES` maps them by
+  exact OSM name. Step 1 raises on a stale entry or on a merged station
+  whose stops spread past 250 m. The nearest-neighbour minimum went from
+  91 m to 518 m. Gate 3 still passes (SITEUR 10 and 8, OSM 10 and 8).
+  Businesses in a ring, of 116,945: 36,751 -> 36,729.
+- **The Centro name joins both names, a call made here, not by the owner.**
+  The owner said to merge "the same way" as Ávila Camacho, which picked one
+  spelling of one name. Here the two names are different, and each line's
+  riders know the station by its own, so dropping either would mislabel it
+  for one line. Mexico City's "Garibaldi-Lagunilla" is a joined precedent.
+  Choosing one name is a one-line change in `INTERCHANGE_NAMES` if the owner
+  prefers it.
+- **Approved and written, the Mexico City page's third bullet under "The
+  lines"** (`app/pages/15_Mexico_City_Heatmap.py`), in the owner's
+  shortened form: "Líneas A and B run north and east into the State of
+  Mexico, and Línea 2 ends just across the city line at Cuatro Caminos;
+  those stations are left out because this map has no business data there.
+  They are listed below." `check_city_page_format.py`,
+  `rendered_surfaces.py --check` and `check_deploy_imports.py` pass.
+- **Approved as drafted and written, the method sentence in
+  `docs/data_sources/mexico.md`'s Mexico City rail row**, after the
+  Lechería sentence. The Guadalajara row's count is now "53 stations".
+
 ### 2026-10-04 - Guadalajara's Ávila Camacho collapsed to one station (owner, via Staging; branch, lands with Mexico City's repair)
 
 - **Collapsed Guadalajara's doubled station: 56 stations -> 55.** OSM names

@@ -52,8 +52,8 @@ st.markdown(
 - Each line is labeled directly on the map in the name its riders use, and appears in the
   legend.
 - Only stations inside Ciudad de México are mapped. Líneas A and B run north and east into
-  the State of Mexico, and those stations are left out because this map has no business data
-  for them — their rings would sit over blank ground. They are listed below.
+  the State of Mexico, and Línea 2 ends just across the city line at Cuatro Caminos; those
+  stations are left out because this map has no business data there. They are listed below.
 - **The line geometry here comes from OpenStreetMap, not from the operator.** None of the
   public servers of the Mexico City government, STC Metro or the STE could be reached from
   where this was built, and the Metro's transit feed refused the download.

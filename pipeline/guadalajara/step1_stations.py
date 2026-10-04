@@ -15,6 +15,7 @@ step checks OSM against them.
 """
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -26,6 +27,7 @@ from shapely.ops import linemerge, polygonize, unary_union
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from pipeline.stations import (
+    projected_xy,
     station_name_key,
     strip_line_designator,
     verify_stations,
@@ -34,6 +36,8 @@ from pipeline.guadalajara.config import (
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
     EXCLUDED_STATIONS_CSV,
+    INTERCHANGE_MAX_SPREAD_M,
+    INTERCHANGE_NAMES,
     LINE_NAMES,
     MUNICIPIOS_KEEP,
     OSM_BOUNDARY_JSON,
@@ -181,6 +185,26 @@ def main():
             print(f"  one station, several names: {sorted(set(g['name']))} "
                   f"-> {shown_name(g['name'])!r}")
     platforms["name"] = platforms.groupby("key")["name"].transform(shown_name)
+
+    # Interchanges OSM names per line, merged by the owner's call (config.py).
+    stale = sorted(set(INTERCHANGE_NAMES) - set(platforms["name"]))
+    if stale:
+        raise SystemExit(
+            f"INTERCHANGE_NAMES lists {stale}, no longer an OSM station name. "
+            "Re-read OSM and update the entry; never keep a stale one.")
+    platforms["name"] = platforms["name"].replace(INTERCHANGE_NAMES)
+    for merged in sorted(set(INTERCHANGE_NAMES.values())):
+        rows = platforms[platforms["name"] == merged]
+        xy = list(projected_xy(range(len(rows)), rows["longitude"],
+                               rows["latitude"], CRS_PROJECTED).values())
+        spread = max(math.dist(a, b) for a in xy for b in xy)
+        print(f"  interchange merged: {merged!r}, {len(rows)} stops, "
+              f"{spread:.0f} m apart at most")
+        if spread > INTERCHANGE_MAX_SPREAD_M:
+            raise SystemExit(
+                f"{merged!r} spans {spread:.0f} m, over "
+                f"{INTERCHANGE_MAX_SPREAD_M:.0f} m: OSM has moved or renamed "
+                "a stop. Re-check before merging.")
 
     grouped = (platforms.groupby("name", as_index=False)
                .agg(latitude=("latitude", "mean"),
