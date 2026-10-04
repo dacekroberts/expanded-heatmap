@@ -2112,6 +2112,7 @@ before the next country is profiled.
 | **Azerbaijan, Panama, Venezuela** | **Baku, Panama City and Caracas discarded, 2026-09-28 (owner)**: `opendata.az` (886 datasets) and `datosabiertos.gob.pa` (5,753 packages; the Municipio de Panamá's 131 are aggregates) hold no premises list; Baku's food register is CAPTCHA-gated and "all rights reserved"; Caracas has no open-data portal (`datos.gob.ve` times out, `datosabiertos.gob.ve` does not resolve) | MEASURED |
 | **Iran, Belarus** | **Left out like Russia, for wartime concerns (owner, 2026-09-28)**: Tehran (~150 stations) and Minsk (~37 stations) are not screened. Not a data finding | — |
 | **Israel** | **Held like Russia, for wartime concerns (owner, 2026-10-04)**, after screening: Jerusalem, Bnei Brak and Bat Yam in Band R, Tel Aviv, Ramat Gan and Haifa discarded, Petah Tikva (a licensed-business layer, 2,835 points, 8 Red Line stations, no licence stated) a possible build when the hold lifts. Not a data finding | — |
+| **North Korea, Myanmar** | **Held like Russia, for wartime concerns (owner, 2026-10-04)**: the Pyongyang Metro and Yangon's Circular Railway (commuter rail) are not screened. Not a data finding | — |
 
 ### Japan's rail data is solved, and not by GTFS
 

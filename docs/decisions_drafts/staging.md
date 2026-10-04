@@ -4,6 +4,27 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - North Korea and Myanmar held for wartime concerns; Côte d'Ivoire to the no-rail group; three watch categories (owner)
+
+- **The owner: "categories to watch in country census: untouched, some rail
+  (minus North Korea, Cote d-Ivoire, Myanmar) cote is likely with mongolia
+  and the other two go into the wartime concerns with russia, ukraine,
+  israel, etc"**, then "other categories: candidates none built yet" and
+  "these along with the commuter rail seem to be the last of our viable
+  picks".
+- **North Korea and Myanmar held for wartime concerns**, as Russia,
+  Ukraine, Belarus, Iran and Israel: never probed, not a data finding.
+  Recorded on the master list's "Countries ruled out" and the country
+  shortlist.
+- **Côte d'Ivoire to the census's no-rail group**, under construction beside
+  Mongolia: the Abidjan Metro is not open.
+- **Three watch categories, the last viable picks at country level:**
+  candidates with none built yet (Hungary, Türkiye, Greece, India), the
+  commuter-rail tier, and the seven untouched countries with some rail
+  (mostly commuter rail, so the same overhaul). The census groups now read
+  built 26, candidates 4, restricted 15, probed with no city 29, ruled out
+  or held 8, untouched 7, no rail 111.
+
 ### 2026-10-04 - Toluca to the pre-verdicts; the commuter-rail group widened into its own tier, not candidates (owner)
 
 - **The owner asked what the El Insurgente ruling was.** Call 37 of the

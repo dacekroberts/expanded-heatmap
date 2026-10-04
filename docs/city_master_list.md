@@ -962,6 +962,11 @@ Bat Yam in Band R, Tel Aviv, Ramat Gan and Haifa in the discards, and
 Petah Tikva's findings on the watch-item list, so the country reopens
 without a new probe when the owner lifts the hold.
 
+🇰🇵 **North Korea** and 🇲🇲 **Myanmar: held for wartime concerns** *(owner,
+2026-10-04, as Russia, Ukraine, Belarus, Iran and Israel; not a data
+finding)*. Never probed: the Pyongyang Metro, and Yangon's Circular Railway
+(commuter rail). Both had sat in staging's untouched-countries census.
+
 *🇳🇿 **New Zealand left this list on 2026-10-04** (owner): "licensing is not municipal" was wrong. Under the Food Act 2014 a food business registers with its council or MPI, and Hamilton and Marlborough publish food registers, though neither has urban rail. Auckland and Wellington, the two rail cities, are discarded on rail.*
 
 *🇧🇪 **Belgium left this list on 2026-10-03** (owner), with the coverage sweep: "bulk access paid" rested on one national method. KBO/BCE's Open Data file is free behind a free account (only the Public Search web service is paid), and the cities publish their own layers: hub.brussels's shop inventory for the City of Brussels, FAVV's operator list on Flanders' VKBO points for Antwerp and Ghent, and Wallonia's LoGIC survey for Charleroi and Liège.*
