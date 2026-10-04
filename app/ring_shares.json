@@ -793,5 +793,10 @@
   "in_ring": 3732,
   "all": 7170,
   "map_blob": "56ffb43a01941ad5561642bca35142c5880600c7"
+ },
+ "tacoma": {
+  "in_ring": 503,
+  "all": 2851,
+  "map_blob": "8b2de93882753d3b0a4ae495b62293a8f04d6b2e"
  }
 }
