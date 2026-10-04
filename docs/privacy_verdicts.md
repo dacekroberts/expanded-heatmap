@@ -137,6 +137,7 @@ a verdict word; they are `publish`, as published on those numbers.
 | Uijeongbu | publish | 2026-09-30 | Uijeongbu built: a Gyeonggi satellite on SEMAS's register, the U Line drawn | Personal exposure: PASS. |
 | Anyang | publish | 2026-09-30 | Anyang built: the last Gyeonggi satellite, on its ring share | Personal exposure: PASS. |
 | Daejeon | publish | 2026-10-04 | Daejeon built: Daejeon Metro Line 1 on SEMAS's register | Personal exposure: PASS; 0 of 50,939 rows show a Korean personal name at a residential address, 79 withheld. (In `docs/decisions_drafts/korea-sweep.md` until Cleanup folds it.) |
+| Gwangju | publish | 2026-10-04 | Gwangju built: Gwangju Metro Line 1 on SEMAS's register, the merged member's codes and a five-district boundary | Personal exposure: PASS; 0 of 47,214 rows show a Korean personal name at a residential address, 82 withheld. (In `docs/decisions_drafts/korea-sweep.md` until Cleanup folds it.) |
 | Dallas | publish | 2026-09-30 | Dallas built on Houston's register and rules, placed by the City's Address Points | Personal exposure: PASS at Houston's level. |
 | Angers | publish | 2026-09-30 | Angers built mark-free on `france-build-3`: 36 stops, 2,530 storefronts, page 120, notice 77 | Personal exposure: PASS. |
 | Brno | publish | 2026-09-30 | Brno rendered and checked: 146 stations, 11 lines, 82.4% of storefronts in a ring; privacy verdict publish | Privacy verdict for Brno, from `check_personal_exposure.py brno`: publish. |

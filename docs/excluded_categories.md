@@ -5130,6 +5130,24 @@ name at an address that reads residential.
 city. Line 2, a tram under construction, is not drawn, nor are Korail's
 intercity lines.
 
+### Gwangju - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above). Since 2026 Gwangju's five districts sit in the merged
+전남광주통합특별시 with all of South Jeolla; the map keeps only the five.
+
+**Out by name**: hostess bars 571, dance halls 38, staff canteens 173,
+household fuel dealers 70; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 82 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**: Line 1 of the Gwangju Metro, 20 stations, every one inside the
+city. Line 2, under construction, is not drawn, nor are Korail's intercity
+lines.
+
 ### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
 
 **The source** is the National Statistics Office of Georgia's Statistical

@@ -4,6 +4,58 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gwangju built: Gwangju Metro Line 1 on SEMAS's register, the merged member's codes and a five-district boundary
+
+**Built** on branch `korea-sweep-build`, page 191, region East Asia, from
+Daejeon's files (Incheon's module). Downloads and page prose under the owner's
+pre-approval (2026-09-30); the page is Bucheon's approved text with Gwangju's
+line, and three proposal sentences (below). **47,214 storefronts** (food
+service 20,701, retail 18,706, personal services 7,807), exactly the brief's,
+from 75,324 rows in the five codes of the member 전남광주통합특별시;
+**14,077 within the rings (29.8%)**. **20 stations** on Line 1, every one
+inside the city, a 770 m median gap (minimum 535 m, Geumnamno 4-ga / 5-ga):
+standard rings. `coverage` full, `categories` "All three", `mode` metro.
+
+- **Step 2 keys on 시군구코드** 12210, 12240, 12270, 12300 and 12330 inside
+  the member 전남광주통합특별시 (owner, 2026-10-03: codes, never names).
+- **Boundary: the union of the five 구 relations** (4162635 동구, 7348759 서구,
+  7348741 남구, 7348583 북구, 7348758 광산구; admin_level 6), each taken by
+  id, checked by name and required to lie inside the city's query box:
+  **500 km²**, gated at 490-510 (the brief expected about 501). The one
+  query asked for any relation named 광주광역시 at any level and returned
+  none: after the 2026 merger OSM no longer holds the city's own relation.
+  This is the brief's prescribed fallback, not a new call.
+- **Rail: one Overpass query**, answered first try. Line 1's two direction
+  relations (`ref=1`, subway, #009088); **Line 2's two circle relations**
+  (`ref=2`, light_rail, 36 planned stops each) **placed as not drawn**, under
+  construction (phase 1 reported for 2028-12). Gate 3 exact: 20 against the
+  operator's 운행현황 (역수 20개역), a primary source. 광주송정 is the Line 1
+  stop (route membership).
+- **One English name overridden**: OSM's "Geumnamro 5-ga" for 금남로5가 to
+  "Geumnamno 5-ga", matching OSM's own 금남로4가 ("Geumnamno 4(sa)-ga") and the
+  operator's English station list (Geumnamno5-ga); the operator's English
+  timetable page itself writes "Geumnamro 5 Ga", so the operator is
+  inconsistent. Ansan's override mechanism, copied into Gwangju's step 1.
+- **녹동 (Nokdong) kept** as a station of the drawn metro line (the brief's
+  recommendation; the 15-minute test is light rail's). The operator's
+  녹동행 page gives first and last trains only (녹동 06:14-22:17 toward 평동,
+  the same span as 소태), and its 운행현황 page gives 소태-평동 33 minutes and
+  녹동-평동 38 minutes with separate 소태행 and 녹동행 tables; the per-station
+  timetables load only through the site's route finder, so 녹동's daily count
+  was **not read**. Recorded as unmeasured, not as a pass.
+- **Line color**: #009088, Delta-E 28.6 from Personal services, kept as
+  Daejeon's.
+- **Personal exposure: PASS.** 0 of 47,214 rows show a Korean personal name
+  at a residential address; 82 withheld by step 2 (8 of them in-ring pins).
+- **Licence**: notice 68 and notice 1 gain Gwangju; no new notice.
+- **Page prose proposals** (not covered by the template): "Most trains turn
+  back at Sotae, one stop short of Nokdong."; "Not drawn: Line 2, still under
+  construction, and Korail's intercity lines."; "The whole city is included:
+  its five districts, which since 2026 sit within the merged
+  전남광주통합특별시."
+- **Downstream**: notice 68 a caption, notice 1 rail, boundary and names;
+  the known SEMAS card hold applies (notice 68 only).
+
 ### 2026-10-04 - Daejeon built: Daejeon Metro Line 1 on SEMAS's register
 
 **Built** on branch `korea-sweep-build` (cut from `origin/master` at
