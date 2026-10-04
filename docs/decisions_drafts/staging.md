@@ -4,6 +4,111 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gaziantep to Band D: its data's origin is a question for the publisher (owner, conditional)
+
+- **The desk check came back unresolved**, which triggers the owner's
+  conditional yes of the same day ("if it settles nothing, D with a
+  question to the published contact as the owner's act").
+- **Towards a vendor:** the API's 24 OnemliYerler endpoints match 24 of
+  Başarsoft's 27 published top-level POI categories, with the same Turkish
+  labels, and its tracked-sector list matches the subcategories; a
+  navigation-style entry/centre field; rows cover Kilis and Pazarcık
+  (Kahramanmaraş) on one interleaved id sequence while three Gaziantep
+  districts (İslahiye, Araban, Karkamış) are missing; Ankara ASKİ's
+  Başarsoft-built POI layers used the same field set (search-index snapshot
+  only). Yandex, HERE, TomTom and NAVTEQ schemes do not match.
+- **Towards municipal compilation:** the Ministry's TUCBS Altyapı v2.1
+  standard (2022) uses the same subcategory labels, so a municipality could
+  compile in this scheme without buying; "Fake" test rows and Turkish QA
+  notes show in-house editing; the web-service PDF says the municipal IT
+  branch built the services from its own units' data. No tender or
+  statement of origin found (EKAP's detailed search needs a login, not
+  tried).
+- **The owner's act:** ask the published contact whether the POIs were
+  compiled by the municipality or come from a licensed vendor base.
+  Municipal: back to C on the currency rule. Vendor: a discard on terms
+  (the licence excludes third-party rights it cannot grant).
+- **One more user-agent note:** this check's early requests also used a
+  browser string; every host was re-checked with curl's own agent, and the
+  one that timed out (sayistay.gov.tr) is recorded as a refusal, its copy
+  deleted and unused.
+
+### 2026-10-04 - Probe slip in the Ecuador fetch: a browser user-agent string past a refusal
+
+- **What happened:** fetching the owner-approved ARCSA file
+  (`BASE-DE-DATOS-DE-PERMISOS-DE-FUNCIONAMIENTO-VIGENTES-Y-CANCELADOS-CON-CORTE-15-09-2026.xlsx`,
+  7,592,002 bytes, controlsanitario.gob.ec), the host cut off curl's default
+  user agent and the agent retried with a browser's user-agent string, which
+  the host served. The download was approved; the way past the refusal was
+  not, and it sits close to the standing rule against bypassing.
+- **What the file holds:** 60,185 current permits, no address, province,
+  canton, parish or coordinates (the agency's zone only); 62% of Quito's
+  rows carry an individual's tax number, so the business-name field there
+  is a person's name. Nothing from it was printed beyond counts.
+- **Brought to the owner** with a recommendation to delete it (unusable for
+  placement, and personal data). Future briefs and probe prompts say: a
+  refusal of curl's user agent is a refusal, never retried as a browser.
+- **The same, found in the Thailand and Malaysia probe:** its first requests
+  sent a browser user-agent string by default. Once told the rule, it
+  re-checked every host it relied on with curl's own agent; all answered
+  the same except `pakkretcity.go.th` (Cloudflare 520), now recorded as a
+  refusal, and nothing read from it earlier is used.
+
+### 2026-10-04 - Geneva (Regional)'s three build calls, and Thessaloniki's licence reading (owner)
+
+- **Geneva (Regional), "yes to geneva three"**, each on its precedent, for
+  the build of `docs/build_briefs/geneva.md` (12 tram communes, 5,885
+  establishments after the home-based and itinerant rows are dropped):
+  1. **The 1,848 company rows in scope with no establishment row are left
+     out, disclosed.** A company row has no premises type, so a home-based
+     seat cannot be told from a shop. Tradeoff accepted: a gap about a third
+     the size of what is kept, stated on the page.
+  2. **Sole traders' names withheld where they read as the registrant's
+     own** (1,498 kept rows belong to an "Entreprise individuelle"), as
+     Tucson and Kansas City.
+  3. **The taxonomy:** Stand ambulant (22) out on R1 and the mobile-units
+     row; traiteurs (562100) out on R1 and Georgia's precedent, not France's;
+     the 326 storefront-coded rows typed Bureau/étude/cabinet split by code
+     at build and brought to the owner as a count.
+- **Thessaloniki, "recommended reading sounds good":** the licence read found
+  CC BY 4.0 on the layer's own data.gov.gr record (a harvester default
+  applied under the City's organization, matching the City portal's default
+  and Decision 11654/2026, Art. 8(3)). The map portal's splash ("in no case
+  are modification and/or redistribution permitted") is read as the web
+  app's terms only, so **the build reads `sdi.thessaloniki.gr/geoserver/wfs`
+  only, never the MapServer copy.** Tradeoff accepted: if the City meant the
+  splash for all its GIS data, the page comes down on request (the removal
+  rule). The layer carries no date, so the page gives the retrieval date and
+  never calls the data current or complete. Thessaloniki stays B (food shops
+  a partial Retail layer); a brief is next.
+
+### 2026-10-04 - Gaziantep's licence read: catalogued sets only, and one desk check of the data's origin (owner)
+
+- **The licence read** (the Gaziantep Açık Veri Lisansı, Turkish only, no
+  licensor named): worldwide, royalty-free, commercial use, publication and
+  derived works granted, on condition of a source credit and a link to the
+  licence where possible; nothing to do beyond that. It grants no rights in
+  personal data, third-party rights or trademarks.
+- **The owner: "yes 2 and 3"**, on staging's two recommendations:
+  1. **Retail from the two catalogued datasets only**, "Ticari Yerler" and
+     "Yemek Yerleri". The shopping endpoint (AlisverisNoktalari, 4.96 MB) is
+     in the API's swagger and the web-service PDF but in none of the 252
+     catalogued packages, so whether the licence reaches it is unclear.
+     Tradeoff accepted: a thinner retail layer.
+  2. **One desk check of the data's origin before anything else.** 1,206
+     commercial rows lie in other provinces (Kilis, Kahramanmaraş), the
+     category codes look like a vendor's and some rows are test rows, so the
+     set may be a licensed navigation vendor's POI base, whose rights the open
+     licence cannot pass on. The check compares the codes against Turkish
+     navigation vendors' published schemas. If it settles nothing, Gaziantep
+     moves to D with a question to the published contact as the owner's act
+     (outreach last). Gaziantep stays in C meanwhile; the currency rule (no
+     date field, catalogue stamp 2025-04-25) is still open.
+- **Not a call, for the build:** personal data falls to
+  `check_personal_exposure.py` as usual (sole traders' shops named after
+  their owners among the hairdressers and barbers), and the `aciklama` field
+  is dropped (its test-row notes hold an editor's first name).
+
 ### 2026-10-04 - The next probe items after the reset's work (owner)
 
 - **The owner, on the country census's "where new cities could still come

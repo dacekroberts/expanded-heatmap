@@ -58,6 +58,14 @@ the pointers. **Delete a section when its item is done.**
 - **On master, `docs/city_master_list.md`: 158 built; 25 candidates (A 9 ·
   B 7 · C 6 · D 3); 29 restricted; 155 discards.** The artifact is at
   version 9 (https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn), with the paused probes listed.
+- **The country census artifact** (https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD,
+  version 3, 2026-10-04): its "Hottest leads" section is every open A-D
+  candidate, rebuilt from the master list by the scratchpad's
+  `leads_build.py` (one-line notes in `leads_notes.json`) before each
+  republish (owner: leads "should dynamically take in promising
+  candidates"). The no-rail group is sorted by the 2026-10-04 fact-check
+  (110 countries; Mongolia possibly building a metro). If the scratchpad
+  is gone, rebuild the section from the band tables by hand.
 - **Three build sessions are out**, each landing at review time: "Korean
   build session" (Daejeon 190, Gwangju 191, Gimhae 192;
   `docs/handoff_korea_sweep_2026-10-03.md`), "Mendoza Tacoma Liverpool"
