@@ -56,7 +56,7 @@ if PROVENANCE_JSON.exists():
         pass
 
 # The scaffold's bullets and the Charleroi brief's page text, filled in;
-# sentences outside the template are flagged in docs/decisions_drafts/belgium.md
+# sentences outside the template are flagged in DECISIONS.md
 # (the 200 m2 and hotels sentences, M2's outside stops, the M1 sentence).
 st.markdown(
     """

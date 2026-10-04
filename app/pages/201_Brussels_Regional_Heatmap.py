@@ -57,7 +57,7 @@ st.caption("Shops and restaurants from KBO/BCE Open Data, the federal register o
                                f"open data, fetched **{_feed}**." if _feed else "."))
 
 # The scaffold's bullets filled in for the 18 communes; sentences outside the
-# template are flagged in docs/decisions_drafts/belgium.md (the different-
+# template are flagged in DECISIONS.md (the different-
 # method sentence, the near-City-station sentence, the several-codes sentence).
 st.markdown(
     """

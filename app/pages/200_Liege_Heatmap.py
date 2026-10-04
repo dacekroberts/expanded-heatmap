@@ -56,7 +56,7 @@ if PROVENANCE_JSON.exists():
         pass
 
 # The tram-city template and the Liège brief's page text, filled in; sentences
-# outside the template are flagged in docs/decisions_drafts/belgium.md (the
+# outside the template are flagged in DECISIONS.md (the
 # 200 m2 and hotels sentences, the fork sentence).
 st.markdown(
     """

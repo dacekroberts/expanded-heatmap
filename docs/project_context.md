@@ -323,8 +323,8 @@ Cities built and running end to end (pipeline, map, app page):
   sales kept (the precedent, not France's exception). Rail and the city
   boundary from one OpenStreetMap query.
 - **Belgium: Brussels, Antwerp, Ghent, Charleroi, Liège and Brussels
-  (Regional)** - built together on `belgium-build`, held for the owner's
-  review; **Belgium's first cities**, in a macro-map view of their own
+  (Regional)** - built together, landed 2026-10-04;
+  **Belgium's first cities**, in a macro-map view of their own
   (Czechia's mechanism). No national method fits all six, so each region
   has its own: Brussels on hub.brussels's street survey (all three
   categories); Antwerp and Ghent on FAVV-AFSCA's food-operator list placed
@@ -337,7 +337,7 @@ Cities built and running end to end (pipeline, map, app page):
   portal, whose terms the owner accepted (a terms change goes back to the
   owner); OSM supplies commune boundaries only. KBO is never read for a
   natural person, and its download is the owner's act, at least yearly.
-  Decisions in `docs/decisions_drafts/belgium.md` until Cleanup folds them.
+  Decisions in `DECISIONS.md`.
 - **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
   Canada Lines. **The first city outside the United States, and the first
   built from two municipalities' own registries.** Distinctive in five ways.

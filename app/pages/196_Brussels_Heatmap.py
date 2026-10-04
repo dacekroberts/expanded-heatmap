@@ -55,7 +55,7 @@ if PROVENANCE_JSON.exists():
         pass
 
 # The scaffold's bullets filled in for the City; sentences outside the template
-# are flagged in docs/decisions_drafts/belgium.md (the several-types sentence,
+# are flagged in DECISIONS.md (the several-types sentence,
 # the color sentence, the premetro sentence).
 st.markdown(
     """

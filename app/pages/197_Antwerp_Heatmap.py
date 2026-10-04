@@ -58,7 +58,7 @@ if PROVENANCE_JSON.exists():
 
 # The tram-city template, filled in for Antwerp, with the Antwerp brief's
 # one-bucket sentences; sentences outside the template are flagged in
-# docs/decisions_drafts/belgium.md.
+# DECISIONS.md.
 st.markdown(
     """
 **The trams**
