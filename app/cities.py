@@ -4209,6 +4209,96 @@ CITIES = [
         "label_offset_by_region": {'Japan West': ('middle', 0, 22)},
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Brussels",
+        "lat": 50.846,
+        "lon": 4.352,
+        "page": "pages/196_Brussels_Heatmap.py",
+        "blurb": "STIB-MIVB (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Belgium",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Antwerp",
+        "lat": 51.2194,
+        "lon": 4.4025,
+        "page": "pages/197_Antwerp_Heatmap.py",
+        "blurb": "De Lijn trams (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Belgium",
+        "mode": "tram",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ghent",
+        "lat": 51.0543,
+        "lon": 3.7174,
+        "page": "pages/198_Ghent_Heatmap.py",
+        "blurb": "De Lijn trams (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Belgium",
+        "mode": "tram",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Charleroi",
+        "lat": 50.4108,
+        "lon": 4.4446,
+        "page": "pages/199_Charleroi_Heatmap.py",
+        "blurb": "Charleroi light metro (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Belgium",
+        "mode": "light_rail",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Liège",
+        "lat": 50.6326,
+        "lon": 5.5797,
+        "page": "pages/200_Liege_Heatmap.py",
+        "blurb": "Liège tram (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Belgium",
+        "mode": "tram",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

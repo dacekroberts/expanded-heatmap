@@ -153,6 +153,9 @@ TAXONOMY_MODULES = {
     "den_haag_source": "pipeline.taxonomies.den_haag_source",
     "seattle": "pipeline.taxonomies.seattle",
     "georgia_nace": "pipeline.taxonomies.georgia_nace",
+    "brussels_hub": "pipeline.taxonomies.brussels_hub",
+    "belgium_favv": "pipeline.taxonomies.belgium_favv",
+    "wallonia_logic": "pipeline.taxonomies.wallonia_logic",
 }
 
 
