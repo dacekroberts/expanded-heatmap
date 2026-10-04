@@ -174,7 +174,10 @@ def region_view(region):
     region borrows DEFAULT_FRAME's frame, and every frame but that one is
     re-centred."""
     frame = DEFAULT_FRAME if region["name"] == DEFAULT_REGION else region["name"]
-    here = cities_in(frame)
+    # The frame takes the REGION_LABELS_ALSO anchors too, as Overview.py does
+    # (owner, 2026-10-04: East Asia had fitted Hong Kong and Taiwan alone).
+    here = cities_in(frame) + [c for c in CITIES if c.get("region") in REGION_LABELS_ALSO.get(frame, ())
+                               and c.get("label_tier") != "minor"]
     lats, lons = [c["lat"] for c in here], [c["lon"] for c in here]
     # The zoom may leave out a region's outlier (cities.REGION_ZOOM_WITHOUT,
     # Riga in Europe); the centre below still takes every city, as Overview does.
