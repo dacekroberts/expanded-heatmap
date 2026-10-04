@@ -50,14 +50,16 @@ def map_path(entry):
 
 
 def blob_ids():
-    """Committed (index) blob id of every map, keyed by its repo path."""
-    out = subprocess.run(["git", "ls-files", "-s", "--", "outputs/*/heatmap.html"],
+    """The blob id each map WOULD be committed as, keyed by its repo path:
+    `git hash-object` on the working file, which applies .gitattributes'
+    eol=lf. Until 2026-10-04 this read the index (`git ls-files -s`), so a
+    --write run before `git add` recorded the old maps' ids, and every later
+    merge rewrote the file (Staging, after a17b97a8)."""
+    paths = sorted(p.relative_to(ROOT).as_posix()
+                   for p in (ROOT / "outputs").glob("*/heatmap.html"))
+    out = subprocess.run(["git", "hash-object", "--", *paths],
                          cwd=ROOT, capture_output=True, text=True, check=True).stdout
-    ids = {}
-    for line in out.splitlines():
-        meta, path = line.split("\t", 1)
-        ids[path] = meta.split()[1]
-    return ids
+    return dict(zip(paths, out.split()))
 
 
 def count_points(path):
