@@ -219,14 +219,9 @@ def station_name_key(name):
 # Same-key pairs a built city still carries, each a DATED DEFECT rather than a
 # pass (check_provenance's KNOWN_GAPS pattern): verify_stations prints them
 # instead of raising, and raises once the pair is gone so a fixed entry cannot
-# linger. {city: {frozenset of names: note}}.
-KNOWN_SAME_NAME = {
-    "Guadalajara": {
-        frozenset({"Avila Camacho", "Ávila Camacho"}):
-            "2026-10-04: one station kept twice, 98 m apart; not yet repaired "
-            "(docs/decisions_drafts/mexico-city-stations.md)",
-    },
-}
+# linger. {city: {frozenset of names: note}}. Empty since Guadalajara's Ávila
+# Camacho was collapsed (2026-10-04).
+KNOWN_SAME_NAME = {}
 
 NAME_COLUMNS = ("station", "name", "stop_name", "station_name")
 

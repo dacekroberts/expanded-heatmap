@@ -156,8 +156,10 @@ the State of México found it. Two shared checks now raise on both:
   (Línea 9 lists stops under `""` and `stops`).
 - **`verify_stations`' same-spelling gate:** two different spellings of one
   `station_name_key` within the spacing floor raise. Collapse on that key,
-  not the raw name. A city still carrying such a pair is listed in
-  `KNOWN_SAME_NAME` as a dated defect (Guadalajara's Ávila Camacho).
+  not the raw name. A city still carrying such a pair goes in
+  `KNOWN_SAME_NAME` as a dated defect until fixed. Guadalajara's "Avila
+  Camacho" / "Ávila Camacho" (98 m) was the third pair the gate found, and was
+  collapsed the same day.
 
 ## The traps, all measured
 

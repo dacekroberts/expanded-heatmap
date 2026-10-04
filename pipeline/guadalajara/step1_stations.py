@@ -25,7 +25,11 @@ from shapely.ops import linemerge, polygonize, unary_union
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from pipeline.stations import verify_stations
+from pipeline.stations import (
+    station_name_key,
+    strip_line_designator,
+    verify_stations,
+)
 from pipeline.guadalajara.config import (
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
@@ -158,17 +162,25 @@ def main():
                        & (tagged["name"] != "")].copy()
     print(f"  railway={'/'.join(OSM_STATION_RAILWAY)} with a name: {len(platforms):,}")
 
-    # A LINE-SUFFIX ALIAS, which is the project's third encounter with this
-    # collapse mechanism after Calgary's suffixes and Toronto's conventions.
-    # OSM carries "Independencia" and "Independencia L3" as separate names for
-    # one station box - the spacing gate caught them at 4 m apart, which is not
-    # two stations. Stripping a trailing " L<digit>" merges them.
-    before_names = platforms["name"].nunique()
-    platforms["name"] = platforms["name"].str.replace(r"\s+L\d+$", "", regex=True)
-    merged = before_names - platforms["name"].nunique()
-    if merged:
-        print(f"  line-suffix alias merged {merged} name(s) "
-              f"(e.g. 'Independencia L3' -> 'Independencia')")
+    # COLLAPSE ON pipeline.stations.station_name_key, not the raw name. It
+    # covers the LINE-SUFFIX ALIAS this step once stripped by hand (OSM carries
+    # "Independencia" and "Independencia L3" for one station box, 4 m apart,
+    # caught by the spacing gate) and the ACCENT VARIANT it missed: "Avila
+    # Camacho" and "Ávila Camacho", 98 m apart, were kept as two stations until
+    # 2026-10-04 (docs/decisions_drafts/mexico-city-stations.md). The shown
+    # name is Monterrey's rule: the spelling with the most accents, since
+    # OSM's unaccented variants are the errors here.
+    platforms["key"] = platforms["name"].map(station_name_key)
+
+    def shown_name(names):
+        variants = sorted({strip_line_designator(n) for n in names})
+        return max(variants, key=lambda v: sum(ord(c) > 127 for c in v))
+
+    for key, g in platforms.groupby("key"):
+        if g["name"].nunique() > 1:
+            print(f"  one station, several names: {sorted(set(g['name']))} "
+                  f"-> {shown_name(g['name'])!r}")
+    platforms["name"] = platforms.groupby("key")["name"].transform(shown_name)
 
     grouped = (platforms.groupby("name", as_index=False)
                .agg(latitude=("latitude", "mean"),

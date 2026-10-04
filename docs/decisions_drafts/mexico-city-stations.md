@@ -4,6 +4,39 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Guadalajara's Ávila Camacho collapsed to one station (owner, via Staging; branch, lands with Mexico City's repair)
+
+- **Collapsed Guadalajara's doubled station: 56 stations -> 55.** OSM names
+  the Línea 1 and Línea 3 stop positions at the Ávila Camacho interchange
+  "Avila Camacho" and "Ávila Camacho", 98 m apart, and step 1 collapsed by
+  the raw name, so the page kept two stations there. The owner asked for the
+  fix through Staging the same day, on this branch, to land with Mexico
+  City's. `pipeline/guadalajara/step1_stations.py` now collapses on
+  `pipeline.stations.station_name_key`. That key also covers the hand-written
+  " L<digit>" strip it replaces ("Independencia L3"), so Independencia is
+  unchanged. Only these two names merged. The merged station sits at the mean
+  of its four stop positions (20.698844, -103.354871), about 50 m from either
+  old point. Businesses in a ring, of 116,945: 36,752 -> 36,751
+  (`app/ring_shares.json`, Guadalajara's row only).
+- **The shown name follows Monterrey's rule, the spelling with the most
+  accents** ("Ávila Camacho", the operator's), rather than a per-name fix in
+  config. OSM's unaccented variants are the errors in both cities, and a
+  rule needs no entry to go stale. Monterrey's `PUBLIC_NAME_FIXES` remains
+  the tool for a name wrong outright.
+- **Gate 3 still passes:** SITEUR's 10 and 8 for Líneas 2 and 4 against
+  OSM's 10 and 8. It counts route members, so the collapse cannot move it.
+  `KNOWN_SAME_NAME` in `pipeline/stations.py` is empty again; the gate now
+  raises on Guadalajara like any city.
+- **Noted for the owner, not changed:** two pairs remain 91 m apart under
+  different names, "Guadalajara Centro" (Línea 3) / "Plaza Universidad"
+  (Línea 2) and "Juárez" (Línea 1) / "Juárez II" (Línea 2). They are
+  interchanges, so each could be one station, or two as SITEUR names them.
+  Neither is a spelling of the other, so the same-spelling gate does not
+  decide them, and neither is recorded anywhere yet. Merging either is a
+  station-count call for the owner.
+- **Count corrected in `docs/data_sources/mexico.md`:** "56 stations across
+  four municipios" -> 55.
+
 ### 2026-10-04 - Mexico City's stations repaired: nine stop-only stations added, two interchanges collapsed, two shared checks that raise (branch, held for review time)
 
 - **Found that Mexico City's built page was missing nine Metro stations and
