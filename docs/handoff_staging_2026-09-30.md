@@ -55,47 +55,16 @@ the pointers. **Delete a section when its item is done.**
 
 ## Where things stand (2026-10-03)
 
-- **On master, `docs/city_master_list.md`: 144 built across 25 countries;
-  14 candidates (A 9 · B 5, all Japan wave 2); 26 restricted (Band R,
-  counted apart from candidates since 2026-10-02, enforced by
-  `check_master_list_counts.py`); 122 discards.** Published artifact (version
-  6): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **Both build sessions have built everything on their branches. Nothing is
-  on master until the owner's review time.**
-  - **Japan wave 2** (`japan-wave2-build`, worktree `japan-wave2`, kit, deleted on landing:
-    `docs/handoff_japan_wave2_2026-10-02.md`): LANDED 2026-10-03; all fourteen built, pages
-    176-189 and notices 115-128, one commit per city; the Japan West/East
-    label pass at PROBLEMS 0; zero
-    drift across all Japanese cities; master merged. Its master list empties
-    Bands A and B: **when it lands, the list has 158 built and 0
-    candidates.**
-  - **Extensions** (`extensions-build`, worktree `extensions`, kit, deleted on landing:
-    `docs/handoff_extensions_2026-10-02.md`): LANDED 2026-10-03; all four built in the kit's
-    order, each proved off with zero drift first. Belo Horizonte, Rio and Los
-    Angeles have their baselines re-recorded on purpose; confirm Vancouver's
-    with the session. Also on the branch: the OGL personal-information
-    exemption read cautiously for the three BC cities (owner, 2026-10-03),
-    and proposal 15 approved by the owner. Its drafts are in
-    `docs/decisions_drafts/extensions.md` there.
-  - **Build-time corrections already recorded:** New Westminster 856 (not
-    907, the 2026-09-29 naics exclusions), Coquitlam 1,026 with Web Mercator
-    coordinates and 10 kiosks, Long Beach 3,246 kept of 20,204. The kit is
-    corrected on master (4c59cb02); the Vancouver brief on `extensions-build`
-    (967de369), to avoid a conflict when it lands.
-- **Review time comes next.** The owner suspended review reminders "until all
-  builds wrap up" (2026-09-30). Both builds have now wrapped, so the one big
-  review is the owner's next call: Japan wave 2, the extensions, and anything
-  else queued for it. Mention it once; the owner calls it.
-- **After both land, the candidate pipeline is empty.** The next staging work
-  is finding new candidates (NEXT, items 4-6).
-
-## While the builds wait: answer the build sessions
-
-A build session may ask staging to correct a brief or re-run its checks.
-Correct a brief when a check fails on a real claim (never relax the check),
-re-run on a RETRY or a 429, and log each correction in the drafts file. A
-brief the build session already edited on its branch is corrected there, by
-that session, not on master.
+- **On master, `docs/city_master_list.md`: 158 built across 25 countries;
+  12 candidates (A 6 · B 5 · D 1); 23 restricted (Band R, counted apart
+  from candidates); 122 discards.** Japan wave 2 and the four extensions
+  LANDED at review time on 2026-10-03; both kits are deleted. Published
+  artifact (version 8): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- **The 12 candidates come from the coverage sweep** (its section below),
+  screened, licence-read and banded by the owner on 2026-10-03.
+- A build session may ask staging to correct a brief or re-run its checks:
+  correct a brief when a check fails on a real claim (never relax the check),
+  re-run on a RETRY or a 429, log each correction in the drafts file.
 
 ## What staging produced on 2026-10-02 and 03 (all on master)
 
@@ -123,11 +92,11 @@ that session, not on master.
 
 ## NEXT - pick up here
 
-1. **Answer the two build sessions** as they ask, until both land.
-2. **After they land:** republish the master list artifact (banded chat
-   format, the owner's memory; Band R counted apart), and delete the two kits
-   if the build sessions have not.
-3. **Watch-item dates** from `docs/recheck_calendar.md`:
+1. **Briefs for the eleven A and B cities** (`docs/build_briefs/`, each with
+   a checks block and its notices, the downstream card-face line), then a
+   kit when the owner releases a build. Every fact is in the screens and the
+   drafts file's licence-read entry.
+2. **Watch-item dates** from `docs/recheck_calendar.md`:
    - Tainan, 18 Oct;
    - Salvador and Teresina, after 25 Oct;
    - SEMAS, 31 Oct;
@@ -135,16 +104,38 @@ that session, not on master.
    - Zurich, 13 Dec and 10 May 2027;
    - two re-pulls left in PLAN from the calendar: Rome's tram 3 and Oslo's
      tram 13 stops (Cleanup's to run; staging only watches).
-4. **Calls still the owner's, raised in the calendar:** São Paulo's Linha 17
+3. **Calls still the owner's, raised in the calendar:** São Paulo's Linha 17
    and Linha 6; Rome's returning trams; Taoyuan's Green Line; a NAF 2025
    mapping before any French refresh; Osaka's Yumeshima re-run.
-5. **Band R requests only the owner can send:** Sendai's letter (drafted);
+4. **Band R requests only the owner can send:** Sendai's letter (drafted);
    Lisbon and Porto (drafted); Kaohsiung, Richmond (BC), Arlington, Chiba.
-6. **New candidates, since the list empties:**
+5. **New candidates, since the list empties:**
    - **A third Japanese wave** (below), if the owner wants one.
    - **The commuter-rail group** (staging's lean is to keep the rule).
    - Re-probes of Band C open gaps (`reprobe-city`) and the Band R cities
      whose blockers have a date.
+
+## Coverage sweep (2026-10-03): first group banded
+
+Sweep reports in the staging scratchpad,
+`...\54e23bab-5cd9-4850-8946-900a2a7b665b\scratchpad\sweep\`, screens in
+`...\scratchpad\screens\`, licence-read notes beside them (readable by path
+while the machine keeps them). Every owner call and every licence verdict is
+in `docs/decisions_drafts/staging.md`; the bands are in the master list.
+Cached: `data/belgium/raw/` (FAVV CSV, LoGIC GeoPackage),
+`data/mendoza/raw/comercios_limpio.json`, each with a meta JSON; SEMAS's ZIP
+was already cached. Tacoma's disclaimer text: `scratchpad\notice_utf8.txt`.
+
+- **A (6):** Daejeon, Gwangju, Gimhae (own page), Mendoza, City of Brussels,
+  Tacoma.
+- **B (5):** Liverpool (Regional), Antwerp, Ghent, Charleroi, Liège.
+- **D (1):** Brussels (Regional), the owner's free KBO account; companies only.
+- **Second group, unscreened:** Jerusalem, Macau, Almaty and Astana,
+  Thessaloniki, Ahmedabad, Timișoara, Iași, Cluj, Basel, Geneva, Norrköping,
+  Quito, Cuenca.
+
+The owner asked that Cleanup and the map-dot session get memory priority.
+One browser-using agent at a time (the pane is shared).
 
 ## Japan: what wave 2's scoping left (2026-10-02)
 
