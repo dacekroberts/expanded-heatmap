@@ -14,9 +14,11 @@ STEP 1 - lines and stations from OpenStreetMap, on `pipeline/osm_tram.py`:
   3. **gate 3, twice, both independent of OSM** (the tram-city rule): the
      operator's own counts (`config.OPERATOR_STATION_COUNTS`, per line or for
      the whole network) and **NaPTAN** (DfT; owner, 2026-10-01): the active
-     MET records with the network's ATCO prefixes inside the scope, matched
-     NAME BY NAME against the stations in scope. A difference not explained in
-     `config.NAPTAN_EXPLAINED` stops the step;
+     records of `config.NAPTAN_STOP_TYPE` (MET, a tram stop's access area, when
+     unset; RLY, a rail station's, for Merseyrail) with the network's ATCO
+     prefixes inside the scope, matched NAME BY NAME against the stations in
+     scope. A difference not explained in `config.NAPTAN_EXPLAINED` stops the
+     step;
   4. the light-rail test's track figures, printed for the record: the share
      of the kept track tagged `railway=light_rail` or `tram`, and in tunnel or
      on a bridge (`docs/tram_city_list.md`);
@@ -55,6 +57,7 @@ from pipeline import stations as station_gates
 from pipeline.baseline import emit
 
 NETWORK = "network"   # the OPERATOR_STATION_COUNTS key for a whole-network count
+NAPTAN_STOP_TYPE = "MET"   # NaPTAN's StopType for a tram stop; config.NAPTAN_STOP_TYPE overrides
 BRANCH_NEAR_M = 300
 BRANCH_MIN_NEW_M = 1000
 HOP_MAX_M = 6000      # a routed hop longer than this is a wrong anchor, not a line
@@ -72,10 +75,13 @@ def norm_name(s):
     """A stop name for matching across OSM, NaPTAN and an operator's list:
     the network suffix NaPTAN appends, "Tram Stop", "&", apostrophes, spaces
     and case all dropped ("Besses o'th'Barn (Manchester Metrolink)" against
-    OSM's "Besses o' th' Barn")."""
+    OSM's "Besses o' th' Barn"). A rail station's RLY record ends in "Rail
+    Station", sometimes after a county qualifier ("Walton (Merseyside) Rail
+    Station"), so a bracket is dropped again once the suffix is gone."""
     s = s.replace("’", "'").replace("&", "and")
     s = re.sub(r"\s*\([^)]*\)\s*$", "", s)
-    s = re.sub(r"(?i)\s+(tram stop|tram|metrolink stop|metrolink)$", "", s)
+    s = re.sub(r"(?i)\s+(tram stop|tram|metrolink stop|metrolink|rail station)$", "", s)
+    s = re.sub(r"\s*\([^)]*\)\s*$", "", s)
     return re.sub(r"[^0-9a-z]", "", s.casefold())
 
 
@@ -318,9 +324,12 @@ def routed_lines(config, kept, stations, seqs):
 
 
 def naptan_gate(config, inside):
-    """Gate 3's second source: NaPTAN's active MET records (one per stop
-    access area) with the network's ATCO prefixes inside the scope, name by
-    name against the stations in scope."""
+    """Gate 3's second source: NaPTAN's active records of the network's stop
+    type (one per stop access area) with the network's ATCO prefixes inside
+    the scope, name by name against the stations in scope. The stop type is
+    `config.NAPTAN_STOP_TYPE`, MET when unset (the UK six's trams, ATCO area
+    940); a heavy-rail network sets RLY (area 910)."""
+    stop_type = getattr(config, "NAPTAN_STOP_TYPE", NAPTAN_STOP_TYPE)
     frames = []
     for code in config.NAPTAN_ATCO_AREAS:
         p = config.NAPTAN_RAW_DIR / f"{code}.csv"
@@ -330,7 +339,7 @@ def naptan_gate(config, inside):
                                   usecols=["ATCOCode", "CommonName", "StopType", "Status",
                                            "Longitude", "Latitude"]))
     na = pd.concat(frames)
-    na = na[(na["StopType"] == "MET") & (na["Status"] == "active")
+    na = na[(na["StopType"] == stop_type) & (na["Status"] == "active")
             & na["ATCOCode"].str.startswith(tuple(config.NAPTAN_PREFIXES))]
     pts = gpd.GeoSeries(gpd.points_from_xy(pd.to_numeric(na["Longitude"]), pd.to_numeric(na["Latitude"])),
                         index=na.index, crs="EPSG:4326")
@@ -342,7 +351,7 @@ def naptan_gate(config, inside):
     explained = {norm_name(k): v for k, v in getattr(config, "NAPTAN_EXPLAINED", {}).items()}
     only_n = sorted(set(nap) - set(built))
     only_b = sorted(set(built) - set(nap))
-    print(f"\n  gate 3, NaPTAN: {len(na)} active MET records ({', '.join(config.NAPTAN_PREFIXES)}) "
+    print(f"\n  gate 3, NaPTAN: {len(na)} active {stop_type} records ({', '.join(config.NAPTAN_PREFIXES)}) "
           f"inside the scope, {len(nap)} names; {len(built)} stations built")
     bad = []
     for k in only_n:

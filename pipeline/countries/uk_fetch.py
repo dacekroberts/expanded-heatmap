@@ -44,20 +44,41 @@ def get(url, timeout=600):
         return r.read()
 
 
+def boundary_selector(config):
+    """The scope's admin relations: by id (`config.BOUNDARY_OSM_RELATIONS`), or,
+    for a city whose relation ids are not yet known, by GSS code in the box
+    (`config.BOUNDARY_GSS`, {code: name}; the ids are then read from the cache
+    and written into config)."""
+    if config.BOUNDARY_OSM_RELATIONS:
+        return f"rel(id:{','.join(str(i) for i in config.BOUNDARY_OSM_RELATIONS)})"
+    gss = getattr(config, "BOUNDARY_GSS", None)
+    if not gss:
+        sys.exit("  neither BOUNDARY_OSM_RELATIONS nor BOUNDARY_GSS is set")
+    s, w, n, e = config.OSM_BBOX
+    return (f'rel["boundary"="administrative"]["ref:gss"~"^({"|".join(gss)})$"]'
+            f"({s},{w},{n},{e})")
+
+
 def osm_query(config):
     """The city's one Overpass query: routes and boundaries `out geom`, the
-    routes' member ways and nodes `out tags` / `out body`."""
+    routes' member ways and nodes `out tags` / `out body`.
+
+    `config.OSM_ROUTE_FILTERS` narrows a mode to one network: a tuple of
+    Overpass tag filters, each its own selector, unioned. A heavy-rail city
+    needs it, since every `route=train` in the box would otherwise come back
+    (the osm-rail skill): Liverpool's Merseyrail by network or operator. Unset,
+    the query is the UK six's unchanged."""
     s, w, n, e = config.OSM_BBOX
-    ids = ",".join(str(i) for i in config.BOUNDARY_OSM_RELATIONS)
-    routes = "".join(f'rel["type"="route"]["route"="{r}"]({s},{w},{n},{e});'
-                     for r in config.OSM_ROUTES)
+    filters = getattr(config, "OSM_ROUTE_FILTERS", ("",))
+    routes = "".join(f'rel["type"="route"]["route"="{r}"]{f}({s},{w},{n},{e});'
+                     for r in config.OSM_ROUTES for f in filters)
     # Beside the routes' own member nodes, every tram stop in the box and any
     # STATION_ADD node: a stop the relations skip (Nottingham's David Lane)
     # can then be added by id from the cache, Kansas City's query shape.
     add = ",".join(str(i) for i in getattr(config, "STATION_ADD", {}) or {})
     return ("[out:json][timeout:180];"
             f"({routes})->.r;"
-            f"rel(id:{ids})->.b;"
+            f"{boundary_selector(config)}->.b;"
             "(.r;.b;);out geom;"
             "way(r.r);out tags;"
             f'(node(r.r);node["railway"="tram_stop"]({s},{w},{n},{e});'
@@ -108,13 +129,27 @@ def write_boundary(config, els):
     from shapely.geometry import LineString, MultiLineString, mapping
     from shapely.ops import linemerge, polygonize, unary_union
 
-    rels = {e["id"]: e for e in els if e.get("type") == "relation"
-            and e["id"] in config.BOUNDARY_OSM_RELATIONS}
-    if set(rels) != set(config.BOUNDARY_OSM_RELATIONS):
+    wanted = dict(config.BOUNDARY_OSM_RELATIONS)
+    if not wanted:
+        # GSS mode: each code must name exactly one relation in the answer.
+        gss = config.BOUNDARY_GSS
+        by_code = {}
+        for e in els:
+            code = e.get("tags", {}).get("ref:gss") if e.get("type") == "relation" else None
+            if code in gss:
+                by_code.setdefault(code, []).append(e["id"])
+        bad = {c: by_code.get(c, []) for c in gss if len(by_code.get(c, [])) != 1}
+        if bad:
+            sys.exit(f"  GSS code(s) not matching exactly one relation: {bad}")
+        wanted = {by_code[c][0]: gss[c] for c in gss}
+        print("  boundary relations by GSS code (write into BOUNDARY_OSM_RELATIONS): "
+              + ", ".join(f"{rid}: {name!r}" for rid, name in wanted.items()))
+    rels = {e["id"]: e for e in els if e.get("type") == "relation" and e["id"] in wanted}
+    if set(rels) != set(wanted):
         sys.exit(f"  boundary relations returned {sorted(rels)}, expected "
-                 f"{sorted(config.BOUNDARY_OSM_RELATIONS)}")
+                 f"{sorted(wanted)}")
     feats, polys = [], []
-    for rid, name in config.BOUNDARY_OSM_RELATIONS.items():
+    for rid, name in wanted.items():
         lines = [LineString([(p["lon"], p["lat"]) for p in m["geometry"]])
                  for m in rels[rid].get("members", [])
                  if m.get("type") == "way" and m.get("role") == "outer"]
@@ -138,7 +173,7 @@ def fetch_osm(config, force):
     from pipeline import osm
     els, host = osm.fetch(osm_query(config), config.OSM_JSON, force=force)
     rels = [e for e in els if e.get("type") == "relation"
-            and e["id"] not in config.BOUNDARY_OSM_RELATIONS]
+            and e.get("tags", {}).get("type") == "route"]
     if not rels:
         sys.exit("  no route relations came back - a FAILED fetch, not a negative")
     if any(not r.get("members") for r in rels):
