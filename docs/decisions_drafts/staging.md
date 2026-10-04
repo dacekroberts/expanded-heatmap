@@ -4,6 +4,49 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The India and Switzerland/Norway/Sweden screens banded (owner)
+
+- **The owner: "42. keep in D, i will decide on R later 43-44 yes to both
+  45-47 yes to all 48 yes".**
+- **Pune to D:** the city portal's "Commercial Establishments" (#434, the
+  building department, 2025-12) sits behind a download form asking for a
+  purpose, a name, a mobile number, an email and a CAPTCHA, which only the
+  owner can fill; the file would show whether it lists private businesses
+  or the corporation's own shop units. The owner may move it to R later
+  (Delhi's CAPTCHA went to R). Pune city only: Pimpri-Chinchwad's host
+  times out.
+- **Nagpur to R** (its corporation's host refuses connections, Ahmedabad's
+  shape); **Noida and Greater Noida in the open gap** (both authorities'
+  hosts time out).
+- **Eleven Indian discards:** Navi Mumbai, Lucknow, Kanpur, Agra, Meerut,
+  Jaipur, Gurugram and Indore on no register (application and lookup
+  systems only); Bhopal (15 minutes at peak, 30 off-peak), Patna (5
+  stations at 20 minutes) and Surat (not confirmed open) on rail. **Staging
+  corrected one row before writing it:** the probe proposed Indore on rail
+  from memory, but Priority Corridor 2 opened in September 2026 (16
+  stations, every 15 minutes, 9:00 to 19:00), so Indore's row rests on its
+  business data instead; the outcome is the owner's approved discard.
+  Bhopal's, Patna's and Surat's rail facts were checked the same way by web
+  search before writing.
+- **Bern and Neuchâtel discarded** (no premises register on the city,
+  cantonal or national hosts); **Trondheim's rail discard stands** (line 9
+  still Ila to Lian, every 15 minutes at midday, 30 in the evening; the St.
+  Olavs gate section not back).
+- **Lund to R, request only** (no published register; a public-records
+  request, Norrköping's precedent).
+- **Lausanne to R, request only:** Vaud's Registre des licences is public
+  by law (LADB art. 8; 981 licences in the commune) but answers only
+  through a paged search (about 1,080 calls) in an app configured with a
+  CAPTCHA service, with holders' personal names and no coordinates; Perth's
+  licence search form counted as no register. A bulk extract would be a
+  request (outreach, the owner's call). The search answered 403 until the
+  session cookie the server sets was returned, as a browser does; recorded,
+  not a user-agent refusal.
+- **Not acted on, for the owner:** Pune's website backend lists its full
+  configuration publicly, user and login resources included (content pages
+  only were read). Not this project's to fix; telling the city would be
+  outreach.
+
 ### 2026-10-04 - Israel held at country level for wartime concerns, screens kept (owner)
 
 - **The owner, asked by staging about Petah Tikva:** "hold at country level
