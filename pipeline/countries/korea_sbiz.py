@@ -17,7 +17,11 @@ The rules, in one place:
     province's member is found by its first row's 시도명;
   * only the columns in READ are loaded - no phone or owner column exists, and
     READ is asserted to be all that arrives;
-  * a city is its 시군구명 prefix (고양시 covers 고양시 덕양구, 일산동구...);
+  * a city is its 시군구코드 list where config gives one, else its 시군구명
+    prefix (고양시 covers 고양시 덕양구, 일산동구...). Names are not unique
+    across a member: Gwangju's 동구, 서구, 남구 and 북구 recur in other
+    metropolitan cities, and 경기도 광주시 is another city. Given both, the
+    two must pick the same rows;
   * the pin shows 상호명 with 지점명 (the branch) where given; a Korean
     personal name at a residential address is withheld (Seoul's rule,
     pipeline/korean_names.py), the address read with its building name.
@@ -38,7 +42,7 @@ ROOT = Path(__file__).parent.parent.parent
 ZIP = ROOT / "data" / "korea" / "raw" / "sbiz_15083033.zip"
 PAGE = "https://www.data.go.kr/data/15083033/fileData.do"
 READ = ["상가업소번호", "상호명", "지점명", "상권업종대분류명", "상권업종중분류명", "상권업종소분류명",
-        "시도명", "시군구명", "도로명주소", "건물명", "경도", "위도"]
+        "시도명", "시군구코드", "시군구명", "도로명주소", "건물명", "경도", "위도"]
 
 
 def need_zip():
@@ -81,15 +85,27 @@ def province(sido):
     sys.exit(f"SEMAS: no member for {sido}")
 
 
-def storefronts(sido, sigungu_prefixes):
+def storefronts(sido, sigungu_prefixes, sigungu_codes=None):
     """The city's storefronts: classified, one per 상가업소번호, named by the
     project's rules. sigungu_prefixes: 시군구명 prefixes (None = the whole
-    province, as for Incheon)."""
+    province, as for Incheon). sigungu_codes: 5-digit 시군구코드 values,
+    which decide the rows when given; prefixes given as well must agree."""
     df = province(sido)
     print(f"  SEMAS {sido}: {len(df):,} rows")
-    if sigungu_prefixes:
-        keep = df["시군구명"].str.startswith(tuple(sigungu_prefixes))
+    by_name = df["시군구명"].str.startswith(tuple(sigungu_prefixes)) if sigungu_prefixes else None
+    if sigungu_codes:
+        codes = tuple(sigungu_codes)
+        unknown = set(codes) - set(df["시군구코드"])
+        if unknown:
+            sys.exit(f"SEMAS {sido}: no rows for 시군구코드 {sorted(unknown)} - read the member's codes")
+        keep = df["시군구코드"].isin(codes)
+        if by_name is not None and not keep.equals(by_name):
+            sys.exit(f"SEMAS {sido}: 시군구코드 and 시군구명 disagree on "
+                     f"{int((keep != by_name).sum()):,} rows")
         df = df[keep].copy()
+        print(f"  in 시군구코드 {', '.join(codes)}: {len(df):,}")
+    elif by_name is not None:
+        df = df[by_name].copy()
         print(f"  in {', '.join(sigungu_prefixes)}: {len(df):,}")
     emit("semas_rows", len(df))
     if df["상가업소번호"].duplicated().any():
