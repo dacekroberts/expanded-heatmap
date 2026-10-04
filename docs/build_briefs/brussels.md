@@ -29,7 +29,7 @@ business source), not one national register. The build opens
 | **`coverage`** | **`full`** | All three buckets from one field survey |
 | **Scope** | **The City of Brussels commune** (Bruxelles-Ville / Stad Brussel, NIS 21004), `SCOPE = "city"` | The inventory is the City's extract: every row inside the commune polygon, none outside. The other 18 communes are **Brussels (Regional)**, a separate Band C row on KBO; never merged into this page |
 | **Trams** | **Drawn and thinned** (Amsterdam's precedent; Oslo drew its trams too, unthinned) | The commune is long and thin, and trams carry most of its surface service: without them Laeken and Neder-Over-Heembeek north of Bockstael/Heysel and the Avenue Louise strip are served only by stations at their ends. The thinning rule is below |
-| **Page name** | **"Brussels"**, slug `brussels`; the scope bullet names the City of Brussels, one of the Region's 19 communes | A proposal: "City of Brussels" is the alternative if the owner wants the commune in the title. A later regional page would be "Brussels (Regional)" |
+| **Page name** | **"Brussels"**, slug `brussels`; the scope bullet names the City of Brussels, one of the Region's 19 communes | **Owner, 2026-10-03** ("recommendation accepted"). A later regional page would be "Brussels (Regional)" |
 | **Rings** | by the spacing rule (`docs/ring_rules.md`) | Pentagon stations sit close together (Bourse, De Brouckère, Anneessens); measure the median gap among the stations kept. Under about 550 m means halved rings, as Oslo and Paris |
 | **Region** | `"Europe"`, country `"Belgium"` | — |
 
@@ -225,8 +225,9 @@ The 10 rows sum to 6,880.
   (December 2025, effective 2026-01-01) say "By accessing the data, the User
   acknowledges having read, understood, and accepted these Terms of Use", and
   the download button opens a consent box first. **Accepting terms is the
-  owner's act**: the first fetch waits for the owner's yes, so this brief
-  carries no check that fetches the feed. Once accepted, add `gtfs_files`
+  owner's act**, and **the owner approved it on 2026-10-03** ("recommendation
+  accepted") for the build's first fetch; a re-fetch after the terms change
+  goes back to the owner. This brief carries no check that fetches the feed. Once accepted, add `gtfs_files`
   (look for `shapes.txt`) and `gtfs_feed_window` checks here.
 - **Licence, to read (`licence-read`, one call) before the build uses it**:
   the terms put every PTO's data under **CC BY 4.0, with STIB-MIVB the sole
@@ -318,8 +319,11 @@ caption only**, and any open terms question:
 
 ## Still unknown
 
-- ⚠️ **The owner's yes to the Belgian Mobility Company's terms** before the
-  first GTFS fetch; then the STIB licence read and the feed's checks.
+- ✅ **The Belgian Mobility Company's terms**: accepted by the owner for the
+  first fetch (2026-10-03); the STIB licence read is done (permitted with
+  conditions, `docs/decisions_drafts/staging.md`). Add the feed's checks
+  after the fetch. Credit: "Source: STIB-MIVB – Open Data – [feed date]",
+  the modified-data line, and the Belgian Mobility Company portal.
 - ⚠️ **The taxonomy**: the splitter, the catch-all share, the two-bucket
   rule, and the ambiguous types above.
 - ⚠️ **Tram lines and stops in the commune**, the thinned count, and gate 3.

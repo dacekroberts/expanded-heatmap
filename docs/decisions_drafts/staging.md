@@ -4,6 +4,28 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Brussels: STIB's GTFS with the owner's acceptance; the page named "Brussels" (owner)
+
+- **STIB-MIVB's static GTFS, `licence-read` 2026-10-03: PERMITTED WITH
+  CONDITIONS.** The Belgian Mobility Company portal's Terms of Use (art. 3)
+  put every dataset under CC BY 4.0 with each operator the sole licensor;
+  art. 4 prescribes "Source: STIB-MIVB – Open Data – [date of dataset
+  update]" and recommends a modified-data line, which CC BY 4.0 makes
+  mandatory; art. 2 makes access an acceptance (a consent box before the
+  download); art. 8 lets the terms change, continued use accepting them;
+  anonymous limits 100 requests a day. The FAQ asks for a Belgian Mobility
+  Company credit with a portal link: the notice names both. Nothing taken
+  from stib-mivb.be itself (its site terms are private use only): no logo,
+  network map or brand material.
+- **The owner: "recommendation accepted"**, both calls as recommended:
+  1. **STIB's GTFS is the rail source**, and the owner approves accepting
+     its terms at the build's first fetch; a re-fetch after the terms change
+     comes back to the owner. OSM (osm-rail) stays the fallback. All 25
+     metro and premetro stations are kept by name (Anneessens, Bourse and
+     Lemonnier are tram-served in the premetro).
+  2. **The page is named "Brussels"**; its text says it covers the City of
+     Brussels, the commune, beside a later Brussels (Regional).
+
 ### 2026-10-03 - BeST-Address Brussels read: permitted with conditions; data.gov.be's research request read as not applying (owner)
 
 - **`licence-read`, 2026-10-03: PERMITTED WITH CONDITIONS.** BOSA's DCAT
