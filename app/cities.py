@@ -1295,6 +1295,11 @@ CITIES = [
         "in_default_view": False,
         # Left of the dot (width 42.9 px, measured 2026-09-27): above it, the
         # pill covers Seoul's marker in East Asia; below it, it grazes Busan's.
+        # EAST ASIA FRAMED TO ITS ANCHORS (owner, 2026-10-04): at the wider
+        # zoom ("end", -14, 0) covered Gwangju's marker; ("end", -20, 0) is the
+        # one placement check_macro_labels.py's scorer clears (grazing the Seoul
+        # Capital Area's dots), PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"East Asia": ("end", -20, 0)},
         "label_offset": ("end", -14, 0),
     },
     {
@@ -1375,7 +1380,9 @@ CITIES = [
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
         # JAPAN WAVE 2 LABEL PASS (2026-10-03): offsets from a search with
         # check_macro_labels.py's own scorer, PROBLEMS 0 at 375, 768 and 1200.
-        "label_offset_by_region": {'Japan West': ('end', -8, 0)},
+        # EAST ASIA FRAMED TO ITS ANCHORS (owner, 2026-10-04): the default
+        # covered Daegu's marker at the wider zoom; above-left clears it.
+        "label_offset_by_region": {'Japan West': ('end', -8, 0), 'East Asia': ('end', -8, -22)},
         "label_offset": ('end', -10, -14),
     },
     {
@@ -1458,6 +1465,9 @@ CITIES = [
         # 375, 768 and 1200.
         # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
+        # EAST ASIA FRAMED TO ITS ANCHORS (owner, 2026-10-04): the default met
+        # Osaka's pill (31.3 x 8.2 px) at the wider zoom; lower clears it.
+        "label_offset_by_region": {'East Asia': ('start', 8, 22)},
         "label_offset": ('start', 10, 14),
     },
     {

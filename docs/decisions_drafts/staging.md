@@ -4,6 +4,75 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The reset wave's calls: a user-agent rule, 31 discards, 11 to R, Konya to D, five open-gap rows, New Zealand back on the map (owner)
+
+- **The owner said yes to each of staging's recommendations**, listed by
+  number in chat. Eskişehir's discard could not pass the discard check (its
+  portal refuses every visitor, so the city's own host never answered);
+  **the owner: "open gap"**, Antalya's shape. The calls:
+- **A user-agent rule (all probes and builds):** a host that refuses curl's
+  own user agent is a refusal, recorded as one; a browser user-agent string
+  is never used to get past it. The project's own identified user agent
+  (`brief_check.py`'s, which names the project) is honest and allowed. Five
+  repository files send a browser string (`scripts/probe_geodata.py`,
+  `scripts/screen_rail.py`, `scripts/rank_canada_storefront_density.py`,
+  `pipeline/montreal/fetch_sources.py`, `pipeline/dublin/fetch_sources.py`):
+  handed to Cleanup to check whether any of their hosts refuse curl.
+- **A token the site's own script sends every visitor** (Palembang's API) is
+  not used as evidence: the 637-dataset figure is dropped, and the discard
+  rests on the city's two other catalogues.
+- **Deleted:** the ARCSA file (7,592,002 bytes, no location below the
+  agency's zone, 62% of Quito's rows an individual's name, fetched past a
+  curl refusal) and both scratchpad copies of Gaziantep's shopping feed
+  (AlisverisNoktalari, 4,957,363 bytes, fetched by the probe and the licence
+  read without a brief naming it; ruled out the same day).
+- **Gaziantep's question, catalogued and NOT sent (owner: "no emails being
+  sent"):** to the published contact, should the owner ever send it: "We
+  would like to reuse the 'Ticari Yerler' and 'Yemek Yerleri' datasets from
+  the Gaziantep Open Data Platform under the Gaziantep Açık Veri Lisansı.
+  Could you tell us whether these points of interest were compiled by the
+  Municipality, or come from a third-party (commercial) POI database? The
+  licence excludes third-party rights, so we want to be sure the licence
+  covers them. Could you also tell us when these datasets were last
+  updated?" Gaziantep stays in D.
+- **Macau:** one Overpass query of OSM addresses approved, to test placing
+  IAM's three food lists (the government GIS points are "All rights
+  reserved"). Over 70% placed: C, then B as a food-only page; under it, R.
+- **Bands:** Quito from C to R (the city's portals refuse this machine).
+  To R: Nonthaburi, Samut Prakan, Shah Alam, Khu Khot (sources inside
+  Thailand or Malaysia only), Parañaque and Caloocan (scripts refused
+  everywhere), Quezon City (open data behind a sign-in, Almaty's
+  precedent), Bursa, Kocaeli, Kayseri (portals geo-blocked to Türkiye).
+  Konya to D (a Cloudflare check from outside Türkiye; one visit in the
+  owner's browser). Open screening gap: Constantine, Sétif, Ouargla (own
+  hosts never answered, no probe inside Algeria; staging's reason: the
+  2026-09-24 audit reversed national-pattern rulings), Antalya (portal
+  down everywhere) and Eskişehir (portal answers 403 to everyone).
+- **Discards:** Parramatta and Newcastle, New South Wales (no register);
+  Auckland (rail: suburban lines, 1.4 km median spacing, 15 to 30 minutes
+  off-peak; a watch item for the City Rail Link) and Wellington (rail);
+  Cuenca (the national file cannot place it); Petaling Jaya, Subang Jaya,
+  Kajang, Klang, Ampang Jaya (no council register); Pathum Thani and
+  Putrajaya (rail); Oran, Mostaganem, Maracaibo, Alexandria, Lusail (no
+  reachable register); Palembang, Bekasi, Bogor, Makati, Pasay,
+  Mandaluyong, San Juan (Metro Manila), Antipolo, Marikina, Pasig (no
+  register, or rail); Depok (rail, one station); Yerevan (its permit system
+  is applications and payments, no holder list); İzmir and Samsun.
+- **New Zealand leaves "Countries ruled out":** its ruling ("licensing is not
+  municipal") was wrong; food businesses register with their council or
+  MPI under the Food Act 2014. Its cities now stand on their own results.
+- **Thessaloniki's eight build calls, all as recommended:** canteens out
+  (R1); ψιλικά convenience shops kept as food shops (convenience stores are
+  food retail everywhere else; bends Antwerp's complementary-retail rule);
+  patisseries and bakery coffee food shops; the operator's own line name,
+  the Kalamaria branch cut at the city line; gate 3 from Elliniko Metro;
+  the OSM city boundary from the build's one Overpass query; headway read
+  at build or the gap recorded; the operator's site may be read with the
+  project's identified user agent.
+- **Not acted on, for the owner:** a public layer in Makati's ArcGIS
+  organization carries person-name and birthday fields (field names read
+  only). Not this project's data; telling the city would be outreach.
+
 ### 2026-10-04 - Gaziantep to Band D: its data's origin is a question for the publisher (owner, conditional)
 
 - **The desk check came back unresolved**, which triggers the owner's
@@ -53,6 +122,14 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   re-checked every host it relied on with curl's own agent; all answered
   the same except `pakkretcity.go.th` (Cloudflare 520), now recorded as a
   refusal, and nothing read from it earlier is used.
+- **And in the Algeria, Maracaibo, Alexandria and Lusail resume:** some early
+  reads used a browser string; `nfsa.gov.eg` and `wilayasetif.dz` refuse
+  curl's own agent and are recorded as refusals, nothing read from them
+  that way counted as evidence. One retry on `apc-constantine.dz` with
+  browser headers was refused anyway.
+- **And in the Indonesia and Philippines probe:** browser strings until the
+  rule arrived; every source was re-read with plain curl and all answered
+  the same.
 
 ### 2026-10-04 - Geneva (Regional)'s three build calls, and Thessaloniki's licence reading (owner)
 
