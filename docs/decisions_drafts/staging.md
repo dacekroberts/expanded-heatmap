@@ -4,6 +4,18 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Three build sessions for the twelve candidates (owner)
+
+- **The owner: "eventual sessions: one korean, one belgium, one for the
+  other cities".** Staging writes one kit per session once the briefs pass:
+  - **Korea:** Daejeon, Gwangju, Gimhae (SEMAS, Incheon's module).
+  - **Belgium:** the City of Brussels, Antwerp, Ghent, Charleroi, Liège, and
+    Brussels (Regional) now that the owner holds the KBO file; their bands
+    wait on the KBO measurement.
+  - **The other cities:** Mendoza, Tacoma, Liverpool (Regional).
+- Each kit claims its own page and notice numbers from the next free ones
+  (`docs/session_roles.md`'s claims sentence; notices from 141).
+
 ### 2026-10-03 - Seven licence reads for the sweep's first group; Brussels and Tacoma to A (owner)
 
 - **The owner: "license readings look good"**, on staging's four
