@@ -4,6 +4,26 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - BeST-Address Brussels read: permitted with conditions; data.gov.be's research request read as not applying (owner)
+
+- **`licence-read`, 2026-10-03: PERMITTED WITH CONDITIONS.** BOSA's DCAT
+  record, landing pages, licence PDF and the data.gov.be record all declare
+  CC BY 4.0; BeST-in-a-Box's conditions (section 6) make reuse free with a
+  source credit under CC BY 4.0, and section 8 defers to the region's
+  licence, which for Brussels (Paradigm's own record) is CC0. Display: the
+  licensor, the licence title and link, and a statement that business
+  addresses were matched to the points; no endorsement, no accuracy claim,
+  no Paradigm or datastore.brussels marks. No act owed.
+- **The owner: "i agree with recommended reading"** on data.gov.be's
+  general terms, which ask the author of research use to send FPS BOSA the
+  results: read as not applying. The clause covers data on data.gov.be's
+  site, the file came from opendata.bosa.be under its own licence, it is a
+  request rather than a condition, and a map is not a study. No message is
+  sent (outreach stays the last resort).
+- **A build trap recorded:** from 2026-10-11 BOSA's files move from Lambert
+  72 to Lambert 2008 (the EPSG:31370 x/y columns become EPSG:3812 x/y, shifts
+  up to 20 cm), so a fresh fetch renames the coordinate columns.
+
 ### 2026-10-03 - KBO measured: Belgian bands kept; Brussels (Regional) D to C; notice 86's sentence (owner)
 
 - **The KBO full file** (extract 501, snapshot 2026-10-02; fetched by the
