@@ -191,7 +191,7 @@ PUBLISHED_STATIONS_PER_LINE = {
 }
 
 # INTERCHANGES UNDER TWO NAMES, merged by the owner's call (2026-10-04, via
-# Cleanup; docs/decisions_drafts/mexico-city-stations.md). Each pair sat 91 m
+# Cleanup; DECISIONS.md). Each pair sat 91 m
 # apart as two stations: one interchange, one station. Not a spelling, so
 # station_name_key cannot merge them; this map does, by exact OSM name.
 # The merged Centro station carries both names, since each line's riders know

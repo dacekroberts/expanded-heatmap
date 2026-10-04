@@ -174,7 +174,7 @@ def main():
     # Nine Metro stations exist only as `railway=stop` positions on their
     # line's route relation (Talismán's station node has no mode tag), four
     # termini among them; the whitelist alone dropped all nine until
-    # 2026-10-04 (docs/decisions_drafts/mexico-city-stations.md). A named stop
+    # 2026-10-04 (DECISIONS.md). A named stop
     # whose key matches no whitelisted node becomes a station here. Station
     # nodes keep precedence wherever they exist, so no kept station moves.
     rels = [e for e in rt_data["elements"] if e["type"] == "relation"]

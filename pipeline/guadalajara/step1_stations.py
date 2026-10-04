@@ -171,7 +171,7 @@ def main():
     # "Independencia" and "Independencia L3" for one station box, 4 m apart,
     # caught by the spacing gate) and the ACCENT VARIANT it missed: "Avila
     # Camacho" and "Ávila Camacho", 98 m apart, were kept as two stations until
-    # 2026-10-04 (docs/decisions_drafts/mexico-city-stations.md). The shown
+    # 2026-10-04 (DECISIONS.md). The shown
     # name is Monterrey's rule: the spelling with the most accents, since
     # OSM's unaccented variants are the errors here.
     platforms["key"] = platforms["name"].map(station_name_key)

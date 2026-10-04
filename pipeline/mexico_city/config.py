@@ -107,7 +107,7 @@ OSM_BBOX = "18.95,-99.45,19.75,-98.85"
 # on their route relation, so step 1 also takes the named stop members of the
 # drawn relations (pipeline/stations.py's route_stop_members), and raises if
 # any stop is still left without a station (2026-10-04,
-# docs/decisions_drafts/mexico-city-stations.md). Proposed stations are on no
+# DECISIONS.md). Proposed stations are on no
 # route relation, so membership keeps the typo immunity.
 OSM_RAILWAY_KEEP = ("station",)
 # railway=subway_entrance is 447 nodes against 184 stations - 2.4x. Counting

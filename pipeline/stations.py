@@ -188,7 +188,7 @@ def check_operator_counts(expected_per_line, actual_per_line):
 # spells one station two ways ("Avila Camacho" and "Ávila Camacho", 98 m). A
 # collapse by the raw name keeps both. Mexico City shipped two such pairs and
 # Guadalajara one before this gate existed (2026-10-04,
-# docs/decisions_drafts/mexico-city-stations.md).
+# DECISIONS.md).
 
 _LINE_DESIGNATOR = re.compile(
     r"\s*\((?:l[ií]nea|line|l)\s*[0-9A-Za-z]{1,3}\)$"   # "Tacubaya (Línea 7)"
