@@ -6,7 +6,7 @@ Edges come from each city's `pipeline/<slug>/config.py`, shares from
 map carries, read from the committed maps). Regenerate after any city lands
 or re-renders.
 
-**160 built cities: 101 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 59 on smaller ones.**
+**161 built cities: 101 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 60 on smaller ones.**
 
 **The rule for smaller rings is station spacing, not coverage**: where the
 median gap between stations is about 550 m or less, a 0.6 mi outer ring
@@ -77,6 +77,7 @@ standard rings.
 | Pittsburgh | 0.05 / 0.1 / 0.2 / 0.3 mi | 18.3% | reason not recorded here: read its config |
 | Tacoma | 0.05 / 0.1 / 0.2 / 0.3 mi | 17.6% | reason not recorded here: read its config |
 | Birmingham (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 17.5% | reason not recorded here: read its config |
+| Mendoza | 0.05 / 0.1 / 0.2 / 0.3 mi | 14.5% | reason not recorded here: read its config |
 | Kansas City | 0.05 / 0.1 / 0.2 / 0.3 mi | 12.7% | reason not recorded here: read its config |
 | Tucson | 0.05 / 0.1 / 0.2 / 0.3 mi | 6.5% | reason not recorded here: read its config |
 
@@ -247,6 +248,7 @@ standard rings.
 | Tacoma | 0.05 / 0.1 / 0.2 / 0.3 mi | 503 | 2,851 | 17.6% |
 | Birmingham (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,642 | 9,383 | 17.5% |
 | Belo Horizonte (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 9,346 | 58,552 | 16.0% |
+| Mendoza | 0.05 / 0.1 / 0.2 / 0.3 mi | 641 | 4,406 | 14.5% |
 | Brasília | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,072 | 36,700 | 13.8% |
 | Fortaleza (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,537 | 63,036 | 13.5% |
 | Kansas City | 0.05 / 0.1 / 0.2 / 0.3 mi | 451 | 3,561 | 12.7% |

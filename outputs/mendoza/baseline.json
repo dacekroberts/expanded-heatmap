@@ -1,0 +1,17 @@
+{
+  "activity_rows": 41179,
+  "bucket_food_service": 713,
+  "bucket_personal_services": 296,
+  "bucket_retail": 3397,
+  "businesses": 8309,
+  "median_gap_m": 412,
+  "name_as_category": 92,
+  "no_ram_row": 151,
+  "outside_city": 0,
+  "premises": 4406,
+  "stations_collapsed": 25,
+  "stations_excluded": 18,
+  "stations_in_scope": 7,
+  "stop_positions": 50,
+  "storefront_businesses": 4406
+}
