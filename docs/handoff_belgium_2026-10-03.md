@@ -67,7 +67,7 @@ Decisions in `docs/decisions_drafts/belgium.md`, newest first.
    relations 3, 9 and 15, `fetch_sources.py --left-bank-trams`) found no
    such relations on overpass-api.de (an empty answer, twice) and timed out
    on kumi.systems; the one retry after the minute did the same (drafts).
-   A broader query (every tram route in the box) is a new query: the owner.s call; else De Lijn.s notice,
+   A broader query (every tram route in the box) is a new query: the owner's call; else De Lijn's notice,
    which the build cannot republish.
 
 **Still to do after those**: the drift check; merge origin/master and
