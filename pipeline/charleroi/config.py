@@ -107,16 +107,18 @@ COLLAPSE_MAX_SPREAD_M = 250.0
 COLLAPSE_SPREAD_ALLOWED = {"Surschiste": 400.0}
 SPACING_MIN_M = 100.0
 
-# Gate 3: TEC's own per-line stop lists. NOT READ: letec.be answers scripts
-# with 403 (the brief, 2026-10-03) and this build had no browser. The lead
-# reads TEC's M2, M3 and M4 line pages in a browser, or names a dated secondary
-# source, and fills OPERATOR_STATION_COUNTS (whole lines, before the commune
-# split: the feed gives M2 23, M3 26, M4 9 by name).
+# Gate 3: NO COUNT. The operator's site answers every path with a challenge
+# page (staging's licence read, 2026-10-04), which this project does not get
+# past. fr.wikipedia's "Métro léger de Charleroi" (read 2026-10-04) gives M1 25,
+# M2 25, M3 28, M4 15, on a different convention (the central loop counted
+# into each line, and Villette, closed for good, still listed), so it cannot
+# check the feed's whole-line counts (M2 23, M3 26, M4 9 by name).
 OPERATOR_STATION_COUNTS = None
 OPERATOR_COUNTS_GAP = (
-    "TEC's line pages (letec.be) refuse scripted reads (403, 2026-10-03) and were not read "
-    "in a browser by 2026-10-04; Wikipedia's network-wide 48 counts M1 and the tram stops. "
-    "The lead reads them before the commit.")
+    "the operator's line pages refuse scripted and browser reads (a challenge page, "
+    "2026-10-04); fr.wikipedia's per-line counts (M2 25, M3 28, M4 15, read 2026-10-04) "
+    "count the central loop into each line and list the closed Villette, so they do not "
+    "compare with the feed's whole lines (M2 23, M3 26, M4 9).")
 
 # Each line's drawn shapes, picked by step 1 (belgium_tec.line_shapes, France's
 # rule: shapes by trips, one added only where it reaches stations the others

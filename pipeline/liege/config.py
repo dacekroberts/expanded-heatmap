@@ -100,12 +100,13 @@ SPACING_MIN_M = 100.0
 # Gate 3: the City of Liege's open dataset "Tram - Stations"
 # (opendata.liege.be, 23 rows, 2022, CC BY; the brief, 2026-10-03): a public
 # authority's list independent of OSM and of the feed, read for the count
-# only, never republished. The whole line. Not re-read by this build (no
-# download): the lead confirms its rows match the line as opened (2025-04-28).
+# only, never republished. The whole line. Re-read 2026-10-04: 23 rows, each
+# within 87 m of one of the feed's 23 stops and each stop within 87 m of one
+# row (median 13 m), so the 2022 list is the line as opened on 2025-04-28.
 OPERATOR_STATION_COUNTS = {"T1": 23}
 OPERATOR_COUNTS_SOURCE = (
-    "Ville de Liège, open dataset 'Tram - Stations' (opendata.liege.be), 23 rows, 2022, "
-    "CC BY; counted by the Liège brief, 2026-10-03.")
+    "Ville de Liège, open dataset 'Tram - Stations' (opendata.liege.be/explore/dataset/"
+    "tram-stations/), 23 rows, 2022, CC BY; matched one to one to the feed's stops, 2026-10-04.")
 
 # T1's drawn shapes, picked by step 1 (belgium_tec.line_shapes, France's rule:
 # shapes by trips, one added only where it reaches stops the others miss).
