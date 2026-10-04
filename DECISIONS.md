@@ -20267,7 +20267,7 @@ until the owner rules):**
   Vancouver and Surrey OGL lines, on the same cautious reading the owner
   confirmed on 2026-10-02. This supersedes the caption-only placement in the
   entry below.
-  - A card cannot carry a link, so a notice's "[name](url)" prints as
+  - A card cannot carry a link, so a notice's `[name](url)` prints as
     "name (host/path)".
   - Only Vancouver's face changed.
 - **The chain page and the sampler's private section now read analytics'
