@@ -1,0 +1,96 @@
+{
+  "city_barber": {
+    "as_of": "2026-09-10",
+    "bytes": 49996,
+    "dataset_page": "https://city.himeji.gkan.jp/gkan/dataset/riyousyo",
+    "file": "282014_kyoka-riyou_20260910.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:56:45+00:00",
+    "rows": 380,
+    "sha256": "a677c6d76c9a1f56642eda5d23dacd8e53df89aa8472f2e7d0e08319815c4acc",
+    "url": "https://city.himeji.gkan.jp/admin/gkan/dataset/7d4810cc-723a-46a8-b2e2-98cb859cb65c/resource/f7d723fa-d1f6-4dbf-8291-6acb6cccc1aa/download/282014_kyoka-riyou_20260910.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2026-09-10",
+    "bytes": 144029,
+    "dataset_page": "https://city.himeji.gkan.jp/gkan/dataset/biyousyo",
+    "file": "282014_kyoka-biyou_20260910.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:56:46+00:00",
+    "rows": 1336,
+    "sha256": "6280b3de653ecd7f1122e66a750325225f204b3de6f015ea0ffd838aea28f22d",
+    "url": "https://city.himeji.gkan.jp/admin/gkan/dataset/77e05f08-cefc-4a8d-8749-e4e239256059/resource/6b9230ee-715e-4b34-a424-8abb84a96f82/download/282014_kyoka-biyou_20260910.xlsx"
+  },
+  "city_food": {
+    "as_of": "2026-09-10",
+    "bytes": 741824,
+    "dataset_page": "https://city.himeji.gkan.jp/gkan/dataset/shokuhinn",
+    "file": "282014_kyoka-syokuhinn_20260910.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:56:45+00:00",
+    "rows": 8347,
+    "sha256": "3c32e54ff814e01768273fc8035d7f8b7912edad7e8134d4f0d5075bb927b683",
+    "url": "https://city.himeji.gkan.jp/admin/gkan/dataset/3868a36d-3029-4502-817b-3094e3ed4806/resource/0738c22f-2527-43d7-a96f-df2d6abb8f9f/download/282014_kyoka-syokuhinn_20260910.xlsx"
+  },
+  "city_laundry": {
+    "as_of": "2026-09-10",
+    "bytes": 31045,
+    "dataset_page": "https://city.himeji.gkan.jp/gkan/dataset/kuriininngu",
+    "file": "282014_kyoka-kuriininngu_20260910.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:56:52+00:00",
+    "rows": 189,
+    "sha256": "a904bce49c2677b51384fb23b8cc4f531d276c29ca2f07face1357b818a0ff45",
+    "url": "https://city.himeji.gkan.jp/admin/gkan/dataset/66a768cb-5017-4e4b-8998-2479035b9dd3/resource/8d3ab779-8035-4dfd-9b5d-2d91c6418aad/download/282014_kyoka-kuriininngu_20260910.xlsx"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_28201_block": {
+    "bytes": 513893,
+    "file": "28201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:36+00:00",
+    "sha256": "7d5f0c45c2ac564c7ed04b8e171143913ec8aabcecd55a1a806f24adb6031c18",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/28201-24.0a.zip"
+  },
+  "isj_28201_chome": {
+    "bytes": 18755,
+    "file": "28201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:37+00:00",
+    "sha256": "1cfdd289f44fbbf4aa30646d29dee3a596db02a2de579a36356bc98979e9a4d5",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/28201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 8361345,
+    "file": "data/japan/raw/N03-20250101_28_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:10+00:00",
+    "sha256": "3ff660682980d4b9f8b938341a6bc7e159c2636a0f1212f14b7c1767fbaf4c72",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_28_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 36653,
+    "elements": 59,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-03T17:54:01Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.58,134.41,35.11,134.83);way[\"railway\"=\"station\"](34.58,134.41,35.11,134.83););out tags center;",
+    "retrieved": "2026-10-03T17:55:06+00:00",
+    "sha256": "0dda0291f2447279fd5ca0d2d4f6652a1f3f68b5630d518f3de3b4311c86aba5"
+  }
+}

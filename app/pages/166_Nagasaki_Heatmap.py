@@ -69,11 +69,11 @@ st.markdown(
 **The businesses**
 
 - The food businesses come from two lists. Nagasaki City's own list is a snapshot of the
-  food-business permits in force on 30 June 2023, the newest it publishes under an open license.
+  food-business permits in force on June 30, 2023, the newest it publishes under an open license.
 - Permits filed online go through the Ministry of Health, Labour and Welfare's system, whose open
-  data is the second list (downloaded 2 October 2026) and carries the permits granted since. A
+  data is the second list (downloaded October 2, 2026) and carries the permits granted since. A
   premises in both lists appears once.
-- The barbers, beauty salons and laundries come from the city's registers as of 31 March 2023;
+- The barbers, beauty salons and laundries come from the city's registers as of March 31, 2023;
   premises opened since then are not on this map.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear either.

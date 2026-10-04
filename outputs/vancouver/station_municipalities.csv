@@ -1,4 +1,24 @@
 station,latitude,longitude,lines,municipality,nearest_station_m
+Brentwood Town Centre,49.2663915,-123.001813,Millennium Line,Burnaby,867.4
+Edmonds,49.211927,-122.959098,Expo Line,Burnaby,1512.8
+Gilmore,49.2649665,-123.01353449999999,Millennium Line,Burnaby,867.4
+Holdom,49.264729,-122.98215350000001,Millennium Line,Burnaby,1442.2
+Lake City Way,49.2546315,-122.939183,Millennium Line,Burnaby,1532.6
+Lougheed Town Centre,49.248548,-122.896883,"Expo Line, Millennium Line",Burnaby,1518.2
+Metrotown,49.2258165,-123.003908,Expo Line,Burnaby,772.3
+Patterson,49.229755,-123.01264549999999,Expo Line,Burnaby,772.3
+Production Way-University,49.2534145,-122.9182045,"Expo Line, Millennium Line",Burnaby,1532.6
+Royal Oak,49.2200615,-122.9884575,Expo Line,Burnaby,1294.2
+Sperling-Burnaby Lake,49.259183500000006,-122.9639865,Millennium Line,Burnaby,1458.5
+Burquitlam,49.261398,-122.8898185,Millennium Line,Coquitlam,1518.2
+Coquitlam Central,49.2748285,-122.800597,Millennium Line,Coquitlam,786.9
+Lafarge Lake-Douglas,49.285718,-122.791529,Millennium Line,Coquitlam,615.5
+Lincoln,49.2804135,-122.79395099999999,Millennium Line,Coquitlam,615.5
+22nd Street,49.200052,-122.9489555,Expo Line,New Westminster,1512.8
+Braid,49.233236,-122.8827745,Expo Line,New Westminster,1067.4
+Columbia,49.2048185,-122.9061525,Expo Line,New Westminster,602.0
+New Westminster,49.201432499999996,-122.912601,Expo Line,New Westminster,602.0
+Sapperton,49.2246605,-122.8893675,Expo Line,New Westminster,1067.4
 Gateway,49.198950499999995,-122.8506075,Expo Line,Surrey,1063.6
 King George,49.1827835,-122.8447175,Expo Line,Surrey,786.7
 Scott Road,49.204415499999996,-122.874178,Expo Line,Surrey,1821.4

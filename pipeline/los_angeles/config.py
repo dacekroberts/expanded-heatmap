@@ -11,8 +11,19 @@ from pathlib import Path
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
+
+# Los Angeles (Regional): Long Beach added for the A Line's eight stations
+# there (owner, 2026-09-27; released 2026-10-02,
+# docs/handoff_extensions_2026-10-02.md), on Long Beach's own licence layer
+# (LONG_BEACH_* below). False reproduces the city-alone build byte for byte,
+# which is how the extension was proved before it was switched on.
+REGIONAL = True
+NAME = "Los Angeles (Regional)" if REGIONAL else "Los Angeles"
 DATA_RAW = ROOT / "data" / "los_angeles" / "raw"
-DATA_PROCESSED = ROOT / "data" / "los_angeles" / "processed"
+# data/ is one junction shared by every worktree, and master's checks read
+# processed/: the regional build writes processed/regional/ (ignored) until it
+# lands (docs/session_roles.md; Cleanup, 2026-10-03). Fold back on landing.
+DATA_PROCESSED = ROOT / "data" / "los_angeles" / "processed" / ("regional" if REGIONAL else "")
 OUTPUTS = ROOT / "outputs" / "los_angeles"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
@@ -132,6 +143,9 @@ OPERATOR_COUNTS_SOURCE = (
 # City of LA is the record whose CITY_COMM_NAME is "LOS ANGELES".
 CITY_BOUNDARY_FIELD = "CITY_COMM_NAME"
 CITY_BOUNDARY_NAME = "LOS ANGELES"
+# The cities whose stations are kept (step 1) and whose outline frames the map
+# (step 4): the City of LA alone, or with Long Beach.
+SCOPE_CITY_NAMES = ("LOS ANGELES", "LONG BEACH") if REGIONAL else ("LOS ANGELES",)
 
 # --- Business filtering ------------------------------------------------
 
@@ -153,7 +167,9 @@ IN_CITY_COUNCIL_DISTRICTS = range(1, 16)
 # in docs/data_sources.md; non-US cities are where this bites.
 SOURCE_ENCODING = "utf-8"
 
-TAXONOMY_SYSTEM = "naics"
+# Regional: pipeline/taxonomies/los_angeles.py dispatches on `source` - LA's
+# rows through NAICS exactly as before, Long Beach's on its own categories.
+TAXONOMY_SYSTEM = "los_angeles" if REGIONAL else "naics"
 # The raw export's own classification column. Step 2 renames it to the
 # taxonomy's VALUE_COLUMN, then filters via pipeline.taxonomies.
 RAW_CLASSIFICATION_COLUMN = "naics"
@@ -215,3 +231,26 @@ PARCEL_BUFFER_M = 25.0
 # Written by fetch_parcel_residence.py (not a step*.py, so the drift check
 # stays offline). Absent rows are simply not flagged.
 PARCEL_RESIDENCE_CSV = DATA_RAW / "parcel_residence.csv"
+
+# --- Long Beach (regional only) ---------------------------------------------
+# "Business Licenses Public View" (City of Long Beach, MapsLB; refreshed
+# nightly from the City's Infor licensing system). PERMITTED WITH CONDITIONS
+# under the MapsLB Terms of Use, the breach-only indemnity accepted by the
+# owner (2026-09-30); never imply endorsement (docs/data_sources/
+# united-states.md). Downloaded by fetch_long_beach.py (not a step*.py).
+#
+# Server-side filter: LICSTATUS 'Active', OUTSIDECITY 'No', HOMEBASED 'No'
+# (the City's own flags) - 20,204 rows on 2026-10-03.
+#
+# PRIVACY: FULLNAME (the licence holder's name) is NEVER requested; step 2
+# raises if it arrives. A row with no DBANAME (trade name) shows its street
+# address, unit removed, as this page does for LA's registrant-name rows.
+LONG_BEACH_URL = ("https://services6.arcgis.com/yCArG7wGXGyWLqav/arcgis/rest/"
+                  "services/Business_Licenses_Public_View/FeatureServer/0/query")
+LONG_BEACH_WHERE = "LICSTATUS='Active' AND OUTSIDECITY='No' AND HOMEBASED='No'"
+LONG_BEACH_FIELDS = ("OBJECTID", "LICENSENO", "LICCATDESC", "CLASSDESC", "LICSTATUS",
+                     "DBANAME", "SITELOCATION", "ZIP", "HOMEBASED", "OUTSIDECITY",
+                     "INDCNTR", "MILESTONE", "ISSDTTM")
+LONG_BEACH_FORBIDDEN = ("FULLNAME",)
+LONG_BEACH_CSV = DATA_RAW / "long_beach_business_licenses.csv"
+LONG_BEACH_BOUNDARY_NAME = "LONG BEACH"

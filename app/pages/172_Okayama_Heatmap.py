@@ -72,7 +72,7 @@ st.markdown(
   pharmacies) do not appear either.
 - The food businesses come from the Ministry of Health, Labour and Welfare's filing system, whose
   open data holds the permits and notifications Okayama City has recorded since June 2021
-  (downloaded 2 October 2026). Permits granted before then and still in force are not in it.
+  (downloaded October 2, 2026). Permits granted before then and still in force are not in it.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than
   hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
   chose to publish in the ministry's list.

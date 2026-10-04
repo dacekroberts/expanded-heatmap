@@ -1,0 +1,107 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 61609,
+    "dataset_page": "https://opendata.smartcity-takamatsu.jp/ckan/dataset/new_barber_shops",
+    "file": "new_barber_shops.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:59:55+00:00",
+    "rows": 371,
+    "sha256": "c8bec9350525a9f4fd68fd2cbea8a57e81948e3c002166da7bc48000213a1661",
+    "url": "https://opendata.takamatsu-fact.com/new_barber_shops/data.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 215281,
+    "dataset_page": "https://opendata.smartcity-takamatsu.jp/ckan/dataset/new_beauty_salons",
+    "file": "new_beauty_salons.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:59:56+00:00",
+    "rows": 1188,
+    "sha256": "67042287866ec8a826883e8d9c9168494040d363f81ed81294a2efbe3d50067a",
+    "url": "https://opendata.takamatsu-fact.com/new_beauty_salons/data.csv"
+  },
+  "city_food": {
+    "as_of": "2026-08-31",
+    "bytes": 2030146,
+    "dataset_page": "https://opendata.smartcity-takamatsu.jp/ckan/dataset/licensed_food_business_facility_list",
+    "file": "licensed_food_business_facility_list.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:59:54+00:00",
+    "rows": 7372,
+    "sha256": "143d53915387ec62690fe91859b481f02c45b67c8ea873118d82351fab42aa41",
+    "url": "https://opendata.takamatsu-fact.com/licensed_food_business_facility_list/data.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-08-31",
+    "bytes": 78459,
+    "dataset_page": "https://opendata.smartcity-takamatsu.jp/ckan/dataset/new_cleanings",
+    "file": "new_cleanings.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:59:57+00:00",
+    "rows": 332,
+    "sha256": "cb9e79c7c46230b9a2483ad2f0220d695398bd3f2dc23c80e92177aec72687c8",
+    "url": "https://opendata.takamatsu-fact.com/new_cleanings/data.csv"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 887971,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "37201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:58:01+00:00",
+    "rows": 3450,
+    "sha256": "35b942492d7b9ec1b1ce211d8dc5c9d865b9dcf47b53e85130e26f0861747d7f",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=37201_food_business_all.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_37201_block": {
+    "bytes": 461083,
+    "file": "37201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:38+00:00",
+    "sha256": "f55c5e6869291a09e159a2ca451e4f517da60424228c8f74e382e66ef82dec2b",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/37201-24.0a.zip"
+  },
+  "isj_37201_chome": {
+    "bytes": 8533,
+    "file": "37201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:39+00:00",
+    "sha256": "c1122aafcdd34d1573d6d04592d4d878d72cf904f537cba629283492de0961ca",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/37201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 4377146,
+    "file": "data/japan/raw/N03-20250101_37_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:24:19+00:00",
+    "sha256": "fe0db60570db284de855b6414e9033cec78cc5e376becbf138344a2895eb0c45",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_37_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 24237,
+    "elements": 59,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-03T17:56:06Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.1,133.91,34.45,134.19);way[\"railway\"=\"station\"](34.1,133.91,34.45,134.19););out tags center;",
+    "retrieved": "2026-10-03T17:57:21+00:00",
+    "sha256": "20fe6fe29eedbd4c13d18619e4c289fbf985cb322f57465eee6cfe608d0bf0a8"
+  }
+}

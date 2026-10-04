@@ -48,8 +48,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 # The join itself lives in the pipeline, shared with the builds; this script MEASURES it.
 from pipeline.countries import japan  # noqa: E402
 from pipeline.countries.japan_register import (  # noqa: E402
-    city_rows, haversine_m, join, join_city, kyoto_permit_stream, load_city_isj, load_city_permits, load_isj,
-    load_permits, permits_from_rows)
+    city_rows, haversine_m, in_term, join, join_city, kyoto_permit_stream, load_city_isj, load_city_permits, load_isj,
+    load_permits, permits_from_rows, rebuilt_register)
 
 # municipality -> (municipality code, name, permit CSV, ISJ block zip, ISJ chōme zip)
 MUNICIPALITIES = {
@@ -171,20 +171,82 @@ for _slug, _pref, _city, _food, _life, _mhlw in (
         CITIES[f"{_slug}-mhlw"] = (_pref, _city, [f"{_slug}/raw/{_mhlw}_food_business_all.csv"], _isj)
 
 
+# Japan wave 2 (2026-10-03), the files staging's Step 0 cached. Each entry
+# reads its lists as the build will: Nishinomiya's register workbooks by sheet,
+# the old-law lists (Nara, Sasebo) only while in term on MHLW's 2026-08-31,
+# Higashiōsaka's register rebuilt from its full list and months.
+_AS_OF = datetime.date(2026, 8, 31)
+_interm = lambda f, col: (lambda: in_term(city_rows(DATA / f), (col,), _AS_OF))  # noqa: E731
+_HO = "higashiosaka/raw/272272_food_business_"
+for _slug, _pref, _city, _food, _life, _mhlw in (
+        ("kawasaki", "神奈川県", "川崎市", ["kawasaki/raw/food_202608.csv"],
+         ["kawasaki/raw/riyoujo202608.csv", "kawasaki/raw/biyoujo202608.csv", "kawasaki/raw/cleaning202608.csv"],
+         "14130"),
+        ("yokosuka", "神奈川県", "横須賀市", ["yokosuka/raw/syoku08.csv"],
+         ["yokosuka/raw/riyouzyo_202608.xlsx", "yokosuka/raw/biyouzyo_202608.xlsx",
+          "yokosuka/raw/kuri-ninngu_ippann_202608.xlsx", "yokosuka/raw/kuri-ninngu_toritugi_202608.xlsx"], "14201"),
+        ("himeji", "兵庫県", "姫路市", ["himeji/raw/282014_kyoka-syokuhinn_20260910.xlsx"],
+         [f"himeji/raw/282014_kyoka-{f}_20260910.xlsx" for f in ("riyou", "biyou", "kuriininngu")], "28201"),
+        ("nishinomiya", "兵庫県", "西宮市", ["nishinomiya/raw/R8.8ichiran_syokuhin.xlsx"],
+         [_rows("nishinomiya/raw/riyo_2026.9.xlsx", sheet="理容"), _rows("nishinomiya/raw/biyo_2026.9.xlsx", sheet="美容"),
+          _rows("nishinomiya/raw/cleaning_ippan_2026.9.xlsx", sheet="一般"),
+          _rows("nishinomiya/raw/cleaning_toritsugi_2026.9.xlsx", sheet="取次")], "28204"),
+        ("takamatsu", "香川県", "高松市", ["takamatsu/raw/licensed_food_business_facility_list.csv"],
+         [f"takamatsu/raw/{f}.csv" for f in ("new_barber_shops", "new_beauty_salons", "new_cleanings")], "37201"),
+        ("toyota", "愛知県", "豊田市", ["toyota/raw/20260907_0800.xlsx"],
+         [f"toyota/raw/{f}_202608.xlsx" for f in ("riyo", "biyo", "cleaning")], "23211"),
+        ("yokkaichi", "三重県", "四日市市",
+         ["yokkaichi/raw/242021_food_business_all_20260831.xlsx", "yokkaichi/raw/242021_eigyoutodokede_20260831.xlsx"],
+         [f"yokkaichi/raw/242021_{f}_20260831.xlsx" for f in ("barber", "beauty", "cleaning")], "24202"),
+        ("otsu", "滋賀県", "大津市", ["otsu/raw/od_2608.csv"],
+         [f"otsu/raw/20260831{f}.csv" for f in ("riyo", "biyo", "cleaning")], "25201"),
+        ("nara", "奈良県", "奈良市", [_interm("nara/raw/203480.csv", "許可有効期限")],
+         [f"nara/raw/{n}.csv" for n in (209465, 209467, 209463)], "29201"),
+        ("hamamatsu", "静岡県", "浜松市", [],
+         [f"hamamatsu/raw/{f}.csv" for f in ("riyoujyo", "biyoujyo", "cleaning_toritugi", "cleaning_ippan")], None),
+        ("higashiosaka", "大阪府", "東大阪市",
+         [lambda: rebuilt_register([DATA / f"{_HO}all_20260401.csv",
+                                    *[DATA / f"{_HO}new_2026{m:02d}01_2026{m:02d}{d}.csv"
+                                      for m, d in ((4, 30), (5, 31), (6, 30), (7, 31), (8, 31))]], _AS_OF)],
+         [], None),
+        ("kurume", "福岡県", "久留米市", [], [], "40203"),
+        ("sasebo", "長崎県", "佐世保市", [_interm("sasebo/raw/dataset_kaiseimaer8.4.csv", "終了年月日")], [], "42202"),
+        ("shimonoseki", "山口県", "下関市", [], [], "35201")):
+    _isj = f"{_slug}/raw/isj"
+    if _food:
+        CITIES[_slug] = (_pref, _city, _food, _isj)
+    if _life:
+        CITIES[f"{_slug}-life"] = (_pref, _city, _life, _isj)
+    if _mhlw:
+        CITIES[f"{_slug}-mhlw"] = (_pref, _city, [f"{_slug}/raw/{_mhlw}_food_business_all.csv"], _isj)
+
+
+def bucketed(key, permits):
+    """Only the rows japan_eigyo keeps (--bucketed): the briefs measure tiers on
+    fixed premises in a bucket. A -life entry is a register (the source decides),
+    anything else a food list."""
+    from pipeline.taxonomies import japan_eigyo
+    src = "barber" if key.endswith("-life") else "food"
+    return [p for p in permits if japan_eigyo.explain(p["type"], src, p.get("form", ""))[0]]
+
+
 def run_city(key, show_misses=False):
     pref, city, files, isj = CITIES[key]
     wardless = bool(japan.CITIES.get(key.split("-")[0], {}).get("wardless"))
-    blocks, chome = load_city_isj(DATA / isj)
+    rules = frozenset(japan.CITIES.get(key.split("-")[0], {}).get("rules", ()))
+    blocks, chome = load_city_isj(DATA / isj, rules)
     ps = []
     for f in files:
         if callable(f):  # a rebuilt register (Kyoto), or a reader with options
-            ps += permits_from_rows(f(), pref, city, wardless)
+            ps += permits_from_rows(f(), pref, city, wardless, rules)
         elif "*" in f:
             for path in sorted(DATA.glob(f)):
-                ps += load_city_permits(path, pref, city, wardless)
+                ps += load_city_permits(path, pref, city, wardless, rules)
         else:
-            ps += load_city_permits(DATA / f, pref, city, wardless)
-    join_city(ps, blocks, chome)
+            ps += load_city_permits(DATA / f, pref, city, wardless, rules)
+    if "--bucketed" in sys.argv:
+        ps = bucketed(key, [p for p in ps if not p.get("closed")])
+    join_city(ps, blocks, chome, rules)
     fixed = [p for p in ps if not p["mobile"]]
     t = collections.Counter(p["tier"] for p in fixed)
     n = max(1, len(fixed))

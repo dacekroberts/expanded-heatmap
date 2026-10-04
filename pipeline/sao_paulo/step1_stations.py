@@ -1,4 +1,5 @@
-"""São Paulo step 1: Metrô Lines 1-5 and 15 stations inside the município.
+"""São Paulo step 1: Metrô Lines 1-5, 15 and 17 and CPTM Line 9 stations
+inside the município.
 
     python pipeline/sao_paulo/step1_stations.py
 
@@ -6,9 +7,12 @@ Reads the cache only; `fetch_sources.py` downloads.
 
   * **Geometry and stations from OpenStreetMap** by route-relation membership
     (the owner's 2026-09-23 decision, osm-rail); **GeoSampa's OPERATING layer
-    decides status** and supplies gate 3's count. Lines 6 and 17 are in OSM
-    and only in GeoSampa's planned layer: step 1 STOPS if either appears in
-    the operating layer, so an opening is added deliberately.
+    decides status** and supplies gate 3's count. Line 6 is in OSM and only
+    in GeoSampa's planned layer: step 1 STOPS if it appears in the operating
+    layer, so an opening is added deliberately. Line 17 runs although
+    GeoSampa still lacks it; gate 3 takes Metrô's list (config.GATE3_ADDED),
+    and its Washington Luís branch station is added by OSM id
+    (config.L17_BRANCH).
   * Stations collapse by NAME across directions, every spread printed.
   * Every station must lie inside the município - the brief measured all six
     operating lines inside it - and step 1 stops if one does not.
@@ -29,7 +33,7 @@ from pipeline.sao_paulo import config  # noqa: E402
 from pipeline.sao_paulo.boundary import city_polygon, neighbour_polygons  # noqa: E402
 
 GEOSAMPA_LINE = {"AZUL": "1", "VERDE": "2", "VERMELHA": "3", "AMARELA": "4", "LILAS": "5",
-                 "PRATA": "15"}
+                 "PRATA": "15", "OURO": "17"}
 
 
 def _read(path):
@@ -102,7 +106,23 @@ def stop_rows():
             rows.append({"line": t["ref"], "node": n["id"],
                          "stop_name": config.STATION_NAME_ALIASES.get(nt["name"], nt["name"]),
                          "latitude": n["lat"], "longitude": n["lon"]})
+    rows.append(l17_branch_stop(rows))
     return pd.DataFrame(rows).drop_duplicates(["line", "node"])
+
+
+def l17_branch_stop(rows):
+    """Washington Luís, added by OSM id: no Linha 17 relation carries it."""
+    br = config.L17_BRANCH
+    if any(r["line"] == "17" and fold(r["stop_name"]) == fold(br["station"]) for r in rows):
+        sys.exit(f"OSM's Linha 17 relations now carry {br['station']!r}: retire "
+                 f"config.L17_BRANCH and its fetch")
+    els = _read(config.OSM_L17_BRANCH_JSON)["elements"]
+    n = next((e for e in els if e["type"] == "node" and e["id"] == br["stop_node"]), None)
+    if n is None or "Washington" not in n.get("tags", {}).get("name", ""):
+        sys.exit(f"node {br['stop_node']} is not Washington Luís in {config.OSM_L17_BRANCH_JSON}")
+    print(f"    added  {n['id']:>9} monorail  17  {br['station']} (by OSM id, config.L17_BRANCH)")
+    return {"line": "17", "node": n["id"], "stop_name": br["station"],
+            "latitude": n["lat"], "longitude": n["lon"]}
 
 
 def main():
@@ -158,7 +178,7 @@ def main():
                         crs=config.CRS_GEOGRAPHIC)
     inside = pts.within(poly).values
     outside = st_rows[~inside]
-    # The six metro lines lie wholly inside the município (the brief); only a
+    # The metro lines lie wholly inside the município (the brief); only a
     # CPTM line may leave it - Line 9 runs on to Osasco.
     bad = [nm for nm, ln in zip(outside["stop_name"], outside["lines"]) if ln != "9"]
     if bad:

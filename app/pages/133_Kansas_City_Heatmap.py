@@ -81,7 +81,7 @@ st.markdown(
 - **Where the license holder is a person rather than a company, the map shows the street address
   instead of a name**, and so it does where a company trades under a person's own name. Elsewhere
   the map shows the name the business trades under.
-- **The license data dates from 15 January 2026**, and holds licenses valid for 2025 and 2026.
+- **The license data dates from January 15, 2026**, and holds licenses valid for 2025 and 2026.
   Businesses that opened since then are missing, and any that closed may still be shown.
 - **About one storefront in eight sits within a ring.**
 

@@ -16,5 +16,13 @@
     "file": "osm_rail.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:00:26+00:00 (cache file time)"
+  },
+  "cnefe:3118601_CONTAGEM.zip": {
+    "file": "3118601_CONTAGEM.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3118601_CONTAGEM.zip",
+    "bytes": 7697598,
+    "sha256": "16a86dbb4059813c6c7e365be58f42f1200ad331bd1db6352a44ddff027980f5",
+    "retrieved": "2026-09-28T05:27:25+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:53:09 GMT"
   }
 }

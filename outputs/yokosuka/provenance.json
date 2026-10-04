@@ -1,0 +1,107 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 43616,
+    "dataset_page": "https://data.bodik.jp/dataset/142018_00_19_environmental_sanitation_facilities",
+    "file": "riyouzyo_202608.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:43+00:00",
+    "rows": 251,
+    "sha256": "60640912a7c78d9a329842dc52cfdcff496f6e450e3aa99fcc3e028c66afc10e",
+    "url": "https://data.bodik.jp/dataset/76f9d975-d773-486b-b7ad-48d046a4a696/resource/d888225b-47f9-431a-9fcd-de53153e6eb9/download/riyouzyo_202608.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 105860,
+    "dataset_page": "https://data.bodik.jp/dataset/142018_00_19_environmental_sanitation_facilities",
+    "file": "biyouzyo_202608.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:46+00:00",
+    "rows": 745,
+    "sha256": "2d00f34546b7746272478786dd07c5dc2adf5fa400a5631b24d1198d87407e33",
+    "url": "https://data.bodik.jp/dataset/76f9d975-d773-486b-b7ad-48d046a4a696/resource/0e4a4287-f846-4ba2-aa09-1cbbd554ddba/download/biyouzyo_202608.xlsx"
+  },
+  "city_food": {
+    "as_of": "2026-08-31",
+    "bytes": 1007571,
+    "dataset_page": "https://data.bodik.jp/dataset/142018_00_18_syokuhin_all",
+    "file": "syoku08.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:41+00:00",
+    "rows": 4172,
+    "sha256": "4b7321421c740cc226b25f7f101145a1726f4e6f675c0fa6aa6421626e46babb",
+    "url": "https://data.bodik.jp/dataset/3a1aaf46-e6ca-41fa-8977-3388f3b7e3ba/resource/4c06c4b1-84de-4c4c-af65-fff85a7963e4/download/syoku08.csv"
+  },
+  "city_laundry_general": {
+    "as_of": "2026-08-31",
+    "bytes": 18576,
+    "dataset_page": "https://data.bodik.jp/dataset/142018_00_19_environmental_sanitation_facilities",
+    "file": "kuri-ninngu_ippann_202608.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:48+00:00",
+    "rows": 49,
+    "sha256": "988c3746d85a3236583bfb7cf2f9fcaa4dfee36bda901810d267407323fc4650",
+    "url": "https://data.bodik.jp/dataset/76f9d975-d773-486b-b7ad-48d046a4a696/resource/bed0a6b2-683a-46b7-8f39-5ccd9552a97f/download/kuri-ninngu_ippann_202608.xlsx"
+  },
+  "city_laundry_pickup": {
+    "as_of": "2026-08-31",
+    "bytes": 25616,
+    "dataset_page": "https://data.bodik.jp/dataset/142018_00_19_environmental_sanitation_facilities",
+    "file": "kuri-ninngu_toritugi_202608.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:51+00:00",
+    "rows": 95,
+    "sha256": "fb12719c0c8cfb198400b7a2a57ac7043e5aed4621258fd172c7daaba1d6739f",
+    "url": "https://data.bodik.jp/dataset/76f9d975-d773-486b-b7ad-48d046a4a696/resource/26c5d72d-91ba-4128-938c-8695f008e54c/download/kuri-ninngu_toritugi_202608.xlsx"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_14201_block": {
+    "bytes": 201228,
+    "file": "14201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:55+00:00",
+    "sha256": "b6060f5bc6a60607eaeb19d26da2b86bbfefac45f2d5046916813b68ddea3ab1",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/14201-24.0a.zip"
+  },
+  "isj_14201_chome": {
+    "bytes": 10086,
+    "file": "14201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T01:00:57+00:00",
+    "sha256": "480d26a8c0fab7736081828bc5f0b2378a8ff60a2dc81c0fc02ef003058f4709",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/14201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 4665116,
+    "file": "data/japan/raw/N03-20250101_14_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T22:43:12+00:00",
+    "sha256": "1cf3c1ee08686de1e2685e5f81b9f0eaf6abb94bfffcd0811cc109c84b2e9fb4",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_14_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 27018,
+    "elements": 37,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-03T17:49:51Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.15,139.56,35.35,139.76);way[\"railway\"=\"station\"](35.15,139.56,35.35,139.76););out tags center;",
+    "retrieved": "2026-10-03T17:51:04+00:00",
+    "sha256": "bc89807116ce0c02f2694b63bd8d5f20aaa3b792939ca902efe23012f4b8911b"
+  }
+}

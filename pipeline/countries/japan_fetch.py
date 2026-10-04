@@ -147,6 +147,34 @@ def fetch_portal(config, force):
     print(f"  {n} portal files recorded ({', '.join(f'{d}: {len(r)}' for d, r in config.PORTAL_RESOURCES.items())})")
 
 
+def current_url(config, key, url, page):
+    """The URL a source is fetched from. Most are pinned in SOURCE_FILES. Two
+    kinds are renamed every month under a stable home (Japan wave 2,
+    2026-10-03), so the pinned URL only says which edition the build read:
+      * config.SOURCE_LINKS {key: regex}: the dataset page's link whose href
+        matches (Kawasaki's 080803(UTF-8).csv, Otsu's od_2608.csv), exactly one;
+      * config.SOURCE_RESOURCES {key: (CKAN API base, resource id)}: the
+        resource's current URL from resource_show (Yokosuka's and Toyota's
+        BODIK files; every Toyota register resource is named _20268.xlsx)."""
+    import re
+    from urllib.parse import urljoin
+    if key in getattr(config, "SOURCE_LINKS", {}):
+        r = S.get(page, timeout=120)
+        r.raise_for_status()
+        pat = re.compile(config.SOURCE_LINKS[key])
+        hrefs = sorted({h for h in re.findall(r'href="([^"]+)"', r.content.decode("utf-8", "replace"))
+                        if pat.search(h)})
+        if len(hrefs) != 1:
+            sys.exit(f"{page}: {len(hrefs)} links match {config.SOURCE_LINKS[key]!r} (want 1): {hrefs[:5]}")
+        return urljoin(page, hrefs[0])
+    if key in getattr(config, "SOURCE_RESOURCES", {}):
+        api, rid = config.SOURCE_RESOURCES[key]
+        r = S.get(f"{api}/resource_show", params={"id": rid}, timeout=120)
+        r.raise_for_status()
+        return r.json()["result"]["url"]
+    return url
+
+
 def fetch_city(config, force):
     if hasattr(config, "PORTAL_RESOURCES"):
         return fetch_portal(config, force)
@@ -155,6 +183,8 @@ def fetch_city(config, force):
     file_rows = getattr(config, "file_rows", None)
     for key, (name, url, page) in config.SOURCE_FILES.items():
         dest = config.source_csv(key)
+        if force or not dest.exists():
+            url = current_url(config, key, url, page)
         how = get(url, dest, force)
         rows = list(file_rows(key) if file_rows else japan_register.city_rows(dest))
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]

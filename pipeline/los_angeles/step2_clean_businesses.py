@@ -33,6 +33,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.los_angeles import config  # noqa: E402
 from pipeline.los_angeles.config import (  # noqa: E402
     BUSINESSES_RAW_CSV,
     BUSINESSES_CLEAN_CSV,
@@ -62,6 +63,58 @@ def parse_latlon(value):
     return float(m.group(1)), float(m.group(2))
 
 
+def long_beach_rows():
+    """Long Beach's storefront licences (regional only), in the shared columns
+    step 3 reads. Every row already carries a point, so coord_status is
+    `source` and the geocoder never sees it. FULLNAME is never loaded."""
+    if not config.LONG_BEACH_CSV.exists():
+        sys.exit(f"No file at {config.LONG_BEACH_CSV}. Run: python pipeline/los_angeles/fetch_long_beach.py")
+    lb = pd.read_csv(config.LONG_BEACH_CSV, dtype=str, encoding="utf-8")
+    leaked = set(lb.columns) & set(config.LONG_BEACH_FORBIDDEN)
+    if leaked:
+        sys.exit(f"{config.LONG_BEACH_CSV.name} carries {sorted(leaked)} - never load the holder's name")
+    print(f"\nLong Beach: {len(lb):,} licences (active, in-city, not home-based, filtered at download)")
+    tax = load_taxonomy_module(TAXONOMY_SYSTEM)
+    lb["source"] = "long_beach"
+    lb["category"] = lb["LICCATDESC"].fillna("").str.strip()
+    lb["bucket"] = [tax.classify({"source": "long_beach", "category": c}) for c in lb["category"]]
+    print("  buckets: " + ", ".join(f"{k} {v:,}" for k, v in
+                                     lb["bucket"].value_counts(dropna=False).items()))
+    lb = lb[lb["bucket"].notna()].copy()
+    # A licence listed twice: keep one row, the higher-priority bucket first.
+    rank = {b: i for i, b in enumerate(tax.BUCKET_PRIORITY)}
+    before = len(lb)
+    lb = (lb.assign(_r=lb["bucket"].map(rank)).sort_values(["LICENSENO", "_r"])
+          .drop_duplicates("LICENSENO").drop(columns="_r"))
+    print(f"  one row per licence: {before:,} -> {len(lb):,}")
+    # Inside the City of Long Beach only: drops the layer's placeholder points
+    # in the Pacific (as far as 27.2 N, -138.2 W on 2026-10-03).
+    cities = gpd.read_file(CITIES_BOUNDARY_GEOJSON)
+    cities = cities.set_crs(CRS_GEOGRAPHIC) if cities.crs is None else cities.to_crs(CRS_GEOGRAPHIC)
+    poly = cities[cities[CITY_BOUNDARY_FIELD] == config.LONG_BEACH_BOUNDARY_NAME].geometry.union_all()
+    pts = gpd.points_from_xy(pd.to_numeric(lb["longitude"]), pd.to_numeric(lb["latitude"]))
+    inside = gpd.GeoSeries(pts, crs=CRS_GEOGRAPHIC).within(poly).to_numpy()
+    print(f"  inside the City of Long Beach: {int(inside.sum()):,} of {len(lb):,} "
+          f"({int((~inside).sum()):,} placeholder or outside points dropped)")
+    lb = lb[inside]
+    issued = pd.to_datetime(pd.to_numeric(lb["ISSDTTM"], errors="coerce"), unit="ms", errors="coerce")
+    out = pd.DataFrame({
+        "location_account": "LB-" + lb["LICENSENO"],
+        # The trade name only; a blank one shows the street address (step 3).
+        "business_name": lb["DBANAME"].fillna("").str.strip(),
+        "dba_name": lb["DBANAME"].fillna("").str.strip(),
+        "street_address": lb["SITELOCATION"].fillna("").str.strip(),
+        "zip_code": lb["ZIP"],
+        "location_start_date": issued.dt.strftime("%Y-%m-%d"),
+        "naics": "", "category": lb["category"], "source": "long_beach",
+        "latitude": pd.to_numeric(lb["latitude"]), "longitude": pd.to_numeric(lb["longitude"]),
+        "coord_status": "source",
+    })
+    for b in tax.BUCKET_PRIORITY:
+        print(f"      {b:<20} {int((lb['bucket'] == b).sum()):>6,}")
+    return out
+
+
 def main():
     if not BUSINESSES_RAW_CSV.exists():
         sys.exit(f"No file at {BUSINESSES_RAW_CSV}; see config.py for the download command.")
@@ -70,9 +123,15 @@ def main():
     print(f"Loaded {len(df):,} rows (already filtered to rows with coordinates at download time)")
 
     # Name the classification column the way the city's taxonomy expects,
-    # so everything below is taxonomy-agnostic.
+    # so everything below is taxonomy-agnostic. Regional: LA's code stays in
+    # `naics` (the dispatching taxonomy reads it there) and `category` shows it.
     value_column = load_taxonomy_module(TAXONOMY_SYSTEM).VALUE_COLUMN
-    df = df.rename(columns={RAW_CLASSIFICATION_COLUMN: value_column})
+    if config.REGIONAL:
+        df["source"] = "los_angeles"
+        df["category"] = "NAICS " + df[RAW_CLASSIFICATION_COLUMN].fillna("").str.strip()
+        value_column = RAW_CLASSIFICATION_COLUMN
+    else:
+        df = df.rename(columns={RAW_CLASSIFICATION_COLUMN: value_column})
 
     # --- Restrict to the City of Los Angeles --------------------------------
     before = len(df)
@@ -141,6 +200,11 @@ def main():
         print(f"Cross-check: {int(inside.sum()):,} of {len(have):,} source-coordinate points "
               f"({inside.mean():.1%}) also fall inside the City of Los Angeles polygon "
               "(the rest sit on the boundary, in enclaves, or are 4-decimal rounding).")
+
+    if config.REGIONAL:
+        lb = long_beach_rows()
+        df = pd.concat([df, lb], ignore_index=True)
+        print(f"\nLos Angeles (Regional): {len(df) - len(lb):,} City of LA rows + {len(lb):,} Long Beach")
 
     df = df.reset_index(drop=True)
     df["record_id"] = df.index.astype(str)

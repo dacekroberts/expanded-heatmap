@@ -68,7 +68,7 @@ st.markdown(
 - **This map shows personal services only: barbers, beauty salons and laundries.**
 - Hakodate City publishes its registers of these premises, but no register of food businesses or
   of other shops, so restaurants, cafés and shops are not on this map.
-- The registers are as of 31 August 2026 and record no closures, so a dot is a premises on the
+- The registers are as of August 31, 2026 and record no closures, so a dot is a premises on the
   register then, not necessarily one open today.
 
 **Reading the map**

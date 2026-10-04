@@ -208,6 +208,9 @@ SLUG_OVERRIDES = {
     "Mexico City": "mexico_city",
     # Japan batch (2026-10-02): the macron dropped from the package name.
     "Kōchi": "kochi",
+    # Japan wave 2 (2026-10-03), likewise.
+    "Ōtsu": "otsu",
+    "Higashiōsaka": "higashiosaka",
     # Brazil: accents dropped from the package name, and the regional pages'
     # suffix, as for Lille.
     "São Paulo": "sao_paulo",
@@ -216,6 +219,12 @@ SLUG_OVERRIDES = {
     "Porto Alegre (Regional)": "porto_alegre",
     "Recife (Regional)": "recife",
     "Santos (Regional)": "santos",
+    # Belo Horizonte extended to Contagem (2026-10-03).
+    "Belo Horizonte (Regional)": "belo_horizonte",
+    # Rio de Janeiro extended to Duque de Caxias (2026-10-03).
+    "Rio de Janeiro (Regional)": "rio_de_janeiro",
+    # Los Angeles extended to Long Beach (2026-10-03).
+    "Los Angeles (Regional)": "los_angeles",
     # Taiwan: Taipei + New Taipei as one regional page (2026-09-25).
     "Taipei (Regional)": "taipei",
     # Mexico: four municipios as one regional page (2026-09-27).

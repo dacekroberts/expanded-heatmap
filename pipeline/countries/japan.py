@@ -78,11 +78,14 @@ ISJ_CHOME_URL_TEMPLATE = "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/{code}-19.
 # pipeline/tokyo/wards.py - the one place a ward is switched on (2026-09-28);
 # the others' stations are drawn hollow (their codes: tokyo_wards.NO_DATA_WARDS).
 from pipeline.tokyo import wards as tokyo_wards  # noqa: E402 - dependency-free, no cycle
+from pipeline.countries.japan_register import WAVE2_RULES  # noqa: E402 - no import back
 
 CITIES = {
     "tokyo": {"name": "東京都区部", "pref": "13", "epsg": 32654,
               "wards": tokyo_wards.ACTIVE_CODES},
-    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653,
+    # N02-25 since 2026-10-03 (owner): N02-24 lacks the Chūō Line's
+    # Yumeshima, opened 2025-01-19.
+    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653, "n02": "25",
               "wards": ["27102", "27103", "27104", "27106", "27107", "27108", "27109", "27111", "27113",
                         "27114", "27115", "27116", "27117", "27118", "27119", "27120", "27121", "27122",
                         "27123", "27124", "27125", "27126", "27127", "27128"]},
@@ -130,6 +133,40 @@ CITIES = {
                 "wards": [f"3310{n}" for n in range(1, 5)]},
     "kochi": {"name": "高知市", "pref": "39", "epsg": 32653, "n02": "25", "wardless": True,
               "wards": ["39201"]},
+    # Japan wave 2 (owner released 2026-10-02), each on N02-25 as its brief
+    # measured. Hamamatsu's three wards are the 2024-01-01 ones (中央区 22138,
+    # 浜名区 22139, 天竜区 22140): MLIT's ISJ and N03 key them so, and the old
+    # seven codes answer 404. "rules": the join rules this wave added, which
+    # no built city reads until its own review re-renders it
+    # (japan_register.WAVE2_RULES).
+    "kawasaki": {"name": "川崎市", "pref": "14", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES,
+                 "wards": [f"1413{n}" for n in range(1, 8)]},
+    "yokosuka": {"name": "横須賀市", "pref": "14", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+                 "wards": ["14201"]},
+    "himeji": {"name": "姫路市", "pref": "28", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+               "wards": ["28201"]},
+    "nishinomiya": {"name": "西宮市", "pref": "28", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+                    "wards": ["28204"]},
+    "takamatsu": {"name": "高松市", "pref": "37", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+                  "wards": ["37201"]},
+    "toyota": {"name": "豊田市", "pref": "23", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+               "wards": ["23211"]},
+    "yokkaichi": {"name": "四日市市", "pref": "24", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+                  "wards": ["24202"]},
+    "otsu": {"name": "大津市", "pref": "25", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+             "wards": ["25201"]},
+    "nara": {"name": "奈良市", "pref": "29", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+             "wards": ["29201"]},
+    "hamamatsu": {"name": "浜松市", "pref": "22", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
+                  "wards": ["22138", "22139", "22140"]},
+    "higashiosaka": {"name": "東大阪市", "pref": "27", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+                     "wards": ["27227"]},
+    "kurume": {"name": "久留米市", "pref": "40", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+               "wards": ["40203"]},
+    "sasebo": {"name": "佐世保市", "pref": "42", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+               "wards": ["42202"]},
+    "shimonoseki": {"name": "下関市", "pref": "35", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+                    "wards": ["35201"]},
 }
 
 

@@ -29,7 +29,6 @@ from cities import (
     CITIES,
     DEFAULT_FRAME,
     DEFAULT_REGION,
-    elsewhere_counts,
     IN_DEFAULT_VIEW,
     MAP_ONLY_NAV,
     REGION_MEMBERS,
@@ -689,11 +688,11 @@ if picked:
 # dot is visible near the top. Whether a given city falls just inside or just
 # beyond the edge depends on the container width, so the wording covers both
 # and the list below is named as the guarantee.
-# NAMES THE OTHER REGIONS RATHER THAN SAYING "SOME CITIES ARE ELSEWHERE".
-# docs/scaling_thresholds.md's failure mode is a default that silently hides
-# most of the site, and a reader cannot tell a deliberate frame from a broken
-# one unless the counts are stated. Every city is drawn at every region - the
-# view is centred, not filtered - so the wording is about where the view sits.
+# Global states the whole site's count (docs/scaling_thresholds.md's failure
+# mode is a default that silently hides most of the site); a region view
+# states only its own (owner, 2026-10-03: region views no longer name the
+# other regions). Every city is drawn at every region - the view is centred,
+# not filtered - so the wording is about where the view sits.
 if region == DEFAULT_REGION:
     st.caption(
         f"All {len(CITIES)} cities are on the map, opening on the "
@@ -701,26 +700,20 @@ if region == DEFAULT_REGION:
         "above to jump there, or use the list below."
     )
 elif len(REGIONS) > 1:
-    # NOT "every region except this one": REGIONS holds composites and
-    # their halves, so that counted the same cities twice. See
-    # cities.elsewhere_counts().
-    _elsewhere = ", ".join(
-        f"{n_cities} in {n}" for n, n_cities in elsewhere_counts(region)
-    )
+    # A region view states its own count only (owner, 2026-10-03): the
+    # whole-map sentence belongs to Global, and the list below still holds
+    # every city, its other regions closed.
     _n_here = len(_region_cities[region])
     st.caption(
         # East Asia (Hong Kong, 2026-09-24) was the first one-city region.
-        f"Showing {_n_here} {'city' if _n_here == 1 else 'cities'} in {region} — "
-        f"{_elsewhere} elsewhere. Every city is on the map: switch region "
-        "above to re-center, or use the list below, which always has all of "
-        "them."
+        f"Showing {_n_here} {'city' if _n_here == 1 else 'cities'} in {region}."
     )
 
 st.caption("Or pick a city from the list:")
 # THE LIST FOLLOWS THE REGION SELECTOR (owner, 2026-10-01): one expander per
 # leaf region, the same partition the caption above counts. The regions the
 # selected view covers come first and open; every other region follows,
-# closed, in the order elsewhere_counts() names them, so the list still holds
+# closed, in menu order, so the list still holds
 # every city in every view. Global opens none: 124 cities open ran to dozens
 # of phone screens.
 _leaves = [n for n in _region_names if n not in REGION_MEMBERS]

@@ -235,7 +235,23 @@ def wrong_band(text):
         letters = re.findall(rf"\b[{M.LETTERS}]\b", row[col])
         if letters and re.match(r"\*\*\d+\*\*\s*—\s*\S", row[2]):
             return _set_cell(lines, i, col, "T" if "T" not in letters else "D")
-    return None
+    # No live row names a candidate (every candidate band emptied, 2026-10-03):
+    # plant one. A synthetic city goes into Band A's table, and the first
+    # by-country row names it as its one candidate while its Bands column
+    # says R; the check must still object that the city's band is not listed.
+    head = next((k for k, ln in enumerate(lines) if ln.startswith("## 🟢 Band A")), None)
+    if head is None or not rows:
+        return None
+    sep = next((k for k in range(head, len(lines)) if re.match(r"^\|(\s*-+\s*\|)+\s*$", lines[k])), None)
+    if sep is None:
+        return None
+    lines.insert(sep + 1, "| **Selftestville** 🏳️ | x | x | x | — |")
+    rows = _by_country(lines)[1]
+    i, row = rows[0]
+    cells = lines[i].split("|")
+    cells[3] = " **1** — Selftestville "
+    lines[i] = "|".join(cells)
+    return _set_cell(lines, i, col, "R")
 
 
 def by_country_bump(col, expect):

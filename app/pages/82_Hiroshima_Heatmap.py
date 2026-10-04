@@ -72,7 +72,7 @@ st.markdown(
 - The food businesses come from two lists. Hiroshima City's own list holds every food-business
   permit applied for at a city counter and in force at the end of March 2026.
 - Permits filed online go through the Ministry of Health, Labour and Welfare's system, whose open
-  data is the second list (downloaded 30 September 2026). A premises in both lists appears once.
+  data is the second list (downloaded September 30, 2026). A premises in both lists appears once.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than
   hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
   chose to publish in the ministry's list.

@@ -9,11 +9,20 @@ the hours. Prodabel's Linha 1 file is a cross-check the build does not read.
 from pathlib import Path
 
 SLUG = "belo_horizonte"
-NAME = "Belo Horizonte"
+
+# Belo Horizonte (Regional): Contagem added for Linha 1's western end, Eldorado
+# and Novo Eldorado (owner, 2026-09-27; released 2026-10-02,
+# docs/handoff_extensions_2026-10-02.md). False reproduces the city-alone build
+# byte for byte, which is how the extension was proved before it was switched on.
+REGIONAL = True
+NAME = "Belo Horizonte (Regional)" if REGIONAL else "Belo Horizonte"
 
 ROOT = Path(__file__).parent.parent.parent
 DATA_RAW = ROOT / "data" / SLUG / "raw"
-DATA_PROCESSED = ROOT / "data" / SLUG / "processed"
+# data/ is one junction shared by every worktree, and master's checks read
+# processed/: the regional build writes processed/regional/ (ignored) until it lands
+# (docs/session_roles.md; Cleanup, 2026-10-03). Fold back to processed/ on landing.
+DATA_PROCESSED = ROOT / "data" / SLUG / "processed" / ("regional" if REGIONAL else "")
 OUTPUTS = ROOT / "outputs" / SLUG
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
@@ -29,14 +38,22 @@ OSM_RAIL_JSON = DATA_RAW / "osm_rail.json"
 TAXONOMY_SYSTEM = "brazil_cnefe"
 
 # --- Scope -------------------------------------------------------------------------
-# One zip per município (IBGE code prefix). Belo Horizonte alone: the brief measured every station inside it, bar Linha 1's western end in Contagem, which step 1 records as excluded.
+# One zip per município (IBGE code prefix). The city alone: the brief measured every station inside it, bar Linha 1's western end in Contagem, which step 1 then recorded as excluded. Regional: Contagem too, so those two stations are in scope.
 CNEFE_FILES = [('31_MG', '3106200_BELO_HORIZONTE.zip')]
-CNEFE_ZIPS = tuple(DATA_RAW / name for _, name in CNEFE_FILES)
 SCOPE_CODES = ('3106200',)
+SCOPE_AREA_KM2 = (300, 360)   # gate on the union's area; Belo Horizonte 331.0 km2
+if REGIONAL:
+    CNEFE_FILES += [('31_MG', '3118601_CONTAGEM.zip')]
+    SCOPE_CODES += ('3118601',)
+    SCOPE_AREA_KM2 = (480, 570)   # Belo Horizonte 331.0 + Contagem 194.8 = 525.8 km2 (OSM, UTM 23S)
+CNEFE_ZIPS = tuple(DATA_RAW / name for _, name in CNEFE_FILES)
 IBGE_MUNICIPIO = SCOPE_CODES[0]
-SCOPE_AREA_KM2 = (300, 360)   # gate on the union's area
 BBOX = (-20.1, -44.15, -19.75, -43.8)   # s, w, n, e - the fetch's OSM box
-SANITY_BBOX = {"lat_min": BBOX[0], "lat_max": BBOX[2], "lon_min": BBOX[1], "lon_max": BBOX[3]}
+# The CNEFE sanity box. Contagem reaches -44.162, west of the fetch box, so the
+# regional box widens to -44.20; the fetch box stays, since OSM returns
+# Contagem's whole outline and Linha 1 ends at -44.04.
+_SANITY = (BBOX[0], -44.20, BBOX[2], BBOX[3]) if REGIONAL else BBOX
+SANITY_BBOX = {"lat_min": _SANITY[0], "lat_max": _SANITY[2], "lon_min": _SANITY[1], "lon_max": _SANITY[3]}
 
 # --- Coordinate reference systems -----------------------------------------
 CRS_GEOGRAPHIC = "EPSG:4326"

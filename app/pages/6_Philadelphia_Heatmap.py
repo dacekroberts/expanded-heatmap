@@ -59,8 +59,8 @@ st.markdown(
   the street.
 - Each is labeled directly on the map and in the legend, and the trolleys' five branches are drawn
   wherever they diverge.
-- **11th St on the Market–Frankford Line is not drawn**: SEPTA closed it on 5 September 2026 to
-  rebuild it with elevators and expects it back on 30 August 2027. Until then L trains run through
+- **11th St on the Market–Frankford Line is not drawn**: SEPTA closed it on September 5, 2026 to
+  rebuild it with elevators and expects it back on August 30, 2027. Until then L trains run through
   it without stopping.
 - **The two kinds of line are treated differently.** Market–Frankford and Broad Street stations sit
   a median 700 m apart, so every one inside the city is kept.

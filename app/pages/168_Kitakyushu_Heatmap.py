@@ -64,16 +64,16 @@ st.markdown(
 - The Shinkansen is not drawn (Kokura appears as a JR and Monorail station).
 - The Sarakurayama cable car and the Mojiko Retro sightseeing train, which are sightseeing lines,
   are not drawn.
-- Nishi-Kurosaki on the Chikuho line closed on 31 July 2026 and is not shown.
+- Nishi-Kurosaki on the Chikuho line closed on July 31, 2026 and is not shown.
 
 **The businesses**
 
 - From two food lists and two registers. Kitakyushu City's own list holds food-business permits
-  granted before June 2021 (as of 31 March 2026), shown where still in term at the end of August
+  granted before June 2021 (as of March 31, 2026), shown where still in term at the end of August
   2026.
 - Permits since then are filed through the Ministry of Health, Labour and Welfare's system, whose
-  open data is the second list (downloaded 2 October 2026). A premises in both lists appears once.
-- Barbers and beauty salons come from the city's registers as of 31 August 2026. The city publishes
+  open data is the second list (downloaded October 2, 2026). A premises in both lists appears once.
+- Barbers and beauty salons come from the city's registers as of August 31, 2026. The city publishes
   no list of laundries, so laundries are not on this map.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear.

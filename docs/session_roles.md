@@ -95,8 +95,8 @@ step instead of an implicit race.
 | UK six builds (released 2026-10-02: `docs/handoff_uk_six_2026-10-01.md`; one lead session with agents; registered 2026-10-02) | `.claude/worktrees/uk-six` | `uk-six-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-02:** pages **156** Manchester (Regional), **157** Birmingham (Regional), **158** Edinburgh, **159** Sheffield, **160** Nottingham (Regional), **161** Blackpool (Regional) (staging's pre-assignment); notices **84-96**, assigned in build order and kept contiguous (`check_provenance.py` D): Manchester 84 (Food Standards Agency) and 85 (Ordnance Survey), 86 NaPTAN for all six, then each city's Food Standards Agency or Food Standards Scotland notice and its Ordnance Survey one where it places at centroids |
 | Japan batch builds, twelve cities (released 2026-10-02: `docs/handoff_japan_batch_2026-10-02.md`; one lead session with agents; registered 2026-10-02) | `.claude/worktrees/japan-batch` | `japan-batch-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-02:** pages **162-173** as pre-assigned (Matsuyama 162, Toyama 163, Kumamoto 164, Fukui 165, Nagasaki 166, Utsunomiya 167, Kitakyushu 168, Sakai 169, Hakodate 170, Kagoshima 171, Okayama 172, Kōchi 173); notice numbers **97-108**, one per city in the same order (Matsuyama 97 ... Kōchi 108), each city's list, MHLW where used, and MLIT, as notices 50-56, 75 and 76; claimed after the UK six's 84-96 |
 | Seattle (Regional), then Tbilisi (released 2026-10-02: `docs/handoff_seattle_tbilisi_2026-10-02.md`; one lead session, Tbilisi queued) | `.claude/worktrees/seattle-tbilisi` | `seattle-tbilisi-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
-| Japan wave 2, fourteen cities (released 2026-10-02: `docs/handoff_japan_wave2_2026-10-02.md`; one lead session with agents) | `.claude/worktrees/japan-wave2` | `japan-wave2-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
-| Four extensions to built cities (released 2026-10-02: `docs/handoff_extensions_2026-10-02.md`; one lead session) | `.claude/worktrees/extensions` | `extensions-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's |
+| Japan wave 2, fourteen cities (released 2026-10-02: `docs/handoff_japan_wave2_2026-10-02.md`; one lead session with agents; registered 2026-10-03) | `.claude/worktrees/japan-wave2` | `japan-wave2-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-03:** pages **176-189** as pre-assigned (Kawasaki 176, Yokosuka 177, Himeji 178, Nishinomiya 179, Takamatsu 180, Toyota 181, Yokkaichi 182, Ōtsu 183, Nara 184, Hamamatsu 185, Higashiōsaka 186, Kurume 187, Sasebo 188, Shimonoseki 189); notice numbers **115-128**, one per city in the same order (Kawasaki 115 ... Shimonoseki 128), each city's list, MHLW where used, and MLIT, as the Japan batch's 97-108 |
+| Four extensions to built cities (released 2026-10-02: `docs/handoff_extensions_2026-10-02.md`; one lead session; registered 2026-10-03) | `.claude/worktrees/extensions` | `extensions-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-03:** notices **129-136** as pre-assigned, taken in build order as the reads require them (Long Beach's, then New Westminster's, Coquitlam's and Burnaby's OGL statements); no new pages |
 | Tram kit, the ten other T1 cities (2026-09-30: `docs/handoff_tram_kit_2026-09-30.md`; holding before builds) | `.claude/worktrees/tram-kit` | `worktree-tram-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build` - the name every build since Dublin has actually used, rather than the `worktree-<role>` form above. Delete the branch when the worktree goes: merged build branches have tended to outlive their worktrees |
 
@@ -200,13 +200,12 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 at once never take the same "next free" number: the UK six **156–161**
 (build order), the Japan batch **162–173** (its kit's table order),
 Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
-here, by the session, before one is written, and the claims open are Japan
-wave 2's notices 115–128 and the four extensions' notices 129–136 (both
-pre-assigned 2026-10-02), and lane-app (cleanup batch, 2026-10-03): notices
-137-140; the next claim starts at 141. Every block before those landed
-2026-10-02 (the last notice landed then is 114; Tbilisi's unused 115–116 were
-released and pre-assigned to Japan wave 2). Pages pre-assigned 2026-10-02:
-Japan wave 2 176–189; the four extensions take no new pages.
+here, by the session, before one is written; none is open, and 133–136,
+released unused by the four extensions on 2026-10-03, stay unassigned; the
+next claim starts at 141. Every claimed block has landed: Japan wave 2's
+115–128, the extensions' 129–132 and lane-app's 137–140 on 2026-10-03, and
+everything up to 114 on 2026-10-02. Pages: Japan wave 2 took 176–189; the
+extensions took none; the next page is 190.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the
 ranges in that one sentence, and delete a batch's range once it lands.

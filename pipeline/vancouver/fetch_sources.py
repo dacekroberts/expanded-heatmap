@@ -31,6 +31,7 @@ it did, twelve times, during Step 0.
 import argparse
 import csv
 import io
+import json
 import sys
 import zipfile
 from datetime import date
@@ -44,6 +45,7 @@ from pipeline.vancouver.config import (  # noqa: E402
     CITY_BOUNDARY_GEOJSON,
     CITY_BOUNDARY_URL,
     DATA_RAW,
+    EXTENSION_SOURCES,
     FORBIDDEN_COLUMNS,
     GTFS_CHECK_FEED_WINDOW,
     GTFS_FEED_INFO_MEMBER,
@@ -53,8 +55,10 @@ from pipeline.vancouver.config import (  # noqa: E402
     MUNICIPALITIES_GEOJSON,
     MUNICIPALITIES_TYPENAME,
     MUNICIPALITIES_URL,
+    NEW_WESTMINSTER_POINTS,
     PARCELS_GEOJSON,
     PARCELS_URL,
+    REGIONAL,
     SOURCES,
     SURREY_BOUNDARY_GEOJSON,
     SURREY_BOUNDARY_URL,
@@ -143,6 +147,72 @@ def fetch_business(key, force):
     return path
 
 
+def fetch_arcgis(key, spec, force):
+    """One ArcGIS layer, paged by object id with an EXPLICIT field list (the
+    extension's registers and New Westminster's address points). Attributes
+    are written as the server sends them, in field order, plus lon/lat (asked
+    in EPSG:4326) when the layer's geometry is wanted. Raises, writing
+    nothing, if a forbidden or unrequested column arrives, an id repeats, or
+    the row count differs from the server's own count. A sidecar .json
+    records the query, the row count, the layer's last edit and the time."""
+    path = spec["file"]
+    if path.exists() and not force:
+        print(f"  {key}: cached ({path.name})")
+        return path
+    fields = list(spec["fields"])
+    oid = fields[0]
+    meta = requests.get(spec["layer"], params={"f": "json"}, headers=HEADERS, timeout=120).json()
+    published = {f["name"] for f in meta.get("fields", [])}
+    if set(fields) - published:
+        sys.exit(f"  {key}: the layer no longer has {sorted(set(fields) - published)}")
+    query = spec["layer"] + "/query"
+    total = requests.get(query, params={"where": spec["where"], "returnCountOnly": "true",
+                                        "f": "json"}, headers=HEADERS, timeout=120).json()["count"]
+    rows, offset = [], 0
+    while True:
+        params = {"where": spec["where"], "outFields": ",".join(fields),
+                  "orderByFields": oid, "resultOffset": offset,
+                  "resultRecordCount": spec["page"], "f": "json",
+                  "returnGeometry": "true" if spec["geometry"] else "false"}
+        if spec["geometry"]:
+            params["outSR"] = "4326"
+        page = requests.get(query, params=params, headers=HEADERS, timeout=180).json()
+        if "error" in page:
+            sys.exit(f"  {key}: {page['error']}")
+        feats = page.get("features", [])
+        for f in feats:
+            arrived = set(f["attributes"])
+            bad = arrived & set(spec["forbidden"]) or arrived - set(fields)
+            if bad:
+                sys.exit(f"  {key}: column(s) {sorted(bad)} arrived unrequested - nothing written")
+            row = {k: f["attributes"].get(k) for k in fields}
+            if spec["geometry"]:
+                g = f.get("geometry") or {}
+                row["lon"], row["lat"] = g.get("x"), g.get("y")
+            rows.append(row)
+        offset += len(feats)
+        if not feats or (not page.get("exceededTransferLimit") and len(feats) < spec["page"]):
+            break
+    ids = [r[oid] for r in rows]
+    if len(ids) != len(set(ids)) or len(rows) != total:
+        sys.exit(f"  {key}: {len(rows)} rows ({len(set(ids))} distinct ids) against the "
+                 f"server's {total} - paging not stable, nothing written")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    cols = fields + (["lon", "lat"] if spec["geometry"] else [])
+    with open(path, "w", encoding="utf-8", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+    edit_ms = (meta.get("editingInfo") or {}).get("dataLastEditDate")
+    side = {"url": query, "where": spec["where"], "fields": fields,
+            "never_requested": list(spec["forbidden"]), "rows": len(rows),
+            "layer_data_last_edit_ms": edit_ms,
+            "retrieved": date.today().isoformat()}
+    path.with_suffix(".json").write_bytes(json.dumps(side, indent=2).encode("utf-8"))
+    print(f"  {key}: {len(rows):,} rows -> {path.name}")
+    return path
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true",
@@ -159,6 +229,12 @@ def main():
     print("\nBusiness registries:")
     for key in SOURCES:
         fetch_business(key, args.force)
+
+    if REGIONAL:
+        print("\nThe extension's registers (Burnaby, Coquitlam, New Westminster):")
+        for key, spec in EXTENSION_SOURCES.items():
+            fetch_arcgis(key, spec, args.force)
+        fetch_arcgis("new_westminster address points", NEW_WESTMINSTER_POINTS, args.force)
 
     print("\nBoundaries:")
     get(CITY_BOUNDARY_URL, CITY_BOUNDARY_GEOJSON, force=args.force,

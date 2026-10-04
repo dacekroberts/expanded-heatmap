@@ -21,6 +21,34 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **The Overview's region caption count disagrees with the labels it shows
+  (owner, 2026-10-03): East Asia's caption says 6, but the map labels more.**
+  Likely cause: `REGION_LABELS_ALSO` names the Seoul Capital Area's and
+  Japan's anchor cities in East Asia's view, while the caption counts only
+  the region's own members (`cities_in`, `elsewhere_counts`). Fix the caption
+  or the labels so they agree, and ADD A CHECK for every region at 375, 768
+  and 1200: the number the caption states equals the cities the view labels
+  (or the caption says which are shown from other views), in
+  `check_macro_labels.py` or its own script in `check_all.py`. The existing
+  check only asserts each region's caption accounts for all cities once
+  across the menu, not that a view's caption matches its own labels.
+
+- [ ] **Overview at phone width (found at the 2026-10-03 review landing):**
+  - **Split Japan West in two (owner, 2026-10-03: approved).** Its zoom is
+    pinned at 6.0 (REGION_ZOOM; fitted, Osaka's and Sakai's dots stack), so at
+    375 px 16 of its 22 dots fall off the canvas (9 before wave 2). The map's
+    zoom is set server-side and cannot follow the screen width, so the fix is
+    two views, Kansai and Chugoku-Shikoku-Kyushu, each placed and scored at
+    375, 768 and 1200 (check_macro_labels.py), the menu order updated.
+  - **check_macro_labels.py assumes a 343 px canvas at 375** (`CANVAS =
+    {375: 343}`); deploy-verify measured 333 (the map frame inside the page's
+    padding). Re-measure, correct, and re-score every region.
+  - **"Los Angeles (Regional)" is about 43% clipped at 375** in Global and
+    United States (no clean position), reported like Glasgow's.
+  - **"Rio de Janeiro (Regional)" is about 24% clipped at 375 in South America**
+    since the rename (was clean); "Los Angeles (Regional)" also 15% in United
+    States West. Re-place both when the scorer canvas is corrected.
+
 - [ ] **Heavy-job gate follow-ups (2026-10-03, measured-figures norm):**
   - **What makes a multi-city Japanese drift run measure 4.5-4.7 GB?** Run
     each Japanese city's drift alone through the gate (label `drift <city>`)
@@ -439,17 +467,35 @@ Desktop is unaffected — the label is fully visible there.
         Brescia, Catania, Cagliari, Alicante, Alcobendas.
     - [ ] **Regional add-ons to built cities (owner, 2026-09-27)**, main's
       work on a branch held for review time:
-      - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded
+      - [x] **Rio + Duque de Caxias** (**built 2026-10-03 on
+        `extensions-build`**: 98 stations, 125,440 storefronts, the shuttle
+        drawn and its three stations unringed; held for review time, its
+        regional processed files in `data/rio_de_janeiro/processed/regional/`
+        until it lands): SuperVia Saracuruna's three excluded
         stations (Duque de Caxias, Corte Oito, Gramacho); CNEFE 18,698
         storefronts. **First a rail test for the Gramacho–Saracuruna shuttle**,
         which the scope would bring in. **Run 2026-09-30**: up to Gramacho
         passes; Campos Elíseos, Jardim Primavera and Saracuruna, beyond it,
         fail (search-level: SuperVia's notices; no timetable feed found), so
         the line is drawn to its end and only those three are left unringed.
-      - **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
+      - [x] **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
         Eldorado; CNEFE 13,011. Belo Horizonte becomes "(Regional)".
+        **Built 2026-10-03 on `extensions-build`** (22 stations, 58,552
+        storefronts), held for the owner's review time; its regional
+        processed files sit in `data/belo_horizonte/processed/regional/`
+        until it lands, then fold back to `processed/`.
+      - [x] **Los Angeles + Long Beach** (Wave-2 follow-ups (6)): **built
+        2026-10-03 on `extensions-build`** (64 stations, 60,740 storefronts,
+        3,246 of them Long Beach's; `FULLNAME` never fetched), held for review
+        time; its regional processed files in
+        `data/los_angeles/processed/regional/` until it lands.
       - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
         and `data/duque_de_caxias/raw/` (and the staging worktree's).
+    - [x] **Built 2026-10-03 on `extensions-build`, without Richmond and
+      Port Moody**: 44 stations, 15,436 storefronts (Burnaby 2,115, Coquitlam
+      1,016, New Westminster 780 placed by address join), held for review
+      time; regional processed files in `data/vancouver/processed/regional/`
+      until it lands. The history below is kept.
     - [ ] **Vancouver (Regional) + Burnaby, New Westminster, Coquitlam,
       Richmond (owner: a PLAN item, probes first)** - 28 SkyTrain stations
       now excluded. Measured: Coquitlam (licences with lat/long, OGL-BC 2.0,
@@ -510,7 +556,7 @@ Desktop is unaffected — the label is fully visible there.
 - [x] **Tbilisi: the full placeholder check run 2026-10-02** on
   `tbilisi-placeholder-check`: the rule with a 5-company minimum (owner),
   thirteen points, 13,211 storefronts placed. `docs/decisions_drafts/tbilisi-placeholder-check.md`.
-- [ ] **Tbilisi: record the drift baseline when `tbilisi-placeholder-check`
+- [x] **DONE 2026-10-03 (17 figures, zero drift).** **Tbilisi: record the drift baseline when `tbilisi-placeholder-check`
   lands** (`python pipeline/drift_check.py tbilisi --update-baseline`): its
   run writes the shared processed folder, so it cannot run before.
 - **Seattle - deferred by the owner 2026-09-21, and scoped as the project's

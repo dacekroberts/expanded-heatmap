@@ -26,11 +26,11 @@ from components import (  # noqa: E402
     set_base_font,
 )
 
-st.set_page_config(page_title="Belo Horizonte Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
+st.set_page_config(page_title="Belo Horizonte (Regional) Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
 
-render_city_nav("Belo Horizonte")
-render_city_title('Belo Horizonte')
+render_city_nav("Belo Horizonte (Regional)")
+render_city_title('Belo Horizonte (Regional)')
 
 # Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
@@ -72,17 +72,19 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Approved by the owner 2026-09-24, with the Brazil batch's rail and scope
-# calls applied as recommended; set as bullets 2026-10-01.
+# calls applied as recommended; set as bullets 2026-10-01. The scope bullet
+# names Contagem since the regional extension (2026-10-03, a proposal for the
+# owner's review in docs/decisions_drafts/extensions.md).
 st.markdown(
     """
 **The lines**
 
 - Two lines are drawn — **Metrô BH Linha 1 and Linha 2** — each labeled on the map and in
   the legend, in the colors OpenStreetMap records.
-- **Linha 2 opened on 3 July 2026 with two stations and runs only at weekday peak hours for
+- **Linha 2 opened on July 3, 2026 with two stations and runs only at weekday peak hours for
   now.**
-- The map covers the **município of Belo Horizonte**; Linha 1's two western stations, in
-  Contagem, are not counted.
+- The map covers **Belo Horizonte and Contagem**, where Linha 1's two western stations
+  stand.
 
 **The businesses**
 
@@ -102,13 +104,13 @@ st.markdown(
   description no rule can read, and are not drawn.** Most are brand or trade names with no
   word saying what they sell.
 - Near the stations it is slightly more.
-- **About one storefront in five sits within a station ring.**
+- **About one storefront in six sits within a station ring.**
 """
 )
 
 render_map_help('three business categories (Retail, Food service and Personal services)')
-render_excluded_stations("Belo Horizonte")
-render_country_links('Belo Horizonte')
+render_excluded_stations("Belo Horizonte (Regional)")
+render_country_links('Belo Horizonte (Regional)')
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
@@ -116,4 +118,4 @@ render_country_links('Belo Horizonte')
 # BREACH, not a cosmetic gap: four city pages shipped without it because
 # this template did, and on those pages the five mandatory notices were
 # absent rather than collapsed.
-render_site_notices("Belo Horizonte")
+render_site_notices("Belo Horizonte (Regional)")

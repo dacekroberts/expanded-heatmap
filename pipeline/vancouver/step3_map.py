@@ -48,12 +48,15 @@ from pipeline.vancouver.config import (  # noqa: E402
     CITY_BOUNDARY_GEOJSON,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
+    EXTENSION_MUNICIPALITIES,
     GTFS_ZIP,
     HEATMAP_HTML,
     LINE_COLOURS,
     LINE_LABEL_ENDS,
     LINE_NAMES,
     LINE_SHAPES,
+    MUNICIPALITIES_GEOJSON,
+    MUNICIPALITIES_NAME_FIELD,
     RING_EDGES_METERS,
     RING_LABELS,
     ROUTE_IDS,
@@ -91,7 +94,18 @@ def mapped_area():
     if len(sur) != 1:
         sys.exit(f"Surrey boundary matched {len(sur)} features, expected 1 - "
                  f"9 of its 10 are town centres.")
-    return van.union_all().union(sur.geometry.iloc[0])
+    area = van.union_all().union(sur.geometry.iloc[0])
+    if EXTENSION_MUNICIPALITIES:
+        # The extension's cities, from the BC municipalities layer.
+        munis = gpd.read_file(MUNICIPALITIES_GEOJSON)
+        munis = (munis.set_crs(CRS_GEOGRAPHIC) if munis.crs is None
+                 else munis.to_crs(CRS_GEOGRAPHIC))
+        ext = munis[munis[MUNICIPALITIES_NAME_FIELD].isin(list(EXTENSION_MUNICIPALITIES))]
+        if len(ext) != len(EXTENSION_MUNICIPALITIES):
+            sys.exit(f"municipalities layer matched {len(ext)} of "
+                     f"{len(EXTENSION_MUNICIPALITIES)} extension cities")
+        area = area.union(ext.union_all())
+    return area
 
 
 def main():

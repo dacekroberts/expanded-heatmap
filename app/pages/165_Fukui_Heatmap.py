@@ -63,7 +63,7 @@ st.markdown(
 **The businesses**
 
 - From Fukui City's lists of food-business permits and of barbers, beauty salons and laundries,
-  all as of 31 August 2026.
+  all as of August 31, 2026.
 - The food list holds fixed premises only, so food trucks and stalls are not on this map.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,

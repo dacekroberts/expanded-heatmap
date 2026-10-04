@@ -68,8 +68,8 @@ st.markdown(
 - Kōchi City publishes no list of laundries, so they are not on this map.
 - Restaurants, cafés and shops are not on this map either: the national list of food businesses
   gives an address for only about half of Kōchi's restaurants.
-- Barbers and beauty salons come from the city's complete lists as of 31 March 2026 and the new
-  premises listed each month since, to 31 August 2026.
+- Barbers and beauty salons come from the city's complete lists as of March 31, 2026 and the new
+  premises listed each month since, to August 31, 2026.
 - The city lists new premises each month but not closures, so a premises that closed after March
   is still counted. The map shows an upper bound, and a dot is a premises on the lists, not
   necessarily one open today.
