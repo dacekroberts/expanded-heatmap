@@ -102,6 +102,13 @@ OSM_BBOX = "18.95,-99.45,19.75,-98.85"
 # `railway=proposed` would have let those five through and drawn rings around
 # building sites, which is Israel's STATUS trap. Keeping only railway=station
 # is immune to the typo.
+#
+# NOT ENOUGH ON ITS OWN: nine Metro stations are only `railway=stop` positions
+# on their route relation, so step 1 also takes the named stop members of the
+# drawn relations (pipeline/stations.py's route_stop_members), and raises if
+# any stop is still left without a station (2026-10-04,
+# docs/decisions_drafts/mexico-city-stations.md). Proposed stations are on no
+# route relation, so membership keeps the typo immunity.
 OSM_RAILWAY_KEEP = ("station",)
 # railway=subway_entrance is 447 nodes against 184 stations - 2.4x. Counting
 # entrances as stations is the Israeli entrances trap and would inflate every

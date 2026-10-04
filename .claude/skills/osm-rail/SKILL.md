@@ -131,12 +131,33 @@ This is the finding that should stop anyone copying a working step 1:
 | | Mexico City | Guadalajara |
 |---|---|---|
 | `railway=station` nodes | **184** | **1** |
-| `railway=stop` (stop positions) | — | **110** |
+| `railway=stop` (stop positions) | 279, and **9 stations exist only as one** | **110** |
 | Collapse mechanism | by **name**, one node per line at interchanges | by **name**, exactly 2 per name (one per direction) |
 
 Mexico City's whitelist finds **one** station in Guadalajara. Same country, one
 register, one taxonomy, one licence - and a different station object. This is
 why `pipeline/stations.py` shares the checks and leaves the collapse per city.
+
+### Mexico City's whitelist lost nine stations in its own city (2026-10-04)
+
+The `railway=station` whitelist shipped Mexico City **missing nine Metro
+stations, four of them termini** (Observatorio, Indios Verdes, Buenavista,
+Cuatro Caminos), because they exist in OSM only as `railway=stop` positions
+on their line's route relation; Talismán's station node has no mode tag. It
+also kept **Consulado and Candelaria twice**, because OSM names an
+interchange's nodes per line ("Consulado L4"). Spacing, the whitelist and
+cross-direction agreement all passed. Gate 3 was unavailable, and a probe of
+the State of México found it. Two shared checks now raise on both:
+
+- **`check_route_stops_covered`** (`pipeline/stations.py`): every stop member
+  of a drawn route relation must have a station in the WHOLE collapsed set,
+  in scope or not. A step 1 that selects stations by tag calls it, with
+  `route_stop_members` to read the members. Member ROLES are not trusted
+  (Línea 9 lists stops under `""` and `stops`).
+- **`verify_stations`' same-spelling gate:** two different spellings of one
+  `station_name_key` within the spacing floor raise. Collapse on that key,
+  not the raw name. A city still carrying such a pair is listed in
+  `KNOWN_SAME_NAME` as a dated defect (Guadalajara's Ávila Camacho).
 
 ## The traps, all measured
 
@@ -323,7 +344,11 @@ runs there.
 
 - [ ] Ground for not using GTFS recorded in the city's config, and approved -
       with `feed_info.txt`'s `feed_end_date` quoted if the feed exists
-- [ ] Stations derived from **route-relation membership**, not a node tag filter
+- [ ] Stations derived from **route-relation membership**, not a node tag filter;
+      a tag-selected set passes `check_route_stops_covered` on every station,
+      in scope or not
+- [ ] Collapsed on `station_name_key`, so "Consulado" and "Consulado L4" are
+      one station
 - [ ] Entrances, proposed and construction excluded by **whitelist**
 - [ ] Every operator-published line present; per-line counts compared where the
       operator publishes them (gate 3), and gaps named rather than filled in
