@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**505 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**506 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-04**
+
+- [Three heavy jobs at once (owner)](#2026-10-04---three-heavy-jobs-at-once-owner)
 
 **2026-10-03**
 
@@ -20461,3 +20465,18 @@ until the owner rules):**
   file, skill or doc outside the decision log quoted an old heading; the
   rendered Spain, South Korea and Taiwan views show the new ones. Capitals
   inside table cells ("**BUILT 2026-09-21**") were not part of the ruling.
+
+### 2026-10-04 - Three heavy jobs at once (owner)
+
+- **The owner: "allow three heavy jobs since i have no other open
+  processes"**, with three build sessions starting at once (Korea sweep,
+  Mendoza/Tacoma/Liverpool, Belgium).
+- `scripts/heavy_job.py`'s `MAX_JOBS` 2 -> 3. Admission is otherwise
+  unchanged: each job still needs available memory to cover its peak, plus
+  what running jobs have yet to claim, plus the 2 GB margin. The self-test
+  now proves a third job is admitted when memory allows and a fourth is
+  refused (15 of 15). `CLAUDE.md`, `docs/session_roles.md` and
+  `docs/rule_history.md` say three, with the owner's condition: if other
+  heavy programs return to the machine, `MAX_JOBS` goes back to 2.
+- Unchanged: one drift check per machine, `--jobs 2` at most; the Python cap
+  of 8 GB a process and 12 GB with children.
