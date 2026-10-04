@@ -4,6 +4,22 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-03 - Probe slip in the Flemish and Walloon briefs: two feeds fetched from a portal whose terms count access as acceptance
+
+- **The briefs' agent ran `gtfs_*` checks against De Lijn's and TEC's
+  static GTFS** on the Belgian Mobility Company portal, which cached both
+  feeds (307 MB) in `data/_brief_check/raw/`. The portal's Terms of Use
+  (art. 2) make accessing the data an acceptance of those terms, and the
+  owner had approved acceptance for STIB's feed only, at the build's first
+  fetch. Nothing was registered and no consent box was ticked; the terms are
+  the same CC BY 4.0 portal terms the owner approved for STIB.
+- **Raised with the owner the same evening**, with the choice of ratifying
+  the acceptance or deleting the cached feeds. Two `licence-read` passes
+  (De Lijn, TEC) run on the operators' own terms meanwhile.
+- **The lesson:** a brief check that fetches from a click-through portal is
+  an acceptance; brief agents are told to skip fetching checks on any source
+  whose terms count access as acceptance until the owner approves it.
+
 ### 2026-10-03 - Brussels: STIB's GTFS with the owner's acceptance; the page named "Brussels" (owner)
 
 - **STIB-MIVB's static GTFS, `licence-read` 2026-10-03: PERMITTED WITH
