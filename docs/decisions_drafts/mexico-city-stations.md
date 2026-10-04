@@ -102,9 +102,13 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   normalization; baseline's 7 figures unchanged: 462,732 DENUE rows,
   442,146 fijo, 280,186 storefront, 280,185 clean, Retail 202,419, Food
   service 49,164, Personal services 28,603; measured peak 1.43 GB).
-  `check_provenance.py` names Mexico City OK; `check_all.py` passed 48 of 48
-  once `ring_shares.json` was rewritten. Only Mexico City was drift-checked,
-  by instruction.
+  `check_provenance.py` names Mexico City OK. `check_all.py`: 47 of 48, with
+  `check_ring_shares.py` passing after the rewrite; the one failure is
+  `check_macro_facts.py` on six Japanese cities (Hiroshima, Matsuyama,
+  Toyama, Kumamoto, Fukui, Nagasaki), whose shared processed data another
+  session rewrote between two runs that afternoon. Nothing here touches
+  them, and no `--write` was run for them. Only Mexico City was
+  drift-checked, by instruction.
 - **The step re-runs on this branch wrote the shared
   `data/mexico_city/processed/stations.csv`; master's copy was restored
   afterwards** (`project_shared_data_junction`). Whoever lands this branch
