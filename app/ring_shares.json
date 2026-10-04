@@ -793,5 +793,10 @@
   "in_ring": 21252,
   "all": 50939,
   "map_blob": "9899bafed8b925f543b6a9971bf261b635346df1"
+ },
+ "gwangju": {
+  "in_ring": 14077,
+  "all": 47214,
+  "map_blob": "16c06ed18461770802cb9504c7d6c2b915f577c2"
  }
 }
