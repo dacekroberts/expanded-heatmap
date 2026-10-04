@@ -788,5 +788,35 @@
   "in_ring": 1272,
   "all": 2972,
   "map_blob": "300053360b6cccbdd873b6fea3626de0a85c0042"
+ },
+ "brussels": {
+  "in_ring": 4762,
+  "all": 5069,
+  "map_blob": "3356dde2447d446bb3bf55eaf771fdcd75a485d4"
+ },
+ "antwerp": {
+  "in_ring": 3973,
+  "all": 4881,
+  "map_blob": "ae48b1a7494ef8c09d8d4c1e4bedb56cc4f91718"
+ },
+ "ghent": {
+  "in_ring": 1596,
+  "all": 2730,
+  "map_blob": "4ab584f2f32960b9891db63ed32221debc261725"
+ },
+ "charleroi": {
+  "in_ring": 989,
+  "all": 1430,
+  "map_blob": "c2ab69f9cdd47ad1059a4b99411b3eb8eaa46e83"
+ },
+ "liege": {
+  "in_ring": 1336,
+  "all": 2345,
+  "map_blob": "b5ffcf7afa6a5d157f1d54d2bc8ccd2afc6903cd"
+ },
+ "brussels_regional": {
+  "in_ring": 10006,
+  "all": 13680,
+  "map_blob": "3d9b612dec133923be8952885b30ac617d7702fa"
  }
 }
