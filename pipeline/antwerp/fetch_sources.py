@@ -39,5 +39,9 @@ if __name__ == "__main__":
         # rewritten. The stops found go in config.CLOSED_FOR_WORKS by hand.
         fetch_tram_route_stops(config.COMMUNES_BBOX, config.WORKS_ABSENT_TRAM_REFS,
                                config.OSM_WORKS_TRAMS_JSON)
+    elif sys.argv[1:] == ["--all-tram-routes"]:
+        # The broad query: every tram route relation in the box, any ref
+        # (owner, 2026-10-04), when the narrow one returned none.
+        fetch_tram_route_stops(config.COMMUNES_BBOX, None, config.OSM_ALL_TRAMS_JSON)
     else:
         fetch_city(config, sys.argv[1:])

@@ -1143,7 +1143,7 @@ CITIES = [
         # Europe's re-centred frame put its pill over Birmingham's and
         # Nottingham's markers.
         # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
-        "label_offset_by_region": {"Europe": ("start", 10, 26)},
+        "label_offset_by_region": {"Europe": ("start", 10, -12)},
     },
     {
         "name": "Hong Kong",
@@ -2238,6 +2238,12 @@ CITIES = [
         # PROBLEMS 0 at 375, 768 and 1200. Right of the dot, the provisional
         # value, unmoved.
         "label_offset": ("start", 11, 0),
+        # EUROPE: below-right, with Rotterdam above-right (owner, 2026-10-04: one
+        # placement pass for the pair). The Belgian dots put Liege under
+        # Rotterdam's old pill; of 144 offset pairs scored by
+        # check_macro_labels.py this is the only one with no problem at
+        # 375, 768 and 1200 px. The labels cross (the dots are 3.0 px apart).
+        "label_offset_by_region": {"Europe": ("start", 10, 12)},
     },
     {
         "name": "Zurich",

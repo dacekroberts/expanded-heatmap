@@ -21,6 +21,21 @@ hands the drafts off, then empties this file (owner, 2026-09-30).
   3. **One placement pass for Den Haag and Rotterdam** in the Europe view.
   4. **A broader Overpass query for Antwerp** (every tram route in the box),
      after the narrow one returned nothing.
+- **Done, call 3**: of 144 offset pairs for Den Haag and Rotterdam in the
+  Europe view scored by `check_macro_labels.py`, one has no problem at 375,
+  768 and 1200 px: Rotterdam above-right ("start", 10, -12), Den Haag
+  below-right ("start", 10, 12). Their labels cross (the dots are 3.0 px
+  apart, a known stacked pair). Europe now scores 0; the Belgium view's
+  Brussels pair (call 2) is the check's last 6 problems.
+- **Done, call 4**: the broad query (`fetch_sources.py --all-tram-routes`,
+  one query, overpass-api.de) returned 25 tram route relations: lines 1, 2,
+  4, 6, 7, 8, 10, 11, 12, 24, A3 and A9, the feed's lines exactly, with
+  notes for the works ("temporarily shortened" on 2, 4 and 12). No relation
+  for 3, 9 or 15 under any ref: OpenStreetMap already mirrors the works
+  service, so it cannot name the left-bank tram stops either. They stay
+  unlisted, and the page and What Is Excluded already say no tram serves
+  the left bank during the works. Only De Lijn's own notice could list
+  them, and its terms bar republishing it.
 
 ### 2026-10-04 - Antwerp's left-bank query (call 5): no tram route relations returned; the closed stations stay unlisted
 

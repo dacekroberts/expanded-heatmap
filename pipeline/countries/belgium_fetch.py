@@ -248,9 +248,11 @@ def fetch_tram_route_stops(bbox, refs, cache_json, force=False):
     naming the stops of lines absent from the feed during works (Antwerp's
     left bank, owner 2026-10-04, Belgian build call 5); never rail geometry."""
     s, w, n, e = bbox
-    pattern = "^(" + "|".join(refs) + ")$"
+    # refs=None asks for every tram route in the box (the broad query, owner
+    # 2026-10-04, after the narrow one returned no relation).
+    ref_filter = "" if refs is None else '["ref"~"^(' + "|".join(refs) + ')$"]'
     q = (f'[out:json][timeout:120];'
-         f'rel["route"="tram"]["ref"~"{pattern}"]({s},{w},{n},{e})->.r;'
+         f'rel["route"="tram"]{ref_filter}({s},{w},{n},{e})->.r;'
          f'.r out body;node(r.r);out body;')
     els, host = osm.fetch(q, cache_json, force=force)
     print(f"  OSM tram routes {refs}: {sum(x['type'] == 'relation' for x in els)} relations, "

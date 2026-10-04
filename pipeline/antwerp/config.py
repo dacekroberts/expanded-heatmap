@@ -151,6 +151,9 @@ CLOSED_FOR_WORKS = {
 # `fetch_sources.py --left-bank-trams`, cached here.
 WORKS_ABSENT_TRAM_REFS = ("3", "9", "15")
 OSM_WORKS_TRAMS_JSON = DATA_RAW / "osm_tram_routes_3_9_15.json"
+# It returned no relation (sent once, retried once), so the broad one:
+# `fetch_sources.py --all-tram-routes`, every tram route in the box.
+OSM_ALL_TRAMS_JSON = DATA_RAW / "osm_tram_routes_all.json"
 CLOSED_FOR_WORKS_OPEN_QUESTION = (
     "the left-bank tram stations closed for works (lines 3, 9 and 15) are not listed: the feed "
     "cannot name them. An OSM query for the tram route relations (or De Lijn's notice) is "
