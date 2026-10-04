@@ -2,6 +2,8 @@
 
 The owner's question was: "we should list our weakest to strongest notice positions to know what could potentially be flagged."
 
+For DERIVED material (the Analytics session's statistics and dashboards, the Visuals session's cards), see `docs/derived_use_licensing.md` (2026-10-04).
+
 This document ranks the legal position on which each source is republished. It covers every source the 144 landed cities rely on (the cities in `app/cities.py` on worktree-staging, merged with master, on 2026-10-02). Sources include business registers, transit feeds, rail data, address and parcel joins, geocoders, boundaries, naming layers, page-text statistics and the basemaps.
 
 **How it was made.** Everything here comes from the project's own record: `docs/data_sources.md`, `docs/data_sources/*.md`, `docs/licenses/`, `docs/privacy_verdicts.md`, `DECISIONS.md` with `docs/decisions/` and `docs/decisions_drafts/`, the build briefs, and `app/components.py` with `app/pages/` for what actually renders. No publisher's page was re-read on the web (0 of the 10 permitted spot checks were used), nothing was downloaded, and no tracked file was edited. Four extraction passes, split by country group, are kept in full as Appendices A to D; each entry there carries the full field set (quote with doc:line, who and when, what would flag it, safety net, strengthen). The tables below are the merged ranking.
