@@ -70,10 +70,10 @@ CITY_BOUNDARY_URL = (
     "limites-administratives-agglomeration.geojson"
 )
 
-# `donnees.montreal.ca` answers a plain client with `RBAC: access denied`. A
-# browser User-Agent is required, and this is portal-wide rather than specific
-# to one dataset.
-BUSINESS_NEEDS_BROWSER_HEADERS = True
+# `donnees.montreal.ca` answers curl's default agent with `RBAC: access
+# denied` and serves the project's identified agent (both download URLs above,
+# measured 2026-10-04). fetch_sources.py sends that agent, never a browser
+# string (owner's user-agent rule, docs/decisions_drafts/staging.md).
 
 # --- Transit feed -----------------------------------------------------------
 

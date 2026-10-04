@@ -357,7 +357,7 @@ refusals early, because they are silent:
 
 | Portal | What bit |
 |---|---|
-| `donnees.montreal.ca` | `RBAC: access denied` to plain curl; browser headers work |
+| `donnees.montreal.ca` | `RBAC: access denied` to plain curl; the project's identified agent is served. Never a browser string: a host refusing both is a refusal (owner, 2026-10-04) |
 | ArcGIS Hub (Surrey) | `/csv` returns **HTTP 202** with an async job, CSV on a later call |
 | Toronto CKAN | `datastore_search_sql` **404s**; use `datastore_search` with `filters` |
 | Opendatasoft | CSV exports are **semicolon-delimited**, not comma |

@@ -53,7 +53,9 @@ import time
 import zipfile
 
 REQUEST_TIMEOUT = 120
-UA = "Mozilla/5.0 (compatible; transit-density-research/1.0)"
+# The project's identified agent, never a browser string: a host that refuses
+# it is recorded as a refusal (owner, 2026-10-04, docs/decisions_drafts/staging.md).
+UA = "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"
 COORD_HINTS = (
     "lat", "lon", "lng", "latitude", "longitude", "x", "y", "geom", "geometry",
     "위도", "경도", "緯度", "経度", "latitud", "longitud", "coord",

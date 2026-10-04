@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.dublin import config
 from pipeline.osm import fetch as osm_fetch
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (expanded-heatmap; Dublin build)"}
+HEADERS = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
 
 
 def _get(url, timeout=300):
