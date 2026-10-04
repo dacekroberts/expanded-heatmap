@@ -50,6 +50,8 @@ why it kept being skipped.
 """
 
 import math
+import re
+import unicodedata
 
 import numpy as np
 
@@ -179,6 +181,179 @@ def check_operator_counts(expected_per_line, actual_per_line):
     return mismatched
 
 
+# --- One station under two names --------------------------------------------
+#
+# OSM names an interchange's nodes per line ("Consulado" and "Consulado L4",
+# 330 m apart; "Candelaria L1" and "Candelaria L4", 180 m), and a register
+# spells one station two ways ("Avila Camacho" and "Ávila Camacho", 98 m). A
+# collapse by the raw name keeps both. Mexico City shipped two such pairs and
+# Guadalajara one before this gate existed (2026-10-04,
+# docs/decisions_drafts/mexico-city-stations.md).
+
+_LINE_DESIGNATOR = re.compile(
+    r"\s*\((?:l[ií]nea|line|l)\s*[0-9A-Za-z]{1,3}\)$"   # "Tacubaya (Línea 7)"
+    r"|\s+L[0-9]{1,2}$",                                # "Consulado L4"
+    re.IGNORECASE,
+)
+
+
+def strip_line_designator(name):
+    """The name without a trailing per-line tag: "Consulado L4" -> "Consulado",
+    "Tacubaya (Línea 7)" -> "Tacubaya". Anything else is returned unchanged."""
+    return _LINE_DESIGNATOR.sub("", str(name)).strip()
+
+
+def station_name_key(name):
+    """A collapse key under which spellings of one station agree: the line
+    designator dropped, accents folded, case folded, a leading "Metro " and the
+    separators "/" and "-" ignored. Non-Latin letters are kept (only combining
+    marks are dropped), so a Han or Hangul name never folds to an empty key."""
+    s = strip_line_designator(name)
+    s = "".join(c for c in unicodedata.normalize("NFKD", s)
+                if not unicodedata.combining(c)).casefold()
+    s = re.sub(r"^metro\s+", "", s)
+    s = re.sub(r"[/\-–]", " ", s)
+    return " ".join(s.split())
+
+
+# Same-key pairs a built city still carries, each a DATED DEFECT rather than a
+# pass (check_provenance's KNOWN_GAPS pattern): verify_stations prints them
+# instead of raising, and raises once the pair is gone so a fixed entry cannot
+# linger. {city: {frozenset of names: note}}. Empty since Guadalajara's Ávila
+# Camacho was collapsed (2026-10-04).
+KNOWN_SAME_NAME = {}
+
+NAME_COLUMNS = ("station", "name", "stop_name", "station_name")
+
+
+def same_name_pairs(stations, crs_projected, *, within_m, name_col,
+                    lat="latitude", lon="longitude"):
+    """[(name_a, name_b, metres)] for every two rows of `stations` whose
+    `station_name_key` agrees and which lie within `within_m` of each other."""
+    keys = stations[name_col].map(station_name_key)
+    dup = stations[keys.duplicated(keep=False) & (keys != "")]
+    if dup.empty:
+        return []
+    xy = projected_xy(range(len(dup)), dup[lon], dup[lat], crs_projected)
+    names, dkeys = list(dup[name_col]), list(keys[dup.index])
+    pairs = []
+    for i in range(len(dup)):
+        for j in range(i + 1, len(dup)):
+            if dkeys[i] != dkeys[j]:
+                continue
+            d = math.dist(xy[i], xy[j])
+            if d < within_m:
+                pairs.append((names[i], names[j], round(d)))
+    return pairs
+
+
+# --- Route-relation coverage, for a station set selected by tag --------------
+#
+# THE GAP A TAG WHITELIST LEAVES. Mexico City's step 1 kept `railway=station`
+# nodes only, and nine Metro stations exist in OSM only as `railway=stop`
+# positions on their line's route relation (Observatorio, Indios Verdes,
+# Potrero, Juárez, Mixcoac, Tepalcates, Buenavista, Cuatro Caminos; Talismán's
+# station node carries no mode tag). Four termini among them, and no internal
+# gate saw it: spacing, the whitelist and cross-direction agreement all passed
+# (2026-10-04). Any step 1 that selects stations by node tag passes its
+# collapsed set, in scope or not, through `check_route_stops_covered`.
+
+ROUTE_STOP_TAGS = (("public_transport", "stop_position"), ("railway", "stop"),
+                   ("railway", "station"), ("railway", "halt"),
+                   ("railway", "tram_stop"))
+
+# An unnamed stop member counts as covered by a station this close. Mexico
+# City's ten untagged members sit 4-110 m from their station (measured
+# 2026-10-04); a missing station sits 470 m or more from the nearest kept one
+# (Juárez to Hidalgo), so the gate has room on both sides.
+UNNAMED_STOP_WITHIN_M = 250.0
+
+
+def route_stop_members(relations, nodes_by_id, *, refs):
+    """One row per (line, stop node) of the route relations whose `ref` is in
+    `refs`: line, node, name ("" when the node is untagged or unnamed),
+    latitude, longitude, network (the RELATION's, since node-level network
+    tags are absent or wrong in OSM; see the osm-rail skill).
+
+    A node member counts when it carries a stop tag (ROUTE_STOP_TAGS), or when
+    the cache has no tags for it at all, which `check_route_stops_covered`
+    then places by distance. Member roles are not trusted: Mexico City's
+    Línea 9 lists five stop positions under the role "" or "stops"."""
+    import pandas as pd
+    rows = []
+    for rel in relations:
+        ref = rel.get("tags", {}).get("ref")
+        if ref not in refs:
+            continue
+        for m in rel.get("members", []):
+            if m.get("type") != "node" or "platform" in (m.get("role") or ""):
+                continue
+            node = nodes_by_id.get(m["ref"])
+            tags = (node or {}).get("tags") or {}
+            if tags and not any(tags.get(k) == v for k, v in ROUTE_STOP_TAGS):
+                continue
+            lat_ = m.get("lat", node and node.get("lat"))
+            lon_ = m.get("lon", node and node.get("lon"))
+            if lat_ is None or lon_ is None:
+                raise ValueError(f"route {ref}: node member {m['ref']} has no "
+                                 f"coordinates in the relation or the node cache")
+            rows.append({"line": ref, "node": m["ref"],
+                         "name": (tags.get("name") or "").strip(),
+                         "latitude": lat_, "longitude": lon_,
+                         "network": rel["tags"].get("network", "")})
+    return pd.DataFrame(rows, columns=["line", "node", "name", "latitude",
+                                       "longitude", "network"])
+
+
+def check_route_stops_covered(*, city, route_stops, stations, crs_projected,
+                              name_col="station",
+                              unnamed_within_m=UNNAMED_STOP_WITHIN_M,
+                              lat="latitude", lon="longitude"):
+    """RAISES unless every stop member of a drawn route relation has a station:
+    a named stop, one whose `station_name_key` is in `stations`; an unnamed
+    one, a station within `unnamed_within_m`. `stations` is the WHOLE
+    collapsed set, out-of-scope stations included, so a stop cut by the
+    boundary still counts as accounted for.
+
+    Returns the station each route stop belongs to, aligned with
+    `route_stops`, so a caller can count stations per line."""
+    st_names = list(stations[name_col])
+    by_key = {station_name_key(n): n for n in st_names}
+    named = route_stops[route_stops["name"] != ""]
+    missing = named[~named["name"].map(station_name_key).isin(by_key)]
+    unnamed = route_stops[route_stops["name"] == ""]
+    station_of = route_stops["name"].map(
+        lambda n: by_key.get(station_name_key(n)) if n else None)
+    far = []
+    if len(unnamed):
+        st_xy = projected_xy(range(len(stations)), stations[lon],
+                             stations[lat], crs_projected)
+        un_xy = projected_xy(range(len(unnamed)), unnamed["longitude"],
+                             unnamed["latitude"], crs_projected)
+        for i, (idx, r) in enumerate(unnamed.iterrows()):
+            j, d = min(((j, math.dist(un_xy[i], p)) for j, p in st_xy.items()),
+                       key=lambda jd: jd[1])
+            station_of[idx] = st_names[j]
+            if d > unnamed_within_m:
+                far.append(f"line {r['line']}: node {r['node']} (unnamed), "
+                           f"{d:,.0f} m from the nearest station")
+    problems = [f"line {r['line']}: {r['name']!r} (node {r['node']})"
+                for _, r in missing.drop_duplicates(["line", "name"]).iterrows()]
+    problems += far
+    print(f"  route coverage ({city}): {len(route_stops)} stop members of the "
+          f"drawn relations, {len(named)} named, {len(unnamed)} unnamed; "
+          f"{len(problems)} without a station")
+    if problems:
+        raise ValueError(
+            f"{city}: {len(problems)} stop member(s) of a drawn route relation "
+            f"have no station. A tag whitelist dropped them (Mexico City lost "
+            f"nine Metro stations, four termini, to `railway=station` only), "
+            f"or a name differs beyond station_name_key. Add the stop, or "
+            f"correct the name; never drop the member:\n  "
+            + "\n  ".join(problems))
+    return station_of
+
+
 def verify_stations(*, city, platforms, stations, crs_projected,
                     expected_per_line=None, actual_per_line=None,
                     non_revenue=0, spacing_min=STATION_SPACING_MEDIAN_M_MIN,
@@ -243,6 +418,48 @@ def verify_stations(*, city, platforms, stations, crs_projected,
               f"have close pairs - but this is also what ONE STATION UNDER TWO "
               f"NAMES looks like, and the median will not show it. Check the "
               f"closest pairs by name before accepting the collapse.")
+
+    # ONE STATION UNDER TWO SPELLINGS, which the NOTE above only prompts for.
+    # Raised, because two spellings of one key this close are never two
+    # stations: the close real pairs above (Sant Gervasi and Placa Molina)
+    # have different keys. Den Haag's per-line stops ("Loosduinseweg (line 11)" and "(line
+    # 12)") sit 496-575 m apart, past this distance.
+    name_col = next((c for c in NAME_COLUMNS if c in stations.columns), None)
+    if name_col is None:
+        print(f"    NOTE: no name column ({', '.join(NAME_COLUMNS)}) - the "
+              f"same-name gate did not run.")
+    else:
+        pairs = same_name_pairs(stations, crs_projected, within_m=spacing_min,
+                                name_col=name_col, lat=lat, lon=lon)
+        # IDENTICAL names are a city's own choice and only noted: New York
+        # keeps a "Canal St" per complex part and Amsterdam two Wibautstraat
+        # rows, on purpose (scan of every stations.csv, 2026-10-04).
+        same = [p for p in pairs if p[0] == p[1]]
+        if same:
+            print(f"    NOTE: {len(same)} pair(s) of identically named "
+                  f"stations within {spacing_min:.0f} m (e.g. {same[0][0]!r}, "
+                  f"{same[0][2]} m) - deliberate only if the city says so.")
+        pairs = [p for p in pairs if p[0] != p[1]]
+        known = KNOWN_SAME_NAME.get(city, {})
+        found = {frozenset((a, b)) for a, b, _ in pairs}
+        stale = [sorted(k) for k in known if k not in found]
+        if stale:
+            raise ValueError(
+                f"{city}: KNOWN_SAME_NAME lists {stale}, no longer a pair in "
+                f"the collapsed set. Remove the entry; a fixed defect stays "
+                f"listed only by mistake.")
+        new = [p for p in pairs if frozenset(p[:2]) not in known]
+        for a, b, d in pairs:
+            if frozenset((a, b)) in known:
+                print(f"    KNOWN DEFECT: {a!r} and {b!r}, {d} m apart - "
+                      f"{known[frozenset((a, b))]}")
+        if new:
+            raise ValueError(
+                f"{city}: {len(new)} station(s) kept twice under two spellings, "
+                f"within {spacing_min:.0f} m: "
+                + "; ".join(f"{a!r} / {b!r} {d} m" for a, b, d in new)
+                + ". Collapse on pipeline.stations.station_name_key, not the "
+                  "raw name (Mexico City's Consulado and Candelaria).")
 
     mismatched = check_operator_counts(expected_per_line, actual_per_line)
 

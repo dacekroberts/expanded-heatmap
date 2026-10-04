@@ -1,24 +1,21 @@
 station,municipio,latitude,longitude
 18 de Marzo,Guadalajara,20.6381097,-103.3770035
-Avila Camacho,Guadalajara,20.698415349999998,-103.35497755
 Belisario Dominguez,Guadalajara,20.672737599999998,-103.3314547
 CUCEI,Guadalajara,20.659741150000002,-103.3240935
 Circunvalación Country,Guadalajara,20.7065111,-103.36601
 Cristobal de Oñate,Guadalajara,20.66751615,-103.31338005
 Division del Norte,Guadalajara,20.707974399999998,-103.3556176
 España,Guadalajara,20.6215975,-103.38926599999999
-Guadalajara Centro,Guadalajara,20.6755849,-103.3473656
+Guadalajara Centro / Plaza Universidad,Guadalajara,20.6753577,-103.34773205
 Independencia,Guadalajara,20.67096745,-103.34469899999999
 Isla Raza,Guadalajara,20.63267835,-103.380693
-Juárez,Guadalajara,20.674962999999998,-103.35474285000001
-Juárez II,Guadalajara,20.6748834,-103.355611
+Juárez,Guadalajara,20.6749232,-103.355176925
 La Aurora,Guadalajara,20.6624585,-103.28557025
 La Normal (CETRAM),Guadalajara,20.693025499999997,-103.34837125
 Mexicaltzingo,Guadalajara,20.666902299999997,-103.35538600000001
 Mezquitán,Guadalajara,20.6914676,-103.3539205
 Oblatos,Guadalajara,20.670283150000003,-103.3225185
 Patria,Guadalajara,20.6266649,-103.385137
-Plaza Universidad,Guadalajara,20.6751305,-103.34809849999999
 Plaza de la Bandera,Guadalajara,20.66502275,-103.33256850000001
 Refugio,Guadalajara,20.6823641,-103.3540745
 Revolución,Guadalajara,20.65106665,-103.3103395
@@ -33,7 +30,7 @@ Tetlán,Guadalajara,20.6597959,-103.2759623
 Unidad Deportiva,Guadalajara,20.647223500000003,-103.369294
 Urdaneta,Guadalajara,20.6431606,-103.372736
 Washington,Guadalajara,20.66108995,-103.3574215
-Ávila Camacho,Guadalajara,20.69927335,-103.3547635
+Ávila Camacho,Guadalajara,20.69884435,-103.354870525
 Central de Autobuses,San Pedro Tlaquepaque,20.62324365,-103.28527249999999
 Jalisco 200 Años,San Pedro Tlaquepaque,20.5750088,-103.35593065
 Las Juntas,San Pedro Tlaquepaque,20.6075127,-103.3408296
