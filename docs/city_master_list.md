@@ -176,7 +176,7 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Chiba** 🇯🇵 | ✅ **Screened and briefed (2026-10-02, Japan wave 2)**: 47 station groups (JR 19, Chiba Urban Monorail 18, Keisei 13), `metro`; MHLW 8,290 restaurant permits (89.3%), 74.6% of fixed with an address, 98.9% of those at block (`docs/build_briefs/chiba.md`) | 🚫 **The city's permission**: its complete lists in all three buckets sit under the site's all-rights-reserved default | **A written request to the city** for its food and 生活衛生 lists: the owner's to send; nothing drafted. **Moved to R by the owner 2026-10-02** ("for 4 mark chiba to R"); the MHLW-only food page is not built meanwhile |
 | **Takaoka** 🇯🇵 | ✅ **Licence settled 2026-10-02: CC BY 4.0** (the old prefecture portal's dataset page, archived 2026-05-21, and its terms; the new platform's front page says the same of all its data). Screened 2026-09-30: Toyama Prefecture's food CSV, 3,128 Takaoka rows, no operator-name column, last updated 2026-03-02 though labelled monthly; personal lists yearly (2025-03-31), also `cc-by`. Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR | 🚧 **The list can no longer be reached (2026-10-02).** The old portal (`opendata.pref.toyama.jp`) no longer resolves and the CSV on `toyama-pref.box.com` answers 404. The new data platform's catalogue (`ckan.tdcp.pref.toyama.jp`) answers 403 to scripts and the browser pane while its front page answers 200; most likely a block on access from outside Japan. **Not routed around.** No other public copy found | A read of the platform's catalogue from an allowed network, or a public link from the prefecture. Moved to R by the owner 2026-10-02, from Band C |
 | **Norrköping** 🇸🇪 | ⚠️ **Trams screened by desk** (2 lines, about 47 stops; 2026-10-04). Nothing published on `norrkoping.se` or `dataportal.se` for food or any other premises | 🚫 **Request only**: the municipal food inspection register (Stockholm's and Göteborg's shape) would come by a public-records request, which is outreach | **A records request to the municipality**, the owner's to send (outreach the last resort); nothing drafted. To R on the owner's call of 2026-10-04 |
-| **Jerusalem** 🇮🇱 | ⚠️ **Rail measured, business leg unread behind the block (2026-10-04).** Two light-rail lines; the city-fed DataCity catalogue (114 datasets) holds no business-licence list, and data.gov.il nothing at premises level | 🚧 The municipal site answers an Akamai "Access Denied"; `datacity.jerusalem.muni.il` a Cloudflare error. **Not routed around** | A read of the city's own catalogue from an allowed network. Tel Aviv's discard (its own terms) does not cover it. To R (owner, 2026-10-04) |
+| **Jerusalem** 🇮🇱 | ⚠️ **Rail measured, business leg unread behind the block (2026-10-04).** Two light-rail lines; the city-fed DataCity catalogue (114 datasets) holds no business-licence list, and data.gov.il nothing at premises level | 🚧 The municipal site answers an Akamai "Access Denied"; `datacity.jerusalem.muni.il` a Cloudflare error. **Not routed around** | A read of the city's own catalogue from an allowed network. Tel Aviv's discard (its own terms) does not cover it. To R (owner, 2026-10-04) Israel held for wartime concerns (owner, 2026-10-04) |
 | **Almaty** 🇰🇿 | ⚠️ **Metro; the city portal (56 datasets) holds no premises list (2026-10-04)** | 🚫 **An account wall:** the national statistics office's business register search now requires its user cabinet (Tbilisi's statistical-register shape behind a sign-in); whether a non-resident can register is untested | If a non-resident account is possible, Band D (the owner's act). To R (owner, 2026-10-04) |
 | **Astana** 🇰🇿 | ⚠️ **LRT opened 2026-05-16 (18 stations); the city portal (52 datasets) holds no premises list** | 🚫 As Almaty | As Almaty |
 | **Ahmedabad** 🇮🇳 | ⚠️ **Gujarat Metro, 31 stations on Phase 1 (the country shortlist's "no metro" is wrong)** | 🚧 The municipal corporation's hosts time out on both ports; the national portal's API returned 503. Hyderabad's shape | A read from inside India. To R (owner, 2026-10-04) |
@@ -193,8 +193,8 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Kocaeli** 🇹🇷 | ⚠️ **NOT screened behind the block (2026-10-04).** The Akçaray tram in İzmit (ASSERTED) | 🚧 **Geo-blocked to Türkiye**: `veri.kocaeli.bel.tr` ("VERİ KOCAELİ", linked from the metropolitan site) answers 200 inside Türkiye and times out from Germany; İzmit's site timed out from here. **Not routed around** | As Bursa, of `veri.kocaeli.bel.tr` |
 | **Kayseri** 🇹🇷 | ⚠️ **NOT screened behind the block (2026-10-04).** The Kayseray tram (ASSERTED). The reachable `cbs.kayseri.bel.tr` holds address forms, numbering, a city guide and map downloads, no data catalogue | 🚧 **Geo-blocked to Türkiye**: `acikveri.kayseri.bel.tr` answers 200 inside Türkiye and times out from Germany; Kocasinan's site answers 403. **Not routed around** | As Bursa, of `acikveri.kayseri.bel.tr` |
 | **Macau** 🇲🇴 | ⚠️ **Food lists measured, placement fails on open data (2026-10-04).** IAM's three lists on data.gov.mo (food and drink 2,325, current 2026-07; takeaway 4,215 and fresh food 425, 2026-01), free reuse with a source credit; no coordinates. One OSM address query (13,858 address objects): exact street and number places **15.1%**; counting a number inside a mapped building's range, 66.9%, and ignoring letter suffixes, 70.1% overall with two of the three lists under 70%. Only **8.3%** of placed rows lie within 500 m of the 15 LRT stations (Taipa and Cotai; the peninsula only at Barra) | 🚫 **Request only:** the government GIS's food and takeaway points would place about 97% (count-only samples), but its disclaimer reserves all rights and requires the land and urban construction bureau's prior permission | The bureau's permission for its points; even then a thin ring map. From C (owner, 2026-10-04) |
-| **Bnei Brak** 🇮🇱 | ⚠️ **NOT screened behind the block (2026-10-04).** The Red Line, 3 stations (Hebrew Wikipedia; the operator NTA refuses scripts) | 🚧 `www.bnei-brak.muni.il` answers a Cloudflare 403 block page, `robots.txt` too. **Not routed around** | A read of the city's site from an allowed network. To R (owner, 2026-10-04) |
-| **Bat Yam** 🇮🇱 | ⚠️ **NOT screened behind the block (2026-10-04).** The Red Line, 9 stations (Hebrew Wikipedia); its ArcGIS Online organization (11 items) holds no business layer | 🚧 `www.bat-yam.muni.il` answers a Cloudflare 403 challenge page, `robots.txt` too. **Not routed around** | As Bnei Brak. To R (owner, 2026-10-04) |
+| **Bnei Brak** 🇮🇱 | ⚠️ **NOT screened behind the block (2026-10-04).** The Red Line, 3 stations (Hebrew Wikipedia; the operator NTA refuses scripts) | 🚧 `www.bnei-brak.muni.il` answers a Cloudflare 403 block page, `robots.txt` too. **Not routed around** | A read of the city's site from an allowed network. To R (owner, 2026-10-04) Israel held for wartime concerns (owner, 2026-10-04) |
+| **Bat Yam** 🇮🇱 | ⚠️ **NOT screened behind the block (2026-10-04).** The Red Line, 9 stations (Hebrew Wikipedia); its ArcGIS Online organization (11 items) holds no business layer | 🚧 `www.bat-yam.muni.il` answers a Cloudflare 403 challenge page, `robots.txt` too. **Not routed around** | As Bnei Brak. To R (owner, 2026-10-04) Israel held for wartime concerns (owner, 2026-10-04) |
 
 ## 🟤 Band T — retired (0 cities; retired 2026-10-01, trams-only maps approved 2026-09-29)
 
@@ -245,6 +245,7 @@ not counted here.
 | Zurich's rebuild | After 12 December 2026 (PLAN) |
 | Santa Cruz de la Sierra's metropolitan train | Its first project stage began 2026-09-02; re-check when a line opens |
 | Auckland's City Rail Link | Re-check frequencies once it opens (opening date not verified); Auckland was discarded on rail 2026-10-04 |
+| Petah Tikva 🇮🇱 (held: Israel, wartime concerns, owner 2026-10-04) | A possible build when the hold lifts. The city's ArcGIS Online layer of businesses needing a licence: **2,835 points** in EPSG:2039, last edited 2026-09-16, with type, status, dates and address (food 1,229, barbers 145, beauty 123, laundries 13; retail only where a licence is needed, a measured gap). The Red Line, **8 stations** (Hebrew Wikipedia; the operator refuses scripts). **No licence stated** on the layer, the service or the city's hub: a licence read comes first, then C or B. About a quarter of Tel Aviv's count per resident, so completeness is a question; the name field goes to the privacy check |
 
 ## Open screening gap (5 cities; reopened 2026-10-04)
 
@@ -456,7 +457,8 @@ being replaced by a BRT), and the earlier one (Winnipeg, Hamilton and Québec Ci
 in 2033), Halifax,
 Mississauga, ~30 single-feed countries) and access-not-data
 (Russia, Ukraine; Iran and Belarus left out the same way 2026-09-28, owner,
-for wartime concerns).
+for wartime concerns; Israel held the same way 2026-10-04, owner, with its
+screens kept).
 
 **Not reached (wave 2, 2026-09-28; owner's call: no row).** Each city's own
 host refused or never answered, so a discard row would rest on no city-host
@@ -706,7 +708,7 @@ it, not a band.
 | 🇬🇷 Greece | — | **1** — Thessaloniki | **0** | B | **Thessaloniki to B 2026-10-04** (the city's active-shop-licence layer; a licence read first). Athens discarded |
 | 🇲🇴 Macau | — | **0** | **1** — Macau | R | **To C 2026-10-04, then R the same day (owner)**: OSM places IAM's food lists at 15.1% exactly, about 70% at best, and 8% of placed rows lie near a station; the government GIS's points need the bureau's permission |
 | 🇪🇨 Ecuador | — | **0** | **1** — Quito | R | **Quito to R and Cuenca discarded 2026-10-04** (owner): ARCSA's national file holds no address or canton. To C earlier the same day |
-| 🇮🇱 Israel | — | **0** | **3** — Jerusalem, Bnei Brak, Bat Yam | R | **2026-10-04, late (owner)**: Bnei Brak and Bat Yam to R (Cloudflare blocks), Ramat Gan (no list) and Haifa (rail) discarded; Petah Tikva's licensed-business layer (2,835 points, 8 stations) found, its band the owner's call. **Jerusalem to R 2026-10-04** (its hosts refuse scripts). Tel Aviv discarded on its own terms |
+| 🇮🇱 Israel | — | **0** | **3** — Jerusalem, Bnei Brak, Bat Yam | R | **Held for wartime concerns (owner, 2026-10-04), screens kept.** 2026-10-04, late (owner): Bnei Brak and Bat Yam to R (Cloudflare blocks), Ramat Gan (no list) and Haifa (rail) discarded; Petah Tikva's licensed-business layer (2,835 points, 8 stations) on the watch-item list until the hold lifts. **Jerusalem to R 2026-10-04** (its hosts refuse scripts). Tel Aviv discarded on its own terms |
 | 🇰🇿 Kazakhstan | — | **0** | **2** — Almaty, Astana | R | **To R 2026-10-04**: the national business register behind a sign-in |
 | 🇵🇰 Pakistan | — | **0** | **1** — Lahore | R | **Lahore to R 2026-10-04** (geo-blocked to Pakistan); Karachi and Islamabad discarded on rail |
 | 🇧🇩 Bangladesh | — | **0** | **0** | — | Dhaka discarded 2026-10-04 (no published list) |
@@ -727,6 +729,13 @@ out by its national portal's first page.*
 
 🇨🇳 **China** *(accounts, terms and
 mapping law; 2026-09-28, owner)*
+
+🇮🇱 **Israel: held for wartime concerns** *(owner, 2026-10-04, as Russia,
+Ukraine, Belarus and Iran on 2026-09-28; not a data finding)*. Unlike those
+four it was screened first, and the screens stay: Jerusalem, Bnei Brak and
+Bat Yam in Band R, Tel Aviv, Ramat Gan and Haifa in the discards, and
+Petah Tikva's findings on the watch-item list, so the country reopens
+without a new probe when the owner lifts the hold.
 
 *🇳🇿 **New Zealand left this list on 2026-10-04** (owner): "licensing is not municipal" was wrong. Under the Food Act 2014 a food business registers with its council or MPI, and Hamilton and Marlborough publish food registers, though neither has urban rail. Auckland and Wellington, the two rail cities, are discarded on rail.*
 

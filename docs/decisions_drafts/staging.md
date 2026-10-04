@@ -4,6 +4,23 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Israel held at country level for wartime concerns, screens kept (owner)
+
+- **The owner, asked by staging about Petah Tikva:** "hold at country level
+  without deleting the screens, and keep the petah tikva findings".
+- **Why country level:** the 2026-09-28 leave-outs (Russia, Ukraine,
+  Belarus, Iran) were whole countries; holding one Israeli city while three
+  sat in Band R would be inconsistent (staging's recommendation on the
+  form; whether to hold was the owner's call).
+- **What differs from those four:** Israel was screened before the hold, so
+  nothing is deleted. Jerusalem, Bnei Brak and Bat Yam stay in Band R, each
+  noting the hold; Tel Aviv, Ramat Gan and Haifa stay discarded (evidence,
+  not access); Petah Tikva's findings (2,835 licensed-business points, 8
+  Red Line stations, no licence stated) sit on the watch-item list as a
+  possible build when the hold lifts, a licence read first. No licence read
+  now. Israel is listed under "Countries ruled out" as held, and in
+  `docs/global_country_shortlist.md` beside Iran and Belarus.
+
 ### 2026-10-04 - Macau to R; the Israel screen's rows (owner)
 
 - **Macau, "33 macau to R okay":** one OSM address query (13,858 address
