@@ -147,6 +147,10 @@ CLOSED_FOR_WORKS = {
 # for the tram stops before the works (OSM's tram route relations, one
 # Overpass query, the lead's to send, or De Lijn's notice). Until then step 1
 # prints this and lists none.
+# The query that names them (owner, 2026-10-04, Belgian build call 5):
+# `fetch_sources.py --left-bank-trams`, cached here.
+WORKS_ABSENT_TRAM_REFS = ("3", "9", "15")
+OSM_WORKS_TRAMS_JSON = DATA_RAW / "osm_tram_routes_3_9_15.json"
 CLOSED_FOR_WORKS_OPEN_QUESTION = (
     "the left-bank tram stations closed for works (lines 3, 9 and 15) are not listed: the feed "
     "cannot name them. An OSM query for the tram route relations (or De Lijn's notice) is "

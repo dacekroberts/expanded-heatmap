@@ -27,10 +27,17 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from pipeline.antwerp import config  # noqa: E402
-from pipeline.countries.belgium_fetch import fetch_city  # noqa: E402
+from pipeline.countries.belgium_fetch import fetch_city, fetch_tram_route_stops  # noqa: E402
 
 if __name__ == "__main__":
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
-    fetch_city(config, sys.argv[1:])
+    if sys.argv[1:] == ["--left-bank-trams"]:
+        # Only the one Overpass query naming the stops of lines 3, 9 and 15
+        # (absent from the feed during works); nothing else is fetched or
+        # rewritten. The stops found go in config.CLOSED_FOR_WORKS by hand.
+        fetch_tram_route_stops(config.COMMUNES_BBOX, config.WORKS_ABSENT_TRAM_REFS,
+                               config.OSM_WORKS_TRAMS_JSON)
+    else:
+        fetch_city(config, sys.argv[1:])

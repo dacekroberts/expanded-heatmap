@@ -242,6 +242,22 @@ def favv_list(refresh=False):
     return meta
 
 
+def fetch_tram_route_stops(bbox, refs, cache_json, force=False):
+    """OSM's tram route relations with these refs in the box, and their member
+    nodes (stops and platforms, with names): ONE Overpass query, cached. For
+    naming the stops of lines absent from the feed during works (Antwerp's
+    left bank, owner 2026-10-04, Belgian build call 5); never rail geometry."""
+    s, w, n, e = bbox
+    pattern = "^(" + "|".join(refs) + ")$"
+    q = (f'[out:json][timeout:120];'
+         f'rel["route"="tram"]["ref"~"{pattern}"]({s},{w},{n},{e})->.r;'
+         f'.r out body;node(r.r);out body;')
+    els, host = osm.fetch(q, cache_json, force=force)
+    print(f"  OSM tram routes {refs}: {sum(x['type'] == 'relation' for x in els)} relations, "
+          f"{sum(x['type'] == 'node' for x in els)} member nodes ({host})")
+    return els, host
+
+
 def fetch_city(cfg, argv):
     """Everything one Flemish tram city reads, then its provenance.json.
 

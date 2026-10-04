@@ -24,75 +24,57 @@ countries are listed (the `add-country` skill's checklist).
 
 **Delete this file** once all six pages have landed.
 
-## SAVEPOINT 2026-10-04 (paused at the owner's 98% weekly-usage line)
+## SAVEPOINT 2026-10-04, second (all six built; four owner calls open)
 
 Branch `belgium-build`, merged with origin/master at 888bdbd9; nothing pushed.
-State, newest commits first in `git log`:
+Decisions in `docs/decisions_drafts/belgium.md`, newest first.
 
-- **Built and committed, pipeline and docs:** Brussels (196), Antwerp (197),
-  Ghent (198), Charleroi (199), Liège (200): steps 1-3, maps, pages, city
-  entries, notices 144-150, rows in `docs/data_sources/belgium.md`, What Is
-  Excluded sections, privacy rows (Brussels, Charleroi, Liège `pending` the
-  owner; Antwerp, Ghent `publish-structural`), OSM boundary lines (app/osm_notice.py),
-  macro label widths measured (app/label_competition.py). `check_provenance`
-  names all five OK; `check_scope_disclosure` passes.
-- **Brussels (Regional) (201):** step 1 committed (shared
-  `pipeline/countries/belgium_stib.py`; 145 stations, 45 underground, halved
-  rings). The KBO business leg is committed as work in progress (aace0cd7:
-  the KBO reader, the BeST join, the taxonomy, step 2, `agreement.py`). Its
-  control: the join reproduces (88.2% exact against 88.5%, 97.2% placed
-  exactly); base and kept counts and rules A, C, D match exactly, B by 5.
-  **The agreement with hub.brussels misses the brief by under a point**
-  (Retail 78.2 / 75.4 against 78.2 / 76.1; Food 83.8 / 84.1 against
-  84.4 / 84.0), so step 2 stops and writes nothing. Suspected cause: this
-  build's `brussels_hub` types about 2,499 City units Retail where the screen
-  typed about 2,340; a diagnostic (`kbo/diag3.py` in this session's
-  scratchpad, not run) would confirm it, and re-basing the targets on
-  `brussels_hub` is an owner call. Not yet written: its `fetch_sources.py`
-  and provenance, the belgium_kbo continuity column (so
-  `check_category_continuity.py` fails), the privacy registry entry, the
-  near-City-station count; then step 3 line specs, page, entry, notices 151
-  and 152, rows, What Is Excluded, privacy.
-- **Antwerp/Ghent follow-up, committed:** partial gate 3 from De Lijn's
-  pages matches (1 = 20, 2 = 27, 4 = 25, 6 = 25, A3 = 37, Ghent T1 = 21; the
-  rest showed Sunday's diverted service, recorded as a gap). **A conflict for
-  the owner:** De Lijn's pages mark De Merode not served through 2026-11-08
-  and Havenhuis and Cadix through 2027-01-10, but the feed serves all three
-  (and Ghent's Bijlokehof) in full from 2026-10-15; they stay ringed, as the
-  timetable runs, until the owner rules. The left-bank closed stations (lines 3, 9, 15) are not
-  listed: they need OSM's tram relations (a second Antwerp Overpass query) or
-  De Lijn's notice: an owner call.
-- **The six calls below were APPROVED by the owner on 2026-10-04** ("1-6
-  recommendations sound good"; `docs/decisions_drafts/belgium.md`), as
-  recommended. The next session applies them: the cafeteria exception in the
-  continuity table; the Brussels, Charleroi and Liège privacy rows
-  (`publish`); a "Belgium" view (Czechia's mechanism) then
-  `check_macro_labels.py`; one Overpass query for Antwerp's left-bank
-  relations; the diagnostic, then re-basing the KBO targets on `brussels_hub`.
-- **The diagnostic ran (2026-10-04) and confirms only half.** Same KBO
-  units, the screen's typing in place of `brussels_hub`: Retail 78.1 / 76.0
-  (target 78.2 / 76.1), so typing explains Retail's recall gap; Food service
-  83.9 / 84.1 (target 84.4 / 84.0), so Food's 0.5-point precision gap is
-  not the typing. The two typings differ on 235 survey rows (161 Retail in
-  `brussels_hub` the screen leaves untyped). The approval was conditional on
-  confirmation, so re-basing waits for the owner. Recommendation: re-base
-  anyway on `brussels_hub` with a 1-point tolerance, recording the Food
-  residual (tradeoff: the control then accepts an unexplained half-point);
-  the alternative is hunting the Food residual in the join first.
-- **Owner calls (now approved)**: Brussels' 46 cafeterias
-  kept (R1 pending in the continuity table); Brussels' signs all shown, no
-  by-eye read (none printed under the standing rule); Charleroi's 33 and
-  Liège's 39 signs withheld by a shape test, not read by eye; a "Belgium"
-  macro-map view on Czechia's mechanism (the six dots collide in Europe:
-  `check_macro_labels.py` fails until then); the Flemish agent's nine calls
-  and the Walloon agent's calls A-G (in this session's transcript, to go
-  into `docs/decisions_drafts/belgium.md`).
-- **Not yet done:** the drafts entries for Antwerp, Ghent, Charleroi and
-  Liège (Brussels' are in); map_inconsistencies rows, master list, project
-  context; drift check and ring shares; `check_all.py`; the downstream note
-  to Visuals (all notices caption-only; open terms question: hub.brussels's
-  "Google Maps" credit; OSM gives boundaries only, for Antwerp, Ghent,
-  Charleroi and Liège, never rail or station names).
+- **All six pages built and committed**: Brussels (196), Antwerp (197),
+  Ghent (198), Charleroi (199), Liège (200), Brussels (Regional) (201):
+  steps 1-3, maps, pages, city entries, notices 144-152, source rows,
+  What Is Excluded sections, privacy rows, map_inconsistencies rows (tables
+  A-D), ring shares, macro facts, the master list (Built 164, Europe 29,
+  Bands A 5 and B 1), README and rendered surfaces regenerated (only the
+  six added; nothing else moved).
+- **Applied from the six approved calls**: the cafeteria exception; the
+  Brussels, Charleroi and Liège privacy rows (`publish`); the Belgium macro
+  view (Czechia's mechanism); the KBO control re-based on `brussels_hub` at
+  a 1-point tolerance (owner, after the diagnostic confirmed only Retail's
+  half); step 2 for Brussels (Regional) then ran green (13,680 storefronts).
+- **`check_all.py`**: every check passes except `check_macro_labels.py`
+  (9 problems, below). Not yet run: `drift_check.py` (heavy; one job) and
+  the merge with origin/master.
+
+**Open for the owner (recommendation, then the tradeoff):**
+
+1. **Brussels (Regional)'s privacy verdict** (row `pending`): 1 pin has a
+   person-like company name at an address the exposure check reads as a
+   residential unit. Recommended: withhold that one name by key (the pin
+   shows its type), not read by eye. Alternative: publish all, resting on
+   every name being a legal person's.
+2. **The Brussels and Brussels (Regional) dots sit 2.4 px apart** in the
+   Belgium view (both near central Brussels), so their pills overlap at
+   every width. Recommended: move Brussels (Regional)'s dot to a point
+   inside its 18 communes clear of the City (Ixelles or Etterbeek), then
+   place the two labels on opposite sides. Alternative: list the pair in
+   `KNOWN_STACKED` for the UI pass, as Kobe and Osaka are.
+3. **Rotterdam's Europe label covers Liège's (unlabelled) dot.** No
+   offset clears it: ten tried, each trades Liège for Den Haag, Amsterdam,
+   London or the UK dots. Recommended: give Den Haag and Rotterdam's pair
+   one more placement pass together (taste, so the owner's); alternative:
+   accept Liège's dot under the pill until the UI pass.
+4. **Antwerp's left bank**: the approved Overpass query (tram route
+   relations 3, 9 and 15, `fetch_sources.py --left-bank-trams`) found no
+   such relations on overpass-api.de (an empty answer, twice) and timed out
+   on kumi.systems; one retry after the minute is recorded in the drafts
+   when it lands. If OSM has none, the remaining source is De Lijn's notice,
+   which the build cannot republish.
+
+**Still to do after those**: the drift check; merge origin/master and
+`check_all.py`; `docs/project_context.md`'s current state; the downstream
+note to Visuals and Analytics after the push (every notice caption-only;
+open terms questions: hub.brussels's "Google Maps" credit, KBO's declared
+purpose).
 
 ---
 
