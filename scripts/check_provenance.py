@@ -755,6 +755,14 @@ def check_invariants(names, lons):
         elif "openstreetmap.org/copyright" not in text.lower():
             problems.append(f"{rel}: attribution present but not linked to "
                             f"the OSM copyright page")
+        # The map sits in an iframe and openstreetmap.org refuses framing
+        # (X-Frame-Options: SAMEORIGIN), so a credit link without a new-tab
+        # target opens "refused to connect" (owner, 2026-10-03).
+        elif not re.search(r'openstreetmap\.org/copyright\\?"\s+target=\\?"_blank',
+                           text):
+            problems.append(f"{rel}: the OSM credit link does not open in a new "
+                            f"tab (target=\"_blank\"); inside the app's iframe "
+                            f"openstreetmap.org refuses to load")
 
         map_h = re.search(r"#map_\w+\s*\{[^}]*?height:\s*([\d.]+)px", text)
         legend_bottom = re.search(

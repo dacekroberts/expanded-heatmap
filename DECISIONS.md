@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**500 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**502 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -74,6 +74,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun](#2026-10-03---vancouvers-130-132-on-the-card-face-private-pages-moved-to-analytics-37eec480-rerun)
 - [Region captions read "in the United States" (owner)](#2026-10-03---region-captions-read-in-the-united-states-owner)
 - [San Diego and Los Angeles: a trade name that is the registrant's own name shows the street address (owner)](#2026-10-03---san-diego-and-los-angeles-a-trade-name-that-is-the-registrants-own-name-shows-the-street-address-owner)
+- [Every map's OpenStreetMap and Leaflet credits open in a new tab (owner)](#2026-10-03---every-maps-openstreetmap-and-leaflet-credits-open-in-a-new-tab-owner)
+- [The stations-left-out tables sort by line or reason (owner)](#2026-10-03---the-stations-left-out-tables-sort-by-line-or-reason-owner)
 
 **2026-10-02**
 
@@ -20330,3 +20332,39 @@ until the owner rules):**
 - **Left open:** the 51 booth-renter-shaped pins, and San Diego's 62 sole
   proprietors with person-like names under the 452 catch-all, for a later
   look.
+
+### 2026-10-03 - Every map's OpenStreetMap and Leaflet credits open in a new tab (owner)
+
+- **The owner's report:** the "OpenStreetMap contributors" link is broken.
+  Cause: every map is embedded in an iframe, the credit link had no target,
+  and openstreetmap.org sends `X-Frame-Options: SAMEORIGIN`, so a click
+  loaded the copyright page inside the map's frame, which refused it.
+  Leaflet's own credit (leafletjs.com allows framing) replaced the map with
+  Leaflet's site inside the frame; **the owner asked for it to open in a new
+  tab as well.**
+- **Built in `pipeline/map_common.py`:** the tile layer takes
+  `OSM_ATTRIBUTION`, the same credit with `target="_blank"` and
+  `rel="noopener noreferrer"`; a new shared block, `CREDIT_TAB_SCRIPT`, adds
+  the same target to Leaflet's prefix through `setPrefix`, keeping its flag,
+  so it survives the control's re-renders (checked after a zoom).
+- **Check:** `check_provenance.py` now fails a map whose OSM credit link has
+  no new-tab target (158 failed before the re-render, 0 after);
+  `check_render_current.py` picks up the new block on its own (12 shared
+  blocks).
+- **All 158 maps re-rendered** (`drift_check.py --render-only --jobs 2`,
+  measured 2.06 GB). Against the committed maps, every one differs only by
+  the credit's attributes and the new block; `check_html_lang.py` passes.
+
+### 2026-10-03 - The stations-left-out tables sort by line or reason (owner)
+
+- **The owner asked** for the stations-left-out tables to be sortable by
+  reason or line. Options put to the owner: a "Sort by" button row above
+  the same styled table (recommended), or Streamlit's native sortable grid,
+  whose header cannot take the site's styling. **The owner chose the button
+  row.**
+- **Built in `components.render_excluded_stations`:** `st.segmented_control`
+  "Sort by" with "As listed" (the file's order, the default), "Line" (only
+  where the file records lines) and "Why"; the station name breaks ties.
+  Shown only for a table of two or more rows. Checked locally on San
+  Francisco's 85 rows: each order re-sorts the table and the expander stays
+  open.

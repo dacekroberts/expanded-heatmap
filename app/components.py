@@ -3128,6 +3128,19 @@ def render_excluded_stations(name):
     body = [[row.get("station", "")] + ([row.get(lines_col, "")] if lines_col else [])
             + [why(row)] for row in rows]
     with st.expander(f"Stations left out ({len(rows):,})"):
+        # Sortable by line or reason (owner, 2026-10-03): a button row above
+        # the same styled table, not st.dataframe, whose header cannot take
+        # the site's styling. "Line" only where the file records lines; the
+        # station name breaks ties so a re-sort is stable.
+        if len(body) > 1:
+            options = ["As listed"] + (["Line"] if lines_col else []) + ["Why"]
+            order = st.segmented_control(
+                "Sort by", options, default="As listed",
+                key=f"stations_left_out_sort_{slug(city_entry(name)['page'])}")
+            if order in ("Line", "Why"):
+                col = header.index("Lines" if order == "Line" else "Why")
+                body = sorted(body, key=lambda r: (str(r[col]).casefold(),
+                                                   str(r[0]).casefold()))
         scroll_table(header, body, min_width=480)
 
 
