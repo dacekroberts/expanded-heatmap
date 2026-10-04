@@ -4,6 +4,24 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The next probe items after the reset's work (owner)
+
+- **The owner, on the country census's "where new cities could still come
+  from": "these would be good next items after our current work
+  finishes".** Queued, to start once the reset's ten agents report:
+  1. **Inside built countries:** Germany's tram and Stadtbahn cities (about
+     55, never asked), Japan's third wave (about 13 cities scoped in wave 2's
+     notes), Korea's regional expansions (Busan, Daegu, Seoul, Anyang),
+     Switzerland's Bern and Lausanne, Norway's Trondheim, Sweden's Lund, and
+     Mexico City's State of México municipios as an extension.
+  2. **Sibling cities never asked in probed-but-negative countries:**
+     Austria (Linz, Innsbruck), Hungary (Debrecen, Szeged, Miskolc), Croatia
+     (Osijek), Slovakia (Košice), Poland's tram cities, Israel's Red Line
+     cities, and India's other metros.
+- The reset's own work (the paused probes, Southeast Asia, greater Oceania,
+  the Macau and Ecuador downloads, two licence reads, three briefs) runs
+  first.
+
 ### 2026-10-04 - The paused wave's results banded; probes stay stopped (owner)
 
 - **The owner: "1. yes 2. all sound good 3. yes 4. yes 5. yes, do not
