@@ -164,7 +164,7 @@ caveat that an active account does not mean a license for the current year.
   (data.tacoma.gov)", drafted by the build.
 - Rows in `docs/data_sources/united-states.md` for the layer and the TIGER
   polygon; the disclaimer in "Notices this project MUST display when
-  published". OSM: ODbL, the site's notice 1.
+  published". OpenStreetMap: ODbL, the site's notice 1.
 
 ## Downstream
 

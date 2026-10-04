@@ -1082,6 +1082,50 @@ COLUMNS["ba_usos_suelo"] = {
     "mobile_unit": absent("the survey records fixed ground-floor uses only; KIOSCO is a fixed kiosk shop"),
 }
 
+# Mendoza's activity register (2026-10-04): one RAM rama per row, classify()
+# on its desc_full. The owner's calls are the drafts heading below.
+MZA_CALLS = "Mendoza's taxonomy: the RAM level, one bucket per business"
+COLUMNS["mendoza_rama"] = {
+    "funeral": [loc("AG.SEPELIOS", "funeral agency")],
+    "no_counter_food": [loc("VIANDAS", "meal delivery"),
+                        loc("F.FRANCA", "feria franca produce stand"),
+                        loc("PUESTO DE FLORES", "flower kiosk on the public way"),
+                        loc("ESCAPARATE", "sidewalk newsstand"),
+                        loc("OCUP.VIA PUB", "stand on the public way")],
+    "personal_catchall": absent("no rama for other personal services, fortune telling or party halls"),
+    "tattoo": [loc("TATUAJES Y PIERCING", "tattoo and piercing")],
+    "adult_hostess": [exception("BAR AMERIC.", "bar americano", "Food service", MZA_CALLS,
+                                "the old name for a hostess bar, but both businesses' other items "
+                                "are a restaurant's, a cafe's and sidewalk tables; kept (owner)")],
+    "sex_shop": absent("no sex-shop rama"),
+    "massage_commercial": absent("no massage rama"),
+    "massage_regulated": absent("no physiotherapy or massage-therapy rama"),
+    "car_dealer": [loc("AUTOMOTORES", "car dealer"), loc("VTA.MOTOS", "motorcycle sales")],
+    "petrol_station": [loc("EST.SERVICIO", "service station")],
+    "vehicle_repair": [loc("T.MECANICO", "car workshop"), loc("T.CHAPISTA", "body shop"),
+                       loc("GOMERIA", "tire repair"), loc("LAVADERO", "car wash (mostly)")],
+    "gambling": [loc("AG.LOTERIA", "lottery agency"), loc("AG.QUINIELA", "quiniela agency"),
+                 loc("JUEGOS MECAN", "amusement machines")],
+    "pawnbroker": [loc("COMPRA VENTA", "second-hand buying and selling, gold buyers among them")],
+    "nightclub": [loc("LOCAL BAILES", "dance club")],
+    "vet": [loc("VETERINARIA", "veterinary clinic")],
+    "nonstore": absent("no nonstore, online or vending rama"),
+    "parking": [loc("ESTACIONAM.", "parking"), loc("GARAGE", "garage"), loc("COCHERA", "car park")],
+    "repair": [loc("T.REPARACION", "repair workshop"), loc("T.COMPOSTURA", "shoe repair"),
+               loc("CERRAJERIA", "locksmith")],
+    "lodging": [loc("HOTEL", "hotel"), loc("HOSPEDAJE", "guest house"), loc("CASA DPTOS", "rental flats"),
+                loc("APART-HOTEL", "apartment hotel")],
+    "recreation": [loc("GIMNASIO", "gym"), loc("CINE", "cinema"), loc("TEATRO", "theater")],
+    "pharmacy": [loc("FARMACIA", "pharmacy")],
+    "optician": [loc("OPTICA", "optician"),
+                 exception("T.OPTICA", "optical workshop", OUT,
+                           "Mendoza's lens workshop (T.OPTICA) stays off the map (owner)",
+                           "1 business: a lens workshop (T. is taller), a workshop rather than an "
+                           "optician's shop; left off (owner, 2026-10-04)")],
+    "health_food": [loc("P.DIETETICOS", "health-food shop"), loc("HERBORISTER", "herbalist")],
+    "mobile_unit": [loc("CARRO PANCHO", "hot-dog cart")],
+}
+
 
 def _br(text):
     return {"DSC_ESTABELECIMENTO": text}

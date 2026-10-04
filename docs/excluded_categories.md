@@ -89,6 +89,10 @@ Rome's Roma–Viterbo urban service, São Paulo's CPTM Linha 9 and Rio's SuperVi
 Deodoro and Saracuruna lines were decided the same way, and Brazil made the
 third part of the test explicit: how many of a line's stations have no drawn
 station within walking distance.
+Liverpool's Merseyrail is drawn on the same test: inside the four council
+areas its stations sit a median of about 1.2 km apart, every one has a train
+at least every 15 minutes by day, and it is the only urban rail there is.
+Northern's City Line from Lime Street, at three trains an hour, is not drawn.
 
 ### Stations left out of a network that IS mapped
 
@@ -2779,6 +2783,34 @@ owner), 45 whose account name is only a person's (read by eye) and
 
 **Stations.** All 21 Sun Link stops are inside the city. Not drawn: buses.
 
+### Tacoma - the City's active license accounts, and every T Line stop
+
+**Left out of the City's business-license layer** (22,128 active Tax & License accounts,
+refreshed daily): 10,316 outside the city's five council districts ("Not Mapped", almost all
+out-of-town addresses, or no district at all). Then, of the 11,812 in the city, by NAICS code,
+the exclusions every NAICS city shares:
+- vending-machine operators (9) and fuel dealers (4) - NAICS 2022 has no "nonstore" code,
+  so online sellers are NOT left out: they sit under the goods they sell;
+- food service contractors (17), caterers (29) and mobile food (66);
+- parking (74), funeral services and cemeteries (12) and "all other personal services" (194);
+- hotels, motels and other lodging (396, among them short-term rentals in homes).
+
+**Also left out**: 61 whose address gives an apartment, trailer or mobile-home space, as
+homes. No storefront in a council district falls outside the city limits.
+
+**Counted once**: a business holding several accounts at one address and under one name: 2,870
+accounts to 2,851 premises.
+
+**Shown, but not named**: 104 storefronts show their type of business instead of a name: the
+account has no trade name of its own (the trade name is the account holder's name), the
+holder carries no company form, and the name reads as a person's.
+
+**Read with care**: an active account does not mean a license for the current year, in the
+City's own words.
+
+**Stations.** All 12 T Line stops are inside the city. Not drawn: Sounder commuter trains
+(Tacoma Dome and South Tacoma, mostly at rush hour) and buses.
+
 ### New Orleans - the City's own business types, and every stop of five streetcar lines
 
 **Left out of the Active Occupational Licenses** (16,521 active licenses), by the City's own
@@ -4457,6 +4489,44 @@ street address.
   storefronts, 1.2%, in Villa Lugano, Villa Soldati and Villa Riachuelo), the
   heritage tramway, and the commuter railways.
 
+### Mendoza - the capital's commercial accounts, one category per business
+
+**One category per business.** The Municipalidad lists each open commercial
+account with every activity it is taxed for; the business type (its rama)
+decides the category, and a business with a storefront rama beside others
+(a restaurant that also sells wine) is on the map once, in the first of Food
+service, Retail and Personal services it qualifies for. Of 8,309 open
+accounts at June 2025, 4,406 are storefronts.
+
+**Excluded by business type** (3,752) - among them doctors' and other health
+practices (503 consulting rooms, 58 laboratories, 35 clinics), offices and
+administration with no trade named (189 offices, 168 administrations and
+others), rental flats, hotels, hostels and guest houses (476 in all), parking
+(261), travel agencies (134), institutes, academies and schools (mostly
+teaching and medical), gyms (73), printers and copy shops, insurers, banks
+and estate agents, car workshops and car washes, locksmiths and other repair
+workshops, veterinary clinics (28), and lottery and quiniela agencies.
+
+**Street stands are out** - 38 sidewalk newsstands, 26 produce stands at the
+feria franca and the flower kiosks on the public way, as food stalls are
+everywhere on this site. Arcades' and shopping centers' own accounts are out
+too: the shops inside them are listed one by one.
+
+**No business type at all** - 151 accounts carry no rama and are left out.
+
+**Shown, but not named** - 92 storefronts whose name is written as a
+person's own, surname first, show their type of business instead.
+
+**Cafés, not shops** - the register's confiterías (137) count as food
+service: here they hold sidewalk-table permits and serve alcohol as cafés
+do, while pastry and bread shops have their own type.
+
+**Stations.** The Metrotranvía is drawn to both its ends, Gutiérrez in Maipú
+to Avellaneda in Las Heras; 7 of its 25 stations are in the Ciudad de Mendoza
+and get rings. The 18 in Godoy Cruz, Las Heras and Maipú are listed on
+Mendoza's page as left out: those departments publish no business register.
+- Not drawn: buses.
+
 ### Palma - the island's restaurant register, food only, placed by address
 
 **Only food is on this map.** The Consell de Mallorca registers every
@@ -4839,6 +4909,57 @@ with the North Station spur, every one inside Blackpool and Wyre; none is
 listed on Blackpool (Regional)'s page as left out. Fylde, to the south, has
 no tram stop and is not on the map.
 - Buses and national rail trains are not drawn.
+
+### Liverpool (Regional) - the food hygiene register, food only
+
+**Only food is on this map.** The Food Standards Agency's register lists the
+premises the four councils Merseyrail serves (Liverpool, Sefton, Knowsley and
+Wirral) inspect for food hygiene; no open register of other shops or of
+personal services covers them, so clothes shops, hairdressers and the like
+are missing rather than excluded. Food shops (grocers, off-licenses, bakers,
+butchers, newsagents selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - other catering premises (1,008), where home caterers
+and event kitchens sit; mobile caterers (291); hospitals, childcare and care
+homes (697); schools, colleges and universities (540); hotels and guest
+houses (144); manufacturers and packers (46); distributors and transporters
+(40); importers and exporters (8); farmers and growers (5).
+
+**Not placed: flats** - 4 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's center** - 399 food storefronts the register
+gives no location but a full postcode (Ordnance Survey's postcode data).
+
+**Not placed** - 223 food storefronts (3.0%) with neither a location nor a
+usable full postcode, most in Sefton (64, 3.8%) and Wirral (64, 3.7%). A
+business run from a private address is published without a location or a
+full postcode and is never placed.
+
+**Shown under its trade name** - 11 businesses registered "trading as"
+another name show the name on the shop.
+
+**Left off because they are outside the area** - 3 whose register location
+lies outside the four council areas.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.9% of that type read as one by name.
+
+**Stations.** Merseyrail's Northern and Wirral Lines, drawn as suburban rail
+that runs as a metro: by day every station inside the four council areas has
+a train at least every 15 minutes, and most have one every 30 minutes in the
+evening and on Sundays. 59 of Merseyrail's 69 stations are inside the four;
+the 10 beyond them are listed on Liverpool (Regional)'s page as left out:
+Ormskirk, Aughton Park and Town Green in West Lancashire, and Hooton,
+Capenhurst, Bache, Chester, Little Sutton, Overpool and Ellesmere Port in
+Cheshire West and Chester. St Helens and Halton have no Merseyrail station and
+are not on the map.
+- Not drawn: the City Line, Northern's trains from Lime Street to Wigan,
+  Warrington and beyond, at three trains an hour (its stations from Edge Hill,
+  Wavertree Technology Park, Broad Green, Mossley Hill and West Allerton to
+  Roby, Huyton, Prescot, Whiston and Halewood); Transport for Wales's Bidston -
+  Wrexham line (Upton and Heswall); Northern's Southport - Wigan line (Meols
+  Cop); other national rail services; buses; and the Mersey Ferries.
 
 ### Sydney - the City of Sydney's floor-space survey, all three buckets
 

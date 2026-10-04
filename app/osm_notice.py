@@ -64,6 +64,7 @@ OSM_RAIL_BY_CITY = {
                "stations", True),
     "Kansas City": ("Kansas City's KC Streetcar and its stops", True),
     "Tucson": ("Tucson's Sun Link and its stops", True),
+    "Tacoma": ("Tacoma's T Line and its stops", True),
     "New Orleans": ("New Orleans's five streetcar lines and their stops", True),
     "Florence": ("Florence's T1 and T2 tram lines and their stops and the comune boundaries "
                  "used to select them and its businesses", True),
@@ -124,6 +125,8 @@ OSM_RAIL_BY_CITY = {
     "Sydney": ("the train and metro routes of Sydney and its City boundary", True),
     "Melbourne": ("the train and metro routes of Melbourne and its City boundary", True),
     "Buenos Aires": ("Buenos Aires's Subte and Premetro routes and its boundary", True),
+    "Mendoza": ("Mendoza's Metrotranvía and its stations, and the department boundaries "
+                "used to select them", True),
     "Seattle (Regional)": ("Seattle's Link 1 and 2 Lines", True),
     "London": ("the lines and stations of London's Underground, DLR, Elizabeth line and "
                "Overground, and the boundaries used to select them", True),
@@ -143,6 +146,8 @@ OSM_RAIL_BY_CITY = {
                               "the boundaries used to select them", True),
     "Blackpool (Regional)": ("the line and stations of the Blackpool Tramway, and the "
                              "boundaries used to select them", True),
+    "Liverpool (Regional)": ("the lines and stations of Merseyrail, and the boundaries "
+                             "used to select them", True),
     "Stockholm": ("Stockholm's Tunnelbana lines and stations and its kommun boundaries", True),
     "Bucharest": ("Bucharest's metro lines and stations and its city and sector boundaries",
                   True),

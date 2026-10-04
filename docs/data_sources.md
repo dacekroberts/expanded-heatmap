@@ -2617,14 +2617,21 @@ DISPLAYED** (written into `render_site_notices()` with the UK six,
   attribution of the Department's own, so the OGL's default applies.
 - **Used for** gate 3 of the UK tram and light-rail cities: each map's stops
   are matched name by name against NaPTAN's active stop areas (stop type MET,
-  ATCO area 940) inside its scope. Nothing from NaPTAN is drawn on a map.
+  ATCO area 940) inside its scope. Since 2026-10-04 also Liverpool
+  (Regional)'s Merseyrail stations, against NaPTAN's rail station records
+  (stop type RLY, ATCO area 910). Nothing from NaPTAN is drawn on a map.
 - **MUST DISPLAY**: "Contains public sector information licensed under the
   Open Government Licence v3.0.", with the licence linked. Whether a count
   checked against the data needs the credit at all is arguable; displaying it
   is the cautious reading.
 - **MUST NOT**: imply the Department's endorsement (OGL); use a DfT logo or
   the Royal Arms; present NaPTAN as complete.
-- Wording approved by the owner 2026-10-02.
+- Wording approved by the owner 2026-10-02. The first sentence reworded to
+  cover Merseyrail, no new notice (owner, 2026-10-03): "Stop and station
+  counts on the UK's tram, light-rail and Merseyrail maps are checked against
+  NaPTAN, the National Public Transport Access Nodes dataset published by the
+  Department for Transport." The licence and no-endorsement sentences are
+  unchanged.
 
 **87. Food Standards Agency (Birmingham) — required, and DISPLAYED** (written
 into `render_site_notices()` with the UK six, 2026-10-02.)
@@ -3529,6 +3536,78 @@ of 2026-10-02.)
 - **MUST NOT**: present the outline as an authoritative boundary location
   ("can only be provided by a licensed land surveyor").
 
+**141. Municipalidad de la Ciudad de Mendoza (Mendoza) — required, and
+DISPLAYED** (written into `render_site_notices()` with Mendoza, 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-03)<!-- /internal -->:
+  CC BY 4.0 at every level - the dataset's `license_id` CC-BY-4.0, the
+  portal and the resources agree. Rows in
+  [`data_sources/argentina.md`](data_sources/argentina.md).
+- **MUST DISPLAY** (CC BY 4.0 section 3(a)): credit to the Municipalidad de la
+  Ciudad de Mendoza with the dataset's title, "Listado Comercios por Actividad
+  2025", linked to its page; the licence linked; and a statement of the
+  modifications (filtered to storefront businesses, grouped into three
+  categories, reprojected from the Gauss-Krüger grid, names that read as a
+  person's own replaced by the business type). No wording is prescribed; the
+  notice is this project's.
+- **MUST NOT**: suggest endorsement by the Municipalidad; use the city's logo.
+- **Personal data**: Argentina's Ley 25.326 is outside the licence. The name
+  rule (a trade name written as a person's own, surname first, shows the
+  business type) and `check_personal_exposure.py` carry it; no address is
+  shown.
+- **Mendoza's rail and the department boundaries are OpenStreetMap data**
+  (ODbL, notice 1).
+
+**142. City of Tacoma (Tacoma) — required, and DISPLAYED on every page**
+(written into `render_site_notices()` with Tacoma, 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-03)<!-- /internal -->:
+  the City's Resolution 39378 (2016) and its open-data page place no
+  restriction on reuse; the rows are in
+  [`data_sources/united-states.md`](data_sources/united-states.md). Accepted
+  by the owner on Chicago's template (2026-10-03).
+- **MUST DISPLAY**: the City's disclaimer, which binds any application using
+  the data - Chicago's (notice 2) and the City of Kansas City, Missouri's (notice 80) shape, so it is
+  displayed site-wide, as theirs are. Reproduced word for word from the City's
+  disclaimer page, its curly apostrophe kept; it is exempt from the
+  American-spelling pass.
+- **REVOCABLE**: the City "reserves the right ... to require the termination of
+  any and all display, distribution or other uses of any or all of the
+  information or data for any reason". Honored through the removal rule: the
+  layer or the city comes down first, and the request is recorded after.
+- **MUST NOT**: present the pins as "currently licensed" businesses (the layer
+  lists active Tax & License accounts and "does not indicate whether a business
+  has a business license for the current year"); cite the dead host
+  data.cityoftacoma.org that the item's licence field still links (the City's
+  portal is data.tacoma.gov); use City marks.
+- **Credited on the page** as "City of Tacoma, Tax & License (data.tacoma.gov)",
+  in the caption under the map.
+- **Tacoma's rail is OpenStreetMap data** (ODbL, notice 1); Sound Transit's
+  GTFS is not used.
+
+**143. Food Standards Agency (Liverpool) — required, and DISPLAYED** (written
+into `render_site_notices()` with Liverpool (Regional), 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**, London's reading (notice 58): the four
+  councils Merseyrail serves (Liverpool, Sefton, Knowsley, Wirral) are on
+  England's FHRS, under the **Open Government Licence v3** with the FSA's
+  conditions. The OGL statement linked; each council's extract date
+  (2026-10-02); no rating, logo or imagery. The credit is London's and
+  Newcastle's, "Food Standards Agency, UK food hygiene rating data", as a
+  notice of its own (Newcastle's precedent, notice 62).
+- **Personal data**: the project's rule as for London: home and mobile
+  caterers out by type, a private address never placed, a storefront at a
+  "Flat" address (4) or named as a childminder (0) never placed, the trade
+  name shown after "trading as".
+- **MUST NOT**: imply official status or FSA endorsement (OGL); use the FSA
+  logo; display a rating.
+- Wording: Newcastle's Food Standards Agency notice 62 as Manchester's notice
+  84, with the city and date changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py liverpool`, run 2026-10-04: no
+  fallback name exists, 0 contact details; the verdict is in
+  `DECISIONS.md`.<!-- /internal -->
+- **Liverpool's rail is OpenStreetMap data** (ODbL, notice 1).
+
 **144. City of Brussels and hub.brussels (Brussels) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-04, from staging's licence read
 of 2026-10-03.)
@@ -3669,6 +3748,20 @@ of 2026-10-03.)
   matched to its points.
 - **MUST NOT**: imply endorsement or accuracy; show Paradigm or
   datastore.brussels marks.
+
+**153. Ordnance Survey (Liverpool) — required, and DISPLAYED** (written into
+`render_site_notices()` with Liverpool (Regional), 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS** (notice 59): the same Code-Point Open file and
+  edition (2026-08), copied from London's cache, not downloaded again. The
+  three statements verbatim, the OGL link, no endorsement, the product's
+  registered name not used.
+- **Used for** 399 Liverpool, Sefton, Knowsley and Wirral food storefronts the
+  FSA lists with a full postcode and no point (5.4% of storefront rows);
+  never a private address. Units kept to the four councils' GSS codes.
+- **The repository carries the credit too**, as for London: committed
+  `outputs/liverpool/` republishes the derived locations (README's credits).
+- Wording: Manchester's Ordnance Survey notice 85, with the city changed.
 
 
 ## Gaps

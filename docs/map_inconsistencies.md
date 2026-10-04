@@ -137,9 +137,11 @@ and districts no metro reaches.
   skill, not the line-by-line test below), Berlin (the S-Bahn's 16 lines, the
   Ring among them, cut at the Land boundary), London (the Elizabeth line and the
   six London Overground lines, cut at Greater London), Sydney (Sydney Trains'
-  six lines through the City of Sydney, where they run as a metro) and
+  six lines through the City of Sydney, where they run as a metro),
   Melbourne (Metro Trains' six line groups through the City Loop and the Metro
-  Tunnel).
+  Tunnel) and
+  Liverpool (Regional) (Merseyrail's Northern and Wirral Lines, inside
+  Liverpool, Sefton, Knowsley and Wirral).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -147,7 +149,7 @@ and districts no metro reaches.
   three lines, Fortaleza's and Recife's diesel lines, Korail's Daegyeong Line (Daegu)
   and Donghae Line (Busan), National Rail in London, Glasgow's suburban lines
   (the Argyle and North Clyde lines and the rest), Northern's trains in Tyne and
-  Wear, Buenos Aires's commuter railways, NSW TrainLink (Sydney), and V/Line and
+  Wear, Northern's City Line in Liverpool, Buenos Aires's commuter railways, NSW TrainLink (Sydney), and V/Line and
   the event-day Flemington Racecourse line (Melbourne).
 - **Not mentioned either way:** Montréal (exo), Mexico City (Tren Suburbano).
   Montréal's REM is drawn from 2026-09-27 (the tram rescope).
@@ -547,6 +549,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Dallas | DART Light Rail, Red, Blue, Green and Orange | Dallas Streetcar, M-Line trolley (owner); Silver Line and TRE (commuter rail) | OpenStreetMap route relations (Houston's route); gate 3 exact | City (TIGER) | 20 / 0 |
 | Kansas City | KC Streetcar, one line | Buses | OpenStreetMap route relations (RideKC's GTFS barred, owner); gate 3 exact | City (TIGER) | 0 / 0 |
 | Tucson | Sun Link streetcar, one line | Buses | OpenStreetMap route relations; gate 3 exact | City (TIGER) | 0 / 0 |
+| Tacoma | T Line (tram), one line | Sounder commuter trains and buses | OpenStreetMap route relations (Sound Transit's GTFS not used, owner); gate 3 exact | City (TIGER) | 0 / 0 |
 | New Orleans | RTA streetcars 12, 46, 47, 48, 49 | Buses, ferries; OSM's stale ref 2 | OpenStreetMap route relations; 46 and 49 stops by node; gate 3 exact (RTA) | City (TIGER; Orleans Parish) | 0 / 0 |
 | **Canada** | | | | | |
 | Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS; gate 3 exact | Vancouver, Surrey, Burnaby, New Westminster, Coquitlam | 10 / 0 |
@@ -702,8 +705,10 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Sheffield | Sheffield Supertram, the Blue, Yellow and Purple routes (tram) | The Tram-Train to Rotherham (every 30 minutes, national rail track beyond Tinsley); buses and national rail trains | OpenStreetMap route relations; gate 3 against NaPTAN only, name by name on 48 (the operator's site refuses scripts) | The City of Sheffield | 0 / 0 |
 | Nottingham (Regional) | Nottingham Express Transit (tram), Line 1 and Line 2, each line's two directions merged | Buses and national rail trains | OpenStreetMap route relations (Bulwell Forest and David Lane added by node); gate 3 exact on 36 and 30 (NET) and name by name against NaPTAN's 50 | The four NET council areas | 0 / 0 |
 | Blackpool (Regional) | Blackpool Tramway (tram), one line, Starr Gate to Fleetwood Ferry with the North Station spur | Buses and national rail trains | OpenStreetMap route relations; gate 3 name by name against NaPTAN's 40 (the operator's site refuses scripts) | Blackpool and Wyre | 0 / 0 |
+| Liverpool (Regional) | Merseyrail (suburban rail run as a metro), the Northern and Wirral Lines | The City Line, other national rail trains, buses and the Mersey Ferries | OpenStreetMap route relations; gate 3 exact on 37 and 34 (Merseytravel's timetable booklets) and name by name against NaPTAN's rail records | The four Merseyrail council areas (Liverpool, Sefton, Knowsley, Wirral) | 10 / 0 |
 | **Argentina** | | | | | |
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
+| Mendoza | Metrotranvía (light rail), one line, drawn to both ends | Buses | OpenStreetMap route relations; gate 3 exact against es.wikipedia (secondary; the operator's page unreconciled) | Ciudad de Mendoza, the capital department (OSM) | 18 / 0 |
 | **Australia** | | | | | |
 | Sydney | Sydney Trains T1, T2, T3, T4, T8 and T9 and Sydney Metro M1 (7 lines, refs on the map, full names in the legend) | Light rail L1-L3 (22 stops in the LGA), NSW TrainLink, ferries | OpenStreetMap route relations (Transport for NSW's GTFS needs an API key); gate 3 exact on the 16 stations inside the LGA | The City of Sydney LGA (lines cut at the boundary) | 157 / 0 |
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
@@ -745,6 +750,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Dallas | Tax register | Texas Comptroller, Active Sales Tax Permit Holders (state) | NAICS | 2,501 / 1,492 / 204 | Personal services thin: a sales-tax permit is held by sellers of taxable goods and services |
 | Kansas City | License register | KCMO Business License Holders (frozen 2026-01-15) | NAICS (2022 titles mapped to codes) | 273 / 52 / 126 | Food service thin: about 175 restaurants and bars in the whole register; 1,095 fee-code licences unclassifiable |
 | Tucson | License register | City of Tucson BUSLIC (active licences, rebuilt daily) | NAICS | 125 / 149 / 66 | Not a complete listing, in the City's own words |
+| Tacoma | License register | City of Tacoma business licenses (active Tax & License accounts, refreshed daily) | NAICS | 183 / 135 / 185 | An active account is not a license for the current year, in the City's own words |
 | New Orleans | License register | City of New Orleans Active Occupational Licenses (daily, CC0) | Own text taxonomy, mapped to NAICS codes | 935 / 978 / 218 | Personal services thin |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 5 licence registers | Vancouver licences; Surrey directory; Burnaby, Coquitlam and New Westminster licences | Own types; NAICS (New Westminster) | 2,967 / 2,617 / 1,426 | — |
@@ -900,8 +906,10 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Sheffield | Food hygiene register | The Food Standards Agency's FHRS file, 1 council | FSA business type | 293 / 869 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Nottingham (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 4 councils | FSA business type | 382 / 828 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Blackpool (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 2 councils | FSA business type | 227 / 593 / — | No Personal services; Retail = food shops only ("Food shops") |
+| Liverpool (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 4 councils | FSA business type | 1,107 / 2,625 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,612 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
+| Mendoza | License register | The capital's commercial accounts list (open accounts, June 2025) | Its own business types (RAM, 418, enumerated), one per business | 413 / 173 / 55 | Personal services small but complete; confiterías counted as cafés |
 | **Australia** | | | | | |
 | Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,769 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
@@ -940,6 +948,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Dallas | Address join to the City's Address Points (89.8%) + Census geocoder (7.9%); 2.3% unplaced, 770 outside the city | Only taxable sellers hold a permit | Non-store sellers, caterers, mobile food, parking; apartments and trailers; address shown for a person's permit (Houston's Residential-point test cannot run: the address type codes are undocumented) |
 | Kansas City | Register coordinates (100%); 11 outside the city | Food service thin; a licence is not a shopfront | Non-store sellers, caterers, mobile food, parking; fee-code licences (1,095); licences that lapsed in 2024; address shown for a person's licence or a person-named trade name |
 | Tucson | Register coordinates (92.4%); 539 not geocoded, 23 outside the city | The City calls its list not complete | Home occupations; non-store sellers, caterers, mobile food, parking; apartments (19); address shown for a person's licence or a business named only as a person |
+| Tacoma | Register coordinates (100%); none outside the city | An active account is not a current license | Non-store sellers, caterers, mobile food, parking; apartments, trailers and mobile-home spaces (61); the business type shown for a person-named account with no trade name of its own |
 | New Orleans | Register coordinates (95.6%); 219 at the register's 0,0, 1 outside the city | A licence is not a shopfront | Event and festival vendors, home offices, flea-market stalls, street artists, video poker; caterers, mobile food, parking; address shown where no business name or a person's |
 | **Canada** | | | |
 | Vancouver (Regional) | Source coordinates; New Westminster by address join (99.8%) | About half of Vancouver's register has none; 1,583 address rows lost | Surrey Home Occupation (51.8%), IMBL, RMT massage; Burnaby's and Coquitlam's catch-alls, Coquitlam's mall kiosks; own-name licences shown by type (OGL personal-information exemption, read cautiously, owner 2026-10-03) |
@@ -1087,8 +1096,10 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Sheffield | Register coordinates (98%) and postcode centers (2%, OS postcode centroids for a full postcode with no register point); 93 not placed | Food only; about one storefront in thirty-seven unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | Nottingham (Regional) | Register coordinates (97%) and postcode centers (3%, OS postcode centroids for a full postcode with no register point); 210 not placed | Food only; about one storefront in eighteen unplaced, most in Rushcliffe (14.2%) and Ashfield; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address, a flat address or a childminder never placed; the name after "trading as" shown |
 | Blackpool (Regional) | Register coordinates (96%) and postcode centers (4%, OS postcode centroids for a full postcode with no register point); 90 not placed | Food only; about one storefront in nineteen unplaced, almost all in Wyre; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
+| Liverpool (Regional) | Register coordinates (94%) and postcode centers (6%, OS postcode centroids for a full postcode with no register point); 223 not placed | Food only; about one storefront in thirty-three unplaced, most in Sefton and Wirral; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
+| Mendoza | Register coordinates (100%), Gauss-Krüger zone 2 reprojected; none outside the capital | The neighboring departments, where 18 stations lie, publish no register | Offices, health practices, lodging, parking, street stands; accounts with no business type (151); the business type shown for a person-named account (92) |
 | **Australia** | | | |
 | Sydney | Census coordinates (per building; 5,054 distinct points for 7,074 storefronts) | The City of Sydney LGA only; a five-yearly survey (2022); no names | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
@@ -1130,6 +1141,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Dallas | Active permits (2026-09-30) | B | 0.6 mi | Yes | 26% | Name; address for a person's permit |
 | Kansas City | Frozen 2026-01-15, licences valid 2025-26 (2026-09-30) | B | 0.3 mi | Yes | 13% | Trade name, else holder company; address for a person's licence |
 | Tucson | Active licences (2026-09-30) | B | 0.3 mi | Yes | 6% | Account name; address for a person's licence |
+| Tacoma | Active accounts, layer edited 2026-10-02 (2026-10-04) | B | 0.3 mi | Yes | 18% | Trade name; the business type for a person-named account with no trade name of its own |
 | New Orleans | Active licences, daily (2026-09-30) | B | 0.3 mi | Yes | 45% | Business name, never the owner's; address where none |
 | **Canada** | | | | | | |
 | Vancouver (Regional) | Current-year licences (fetched 2026-09-21 to 2026-10-03) | — | 0.6 mi | Yes | 45% | Name; type on 92 pins |
@@ -1285,8 +1297,10 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Sheffield | Extract of 2026-10-02 (fetched 2026-10-02) | B | 0.3 mi | Yes | 35% | Registered name; the trade name where registered "trading as" |
 | Nottingham (Regional) | Extracts of 2026-10-01 to 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 35% | Registered name; the trade name where registered "trading as" |
 | Blackpool (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-02) | B | 0.3 mi | Yes | 50% | Registered name; the trade name where registered "trading as" |
+| Liverpool (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-04) | B | 0.6 mi | Yes | 52% | Registered name; the trade name where registered "trading as" |
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
+| Mendoza | Open accounts, June 2025 (2026-10-04) | B | 0.3 mi | Yes | 15% | Trade name; the business type for a person-named account |
 | **Australia** | | | | | | |
 | Sydney | Survey of 2022 (layer last edited 2025-02-12; fetched 2026-09-28) | B | 0.6 mi | Yes | 83% | Kind of business (the survey has no names) |
 | Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |

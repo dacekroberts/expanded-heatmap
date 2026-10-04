@@ -269,6 +269,12 @@ REGISTRIES = {
     "buenos_aires": dict(raw=None, trade=None, owner=None, name_is_address=True,
                          processed="businesses_clean.csv",
                          address=("business_name",)),
+    # Mendoza (2026-10-04): one name column, `nombre_fantasia`, filled on
+    # every business and never falling back to another. A sole trader writes
+    # it as their own name, surname first with a comma; step 2 shows the
+    # business type for those (Vancouver's rule). No address column is kept.
+    "mendoza": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None),
     # Glasgow reads the same FSA file format through pipeline/fsa.py: no
     # fallback name, and the flat rule (a storefront at a "Flat" address is
     # never placed, 185 rows) is the structural guard this check cannot see.
@@ -564,6 +570,14 @@ REGISTRIES = {
     "kansas_city": dict(raw="business_licenses.csv", trade="business_name",
                         owner="dba_name", processed="businesses_clean.csv",
                         address=("address",)),
+    # Tacoma (2026-10-04): `trade_name` is never blank but is the entity's own
+    # name (`business_name`) on some rows; where that entity has no legal form
+    # and reads as a person's, step 2 shows the NAICS description (Vancouver's
+    # rule). The site unit field joins the address; mailing fields are never
+    # fetched.
+    "tacoma": dict(raw="business_licenses.csv", trade="trade_name",
+                   owner="business_name", processed="businesses_clean.csv",
+                   address=("address",)),
     # Tucson: the City's BUSLIC layer has one name, `ACC_NAME`, the account
     # (trading) name; there is no separate owner column to fall back to. Step 2
     # shows the address for the personal OWN_TYPEs (Sole Proprietorship,
@@ -857,6 +871,9 @@ REGISTRIES = {
     "nottingham": dict(raw=None, trade=None, owner=None,
                        processed="businesses_clean.csv", address=None),
     "blackpool": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
+    # Liverpool (Regional) (2026-10-04) on the same shared step 2.
+    "liverpool": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
 }
 
