@@ -32,10 +32,10 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **158** across 25 countries *(unchanged by the rebuild; each city's build line is in the Built table below, and the dated moves in the archived list)* |
-> | **Candidates** | **12** — A 6 · B 6 · C 0 · D 0 *(Brussels (Regional) from D to C, then B, 2026-10-03: the owner's KBO file and a measured storefront filter; the coverage sweep's first group, banded 2026-10-03 (owner): Daejeon, Gwangju and Gimhae from R, Mendoza, the City of Brussels and Tacoma to A; Liverpool (Regional), Antwerp, Ghent, Charleroi and Liège to B; Brussels (Regional) to D, then C, then B; Band R counted apart from 2026-10-02 (owner); Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded, Chiba to R (owner); Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
-> | **Restricted (Band R)** | **23** *(Daejeon, Gwangju and Gimhae to A 2026-10-03, on SEMAS's keyless file; a band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
+> | **Candidates** | **20** — A 9 · B 6 · C 2 · D 3 *(the probe wave, 2026-10-04 (owner): Gimpo, Siheung and Geneva to A, Yangsan and Gyeongsan to C, Timișoara, Iași and Cluj-Napoca to D; Brussels (Regional) from D to C, then B, 2026-10-03: the owner's KBO file and a measured storefront filter; the coverage sweep's first group, banded 2026-10-03 (owner): Daejeon, Gwangju and Gimhae from R, Mendoza, the City of Brussels and Tacoma to A; Liverpool (Regional), Antwerp, Ghent, Charleroi and Liège to B; Brussels (Regional) to D, then C, then B; Band R counted apart from 2026-10-02 (owner); Japan wave 2 briefed 2026-10-02: 15 added, Wakayama discarded, Chiba to R (owner); Arlington (VA) to R 2026-10-02 as D.C.'s add-on, Richmond's precedent (owner); rebuilt 2026-10-01 from the post-review screens; R carried over with four new rows: Kraków, Brescia, Catania and Alicante, whose portals refuse this machine and a browser; Takaoka from Band C 2026-10-02, its list now unreachable (owner))* |
+> | **Restricted (Band R)** | **24** *(Norrköping to R 2026-10-04, request only; Daejeon, Gwangju and Gimhae to A 2026-10-03, on SEMAS's keyless file; a band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
 > | **Open screening gap** | **0** *(no row rests on an absence)* |
-> | **Discarded** | **122**, each naming its evidence *(Wakayama 2026-10-02, opt-in coverage; 100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
+> | **Discarded** | **143**, each naming its evidence *(21 added 2026-10-04 from the probe wave; Wakayama 2026-10-02, opt-in coverage; 100 carried over; 19 added 2026-10-01 from the post-review screens, confirmed by the owner the same day; Tempe from Band D the same day, no address in its list (owner); Brisbane from Band C the same day, commuter rail only (owner))* |
 >
 > *Counts are checked by `scripts/check_master_list_counts.py`; the
 > discard rows' evidence by `scripts/check_discard_evidence.py`.*
@@ -73,24 +73,24 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 12
+## Candidates — 20
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **6** |
+| 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **9** |
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **6** |
-| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **0** |
-| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
+| 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **2** |
+| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **3** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **12** |
-| ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **23** |
+| | **Candidates** | **20** |
+| ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **24** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
-| *Discarded* | Measured negative, evidence named | *122* |
+| *Discarded* | Measured negative, evidence named | *143* |
 
-## 🟢 Band A — ready to build (6 ready + 0 ✅ BUILT)
+## 🟢 Band A — ready to build (9 ready + 0 ✅ BUILT)
 
 **From the coverage sweep of 2026-10-03** (every metro, light-rail and tram
 city checked against this list; the owner approved the first group's screens
@@ -105,6 +105,9 @@ and landed at review time on 2026-10-03.
 | **Mendoza** 🇦🇷 | The capital's "Listado Comercios por Actividad 2025": **8,309 businesses**, all active June 2025; retail 3,350, food 721, personal 331 at a first mapping; **100% with an x/y** in `comercios_limpio.json` (cached) | **CC BY 4.0** (read 2026-10-03): credit, licence link, a modification statement, no endorsement | LIGHT RAIL: the Metrotranvía, **7 of 25 stations** in the capital, every 11-12 minutes off-peak on a converted railway | The capital alone (owner: "mendoza can be built"); some trade names are sole traders' own names |
 | **City of Brussels** 🇧🇪 | hub.brussels's shop inventory on opendata.brussels.be: **6,880 rows, every one placed in the commune** (2025-10-17); food 1,908, retail 2,459, personal 508; 1,068 vacant out | **CC BY 4.0** (read 2026-10-03). The "Google Maps" credit is the portal's two link columns, built from each record's own point; 21 of 24 comparable points sit within 0.35 m of UrbIS address points. Drop both link columns; name the publisher's contributors | METRO: **25 metro and premetro stations** in the commune; trams drawn and thinned (Amsterdam's and Oslo's precedent) | Catch-alls: art galleries (145, Retail by precedent), 160 rows typed in two buckets |
 | **Tacoma** 🇺🇸 | The City's business licences: **11,812 in the city**, NAICS, daily; retail 1,520, food 600, personal 811; points in the separate map layer (item `2fa3b14b...`) | **Permitted with conditions** (read 2026-10-03): the City's 115-word disclaimer displayed site-wide; revocable for any reason (Chicago's template, accepted) | TRAM: the T Line, **12 stops**, every 12 minutes, median 469 m | Pins are "active business license accounts", never "currently licensed"; 712 trade names equal the entity name |
+| **Gimpo** 🇰🇷 | SEMAS (cached): **13,398 storefronts** (food 6,112, retail 5,512, personal 1,774), 100% placed; 53% in a ring | Already recorded (notice 68) | LIGHT RAIL: the Gimpo Goldline, **9 stations**, every 6 minutes at midday | Left out earlier by the owner's Gyeonggi scope ("the smaller 시군"); back on the owner's call of 2026-10-04 |
+| **Siheung** 🇰🇷 | SEMAS: **15,206** (7,273 / 5,763 / 2,170), 100% placed; 41% in a ring | As Gimpo | Line 4 every 11.6 minutes; the Suin-Bundang and Seohae lines every 15.0 (borderline, Ansan's and Bucheon's precedent); **9 stations** | Never screened before 2026-10-04 |
+| **Geneva** 🇨🇭 | The canton's business register (REG): **100,588 active rows**, daily, each with a NOGA code, a premises type and a coordinate; in the Ville: food 1,378, retail 1,862, personal 909 (establishment rows); work-from-home rows flagged | SITG's terms (opendata.swiss lists open use): a licence read follows | TRAM: the TPG network | **Regional** scope, the communes the trams serve, measured at build (owner leaning, 2026-10-04); dedupe company rows against establishment rows; the download `REG_ENTREPRISE_ETABLISSEMENT-CSV.zip` approved |
 
 ## 🔵 Band B — narrower pages (6 cities)
 
@@ -120,15 +123,24 @@ five one-bucket cities were built and landed at review time the same day.
 | **Liège** 🇧🇪 | As Charleroi | LoGIC: retail 1,477, horeca 868 (**68%**) | Tram, 23 stops, every 5-15 minutes | As Charleroi |
 | **Brussels (Regional)** 🇧🇪 | Retail and food service; personal services off; a different method from the City's, said on the page | KBO/BCE Open Data (the owner's account), companies' units in the 18 communes outside the City, joined to BeST-Address Brussels (**96.8% placed at a number**), filtered by four rules: against hub.brussels in the City **Retail 78% precision / 76% recall, Food 84% / 84%**; **Retail 9,124, Food 5,209** after the filter | STIB metro, premetro and trams beyond the City | B (owner, 2026-10-03); companies only (KBO's licence) |
 
-## 🟣 Band C — closer to a page (0 cities)
+## 🟣 Band C — closer to a page (2 cities)
 
-*Empty again on 2026-10-03: Brussels (Regional) moved to Band B once its storefront filter measured (owner).*
+| City | What there is | What stands between it and a band |
+|---|---|---|
+| **Yangsan** 🇰🇷 | SEMAS: **11,202 storefronts** (5,710 / 3,826 / 1,666), 100% placed; Busan Line 2, **5 stations** (Busan's operator pages refuse scripts, so the headway is unread); 26% in a ring | **A page of its own, or Busan (Regional)** (the add-ons section): the owner's call when a Busan regional page comes up |
+| **Gyeongsan** 🇰🇷 | SEMAS: **8,943** (4,476 / 3,223 / 1,244), 100% placed; Daegu Lines 1 and 2, **5 stations** (Daegu's site answers a cookie challenge); 35% in a ring | **A page of its own, or Daegu (Regional)**, as Yangsan |
 
-## 🔴 Band D — blocked, but the owner can act alone (0 cities)
+## 🔴 Band D — blocked, but the owner can act alone (3 cities)
 
-*Empty again on 2026-10-03: Brussels (Regional), its only row, moved to Band C once the owner held the KBO Open Data file. Tempe, the band's earlier row, went to the discards on 2026-10-01 once the owner fetched its list (a 33-page PDF with no addresses).*
+| City | What there is | The owner's act |
+|---|---|---|
+| **Timișoara** 🇷🇴 | Trams: 6 lines in the city's own CC BY feed, 60 stop names on SMTT's page. The city catalogue (36 datasets) holds counts only. DSVSA Timiș answers 503 "Verifying your browser" to scripts | **Save DSVSA Timiș's "Unități înregistrate" lists in the owner's own browser** (Bucharest's route); then B (food only), placed by the OSM address join |
+| **Iași** 🇷🇴 | Trams: 9 lines; the operator's feed needs a tranzy.ai key, so rail from OSM. The city portal holds statistics only. DSVSA Iași answers 503 | As Timișoara, DSVSA Iași |
+| **Cluj-Napoca** 🇷🇴 | Trams 100, 101, 102 (midday every 16.7, 10.3 and 13.6 minutes; the shared axis about every 4.3). The city portal is gone (404). DSVSA Cluj answers 503 | As Timișoara, DSVSA Cluj |
 
-## ⚫ Band R — restricted or request only (23 cities; created 2026-09-28)
+*Tempe, the band's earlier row, went to the discards on 2026-10-01 once the owner fetched its list (a 33-page PDF with no addresses).*
+
+## ⚫ Band R — restricted or request only (24 cities; created 2026-09-28)
 
 **▼ 2026-10-03: Daejeon, Gwangju and Gimhae left for Band A (owner).** Their block was the national register's identity wall; SEMAS's keyless national storefront file, which Incheon and the Gyeonggi cities were built on from 2026-09-29, covers all three, and the coverage sweep found the rows had never been re-checked against it.
 
@@ -165,6 +177,7 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Arlington (VA)** 🇺🇸 | ✅ **Screened (2026-10-02), Washington D.C.'s add-on**: Arlington County's "Active Business Licenses" (Commissioner of Revenue, weekly, 12,212 records at 2026-09-25; addresses and section codes, no coordinates; in-home businesses excluded by the publisher), around 11 of D.C.'s 32 excluded Virginia Metrorail stations. **Measured 2026-10-02: 2,399 premises in the buckets (personal 894, food 792, retail 713), 94.3% joined exactly to the County's address points** | 🚫 **Not permitted as it stands** (`licence-read`, 2026-10-02): the dataset has no licence; the only terms the portal links, the County website's Terms & Conditions, allow downloads for "non commercial, personal use only" and forbid reposting or derivative works "without the written permission". The 2016 Open Data Public Use Notice ("free to share and adapt our data for any purpose") was withdrawn in the 2023 site relaunch; the portal's guide still links its dead URL. The County GIS hub's address points assert copyright, "not considered in the Public Domain", with no grant | **A written question to the County** (its Open Data Feedback form) on whether the Public Use Notice still governs portal data and the GIS address layer: the owner's to send; nothing drafted or sent. **Left out by the owner 2026-10-02, Richmond's precedent** |
 | **Chiba** 🇯🇵 | ✅ **Screened and briefed (2026-10-02, Japan wave 2)**: 47 station groups (JR 19, Chiba Urban Monorail 18, Keisei 13), `metro`; MHLW 8,290 restaurant permits (89.3%), 74.6% of fixed with an address, 98.9% of those at block (`docs/build_briefs/chiba.md`) | 🚫 **The city's permission**: its complete lists in all three buckets sit under the site's all-rights-reserved default | **A written request to the city** for its food and 生活衛生 lists: the owner's to send; nothing drafted. **Moved to R by the owner 2026-10-02** ("for 4 mark chiba to R"); the MHLW-only food page is not built meanwhile |
 | **Takaoka** 🇯🇵 | ✅ **Licence settled 2026-10-02: CC BY 4.0** (the old prefecture portal's dataset page, archived 2026-05-21, and its terms; the new platform's front page says the same of all its data). Screened 2026-09-30: Toyama Prefecture's food CSV, 3,128 Takaoka rows, no operator-name column, last updated 2026-03-02 though labelled monthly; personal lists yearly (2025-03-31), also `cc-by`. Rail: the Man'yōsen (about half its 25 stops in Takaoka), Ainokaze, JR | 🚧 **The list can no longer be reached (2026-10-02).** The old portal (`opendata.pref.toyama.jp`) no longer resolves and the CSV on `toyama-pref.box.com` answers 404. The new data platform's catalogue (`ckan.tdcp.pref.toyama.jp`) answers 403 to scripts and the browser pane while its front page answers 200; most likely a block on access from outside Japan. **Not routed around.** No other public copy found | A read of the platform's catalogue from an allowed network, or a public link from the prefecture. Moved to R by the owner 2026-10-02, from Band C |
+| **Norrköping** 🇸🇪 | ⚠️ **Trams screened by desk** (2 lines, about 47 stops; 2026-10-04). Nothing published on `norrkoping.se` or `dataportal.se` for food or any other premises | 🚫 **Request only**: the municipal food inspection register (Stockholm's and Göteborg's shape) would come by a public-records request, which is outreach | **A records request to the municipality**, the owner's to send (outreach the last resort); nothing drafted. To R on the owner's call of 2026-10-04 |
 
 ## 🟤 Band T — retired (0 cities; retired 2026-10-01, trams-only maps approved 2026-09-29)
 
@@ -178,6 +191,13 @@ The tiers, the light-rail test and the currency audit stay on the tram list,
 
 **Add-ons extend a built city**; they are builds for main, in `PLAN.md`, and
 not counted here.
+
+- **Potential Korean regional expansions** (marked by the owner 2026-10-04; none scheduled):
+  - **Busan (Regional) + Yangsan** (Busan Line 2, 5 stations; Yangsan is Band C until chosen). Gimhae is its own page (owner, 2026-10-03).
+  - **Daegu (Regional) + Gyeongsan** (Daegu Lines 1 and 2, 5 stations; Band C until chosen).
+  - **Seoul (Regional) + Gwacheon (Line 4, 5 stations), Gwangmyeong (Line 7, 2), Hanam (Line 5, 4) and Guri (Line 8, 4)**: left out as standalone pages on the owner's Gyeonggi scope ("the smaller 시군").
+  - **Anyang (Regional) + Gunpo (Lines 4 and 1, 6 stations) and Uiwang (1)**: the same scope.
+  - **How each would build:** Seoul, Busan and Daegu read the national LOCALDATA permit registers (`pipeline/countries/korea.py`), the suburbs SEMAS, so a Seoul, Busan or Daegu regional page joins two sources (Los Angeles + Long Beach's shape, `multi-source-city`); Anyang is SEMAS already, so its regional page is a district-code list once the Korea build's `korea_sbiz` code filter lands. Each proves the city alone at zero drift first, as the 2026-10-03 extensions did.
 
 - **Vancouver (Regional) + Burnaby, New Westminster and Coquitlam: built 2026-10-03** on `extensions-build` (44 stations, 15,436 storefronts), in the Built row; held for the owner's review.
   - Burnaby's "Business Licences" layer opens in a browser: 19,959 approved
@@ -206,7 +226,9 @@ not counted here.
 | ION Stage 2 | In planning |
 | Zurich's rebuild | After 12 December 2026 (PLAN) |
 
-## DISCARDED — 122 cities, each naming its evidence
+## DISCARDED — 143 cities, each naming its evidence
+
+▼ **2026-10-04 — twenty-one rows from the coverage sweep's probes** (owner: "approve all"): fifteen Korean cities on rail (Pyeongtaek, Osan, Yangju, Dongducheon, Cheonan, Asan, Paju, Chuncheon, Gyeonggi Gwangju, Icheon, Yeoju, Ulsan, Gumi; Uiwang with one station; Hwaseong with only GTX-A), five with no urban rail open (Changwon, Sejong, Cheongju, Pohang, Jeju), and Basel on absence.
 
 ▼ **2026-10-01 — nineteen rows from the post-review screens** (staging's recommendations, confirmed by the owner the same day), in their own table below: Toyohashi (Japan), Dresden, Leipzig, Graz, Luxembourg City, Wrocław, Adelaide, the Gold Coast and Canberra (the cities a country pattern had left unscreened), Belgrade, Sarajevo, Santo Domingo, Casablanca, Rabat–Salé, Tunis, Lagos and Addis Ababa (the countries once ruled out on "no urban rail", each failing on its business data), and Cagliari and Alcobendas (wave 2's not-reached rows, now read in a browser).
 
@@ -487,6 +509,27 @@ dataset title**.
 | **Alcobendas** 🇪🇸 | measured | read `empresasycomercios.alcobendas.org` (shops "que voluntariamente han solicitado su inscripción") · read `datos.alcobendas.org` (the package withdrawn; the `datos.gob.es` copy last modified 2022-11-27) | yes — both city hosts | **A voluntary directory, withdrawn and stale (2026-10-01)**: not a register |
 | **Tempe** 🇺🇸 | measured | measured the City's General Business License List (a 33-page PDF, as of 2026-09-03, fetched by the owner in their browser since the host refuses scripts; kept locally in `data/tempe/raw/`): four columns, licence number, business name, business activity and website · read the City's ArcGIS "Tempe Business License" app (short-term rentals 1,061 and tobacco 133 only) | yes — `tempe.gov` and its ArcGIS org | **No address in the list (2026-10-01, owner's call)**, so nothing can be placed: Denver's original failure. Valley Metro light rail. What would reopen it: a licence list with premises addresses |
 | **Brisbane** 🇦🇺 | rail | measured OSM's Citytrain relations (Translink: 83 stations inside the City of Brisbane, median nearest-station gap 1,012 m) · read Translink's own timetables (30 min off-peak on every line under the 2026 reduced timetable; at best 15 min on five trunk sections, 7am-7pm weekdays, in the normal one; only the Roma Street-Bowen Hills core about every 4 min) · measured Brisbane City Council's Food Safety Permits (8,050 current, CC BY 4.0, daily, addresses only) | yes — `data.brisbane.qld.gov.au` | **Commuter rail only, at commuter frequency (2026-10-01, owner).** Spacing passes; frequency fails the commuter-rail exception, and the gate applies on railway track (Aarhus L1, Sheffield's Tram-Train), so Buffalo's precedent does not reach it. In the commuter-rail revisit group below. **Reopens when Cross River Rail opens (2029)** |
+| **Pyeongtaek** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Line 1's outer stretch: stations 3.4 km apart, every 18-20 minutes at 송탄 |
+| **Osan** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Line 1, stations 2.6 km apart |
+| **Yangju** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Line 1, 2.8 km apart, every 20 minutes |
+| **Dongducheon** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Line 1 every 19-20 minutes; 소요산 hourly |
+| **Cheonan** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Line 1, 2.5-3.3 km apart; every 27.7 minutes south of 천안 |
+| **Asan** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Line 1, 3.1 km apart, every 27.7 minutes |
+| **Paju** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Gyeongui-Jungang, 2.0 km apart, every 12-13 minutes: fails on spacing (Goyang's drawing of the same line is raised with Cleanup) |
+| **Chuncheon** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Gyeongchun, 2.8 km apart, every 24 minutes |
+| **Gyeonggi-Gwangju** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Gyeonggang Line, 4.3-5.3 km apart, every 18-22 minutes |
+| **Icheon** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Gyeonggang Line, as Gyeonggi Gwangju |
+| **Yeoju** 🇰🇷 | rail | read Seoul Metro's station timetables (posted 2026-09-01) · measured station spacing on the built cities' cached OSM rail relations | no | **Fails on rail (2026-10-04).** Gyeonggang Line, as Gyeonggi Gwangju |
+| **Ulsan** 🇰🇷 | rail | measured station spacing on Busan's cached OSM rail relations · read the Donghae Line's service | no | **Fails on rail (2026-10-04).** Donghae Line only, 3.3 km apart; Busan's precedent leaves it out |
+| **Gumi** 🇰🇷 | rail | measured station spacing on Daegu's cached OSM rail relations · read the Daegyeong Line's service | no | **Fails on rail (2026-10-04).** Daegyeong Line only, 4.1 km apart; Daegu's precedent leaves it out |
+| **Uiwang** 🇰🇷 | rail | measured stations on the cached OSM rail relations · measured SEMAS's storefront points (gate peak 0.18 GB) | no | **Too few stations (2026-10-04).** One station; 19% of storefronts in a ring (a potential Anyang (Regional) add-on) |
+| **Hwaseong** 🇰🇷 | rail | read GTX-A's stations and service · measured stations on the cached OSM rail relations | no | **No qualifying rail (2026-10-04).** Dongtan is served only by GTX-A, an express |
+| **Changwon** 🇰🇷 | rail | read the national urban-railway lists · measured stations on the cached OSM rail relations (none) | no | **No urban rail open (2026-10-04).** Changwon's and Yangsan's LRT plans are not open |
+| **Sejong** 🇰🇷 | rail | read the national urban-railway lists · measured stations on the cached OSM rail relations (none) | no | **No urban rail open (2026-10-04).** |
+| **Cheongju** 🇰🇷 | rail | read the national urban-railway lists · measured stations on the cached OSM rail relations (none) | no | **No urban rail open (2026-10-04).** |
+| **Pohang** 🇰🇷 | rail | read the national urban-railway lists · measured stations on the cached OSM rail relations (none) | no | **No urban rail open (2026-10-04).** |
+| **Jeju** 🇰🇷 | rail | read the national urban-railway lists · measured stations on the cached OSM rail relations (none) | no | **No urban rail open (2026-10-04).** |
+| **Basel** 🇨🇭 | absence | enumerated the canton's catalogue `data.bs.ch` (364 datasets, read title by title) · measured the commercial register (19,437 companies: seat addresses, no activity code) · read the public-space permits (no hospitality type) and the permit office's counts · read Basel-Landschaft's hospitality list (the suburban canton only) | yes — `data.bs.ch` | **No premises register (2026-10-04).** Zurich's shape does not exist here |
 
 ## Commuter-rail revisit group (discards, not candidates; owner, 2026-10-01)
 
@@ -532,13 +575,13 @@ it, not a band.
 | 🇱🇻 Latvia | **3** | **0** | **0** | — | **Daugavpils and Liepāja built 2026-09-30** (the tram kit), on Riga's two layers |
 | 🇳🇱 Netherlands | **3** | **0** | **1** — Utrecht | R | **Den Haag built 2026-09-30** (the tram kit). **T2's verdicts 2026-09-30 (owner)**: Den Haag to T1 on the city's own horeca permit layer (2,352 food premises) and the BAG, Rotterdam's shape; Utrecht to R (its portal answers 403 to this machine and a browser); Rijswijk and Delft to the discards (no food source) |
 | 🇭🇰 Hong Kong | **1** | **0** | **0** | — | Built; the East Asia region |
-| 🇰🇷 South Korea | **13** | **3** — Daejeon, Gwangju, Gimhae | **0** | A | **Daejeon, Gwangju and Gimhae from R to A 2026-10-03** (owner): SEMAS's keyless file covers them. **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
+| 🇰🇷 South Korea | **13** | **7** — Daejeon, Gwangju, Gimhae, Gimpo, Siheung, Yangsan, Gyeongsan | **0** | A, C | **Gimpo and Siheung to A, Yangsan and Gyeongsan to C 2026-10-04** (owner; SEMAS, the probe wave); fifteen more discarded on rail and five with no urban rail. **Daejeon, Gwangju and Gimhae from R to A 2026-10-03** (owner): SEMAS's keyless file covers them. **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
 | 🇹🇼 Taiwan | **3** | **0** | **1** — Kaohsiung | R | Its door-plate file is geo-blocked to Taiwan |
 | 🇯🇵 Japan | **34** | **0** | **3** — Chiba, Takaoka, Sendai | R | **Wave 2's fourteen built 2026-10-03** (one build session; they land at the owner's review time; Wakayama discarded at screening). The first batch's twelve built 2026-10-02. Toyohashi and Wakayama discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
 | 🇧🇷 Brazil | **9** | **0** | **0** | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons (owner; PLAN). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
-| 🇸🇪 Sweden | **2** | **0** | **0** | — | **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
-| 🇨🇭 Switzerland | **1** | **0** | **0** | — | **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
-| 🇷🇴 Romania | **1** | **0** | **0** | — | **Bucharest built 2026-09-29**: DSVSA's food registers, fetched by the owner in their browser, placed by an OSM address join (74.9%) |
+| 🇸🇪 Sweden | **2** | **0** | **1** — Norrköping | R | **Norrköping to R 2026-10-04** (request only). **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
+| 🇨🇭 Switzerland | **1** | **1** — Geneva | **0** | A | **Geneva to A 2026-10-04** (the canton's business register); Basel discarded. **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
+| 🇷🇴 Romania | **1** | **3** — Timișoara, Iași, Cluj-Napoca | **0** | D | **Timișoara, Iași and Cluj-Napoca to D 2026-10-04**: the owner's browser fetch of each county's DSVSA list, Bucharest's route. **Bucharest built 2026-09-29**: DSVSA's food registers, fetched by the owner in their browser, placed by an OSM address join (74.9%) |
 | 🇦🇷 Argentina | **1** | **1** — Mendoza | **0** | A | **Mendoza to A 2026-10-03** (owner; the capital alone, CC BY 4.0, every business placed). Buenos Aires built 2026-09-28: the city's land-use survey joined to its parcels (99.8%), CC BY 2.5 AR |
 | 🇦🇺 Australia | **2** | **0** | **0** | — | Brisbane's food permits found 2026-10-01 (the commuter-rail test first); Adelaide, the Gold Coast and Canberra discarded |
 | 🇹🇷 Türkiye | — | **0** | **0** | — | Pharmacies and opticians only on İBB's portal (2026-09-28, owner); the districts, which license shops and restaurants, publish no lists |
@@ -573,7 +616,7 @@ it, not a band.
 | 🇳🇬 Nigeria | — | **0** | **0** | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | **0** | **0** | — | Addis Ababa discarded 2026-10-01 |
 | 🇧🇪 Belgium | — | **6** — City of Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) | **0** | A, B | **Off "Countries ruled out" 2026-10-03** (owner): the ruling rested on one national method. The City of Brussels to A (hub.brussels, CC BY 4.0); Antwerp and Ghent to B (FAVV food on VKBO points); Charleroi and Liège to B (LoGIC 2024, gap disclosed); the rest of the Region to B (the owner's KBO file, filtered, on BeST-Address) |
-| **Total** | **158** | **12** | **23** |  | A 6 · B 6 · C 0 · D 0 · R 23. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **158** | **20** | **24** |  | A 9 · B 6 · C 2 · D 3 · R 24. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 

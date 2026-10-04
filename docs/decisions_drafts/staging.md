@@ -4,6 +4,42 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The probe wave's first results: Korea and Europe banded; Korean regional expansions marked (owner)
+
+- **The owner: "approve all"** on staging's recommendations, then "mark the
+  potential korean regional expansions":
+  - **Korea (SEMAS, cached; gate peak 0.18 GB):** **Gimpo** (Goldline, 9
+    stations, every 6 minutes; 13,398 storefronts) and **Siheung** (9
+    stations; 15,206) to **A**. Gimpo returns from the owner's earlier
+    Gyeonggi scope ("the smaller 시군") on this call. **Yangsan** (Busan
+    Line 2, 5 stations) and **Gyeongsan** (Daegu Lines 1 and 2, 5) to **C**:
+    a page of its own or a Busan or Daegu regional page. **Gunpo, Hanam,
+    Guri, Gwacheon and Gwangmyeong stay out** on the Gyeonggi scope.
+  - **Discards (21):** fifteen Korean cities on rail (Pyeongtaek, Osan,
+    Yangju, Dongducheon, Cheonan, Asan, Paju, Chuncheon, Gyeonggi-Gwangju,
+    Icheon, Yeoju, Ulsan, Gumi, Uiwang, Hwaseong), five with no urban rail
+    open (Changwon, Sejong, Cheongju, Pohang, Jeju), and Basel on absence
+    (the canton's 364 datasets; its commercial register has no activity
+    code).
+  - **Geneva to A**: the canton's business register (REG, 100,588 active
+    rows, NOGA codes, LV95 points, daily), regional scope leaning, the
+    download approved and cached (`data/geneva/raw/`, 11,344,581 bytes,
+    sha256 `45aff219...fa3d616`); a licence read of SITG's terms runs.
+  - **Timișoara, Iași and Cluj-Napoca to D**: each county's DSVSA site
+    answers scripts with a browser check, so the owner saves the
+    "Unități înregistrate" lists in their own browser (Bucharest's route).
+  - **Norrköping to R** (request only: a public-records request; outreach
+    the last resort).
+- **Potential Korean regional expansions marked** in the master list's
+  add-ons: Busan (Regional) + Yangsan; Daegu (Regional) + Gyeongsan; Seoul
+  (Regional) + Gwacheon, Gwangmyeong, Hanam and Guri; Anyang (Regional) +
+  Gunpo and Uiwang. Seoul, Busan and Daegu read LOCALDATA, so theirs join
+  two sources (`multi-source-city`); Anyang's is a district-code list on
+  `korea_sbiz` once the Korea build's code filter lands.
+- **Raised with Cleanup:** Namyangju's Gyeongchun line (every 22-24 minutes
+  at midday) and Goyang's Gyeongui-Jungang line (2.0 km spacing) fail the
+  tests the probe applied to Chuncheon and Paju; recorded calls or defects.
+
 ### 2026-10-04 - The "TEC" name on the Charleroi and Liège pages; the never-probed countries' wave (owner)
 
 - **The owner: "recommendation for TEC approved".** Notice 150 credits the
