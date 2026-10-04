@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**492 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**493 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -66,6 +66,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Vancouver (Regional) extended: Burnaby, New Westminster and Coquitlam on their own registers](#2026-10-03---vancouver-regional-extended-burnaby-new-westminster-and-coquitlam-on-their-own-registers)
 - [Burnaby, New Westminster and Coquitlam: the OGL personal-information exemption read cautiously (owner)](#2026-10-03---burnaby-new-westminster-and-coquitlam-the-ogl-personal-information-exemption-read-cautiously-owner)
 - [Overview: a region view's caption names the regions whose anchors it labels (owner)](#2026-10-03---overview-a-region-views-caption-names-the-regions-whose-anchors-it-labels-owner)
+- [The country selector folds Japan into East Asia; Why the Maps Differ's key moves above its table (owner)](#2026-10-03---the-country-selector-folds-japan-into-east-asia-why-the-maps-differs-key-moves-above-its-table-owner)
 
 **2026-10-02**
 
@@ -20015,3 +20016,22 @@ until the owner rules):**
   nor names, or states a number other than the region's own. It failed
   East Asia and Europe at all three widths before the change and passes
   after.
+
+### 2026-10-03 - The country selector folds Japan into East Asia; Why the Maps Differ's key moves above its table (owner)
+
+- **Asked by the owner:** are all regions represented on the other
+  macro-info pages? All 158 cities and every country were. But the region
+  step on About the Data and What Is Excluded read "Japan West (34)": a
+  country's group was its first city's region, and REGION_GROUP in
+  `app/country_sections.py` had no rows for Japan's two halves.
+- **Options put to the owner:** fold Japan into East Asia (recommended, the
+  same fold as the Seoul Capital Area) or a group of its own. **The owner
+  chose East Asia**: East Asia (51) holds Hong Kong, South Korea, Taiwan
+  and Japan.
+- **Guard:** `_groups()` now raises when a country's cities fall in two
+  groups, which the old mapping would have done; a new split region needs
+  its REGION_GROUP rows before the app imports.
+- **Why the Maps Differ (owner):** the table's key ("Trams" includes light
+  rail; "... thin"; "Storefronts near a station") moves from under the
+  158-row table to between its heading and the table, for the table's
+  length. Wording unchanged.

@@ -191,11 +191,8 @@ under an ordinary label, they stay on the map.
 )
 
 st.subheader("Every city in one row")
-cols = list(rows[0])
-scroll_table(cols,
-             [["—" if r[c] is None else f"{r[c]}%" if c == "Storefronts near a station"
-               else r[c] for c in cols] for r in rows],
-             right=("Storefronts near a station",), min_width=760)
+# The key sits above the table, not under it (owner, 2026-10-03): at 158
+# rows a key below the table is read only after the table.
 st.caption(
     "\"Trams\" includes light rail. \"Retail thin\", \"Food service thin\" or "
     "\"Personal services thin\" means that layer holds only part of its trades, "
@@ -203,5 +200,10 @@ st.caption(
     "licenses. \"Storefronts near a station\" is the "
     "share of the map's storefronts inside its station rings."
 )
+cols = list(rows[0])
+scroll_table(cols,
+             [["—" if r[c] is None else f"{r[c]}%" if c == "Storefronts near a station"
+               else r[c] for c in cols] for r in rows],
+             right=("Storefronts near a station",), min_width=760)
 
 render_site_notices(show_links=False)

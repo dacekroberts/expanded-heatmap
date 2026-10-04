@@ -25,11 +25,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   (owner, 2026-10-03).** Expected to be the mobile-tap-targets landing at
   review time; the audit follows the live check of its three asks.
 
-- [ ] **The macro-info pages (owner, 2026-10-03):** move the note under the
-  table ("Trams" includes light rail; "... thin"; "Storefronts near a
-  station") above the table, for its length; and check every macro-info
-  page represents every region (one page's selector reads "Japan West (34)"
-  with no Japan East, 34 being all of Japan).
+- [x] **The macro-info pages (owner, 2026-10-03):** Why the Maps Differ's
+  key above its table; Japan folded into East Asia in the country selector.
+  DECISIONS 2026-10-03, "The country selector folds Japan into East Asia".
+  Live once pushed and rebooted.
 
 - [x] **The Overview's region caption against its labels (owner,
   2026-10-03).** DECISIONS 2026-10-03, "Overview: a region view's caption

@@ -225,6 +225,10 @@ REGION_GROUP = {
     "Czechia": "Europe",
     "United Kingdom": "Europe",
     "Seoul Capital Area": "East Asia",
+    # Japan's two halves (owner, 2026-10-03). Unfolded, all 34 Japanese cities
+    # showed as "Japan West (34)", named after the first city's half.
+    "Japan West": "East Asia",
+    "Japan East": "East Asia",
 }
 
 
@@ -232,8 +236,15 @@ def _groups():
     """{group: [country, ...]} in COUNTRY_ORDER, groups in first-seen order."""
     group_of = {}
     for c in CITIES:
-        group_of.setdefault(c["country"],
-                            REGION_GROUP.get(c["region"], c["region"]))
+        group = REGION_GROUP.get(c["region"], c["region"])
+        # A country whose cities fall in two groups would be listed under the
+        # first only, named after one half: a new split region needs its
+        # REGION_GROUP rows.
+        if group_of.setdefault(c["country"], group) != group:
+            raise ValueError(
+                f"country_sections.py: {c['country']} falls in both "
+                f"{group_of[c['country']]!r} and {group!r} ({c['region']}); "
+                f"fold its regions into one group in REGION_GROUP")
     groups = {}
     for country in COUNTRY_ORDER:
         groups.setdefault(group_of[country], []).append(country)
