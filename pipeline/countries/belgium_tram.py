@@ -270,6 +270,15 @@ def build(cfg, city, fetch_script):
                  f"{res['per_line_mismatches']}")
     else:
         print(f"    gate 3 source: {cfg.OPERATOR_COUNTS_SOURCE}")
+        unknown = sorted(set(cfg.OPERATOR_STATION_COUNTS) - set(cfg.LINES))
+        if unknown:
+            sys.exit(f"gate 3 names line(s) {unknown} this city does not draw")
+        rest = [ln for ln in cfg.LINES if ln not in cfg.OPERATOR_STATION_COUNTS]
+        if rest:
+            if not cfg.OPERATOR_COUNTS_GAP:
+                sys.exit(f"gate 3 compares no figure for {rest}, and OPERATOR_COUNTS_GAP "
+                         f"does not say why")
+            print(f"    gate 3 PARTIAL - not compared {rest}: {cfg.OPERATOR_COUNTS_GAP}")
 
     # 7. shapes and headways
     window = trips[trips["service_id"].isin(set(days_of))]

@@ -131,6 +131,14 @@ CLOSED_FOR_WORKS = {
         "Hoboken Jan Van de Wouwer",
         f"temporarily discontinued, closed for works{_WHY}: trams pass without stopping; {_DUE}"),
 }
+# NOT LISTED, AN OPEN CONFLICT: De Lijn's line pages (2026-10-04) mark three
+# stops "Halte niet bediend": Berchem De Merode on 7 and A3 through
+# 2026-11-08, Antwerpen Havenhuis and Antwerpen Cadix on 24 through
+# 2027-01-10. The feed serves all three in full from 2026-10-15 (measured
+# 2026-10-04: De Merode 2-3 boardable stop_times a day on 7 before then and
+# 278-439 a day on 7 and A3 after; Havenhuis and Cadix no tram trip before then, then
+# every day line 24 runs). So they stay ringed until the owner rules; the
+# closed-for-works check would stop step 1 on them as the feed stands.
 # THE LEFT BANK (Linkeroever). Lines 3, 9 and 15 served it and are absent; no
 # tram serves any stop there in this feed. The feed cannot say WHICH stops
 # were tram stops: the left bank's stops are all still served by buses (104
@@ -144,16 +152,21 @@ CLOSED_FOR_WORKS_OPEN_QUESTION = (
     "cannot name them. An OSM query for the tram route relations (or De Lijn's notice) is "
     "needed, then each goes in config.CLOSED_FOR_WORKS")
 
-# GATE 3: De Lijn's own per-line stop counts. Its line pages are
-# script-rendered (no stop list in the static HTML); the lead reads them in a
-# browser later. Until then, the gap is recorded.
-OPERATOR_STATION_COUNTS = None
+# GATE 3, PARTIAL: De Lijn's own per-line stop counts, the whole line before
+# the city split, where the line page shows the regular route. Hoboken Jan Van
+# de Wouwer (closed, on 2, 4, 7 and 8) is in neither figure: the build's 2 and
+# 4 are 27 and 25 without it, as De Lijn's pages are. A step 1 mismatch stops
+# the build.
+OPERATOR_STATION_COUNTS = {"1": 20, "2": 27, "4": 25, "6": 25, "A3": 37}
+OPERATOR_COUNTS_SOURCE = (
+    "De Lijn's line pages (delijn.be/nl/lijnen/<id>/), read 2026-10-04 in a browser by the "
+    "Belgium build session, for the count only, never republished: lines 1, 2, 4, 6 and A3 "
+    "(\"Lijn A3\"; A9 is \"Lijn A9\").")
 OPERATOR_COUNTS_GAP = (
-    "De Lijn's line pages (delijn.be) are script-rendered: their static HTML carries no "
-    "stop list (the brief, 2026-10-03). The feed is De Lijn's own data but is this "
-    "build's input, so it is not an independent count. Not yet read in a browser "
-    "(2026-10-04); the lead reads them later, for the count only, never republished.")
-OPERATOR_COUNTS_SOURCE = None
+    "lines 7, 8, 10, 11, 12, 24 and A9 not compared: on 2026-10-04 (a Sunday) De Lijn's line "
+    "pages showed the day's works-diverted service (7 Eilandje - Mortsel 23 stops, 8 Astrid - "
+    "P+R Wommelgem 7, 11 13, 12 7; 24 and A9 likewise; 10 not read), not the regular route "
+    "the feed carries from 2026-10-15.")
 
 # De Lijn's route_color per line (routes.txt, 2026-10-04); step 1 stops if the
 # feed moves one. LINE_COLOURS is what is drawn (step 3).

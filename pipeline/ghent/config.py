@@ -85,16 +85,25 @@ PLATFORM_WORDS = r"(?i)\bperron\b|\bmetro\b"
 OWN_PREFIX = "Gent "
 
 NAME_ALIASES = {}
+# NOT LISTED, AN OPEN CONFLICT: De Lijn's T1 page (2026-10-04) marks Gent
+# Bijlokehof "Halte niet bediend" until the works end; the feed passes it
+# without stopping through 2026-10-14 and serves it on T1 and T4 every day
+# from 2026-10-15 (measured 2026-10-04). It stays ringed until the owner rules.
 CLOSED_FOR_WORKS = {}
 
-# GATE 3, as Antwerp: De Lijn's line pages are script-rendered.
-OPERATOR_STATION_COUNTS = None
+# GATE 3, PARTIAL, as Antwerp: De Lijn's own count for T1, the whole line.
+# Bijlokehof, which the page marks "Halte niet bediend" until the works end,
+# is in both figures (the feed serves it from 2026-10-15). A step 1 mismatch
+# stops the build.
+OPERATOR_STATION_COUNTS = {"T1": 21}
+OPERATOR_COUNTS_SOURCE = (
+    "De Lijn's line pages (delijn.be/nl/lijnen/<id>/), read 2026-10-04 in a browser by the "
+    "Belgium build session, for the count only, never republished: \"Lijn T1\" (T2 and T4 "
+    "are \"Lijn T2\" and \"Lijn T4\").")
 OPERATOR_COUNTS_GAP = (
-    "De Lijn's line pages (delijn.be) are script-rendered: their static HTML carries no "
-    "stop list (the Antwerp brief, 2026-10-03). The feed is De Lijn's own data but is "
-    "this build's input, so it is not an independent count. Not yet read in a browser "
-    "(2026-10-04); the lead reads them later, for the count only, never republished.")
-OPERATOR_COUNTS_SOURCE = None
+    "T2 and T4 not compared: on 2026-10-04 (a Sunday) De Lijn's line pages showed the day's "
+    "works-diverted service (T2 7 stops, T4 no trips that day), not the regular route the "
+    "feed carries from 2026-10-15.")
 
 # De Lijn's route_color per line (routes.txt, 2026-10-04); step 1 stops if the
 # feed moves one. LINE_COLOURS is what is drawn (step 3).
