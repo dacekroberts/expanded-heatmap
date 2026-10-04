@@ -109,7 +109,14 @@ the pointers. **Delete a section when its item is done.**
    (Gaziantep's shopping feed and licence; the unreached Algerian, Turkish,
    Venezuelan, Egyptian and Qatari hosts, a Globalping check first). Then
    briefs for Gimpo, Siheung and Geneva, and kits when the owner releases
-   builds.
+   builds. **The owner set the resume for 12:01pm on 2026-10-04** (after the
+   weekly reset) and added two regions to it: **Southeast Asia** (Bangkok's
+   satellites, Selangor's cities, Palembang, Bekasi, Depok, Bogor, Metro
+   Manila's other cities; the capitals already have verdicts) and **greater
+   Oceania** (Parramatta, Newcastle NSW; New Zealand's unverified "licensing
+   is not municipal" ruling re-checked; any Pacific urban rail). Also fetch
+   the approved Macau and ARCSA downloads, and read Thessaloniki's and
+   Gaziantep's licences.
 2. **Watch-item dates** from `docs/recheck_calendar.md`:
    - Tainan, 18 Oct;
    - Salvador and Teresina, after 25 Oct;
