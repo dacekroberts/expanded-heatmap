@@ -55,9 +55,9 @@ the pointers. **Delete a section when its item is done.**
 
 ## Where things stand (2026-10-04, saved at the weekly limit)
 
-- **On master, `docs/city_master_list.md`: 158 built; 20 candidates (A 9 ·
-  B 6 · C 2 · D 3); 24 restricted; 143 discards.** The artifact is at
-  version 8 (12 candidates): republish it from the list.
+- **On master, `docs/city_master_list.md`: 158 built; 25 candidates (A 9 ·
+  B 7 · C 6 · D 3); 29 restricted; 155 discards.** The artifact is at
+  version 9 (https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn), with the paused probes listed.
 - **Three build sessions are out**, each landing at review time: "Korean
   build session" (Daejeon 190, Gwangju 191, Gimhae 192;
   `docs/handoff_korea_sweep_2026-10-03.md`), "Mendoza Tacoma Liverpool"
@@ -97,18 +97,26 @@ the pointers. **Delete a section when its item is done.**
 
 ## NEXT - pick up here
 
-1. **The probe wave (2026-10-04), paused or finishing at the weekly limit.**
-   Reports land in the staging scratchpad's `probe2\` folder (readable by
-   path while the machine keeps it): `korea.md` and `group2_europe.md` are
-   banded on master; still out at the save: `group2_world.md` (Jerusalem,
-   Macau, Almaty, Astana, Ahmedabad, Thessaloniki, Quito, Cuenca),
-   `bolivia_puerto_rico.md`, `mauritius_armenia.md`,
-   `pakistan_bangladesh.md`, `one_city_countries.md` (Chile, Venezuela,
-   Egypt, Algeria, Türkiye, Qatar). Read each, bring proposed bands to the
-   owner, and re-run any probe whose report is missing or cut short. Then
-   briefs for Gimpo, Siheung and Geneva (its SITG licence read was running:
-   re-run it if no verdict is in the drafts), and kits when the owner
-   releases builds.
+1. **The probe wave (2026-10-04), PAUSED by the owner so the Belgium build
+   can finish.** Reports in the staging scratchpad's `probe2\` folder
+   (readable by path while the machine keeps it). Banded on master:
+   `korea.md`, `group2_europe.md`. Complete, owner calls pending (summarised
+   in `docs/decisions_drafts/staging.md`, 2026-10-04 entries):
+   `group2_world.md`, `pakistan_bangladesh.md`, `bolivia_puerto_rico.md`,
+   and Geneva's licence read (indemnity and ge.ch-terms calls). **Partial,
+   resume from each report's next steps:** `mauritius_armenia.md` (Armenia's
+   Yerevan permits, ArmStat, the tax service) and `one_city_countries.md`
+   (Gaziantep's shopping feed and licence; the unreached Algerian, Turkish,
+   Venezuelan, Egyptian and Qatari hosts, a Globalping check first). Then
+   briefs for Gimpo, Siheung and Geneva, and kits when the owner releases
+   builds. **The owner set the resume for 12:01pm on 2026-10-04** (after the
+   weekly reset) and added two regions to it: **Southeast Asia** (Bangkok's
+   satellites, Selangor's cities, Palembang, Bekasi, Depok, Bogor, Metro
+   Manila's other cities; the capitals already have verdicts) and **greater
+   Oceania** (Parramatta, Newcastle NSW; New Zealand's unverified "licensing
+   is not municipal" ruling re-checked; any Pacific urban rail). Also fetch
+   the approved Macau and ARCSA downloads, and read Thessaloniki's and
+   Gaziantep's licences.
 2. **Watch-item dates** from `docs/recheck_calendar.md`:
    - Tainan, 18 Oct;
    - Salvador and Teresina, after 25 Oct;
