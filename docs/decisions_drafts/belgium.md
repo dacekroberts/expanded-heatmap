@@ -4,6 +4,28 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then empties this file (owner, 2026-09-30).
 
+### 2026-10-04 - Six Belgian calls approved (owner)
+
+- **The owner: "1-6 recommendations sound good"**, each as recommended:
+  1. **Brussels' 46 cafeterias and food courts stay Food service**: the
+     survey records street-level units, not staff canteens. The `pending`
+     cell in `scripts/category_continuity_table.py` becomes an exception
+     citing this entry.
+  2. **Shop signs:** Brussels publishes every sign, with no by-eye read (verdict
+     publish). Charleroi's 33 and Liège's 39 signs stay withheld by the
+     name-shape test (keys only, brands at two or more points exempt), with
+     no by-eye read, since this build prints no name.
+  3. **Belgium gets a macro-map view of its own, on Czechia's mechanism**,
+     holding all six Belgian cities, because their dots collide in Europe's view.
+  4. **Antwerp's and Ghent's disputed stops stay as the timetable runs**:
+     De Merode, Havenhuis, Cadix and Bijlokehof, which De Lijn's pages mark
+     unserved but the feed serves from 2026-10-15, keep their rings.
+  5. **One more Overpass query for Antwerp** (its tram route relations for
+     lines 3, 9 and 15) to list the left-bank stations closed for works.
+  6. **Brussels (Regional)'s agreement targets are re-based on
+     `brussels_hub`** once the diagnostic confirms that the survey's typing
+     explains the sub-point miss.
+
 ### 2026-10-04 - Brussels built: STIB's metro, premetro and thinned trams; hub.brussels's survey in three categories
 
 - **Built the City of Brussels (page 196) on hub.brussels's inventory and

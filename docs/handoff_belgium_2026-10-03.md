@@ -62,7 +62,14 @@ State, newest commits first in `git log`:
   timetable runs, until the owner rules. The left-bank closed stations (lines 3, 9, 15) are not
   listed: they need OSM's tram relations (a second Antwerp Overpass query) or
   De Lijn's notice: an owner call.
-- **Owner calls waiting** (recommendation first): Brussels' 46 cafeterias
+- **The six calls below were APPROVED by the owner on 2026-10-04** ("1-6
+  recommendations sound good"; `docs/decisions_drafts/belgium.md`), as
+  recommended. The next session applies them: the cafeteria exception in the
+  continuity table; the Brussels, Charleroi and Liège privacy rows
+  (`publish`); a "Belgium" view (Czechia's mechanism) then
+  `check_macro_labels.py`; one Overpass query for Antwerp's left-bank
+  relations; the diagnostic, then re-basing the KBO targets on `brussels_hub`.
+- **Owner calls (now approved)**: Brussels' 46 cafeterias
   kept (R1 pending in the continuity table); Brussels' signs all shown, no
   by-eye read (none printed under the standing rule); Charleroi's 33 and
   Liège's 39 signs withheld by a shape test, not read by eye; a "Belgium"
